@@ -1,0 +1,23 @@
+
+node_modules
+dist
+
+# YARN
+yarn-debug.log
+yarn-error.log
+
+# NPM
+.npm
+# also make sure we are not using npm install by excluding the lock file
+package-lock.json
+
+# JEST
+.jest-cache
+.jest-coverage
+coverage
+
+## tsc
+tsconfig.tsbuildinfo
+
+## OS
+.DS_Store
