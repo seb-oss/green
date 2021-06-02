@@ -5,8 +5,10 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
     "lint": "lerna run lint --parallel",
-    "lint:fix": "lerna run lint:fix --parallel"
+    "lint:fix": "lerna run lint:fix --parallel",
+    "test": "jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

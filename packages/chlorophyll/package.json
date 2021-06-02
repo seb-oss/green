@@ -21,9 +21,21 @@
   },
   "scripts": {
     "lint": "stylelint --config-basedir ../../ src/*.scss",
-    "lint:fix": "stylelint --config-basedir ../../ src/*.scss --fix"
+    "lint:fix": "stylelint --config-basedir ../../ src/*.scss --fix",
+    "test": "jest",
+    "generate": "ts-node ./build/generate",
+    "prebuild": "yarn generate",
+    "postinstall": "yarn generate"
   },
   "bugs": {
     "url": "https://github.com/sebgroup/green/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.2",
+    "babel-jest": "^27.0.2",
+    "sass": "^1.34.0",
+    "ts-jest": "^27.0.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   }
 }
