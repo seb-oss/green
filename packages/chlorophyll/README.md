@@ -23,8 +23,6 @@ All your basic styling will now be correct. Additional classes will only be need
 
 ...will look like this:
 
-## Develop
+## Develop / Contribute
 
-## Principles
-
-## Techniques
+This is part of a monorepo. If you want to contribute, see [Green](https://github.com/sebgroup/green)
