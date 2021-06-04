@@ -8,7 +8,8 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "lint": "lerna run lint --parallel",
     "lint:fix": "lerna run lint:fix --parallel",
-    "test": "jest"
+    "test:dev": "jest --watchAll",
+    "test": "yarn lint && jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
