@@ -16,6 +16,7 @@ All your basic styling will now be correct. Additional classes will only be need
   <form>
     <label for="pretty-first-name">First name</label>
     <input name="firstName" id="pretty-first-name" />
+    <hr />
     <button type="submit">Send</button>
   </form>
 </div>
