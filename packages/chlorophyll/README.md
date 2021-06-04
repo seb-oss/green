@@ -55,7 +55,7 @@ To find all components, possible modifiers and information on when to use them, 
 
 If you cannot find the component you're looking for and/or want help switching to Green, see information on [Green pilots](https://github.com/sebgroup/green)
 
-If you are up and running with Green and want to contribute a new component, see [Contributions](https://github.com/sebgroup/green/CONTRIBUTIONS.md)
+If you are up and running with Green and want to contribute a new component, see [Contributions](https://github.com/sebgroup/green/CONTRIBUTING.md)
 
 ## Develop / Contribute
 
