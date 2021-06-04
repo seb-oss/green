@@ -24,6 +24,8 @@ All your basic styling will now be correct. Additional classes will only be need
 
 ...will look like this:
 
+![form preview](https://user-images.githubusercontent.com/548783/120811253-11197700-c54c-11eb-9bfe-1091a810c4e0.png)
+
 ## Develop / Contribute
 
 This is part of a monorepo. If you want to contribute, see [Green](https://github.com/sebgroup/green)
