@@ -5,8 +5,11 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
     "lint": "lerna run lint --parallel",
-    "lint:fix": "lerna run lint:fix --parallel"
+    "lint:fix": "lerna run lint:fix --parallel",
+    "test:dev": "jest --watchAll",
+    "test": "yarn lint && jest"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -22,6 +25,7 @@
     "jest": "^27.0.3",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
+    "postcss": "^8.3.0",
     "prettier": "^2.3.0",
     "prettier-eslint": "^12.0.0",
     "semantic-release": "^17.4.3",
@@ -31,5 +35,8 @@
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2",
     "yarn": "^1.22.10"
+  },
+  "resolutions": {
+    "postcss": "8.3.0"
   }
 }
