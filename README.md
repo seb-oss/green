@@ -6,6 +6,28 @@ Green is an opinionated design system for building content and functionality for
 
 ## Use
 
+## Philisophy
+
+### We only build what we need
+
+If no-one needs a component, we will not build it. If someone needs a component, we will build it. This means that some things in Design Library might not make it into Green. It all depends on what gets used.
+
+### Ease of use, not ease of build
+
+The components of Green will be used more times than one. This puts a multiplier on the value of every hour spent improving ease of use.
+
+### Minimum possible flexibility, but _not_ less
+
+Flexibility means decisions have to be made. This puts strain on every user of a system. Green goes the other way: Minimum flexibility, maximum clarity. If our user's cannot do what they need, we solve that specific problem in a generalized way - no more, no less. Remember: The most flexible system possible is you terminal.
+
+### We don't solve problems we do not have
+
+If something _might_ be a performance problem, that is ok. If something _might_ give a to large payload, that is ok. When we suspect a problem, we measure it. If it _is_ a problem, we fix it. See [premature optimization](https://xkcd.com/1691/)
+
+### We work from right to left
+
+If something can be deployed, we deploy. Then, if a PR needs a review, we review. Then, and only then, if something can be built, we build. Flow is more important than speed.
+
 ## Develop
 
 ### Yarn
@@ -49,7 +71,3 @@ npm install -g git-cz
 ```
 
 To commit, just run `git-cz` in the terminal 😄
-
-## Principles
-
-## Techniques
