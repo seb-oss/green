@@ -1,0 +1,38 @@
+/*
+ Forward all mixins and variables so that they can be used by referencing a single file.
+ Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
+ Ie. 'button-base' (mixin), badge-padding (variable).
+*/
+.btn {
+  margin: 0;
+  display: block;
+  background: none;
+  padding: 1rem;
+}
+
+.btn-primary {
+  background: blue;
+}
+
+.btn-secondary {
+  background: blue;
+}
+
+/* import specific class like this:
+@use "classes/button"; // all buttons
+@use "classes/button/primary"; // primary button
+ */
+.my-btn {
+  margin: 0;
+  display: block;
+  background: none;
+  background: blue;
+}
+
+.my-badge {
+  margin: 0;
+  display: block;
+  background: none;
+}
+
+/*# sourceMappingURL=green-chlorophyll.css.map */
