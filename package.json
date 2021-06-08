@@ -35,8 +35,5 @@
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2",
     "yarn": "^1.22.10"
-  },
-  "resolutions": {
-    "postcss": "8.3.0"
   }
 }
