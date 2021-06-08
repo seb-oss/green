@@ -6,6 +6,7 @@
   "description": "Storybook for Chlorophyll",
   "private": true,
   "scripts": {
+    "lint": "eslint .",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
