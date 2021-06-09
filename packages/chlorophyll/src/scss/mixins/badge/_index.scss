@@ -1,0 +1,7 @@
+$class: 'badge';
+$padding: 1rem;
+@mixin base {
+  margin: 0;
+  display: block;
+  background: none;
+}

@@ -9,7 +9,8 @@
     "lint": "lerna run lint --parallel",
     "lint:fix": "lerna run lint:fix --parallel",
     "test:dev": "jest --watchAll",
-    "test": "yarn lint && jest"
+    "test": "yarn lint && jest",
+    "build": "lerna run build --parallel"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
