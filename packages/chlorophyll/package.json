@@ -21,8 +21,8 @@
   },
   "scripts": {
     "dev": "concurrently --kill-others 'yarn watch:tokens'",
-    "lint": "stylelint --config-basedir ../../ src/*.scss",
-    "lint:fix": "stylelint --config-basedir ../../ src/*.scss --fix",
+    "lint": "stylelint --config-basedir ../../ src/**/*.scss",
+    "lint:fix": "stylelint --config-basedir ../../ src/**/*.scss --fix",
     "test": "jest",
     "generate": "ts-node ./build/generate",
     "prebuild": "yarn generate",

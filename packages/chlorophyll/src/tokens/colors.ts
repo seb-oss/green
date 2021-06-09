@@ -21,8 +21,8 @@ interface Colors extends Record<Color, Swatch> {
 }
 
 export const colors: Colors = {
-  white: '#ffffff',
-  black: '#000000',
+  white: '#fff',
+  black: '#000',
   grey: {
     s100: '#fbfbfb',
     s200: '#e9e9e9',
@@ -31,7 +31,7 @@ export const colors: Colors = {
     s500: '#adadad',
     s600: '#868686',
     s700: '#494949',
-    s800: '#333333',
+    s800: '#333',
     s900: '#1a1a1a',
   },
   green: {
