@@ -29,7 +29,8 @@
     "postinstall": "yarn generate",
     "watch:tokens": "watch 'yarn generate' ./src/tokens",
     "compile:scss": "sass src/scss/index.scss dist/green-chlorophyll.css",
-    "watch:scss": "sass --watch src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css"
+    "watch:scss": "sass --watch src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css",
+    "build": "yarn compile:scss"
   },
   "bugs": {
     "url": "https://github.com/sebgroup/green/issues"
