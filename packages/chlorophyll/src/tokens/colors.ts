@@ -15,6 +15,7 @@ interface FullSwatch extends Swatch {
 
 type Color = 'green' | 'yellow' | 'purple' | 'red' | 'blue'
 interface Colors extends Record<Color, Swatch> {
+  transparent: string
   white: string
   black: string
   grey: FullSwatch
@@ -23,6 +24,7 @@ interface Colors extends Record<Color, Swatch> {
 export const colors: Colors = {
   white: '#fff',
   black: '#000',
+  transparent: 'transparent',
   grey: {
     s100: '#fbfbfb',
     s200: '#e9e9e9',
@@ -42,31 +44,31 @@ export const colors: Colors = {
     s900: '#379d00',
   },
   blue: {
-    s100: '#',
-    s300: '#',
-    s500: '#',
-    s700: '#',
-    s900: '#',
+    s100: '#7ecff9',
+    s300: '#00adff',
+    s500: '#41b0ee',
+    s700: '#0092e1',
+    s900: '#007ac7',
   },
   purple: {
-    s100: '#',
-    s300: '#',
-    s500: '#',
-    s700: '#',
-    s900: '#',
+    s100: '#b39ddb',
+    s300: '#b39ddb',
+    s500: '#673ab6',
+    s700: '#4f2c99',
+    s900: '#3f2587',
   },
   red: {
-    s100: '#',
-    s300: '#',
-    s500: '#',
-    s700: '#',
-    s900: '#',
+    s100: '#f7706d',
+    s300: '#f7706d',
+    s500: '#ffc500',
+    s700: '#d81a1a',
+    s900: '#bb000c',
   },
   yellow: {
-    s100: '#',
-    s300: '#',
-    s500: '#',
-    s700: '#',
-    s900: '#',
+    s100: '#ffe182',
+    s300: '#ffe182',
+    s500: '#ffc500',
+    s700: '#ffb400',
+    s900: '#f8a000',
   },
 }
