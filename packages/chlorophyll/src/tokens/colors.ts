@@ -60,7 +60,7 @@ export const colors: Colors = {
   red: {
     s100: '#f7706d',
     s300: '#f7706d',
-    s500: '#ffc500',
+    s500: '#f03529',
     s700: '#d81a1a',
     s900: '#bb000c',
   },
