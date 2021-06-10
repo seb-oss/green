@@ -29,6 +29,7 @@
     "postinstall": "yarn generate",
     "watch:tokens": "watch 'yarn generate' ./src/tokens",
     "build": "sass src/scss/index.scss dist/green-chlorophyll.css",
+    "build:compressed": "sass src/scss/index.scss dist/green-chlorophyll.min.css --style compressed",
     "build:storybook": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css",
     "build:all": "concurrently 'yarn build' 'yarn build:storybook'",
     "serve": "yarn build && live-server --port=5000 --watch=index.html,./dist"
