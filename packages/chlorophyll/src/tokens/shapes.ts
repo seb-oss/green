@@ -7,17 +7,19 @@ export interface Shape {
   margin: Spacing
   borderRadius: Spacing
 }
+export type Shapes = 'button' | 'input'
 
-export const button: Shape = {
-  display: 'inline-block',
-  padding: { v: '0', h: '16px' },
-  margin: '0px',
-  borderRadius: '.25em',
-}
-
-export const input: Shape = {
-  display: 'inline-block',
-  padding: { v: '0', h: '16px' },
-  margin: '0px',
-  borderRadius: '4px',
+export const shapes: Record<Shapes, Shape> = {
+  button: {
+    display: 'inline-block',
+    padding: { v: '0', h: '16px' },
+    margin: '0px',
+    borderRadius: '.25em',
+  },
+  input: {
+    display: 'inline-block',
+    padding: { v: '0', h: '16px' },
+    margin: '0px',
+    borderRadius: '4px',
+  },
 }
