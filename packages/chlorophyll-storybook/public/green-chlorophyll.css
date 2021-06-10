@@ -158,6 +158,62 @@
   background-color: #41b0ee;
   border-color: transparent;
 }
+.ds-green input[type=date] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=datetime] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=datetime-local] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=email] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=month] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=number] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=password] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
 .ds-green input[type=reset] {
   display: inline-block;
   text-align: center;
@@ -181,6 +237,14 @@
   background-color: #f03529;
   border-color: transparent;
 }
+.ds-green input[type=search] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
 .ds-green input[type=submit] {
   display: inline-block;
   text-align: center;
@@ -195,6 +259,47 @@
 }
 .ds-green input[type=submit]:hover, .ds-green input[type=submit]:active {
   background-color: #41b0ee;
+}
+.ds-green input[type=tel] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input:not([type]),
+.ds-green input[type=text] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=time] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=url] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
+}
+.ds-green input[type=week] {
+  display: inline-block;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  color: #1a1a1a;
+  padding: 0 16px;
+  min-height: 44px;
 }
 
 /* import specific class like this:

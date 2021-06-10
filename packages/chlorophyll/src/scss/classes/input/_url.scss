@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-url} {
+  @include input.input-field;
+}

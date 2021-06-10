@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-tel} {
+  @include input.input-field;
+}

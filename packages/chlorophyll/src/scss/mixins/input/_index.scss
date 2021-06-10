@@ -1,7 +1,7 @@
 @use "../../tokens";
 @use "../button";
 
-$selector: 'input';
+$selector: 'input:not([type])';
 $selector-button: 'input[type=button]';
 $selector-checkbox: 'input[type=checkbox]';
 $selector-color: 'input[type=color]';
@@ -21,8 +21,18 @@ $selector-search: 'input[type=search]';
 $selector-submit: 'input[type=submit]';
 $selector-tel: 'input[type=tel]';
 $selector-text: 'input[type=text]';
+$selector-time: 'input[type=time]';
 $selector-url: 'input[type=url]';
 $selector-week: 'input[type=week]';
+
+@mixin input-field {
+  display: tokens.$shape-input-display;
+  border: 1px solid tokens.$color-grey-400;
+  border-radius: tokens.$shape-input-border-radius;
+  color: tokens.$theme-light-background-opposite;
+  padding: tokens.$shape-input-padding-v tokens.$shape-input-padding-h;
+  min-height: 44px;
+}
 
 @mixin button {
   @include button.base;
