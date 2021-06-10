@@ -26,4 +26,9 @@ describe('generator', () => {
 
     expect(scss).toEqual(['$color-green-100: #0000ff;'])
   })
+  it('handles camelCase variables', () => {
+    const scss = generate({ borderWidth: '5px' }, 'button')
+
+    expect(scss).toEqual(['$button-border-width: 5px;'])
+  })
 })
