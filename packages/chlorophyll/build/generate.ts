@@ -2,14 +2,16 @@ import { mkdir, writeFile } from 'fs/promises'
 import { generate } from './generator'
 import { colors, fonts, shapes, themes, typography } from '../src/tokens'
 
-const generateAndSave = async (folder: string, data: any, prefix: string, filename: string): Promise<string> => {
-  const scss = generate(data, prefix)
-  await writeFile(`${folder}/_${filename}.scss`, scss.join('\n') + '\n', 'utf-8')
-  return filename
+type FilaAndAs = [fileName: string, asName: string]
+
+const generateAndSave = async (folder: string, data: any, asName: string, fileName: string): Promise<FilaAndAs> => {
+  const scss = generate(data)
+  await writeFile(`${folder}/_${fileName}.scss`, scss.join('\n') + '\n', 'utf-8')
+  return [fileName, asName]
 }
 
-const generateAndSaveIndex = async (folder: string, ...files: string[]): Promise<void> => {
-  const forwards = files.map((file) => `@forward '${file}';`)
+const generateAndSaveIndex = async (folder: string, files: FilaAndAs[]): Promise<void> => {
+  const forwards = files.map(([fileName, asName]) => `@forward '${fileName} as ${asName}-*';`)
   await writeFile(`${folder}/_index.scss`, forwards.join('\n') + '\n', 'utf-8')
 }
 
@@ -24,7 +26,7 @@ const run = async () => {
     generateAndSave(folder, themes, 'theme', 'themes'),
     generateAndSave(folder, typography, 'typography', 'typography'),
   ])
-  await generateAndSaveIndex(folder, ...files)
+  await generateAndSaveIndex(folder, files)
 }
 
 run()
