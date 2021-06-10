@@ -6,19 +6,19 @@ export type Weight = 'light' |'regular' | 'medium' | 'bold'
 
 export const fonts: Record<Weight, Font> = {
   light: {
-    family: '',
+    family: 'SEBSansSerif',
     weight: '300',
   },
   regular: {
-    family: '',
+    family: 'SEBSansSerif',
     weight: '400',
   },
   medium: {
-    family: '',
+    family: 'SEBSansSerif',
     weight: '500',
   },
   bold: {
-    family: '',
+    family: 'SEBSansSerif',
     weight: '700',
   },
 }

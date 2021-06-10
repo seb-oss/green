@@ -1,11 +1,29 @@
-$class: 'btn';
-$padding: 1rem;
+@use "../../tokens";
+
+$selector: 'button';
+
+$color-text: tokens.$theme-light-background;
+$color-bg-default: tokens.$color-blue-700;
+$color-bg-hover: tokens.$color-blue-500;
+
 @mixin base {
-  margin: 0;
-  display: block;
-  background: none;
+  display: tokens.$shape-button-display;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: tokens.$shape-button-border-radius;
+  background-color: $color-bg-default;
+  color: $color-text;
+  padding: tokens.$shape-button-padding-h tokens.$shape-button-padding-v;
+
+  &:hover,
+  &:active {
+    background-color: $color-bg-hover;
+  }
 }
 
-@mixin primary {
-  background: blue;
+@mixin secondary {
+  background: transparent;
 }
