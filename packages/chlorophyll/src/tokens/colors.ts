@@ -15,6 +15,7 @@ interface FullSwatch extends Swatch {
 
 type Color = 'green' | 'yellow' | 'purple' | 'red' | 'blue'
 interface Colors extends Record<Color, Swatch> {
+  transparent: string
   white: string
   black: string
   grey: FullSwatch
@@ -23,6 +24,7 @@ interface Colors extends Record<Color, Swatch> {
 export const colors: Colors = {
   white: '#fff',
   black: '#000',
+  transparent: 'transparent',
   grey: {
     s100: '#fbfbfb',
     s200: '#e9e9e9',
