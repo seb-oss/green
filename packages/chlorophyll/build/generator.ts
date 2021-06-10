@@ -4,12 +4,12 @@ const handleShadePrefix = (key: string): string => {
   else return key
 }
 
-export const generateScss = (obj: any, ...prefix: string[]): string[] => (
+export const generate = (obj: any, ...prefix: string[]): string[] => (
   Object.entries(obj)
     .flatMap(([key, value]) => {
       const prefixes = prefix.concat(handleShadePrefix(key))
 
-      if (typeof value === 'object') return generateScss(value, ...prefixes)
+      if (typeof value === 'object') return generate(value, ...prefixes)
       return `$${prefixes.join('-')}: ${value};`
     })
 )
