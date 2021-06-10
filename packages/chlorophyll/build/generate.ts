@@ -11,7 +11,7 @@ const generateAndSave = async (folder: string, data: any, asName: string, fileNa
 }
 
 const generateAndSaveIndex = async (folder: string, files: FilaAndAs[]): Promise<void> => {
-  const forwards = files.map(([fileName, asName]) => `@forward '${fileName} as ${asName}-*';`)
+  const forwards = files.map(([fileName, asName]) => `@forward '${fileName}' as ${asName}-*;`)
   await writeFile(`${folder}/_index.scss`, forwards.join('\n') + '\n', 'utf-8')
 }
 
