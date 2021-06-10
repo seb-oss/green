@@ -1,6 +1,5 @@
 @use '../../mixins/button';
 
-.#{button.$class} {
+#{button.$selector} {
   @include button.base;
-  padding: button.$padding;
 }
