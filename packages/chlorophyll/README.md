@@ -47,9 +47,9 @@ Styling is made by expressing intent – not design. A button is not green, it i
 
 To find all components, possible modifiers and information on when to use them, visit:
 
-* Storybook for Angular
-* Storybook for React
-* Storybook for html/css (for when you definitely don't need a framework)
+- Storybook for Angular
+- Storybook for React
+- Storybook for html/css (for when you definitely don't need a framework)
 
 ### Missing components and/or help
 
@@ -60,3 +60,13 @@ If you are up and running with Green and want to contribute a new component, see
 ## Develop / Contribute
 
 This is part of a monorepo. If you want to contribute, see [Green](https://github.com/sebgroup/green)
+
+- Watch all changes and auto generate css
+  ```bash
+  yarn dev
+  ```
+- Run linter in editor
+- Run tests on editor or console
+  ```bash
+  yarn test --watchAll
+  ```

@@ -3,36 +3,33 @@
  Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
  Ie. 'button-base' (mixin), badge-padding (variable).
 */
-.btn {
+.ds-green button {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+}
+.ds-green button:hover, .ds-green button:active {
+  background-color: #41b0ee;
+}
+.ds-green button-secondary {
+  background: transparent;
+}
+.ds-green .badge {
   margin: 0;
   display: block;
   background: none;
-  padding: 1rem;
-}
-
-.btn-primary {
-  background: blue;
-}
-
-.btn-secondary {
-  background: blue;
 }
 
 /* import specific class like this:
 @use "classes/button"; // all buttons
 @use "classes/button/primary"; // primary button
  */
-.my-btn {
-  margin: 0;
-  display: block;
-  background: none;
-  background: blue;
-}
-
-.my-badge {
-  margin: 0;
-  display: block;
-  background: none;
-}
 
 /*# sourceMappingURL=green-chlorophyll.css.map */
