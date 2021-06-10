@@ -4,7 +4,7 @@ import { colors } from '../src/tokens'
 
 const run = async () => {
   const scssColors = generateScss(colors, 'color')
-  await writeFile('./src/style/colors.scss', scssColors.join('\n') + '\n', 'utf-8')
+  await writeFile('./src/scss/_colors.scss', scssColors.join('\n') + '\n', 'utf-8')
 }
 
 run()
