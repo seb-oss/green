@@ -2,10 +2,6 @@
 
 $selector: 'button';
 
-$color-text: tokens.$theme-light-background;
-$color-bg-default: tokens.$color-blue-700;
-$color-bg-hover: tokens.$color-blue-500;
-
 @mixin base {
   display: tokens.$shape-button-display;
   text-align: center;
@@ -14,16 +10,74 @@ $color-bg-hover: tokens.$color-blue-500;
   user-select: none;
   border: 1px solid transparent;
   border-radius: tokens.$shape-button-border-radius;
-  background-color: $color-bg-default;
-  color: $color-text;
+  background-color: tokens.$theme-light-primary-color;
+  color: tokens.$theme-light-primary-opposite;
   padding: tokens.$shape-button-padding-h tokens.$shape-button-padding-v;
 
   &:hover,
   &:active {
-    background-color: $color-bg-hover;
+    background-color: tokens.$theme-light-primary-color2;
   }
 }
 
 @mixin secondary {
-  background: transparent;
+  background: tokens.$theme-light-secondary-color;
+  color: tokens.$theme-light-secondary-opposite;
+  border-color: tokens.$theme-light-secondary-opposite;
+
+  &:hover,
+  &:active {
+    color: tokens.$theme-light-secondary-opposite2;
+    background-color: tokens.$theme-light-secondary-color2;
+    border-color: transparent;
+  }
+}
+
+@mixin link {
+  @include secondary;
+  border-color: transparent;
+
+  &:hover,
+  &:active {
+    border-color: transparent;
+  }
+}
+
+@mixin danger {
+  background: tokens.$theme-light-danger-color;
+  color: tokens.$theme-light-danger-opposite;
+  border-color: transparent;
+
+  &:hover,
+  &:active {
+    color: tokens.$theme-light-danger-opposite2;
+    background-color: tokens.$theme-light-danger-color2;
+    border-color: transparent;
+  }
+}
+
+@mixin danger-opposite {
+  background: tokens.$theme-light-danger-opposite;
+  color: tokens.$theme-light-danger-color;
+  border-color: transparent;
+
+  &:hover,
+  &:active {
+    color: tokens.$theme-light-danger-opposite2;
+    background-color: tokens.$theme-light-danger-color2;
+    border-color: transparent;
+  }
+}
+
+@mixin ghost {
+  background: tokens.$theme-light-ghost-color;
+  color: tokens.$theme-light-ghost-opposite;
+  border-color: tokens.$theme-light-ghost-opposite;
+
+  &:hover,
+  &:active {
+    color: tokens.$theme-light-ghost-color;
+    background-color: tokens.$theme-light-ghost-opposite;
+    border-color: transparent;
+  }
 }

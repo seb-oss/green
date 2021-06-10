@@ -1,37 +1,83 @@
 import { colors } from './colors'
 
 export type ThemeName = 'light' | 'dark'
+interface ColorSet {
+  color: string
+  opposite: string
+  color2?: string
+  opposite2?: string
+}
 export interface Theme {
-  background: string
-  onBackground: string
-  surface: string
-  onSurface: string
-  primary: string
-  onPrimary: string
-  secondary: string
-  onSecondary: string
+  background: ColorSet
+  surface: ColorSet
+  primary: ColorSet
+  secondary: ColorSet
+  ghost: ColorSet
+  danger: ColorSet
 }
 type Themes = Record<ThemeName, Theme>
 
 export const themes: Themes = {
   light: {
-    background: colors.white,
-    onBackground: colors.grey.s900,
-    surface: colors.grey.s100,
-    onSurface: colors.grey.s900,
-    primary: colors.blue.s500,
-    onPrimary: colors.white,
-    secondary: colors.transparent,
-    onSecondary: colors.black,
+    background: {
+      color: colors.white,
+      opposite: colors.grey.s900,
+    },
+    surface: {
+      color: colors.grey.s100,
+      opposite: colors.grey.s900,
+    },
+    primary: {
+      color: colors.blue.s700,
+      opposite: colors.white,
+      color2: colors.blue.s500,
+    },
+    secondary: {
+      color: colors.white,
+      opposite: colors.blue.s700,
+      color2: colors.blue.s500,
+      opposite2: colors.white,
+    },
+    ghost: {
+      color: colors.white,
+      opposite: colors.grey.s800,
+    },
+    danger: {
+      color: colors.white,
+      opposite: colors.red.s700,
+      color2: colors.red.s500,
+      opposite2: colors.white,
+    },
   },
   dark: {
-    background: colors.grey.s900,
-    onBackground: colors.grey.s100,
-    surface: colors.grey.s800,
-    onSurface: colors.grey.s100,
-    primary: colors.blue.s500,
-    onPrimary: colors.white,
-    secondary: colors.transparent,
-    onSecondary: colors.black,
+    background: {
+      color: colors.grey.s900,
+      opposite: colors.grey.s100,
+    },
+    surface: {
+      color: colors.grey.s800,
+      opposite: colors.white,
+    },
+    primary: {
+      color: colors.blue.s700,
+      opposite: colors.white,
+      color2: colors.blue.s500,
+    },
+    secondary: {
+      color: colors.white,
+      opposite: colors.blue.s700,
+      color2: colors.blue.s500,
+      opposite2: colors.white,
+    },
+    ghost: {
+      color: colors.white,
+      opposite: colors.grey.s800,
+    },
+    danger: {
+      color: colors.white,
+      opposite: colors.red.s700,
+      color2: colors.red.s500,
+      opposite2: colors.white,
+    },
   },
 }

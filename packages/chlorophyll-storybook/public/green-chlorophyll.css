@@ -3,7 +3,13 @@
  Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
  Ie. 'button-base' (mixin), badge-padding (variable).
 */
-.ds-green button {
+.ds-green .badge {
+  margin: 0;
+  display: block;
+  background: none;
+}
+.ds-green button,
+.ds-green button[type=button] {
   display: inline-block;
   text-align: center;
   text-decoration: none;
@@ -15,16 +21,180 @@
   color: #fff;
   padding: 0.5em 1em;
 }
-.ds-green button:hover, .ds-green button:active {
+.ds-green button:hover, .ds-green button:active,
+.ds-green button[type=button]:hover,
+.ds-green button[type=button]:active {
   background-color: #41b0ee;
 }
-.ds-green button-secondary {
-  background: transparent;
+.ds-green button.danger,
+.ds-green button.delete {
+  background: #fff;
+  color: #d81a1a;
+  border-color: transparent;
 }
-.ds-green .badge {
-  margin: 0;
-  display: block;
-  background: none;
+.ds-green button.danger:hover, .ds-green button.danger:active,
+.ds-green button.delete:hover,
+.ds-green button.delete:active {
+  color: #fff;
+  background-color: #f03529;
+  border-color: transparent;
+}
+.ds-green button.delete.confirm {
+  background: #d81a1a;
+  color: #fff;
+  border-color: transparent;
+}
+.ds-green button.delete.confirm:hover, .ds-green button.delete.confirm:active {
+  color: #fff;
+  background-color: #f03529;
+  border-color: transparent;
+}
+.ds-green button.ghost {
+  background: #fff;
+  color: #333;
+  border-color: #333;
+}
+.ds-green button.ghost:hover, .ds-green button.ghost:active {
+  color: #fff;
+  background-color: #333;
+  border-color: transparent;
+}
+.ds-green button.link {
+  background: #fff;
+  color: #0092e1;
+  border-color: #0092e1;
+  border-color: transparent;
+}
+.ds-green button.link:hover, .ds-green button.link:active {
+  color: #fff;
+  background-color: #41b0ee;
+  border-color: transparent;
+}
+.ds-green button.link:hover, .ds-green button.link:active {
+  border-color: transparent;
+}
+.ds-green button[type=menu] {
+  background: #fff;
+  color: #0092e1;
+  border-color: #0092e1;
+  border-color: transparent;
+}
+.ds-green button[type=menu]:hover, .ds-green button[type=menu]:active {
+  color: #fff;
+  background-color: #41b0ee;
+  border-color: transparent;
+}
+.ds-green button[type=menu]:hover, .ds-green button[type=menu]:active {
+  border-color: transparent;
+}
+.ds-green button[type=reset] {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+  background: #d81a1a;
+  color: #fff;
+  border-color: transparent;
+}
+.ds-green button[type=reset]:hover, .ds-green button[type=reset]:active {
+  background-color: #41b0ee;
+}
+.ds-green button[type=reset]:hover, .ds-green button[type=reset]:active {
+  color: #fff;
+  background-color: #f03529;
+  border-color: transparent;
+}
+.ds-green button.secondary {
+  background: #fff;
+  color: #0092e1;
+  border-color: #0092e1;
+}
+.ds-green button.secondary:hover, .ds-green button.secondary:active {
+  color: #fff;
+  background-color: #41b0ee;
+  border-color: transparent;
+}
+.ds-green button[type=submit] {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+}
+.ds-green button[type=submit]:hover, .ds-green button[type=submit]:active {
+  background-color: #41b0ee;
+}
+.ds-green input[type=button] {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+  background: #fff;
+  color: #0092e1;
+  border-color: #0092e1;
+}
+.ds-green input[type=button]:hover, .ds-green input[type=button]:active {
+  background-color: #41b0ee;
+}
+.ds-green input[type=button]:hover, .ds-green input[type=button]:active {
+  color: #fff;
+  background-color: #41b0ee;
+  border-color: transparent;
+}
+.ds-green input[type=reset] {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+  background: #d81a1a;
+  color: #fff;
+  border-color: transparent;
+}
+.ds-green input[type=reset]:hover, .ds-green input[type=reset]:active {
+  background-color: #41b0ee;
+}
+.ds-green input[type=reset]:hover, .ds-green input[type=reset]:active {
+  color: #fff;
+  background-color: #f03529;
+  border-color: transparent;
+}
+.ds-green input[type=submit] {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 0.25em;
+  background-color: #0092e1;
+  color: #fff;
+  padding: 0.5em 1em;
+}
+.ds-green input[type=submit]:hover, .ds-green input[type=submit]:active {
+  background-color: #41b0ee;
 }
 
 /* import specific class like this:

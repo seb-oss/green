@@ -1,0 +1,5 @@
+@use '../../mixins/button';
+
+#{button.$selector}[type='menu'] {
+  @include button.link;
+}
