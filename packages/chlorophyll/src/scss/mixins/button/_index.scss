@@ -2,7 +2,7 @@
 @use '../../mixins/utility';
 @use '../../functions';
 
-$selector-default: 'button:not([class]), a';
+$selector-default: 'button:not([class])';
 $selector: '.btn';
 $selector-primary: '.btn-primary';
 
