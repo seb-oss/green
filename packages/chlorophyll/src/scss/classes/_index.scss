@@ -8,10 +8,14 @@
  @use 'input';
  @use 'utility/spacing';
 
+// TODO: move and refactor
 .size-sm {
  @include utility.padding-horizontal(3);
  @include utility.padding-vertical(2);
  @include utility.font-size('s');
+}
+input.size-sm {
+ height: 0.75rem;
 }
 
 .size-lg {
