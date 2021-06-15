@@ -7,9 +7,11 @@
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0.25em 0.0625em map-get(scss-tokens.$blue, 2);
     border-color: map-get(scss-tokens.$blue, 0);
-    outline-style: solid;
+    box-shadow: 0 0 0.25em 0.0625em map-get(scss-tokens.$blue, 2);
     outline-color: transparent;
+    outline-style: solid;
   }
 }
+
+
