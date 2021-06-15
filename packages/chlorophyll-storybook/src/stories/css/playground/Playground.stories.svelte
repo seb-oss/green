@@ -4,10 +4,9 @@
 </script>
 
 <Meta
-        title="CSS/Playground"
-        component={Playground}
+    title="CSS/Playground"
+    component={Playground}
 />
-
 
 <Template let:args>
     <Playground {...args}/>

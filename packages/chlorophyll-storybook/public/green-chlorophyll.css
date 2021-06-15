@@ -1,305 +1,302 @@
+/**
+ * Calculate the luminance for a color.
+ * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ */
+/**
+ * Calculate the contrast ratio between two colors.
+ * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ */
+/**
+ * Determine whether to use dark or light text on top of given color.
+ * Returns black for dark text and white for light text.
+ */
 /*
  Forward all mixins and variables so that they can be used by referencing a single file.
  Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
  Ie. 'button-base' (mixin), badge-padding (variable).
 */
-.ds-green .badge {
-  margin: 0;
-  display: block;
-  background: none;
-}
-.ds-green button,
-.ds-green button[type=button] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
-}
-.ds-green button:hover, .ds-green button:active,
-.ds-green button[type=button]:hover,
-.ds-green button[type=button]:active {
-  background-color: #41b0ee;
-}
-.ds-green button.danger,
-.ds-green button.delete {
-  background: #fff;
-  color: #d81a1a;
-  border-color: transparent;
-}
-.ds-green button.danger:hover, .ds-green button.danger:active,
-.ds-green button.delete:hover,
-.ds-green button.delete:active {
-  color: #fff;
-  background-color: #f03529;
-  border-color: transparent;
-}
-.ds-green button.delete.confirm {
-  background: #d81a1a;
-  color: #fff;
-  border-color: transparent;
-}
-.ds-green button.delete.confirm:hover, .ds-green button.delete.confirm:active {
-  color: #fff;
-  background-color: #f03529;
-  border-color: transparent;
-}
-.ds-green button.ghost {
-  background: #fff;
-  color: #333;
-  border-color: #333;
-}
-.ds-green button.ghost:hover, .ds-green button.ghost:active {
-  color: #fff;
-  background-color: #333;
-  border-color: transparent;
-}
-.ds-green button.link {
-  background: #fff;
-  color: #0092e1;
-  border-color: #0092e1;
-  border-color: transparent;
-}
-.ds-green button.link:hover, .ds-green button.link:active {
-  color: #fff;
-  background-color: #41b0ee;
-  border-color: transparent;
-}
-.ds-green button.link:hover, .ds-green button.link:active {
-  border-color: transparent;
-}
-.ds-green button[type=menu] {
-  background: #fff;
-  color: #0092e1;
-  border-color: #0092e1;
-  border-color: transparent;
-}
-.ds-green button[type=menu]:hover, .ds-green button[type=menu]:active {
-  color: #fff;
-  background-color: #41b0ee;
-  border-color: transparent;
-}
-.ds-green button[type=menu]:hover, .ds-green button[type=menu]:active {
-  border-color: transparent;
-}
-.ds-green button[type=reset] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
-  background: #d81a1a;
-  color: #fff;
-  border-color: transparent;
-}
-.ds-green button[type=reset]:hover, .ds-green button[type=reset]:active {
-  background-color: #41b0ee;
-}
-.ds-green button[type=reset]:hover, .ds-green button[type=reset]:active {
-  color: #fff;
-  background-color: #f03529;
-  border-color: transparent;
-}
-.ds-green button.secondary {
-  background: #fff;
-  color: #0092e1;
-  border-color: #0092e1;
-}
-.ds-green button.secondary:hover, .ds-green button.secondary:active {
-  color: #fff;
-  background-color: #41b0ee;
-  border-color: transparent;
-}
-.ds-green button[type=submit] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
-}
-.ds-green button[type=submit]:hover, .ds-green button[type=submit]:active {
-  background-color: #41b0ee;
-}
-.ds-green input[type=button] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
-  background: #fff;
-  color: #0092e1;
-  border-color: #0092e1;
-}
-.ds-green input[type=button]:hover, .ds-green input[type=button]:active {
-  background-color: #41b0ee;
-}
-.ds-green input[type=button]:hover, .ds-green input[type=button]:active {
-  color: #fff;
-  background-color: #41b0ee;
-  border-color: transparent;
-}
-.ds-green input[type=date] {
-  display: inline-block;
-  border: 1px solid #cecece;
+/*.btn,
+.btn[type='button'] {
+  @include button.base;
+  @include button.primary;
+}*/
+.btn {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
   border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
+  border: solid 1px;
+  font-weight: 500;
+}
+@media screen and (-ms-high-contrast: active) {
+  .btn {
+    border: 2px solid currentcolor;
+  }
+}
+
+.btn-primary {
+  background: #0092e1;
+  color: black;
+  /*&:hover,
+  &:active {
+    color: tokens.$theme-light-secondary-opposite2;
+    background-color: tokens.$theme-light-secondary-color2;
+    border-color: transparent;
+  }*/
+}
+.btn-primary:focus:not(:focus-visible) {
+  outline: 0;
+}
+.btn-primary:focus-visible {
+  outline-style: solid;
+  box-shadow: 0 0 0 4px #000099;
+  outline-color: transparent;
+}
+
+button:not([class]), a {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+  border-radius: 4px;
+  border: solid 1px;
+  font-weight: 500;
+  background: #0092e1;
+  color: black;
+  /*&:hover,
+  &:active {
+    color: tokens.$theme-light-secondary-opposite2;
+    background-color: tokens.$theme-light-secondary-color2;
+    border-color: transparent;
+  }*/
+}
+@media screen and (-ms-high-contrast: active) {
+  button:not([class]), a {
+    border: 2px solid currentcolor;
+  }
+}
+button:not([class]):focus:not(:focus-visible), a:focus:not(:focus-visible) {
+  outline: 0;
+}
+button:not([class]):focus-visible, a:focus-visible {
+  outline-style: solid;
+  box-shadow: 0 0 0 4px #000099;
+  outline-color: transparent;
+}
+
+/*@use 'delete';
+@use 'ghost';
+@use 'link';
+@use 'menu';
+@use 'reset';
+@use 'secondary';
+@use 'submit';*/
+/*@use "../../tokens";
+@use "../button";
+
+$selector: 'input:not([type])';
+$selector-button: 'input[type=button]';
+$selector-checkbox: 'input[type=checkbox]';
+$selector-color: 'input[type=color]';
+$selector-date: 'input[type=date]';
+$selector-datetime: 'input[type=datetime]';
+$selector-datetime-local: 'input[type=datetime-local]';
+$selector-email: 'input[type=email]';
+$selector-hidden: 'input[type=hidden]';
+$selector-image: 'input[type=image]';
+$selector-month: 'input[type=month]';
+$selector-number: 'input[type=number]';
+$selector-password: 'input[type=password]';
+$selector-radio: 'input[type=radio]';
+$selector-range: 'input[type=range]';
+$selector-reset: 'input[type=reset]';
+$selector-search: 'input[type=search]';
+$selector-submit: 'input[type=submit]';
+$selector-tel: 'input[type=tel]';
+$selector-text: 'input[type=text]';
+$selector-time: 'input[type=time]';
+$selector-url: 'input[type=url]';
+$selector-week: 'input[type=week]';
+
+@mixin input-field {
+  display: tokens.$shape-input-display;
+  border: 1px solid tokens.$color-grey-400;
+  border-radius: tokens.$shape-input-border-radius;
+  color: tokens.$theme-light-background-opposite;
+  padding: tokens.$shape-input-padding-v tokens.$shape-input-padding-h;
   min-height: 44px;
 }
-.ds-green input[type=datetime] {
-  display: inline-block;
-  border: 1px solid #cecece;
+
+@mixin button {
+  @include button.base;
+  @include button.secondary;
+}
+
+@mixin reset {
+  @include button.base;
+  @include button.danger-opposite;
+}
+
+@mixin submit {
+  @include button.base;
+}
+*/
+.form-input {
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
   border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+  border: solid 1px;
 }
-.ds-green input[type=datetime-local] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+@media screen and (-ms-high-contrast: active) {
+  .form-input {
+    border: 2px solid currentcolor;
+  }
 }
-.ds-green input[type=email] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+/*@use 'button';
+@use 'checkbox';
+@use 'color';
+@use 'date';
+@use 'datetime';
+@use 'datetime-local';
+@use 'email';
+@use 'file';
+@use 'hidden';
+@use 'image';
+@use 'month';
+@use 'number';
+@use 'password';
+@use 'radio';
+@use 'range';
+@use 'reset';
+@use 'search';
+@use 'submit';
+@use 'tel';
+@use 'text';
+@use 'time';
+@use 'url';
+@use 'week';
+*/
+body html {
+  font-size: 16px;
 }
-.ds-green input[type=month] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+body body {
+  font-weight: 400;
+  font-family: 'SEBSansSerif',Arial,sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-.ds-green input[type=number] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+.display-01 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 56px;
+  letter-spacing: 0;
 }
-.ds-green input[type=password] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 40px;
+  letter-spacing: 0;
 }
-.ds-green input[type=reset] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
-  background: #d81a1a;
-  color: #fff;
-  border-color: transparent;
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 32px;
+  letter-spacing: 0;
 }
-.ds-green input[type=reset]:hover, .ds-green input[type=reset]:active {
-  background-color: #41b0ee;
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 28px;
+  letter-spacing: 0;
 }
-.ds-green input[type=reset]:hover, .ds-green input[type=reset]:active {
-  color: #fff;
-  background-color: #f03529;
-  border-color: transparent;
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 28px;
+  letter-spacing: 0;
 }
-.ds-green input[type=search] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+h5 {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: 0;
 }
-.ds-green input[type=submit] {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  user-select: none;
-  border: 1px solid transparent;
-  border-radius: 0.25em;
-  background-color: #0092e1;
-  color: #fff;
-  padding: 0.5em 1em;
+
+h6 {
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 20px;
+  letter-spacing: 0;
 }
-.ds-green input[type=submit]:hover, .ds-green input[type=submit]:active {
-  background-color: #41b0ee;
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
 }
-.ds-green input[type=tel] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+p.small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
 }
-.ds-green input:not([type]),
-.ds-green input[type=text] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+/*.ds-green {
+  @import 'badge';
+  @import 'button';
+  @import 'input';
+}*/
+.size-sm {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.25rem;
+  padding-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1;
 }
-.ds-green input[type=time] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
-}
-.ds-green input[type=url] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
-}
-.ds-green input[type=week] {
-  display: inline-block;
-  border: 1px solid #cecece;
-  border-radius: 4px;
-  color: #1a1a1a;
-  padding: 0 16px;
-  min-height: 44px;
+
+.size-lg {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
 }
 
 /* import specific class like this:

@@ -1,0 +1,13 @@
+@use "../../scss-tokens/typography";
+
+@forward "reset";
+
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin header-margin() {
+
+}
