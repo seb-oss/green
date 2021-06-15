@@ -34,6 +34,8 @@ $selector-primary: '.btn-primary';
 @mixin primary {
   background: map-get(scss-tokens.$theme-colors, 'primary');
   color: functions.choose-contrast-color(map-get(scss-tokens.$theme-colors, 'primary'));
+  @include utility.add-hover-active-state();
+
 
   /*&:hover,
   &:active {
