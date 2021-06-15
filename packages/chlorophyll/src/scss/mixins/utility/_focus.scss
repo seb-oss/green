@@ -14,4 +14,24 @@
   }
 }
 
+@mixin add-hover-state($color: map-get(scss-tokens.$blue, 2)) {
+  transition: color 0.25s; // TODO: append transition rule...
 
+  &:hover {
+    background: $color;
+  }
+}
+
+@mixin add-active-state($color: map-get(scss-tokens.$blue, 0)) {
+  &:active,
+  &.active,
+  &.active:hover,
+  &:active:hover {
+    background: $color;
+  }
+}
+
+@mixin add-hover-active-state() {
+  @include add-hover-state();
+  @include add-active-state();
+}
