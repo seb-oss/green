@@ -21,3 +21,4 @@ tsconfig.tsbuildinfo
 
 ## OS
 .DS_Store
+.idea

@@ -4,8 +4,8 @@
 </script>
 
 <Meta
-        title="CSS/Playground"
-        component={Playground}
+    title="CSS/Playground"
+    component={Playground}
 />
 
 

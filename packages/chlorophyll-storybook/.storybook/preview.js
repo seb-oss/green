@@ -1,3 +1,4 @@
+import "../public/green-chlorophyll.css"
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
