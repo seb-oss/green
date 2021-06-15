@@ -6,6 +6,7 @@
 }*/
  @use 'button';
  @use 'input';
+ @use 'utility/spacing';
 
 .size-sm {
  @include utility.padding-horizontal(3);

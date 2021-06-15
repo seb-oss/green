@@ -1,10 +1,47 @@
 @use '../../scss-tokens';
+@mixin margin($size) {
+  margin: map-get(scss-tokens.$spacing, $size);
+}
 @mixin margin-start($size) {
   margin-left: map-get(scss-tokens.$spacing, $size);
+}
+@mixin margin-end($size) {
+  margin-right: map-get(scss-tokens.$spacing, $size);
+}
+@mixin margin-top($size) {
+  margin-top: map-get(scss-tokens.$spacing, $size);
+}
+@mixin margin-bottom($size) {
+  margin-bottom: map-get(scss-tokens.$spacing, $size);
 }
 @mixin margin-horizontal($size) {
   margin-left: map-get(scss-tokens.$spacing, $size);
   margin-right: map-get(scss-tokens.$spacing, $size);
+}
+
+@mixin margin-vertical($size) {
+  margin-bottom: map-get(scss-tokens.$spacing, $size);
+  margin-top: map-get(scss-tokens.$spacing, $size);
+}
+
+@mixin padding($size, $spacing: scss-tokens.$spacing) {
+  padding: map-get($spacing, $size);
+}
+
+@mixin padding-start($size) {
+  padding-left: map-get(scss-tokens.$spacing, $size);
+}
+
+@mixin padding-end($size) {
+  padding-right: map-get(scss-tokens.$spacing, $size);
+}
+
+@mixin padding-top($size) {
+  padding-right: map-get(scss-tokens.$spacing, $size);
+}
+
+@mixin padding-bottom($size) {
+  padding-left: map-get(scss-tokens.$spacing, $size);
 }
 
 @mixin padding-horizontal($size) {
