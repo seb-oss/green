@@ -11,7 +11,7 @@
             type: {
               control: { type: "select", options: ["primary", "secondary"] },
             }
-          }}
+        }}
 />
 
 
@@ -19,11 +19,10 @@
     <Button {...args}/>
 </Template>
 
-
 <Story
-        source={`<button class="btn btn-primary">Primary</button>`}
-        name="Primary"
-        args={{
+    source={`<button class="btn btn-primary">Primary</button>`}
+    name="Primary"
+    args={{
     type: "primary",
     label: "Primary",
   }}

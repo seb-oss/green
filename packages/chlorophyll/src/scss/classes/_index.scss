@@ -6,6 +6,7 @@
 }*/
  @use 'button';
  @use 'input';
+ @use 'typography';
 
 .size-sm {
  @include utility.padding-horizontal('xs');
