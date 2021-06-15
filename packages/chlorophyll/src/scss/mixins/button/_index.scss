@@ -21,6 +21,8 @@ $selector-primary: '.btn-primary';
   @include utility.add-border-radius();
   @include utility.add-border();
   @include utility.font-weight('medium');
+  @include utility.add-focus();
+
 
 
   @media screen and (-ms-high-contrast: active) {
@@ -30,7 +32,6 @@ $selector-primary: '.btn-primary';
 }
 
 @mixin primary {
-  @include utility.add-focus();
   background: map-get(scss-tokens.$theme-colors, 'primary');
   color: functions.choose-contrast-color(map-get(scss-tokens.$theme-colors, 'primary'));
 
