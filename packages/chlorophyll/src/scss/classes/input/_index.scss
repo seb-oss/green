@@ -1,4 +1,9 @@
-@use 'button';
+@use '../../mixins/input';
+
+.form-input {
+  @include input.base();
+}
+/*@use 'button';
 @use 'checkbox';
 @use 'color';
 @use 'date';
@@ -21,3 +26,4 @@
 @use 'time';
 @use 'url';
 @use 'week';
+*/

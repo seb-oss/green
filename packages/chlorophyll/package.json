@@ -28,6 +28,7 @@
     "prebuild": "yarn generate",
     "postinstall": "yarn generate",
     "watch:tokens": "watch 'yarn generate' ./src/tokens",
+    "watch:sass": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css --watch",
     "build": "sass src/scss/index.scss dist/green-chlorophyll.css",
     "build:compressed": "sass src/scss/index.scss dist/green-chlorophyll.min.css --style compressed",
     "build:storybook": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css",

@@ -1,6 +1,10 @@
 @use '../../mixins/button';
 
-#{button.$selector},
+/*#{button.$selector},
 #{button.$selector}[type='button'] {
+  @include button.base;
+  @include button.primary;
+}*/
+#{button.$selector} {
   @include button.base;
 }

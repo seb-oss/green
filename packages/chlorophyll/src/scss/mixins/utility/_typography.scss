@@ -1,0 +1,9 @@
+@use '../../scss-tokens';
+@mixin font-size($size) {
+  font-size: map-get(scss-tokens.$font-size, $size);
+  line-height: map-get(scss-tokens.$line-height, $size);
+}
+
+@mixin font-weight($weight) {
+  font-weight: map-get(scss-tokens.$font-weight, $weight);
+}

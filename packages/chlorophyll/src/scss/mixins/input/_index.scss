@@ -1,4 +1,29 @@
-@use "../../tokens";
+@use '../../scss-tokens';
+@use '../../mixins/utility';
+@use '../../functions';
+
+@mixin base {
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  //@include utility.spacing-padding-horizontal('m');
+  @include utility.padding-horizontal('m');
+  @include utility.padding-vertical('s');
+  @include utility.add-border-radius();
+  @include utility.add-border();
+
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+
+}
+
+/*@use "../../tokens";
 @use "../button";
 
 $selector: 'input:not([type])';
@@ -47,3 +72,4 @@ $selector-week: 'input[type=week]';
 @mixin submit {
   @include button.base;
 }
+*/

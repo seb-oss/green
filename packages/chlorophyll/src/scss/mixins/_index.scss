@@ -3,5 +3,6 @@
  Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
  Ie. 'button-base' (mixin), badge-padding (variable).
 */
+@forward 'utility' as utility-*;
 @forward 'button' as button-*;
 @forward 'badge' as badge-*;

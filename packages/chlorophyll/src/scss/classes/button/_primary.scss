@@ -1,0 +1,5 @@
+@use '../../mixins/button';
+
+#{button.$selector-primary} {
+  @include button.primary;
+}
