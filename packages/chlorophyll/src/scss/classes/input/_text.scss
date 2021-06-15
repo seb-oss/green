@@ -1,0 +1,6 @@
+@use '../../mixins/input';
+
+#{input.$selector},
+#{input.$selector-text} {
+  @include input.input-field;
+}

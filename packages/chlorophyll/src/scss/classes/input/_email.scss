@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-email} {
+  @include input.input-field;
+}

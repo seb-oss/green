@@ -1,11 +1,43 @@
-$class: 'btn';
-$padding: 1rem;
+@use '../../scss-tokens';
+@use '../../mixins/utility';
+@use '../../functions';
+
+$selector-default: 'button:not([class]), a';
+$selector: '.btn';
+$selector-primary: '.btn-primary';
+
 @mixin base {
-  margin: 0;
-  display: block;
-  background: none;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  //@include utility.spacing-padding-horizontal('m');
+  @include utility.padding-horizontal('m');
+  @include utility.padding-vertical('s');
+  @include utility.add-border-radius();
+  @include utility.add-border();
+  @include utility.font-weight('medium');
+
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+
 }
 
 @mixin primary {
-  background: blue;
+  @include utility.add-focus();
+  background: map-get(scss-tokens.$theme-colors, 'primary');
+  color: functions.choose-contrast-color(map-get(scss-tokens.$theme-colors, 'primary'));
+
+  /*&:hover,
+  &:active {
+    color: tokens.$theme-light-secondary-opposite2;
+    background-color: tokens.$theme-light-secondary-color2;
+    border-color: transparent;
+  }*/
 }

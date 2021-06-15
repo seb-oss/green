@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-month} {
+  @include input.input-field;
+}

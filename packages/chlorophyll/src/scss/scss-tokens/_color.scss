@@ -1,0 +1,46 @@
+$grey: (
+  0: rgb(26, 26, 26),
+  1: rgb(51, 51, 51),
+  2: rgb(73, 73, 73),
+  3: rgb(134, 134, 134),
+  4: rgb(173, 173, 173),
+  5: rgb(206, 206, 206),
+  6: rgb(222, 222, 222),
+  7: rgb(233, 233, 233),
+  8: rgb(248, 248, 248)
+);
+
+$green: (
+  0: rgb(55, 157, 0),
+  1: rgb(69, 180, 0),
+  2: rgb(96, 205, 24),
+);
+$blue: (
+  0: rgb(0, 122, 199),
+  1: rgb(0, 146, 225),
+  2: rgb(65, 176, 238),
+);
+$red: (
+  0: rgb(187, 0, 12),
+  1: rgb(216, 26, 26),
+  2: rgb(240, 53, 41),
+);
+$yellow: (
+  0: rgb(248, 160, 0),
+  1: rgb(255, 180, 0),
+  2: rgb(255, 197, 0),
+);
+
+$brand-colors: (
+  'primary': map-get($blue, 1),
+  'secondary': map-get($blue, 1)
+);
+
+$intent-colors: (
+  'info': map-get($blue, 1),
+  'success': map-get($green, 1),
+  'warning': map-get($yellow, 1),
+  'danger': map-get($red, 1)
+);
+
+$theme-colors: map-merge($brand-colors, $intent-colors);

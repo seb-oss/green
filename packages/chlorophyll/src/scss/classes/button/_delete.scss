@@ -1,0 +1,11 @@
+@use '../../mixins/button'; // import mixins
+@use './base'; // import base class
+
+#{button.$selector}.danger,
+#{button.$selector}.delete {
+  @include button.danger;
+}
+
+#{button.$selector}.delete.confirm {
+  @include button.danger-opposite;
+}

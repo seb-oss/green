@@ -1,6 +1,5 @@
-@use '../../mixins/button'; // import mixins
-@use './base'; // import base class
+@use '../../mixins/button';
 
-.#{button.$class}-primary {
+#{button.$selector-primary} {
   @include button.primary;
 }

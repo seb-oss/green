@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-search} {
+  @include input.input-field;
+}

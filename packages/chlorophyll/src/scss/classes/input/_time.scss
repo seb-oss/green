@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-time} {
+  @include input.input-field;
+}

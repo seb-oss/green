@@ -1,0 +1,29 @@
+@use '../../mixins/input';
+
+.form-input {
+  @include input.base();
+}
+/*@use 'button';
+@use 'checkbox';
+@use 'color';
+@use 'date';
+@use 'datetime';
+@use 'datetime-local';
+@use 'email';
+@use 'file';
+@use 'hidden';
+@use 'image';
+@use 'month';
+@use 'number';
+@use 'password';
+@use 'radio';
+@use 'range';
+@use 'reset';
+@use 'search';
+@use 'submit';
+@use 'tel';
+@use 'text';
+@use 'time';
+@use 'url';
+@use 'week';
+*/

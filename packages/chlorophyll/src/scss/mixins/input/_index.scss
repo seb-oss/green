@@ -1,0 +1,75 @@
+@use '../../scss-tokens';
+@use '../../mixins/utility';
+@use '../../functions';
+
+@mixin base {
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  //@include utility.spacing-padding-horizontal('m');
+  @include utility.padding-horizontal('m');
+  @include utility.padding-vertical('s');
+  @include utility.add-border-radius();
+  @include utility.add-border();
+
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+
+}
+
+/*@use "../../tokens";
+@use "../button";
+
+$selector: 'input:not([type])';
+$selector-button: 'input[type=button]';
+$selector-checkbox: 'input[type=checkbox]';
+$selector-color: 'input[type=color]';
+$selector-date: 'input[type=date]';
+$selector-datetime: 'input[type=datetime]';
+$selector-datetime-local: 'input[type=datetime-local]';
+$selector-email: 'input[type=email]';
+$selector-hidden: 'input[type=hidden]';
+$selector-image: 'input[type=image]';
+$selector-month: 'input[type=month]';
+$selector-number: 'input[type=number]';
+$selector-password: 'input[type=password]';
+$selector-radio: 'input[type=radio]';
+$selector-range: 'input[type=range]';
+$selector-reset: 'input[type=reset]';
+$selector-search: 'input[type=search]';
+$selector-submit: 'input[type=submit]';
+$selector-tel: 'input[type=tel]';
+$selector-text: 'input[type=text]';
+$selector-time: 'input[type=time]';
+$selector-url: 'input[type=url]';
+$selector-week: 'input[type=week]';
+
+@mixin input-field {
+  display: tokens.$shape-input-display;
+  border: 1px solid tokens.$color-grey-400;
+  border-radius: tokens.$shape-input-border-radius;
+  color: tokens.$theme-light-background-opposite;
+  padding: tokens.$shape-input-padding-v tokens.$shape-input-padding-h;
+  min-height: 44px;
+}
+
+@mixin button {
+  @include button.base;
+  @include button.secondary;
+}
+
+@mixin reset {
+  @include button.base;
+  @include button.danger-opposite;
+}
+
+@mixin submit {
+  @include button.base;
+}
+*/

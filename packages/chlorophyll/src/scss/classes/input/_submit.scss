@@ -1,0 +1,5 @@
+@use '../../mixins/input';
+
+#{input.$selector-submit} {
+  @include input.submit;
+}

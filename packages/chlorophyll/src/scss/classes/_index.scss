@@ -1,3 +1,20 @@
-@use "button";
-@use "badge";
+@use '../mixins/utility';
+/*.ds-green {
+  @import 'badge';
+  @import 'button';
+  @import 'input';
+}*/
+ @use 'button';
+ @use 'input';
 
+.size-sm {
+ @include utility.padding-horizontal('xs');
+ @include utility.padding-vertical('xxs');
+ @include utility.font-size('s');
+}
+
+.size-lg {
+ @include utility.padding-horizontal('l');
+ @include utility.padding-vertical('m');
+ @include utility.font-size('l');
+}

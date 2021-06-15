@@ -20,7 +20,7 @@
     "url": "git+https://github.com/sebgroup/green.git"
   },
   "scripts": {
-    "dev": "concurrently --kill-others 'yarn watch:tokens'",
+    "dev": "concurrently --kill-others 'yarn watch:tokens' 'yarn build --watch' 'yarn build:storybook --watch' 'yarn serve'",
     "lint": "stylelint --config-basedir ../../ src/**/*.scss",
     "lint:fix": "stylelint --config-basedir ../../ src/**/*.scss --fix",
     "test": "jest",
@@ -28,10 +28,12 @@
     "prebuild": "yarn generate",
     "postinstall": "yarn generate",
     "watch:tokens": "watch 'yarn generate' ./src/tokens",
-    "compile:scss": "sass src/scss/index.scss dist/green-chlorophyll.css",
-    "watch:scss": "sass --watch src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css",
-    "build": "yarn compile:scss",
-    "serve": "yarn build && sirv . --no-clear"
+    "watch:sass": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css --watch",
+    "build": "sass src/scss/index.scss dist/green-chlorophyll.css",
+    "build:compressed": "sass src/scss/index.scss dist/green-chlorophyll.min.css --style compressed",
+    "build:storybook": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css",
+    "build:all": "concurrently 'yarn build' 'yarn build:storybook'",
+    "serve": "yarn build && live-server --port=5000 --watch=index.html,./dist"
   },
   "bugs": {
     "url": "https://github.com/sebgroup/green/issues"
@@ -42,8 +44,8 @@
     "change-case": "^4.1.2",
     "concurrently": "^6.2.0",
     "jest": "^27.0.4",
+    "live-server": "^1.2.1",
     "sass": "^1.34.1",
-    "sirv-cli": "^1.0.12",
     "ts-jest": "^27.0.2",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2",
