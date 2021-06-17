@@ -6,16 +6,21 @@
 }*/
  @use 'button';
  @use 'input';
+ @use 'utility/spacing';
  @use 'typography';
 
+// TODO: move and refactor
 .size-sm {
- @include utility.padding-horizontal('xs');
- @include utility.padding-vertical('xxs');
+ @include utility.padding-horizontal(3);
+ @include utility.padding-vertical(2);
  @include utility.font-size('s');
+}
+input.size-sm {
+ height: 0.75rem;
 }
 
 .size-lg {
- @include utility.padding-horizontal('l');
- @include utility.padding-vertical('m');
+ @include utility.padding-horizontal(6);
+ @include utility.padding-vertical(5);
  @include utility.font-size('l');
 }
