@@ -1,4 +1,4 @@
-# ![image](https://user-images.githubusercontent.com/548783/120328881-92260380-c2eb-11eb-9f67-12a9a5830761.png) @sebgroup/chlorophyll
+# ![image](https://user-images.githubusercontent.com/11420341/122364587-2cc44a80-cf5a-11eb-8434-0251f2d0cb05.png) @sebgroup/chlorophyll
 
 Chlorophyll is the design token and css part of Green. It is used in all high level component libraries. If you are not useing a framework, you can use chlorophyll directly to style your `html`.
 
