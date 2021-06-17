@@ -6,14 +6,9 @@
 
 </script>
 
-<button class='btn btn-primary size-sm'>Primary</button>
-<input class="form-input size-sm" type='text'/>
-<br/>
-<br/>
-<button class='btn btn-primary'>Primary</button>
-<input class="form-input" type='text'/>
-<br/>
-<br/>
-<button class='btn btn-primary size-lg'>Primary</button>
-<input class="form-input size-lg" type='text'/>
-
+<a>Normal</a>
+<input class="form-input size-sm" type="text" />
+<br />
+<br />
+<a class="button">Button</a>
+<input class="form-input" type="text" />

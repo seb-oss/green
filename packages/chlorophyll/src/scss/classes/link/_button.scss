@@ -1,0 +1,14 @@
+@use '../../mixins/link';
+@use '../../mixins/button';
+
+#{link.$selector}.button,
+#{link.$selector}.button.primary {
+  @include button.base;
+  @include button.primary;
+  @include link.button;
+}
+
+#{link.$selector}.button.secondary {
+  @include button.base;
+  @include link.button;
+}
