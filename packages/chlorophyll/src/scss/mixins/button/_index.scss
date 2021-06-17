@@ -1,4 +1,4 @@
-@use '../../scss-tokens';
+@use '../../tokens';
 @use '../../mixins/utility';
 @use '../../functions';
 
@@ -29,9 +29,9 @@ $selector-primary: '.primary';
 }
 
 @mixin primary {
-  background: map-get(scss-tokens.$theme-colors, 'primary');
+  background: map-get(tokens.$theme-colors, 'primary');
   color: functions.choose-contrast-color(
-    map-get(scss-tokens.$theme-colors, 'primary')
+    map-get(tokens.$theme-colors, 'primary')
   );
   @include utility.add-hover-active-state();
 

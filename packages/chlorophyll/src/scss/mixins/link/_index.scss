@@ -1,4 +1,4 @@
-@use '../../scss-tokens';
+@use '../../tokens';
 @use '../../mixins/utility';
 @use '../../functions';
 
@@ -6,7 +6,7 @@ $selector-default: 'a:not([class])';
 $selector: 'a';
 
 @mixin base {
-  color: map-get(scss-tokens.$theme-colors, 'primary');
+  color: map-get(tokens.$theme-colors, 'primary');
 }
 
 @mixin button {

@@ -1,4 +1,4 @@
-@use "../../scss-tokens/typography";
+@use "../../tokens/typography";
 
 @forward "reset";
 
@@ -9,5 +9,4 @@
 }
 
 @mixin header-margin() {
-
 }

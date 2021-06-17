@@ -1,8 +1,8 @@
-@use '../../scss-tokens';
+@use '../../tokens';
 @mixin add-border-radius() {
-  border-radius: scss-tokens.$border-radius;
+  border-radius: tokens.$border-radius;
 }
 
 @mixin add-border() {
-  border: solid scss-tokens.$border-width;
+  border: solid tokens.$border-width;
 }
