@@ -5,7 +5,7 @@
 </script>
 
 <Meta
-  title="CSS/Button/Stories"
+  title="CSS/Link/Stories"
   component={Link}
   argTypes={{
     label: { control: 'text' },
