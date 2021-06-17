@@ -2,9 +2,9 @@
 @use '../../mixins/utility';
 @use '../../functions';
 
-$selector-default: 'button:not([class]), a';
-$selector: '.btn';
-$selector-primary: '.btn-primary';
+$selector-default: 'button:not([class])';
+$selector: 'button';
+$selector-primary: '.primary';
 
 @mixin base {
   border: none;
@@ -16,23 +16,24 @@ $selector-primary: '.btn-primary';
   align-items: center;
   justify-content: center;
   //@include utility.spacing-padding-horizontal('m');
-  @include utility.padding-horizontal('m');
-  @include utility.padding-vertical('s');
+  @include utility.padding-horizontal(5);
+  @include utility.padding-vertical(4);
   @include utility.add-border-radius();
   @include utility.add-border();
   @include utility.font-weight('medium');
-
+  @include utility.add-focus();
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
   }
-
 }
 
 @mixin primary {
-  @include utility.add-focus();
   background: map-get(scss-tokens.$theme-colors, 'primary');
-  color: functions.choose-contrast-color(map-get(scss-tokens.$theme-colors, 'primary'));
+  color: functions.choose-contrast-color(
+    map-get(scss-tokens.$theme-colors, 'primary')
+  );
+  @include utility.add-hover-active-state();
 
   /*&:hover,
   &:active {

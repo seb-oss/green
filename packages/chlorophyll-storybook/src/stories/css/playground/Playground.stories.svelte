@@ -8,8 +8,9 @@
     component={Playground}
 />
 
-<Template let:args>
-    <Playground {...args}/>
+
+<Template>
+    <Playground/>
 </Template>
 
 
