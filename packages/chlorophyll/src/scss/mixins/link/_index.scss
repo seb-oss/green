@@ -1,0 +1,14 @@
+@use '../../scss-tokens';
+@use '../../mixins/utility';
+@use '../../functions';
+
+$selector-default: 'a:not([class])';
+$selector: 'a';
+
+@mixin base {
+  color: map-get(scss-tokens.$theme-colors, 'primary');
+}
+
+@mixin button {
+  text-decoration: none;
+}

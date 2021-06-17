@@ -1,26 +1,22 @@
 @use '../mixins/utility';
-/*.ds-green {
-  @import 'badge';
-  @import 'button';
-  @import 'input';
-}*/
- @use 'button';
- @use 'input';
- @use 'utility/spacing';
- @use 'typography';
+@use 'button';
+@use 'input';
+@use 'link';
+@use 'utility/spacing';
+@use 'typography';
 
 // TODO: move and refactor
 .size-sm {
- @include utility.padding-horizontal(3);
- @include utility.padding-vertical(2);
- @include utility.font-size('s');
+  @include utility.padding-horizontal(3);
+  @include utility.padding-vertical(2);
+  @include utility.font-size('s');
 }
 input.size-sm {
- height: 0.75rem;
+  height: 0.75rem;
 }
 
 .size-lg {
- @include utility.padding-horizontal(6);
- @include utility.padding-vertical(5);
- @include utility.font-size('l');
+  @include utility.padding-horizontal(6);
+  @include utility.padding-vertical(5);
+  @include utility.font-size('l');
 }
