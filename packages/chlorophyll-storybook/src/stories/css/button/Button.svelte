@@ -7,15 +7,13 @@
   /**
    * Button type
    */
-  export let type = 'primary';
+  export let type = 'primary'
 
   /**
    * Button contents
    */
-  export let label = '';
+  export let label = ''
 
 </script>
 
-<button type="button"
-  class={['btn', `btn-${type}`].join(' ')}
-  >{label}</button>
+<button type="button" class={type}>{label}</button>
