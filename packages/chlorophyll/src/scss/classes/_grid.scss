@@ -1,5 +1,5 @@
 @use '../mixins';
-@use '../scss-tokens' as tokens;
+@use '../tokens' as tokens;
 // Row
 //
 // Rows contain your columns.
@@ -13,7 +13,6 @@
     }
   }
 }
-
 
 // Columns
 //

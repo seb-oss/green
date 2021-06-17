@@ -1,8 +1,8 @@
-@use "../../scss-tokens/typography" as tokens;
+@use "../../tokens/typography" as tokens;
 
 @mixin reset(
-    $base-font-size: tokens.$base-font-size,
-    $body-font-family: tokens.font-family('sans')
+  $base-font-size: tokens.$base-font-size,
+  $body-font-family: tokens.font-family('sans')
 ) {
   html {
     font-size: $base-font-size;

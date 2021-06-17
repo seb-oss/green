@@ -16,6 +16,8 @@ const generateAndSaveIndex = async (folder: string, files: FilaAndAs[]): Promise
 }
 
 const run = async () => {
+  console.log('Generate is currently suspended. Please come back later!')
+  /*
   const folder = './src/scss/tokens'
   await mkdir(folder, { recursive: true })
 
@@ -27,6 +29,7 @@ const run = async () => {
     generateAndSave(folder, typography, 'typography', 'typography'),
   ])
   await generateAndSaveIndex(folder, files)
+  */
 }
 
 run()

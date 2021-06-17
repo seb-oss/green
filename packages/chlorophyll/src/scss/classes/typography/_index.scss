@@ -1,8 +1,8 @@
 @use "../../mixins/typography" as mixins;
-@use "../../scss-tokens/typography" as tokens;
+@use "../../tokens/typography" as tokens;
 
 body {
- @include mixins.reset()
+  @include mixins.reset();
 }
 
 .display-01 {
