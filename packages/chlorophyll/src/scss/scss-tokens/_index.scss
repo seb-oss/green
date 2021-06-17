@@ -1,3 +1,6 @@
+$variable-prefix: sg-;
+$enable-grid-classes: true;
+$include-column-box-sizing: true;
 @forward 'color';
 @forward 'spacing';
 @forward 'typography';

@@ -1,4 +1,5 @@
 @use './spacing';
+@use '../functions';
 
 // Grid breakpoints
 //
@@ -14,6 +15,8 @@ $grid-breakpoints: (
   xxl: 1400px
 );
 
+@include functions.assert-ascending($grid-breakpoints, '$grid-breakpoints');
+@include functions.assert-starts-at-zero($grid-breakpoints, '$grid-breakpoints');
 
 // Grid columns
 //
