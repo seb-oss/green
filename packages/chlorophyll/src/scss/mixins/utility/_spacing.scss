@@ -53,3 +53,7 @@
   padding-bottom: map-get(tokens.$spacing, $size);
   padding-top: map-get(tokens.$spacing, $size);
 }
+
+@mixin min-width($size) {
+  min-width: map-get(tokens.$spacing, $size);
+}

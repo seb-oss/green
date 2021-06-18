@@ -24,7 +24,7 @@
     "lint": "stylelint --config-basedir ../../ src/**/*.scss",
     "lint:fix": "stylelint --config-basedir ../../ src/**/*.scss --fix",
     "test": "jest",
-    "generate": "ts-node ./build/generate",
+    "generate": "ts-node ./build/g:enerate",
     "prebuild": "yarn generate",
     "postinstall": "yarn generate",
     "watch:tokens": "watch 'yarn generate' ./src/tokens",
