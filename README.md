@@ -8,6 +8,8 @@ Green is an opinionated design system for building content and functionality for
 
 ## Philisophy
 
+Dream big! Start small! Learn fast!
+
 ### We only build what we need
 
 If no-one needs a component, we will not build it. If someone needs a component, we will build it. This means that some things in Design Library might not make it into Green. It all depends on what gets used.
