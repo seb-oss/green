@@ -10,7 +10,10 @@
   argTypes={{
     label: { control: 'text' },
     type: {
-      control: { type: 'select', options: ['', 'primary', 'secondary'] },
+      control: {
+        type: 'select',
+        options: ['', 'primary', 'secondary', 'ghost'],
+      },
     },
   }}
 />
@@ -25,23 +28,5 @@
   args={{
     type: '',
     label: 'Default',
-  }}
-/>
-
-<Story
-  source={`<button class="primary">Primary</button>`}
-  name="Primary"
-  args={{
-    type: 'primary',
-    label: 'Primary',
-  }}
-/>
-
-<Story
-  source={`<button class="secondary">Secondary</button>`}
-  name="Secondary"
-  args={{
-    type: 'secondary',
-    label: 'Secondary',
   }}
 />

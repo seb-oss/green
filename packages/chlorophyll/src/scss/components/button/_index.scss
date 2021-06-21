@@ -17,3 +17,7 @@ input[type='submit'],
 a.button.primary {
   @include mixins.primary;
 }
+
+button.ghost {
+  @include mixins.ghost;
+}
