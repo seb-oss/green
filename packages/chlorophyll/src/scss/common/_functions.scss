@@ -102,7 +102,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 @function color-contrast($fg, $bg) {
   $luminance1: luminance($fg) + 0.05;
   $luminance2: luminance($bg) + 0.05;
-  $ratio: $luminance1 / $luminance2;
+  $ratio: math.div($luminance1, $luminance2);
   @if $luminance2 > $luminance1 {
     $ratio: math.div(1, $ratio);
   }
@@ -118,11 +118,20 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 // .sample { validate-font-size: 16; }
 //
 @function validate-font-size($size) {
-  @if unit($size) == 'em' or unit($size) == 'rem' or unit($size) == 'px' or unit($size) == '' {
+  @if unit($size) ==
+    'em' or
+    unit($size) ==
+    'rem' or
+    unit($size) ==
+    'px' or
+    unit($size) ==
+    ''
+  {
     // Check if a flexible unit
     @if unit($size) == 'em' or unit($size) == 'rem' {
       // Need to convert to a pixel value. Let's not overcomplicate it with possible EM inheritence scale factors
-      @return strip-unit($size * 16); }
+      @return strip-unit($size * 16);
+    }
     @if unit($size) == 'px' {
       // We expect PX, so strip the value and return it
       @return strip-unit($size);
@@ -255,10 +264,10 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     // Run through some cases where we want to darken, or use a negative step value
     @if $fg-lod == 'light' and $bg-lod == 'light' {
       // Both are light colors, darken the fg
-      $step: - $step;
+      $step: -$step;
     } @else if $fg-lod == 'dark' and $bg-lod == 'light' {
       // bg is light, fg is dark but does not pass, darken more
-      $step: - $step;
+      $step: -$step;
     }
     // Keeping the rest of the logic here, but our default values do not change, so this logic is not needed
     //@else if $fg-lod == 'light' and $bg-lod == 'dark' {
