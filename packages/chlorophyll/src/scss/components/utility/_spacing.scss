@@ -1,6 +1,5 @@
 @use '../../tokens';
 @use '../../mixins/utility/spacing';
-@use '../../mixins/button';
 
 @each $name, $value in tokens.$spacing {
   .p-#{$name} {

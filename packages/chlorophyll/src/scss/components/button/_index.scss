@@ -1,0 +1,18 @@
+@use 'mixins';
+@forward 'mixins';
+
+// base
+#{mixins.$selector} {
+  @include mixins.base;
+}
+
+// default
+#{mixins.$selector-default} {
+  @include mixins.base;
+  @include mixins.primary;
+}
+
+// primary
+#{mixins.$selector-primary} {
+  @include mixins.primary;
+}

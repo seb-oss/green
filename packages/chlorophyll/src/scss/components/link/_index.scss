@@ -1,0 +1,16 @@
+@use 'mixins';
+@use '../button';
+@forward 'mixins';
+
+// default
+#{mixins.$selector} {
+  @include mixins.base;
+}
+
+// button
+#{mixins.$selector}.button,
+#{mixins.$selector}.button.primary {
+  @include button.base;
+  @include button.primary;
+  @include mixins.button;
+}

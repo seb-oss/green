@@ -1,7 +1,7 @@
 @forward 'tokens';
 @forward 'functions';
 @forward 'mixins';
-@use 'classes';
+@use 'components';
 
 /* import specific class like this:
 @use "classes/button"; // all buttons
