@@ -1,0 +1,21 @@
+@use '../../mixins/tabs-bar';
+
+#{tabs-bar.$selector-tab} {
+  @include tabs-bar.tab;
+}
+
+#{tabs-bar.$selector-tab--selected} {
+  @include tabs-bar.tab--selected;
+}
+
+#{tabs-bar.$selector-tabs-bar} {
+  @include tabs-bar.tabs-bar
+}
+
+#{tabs-bar.$selector-tab-panel} {
+  @include tabs-bar.tabs-panel;
+}
+
+#{tabs-bar.$selector-tab-panel--selected} {
+  @include tabs-bar.tabs-panel--selected;
+}

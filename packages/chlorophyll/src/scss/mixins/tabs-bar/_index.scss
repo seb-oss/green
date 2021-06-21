@@ -1,0 +1,55 @@
+@use '../../tokens';
+@use '../../mixins/utility';
+@use '../../functions';
+
+$selector-tab: "[role=tab]";
+$selector-tab--selected: $selector-tab + "[aria-selected=true]";
+$selector-tab-panel: "[role=tabpanel]";
+$selector-tab-panel--selected: $selector-tab-panel + "[aria-hidden=false]";
+$selector-tabs-bar: "[role=tablist]";
+
+@mixin tab {
+  @include utility.add-border($sides: "bottom");
+  @include utility.add-border-color;
+  @include utility.padding-horizontal(5);
+  @include utility.padding-vertical(4);
+  @include utility.font-weight('medium');
+  @include utility.min-width(10);
+
+  color: map-get(tokens.$theme-colors, 'primary');
+  text-decoration: none;
+  text-align: center;
+
+  @include utility.add-hover-state;
+  @include utility.add-focus;
+}
+
+@mixin tab--selected {
+  @include utility.add-border($sides: ("top", "right", "left"));
+  @include utility.add-border-color;
+
+  border-bottom: tokens.$border-width transparent;
+  color: map-get(tokens.$grey, 1);
+
+  @include utility.add-hover-state;
+}
+
+@mixin tabs-bar {
+  display: flex;
+
+  &::after {
+    @include utility.add-border($sides: ("bottom"));
+    @include utility.add-border-color;
+    content: '';
+    display: block;
+    flex-grow: 1;
+  }
+}
+
+@mixin tabs-panel {
+  display: none;
+}
+
+@mixin tabs-panel--selected {
+  display: block;
+}
