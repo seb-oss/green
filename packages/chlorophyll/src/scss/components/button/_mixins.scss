@@ -31,3 +31,13 @@
   color: common.choose-contrast-color(map-get(tokens.$theme-colors, 'primary'));
   @include common.add-hover-active-state();
 }
+
+@mixin ghost {
+  background-color: transparent;
+  color: map-get(tokens.$grey, 1);
+  border-color: map-get(tokens.$grey, 1);
+  @include common.add-hover-active-state(
+    map-get(tokens.$grey, 1),
+    map-get(tokens.$grey, 1)
+  );
+}
