@@ -3,14 +3,10 @@
 @forward 'mixins';
 
 // default
-#{mixins.$selector} {
+a {
   @include mixins.base;
 }
 
-// button
-#{mixins.$selector}.button,
-#{mixins.$selector}.button.primary {
-  @include button.base;
-  @include button.primary;
+a.button {
   @include mixins.button;
 }

@@ -1,10 +1,6 @@
 @use '../../tokens';
 @use '../../common';
 
-$selector-default: 'button:not([class])';
-$selector: 'button';
-$selector-primary: '.primary';
-
 @mixin base {
   border: none;
   background-color: transparent;

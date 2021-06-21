@@ -1,26 +1,26 @@
 @use 'mixins';
 
 // Tab
-#{mixins.$selector-tab} {
+[role='tab'] {
   @include mixins.tab;
 }
 
 // Selected tab
-#{mixins.$selector-tab--selected} {
+[role='tab'][aria-selected='true'] {
   @include mixins.tab--selected;
 }
 
 // Tab bar
-#{mixins.$selector-tabs-bar} {
+[role='tablist'] {
   @include mixins.tabs-bar;
 }
 
 // Tab panel
-#{mixins.$selector-tab-panel} {
+[role='tabpanel'] {
   @include mixins.tabs-panel;
 }
 
 // Selected tab panel
-#{mixins.$selector-tab-panel--selected} {
+[role='tabpanel'][aria-hidden='false'] {
   @include mixins.tabs-panel--selected;
 }

@@ -2,17 +2,16 @@
 @forward 'mixins';
 
 // base
-#{mixins.$selector} {
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+a.button {
   @include mixins.base;
 }
 
-// default
-#{mixins.$selector-default} {
-  @include mixins.base;
-  @include mixins.primary;
-}
-
-// primary
-#{mixins.$selector-primary} {
+button.primary,
+input[type='submit'],
+a.button.primary {
   @include mixins.primary;
 }

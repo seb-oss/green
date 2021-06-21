@@ -1,12 +1,6 @@
 @use '../../tokens';
 @use '../../common';
 
-$selector-tab: '[role=tab]';
-$selector-tab--selected: $selector-tab + '[aria-selected=true]';
-$selector-tab-panel: '[role=tabpanel]';
-$selector-tab-panel--selected: $selector-tab-panel + '[aria-hidden=false]';
-$selector-tabs-bar: '[role=tablist]';
-
 @mixin tab {
   @include common.add-border($sides: 'bottom');
   @include common.add-border-color;

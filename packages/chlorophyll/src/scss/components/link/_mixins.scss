@@ -1,8 +1,5 @@
 @use '../../tokens';
 
-$selector-default: 'a:not([class])';
-$selector: 'a';
-
 @mixin base {
   color: map-get(tokens.$theme-colors, 'primary');
 }
