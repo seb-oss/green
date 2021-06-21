@@ -3,6 +3,7 @@
 
 // base
 button,
+button,
 input[type='button'],
 input[type='submit'],
 input[type='reset'],
@@ -11,6 +12,7 @@ a.button {
 }
 
 button.primary,
+button[type='submit'],
 input[type='submit'],
 a.button.primary {
   @include mixins.primary;

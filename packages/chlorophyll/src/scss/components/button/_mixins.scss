@@ -4,6 +4,8 @@
 @mixin base {
   border: none;
   background-color: transparent;
+  color: map-get(tokens.$theme-colors, 'primary');
+  border-color: map-get(tokens.$theme-colors, 'primary');
   font-family: inherit;
   padding: 0;
   cursor: pointer;
@@ -16,6 +18,8 @@
   @include common.add-border();
   @include common.font-weight('medium');
   @include common.add-focus();
+
+  @include common.add-hover-active-state();
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
