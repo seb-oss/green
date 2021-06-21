@@ -1,4 +1,4 @@
-@use '../../tokens';
+@use '../tokens';
 @mixin margin($size) {
   margin: map-get(tokens.$spacing, $size);
 }

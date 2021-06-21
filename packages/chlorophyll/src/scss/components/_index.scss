@@ -1,4 +1,4 @@
-@use '../mixins/utility';
+@use '../common';
 @use 'grid';
 @use 'button';
 @use 'input';
@@ -9,18 +9,18 @@
 
 // TODO: move and refactor
 .size-sm {
-  @include utility.padding-horizontal(3);
-  @include utility.padding-vertical(2);
-  @include utility.font-size('s');
+  @include common.padding-horizontal(3);
+  @include common.padding-vertical(2);
+  @include common.font-size('s');
 }
 input.size-sm {
   height: 0.75rem;
 }
 
 .size-lg {
-  @include utility.padding-horizontal(6);
-  @include utility.padding-vertical(5);
-  @include utility.font-size('l');
+  @include common.padding-horizontal(6);
+  @include common.padding-vertical(5);
+  @include common.font-size('l');
 }
 // TODO: should be part of global reset/reboot
 // Document

@@ -1,29 +1,19 @@
-@use '../../mixins/input';
+@use 'mixins';
 
-.form-input {
-  @include input.base();
+input:not([type]),
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='file'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'] {
+  @include mixins.text-input();
 }
-/*@use 'button';
-@use 'checkbox';
-@use 'color';
-@use 'date';
-@use 'datetime';
-@use 'datetime-local';
-@use 'email';
-@use 'file';
-@use 'hidden';
-@use 'image';
-@use 'month';
-@use 'number';
-@use 'password';
-@use 'radio';
-@use 'range';
-@use 'reset';
-@use 'search';
-@use 'submit';
-@use 'tel';
-@use 'text';
-@use 'time';
-@use 'url';
-@use 'week';
-*/

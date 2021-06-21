@@ -1,21 +1,26 @@
-@use '../../mixins/tabs-bar';
+@use 'mixins';
 
-#{tabs-bar.$selector-tab} {
-  @include tabs-bar.tab;
+// Tab
+#{mixins.$selector-tab} {
+  @include mixins.tab;
 }
 
-#{tabs-bar.$selector-tab--selected} {
-  @include tabs-bar.tab--selected;
+// Selected tab
+#{mixins.$selector-tab--selected} {
+  @include mixins.tab--selected;
 }
 
-#{tabs-bar.$selector-tabs-bar} {
-  @include tabs-bar.tabs-bar
+// Tab bar
+#{mixins.$selector-tabs-bar} {
+  @include mixins.tabs-bar;
 }
 
-#{tabs-bar.$selector-tab-panel} {
-  @include tabs-bar.tabs-panel;
+// Tab panel
+#{mixins.$selector-tab-panel} {
+  @include mixins.tabs-panel;
 }
 
-#{tabs-bar.$selector-tab-panel--selected} {
-  @include tabs-bar.tabs-panel--selected;
+// Selected tab panel
+#{mixins.$selector-tab-panel--selected} {
+  @include mixins.tabs-panel--selected;
 }

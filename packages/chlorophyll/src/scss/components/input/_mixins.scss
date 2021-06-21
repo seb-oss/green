@@ -1,12 +1,6 @@
-@use '../../tokens';
 @use '../../common';
 
-$selector-default: 'button:not([class])';
-$selector: 'button';
-$selector-primary: '.primary';
-
-@mixin base {
-  border: none;
+@mixin text-input {
   background-color: transparent;
   font-family: inherit;
   padding: 0;
@@ -18,16 +12,9 @@ $selector-primary: '.primary';
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
-  @include common.font-weight('medium');
   @include common.add-focus();
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
   }
-}
-
-@mixin primary {
-  background: map-get(tokens.$theme-colors, 'primary');
-  color: common.choose-contrast-color(map-get(tokens.$theme-colors, 'primary'));
-  @include common.add-hover-active-state();
 }

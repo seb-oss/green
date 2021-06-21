@@ -1,47 +1,47 @@
 @use '../../tokens';
-@use '../../mixins/utility/spacing';
+@use '../../common';
 
 @each $name, $value in tokens.$spacing {
   .p-#{$name} {
-    @include spacing.padding($name);
+    @include common.padding($name);
   }
   .px-#{$name} {
-    @include spacing.padding-horizontal($name);
+    @include common.padding-horizontal($name);
   }
   .py-#{$name} {
-    @include spacing.padding-vertical($name);
+    @include common.padding-vertical($name);
   }
   .ps-#{$name} {
-    @include spacing.padding-start($name);
+    @include common.padding-start($name);
   }
   .pe-#{$name} {
-    @include spacing.padding-end($name);
+    @include common.padding-end($name);
   }
   .pt-#{$name} {
-    @include spacing.padding-top($name);
+    @include common.padding-top($name);
   }
   .pb-#{$name} {
-    @include spacing.padding-bottom($name);
+    @include common.padding-bottom($name);
   }
   .m-#{$name} {
-    @include spacing.margin($name);
+    @include common.margin($name);
   }
   .mx-#{$name} {
-    @include spacing.margin-horizontal($name);
+    @include common.margin-horizontal($name);
   }
   .my-#{$name} {
-    @include spacing.margin-vertical($name);
+    @include common.margin-vertical($name);
   }
   .ms-#{$name} {
-    @include spacing.margin-start($name);
+    @include common.margin-start($name);
   }
   .me-#{$name} {
-    @include spacing.margin-end($name);
+    @include common.margin-end($name);
   }
   .mt-#{$name} {
-    @include spacing.margin-top($name);
+    @include common.margin-top($name);
   }
   .mb-#{$name} {
-    @include spacing.margin-bottom($name);
+    @include common.margin-bottom($name);
   }
 }

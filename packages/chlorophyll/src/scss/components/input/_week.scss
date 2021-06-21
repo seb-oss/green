@@ -1,5 +1,0 @@
-@use '../../mixins/input';
-
-#{input.$selector-week} {
-  @include input.input-field;
-}

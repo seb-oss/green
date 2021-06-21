@@ -1,5 +1,14 @@
 @use "../../tokens/typography" as tokens;
 
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin header-margin() {
+}
+
 @mixin reset(
   $base-font-size: tokens.$base-font-size,
   $body-font-family: tokens.font-family('sans')

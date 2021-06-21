@@ -1,6 +1,4 @@
 @use '../../tokens';
-@use '../../mixins/utility';
-@use '../../functions';
 
 $selector-default: 'a:not([class])';
 $selector: 'a';

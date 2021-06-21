@@ -1,4 +1,4 @@
-@use '../../tokens';
+@use '../tokens';
 
 @mixin font-size($size) {
   font-size: map-get(tokens.$font-size, $size);

@@ -1,9 +1,0 @@
-/*
- Forward all mixins and variables so that they can be used by referencing a single file.
- Mixins and variables can be access using forward prefix like this <prefix>-<mixin/variable>.
- Ie. 'button-base' (mixin), badge-padding (variable).
-*/
-@forward 'utility' as utility-*;
-@forward 'badge' as badge-*;
-@forward 'grid';
-@forward 'breakpoints';
