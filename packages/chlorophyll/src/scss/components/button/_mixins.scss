@@ -28,7 +28,7 @@
 
 @mixin primary {
   background: map-get(tokens.$theme-colors, 'primary');
-  color: common.choose-contrast-color(map-get(tokens.$theme-colors, 'primary'));
+  color: common.most-legible-color(map-get(tokens.$theme-colors, 'primary'));
   @include common.add-hover-active-state();
 }
 
