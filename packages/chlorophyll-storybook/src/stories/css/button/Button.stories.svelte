@@ -10,7 +10,7 @@
   argTypes={{
     label: { control: 'text' },
     type: {
-      control: { type: 'select', options: ['primary', 'secondary'] },
+      control: { type: 'select', options: ['', 'primary', 'secondary'] },
     },
   }}
 />
