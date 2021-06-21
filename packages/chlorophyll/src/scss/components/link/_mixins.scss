@@ -1,0 +1,9 @@
+@use '../../tokens';
+
+@mixin base {
+  color: map-get(tokens.$theme-colors, 'primary');
+}
+
+@mixin button {
+  text-decoration: none;
+}

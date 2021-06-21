@@ -1,6 +1,0 @@
-@use '../../mixins/button';
-@use '../../mixins/input';
-
-#{button.$selector}[type='reset'] {
-  @include input.reset;
-}

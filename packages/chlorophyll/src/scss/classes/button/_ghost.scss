@@ -1,6 +1,0 @@
-@use '../../mixins/button'; // import mixins
-@use './base'; // import base class
-
-#{button.$selector}.ghost {
-  @include button.ghost;
-}

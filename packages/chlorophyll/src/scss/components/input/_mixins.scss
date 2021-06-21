@@ -1,0 +1,20 @@
+@use '../../common';
+
+@mixin text-input {
+  background-color: transparent;
+  font-family: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-focus();
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+}

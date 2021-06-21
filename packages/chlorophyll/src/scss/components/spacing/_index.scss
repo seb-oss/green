@@ -1,0 +1,47 @@
+@use '../../tokens';
+@use '../../mixins/utility/spacing';
+
+@each $name, $value in tokens.$spacing {
+  .p-#{$name} {
+    @include spacing.padding($name);
+  }
+  .px-#{$name} {
+    @include spacing.padding-horizontal($name);
+  }
+  .py-#{$name} {
+    @include spacing.padding-vertical($name);
+  }
+  .ps-#{$name} {
+    @include spacing.padding-start($name);
+  }
+  .pe-#{$name} {
+    @include spacing.padding-end($name);
+  }
+  .pt-#{$name} {
+    @include spacing.padding-top($name);
+  }
+  .pb-#{$name} {
+    @include spacing.padding-bottom($name);
+  }
+  .m-#{$name} {
+    @include spacing.margin($name);
+  }
+  .mx-#{$name} {
+    @include spacing.margin-horizontal($name);
+  }
+  .my-#{$name} {
+    @include spacing.margin-vertical($name);
+  }
+  .ms-#{$name} {
+    @include spacing.margin-start($name);
+  }
+  .me-#{$name} {
+    @include spacing.margin-end($name);
+  }
+  .mt-#{$name} {
+    @include spacing.margin-top($name);
+  }
+  .mb-#{$name} {
+    @include spacing.margin-bottom($name);
+  }
+}

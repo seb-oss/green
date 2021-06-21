@@ -1,0 +1,17 @@
+@use 'mixins';
+@forward 'mixins';
+
+// base
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+a.button {
+  @include mixins.base;
+}
+
+button.primary,
+input[type='submit'],
+a.button.primary {
+  @include mixins.primary;
+}

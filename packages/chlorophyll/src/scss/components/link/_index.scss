@@ -1,0 +1,18 @@
+@use 'mixins';
+@use '../button';
+@forward 'mixins';
+
+// default
+a {
+  @include mixins.base;
+}
+
+a.button {
+  @include mixins.button;
+}
+
+/*
+  a.button
+  
+  ../button/_index.scss
+*/

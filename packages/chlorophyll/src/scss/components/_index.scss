@@ -1,0 +1,34 @@
+@use '../common';
+@use 'grid';
+@use 'button';
+@use 'input';
+@use 'link';
+@use 'tabs-bar';
+@use 'utility/spacing';
+@use 'typography';
+
+// TODO: move and refactor
+.size-sm {
+  @include common.padding-horizontal(3);
+  @include common.padding-vertical(2);
+  @include common.font-size('s');
+}
+input.size-sm {
+  height: 0.75rem;
+}
+
+.size-lg {
+  @include common.padding-horizontal(6);
+  @include common.padding-vertical(5);
+  @include common.font-size('l');
+}
+// TODO: should be part of global reset/reboot
+// Document
+//
+// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
