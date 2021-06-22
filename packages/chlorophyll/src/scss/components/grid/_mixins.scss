@@ -95,7 +95,6 @@
       .col#{$infix} {
         flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
       }
-      @debug $breakpoint $infix;
 
       .row-cols#{$infix}-auto > * {
         @include make-col-auto();
@@ -110,7 +109,6 @@
       }
       @if $columns > 0 {
         @for $i from 1 through $columns {
-          @debug $i;
 
           .col#{$infix}-#{$i} {
             @include make-col($i, $columns);
