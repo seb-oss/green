@@ -14,11 +14,11 @@
 
 </script>
 
-<div class="card">
+<section class="card">
   <h2>{headline}</h2>
   <p>{body}</p>
-  <div>
+  <footer>
     <button>{buttonText1}</button>
     <a class="button primary" href="#">{buttonText2}</a>
-  </div>
-</div>
+  </footer>
+</section>

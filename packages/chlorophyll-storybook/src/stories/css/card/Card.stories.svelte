@@ -21,16 +21,16 @@
 
 <Story
   source={`
-    <div class="card">
+    <section class="card">
       <h2>Headline</h2>
       <p>
         Lorem ipsum dolor sit amet
       </p>
-      <div>
+      <footer>
         <button>Do something</button>
         <a class="button primary" href="#">Go somewhere</a>
-      </div>
-    </div>
+      </footer>
+    </section>
   `}
   name="Card"
   args={{

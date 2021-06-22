@@ -13,8 +13,8 @@
 
 </script>
 
-<div class="card">
+<section class="card">
   <h2>{headline}</h2>
   <p>{body}</p>
   <a class="button primary" href="#">{buttonText}</a>
-</div>
+</section>
