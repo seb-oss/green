@@ -10,7 +10,8 @@
   argTypes={{
     headline: { control: 'text' },
     body: { control: 'text' },
-    buttonText: { control: 'text' },
+    buttonText1: { control: 'text' },
+    buttonText2: { control: 'text' },
   }}
 />
 
@@ -25,13 +26,17 @@
       <p>
         Lorem ipsum dolor sit amet
       </p>
-      <a class="button primary" href="#">Go somewhere</a>
+      <div>
+        <button>Do something</button>
+        <a class="button primary" href="#">Go somewhere</a>
+      </div>
     </div>
   `}
-  name="Nobutton"
+  name="Card"
   args={{
     headline: 'Headline',
     body: 'Lorem ipsum dolor sit amet',
-    buttonText: 'Go somewhere',
+    buttonText1: 'Do something',
+    buttonText2: 'Go somewhere',
   }}
 />
