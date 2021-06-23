@@ -1,0 +1,10 @@
+<section class="card">
+  <h2><%= headline %></h2>
+  <p><%= body %></p>
+  <% if (buttonText1 || buttonText2) { %>
+    <footer>
+      <button><%= buttonText1 %></button>
+      <a class="button primary" href="#"><%= buttonText2 %></a>
+    </footer>
+  <% } %>
+</section>

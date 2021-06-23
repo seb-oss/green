@@ -1,11 +1,17 @@
+const { resolve } = require('path')
+
 module.exports = {
   stories: [
     '../src/stories/**/*.stories.mdx',
     '../src/stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   webpackFinal: (config) => {
-    console.log(config)
     config.module.rules.push({ test: /\.hbs$/, loader: "handlebars-loader" })
+    config.module.rules.push({
+      test: /\.ejs$/,
+      loader: 'ejs-webpack-loader',
+      include: resolve(__dirname, '../src/stories'),
+    })
     return config
   },
   addons: [
