@@ -1,0 +1,19 @@
+{
+  "name": "chlorophyll-storybook-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "babel-loader": "^8.2.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "storybook": "start-storybook -s ./public -p 6007",
+    "build-storybook": "build-storybook -s ./public"
+  }
+}

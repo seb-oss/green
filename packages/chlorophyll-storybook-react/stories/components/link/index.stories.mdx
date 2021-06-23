@@ -1,0 +1,62 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { Link } from './Link'
+
+export const Template = (args) => <Link {...args} />
+
+<Meta
+  title="Components/Links"
+  component={Link}
+  argTypes={{
+    text: { control: 'text' },
+    className: { control: 'select' },
+    href: { control: 'text' },
+  }}
+/>
+
+# Link
+
+Links can be displayed as inline och buttons.
+
+<Canvas>
+  <Story
+    name="Inline"
+    args={{
+      text: 'Inline link',
+      className: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Button"
+    args={{
+      text: 'Button type link',
+      className: 'button',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Button type links can in turn use the classNames for regular buttons to alter appearance.
+
+<Canvas>
+  <Story
+    name="Primary button link"
+    args={{
+      text: 'Primary button link',
+      className: 'button primary',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Ghost button link"
+    args={{
+      text: 'Ghost button link',
+      className: 'button ghost',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

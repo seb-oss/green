@@ -1,0 +1,89 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { Button } from './Button'
+
+export const Template = (args) => <Button {...args} />
+
+<Meta
+  title="Components/Buttons"
+  component={Button}
+  argTypes={{
+    text: { control: 'text' },
+    className: { control: 'select' },
+    type: { control: 'select' },
+  }}
+/>
+
+# Button
+
+Buttons can be defined by either type or className. It is preferred to use
+type since that communicates intent.
+
+## Button type
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      text: 'Default',
+      type: '',
+      className: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Submit"
+    args={{
+      text: 'Submit',
+      type: 'submit',
+      className: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Reset"
+    args={{
+      text: 'Reset',
+      type: 'reset',
+      className: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Button className
+
+<Canvas>
+  <Story
+    name="Primary"
+    args={{
+      text: 'Primary',
+      type: '',
+      className: 'primary',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Secondary"
+    args={{
+      text: 'Secondary',
+      type: '',
+      className: 'secondary',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Ghost"
+    args={{
+      text: 'Ghost',
+      type: '',
+      className: 'ghost',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
