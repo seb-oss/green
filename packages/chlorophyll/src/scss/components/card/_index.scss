@@ -1,35 +1,49 @@
+@use '../../common/spacing';
+@use '../../tokens/card';
+
+
+// TODO: If the whole card is a link it should be clickable
+// TODO:
+
 .card {
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
   background-clip: border-box;
-
-  padding: 20px;
-
-  border: none;
-  border-radius: 0;
-
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
+  // TODO: This background should be based on the foreground color of the theme
+  background-color: card.$background;
+  border: card.$border;
+  border-radius: card.$border-radius;
+  // TODO: How do we handle elevation in our design system?
+  box-shadow: card.$shadow;
+  display: flex;
+  flex-direction: card.$layout-direction;
 
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
-    margin-block-start: 0.1em;
-    margin-block-end: 0.1em;
+  h6,
+  .card-header {
+    @include spacing.margin-top(card.$header-spacing-top);
+    @include spacing.margin-bottom(card.$header-spacing-bottom);
   }
 
-  button,
-  a.button {
-    display: inline-block;
-  }
+  // TODO: Picture in card
+  /*figure,
+  img,
+  picture {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }*/
 
-  footer {
+  // TODO: Card footer
+  /*footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
+  }*/
+}
+
+.card-body {
+  @include spacing.padding(card.$padding-spacing);
 }

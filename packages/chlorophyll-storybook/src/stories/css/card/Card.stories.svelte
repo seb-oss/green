@@ -1,12 +1,11 @@
 <script>
   import { Meta, Template, Story } from '@storybook/addon-svelte-csf'
-  import Card from './Card.svelte'
-
+  import Component from './Card.svelte'
 </script>
 
 <Meta
   title="CSS/Card/Stories"
-  component={Card}
+  component={Component}
   argTypes={{
     headline: { control: 'text' },
     body: { control: 'text' },
@@ -16,20 +15,22 @@
 />
 
 <Template let:args>
-  <Card {...args} />
+  <Component {...args} />
 </Template>
 
 <Story
   source={`
     <section class="card">
-      <h2>Headline</h2>
-      <p>
-        Lorem ipsum dolor sit amet
-      </p>
-      <footer>
-        <button>Do something</button>
-        <a class="button primary" href="#">Go somewhere</a>
-      </footer>
+      <div class="card-body">
+        <h2>Headline</h2>
+        <p>
+          Lorem ipsum dolor sit amet
+        </p>
+        <footer>
+          <button>Do something</button>
+          <a class="button primary" href="#">Go somewhere</a>
+        </footer>
+      </div>
     </section>
   `}
   name="Card"
