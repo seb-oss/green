@@ -6,24 +6,10 @@ import { Meta, Story } from '@storybook/addon-docs/blocks'
 
 Lorem ipsum alerts
 
+
 <Canvas>
-  <div role="alert" class="warning">Alert lorem ipsum dolar sit amet.</div>
-  <hr/>
-  <div role="alert" class="warning">Alert lorem ipsum dolar sit amet.</div>
-  <hr/>
-  <div role="alert" class="success">
-   <h3>Alert heading</h3>
-   <p>Alert lorem ipsum dolar sit amet.</p>
-  </div>
-  <hr/>
-  <div role="alert" class="danger">
-    <h3>Alert heading</h3>
-    <p>Alert lorem ipsum dolar sit amet.</p>
-  </div>
-  <hr/>
-  <div role="alert" class="success">
-   <h3>Alert heading</h3>
-   <p>Alert lorem ipsum <a href="#">dolar</a> sit amet.</p>
-  </div>
-  <hr/>
+    <Story id="css-alert-stories--success&args=type:success;content:Success;heading:Heading;link:link;button:Button;primaryButton:Primary" />
+    <Story id="css-alert-stories&args=type:warning;content:Warning;heading:Heading;link:link;button:Button;primaryButton:Primary" />
+    <Story id="css-alert-stories&args=type:danger;content:Danger;heading:Heading;link:link;button:Button;primaryButton:Primary" />
+    <Story id="css-alert-stories&args=type:info;content:Info;heading:Heading;link:link;button:Button;primaryButton:Primary" />
 </Canvas>
