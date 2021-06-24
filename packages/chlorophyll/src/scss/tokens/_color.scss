@@ -80,3 +80,5 @@ $intent-colors-dark: (
 );
 
 $theme-colors: map-merge($brand-colors, $intent-colors);
+
+$background-color: map-get($grey, 8);
