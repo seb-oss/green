@@ -233,35 +233,30 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-@mixin desired-color-combination($fg, $bg, $offsetThreshold: 2) {
-  @debug 'input' $fg $bg;
-
+@function desired-color-combination($fg, $bg, $offsetThreshold: 20%) {
   $ratio: 4.5;
   $color: $fg;
   $background: $bg;
-
-
   @if $ratio < color-contrast($fg, $bg) {
     $color: $fg;
-    @debug 'okay';
 
   } @else {
-    $background: a11y-color($bg, $fg, 'AA', 16, false, false, 20%);
+    $background: a11y-color($bg, $fg, 'AA', 16, false, false, $offsetThreshold);
     @if $ratio < color-contrast($color, $background) {
       $color: $color;
       $bg: $background;
-      @debug 'adjust' $color $background;
 
     } @else {
       $color: most-legible-color($bg);
-      @debug 'invert' $color $bg;
-
     }
   }
-  @debug $fg $bg $color;
-  background-color: $bg;
-  color: $color;
-  //@return $color;
+  @return $bg, $color;
+}
+
+@mixin desired-color-combination($fg, $bg, $offsetThreshold: 20%) {
+  $color-combination: desired-color-combination($fg, $bg, $offsetThreshold: 20%);
+  background-color: nth($color-combination, 1);
+  color: nth($color-combination, 2);
 }
 
 // a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false)
