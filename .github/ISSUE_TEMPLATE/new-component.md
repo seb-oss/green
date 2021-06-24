@@ -10,5 +10,6 @@ assignees: ''
 [Write a small description of the component]
 
 Todos:
-- [ ] Component
+- [ ] Markup
+- [ ] Tokens
 - [ ] Story
