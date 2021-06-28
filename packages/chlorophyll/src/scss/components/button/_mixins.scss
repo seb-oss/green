@@ -32,12 +32,19 @@
   @include common.add-hover-active-state();
 }
 
-@mixin ghost {
+@mixin ghost($bg: tokens.$background-color) {
+  $ghost-color: transparent;
+  @if (common.light-or-dark($bg) == 'light') {
+    $ghost-color: map-get(tokens.$grey, 1);
+  } @else {
+    $ghost-color: tokens.$white;
+  }
+
   background-color: transparent;
-  color: map-get(tokens.$grey, 1);
-  border-color: map-get(tokens.$grey, 1);
+  border-color: $ghost-color;
+  color: $ghost-color;
   @include common.add-hover-active-state(
-    map-get(tokens.$grey, 1),
-    map-get(tokens.$grey, 1)
+    $ghost-color,
+    $ghost-color
   );
 }

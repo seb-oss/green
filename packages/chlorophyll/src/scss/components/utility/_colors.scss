@@ -1,0 +1,57 @@
+@use '../../tokens';
+@use '../../common';
+
+@each $intent, $color in tokens.$intent-colors {
+  $bg: common.a11y-color($color, tokens.$white, 'AA', 16, true, true);
+  $bg: common.a11y-color($color, tokens.$white);
+  .text-#{$intent} {
+    color: common.a11y-color($color, tokens.$white);
+  }
+
+  .bg-#{$intent} {
+
+    background: $color;
+    color: common.most-legible-color($bg);
+  }
+  .bg-#{$intent}-adjusted {
+    @include common.desired-color-combination(tokens.$white, $color);
+  }
+}
+
+.dark {
+  background: map-get(tokens.$grey, 1);
+  @each $intent, $color in tokens.$intent-colors-dark {
+    $bg: common.a11y-color($color, map-get(tokens.$grey, 1), 'AA', 16, true, true);
+    .text-#{$intent} {
+      color: common.a11y-color($color, map-get(tokens.$grey, 1));
+    }
+
+    .bg-#{$intent} {
+      background: $color;
+      color: common.most-legible-color($bg);
+    }
+    .bg-#{$intent}-adjusted {
+      @include common.desired-color-combination(tokens.$white, $color);
+    }
+  }
+}
+
+.dark-auto {
+  background: map-get(tokens.$grey, 1);
+  @each $intent, $color in tokens.$intent-colors {
+    $bg: common.a11y-color($color, map-get(tokens.$grey, 1), 'AA', 16, false, true);
+    .text-#{$intent} {
+      color: common.a11y-color($color, map-get(tokens.$grey, 1));
+    }
+
+    .bg-#{$intent} {
+      background: $color;
+      color: common.most-legible-color($bg);
+    }
+    .bg-#{$intent}-adjusted {
+      @include common.desired-color-combination(tokens.$black, $bg);
+    }
+  }
+}
+
+

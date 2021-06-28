@@ -1,4 +1,5 @@
 @use '../tokens';
+@use '../common/functions';
 @mixin add-focus() {
   transition: box-shadow tokens.$transition-time;
 
@@ -19,7 +20,7 @@
 
   &:hover {
     background: $color;
-    color: white;
+    color: functions.most-legible-color($color);
   }
 }
 

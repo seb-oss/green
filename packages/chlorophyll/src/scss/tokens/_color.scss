@@ -18,20 +18,46 @@ $green: (
   1: rgb(69, 180, 0),
   2: rgb(96, 205, 24),
 );
+
+$green-dark: (
+        0: rgb(143, 214, 104),
+        1: rgb(117, 186, 74),
+        2: rgb(96, 205, 24),
+);
 $blue: (
   0: rgb(0, 122, 199),
   1: rgb(0, 146, 225),
   2: rgb(65, 176, 238),
 );
+
+$blue-dark: (
+        0: rgb(0, 122, 199),
+        1: rgb(0, 146, 225),
+        2: rgb(65, 176, 238),
+);
+
 $red: (
   0: rgb(187, 0, 12),
   1: rgb(216, 26, 26),
   2: rgb(240, 53, 41),
 );
+
+$red-dark: (
+        0: rgb(247, 112, 109),
+        1: rgb(219, 90, 88),
+        2: rgb(240, 53, 41),
+);
+
 $yellow: (
   0: rgb(248, 160, 0),
   1: rgb(255, 180, 0),
   2: rgb(255, 197, 0),
+);
+
+$yellow-dark: (
+        0: rgb(235, 171, 57),
+        1: rgb(240, 190, 71),
+        2: rgb(255, 225, 130),
 );
 
 $brand-colors: (
@@ -40,10 +66,19 @@ $brand-colors: (
 );
 
 $intent-colors: (
-  'info': map-get($blue, 1),
-  'success': map-get($green, 1),
+  'info': map-get($blue, 0),
+  'success': map-get($green, 0),
   'warning': map-get($yellow, 1),
   'danger': map-get($red, 1),
 );
 
+$intent-colors-dark: (
+        'info': map-get($blue-dark, 2),
+        'success': map-get($green-dark, 0),
+        'warning': map-get($yellow-dark, 2),
+        'danger': map-get($red-dark, 0),
+);
+
 $theme-colors: map-merge($brand-colors, $intent-colors);
+
+$background-color: map-get($grey, 8);
