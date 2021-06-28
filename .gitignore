@@ -22,3 +22,4 @@ tsconfig.tsbuildinfo
 ## OS
 .DS_Store
 .idea
+packages/chlorophyll/storybook-static/
