@@ -7,6 +7,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-svelte-csf",
-    "@whitespace/storybook-addon-html"
+    "@whitespace/storybook-addon-html",
+    "storybook-dark-mode"
   ]
 }
