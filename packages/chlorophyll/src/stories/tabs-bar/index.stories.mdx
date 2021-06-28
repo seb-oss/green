@@ -1,11 +1,12 @@
-<script>
-  /**
-   * Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
-   * @component
-   */
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
-</script>
+<Meta title="Components/TabsBar/Overview" />
 
+# Tabs bar
+
+Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
+
+<Canvas>
 <nav role="tablist">
   <a href='#tab' aria-controls="tab-content-1" role="tab" aria-selected='true'>Tab 1</a>
   <a href='#tab' aria-controls="tab-content-2" role="tab">Tab 2</a>
@@ -16,3 +17,4 @@
   <article id="tab-content-2" role="tabpanel" aria-hidden='true'>Content for tab 2</article>
   <article id="tab-content-3" role="tabpanel" aria-hidden='true'>Content for tab 3</article>
 </section>
+</Canvas>

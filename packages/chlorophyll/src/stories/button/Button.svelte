@@ -1,6 +1,14 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
+  /**
+   * A Button Component
+   * @component
+   */
+
+  /**
+   * Button type
+   */
   export let type = ''
   export let variant = ''
   export let label = 'Button'

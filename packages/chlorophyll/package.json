@@ -20,15 +20,12 @@
     "url": "git+https://github.com/sebgroup/green.git"
   },
   "scripts": {
-    "dev": "concurrently --kill-others 'yarn watch:tokens' 'yarn build --watch' 'yarn storybook' 'yarn serve'",
-    "lint": "stylelint --config-basedir ../../ src/**/*.scss",
-    "lint:fix": "stylelint --config-basedir ../../ src/**/*.scss --fix",
+    "dev": "concurrently --kill-others 'yarn build --watch' 'yarn storybook'",
+    "lint": "stylelint src/**/*.scss",
+    "lint:fix": "stylelint src/**/*.scss --fix",
     "test": "jest",
     "generate": "ts-node ./build/generate",
     "prebuild": "yarn generate",
-    "postinstall": "yarn generate",
-    "watch:tokens": "watch 'yarn generate' ./src/tokens",
-    "watch:sass": "sass src/scss/index.scss ../chlorophyll-storybook/public/green-chlorophyll.css --watch",
     "build": "sass src/scss/index.scss dist/green-chlorophyll.css",
     "serve": "yarn build && live-server --port=5000 --watch=index.html,./dist",
     "storybook": "start-storybook -p 6006 -s ./dist",

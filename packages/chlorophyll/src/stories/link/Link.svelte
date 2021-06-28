@@ -14,6 +14,8 @@
    */
   export let label = 'Link'
 
+  let props = {}
+  if (type && type !== 'none') props.class = type
 </script>
 
-<a href="#" class={type}>{label}</a>
+<a href="#" {...props}>{label}</a>

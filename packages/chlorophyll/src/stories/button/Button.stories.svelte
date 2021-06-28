@@ -22,19 +22,3 @@
 </Template>
 
 <Story name="Button" args={{ label: 'Default button' }} />
-
-<Story name="Types">
-  <p>Types</p>
-
-  <Button type="button" label="Button" />
-  <Button type="submit" label="Submit" />
-  <Button type="reset" label="Reset" />
-</Story>
-
-<Story name="Variants">
-  <p>Variants</p>
-
-  <Button variant="primary" label="Primary" />
-  <Button variant="secondary" label="Secondary" />
-  <Button variant="ghost" label="Ghost" />
-</Story>

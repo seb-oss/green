@@ -1,16 +1,24 @@
 <script>
   import { Meta, Template, Story } from '@storybook/addon-svelte-csf'
   import Link from './Link.svelte'
-
 </script>
 
 <Meta
-  title="CSS/Link/Stories"
+  title="Components/Links"
   component={Link}
   argTypes={{
     label: { control: 'text' },
     type: {
-      control: { type: 'select', options: ['', 'button'] },
+      control: {
+        type: 'select',
+        options: [
+          'none',
+          'button',
+          'button primary',
+          'button secondary',
+          'button ghost',
+        ],
+      },
     },
   }}
 />
@@ -20,10 +28,9 @@
 </Template>
 
 <Story
-  source={`<a href="#">Normal</a>`}
-  name="Normal"
+  name="Link"
   args={{
-    type: '',
+    type: 'none',
     label: 'Normal',
   }}
 />
