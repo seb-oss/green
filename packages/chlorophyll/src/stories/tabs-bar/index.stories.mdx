@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/TabsBar/Overview" />
+
+# Tabs bar
+
+Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
+
+<Canvas>
+<nav role="tablist">
+  <a href='#tab' aria-controls="tab-content-1" role="tab" aria-selected='true'>Tab 1</a>
+  <a href='#tab' aria-controls="tab-content-2" role="tab">Tab 2</a>
+  <a href='#tab' aria-controls="tab-content-3" role="tab">Tab 3</a>
+</nav>
+<section aria-live="polite">
+  <article id="tab-content-1" role="tabpanel" aria-hidden='false'>Content for tab 1</article>
+  <article id="tab-content-2" role="tabpanel" aria-hidden='true'>Content for tab 2</article>
+  <article id="tab-content-3" role="tabpanel" aria-hidden='true'>Content for tab 3</article>
+</section>
+</Canvas>
