@@ -5,7 +5,7 @@
 </script>
 
 <Meta
-  title="CSS/Alert/Stories"
+  title="Components/Alert/Stories"
   component={Alert}
   argTypes={{
     content: { control: 'text' },

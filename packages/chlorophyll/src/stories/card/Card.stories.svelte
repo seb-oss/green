@@ -4,7 +4,7 @@
 </script>
 
 <Meta
-  title="CSS/Card/Stories"
+  title="Components/Card/Stories"
   component={Component}
   argTypes={{
     headline: { control: 'text' },
