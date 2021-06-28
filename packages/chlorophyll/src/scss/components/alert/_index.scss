@@ -1,0 +1,13 @@
+@use '../../tokens';
+@use '../../common';
+@use 'mixins';
+@forward 'mixins';
+
+div[role='alert'] {
+  @include mixins.alert();
+  @each $intent, $color in tokens.$intent-colors {
+    &.#{$intent} {
+      @include mixins.alert-variant($color);
+    }
+  }
+}

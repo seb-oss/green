@@ -1,12 +1,14 @@
 @use '../common';
-@use 'grid';
 @use 'button';
+@use 'card';
+@use 'grid';
+@use 'alert';
 @use 'input';
 @use 'link';
 @use 'tabs-bar';
+@use 'typography';
 @use 'utility/spacing';
 @use 'utility/colors';
-@use 'typography';
 
 // TODO: move and refactor
 .size-sm {
