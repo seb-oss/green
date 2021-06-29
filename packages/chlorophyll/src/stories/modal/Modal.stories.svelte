@@ -1,31 +1,54 @@
 <script>
   import { Meta, Template, Story } from '@storybook/addon-svelte-csf'
-  import Alert from './Modal.svelte'
+  import Modal from './Modal.svelte'
 
 </script>
 
 <Meta
   title="Components/Modal/Stories"
-  component={Alert}
+  component={Modal}
   argTypes={{
     content: { control: 'text' },
-    type: {
+    tag: {
       control: {
         type: 'select',
-        options: ['', 'slide-out', 'take-over', 'dialog'],
+        options: ['aside', 'section', 'div', 'main'],
+      },
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: ['', 'large'],
       },
     },
   }}
 />
 
 <Template let:args>
-  <Alert {...args} />
+  <Modal {...args} />
 </Template>
 
 <Story
   name="default"
   args={{
     type: '',
-
+    tag: 'section',
+    size: ''
+  }}
+/>
+<Story
+  name="slide-out"
+  args={{
+    type: '',
+    tag: 'aside',
+    size: ''
+  }}
+/>
+<Story
+  name="take-over"
+  args={{
+    type: '',
+    tag: 'main',
+    size: ''
   }}
 />

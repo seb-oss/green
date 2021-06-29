@@ -5,11 +5,6 @@
    */
 
   /**
-   * Modal type
-   */
-  export let type = 'slide-out'
-
-  /**
    * Modal contents
    */
   export let content = 'Lorem ipsum dolar sit amet modal body content.'
@@ -29,18 +24,26 @@
    */
   export let size = ''
 
+  /**
+   * Tag name to use with modal element. Determines type of modal i.e. slide out, dialog, take over etc.
+   */
+  export let tag = 'section'
 
-</script>
-
-<div role='dialog' class="modal">
+  let modal = `<${tag} role='dialog' ${size ? 'class=' + size : '' }>
   <div class='header'>
-    <h3>{ heading }</h3>
-    <button class='close'>close</button>
+    <h3>${ heading }</h3>
+    <button class='close'>
+      <span class='sr-only'>Close</span>
+    </button>
   </div>
   <div class='body'>
-    <p>{ content }</p>
+    <p>${ content }</p>
   </div>
   <div class='footer'>
     <button>Secondary</button><button>Primary</button>
   </div>
-</div>
+</${tag}>`
+
+</script>
+
+{@html modal}
