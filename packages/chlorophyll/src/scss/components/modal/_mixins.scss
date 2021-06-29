@@ -1,0 +1,44 @@
+@use '../../tokens';
+@use '../../common';
+@use '../../components/button';
+
+@mixin modal {
+  position: absolute;
+  width: 100%;
+  z-index: 1080;
+  @include common.add-border();
+}
+
+@mixin modal-header {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border('bottom');
+
+  h3,
+  .h3 {
+    @include common.margin-vertical(0);
+  }
+}
+
+
+@mixin modal-body {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  overflow: auto;
+  width: 100%;
+
+  p {
+    @include common.margin-vertical(0);
+  }
+}
+
+@mixin modal-footer {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+}

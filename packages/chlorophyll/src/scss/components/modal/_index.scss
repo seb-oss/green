@@ -1,0 +1,19 @@
+@use '../../tokens';
+@use '../../common';
+@use 'mixins';
+@forward 'mixins';
+
+div[role='dialog'] {
+  @include mixins.modal();
+  > .header {
+    @include mixins.modal-header;
+  }
+
+  > .body {
+    @include mixins.modal-body;
+  }
+
+  > .footer {
+    @include mixins.modal-footer;
+  }
+}
