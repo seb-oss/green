@@ -6,6 +6,7 @@
   position: absolute;
   width: 100%;
   z-index: 1080;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
   @include common.add-border();
 }
 
@@ -20,6 +21,11 @@
   h3,
   .h3 {
     @include common.margin-vertical(0);
+
+    // TODO: calculate margin (height of close minus height of h3 divided by 2)
+    + .close {
+      margin: -7px;
+    }
   }
 }
 
