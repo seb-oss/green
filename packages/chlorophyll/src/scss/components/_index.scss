@@ -1,5 +1,6 @@
 @use '../common';
 @use 'button';
+@use 'close';
 @use 'card';
 @use 'grid';
 @use 'alert';
@@ -24,6 +25,13 @@ input.size-sm {
   @include common.padding-horizontal(6);
   @include common.padding-vertical(5);
   @include common.font-size('l');
+}
+
+.sr-only {
+  display: none;
+  @media speech {
+    display: block;
+  }
 }
 // TODO: should be part of global reset/reboot
 // Document
