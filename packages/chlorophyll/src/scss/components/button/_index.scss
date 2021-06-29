@@ -3,12 +3,18 @@
 
 // base
 button,
-button,
+.button {
+  @include mixins.base;
+}
+
+// default
+button:not([class]),
+button.secondary,
 input[type='button'],
 input[type='submit'],
 input[type='reset'],
 a.button {
-  @include mixins.base;
+  @include mixins.default;
 }
 
 button.primary,
