@@ -37,6 +37,8 @@
     "yarn": "^1.22.10"
   },
   "resolutions": {
-    "postcss": "^7.0.36"
+    "parse-url": "^6.0.0",
+    "postcss": "^7.0.36",
+    "trim-newlines": "^3.0.1"
   }
 }
