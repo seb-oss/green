@@ -1,17 +1,18 @@
 @use '../../tokens';
 @use '../../common';
 
-@mixin base {
-  border: none;
+@mixin reset {
   background-color: transparent;
-  color: map-get(tokens.$theme-colors, 'primary');
-  border-color: map-get(tokens.$theme-colors, 'primary');
-  font-family: inherit;
-  padding: 0;
+  border: 0;
   cursor: pointer;
-  display: inline-flex;
+  font-family: inherit;
+}
+
+@mixin base {
   align-items: center;
+  display: inline-flex;
   justify-content: center;
+  padding: 0;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.add-border-radius();
@@ -26,10 +27,15 @@
   }
 }
 
+@mixin secondary {
+  border-color: map-get(tokens.$theme-colors, 'primary');
+  color: map-get(tokens.$theme-colors, 'primary');
+}
+
 @mixin primary {
   background: map-get(tokens.$theme-colors, 'primary');
+  border-color: map-get(tokens.$theme-colors, 'primary');
   color: common.most-legible-color(map-get(tokens.$theme-colors, 'primary'));
-  @include common.add-hover-active-state();
 }
 
 @mixin ghost($bg: tokens.$background-color) {
@@ -39,8 +45,6 @@
   } @else {
     $ghost-color: tokens.$white;
   }
-
-  background-color: transparent;
   border-color: $ghost-color;
   color: $ghost-color;
   @include common.add-hover-active-state(

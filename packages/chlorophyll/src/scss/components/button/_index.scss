@@ -1,16 +1,34 @@
 @use 'mixins';
 @forward 'mixins';
 
+// reset
+button,
+.button {
+  @include mixins.reset;
+}
+
 // base
-button,
-button,
-input[type='button'],
+button:not([class]),
+button.secondary,
+button.primary,
+button.ghost,
+button[type='button'],
 input[type='submit'],
-input[type='reset'],
+button[type='reset'],
 a.button {
   @include mixins.base;
 }
 
+// secondary
+button:not([class]),
+button.secondary,
+a.button.secondary,
+button[type='button'],
+button[type='reset'] {
+  @include mixins.secondary;
+}
+
+// primary
 button.primary,
 button[type='submit'],
 input[type='submit'],
@@ -18,6 +36,7 @@ a.button.primary {
   @include mixins.primary;
 }
 
+// ghost
 button.ghost {
   @include mixins.ghost;
 }

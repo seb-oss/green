@@ -19,8 +19,8 @@
   transition: all tokens.$transition-time; // TODO: append transition rule...
 
   &:hover {
-    background: $color;
-    color: functions.most-legible-color($color);
+    @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
+    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1)
   }
 }
 
@@ -30,6 +30,7 @@
   &.active:hover,
   &:active:hover {
     background: $color;
+    border-color: $color;
   }
 }
 

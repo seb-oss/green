@@ -233,15 +233,14 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-@function desired-color-combination($fg, $bg, $offsetThreshold: 20%) {
-  $ratio: 4.5;
+@function desired-color-combination($fg, $bg, $offsetThreshold: 20%, $ratio: 4.5) {
   $color: $fg;
   $background: $bg;
   @if $ratio < color-contrast($fg, $bg) {
     $color: $fg;
 
   } @else {
-    $background: a11y-color($bg, $fg, 'AA', 16, false, false, $offsetThreshold);
+    $background: a11y-color($bg, $fg, 'AA', 16, false, false, $offsetThreshold, false, $ratio);
     @if $ratio < color-contrast($color, $background) {
       $color: $color;
       $bg: $background;
@@ -253,8 +252,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $bg, $color;
 }
 
-@mixin desired-color-combination($fg, $bg, $offsetThreshold: 20%) {
-  $color-combination: desired-color-combination($fg, $bg, $offsetThreshold: 20%);
+@mixin desired-color-combination($fg, $bg, $offsetThreshold: 20%, $ratio: 4.5) {
+  $color-combination: desired-color-combination($fg, $bg, $offsetThreshold, $ratio);
   background-color: nth($color-combination, 1);
   color: nth($color-combination, 2);
 }
@@ -272,11 +271,15 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 //   color: #d200d2;
 // }
 //
-@function a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false, $maxOffset: 1000%, $darkMode: false) {
+@function a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false, $maxOffset: 1000%, $darkMode: false, $ratio: false) {
   // Helper: make sure the font size value is acceptable
   $font-size: validate-font-size($size);
-  // Helper: With the level, font size, and bold boolean, return the proper target ratio. 3.0, 4.5, or 7.0 expected
-  $ratio: get-ratio($level, $font-size, $bold, $graphic);
+
+  @if not $ratio {
+    // Helper: With the level, font size, and bold boolean, return the proper target ratio. 3.0, 4.5, or 7.0 expected
+    $ratio: get-ratio($level, $font-size, $bold, $graphic);
+  }
+
   // Calculate the first contrast ratio of the given pair
   $original-contrast: color-contrast($fg, $bg);
 
