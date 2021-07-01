@@ -2,12 +2,13 @@
 @use '../../common';
 @use '../../components/button';
 
+$border-color: map-get(tokens.$grey, 6);
+
 @mixin modal {
   position: absolute;
   width: 100%;
   z-index: 1080;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
-  @include common.add-border();
 }
 
 @mixin modal-header {
@@ -17,6 +18,8 @@
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.add-border('bottom');
+  @include common.add-border-color($border-color);
+
 
   h3,
   .h3 {
