@@ -1,0 +1,53 @@
+@use '../../tokens';
+@use '../../common';
+@use '../../components/button';
+
+$border-color: map-get(tokens.$grey, 6);
+
+@mixin modal {
+  position: absolute;
+  width: 100%;
+  z-index: 1080;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+}
+
+@mixin modal-header {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border('bottom');
+  @include common.add-border-color($border-color);
+
+
+  h3,
+  .h3 {
+    @include common.margin-vertical(0);
+
+    // TODO: calculate margin (height of close minus height of h3 divided by 2)
+    + .close {
+      margin: -7px;
+    }
+  }
+}
+
+
+@mixin modal-body {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  overflow: auto;
+  width: 100%;
+
+  p {
+    @include common.margin-vertical(0);
+  }
+}
+
+@mixin modal-footer {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+}
