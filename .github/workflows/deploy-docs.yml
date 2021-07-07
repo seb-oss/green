@@ -1,4 +1,4 @@
-name: CI
+name: Deploy gh-pages
 on:
   push:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
         id: branch
 
       - name: Build documentation and demo site
-        run: yarn run build:demo
+        run: yarn run build:docs
 
       #- name: Set base href
       #  run: ./node_modules/.bin/replace '<base href=(.*?)>' '<base href="/${{ github.event.repository.name }}/${{ steps.branch.outputs.branch }}/">' packages/chlorophyll/storybook-static/index.html
