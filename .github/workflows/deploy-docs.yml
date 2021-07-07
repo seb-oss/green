@@ -1,6 +1,5 @@
-name: Deploy gh-pages
+name: Deploy storybook
 on:
-  push:
   pull_request:
 
 jobs:
@@ -29,10 +28,11 @@ jobs:
       #  run: ./node_modules/.bin/replace '<base href=(.*?)>' '<base href="/${{ github.event.repository.name }}/${{ steps.branch.outputs.branch }}/">' packages/chlorophyll/storybook-static/index.html
 
       - name: Deploy documentation to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.4.1
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: packages/chlorophyll/storybook-static # The folder the action should deploy.
-          TARGET_FOLDER: ${{ steps.branch.outputs.branch }} # The folder the action should deploy to.
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: packages/chlorophyll/storybook-static # The folder the action should deploy.
+          # TARGET_FOLDER: ${{ steps.branch.outputs.branch }} # The folder the action should deploy to.
+          target-folder: pr-${{ github.event.number }} # The folder the action should deploy to.
 
