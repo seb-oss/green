@@ -1,0 +1,28 @@
+name: Clean up pages
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Create empty folder
+        run: mkdir empty
+
+      - name: Deploy documentation to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: empty # The folder the action should deploy.
+          # TARGET_FOLDER: ${{ steps.branch.outputs.branch }} # The folder the action should deploy to.
+          target-folder: pr-${{ github.event.number }} # The folder the action should deploy to.
+

@@ -1,0 +1,48 @@
+name: Deploy storybook
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --silent
+
+      - name: Get branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+        id: branch
+
+      - name: Determine deploy target
+        shell: bash
+        run:  |
+          if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
+            echo "##[set-output name=target;]$(echo latest)"
+          else
+            echo "##[set-output name=target;]$(echo pr-${{ github.event.number }})"
+          fi
+        id: target
+
+
+      - name: Build storybook
+        run: yarn run build:docs
+
+      - name: Deploy storybook to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: packages/chlorophyll/storybook-static # The folder the action should deploy.
+          # target-folder: pr-${{ github.event.number }} # The folder the action should deploy to.
+          target-folder: ${{ steps.target.outputs.target }}  # The folder the action should deploy to.
+
