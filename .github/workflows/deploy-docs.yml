@@ -26,7 +26,7 @@ jobs:
       - name: Determine deploy target
         shell: bash
         run:  |
-          if steps.branch.outputs.branch == 'main'; then
+          if $(echo ${{ steps.branch.outputs.branch }}) == 'main'; then
             echo "##[set-output name=target;]$(echo latest)"
           else
             echo "##[set-output name=target;]$(echo pr-${{ github.event.number }})"
