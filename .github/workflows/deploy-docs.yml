@@ -56,3 +56,15 @@ jobs:
           folder: packages/chlorophyll/storybook-static # The folder the action should deploy.
           target-folder: ${{ steps.target.outputs.target }}  # The folder the action should deploy to.
 
+      - name: Add Storybook link to pull request
+        uses: actions/github-script@v4
+        if: github.event.action == 'opened'
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for creating a pull request! 🚀 Checkout the storybook we created for it [here](https://automatic-pancake-aa6626d9.pages.github.io/${{ steps.target.outputs.target }}/).'
+            })
