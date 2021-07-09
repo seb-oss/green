@@ -360,3 +360,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     }
   }
 }
+
+// Add important rule
+@function is-important($important) {
+  @return #{if($important, '!important', '')};
+}
