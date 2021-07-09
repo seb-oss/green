@@ -25,6 +25,11 @@
   export let size = ''
 
   /**
+   * Backdrop
+   */
+  export let useBackdrop = true
+
+  /**
    * Tag name to use with modal element. Determines type of modal i.e. slide out, dialog, take over etc.
    */
   export let tag = 'section'
@@ -42,7 +47,8 @@
   <div class='footer'>
     <button>Secondary</button><button>Primary</button>
   </div>
-</${tag}>`
+</${tag}>
+ ${useBackdrop ? '<div class="backdrop"></div>' : ''}`
 
 </script>
 
