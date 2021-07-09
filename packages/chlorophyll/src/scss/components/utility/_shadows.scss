@@ -1,0 +1,7 @@
+@use '../../tokens';
+
+@each $depth-level, $shadow in tokens.$depth-level {
+  .shadow-#{$depth-level} {
+    box-shadow: $shadow;
+  }
+}
