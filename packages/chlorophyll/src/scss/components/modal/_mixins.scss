@@ -2,13 +2,15 @@
 @use '../../common';
 @use '../../components/button';
 
+// TODO: move to tokens
 $border-color: map-get(tokens.$grey, 6);
+$shadow-level: 2;
 
 @mixin modal {
   position: absolute;
   width: 100%;
-  z-index: 1080;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+  z-index: tokens.$zindex-modal;
+  @include common.add-shadow($shadow-level);
 }
 
 @mixin modal-header {
