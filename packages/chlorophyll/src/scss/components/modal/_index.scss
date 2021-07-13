@@ -40,6 +40,7 @@ aside[role='dialog'] {
   flex-flow: column;
   max-width: 375px;
   right: 0;
+  top: 0;
 
   &.large {
     max-width: 720px;
@@ -61,8 +62,17 @@ main[role='dialog'] {
   min-height: -webkit-fill-available;
   display: flex;
   flex-flow: column;
+  inset: 0;
 
   > .body {
     flex: 1 0;
   }
+}
+
+// backdrop TODO: modal specific?
+.backdrop {
+  background: mixins.$backdrop-fill;
+  inset: 0;
+  position: fixed;
+  z-index: tokens.$zindex-modal-backdrop;
 }

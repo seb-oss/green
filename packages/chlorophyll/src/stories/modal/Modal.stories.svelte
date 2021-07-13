@@ -21,6 +21,12 @@
         options: ['', 'large'],
       },
     },
+    useBackdrop: {
+      control: {
+        type: 'select',
+        options: [true, false],
+      },
+    },
   }}
 />
 
