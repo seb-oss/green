@@ -1,0 +1,6 @@
+@use '../../tokens';
+
+@mixin icon-size($step) {
+  height: tokens.icon-scale($step);
+  width: tokens.icon-scale($step);
+}

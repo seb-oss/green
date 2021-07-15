@@ -1,0 +1,7 @@
+@use './typography';
+
+$icon-scale: typography.$font-scale;
+
+@function icon-scale($step) {
+  @return map-get($icon-scale, $step);
+}
