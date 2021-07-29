@@ -12,6 +12,7 @@
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
+  @include common.add-border-color();
   @include common.add-focus();
 
   @media screen and (-ms-high-contrast: active) {
