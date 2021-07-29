@@ -1,10 +1,27 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
 <Meta title="Components/Forms/Overview" />
 
-<a>Normal</a>
-<input class="form-input size-sm" type="text" />
-<br />
-<br />
-<a class="button">Button</a>
-<input class="form-input" type="text" />
+# Input
+
+Lorem ipsum input fields
+
+## Default input
+
+<Canvas>
+  <input type="text" />
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <input type="text" class="size-sm" value="Small"/><button class="size-sm">Small</button>
+</Canvas>
+
+<Canvas>
+  <input type="text" value="Medium"/><button>Medium</button>
+</Canvas>
+
+<Canvas>
+  <input type="text" class="size-lg" value="Large"/><button class="size-lg">Large</button><br/>
+</Canvas>
