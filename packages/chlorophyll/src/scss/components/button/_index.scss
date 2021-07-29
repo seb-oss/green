@@ -9,6 +9,8 @@ button,
 
 // base
 button:not([class]),
+button.size-sm,
+button.size-lg,
 button.secondary,
 button.primary,
 button.ghost,
@@ -22,6 +24,8 @@ a.button {
 // secondary
 button:not([class]),
 button.secondary,
+button.size-sm,
+button.size-lg,
 a.button.secondary,
 button[type='button'],
 button[type='reset'] {
