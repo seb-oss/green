@@ -13,7 +13,13 @@
     "build": "lerna run build --parallel",
     "build:chlorophyll": "lerna run build --scope @sebgroup/chlorophyll",
     "prebuild:docs": "yarn run build:chlorophyll",
-    "build:docs": "lerna run build-storybook"
+    "build:docs": "lerna run build-storybook",
+    "prepare": "husky install && cp -a .husky/. .git/hooks/"
+  },
+  "lint-staged": {
+    "packages/**/src/**/*.scss": [
+      "stylelint --syntax scss --fix"
+    ]
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -25,16 +31,17 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.1",
     "jest": "^27.0.3",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^11.1.1",
     "prettier": "^2.3.0",
     "prettier-eslint": "^12.0.0",
     "semantic-release": "^17.4.3",
     "semantic-release-monorepo": "^7.0.5",
     "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-scss": "^3.20.1",
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2",
     "yarn": "^1.22.10"
