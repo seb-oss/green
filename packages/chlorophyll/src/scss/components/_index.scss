@@ -15,17 +15,15 @@
 
 // TODO: move and refactor
 .size-sm {
-  @include common.padding-horizontal(3);
-  @include common.padding-vertical(2);
+  @include common.padding-horizontal(3, true);
+  @include common.padding-vertical(2, true);
   @include common.font-size('s');
 }
-input.size-sm {
-  height: 0.75rem;
-}
+
 
 .size-lg {
-  @include common.padding-horizontal(6);
-  @include common.padding-vertical(5);
+  @include common.padding-horizontal(6, true);
+  @include common.padding-vertical(5, true);
   @include common.font-size('l');
 }
 
