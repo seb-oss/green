@@ -8,7 +8,7 @@
   /**
    * Input type
    */
-  export let type = ''
+  export let type = 'text'
   export let size = ''
   export let label = 'Input'
 
@@ -21,4 +21,4 @@
   }
 </script>
 
-<input {...props} type='text'>
+<input {...props}>

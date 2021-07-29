@@ -8,7 +8,7 @@
   title="Components/Forms/Input"
   component={Input}
   argTypes={{
-    type: { control: 'select', options: ['none', 'button', 'submit', 'reset'] },
+    type: { control: 'select', options: ['none', 'text', 'password', 'number', 'email', 'tel', 'search', 'url'] },
     size: {
       control: 'select',
       options: ['none', 'size-sm', 'size-lg'],
