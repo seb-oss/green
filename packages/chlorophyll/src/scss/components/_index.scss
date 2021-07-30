@@ -1,3 +1,4 @@
+@use 'reset';
 @use '../common';
 @use 'button';
 @use 'close';
@@ -32,14 +33,4 @@
   @media speech {
     display: block;
   }
-}
-// TODO: should be part of global reset/reboot
-// Document
-//
-// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
