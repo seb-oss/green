@@ -15,15 +15,19 @@
 @use 'utility/colors';
 @use 'utility/shadows';
 
+
+
 // TODO: move and refactor
-.size-sm {
+.size-sm:not(.group),
+.group.size-sm > * {
   @include common.padding-horizontal(3, true);
   @include common.padding-vertical(2, true);
   @include common.font-size('s');
 }
 
 
-.size-lg {
+.size-lg:not(.group),
+.group.size-lg > * {
   @include common.padding-horizontal(6, true);
   @include common.padding-vertical(5, true);
   @include common.font-size('l');
