@@ -1,6 +1,7 @@
 @use 'mixins';
 @use '../../tokens';
 @use '../../common/functions';
+@use '../../common';
 @use 'sass:map';
 
 input:not([type]),
@@ -20,14 +21,10 @@ input[type='week'] {
   @include mixins.text-input();
 }
 
-input.size-sm {
-  height: calc(#{map.get(tokens.$spacing, 2) * 2 + map-get(tokens.$font-size, 'm')} - #{tokens.$border-width * 2});
+.form-text {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  display: inline-flex;
+  font: inherit;
 }
 
-/*
-  input[type='button']
-  input[type='submit']
-  input[type='reset']
-  
-  ../button/_index.scss
-*/

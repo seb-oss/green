@@ -1,0 +1,62 @@
+@use '../../tokens';
+@use '../../common';
+
+.group {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+
+  > * {
+    min-width: 0;
+  }
+
+  > *:focus {
+    position: relative;
+  }
+
+  > * + *:not(:last-child) {
+    border-radius: 0 !important;
+    margin-left: -(tokens.$border-width);
+  }
+
+  > *:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  > *:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -(tokens.$border-width);
+  }
+
+  &.border {
+    @include common.add-focus('within');
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-border-radius();
+
+    > * + *:not(:last-child) {
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+
+    > *:first-child {
+      border-right-color: transparent;
+    }
+
+    > *:last-child:not(button) {
+      border-left-color: transparent;
+    }
+
+    > * {
+      border: 0;
+      box-shadow: none !important;
+    }
+
+    > button,
+    > .button {
+      margin: -(tokens.$border-width);
+    }
+  }
+}
