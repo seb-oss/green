@@ -1,0 +1,32 @@
+{
+  "name": "@sebgroup/green-react",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "homepage": "https://github.com/sebgroup/green#readme",
+  "license": "MIT",
+  "main": "lib/green-react.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/issues"
+  },
+  "dependencies": {
+    "@sebgroup/extract": "^0.0.0"
+  }
+}
