@@ -21,12 +21,39 @@
     "url": "git+https://github.com/sebgroup/green.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "jest",
+    "test:dev": "jest --watchAll",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "component": "node tmpl/tmpl.js"
   },
   "bugs": {
     "url": "https://github.com/sebgroup/green/issues"
   },
   "dependencies": {
-    "@sebgroup/extract": "^0.0.0"
+    "@sebgroup/chlorophyll": "^0.0.0",
+    "@sebgroup/extract": "^0.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@storybook/addon-actions": "^6.3.6",
+    "@storybook/addon-essentials": "^6.3.6",
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/react": "^6.3.6",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/ejs": "^3.0.7",
+    "@types/inquirer": "^7.3.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.10",
+    "@types/react": "^17.0.15",
+    "babel-loader": "^8.2.2",
+    "change-case": "^4.1.2",
+    "ejs": "^3.1.6",
+    "inquirer": "^8.1.2",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4"
   }
 }

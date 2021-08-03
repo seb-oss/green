@@ -1,0 +1,16 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import <%= name %> from './<%= name %>'
+
+export const Template = ({ children, ...props }) => (
+  <<%= name %> {...props}>{children}</<%= name %>>
+)
+
+<Meta title="Components/<%= name %>" component={<%= name %>} />
+
+# <%= name %>s
+
+<Canvas>
+  <Story name="<%= name %>" args={{ children: '<%= name %>' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

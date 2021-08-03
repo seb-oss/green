@@ -1,0 +1,10 @@
+import { render, screen } from '@testing-library/react'
+import <%= name %> from './<%= name %>'
+
+describe('<%= name %>', () => {
+  it('renders', () => {
+    render(<<%= name %>>Hello</<%= name %>>)
+
+    expect(screen.getByText('Hello')).toBeVisible()
+  })
+})

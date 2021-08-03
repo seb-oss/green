@@ -1,0 +1,70 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Alert from './Alert'
+import Button from '../button'
+
+export const Template = ({ children, ...props }) => (
+  <Alert {...props}>{children}</Alert>
+)
+
+<Meta title="Components/Alert" component={Alert} />
+
+# Alerts
+
+<Alert
+  type="info"
+  heading="Info"
+  buttons={[
+    <Button>Button</Button>,
+    <Button variant="primary">Primary</Button>,
+  ]}
+>
+  This is an alert <a href="#">with a link</a>.
+</Alert>
+
+<Alert
+  type="success"
+  heading="Success"
+  buttons={[
+    <Button>Button</Button>,
+    <Button variant="primary">Primary</Button>,
+  ]}
+>
+  This is an alert <a href="#">with a link</a>.
+</Alert>
+
+<Alert
+  type="warning"
+  heading="Warning"
+  buttons={[
+    <Button>Button</Button>,
+    <Button variant="primary">Primary</Button>,
+  ]}
+>
+  This is an alert <a href="#">with a link</a>.
+</Alert>
+
+<Alert
+  type="danger"
+  heading="Danger"
+  buttons={[
+    <Button>Button</Button>,
+    <Button variant="primary">Primary</Button>,
+  ]}
+>
+  This is an alert <a href="#">with a link</a>.
+</Alert>
+
+<Canvas>
+  <Story
+    name="Alert"
+    args={{
+      type: 'info',
+      heading: 'Heading',
+      children: 'Alert',
+      isCloseable: true,
+      closeText: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -1,0 +1,11 @@
+import { FC, ReactNode } from 'react'
+
+export interface <%= name %>Props {
+  children?: ReactNode
+}
+
+const <%= name %>: FC<<%= name %>Props> = ({ children }) => {
+  return <>{children}</>
+}
+
+export default <%= name %>
