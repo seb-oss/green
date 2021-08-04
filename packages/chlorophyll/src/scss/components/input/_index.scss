@@ -3,6 +3,7 @@
 @use '../../common/functions';
 @use '../../common';
 @use 'sass:map';
+@use 'checkbox';
 
 input:not([type]),
 input[type='date'],
