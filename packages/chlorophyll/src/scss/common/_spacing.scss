@@ -40,11 +40,11 @@
 }
 
 @mixin padding-top($size, $important: false) {
-  padding-right: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-top: map.get(tokens.$spacing, $size) functions.is-important($important);
 }
 
 @mixin padding-bottom($size, $important: false) {
-  padding-left: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-bottom: map.get(tokens.$spacing, $size) functions.is-important($important);
 }
 
 @mixin padding-horizontal($size, $important: false) {
