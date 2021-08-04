@@ -36,7 +36,7 @@ form:not(.horizontal) >,
 }
 
 .horizontal > {
-  * {
+  *:not(label:not(.form-control)) {
     @include common.margin-end(4);
     display: inline-flex !important;
   }
@@ -49,3 +49,10 @@ form:not(.horizontal) >,
   font: inherit;
 }
 
+// label
+form label:not(.form-control),
+.form label:not(.form-control) {
+  @include common.font-weight('medium');
+  @include common.margin-bottom(3, true);
+  display: block !important;
+}
