@@ -18,18 +18,26 @@
 
 
 // TODO: move and refactor
-.size-sm:not(.group),
-.group.size-sm > * {
+
+.size-sm:not(.group,.form-text),
+.group.size-sm > *:not(.form-text) {
   @include common.padding-horizontal(3, true);
   @include common.padding-vertical(2, true);
+}
+
+.size-sm:not(.group),
+.group.size-sm > * {
   @include common.font-size('s');
 }
 
+.size-lg:not(.group,.form-text),
+.group.size-lg > *:not(.form-text) {
+  @include common.padding-horizontal(6, true);
+  @include common.padding-vertical(5, true);
+}
 
 .size-lg:not(.group),
 .group.size-lg > * {
-  @include common.padding-horizontal(6, true);
-  @include common.padding-vertical(5, true);
   @include common.font-size('l');
 }
 

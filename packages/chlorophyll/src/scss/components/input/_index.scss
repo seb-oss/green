@@ -22,10 +22,30 @@ input[type='week'] {
   @include mixins.text-input();
 }
 
+form:not(.horizontal) >,
+.form:not(.horizontal) > {
+  * {
+    //display: flex !important;
+    margin-bottom: 1rem;
+  }
+
+  .form-control,
+  .form-text {
+    @include common.padding-vertical(0);
+  }
+}
+
+.horizontal > {
+  * {
+    @include common.margin-end(4);
+    display: inline-flex !important;
+  }
+}
+
 .form-text {
-  @include common.padding-horizontal(5);
+  //@include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  display: inline-flex;
+  display: flex;
   font: inherit;
 }
 
