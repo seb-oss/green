@@ -44,12 +44,12 @@ $checkmark-color: tokens.$white;
 }
 
 /* Hover state */
-.form-control:hover input ~ span {
+.form-control:hover input[type=checkbox] ~ span {
   background-color: $background-hover;
 }
 
 /* Checked state */
-.form-control input:checked ~ span {
+.form-control input[type=checkbox]:checked ~ span {
   @include common.add-border-color($background-active);
   background-color: $background-active;
 }
@@ -79,18 +79,18 @@ $checkmark-color: tokens.$white;
 }
 
 /* Show the checkmark when checked */
-.form-control input:checked ~ span::before,
-.form-control input:checked ~ span::after {
+.form-control input[type=checkbox]:checked ~ span::before,
+.form-control input[type=checkbox]:checked ~ span::after {
   opacity: 1;
   transition-timing-function: ease-in-out;
 }
 
-.form-control input:checked ~ span::after {
+.form-control input[type=checkbox]:checked ~ span::after {
   transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(1);
   transition-delay: 100ms;
 }
 
-.form-control input:checked ~ span::before {
+.form-control input[type=checkbox]:checked ~ span::before {
   transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(1);
   transition-delay: 0s;
 }
