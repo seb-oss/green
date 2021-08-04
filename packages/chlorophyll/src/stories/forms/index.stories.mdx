@@ -9,7 +9,10 @@ Lorem ipsum input fields
 ## Default input
 
 <Canvas>
-  <input type="text" />
+  <form>
+    <label for="input">Input label</label>
+    <input id="input" type="text" />
+  </form>
 </Canvas>
 
 ## Orientation
@@ -17,7 +20,8 @@ Lorem ipsum input fields
 ### Horizontal
 <Canvas>
   <form class="horizontal">
-    <input type="text" placeholder="Regular input"/>
+    <label for="horizontalInput">Input label</label>
+    <input type="text" id="horizontalInput" placeholder="Regular input"/>
     <button>Medium</button>
     <label class="form-control">One
       <input type="checkbox"/>
@@ -30,16 +34,18 @@ Lorem ipsum input fields
 ## Sizes
 
 <Canvas>
-  <form>
-    <input type="text" class="size-sm" placeholder="Small input"/>
+  <form class="horizontal">
+    <label for="horizontalSmInput">Input label</label>
+    <input type="text" id="horizontalSmInput" class="size-sm" placeholder="Small input"/>
     <button class="size-sm">Small</button>
     <span class="form-text size-sm">Static text</span>
   </form>
 </Canvas>
 
 <Canvas>
-  <form>
-    <input type="text" placeholder="Regular input"/>
+  <form class="horizontal">
+    <label for="horizontalMdInput">Input label</label>
+    <input type="text" id="horizontalMdInput" placeholder="Regular input"/>
     <button>Medium</button>
     <label class="form-control">One
       <input type="checkbox"/>
@@ -50,8 +56,9 @@ Lorem ipsum input fields
 </Canvas>
 
 <Canvas>
-  <form>
-    <input type="text" class="size-lg" placeholder="Large input"/>
+  <form class="horizontal">
+    <label for="horizontalLgInput">Input label</label>
+    <input type="text" id="horizontalLgInput" class="size-lg" placeholder="Large input"/>
     <button class="size-lg">Large</button>
     <span class="form-text size-lg">Static text</span>
   </form>
