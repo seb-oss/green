@@ -2,7 +2,6 @@
 
 @mixin font-size($size) {
   font-size: map-get(tokens.$font-size, $size);
-  line-height: map-get(tokens.$line-height, $size);
 }
 
 @mixin font-weight($weight) {

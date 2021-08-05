@@ -5,6 +5,7 @@
 // TODO: move to tokens
 $border-color: map-get(tokens.$grey, 6);
 $shadow-level: 2;
+$backdrop-fill: rgba(tokens.$black, 0.5);
 
 @mixin modal {
   position: absolute;

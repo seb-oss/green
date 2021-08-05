@@ -1,3 +1,4 @@
+@use 'reset';
 @use '../common';
 @use 'button';
 @use 'close';
@@ -6,6 +7,7 @@
 @use 'alert';
 @use 'modal';
 @use 'input';
+@use 'group';
 @use 'link';
 @use 'tabs-bar';
 @use 'typography';
@@ -13,19 +15,29 @@
 @use 'utility/colors';
 @use 'utility/shadows';
 
+
+
 // TODO: move and refactor
-.size-sm {
-  @include common.padding-horizontal(3);
-  @include common.padding-vertical(2);
-  @include common.font-size('s');
-}
-input.size-sm {
-  height: 0.75rem;
+
+.size-sm:not(.group),
+.group.size-sm > *:not(.form-text) {
+  @include common.padding-horizontal(3, true);
+  @include common.padding-vertical(2, true);
 }
 
-.size-lg {
-  @include common.padding-horizontal(6);
-  @include common.padding-vertical(5);
+.size-sm:not(.group),
+.group.size-sm > * {
+  @include common.font-size('s');
+}
+
+.size-lg:not(.group),
+.group.size-lg > *:not(.form-text) {
+  @include common.padding-horizontal(6, true);
+  @include common.padding-vertical(5, true);
+}
+
+.size-lg:not(.group),
+.group.size-lg > * {
   @include common.font-size('l');
 }
 
@@ -34,14 +46,4 @@ input.size-sm {
   @media speech {
     display: block;
   }
-}
-// TODO: should be part of global reset/reboot
-// Document
-//
-// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
