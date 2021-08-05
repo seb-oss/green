@@ -25,7 +25,7 @@ const Alert: FC<AlertProps> = ({
       setCloseButton(<></>)
     } else {
       if (closeText) setCloseButton(<Button>{closeText}</Button>)
-      else setCloseButton(<Button>X</Button>)
+      else setCloseButton(<button className="close" />)
     }
   }, [isCloseable, closeText])
 
