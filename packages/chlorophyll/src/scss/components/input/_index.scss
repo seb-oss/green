@@ -4,6 +4,7 @@
 @use '../../common';
 @use 'sass:map';
 @use 'checkbox';
+@use 'validation';
 
 input:not([type]),
 input[type='date'],
@@ -47,6 +48,14 @@ form:not(.horizontal) >,
   @include common.padding-vertical(4);
   display: flex;
   font: inherit;
+}
+
+// field
+.form-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: fit-content;
 }
 
 // label
