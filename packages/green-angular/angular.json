@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "analytics": false,
+    "packageManager": "yarn"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "green-angular": {
+      "projectType": "library",
+      "root": "projects/green-angular",
+      "sourceRoot": "projects/green-angular/src",
+      "prefix": "sg-ng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/green-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/green-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/green-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/green-angular/src/test.ts",
+            "tsConfig": "projects/green-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/green-angular/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "green-angular"
+}
