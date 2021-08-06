@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/green-angular/ng-package.json"
+            "project": "projects/green-angular/ng-package.json",
           },
           "configurations": {
             "production": {
@@ -37,7 +37,113 @@
           }
         }
       }
+    },
+    "green-angular-dev": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/green-angular-dev",
+      "sourceRoot": "projects/green-angular-dev/src",
+      "prefix": "sg-ng-dev",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/green-angular-dev",
+            "index": "projects/green-angular-dev/src/index.html",
+            "main": "projects/green-angular-dev/src/main.ts",
+            "polyfills": "projects/green-angular-dev/src/polyfills.ts",
+            "tsConfig": "projects/green-angular-dev/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/green-angular-dev/src/favicon.ico",
+              "projects/green-angular-dev/src/assets"
+            ],
+            "styles": [
+              "projects/green-angular-dev/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/green-angular-dev/src/environments/environment.ts",
+                  "with": "projects/green-angular-dev/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "green-angular-dev:build:production"
+            },
+            "development": {
+              "browserTarget": "green-angular-dev:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "green-angular-dev:build"
+          }
+        }
+      }
     }
   },
-  "defaultProject": "green-angular"
+  "defaultProject": "green-angular-dev"
 }
