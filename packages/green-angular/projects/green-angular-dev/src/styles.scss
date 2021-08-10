@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@sebgroup/chlorophyll/dist/green-chlorophyll.css';
+
+// custom rule that will break with wrapped components
+button + button {
+  margin-left: 1rem;
+}
