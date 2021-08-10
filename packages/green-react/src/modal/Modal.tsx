@@ -5,7 +5,7 @@ import Button from '../button'
 import { MouseEvent } from 'react'
 
 export interface ModalProps {
-  type: ModalType
+  type?: ModalType
   header?: string
   children: ReactNode
   confirm?: string
