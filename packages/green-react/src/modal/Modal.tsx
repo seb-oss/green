@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react'
-import { ModalType, ModalRole, ModalSize } from '@sebgroup/extract/src/modal'
+import { ModalType, ModalRole } from '@sebgroup/extract/src/modal'
+import { Size } from '@sebgroup/extract/src/size'
 import Button from '../button'
 import { MouseEvent } from 'react'
 
@@ -9,7 +10,7 @@ export interface ModalProps {
   children: ReactNode
   confirm?: string
   dismiss?: string
-  size?: ModalSize
+  size?: Size
 
   onClose?: (...args: any[]) => void
   onConfirm?: (...args: any[]) => void

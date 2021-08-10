@@ -4,4 +4,3 @@ export const ModalRole: Record<ModalType, string> = {
   slideout: 'aside',
   takeover: 'main',
 }
-export type ModalSize = 'sm' | 'md' | 'lg'

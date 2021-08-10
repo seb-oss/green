@@ -23,7 +23,7 @@
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watchAll",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook",
     "component": "node tmpl/tmpl.js"
   },

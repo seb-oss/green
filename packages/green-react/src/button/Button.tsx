@@ -7,12 +7,18 @@ export interface ButtonProps {
   children?: ReactNode
   type?: ButtonType
   variant?: ButtonVariant
+  active?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-const Button: FC<ButtonProps> = ({ children, type = 'button', variant, onClick }) => {
+// eslint-disable-next-line complexity
+const Button: FC<ButtonProps> = ({ children, variant, onClick, active = false, type = 'button' }) => {
   const props: ButtonHTMLAttributes<HTMLButtonElement> = { type }
-  if (variant) props.className = variant
+  const classNames: string[] = []
+  if (variant) classNames.push(variant)
+  if (active) classNames.push('active')
+
+  if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
 
   return (
