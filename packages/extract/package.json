@@ -28,7 +28,7 @@
     "url": "https://github.com/sebgroup/green/issues"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.0",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
