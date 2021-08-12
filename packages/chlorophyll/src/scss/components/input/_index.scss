@@ -27,7 +27,7 @@ form:not(.horizontal) >,
 .form:not(.horizontal) > {
   * {
     //display: flex !important;
-    margin-bottom: 1rem;
+    //@include common.margin-bottom(4);
   }
 
   .form-control,
@@ -52,15 +52,19 @@ form:not(.horizontal) >,
 
 // field
 .form-field {
+  @include common.margin-bottom(6);
   display: flex;
   flex-direction: column;
   position: relative;
   width: fit-content;
 }
 
+.form-field > input {
+  @include common.margin-bottom(3);
+}
+
 // label
-form label:not(.form-control),
-.form label:not(.form-control) {
+.form-field label:not(.form-control) {
   @include common.font-weight('medium');
   @include common.margin-bottom(3, true);
   display: block !important;

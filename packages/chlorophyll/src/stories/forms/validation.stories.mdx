@@ -4,63 +4,64 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
 # Form validation
 
-Lorem ipsum input field validation
+Form validation in Green Chlorophyll relies on `:valid` and `:invalid` state of inputs scoped using the `.was-validated` class. The class `.was-validated` is preferably added to the form element once the form has been submitted or when validations should be displayed. Without it, `:valid` and `:invalid` and won't have any effect and no feedback will be displayed.
+It's also possible to add either `.is-valid` or `.is-invalid` directly to an inputs to give feedback before the form has been submitted or to override the actual state.
 
-## Default form
+## Default form with validation
 <Canvas>
-  <form autocomplete="off">
+  <form autocomplete="off" class="was-validated">
     <div class="form-field">
       <label for="input">Input label</label>
       <input id="input" type="text" required/>
-      <span class="form-feedback">Field is required!</span>
+      <span class="form-info">Field is required!</span>
     </div>
     <div class="form-field">
       <label for="inputLong">Input label</label>
       <input id="inputLong" type="text" required/>
-      <span class="form-feedback">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
+      <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
     </div>
     <div class="form-field">
       <label for="numberInput">Input label</label>
       <input id="numberInput" type="number" min="1" max="5" required/>
-      <span class="form-feedback">Invalid number!</span>
+      <span class="form-info">Invalid number!</span>
     </div>
   </form>
 </Canvas>
 
-## Horizontal form
+## Horizontal form with validation
 <Canvas>
-  <form class="horizontal" autocomplete="off">
+  <form class="horizontal was-validated" autocomplete="off">
     <div class="form-field">
       <label for="inputHorizontal">Input label</label>
       <input id="inputHorizontal" type="text" required/>
-      <span class="form-feedback">Field is required!</span>
+      <span class="form-info">Field is required!</span>
     </div>
     <div class="form-field">
       <label for="inputHorizontalLong">Input label</label>
       <input id="inputHorizontalLong" type="text" required/>
-      <span class="form-feedback">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
+      <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
     </div>
     <div class="form-field">
       <label for="numberInputHorizontal">Input label</label>
-      <input id="numberInputHorizontal" type="number" min="1" max="5"/>
-      <span class="form-feedback">Invalid number!</span>
+      <input id="numberInputHorizontal" type="number" min="1" max="5" required/>
+      <span class="form-info">Invalid number!</span>
     </div>
   </form>
 </Canvas>
 
-## No feedback content
+## Validation without content
 
 <Canvas>
-  <form autocomplete="off">
+  <form autocomplete="off" class="was-validated">
     <div class="form-field">
       <label for="inputNoFeedback">Input label</label>
       <input id="inputNoFeedback" type="text" required placeholder="Invalid"/>
-      <span class="form-feedback"></span>
+      <span class="form-info"></span>
     </div>
     <div class="form-field">
-      <label for="inputNoFeedback">Input label</label>
+      <label for="inputNoinfo">Input label</label>
       <input id="inputNoFeedback" type="text" placeholder="Valid"/>
-      <span class="form-feedback"></span>
+      <span class="form-info"></span>
     </div>
   </form>
 </Canvas>
@@ -73,12 +74,64 @@ Use `.is-valid` and/or `.is-invalid` to explicitly indicate input validity (usua
     <div class="form-field">
       <label for="inputValid">Input label</label>
       <input id="inputValid" type="text" class="is-valid" value="Some value" required/>
-      <span class="form-feedback">Valid input</span>
+      <span class="form-info">Valid input</span>
     </div>
     <div class="form-field">
       <label for="inputInvalid">Input label</label>
       <input id="inputInvalid" type="text" class="is-invalid" value="Valid but still not"/>
-      <span class="form-feedback">Invalid input</span>
+      <span class="form-info">Invalid input</span>
+    </div>
+  </form>
+</Canvas>
+
+## Validation states
+
+Using `.was-validated`, form inputs can either be marked as valid or invalid depending on the input state (`:valid` or `:invalid`).
+
+<Canvas>
+  <form autocomplete="off" class="was-validated" novalidate>
+    <div class="form-field">
+      <label for="inputValid">Input label</label>
+      <span class="form-info">Lorem ipsum description</span>
+      <input id="inputValid" type="text" value="Some value" required/>
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-field">
+      <label for="inputValid">Input label</label>
+      <span class="form-info">Lorem ipsum description</span>
+      <input id="inputValid" type="text" value="Some value" required/>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-field">
+      <label for="inputValid">Input label</label>
+      <span class="form-info">Lorem ipsum description</span>
+      <input id="inputValid" type="text" required/>
+      <span class="form-info">Invalid</span>
+    </div>
+  </form>
+</Canvas>
+
+Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as valid, invalid or neutral depending on which class that has been applied to the input. If no class has been applied but the `.form-info` element is present, it's considered to be neutral i.e. just plain info related to the input.
+
+<Canvas>
+  <form autocomplete="off" novalidate>
+    <div class="form-field">
+      <label for="inputInvalid">Input label</label>
+      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+      <input id="inputInvalid" type="text" />
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-field">
+      <label for="inputInvalid">Input label</label>
+      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+      <input id="inputInvalid" type="text" class="is-valid"/>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-field">
+      <label for="inputInvalid">Input label</label>
+      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+      <input id="inputInvalid" type="text" class="is-invalid"/>
+      <span class="form-info">Invalid</span>
     </div>
   </form>
 </Canvas>
