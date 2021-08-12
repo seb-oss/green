@@ -3,6 +3,12 @@ import base from '../../jest.config'
 export default {
   ...base,
 
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.test.json',
+    },
+  },
+
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
@@ -15,4 +21,5 @@ export default {
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
   ],
+
 }
