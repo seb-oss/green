@@ -1,8 +1,10 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 
-export const Template = ({ type, variant, text }) => `
-  <button type="${type}" class="${variant}">${text}</button>
-`
+export const Template = ({ type, variant, text }) => {
+  const attrType = type ? `type="${type}" ` : ''
+  const attrClass = variant ? `class="${variant}" ` : ''
+  return `<button ${attrType}${attrClass}>${text}</button>`
+}
 
 <Meta
   title="Components/Forms/Button"

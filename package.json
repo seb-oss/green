@@ -13,7 +13,6 @@
     "lint:all": "nx run-many --target=lint --all",
     "e2e": "nx e2e",
     "storybook": "nx storybook",
-    "storybook:all": "nx run-many --target=storybook --all",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
