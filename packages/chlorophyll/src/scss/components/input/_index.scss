@@ -43,9 +43,31 @@ form:not(.horizontal) >,
   }
 }
 
+.horizontal {
+  display: flex;
+}
+
+.horizontal .form-field ~ {
+  button,
+  .form-control,
+  .form-text {
+    margin-bottom: auto;
+    margin-top: 1.625rem;
+  }
+}
+
+.horizontal.was-validated .form-field label + .form-info {
+  opacity: 0;
+}
+
+.horizontal .form-field label + .form-info {
+  order: 1;
+}
+
 .form-text {
   //@include common.padding-horizontal(5);
   @include common.padding-vertical(4);
+  border: solid transparent 1px; // correct vertical alignment
   display: flex;
   font: inherit;
 }
