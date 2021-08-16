@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import {
+  Form,
+  TextInput,
+  EmailInput,
+  NumberInput,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  Text,
+} from './'
+
+export const Template = ({ children, ...props }) => (
+  <Form {...props}>
+    <TextInput id="namedField" label="Some field" />
+    <EmailInput label="Email field" />
+    <NumberInput label="Numeric field" value={3} min={-1} max={10} step={2} />
+    <Checkbox label="Some checkbox" checked={true} />
+    <Text>Static text</Text>
+    <ButtonGroup>
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+    </ButtonGroup>
+    <ButtonGroup variant="ghost">
+      <Button>Button 1</Button>
+      <Button>Button 2</Button>
+    </ButtonGroup>
+    <Button type="reset">Reset</Button>
+    <Button type="submit">Submit</Button>
+  </Form>
+)
+
+<Meta title="Components/Form" component={Form} />
+
+# Forms
+
+<Canvas>
+  <Story name="Form" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

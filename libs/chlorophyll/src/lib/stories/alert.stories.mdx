@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+export const Template = ({
+  type,
+  heading,
+  content,
+  link,
+  button,
+  primaryButton,
+}) => `
+  <div role="alert" class="${type}">
+    <h3>${heading}</h3>
+    <p>
+      ${content}
+      ${link ? `<a href="#">${link}</a>.` : ''}
+    </p>
+    ${button ? `<button>${button}</button>` : ''}
+    ${primaryButton ? `<button class="primary">${primaryButton}</button>` : ''}
+  </div>
+`
+
+<Meta
+  title="Components/Alert"
+  argTypes={{
+    type: {
+      control: 'select',
+      options: ['success', 'warning', 'danger', 'info'],
+    },
+    heading: { control: 'text' },
+    content: { control: 'text' },
+    link: { control: 'text' },
+    button: { control: 'text' },
+    primaryButton: { control: 'text' },
+  }}
+/>
+
+# Alerts
+
+Hello
+
+<Canvas>
+  <Story
+    name="success"
+    args={{
+      type: 'success',
+      heading: 'Success',
+      content: 'Text',
+      link: 'Foo bar',
+      button: '',
+      primaryButton: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="warning"
+    args={{
+      type: 'warning',
+      heading: 'Warning',
+      content: 'Text',
+      link: 'Foo bar',
+      button: '',
+      primaryButton: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="danger"
+    args={{
+      type: 'danger',
+      heading: 'Danger',
+      content: 'Text',
+      link: 'Foo bar',
+      button: '',
+      primaryButton: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="info"
+    args={{
+      type: 'info',
+      heading: 'Info',
+      content: 'Text',
+      link: 'Foo bar',
+      button: '',
+      primaryButton: '',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components/Forms/Overview" />
+
+# Input
+
+Lorem ipsum input fields
+
+## Default input
+
+<Canvas>
+  <form>
+    <label for="input">Input label</label>
+    <input id="input" type="text" />
+  </form>
+</Canvas>
+
+## Orientation
+
+### Horizontal
+<Canvas>
+  <form class="horizontal">
+    <label for="horizontalInput">Input label</label>
+    <input type="text" id="horizontalInput" placeholder="Regular input"/>
+    <button>Medium</button>
+    <label class="form-control">One
+      <input type="checkbox"/>
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-text">Static text</span>
+  </form>
+</Canvas>
+
+## Sizes
+
+<Canvas>
+  <form class="horizontal">
+    <label for="horizontalSmInput">Input label</label>
+    <input type="text" id="horizontalSmInput" class="size-sm" placeholder="Small input"/>
+    <button class="size-sm">Small</button>
+    <span class="form-text size-sm">Static text</span>
+  </form>
+</Canvas>
+
+<Canvas>
+  <form class="horizontal">
+    <label for="horizontalMdInput">Input label</label>
+    <input type="text" id="horizontalMdInput" placeholder="Regular input"/>
+    <button>Medium</button>
+    <label class="form-control">One
+      <input type="checkbox"/>
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-text">Static text</span>
+  </form>
+</Canvas>
+
+<Canvas>
+  <form class="horizontal">
+    <label for="horizontalLgInput">Input label</label>
+    <input type="text" id="horizontalLgInput" class="size-lg" placeholder="Large input"/>
+    <button class="size-lg">Large</button>
+    <span class="form-text size-lg">Static text</span>
+  </form>
+</Canvas>

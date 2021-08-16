@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+export const Template = ({ type, variant, text }) => `
+  <button type="${type}" class="${variant}">${text}</button>
+`
+
+<Meta
+  title="Components/Forms/Button"
+  argTypes={{
+    type: {
+      control: 'select',
+      options: ['', 'button', 'submit', 'reset'],
+    },
+    variant: {
+      control: 'select',
+      options: ['', 'primary', 'secondary', 'ghost'],
+    },
+    text: { control: 'text' },
+  }}
+/>
+
+# Buttons
+
+Lorem ipsum buttons
+
+<Story
+  name="Button"
+  args={{
+    text: 'Click me!',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+---
+
+## Types
+
+Preferably use type to describe the function of a button. Use variant only when necessary.
+
+<Canvas>
+  <button type="button">Button type</button>
+  <button type="submit">Submit type</button>
+  <button type="reset">Reset type</button>
+</Canvas>
+
+## Variants
+
+Styling can also be achieved by class
+
+<Canvas>
+  <button class="primary">Primary button</button>
+  <button class="secondary">Secondary button</button>
+  <button class="ghost">Ghost button</button>
+</Canvas>
+
+## Special buttons
+
+### Close button
+
+<Canvas>
+  <button class="close">
+    <span class="sr-only">Close</span>
+  </button>
+</Canvas>
