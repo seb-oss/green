@@ -146,7 +146,8 @@
             "port": 4100,
             "config": {
               "configFolder": "libs/angular/.storybook"
-            }
+            },
+            "staticDir": ["dist/libs/chlorophyll"]
           },
           "configurations": {
             "ci": {
@@ -243,7 +244,8 @@
             "port": 4200,
             "config": {
               "configFolder": "libs/react/.storybook"
-            }
+            },
+            "staticDir": ["dist/libs/chlorophyll"]
           },
           "configurations": {
             "ci": {

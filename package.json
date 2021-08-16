@@ -12,7 +12,7 @@
     "lint": "nx workspace-lint && nx lint",
     "lint:all": "nx run-many --target=lint --all",
     "e2e": "nx e2e",
-    "storybook": "nx storybook",
+    "storybook": "nx build chlorophyll && nx storybook",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
