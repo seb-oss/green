@@ -10,6 +10,7 @@ export interface InputProps {
 export interface TextInputProps<T> extends InputProps {
   type?: 'text' | 'email' | 'number'
   value?: T
+  info?: string
   onChangeText?: (text?: T) => unknown
 }
 export interface NumberInputProps extends TextInputProps<number> {

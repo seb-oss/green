@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, VFC } from 'react'
+import { InputHTMLAttributes } from 'react'
 import useInput from './useInput'
 import { CheckboxProps, InputListener, TextInputProps } from './types'
 
@@ -7,35 +7,41 @@ type Renderer = <T>(
   props: InputHTMLAttributes<HTMLInputElement>,
   evaluator: (target: HTMLInputElement) => T | undefined,
   label?: string,
+  info?: string,
   listener?: InputListener<T>
 ) => JSX.Element
 
-const RenderInput: Renderer = (type, props, evaluator, label, listener) => {
+const RenderInput: Renderer = (type, props, evaluator, label, info, listener) => {
   const { value, ...inputProps } = useInput(props, evaluator, listener)
+  const propsWithDescription = info ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` } : inputProps
   return (
-    <>
+    <div className="form-field">
       {label && <label htmlFor={inputProps.id}>{label}</label>}
-      <input type={type} value={value} {...inputProps} />
-    </>
+      {info && <span className="form-info" id="{inputProps.id}_info">{info}</span>}
+      <input type={type} value={value} {...propsWithDescription} />
+    </div>
   )
 }
 
 export const TextInput = ({
   label,
+  info,
   onChangeText,
   ...props
 }: TextInputProps<string>) =>
-  RenderInput<string>('text', props, (e) => e.value, label, onChangeText)
+  RenderInput<string>('text', props, (e) => e.value, label, info, onChangeText)
 
 export const EmailInput = ({
   label,
+  info,
   onChangeText,
   ...props
 }: TextInputProps<string>) =>
-  RenderInput<string>('email', props, (e) => e.value, label, onChangeText)
+  RenderInput<string>('email', props, (e) => e.value, label, info, onChangeText)
 
 export const NumberInput = ({
   label,
+  info,
   onChangeText,
   ...props
 }: TextInputProps<number>) =>
@@ -44,7 +50,8 @@ export const NumberInput = ({
     props,
     (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
     label,
-    onChangeText
+    info,
+    onChangeText,
   )
 
 export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
