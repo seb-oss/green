@@ -120,6 +120,7 @@
   "resolutions": {
     "browserslist": "^4.16.7",
     "glob-parent": "^6.0.1",
+    "tar": "^6.1.8",
     "trim": "^1.0.1"
   }
 }
