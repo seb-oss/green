@@ -1,7 +1,6 @@
-import { FC, ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { ButtonVariant } from '@sebgroup/extract'
-import Button from './button'
-import { ButtonProps } from './button'
+import { Button, ButtonProps } from './button'
 import { Group } from '../layout'
 
 interface ButtonGroupProps {
@@ -10,7 +9,7 @@ interface ButtonGroupProps {
   variant?: ButtonVariant
 }
 type Props = ButtonProps & JSX.IntrinsicAttributes
-export const ButtonGroup: FC<ButtonGroupProps> = ({ children, selectedIndex, variant }) => {
+export const ButtonGroup = ({ children, selectedIndex, variant }: ButtonGroupProps) => {
   const [selected, setSelected] = useState(selectedIndex)
   const [buttons, setButtons] = useState<Props[]>([])
 
