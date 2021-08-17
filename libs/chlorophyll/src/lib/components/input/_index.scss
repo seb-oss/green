@@ -27,7 +27,7 @@ form:not(.horizontal) >,
 .form:not(.horizontal) > {
   * {
     //display: flex !important;
-    margin-bottom: 1rem;
+    //@include common.margin-bottom(4);
   }
 
   .form-control,
@@ -43,24 +43,50 @@ form:not(.horizontal) >,
   }
 }
 
+.horizontal {
+  display: flex;
+}
+
+.horizontal .form-field ~ {
+  button,
+  .form-control,
+  .form-text {
+    margin-bottom: auto;
+    margin-top: 1.625rem;
+  }
+}
+
+.horizontal.was-validated .form-field label + .form-info {
+  opacity: 0;
+}
+
+.horizontal .form-field label + .form-info {
+  order: 1;
+}
+
 .form-text {
   //@include common.padding-horizontal(5);
   @include common.padding-vertical(4);
+  border: solid transparent 1px; // correct vertical alignment
   display: flex;
   font: inherit;
 }
 
 // field
 .form-field {
+  @include common.margin-bottom(6);
   display: flex;
   flex-direction: column;
   position: relative;
   width: fit-content;
 }
 
+.form-field > input {
+  @include common.margin-bottom(3);
+}
+
 // label
-form label:not(.form-control),
-.form label:not(.form-control) {
+.form-field label:not(.form-control) {
   @include common.font-weight('medium');
   @include common.margin-bottom(3, true);
   display: block !important;
