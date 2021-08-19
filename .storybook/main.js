@@ -3,7 +3,6 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@whitespace/storybook-addon-html",
     "storybook-dark-mode",
   ],
   // uncomment the property below if you want to apply some webpack config globally
