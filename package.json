@@ -87,7 +87,6 @@
     "@types/testing-library__jest-dom": "^5.14.1",
     "@typescript-eslint/eslint-plugin": "~4.28.3",
     "@typescript-eslint/parser": "~4.28.3",
-    "@whitespace/storybook-addon-html": "^5.0.0",
     "babel-jest": "27.0.6",
     "babel-loader": "8.1.0",
     "babel-plugin-polyfill-corejs2": "^0.2.2",
