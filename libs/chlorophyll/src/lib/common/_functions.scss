@@ -126,8 +126,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     unit($size) ==
     'px' or
     unit($size) ==
-    ''
-  {
+    '' {
     // Check if a flexible unit
     @if unit($size) == 'em' or unit($size) == 'rem' {
       // Need to convert to a pixel value. Let's not overcomplicate it with possible EM inheritence scale factors

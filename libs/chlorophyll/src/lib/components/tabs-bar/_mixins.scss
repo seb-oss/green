@@ -9,12 +9,12 @@
   @include common.font-weight('medium');
   @include common.min-width(10);
 
-  color: map-get(tokens.$theme-colors, 'primary');
-  text-decoration: none;
-  text-align: center;
-
   @include common.add-hover-state;
   @include common.add-focus;
+
+  color: map-get(tokens.$theme-colors, 'primary');
+  text-align: center;
+  text-decoration: none;
 }
 
 @mixin tab--selected {
@@ -27,10 +27,10 @@
   );
   @include common.add-border-color;
 
+  @include common.add-hover-state;
+
   border-bottom: tokens.$border-width transparent;
   color: map-get(tokens.$grey, 1);
-
-  @include common.add-hover-state;
 }
 
 @mixin tabs-bar {

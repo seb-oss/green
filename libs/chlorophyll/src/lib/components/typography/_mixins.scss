@@ -1,12 +1,9 @@
-@use "../../tokens/typography" as tokens;
+@use '../../tokens/typography' as tokens;
 
 @mixin properties($map) {
   @each $name, $value in $map {
     #{$name}: $value;
   }
-}
-
-@mixin header-margin() {
 }
 
 @mixin reset(
@@ -18,11 +15,11 @@
   }
 
   body {
-    font-weight: tokens.font-weight('regular');
 
     font-family: $body-font-family;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    font-weight: tokens.font-weight('regular');
     text-rendering: optimizeLegibility;
   }
 

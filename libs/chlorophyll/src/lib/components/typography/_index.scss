@@ -1,5 +1,5 @@
-@use "mixins";
-@use "../../tokens/typography" as tokens;
+@use 'mixins';
+@use '../../tokens/typography' as tokens;
 
 body {
   @include mixins.reset();

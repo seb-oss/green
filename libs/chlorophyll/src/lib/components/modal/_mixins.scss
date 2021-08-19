@@ -8,20 +8,20 @@ $shadow-level: 2;
 $backdrop-fill: rgba(tokens.$black, 0.5);
 
 @mixin modal {
+  @include common.add-shadow($shadow-level);
   position: absolute;
   width: 100%;
   z-index: tokens.$zindex-modal;
-  @include common.add-shadow($shadow-level);
 }
 
 @mixin modal-header {
-  display: inline-flex;
-  justify-content: space-between;
-  width: 100%;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.add-border('bottom');
   @include common.add-border-color($border-color);
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
 
 
   h3,

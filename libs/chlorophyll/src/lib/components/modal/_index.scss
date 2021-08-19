@@ -8,9 +8,11 @@ div[role='dialog'],
 section[role='dialog'],
 main[role='dialog'],
 aside[role='dialog'] {
-  background: white;
   @include mixins.modal();
-  > .header, > header {
+  background: tokens.$white;
+
+  > .header,
+  > header {
     @include mixins.modal-header;
   }
 
@@ -18,7 +20,8 @@ aside[role='dialog'] {
     @include mixins.modal-body;
   }
 
-  > .footer, > footer {
+  > .footer,
+  > footer {
     @include mixins.modal-footer;
   }
 }
@@ -27,6 +30,7 @@ aside[role='dialog'] {
 div[role='dialog'],
 section[role='dialog'] {
   max-width: 375px;
+
   &.large {
     max-width: 720px;
   }
@@ -34,11 +38,11 @@ section[role='dialog'] {
 
 // aside aka slide out modal
 aside[role='dialog'] {
-  height: 100vh;
-  min-height: -webkit-fill-available;
   display: flex;
   flex-flow: column;
+  height: 100vh;
   max-width: 375px;
+  min-height: fill-available;
   right: 0;
   top: 0;
 
@@ -57,12 +61,12 @@ aside[role='dialog'] {
 
 // fullscreen aka take over modal
 main[role='dialog'] {
-  height: 100vh;
-  width: 100vw;
-  min-height: -webkit-fill-available;
   display: flex;
   flex-flow: column;
+  height: 100vh;
   inset: 0;
+  min-height: fill-available;
+  width: 100vw;
 
   > .body {
     flex: 1 0;

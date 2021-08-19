@@ -9,18 +9,16 @@
 }
 
 @mixin base {
-  align-items: center;
-  display: inline-flex;
-  justify-content: center;
-  padding: 0;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
   @include common.font-weight('medium');
   @include common.add-focus();
-
   @include common.add-hover-active-state();
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
@@ -40,15 +38,15 @@
 
 @mixin ghost($bg: tokens.$background-color) {
   $ghost-color: transparent;
+  @include common.add-hover-active-state(
+    $ghost-color,
+    $ghost-color
+  );
+  border-color: $ghost-color;
+  color: $ghost-color;
   @if (common.light-or-dark($bg) == 'light') {
     $ghost-color: map-get(tokens.$grey, 1);
   } @else {
     $ghost-color: tokens.$white;
   }
-  border-color: $ghost-color;
-  color: $ghost-color;
-  @include common.add-hover-active-state(
-    $ghost-color,
-    $ghost-color
-  );
 }
