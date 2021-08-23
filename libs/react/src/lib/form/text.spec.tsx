@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import Text from './Text'
+import Text from './text'
 
 describe('Text', () => {
   it('renders', () => {
