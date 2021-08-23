@@ -1,0 +1,49 @@
+@use '../../common/spacing';
+@use '../../common/shadow';
+@use '../../tokens/card';
+
+
+// TODO: If the whole card is a link it should be clickable
+// TODO:
+
+.card {
+  @include shadow.add-shadow(card.$shadow-level);
+  background-clip: border-box;
+  // TODO: This background should be based on the foreground color of the theme
+  background-color: card.$background;
+  border: card.$border;
+  border-radius: card.$border-radius;
+  display: flex;
+  flex-direction: card.$layout-direction;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .card-header {
+    @include spacing.margin-top(card.$header-spacing-top);
+    @include spacing.margin-bottom(card.$header-spacing-bottom);
+  }
+
+  // TODO: Picture in card
+  /*figure,
+  img,
+  picture {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }*/
+
+  // TODO: Card footer
+  /*footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }*/
+}
+
+.card-body {
+  @include spacing.padding(card.$padding-spacing);
+}

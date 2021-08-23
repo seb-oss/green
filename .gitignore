@@ -1,25 +1,39 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-node_modules
-dist
+# compiled output
+/dist
+/tmp
+/out-tsc
 
-# YARN
-yarn-debug.log
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
 yarn-error.log
+testem.log
+/typings
 
-# NPM
-.npm
-# also make sure we are not using npm install by excluding the lock file
-package-lock.json
-
-# JEST
-.jest-cache
-.jest-coverage
-coverage
-
-## tsc
-tsconfig.tsbuildinfo
-
-## OS
+# System Files
 .DS_Store
-.idea
-packages/chlorophyll/storybook-static/
+Thumbs.db

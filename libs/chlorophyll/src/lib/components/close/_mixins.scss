@@ -1,0 +1,48 @@
+@use 'sass:math';
+@use '../../tokens';
+@use '../../common';
+
+$close-height: 42px;
+$close-padding: 20px;
+$close-thickness: 4px;
+@mixin close {
+  @include common.add-hover-active-state(
+    map-get(tokens.$grey, 6),
+    $active: map-get(tokens.$grey, 4)
+  );
+  @include common.add-focus();
+  background: transparent;
+  background-color: transparent;
+  border: 0;
+  border-radius: 50%;
+  content: '';
+  cursor: pointer;
+  font-family: inherit;
+  height: $close-height;
+  position: relative;
+  width: $close-height;
+
+  &::after {
+    background: tokens.$black;
+    content: '';
+    display: block;
+    height: $close-height - $close-padding;
+    left: calc(50% - math.div($close-thickness, 2));
+    position: absolute;
+    top: math.div($close-padding, 2);
+    transform: rotateZ(45deg);
+    width: $close-thickness;
+  }
+
+  &::before {
+    background: tokens.$black;
+    content: '';
+    display: block;
+    height: $close-height - $close-padding;
+    left: calc(50% - math.div($close-thickness, 2));
+    position: absolute;
+    top: math.div($close-padding, 2);
+    transform: rotateZ(-45deg);
+    width: $close-thickness;
+  }
+}

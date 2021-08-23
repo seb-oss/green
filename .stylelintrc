@@ -5,10 +5,11 @@
   ],
   "rules": {
     "at-rule-no-unknown": null,
-    "max-nesting-depth": 2,
+    "max-nesting-depth": 4,
+    "selector-max-compound-selectors": 4,
     "scss/at-rule-no-unknown": true,
     "selector-no-qualifying-type": [true, {
-      "ignore": ["attribute"]
+      "ignore": ["attribute", "class"]
     }
     ]
   }

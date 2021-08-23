@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Card from './card'
+import Button from '../form/button'
+
+export const Template = ({ children, ...props }) => (
+  <Card {...props}>{children}</Card>
+)
+
+<Meta title="Components/Card" component={Card} />
+
+# Cards
+
+<Card>Plain card</Card>
+
+<Card headline="Card with headline">Here is some content</Card>
+
+<Card
+  headline="Card with headline and buttons"
+  buttons={[
+    <Button>Button</Button>,
+    <Button variant="primary">Primary</Button>,
+  ]}
+>
+  Here is some content
+</Card>
+
+<Canvas>
+  <Story
+    name="Card"
+    args={{ headline: 'Card headline', children: 'Card content' }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
