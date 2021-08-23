@@ -57,6 +57,7 @@ button,
 textarea,
 select {
   font: inherit;
+  appearance: none; /* remove shadow from iOS */
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
