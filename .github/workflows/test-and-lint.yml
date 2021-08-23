@@ -16,9 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - run: git fetch --no-tags --prune --depth=5 origin main
 
       - name: Use Node.js
         uses: actions/setup-node@v2
@@ -41,9 +39,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Lint affected libraries
-        # - run: yarn affected:lint TODO: enable once merged to main
         run: yarn affected:lint
 
       - name: Test affected libraries
-        # - run: yarn affected:test TODO: enable once merged to main
         run: yarn affected:test
