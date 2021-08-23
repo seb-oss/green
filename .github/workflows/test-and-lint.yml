@@ -35,11 +35,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Fetch main branch
+        run: git fetch origin main
+
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Lint affected libraries
-        run: yarn affected:lint
+        run: yarn affected:lint -- --base=$BEFORE_SHA
 
       - name: Test affected libraries
-        run: yarn affected:test
+        run: yarn affected:test -- --base=$BEFORE_SHA
