@@ -15,6 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v2
@@ -37,9 +39,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Lint affected libraries
-        # - run: yarn affected:lint TODO: enable once merged to main
-        run: yarn lint:all
+        run: yarn affected:lint --base=origin/main
 
       - name: Test affected libraries
-        # - run: yarn affected:test TODO: enable once merged to main
-        run: yarn test:all
+        run: yarn affected:test --base=origin/main
