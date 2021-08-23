@@ -9,9 +9,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-env:
-  BEFORE_SHA: ${{ github.event.before }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,7 +42,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Lint affected libraries
-        run: yarn affected:lint --base=$BEFORE_SHA
+        run: yarn affected:lint --base=origin/main
 
       - name: Test affected libraries
-        run: yarn affected:test --base=$BEFORE_SHA
+        run: yarn affected:test --base=origin/main
