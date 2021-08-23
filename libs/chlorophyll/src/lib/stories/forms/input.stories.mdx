@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+export const Template = ({ type, size, label }) => `
+  <form>
+    <label htmlFor="my-input">${label}</label>
+    <input id="my-input" type="${type}" class="${size}" />
+  </form>
+`
+
+<Meta
+  title="Components/Forms/Input"
+  argTypes={{
+    type: {
+      control: 'select',
+      options: [
+        '',
+        'text',
+        'password',
+        'number',
+        'email',
+        'tel',
+        'search',
+        'url',
+      ],
+    },
+    size: {
+      control: 'select',
+      options: ['none', 'size-sm', 'size-lg'],
+    },
+    label: { control: 'text' },
+  }}
+/>
+
+# Input
+
+<Canvas>
+  <Story name="Input" args={{ label: 'Default input' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -1,0 +1,81 @@
+@use '../tokens';
+@use '../common/functions';
+@mixin add-focus($suffix: 'visible') {
+  @if not $suffix {
+    $suffix: '';
+  } @else {
+    $suffix: '-' + $suffix;
+  }
+  transition: box-shadow tokens.$transition-time;
+
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  &:focus#{$suffix} {
+    border-color: map-get(tokens.$blue, 0);
+    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
+    outline-color: transparent;
+    outline-style: solid;
+  }
+}
+
+@mixin add-focus($suffix: 'visible', $target: '') {
+  @if not $suffix {
+    $suffix: '';
+  } @else {
+    $suffix: '-' + $suffix;
+  }
+
+  @if not $target == '' {
+    #{$target} {
+      transition: box-shadow tokens.$transition-time;
+    }
+  } @else {
+    transition: box-shadow tokens.$transition-time;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  &:focus#{$suffix} #{$target} {
+    border-color: map-get(tokens.$blue, 0);
+    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
+    outline-color: transparent;
+    outline-style: solid;
+  }
+}
+
+@mixin add-hover-state($color: map-get(tokens.$blue, 2), $target: '') {
+  @if not $target == '' {
+    #{$target} {
+      transition: all tokens.$transition-time; // TODO: append transition rule...
+    }
+  } @else {
+    transition: all tokens.$transition-time; // TODO: append transition rule...
+  }
+
+  &:hover #{$target} {
+    @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
+    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+  }
+}
+
+@mixin add-active-state($color: map-get(tokens.$blue, 0)) {
+  &:active,
+  &.active,
+  &.active:hover,
+  &:active:hover {
+    background: $color;
+    border-color: $color;
+  }
+}
+
+@mixin add-hover-active-state(
+  $hover: map-get(tokens.$blue, 2),
+  $active: map-get(tokens.$blue, 0)
+) {
+  @include add-hover-state($hover);
+  @include add-active-state($active);
+}

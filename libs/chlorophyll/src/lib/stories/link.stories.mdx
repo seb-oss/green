@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = ({ text, className }) => `
+  <a href="#" class="${className}">${text}</a>
+`
+
+<Meta
+  title="Components/Links"
+  argTypes={{
+    text: { control: 'text' },
+    className: {
+      control: 'select',
+      options: [
+        '',
+        'button',
+        'button primary',
+        'button secondary',
+        'button ghost',
+      ],
+    },
+  }}
+/>
+
+# Links
+
+Lorem ipsum links
+
+<Canvas>
+  <a href="#">Normal link</a>
+  <a href="#" class="button">
+    Button link
+  </a>
+  <a href="#" class="button primary">
+    Primary button link
+  </a>
+  <a href="#" class="button secondary">
+    Secondary button link
+  </a>
+  <a href="#" class="button ghost">
+    Ghost button link
+  </a>
+</Canvas>
+
+<Story
+  name="Link"
+  args={{
+    text: 'Go somewhere!',
+  }}
+>
+  {Template.bind({})}
+</Story>

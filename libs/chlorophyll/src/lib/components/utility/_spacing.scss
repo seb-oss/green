@@ -1,0 +1,47 @@
+@use '../../tokens';
+@use '../../common';
+
+@each $name, $value in tokens.$spacing {
+  .p-#{$name} {
+    @include common.padding($name, true);
+  }
+  .px-#{$name} {
+    @include common.padding-horizontal($name, true);
+  }
+  .py-#{$name} {
+    @include common.padding-vertical($name, true);
+  }
+  .ps-#{$name} {
+    @include common.padding-start($name, true);
+  }
+  .pe-#{$name} {
+    @include common.padding-end($name, true);
+  }
+  .pt-#{$name} {
+    @include common.padding-top($name, true);
+  }
+  .pb-#{$name} {
+    @include common.padding-bottom($name, true);
+  }
+  .m-#{$name} {
+    @include common.margin($name !important);
+  }
+  .mx-#{$name} {
+    @include common.margin-horizontal($name, true);
+  }
+  .my-#{$name} {
+    @include common.margin-vertical($name, true);
+  }
+  .ms-#{$name} {
+    @include common.margin-start($name, true);
+  }
+  .me-#{$name} {
+    @include common.margin-end($name, true);
+  }
+  .mt-#{$name} {
+    @include common.margin-top($name, true);
+  }
+  .mb-#{$name} {
+    @include common.margin-bottom($name, true);
+  }
+}

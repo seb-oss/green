@@ -1,0 +1,11 @@
+$variable-prefix: sg-;
+$enable-grid-classes: true;
+$include-column-box-sizing: true;
+@forward 'color';
+@forward 'depth';
+@forward 'animation';
+@forward 'spacing';
+@forward 'typography';
+@forward 'grid';
+@forward 'icon';
+@forward 'border' as border-*;

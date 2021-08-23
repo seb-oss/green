@@ -1,0 +1,49 @@
+@use 'reset';
+@use '../common';
+@use 'button';
+@use 'close';
+@use 'card';
+@use 'grid';
+@use 'alert';
+@use 'modal';
+@use 'input';
+@use 'group';
+@use 'link';
+@use 'tabs-bar';
+@use 'typography';
+@use 'utility/spacing';
+@use 'utility/colors';
+@use 'utility/shadows';
+
+
+
+// TODO: move and refactor
+
+.size-sm:not(.group),
+.group.size-sm > *:not(.form-text) {
+  @include common.padding-horizontal(3, true);
+  @include common.padding-vertical(2, true);
+}
+
+.size-sm:not(.group),
+.group.size-sm > * {
+  @include common.font-size('s');
+}
+
+.size-lg:not(.group),
+.group.size-lg > *:not(.form-text) {
+  @include common.padding-horizontal(6, true);
+  @include common.padding-vertical(5, true);
+}
+
+.size-lg:not(.group),
+.group.size-lg > * {
+  @include common.font-size('l');
+}
+
+.sr-only {
+  display: none;
+  @media speech {
+    display: block;
+  }
+}

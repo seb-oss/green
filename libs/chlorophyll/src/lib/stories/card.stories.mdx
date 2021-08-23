@@ -1,0 +1,70 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = ({ headline, body, buttonText1, buttonText2 }) => `
+  <section class="card">
+    <div class="card-body">
+      <h2>${headline}</h2>
+      <p>${body}</p>
+      ${
+        buttonText1 || buttonText2
+          ? `
+      <footer>
+        ${buttonText1 ? `<button>${buttonText1}</button>` : ''}
+        ${
+          buttonText2
+            ? `<a class="button primary" href="#">${buttonText2}</a>`
+            : ''
+        }
+      </footer>
+      `
+          : ''
+      } 
+    </div>
+  </section>
+`
+
+<Meta
+  title="Components/Card"
+  argTypes={{
+    headline: { control: 'text' },
+    body: { control: 'text' },
+    buttonText1: { control: 'text' },
+    buttonText2: { control: 'text' },
+  }}
+/>
+
+# Cards
+
+A card is container for short content, related pieces of information, and action on a specific content.
+
+## Short description
+
+A card's purpose is to serve as a clear entry point to more detailed content located on another internal or external page or application. To guide and make it easy for the user to scan and find relevant information, the content within the card should be clear, concise and easy to understand. Cards could also contain content such as forms, graphs, images, buttons, icons and text links.
+
+## When and how to use it
+
+When serving related content available on another section, page or articles, cards could be a good choice to use. Cards could also be an entry point for starting user flows such as onboarding, wizards, input, signing etc.
+
+## Behaviour
+
+Cards is an element without a determined place in the interface. Where is decided on context, purpose and need. There could also be multiple cards within the same screen with different places (hierarchy) depending on which device it is displayed on.
+
+Cards might be expanded to display additional content inside the card.
+
+The whole card could be linked, otherwise there could be text links or buttons within the card that sends the user to the related page/sections/application.
+
+To add contrast between its background and the surface it appears on, the cards have a smooth drop shadow.
+
+<Canvas>
+  <Story
+    name="success"
+    args={{
+      headline: 'Card headline',
+      body: 'Card body',
+      buttonText1: 'Button 1',
+      buttonText2: 'Button 2',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

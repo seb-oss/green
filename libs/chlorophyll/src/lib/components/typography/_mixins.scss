@@ -1,0 +1,29 @@
+@use '../../tokens/typography' as tokens;
+
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+@mixin reset(
+  $base-font-size: tokens.$base-font-size,
+  $body-font-family: tokens.font-family('sans')
+) {
+  html {
+    font-size: $base-font-size;
+  }
+
+  body {
+
+    font-family: $body-font-family;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-weight: tokens.font-weight('regular');
+    text-rendering: optimizeLegibility;
+  }
+
+  strong {
+    font-weight: tokens.font-weight('semibold');
+  }
+}
