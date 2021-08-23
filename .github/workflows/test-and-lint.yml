@@ -38,8 +38,8 @@ jobs:
 
       - name: Lint affected libraries
         # - run: yarn affected:lint TODO: enable once merged to main
-        run: yarn run nx run-many --target=lint --all
+        run: yarn lint:all
 
       - name: Test affected libraries
         # - run: yarn affected:test TODO: enable once merged to main
-        run: yarn run nx run-many --target=test --all
+        run: yarn test:all
