@@ -34,6 +34,15 @@ export const Template = ({ type, size, label }) => `
 # Input
 
 <Canvas>
+  <div class="form-field">
+    <label for="inputInvalid">Input label</label>
+    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <input id="inputInvalid" type="text" />
+    <span class="form-info">Neutral</span>
+  </div>
+</Canvas>
+
+<Canvas>
   <Story name="Input" args={{ label: 'Default input' }}>
     {Template.bind({})}
   </Story>
