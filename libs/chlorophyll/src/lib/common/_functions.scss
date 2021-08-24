@@ -373,7 +373,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 // @param {String} $search - Substring to replace
 // @param {String} $replace ('') - New value
 // @return {String} - Updated string
-@function str-replace($string, $search, $replace: "") {
+@function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
 
   @if $index {

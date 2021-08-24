@@ -22,12 +22,12 @@ ul.check {
 }
 
 .table-list-caption {
-  display: flex;
-  background: map.get(tokens.$grey, 7);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(3);
   @include common.font-size('s');
   @include common.font-weight('medium');
+  background: map.get(tokens.$grey, 7);
+  display: flex;
 }
 
 dl {
