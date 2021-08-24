@@ -1,0 +1,35 @@
+@use '../../tokens';
+@use '../../common';
+@use 'mixins';
+@use 'sass:map';
+@forward 'mixins';
+
+ul {
+  @include mixins.base-list();
+}
+
+ul:not(.check,.table) {
+  @include mixins.bullet-list();
+}
+
+ol {
+  @include mixins.base-list();
+  @include mixins.ordered-list();
+}
+
+ul.check {
+  @include mixins.check-list();
+}
+
+.table-list-caption {
+  display: flex;
+  background: map.get(tokens.$grey, 7);
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(3);
+  @include common.font-size('s');
+  @include common.font-weight('medium');
+}
+
+dl {
+  @include mixins.table-list();
+}
