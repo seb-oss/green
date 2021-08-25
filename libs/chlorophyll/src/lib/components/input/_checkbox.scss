@@ -1,5 +1,6 @@
 @use '../../tokens';
 @use '../../common';
+@use 'sass:map';
 
 /* Tokens todo: move/refactor */
 $background: tokens.$white;
@@ -10,6 +11,7 @@ $checkmark-color: tokens.$white;
 /* Style for label */
 .form-control {
   @include common.padding-vertical(4);
+  @include common.padding-end(4);
   @include common.add-hover-state(map-get(tokens.$blue, 2), 'input[type=checkbox] ~ span');
   align-items: center;
   cursor: pointer;
@@ -19,6 +21,7 @@ $checkmark-color: tokens.$white;
   justify-content: flex-end;
   position: relative;
   user-select: none;
+  max-width: fit-content;
 }
 
 /* Hide the browser's default checkbox */
