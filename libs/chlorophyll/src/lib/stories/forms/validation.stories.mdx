@@ -107,7 +107,7 @@ Using `.was-validated`, form inputs can either be marked as valid or invalid dep
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
       <input id="inputValid" type="text" required/>
-      <span class="form-info">Invalid</span>
+      <span class="form-info">Error</span>
     </div>
   </form>
 </Canvas>
@@ -132,7 +132,49 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
       <label for="inputInvalid">Input label</label>
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="inputInvalid" type="text" class="is-invalid"/>
-      <span class="form-info">Invalid</span>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
+</Canvas>
+
+## Group and form control validation
+
+<Canvas>
+  <form>
+    <div class="form-field">
+      <label for="inputValid">Input group label</label>
+      <span class="form-info">Lorem ipsum group description</span>
+      <div class="group is-invalid">
+        <input id="inputValid1" type="text" required/>
+        <input id="inputValid2" type="text" required/>
+        <button type="button">Button</button>
+      </div>
+      <span class="form-info">Error</span>
+    </div>
+    <div class="form-field">
+      <label for="inputValid">Input group label</label>
+      <span class="form-info">Lorem ipsum group description</span>
+      <div class="group group-border is-invalid">
+        <input id="inputValid1" type="text" required/>
+        <input id="inputValid2" type="text" required/>
+        <button type="button">Button</button>
+      </div>
+      <span class="form-info">Error</span>
+    </div>
+    <div class="form-field">
+      <fieldset aria-describedby="checkboxGroupHelp1" class="is-invalid">
+        <legend>Invalid checkbox group</legend>
+        <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required class="is-invalid" type="checkbox"/>
+          <span></span>
+        </label>
+        <label class="form-control">Two
+          <input required class="is-invalid" type="checkbox" required/>
+          <span></span>
+        </label>
+      </fieldset>
+      <span class="form-info">Error</span>
     </div>
   </form>
 </Canvas>
