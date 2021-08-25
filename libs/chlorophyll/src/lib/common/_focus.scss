@@ -73,7 +73,7 @@
   @if($fadeActiveHover) {
     &.active:hover,
     &:active:hover {
-      opacity: .9;
+      opacity: 0.9;
     }
   }
 }
