@@ -38,15 +38,15 @@
 
 @mixin ghost($bg: tokens.$background-color) {
   $ghost-color: transparent;
+  @if (common.light-or-dark($bg) == 'light') {
+    $ghost-color: map-get(tokens.$grey, 1);
+  } @else {
+    $ghost-color: tokens.$white;
+  }
   @include common.add-hover-active-state(
     $ghost-color,
     $ghost-color
   );
   border-color: $ghost-color;
   color: $ghost-color;
-  @if (common.light-or-dark($bg) == 'light') {
-    $ghost-color: map-get(tokens.$grey, 1);
-  } @else {
-    $ghost-color: tokens.$white;
-  }
 }
