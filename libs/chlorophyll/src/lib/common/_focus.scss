@@ -62,20 +62,27 @@
   }
 }
 
-@mixin add-active-state($color: map-get(tokens.$blue, 0)) {
+@mixin add-active-state($color: map-get(tokens.$blue, 0), $fadeActiveHover: false) {
   &:active,
   &.active,
   &.active:hover,
   &:active:hover {
-    background: $color;
-    border-color: $color;
+    @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
+    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+  }
+  @if($fadeActiveHover) {
+    &.active:hover,
+    &:active:hover {
+      opacity: .9;
+    }
   }
 }
 
 @mixin add-hover-active-state(
   $hover: map-get(tokens.$blue, 2),
-  $active: map-get(tokens.$blue, 0)
+  $active: map-get(tokens.$blue, 0),
+  $fadeActiveHover: false
 ) {
   @include add-hover-state($hover);
-  @include add-active-state($active);
+  @include add-active-state($active, $fadeActiveHover);
 }
