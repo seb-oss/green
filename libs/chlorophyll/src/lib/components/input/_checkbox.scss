@@ -19,9 +19,9 @@ $checkmark-color: tokens.$white;
   flex-direction: row-reverse;
   font: inherit;
   justify-content: flex-end;
+  max-width: fit-content;
   position: relative;
   user-select: none;
-  max-width: fit-content;
 }
 
 /* Hide the browser's default checkbox */
@@ -58,20 +58,24 @@ $checkmark-color: tokens.$white;
 }
 
 /* Valid state */
-.was-validated .form-control input[type=checkbox]:not(.is-invalid):valid, .form-control input[type=checkbox].is-valid {
+.was-validated .form-control input[type=checkbox]:not(.is-invalid):valid,
+.form-control input[type=checkbox].is-valid {
   ~ span {
     @include common.add-border-color(map.get(tokens.$intent-colors, 'success'));
   }
+
   &:checked ~ span {
     background-color: map.get(tokens.$intent-colors, 'success');
   }
 }
 
 /* Invalid state */
-.was-validated .form-control input[type=checkbox]:not(.is-valid):invalid, .form-control input[type=checkbox].is-invalid {
+.was-validated .form-control input[type=checkbox]:not(.is-valid):invalid,
+.form-control input[type=checkbox].is-invalid {
   ~ span {
     @include common.add-border-color(map.get(tokens.$intent-colors, 'danger'));
   }
+
   &:checked ~ span {
     background-color: map.get(tokens.$intent-colors, 'danger');
   }
