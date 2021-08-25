@@ -1,0 +1,50 @@
+@use '../../tokens';
+@use '../../common';
+@use 'sass:map';
+//@use 'mixins';
+//@forward 'mixins';
+
+.border {
+  @include common.add-border();
+}
+
+.border-top {
+  @include common.add-border('top');
+}
+
+.border-bottom {
+  @include common.add-border('bottom');
+}
+
+.border-left {
+  @include common.add-border('left');
+}
+
+.border-right {
+  @include common.add-border('right');
+}
+
+.border-radius {
+  @include common.add-border-radius();
+}
+
+@each $key, $value in tokens.$intent-colors {
+  .border-#{$key} {
+    @include common.add-border-color($value);
+  }
+}
+
+
+/* Validation */
+.border {
+  &.is-invalid {
+    @include common.add-border-color(map.get(tokens.$intent-colors, 'danger'));
+    @include common.add-border-radius();
+
+  }
+
+  &.is-valid {
+    @include common.add-border-color(map.get(tokens.$intent-colors, 'success'));
+    @include common.add-border-radius();
+  }
+}

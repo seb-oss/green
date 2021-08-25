@@ -23,19 +23,6 @@ input[type='week'] {
   @include mixins.text-input();
 }
 
-form:not(.horizontal) >,
-.form:not(.horizontal) > {
-  * {
-    //display: flex !important;
-    //@include common.margin-bottom(4);
-  }
-
-  .form-control,
-  .form-text {
-    @include common.padding-vertical(0);
-  }
-}
-
 .horizontal > {
   *:not(label:not(.form-control)) {
     @include common.margin-end(4);
@@ -54,6 +41,10 @@ form:not(.horizontal) >,
     margin-bottom: auto;
     margin-top: 1.625rem;
   }
+}
+
+.horizontal .form-control {
+  display: inline-flex;
 }
 
 .horizontal.was-validated .form-field label + .form-info {
