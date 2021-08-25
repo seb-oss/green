@@ -2893,7 +2893,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-essentials@~6.3.0":
+"@storybook/addon-essentials@~6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-6.3.7.tgz#5af605ab705e938c5b25a7e19daa26e5924fd4e4"
   integrity sha512-ZWAW3qMFrrpfSekmCZibp/ivnohFLJdJweiIA0CLnuCNuuK9kQdpFahWdvyBy5NlCj3UJwB7epTZYZyHqYW7UQ==
@@ -2992,7 +2992,7 @@
     global "^4.4.0"
     regenerator-runtime "^0.13.7"
 
-"@storybook/angular@~6.3.0":
+"@storybook/angular@~6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/angular/-/angular-6.3.7.tgz#1057171897b350f08deca13a229adfbcf9a52739"
   integrity sha512-BTtZLlmmsIEpExVIvJ7u9aPnUI7uuBlQpiN5t6xKpiP/Ba2k74vinW0FnJq7KX0Z0bxM4A8fr2B/KJHjxHnfxg==
@@ -3126,7 +3126,7 @@
     webpack-hot-middleware "^2.25.0"
     webpack-virtual-modules "^0.2.2"
 
-"@storybook/builder-webpack5@~6.3.0":
+"@storybook/builder-webpack5@~6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-6.3.7.tgz#7db89160e91fe988b724340e6999ff453799744d"
   integrity sha512-nenxN9uLnZs4mLjK5RsaduVau8Sb6EO74Sly2xpfTxridRtt3Viw81J1HWr/4vj/FgnN/UONQ9kgstIE6s5MIw==
@@ -3492,7 +3492,7 @@
     webpack-dev-middleware "^3.7.3"
     webpack-virtual-modules "^0.2.2"
 
-"@storybook/manager-webpack5@~6.3.0":
+"@storybook/manager-webpack5@~6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/manager-webpack5/-/manager-webpack5-6.3.7.tgz#2375010625008a3912664f6877bedb75e40fb7f8"
   integrity sha512-ikibiIco9X6r2BpAnumJSGEJCwCwPtH4XsDFKRMM/GkrilNR8k6UXv8EB/eSIGjLF5FG3yHs6AX0YcQQ760xfA==
@@ -3575,7 +3575,7 @@
     react-docgen-typescript "^2.0.0"
     tslib "^2.0.0"
 
-"@storybook/react@~6.3.0":
+"@storybook/react@~6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.3.7.tgz#b15259aeb4cdeef99cc7f09d21db42e3ecd7a01a"
   integrity sha512-4S0iCQIzgi6PdAtV2sYw4uL57yIwbMInNFSux9CxPnVdlxOxCJ+U8IgTxD4tjkTvR4boYSEvEle46ns/bwg5iQ==
@@ -3644,7 +3644,7 @@
     prettier "~2.2.1"
     regenerator-runtime "^0.13.7"
 
-"@storybook/theming@6.3.7":
+"@storybook/theming@6.3.7", "@storybook/theming@^6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.3.7.tgz#6daf9a21b26ed607f3c28a82acd90c0248e76d8b"
   integrity sha512-GXBdw18JJd5jLLcRonAZWvGGdwEXByxF1IFNDSOYCcpHWsMgTk4XoLjceu9MpXET04pVX51LbVPLCvMdggoohg==
