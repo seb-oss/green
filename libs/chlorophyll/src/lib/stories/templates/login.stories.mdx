@@ -23,7 +23,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
               Other
             </a>
           </nav>
-          <div class="row">
+          <div class="row" style={{justifyContent: 'space-between'}}>
             <div class="col-12 col-sm-auto">
               <form autocomplete="off" class="mt-7">
                 <div class="form-field">
@@ -51,9 +51,9 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
                 <button type="submit" class="mt-6 primary">Log in</button>
               </form>
             </div>
-            <div class="col-12 col-sm">
-              <label for="loginHelp">Login using digipass</label>
-              <ol id="loginHelp">
+            <div class="col-12 col-sm" style={{maxWidth: '375px'}}>
+              <h5 class="mt-7 mb-4" for="loginHelp">Login using digipass</h5>
+              <ol aria-describedby="loginHelp">
                 <li>Press the arrow key on the digipass.</li>
                 <li>Enter your four-digit pin code. Appli is shown in the window.</li>
                 <li>Press 2. The number 1 is shown in the window.</li>
