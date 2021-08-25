@@ -57,6 +57,26 @@ $checkmark-color: tokens.$white;
   background-color: $background-active;
 }
 
+/* Valid state */
+.was-validated .form-control input[type=checkbox]:not(.is-invalid):valid, .form-control input[type=checkbox].is-valid {
+  ~ span {
+    @include common.add-border-color(map.get(tokens.$intent-colors, 'success'));
+  }
+  &:checked ~ span {
+    background-color: map.get(tokens.$intent-colors, 'success');
+  }
+}
+
+/* Invalid state */
+.was-validated .form-control input[type=checkbox]:not(.is-valid):invalid, .form-control input[type=checkbox].is-invalid {
+  ~ span {
+    @include common.add-border-color(map.get(tokens.$intent-colors, 'danger'));
+  }
+  &:checked ~ span {
+    background-color: map.get(tokens.$intent-colors, 'danger');
+  }
+}
+
 /* Checkmark */
 .form-control input[type=checkbox] ~ span::after,
 .form-control input[type=checkbox] ~ span::before {

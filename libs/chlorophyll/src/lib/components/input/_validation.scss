@@ -46,8 +46,9 @@ label + .form-info {
   @include common.margin-bottom(3);
 }
 
-input + .form-info {
+input + .form-info, .group + .form-info {
   @include add-feedback-element();
+  position: relative;
 }
 
 
@@ -63,4 +64,44 @@ input + .form-info {
 .was-validated input:not(.is-valid):invalid + .form-info,
 .is-invalid ~ .form-info {
   @include add-feedback(map.get(tokens.$intent-colors, 'danger'));
+}
+
+.group.is-invalid, .group.is-valid {
+  @include common.margin-bottom(3);
+}
+
+/* rules for groups of checkboxes and radio buttons*/
+
+fieldset {
+  border: 0;
+  @include common.padding(0);
+  @include common.margin(0);
+  &.is-valid {
+    box-shadow: 0 0 0 tokens.$border-width map.get(tokens.$intent-colors, 'success');
+  }
+  &.is-invalid {
+    box-shadow: 0 0 0 tokens.$border-width map.get(tokens.$intent-colors, 'danger');
+  }
+}
+
+fieldset.is-valid, fieldset.is-invalid {
+  @include common.add-border-radius();
+  @include common.padding-bottom(2);
+  @include common.padding-horizontal(5);
+  @include common.margin-bottom(4);
+
+  legend {
+    padding-bottom: 2.5rem;
+    margin-bottom: -1.5rem;
+    margin-left: -1rem;
+    /* hide prepended form-info when fieldset/group is valid/invalid */
+    + .form-info {
+      display: none;
+    }
+  }
+}
+legend {
+  @include common.font-weight('medium');
+  @include common.margin-bottom(3);
+  padding: 0;
 }
