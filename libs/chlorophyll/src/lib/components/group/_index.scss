@@ -14,9 +14,10 @@
     position: relative;
   }
 
-  > * + *:not(:last-child) {
+  &:not(.group-border)> * + *:not(:last-child) {
     border-radius: 0 !important;
     margin-left: -(tokens.$border-width);
+    padding-left: calc(1rem + #{tokens.$border-width});
   }
 
   > *:first-child {
@@ -28,9 +29,10 @@
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     margin-left: -(tokens.$border-width);
+    padding-left: calc(1rem + #{tokens.$border-width});
   }
 
-  &.border {
+  &.group-border {
     @include common.add-focus('within');
     @include common.add-border();
     @include common.add-border-color();
@@ -57,6 +59,7 @@
     > button,
     > .button {
       margin: -(tokens.$border-width);
+      padding-left: calc(1rem + #{tokens.$border-width});
     }
 
     .form-text {

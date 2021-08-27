@@ -2,9 +2,17 @@
 
 Green is an opinionated design system for building content and functionality for SEB. It builds on a set of principles and techniques aimed at maximizing code quality, code reuse, consistency and collaboration.
 
+## View
+
+View the components in our [Storybook](https://automatic-pancake-aa6626d9.pages.github.io/latest/chlorophyll)
+
 ## Install
 
+// TODO
+
 ## Use
+
+// TODO
 
 ## Philisophy
 

@@ -8,34 +8,24 @@ button,
 }
 
 // base
-button:not([class]),
-button.size-sm,
-button.size-lg,
-button.secondary,
-button.primary,
-button.ghost,
-button[type='button'],
-input[type='submit'],
-button[type='reset'],
-a.button {
+button,
+.button {
   @include mixins.base;
 }
 
 // secondary
-button:not([class]),
+button:not(.primary,.ghost,.close),
 button.secondary,
-button.size-sm,
-button.size-lg,
 a.button.secondary,
-button[type='button'],
-button[type='reset'] {
+button[type='button']:not(.primary,.ghost,.close),
+button[type='reset']:not(.primary,.ghost,.close) {
   @include mixins.secondary;
 }
 
 // primary
 button.primary,
-button[type='submit'],
-input[type='submit'],
+button[type='submit']:not(.secondary,.ghost,.close),
+input[type='submit']:not(.secondary,.ghost,.close),
 a.button.primary {
   @include mixins.primary;
 }

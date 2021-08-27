@@ -15,7 +15,6 @@
   @include common.add-border();
   @include common.font-weight('medium');
   @include common.add-focus();
-  @include common.add-hover-active-state();
   align-items: center;
   display: inline-flex;
   justify-content: center;
@@ -26,11 +25,14 @@
 }
 
 @mixin secondary {
+  @include common.add-focus();
+  @include common.add-hover-active-state();
   border-color: map-get(tokens.$theme-colors, 'primary');
   color: map-get(tokens.$theme-colors, 'primary');
 }
 
 @mixin primary {
+  @include common.add-hover-active-state();
   background: map-get(tokens.$theme-colors, 'primary');
   border-color: map-get(tokens.$theme-colors, 'primary');
   color: common.most-legible-color(map-get(tokens.$theme-colors, 'primary'));
@@ -38,15 +40,16 @@
 
 @mixin ghost($bg: tokens.$background-color) {
   $ghost-color: transparent;
-  @include common.add-hover-active-state(
-    $ghost-color,
-    $ghost-color
-  );
-  border-color: $ghost-color;
-  color: $ghost-color;
   @if (common.light-or-dark($bg) == 'light') {
     $ghost-color: map-get(tokens.$grey, 1);
   } @else {
     $ghost-color: tokens.$white;
   }
+  @include common.add-hover-active-state(
+    $ghost-color,
+    $ghost-color,
+    true
+  );
+  border-color: $ghost-color;
+  color: $ghost-color;
 }

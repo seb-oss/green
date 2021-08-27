@@ -20,6 +20,7 @@ Group inputs, buttons and other form elements together using <code>.group</code>
   <div class="group">
     <button>Button</button>
     <button>Button</button>
+    <button class="active">Button</button>
   </div>
 </Canvas>
 
@@ -27,33 +28,58 @@ Group inputs, buttons and other form elements together using <code>.group</code>
   <div class="group size-sm">
     <button class="ghost">Button</button>
     <button class="ghost">Button</button>
+    <button class="ghost active">Button</button>
     <button class="ghost">Button</button>
   </div>
 </Canvas>
 
 ## Inputs
 <Canvas>
-  <div class="group">
-    <input type="text" placeholder="Input field"/>
-    <input type="text" placeholder="Input field"/>
-    <input type="text" placeholder="Input field"/>
+  <form>
+    <div class="form-field">
+      <div class="group">
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+      </div>
   </div>
+    <div class="form-field">
+      <div class="group is-invalid">
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+      </div>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
 </Canvas>
 
 ## Group with shared border
 
 <Canvas>
-  <div class="group border">
-    <input type="text" placeholder="Input field"/>
-    <input type="text" placeholder="Input field"/>
-    <input type="text" placeholder="Input field"/>
-  </div>
+  <form>
+    <div class="form-field">
+      <div class="group group-border">
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+      </div>
+    </div>
+    <div class="form-field">
+      <div class="group group-border is-invalid">
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+        <input type="text" placeholder="Input field"/>
+      </div>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
 </Canvas>
 
 ### Static text
 
 <Canvas>
-  <div class="group border">
+  <div class="group group-border">
     <input type="text" placeholder="Some text"/>
     <span class="form-text">Static</span>
   </div>
@@ -62,7 +88,7 @@ Group inputs, buttons and other form elements together using <code>.group</code>
 ### Input and buttons
 
 <Canvas>
-  <div class="group border">
+  <div class="group group-border">
     <input type="text" placeholder="Some text"/>
     <button>Button</button>
     <button class="primary">Button</button>

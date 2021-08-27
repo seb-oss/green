@@ -11,7 +11,7 @@ export const Template = ({ type, variant, text }) => {
   argTypes={{
     type: {
       control: 'select',
-      options: ['', 'button', 'submit', 'reset'],
+      options: ['button', 'submit', 'reset'],
     },
     variant: {
       control: 'select',
@@ -28,6 +28,7 @@ Lorem ipsum buttons
 <Story
   name="Button"
   args={{
+    type: 'button',
     text: 'Click me!',
   }}
 >
@@ -64,4 +65,31 @@ Styling can also be achieved by class
   <button class="close">
     <span class="sr-only">Close</span>
   </button>
+</Canvas>
+
+
+<Canvas>
+  <div>
+    <h3 class="mb-4">Default</h3>
+    <div class="mb-4">
+      <button class="primary">Primary button</button>
+      <button type="button">Secondary button</button>
+      <button class="secondary">Secondary button</button>
+      <button class="ghost">Ghost button</button>
+    </div>
+    <h3 class="mb-4">Active</h3>
+    <div class="mb-4">
+      <button class="primary active">Primary button</button>
+      <button type="button" class="active">Secondary button</button>
+      <button class="secondary active">Secondary button</button>
+      <button class="ghost active">Ghost button</button>
+    </div>
+    <h3 class="mb-4">Disabled</h3>
+    <div class="mb-4">
+      <button class="primary" disabled>Primary button</button>
+      <button type="button" disabled>Secondary button</button>
+      <button class="secondary" disabled>Secondary button</button>
+      <button class="ghost" disabled>Ghost button</button>
+    </div>
+  </div>
 </Canvas>
