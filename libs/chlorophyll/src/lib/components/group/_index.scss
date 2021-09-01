@@ -67,6 +67,7 @@
       @include common.padding-end(5);
     }
   }
+
   &.group-border.disabled {
     @include common.add-disable(false,false, true);
   }

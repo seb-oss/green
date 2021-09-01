@@ -22,6 +22,7 @@
     border-color: desaturate(functions.max-contrast($border-color), 100%);
   }
   cursor: not-allowed;
+
   &::placeholder {
     color: map.get(tokens.$disabled-colors, 'color');
   }

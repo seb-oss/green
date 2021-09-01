@@ -21,7 +21,10 @@ input[type='time'],
 input[type='url'],
 input[type='week'] {
   @include mixins.text-input();
-  &:disabled, &.disabled, &[aria-disabled="true"] {
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
     @include common.add-disable(true, true, true);
   }
 }
