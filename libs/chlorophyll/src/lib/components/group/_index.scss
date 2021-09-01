@@ -40,6 +40,7 @@
 
     > * + *:not(:last-child) {
       border-left-color: transparent;
+      border-radius: 0;
       border-right-color: transparent;
     }
 

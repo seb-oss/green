@@ -1,24 +1,5 @@
 @use '../tokens';
 @use '../common/functions';
-@mixin add-focus($suffix: 'visible') {
-  @if not $suffix {
-    $suffix: '';
-  } @else {
-    $suffix: '-' + $suffix;
-  }
-  transition: box-shadow tokens.$transition-time;
-
-  &:focus:not(:focus-visible) {
-    outline: 0;
-  }
-
-  &:focus#{$suffix} {
-    border-color: map-get(tokens.$blue, 0);
-    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
-    outline-color: transparent;
-    outline-style: solid;
-  }
-}
 
 @mixin add-focus($suffix: 'visible', $target: '') {
   @if not $suffix {
@@ -35,7 +16,16 @@
     transition: box-shadow tokens.$transition-time;
   }
 
+  &:focus {
+    border-color: map-get(tokens.$blue, 0);
+    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
+    outline-color: transparent;
+    outline-style: solid;
+  }
+
   &:focus:not(:focus-visible) {
+    border-color: inherit;
+    box-shadow: none;
     outline: 0;
   }
 
