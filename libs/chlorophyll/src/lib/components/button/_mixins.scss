@@ -37,7 +37,7 @@
     @include common.add-disable(
       false,
       true,
-        true
+      true
     );
   }
 }
@@ -55,7 +55,7 @@
     @include common.add-disable(
       map-get(tokens.$theme-colors, 'primary'),
       common.most-legible-color(map-get(tokens.$theme-colors, 'primary')),
-        map-get(tokens.$theme-colors, 'primary')
+      map-get(tokens.$theme-colors, 'primary')
     );
   }
 }
@@ -82,7 +82,7 @@
     @include common.add-disable(
       false,
       true,
-        true
+      true
     );
   }
 }
