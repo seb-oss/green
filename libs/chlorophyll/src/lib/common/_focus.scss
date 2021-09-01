@@ -24,9 +24,9 @@
   }
 
   &:focus:not(:focus-visible) {
-    outline: 0;
     border-color: inherit;
     box-shadow: none;
+    outline: 0;
   }
 
   &:focus#{$suffix} #{$target} {
