@@ -30,7 +30,7 @@
   }
 
   &:focus#{$suffix} #{$target} {
-    border-color: map-get(tokens.$blue, 0);
+    border-color: map-get(tokens.$blue, 0) !important;
     box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
     outline-color: transparent;
     outline-style: solid;
@@ -46,7 +46,7 @@
     transition: all tokens.$transition-time; // TODO: append transition rule...
   }
 
-  &:hover #{$target} {
+  &:not(:disabled,.disabled):hover #{$target} {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
     border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
   }
