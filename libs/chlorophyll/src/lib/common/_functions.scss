@@ -326,6 +326,14 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
+@function max-contrast($fg, $bg: tokens.$background-color, $max: map-get(tokens.$disabled-colors, 'max')) {
+  @if (color-contrast($fg, $bg) > 3) {
+    @return $max;
+  } @else {
+    @return $fg;
+  }
+}
+
 // Bootstrap functions
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
