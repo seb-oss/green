@@ -24,7 +24,7 @@
   }
 
   &:focus:not(:focus-visible) {
-    border-color: inherit;
+    border-color: initial;
     box-shadow: none;
     outline: 0;
   }
@@ -75,4 +75,12 @@
 ) {
   @include add-hover-state($hover);
   @include add-active-state($active, $fadeActiveHover);
+}
+
+/** add background color, color and border-color to element when it has focus-visible i.e. tab focus */
+@mixin add-active-focus-state($color: map-get(tokens.$blue, 2)) {
+  &:focus-visible {
+    @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
+    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1) !important;
+  }
 }
