@@ -39,6 +39,7 @@
     @include common.add-border-radius();
 
     > * + *:not(:last-child) {
+      border-radius: 0;
       border-left-color: transparent;
       border-right-color: transparent;
     }
