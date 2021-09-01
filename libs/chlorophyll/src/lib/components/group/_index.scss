@@ -67,4 +67,11 @@
       @include common.padding-end(5);
     }
   }
+  &.group-border.disabled {
+    @include common.add-disable(false,false, true);
+  }
+}
+
+.form-field > .group {
+  @include common.margin-bottom(3);
 }
