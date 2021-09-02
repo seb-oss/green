@@ -23,8 +23,11 @@
 
 .size-sm:not(.group),
 .group.size-sm > *:not(.form-text) {
-  @include common.padding-horizontal(3, true);
   @include common.padding-vertical(2, true);
+
+  &:not(.form-text) {
+    @include common.padding-horizontal(3, true)
+  ;};
 }
 
 .size-sm:not(.group),
@@ -34,8 +37,11 @@
 
 .size-lg:not(.group),
 .group.size-lg > *:not(.form-text) {
-  @include common.padding-horizontal(6, true);
   @include common.padding-vertical(5, true);
+
+  &:not(.form-text) {
+    @include common.padding-horizontal(6, true);
+  }
 }
 
 .size-lg:not(.group),

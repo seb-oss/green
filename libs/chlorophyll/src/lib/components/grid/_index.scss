@@ -1,5 +1,7 @@
 @use 'mixins';
-@use '../../tokens' as tokens;
+@use 'sass:map';
+@use '../../common';
+@use '../../tokens';
 // Row
 //
 // Rows contain your columns.
@@ -20,4 +22,22 @@
 
 @if tokens.$enable-grid-classes {
   @include mixins.make-grid-columns();
+}
+
+.mw-xs {
+  @include common.media-breakpoint-up('xs') {
+    max-width: 375px;
+  }
+}
+
+.mw-sm {
+  @include common.media-breakpoint-up('sm') {
+    max-width: map.get(tokens.$grid-breakpoints, 'sm');
+  }
+}
+
+.mw-md {
+  @include common.media-breakpoint-up('md') {
+    max-width: map.get(tokens.$grid-breakpoints, 'md');
+  }
 }

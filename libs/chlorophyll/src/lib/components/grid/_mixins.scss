@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../../tokens' as tokens;
-@use './breakpoints';
+@use '../../tokens';
+@use '../../common/breakpoints';
 
 /// Grid system
 //
