@@ -27,15 +27,37 @@
 @mixin secondary {
   @include common.add-focus();
   @include common.add-hover-active-state();
+  @include common.add-active-focus-state();
   border-color: map-get(tokens.$theme-colors, 'primary');
   color: map-get(tokens.$theme-colors, 'primary');
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(
+      false,
+      true,
+      true
+    );
+  }
 }
 
 @mixin primary {
   @include common.add-hover-active-state();
+  @include common.add-active-focus-state();
   background: map-get(tokens.$theme-colors, 'primary');
   border-color: map-get(tokens.$theme-colors, 'primary');
   color: common.most-legible-color(map-get(tokens.$theme-colors, 'primary'));
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(
+      map-get(tokens.$theme-colors, 'primary'),
+      common.most-legible-color(map-get(tokens.$theme-colors, 'primary')),
+      map-get(tokens.$theme-colors, 'primary')
+    );
+  }
 }
 
 @mixin ghost($bg: tokens.$background-color) {
@@ -50,6 +72,17 @@
     $ghost-color,
     true
   );
+  @include common.add-active-focus-state($ghost-color);
   border-color: $ghost-color;
   color: $ghost-color;
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(
+      false,
+      true,
+      true
+    );
+  }
 }

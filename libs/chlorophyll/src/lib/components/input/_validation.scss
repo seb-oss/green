@@ -67,11 +67,6 @@ input + .form-info,
   @include add-feedback(map.get(tokens.$intent-colors, 'danger'));
 }
 
-.group.is-invalid,
-.group.is-valid {
-  @include common.margin-bottom(3);
-}
-
 /* rules for groups of checkboxes and radio buttons*/
 
 fieldset {
