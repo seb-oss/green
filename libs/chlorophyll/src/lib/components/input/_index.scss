@@ -29,23 +29,36 @@ input[type='week'] {
   }
 }
 
+form,
+.form {
+  > * {
+    @include common.margin-bottom(6);
+  }
+}
+
 .horizontal > {
   *:not(label:not(.form-control)) {
-    @include common.margin-end(4);
-    display: inline-flex !important;
+    @include common.media-breakpoint-up('sm') {
+      @include common.margin-end(4);
+      display: inline-flex !important;
+    }
   }
 }
 
 .horizontal {
-  display: flex;
+  @include common.media-breakpoint-up('sm') {
+    display: flex;
+  }
 }
 
 .horizontal .form-field ~ {
   button,
   .form-control,
   .form-text {
-    margin-bottom: auto;
-    margin-top: 1.625rem;
+    @include common.media-breakpoint-up('sm') {
+      margin-bottom: auto;
+      margin-top: 1.625rem;
+    }
   }
 }
 
@@ -71,11 +84,16 @@ input[type='week'] {
 
 // field
 .form-field {
-  @include common.margin-bottom(6);
   display: flex;
   flex-direction: column;
+  max-width: 100%;
   position: relative;
-  width: fit-content;
+  width: 100%;
+  @include common.media-breakpoint-up('sm') {
+    @include common.margin-bottom(6);
+    width: fit-content;
+  }
+
 }
 
 .form-field > input {

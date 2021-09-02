@@ -80,7 +80,7 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
 
 <Canvas>
   <div>
-    <form>
+    <form class="mw-xs">
       <div class="form-field">
         <label for="inputValid">Input group label</label>
         <span class="form-info">Lorem ipsum group description</span>
@@ -126,12 +126,14 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
         </fieldset>
         <span class="form-info">Hint</span>
       </div>
+      <div class="row">
+        <div class="col col-sm-auto">
+          <button type="button" disabled>Cancel</button>
+        </div>
+        <div class="col col-sm-auto">
+          <button type="submit" disabled>Submit</button>
+        </div>
+      </div>
     </form>
-    <div class="mb-4">
-      <button class="primary" disabled>Primary button</button>
-      <button type="button" disabled>Secondary button</button>
-      <button class="secondary" disabled>Secondary button</button>
-      <button class="ghost" disabled>Ghost button</button>
-    </div>
   </div>
 </Canvas>

@@ -5,8 +5,13 @@
   display: inline-flex;
   flex-wrap: nowrap;
   max-width: 100%;
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
 
   > * {
+    flex: 1 1 auto;
+    margin: 0;
     min-width: 0;
   }
 

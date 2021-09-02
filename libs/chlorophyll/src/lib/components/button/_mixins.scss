@@ -18,6 +18,9 @@
   align-items: center;
   display: inline-flex;
   justify-content: center;
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
