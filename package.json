@@ -28,7 +28,8 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main"
+    "postinstall": "ngcc --properties es2015 browser module main",
+    "prepare": "husky install && cp -a .husky/. .git/hooks/"
   },
   "lint-staged": {
     "libs/**/src/**/*.scss": [
@@ -107,6 +108,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
     "jest": "^27.0.6",
     "jest-preset-angular": "^9.0.7",
     "lint-staged": "^11.1.2",
