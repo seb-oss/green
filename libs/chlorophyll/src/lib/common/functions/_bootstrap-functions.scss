@@ -1,6 +1,8 @@
 @use 'sass:math';
 @use '../../tokens/config';
 
+/* stylelint-disable max-nesting-depth */
+
 // Bootstrap functions
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
@@ -64,7 +66,7 @@
   $result: ();
   @each $key, $value in $map {
     @if $key != 0 {
-      $result: map-merge($result, ("n" + $key: (-$value)));
+      $result: map-merge($result, ('n' + $key: (-$value)));
     }
   }
   @return $result;
@@ -77,7 +79,7 @@ $enable-important-utilities: true;
   $values: map-get($utility, values);
 
   // If the values are a list or string, convert it into a map
-  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
+  @if type-of($values) == 'string' or type-of(nth($values, 1)) != 'list' {
     $values: zip($values, $values);
   }
 
@@ -85,21 +87,21 @@ $enable-important-utilities: true;
     $properties: map-get($utility, property);
 
     // Multiple properties are possible, for example with vertical or horizontal margins or paddings
-    @if type-of($properties) == "string" {
+    @if type-of($properties) == 'string' {
       $properties: append((), $properties);
     }
 
     // Use custom class if present
     $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
-    $property-class: if($property-class == null, "", $property-class);
+    $property-class: if($property-class == null, '', $property-class);
 
     // State params to generate pseudo-classes
     $state: if(map-has-key($utility, state), map-get($utility, state), ());
 
-    $infix: if($property-class == "" and str-slice($infix, 1, 1) == "-", str-slice($infix, 2), $infix);
+    $infix: if($property-class == '' and str-slice($infix, 1, 1) == '-', str-slice($infix, 2), $infix);
 
     // Don't prefix if value key is null (eg. with shadow class)
-    $property-class-modifier: if($key, if($property-class == "" and $infix == "", "", "-") + $key, "");
+    $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
 
     // Disable RFS for now
     /*@if map-get($utility, rfs) {
@@ -161,3 +163,4 @@ $enable-important-utilities: true;
     }
   }
 }
+/* stylelint-enable max-nesting-depth */
