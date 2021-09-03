@@ -9,7 +9,8 @@
         "build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "sass libs/chlorophyll/src/lib/index.scss dist/libs/chlorophyll/green-chlorophyll.css"
+            "command": "npx sass --no-source-map libs/chlorophyll/src/lib/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css && npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=autoprefixer -m -r && npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
+
           }
         },
         "lint": {
