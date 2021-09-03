@@ -1,3 +1,5 @@
+@use '../common/functions';
+$enable-negative-margins: true;
 $spacing: (
   0: 0,
   1: 0.125rem,
@@ -11,3 +13,5 @@ $spacing: (
   9: 6rem,
   10: 8rem
 );
+
+$negative-spacing: if($enable-negative-margins, functions.negativify-map($spacing), null) !default;
