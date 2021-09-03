@@ -16,6 +16,18 @@
   }
 }
 
+@if tokens.$enable-cssgrid {
+  .grid {
+
+    @include mixins.make-cssgrid();
+    display: grid;
+    gap: var(--#{tokens.$variable-prefix}gap, #{tokens.$grid-gutter-width});
+    grid-template-columns: repeat(var(--#{tokens.$variable-prefix}columns, #{tokens.$grid-columns}), 1fr);
+    grid-template-rows: repeat(var(--#{tokens.$variable-prefix}rows, 1), 1fr);
+  }
+}
+
+
 // Columns
 //
 // Common styles for small and large grid columns
@@ -23,6 +35,7 @@
 @if tokens.$enable-grid-classes {
   @include mixins.make-grid-columns();
 }
+
 
 .mw-xs {
   @include common.media-breakpoint-up('xs') {
