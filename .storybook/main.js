@@ -1,10 +1,20 @@
 module.exports = {
+  core: {
+    builder: "webpack5",
+  },
   stories: [],
   addons: [
-    "@storybook/addon-postcss",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "storybook-dark-mode",
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+      },
+    },
   ],
   // uncomment the property below if you want to apply some webpack config globally
   // webpackFinal: async (config, { configType }) => {
