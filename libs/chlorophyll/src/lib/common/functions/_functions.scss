@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../tokens/color' as tokens;
+@use '../../tokens/color' as colors;
 
 //  Precomputed linear color channel values, for use in contrast calculations.
 //  See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
@@ -199,8 +199,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 // .sample { light-or-dark: "light"; }
 //
 @function light-or-dark($color) {
-  $light-contrast: color-contrast($color, tokens.$white);
-  $dark-contrast: color-contrast($color, tokens.$black);
+  $light-contrast: color-contrast($color, colors.$white);
+  $dark-contrast: color-contrast($color, colors.$black);
 
   @if $light-contrast > $dark-contrast {
     // Contrast against white is higher than against black, so, this is a dark color
@@ -226,9 +226,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   $color-lod: light-or-dark($color);
 
   @if ($color-lod == 'dark') {
-    @return tokens.$white;
+    @return colors.$white;
   } @else {
-    @return tokens.$black;
+    @return colors.$black;
   }
 }
 
@@ -326,7 +326,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-@function max-contrast($fg, $bg: tokens.$background-color, $max: map-get(tokens.$disabled-colors, 'max')) {
+@function max-contrast($fg, $bg: colors.$background-color, $max: map-get(colors.$disabled-colors, 'max')) {
   @if (color-contrast($fg, $bg) > 3) {
     @return $max;
   } @else {
@@ -334,59 +334,3 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-// Bootstrap functions
-//
-// Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
-
-// Ascending
-// Used to evaluate Sass maps like our grid breakpoints.
-@mixin assert-ascending($map, $map-name) {
-  $prev-key: null;
-  $prev-num: null;
-  @each $key, $num in $map {
-    @if $prev-num == null or unit($num) == '%' or unit($prev-num) == '%' {
-      // Do nothing
-    } @else if not comparable($prev-num, $num) {
-      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
-    } @else if $prev-num >= $num {
-      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
-    }
-    $prev-key: $key;
-    $prev-num: $num;
-  }
-}
-
-// Starts at zero
-// Used to ensure the min-width of the lowest breakpoint starts at 0.
-@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
-  @if length($map) > 0 {
-    $values: map-values($map);
-    $first-value: nth($values, 1);
-    @if $first-value != 0 {
-      @warn 'First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.';
-    }
-  }
-}
-
-// Add important rule
-@function is-important($important) {
-  @return #{if($important, '!important', '')};
-}
-
-// Replace `$search` with `$replace` in `$string`
-// Used on our SVG icon backgrounds for custom forms.
-//
-// @author Hugo Giraudel
-// @param {String} $string - Initial string
-// @param {String} $search - Substring to replace
-// @param {String} $replace ('') - New value
-// @return {String} - Updated string
-@function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
-
-  @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
-  }
-
-  @return $string;
-}
