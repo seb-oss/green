@@ -1,6 +1,4 @@
-$variable-prefix: sg-;
-$enable-grid-classes: true;
-$include-column-box-sizing: true;
+@forward 'config';
 @forward 'color';
 @forward 'depth';
 @forward 'animation';
