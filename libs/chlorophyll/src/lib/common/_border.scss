@@ -14,6 +14,6 @@
   }
 }
 
-@mixin add-border-color($color: tokens.$border-color-default) {
+@mixin add-border-color($color: tokens.$border-color) {
   border-color: $color;
 }

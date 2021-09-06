@@ -1,5 +1,5 @@
 @use '../tokens';
-@use './functions';
+@use 'functions';
 @use 'sass:map';
 
 @mixin margin($size, $important: false) {

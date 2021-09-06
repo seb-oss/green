@@ -1,5 +1,5 @@
 @use '../tokens';
-@use '../common/functions';
+@use 'functions';
 
 @mixin add-focus($suffix: 'visible', $target: '') {
   @if not $suffix {

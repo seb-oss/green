@@ -95,9 +95,13 @@
           }
         }
       }
+
+      .col#{$infix}-auto {
+        @include make-col-auto();
+      }
+
       @if $columns > 0 {
         @for $i from 1 through $columns {
-
           .col#{$infix}-#{$i} {
             @include make-col($i, $columns);
           }
@@ -132,6 +136,30 @@
         .g#{$infix}-#{$key},
         .gy#{$infix}-#{$key} {
           --#{tokens.$variable-prefix}gutter-y: #{$value};
+        }
+      }
+    }
+  }
+}
+
+@mixin make-cssgrid($columns: tokens.$grid-columns, $breakpoints: tokens.$grid-breakpoints) {
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoints.breakpoint-infix($breakpoint, $breakpoints);
+
+    @include breakpoints.media-breakpoint-up($breakpoint, $breakpoints) {
+      @if $columns > 0 {
+        @for $i from 1 through $columns {
+          .g-col#{$infix}-#{$i} {
+            grid-column: auto / span $i;
+          }
+        }
+
+        // Start with `1` because `0` is and invalid value.
+        // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+        @for $i from 1 through ($columns - 1) {
+          .g-start#{$infix}-#{$i} {
+            grid-column-start: $i;
+          }
         }
       }
     }

@@ -1,4 +1,5 @@
 @use './color';
+@use 'sass:map';
 
 // box shadow depth
 $depth-level: (
@@ -16,3 +17,6 @@ $zindex-modal-backdrop: 1040;
 $zindex-modal: 1050;
 $zindex-popover: 1060;
 $zindex-tooltip: 1070;
+
+$box-shadow: map.get($depth-level, 1);
+$box-shadow-lg: map.get($depth-level, 2);
