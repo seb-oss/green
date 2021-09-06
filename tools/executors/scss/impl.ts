@@ -1,0 +1,36 @@
+import { ExecutorContext, runExecutor } from '@nrwl/devkit';
+import * as copyfiles  from 'copyfiles';
+
+export interface MultipleExecutorOptions {
+  outputPath: string;
+  packageJson: string;
+}
+
+export default async function multipleExecutor(
+  options: MultipleExecutorOptions,
+  context: ExecutorContext
+) {
+  console.info(`Executing "build-lib"...`);
+  console.info(`Options: ${JSON.stringify(options, null, 2)}`);
+  const result = await Promise.race([
+    await runExecutor(
+      { project: context.projectName, target: 'compile-scss' },
+      {},
+      context
+    ),
+    // copy package json
+    await new Promise(resolve => copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve))
+      .catch(_ => [{success: false}])
+      .then(_ => [{success: true}]),
+    // copy scss files
+    await new Promise(resolve => copyfiles([`libs/${context.projectName}/src/lib/**/*.scss`, `${options.outputPath}/scss`], { up: 4 }, resolve))
+      .catch(_ => [{success: false}])
+      .then(_ => [{success: true}])
+  ]);
+
+  for await (const res of result) {
+    if (!res.success) return res;
+  }
+
+  return { success: true };
+}

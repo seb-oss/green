@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "build-lib": {
+      "implementation": "./impl",
+      "schema": "./schema.json",
+      "description": "Prepare scss lib by compiling scss to css and copying scss to dist folder."
+    }
+  }
+}
