@@ -79,6 +79,12 @@
               "quiet": true
             }
           }
+        },
+        "release": {
+          "builder": "@ng-easy/builders:semantic-release",
+          "configuration": {
+            "dryRun": false
+          }
         }
       }
     },

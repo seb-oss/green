@@ -65,6 +65,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@ng-easy/builders": "^3.3.5",
     "@nrwl/angular": "^12.8.0",
     "@nrwl/cli": "^12.8.0",
     "@nrwl/eslint-plugin-nx": "^12.8.0",
