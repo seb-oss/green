@@ -82,8 +82,7 @@
         },
         "release": {
           "builder": "@ng-easy/builders:semantic-release",
-          "configuration": {
-            "dryRun": false,
+          "options": {
             "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
