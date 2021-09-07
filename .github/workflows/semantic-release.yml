@@ -33,9 +33,10 @@ jobs:
         run: npx nx run chlorophyll:build
 
       - name: Release chlorophyll
-        run: npx nx run chlorophyll:release
+        run: npx nx run chlorophyll:release --verbose
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
