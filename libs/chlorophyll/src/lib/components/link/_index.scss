@@ -1,18 +1,24 @@
 @use 'mixins';
 @use '../button';
+@use '../../tokens';
+@use '../../common/functions';
+@use 'sass:map';
 @forward 'mixins';
 
 // default
-a {
+a, .link {
   @include mixins.base;
 }
+
 
 a.button {
   @include mixins.button;
 }
 
-/*
-  a.button
-  
-  ../button/_index.scss
-*/
+@each $key, $value in tokens.$intent-colors {
+  [class*="-#{$key}"] > {
+    a, a:visited {
+      color: functions.most-legible-color($value);
+    }
+  }
+}

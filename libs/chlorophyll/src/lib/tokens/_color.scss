@@ -38,6 +38,10 @@ $blue-dark: (
   2: rgb(65, 176, 238),
 );
 
+// Todo refactor link color (add to blue swatch)
+$link-color: rgb(0, 98, 188);
+$link-color-visited: rgb(103, 58, 182);
+
 $red: (
   0: rgb(187, 0, 12),
   1: rgb(216, 26, 26),
