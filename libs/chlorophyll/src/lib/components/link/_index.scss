@@ -1,6 +1,7 @@
 @use 'mixins';
 @use '../button';
 @use '../../tokens';
+@use '../../common';
 @use '../../common/functions';
 @use 'sass:map';
 @forward 'mixins';
@@ -8,6 +9,7 @@
 // default
 a, .link {
   @include mixins.base;
+  @include common.add-outline-focus-state();
 }
 
 
@@ -17,6 +19,9 @@ a.button {
 
 @each $key, $value in tokens.$intent-colors {
   [class*="-#{$key}"] > {
+    a {
+      @include common.add-outline-focus-state(functions.most-legible-color($value));
+    }
     a, a:visited {
       color: functions.most-legible-color($value);
     }
