@@ -28,12 +28,12 @@ $container-max-widths: (
     }
 
     @include common.media-breakpoint-up($breakpoint, tokens.$grid-breakpoints) {
-      %responsive-container-#{$breakpoint} {
-        max-width: $container-max-width;
-      }
 
       // Extend each breakpoint which is smaller or equal to the current breakpoint
       $extend-breakpoint: true;
+      %responsive-container-#{$breakpoint} {
+        max-width: $container-max-width;
+      }
 
       @each $name, $width in tokens.$grid-breakpoints {
         @if ($extend-breakpoint) {

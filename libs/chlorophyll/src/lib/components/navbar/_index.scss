@@ -5,6 +5,6 @@
 @use 'sass:map';
 @forward 'mixins';
 
-nav[role="navigation"] {
- @include mixins.navbar();
+nav[role='navigation'] {
+  @include mixins.navbar();
 }

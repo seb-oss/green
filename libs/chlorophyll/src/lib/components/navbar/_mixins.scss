@@ -3,10 +3,11 @@
 
 @mixin navbar() {
   & {
+    align-items: center;
     display: flex;
     height: 3.5rem;
-    align-items: center;
   }
+
   h1 {
     font-size: 1rem;
   }
