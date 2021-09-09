@@ -17,16 +17,12 @@ $container-max-widths: (
   // Single container class with breakpoint max-widths
   .container,
     // 100% wide container at all breakpoints
-  .container-fluid {
+  .container-fluid, %container-fluid {
     @include mixins.make-container();
   }
 
   // Responsive containers that are 100% wide until a breakpoint
   @each $breakpoint, $container-max-width in $container-max-widths {
-    .container-#{$breakpoint} {
-      @extend .container-fluid;
-    }
-
     @include common.media-breakpoint-up($breakpoint, tokens.$grid-breakpoints) {
 
       // Extend each breakpoint which is smaller or equal to the current breakpoint
@@ -47,6 +43,9 @@ $container-max-widths: (
           }
         }
       }
+    }
+    .container-#{$breakpoint} {
+      @extend %container-fluid;
     }
   }
 }
