@@ -7,7 +7,8 @@
 @forward 'mixins';
 
 // default
-a, .link {
+a,
+.link {
   @include mixins.base;
   @include common.add-outline-focus-state();
 }
@@ -22,7 +23,9 @@ a.button {
     a {
       @include common.add-outline-focus-state(functions.most-legible-color($value));
     }
-    a, a:visited {
+
+    a,
+    a:visited {
       color: functions.most-legible-color($value);
     }
   }

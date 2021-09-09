@@ -3,13 +3,16 @@
 
 @mixin base {
   color: tokens.$link-color;
-  text-decoration: none;
   font-weight: tokens.font-weight('medium');
-  &:hover, &:focus {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
     color: map.get(tokens.$blue, 1);
     text-decoration: underline;
   }
-  &:not(button, .button, [href="#"]):visited {
+
+  &:not(button, .button, [href='#']):visited {
     color: tokens.$link-color-visited;
   }
 }

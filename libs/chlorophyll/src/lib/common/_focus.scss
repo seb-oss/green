@@ -43,9 +43,11 @@
     outline: transparentize($color, 0.5) solid 2px;
     outline-offset: 2px;
   }
+
   &:focus:not(:focus-visible) {
     outline: 0;
   }
+
   &:focus-visible {
     outline: transparentize($color, 0.5) solid 2px;
     outline-offset: 2px;
