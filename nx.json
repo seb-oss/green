@@ -33,18 +33,18 @@
     ]
   },
   "projects": {
-    "chlorophyll": {
-      "tags": []
-    },
-    "extract": {
-      "tags": []
-    },
     "angular": {
       "tags": []
     },
     "angular-e2e": {
       "tags": [],
       "implicitDependencies": ["angular"]
+    },
+    "chlorophyll": {
+      "tags": []
+    },
+    "extract": {
+      "tags": []
     },
     "react": {
       "tags": []
