@@ -1,0 +1,11 @@
+@use '../../tokens';
+
+// Container mixins
+
+@mixin make-container($gutter: tokens.$container-padding-x) {
+  width: 100%;
+  padding-right: var(--#{tokens.$variable-prefix}gutter-x, #{$gutter});
+  padding-left: var(--#{tokens.$variable-prefix}gutter-x, #{$gutter});
+  margin-right: auto;
+  margin-left: auto;
+}
