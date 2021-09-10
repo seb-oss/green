@@ -17,7 +17,8 @@ $container-max-widths: (
   // Single container class with breakpoint max-widths
   .container,
     // 100% wide container at all breakpoints
-  .container-fluid, %container-fluid {
+  .container-fluid,
+  %container-fluid {
     @include mixins.make-container();
   }
 
