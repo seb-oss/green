@@ -1,19 +1,18 @@
 @use '../../tokens';
 @use '../../common';
 
-@each $intent, $color in tokens.$intent-colors {
-  $bg: common.a11y-color($color, tokens.$white, 'AA', 16, true, true);
-  $bg: common.a11y-color($color, tokens.$white);
-  .text-#{$intent} {
+@each $key, $color in tokens.$extended-colors {
+  // $bg: common.a11y-color($color, tokens.$white, 'AA', 16, true, true);
+  // $bg: common.a11y-color($color, tokens.$white);
+  .text-#{$key} {
     color: common.a11y-color($color, tokens.$white);
   }
 
-  .bg-#{$intent} {
-
+  .bg-#{$key} {
     background: $color;
-    color: common.most-legible-color($bg);
+    color: common.most-legible-color($color);
   }
-  .bg-#{$intent}-adjusted {
+  .bg-#{$key}-adjusted {
     @include common.desired-color-combination(tokens.$white, $color);
   }
 }

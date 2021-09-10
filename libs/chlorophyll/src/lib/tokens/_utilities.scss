@@ -9,14 +9,14 @@
 $utilities: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $utilities: map-merge((
-      
+
       'align': (
         property: vertical-align,
         class: align,
         values: baseline top middle bottom text-bottom text-top
       ),
-      
-      
+
+
       'float': (
         responsive: true,
         property: float,
@@ -26,9 +26,9 @@ $utilities: map-merge((
           none: none,
         )
       ),
-      
-      
-      
+
+
+
       'opacity': (
         property: opacity,
         values: (
@@ -39,14 +39,14 @@ $utilities: map-merge((
           100: 1,
         )
       ),
-      
-      
+
+
       'overflow': (
         property: overflow,
         values: auto hidden visible scroll,
       ),
-      
-      
+
+
       'display': (
         responsive: true,
         print: true,
@@ -54,8 +54,8 @@ $utilities: map-merge((
         class: d,
         values: inline inline-block block grid table table-row table-cell flex inline-flex none
       ),
-      
-      
+
+
       'shadow': (
         property: box-shadow,
         class: shadow,
@@ -65,7 +65,7 @@ $utilities: map-merge((
           none: none,
         )
       ),
-      
+
       'border': (
         property: border,
         values: (
@@ -113,9 +113,7 @@ $utilities: map-merge((
         class: border,
         values: tokens.$border-width
       ),
-      
-      
-      
+
       'width': (
         property: width,
         class: w,
@@ -168,9 +166,9 @@ $utilities: map-merge((
         class: min-vh,
         values: (100: 100vh)
       ),
-      
-      
-      
+
+
+
       'flex': (
         responsive: true,
         property: flex,
@@ -267,9 +265,9 @@ $utilities: map-merge((
           last: 6,
         ),
       ),
-      
-      
-      
+
+
+
       'margin': (
         responsive: true,
         property: margin,
@@ -312,7 +310,7 @@ $utilities: map-merge((
         class: ms,
         values: map-merge(tokens.$spacing, (auto: auto))
       ),
-      
+
       'negative-margin': (
         responsive: true,
         property: margin,
@@ -355,7 +353,7 @@ $utilities: map-merge((
         class: ms,
         values: tokens.$negative-spacing
       ),
-      
+
       'padding': (
         responsive: true,
         property: padding,
@@ -398,9 +396,9 @@ $utilities: map-merge((
         class: ps,
         values: tokens.$spacing
       ),
-      
-      
-      
+
+
+
       'font-family': (
         property: font-family,
         class: font,
@@ -471,15 +469,15 @@ $utilities: map-merge((
         values: (break: break-word),
         rtl: false
       ),
-      
-      
+
+
       'color': (
         property: color,
         class: text,
         local-vars: (
           'text-opacity': 1
         ),
-        values: map-merge(tokens.$intent-colors,
+        values: map-merge(tokens.$extended-colors,
             (
               'reset': inherit,
             ))
@@ -494,15 +492,15 @@ $utilities: map-merge((
           100: 1
         )
       ),
-      
-      
+
+
       'background-color': (
         property: background-color,
         class: bg,
         local-vars: (
           'bg-opacity': 1
         ),
-        values: map-merge(tokens.$intent-colors,
+        values: map-merge(tokens.$extended-colors,
             (
               'transparent': transparent
             ))
@@ -518,13 +516,13 @@ $utilities: map-merge((
           100: 1
         )
       ),
-      
+
       'gradient': (
         property: background-image,
         class: bg,
         values: (gradient: var(--#{tokens.$variable-prefix}gradient))
       ),
-      
+
       'user-select': (
         property: user-select,
         values: all auto none
@@ -534,8 +532,8 @@ $utilities: map-merge((
         class: pe,
         values: none auto,
       ),
-      
-      
+
+
       'rounded': (
         property: border-radius,
         class: rounded,
@@ -566,8 +564,8 @@ $utilities: map-merge((
         class: rounded-start,
         values: (null: tokens.$border-radius)
       ),
-      
-      
+
+
       'visibility': (
         property: visibility,
         class: null,
@@ -576,6 +574,6 @@ $utilities: map-merge((
           invisible: hidden,
         )
       )
-      
+
     ),
     $utilities);

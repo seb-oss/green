@@ -4,7 +4,10 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 
 <Canvas>
   <main style={{backgroundImage: 'url(\'https://id.seb.se/assets/fog-and-trees.jpg\')'}}>
-    <div>!!Navbar placeholder!!</div>
+    <nav role="navigation" class="bg-dark">
+      <a aria-label='Open seb.se in new tab' href='http://www.seb.se' target='_blank' class='brand'/>
+      <h1 class="mx-4">Login to Business Arena</h1>
+    </nav>
     <div class="mx-auto my-6" style={{maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto'}}>
       <h1>Business Arena</h1>
       <p class="mb-5">Online banking for Corporates and Financial Institutions</p>
