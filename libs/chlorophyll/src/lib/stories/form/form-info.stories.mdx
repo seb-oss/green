@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Components/Forms/Info" />
+<Meta title="Components/Form/Info" />
 
 # Info
 
@@ -9,7 +9,7 @@ Add info or description for input using <code>.form-info</code> class.
 ## Form info before input
 
 <Canvas>
-  <div class="form-field">
+  <div class="form-group">
     <label for="formInput1">Input</label>
     <span class="form-info" id="formInfo1">Some info or help</span>
     <input id="formInput1" type="text" aria-describedby="formInfo1"/>
@@ -22,17 +22,17 @@ When placed after an input the form info also shows the state of the input if ei
 
 <Canvas>
   <form class="horizontal">
-    <div class="form-field">
+    <div class="form-group">
       <label for="formInput2">Input</label>
       <input id="formInput2" type="text" aria-describedby="formInfo2"/>
       <span class="form-info" id="formInfo2">Some info or help</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="formInput2a">Input</label>
       <input id="formInput2a" type="text" class="is-valid" aria-describedby="formInfo2a"/>
       <span class="form-info" id="formInfo2a">When input is valid</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="formInput2b">Input</label>
       <input id="formInput2b" type="text" class="is-invalid" aria-describedby="formInfo2b"/>
       <span class="form-info" id="formInfo2b">When input is invalid</span>
