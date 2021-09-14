@@ -1,0 +1,95 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+export const Template = ({ type, variant, text }) => {
+  const attrType = type ? `type="${type}" ` : ''
+  const attrClass = variant ? `class="${variant}" ` : ''
+  return `<button ${attrType}${attrClass}>${text}</button>`
+}
+
+<Meta
+  title="Components/Form/Elements/Button"
+  argTypes={{
+    type: {
+      control: 'select',
+      options: ['button', 'submit', 'reset'],
+    },
+    variant: {
+      control: 'select',
+      options: ['', 'primary', 'secondary', 'ghost'],
+    },
+    text: { control: 'text' },
+  }}
+/>
+
+# Buttons
+
+Lorem ipsum buttons
+
+<Story
+  name="Button"
+  args={{
+    type: 'button',
+    text: 'Click me!',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+---
+
+## Types
+
+Preferably use type to describe the function of a button. Use variant only when necessary.
+
+<Canvas>
+  <button type="button">Button type</button>
+  <button type="submit">Submit type</button>
+  <button type="reset">Reset type</button>
+</Canvas>
+
+## Variants
+
+Styling can also be achieved by class
+
+<Canvas>
+  <button class="primary">Primary button</button>
+  <button class="secondary">Secondary button</button>
+  <button class="ghost">Ghost button</button>
+</Canvas>
+
+## Special buttons
+
+### Close button
+
+<Canvas>
+  <button class="close">
+    <span class="sr-only">Close</span>
+  </button>
+</Canvas>
+
+
+<Canvas>
+  <div>
+    <h3 class="mb-4">Default</h3>
+    <div class="mb-4">
+      <button class="primary">Primary button</button>
+      <button type="button">Secondary button</button>
+      <button class="secondary">Secondary button</button>
+      <button class="ghost">Ghost button</button>
+    </div>
+    <h3 class="mb-4">Active</h3>
+    <div class="mb-4">
+      <button class="primary active">Primary button</button>
+      <button type="button" class="active">Secondary button</button>
+      <button class="secondary active">Secondary button</button>
+      <button class="ghost active">Ghost button</button>
+    </div>
+    <h3 class="mb-4">Disabled</h3>
+    <div class="mb-4">
+      <button class="primary" disabled>Primary button</button>
+      <button type="button" disabled>Secondary button</button>
+      <button class="secondary" disabled>Secondary button</button>
+      <button class="ghost" disabled>Ghost button</button>
+    </div>
+  </div>
+</Canvas>
