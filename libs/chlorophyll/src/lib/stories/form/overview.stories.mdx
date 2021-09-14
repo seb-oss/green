@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Components/Forms/Overview" />
+<Meta title="Components/Form/Overview" />
 
 # Input
 
@@ -10,7 +10,7 @@ Lorem ipsum input fields
 
 <Canvas>
   <form>
-    <div class="form-field">
+    <div class="form-group">
       <label for="input">Input label</label>
       <input id="input" type="text" />
     </div>
@@ -22,7 +22,7 @@ Lorem ipsum input fields
 ### Horizontal
 <Canvas>
   <form class="horizontal">
-    <div class="form-field">
+    <div class="form-group">
       <label for="horizontalInput">Input label</label>
       <input type="text" id="horizontalInput" placeholder="Regular input"/>
     </div>
@@ -39,7 +39,7 @@ Lorem ipsum input fields
 
 <Canvas>
   <form class="horizontal">
-    <div class="form-field">
+    <div class="form-group">
       <label for="horizontalSmInput">Input label</label>
       <input type="text" id="horizontalSmInput" class="size-sm" placeholder="Small input"/>
     </div>
@@ -50,7 +50,7 @@ Lorem ipsum input fields
 
 <Canvas>
   <form class="horizontal">
-    <div class="form-field">
+    <div class="form-group">
       <label for="horizontalMdInput">Input label</label>
       <input type="text" id="horizontalMdInput" placeholder="Regular input"/>
     </div>
@@ -65,7 +65,7 @@ Lorem ipsum input fields
 
 <Canvas>
   <form class="horizontal">
-    <div class="form-field">
+    <div class="form-group">
       <label for="horizontalLgInput">Input label</label>
       <input type="text" id="horizontalLgInput" class="size-lg" placeholder="Large input"/>
     </div>
@@ -81,13 +81,13 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
 <Canvas>
   <div>
     <form class="mw-xs">
-      <div class="form-field">
+      <div class="form-group">
         <label for="inputValid">Input group label</label>
         <span class="form-info">Lorem ipsum group description</span>
         <input id="inputValid1" type="text" disabled required value="Disabled"/>
         <span class="form-info">Hint</span>
       </div>
-      <div class="form-field">
+      <div class="form-group">
         <label for="inputValid">Input group label</label>
         <span class="form-info">Example with aria-disabled="true" and .disabled</span>
         <div class="group">
@@ -97,7 +97,7 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
         </div>
         <span class="form-info">Hint</span>
       </div>
-      <div class="form-field">
+      <div class="form-group">
         <label for="inputValid">Input group label</label>
         <span class="form-info">Lorem ipsum group description</span>
         <div class="group group-border disabled">
@@ -107,7 +107,7 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
         </div>
         <span class="form-info">Hint</span>
       </div>
-      <div class="form-field">
+      <div class="form-group">
         <fieldset aria-describedby="checkboxGroupHelp1">
           <legend>Invalid checkbox group</legend>
           <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>

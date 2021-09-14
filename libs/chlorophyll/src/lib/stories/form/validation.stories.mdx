@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Components/Forms/Validation" />
+<Meta title="Components/Form/Validation" />
 
 # Form validation
 
@@ -10,17 +10,17 @@ It's also possible to add either `.is-valid` or `.is-invalid` directly to an inp
 ## Default form with validation
 <Canvas>
   <form autocomplete="off" class="was-validated">
-    <div class="form-field">
+    <div class="form-group">
       <label for="input">Input label</label>
       <input id="input" type="text" required/>
       <span class="form-info">Field is required!</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputLong">Input label</label>
       <input id="inputLong" type="text" required/>
       <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="numberInput">Input label</label>
       <input id="numberInput" type="number" min="1" max="5" required/>
       <span class="form-info">Invalid number!</span>
@@ -31,17 +31,17 @@ It's also possible to add either `.is-valid` or `.is-invalid` directly to an inp
 ## Horizontal form with validation
 <Canvas>
   <form class="horizontal was-validated" autocomplete="off">
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputHorizontal">Input label</label>
       <input id="inputHorizontal" type="text" required/>
       <span class="form-info">Field is required!</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputHorizontalLong">Input label</label>
       <input id="inputHorizontalLong" type="text" required/>
       <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="numberInputHorizontal">Input label</label>
       <input id="numberInputHorizontal" type="number" min="1" max="5" required/>
       <span class="form-info">Invalid number!</span>
@@ -54,12 +54,12 @@ It's also possible to add either `.is-valid` or `.is-invalid` directly to an inp
 
 <Canvas>
   <form autocomplete="off" class="was-validated">
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputNoFeedback">Input label</label>
       <input id="inputNoFeedback" type="text" required placeholder="Invalid"/>
       <span class="form-info"></span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputNoinfo">Input label</label>
       <input id="inputNoFeedback" type="text" placeholder="Valid"/>
       <span class="form-info"></span>
@@ -72,12 +72,12 @@ Use `.is-valid` and/or `.is-invalid` to explicitly indicate input validity (usua
 
 <Canvas>
   <form autocomplete="off">
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input label</label>
       <input id="inputValid" type="text" class="is-valid" value="Some value" required/>
       <span class="form-info">Valid input</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputInvalid">Input label</label>
       <input id="inputInvalid" type="text" class="is-invalid" value="Valid but still not"/>
       <span class="form-info">Invalid input</span>
@@ -91,19 +91,19 @@ Using `.was-validated`, form inputs can either be marked as valid or invalid dep
 
 <Canvas>
   <form autocomplete="off" class="was-validated" novalidate>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
       <input id="inputValid" type="text" value="Some value" required/>
       <span class="form-info">Neutral</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
       <input id="inputValid" type="text" value="Some value" required/>
       <span class="form-info">Valid</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
       <input id="inputValid" type="text" required/>
@@ -116,19 +116,19 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
 
 <Canvas>
   <form autocomplete="off" novalidate>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputInvalid">Input label</label>
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="inputInvalid" type="text" />
       <span class="form-info">Neutral</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputInvalid">Input label</label>
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="inputInvalid" type="text" class="is-valid"/>
       <span class="form-info">Valid</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputInvalid">Input label</label>
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="inputInvalid" type="text" class="is-invalid"/>
@@ -141,7 +141,7 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
 
 <Canvas>
   <form>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input group label</label>
       <span class="form-info">Lorem ipsum group description</span>
       <div class="group is-invalid">
@@ -151,7 +151,7 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
       </div>
       <span class="form-info">Error</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <label for="inputValid">Input group label</label>
       <span class="form-info">Lorem ipsum group description</span>
       <div class="group group-border is-invalid">
@@ -161,7 +161,7 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
       </div>
       <span class="form-info">Error</span>
     </div>
-    <div class="form-field">
+    <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp1" class="is-invalid">
         <legend>Invalid checkbox group</legend>
         <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
