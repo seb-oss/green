@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-alpha.1...@sebgroup/chlorophyll@1.0.0-alpha.2) (2021-09-14)
+
+
+### Bug Fixes
+
+* add readme and change log to package  ([52f4af1](https://github.com/sebgroup/green/commit/52f4af11063c2985fcaff763fcad68b58b258253)), closes [#193](https://github.com/sebgroup/green/issues/193)
+
 # 1.0.0-alpha.1 (2021-09-07)
 
 
