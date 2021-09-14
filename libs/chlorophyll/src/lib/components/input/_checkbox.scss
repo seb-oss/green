@@ -22,6 +22,7 @@ $checkmark-color: tokens.$white;
   max-width: fit-content;
   position: relative;
   user-select: none;
+  white-space: nowrap;
 }
 
 /* Hide the browser's default checkbox */

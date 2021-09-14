@@ -1,7 +1,20 @@
 @use '../../tokens';
+@use 'sass:map';
 
 @mixin base {
-  color: map-get(tokens.$theme-colors, 'primary');
+  color: tokens.$link-color;
+  font-weight: tokens.font-weight('medium');
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: map.get(tokens.$blue, 1);
+    text-decoration: underline;
+  }
+
+  &:not(button, .button, [href='#']):visited {
+    color: tokens.$link-color-visited;
+  }
 }
 
 @mixin button {

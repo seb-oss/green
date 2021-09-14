@@ -1,5 +1,6 @@
 @use '../tokens';
 @use 'functions';
+@use 'sass:map';
 
 @mixin add-focus($suffix: 'visible', $target: '') {
   @if not $suffix {
@@ -17,8 +18,8 @@
   }
 
   &:focus {
-    border-color: map-get(tokens.$blue, 0);
-    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
+    border-color: map.get(tokens.$blue, 0);
+    box-shadow: 0 0 0.25em 0.0625em map.get(tokens.$blue, 2);
     outline-color: transparent;
     outline-style: solid;
   }
@@ -30,14 +31,30 @@
   }
 
   &:focus#{$suffix} #{$target} {
-    border-color: map-get(tokens.$blue, 0) !important;
-    box-shadow: 0 0 0.25em 0.0625em map-get(tokens.$blue, 2);
+    border-color: map.get(tokens.$blue, 0) !important;
+    box-shadow: 0 0 0.25em 0.0625em map.get(tokens.$blue, 2);
     outline-color: transparent;
     outline-style: solid;
   }
 }
 
-@mixin add-hover-state($color: map-get(tokens.$blue, 2), $target: '') {
+@mixin add-outline-focus-state($color: map.get(tokens.$blue, 1)) {
+  &:focus {
+    outline: transparentize($color, 0.5) solid 2px;
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    outline: transparentize($color, 0.5) solid 2px;
+    outline-offset: 2px;
+  }
+}
+
+@mixin add-hover-state($color: map.get(tokens.$blue, 2), $target: '') {
   @if not $target == '' {
     #{$target} {
       transition: all tokens.$transition-time; // TODO: append transition rule...
@@ -52,7 +69,7 @@
   }
 }
 
-@mixin add-active-state($color: map-get(tokens.$blue, 0), $fadeActiveHover: false) {
+@mixin add-active-state($color: map.get(tokens.$blue, 0), $fadeActiveHover: false) {
   &:active,
   &.active,
   &.active:hover,
@@ -69,8 +86,8 @@
 }
 
 @mixin add-hover-active-state(
-  $hover: map-get(tokens.$blue, 2),
-  $active: map-get(tokens.$blue, 0),
+  $hover: map.get(tokens.$blue, 2),
+  $active: map.get(tokens.$blue, 0),
   $fadeActiveHover: false
 ) {
   @include add-hover-state($hover);
@@ -78,7 +95,7 @@
 }
 
 /** add background color, color and border-color to element when it has focus-visible i.e. tab focus */
-@mixin add-active-focus-state($color: map-get(tokens.$blue, 2)) {
+@mixin add-active-focus-state($color: map.get(tokens.$blue, 2)) {
   &:focus-visible {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
     border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1) !important;

@@ -38,6 +38,10 @@ $blue-dark: (
   2: rgb(65, 176, 238),
 );
 
+// Todo refactor link color (add to blue swatch)
+$link-color: rgb(0, 98, 188);
+$link-color-visited: rgb(103, 58, 182);
+
 $red: (
   0: rgb(187, 0, 12),
   1: rgb(216, 26, 26),
@@ -63,27 +67,37 @@ $yellow-dark: (
 );
 
 $brand-colors: (
-  'primary': map-get($blue, 0),
-  'secondary': map-get($blue, 1),
+  'primary': map.get($blue, 0),
+  'secondary': map.get($blue, 1),
 );
 
 $intent-colors: (
-  'info': map-get($blue, 0),
-  'success': map-get($green, 0),
-  'warning': map-get($yellow, 1),
-  'danger': map-get($red, 1),
+  'info': map.get($blue, 0),
+  'success': map.get($green, 0),
+  'warning': map.get($yellow, 1),
+  'danger': map.get($red, 1),
+);
+
+$achromatic-colors: (
+  'white': $white,
+  'light': map.get($grey, 8),
+  'dark': map.get($grey, 1),
+  'black': $black,
 );
 
 $intent-colors-dark: (
-  'info': map-get($blue-dark, 2),
-  'success': map-get($green-dark, 0),
-  'warning': map-get($yellow-dark, 2),
-  'danger': map-get($red-dark, 0),
+  'info': map.get($blue-dark, 2),
+  'success': map.get($green-dark, 0),
+  'warning': map.get($yellow-dark, 2),
+  'danger': map.get($red-dark, 0),
 );
 
 $theme-colors: map-merge($brand-colors, $intent-colors);
 
-$background-color: map-get($grey, 8);
+$extended-colors: map-merge($intent-colors, $achromatic-colors);
+
+
+$background-color: map.get($grey, 8);
 
 $disabled-colors: (
   'max': map.get($grey, 5),

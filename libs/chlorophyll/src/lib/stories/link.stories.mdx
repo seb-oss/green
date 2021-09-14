@@ -26,19 +26,62 @@ export const Template = ({ text, className }) => `
 Lorem ipsum links
 
 <Canvas>
-  <a href="#">Normal link</a>
+  <div>
+    <a href="#">Normal link</a><br/>
+    <a href="https://www.seb.se">Go to seb.se</a><br/>
+    <a href="#" target="_blank">External link</a> (icon will be added)<br/>
+  </div>
+</Canvas>
+
+### Links on backgrounds
+
+Links will by default have their color adjusted and use the color which gives best contrast against background of immediate parent. Currently, it works with all the intent colors using the pattern `*-{intent}` e.g. `bg-info`, `alert-success`, `alert-danger` etc.
+
+<Canvas>
+  <div>
+    <div class="bg-info p-4 my-4">
+      <a href="#">Link</a>
+    </div>
+    <div class="bg-success p-4 my-4">
+      <a href="#">Link</a>
+    </div>
+    <div class="bg-warning p-4 my-4">
+      <a href="#">Link</a>
+    </div>
+    <div class="bg-danger p-4 my-4">
+      <a href="#">Link</a>
+    </div>
+  </div>
+</Canvas>
+
+### Style links as button
+Sometimes you want to use links but style them as buttons, just add the class `button` and optionally a variant like `primary` or `ghost` and voilà - now you've got a link which looks and behaves like a button!
+<Canvas>
+  <div>
   <a href="#" class="button">
-    Button link
-  </a>
+    Link button
+  </a><br/>
   <a href="#" class="button primary">
-    Primary button link
-  </a>
+    Primary link button
+  </a><br/>
   <a href="#" class="button secondary">
-    Secondary button link
-  </a>
+    Secondary link button
+  </a><br/>
   <a href="#" class="button ghost">
-    Ghost button link
-  </a>
+    Ghost link button
+  </a><br/>
+  </div>
+</Canvas>
+
+### Style buttons as links
+It's also possible to do the opposite, i.e. style buttons as links by adding the class `link`.
+<Canvas>
+  <div>
+    <button class="link">Button link</button><br/>
+    <button type="submit" class="link">Button link</button><br/>
+    <button type="button" class="link">Button link</button><br/>
+    <button type="reset" class="link">Button link</button><br/>
+  </div>
 </Canvas>
 
 <Story

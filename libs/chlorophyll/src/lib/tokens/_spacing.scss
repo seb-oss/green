@@ -1,4 +1,5 @@
 @use '../common/functions';
+@use 'sass:map';
 $enable-negative-margins: true;
 $spacing: (
   0: 0,
@@ -14,4 +15,5 @@ $spacing: (
   10: 8rem
 );
 
+$container-padding-x: map.get($spacing, 4);
 $negative-spacing: if($enable-negative-margins, functions.negativify-map($spacing), null) !default;
