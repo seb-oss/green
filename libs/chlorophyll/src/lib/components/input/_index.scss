@@ -50,6 +50,19 @@ form,
   }
 }
 
+.horizontal .form-group > {
+  fieldset {
+    @include common.media-breakpoint-up('sm') {
+      margin-bottom: auto;
+      margin-top: 1.625rem;
+    }
+
+    > label.form-control {
+      padding-right: 0;
+    }
+  }
+}
+
 .horizontal .form-group ~ {
   button,
   .form-control,
@@ -59,6 +72,7 @@ form,
       margin-top: 1.625rem;
     }
   }
+
 }
 
 .horizontal .form-control {
@@ -73,9 +87,11 @@ form,
   order: 1;
 }
 
-.form-text {
-  //@include common.padding-horizontal(5);
+.horizontal .form-text {
   @include common.padding-vertical(4);
+}
+
+.form-text {
   border: solid transparent 1px; // correct vertical alignment
   display: flex;
   font: inherit;
