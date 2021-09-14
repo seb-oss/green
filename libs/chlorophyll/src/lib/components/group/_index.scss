@@ -66,8 +66,8 @@
     > button,
     > .button {
       margin: -(tokens.$border-width);
-      padding-left: calc(1rem + #{tokens.$border-width});
       min-width: auto !important;
+      padding-left: calc(1rem + #{tokens.$border-width});
     }
 
     .form-text {
