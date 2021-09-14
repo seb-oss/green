@@ -18,6 +18,10 @@ export default async function multipleExecutor(
       {},
       context
     ),
+    // copy readme and changelog
+    await new Promise(resolve => copyfiles([`libs/${context.projectName}/*.md`, options.outputPath], { up: 2 }, resolve))
+      .catch(_ => [{success: false}])
+      .then(_ => [{success: true}]),
     // copy package json
     await new Promise(resolve => copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve))
       .catch(_ => [{success: false}])

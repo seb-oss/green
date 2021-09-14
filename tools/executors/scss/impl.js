@@ -60,10 +60,18 @@ function multipleExecutor(options, context) {
                     _d = [
                         _e.sent()
                     ];
+                    // copy readme and changelog
+                    return [4 /*yield*/, new Promise(function (resolve) { return copyfiles(["libs/" + context.projectName + "/*.md", options.outputPath], { up: 2 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
+                            .then(function (_) { return [{ success: true }]; })];
+                case 2:
+                    _d = _d.concat([
+                        // copy readme and changelog
+                        _e.sent()
+                    ]);
                     // copy package json
                     return [4 /*yield*/, new Promise(function (resolve) { return copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
-                case 2:
+                case 3:
                     _d = _d.concat([
                         // copy package json
                         _e.sent()
@@ -71,43 +79,43 @@ function multipleExecutor(options, context) {
                     // copy scss files
                     return [4 /*yield*/, new Promise(function (resolve) { return copyfiles(["libs/" + context.projectName + "/src/lib/**/*.scss", options.outputPath + "/scss"], { up: 4 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
-                case 3: return [4 /*yield*/, _c.apply(_b, [_d.concat([
+                case 4: return [4 /*yield*/, _c.apply(_b, [_d.concat([
                             // copy scss files
                             _e.sent()
                         ])])];
-                case 4:
-                    result = _e.sent();
-                    _e.label = 5;
                 case 5:
-                    _e.trys.push([5, 10, 11, 16]);
-                    result_1 = __asyncValues(result);
+                    result = _e.sent();
                     _e.label = 6;
-                case 6: return [4 /*yield*/, result_1.next()];
-                case 7:
-                    if (!(result_1_1 = _e.sent(), !result_1_1.done)) return [3 /*break*/, 9];
+                case 6:
+                    _e.trys.push([6, 11, 12, 17]);
+                    result_1 = __asyncValues(result);
+                    _e.label = 7;
+                case 7: return [4 /*yield*/, result_1.next()];
+                case 8:
+                    if (!(result_1_1 = _e.sent(), !result_1_1.done)) return [3 /*break*/, 10];
                     res = result_1_1.value;
                     if (!res.success)
                         return [2 /*return*/, res];
-                    _e.label = 8;
-                case 8: return [3 /*break*/, 6];
-                case 9: return [3 /*break*/, 16];
-                case 10:
+                    _e.label = 9;
+                case 9: return [3 /*break*/, 7];
+                case 10: return [3 /*break*/, 17];
+                case 11:
                     e_1_1 = _e.sent();
                     e_1 = { error: e_1_1 };
-                    return [3 /*break*/, 16];
-                case 11:
-                    _e.trys.push([11, , 14, 15]);
-                    if (!(result_1_1 && !result_1_1.done && (_a = result_1["return"]))) return [3 /*break*/, 13];
-                    return [4 /*yield*/, _a.call(result_1)];
+                    return [3 /*break*/, 17];
                 case 12:
+                    _e.trys.push([12, , 15, 16]);
+                    if (!(result_1_1 && !result_1_1.done && (_a = result_1["return"]))) return [3 /*break*/, 14];
+                    return [4 /*yield*/, _a.call(result_1)];
+                case 13:
                     _e.sent();
-                    _e.label = 13;
-                case 13: return [3 /*break*/, 15];
-                case 14:
+                    _e.label = 14;
+                case 14: return [3 /*break*/, 16];
+                case 15:
                     if (e_1) throw e_1.error;
                     return [7 /*endfinally*/];
-                case 15: return [7 /*endfinally*/];
-                case 16: return [2 /*return*/, { success: true }];
+                case 16: return [7 /*endfinally*/];
+                case 17: return [2 /*return*/, { success: true }];
             }
         });
     });
