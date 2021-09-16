@@ -133,7 +133,7 @@
     "browserslist": "^4.16.8",
     "ecstatic": "^4.1.4",
     "glob-parent": "^6.0.1",
+    "immer": "^9.0.6",
     "trim": "^1.0.1"
   }
 }
-
