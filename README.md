@@ -42,7 +42,7 @@ If something can be deployed, we deploy. Then, if a PR needs a review, we review
 
 ### Yarn
 
-This mono repo is based on `lerna` and `yarn workspaces`. If you are unused to yarn, see the following instructions:
+This mono repo is based on `nx` and uses `yarn` instead of `npm`. If you are unused to yarn, see the following instructions:
 
 #### Install yarn
 
@@ -58,10 +58,10 @@ yarn
 
 #### Add a dependency to a workspace
 
-If you want to add `leftpad` to the chlorophyll project:
+All projects use a common set of dependencies so if you want to add `leftpad` to the chlorophyll project, just run:
 
 ```bash
-yarn workspace @sebgroup/chlorophyll add leftpad
+yarn add leftpad
 ```
 
 #### Run a command in `package.json`
