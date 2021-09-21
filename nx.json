@@ -40,6 +40,13 @@
       "tags": [],
       "implicitDependencies": ["angular"]
     },
+    "angular-lib-dev": {
+      "tags": []
+    },
+    "angular-lib-dev-e2e": {
+      "tags": [],
+      "implicitDependencies": ["angular-lib-dev"]
+    },
     "chlorophyll": {
       "tags": []
     },
