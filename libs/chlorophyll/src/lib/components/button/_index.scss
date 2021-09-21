@@ -3,29 +3,38 @@
 
 // reset
 button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
 .button {
   @include mixins.reset;
 }
 
 // base
 button:not(.link),
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
 .button {
   @include mixins.base;
 }
 
 // secondary
-button:not(.primary,.ghost,.close,.link),
+button:not(.primary, .ghost, .close, .link),
 button.secondary,
 a.button.secondary,
-button[type='button']:not(.primary,.ghost,.close,.link),
-button[type='reset']:not(.primary,.ghost,.close,.link) {
+input[type='button'],
+input[type='reset'],
+button[type='button']:not(.primary, .ghost, .close, .link),
+button[type='reset']:not(.primary, .ghost, .close, .link) {
   @include mixins.secondary;
 }
 
 // primary
 button.primary,
-button[type='submit']:not(.secondary,.ghost,.close,.link),
-input[type='submit']:not(.secondary,.ghost,.close,.link),
+input[type='submit'],
+button[type='submit']:not(.secondary, .ghost, .close, .link),
+input[type='submit']:not(.secondary, .ghost, .close, .link),
 a.button.primary {
   @include mixins.primary;
 }
