@@ -21,6 +21,7 @@ input[type='reset'],
 
 // secondary
 button:not(.primary, .ghost, .close, .link),
+a.button:not(.primary, .ghost, .close, .link),
 button.secondary,
 a.button.secondary,
 input[type='button'],
