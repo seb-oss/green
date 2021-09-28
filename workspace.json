@@ -11,7 +11,8 @@
           "executor": "@nrwl/angular:package",
           "outputs": ["dist/libs/angular"],
           "options": {
-            "project": "libs/angular/ng-package.json"
+            "project": "libs/angular/ng-package.json",
+            "tsConfig": "libs/angular/tsconfig.lib.prod.json"
           },
           "configurations": {
             "production": {
@@ -49,7 +50,7 @@
             "config": {
               "configFolder": "libs/angular/.storybook"
             },
-            "staticDir": ["dist/libs/chlorophyll"]
+            "staticDir": ["dist/libs/angular"]
           },
           "configurations": {
             "ci": {
