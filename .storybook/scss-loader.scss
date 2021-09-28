@@ -1,4 +1,4 @@
 // load global styles used by storybook
 @use '../libs/chlorophyll/src/lib/index.scss' with (
-  $font-path: '../dist/storybook/fonts'
+  $font-path: '../dist/fonts'
 );

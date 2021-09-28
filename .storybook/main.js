@@ -1,4 +1,6 @@
-const CopyPlugin = require('copy-webpack-plugin');
+const EventHooksPlugin = require('event-hooks-webpack-plugin');
+const copyfiles = require('copyfiles');
+
 
 module.exports = {
   core: {
@@ -25,15 +27,17 @@ module.exports = {
     config = {
       ...config,
       plugins: [
+        new EventHooksPlugin({
+          compile: async () => {
+            console.log('Copying fonts');
+              await new Promise(resolve => copyfiles(['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'], { up: true }, resolve))
+                .catch(_ => [{ success: false }])
+                .then(_ => [{ success: true }])
+          }
+        }),
         ...config.plugins,
-        new CopyPlugin({
-          patterns: [{
-            from: './node_modules/@sebgroup/fonts/fonts', to: '../fonts'}
-          ]}
-        )
       ]
     }
-    console.log(config);
 
     // Return the altered config
     return config;
