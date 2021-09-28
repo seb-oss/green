@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   template: `
@@ -9,11 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class OptionAComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class OptionAComponent {
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs'
-import { SegmentedControl } from '../../../../../libs/angular/src/lib/segmented-control/segmented-control.component'
+// eslint-disable-next-line
+import { SegmentedControl } from '@sebgroup/green-angular';
 
 @Component({
   templateUrl: './segmented-control.component.html',

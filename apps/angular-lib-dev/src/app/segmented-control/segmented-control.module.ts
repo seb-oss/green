@@ -5,9 +5,8 @@ import { SegmentedControlRoutingModule } from './segmented-control-routing.modul
 import { SegmentedControlComponent } from './segmented-control.component';
 import { OptionAComponent } from './option-a/option-a.component';
 import { OptionBComponent } from './option-b/option-b.component';
-import {
-  GreenSegmentedControlModule,
-} from '../../../../../libs/angular/src/lib/segmented-control/segmented-control.module'
+// eslint-disable-next-line
+import { GreenSegmentedControlModule } from '@sebgroup/green-angular';
 
 
 @NgModule({
@@ -20,6 +19,7 @@ import {
     CommonModule,
     GreenSegmentedControlModule,
     SegmentedControlRoutingModule
-  ]
+  ],
+  exports: [OptionAComponent, OptionBComponent]
 })
 export class SegmentedControlModule { }

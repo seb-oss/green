@@ -1,12 +1,15 @@
 // Segmented-controls.stories.ts
 
 import { Meta } from '@storybook/angular/types-6-0';
-import { SgSegmentedControlComponent } from './segmented-control.component'
+import { GreenSegmentedControlComponent } from './segmented-control.component'
 import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 import { of } from 'rxjs'
+
+// eslint-disable-next-line
 import { OptionAComponent } from '../../../../../apps/angular-lib-dev/src/app/segmented-control/option-a/option-a.component'
+// eslint-disable-next-line
 import { OptionBComponent } from '../../../../../apps/angular-lib-dev/src/app/segmented-control/option-b/option-b.component'
 
 const routes: Routes = [{
@@ -19,7 +22,7 @@ const routes: Routes = [{
 
 export default {
   title: 'Components/Segmented control',
-  component: SgSegmentedControlComponent,
+  component: GreenSegmentedControlComponent,
   decorators: [
     moduleMetadata({
       declarations: [],
