@@ -2,10 +2,11 @@
 @use '../../common';
 
 .group {
-  display: inline-flex;
+  display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
   overflow: auto;
+  width: fit-content;
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
@@ -14,7 +15,10 @@
     flex: 1 1 auto;
     margin: 0;
     min-width: 0 !important;
-  }
+    @include common.media-breakpoint-up('sm') {
+      flex: 0 1 auto;
+    }
+    }
 
   > *:focus {
     position: relative;
@@ -77,6 +81,9 @@
 
   &.group-border.disabled {
     @include common.add-disable(false,false, true);
+  }
+  .form-text {
+    @include common.padding-vertical(4);
   }
 }
 
