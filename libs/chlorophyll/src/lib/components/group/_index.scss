@@ -17,7 +17,7 @@
     @include common.media-breakpoint-up('sm') {
       flex: 0 1 auto;
     }
-    }
+  }
 
   > *:focus {
     position: relative;
@@ -81,6 +81,7 @@
   &.group-border.disabled {
     @include common.add-disable(false,false, true);
   }
+
   .form-text {
     @include common.padding-vertical(4);
   }

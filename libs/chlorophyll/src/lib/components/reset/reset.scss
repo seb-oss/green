@@ -24,8 +24,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+ul[role='list'],
+ol[role='list'] {
   list-style: none;
 }
 
@@ -36,9 +36,9 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
+  line-height: 1.125;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
-  line-height: 1.125;
 }
 
 /* A elements that don't have a class get default styles */
@@ -49,8 +49,8 @@ a:not([class]) {
 /* Make images easier to work with */
 img,
 picture {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -58,23 +58,24 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
   appearance: none; /* remove shadow from iOS */
+  font: inherit;
   margin: 0;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+    scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
