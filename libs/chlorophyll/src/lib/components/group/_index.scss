@@ -5,7 +5,6 @@
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
-  overflow: auto;
   width: fit-content;
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
