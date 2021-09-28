@@ -1,3 +1,5 @@
+@use '../../tokens';
+
 /* credits to: https://piccalil.li/blog/a-modern-css-reset/ (copied from node_modules/modern-css-reset 1.4.0) with minor modifications */
 
 /* Box sizing rules */
@@ -74,4 +76,9 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+body {
+  font-family: tokens.font-family('sans');
+  font-size: tokens.$base-font-size;
 }
