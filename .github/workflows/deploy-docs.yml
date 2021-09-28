@@ -66,5 +66,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for creating a pull request! 🚀 Checkout the storybook we created for it [here](https://automatic-pancake-aa6626d9.pages.github.io/${{ steps.target.outputs.target }}/).'
+              body: '👋 Thanks for creating a pull request! 🚀 Checkout the storybook we created for it [here](https://sebgroup.github.io/green/${{ steps.target.outputs.target }}/chlorophyll/).'
             })
