@@ -46,7 +46,7 @@ jobs:
         id: target
 
       - name: Build storybook
-        run: yarn run nx affected --target build-storybook
+        run: yarn run nx affected --target build-storybook --base=origin/main
 
       - name: Deploy storybook to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
