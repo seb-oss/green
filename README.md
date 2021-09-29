@@ -4,7 +4,7 @@ Green is an opinionated design system for building content and functionality for
 
 ## View
 
-View the components in our [Storybook](https://automatic-pancake-aa6626d9.pages.github.io/latest/chlorophyll)
+View the components in our [Storybook](https://sebgroup.github.io/green/latest/chlorophyll/)
 
 ## Philisophy
 

@@ -1,2 +1,5 @@
-// import scss using scss-loader file
-import '!style-loader!css-loader!postcss-loader!sass-loader!./scss-loader.scss';
+import { parameters as baseParameters } from '../../../.storybook/preview'
+
+export const parameters = {
+  ...baseParameters,
+}

@@ -1,5 +1,6 @@
 @use 'sass:map';
 $base-font-size: 16px !default;
+$font-path: 'fonts' !default;
 
 $font-size: (
   's': 0.75rem,
