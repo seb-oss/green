@@ -78,6 +78,7 @@
     "@nrwl/tao": "12.9.0",
     "@nrwl/web": "12.9.0",
     "@nrwl/workspace": "12.9.0",
+    "@sebgroup/fonts": "^1.1.0",
     "@storybook/addon-docs": "^6.4.0-beta.0",
     "@storybook/addon-essentials": "^6.4.0-beta.0",
     "@storybook/addon-links": "^6.4.0-beta.0",
@@ -143,7 +144,6 @@
     "ecstatic": "^4.1.4",
     "glob-parent": "^6.0.1",
     "immer": "^9.0.6",
-    "trim": "^1.0.1",
-    "trim-newlines": ">=4.0.1"
+    "trim": "^1.0.1"
   }
 }
