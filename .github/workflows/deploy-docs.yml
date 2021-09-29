@@ -46,7 +46,7 @@ jobs:
         id: target
 
       - name: Build storybook
-        run: yarn run nx run chlorophyll:build-storybook
+        run: yarn run nx affected --target build-storybook
 
       - name: Deploy storybook to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
