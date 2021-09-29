@@ -4,15 +4,7 @@ Green is an opinionated design system for building content and functionality for
 
 ## View
 
-View the components in our [Storybook](https://automatic-pancake-aa6626d9.pages.github.io/latest/chlorophyll)
-
-## Install
-
-// TODO
-
-## Use
-
-// TODO
+View the components in our [Storybook](https://sebgroup.github.io/green/latest/chlorophyll/)
 
 ## Philisophy
 
@@ -38,11 +30,21 @@ If something _might_ be a performance problem, that is ok. If something _might_ 
 
 If something can be deployed, we deploy. Then, if a PR needs a review, we review. Then, and only then, if something can be built, we build. Flow is more important than speed.
 
+## The design process
+
+Green is tightly integrated with the design process. The design responsibles are part of the team so that decisions can be made effectively and by those most suited.
+
+For the most part we follow the existing design. When changes have to be made for practical reasons, clarity, uniformity, accessibility or any other reason, the design responsibles make the call and the change is integrated.
+
+This can, and will, lead to minor inconsistencies in different parts of our offering, especially as Green is not yet (even close to) at 100% adoption. This is fine. Far larger inconsistencies already exist in our current, digital ecosystem. We therefore prioritise the ability to keep moving forward and improve our customers' experience over delaying for the sake of consistency.
+
+In the long run, consistency will be achieved by automating the roll-out of changes, be they visual, functional or qualitative, to keep all parts of our offering on the latest version. When we go Green, we stay green.
+
 ## Develop
 
 ### Yarn
 
-This mono repo is based on `lerna` and `yarn workspaces`. If you are unused to yarn, see the following instructions:
+This mono repo is based on `nx` and uses `yarn` instead of `npm`. If you are unused to yarn, see the following instructions:
 
 #### Install yarn
 
@@ -58,10 +60,10 @@ yarn
 
 #### Add a dependency to a workspace
 
-If you want to add `leftpad` to the chlorophyll project:
+All projects use a common set of dependencies so if you want to add `leftpad` to the chlorophyll project, just run:
 
 ```bash
-yarn workspace @sebgroup/chlorophyll add leftpad
+yarn add leftpad
 ```
 
 #### Run a command in `package.json`

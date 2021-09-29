@@ -1,2 +1,6 @@
 // load global styles used by storybook
-@use '../../chlorophyll/src/lib';
+@use '../../libs/chlorophyll/src/lib/index.scss';
+body {
+  background: red;
+}
+

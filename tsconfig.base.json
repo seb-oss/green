@@ -18,6 +18,7 @@
       "@sebgroup/chlorophyll": ["libs/chlorophyll/src/index.ts"],
       "@sebgroup/extract": ["libs/extract/src/index.ts"],
       "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
+      "@sebgroup/green-angular-dev/*": ["apps/angular-lib-dev/*"],
       "@sebgroup/green-react": ["libs/react/src/index.ts"]
     }
   },
