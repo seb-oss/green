@@ -1,5 +1,5 @@
 @use '../tokens';
-@use '~@sebgroup/fonts/scss/seb-fonts' with (
+@use '@sebgroup/fonts/scss/seb-fonts' with (
   $seb-font-path: tokens.$font-path
 );
 
