@@ -231,7 +231,22 @@
         "build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "sass libs/chlorophyll/src/lib/index.scss dist/libs/chlorophyll/green-chlorophyll.css"
+            "commands": [
+              {
+                "description": "compile scss",
+                "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/src/lib/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
+              },
+              {
+                "description": "auto prefix compiled css overwrite file and output maps",
+                "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=autoprefixer -m -r"
+              },
+              {
+                "description": "minifiy compiled and auto prefixed css and output maps",
+                "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
+              }
+            ],
+            "parallel": false,
+            "outputPath": "dist/libs/chlorophyll"
           }
         },
         "lint": {
