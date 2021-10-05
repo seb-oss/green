@@ -3,9 +3,7 @@
 @use 'sass:map';
 
 @mixin add-focus($suffix: 'visible', $target: '') {
-  @if not $suffix {
-    $suffix: '';
-  } @else {
+  @if $suffix != ''  {
     $suffix: '-' + $suffix;
   }
 
@@ -24,10 +22,12 @@
     outline-style: solid;
   }
 
-  &:focus:not(:focus-visible) {
-    border-color: initial;
-    box-shadow: none;
-    outline: 0;
+  @if $suffix != '' {
+    &:focus:not(:focus-visible) {
+      border-color: initial;
+      box-shadow: none;
+      outline: 0;
+    }
   }
 
   &:focus#{$suffix} #{$target} {
@@ -70,6 +70,7 @@
 }
 
 @mixin add-active-state($color: map.get(tokens.$blue, 0), $fadeActiveHover: false) {
+  &[aria-selected],
   &:active,
   &.active,
   &.active:hover,
@@ -78,6 +79,7 @@
     border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
   }
   @if($fadeActiveHover) {
+    &[aria-selected]:hover,
     &.active:hover,
     &:active:hover {
       opacity: 0.9;
