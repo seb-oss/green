@@ -223,6 +223,28 @@
         }
       }
     },
+    "charts": {
+      "root": "libs/charts",
+      "sourceRoot": "libs/charts/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/charts/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/charts"],
+          "options": {
+            "jestConfig": "libs/charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "chlorophyll": {
       "root": "libs/chlorophyll",
       "sourceRoot": "libs/chlorophyll/src",
@@ -408,6 +430,105 @@
             "ci": {
               "quiet": true
             }
+          }
+        }
+      }
+    },
+    "react-charts": {
+      "root": "libs/react-charts",
+      "sourceRoot": "libs/react-charts/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/react-charts",
+            "tsConfig": "libs/react-charts/tsconfig.lib.json",
+            "project": "libs/react-charts/package.json",
+            "entryFile": "libs/react-charts/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/react-charts/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react-charts/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react-charts"],
+          "options": {
+            "jestConfig": "libs/react-charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/react-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/react-charts",
+            "config": {
+              "configFolder": "libs/react-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "react-charts-e2e": {
+      "root": "apps/react-charts-e2e",
+      "sourceRoot": "apps/react-charts-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/react-charts-e2e/cypress.json",
+            "devServerTarget": "react-charts:storybook",
+            "tsConfig": "apps/react-charts-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "react-charts:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/react-charts-e2e/**/*.{js,ts}"]
           }
         }
       }

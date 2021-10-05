@@ -47,6 +47,9 @@
       "tags": [],
       "implicitDependencies": ["angular-lib-dev"]
     },
+    "charts": {
+      "tags": []
+    },
     "chlorophyll": {
       "tags": []
     },
@@ -55,6 +58,13 @@
     },
     "react": {
       "tags": []
+    },
+    "react-charts": {
+      "tags": []
+    },
+    "react-charts-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-charts"]
     },
     "react-e2e": {
       "tags": [],
