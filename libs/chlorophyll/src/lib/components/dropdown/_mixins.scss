@@ -1,0 +1,47 @@
+@use '../../tokens';
+@use '../../common';
+@use 'sass:map';
+
+@mixin dropdown-trigger {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color();
+  @include common.add-focus('');
+}
+
+@mixin popover {
+  @include common.add-shadow(1);
+  @include common.add-border();
+  @include common.add-border-color(map.get(tokens.$blue, 0));
+  @include common.add-border-radius();
+  z-index: tokens.$zindex-dropdown;
+  background-color: tokens.$white;
+  position: absolute;
+  display: none;
+  min-width: 90px;
+}
+@mixin select {
+  [role="option"] {
+    @include common.padding-horizontal(4);
+    @include common.padding-vertical(4);
+    @include common.add-hover-active-state();
+    cursor: pointer;
+  }
+}
+
+@mixin multi-select {
+  [role="option"] {
+    @include common.margin-horizontal(4)
+  }
+}
+
+@mixin menu {
+  [role="menuitem"] {
+    @include common.padding-horizontal(4);
+    @include common.padding-vertical(4);
+    @include common.add-hover-state();
+    cursor: pointer;
+  }
+}
