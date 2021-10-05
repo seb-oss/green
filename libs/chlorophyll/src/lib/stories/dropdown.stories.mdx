@@ -1,0 +1,87 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components/Dropdown" />
+
+### Dropdown select
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Option 2</button>
+    <ul role="listbox" class="popover d-block" aria-activedescendant="option_2" tabIndex="-1">
+      <li id="option_1" role="option">Option 1</li>
+      <li id="option_2" role="option" aria-selected>Option 2</li>
+      <li id="option_3" role="option">Option 3</li>
+    </ul>
+  </div>
+</Canvas>
+
+### Dropdown multiselect
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
+    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover d-block" tabIndex="-1" aria-multiselectable="true">
+      <legend class="sr-only">Checkbox group</legend>
+      <label class="form-control" role="option">One
+        <input required type="checkbox" />
+        <span></span>
+      </label>
+      <label class="form-control" role="option">Two
+        <input required type="checkbox" required />
+        <span></span>
+      </label>
+    </fieldset>
+  </div>
+</Canvas>
+
+### Dropdown multiselect with search
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
+    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover d-block" tabIndex="-1" aria-multiselectable="true">
+      <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
+      <legend class="sr-only">Checkbox group</legend>
+      <label class="form-control" role="option">One
+        <input required type="checkbox" />
+        <span></span>
+      </label>
+      <label class="form-control" role="option">Two
+        <input required type="checkbox" required />
+        <span></span>
+      </label>
+    </fieldset>
+  </div>
+</Canvas>
+
+### Dropdown autocomplete
+<Canvas>
+  <div style={{height: '300px'}}>
+    <input type="text"
+           role="combobox"
+           aria-expanded="true"
+           aria-autocomplete="list"
+           aria-controls="autocompleteListbox"
+           class="dropdown-menu"/>
+    <ul id="autocompleteListbox" role="listbox" class="popover d-block" tabIndex="-1">
+      <li id="option_1" role="option">Option 1</li>
+      <li id="option_2" role="option">Option 2</li>
+      <li id="option_3" role="option">Option 3</li>
+    </ul>
+  </div>
+</Canvas>
+
+### Dropdown menu
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button"
+            role="button"
+            aria-expanded="true"
+            aria-haspopup="menu"
+            aria-controls="drownMenu"
+            class="dropdown-menu">Menu Icon</button>
+    <ul id="dropdownMenu" role="menu" class="popover d-block" tabIndex="-1">
+      <li id="option_1" role="menuitem">Action 1</li>
+      <li id="option_2" role="menuitem">Action 2</li>
+      <li id="option_3" role="menuitem">Action 3</li>
+    </ul>
+  </div>
+</Canvas>
+
