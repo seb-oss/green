@@ -1,7 +1,7 @@
 @use 'mixins';
 @forward 'mixins';
 
-button[aria-haspopup="listbox"] {
+button[aria-haspopup='listbox'] {
   @include mixins.dropdown-trigger();
 }
 
@@ -9,13 +9,14 @@ button[aria-haspopup="listbox"] {
   @include mixins.popover();
 }
 
-ul[role="menu"] {
+ul[role='menu'] {
   @include mixins.menu();
 }
 
-ul[role="listbox"] {
+ul[role='listbox'] {
   @include mixins.select();
 }
-fieldset[role="listbox"][aria-multiselectable="true"] {
+
+fieldset[role='listbox'][aria-multiselectable='true'] {
   @include mixins.multi-select();
 }

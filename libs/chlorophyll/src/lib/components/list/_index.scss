@@ -8,7 +8,7 @@ ul {
   @include mixins.base-list();
 }
 
-ul:not(.check,.table,[role="listbox"],[role="menu"]) {
+ul:not(.check,.table,[role='listbox'],[role='menu']) {
   @include mixins.bullet-list();
 }
 

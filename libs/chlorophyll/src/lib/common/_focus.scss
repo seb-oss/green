@@ -3,7 +3,7 @@
 @use 'sass:map';
 
 @mixin add-focus($suffix: 'visible', $target: '') {
-  @if $suffix != ''  {
+  @if $suffix != '' {
     $suffix: '-' + $suffix;
   }
 

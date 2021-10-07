@@ -16,14 +16,14 @@
   @include common.add-border();
   @include common.add-border-color(map.get(tokens.$blue, 0));
   @include common.add-border-radius();
-  z-index: tokens.$zindex-dropdown;
   background-color: tokens.$white;
-  position: absolute;
   display: none;
   min-width: 90px;
+  position: absolute;
+  z-index: tokens.$zindex-dropdown;
 }
 @mixin select {
-  [role="option"] {
+  [role='option'] {
     @include common.padding-horizontal(4);
     @include common.padding-vertical(4);
     @include common.add-hover-active-state();
@@ -32,13 +32,12 @@
 }
 
 @mixin multi-select {
-  [role="option"] {
-    @include common.margin-horizontal(4)
-  }
+  [role='option'] {
+    @include common.margin-horizontal(4); }
 }
 
 @mixin menu {
-  [role="menuitem"] {
+  [role='menuitem'] {
     @include common.padding-horizontal(4);
     @include common.padding-vertical(4);
     @include common.add-hover-state();

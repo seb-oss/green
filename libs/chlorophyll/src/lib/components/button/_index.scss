@@ -11,7 +11,7 @@ input[type='reset'],
 }
 
 // base
-button:not(.link, [aria-haspopup="listbox"], [aria-haspopup="menu"]),
+button:not(.link, [aria-haspopup='listbox'], [aria-haspopup='menu']),
 input[type='button'],
 input[type='submit'],
 input[type='reset'],
@@ -20,13 +20,13 @@ input[type='reset'],
 }
 
 // secondary
-button:not(.primary, .ghost, .close, .link, [aria-haspopup="listbox"], [aria-haspopup="menu"]),
+button:not(.primary, .ghost, .close, .link, [aria-haspopup='listbox'], [aria-haspopup='menu']),
 a.button:not(.primary, .ghost, .close, .link),
 button.secondary,
 a.button.secondary,
 input[type='button'],
 input[type='reset'],
-button[type='button']:not(.primary, .ghost, .close, .link, [aria-haspopup="listbox"], [aria-haspopup="menu"]),
+button[type='button']:not(.primary, .ghost, .close, .link, [aria-haspopup='listbox'], [aria-haspopup='menu']),
 button[type='reset']:not(.primary, .ghost, .close, .link) {
   @include mixins.secondary;
 }
