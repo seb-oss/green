@@ -3,7 +3,8 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'segmented-control', pathMatch: 'full' },
-  { path: 'segmented-control', loadChildren: () => import('./segmented-control/segmented-control.module').then(m => m.SegmentedControlModule) },
+  { path: 'segmented-control', data: {name: 'Segmented control'}, loadChildren: () => import('./segmented-control/segmented-control.module').then(m => m.SegmentedControlModule) },
+  { path: 'dropdown', data: {name: 'Dropdown'}, loadChildren: () => import('./dropdown/dropdown.module').then(m => m.DropdownModule) },
   { path: '**', redirectTo: 'buttons' },
 ];
 
