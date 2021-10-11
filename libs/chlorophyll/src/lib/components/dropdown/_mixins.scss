@@ -9,6 +9,7 @@
   @include common.add-border();
   @include common.add-border-color();
   @include common.add-focus('');
+  @include common.add-hover-state();
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
@@ -28,6 +29,9 @@
   }
   &[aria-expanded="true"]::after {
     transform: translate(75%, 6px) rotate3d(0, 0, 1, -45deg) scale3d(-1,-1,1);
+  }
+  &:hover::after {
+    border-color: currentColor;
   }
 }
 
