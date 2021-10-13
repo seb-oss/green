@@ -10,26 +10,29 @@
   @include common.add-border-color();
   @include common.add-focus('');
   @include common.add-hover-state();
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
-  display:flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+
   &::after {
-    display: block;
     @include common.margin-horizontal(3);
+    border-bottom: solid 2px map.get(tokens.$blue, 0);
+    border-left: solid 2px map.get(tokens.$blue, 0);
     content: '';
-    border-left: solid 2px map.get(tokens.$blue,0);
-    border-bottom: solid 2px map.get(tokens.$blue,0);
+    display: block;
+    height: 12px;
     transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg);
     transition: transform 300ms ease-in;
     width: 12px;
-    height: 12px;
   }
-  &[aria-expanded="true"]::after {
-    transform: translate(75%, 6px) rotate3d(0, 0, 1, -45deg) scale3d(-1,-1,1);
+
+  &[aria-expanded='true']::after {
+    transform: translate(75%, 6px) rotate3d(0, 0, 1, -45deg) scale3d(-1, -1, 1);
   }
+
   &:hover::after {
     border-color: currentColor;
   }
