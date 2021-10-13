@@ -23,7 +23,7 @@ import { Instance } from '@popperjs/core/lib/types'
 @Directive({
   selector: '[nggPopoverTrigger]',
 })
-export class GreenPopoverTriggerDirective implements OnInit, OnDestroy {
+export class NggPopoverTriggerDirective implements OnInit, OnDestroy {
   $unsubscribe = new Subject()
   get options(): Array<any> {
     return this._options
@@ -66,8 +66,8 @@ export class GreenPopoverTriggerDirective implements OnInit, OnDestroy {
     this.popover.toggle()
   }
   constructor(
-    @Inject(forwardRef(() => GreenPopoverDirective))
-    public popover: GreenPopoverDirective,
+    @Inject(forwardRef(() => NggPopoverDirective))
+    public popover: NggPopoverDirective,
     private _elRef: ElementRef,
     private cdr: ChangeDetectorRef
   ) {}
@@ -128,7 +128,7 @@ export class GreenPopoverTriggerDirective implements OnInit, OnDestroy {
 @Directive({
   selector: '[nggPopoverOption]',
 })
-export class GreenPopoverOptionDirective implements OnInit, OnDestroy {
+export class NggPopoverOptionDirective implements OnInit, OnDestroy {
   $unsubscribe = new Subject()
 
   @Input() nggPopoverOption: any
@@ -145,8 +145,8 @@ export class GreenPopoverOptionDirective implements OnInit, OnDestroy {
     this.popover.state.$focusedElement?.next(this.id)
   }
   constructor(
-    @Inject(forwardRef(() => GreenPopoverDirective))
-    public popover: GreenPopoverDirective,
+    @Inject(forwardRef(() => NggPopoverDirective))
+    public popover: NggPopoverDirective,
     private cdr: ChangeDetectorRef,
     public elRef: ElementRef
   ) {}
@@ -174,7 +174,7 @@ export class GreenPopoverOptionDirective implements OnInit, OnDestroy {
 @Directive({
   selector: '[nggPopover]',
 })
-export class GreenPopoverDirective {
+export class NggPopoverDirective {
   get config(): { usePopper?: boolean; container?: '' | 'body' } {
     return this._config
   }
@@ -204,8 +204,8 @@ export class GreenPopoverDirective {
   }
   //options: Array<{ id: string; value: any }> = []
   control: AbstractControl | undefined
-  @ContentChild(GreenPopoverTriggerDirective, { static: false })
-  private _trigger: GreenPopoverTriggerDirective | undefined
+  @ContentChild(NggPopoverTriggerDirective, { static: false })
+  private _trigger: NggPopoverTriggerDirective | undefined
   close() {
     // unselect focused element on close
     this.state.$focusedElement.next(null)
@@ -231,12 +231,12 @@ export class GreenPopoverDirective {
 @Directive({
   selector: '[nggPopoverElement]',
 })
-export class GreenPopoverElementDirective implements OnInit, OnDestroy {
+export class NggPopoverElementDirective implements OnInit, OnDestroy {
   _popper?: Instance
   _container?: ElementRef | null
   $unsubscribe = new Subject()
-  @ContentChildren(GreenPopoverOptionDirective) options:
-    | QueryList<GreenPopoverOptionDirective>
+  @ContentChildren(NggPopoverOptionDirective) options:
+    | QueryList<NggPopoverOptionDirective>
     | undefined
 
   @HostBinding('class.popover') class = true
@@ -284,8 +284,8 @@ export class GreenPopoverElementDirective implements OnInit, OnDestroy {
   }
 
   constructor(
-    @Inject(forwardRef(() => GreenPopoverDirective))
-    public popover: GreenPopoverDirective,
+    @Inject(forwardRef(() => NggPopoverDirective))
+    public popover: NggPopoverDirective,
     private _elRef: ElementRef,
     private _renderer: Renderer2,
     private _cdr: ChangeDetectorRef

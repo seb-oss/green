@@ -1,24 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { DropdownRoutingModule } from './dropdown-routing.module';
-import { DropdownComponent } from './dropdown.component';
+import { DropdownRoutingModule } from './dropdown-routing.module'
+import { DropdownComponent } from './dropdown.component'
 import { ReactiveFormsModule } from '@angular/forms'
 // eslint-disable-next-line
-import { GreenDropdownModule } from '@sebgroup/green-angular'
-
+import { NggDropdownModule } from '@sebgroup/green-angular'
 
 @NgModule({
-  declarations: [
-    DropdownComponent,
-  ],
+  declarations: [DropdownComponent],
   imports: [
     CommonModule,
-    GreenDropdownModule,
+    NggDropdownModule,
     DropdownRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  exports: [
-  ]
+  exports: [],
 })
-export class DropdownModule { }
+export class DropdownModule {}

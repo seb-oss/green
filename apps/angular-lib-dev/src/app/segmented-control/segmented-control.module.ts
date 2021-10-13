@@ -1,25 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { SegmentedControlRoutingModule } from './segmented-control-routing.module';
-import { SegmentedControlComponent } from './segmented-control.component';
-import { OptionAComponent } from './option-a/option-a.component';
-import { OptionBComponent } from './option-b/option-b.component';
+import { SegmentedControlRoutingModule } from './segmented-control-routing.module'
+import { SegmentedControlComponent } from './segmented-control.component'
+import { OptionAComponent } from './option-a/option-a.component'
+import { OptionBComponent } from './option-b/option-b.component'
 // eslint-disable-next-line
-import { GreenSegmentedControlModule } from '@sebgroup/green-angular';
-
+import { NggSegmentedControlModule } from '@sebgroup/green-angular'
 
 @NgModule({
-  declarations: [
-    SegmentedControlComponent,
-    OptionAComponent,
-    OptionBComponent
-  ],
+  declarations: [SegmentedControlComponent, OptionAComponent, OptionBComponent],
   imports: [
     CommonModule,
-    GreenSegmentedControlModule,
-    SegmentedControlRoutingModule
+    NggSegmentedControlModule,
+    SegmentedControlRoutingModule,
   ],
-  exports: [OptionAComponent, OptionBComponent]
+  exports: [OptionAComponent, OptionBComponent],
 })
-export class SegmentedControlModule { }
+export class SegmentedControlModule {}

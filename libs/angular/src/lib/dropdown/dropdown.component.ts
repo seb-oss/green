@@ -26,7 +26,7 @@ import { AbstractControl } from '@angular/forms'
   `,
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GreenDropdownComponent {
+export class NggDropdownComponent {
   get control(): AbstractControl {
     return <AbstractControl>this._control
   }

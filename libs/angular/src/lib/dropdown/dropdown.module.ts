@@ -1,32 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 import {
-  GreenPopoverDirective,
-  GreenPopoverElementDirective,
-  GreenPopoverOptionDirective,
-  GreenPopoverTriggerDirective
+  NggPopoverDirective,
+  NggPopoverElementDirective,
+  NggPopoverOptionDirective,
+  NggPopoverTriggerDirective,
 } from './popover.directive'
-import { GreenDropdownComponent } from './dropdown.component';
-
-
+import { NggDropdownComponent } from './dropdown.component'
 
 @NgModule({
   declarations: [
-    GreenPopoverDirective,
-    GreenPopoverOptionDirective,
-    GreenPopoverElementDirective,
-    GreenPopoverTriggerDirective,
-    GreenDropdownComponent
+    NggPopoverDirective,
+    NggPopoverOptionDirective,
+    NggPopoverElementDirective,
+    NggPopoverTriggerDirective,
+    NggDropdownComponent,
   ],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [
-    GreenPopoverDirective,
-    GreenPopoverOptionDirective,
-    GreenPopoverElementDirective,
-    GreenPopoverTriggerDirective,
-    GreenDropdownComponent
-  ]
+    NggPopoverDirective,
+    NggPopoverOptionDirective,
+    NggPopoverElementDirective,
+    NggPopoverTriggerDirective,
+    NggDropdownComponent,
+  ],
 })
-export class GreenDropdownModule { }
+export class NggDropdownModule {}
