@@ -3,8 +3,16 @@
   <h1 class='mx-4'>Green Angular Dev</h1>
 </nav>
 <div class='container-fluid'>
-  <div class='my-6'>
-    <a routerLink='segmented-control'>Segmented control</a>
-  </div>
-  <router-outlet></router-outlet>
+  <nav role='tab-list' class='my-6'>
+    <a role='tab' *ngFor='let route of routes'
+       [routerLink]='route.path'
+       #rla=routerLinkActive
+       routerLinkActive
+       [attr.aria-selected]='rla.isActive'>
+      {{route.data?.name}}
+    </a>
+  </nav>
+  <section aria-live="polite">
+    <router-outlet></router-outlet>
+  </section>
 </div>

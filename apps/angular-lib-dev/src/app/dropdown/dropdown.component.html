@@ -1,0 +1,31 @@
+<h3 class='mb-4'>Example with and without container</h3>
+<div style='height:100px;overflow: hidden;position: relative;' class='border p-4 mb-5'>
+  <form [formGroup]='dropdownForm' class='horizontal'>
+    <ngg-dropdown [options]='options'
+                  [control]='dropdownForm.controls.select'>
+    </ngg-dropdown>
+    <ngg-dropdown [options]='options'
+                  [control]='dropdownForm.controls.select'
+                  [config]="{container: 'body'}">
+    </ngg-dropdown>
+  </form>
+</div>
+<h3 class='mb-4'>Example with popper</h3>
+<div style='height: 250px; width: 250px;overflow: scroll; position: relative' class='border mb-5' #container>
+    <form [formGroup]='dropdownForm' style='
+    margin-top: 600px;
+    margin-bottom: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    height: fit-content;
+    width: fit-content;
+    padding: 0 600px;'>
+      <ngg-dropdown [options]='options'
+                    [control]='dropdownForm.controls.select'>
+      </ngg-dropdown>
+    </form>
+</div>
+
+<h3>Selected value</h3>
+{{dropdownForm.value | json}}
+
