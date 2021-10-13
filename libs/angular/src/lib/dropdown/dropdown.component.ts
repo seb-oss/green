@@ -4,15 +4,23 @@ import { AbstractControl } from '@angular/forms'
 @Component({
   selector: 'ngg-dropdown',
   template: `
-    <div nggPopover [config]='config'>
-      <button type='button' nggPopoverTrigger [control]='control'>
-        {{control.value}}
+    <div nggPopover [config]="config">
+      <button
+        type="button"
+        nggPopoverTrigger
+        [control]="control"
+        [options]="options"
+      >
+        {{ control.value }}
       </button>
-      <ul nggPopoverElement tabindex='-1' autofocus>
-        <li *ngFor='let option of options; let i = index'
-            [nggPopoverOption]='option.value'
-            [index]='i'
-        >{{option.key}}</li>
+      <ul nggPopoverElement tabindex="-1" autofocus>
+        <li
+          *ngFor="let option of options; let i = index"
+          [nggPopoverOption]="option.value"
+          [index]="i"
+        >
+          {{ option.key }}
+        </li>
       </ul>
     </div>
   `,
@@ -20,7 +28,7 @@ import { AbstractControl } from '@angular/forms'
 })
 export class GreenDropdownComponent {
   get control(): AbstractControl {
-    return <AbstractControl>this._control;
+    return <AbstractControl>this._control
   }
 
   @Input() set control(value: AbstractControl) {
@@ -40,9 +48,9 @@ export class GreenDropdownComponent {
     this._config = value
   }
 
-  private _options: Array<any> = [];
+  private _options: Array<any> = []
 
-  private _control?: AbstractControl;
+  private _control?: AbstractControl
 
-  private _config?: any = {};
+  private _config?: any = {}
 }
