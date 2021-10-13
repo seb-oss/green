@@ -19,7 +19,7 @@ export class DropdownComponent implements AfterViewInit {
     value: 3
   }];
   dropdownForm = this._fb.group({
-    select: ['1']
+    select: [2]
   });
   constructor(private _fb: FormBuilder) {
   }
