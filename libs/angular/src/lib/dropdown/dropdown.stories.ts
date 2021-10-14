@@ -1,10 +1,12 @@
 // Dropdown.stories.ts
 
-import { moduleMetadata } from '@storybook/angular'
+import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
 
 import { FormBuilder } from '@angular/forms'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { NggDropdownComponent } from './dropdown.component'
+import { CommonModule } from '@angular/common'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggDropdownModule } from './dropdown.module'
 
 export default {
   title: 'Components/Dropdown',
@@ -13,8 +15,10 @@ export default {
       declarations: [],
       imports: [
         FormsModule,
+        BrowserModule,
+        CommonModule,
         ReactiveFormsModule,
-        //GreenDropdownModule // NOT WORKING!?
+        NggDropdownModule,
       ],
     }),
   ],
@@ -23,13 +27,13 @@ export default {
 export const Select = () => {
   const _fb = new FormBuilder()
   const dropdownForm = _fb.group({
-    select: ['1'],
+    select: [1],
   })
   return {
-    component: NggDropdownComponent,
     template: `<ngg-dropdown
                   [control]='control'
                   [options]='options'
+                  [config]='config'
                   ></ngg-dropdown>`,
     props: {
       control: dropdownForm.controls.select,
