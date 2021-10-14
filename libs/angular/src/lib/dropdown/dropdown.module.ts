@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import {
-  NggPopoverDirective,
-  NggPopoverElementDirective,
-  NggPopoverOptionDirective,
-  NggPopoverTriggerDirective,
-} from './popover.directive'
 import { NggDropdownComponent } from './dropdown.component'
+import { NggPopoverElementDirective } from './popover-element.directive'
+import { NggPopoverOptionDirective } from './popover-option.directive'
+import { NggPopoverTriggerDirective } from './popover-trigger.directive'
+import { NggPopoverDirective } from './popover.directive'
 
 @NgModule({
   declarations: [
