@@ -7,7 +7,7 @@ Chlorophyll is the design token and css part of Green. It is used in all high le
 
 ## Use
 
-The Green design system has an unrelenting focus on sensible defaults and ease of use. All you have to do to start using it is import the css, mark the area in which you intend to start using Greem (use the `html` tag if the whole application uses it), and add the class `green`.
+The Green design system has an unrelenting focus on sensible defaults and ease of use. All you have to do to start using it is import the css, mark the area in which you intend to start using Green (use the `html` tag if the whole application uses it), and add the class `green`.
 
 ```html
 <body class="green">
