@@ -32,18 +32,35 @@ module.exports = {
           compile: async () => {
             fs.access('dist/fonts', async (error) => {
               if (error) {
-                console.log('Font directory does not exist. Copy fonts...')
+                console.log('Font directory does not exist. Copying fonts...')
                 await new Promise(resolve => copyfiles(['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'], { up: true }, resolve))
                   .catch(_ => [{ success: false }])
                   .then(_ => [{ success: true }])
               } else {
-                console.log('Font directory already exist. Don\'t copy fonts...')
+                console.log('Font directory already exist. Won\'t copy fonts...')
               }
             })
           }
         }),
         ...config.plugins,
-      ]
+      ],
+      module: {
+        ...config.module,
+        rules: [
+          ...config.module.rules,
+          {
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                  outputPath: '../../fonts/'
+                }
+              }
+            ]
+          }]
+      }
     }
 
     // Return the altered config

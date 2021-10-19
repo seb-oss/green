@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { GreenSegmentedControlModule } from './segmented-control/segmented-control.module'
+import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
+import { NggDropdownModule } from './dropdown/dropdown.module'
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  exports: [GreenSegmentedControlModule]
+  exports: [NggSegmentedControlModule, NggDropdownModule],
 })
-export class GreenAngularModule {}
+export class NggModule {}

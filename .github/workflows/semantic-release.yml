@@ -29,14 +29,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Build chlorophyll
-        run: npx nx run chlorophyll:build
+      - name: Build affected libs
+        # run: npx nx run chlorophyll:build
+        run: npx nx affected --target build --base=origin/main
 
-      - name: Release chlorophyll
-        run: npx nx run chlorophyll:release --verbose
+      - name: Release affected libs
+        # run: npx nx run chlorophyll:release --verbose
+        run: npx nx affected --target release --base=origin/main
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           HUSKY: 0
-
-
