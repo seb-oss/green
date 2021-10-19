@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-alpha.2...@sebgroup/chlorophyll@1.0.0-alpha.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* 🐛 Updated immer ([#205](https://github.com/sebgroup/green/issues/205)) ([b50334d](https://github.com/sebgroup/green/commit/b50334dec269eb5e0d5820a6691439fce4bf3505))
+
 # [1.0.0-alpha.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-alpha.1...@sebgroup/chlorophyll@1.0.0-alpha.2) (2021-09-14)
 
 
