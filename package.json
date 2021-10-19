@@ -38,6 +38,7 @@
     ]
   },
   "private": true,
+  "workspaces": ["packages/*"],
   "dependencies": {
     "@angular/animations": "12.2.10",
     "@angular/common": "12.2.10",
@@ -69,7 +70,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@ng-easy/builders": "^3.3.5",
+    "@ng-easy/builders": "^3.3.20",
     "@nrwl/angular": "12.9.0",
     "@nrwl/cli": "12.9.0",
     "@nrwl/cypress": "12.9.0",
