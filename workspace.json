@@ -73,6 +73,12 @@
               "quiet": true
             }
           }
+        },
+        "release": {
+          "builder": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
         }
       }
     },
