@@ -477,7 +477,7 @@
           "executor": "@nrwl/storybook:storybook",
           "options": {
             "uiFramework": "@storybook/react",
-            "port": 4400,
+            "port": 4300,
             "config": {
               "configFolder": "libs/react-charts/.storybook"
             }

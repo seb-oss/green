@@ -1,56 +1,20 @@
 import bb, {
   Chart,
   ChartOptions,
-  Data,
-  LegendOptions,
-  ZoomOptions,
-  areaSpline,
-  areaStep,
-  line,
-  bar,
-  gauge,
-  area,
-  pie,
-  donut,
-  spline,
-  radar,
-  Axis,
 } from 'billboard.js'
 import { useEffect, useRef, useState } from 'react'
-import '@sebgroup/green-charts'
-
-const rand = () => Math.round(3000 * Math.random()) - 1000
+import { ChartData, ComplexChartData, createOptions } from '@sebgroup/green-charts'
 
 /* eslint-disable-next-line */
 export interface ReactChartsProps {
-  data: Data
-  axis?: Axis
-  legend?: LegendOptions
-  zoom?: ZoomOptions
+  data: ChartData | ComplexChartData
   theme?: string
 }
 
-export function ReactCharts({ data, axis, legend, zoom, theme }: ReactChartsProps) {
-  line()
-  bar()
-  area()
-  spline()
-  pie()
-  areaSpline()
-  areaStep()
-  gauge()
-  donut()
-  radar()
+export function ReactCharts({ data, theme }: ReactChartsProps) {
   const chartRef = useRef(null)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const [options, setOptions] = useState<ChartOptions>({
-    data,
-    axis,
-    zoom,
-    legend,
-    interaction: { enabled: true },
-    transition: { duration: 1000 },
-  })
+  const [options, setOptions] = useState<ChartOptions>(createOptions(data))
   const [chart, setChart] = useState<Chart>()
   useEffect(() => {
     if (!chart && chartRef.current) {
@@ -62,7 +26,7 @@ export function ReactCharts({ data, axis, legend, zoom, theme }: ReactChartsProp
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartRef, chart])
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!data || !chart || options.data === data) return
     
     setOptions({
@@ -72,7 +36,8 @@ export function ReactCharts({ data, axis, legend, zoom, theme }: ReactChartsProp
     const { columns, type, types  } = data
     chart.load({ columns, type, types  })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+  }, [data])*/
+
   return (
     <i className={theme} ref={chartRef} />
   )

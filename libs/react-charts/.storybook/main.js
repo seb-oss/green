@@ -3,9 +3,6 @@ const rootMain = require('../../../.storybook/main')
 module.exports = {
   ...rootMain,
 
-  core: {
-    // builder: 'webpack4',
-  },
   stories: [
     ...rootMain.stories,
     '../src/lib/**/*.stories.mdx',
