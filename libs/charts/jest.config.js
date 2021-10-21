@@ -8,8 +8,11 @@ module.exports = {
     },
   },
   transform: {
-    '^.+\\.[tj]sx?$': 'babel-jest',
+    '^.+\\.[tj]sx?$': 'ts-jest',
   },
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!billboard.js/.*)"
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/charts',
 }

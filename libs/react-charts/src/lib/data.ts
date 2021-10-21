@@ -41,31 +41,31 @@ const lines: ComplexChartData = {
   ],
   categories: ['jan', 'feb', 'mar', 'apr'],
 }
-  const oxceed: ComplexChartData = {
-    name: 'Totala kostnader',
-    data: [
-      {
-        name: 'Ack. utfall',
-        type: 'spline',
-        values: [1,2,3,4,5],
-        axis: 'y2',
-      },
-      {
-        name: 'Utfall',
-        type: 'bar',
-        values: [1,2,3,4,5],
-      },
-      {
-        name: 'Ack. prognos',
-        type: 'spline',
-        values: [1,2,3,4,5],
-        axis: 'y2',
-      },
-      {
-        name: 'Prognos',
-        type: 'bar',
-        values: [1,2,3,4,5],
-      },
-    ],
-    categories: ['jan', 'feb', 'mar', 'apr', 'maj'],
-  }
+const oxceed: ComplexChartData = {
+  name: 'Totala kostnader',
+  data: [
+    {
+      name: 'Ack. utfall',
+      type: 'spline',
+      values: [1,2,3,4,5],
+      axis: 'y2',
+    },
+    {
+      name: 'Utfall',
+      type: 'bar',
+      values: [1,2,3,4,5],
+    },
+    {
+      name: 'Ack. prognos',
+      type: 'spline',
+      values: [1,2,3,4,5],
+      axis: 'y2',
+    },
+    {
+      name: 'Prognos',
+      type: 'bar',
+      values: [1,2,3,4,5],
+    },
+  ],
+  categories: ['jan', 'feb', 'mar', 'apr', 'maj'],
+}
