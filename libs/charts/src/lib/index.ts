@@ -1,59 +1,47 @@
-import { area, bar, ChartOptions, line, pie, spline } from 'billboard.js'
+import { area, bar, ChartOptions, donut, line, pie, spline } from 'billboard.js'
+import { Chart, ChartType } from './types'
+
+export { Chart }
 
 const init = () => {
   if (!line) return
 
   line()
   bar()
+  donut()
   area()
   spline()
   pie()
 }
 init()
 
-export type ChartType = 'area' | 'bar' | 'line' | 'spline' | 'pie'
+export const createOptions = (chart: Chart): ChartOptions => {
+  const columns = chart.data.map((d) => [d.name, ...d.values])
 
-export interface NamedValue {
-  name: string
-  value: number
-}
-export type Values = NamedValue[] | number[]
-export interface ChartData {
-  name: string
-  type: ChartType
-  values: Values
-  axis?: 'y' | 'y2'
-}
-export interface ComplexChartData {
-  name: string
-  data: ChartData[]
-  categories?: string[]
-}
-
-const parseValues = (values: Values): number[] => (
-  values.map((v) => (typeof v === 'object') ? v.value : v)
-)
-const valuesToColumns = (data: ChartData[]): any[] => {
-  return data.map((d) => [d.name, ...parseValues(d.values)])
-}
-
-export const createOptions = (data: ChartData | ComplexChartData): ChartOptions => {
-  
-  const charts = ((data as ComplexChartData).data)
-    ? (data as ComplexChartData).data
-    : [data as ChartData]
-
-  const columns = valuesToColumns(charts)
-  const types = charts.reduce((res, c) => ({
+  const defaultType: ChartType = chart.type || 'bar'
+  const types = chart.data.reduce((res, d) => ({
     ...res,
-    [c.name]: c.type,
+    [d.name]: d.type || defaultType,
   }), {})
 
   const options: ChartOptions = {
     data: {
       columns,
       types,
+    },
+    legend: {
+      show: false,
+    },
+  }
+
+  if (chart.categories) {
+    options.axis = {
+      x: {
+        type: 'category',
+        categories: chart.categories,
+      }
     }
   }
+
   return options
 }

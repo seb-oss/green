@@ -1,14 +1,16 @@
 import { ChartOptions } from 'billboard.js'
-import { ChartData, createOptions } from './index'
+import { Chart, createOptions } from './index'
 
 describe('parse', () => {
   it('parses simple ChartData', () => {
-    const data: ChartData = {
-      name: 'Foo',
-      type: 'bar',
-      values: [1,2,3]
+    const chart: Chart = {
+      data: [{
+        name: 'Foo',
+        type: 'bar',
+        values: [1,2,3],
+      }]
     }
-    const parsed = createOptions(data)
+    const parsed = createOptions(chart)
     const expected: ChartOptions = {
       data: {
         columns: [
@@ -18,35 +20,107 @@ describe('parse', () => {
           'Foo': 'bar',
         },
       },
+      legend: { show: false },
     }
     expect(parsed).toEqual(expected)
   })
-  it.skip('parses ChartData with named values', () => {
-    const data: ChartData = {
-      name: 'Foo',
-      type: 'area',
-      values: [
-        { name: 'Herp', value: 1 },
-        { name: 'Derp', value: 2 },
-        { name: 'Slurp', value: 3 },
-      ]
+  it('parses ChartData with named x-axis', () => {
+    const chart: Chart = {
+      data: [{
+        name: 'Foo',
+        type: 'area',
+        values: [1, 2, 3],
+      }],
+      categories: [ 'Herp', 'Derp', 'Slurp' ],
     }
-    const parsed = createOptions(data)
+    const parsed = createOptions(chart)
     const expected: ChartOptions = {
       data: {
-        json: [
-          { name: 'Herp', value: 1 },
-          { name: 'Derp', value: 2 },
-          { name: 'Slurp', value: 3 },
+        columns: [
+          ['Foo', 1, 2, 3]
         ],
-        keys: {
-          x: 'name',
-          value: ['value'],
-        },
         types: {
-          'Foo': 'area',
+          'Foo': 'area'
         },
       },
+      axis: {
+        x: {
+          categories: [ 'Herp', 'Derp', 'Slurp' ],
+          type: 'category',
+        },
+      },
+      legend: { show: false },
+    }
+    expect(parsed).toEqual(expected)
+  })
+  it('sets types from Chart to ChartData', () => {
+    const chart: Chart = {
+      type: 'bar',
+      data: [
+        { name: 'Foo', values: [1] },
+        { name: 'Bar', values: [2] },
+      ]
+    }
+    const parsed = createOptions(chart)
+    const expected: ChartOptions = {
+      data: {
+        columns: [
+          ['Foo', 1],
+          ['Bar', 2],
+        ],
+        types: {
+          'Foo': 'bar',
+          'Bar': 'bar',
+        },
+      },
+      legend: { show: false },
+    }
+    expect(parsed).toEqual(expected)
+  })
+  it('makes ChartData type overrides Chart type', () => {
+    const chart: Chart = {
+      type: 'bar',
+      data: [
+        { name: 'Foo', values: [1] },
+        { name: 'Bar', values: [2], type: 'area' },
+      ]
+    }
+    const parsed = createOptions(chart)
+    const expected: ChartOptions = {
+      data: {
+        columns: [
+          ['Foo', 1],
+          ['Bar', 2],
+        ],
+        types: {
+          'Foo': 'bar',
+          'Bar': 'area',
+        },
+      },
+      legend: { show: false },
+    }
+    expect(parsed).toEqual(expected)
+  })
+  it('sets bar as default', () => {
+    const chart: Chart = {
+      data: [
+        { name: 'Foo', values: [1] },
+        { name: 'Bar', values: [2], type: 'area' },
+      ]
+    }
+    const parsed = createOptions(chart)
+    const expected: ChartOptions = {
+      data: {
+        columns: [
+          ['Foo', 1],
+          ['Bar', 2],
+        ],
+        types: {
+          'Foo': 'bar',
+          'Bar': 'area',
+        },
+      },
+      legend: { show: false },
     }
     expect(parsed).toEqual(expected)
   })

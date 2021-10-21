@@ -11,13 +11,16 @@ const Template: Story<ReactChartsProps> = (args) => <ReactCharts {...args} />
 export const SimpleBar = Template.bind({})
 SimpleBar.args = {
   data: {
-    name: 'Antal',
-    type: 'bar',
-    values: [
-      { name: 'Signerade avtal (SEB)', value: 234 },
-      { name: 'Påbörjade trials (Oxceed)', value: 197 },
-      { name: 'Aktiverade prenumerationer', value: 97 },
-      { name: 'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)', value: 12 },
+    data: [{
+      name: 'Antal',
+      type: 'bar',
+      values: [ 234, 197, 97, 12 ]
+    }],
+    categories: [
+      'Signerade avtal (SEB)',
+      'Påbörjade trials (Oxceed)',
+      'Aktiverade prenumerationer',
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ]
   }
 }
@@ -25,12 +28,43 @@ SimpleBar.args = {
 export const Pie = Template.bind({})
 Pie.args = {
   data: {
-    name: 'Gold tickets',
+    title: 'Gold tickets',
     type: 'pie',
-    values: [
-      { name: 'Ej tilldelade', value: 700 },
-      { name: 'Tilldelade', value: 200 },
-      { name: 'Utnyttjade', value: 100 },
+    data: [
+      {
+        name: 'Ej tilldelade',
+        values: [ 700 ],
+      },
+      {
+        name: 'Tilldelade',
+        values: [ 200 ],
+      },
+      {
+        name: 'Utnyttjade',
+        values: [ 100 ],
+      },
+    ],
+  },
+}
+
+export const Donut = Template.bind({})
+Donut.args = {
+  data: {
+    title: 'Gold tickets',
+    type: 'donut',
+    data: [
+      {
+        name: 'Ej tilldelade',
+        values: [ 700 ],
+      },
+      {
+        name: 'Tilldelade',
+        values: [ 200 ],
+      },
+      {
+        name: 'Utnyttjade',
+        values: [ 100 ],
+      },
     ],
   },
 }
@@ -38,7 +72,7 @@ Pie.args = {
 export const Lines = Template.bind({})
 Lines.args = {
   data: {
-    name: 'Diagramrubrik',
+    title: 'Diagramrubrik',
     data: [
       {
         name: 'Signerade avtal SEB',

@@ -1,13 +1,13 @@
 import bb, {
-  Chart,
+  Chart as BBChart,
   ChartOptions,
 } from 'billboard.js'
 import { useEffect, useRef, useState } from 'react'
-import { ChartData, ComplexChartData, createOptions } from '@sebgroup/green-charts'
+import { Chart, createOptions } from '@sebgroup/green-charts'
 
 /* eslint-disable-next-line */
 export interface ReactChartsProps {
-  data: ChartData | ComplexChartData
+  data: Chart
   theme?: string
 }
 
@@ -15,7 +15,7 @@ export function ReactCharts({ data, theme }: ReactChartsProps) {
   const chartRef = useRef(null)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const [options, setOptions] = useState<ChartOptions>(createOptions(data))
-  const [chart, setChart] = useState<Chart>()
+  const [chart, setChart] = useState<BBChart>()
   useEffect(() => {
     if (!chart && chartRef.current) {
       setChart(bb.generate({
@@ -26,17 +26,18 @@ export function ReactCharts({ data, theme }: ReactChartsProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartRef, chart])
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (!data || !chart || options.data === data) return
     
-    setOptions({
-      ...options,
-      data,
-    })
-    const { columns, type, types  } = data
-    chart.load({ columns, type, types  })
+    const newOptions = createOptions(data)
+    setOptions(newOptions)
+
+    if (newOptions.data) {
+      const { columns, types  } = newOptions.data
+      chart.load({ columns, types  })
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])*/
+  }, [data])
 
   return (
     <i className={theme} ref={chartRef} />
