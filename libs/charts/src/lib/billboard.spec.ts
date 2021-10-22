@@ -1,9 +1,10 @@
 import { ChartOptions } from 'billboard.js'
-import { Chart, createOptions } from './index'
+import { ChartSettings } from './types'
+import { createOptions } from './billboard'
 
 describe('parse', () => {
   it('parses simple ChartData', () => {
-    const chart: Chart = {
+    const chart: ChartSettings = {
       data: [{
         name: 'Foo',
         type: 'bar',
@@ -25,7 +26,7 @@ describe('parse', () => {
     expect(parsed).toEqual(expected)
   })
   it('parses ChartData with named x-axis', () => {
-    const chart: Chart = {
+    const chart: ChartSettings = {
       data: [{
         name: 'Foo',
         type: 'area',
@@ -54,7 +55,7 @@ describe('parse', () => {
     expect(parsed).toEqual(expected)
   })
   it('sets types from Chart to ChartData', () => {
-    const chart: Chart = {
+    const chart: ChartSettings = {
       type: 'bar',
       data: [
         { name: 'Foo', values: [1] },
@@ -78,7 +79,7 @@ describe('parse', () => {
     expect(parsed).toEqual(expected)
   })
   it('makes ChartData type overrides Chart type', () => {
-    const chart: Chart = {
+    const chart: ChartSettings = {
       type: 'bar',
       data: [
         { name: 'Foo', values: [1] },
@@ -102,7 +103,7 @@ describe('parse', () => {
     expect(parsed).toEqual(expected)
   })
   it('sets bar as default', () => {
-    const chart: Chart = {
+    const chart: ChartSettings = {
       data: [
         { name: 'Foo', values: [1] },
         { name: 'Bar', values: [2], type: 'area' },

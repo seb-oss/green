@@ -1,8 +1,8 @@
+/* stylelint-disable */
 @use '../../../chlorophyll/src/lib/tokens/color';
 @import 'node_modules/billboard.js/src/scss/billboard';
 
-$font-family: Helvetica, 'Apple SD Gothic Neo', Arial, sans-serif, 'nanumgothic',
-  'Dotum';
+$font-family: 'SEBSansSerif', Arial, sans-serif;
 $axis-color: #8c8c8c;
 @mixin select-none {
   -webkit-user-select: none;
@@ -43,7 +43,7 @@ $axis-color: #8c8c8c;
   .bb-button {
     @include select-none;
     fill: #555;
-    font-size: 12px;
+    font-size: 16px;
     letter-spacing: -0.3px;
   }
 }

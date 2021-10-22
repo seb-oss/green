@@ -7,9 +7,14 @@ export interface ChartData {
   axis?: 'y' | 'y2'
 }
 
-export interface Chart {
+export interface ChartSettings {
   title?: string
   type?: ChartType
   data: ChartData[]
   categories?: string[]
+}
+
+export interface Chart {
+  settings: ChartSettings
+  update: (settings: ChartSettings) => Chart
 }

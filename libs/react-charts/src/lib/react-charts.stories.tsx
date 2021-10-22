@@ -10,7 +10,7 @@ const Template: Story<ReactChartsProps> = (args) => <ReactCharts {...args} />
 
 export const SimpleBar = Template.bind({})
 SimpleBar.args = {
-  data: {
+  settings: {
     data: [{
       name: 'Antal',
       type: 'bar',
@@ -27,7 +27,7 @@ SimpleBar.args = {
 
 export const Pie = Template.bind({})
 Pie.args = {
-  data: {
+  settings: {
     title: 'Gold tickets',
     type: 'pie',
     data: [
@@ -49,7 +49,7 @@ Pie.args = {
 
 export const Donut = Template.bind({})
 Donut.args = {
-  data: {
+  settings: {
     title: 'Gold tickets',
     type: 'donut',
     data: [
@@ -71,7 +71,7 @@ Donut.args = {
 
 export const Lines = Template.bind({})
 Lines.args = {
-  data: {
+  settings: {
     title: 'Diagramrubrik',
     data: [
       {
@@ -87,6 +87,29 @@ Lines.args = {
       {
         name: 'Aktiverade prenumerationer',
         type: 'line',
+        values: [3, 7, 9, 10],
+      },
+    ],
+    categories: ['jan', 'feb', 'mar', 'apr'],
+  },
+}
+
+export const Splines = Template.bind({})
+Splines.args = {
+  settings: {
+    title: 'Diagramrubrik',
+    type: 'spline',
+    data: [
+      {
+        name: 'Signerade avtal SEB',
+        values: [10, 14, 6, 15],
+      },
+      {
+        name: 'Påbörjade trials',
+        values: [8, 9, 13, 11],
+      },
+      {
+        name: 'Aktiverade prenumerationer',
         values: [3, 7, 9, 10],
       },
     ],
