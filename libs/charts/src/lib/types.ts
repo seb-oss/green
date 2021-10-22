@@ -14,7 +14,21 @@ export interface ChartSettings {
   categories?: string[]
 }
 
+interface LegendItem {
+  title: string
+}
+
+export interface Legend {
+  items: LegendItem[]
+}
+
+export interface ChartInfo {
+  title?: string
+  legend?: Legend
+}
+
 export interface Chart {
   settings: ChartSettings
-  update: (settings: ChartSettings) => void
+  info: ChartInfo
+  update: (settings: ChartSettings) => Chart
 }

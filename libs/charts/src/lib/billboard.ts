@@ -7,7 +7,8 @@ import bb, {
   pie,
   spline
 } from 'billboard.js'
-import { Chart, ChartSettings, ChartType } from './types'
+import { ChartSettingsUpdate } from './billboardtypes'
+import { Chart, ChartInfo, ChartSettings, ChartType, Legend } from './types'
 
 export const init = () => {
   if (!line) return // for some reason these functions do not work in Jest
@@ -20,11 +21,11 @@ export const init = () => {
   pie()
 }
 
-export const createOptions = (chart: ChartSettings): ChartOptions => {
-  const columns = chart.data.map((d) => [d.name, ...d.values])
+export const createOptions = (settings: ChartSettings): ChartOptions => {
+  const columns = settings.data.map((d) => [d.name, ...d.values])
 
-  const defaultType: ChartType = chart.type || 'bar'
-  const types = chart.data.reduce((res, d) => ({
+  const defaultType: ChartType = settings.type || 'bar'
+  const types = settings.data.reduce((res, d) => ({
     ...res,
     [d.name]: d.type || defaultType,
   }), {})
@@ -39,11 +40,11 @@ export const createOptions = (chart: ChartSettings): ChartOptions => {
     },
   }
 
-  if (chart.categories) {
+  if (settings.categories) {
     options.axis = {
       x: {
         type: 'category',
-        categories: chart.categories,
+        categories: settings.categories,
       }
     }
   }
@@ -51,23 +52,52 @@ export const createOptions = (chart: ChartSettings): ChartOptions => {
   return options
 }
 
+export const createUpdate = (_oldSettings: ChartSettings, newSettings: ChartSettings): ChartSettingsUpdate => {
+  // const oldOptions = createOptions(oldSettings)
+  const newOptions = createOptions(newSettings)
+  const data = newOptions.data || {}
+
+  const update: ChartSettingsUpdate = {
+    columns: data.columns || [],
+    types: data.types || {},
+    categories: newSettings.categories,
+  }
+
+  return update
+}
+
+export const createInfo = (settings: ChartSettings): ChartInfo => {
+  return {
+    title: settings.title
+  }
+}
+
 export const create = (element: any, settings: ChartSettings): Chart => {
+  const wrapper: Chart = {
+    settings,
+    info: createInfo(settings),
+    update: (_) => null as unknown as Chart,
+  }
+
   const options = createOptions(settings)
   const chart = bb.generate({
     ...options,
     bindto: element,
   })
 
-  const update = (settings: ChartSettings): void => {
-    const newOptions = createOptions(settings)
+  const update = (settings: ChartSettings): Chart => {
+    const newOptions = createUpdate(wrapper.settings, settings)
+    const info = createInfo(settings)
 
-    if (newOptions.data) {
-      const { columns, types  } = newOptions.data
-      chart.load({ columns, types  })
+    chart.load(newOptions)
+
+    return {
+      ...wrapper,
+      info,
+      settings,
     }
   }
-
-  const wrapper: Chart = { settings, update }
+  wrapper.update = update
 
   return wrapper
 }

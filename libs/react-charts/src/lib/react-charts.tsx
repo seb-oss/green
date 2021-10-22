@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { create, Chart, ChartSettings } from '@sebgroup/green-charts'
+import { ChartInfo } from 'libs/charts/src/lib/types'
+import { useChart } from './hooks'
 
 /* eslint-disable-next-line */
 export interface ReactChartsProps {
@@ -8,24 +10,23 @@ export interface ReactChartsProps {
 }
 
 export function ReactCharts({ settings, theme }: ReactChartsProps) {
-  const chartRef = useRef(null)
-  const [chart, setChart] = useState<Chart>()
-  
-  useEffect(() => {
-    if (!chart && chartRef.current) {
-      setChart(create(chartRef.current, settings))
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartRef, chart])
-
-  useEffect(() => {
-    if (!settings || !chart || chart.settings === settings) return
-    chart.update(settings)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settings])
+  const ref = useRef(null)
+  const { info } = useChart(ref, settings)
 
   return (
-    <i className={theme} ref={chartRef} />
+    <div className="chart">
+      { info.title &&
+        <h1>{ info.title }</h1>
+      }
+      <div className={theme} ref={ref} />
+      { info.legend &&
+        <ul className="legend">
+          { info.legend.items.map((li) => (
+            <li>{ li.title }</li>
+          ))}
+        </ul>
+      }
+    </div>
   )
 }
 

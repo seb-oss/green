@@ -1,7 +1,7 @@
-import { Chart, ChartSettings } from './types'
+import { Chart, ChartInfo, ChartSettings } from './types'
 import { create, init } from './billboard'
 
 init()
 
-export { Chart, ChartSettings }
+export { Chart, ChartInfo, ChartSettings }
 export { create }

@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-
 import ReactCharts from './react-charts'
 
 describe('ReactCharts', () => {
