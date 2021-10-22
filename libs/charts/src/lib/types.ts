@@ -16,5 +16,5 @@ export interface ChartSettings {
 
 export interface Chart {
   settings: ChartSettings
-  update: (settings: ChartSettings) => Chart
+  update: (settings: ChartSettings) => void
 }

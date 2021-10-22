@@ -7,7 +7,7 @@ import bb, {
   pie,
   spline
 } from 'billboard.js'
-import { Chart, ChartSettings } from './types'
+import { Chart, ChartSettings, ChartType } from './types'
 
 export const init = () => {
   if (!line) return // for some reason these functions do not work in Jest
@@ -58,16 +58,16 @@ export const create = (element: any, settings: ChartSettings): Chart => {
     bindto: element,
   })
 
-  const update = (settings: ChartSettings): Chart => {
+  const update = (settings: ChartSettings): void => {
     const newOptions = createOptions(settings)
 
     if (newOptions.data) {
       const { columns, types  } = newOptions.data
       chart.load({ columns, types  })
     }
-
-    return { settings, update }
   }
 
-  return { settings, update }
+  const wrapper: Chart = { settings, update }
+
+  return wrapper
 }
