@@ -8,7 +8,7 @@ import bb, {
   spline
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
-import { Chart, ChartInfo, ChartSettings, ChartType, Legend } from './types'
+import { Chart, ChartInfo, ChartSettings, ChartType } from './types'
 
 export const init = () => {
   if (!line) return // for some reason these functions do not work in Jest

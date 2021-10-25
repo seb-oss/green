@@ -1,16 +1,16 @@
 import { Chart, ChartInfo, ChartSettings, create } from '@sebgroup/green-charts'
 import { MutableRefObject, useEffect, useState } from 'react'
 
-export const useChart = (ref: MutableRefObject<null>, settings: ChartSettings) => {
+export const useChart = (chartRef: MutableRefObject<null>, settings: ChartSettings) => {
   const [chart, setChart] = useState<Chart>()
   const [info, setInfo] = useState<ChartInfo>({})
 
   useEffect(() => {
-    if (!chart && ref.current) {
-      setChart(create(ref.current, settings))
+    if (!chart && chartRef.current) {
+      setChart(create(chartRef.current, settings))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref, chart])
+  }, [chartRef, chart])
 
   useEffect(() => {
     if (!settings || !chart || chart.settings === settings) return

@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { create, Chart, ChartSettings } from '@sebgroup/green-charts'
-import { ChartInfo } from 'libs/charts/src/lib/types'
+import { useRef } from 'react'
+import { ChartSettings } from '@sebgroup/green-charts'
 import { useChart } from './hooks'
 
 /* eslint-disable-next-line */
