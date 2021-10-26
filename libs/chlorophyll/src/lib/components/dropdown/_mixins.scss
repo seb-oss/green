@@ -10,6 +10,7 @@
   @include common.add-border-color();
   @include common.add-focus('');
   @include common.add-hover-state();
+  color: #000;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -24,7 +25,7 @@
     content: '';
     display: block;
     height: 12px;
-    transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg);
+    transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, -1);
     transition: transform 300ms ease-in;
     width: 12px;
   }
@@ -38,17 +39,47 @@
   }
 }
 
-
 @mixin popover {
-  @include common.add-shadow(1);
-  @include common.add-border();
-  @include common.add-border-color(map.get(tokens.$blue, 0));
-  @include common.add-border-radius();
   background-color: tokens.$white;
-  display: none;
-  min-width: 90px;
-  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  opacity: 0;
+  position: fixed;
+  transition: all 300ms ease-in-out;
+  visibility: hidden;
   z-index: tokens.$zindex-dropdown;
+  @include common.media-breakpoint-only(xs) {
+    @include common.add-border('top');
+    @include common.add-border-color(map.get(tokens.$grey, 6));
+    @include common.padding-bottom(3);
+    border-radius: 1rem 1rem 0 0;
+    bottom: 0;
+    box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
+    left: 0;
+    transform: translate3d(0, 100%, 0);
+    width: 100%;
+  }
+
+  @include common.media-breakpoint-up(sm) {
+    @include common.padding-bottom(0);
+    @include common.add-shadow(1);
+    @include common.add-border();
+    @include common.add-border-color(map.get(tokens.$blue, 0));
+    @include common.add-border-radius();
+    min-width: 90px;
+    position: absolute;
+  }
+
+  > ul[role='listbox'] {
+    width: 100%;
+  }
+
+  &.active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
 }
 @mixin select {
   [role='option'] {
@@ -61,7 +92,8 @@
 
 @mixin multi-select {
   [role='option'] {
-    @include common.margin-horizontal(4); }
+    @include common.margin-horizontal(4);
+  }
 }
 
 @mixin menu {
