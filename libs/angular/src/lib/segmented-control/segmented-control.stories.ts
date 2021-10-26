@@ -6,11 +6,17 @@ import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 import { of } from 'rxjs'
+import { Component } from '@angular/core'
 
-// eslint-disable-next-line
-import { OptionAComponent } from '../../../../../apps/angular-lib-dev/src/app/segmented-control/option-a/option-a.component'
-// eslint-disable-next-line
-import { OptionBComponent } from '../../../../../apps/angular-lib-dev/src/app/segmented-control/option-b/option-b.component'
+@Component({
+  template: ` <p class="mt-4">Option A</p> `,
+})
+class OptionAComponent {}
+
+@Component({
+  template: ` <p class="mt-4">Option B</p> `,
+})
+class OptionBComponent {}
 
 const routes: Routes = [
   {
@@ -28,7 +34,7 @@ export default {
   component: NggSegmentedControlComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
+      declarations: [OptionAComponent, OptionBComponent],
       imports: [CommonModule, RouterModule.forRoot(routes)],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),

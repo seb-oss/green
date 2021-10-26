@@ -30,11 +30,13 @@
         "target": "build",
         "projects": "dependencies"
       }
-    ]
+    ],
+    "release": [{ "target": "release", "projects": "dependencies" }]
   },
   "projects": {
     "angular": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"]
     },
     "angular-e2e": {
       "tags": [],

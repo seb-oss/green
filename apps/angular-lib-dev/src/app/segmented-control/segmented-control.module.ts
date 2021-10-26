@@ -5,7 +5,6 @@ import { SegmentedControlRoutingModule } from './segmented-control-routing.modul
 import { SegmentedControlComponent } from './segmented-control.component'
 import { OptionAComponent } from './option-a/option-a.component'
 import { OptionBComponent } from './option-b/option-b.component'
-// eslint-disable-next-line
 import { NggSegmentedControlModule } from '@sebgroup/green-angular'
 
 @NgModule({

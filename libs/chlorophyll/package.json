@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/chlorophyll",
   "version": "0.0.0-semantically-released",
-  "description": "A standalone bootstrap theme for SEB",
+  "description": "A CSS framework for SEB with accessibility at it's core.",
   "main": "css/green-chlorophyll.min.css",
   "repository": {
     "type": "git",

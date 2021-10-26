@@ -1,9 +1,18 @@
 module.exports = {
   displayName: 'react-charts',
   preset: '../../jest.preset.js',
-  transform: {
-    '^.+\\.[tj]sx?$': 'babel-jest',
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+      stringifyContentPathRegex: '\\.(html|svg)$',
+    },
   },
+  transform: {
+    '^.+\\.[tj]sx?$': 'ts-jest',
+  },
+  transformIgnorePatterns: [
+    "<rootDir>/node_modules/(?!billboard.js/.*)"
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/react-charts',
+  coverageDirectory: '../../coverage/libs/charts',
 }
