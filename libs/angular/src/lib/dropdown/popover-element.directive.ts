@@ -18,6 +18,7 @@ import { EMPTY, fromEvent, merge, Subject } from 'rxjs'
 import { NggPopoverOptionDirective } from './popover-option.directive'
 import { NggPopoverDirective } from './popover.directive'
 import { createPopper } from '@popperjs/core'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 @Directive({
   selector: '[nggPopoverElement]',
@@ -110,6 +111,10 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
           this.show = isOpen // toggle visibility
 
           if (isOpen) {
+            // if use body scroll lock
+            if (this.popover.config.useBodyScrollLock) {
+              this.disableBodyScrollLock()
+            }
             // if popover is configured to use a container...
             if (this.popover.config.container !== '') {
               // ...add container
@@ -120,6 +125,9 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
               this.addPopper()
             }
           } else {
+            if (this.popover.config.useBodyScrollLock) {
+              this.enableBodyScrollLock()
+            }
             this.removeContainer()
             this.removePopper()
           }
@@ -161,6 +169,7 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.removePopper()
+    this.disableBodyScrollLock()
 
     // remove container if declared
     if (this._container) {
@@ -168,6 +177,14 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
     }
     this.$unsubscribe.next()
     this.$unsubscribe.complete()
+  }
+
+  enableBodyScrollLock() {
+    enableBodyScroll(this._elRef.nativeElement)
+  }
+
+  disableBodyScrollLock() {
+    disableBodyScroll(this._elRef.nativeElement)
   }
 
   addPopper() {
