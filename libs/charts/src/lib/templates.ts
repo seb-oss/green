@@ -1,4 +1,4 @@
-export const tooltip = `
+export const tmplTooltip = `
   <ul>
     <li>
       Index
@@ -15,7 +15,7 @@ export const tooltip = `
   </ul>
 `
 
-export const legend = `
+export const tmplLegend = `
   <span style="color:#fff; padding:10px; background-color:{=COLOR}">
     {=TITLE}
   </span>

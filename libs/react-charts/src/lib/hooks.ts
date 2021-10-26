@@ -1,20 +1,25 @@
-import { Chart, ChartInfo, ChartSettings, create } from '@sebgroup/green-charts'
-import { MutableRefObject, useEffect, useState } from 'react'
+import { Chart, ChartArgs, ChartInfo, ChartSettings, create } from '@sebgroup/green-charts'
+import { RefObject, useEffect, useState } from 'react'
 
-export const useChart = (chartRef: MutableRefObject<null>, settings: ChartSettings) => {
+interface ChartProps {
+  chartRef: RefObject<HTMLDivElement>
+  settings: ChartSettings
+}
+export const useChart = ({ chartRef, settings }: ChartProps) => {
   const [chart, setChart] = useState<Chart>()
   const [info, setInfo] = useState<ChartInfo>({})
 
   useEffect(() => {
     if (!chart && chartRef.current) {
-      setChart(create(chartRef.current, settings))
+      const args: ChartArgs = { settings, chartElement: chartRef.current }
+      setChart(create(args))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartRef, chart])
 
   useEffect(() => {
-    if (!settings || !chart || chart.settings === settings) return
-    setChart(chart.update(settings))
+    if (!chartRef || !chartRef.current || !settings || !chart || chart.settings === settings) return
+    setChart(chart.update({ settings, chartElement: chartRef.current }))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings])
 
@@ -22,7 +27,7 @@ export const useChart = (chartRef: MutableRefObject<null>, settings: ChartSettin
     if (chart && chart.info) {
       setInfo(chart.info)
     }
-  }, [chart, chart?.info])
+  }, [chart, chart?.info, settings])
 
   return { chart, info }
 }

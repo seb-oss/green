@@ -1,4 +1,7 @@
+import { ArrayOrString } from "billboard.js"
+
 export type ChartType = 'area' | 'bar' | 'donut' | 'line' | 'spline' | 'pie'
+export type LegendPlacement = 'top' | 'right' | 'none'
 
 export interface ChartData {
   name: string
@@ -12,6 +15,7 @@ export interface ChartSettings {
   type?: ChartType
   data: ChartData[]
   categories?: string[]
+  legend?: LegendPlacement
 }
 
 interface LegendItem {
@@ -20,6 +24,7 @@ interface LegendItem {
 
 export interface Legend {
   items: LegendItem[]
+  placement: LegendPlacement
 }
 
 export interface ChartInfo {
@@ -27,8 +32,20 @@ export interface ChartInfo {
   legend?: Legend
 }
 
+export interface ChartArgs {
+  settings: ChartSettings
+  chartElement: ElementReference
+}
+export interface ChartUpdateArgs extends ChartArgs {
+  oldSettings: ChartSettings
+}
+
+export type ElementReference = string | HTMLElement
 export interface Chart {
   settings: ChartSettings
   info: ChartInfo
-  update: (settings: ChartSettings) => Chart
+  update: (args: ChartArgs) => Chart
+  focus: (targetIds: ArrayOrString) => void
+  revert: (targetIds?: ArrayOrString) => void
+  toggle: (targetIds: ArrayOrString) => void
 }

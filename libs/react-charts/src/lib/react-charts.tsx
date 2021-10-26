@@ -9,22 +9,28 @@ export interface ReactChartsProps {
 }
 
 export function ReactCharts({ settings, theme }: ReactChartsProps) {
-  const ref = useRef(null)
-  const { info } = useChart(ref, settings)
+  const chartRef = useRef<HTMLDivElement>(null)
+  const { chart, info } = useChart({ chartRef, settings })
 
   return (
     <div className="chart">
       { info.title &&
-        <h1>{ info.title }</h1>
+        <h2>{ info.title }</h2>
       }
-      <div className={theme} ref={ref} />
-      { info.legend &&
+      <div className={theme} ref={chartRef} />
+      { info.legend?.placement !== 'none' && (
         <ul className="legend">
-          { info.legend.items.map((li) => (
-            <li>{ li.title }</li>
-          ))}
+          { info.legend?.items.map((i) => (
+            <li
+              onMouseOver={() => chart?.focus(i.title)}
+              onMouseOut={() => chart?.revert()}
+              onMouseUp={() => chart?.toggle(i.title)}
+            >
+              {i.title}
+            </li>
+          )) }
         </ul>
-      }
+      ) }
     </div>
   )
 }

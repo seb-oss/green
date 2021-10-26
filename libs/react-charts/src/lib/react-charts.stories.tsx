@@ -21,7 +21,7 @@ SimpleBar.args = {
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
-    ]
+    ],
   }
 }
 
@@ -44,6 +44,7 @@ Pie.args = {
         values: [ 100 ],
       },
     ],
+    legend: 'right',
   },
 }
 
