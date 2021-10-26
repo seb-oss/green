@@ -1,13 +1,15 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "1.0.0-alpha.1",
+  "version": "0.0.0-semantically-released",
   "peerDependencies": {
     "@angular/common": "^12.1.0",
     "@angular/core": "^12.1.0"
   },
   "dependencies": {
-    "tslib": "^2.2.0",
-    "@sebgroup/chlorophyll": "*"
+    "@sebgroup/chlorophyll": "*",
+    "@types/body-scroll-lock": "^3.1.0",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "tslib": "^2.2.0"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",
   "repository": {

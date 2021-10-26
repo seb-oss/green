@@ -1,28 +1,28 @@
 import { Directive, ElementRef, Input } from '@angular/core'
 import { AbstractControl } from '@angular/forms'
 import { BehaviorSubject } from 'rxjs'
+interface PopoverConfig {
+  usePopper?: boolean
+  container?: '' | 'body'
+  useBodyScrollLock?: boolean
+}
 
 @Directive({
   selector: '[nggPopover]',
 })
 export class NggPopoverDirective {
-  get config(): { usePopper?: boolean; container?: '' | 'body' } {
+  get config(): PopoverConfig {
     return this._config
   }
 
-  @Input() set config(config: {
-    usePopper?: boolean
-    container?: '' | 'body'
-  }) {
+  @Input() set config(config: PopoverConfig) {
     this._config = { ...this.config, ...config }
   }
   triggerElement?: ElementRef
-  private _config: {
-    usePopper?: boolean
-    container?: '' | 'body'
-  } = {
+  private _config: PopoverConfig = {
     usePopper: true,
     container: '',
+    useBodyScrollLock: true,
   }
   state: {
     $isOpen: BehaviorSubject<boolean>

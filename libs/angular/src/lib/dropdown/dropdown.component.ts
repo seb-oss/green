@@ -13,15 +13,20 @@ import { AbstractControl } from '@angular/forms'
       >
         {{ control.value }}
       </button>
-      <ul nggPopoverElement tabindex="-1" autofocus>
-        <li
-          *ngFor="let option of options; let i = index"
-          [nggPopoverOption]="option.value"
-          [index]="i"
-        >
-          {{ option.key }}
-        </li>
-      </ul>
+      <div nggPopoverElement tabindex="-1" autofocus>
+        <button class="close m-4 m-sm-2 d-block d-sm-none ">
+          <span class="sr-only">Close</span>
+        </button>
+        <ul role="listbox">
+          <li
+            *ngFor="let option of options; let i = index"
+            [nggPopoverOption]="option.value"
+            [index]="i"
+          >
+            {{ option.key }}
+          </li>
+        </ul>
+      </div>
     </div>
   `,
   //changeDetection: ChangeDetectionStrategy.OnPush

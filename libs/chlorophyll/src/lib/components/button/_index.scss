@@ -11,7 +11,7 @@ input[type='reset'],
 }
 
 // base
-button:not(.link, [aria-haspopup='listbox'], [aria-haspopup='menu']),
+button:not(.link, .close, [aria-haspopup='listbox'], [aria-haspopup='menu']),
 input[type='button'],
 input[type='submit'],
 input[type='reset'],
