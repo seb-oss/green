@@ -46,7 +46,6 @@
   justify-content: flex-end;
   opacity: 0;
   position: fixed;
-  transition: all 300ms ease-in-out;
   visibility: hidden;
   z-index: tokens.$zindex-dropdown;
   @include common.media-breakpoint-only(xs) {
@@ -58,6 +57,7 @@
     box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
     left: 0;
     transform: translate3d(0, 100%, 0);
+    transition: all 300ms ease-in-out;
     width: 100%;
   }
 
