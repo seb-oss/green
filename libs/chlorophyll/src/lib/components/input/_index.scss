@@ -4,6 +4,7 @@
 @use 'sass:map';
 @use 'checkbox';
 @use 'validation';
+@use 'radio';
 
 input:not([type]),
 input[type='date'],
