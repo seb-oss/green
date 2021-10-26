@@ -47,6 +47,7 @@
           "options": {
             "uiFramework": "@storybook/angular",
             "port": 4100,
+            "host": "0.0.0.0",
             "config": {
               "configFolder": "libs/angular/.storybook"
             },
@@ -72,6 +73,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -169,7 +176,10 @@
               "browserTarget": "angular-lib-dev:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "host": "0.0.0.0"
+          }
         },
         "extract-i18n": {
           "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -229,6 +239,12 @@
       "projectType": "library",
       "targets": {
         "build": {
+          "executor": "./tools/executors/scss:build-lib",
+          "options": {
+            "packageJson": "libs/chlorophyll/package.json",
+            "outputPath": "dist/libs/chlorophyll"          }
+        },
+        "compile-scss": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
@@ -294,6 +310,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "builder": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
