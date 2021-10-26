@@ -5,6 +5,7 @@ import {
   ElementRef,
   forwardRef,
   HostBinding,
+  HostListener,
   Inject,
   OnDestroy,
   OnInit,
@@ -22,9 +23,10 @@ import { createPopper } from '@popperjs/core'
   selector: '[nggPopoverElement]',
 })
 export class NggPopoverElementDirective implements OnInit, OnDestroy {
-  _popper?: Instance
+  _popper?: Instance | null
   _container?: ElementRef | null
   $unsubscribe = new Subject()
+  sm = window.innerWidth <= 576
   @ContentChildren(NggPopoverOptionDirective) options:
     | QueryList<NggPopoverOptionDirective>
     | undefined
@@ -32,9 +34,21 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
   @HostBinding('class.popover') class = true
   @HostBinding('attr.role') role = 'listbox'
   @HostBinding('attr.id') id = null
-  @HostBinding('class.d-block') show = this.popover.state.$isOpen.value
+  @HostBinding('class.active') show = this.popover.state.$isOpen.value
   @HostBinding('attr.aria-activedescendant') activeDescendant: string | null =
     null
+  // TODO: refactor and move to general size/device service
+  @HostListener('window:resize', ['$event']) onResize(event: UIEvent) {
+    // determine if small screen size i.e less than or equal to 576 pixels which is the breakpoint for small screens
+    this.sm = (event.target as Window).innerWidth <= 576
+    if (this.sm) {
+      // remove popper
+      this.removePopper()
+    } else if (!this._popper) {
+      // add popper
+      this.addPopper()
+    }
+  }
 
   handleClickEvent(event: Event) {
     // if click inside popover element...
@@ -103,28 +117,11 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
             }
             // if popover is configured to use popper.js...
             if (this.popover.config.usePopper) {
-              // ...create popper instance for anchoring popover with trigger element
-              this._popper = createPopper(
-                this.popover.triggerElement?.nativeElement,
-                this._elRef.nativeElement,
-                {
-                  placement: 'bottom-start',
-                  modifiers: [
-                    {
-                      name: 'offset',
-                      options: {
-                        offset: [0, 4],
-                      },
-                    },
-                  ],
-                }
-              )
-              // detect changes once element and popper is initiated to update initial position
-              this._cdr.detectChanges()
+              this.addPopper()
             }
           } else {
             this.removeContainer()
-            this._popper?.destroy()
+            this.removePopper()
           }
         }),
         switchMap((isOpen) =>
@@ -163,10 +160,7 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // destroy popper if declared
-    if (this._popper) {
-      this._popper?.destroy()
-    }
+    this.removePopper()
 
     // remove container if declared
     if (this._container) {
@@ -176,6 +170,42 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
     this.$unsubscribe.complete()
   }
 
+  addPopper() {
+    if (this.sm) {
+      return
+    }
+    if (!this._popper) {
+      // ...create popper instance for anchoring popover with trigger element
+      this._popper = createPopper(
+        this.popover.triggerElement?.nativeElement,
+        this._elRef.nativeElement,
+        {
+          placement: 'bottom-start',
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 4],
+              },
+            },
+          ],
+        }
+      )
+      // detect changes once element and popper is initiated to update initial position
+      this._cdr.detectChanges()
+    } else {
+      this._popper.state.elements.reference =
+        this.popover.triggerElement?.nativeElement
+      this._popper.update().then((_) => this._cdr.detectChanges())
+    }
+  }
+  removePopper() {
+    // destroy popper if declared
+    if (this._popper) {
+      this._popper?.destroy()
+      this._popper = null
+    }
+  }
   addContainer() {
     // create global container for popover if not already present
     if (!this._container) {
