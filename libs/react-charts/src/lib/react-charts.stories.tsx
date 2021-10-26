@@ -117,3 +117,29 @@ Splines.args = {
     categories: ['jan', 'feb', 'mar', 'apr'],
   },
 }
+
+export const Mixed = Template.bind({})
+Mixed.args = {
+  settings: {
+    title: 'Mixed graph',
+    data: [
+      {
+        type: 'spline',
+        name: 'Signerade avtal SEB',
+        values: [10, 14, 6, 15],
+      },
+      {
+        type: 'area',
+        name: 'Påbörjade trials',
+        values: [8, 9, 13, 11],
+      },
+      {
+        type: 'bar',
+        name: 'Aktiverade prenumerationer',
+        values: [3, 7, 9, 10],
+      },
+    ],
+    categories: ['jan', 'feb', 'mar', 'apr'],
+    legend: 'right',
+  },
+}

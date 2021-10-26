@@ -1,7 +1,7 @@
 import { ChartOptions } from 'billboard.js'
 import { ChartSettings, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
-import { tmplLegend } from './templates'
+import { tmplTooltip } from './templates'
 
 describe('billboard', () => {
   describe('createOptions', () => {
@@ -26,6 +26,7 @@ describe('billboard', () => {
           },
         },
         legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
       }
       expect(parsed).toEqual(expected)
     })
@@ -57,6 +58,7 @@ describe('billboard', () => {
           },
         },
         legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
       }
       expect(parsed).toEqual(expected)
     })
@@ -83,6 +85,7 @@ describe('billboard', () => {
           },
         },
         legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
       }
       expect(parsed).toEqual(expected)
     })
@@ -109,6 +112,7 @@ describe('billboard', () => {
           },
         },
         legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
       }
       expect(parsed).toEqual(expected)
     })
@@ -134,6 +138,7 @@ describe('billboard', () => {
           },
         },
         legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
       }
       expect(parsed).toEqual(expected)
     })

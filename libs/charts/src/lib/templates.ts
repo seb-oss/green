@@ -1,22 +1,10 @@
 export const tmplTooltip = `
-  <ul>
-    <li>
-      Index
-      <br />
-      {=TITLE}
-    </li>
+  <ul class="tooltip">
+    <li>{=TITLE}</li>
     {{
     <li class="{=CLASS_TOOLTIP_NAME}">
-      <span> {=VALUE}:{=VAR} </span>
-      <br />
-      <span style="color:{=COLOR}"> {=NAME} </span>
+      <span style="background-color: {=COLOR}">{=NAME} {=VALUE}</span>
     </li>
     }}
   </ul>
-`
-
-export const tmplLegend = `
-  <span style="color:#fff; padding:10px; background-color:{=COLOR}">
-    {=TITLE}
-  </span>
 `

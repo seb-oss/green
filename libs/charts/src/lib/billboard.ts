@@ -9,6 +9,7 @@ import bb, {
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
 import { Chart, ChartArgs, ChartInfo, ChartSettings, ChartType, ChartUpdateArgs } from './types'
+import { tmplTooltip } from './templates'
 
 export const init = () => {
   if (!line) return // for some reason these functions do not work in Jest
@@ -37,6 +38,7 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
       types,
     },
     legend: { show: false },
+    tooltip: { contents: { template: tmplTooltip } },
   }
 
   if (settings.categories) {
