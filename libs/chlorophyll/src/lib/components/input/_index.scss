@@ -4,6 +4,7 @@
 @use 'sass:map';
 @use 'checkbox';
 @use 'validation';
+@use 'radio';
 
 input:not([type]),
 input[type='date'],
@@ -57,8 +58,12 @@ form,
       margin-top: 1.625rem;
     }
 
-    > label.form-control {
+    label.form-control:last-of-type {
       padding-right: 0;
+    }
+
+    .form-info {
+      @include common.margin-bottom(3);
     }
   }
 }
@@ -72,7 +77,6 @@ form,
       margin-top: 1.625rem;
     }
   }
-
 }
 
 .horizontal .form-control {
@@ -108,7 +112,6 @@ form,
     @include common.margin-bottom(6);
     width: fit-content;
   }
-
 }
 
 .form-group > input {
