@@ -1,9 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/libs/angular",
-  "allowedNonPeerDependencies": [
-    "@sebgroup/chlorophyll"
-  ],
+  "allowedNonPeerDependencies": ["@sebgroup/chlorophyll", "body-scroll-lock"],
   "lib": {
     "entryFile": "src/index.ts"
   }
