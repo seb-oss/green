@@ -6,8 +6,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@sebgroup/green-charts": "*",
-    "billboard.js": "^3.2.1"
+    "@sebgroup/green-charts": "*"
   },
   "description": "Chart components built on top of @sebgroup/green-charts.",
   "repository": {
