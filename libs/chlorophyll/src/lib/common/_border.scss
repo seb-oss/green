@@ -1,15 +1,15 @@
 @use '../tokens';
 
-@mixin add-border-radius() {
-  border-radius: tokens.$border-radius;
+@mixin add-border-radius($border-radius: tokens.$border-radius) {
+  border-radius: $border-radius;
 }
 
-@mixin add-border($sides: false) {
+@mixin add-border($sides: false, $width: tokens.$border-width) {
   @if not $sides {
     border: solid tokens.$border-width;
   } @else {
     @each $side in $sides {
-      border-#{$side}: solid tokens.$border-width;
+      border-#{$side}: solid $width;
     }
   }
 }
