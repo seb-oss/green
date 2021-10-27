@@ -167,6 +167,7 @@
     "glob-parent": "^6.0.1",
     "immer": "^9.0.6",
     "minimist": "^1.2.3",
+    "prismjs": "^1.25.0",
     "set-value": "^4.1.0",
     "trim": "^1.0.1"
   }
