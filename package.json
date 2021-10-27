@@ -169,6 +169,7 @@
     "minimist": "^1.2.3",
     "prismjs": "^1.25.0",
     "set-value": "^4.1.0",
-    "trim": "^1.0.1"
+    "trim": "^1.0.1",
+    "trim-newlines": "^3.0.1"
   }
 }
