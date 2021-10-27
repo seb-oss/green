@@ -1,7 +1,40 @@
-# react-charts
+# Green React Charts
 
-This library was generated with [Nx](https://nx.dev).
+React Green charting components
 
-## Running unit tests
+## Install
 
-Run `nx test react-charts` to execute the unit tests via [Jest](https://jestjs.io).
+```bash
+yarn add @sebgroup/green-react-charts
+```
+
+```bash
+npm install -S @sebgroup/green-react-charts
+```
+
+## Use
+
+```typescript
+import { Chart, ChartSettings } from '@sebgroup/green-react-charts'
+
+export const MyChart = () => {
+  const settings: ChartSettings = {
+    title: 'My mixed chart',
+    data: [
+      {
+        title: 'Sales',
+        type: 'bar',
+        columns: [100, 200, 300, -50],
+      },
+      {
+        title: 'Prognosis',
+        type: 'spline',
+        columns: [0, 10, 150, 330],
+      },
+    ],
+    categories: ['Jan', 'Feb', 'Mar', 'Apr'],
+  }
+
+  return <Chart settings={settings} />
+}
+```

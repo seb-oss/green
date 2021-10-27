@@ -8,7 +8,7 @@
   "dependencies": {
     "@sebgroup/green-charts": "*"
   },
-  "description": "Chart components built on top of @sebgroup/green-charts.",
+  "description": "React components built on top of @sebgroup/green-charts.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebgroup/green.git"

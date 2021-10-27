@@ -1,7 +1,23 @@
 {
   "name": "@green/charts",
-  "version": "0.0.1",
+  "version": "0.0.0-semantically-released",
   "dependencies": {
     "billboard.js": "^3.2.1"
-  }
+  },
+  "description": "Base library for charts.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "author": "Johan Öbrink <johan.obrink@gmail.com> (http://www.linkedin.com/in/johanobrink/)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/labels/charts"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/charts/"
 }
