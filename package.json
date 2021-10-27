@@ -38,7 +38,9 @@
     ]
   },
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@angular/animations": "12.2.10",
     "@angular/common": "12.2.10",
@@ -159,11 +161,12 @@
     "webpack-sources": "^3.0.2"
   },
   "resolutions": {
-    "minimist": ">=1.2.3",
+    "ansi-regex": "^5.0.1",
     "browserslist": "^4.16.8",
     "ecstatic": "^4.1.4",
     "glob-parent": "^6.0.1",
     "immer": "^9.0.6",
+    "minimist": "^1.2.3",
     "trim": "^1.0.1"
   }
 }
