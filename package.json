@@ -166,6 +166,7 @@
     "ecstatic": "^4.1.4",
     "glob-parent": "^6.0.1",
     "immer": "^9.0.6",
+    "jpeg-js": "^0.4.3",
     "minimist": "^1.2.3",
     "nth-check": "^2.0.1",
     "prismjs": "^1.25.0",
