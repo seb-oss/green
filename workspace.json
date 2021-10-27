@@ -78,7 +78,7 @@
         "release": {
           "builder": "@ng-easy/builders:semantic-release",
           "options": {
-            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -283,7 +283,8 @@
           "executor": "./tools/executors/scss:build-lib",
           "options": {
             "packageJson": "libs/chlorophyll/package.json",
-            "outputPath": "dist/libs/chlorophyll"          }
+            "outputPath": "dist/libs/chlorophyll"
+          }
         },
         "compile-scss": {
           "executor": "@nrwl/workspace:run-commands",
@@ -356,7 +357,7 @@
         "release": {
           "builder": "@ng-easy/builders:semantic-release",
           "options": {
-            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
