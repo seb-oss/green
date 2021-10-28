@@ -1,25 +1,63 @@
-/* stylelint-disable */
 @use '../../../chlorophyll/src/lib/tokens/color';
-@import 'node_modules/billboard.js/src/scss/billboard';
+@use '../../../chlorophyll/src/lib/tokens';
+@use 'sass:map';
+@use 'shame';
+// @use 'node_modules/billboard.js/src/scss/billboard';
 
 $font-family: 'SEBSansSerif', Arial, sans-serif;
 $axis-color: #8c8c8c;
+
+$axis-text-color: color.$black;
+$axis-text-size: tokens.$base-font-size;
+$axis-text-weight: tokens.font-weight('regular');
+
+$y-axis-text-color: $axis-text-color;
+
+$y-axis-color: transparent;
+$y-axis-thickness: 0;
+$y-axis-tick-color: $y-axis-color;
+$y-axis-tick-thickness: $y-axis-thickness;
+
+$x-axis-text-color: $axis-text-color;
+
+$x-axis-color: map.get(color.$grey, 6);
+$x-axis-thickness: 1px;
+$x-axis-tick-color: $x-axis-color;
+$x-axis-tick-thickness: $x-axis-thickness;
+
+$grid-focus-line-color: map.get(color.$blue, 2);
+
 @mixin select-none {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  user-select: none;
+  user-select: none;
+  user-select: none;
   user-select: none;
 }
+/* Html x-axis */
+ul.x-axis {
+  flex-direction: row;
+  width: 100%;
+
+  li {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+ul.x-axis
 
 /*-- Default color pattern --*/
 .bb-color-pattern {
   background-image: url('#45B400;#0092E1;#FFB400;#D81A1A;#4F2C99;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
+
   &.blue {
     background-image: url('#0000ff;0000cc;#000099;#EF65A2;#A377FE;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
   }
+
   &.red {
     background-image: url('#65CFC2;#D0A45F;#64A4F5;#EF65A2;#A377FE;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
   }
+
   &.green {
     background-image: url('#65CFC2;#D0A45F;#64A4F5;#EF65A2;#A377FE;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
   }
@@ -28,15 +66,15 @@ $axis-color: #8c8c8c;
 /*-- Chart --*/
 .bb {
   svg {
-    font-size: 12px;
     font-family: $font-family;
+    font-size: 12px;
     line-height: 1;
   }
 
   path,
   line {
     fill: none;
-    stroke: $axis-color;
+    //stroke: $axis-color;
   }
 
   text,
@@ -62,12 +100,44 @@ $axis-color: #8c8c8c;
   shape-rendering: crispEdges;
 }
 
-.bb-axis-y text,
-.bb-axis-y2 text {
-  fill: $axis-color;
+.bb-axis-y,
+.bb-axis-y2 {
+  text {
+    fill: $y-axis-text-color;
+    font-size: $axis-text-size;
+    font-weight: $axis-text-weight;
+  }
+
+  path {
+    stroke: $y-axis-color;
+    stroke-width: $y-axis-thickness;
+  }
+
+  .tick line {
+    stroke: $y-axis-tick-color;
+    stroke-width: $y-axis-tick-thickness;
+  }
 }
-.bb-axis-y2 .tick {
+
+.bb-axis-x {
+  text {
+    fill: $x-axis-text-color;
+    font-size: $axis-text-size;
+    font-weight: $axis-text-weight;
+  }
+
+  path {
+    stroke: $x-axis-color;
+    stroke-width: $x-axis-thickness;
+  }
+
+  .tick line {
+    stroke: $x-axis-tick-color;
+    stroke-width: $x-axis-tick-thickness;
+  }
 }
+
+/* stylelint-disable */
 
 .bb-event-rects {
   fill-opacity: 1 !important;
@@ -94,7 +164,7 @@ $axis-color: #8c8c8c;
 
 .bb-xgrid-focus line,
 .bb-ygrid-focus line {
-  stroke: #ffb6b6;
+  stroke: $grid-focus-line-color;
   stroke-dasharray: 3px;
 }
 
@@ -203,8 +273,8 @@ use.bb-circle {
 }
 
 .bb-legend-background {
-  opacity: 0.75;
   fill: white;
+  opacity: 0.75;
   stroke: lightgray;
   stroke-width: 1px;
 }
@@ -220,30 +290,30 @@ use.bb-circle {
 
 /*-- Tooltip --*/
 .bb-tooltip-container {
-  z-index: 10;
   font-family: $font-family;
   user-select: none;
+  z-index: 10;
 }
 
 .bb-tooltip {
   @include select-none;
-  border-collapse: separate;
-  border-spacing: 0;
-  empty-cells: show;
-  border: 1px solid #999;
-  border-radius: 2px;
   background-color: #fff;
-  text-align: left;
-  font-size: 12px;
+  border: 1px solid #999;
+  border-collapse: separate;
+  border-radius: 2px;
+  border-spacing: 0;
   box-shadow: 0.5px 0.5px 1px #999;
+  empty-cells: show;
+  font-size: 12px;
+  text-align: left;
 
   th {
+    background-color: #efefef;
+    border-bottom: dotted 1px #000;
+    color: #000;
     font-size: 12px;
     padding: 4px 8px;
     text-align: center;
-    border-bottom: dotted 1px #000;
-    background-color: #efefef;
-    color: #000;
   }
 
   tr {
@@ -253,13 +323,13 @@ use.bb-circle {
   }
 
   td {
-    padding: 3px 6px;
     background-color: #fff;
     border-bottom: solid 1px #eee;
+    padding: 3px 6px;
 
     &:first-child {
-      padding-left: 5px;
       border-right: solid 1px #eee;
+      padding-left: 5px;
     }
 
     &:last-child {
@@ -269,10 +339,10 @@ use.bb-circle {
     > span,
     > svg {
       display: inline-block;
-      width: 5px;
       height: 12px;
       margin-right: 6px;
       vertical-align: middle;
+      width: 5px;
     }
 
     &.value {
@@ -282,8 +352,8 @@ use.bb-circle {
   }
 
   .bb-tooltip-title {
-    display: inline-block;
     color: #aaa;
+    display: inline-block;
     line-height: 20px;
   }
 
@@ -296,24 +366,24 @@ use.bb-circle {
 
     .bb-tooltip-name,
     .bb-tooltip-value {
+      color: #444;
+      font-weight: normal;
       line-height: 13px;
       padding: 4px 0 3px;
-      color: #444;
       text-align: left;
-      font-weight: normal;
     }
 
     .bb-tooltip-value {
-      padding-left: 5px;
       font-weight: 800;
+      padding-left: 5px;
     }
   }
 }
 
 /*-- Area --*/
 .bb-area {
-  stroke-width: 0;
   opacity: 0.2;
+  stroke-width: 0;
 }
 
 /*-- Arc --*/
@@ -344,8 +414,8 @@ use.bb-circle {
   }
 
   .bb-chart-arcs-title {
-    font-size: 16px !important;
     fill: $axis-color;
+    font-size: 16px !important;
     font-style: italic;
   }
 
@@ -398,9 +468,9 @@ use.bb-circle {
     }
 
     text {
+      cursor: default;
       font-size: 1.15em;
       font-weight: bold;
-      cursor: default;
     }
   }
 
@@ -415,16 +485,17 @@ use.bb-circle {
 /*-- Button --*/
 .bb-button {
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 10px;
 
   .bb-zoom-reset {
-    border: solid 1px #ccc;
     background-color: #fff;
-    padding: 5px;
+    border: solid 1px #ccc;
     border-radius: 5px;
+    box-shadow: 1px 1px 2px #ccc;
     cursor: pointer;
     opacity: 0.8;
-    box-shadow: 1px 1px 2px #ccc;
+    padding: 5px;
   }
 }
+/* stylelint-enable */
