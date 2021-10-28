@@ -1,10 +1,11 @@
+// todo: add aria-hidden to tooltip when not visible, it should also have unique id that can be used together with aria-labelledby
 export const tmplTooltip = `
-  <ul class="tooltip">
-    <li>{=TITLE}</li>
+  <dl class="tooltip">
+    <dt>{=TITLE}</dt>
     {{
-    <li class="{=CLASS_TOOLTIP_NAME}">
-      <span style="background-color: {=COLOR}">{=NAME} {=VALUE}</span>
-    </li>
+    <dd class="{=CLASS_TOOLTIP_NAME}" style="--color: {=COLOR}">
+      <span>{=NAME} {=VALUE}</span>
+    </dd>
     }}
-  </ul>
+  </dl>
 `
