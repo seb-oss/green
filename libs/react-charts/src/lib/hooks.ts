@@ -7,7 +7,7 @@ interface ChartProps {
 }
 export const useChart = ({ chartRef, settings }: ChartProps) => {
   const [chart, setChart] = useState<Chart>()
-  const [info, setInfo] = useState<ChartInfo>({})
+  const [info, setInfo] = useState<ChartInfo>()
 
   useEffect(() => {
     if (!chart && chartRef.current) {

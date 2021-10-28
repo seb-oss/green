@@ -14,22 +14,37 @@ export function ReactCharts({ settings, theme }: ReactChartsProps) {
 
   return (
     <div className="chart">
-      { info.title &&
+      { info?.title &&
         <h2>{ info.title }</h2>
       }
       <div className={theme} ref={chartRef} />
-      { info.legend?.placement !== 'none' && (
-        <ul className="legend">
-          { info.legend?.items.map((i) => (
-            <li
-              onMouseOver={() => chart?.focus(i.title)}
-              onMouseOut={() => chart?.revert()}
-              onMouseUp={() => chart?.toggle(i.title)}
-            >
-              {i.title}
-            </li>
+
+      { info?.xAxis &&
+        <div>
+          x axis:
+          <ul className="x-axis">
+          { info.xAxis.ticks.map((t) => (
+            <li>{ t.text }</li>
           )) }
-        </ul>
+          </ul>
+        </div>
+      }
+
+      { info?.legend?.placement !== 'none' && (
+        <div>
+          Legend:
+          <ul className="legend">
+            { info?.legend?.items.map((i) => (
+              <li
+                onMouseOver={() => chart?.focus(i.title)}
+                onMouseOut={() => chart?.revert()}
+                onMouseUp={() => chart?.toggle(i.title)}
+              >
+                {i.title}
+              </li>
+            )) }
+          </ul>
+        </div>
       ) }
     </div>
   )

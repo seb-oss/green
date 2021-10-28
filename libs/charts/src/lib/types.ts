@@ -27,9 +27,17 @@ export interface Legend {
   placement: LegendPlacement
 }
 
+interface Tick {
+  text: string
+}
+export interface Axis {
+  ticks: Tick[]
+}
+
 export interface ChartInfo {
   title?: string
-  legend?: Legend
+  legend: Legend
+  xAxis: Axis
 }
 
 export interface ChartArgs {

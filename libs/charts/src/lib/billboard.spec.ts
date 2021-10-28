@@ -1,4 +1,4 @@
-import { ChartOptions } from 'billboard.js'
+import { ChartOptions, Chart } from 'billboard.js'
 import { ChartSettings, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 import { tmplTooltip } from './templates'
@@ -144,31 +144,35 @@ describe('billboard', () => {
     })
   })
   describe('createInfo', () => {
-    it('sets title', () => {
-      const settings: ChartSettings = {
-        title: 'Foo',
-        data: []
+    let settings: ChartSettings
+    let chart: Chart
+    beforeEach(() => {
+      settings = { data: [] }
+      const pChart: Partial<Chart> = {
+        categories: jest.fn().mockReturnValue([]),
       }
-      const info = createInfo(settings)
+      chart = pChart as Chart
+    })
+    it('sets title', () => {
+      settings.title = 'Foo'
+      const info = createInfo(settings, chart)
 
       expect(info.title).toEqual('Foo')
     })
     it('sets legend', () => {
-      const settings: ChartSettings = {
-        title: 'Foo',
-        data: [
-          { name: 'Foo', values: [] },
-          { name: 'Bar', values: [] },
-        ],
-        legend: 'top',
-      }
-      const info = createInfo(settings)
+      settings.data = [
+        { name: 'Foo', values: [] },
+        { name: 'Bar', values: [] },
+      ]
+      settings.legend = 'top'
+
+      const info = createInfo(settings, chart)
       const expected: Legend = {
         placement: 'top',
         items: [
           { title: 'Foo' },
           { title: 'Bar' },
-        ]
+        ],
       }
 
       expect(info.legend).toEqual(expected)

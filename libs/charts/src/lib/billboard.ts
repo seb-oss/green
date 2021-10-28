@@ -1,6 +1,7 @@
 import bb, {
   area,
   bar,
+  Chart as BBChart,
   ChartOptions,
   donut,
   line,
@@ -46,7 +47,7 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
       x: {
         type: 'category',
         categories: settings.categories,
-      }
+      },
     }
   }
 
@@ -67,47 +68,46 @@ export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): Chart
   return update
 }
 
-export const createInfo = (settings: ChartSettings): ChartInfo => {
-  return {
+export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo => {
+  const info: Partial<ChartInfo> = {
     title: settings.title,
     legend: {
       items: settings.data.map((d) => ({ title: d.name })),
       placement: settings.legend || 'none',
-    }
+    },
   }
+  info.xAxis = {
+    ticks: chart.categories().map((text) => ({ text }))
+  }
+
+  return info as ChartInfo
 }
 
 export const create = ({ settings, chartElement }: ChartArgs): Chart => {
-  const wrapper: Chart = {
-    settings,
-    info: createInfo(settings),
-    update: (_: ChartArgs) => null as unknown as Chart,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    focus: (_) => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    revert: (_) => {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    toggle: (_) => {},
-  }
-
   const options = createOptions({ settings, chartElement })
   const chart = bb.generate(options)
-  wrapper.focus = (targetIds) => chart.focus(targetIds)
-  wrapper.revert = (targetIds) => chart.revert(targetIds)
-  wrapper.toggle = (targetIds) => chart.toggle(targetIds)
+  const info = createInfo(settings, chart)
+
+  const wrapper: Chart = {
+    settings,
+    info,
+    focus: (targetIds) => chart.focus(targetIds),
+    revert: (targetIds) => chart.revert(targetIds),
+    toggle: (targetIds) => chart.toggle(targetIds),
+    update: () => null as unknown as Chart,
+  }
 
   const update = ({ settings, chartElement }: ChartArgs): Chart => {
     const newOptions = createUpdate({ settings, chartElement, oldSettings: wrapper.settings })
-    const info = createInfo(settings)
-
     chart.load(newOptions)
+    const info = createInfo(settings, chart)
 
     wrapper.info = info
     wrapper.settings = settings
 
-    return wrapper
+    return wrapper as Chart
   }
   wrapper.update = update
 
-  return wrapper
+  return wrapper as Chart
 }
