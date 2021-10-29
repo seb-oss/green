@@ -31,7 +31,6 @@ export function ReactCharts({ settings, theme }: ReactChartsProps) {
 
       {info?.xAxis && (
         <div>
-          x axis:
           <ul className="x-axis">
             {info.xAxis.ticks.map((t) => (
               <li>{t.text}</li>
@@ -42,7 +41,6 @@ export function ReactCharts({ settings, theme }: ReactChartsProps) {
 
       {info?.legend?.placement !== 'none' && (
         <div>
-          Legend:
           <ul className="legend">
             {info?.legend?.items.map((i) => (
               <li

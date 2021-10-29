@@ -55,6 +55,12 @@ describe('billboard', () => {
           x: {
             categories: [ 'Herp', 'Derp', 'Slurp' ],
             type: 'category',
+            tick: {
+              text: {
+                show: false,
+              },
+            },
+            height: 10,
           },
         },
         legend: { show: false },

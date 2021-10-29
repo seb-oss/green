@@ -47,6 +47,12 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
       x: {
         type: 'category',
         categories: settings.categories,
+        tick: {
+          text: {
+            show: false,
+          },
+        },
+        height: 10,
       },
     }
   }
