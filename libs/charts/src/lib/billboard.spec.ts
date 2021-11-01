@@ -1,5 +1,5 @@
 import { ChartOptions, Chart } from 'billboard.js'
-import { ChartSettings, Legend } from './types'
+import { ChartSettings, ChartStyle, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 import { tmplTooltip } from './templates'
 
@@ -209,6 +209,22 @@ describe('billboard', () => {
       }
 
       expect(info.legend).toEqual(expected)
+    })
+    it('calculates Chart style', () => {
+      settings.data = [
+        { name: 'Foo', values: [] },
+        { name: 'Bar', values: [] },
+      ]
+
+      const info = createInfo(settings, chart)
+      const expected: ChartStyle = {
+        '--chart-width': '768px',
+        '--chart-height': '500px',
+        '--chart-space-left': '49px',
+        '--chart-space-right': 0,
+      }
+
+      expect(info.style).toEqual(expected)
     })
   })
 })

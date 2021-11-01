@@ -8,24 +8,12 @@ export interface ChartProps {
   theme?: string
 }
 
-interface ChartLayoutInfo extends CSSProperties {
-  '--chart-width': string | number
-  '--chart-height': string | number
-  '--chart-space-left': string | number
-  '--chart-space-right': string | number
-}
-
 export function Chart({ settings, theme }: ChartProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const { chart, info } = useChart({ chartRef, settings })
-  const chartLayoutInfo: ChartLayoutInfo = {
-    '--chart-width': '768px',
-    '--chart-height': '500px',
-    '--chart-space-left': '49px',
-    '--chart-space-right': 0,
-  }
+
   return (
-    <div className="chart" style={chartLayoutInfo}>
+    <div className="chart" style={info?.style as unknown as CSSProperties}>
       <div className={theme} ref={chartRef} />
 
       {info?.xAxis && (

@@ -33,8 +33,15 @@ export interface Axis {
   ticks: Tick[]
 }
 
+export interface ChartStyle {
+  '--chart-width': string | number
+  '--chart-height': string | number
+  '--chart-space-left': string | number
+  '--chart-space-right': string | number
+}
 export interface ChartInfo {
   legend: Legend
+  style: ChartStyle
   xAxis: Axis
 }
 

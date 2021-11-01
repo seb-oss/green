@@ -101,8 +101,16 @@ export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo =
       placement: settings.legend || 'none',
     },
   }
+
   info.xAxis = {
     ticks: chart.categories().map((text) => ({ text }))
+  }
+
+  info.style = {
+    '--chart-width': '768px',
+    '--chart-height': '500px',
+    '--chart-space-left': '49px',
+    '--chart-space-right': 0,
   }
 
   return info as ChartInfo
