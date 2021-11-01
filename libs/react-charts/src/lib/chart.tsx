@@ -19,8 +19,8 @@ export function Chart({ settings, theme }: ChartProps) {
       {info?.xAxis && (
         <div>
           <ul className="x-axis">
-            {info.xAxis.ticks.map((t) => (
-              <li>{t.text}</li>
+            {info.xAxis.ticks.map((t, ix) => (
+              <li key={`tick--${ix}`}>{t.text}</li>
             ))}
           </ul>
         </div>
@@ -29,8 +29,9 @@ export function Chart({ settings, theme }: ChartProps) {
       {info?.legend?.placement !== 'none' && (
         <div>
           <ul className="legend">
-            {info?.legend?.items.map((i) => (
+            {info?.legend?.items.map((i, ix) => (
               <li
+                key={`legend--${ix}`}
                 onMouseOver={() => chart?.focus(i.title)}
                 onMouseOut={() => chart?.revert()}
                 onMouseUp={() => chart?.toggle(i.title)}

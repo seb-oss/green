@@ -88,8 +88,8 @@ export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): Chart
   const update: ChartSettingsUpdate = {
     columns: data.columns || [],
     types: data.types || {},
-    categories: settings.categories,
   }
+  if (settings.categories) update.categories = settings.categories
 
   return update
 }
