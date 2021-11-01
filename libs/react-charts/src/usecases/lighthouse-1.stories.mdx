@@ -1,0 +1,53 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Chart } from '../'
+
+export const Template = (args) => <Chart {...args} />
+
+<Meta title="Use cases/Lighthouse 1" component={Chart} />
+
+# Lighthouse: Use case 1
+
+## Bar chart
+
+<Canvas>
+  <Story
+    name="Bar chart"
+    args={{
+      settings: {
+        data: [],
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Pie chart
+
+<Canvas>
+  <Story
+    name="Pie chart"
+    args={{
+      settings: {
+        data: [],
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Splines chart
+
+<Canvas>
+  <Story
+    name="Splines chart"
+    args={{
+      settings: {
+        data: [],
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
