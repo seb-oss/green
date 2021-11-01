@@ -1,15 +1,10 @@
 {
-  "name": "@sebgroup/green-react",
+  "name": "@green/charts",
   "version": "0.0.0-semantically-released",
-  "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "dependencies": {
-    "@sebgroup/chlorophyll": "*",
-    "@sebgroup/extract": "*"
+    "billboard.js": "^3.2.1"
   },
-  "description": "React components built on top of @sebgroup/chlorophyll.",
+  "description": "Base library for charts.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebgroup/green.git"
@@ -22,7 +17,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/react"
+    "url": "https://github.com/sebgroup/green/labels/charts"
   },
-  "homepage": "https://sebgroup.github.io/green/latest/react/"
+  "homepage": "https://sebgroup.github.io/green/latest/charts/"
 }

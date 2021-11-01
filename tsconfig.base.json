@@ -19,7 +19,9 @@
       "@sebgroup/extract": ["libs/extract/src/index.ts"],
       "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
       "@sebgroup/green-angular-dev/*": ["apps/angular-lib-dev/*"],
-      "@sebgroup/green-react": ["libs/react/src/index.ts"]
+      "@sebgroup/green-charts": ["libs/charts/src/index.ts"],
+      "@sebgroup/green-react": ["libs/react/src/index.ts"],
+      "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
