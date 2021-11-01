@@ -26,7 +26,6 @@ export function Chart({ settings, theme }: ChartProps) {
   }
   return (
     <div className="chart" style={chartLayoutInfo}>
-      {info?.title && <h2>{info.title}</h2>}
       <div className={theme} ref={chartRef} />
 
       {info?.xAxis && (

@@ -28,7 +28,6 @@ SimpleBar.args = {
 export const Pie = Template.bind({})
 Pie.args = {
   settings: {
-    title: 'Gold tickets',
     type: 'pie',
     data: [
       {
@@ -51,7 +50,6 @@ Pie.args = {
 export const Donut = Template.bind({})
 Donut.args = {
   settings: {
-    title: 'Gold tickets',
     type: 'donut',
     data: [
       {
@@ -73,7 +71,6 @@ Donut.args = {
 export const Lines = Template.bind({})
 Lines.args = {
   settings: {
-    title: 'Diagramrubrik',
     data: [
       {
         name: 'Signerade avtal SEB',
@@ -98,7 +95,6 @@ Lines.args = {
 export const Splines = Template.bind({})
 Splines.args = {
   settings: {
-    title: 'Diagramrubrik',
     type: 'spline',
     data: [
       {
@@ -121,7 +117,6 @@ Splines.args = {
 export const Mixed = Template.bind({})
 Mixed.args = {
   settings: {
-    title: 'Mixed graph',
     data: [
       {
         type: 'spline',

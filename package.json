@@ -11,6 +11,7 @@
     "test:all": "nx run-many --target=test --all",
     "lint": "nx workspace-lint && nx lint",
     "lint:all": "nx run-many --target=lint --all",
+    "smoketest": "yarn lint:all && yarn test:all && yarn build:all",
     "e2e": "nx e2e",
     "storybook": "nx build chlorophyll && nx storybook",
     "affected:apps": "nx affected:apps",

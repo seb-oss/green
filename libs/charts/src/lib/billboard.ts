@@ -76,7 +76,6 @@ export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): Chart
 
 export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo => {
   const info: Partial<ChartInfo> = {
-    title: settings.title,
     legend: {
       items: settings.data.map((d) => ({ title: d.name })),
       placement: settings.legend || 'none',

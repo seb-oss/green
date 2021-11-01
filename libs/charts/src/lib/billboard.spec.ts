@@ -159,12 +159,6 @@ describe('billboard', () => {
       }
       chart = pChart as Chart
     })
-    it('sets title', () => {
-      settings.title = 'Foo'
-      const info = createInfo(settings, chart)
-
-      expect(info.title).toEqual('Foo')
-    })
     it('sets legend', () => {
       settings.data = [
         { name: 'Foo', values: [] },

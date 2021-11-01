@@ -11,7 +11,6 @@ export interface ChartData {
 }
 
 export interface ChartSettings {
-  title?: string
   type?: ChartType
   data: ChartData[]
   categories?: string[]
@@ -35,7 +34,6 @@ export interface Axis {
 }
 
 export interface ChartInfo {
-  title?: string
   legend: Legend
   xAxis: Axis
 }
