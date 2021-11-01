@@ -3,7 +3,7 @@ import { ChartSettings } from '@sebgroup/green-charts'
 import { useChart } from './hooks'
 
 /* eslint-disable-next-line */
-export interface ReactChartsProps {
+export interface ChartProps {
   settings: ChartSettings
   theme?: string
 }
@@ -15,7 +15,7 @@ interface ChartLayoutInfo extends CSSProperties {
   '--chart-space-right': string | number
 }
 
-export function ReactCharts({ settings, theme }: ReactChartsProps) {
+export function Chart({ settings, theme }: ChartProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const { chart, info } = useChart({ chartRef, settings })
   const chartLayoutInfo: ChartLayoutInfo = {
@@ -58,4 +58,4 @@ export function ReactCharts({ settings, theme }: ReactChartsProps) {
   )
 }
 
-export default ReactCharts
+export default Chart

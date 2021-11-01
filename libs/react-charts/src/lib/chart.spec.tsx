@@ -1,8 +1,8 @@
 import { ChartSettings } from '@sebgroup/green-charts'
 import { render } from '@testing-library/react'
-import ReactCharts from './react-charts'
+import Chart from './chart'
 
-describe('ReactCharts', () => {
+describe('Chart', () => {
   let settings: ChartSettings
   beforeEach(() => {
     settings = {
@@ -11,11 +11,11 @@ describe('ReactCharts', () => {
     }
   })
   it('renders', () => {
-    const { baseElement } = render(<ReactCharts settings={settings} />)
+    const { baseElement } = render(<Chart settings={settings} />)
     expect(baseElement).toBeTruthy()
   })
   it('renders title', async () => {
-    const { findByRole } = render(<ReactCharts settings={settings} />)
+    const { findByRole } = render(<Chart settings={settings} />)
     const heading = await findByRole('heading')
     expect(heading.innerHTML).toEqual('Title')
   })

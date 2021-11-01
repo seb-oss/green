@@ -1,12 +1,12 @@
 import { Story, Meta } from '@storybook/react'
-import { ReactCharts, ReactChartsProps } from './react-charts'
+import { Chart, ChartProps } from './chart'
 
 export default {
-  component: ReactCharts,
-  title: 'ReactCharts',
+  component: Chart,
+  title: 'Chart',
 } as Meta
 
-const Template: Story<ReactChartsProps> = (args) => <ReactCharts {...args} />
+const Template: Story<ChartProps> = (args) => <Chart {...args} />
 
 export const SimpleBar = Template.bind({})
 SimpleBar.args = {
