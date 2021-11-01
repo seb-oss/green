@@ -148,6 +148,39 @@ describe('billboard', () => {
       }
       expect(parsed).toEqual(expected)
     })
+    it('adds y base line if any value is negative', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [
+          { name: 'Foo', values: [1] },
+          { name: 'Bar', values: [-2], type: 'area' },
+        ]
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: ChartOptions = {
+        bindto: '#foo',
+        data: {
+          columns: [
+            ['Foo', 1],
+            ['Bar', -2],
+          ],
+          types: {
+            'Foo': 'bar',
+            'Bar': 'area',
+          },
+        },
+        legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
+        grid: {
+          y: {
+            lines: [
+              { value: 0, class: 'base-line' }
+            ],
+          },
+        },
+      }
+      expect(parsed).toEqual(expected)
+    })
   })
   describe('createInfo', () => {
     let settings: ChartSettings

@@ -42,6 +42,26 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
     tooltip: { contents: { template: tmplTooltip } },
   }
 
+  let hasNegativeValue = false
+  for (const dt of columns) {
+    for (const val of dt) {
+      if (val < 0) {
+        hasNegativeValue = true
+        break
+      }
+    }
+    if (hasNegativeValue) break
+  }
+  if (hasNegativeValue) {
+    options.grid = {
+      y: {
+        lines: [ {
+          value: 0, class: 'base-line',
+        } ],
+      },
+    }
+  }
+
   if (settings.categories) {
     options.axis = {
       x: {
