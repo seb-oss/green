@@ -64,6 +64,10 @@ ul.x-axis {
 }
 
 /*-- Chart --*/
+.chart {
+  position: relative;
+}
+
 .bb {
   svg {
     font-family: $font-family;

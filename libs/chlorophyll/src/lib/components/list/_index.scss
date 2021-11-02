@@ -4,11 +4,11 @@
 @use 'sass:map';
 @forward 'mixins';
 
-ul {
+ul:not(.legend) {
   @include mixins.base-list();
 }
 
-ul:not(.check, .table, [role='listbox'], [role='menu'], .x-axis) {
+ul:not(.check, .table, [role='listbox'], [role='menu'], .x-axis, .legend) {
   @include mixins.bullet-list();
 }
 
