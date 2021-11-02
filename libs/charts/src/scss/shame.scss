@@ -35,6 +35,51 @@
 }
 
 // legend
+.legend-container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 0;
+
+  &.top {
+    align-items: flex-start;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+
+    &:not(.right, .left) {
+      justify-content: center;
+      position: relative;
+
+      .legend {
+        display: flex;
+
+        li {
+          margin: 0 0.5rem;
+        }
+      }
+    }
+  }
+
+  &.center {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: end;
+  }
+
+  &.right {
+    right: 0;
+  }
+
+  &.left {
+    left: 0;
+  }
+}
+
 ul.legend {
   list-style: none;
   margin: 0;

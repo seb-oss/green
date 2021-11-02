@@ -27,7 +27,7 @@ export function Chart({ settings, theme }: ChartProps) {
       )}
 
       {info?.legend?.placement !== 'none' && (
-        <div>
+        <div className={'legend-container ' + info?.legend?.placement}>
           <ul className="legend">
             {info?.legend?.items.map((i, ix) => (
               <li
