@@ -31,12 +31,13 @@ export function Chart({ settings, theme }: ChartProps) {
           <ul className="legend">
             {info?.legend?.items.map((i, ix) => (
               <li
+                style={{ '--color': i.color } as unknown as CSSProperties}
                 key={`legend--${ix}`}
                 onMouseOver={() => chart?.focus(i.title)}
                 onMouseOut={() => chart?.revert()}
                 onMouseUp={() => chart?.toggle(i.title)}
               >
-                {i.title}
+                <span>{i.title}</span>
               </li>
             ))}
           </ul>

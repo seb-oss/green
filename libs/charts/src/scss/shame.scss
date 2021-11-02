@@ -1,4 +1,23 @@
 @use '../../../chlorophyll/src/lib/tokens';
+@use '../../../chlorophyll/src/lib/common';
+@mixin chart-series-list-item() {
+  @include common.margin-top(3);
+  align-items: center;
+  display: flex;
+
+  &:not(:last-child) {
+    @include common.margin-bottom(3);
+  }
+
+  &::before {
+    background: var(--color);
+    border-radius: 50%;
+    content: '';
+    height: 0.75rem;
+    margin-right: 0.5rem;
+    width: 0.75rem;
+  }
+}
 
 .tooltip {
   background: tokens.$black;
@@ -11,16 +30,17 @@
   }
 
   dd {
-    align-items: center;
-    display: flex;
+    @include chart-series-list-item();
+  }
+}
 
-    &::before {
-      background: var(--color);
-      border-radius: 50%;
-      content: '';
-      height: 0.75rem;
-      margin-right: 0.5rem;
-      width: 0.75rem;
-    }
+// legend
+ul.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    @include chart-series-list-item();
   }
 }

@@ -97,13 +97,16 @@ export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): Chart
 export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo => {
   const info: Partial<ChartInfo> = {
     legend: {
-      items: settings.data.map((d) => ({ title: d.name })),
+      items: settings.data.map((d) => ({
+        title: d.name,
+        color: chart.color(d.name),
+      })),
       placement: settings.legend || 'none',
     },
   }
 
   info.xAxis = {
-    ticks: chart.categories().map((text) => ({ text }))
+    ticks: chart.categories().map((text) => ({ text })),
   }
 
   info.style = {
