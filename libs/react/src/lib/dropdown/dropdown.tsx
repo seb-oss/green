@@ -1,10 +1,6 @@
+import { DropdownOption } from 'libs/extract/src/lib/dropdown'
 import { HTMLAttributes, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
-
-export interface DropdownOption {
-  key: string
-  value: never
-}
 
 export interface DropdownProps {
   children?: string
