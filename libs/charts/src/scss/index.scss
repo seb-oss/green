@@ -26,6 +26,7 @@ $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
 $grid-focus-line-color: map.get(color.$blue, 2);
+$grid-base-line-color: map.get(color.$grey, 6);
 
 @mixin select-none {
   user-select: none;
@@ -43,10 +44,6 @@ ul.x-axis {
     text-align: center;
     word-break: break-word;
   }
-}
-
-g.base-line line {
-  stroke: #000;
 }
 
 /*-- Default color pattern --*/
@@ -162,6 +159,9 @@ g.base-line line {
 .bb-grid {
   line {
     stroke: #f1f1f1;
+  }
+  .base-line line {
+    stroke: $grid-base-line-color;
   }
 }
 
