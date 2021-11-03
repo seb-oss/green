@@ -31,7 +31,7 @@ export const Select = () => {
   })
   return {
     template: `<ngg-dropdown
-                  [control]='control'
+                  [formControl]='control'
                   [options]='options'
                   [config]='config'
                   ></ngg-dropdown>`,
