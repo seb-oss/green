@@ -1,47 +1,124 @@
-import { DropdownOption, ExtendedDropdownOption, extendOptions, select } from './dropdown'
+import {
+  AbstractDropdown,
+  create,
+  DropdownOption,
+} from './dropdown'
 
 describe('dropdown', () => {
-  describe('.extendOptions', () => {
-    it('adds id', () => {
-      const options: DropdownOption[] = [
-        { key: 'a', value: 1 },
-        { key: 'b', value: 2 },
+  describe('create', () => {
+    let id: string
+    let options: DropdownOption[]
+    beforeEach(() => {
+      id = 'foo'
+      options = [
+        { key: 'A', value: 1 },
+        { key: 'B', value: 2 },
       ]
-      const expected: ExtendedDropdownOption[] = [
-        { key: 'a', value: 1, id: 'id_option0' },
-        { key: 'b', value: 2, id: 'id_option1' },
-      ]
-      const result = extendOptions(options, 'id')
-
-      expect(result).toEqual(expected)
     })
-  })
-  describe('.select', () => {
-    it('sets selected', () => {
-      const items: ExtendedDropdownOption[] = [
-        { key: 'a', value: 1, id: 'id_option0' },
-        { key: 'b', value: 2, id: 'id_option1' },
-      ]
-      const expected: ExtendedDropdownOption[] = [
-        { key: 'a', value: 1, id: 'id_option0', selected: false },
-        { key: 'b', value: 2, id: 'id_option1', selected: true },
-      ]
-      const result = select(items, items[1])
+    it('uses passed in id', () => {
+      const dropdown = create({ id, options })
 
-      expect(result).toEqual(expected)
+      expect(dropdown.id).toEqual('foo')
     })
-    it('sets unselected', () => {
-      const items: ExtendedDropdownOption[] = [
-        { key: 'a', value: 1, id: 'id_option0', selected: true },
-        { key: 'b', value: 2, id: 'id_option1' },
-      ]
-      const expected: ExtendedDropdownOption[] = [
-        { key: 'a', value: 1, id: 'id_option0', selected: false },
-        { key: 'b', value: 2, id: 'id_option1', selected: true },
-      ]
-      const result = select(items, items[1])
+    it('creates an id if not supplied', () => {
+      const dropdown = create({ options })
 
-      expect(result).toEqual(expected)
+      expect(dropdown.id).toBeTruthy()
+    })
+    it('contains options', () => {
+      const dropdown = create({ options })
+
+      expect(dropdown.options).toHaveLength(2)
+    })
+    it('sets correct option attributes', () => {
+      options[1].selected = true
+      const dropdown = create({ id, options })
+      const optionAttributes = dropdown.options.map((o) => o.attributes)
+
+      expect(optionAttributes).toEqual([
+        { id: 'foo_option0', role: 'option' },
+        { id: 'foo_option1', role: 'option', 'aria-selected': true },
+      ])
+    })
+    describe('elements', () => {
+      it('sets correct toggle attributes', () => {
+        const dropdown = create({ id, options })
+
+        expect(dropdown.elements.toggle.attributes).toEqual({
+          'aria-haspopup': 'listbox',
+          'aria-owns': 'foo',
+          'aria-expanded': false,
+        })
+      })
+      it('sets correct toggle classes', () => {
+        const dropdown = create({ id, options })
+
+        expect(dropdown.elements.toggle.classes).toEqual(['dropdown-toggle'])
+      })
+      it('sets correct listbox attributes', () => {
+        const dropdown = create({ id, options })
+
+        expect(dropdown.elements.listbox.attributes).toEqual({
+          role: 'listbox',
+          tabIndex: -1,
+        })
+      })
+      it('sets correct listbox classes', () => {
+        const dropdown = create({ id, options })
+
+        expect(dropdown.elements.listbox.classes).toEqual(['popover'])
+      })
+    })
+    describe('interactions', () => {
+      let dropdown: AbstractDropdown
+      beforeEach(() => {
+        dropdown = create({ id, options })
+      })
+      it('defaults to closed', () => {
+        expect(dropdown.isOpen).toBe(false)
+      })
+      describe('open', () => {
+        beforeEach(() => {
+          dropdown = dropdown.open()
+        })
+        it('sets isOpen=true', () => {
+          expect(dropdown.isOpen).toBe(true)
+        })
+        it('sets toggle.aria-expanded=true', () => {
+          const expanded = dropdown.elements.toggle.attributes['aria-expanded']
+          expect(expanded).toBe(true)
+        })
+        it('adds listbox class active', () => {
+          const { classes } = dropdown.elements.listbox
+          expect(classes).toContain('active')
+        })
+
+        describe('close', () => {
+          beforeEach(() => {
+            dropdown = dropdown.close()
+          })
+          it('sets isOpen=false', () => {
+            expect(dropdown.isOpen).toBe(false)
+          })
+          it('sets toggle.aria-expanded=false', () => {
+            const expanded = dropdown.elements.toggle.attributes['aria-expanded']
+            expect(expanded).toBe(false)
+          })
+          it('removes listbox class active', () => {
+            const { classes } = dropdown.elements.listbox
+            expect(classes).not.toContain('active')
+          })
+        })
+      })
+      describe('toggle', () => {
+        it('switches between open and close', () => {
+          expect(dropdown.isOpen).toBe(false)
+          dropdown = dropdown.toggle()
+          expect(dropdown.isOpen).toBe(true)
+          dropdown = dropdown.toggle()
+          expect(dropdown.isOpen).toBe(false)
+        })
+      })
     })
   })
 })
