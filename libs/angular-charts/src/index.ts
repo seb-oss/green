@@ -1,1 +1,1 @@
-export * from './lib/angular-charts.module'
+export * from './lib/ngg-charts.module'
