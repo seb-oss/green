@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[147],{"./package.json":module=>{module.exports={i8:"0.0.0"}}}]);
