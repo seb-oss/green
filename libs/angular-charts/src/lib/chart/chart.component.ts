@@ -20,11 +20,37 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
         </li>
       </ul>
     </div>
+    <ng-container *ngIf="chart?.info?.legend as legend">
+      <div
+        class="legend-container"
+        [class]="legend.placement"
+        *ngIf="legend.placement !== 'none'"
+      >
+        <ul class="legend">
+          <li
+            *ngFor="let item of legend.items"
+            [style.--color]="item.color"
+            (mouseover)="chart.focus(item.title)"
+            (mouseup)="chart.focus(item.title)"
+            (mouseout)="chart.revert()"
+          >
+            <span>{{ item.title }}</span>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartComponent implements AfterViewInit {
   @ViewChild('chartRef') _chartElementRef: ElementRef | undefined
+  get chart(): Chart {
+    return <Chart>this._chart
+  }
+
+  set chart(value: Chart) {
+    this._chart = value
+  }
 
   get theme(): string {
     return <string>this._theme
