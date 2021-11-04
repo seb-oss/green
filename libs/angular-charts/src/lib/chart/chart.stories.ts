@@ -16,16 +16,17 @@ export default {
 
 const ChartStory: Story<ChartComponent> = (args) => ({
   props: args,
-  template: `<ngg-chart [settings]='settings'></ngg-chart>`,
+  template: `<ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>`,
 })
 
 const ObservableChartStory: Story<ChartComponent> = (args) => ({
   props: args,
-  template: `<ngg-chart [settings]='settings | async'></ngg-chart>`,
+  template: `<ngg-chart [settings]='settings | async' [theme]='theme'></ngg-chart>`,
 })
 
 export const SimpleBar = ChartStory.bind({})
 SimpleBar.args = {
+  theme: '',
   settings: {
     data: [
       {
@@ -48,6 +49,7 @@ EmptyChart.args = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   settings: null,
+  theme: '',
 }
 
 export const ObservableSimpleBar = ObservableChartStory.bind({})
@@ -69,6 +71,7 @@ ObservableSimpleBar.args = {
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
   }),
+  theme: '',
 }
 
 export const Pie = ChartStory.bind({})
@@ -91,6 +94,7 @@ Pie.args = {
     ],
     legend: 'right',
   },
+  theme: '',
 }
 
 export const Donut = ChartStory.bind({})
@@ -112,6 +116,7 @@ Donut.args = {
       },
     ],
   },
+  theme: '',
 }
 
 export const Lines = ChartStory.bind({})
@@ -136,6 +141,7 @@ Lines.args = {
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
   },
+  theme: '',
 }
 
 export const Splines = ChartStory.bind({})
@@ -158,6 +164,7 @@ Splines.args = {
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
   },
+  theme: '',
 }
 
 export const Mixed = ChartStory.bind({})
@@ -183,4 +190,5 @@ Mixed.args = {
     categories: ['jan', 'feb', 'mar', 'apr'],
     legend: 'right',
   },
+  theme: '',
 }
