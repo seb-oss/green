@@ -12,7 +12,7 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 @Component({
   selector: 'ngg-chart',
   template: `<div class="chart" [style]="chart?.info?.style">
-    <div #chartRef></div>
+    <div #chartRef [class]="theme"></div>
     <div *ngIf="chart?.info?.xAxis as xAxis">
       <ul class="x-axis">
         <li *ngFor="let tick of xAxis.ticks">
@@ -26,13 +26,14 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 export class ChartComponent implements AfterViewInit {
   @ViewChild('chartRef') _chartElementRef: ElementRef | undefined
 
-  get chart(): Chart | undefined {
-    return this._chart
+  get theme(): string {
+    return <string>this._theme
   }
 
-  set chart(value: Chart | undefined) {
-    this._chart = value
+  @Input() set theme(value: string) {
+    this._theme = value
   }
+
   get settings() {
     return this._settings
   }
@@ -46,6 +47,7 @@ export class ChartComponent implements AfterViewInit {
       })
     }
   }
+  private _theme: string | undefined
   private _settings: ChartSettings | undefined
   private _chart: Chart | undefined
 
