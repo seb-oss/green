@@ -22,13 +22,12 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
   const [listItems, setListItems] = useState<Props[]>([])
 
   useEffect(() => {
-    console.log('dropdown changed', dropdown)
     if (!dropdown) return
     const { elements: { toggle, listbox } } = dropdown
 
     const newToggleProps: Props = {
       ...toggle.attributes,
-      className: toggle.classes.join(' '),
+      className: toggle.classes?.join(' '),
       children: dropdown.text,
       onClick: () => {
         setDropdown({...dropdown.toggle()})
@@ -38,13 +37,13 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
 
     const newListboxProps: Props = {
       ...listbox.attributes,
-      className: listbox.classes.join(' '),
+      className: listbox.classes?.join(' '),
     }
     setListboxProps(newListboxProps)
 
     const newListItems: Props[] = dropdown.options.map((o) => ({
       ...o.attributes,
-      className: o.classes.join(' '),
+      className: o.classes?.join(' '),
       children: o.key,
     }))
     setListItems(newListItems)
