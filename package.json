@@ -38,9 +38,6 @@
     ]
   },
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "@angular/animations": "12.2.10",
     "@angular/common": "12.2.10",
@@ -57,6 +54,7 @@
     "browserslist": "^4.16.8",
     "core-js": "^3.16.3",
     "fast-copy": "^2.1.1",
+    "merge": "^2.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
