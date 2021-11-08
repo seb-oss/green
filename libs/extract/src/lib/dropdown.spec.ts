@@ -30,15 +30,17 @@ describe('dropdown', () => {
 
       expect(dropdown.options).toHaveLength(2)
     })
-    it('sets correct option attributes', () => {
-      options[1].selected = true
-      const dropdown = create({ id, options })
-      const optionAttributes = dropdown.options.map((o) => o.attributes)
+    describe('options', () => {
+      it('sets correct option attributes', () => {
+        options[1].selected = true
+        const dropdown = create({ id, options })
+        const optionAttributes = dropdown.options.map((o) => o.attributes)
 
-      expect(optionAttributes).toEqual([
-        { id: 'foo_option0', role: 'option' },
-        { id: 'foo_option1', role: 'option', 'aria-selected': true },
-      ])
+        expect(optionAttributes).toEqual([
+          { id: 'foo_option0', role: 'option' },
+          { id: 'foo_option1', role: 'option', 'aria-selected': true },
+        ])
+      })
     })
     describe('elements', () => {
       it('sets correct toggle attributes', () => {

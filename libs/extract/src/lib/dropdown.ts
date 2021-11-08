@@ -1,5 +1,31 @@
-import copy from 'fast-copy'
+import { recursive } from 'merge'
 import { randomId } from './id'
+
+const reduce = (...items: Partial<AbstractDropdown>[]): AbstractDropdown => {
+  const result = recursive(true, ...items) as AbstractDropdown
+  result.toggle = () => (result.isOpen) ? result.close() : result.open()
+  return result
+}
+
+const distinct = <T>(arr: T[]): T[] => {
+  const map: Record<string, boolean> = {}
+  return arr.filter((item) => {
+    const key = (typeof item === 'string') ? item : JSON.stringify(item)
+    if (map[key]) return false
+    else {
+      map[key] = true
+      return true
+    }
+  })
+}
+
+const addClass = (classes: string[] | undefined, newClass: string): string[] => (
+  distinct((classes || []).concat(newClass))
+)
+
+const removeClass = (classes: string[] | undefined, removeClass: string): string[] => (
+  (classes || []).filter((item) => item !== removeClass)
+)
 
 export interface DropdownOption {
   key: string
@@ -33,8 +59,8 @@ export interface AbstractDropdown {
   toggle: () => AbstractDropdown
   options: ExtendedDropdownOption[]
   elements: {
-    toggle: ElementProps
-    listbox: ElementProps
+    toggle: Partial<ElementProps>
+    listbox: Partial<ElementProps>
   }
 }
 
@@ -81,20 +107,36 @@ export const create = ({ id, text, options }: DropdownArgs): AbstractDropdown =>
   }
 
   dd.isOpen = false
-  dd.open = () => {
-    const newDropdown = dd as AbstractDropdown
-    newDropdown.isOpen = true
-    newDropdown.elements.toggle.attributes['aria-expanded'] = true
-    newDropdown.elements.listbox.classes.push('active')
-    return newDropdown
-  }
-  dd.close = () => {
-    const newDropdown = dd as AbstractDropdown
-    newDropdown.isOpen = false
-    newDropdown.elements.toggle.attributes['aria-expanded'] = false
-    newDropdown.elements.listbox.classes = newDropdown.elements.listbox.classes.filter((c) => c !== 'active')
-    return newDropdown as AbstractDropdown
-  }
+  dd.open = () => (
+    reduce(dd, {
+      isOpen: true,
+      elements: {
+        toggle: {
+          attributes: {
+            'aria-expanded': true,
+          },
+        },
+        listbox: {
+          classes: addClass(dd.elements?.listbox.classes, 'active'),
+        },
+      },
+    })
+  ),
+  dd.close = () => (
+    reduce(dd, {
+      isOpen: false,
+      elements: {
+        toggle: {
+          attributes: {
+            'aria-expanded': false,
+          },
+        },
+        listbox: {
+          classes: removeClass(dd.elements?.listbox.classes, 'active'),
+        },
+      },
+    })
+  )
   dd.toggle = () => dd.isOpen
     ? (dd as AbstractDropdown).close()
     : (dd as AbstractDropdown).open()
