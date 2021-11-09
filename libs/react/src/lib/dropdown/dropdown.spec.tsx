@@ -1,4 +1,4 @@
-import { render, act, fireEvent } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { Dropdown, DropdownProps } from './dropdown'
 describe('Dropdown', () => {
   let props: DropdownProps
@@ -75,8 +75,16 @@ describe('Dropdown', () => {
     })
     it('sets aria-selected', () => {
       fireEvent.click(options[1])
-
       expect(options[1].getAttribute('aria-selected')).toEqual('true')
+    })
+    it('closes dropdown', () => {
+      fireEvent.click(options[1])
+      expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+      expect(listbox.className).toEqual('popover')
+    })
+    it('sets toggler text', () => {
+      fireEvent.click(options[1])
+      expect(toggleButton.innerHTML.trim()).toEqual('B')
     })
   })
 })
