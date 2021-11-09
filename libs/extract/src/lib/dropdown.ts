@@ -3,7 +3,6 @@ import { randomId } from './id'
 
 const reduce = (...items: Partial<AbstractDropdown>[]): AbstractDropdown => {
   const result = recursive(true, ...items) as AbstractDropdown
-  result.toggle = () => (result.isOpen) ? result.close() : result.open()
   return result
 }
 
@@ -54,12 +53,9 @@ export interface AbstractDropdown {
   id: string
   text: string
   isOpen: boolean
-  open: () => AbstractDropdown
-  close: () => AbstractDropdown
-  toggle: () => AbstractDropdown
   options: ExtendedDropdownOption[]
   elements: {
-    toggle: Partial<ElementProps>
+    toggler: Partial<ElementProps>
     listbox: Partial<ElementProps>
   }
 }
@@ -89,7 +85,7 @@ export const create = ({ id, text, options }: DropdownArgs): AbstractDropdown =>
   })
 
   dd.elements = {
-    toggle: {
+    toggler: {
       attributes: {
         'aria-haspopup': 'listbox',
         'aria-owns': dd.id,
@@ -107,39 +103,52 @@ export const create = ({ id, text, options }: DropdownArgs): AbstractDropdown =>
   }
 
   dd.isOpen = false
-  dd.open = () => (
-    reduce(dd, {
-      isOpen: true,
-      elements: {
-        toggle: {
-          attributes: {
-            'aria-expanded': true,
-          },
-        },
-        listbox: {
-          classes: addClass(dd.elements?.listbox.classes, 'active'),
-        },
-      },
-    })
-  ),
-  dd.close = () => (
-    reduce(dd, {
-      isOpen: false,
-      elements: {
-        toggle: {
-          attributes: {
-            'aria-expanded': false,
-          },
-        },
-        listbox: {
-          classes: removeClass(dd.elements?.listbox.classes, 'active'),
-        },
-      },
-    })
-  )
-  dd.toggle = () => dd.isOpen
-    ? (dd as AbstractDropdown).close()
-    : (dd as AbstractDropdown).open()
   
   return dd as AbstractDropdown
 }
+export const open = (dropdown: AbstractDropdown): AbstractDropdown => (
+  reduce(dropdown, {
+    isOpen: true,
+    elements: {
+      toggler: {
+        attributes: {
+          'aria-expanded': true,
+        },
+      },
+      listbox: {
+        classes: addClass(dropdown.elements?.listbox.classes, 'active'),
+      },
+    },
+  })
+)
+export const close = (dropdown: AbstractDropdown): AbstractDropdown => (
+  reduce(dropdown, {
+    isOpen: false,
+    elements: {
+      toggler: {
+        attributes: {
+          'aria-expanded': false,
+        },
+      },
+      listbox: {
+        classes: removeClass(dropdown.elements?.listbox.classes, 'active'),
+      },
+    },
+  })
+)
+export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => (
+  (dropdown.isOpen) ? close(dropdown) : open(dropdown)
+)
+export const select = (dropdown: AbstractDropdown, option: ExtendedDropdownOption): AbstractDropdown => (
+  reduce(close(dropdown), {
+    text: option.key,
+    options: dropdown.options.map((o) => ({
+      ...o,
+      selected: o === option,
+      attributes: {
+        ...o.attributes,
+        'aria-selected': o === option || undefined,
+      },
+    })),
+  })
+)

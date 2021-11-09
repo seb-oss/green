@@ -1,7 +1,11 @@
 import {
   AbstractDropdown,
+  close,
   create,
   DropdownOption,
+  open,
+  select,
+  toggle,
 } from './dropdown'
 
 describe('dropdown', () => {
@@ -31,14 +35,29 @@ describe('dropdown', () => {
       expect(dropdown.options).toHaveLength(2)
     })
     describe('options', () => {
-      it('sets correct option attributes', () => {
+      it('sets option ids', () => {
+        const dropdown = create({ id, options })
+        const optionAttributes = dropdown.options.map((o) => o.attributes)
+
+        expect(optionAttributes.map((o) => o.id)).toEqual([
+          'foo_option0', 'foo_option1',
+        ])
+      })
+      it('sets option roles', () => {
+        const dropdown = create({ id, options })
+        const optionAttributes = dropdown.options.map((o) => o.attributes)
+
+        expect(optionAttributes.map((o) => o.role)).toEqual([
+          'option', 'option',
+        ])
+      })
+      it('sets option selected', () => {
         options[1].selected = true
         const dropdown = create({ id, options })
         const optionAttributes = dropdown.options.map((o) => o.attributes)
 
-        expect(optionAttributes).toEqual([
-          { id: 'foo_option0', role: 'option' },
-          { id: 'foo_option1', role: 'option', 'aria-selected': true },
+        expect(optionAttributes.map((o) => o['aria-selected'])).toEqual([
+          undefined, true,
         ])
       })
     })
@@ -46,16 +65,16 @@ describe('dropdown', () => {
       it('sets correct toggle attributes', () => {
         const dropdown = create({ id, options })
 
-        expect(dropdown.elements.toggle.attributes).toEqual({
+        expect(dropdown.elements.toggler.attributes).toEqual({
           'aria-haspopup': 'listbox',
           'aria-owns': 'foo',
           'aria-expanded': false,
         })
       })
-      it('sets correct toggle classes', () => {
+      it('sets correct toggler classes', () => {
         const dropdown = create({ id, options })
 
-        expect(dropdown.elements.toggle.classes).toEqual(['dropdown-toggle'])
+        expect(dropdown.elements.toggler.classes).toEqual(['dropdown-toggle'])
       })
       it('sets correct listbox attributes', () => {
         const dropdown = create({ id, options })
@@ -81,13 +100,13 @@ describe('dropdown', () => {
       })
       describe('open', () => {
         beforeEach(() => {
-          dropdown = dropdown.open()
+          dropdown = open(dropdown)
         })
         it('sets isOpen=true', () => {
           expect(dropdown.isOpen).toBe(true)
         })
-        it('sets toggle.aria-expanded=true', () => {
-          const expanded = dropdown.elements.toggle.attributes['aria-expanded']
+        it('sets toggler.aria-expanded=true', () => {
+          const expanded = dropdown.elements.toggler.attributes['aria-expanded']
           expect(expanded).toBe(true)
         })
         it('adds listbox class active', () => {
@@ -97,13 +116,13 @@ describe('dropdown', () => {
 
         describe('close', () => {
           beforeEach(() => {
-            dropdown = dropdown.close()
+            dropdown = close(dropdown)
           })
           it('sets isOpen=false', () => {
             expect(dropdown.isOpen).toBe(false)
           })
-          it('sets toggle.aria-expanded=false', () => {
-            const expanded = dropdown.elements.toggle.attributes['aria-expanded']
+          it('sets toggler.aria-expanded=false', () => {
+            const expanded = dropdown.elements.toggler.attributes['aria-expanded']
             expect(expanded).toBe(false)
           })
           it('removes listbox class active', () => {
@@ -115,10 +134,20 @@ describe('dropdown', () => {
       describe('toggle', () => {
         it('switches between open and close', () => {
           expect(dropdown.isOpen).toBe(false)
-          dropdown = dropdown.toggle()
+          dropdown = toggle(dropdown)
           expect(dropdown.isOpen).toBe(true)
-          dropdown = dropdown.toggle()
+          dropdown = toggle(dropdown)
           expect(dropdown.isOpen).toBe(false)
+        })
+      })
+      describe('select', () => {
+        it('sets option selected', () => {
+          dropdown = select(dropdown, dropdown.options[1])
+          const optionAttributes = dropdown.options.map((o) => o.attributes)
+  
+          expect(optionAttributes.map((o) => o['aria-selected'])).toEqual([
+            undefined, true,
+          ])
         })
       })
     })
