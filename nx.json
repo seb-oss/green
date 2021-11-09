@@ -31,12 +31,20 @@
         "projects": "dependencies"
       }
     ],
-    "release": [{ "target": "release", "projects": "dependencies" }]
+    "release": [
+      {
+        "target": "release",
+        "projects": "dependencies"
+      }
+    ]
   },
   "projects": {
     "angular": {
       "tags": [],
       "implicitDependencies": ["chlorophyll"]
+    },
+    "angular-charts": {
+      "tags": []
     },
     "angular-e2e": {
       "tags": [],

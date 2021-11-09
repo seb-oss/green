@@ -76,9 +76,65 @@
           }
         },
         "release": {
-          "builder": "@ng-easy/builders:semantic-release",
+          "executor": "@ng-easy/builders:semantic-release",
           "options": {
             "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
+        }
+      }
+    },
+    "angular-charts": {
+      "projectType": "library",
+      "root": "libs/angular-charts",
+      "sourceRoot": "libs/angular-charts/src",
+      "prefix": "green",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/angular-charts"],
+          "options": {
+            "jestConfig": "libs/angular-charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-charts/src/**/*.ts",
+              "libs/angular-charts/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/angular-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/angular-charts",
+            "config": {
+              "configFolder": "libs/angular-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
@@ -355,7 +411,7 @@
           }
         },
         "release": {
-          "builder": "@ng-easy/builders:semantic-release",
+          "executor": "@ng-easy/builders:semantic-release",
           "options": {
             "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
