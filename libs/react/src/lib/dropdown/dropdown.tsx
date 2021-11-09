@@ -10,13 +10,13 @@ export interface DropdownProps {
 export const Dropdown = ({ id, options, children }: DropdownProps) => {
   const {
     listboxProps,
-    toggleProps,
+    togglerProps,
     listItems,
   } = useDropdown({ id, options, text: children })
 
   return (
     <div>
-      <button {...toggleProps} />
+      <button {...togglerProps} />
       <div {...listboxProps}>
         <button className="close m-4 m-sm-2 d-block d-sm-none">
           <span className="sr-only">Close</span>

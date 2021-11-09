@@ -1,4 +1,10 @@
-import { AbstractDropdown, create, DropdownOption, ExtendedDropdownOption } from '@sebgroup/extract'
+import {
+  AbstractDropdown,
+  create,
+  DropdownOption,
+  select,
+  toggle,
+} from '@sebgroup/extract'
 import { HTMLAttributes, useEffect, useState } from 'react'
 
 interface HookArgs {
@@ -10,30 +16,28 @@ interface HookArgs {
 type Props = HTMLAttributes<HTMLElement>
 
 interface HookResult {
-  toggleProps: Props
+  togglerProps: Props
   listboxProps: Props
   listItems: Props[]
 }
 
 export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
-  const [toggleProps, setToggleProps] = useState<Props>({})
+  const [togglerProps, setTogglerProps] = useState<Props>({})
   const [listboxProps, setListboxProps] = useState<Props>({})
   const [listItems, setListItems] = useState<Props[]>([])
 
   useEffect(() => {
     if (!dropdown) return
-    const { elements: { toggle, listbox } } = dropdown
+    const { elements: { toggler, listbox } } = dropdown
 
     const newToggleProps: Props = {
-      ...toggle.attributes,
-      className: toggle.classes?.join(' '),
+      ...toggler.attributes,
+      className: toggler.classes?.join(' '),
       children: dropdown.text,
-      onClick: () => {
-        setDropdown({...dropdown.toggle()})
-      },
+      onClick: () => setDropdown(toggle(dropdown)),
     }
-    setToggleProps(newToggleProps)
+    setTogglerProps(newToggleProps)
 
     const newListboxProps: Props = {
       ...listbox.attributes,
@@ -45,6 +49,7 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
       ...o.attributes,
       className: o.classes?.join(' '),
       children: o.key,
+      onClick: () => setDropdown(select(dropdown, o))
     }))
     setListItems(newListItems)
 
@@ -54,5 +59,9 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
     setDropdown({...create({ id, text, options })})
   }, [])
 
-  return { toggleProps, listboxProps, listItems }
+  return {
+    togglerProps,
+    listboxProps,
+    listItems,
+  }
 }
