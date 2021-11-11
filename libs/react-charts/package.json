@@ -7,7 +7,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@sebgroup/green-charts": "*"
+    "@sebgroup/green-charts": "^1.0.0-beta.1"
   },
   "description": "React components built on top of @sebgroup/green-charts.",
   "repository": {
