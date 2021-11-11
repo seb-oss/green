@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-react-charts",
-  "version": "0.0.0-semantically-released",
+  "version": "1.0.0-beta.1",
   "peerDependencies": {
     "@sebgroup/chlorophyll": "^1.0.0-beta.1",
     "react": "^17.0.2",
