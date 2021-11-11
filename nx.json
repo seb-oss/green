@@ -16,11 +16,13 @@
       "options": {
         "cacheableOperations": [
           "build",
+          "release",
           "lint",
           "test",
           "e2e",
           "build-storybook"
-        ]
+        ],
+        "strictlyOrderedTargets": ["build", "release"]
       }
     }
   },
@@ -37,52 +39,5 @@
         "projects": "dependencies"
       }
     ]
-  },
-  "projects": {
-    "angular": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll"]
-    },
-    "angular-charts": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll", "charts"]
-    },
-    "angular-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular"]
-    },
-    "angular-lib-dev": {
-      "tags": []
-    },
-    "angular-lib-dev-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular-lib-dev"]
-    },
-    "charts": {
-      "tags": []
-    },
-    "chlorophyll": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll"]
-    },
-    "extract": {
-      "tags": []
-    },
-    "react": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll"]
-    },
-    "react-charts": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll", "charts"]
-    },
-    "react-charts-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react-charts"]
-    },
-    "react-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react"]
-    }
   }
 }

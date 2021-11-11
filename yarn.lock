@@ -2560,17 +2560,17 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-easy/builders@^3.3.20":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@ng-easy/builders/-/builders-3.4.1.tgz#de4e176d48721f9ff3dbbb1c2a6155c79915e2cb"
-  integrity sha512-SAToFGJiL/SwpHdwBguBXEFY2z9F3wGVy76SUEkVkd8kzYTWBSjph6KJfIGIuGVPN80++sMar6h54rpw1qMcWQ==
+"@ng-easy/builders@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@ng-easy/builders/-/builders-3.4.3.tgz#d81baceb31d422f24a668e3fd902ce9ece03c195"
+  integrity sha512-AB7Iy/WeRfLXbLh+AFx7oWRQd5NkTVXvvvJwvF6FVmieqB6TAFprmQNBsc4JvF4U0i2NOhFteVLCbLQ4uY2BwA==
   dependencies:
-    "@ng-easy/image-config" "^1.2.21"
-    "@ng-easy/image-optimizer" "^1.3.25"
-    "@nrwl/workspace" "^13.0.1"
-    "@semantic-release/changelog" "^6.0.0"
-    "@semantic-release/exec" "^6.0.1"
-    "@semantic-release/git" "^10.0.0"
+    "@ng-easy/image-config" "^1.2.23"
+    "@ng-easy/image-optimizer" "^1.3.27"
+    "@nrwl/workspace" "^13.1.3"
+    "@semantic-release/changelog" "^6.0.1"
+    "@semantic-release/exec" "^6.0.2"
+    "@semantic-release/git" "^10.0.1"
     cheerio "^1.0.0-rc.10"
     fs-extra "^10.0.0"
     imagemin "^8.0.1"
@@ -2579,20 +2579,20 @@
     semantic-release "^18.0.0"
     sharp "^0.29.2"
     stream-buffers "^3.0.2"
-    svgo "^2.7.0"
+    svgo "^2.8.0"
     tinycolor2 "^1.4.2"
     to-ico "^1.1.5"
     xml2js "^0.4.23"
 
-"@ng-easy/image-config@^1.2.21":
-  version "1.2.22"
-  resolved "https://registry.yarnpkg.com/@ng-easy/image-config/-/image-config-1.2.22.tgz#e2cc7e89557c6d58d0eeb43328712885b7fb87a9"
-  integrity sha512-MIyF6qkVrUIa0hKR5UL+XHf+qm9Aali0+7XefhJCUxgtI4/h6ywAQ6iBQqp58jS+fgI2cdalY0IGSAyVLnxRog==
+"@ng-easy/image-config@^1.2.23":
+  version "1.2.24"
+  resolved "https://registry.yarnpkg.com/@ng-easy/image-config/-/image-config-1.2.24.tgz#cf5eae04210df042cb87b74301ac33868bdcf27e"
+  integrity sha512-VtpxQ8svXlCeAovd8d5/xAtRcblE19GCFtVR7SME5e1Nc1EaoIkLp8S1dUOee3NHmSvqJtx+j8rq2o3Bxef3aA==
 
-"@ng-easy/image-optimizer@^1.3.25":
-  version "1.3.26"
-  resolved "https://registry.yarnpkg.com/@ng-easy/image-optimizer/-/image-optimizer-1.3.26.tgz#9e4ac4f914b7a70bdc09e5aa444e48e5ccaf646c"
-  integrity sha512-RXk4IfJYTTvPT2TiKMGgkwP1MrZxcHdFRLo/8v1G00dtM2d3rs8RaF2z4OyR+aC3fWvC0SFb3F2kQsuCg+HmWQ==
+"@ng-easy/image-optimizer@^1.3.27":
+  version "1.3.28"
+  resolved "https://registry.yarnpkg.com/@ng-easy/image-optimizer/-/image-optimizer-1.3.28.tgz#1389d5d6a9813f7744593cfabc6ee61ecde77223"
+  integrity sha512-D+KNrV1MdmDoCsr3qSwMP8skzSH1Sm8JM3oslnP5LN+TCS8Gov+IUykd6Wam6Rh9VzwxrTIkAGEJOESR91p+LA==
 
 "@ngtools/webpack@12.1.4":
   version "12.1.4"
@@ -2798,7 +2798,7 @@
     tslib "^2.2.0"
     webpack-merge "5.7.3"
 
-"@nrwl/cli@*", "@nrwl/cli@13.0.2":
+"@nrwl/cli@*":
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.0.2.tgz#4306ebe09214f9337d05ff8bf87c38d606cb5e46"
   integrity sha512-VUbkMxYDdMNZe3CP2AtQbSKyP1kwaebdJyCyQ4l7tsqcFyDAc+zDXbvM1MPYSsFi4DI5Sf11BEFMLfYxRLi6FA==
@@ -2817,6 +2817,18 @@
   dependencies:
     "@nrwl/tao" "12.9.0"
     chalk "4.1.0"
+    v8-compile-cache "2.3.0"
+    yargs "15.4.1"
+    yargs-parser "20.0.0"
+
+"@nrwl/cli@13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.1.3.tgz#c5d21ea5d878c8aa0438e52a2f39236bcd37085a"
+  integrity sha512-pwHMOy8MEKdPWf3qbTfSWt33tYq8p5mRE0RAdA9iXcxk7+2TZkU+ScVHZz4asmrZlsTC+UYJIzWJWTSCwaGL5A==
+  dependencies:
+    "@nrwl/tao" "13.1.3"
+    chalk "4.1.0"
+    enquirer "~2.3.6"
     v8-compile-cache "2.3.0"
     yargs "15.4.1"
     yargs-parser "20.0.0"
@@ -2851,12 +2863,12 @@
     semver "7.3.4"
     tslib "^2.0.0"
 
-"@nrwl/devkit@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-13.0.2.tgz#7a22bb777894c8688545a36a113fa50e185fc80d"
-  integrity sha512-DLcdxcINC+efSxcMaIqKHo1wp1Fp6tb5QrFJ2bs8jihFazRU+r8N8kgthgp11pCnXXZdXsHOvpfdADM1OQMhlQ==
+"@nrwl/devkit@13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-13.1.3.tgz#8b119587984371a4caf0b3601a7481e04bac65a3"
+  integrity sha512-TAAsZJvVc/obeH0rZKY6miVhyM2GHGb8qIWp9MAIdLlXf4VDcNC7rxwb5OrGVSwuTTjqGYBGPUx0yEogOOJthA==
   dependencies:
-    "@nrwl/tao" "13.0.2"
+    "@nrwl/tao" "13.1.3"
     ejs "^3.1.5"
     ignore "^5.0.4"
     rxjs "^6.5.4"
@@ -2891,14 +2903,14 @@
     rxjs "^6.5.4"
     tslib "^2.0.0"
 
-"@nrwl/jest@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-13.0.2.tgz#07219a35f2ec2fb91dcb2fb80bddab00d4b6fd8d"
-  integrity sha512-JOU2Nku3IT+phBM2U2Vp8WmJAJdKHe4Dw73Eex20fR/tGK8SO8zVm4T1PAaXrqSslW/ET6CXMWghaMT1ZhKcRA==
+"@nrwl/jest@13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-13.1.3.tgz#67a70dfc88c3e2ff9dedfe6be24c13259019547e"
+  integrity sha512-6ogg6TOOneVtJuIW02wKrkO35EDGtpiuIdB58syQOYbG3SwqsHvy0MPGqzz+A1q4esOE3+qyn/9M+DtTGiAwbQ==
   dependencies:
     "@jest/reporters" "27.2.2"
     "@jest/test-result" "27.2.2"
-    "@nrwl/devkit" "13.0.2"
+    "@nrwl/devkit" "13.1.3"
     chalk "4.1.0"
     identity-obj-proxy "3.0.0"
     jest-config "27.2.2"
@@ -2919,13 +2931,13 @@
     tmp "~0.2.1"
     tslib "^2.0.0"
 
-"@nrwl/linter@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-13.0.2.tgz#99d1793f8f6e853f4ed440593ef4c27bb76f1373"
-  integrity sha512-M9UXbIe+Gdi7p5zPd+l35IvIhE6C0LE8dMw6wQpcF0XD6f3bA02ut7c6nKaYverV2j+JxViZ6YuwqCQS3JXwKA==
+"@nrwl/linter@13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-13.1.3.tgz#d34397531cf47c29f1dc084513bba953b674ca6b"
+  integrity sha512-aUIHKenNTZxqv3RZ2KVgMuZRAoyDIowp0r8qoH+Xfhxkq+PpLHDsk+Z3C0LDzk7sbqQeIbq+bbSleUtHYDh5qg==
   dependencies:
-    "@nrwl/devkit" "13.0.2"
-    "@nrwl/jest" "13.0.2"
+    "@nrwl/devkit" "13.1.3"
+    "@nrwl/jest" "13.1.3"
     eslint "7.32.0"
     glob "7.1.4"
     minimatch "3.0.4"
@@ -3001,6 +3013,23 @@
     fs-extra "^9.1.0"
     jsonc-parser "3.0.0"
     nx "13.0.2"
+    rxjs "^6.5.4"
+    rxjs-for-await "0.0.2"
+    semver "7.3.4"
+    tmp "~0.2.1"
+    tslib "^2.0.0"
+    yargs-parser "20.0.0"
+
+"@nrwl/tao@13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.1.3.tgz#5a88029b0aa9dfd4bca0a86d3dde2b608c468b36"
+  integrity sha512-/IwJgSgCBD1SaF+n8RuXX2OxDAh8ut/+P8pMswjm8063ac30UlAHjQ4XTYyskLH8uoUmNi2hNaGgHUrkwt7tQA==
+  dependencies:
+    chalk "4.1.0"
+    enquirer "~2.3.6"
+    fs-extra "^9.1.0"
+    jsonc-parser "3.0.0"
+    nx "13.1.3"
     rxjs "^6.5.4"
     rxjs-for-await "0.0.2"
     semver "7.3.4"
@@ -3121,15 +3150,15 @@
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
-"@nrwl/workspace@^13.0.1":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-13.0.2.tgz#90d970c2053ad69eca28b2664154f6fe522b8729"
-  integrity sha512-yleaql1MmKnahXAoCoCEJN5AEuErH0BozEcgJ+3riI0KdVZingUBDddBplzkNJw28YS1F7cjp8JTQ69dV0VH/w==
+"@nrwl/workspace@^13.1.3":
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-13.1.3.tgz#6cc6efc580b4ff27f7b824de76e247fde68d0560"
+  integrity sha512-qNsHiLFDUwD8xR0lnN08Wcu+7ouNKqqeUcAzYb/jxL0HDw/bKD1oUqO8Z+L7IaYG7Iqd0+lwv4kPNvhKPm0lAQ==
   dependencies:
-    "@nrwl/cli" "13.0.2"
-    "@nrwl/devkit" "13.0.2"
-    "@nrwl/jest" "13.0.2"
-    "@nrwl/linter" "13.0.2"
+    "@nrwl/cli" "13.1.3"
+    "@nrwl/devkit" "13.1.3"
+    "@nrwl/jest" "13.1.3"
+    "@nrwl/linter" "13.1.3"
     "@parcel/watcher" "2.0.0-alpha.11"
     chalk "4.1.0"
     chokidar "^3.5.1"
@@ -3392,12 +3421,12 @@
   resolved "https://registry.yarnpkg.com/@sebgroup/fonts/-/fonts-1.1.0.tgz#97f6001aa61f9803c580b38c85f44c70c99bde72"
   integrity sha512-AkEmzHjRgs0KV1btGwrn+CTEP1uY7zoQGSEmBy6+ZbMlZPquTresdbbh5hvsQ1JYoMzy8hcLz8VPSsw07ZT8yQ==
 
-"@semantic-release/changelog@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@semantic-release/changelog/-/changelog-6.0.0.tgz#b16636009bfbde9c09c6c1b89463af257d4a7142"
-  integrity sha512-X01Me+QVMykvILockNGlXXl3dgr1QqpbRQsknQoOJQCXQGXoqY3DNQ3rBQuI8/SUK7RZwYLctg0NbPNArlo6eQ==
+"@semantic-release/changelog@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@semantic-release/changelog/-/changelog-6.0.1.tgz#8dd0334fd8c7d50cda747d2591e4f18f816b3c9c"
+  integrity sha512-FT+tAGdWHr0RCM3EpWegWnvXJ05LQtBkQUaQRIExONoXjVjLuOILNm4DEKNaV+GAQyJjbLRVs57ti//GypH6PA==
   dependencies:
-    "@semantic-release/error" "^2.1.0"
+    "@semantic-release/error" "^3.0.0"
     aggregate-error "^3.0.0"
     fs-extra "^9.0.0"
     lodash "^4.17.4"
@@ -3415,7 +3444,7 @@
     lodash "^4.17.4"
     micromatch "^4.0.2"
 
-"@semantic-release/error@^2.1.0", "@semantic-release/error@^2.2.0":
+"@semantic-release/error@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@semantic-release/error/-/error-2.2.0.tgz#ee9d5a09c9969eade1ec864776aeda5c5cddbbf0"
   integrity sha512-9Tj/qn+y2j+sjCI3Jd+qseGtHjOAeg7dU2/lVcqIQ9TV3QDaDXDYXcoOHU+7o2Hwh8L8ymL4gfuO7KxDs3q2zg==
@@ -3425,24 +3454,24 @@
   resolved "https://registry.yarnpkg.com/@semantic-release/error/-/error-3.0.0.tgz#30a3b97bbb5844d695eb22f9d3aa40f6a92770c2"
   integrity sha512-5hiM4Un+tpl4cKw3lV4UgzJj+SmfNIDCLLw0TepzQxz9ZGV5ixnqkzIVF+3tp0ZHgcMKE+VNGHJjEeyFG2dcSw==
 
-"@semantic-release/exec@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@semantic-release/exec/-/exec-6.0.1.tgz#6316f52ad786c7fafff5e1cbcfeeb7608501db78"
-  integrity sha512-RlMoxuhQ7QujrykIG5uw0NU6x82BR4E7ssKsl+ISCFhFHnvxxH+w4h4klWOs/cT/XEPJdoPFbBOVoruKtAwfDg==
+"@semantic-release/exec@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@semantic-release/exec/-/exec-6.0.2.tgz#1eba943170595192083e71c7788823c570443bbb"
+  integrity sha512-ciaqJTHB1TFtU6C78xrgmoNI9UyfheR9+Bk6Ico7CJ7+ADOEAvUrPBKvz64UCfoWlg+SlKGTVGbFnA509wRUVw==
   dependencies:
-    "@semantic-release/error" "^2.1.0"
+    "@semantic-release/error" "^3.0.0"
     aggregate-error "^3.0.0"
     debug "^4.0.0"
     execa "^5.0.0"
     lodash "^4.17.4"
     parse-json "^5.0.0"
 
-"@semantic-release/git@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-10.0.0.tgz#41dda434e9c2fe222d030f12060e6f5a8696e7ba"
-  integrity sha512-/BljvngXJzwbFFJouxHHvSzAhi5iaucF7l0kQPszD4m7Y79+FHyvQl5Q/HK7T/e8MIwU9hz321KjOZn9yfSpPg==
+"@semantic-release/git@^10.0.1":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-10.0.1.tgz#c646e55d67fae623875bf3a06a634dd434904498"
+  integrity sha512-eWrx5KguUcU2wUPaO6sfvZI0wPafUKAMNC18aXY4EnNcrZL86dEmpNVnC9uMpGZkmZJ9EfCVJBQx4pV4EMGT1w==
   dependencies:
-    "@semantic-release/error" "^2.1.0"
+    "@semantic-release/error" "^3.0.0"
     aggregate-error "^3.0.0"
     debug "^4.0.0"
     dir-glob "^3.0.0"
@@ -15510,6 +15539,13 @@ nx@13.0.2:
   dependencies:
     "@nrwl/cli" "*"
 
+nx@13.1.3:
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-13.1.3.tgz#0b2db9b5bc87a47fb3a90014d2b2abb44f568851"
+  integrity sha512-clM0NQhQKYkqcNz2E3uYRMLwhp2L/9dBhJhQi9XBX4IAyA2gWAomhRIlLm5Xxg3g4h1xwSpP3eJ5t89VikY8Pw==
+  dependencies:
+    "@nrwl/cli" "*"
+
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
@@ -20003,7 +20039,7 @@ svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-svgo@^2.3.0, svgo@^2.7.0:
+svgo@^2.3.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-2.7.0.tgz#e164cded22f4408fe4978f082be80159caea1e2d"
   integrity sha512-aDLsGkre4fTDCWvolyW+fs8ZJFABpzLXbtdK1y71CKnHzAnpDxKXPj2mNKj+pyOXUCzFHzuxRJ94XOFygOWV3w==
@@ -20014,6 +20050,19 @@ svgo@^2.3.0, svgo@^2.7.0:
     css-tree "^1.1.3"
     csso "^4.2.0"
     nanocolors "^0.1.12"
+    stable "^0.1.8"
+
+svgo@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/svgo/-/svgo-2.8.0.tgz#4ff80cce6710dc2795f0c7c74101e6764cfccd24"
+  integrity sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==
+  dependencies:
+    "@trysound/sax" "0.2.0"
+    commander "^7.2.0"
+    css-select "^4.1.3"
+    css-tree "^1.1.3"
+    csso "^4.2.0"
+    picocolors "^1.0.0"
     stable "^0.1.8"
 
 symbol-tree@^3.2.4:

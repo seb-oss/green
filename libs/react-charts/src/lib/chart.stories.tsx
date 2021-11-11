@@ -11,18 +11,20 @@ const Template: Story<ChartProps> = (args) => <Chart {...args} />
 export const SimpleBar = Template.bind({})
 SimpleBar.args = {
   settings: {
-    data: [{
-      name: 'Antal',
-      type: 'bar',
-      values: [ 234, 197, 97, 12 ]
-    }],
+    data: [
+      {
+        name: 'Antal',
+        type: 'bar',
+        values: [234, 197, 97, 12],
+      },
+    ],
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
-  }
+  },
 }
 
 export const Pie = Template.bind({})
@@ -32,15 +34,15 @@ Pie.args = {
     data: [
       {
         name: 'Ej tilldelade',
-        values: [ 700 ],
+        values: [700],
       },
       {
         name: 'Tilldelade',
-        values: [ 200 ],
+        values: [200],
       },
       {
         name: 'Utnyttjade',
-        values: [ 100 ],
+        values: [100],
       },
     ],
     legend: 'right',
@@ -54,15 +56,15 @@ Donut.args = {
     data: [
       {
         name: 'Ej tilldelade',
-        values: [ 700 ],
+        values: [700],
       },
       {
         name: 'Tilldelade',
-        values: [ 200 ],
+        values: [200],
       },
       {
         name: 'Utnyttjade',
-        values: [ 100 ],
+        values: [100],
       },
     ],
   },

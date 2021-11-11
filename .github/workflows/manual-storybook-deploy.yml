@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -37,7 +37,7 @@ jobs:
 
       - name: Determine deploy target
         shell: bash
-        run:  |
+        run: |
           if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
             echo "##[set-output name=target;]$(echo latest)"
           elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
@@ -47,13 +47,14 @@ jobs:
           fi
         id: target
 
-      - name: Build storybook
+      - name: Build all storybooks
         run: yarn run nx run-many --target build-storybook --all
 
-      - name: Deploy storybook to GitHub Pages
+      - name: Deploy storybooks to GitHub Pages
+
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
           folder: dist/storybook # The folder the action should deploy.
-          target-folder: ${{ steps.target.outputs.target }}  # The folder the action should deploy to.
+          target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.

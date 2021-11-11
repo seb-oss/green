@@ -6,6 +6,8 @@
       "root": "libs/angular",
       "sourceRoot": "libs/angular/src",
       "prefix": "green",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
           "executor": "@nrwl/angular:package",
@@ -88,6 +90,8 @@
       "root": "libs/angular-charts",
       "sourceRoot": "libs/angular-charts/src",
       "prefix": "green",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"],
       "targets": {
         "build": {
           "executor": "@nrwl/angular:package",
@@ -166,6 +170,8 @@
       "root": "apps/angular-e2e",
       "sourceRoot": "apps/angular-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["angular"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
@@ -289,6 +295,8 @@
       "root": "apps/angular-lib-dev-e2e",
       "sourceRoot": "apps/angular-lib-dev-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["angular-lib-dev"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
@@ -316,11 +324,13 @@
       "root": "libs/charts",
       "sourceRoot": "libs/charts/src",
       "projectType": "library",
+      "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "packageJson": "libs/charts/package.json",
             "outputPath": "dist/libs/charts",
             "tsConfig": "libs/charts/tsconfig.lib.json",
             "project": "libs/charts/package.json",
@@ -492,12 +502,15 @@
       "root": "libs/react",
       "sourceRoot": "libs/react/src",
       "projectType": "library",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/react",
+            "packageJson": "libs/react/package.json",
             "tsConfig": "libs/react/tsconfig.lib.json",
             "project": "libs/react/package.json",
             "entryFile": "libs/react/src/index.ts",
@@ -571,12 +584,15 @@
       "root": "libs/react-charts",
       "sourceRoot": "libs/react-charts/src",
       "projectType": "library",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"],
       "targets": {
         "build": {
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/react-charts",
+            "packageJson": "libs/react-charts/package.json",
             "tsConfig": "libs/react-charts/tsconfig.lib.json",
             "project": "libs/react-charts/package.json",
             "entryFile": "libs/react-charts/src/index.ts",
@@ -636,6 +652,12 @@
               "quiet": true
             }
           }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
         }
       }
     },
@@ -643,6 +665,8 @@
       "root": "apps/react-charts-e2e",
       "sourceRoot": "apps/react-charts-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["react-charts"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
@@ -670,6 +694,8 @@
       "root": "apps/react-e2e",
       "sourceRoot": "apps/react-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["react"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
