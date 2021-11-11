@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { ChartComponent } from './chart/chart.component'
+import { NggChartComponent } from './chart/ngg-chart.component'
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ChartComponent],
-  exports: [ChartComponent],
+  declarations: [NggChartComponent],
+  exports: [NggChartComponent],
 })
 export class NggChartsModule {}
