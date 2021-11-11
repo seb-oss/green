@@ -42,7 +42,7 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChartComponent implements AfterViewInit {
+export class NggChartComponent implements AfterViewInit {
   @ViewChild('chartRef') _chartElementRef: ElementRef | undefined
   get chart(): Chart {
     return <Chart>this._chart

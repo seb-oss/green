@@ -1,7 +1,7 @@
 import { moduleMetadata, Story } from '@storybook/angular'
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
-import { ChartComponent } from './chart.component'
+import { NggChartComponent } from './ngg-chart.component'
 import { of } from 'rxjs'
 import { NggChartsModule } from '../ngg-charts.module'
 
@@ -14,12 +14,12 @@ export default {
   ],
 }
 
-const ChartStory: Story<ChartComponent> = (args) => ({
+const ChartStory: Story<NggChartComponent> = (args) => ({
   props: args,
   template: `<ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>`,
 })
 
-const ObservableChartStory: Story<ChartComponent> = (args) => ({
+const ObservableChartStory: Story<NggChartComponent> = (args) => ({
   props: args,
   template: `<ngg-chart [settings]='settings | async' [theme]='theme'></ngg-chart>`,
 })

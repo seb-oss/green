@@ -44,7 +44,8 @@
       "implicitDependencies": ["chlorophyll"]
     },
     "angular-charts": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"]
     },
     "angular-e2e": {
       "tags": [],
@@ -61,16 +62,19 @@
       "tags": []
     },
     "chlorophyll": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"]
     },
     "extract": {
       "tags": []
     },
     "react": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"]
     },
     "react-charts": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"]
     },
     "react-charts-e2e": {
       "tags": [],

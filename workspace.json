@@ -89,6 +89,23 @@
       "sourceRoot": "libs/angular-charts/src",
       "prefix": "green",
       "targets": {
+        "build": {
+          "executor": "@nrwl/angular:package",
+          "outputs": ["dist/libs/angular-charts"],
+          "options": {
+            "project": "libs/angular-charts/ng-package.json",
+            "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/angular-charts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/angular-charts"],
@@ -135,6 +152,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -326,6 +349,12 @@
           "options": {
             "jestConfig": "libs/charts/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -528,6 +557,12 @@
             "ci": {
               "quiet": true
             }
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
