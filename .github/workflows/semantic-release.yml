@@ -1,7 +1,7 @@
 name: Run semantic release
 on:
   push:
-    branches: [ alpha ]
+    branches: [ alpha, beta ]
 
 jobs:
   build:
