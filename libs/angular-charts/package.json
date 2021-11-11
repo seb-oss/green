@@ -7,7 +7,7 @@
     "@sebgroup/chlorophyll": "^1.0.0-beta.1"
   },
   "dependencies": {
-    "@sebgroup/green-charts": "*",
+    "@sebgroup/green-charts": "^1.0.0-beta.1",
     "tslib": "^2.2.0"
   },
   "description": "Angular charts built on top of @sebgroup/green-charts.",
