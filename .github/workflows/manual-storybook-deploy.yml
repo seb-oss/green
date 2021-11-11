@@ -47,10 +47,10 @@ jobs:
           fi
         id: target
 
-      - name: Build storybook
+      - name: Build all storybooks
         run: yarn run nx run-many --target build-storybook --all
 
-      - name: Deploy storybook to GitHub Pages
+      - name: Deploy storybooks to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}

@@ -29,11 +29,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Build affected libs
+      - name: Build all libs
         # run: npx nx run chlorophyll:build
-        run: npx nx run-many --target build --all
+        run: npx nx run-many --target build --all --exclude angular-lib-dev
 
-      - name: Release affected libs
+      - name: Release all libs
         # run: npx nx run chlorophyll:release --verbose
         run: npx nx run-many --target release --all
         env:
