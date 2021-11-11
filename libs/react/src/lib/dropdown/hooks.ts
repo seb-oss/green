@@ -32,16 +32,16 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
     const { elements: { toggler, listbox } } = dropdown
 
     const newToggleProps: Props = {
-      ...toggler.attributes,
-      className: toggler.classes?.join(' '),
+      ...toggler?.attributes,
+      className: toggler?.classes?.join(' '),
       children: dropdown.text,
       onClick: () => setDropdown(toggle(dropdown)),
     }
     setTogglerProps(newToggleProps)
 
     const newListboxProps: Props = {
-      ...listbox.attributes,
-      className: listbox.classes?.join(' '),
+      ...listbox?.attributes,
+      className: listbox?.classes?.join(' '),
     }
     setListboxProps(newListboxProps)
 
@@ -56,7 +56,7 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
   }, [dropdown])
 
   useEffect(() => {
-    setDropdown({...create({ id, text, options })})
+    setDropdown(create({ id, text, options }))
   }, [])
 
   return {
