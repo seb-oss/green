@@ -51,6 +51,7 @@ jobs:
         run: yarn run nx run-many --target build-storybook --all
 
       - name: Deploy storybooks to GitHub Pages
+
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}
