@@ -19,7 +19,7 @@ describe('Chart', () => {
         {
           type: 'bar',
           name: 'Foo',
-          values: [1, 2, 3]
+          values: [1, 2, 3],
         },
       ],
       categories: ['A', 'B', 'C'],
