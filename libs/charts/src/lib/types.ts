@@ -1,4 +1,4 @@
-import { ArrayOrString } from "billboard.js"
+import { ArrayOrString } from 'billboard.js'
 
 export type ChartType = 'area' | 'bar' | 'donut' | 'line' | 'spline' | 'pie'
 export type LegendPlacement = 'top' | 'right' | 'none'
@@ -11,7 +11,6 @@ export interface ChartData {
 }
 
 export interface ChartSettings {
-  title?: string
   type?: ChartType
   data: ChartData[]
   categories?: string[]
@@ -20,6 +19,7 @@ export interface ChartSettings {
 
 interface LegendItem {
   title: string
+  color: string
 }
 
 export interface Legend {
@@ -34,9 +34,15 @@ export interface Axis {
   ticks: Tick[]
 }
 
+export interface ChartStyle {
+  '--chart-width': string | number
+  '--chart-height': string | number
+  '--chart-space-left': string | number
+  '--chart-space-right': string | number
+}
 export interface ChartInfo {
-  title?: string
   legend: Legend
+  style: ChartStyle
   xAxis: Axis
 }
 

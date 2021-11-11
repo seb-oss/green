@@ -31,12 +31,21 @@
         "projects": "dependencies"
       }
     ],
-    "release": [{ "target": "release", "projects": "dependencies" }]
+    "release": [
+      {
+        "target": "release",
+        "projects": "dependencies"
+      }
+    ]
   },
   "projects": {
     "angular": {
       "tags": [],
       "implicitDependencies": ["chlorophyll"]
+    },
+    "angular-charts": {
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"]
     },
     "angular-e2e": {
       "tags": [],
@@ -53,16 +62,19 @@
       "tags": []
     },
     "chlorophyll": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"]
     },
     "extract": {
       "tags": []
     },
     "react": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"]
     },
     "react-charts": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"]
     },
     "react-charts-e2e": {
       "tags": [],

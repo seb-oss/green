@@ -1,5 +1,5 @@
 import { ChartOptions, Chart } from 'billboard.js'
-import { ChartSettings, Legend } from './types'
+import { ChartSettings, ChartStyle, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 import { tmplTooltip } from './templates'
 
@@ -8,21 +8,21 @@ describe('billboard', () => {
     it('parses simple ChartData', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
-        data: [{
-          name: 'Foo',
-          type: 'bar',
-          values: [1,2,3],
-        }]
+        data: [
+          {
+            name: 'Foo',
+            type: 'bar',
+            values: [1, 2, 3],
+          },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
         bindto: '#foo',
         data: {
-          columns: [
-            ['Foo', 1, 2, 3]
-          ],
+          columns: [['Foo', 1, 2, 3]],
           types: {
-            'Foo': 'bar',
+            Foo: 'bar',
           },
         },
         legend: { show: false },
@@ -33,27 +33,27 @@ describe('billboard', () => {
     it('parses ChartData with named x-axis', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
-        data: [{
-          name: 'Foo',
-          type: 'area',
-          values: [1, 2, 3],
-        }],
-        categories: [ 'Herp', 'Derp', 'Slurp' ],
+        data: [
+          {
+            name: 'Foo',
+            type: 'area',
+            values: [1, 2, 3],
+          },
+        ],
+        categories: ['Herp', 'Derp', 'Slurp'],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
         bindto: '#foo',
         data: {
-          columns: [
-            ['Foo', 1, 2, 3]
-          ],
+          columns: [['Foo', 1, 2, 3]],
           types: {
-            'Foo': 'area'
+            Foo: 'area',
           },
         },
         axis: {
           x: {
-            categories: [ 'Herp', 'Derp', 'Slurp' ],
+            categories: ['Herp', 'Derp', 'Slurp'],
             type: 'category',
             tick: {
               text: {
@@ -75,7 +75,7 @@ describe('billboard', () => {
         data: [
           { name: 'Foo', values: [1] },
           { name: 'Bar', values: [2] },
-        ]
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -86,8 +86,8 @@ describe('billboard', () => {
             ['Bar', 2],
           ],
           types: {
-            'Foo': 'bar',
-            'Bar': 'bar',
+            Foo: 'bar',
+            Bar: 'bar',
           },
         },
         legend: { show: false },
@@ -102,7 +102,7 @@ describe('billboard', () => {
         data: [
           { name: 'Foo', values: [1] },
           { name: 'Bar', values: [2], type: 'area' },
-        ]
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -113,8 +113,8 @@ describe('billboard', () => {
             ['Bar', 2],
           ],
           types: {
-            'Foo': 'bar',
-            'Bar': 'area',
+            Foo: 'bar',
+            Bar: 'area',
           },
         },
         legend: { show: false },
@@ -128,7 +128,7 @@ describe('billboard', () => {
         data: [
           { name: 'Foo', values: [1] },
           { name: 'Bar', values: [2], type: 'area' },
-        ]
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -139,12 +139,43 @@ describe('billboard', () => {
             ['Bar', 2],
           ],
           types: {
-            'Foo': 'bar',
-            'Bar': 'area',
+            Foo: 'bar',
+            Bar: 'area',
           },
         },
         legend: { show: false },
         tooltip: { contents: { template: tmplTooltip } },
+      }
+      expect(parsed).toEqual(expected)
+    })
+    it('adds y base line if any value is negative', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [
+          { name: 'Foo', values: [1] },
+          { name: 'Bar', values: [-2], type: 'area' },
+        ],
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: ChartOptions = {
+        bindto: '#foo',
+        data: {
+          columns: [
+            ['Foo', 1],
+            ['Bar', -2],
+          ],
+          types: {
+            Foo: 'bar',
+            Bar: 'area',
+          },
+        },
+        legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
+        grid: {
+          y: {
+            lines: [{ value: 0, class: 'base-line' }],
+          },
+        },
       }
       expect(parsed).toEqual(expected)
     })
@@ -156,14 +187,9 @@ describe('billboard', () => {
       settings = { data: [] }
       const pChart: Partial<Chart> = {
         categories: jest.fn().mockReturnValue([]),
+        color: jest.fn().mockReturnValue('#379D00FF'),
       }
       chart = pChart as Chart
-    })
-    it('sets title', () => {
-      settings.title = 'Foo'
-      const info = createInfo(settings, chart)
-
-      expect(info.title).toEqual('Foo')
     })
     it('sets legend', () => {
       settings.data = [
@@ -176,12 +202,28 @@ describe('billboard', () => {
       const expected: Legend = {
         placement: 'top',
         items: [
-          { title: 'Foo' },
-          { title: 'Bar' },
+          { title: 'Foo', color: '#379D00FF' },
+          { title: 'Bar', color: '#379D00FF' },
         ],
       }
 
       expect(info.legend).toEqual(expected)
+    })
+    it('calculates Chart style', () => {
+      settings.data = [
+        { name: 'Foo', values: [] },
+        { name: 'Bar', values: [] },
+      ]
+
+      const info = createInfo(settings, chart)
+      const expected: ChartStyle = {
+        '--chart-width': '768px',
+        '--chart-height': '500px',
+        '--chart-space-left': '49px',
+        '--chart-space-right': 0,
+      }
+
+      expect(info.style).toEqual(expected)
     })
   })
 })

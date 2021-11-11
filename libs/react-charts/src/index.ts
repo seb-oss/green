@@ -1,1 +1,1 @@
-export * from './lib/react-charts'
+export * from './lib/chart'

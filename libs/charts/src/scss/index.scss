@@ -26,6 +26,7 @@ $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
 $grid-focus-line-color: map.get(color.$blue, 2);
+$grid-base-line-color: map.get(color.$grey, 6);
 
 @mixin select-none {
   user-select: none;
@@ -63,6 +64,10 @@ ul.x-axis {
 }
 
 /*-- Chart --*/
+.chart {
+  position: relative;
+}
+
 .bb {
   svg {
     font-family: $font-family;
@@ -158,6 +163,9 @@ ul.x-axis {
 .bb-grid {
   line {
     stroke: #f1f1f1;
+  }
+  .base-line line {
+    stroke: $grid-base-line-color;
   }
 }
 

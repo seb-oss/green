@@ -6,10 +6,17 @@ import bb, {
   donut,
   line,
   pie,
-  spline
+  spline,
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
-import { Chart, ChartArgs, ChartInfo, ChartSettings, ChartType, ChartUpdateArgs } from './types'
+import {
+  Chart,
+  ChartArgs,
+  ChartInfo,
+  ChartSettings,
+  ChartType,
+  ChartUpdateArgs,
+} from './types'
 import { tmplTooltip } from './templates'
 
 export const init = () => {
@@ -23,14 +30,20 @@ export const init = () => {
   pie()
 }
 
-export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptions => {
+export const createOptions = ({
+  settings,
+  chartElement,
+}: ChartArgs): ChartOptions => {
   const columns = settings.data.map((d) => [d.name, ...d.values])
 
   const defaultType: ChartType = settings.type || 'bar'
-  const types = settings.data.reduce((res, d) => ({
-    ...res,
-    [d.name]: d.type || defaultType,
-  }), {})
+  const types = settings.data.reduce(
+    (res, d) => ({
+      ...res,
+      [d.name]: d.type || defaultType,
+    }),
+    {}
+  )
 
   const options: ChartOptions = {
     bindto: chartElement,
@@ -40,6 +53,29 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
     },
     legend: { show: false },
     tooltip: { contents: { template: tmplTooltip } },
+  }
+
+  let hasNegativeValue = false
+  for (const dt of columns) {
+    for (const val of dt) {
+      if (val < 0) {
+        hasNegativeValue = true
+        break
+      }
+    }
+    if (hasNegativeValue) break
+  }
+  if (hasNegativeValue) {
+    options.grid = {
+      y: {
+        lines: [
+          {
+            value: 0,
+            class: 'base-line',
+          },
+        ],
+      },
+    }
   }
 
   if (settings.categories) {
@@ -60,7 +96,10 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
   return options
 }
 
-export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): ChartSettingsUpdate => {
+export const createUpdate = ({
+  settings,
+  chartElement,
+}: ChartUpdateArgs): ChartSettingsUpdate => {
   // const oldOptions = createOptions(oldSettings)
   const newOptions = createOptions({ settings, chartElement })
   const data = newOptions.data || {}
@@ -68,22 +107,35 @@ export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): Chart
   const update: ChartSettingsUpdate = {
     columns: data.columns || [],
     types: data.types || {},
-    categories: settings.categories,
   }
+  if (settings.categories) update.categories = settings.categories
 
   return update
 }
 
-export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo => {
+export const createInfo = (
+  settings: ChartSettings,
+  chart: BBChart
+): ChartInfo => {
   const info: Partial<ChartInfo> = {
-    title: settings.title,
     legend: {
-      items: settings.data.map((d) => ({ title: d.name })),
+      items: settings.data.map((d) => ({
+        title: d.name,
+        color: chart.color(d.name),
+      })),
       placement: settings.legend || 'none',
     },
   }
+
   info.xAxis = {
-    ticks: chart.categories().map((text) => ({ text }))
+    ticks: chart.categories().map((text) => ({ text })),
+  }
+
+  info.style = {
+    '--chart-width': '768px',
+    '--chart-height': '500px',
+    '--chart-space-left': '49px',
+    '--chart-space-right': 0,
   }
 
   return info as ChartInfo
@@ -104,7 +156,11 @@ export const create = ({ settings, chartElement }: ChartArgs): Chart => {
   }
 
   const update = ({ settings, chartElement }: ChartArgs): Chart => {
-    const newOptions = createUpdate({ settings, chartElement, oldSettings: wrapper.settings })
+    const newOptions = createUpdate({
+      settings,
+      chartElement,
+      oldSettings: wrapper.settings,
+    })
     chart.load(newOptions)
     const info = createInfo(settings, chart)
 
