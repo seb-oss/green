@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-charts",
-  "version": "0.0.0-semantically-released",
+  "version": "1.0.0-beta.1",
   "dependencies": {
     "@sebgroup/chlorophyll": "^1.0.0-beta.1",
     "billboard.js": "^3.2.1"
