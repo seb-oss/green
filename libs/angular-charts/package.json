@@ -3,7 +3,8 @@
   "version": "0.0.0-semantically-released",
   "peerDependencies": {
     "@angular/common": "^12.1.0",
-    "@angular/core": "^12.1.0"
+    "@angular/core": "^12.1.0",
+    "@sebgroup/chlorophyll": "*"
   },
   "dependencies": {
     "@sebgroup/green-charts": "*",
