@@ -1,12 +1,11 @@
 import {
-  AbstractDropdown,
   close,
   create,
-  DropdownOption,
   open,
   select,
   toggle,
 } from './dropdown'
+import { AbstractDropdown, DropdownOption } from './types'
 
 describe('dropdown', () => {
   describe('create', () => {
