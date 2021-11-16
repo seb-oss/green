@@ -1,6 +1,7 @@
 export {
   close,
   create,
+  focus,
   open,
   select,
   toggle,

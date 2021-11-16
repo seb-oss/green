@@ -104,3 +104,6 @@ export const select = (dropdown: AbstractDropdown, option: ExtendedDropdownOptio
     }))
   })
 )
+export const focus = (dropdown: AbstractDropdown, option: ExtendedDropdownOption): AbstractDropdown => (
+  dropdown
+)
