@@ -7,8 +7,7 @@
   },
   "dependencies": {
     "@sebgroup/chlorophyll": "*",
-    "@sebgroup/extract": "*",
-    "react-popper": "^2.2.5"
+    "@sebgroup/extract": "*"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
   "repository": {
