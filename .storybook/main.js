@@ -12,6 +12,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "storybook-dark-mode",
+    "./addons/run-in-iframe/run-in-iframe-preset.js",
     {
       name: '@storybook/addon-postcss',
       options: {
@@ -48,18 +49,7 @@ module.exports = {
         ...config.module,
         rules: [
           ...config.module.rules,
-          {
-            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {
-                  name: '[name].[ext]',
-                  outputPath: '../../fonts/'
-                }
-              }
-            ]
-          }]
+          ]
       }
     }
 
