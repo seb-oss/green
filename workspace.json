@@ -6,6 +6,8 @@
       "root": "libs/angular",
       "sourceRoot": "libs/angular/src",
       "prefix": "green",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
           "executor": "@nrwl/angular:package",
@@ -76,9 +78,90 @@
           }
         },
         "release": {
-          "builder": "@ng-easy/builders:semantic-release",
+          "executor": "@ng-easy/builders:semantic-release",
           "options": {
-            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
+        }
+      }
+    },
+    "angular-charts": {
+      "projectType": "library",
+      "root": "libs/angular-charts",
+      "sourceRoot": "libs/angular-charts/src",
+      "prefix": "green",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"],
+      "targets": {
+        "build": {
+          "executor": "@nrwl/angular:package",
+          "outputs": ["dist/libs/angular-charts"],
+          "options": {
+            "project": "libs/angular-charts/ng-package.json",
+            "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/angular-charts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/angular-charts"],
+          "options": {
+            "jestConfig": "libs/angular-charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/angular-charts/src/**/*.ts",
+              "libs/angular-charts/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/angular-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/angular-charts",
+            "config": {
+              "configFolder": "libs/angular-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -87,6 +170,8 @@
       "root": "apps/angular-e2e",
       "sourceRoot": "apps/angular-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["angular"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
@@ -210,6 +295,8 @@
       "root": "apps/angular-lib-dev-e2e",
       "sourceRoot": "apps/angular-lib-dev-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["angular-lib-dev"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
@@ -233,6 +320,55 @@
         }
       }
     },
+    "charts": {
+      "root": "libs/charts",
+      "sourceRoot": "libs/charts/src",
+      "projectType": "library",
+      "implicitDependencies": ["chlorophyll"],
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "packageJson": "libs/charts/package.json",
+            "outputPath": "dist/libs/charts",
+            "tsConfig": "libs/charts/tsconfig.lib.json",
+            "project": "libs/charts/package.json",
+            "entryFile": "libs/charts/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/charts/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/charts/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/charts"],
+          "options": {
+            "jestConfig": "libs/charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
+        }
+      }
+    },
     "chlorophyll": {
       "root": "libs/chlorophyll",
       "sourceRoot": "libs/chlorophyll/src",
@@ -242,7 +378,8 @@
           "executor": "./tools/executors/scss:build-lib",
           "options": {
             "packageJson": "libs/chlorophyll/package.json",
-            "outputPath": "dist/libs/chlorophyll"          }
+            "outputPath": "dist/libs/chlorophyll"
+          }
         },
         "compile-scss": {
           "executor": "@nrwl/workspace:run-commands",
@@ -313,9 +450,9 @@
           }
         },
         "release": {
-          "builder": "@ng-easy/builders:semantic-release",
+          "executor": "@ng-easy/builders:semantic-release",
           "options": {
-            "releaseCommitMessage": "chore(release): :package: @sebgroup\/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }
@@ -365,12 +502,15 @@
       "root": "libs/react",
       "sourceRoot": "libs/react/src",
       "projectType": "library",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/libs/react",
+            "packageJson": "libs/react/package.json",
             "tsConfig": "libs/react/tsconfig.lib.json",
             "project": "libs/react/package.json",
             "entryFile": "libs/react/src/index.ts",
@@ -431,6 +571,122 @@
               "quiet": true
             }
           }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
+        }
+      }
+    },
+    "react-charts": {
+      "root": "libs/react-charts",
+      "sourceRoot": "libs/react-charts/src",
+      "projectType": "library",
+      "tags": [],
+      "implicitDependencies": ["chlorophyll", "charts"],
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/react-charts",
+            "packageJson": "libs/react-charts/package.json",
+            "tsConfig": "libs/react-charts/tsconfig.lib.json",
+            "project": "libs/react-charts/package.json",
+            "entryFile": "libs/react-charts/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/react-charts/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/react-charts/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react-charts"],
+          "options": {
+            "jestConfig": "libs/react-charts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4300,
+            "config": {
+              "configFolder": "libs/react-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/react-charts",
+            "config": {
+              "configFolder": "libs/react-charts/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+          }
+        }
+      }
+    },
+    "react-charts-e2e": {
+      "root": "apps/react-charts-e2e",
+      "sourceRoot": "apps/react-charts-e2e/src",
+      "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["react-charts"],
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/react-charts-e2e/cypress.json",
+            "devServerTarget": "react-charts:storybook",
+            "tsConfig": "apps/react-charts-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "react-charts:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/react-charts-e2e/**/*.{js,ts}"]
+          }
         }
       }
     },
@@ -438,6 +694,8 @@
       "root": "apps/react-e2e",
       "sourceRoot": "apps/react-e2e/src",
       "projectType": "application",
+      "tags": [],
+      "implicitDependencies": ["react"],
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",

@@ -1,10 +1,13 @@
 import { Directive, ElementRef, Input } from '@angular/core'
-import { AbstractControl } from '@angular/forms'
 import { BehaviorSubject } from 'rxjs'
 interface PopoverConfig {
   usePopper?: boolean
   container?: '' | 'body'
   useBodyScrollLock?: boolean
+}
+
+interface PopoverState {
+  $isOpen: BehaviorSubject<boolean>
 }
 
 @Directive({
@@ -24,35 +27,21 @@ export class NggPopoverDirective {
     container: '',
     useBodyScrollLock: true,
   }
-  state: {
-    $isOpen: BehaviorSubject<boolean>
-    $selected: BehaviorSubject<Array<string>>
-    $focusedElement: BehaviorSubject<string | null>
-  } = {
+  state: PopoverState = {
     $isOpen: new BehaviorSubject<boolean>(false),
-    $selected: new BehaviorSubject<Array<string>>([]),
-    $focusedElement: new BehaviorSubject<string | null>(null),
   }
-  control: AbstractControl | undefined
 
   close() {
-    // unselect focused element on close
-    this.state.$focusedElement.next(null)
     this.state.$isOpen.next(false)
   }
   open() {
-    if (this.state.$selected.value) {
-      this.state.$focusedElement.next(this.state.$selected.value[0])
-    }
     this.state.$isOpen.next(true)
   }
   toggle() {
-    // unselect focused element on close
     if (this.state.$isOpen.value) {
-      this.state.$focusedElement.next(null)
-    } else if (this.state.$selected.value) {
-      this.state.$focusedElement.next(this.state.$selected.value[0])
+      this.close()
+    } else {
+      this.open()
     }
-    this.state.$isOpen.next(!this.state.$isOpen.value)
   }
 }

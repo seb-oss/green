@@ -28,7 +28,7 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
   _container?: ElementRef | null
   $unsubscribe = new Subject()
   sm = window.innerWidth <= 576
-  @ContentChildren(NggPopoverOptionDirective) options:
+  @ContentChildren(NggPopoverOptionDirective, { descendants: true }) options:
     | QueryList<NggPopoverOptionDirective>
     | undefined
 
@@ -54,10 +54,10 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
   handleClickEvent(event: Event) {
     // if click inside popover element...
     if (this._elRef.nativeElement.contains(event.target)) {
-      this.popover.state.$isOpen.next(false)
+      this.popover.close()
     } else if (this.popover.state.$isOpen.value) {
       // else if click outside popover element...
-      this.popover.state.$isOpen.next(false)
+      this.popover.close()
     }
   }
   handleKeydownEvent(event: KeyboardEvent) {
@@ -111,6 +111,9 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
           this.show = isOpen // toggle visibility
 
           if (isOpen) {
+            this.activeDescendant =
+              this.options?.find((option) => !!option.selected)?.id || null
+
             // if use body scroll lock
             if (this.popover.config.useBodyScrollLock) {
               this.disableBodyScrollLock()
@@ -125,6 +128,7 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
               this.addPopper()
             }
           } else {
+            this.activeDescendant = null
             if (this.popover.config.useBodyScrollLock) {
               this.enableBodyScrollLock()
             }
@@ -155,13 +159,6 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
               )
             : EMPTY
         ),
-        takeUntil(this.$unsubscribe)
-      )
-      .subscribe()
-    // update focused option
-    this.popover.state.$focusedElement
-      .pipe(
-        tap((elmentId) => (this.activeDescendant = elmentId)),
         takeUntil(this.$unsubscribe)
       )
       .subscribe()

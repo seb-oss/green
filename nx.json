@@ -16,11 +16,13 @@
       "options": {
         "cacheableOperations": [
           "build",
+          "release",
           "lint",
           "test",
           "e2e",
           "build-storybook"
-        ]
+        ],
+        "strictlyOrderedTargets": ["build", "release"]
       }
     }
   },
@@ -31,36 +33,11 @@
         "projects": "dependencies"
       }
     ],
-    "release": [{ "target": "release", "projects": "dependencies" }]
-  },
-  "projects": {
-    "angular": {
-      "tags": [],
-      "implicitDependencies": ["chlorophyll"]
-    },
-    "angular-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular"]
-    },
-    "angular-lib-dev": {
-      "tags": []
-    },
-    "angular-lib-dev-e2e": {
-      "tags": [],
-      "implicitDependencies": ["angular-lib-dev"]
-    },
-    "chlorophyll": {
-      "tags": []
-    },
-    "extract": {
-      "tags": []
-    },
-    "react": {
-      "tags": []
-    },
-    "react-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react"]
-    }
+    "release": [
+      {
+        "target": "release",
+        "projects": "dependencies"
+      }
+    ]
   }
 }
