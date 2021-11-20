@@ -1,7 +1,7 @@
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 const copyfiles = require('copyfiles');
 const fs = require('fs')
-
+const path = require('path')
 
 module.exports = {
   core: {
@@ -12,6 +12,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "storybook-dark-mode",
+    path.resolve("./.storybook/addons/run-in-iframe/run-in-iframe-preset.js"),
     {
       name: '@storybook/addon-postcss',
       options: {
@@ -59,7 +60,8 @@ module.exports = {
                 }
               }
             ]
-          }]
+          }
+          ]
       }
     }
 
