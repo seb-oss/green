@@ -5,7 +5,9 @@ export interface DropdownOption {
 }
 
 export interface ExtendedDropdownOption
-  extends DropdownOption, ElementProps {}
+  extends DropdownOption, ElementProps {
+    focused?: boolean
+}
 
 export interface Attributes {
   'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | undefined

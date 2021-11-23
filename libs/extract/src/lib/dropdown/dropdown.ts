@@ -31,7 +31,6 @@ const extendOption = (id: string, option: DropdownOption, ix: number): ExtendedD
   reduce<ExtendedDropdownOption>(optionValues, option, {
     attributes: {
       id: `${id}_option${ix}`,
-      role: 'option',
       'aria-selected': option.selected || undefined,
     },
     classes: [],
