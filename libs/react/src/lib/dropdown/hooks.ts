@@ -5,6 +5,7 @@ import {
   select,
   toggle,
 } from '@sebgroup/extract'
+import { activate, observe, unobserve } from 'libs/extract/src/lib/dropdown/dropdown'
 import { HTMLAttributes, useEffect, useState } from 'react'
 
 interface HookArgs {
@@ -19,6 +20,8 @@ interface HookResult {
   togglerProps: Props
   listboxProps: Props
   listItems: Props[]
+  activate: () => void
+  deactivate: () => void
 }
 
 export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
@@ -29,6 +32,8 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
 
   useEffect(() => {
     if (!dropdown) return
+    observe(dropdown, setDropdown)
+
     const { elements: { toggler, listbox } } = dropdown
 
     const newToggleProps: Props = {
@@ -57,9 +62,16 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
 
   useEffect(() => {
     setDropdown(create({ id, text, options }))
+
+    return () => {
+      if (dropdown) unobserve(dropdown)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {
+    activate: () => setDropdown(activate(dropdown)),
+    deactivate: () => setDropdown(deactivate(dropdown)),
     togglerProps,
     listboxProps,
     listItems,

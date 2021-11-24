@@ -9,13 +9,15 @@ export interface DropdownProps {
 
 export const Dropdown = ({ id, options, children }: DropdownProps) => {
   const {
+    activate,
+    deactivate,
     listboxProps,
     togglerProps,
     listItems,
   } = useDropdown({ id, options, text: children })
 
   return (
-    <div>
+    <div onFocus={activate} onBlur={deactivate}>
       <button {...togglerProps} />
       <div {...listboxProps}>
         <button className="close m-4 m-sm-2 d-block d-sm-none">

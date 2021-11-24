@@ -1,3 +1,5 @@
+import { fromEvent, Observable, Subscription } from 'rxjs'
+import { filter, tap } from 'rxjs/operators'
 import { dropdownValues, optionValues } from './defaultValues'
 import { randomId } from '../id'
 import reduce from '../reduce'
@@ -47,7 +49,8 @@ interface DropdownArgs {
   text?: string
 }
 export const create = ({ id = randomId(), text, options: _options }: DropdownArgs): AbstractDropdown => {
-  const settings: Partial<AbstractDropdown> = {
+  const options = extendOptions(_options, id)
+  const dropdown: Partial<AbstractDropdown> = {
     id,
     text: text || 'dropdown',
     elements: {
@@ -55,9 +58,10 @@ export const create = ({ id = randomId(), text, options: _options }: DropdownArg
         attributes: { 'aria-owns': id },
       },
     },
+    options,
   }
-  const options = extendOptions(_options, id)
-  return reduce<AbstractDropdown>(dropdownValues, settings, { options })
+
+  return reduce(dropdown, dropdownValues)
 }
 
 export const open = (dropdown: AbstractDropdown): AbstractDropdown => (
@@ -104,6 +108,57 @@ export const select = (dropdown: AbstractDropdown, option: ExtendedDropdownOptio
     }))
   })
 )
-export const focus = (dropdown: AbstractDropdown, option: ExtendedDropdownOption): AbstractDropdown => (
-  dropdown
+export const focus = (dropdown: AbstractDropdown, focusedIndex: number): AbstractDropdown => {
+  const options: ExtendedDropdownOption[] = dropdown.options.map((o, optionIndex) => {
+    return {
+      ...o,
+      focused: focusedIndex === optionIndex,
+    }
+  })
+  return reduce(dropdown, { options } as Partial<AbstractDropdown>)
+}
+export const activate = (dropdown: AbstractDropdown): AbstractDropdown => (
+  reduce(dropdown, { isActive: true })
 )
+export const deactivate = (dropdown: AbstractDropdown): AbstractDropdown => (
+  reduce(dropdown, { isActive: false })
+)
+
+const observers: Record<string, {
+  subscription: Subscription,
+  observable: Observable<KeyboardEvent>
+}> = {}
+type Listener = (dropdown: AbstractDropdown) => void
+export const observe = (dropdown: AbstractDropdown, listener: Listener): void => {
+  let observable: Observable<KeyboardEvent>
+  let subscription: Subscription
+
+  if (!observers[dropdown.id]) {
+    observable = fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(filter((event) => ['ArrowDown', 'ArrowUp', 'Escape', 'Home', 'End', ' '].includes(event.key)))
+  } else {
+    ({ observable, subscription } = observers[dropdown.id]);
+    if (subscription) subscription.unsubscribe()
+  }
+
+  subscription = observable.subscribe((event) => {
+    if (!dropdown.isActive) return
+    event.preventDefault()
+    switch (event.key) {
+      case ' ':
+        listener(open(dropdown))
+        break
+      case 'Escape':
+        listener(close(dropdown))
+        break
+    }
+  })
+
+  observers[dropdown.id] = { observable, subscription }
+}
+export const unobserve = (dropdown: AbstractDropdown): void => {
+  if (observers[dropdown.id]) {
+    observers[dropdown.id].subscription.unsubscribe()
+    delete observers[dropdown.id]
+  }
+}

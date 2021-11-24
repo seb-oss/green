@@ -1,3 +1,5 @@
+import { Observable, Subscription } from 'rxjs'
+
 export interface DropdownOption {
   key: string
   value: unknown
@@ -27,10 +29,13 @@ export interface ElementProps {
 export interface AbstractDropdown {
   id: string
   text: string
+  isActive: boolean
   isOpen: boolean
   options: ExtendedDropdownOption[]
   elements: Partial<{
     toggler: Partial<ElementProps>
     listbox: Partial<ElementProps>
   }>
+  keyboardEvents: Observable<KeyboardEvent>
+  subscription: Subscription
 }

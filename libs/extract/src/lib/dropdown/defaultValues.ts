@@ -17,6 +17,7 @@ export const dropdownValues: Partial<AbstractDropdown> = {
       classes: ['popover'],
     },
   },
+  isActive: false,
   isOpen: false,
 }
 

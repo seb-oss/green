@@ -1,10 +1,14 @@
 import {
+  activate,
   close,
   create,
+  deactivate,
   focus,
+  observe,
   open,
   select,
   toggle,
+  unobserve,
 } from './dropdown'
 import { AbstractDropdown, DropdownOption } from './types'
 
@@ -99,6 +103,9 @@ describe('dropdown', () => {
     it('defaults to closed', () => {
       expect(dropdown.isOpen).toBe(false)
     })
+    it('defaults to inactive', () => {
+      expect(dropdown.isActive).toBe(false)
+    })
     describe('open', () => {
       beforeEach(() => {
         dropdown = open(dropdown)
@@ -129,6 +136,22 @@ describe('dropdown', () => {
         it('removes listbox class active', () => {
           const { classes } = dropdown.elements.listbox
           expect(classes).not.toContain('active')
+        })
+      })
+    })
+    describe('activate', () => {
+      beforeEach(() => {
+        dropdown = activate(dropdown)
+      })
+      it('sets isActive to true', () => {
+        expect(dropdown.isActive).toBe(true)
+      })
+      describe('deactivate', () => {
+        beforeEach(() => {
+          dropdown = deactivate(dropdown)
+        })
+        it('sets isActive to false', () => {
+          expect(dropdown.isActive).toBe(false)
         })
       })
     })
@@ -163,7 +186,47 @@ describe('dropdown', () => {
         dropdown = open(dropdown)
       })
       it('sets option focus', () => {
-        dropdown = focus(dropdown, dropdown.options[1])
+        dropdown = focus(dropdown, 1)
+        expect(dropdown.options[1].focused).toBe(true)
+      })
+    })
+    describe('observe', () => {
+      afterEach(() => unobserve(dropdown))
+      describe('when inactive', () => {
+        it('does not trigger key events', () => {
+          const listener = jest.fn()
+          observe(dropdown, listener)
+
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
+
+          expect(listener).not.toHaveBeenCalled()
+        })
+      })
+      describe('when active', () => {
+        beforeEach(() => {
+          dropdown = activate(dropdown)
+        })
+        it('opens dropdown on SPACE', () => {
+          const listener = jest.fn()
+          observe(dropdown, listener)
+
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
+
+          expect(listener).toHaveBeenCalled()
+        })
+        it('closes dropdown on Escape', () => {
+          const listener = jest.fn()
+          observe(open(dropdown), listener)
+
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+
+          expect(listener).toHaveBeenCalled()
+        })
       })
     })
   })
