@@ -176,18 +176,52 @@ describe('dropdown', () => {
           undefined, true,
         ])
       })
-      it('closes dropdown', () => {
+      it('sets activedecendant', () => {
+        const selectedOption = dropdown.options[1]
+        dropdown = select(dropdown, selectedOption)
+        const attrs = dropdown.elements.listbox.attributes
+
+        expect(attrs['aria-activedescendant']).toEqual(selectedOption.attributes.id)
+      })
+      it('does not close dropdown', () => {
         dropdown = select(dropdown, dropdown.options[1])
-        expect(dropdown.isOpen).toBe(false)
+        expect(dropdown.isOpen).toBe(true)
       })
-    })
-    describe('focus', () => {
-      beforeEach(() => {
-        dropdown = open(dropdown)
-      })
-      it('sets option focus', () => {
-        dropdown = focus(dropdown, 1)
-        expect(dropdown.options[1].focused).toBe(true)
+      describe('with step', () => {
+        it('sets first if no selection and step is 1', () => {
+          dropdown = select(dropdown, 1)
+          
+          expect(dropdown.options[0].selected).toBe(true)
+        })
+        it('sets first if no selection and step is -1', () => {
+          dropdown = select(dropdown, -1)
+          
+          expect(dropdown.options[0].selected).toBe(true)
+        })
+        it('sets second if first is selected and step is 1', () => {
+          dropdown.options[0].selected = true
+          dropdown = select(dropdown, 1)
+          
+          expect(dropdown.options[1].selected).toBe(true)
+        })
+        it('stays if last is selected and step is 1', () => {
+          dropdown.options[1].selected = true
+          dropdown = select(dropdown, 1)
+          
+          expect(dropdown.options[1].selected).toBe(true)
+        })
+        it('sets second if first is selected and step is 1', () => {
+          dropdown.options[1].selected = true
+          dropdown = select(dropdown, -1)
+          
+          expect(dropdown.options[0].selected).toBe(true)
+        })
+        it('stays if first is selected and step is -1', () => {
+          dropdown.options[0].selected = true
+          dropdown = select(dropdown, -1)
+          
+          expect(dropdown.options[0].selected).toBe(true)
+        })
       })
     })
     describe('observe', () => {

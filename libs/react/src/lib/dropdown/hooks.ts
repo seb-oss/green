@@ -1,11 +1,14 @@
 import {
-  AbstractDropdown,
+  activate,
+  close,
   create,
-  DropdownOption,
+  deactivate,
+  observe,
   select,
   toggle,
+  AbstractDropdown,
+  DropdownOption,
 } from '@sebgroup/extract'
-import { activate, observe, unobserve } from 'libs/extract/src/lib/dropdown/dropdown'
 import { HTMLAttributes, useEffect, useState } from 'react'
 
 interface HookArgs {
@@ -54,7 +57,7 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
       ...o.attributes,
       className: o.classes?.join(' '),
       children: o.key,
-      onClick: () => setDropdown(select(dropdown, o))
+      onClick: () => setDropdown(close(select(dropdown, o)))
     }))
     setListItems(newListItems)
 
@@ -70,8 +73,8 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
   }, [])
 
   return {
-    activate: () => setDropdown(activate(dropdown)),
-    deactivate: () => setDropdown(deactivate(dropdown)),
+    activate: () => dropdown && setDropdown(activate(dropdown)),
+    deactivate: () => dropdown && setDropdown(deactivate(dropdown)),
     togglerProps,
     listboxProps,
     listItems,

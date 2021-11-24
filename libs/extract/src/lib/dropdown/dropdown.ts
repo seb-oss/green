@@ -97,9 +97,27 @@ export const close = (dropdown: AbstractDropdown): AbstractDropdown => (
 export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => (
   (dropdown.isOpen) ? close(dropdown) : open(dropdown)
 )
-export const select = (dropdown: AbstractDropdown, option: ExtendedDropdownOption): AbstractDropdown => (
-  reduce(close(dropdown), {
+export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOption | number): AbstractDropdown => {
+  let option: ExtendedDropdownOption
+  if (typeof selection === 'number') {
+    const opts = dropdown.options
+    const currentlySelectedIndex = opts.findIndex((o) => o.selected)
+    let newSelectedIndex = currentlySelectedIndex + selection
+    if (newSelectedIndex < 0) newSelectedIndex = 0
+    if (newSelectedIndex >= opts.length) newSelectedIndex = opts.length - 1
+    option = opts[newSelectedIndex]
+  } else {
+    option = selection
+  }
+  return reduce(dropdown, {
     text: option.key,
+    elements: {
+      listbox: {
+        attributes: {
+          'aria-activedescendant': option.attributes.id,
+        }
+      }
+    },
     options: dropdown.options.map((o) => reduce(o, {
       selected: o === option,
       attributes: {
@@ -107,7 +125,7 @@ export const select = (dropdown: AbstractDropdown, option: ExtendedDropdownOptio
       },
     }))
   })
-)
+}
 export const focus = (dropdown: AbstractDropdown, focusedIndex: number): AbstractDropdown => {
   const options: ExtendedDropdownOption[] = dropdown.options.map((o, optionIndex) => {
     return {
@@ -150,6 +168,12 @@ export const observe = (dropdown: AbstractDropdown, listener: Listener): void =>
         break
       case 'Escape':
         listener(close(dropdown))
+        break
+      case 'ArrowDown':
+        listener(select(dropdown, 1))
+        break
+      case 'ArrowUp':
+        listener(select(dropdown, -1))
         break
     }
   })

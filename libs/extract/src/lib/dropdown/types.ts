@@ -1,4 +1,5 @@
 import { Observable, Subscription } from 'rxjs'
+import { AriaAttributes } from 'react'
 
 export interface DropdownOption {
   key: string
@@ -7,15 +8,9 @@ export interface DropdownOption {
 }
 
 export interface ExtendedDropdownOption
-  extends DropdownOption, ElementProps {
-    focused?: boolean
-}
+  extends DropdownOption, ElementProps {}
 
-export interface Attributes {
-  'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | undefined
-  'aria-owns'?: string
-  'aria-expanded'?: boolean
-  'aria-selected'?: boolean
+export interface Attributes extends AriaAttributes {
   id?: string
   role?: string
   tabIndex?: number
