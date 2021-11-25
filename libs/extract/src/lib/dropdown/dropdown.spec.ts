@@ -222,13 +222,39 @@ describe('dropdown', () => {
           
           expect(dropdown.options[0].selected).toBe(true)
         })
+        describe('loop', () => {
+          beforeEach(() => {
+            dropdown = activate({ ...dropdown, loop: true })
+          })
+          it('sets last if no selection and step is -1', () => {
+            dropdown = select(dropdown, -1)
+            
+            expect(dropdown.options[1].selected).toBe(true)
+          })
+          it('sets first if last is selected and step is 1', () => {
+            dropdown.options[1].selected = true
+            dropdown = select(dropdown, 1)
+            
+            expect(dropdown.options[0].selected).toBe(true)
+          })
+          it('sets last if first is selected and step is -1', () => {
+            dropdown.options[0].selected = true
+            dropdown = select(dropdown, -1)
+            
+            expect(dropdown.options[1].selected).toBe(true)
+          })
+        })
       })
     })
     describe('observe', () => {
+      let listener: jest.Mock<undefined, [AbstractDropdown]>
+      beforeEach(() => {
+        listener = jest.fn()
+        observe(dropdown, listener)
+      })
       afterEach(() => unobserve(dropdown))
       describe('when inactive', () => {
         it('does not trigger key events', () => {
-          const listener = jest.fn()
           observe(dropdown, listener)
 
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
@@ -244,22 +270,39 @@ describe('dropdown', () => {
       describe('when active', () => {
         beforeEach(() => {
           dropdown = activate(dropdown)
-        })
-        it('opens dropdown on SPACE', () => {
-          const listener = jest.fn()
           observe(dropdown, listener)
-
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
-
-          expect(listener).toHaveBeenCalled()
         })
-        it('closes dropdown on Escape', () => {
-          const listener = jest.fn()
-          observe(open(dropdown), listener)
+        describe('Space', () => {
+          it('opens closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
+            
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(true)
+          })
+          it('closes open dropdown', () => {
+            dropdown = observe(open(dropdown), listener)
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
+            
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(false)
+          })
+        })
+        describe('Escape', () => {
+          it('closes open dropdown', () => {
+            dropdown = observe(open(dropdown), listener)
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
 
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(false)
+          })
+          it('does nothing to closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
 
-          expect(listener).toHaveBeenCalled()
+            expect(listener).not.toHaveBeenCalled()
+          })
         })
       })
     })

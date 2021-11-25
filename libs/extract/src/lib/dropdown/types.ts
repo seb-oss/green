@@ -26,6 +26,7 @@ export interface AbstractDropdown {
   text: string
   isActive: boolean
   isOpen: boolean
+  loop?: boolean
   options: ExtendedDropdownOption[]
   elements: Partial<{
     toggler: Partial<ElementProps>

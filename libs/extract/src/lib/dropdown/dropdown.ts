@@ -1,5 +1,5 @@
 import { fromEvent, Observable, Subscription } from 'rxjs'
-import { filter, tap } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 import { dropdownValues, optionValues } from './defaultValues'
 import { randomId } from '../id'
 import reduce from '../reduce'
@@ -46,9 +46,10 @@ const extendOptions = (options: DropdownOption[], id: string): ExtendedDropdownO
 interface DropdownArgs {
   id?: string
   options: DropdownOption[]
+  loop?: boolean
   text?: string
 }
-export const create = ({ id = randomId(), text, options: _options }: DropdownArgs): AbstractDropdown => {
+export const create = ({ id = randomId(), text, options: _options, loop }: DropdownArgs): AbstractDropdown => {
   const options = extendOptions(_options, id)
   const dropdown: Partial<AbstractDropdown> = {
     id,
@@ -59,6 +60,7 @@ export const create = ({ id = randomId(), text, options: _options }: DropdownArg
       },
     },
     options,
+    loop,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -103,8 +105,8 @@ export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOp
     const opts = dropdown.options
     const currentlySelectedIndex = opts.findIndex((o) => o.selected)
     let newSelectedIndex = currentlySelectedIndex + selection
-    if (newSelectedIndex < 0) newSelectedIndex = 0
-    if (newSelectedIndex >= opts.length) newSelectedIndex = opts.length - 1
+    if (newSelectedIndex < 0) newSelectedIndex = dropdown.loop ? opts.length - 1 : 0
+    if (newSelectedIndex >= opts.length) newSelectedIndex = dropdown.loop ? 0 : opts.length - 1
     option = opts[newSelectedIndex]
   } else {
     option = selection
@@ -147,7 +149,7 @@ const observers: Record<string, {
   observable: Observable<KeyboardEvent>
 }> = {}
 type Listener = (dropdown: AbstractDropdown) => void
-export const observe = (dropdown: AbstractDropdown, listener: Listener): void => {
+export const observe = (dropdown: AbstractDropdown, listener: Listener): AbstractDropdown => {
   let observable: Observable<KeyboardEvent>
   let subscription: Subscription
 
@@ -164,9 +166,10 @@ export const observe = (dropdown: AbstractDropdown, listener: Listener): void =>
     event.preventDefault()
     switch (event.key) {
       case ' ':
-        listener(open(dropdown))
+        listener(toggle(dropdown))
         break
       case 'Escape':
+        if (!dropdown.isOpen) return
         listener(close(dropdown))
         break
       case 'ArrowDown':
@@ -179,10 +182,13 @@ export const observe = (dropdown: AbstractDropdown, listener: Listener): void =>
   })
 
   observers[dropdown.id] = { observable, subscription }
+
+  return dropdown
 }
-export const unobserve = (dropdown: AbstractDropdown): void => {
+export const unobserve = (dropdown: AbstractDropdown): AbstractDropdown => {
   if (observers[dropdown.id]) {
     observers[dropdown.id].subscription.unsubscribe()
     delete observers[dropdown.id]
   }
+  return dropdown
 }

@@ -6,6 +6,7 @@ import {
   observe,
   select,
   toggle,
+  unobserve,
   AbstractDropdown,
   DropdownOption,
 } from '@sebgroup/extract'
@@ -15,6 +16,7 @@ interface HookArgs {
   id?: string
   text?: string
   options: DropdownOption[]
+  loop?: boolean
 }
 
 type Props = HTMLAttributes<HTMLElement>
@@ -27,7 +29,7 @@ interface HookResult {
   deactivate: () => void
 }
 
-export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
+export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult => {
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
   const [togglerProps, setTogglerProps] = useState<Props>({})
   const [listboxProps, setListboxProps] = useState<Props>({})
@@ -64,7 +66,7 @@ export const useDropdown = ({ id, text, options }: HookArgs): HookResult => {
   }, [dropdown])
 
   useEffect(() => {
-    setDropdown(create({ id, text, options }))
+    setDropdown(create({ id, text, options, loop }))
 
     return () => {
       if (dropdown) unobserve(dropdown)

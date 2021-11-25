@@ -5,16 +5,17 @@ export interface DropdownProps {
   id?: string
   children?: string
   options: DropdownOption[]
+  loop?: boolean
 }
 
-export const Dropdown = ({ id, options, children }: DropdownProps) => {
+export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
   const {
     activate,
     deactivate,
     listboxProps,
     togglerProps,
     listItems,
-  } = useDropdown({ id, options, text: children })
+  } = useDropdown({ id, options, loop, text: children })
 
   return (
     <div onFocus={activate} onBlur={deactivate}>
