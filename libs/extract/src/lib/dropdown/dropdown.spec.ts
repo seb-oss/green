@@ -269,7 +269,8 @@ describe('dropdown', () => {
       })
       describe('when active', () => {
         beforeEach(() => {
-          dropdown = activate(dropdown)
+          dropdown.options = dropdown.options.map((o) => ({ ...o, selected: false }))
+          dropdown = activate(close(dropdown))
           observe(dropdown, listener)
         })
         describe('Space', () => {
@@ -302,6 +303,81 @@ describe('dropdown', () => {
             document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
 
             expect(listener).not.toHaveBeenCalled()
+          })
+        })
+        describe('Arrow down', () => {
+          it('opens closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(true)
+          })
+          it('selects first option', () => {
+            dropdown = select(dropdown, dropdown.options[0])
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.options[0].selected).toBe(true)
+          })
+        })
+        describe('Arrow up', () => {
+          it('opens closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(true)
+          })
+          it('selects first option', () => {
+            dropdown = select(dropdown, dropdown.options[0])
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.options[0].selected).toBe(true)
+          })
+          it('selects last option if looped', () => {
+            dropdown.loop = true
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.options[1].selected).toBe(true)
+          })
+        })
+        describe('Home', () => {
+          it('opens closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(true)
+          })
+          it('selects first option', () => {
+            dropdown = select(dropdown, dropdown.options[1])
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.options[0].selected).toBe(true)
+          })
+        })
+        describe('End', () => {
+          it('opens closed dropdown', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.isOpen).toBe(true)
+          })
+          it('selects last option', () => {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
+  
+            expect(listener).toHaveBeenCalled()
+            const [dd] = listener.mock.calls[0]
+            expect(dd.options[1].selected).toBe(true)
           })
         })
       })

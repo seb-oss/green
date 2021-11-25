@@ -154,8 +154,9 @@ export const observe = (dropdown: AbstractDropdown, listener: Listener): Abstrac
   let subscription: Subscription
 
   if (!observers[dropdown.id]) {
-    observable = fromEvent<KeyboardEvent>(document, 'keydown')
-      .pipe(filter((event) => ['ArrowDown', 'ArrowUp', 'Escape', 'Home', 'End', ' '].includes(event.key)))
+    observable = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+      filter((event) => ['ArrowDown', 'ArrowUp', 'Escape', 'Home', 'End', ' '].includes(event.key))
+    )
   } else {
     ({ observable, subscription } = observers[dropdown.id]);
     if (subscription) subscription.unsubscribe()
@@ -164,21 +165,36 @@ export const observe = (dropdown: AbstractDropdown, listener: Listener): Abstrac
   subscription = observable.subscribe((event) => {
     if (!dropdown.isActive) return
     event.preventDefault()
+    let newState: AbstractDropdown
+    const opts = dropdown.options
     switch (event.key) {
       case ' ':
-        listener(toggle(dropdown))
+        newState = toggle(dropdown)
         break
       case 'Escape':
         if (!dropdown.isOpen) return
-        listener(close(dropdown))
+        newState = close(dropdown)
         break
       case 'ArrowDown':
-        listener(select(dropdown, 1))
+        newState = (dropdown.isOpen)
+          ? select(dropdown, 1) 
+          : open(select(dropdown, opts[0]))
         break
       case 'ArrowUp':
-        listener(select(dropdown, -1))
+        newState = (dropdown.isOpen)
+          ? select(dropdown, -1) 
+          : open(select(dropdown, (dropdown.loop) ? opts[opts.length - 1] : opts[0]))
         break
+      case 'Home':
+        newState = open(select(dropdown, opts[0]))
+        break
+      case 'End':
+        newState = open(select(dropdown, opts[opts.length - 1]))
+        break
+      default:
+        return
     }
+    listener(newState)
   })
 
   observers[dropdown.id] = { observable, subscription }

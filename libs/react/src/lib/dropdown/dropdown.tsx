@@ -12,6 +12,7 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
   const {
     activate,
     deactivate,
+    close,
     listboxProps,
     togglerProps,
     listItems,
@@ -21,7 +22,7 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
     <div onFocus={activate} onBlur={deactivate}>
       <button {...togglerProps} />
       <div {...listboxProps}>
-        <button className="close m-4 m-sm-2 d-block d-sm-none">
+        <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={close}>
           <span className="sr-only">Close</span>
         </button>
         <ul role="listbox">

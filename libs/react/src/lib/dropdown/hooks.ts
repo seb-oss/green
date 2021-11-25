@@ -27,6 +27,7 @@ interface HookResult {
   listItems: Props[]
   activate: () => void
   deactivate: () => void
+  close: () => void
 }
 
 export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult => {
@@ -77,6 +78,8 @@ export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult =
   return {
     activate: () => dropdown && setDropdown(activate(dropdown)),
     deactivate: () => dropdown && setDropdown(deactivate(dropdown)),
+    close: () => dropdown && setDropdown(close(dropdown)),
+
     togglerProps,
     listboxProps,
     listItems,
