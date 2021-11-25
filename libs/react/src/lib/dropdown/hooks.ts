@@ -73,7 +73,7 @@ export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult =
       if (dropdown) unobserve(dropdown)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [id, loop, options, text])
 
   return {
     activate: () => dropdown && setDropdown(activate(dropdown)),

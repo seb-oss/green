@@ -141,7 +141,7 @@ export const activate = (dropdown: AbstractDropdown): AbstractDropdown => (
   reduce(dropdown, { isActive: true })
 )
 export const deactivate = (dropdown: AbstractDropdown): AbstractDropdown => (
-  reduce(dropdown, { isActive: false })
+  reduce(close(dropdown), { isActive: false })
 )
 
 const observers: Record<string, {
