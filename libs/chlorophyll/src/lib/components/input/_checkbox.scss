@@ -1,11 +1,14 @@
 @use '../../tokens';
 @use '../../common';
 @use 'sass:map';
+@use 'sass:math';
 
 /* Tokens todo: move/refactor */
 $background: tokens.$white;
 $background-hover: tokens.$white;
 $background-active: map-get(tokens.$blue, 1);
+$checkbox-size: 1.25rem;
+$sm-size-division-amount: 1.55;
 $checkmark-color: tokens.$white;
 
 /* Style for label */
@@ -43,9 +46,23 @@ $checkmark-color: tokens.$white;
   @include common.margin-end(4);
   background-color: $background;
   flex: 0 0 auto;
-  height: 1.25rem;
+  height: $checkbox-size;
   transition: 300ms;
-  width: 1.25rem;
+  width: $checkbox-size;
+}
+
+/* Small custom checkbox */
+.form-control input[type=checkbox].size-sm ~ span {
+  @include common.margin-end(2);
+  height: math.div($checkbox-size, $sm-size-division-amount);
+  width: math.div($checkbox-size, $sm-size-division-amount);
+}
+
+/* Large custom checkbox */
+.form-control input[type=checkbox].size-lg ~ span {
+  @include common.margin-end(6);
+  height: $checkbox-size * 2;
+  width: $checkbox-size * 2;
 }
 
 /* Hover state */
@@ -95,7 +112,7 @@ $checkmark-color: tokens.$white;
   }
 }
 
-/* Checkmark */
+/* Un-checked checkbox (Setup initial styles) */
 .form-control input[type=checkbox] ~ span::after,
 .form-control input[type=checkbox] ~ span::before {
   background: $checkmark-color;
@@ -105,13 +122,36 @@ $checkmark-color: tokens.$white;
   width: 3px;
 }
 
+/* Un-checked checkbox - Small variation */
+.form-control input[type=checkbox].size-sm ~ span::after,
+.form-control input[type=checkbox].size-sm ~ span::before {
+  width: math.div(3px, $sm-size-division-amount);
+}
+
+/* Un-checked checkbox - Large variation */
+.form-control input[type=checkbox].size-lg ~ span::after,
+.form-control input[type=checkbox].size-lg ~ span::before {
+  width: 3px * 2;
+}
+
+/* Un-checked checkbox ::after */
 .form-control input[type=checkbox] ~ span::after {
-  height: 13px;
   transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(0);
   transform-origin: bottom right;
   transition: 100ms 0s ease-out;
 }
 
+/* Un-checked checkbox ::after - Small variation */
+.form-control input[type=checkbox].size-sm ~ span::after {
+  transform: rotate3d(0, 0, 1, 45deg) translate3d(2.25px, -1.25px, 0) scaleY(1);
+}
+
+/* Un-checked checkbox ::after - Large variation */
+.form-control input[type=checkbox].size-lg ~ span::after {
+  transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(1);
+}
+
+/* Un-checked checkbox ::before */
 .form-control input[type=checkbox] ~ span::before {
   height: 9px;
   transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(0);
@@ -119,19 +159,56 @@ $checkmark-color: tokens.$white;
   transition: 100ms 100ms ease-in;
 }
 
-/* Show the checkmark when checked */
+/* Un-checked checkbox ::before - Small variation */
+.form-control input[type=checkbox].size-sm ~ span::before {
+  transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(-1);
+}
+
+/* Un-checked checkbox ::before - Small variation */
+.form-control input[type=checkbox].size-lg ~ span::before {
+  transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(1);
+}
+
+/* Checked checkbox (Show the checkmark when checked) */
 .form-control input[type=checkbox]:checked ~ span::before,
 .form-control input[type=checkbox]:checked ~ span::after {
   opacity: 1;
   transition-timing-function: ease-in-out;
 }
 
+/* Checked checkbox ::after */
 .form-control input[type=checkbox]:checked ~ span::after {
+  height: 13px;
   transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(1);
   transition-delay: 100ms;
 }
 
+/* Checked checkbox ::after - Small variation */
+.form-control input[type=checkbox].size-sm:checked ~ span::after {
+  height: math.div(13px, $sm-size-division-amount);
+  transform: rotate3d(0, 0, 1, 45deg) translate3d(2px, -2px, 0)  scaleY(1);
+}
+
+/* Checked checkbox ::after - Large variation */
+.form-control input[type=checkbox].size-lg:checked ~ span::after {
+  height: 13px * 2;
+  transform: rotate3d(0, 0, 1, 45deg) translate3d(9px, -5px, 0) scaleY(1);
+}
+
+/* Checked checkbox ::before */
 .form-control input[type=checkbox]:checked ~ span::before {
   transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(1);
   transition-delay: 0s;
+}
+
+/* Checked checkbox ::before - Small variation */
+.form-control input[type=checkbox].size-sm:checked ~ span::before {
+  height: math.div(9px, $sm-size-division-amount);
+  transform: rotate3d(0, 0, 1, 135deg) translate3d(-2.5px, 0.5px, 0)  scaleY(1);
+}
+
+/* Checked checkbox ::before - Large variation */
+.form-control input[type=checkbox].size-lg:checked ~ span::before {
+  height: 9px * 2;
+  transform: rotate3d(0, 0, 1, 135deg) translate3d(-8px, -1px, 0) scaleY(1);
 }

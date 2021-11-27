@@ -66,6 +66,18 @@ form,
       @include common.margin-bottom(3);
     }
   }
+
+  fieldset:not(.is-valid):not(.is-invalid) {
+    label.form-control {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+
+  fieldset.is-valid,
+  fieldset.is-invalid {
+    @include common.margin-bottom(4);
+  }
 }
 
 .horizontal .form-group ~ {

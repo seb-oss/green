@@ -1,6 +1,7 @@
 @use '../../tokens';
 @use '../../common';
 @use 'sass:map';
+@use 'sass:math';
 
 /* Tokens todo: move/refactor */
 $background: tokens.$white;
@@ -12,6 +13,7 @@ $radiobutton-border-color-active: map.get(tokens.$blue, 2);
 $radiobutton-border-color-hover: map.get(tokens.$blue, 0);
 $radiomark-diameter-percentage: 0.5;
 $radiomark-color: map.get(tokens.$blue, 1);
+$sm-size-division-amount: 1.55;
 
 /* Style for label */
 .form-control {
@@ -55,6 +57,20 @@ $radiomark-color: map.get(tokens.$blue, 1);
   height: $radiobutton-diameter;
   transition: 300ms;
   width: $radiobutton-diameter;
+}
+
+/* Small radio */
+.form-control input[type='radio'].size-sm ~ span {
+  @include common.margin-end(2);
+  height: math.div($radiobutton-diameter, $sm-size-division-amount);
+  width: math.div($radiobutton-diameter, $sm-size-division-amount);
+}
+
+/* Large radio */
+.form-control input[type='radio'].size-lg ~ span {
+  @include common.margin-end(6);
+  height: $radiobutton-diameter * 2;
+  width: $radiobutton-diameter * 2;
 }
 
 /* Hover state */
@@ -127,6 +143,18 @@ input[type='radio']:not(:checked, .disabled, :disabled)
   transform-origin: center;
   transition: 200ms ease-in;
   width: $radiobutton-diameter;
+}
+
+/* Checkmark - Small variation */
+.form-control input[type='radio'].size-sm ~ span::before {
+  height: math.div($radiobutton-diameter, $sm-size-division-amount);
+  width: math.div($radiobutton-diameter, $sm-size-division-amount);
+}
+
+/* Checkmark - Large variation */
+.form-control input[type='radio'].size-lg ~ span::before {
+  height: $radiobutton-diameter * 2;
+  width: $radiobutton-diameter * 2;
 }
 
 /* Show the checkmark when checked */
