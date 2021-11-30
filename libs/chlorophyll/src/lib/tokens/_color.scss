@@ -2,6 +2,8 @@
 
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
+$transparent-black: fade-out($black, 1);
+$transparent-white: transparentize($white, 1);
 
 $grey: (
   0: rgb(26, 26, 26),
@@ -13,6 +15,35 @@ $grey: (
   6: rgb(222, 222, 222),
   7: rgb(233, 233, 233),
   8: rgb(248, 248, 248),
+);
+
+$elevation-light: (
+  0: rgb(255, 255, 255),
+  1: rgb(255, 255, 255),
+  2: rgb(255, 255, 255),
+  3: rgb(255, 255, 255),
+);
+
+$elevation-dark: (
+  0: rgb(18, 18, 18),
+  1: rgb(34, 34, 34),
+  2: rgb(39, 39, 39),
+  3: rgb(44, 44, 44),
+);
+
+$secondary-text-dark: rgba(255, 255, 255, 0.6);
+$secondary-text: rgba(86, 86, 86); //rgba(0, 0, 8, 0.6);
+
+$grey-dark: (
+  0: rgb(39, 39, 39),
+  1: rgb(51, 51, 51),
+  2: rgb(60, 60, 60),
+  3: rgb(67, 67, 67),
+  4: rgb(73, 73, 73),
+  5: rgb(117, 117, 117),
+  6: rgb(179, 179, 179),
+  7: rgb(171, 171, 171),
+  8: rgba(255, 255, 255, 0.9),
 );
 
 $green: (
@@ -95,7 +126,6 @@ $intent-colors-dark: (
 $theme-colors: map-merge($brand-colors, $intent-colors);
 
 $extended-colors: map-merge($intent-colors, $achromatic-colors);
-
 
 $background-color: map.get($grey, 8);
 

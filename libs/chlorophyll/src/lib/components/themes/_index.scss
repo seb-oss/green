@@ -1,0 +1,17 @@
+@use '../../tokens/shame' as newTokens;
+/* force dark mode to whole app or part of it by adding the class ".dark-mode" */
+.dark-mode {
+  @include newTokens.dark-mode;
+}
+
+/* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */
+@media (prefers-color-scheme: dark) {
+  .auto-mode {
+    @include newTokens.dark-mode;
+  }
+}
+
+/* apps will use light mode by default */
+:root {
+  @include newTokens.light-mode;
+}

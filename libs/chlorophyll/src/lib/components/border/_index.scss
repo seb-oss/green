@@ -1,16 +1,16 @@
-@use '../../tokens';
 @use '../../common';
+@use 'mixins' as border;
 @use 'sass:map';
 
 /* Validation */
 .border {
   &.is-invalid {
-    @include common.add-border-color(map.get(tokens.$intent-colors, 'danger'));
+    @include common.add-border-color(border.$color-invalid);
     @include common.add-border-radius();
   }
 
   &.is-valid {
-    @include common.add-border-color(map.get(tokens.$intent-colors, 'success'));
+    @include common.add-border-color(border.$color-valid);
     @include common.add-border-radius();
   }
 }

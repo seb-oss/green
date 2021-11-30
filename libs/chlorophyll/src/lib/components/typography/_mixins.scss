@@ -1,4 +1,5 @@
 @use '../../tokens/typography' as tokens;
+@use '../../tokens/shame' as newTokens;
 
 @mixin properties($map) {
   @each $name, $value in $map {
@@ -15,7 +16,7 @@
   }
 
   body {
-
+    color: newTokens.$text-primary-color;
     font-family: $body-font-family;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;

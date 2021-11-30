@@ -1,19 +1,24 @@
-@use '../../tokens';
+@use '../../tokens/shame' as newTokens;
 @use 'sass:map';
 
+$color: newTokens.$link-color;
+$color-hover: newTokens.get(newTokens.$blue, 1);
+$color-visited: newTokens.$link-color-visited;
+$font-weight: newTokens.$font-weight-bold;
+
 @mixin base {
-  color: tokens.$link-color;
-  font-weight: tokens.font-weight('medium');
+  color: $color;
+  font-weight: $font-weight;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    color: map.get(tokens.$blue, 1);
+    color: $color-hover;
     text-decoration: underline;
   }
 
-  &:not(button, .button, [href='#']):visited {
-    color: tokens.$link-color-visited;
+  &.link-history:visited {
+    color: $color-visited;
   }
 }
 

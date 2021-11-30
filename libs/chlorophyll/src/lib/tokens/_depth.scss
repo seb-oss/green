@@ -1,13 +1,6 @@
 @use './color';
 @use 'sass:map';
 
-// box shadow depth
-$depth-level: (
-  0: 0 0 0 0,
-  1: 0 0.125rem 0.375rem rgba(color.$black, 0.15),
-  2: 0 0.5rem 1rem rgba(color.$black, 0.1)
-);
-
 // based on what we have and use in bootstrap today
 $zindex-dropdown-backdrop: 990;
 $zindex-dropdown: 1000;
@@ -17,6 +10,3 @@ $zindex-modal-backdrop: 1040;
 $zindex-modal: 1050;
 $zindex-popover: 1060;
 $zindex-tooltip: 1070;
-
-$box-shadow: map.get($depth-level, 1);
-$box-shadow-lg: map.get($depth-level, 2);
