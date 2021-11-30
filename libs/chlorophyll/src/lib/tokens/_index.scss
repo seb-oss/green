@@ -5,4 +5,4 @@
 @forward 'spacing';
 @forward 'typography';
 @forward 'grid';
-@forward 'border' as border-*;
+@use 'shame';

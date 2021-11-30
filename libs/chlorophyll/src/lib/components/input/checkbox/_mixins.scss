@@ -1,0 +1,13 @@
+@use '../../../tokens/shame' as newTokens;
+
+/* checkbox */
+$background: newTokens.$form-control-bg;
+// currently not adjusted for light/dark mode...
+$background-hover: transparentize(newTokens.get(newTokens.$blue, 2), 0.25);
+$background-checked: newTokens.get(newTokens.$blue, 1);
+
+$border-checked: $background-checked;
+
+/* checkbox checkmark */
+$checkmark-color: newTokens.$white;
+$checkmark-disabled-color: newTokens.$checkbox-checkmark-disabled-color;

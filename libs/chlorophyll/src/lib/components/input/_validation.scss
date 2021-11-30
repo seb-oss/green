@@ -1,4 +1,4 @@
-@use '../../tokens';
+@use '../../tokens/shame' as newToken;
 @use '../../common';
 @use 'sass:map';
 
@@ -31,12 +31,10 @@
   }
 }
 
-
-
 // form info
 .form-info {
   @include common.font-size('s');
-  color: map-get(tokens.$grey, 3);
+  color: newToken.$text-secondary-color; //map-get(tokens.$grey, 3);
   display: block;
   max-width: fit-content;
   min-width: 100%;
@@ -52,19 +50,18 @@ input + .form-info,
   position: relative;
 }
 
-
 .was-validated input + .form-info {
   opacity: 0;
 }
 
 .was-validated input:not(.is-invalid):valid + .form-info,
 .is-valid ~ .form-info {
-  @include add-feedback(map.get(tokens.$intent-colors, 'success'));
+  @include add-feedback(newToken.$intent-color-success);
 }
 
 .was-validated input:not(.is-valid):invalid + .form-info,
 .is-invalid ~ .form-info {
-  @include add-feedback(map.get(tokens.$intent-colors, 'danger'));
+  @include add-feedback(newToken.$intent-color-danger);
 }
 
 /* rules for groups of checkboxes and radio buttons*/
@@ -75,11 +72,11 @@ fieldset {
   border: 0;
 
   &.is-valid {
-    box-shadow: 0 0 0 tokens.$border-width map.get(tokens.$intent-colors, 'success');
+    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-color-success;
   }
 
   &.is-invalid {
-    box-shadow: 0 0 0 tokens.$border-width map.get(tokens.$intent-colors, 'danger');
+    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-color-danger;
   }
 }
 

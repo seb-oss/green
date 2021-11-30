@@ -46,17 +46,37 @@ Styling is applied to `disabled`, `.disabled` and `aria-disabled="true"`. Note t
         <fieldset aria-describedby="checkboxGroupHelp1">
           <legend>Invalid checkbox group</legend>
           <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
-          <label class="form-control">One
+          <label class="form-control">
             <input required type="checkbox" disabled/>
-            <span></span>
+            <span>One</span>
+            <i/>
           </label>
-          <label class="form-control">Two
+          <label class="form-control">
             <input required type="checkbox" required disabled/>
-            <span></span>
+            <span>Two</span>
+            <i/>
           </label>
-          <label class="form-control">Three
+          <label class="form-control">
             <input required type="checkbox" checked="true" required disabled/>
-            <span></span>
+            <span>Three</span>
+            <i/>
+          </label>
+        </fieldset>
+        <span class="form-info">Hint</span>
+      </div>
+      <div class="form-group">
+        <fieldset aria-describedby="radioGroupHelp1">
+          <legend>Disabled radio group</legend>
+          <span id="radioGroupHelp1" class="form-info">Radio group description</span>
+          <label class="form-control">
+            <input required type="radio" disabled/>
+            <span>One</span>
+            <i/>
+          </label>
+          <label class="form-control">
+            <input required type="radio" required disabled/>
+            <span>Two</span>
+            <i/>
           </label>
         </fieldset>
         <span class="form-info">Hint</span>

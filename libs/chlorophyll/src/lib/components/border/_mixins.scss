@@ -1,0 +1,25 @@
+@use '../../tokens/shame' as newTokens;
+
+$radius: 4px;
+$width: 1px;
+$color: newTokens.$border-color;
+$color-invalid: newTokens.$border-color-invalid;
+$color-valid: newTokens.$border-color-valid;
+
+@mixin add-border-radius($radius: $radius) {
+  border-radius: $radius;
+}
+
+@mixin add-border($sides: false, $width: $width, $color: $color) {
+  @if not $sides {
+    border: solid $width $color;
+  } @else {
+    @each $side in $sides {
+      border-#{$side}: solid $width $color;
+    }
+  }
+}
+
+@mixin add-border-color($color: $color) {
+  --border-color: $color;
+}

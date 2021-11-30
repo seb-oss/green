@@ -1,19 +1,24 @@
 @use '../tokens';
+@use '../tokens/shame' as newTokens;
 
-@mixin add-border-radius($border-radius: tokens.$border-radius) {
+@mixin add-border-radius($border-radius: newTokens.$border-radius) {
   border-radius: $border-radius;
 }
 
-@mixin add-border($sides: false, $width: tokens.$border-width) {
+@mixin add-border(
+  $sides: false,
+  $width: newTokens.$border-width,
+  $color: newTokens.$border-color
+) {
   @if not $sides {
-    border: solid tokens.$border-width;
+    border: solid $width $color;
   } @else {
     @each $side in $sides {
-      border-#{$side}: solid $width;
+      border-#{$side}: solid $width $color;
     }
   }
 }
 
-@mixin add-border-color($color: tokens.$border-color) {
+@mixin add-border-color($color: newTokens.$border-color) {
   border-color: $color;
 }

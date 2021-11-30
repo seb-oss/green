@@ -1,0 +1,257 @@
+@use 'sass:map';
+@function get($property, $value, $theme: light) {
+  @return map.get(map.get($property, $theme), $value);
+}
+
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+
+$heading-primary-color: var(--heading-primary-color);
+$text-primary-color: var(--text-primary-color);
+$text-secondary-color: var(--text-secondary-color);
+$text-disabled-color: var(--text-disabled-color);
+$text-primary-disabled-color: var(--text-primary-disabled-color);
+$text-inherit-color: inherit;
+
+// Todo refactor link color (add to blue swatch)
+$link-color: rgb(0, 98, 188);
+$link-color-visited: rgb(103, 58, 182);
+
+// font weights
+$font-weight-light: 300;
+$font-weight-lighter: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 500;
+$font-weight-bolder: 800;
+
+$green: (
+  light: (
+    0: rgb(55, 157, 0),
+    1: rgb(69, 180, 0),
+    2: rgb(96, 205, 24),
+  ),
+  dark: (
+    0: rgb(143, 214, 104),
+    1: rgb(117, 186, 74),
+    2: rgb(96, 205, 24),
+  ),
+);
+
+$blue: (
+  light: (
+    0: rgb(0, 122, 199),
+    1: rgb(0, 146, 225),
+    2: rgb(65, 176, 238),
+  ),
+  dark: (
+    0: rgb(0, 122, 199),
+    1: rgb(0, 146, 225),
+    2: rgb(65, 176, 238),
+  ),
+);
+
+$red: (
+  light: (
+    0: rgb(187, 0, 12),
+    1: rgb(216, 26, 26),
+    2: rgb(240, 53, 41),
+  ),
+  dark: (
+    0: rgb(247, 112, 109),
+    1: rgb(219, 90, 88),
+    2: rgb(240, 53, 41),
+  ),
+);
+
+$yellow: (
+  light: (
+    0: rgb(248, 160, 0),
+    1: rgb(255, 180, 0),
+    2: rgb(255, 197, 0),
+  ),
+  dark: (
+    0: rgb(235, 171, 57),
+    1: rgb(240, 190, 71),
+    2: rgb(255, 225, 130),
+  ),
+);
+
+$grey: (
+  light: (
+    1100: rgb(26, 26, 26),
+    1000: rgb(51, 51, 51),
+    900: rgb(73, 73, 73),
+    800: rgb(134, 134, 134),
+    700: rgb(173, 173, 173),
+    600: rgb(206, 206, 206),
+    500: rgb(222, 222, 222),
+    400: rgb(233, 233, 233),
+    300: rgb(238, 238, 238),
+    // missing?
+    // background
+    200: rgb(248, 248, 248),
+    100: rgb(255, 255, 255),
+    // missing?
+  ),
+  dark: (
+    100: rgb(18, 18, 18),
+    // background
+    200: rgb(34, 34, 34),
+    300: rgb(39, 39, 39),
+    400: rgb(44, 44, 44),
+    500: rgb(51, 51, 51),
+    600: rgb(60, 60, 60),
+    // missing?
+    700: rgb(67, 67, 67),
+    // missing?
+    800: rgb(73, 73, 73),
+    900: rgb(117, 117, 117),
+    1000: rgb(171, 171, 171),
+    1100: rgb(179, 179, 179),
+    // missing?
+  ),
+);
+
+$disabled: (
+  light: (
+    'background': get($grey, 300),
+    'color': get($grey, 600),
+    'border': get($grey, 400),
+    'primary-background': get($grey, 300),
+    'primary-color': get($grey, 600),
+    'primary-border': get($grey, 400),
+  ),
+  dark: (
+    'background': transparentize($white, 0.98),
+    'color': transparentize($white, 0.93),
+    'border': get($grey, 400, 'dark'),
+    'primary-background': transparentize($white, 0.98),
+    'primary-color': transparentize($white, 0.93),
+    'primary-border': get($grey, 400, 'dark'),
+  ),
+);
+
+$shadows: (
+  light: (
+    'none': 0 0 0 0,
+    'sm': 0 0.125rem 0.375rem rgba($black, 0.15),
+    'md': 0 0.5rem 1rem rgba($black, 0.1),
+  ),
+  dark: (
+    'none': 0 0 0 0,
+    'sm': 0 0.125rem 0.375rem rgba($black, 0.15),
+    'md': 0 0.5rem 1rem rgba($black, 0.1),
+  ),
+);
+
+$intent: (
+  light: (
+    'info': get($blue, 0),
+    'success': get($green, 0),
+    'warning': get($yellow, 1),
+    'danger': get($red, 1),
+  ),
+  dark: (
+    'info': get($blue, 2, 'dark'),
+    'success': get($green, 0, 'dark'),
+    'warning': get($yellow, 2, 'dark'),
+    'danger': get($red, 0, 'dark'),
+  ),
+);
+
+$elevation-0-bg: var(--elevation-0-bg);
+$elevation-0-box-shadow: var(--elevation-0-box-shadow);
+$elevation-0-border-color: var(--elevation-0-border-color);
+$elevation-1-bg: var(--elevation-1-bg);
+$elevation-1-box-shadow: var(--elevation-1-box-shadow);
+$elevation-1-border-color: var(--elevation-1-border-color);
+$elevation-2-bg: var(--elevation-2-bg);
+$elevation-2-box-shadow: var(--elevation-2-box-shadow);
+$elevation-2-border-color: var(--elevation-2-border-color);
+
+$border-color: var(--border-color);
+$border-width: 1px;
+$border-radius: 4px;
+$border-disabled-color: var(--border-disabled-color);
+$border-primary-disabled-color: var(--border-primary-disabled-color);
+$border-color-invalid: var(--border-color-invalid);
+$border-color-valid: var(--border-color-valid);
+
+$intent-color-success: var(--intent-color-success);
+$intent-color-info: var(--intent-color-info);
+$intent-color-warning: var(--intent-color-warning);
+$intent-color-danger: var(--intent-color-danger);
+
+$checkbox-checkmark-disabled-color: var(--checkbox-checkmark-disabled-color);
+$form-control-bg: var(--form-control-bg);
+$form-control-bg-disabled: var(--form-control-bg-disabled);
+$form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
+
+@mixin dark-mode() {
+  --heading-primary-color: $white;
+  --text-primary-color: #{transparentize($white, 0.1)};
+  --text-secondary-color: #{transparentize($white, 0.4)};
+  --text-disabled-color: #{get($disabled, 'color', 'dark')};
+  --text-primary-disabled-color: #{get($disabled, 'primary-color', 'dark')};
+  --border-color: #{get($grey, 500, 'dark')};
+  --border-disabled-color: #{get($disabled, 'border', 'dark')};
+  --border-primary-disabled-color: #{get($disabled, 'primary-border', 'dark')};
+  --border-color-invalid: #{get($intent, 'danger', 'dark')};
+  --border-color-valid: #{get($intent, 'success', 'dark')};
+  --checkbox-checkmark-disabled-color: #{get($grey, 500, 'dark')};
+  --form-control-bg: #{transparentize($black, 0.9)};
+  --form-control-bg-disabled: #{get($disabled, 'background', 'dark')};
+  --form-control-primary-bg-disabled: #{get($disabled,
+  'primary-background',
+  'dark')};
+  --elevation-0-bg: #{get($grey, 100, 'dark')};
+  --elevation-0-box-shadow: #{get($shadows, 'none', 'dark')};
+  --elevation-0-border-color: #{get($grey, 100, 'dark')};
+  --elevation-1-bg: #{get($grey, 200, 'dark')};
+  --elevation-1-box-shadow: #{get($shadows, 'none', 'dark')};
+  --elevation-1-border-color: #{get($grey, 200, 'dark')};
+  --elevation-2-bg: #{get($grey, 300, 'dark')};
+  --elevation-2-box-shadow: #{get($shadows, 'none', 'dark')};
+  --elevation-2-border-color: #{get($grey, 300, 'dark')};
+  --intent-color-success: #{get($intent, 'success', 'dark')};
+  --intent-color-info: #{get($intent, 'info', 'dark')};
+  --intent-color-warning: #{get($intent, 'warning', 'dark')};
+  --intent-color-danger: #{get($intent, 'danger', 'dark')};
+  color: var(--text-primary-color);
+}
+
+@mixin light-mode() {
+  --heading-primary-color: $black;
+  --text-primary-color: #{transparentize($black, 0.1)};
+  --text-secondary-color: #{transparentize($black, 0.475)}; // #767676 against white 4.5 contrast
+  --text-disabled-color: #{get($disabled, 'color')};
+  --text-primary-disabled-color: #{get($disabled, 'primary-color')};
+  --border-color: #{transparentize($black, 0.83)}; // #CECECE against white
+  --border-disabled-color: #{get($disabled, 'border')};
+  --border-primary-disabled-color: #{get($disabled, 'primary-border')};
+  --border-color-invalid: #{get($intent, 'danger')};
+  --border-color-valid: #{get($intent, 'success')};
+  --checkbox-checkmark-disabled-color: #{$white};
+  --form-control-bg: #{$white};
+  --form-control-bg-disabled: #{get($disabled, 'background')};
+  --form-control-primary-bg-disabled: #{get($disabled, 'primary-background')};
+  --elevation-0-bg: #{get($grey, 300)};
+  --elevation-0-box-shadow: #{get($shadows, 'none')};
+  --elevation-0-border-color: #{get($grey, 100)};
+  --elevation-1-bg: #{get($grey, 100)};
+  --elevation-1-box-shadow: #{get($shadows, 'sm')};
+  --elevation-1-border-color: #{get($grey, 100)};
+  --elevation-2-bg: #{get($grey, 100)};
+  --elevation-2-box-shadow: #{get($shadows, 'md')};
+  --elevation-2-border-color: #{get($grey, 100)};
+  --intent-color-success: #{get($intent, 'success')};
+  --intent-color-info: #{get($intent, 'info')};
+  --intent-color-warning: #{get($intent, 'warning')};
+  --intent-color-danger: #{get($intent, 'danger')};
+  color: var(--text-primary-color);
+}
+
+/* For testing purposes only! TODO: remove */
+.elevation-2 {
+  background: var(--elevation-2-bg);
+}

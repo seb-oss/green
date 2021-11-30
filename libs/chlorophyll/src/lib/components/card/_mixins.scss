@@ -1,0 +1,13 @@
+@use '../../tokens/shame' as newToken;
+
+$padding-spacing: 5;
+$header-spacing-top: 0;
+$header-spacing-bottom: 4;
+$box-shadow: newToken.$elevation-1-box-shadow;
+$background: newToken.$elevation-1-bg;
+$heading-color: newToken.$heading-primary-color;
+$text-color: newToken.$text-inherit-color;
+$border: solid 1px newToken.$elevation-1-border-color;
+$border-radius: 0;
+$layout-direction: column;
+$shadow-level: 1;

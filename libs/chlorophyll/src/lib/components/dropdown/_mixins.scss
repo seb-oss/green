@@ -1,6 +1,10 @@
 @use '../../tokens';
+@use '../../tokens/shame' as newTokens;
 @use '../../common';
 @use 'sass:map';
+
+$box-shadow: newTokens.$elevation-1-box-shadow;
+$z-index: tokens.$zindex-dropdown;
 
 @mixin dropdown-trigger {
   @include common.padding-horizontal(5);
@@ -10,7 +14,7 @@
   @include common.add-border-color();
   @include common.add-focus('');
   @include common.add-hover-state();
-  color: #000;
+  color: newTokens.$text-primary-color;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -47,7 +51,7 @@
   opacity: 0;
   position: fixed;
   visibility: hidden;
-  z-index: tokens.$zindex-dropdown;
+  z-index: $z-index;
   @include common.media-breakpoint-only(xs) {
     @include common.add-border('top');
     @include common.add-border-color(map.get(tokens.$grey, 6));
@@ -63,10 +67,10 @@
 
   @include common.media-breakpoint-up(sm) {
     @include common.padding-bottom(0);
-    @include common.add-shadow(1);
     @include common.add-border();
     @include common.add-border-color(map.get(tokens.$blue, 0));
     @include common.add-border-radius();
+    box-shadow: $box-shadow;
     min-width: 90px;
     position: absolute;
   }

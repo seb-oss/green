@@ -1,6 +1,6 @@
-@use '../../tokens';
+@use '../../tokens/shame' as newTokens;
 @use '../../common';
-@use '../../components/button';
+@use '../../components/button/mixins' as button;
 
 @mixin alert {
   @include common.padding-horizontal(5);
@@ -14,7 +14,7 @@
 }
 
 @mixin alert-variant($color) {
-  @include common.desired-color-combination(tokens.$white, $color);
+  @include common.desired-color-combination(newTokens.$white, $color);
 
   a {
     color: inherit;
@@ -25,7 +25,7 @@
   }
 
   button {
-    $bg: common.desired-color-combination(tokens.$white, $color);
+    $bg: common.desired-color-combination(newTokens.$white, $color);
     @include button.ghost(nth($bg, 1));
   }
 }

@@ -1,18 +1,23 @@
-@use '../../tokens';
+@use '../../tokens/shame' as newTokens;
 @use '../../common';
+
+$font-weight: 'medium';
+$color: newTokens.$link-color;
+$color-active: newTokens.$text-primary-color;
+$border-width: newTokens.$border-width;
 
 @mixin tab {
   @include common.add-border($sides: 'bottom');
   @include common.add-border-color;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  @include common.font-weight('medium');
+  @include common.font-weight($font-weight);
   @include common.min-width(10);
 
   @include common.add-hover-state;
   @include common.add-focus;
 
-  color: map-get(tokens.$theme-colors, 'primary');
+  color: $color;
   text-align: center;
   text-decoration: none;
 }
@@ -25,12 +30,11 @@
       'left',
     )
   );
-  @include common.add-border-color;
 
   @include common.add-hover-state;
 
-  border-bottom: tokens.$border-width transparent;
-  color: map-get(tokens.$grey, 1);
+  border-bottom: $border-width transparent;
+  color: $color-active;
 }
 
 @mixin tabs-bar {
