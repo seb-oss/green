@@ -11,9 +11,13 @@
   ],
   "exclude": [
     "../**/*.spec.ts",
+    "../**/*.test.ts",
     "../**/*.spec.js",
+    "../**/*.test.js",
     "../**/*.spec.tsx",
-    "../**/*.spec.jsx"
+    "../**/*.test.tsx",
+    "../**/*.spec.jsx",
+    "../**/*.test.jsx"
   ],
   "include": ["../src/**/*", "*.js"]
 }
