@@ -44,6 +44,7 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
+  "defaultProject": "chlorophyll",
   "generators": {
     "@nrwl/angular:application": {
       "style": "scss",
