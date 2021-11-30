@@ -166,7 +166,11 @@ export class NggPopoverElementDirective implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.removePopper()
-    this.disableBodyScrollLock()
+
+    // enable scroll if body scroll lock is used
+    if (this.popover.config.useBodyScrollLock) {
+      this.enableBodyScrollLock()
+    }
 
     // remove container if declared
     if (this._container) {
