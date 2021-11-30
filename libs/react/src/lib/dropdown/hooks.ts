@@ -64,6 +64,9 @@ export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult =
     }))
     setListItems(newListItems)
 
+    return () => {
+      unobserve(dropdown)
+    }
   }, [dropdown])
 
   useEffect(() => {

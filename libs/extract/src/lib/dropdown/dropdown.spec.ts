@@ -84,6 +84,7 @@ describe('dropdown', () => {
         const dropdown = create({ id, options })
 
         expect(dropdown.elements.listbox.attributes).toEqual({
+          id,
           role: 'listbox',
           tabIndex: -1,
         })
@@ -121,7 +122,6 @@ describe('dropdown', () => {
         const { classes } = dropdown.elements.listbox
         expect(classes).toContain('active')
       })
-
       describe('close', () => {
         beforeEach(() => {
           dropdown = close(dropdown)

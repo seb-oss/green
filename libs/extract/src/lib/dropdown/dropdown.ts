@@ -58,6 +58,9 @@ export const create = ({ id = randomId(), text, options: _options, loop }: Dropd
       toggler: {
         attributes: { 'aria-owns': id },
       },
+      listbox: {
+        attributes: { id },
+      },
     },
     options,
     loop,
