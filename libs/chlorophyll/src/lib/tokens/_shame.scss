@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../common/functions';
 @function get($property, $value, $theme: light) {
   @return map.get(map.get($property, $theme), $value);
 }
@@ -12,6 +13,9 @@ $text-secondary-color: var(--text-secondary-color);
 $text-disabled-color: var(--text-disabled-color);
 $text-primary-disabled-color: var(--text-primary-disabled-color);
 $text-inherit-color: inherit;
+
+$fadable-foreground-color: var(--fadable-foreground-color);
+$fadable-background-color: var(--fadable-background-color);
 
 // Todo refactor link color (add to blue swatch)
 $link-color: rgb(0, 98, 188);
@@ -170,6 +174,7 @@ $elevation-2-box-shadow: var(--elevation-2-box-shadow);
 $elevation-2-border-color: var(--elevation-2-border-color);
 
 $border-color: var(--border-color);
+$border-secondary-color: var(--border-secondary-color);
 $border-width: 1px;
 $border-radius: 4px;
 $border-disabled-color: var(--border-disabled-color);
@@ -193,7 +198,10 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --text-secondary-color: #{transparentize($white, 0.4)};
   --text-disabled-color: #{get($disabled, 'color', 'dark')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color', 'dark')};
+  --fadable-foreground-color: #{functions.stripped-rgb($white)};
+  --fadable-background-color: #{functions.stripped-rgb(get($grey, 100, 'dark'))};
   --border-color: #{get($grey, 500, 'dark')};
+  --border-secondary-color: #{get($grey, 500, 'dark')};
   --border-disabled-color: #{get($disabled, 'border', 'dark')};
   --border-primary-disabled-color: #{get($disabled, 'primary-border', 'dark')};
   --border-color-invalid: #{get($intent, 'danger', 'dark')};
@@ -226,7 +234,10 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --text-secondary-color: #{transparentize($black, 0.475)}; // #767676 against white 4.5 contrast
   --text-disabled-color: #{get($disabled, 'color')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
+  --fadable-foreground-color: #{functions.stripped-rgb($black)};
+  --fadable-background-color: #{functions.stripped-rgb($white)};
   --border-color: #{transparentize($black, 0.83)}; // #CECECE against white
+  --border-secondary-color: #{transparentize($black, 0.9)};
   --border-disabled-color: #{get($disabled, 'border')};
   --border-primary-disabled-color: #{get($disabled, 'primary-border')};
   --border-color-invalid: #{get($intent, 'danger')};

@@ -5,6 +5,9 @@
 
 $box-shadow: newTokens.$elevation-1-box-shadow;
 $z-index: tokens.$zindex-dropdown;
+$color: newTokens.$text-primary-color;
+$background: newTokens.$form-control-bg;
+$popover-bg: newTokens.$elevation-1-bg;
 
 @mixin dropdown-trigger {
   @include common.padding-horizontal(5);
@@ -14,7 +17,8 @@ $z-index: tokens.$zindex-dropdown;
   @include common.add-border-color();
   @include common.add-focus('');
   @include common.add-hover-state();
-  color: newTokens.$text-primary-color;
+  background: $background;
+  color: $color;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -44,7 +48,7 @@ $z-index: tokens.$zindex-dropdown;
 }
 
 @mixin popover {
-  background-color: tokens.$white;
+  background-color: $popover-bg;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -54,7 +58,7 @@ $z-index: tokens.$zindex-dropdown;
   z-index: $z-index;
   @include common.media-breakpoint-only(xs) {
     @include common.add-border('top');
-    @include common.add-border-color(map.get(tokens.$grey, 6));
+    @include common.add-border-color();
     @include common.padding-bottom(3);
     border-radius: 1rem 1rem 0 0;
     bottom: 0;
