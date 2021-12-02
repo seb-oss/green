@@ -1,5 +1,6 @@
 @use '../../../chlorophyll/src/lib/tokens/color';
 @use '../../../chlorophyll/src/lib/tokens';
+@use '../../../chlorophyll/src/lib/tokens/shame' as newTokens;
 @use 'sass:map';
 @use 'shame';
 // @use 'node_modules/billboard.js/src/scss/billboard';
@@ -7,7 +8,7 @@
 $font-family: 'SEBSansSerif', Arial, sans-serif;
 $axis-color: #8c8c8c;
 
-$axis-text-color: color.$black;
+$axis-text-color: newTokens.$text-primary-color;
 $axis-text-size: tokens.$base-font-size;
 $axis-text-weight: tokens.font-weight('regular');
 
@@ -20,13 +21,13 @@ $y-axis-tick-thickness: $y-axis-thickness;
 
 $x-axis-text-color: $axis-text-color;
 
-$x-axis-color: map.get(color.$grey, 6);
+$x-axis-color: newTokens.$border-secondary-color; //map.get(color.$grey, 6);
 $x-axis-thickness: 1px;
 $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
 $grid-focus-line-color: map.get(color.$blue, 2);
-$grid-base-line-color: map.get(color.$grey, 6);
+$grid-base-line-color: newTokens.$border-secondary-color; // map.get(color.$grey, 6);
 
 @mixin select-none {
   user-select: none;
@@ -439,7 +440,7 @@ use.bb-circle {
   }
 
   path {
-    stroke: #fff;
+    stroke: transparent;
   }
 
   rect {
