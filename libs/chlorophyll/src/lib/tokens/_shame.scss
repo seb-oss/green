@@ -79,7 +79,7 @@ $yellow: (
     2: rgb(255, 225, 130),
   ),
 );
-
+/* stylelint-disable */
 $grey: (
   light: (
     1100: rgb(26, 26, 26),
@@ -115,6 +115,7 @@ $grey: (
     // missing?
   ),
 );
+/* stylelint-enable */
 
 $disabled: (
   light: (
@@ -192,6 +193,7 @@ $form-control-bg: var(--form-control-bg);
 $form-control-bg-disabled: var(--form-control-bg-disabled);
 $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 
+/* stylelint-disable */
 @mixin dark-mode() {
   --heading-primary-color: $white;
   --text-primary-color: #{transparentize($white, 0.1)};
@@ -209,9 +211,11 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --checkbox-checkmark-disabled-color: #{get($grey, 500, 'dark')};
   --form-control-bg: #{transparentize($black, 0.9)};
   --form-control-bg-disabled: #{get($disabled, 'background', 'dark')};
-  --form-control-primary-bg-disabled: #{get($disabled,
-  'primary-background',
-  'dark')};
+  --form-control-primary-bg-disabled: #{get(
+      $disabled,
+      'primary-background',
+      'dark'
+    )};
   --elevation-0-bg: #{get($grey, 100, 'dark')};
   --elevation-0-box-shadow: #{get($shadows, 'none', 'dark')};
   --elevation-0-border-color: #{get($grey, 100, 'dark')};
@@ -261,6 +265,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --intent-color-danger: #{get($intent, 'danger')};
   color: var(--text-primary-color);
 }
+/* stylelint-enable */
 
 /* For testing purposes only! TODO: remove */
 .elevation-2 {
