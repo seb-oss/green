@@ -1,5 +1,6 @@
 export * from './lib/alert'
 export * from './lib/button'
+export * from './lib/dropdown'
 export * from './lib/form'
 export * from './lib/id'
 export * from './lib/modal'

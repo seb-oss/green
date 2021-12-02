@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Dropdown } from './dropdown'
+
+export const Template = (props) => <Dropdown {...props}>Select</Dropdown>
+
+<Meta title="Components/Dropdown" component={Dropdown} />
+
+# Dropdown
+
+<Canvas>
+  <Story
+    name="Dropdown"
+    args={{
+      loop: true,
+      options: [
+        {
+          key: 'Option 1',
+          value: 1,
+        },
+        {
+          key: 'Option 2',
+          value: 2,
+        },
+        {
+          key: 'Option 3',
+          value: 3,
+        },
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
