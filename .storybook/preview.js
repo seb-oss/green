@@ -8,6 +8,7 @@ export const parameters = {
     dark,
     light,
     stylePreview: true,
+    darkClass: 'dark-mode',
   },
   /*docs: {
     theme: themes.dark,
