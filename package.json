@@ -39,9 +39,6 @@
     ]
   },
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "@angular/animations": "13.0.2",
     "@angular/common": "13.0.2",
@@ -57,6 +54,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "browserslist": "^4.16.8",
     "core-js": "^3.16.3",
+    "merge": "^2.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
@@ -173,6 +171,7 @@
     "glob-parent": "^6.0.1",
     "immer": "^9.0.6",
     "jpeg-js": "^0.4.3",
+    "json-schema": "^0.4.0",
     "minimist": "^1.2.3",
     "nth-check": "^2.0.1",
     "prismjs": "^1.25.0",
