@@ -1,7 +1,11 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import { Dropdown } from './dropdown'
 
-export const Template = (props) => <Dropdown {...props}>Select</Dropdown>
+export const Template = ({ align, ...props }) => (
+  <div style={{ position: 'relative', paddingTop: '150px' }}>
+    <Dropdown {...props}>Select</Dropdown>
+  </div>
+)
 
 <Meta title="Components/Dropdown" component={Dropdown} />
 
@@ -11,18 +15,19 @@ export const Template = (props) => <Dropdown {...props}>Select</Dropdown>
   <Story
     name="Dropdown"
     args={{
+      align: 'start',
       loop: true,
       options: [
         {
-          key: 'Option 1',
+          key: 'Really long option value 1',
           value: 1,
         },
         {
-          key: 'Option 2',
+          key: 'Really long option value 2',
           value: 2,
         },
         {
-          key: 'Option 3',
+          key: 'Really long option value 3',
           value: 3,
         },
       ],

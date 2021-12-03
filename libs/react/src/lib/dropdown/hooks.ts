@@ -10,13 +10,15 @@ import {
   AbstractDropdown,
   DropdownOption,
 } from '@sebgroup/extract'
-import { HTMLAttributes, useEffect, useState } from 'react'
+import { HTMLAttributes, RefObject, useEffect, useState, CSSProperties } from 'react'
 
 interface HookArgs {
   id?: string
   text?: string
   options: DropdownOption[]
   loop?: boolean
+  togglerRef: RefObject<HTMLElement>
+  listboxRef: RefObject<HTMLElement>
 }
 
 type Props = HTMLAttributes<HTMLElement>
@@ -30,15 +32,15 @@ interface HookResult {
   close: () => void
 }
 
-export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult => {
+export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }: HookArgs): HookResult => {
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
   const [togglerProps, setTogglerProps] = useState<Props>({})
   const [listboxProps, setListboxProps] = useState<Props>({})
   const [listItems, setListItems] = useState<Props[]>([])
 
   useEffect(() => {
-    if (!dropdown) return
-    observe(dropdown, setDropdown)
+    if (!dropdown || !togglerRef.current || !listboxRef.current) return
+    observe(dropdown, togglerRef.current, listboxRef.current, setDropdown)
 
     const { elements: { toggler, listbox } } = dropdown
 
@@ -67,7 +69,7 @@ export const useDropdown = ({ id, text, options, loop }: HookArgs): HookResult =
     return () => {
       unobserve(dropdown)
     }
-  }, [dropdown])
+  }, [dropdown, togglerRef, listboxRef])
 
   useEffect(() => {
     setDropdown(create({ id, text, options, loop }))
