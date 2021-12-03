@@ -13,6 +13,7 @@ export interface ExtendedDropdownOption
 export interface Attributes extends AriaAttributes {
   id?: string
   role?: string
+  style?: CSSStyleDeclaration
   tabIndex?: number
 }
 

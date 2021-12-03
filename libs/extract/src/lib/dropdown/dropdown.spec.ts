@@ -1,9 +1,9 @@
+import { createPopper } from '@popperjs/core'
 import {
   activate,
   close,
   create,
   deactivate,
-  focus,
   observe,
   open,
   select,
@@ -11,6 +11,10 @@ import {
   unobserve,
 } from './dropdown'
 import { AbstractDropdown, DropdownOption } from './types'
+
+jest.mock('@popperjs/core', () => ({
+  createPopper: jest.fn().mockName('createPopper')
+}))
 
 describe('dropdown', () => {
   let id: string
@@ -255,8 +259,6 @@ describe('dropdown', () => {
       afterEach(() => unobserve(dropdown))
       describe('when inactive', () => {
         it('does not trigger key events', () => {
-          observe(dropdown, listener)
-
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
@@ -379,6 +381,19 @@ describe('dropdown', () => {
             const [dd] = listener.mock.calls[0]
             expect(dd.options[1].selected).toBe(true)
           })
+        })
+      })
+      describe('popper', () => {
+        beforeEach(() => {
+          global.innerWidth = 1024
+          dropdown = activate(close(dropdown))
+          observe(dropdown, listener)
+        })
+        it('calls createPopper if width < 576', () => {
+          global.innerWidth = 500
+          global.dispatchEvent(new UIEvent('resize'))
+          
+          expect(createPopper).toHaveBeenCalled()
         })
       })
     })

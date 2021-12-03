@@ -1,5 +1,6 @@
-import { fromEvent, Observable, Subscription } from 'rxjs'
+import { fromEvent, merge, Observable, Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { createPopper, Instance } from '@popperjs/core'
 import { dropdownValues, optionValues } from './defaultValues'
 import { randomId } from '../id'
 import reduce from '../reduce'
@@ -148,66 +149,101 @@ export const deactivate = (dropdown: AbstractDropdown): AbstractDropdown => (
 )
 
 const observers: Record<string, {
-  subscription: Subscription,
-  observable: Observable<KeyboardEvent>
+  keyboardEvents: Observable<KeyboardEvent>
+  uiEvents: Observable<UIEvent>
+  subscription: Subscription
+  popper?: Instance
 }> = {}
 type Listener = (dropdown: AbstractDropdown) => void
-export const observe = (dropdown: AbstractDropdown, listener: Listener): AbstractDropdown => {
-  let observable: Observable<KeyboardEvent>
+export const observe = (dropdown: AbstractDropdown, toggler: HTMLElement, listbox: HTMLElement, listener: Listener): AbstractDropdown => {
+  let keyboardEvents: Observable<KeyboardEvent>
+  let uiEvents: Observable<UIEvent>
   let subscription: Subscription
+  let popper: Instance|undefined
 
   if (!observers[dropdown.id]) {
-    observable = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+    uiEvents = fromEvent<UIEvent>(window, 'resize')
+    keyboardEvents = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
       filter((event) => ['ArrowDown', 'ArrowUp', 'Escape', 'Home', 'End', ' '].includes(event.key))
     )
   } else {
-    ({ observable, subscription } = observers[dropdown.id]);
+    ({ keyboardEvents, uiEvents, subscription, popper } = observers[dropdown.id]);
     if (subscription) subscription.unsubscribe()
   }
 
-  subscription = observable.subscribe((event) => {
-    if (!dropdown.isActive) return
-    event.preventDefault()
-    let newState: AbstractDropdown
-    const opts = dropdown.options
-    switch (event.key) {
-      case ' ':
-        newState = toggle(dropdown)
-        break
-      case 'Escape':
-        if (!dropdown.isOpen) return
-        newState = close(dropdown)
-        break
-      case 'ArrowDown':
-        newState = (dropdown.isOpen)
-          ? select(dropdown, 1) 
-          : open(select(dropdown, opts[0]))
-        break
-      case 'ArrowUp':
-        newState = (dropdown.isOpen)
-          ? select(dropdown, -1) 
-          : open(select(dropdown, (dropdown.loop) ? opts[opts.length - 1] : opts[0]))
-        break
-      case 'Home':
-        newState = open(select(dropdown, opts[0]))
-        break
-      case 'End':
-        newState = open(select(dropdown, opts[opts.length - 1]))
-        break
-      default:
-        return
+  subscription = merge(keyboardEvents, uiEvents).subscribe(async (event) => {
+    if (event.type === 'keydown') {
+      if (!dropdown.isActive) return
+      event.preventDefault()
+
+      const { key } = event as KeyboardEvent
+      const newState = handleKeyPress(key, dropdown)
+      if (newState) {
+        popper?.update()
+        listener(newState)
+      }
+    } else if (event.type === 'resize') {
+      const { innerWidth } = event.target as Window
+      if (innerWidth < 576) {
+        popper?.destroy()
+        popper = undefined
+        const newState = reduce(dropdown, { elements: { listbox: { attributes: { style: undefined } } } })
+        listener(newState)
+      } else {
+        if (!popper) popper = createPopper(toggler, listbox, {
+          placement: 'bottom-start',
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 4],
+              },
+            },
+          ],
+        })
+        const { styles } = await popper.update()
+        if (styles.popper) {
+          const style = styles.popper as CSSStyleDeclaration
+          const newState = reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
+          listener(newState)
+        }
+      }
     }
-    listener(newState)
+    observers[dropdown.id].popper = popper
   })
 
-  observers[dropdown.id] = { observable, subscription }
-
+  observers[dropdown.id] = { keyboardEvents, uiEvents, subscription, popper }
+  popper?.update()
   return dropdown
 }
 export const unobserve = (dropdown: AbstractDropdown): AbstractDropdown => {
   if (observers[dropdown.id]) {
     observers[dropdown.id].subscription.unsubscribe()
+    observers[dropdown.id].popper?.destroy()
     delete observers[dropdown.id]
   }
   return dropdown
+}
+const handleKeyPress = (key: string, dropdown: AbstractDropdown): AbstractDropdown|undefined => {
+  const opts = dropdown.options
+  switch (key) {
+    case ' ':
+      return toggle(dropdown)
+    case 'Escape':
+      if (!dropdown.isOpen) return
+      return close(dropdown)
+    case 'ArrowDown':
+      return (dropdown.isOpen)
+        ? select(dropdown, 1) 
+        : open(select(dropdown, opts[0]))
+    case 'ArrowUp':
+      return (dropdown.isOpen)
+        ? select(dropdown, -1) 
+        : open(select(dropdown, (dropdown.loop) ? opts[opts.length - 1] : opts[0]))
+    case 'Home':
+      return open(select(dropdown, opts[0]))
+    case 'End':
+      return open(select(dropdown, opts[opts.length - 1]))
+    default: return
+  }
 }
