@@ -43,18 +43,30 @@ export const createDropdown = (
   handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
   handler.update = (props) => update(handler, listener, create(props))
 
-  handler.subscription = merge<KeyboardEvent, UIEvent>(
+  handler.subscription = merge<KeyboardEvent, UIEvent, MouseEvent>(
     fromEvent(document, 'keydown'),
     fromEvent(window, 'resize'),
+    fromEvent(document, 'click'),
   ).subscribe((event) => {
-    if (event.type === 'keydown') {
-      if (!handler.dropdown.isActive) return
-      event.preventDefault()
-
-      const { key } = event as KeyboardEvent
-      update(handler, listener, keypress(handler.dropdown, key))
-    } else {
-      pop(handler, listener, (event.target as Window).innerWidth)
+    switch (event.type) {
+      case 'keydown': {
+        if (!handler.dropdown.isActive) return
+        event.preventDefault()
+        const { key } = event as KeyboardEvent
+        update(handler, listener, keypress(handler.dropdown, key))
+        break
+      }
+      case 'resize': {
+        pop(handler, listener, (event.target as Window).innerWidth)
+        break
+      }
+      case 'click': {
+        const container = handler.toggler.parentElement
+        const clickedOn = event.target as HTMLElement
+        if (!container?.contains(clickedOn)) {
+          update(handler, listener, active(close(handler.dropdown), false))
+        }
+      }
     }
   })
 

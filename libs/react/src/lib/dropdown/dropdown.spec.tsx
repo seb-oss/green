@@ -75,29 +75,39 @@ describe('Dropdown', () => {
       })
     })
   })
-  describe('select item', () => {
+  describe('mouse interaction', () => {
     beforeEach(async () => {
       await act(async () => {
         fireEvent.click(toggleButton)
       })
     })
-    it('sets aria-selected', async () => {
-      await act(async () => {
-        fireEvent.click(options[1])
-        await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
+    describe('click option', () => {
+      it('sets aria-selected', async () => {
+        await act(async () => {
+          fireEvent.click(options[1])
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
+        })
+      })
+      it('closes dropdown', async () => {
+        await act(async () => {
+          fireEvent.click(options[1])
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+          await waitFor(() => expect(listbox.className).toEqual('popover'))
+        })
+      })
+      it('sets toggler text', async () => {
+        await act(async () => {
+          fireEvent.click(options[1])
+          await waitFor(() => expect(toggleButton.innerHTML.trim()).toEqual('B'))
+        })
       })
     })
-    it('closes dropdown', async () => {
-      await act(async () => {
-        fireEvent.click(options[1])
-        await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
-        await waitFor(() => expect(listbox.className).toEqual('popover'))
-      })
-    })
-    it('sets toggler text', async () => {
-      await act(async () => {
-        fireEvent.click(options[1])
-        await waitFor(() => expect(toggleButton.innerHTML.trim()).toEqual('B'))
+    describe('click outside', () => {
+      it('closes the dropdown', async () => {
+        await act(async () => {
+          fireEvent.click(document.body)
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
     })
   })
