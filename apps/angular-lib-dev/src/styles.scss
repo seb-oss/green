@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use './libs/chlorophyll/src/lib' with (
-  $font-path: '../fonts'
-);
+@use './libs/chlorophyll/scss' with ($font-path: '../fonts');
+
+@use './libs/charts/scss' as charts;
