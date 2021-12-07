@@ -10,7 +10,6 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { inspect } from 'util'
 
 interface HookArgs {
   id?: string
@@ -38,6 +37,7 @@ export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }:
   const [listboxProps, setListboxProps] = useState<Props>({})
   const [listItems, setListItems] = useState<Props[]>([])
 
+  // When dropdown data changes
   useEffect(() => {
     if (!dropdown) return
 
@@ -67,6 +67,15 @@ export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }:
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dropdown])
 
+  // When dropdown properties change
+  useEffect(() => {
+    if (!dropdown) return
+    handler?.update({ id, text, options, loop })
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, text, options, loop])
+
+  // Create dropdown handler
   useEffect(() => {
     if (!handler && togglerRef.current && listboxRef.current) {
       setHandler(createDropdown({ id, text, options, loop }, togglerRef.current, listboxRef.current, setDropdown))

@@ -5,6 +5,7 @@ import {
   open,
   select,
   toggle,
+  loop,
 } from './reducers'
 import { AbstractDropdown, DropdownOption } from './types'
 
@@ -145,6 +146,16 @@ describe('dropdown/reducers', () => {
         expect(dropdown.isActive).toBe(false)
       })
     })
+    describe('loop', () => {
+      it('sets isLooping to true', () => {
+        dropdown = loop(dropdown, true)
+        expect(dropdown.isLooping).toBe(true)
+      })
+      it('sets isActive to false', () => {
+        dropdown = loop(dropdown, false)
+        expect(dropdown.isLooping).toBe(false)
+      })
+    })
     describe('toggle', () => {
       it('switches between open and close', () => {
         expect(dropdown.isOpen).toBe(false)
@@ -214,7 +225,7 @@ describe('dropdown/reducers', () => {
         })
         describe('loop', () => {
           beforeEach(() => {
-            dropdown = active({ ...dropdown, loop: true }, true)
+            dropdown = active(loop(dropdown, true), true)
           })
           it('sets last if no selection and step is -1', () => {
             dropdown = select(dropdown, -1)

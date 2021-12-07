@@ -18,15 +18,9 @@ import {
   AbstractDropdown,
   DropdownHandler,
   DropdownListener,
-  DropdownOption,
+  DropdownArgs,
 } from './types'
 
-interface DropdownArgs {
-  id?: string
-  options: DropdownOption[]
-  loop?: boolean
-  text?: string
-}
 export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
@@ -47,6 +41,7 @@ export const createDropdown = (
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
   handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
+  handler.update = (props) => update(handler, listener, create(props))
 
   handler.subscription = merge<KeyboardEvent, UIEvent>(
     fromEvent(document, 'keydown'),

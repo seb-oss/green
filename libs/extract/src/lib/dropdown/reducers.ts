@@ -61,7 +61,7 @@ export const create = ({ id = randomId(), text, options: _options, loop }: Dropd
       },
     },
     options,
-    loop,
+    isLooping: loop,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -106,8 +106,8 @@ export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOp
     const opts = dropdown.options
     const currentlySelectedIndex = opts.findIndex((o) => o.selected)
     let newSelectedIndex = currentlySelectedIndex + selection
-    if (newSelectedIndex < 0) newSelectedIndex = dropdown.loop ? opts.length - 1 : 0
-    if (newSelectedIndex >= opts.length) newSelectedIndex = dropdown.loop ? 0 : opts.length - 1
+    if (newSelectedIndex < 0) newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
+    if (newSelectedIndex >= opts.length) newSelectedIndex = dropdown.isLooping ? 0 : opts.length - 1
     option = opts[newSelectedIndex]
   } else {
     option = selection
@@ -133,7 +133,7 @@ export const active = (dropdown: AbstractDropdown, isActive: boolean): AbstractD
   reduce(dropdown, { isActive } as Partial<AbstractDropdown>)
 )
 export const loop = (dropdown: AbstractDropdown, isLooping: boolean): AbstractDropdown => (
-  reduce(dropdown, { loop: isLooping } as Partial<AbstractDropdown>)
+  reduce(dropdown, { isLooping } as Partial<AbstractDropdown>)
 )
 export const keypress = (dropdown: AbstractDropdown, key: string): AbstractDropdown|undefined => {
   const opts = dropdown.options
@@ -150,7 +150,7 @@ export const keypress = (dropdown: AbstractDropdown, key: string): AbstractDropd
     case 'ArrowUp':
       return (dropdown.isOpen)
         ? select(dropdown, -1) 
-        : open(select(dropdown, (dropdown.loop) ? opts[opts.length - 1] : opts[0]))
+        : open(select(dropdown, (dropdown.isLooping) ? opts[opts.length - 1] : opts[0]))
     case 'Home':
       return open(select(dropdown, opts[0]))
     case 'End':
