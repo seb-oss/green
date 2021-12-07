@@ -13,9 +13,7 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
   const {
-    activate,
-    deactivate,
-    close,
+    dropdown,
     listboxProps,
     togglerProps,
     listItems,
@@ -29,10 +27,10 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
   })
 
   return (
-    <div onFocus={activate} onBlur={deactivate}>
+    <div onFocus={() => dropdown?.active(true)} onBlur={() => dropdown?.active(false)}>
       <button {...togglerProps} ref={togglerRef} />
       <div {...listboxProps} ref={listboxRef}>
-        <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={close}>
+        <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={dropdown?.close}>
           <span className="sr-only">Close</span>
         </button>
         <ul role="listbox">

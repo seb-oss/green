@@ -1,6 +1,6 @@
 import { createPopper } from '@popperjs/core'
 import {
-  create as _create,
+  create,
   active,
   open,
   close,
@@ -27,24 +27,26 @@ interface DropdownArgs {
   loop?: boolean
   text?: string
 }
-export const create = (
+export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
   listbox: HTMLElement,
   listener: DropdownListener
 ): DropdownHandler =>  {
-  const handler: Partial<DropdownHandler> = {
+  const _handler: Partial<DropdownHandler> = {
     toggler,
     listbox,
-    dropdown: _create(init),
+    dropdown: create(init),
+    isAlive: true,
   }
+  const handler = _handler as DropdownHandler
 
   handler.active = (isActive) => update(handler, listener, active(handler.dropdown, isActive))
   handler.loop = (isLooping) => update(handler, listener, loop(handler.dropdown, isLooping))
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
-  handler.select = (selection) => update(handler, listener, select(handler.dropdown, selection))
+  handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
 
   handler.subscription = merge<KeyboardEvent, UIEvent>(
     fromEvent(document, 'keydown'),
@@ -62,23 +64,26 @@ export const create = (
   })
 
   handler.destroy = () => {
-    handler.subscription.unsubscribe()
+    handler.subscription?.unsubscribe()
     handler.popper?.destroy()
+    handler.isAlive = false
   }
 
   pop(handler, listener)
 
-  return handler as DropdownHandler
+  return handler
 }
 
-const update = async (handler: Partial<DropdownHandler>, listener: DropdownListener, newState?: AbstractDropdown) => {
+const update = async (handler: DropdownHandler, listener: DropdownListener, newState?: AbstractDropdown) => {
+  if (!handler.isAlive) return
+
   const oldState = handler.dropdown
   if (newState) handler.dropdown = newState
 
   if (handler.popper) {
     const { styles } = await handler.popper.update()
-    if (styles.popper) {
-      const oldStyle = handler.dropdown.elements.listbox.attributes.style
+    if (styles?.popper) {
+      const oldStyle = handler.dropdown?.elements?.listbox?.attributes?.style
       const style = styles.popper as CSSStyleDeclaration
 
       if (JSON.stringify(oldStyle) !== JSON.stringify(style)) {
@@ -90,7 +95,7 @@ const update = async (handler: Partial<DropdownHandler>, listener: DropdownListe
     listener(handler.dropdown)
   }
 }
-const pop = (handler: Partial<DropdownHandler>, listener: DropdownListener, innerWidth: number = window.innerWidth) => {
+const pop = (handler: DropdownHandler, listener: DropdownListener, innerWidth: number = window.innerWidth) => {
   if (innerWidth < 576 && handler.popper) {
     handler.popper.destroy()
     handler.popper = undefined
@@ -112,3 +117,5 @@ const pop = (handler: Partial<DropdownHandler>, listener: DropdownListener, inne
     update(handler, listener, handler.dropdown)
   }
 }
+
+export default createDropdown

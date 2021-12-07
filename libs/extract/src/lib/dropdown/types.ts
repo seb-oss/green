@@ -46,6 +46,7 @@ export interface DropdownHandler {
   listbox: HTMLElement
   popper?: Instance
   subscription: Subscription
+  isAlive: boolean
 
   active: (isActive: boolean) => Promise<void>
   loop: (isLooping: boolean) => Promise<void>

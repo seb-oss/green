@@ -1,16 +1,16 @@
 import {
-  activate,
-  close,
-  create,
-  deactivate,
-  observe,
-  select,
-  toggle,
-  unobserve,
+  createDropdown,
   AbstractDropdown,
+  DropdownHandler,
   DropdownOption,
 } from '@sebgroup/extract'
-import { HTMLAttributes, RefObject, useEffect, useState, CSSProperties } from 'react'
+import {
+  HTMLAttributes,
+  RefObject,
+  useEffect,
+  useState,
+} from 'react'
+import { inspect } from 'util'
 
 interface HookArgs {
   id?: string
@@ -24,66 +24,59 @@ interface HookArgs {
 type Props = HTMLAttributes<HTMLElement>
 
 interface HookResult {
+  dropdown?: DropdownHandler
+
   togglerProps: Props
   listboxProps: Props
   listItems: Props[]
-  activate: () => void
-  deactivate: () => void
-  close: () => void
 }
 
 export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }: HookArgs): HookResult => {
+  const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
   const [togglerProps, setTogglerProps] = useState<Props>({})
   const [listboxProps, setListboxProps] = useState<Props>({})
   const [listItems, setListItems] = useState<Props[]>([])
 
   useEffect(() => {
-    if (!dropdown || !togglerRef.current || !listboxRef.current) return
-    observe(dropdown, togglerRef.current, listboxRef.current, setDropdown)
+    if (!dropdown) return
 
     const { elements: { toggler, listbox } } = dropdown
 
     const newToggleProps: Props = {
-      ...toggler?.attributes,
+      ...toggler?.attributes as unknown as Props,
       className: toggler?.classes?.join(' '),
       children: dropdown.text,
-      onClick: () => setDropdown(toggle(dropdown)),
+      onClick: () => handler?.toggle(),
     }
     setTogglerProps(newToggleProps)
 
     const newListboxProps: Props = {
-      ...listbox?.attributes,
+      ...listbox?.attributes as unknown as Props,
       className: listbox?.classes?.join(' '),
     }
     setListboxProps(newListboxProps)
 
     const newListItems: Props[] = dropdown.options.map((o) => ({
-      ...o.attributes,
+      ...o.attributes as unknown as Props,
       className: o.classes?.join(' '),
       children: o.key,
-      onClick: () => setDropdown(close(select(dropdown, o)))
+      onClick: () => handler?.select(o),
     }))
     setListItems(newListItems)
-
-    return () => {
-      unobserve(dropdown)
-    }
-  }, [dropdown, togglerRef, listboxRef])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dropdown])
 
   useEffect(() => {
-    setDropdown(create({ id, text, options, loop }))
-
-    return () => {
-      if (dropdown) unobserve(dropdown)
+    if (!handler && togglerRef.current && listboxRef.current) {
+      setHandler(createDropdown({ id, text, options, loop }, togglerRef.current, listboxRef.current, setDropdown))
     }
+    return () => handler?.destroy()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, loop, options, text])
+  }, [togglerRef, listboxRef])
 
   return {
-    activate: () => dropdown && setDropdown(activate(dropdown)),
-    deactivate: () => dropdown && setDropdown(deactivate(dropdown)),
-    close: () => dropdown && setDropdown(close(dropdown)),
+    dropdown: handler,
 
     togglerProps,
     listboxProps,

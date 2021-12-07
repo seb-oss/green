@@ -1,8 +1,15 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { Dropdown, DropdownProps } from './dropdown'
+
+const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
+
 describe('Dropdown', () => {
   let props: DropdownProps
-  beforeEach(() => {
+  let component: RenderResult
+  let toggleButton: HTMLElement
+  let listbox: HTMLElement
+  let options: HTMLElement[]
+  beforeEach(async () => {
     props = {
       options: [
         {key: 'A', value: 1},
@@ -10,379 +17,354 @@ describe('Dropdown', () => {
         {key: 'C', value: 3},
       ]
     }
+    component = render(<Dropdown {...props} />)
+    await act(() => tick())
+
+    const [_buttons, _listboxes, _options] = [
+      await component.findAllByRole('button'),
+      await component.findAllByRole('listbox'),
+      await component.findAllByRole('option'),
+    ]
+
+    toggleButton = _buttons[0]
+    listbox = _listboxes[0]
+    options = _options
+  })
+  afterEach(() => {
+    component.unmount()
   })
   it('renders', () => {
-    const { baseElement } = render(<Dropdown {...props} />)
-
-    expect(baseElement).toBeTruthy()
+    expect(component.baseElement).toBeTruthy()
   })
-  it('sets correct classes on dropdown toggle', async () => {
-    const { findAllByRole } = render(<Dropdown {...props} />)
-    const buttons = await findAllByRole('button')
-    const toggle = buttons[0]
-
-    expect(toggle.className).toEqual('dropdown-toggle')
+  it('sets correct classes on dropdown toggle', () => {
+    expect(toggleButton.className).toEqual('dropdown-toggle')
   })
-  it('renders options', async () => {
-    const { findAllByRole } = render(<Dropdown {...props} />)
-    const options = await findAllByRole('option')
-
+  it('renders options', () => {
     expect(options).toHaveLength(3)
   })
   describe('toggle', () => {
     it('sets aria-expanded on trigger', async () => {
-      const { findAllByRole } = render(<Dropdown {...props} />)
-      const toggleButton = (await findAllByRole('button'))[0]
-
       // initial
       expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
-      
-      // open
-      fireEvent.click(toggleButton)
-      expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
-      
-      // close
-      fireEvent.click(toggleButton)
-      expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+
+      await act(async () => {
+        // open
+        fireEvent.click(toggleButton)
+        await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+        
+        // close
+        fireEvent.click(toggleButton)
+        await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+      })
     })
     it('sets class active on listbox', async () => {
-      const { findAllByRole } = render(<Dropdown {...props} />)
-      const listbox = (await findAllByRole('listbox'))[0]
-      const toggleButton = (await findAllByRole('button'))[0]
-      
       // initial
       expect(listbox.className).toEqual('popover')
       
-      // open
-      fireEvent.click(toggleButton)
-      expect(listbox.className).toEqual('popover active')
-      
-      // close
-      fireEvent.click(toggleButton)
-      expect(listbox.className).toEqual('popover')
+      await act(async () => {
+        // open
+        fireEvent.click(toggleButton)
+        await waitFor(() => expect(listbox.className).toEqual('popover active'))
+        
+        // close
+        fireEvent.click(toggleButton)
+        await waitFor(() => expect(listbox.className).toEqual('popover'))
+      })
     })
   })
   describe('select item', () => {
-    let toggleButton: HTMLElement
-    let listbox: HTMLElement
-    let options: HTMLElement[]
     beforeEach(async () => {
-      const { findAllByRole } = render(<Dropdown {...props} />)
-      toggleButton = (await findAllByRole('button'))[0]
-      listbox = (await findAllByRole('listbox'))[0]
-      options = await findAllByRole('option')
-
-      fireEvent.click(toggleButton)
+      await act(async () => {
+        fireEvent.click(toggleButton)
+      })
     })
-    it('sets aria-selected', () => {
-      fireEvent.click(options[1])
-      expect(options[1].getAttribute('aria-selected')).toEqual('true')
+    it('sets aria-selected', async () => {
+      await act(async () => {
+        fireEvent.click(options[1])
+        await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
+      })
     })
-    it('closes dropdown', () => {
-      fireEvent.click(options[1])
-      expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
-      expect(listbox.className).toEqual('popover')
+    it('closes dropdown', async () => {
+      await act(async () => {
+        fireEvent.click(options[1])
+        await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        await waitFor(() => expect(listbox.className).toEqual('popover'))
+      })
     })
-    it('sets toggler text', () => {
-      fireEvent.click(options[1])
-      expect(toggleButton.innerHTML.trim()).toEqual('B')
+    it('sets toggler text', async () => {
+      await act(async () => {
+        fireEvent.click(options[1])
+        await waitFor(() => expect(toggleButton.innerHTML.trim()).toEqual('B'))
+      })
     })
   })
   describe('keyboard navigation', () => {
     describe('Space', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-
-        const toggleButton = (await findAllByRole('button'))[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.keyDown(document, { key: ' ' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: ' ' })
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
       it('opens when active', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: ' ' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: ' ' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+        })
       })
       it('closes when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
+        await act(async () => {
+          fireEvent.click(toggleButton)
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
 
-        fireEvent.click(toggleButton)
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: ' ' })
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: ' ' })
-
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
     })
     describe('Escape', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-
-        const toggleButton = (await findAllByRole('button'))[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.keyDown(document, { key: 'Escape' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: 'Escape' })
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
       it('does nothing when not open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
       it('closes when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
+        await act(async () => {
+          fireEvent.click(toggleButton)
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
 
-        fireEvent.click(toggleButton)
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
-
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
     })
     describe('ArrowDown', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-
-        const toggleButton = (await findAllByRole('button'))[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.keyDown(document, { key: 'ArrowDown' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: 'ArrowDown' })
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
       it('opens when active', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+        })
       })
       it('selects next when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
 
-        fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('stops on last when not looping', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
 
-        fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('loops to first when looping', async () => {
         props.loop = true
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
 
-        fireEvent.focus(toggleButton)
+        await act(async () => {
+          fireEvent.focus(toggleButton)
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
     })
     describe('ArrowUp', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
+        //expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        const toggleButton = (await findAllByRole('button'))[0]
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
-
-        fireEvent.keyDown(document, { key: 'ArrowUp' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: 'ArrowUp' })
+          await tick(50)
+          expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        })
       })
       it('opens when active', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+        })
       })
       it('selects previous when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('stops on first when not looping', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
 
-        fireEvent.focus(toggleButton)
+          // go to last option
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          // spam up
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('loops to first when looping', async () => {
         props.loop = true
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
 
-        fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
     })
     describe('Home', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-
-        const toggleButton = (await findAllByRole('button'))[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.keyDown(document, { key: 'Home' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: 'Home' })
+          await tick()
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
+        })
       })
       it('opens and selects first when active', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('selects first when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
     })
     describe('End', () => {
       it('does nothing when inactive', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-
-        const toggleButton = (await findAllByRole('button'))[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.keyDown(document, { key: 'End' })
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        await act(async () => {
+          fireEvent.keyDown(document, { key: 'End' })
+          await tick(10)
+          expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
+        })
       })
       it('opens and selects last when active', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
-
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'End' })
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'End' })
 
-        expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
       it('selects first when open', async () => {
-        const { findAllByRole } = render(<Dropdown {...props} />)
-        const toggleButton = (await findAllByRole('button'))[0]
-        const options = await findAllByRole('option')
+        await act(async () => {
+          fireEvent.focus(toggleButton)
+          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-        fireEvent.focus(toggleButton)
-        fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-        expect(options[0].getAttribute('aria-selected')).toEqual('true')
-
-        fireEvent.keyDown(document.activeElement || document, { key: 'End' })
-        expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          fireEvent.keyDown(document.activeElement || document, { key: 'End' })
+          await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
+        })
       })
     })
   })

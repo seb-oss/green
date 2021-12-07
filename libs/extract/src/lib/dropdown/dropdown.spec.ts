@@ -1,6 +1,6 @@
 import { createPopper, Instance } from '@popperjs/core'
 import { AbstractDropdown, DropdownHandler, DropdownListener, DropdownOption } from "./types"
-import { create } from './dropdown'
+import { createDropdown } from './dropdown'
 
 jest.mock('@popperjs/core', () => ({
   createPopper: jest.fn().mockName('createPopper')
@@ -35,7 +35,7 @@ describe('dropdown', () => {
     ;(createPopper as jest.Mock<Instance>)
       .mockReturnValue(popper as Instance)
     
-    handler = create({ id: 'foo', options }, toggler, listbox, listener)
+    handler = createDropdown({ id: 'foo', options }, toggler, listbox, listener)
     await tick()
   })
 
