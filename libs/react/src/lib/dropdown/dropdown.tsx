@@ -27,7 +27,7 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
   })
 
   return (
-    <div onFocus={() => dropdown?.active(true)} onBlur={() => dropdown?.active(false)}>
+    <div>
       <button {...togglerProps} ref={togglerRef} />
       <div {...listboxProps} ref={listboxRef}>
         <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={dropdown?.close}>

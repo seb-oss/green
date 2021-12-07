@@ -46,6 +46,7 @@ export const createDropdown = (
   handler.subscription = merge(
     fromEvent<KeyboardEvent>(document, 'keydown'),
     fromEvent<UIEvent>(window, 'resize'),
+    fromEvent<FocusEvent>(document, 'focusin'),
     fromEvent<MouseEvent>(document, 'click'),
   ).subscribe((event) => {
     switch (event.type) {
@@ -60,10 +61,19 @@ export const createDropdown = (
         pop(handler, listener, (event.target as Window).innerWidth)
         break
       }
+      case 'focusin': {
+        const component = toggler.parentElement as HTMLElement
+        const focused = event.target as HTMLElement
+        if (handler.dropdown.isActive && !component.contains(focused)) {
+          update(handler, listener, active(handler.dropdown, false))
+        } else if (!handler.dropdown.isActive) {
+          update(handler, listener, active(handler.dropdown, true))
+        }
+        break
+      }
       case 'click': {
-        const container = handler.toggler.parentElement
         const clickedOn = event.target as HTMLElement
-        if (!container?.contains(clickedOn)) {
+        if (!handler.toggler.contains(clickedOn) && !handler.listbox.contains(clickedOn)) {
           update(handler, listener, active(close(handler.dropdown), false))
         }
       }
