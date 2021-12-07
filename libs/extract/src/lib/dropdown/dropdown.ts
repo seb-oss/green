@@ -43,10 +43,10 @@ export const createDropdown = (
   handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
   handler.update = (props) => update(handler, listener, create(props))
 
-  handler.subscription = merge<KeyboardEvent, UIEvent, MouseEvent>(
-    fromEvent(document, 'keydown'),
-    fromEvent(window, 'resize'),
-    fromEvent(document, 'click'),
+  handler.subscription = merge(
+    fromEvent<KeyboardEvent>(document, 'keydown'),
+    fromEvent<UIEvent>(window, 'resize'),
+    fromEvent<MouseEvent>(document, 'click'),
   ).subscribe((event) => {
     switch (event.type) {
       case 'keydown': {
