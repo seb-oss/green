@@ -327,6 +327,17 @@
       "implicitDependencies": ["chlorophyll"],
       "targets": {
         "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx run charts:build-lib",
+              "nx run charts:compile-scss",
+              "nx run charts:copy-scss"
+            ],
+            "parallel": false
+          }
+        },
+        "build-lib": {
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
@@ -344,6 +355,40 @@
                 "output": "."
               }
             ]
+          }
+        },
+        "compile-scss": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "description": "compile scss",
+                "command": "npx sass --no-source-map --load-path=node_modules/ --load-path=libs/chlorophyll/ libs/charts/scss/index.scss dist/libs/charts/css/green-charts.css"
+              },
+              {
+                "description": "auto prefix compiled css overwrite file and output maps",
+                "command": "npx postcss dist/libs/charts/css/green-charts.css --use=autoprefixer -m -r"
+              },
+              {
+                "description": "minify compiled and auto prefixed css and output maps",
+                "command": "npx postcss dist/libs/charts/css/green-charts.css --use=cssnano -m -o=dist/libs/charts/css/green-charts.min.css"
+              }
+            ],
+            "parallel": false,
+            "outputPath": "dist/libs/chlorophyll"
+          }
+        },
+        "copy-scss": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "description": "copy scss",
+                "command": "npx copyfiles libs/charts/scss/**/* dist/libs/charts/scss -f"
+              }
+            ],
+            "parallel": false,
+            "outputPath": "dist/libs/chlorophyll"
           }
         },
         "lint": {
@@ -387,14 +432,14 @@
             "commands": [
               {
                 "description": "compile scss",
-                "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/src/lib/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
+                "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/scss/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
               },
               {
                 "description": "auto prefix compiled css overwrite file and output maps",
                 "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=autoprefixer -m -r"
               },
               {
-                "description": "minifiy compiled and auto prefixed css and output maps",
+                "description": "minify compiled and auto prefixed css and output maps",
                 "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
               }
             ],
@@ -466,6 +511,7 @@
           "executor": "@nrwl/web:package",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "packageJson": "libs/extract/package.json",
             "outputPath": "dist/libs/extract",
             "tsConfig": "libs/extract/tsconfig.lib.json",
             "project": "libs/extract/package.json",
@@ -494,6 +540,12 @@
           "options": {
             "jestConfig": "libs/extract/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "release": {
+          "executor": "@ng-easy/builders:semantic-release",
+          "options": {
+            "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
           }
         }
       }

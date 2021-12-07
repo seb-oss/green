@@ -2,13 +2,13 @@
   "name": "@sebgroup/green-angular-charts",
   "version": "0.0.0-semantically-released",
   "peerDependencies": {
-    "@angular/common": "^12.1.0",
-    "@angular/core": "^12.1.0",
+    "@angular/common": "^13.0.3",
+    "@angular/core": "^13.0.3",
     "@sebgroup/chlorophyll": "^1.0.0-alpha.1"
   },
   "dependencies": {
     "@sebgroup/green-charts": "*",
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.1"
   },
   "description": "Angular charts built on top of @sebgroup/green-charts.",
   "repository": {
