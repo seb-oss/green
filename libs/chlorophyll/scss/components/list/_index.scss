@@ -2,7 +2,6 @@
 @use '../../common';
 @use 'mixins';
 @use 'sass:map';
-@forward 'mixins';
 
 ul:not(.legend) {
   @include mixins.base-list();
