@@ -55,13 +55,15 @@ function multipleExecutor(options, context) {
                     console.info("Executing \"build-lib\"...");
                     console.info("Options: " + JSON.stringify(options, null, 2));
                     _c = (_b = Promise).race;
-                    return [4 /*yield*/, devkit_1.runExecutor({ project: context.projectName, target: 'compile-scss' }, {}, context)];
+                    return [4 /*yield*/, (0, devkit_1.runExecutor)({ project: context.projectName, target: 'compile-scss' }, {}, context)];
                 case 1:
                     _d = [
                         _e.sent()
                     ];
                     // copy readme and changelog
-                    return [4 /*yield*/, new Promise(function (resolve) { return copyfiles(["libs/" + context.projectName + "/*.md", options.outputPath], { up: 2 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
+                    return [4 /*yield*/, new Promise(function (resolve) {
+                            return copyfiles(["libs/" + context.projectName + "/*.md", options.outputPath], { up: 2 }, resolve);
+                        })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
                 case 2:
                     _d = _d.concat([
@@ -69,7 +71,9 @@ function multipleExecutor(options, context) {
                         _e.sent()
                     ]);
                     // copy package json
-                    return [4 /*yield*/, new Promise(function (resolve) { return copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
+                    return [4 /*yield*/, new Promise(function (resolve) {
+                            return copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve);
+                        })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
                 case 3:
                     _d = _d.concat([
@@ -77,7 +81,12 @@ function multipleExecutor(options, context) {
                         _e.sent()
                     ]);
                     // copy scss files
-                    return [4 /*yield*/, new Promise(function (resolve) { return copyfiles(["libs/" + context.projectName + "/src/lib/**/*.scss", options.outputPath + "/scss"], { up: 4 }, resolve); })["catch"](function (_) { return [{ success: false }]; })
+                    return [4 /*yield*/, new Promise(function (resolve) {
+                            return copyfiles([
+                                "libs/" + context.projectName + "/scss/**/*.scss",
+                                options.outputPath + "/scss",
+                            ], { up: 3 }, resolve);
+                        })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
                 case 4: return [4 /*yield*/, _c.apply(_b, [_d.concat([
                             // copy scss files
