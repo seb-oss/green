@@ -1,213 +1,138 @@
-import { fromEvent, Observable, Subscription } from 'rxjs'
-import { filter } from 'rxjs/operators'
-import { dropdownValues, optionValues } from './defaultValues'
-import { randomId } from '../id'
-import reduce from '../reduce'
+import { createPopper } from '@popperjs/core'
+import {
+  create,
+  active,
+  open,
+  close,
+  toggle,
+  select,
+  loop,
+  popper,
+  keypress,
+} from './reducers'
+import {
+  fromEvent,
+  merge,
+} from 'rxjs'
 import {
   AbstractDropdown,
-  DropdownOption,
-  ExtendedDropdownOption,
+  DropdownHandler,
+  DropdownListener,
+  DropdownArgs,
 } from './types'
 
-const distinct = <T>(arr: T[]): T[] => {
-  const map: Record<string, boolean> = {}
-  return arr.filter((item) => {
-    const key = (typeof item === 'string') ? item : JSON.stringify(item)
-    if (map[key]) return false
-    else {
-      map[key] = true
-      return true
-    }
-  })
-}
-
-const addClass = (classes: string[] | undefined, newClass: string): string[] => (
-  distinct((classes || []).concat(newClass))
-)
-
-const removeClass = (classes: string[] | undefined, removeClass: string): string[] => (
-  (classes || []).filter((item) => item !== removeClass)
-)
-
-const extendOption = (id: string, option: DropdownOption, ix: number): ExtendedDropdownOption => (
-  reduce<ExtendedDropdownOption>(optionValues, option, {
-    attributes: {
-      id: `${id}_option${ix}`,
-      role: 'option',
-      'aria-selected': option.selected || undefined,
-    },
-    classes: [],
-  })
-)
-const extendOptions = (options: DropdownOption[], id: string): ExtendedDropdownOption[] => (
-  options.map((option, ix) => extendOption(id, option, ix))
-)
-
-interface DropdownArgs {
-  id?: string
-  options: DropdownOption[]
-  loop?: boolean
-  text?: string
-}
-export const create = ({ id = randomId(), text, options: _options, loop }: DropdownArgs): AbstractDropdown => {
-  const options = extendOptions(_options, id)
-  const dropdown: Partial<AbstractDropdown> = {
-    id,
-    text: text || 'dropdown',
-    elements: {
-      toggler: {
-        attributes: { 'aria-owns': id },
-      },
-      listbox: {
-        attributes: { id },
-      },
-    },
-    options,
-    loop,
+export const createDropdown = (
+  init: DropdownArgs,
+  toggler: HTMLElement,
+  listbox: HTMLElement,
+  listener: DropdownListener
+): DropdownHandler =>  {
+  const _handler: Partial<DropdownHandler> = {
+    toggler,
+    listbox,
+    dropdown: create(init),
+    isAlive: true,
   }
+  const handler = _handler as DropdownHandler
 
-  return reduce(dropdown, dropdownValues)
-}
+  handler.active = (isActive) => update(handler, listener, active(handler.dropdown, isActive))
+  handler.loop = (isLooping) => update(handler, listener, loop(handler.dropdown, isLooping))
+  handler.open = () => update(handler, listener, open(handler.dropdown))
+  handler.close = () => update(handler, listener, close(handler.dropdown))
+  handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
+  handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
+  handler.update = (props) => update(handler, listener, create(props))
 
-export const open = (dropdown: AbstractDropdown): AbstractDropdown => (
-  reduce(dropdown, {
-    isOpen: true,
-    elements: {
-      toggler: {
-        attributes: {
-          'aria-expanded': true,
-        },
-      },
-      listbox: {
-        classes: addClass(dropdown.elements?.listbox?.classes, 'active'),
-      },
-    },
-  })
-)
-export const close = (dropdown: AbstractDropdown): AbstractDropdown => (
-  reduce(dropdown, {
-    isOpen: false,
-    elements: {
-      toggler: {
-        attributes: {
-          'aria-expanded': false,
-        },
-      },
-      listbox: {
-        classes: removeClass(dropdown.elements?.listbox?.classes, 'active'),
-      },
-    },
-  })
-)
-export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => (
-  (dropdown.isOpen) ? close(dropdown) : open(dropdown)
-)
-export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOption | number): AbstractDropdown => {
-  let option: ExtendedDropdownOption
-  if (typeof selection === 'number') {
-    const opts = dropdown.options
-    const currentlySelectedIndex = opts.findIndex((o) => o.selected)
-    let newSelectedIndex = currentlySelectedIndex + selection
-    if (newSelectedIndex < 0) newSelectedIndex = dropdown.loop ? opts.length - 1 : 0
-    if (newSelectedIndex >= opts.length) newSelectedIndex = dropdown.loop ? 0 : opts.length - 1
-    option = opts[newSelectedIndex]
-  } else {
-    option = selection
-  }
-  return reduce(dropdown, {
-    text: option.key,
-    elements: {
-      listbox: {
-        attributes: {
-          'aria-activedescendant': option.attributes.id,
+  handler.subscription = merge(
+    fromEvent<KeyboardEvent>(document, 'keydown'),
+    fromEvent<UIEvent>(window, 'resize'),
+    fromEvent<FocusEvent>(document, 'focusin'),
+    fromEvent<MouseEvent>(document, 'click'),
+  ).subscribe((event) => {
+    switch (event.type) {
+      case 'keydown': {
+        if (!handler.dropdown.isActive) return
+        event.preventDefault()
+        const { key } = event as KeyboardEvent
+        update(handler, listener, keypress(handler.dropdown, key))
+        break
+      }
+      case 'resize': {
+        pop(handler, listener, (event.target as Window).innerWidth)
+        break
+      }
+      case 'focusin': {
+        const component = toggler.parentElement as HTMLElement
+        const focused = event.target as HTMLElement
+        if (handler.dropdown.isActive && !component.contains(focused)) {
+          update(handler, listener, active(handler.dropdown, false))
+        } else if (!handler.dropdown.isActive) {
+          update(handler, listener, active(handler.dropdown, true))
+        }
+        break
+      }
+      case 'click': {
+        const clickedOn = event.target as HTMLElement
+        if (!handler.toggler.contains(clickedOn) && !handler.listbox.contains(clickedOn)) {
+          update(handler, listener, active(close(handler.dropdown), false))
         }
       }
-    },
-    options: dropdown.options.map((o) => reduce(o, {
-      selected: o === option,
-      attributes: {
-        'aria-selected': o === option || undefined,
-      },
-    }))
-  })
-}
-export const focus = (dropdown: AbstractDropdown, focusedIndex: number): AbstractDropdown => {
-  const options: ExtendedDropdownOption[] = dropdown.options.map((o, optionIndex) => {
-    return {
-      ...o,
-      focused: focusedIndex === optionIndex,
     }
   })
-  return reduce(dropdown, { options } as Partial<AbstractDropdown>)
-}
-export const activate = (dropdown: AbstractDropdown): AbstractDropdown => (
-  reduce(dropdown, { isActive: true })
-)
-export const deactivate = (dropdown: AbstractDropdown): AbstractDropdown => (
-  reduce(close(dropdown), { isActive: false })
-)
 
-const observers: Record<string, {
-  subscription: Subscription,
-  observable: Observable<KeyboardEvent>
-}> = {}
-type Listener = (dropdown: AbstractDropdown) => void
-export const observe = (dropdown: AbstractDropdown, listener: Listener): AbstractDropdown => {
-  let observable: Observable<KeyboardEvent>
-  let subscription: Subscription
-
-  if (!observers[dropdown.id]) {
-    observable = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
-      filter((event) => ['ArrowDown', 'ArrowUp', 'Escape', 'Home', 'End', ' '].includes(event.key))
-    )
-  } else {
-    ({ observable, subscription } = observers[dropdown.id]);
-    if (subscription) subscription.unsubscribe()
+  handler.destroy = () => {
+    handler.subscription?.unsubscribe()
+    handler.popper?.destroy()
+    handler.isAlive = false
   }
 
-  subscription = observable.subscribe((event) => {
-    if (!dropdown.isActive) return
-    event.preventDefault()
-    let newState: AbstractDropdown
-    const opts = dropdown.options
-    switch (event.key) {
-      case ' ':
-        newState = toggle(dropdown)
-        break
-      case 'Escape':
-        if (!dropdown.isOpen) return
-        newState = close(dropdown)
-        break
-      case 'ArrowDown':
-        newState = (dropdown.isOpen)
-          ? select(dropdown, 1) 
-          : open(select(dropdown, opts[0]))
-        break
-      case 'ArrowUp':
-        newState = (dropdown.isOpen)
-          ? select(dropdown, -1) 
-          : open(select(dropdown, (dropdown.loop) ? opts[opts.length - 1] : opts[0]))
-        break
-      case 'Home':
-        newState = open(select(dropdown, opts[0]))
-        break
-      case 'End':
-        newState = open(select(dropdown, opts[opts.length - 1]))
-        break
-      default:
-        return
+  pop(handler, listener)
+
+  return handler
+}
+
+const update = async (handler: DropdownHandler, listener: DropdownListener, newState?: AbstractDropdown) => {
+  if (!handler.isAlive) return
+
+  const oldState = handler.dropdown
+  if (newState) handler.dropdown = newState
+
+  if (handler.popper) {
+    const { styles } = await handler.popper.update()
+    if (styles?.popper) {
+      const oldStyle = handler.dropdown?.elements?.listbox?.attributes?.style
+      const style = styles.popper as CSSStyleDeclaration
+
+      if (JSON.stringify(oldStyle) !== JSON.stringify(style)) {
+        handler.dropdown = popper(handler.dropdown, style)
+      }
     }
-    listener(newState)
-  })
-
-  observers[dropdown.id] = { observable, subscription }
-
-  return dropdown
-}
-export const unobserve = (dropdown: AbstractDropdown): AbstractDropdown => {
-  if (observers[dropdown.id]) {
-    observers[dropdown.id].subscription.unsubscribe()
-    delete observers[dropdown.id]
   }
-  return dropdown
+  if (handler.dropdown !== oldState) {
+    listener(handler.dropdown)
+  }
 }
+const pop = (handler: DropdownHandler, listener: DropdownListener, innerWidth: number = window.innerWidth) => {
+  if (innerWidth < 576 && handler.popper) {
+    handler.popper.destroy()
+    handler.popper = undefined
+
+    update(handler, listener, popper(handler.dropdown))
+  } else if (innerWidth >= 576 && !handler.popper) {
+    handler.popper = createPopper(handler.toggler, handler.listbox, {
+      placement: 'bottom-start',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 4],
+          },
+        },
+      ],
+    })
+
+    update(handler, listener, handler.dropdown)
+  }
+}
+
+export default createDropdown

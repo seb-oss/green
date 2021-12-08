@@ -4,4 +4,6 @@ export {
   AbstractDropdown,
   DropdownOption,
   ExtendedDropdownOption,
+  DropdownHandler,
+  DropdownListener,
 } from './types'

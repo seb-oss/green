@@ -1,4 +1,5 @@
 import { DropdownOption } from '@sebgroup/extract'
+import { useRef } from 'react'
 import { useDropdown } from './hooks'
 
 export interface DropdownProps {
@@ -9,20 +10,27 @@ export interface DropdownProps {
 }
 
 export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
+  const togglerRef = useRef<HTMLButtonElement>(null)
+  const listboxRef = useRef<HTMLDivElement>(null)
   const {
-    activate,
-    deactivate,
-    close,
+    dropdown,
     listboxProps,
     togglerProps,
     listItems,
-  } = useDropdown({ id, options, loop, text: children })
+  } = useDropdown({
+    id,
+    options,
+    loop,
+    togglerRef,
+    listboxRef,
+    text: children
+  })
 
   return (
-    <div onFocus={activate} onBlur={deactivate}>
-      <button {...togglerProps} />
-      <div {...listboxProps}>
-        <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={close}>
+    <div>
+      <button {...togglerProps} ref={togglerRef} />
+      <div {...listboxProps} ref={listboxRef}>
+        <button className="close m-4 m-sm-2 d-block d-sm-none" onClick={dropdown?.close}>
           <span className="sr-only">Close</span>
         </button>
         <ul role="listbox">
