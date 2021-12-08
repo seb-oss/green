@@ -1,5 +1,5 @@
-@use '../../../chlorophyll/src/lib/tokens';
-@use '../../../chlorophyll/src/lib/common/spacing' as common;
+@use '../../chlorophyll/scss/tokens';
+@use '../../chlorophyll/scss/common/spacing' as common;
 @mixin chart-series-list-item() {
   @include common.margin-top(3);
   align-items: center;

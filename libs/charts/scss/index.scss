@@ -1,6 +1,6 @@
-@use '../../../chlorophyll/src/lib/tokens/color';
-@use '../../../chlorophyll/src/lib/tokens';
-@use '../../../chlorophyll/src/lib/tokens/shame' as newTokens;
+@use '../../chlorophyll/scss/tokens/color';
+@use '../../chlorophyll/scss/tokens';
+@use '../../chlorophyll/scss/tokens/shame' as newTokens;
 @use 'sass:map';
 @use 'shame';
 // @use 'node_modules/billboard.js/src/scss/billboard';
