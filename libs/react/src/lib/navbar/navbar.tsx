@@ -20,7 +20,7 @@ export const Navbar = ({ children, variant, title }: NavProps) => {
       >
         {''}
       </a>
-      <h1>{title}</h1>
+      <h1 className="mx-4">{title}</h1>
       {children}
     </nav>
   )
