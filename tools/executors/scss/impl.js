@@ -82,10 +82,7 @@ function multipleExecutor(options, context) {
                     ]);
                     // copy scss files
                     return [4 /*yield*/, new Promise(function (resolve) {
-                            return copyfiles([
-                                "libs/" + context.projectName + "/scss/**/*.scss",
-                                options.outputPath + "/scss",
-                            ], { up: 3 }, resolve);
+                            return copyfiles(["libs/" + context.projectName + "/scss/**/*.scss", "" + options.outputPath], { up: 2 }, resolve);
                         })["catch"](function (_) { return [{ success: false }]; })
                             .then(function (_) { return [{ success: true }]; })];
                 case 4: return [4 /*yield*/, _c.apply(_b, [_d.concat([

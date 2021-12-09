@@ -37,11 +37,8 @@ export default async function multipleExecutor(
     // copy scss files
     await new Promise((resolve) =>
       copyfiles(
-        [
-          `libs/${context.projectName}/scss/**/*.scss`,
-          `${options.outputPath}/scss`,
-        ],
-        { up: 3 },
+        [`libs/${context.projectName}/scss/**/*.scss`, `${options.outputPath}`],
+        { up: 2 },
         resolve
       )
     )
