@@ -9,8 +9,13 @@ interface NavProps {
 
 //TODO: Add variants
 export const Navbar = ({ children, variant, title }: NavProps) => {
+  const props: HTMLAttributes<HTMLElement> = {}
+  const classNames: string[] = []
+  if (variant) classNames.push(variant)
+  if (classNames.length) props.className = classNames.join('')
+
   return (
-    <nav role="navigation">
+    <nav role="navigation" {...props}>
       <a
         aria-label="Open seb.se in new tab"
         href="http://www.seb.se"

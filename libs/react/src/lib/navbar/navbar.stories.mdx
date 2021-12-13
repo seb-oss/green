@@ -7,12 +7,24 @@ export const Template = ({ children, ...props }) => (
 
 # Navbar
 
+Simple navbar component.
+
 <Meta title="Components/navbar" component={Navbar} />
 
-<Navbar title="Standard" variant="standard"></Navbar>
+### Transparent navbar with heading and brand as link
 
 <Canvas>
-  <Story name="Navbar" args={{ children: 'This is a navbar', title: 'Navbar' }}>
-    {Template}
-  </Story>
+  <Navbar title="Page heading" />
+</Canvas>
+
+### Dark navbar with heading and brand as link
+
+<Canvas>
+  <Navbar title="Page heading" variant="bg-dark" />
+</Canvas>
+
+### Light navbar with heading and brand
+
+<Canvas>
+  <Navbar title="Page heading" variant="bg-light" />
 </Canvas>

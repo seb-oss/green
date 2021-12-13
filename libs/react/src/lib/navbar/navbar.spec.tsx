@@ -19,4 +19,19 @@ describe('Navbar', () => {
     render(<Navbar title={title}>Test Data</Navbar>)
     expect(screen.getByRole('navigation')).toHaveTextContent('Test Data')
   })
+
+  it('should have render variant bg-light', () => {
+    render(<Navbar title={title} variant="bg-light" />)
+    expect(screen.getByRole('navigation')).toHaveClass('bg-light')
+  })
+
+  it('should have render variant bg-dark', () => {
+    render(<Navbar title={title} variant="bg-dark" />)
+    expect(screen.getByRole('navigation')).toHaveClass('bg-dark')
+  })
+
+  it('should have render variant transparent', () => {
+    render(<Navbar title={title} />)
+    expect(screen.getByRole('navigation').classList.length).toBe(0)
+  })
 })
