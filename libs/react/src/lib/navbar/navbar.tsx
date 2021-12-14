@@ -1,5 +1,5 @@
 import { NavbarVariant } from '@sebgroup/extract'
-import { HTMLAttributes, ReactNode } from 'react'
+import { HTMLAttributes, ReactNode, useEffect, useState } from 'react'
 
 interface NavProps {
   title?: string
@@ -9,10 +9,13 @@ interface NavProps {
 
 //TODO: Add variants
 export const Navbar = ({ children, variant, title }: NavProps) => {
-  const props: HTMLAttributes<HTMLElement> = {}
-  const classNames: string[] = []
-  if (variant) classNames.push(variant)
-  if (classNames.length) props.className = classNames.join('')
+  const [props, setProps] = useState<HTMLAttributes<HTMLElement>>({})
+  useEffect(() => {
+    const classNames: string[] = []
+    if (variant) classNames.push(variant)
+    setProps({ ...props, className: classNames.join(' ') })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variant])
 
   return (
     <nav role="navigation" {...props}>
