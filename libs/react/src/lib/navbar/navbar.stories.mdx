@@ -9,22 +9,28 @@ export const Template = ({ children, ...props }) => (
 
 Simple navbar component.
 
-<Meta title="Components/navbar" component={Navbar} />
+<Meta title="Components/Navbar" component={Navbar} />
 
 ### Transparent navbar with heading and brand as link
 
 <Canvas>
-  <Navbar title="Page heading" />
+  <Story name="Default" args={{ title: 'Page heading' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ### Dark navbar with heading and brand as link
 
 <Canvas>
-  <Navbar title="Page heading" variant="bg-dark" />
+  <Story name="Dark" args={{ title: 'Page heading', variant: 'bg-dark' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
-### Light navbar with heading and brand
+### Light navbar with heading and brand as link
 
 <Canvas>
-  <Navbar title="Page heading" variant="bg-light" />
+  <Story name="Light" args={{ title: 'Page heading', variant: 'bg-light' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
