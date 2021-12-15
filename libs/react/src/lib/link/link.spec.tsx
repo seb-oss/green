@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { notDeepEqual } from 'assert'
 import Link from './link'
 
 describe('Link', () => {

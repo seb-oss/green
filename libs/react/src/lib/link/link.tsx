@@ -1,38 +1,13 @@
-import React, { HTMLProps, PropsWithChildren, useEffect, useState } from 'react'
-
-type Rel = 'alternate'
-  | 'author'
-  | 'bookmark'
-  | 'external'
-  | 'help'
-  | 'license'
-  | 'next'
-  | 'nofollow'
-  | 'noopener'
-  | 'noreferrer'
-  | 'opener'
-  | 'prev'
-  | 'search'
-  | 'tag'
-
-  type Role = 'button'
-    | 'checkbox'
-    | 'menuitem'
-    | 'menuitemcheckbox'
-    | 'menuitemradio'
-    | 'option'
-    | 'radio'
-    | 'switch'
-    | 'tab'
-    | 'treeitem'
+import { HTMLProps, PropsWithChildren, useEffect, useState } from 'react'
+import { ButtonVariant, LinkRel, LinkRole } from '@sebgroup/extract'
 
 interface LinkProps {
   id?: string
   href?: string
   target?: '_self' | '_blank' | '_parent' | '_top' | string
-  button?: boolean | 'primary' | 'secondary' | 'ghost'
-  rel?: Rel | Rel[]
-  role?: Role
+  button?: boolean | ButtonVariant
+  rel?: LinkRel | LinkRel[]
+  role?: LinkRole
   external?: boolean
 }
 
