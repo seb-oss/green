@@ -1,16 +1,42 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import { Link } from './link'
 
-export const Template = ({ children, ...props }) => <Link {...props} />
+export const Template = ({ ...props }) => <Link {...props} />
 
-<Meta title="Components/Link" component={Link} />
+<Meta
+  title="Components/Link"
+  component={Link}
+  argTypes={{
+    button: {
+      options: [undefined, 'primary', 'secondary', 'ghost'],
+    },
+    rel: {
+      options: [
+        undefined,
+        'button',
+        'checkbox',
+        'menuitem',
+        'menuitemcheckbox',
+        'menuitemradio',
+        'option',
+        'radio',
+        'switch',
+        'tab',
+        'treeitem',
+      ],
+    },
+  }}
+/>
 
 # Link
 
 Simple link component
 
 <Canvas>
-  <Story name="Link" args={{ text: 'Go to seb.se', link: 'https://seb.se' }}>
+  <Story
+    name="Link"
+    args={{ children: 'Go to seb.se', href: 'https://seb.se' }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
