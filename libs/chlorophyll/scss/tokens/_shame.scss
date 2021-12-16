@@ -4,6 +4,16 @@
   @return map.get(map.get($property, $theme), $value);
 }
 
+@mixin generate-intent-variables($map, $theme: light) {
+  @each $key, $value in map.get($map, $theme) {
+    /* try and adjust colors to get desired color combination,
+    in this case adjust background to go with white foreground */
+    $colors: functions.desired-color-combination(#fff, $value);
+    --intent-#{$key}-background: #{nth($colors, 1)};
+    --intent-#{$key}-color: #{nth($colors, 2)};
+  }
+}
+
 $black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
 
@@ -183,10 +193,14 @@ $border-primary-disabled-color: var(--border-primary-disabled-color);
 $border-color-invalid: var(--border-color-invalid);
 $border-color-valid: var(--border-color-valid);
 
-$intent-color-success: var(--intent-color-success);
-$intent-color-info: var(--intent-color-info);
-$intent-color-warning: var(--intent-color-warning);
-$intent-color-danger: var(--intent-color-danger);
+$intent-success-color: var(--intent-success-color);
+$intent-info-color: var(--intent-info-color);
+$intent-warning-color: var(--intent-warning-color);
+$intent-danger-color: var(--intent-danger-color);
+$intent-success-background: var(--intent-success-background);
+$intent-info-background: var(--intent-info-background);
+$intent-warning-background: var(--intent-warning-background);
+$intent-danger-background: var(--intent-danger-background);
 
 $checkbox-checkmark-disabled-color: var(--checkbox-checkmark-disabled-color);
 $form-control-bg: var(--form-control-bg);
@@ -225,10 +239,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --elevation-2-bg: #{get($grey, 300, 'dark')};
   --elevation-2-box-shadow: #{get($shadows, 'none', 'dark')};
   --elevation-2-border-color: #{get($grey, 300, 'dark')};
-  --intent-color-success: #{get($intent, 'success', 'dark')};
-  --intent-color-info: #{get($intent, 'info', 'dark')};
-  --intent-color-warning: #{get($intent, 'warning', 'dark')};
-  --intent-color-danger: #{get($intent, 'danger', 'dark')};
+  @include generate-intent-variables($intent, 'dark');
   color: var(--text-primary-color);
 }
 
@@ -259,10 +270,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --elevation-2-bg: #{get($grey, 100)};
   --elevation-2-box-shadow: #{get($shadows, 'md')};
   --elevation-2-border-color: #{get($grey, 100)};
-  --intent-color-success: #{get($intent, 'success')};
-  --intent-color-info: #{get($intent, 'info')};
-  --intent-color-warning: #{get($intent, 'warning')};
-  --intent-color-danger: #{get($intent, 'danger')};
+  @include generate-intent-variables($intent);
   color: var(--text-primary-color);
 }
 /* stylelint-enable */
