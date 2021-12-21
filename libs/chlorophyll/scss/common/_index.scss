@@ -1,7 +1,7 @@
 @forward 'spacing';
 @forward 'disable';
 @forward 'focus';
-@forward 'border';
+@forward '../components/border/mixins';
 @forward 'typography';
 @forward 'functions';
 @forward 'breakpoints';

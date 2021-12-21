@@ -1,10 +1,10 @@
-@use '../../tokens/shame' as newTokens;
+@use '../../tokens/shame' as tokens;
 
-$radius: 4px;
-$width: 1px;
-$color: newTokens.$border-color;
-$color-invalid: newTokens.$border-color-invalid;
-$color-valid: newTokens.$border-color-valid;
+$radius: tokens.$border-radius;
+$width: tokens.$border-width;
+$color: tokens.$border-color;
+$color-invalid: tokens.$border-color-invalid;
+$color-valid: tokens.$border-color-valid;
 
 @mixin add-border-radius($radius: $radius) {
   border-radius: $radius;
@@ -21,5 +21,17 @@ $color-valid: newTokens.$border-color-valid;
 }
 
 @mixin add-border-color($color: $color) {
-  --border-color: $color;
+  --border-color: #{$color};
+}
+
+@mixin add-validation() {
+  &.is-invalid {
+    @include add-border-color($color-invalid);
+    @include add-border-radius();
+  }
+
+  &.is-valid {
+    @include add-border-color($color-valid);
+    @include add-border-radius();
+  }
 }
