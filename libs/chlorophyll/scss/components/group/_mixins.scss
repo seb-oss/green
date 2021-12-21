@@ -1,8 +1,8 @@
-@use '../../tokens/shame' as newTokens;
+@use '../../tokens/shame' as tokens;
 @use '../../common';
 
-$border-width: newTokens.$border-width;
-$border-color: newTokens.$border-color;
+$border-width: tokens.$border-width;
+$border-color: tokens.$border-color;
 
 @mixin add-group() {
   display: flex;
@@ -98,7 +98,7 @@ $border-color: newTokens.$border-color;
 
   .button,
   button {
-    background: newTokens.$form-control-bg;
+    background: tokens.$form-control-bg;
 
     &.disabled,
     &:disabled,

@@ -1,13 +1,12 @@
-@use '../../tokens';
-@use '../../tokens/shame' as newTokens;
+@use '../../tokens/shame' as tokens;
 @use '../../common';
 @use 'sass:map';
 
-$box-shadow: newTokens.$elevation-1-box-shadow;
+$box-shadow: tokens.$elevation-1-box-shadow;
 $z-index: tokens.$zindex-dropdown;
-$color: newTokens.$text-primary-color;
-$background: newTokens.$form-control-bg;
-$popover-bg: newTokens.$elevation-1-bg;
+$color: tokens.$text-primary-color;
+$background: tokens.$form-control-bg;
+$popover-bg: tokens.$elevation-1-bg;
 
 @mixin dropdown-trigger {
   @include common.padding-horizontal(5);
