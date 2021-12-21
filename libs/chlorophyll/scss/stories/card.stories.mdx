@@ -1,24 +1,21 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-export const Template = ({ headline, body, buttonText1, buttonText2 }) => `
+export const Template = ({ heading,closeButton, body, button, primaryButton, link }) => `
   <section class="card">
-    <div class="card-body">
-      <h2>${headline}</h2>
+      ${heading || closeButton ?
+      `<header>
+        <h3>${heading}</h3>
+        ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
+       </header>` : ''
+      }
       <p>${body}</p>
-      ${
-        buttonText1 || buttonText2
-          ? `
-      <footer>
-        ${buttonText1 ? `<button>${buttonText1}</button>` : ''}
-        ${
-          buttonText2
-            ? `<a class="button primary" href="#">${buttonText2}</a>`
-            : ''
-        }
-      </footer>
-      `
-          : ''
-      } 
+      ${button || primaryButton || link  ?
+      `<footer>
+        ${link ? `<a href="#">${link}</a>` : ''}
+        ${button ? `<button type="button">${button}</button>` : ''}
+        ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
+       </footer>` : ''
+      }
     </div>
   </section>
 `
@@ -26,10 +23,12 @@ export const Template = ({ headline, body, buttonText1, buttonText2 }) => `
 <Meta
   title="Components/Card"
   argTypes={{
-    headline: { control: 'text' },
+    heading: { control: 'text' },
     body: { control: 'text' },
-    buttonText1: { control: 'text' },
-    buttonText2: { control: 'text' },
+    link: { control: 'text' },
+    button: { control: 'text' },
+    primaryButton: { control: 'text' },
+    closeButton: { control: 'boolean' },
   }}
 />
 
@@ -57,14 +56,46 @@ To add contrast between its background and the surface it appears on, the cards 
 
 <Canvas>
   <Story
-    name="success"
+    name="example"
     args={{
-      headline: 'Card headline',
+      heading: 'Card headline',
       body: 'Card body',
-      buttonText1: 'Button 1',
-      buttonText2: 'Button 2',
+      link: '',
+      button: '',
+      primaryButton: '',
     }}
   >
     {Template.bind({})}
   </Story>
+</Canvas>
+
+
+## Element structure
+
+Cards can contain the following elements:
+
+**Header** (optional)<br/>
+Cards may have a `<header>...</header>` which in turn can contain a heading like `<h3>...</h3>` and optionally a `<button class="close">...</button>` if it's dismissable.
+
+**Content**<br/>
+Content should be placed between optional header and footer.
+
+**Footer** (optional)<br/>
+If the card has actions (like buttons) or contain links, they should be placed inside a `<footer>...</footer>`.
+
+<Canvas>
+    <section class="card">
+      <header>
+        <h3>Heading</h3>
+        <button class="close"><span class="sr-only">Close</span></button>
+      </header>
+      <p>
+        Card content placed here.
+      </p>
+      <footer>
+        <a href="#" class="button link">Link</a>
+        <button type="button">Default button</button>
+        <button type="button" class="primary">Primary button</button>
+      </footer>
+    </section>
 </Canvas>

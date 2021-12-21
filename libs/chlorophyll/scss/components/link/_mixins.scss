@@ -10,6 +10,7 @@ $font-weight: newTokens.$font-weight-bold;
   color: $color;
   font-weight: $font-weight;
   text-decoration: none;
+  border: none;
 
   &:hover,
   &:focus {

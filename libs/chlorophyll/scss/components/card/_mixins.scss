@@ -1,13 +1,63 @@
-@use '../../tokens/shame' as newToken;
+@use '../../tokens/shame' as tokens;
+@use '../../common';
 
-$padding-spacing: 5;
-$header-spacing-top: 0;
-$header-spacing-bottom: 4;
-$box-shadow: newToken.$elevation-1-box-shadow;
-$background: newToken.$elevation-1-bg;
-$heading-color: newToken.$heading-primary-color;
-$text-color: newToken.$text-inherit-color;
-$border: solid 1px newToken.$elevation-1-border-color;
+$box-shadow: tokens.$elevation-1-box-shadow;
+$background: tokens.$elevation-1-bg;
+$heading-color: tokens.$heading-primary-color;
+$color: tokens.$text-inherit-color;
+$border: solid 1px tokens.$elevation-1-border-color;
 $border-radius: 0;
 $layout-direction: column;
-$shadow-level: 1;
+
+@mixin card() {
+  background-clip: border-box;
+  background: $background;
+  border: $border;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  color: $color;
+  display: flex;
+  flex-direction: $layout-direction;
+  @include common.padding(5);
+
+  > header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    @include common.margin-bottom(4);
+    .close {
+      margin: -0.5rem -0.5rem -0.5rem 0.5rem;
+    }
+  }
+
+  > footer {
+    @include common.margin-top(4);
+    @include common.media-breakpoint-up('sm') {
+      display: flex;
+      justify-content: flex-end;
+    }
+    button:not(.link),
+    .button:not(.link) {
+      + {
+        button,
+        .button {
+          @include common.media-breakpoint-only('xs') {
+            @include common.margin-top(4);
+          }
+          @include common.media-breakpoint-up('sm') {
+            @include common.margin-start(4);
+          }
+        }
+      }
+    }
+  }
+
+  // TODO: Picture in card
+  /*figure,
+  img,
+  picture {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }*/
+}

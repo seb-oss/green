@@ -32,15 +32,15 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
   border: $border;
   color: $color;
   display: inline-block;
-  @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
+  @include common.padding(5);
 
   > header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-
     .close {
+      margin: -0.5rem -0.5rem -0.5rem 0.5rem;
+
       --fadable-foreground-color: #{$close-bg-hover};
       &::before,
       &::after {
