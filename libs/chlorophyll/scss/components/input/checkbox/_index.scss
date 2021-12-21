@@ -1,27 +1,6 @@
-@use '../../../tokens/color';
 @use '../../../common';
 @use 'sass:map';
 @use 'mixins' as checkbox;
-
-/* Style for label */
-.form-control {
-  @include common.padding-vertical(4);
-  @include common.padding-end(4);
-  @include common.add-hover-state(
-    checkbox.$background-hover,
-    'input[type=checkbox]:not(.disabled,:disabled) ~ i'
-  );
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row-reverse;
-  font: inherit;
-  justify-content: flex-end;
-  max-width: fit-content;
-  position: relative;
-  user-select: none;
-  white-space: nowrap;
-}
 
 /* Hide the browser's default checkbox */
 .form-control input[type='checkbox'] {
@@ -46,6 +25,14 @@
   width: 1.25rem;
 }
 
+/* Hover state */
+.form-control {
+  @include common.add-hover-state(
+    checkbox.$background-hover,
+    'input[type=checkbox]:not(.disabled,:disabled) ~ i'
+  );
+}
+
 /* Checked state */
 .form-control input[type='checkbox']:checked ~ i {
   @include common.add-border-color(checkbox.$border-checked);
@@ -56,11 +43,11 @@
 .was-validated .form-control input[type='checkbox']:not(.is-invalid):valid,
 .form-control input[type='checkbox'].is-valid {
   ~ i {
-    @include common.add-border-color(map.get(color.$intent-colors, 'success'));
+    @include common.add-border-color(checkbox.$valid-color);
   }
 
   &:checked ~ i {
-    background-color: map.get(color.$intent-colors, 'success');
+    background-color: checkbox.$valid-color;
   }
 }
 
@@ -68,11 +55,11 @@
 .was-validated .form-control input[type='checkbox']:not(.is-valid):invalid,
 .form-control input[type='checkbox'].is-invalid {
   ~ i {
-    @include common.add-border-color(map.get(color.$intent-colors, 'danger'));
+    @include common.add-border-color(checkbox.$invalid-color);
   }
 
   &:checked ~ i {
-    background-color: map.get(color.$intent-colors, 'danger');
+    background-color: checkbox.$invalid-color;
   }
 }
 
