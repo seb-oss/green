@@ -1,16 +1,6 @@
-@use '../../common';
-@use 'mixins' as border;
-@use 'sass:map';
+@use 'mixins' as mixins;
 
-/* Validation */
 .border {
-  &.is-invalid {
-    @include common.add-border-color(border.$color-invalid);
-    @include common.add-border-radius();
-  }
-
-  &.is-valid {
-    @include common.add-border-color(border.$color-valid);
-    @include common.add-border-radius();
-  }
+  /* Add validation variants */
+  @include mixins.add-validation;
 }
