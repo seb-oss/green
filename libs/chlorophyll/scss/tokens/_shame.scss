@@ -5,10 +5,14 @@
 }
 
 @mixin generate-intent-variables($map, $theme: light) {
-  @each $key, $value in map.get($map, $theme) {
+  $desired-color: #fff;
+  @if ($theme == dark) {
+    $desired-color: #000;
+  }
+  @each $key, $color in map.get($map, $theme) {
     /* try and adjust colors to get desired color combination,
     in this case adjust background to go with white foreground */
-    $colors: functions.desired-color-combination(#fff, $value);
+    $colors: functions.desired-color-combination($desired-color, $color);
     --intent-#{$key}-background: #{nth($colors, 1)};
     --intent-#{$key}-color: #{nth($colors, 2)};
   }
@@ -45,9 +49,9 @@ $green: (
     2: rgb(96, 205, 24),
   ),
   dark: (
-    0: rgb(143, 214, 104),
-    1: rgb(117, 186, 74),
-    2: rgb(96, 205, 24),
+    0: rgb(96, 205, 24),
+    1: rgb(117, 180, 74),
+    2: rgb(48, 136, 0),
   ),
 );
 
@@ -58,9 +62,9 @@ $blue: (
     2: rgb(65, 176, 238),
   ),
   dark: (
-    0: rgb(0, 122, 199),
-    1: rgb(0, 146, 225),
-    2: rgb(65, 176, 238),
+    0: rgb(88, 184, 238),
+    1: rgb(0, 173, 255),
+    2: rgb(44, 156, 217),
   ),
 );
 
@@ -72,8 +76,8 @@ $red: (
   ),
   dark: (
     0: rgb(247, 112, 109),
-    1: rgb(219, 90, 88),
-    2: rgb(240, 53, 41),
+    1: rgb(200, 42, 41),
+    2: rgb(158, 33, 32),
   ),
 );
 
@@ -84,9 +88,22 @@ $yellow: (
     2: rgb(255, 197, 0),
   ),
   dark: (
-    0: rgb(235, 171, 57),
+    0: rgb(255, 225, 130),
     1: rgb(240, 190, 71),
-    2: rgb(255, 225, 130),
+    2: rgb(235, 171, 57),
+  ),
+);
+
+$purple: (
+  light: (
+    0: rgb(63, 37, 135),
+    1: rgb(79, 44, 153),
+    2: rgb(103, 58, 182),
+  ),
+  dark: (
+    0: rgb(173, 145, 220),
+    1: rgb(126, 82, 204),
+    2: rgb(74, 50, 143),
   ),
 );
 /* stylelint-disable */
@@ -163,14 +180,14 @@ $intent: (
   light: (
     'info': get($blue, 0),
     'success': get($green, 0),
-    'warning': get($yellow, 1),
+    'warning': get($yellow, 2),
     'danger': get($red, 1),
   ),
   dark: (
     'info': get($blue, 2, 'dark'),
-    'success': get($green, 0, 'dark'),
-    'warning': get($yellow, 2, 'dark'),
-    'danger': get($red, 0, 'dark'),
+    'success': get($green, 2, 'dark'),
+    'warning': get($yellow, 0, 'dark'),
+    'danger': get($red, 1, 'dark'),
   ),
 );
 

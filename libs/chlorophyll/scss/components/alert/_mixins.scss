@@ -24,6 +24,7 @@ $border-radius: 0;
 $border: solid 1px var(--background);
 $color: var(--color);
 $background: var(--background);
+$close-bg-hover: common.stripped-rgb(tokens.$black);
 
 @mixin alert {
   background: $background;
@@ -40,6 +41,7 @@ $background: var(--background);
     justify-content: space-between;
 
     .close {
+      --fadable-foreground-color: #{$close-bg-hover};
       &::before,
       &::after {
         background: var(--color);
