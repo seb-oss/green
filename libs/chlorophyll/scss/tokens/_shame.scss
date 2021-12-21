@@ -42,6 +42,17 @@ $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 800;
 
+// z-index values for managing depth
+// based on what we have and use in bootstrap today
+$zindex-dropdown-backdrop: 990;
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;
+
 $green: (
   light: (
     0: rgb(55, 157, 0),
