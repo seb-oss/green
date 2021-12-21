@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../../tokens';
-@use '../../tokens/shame' as newTokens;
+@use 'sass:map';
+@use '../../tokens/shame' as tokens;
 @use '../../common';
 
 $close-height: 42px;
@@ -10,10 +10,10 @@ $close-width-sm: $close-height-sm;
 $close-padding: 20px;
 $close-padding-sm: 16px;
 $close-thickness: 4px;
-$close-bg: rgba(newTokens.$fadable-foreground-color, 0);
-$close-bg-hover: rgba(newTokens.$fadable-foreground-color, 0.1);
-$close-bg-active: rgba(newTokens.$fadable-foreground-color, 0.2);
-$close-icon-color: newTokens.$text-primary-color;
+$close-bg: rgba(tokens.$fadable-foreground-color, 0);
+$close-bg-hover: rgba(tokens.$fadable-foreground-color, 0.1);
+$close-bg-active: rgba(tokens.$fadable-foreground-color, 0.2);
+$close-icon-color: tokens.$text-primary-color;
 @mixin close {
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
@@ -30,12 +30,6 @@ $close-icon-color: newTokens.$text-primary-color;
     }
   }
 
-  /*@include common.add-hover-active-state(
-    $close-bg-hover,
-    $active: map-get(tokens.$grey, 4)
-  );*/
-
-  @include common.add-active-state(map-get(tokens.$grey, 4));
   @include common.add-focus();
   background: $close-bg;
   border: 0;
