@@ -21,7 +21,9 @@ $color-valid: tokens.$border-color-valid;
 }
 
 @mixin add-border-color($color: $color) {
-  --border-color: #{$color};
+  @if not($color == var(--border-color)) {
+    --border-color: #{$color};
+  }
 }
 
 @mixin add-validation() {
