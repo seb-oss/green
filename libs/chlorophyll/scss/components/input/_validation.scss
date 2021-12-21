@@ -56,12 +56,12 @@ input + .form-info,
 
 .was-validated input:not(.is-invalid):valid + .form-info,
 .is-valid ~ .form-info {
-  @include add-feedback(newToken.$intent-color-success);
+  @include add-feedback(newToken.$intent-success-background);
 }
 
 .was-validated input:not(.is-valid):invalid + .form-info,
 .is-invalid ~ .form-info {
-  @include add-feedback(newToken.$intent-color-danger);
+  @include add-feedback(newToken.$intent-danger-background);
 }
 
 /* rules for groups of checkboxes and radio buttons*/
@@ -72,11 +72,11 @@ fieldset {
   border: 0;
 
   &.is-valid {
-    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-color-success;
+    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-success-background;
   }
 
   &.is-invalid {
-    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-color-danger;
+    box-shadow: 0 0 0 newToken.$border-width newToken.$intent-danger-background;
   }
 }
 

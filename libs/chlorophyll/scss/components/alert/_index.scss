@@ -1,13 +1,17 @@
-@use '../../tokens';
-@use '../../common';
 @use 'mixins';
-@forward 'mixins';
+@use 'sass:map';
 
 div[role='alert'] {
+  // add base styles for alert
   @include mixins.alert();
-  @each $intent, $color in tokens.$intent-colors {
-    &.#{$intent} {
-      @include mixins.alert-variant($color);
+
+  // add styles for each variant
+  @each $variant, $colors in mixins.$variants {
+    &.#{$variant} {
+      @include mixins.alert-variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'background')
+      );
     }
   }
 }

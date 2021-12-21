@@ -1,31 +1,96 @@
-@use '../../tokens/shame' as newTokens;
+@use '../../tokens/shame' as tokens;
 @use '../../common';
-@use '../../components/button/mixins' as button;
+
+$variants: (
+  'info': (
+    color: tokens.$intent-info-color,
+    background: tokens.$intent-info-background,
+  ),
+  'success': (
+    color: tokens.$intent-success-color,
+    background: tokens.$intent-success-background,
+  ),
+  'warning': (
+    color: tokens.$intent-warning-color,
+    background: tokens.$intent-warning-background,
+  ),
+  'danger': (
+    color: tokens.$intent-danger-color,
+    background: tokens.$intent-danger-background,
+  ),
+);
+
+$border-radius: 0;
+$border: solid 1px var(--background);
+$color: var(--color);
+$background: var(--background);
+$close-bg-hover: common.stripped-rgb(tokens.$black);
 
 @mixin alert {
+  background: $background;
+  border-radius: $border-radius;
+  border: $border;
+  color: $color;
+  display: inline-block;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
 
-  > h3,
-  > .h3,
+  > header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .close {
+      --fadable-foreground-color: #{$close-bg-hover};
+      &::before,
+      &::after {
+        background: var(--color);
+      }
+    }
+  }
+
   > p {
     @include common.margin-vertical(0);
   }
-}
-
-@mixin alert-variant($color) {
-  @include common.desired-color-combination(newTokens.$white, $color);
-
   a {
     color: inherit;
+    text-decoration: underline;
+    transition: opacity 300ms ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:focus-visible {
+      outline-color: currentColor;
+    }
   }
+  > footer {
+    @include common.margin-top(4);
+    @include common.media-breakpoint-up('sm') {
+      display: flex;
+      justify-content: flex-end;
+    }
+    button,
+    .button {
+      &:not(.primary, [type='submit']) {
+        border-color: currentColor;
+        color: currentColor;
+      }
+      + {
+        button,
+        .button {
+          @include common.media-breakpoint-only('xs') {
+            @include common.margin-top(4);
+          }
+          @include common.media-breakpoint-up('sm') {
+            @include common.margin-start(4);
+          }
+        }
+      }
+    }
+  }
+}
 
-  p + button {
-    @include common.margin-top(3);
-  }
-
-  button {
-    $bg: common.desired-color-combination(newTokens.$white, $color);
-    @include button.ghost(nth($bg, 1));
-  }
+@mixin alert-variant($color, $background) {
+  --background: #{$background};
+  --color: #{$color};
 }
