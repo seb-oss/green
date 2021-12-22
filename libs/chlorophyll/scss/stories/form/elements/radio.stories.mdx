@@ -1,0 +1,204 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components/Form/Elements/Radio button" />
+
+# Radio
+
+Lorem ipsum radio
+
+## Default radio
+<Canvas>
+  <label class="form-control">
+    <input type="radio"/>
+    <span>Radio</span><i/>
+  </label>
+</Canvas>
+
+## States and variants radio
+<Canvas>
+  <form>
+    <label class="form-control">
+      <input type="radio" name="default"/>
+      <span>Radio</span><i/>
+    </label>
+    <label class="form-control">
+      <input type="radio" name="default"checked/>
+      <span>Radio</span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">
+      <input type="radio" name="valid" class="is-valid"/>
+      <span>Radio</span><i/>
+    </label>
+    <label class="form-control">
+      <input type="radio" name="valid" class="is-valid" checked/>
+      <span>Radio</span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">
+      <input type="radio" name="invalid" class="is-invalid"/>
+      <span>Radio</span><i/>
+    </label>
+    <label class="form-control">
+      <input type="radio" name="invalid" class="is-invalid" checked/>
+      <span>Radio</span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">
+      <input type="radio" name="disabled" disabled />
+      <span>Radio</span><i/>
+    </label>
+    <label class="form-control">
+      <input type="radio" name="disabled" disabled checked/>
+      <span>Radio</span><i/>
+    </label>
+  </form>
+</Canvas>
+
+## Group
+Group form controls such as checkboxes and radio buttons using `<fieldset>` and add an optional description using a `<legend>`.
+
+<Canvas>
+  <form>
+    <div class="form-group">
+      <fieldset>
+        <legend class="sr-only">Radio group</legend>
+        <label class="form-control">
+          <input type="radio" name="radioGroup"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input type="radio" name="radioGroup"/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+    </div>
+  </form>
+</Canvas>
+
+### Horizontal form with group and visible legend
+<Canvas>
+  <form class="horizontal">
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp">
+        <legend>Radio group</legend>
+        <label class="form-control">
+          <input type="radio" name="horizontal"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input type="radio" name="horizontal"/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+    </div>
+  </form>
+</Canvas>
+
+
+
+## Validation
+### Default form (vertical)
+<Canvas>
+  <form>
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp">
+        <legend>Radio group</legend>
+        <span id="radioGroupHelp" class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required type="radio" name="radioGroupNormal"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required type="radio" name="radioGroupNormal" required/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp1" class="is-valid">
+        <legend>Valid radio group</legend>
+        <span id="radioGroupHelp1" class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required class="is-valid" name="radioGroupValid" type="radio"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required class="is-valid" name="radioGroupValid" type="radio" required/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp2" class="is-invalid">
+        <legend>Invalid radio group</legend>
+        <span class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required class="is-invalid" name="radioGroupInvalid" type="radio"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required class="is-invalid" name="radioGroupInvalid" type="radio" required/>
+          <span>One</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
+</Canvas>
+
+### Horizontal
+<Canvas>
+  <form class="horizontal">
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp">
+        <legend>Radio group</legend>
+        <span id="radioGroupHelp" class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required type="radio" name="radioGroupNormalHorizontal"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required type="radio" name="radioGroupNormalHorizontal" required/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp1" class="is-valid">
+        <legend>Valid radio group</legend>
+        <span id="radioGroupHelp1" class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required class="is-valid" name="radioGroupValidHorizontal" type="radio"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required class="is-valid" name="radioGroupValidHorizontal" type="radio" required/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="radioGroupHelp2" class="is-invalid">
+        <legend>Invalid radio group</legend>
+        <span class="form-info">Radio group description</span>
+        <label class="form-control">
+          <input required class="is-invalid" name="radioGroupInvalidHorizontal" type="radio"/>
+          <span>One</span><i/>
+        </label>
+        <label class="form-control">
+          <input required class="is-invalid" name="radioGroupInvalidHorizontal" type="radio" required/>
+          <span>Two</span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
+</Canvas>

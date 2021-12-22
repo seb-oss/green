@@ -1,6 +1,0 @@
-@use '../tokens';
-@use 'sass:map';
-
-@mixin add-shadow($shadow-level: 0) {
-  box-shadow: map.get(tokens.$depth-level, $shadow-level);
-}

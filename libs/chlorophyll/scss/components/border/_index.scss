@@ -1,0 +1,6 @@
+@use 'mixins' as mixins;
+
+.border {
+  /* Add validation variants */
+  @include mixins.add-validation;
+}

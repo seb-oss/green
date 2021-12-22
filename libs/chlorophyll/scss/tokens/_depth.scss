@@ -1,0 +1,12 @@
+@use './color';
+@use 'sass:map';
+
+// based on what we have and use in bootstrap today
+$zindex-dropdown-backdrop: 990;
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;

@@ -1,7 +1,0 @@
-@use '../../tokens';
-@use '../../common';
-@use 'mixins';
-
-.brand {
-  @include mixins.add-brand();
-}

@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/sebgroup/green/labels/extract"
   },
-  "homepage": "https://sebgroup.github.io/green/latest/extract/"
+  "homepage": "https://sebgroup.github.io/green/latest/extract/",
+  "dependencies": {
+    "merge": "*",
+    "@popperjs/core": "*",
+    "rxjs": "*"
+  }
 }

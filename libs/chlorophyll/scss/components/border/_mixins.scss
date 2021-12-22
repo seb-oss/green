@@ -1,0 +1,39 @@
+@use '../../tokens/shame' as tokens;
+
+$radius: tokens.$border-radius;
+$width: tokens.$border-width;
+$color: tokens.$border-color;
+$color-invalid: tokens.$border-color-invalid;
+$color-valid: tokens.$border-color-valid;
+
+@mixin add-border-radius($radius: $radius) {
+  border-radius: $radius;
+}
+
+@mixin add-border($sides: false, $width: $width, $color: $color) {
+  @if not $sides {
+    border: solid $width $color;
+  } @else {
+    @each $side in $sides {
+      border-#{$side}: solid $width $color;
+    }
+  }
+}
+
+@mixin add-border-color($color: $color) {
+  @if not($color == var(--border-color)) {
+    --border-color: #{$color};
+  }
+}
+
+@mixin add-validation() {
+  &.is-invalid {
+    @include add-border-color($color-invalid);
+    @include add-border-radius();
+  }
+
+  &.is-valid {
+    @include add-border-color($color-valid);
+    @include add-border-radius();
+  }
+}

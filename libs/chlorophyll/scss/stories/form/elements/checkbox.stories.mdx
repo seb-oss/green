@@ -1,0 +1,203 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+<Meta title="Components/Form/Elements/Checkbox" />
+
+# Checkbox
+
+Lorem ipsum checkboxes
+
+## Default checkbox
+<Canvas>
+  <label class="form-control">
+    <input type="checkbox"/>
+    <span>Checkbox</span><i/>
+  </label>
+</Canvas>
+
+## States and variants checkbox
+<Canvas>
+  <form>
+    <label class="form-control">
+      <input type="checkbox" />
+      <span>Checkbox</span><i/>
+    </label>
+    <label class="form-control">Checkbox
+      <input type="checkbox" checked/>
+      <span></span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">Checkbox
+      <input type="checkbox" class="is-valid"/>
+      <span></span><i/>
+    </label>
+    <label class="form-control">Checkbox
+      <input type="checkbox" class="is-valid" checked/>
+      <span></span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">Checkbox
+      <input type="checkbox" class="is-invalid"/>
+      <span></span><i/>
+    </label>
+    <label class="form-control">Checkbox
+      <input type="checkbox" class="is-invalid" checked/>
+      <span></span><i/>
+    </label>
+  </form>
+  <form>
+    <label class="form-control">Checkbox
+      <input type="checkbox" disabled />
+      <span></span><i/>
+    </label>
+    <label class="form-control">Checkbox
+      <input type="checkbox" disabled checked/>
+      <span></span><i/>
+    </label>
+  </form>
+</Canvas>
+
+## Group
+Group form controls such as checkboxes and radio buttons using `<fieldset>` and add an optional description using a `<legend>`.
+
+### Default group with hidden legend
+<Canvas>
+  <form>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp">
+        <legend class="sr-only">Checkbox group</legend>
+        <label class="form-control">One
+          <input required type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+    </div>
+  </form>
+</Canvas>
+
+### Horizontal form with group and visible legend
+<Canvas>
+  <form class="horizontal">
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp">
+        <legend>Checkbox group</legend>
+        <label class="form-control">One
+          <input required type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+    </div>
+  </form>
+</Canvas>
+
+## Validation
+### Default form (vertical)
+<Canvas>
+  <form>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp">
+        <legend>Checkbox group</legend>
+        <span id="checkboxGroupHelp" class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp1" class="is-valid">
+        <legend>Valid checkbox group</legend>
+        <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required class="is-valid" type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required class="is-valid" type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
+        <legend>Invalid checkbox group</legend>
+        <span class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required class="is-invalid" type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required class="is-invalid" type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
+</Canvas>
+
+### Horizontal
+<Canvas>
+  <form class="horizontal">
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp">
+        <legend>Checkbox group</legend>
+        <span id="checkboxGroupHelp" class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp1" class="is-valid">
+        <legend>Valid checkbox group</legend>
+        <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required class="is-valid" type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required class="is-valid" type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Valid</span>
+    </div>
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
+        <legend>Invalid checkbox group</legend>
+        <span class="form-info">Checkbox group description</span>
+        <label class="form-control">One
+          <input required class="is-invalid" type="checkbox"/>
+          <span></span><i/>
+        </label>
+        <label class="form-control">Two
+          <input required class="is-invalid" type="checkbox" required/>
+          <span></span><i/>
+        </label>
+      </fieldset>
+      <span class="form-info">Error</span>
+    </div>
+  </form>
+</Canvas>

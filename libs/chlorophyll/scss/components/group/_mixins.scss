@@ -1,0 +1,109 @@
+@use '../../tokens/shame' as tokens;
+@use '../../common';
+
+$border-width: tokens.$border-width;
+$border-color: tokens.$border-color;
+
+@mixin add-group() {
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  width: fit-content;
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
+
+  > * {
+    flex: 1 1 auto;
+    margin: 0;
+    min-width: 0 !important;
+    @include common.media-breakpoint-up('sm') {
+      flex: 0 1 auto;
+    }
+  }
+
+  > *:focus {
+    position: relative;
+  }
+
+  &:not(.group-border) > * + *:not(:last-child) {
+    border-radius: 0 !important;
+    margin-left: -($border-width);
+    padding-left: calc(1rem + #{$border-width});
+  }
+
+  > *:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  > *:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -($border-width);
+    padding-left: calc(1rem + #{$border-width});
+  }
+
+  &.group-border {
+    @include common.add-focus('within');
+    @include common.add-focus('within', 'button, .button');
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-border-radius();
+
+    > * + *:not(:last-child) {
+      border-left-color: transparent;
+      border-radius: 0;
+      border-right-color: transparent;
+    }
+
+    > *:first-child {
+      border-right-color: transparent;
+    }
+
+    > *:last-child:not(button) {
+      border-left-color: transparent;
+    }
+
+    > * {
+      border: 0;
+      box-shadow: none !important;
+    }
+
+    > button,
+    > .button {
+      border-bottom: solid $border-width $border-color;
+      border-top: solid $border-width $border-color;
+      margin: -($border-width);
+      min-width: auto !important;
+      padding-left: calc(1rem + #{$border-width});
+
+      &:last-child {
+        border-right: solid $border-width $border-color;
+      }
+    }
+
+    .form-text {
+      @include common.padding-end(5);
+    }
+  }
+
+  &.group-border.disabled {
+    @include common.add-disable(false, false, true);
+  }
+
+  .form-text {
+    @include common.padding-vertical(4);
+  }
+
+  .button,
+  button {
+    background: tokens.$form-control-bg;
+
+    &.disabled,
+    &:disabled,
+    &[aria-disabled='true'] {
+      @include common.add-disable(true, true, true);
+    }
+  }
+}

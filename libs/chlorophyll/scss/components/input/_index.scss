@@ -1,0 +1,72 @@
+@use 'mixins';
+@use '../../tokens';
+@use '../../common';
+@use 'sass:map';
+@use 'validation';
+@use 'form-control';
+@use 'radio';
+@use 'checkbox';
+
+input:not([type]),
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'] {
+  @include mixins.text-input();
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(true, true, true);
+  }
+}
+
+form,
+.form {
+  > * {
+    @include common.margin-bottom(6);
+  }
+}
+
+.horizontal {
+  @include mixins.horizontal-layout;
+}
+
+.form-text {
+  border: solid transparent 1px; // correct vertical alignment
+  display: flex;
+  font: inherit;
+}
+
+// field
+.form-group {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  @include common.media-breakpoint-up('sm') {
+    @include common.margin-bottom(6);
+    width: fit-content;
+  }
+}
+
+.form-group > input {
+  @include common.margin-bottom(3);
+}
+
+// label
+.form-group label:not(.form-control) {
+  @include common.font-weight('medium');
+  @include common.margin-bottom(3, true);
+  display: block !important;
+}
