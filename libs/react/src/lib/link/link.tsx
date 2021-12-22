@@ -1,36 +1,33 @@
 import { HTMLProps, PropsWithChildren, useEffect, useState } from 'react'
-import { ButtonVariant, LinkRel, LinkRole } from '@sebgroup/extract'
+import { ButtonVariant } from '@sebgroup/extract'
 
-interface LinkProps {
-  id?: string
-  href?: string
-  target?: '_self' | '_blank' | '_parent' | '_top' | string
+interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   button?: boolean | ButtonVariant
-  rel?: LinkRel | LinkRel[]
-  role?: LinkRole
-  external?: boolean
 }
 
-export const Link = ({ href, target, button, rel, role, external, id, children }: PropsWithChildren<LinkProps>) => {
-  const [props, setProps] = useState<HTMLProps<HTMLAnchorElement>>({})
+export const Link = ({
+  button,
+  children,
+  ...props
+}: PropsWithChildren<LinkProps>) => {
+  const [anchorProps, setAnchorProps] = useState<HTMLProps<HTMLAnchorElement>>(
+    {}
+  )
   useEffect(() => {
-    const className = (button)
-      ? ((typeof button === 'string') ? `button ${button}` : 'button')
+    const className = button
+      ? typeof button === 'string'
+        ? `button ${button}`
+        : 'button'
       : undefined
-    const rels = (rel) ? ((rel instanceof Array) ? rel : [rel]) : []
-    if (external && !rels.includes('external')) rels.push('external')
-    
     const newProps: HTMLProps<HTMLAnchorElement> = {
-      role: role || ((button) ? 'button' : undefined),
-      rel: rels.join(' ') || undefined,
-      className,
-      href,
-      id,
-      target,
+      role: button ? 'button' : undefined,
+      className: className,
+      ...props,
     }
-    setProps(newProps)
-  }, [href, target, button, rel, external, id])
-  return <a {...props}>{ children }</a>
+    setAnchorProps(newProps)
+  }, [button])
+
+  return <a {...anchorProps}>{children}</a>
 }
 
 export default Link
