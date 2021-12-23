@@ -2,11 +2,7 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import List from './list'
 
 export const Template = ({ children, ...props }) => (
-  <List {...props}>
-    <li>First</li>
-    <li>Second</li>
-    <li>Third</li>
-  </List>
+  <List {...props}>{children}</List>
 )
 
 <Meta title="Components/List" component={List} />
@@ -20,6 +16,7 @@ export const Template = ({ children, ...props }) => (
     name="Ordered-list"
     args={{
       listType: 'ordered',
+      children: ['First', 'Second', 'Third', 'Fourth'],
     }}
   >
     {Template.bind({})}
@@ -33,6 +30,7 @@ export const Template = ({ children, ...props }) => (
     name="Unordered-list"
     args={{
       listType: 'unordered',
+      children: ['First', 'Second', 'Third', 'Fourth'],
     }}
   >
     {Template.bind({})}
@@ -46,10 +44,9 @@ export const Template = ({ children, ...props }) => (
     name="Check-list"
     args={{
       listType: 'check',
+      children: ['First', 'Second', 'Third', 'Fourth'],
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
-
-<List>asdasdasd</List>

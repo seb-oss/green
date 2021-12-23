@@ -1,36 +1,30 @@
 import { ListType } from '@sebgroup/extract'
-import React, {
-  ReactNode,
-  HTMLProps,
-  OlHTMLAttributes,
-  HTMLAttributes,
-} from 'react'
+import { ReactNode, HTMLAttributes } from 'react'
+import ListItem from './listItem'
 
-interface ListProps extends HTMLAttributes<HTMLElement> {
+interface ListProps
+  extends HTMLAttributes<HTMLOListElement | HTMLUListElement> {
   listType?: ListType
   children?: ReactNode[]
 }
 
 export const List = ({ listType, children, ...props }: ListProps) => {
-  switch (listType) {
-    case 'ordered': {
-      const newProps: OlHTMLAttributes<HTMLOListElement> = { ...props }
-      return <ol {...newProps}>{children?.map((child) => child)}</ol>
-    }
-    case 'unordered': {
-      const newProps: HTMLProps<HTMLUListElement> = { ...props }
-      return <ul {...newProps}>{children?.map((child) => child)}</ul>
-    }
-    case 'check': {
-      const newProps: HTMLProps<HTMLUListElement> = { ...props }
-      return (
-        <ul {...newProps} className={listType}>
-          {children?.map((child) => child)}
-        </ul>
-      )
-    }
-    default:
-      return <ul></ul>
+  if (listType === 'ordered') {
+    return (
+      <ol {...props}>
+        {children?.map((child, index) => (
+          <ListItem key={index}>{child}</ListItem>
+        ))}
+      </ol>
+    )
+  } else {
+    return (
+      <ul {...props} className={listType}>
+        {children?.map((child, index) => (
+          <ListItem key={index}>{child}</ListItem>
+        ))}
+      </ul>
+    )
   }
 }
 
