@@ -40,7 +40,12 @@ Simple navbar component.
     name="Search"
     args={{
       title: 'Page heading',
-      children: <input type="text"></input>,
+      children: [
+        <input type="text" placeholder="Input field" />,
+        <button type="button" class="ghost">
+          Search
+        </button>,
+      ],
     }}
   >
     {Template.bind({})}
