@@ -5,10 +5,16 @@ import ListItem from './listItem'
 interface ListProps
   extends HTMLAttributes<HTMLOListElement | HTMLUListElement> {
   listType?: ListType
+  tableCaption?: string
   children?: ReactNode[]
 }
 
-export const List = ({ listType, children, ...props }: ListProps) => {
+export const List = ({
+  listType,
+  tableCaption,
+  children,
+  ...props
+}: ListProps) => {
   if (listType === 'ordered') {
     return (
       <ol {...props}>
@@ -17,13 +23,26 @@ export const List = ({ listType, children, ...props }: ListProps) => {
         ))}
       </ol>
     )
-  } else {
+  } else if (listType !== 'table') {
     return (
       <ul {...props} className={listType}>
         {children?.map((child, index) => (
           <ListItem key={index}>{child}</ListItem>
         ))}
       </ul>
+    )
+  } else {
+    return (
+      <figure>
+        <figcaption className="table-list-caption">{tableCaption}</figcaption>
+        <dl>
+          {children?.map((child, index) => (
+            <ListItem listType={listType} key={index}>
+              {child}
+            </ListItem>
+          ))}
+        </dl>
+      </figure>
     )
   }
 }

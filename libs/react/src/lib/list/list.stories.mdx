@@ -5,6 +5,15 @@ export const Template = ({ children, ...props }) => (
   <List {...props}>{children}</List>
 )
 
+export const TableListTemplate = ({ ...props }) => (
+  <List {...props}>
+    <dt>First</dt>
+    <dt>Second</dt>
+    <dt>Third</dt>
+    <dt>Fourth</dt>
+  </List>
+)
+
 <Meta title="Components/List" component={List} />
 
 # List
@@ -48,5 +57,19 @@ export const Template = ({ children, ...props }) => (
     }}
   >
     {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Table List
+
+<Canvas>
+  <Story
+    name="Table-list"
+    args={{
+      listType: 'table',
+      tableCaption: 'Table List',
+    }}
+  >
+    {TableListTemplate.bind({})}
   </Story>
 </Canvas>
