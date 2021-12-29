@@ -4,12 +4,13 @@ import { HTMLAttributes, ReactNode, useEffect, useState } from 'react'
 
 interface NavProps extends HTMLAttributes<HTMLElement> {
   title?: string
+  titleLink?: string
   variant?: NavbarVariant
   children?: ReactNode
 }
 
 //TODO: Add variants
-export const Navbar = ({ children, variant, title }: NavProps) => {
+export const Navbar = ({ children, variant, title, titleLink }: NavProps) => {
   const [props, setProps] = useState<HTMLAttributes<HTMLElement>>({})
   useEffect(() => {
     const classNames: string[] = []
@@ -29,9 +30,13 @@ export const Navbar = ({ children, variant, title }: NavProps) => {
       <div className="container-fluid">
         <div className="row justify-content-between align-items-center">
           <div className="col-auto">
-            <Link className="mx-4">
+            {titleLink ? (
+              <Link className="mx-4" href={titleLink}>
+                <h1>{title}</h1>
+              </Link>
+            ) : (
               <h1>{title}</h1>
-            </Link>
+            )}
           </div>
         </div>
       </div>

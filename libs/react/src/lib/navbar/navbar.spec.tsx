@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { getByRole, render, screen } from '@testing-library/react'
 import Navbar from './navbar'
 
 describe('Navbar', () => {
@@ -33,5 +33,19 @@ describe('Navbar', () => {
   it('should have render variant transparent', () => {
     render(<Navbar title={title} />)
     expect(screen.getByRole('navigation').classList.length).toBe(0)
+  })
+
+  it('should render default title', () => {
+    const { container } = render(<Navbar title={title} />)
+    expect(container.querySelectorAll('a')[1]).toBeFalsy()
+    expect(container.querySelector('h1')?.textContent).toBe('Header')
+  })
+
+  it('should render linkable title', () => {
+    const { container } = render(<Navbar title={title} titleLink="#" />)
+    const anchorElement: HTMLAnchorElement = container.querySelectorAll('a')[1]
+    expect(anchorElement).toBeTruthy()
+    expect(anchorElement.href).toBe('http://localhost/#')
+    expect(anchorElement.textContent).toBe('Header')
   })
 })
