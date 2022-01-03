@@ -11,7 +11,7 @@ Simple navbar component.
 
 <Meta title="Components/Navbar" component={Navbar} />
 
-### Transparent navbar with heading and brand as link
+### Transparent navbar with heading and brand and header as link
 
 <Canvas>
   <Story name="Default" args={{ title: 'Page heading', titleLink: '#' }}>
@@ -19,7 +19,7 @@ Simple navbar component.
   </Story>
 </Canvas>
 
-### Dark navbar with heading and brand as link
+### Dark navbar with heading and brand
 
 <Canvas>
   <Story name="Dark" args={{ title: 'Page heading', variant: 'bg-dark' }}>
@@ -27,7 +27,7 @@ Simple navbar component.
   </Story>
 </Canvas>
 
-### Light navbar with heading and brand as link
+### Light navbar with heading and brand
 
 <Canvas>
   <Story name="Light" args={{ title: 'Page heading', variant: 'bg-light' }}>
@@ -35,11 +35,14 @@ Simple navbar component.
   </Story>
 </Canvas>
 
+### Light navbar with grid and additional content
+
 <Canvas>
   <Story
     name="Search"
     args={{
       title: 'Page heading',
+      variant: 'bg-light',
       children: [
         <input type="text" placeholder="Input field" />,
         <button type="button" class="ghost">

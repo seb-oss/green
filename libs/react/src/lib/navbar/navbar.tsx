@@ -38,10 +38,10 @@ export const Navbar = ({ children, variant, title, titleLink }: NavProps) => {
               <h1>{title}</h1>
             )}
           </div>
+          <div className="col-auto">
+            <div className="group size-sm">{children}</div>
+          </div>
         </div>
-      </div>
-      <div className="col-auto">
-        <div className="group size-sm">{children}</div>
       </div>
     </nav>
   )
