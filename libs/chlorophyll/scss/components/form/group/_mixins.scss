@@ -1,5 +1,5 @@
-@use '../../tokens/shame' as tokens;
-@use '../../common';
+@use '../../../tokens/shame' as tokens;
+@use '../../../common';
 
 $border-width: tokens.$border-width;
 $border-color: tokens.$border-color;

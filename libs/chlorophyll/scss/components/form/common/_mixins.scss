@@ -1,28 +1,13 @@
-@use '../../common';
-@use '../../tokens/shame' as newTokens;
+@use '../../../common';
 
-$color: newTokens.$text-primary-color;
-$background: newTokens.$form-control-bg;
-
-@mixin text-input {
-  @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
-  @include common.add-border-radius();
-  @include common.add-border();
-  @include common.add-border-color();
-  @include common.add-focus();
-  align-items: center;
-  background-color: $background;
-  color: $color;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-
-  @media screen and (-ms-high-contrast: active) {
-    border: 2px solid currentcolor;
+/* base style for forms */
+@mixin add-form {
+  > * {
+    @include common.margin-bottom(6);
   }
 }
 
+/* horizontal layout for forms */
 @mixin horizontal-layout() {
   /* use flex layout on small screens and up, ie. stack on small screens (mobile devices) */
   @include common.media-breakpoint-up('sm') {
@@ -86,4 +71,51 @@ $background: newTokens.$form-control-bg;
   .form-text {
     @include common.padding-vertical(4);
   }
+}
+
+/* label for checkboxes and radio buttons */
+@mixin add-form-control {
+  @include common.padding-vertical(4);
+  @include common.padding-end(4);
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row-reverse;
+  font: inherit;
+  justify-content: flex-end;
+  max-width: fit-content;
+  position: relative;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* form group */
+@mixin add-form-group() {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  @include common.media-breakpoint-up('sm') {
+    @include common.margin-bottom(6);
+    width: fit-content;
+  }
+
+  > input {
+    @include common.margin-bottom(3);
+  }
+
+  // label
+  label:not(.form-control) {
+    @include common.font-weight('medium');
+    @include common.margin-bottom(3, true);
+    display: block !important;
+  }
+}
+
+/* form text */
+@mixin add-form-text() {
+  border: solid transparent 1px; // correct vertical alignment
+  display: flex;
+  font: inherit;
 }
