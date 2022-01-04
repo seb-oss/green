@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Tabs } from './tabs'
+
+export const Template = (children, ...props) => (
+  <Tabs
+    list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+      { text: 'Page 5', href: '#' },
+      { text: 'Page 6', href: '#' },
+    ]}
+    {...props}
+  />
+)
+
+<Meta title="Components/Tabs" component={Tabs} />
+
+# Tabs
+
+Tabs component
+
+<Canvas>
+  <Story name="Tabs" args={{ children: 'Test' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

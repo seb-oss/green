@@ -1,0 +1,46 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Link from './link'
+
+export const Template = ({ ...props }) => <Link {...props} />
+
+<Meta
+  title="Components/Link"
+  component={Link}
+  argTypes={{
+    button: {
+      options: [undefined, 'primary', 'secondary', 'ghost'],
+    },
+  }}
+/>
+
+# Link
+
+Simple link component
+
+### Basic Link Component
+
+<Canvas>
+  <Story
+    name="Link"
+    args={{
+      children: 'Go to seb.se',
+      href: 'https://seb.se',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Link styled as a button
+
+<Canvas>
+  <Link button href="https://seb.se">
+    Go to seb.se
+  </Link>
+  <Link button="primary" href="https://seb.se">
+    Go to seb.se
+  </Link>
+  <Link button="ghost" href="https://seb.se">
+    Go to seb.se
+  </Link>
+</Canvas>
