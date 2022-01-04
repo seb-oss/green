@@ -94,11 +94,15 @@ $border-color: tokens.$border-color;
 
   .form-text {
     @include common.padding-vertical(4);
+    background: tokens.$form-control-bg;
+    border-radius: inherit;
   }
 
   .button,
   button {
-    background: tokens.$form-control-bg;
+    &:not(.primary, .active, [type='submit']) {
+      background: tokens.$form-control-bg;
+    }
 
     &.disabled,
     &:disabled,
