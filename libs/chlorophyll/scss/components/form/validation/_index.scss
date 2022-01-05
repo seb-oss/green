@@ -1,0 +1,19 @@
+@use 'mixins';
+@use '../../../common';
+
+// form info
+.form-info {
+  @include mixins.add-form-info;
+}
+
+label + .form-info {
+  @include common.margin-bottom(3);
+}
+
+input + .form-info,
+.group + .form-info {
+  @include mixins.add-feedback-element();
+}
+
+@include mixins.add-validation;
+@include mixins.add-fieldset-validation;

@@ -1,0 +1,21 @@
+@use 'mixins';
+
+form,
+.form {
+  @include mixins.add-form;
+}
+
+.horizontal {
+  @include mixins.horizontal-layout;
+}
+
+.form-control {
+  @include mixins.add-form-control;
+}
+.form-group {
+  @include mixins.add-form-group;
+}
+
+.form-text {
+  @include mixins.add-form-text;
+}
