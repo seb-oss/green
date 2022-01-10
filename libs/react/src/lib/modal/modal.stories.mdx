@@ -1,5 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import Modal from './modal'
+import ModalSample from './modalSample'
 import Button from '../form/button'
 
 export const Template = ({ children, ...props }) => (
@@ -11,18 +12,12 @@ export const Template = ({ children, ...props }) => (
 # Modals
 
 <Canvas>
-  <Story
-    name="Default"
-    args={{
-      type: 'default',
-      header: 'Default modal',
-      children: 'Body content',
-      confirm: 'OK',
-      dismiss: 'Nope',
-    }}
-  >
-    {Template.bind({})}
+  <Story name="default" height="230px">
+    <ModalSample />
   </Story>
+</Canvas>
+
+<Canvas>
   <Story
     name="Slidein"
     args={{
@@ -35,6 +30,9 @@ export const Template = ({ children, ...props }) => (
   >
     {Template.bind({})}
   </Story>
+</Canvas>
+
+<Canvas>
   <Story
     name="Takeover"
     args={{
