@@ -1,56 +1,53 @@
-@use '../../tokens';
-@use '../../common';
+@use '../../tokens/shame' as tokens;
+@use 'sass:map';
 
-@each $key, $color in tokens.$extended-colors {
-  // $bg: common.a11y-color($color, tokens.$white, 'AA', 16, true, true);
-  // $bg: common.a11y-color($color, tokens.$white);
+$colors: (
+  'primary': (
+    color: tokens.$text-primary-color,
+    contrast: tokens.$elevation-0-bg,
+  ),
+  'secondary': (
+    color: tokens.$text-secondary-color,
+    contrast: tokens.$elevation-0-bg,
+  ),
+  'info': (
+    color: tokens.$intent-info-background,
+    contrast: tokens.$intent-info-color,
+  ),
+  'success': (
+    color: tokens.$intent-success-background,
+    contrast: tokens.$intent-success-color,
+  ),
+  'warning': (
+    color: tokens.$intent-warning-background,
+    contrast: tokens.$intent-warning-color,
+  ),
+  'danger': (
+    color: tokens.$intent-danger-background,
+    contrast: tokens.$intent-danger-color,
+  ),
+  'reset': (
+    color: inherit,
+    contrast: null,
+  ),
+  'background': (
+    color: tokens.$elevation-0-bg,
+    contrast: null,
+  ),
+  'transparent': (
+    color: transparent,
+    contrast: null,
+  ),
+);
+@each $key, $variant in $colors {
   .text-#{$key} {
-    color: common.a11y-color($color, tokens.$white);
+    color: map.get($variant, 'color') !important;
   }
 
   .bg-#{$key} {
-    background: $color;
-    color: common.most-legible-color($color);
-  }
-  .bg-#{$key}-adjusted {
-    @include common.desired-color-combination(tokens.$white, $color);
-  }
-}
-
-.dark {
-  background: map-get(tokens.$grey, 1);
-  @each $intent, $color in tokens.$intent-colors-dark {
-    $bg: common.a11y-color($color, map-get(tokens.$grey, 1), 'AA', 16, true, true);
-    .text-#{$intent} {
-      color: common.a11y-color($color, map-get(tokens.$grey, 1));
-    }
-
-    .bg-#{$intent} {
-      background: $color;
-      color: common.most-legible-color($bg);
-    }
-    .bg-#{$intent}-adjusted {
-      @include common.desired-color-combination(tokens.$white, $color);
+    background: map.get($variant, 'color') !important;
+    @if (map.get($variant, 'contrast') != null) {
+      color: map.get($variant, 'contrast') !important;
     }
   }
 }
-
-.dark-auto {
-  background: map-get(tokens.$grey, 1);
-  @each $intent, $color in tokens.$intent-colors {
-    $bg: common.a11y-color($color, map-get(tokens.$grey, 1), 'AA', 16, false, true);
-    .text-#{$intent} {
-      color: common.a11y-color($color, map-get(tokens.$grey, 1));
-    }
-
-    .bg-#{$intent} {
-      background: $color;
-      color: common.most-legible-color($bg);
-    }
-    .bg-#{$intent}-adjusted {
-      @include common.desired-color-combination(tokens.$black, $bg);
-    }
-  }
-}
-
-

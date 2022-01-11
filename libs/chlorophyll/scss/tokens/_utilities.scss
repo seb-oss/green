@@ -487,7 +487,7 @@ $utilities: map-merge((
       ),
       rtl: false,
     ),
-    'color': (
+    /*'color': (
       property: color,
       class: text,
       local-vars: (
@@ -498,7 +498,7 @@ $utilities: map-merge((
           (
             'reset': inherit,
           )),
-    ),
+    ),*/
     'text-opacity': (
       css-var: true,
       class: text-opacity,
@@ -509,7 +509,7 @@ $utilities: map-merge((
         100: 1,
       ),
     ),
-    'background-color': (
+    /*'background-color': (
       property: background-color,
       class: bg,
       local-vars: (
@@ -521,7 +521,7 @@ $utilities: map-merge((
             'transparent': transparent,
           )),
     ),
-    'bg-opacity': (
+    ),*/
       css-var: true,
       class: bg-opacity,
       values: (
