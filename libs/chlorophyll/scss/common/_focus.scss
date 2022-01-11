@@ -60,28 +60,38 @@
 @mixin add-hover-state($color: map.get(tokens.$blue, 2), $target: '') {
   @if not $target == '' {
     #{$target} {
-      transition: all tokens.$transition-time; // TODO: append transition rule...
+      transition: all
+        tokens.$transition-time; // TODO: append transition rule...
     }
   } @else {
     transition: all tokens.$transition-time; // TODO: append transition rule...
   }
 
-  &:not(:disabled,.disabled):hover #{$target} {
+  &:not(:disabled, .disabled):hover #{$target} {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    );
   }
 }
 
-@mixin add-active-state($color: map.get(tokens.$blue, 0), $fadeActiveHover: false) {
+@mixin add-active-state(
+  $color: map.get(tokens.$blue, 0),
+  $fadeActiveHover: false
+) {
   &[aria-selected],
   &:active,
   &.active,
   &.active:hover,
   &:active:hover {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    );
   }
-  @if($fadeActiveHover) {
+  @if ($fadeActiveHover) {
     &[aria-selected]:hover,
     &.active:hover,
     &:active:hover {
@@ -103,6 +113,9 @@
 @mixin add-active-focus-state($color: map.get(tokens.$blue, 2)) {
   &:focus-visible {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1) !important;
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    ) !important;
   }
 }
