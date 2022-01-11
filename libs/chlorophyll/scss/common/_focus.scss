@@ -39,8 +39,11 @@
 }
 
 @mixin add-outline-focus-state($color: map.get(tokens.$blue, 1)) {
+  @if (type-of($color) == color) {
+    $color: transparentize($color, 0.35);
+  }
   &:focus {
-    outline: transparentize($color, 0.5) solid 2px;
+    outline: $color solid 2px;
     outline-offset: 2px;
   }
 
@@ -49,7 +52,7 @@
   }
 
   &:focus-visible {
-    outline: transparentize($color, 0.5) solid 2px;
+    outline: $color solid 2px;
     outline-offset: 2px;
   }
 }
