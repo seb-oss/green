@@ -9,7 +9,8 @@
 
 $utilities: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$utilities: map-merge((
+$utilities: map-merge(
+  (
     'align': (
       property: vertical-align,
       class: align,
@@ -87,10 +88,12 @@ $utilities: map-merge((
       property: border-color,
       class: border,
       values:
-        map-merge(tokens.$intent-colors,
+        map-merge(
+          tokens.$intent-colors,
           (
             'white': tokens.$white,
-          )),
+          )
+        ),
     ),
     'border-width': (
       property: border-width,
@@ -264,70 +267,84 @@ $utilities: map-merge((
       property: margin,
       class: m,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-x': (
       responsive: true,
       property: margin-right margin-left,
       class: mx,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-y': (
       responsive: true,
       property: margin-top margin-bottom,
       class: my,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-top': (
       responsive: true,
       property: margin-top,
       class: mt,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-end': (
       responsive: true,
       property: margin-right,
       class: me,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-bottom': (
       responsive: true,
       property: margin-bottom,
       class: mb,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'margin-start': (
       responsive: true,
       property: margin-left,
       class: ms,
       values:
-        map-merge(tokens.$spacing,
+        map-merge(
+          tokens.$spacing,
           (
             auto: auto,
-          )),
+          )
+        ),
     ),
     'negative-margin': (
       responsive: true,
@@ -499,16 +516,17 @@ $utilities: map-merge((
             'reset': inherit,
           )),
     ),*/
-    'text-opacity': (
-      css-var: true,
-      class: text-opacity,
-      values: (
-        25: 0.25,
-        50: 0.5,
-        75: 0.75,
-        100: 1,
+      'text-opacity':
+      (
+        css-var: true,
+        class: text-opacity,
+        values: (
+          25: 0.25,
+          50: 0.5,
+          75: 0.75,
+          100: 1,
+        ),
       ),
-    ),
     /*'background-color': (
       property: background-color,
       class: bg,
@@ -516,22 +534,25 @@ $utilities: map-merge((
         'bg-opacity': 1,
       ),
       values:
-        map-merge(tokens.$extended-colors,
+        map-merge(
+          tokens.$extended-colors,
           (
             'transparent': transparent,
-          )),
-    ),
+          )
+        ),
     ),*/
-      css-var: true,
-      class: bg-opacity,
-      values: (
-        10: 0.1,
-        25: 0.25,
-        50: 0.5,
-        75: 0.75,
-        100: 1,
+      'bg-opacity':
+      (
+        css-var: true,
+        class: bg-opacity,
+        values: (
+          10: 0.1,
+          25: 0.25,
+          50: 0.5,
+          75: 0.75,
+          100: 1,
+        ),
       ),
-    ),
     'gradient': (
       property: background-image,
       class: bg,
@@ -595,4 +616,5 @@ $utilities: map-merge((
       ),
     ),
   ),
-  $utilities);
+  $utilities
+);
