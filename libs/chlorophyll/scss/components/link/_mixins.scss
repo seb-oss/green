@@ -1,12 +1,34 @@
-@use '../../tokens/shame' as newTokens;
+@use '../../tokens/shame' as tokens;
+@use '../../common';
 @use 'sass:map';
 
-$color: newTokens.$link-color;
-$color-hover: newTokens.get(newTokens.$blue, 1);
-$color-visited: newTokens.$link-color-visited;
-$font-weight: newTokens.$font-weight-bold;
+$color: tokens.$link-color;
+$color-hover: tokens.get(tokens.$blue, 1);
+$color-visited: tokens.$link-color-visited;
+$font-weight: tokens.$font-weight-bold;
+$outline-opacity: 0.35;
+
+$variants: (
+  'info': (
+    color: tokens.$intent-info-color,
+    fadable-color: tokens.$intent-info-fadable-color,
+  ),
+  'success': (
+    color: tokens.$intent-success-color,
+    fadable-color: tokens.$intent-success-fadable-color,
+  ),
+  'warning': (
+    color: tokens.$intent-warning-color,
+    fadable-color: tokens.$intent-warning-fadable-color,
+  ),
+  'danger': (
+    color: tokens.$intent-danger-color,
+    fadable-color: tokens.$intent-danger-fadable-color,
+  ),
+);
 
 @mixin base {
+  @include common.add-outline-focus-state();
   color: $color;
   font-weight: $font-weight;
   text-decoration: none;
@@ -25,4 +47,15 @@ $font-weight: newTokens.$font-weight-bold;
 
 @mixin button {
   text-decoration: none;
+}
+
+/* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
+@mixin variant($color, $outline-color) {
+  a {
+    @include common.add-outline-focus-state($outline-color);
+  }
+  a,
+  a:visited {
+    color: $color;
+  }
 }
