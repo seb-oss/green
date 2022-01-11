@@ -15,6 +15,7 @@
     $colors: functions.desired-color-combination($desired-color, $color);
     --intent-#{$key}-background: #{nth($colors, 1)};
     --intent-#{$key}-color: #{nth($colors, 2)};
+    --intent-#{$key}-fadable-color: #{functions.stripped-rgb(nth($colors, 2))};
   }
 }
 
@@ -225,6 +226,10 @@ $intent-success-color: var(--intent-success-color);
 $intent-info-color: var(--intent-info-color);
 $intent-warning-color: var(--intent-warning-color);
 $intent-danger-color: var(--intent-danger-color);
+$intent-success-fadable-color: var(--intent-success-fadable-color);
+$intent-info-fadable-color: var(--intent-info-fadable-color);
+$intent-warning-fadable-color: var(--intent-warning-fadable-color);
+$intent-danger-fadable-color: var(--intent-danger-fadable-color);
 $intent-success-background: var(--intent-success-background);
 $intent-info-background: var(--intent-info-background);
 $intent-warning-background: var(--intent-warning-background);
