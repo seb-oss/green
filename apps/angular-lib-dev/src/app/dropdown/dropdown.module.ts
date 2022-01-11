@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 
 import { DropdownRoutingModule } from './dropdown-routing.module'
 import { DropdownComponent } from './dropdown.component'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NggDropdownModule } from '@sebgroup/green-angular'
 
 @NgModule({
@@ -13,6 +13,7 @@ import { NggDropdownModule } from '@sebgroup/green-angular'
     NggDropdownModule,
     DropdownRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [],
 })
