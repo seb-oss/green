@@ -6,4 +6,5 @@ export {
   ExtendedDropdownOption,
   DropdownHandler,
   DropdownListener,
+  ElementProps,
 } from './types'
