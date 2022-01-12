@@ -11,7 +11,7 @@ export interface ModalProps {
   confirm?: string
   dismiss?: string
   size?: Size
-
+  isOpen?: boolean
   onClose?: ModalEventListener
   onConfirm?: ModalEventListener
   onDismiss?: ModalEventListener
@@ -66,14 +66,14 @@ const ModalFooter = ({
   )
 }
 
-export const Modal = ({ type = 'default', ...props }: ModalProps) => {
-  return (
+export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
+  return isOpen ? (
     <section role={ModalRole[type]}>
       <ModalHeader {...props} />
       <ModalBody {...props} />
       <ModalFooter {...props} />
     </section>
-  )
+  ) : null
 }
 
 export default Modal
