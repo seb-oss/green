@@ -1,20 +1,22 @@
 import { FormDirection, Size } from '@sebgroup/extract'
-import { ReactNode } from 'react'
+import { HTMLProps, ReactNode } from 'react'
 
 /* eslint-disable-next-line */
-export interface FormProps {
+export interface FormProps extends HTMLProps<HTMLFormElement> {
   children?: ReactNode
   direction?: FormDirection
-  size?: Size
+  formSize?: Size
 }
 
 export function Form({
   children,
   direction = 'vertical',
-  size = 'md',
+  formSize = 'md',
 }: FormProps) {
   return (
-    <form className={[direction, `size-${size}`].join(' ')}>{children}</form>
+    <form className={[direction, `size-${formSize}`].join(' ')}>
+      {children}
+    </form>
   )
 }
 
