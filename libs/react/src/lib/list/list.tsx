@@ -2,16 +2,23 @@ import { ListType } from '@sebgroup/extract'
 import { ReactNode, HTMLAttributes } from 'react'
 import ListItem from './listItem'
 
-interface ListProps
+export interface ListProps
   extends HTMLAttributes<HTMLOListElement | HTMLUListElement> {
   listType?: ListType
   tableCaption?: string
+  tableData?: TableListProps[]
   children?: ReactNode[]
+}
+
+export interface TableListProps {
+  title: string
+  definition: string[]
 }
 
 export const List = ({
   listType,
   tableCaption,
+  tableData,
   children,
   ...props
 }: ListProps) => {
@@ -36,10 +43,8 @@ export const List = ({
       <figure>
         <figcaption className="table-list-caption">{tableCaption}</figcaption>
         <dl>
-          {children?.map((child, index) => (
-            <ListItem listType={listType} key={index}>
-              {child}
-            </ListItem>
+          {tableData?.map((data, index) => (
+            <ListItem listType={listType} tableRowData={data} key={index} />
           ))}
         </dl>
       </figure>

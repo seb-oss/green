@@ -5,14 +5,7 @@ export const Template = ({ children, ...props }) => (
   <List {...props}>{children}</List>
 )
 
-export const TableListTemplate = ({ ...props }) => (
-  <List {...props}>
-    <dt>First</dt>
-    <dt>Second</dt>
-    <dt>Third</dt>
-    <dt>Fourth</dt>
-  </List>
-)
+export const TableListTemplate = ({ ...props }) => <List {...props} />
 
 <Meta title="Components/List" component={List} />
 
@@ -68,6 +61,11 @@ export const TableListTemplate = ({ ...props }) => (
     args={{
       listType: 'table',
       tableCaption: 'Table List',
+      tableData: [
+        { title: 'First', definition: ['Value 1', 'Value 2'] },
+        { title: 'Second', definition: ['Value 1', 'Value 2'] },
+        { title: 'Third', definition: ['Value 1', 'Value 2'] },
+      ],
     }}
   >
     {TableListTemplate.bind({})}
