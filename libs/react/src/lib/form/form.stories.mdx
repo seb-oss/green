@@ -12,11 +12,15 @@ import {
 
 export const Template = ({ children, ...props }) => (
   <Form {...props}>
+    <h2>Inputs</h2>
     <TextInput id="namedField" label="Some field" />
     <EmailInput label="Email field" />
     <NumberInput label="Numeric field" value={3} min={-1} max={10} step={2} />
+    <h2>Checkbox</h2>
     <Checkbox label="Some checkbox" checked={true} />
+    <h2>Text</h2>
     <Text>Static text</Text>
+    <h2>Button Group</h2>
     <ButtonGroup>
       <Button>Button 1</Button>
       <Button>Button 2</Button>
@@ -25,6 +29,7 @@ export const Template = ({ children, ...props }) => (
       <Button>Button 1</Button>
       <Button>Button 2</Button>
     </ButtonGroup>
+    <h2>Buttons</h2>
     <Button type="reset">Reset</Button>
     <Button type="submit">Submit</Button>
   </Form>

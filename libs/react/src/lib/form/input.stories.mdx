@@ -1,0 +1,44 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { TextInput, EmailInput, NumberInput } from './input'
+import { Form } from './form'
+
+export const TextInputTemplate = ({ ...props }) => <TextInput {...props} />
+export const EmailInputTemplate = ({ ...props }) => <EmailInput {...props} />
+export const NumberInputTemplate = ({ ...props }) => <NumberInput {...props} />
+
+<Meta title="Components/Form/Input" component={TextInput} />
+
+# Inputs
+
+### Text Input
+
+<Canvas>
+  <Story
+    name="TextInput"
+    args={{ label: 'Text input', info: 'Input some text here' }}
+  >
+    {TextInputTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Email Input
+
+<Canvas>
+  <Story
+    name="EmailInput"
+    args={{ label: 'Email input', info: 'Only email input' }}
+  >
+    {EmailInputTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Number Input
+
+<Canvas>
+  <Story
+    name="NumberInput"
+    args={{ label: 'Number input', info: 'Only number input' }}
+  >
+    {NumberInputTemplate.bind({})}
+  </Story>
+</Canvas>
