@@ -1,6 +1,6 @@
 import { ModalRole, ModalType, Size } from '@sebgroup/extract'
 import { MouseEvent, ReactNode } from 'react'
-import Button from '../form/button'
+import Button from '../form/button/button'
 
 type ModalEventListener = (event: MouseEvent<HTMLButtonElement>) => unknown
 

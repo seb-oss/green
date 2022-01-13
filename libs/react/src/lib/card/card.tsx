@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import Button from '../form/button'
+import Button from '../form/button/button'
 
 /* eslint-disable-next-line */
 export interface CardProps {
