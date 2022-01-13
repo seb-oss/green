@@ -65,7 +65,7 @@ $border-color: tokens.$border-color;
       flex: 1 1 auto;
     }
 
-    dl {
+    dd {
       @include common.padding-start(3);
     }
   }
