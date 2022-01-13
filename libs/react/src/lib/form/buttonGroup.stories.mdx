@@ -1,0 +1,38 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { ButtonGroup } from './buttonGroup'
+import { Button } from './button'
+
+export const Template = ({ children, ...props }) => (
+  <ButtonGroup {...props}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+  </ButtonGroup>
+)
+
+<Meta title="Components/Form" component={ButtonGroup} />
+
+# Buttons aka button group
+
+Grouping Button Components
+
+<Canvas>
+  <Story
+    name="Button Group"
+    args={{
+      variant: 'ghost',
+      selectedIndex: 1,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Buttons aka button group small
+
+<Canvas>
+  <ButtonGroup variant="secondary" selectedIndex={2} className="size-sm">
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+    <Button>Button 2</Button>
+  </ButtonGroup>
+</Canvas>
