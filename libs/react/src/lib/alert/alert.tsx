@@ -1,6 +1,6 @@
 import { AlertType } from '@sebgroup/extract'
 import { ReactNode, useEffect, useState } from 'react'
-import Button from '../form/button'
+import Button from '../form/button/button'
 
 export interface AlertProps {
   children: ReactNode
