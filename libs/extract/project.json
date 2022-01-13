@@ -1,0 +1,48 @@
+{
+  "root": "libs/extract",
+  "sourceRoot": "libs/extract/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "packageJson": "libs/extract/package.json",
+        "outputPath": "dist/libs/extract",
+        "tsConfig": "libs/extract/tsconfig.lib.json",
+        "project": "libs/extract/package.json",
+        "entryFile": "libs/extract/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/extract/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/extract/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/extract"],
+      "options": {
+        "jestConfig": "libs/extract/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "release": {
+      "executor": "@ng-easy/builders:semantic-release",
+      "options": {
+        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    }
+  }
+}
