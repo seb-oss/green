@@ -17,7 +17,7 @@ export const Navbar = ({
   variant,
   title,
   titleLink,
-  brandLink = 'http://www.seb.se',
+  brandLink = 'https://www.seb.se',
   brandAriaLabel = 'Open seb.se in new tab',
 }: NavProps) => {
   const [props, setProps] = useState<HTMLAttributes<HTMLElement>>({})
