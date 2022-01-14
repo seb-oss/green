@@ -52,9 +52,12 @@ export const createDropdown = (
     switch (event.type) {
       case 'keydown': {
         if (!handler.dropdown.isActive) return
-        event.preventDefault()
         const { key } = event as KeyboardEvent
-        update(handler, listener, keypress(handler.dropdown, key))
+        update(
+          handler,
+          listener,
+          keypress(handler.dropdown, key, event as KeyboardEvent)
+        )
         break
       }
       case 'resize': {
@@ -64,9 +67,10 @@ export const createDropdown = (
       case 'focusin': {
         const component = toggler.parentElement as HTMLElement
         const focused = event.target as HTMLElement
-        if (handler.dropdown.isActive && !component.contains(focused)) {
+        const componentWasFocuesd = component.contains(focused)
+        if (handler.dropdown.isActive && !componentWasFocuesd) {
           update(handler, listener, active(handler.dropdown, false))
-        } else if (!handler.dropdown.isActive) {
+        } else if (!handler.dropdown.isActive && componentWasFocuesd) {
           update(handler, listener, active(handler.dropdown, true))
         }
         break

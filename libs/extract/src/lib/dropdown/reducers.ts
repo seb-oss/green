@@ -64,7 +64,7 @@ export const create = ({
     text: text || 'dropdown',
     elements: {
       toggler: {
-        attributes: { 'aria-owns': id },
+        attributes: { id: `${id}_toggle`, 'aria-owns': id },
       },
       listbox: {
         attributes: { id },
@@ -155,21 +155,25 @@ export const loop = (
   reduce(dropdown, { isLooping } as Partial<AbstractDropdown>)
 export const keypress = (
   dropdown: AbstractDropdown,
-  key: string
+  key: string,
+  event: KeyboardEvent
 ): AbstractDropdown | undefined => {
   const opts = dropdown.options
+  let action
   switch (key) {
     case ' ':
-      return toggle(dropdown)
+      action = toggle(dropdown)
+      break
     case 'Escape':
-      if (!dropdown.isOpen) return
-      return close(dropdown)
+      if (dropdown.isOpen) action = close(dropdown)
+      break
     case 'ArrowDown':
-      return dropdown.isOpen
+      action = dropdown.isOpen
         ? select(dropdown, 1)
         : open(select(dropdown, opts[0]))
+      break
     case 'ArrowUp':
-      return dropdown.isOpen
+      action = dropdown.isOpen
         ? select(dropdown, -1)
         : open(
             select(
@@ -177,13 +181,21 @@ export const keypress = (
               dropdown.isLooping ? opts[opts.length - 1] : opts[0]
             )
           )
+      break
     case 'Home':
-      return open(select(dropdown, opts[0]))
+      action = open(select(dropdown, opts[0]))
+      break
     case 'End':
-      return open(select(dropdown, opts[opts.length - 1]))
+      action = open(select(dropdown, opts[opts.length - 1]))
+      break
     default:
-      return
+      break
   }
+
+  if (action) {
+    event.preventDefault()
+  }
+  return action
 }
 
 export const popper = (
