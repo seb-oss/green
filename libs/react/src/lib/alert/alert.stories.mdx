@@ -10,61 +10,56 @@ export const Template = ({ children, ...props }) => (
 
 # Alerts
 
-<Alert
-  type="info"
-  heading="Info"
-  buttons={[
-    <Button>Button</Button>,
-    <Button variant="primary">Primary</Button>,
-  ]}
->
-  This is an alert <a href="#">with a link</a>.
-</Alert>
+Simple Alert Component
 
-<Alert
-  type="success"
-  heading="Success"
-  buttons={[
-    <Button>Button</Button>,
-    <Button variant="primary">Primary</Button>,
-  ]}
+<Story
+  name="Alert"
+  args={{
+    type: 'info',
+    heading: 'Heading',
+    children: 'Alert',
+    isCloseable: false,
+    closeText: '',
+  }}
 >
-  This is an alert <a href="#">with a link</a>.
-</Alert>
+  {Template.bind({})}
+</Story>
 
-<Alert
-  type="warning"
-  heading="Warning"
-  buttons={[
-    <Button>Button</Button>,
-    <Button variant="primary">Primary</Button>,
-  ]}
->
-  This is an alert <a href="#">with a link</a>.
-</Alert>
+#
 
-<Alert
-  type="danger"
-  heading="Danger"
-  buttons={[
-    <Button>Button</Button>,
-    <Button variant="primary">Primary</Button>,
-  ]}
->
-  This is an alert <a href="#">with a link</a>.
-</Alert>
+## Types
+
+Set a alert type for color coded alerts.
 
 <Canvas>
-  <Story
-    name="Alert"
-    args={{
-      type: 'info',
-      heading: 'Heading',
-      children: 'Alert',
-      isCloseable: true,
-      closeText: '',
-    }}
+  <Alert type="info" heading="Info" isCloseable={false}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert type="success" heading="Success" isCloseable={false}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert type="warning" heading="Warning" isCloseable={false}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert type="danger" heading="Danger" isCloseable={false}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+</Canvas>
+
+## Close button
+
+Close button icon and text button
+
+<Canvas>
+  <Alert type="success" heading="Success" isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert
+    type="success"
+    heading="Success"
+    isCloseable={true}
+    closeText="Close button"
   >
-    {Template.bind({})}
-  </Story>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
 </Canvas>

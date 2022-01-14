@@ -22,7 +22,8 @@ export function Alert({
     if (!isCloseable) {
       setCloseButton(null)
     } else {
-      if (closeText) setCloseButton(<Button>{closeText}</Button>)
+      if (closeText)
+        setCloseButton(<Button variant="ghost">{closeText}</Button>)
       else setCloseButton(<button className="close" />)
     }
   }, [isCloseable, closeText])
