@@ -26,6 +26,7 @@ import {
     <div>
       <button
         #togglerRef
+        [id]="toggler?.attributes?.id"
         [attr.aria-haspopup]="toggler?.attributes?.['aria-haspopup']"
         [attr.aria-expanded]="toggler?.attributes?.['aria-expanded']"
         [attr.aria-owns]="toggler?.attributes?.['aria-owns']"
@@ -55,7 +56,7 @@ import {
         </button>
         <ul role="listbox">
           <li
-            *ngFor="let option of dropdown?.options"
+            *ngFor="let option of dropdown?.options; trackBy: trackByKey"
             [id]="option.attributes.id"
             [attr.role]="option.attributes.role"
             [attr.aria-selected]="option.attributes['aria-selected']"
@@ -95,8 +96,8 @@ export class NggDropdownComponent
     | undefined
 
   value: any = undefined
-  onChangeFn: any
-  onTouchedFn: any
+  onChangeFn?: any
+  onTouchedFn?: any
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
@@ -148,8 +149,12 @@ export class NggDropdownComponent
 
   select(option: ExtendedDropdownOption) {
     this.handler?.select(option)
-    this.onChangeFn(option.value)
-    this.onTouchedFn()
+    this.onChangeFn && this.onChangeFn(option.value)
+    this.onTouchedFn && this.onTouchedFn()
+  }
+
+  trackByKey = (index: number, option: ExtendedDropdownOption): string => {
+    return option.key
   }
 
   private get props(): DropdownArgs {
