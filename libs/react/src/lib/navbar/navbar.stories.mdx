@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import Navbar from './navbar'
 
 export const Template = ({ children, ...props }) => (
@@ -9,7 +9,15 @@ export const Template = ({ children, ...props }) => (
 
 Simple navbar component.
 
-<Meta title="Components/Navbar" component={Navbar} />
+<Meta
+  title="Components/Navbar"
+  component={Navbar}
+  argTypes={{
+    variant: {
+      options: [undefined, 'bg-light', 'bg-dark'],
+    },
+  }}
+/>
 
 ### Transparent navbar with heading and brand and header as link
 
@@ -19,38 +27,17 @@ Simple navbar component.
   </Story>
 </Canvas>
 
-### Dark navbar with heading and brand
-
-<Canvas>
-  <Story name="Dark" args={{ title: 'Page heading', variant: 'bg-dark' }}>
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Light navbar with heading and brand
-
-<Canvas>
-  <Story name="Light" args={{ title: 'Page heading', variant: 'bg-light' }}>
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
 ### Light navbar with grid and additional content
 
 <Canvas>
-  <Story
-    name="Search"
-    args={{
-      title: 'Page heading',
-      variant: 'bg-light',
-      children: [
-        <input type="text" placeholder="Input field" />,
-        <button type="button" class="ghost">
-          Search
-        </button>,
-      ],
-    }}
-  >
-    {Template.bind({})}
-  </Story>
+  <Navbar title="Page heading" variant="bg-light">
+    <input type="text" placeholder="Input field" />
+    <button type="button" className="ghost">
+      Search
+    </button>
+  </Navbar>
 </Canvas>
+
+#### Available props
+
+<ArgsTable of={Navbar} />

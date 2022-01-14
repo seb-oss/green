@@ -48,4 +48,18 @@ describe('Navbar', () => {
     expect(anchorElement.href).toBe('http://localhost/#')
     expect(anchorElement.textContent).toBe('Header')
   })
+
+  it('should have custom brand link and aria-label', () => {
+    const { container } = render(
+      <Navbar
+        title={title}
+        brandLink="www.random.com"
+        brandAriaLabel="Opens random com"
+      />
+    )
+    const anchorElement: HTMLAnchorElement = container.querySelectorAll('a')[0]
+    expect(anchorElement).toBeInTheDocument()
+    expect(anchorElement.getAttribute('href')).toBe('www.random.com')
+    expect(anchorElement.getAttribute('aria-label')).toBe('Opens random com')
+  })
 })

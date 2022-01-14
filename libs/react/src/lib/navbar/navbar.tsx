@@ -2,15 +2,24 @@ import { NavbarVariant } from '@sebgroup/extract'
 import Link from '../link/link'
 import { HTMLAttributes, ReactNode, useEffect, useState } from 'react'
 
-interface NavProps extends HTMLAttributes<HTMLElement> {
+export interface NavProps extends HTMLAttributes<HTMLElement> {
   title?: string
   titleLink?: string
+  brandLink?: string
+  brandAriaLabel?: string
   variant?: NavbarVariant
   children?: ReactNode
 }
 
 //TODO: Add variants
-export const Navbar = ({ children, variant, title, titleLink }: NavProps) => {
+export const Navbar = ({
+  children,
+  variant,
+  title,
+  titleLink,
+  brandLink = 'http://www.seb.se',
+  brandAriaLabel = 'Open seb.se in new tab',
+}: NavProps) => {
   const [props, setProps] = useState<HTMLAttributes<HTMLElement>>({})
   useEffect(() => {
     const classNames: string[] = []
@@ -22,8 +31,8 @@ export const Navbar = ({ children, variant, title, titleLink }: NavProps) => {
   return (
     <nav role="navigation" {...props}>
       <Link
-        aria-label="Open seb.se in new tab"
-        href="http://www.seb.se"
+        aria-label={brandAriaLabel}
+        href={brandLink}
         target="_blank"
         className="brand"
       />
