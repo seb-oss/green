@@ -4,7 +4,7 @@ interface TextProps {
   children: ReactNode
 }
 
-const Text = ({ children }: TextProps) => (
+export const Text = ({ children }: TextProps) => (
   <span className="form-text">{children}</span>
 )
 

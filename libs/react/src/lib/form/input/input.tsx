@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react'
-import useInput from './useInput'
-import { CheckboxProps, InputListener, TextInputProps } from './types'
+import useInput from '../useInput'
+import { CheckboxProps, InputListener, TextInputProps } from '../types'
 
 type Renderer = <T>(
   type: string,
@@ -11,13 +11,26 @@ type Renderer = <T>(
   listener?: InputListener<T>
 ) => JSX.Element
 
-const RenderInput: Renderer = (type, props, evaluator, label, info, listener) => {
+const RenderInput: Renderer = (
+  type,
+  props,
+  evaluator,
+  label,
+  info,
+  listener
+) => {
   const { value, ...inputProps } = useInput(props, evaluator, listener)
-  const propsWithDescription = info ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` } : inputProps
+  const propsWithDescription = info
+    ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` }
+    : inputProps
   return (
     <div className="form-field">
       {label && <label htmlFor={inputProps.id}>{label}</label>}
-      {info && <span className="form-info" id="{inputProps.id}_info">{info}</span>}
+      {info && (
+        <span className="form-info" id="{inputProps.id}_info">
+          {info}
+        </span>
+      )}
       <input type={type} value={value} {...propsWithDescription} />
     </div>
   )
@@ -51,7 +64,7 @@ export const NumberInput = ({
     (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
     label,
     info,
-    onChangeText,
+    onChangeText
   )
 
 export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
