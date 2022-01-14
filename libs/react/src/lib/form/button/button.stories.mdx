@@ -1,0 +1,68 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Button from './button'
+
+export const Template = ({ children, ...props }) => (
+  <Button {...props}>{children}</Button>
+)
+
+<Meta title="Components/Form/Button" component={Button} />
+
+# Buttons
+
+Simple Button Component
+
+<Story name="Button" args={{ children: 'Button', className: 'size-sm' }}>
+  {Template.bind({})}
+</Story>
+
+#
+
+## Types
+
+Preferably use type to describe the function of a button. Use variant only when necessary.
+
+<Canvas>
+  <Button type="button">Button Type</Button>
+  <Button type="submit">Submit Type</Button>
+  <Button type="reset">Reset Type</Button>
+</Canvas>
+
+## Variants
+
+Styling can also be achieved by class
+
+<Canvas>
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="ghost">Ghost</Button>
+</Canvas>
+
+## Close button
+
+Close button with text for screen readers
+
+<Canvas>
+  <Button variant="close">
+    <span className="sr-only">Close</span>
+  </Button>
+</Canvas>
+
+## Active button
+
+Button with active state
+
+<Canvas>
+  <Button variant="primary" active>
+    Primary Button
+  </Button>
+  <Button variant="secondary" active>
+    Secondary Button
+  </Button>
+  <Button variant="ghost" active>
+    Ghost Button
+  </Button>
+</Canvas>
+
+## Disabled button
+
+Refactor button component to add disabled props

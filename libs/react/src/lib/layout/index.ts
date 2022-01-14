@@ -1,2 +1,2 @@
-export * from './flexbox'
-export * from './group'
+export * from './flexbox/flexbox'
+export * from './group/group'

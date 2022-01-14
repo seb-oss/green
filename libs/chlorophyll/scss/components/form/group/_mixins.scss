@@ -1,5 +1,5 @@
-@use '../../tokens/shame' as tokens;
-@use '../../common';
+@use '../../../tokens/shame' as tokens;
+@use '../../../common';
 
 $border-width: tokens.$border-width;
 $border-color: tokens.$border-color;
@@ -94,11 +94,15 @@ $border-color: tokens.$border-color;
 
   .form-text {
     @include common.padding-vertical(4);
+    background: tokens.$form-control-bg;
+    border-radius: inherit;
   }
 
   .button,
   button {
-    background: tokens.$form-control-bg;
+    &:not(.primary, .active, [type='submit']) {
+      background: tokens.$form-control-bg;
+    }
 
     &.disabled,
     &:disabled,
