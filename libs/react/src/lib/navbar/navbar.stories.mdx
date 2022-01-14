@@ -19,13 +19,27 @@ Simple navbar component.
   }}
 />
 
-### Transparent navbar with heading and brand and header as link
+## Variants
+
+### Transparent
 
 <Canvas>
-  <Story name="Default" args={{ title: 'Page heading', titleLink: '#' }}>
-    {Template.bind({})}
-  </Story>
+  <Navbar title="Transparent navbar" />
 </Canvas>
+
+### Light
+
+<Canvas>
+  <Navbar title="Light navbar" varient="bg-light" />
+</Canvas>
+
+### Dark
+
+<Canvas>
+  <Navbar title="Dark navbar" varient="bg-dark" />
+</Canvas>
+
+## Content
 
 ### Light navbar with grid and additional content
 
@@ -36,6 +50,17 @@ Simple navbar component.
       Search
     </button>
   </Navbar>
+</Canvas>
+
+## Component
+
+<Canvas>
+  <Story
+    name="Component"
+    args={{ title: 'Page heading', titleLink: '', variant: undefined }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 #### Available props
