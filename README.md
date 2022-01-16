@@ -83,3 +83,24 @@ npm install -g git-cz
 ```
 
 To commit, just run `git-cz` in the terminal 😄
+
+
+### On SEB Windows computer
+
+Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
+
+You start the 3 storybocks with thesse commands:
+
+```bash
+npx nx run chlorofyll:storybook
+npx nx run react:storybook
+npx nx run angular:storybook
+```
+
+Or if you install nx globally you can omit the npx above.
+
+```bash
+npm install -g nx
+```
+
+Also if push fails, uncomment proxy settings in `C:\Users\%Username%\.npmrc`.
