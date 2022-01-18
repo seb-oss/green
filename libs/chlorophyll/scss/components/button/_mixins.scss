@@ -1,6 +1,14 @@
-@use '../../tokens';
+@use '../../tokens/shame' as tokens;
 @use '../../common';
+@use 'sass:map';
 
+$button-primary-bg: tokens.get(tokens.$blue, 0);
+$button-primary-color: common.most-legible-color($button-primary-bg);
+$button-primary-border-color: $button-primary-bg;
+$button-secondary-bg: transparent;
+$button-secondary-color: tokens.get(tokens.$blue, 0);
+$button-secondary-border-color: $button-secondary-color;
+$button-ghost-bg: tokens.get(tokens.$grey, 200);
 @mixin reset {
   background-color: transparent;
   border: 0;
@@ -32,50 +40,44 @@
   @include common.add-focus();
   @include common.add-hover-active-state();
   @include common.add-active-focus-state();
-  border-color: map-get(tokens.$theme-colors, 'primary');
-  color: map-get(tokens.$theme-colors, 'primary');
+  background: $button-secondary-bg;
+  border-color: $button-secondary-border-color;
+  color: $button-secondary-color;
 
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable(
-      false,
-      true,
-      true
-    );
+    @include common.add-disable(false, true, true);
   }
 }
 
 @mixin primary {
   @include common.add-hover-active-state();
   @include common.add-active-focus-state();
-  background: map-get(tokens.$theme-colors, 'primary');
-  border-color: map-get(tokens.$theme-colors, 'primary');
-  color: common.most-legible-color(map-get(tokens.$theme-colors, 'primary'));
+  background: $button-primary-bg;
+  border-color: $button-primary-border-color;
+  color: $button-primary-color;
 
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
     @include common.add-disable(
-      map-get(tokens.$theme-colors, 'primary'),
-      common.most-legible-color(map-get(tokens.$theme-colors, 'primary')),
-      map-get(tokens.$theme-colors, 'primary')
+      $button-primary-bg,
+      $button-primary-color,
+      $button-primary-border-color
     );
   }
 }
 
-@mixin ghost($bg: tokens.$background-color) {
+// TODO: handle themes (dark/light mode)
+@mixin ghost($bg: $button-ghost-bg) {
   $ghost-color: transparent;
   @if (common.light-or-dark($bg) == 'light') {
-    $ghost-color: map-get(tokens.$grey, 1);
+    $ghost-color: tokens.get(tokens.$grey, 1000);
   } @else {
     $ghost-color: tokens.$white;
   }
-  @include common.add-hover-active-state(
-    $ghost-color,
-    $ghost-color,
-    true
-  );
+  @include common.add-hover-active-state($ghost-color, $ghost-color, true);
   @include common.add-active-focus-state($ghost-color);
   border-color: $ghost-color;
   color: $ghost-color;
@@ -83,10 +85,6 @@
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable(
-      false,
-      true,
-      true
-    );
+    @include common.add-disable(false, true, true);
   }
 }
