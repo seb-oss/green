@@ -65,6 +65,7 @@ describe('dropdown/reducers', () => {
           'aria-haspopup': 'listbox',
           'aria-owns': 'foo',
           'aria-expanded': false,
+          id: 'foo_toggle',
         })
       })
       it('sets correct toggler classes', () => {
