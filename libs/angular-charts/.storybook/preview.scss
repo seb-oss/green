@@ -1,6 +1,6 @@
 // load global styles used by storybook
 @use '../../chlorophyll/scss' with (
-  $font-path: '../static/media/dist/fonts'
+  $font-path: '.'
 );
 
 @use '../../charts/scss' as charts;
