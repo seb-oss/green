@@ -1,0 +1,37 @@
+// load global styles used by storybook
+
+// use fonts from chlorophyll
+@use '../libs/chlorophyll/scss/components/fonts' with (
+  $font-path: '../dist/fonts'
+);
+// use themes from chlorophyll
+@use '../libs/chlorophyll/scss/components/themes';
+
+// styling for storybook
+body {
+  background: var(--elevation-0-bg);
+}
+
+.sidebar-header img {
+  display: block;
+  margin: 0 auto;
+}
+
+.sidebar-subheading {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+.sidebar-subheading {
+  color: var(--heading-primary-color) !important;
+}
+
+.sidebar-item {
+  font-weight: 400 !important;
+}
+
+.sidebar-item svg {
+  color: var(--text-primary-color);
+}

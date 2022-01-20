@@ -47,8 +47,7 @@
         "port": 4200,
         "config": {
           "configFolder": "libs/react/.storybook"
-        },
-        "staticDir": ["dist/libs/chlorophyll"]
+        }
       },
       "configurations": {
         "ci": {
