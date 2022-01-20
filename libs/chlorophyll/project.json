@@ -53,8 +53,7 @@
         "host": "0.0.0.0",
         "config": {
           "configFolder": "libs/chlorophyll/.storybook"
-        },
-        "staticDir": ["dist/libs/chlorophyll"]
+        }
       },
       "configurations": {
         "ci": {
