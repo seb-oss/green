@@ -1,7 +1,4 @@
 @use '../tokens';
-@use '@sebgroup/fonts/scss/seb-fonts' with (
-  $seb-font-path: tokens.$font-path
-);
 
 @mixin font-size($size) {
   font-size: map-get(tokens.$font-size, $size);
