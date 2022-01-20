@@ -1,4 +1,3 @@
-@use '../../chlorophyll/scss/tokens';
 @use '../../chlorophyll/scss/common/spacing' as common;
 @mixin chart-series-list-item() {
   @include common.margin-top(3);
@@ -16,21 +15,6 @@
     height: 0.75rem;
     margin-right: 0.5rem;
     width: 0.75rem;
-  }
-}
-
-.tooltip {
-  background: tokens.$black;
-  color: tokens.$white;
-  padding: 0.5rem;
-
-  dt {
-    font-weight: tokens.font-weight('bold');
-    margin-bottom: 0.25rem;
-  }
-
-  dd {
-    @include chart-series-list-item();
   }
 }
 

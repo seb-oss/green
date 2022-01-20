@@ -1,16 +1,15 @@
-@use '../../chlorophyll/scss/tokens/color';
-@use '../../chlorophyll/scss/tokens';
-@use '../../chlorophyll/scss/tokens/shame' as newTokens;
+@use '../../chlorophyll/scss/tokens/shame' as tokens;
+@use '../../chlorophyll/scss/components/list';
 @use 'sass:map';
 @use 'shame';
 // @use 'node_modules/billboard.js/src/scss/billboard';
 
-$font-family: 'SEBSansSerif', Arial, sans-serif;
+$font-family: tokens.$font-family-sans-serif;
 $axis-color: #8c8c8c;
 
-$axis-text-color: newTokens.$text-primary-color;
+$axis-text-color: tokens.$text-primary-color;
 $axis-text-size: tokens.$base-font-size;
-$axis-text-weight: tokens.font-weight('regular');
+$axis-text-weight: tokens.$font-weight-normal;
 
 $y-axis-text-color: $axis-text-color;
 
@@ -21,19 +20,20 @@ $y-axis-tick-thickness: $y-axis-thickness;
 
 $x-axis-text-color: $axis-text-color;
 
-$x-axis-color: newTokens.$border-secondary-color; //map.get(color.$grey, 6);
+$x-axis-color: tokens.$border-secondary-color;
 $x-axis-thickness: 1px;
 $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
-$grid-focus-line-color: map.get(color.$blue, 2);
-$grid-base-line-color: newTokens.$border-secondary-color; // map.get(color.$grey, 6);
+$grid-focus-line-color: tokens.get(tokens.$blue, 2);
+$grid-base-line-color: tokens.$border-secondary-color;
 
 @mixin select-none {
   user-select: none;
 }
+
 /* Html x-axis */
-ul.x-axis {
+.chart .bb + div ul.x-axis {
   flex-direction: row;
   padding-left: var(--chart-space-left);
   padding-right: var(--chart-space-right);
@@ -301,6 +301,21 @@ use.bb-circle {
   font-family: $font-family;
   user-select: none;
   z-index: 10;
+}
+
+.bb-tooltip-list {
+  background: tokens.$black;
+  color: tokens.$white;
+  padding: 0.5rem;
+
+  dt {
+    font-weight: tokens.$font-weight-bold;
+    margin-bottom: 0.25rem;
+  }
+
+  dd {
+    @include shame.chart-series-list-item();
+  }
 }
 
 .bb-tooltip {
