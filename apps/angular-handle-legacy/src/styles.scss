@@ -1,22 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* import bootstrap (ideally you'd only import the parts from bootstrap you use and scope them like this:
+  .use-bootstrap {
+    @import '@sebgroup/bootstrap/scss/styles/buttons';
+  }
+*/
+@use '@sebgroup/bootstrap/scss/bootstrap';
+
 /* import all of green */
 /* @use './libs/chlorophyll/scss' with ( $font-path: '../fonts'); */
 
 /* add use-green scope i.e. ability to use (`.use-green`) */
 @use './libs/chlorophyll/scss/components/use-green-scope';
 
-/* add styles for green charts */
-@use './libs/charts/scss' as charts;
-@use './libs/chlorophyll/scss/components/list';
-
-/* import all of bootstrap */
-@use '@sebgroup/bootstrap/scss/bootstrap';
+/* add color palettes for charts, temporary workaround for https://github.com/sebgroup/green/issues/357  */
+@use './libs/charts/scss/mixins' as chart-mixins;
+@include chart-mixins.add-color-palettes;
 
 /* import specific parts from green and scope them to `.use-green` class */
 .use-green {
   @import './libs/chlorophyll/scss/components/button'; // button component(s)
-  //@import './libs/charts/scss'; // charts
+  $font-path: '../fonts'; // declare path to fonts
+  @import './libs/chlorophyll/scss/components/fonts'; // font declaration
+  @include chart-mixins.add-chart-styles; // add charts
   //@import './libs/chlorophyll/scss/components/list'; // list component(s)
   // etc.
 }
