@@ -1,6 +1,4 @@
 @use 'sass:map';
-$base-font-size: 16px !default;
-$font-path: 'fonts' !default;
 
 $font-size: (
   's': 0.75rem,
@@ -19,16 +17,25 @@ $font-sizes: (
 );
 
 $font-scale: (
-  1: 0.75rem,   // 12px
-  2: 0.875rem,  // 14px
-  3: 1rem,      // 16px
-  4: 1.25rem,   // 20px
-  5: 1.5rem,    // 24px
-  6: 2rem,      // 32px
-  7: 2.5rem,    // 40px
-  8: 3rem,      // 48px
-  9: 4rem,      // 64px
-  10: 6rem       // 92px
+  1: 0.75rem,
+  // 12px
+  2: 0.875rem,
+  // 14px
+  3: 1rem,
+  // 16px
+  4: 1.25rem,
+  // 20px
+  5: 1.5rem,
+  // 24px
+  6: 2rem,
+  // 32px
+  7: 2.5rem,
+  // 40px
+  8: 3rem,
+  // 48px
+  9: 4rem,
+  // 64px
+  10: 6rem // 92px,,,,,,
 );
 
 $line-height: (
@@ -48,13 +55,6 @@ $font-weights: (
   'bold': 800,
 );
 
-// bootstrap fixes
-$font-weight-light: 300;
-$font-weight-lighter: 300;
-$font-weight-normal: 400;
-$font-weight-bold: 500;
-$font-weight-bolder: 800;
-
 $line-height-sm: 1;
 $line-height-base: 1.25;
 $line-height-lg: 1.3;
@@ -63,77 +63,67 @@ $line-height-lg: 1.3;
   @return map-get($font-weights, $weight);
 }
 
-$font-family-sans-serif: "'SEBSansSerif',Arial,sans-serif";
-
-$font-families: (
-  'sans': unquote($font-family-sans-serif)
-);
-
-@function font-family($family) {
-  @return map-get($font-families, $family);
-}
-
 $display-01: (
   font-size: font-scale(8),
   font-weight: font-weight('bold'),
   line-height: 56px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-01: (
   font-size: font-scale(6),
   font-weight: font-weight('bold'),
   line-height: 40px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-02: (
   font-size: font-scale(5),
   font-weight: font-weight('bold'),
   line-height: 32px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-03: (
   font-size: font-scale(4),
   font-weight: font-weight('bold'),
   line-height: 28px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-04: (
   font-size: font-scale(4),
   font-weight: font-weight('bold'),
   line-height: 28px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-05: (
   font-size: font-scale(3),
   font-weight: font-weight('bold'),
   line-height: 24px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $heading-06: (
   font-size: font-scale(2),
   font-weight: font-weight('bold'),
   line-height: 20px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $body-01: (
   font-size: font-scale(3),
   font-weight: font-weight('regular'),
   line-height: 24px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $body-02: (
   font-size: font-scale(1),
   font-weight: font-weight('regular'),
   line-height: 20px,
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $headings: (
