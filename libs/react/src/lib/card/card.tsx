@@ -3,8 +3,8 @@ import { ReactNode } from 'react'
 /* eslint-disable-next-line */
 export interface CardProps {
   children?: ReactNode
-  header?: JSX.Element
-  footer?: JSX.Element
+  header?: ReactNode
+  footer?: ReactNode
 }
 
 export function Card({ children, header, footer }: CardProps) {

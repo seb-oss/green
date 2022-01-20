@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import Card from './card'
 import Button from '../form/button/button'
 
@@ -26,38 +26,19 @@ export const Footer = () => (
 
 # Cards
 
-
-Simple Card Component
-
 <Story
   name="Card"
-  args={{ headline: 'Card headline', children: 'Card content' }}
+  args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
 >
   {Template.bind({})}
 </Story>
 
-#
-
-## Headline and Text Content
-
-<Canvas>
-  <Card headline="Card with headline">Here is some content</Card>
-  <Card headline="Card with headline"></Card>
-  <Card>Plain card</Card>
-</Canvas>
+<br />
 
 ## Card with Button
 
 <Canvas>
-  <Card
-    headline="Card with headline and buttons"
-    buttons={[
-      <Button>Button</Button>,
-      <Button variant="primary">Primary</Button>,
-    ]}
-  >
-    Here is some content
+  <Card header={<Header />} footer={<Footer />}>
+    Here is some content with link and button footer
   </Card>
 </Canvas>
-
-<ArgsTable of={Card} />
