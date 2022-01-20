@@ -4,7 +4,6 @@ import { ChartSettings } from '@sebgroup/green-charts'
 @Component({
   selector: 'green-green-charts',
   template: `<ngg-chart [settings]="settings"></ngg-chart>`,
-  styleUrls: ['./green-charts.component.css'],
 })
 export class GreenChartsComponent {
   settings: ChartSettings = {

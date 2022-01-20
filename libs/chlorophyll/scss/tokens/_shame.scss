@@ -15,6 +15,13 @@
     $colors: functions.desired-color-combination($desired-color, $color);
     --intent-#{$key}-background: #{nth($colors, 1)};
     --intent-#{$key}-color: #{nth($colors, 2)};
+    --intent-#{$key}-fadable-color: #{functions.stripped-rgb(nth($colors, 2))};
+  }
+}
+
+@mixin grey-colors($map, $theme: light) {
+  @each $key, $color in map.get($map, $theme) {
+    --grey-#{$key}: #{$color};
   }
 }
 
@@ -221,10 +228,16 @@ $border-primary-disabled-color: var(--border-primary-disabled-color);
 $border-color-invalid: var(--border-color-invalid);
 $border-color-valid: var(--border-color-valid);
 
+$grey-400: var(--grey-400);
+
 $intent-success-color: var(--intent-success-color);
 $intent-info-color: var(--intent-info-color);
 $intent-warning-color: var(--intent-warning-color);
 $intent-danger-color: var(--intent-danger-color);
+$intent-success-fadable-color: var(--intent-success-fadable-color);
+$intent-info-fadable-color: var(--intent-info-fadable-color);
+$intent-warning-fadable-color: var(--intent-warning-fadable-color);
+$intent-danger-fadable-color: var(--intent-danger-fadable-color);
 $intent-success-background: var(--intent-success-background);
 $intent-info-background: var(--intent-info-background);
 $intent-warning-background: var(--intent-warning-background);
@@ -237,7 +250,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 
 /* stylelint-disable */
 @mixin dark-mode() {
-  --heading-primary-color: $white;
+  --heading-primary-color: #{$white};
   --text-primary-color: #{transparentize($white, 0.1)};
   --text-secondary-color: #{transparentize($white, 0.4)};
   --text-disabled-color: #{get($disabled, 'color', 'dark')};
@@ -268,11 +281,12 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --elevation-2-box-shadow: #{get($shadows, 'none', 'dark')};
   --elevation-2-border-color: #{get($grey, 300, 'dark')};
   @include generate-intent-variables($intent, 'dark');
+  @include grey-colors($grey, 'dark');
   color: var(--text-primary-color);
 }
 
 @mixin light-mode() {
-  --heading-primary-color: $black;
+  --heading-primary-color: #{$black};
   --text-primary-color: #{transparentize($black, 0.1)};
   --text-secondary-color: #{transparentize($black, 0.475)}; // #767676 against white 4.5 contrast
   --text-disabled-color: #{get($disabled, 'color')};
@@ -299,6 +313,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --elevation-2-box-shadow: #{get($shadows, 'md')};
   --elevation-2-border-color: #{get($grey, 100)};
   @include generate-intent-variables($intent);
+  @include grey-colors($grey);
   color: var(--text-primary-color);
 }
 /* stylelint-enable */

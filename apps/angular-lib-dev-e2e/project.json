@@ -1,0 +1,29 @@
+{
+  "root": "apps/angular-lib-dev-e2e",
+  "sourceRoot": "apps/angular-lib-dev-e2e/src",
+  "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["angular-lib-dev"],
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/angular-lib-dev-e2e/cypress.json",
+        "devServerTarget": "angular-lib-dev:serve:development",
+        "tsConfig": "apps/angular-lib-dev-e2e/tsconfig.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "angular-lib-dev:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/angular-lib-dev-e2e/**/*.{js,ts}"]
+      }
+    }
+  }
+}

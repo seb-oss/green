@@ -1,0 +1,45 @@
+@use '../../../tokens/shame' as tokens;
+@use '../../../common';
+
+$color: tokens.$text-primary-color;
+$background: tokens.$form-control-bg;
+
+@mixin add-text-input() {
+  input:not([type]),
+  input[type='date'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='email'],
+  input[type='month'],
+  input[type='number'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='text'],
+  input[type='time'],
+  input[type='url'],
+  input[type='week'] {
+    @include common.padding-horizontal(5);
+    @include common.padding-vertical(4);
+    @include common.add-border-radius();
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-focus();
+    align-items: center;
+    background-color: $background;
+    color: $color;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (-ms-high-contrast: active) {
+      border: 2px solid currentcolor;
+    }
+
+    &:disabled,
+    &.disabled,
+    &[aria-disabled='true'] {
+      @include common.add-disable(true, true, true);
+    }
+  }
+}
