@@ -2,6 +2,14 @@
 @use 'sass:map';
 
 $colors: (
+  'light': (
+    color: tokens.get(tokens.$grey, 200),
+    contrast: tokens.$black,
+  ),
+  'dark': (
+    color: tokens.get(tokens.$grey, 1000),
+    contrast: tokens.$white,
+  ),
   'primary': (
     color: tokens.$text-primary-color,
     contrast: tokens.$elevation-0-bg,
