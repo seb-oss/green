@@ -106,6 +106,7 @@
     "@storybook/react": "6.4.12",
     "@storybook/theming": "^6.4.1",
     "@svgr/webpack": "^5.5.0",
+    "@testing-library/angular": "^11.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",

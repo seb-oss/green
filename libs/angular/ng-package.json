@@ -3,6 +3,7 @@
   "dest": "../../dist/libs/angular",
   "allowedNonPeerDependencies": [
     "@sebgroup/chlorophyll",
+    "@sebgroup/extract",
     "body-scroll-lock"
   ],
   "lib": {
