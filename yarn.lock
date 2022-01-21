@@ -6058,6 +6058,14 @@
     "@svgr/plugin-jsx" "^6.2.0"
     "@svgr/plugin-svgo" "^6.2.0"
 
+"@testing-library/angular@^11.0.2":
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/angular/-/angular-11.0.2.tgz#268ca52a4881c7503915b2409fbcaefc873b9116"
+  integrity sha512-sqOD9MzTZ/sIXzCj5ogJm72x+iveWU+Q3vu2hZW5YC89YJV+M4w6PuBo0wgqpsyL4xnktVf41vNJcLMkajUjZw==
+  dependencies:
+    "@testing-library/dom" "^8.0.0"
+    tslib "^2.0.0"
+
 "@testing-library/dom@^8.0.0":
   version "8.11.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.11.1.tgz#03fa2684aa09ade589b460db46b4c7be9fc69753"
