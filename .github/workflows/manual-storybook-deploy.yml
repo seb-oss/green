@@ -48,7 +48,7 @@ jobs:
         id: target
 
       - name: Build all storybooks
-        run: NODE_ENV=production yarn run nx run-many --target build-storybook --all
+        run: yarn run nx run-many --target build-storybook --all
 
       - name: Deploy storybooks to GitHub Pages
 
