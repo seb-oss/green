@@ -1,0 +1,48 @@
+// styling for storybook
+body {
+  background: var(--elevation-0-bg);
+}
+
+.sbdocs {
+  font-family: inherit !important;
+}
+
+.sbdocs,
+.sbdocs code,
+.docs-story > div,
+.docs-story > div > button:not(.docblock-code-toggle) {
+  background: inherit !important;
+  color: inherit !important;
+}
+
+button.docblock-code-toggle {
+  border-radius: 5px 0;
+  background: var(--border-color) !important;
+  font-weight: 700;
+  border: none;
+  color: var(--text-primary-color);
+  margin: -1px;
+  opacity: 0.6;
+  transition: all 300ms;
+  &:hover {
+    opacity: 1;
+    color: var(--text-primary-color) !important;
+  }
+  &--disabled:disabled {
+    background: none !important;
+    border: solid 1px var(--border-color) !important;
+    &:hover {
+      color: var(--border-color) !important;
+    }
+  }
+}
+
+.docs-story {
+  padding-bottom: 2rem;
+}
+
+.sbdocs.sbdocs-preview {
+  box-shadow: var(--elevation-1-box-shadow);
+  border: solid 1px var(--border-color);
+  background: var(--elevation-1-bg);
+}

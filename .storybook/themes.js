@@ -2,10 +2,11 @@ import { create } from '@storybook/theming'
 
 const common = {
   appBorderRadius: 3,
-  brandImage: 'https://user-images.githubusercontent.com/11420341/121186039-f6eeda00-c866-11eb-9d80-21d01d065f0a.png',
+  brandImage:
+    'https://user-images.githubusercontent.com/11420341/121186039-f6eeda00-c866-11eb-9d80-21d01d065f0a.png',
   brandTitle: 'Green',
   brandUrl: 'https://github.com/sebgroup/green',
-  fontBase: '"SEBSansSerif", sans-serif',
+  fontBase: '"SEBSansSerif", sans-serif, "Helvetica Neue", Helvetica, Arial',
   fontCode: 'monospace',
   gridCellSize: 10,
   inputBorderRadius: 7,
@@ -29,7 +30,6 @@ export const light = create({
   textColor: '#333',
   textMutedColor: '#333',
 })
-
 
 export const dark = create({
   ...common,

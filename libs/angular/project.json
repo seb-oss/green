@@ -49,8 +49,7 @@
         "host": "0.0.0.0",
         "config": {
           "configFolder": "libs/angular/.storybook"
-        },
-        "staticDir": ["dist/libs/angular"]
+        }
       },
       "configurations": {
         "ci": {

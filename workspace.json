@@ -4,6 +4,7 @@
     "angular": "libs/angular",
     "angular-charts": "libs/angular-charts",
     "angular-e2e": "apps/angular-e2e",
+    "angular-handle-legacy": "apps/angular-handle-legacy",
     "angular-lib-dev": "apps/angular-lib-dev",
     "angular-lib-dev-e2e": "apps/angular-lib-dev-e2e",
     "charts": "libs/charts",

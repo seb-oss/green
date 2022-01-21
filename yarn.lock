@@ -4044,6 +4044,13 @@
     "@angular-devkit/schematics" "13.1.3"
     jsonc-parser "3.0.0"
 
+"@sebgroup/bootstrap@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@sebgroup/bootstrap/-/bootstrap-6.0.1.tgz#2a41b5f0b0177452299d137bad9edc76e25e6ee4"
+  integrity sha512-viR+3tbYnyymzzglOaFHaaCgJCCRcx136Z08cHT5T71daBmZCbyfcw26xMlnfJ6QEqukeNK5K4MCg5XI19zh5A==
+  dependencies:
+    "@sebgroup/fonts" "^1.1.0"
+
 "@sebgroup/fonts@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sebgroup/fonts/-/fonts-1.1.0.tgz#97f6001aa61f9803c580b38c85f44c70c99bde72"
