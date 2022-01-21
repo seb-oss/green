@@ -1,12 +1,4 @@
-import {
-  active,
-  close,
-  create,
-  open,
-  select,
-  toggle,
-  loop,
-} from './reducers'
+import { active, close, create, open, select, toggle, loop } from './reducers'
 import { AbstractDropdown, DropdownOption } from './types'
 
 describe('dropdown/reducers', () => {
@@ -33,7 +25,7 @@ describe('dropdown/reducers', () => {
     describe('options', () => {
       it('contains options', () => {
         const dropdown = create({ options })
-  
+
         expect(dropdown.options).toHaveLength(2)
       })
       it('sets option ids', () => {
@@ -41,7 +33,8 @@ describe('dropdown/reducers', () => {
         const optionAttributes = dropdown.options.map((o) => o.attributes)
 
         expect(optionAttributes.map((o) => o.id)).toEqual([
-          'foo_option0', 'foo_option1',
+          'foo_option0',
+          'foo_option1',
         ])
       })
       it('sets option roles', () => {
@@ -49,7 +42,8 @@ describe('dropdown/reducers', () => {
         const optionAttributes = dropdown.options.map((o) => o.attributes)
 
         expect(optionAttributes.map((o) => o.role)).toEqual([
-          'option', 'option',
+          'option',
+          'option',
         ])
       })
       it('sets option selected', () => {
@@ -58,7 +52,8 @@ describe('dropdown/reducers', () => {
         const optionAttributes = dropdown.options.map((o) => o.attributes)
 
         expect(optionAttributes.map((o) => o['aria-selected'])).toEqual([
-          undefined, true,
+          undefined,
+          true,
         ])
       })
     })
@@ -70,6 +65,7 @@ describe('dropdown/reducers', () => {
           'aria-haspopup': 'listbox',
           'aria-owns': 'foo',
           'aria-expanded': false,
+          id: 'foo_toggle',
         })
       })
       it('sets correct toggler classes', () => {
@@ -174,7 +170,8 @@ describe('dropdown/reducers', () => {
         const optionAttributes = dropdown.options.map((o) => o.attributes)
 
         expect(optionAttributes.map((o) => o['aria-selected'])).toEqual([
-          undefined, true,
+          undefined,
+          true,
         ])
       })
       it('sets activedecendant', () => {
@@ -182,7 +179,9 @@ describe('dropdown/reducers', () => {
         dropdown = select(dropdown, selectedOption)
         const attrs = dropdown.elements.listbox.attributes
 
-        expect(attrs['aria-activedescendant']).toEqual(selectedOption.attributes.id)
+        expect(attrs['aria-activedescendant']).toEqual(
+          selectedOption.attributes.id
+        )
       })
       it('does not close dropdown', () => {
         dropdown = select(dropdown, dropdown.options[1])
@@ -191,36 +190,36 @@ describe('dropdown/reducers', () => {
       describe('with step', () => {
         it('sets first if no selection and step is 1', () => {
           dropdown = select(dropdown, 1)
-          
+
           expect(dropdown.options[0].selected).toBe(true)
         })
         it('sets first if no selection and step is -1', () => {
           dropdown = select(dropdown, -1)
-          
+
           expect(dropdown.options[0].selected).toBe(true)
         })
         it('sets second if first is selected and step is 1', () => {
           dropdown.options[0].selected = true
           dropdown = select(dropdown, 1)
-          
+
           expect(dropdown.options[1].selected).toBe(true)
         })
         it('stays if last is selected and step is 1', () => {
           dropdown.options[1].selected = true
           dropdown = select(dropdown, 1)
-          
+
           expect(dropdown.options[1].selected).toBe(true)
         })
         it('sets second if first is selected and step is 1', () => {
           dropdown.options[1].selected = true
           dropdown = select(dropdown, -1)
-          
+
           expect(dropdown.options[0].selected).toBe(true)
         })
         it('stays if first is selected and step is -1', () => {
           dropdown.options[0].selected = true
           dropdown = select(dropdown, -1)
-          
+
           expect(dropdown.options[0].selected).toBe(true)
         })
         describe('loop', () => {
@@ -229,19 +228,19 @@ describe('dropdown/reducers', () => {
           })
           it('sets last if no selection and step is -1', () => {
             dropdown = select(dropdown, -1)
-            
+
             expect(dropdown.options[1].selected).toBe(true)
           })
           it('sets first if last is selected and step is 1', () => {
             dropdown.options[1].selected = true
             dropdown = select(dropdown, 1)
-            
+
             expect(dropdown.options[0].selected).toBe(true)
           })
           it('sets last if first is selected and step is -1', () => {
             dropdown.options[0].selected = true
             dropdown = select(dropdown, -1)
-            
+
             expect(dropdown.options[1].selected).toBe(true)
           })
         })

@@ -1,9 +1,14 @@
 import { createPopper, Instance } from '@popperjs/core'
-import { AbstractDropdown, DropdownHandler, DropdownListener, DropdownOption } from "./types"
+import {
+  AbstractDropdown,
+  DropdownHandler,
+  DropdownListener,
+  DropdownOption,
+} from './types'
 import { createDropdown } from './dropdown'
 
 jest.mock('@popperjs/core', () => ({
-  createPopper: jest.fn().mockName('createPopper')
+  createPopper: jest.fn().mockName('createPopper'),
 }))
 
 const tick = (t = 0) => new Promise((r) => setTimeout(r, t))
@@ -27,14 +32,14 @@ describe('dropdown', () => {
       { key: 'C', value: 3 },
     ]
     popper = {
-      update: jest.fn()
+      update: jest
+        .fn()
         .mockName('update')
         .mockResolvedValue({ styles: { popper: {} } }),
-      destroy: jest.fn().mockName('destroy')
+      destroy: jest.fn().mockName('destroy'),
     }
-    ;(createPopper as jest.Mock<Instance>)
-      .mockReturnValue(popper as Instance)
-    
+    ;(createPopper as jest.Mock<Instance>).mockReturnValue(popper as Instance)
+
     handler = createDropdown({ id: 'foo', options }, toggler, listbox, listener)
     await tick()
   })
@@ -81,7 +86,9 @@ describe('dropdown', () => {
   describe('keyboard', () => {
     describe('when inactive', () => {
       it('does not trigger key events', async () => {
-        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+        document.dispatchEvent(
+          new KeyboardEvent('keydown', { key: 'ArrowDown' })
+        )
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
@@ -119,7 +126,9 @@ describe('dropdown', () => {
       describe('Escape', () => {
         it('closes open dropdown', async () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'Escape' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(4)
@@ -128,7 +137,9 @@ describe('dropdown', () => {
         })
         it('does nothing to closed dropdown', async () => {
           expect(listener).toHaveBeenCalledTimes(2)
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'Escape' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(2)
@@ -136,7 +147,9 @@ describe('dropdown', () => {
       })
       describe('Arrow down', () => {
         it('opens closed dropdown', async () => {
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(3)
@@ -144,7 +157,9 @@ describe('dropdown', () => {
           expect(dd.isOpen).toBe(true)
         })
         it('selects first option', async () => {
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(3)
@@ -154,7 +169,9 @@ describe('dropdown', () => {
       })
       describe('Arrow up', () => {
         it('opens closed dropdown', async () => {
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowUp' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(3)
@@ -162,7 +179,9 @@ describe('dropdown', () => {
           expect(dd.isOpen).toBe(true)
         })
         it('selects first option', async () => {
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowUp' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(3)
@@ -171,7 +190,9 @@ describe('dropdown', () => {
         })
         it('selects last option if looped', async () => {
           handler.loop(true)
-          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }))
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowUp' })
+          )
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(4)

@@ -1,5 +1,8 @@
 @use 'sass:math';
-@use '../../tokens/color' as colors;
+$white: #fff;
+$black: black;
+$grey-200: rgb(248, 248, 248);
+$grey-600: rgb(206, 206, 206);
 
 //  Precomputed linear color channel values, for use in contrast calculations.
 //  See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
@@ -110,6 +113,17 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $ratio;
 }
 
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
 // validate-font-size($size)
 // Helper: Depending on the unit recalculate a font size value into pixels if possible
 // To be used in other functions or mixins — creates non-standard CSS output:
@@ -126,7 +140,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     unit($size) ==
     'px' or
     unit($size) ==
-    '' {
+    ''
+  {
     // Check if a flexible unit
     @if unit($size) == 'em' or unit($size) == 'rem' {
       // Need to convert to a pixel value. Let's not overcomplicate it with possible EM inheritence scale factors
@@ -199,8 +214,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 // .sample { light-or-dark: "light"; }
 //
 @function light-or-dark($color) {
-  $light-contrast: color-contrast($color, colors.$white);
-  $dark-contrast: color-contrast($color, colors.$black);
+  $light-contrast: color-contrast($color, $white);
+  $dark-contrast: color-contrast($color, $black);
 
   @if $light-contrast > $dark-contrast {
     // Contrast against white is higher than against black, so, this is a dark color
@@ -226,9 +241,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   $color-lod: light-or-dark($color);
 
   @if ($color-lod == 'dark') {
-    @return colors.$white;
+    @return $white;
   } @else {
-    @return colors.$black;
+    @return $black;
   }
 }
 
@@ -243,15 +258,17 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @if $ratio < color-contrast($fg, $bg) {
     $color: $fg;
   } @else {
-    $background: a11y-color($bg,
-    $fg,
-    'AA',
-    16,
-    false,
-    false,
-    $offsetThreshold,
-    false,
-    $ratio);
+    $background: a11y-color(
+      $bg,
+      $fg,
+      'AA',
+      16,
+      false,
+      false,
+      $offsetThreshold,
+      false,
+      $ratio
+    );
     @if $ratio < color-contrast($color, $background) {
       $color: $color;
       $bg: $background;
@@ -263,10 +280,12 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 }
 
 @mixin desired-color-combination($fg, $bg, $offsetThreshold: 20%, $ratio: 4.5) {
-  $color-combination: desired-color-combination($fg,
-  $bg,
-  $offsetThreshold,
-  $ratio);
+  $color-combination: desired-color-combination(
+    $fg,
+    $bg,
+    $offsetThreshold,
+    $ratio
+  );
   background-color: nth($color-combination, 1);
   color: nth($color-combination, 2);
 }
@@ -349,11 +368,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-@function max-contrast(
-  $fg,
-  $bg: colors.$background-color,
-  $max: map-get(colors.$disabled-colors, 'max')
-) {
+@function max-contrast($fg, $bg: $grey-200, $max: $grey-600) {
   @if (color-contrast($fg, $bg) > 3) {
     @return $max;
   } @else {

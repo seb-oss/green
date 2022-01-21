@@ -1,9 +1,9 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import { Dropdown } from './dropdown'
 
 export const Template = ({ align, ...props }) => (
-  <div style={{ position: 'relative', paddingTop: '150px' }}>
-    <Dropdown {...props}>Select</Dropdown>
+  <div style={{ paddingBottom: '150px' }}>
+    <Dropdown {...props}>Select a dropdown option</Dropdown>
   </div>
 )
 
@@ -11,28 +11,49 @@ export const Template = ({ align, ...props }) => (
 
 # Dropdown
 
+Dropdown Component
+
+<Story
+  name="Dropdown"
+  args={{
+    loop: true,
+    options: [
+      {
+        key: 'Really long option value 1',
+        value: 1,
+      },
+      {
+        key: 'Really long option value 2',
+        value: 2,
+      },
+      {
+        key: 'Really long option value 3',
+        value: 3,
+      },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+## Dropdown
+
+Code preview for Dropdown component
+
 <Canvas>
-  <Story
-    name="Dropdown"
-    args={{
-      align: 'start',
-      loop: true,
-      options: [
-        {
-          key: 'Really long option value 1',
-          value: 1,
-        },
-        {
-          key: 'Really long option value 2',
-          value: 2,
-        },
-        {
-          key: 'Really long option value 3',
-          value: 3,
-        },
-      ],
-    }}
-  >
-    {Template.bind({})}
-  </Story>
+  <div style={{ height: '200px' }}>
+    <Dropdown
+      options={[
+        { key: 'Option 1', value: 1 },
+        { key: 'Option 2', value: 2 },
+        { key: 'Option 3', value: 3 },
+      ]}
+    >
+      Select option
+    </Dropdown>
+  </div>
 </Canvas>
+
+### Available props
+
+<ArgsTable of={Dropdown} />

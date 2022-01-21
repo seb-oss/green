@@ -6,29 +6,39 @@ export const Template = ({ children, ...props }) => (
   <Card {...props}>{children}</Card>
 )
 
+export const Header = () => (
+  <>
+    <h3>Card Headline</h3>
+    <Button variant="close">
+      <span className="sr-only">Close</span>
+    </Button>
+  </>
+)
+
+export const Footer = () => (
+  <>
+    <Button>Default button</Button>
+    <Button variant="primary">Primary</Button>
+  </>
+)
+
 <Meta title="Components/Card" component={Card} />
 
 # Cards
 
-<Card>Plain card</Card>
-
-<Card headline="Card with headline">Here is some content</Card>
-
-<Card
-  headline="Card with headline and buttons"
-  buttons={[
-    <Button>Button</Button>,
-    <Button variant="primary">Primary</Button>,
-  ]}
+<Story
+  name="Card"
+  args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
 >
-  Here is some content
-</Card>
+  {Template.bind({})}
+</Story>
+
+<br />
+
+## Card with Button
 
 <Canvas>
-  <Story
-    name="Card"
-    args={{ headline: 'Card headline', children: 'Card content' }}
-  >
-    {Template.bind({})}
-  </Story>
+  <Card header={<Header />} footer={<Footer />}>
+    Here is some content with link and button footer
+  </Card>
 </Canvas>

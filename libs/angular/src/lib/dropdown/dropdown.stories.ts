@@ -1,8 +1,7 @@
 // Dropdown.stories.ts
 
-import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
+import { moduleMetadata } from '@storybook/angular'
 
-import { FormBuilder } from '@angular/forms'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
@@ -25,31 +24,13 @@ export default {
 }
 
 export const Select = () => {
-  const _fb = new FormBuilder()
-  const dropdownForm = _fb.group({
-    select: [1],
-  })
   return {
-    template: `<ngg-dropdown
-                  [formControl]='control'
-                  [options]='options'
-                  [config]='config'
-                  ></ngg-dropdown>`,
+    template: `<ngg-dropdown text="Select" [options]='options'></ngg-dropdown>`,
     props: {
-      control: dropdownForm.controls.select,
       options: [
-        {
-          key: 'Option 1',
-          value: 1,
-        },
-        {
-          key: 'Option 2',
-          value: 2,
-        },
-        {
-          key: 'Option 3',
-          value: 3,
-        },
+        { key: 'Tacos', value: 'tacos' },
+        { key: 'Pizza', value: 'pizza' },
+        { key: 'Sushi', value: 'sushi' },
       ],
     },
   }
