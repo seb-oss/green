@@ -1,39 +1,32 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core'
+import { Component } from '@angular/core'
 import { FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'green-dropdown',
   templateUrl: './dropdown.component.html',
 })
-export class DropdownComponent implements AfterViewInit {
-  @ViewChild('container', { read: ElementRef }) public _container:
-    | ElementRef<HTMLIFrameElement>
-    | undefined
+export class DropdownComponent {
+  templateDropdown = 'tacos'
 
-  options: Array<{ key: string; value: any }> = [
+  options: Array<{ key: string; value: string }> = [
     {
-      key: 'Option 1',
-      value: 1,
+      key: 'Tacos',
+      value: 'tacos',
     },
     {
-      key: 'Option 2',
-      value: 2,
+      key: 'Pizza',
+      value: 'pizza',
     },
     {
-      key: 'Option 3',
-      value: 3,
+      key: 'Sushi',
+      value: 'sushi',
     },
   ]
+
   dropdownForm = this._fb.group({
-    select1: [1],
-    select2: [2],
-    select3: [3],
+    select1: 'sushi',
+    select2: undefined,
   })
+
   constructor(private _fb: FormBuilder) {}
-  ngAfterViewInit() {
-    if (this._container) {
-      this._container.nativeElement.scrollTop = 500
-      this._container.nativeElement.scrollLeft = 500
-    }
-  }
 }

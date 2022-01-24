@@ -10,7 +10,7 @@ import {
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
   return arr.filter((item) => {
-    const key = (typeof item === 'string') ? item : JSON.stringify(item)
+    const key = typeof item === 'string' ? item : JSON.stringify(item)
     if (map[key]) return false
     else {
       map[key] = true
@@ -19,15 +19,19 @@ const distinct = <T>(arr: T[]): T[] => {
   })
 }
 
-const addClass = (classes: string[] | undefined, newClass: string): string[] => (
+const addClass = (classes: string[] | undefined, newClass: string): string[] =>
   distinct((classes || []).concat(newClass))
-)
 
-const removeClass = (classes: string[] | undefined, removeClass: string): string[] => (
-  (classes || []).filter((item) => item !== removeClass)
-)
+const removeClass = (
+  classes: string[] | undefined,
+  removeClass: string
+): string[] => (classes || []).filter((item) => item !== removeClass)
 
-const extendOption = (id: string, option: DropdownOption, ix: number): ExtendedDropdownOption => (
+const extendOption = (
+  id: string,
+  option: DropdownOption,
+  ix: number
+): ExtendedDropdownOption =>
   reduce<ExtendedDropdownOption>(optionValues, option, {
     attributes: {
       id: `${id}_option${ix}`,
@@ -36,10 +40,11 @@ const extendOption = (id: string, option: DropdownOption, ix: number): ExtendedD
     },
     classes: [],
   })
-)
-const extendOptions = (options: DropdownOption[], id: string): ExtendedDropdownOption[] => (
+const extendOptions = (
+  options: DropdownOption[],
+  id: string
+): ExtendedDropdownOption[] =>
   options.map((option, ix) => extendOption(id, option, ix))
-)
 
 interface DropdownArgs {
   id?: string
@@ -47,14 +52,19 @@ interface DropdownArgs {
   loop?: boolean
   text?: string
 }
-export const create = ({ id = randomId(), text, options: _options, loop }: DropdownArgs): AbstractDropdown => {
+export const create = ({
+  id = randomId(),
+  text,
+  options: _options,
+  loop,
+}: DropdownArgs): AbstractDropdown => {
   const options = extendOptions(_options, id)
   const dropdown: Partial<AbstractDropdown> = {
     id,
     text: text || 'dropdown',
     elements: {
       toggler: {
-        attributes: { 'aria-owns': id },
+        attributes: { id: `${id}_toggle`, 'aria-owns': id },
       },
       listbox: {
         attributes: { id },
@@ -67,7 +77,7 @@ export const create = ({ id = randomId(), text, options: _options, loop }: Dropd
   return reduce(dropdown, dropdownValues)
 }
 
-export const open = (dropdown: AbstractDropdown): AbstractDropdown => (
+export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
   reduce(dropdown, {
     isOpen: true,
     elements: {
@@ -81,8 +91,7 @@ export const open = (dropdown: AbstractDropdown): AbstractDropdown => (
       },
     },
   })
-)
-export const close = (dropdown: AbstractDropdown): AbstractDropdown => (
+export const close = (dropdown: AbstractDropdown): AbstractDropdown =>
   reduce(dropdown, {
     isOpen: false,
     elements: {
@@ -96,18 +105,21 @@ export const close = (dropdown: AbstractDropdown): AbstractDropdown => (
       },
     },
   })
-)
-export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => (
-  (dropdown.isOpen) ? close(dropdown) : open(dropdown)
-)
-export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOption | number): AbstractDropdown => {
+export const toggle = (dropdown: AbstractDropdown): AbstractDropdown =>
+  dropdown.isOpen ? close(dropdown) : open(dropdown)
+export const select = (
+  dropdown: AbstractDropdown,
+  selection: ExtendedDropdownOption | number
+): AbstractDropdown => {
   let option: ExtendedDropdownOption
   if (typeof selection === 'number') {
     const opts = dropdown.options
     const currentlySelectedIndex = opts.findIndex((o) => o.selected)
     let newSelectedIndex = currentlySelectedIndex + selection
-    if (newSelectedIndex < 0) newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
-    if (newSelectedIndex >= opts.length) newSelectedIndex = dropdown.isLooping ? 0 : opts.length - 1
+    if (newSelectedIndex < 0)
+      newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
+    if (newSelectedIndex >= opts.length)
+      newSelectedIndex = dropdown.isLooping ? 0 : opts.length - 1
     option = opts[newSelectedIndex]
   } else {
     option = selection
@@ -118,47 +130,76 @@ export const select = (dropdown: AbstractDropdown, selection: ExtendedDropdownOp
       listbox: {
         attributes: {
           'aria-activedescendant': option.attributes.id,
-        }
-      }
-    },
-    options: dropdown.options.map((o) => reduce(o, {
-      selected: o === option,
-      attributes: {
-        'aria-selected': o === option || undefined,
+        },
       },
-    }))
+    },
+    options: dropdown.options.map((o) =>
+      reduce(o, {
+        selected: o === option,
+        attributes: {
+          'aria-selected': o === option || undefined,
+        },
+      })
+    ),
   })
 }
-export const active = (dropdown: AbstractDropdown, isActive: boolean): AbstractDropdown => (
+export const active = (
+  dropdown: AbstractDropdown,
+  isActive: boolean
+): AbstractDropdown =>
   reduce(dropdown, { isActive } as Partial<AbstractDropdown>)
-)
-export const loop = (dropdown: AbstractDropdown, isLooping: boolean): AbstractDropdown => (
+export const loop = (
+  dropdown: AbstractDropdown,
+  isLooping: boolean
+): AbstractDropdown =>
   reduce(dropdown, { isLooping } as Partial<AbstractDropdown>)
-)
-export const keypress = (dropdown: AbstractDropdown, key: string): AbstractDropdown|undefined => {
+export const keypress = (
+  dropdown: AbstractDropdown,
+  key: string,
+  event: KeyboardEvent
+): AbstractDropdown | undefined => {
   const opts = dropdown.options
+  let action
   switch (key) {
     case ' ':
-      return toggle(dropdown)
+      action = toggle(dropdown)
+      break
     case 'Escape':
-      if (!dropdown.isOpen) return
-      return close(dropdown)
+      if (dropdown.isOpen) action = close(dropdown)
+      break
     case 'ArrowDown':
-      return (dropdown.isOpen)
-        ? select(dropdown, 1) 
+      action = dropdown.isOpen
+        ? select(dropdown, 1)
         : open(select(dropdown, opts[0]))
+      break
     case 'ArrowUp':
-      return (dropdown.isOpen)
-        ? select(dropdown, -1) 
-        : open(select(dropdown, (dropdown.isLooping) ? opts[opts.length - 1] : opts[0]))
+      action = dropdown.isOpen
+        ? select(dropdown, -1)
+        : open(
+            select(
+              dropdown,
+              dropdown.isLooping ? opts[opts.length - 1] : opts[0]
+            )
+          )
+      break
     case 'Home':
-      return open(select(dropdown, opts[0]))
+      action = open(select(dropdown, opts[0]))
+      break
     case 'End':
-      return open(select(dropdown, opts[opts.length - 1]))
-    default: return
+      action = open(select(dropdown, opts[opts.length - 1]))
+      break
+    default:
+      break
   }
+
+  if (action) {
+    event.preventDefault()
+  }
+  return action
 }
 
-export const popper = (dropdown: AbstractDropdown, style?: CSSStyleDeclaration): AbstractDropdown => (
+export const popper = (
+  dropdown: AbstractDropdown,
+  style?: CSSStyleDeclaration
+): AbstractDropdown =>
   reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
-)

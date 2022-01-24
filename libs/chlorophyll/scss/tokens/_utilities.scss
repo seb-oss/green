@@ -2,6 +2,7 @@
 
 @use 'index' as tokens;
 @use 'shame' as newTokens;
+@use 'sass:map';
 
 // stylelint-disable indentation
 
@@ -89,9 +90,9 @@ $utilities: map-merge(
       class: border,
       values:
         map-merge(
-          tokens.$intent-colors,
+          map.get(newTokens.$intent, 'light'),
           (
-            'white': tokens.$white,
+            'white': newTokens.$white,
           )
         ),
     ),

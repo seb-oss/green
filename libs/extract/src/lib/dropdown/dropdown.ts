@@ -10,10 +10,7 @@ import {
   popper,
   keypress,
 } from './reducers'
-import {
-  fromEvent,
-  merge,
-} from 'rxjs'
+import { fromEvent, merge } from 'rxjs'
 import {
   AbstractDropdown,
   DropdownHandler,
@@ -26,7 +23,7 @@ export const createDropdown = (
   toggler: HTMLElement,
   listbox: HTMLElement,
   listener: DropdownListener
-): DropdownHandler =>  {
+): DropdownHandler => {
   const _handler: Partial<DropdownHandler> = {
     toggler,
     listbox,
@@ -35,26 +32,32 @@ export const createDropdown = (
   }
   const handler = _handler as DropdownHandler
 
-  handler.active = (isActive) => update(handler, listener, active(handler.dropdown, isActive))
-  handler.loop = (isLooping) => update(handler, listener, loop(handler.dropdown, isLooping))
+  handler.active = (isActive) =>
+    update(handler, listener, active(handler.dropdown, isActive))
+  handler.loop = (isLooping) =>
+    update(handler, listener, loop(handler.dropdown, isLooping))
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
-  handler.select = (selection) => update(handler, listener, close(select(handler.dropdown, selection)))
+  handler.select = (selection) =>
+    update(handler, listener, close(select(handler.dropdown, selection)))
   handler.update = (props) => update(handler, listener, create(props))
 
   handler.subscription = merge(
     fromEvent<KeyboardEvent>(document, 'keydown'),
     fromEvent<UIEvent>(window, 'resize'),
     fromEvent<FocusEvent>(document, 'focusin'),
-    fromEvent<MouseEvent>(document, 'click'),
+    fromEvent<MouseEvent>(document, 'click')
   ).subscribe((event) => {
     switch (event.type) {
       case 'keydown': {
         if (!handler.dropdown.isActive) return
-        event.preventDefault()
         const { key } = event as KeyboardEvent
-        update(handler, listener, keypress(handler.dropdown, key))
+        update(
+          handler,
+          listener,
+          keypress(handler.dropdown, key, event as KeyboardEvent)
+        )
         break
       }
       case 'resize': {
@@ -64,16 +67,20 @@ export const createDropdown = (
       case 'focusin': {
         const component = toggler.parentElement as HTMLElement
         const focused = event.target as HTMLElement
-        if (handler.dropdown.isActive && !component.contains(focused)) {
+        const componentWasFocuesd = component.contains(focused)
+        if (handler.dropdown.isActive && !componentWasFocuesd) {
           update(handler, listener, active(handler.dropdown, false))
-        } else if (!handler.dropdown.isActive) {
+        } else if (!handler.dropdown.isActive && componentWasFocuesd) {
           update(handler, listener, active(handler.dropdown, true))
         }
         break
       }
       case 'click': {
         const clickedOn = event.target as HTMLElement
-        if (!handler.toggler.contains(clickedOn) && !handler.listbox.contains(clickedOn)) {
+        if (
+          !handler.toggler.contains(clickedOn) &&
+          !handler.listbox.contains(clickedOn)
+        ) {
           update(handler, listener, active(close(handler.dropdown), false))
         }
       }
@@ -91,7 +98,11 @@ export const createDropdown = (
   return handler
 }
 
-const update = async (handler: DropdownHandler, listener: DropdownListener, newState?: AbstractDropdown) => {
+const update = async (
+  handler: DropdownHandler,
+  listener: DropdownListener,
+  newState?: AbstractDropdown
+) => {
   if (!handler.isAlive) return
 
   const oldState = handler.dropdown
@@ -112,7 +123,11 @@ const update = async (handler: DropdownHandler, listener: DropdownListener, newS
     listener(handler.dropdown)
   }
 }
-const pop = (handler: DropdownHandler, listener: DropdownListener, innerWidth: number = window.innerWidth) => {
+const pop = (
+  handler: DropdownHandler,
+  listener: DropdownListener,
+  innerWidth: number = window.innerWidth
+) => {
   if (innerWidth < 576 && handler.popper) {
     handler.popper.destroy()
     handler.popper = undefined

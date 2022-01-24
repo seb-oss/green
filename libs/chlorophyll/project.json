@@ -1,0 +1,87 @@
+{
+  "root": "libs/chlorophyll",
+  "sourceRoot": "libs/chlorophyll/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "./tools/executors/scss:build-lib",
+      "options": {
+        "packageJson": "libs/chlorophyll/package.json",
+        "outputPath": "dist/libs/chlorophyll"
+      }
+    },
+    "compile-scss": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "description": "compile scss",
+            "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/scss/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
+          },
+          {
+            "description": "auto prefix compiled css overwrite file and output maps",
+            "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=autoprefixer -m -r"
+          },
+          {
+            "description": "minify compiled and auto prefixed css and output maps",
+            "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
+          }
+        ],
+        "parallel": false,
+        "outputPath": "dist/libs/chlorophyll"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx stylelint libs/chlorophyll/**/*.scss"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/chlorophyll"],
+      "options": {
+        "jestConfig": "libs/chlorophyll/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/html",
+        "port": 4000,
+        "host": "0.0.0.0",
+        "config": {
+          "configFolder": "libs/chlorophyll/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "uiFramework": "@storybook/html",
+        "outputPath": "dist/storybook/chlorophyll",
+        "config": {
+          "configFolder": "libs/chlorophyll/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "release": {
+      "executor": "@ng-easy/builders:semantic-release",
+      "options": {
+        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    }
+  }
+}
