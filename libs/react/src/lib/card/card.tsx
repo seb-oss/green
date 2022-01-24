@@ -1,21 +1,18 @@
 import { ReactNode } from 'react'
-import Button from '../form/button/button'
 
 /* eslint-disable-next-line */
 export interface CardProps {
   children?: ReactNode
-  headline?: string
-  buttons?: typeof Button[]
+  header?: ReactNode
+  footer?: ReactNode
 }
 
-export function Card({ children, headline, buttons }: CardProps) {
+export function Card({ children, header, footer }: CardProps) {
   return (
     <section className="card">
-      <div className="card-body">
-        {headline && <h2>{headline}</h2>}
-        <p>{children}</p>
-        {buttons && <footer>{buttons}</footer>}
-      </div>
+      <header>{header}</header>
+      <p>{children}</p>
+      <footer>{footer}</footer>
     </section>
   )
 }

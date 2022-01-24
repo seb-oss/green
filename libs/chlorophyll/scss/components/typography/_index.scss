@@ -1,16 +1,13 @@
 @use 'mixins';
 @use '../../tokens/typography' as tokens;
 
-body {
-  @include mixins.reset();
-}
-
 .display-01 {
   @include mixins.properties(tokens.$display-01);
 }
 
 @for $i from 1 through 6 {
-  h#{$i} {
+  h#{$i},
+  .h#{$i} {
     @include mixins.properties(map-get(tokens.$headings, $i));
   }
 }
@@ -19,6 +16,11 @@ p {
   @include mixins.properties(tokens.$body-01);
 }
 
-p.small {
+p.small,
+small {
   @include mixins.properties(tokens.$body-02);
+}
+
+strong {
+  font-weight: tokens.font-weight('semibold');
 }

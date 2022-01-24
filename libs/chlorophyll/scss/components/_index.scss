@@ -1,5 +1,5 @@
 @use 'reset';
-@use '../common';
+@use 'fonts';
 @use 'border';
 @use 'brand';
 @use 'button';
@@ -20,3 +20,4 @@
 @use 'utility/colors';
 @use 'utility/bootstrap-utilities';
 @use 'shame';
+@use '../common';
