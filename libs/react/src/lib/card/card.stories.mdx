@@ -6,6 +6,22 @@ export const Template = ({ children, ...props }) => (
   <Card {...props}>{children}</Card>
 )
 
+export const Header = () => (
+  <>
+    <h3>Card Headline</h3>
+    <Button variant="close">
+      <span className="sr-only">Close</span>
+    </Button>
+  </>
+)
+
+export const Footer = () => (
+  <>
+    <Button>Default button</Button>
+    <Button variant="primary">Primary</Button>
+  </>
+)
+
 <Meta title="Components/Card" component={Card} />
 
 # Cards
@@ -14,7 +30,7 @@ Simple Card Component
 
 <Story
   name="Card"
-  args={{ headline: 'Card headline', children: 'Card content' }}
+  args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
 >
   {Template.bind({})}
 </Story>
@@ -24,22 +40,15 @@ Simple Card Component
 ## Headline and Text Content
 
 <Canvas>
-  <Card headline="Card with headline">Here is some content</Card>
-  <Card headline="Card with headline"></Card>
-  <Card>Plain card</Card>
+  <Card header={<h3>Card with Headline</h3>}>Here is some content</Card>
+  <Card header={<h3>Card with Headline</h3>}></Card>
 </Canvas>
 
 ## Card with Button
 
 <Canvas>
-  <Card
-    headline="Card with headline and buttons"
-    buttons={[
-      <Button>Button</Button>,
-      <Button variant="primary">Primary</Button>,
-    ]}
-  >
-    Here is some content
+  <Card header={<Header />} footer={<Footer />}>
+    Here is some content with link and button footer
   </Card>
 </Canvas>
 
