@@ -89,7 +89,7 @@ To commit, just run `git-cz` in the terminal 😄
 
 Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
 
-You start the 3 storybocks with thesse commands:
+You start the 3 storybocks with these commands:
 
 ```bash
 npx nx run chlorofyll:storybook
