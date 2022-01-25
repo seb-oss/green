@@ -2,13 +2,12 @@
   "name": "@sebgroup/green-angular",
   "version": "0.0.0-semantically-released",
   "peerDependencies": {
-    "@angular/common": "^13.0.3",
-    "@angular/core": "^13.0.3"
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0"
   },
   "dependencies": {
     "@sebgroup/chlorophyll": "*",
     "@sebgroup/extract": "*",
-    "body-scroll-lock": "^4.0.0-beta.0",
     "tslib": "^2.3.1"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",
