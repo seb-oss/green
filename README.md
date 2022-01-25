@@ -100,7 +100,7 @@ npx nx run angular:storybook
 Or if you install nx globally you can omit the npx above.
 
 ```bash
-npm install -g nx
+npm install nx -g
 ```
 
 Also if push fails, uncomment proxy settings in `C:\Users\%Username%\.npmrc`.
