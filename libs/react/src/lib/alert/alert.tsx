@@ -1,18 +1,20 @@
 import { AlertType } from '@sebgroup/extract'
-import { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Button from '../form/button/button'
 
 export interface AlertProps {
   children: ReactNode
   type: AlertType
-  heading?: string
+  header?: ReactNode
+  footer?: ReactNode
   isCloseable?: boolean
   closeText?: string
 }
 
 export function Alert({
   type,
-  heading,
+  header,
+  footer,
   children,
   closeText,
   isCloseable = true,
@@ -23,16 +25,25 @@ export function Alert({
       setCloseButton(null)
     } else {
       if (closeText)
-        setCloseButton(<Button variant="ghost">{closeText}</Button>)
+        setCloseButton(
+          <Button variant="ghost">
+            <span className="sr-only">{closeText}</span>
+          </Button>
+        )
       else setCloseButton(<button className="close" />)
     }
   }, [isCloseable, closeText])
 
   return (
     <div role="alert" className={type}>
-      {heading && <h3>{heading}</h3>}
+      {header && (
+        <header>
+          {React.isValidElement(header) ? header : <h3>{header}</h3>}
+          {closeButton}
+        </header>
+      )}
       <p>{children}</p>
-      {closeButton}
+      {footer && <footer>{footer}</footer>}
     </div>
   )
 }

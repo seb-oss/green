@@ -6,6 +6,13 @@ export const Template = ({ children, ...props }) => (
   <Alert {...props}>{children}</Alert>
 )
 
+export const Footer = () => (
+  <>
+    <Button>Default button</Button>
+    <Button variant="primary">Primary Button</Button>
+  </>
+)
+
 <Meta title="Components/Alert" component={Alert} />
 
 # Alerts
@@ -16,7 +23,8 @@ Simple Alert Component
   name="Alert"
   args={{
     type: 'info',
-    heading: 'Heading',
+    header: 'Heading',
+    footer: <Footer />,
     children: 'Alert',
     isCloseable: false,
     closeText: '',
@@ -32,34 +40,58 @@ Simple Alert Component
 Set a alert type for color coded alerts.
 
 <Canvas>
-  <Alert type="info" heading="Info" isCloseable={false}>
+  <Alert type="info" header="Info" isCloseable={false}>
+    Alert content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </Alert>
+  <Alert type="success" header="Success" isCloseable={false}>
+    Alert content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </Alert>
+  <Alert type="warning" header="Warning" isCloseable={false}>
+    Alert content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </Alert>
+  <Alert type="danger" header="Danger" isCloseable={false}>
+    Alert content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </Alert>
+</Canvas>
+
+## Alert with Close button
+
+Close button icon
+
+<Canvas>
+  <Alert type="info" header="Info" isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
-  <Alert type="success" heading="Success" isCloseable={false}>
+  <Alert type="success" header="Success" isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
-  <Alert type="warning" heading="Warning" isCloseable={false}>
+  <Alert type="warning" header="Warning" isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
-  <Alert type="danger" heading="Danger" isCloseable={false}>
+  <Alert type="danger" header="Danger" isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
 </Canvas>
 
-## Close button
+## Alert with Footer Buttons
 
-Close button icon and text button
+Button components can be passed in as a footer
 
 <Canvas>
-  <Alert type="success" heading="Success" isCloseable={true}>
+  <Alert type="info" header="Info" footer={<Footer />} isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
-  <Alert
-    type="success"
-    heading="Success"
-    isCloseable={true}
-    closeText="Close button"
-  >
+  <Alert type="success" header="Success" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert type="warning" header="Warning" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </Alert>
+  <Alert type="danger" header="Danger" footer={<Footer />} isCloseable={true}>
     This is an alert <a href="#">with a link</a>.
   </Alert>
 </Canvas>
