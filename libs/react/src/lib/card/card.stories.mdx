@@ -1,6 +1,7 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import Card from './card'
 import Button from '../form/button/button'
+import Link from '../link/link'
 
 export const Template = ({ children, ...props }) => (
   <Card {...props}>{children}</Card>
@@ -17,6 +18,9 @@ export const Header = () => (
 
 export const Footer = () => (
   <>
+    <Link href="https://seb.se" className="button link">
+      Link
+    </Link>
     <Button>Default button</Button>
     <Button variant="primary">Primary</Button>
   </>
@@ -26,6 +30,8 @@ export const Footer = () => (
 
 # Cards
 
+Simple Card Component
+
 <Story
   name="Card"
   args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
@@ -33,7 +39,14 @@ export const Footer = () => (
   {Template.bind({})}
 </Story>
 
-<br />
+#
+
+## Headline and Text Content
+
+<Canvas>
+  <Card header={<h3>Card with Headline</h3>}>Here is some content</Card>
+  <Card header={<h3>Card with Headline</h3>}></Card>
+</Canvas>
 
 ## Card with Button
 
@@ -42,3 +55,5 @@ export const Footer = () => (
     Here is some content with link and button footer
   </Card>
 </Canvas>
+
+<ArgsTable of={Card} />
