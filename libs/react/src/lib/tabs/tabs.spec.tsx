@@ -7,7 +7,7 @@ const list = [
   { text: 'Page 3', href: '#' },
   { text: 'Page 4', href: '#' },
   { text: 'Page 5', href: '#' },
-  { text: 'Page 6' },
+  { text: 'Page 6', disabled: true },
 ]
 
 describe('Tabs', () => {
@@ -26,4 +26,14 @@ describe('Tabs', () => {
     fireEvent.click(anchorTag[1])
     expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2')
   })
+
+  // it('OnClick should fire tabOnChange function', () => {
+  //   const onTabChange: jest.Mock = jest
+  //     .fn()
+  //     .mockImplementation((value: number) => value)
+  //   render(<Tabs list={list} onTabChange={onTabChange}></Tabs>)
+  //   const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
+  //   fireEvent.click(anchorTag[1])
+  //   expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2')
+  // })
 })

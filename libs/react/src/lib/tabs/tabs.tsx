@@ -3,21 +3,27 @@ import React, { useState, ReactNode } from 'react'
 interface IList {
   text?: string
   href?: string
+  disabled?: boolean
 }
 
 interface TabsProps {
   list?: IList[]
-  disabled?: boolean
+  onTabChange?: (index: number) => void
   children?: ReactNode[]
 }
 
-export const Tabs = ({ list, disabled, children, ...props }: TabsProps) => {
+export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
   const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
-    setSelectedTab(Number(event.currentTarget.dataset.indexNumber))
+    if (event.currentTarget.dataset.disabled !== 'true') {
+      const focusedIndex: number = parseInt(
+        event.currentTarget.dataset.indexNumber as string
+      )
+      setSelectedTab(focusedIndex)
+      onTabChange && onTabChange(focusedIndex)
+    }
   }
-
   return (
     <>
       <nav role="tablist">
@@ -28,6 +34,7 @@ export const Tabs = ({ list, disabled, children, ...props }: TabsProps) => {
             role="tab"
             key={index}
             data-index-number={index}
+            data-disabled={value.disabled}
             aria-selected={selectedTab === index}
           >
             {value.text}

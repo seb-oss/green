@@ -60,3 +60,7 @@ $border-width: newTokens.$border-width;
 @mixin tabs-panel--selected {
   display: block;
 }
+
+@mixin tabs-panel--disabled {
+  @include common.add-disable(false, true, true);
+}
