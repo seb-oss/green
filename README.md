@@ -46,10 +46,11 @@ In the long run, consistency will be achieved by automating the roll-out of chan
 
 This mono repo is based on `nx` and uses `yarn` instead of `npm`. If you are unused to yarn, see the following instructions:
 
+
 #### Install yarn
 
 ```bash
-npm install -g yarn
+npm install yarn -g
 ```
 
 #### Install dependencies
@@ -74,22 +75,33 @@ Unlike `npm`, `yarn` doesn't require the `run` command. So if you want to run `l
 yarn lint
 ```
 
+### How to contribute?
+
+- Clone the project locally from GitHub - `git clone https://github.com/sebgroup/green.git`.
+- Create a new branch each time - `git checkout -b "DESCRIPTIVE NAME"`.
+- Commit with the Semantic everything inscructions underneath.
+- Pull the latest - `git pull`.
+- Push eveything - `git push`.
+- Make a pull request in GitHub - `https://github.com/sebgroup/green/compare`.
+
+
 ### Semantic everything
 
 All projects in Green use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to power [semantic releases](https://semantic-release.gitbook.io/semantic-release/). In order to simplify using this format, install:
 
 ```bash
-npm install -g git-cz
+npm install git-cz -g
 ```
 
-To commit, just run `git-cz` in the terminal 😄
+To commit, just run `git-cz` in the terminal 😄.
+Always try to add reference to an issue in the longer description with # and the issue number. Eg `#1337`. 
 
 
 ### On SEB Windows computer
 
 Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
 
-You start the 3 storybocks with these commands:
+You start the common storybooks with these commands:
 
 ```bash
 npx nx run chlorofyll:storybook
@@ -97,7 +109,9 @@ npx nx run react:storybook
 npx nx run angular:storybook
 ```
 
-Or if you install nx globally you can omit the npx above.
+Or the general `npx nx run [PROJECT]:storybook` where you replace `[PROJECT]` with a folder name from `green\libs`.
+
+If you install nx globally you can omit the npx above.
 
 ```bash
 npm install nx -g
