@@ -9,4 +9,5 @@ export const parameters = {
     stylePreview: true,
     darkClass: 'dark-mode',
   },
+  viewMode: 'docs'
 }
