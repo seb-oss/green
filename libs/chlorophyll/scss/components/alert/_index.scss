@@ -12,6 +12,11 @@ div[role='alert'] {
         map.get($colors, 'color'),
         map.get($colors, 'background')
       );
+      // style for nested links
+      @include mixins.link-variant(
+          map.get($colors, 'color'),
+          rgba(map.get($colors, 'fadable-color'), mixins.$link-outline-opacity)
+      );
     }
   }
 }
