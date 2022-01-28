@@ -1,13 +1,13 @@
 @use 'mixins';
 
 // Tab
-[role='tab'] {
+[role='tab']:link, [role='tab']:visited {
   @include mixins.tab;
-}
 
-// Selected tab
-[role='tab'][aria-selected='true'] {
-  @include mixins.tab--selected;
+  // Selected tab
+  &[aria-selected='true'] {
+    @include mixins.tab--selected;
+  }
 }
 
 // Tab bar
