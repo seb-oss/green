@@ -46,3 +46,8 @@ button.docblock-code-toggle {
   border: solid 1px var(--border-color);
   background: var(--elevation-1-bg);
 }
+
+div[role=alert] {
+  background: var(--background) !important;
+  color: var(--color) !important;
+}
