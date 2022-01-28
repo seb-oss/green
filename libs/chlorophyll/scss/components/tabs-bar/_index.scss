@@ -24,8 +24,3 @@
 [role='tabpanel'][aria-hidden='false'] {
   @include mixins.tabs-panel--selected;
 }
-
-// Disabled tab panel
-[role='tab'][data-disabled='true'] {
-  @include mixins.tabs-panel--disabled;
-}

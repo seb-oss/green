@@ -1,36 +1,54 @@
-import { Meta, Canvas, Story } from '@storybook/addon-docs'
-
-export const Template = () => `
-  <nav role="tablist">
-    <a href="#tab" aria-controls="tab-content-1" role="tab" aria-selected="true">
-      Tab 1
-    </a>
-    <a href="#tab" aria-controls="tab-content-2" role="tab">
-      Tab 2
-    </a>
-    <a href="#tab" aria-controls="tab-content-3" role="tab">
-      Tab 3
-    </a>
-  </nav>
-  <section aria-live="polite">
-    <article id="tab-content-1" role="tabpanel" aria-hidden="false">
-      Content for tab 1
-    </article>
-    <article id="tab-content-2" role="tabpanel" aria-hidden="true">
-      Content for tab 2
-    </article>
-    <article id="tab-content-3" role="tabpanel" aria-hidden="true">
-      Content for tab 3
-    </article>
-  </section>
-`
+import { Meta, Canvas} from '@storybook/addon-docs'
 
 <Meta title="Components/Tabs" />
 
-# Tabs bar
+# Tabs
 
 Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
 
 <Canvas>
-  <Story name="Tabs">{Template.bind({})}</Story>
+  <div>
+    <nav role="tablist">
+      <a href="#tab1" aria-controls="tab-content-1" role="tab" aria-selected="true">
+        Tab 1
+      </a>
+      <a href="#tab2" aria-controls="tab-content-2" role="tab">
+        Tab 2
+      </a>
+      <a href="#tab3" aria-controls="tab-content-3" role="tab">
+        Tab 3
+      </a>
+    </nav>
+    <section aria-live="polite">
+      <article id="tab-content-1" role="tabpanel" aria-hidden="false">
+        <p class="pt-5">Content for tab 1, note that padding needs to be added to content, in this case we've used `pt-5` padding top with spacing unit 5.</p>
+      </article>
+      <article id="tab-content-2" role="tabpanel" aria-hidden="true">
+        Content for tab 2
+      </article>
+      <article id="tab-content-3" role="tabpanel" aria-hidden="true">
+        Content for tab 3
+      </article>
+    </section>
+  </div>
 </Canvas>
+
+
+### Tabs with disabled tab
+
+Omit the href attribute to disable a tab and add aria-disabled to let screen readers know it's disabled.
+
+<Canvas>
+  <nav role="tablist">
+    <a href="#tab1" aria-controls="tab-content-1" role="tab" aria-selected="true">
+      Tab 1
+    </a>
+    <a href="#tab2" aria-controls="tab-content-2" role="tab">
+      Tab 2
+    </a>
+    <a aria-controls="tab-content-3" role="tab" aria-disabled>
+      Tab 3
+    </a>
+  </nav>
+</Canvas>
+
