@@ -67,7 +67,7 @@
     transition: all tokens.$transition-time; // TODO: append transition rule...
   }
 
-  &:not(:disabled, .disabled):hover #{$target} {
+  &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
     border-color: nth(
       functions.desired-color-combination(tokens.$white, $color, 20%, 3),
