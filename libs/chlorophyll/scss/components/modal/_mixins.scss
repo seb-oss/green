@@ -11,6 +11,8 @@ $box-shadow: newTokens.$elevation-1-box-shadow;
 
 @mixin modal {
   //@include common.add-shadow($shadow-level);
+  display: flex;
+  flex-direction: column;
   box-shadow: $box-shadow;
   position: absolute;
   width: 100%;
@@ -51,7 +53,23 @@ $box-shadow: newTokens.$elevation-1-box-shadow;
 @mixin modal-footer {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  display: inline-flex;
-  justify-content: flex-end;
   width: 100%;
+  @include common.media-breakpoint-up('sm') {
+    display: flex;
+    justify-content: flex-end;
+  }
+  button,
+  .button {
+    + {
+      button,
+      .button {
+        @include common.media-breakpoint-only('xs') {
+          @include common.margin-top(4);
+        }
+        @include common.media-breakpoint-up('sm') {
+          @include common.margin-start(4);
+        }
+      }
+    }
+  }
 }
