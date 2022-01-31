@@ -16,7 +16,7 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
   const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
-    if (event.currentTarget.dataset.disabled !== 'true') {
+    if (event.currentTarget.ariaDisabled !== 'true') {
       const focusedIndex: number = parseInt(
         event.currentTarget.dataset.indexNumber as string
       )
@@ -29,12 +29,12 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
       <nav role="tablist">
         {list?.map((value: IList, index: number) => (
           <a
-            href={value.href || '#'}
+            href={value.disabled ? undefined : value.href || '#'}
             onClick={onClick}
             role="tab"
             key={index}
             data-index-number={index}
-            data-disabled={value.disabled}
+            aria-disabled={value.disabled}
             aria-selected={selectedTab === index}
           >
             {value.text}
