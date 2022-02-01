@@ -5,6 +5,7 @@
 $box-shadow: tokens.$elevation-1-box-shadow;
 $z-index: tokens.$zindex-dropdown;
 $color: tokens.$text-primary-color;
+$border-color: map.get(tokens.$blue, 'light', 0);
 $background: tokens.$form-control-bg;
 $popover-bg: tokens.$elevation-1-bg;
 
@@ -50,6 +51,7 @@ $popover-bg: tokens.$elevation-1-bg;
   background-color: $popover-bg;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: flex-end;
   opacity: 0;
   position: fixed;
@@ -71,7 +73,7 @@ $popover-bg: tokens.$elevation-1-bg;
   @include common.media-breakpoint-up(sm) {
     @include common.padding-bottom(0);
     @include common.add-border();
-    @include common.add-border-color(map.get(tokens.$blue, 0));
+    @include common.add-border-color($border-color);
     @include common.add-border-radius();
     box-shadow: $box-shadow;
     min-width: 90px;
