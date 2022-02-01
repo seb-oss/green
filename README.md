@@ -6,7 +6,7 @@ Green is an opinionated design system for building content and functionality for
 
 View the components in our [Storybook](https://sebgroup.github.io/green/latest/chlorophyll/)
 
-## Philisophy
+## Philosophy
 
 Dream big! Start small! Learn fast!
 
@@ -20,7 +20,7 @@ The components of Green will be used more times than one. This puts a multiplier
 
 ### Minimum possible flexibility, but _not_ less
 
-Flexibility means decisions have to be made. This puts strain on every user of a system. Green goes the other way: Minimum flexibility, maximum clarity. If our user's cannot do what they need, we solve that specific problem in a generalized way - no more, no less. Remember: The most flexible system possible is you terminal.
+Flexibility means decisions must be made. This puts strain on every user of a system. Green goes the other way: Minimum flexibility, maximum clarity. If our users cannot do what they need, we solve that specific problem in a generalized way - no more, no less. Remember: The most flexible system possible is your terminal.
 
 ### We don't solve problems we do not have
 
@@ -32,9 +32,9 @@ If something can be deployed, we deploy. Then, if a PR needs a review, we review
 
 ## The design process
 
-Green is tightly integrated with the design process. The design responsibles are part of the team so that decisions can be made effectively and by those most suited.
+Green is tightly integrated with the design process. The design responsible are part of the team so that decisions can be made effectively and by those most suited.
 
-For the most part we follow the existing design. When changes have to be made for practical reasons, clarity, uniformity, accessibility or any other reason, the design responsibles make the call and the change is integrated.
+For the most part we follow the existing design. When changes have to be made for practical reasons, clarity, uniformity, accessibility or any other reason, the design responsible make the call and the change is integrated.
 
 This can, and will, lead to minor inconsistencies in different parts of our offering, especially as Green is not yet (even close to) at 100% adoption. This is fine. Far larger inconsistencies already exist in our current, digital ecosystem. We therefore prioritise the ability to keep moving forward and improve our customers' experience over delaying for the sake of consistency.
 
@@ -46,14 +46,12 @@ In the long run, consistency will be achieved by automating the roll-out of chan
 
 This mono repo is based on `nx` and uses `yarn` instead of `npm`. If you are unused to yarn, see the following instructions:
 
-
 #### Install yarn
 
 ```bash
 npm install yarn -g
 ```
-Use the -g flag to install it globaly on your computer.
-
+Use the -g flag to install it globally on your computer.
 
 #### Install dependencies
 
@@ -86,7 +84,6 @@ yarn lint
 - Push eveything - `git push`.
 - Make a pull request in GitHub - `https://github.com/sebgroup/green/compare`.
 
-
 ### Semantic everything
 
 All projects in Green use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) to power [semantic releases](https://semantic-release.gitbook.io/semantic-release/). In order to simplify using this format, install:
@@ -95,8 +92,7 @@ All projects in Green use [conventional commits](https://www.conventionalcommits
 npm install git-cz -g
 ```
 
-To commit, just run `git-cz` in the terminal 😄.
-Always try to add reference to an issue in the longer description with # and the issue number. Eg `#1337`. 
+To commit, just run `git-cz` in the terminal. Always try to add reference to an issue in the longer description with # and the issue number. Eg `#1337`. 
 
 ### Start Storybook
 
@@ -118,7 +114,7 @@ npm install nx -g
 
 #### Build
 
-If you want to build the files so see how the output looks use `build-storybook`:
+If you want to build the files to see how the output looks use `build-storybook`:
 
 ```bash
 npx nx run chlorofyll:build-storybook
@@ -142,10 +138,6 @@ Also if push fails, uncomment (with `;`) proxy settings in `C:\Users\%Username%\
 
 If you get `SSL certificate problem: unable to get local issuer certificate` you can try:
 
-```bash
-$env:GIT_SSL_NO_VERIFY = "true"
-```
-or
 ```cmd
 SET GIT_SSL_NO_VERIFY=true
 ```
