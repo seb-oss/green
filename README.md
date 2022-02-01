@@ -52,6 +52,8 @@ This mono repo is based on `nx` and uses `yarn` instead of `npm`. If you are unu
 ```bash
 npm install yarn -g
 ```
+Use the -g flag to install it globaly on your computer.
+
 
 #### Install dependencies
 
@@ -96,10 +98,7 @@ npm install git-cz -g
 To commit, just run `git-cz` in the terminal 😄.
 Always try to add reference to an issue in the longer description with # and the issue number. Eg `#1337`. 
 
-
-### On SEB Windows computer
-
-Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
+### Start Storybook
 
 You start the common storybooks with these commands:
 
@@ -117,4 +116,36 @@ If you install nx globally you can omit the npx above.
 npm install nx -g
 ```
 
-Also if push fails, uncomment proxy settings in `C:\Users\%Username%\.npmrc`.
+#### Build
+
+If you want to build the files so see how the output looks use `build-storybook`:
+
+```bash
+npx nx run chlorofyll:build-storybook
+npx nx run react:build-storybook
+npx nx run angular:build-storybook
+```
+
+### On SEB Windows computer
+
+#### VPN
+
+Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
+
+
+#### Proxy
+
+Also if push fails, uncomment (with `;`) proxy settings in `C:\Users\%Username%\.npmrc`.
+
+
+#### SSL certificate problem
+
+If you get `SSL certificate problem: unable to get local issuer certificate` you can try:
+
+```bash
+$env:GIT_SSL_NO_VERIFY = "true"
+```
+or
+```cmd
+SET GIT_SSL_NO_VERIFY=true
+```
