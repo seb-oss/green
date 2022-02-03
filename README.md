@@ -134,6 +134,8 @@ npx nx run angular:build-storybook
 
 ### On SEB Windows computer
 
+These are just an intermediate fixes to turn of security. Should be solved for real later on with certificate/proxy changes.
+
 #### VPN
 
 Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
@@ -142,7 +144,12 @@ Yarn support for our artifactory will be supported later on, but for now you nee
 #### Proxy
 
 Also if push fails, uncomment (with `;`) proxy settings in `C:\Users\%Username%\.npmrc`.
-
+Then use:
+```cmd
+strict-ssl=false
+https-proxy=null
+proxy=null
+```
 
 #### SSL certificate problem
 
@@ -150,4 +157,6 @@ If you get `SSL certificate problem: unable to get local issuer certificate` you
 
 ```cmd
 SET GIT_SSL_NO_VERIFY=true
+git config --global http.sslVerify false
+yarn config set strict-ssl false --global
 ```
