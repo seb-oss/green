@@ -79,8 +79,10 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.14.5",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.15.0",
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-angular": "^16.0.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@ng-easy/builders": "^3.4.7",
+    "@jscutlery/semver": "^2.18.0",
     "@nrwl/angular": "13.4.4",
     "@nrwl/cli": "13.4.4",
     "@nrwl/cypress": "13.4.4",
@@ -185,4 +187,3 @@
     "trim-newlines": "^3.0.1"
   }
 }
-
