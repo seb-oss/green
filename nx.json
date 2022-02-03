@@ -16,7 +16,6 @@
       "options": {
         "cacheableOperations": [
           "build",
-          "release",
           "lint",
           "test",
           "e2e",
@@ -34,9 +33,9 @@
         "projects": "dependencies"
       }
     ],
-    "release": [
+    "version": [
       {
-        "target": "release",
+        "target": "version",
         "projects": "dependencies"
       }
     ]

@@ -70,16 +70,14 @@
         }
       }
     },
-    "release": {
-      "executor": "@ng-easy/builders:semantic-release",
-      "options": {
-        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-      }
-    },
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}"
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "versionTagPrefix": "@sebgroup/green-${target}@",
+        "releaseAs": "prerelease",
+        "preid": "beta",
+        "trackDeps": true
       }
     }
   }
