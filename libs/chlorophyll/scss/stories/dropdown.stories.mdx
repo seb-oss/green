@@ -2,11 +2,36 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 
 <Meta title="Components/Dropdown" />
 
+<style>{
+  `
+    .popover {
+    visibility: visible;
+    opacity: 1;
+    margin-top:4px !important;
+  }
+`}
+</style>
+
+# Dropdowns
+
+<div role="alert" class="info mb-7 mt-5">
+  <header>
+    <h3>Missing JavaScript!</h3>
+  </header>
+  <p>
+    Please note that the examples below just represent the html markup and they won't work without JavaScript. Please checkout the framework implementations for "working" examples.
+  </p>
+  <footer>
+    <a target="_blank" href="./../angular/?path=/docs/components-dropdown--select">View Angular component</a>
+    <a target="_blank" href="./../react/?path=/docs/components-dropdown--dropdown">View React component</a>
+  </footer>
+</div>
+
 ### Dropdown select
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2</button>
-    <ul role="listbox" class="popover d-block" aria-activedescendant="option_2" tabIndex="-1">
+    <ul role="listbox" class="popover" aria-activedescendant="option_2" tabIndex="-1">
       <li id="option_1" role="option">Option 1</li>
       <li id="option_2" role="option" aria-selected>Option 2</li>
       <li id="option_3" role="option">Option 3</li>
@@ -18,7 +43,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
-    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover d-block" tabIndex="-1" aria-multiselectable="true">
+    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover" tabIndex="-1" aria-multiselectable="true">
       <legend class="sr-only">Checkbox group</legend>
       <label class="form-control" role="option">
         <input required type="checkbox" />
@@ -38,7 +63,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
-    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover d-block" tabIndex="-1" aria-multiselectable="true">
+    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover" tabIndex="-1" aria-multiselectable="true">
       <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
       <legend class="sr-only">Checkbox group</legend>
       <label class="form-control" role="option">
@@ -64,7 +89,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
            aria-autocomplete="list"
            aria-controls="autocompleteListbox"
            class="dropdown-menu"/>
-    <ul id="autocompleteListbox" role="listbox" class="popover d-block" tabIndex="-1">
+    <ul id="autocompleteListbox" role="listbox" class="popover" tabIndex="-1">
       <li id="option_1" role="option">Option 1</li>
       <li id="option_2" role="option">Option 2</li>
       <li id="option_3" role="option">Option 3</li>
@@ -81,7 +106,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
             aria-haspopup="menu"
             aria-controls="drownMenu"
             class="dropdown-menu">Menu Icon</button>
-    <ul id="dropdownMenu" role="menu" class="popover d-block" tabIndex="-1">
+    <ul id="dropdownMenu" role="menu" class="popover" tabIndex="-1">
       <li id="option_1" role="menuitem">Action 1</li>
       <li id="option_2" role="menuitem">Action 2</li>
       <li id="option_3" role="menuitem">Action 3</li>

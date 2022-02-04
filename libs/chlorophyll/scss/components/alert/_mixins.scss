@@ -74,6 +74,10 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
       display: flex;
       justify-content: flex-end;
     }
+    a {
+      display: flex;
+    }
+    a,
     button,
     .button {
       &:not(.primary, [type='submit']) {
@@ -81,6 +85,7 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
         color: currentColor;
       }
       + {
+        a,
         button,
         .button {
           @include common.media-breakpoint-only('xs') {

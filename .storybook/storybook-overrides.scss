@@ -15,7 +15,7 @@ body {
   color: inherit !important;
 }
 
-button.docblock-code-toggle {
+button.docblock-code-toggle{
   border-radius: 5px 0;
   background: var(--border-color) !important;
   font-weight: 700;
@@ -37,6 +37,10 @@ button.docblock-code-toggle {
   }
 }
 
+.docs-story + div > div > button {
+  border-radius: 5px 0;
+}
+
 .docs-story {
   padding-bottom: 2rem;
 }
@@ -44,6 +48,7 @@ button.docblock-code-toggle {
 .sbdocs.sbdocs-preview {
   box-shadow: var(--elevation-1-box-shadow);
   border: solid 1px var(--border-color);
+  border-radius: 5px;
   background: var(--elevation-1-bg);
 }
 

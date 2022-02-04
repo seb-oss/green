@@ -38,8 +38,6 @@ section[role='dialog'] {
 
 // aside aka slide out modal
 aside[role='dialog'] {
-  display: flex;
-  flex-flow: column;
   height: 100vh;
   max-width: 375px;
   min-height: fill-available;
@@ -61,8 +59,6 @@ aside[role='dialog'] {
 
 // fullscreen aka take over modal
 main[role='dialog'] {
-  display: flex;
-  flex-flow: column;
   height: 100vh;
   inset: 0;
   min-height: fill-available;
