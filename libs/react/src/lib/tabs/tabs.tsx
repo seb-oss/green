@@ -1,6 +1,6 @@
 import React, { useState, ReactNode } from 'react'
 
-interface IList {
+export interface IList {
   text?: string
   href?: string
   disabled?: boolean

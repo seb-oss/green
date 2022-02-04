@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import Tabs from './tabs'
+import { render, screen, fireEvent, getByRole } from '@testing-library/react'
+import Tabs, { IList } from './tabs'
 
-const list = [
+const list: IList[] = [
   { text: 'Page 1', href: '#' },
   { text: 'Page 2', href: '#' },
   { text: 'Page 3', href: '#' },
@@ -27,13 +27,21 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2')
   })
 
-  // it('OnClick should fire tabOnChange function', () => {
-  //   const onTabChange: jest.Mock = jest
-  //     .fn()
-  //     .mockImplementation((value: number) => value)
-  //   render(<Tabs list={list} onTabChange={onTabChange}></Tabs>)
-  //   const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
-  //   fireEvent.click(anchorTag[1])
-  //   expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2')
-  // })
+  it('OnClick should fire tabOnChange function', () => {
+    const onTabChange: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: number) => value)
+    render(<Tabs list={list} onTabChange={onTabChange}></Tabs>)
+    const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
+    fireEvent.click(anchorTag[1])
+    expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2')
+    expect(onTabChange).toBeCalledWith(1)
+  })
+
+  it('Should have aria-disabled', () => {
+    render(<Tabs list={list} />)
+    const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
+    expect(anchorTag[4].getAttribute('aria-disabled')).toBe(null)
+    expect(anchorTag[5].getAttribute('aria-disabled')).toBe('true')
+  })
 })
