@@ -68,13 +68,39 @@ const ModalFooter = ({
 }
 
 export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
-  return isOpen ? (
-    <section role={ModalRole[type]}>
-      <ModalHeader {...props} />
-      <ModalBody {...props} />
-      <ModalFooter {...props} />
-    </section>
-  ) : null
+  const modalContent = () => {
+    switch (type) {
+      case 'slideout': {
+        return (
+          <aside role="dialog">
+            <ModalHeader {...props} />
+            <ModalBody {...props} />
+            <ModalFooter {...props} />
+          </aside>
+        )
+      }
+      case 'takeover': {
+        return (
+          <main role="dialog">
+            <ModalHeader {...props} />
+            <ModalBody {...props} />
+            <ModalFooter {...props} />
+          </main>
+        )
+      }
+      default: {
+        return (
+          <section role="dialog">
+            <ModalHeader {...props} />
+            <ModalBody {...props} />
+            <ModalFooter {...props} />
+          </section>
+        )
+      }
+    }
+  }
+
+  return isOpen ? modalContent() : null
 }
 
 export default Modal
