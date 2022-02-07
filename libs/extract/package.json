@@ -22,5 +22,8 @@
     "merge": "^2.1.1",
     "@popperjs/core": "^2.11.0",
     "rxjs": "^6.6.7"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.39"
   }
 }
