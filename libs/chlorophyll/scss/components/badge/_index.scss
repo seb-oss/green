@@ -1,0 +1,17 @@
+@use 'mixins';
+@use 'sass:map';
+
+.badge {
+  // add base styles for badge
+  @include mixins.badge();
+
+  // add styles for each variant
+  @each $variant, $colors in mixins.$variants {
+    &.#{$variant} {
+      @include mixins.badge-variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'background')
+      );
+    }
+  }
+}

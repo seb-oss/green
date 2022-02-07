@@ -1,0 +1,40 @@
+@use '../../tokens/shame' as tokens;
+@use '../../common';
+
+$variants: (
+  'info': (
+    color: tokens.$intent-info-color,
+    background: tokens.$intent-info-background,
+  ),
+  'success': (
+    color: tokens.$intent-success-color,
+    background: tokens.$intent-success-background,
+  ),
+  'warning': (
+    color: tokens.$intent-warning-color,
+    background: tokens.$intent-warning-background,
+  ),
+  'danger': (
+    color: tokens.$intent-danger-color,
+    background: tokens.$intent-danger-background,
+  ),
+);
+
+$border-radius: 0;
+$color: var(--color);
+$background: var(--background);
+$close-bg-hover: common.stripped-rgb(tokens.$black);
+
+@mixin badge {
+  background: $background;
+  border-radius: $border-radius;
+  color: $color;
+  display: inline-block;
+  @include common.padding-vertical(2);
+  @include common.padding-horizontal(3);
+}
+
+@mixin badge-variant($color, $background) {
+  --background: #{$background};
+  --color: #{$color};
+}

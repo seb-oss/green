@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Components/Badge"
+  argTypes={{
+    variant: { control: 'text' },
+    children: { control: 'text' },
+  }}
+/>
+
+# Badge
+
+<span class="badge info">Information</span>
+
+<Canvas>
+  <span class="badge info">Information</span>
+  <span class="badge success">Success</span>
+  <span class="badge warning">Warning</span>
+  <span class="badge danger">Danger</span>
+</Canvas>
