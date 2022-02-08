@@ -35,7 +35,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Build all libs
-        run: npx nx run-many --target build --projects=chlorophyll,extract,charts,angular,angular-charts,react,react-charts --base=origin/main
+        run: npx nx run-many --target build --projects=chlorophyll,extract,charts,angular,angular-charts,react,react-charts
 
       - name: Prepare release of chlorophyll and extract
         run: npx nx run-many --target=version --projects=chlorophyll,extract --base=origin/main --parallel=1
