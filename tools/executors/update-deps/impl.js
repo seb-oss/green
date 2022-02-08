@@ -72,11 +72,12 @@ function multipleExecutor(options, context) {
                             var pkg = JSON.parse(fs.readFileSync("libs/".concat(context.projectName, "/package.json")));
                             console.log("existing package.json for ".concat(context.projectName), pkg);
                             // dependencies as arrays
-                            var peerDependencies = Object.keys(pkg.peerDependencies);
-                            var dependencies = Object.keys(pkg.dependencies);
+                            var peerDependencies = Object.keys((pkg === null || pkg === void 0 ? void 0 : pkg.peerDependencies) || {});
+                            var dependencies = Object.keys((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) || {});
                             // get libs based on path
-                            var libs = Object.values(workspace.projects)
-                                .filter(function (path) { return /^libs\/.*/.test(path); });
+                            var libs = Object.values(workspace.projects).filter(function (path) {
+                                return /^libs\/.*/.test(path);
+                            });
                             // get current version of each lib from package.json
                             var packages = libs.reduce(function (previous, current) {
                                 var _a;
@@ -89,14 +90,18 @@ function multipleExecutor(options, context) {
                             if (peerDependencies.length > 0) {
                                 updatedPkg = __assign(__assign({}, updatedPkg), { peerDependencies: __assign(__assign({}, updatedPkg.peerDependencies), peerDependencies.reduce(function (previous, current) {
                                         var _a;
-                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current] ? "^".concat(packages[current]) : updatedPkg.peerDependencies[current], _a)));
+                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current]
+                                            ? "^".concat(packages[current])
+                                            : updatedPkg.peerDependencies[current], _a)));
                                     }, {})) });
                             }
                             // update dependencies if needed
                             if (dependencies.length > 0) {
                                 updatedPkg = __assign(__assign({}, updatedPkg), { dependencies: __assign(__assign({}, updatedPkg.dependencies), dependencies.reduce(function (previous, current) {
                                         var _a;
-                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current] ? "^".concat(packages[current]) : updatedPkg.dependencies[current], _a)));
+                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current]
+                                            ? "^".concat(packages[current])
+                                            : updatedPkg.dependencies[current], _a)));
                                     }, {})) });
                             }
                             console.log("updated package.json for ".concat(context.projectName), updatedPkg);
