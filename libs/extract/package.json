@@ -18,12 +18,10 @@
   },
   "homepage": "https://sebgroup.github.io/green/latest/extract/",
   "dependencies": {
+    "@types/react": "^17.0.39",
     "body-scroll-lock": "^4.0.0-beta.0",
     "merge": "^2.1.1",
     "@popperjs/core": "^2.11.0",
     "rxjs": "^6.6.7"
-  },
-  "devDependencies": {
-    "@types/react": "^17.0.39"
   }
 }
