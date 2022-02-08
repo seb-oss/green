@@ -34,9 +34,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Build affected libs
-        # run: npx nx run chlorophyll:build
-        run: npx nx affected --target build --base=origin/main
+      - name: Build all libs
+        run: npx nx run-many --target build --projects=chlorophyll,extract,charts,angular,angular-charts,react,react-charts --base=origin/main
 
       - name: Prepare release of chlorophyll and extract
         run: npx nx run-many --target=version --projects=chlorophyll,extract --base=origin/main --parallel=1
