@@ -70,6 +70,20 @@
         }
       }
     },
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run angular-charts:update-dependencies && nx run angular-charts:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {

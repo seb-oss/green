@@ -72,6 +72,20 @@
         }
       }
     },
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run angular:update-dependencies && nx run angular:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {

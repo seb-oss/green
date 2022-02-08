@@ -80,6 +80,20 @@
         ]
       }
     },
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run react:update-dependencies && nx run react:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
