@@ -43,12 +43,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      # - name: Prepare release of chlorophyll and extract
-      #  run: npx nx run-many --target=version --projects=chlorophyll,extract --base=origin/main --parallel=1
-      #  env:
-      #    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #    GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      #    HUSKY: 0
+      - name: Prepare release of chlorophyll and extract
+        run: npx nx run-many --target=version --projects=chlorophyll,extract --base=origin/main --parallel=1
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          HUSKY: 0
 
       - name: Prepare release of charts
         run: npx nx run-many --target=prepare-release --projects=charts --base=origin/main --parallel=1
