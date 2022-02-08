@@ -6,6 +6,7 @@
     "build": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
+        "outputPath": "dist/libs/charts",
         "commands": [
           "nx run charts:build-lib",
           "nx run charts:compile-scss",
