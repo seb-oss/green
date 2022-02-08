@@ -39,7 +39,7 @@ With SASS it's easy to make sure styles don't leak, simply include them inside a
 ### Scoping selectors
 
 **scss**
-```scss
+```css
 .foo-bar-app {
   // generic element selector
   button {
@@ -68,7 +68,7 @@ With SASS it's easy to make sure styles don't leak, simply include them inside a
 The same concept works for mixins and imports too. Note however that `@use` which is the new and preferred way of including external style modules can't be scoped, but it's perfectly safe and fine to use `@import` here. If possible use mixins to include styles.
 
 **scss**
-```scss
+```css
 @mixin add-critical-button() {
   .button-critical {
       background: red;

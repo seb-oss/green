@@ -1,21 +1,26 @@
 @use '../../tokens/shame' as tokens;
+@forward '../../components/link/mixins' as link-*;
 @use '../../common';
 
 $variants: (
   'info': (
     color: tokens.$intent-info-color,
+    fadable-color: tokens.$intent-info-fadable-color,
     background: tokens.$intent-info-background,
   ),
   'success': (
     color: tokens.$intent-success-color,
+    fadable-color: tokens.$intent-success-fadable-color,
     background: tokens.$intent-success-background,
   ),
   'warning': (
     color: tokens.$intent-warning-color,
+    fadable-color: tokens.$intent-warning-fadable-color,
     background: tokens.$intent-warning-background,
   ),
   'danger': (
     color: tokens.$intent-danger-color,
+    fadable-color: tokens.$intent-danger-fadable-color,
     background: tokens.$intent-danger-background,
   ),
 );
