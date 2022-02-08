@@ -3169,6 +3169,17 @@
     v8-compile-cache "2.3.0"
     yargs-parser "20.0.0"
 
+"@nrwl/cli@13.7.3":
+  version "13.7.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.7.3.tgz#2e5f5ace22db58b3176dd28e2830a59f306be5bb"
+  integrity sha512-iL10s55Levr2mI/qhKoHuYARYHniS9zlu0+yM6W1kRglJkJpX1KkbGwQ8P6TRImEdz1FlZQqJ/X8qMSH13eOhA==
+  dependencies:
+    "@nrwl/tao" "13.7.3"
+    chalk "4.1.0"
+    enquirer "~2.3.6"
+    v8-compile-cache "2.3.0"
+    yargs-parser "20.0.0"
+
 "@nrwl/cypress@13.4.4":
   version "13.4.4"
   resolved "https://registry.yarnpkg.com/@nrwl/cypress/-/cypress-13.4.4.tgz#3dde2f7cc492cd2b623f58c37edccaa1ec375dc1"
@@ -3195,6 +3206,18 @@
   integrity sha512-jLqIcmVzQNInwEabR2/+ru0VR5D2n3CQ7RZx4QQKPkqF+s4qd1QoMFRZXPZWpUpYR02xhRSKljsIRlU2yOtngQ==
   dependencies:
     "@nrwl/tao" "13.4.4"
+    ejs "^3.1.5"
+    ignore "^5.0.4"
+    rxjs "^6.5.4"
+    semver "7.3.4"
+    tslib "^2.3.0"
+
+"@nrwl/devkit@13.7.3":
+  version "13.7.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-13.7.3.tgz#6159b205e743e6127df432a5e33c2fab04a01c93"
+  integrity sha512-HUfiQuq1qNaavQgbTjYG2UpjrtKtrlOSIq9OPUGYRpmCVNoT5IOtovn7BT+o1Dg6qYW/6F14ydbnubv/SAKXMw==
+  dependencies:
+    "@nrwl/tao" "13.7.3"
     ejs "^3.1.5"
     ignore "^5.0.4"
     rxjs "^6.5.4"
@@ -3346,6 +3369,25 @@
     ignore "^5.0.4"
     jsonc-parser "3.0.0"
     nx "13.7.2"
+    rxjs "^6.5.4"
+    rxjs-for-await "0.0.2"
+    semver "7.3.4"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+    yargs-parser "20.0.0"
+
+"@nrwl/tao@13.7.3":
+  version "13.7.3"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.7.3.tgz#af4d3c21e7b4e529813a8b40ea11a0769d0305c3"
+  integrity sha512-D/0lZj/BhY+fkEYfrgtfOFwRCX129rbuFpAKsk52fJkXym5tWdWMrNwMQPtoi+GqSKJSksyvi9wESZuQQ+/jPA==
+  dependencies:
+    chalk "4.1.0"
+    enquirer "~2.3.6"
+    fast-glob "3.2.7"
+    fs-extra "^9.1.0"
+    ignore "^5.0.4"
+    jsonc-parser "3.0.0"
+    nx "13.7.3"
     rxjs "^6.5.4"
     rxjs-for-await "0.0.2"
     semver "7.3.4"
@@ -15082,6 +15124,13 @@ ng-packagr@13.1.3:
   optionalDependencies:
     esbuild "^0.14.0"
 
+ngx-deploy-npm@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/ngx-deploy-npm/-/ngx-deploy-npm-3.1.1.tgz#2df98ee527ff6085edc86a8c5c9faa98c0ede8f3"
+  integrity sha512-NFKXpvxVw8O0GRBAyzHm+aXe6OchuWgjIsFCvAflxO2E4JgVrpPgTklIa2IqFNarDo8hEmYj3lOXkZGyleVQuA==
+  dependencies:
+    "@nrwl/devkit" "13.7.3"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
@@ -15393,6 +15442,13 @@ nx@13.7.2:
   integrity sha512-5xZVZKi81U7YKoDSC4HcrJDUajfReRlWroIBfDhH92c2DMdAxL1gnWxLFJ8HB3V2O8UYPlomYllr3CwHrfnqcQ==
   dependencies:
     "@nrwl/cli" "13.7.2"
+
+nx@13.7.3:
+  version "13.7.3"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-13.7.3.tgz#8dc2af983e519b75121649dd43217b84c293f55d"
+  integrity sha512-LTj2V0+f1FIHIvPCGMDw3FilWBgNujGcjxJ85A1Pdkoy1Ovr4Onhv1BNfDpjzy9UB0zNgkTfMQzSiEzK6+p2fA==
+  dependencies:
+    "@nrwl/cli" "13.7.3"
 
 object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
