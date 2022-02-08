@@ -1,7 +1,5 @@
 name: Prepare semantic release --dryRun
-on:
-  workflow_dispatch
-  push:
+on: [workflow_dispatch, push]
 
 jobs:
   build:
