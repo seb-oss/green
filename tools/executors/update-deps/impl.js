@@ -55,6 +55,17 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 };
 exports.__esModule = true;
 var fs = require('fs');
+var updateDeps = function (pkg, packages, type) {
+    var _a;
+    if (type === void 0) { type = 'dependencies'; }
+    var deps = Object.entries(pkg[type] || {});
+    return __assign(__assign({}, pkg), (_a = {}, _a[type] = __assign({}, deps.reduce(function (previous, current) {
+        var _a;
+        return (__assign(__assign({}, previous), (_a = {}, _a[current[0]] = packages[current[0]]
+            ? "^".concat(packages[current[0]])
+            : current[1], _a)));
+    }, {})), _a));
+};
 function multipleExecutor(options, context) {
     var e_1, _a;
     return __awaiter(this, void 0, void 0, function () {
@@ -71,9 +82,6 @@ function multipleExecutor(options, context) {
                             // get package json for project
                             var pkg = JSON.parse(fs.readFileSync("libs/".concat(context.projectName, "/package.json")));
                             console.log("existing package.json for ".concat(context.projectName), pkg);
-                            // dependencies as arrays
-                            var peerDependencies = Object.keys((pkg === null || pkg === void 0 ? void 0 : pkg.peerDependencies) || {});
-                            var dependencies = Object.keys((pkg === null || pkg === void 0 ? void 0 : pkg.dependencies) || {});
                             // get libs based on path
                             var libs = Object.values(workspace.projects).filter(function (path) {
                                 return /^libs\/.*/.test(path);
@@ -87,22 +95,12 @@ function multipleExecutor(options, context) {
                             // placeholder for updated package.json for project
                             var updatedPkg = __assign({}, pkg);
                             // update peer dependencies if needed
-                            if (peerDependencies.length > 0) {
-                                updatedPkg = __assign(__assign({}, updatedPkg), { peerDependencies: __assign(__assign({}, updatedPkg.peerDependencies), peerDependencies.reduce(function (previous, current) {
-                                        var _a;
-                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current]
-                                            ? "^".concat(packages[current])
-                                            : updatedPkg.peerDependencies[current], _a)));
-                                    }, {})) });
+                            if (pkg.peerDependencies) {
+                                updatedPkg = updateDeps(updatedPkg, packages, 'peerDependencies');
                             }
                             // update dependencies if needed
-                            if (dependencies.length > 0) {
-                                updatedPkg = __assign(__assign({}, updatedPkg), { dependencies: __assign(__assign({}, updatedPkg.dependencies), dependencies.reduce(function (previous, current) {
-                                        var _a;
-                                        return (__assign(__assign({}, previous), (_a = {}, _a[current] = packages[current]
-                                            ? "^".concat(packages[current])
-                                            : updatedPkg.dependencies[current], _a)));
-                                    }, {})) });
+                            if (pkg.dependencies) {
+                                updatedPkg = updateDeps(updatedPkg, packages);
                             }
                             console.log("updated package.json for ".concat(context.projectName), updatedPkg);
                             fs.writeFile("libs/".concat(context.projectName, "/package.json"), JSON.stringify(updatedPkg, null, 4), resolve);

@@ -6,6 +6,28 @@ export interface MultipleExecutorOptions {
   packageJson: string
 }
 
+const updateDeps = (
+  pkg,
+  packages,
+  type: 'dependencies' | 'peerDependencies' = 'dependencies'
+) => {
+  const deps = Object.entries(pkg[type] || {})
+  return {
+    ...pkg,
+    [type]: {
+      ...deps.reduce(
+        (previous, current) => ({
+          ...previous,
+          [current[0]]: packages[current[0]]
+            ? `^${packages[current[0]]}`
+            : current[1],
+        }),
+        {}
+      ),
+    },
+  }
+}
+
 export default async function multipleExecutor(
   options: MultipleExecutorOptions,
   context: ExecutorContext
@@ -22,10 +44,6 @@ export default async function multipleExecutor(
         fs.readFileSync(`libs/${context.projectName}/package.json`)
       )
       console.log(`existing package.json for ${context.projectName}`, pkg)
-
-      // dependencies as arrays
-      const peerDependencies = Object.keys(pkg?.peerDependencies || {})
-      const dependencies = Object.keys(pkg?.dependencies || {})
 
       // get libs based on path
       const libs = Object.values<string>(workspace.projects).filter((path) =>
@@ -47,41 +65,13 @@ export default async function multipleExecutor(
       }
 
       // update peer dependencies if needed
-      if (peerDependencies.length > 0) {
-        updatedPkg = {
-          ...updatedPkg,
-          peerDependencies: {
-            ...updatedPkg.peerDependencies,
-            ...peerDependencies.reduce(
-              (previous, current) => ({
-                ...previous,
-                [current]: packages[current]
-                  ? `^${packages[current]}`
-                  : updatedPkg.peerDependencies[current],
-              }),
-              {}
-            ),
-          },
-        }
+      if (pkg.peerDependencies) {
+        updatedPkg = updateDeps(updatedPkg, packages, 'peerDependencies')
       }
 
       // update dependencies if needed
-      if (dependencies.length > 0) {
-        updatedPkg = {
-          ...updatedPkg,
-          dependencies: {
-            ...updatedPkg.dependencies,
-            ...dependencies.reduce(
-              (previous, current) => ({
-                ...previous,
-                [current]: packages[current]
-                  ? `^${packages[current]}`
-                  : updatedPkg.dependencies[current],
-              }),
-              {}
-            ),
-          },
-        }
+      if (pkg.dependencies) {
+        updatedPkg = updateDeps(updatedPkg, packages)
       }
       console.log(`updated package.json for ${context.projectName}`, updatedPkg)
       fs.writeFile(
