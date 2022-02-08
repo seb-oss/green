@@ -19,6 +19,15 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+      - name: Add auth to .npmrc
+        run: |
+          echo '
+            registry=https://registry.npmjs.org
+            always-auth=true
+            //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          ' >> .npmrc
+        shell: bash
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
