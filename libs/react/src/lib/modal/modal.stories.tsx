@@ -13,8 +13,36 @@ const Template: Story<ModalProps> = (props) => {
     console.log('ok clicked')
   }
 
+  const Styles = () => (
+    <style>
+      {`
+          main {
+            position: relative !important;
+            max-height: 500px;
+            max-width: 100%;
+          }
+          section {
+            position: relative !important;
+            margin: auto;
+            max-height: 300px;
+          }
+          aside {
+            position: relative !important;
+            max-height: 500px;
+            margin-left: auto;
+          }
+          .backdrop {
+            position: absolute;
+            margin-bottom: 1.5rem;
+          }
+         
+      `}
+    </style>
+  )
+
   return (
-    <div style={{ height: '180px' }}>
+    <div>
+      <Styles />
       {!isOpen && (
         <button className="button" onClick={openModal}>
           open modal
