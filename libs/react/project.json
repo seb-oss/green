@@ -101,7 +101,24 @@
         "versionTagPrefix": "@sebgroup/green-${target}@",
         "releaseAs": "prerelease",
         "preid": "beta",
-        "trackDeps": true
+        "trackDeps": true,
+        "push": true,
+        "postTargets": ["react:publish", "react:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}",
+        "prerelease": true
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "noBuild": true
       }
     }
   }
