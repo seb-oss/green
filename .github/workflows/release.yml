@@ -1,5 +1,5 @@
-name: Prepare semantic release
-on: [workflow_dispatch, push]
+name: Release to Github and NPM
+on: workflow_dispatch
 
 jobs:
   build:
