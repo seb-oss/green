@@ -2,7 +2,6 @@
   "root": "libs/charts",
   "sourceRoot": "libs/charts/src",
   "projectType": "library",
-  "implicitDependencies": ["chlorophyll"],
   "targets": {
     "build": {
       "executor": "@nrwl/workspace:run-commands",
@@ -84,10 +83,45 @@
         "passWithNoTests": true
       }
     },
-    "release": {
-      "executor": "@ng-easy/builders:semantic-release",
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "commands": [
+          {
+            "command": "nx run charts:update-dependencies && nx run charts:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "versionTagPrefix": "@sebgroup/green-${target}@",
+        "releaseAs": "prerelease",
+        "preid": "beta",
+        "trackDeps": true,
+        "push": true,
+        "postTargets": ["charts:publish", "charts:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}",
+        "prerelease": true
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "noBuild": true
       }
     }
   }

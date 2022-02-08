@@ -6,8 +6,8 @@
     "react-dom": "^17.0.0"
   },
   "dependencies": {
-    "@sebgroup/chlorophyll": "*",
-    "@sebgroup/extract": "*"
+    "@sebgroup/chlorophyll": "0.0.0-semantically-released",
+    "@sebgroup/extract": "0.0.0-semantically-released"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
   "repository": {
