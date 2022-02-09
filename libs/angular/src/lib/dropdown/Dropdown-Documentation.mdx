@@ -1,0 +1,23 @@
+<!-- Dropdown-Documentation.mdx -->
+
+import { Story, Source } from '@storybook/addon-docs'
+
+# Dropdown
+
+The dropdown supports 2-way binding to the value property without the need for Angular forms,
+and support all of the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.)
+
+<Source
+  language="html"
+  code={`<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>`}
+/>
+
+<Source
+  language="html"
+  code={`<ngg-dropdown [formControl]="control" [options]="options"></ngg-dropdown>`}
+/>
+
+<Source
+  language="html"
+  code={`<ngg-dropdown [(ngModel)]="selected" [options]="options"></ngg-dropdown>`}
+/>
