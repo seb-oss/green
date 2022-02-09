@@ -75,6 +75,7 @@ export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
       {label}
       <input type="checkbox" {...inputProps} />
       <span></span>
+      <i />
     </label>
   )
 }
