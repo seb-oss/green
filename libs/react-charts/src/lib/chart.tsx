@@ -13,7 +13,10 @@ export function Chart({ settings, theme }: ChartProps) {
   const { chart, info } = useChart({ chartRef, settings })
 
   return (
-    <div className="chart" style={info?.style as unknown as CSSProperties}>
+    <div
+      className={'chart' + (settings?.fitHeightToParent ? ' fit-height' : '')}
+      style={info?.style as unknown as CSSProperties}
+    >
       <div className={theme} ref={chartRef} />
 
       {info?.xAxis && (
