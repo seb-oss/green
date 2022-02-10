@@ -1,5 +1,6 @@
 @use '../../chlorophyll/scss/tokens/shame' as tokens;
 @use '../../chlorophyll/scss/common/spacing' as common;
+@use '../../chlorophyll/scss/common/breakpoints' as breakpoints;
 @use '../../chlorophyll/scss/components/list';
 $font-family: tokens.$font-family-sans-serif;
 $axis-color: #8c8c8c;
@@ -44,13 +45,9 @@ $grid-base-line-color: tokens.$border-secondary-color;
   }
 }
 @mixin _chart-series-list-item() {
-  @include common.margin-top(3);
+  @include common.margin-end(3);
   align-items: center;
   display: flex;
-
-  &:not(:last-child) {
-    @include common.margin-bottom(3);
-  }
 
   &::before {
     background: var(--color);
@@ -59,9 +56,72 @@ $grid-base-line-color: tokens.$border-secondary-color;
     height: 0.75rem;
     margin-right: 0.5rem;
     width: 0.75rem;
+    flex-shrink: 0;
   }
 }
 @mixin add-chart-styles() {
+  // layout using grid
+  .chart {
+    display: grid;
+
+    // stack by default in a one column layout
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'legend-right'
+      'legend-top'
+      'chart'
+      'axis';
+    justify-items: center;
+
+    // use a two column layout on medium sized screens and up
+    @include breakpoints.media-breakpoint-up('md') {
+      justify-items: start;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        'legend-top legend-top'
+        'chart legend-right'
+        'axis .';
+    }
+
+    // chart
+    > .bb {
+      grid-area: chart;
+      place-self: stretch;
+    }
+
+    // axis
+    > .bb + div {
+      grid-area: axis;
+      place-self: stretch;
+    }
+
+    .legend-container {
+      grid-area: legend-right;
+      ul.legend {
+        @include common.margin-bottom(4);
+      }
+      &.top {
+        justify-self: center;
+        grid-area: legend-top;
+        ul.legend {
+          @include common.margin-bottom(4);
+        }
+      }
+      @include breakpoints.media-breakpoint-up('md') {
+        align-self: center;
+      }
+      // align list items vertically on medium screens and up if not placement equals top
+      &:not(.top) > ul.legend {
+        @include breakpoints.media-breakpoint-up('md') {
+          flex-direction: column;
+          @include common.margin-bottom(0);
+        }
+      }
+    }
+  }
+
   /* Html x-axis */
   .chart .bb + div ul.x-axis {
     flex-direction: row;
@@ -87,6 +147,7 @@ $grid-base-line-color: tokens.$border-secondary-color;
       font-family: $font-family;
       font-size: 12px;
       line-height: 1;
+      width: 100%;
     }
 
     path,
@@ -416,56 +477,11 @@ $grid-base-line-color: tokens.$border-secondary-color;
     }
   }
 
-  // legend
-  .legend-container {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    position: absolute;
-    top: 0;
-
-    &.top {
-      align-items: flex-start;
-    }
-
-    &.bottom {
-      align-items: flex-end;
-
-      &:not(.right, .left) {
-        justify-content: center;
-        position: relative;
-
-        .legend {
-          display: flex;
-
-          li {
-            margin: 0 0.5rem;
-          }
-        }
-      }
-    }
-
-    &.center {
-      align-items: center;
-    }
-
-    &.bottom {
-      align-items: end;
-    }
-
-    &.right {
-      right: 0;
-    }
-
-    &.left {
-      left: 0;
-    }
-  }
-
   ul.legend {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
 
     li {
       @include _chart-series-list-item();
