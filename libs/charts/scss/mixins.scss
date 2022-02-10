@@ -26,6 +26,8 @@ $x-axis-tick-thickness: $x-axis-thickness;
 $grid-focus-line-color: tokens.get(tokens.$blue, 2);
 $grid-base-line-color: tokens.$border-secondary-color;
 
+$min-height: 3.5rem;
+
 @mixin add-color-palettes() {
   /*-- Default color pattern --*/
   .bb-color-pattern {
@@ -66,7 +68,7 @@ $grid-base-line-color: tokens.$border-secondary-color;
 
     // stack by default in a one column layout
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto minmax(#{$min-height}, 1fr) auto;
     grid-template-areas:
       'legend-right'
       'legend-top'
@@ -78,7 +80,7 @@ $grid-base-line-color: tokens.$border-secondary-color;
     @include breakpoints.media-breakpoint-up('md') {
       justify-items: start;
       grid-template-columns: 1fr auto;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto minmax(#{$min-height}, 1fr) auto;
       grid-template-areas:
         'legend-top legend-top'
         'chart legend-right'
@@ -140,6 +142,17 @@ $grid-base-line-color: tokens.$border-secondary-color;
   /*-- Chart --*/
   .chart {
     position: relative;
+  }
+
+  // use height of chart parent for chart and svg
+  .chart.fit-height {
+    height: 100%;
+    .bb {
+      svg {
+        position: absolute;
+        height: 100%;
+      }
+    }
   }
 
   .bb {
