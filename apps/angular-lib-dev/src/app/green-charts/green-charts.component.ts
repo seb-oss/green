@@ -9,9 +9,15 @@ export class GreenChartsComponent {
   settings: ChartSettings = {
     data: [
       {
-        name: 'Antal',
+        name: 'Totalt',
         type: 'bar',
         values: [234, 197, 97, 12],
+      },
+      {
+        name: 'Unika',
+        type: 'line',
+        values: [12, 5, 20, 7],
+        axis: 'y2',
       },
     ],
     categories: [
