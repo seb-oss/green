@@ -46,7 +46,8 @@
         "port": 4400,
         "config": {
           "configFolder": "libs/angular-charts/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular-charts:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -62,7 +63,8 @@
         "outputPath": "dist/storybook/angular-charts",
         "config": {
           "configFolder": "libs/angular-charts/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular-charts:build-storybook"
       },
       "configurations": {
         "ci": {

@@ -48,7 +48,8 @@
         "host": "0.0.0.0",
         "config": {
           "configFolder": "libs/angular/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -64,7 +65,8 @@
         "outputPath": "dist/storybook/angular",
         "config": {
           "configFolder": "libs/angular/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular:build-storybook"
       },
       "configurations": {
         "ci": {
