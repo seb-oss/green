@@ -1,11 +1,4 @@
 import React from 'react'
-import { RadioButton, RadioButtonProps } from '..'
-
-export interface OnChangeRadioButton {
-  value?: string
-  checked?: boolean
-}
-
 export interface RadioGroupProps {
   title?: string
   description?: string

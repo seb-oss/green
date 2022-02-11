@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { RadioButton } from './radioButton'
+import { RadioButton } from '../input/input'
 import { RadioGroup } from './radioGroup'
 
 export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
@@ -15,7 +15,16 @@ Simple Radio Button Component
 ### Default Radio Button
 
 <Canvas>
-  <Story name="RadioButton" args={{ label: 'Radio Button' }}>
+  <Story
+    name="RadioButton"
+    args={{
+      label: 'Radio Button',
+      value: 'Button value',
+      onChangeRadioBtn: (checked) => {
+        console.log(checked)
+      },
+    }}
+  >
     {RadioButtonTemplate.bind({})}
   </Story>
 </Canvas>

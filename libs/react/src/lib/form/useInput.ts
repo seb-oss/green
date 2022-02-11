@@ -25,8 +25,8 @@ const useInput = <T>(
   useEffect(() => {
     if (ref.current && ref.current.form) {
       const resetListener = (): void => {
-        setValue(props.value)
-        setChecked((props as CheckboxProps).checked)
+        props.value && setValue(props.value)
+        props.checked && setChecked((props as CheckboxProps).checked)
       }
       const form = ref.current.form
       form.addEventListener('reset', resetListener)
@@ -38,8 +38,8 @@ const useInput = <T>(
   }, [props])
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.target.value)
-    setChecked(event.target.checked)
+    props.value && setValue(event.target.value)
+    props.checked && setChecked(event.target.checked)
     if (notify) notify(evaluator(event.target))
   }
 

@@ -1,6 +1,11 @@
 import { InputHTMLAttributes } from 'react'
 import useInput from '../useInput'
-import { CheckboxProps, InputListener, TextInputProps } from '../types'
+import {
+  CheckboxProps,
+  InputListener,
+  RadioButtonProps,
+  TextInputProps,
+} from '../types'
 
 type Renderer = <T>(
   type: string,
@@ -75,6 +80,28 @@ export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
       {label}
       <input type="checkbox" {...inputProps} />
       <span></span>
+    </label>
+  )
+}
+
+export const RadioButton = ({
+  label,
+  onChangeRadioBtn,
+  ...props
+}: RadioButtonProps) => {
+  const inputProps = useInput(
+    props,
+    (e) => {
+      return { value: e.value, checked: e.checked }
+    },
+    onChangeRadioBtn
+  )
+
+  return (
+    <label htmlFor={inputProps.id} className="form-control">
+      <input type="radio" name="default" {...inputProps} />
+      <span>{label}</span>
+      <i />
     </label>
   )
 }

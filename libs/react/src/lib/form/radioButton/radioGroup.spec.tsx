@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import RadioGroup from './radioGroup'
-import RadioButton, { RadioButtonProps } from './radioButton'
+import { RadioButton } from '../input/input'
+import { RadioButtonProps } from '../types'
 
 describe('RadioButton Group Component', () => {
   const radioBtnValues: RadioButtonProps[] = [
@@ -17,7 +18,7 @@ describe('RadioButton Group Component', () => {
   const MockComponent = () => (
     <RadioGroup title="Radio Group title" description="Description">
       {radioBtnValues.map((value: RadioButtonProps, index: number) => (
-        <RadioButton key={index} value={value.value} label={value.label} />
+        <RadioButton key={index} {...value} />
       ))}
     </RadioGroup>
   )

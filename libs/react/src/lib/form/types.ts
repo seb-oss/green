@@ -24,4 +24,15 @@ export interface CheckboxProps extends InputProps {
   onChecked?: (checked: boolean | undefined) => unknown
 }
 
+export interface OnChangeRadioButton {
+  value?: string
+  checked?: boolean
+}
+export interface RadioButtonProps {
+  label?: string
+  value?: string
+  disabled?: boolean
+  onChangeRadioBtn?: (checked: OnChangeRadioButton | undefined) => unknown
+}
+
 export type InputListener<T> = (newValue?: T) => unknown
