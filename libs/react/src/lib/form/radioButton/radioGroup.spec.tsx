@@ -33,4 +33,25 @@ describe('RadioButton Group Component', () => {
     render(<RadioGroup>test</RadioGroup>)
     expect(screen.getByText('test')).toBeVisible()
   })
+
+  it('Should render validator: valid', () => {
+    const { container } = render(
+      <RadioGroup validator={{ message: 'valid message', indicator: 'valid' }}>
+        <RadioButton label="car 5" />
+      </RadioGroup>
+    )
+    expect(screen.getByText('valid message')).toBeVisible()
+    expect(container.querySelectorAll('.is-valid')).toHaveLength(2)
+  })
+  it('Should render validator: invalid', () => {
+    const { container } = render(
+      <RadioGroup
+        validator={{ message: 'invalid message', indicator: 'invalid' }}
+      >
+        <RadioButton label="car 5" />
+      </RadioGroup>
+    )
+    expect(screen.getByText('invalid message')).toBeVisible()
+    expect(container.querySelectorAll('.is-invalid')).toHaveLength(2)
+  })
 })

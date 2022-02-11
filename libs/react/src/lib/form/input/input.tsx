@@ -30,9 +30,8 @@ const RenderInput: Renderer = (
     : inputProps
 
   // Render naked
-  if (!label && !info) return (
-    <input type={type} value={value} {...propsWithDescription} />
-  )
+  if (!label && !info)
+    return <input type={type} value={value} {...propsWithDescription} />
 
   return (
     <div className="form-field">
@@ -93,6 +92,7 @@ export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
 export const RadioButton = ({
   label,
   onChangeRadioBtn,
+  validator,
   ...props
 }: RadioButtonProps) => {
   const inputProps = useInput(
@@ -105,7 +105,14 @@ export const RadioButton = ({
 
   return (
     <label htmlFor={inputProps.id} className="form-control">
-      <input type="radio" name="default" {...inputProps} />
+      <input
+        type="radio"
+        name="default"
+        {...inputProps}
+        className={
+          validator && (validator === 'valid' ? 'is-valid' : 'is-invalid')
+        }
+      />
       <span>{label}</span>
       <i />
     </label>

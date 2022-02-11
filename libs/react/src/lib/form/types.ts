@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react'
+import { IndicatorType } from './radioButton/radioGroup'
 
 export interface InputProps {
   id?: string
@@ -32,6 +33,7 @@ export interface RadioButtonProps {
   label?: string
   value?: string
   disabled?: boolean
+  validator?: IndicatorType
   onChangeRadioBtn?: (checked: OnChangeRadioButton | undefined) => unknown
 }
 

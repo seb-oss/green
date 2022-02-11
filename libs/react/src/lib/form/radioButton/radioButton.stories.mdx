@@ -67,4 +67,20 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
   </form>
 </Canvas>
 
+### validator
+
+<Canvas>
+  <form>
+    <RadioGroup
+      title="Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'valid', indicator: 'valid' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+      <RadioButton label="Radio Button 3" value="button3" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
 <ArgsTable of={RadioButton} />

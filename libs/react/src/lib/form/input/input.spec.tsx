@@ -174,4 +174,16 @@ describe('Component: RadioButton', () => {
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).not.toBeCalled()
   })
+  it('Should render validator: valid', () => {
+    const { container } = render(
+      <RadioButton label="Radio button" validator="valid" />
+    )
+    expect(container.querySelectorAll('.is-valid')).toHaveLength(1)
+  })
+  it('Should render validator: invalid', () => {
+    const { container } = render(
+      <RadioButton label="Radio button" validator="invalid" />
+    )
+    expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
+  })
 })
