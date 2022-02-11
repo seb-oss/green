@@ -1,28 +1,28 @@
 {
-  "name": "@sebgroup/green-angular-charts",
-  "version": "0.0.0-semantically-released",
-  "peerDependencies": {
-    "@angular/common": "^13.0.0",
-    "@angular/core": "^13.0.0"
-  },
-  "dependencies": {
-    "@sebgroup/green-charts": "*",
-    "tslib": "^2.3.1"
-  },
-  "description": "Angular charts built on top of @sebgroup/green-charts.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "author": "Robert Hjalmers <opensource@rhj.se> (http://www.linkedin.com/in/robert-hjalmers/)",
-  "contributors": [],
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/angular"
-  },
-  "homepage": "https://sebgroup.github.io/green/latest/angular-charts/"
+    "name": "@sebgroup/green-angular-charts",
+    "version": "1.0.0-beta.5",
+    "peerDependencies": {
+        "@angular/common": "^12.0.0 || ^13.0.0",
+        "@angular/core": "^12.0.0 || ^13.0.0"
+    },
+    "dependencies": {
+        "@sebgroup/green-charts": "^1.0.0-beta.5",
+        "tslib": "^2.3.1"
+    },
+    "description": "Angular charts built on top of @sebgroup/green-charts.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sebgroup/green.git"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
+    "author": "Robert Hjalmers <opensource@rhj.se> (http://www.linkedin.com/in/robert-hjalmers/)",
+    "contributors": [],
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/sebgroup/green/labels/angular"
+    },
+    "homepage": "https://sebgroup.github.io/green/latest/angular-charts/"
 }
