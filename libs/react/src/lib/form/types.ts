@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react'
+import { IndicatorType } from '@sebgroup/extract'
 
 export interface InputProps {
   id?: string
@@ -38,3 +39,8 @@ export interface RadioButtonProps {
 }
 
 export type InputListener<T> = (newValue?: T) => unknown
+
+export interface IValidator {
+  message: string
+  indicator: IndicatorType
+}
