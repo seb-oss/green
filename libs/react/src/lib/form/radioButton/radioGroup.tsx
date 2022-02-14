@@ -1,7 +1,6 @@
 import React from 'react'
 import { RadioButtonProps } from '../types'
-
-export type IndicatorType = 'valid' | 'invalid'
+import { IndicatorType, validateClassName } from '@sebgroup/extract'
 
 interface IValidator {
   message: string
@@ -19,29 +18,18 @@ export const RadioGroup = ({
   validator,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
-  let fieldsetClassName: string
-  switch (validator?.indicator) {
-    case 'valid': {
-      fieldsetClassName = 'is-valid'
-      break
-    }
-    case 'invalid': {
-      fieldsetClassName = 'is-invalid'
-      break
-    }
-    default: {
-      fieldsetClassName = ''
-    }
-  }
+  const validatorClassName: string = validateClassName(
+    validator?.indicator as IndicatorType
+  )
   return (
     <div className="form-group">
-      <fieldset className={fieldsetClassName}>
+      <fieldset className={validatorClassName}>
         <legend>{title}</legend>
         <span className="form-info">{description}</span>
         {React.Children.toArray(children).map((child: React.ReactNode) => {
           return React.isValidElement<React.FC<RadioButtonProps>>(child)
             ? React.cloneElement<any>(child, {
-                validator: validator?.indicator,
+                validator: validatorClassName,
               })
             : child
         })}

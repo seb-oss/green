@@ -67,18 +67,58 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
   </form>
 </Canvas>
 
-### validator
+## Validation
+
+### Default form (vertical)
 
 <Canvas>
   <form>
     <RadioGroup
       title="Radio Group"
       description="Radio Group Description"
+      validator={{ message: 'neutral', indicator: 'neutral' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+    <RadioGroup
+      title="Valid Radio Group"
+      description="Radio Group Description"
       validator={{ message: 'valid', indicator: 'valid' }}
     >
       <RadioButton label="Radio Button 1" value="button1" />
       <RadioButton label="Radio Button 2" value="button2" />
-      <RadioButton label="Radio Button 3" value="button3" />
+    </RadioGroup>
+    <RadioGroup
+      title="Invalid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'Invalid', indicator: 'invalid' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+### Horizontal
+
+<Canvas>
+  <form className="horizontal">
+    <RadioGroup
+      title="Valid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'valid', indicator: 'valid' }}
+    >
+      <RadioButton label="One" value="button1" />
+      <RadioButton label="Two" value="button2" />
+    </RadioGroup>
+    <RadioGroup
+      title="Invalid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'Invalid', indicator: 'invalid' }}
+    >
+      <RadioButton label="One" value="button1" />
+      <RadioButton label="Two" value="button2" />
     </RadioGroup>
   </form>
 </Canvas>

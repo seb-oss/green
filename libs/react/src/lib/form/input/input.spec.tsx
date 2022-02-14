@@ -176,13 +176,13 @@ describe('Component: RadioButton', () => {
   })
   it('Should render validator: valid', () => {
     const { container } = render(
-      <RadioButton label="Radio button" validator="valid" />
+      <RadioButton label="Radio button" validator="is-valid" />
     )
     expect(container.querySelectorAll('.is-valid')).toHaveLength(1)
   })
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioButton label="Radio button" validator="invalid" />
+      <RadioButton label="Radio button" validator="is-invalid" />
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })

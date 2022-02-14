@@ -102,16 +102,13 @@ export const RadioButton = ({
     },
     onChangeRadioBtn
   )
-
   return (
     <label htmlFor={inputProps.id} className="form-control">
       <input
         type="radio"
         name="default"
         {...inputProps}
-        className={
-          validator && (validator === 'valid' ? 'is-valid' : 'is-invalid')
-        }
+        className={validator}
       />
       <span>{label}</span>
       <i />
