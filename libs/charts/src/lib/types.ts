@@ -15,7 +15,7 @@ export interface ChartSettings {
   data: ChartData[]
   categories?: string[]
   legend?: LegendPlacement
-  fitHeightToParent?: boolean
+  style?: ChartStyle
 }
 
 interface LegendItem {
@@ -26,6 +26,18 @@ interface LegendItem {
 export interface Legend {
   items: LegendItem[]
   placement: LegendPlacement
+}
+
+export interface ChartStyle {
+  axis?: {
+    show:
+      | {
+          x?: boolean
+          y?: boolean
+          y2?: boolean
+        }
+      | boolean
+  }
 }
 
 interface Tick {

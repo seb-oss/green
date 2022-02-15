@@ -1,5 +1,6 @@
 import bb, {
   area,
+  Axis,
   bar,
   Chart as BBChart,
   ChartOptions,
@@ -75,6 +76,37 @@ export const createOptions = ({
     }
   }
 
+  // add settings for axis
+  if (settings?.style?.axis != null) {
+    let axesSetting: Axis
+
+    if (settings?.style.axis.show === false) {
+      // hide all axes
+      axesSetting = {
+        y: { show: false },
+        y2: { show: false },
+        x: { show: false },
+      }
+    } else {
+      axesSetting = Object.entries(settings?.style.axis.show).reduce(
+        (axes, [axis, show]) => ({
+          ...axes,
+          [axis]: {
+            ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
+            show,
+          },
+        }),
+        {
+          ...(options.axis || {}),
+        }
+      )
+    }
+    options.axis = {
+      ...options.axis,
+      ...axesSetting,
+    }
+  }
+
   let hasNegativeValue = false
   for (const dt of columns) {
     for (const val of dt) {
@@ -102,6 +134,7 @@ export const createOptions = ({
     options.axis = {
       ...(options.axis || {}),
       x: {
+        ...(options?.axis?.x || {}),
         type: 'category',
         categories: settings.categories,
         tick: {
@@ -113,7 +146,6 @@ export const createOptions = ({
       },
     }
   }
-
   return options
 }
 
@@ -148,8 +180,15 @@ export const createInfo = (
     },
   }
 
+  // expose values for axis unless hidden
+  if (
+    settings.style?.axis?.show === true ||
+    (settings.style?.axis?.show !== false &&
+      settings.style?.axis?.show?.x !== false)
+  ) {
   info.xAxis = {
     ticks: chart.categories().map((text) => ({ text })),
+    }
   }
 
   info.properties = {
