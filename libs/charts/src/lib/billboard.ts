@@ -7,6 +7,7 @@ import bb, {
   donut,
   line,
   pie,
+  PointOptions,
   spline,
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
@@ -73,6 +74,24 @@ export const createOptions = ({
       y2: {
         show: true,
       },
+    }
+  }
+
+  // add settings for point
+  if (settings?.style?.point != null) {
+    let pointSetting: PointOptions
+
+    if (settings?.style.point.show === 'focus') {
+      pointSetting = {
+        focus: { only: true },
+      }
+    } else {
+      pointSetting = {
+        show: settings?.style.point.show,
+      }
+    }
+    options.point = {
+      ...pointSetting,
     }
   }
 
@@ -186,8 +205,8 @@ export const createInfo = (
     (settings.style?.axis?.show !== false &&
       settings.style?.axis?.show?.x !== false)
   ) {
-  info.xAxis = {
-    ticks: chart.categories().map((text) => ({ text })),
+    info.xAxis = {
+      ticks: chart.categories().map((text) => ({ text })),
     }
   }
 

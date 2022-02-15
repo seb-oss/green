@@ -38,6 +38,9 @@ export interface ChartStyle {
         }
       | boolean
   }
+  point?: {
+    show?: boolean | 'focus'
+  }
 }
 
 interface Tick {
