@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react'
+import { IndicatorType } from '@sebgroup/extract'
 
 export interface InputProps {
   id?: string
@@ -24,4 +25,22 @@ export interface CheckboxProps extends InputProps {
   onChecked?: (checked: boolean | undefined) => unknown
 }
 
+export interface OnChangeRadioButton {
+  value?: string
+  checked?: boolean
+}
+export interface RadioButtonProps {
+  label?: string
+  value?: string
+  disabled?: boolean
+  validator?: string
+  checked?: boolean
+  onChangeRadioBtn?: (checked: OnChangeRadioButton | undefined) => unknown
+}
+
 export type InputListener<T> = (newValue?: T) => unknown
+
+export interface IValidator {
+  message: string
+  indicator: IndicatorType
+}
