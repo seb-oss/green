@@ -68,7 +68,7 @@ $min-height: 3.5rem;
 
     // stack by default in a one column layout
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(#{$min-height}, 1fr) auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
       'legend-right'
       'legend-top'
@@ -80,7 +80,7 @@ $min-height: 3.5rem;
     @include breakpoints.media-breakpoint-up('md') {
       justify-items: start;
       grid-template-columns: 1fr auto;
-      grid-template-rows: auto minmax(#{$min-height}, 1fr) auto;
+      grid-template-rows: auto auto auto;
       grid-template-areas:
         'legend-top legend-top'
         'chart legend-right'
@@ -147,6 +147,11 @@ $min-height: 3.5rem;
   // use height of chart parent for chart and svg
   .chart.fit-height {
     height: 100%;
+    grid-template-rows: auto auto minmax(#{$min-height}, 1fr) auto;
+
+    @include breakpoints.media-breakpoint-up('md') {
+      grid-template-rows: auto minmax(#{$min-height}, 1fr) auto;
+    }
     .bb {
       svg {
         position: absolute;
