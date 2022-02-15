@@ -23,6 +23,12 @@ const RenderInput: Renderer = (
   const propsWithDescription = info
     ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` }
     : inputProps
+
+  // Render naked
+  if (!label && !info) return (
+    <input type={type} value={value} {...propsWithDescription} />
+  )
+
   return (
     <div className="form-field">
       {label && <label htmlFor={inputProps.id}>{label}</label>}

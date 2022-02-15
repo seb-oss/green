@@ -203,6 +203,33 @@ Mixed.args = {
   theme: '',
 }
 
+export const MixedSecondY = ChartStory.bind({})
+MixedSecondY.args = {
+  settings: {
+    data: [
+      {
+        type: 'spline',
+        name: 'Signerade avtal SEB',
+        values: [100, 140, 60, 150],
+      },
+      {
+        type: 'area',
+        name: 'Påbörjade trials',
+        values: [80, 90, 130, 110],
+      },
+      {
+        type: 'bar',
+        name: 'Aktiverade prenumerationer',
+        values: [3, 7, 9, 2],
+        axis: 'y2',
+      },
+    ],
+    categories: ['jan', 'feb', 'mar', 'apr'],
+    legend: 'top',
+  },
+  theme: '',
+}
+
 export const FitToHeight = ChartCardStory.bind({})
 FitToHeight.storyName = 'Fit to height of parent'
 FitToHeight.args = {
