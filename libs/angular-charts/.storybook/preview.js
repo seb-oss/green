@@ -7,6 +7,7 @@ export const parameters = {
     ...baseParameters.docs,
     iframeHeight: 400,
   },
+  viewMode: 'canvas',
 }
 
 // workaround for https://github.com/nrwl/nx/issues/7054

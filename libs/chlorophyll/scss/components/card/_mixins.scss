@@ -30,6 +30,10 @@ $layout-direction: column;
     }
   }
 
+  > *:not(header, footer) {
+    flex: 1 1 auto;
+  }
+
   > footer {
     @include common.margin-top(4);
     @include common.media-breakpoint-up('sm') {
