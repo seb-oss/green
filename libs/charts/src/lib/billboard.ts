@@ -152,7 +152,7 @@ export const createInfo = (
     ticks: chart.categories().map((text) => ({ text })),
   }
 
-  info.style = {
+  info.properties = {
     '--chart-width': '768px',
     '--chart-height': '500px',
     '--chart-space-left': '49px',

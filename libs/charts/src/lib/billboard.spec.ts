@@ -1,5 +1,5 @@
 import { ChartOptions, Chart } from 'billboard.js'
-import { ChartSettings, ChartStyle, Legend } from './types'
+import { ChartSettings, ChartProperties, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 import { tmplTooltip } from './templates'
 
@@ -272,14 +272,14 @@ describe('billboard', () => {
       ]
 
       const info = createInfo(settings, chart)
-      const expected: ChartStyle = {
+      const expected: ChartProperties = {
         '--chart-width': '768px',
         '--chart-height': '500px',
         '--chart-space-left': '49px',
         '--chart-space-right': 0,
       }
 
-      expect(info.style).toEqual(expected)
+      expect(info.properties).toEqual(expected)
     })
   })
 })

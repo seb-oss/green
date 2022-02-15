@@ -13,7 +13,7 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
   selector: 'ngg-chart',
   template: `<div
     class="chart"
-    [style]="chart?.info?.style"
+    [style]="chart?.info?.properties"
     [class.fit-height]="chart?.settings?.fitHeightToParent"
   >
     <div #chartRef [class]="theme"></div>

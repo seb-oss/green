@@ -35,7 +35,7 @@ export interface Axis {
   ticks: Tick[]
 }
 
-export interface ChartStyle {
+export interface ChartProperties {
   '--chart-width': string | number
   '--chart-height': string | number
   '--chart-space-left': string | number
@@ -43,7 +43,7 @@ export interface ChartStyle {
 }
 export interface ChartInfo {
   legend: Legend
-  style: ChartStyle
+  properties: ChartProperties
   xAxis: Axis
 }
 
