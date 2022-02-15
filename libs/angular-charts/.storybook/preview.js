@@ -3,6 +3,7 @@ import { parameters as baseParameters } from '../../../.storybook/preview'
 
 export const parameters = {
   ...baseParameters,
+  viewMode: 'canvas',
 }
 
 // workaround for https://github.com/nrwl/nx/issues/7054

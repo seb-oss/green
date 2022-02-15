@@ -19,6 +19,16 @@ const ChartStory: Story<NggChartComponent> = (args) => ({
   template: `<ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>`,
 })
 
+const ChartCardStory: Story<NggChartComponent> = (args) => ({
+  props: args,
+  template: `<div class="card" style="height: 340px">
+                <header><h3>Chart in card with locked height (340px)</h3></header>
+                <div>
+                    <ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>
+                </div>
+             </div>`,
+})
+
 const ObservableChartStory: Story<NggChartComponent> = (args) => ({
   props: args,
   template: `<ngg-chart [settings]='settings | async' [theme]='theme'></ngg-chart>`,
@@ -191,4 +201,26 @@ Mixed.args = {
     legend: 'right',
   },
   theme: '',
+}
+
+export const FitToHeight = ChartCardStory.bind({})
+FitToHeight.storyName = 'Fit to height of parent'
+FitToHeight.args = {
+  theme: '',
+  settings: {
+    fitHeightToParent: true,
+    data: [
+      {
+        name: 'Antal',
+        type: 'bar',
+        values: [234, 197, 97, 12],
+      },
+    ],
+    categories: [
+      'Signerade avtal (SEB)',
+      'Påbörjade trials (Oxceed)',
+      'Aktiverade prenumerationer',
+      'Avslutade prenumerationer',
+    ],
+  },
 }
