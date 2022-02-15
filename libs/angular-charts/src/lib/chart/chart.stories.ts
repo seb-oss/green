@@ -235,7 +235,9 @@ FitToHeight.storyName = 'Fit to height of parent'
 FitToHeight.args = {
   theme: '',
   settings: {
-    fitHeightToParent: true,
+    style: {
+      fitHeightToParent: true,
+    },
     data: [
       {
         name: 'Antal',

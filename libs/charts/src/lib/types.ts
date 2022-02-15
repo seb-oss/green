@@ -29,6 +29,7 @@ export interface Legend {
 }
 
 export interface ChartStyle {
+  fitHeightToParent?: boolean
   axis?: {
     show:
       | {
