@@ -24,6 +24,9 @@ describe('billboard', () => {
           types: {
             Foo: 'bar',
           },
+          axes: {
+            Foo: 'y',
+          },
         },
         legend: { show: false },
         tooltip: { contents: { template: tmplTooltip } },
@@ -49,6 +52,9 @@ describe('billboard', () => {
           columns: [['Foo', 1, 2, 3]],
           types: {
             Foo: 'area',
+          },
+          axes: {
+            Foo: 'y',
           },
         },
         axis: {
@@ -89,6 +95,10 @@ describe('billboard', () => {
             Foo: 'bar',
             Bar: 'bar',
           },
+          axes: {
+            Foo: 'y',
+            Bar: 'y',
+          },
         },
         legend: { show: false },
         tooltip: { contents: { template: tmplTooltip } },
@@ -116,6 +126,44 @@ describe('billboard', () => {
             Foo: 'bar',
             Bar: 'area',
           },
+          axes: {
+            Foo: 'y',
+            Bar: 'y',
+          },
+        },
+        legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
+      }
+      expect(parsed).toEqual(expected)
+    })
+    it('adds y2 axis when defined in data', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [
+          {
+            name: 'Foo',
+            type: 'bar',
+            values: [1, 2, 3],
+            axis: 'y2',
+          },
+        ],
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: ChartOptions = {
+        bindto: '#foo',
+        data: {
+          columns: [['Foo', 1, 2, 3]],
+          types: {
+            Foo: 'bar',
+          },
+          axes: {
+            Foo: 'y2',
+          },
+        },
+        axis: {
+          y2: {
+            show: true,
+          },
         },
         legend: { show: false },
         tooltip: { contents: { template: tmplTooltip } },
@@ -142,6 +190,10 @@ describe('billboard', () => {
             Foo: 'bar',
             Bar: 'area',
           },
+          axes: {
+            Foo: 'y',
+            Bar: 'y',
+          },
         },
         legend: { show: false },
         tooltip: { contents: { template: tmplTooltip } },
@@ -167,6 +219,10 @@ describe('billboard', () => {
           types: {
             Foo: 'bar',
             Bar: 'area',
+          },
+          axes: {
+            Foo: 'y',
+            Bar: 'y',
           },
         },
         legend: { show: false },
