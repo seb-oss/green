@@ -44,15 +44,35 @@ export const createOptions = ({
     }),
     {}
   )
+  const axes = settings.data.reduce(
+    (res, d) => ({
+      ...res,
+      [d.name]: d.axis || 'y',
+    }),
+    {}
+  )
 
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
       columns,
       types,
+      axes,
     },
     legend: { show: false },
     tooltip: { contents: { template: tmplTooltip } },
+  }
+
+  let hasY2Axis = false
+  hasY2Axis = Object.values(axes).indexOf('y2') !== -1
+
+  if (hasY2Axis) {
+    options.axis = {
+      ...(options.axis || {}),
+      y2: {
+        show: true,
+      },
+    }
   }
 
   let hasNegativeValue = false
@@ -80,6 +100,7 @@ export const createOptions = ({
 
   if (settings.categories) {
     options.axis = {
+      ...(options.axis || {}),
       x: {
         type: 'category',
         categories: settings.categories,

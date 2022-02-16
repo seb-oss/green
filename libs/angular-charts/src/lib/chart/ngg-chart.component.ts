@@ -11,7 +11,11 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 
 @Component({
   selector: 'ngg-chart',
-  template: `<div class="chart" [style]="chart?.info?.style">
+  template: `<div
+    class="chart"
+    [style]="chart?.info?.style"
+    [class.fit-height]="chart?.settings?.fitHeightToParent"
+  >
     <div #chartRef [class]="theme"></div>
     <div *ngIf="chart?.info?.xAxis as xAxis">
       <ul class="x-axis">

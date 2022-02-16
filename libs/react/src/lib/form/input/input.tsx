@@ -115,6 +115,34 @@ export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
       {label}
       <input type="checkbox" {...inputProps} />
       <span></span>
+      <i />
+    </label>
+  )
+}
+
+export const RadioButton = ({
+  label,
+  onChangeRadioBtn,
+  validator,
+  ...props
+}: RadioButtonProps) => {
+  const inputProps = useInput(
+    props,
+    (e) => {
+      return { value: e.value, checked: e.checked }
+    },
+    onChangeRadioBtn
+  )
+  return (
+    <label htmlFor={inputProps.id} className="form-control">
+      <input
+        type="radio"
+        name="default"
+        {...inputProps}
+        className={validator}
+      />
+      <span>{label}</span>
+      <i />
     </label>
   )
 }

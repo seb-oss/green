@@ -15,6 +15,7 @@ export interface ChartSettings {
   data: ChartData[]
   categories?: string[]
   legend?: LegendPlacement
+  fitHeightToParent?: boolean
 }
 
 interface LegendItem {
