@@ -202,16 +202,24 @@ $shadows: (
 
 $intent: (
   light: (
+    'primary': get($blue, 0),
+    'secondary': get($grey, 500),
     'info': get($blue, 0),
     'success': get($green, 0),
     'warning': get($yellow, 2),
     'danger': get($red, 1),
+    'light': get($grey, 300),
+    'dark': get($grey, 1000),
   ),
   dark: (
+    'primary': get($blue, 2, 'dark'),
+    'secondary': get($grey, 500, 'dark'),
     'info': get($blue, 2, 'dark'),
     'success': get($green, 2, 'dark'),
     'warning': get($yellow, 0, 'dark'),
     'danger': get($red, 1, 'dark'),
+    'light': get($grey, 300, 'dark'),
+    'dark': get($grey, 1000, 'dark'),
   ),
 );
 
@@ -236,18 +244,30 @@ $border-color-valid: var(--border-color-valid);
 
 $grey-400: var(--grey-400);
 
+$intent-primary-color: var(--intent-primary-color);
+$intent-secondary-color: var(--intent-secondary-color);
 $intent-success-color: var(--intent-success-color);
 $intent-info-color: var(--intent-info-color);
 $intent-warning-color: var(--intent-warning-color);
 $intent-danger-color: var(--intent-danger-color);
+$intent-light-color: var(--intent-light-color);
+$intent-dark-color: var(--intent-dark-color);
+$intent-primary-fadable-color: var(--intent-primary-fadable-color);
+$intent-secondary-fadable-color: var(--intent-secondary-fadable-color);
 $intent-success-fadable-color: var(--intent-success-fadable-color);
 $intent-info-fadable-color: var(--intent-info-fadable-color);
 $intent-warning-fadable-color: var(--intent-warning-fadable-color);
 $intent-danger-fadable-color: var(--intent-danger-fadable-color);
+$intent-light-fadable-color: var(--intent-light-fadable-color);
+$intent-dark-fadable-color: var(--intent-dark-fadable-color);
+$intent-primary-background: var(--intent-primary-background);
+$intent-secondary-background: var(--intent-secondary-background);
 $intent-success-background: var(--intent-success-background);
 $intent-info-background: var(--intent-info-background);
 $intent-warning-background: var(--intent-warning-background);
 $intent-danger-background: var(--intent-danger-background);
+$intent-light-background: var(--intent-light-background);
+$intent-dark-background: var(--intent-dark-background);
 
 $checkbox-checkmark-disabled-color: var(--checkbox-checkmark-disabled-color);
 $form-control-bg: var(--form-control-bg);

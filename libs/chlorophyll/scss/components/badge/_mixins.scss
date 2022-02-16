@@ -2,6 +2,14 @@
 @use '../../common';
 
 $variants: (
+  'primary': (
+    color: tokens.$intent-primary-color,
+    background: tokens.$intent-primary-background,
+  ),
+  'secondary': (
+    color: tokens.$intent-secondary-color,
+    background: tokens.$intent-secondary-background,
+  ),
   'info': (
     color: tokens.$intent-info-color,
     background: tokens.$intent-info-background,
@@ -17,6 +25,14 @@ $variants: (
   'danger': (
     color: tokens.$intent-danger-color,
     background: tokens.$intent-danger-background,
+  ),
+  'light': (
+    color: tokens.$intent-light-color,
+    background: tokens.$intent-light-background,
+  ),
+  'dark': (
+    color: tokens.$intent-dark-color,
+    background: tokens.$intent-dark-background,
   ),
 );
 
