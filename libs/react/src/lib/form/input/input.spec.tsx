@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { render, screen, fireEvent } from '@testing-library/react'
+import { TextInputProps } from '../types'
 import {
   Checkbox,
   EmailInput,
@@ -185,5 +186,28 @@ describe('Component: RadioButton', () => {
       <RadioButton label="Radio button" validator="is-invalid" />
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
+  })
+})
+
+describe('Validation: text, number and email component', () => {
+  const MockComponent = () => (
+    <>
+      <TextInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'valid' }}
+      />
+      <NumberInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'valid' }}
+      />
+      <EmailInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'valid' }}
+      />
+    </>
+  )
+  it('Should render validation: valid', () => {
+    render(<MockComponent />)
+    expect(screen.getAllByText('valid message')).toHaveLength(3)
   })
 })

@@ -3,9 +3,12 @@ import useInput from '../useInput'
 import {
   CheckboxProps,
   InputListener,
+  IValidator,
+  NumberInputProps,
   RadioButtonProps,
   TextInputProps,
 } from '../types'
+import { IndicatorType, validateClassName } from '@sebgroup/extract'
 
 type Renderer = <T>(
   type: string,
@@ -13,7 +16,8 @@ type Renderer = <T>(
   evaluator: (target: HTMLInputElement) => T | undefined,
   label?: string,
   info?: string,
-  listener?: InputListener<T>
+  listener?: InputListener<T>,
+  validator?: IValidator
 ) => JSX.Element
 
 const RenderInput: Renderer = (
@@ -22,7 +26,8 @@ const RenderInput: Renderer = (
   evaluator,
   label,
   info,
-  listener
+  listener,
+  validator
 ) => {
   const { value, ...inputProps } = useInput(props, evaluator, listener)
   const propsWithDescription = info
@@ -34,14 +39,22 @@ const RenderInput: Renderer = (
     return <input type={type} value={value} {...propsWithDescription} />
 
   return (
-    <div className="form-field">
+    <div className="form-group">
       {label && <label htmlFor={inputProps.id}>{label}</label>}
       {info && (
-        <span className="form-info" id="{inputProps.id}_info">
+        <span className="form-info" id={`${inputProps.id}_info`}>
           {info}
         </span>
       )}
-      <input type={type} value={value} {...propsWithDescription} />
+      <input
+        type={type}
+        value={value}
+        {...propsWithDescription}
+        className={
+          validator && validateClassName(validator?.indicator as IndicatorType)
+        }
+      />
+      {validator && <span className="form-info">{validator.message}</span>}
     </div>
   )
 }
@@ -52,7 +65,15 @@ export const TextInput = ({
   onChangeText,
   ...props
 }: TextInputProps<string>) =>
-  RenderInput<string>('text', props, (e) => e.value, label, info, onChangeText)
+  RenderInput<string>(
+    'text',
+    props,
+    (e) => e.value,
+    label,
+    info,
+    onChangeText,
+    props.validator
+  )
 
 export const EmailInput = ({
   label,
@@ -60,21 +81,30 @@ export const EmailInput = ({
   onChangeText,
   ...props
 }: TextInputProps<string>) =>
-  RenderInput<string>('email', props, (e) => e.value, label, info, onChangeText)
+  RenderInput<string>(
+    'email',
+    props,
+    (e) => e.value,
+    label,
+    info,
+    onChangeText,
+    props.validator
+  )
 
 export const NumberInput = ({
   label,
   info,
   onChangeText,
   ...props
-}: TextInputProps<number>) =>
+}: NumberInputProps) =>
   RenderInput<number>(
     'number',
     props,
     (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
     label,
     info,
-    onChangeText
+    onChangeText,
+    props.validator
   )
 
 export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {

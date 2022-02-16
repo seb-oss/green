@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import { TextInput, EmailInput, NumberInput } from './input'
 
 export const TextInputTemplate = ({ ...props }) => <TextInput {...props} />
@@ -40,4 +40,24 @@ export const NumberInputTemplate = ({ ...props }) => <NumberInput {...props} />
   >
     {NumberInputTemplate.bind({})}
   </Story>
+</Canvas>
+
+### Validation
+
+<Canvas>
+  <TextInput
+    label="Text Input"
+    info="Info"
+    validator={{ message: 'success', indicator: 'valid' }}
+  />
+  <EmailInput
+    label="Email Input"
+    info="Info"
+    validator={{ message: 'error', indicator: 'invalid' }}
+  />
+  <NumberInput
+    label="Number Input"
+    info="Info"
+    validator={{ message: 'nuetral', indicator: 'nuetral' }}
+  />
 </Canvas>

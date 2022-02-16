@@ -7,6 +7,8 @@ export interface InputProps {
   onFocus?: FocusEventHandler<HTMLInputElement>
   onBlur?: FocusEventHandler<HTMLInputElement>
   onChange?: ChangeEventHandler<HTMLInputElement>
+  validator?: IValidator
+  disabled?: boolean
 }
 export interface TextInputProps<T> extends InputProps {
   type?: 'text' | 'email' | 'number'
