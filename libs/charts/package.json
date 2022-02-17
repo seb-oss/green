@@ -1,8 +1,8 @@
 {
     "name": "@sebgroup/green-charts",
-    "version": "1.0.0-beta.5",
+    "version": "1.0.0-beta.6",
     "dependencies": {
-        "@sebgroup/chlorophyll": "^1.0.0-beta.5",
+        "@sebgroup/chlorophyll": "^1.0.0-beta.6",
         "@types/d3-selection": "^3.0.2",
         "billboard.js": "^3.3.2"
     },
