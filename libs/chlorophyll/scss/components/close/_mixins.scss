@@ -5,11 +5,12 @@
 
 $close-height: 42px;
 $close-width: $close-height;
-$close-height-sm: 34px;
+$close-height-sm: 30px;
 $close-width-sm: $close-height-sm;
 $close-padding: 20px;
 $close-padding-sm: 16px;
 $close-thickness: 4px;
+$close-thickness-sm: 2px;
 $close-bg: rgba(tokens.$fadable-foreground-color, 0);
 $close-bg-hover: rgba(tokens.$fadable-foreground-color, 0.1);
 $close-bg-active: rgba(tokens.$fadable-foreground-color, 0.2);
@@ -70,5 +71,28 @@ $close-icon-color: tokens.$text-primary-color;
 
   &::before {
     transform: rotateZ(-45deg);
+  }
+}
+
+@mixin close-badge {
+  height: $close-height-sm;
+  width: $close-width-sm;
+
+  &:not(:disabled, .disabled):hover {
+    background: none;
+    border-color: none;
+  }
+
+  &:not(:disabled, .disabled):hover:active {
+    background: none;
+    border-color: none;
+  }
+
+  &::after,
+  &::before {
+    height: $close-height-sm - $close-padding-sm;
+    left: calc(50% - #{math.div($close-thickness-sm, 2)});
+    top: math.div($close-padding-sm, 2);
+    width: $close-thickness-sm;
   }
 }

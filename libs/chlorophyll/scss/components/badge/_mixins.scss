@@ -48,6 +48,15 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
   display: inline-block;
   @include common.padding-vertical(2);
   @include common.padding-horizontal(3);
+
+  .close,
+  .close-badge {
+    --fadable-foreground-color: #{$close-bg-hover};
+    &::before,
+    &::after {
+      background: var(--color);
+    }
+  }
 }
 
 @mixin badge-variant($color, $background) {
