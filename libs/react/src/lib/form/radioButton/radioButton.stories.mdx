@@ -1,0 +1,126 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { RadioButton } from '../input/input'
+import { RadioGroup } from './radioGroup'
+
+export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
+
+export const RadioGroupTemplate = ({ ...props }) => <RadioGroup {...props} />
+
+<Meta title="Components/Form/RadioButton" component={RadioButton} />
+
+# Radio button
+
+Simple Radio Button Component
+
+### Default Radio Button
+
+<Canvas>
+  <Story
+    name="RadioButton"
+    args={{
+      label: 'Radio Button',
+      value: 'Button value',
+      onChangeRadioBtn: (checked) => {
+        console.log(checked)
+      },
+    }}
+  >
+    {RadioButtonTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Radio Group
+
+Group form controls such as checkboxes and radio buttons using `fieldset` and adds an optional description using `description`.
+
+<Canvas>
+  <form>
+    <RadioGroup title="Radio Group" description="Radio Group Description">
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+### Horizontal form with group and visible legend
+
+<Canvas>
+  <form className="horizontal">
+    <RadioGroup title="Radio Group" description="Radio Group Description">
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+### Disabled radio group buttons
+
+<Canvas>
+  <form>
+    <RadioGroup title="Radio Group" description="Radio Group Description">
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+      <RadioButton label="Radio Button 3" value="button3" disabled />
+      <RadioButton label="Radio Button 4" value="button4" disabled />
+      <RadioButton label="Radio Button 5" value="button5" disabled />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+## Validation
+
+### Default form (vertical)
+
+<Canvas>
+  <form>
+    <RadioGroup
+      title="Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'neutral', indicator: 'neutral' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+    <RadioGroup
+      title="Valid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'valid', indicator: 'valid' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+    <RadioGroup
+      title="Invalid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'Invalid', indicator: 'invalid' }}
+    >
+      <RadioButton label="Radio Button 1" value="button1" />
+      <RadioButton label="Radio Button 2" value="button2" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+### Horizontal
+
+<Canvas>
+  <form className="horizontal">
+    <RadioGroup
+      title="Valid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'valid', indicator: 'valid' }}
+    >
+      <RadioButton label="One" value="button1" />
+      <RadioButton label="Two" value="button2" />
+    </RadioGroup>
+    <RadioGroup
+      title="Invalid Radio Group"
+      description="Radio Group Description"
+      validator={{ message: 'Invalid', indicator: 'invalid' }}
+    >
+      <RadioButton label="One" value="button1" />
+      <RadioButton label="Two" value="button2" />
+    </RadioGroup>
+  </form>
+</Canvas>
+
+<ArgsTable of={RadioButton} />

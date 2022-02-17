@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { ButtonVariant } from '@sebgroup/extract'
 import { Button, ButtonProps } from '../button/button'
-import { Group } from '../../layout/group/group'
+import { Group } from '../'
 
 interface ButtonGroupProps {
   children: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]

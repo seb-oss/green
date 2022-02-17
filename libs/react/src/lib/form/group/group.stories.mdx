@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Group } from '../'
+import { TextInput, Button } from '../../form'
+
+<Meta title="Components/Form/Group" component={Group} />
+
+# Group
+
+Group inputs, buttons and other form elements together.
+
+## Input & Button
+
+<Canvas>
+  <Group>
+    <TextInput placeholder="Input field" />
+    <Button>Button</Button>
+  </Group>
+</Canvas>
+
+## Inputs
+
+<Canvas>
+  <Group>
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+  </Group>
+  <Group error="Error">
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+  </Group>
+</Canvas>
+
+## Group with shared border
+
+<Canvas>
+  <Group groupBorder>
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+  </Group>
+  <Group error="Error" groupBorder>
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+    <TextInput placeholder="Input field" />
+  </Group>
+</Canvas>

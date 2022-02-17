@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.5...@sebgroup/chlorophyll@1.0.0-beta.6) (2022-02-17)
+
+
+### Bug Fixes
+
+* 🐛 fixed navbar styling ([#392](https://github.com/sebgroup/green/issues/392)) ([5077380](https://github.com/sebgroup/green/commit/507738055a66c25a8029feda70514a0f80389ed1))
+
+
+
 # [1.0.0-beta.5](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.4...@sebgroup/chlorophyll@1.0.0-beta.5) (2022-02-08)
 
 
