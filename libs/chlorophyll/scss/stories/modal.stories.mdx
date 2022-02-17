@@ -20,8 +20,9 @@ import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks'; import {back
       margin-left: auto;
     }
     .backdrop {
-      position: absolute;
+      position: absolute !important;
       margin-bottom: 1.5rem;
+      z-index: -1 !important;
     }
 `}
 </style>
