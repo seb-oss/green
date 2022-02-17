@@ -1,17 +1,31 @@
 @use '../../tokens/shame' as tokens;
+@use 'mixins';
 /* force dark mode to whole app or part of it by adding the class ".dark-mode" */
 .dark-mode {
   @include tokens.dark-mode;
+  @include mixins.add-theme(
+    $bg-level-0: #121212,
+    $bg-level-1: #222222,
+    $bg-level-2: #272727,
+    $bg-level-3: #2c2c2c
+  );
 }
 
 /* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */
 @media (prefers-color-scheme: dark) {
   .auto-mode {
     @include tokens.dark-mode;
+    @include mixins.add-theme(
+      $bg-level-0: #121212,
+      $bg-level-1: #222222,
+      $bg-level-2: #272727,
+      $bg-level-3: #2c2c2c
+    );
   }
 }
 
 /* apps will use light mode by default */
 :root {
   @include tokens.light-mode;
+  @include mixins.add-theme();
 }
