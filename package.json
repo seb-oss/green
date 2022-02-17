@@ -169,7 +169,8 @@
     "ts-node": "^10.2.1",
     "typescript": "4.5.5",
     "url-loader": "^4.1.1",
-    "webpack": "5"
+    "webpack": "5",
+    "yarn-audit-fix": "^9.0.11"
   },
   "resolutions": {
     "ansi-regex": "^5.0.1",
@@ -188,4 +189,3 @@
     "trim-newlines": "^3.0.1"
   }
 }
-
