@@ -114,7 +114,7 @@ export class NggDropdownComponent
     | ElementRef<HTMLElement>
     | undefined
 
-  onChangeFn?: any
+  onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
   dropdown?: AbstractDropdown
@@ -134,6 +134,13 @@ export class NggDropdownComponent
           this.dropdown = dropdown
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
+
+          const selected = this.dropdown.options.find(
+            (option) => option.selected
+          )
+          if (this._value !== selected?.value) {
+            this._value = selected?.value
+          }
           this.cd.detectChanges()
         }
       )
@@ -149,7 +156,6 @@ export class NggDropdownComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (
       this.handler &&
-      this.dropdown &&
       (changes.id || changes.text || changes.loop || changes.options)
     ) {
       this.handler.update(this.props)
@@ -157,8 +163,8 @@ export class NggDropdownComponent
     }
   }
 
-  writeValue(obj: any): void {
-    this.value = obj
+  writeValue(value: any): void {
+    this.value = value
   }
 
   registerOnChange(fn: any): void {
@@ -171,6 +177,7 @@ export class NggDropdownComponent
 
   select(option: ExtendedDropdownOption) {
     this.handler?.select(option)
+    this._value = option.value
     this.valueChange.emit(option.value)
     this.onChangeFn && this.onChangeFn(option.value)
     this.onTouchedFn && this.onTouchedFn()

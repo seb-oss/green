@@ -21,11 +21,28 @@ export class DropdownComponent {
     },
   ]
 
+  optionsWithInitial = [
+    {
+      key: 'Tacos',
+      value: 'tacos',
+    },
+    {
+      key: 'Pizza',
+      value: 'pizza',
+      selected: true,
+    },
+    {
+      key: 'Sushi',
+      value: 'sushi',
+    },
+  ]
+
   dropdownForm = this._fb.group({
     select1: undefined,
     select2: 'pizza',
   })
 
+  dropdownValue0: any = undefined
   dropdownValue1: any = undefined
   dropdownValue2 = 'sushi'
   dropdownValue3: any = undefined

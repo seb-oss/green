@@ -4,6 +4,11 @@
   <ngg-dropdown
     [options]="options"
     text="Select"
+    [(value)]="dropdownValue0"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [options]="optionsWithInitial"
+    text="Select"
     [(value)]="dropdownValue1"
   ></ngg-dropdown>
   <ngg-dropdown
@@ -12,6 +17,7 @@
     [(value)]="dropdownValue2"
   ></ngg-dropdown>
 </div>
+<div>Value: {{ dropdownValue0 | json }}</div>
 <div>Value: {{ dropdownValue1 | json }}</div>
 <div>Value: {{ dropdownValue2 | json }}</div>
 
