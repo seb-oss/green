@@ -10,7 +10,8 @@
       "outputs": ["dist/libs/angular"],
       "options": {
         "project": "libs/angular/ng-package.json",
-        "tsConfig": "libs/angular/tsconfig.lib.prod.json"
+        "tsConfig": "libs/angular/tsconfig.lib.prod.json",
+        "updateBuildableProjectDepsInPackageJson": false
       },
       "configurations": {
         "production": {

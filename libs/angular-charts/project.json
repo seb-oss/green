@@ -10,7 +10,8 @@
       "outputs": ["dist/libs/angular-charts"],
       "options": {
         "project": "libs/angular-charts/ng-package.json",
-        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json",
+        "updateBuildableProjectDepsInPackageJson": false
       },
       "configurations": {
         "production": {
