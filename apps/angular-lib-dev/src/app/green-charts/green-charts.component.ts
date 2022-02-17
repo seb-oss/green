@@ -3,13 +3,18 @@ import { ChartSettings } from '@sebgroup/green-charts'
 
 @Component({
   selector: 'green-green-charts',
-  template: ` <div class="card d-block" style="height: 270px;">
-    <ngg-chart [settings]="settings"></ngg-chart>
-  </div>`,
+  template: `<div class="card d-block" style="height: 270px;">
+      <ngg-chart [settings]="settings"></ngg-chart>
+    </div>
+    <div class="card d-block mt-5">
+      <ngg-chart [settings]="hideAxis"></ngg-chart>
+    </div>`,
 })
 export class GreenChartsComponent {
   settings: ChartSettings = {
-    fitHeightToParent: true,
+    style: {
+      fitHeightToParent: true,
+    },
     data: [
       {
         name: 'Totalt',
@@ -29,6 +34,29 @@ export class GreenChartsComponent {
       },
     ],
     legend: 'right',
+    categories: [
+      'Signerade avtal (SEB)',
+      'Påbörjade trials (Oxceed)',
+      'Aktiverade prenumerationer',
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+    ],
+  }
+  hideAxis: ChartSettings = {
+    data: [
+      {
+        name: 'Unika',
+        type: 'line',
+        values: [12, 5, 20, 7, 4, 16, 2, 3, 9],
+      },
+    ],
+    style: {
+      axis: {
+        show: false,
+      },
+      point: {
+        show: 'focus',
+      },
+    },
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',

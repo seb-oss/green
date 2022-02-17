@@ -154,6 +154,38 @@ Lines.args = {
   theme: '',
 }
 
+export const HideAxes = ChartStory.bind({})
+HideAxes.args = {
+  settings: {
+    data: [
+      {
+        name: 'Signerade avtal SEB',
+        type: 'line',
+        values: [10, 14, 6, 15],
+      },
+      {
+        name: 'Påbörjade trials',
+        type: 'line',
+        values: [8, 9, 13, 11],
+      },
+      {
+        name: 'Aktiverade prenumerationer',
+        type: 'line',
+        values: [3, 7, 9, 10],
+      },
+    ],
+    categories: ['jan', 'feb', 'mar', 'apr'],
+    style: {
+      axis: {
+        show: false,
+      },
+      point: {
+        show: 'focus',
+      },
+    },
+  },
+}
+
 export const Splines = ChartStory.bind({})
 Splines.args = {
   settings: {
@@ -235,7 +267,9 @@ FitToHeight.storyName = 'Fit to height of parent'
 FitToHeight.args = {
   theme: '',
   settings: {
-    fitHeightToParent: true,
+    style: {
+      fitHeightToParent: true,
+    },
     data: [
       {
         name: 'Antal',

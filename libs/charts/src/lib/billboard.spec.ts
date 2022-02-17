@@ -1,5 +1,5 @@
-import { ChartOptions, Chart } from 'billboard.js'
-import { ChartSettings, ChartStyle, Legend } from './types'
+import { ChartOptions, Chart, Axis } from 'billboard.js'
+import { ChartSettings, ChartProperties, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 import { tmplTooltip } from './templates'
 
@@ -235,6 +235,101 @@ describe('billboard', () => {
       }
       expect(parsed).toEqual(expected)
     })
+    it('adds y base line if any value is negative', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [
+          { name: 'Foo', values: [1] },
+          { name: 'Bar', values: [-2], type: 'area' },
+        ],
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: ChartOptions = {
+        bindto: '#foo',
+        data: {
+          columns: [
+            ['Foo', 1],
+            ['Bar', -2],
+          ],
+          types: {
+            Foo: 'bar',
+            Bar: 'area',
+          },
+          axes: {
+            Foo: 'y',
+            Bar: 'y',
+          },
+        },
+        legend: { show: false },
+        tooltip: { contents: { template: tmplTooltip } },
+        grid: {
+          y: {
+            lines: [{ value: 0, class: 'base-line' }],
+          },
+        },
+      }
+      expect(parsed).toEqual(expected)
+    })
+    it('hide y axis if hidden', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [1] }],
+        style: {
+          axis: {
+            show: {
+              y: false,
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        y: {
+          show: false,
+        },
+      }
+      expect(parsed.axis).toEqual(expected)
+    })
+    it('hide x axis if hidden', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [1] }],
+        style: {
+          axis: {
+            show: {
+              x: false,
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        x: {
+          show: false,
+        },
+      }
+      expect(parsed.axis).toEqual(expected)
+    })
+    it('hide y2 axis if hidden', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [1], axis: 'y2' }],
+        style: {
+          axis: {
+            show: {
+              y2: false,
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        y2: {
+          show: false,
+        },
+      }
+      expect(parsed.axis).toEqual(expected)
+    })
   })
   describe('createInfo', () => {
     let settings: ChartSettings
@@ -272,14 +367,47 @@ describe('billboard', () => {
       ]
 
       const info = createInfo(settings, chart)
-      const expected: ChartStyle = {
+      const expected: ChartProperties = {
         '--chart-width': '768px',
         '--chart-height': '500px',
         '--chart-space-left': '49px',
         '--chart-space-right': 0,
       }
 
-      expect(info.style).toEqual(expected)
+      expect(info.properties).toEqual(expected)
+    })
+    it('omit xAxis if hidden', () => {
+      settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
+      settings.style = { axis: { show: false } }
+
+      const info = createInfo(settings, chart)
+      expect(info.xAxis).toBeUndefined()
+    })
+    it('omit xAxis if hidden', () => {
+      settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
+      settings.style = {
+        axis: {
+          show: {
+            x: false,
+          },
+        },
+      }
+
+      const info = createInfo(settings, chart)
+      expect(info.xAxis).toBeUndefined()
+    })
+    it('add xAxis by default', () => {
+      settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
+
+      const info = createInfo(settings, chart)
+      expect(info.xAxis).not.toBeUndefined()
+    })
+    it("don't omit xAxis if shown", () => {
+      settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
+      settings.style = { axis: { show: true } }
+
+      const info = createInfo(settings, chart)
+      expect(info.xAxis).not.toBeUndefined()
     })
   })
 })
