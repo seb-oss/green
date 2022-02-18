@@ -14,8 +14,10 @@ export function Chart({ settings, theme }: ChartProps) {
 
   return (
     <div
-      className={'chart' + (settings?.fitHeightToParent ? ' fit-height' : '')}
-      style={info?.style as unknown as CSSProperties}
+      className={
+        'chart' + (settings?.style?.fitHeightToParent ? ' fit-height' : '')
+      }
+      style={info?.properties as unknown as CSSProperties}
     >
       <div className={theme} ref={chartRef} />
 

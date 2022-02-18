@@ -15,6 +15,7 @@
         "entryFile": "libs/react/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           {
             "glob": "libs/react/README.md",

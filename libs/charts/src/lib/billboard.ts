@@ -1,11 +1,13 @@
 import bb, {
   area,
+  Axis,
   bar,
   Chart as BBChart,
   ChartOptions,
   donut,
   line,
   pie,
+  PointOptions,
   spline,
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
@@ -75,6 +77,55 @@ export const createOptions = ({
     }
   }
 
+  // add settings for point
+  if (settings?.style?.point != null) {
+    let pointSetting: PointOptions
+
+    if (settings?.style.point.show === 'focus') {
+      pointSetting = {
+        focus: { only: true },
+      }
+    } else {
+      pointSetting = {
+        show: settings?.style.point.show,
+      }
+    }
+    options.point = {
+      ...pointSetting,
+    }
+  }
+
+  // add settings for axis
+  if (settings?.style?.axis != null) {
+    let axesSetting: Axis
+
+    if (settings?.style.axis.show === false) {
+      // hide all axes
+      axesSetting = {
+        y: { show: false },
+        y2: { show: false },
+        x: { show: false },
+      }
+    } else {
+      axesSetting = Object.entries(settings?.style.axis.show).reduce(
+        (axes, [axis, show]) => ({
+          ...axes,
+          [axis]: {
+            ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
+            show,
+          },
+        }),
+        {
+          ...(options.axis || {}),
+        }
+      )
+    }
+    options.axis = {
+      ...options.axis,
+      ...axesSetting,
+    }
+  }
+
   let hasNegativeValue = false
   for (const dt of columns) {
     for (const val of dt) {
@@ -102,6 +153,7 @@ export const createOptions = ({
     options.axis = {
       ...(options.axis || {}),
       x: {
+        ...(options?.axis?.x || {}),
         type: 'category',
         categories: settings.categories,
         tick: {
@@ -113,7 +165,6 @@ export const createOptions = ({
       },
     }
   }
-
   return options
 }
 
@@ -148,11 +199,18 @@ export const createInfo = (
     },
   }
 
-  info.xAxis = {
-    ticks: chart.categories().map((text) => ({ text })),
+  // expose values for axis unless hidden
+  if (
+    settings.style?.axis?.show === true ||
+    (settings.style?.axis?.show !== false &&
+      settings.style?.axis?.show?.x !== false)
+  ) {
+    info.xAxis = {
+      ticks: chart.categories().map((text) => ({ text })),
+    }
   }
 
-  info.style = {
+  info.properties = {
     '--chart-width': '768px',
     '--chart-height': '500px',
     '--chart-space-left': '49px',
