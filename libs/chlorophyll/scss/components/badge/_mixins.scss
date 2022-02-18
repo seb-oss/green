@@ -40,6 +40,7 @@ $border-radius: 0;
 $color: var(--color);
 $background: var(--background);
 $close-bg-hover: common.stripped-rgb(tokens.$black);
+$close-color-hover: tokens.$grey-700;
 
 @mixin badge {
   background: $background;
@@ -49,12 +50,19 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
   @include common.padding-vertical(2);
   @include common.padding-horizontal(3);
 
-  .close,
   .close-badge {
     --fadable-foreground-color: #{$close-bg-hover};
     &::before,
     &::after {
       background: var(--color);
+    }
+  }
+
+  .close-badge:hover {
+    --fadable-foreground-color: #{$close-bg-hover};
+    &::before,
+    &::after {
+      background: #{$close-color-hover};
     }
   }
 }
