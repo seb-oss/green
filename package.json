@@ -118,6 +118,7 @@
     "@types/copyfiles": "^2.4.1",
     "@types/d3-selection": "^3.0.2",
     "@types/jest": "27.0.2",
+    "@types/mdx": "^2.0.1",
     "@types/node": "^16.7.2",
     "@types/react": "17.0.30",
     "@types/react-dom": "17.0.9",
