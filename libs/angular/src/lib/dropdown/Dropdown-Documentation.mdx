@@ -1,23 +1,64 @@
-<!-- Dropdown-Documentation.mdx -->
+import {NggDropdownComponent} from "./dropdown.component";
 
-import { Story, Source } from '@storybook/addon-docs'
+
+import {Story} from '@storybook/addon-docs'
 
 # Dropdown
 
+## Importing module
+
+If you're only using the dropdown component, you just need to import the `NggDropdownModule`. The example below uses reactive forms hence it needs the `ReactiveFormsModule` too.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { AppComponent } from './app.component'
+import { ReactiveFormsModule } from '@angular/forms'
+import { NggDropdownModule } from '@sebgroup/green-angular'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    NggDropdownModule
+  ],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Dropdown Select
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
-and support all of the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.)
+and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
 
-<Source
-  language="html"
-  code={`<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>`}
-/>
+<Story id="components-dropdown--select" />
 
-<Source
-  language="html"
-  code={`<ngg-dropdown [formControl]="control" [options]="options"></ngg-dropdown>`}
-/>
+## 2-way binding without forms
+If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
 
-<Source
-  language="html"
-  code={`<ngg-dropdown [(ngModel)]="selected" [options]="options"></ngg-dropdown>`}
-/>
+
+```html
+<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
+```
+
+## Reactive forms
+We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
+if you're dealing with complex or dynamic forms.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown formControlName="dropdownSelect" [options]="options"></ngg-dropdown>
+</form>
+```
+
+## Template-driven forms
+Another approach is to use <a href="https://angular.io/guide/forms" target="_blank">Template-driven forms</a>.
+
+```html
+<form #dropdownForm="ngForm">
+  <ngg-dropdown [(ngModel)]="selected" [options]="options"></ngg-dropdown>
+</form>
+```
+
+

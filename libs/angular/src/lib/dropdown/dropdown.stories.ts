@@ -25,8 +25,8 @@ const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
   props: args,
 })
 
-export const Primary = Template.bind({})
-Primary.args = {
+export const Select = Template.bind({})
+Select.args = {
   id: '',
   text: 'Select Meal',
   value: '',
