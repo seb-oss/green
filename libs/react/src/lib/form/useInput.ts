@@ -1,5 +1,6 @@
 import { randomId } from '@sebgroup/extract'
 import {
+  ChangeEvent,
   ChangeEventHandler,
   InputHTMLAttributes,
   RefObject,
@@ -37,8 +38,10 @@ const useInput = <T>(
     }
   }, [props])
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    props.value && setValue(event.target.value)
+  const onChange: ChangeEventHandler<HTMLInputElement> = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setValue(event.target.value)
     props.checked && setChecked(event.target.checked)
     if (notify) notify(evaluator(event.target))
   }

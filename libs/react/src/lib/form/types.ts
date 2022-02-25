@@ -14,6 +14,8 @@ export interface TextInputProps<T> extends InputProps {
   type?: 'text' | 'email' | 'number'
   value?: T
   info?: string
+  errors?: Record<string, any>
+  onChange?: ChangeEventHandler<HTMLInputElement>
   onChangeText?: (text?: T) => unknown
 }
 export interface NumberInputProps extends TextInputProps<number> {
