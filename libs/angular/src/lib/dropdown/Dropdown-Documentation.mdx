@@ -1,6 +1,4 @@
 import {NggDropdownComponent} from "./dropdown.component";
-
-
 import {Story} from '@storybook/addon-docs'
 
 # Dropdown
@@ -29,6 +27,8 @@ export class AppModule {}
 ```
 
 ## Dropdown Select
+NggDropdownComponent is a form control for selecting a value from a set of options. 
+
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
 and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
 
@@ -61,4 +61,18 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 </form>
 ```
 
+## Options
+The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected. 
 
+```typescript
+const options = [
+    { key: 'Tacos', value: 'tacos' },
+    { key: 'Pizza', value: 'pizza' },
+    { key: 'Sushi', value: 'sushi', selected: true }
+  ]
+```
+Set an initial value by assigning the option `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
+
+## Placeholder
+
+The text input can be used to set a placeholder that will be shown when no value is selected.
