@@ -4,9 +4,3 @@
 .close {
   @include mixins.close;
 }
-
-button.close-badge {
-  @include mixins.close;
-  @include mixins.close-badge;
-  margin: -0.5rem -0.5rem -0.55rem -0.2rem;
-}

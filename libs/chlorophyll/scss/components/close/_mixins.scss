@@ -16,6 +16,8 @@ $close-bg-hover: rgba(tokens.$fadable-foreground-color, 0.1);
 $close-bg-active: rgba(tokens.$fadable-foreground-color, 0.2);
 $close-icon-color: tokens.$text-primary-color;
 @mixin close {
+  --color: #{$close-icon-color};
+
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
     &:not(:disabled):not(.disabled) {
@@ -55,7 +57,7 @@ $close-icon-color: tokens.$text-primary-color;
 
   &::after,
   &::before {
-    background: $close-icon-color;
+    background: var(--color);
     content: '';
     display: block;
     height: $close-height - $close-padding;
@@ -71,28 +73,5 @@ $close-icon-color: tokens.$text-primary-color;
 
   &::before {
     transform: rotateZ(-45deg);
-  }
-}
-
-@mixin close-badge {
-  height: $close-height-sm;
-  width: $close-width-sm;
-
-  &:not(:disabled, .disabled):hover {
-    background: none;
-    border-color: none;
-  }
-
-  &:not(:disabled, .disabled):hover:active {
-    background: none;
-    border-color: none;
-  }
-
-  &::after,
-  &::before {
-    height: $close-height-sm - $close-padding-sm;
-    left: calc(50% - #{math.div($close-thickness-sm, 2)});
-    top: math.div($close-padding-sm, 2);
-    width: $close-thickness-sm;
   }
 }
