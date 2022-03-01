@@ -7,7 +7,10 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   ViewChild,
+  EventEmitter,
+  SimpleChanges,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
@@ -84,8 +87,24 @@ export class NggDropdownComponent
 {
   @Input() id?: string
   @Input() text?: string
-  @Input() loop?: boolean
+  @Input() loop?: boolean = false
   @Input() options: DropdownOption[] = []
+
+  @Input()
+  get value(): any {
+    return this._value
+  }
+  set value(newValue: any) {
+    if (newValue !== this._value) {
+      if (this.options) {
+        this.setSelectionByValue(newValue)
+      }
+      this._value = newValue
+    }
+  }
+  private _value: any
+
+  @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
 
   @ViewChild('togglerRef') public togglerRef:
     | ElementRef<HTMLElement>
@@ -95,8 +114,7 @@ export class NggDropdownComponent
     | ElementRef<HTMLElement>
     | undefined
 
-  value: any = undefined
-  onChangeFn?: any
+  onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
   dropdown?: AbstractDropdown
@@ -116,11 +134,18 @@ export class NggDropdownComponent
           this.dropdown = dropdown
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
+
+          const selected = this.dropdown.options.find(
+            (option) => option.selected
+          )
+          if (this._value !== selected?.value) {
+            this._value = selected?.value
+          }
           this.cd.detectChanges()
         }
       )
 
-      this.selectFromValue(this.value)
+      this.setSelectionByValue(this.value)
     }
   }
 
@@ -128,15 +153,18 @@ export class NggDropdownComponent
     this.handler?.destroy()
   }
 
-  ngOnChanges(): void {
-    if (this.handler && this.dropdown) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      this.handler &&
+      (changes.id || changes.text || changes.loop || changes.options)
+    ) {
       this.handler.update(this.props)
+      this.setSelectionByValue(this.value)
     }
   }
 
-  writeValue(obj: any): void {
-    this.value = obj
-    this.selectFromValue(this.value)
+  writeValue(value: any): void {
+    this.value = value
   }
 
   registerOnChange(fn: any): void {
@@ -149,6 +177,8 @@ export class NggDropdownComponent
 
   select(option: ExtendedDropdownOption) {
     this.handler?.select(option)
+    this._value = option.value
+    this.valueChange.emit(option.value)
     this.onChangeFn && this.onChangeFn(option.value)
     this.onTouchedFn && this.onTouchedFn()
   }
@@ -166,7 +196,7 @@ export class NggDropdownComponent
     }
   }
 
-  private selectFromValue(value: any) {
+  private setSelectionByValue(value: any) {
     if (this.handler && value !== undefined) {
       const option = this.handler.dropdown.options.find(
         (option) => option.value === value

@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen } from '@testing-library/react'
-import { Checkbox, EmailInput, NumberInput, TextInput } from './input'
+import { render, screen, fireEvent } from '@testing-library/react'
+import {
+  Checkbox,
+  EmailInput,
+  NumberInput,
+  TextInput,
+  RadioButton,
+} from './input'
 
 describe('Inputs', () => {
   describe('Checkbox', () => {
@@ -134,5 +140,50 @@ describe('Inputs', () => {
 
       expect(screen.getByLabelText('Input')).toHaveValue('')
     })
+  })
+})
+
+describe('Component: RadioButton', () => {
+  it('should render component and display label', () => {
+    render(<RadioButton value={'test value'} label={'Radio Button'} />)
+    expect(screen.getByText('Radio Button')).toBeVisible()
+  })
+
+  it('Should capture onChange events from individual radio buttons and emit it as one event', () => {
+    const onChange: jest.Mock = jest.fn().mockImplementation((value) => value)
+    render(
+      <RadioButton
+        onChangeRadioBtn={onChange}
+        value="test value"
+        label="Radio button"
+      />
+    )
+    fireEvent.click(screen.getByText('Radio button'))
+    expect(onChange).toBeCalledWith({ value: 'test value', checked: true })
+  })
+  it('Should not fire onchange when disabled', () => {
+    const onChange: jest.Mock = jest.fn().mockImplementation((value) => value)
+    render(
+      <RadioButton
+        onChangeRadioBtn={onChange}
+        value="test value"
+        label="Radio button"
+        disabled
+      />
+    )
+    fireEvent.click(screen.getByText('Radio button'))
+    expect(onChange).not.toBeCalled()
+  })
+  it('Should render validator: valid', () => {
+    const { container } = render(
+      <RadioButton label="Radio button" validator="is-valid" />
+    )
+    expect(container.querySelectorAll('.is-valid')).toHaveLength(1)
+  })
+  it('Should render validator: invalid', () => {
+    const { container } = render(
+      <RadioButton label="Radio button" validator="is-invalid" />
+    )
+    expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })
 })

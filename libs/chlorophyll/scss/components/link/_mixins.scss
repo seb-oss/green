@@ -36,13 +36,20 @@ $variants: (
 
   &:hover,
   &:focus {
-    color: $color-hover;
-    text-decoration: underline;
+    &:not([aria-disabled]) {
+      color: $color-hover;
+      text-decoration: underline;
+    }
   }
 
   &.link-history:visited {
     color: $color-visited;
   }
+}
+
+@mixin disabled {
+  font-weight: $font-weight;
+  @include common.add-disable(false, true, false)
 }
 
 @mixin button {
@@ -51,11 +58,16 @@ $variants: (
 
 /* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
 @mixin variant($color, $outline-color) {
-  a {
+  a:link {
     @include common.add-outline-focus-state($outline-color);
   }
-  a,
-  a:visited {
+  a:link:not(.button, [aria-disabled]) {
     color: $color;
+    &:hover,
+    &:focus,
+    &:visited {
+      color: inherit;
+    }
   }
+
 }

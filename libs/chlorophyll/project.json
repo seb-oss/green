@@ -77,10 +77,30 @@
         }
       }
     },
-    "release": {
-      "executor": "@ng-easy/builders:semantic-release",
+    "version": {
+      "executor": "@jscutlery/semver:version",
       "options": {
-        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "versionTagPrefix": "@sebgroup/${target}@",
+        "releaseAs": "prerelease",
+        "preid": "beta",
+        "trackDeps": true,
+        "push": true,
+        "postTargets": ["chlorophyll:publish", "chlorophyll:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}",
+        "prerelease": true
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
       }
     }
   }

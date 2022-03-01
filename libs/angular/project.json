@@ -4,14 +4,14 @@
   "sourceRoot": "libs/angular/src",
   "prefix": "green",
   "tags": [],
-  "implicitDependencies": ["chlorophyll"],
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
       "outputs": ["dist/libs/angular"],
       "options": {
         "project": "libs/angular/ng-package.json",
-        "tsConfig": "libs/angular/tsconfig.lib.prod.json"
+        "tsConfig": "libs/angular/tsconfig.lib.prod.json",
+        "updateBuildableProjectDepsInPackageJson": false
       },
       "configurations": {
         "production": {
@@ -49,7 +49,8 @@
         "host": "0.0.0.0",
         "config": {
           "configFolder": "libs/angular/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -65,7 +66,8 @@
         "outputPath": "dist/storybook/angular",
         "config": {
           "configFolder": "libs/angular/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -73,10 +75,45 @@
         }
       }
     },
-    "release": {
-      "executor": "@ng-easy/builders:semantic-release",
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "commands": [
+          {
+            "command": "nx run angular:update-dependencies && nx run angular:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "versionTagPrefix": "@sebgroup/green-${target}@",
+        "releaseAs": "prerelease",
+        "preid": "beta",
+        "trackDeps": true,
+        "push": true,
+        "postTargets": ["angular:publish", "angular:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}",
+        "prerelease": true
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
       }
     }
   }

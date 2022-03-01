@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "cli": "nx",
+  "properties": {
+    "packageJson": {
+      "type": "string",
+      "description": "Path to package.json used for npm publication"
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "Output path for package.json"
+    }
+  }
+}

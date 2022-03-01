@@ -15,6 +15,7 @@ export interface ChartSettings {
   data: ChartData[]
   categories?: string[]
   legend?: LegendPlacement
+  style?: ChartStyle
 }
 
 interface LegendItem {
@@ -27,6 +28,22 @@ export interface Legend {
   placement: LegendPlacement
 }
 
+export interface ChartStyle {
+  fitHeightToParent?: boolean
+  axis?: {
+    show:
+      | {
+          x?: boolean
+          y?: boolean
+          y2?: boolean
+        }
+      | boolean
+  }
+  point?: {
+    show?: boolean | 'focus'
+  }
+}
+
 interface Tick {
   text: string
 }
@@ -34,7 +51,7 @@ export interface Axis {
   ticks: Tick[]
 }
 
-export interface ChartStyle {
+export interface ChartProperties {
   '--chart-width': string | number
   '--chart-height': string | number
   '--chart-space-left': string | number
@@ -42,7 +59,7 @@ export interface ChartStyle {
 }
 export interface ChartInfo {
   legend: Legend
-  style: ChartStyle
+  properties: ChartProperties
   xAxis: Axis
 }
 
