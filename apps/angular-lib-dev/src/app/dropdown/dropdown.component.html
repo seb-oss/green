@@ -1,5 +1,27 @@
-<h3 class="mb-4">Reactive dropdown</h3>
+<h3 class="mb-4">Dropdown</h3>
 
+<div style="height: 200px" class="border p-4 mb-5 horizontal">
+  <ngg-dropdown
+    [options]="options"
+    text="Select"
+    [(value)]="dropdownValue0"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [options]="optionsWithInitial"
+    text="Select"
+    [(value)]="dropdownValue1"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [options]="options"
+    text="Select"
+    [(value)]="dropdownValue2"
+  ></ngg-dropdown>
+</div>
+<div>Value: {{ dropdownValue0 | json }}</div>
+<div>Value: {{ dropdownValue1 | json }}</div>
+<div>Value: {{ dropdownValue2 | json }}</div>
+
+<h3 class="mb-4">Dropdown (FormControl)</h3>
 <div style="height: 200px" class="border p-4 mb-5">
   <form [formGroup]="dropdownForm" class="horizontal">
     <ngg-dropdown
@@ -16,12 +38,18 @@
 </div>
 <div>Value: {{ dropdownForm.value | json }}</div>
 
-<h3 class="mb-4 mt-4">Template-driven dropdown</h3>
-<div style="height: 200px" class="border p-4 mb-5">
+<h3 class="mb-4 mt-4">Dropdown (NgModel)</h3>
+<div style="height: 200px" class="border p-4 mb-5 horizontal">
   <ngg-dropdown
-    [(ngModel)]="templateDropdown"
+    [(ngModel)]="dropdownValue3"
+    [options]="options"
+    text="Select"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue4"
     [options]="options"
     text="Select"
   ></ngg-dropdown>
 </div>
-<div>Value: {{ templateDropdown | json }}</div>
+<div>Value: {{ dropdownValue3 | json }}</div>
+<div>Value: {{ dropdownValue4 | json }}</div>

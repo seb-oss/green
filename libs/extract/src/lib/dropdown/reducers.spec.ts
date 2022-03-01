@@ -3,9 +3,11 @@ import { AbstractDropdown, DropdownOption } from './types'
 
 describe('dropdown/reducers', () => {
   let id: string
+  let text: string
   let options: DropdownOption[]
   beforeEach(() => {
     id = 'foo'
+    text = 'dropdown_text'
     options = [
       { key: 'A', value: 1 },
       { key: 'B', value: 2 },
@@ -14,8 +16,21 @@ describe('dropdown/reducers', () => {
   describe('create', () => {
     it('uses passed in id', () => {
       const dropdown = create({ id, options })
-
       expect(dropdown.id).toEqual('foo')
+    })
+    it('uses passed in text', () => {
+      const dropdown = create({ id, options, text })
+      expect(dropdown.text).toEqual(text)
+    })
+    it('uses defaul option text', () => {
+      const defaultOption = {
+        key: 'C',
+        value: 3,
+        selected: true,
+      }
+      const _options = [...options, defaultOption]
+      const dropdown = create({ id, options: _options, text })
+      expect(dropdown.text).toEqual(defaultOption.key)
     })
     it('creates an id if not supplied', () => {
       const dropdown = create({ options })
@@ -173,6 +188,11 @@ describe('dropdown/reducers', () => {
           undefined,
           true,
         ])
+      })
+      it('sets text', () => {
+        const selectedOption = dropdown.options[1]
+        dropdown = select(dropdown, selectedOption)
+        expect(dropdown.text).toEqual(selectedOption.key)
       })
       it('sets activedecendant', () => {
         const selectedOption = dropdown.options[1]
