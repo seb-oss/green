@@ -5,10 +5,53 @@ on:
     branches: [main, alpha]
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.check-updated-storybooks.outputs.any }}
+      outputs: ${{ steps.check-updated-storybooks.outputs }}
+    steps:
+      - name: Check updated storybooks
+        uses: dorny/paths-filter@v2
+        id: check-updated-storybooks
+        with:
+          filters: |
+            any:
+              - libs/**
+            chlorophyll:
+              - libs/chlorophyll/**
+            react:
+              - libs/react/**
+            react-charts:
+              - libs/react-charts/**
+            angular:
+              - libs/angular/**
+            angular-charts:
+              - libs/angular-charts/**
+
   build:
     runs-on: ubuntu-latest
-
+    needs: check
+    if: needs.check.outputs.status == 'true'
     steps:
+#      - name: Check updated storybooks
+#        uses: dorny/paths-filter@v2
+#        id: check-updated-storybooks
+#        with:
+#          filters: |
+#            any:
+#              - libs/**
+#            chlorophyll:
+#              - libs/chlorophyll/**
+#            react:
+#              - libs/react/**
+#            react-charts:
+#              - libs/react-charts/**
+#            angular:
+#              - libs/angular/**
+#            angular-charts:
+#              - libs/angular-charts/**
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -53,26 +96,7 @@ jobs:
       - name: Build storybook
         run: yarn run nx affected --target build-storybook --base=origin/main
 
-      - name: Check built storybooks
-        uses: dorny/paths-filter@v2
-        id: check-built-storybooks
-        with:
-          filters: |
-            any:
-              - libs/**
-            chlorophyll:
-              - libs/chlorophyll/**
-            react:
-              - libs/react/**
-            react-charts:
-              - libs/react-charts/**
-            angular:
-              - libs/angular/**
-            angular-charts:
-              - libs/angular-charts/**
-
       - name: Deploy built storybooks to GitHub Pages
-        if: steps.check-built-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -82,17 +106,17 @@ jobs:
 
       - name: Add Storybook link to pull request
         uses: actions/github-script@v5
-        if: github.event.action == 'opened' && steps.check-built-storybooks.outputs.any == 'true'
+        if: github.event.action == 'opened'
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             // Storybooks
             const storybooks = {
-                'chlorophyll': ${{steps.check-built-storybooks.outputs.chlorophyll}},
-                'react': ${{steps.check-built-storybooks.outputs.react}},
-                'react-charts': ${{steps.check-built-storybooks.outputs.react-charts}},
-                'angular': ${{steps.check-built-storybooks.outputs.angular}},
-                'angular-charts': ${{steps.check-built-storybooks.outputs.angular-charts}}
+                'chlorophyll': ${{needs.check.outputs.chlorophyll}},
+                'react': ${{needs.check.outputs.react}},
+                'react-charts': ${{needs.check.outputs.react-charts}},
+                'angular': ${{needs.check.outputs.angular}},
+                'angular-charts': ${{needs.check.outputs.angular-charts}}
               }
 
             // Filter updated storybooks (based on file changes not affected storybooks)
