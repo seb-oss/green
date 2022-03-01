@@ -53,7 +53,26 @@ jobs:
       - name: Build storybook
         run: yarn run nx affected --target build-storybook --base=origin/main
 
-      - name: Deploy storybook to GitHub Pages
+      - name: Check built storybooks
+        uses: dorny/paths-filter@v2
+        id: check-built-storybooks
+        with:
+          filters: |
+            any:
+              - libs/**
+            chlorophyll:
+              - libs/chlorophyll/**
+            react:
+              - libs/react/**
+            react-charts:
+              - libs/react-charts/**
+            angular:
+              - libs/angular/**
+            angular-charts:
+              - libs/angular-charts/**
+
+      - name: Deploy built storybooks to GitHub Pages
+        if: steps.check-built-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -62,14 +81,34 @@ jobs:
           target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.
 
       - name: Add Storybook link to pull request
-        uses: actions/github-script@v4
-        if: github.event.action == 'opened'
+        uses: actions/github-script@v5
+        if: github.event.action == 'opened' && steps.check-built-storybooks.outputs.any == 'true'
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            github.issues.createComment({
+            // Storybooks
+            const storybooks = {
+                'chlorophyll': ${{steps.check-built-storybooks.outputs.chlorophyll}},
+                'react': ${{steps.check-built-storybooks.outputs.react}},
+                'react-charts': ${{steps.check-built-storybooks.outputs.react-charts}},
+                'angular': ${{steps.check-built-storybooks.outputs.angular}},
+                'angular-charts': ${{steps.check-built-storybooks.outputs.angular-charts}}
+              }
+
+            // Filter updated storybooks (based on file changes not affected storybooks)
+            const updatedStorybooks = Object.keys(storybooks)
+              .filter((storybook) => storybooks[storybook]);
+
+            // Create link list
+            const links = '<ul>' + updatedStorybooks
+              .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.target.outputs.target }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
+
+            // Create comment body
+            const body = `👋 Thanks for creating a pull request! 🚀 Checkout the ${updatedStorybooks.length > 1 ? 'storybooks' : 'storybook'} we've created for it: ${links}`;
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for creating a pull request! 🚀 Checkout the storybook we created for it [here](https://sebgroup.github.io/green/${{ steps.target.outputs.target }}/chlorophyll/).'
-            })
+              body
+            });
+
