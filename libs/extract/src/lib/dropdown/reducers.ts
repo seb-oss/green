@@ -59,9 +59,10 @@ export const create = ({
   loop,
 }: DropdownArgs): AbstractDropdown => {
   const options = extendOptions(_options, id)
+  const selected = options.find((option) => option.selected)
   const dropdown: Partial<AbstractDropdown> = {
     id,
-    text: text || 'dropdown',
+    text: selected?.key || text || 'dropdown',
     elements: {
       toggler: {
         attributes: { id: `${id}_toggle`, 'aria-owns': id },
