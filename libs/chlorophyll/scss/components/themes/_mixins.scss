@@ -1,0 +1,66 @@
+@use 'sass:map';
+
+/* Mixin for adding themes,
+Themes such as dark-mode, high-contrast mode etc.
+Values for light mode are used by default.
+*/
+
+@mixin add-theme(
+  /* colors */ $black: #000,
+  $_colors: (black: $black),
+  $bg-level-0: #eeeeee,
+  $bg-level-1: #ffffff,
+  $bg-level-2: #ffffff,
+  $bg-level-3: #ffffff,
+  $_bg-level: (0: $bg-level-0, 1: $bg-level-1, 2: $bg-level-2, 3: $bg-level-3)
+  /* global */,
+  $box-shadow-0: 0,
+  $box-shadow-1: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $box-shadow-2: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $box-shadow-3: 0 0.125rem 0.375rem rgba($black, 0.15),
+  $backdrop-color: $black,
+  $backdrop-opacity: 0.5,
+  $z-index-dropdown-backdrop: 990,
+  $z-index-dropdown: 1000,
+  $z-index-sticky: 1020,
+  $z-index-fixed: 1030,
+  $z-index-modal-backdrop: 1040,
+  $z-index-modal: 1050,
+  $z-index-popover: 1060,
+  $z-index-tooltip: 1070,
+  $_z-index: (
+    dropdown-backdrop: $z-index-dropdown-backdrop,
+    dropdown: $z-index-dropdown,
+    sticky: $z-index-sticky,
+    fixed: $z-index-fixed,
+    modal-backdrop: $z-index-modal-backdrop,
+    modal: $z-index-modal,
+    popover: $z-index-popover,
+    tooltip: $z-index-tooltip
+  )
+  /* modal */,
+  $modal-bg: $bg-level-2,
+  $modal-box-shadow: $box-shadow-2,
+  $modal-backdrop-background: rgba($backdrop-color, $backdrop-opacity),
+  $_modal: (
+    background: $modal-bg,
+    box-shadow: $modal-box-shadow,
+    backdrop-background: $modal-backdrop-background
+  )
+) {
+  /* generate css variables */
+  @include _generate-variables($_z-index, 'sg-z-index');
+  @include _generate-variables($_colors, 'sg-color');
+  @include _generate-variables($_bg-level, 'sg-bg-level');
+  @include _generate-variables($_modal, 'sg-modal');
+}
+
+/* mixin for generating css variables from map with optional prefix */
+@mixin _generate-variables($map, $prefix: '') {
+  @if ($prefix != '') {
+    $prefix: #{$prefix}-;
+  }
+  @each $key, $value in $map {
+    --#{$prefix}#{$key}: #{$value};
+  }
+}

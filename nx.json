@@ -16,7 +16,6 @@
       "options": {
         "cacheableOperations": [
           "build",
-          "release",
           "lint",
           "test",
           "e2e",
@@ -33,12 +32,6 @@
         "target": "build",
         "projects": "dependencies"
       }
-    ],
-    "release": [
-      {
-        "target": "release",
-        "projects": "dependencies"
-      }
     ]
   },
   "cli": {
@@ -53,7 +46,6 @@
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
-      "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest"
     },

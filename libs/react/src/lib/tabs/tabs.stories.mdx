@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import { Tabs } from './tabs'
 
 export const Template = (children, ...props) => (
@@ -19,10 +19,44 @@ export const Template = (children, ...props) => (
 
 # Tabs
 
-Tabs component
+Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
 
 <Canvas>
-  <Story name="Tabs" args={{ children: 'Test' }}>
-    {Template.bind({})}
-  </Story>
+  <Tabs
+    list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+    ]}
+  />
 </Canvas>
+
+### Disabled tabs
+
+<Canvas>
+  <Tabs
+    list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+      { text: 'Page 5', href: '#', disabled: true },
+      { text: 'Page 6', href: '#', disabled: true },
+    ]}
+  />
+</Canvas>
+
+<hr />
+<br />
+
+<Story name="Tabs" args={{ children: 'Test' }}>
+  {Template.bind({})}
+</Story>
+
+<br />
+<hr />
+
+#### Available props
+
+<ArgsTable of={Tabs} />

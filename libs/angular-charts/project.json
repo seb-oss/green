@@ -4,14 +4,14 @@
   "sourceRoot": "libs/angular-charts/src",
   "prefix": "green",
   "tags": [],
-  "implicitDependencies": ["chlorophyll", "charts"],
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
       "outputs": ["dist/libs/angular-charts"],
       "options": {
         "project": "libs/angular-charts/ng-package.json",
-        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
+        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json",
+        "updateBuildableProjectDepsInPackageJson": false
       },
       "configurations": {
         "production": {
@@ -47,7 +47,8 @@
         "port": 4400,
         "config": {
           "configFolder": "libs/angular-charts/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular-charts:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -63,7 +64,8 @@
         "outputPath": "dist/storybook/angular-charts",
         "config": {
           "configFolder": "libs/angular-charts/.storybook"
-        }
+        },
+        "projectBuildConfig": "angular-charts:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -71,10 +73,45 @@
         }
       }
     },
-    "release": {
-      "executor": "@ng-easy/builders:semantic-release",
+    "prepare-release": {
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "releaseCommitMessage": "chore(release): :package: @sebgroup/${project}@${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "commands": [
+          {
+            "command": "nx run angular-charts:update-dependencies && nx run angular-charts:version"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "./tools/executors/update-deps:update-deps",
+      "options": {}
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "versionTagPrefix": "@sebgroup/green-${target}@",
+        "releaseAs": "prerelease",
+        "preid": "beta",
+        "trackDeps": true,
+        "push": true,
+        "postTargets": ["angular-charts:publish", "angular-charts:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}",
+        "prerelease": true
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public",
+        "buildTarget": "production"
       }
     }
   }

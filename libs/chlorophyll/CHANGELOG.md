@@ -1,3 +1,33 @@
+# Changelog
+
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.0.0-beta.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.5...@sebgroup/chlorophyll@1.0.0-beta.6) (2022-02-17)
+
+
+### Bug Fixes
+
+* 🐛 fixed navbar styling ([#392](https://github.com/sebgroup/green/issues/392)) ([5077380](https://github.com/sebgroup/green/commit/507738055a66c25a8029feda70514a0f80389ed1))
+
+
+
+# [1.0.0-beta.5](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.4...@sebgroup/chlorophyll@1.0.0-beta.5) (2022-02-08)
+
+
+### Bug Fixes
+
+* **alert:** add margin to links in footer ([00364a2](https://github.com/sebgroup/green/commit/00364a2e42ee3f5a274253502f8215df742edbd3)), closes [#376](https://github.com/sebgroup/green/issues/376)
+* **dropdown:** border-color of popover ([9c4303e](https://github.com/sebgroup/green/commit/9c4303ef549340054b7bf7fbfbc9fc337277e23e)), closes [#375](https://github.com/sebgroup/green/issues/375)
+* **link:** style and option for visited links ([32a6fb3](https://github.com/sebgroup/green/commit/32a6fb33ca2562a111f6b66a85ebc14d053b35b0))
+* **modal:** margins for buttons in modal footer ([0302f25](https://github.com/sebgroup/green/commit/0302f250b884483dc2f0124a5df2fdae6b88b4b6)), closes [#311](https://github.com/sebgroup/green/issues/311)
+
+
+### Features
+
+* **link:** add styling for disabled state ([cf9d8d7](https://github.com/sebgroup/green/commit/cf9d8d7f37723df5d5876a18df12bcd35c9a0d04))
+
+
+
 # 1.0.0-alpha.1 (2021-11-11)
 
 
