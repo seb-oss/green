@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       status: ${{ steps.check-updated-storybooks.outputs.any }}
-      outputs: ${{ steps.check-updated-storybooks.outputs }}
     steps:
       - name: Check updated storybooks
         uses: dorny/paths-filter@v2
@@ -34,23 +33,23 @@ jobs:
     needs: check
     if: needs.check.outputs.status == 'true'
     steps:
-#      - name: Check updated storybooks
-#        uses: dorny/paths-filter@v2
-#        id: check-updated-storybooks
-#        with:
-#          filters: |
-#            any:
-#              - libs/**
-#            chlorophyll:
-#              - libs/chlorophyll/**
-#            react:
-#              - libs/react/**
-#            react-charts:
-#              - libs/react-charts/**
-#            angular:
-#              - libs/angular/**
-#            angular-charts:
-#              - libs/angular-charts/**
+      - name: Check updated storybooks
+        uses: dorny/paths-filter@v2
+        id: check-updated-storybooks
+        with:
+          filters: |
+            any:
+              - libs/**
+            chlorophyll:
+              - libs/chlorophyll/**
+            react:
+              - libs/react/**
+            react-charts:
+              - libs/react-charts/**
+            angular:
+              - libs/angular/**
+            angular-charts:
+              - libs/angular-charts/**
 
       - uses: actions/checkout@v2
         with:
@@ -97,6 +96,7 @@ jobs:
         run: yarn run nx affected --target build-storybook --base=origin/main
 
       - name: Deploy built storybooks to GitHub Pages
+        if: steps.check-updated-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.GH_TOKEN }}
@@ -106,17 +106,17 @@ jobs:
 
       - name: Add Storybook link to pull request
         uses: actions/github-script@v5
-        if: github.event.action == 'opened'
+        if: github.event.action == 'opened' && steps.check-updated-storybooks.outputs.any == 'true'
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
             // Storybooks
             const storybooks = {
-                'chlorophyll': ${{needs.check.outputs.chlorophyll}},
-                'react': ${{needs.check.outputs.react}},
-                'react-charts': ${{needs.check.outputs.react-charts}},
-                'angular': ${{needs.check.outputs.angular}},
-                'angular-charts': ${{needs.check.outputs.angular-charts}}
+                'chlorophyll': ${{steps.check-updated-storybooks.outputs.chlorophyll}},
+                'react': ${{steps.check-updated-storybooks.outputs.react}},
+                'react-charts': ${{steps.check-updated-storybooks.outputs.react-charts}},
+                'angular': ${{steps.check-updated-storybooks.outputs.angular}},
+                'angular-charts': ${{steps.check-updated-storybooks.outputs.angular-charts}}
               }
 
             // Filter updated storybooks (based on file changes not affected storybooks)
