@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
 import useInput from '../useInput'
 import {
   CheckboxProps,
@@ -8,45 +8,40 @@ import {
   RadioButtonProps,
   TextInputProps,
 } from '../types'
+import { IndicatorType, validateClassName } from '@sebgroup/extract'
+import React from 'react'
 
-type Renderer = <T>(
+export type Renderer = <T>(
   type: string,
   props: InputHTMLAttributes<HTMLInputElement>,
   evaluator: (target: HTMLInputElement) => T | undefined,
   label?: string,
   info?: string,
   listener?: InputListener<T>,
-  errors?: Record<string, any>,
-  onChange?: ChangeEventHandler<HTMLInputElement>,
-  validator?: IValidator
+  validator?: IValidator,
+  ref?: React.ForwardedRef<HTMLInputElement>
 ) => JSX.Element
 
-const RenderInput: Renderer = (
+export const RenderInput: Renderer = (
   type,
   props,
   evaluator,
   label,
   info,
   listener,
-  errors,
-  onChange
+  validator,
+  ref
 ) => {
   const { value, ...inputProps } = useInput(props, evaluator, listener)
-  const error: string[] | undefined = errors
-    ? Object.keys(errors).filter((key: string) => key === type)
-    : undefined
   const propsWithDescription = info
     ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` }
     : inputProps
 
-  const changeFunction = (event: ChangeEvent<HTMLInputElement>) => {
-    inputProps.onChange && inputProps.onChange(event)
-    onChange && onChange(event)
-  }
-
   // Render naked
   if (!label && !info)
-    return <input type={type} value={value} {...propsWithDescription} />
+    return (
+      <input type={type} value={value} {...propsWithDescription} ref={ref} />
+    )
 
   return (
     <div className="form-group">
@@ -58,109 +53,112 @@ const RenderInput: Renderer = (
       )}
       <input
         type={type}
-        value={value || ''}
+        value={value}
         {...propsWithDescription}
-        className={error && error.shift() === type ? 'is-invalid' : ''}
-        onChange={changeFunction}
+        className={
+          validator && validateClassName(validator?.indicator as IndicatorType)
+        }
+        ref={ref}
       />
-      {error && <span className="form-info">{errors?.[type]}</span>}
+      {validator && <span className="form-info">{validator.message}</span>}
     </div>
   )
 }
 
-export const TextInput = ({
-  label,
-  info,
-  onChangeText,
-  errors,
-  onChange,
-  ...props
-}: TextInputProps<string>) =>
-  RenderInput<string>(
-    'text',
-    props,
-    (e) => e.value,
-    label,
-    info,
-    onChangeText,
-    errors,
-    onChange
-  )
+export const TextInput = React.forwardRef(
+  (
+    { label, info, onChangeText, ...props }: TextInputProps<string>,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    return RenderInput<string>(
+      'text',
+      props,
+      (e) => e.value,
+      label,
+      info,
+      onChangeText,
+      props.validator,
+      ref
+    )
+  }
+)
 
-export const EmailInput = ({
-  label,
-  info,
-  onChangeText,
-  errors,
-  onChange,
-  ...props
-}: TextInputProps<string>) =>
-  RenderInput<string>(
-    'email',
-    props,
-    (e) => e.value,
-    label,
-    info,
-    onChangeText,
-    errors,
-    onChange
-  )
+export const EmailInput = React.forwardRef(
+  (
+    { label, info, onChangeText, ...props }: TextInputProps<string>,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) =>
+    RenderInput<string>(
+      'email',
+      props,
+      (e) => e.value,
+      label,
+      info,
+      onChangeText,
+      props.validator,
+      ref
+    )
+)
 
-export const NumberInput = ({
-  label,
-  info,
-  onChangeText,
-  errors,
-  onChange,
-  ...props
-}: NumberInputProps) =>
-  RenderInput<number>(
-    'number',
-    props,
-    (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
-    label,
-    info,
-    onChangeText,
-    errors,
-    onChange
-  )
+export const NumberInput = React.forwardRef(
+  (
+    { label, info, onChangeText, ...props }: NumberInputProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) =>
+    RenderInput<number>(
+      'number',
+      props,
+      (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
+      label,
+      info,
+      onChangeText,
+      props.validator,
+      ref
+    )
+)
 
-export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
-  const inputProps = useInput(props, (e) => e.checked, onChecked)
+export const Checkbox = React.forwardRef(
+  (
+    { label, onChecked, ...props }: CheckboxProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    const inputProps = useInput(props, (e) => e.checked, onChecked)
 
-  return (
-    <label htmlFor={inputProps.id} className="form-control">
-      {label}
-      <input type="checkbox" {...inputProps} />
-      <span></span>
-      <i />
-    </label>
-  )
-}
+    return (
+      <label htmlFor={inputProps.id} className="form-control">
+        {label}
+        <input type="checkbox" {...inputProps} ref={ref} />
+        <span></span>
+        <i />
+      </label>
+    )
+  }
+)
 
-export const RadioButton = ({
-  label,
-  onChangeRadioBtn,
-  validator,
-  ...props
-}: RadioButtonProps) => {
-  const inputProps = useInput(
-    props,
-    (e) => {
-      return { value: e.value, checked: e.checked }
-    },
-    onChangeRadioBtn
-  )
-  return (
-    <label htmlFor={inputProps.id} className="form-control">
-      <input
-        type="radio"
-        name="default"
-        {...inputProps}
-        className={validator}
-      />
-      <span>{label}</span>
-      <i />
-    </label>
-  )
-}
+export const RadioButton = React.forwardRef(
+  (
+    { label, onChangeRadioBtn, validator, ...props }: RadioButtonProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    const inputProps = useInput(
+      props,
+      (e) => {
+        return { value: e.value, checked: e.checked }
+      },
+      onChangeRadioBtn
+    )
+    return (
+      <label htmlFor={inputProps.id} className="form-control">
+        <input
+          type="radio"
+          name="default"
+          {...inputProps}
+          className={validator}
+          ref={ref}
+        />
+        <span>{label}</span>
+        <i />
+      </label>
+    )
+  }
+)

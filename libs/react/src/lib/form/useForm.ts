@@ -1,51 +1,37 @@
-import React, { ChangeEvent, ChangeEventHandler } from 'react'
+import { validateInputValue } from '@sebgroup/extract'
+import React from 'react'
+import { useFormContext } from './formContext'
 
-const useForm = () => {
-  //Form values
-  const [values, setValues] = React.useState({})
-  //Errors
-  const [errors, setErrors] = React.useState<Record<string, string>>({})
+const useForm = (
+  callback?: (values: Record<string, any>, errors: Record<string, any>) => void
+) => {
+  const { values, errors, setErrors } = useFormContext()
 
-  const validate = (values: Record<string, any>) => {
-    if (!values.email) {
-      return null
-    } else if (values.email) {
-      setErrors({
-        ...errors,
-        email: 'Email address is not valid',
-      })
-    }
-
-    return errors
-  }
-
-  //A method to handle form inputs
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const { type, value } = event.target
-
-    //Let's set these values in state
-    setValues({
-      ...values,
-      [type]: value,
-    })
-  }
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    validate(values)
-    console.log(values)
+
+    if (values) {
+      const inputNames: string[] = Object.keys(values).filter(
+        (keys: string) => values[keys] === ''
+      )
+      if (inputNames.length === 0) {
+        if (errors && Object.keys(errors).length === 0) {
+          console.log('submitted')
+          callback && callback(values, errors)
+        } else {
+          return
+        }
+      } else {
+        inputNames.map((name: string) =>
+          validateInputValue(name, 'Required', '', setErrors)
+        )
+      }
+    } else {
+      return
+    }
   }
 
-  return {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-  }
+  return { formSubmit }
 }
 
 export default useForm

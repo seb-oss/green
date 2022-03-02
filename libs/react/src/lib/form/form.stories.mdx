@@ -8,14 +8,42 @@ import {
   ButtonGroup,
   Checkbox,
   Text,
+  FormItems,
 } from './'
 
 export const Template = ({ children, ...props }) => (
   <Form {...props}>
     <h2>Inputs</h2>
-    <TextInput id="namedField" label="Some field" />
-    <EmailInput label="Email field" />
-    <NumberInput label="Numeric field" value={3} min={-1} max={10} step={2} />
+    <FormItems
+      name="text"
+      validate={{
+        message: 'Required',
+        indicator: 'invalid',
+        type: 'Required',
+      }}
+    >
+      <TextInput id="namedField" label="Some field" />
+    </FormItems>
+    <FormItems
+      name="email"
+      validate={{
+        message: 'Required',
+        indicator: 'invalid',
+        type: 'Required',
+      }}
+    >
+      <EmailInput label="Email field" />
+    </FormItems>
+    <FormItems
+      name="number"
+      validate={{
+        message: 'Required',
+        indicator: 'invalid',
+        type: 'Required',
+      }}
+    >
+      <NumberInput label="Numeric field" min={-1} max={10} step={2} />
+    </FormItems>
     <h2>Checkbox</h2>
     <Checkbox label="Some checkbox" checked={true} />
     <h2>Text</h2>
