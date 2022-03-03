@@ -22,52 +22,46 @@ export const FormProvider = ({
   children,
   direction = 'vertical',
   formSize = 'md',
+  onSubmit,
   ...props
 }: React.PropsWithChildren<FormProps>) => {
   const [values, setValues] = React.useState<Record<string, any>>()
   const [errors, setErrors] = React.useState<Record<string, any>>()
-  const [fields, setFields] = React.useState<Record<string, any>>()
-  const formRef: React.RefObject<HTMLFormElement> = React.useRef(null)
+  const [fields, setFields] = React.useState<Record<string, any>>({})
 
   const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    let hasError = false
     event.preventDefault()
-    if (fields) {
-      const newErrors: Array<string | undefined> = []
-      Object.keys(fields).map((keys: string) =>
-        newErrors.push(
-          validateInputValue(keys, fields[keys], values?.[keys], setErrors)
-        )
-      )
-      if (!newErrors.includes('error')) {
-        console.log('submitted')
-      }
+
+    Object.keys(fields).forEach((key: string) => {
+      const errorMessage: string = validateInputValue(
+        key,
+        fields[key],
+        values?.[key],
+        setErrors
+      ) as string
+      hasError = hasError || !!errorMessage
+    })
+
+    if (!hasError) {
+      onSubmit && onSubmit(event)
     }
   }
 
-  React.useEffect(() => {
-    if (formRef.current) {
-      const currentRef: HTMLFormElement = formRef.current
-      const resetErrors = () => {
-        setErrors({})
-      }
-      currentRef.addEventListener('reset', resetErrors)
-
-      return () => currentRef.removeEventListener('reset', resetErrors)
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      return () => {}
-    }
-  }, [])
+  const onResetForm = () => {
+    setValues({})
+    setErrors({})
+  }
 
   return (
     <FormContext.Provider
       value={{ setValues, setErrors, setFields, errors, values }}
     >
       <form
-        ref={formRef}
         className={[direction, `size-${formSize}`].join(' ')}
         onSubmit={formSubmit}
         {...props}
+        onReset={onResetForm}
       >
         {children}
       </form>

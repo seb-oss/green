@@ -1,7 +1,7 @@
-import { validateInputValue } from '@sebgroup/extract'
+import { validateInputValue, ValidatorRules } from '@sebgroup/extract'
 import React from 'react'
 import { useFormContext } from './formContext'
-import { IValidator, ValidatorType } from './types'
+import { IValidator } from './types'
 
 export interface FormItemsProps {
   children: React.ReactNode
@@ -30,7 +30,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
         [name]: text,
       }
     })
-    validateInputValue(name, validate?.rules, text, setErrors)
+    validateInputValue(name, validate?.rules as ValidatorRules, text, setErrors)
   }
 
   return (

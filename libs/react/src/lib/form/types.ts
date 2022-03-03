@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react'
-import { IndicatorType } from '@sebgroup/extract'
+import { IndicatorType, ValidatorRules } from '@sebgroup/extract'
 
 export interface InputProps {
   id?: string
@@ -47,10 +47,3 @@ export interface IValidator {
   indicator: IndicatorType
   rules: ValidatorRules
 }
-
-export interface ValidatorRules {
-  type: ValidatorType
-  custom?: () => string | undefined
-}
-
-export type ValidatorType = 'Required' | 'Email'

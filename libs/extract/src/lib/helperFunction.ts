@@ -1,6 +1,13 @@
 import * as React from 'react'
 
-export type IndicatorType = 'valid' | 'invalid' | 'neutral'
+export type IndicatorType = 'valid' | 'invalid' | 'info'
+
+export type ValidatorType = 'Required' | 'Email'
+
+export interface ValidatorRules {
+  type: ValidatorType
+  custom?: () => string | undefined
+}
 
 export const validateClassName = (value: IndicatorType) => {
   switch (value) {
@@ -15,33 +22,31 @@ export const validateClassName = (value: IndicatorType) => {
 
 export const validateInputValue = (
   name: string,
-  rules: any,
+  rules: ValidatorRules,
   value: string,
   setError: React.Dispatch<React.SetStateAction<Record<string, any>>>
 ) => {
+  const errorMessage: string | undefined = validateInputValueErrors(
+    rules,
+    value
+  )
+  errorMessage ? setErrorInsert(setError, name) : setErrorRemove(setError, name)
+  return errorMessage
+}
+
+const validateInputValueErrors = (rules: ValidatorRules, value: string) => {
   if (rules?.custom instanceof Function) {
-    const ruleResult: string = rules?.custom()
-    if (ruleResult) {
-      setErrorInsert(setError, name)
-      return 'error'
-    } else {
-      setErrorRemove(setError, name)
-      return
+    return rules?.custom()
+  }
+
+  switch (rules.type) {
+    case 'Required': {
+      return value === '' || value === undefined || value === undefined
+        ? 'error'
+        : null
     }
-  } else {
-    switch (rules.type) {
-      case 'Required': {
-        if (value === '' || value === undefined || value === null) {
-          setErrorInsert(setError, name)
-          return 'error'
-        } else {
-          setErrorRemove(setError, name)
-          return
-        }
-      }
-      default: {
-        return
-      }
+    default: {
+      return
     }
   }
 }
@@ -57,6 +62,7 @@ const setErrorInsert = (
     }
   })
 }
+
 const setErrorRemove = (
   setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
   name: string
