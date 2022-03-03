@@ -15,27 +15,55 @@ export const validateClassName = (value: IndicatorType) => {
 
 export const validateInputValue = (
   name: string,
-  validateType: string,
+  rules: any,
   value: string,
   setError: React.Dispatch<React.SetStateAction<Record<string, any>>>
 ) => {
-  switch (validateType) {
-    case 'Required': {
-      if (value === '' || typeof value === 'undefined') {
-        setError((errors: Record<string, any>) => {
-          return {
-            ...errors,
-            [name]: true,
-          }
-        })
-      } else {
-        setError((errors: Record<string, any>) => {
-          const newError: Record<string, any> = { ...errors }
-          delete newError[name]
-          return newError
-        })
+  if (rules?.custom instanceof Function) {
+    const ruleResult: string = rules?.custom()
+    if (ruleResult) {
+      setErrorInsert(setError, name)
+      return 'error'
+    } else {
+      setErrorRemove(setError, name)
+      return
+    }
+  } else {
+    switch (rules.type) {
+      case 'Required': {
+        if (value === '' || value === undefined || value === null) {
+          setErrorInsert(setError, name)
+          return 'error'
+        } else {
+          setErrorRemove(setError, name)
+          return
+        }
       }
-      break
+      default: {
+        return
+      }
     }
   }
+}
+
+const setErrorInsert = (
+  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
+  name: string
+) => {
+  setError((errors: Record<string, any>) => {
+    return {
+      ...errors,
+      [name]: true,
+    }
+  })
+}
+const setErrorRemove = (
+  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
+  name: string
+) => {
+  setError((errors: Record<string, any>) => {
+    const newError: Record<string, any> = { ...errors }
+    delete newError[name]
+    return newError
+  })
 }

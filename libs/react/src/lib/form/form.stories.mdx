@@ -19,7 +19,7 @@ export const Template = ({ children, ...props }) => (
       validate={{
         message: 'Required',
         indicator: 'invalid',
-        type: 'Required',
+        rules: { type: 'Required' },
       }}
     >
       <TextInput id="namedField" label="Some field" />
@@ -29,7 +29,7 @@ export const Template = ({ children, ...props }) => (
       validate={{
         message: 'Required',
         indicator: 'invalid',
-        type: 'Required',
+        rules: { type: 'Required' },
       }}
     >
       <EmailInput label="Email field" />
@@ -39,7 +39,7 @@ export const Template = ({ children, ...props }) => (
       validate={{
         message: 'Required',
         indicator: 'invalid',
-        type: 'Required',
+        rules: { type: 'Required' },
       }}
     >
       <NumberInput label="Numeric field" min={-1} max={10} step={2} />

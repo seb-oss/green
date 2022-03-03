@@ -45,7 +45,12 @@ export type InputListener<T> = (newValue?: T) => unknown
 export interface IValidator {
   message: string
   indicator: IndicatorType
-  type?: ValidatorType
+  rules: ValidatorRules
+}
+
+export interface ValidatorRules {
+  type: ValidatorType
+  custom?: () => string | undefined
 }
 
 export type ValidatorType = 'Required' | 'Email'

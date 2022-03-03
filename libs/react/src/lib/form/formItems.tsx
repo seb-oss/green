@@ -14,15 +14,13 @@ export const FormItems: React.FC<FormItemsProps> = ({
   validate,
   name,
 }) => {
-  const { setValues, errors, setErrors } = useFormContext()
+  const { setValues, setErrors, setFields, errors } = useFormContext()
 
   React.useEffect(() => {
-    setValues((values: Record<string, any>) => {
-      return {
-        ...values,
-        [name]: '',
-      }
-    })
+    setFields((fields: Record<string, any>) => ({
+      ...fields,
+      [name]: validate?.rules,
+    }))
   }, [])
 
   const onChangeText = (text: string) => {
@@ -32,7 +30,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
         [name]: text,
       }
     })
-    validateInputValue(name, validate?.type as ValidatorType, text, setErrors)
+    validateInputValue(name, validate?.rules, text, setErrors)
   }
 
   return (
