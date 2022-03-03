@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export type IndicatorType = 'valid' | 'invalid' | 'info'
+export type IndicatorType = 'success' | 'error' | 'info'
 
 export type ValidatorType = 'Required' | 'Email'
 
@@ -11,9 +11,9 @@ export interface ValidatorRules {
 
 export const validateClassName = (value: IndicatorType) => {
   switch (value) {
-    case 'valid':
+    case 'success':
       return 'is-valid'
-    case 'invalid':
+    case 'error':
       return 'is-invalid'
     default:
       return ''
@@ -29,7 +29,7 @@ export const validateInputValue = (
   const errorMessage: string | undefined = validateInputValueErrors(
     rules,
     value
-  )
+  ) as string
   errorMessage ? setErrorInsert(setError, name) : setErrorRemove(setError, name)
   return errorMessage
 }
