@@ -1,9 +1,12 @@
+import { add, Duration } from 'date-fns'
 import { createCalendar } from '.'
 import { CalendarGrid } from './calendar'
 
-type DateUnit = 'year' | 'month' | 'day'
-interface Datepicker {
+type DateUnit = 'years' | 'months' | 'days'
+export interface Datepicker {
   add: (amount: number, unit: DateUnit) => void
+  sub: (amount: number, unit: DateUnit) => void
+  set: (date: Date) => void
 }
 
 export interface DatepickerData {
@@ -42,8 +45,16 @@ export const createDatepicker = (
   // eslint-disable-next-line prefer-const
   let data = createData(locale, currentDate)
   const dp: Datepicker = {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    add: (amount, unit) => {}
+    add: (amount, unit) => {
+      data = createData(locale, add(data.date, { [unit]: amount }))
+      listener(data)
+    },
+    sub: (amount, unit) => {
+      //
+    },
+    set: (date) => {
+      //
+    },
   }
 
   listener(data)
