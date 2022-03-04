@@ -1,7 +1,8 @@
-import { validateInputValue, ValidatorRules } from '@sebgroup/extract'
+import { ValidatorRules } from '@sebgroup/extract'
 import React from 'react'
 import { useFormContext } from './formContext'
 import { IValidator } from './types'
+import { validateInputValue } from './validateInput'
 
 export interface FormItemsProps {
   children: React.ReactNode

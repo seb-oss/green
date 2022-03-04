@@ -45,5 +45,5 @@ export type InputListener<T> = (newValue?: T) => unknown
 export interface IValidator {
   message: string
   indicator: IndicatorType
-  rules: ValidatorRules
+  rules?: ValidatorRules
 }

@@ -36,7 +36,7 @@ describe('RadioButton Group Component', () => {
 
   it('Should render validator: valid', () => {
     const { container } = render(
-      <RadioGroup validator={{ message: 'valid message', indicator: 'valid' }}>
+      <RadioGroup validator={{ message: 'valid message', indicator: 'success' }}>
         <RadioButton label="car 5" />
       </RadioGroup>
     )
@@ -45,9 +45,7 @@ describe('RadioButton Group Component', () => {
   })
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioGroup
-        validator={{ message: 'invalid message', indicator: 'invalid' }}
-      >
+      <RadioGroup validator={{ message: 'invalid message', indicator: 'error' }}>
         <RadioButton label="car 5" />
       </RadioGroup>
     )
