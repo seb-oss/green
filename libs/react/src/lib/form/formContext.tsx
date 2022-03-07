@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import { FormProps } from './form'
 import { validateInputValue } from './validateInput'
 
@@ -35,14 +35,14 @@ export const FormProvider = ({ children, direction = 'vertical', formSize = 'md'
     }
   }
 
-  const onResetForm = () => {
+  const resetForm = () => {
     setValues({})
     setErrors({})
   }
 
   return (
     <FormContext.Provider value={{ setValues, setErrors, setFields, errors, values }}>
-      <form className={[direction, `size-${formSize}`].join(' ')} onSubmit={formSubmit} {...props} onReset={onResetForm}>
+      <form className={[direction, `size-${formSize}`].join(' ')} onSubmit={formSubmit} {...props} onReset={resetForm}>
         {children}
       </form>
     </FormContext.Provider>

@@ -10,11 +10,7 @@ export interface FormItemsProps {
   name: string
 }
 
-export const FormItems: React.FC<FormItemsProps> = ({
-  children,
-  validate,
-  name,
-}) => {
+export const FormItems: React.FC<FormItemsProps> = ({ children, validate, name }) => {
   const { setValues, setErrors, setFields, errors } = useFormContext()
 
   React.useEffect(() => {
@@ -22,6 +18,18 @@ export const FormItems: React.FC<FormItemsProps> = ({
       ...fields,
       [name]: validate?.rules,
     }))
+
+    const removeValues = (values: Record<string, any>) => {
+      const newValues: Record<string, any> = { ...values }
+      delete newValues[name]
+      return newValues
+    }
+
+    return () => {
+      setFields((fields: Record<string, any>) => removeValues(fields))
+      setValues((values: Record<string, any>) => removeValues(values))
+      setErrors((errors: Record<string, any>) => removeValues(errors))
+    }
   }, [])
 
   const onChangeText = (text: string) => {
