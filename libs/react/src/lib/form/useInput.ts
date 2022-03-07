@@ -1,19 +1,10 @@
 import { randomId } from '@sebgroup/extract'
-import {
-  ChangeEventHandler,
-  InputHTMLAttributes,
-  RefObject,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-import { CheckboxProps, InputListener } from './types'
+import React, { ChangeEventHandler, InputHTMLAttributes, RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import { CheckboxProps } from './types'
 
 const useInput = <T>(
   props: InputHTMLAttributes<HTMLInputElement>,
-  evaluator: (element: HTMLInputElement) => T | undefined,
-  notify?: InputListener<T>
+  onChanges?: (event: React.ChangeEvent<HTMLInputElement>) => void
 ): InputHTMLAttributes<HTMLInputElement> & {
   ref: RefObject<HTMLInputElement>
 } => {
@@ -37,10 +28,10 @@ const useInput = <T>(
     }
   }, [props])
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.value && setValue(event.target.value)
     props.checked && setChecked(event.target.checked)
-    if (notify) notify(evaluator(event.target))
+    onChanges && onChanges(event)
   }
 
   return {

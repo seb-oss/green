@@ -1,43 +1,26 @@
-import { ChangeEventHandler, FocusEventHandler } from 'react'
+import { HTMLProps } from 'react'
 import { IndicatorType } from '@sebgroup/extract'
 
-export interface InputProps {
-  id?: string
-  label?: string
-  onFocus?: FocusEventHandler<HTMLInputElement>
-  onBlur?: FocusEventHandler<HTMLInputElement>
-  onChange?: ChangeEventHandler<HTMLInputElement>
-  validator?: IValidator
-  disabled?: boolean
-}
-export interface TextInputProps<T> extends InputProps {
+export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   type?: 'text' | 'email' | 'number'
-  value?: T
+  label?: string
   info?: string
-  onChangeText?: (text?: T) => unknown
+  validator?: IValidator
 }
-export interface NumberInputProps extends TextInputProps<number> {
+
+export interface NumberInputProps extends TextInputProps {
   min?: number
   max?: number
   step?: number
 }
-export interface CheckboxProps extends InputProps {
-  checked?: boolean
-  value?: string
-  onChecked?: (checked: boolean | undefined) => unknown
+
+export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
+  validator?: IValidator
 }
 
-export interface OnChangeRadioButton {
-  value?: string
-  checked?: boolean
-}
-export interface RadioButtonProps {
+export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
   label?: string
-  value?: string
-  disabled?: boolean
   validator?: string
-  checked?: boolean
-  onChangeRadioBtn?: (checked: OnChangeRadioButton | undefined) => unknown
 }
 
 export type InputListener<T> = (newValue?: T) => unknown

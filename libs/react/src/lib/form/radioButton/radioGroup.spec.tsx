@@ -18,7 +18,7 @@ describe('RadioButton Group Component', () => {
   const MockComponent = () => (
     <RadioGroup title="Radio Group title" description="Description">
       {radioBtnValues.map((value: RadioButtonProps, index: number) => (
-        <RadioButton key={index} {...value} />
+        <RadioButton key={index} value={value.value} label={value.label} />
       ))}
     </RadioGroup>
   )
@@ -45,9 +45,7 @@ describe('RadioButton Group Component', () => {
   })
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioGroup
-        validator={{ message: 'invalid message', indicator: 'invalid' }}
-      >
+      <RadioGroup validator={{ message: 'invalid message', indicator: 'invalid' }}>
         <RadioButton label="car 5" />
       </RadioGroup>
     )
