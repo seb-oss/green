@@ -3,18 +3,22 @@ import {
   endOfMonth,
   addDays,
   subDays,
-  format,
+  isSameDay,
+  isSameMonth,
 } from 'date-fns'
 
 export interface CalendarDay {
   day: number
   currentMonth: boolean
   currentDay: boolean
+  today: boolean
+  selected: boolean
+  rangeSelected: boolean
 }
 export type CalendarGrid = CalendarDay[][]
 
 export const createCalendar = (locale: string, date: Date): CalendarGrid => {
-  const today = format(date, 'yyyy-MM-dd')
+  const today = new Date()
   
   const som = startOfMonth(date)
   const eom = endOfMonth(date)
@@ -33,8 +37,11 @@ export const createCalendar = (locale: string, date: Date): CalendarGrid => {
     }
     currentWeek.push({
       day: currentDay.getDate(),
-      currentDay: format(currentDay, 'yyyy-MM-dd') === today,
-      currentMonth: date.getMonth() === currentDay.getMonth(),
+      currentDay: isSameDay(currentDay, date),
+      currentMonth: isSameMonth(currentDay, date),
+      today: isSameDay(currentDay, today),
+      selected: false,
+      rangeSelected: false,
     })
     currentDay = addDays(currentDay, 1)
   }

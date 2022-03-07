@@ -1,4 +1,4 @@
-import { add, Duration } from 'date-fns'
+import { add } from 'date-fns'
 import { createCalendar } from '.'
 import { CalendarGrid } from './calendar'
 
@@ -42,7 +42,6 @@ export const createDatepicker = (
     currentDate = new Date(),
   }: DatepickerOptions,
 ): Datepicker => {
-  // eslint-disable-next-line prefer-const
   let data = createData(locale, currentDate)
   const dp: Datepicker = {
     add: (amount, unit) => {
