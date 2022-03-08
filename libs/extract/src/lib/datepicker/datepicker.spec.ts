@@ -373,6 +373,16 @@ describe('datepicker', () => {
 
     expect(listener).toHaveBeenCalledWith(expected)
   })
+  it('calls listener with selectedDate', () => {
+    const selected = new Date('2022-03-08 12:00:00')
+    options.selectedDate = selected
+    createDatepicker(listener, options)
+    const expected = expect.objectContaining<Partial<DatepickerData>>({
+      selectedDate: selected,
+    })
+
+    expect(listener).toHaveBeenCalledWith(expected)
+  })
   describe('.add', () => {
     let datepicker: Datepicker
     let data: DatepickerData
@@ -423,9 +433,10 @@ describe('datepicker', () => {
           today: false,
           currentDay: true,
         })
+        const calendar = data.calendar.flatMap((week) => week)
 
-        expect(data.calendar[0]).toContainEqual(today)
-        expect(data.calendar[0]).toContainEqual(current)
+        expect(calendar).toContainEqual(today)
+        expect(calendar).toContainEqual(current)
       })
     })
     describe('months', () => {
@@ -601,6 +612,33 @@ describe('datepicker', () => {
       })
 
       expect(data).toEqual(expected)
+    })
+  })
+  describe('.select', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    beforeEach(() => {
+      datepicker = createDatepicker((_data) => {
+        data = _data
+      }, options)
+    })
+    it('sets selectedDate', () => {
+      const selected = new Date('2022-03-08 12:00:00')
+      datepicker.select(selected)
+
+      const expected = expect.objectContaining<Partial<DatepickerData>>({
+        selectedDate: selected,
+      })
+      const selectedDay = expect.objectContaining<Partial<CalendarDay>>({
+        day: 8,
+        today: false,
+        currentDay: false,
+        selected: true,
+      })
+      const calendar = data.calendar.flatMap((week) => week)
+
+      expect(data).toEqual(expected)
+      expect(calendar).toContainEqual(selectedDay)
     })
   })
 })

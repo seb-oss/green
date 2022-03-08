@@ -17,7 +17,7 @@ export interface CalendarDay {
 }
 export type CalendarGrid = CalendarDay[][]
 
-export const createCalendar = (locale: string, date: Date): CalendarGrid => {
+export const createCalendar = (locale: string, date: Date, selectedDate?: Date): CalendarGrid => {
   const today = new Date()
   
   const som = startOfMonth(date)
@@ -42,7 +42,7 @@ export const createCalendar = (locale: string, date: Date): CalendarGrid => {
       currentDay: isSameDay(currentDay, date),
       currentMonth: isSameMonth(currentDay, date),
       today: isSameDay(currentDay, today),
-      selected: false,
+      selected: isSameDay(currentDay, selectedDate),
       rangeSelected: false,
     })
     currentDay = addDays(currentDay, 1)
