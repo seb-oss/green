@@ -40,7 +40,14 @@ export const Template = ({ children, ...props }) => (
 # Forms
 
 <Canvas>
-  <Story name="Form" args={{}}>
+  <Story
+    name="Form"
+    args={{
+      onSubmit: (e) => {
+        e.preventDefault()
+      },
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
