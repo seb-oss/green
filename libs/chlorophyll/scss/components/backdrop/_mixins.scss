@@ -1,0 +1,6 @@
+@mixin add-backdrop($background, $z-index) {
+  background: $background;
+  inset: 0;
+  position: fixed;
+  z-index: $z-index;
+}
