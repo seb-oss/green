@@ -30,7 +30,9 @@ export const createCalendar = (locale: string, date: Date): CalendarGrid => {
 
   let currentDay = soc
   let currentWeek: CalendarDay[]
+  let daysInCalendar = 0
   while(currentDay < eoc) {
+    if (++daysInCalendar > 35) throw new Error('Calendar failed')
     if (currentDay.getDay() === 1) {
       currentWeek = []
       weeks.push(currentWeek)

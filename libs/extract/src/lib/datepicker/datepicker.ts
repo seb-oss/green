@@ -1,8 +1,8 @@
-import { add } from 'date-fns'
+import { add, sub } from 'date-fns'
 import { createCalendar } from '.'
 import { CalendarGrid } from './calendar'
 
-type DateUnit = 'years' | 'months' | 'days'
+type DateUnit = 'years' | 'months' | 'weeks' | 'days'
 export interface Datepicker {
   add: (amount: number, unit: DateUnit) => void
   sub: (amount: number, unit: DateUnit) => void
@@ -49,7 +49,8 @@ export const createDatepicker = (
       listener(data)
     },
     sub: (amount, unit) => {
-      //
+      data = createData(locale, sub(data.date, { [unit]: amount }))
+      listener(data)
     },
     set: (date) => {
       //

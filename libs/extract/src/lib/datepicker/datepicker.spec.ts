@@ -381,50 +381,204 @@ describe('datepicker', () => {
         data = _data
       }, options)
     })
+    describe('days', () => {
 
-    it('sets correct info for 1 day', () => {
-      datepicker.add(1, 'days')
+      it('sets correct info for 1 day', () => {
+        datepicker.add(1, 'days')
 
-      const expected = expect.objectContaining<Partial<DatepickerData>>({
-        date: new Date('2022-03-05 12:00:00'),
-        day: 5,
-        month: 'mars',
-        weekday: 'lördag',
-        year: 2022,
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-03-05 12:00:00'),
+          day: 5,
+          month: 'mars',
+          weekday: 'lördag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
       })
 
-      expect(data).toEqual(expected)
+      it('sets correct info for month rollover', () => {
+        datepicker.add(30, 'days')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-04-03 12:00:00'),
+          day: 3,
+          month: 'april',
+          weekday: 'söndag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
+      })
+      it('sets correct current and today for 1 day', () => {
+        datepicker.add(1, 'days')
+
+        const today = expect.objectContaining<Partial<CalendarDay>>({
+          day: 4,
+          today: true,
+          currentDay: false,
+        })
+        const current = expect.objectContaining<Partial<CalendarDay>>({
+          day: 5,
+          today: false,
+          currentDay: true,
+        })
+
+        expect(data.calendar[0]).toContainEqual(today)
+        expect(data.calendar[0]).toContainEqual(current)
+      })
     })
+    describe('months', () => {
 
-    it('sets correct info for date rollover', () => {
-      datepicker.add(30, 'days')
+      it('sets correct info for 1 month', () => {
+        datepicker.add(1, 'months')
 
-      const expected = expect.objectContaining<Partial<DatepickerData>>({
-        date: new Date('2022-04-03 12:00:00'),
-        day: 3,
-        month: 'april',
-        weekday: 'söndag',
-        year: 2022,
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-04-04 12:00:00'),
+          day: 4,
+          month: 'april',
+          weekday: 'måndag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
       })
-
-      expect(data).toEqual(expected)
     })
-    it('sets correct current and today for 1 day', () => {
-      datepicker.add(1, 'days')
+    describe('weeks', () => {
 
-      const today = expect.objectContaining<Partial<CalendarDay>>({
-        day: 4,
-        today: true,
-        currentDay: false,
+      it('sets correct info for 1 week', () => {
+        datepicker.add(1, 'weeks')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-03-11 12:00:00'),
+          day: 11,
+          month: 'mars',
+          weekday: 'fredag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
       })
-      const current = expect.objectContaining<Partial<CalendarDay>>({
-        day: 5,
-        today: false,
-        currentDay: true,
+    })
+    describe('years', () => {
+
+      it('sets correct info for 1 month', () => {
+        datepicker.add(1, 'years')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2023-03-04 12:00:00'),
+          day: 4,
+          month: 'mars',
+          weekday: 'lördag',
+          year: 2023,
+        })
+
+        expect(data).toEqual(expected)
+      })
+    })
+  })
+  describe('.sub', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    beforeEach(() => {
+      datepicker = createDatepicker((_data) => {
+        data = _data
+      }, options)
+    })
+    describe('days', () => {
+
+      it('sets correct info for 1 day', () => {
+        datepicker.sub(1, 'days')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-03-03 12:00:00'),
+          day: 3,
+          month: 'mars',
+          weekday: 'torsdag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
       })
 
-      expect(data.calendar[0]).toContainEqual(today)
-      expect(data.calendar[0]).toContainEqual(current)
+      it('sets correct info for month rollover', () => {
+        datepicker.sub(30, 'days')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-02-02 12:00:00'),
+          day: 2,
+          month: 'februari',
+          weekday: 'onsdag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
+      })
+      it('sets correct current and today for 1 day', () => {
+        datepicker.sub(1, 'days')
+
+        const today = expect.objectContaining<Partial<CalendarDay>>({
+          day: 4,
+          today: true,
+          currentDay: false,
+        })
+        const current = expect.objectContaining<Partial<CalendarDay>>({
+          day: 3,
+          today: false,
+          currentDay: true,
+        })
+
+        expect(data.calendar[0]).toContainEqual(today)
+        expect(data.calendar[0]).toContainEqual(current)
+      })
+    })
+    describe('months', () => {
+
+      it('sets correct info for 1 month', () => {
+        datepicker.sub(1, 'months')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-02-04 12:00:00'),
+          day: 4,
+          month: 'februari',
+          weekday: 'fredag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
+      })
+    })
+    describe('weeks', () => {
+
+      it('sets correct info for 1 week', () => {
+        datepicker.sub(1, 'weeks')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2022-02-25 12:00:00'),
+          day: 25,
+          month: 'februari',
+          weekday: 'fredag',
+          year: 2022,
+        })
+
+        expect(data).toEqual(expected)
+      })
+    })
+    describe('years', () => {
+
+      it('sets correct info for 1 month', () => {
+        datepicker.sub(1, 'years')
+
+        const expected = expect.objectContaining<Partial<DatepickerData>>({
+          date: new Date('2021-03-04 12:00:00'),
+          day: 4,
+          month: 'mars',
+          weekday: 'torsdag',
+          year: 2021,
+        })
+
+        expect(data).toEqual(expected)
+      })
     })
   })
 })
