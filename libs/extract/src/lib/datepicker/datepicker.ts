@@ -53,7 +53,8 @@ export const createDatepicker = (
       listener(data)
     },
     set: (date) => {
-      //
+      data = createData(locale, date)
+      listener(data)
     },
   }
 

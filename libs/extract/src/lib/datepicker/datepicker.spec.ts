@@ -581,4 +581,26 @@ describe('datepicker', () => {
       })
     })
   })
+  describe('.set', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    beforeEach(() => {
+      datepicker = createDatepicker((_data) => {
+        data = _data
+      }, options)
+    })
+    it('sets current date', () => {
+      datepicker.set(new Date('2022-03-08 12:00:00'))
+
+      const expected = expect.objectContaining<Partial<DatepickerData>>({
+        date: new Date('2022-03-08 12:00:00'),
+        day: 8,
+        month: 'mars',
+        weekday: 'tisdag',
+        year: 2022,
+      })
+
+      expect(data).toEqual(expected)
+    })
+  })
 })
