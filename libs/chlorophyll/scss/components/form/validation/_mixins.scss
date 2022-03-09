@@ -53,6 +53,15 @@
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }
+
+  .horizontal {
+    .was-validated input:not(.is-invalid):valid + .form-info,
+    .is-valid ~ .form-info,
+    .was-validated input:not(.is-valid):invalid + .form-info,
+    .is-invalid ~ .form-info {
+      @include common.margin-top(3);
+    }
+  }
 }
 
 /* rules for groups of checkboxes and radio buttons*/

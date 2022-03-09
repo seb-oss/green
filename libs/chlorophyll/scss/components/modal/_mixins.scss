@@ -1,22 +1,37 @@
-@use '../../tokens';
-@use '../../tokens/shame' as newTokens;
 @use '../../common';
-@use '../../components/button';
 
-// TODO: move to tokens
-//border-color: newTokens.$border-color;
-$shadow-level: 2;
-$backdrop-fill: rgba(newTokens.$black, 0.5);
-$box-shadow: newTokens.$elevation-1-box-shadow;
+// include components used by modal
+@use '../../components/close';
+@use '../../components/button';
+@use '../../components/backdrop';
+
+$box-shadow: var(--sg-modal-box-shadow);
+$background: var(--sg-modal-background);
+$z-index: var(--sg-z-index-modal);
+$backdrop-background: var(--sg-modal-backdrop-background);
+$backdrop-z-index: var(--sg-z-index-modal-backdrop);
 
 @mixin modal {
-  //@include common.add-shadow($shadow-level);
+  background: $background;
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow;
   position: absolute;
   width: 100%;
-  z-index: tokens.$zindex-modal;
+  z-index: $z-index;
+  > .header,
+  > header {
+    @include modal-header;
+  }
+
+  > .body {
+    @include modal-body;
+  }
+
+  > .footer,
+  > footer {
+    @include modal-footer;
+  }
 }
 
 @mixin modal-header {
@@ -72,4 +87,47 @@ $box-shadow: newTokens.$elevation-1-box-shadow;
       }
     }
   }
+}
+
+@mixin dialog-modal() {
+  max-width: 375px;
+
+  &.large {
+    max-width: 720px;
+  }
+}
+
+@mixin aside-modal() {
+  height: 100vh;
+  max-width: 375px;
+  min-height: fill-available;
+  right: 0;
+  top: 0;
+
+  &.large {
+    max-width: 720px;
+  }
+
+  > .body {
+    flex: 1 0;
+  }
+
+  &.left {
+    left: 0;
+  }
+}
+
+@mixin fullscreen-modal() {
+  height: 100vh;
+  inset: 0;
+  min-height: fill-available;
+  width: 100vw;
+
+  > .body {
+    flex: 1 0;
+  }
+}
+
+@mixin modal-backdrop() {
+  @include backdrop.add-backdrop($backdrop-background, $backdrop-z-index);
 }

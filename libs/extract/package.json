@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/extract",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "Base library for framework components.",
   "repository": {
     "type": "git",
@@ -22,6 +22,6 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "merge": "^2.1.1",
     "@popperjs/core": "^2.11.0",
-    "rxjs": "^6.6.7"
+    "rxjs": "^6.5.3 || ^7.4.0"
   }
 }
