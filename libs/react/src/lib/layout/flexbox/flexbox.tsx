@@ -1,12 +1,13 @@
 import { useState, PropsWithChildren, HTMLProps, useLayoutEffect } from 'react'
+import { AlignContentType, AlignType, FlexDirectionType, FlexWrapType, JustifyContentType } from './types'
 
 export interface FlexboxProps extends HTMLProps<HTMLDivElement> {
-  alignContent?: 'start' | 'between' | 'center' | 'stretch' | 'around' | 'end'
-  alignItems?: 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-  alignSelf?: 'auto' | 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-  justifyContent?: 'start' | 'between' | 'center' | 'evenly' | 'around' | 'end'
-  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
-  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
+  alignContent?: AlignContentType
+  alignItems?: AlignType
+  alignSelf?: AlignType
+  justifyContent?: JustifyContentType
+  flexDirection?: FlexDirectionType
+  flexWrap?: FlexWrapType
   className?: string
 }
 
