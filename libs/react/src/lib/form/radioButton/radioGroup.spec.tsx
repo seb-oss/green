@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import RadioGroup from './radioGroup'
 import { RadioButton } from '../input/input'
-import { RadioButtonProps } from '../types'
+import { IValidator, RadioButtonProps } from '../types'
 
 describe('RadioButton Group Component', () => {
   const radioBtnValues: RadioButtonProps[] = [
@@ -15,10 +15,12 @@ describe('RadioButton Group Component', () => {
     },
   ]
 
-  const MockComponent = () => (
-    <RadioGroup title="Radio Group title" description="Description">
+  type MockComponentProps = { validator?: IValidator; onChangeRadio?: (value: string) => string }
+
+  const MockComponent = (props: MockComponentProps) => (
+    <RadioGroup title="Radio Group title" description="Description" {...props}>
       {radioBtnValues.map((value: RadioButtonProps, index: number) => (
-        <RadioButton key={index} value={value.value} label={value.label} />
+        <RadioButton key={index} {...value} />
       ))}
     </RadioGroup>
   )
@@ -34,22 +36,24 @@ describe('RadioButton Group Component', () => {
     expect(screen.getByText('test')).toBeVisible()
   })
 
-  it('Should render validator: valid', () => {
-    const { container } = render(
-      <RadioGroup validator={{ message: 'valid message', indicator: 'valid' }}>
-        <RadioButton label="car 5" />
-      </RadioGroup>
-    )
-    expect(screen.getByText('valid message')).toBeVisible()
-    expect(container.querySelectorAll('.is-valid')).toHaveLength(2)
+  it('Should fire onChangeRadio', () => {
+    const mockFn: jest.Mock = jest.fn().mockImplementation((value: string) => value)
+    render(<MockComponent onChangeRadio={mockFn} />)
+    fireEvent.click(screen.getByText('Car 1'))
+    expect(mockFn).toBeCalled()
+    expect(mockFn).lastCalledWith('Car 1')
+    expect(mockFn).toBeCalledWith('Car 1')
   })
+
+  it('Should render validator: valid', () => {
+    const { container } = render(<MockComponent validator={{ message: 'valid message', indicator: 'valid' }} />)
+    expect(screen.getByText('valid message')).toBeVisible()
+    expect(container.querySelectorAll('.is-valid')).toHaveLength(3)
+  })
+
   it('Should render validator: invalid', () => {
-    const { container } = render(
-      <RadioGroup validator={{ message: 'invalid message', indicator: 'invalid' }}>
-        <RadioButton label="car 5" />
-      </RadioGroup>
-    )
+    const { container } = render(<MockComponent validator={{ message: 'invalid message', indicator: 'invalid' }} />)
     expect(screen.getByText('invalid message')).toBeVisible()
-    expect(container.querySelectorAll('.is-invalid')).toHaveLength(2)
+    expect(container.querySelectorAll('.is-invalid')).toHaveLength(3)
   })
 })

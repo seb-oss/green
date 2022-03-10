@@ -6,6 +6,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   label?: string
   info?: string
   validator?: IValidator
+  onChangeInput?: (value: string) => string
 }
 
 export interface NumberInputProps extends TextInputProps {
@@ -19,8 +20,9 @@ export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
 }
 
 export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
-  label?: string
+  label: string
   validator?: string
+  value: string
 }
 
 export type InputListener<T> = (newValue?: T) => unknown

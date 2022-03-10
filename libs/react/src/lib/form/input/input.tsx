@@ -8,18 +8,18 @@ export type Renderer = (
   type: string,
   props: InputHTMLAttributes<HTMLInputElement>,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChangeInput?: (value: string) => string,
   label?: string,
   info?: string,
-  validator?: IValidator,
-  ref?: React.ForwardedRef<HTMLInputElement>
+  validator?: IValidator
 ) => JSX.Element
 
-export const RenderInput: Renderer = (type, props, onChange, label, info, validator, ref) => {
-  const { value, ...inputProps } = useInput(props, onChange)
+export const RenderInput: Renderer = (type, props, onChange, onChangeInput, label, info, validator) => {
+  const { value, ...inputProps } = useInput(props, onChange, onChangeInput)
   const propsWithDescription = info ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` } : inputProps
 
   // Render naked
-  if (!label && !info) return <input type={type} value={value} {...propsWithDescription} ref={ref} />
+  if (!label && !info) return <input type={type} value={value} {...propsWithDescription} />
 
   return (
     <div className="form-group">
@@ -29,45 +29,39 @@ export const RenderInput: Renderer = (type, props, onChange, label, info, valida
           {info}
         </span>
       )}
-      <input type={type} value={value} {...propsWithDescription} className={validator && validateClassName(validator?.indicator as IndicatorType)} ref={ref} />
+      <input type={type} value={value} {...propsWithDescription} className={validator && validateClassName(validator?.indicator as IndicatorType)} />
       {validator && <span className="form-info">{validator.message}</span>}
     </div>
   )
 }
 
-export const TextInput = React.forwardRef(({ label, info, onChange, ...props }: TextInputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
-  return RenderInput('text', props, onChange, label, info, props.validator, ref)
-})
+export const TextInput = ({ label, info, onChange, onChangeInput, validator, ...props }: TextInputProps) => RenderInput('text', props, onChange, onChangeInput, label, info, validator)
 
-export const EmailInput = React.forwardRef(({ label, info, onChange, ...props }: TextInputProps, ref: React.ForwardedRef<HTMLInputElement>) =>
-  RenderInput('email', props, onChange, label, info, props.validator, ref)
-)
+export const EmailInput = ({ label, info, onChange, onChangeInput, validator, ...props }: TextInputProps) => RenderInput('email', props, onChange, onChangeInput, label, info, validator)
 
-export const NumberInput = React.forwardRef(({ label, info, onChange, ...props }: NumberInputProps, ref: React.ForwardedRef<HTMLInputElement>) =>
-  RenderInput('number', props, onChange, label, info, props.validator, ref)
-)
+export const NumberInput = ({ label, info, onChange, onChangeInput, validator, ...props }: NumberInputProps) => RenderInput('number', props, onChange, onChangeInput, label, info, validator)
 
-export const Checkbox = React.forwardRef(({ label, onChange, ...props }: CheckboxProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+export const Checkbox = ({ label, onChange, ...props }: CheckboxProps) => {
   const inputProps = useInput(props, onChange)
 
   return (
     <label htmlFor={inputProps.id} className="form-control">
       {label}
-      <input type="checkbox" {...inputProps} ref={ref} />
+      <input type="checkbox" {...inputProps} />
       <span></span>
       <i />
     </label>
   )
-})
+}
 
-export const RadioButton = React.forwardRef(({ label, onChange, validator, ...props }: RadioButtonProps, ref: React.ForwardedRef<HTMLInputElement>) => {
-  const inputProps = useInput(props, onChange)
+export const RadioButton = ({ label, validator, ...props }: RadioButtonProps) => {
+  const { id } = useInput(props)
 
   return (
-    <label htmlFor={inputProps.id} className="form-control">
-      <input type="radio" name="default" {...inputProps} className={validator} ref={ref} />
+    <label htmlFor={id} className="form-control">
+      <input id={id} type="radio" {...props} className={validator} />
       <span>{label}</span>
       <i />
     </label>
   )
-})
+}

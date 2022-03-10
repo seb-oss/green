@@ -119,6 +119,15 @@ describe('Inputs', () => {
 
       expect(screen.getByLabelText('Input')).toHaveValue('Hello')
     })
+
+    it('Should fire onChangeInput', () => {
+      const mockFn: jest.Mock = jest.fn().mockImplementation((value: string) => value)
+      render(<TextInput placeholder="text field" onChangeInput={mockFn} />)
+      fireEvent.change(screen.getByPlaceholderText('text field'), { target: { value: 'cat' } })
+      expect(mockFn).toBeCalled()
+      expect(mockFn).lastReturnedWith('cat')
+    })
+
     it('resets correctly', async () => {
       render(
         <form role="form">
