@@ -5,16 +5,19 @@
 
 $close-height: 42px;
 $close-width: $close-height;
-$close-height-sm: 34px;
+$close-height-sm: 30px;
 $close-width-sm: $close-height-sm;
 $close-padding: 20px;
 $close-padding-sm: 16px;
 $close-thickness: 4px;
+$close-thickness-sm: 2px;
 $close-bg: rgba(tokens.$fadable-foreground-color, 0);
 $close-bg-hover: rgba(tokens.$fadable-foreground-color, 0.1);
 $close-bg-active: rgba(tokens.$fadable-foreground-color, 0.2);
 $close-icon-color: tokens.$text-primary-color;
 @mixin close {
+  --color: #{$close-icon-color};
+
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
     &:not(:disabled):not(.disabled) {
@@ -54,7 +57,7 @@ $close-icon-color: tokens.$text-primary-color;
 
   &::after,
   &::before {
-    background: $close-icon-color;
+    background: var(--color);
     content: '';
     display: block;
     height: $close-height - $close-padding;

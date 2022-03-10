@@ -1,0 +1,91 @@
+@use '../../tokens/shame' as tokens;
+@use '../../common';
+@use 'sass:math';
+
+$variants: (
+  'primary': (
+    color: tokens.$intent-primary-color,
+    background: tokens.$intent-primary-background,
+  ),
+  'secondary': (
+    color: tokens.$intent-secondary-color,
+    background: tokens.$intent-secondary-background,
+  ),
+  'info': (
+    color: tokens.$intent-info-color,
+    background: tokens.$intent-info-background,
+  ),
+  'success': (
+    color: tokens.$intent-success-color,
+    background: tokens.$intent-success-background,
+  ),
+  'warning': (
+    color: tokens.$intent-warning-color,
+    background: tokens.$intent-warning-background,
+  ),
+  'danger': (
+    color: tokens.$intent-danger-color,
+    background: tokens.$intent-danger-background,
+  ),
+  'light': (
+    color: tokens.$intent-light-color,
+    background: tokens.$intent-light-background,
+  ),
+  'dark': (
+    color: tokens.$intent-dark-color,
+    background: tokens.$intent-dark-background,
+  ),
+);
+
+$border-radius: 0;
+$color: var(--color);
+$background: var(--background);
+$close-bg-hover: rgba(tokens.$fadable-foreground-color, 0.2);
+$close-bg-active: rgba(tokens.$fadable-foreground-color, 0.3);
+
+$close-height: 1.5rem;
+$close-width: $close-height;
+
+$close-icon-thickness: 3px;
+
+@mixin badge {
+  background: $background;
+  border-radius: $border-radius;
+  color: $color;
+  display: flex;
+  @include common.padding-vertical(2);
+  @include common.padding-horizontal(3);
+
+  // close button
+  .close {
+    height: $close-height;
+    width: $close-height;
+    margin: calc(-0.25rem + 1px) calc(-0.5rem + 1px) -0.25rem 0.125rem;
+    &:before,
+    &:after {
+      height: math.div($close-height, 1.5);
+      width: 3px;
+      top: calc(50% - #{math.div($close-height, 3)});
+      left: calc(50% - #{math.div($close-icon-thickness, 2)});
+    }
+
+    &:not(:disabled, .disabled):hover {
+      background: $close-bg-hover;
+      border-color: $close-bg-hover;
+    }
+
+    &:not(:disabled, .disabled):hover:active {
+      background: $close-bg-active;
+      border-color: $close-bg-active;
+    }
+  }
+}
+
+@mixin badge-variant($color, $background) {
+  --background: #{$background};
+  --color: #{$color};
+  // badge close
+  .close {
+    --color: #{$color};
+  }
+}

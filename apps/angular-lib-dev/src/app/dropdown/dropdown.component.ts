@@ -6,8 +6,6 @@ import { FormBuilder } from '@angular/forms'
   templateUrl: './dropdown.component.html',
 })
 export class DropdownComponent {
-  templateDropdown = 'tacos'
-
   options: Array<{ key: string; value: string }> = [
     {
       key: 'Tacos',
@@ -23,10 +21,32 @@ export class DropdownComponent {
     },
   ]
 
+  optionsWithInitial = [
+    {
+      key: 'Tacos',
+      value: 'tacos',
+    },
+    {
+      key: 'Pizza',
+      value: 'pizza',
+      selected: true,
+    },
+    {
+      key: 'Sushi',
+      value: 'sushi',
+    },
+  ]
+
   dropdownForm = this._fb.group({
-    select1: 'sushi',
-    select2: undefined,
+    select1: undefined,
+    select2: 'pizza',
   })
+
+  dropdownValue0: any = undefined
+  dropdownValue1: any = undefined
+  dropdownValue2 = 'sushi'
+  dropdownValue3: any = undefined
+  dropdownValue4 = 'tacos'
 
   constructor(private _fb: FormBuilder) {}
 }

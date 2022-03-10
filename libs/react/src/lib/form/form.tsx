@@ -12,9 +12,10 @@ export function Form({
   children,
   direction = 'vertical',
   formSize = 'md',
+  ...props
 }: FormProps) {
   return (
-    <form className={[direction, `size-${formSize}`].join(' ')}>
+    <form className={[direction, `size-${formSize}`].join(' ')} {...props}>
       {children}
     </form>
   )
