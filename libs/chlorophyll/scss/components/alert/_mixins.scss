@@ -1,41 +1,53 @@
-@use '../../tokens/shame' as tokens;
-@forward '../../components/link/mixins' as link-*;
+@use 'sass:map';
 @use '../../common';
+
+// alerts have a dependency to links
+@use '../../components/link/mixins' as link;
 
 $variants: (
   'info': (
-    color: tokens.$intent-info-color,
-    fadable-color: tokens.$intent-info-fadable-color,
-    background: tokens.$intent-info-background,
+    color: hsl(var(--sg-intent-info-hsl-contrast)),
+    link-outline-color:
+      hsla(var(--sg-intent-info-hsl-contrast), link.$outline-opacity),
+    background: hsl(var(--sg-intent-info-hsl)),
   ),
   'success': (
-    color: tokens.$intent-success-color,
-    fadable-color: tokens.$intent-success-fadable-color,
-    background: tokens.$intent-success-background,
+    color: hsl(var(--sg-intent-success-hsl-contrast)),
+    link-outline-color:
+      hsla(var(--sg-intent-success-hsl-contrast), link.$outline-opacity),
+    background: hsl(var(--sg-intent-success-hsl)),
   ),
   'warning': (
-    color: tokens.$intent-warning-color,
-    fadable-color: tokens.$intent-warning-fadable-color,
-    background: tokens.$intent-warning-background,
+    color: hsl(var(--sg-intent-warning-hsl-contrast)),
+    link-outline-color:
+      hsla(var(--sg-intent-warning-hsl-contrast), link.$outline-opacity),
+    background: hsl(var(--sg-intent-warning-hsl)),
   ),
   'danger': (
-    color: tokens.$intent-danger-color,
-    fadable-color: tokens.$intent-danger-fadable-color,
-    background: tokens.$intent-danger-background,
+    color: hsl(var(--sg-intent-critical-hsl-contrast)),
+    link-outline-color:
+      hsla(var(--sg-intent-critical-hsl-contrast), link.$outline-opacity),
+    background: hsl(var(--sg-intent-critical-hsl)),
   ),
 );
 
+$background: hsl(var(--sg-intent-neutral-hsl));
 $border-radius: 0;
 $border: solid 1px var(--background);
-$color: var(--color);
-$background: var(--background);
-$close-bg-hover: common.stripped-rgb(tokens.$black);
+$close-bg-hover: var(--sg-hsl-black);
+$color: hsl(var(--sg-intent-neutral-hsl-contrast));
+$link-outline-color: hsla(
+  var(--sg-intent-neutral-hsl-contrast),
+  link.$outline-opacity
+);
 
 @mixin alert {
-  background: $background;
+  --background: #{$background};
+  --color: #{$color};
+  background: var(--background);
   border-radius: $border-radius;
   border: $border;
-  color: $color;
+  color: var(--color);
   display: inline-block;
   @include common.padding(5);
 
@@ -45,27 +57,20 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
     justify-content: space-between;
     .close {
       margin: -0.5rem -0.5rem -0.5rem 0.5rem;
-
-      --fadable-foreground-color: #{$close-bg-hover};
-      &::before,
-      &::after {
-        background: var(--color);
-      }
+      --background-hsl: #{$close-bg-hover};
+      --color: #{$color};
     }
   }
 
   > p {
     @include common.margin-vertical(0);
   }
+  @include link.variant($color, $link-outline-color);
   a {
-    color: inherit;
-    text-decoration: underline;
+    text-decoration: underline !important;
     transition: opacity 300ms ease-in-out;
     &:hover {
       opacity: 0.5;
-    }
-    &:focus-visible {
-      outline-color: currentColor;
     }
   }
   > footer {
@@ -98,9 +103,27 @@ $close-bg-hover: common.stripped-rgb(tokens.$black);
       }
     }
   }
+  // add styles for each variant
+  @each $variant, $colors in $variants {
+    &.#{$variant} {
+      @include alert-variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'background')
+      );
+      // style for nested links
+      @include link.variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'link-outline-color')
+      );
+    }
+  }
 }
 
 @mixin alert-variant($color, $background) {
   --background: #{$background};
   --color: #{$color};
+  // alert close
+  .close {
+    --color: #{$color};
+  }
 }

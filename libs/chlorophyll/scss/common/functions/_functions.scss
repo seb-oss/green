@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:map';
 $white: #fff;
 $black: black;
 $grey-200: rgb(248, 248, 248);
@@ -378,4 +379,23 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 
 @function stripped-rgb($color) {
   @return red($color) + ', ' + green($color) + ', ' + blue($color);
+}
+
+@function stripped-hsl($color) {
+  @return hue($color) + ', ' + saturation($color) + ', ' + lightness($color);
+}
+
+@function hsl-map($colors) {
+  // new map
+  $hsl-map: ();
+  // for each defined color
+  @each $name, $color in $colors {
+    $hsl-map: map.merge(
+      $hsl-map,
+      (
+        $name: stripped-hsl($color),
+      )
+    );
+  }
+  @return $hsl-map;
 }
