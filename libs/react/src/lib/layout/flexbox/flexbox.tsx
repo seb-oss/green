@@ -1,39 +1,44 @@
-import { useEffect, useState, PropsWithChildren } from 'react'
+import { useState, PropsWithChildren, HTMLProps, useLayoutEffect } from 'react'
+import { AlignContentType, AlignType, FlexDirectionType, FlexWrapType, JustifyContentType } from './types'
 
-interface FlexboxProps {
-  alignContent?: 'start' | 'between' | 'center' | 'stretch' | 'around' | 'end'
-  alignItems?: 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-  alignSelf?: 'auto' | 'start' | 'end' | 'center' | 'baseline' | 'stretch'
-  justifyContent?: 'start' | 'between' | 'center' | 'evenly' | 'around' | 'end'
+export interface FlexboxProps extends HTMLProps<HTMLDivElement> {
+  alignContent?: AlignContentType
+  alignItems?: AlignType
+  alignSelf?: AlignType
+  justifyContent?: JustifyContentType
+  flexDirection?: FlexDirectionType
+  flexWrap?: FlexWrapType
+  className?: string
 }
-export const Flexbox = ({
-  alignContent,
-  alignItems,
-  alignSelf,
-  children,
-  justifyContent,
-}: PropsWithChildren<FlexboxProps>) => {
+
+export const Flexbox = ({ alignContent, alignItems, alignSelf, children, justifyContent, flexDirection, flexWrap, className, ...props }: PropsWithChildren<FlexboxProps>) => {
   const [classes, setClasses] = useState<string[]>(['d-flex'])
-  const [className, setClassName] = useState<string>('d-flex')
+  const [flexClassName, setFlexClassName] = useState<string>('d-flex')
 
-  // update className when classes change
-  useEffect(() => {
+  // // update className when classes change
+  useLayoutEffect(() => {
     const newClassName = classes.join(' ')
-    if (newClassName !== className) setClassName(newClassName)
-  }, [classes, className])
+    if (newClassName !== flexClassName) setFlexClassName(newClassName)
+  }, [classes, flexClassName])
 
-  // update classes when props change
-  useEffect(() => {
+  // // update classes when props change
+  useLayoutEffect(() => {
     const newClasses = ['d-flex']
-    if (alignItems) newClasses.push(`align-items-${alignItems}`)
-    if (alignContent) newClasses.push(`align-content-${alignContent}`)
-    if (alignSelf) newClasses.push(`align-content-${alignSelf}`)
-    if (justifyContent) newClasses.push(`justify-content-${justifyContent}`)
+    alignItems && newClasses.push(`align-items-${alignItems}`)
+    alignContent && newClasses.push(`align-content-${alignContent}`)
+    alignSelf && newClasses.push(`align-self-${alignSelf}`)
+    justifyContent && newClasses.push(`justify-content-${justifyContent}`)
+    flexDirection && newClasses.push(`flex-${flexDirection}`)
+    flexWrap && newClasses.push(`flex-${flexWrap}`)
+    className && newClasses.push(className)
 
     setClasses(newClasses)
-  }, [alignContent, alignItems, alignSelf, justifyContent])
+  }, [alignContent, alignItems, alignSelf, justifyContent, flexDirection, flexWrap, className])
+
   return (
-    <div className={className}>{ children }</div>
+    <div className={flexClassName} {...props}>
+      {children}
+    </div>
   )
 }
 
