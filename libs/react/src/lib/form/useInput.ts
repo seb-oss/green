@@ -1,32 +1,23 @@
 import { randomId } from '@sebgroup/extract'
-import {
-  ChangeEventHandler,
-  InputHTMLAttributes,
-  RefObject,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-import { CheckboxProps, InputListener } from './types'
+import React, { InputHTMLAttributes, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 
-const useInput = <T>(
+const useInput = (
   props: InputHTMLAttributes<HTMLInputElement>,
-  evaluator: (element: HTMLInputElement) => T | undefined,
-  notify?: InputListener<T>
+  onChanges?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChangeInput?: (value: string) => string
 ): InputHTMLAttributes<HTMLInputElement> & {
   ref: RefObject<HTMLInputElement>
 } => {
   const id = useMemo(() => props.id || randomId(), [props.id])
   const ref = useRef<HTMLInputElement>(null)
-  const [value, setValue] = useState(props.value)
-  const [checked, setChecked] = useState((props as CheckboxProps).checked)
+  const [value, setValue] = useState(props.value ? props.value : '')
+  const [checked, setChecked] = useState(props.checked ? props.checked : false)
 
   useEffect(() => {
     if (ref.current && ref.current.form) {
       const resetListener = (): void => {
-        props.value && setValue(props.value)
-        props.checked && setChecked((props as CheckboxProps).checked)
+        setValue(props.value ? props.value : '')
+        setChecked(props.checked ? props.checked : false)
       }
       const form = ref.current.form
       form.addEventListener('reset', resetListener)
@@ -37,10 +28,12 @@ const useInput = <T>(
     }
   }, [props])
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    props.value && setValue(event.target.value)
-    props.checked && setChecked(event.target.checked)
-    if (notify) notify(evaluator(event.target))
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+    setChecked(event.currentTarget.checked)
+
+    onChanges && onChanges(event)
+    onChangeInput && onChangeInput(event.target.value)
   }
 
   return {
