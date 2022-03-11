@@ -1,0 +1,11 @@
+@use 'mixins';
+
+.sg-date {
+  // add base styles for calendar
+  @include mixins.calendar;
+}
+
+.sg-date-range {
+  // add range modifier for calendar
+  @include mixins.calendar-range;
+}
