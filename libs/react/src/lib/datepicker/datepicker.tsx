@@ -13,8 +13,10 @@ export const Datepicker = () => {
       </div>
       <div className="sg-date" role="dialog" aria-modal="true" aria-label="Choose Date">
         <header>
+          <button onClick={() => datepicker.sub(1, 'months')}>&lt;</button>
           <button type="button" aria-haspopup="listbox">{ data.month }</button>
           <button type="button" aria-haspopup="listbox">{ data.year }</button>
+          <button onClick={() => datepicker.add(1, 'months')}>&gt;</button>
         </header>
         <main>
           <table role="grid">

@@ -32,11 +32,11 @@ export const createCalendar = (locale: string, date: Date, selectedDate?: Date):
   const weeks: CalendarGrid = []
 
   let currentDay = soc
-  let currentWeek: CalendarDay[]
+  let currentWeek: CalendarDay[] = []
   let daysInCalendar = 0
   while(currentDay < eoc) {
     if (++daysInCalendar > 35) throw new Error('Calendar failed')
-    if (!currentWeek || currentDay.getDay() === 1) {
+    if (currentDay.getDay() === 1) {
       currentWeek = []
       weeks.push(currentWeek)
     }
@@ -47,7 +47,7 @@ export const createCalendar = (locale: string, date: Date, selectedDate?: Date):
       currentDay: isSameDay(currentDay, date),
       currentMonth: isSameMonth(currentDay, date),
       today: isSameDay(currentDay, today),
-      selected: selectedDate && isSameDay(currentDay, selectedDate),
+      selected: selectedDate ? isSameDay(currentDay, selectedDate) : false,
       rangeSelected: false,
     })
     currentDay = addDays(currentDay, 1)
