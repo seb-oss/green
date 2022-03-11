@@ -41,16 +41,20 @@ export const EmailInput = ({ label, info, onChange, onChangeInput, validator, ..
 
 export const NumberInput = ({ label, info, onChange, onChangeInput, validator, ...props }: NumberInputProps) => RenderInput('number', props, onChange, onChangeInput, label, info, validator)
 
-export const Checkbox = ({ label, onChange, ...props }: CheckboxProps) => {
+export const Checkbox = ({ label, onChange, validator, ...props }: CheckboxProps) => {
   const inputProps = useInput(props, onChange)
+  const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
 
   return (
-    <label htmlFor={inputProps.id} className="form-control">
-      {label}
-      <input type="checkbox" {...inputProps} />
-      <span></span>
-      <i />
-    </label>
+    <>
+      <label htmlFor={inputProps.id} className={`form-control ${validatorClassName}`}>
+        {label}
+        <input type="checkbox" {...inputProps} />
+        <span></span>
+        <i />
+      </label>
+      {validator && <span className="form-info">{validator.message}</span>}
+    </>
   )
 }
 

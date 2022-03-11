@@ -81,7 +81,16 @@ export const Template = ({ children, ...props }) => (
     <div className="row">
       <div className="col-6">
         <h2>Checkbox</h2>
-        <Checkbox label="Some checkbox" checked={true} />
+        <FormItems
+          name="checkbox"
+          validate={{
+            message: 'Required',
+            indicator: 'error',
+            rules: { type: 'Required' },
+          }}
+        >
+          <Checkbox label="Some checkbox" value="checkme" />
+        </FormItems>
       </div>
       <div className="col-6">
         <h2 className="mb-3">Text</h2>

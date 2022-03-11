@@ -26,7 +26,7 @@ export const FormProvider = ({ children, direction = 'vertical', formSize = 'md'
     event.preventDefault()
 
     Object.keys(fields).forEach((key: string) => {
-      const errorMessage: string = validateInputValue(key, fields[key], values?.[key], setErrors) as string
+      const errorMessage: string = validateInputValue({ name: key, value: values?.[key] }, fields[key], setErrors) as string
       hasError = hasError || !!errorMessage
     })
 

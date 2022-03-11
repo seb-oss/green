@@ -2,23 +2,34 @@ import { validateInputValue } from './validateInput'
 
 describe('ValidateInput Function', () => {
   const args: any = {
-    name: 'text',
+    target: {},
     rules: { type: 'Required' },
-    value: undefined,
     setError: jest.fn(),
   }
 
   it('Should return error when value is undefined', () => {
-    expect(validateInputValue(args.name, args.rules, args.value, args.setError)).toBe('error')
+    args.target = { name: 'text', value: undefined, type: 'text' }
+    expect(validateInputValue(args.target, args.rules, args.setError)).toBe('error')
   })
 
   it('Should return null if input has value', () => {
-    args.value = 'i am input'
-    expect(validateInputValue(args.name, args.rules, args.value, args.setError)).toBe(null)
+    args.target = { name: 'text', value: 'value', type: 'text' }
+    expect(validateInputValue(args.target, args.rules, args.setError)).toBe(null)
+  })
+
+  it('Should validate checked value', () => {
+    args.target = { name: 'text', value: 'value', type: 'checkbox', checked: true }
+    expect(validateInputValue(args.target, args.rules, args.setError)).toBe(null)
+  })
+
+  it('Should throw error for checked value', () => {
+    args.target = { name: 'text', value: 'value', type: 'checkbox', checked: false }
+    expect(validateInputValue(args.target, args.rules, args.setError)).not.toBe(null)
   })
 
   it('Should use custom validation', () => {
+    args.target = { name: 'text', value: 'value', type: 'text' }
     args.rules = { type: 'Required', custom: () => 'customError' }
-    expect(validateInputValue(args.name, args.rules, args.value, args.setError)).toBe('customError')
+    expect(validateInputValue(args.target, args.rules, args.setError)).toBe('customError')
   })
 })
