@@ -61,7 +61,7 @@ export const createDatepicker = (
       data = createData(locale, date, data.selectedDate)
       listener(data)
     },
-    select: (date: Date) => {
+    select: (date) => {
       data = createData(locale, data.date, date)
       listener(data)
     }

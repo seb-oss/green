@@ -5,9 +5,12 @@ import {
   subDays,
   isSameDay,
   isSameMonth,
+  format,
 } from 'date-fns'
 
 export interface CalendarDay {
+  date: Date
+  formattedDate: string
   day: number
   currentMonth: boolean
   currentDay: boolean
@@ -33,16 +36,18 @@ export const createCalendar = (locale: string, date: Date, selectedDate?: Date):
   let daysInCalendar = 0
   while(currentDay < eoc) {
     if (++daysInCalendar > 35) throw new Error('Calendar failed')
-    if (currentDay.getDay() === 1) {
+    if (!currentWeek || currentDay.getDay() === 1) {
       currentWeek = []
       weeks.push(currentWeek)
     }
     currentWeek.push({
+      date: currentDay,
+      formattedDate: format(currentDay, 'yyyy-MM-dd'),
       day: currentDay.getDate(),
       currentDay: isSameDay(currentDay, date),
       currentMonth: isSameMonth(currentDay, date),
       today: isSameDay(currentDay, today),
-      selected: isSameDay(currentDay, selectedDate),
+      selected: selectedDate && isSameDay(currentDay, selectedDate),
       rangeSelected: false,
     })
     currentDay = addDays(currentDay, 1)
