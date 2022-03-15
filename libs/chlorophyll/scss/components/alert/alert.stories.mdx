@@ -10,18 +10,18 @@ export const Template = ({
   closeButton,
 }) => `
   <div role="alert" class="${type}">
-    ${heading || closeButton ?
-      `<header>
-          <h3>${heading}</h3>
-          ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
-       </header>` : ''
-    }
-    <p>
-      ${content}
-      ${link ? `<a href="#">${link}</a>.` : ''}
-    </p>
+    <main>
+      ${heading ?
+        `<h3>${heading}</h3>` : ''
+      }
+      <p>
+        ${content}
+        ${link ? `<a href="#">${link}</a>.` : ''}
+      </p>
+    </main>
+    ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
     ${button || primaryButton  ?
-      `<footer>
+    `<footer>
         ${button ? `<button type="button">${button}</button>` : ''}
         ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
        </footer>` : ''
@@ -47,7 +47,7 @@ export const Template = ({
 
 <style>{`
   [role="alert"] + [role="alert"] {
-    margin: 1rem 0;
+    margin-top: 1.5rem;
   }`}
 </style>
 
@@ -57,9 +57,9 @@ export const Template = ({
     name="example"
     args={{
       type: 'success',
-      heading: 'Success',
+      heading: 'Success!',
       content: 'Text content',
-      link: 'Foo bar',
+      link: 'inline link',
       button: '',
       primaryButton: '',
       closeButton: false
@@ -96,77 +96,77 @@ Alerts are available in a number of different variants based on the intent of th
 
 Alerts can contain the following elements:
 
-**Header** (optional)<br/>
-Alerts may have a `<header>...</header>` which in turn can contain a heading like `<h3>...</h3>` and optionally a `<button class="close">...</button>` if the alert is dismissible.
+**Main**<br/>
+Content should be placed inside `<main>...</main>` and may in turn contain a heading `<h1>, <h2>, <h3>, <h4>, <h5>` and a `<p>` with additional content like links etc.
 
-**Content**<br/>
-Content should be placed inside a `<p>...</p>` and may contain links as well.
+**Close button**<br/>
+`<button class="close">...</button>` if the alert is dismissible.
 
 **Footer** (optional)<br/>
-If the alert has actions like buttons they should be placed inside a `<footer>...</footer>`.
+If the alert has actions like buttons or links they should be placed inside a `<footer>...</footer>`.
 
 <Canvas>
   <div>
     <div role="alert">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-      </p>
+      <main>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </main>
+      <button class="close"><span class="sr-only">Close</span></button>
       <footer>
         <button type="button">Default button</button>
         <button type="button" class="primary">Primary button</button>
       </footer>
     </div>
     <div role="alert" class="info">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-      </p>
+      <main>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </main>
+      <button class="close"><span class="sr-only">Close</span></button>
       <footer>
         <button type="button">Default button</button>
         <button type="button" class="primary">Primary button</button>
       </footer>
     </div>
     <div role="alert" class="success">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-      </p>
+      <main>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </main>
+      <button class="close"><span class="sr-only">Close</span></button>
       <footer>
         <button>Default button</button>
         <button class="primary">Primary button</button>
       </footer>
     </div>
     <div role="alert" class="warning">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-      </p>
+      <main>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </main>
+      <button class="close"><span class="sr-only">Close</span></button>
       <footer>
         <button>Default button</button>
         <button class="primary">Primary button</button>
       </footer>
     </div>
     <div role="alert" class="danger">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-      </p>
+      <main>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </main>
+      <button class="close"><span class="sr-only">Close</span></button>
       <footer>
         <button>Default button</button>
         <button class="primary">Primary button</button>
@@ -175,3 +175,56 @@ If the alert has actions like buttons they should be placed inside a `<footer>..
   </div>
 </Canvas>
 
+
+### More examples
+<Canvas>
+  <div>
+  <div role="alert" class="warning">
+    <main>
+      <h3>Warning!</h3>
+      <p>
+        Alert with single action in footer and no dismiss (close) button.<br/>
+        Foo bar warning alert lorem ipsum dolar sit amet.
+      </p>
+    </main>
+    <footer>
+      <button type="button">Action</button>
+    </footer>
+  </div>
+  <div role="alert">
+    <main>
+      <h3>Neutral</h3>
+      <p>
+        Alert without dismiss (close) button or actions in footer.
+      </p>
+    </main>
+  </div>
+  <div role="alert" class="success">
+    <main>
+      <h3>Success!</h3>
+      <p>
+        Alert with single link in footer and no dismiss (close) button.
+      </p>
+    </main>
+    <footer>
+      <a href="#">Take me somewhere</a>
+    </footer>
+  </div>
+  </div>
+</Canvas>
+
+<!--
+<Canvas>
+  <div role="alert" class="alert-icon">
+    <main>
+      <h3>Success!</h3>
+      <p>
+        Alert with icon and single link in footer and no dismiss (close) button.
+      </p>
+    </main>
+    <footer>
+      <a href="#">Take me somewhere</a>
+    </footer>
+  </div>
+</Canvas>
+-->
