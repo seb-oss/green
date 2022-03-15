@@ -40,6 +40,7 @@ $link-outline-color: hsla(
   var(--sg-intent-neutral-hsl-contrast),
   link.$outline-opacity
 );
+$max-content-width: 768px;
 
 @mixin alert {
   --background: #{$background};
@@ -48,23 +49,66 @@ $link-outline-color: hsla(
   border-radius: $border-radius;
   border: $border;
   color: var(--color);
-  display: inline-block;
   @include common.padding(5);
 
-  > header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    .close {
-      margin: -0.5rem -0.5rem -0.5rem 0.5rem;
-      --background-hsl: #{$close-bg-hover};
-      --color: #{$color};
+  // layout
+  display: inline-grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    'icon content dismiss'
+    'footer footer footer';
+
+  @include common.media-breakpoint-up('sm') {
+    grid-template-areas:
+      'icon content dismiss'
+      'icon content footer';
+  }
+
+  // icon
+  &.alert-icon::after {
+    content: '<';
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    grid-area: icon;
+  }
+
+  // content
+  > main {
+    grid-area: content;
+    max-width: $max-content-width;
+
+    > h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      display: inline;
+      font-size: 1rem;
+      margin-right: 0.25rem;
+    }
+    > p {
+      display: inline;
+      @include common.margin-vertical(0);
     }
   }
 
-  > p {
-    @include common.margin-vertical(0);
+  // dismiss
+  button.close {
+    grid-area: dismiss;
+    justify-self: flex-end;
+    margin: -0.5rem -0.5rem 0 0.5rem;
+    --background-hsl: #{$close-bg-hover};
+    --color: #{$color};
+    @include common.media-breakpoint-up('sm') {
+      + footer {
+        @include common.margin-top(4);
+      }
+    }
   }
+
+  // links
   @include link.variant($color, $link-outline-color);
   a {
     text-decoration: underline !important;
@@ -73,13 +117,18 @@ $link-outline-color: hsla(
       opacity: 0.5;
     }
   }
+
+  // footer
   > footer {
-    @include common.margin-top(4);
-    @include common.media-breakpoint-up('sm') {
-      display: flex;
-      justify-content: flex-end;
+    grid-area: footer;
+    align-self: center;
+    @include common.media-breakpoint-only('xs') {
+      @include common.margin-top(4);
     }
-    a {
+    @include common.media-breakpoint-up('sm') {
+      @include common.margin-start(4);
+    }
+    > a {
       display: flex;
     }
     a,
