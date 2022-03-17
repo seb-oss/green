@@ -43,6 +43,12 @@ $disabled-color: hsl(var(--sg-hsl-disabled-color));
 $disabled-weekend-color: hsla(var(--sg-hsl-red-2), 0.25);
 $disabled-background: hsl(var(--sg-hsl-disabled-background));
 
+// today
+$today-color: $selected-background;
+$today-box-shadow: inset 0 0 0 2px $today-color;
+$today-border-radius: $selected-border-radius;
+$today-background: transparent;
+
 // weekend
 $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
@@ -125,11 +131,20 @@ $weekend-background: $background;
           font-weight: $date-weight;
           border: solid 1px transparent;
           user-select: none;
+          transition: all 200ms ease-in-out;
 
           // weekend
           &.sg-date-holiday:not(.disabled) {
             background: $weekend-background;
             color: $weekend-color;
+          }
+
+          // today
+          &.sg-date-today {
+            background: $today-background;
+            box-shadow: $today-box-shadow;
+            border-radius: $today-border-radius;
+            color: $today-color;
           }
 
           // hover

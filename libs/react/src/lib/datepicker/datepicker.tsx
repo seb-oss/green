@@ -1,4 +1,4 @@
-import { DatepickerOptions } from '@sebgroup/extract'
+import { CalendarDay, DatepickerOptions } from '@sebgroup/extract'
 import { useRef } from 'react'
 import { useDatepicker } from './hook'
 
@@ -9,8 +9,20 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
   const datepickerDialogRef = useRef<HTMLDivElement>(null)
   const dateInputRef = useRef<HTMLInputElement>(null)
 
-  const { datepicker, data, state } = useDatepicker(datepickerRef, datepickerDialogRef, dateInputRef, options)
-
+  const { datepicker, data, state } = useDatepicker(
+    datepickerRef,
+    datepickerDialogRef,
+    dateInputRef,
+    options
+  )
+  const classNames = (day: CalendarDay) =>
+    Object.entries({
+      disabled: !day.currentMonth,
+      'sg-date-today': day.today,
+      // 'sg-date-holiday': day.holiday,
+    })
+      .map(([className, add]) => (add ? className : ''))
+      .join(' ')
   return (
     <>
       <div className="form-group">
@@ -38,44 +50,65 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
       </div>
       <div
         ref={datepickerDialogRef}
-        className={`sg-date ${ state.isActive ? 'active' : ''}`}
+        className={`sg-date ${state.isActive ? 'active' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Choose Date"
       >
         <header>
           <button onClick={() => datepicker.sub(1, 'months')}>&lt;</button>
-          <button type="button" aria-haspopup="listbox">{ data.month }</button>
-          <button type="button" aria-haspopup="listbox">{ data.year }</button>
+          <button type="button" aria-haspopup="listbox">
+            {data.month}
+          </button>
+          <button type="button" aria-haspopup="listbox">
+            {data.year}
+          </button>
           <button onClick={() => datepicker.add(1, 'months')}>&gt;</button>
         </header>
         <main>
           <table role="grid">
             <thead>
               <tr>
-                <th scope="col" abbr="Monday">Mon</th>
-                <th scope="col" abbr="Tuesday">Tue</th>
-                <th scope="col" abbr="Wednesday">Wed</th>
-                <th scope="col" abbr="Thursday">Thu</th>
-                <th scope="col" abbr="Friday">Fri</th>
-                <th scope="col" abbr="Saturday">Sat</th>
-                <th scope="col" abbr="Sunday">Sun</th>
+                <th scope="col" abbr="Monday">
+                  Mon
+                </th>
+                <th scope="col" abbr="Tuesday">
+                  Tue
+                </th>
+                <th scope="col" abbr="Wednesday">
+                  Wed
+                </th>
+                <th scope="col" abbr="Thursday">
+                  Thu
+                </th>
+                <th scope="col" abbr="Friday">
+                  Fri
+                </th>
+                <th scope="col" abbr="Saturday">
+                  Sat
+                </th>
+                <th scope="col" abbr="Sunday">
+                  Sun
+                </th>
               </tr>
             </thead>
             <tbody>
-              { data.calendar.map((week, ix) => (
+              {data.calendar.map((week, ix) => (
                 <tr key={`week_${ix}`}>
-                  { week.map((day) => (
+                  {week.map((day) => (
                     <td
                       key={day.day}
                       data-date={day.formattedDate}
-                      className={`${day.currentMonth? '' : 'disabled'}`}
+                      className={classNames(day)}
+                      title={day.today ? 'Today' : ''}
                       tabIndex={-1}
                       role={day.selected ? 'gridcell' : undefined}
                       aria-selected={day.selected ? true : undefined}
-                      onClick={() => { day.currentMonth && datepicker.select(day.date) }}
+                      onClick={() => {
+                        day.currentMonth && datepicker.select(day.date)
+                      }}
                     >
-                      { day.day }
+                      {day.day}
                     </td>
                   ))}
                 </tr>

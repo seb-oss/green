@@ -55,6 +55,8 @@
             [attr.role]="day.selected ? 'gridcell' : null"
             [attr.aria-selected]="day.selected ? true : null"
             [class.disabled]="!day.currentMonth"
+            [class.sg-date-today]="day.today"
+            [title]="day.today ? 'Today' : ''"
             tabindex="-1"
             (click)="day.currentMonth && dp?.select(day.date)"
           >
