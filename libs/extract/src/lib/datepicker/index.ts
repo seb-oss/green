@@ -1,3 +1,3 @@
 export * from './calendar'
 export * from './datepicker'
-export { months, weekdays } from './values'
+export { months, weekdays, getWeekday } from './values'

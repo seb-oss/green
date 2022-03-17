@@ -7,6 +7,7 @@ import {
   isSameMonth,
   format,
 } from 'date-fns'
+import { getWeekday } from './values'
 
 export interface CalendarDay {
   date: Date
@@ -20,23 +21,26 @@ export interface CalendarDay {
 }
 export type CalendarGrid = CalendarDay[][]
 
-export const createCalendar = (locale: string, date: Date, selectedDate?: Date): CalendarGrid => {
+export const createCalendar = (
+  locale: string,
+  date: Date,
+  selectedDate?: Date
+): CalendarGrid => {
   const today = new Date()
-  
+
   const som = startOfMonth(date)
   const eom = endOfMonth(date)
-  
-  const soc = subDays(som, som.getDay() - 1)
-  const eoc = addDays(eom, 7 - eom.getDay())
 
+  const soc = subDays(som, getWeekday(som))
+  const eoc = addDays(eom, 6 - getWeekday(eom))
   const weeks: CalendarGrid = []
 
   let currentDay = soc
   let currentWeek: CalendarDay[] = []
   let daysInCalendar = 0
-  while(currentDay < eoc) {
-    if (++daysInCalendar > 35) throw new Error('Calendar failed')
-    if (currentDay.getDay() === 1) {
+  while (currentDay < eoc) {
+    if (++daysInCalendar > 42) throw new Error('Calendar failed')
+    if (getWeekday(currentDay) === 0) {
       currentWeek = []
       weeks.push(currentWeek)
     }
