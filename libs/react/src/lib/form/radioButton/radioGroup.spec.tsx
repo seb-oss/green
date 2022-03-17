@@ -46,13 +46,13 @@ describe('RadioButton Group Component', () => {
   })
 
   it('Should render validator: valid', () => {
-    const { container } = render(<MockComponent validator={{ message: 'valid message', indicator: 'valid' }} />)
+    const { container } = render(<MockComponent validator={{ message: 'valid message', indicator: 'success' }} />)
     expect(screen.getByText('valid message')).toBeVisible()
     expect(container.querySelectorAll('.is-valid')).toHaveLength(3)
   })
 
   it('Should render validator: invalid', () => {
-    const { container } = render(<MockComponent validator={{ message: 'invalid message', indicator: 'invalid' }} />)
+    const { container } = render(<MockComponent validator={{ message: 'invalid message', indicator: 'error' }} />)
     expect(screen.getByText('invalid message')).toBeVisible()
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(3)
   })

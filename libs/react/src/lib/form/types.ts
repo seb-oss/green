@@ -1,5 +1,5 @@
+import { IndicatorType, ValidatorRules } from '@sebgroup/extract'
 import { HTMLProps } from 'react'
-import { IndicatorType } from '@sebgroup/extract'
 
 export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   type?: 'text' | 'email' | 'number'
@@ -30,4 +30,5 @@ export type InputListener<T> = (newValue?: T) => unknown
 export interface IValidator {
   message: string
   indicator: IndicatorType
+  rules?: ValidatorRules
 }
