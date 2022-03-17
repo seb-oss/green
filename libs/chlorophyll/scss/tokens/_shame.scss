@@ -35,9 +35,6 @@ $text-disabled-color: var(--text-disabled-color);
 $text-primary-disabled-color: var(--text-primary-disabled-color);
 $text-inherit-color: inherit;
 
-$fadable-foreground-color: var(--fadable-foreground-color);
-$fadable-background-color: var(--fadable-background-color);
-
 // Todo refactor link color (add to blue swatch)
 $link-color: rgb(0, 98, 188);
 $link-color-visited: rgb(103, 58, 182);
@@ -282,8 +279,6 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --text-secondary-color: #{transparentize($white, 0.4)};
   --text-disabled-color: #{get($disabled, 'color', 'dark')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color', 'dark')};
-  --fadable-foreground-color: #{functions.stripped-rgb($white)};
-  --fadable-background-color: #{functions.stripped-rgb(get($grey, 100, 'dark'))};
   --border-color: #{get($grey, 500, 'dark')};
   --border-secondary-color: #{get($grey, 500, 'dark')};
   --border-disabled-color: #{get($disabled, 'border', 'dark')};
@@ -318,8 +313,6 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --text-secondary-color: #{transparentize($black, 0.475)}; // #767676 against white 4.5 contrast
   --text-disabled-color: #{get($disabled, 'color')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
-  --fadable-foreground-color: #{functions.stripped-rgb($black)};
-  --fadable-background-color: #{functions.stripped-rgb($white)};
   --border-color: #{transparentize($black, 0.83)}; // #CECECE against white
   --border-secondary-color: #{transparentize($black, 0.9)};
   --border-disabled-color: #{get($disabled, 'border')};

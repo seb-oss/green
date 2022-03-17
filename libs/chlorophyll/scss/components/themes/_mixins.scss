@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../../common/functions';
 
 /* Mixin for adding themes,
 Themes such as dark-mode, high-contrast mode etc.
@@ -6,13 +7,103 @@ Values for light mode are used by default.
 */
 
 @mixin add-theme(
-  /* colors */ $black: #000,
-  $_colors: (black: $black),
+  $black: #000,
+  $white: #fff /* greys */,
+  $grey-100: #f8f8f8,
+  $grey-200: #e9e9e9,
+  $grey-300: #dedede,
+  $grey-400: #cecece,
+  $grey-500: #adadad,
+  $grey-600: #868686,
+  $grey-700: #494949,
+  $grey-800: #333333,
+  $grey-900: #1a1a1a,
+  $_greys: (
+    100: $grey-100,
+    200: $grey-200,
+    300: $grey-300,
+    400: $grey-400,
+    500: $grey-500,
+    600: $grey-600,
+    700: $grey-700,
+    800: $grey-800,
+    900: $grey-900,
+  ),
   $bg-level-0: #eeeeee,
-  $bg-level-1: #ffffff,
-  $bg-level-2: #ffffff,
-  $bg-level-3: #ffffff,
-  $_bg-level: (0: $bg-level-0, 1: $bg-level-1, 2: $bg-level-2, 3: $bg-level-3)
+  $bg-level-1: $white,
+  $bg-level-2: $white,
+  $bg-level-3: $white,
+  $_bg-level: (
+    0: $bg-level-0,
+    1: $bg-level-1,
+    2: $bg-level-2,
+    3: $bg-level-3,
+  )
+  /* colors */,
+  $blue-0: #41b0ee,
+  $blue-1: #0092e1,
+  $blue-2: #007ac7,
+  $green-0: #60cd18,
+  $green-1: #45b400,
+  $green-2: #379d00,
+  $yellow-0: #ffc500,
+  $yellow-1: #ffb400,
+  $yellow-2: #f8a000,
+  $red-0: #f03529,
+  $red-1: #d81a1a,
+  $red-2: #bb000c,
+  $purple-0: #673ab6,
+  $purple-1: #4f2c99,
+  $purple-2: #3f2587,
+  $_colors: (
+    contrast: functions.most-legible-color($bg-level-0),
+    light: $grey-100,
+    light-contrast: functions.most-legible-color($grey-100),
+    dark: $grey-900,
+    dark-contrast: functions.most-legible-color($grey-900),
+    black: $black,
+    white: $white,
+    blue-0: $blue-0,
+    blue-1: $blue-1,
+    blue-2: $blue-2,
+    green-0: $green-0,
+    green-1: $green-1,
+    green-2: $green-2,
+    yellow-0: $yellow-0,
+    yellow-1: $yellow-1,
+    yellow-2: $yellow-2,
+    red-0: $red-0,
+    red-1: $red-1,
+    red-2: $red-2,
+    purple-0: $purple-0,
+    purple-1: $purple-1,
+    purple-2: $purple-2,
+  )
+  /* intent */,
+  $intent-neutral:
+    nth(functions.desired-color-combination($white, $grey-200), 1),
+  $intent-info: nth(functions.desired-color-combination($white, $blue-2), 1),
+  $intent-success: nth(functions.desired-color-combination($white, $green-2), 1),
+  $intent-warning:
+    nth(functions.desired-color-combination($white, $yellow-0), 1),
+  $intent-critical: nth(functions.desired-color-combination($white, $red-1), 1),
+  $_intent: (
+    neutral-hsl: functions.stripped-hsl($intent-neutral),
+    neutral-hsl-contrast:
+      functions.stripped-hsl(functions.most-legible-color($intent-neutral)),
+    info-hsl: functions.stripped-hsl($intent-info),
+    info-hsl-contrast:
+      functions.stripped-hsl(functions.most-legible-color($intent-info)),
+    success-hsl: functions.stripped-hsl($intent-success),
+    success-hsl-contrast:
+      functions.stripped-hsl(functions.most-legible-color($intent-success)),
+    warning-hsl: functions.stripped-hsl($intent-warning),
+    warning-hsl-contrast:
+      functions.stripped-hsl(functions.most-legible-color($intent-warning)),
+    critical-hsl: functions.stripped-hsl($intent-critical),
+    critical-hsl-contrast:
+      functions.stripped-hsl(functions.most-legible-color($intent-critical)),
+  )
   /* global */,
   $box-shadow-0: 0,
   $box-shadow-1: 0 0.125rem 0.375rem rgba($black, 0.15),
@@ -36,7 +127,7 @@ Values for light mode are used by default.
     modal-backdrop: $z-index-modal-backdrop,
     modal: $z-index-modal,
     popover: $z-index-popover,
-    tooltip: $z-index-tooltip
+    tooltip: $z-index-tooltip,
   )
   /* modal */,
   $modal-bg: $bg-level-2,
@@ -45,12 +136,14 @@ Values for light mode are used by default.
   $_modal: (
     background: $modal-bg,
     box-shadow: $modal-box-shadow,
-    backdrop-background: $modal-backdrop-background
+    backdrop-background: $modal-backdrop-background,
   )
 ) {
   /* generate css variables */
   @include _generate-variables($_z-index, 'sg-z-index');
-  @include _generate-variables($_colors, 'sg-color');
+  @include _generate-variables(functions.hsl-map($_colors), 'sg-hsl');
+  @include _generate-variables($_greys, 'sg-grey');
+  @include _generate-variables($_intent, 'sg-intent');
   @include _generate-variables($_bg-level, 'sg-bg-level');
   @include _generate-variables($_modal, 'sg-modal');
 }

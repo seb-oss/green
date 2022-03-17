@@ -109,7 +109,7 @@ To commit, just run `git-cz` in the terminal. Always try to add reference to an 
 You start the common storybooks with these commands:
 
 ```bash
-npx nx run chlorofyll:storybook
+npx nx run chlorophyll:storybook
 npx nx run react:storybook
 npx nx run angular:storybook
 ```
@@ -127,7 +127,7 @@ npm install nx -g
 If you want to build the files to see how the output looks use `build-storybook`:
 
 ```bash
-npx nx run chlorofyll:build-storybook
+npx nx run chlorophyll:build-storybook
 npx nx run react:build-storybook
 npx nx run angular:build-storybook
 ```

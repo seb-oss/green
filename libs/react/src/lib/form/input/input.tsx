@@ -1,116 +1,69 @@
 import { InputHTMLAttributes } from 'react'
 import useInput from '../useInput'
-import {
-  CheckboxProps,
-  InputListener,
-  RadioButtonProps,
-  TextInputProps,
-} from '../types'
+import { CheckboxProps, InputListener, IValidator, NumberInputProps, RadioButtonProps, TextInputProps } from '../types'
+import { IndicatorType, validateClassName } from '@sebgroup/extract'
+import React from 'react'
 
-type Renderer = <T>(
+export type Renderer = (
   type: string,
   props: InputHTMLAttributes<HTMLInputElement>,
-  evaluator: (target: HTMLInputElement) => T | undefined,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChangeInput?: (value: string) => string,
   label?: string,
   info?: string,
-  listener?: InputListener<T>
+  validator?: IValidator
 ) => JSX.Element
 
-const RenderInput: Renderer = (
-  type,
-  props,
-  evaluator,
-  label,
-  info,
-  listener
-) => {
-  const { value, ...inputProps } = useInput(props, evaluator, listener)
-  const propsWithDescription = info
-    ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` }
-    : inputProps
+export const RenderInput: Renderer = (type, props, onChange, onChangeInput, label, info, validator) => {
+  const { value, ...inputProps } = useInput(props, onChange, onChangeInput)
+  const propsWithDescription = info ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` } : inputProps
 
   // Render naked
-  if (!label && !info)
-    return <input type={type} value={value} {...propsWithDescription} />
+  if (!label && !info) return <input type={type} value={value} {...propsWithDescription} />
 
   return (
-    <div className="form-field">
+    <div className="form-group">
       {label && <label htmlFor={inputProps.id}>{label}</label>}
       {info && (
-        <span className="form-info" id="{inputProps.id}_info">
+        <span className="form-info" id={`${inputProps.id}_info`}>
           {info}
         </span>
       )}
-      <input type={type} value={value} {...propsWithDescription} />
+      <input type={type} value={value} {...propsWithDescription} className={validator && validateClassName(validator?.indicator as IndicatorType)} />
+      {validator && <span className="form-info">{validator.message}</span>}
     </div>
   )
 }
 
-export const TextInput = ({
-  label,
-  info,
-  onChangeText,
-  ...props
-}: TextInputProps<string>) =>
-  RenderInput<string>('text', props, (e) => e.value, label, info, onChangeText)
+export const TextInput = ({ label, info, onChange, onChangeInput, validator, ...props }: TextInputProps) => RenderInput('text', props, onChange, onChangeInput, label, info, validator)
 
-export const EmailInput = ({
-  label,
-  info,
-  onChangeText,
-  ...props
-}: TextInputProps<string>) =>
-  RenderInput<string>('email', props, (e) => e.value, label, info, onChangeText)
+export const EmailInput = ({ label, info, onChange, onChangeInput, validator, ...props }: TextInputProps) => RenderInput('email', props, onChange, onChangeInput, label, info, validator)
 
-export const NumberInput = ({
-  label,
-  info,
-  onChangeText,
-  ...props
-}: TextInputProps<number>) =>
-  RenderInput<number>(
-    'number',
-    props,
-    (e) => (e.value.length ? parseInt(e.value, 10) : undefined),
-    label,
-    info,
-    onChangeText
-  )
+export const NumberInput = ({ label, info, onChange, onChangeInput, validator, ...props }: NumberInputProps) => RenderInput('number', props, onChange, onChangeInput, label, info, validator)
 
-export const Checkbox = ({ label, onChecked, ...props }: CheckboxProps) => {
-  const inputProps = useInput(props, (e) => e.checked, onChecked)
+export const Checkbox = ({ label, onChange, validator, ...props }: CheckboxProps) => {
+  const inputProps = useInput(props, onChange)
+  const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
 
   return (
-    <label htmlFor={inputProps.id} className="form-control">
-      {label}
-      <input type="checkbox" {...inputProps} />
-      <span></span>
-      <i />
-    </label>
+    <>
+      <label htmlFor={inputProps.id} className={`form-control ${validatorClassName}`}>
+        {label}
+        <input type="checkbox" {...inputProps} />
+        <span></span>
+        <i />
+      </label>
+      {validator && <span className="form-info">{validator.message}</span>}
+    </>
   )
 }
 
-export const RadioButton = ({
-  label,
-  onChangeRadioBtn,
-  validator,
-  ...props
-}: RadioButtonProps) => {
-  const inputProps = useInput(
-    props,
-    (e) => {
-      return { value: e.value, checked: e.checked }
-    },
-    onChangeRadioBtn
-  )
+export const RadioButton = ({ label, validator, ...props }: RadioButtonProps) => {
+  const { id } = useInput(props)
+
   return (
-    <label htmlFor={inputProps.id} className="form-control">
-      <input
-        type="radio"
-        name="default"
-        {...inputProps}
-        className={validator}
-      />
+    <label htmlFor={id} className="form-control">
+      <input id={id} type="radio" {...props} className={validator} />
       <span>{label}</span>
       <i />
     </label>
