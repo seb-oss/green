@@ -25,6 +25,12 @@ const routes: Routes = [
         (m) => m.GreenChartsModule
       ),
   },
+  {
+    path: 'datepicker',
+    data: { name: 'Datepicker' },
+    loadChildren: () =>
+      import('./datepicker/datepicker.module').then((m) => m.DatepickerModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 

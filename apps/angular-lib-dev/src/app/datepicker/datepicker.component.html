@@ -1,0 +1,12 @@
+<h3 class="mb-4">Datepicker (FormControl)</h3>
+<div class="border p-4 mb-5" style="height: 420px">
+  <form [formGroup]="dateForm">
+    <ngg-datepicker formControlName="date"></ngg-datepicker>
+  </form>
+  {{ dateForm.value | json }}
+</div>
+<!--<h3 class="mb-4 mt-4">Datepicker (NgModel)</h3>
+<div class="border p-4 mb-5" style="height: 420px">
+  <ngg-datepicker [(ngModel)]="dateValue"></ngg-datepicker>
+</div>
+<div>Value: {{ dateValue | json }}</div>-->
