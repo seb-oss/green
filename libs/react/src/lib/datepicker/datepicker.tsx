@@ -40,10 +40,10 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
           <button
             ref={datepickerTriggerRef}
             type="button"
-            className="sg-date-select"
+            className="primary"
             onClick={() => datepicker.open()}
           >
-            Select date
+            <i className="sg-icon sg-icon-calendar">Select date</i>
           </button>
         </div>
         <span className="form-info">Select a date</span>
