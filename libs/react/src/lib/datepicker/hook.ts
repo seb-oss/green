@@ -4,6 +4,7 @@ import { createDatepicker, Datepicker, DatepickerData, DatepickerOptions, Datepi
 interface HookResult {
   datepicker: Datepicker
   data: DatepickerData
+  state: DatepickerState
 }
 interface DatepickerHook {
   (
@@ -19,15 +20,18 @@ export const useDatepicker: DatepickerHook = (
   const dataStub: Partial<DatepickerData> = { calendar: [] }
   const [data, setData] = useState<DatepickerData>(dataStub as DatepickerData)
   
-  const datepickerStub: Partial<Datepicker> = {
-    state: {} as Partial<DatepickerState> as DatepickerState,
-  }
+  const [state, setState] = useState<DatepickerState>({ isActive: false })
+  
+  const datepickerStub: Partial<Datepicker> = {}
   const [datepicker, setDatepicker] = useState<Datepicker>(datepickerStub as Datepicker)
 
   useEffect(() => {
     if (!datepicker.open && datepickerRef.current && datepickerDialogRef.current && dateInputRef.current) {
       setDatepicker(createDatepicker(
-        (data) => { if (data) setData(data) },
+        (data, state) => {
+          if (data) setData(data)
+          if (state) setState(state)
+        },
         options,
         datepickerRef.current,
         datepickerDialogRef.current,
@@ -36,5 +40,5 @@ export const useDatepicker: DatepickerHook = (
     }
   }, [datepicker, datepickerRef, datepickerDialogRef, dateInputRef, options])
 
-  return { datepicker, data }
+  return { datepicker, data, state }
 }
