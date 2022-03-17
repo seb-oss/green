@@ -2,13 +2,12 @@ import { DatepickerOptions } from '@sebgroup/extract'
 import { useRef } from 'react'
 import { useDatepicker } from './hook'
 
-export const Datepicker = () => {
+export const Datepicker = (options: DatepickerOptions = {}) => {
   const id = 'input'
   const datepickerRef = useRef<HTMLDivElement>(null)
   const datepickerTriggerRef = useRef<HTMLButtonElement>(null)
   const datepickerDialogRef = useRef<HTMLDivElement>(null)
   const dateInputRef = useRef<HTMLInputElement>(null)
-  const options: DatepickerOptions = {}
 
   const { datepicker, data, state } = useDatepicker(datepickerRef, datepickerDialogRef, dateInputRef, options)
 
