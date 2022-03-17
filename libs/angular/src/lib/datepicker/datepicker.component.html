@@ -1,0 +1,67 @@
+<div class="form-group">
+  <label for="input">Date</label>
+  <div class="group" #datepickerElRef>
+    <input
+      id="input"
+      type="text"
+      #dateInputElRef
+      [value]="data?.formattedSelectedDate"
+      (change)="select(dateInputElRef.value, $event)"
+    />
+    <button
+      #datepickerTriggerElRef
+      (click)="dp?.open()"
+      type="button"
+      class="sg-date-select"
+    >
+      Select date
+    </button>
+  </div>
+  <span class="form-info">Select a date</span>
+</div>
+<!-- TODO: get or set attributes from within datepicker instance (dp) -->
+<div
+  #datepickerDialogElRef
+  class="sg-date"
+  [class.active]="dp?.state?.isActive"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Choose Date"
+>
+  <header>
+    <button (click)="dp?.sub(1, 'months')">&lt;</button>
+    <button type="button" aria-haspopup="listbox">February</button>
+    <button type="button" aria-haspopup="listbox">2020</button>
+    <button (click)="dp?.add(1, 'months')">&gt;</button>
+  </header>
+  <main>
+    <table role="grid">
+      <thead>
+        <tr>
+          <th scope="col" abbr="Monday">Mon</th>
+          <th scope="col" abbr="Tuesday">Tue</th>
+          <th scope="col" abbr="Wednesday">Wed</th>
+          <th scope="col" abbr="Thursday">Thu</th>
+          <th scope="col" abbr="Friday">Fri</th>
+          <th scope="col" abbr="Saturday">Sat</th>
+          <th scope="col" abbr="Sunday">Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of data?.calendar; trackBy: trackWeek">
+          <td
+            *ngFor="let day of week"
+            [attr.data-date]="day.formattedDate"
+            [attr.role]="day.selected ? 'gridcell' : null"
+            [attr.aria-selected]="day.selected ? true : null"
+            [class.disabled]="!day.currentMonth"
+            tabindex="-1"
+            (click)="day.currentMonth && dp?.select(day.date)"
+          >
+            {{ day.day }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
