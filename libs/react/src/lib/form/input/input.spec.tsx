@@ -159,18 +159,21 @@ describe('Component: RadioButton', () => {
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).toBeCalled()
   })
+
   it('Should not fire onchange when disabled', () => {
     const onChange: jest.Mock = jest.fn().mockImplementation((value) => value)
     render(<RadioButton onChange={onChange} value="test value" label="Radio button" disabled />)
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).not.toBeCalled()
   })
+
   it('Should render validator: valid', () => {
-    const { container } = render(<RadioButton label="Radio button" validator="is-valid" />)
+    const { container } = render(<RadioButton label="Radio button" value="" validator="is-valid" />)
     expect(container.querySelectorAll('.is-valid')).toHaveLength(1)
   })
+
   it('Should render validator: invalid', () => {
-    const { container } = render(<RadioButton label="Radio button" validator="is-invalid" />)
+    const { container } = render(<RadioButton label="Radio button" value="" validator="is-invalid" />)
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })
 })
@@ -178,9 +181,9 @@ describe('Component: RadioButton', () => {
 describe('Validation: text, number and email component', () => {
   const MockComponent = () => (
     <>
-      <TextInput label="Input label" validator={{ message: 'valid message', indicator: 'valid' }} />
-      <NumberInput label="Input label" validator={{ message: 'valid message', indicator: 'valid' }} />
-      <EmailInput label="Input label" validator={{ message: 'valid message', indicator: 'valid' }} />
+      <TextInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
+      <NumberInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
+      <EmailInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
     </>
   )
   it('Should render validation: valid', () => {

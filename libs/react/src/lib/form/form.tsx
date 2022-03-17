@@ -1,24 +1,17 @@
 import { FormDirection, Size } from '@sebgroup/extract'
 import { HTMLProps, ReactNode } from 'react'
+import { FormProvider } from './formContext'
 
 /* eslint-disable-next-line */
 export interface FormProps extends HTMLProps<HTMLFormElement> {
   children?: ReactNode
   direction?: FormDirection
   formSize?: Size
+  onFormSubmit?: (values: any) => void
 }
 
-export function Form({
-  children,
-  direction = 'vertical',
-  formSize = 'md',
-  ...props
-}: FormProps) {
-  return (
-    <form className={[direction, `size-${formSize}`].join(' ')} {...props}>
-      {children}
-    </form>
-  )
+export const Form: React.FC<FormProps> = (props: FormProps) => {
+  return <FormProvider {...props} />
 }
 
 export default Form
