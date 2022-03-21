@@ -24,6 +24,7 @@ const validateInputValueErrors = (rules: ValidatorRules, target: InputTargetType
     case 'text':
     case 'email':
     case 'number':
+    case 'radio':
       return validateTextInputValues(value, rules)
     case 'checkbox':
       return validateCheckBoxInput(checked as boolean)

@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { Form, TextInput, EmailInput, NumberInput, Button, ButtonGroup, Checkbox, Text, FormItems } from './'
+import { Form, TextInput, EmailInput, NumberInput, Button, ButtonGroup, Checkbox, Text, FormItems, RadioGroup, RadioButton } from './'
 import { Alert } from '../alert/alert'
 
 export const Styles = () => (
@@ -106,6 +106,26 @@ export const Template = ({ children, ...props }) => (
           <Button>Button 1</Button>
           <Button>Button 2</Button>
         </ButtonGroup>
+      </div>
+    </div>
+    <div className="row mb-0">
+      <div className="col-12 mb-5">
+        <h2>Radio Group</h2>
+      </div>
+      <div className="col-6">
+        <FormItems
+          name="radiobtnGroup"
+          validate={{
+            message: 'Required',
+            indicator: 'error',
+            rules: { type: 'Required' },
+          }}
+        >
+          <RadioGroup title="Groups">
+            <RadioButton label="Radio Button 1" value="button1" />
+            <RadioButton label="Radio Button 2" value="button2" />
+          </RadioGroup>
+        </FormItems>
       </div>
     </div>
     <div className="row mb-0">
