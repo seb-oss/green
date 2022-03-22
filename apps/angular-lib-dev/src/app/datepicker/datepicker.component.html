@@ -1,12 +1,22 @@
 <h3 class="mb-4">Datepicker (FormControl)</h3>
-<div class="border p-4 mb-5" style="height: 420px">
+Value: {{ dateForm.value.date | json }}
+<div class="border p-4 mt-4 mb-5" style="height: 420px">
   <form [formGroup]="dateForm">
     <ngg-datepicker formControlName="date"></ngg-datepicker>
+    <ngg-datepicker formControlName="dateEmpty"></ngg-datepicker>
   </form>
-  {{ dateForm.value | json }}
 </div>
-<!--<h3 class="mb-4 mt-4">Datepicker (NgModel)</h3>
-<div class="border p-4 mb-5" style="height: 420px">
-  <ngg-datepicker [(ngModel)]="dateValue"></ngg-datepicker>
+
+<h3 class="mb-4 mt-4">Datepicker (NgModel)</h3>
+Value: {{ ngModelDate | json }}
+<div class="border p-4 mt-4 mb-5" style="height: 420px">
+  <ngg-datepicker [(ngModel)]="ngModelDate"></ngg-datepicker>
+  <ngg-datepicker [(ngModel)]="ngModelDateEmpty"></ngg-datepicker>
 </div>
-<div>Value: {{ dateValue | json }}</div>-->
+
+<h3 class="mb-4 mt-4">Datepicker (value)</h3>
+Value: {{ value | json }}
+<div class="border p-4 mt-4 mb-5" style="height: 420px">
+  <ngg-datepicker [(value)]="value"></ngg-datepicker>
+  <ngg-datepicker [(value)]="valueEmpty"></ngg-datepicker>
+</div>

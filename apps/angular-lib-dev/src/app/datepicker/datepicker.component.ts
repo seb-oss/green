@@ -10,8 +10,12 @@ export class DatepickerComponent {
   dateForm: FormGroup
   constructor(private _fb: FormBuilder) {
     this.dateForm = this._fb.group({
-      date: ['', [Validators.required]],
+      date: [new Date(), [Validators.required]],
+      dateEmpty: ['', [Validators.required]],
     })
   }
-  dateValue = null
+  ngModelDate = new Date()
+  ngModelDateEmpty = ''
+  value = new Date()
+  valueEmpty = ''
 }
