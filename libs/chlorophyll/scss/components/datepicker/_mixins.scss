@@ -3,9 +3,9 @@
 
 $background: var(--sg-bg-level-2);
 $dialog-border-color: hsl(var(--sg-hsl-blue-1));
-// TODO: use css variable
 $border-color: var(--sg-grey-300);
 $box-shadow: var(--sg-modal-box-shadow);
+$z-index: var(--sg-z-index-datepicker);
 
 // TODO: use css variable
 $border-radius: 4px;
@@ -60,6 +60,7 @@ $weekend-background: $background;
   @include common.add-border();
   @include common.add-border-color($dialog-border-color);
   display: inline-flex;
+  z-index: $z-index;
   flex-direction: column;
   visibility: hidden;
   opacity: 0;
@@ -121,7 +122,9 @@ $weekend-background: $background;
           font-weight: $day-weight;
           border-bottom: solid 1px $border-color;
           background: $background;
-          position: sticky;
+          @include common.media-breakpoint-down(sm) {
+            position: sticky;
+          }
           top: 0;
         }
       }
