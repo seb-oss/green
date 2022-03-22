@@ -25,4 +25,32 @@ $_icons: (
       mask-image: $svg;
     }
   }
+
+  &.sg-icon-next::before {
+    background: none;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    content: '';
+    display: block;
+    height: 12px;
+    margin-left: -10px;
+    margin-top: 2px;
+    transform: translate(75%) rotate(-135deg) scaleZ(-1);
+    transition: transform 0.3s ease-in;
+    width: 12px;
+  }
+
+  &.sg-icon-previous::before {
+    background: none;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    content: '';
+    display: block;
+    height: 12px;
+    margin-left: -4px;
+    margin-top: 2px;
+    transform: translate(75%) rotate(45deg) scaleZ(-1);
+    transition: transform 0.3s ease-in;
+    width: 12px;
+  }
 }
