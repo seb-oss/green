@@ -24,7 +24,8 @@ export type CalendarGrid = CalendarDay[][]
 export const createCalendar = (
   locale: string,
   date: Date,
-  selectedDate?: Date
+  selectedDate?: Date,
+  useCurrentTime = true
 ): CalendarGrid => {
   const today = new Date()
 
@@ -34,6 +35,11 @@ export const createCalendar = (
   const soc = subDays(som, getWeekday(som))
   const eoc = addDays(eom, 6 - getWeekday(eom))
   const weeks: CalendarGrid = []
+
+  const ch = today.getHours()
+  const cm = today.getMinutes()
+  const cs = today.getSeconds()
+  const cms = today.getMilliseconds()
 
   let currentDay = soc
   let currentWeek: CalendarDay[] = []
@@ -45,7 +51,9 @@ export const createCalendar = (
       weeks.push(currentWeek)
     }
     currentWeek.push({
-      date: currentDay,
+      date: useCurrentTime
+        ? new Date(currentDay.setHours(ch, cm, cs, cms))
+        : currentDay,
       formattedDate: format(currentDay, 'yyyy-MM-dd'),
       day: currentDay.getDate(),
       currentDay: isSameDay(currentDay, date),

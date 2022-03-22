@@ -40,6 +40,7 @@ export interface DatepickerOptions {
   currentDate?: Date | string
   selectedDate?: Date | string
   closeOnSelect?: boolean
+  useCurrentTime?: boolean
 }
 
 const createState = (isActive = false): DatepickerState => {
@@ -51,7 +52,8 @@ const createState = (isActive = false): DatepickerState => {
 const createData = (
   locale: string,
   currentDate: Date | string,
-  preSelectedDate?: Date | string
+  preSelectedDate?: Date | string,
+  useCurrentTime?: boolean
 ): DatepickerData => {
   const date =
     typeof currentDate === 'string'
@@ -80,7 +82,7 @@ const createData = (
     month: Intl.DateTimeFormat(locale, { month: 'long' }).format(date),
     day: date.getDate(),
     weekday: Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date),
-    calendar: createCalendar(locale, date, selectedDate),
+    calendar: createCalendar(locale, date, selectedDate, useCurrentTime),
   }
 }
 
@@ -91,19 +93,21 @@ export const createDatepicker = (
     locale = navigator.language,
     currentDate = new Date(),
     closeOnSelect = true,
+    useCurrentTime = true,
   }: DatepickerOptions,
   datepickerElRef: HTMLElement,
   datepickerDialogElRef: HTMLElement,
   // TODO: update value for date input
   dateInputElRef: HTMLElement
 ): Datepicker => {
-  let data = createData(locale, currentDate, selectedDate)
+  let data = createData(locale, currentDate, selectedDate, useCurrentTime)
   const dp: Datepicker = {
     add: (amount, unit) => {
       data = createData(
         locale,
         add(data.date, { [unit]: amount }),
-        data.selectedDate
+        data.selectedDate,
+        useCurrentTime
       )
       listener(data)
     },
@@ -111,16 +115,17 @@ export const createDatepicker = (
       data = createData(
         locale,
         sub(data.date, { [unit]: amount }),
-        data.selectedDate
+        data.selectedDate,
+        useCurrentTime
       )
       listener(data)
     },
     set: (date) => {
-      data = createData(locale, date, data.selectedDate)
+      data = createData(locale, date, data.selectedDate, useCurrentTime)
       listener(data)
     },
     select: (date) => {
-      data = createData(locale, data.date, date)
+      data = createData(locale, data.date, date, useCurrentTime)
       listener(data)
       if (closeOnSelect) {
         dp.close()
