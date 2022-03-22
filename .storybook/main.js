@@ -7,6 +7,9 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  features: {
+    buildStoriesJson: true
+  },
   stories: [],
   addons: [
     '@storybook/addon-links',
