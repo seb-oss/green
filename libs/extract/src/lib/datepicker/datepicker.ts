@@ -13,6 +13,7 @@ export interface Datepicker {
   state: DatepickerState
   open: () => void
   close: () => void
+  toggle: () => void
 }
 
 export interface DatepickerData {
@@ -139,6 +140,10 @@ export const createDatepicker = (
       const state = createState(false)
       listener(undefined, state)
     },
+    toggle: () => {
+      const state = createState(!dp.state.isActive)
+      listener(undefined, state)
+    },
     state: createState(),
     _popper: createPopper(datepickerElRef, datepickerDialogElRef, {
       placement: 'bottom-start',
@@ -153,7 +158,7 @@ export const createDatepicker = (
     }),
   }
 
-  listener(data)
+  listener(data, dp.state)
 
   return dp
 }
