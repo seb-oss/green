@@ -82,11 +82,16 @@ $weekend-background: $background;
     @include common.padding-top(3);
     @include common.padding-horizontal(3);
     > button {
+      @include common.margin-horizontal(2);
       min-width: auto;
+      &.link {
+        flex: 1 1;
+      }
     }
   }
   main {
     display: flex;
+    justify-content: center;
     @include common.media-breakpoint-down(sm) {
       flex-wrap: wrap;
       overflow-y: auto;
