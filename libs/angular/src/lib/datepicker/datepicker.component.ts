@@ -10,6 +10,7 @@ import {
   ViewChild,
   EventEmitter,
   SimpleChanges,
+  ChangeDetectorRef,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
@@ -38,6 +39,15 @@ import {
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges
 {
+  @Input()
+  get value(): string | Date | undefined {
+    return this._value
+  }
+  set value(newValue: string | Date | undefined) {
+    if (newValue !== this._value) {
+      this._value = newValue
+    }
+  }
   @Input() id?: string
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @ViewChild('datepickerDialogElRef') public datepickerDialogElRef:
@@ -57,18 +67,25 @@ export class NggDatepickerComponent
   handler?: DropdownHandler
   toggler?: Partial<ElementProps>
   listbox?: Partial<ElementProps>
+  _value: string | Date | undefined
 
   dp: Datepicker | undefined
   private _data: DatepickerData | undefined
 
-  constructor() {}
+  constructor(private _cdr: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {}
 
   writeValue(value: any): void {
-    //this.value = value
+    this.value = value
+
+    // When binding using ngModel we need to set initial select date
+    // once we get initial value as it's not available when component is created
+    if (value && this.dp && !this.data?.selectedDate) {
+      this.dp.select(value)
+  }
   }
 
   registerOnChange(fn: any): void {
@@ -106,8 +123,8 @@ export class NggDatepickerComponent
     this.onTouchedFn && this.onTouchedFn()
 
     if (data) {
-      this.valueChange.emit(data.formattedSelectedDate)
-      this.onChangeFn && this.onChangeFn(data.formattedSelectedDate)
+      this.valueChange.emit(data.selectedDate)
+      this.onChangeFn && this.onChangeFn(data.selectedDate)
       this.data = data
     }
   }
@@ -116,20 +133,24 @@ export class NggDatepickerComponent
   }
 
   ngAfterViewInit(): void {
+    // initialize datepicker
     if (
       this.datepickerElRef &&
       this.datepickerDialogElRef &&
-      this.dateInputElRef
+      this.dateInputElRef &&
+      !this.dp
     ) {
       this.dp = createDatepicker(
         this.listener,
         {
+          selectedDate: this.value,
           closeOnSelect: true,
         },
         this.datepickerElRef.nativeElement,
         this.datepickerDialogElRef.nativeElement,
         this.dateInputElRef.nativeElement
       )
+      this._cdr.detectChanges()
     } else {
       throw 'Missing one or more elements...'
     }
