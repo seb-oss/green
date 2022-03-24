@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { HTMLProps } from 'react'
 
-export interface BadgeProps {
+export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
   title: string
   badgeType?: string //TODO: change this to extract type
   isCloseable?: boolean
@@ -12,9 +12,10 @@ export function Badge({
   badgeType,
   isCloseable,
   closeText,
+  ...props
 }: BadgeProps) {
   return (
-    <span className={`badge ${badgeType}`}>
+    <span {...props} className={`badge ${badgeType}`}>
       <strong>{title}</strong>
       {isCloseable && (
         <button className="close">
