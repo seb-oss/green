@@ -2,6 +2,35 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.6...@sebgroup/chlorophyll@1.0.0-beta.7) (2022-03-24)
+
+
+### Bug Fixes
+
+* **alert:** update variants ([277ed95](https://github.com/sebgroup/green/commit/277ed95f813c667c5a007c587d27311811040300)), closes [#292](https://github.com/sebgroup/green/issues/292)
+* **badge:** update variants ([5684ed1](https://github.com/sebgroup/green/commit/5684ed19ee15c0eef1ddb945bfa21782a6df3750)), closes [#292](https://github.com/sebgroup/green/issues/292)
+* **form-validation:** margin for error in horizontal forms ([4957c0c](https://github.com/sebgroup/green/commit/4957c0cea106b1d0dacc28557bcde8b25d984e62)), closes [#404](https://github.com/sebgroup/green/issues/404)
+* **modal:** use css variables from theme ([0283a6f](https://github.com/sebgroup/green/commit/0283a6fbf25faa428e4b17a446abac2ba0b814f5)), closes [#389](https://github.com/sebgroup/green/issues/389)
+
+
+### Code Refactoring
+
+* **alert:** update layout ([0028750](https://github.com/sebgroup/green/commit/002875096c01a33509801b431b123c96faab8376)), closes [#438](https://github.com/sebgroup/green/issues/438)
+
+
+### Features
+
+* 🎸 add badge styles and storybook ([4781fad](https://github.com/sebgroup/green/commit/4781fadbb62c6f1e8dea95dbc0e11e3b60a0be21))
+* 🎸 add small close button for badges ([fdc1578](https://github.com/sebgroup/green/commit/fdc157823e2b9e4dfb3d9e85c8c727d03f830db9))
+* **backdrop:** add mixin ([2ffd0ee](https://github.com/sebgroup/green/commit/2ffd0ee190ead319a3a700808da5a1eb1e144a05))
+
+
+### BREAKING CHANGES
+
+* **alert:** Markup structure has changed, see storybook for more info.
+
+
+
 # [1.0.0-beta.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.5...@sebgroup/chlorophyll@1.0.0-beta.6) (2022-02-17)
 
 
