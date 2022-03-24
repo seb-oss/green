@@ -7,7 +7,7 @@
       placeholder="yyyy-mm-dd"
       #dateInputElRef
       [value]="data?.formattedSelectedDate || ''"
-      (change)="select(dateInputElRef.value, $event)"
+      (change)="dp?.select(dateInputElRef.value)"
     />
     <button
       #datepickerTriggerElRef
@@ -33,8 +33,18 @@
     <button type="button" class="link" (click)="dp?.sub(1, 'months')">
       <i class="sg-icon sg-icon-previous">Previous month</i>
     </button>
-    <button type="button" aria-haspopup="listbox">February</button>
-    <button type="button" aria-haspopup="listbox">2020</button>
+    <ngg-dropdown
+      [options]="months"
+      text="Select"
+      [value]="data?.month"
+      (valueChange)="dp?.setMonth($event)"
+    ></ngg-dropdown>
+    <ngg-dropdown
+      [options]="years"
+      text="Select"
+      [value]="data?.year"
+      (valueChange)="dp?.setYear($event)"
+    ></ngg-dropdown>
     <button type="button" class="link" (click)="dp?.add(1, 'months')">
       <i class="sg-icon sg-icon-next">Next month</i>
     </button>

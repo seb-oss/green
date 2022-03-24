@@ -4,12 +4,10 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges,
   OnDestroy,
   Output,
   ViewChild,
   EventEmitter,
-  SimpleChanges,
   ChangeDetectorRef,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
@@ -22,6 +20,9 @@ import {
   Datepicker,
   createDatepicker,
   DatepickerState,
+  DropdownOption,
+  months,
+  years,
 } from '@sebgroup/extract'
 
 @Component({
@@ -37,7 +38,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDatepickerComponent
-  implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges
+  implements ControlValueAccessor, AfterViewInit, OnDestroy
 {
   @Input()
   get value(): string | Date | undefined {
@@ -68,6 +69,8 @@ export class NggDatepickerComponent
   toggler?: Partial<ElementProps>
   listbox?: Partial<ElementProps>
   _value: string | Date | undefined
+  months: Array<DropdownOption> = months({})
+  years: Array<DropdownOption> = years({})
 
   dp: Datepicker | undefined
   private _data: DatepickerData | undefined
@@ -75,8 +78,6 @@ export class NggDatepickerComponent
   constructor(private _cdr: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {}
-
-  ngOnChanges(changes: SimpleChanges): void {}
 
   writeValue(value: any): void {
     this.value = value
@@ -94,10 +95,6 @@ export class NggDatepickerComponent
 
   registerOnTouched(fn: any): void {
     this.onTouchedFn = fn
-  }
-
-  select(date: any, event: any) {
-    this.dp?.select(date)
   }
 
   trackByKey = (index: number, option: ExtendedDropdownOption): string => {
