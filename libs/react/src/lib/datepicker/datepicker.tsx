@@ -1,6 +1,12 @@
-import { CalendarDay, DatepickerOptions } from '@sebgroup/extract'
+import {
+  CalendarDay,
+  DatepickerOptions,
+  months,
+  years,
+} from '@sebgroup/extract'
 import { useRef } from 'react'
 import { useDatepicker } from './hook'
+import Dropdown from '../dropdown/dropdown'
 
 export const Datepicker = (options: DatepickerOptions = {}) => {
   const id = 'input'
@@ -56,14 +62,14 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
         aria-label="Choose Date"
       >
         <header>
-          <button onClick={() => datepicker.sub(1, 'months')}>&lt;</button>
-          <button type="button" aria-haspopup="listbox">
-            {data.month}
+          <button className="link" onClick={() => datepicker.sub(1, 'months')}>
+            <i className="sg-icon sg-icon-previous">Previous month</i>
           </button>
-          <button type="button" aria-haspopup="listbox">
-            {data.year}
+          <Dropdown options={months({})}>{data.monthName}</Dropdown>
+          <Dropdown options={years({})}>{data.year + ''}</Dropdown>
+          <button className="link" onClick={() => datepicker.add(1, 'months')}>
+            <i className="sg-icon sg-icon-next">Next month</i>
           </button>
-          <button onClick={() => datepicker.add(1, 'months')}>&gt;</button>
         </header>
         <main>
           <table role="grid">
