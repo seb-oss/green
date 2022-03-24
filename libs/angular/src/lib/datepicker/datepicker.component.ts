@@ -23,6 +23,7 @@ import {
   DropdownOption,
   months,
   years,
+  randomId,
 } from '@sebgroup/extract'
 
 @Component({
@@ -49,7 +50,8 @@ export class NggDatepickerComponent
       this._value = newValue
     }
   }
-  @Input() id?: string
+  @Input() id?: string = randomId()
+  @Input() label?: string
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @ViewChild('datepickerDialogElRef') public datepickerDialogElRef:
     | ElementRef<HTMLElement>
@@ -86,7 +88,7 @@ export class NggDatepickerComponent
     // once we get initial value as it's not available when component is created
     if (value && this.dp && !this.data?.selectedDate) {
       this.dp.select(value)
-  }
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -151,6 +153,6 @@ export class NggDatepickerComponent
     } else {
       throw 'Missing one or more elements...'
     }
-    console.log(this.dp)
+    console.log(this.dp, this.data)
   }
 }
