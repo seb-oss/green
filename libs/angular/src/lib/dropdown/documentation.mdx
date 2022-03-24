@@ -27,20 +27,12 @@ export class AppModule {}
 ```
 
 ## Dropdown Select
-NggDropdownComponent is a form control for selecting a value from a set of options. 
+NggDropdownComponent is a form control for selecting a value from a set of options.
 
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
 and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
 
 <Story id="components-dropdown--select" />
-
-## 2-way binding without forms
-If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
-
-
-```html
-<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
-```
 
 ## Reactive forms
 We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
@@ -61,8 +53,16 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 </form>
 ```
 
+## 2-way binding without forms
+If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
+
+
+```html
+<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
+```
+
 ## Options
-The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected. 
+The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected.
 
 ```typescript
 const options = [

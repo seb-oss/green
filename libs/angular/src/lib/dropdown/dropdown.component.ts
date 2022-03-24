@@ -176,6 +176,7 @@ export class NggDropdownComponent
   }
 
   select(option: ExtendedDropdownOption) {
+    console.log(option)
     this.handler?.select(option)
     this._value = option.value
     this.valueChange.emit(option.value)
