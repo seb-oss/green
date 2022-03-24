@@ -47,7 +47,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
             ref={datepickerTriggerRef}
             type="button"
             className="primary"
-            onClick={() => datepicker.open()}
+            onClick={() => datepicker.toggle()}
           >
             <i className="sg-icon sg-icon-calendar">Select date</i>
           </button>
