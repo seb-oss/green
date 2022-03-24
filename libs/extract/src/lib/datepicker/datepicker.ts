@@ -7,6 +7,8 @@ type DateUnit = 'years' | 'months' | 'weeks' | 'days'
 export interface Datepicker {
   add: (amount: number, unit: DateUnit) => void
   sub: (amount: number, unit: DateUnit) => void
+  setMonth: (number: number) => void
+  setYear: (number: number) => void
   set: (date: Date | string) => void
   select: (date: Date | string) => void
   _popper?: Instance
@@ -20,7 +22,8 @@ export interface DatepickerData {
   date: Date
   formattedDate: string
   year: number
-  month: string
+  month: number
+  monthName: string
   day: number
   weekday: string
   calendar: CalendarGrid
@@ -80,7 +83,8 @@ const createData = (
     date,
     formattedDate,
     year: date.getFullYear(),
-    month: Intl.DateTimeFormat(locale, { month: 'long' }).format(date),
+    month: date.getMonth(),
+    monthName: Intl.DateTimeFormat(locale, { month: 'long' }).format(date),
     day: date.getDate(),
     weekday: Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date),
     calendar: createCalendar(locale, date, selectedDate, useCurrentTime),
@@ -122,6 +126,16 @@ export const createDatepicker = (
       listener(data)
     },
     set: (date) => {
+      data = createData(locale, date, data.selectedDate, useCurrentTime)
+      listener(data)
+    },
+    setMonth: (number) => {
+      const date = new Date(data.date.setMonth(number))
+      data = createData(locale, date, data.selectedDate, useCurrentTime)
+      listener(data)
+    },
+    setYear: (number) => {
+      const date = new Date(data.date.setFullYear(number))
       data = createData(locale, date, data.selectedDate, useCurrentTime)
       listener(data)
     },

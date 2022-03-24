@@ -32,34 +32,56 @@ type MonthFormat = 'long' | 'narrow' | 'short' | 'numeric' | '2-digit'
 export interface MonthFormatOptions extends DateTimeFormatOptions {
   format: MonthFormat
 }
+export interface Month {
+  key: string
+  value: number
+}
 type Months = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month,
+  Month
 ]
+
 export const months = ({
   locale = navigator.language,
   format = 'long',
 }: Partial<MonthFormatOptions>): Months => {
-  const year = Array(12)
+  const months = Array(12)
     .fill(null)
-    .map((_, month) =>
-      _format(
+    .map((_, month) => ({
+      key: _format(
         new Date(`1970-${_paddedString(month + 1)}-01`),
         { month: format },
         locale
-      )
-    )
-  return year as Months
+      ),
+      value: month,
+    }))
+  return months as Months
+}
+
+export const years = ({
+  from = new Date().getFullYear() - 5,
+  to = new Date().getFullYear() + 5,
+}: Partial<{
+  from: number
+  to: number
+}>): Array<{ key: string; value: number }> => {
+  const years = Array(to - from + 1)
+    .fill(null)
+    .map((_, year) => ({
+      key: from + year + '',
+      value: from + year,
+    }))
+  return years
 }
 
 /** Get weekday
