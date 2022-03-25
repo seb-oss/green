@@ -6,7 +6,7 @@ const list: IList[] = [
   { text: 'Page 2', href: '#' },
   { text: 'Page 3', href: '#' },
   { text: 'Page 4', href: '#' },
-  { text: 'Page 5', href: '#' },
+  { text: 'Page 5' },
   { text: 'Page 6', disabled: true },
 ]
 
@@ -42,6 +42,13 @@ describe('Tabs', () => {
     render(<Tabs list={list} />)
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag[4].getAttribute('aria-disabled')).toBe(null)
+    expect(anchorTag[4].getAttribute('href')).toBe('#')
     expect(anchorTag[5].getAttribute('aria-disabled')).toBe('true')
+  })
+
+  it('Should set href to "#" if href is not defined ', () => {
+    render(<Tabs list={list} />)
+    const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
+    expect(anchorTag[4].getAttribute('href')).toBe('#')
   })
 })
