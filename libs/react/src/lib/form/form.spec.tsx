@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import * as FormContext from './formContext'
 import React from 'react'
-import { FormItems, TextInput } from '.'
+import { FormItems, RadioGroup, TextInput } from '.'
 import Form from './form'
-import { Checkbox } from './input/input'
+import { Checkbox, RadioButton } from './input/input'
 
 type MockComponentProps = {
   mockOnSubmit?: (values: any) => void
@@ -93,14 +93,31 @@ describe('Form component', () => {
   it('Should validate checkbox', () => {
     render(
       <Form>
-        <FormItems name="checkbox" validate={{ message: 'required', indicator: 'error' }}>
-          <Checkbox label="checkbox" />
+        <FormItems name="checkbox" validate={{ message: 'required', indicator: 'error', rules: { type: 'Required' } }}>
+          <Checkbox label="checkbox" value="checkme" />
         </FormItems>
       </Form>
     )
     expect(screen.queryByText('required')).toBeNull()
     fireEvent.click(screen.getByText('checkbox'))
     fireEvent.click(screen.getByText('checkbox'))
+    expect(screen.queryByText('required')).not.toBeNull()
+  })
+
+  it('Should validate radio group', () => {
+    render(
+      <Form>
+        <FormItems name="checkbox" validate={{ message: 'required', indicator: 'error', rules: { type: 'Required' } }}>
+          <RadioGroup title="Radio Group">
+            <RadioButton label="Radio Button 1" value="button1" />
+            <RadioButton label="Radio Button 2" value="button2" />
+          </RadioGroup>
+        </FormItems>
+        <button type="submit">submit</button>
+      </Form>
+    )
+    expect(screen.queryByText('required')).toBeNull()
+    fireEvent.click(screen.getByText('submit'))
     expect(screen.queryByText('required')).not.toBeNull()
   })
 

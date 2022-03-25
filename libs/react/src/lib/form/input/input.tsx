@@ -58,14 +58,14 @@ export const Checkbox = ({ label, onChange, validator, ...props }: CheckboxProps
   )
 }
 
-export const RadioButton = ({ label, validator, ...props }: RadioButtonProps) => {
+export const RadioButton = React.forwardRef(({ label, validator, ...props }: RadioButtonProps, ref: React.ForwardedRef<HTMLInputElement>) => {
   const { id } = useInput(props)
 
   return (
     <label htmlFor={id} className="form-control">
-      <input id={id} type="radio" {...props} className={validator} />
+      <input id={id} type="radio" {...props} className={validator} ref={ref} />
       <span>{label}</span>
       <i />
     </label>
   )
-}
+})

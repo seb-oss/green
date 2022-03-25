@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { IValidator, RadioButtonProps } from '../types'
 import { IndicatorType, validateClassName } from '@sebgroup/extract'
 
@@ -21,6 +21,22 @@ export const RadioGroup = ({ description, title, validator, onChangeRadio, onCha
     onChange && onChange(event)
   }
 
+  const radioBtnRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+
+  React.useEffect(() => {
+    if (radioBtnRef && radioBtnRef.current) {
+      const form: HTMLFormElement = radioBtnRef?.current?.form as HTMLFormElement
+      const resetListner = () => {
+        setChecked(undefined)
+      }
+      form?.addEventListener('reset', resetListner)
+      return () => form?.removeEventListener('reset', resetListner)
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      return () => {}
+    }
+  }, [])
+
   return (
     <div className="form-group">
       <fieldset className={validatorClassName}>
@@ -28,7 +44,7 @@ export const RadioGroup = ({ description, title, validator, onChangeRadio, onCha
         <span className="form-info">{description}</span>
         {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
           return React.isValidElement<React.FC<RadioButtonProps>>(Child)
-            ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name })
+            ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name, ref: radioBtnRef })
             : Child
         })}
       </fieldset>
