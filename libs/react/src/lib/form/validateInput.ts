@@ -14,22 +14,12 @@ export const validateInputValue = (target: InputTargetType, rules: ValidatorRule
 }
 
 const validateInputValueErrors = (rules: ValidatorRules, target: InputTargetType) => {
-  const { value, type, checked } = target
+  const { value } = target
 
   if (rules?.custom instanceof Function) {
     return rules?.custom()
   }
-
-  switch (type) {
-    case 'text':
-    case 'email':
-    case 'number':
-      return validateTextInputValues(value, rules)
-    case 'checkbox':
-      return validateCheckBoxInput(checked as boolean)
-    default:
-      return validateTextInputValues(value, rules)
-  }
+  return validateTextInputValues(value, rules)
 }
 
 const setErrorInsert = (setError: React.Dispatch<React.SetStateAction<Record<string, any>>>, name: string) => {
@@ -58,11 +48,4 @@ const validateTextInputValues = (value: string, rules: ValidatorRules) => {
       return
     }
   }
-}
-
-const validateCheckBoxInput = (checked: boolean) => {
-  if (!checked) {
-    return 'error'
-  }
-  return null
 }

@@ -4,7 +4,7 @@ import { RadioButton } from '../input/input'
 import { IValidator, RadioButtonProps } from '../types'
 
 describe('RadioButton Group Component', () => {
-  const radioBtnValues: RadioButtonProps[] = [
+  const radioBtnValues: any = [
     {
       value: 'Car 1',
       label: 'Car 1',
@@ -19,7 +19,7 @@ describe('RadioButton Group Component', () => {
 
   const MockComponent = (props: MockComponentProps) => (
     <RadioGroup title="Radio Group title" description="Description" {...props}>
-      {radioBtnValues.map((value: RadioButtonProps, index: number) => (
+      {radioBtnValues.map((value: any, index: number) => (
         <RadioButton key={index} {...value} />
       ))}
     </RadioGroup>
@@ -55,5 +55,19 @@ describe('RadioButton Group Component', () => {
     const { container } = render(<MockComponent validator={{ message: 'invalid message', indicator: 'error' }} />)
     expect(screen.getByText('invalid message')).toBeVisible()
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(3)
+  })
+
+  it('Should reset radio values when form reset', () => {
+    const { container } = render(
+      <form>
+        <MockComponent validator={{ message: 'invalid message', indicator: 'error' }} />
+        <button type="reset">reset</button>
+      </form>
+    )
+    expect(container.querySelector<HTMLInputElement>("input[type='radio']")?.checked).toBe(false)
+    fireEvent.click(screen.getByText('Car 1'))
+    expect(container.querySelector<HTMLInputElement>("input[type='radio']")?.checked).toBe(true)
+    fireEvent.click(screen.getByText('reset'))
+    expect(container.querySelector<HTMLInputElement>("input[type='radio']")?.checked).toBe(false)
   })
 })
