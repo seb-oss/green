@@ -1,8 +1,18 @@
 import { screen, render } from '@testing-library/react'
-import List from './list'
+import List, { TableListProps } from './list'
 import ListItem from './listItem'
 
 const list: string[] = ['First', 'Second', 'Third']
+const tableData: TableListProps[] = [
+  {
+    title: 'title',
+    definition: ['description 1'],
+  },
+  {
+    title: 'title 2',
+    definition: ['description 2'],
+  },
+]
 
 describe('List', () => {
   it('Should render ordered list', () => {
@@ -24,6 +34,12 @@ describe('List', () => {
     list.map((text, index) =>
       expect(screen.getByText(text).textContent).toBe(list[index])
     )
+  })
+
+  it('Should render description list', () => {
+    render(<List listType="table" tableData={tableData}></List>)
+    expect(screen.getByText('description 1')).toBeTruthy()
+    expect(screen.getByText('description 2')).toBeTruthy()
   })
 
   it('Check list should have check class name', () => {

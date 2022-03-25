@@ -32,6 +32,16 @@ describe('Alert', () => {
     expect(screen.getByRole('heading')).toHaveTextContent('Card Headline')
   })
 
+  it('renders heading with h3 tag if just string', () => {
+    render(
+      <Alert type="info" header={'header'}>
+        Alert
+      </Alert>
+    )
+
+    expect(screen.getByRole('heading')).toContainHTML('<h3>header</h3>')
+  })
+
   it('renders footer', () => {
     render(
       <Alert type="info" footer={<Footer />}>
@@ -40,5 +50,25 @@ describe('Alert', () => {
     )
 
     expect(screen.getByRole('contentinfo')).toHaveTextContent('Default Button')
+  })
+
+  it('renders close text', () => {
+    render(
+      <Alert type="info" closeText="this is close text" header={<Header />}>
+        Alert
+      </Alert>
+    )
+
+    expect(screen.getByRole('button')).toHaveTextContent('this is close text')
+  })
+
+  it('should not render close button', () => {
+    render(
+      <Alert type="info" isCloseable={false} header={<Header />}>
+        Alert
+      </Alert>
+    )
+
+    expect(screen.getByRole('heading')).not.toContain(<button />)
   })
 })
