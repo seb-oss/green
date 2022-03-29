@@ -4,7 +4,10 @@ const _format = (
   date: Date,
   options: Intl.DateTimeFormatOptions,
   locale: string
-) => Intl.DateTimeFormat(locale, options).format(date)
+) => {
+  const string = Intl.DateTimeFormat(locale, options).format(date)
+  return string[0].toUpperCase() + string.substring(1)
+}
 
 interface DateTimeFormatOptions {
   locale: string
