@@ -6,8 +6,9 @@ import {
   isSameDay,
   isSameMonth,
   format,
+  getWeek,
 } from 'date-fns'
-import { getWeekday } from './values'
+import { getNameForWeek, getWeekday, weekdays } from './values'
 
 export interface CalendarDay {
   date: Date
@@ -21,12 +22,26 @@ export interface CalendarDay {
 }
 export type CalendarGrid = CalendarDay[][]
 
+export interface Calendar {
+  calendarGrid: CalendarGrid
+  headers: CalendarHeader[]
+  weekNumbers?: number[]
+}
+export interface CalendarHeader {
+  abbr: string
+  displayText: string
+  type: 'week' | 'day'
+}
+
 export const createCalendar = (
   locale: string,
   date: Date,
-  selectedDate?: Date,
-  useCurrentTime = true
-): CalendarGrid => {
+  selectedDate: Date | undefined,
+  showWeeks: boolean,
+  useCurrentTime: boolean,
+  weekName: { abbr: string; displayText: string }
+): Calendar => {
+  let calendar: Partial<Calendar> = {}
   const today = new Date()
 
   const som = startOfMonth(date)
@@ -44,11 +59,17 @@ export const createCalendar = (
   let currentDay = soc
   let currentWeek: CalendarDay[] = []
   let daysInCalendar = 0
+  let weekNumbers
   while (currentDay < eoc) {
     if (++daysInCalendar > 42) throw new Error('Calendar failed')
     if (getWeekday(currentDay) === 0) {
       currentWeek = []
       weeks.push(currentWeek)
+
+      if (showWeeks) {
+        const weekNumber = getWeek(currentDay)
+        weekNumbers = [...(weekNumbers || []), weekNumber]
+    }
     }
     currentWeek.push({
       date: useCurrentTime
@@ -65,5 +86,22 @@ export const createCalendar = (
     currentDay = addDays(currentDay, 1)
   }
 
-  return weeks
+  // create headers for weekdays
+  let headers = <CalendarHeader[]>weekdays({ locale }).map((day) => ({
+    abbr: day.long,
+    displayText: day.short,
+    type: 'day',
+  }))
+
+  if (showWeeks && weekNumbers) {
+    // add header for week numbers
+    headers = [getNameForWeek({ locale, weekName }), ...headers]
+    calendar = { weekNumbers }
+  }
+  calendar = {
+    ...calendar,
+    calendarGrid: weeks,
+    headers,
+  }
+  return <Calendar>calendar
 }

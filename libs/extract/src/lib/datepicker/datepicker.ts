@@ -1,6 +1,5 @@
 import { add, format, sub } from 'date-fns'
-import { createCalendar } from '.'
-import { CalendarGrid } from './calendar'
+import { Calendar, CalendarHeader, createCalendar } from '.'
 import { createPopper, Instance } from '@popperjs/core'
 
 type DateUnit = 'years' | 'months' | 'weeks' | 'days'
@@ -26,7 +25,7 @@ export interface DatepickerData {
   monthName: string
   day: number
   weekday: string
-  calendar: CalendarGrid
+  calendar: Calendar
   selectedDate?: Date
   formattedSelectedDate?: string
 }
@@ -45,6 +44,8 @@ export interface DatepickerOptions {
   selectedDate?: Date | string
   closeOnSelect?: boolean
   useCurrentTime?: boolean
+  weekName?: { abbr: string; displayText: string }
+  showWeeks?: boolean
 }
 
 const createState = (isActive = false): DatepickerState => {
@@ -57,7 +58,9 @@ const createData = (
   locale: string,
   currentDate: Date | string,
   preSelectedDate?: Date | string,
-  useCurrentTime?: boolean
+  useCurrentTime?: boolean,
+  showWeeks?: boolean,
+  weekName?: { abbr: string; displayText: string }
 ): DatepickerData => {
   const date =
     typeof currentDate === 'string'
@@ -87,7 +90,14 @@ const createData = (
     monthName: Intl.DateTimeFormat(locale, { month: 'long' }).format(date),
     day: date.getDate(),
     weekday: Intl.DateTimeFormat(locale, { weekday: 'long' }).format(date),
-    calendar: createCalendar(locale, date, selectedDate, useCurrentTime),
+    calendar: createCalendar(
+      locale,
+      date,
+      selectedDate,
+      <boolean>showWeeks,
+      <boolean>useCurrentTime,
+      <{ abbr: string; displayText: string }>weekName
+    ),
   }
 }
 
@@ -99,20 +109,31 @@ export const createDatepicker = (
     currentDate = new Date(),
     closeOnSelect = true,
     useCurrentTime = true,
+    showWeeks = false,
+    weekName = { abbr: 'Week', displayText: 'wk' },
   }: DatepickerOptions,
   datepickerElRef: HTMLElement,
   datepickerDialogElRef: HTMLElement,
   // TODO: update value for date input
   dateInputElRef: HTMLElement
 ): Datepicker => {
-  let data = createData(locale, currentDate, selectedDate, useCurrentTime)
+  let data = createData(
+    locale,
+    currentDate,
+    selectedDate,
+    useCurrentTime,
+    showWeeks,
+    weekName
+  )
   const dp: Datepicker = {
     add: (amount, unit) => {
       data = createData(
         locale,
         add(data.date, { [unit]: amount }),
         data.selectedDate,
-        useCurrentTime
+        useCurrentTime,
+        showWeeks,
+        weekName
       )
       listener(data)
     },
@@ -121,26 +142,56 @@ export const createDatepicker = (
         locale,
         sub(data.date, { [unit]: amount }),
         data.selectedDate,
-        useCurrentTime
+        useCurrentTime,
+        showWeeks,
+        weekName
       )
       listener(data)
     },
     set: (date) => {
-      data = createData(locale, date, data.selectedDate, useCurrentTime)
+      data = createData(
+        locale,
+        date,
+        data.selectedDate,
+        useCurrentTime,
+        showWeeks,
+        weekName
+      )
       listener(data)
     },
     setMonth: (number) => {
       const date = new Date(data.date.setMonth(number))
-      data = createData(locale, date, data.selectedDate, useCurrentTime)
+      data = createData(
+        locale,
+        date,
+        data.selectedDate,
+        useCurrentTime,
+        showWeeks,
+        weekName
+      )
       listener(data)
     },
     setYear: (number) => {
       const date = new Date(data.date.setFullYear(number))
-      data = createData(locale, date, data.selectedDate, useCurrentTime)
+      data = createData(
+        locale,
+        date,
+        data.selectedDate,
+        useCurrentTime,
+        showWeeks,
+        weekName
+      )
       listener(data)
     },
     select: (date) => {
-      data = createData(locale, data.date, date, useCurrentTime)
+      data = createData(
+        locale,
+        data.date,
+        date,
+        useCurrentTime,
+        showWeeks,
+        weekName
+      )
       listener(data)
       if (closeOnSelect) {
         dp.close()
@@ -151,7 +202,9 @@ export const createDatepicker = (
         locale,
         data.selectedDate || new Date(),
         data.selectedDate,
-        useCurrentTime
+        useCurrentTime,
+        showWeeks,
+        weekName
       )
       const state = createState(true)
       listener(data, state)

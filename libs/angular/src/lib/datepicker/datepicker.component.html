@@ -53,17 +53,31 @@
     <table role="grid">
       <thead>
         <tr>
-          <th scope="col" abbr="Monday">Mon</th>
-          <th scope="col" abbr="Tuesday">Tue</th>
-          <th scope="col" abbr="Wednesday">Wed</th>
-          <th scope="col" abbr="Thursday">Thu</th>
-          <th scope="col" abbr="Friday">Fri</th>
-          <th scope="col" abbr="Saturday">Sat</th>
-          <th scope="col" abbr="Sunday">Sun</th>
+          <th
+            scope="col"
+            *ngFor="let header of data?.calendar?.headers"
+            [abbr]="header.abbr"
+            [class.sg-week-header]="header.type === 'week'"
+            [class.sg-day-header]="header.type === 'day'"
+          >
+            {{ header.displayText }}
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let week of data?.calendar; trackBy: trackWeek">
+        <tr
+          *ngFor="
+            let week of data?.calendar?.calendarGrid;
+            trackBy: trackWeek;
+            let i = index
+          "
+        >
+          <th
+            *ngIf="data?.calendar?.weekNumbers as weekNumbers"
+            class="sg-week-number"
+          >
+            {{ weekNumbers[i] }}
+          </th>
           <td
             *ngFor="let day of week"
             [attr.data-date]="day.formattedDate"

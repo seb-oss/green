@@ -24,6 +24,7 @@ import {
   months,
   years,
   randomId,
+  DatepickerOptions,
 } from '@sebgroup/extract'
 
 @Component({
@@ -41,6 +42,23 @@ import {
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy
 {
+  get months(): Array<DropdownOption> {
+    return this._months
+  }
+
+  set months(value: Array<DropdownOption>) {
+    this._months = value
+  }
+  @Input()
+  get options(): DatepickerOptions {
+    return <DatepickerOptions>this._options
+  }
+  set options(value: DatepickerOptions) {
+    this._options = value
+    if (value.locale) {
+      this.months = months({ locale: this.options?.locale })
+    }
+  }
   @Input()
   get value(): string | Date | undefined {
     return this._value
@@ -71,8 +89,9 @@ export class NggDatepickerComponent
   toggler?: Partial<ElementProps>
   listbox?: Partial<ElementProps>
   _value: string | Date | undefined
-  months: Array<DropdownOption> = months({})
+  private _months: Array<DropdownOption> = months({})
   years: Array<DropdownOption> = years({})
+  private _options?: DatepickerOptions
 
   dp: Datepicker | undefined
   private _data: DatepickerData | undefined
@@ -142,8 +161,8 @@ export class NggDatepickerComponent
       this.dp = createDatepicker(
         this.listener,
         {
+          ...this.options,
           selectedDate: this.value,
-          closeOnSelect: true,
         },
         this.datepickerElRef.nativeElement,
         this.datepickerDialogElRef.nativeElement,

@@ -1,3 +1,5 @@
+import { CalendarHeader } from './calendar'
+
 const _paddedString = (num: number) => (num < 10 ? '0' + num : '' + num)
 
 const _format = (
@@ -17,17 +19,24 @@ type WeekFormat = 'long' | 'narrow' | 'short'
 export interface WeekFormatOptions extends DateTimeFormatOptions {
   format: WeekFormat
 }
-type Days = [string, string, string, string, string, string, string]
+type Days = [Day, Day, Day, Day, Day, Day, Day]
+interface Day {
+  long: string
+  short: string
+}
 export const weekdays = ({
   locale = navigator.language,
-  format = 'long',
 }: Partial<WeekFormatOptions>): Days => {
   // eslint-disable-next-line no-sparse-arrays
   const week = Array(7)
     .fill(null)
-    .map((_, day) =>
-      _format(new Date(`1970-01-${12 + day}`), { weekday: format }, locale)
-    )
+    .map((_, day) => {
+      const date = new Date(`1970-01-${12 + day}`)
+      return {
+        long: _format(date, { weekday: 'long' }, locale),
+        short: _format(date, { weekday: 'short' }, locale),
+      }
+    })
   return week as Days
 }
 
@@ -94,3 +103,27 @@ export const years = ({
  */
 export const getWeekday = (date: Date, startDay = 6) =>
   (date.getDay() + startDay) % 7
+
+/** Get name for week - used when week numbers are displayed
+ * @param {
+ *    locale?: string,
+ *    weekName?: Partial<CalendarHeader>
+ * } - Config object with optional locale and calendar header
+ * @return CalendarHeader - Calendar header used for week numbers
+ */
+export const getNameForWeek = ({
+  locale,
+  weekName,
+}: {
+  locale: string
+  weekName: { abbr: string; displayText: string }
+}): CalendarHeader => {
+  const calendarHead: Partial<CalendarHeader> = { type: 'week' }
+  // check if swedish locale...
+  if (/^sv/.test(locale)) {
+    // ...return default header for swedish locale...
+    return <CalendarHeader>{ ...calendarHead, abbr: 'Vecka', displayText: 'v.' }
+  }
+  // ...else return passed week name which defaults to english if omitted
+  return <CalendarHeader>{ ...calendarHead, ...weekName }
+}
