@@ -147,16 +147,25 @@ export const createDatepicker = (
       }
     },
     open: () => {
+      data = createData(
+        locale,
+        data.selectedDate || new Date(),
+        data.selectedDate,
+        useCurrentTime
+      )
       const state = createState(true)
-      listener(undefined, state)
+      listener(data, state)
     },
     close: () => {
       const state = createState(false)
       listener(undefined, state)
     },
     toggle: () => {
-      const state = createState(!dp.state.isActive)
-      listener(undefined, state)
+      if (dp.state.isActive) {
+        dp.close()
+      } else {
+        dp.open()
+      }
     },
     state: createState(),
     _popper: createPopper(datepickerElRef, datepickerDialogElRef, {
