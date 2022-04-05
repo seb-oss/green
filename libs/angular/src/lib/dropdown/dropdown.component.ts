@@ -21,6 +21,7 @@ import {
   ExtendedDropdownOption,
   ElementProps,
   DropdownArgs,
+  dropdownValues,
 } from '@sebgroup/extract'
 
 @Component({
@@ -38,7 +39,7 @@ import {
         [class]="toggler?.classes"
         (click)="handler?.toggle()"
       >
-        {{ dropdown?.text }}
+        <span>{{ dropdown?.text }}</span>
       </button>
       <div
         #listboxRef
@@ -119,8 +120,8 @@ export class NggDropdownComponent
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
-  toggler?: Partial<ElementProps>
-  listbox?: Partial<ElementProps>
+  toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
 
   constructor(private cd: ChangeDetectorRef) {}
 
