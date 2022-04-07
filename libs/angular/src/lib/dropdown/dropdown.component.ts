@@ -38,6 +38,9 @@ import {
         [attr.aria-labelledby]="
           label ? toggler?.attributes?.id + '_info' : null
         "
+        [attr.aria-describedby]="
+          label ? toggler?.attributes?.id + '_info' : null
+        "
         type="button"
         #togglerRef
         [id]="toggler?.attributes?.id"
@@ -48,9 +51,14 @@ import {
         [style]="toggler?.attributes?.style"
         [class]="toggler?.classes"
         (click)="handler?.toggle()"
+        [class.is-valid]="valid"
+        [class.is-invalid]="invalid"
       >
         <span>{{ dropdown?.text }}</span>
       </button>
+      <span class="form-info" [attr.id]="toggler?.attributes?.id + '_info'"
+        ><ng-content select="[data-form-info]"></ng-content
+      ></span>
       <div
         #listboxRef
         [id]="listbox?.attributes?.id"
@@ -102,6 +110,8 @@ export class NggDropdownComponent
   @Input() loop?: boolean = false
   @Input() label?: string
   @Input() options: DropdownOption[] = []
+  @Input() valid?: boolean
+  @Input() invalid?: boolean
 
   @Input()
   get value(): any {
