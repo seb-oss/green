@@ -114,3 +114,23 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
   </div>
 </Canvas>
 
+### Dropdown with form group and validation
+<Canvas>
+  <div>
+    <div class="form-group">
+      <span class="label" id="dropdown1_label">Label</span>
+      <button type="button" aria-labelledby="dropdown1_label" aria-describedby="dropdown1_info" aria-haspopup="listbox">Option 2</button>
+      <span class="form-info" id="dropdown1_info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <span class="label" id="dropdown2_label">Label</span>
+      <button type="button" aria-labelledby="dropdown2_label" aria-describedby="dropdown2_info" aria-haspopup="listbox" class="is-valid">Option 2</button>
+      <span class="form-info" id="dropdown2_info">Valid</span>
+    </div>
+    <div class="form-group">
+      <span class="label" id="dropdown3_label">Label</span>
+      <button type="button" aria-labelledby="dropdown3_label" aria-describedby="dropdown3_info" aria-haspopup="listbox" class="is-invalid">Option 2</button>
+      <span class="form-info" id="dropdown3_info">Error</span>
+    </div>
+  </div>
+</Canvas>
