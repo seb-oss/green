@@ -63,7 +63,7 @@ $popover-bg: tokens.$elevation-1-bg;
   background-color: $popover-bg;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: flex-end;
   opacity: 0;
   position: fixed;
   visibility: hidden;
@@ -105,6 +105,7 @@ $popover-bg: tokens.$elevation-1-bg;
 
   .close {
     flex-shrink: 0;
+    align-self: flex-end;
   }
 }
 @mixin select {
