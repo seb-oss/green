@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.7...@sebgroup/green-react@1.0.0-beta.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* 🐛 Updated documentation ([05537d5](https://github.com/sebgroup/green/commit/05537d55b48271764abbc108b01d124728e58c62))
+* **dropdown:** use type button (prevent form submit) ([49075db](https://github.com/sebgroup/green/commit/49075db950349a033469c5c7d8a86fddfcf2e867))
+
+
+### Features
+
+* 🎸 added radio-btn validation ([aa6131d](https://github.com/sebgroup/green/commit/aa6131dc7bcecbee9a94072f9b97be8dc8e4d741))
+* 🎸 Started adding react support for changes ([867f869](https://github.com/sebgroup/green/commit/867f869fc091a658630ab864486b5e14fcb83b10))
+
+
+
 # [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.6...@sebgroup/green-react@1.0.0-beta.7) (2022-03-24)
 
 
