@@ -53,3 +53,34 @@
 </div>
 <div>Value: {{ dropdownValue3 | json }}</div>
 <div>Value: {{ dropdownValue4 | json }}</div>
+
+<h3 class="my-4">Form group and validation</h3>
+<form [formGroup]="dropdownForm" #ngForm="ngForm" (submit)="save()">
+  <div class="form-group" *ngIf="dropdownForm.get('select1') as select1">
+    <ngg-dropdown
+      label="Favorite food"
+      [options]="options"
+      formControlName="select1"
+      text="Select"
+      [valid]="select1.valid && ngForm.submitted"
+      [invalid]="select1.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select favorite food</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="select1.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']"
+            >Select favorite food</ng-container
+          >
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button type="submit" [disabled]="ngForm.submitted && dropdownForm.invalid">
+    Save
+  </button>
+</form>

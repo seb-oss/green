@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 
 @Component({
   selector: 'green-dropdown',
@@ -38,7 +38,7 @@ export class DropdownComponent {
   ]
 
   dropdownForm = this._fb.group({
-    select1: undefined,
+    select1: [undefined, [Validators.required]],
     select2: 'pizza',
   })
 
@@ -49,4 +49,8 @@ export class DropdownComponent {
   dropdownValue4 = 'tacos'
 
   constructor(private _fb: FormBuilder) {}
+
+  save() {
+    console.log(this.dropdownForm.value)
+  }
 }
