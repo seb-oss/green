@@ -29,6 +29,7 @@ import {
   template: `
     <div>
       <button
+        type="button"
         #togglerRef
         [id]="toggler?.attributes?.id"
         [attr.aria-haspopup]="toggler?.attributes?.['aria-haspopup']"
@@ -53,6 +54,7 @@ import {
         [class]="listbox?.classes"
       >
         <button
+          type="button"
           class="close m-4 m-sm-2 d-block d-sm-none"
           (click)="handler?.close()"
         >
