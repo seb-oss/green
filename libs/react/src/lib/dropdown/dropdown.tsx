@@ -23,7 +23,9 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
 
   return (
     <div>
-      <button {...togglerProps} ref={togglerRef} />
+      <button {...togglerProps} ref={togglerRef}>
+        <span>{togglerProps.children}</span>
+      </button>
       <div {...listboxProps} ref={listboxRef}>
         <button
           className="close m-4 m-sm-2 d-block d-sm-none"
