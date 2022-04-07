@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.7...@sebgroup/extract@1.0.0-beta.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* **dropdown:** body-scroll-lock and styling ([b12a834](https://github.com/sebgroup/green/commit/b12a8344a6c5f87a05cac0cd76e5765451827234))
+
+
+
 # [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.6...@sebgroup/extract@1.0.0-beta.7) (2022-03-24)
 
 
