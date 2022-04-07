@@ -28,7 +28,16 @@ import {
   selector: 'ngg-dropdown',
   template: `
     <div>
+      <span
+        class="label"
+        *ngIf="label"
+        [id]="toggler?.attributes?.id + '_label'"
+        >{{ label }}</span
+      >
       <button
+        [attr.aria-labelledby]="
+          label ? toggler?.attributes?.id + '_info' : null
+        "
         type="button"
         #togglerRef
         [id]="toggler?.attributes?.id"
@@ -91,6 +100,7 @@ export class NggDropdownComponent
   @Input() id?: string
   @Input() text?: string
   @Input() loop?: boolean = false
+  @Input() label?: string
   @Input() options: DropdownOption[] = []
 
   @Input()
