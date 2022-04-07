@@ -9,3 +9,5 @@ export {
   ElementProps,
   DropdownArgs,
 } from './types'
+
+export { dropdownValues, optionValues } from './defaultValues'
