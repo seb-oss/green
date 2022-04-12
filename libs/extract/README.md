@@ -72,11 +72,11 @@ export const createCalculator = (
       listener(data)
     },
     pressDigit: (digit) => {
-      data = pressDigit(digit) // pure function
+      data = pressDigit(digit, data) // pure function
       listener(data)
     },
     pressOperator: (operator) => {
-      data = pressOperator(operator) // pure function
+      data = pressOperator(operator, data) // pure function
       listener(data)
     },
   }
