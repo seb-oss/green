@@ -1,11 +1,99 @@
 # `@sebgroup/extract`
 
-> TODO: description
+Extract is where all the business logic of Green components lives so that it
+can be shared between Angular and React implementations. It is called Extract
+since the normal way of creating a component is within Angular and React and
+then extracting the common logic.
 
-## Usage
+## Patterns for common components
 
+### The look
+
+Step one is always creating CSS and HTML for your component in Chlorophyll.
+We use Storybook to visualise the component in various states so that we can
+track progress and continuously check that it adheres to design guidelines.
+Read more in https://github.com/sebgroup/green/libs/chlorophyll
+
+### Interaction and data
+
+A common component consists of two parts: An interaction object and the data.
+Let's look at these through an example.
+
+```typescript
+type Operator = '+' | '-' | '*' | '/' | '='
+type Digit = number | '.'
+type Press = Operator | Digit
+
+export interface Calculator {
+  pressDigit: (digit: Digit) => void
+  pressOperator: (operator: Operator) => void
+  clear: () => void
+}
+
+export interface CalculatorData {
+  currentValue: number
+  numpad: Digit[][]
+  operators: string[]
+  presses: Press[]
+}
 ```
-const extract = require('@sebgroup/extract');
 
-// TODO: DEMONSTRATE API
+These are the components we will be interacting with. The `Calculator` instance
+will be persistent and allows us to interact while the `CalculatorData` is
+changed on every interaction and allows us to render our component.
+
+Now, lets create out Calculator.
+
+```typescript
+export interface CalculatorOptions {
+  containerEl: HTMLElement
+}
+
+export const createCalculator = (
+  listener: (data: CalculatorData) => void,
+  options: CalculatorOptions
+): Calculator => {
+  // Create initial data
+  let data: CalculatorData = {
+    currentValue: 0,
+    numpad: [
+      [7, 8, 9],
+      [4, 5, 6],
+      [1, 2, 3],
+      [0, '.'],
+    ],
+    operators: ['/', '*', '-', '+', '='],
+  }
+
+  // Create interaction object
+  const calculator: Calculator = {
+    clear: () => {
+      data = clear(data) // pure function
+      listener(data)
+    },
+    pressDigit: (digit) => {
+      data = pressDigit(digit) // pure function
+      listener(data)
+    },
+    pressOperator: (operator) => {
+      data = pressOperator(operator) // pure function
+      listener(data)
+    },
+  }
+
+  // Add keyboard interactions to element
+  // options.containerEl
+
+  // Call listener with initial data
+  listener(data)
+}
 ```
+
+All interactions with the calculator is done through pure functions with no
+side effects. These are easily testable. They result in an updated data model
+which is communicated to the framewoek of choice. This is easily bindable.
+
+## And then...
+
+This is work in progress. Please reah out to us for clarifications or suggested
+improvements!
