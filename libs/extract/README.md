@@ -72,11 +72,11 @@ export const createCalculator = (
       listener(data)
     },
     pressDigit: (digit) => {
-      data = pressDigit(digit, data) // pure function
+      data = pressDigit(data, digit) // reducer
       listener(data)
     },
     pressOperator: (operator) => {
-      data = pressOperator(operator, data) // pure function
+      data = pressOperator(data, operator) // reducer
       listener(data)
     },
   }
@@ -90,8 +90,10 @@ export const createCalculator = (
 ```
 
 All interactions with the calculator is done through pure functions with no
-side effects. These are easily testable. They result in an updated data model
-which is communicated to the framewoek of choice. This is easily bindable.
+side effects using a reducer pattern (basically a data structure goes in and
+a new, changed data structure comes out). These are easily testable. The
+resulting updated data model is communicated to the framewoek of choice which
+can then re-render making it easily bindable.
 
 ## And then...
 
