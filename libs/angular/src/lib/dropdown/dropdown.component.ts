@@ -153,7 +153,7 @@ export class NggDropdownComponent
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
 
-          const selected = this.dropdown.options.find(
+          const selected = this.dropdown.options?.find(
             (option) => option.selected
           )
           if (selected && this._value !== selected?.value) {
@@ -201,7 +201,7 @@ export class NggDropdownComponent
 
   private get props(): DropdownArgs {
     return {
-      id: this.id,
+      id: this.id || this.dropdown?.id,
       text: this.text,
       options: this.options,
       loop: this.loop,
@@ -213,7 +213,7 @@ export class NggDropdownComponent
     if (this._value !== value) {
       this._value = value
 
-      const selected = this.handler?.dropdown.options.find(
+      const selected = this.handler?.dropdown?.options.find(
         (option) => option.value === value
       )
       if (selected) this.handler?.select(selected)
