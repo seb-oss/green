@@ -3,6 +3,7 @@ import { randomId } from '../id'
 import reduce from '../reduce'
 import {
   AbstractDropdown,
+  DropdownArgs,
   DropdownOption,
   ExtendedDropdownOption,
 } from './types'
@@ -46,18 +47,19 @@ const extendOptions = (
 ): ExtendedDropdownOption[] =>
   options.map((option, ix) => extendOption(id, option, ix))
 
-interface DropdownArgs {
-  id?: string
-  options: DropdownOption[]
-  loop?: boolean
-  text?: string
-}
 export const create = ({
   id = randomId(),
   text,
   options: _options,
   loop,
+  value,
 }: DropdownArgs): AbstractDropdown => {
+  if (value) {
+    _options = _options.map((option) => ({
+      ...option,
+      selected: option.value === value,
+    }))
+  }
   const options = extendOptions(_options, id)
   const selected = options.find((option) => option.selected)
   const dropdown: Partial<AbstractDropdown> = {
