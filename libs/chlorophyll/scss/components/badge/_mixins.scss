@@ -45,7 +45,7 @@ $close-icon-thickness: 3px;
   background: var(--background);
   border-radius: $border-radius;
   color: var(--color);
-  display: flex;
+  display: inline-flex;
   @include common.padding-vertical(2);
   @include common.padding-horizontal(3);
 
