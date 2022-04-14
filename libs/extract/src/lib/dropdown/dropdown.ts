@@ -17,6 +17,7 @@ import {
   DropdownListener,
   DropdownArgs,
 } from './types'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 export const createDropdown = (
   init: DropdownArgs,
@@ -91,9 +92,15 @@ export const createDropdown = (
     handler.subscription?.unsubscribe()
     handler.popper?.destroy()
     handler.isAlive = false
+
+    const scrollableListbox = handler.listbox.querySelector('ul')
+    scrollableListbox && enableBodyScroll(scrollableListbox)
   }
 
   pop(handler, listener)
+
+  // Trigger initial render
+  listener(handler.dropdown)
 
   return handler
 }
@@ -108,6 +115,15 @@ const update = async (
   const oldState = handler.dropdown
   if (newState) handler.dropdown = newState
 
+  if (oldState.isOpen !== handler.dropdown.isOpen) {
+    const scrollableListbox = handler.listbox.querySelector('ul')
+    if (scrollableListbox) {
+      handler.dropdown.isOpen
+        ? disableBodyScroll(scrollableListbox)
+        : enableBodyScroll(scrollableListbox)
+    }
+  }
+
   if (handler.popper) {
     const { styles } = await handler.popper.update()
     if (styles?.popper) {
@@ -119,10 +135,12 @@ const update = async (
       }
     }
   }
+
   if (handler.dropdown !== oldState) {
     listener(handler.dropdown)
   }
 }
+
 const pop = (
   handler: DropdownHandler,
   listener: DropdownListener,

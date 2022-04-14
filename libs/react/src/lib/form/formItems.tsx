@@ -34,32 +34,16 @@ export const FormItems: React.FC<FormItemsProps> = ({ children, validate, name }
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name, type, checked } = event.target
+    let inputValue
     if (type === 'checkbox') {
-      if (checked) {
-        setValues((values: Record<string, any>) => {
-          return {
-            ...values,
-            [name]: { value, checked },
-          }
-        })
-      } else {
-        setValues((values: Record<string, any>) => {
-          return {
-            ...values,
-            [name]: null,
-          }
-        })
-      }
+      inputValue = checked ? value : null
+      checked ? setValues((values: Record<string, any>) => ({ ...values, [name]: value })) : setValues((values: Record<string, any>) => ({ ...values, [name]: null }))
     } else {
-      setValues((values: Record<string, any>) => {
-        return {
-          ...values,
-          [name]: value,
-        }
-      })
+      inputValue = value
+      setValues((values: Record<string, any>) => ({ ...values, [name]: value }))
     }
 
-    validateInputValue({ value, name, type, checked }, validate?.rules as ValidatorRules, setErrors)
+    validateInputValue({ value: inputValue as string, name, type, checked }, validate?.rules as ValidatorRules, setErrors)
   }
 
   return React.cloneElement(children as any, {

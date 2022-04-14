@@ -96,7 +96,7 @@ describe('dropdown', () => {
         document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
         await tick()
 
-        expect(listener).toHaveBeenCalledTimes(1)
+        expect(listener).toHaveBeenCalledTimes(2)
       })
     })
     describe('when active', () => {
@@ -109,8 +109,8 @@ describe('dropdown', () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
           await tick(10)
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
         it('closes open dropdown', async () => {
@@ -118,8 +118,8 @@ describe('dropdown', () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(4)
-          const [dd] = listener.mock.calls[3]
+          expect(listener).toHaveBeenCalledTimes(5)
+          const [dd] = listener.mock.calls[4]
           expect(dd.isOpen).toBe(false)
         })
       })
@@ -131,18 +131,18 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(4)
-          const [dd] = listener.mock.calls[3]
+          expect(listener).toHaveBeenCalledTimes(5)
+          const [dd] = listener.mock.calls[4]
           expect(dd.isOpen).toBe(false)
         })
         it('does nothing to closed dropdown', async () => {
-          expect(listener).toHaveBeenCalledTimes(2)
+          expect(listener).toHaveBeenCalledTimes(3)
           document.dispatchEvent(
             new KeyboardEvent('keydown', { key: 'Escape' })
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(2)
+          expect(listener).toHaveBeenCalledTimes(3)
         })
       })
       describe('Arrow down', () => {
@@ -152,8 +152,8 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
         it('selects first option', async () => {
@@ -162,8 +162,8 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.options[0].selected).toBe(true)
         })
       })
@@ -174,8 +174,8 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
         it('selects first option', async () => {
@@ -184,8 +184,8 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.options[0].selected).toBe(true)
         })
         it('selects last option if looped', async () => {
@@ -195,8 +195,8 @@ describe('dropdown', () => {
           )
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(4)
-          const [dd] = listener.mock.calls[3]
+          expect(listener).toHaveBeenCalledTimes(5)
+          const [dd] = listener.mock.calls[4]
           expect(dd.options[2].selected).toBe(true)
         })
       })
@@ -205,16 +205,16 @@ describe('dropdown', () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
         it('selects first option', async () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.options[0].selected).toBe(true)
         })
       })
@@ -223,16 +223,16 @@ describe('dropdown', () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
         it('selects last option', async () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
           await tick()
 
-          expect(listener).toHaveBeenCalledTimes(3)
-          const [dd] = listener.mock.calls[2]
+          expect(listener).toHaveBeenCalledTimes(4)
+          const [dd] = listener.mock.calls[3]
           expect(dd.options[2].selected).toBe(true)
         })
       })
@@ -253,7 +253,7 @@ describe('dropdown', () => {
       global.dispatchEvent(new UIEvent('resize'))
       await tick()
 
-      expect(listener).toHaveBeenCalledTimes(2)
+      expect(listener).toHaveBeenCalledTimes(3)
       expect(popper.destroy).toHaveBeenCalledTimes(1)
       expect(handler.popper).toBe(undefined)
     })
@@ -261,7 +261,7 @@ describe('dropdown', () => {
       global.innerWidth = 500
       global.dispatchEvent(new UIEvent('resize'))
       await tick()
-      expect(listener).toHaveBeenCalledTimes(2)
+      expect(listener).toHaveBeenCalledTimes(3)
       expect(popper.destroy).toHaveBeenCalledTimes(1)
       expect(handler.popper).toBe(undefined)
 
@@ -269,7 +269,7 @@ describe('dropdown', () => {
       global.dispatchEvent(new UIEvent('resize'))
       await tick(100)
 
-      expect(listener).toHaveBeenCalledTimes(3)
+      expect(listener).toHaveBeenCalledTimes(4)
       expect(createPopper).toHaveBeenCalledTimes(2)
       expect(handler.popper).toBe(popper)
     })

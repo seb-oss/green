@@ -16,7 +16,8 @@
   /* inline child elements on small screens and up unless it's a label
   for form control, which should be positioned on top */
   > {
-    *:not(label:not(.form-control)) {
+    *:not(label:not(.form-control)),
+    *:not(.label:not(.form-control)) {
       @include common.media-breakpoint-up('sm') {
         @include common.margin-end(4);
         display: inline-flex !important;
@@ -32,7 +33,8 @@
         margin-top: 1.625rem;
       }
 
-      label.form-control:last-of-type {
+      label.form-control:last-of-type,
+      .label.form-control:last-of-type {
         padding-right: 0;
       }
 
@@ -59,12 +61,14 @@
   }
 
   // hide form info as it's not positioned correctly
-  &.was-validated .form-group label + .form-info {
+  &.was-validated .form-group label + .form-info,
+  &.was-validated .form-group .label + .form-info {
     opacity: 0;
   }
 
   // place form info first
-  .form-group label + .form-info {
+  .form-group label + .form-info,
+  .form-group .label + .form-info {
     order: 1;
   }
 
@@ -101,12 +105,15 @@
     width: fit-content;
   }
 
-  > input {
+  > input,
+  > button,
+  button[aria-haspopup='listbox'] {
     @include common.margin-bottom(3);
   }
 
   // label
-  label:not(.form-control) {
+  label:not(.form-control),
+  .label:not(.form-control) {
     @include common.font-weight('medium');
     @include common.margin-bottom(3, true);
     display: block !important;

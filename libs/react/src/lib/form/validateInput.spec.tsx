@@ -23,7 +23,7 @@ describe('ValidateInput Function', () => {
   })
 
   it('Should throw error for checked value', () => {
-    args.target = { name: 'text', value: 'value', type: 'checkbox', checked: false }
+    args.target = { name: 'text', value: null, type: 'checkbox', checked: false }
     expect(validateInputValue(args.target, args.rules, args.setError)).not.toBe(null)
   })
 

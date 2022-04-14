@@ -1,6 +1,11 @@
 @use 'mixins';
 @forward 'mixins';
 
+// dependencies
+@use '../../components/list';
+@use '../../components/close';
+@use '../../components/utility';
+
 button[aria-haspopup='listbox'] {
   @include mixins.dropdown-trigger();
 }

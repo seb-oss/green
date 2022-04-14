@@ -2,6 +2,18 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.7...@sebgroup/green-angular@1.0.0-beta.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* **angular:** dropdown experimental support for validation ([bc452a1](https://github.com/sebgroup/green/commit/bc452a101884a7b71ffaf953a19717d8aeb66247))
+* **angular:** dropdown support for label ([1754f7c](https://github.com/sebgroup/green/commit/1754f7ce746844e7364c859fa6ad2dc55d74d9b4))
+* **dropdown:** body-scroll-lock and styling ([b12a834](https://github.com/sebgroup/green/commit/b12a8344a6c5f87a05cac0cd76e5765451827234))
+* **dropdown:** use type button (prevent form submit) ([49075db](https://github.com/sebgroup/green/commit/49075db950349a033469c5c7d8a86fddfcf2e867))
+
+
+
 # [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.6...@sebgroup/green-angular@1.0.0-beta.7) (2022-03-24)
 
 

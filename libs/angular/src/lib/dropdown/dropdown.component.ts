@@ -21,13 +21,27 @@ import {
   ExtendedDropdownOption,
   ElementProps,
   DropdownArgs,
+  dropdownValues,
 } from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-dropdown',
   template: `
     <div>
+      <span
+        class="label"
+        *ngIf="label"
+        [id]="toggler?.attributes?.id + '_label'"
+        >{{ label }}</span
+      >
       <button
+        [attr.aria-labelledby]="
+          label ? toggler?.attributes?.id + '_info' : null
+        "
+        [attr.aria-describedby]="
+          label ? toggler?.attributes?.id + '_info' : null
+        "
+        type="button"
         #togglerRef
         [id]="toggler?.attributes?.id"
         [attr.aria-haspopup]="toggler?.attributes?.['aria-haspopup']"
@@ -37,9 +51,14 @@ import {
         [style]="toggler?.attributes?.style"
         [class]="toggler?.classes"
         (click)="handler?.toggle()"
+        [class.is-valid]="valid"
+        [class.is-invalid]="invalid"
       >
-        {{ dropdown?.text }}
+        <span>{{ dropdown?.text }}</span>
       </button>
+      <span class="form-info" [attr.id]="toggler?.attributes?.id + '_info'"
+        ><ng-content select="[data-form-info]"></ng-content
+      ></span>
       <div
         #listboxRef
         [id]="listbox?.attributes?.id"
@@ -52,6 +71,7 @@ import {
         [class]="listbox?.classes"
       >
         <button
+          type="button"
           class="close m-4 m-sm-2 d-block d-sm-none"
           (click)="handler?.close()"
         >
@@ -88,7 +108,10 @@ export class NggDropdownComponent
   @Input() id?: string
   @Input() text?: string
   @Input() loop?: boolean = false
+  @Input() label?: string
   @Input() options: DropdownOption[] = []
+  @Input() valid?: boolean
+  @Input() invalid?: boolean
 
   @Input()
   get value(): any {
@@ -119,8 +142,8 @@ export class NggDropdownComponent
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
-  toggler?: Partial<ElementProps>
-  listbox?: Partial<ElementProps>
+  toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
 
   constructor(private cd: ChangeDetectorRef) {}
 

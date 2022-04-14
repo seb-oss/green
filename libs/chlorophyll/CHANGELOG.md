@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.7...@sebgroup/chlorophyll@1.0.0-beta.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* 🐛 Updated documentation ([05537d5](https://github.com/sebgroup/green/commit/05537d55b48271764abbc108b01d124728e58c62))
+* **dropdown:** add sass dependencies ([cd77677](https://github.com/sebgroup/green/commit/cd77677989fece72cbc8980deb39569c95fd5088)), closes [#448](https://github.com/sebgroup/green/issues/448)
+* **dropdown:** add styles for label and validation ([12c5648](https://github.com/sebgroup/green/commit/12c56488e1461290253b1b108c539b2f3f97ed24))
+* **dropdown:** body-scroll-lock and styling ([b12a834](https://github.com/sebgroup/green/commit/b12a8344a6c5f87a05cac0cd76e5765451827234))
+* update default token value for font location ([ca8c983](https://github.com/sebgroup/green/commit/ca8c9837f00c8047c6458b441eb80b1c04cbf42e)), closes [#450](https://github.com/sebgroup/green/issues/450)
+
+
+### Performance Improvements
+
+* scoping with `.use-green` ([ac96d7d](https://github.com/sebgroup/green/commit/ac96d7d3c56b4a329b2a19a16659f5b35942630b))
+
+
+
 # [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.6...@sebgroup/chlorophyll@1.0.0-beta.7) (2022-03-24)
 
 

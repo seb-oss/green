@@ -6,7 +6,12 @@ describe('Modal', () => {
   const MockModal = () => {
     const [toggle, setToggle] = useState(true)
     return (
-      <Modal isOpen={toggle} onClose={() => setToggle(false)}>
+      <Modal
+        isOpen={toggle}
+        onClose={() => setToggle(false)}
+        dismiss="Dismiss"
+        confirm="Confirm"
+      >
         This is a modal body
       </Modal>
     )
@@ -35,10 +40,24 @@ describe('Modal', () => {
     expect(screen.getByText('Ok')).toBeInTheDocument()
   })
 
-  it('Should close modal', () => {
+  it('Should close modal with header close button click', () => {
     render(<MockModal />)
     expect(screen.getByText('This is a modal body')).toBeInTheDocument()
     fireEvent.click(screen.getByText('Close'))
+    expect(screen.queryByText('This is a modal body')).toBe(null)
+  })
+
+  it('Should close modal when footer confirm button click', () => {
+    render(<MockModal />)
+    expect(screen.getByText('This is a modal body')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Confirm'))
+    expect(screen.queryByText('This is a modal body')).toBe(null)
+  })
+
+  it('Should close modal when footer dismiss button click', () => {
+    render(<MockModal />)
+    expect(screen.getByText('This is a modal body')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Dismiss'))
     expect(screen.queryByText('This is a modal body')).toBe(null)
   })
 
