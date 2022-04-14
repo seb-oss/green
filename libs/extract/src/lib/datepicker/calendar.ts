@@ -69,7 +69,7 @@ export const createCalendar = (
       if (showWeeks) {
         const weekNumber = getWeek(currentDay)
         weekNumbers = [...(weekNumbers || []), weekNumber]
-    }
+      }
     }
     currentWeek.push({
       date: useCurrentTime
@@ -87,7 +87,7 @@ export const createCalendar = (
   }
 
   // create headers for weekdays
-  let headers = <CalendarHeader[]>weekdays({ locale }).map((day) => ({
+  let headers = <CalendarHeader[]>weekdays(locale).map((day) => ({
     abbr: day.long,
     displayText: day.short,
     type: 'day',

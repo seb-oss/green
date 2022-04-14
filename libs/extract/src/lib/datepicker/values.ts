@@ -15,18 +15,12 @@ interface DateTimeFormatOptions {
   locale: string
 }
 
-type WeekFormat = 'long' | 'narrow' | 'short'
-export interface WeekFormatOptions extends DateTimeFormatOptions {
-  format: WeekFormat
-}
 type Days = [Day, Day, Day, Day, Day, Day, Day]
 interface Day {
   long: string
   short: string
 }
-export const weekdays = ({
-  locale = navigator.language,
-}: Partial<WeekFormatOptions>): Days => {
+export const weekdays = (locale = navigator.language): Days => {
   // eslint-disable-next-line no-sparse-arrays
   const week = Array(7)
     .fill(null)
