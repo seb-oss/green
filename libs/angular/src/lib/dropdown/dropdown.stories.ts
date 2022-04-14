@@ -10,7 +10,6 @@ import {
 } from '@angular/forms'
 import { NggDropdownModule } from './dropdown.module'
 import { NggDropdownComponent } from './dropdown.component'
-import { DropdownComponent } from '../../../../../apps/angular-lib-dev/src/app/dropdown/dropdown.component'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
 
@@ -47,8 +46,8 @@ Select.args = {
   ],
 }
 
-const FormControlTemplate: Story<DropdownComponent> = (
-  args: DropdownComponent
+const FormControlTemplate: Story<NggDropdownComponent> = (
+  args: NggDropdownComponent
 ) => {
   const validationForm = new FormGroup({
     country: new FormControl(undefined, [Validators.required]),
@@ -142,7 +141,7 @@ const FormControlTemplate: Story<DropdownComponent> = (
   }
 
   return {
-    component: DropdownComponent,
+    component: NggDropdownComponent,
     template: `
       <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save(validationForm.value)">
   <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
