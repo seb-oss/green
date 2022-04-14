@@ -1,94 +1,89 @@
-import { weekdays, months, WeekFormatOptions, MonthFormatOptions } from './values'
+import { weekdays, months, MonthFormatOptions } from './values'
 describe('datepicker/values', () => {
   describe('weekdays', () => {
     it('returns long names for swedish', () => {
-      const options: WeekFormatOptions = {
-        locale: 'sv-SE',
-        format: 'long',
-      }
-      expect(weekdays(options)).toEqual([
-        'måndag',
-        'tisdag',
-        'onsdag',
-        'torsdag',
-        'fredag',
-        'lördag',
-        'söndag',
-      ])
-    })
-    it('returns short names for swedish', () => {
-      const options: WeekFormatOptions = {
-        locale: 'sv-SE',
-        format: 'short',
-      }
-      expect(weekdays(options)).toEqual([
-        'mån',
-        'tis',
-        'ons',
-        'tors',
-        'fre',
-        'lör',
-        'sön',
-      ])
-    })
-    it('returns narrow names for swedish', () => {
-      const options: WeekFormatOptions = {
-        locale: 'sv-SE',
-        format: 'narrow',
-      }
-      expect(weekdays(options)).toEqual([
-        'M',
-        'T',
-        'O',
-        'T',
-        'F',
-        'L',
-        'S',
+      expect(weekdays('sv-SE')).toEqual([
+        {
+          long: 'Måndag',
+          short: 'Mån',
+        },
+        {
+          long: 'Tisdag',
+          short: 'Tis',
+        },
+        {
+          long: 'Onsdag',
+          short: 'Ons',
+        },
+        {
+          long: 'Torsdag',
+          short: 'Tors',
+        },
+        {
+          long: 'Fredag',
+          short: 'Fre',
+        },
+        {
+          long: 'Lördag',
+          short: 'Lör',
+        },
+        {
+          long: 'Söndag',
+          short: 'Sön',
+        },
       ])
     })
     it('returns long names for english', () => {
-      const options: WeekFormatOptions = {
-        locale: 'en-US',
-        format: 'long',
-      }
-      expect(weekdays(options)).toEqual([
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
+      expect(weekdays('en-US')).toEqual([
+        {
+          long: 'Monday',
+          short: 'Mon',
+        },
+        {
+          long: 'Tuesday',
+          short: 'Tue',
+        },
+        {
+          long: 'Wednesday',
+          short: 'Wed',
+        },
+        {
+          long: 'Thursday',
+          short: 'Thu',
+        },
+        {
+          long: 'Friday',
+          short: 'Fri',
+        },
+        {
+          long: 'Saturday',
+          short: 'Sat',
+        },
+        {
+          long: 'Sunday',
+          short: 'Sun',
+        },
       ])
     })
-    it('returns short names for english', () => {
-      const options: WeekFormatOptions = {
+  })
+  describe('months', () => {
+    it('returns long names for swedish', () => {
+      const options: Partial<MonthFormatOptions> = {
         locale: 'en-US',
-        format: 'short',
       }
-      expect(weekdays(options)).toEqual([
-        'Mon',
-        'Tue',
-        'Wed',
-        'Thu',
-        'Fri',
-        'Sat',
-        'Sun',
-      ])
-    })
-    it('returns narrow names for english', () => {
-      const options: WeekFormatOptions = {
-        locale: 'en-US',
-        format: 'narrow',
-      }
-      expect(weekdays(options)).toEqual([
-        'M',
-        'T',
-        'W',
-        'T',
-        'F',
-        'S',
-        'S',
+      expect(months(options)).toEqual([
+        { key: 'January', value: 0 },
+        { key: 'February', value: 1 },
+        { key: 'March', value: 2 },
+        { key: 'April', value: 3 },
+        { key: 'May', value: 4 },
+        { key: 'June', value: 5 },
+        { key: 'July', value: 6 },
+        { key: 'August', value: 7 },
+        { key: 'September', value: 8 },
+        { key: 'October', value: 9 },
+        { key: 'November', value: 10 },
+        { key: 'December', value: 11 },
       ])
     })
   })
@@ -99,18 +94,18 @@ describe('datepicker/values', () => {
         format: 'long',
       }
       expect(months(options)).toEqual([
-        'januari',
-        'februari',
-        'mars',
-        'april',
-        'maj',
-        'juni',
-        'juli',
-        'augusti',
-        'september',
-        'oktober',
-        'november',
-        'december',
+        { key: 'Januari', value: 0 },
+        { key: 'Februari', value: 1 },
+        { key: 'Mars', value: 2 },
+        { key: 'April', value: 3 },
+        { key: 'Maj', value: 4 },
+        { key: 'Juni', value: 5 },
+        { key: 'Juli', value: 6 },
+        { key: 'Augusti', value: 7 },
+        { key: 'September', value: 8 },
+        { key: 'Oktober', value: 9 },
+        { key: 'November', value: 10 },
+        { key: 'December', value: 11 },
       ])
     })
   })
