@@ -45,7 +45,7 @@ const extendOptions = (
   options: DropdownOption[],
   id: string
 ): ExtendedDropdownOption[] =>
-  options.map((option, ix) => extendOption(id, option, ix))
+  options?.map((option, ix) => extendOption(id, option, ix))
 
 export const create = ({
   id = randomId(),
@@ -55,13 +55,13 @@ export const create = ({
   value,
 }: DropdownArgs): AbstractDropdown => {
   if (value) {
-    _options = _options.map((option) => ({
+    _options = _options?.map((option) => ({
       ...option,
       selected: option.value === value,
     }))
   }
   const options = extendOptions(_options, id)
-  const selected = options.find((option) => option.selected)
+  const selected = options?.find((option) => option.selected)
   const dropdown: Partial<AbstractDropdown> = {
     id,
     text: selected?.key || text || 'dropdown',
