@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Badge from './badge'
+
+export const Template = ({ ...props }) => <Badge {...props} />
+
+<Meta title="Components/Badge" component={Badge} />
+
+# Badge
+
+Simple Badge Component
+
+<Story
+  name="Badge"
+  args={{
+    title: 'Primary',
+    badgeType: 'info',
+    isCloseable: false,
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+#
+
+### Types
+
+Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
+
+<Canvas>
+  <Badge title="Badge" />
+  <Badge title="Information" badgeType="info" />
+  <Badge title="Information" badgeType="success" />
+  <Badge title="Information" badgeType="warning" />
+  <Badge title="Information" badgeType="danger" />
+  <Badge title="Information" badgeType="light" />
+  <Badge title="Information" badgeType="dark" />
+</Canvas>
+
+### Dismissible Badges
+
+Badges that can be dismissed/removed
+
+<Canvas>
+  <Badge title="Badge" isCloseable />
+  <Badge title="Information" badgeType="info" isCloseable />
+  <Badge title="Information" badgeType="success" isCloseable />
+  <Badge title="Information" badgeType="warning" isCloseable />
+  <Badge title="Information" badgeType="danger" isCloseable />
+  <Badge title="Information" badgeType="light" isCloseable />
+  <Badge title="Information" badgeType="dark" isCloseable />
+</Canvas>
