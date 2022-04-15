@@ -2,6 +2,28 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.8...@sebgroup/green-react@1.0.0-beta.9) (2022-04-15)
+
+
+### Bug Fixes
+
+* 🐛 Fixed state handling in React ([0ad52a9](https://github.com/sebgroup/green/commit/0ad52a97a9c921342bf17eccb341a1b4ea43b4b9))
+* **datepicker:** add calendar icon ([19b8599](https://github.com/sebgroup/green/commit/19b8599e77269d1c4cc5d180c4f6547b0d84d45f))
+* **react:** datepicker add year and month dropdown ([eeffbad](https://github.com/sebgroup/green/commit/eeffbad769f0f9eb3b89304f859b92f66201f70f))
+
+
+### Features
+
+* 🎸 add badge component with tests ([1202a31](https://github.com/sebgroup/green/commit/1202a31c643c52e7e116021ad6708e7e73ab75be))
+* 🎸 Added formatted dates ([67ed1cb](https://github.com/sebgroup/green/commit/67ed1cbff27beb07da18579e6061ea3a392a9c59))
+* 🎸 React - New elementReferences and updated HTML ([0c9f001](https://github.com/sebgroup/green/commit/0c9f001dc536531849d5c942ee5466590cbdb455))
+* 🎸 Renders datepicker and enabled select ([6e5158d](https://github.com/sebgroup/green/commit/6e5158d28c47a36b361f4a8bd26e5161e3902ffe))
+* 🎸 Utility functions for weeks and months ([49b8a34](https://github.com/sebgroup/green/commit/49b8a34efaa83c52f63a052dec224113b6d1dfd6))
+* **datepicker:** add option for week numbers, fix week days ([83c9ffa](https://github.com/sebgroup/green/commit/83c9ffa3c69dca4f423e561006104140a02fa6ae))
+* **datepicker:** add today ([076b1a4](https://github.com/sebgroup/green/commit/076b1a43774c0e0d3228f1fc73bbc9678b351d25))
+
+
+
 # [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.7...@sebgroup/green-react@1.0.0-beta.8) (2022-04-07)
 
 
