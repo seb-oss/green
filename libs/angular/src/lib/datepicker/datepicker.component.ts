@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnDestroy,
   Output,
   ViewChild,
   EventEmitter,
@@ -40,7 +39,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDatepickerComponent
-  implements ControlValueAccessor, AfterViewInit, OnDestroy
+  implements ControlValueAccessor, AfterViewInit
 {
   get months(): Array<DropdownOption> {
     return this._months
@@ -70,6 +69,8 @@ export class NggDatepickerComponent
   }
   @Input() id?: string = randomId()
   @Input() label?: string
+  @Input() valid?: boolean
+  @Input() invalid?: boolean
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @ViewChild('datepickerDialogElRef') public datepickerDialogElRef:
     | ElementRef<HTMLElement>
@@ -97,8 +98,6 @@ export class NggDatepickerComponent
   private _data: DatepickerData | undefined
 
   constructor(private _cdr: ChangeDetectorRef) {}
-
-  ngOnDestroy(): void {}
 
   writeValue(value: any): void {
     this.value = value
@@ -172,6 +171,5 @@ export class NggDatepickerComponent
     } else {
       throw 'Missing one or more elements...'
     }
-    console.log(this.dp, this.data)
   }
 }

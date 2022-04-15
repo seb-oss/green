@@ -1,8 +1,18 @@
 <div class="form-group">
   <label *ngIf="label" [for]="id">{{ label }}</label>
-  <div class="group" #datepickerElRef>
+  <div
+    class="group"
+    #datepickerElRef
+    [class.is-valid]="valid"
+    [class.is-invalid]="invalid"
+  >
     <input
       [attr.id]="id"
+      [attr.aria-describedby]="
+        formInfo?.innerText && formInfo.innerText.length > 0
+          ? id + '_info'
+          : null
+      "
       type="text"
       placeholder="yyyy-mm-dd"
       #dateInputElRef
@@ -18,7 +28,9 @@
       <i class="sg-icon sg-icon-calendar">Select date</i>
     </button>
   </div>
-  <ng-content></ng-content>
+  <span class="form-info" #formInfo [attr.id]="id + '_info'"
+    ><ng-content select="[data-form-info]"></ng-content
+  ></span>
 </div>
 <!-- TODO: get or set attributes from within datepicker instance (dp) -->
 <div
