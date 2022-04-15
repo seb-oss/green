@@ -98,6 +98,14 @@ $border-color: tokens.$border-color;
     border-radius: inherit;
   }
 
+  // don't grow buttons in groups with inputs
+  input ~ {
+    .button,
+    button {
+      flex-grow: 0;
+    }
+  }
+
   .button,
   button {
     &:not(.primary, .active, [type='submit']) {

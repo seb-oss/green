@@ -34,14 +34,6 @@ and supports all the form directives from the core FormsModule (NgModel) and Rea
 
 <Story id="components-dropdown--select" />
 
-## 2-way binding without forms
-If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
-
-
-```html
-<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
-```
-
 ## Reactive forms
 We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
 if you're dealing with complex or dynamic forms.
@@ -59,6 +51,14 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 <form #dropdownForm="ngForm">
   <ngg-dropdown [(ngModel)]="selected" [options]="options"></ngg-dropdown>
 </form>
+```
+
+## 2-way binding without forms
+If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
+
+
+```html
+<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
 ```
 
 ## Options

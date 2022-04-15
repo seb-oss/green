@@ -36,10 +36,12 @@ import {
       >
       <button
         [attr.aria-labelledby]="
-          label ? toggler?.attributes?.id + '_info' : null
+          label ? toggler?.attributes?.id + '_label' : null
         "
         [attr.aria-describedby]="
-          label ? toggler?.attributes?.id + '_info' : null
+          formInfo?.innerText && formInfo.innerText.length > 0
+            ? toggler?.attributes?.id + '_info'
+            : null
         "
         type="button"
         #togglerRef
@@ -56,7 +58,10 @@ import {
       >
         <span>{{ dropdown?.text }}</span>
       </button>
-      <span class="form-info" [attr.id]="toggler?.attributes?.id + '_info'"
+      <span
+        class="form-info"
+        #formInfo
+        [attr.id]="toggler?.attributes?.id + '_info'"
         ><ng-content select="[data-form-info]"></ng-content
       ></span>
       <div
@@ -193,6 +198,14 @@ export class NggDropdownComponent
 
   registerOnTouched(fn: any): void {
     this.onTouchedFn = fn
+  }
+
+  select(option: ExtendedDropdownOption) {
+    this.handler?.select(option)
+    this._value = option.value
+    this.valueChange.emit(option.value)
+    this.onChangeFn && this.onChangeFn(option.value)
+    this.onTouchedFn && this.onTouchedFn()
   }
 
   trackByKey = (index: number, option: ExtendedDropdownOption): string => {

@@ -141,6 +141,6 @@ export class DropdownComponent {
   constructor(private _fb: FormBuilder) {}
 
   save() {
-    console.log(this.dropdownForm.value)
+    console.log(this.validationForm.value)
   }
 }

@@ -1,0 +1,4 @@
+@use 'mixins';
+i.sg-icon {
+  @include mixins.add-icons;
+}

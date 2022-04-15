@@ -43,6 +43,7 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   background: $button-secondary-bg;
   border-color: $button-secondary-border-color;
   color: $button-secondary-color;
+  --color: #{$button-secondary-color};
 
   &:disabled,
   &.disabled,
@@ -57,6 +58,7 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   background: $button-primary-bg;
   border-color: $button-primary-border-color;
   color: $button-primary-color;
+  --color: #{$button-primary-color};
 
   &:disabled,
   &.disabled,
@@ -81,6 +83,7 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   @include common.add-active-focus-state($ghost-color);
   border-color: $ghost-color;
   color: $ghost-color;
+  --color: #{$ghost-color};
 
   &:disabled,
   &.disabled,

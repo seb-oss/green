@@ -289,6 +289,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   );
   background-color: nth($color-combination, 1);
   color: nth($color-combination, 2);
+  --background: #{nth($color-combination, 1)};
+  --color: #{nth($color-combination, 2)};
 }
 
 // a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false)

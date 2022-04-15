@@ -1,5 +1,5 @@
 // Dropdown.stories.ts
-import DropdownDocumentation from './Dropdown-Documentation.mdx'
+import Documentation from './documentation.mdx'
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 import {
   FormControl,
@@ -23,7 +23,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: DropdownDocumentation,
+      page: Documentation,
     },
   },
 } as Meta<NggDropdownComponent>
