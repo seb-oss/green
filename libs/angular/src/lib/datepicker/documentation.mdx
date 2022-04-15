@@ -59,3 +59,38 @@ If you just need a simple select without any form, validation etc. it's possible
 ```html
   <ngg-datepicker [(value)]="date" label="Date"></ngg-datepicker>
 ```
+
+
+
+## Example usage in reactive form
+
+Below is an example of how the component can be used with reactive forms and validations.
+
+<Story id="components-datepicker--form" />
+
+### Markup
+```html
+<form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
+  <ng-container *ngIf="validationForm.get('date') as date">
+    <ngg-datepicker
+      formControlName="date"
+      label="Date"
+      [valid]="date.valid && ngForm.submitted"
+      [invalid]="date.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']">Select date</ng-container>
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="date.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select a date</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-datepicker>
+  </ng-container>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+    Save
+  </button>
+</form>
+```

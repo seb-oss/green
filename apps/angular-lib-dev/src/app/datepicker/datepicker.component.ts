@@ -18,4 +18,12 @@ export class DatepickerComponent {
   ngModelDateEmpty = ''
   value = new Date()
   valueEmpty = ''
+
+  validationForm = this._fb.group({
+    date: [null, [Validators.required]],
+  })
+
+  save() {
+    console.log(this.validationForm.value)
+  }
 }
