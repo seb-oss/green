@@ -1,5 +1,4 @@
-<h3 class="mb-4">Dropdown</h3>
-
+<h3 class="mb-4">Dropdown (value)</h3>
 <div style="height: 200px" class="border p-4 mb-5 horizontal">
   <ngg-dropdown
     [options]="options"
@@ -17,11 +16,12 @@
     [(value)]="dropdownValue2"
   ></ngg-dropdown>
 </div>
-<div>Value: {{ dropdownValue0 | json }}</div>
-<div>Value: {{ dropdownValue1 | json }}</div>
-<div>Value: {{ dropdownValue2 | json }}</div>
-
-<h3 class="mb-4">Dropdown (FormControl)</h3>
+<code>
+  <div>Value: {{ dropdownValue0 | json }}</div>
+  <div>Value: {{ dropdownValue1 | json }}</div>
+  <div>Value: {{ dropdownValue2 | json }}</div>
+</code>
+<h3 class="mb-4 mt-5">Dropdown (FormControl)</h3>
 <div style="height: 200px" class="border p-4 mb-5">
   <form [formGroup]="dropdownForm" class="horizontal">
     <ngg-dropdown
@@ -36,9 +36,11 @@
     ></ngg-dropdown>
   </form>
 </div>
-<div>Value: {{ dropdownForm.value | json }}</div>
+<code>
+  <div>Value: {{ dropdownForm.value | json }}</div>
+</code>
 
-<h3 class="mb-4 mt-4">Dropdown (NgModel)</h3>
+<h3 class="mb-4 mt-5">Dropdown (NgModel)</h3>
 <div style="height: 200px" class="border p-4 mb-5 horizontal">
   <ngg-dropdown
     [(ngModel)]="dropdownValue3"
@@ -51,36 +53,75 @@
     text="Select"
   ></ngg-dropdown>
 </div>
-<div>Value: {{ dropdownValue3 | json }}</div>
-<div>Value: {{ dropdownValue4 | json }}</div>
 
-<h3 class="my-4">Form group and validation</h3>
-<form [formGroup]="dropdownForm" #ngForm="ngForm" (submit)="save()">
-  <div class="form-group" *ngIf="dropdownForm.get('select1') as select1">
+<code>
+  <div>Value: {{ dropdownValue3 | json }}</div>
+  <div>Value: {{ dropdownValue4 | json }}</div>
+</code>
+
+<h3 class="mb-4 mt-5">Form group and validation</h3>
+<form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
+  <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
     <ngg-dropdown
-      label="Favorite food"
-      [options]="options"
-      formControlName="select1"
+      label="Country"
+      [options]="(options$ | async)!"
+      formControlName="country"
       text="Select"
-      [valid]="select1.valid && ngForm.submitted"
-      [invalid]="select1.invalid && ngForm.submitted"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
     >
       <!-- Hint text when not submitted -->
       <ng-container data-form-info *ngIf="!ngForm['submitted']"
-        >Select favorite food</ng-container
+        >Select country</ng-container
       >
       <ng-container data-form-info *ngIf="ngForm['submitted']">
         <!-- Text when form control contains one or more errors -->
-        <ng-container *ngIf="select1.errors as errors">
+        <ng-container *ngIf="dropdown.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->
-          <ng-container *ngIf="errors['required']"
-            >Select favorite food</ng-container
-          >
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
         </ng-container>
       </ng-container>
     </ngg-dropdown>
   </div>
-  <button type="submit" [disabled]="ngForm.submitted && dropdownForm.invalid">
+  <div
+    class="form-group"
+    *ngIf="validationForm.get('otherCountry') as dropdown"
+  >
+    <ngg-dropdown
+      label="Other country"
+      [options]="(options$ | async)!"
+      formControlName="otherCountry"
+      text="Select"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
+      ><!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="dropdown.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
     Save
   </button>
 </form>
+<code>
+  <h5 class="mb-0">Form data</h5>
+  <div>
+    Submitted: {{ ngForm?.submitted }} Invalid: {{ validationForm?.invalid }}
+  </div>
+  <h5 class="mb-0">Values</h5>
+  <div>
+    {{ validationForm?.value | json }}
+  </div>
+  <h5 class="mb-0">Errors</h5>
+  <div *ngFor="let f of validationForm?.controls | keyvalue">
+    {{ f.key }}:{{ f.value.errors | json }}
+  </div>
+</code>

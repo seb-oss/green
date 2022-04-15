@@ -22,7 +22,7 @@ describe('dropdown/reducers', () => {
       const dropdown = create({ id, options, text })
       expect(dropdown.text).toEqual(text)
     })
-    it('uses defaul option text', () => {
+    it('uses default option text', () => {
       const defaultOption = {
         key: 'C',
         value: 3,
@@ -61,7 +61,16 @@ describe('dropdown/reducers', () => {
           'option',
         ])
       })
-      it('sets option selected', () => {
+      it('sets default option by value', () => {
+        const dropdown = create({ id, options, value: 2 })
+        const optionAttributes = dropdown.options.map((o) => o.attributes)
+
+        expect(optionAttributes.map((o) => o['aria-selected'])).toEqual([
+          undefined,
+          true,
+        ])
+      })
+      it('sets detfault option by selected boolean', () => {
         options[1].selected = true
         const dropdown = create({ id, options })
         const optionAttributes = dropdown.options.map((o) => o.attributes)

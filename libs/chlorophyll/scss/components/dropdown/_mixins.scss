@@ -86,6 +86,7 @@ $popover-bg: tokens.$elevation-1-bg;
     @include common.add-border();
     @include common.add-border-color($border-color);
     @include common.add-border-radius();
+    max-height: 320px;
     box-shadow: $box-shadow;
     min-width: 90px;
     position: absolute;
@@ -93,8 +94,8 @@ $popover-bg: tokens.$elevation-1-bg;
 
   > ul[role='listbox'] {
     width: 100%;
-    max-height: calc(2.75rem * 5);
     overflow-y: auto;
+    scroll-behavior: smooth;
   }
 
   &.active {
