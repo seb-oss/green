@@ -36,10 +36,12 @@ import {
       >
       <button
         [attr.aria-labelledby]="
-          label ? toggler?.attributes?.id + '_info' : null
+          label ? toggler?.attributes?.id + '_label' : null
         "
         [attr.aria-describedby]="
-          label ? toggler?.attributes?.id + '_info' : null
+          formInfo?.innerText && formInfo.innerText.length > 0
+            ? toggler?.attributes?.id + '_info'
+            : null
         "
         type="button"
         #togglerRef
@@ -56,7 +58,10 @@ import {
       >
         <span>{{ dropdown?.text }}</span>
       </button>
-      <span class="form-info" [attr.id]="toggler?.attributes?.id + '_info'"
+      <span
+        class="form-info"
+        #formInfo
+        [attr.id]="toggler?.attributes?.id + '_info'"
         ><ng-content select="[data-form-info]"></ng-content
       ></span>
       <div
