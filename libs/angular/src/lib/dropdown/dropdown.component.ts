@@ -85,7 +85,7 @@ import {
             [attr.aria-selected]="option.attributes['aria-selected']"
             [style]="option.attributes.style"
             [class]="option.classes"
-            (click)="select(option)"
+            (click)="handler?.select(option)"
           >
             {{ option.key }}
           </li>
@@ -118,12 +118,7 @@ export class NggDropdownComponent
     return this._value
   }
   set value(newValue: any) {
-    if (newValue !== this._value) {
-      if (this.options) {
-        this.setSelectionByValue(newValue)
-      }
-      this._value = newValue
-    }
+    this.setSelectionByValue(newValue)
   }
   private _value: any
 
@@ -158,17 +153,20 @@ export class NggDropdownComponent
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
 
-          const selected = this.dropdown.options.find(
+          const selected = this.dropdown.options?.find(
             (option) => option.selected
           )
-          if (this._value !== selected?.value) {
-            this._value = selected?.value
+          if (selected && this._value !== selected?.value) {
+            setTimeout(() => {
+              this._value = selected.value
+              this.valueChange.emit(selected.value)
+              this.onChangeFn && this.onChangeFn(selected.value)
+              this.onTouchedFn && this.onTouchedFn()
+            }, 0)
           }
           this.cd.detectChanges()
         }
       )
-
-      this.setSelectionByValue(this.value)
     }
   }
 
@@ -182,7 +180,6 @@ export class NggDropdownComponent
       (changes.id || changes.text || changes.loop || changes.options)
     ) {
       this.handler.update(this.props)
-      this.setSelectionByValue(this.value)
     }
   }
 
@@ -198,33 +195,28 @@ export class NggDropdownComponent
     this.onTouchedFn = fn
   }
 
-  select(option: ExtendedDropdownOption) {
-    this.handler?.select(option)
-    this._value = option.value
-    this.valueChange.emit(option.value)
-    this.onChangeFn && this.onChangeFn(option.value)
-    this.onTouchedFn && this.onTouchedFn()
-  }
-
   trackByKey = (index: number, option: ExtendedDropdownOption): string => {
     return option.key
   }
 
   private get props(): DropdownArgs {
     return {
-      id: this.id,
+      id: this.id || this.dropdown?.id,
       text: this.text,
       options: this.options,
       loop: this.loop,
+      value: this.value,
     }
   }
 
   private setSelectionByValue(value: any) {
-    if (this.handler && value !== undefined) {
-      const option = this.handler.dropdown.options.find(
+    if (this._value !== value) {
+      this._value = value
+
+      const selected = this.handler?.dropdown?.options.find(
         (option) => option.value === value
       )
-      if (option) this.handler?.select(option)
+      if (selected) this.handler?.select(selected)
     }
   }
 }

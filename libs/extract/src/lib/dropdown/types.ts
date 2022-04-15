@@ -8,8 +8,7 @@ export interface DropdownOption {
   selected?: boolean
 }
 
-export interface ExtendedDropdownOption
-  extends DropdownOption, ElementProps {}
+export interface ExtendedDropdownOption extends DropdownOption, ElementProps {}
 
 export interface Attributes extends AriaAttributes {
   id?: string
@@ -45,6 +44,7 @@ export interface DropdownArgs {
   options: DropdownOption[]
   loop?: boolean
   text?: string
+  value?: any
 }
 
 export interface DropdownHandler {

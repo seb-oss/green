@@ -27,7 +27,7 @@ export class AppModule {}
 ```
 
 ## Dropdown Select
-NggDropdownComponent is a form control for selecting a value from a set of options. 
+NggDropdownComponent is a form control for selecting a value from a set of options.
 
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
 and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
@@ -62,7 +62,7 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 ```
 
 ## Options
-The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected. 
+The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected.
 
 ```typescript
 const options = [
@@ -76,3 +76,43 @@ Set an initial value by assigning the option `value` to the value input or form 
 ## Placeholder
 
 The text input can be used to set a placeholder that will be shown when no value is selected.
+
+
+
+## Example usage in reactive form
+
+Below is an example of how the component can be used with reactive forms and validations.
+
+<Story id="components-dropdown--form" />
+
+
+### Markup
+```html
+<form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
+  <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
+    <ngg-dropdown
+      label="Country"
+      [options]="(options$ | async)!"
+      formControlName="country"
+      text="Select"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="dropdown.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+    Save
+  </button>
+</form>
+```

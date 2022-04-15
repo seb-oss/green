@@ -62,7 +62,9 @@ export const createDropdown = (
         break
       }
       case 'resize': {
-        pop(handler, listener, (event.target as Window).innerWidth)
+        const innerWidth = (event.target as Window).innerWidth
+        lockBodyScroll(handler, innerWidth)
+        pop(handler, listener, innerWidth)
         break
       }
       case 'focusin': {
@@ -116,12 +118,7 @@ const update = async (
   if (newState) handler.dropdown = newState
 
   if (oldState.isOpen !== handler.dropdown.isOpen) {
-    const scrollableListbox = handler.listbox.querySelector('ul')
-    if (scrollableListbox) {
-      handler.dropdown.isOpen
-        ? disableBodyScroll(scrollableListbox)
-        : enableBodyScroll(scrollableListbox)
-    }
+    lockBodyScroll(handler)
   }
 
   if (handler.popper) {
@@ -165,6 +162,18 @@ const pop = (
     })
 
     update(handler, listener, handler.dropdown)
+  }
+}
+
+const lockBodyScroll = (
+  handler: DropdownHandler,
+  width = window.innerWidth
+) => {
+  const scrollableListbox = handler.listbox.querySelector('ul')
+  if (scrollableListbox) {
+    handler.dropdown.isOpen && width < 576
+      ? disableBodyScroll(scrollableListbox)
+      : enableBodyScroll(scrollableListbox)
   }
 }
 
