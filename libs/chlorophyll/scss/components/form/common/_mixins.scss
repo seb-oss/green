@@ -28,6 +28,7 @@
   // form group fieldset (groups of radio buttons or checkboxes)
   .form-group > {
     fieldset {
+      @include common.margin-bottom(0);
       @include common.media-breakpoint-up('sm') {
         margin-bottom: auto;
         margin-top: 1.625rem;
@@ -37,10 +38,16 @@
       .label.form-control:last-of-type {
         padding-right: 0;
       }
+    }
 
-      .form-info {
-        @include common.margin-bottom(3);
-      }
+    input,
+    button,
+    button[aria-haspopup='listbox'] {
+      @include common.margin-bottom(0);
+    }
+
+    .form-info {
+      @include common.margin-top(3);
     }
   }
 
