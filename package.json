@@ -176,6 +176,7 @@
     "yarn-audit-fix": "^9.0.12"
   },
   "resolutions": {
+    "async": "^3.2.2",
     "ansi-regex": "^5.0.1",
     "browserslist": "^4.16.8",
     "ecstatic": "^4.1.4",
