@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.10](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.9...@sebgroup/extract@1.0.0-beta.10) (2022-04-20)
+
+
+### Bug Fixes
+
+* 🐛 Added date-fns dependency ([a3ce28a](https://github.com/sebgroup/green/commit/a3ce28a21b3c6768cc75791c02d5472e0e2faa3e))
+* **datepicker:** keyboard navigation, background scroll, swipe gesture ([a9494ca](https://github.com/sebgroup/green/commit/a9494ca4293fd7c6409016552331d089968db0d5)), closes [#480](https://github.com/sebgroup/green/issues/480) [#479](https://github.com/sebgroup/green/issues/479) [#470](https://github.com/sebgroup/green/issues/470)
+
+
+### Features
+
+* **extract:** add observable for viewport size and mobile viewport ([2fd6864](https://github.com/sebgroup/green/commit/2fd68643ad4dc9e2fea213a3e8ad6022c3020d91))
+
+
+
 # [1.0.0-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.8...@sebgroup/extract@1.0.0-beta.9) (2022-04-15)
 
 
