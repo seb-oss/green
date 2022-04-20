@@ -20,6 +20,7 @@ export const Dropdown = ({ id, options, loop, children }: DropdownProps) => {
     listboxRef,
     text: children,
   })
+  console.log('togglerProps', togglerProps)
 
   return (
     <div>

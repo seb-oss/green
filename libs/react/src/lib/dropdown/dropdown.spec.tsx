@@ -1,7 +1,10 @@
-import { act, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
+import { act, render, RenderResult, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { wait } from '@testing-library/user-event/dist/types/utils'
 import { Dropdown, DropdownProps } from './dropdown'
 
 const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
+jest.setTimeout(50000)
 
 describe('Dropdown', () => {
   let props: DropdownProps
@@ -46,66 +49,78 @@ describe('Dropdown', () => {
     expect(options).toHaveLength(3)
   })
   describe('toggle', () => {
-    it('sets aria-expanded on trigger', async () => {
+    it.only('sets aria-expanded on trigger', async () => {
       // initial
+      const user = userEvent.setup()
       expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
       await act(async () => {
         // open
-        fireEvent.click(toggleButton)
+        console.log('user.click')
+        await user.click(toggleButton)
+        console.log('wait')
+        await tick(1000)
+
         await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
         
         // close
-        fireEvent.click(toggleButton)
+        await user.click(toggleButton)
         await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
       })
     })
-    it('sets class active on listbox', async () => {
+    it.skip('sets class active on listbox', async () => {
+      const user = userEvent.setup()
+
       // initial
       expect(listbox.className).toEqual('popover')
       
       await act(async () => {
         // open
-        fireEvent.click(toggleButton)
+        user.click(toggleButton)
         await waitFor(() => expect(listbox.className).toEqual('popover active'))
         
         // close
-        fireEvent.click(toggleButton)
+        user.click(toggleButton)
         await waitFor(() => expect(listbox.className).toEqual('popover'))
       })
     })
   })
   describe('mouse interaction', () => {
     beforeEach(async () => {
+      const user = userEvent.setup()
       await act(async () => {
-        fireEvent.click(toggleButton)
+        user.tab()
       })
     })
     describe('click option', () => {
-      it('sets aria-selected', async () => {
+      it.skip('sets aria-selected', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.click(options[1])
+          user.click(options[1])
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
         })
       })
-      it('closes dropdown', async () => {
-        await act(async () => {
-          fireEvent.click(options[1])
+      it.skip('closes dropdown', async () => {
+      const user = userEvent.setup()
+      await act(async () => {
+          user.click(options[1])
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
           await waitFor(() => expect(listbox.className).toEqual('popover'))
         })
       })
-      it('sets toggler text', async () => {
-        await act(async () => {
-          fireEvent.click(options[1])
+      it.skip('sets toggler text', async () => {
+      const user = userEvent.setup()
+      await act(async () => {
+          user.click(options[1])
           await waitFor(() => expect(toggleButton.innerHTML.trim()).toEqual('<span>B</span>'))
         })
       })
     })
     describe('click outside', () => {
-      it('closes the dropdown', async () => {
-        await act(async () => {
-          fireEvent.click(document.body)
+      it.skip('closes the dropdown', async () => {
+      const user = userEvent.setup()
+      await act(async () => {
+          user.click(document.body)
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
@@ -113,270 +128,290 @@ describe('Dropdown', () => {
   })
   describe('keyboard navigation', () => {
     describe('Space', () => {
-      it('does nothing when inactive', async () => {
+      it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: ' ' })
+          user.keyboard(' ')
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
-      it('opens when active', async () => {
+      it.skip('opens when active', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: ' ' })
+          user.tab()
+          user.keyboard(' ')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
         })
       })
-      it('closes when open', async () => {
+      it.skip('closes when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.click(toggleButton)
+          user.click(toggleButton)
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
 
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: ' ' })
+          user.keyboard(' ')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
     })
     describe('Escape', () => {
-      it('does nothing when inactive', async () => {
+      it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: 'Escape' })
+          user.keyboard('Escape')
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
-      it('does nothing when not open', async () => {
+      it.skip('does nothing when not open', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
+          user.tab()
+          user.keyboard('Escape')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
-      it('closes when open', async () => {
+      it.skip('closes when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.click(toggleButton)
+          user.tab()
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
 
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'Escape' })
+          user.keyboard('Escape')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
     })
     describe('ArrowDown', () => {
-      it('does nothing when inactive', async () => {
+      it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
-      it('opens when active', async () => {
+      it.skip('opens when active', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.tab()
+          user.keyboard('ArrowDown')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
         })
       })
-      it('selects next when open', async () => {
+      it.skip('selects next when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
+          user.tab()
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
         })
       })
-      it('stops on last when not looping', async () => {
+      it.skip('stops on last when not looping', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
+          user.tab()
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
         })
       })
       it.skip('loops to first when looping', async () => {
+        const user = userEvent.setup()
         props.loop = true
         component.rerender(<Dropdown {...props} />)
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
+          user.tab()
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
         })
       })
     })
     describe('ArrowUp', () => {
-      it('does nothing when inactive', async () => {
+      it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await tick(50)
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         })
       })
-      it('opens when active', async () => {
+      it.skip('opens when active', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.tab()
+          user.keyboard('ArrowUp')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
         })
       })
       it.skip('selects previous when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.tab()
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
         })
       })
       it.skip('stops on first when not looping', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
+          user.tab()
 
           // go to last option
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
           // spam up
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
+          user.keyboard('ArrowUp')
+          user.keyboard('ArrowUp')
+          user.keyboard('ArrowUp')
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
         })
       })
       it.skip('loops to first when looping', async () => {
+        const user = userEvent.setup()
         props.loop = true
         await act(async () => {
-          fireEvent.focus(toggleButton)
+          user.tab()
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[1].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowUp' })
+          user.keyboard('ArrowUp')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
         })
       })
     })
     describe('Home', () => {
-      it('does nothing when inactive', async () => {
+      it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: 'Home' })
+          user.keyboard('Home')
           await tick()
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
         })
       })
-      it('opens and selects first when active', async () => {
+      it.skip('opens and selects first when active', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
+          user.tab()
+          user.keyboard('Home')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
         })
       })
-      it('selects first when open', async () => {
+      it.skip('selects first when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.tab()
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'Home' })
+          user.keyboard('Home')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
         })
       })
     })
     describe('End', () => {
       it.skip('does nothing when inactive', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.keyDown(document, { key: 'End' })
+          user.keyboard('End')
           await tick(10)
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         })
       })
       it.skip('opens and selects last when active', async () => {
+        const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'End' })
+          user.tab()
+          user.keyboard('End')
 
           await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('true'))
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
         })
       })
       it.skip('selects first when open', async () => {
+        const user = userEvent.setup()
         await act(async () => {
-          fireEvent.focus(toggleButton)
-          fireEvent.keyDown(document.activeElement || document, { key: 'ArrowDown' })
+          user.tab()
+          user.keyboard('ArrowDown')
           await waitFor(() => expect(options[0].getAttribute('aria-selected')).toEqual('true'))
 
-          fireEvent.keyDown(document.activeElement || document, { key: 'End' })
+          user.keyboard('End')
           await waitFor(() => expect(options[2].getAttribute('aria-selected')).toEqual('true'))
         })
       })
