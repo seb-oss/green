@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.10](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.9...@sebgroup/chlorophyll@1.0.0-beta.10) (2022-04-20)
+
+
+### Bug Fixes
+
+* **close:** hide text content inside close button ([1f7a7ca](https://github.com/sebgroup/green/commit/1f7a7ca590d30f0f74aab5ad00fa4a4a043a5d18))
+* **datepicker:** improve mobile layout ([fe58ac1](https://github.com/sebgroup/green/commit/fe58ac19120bc988c999fe6edeb6b332f11751c2)), closes [#471](https://github.com/sebgroup/green/issues/471)
+* **form:** margin for form info in horizontal form ([889a186](https://github.com/sebgroup/green/commit/889a186abfb0078bd73ee04fb3675fb9e3cf36bb)), closes [#468](https://github.com/sebgroup/green/issues/468)
+
+
+
 # [1.0.0-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.8...@sebgroup/chlorophyll@1.0.0-beta.9) (2022-04-15)
 
 
