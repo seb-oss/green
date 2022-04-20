@@ -127,7 +127,9 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
                         }
                         role={day.selected ? 'gridcell' : undefined}
                         aria-selected={
-                          day.selected && !data?.highlightedDate ? true : null
+                          day.selected && !data?.highlightedDate
+                            ? true
+                            : undefined
                         }
                         onClick={() => {
                           day.currentMonth && datepicker.select(day.date)
