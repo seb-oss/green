@@ -21,7 +21,7 @@ export function Badge({
     <span {...props} className={`badge ${badgeType}`}>
       <strong>{title}</strong>
       {isCloseable && (
-        <button className="close" onClick={()=>setIsClosed(true)}>
+        <button className="close" onClick={() => setIsClosed(true)}>
           {/* <span className="sr-only">{closeText}</span> */}
         </button>
       )}
