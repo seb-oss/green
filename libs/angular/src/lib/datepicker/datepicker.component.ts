@@ -72,15 +72,13 @@ export class NggDatepickerComponent
   @Input() valid?: boolean
   @Input() invalid?: boolean
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
-  @ViewChild('datepickerDialogElRef') public datepickerDialogElRef:
-    | ElementRef<HTMLElement>
-    | undefined
-  @ViewChild('dateInputElRef') public dateInputElRef:
-    | ElementRef<HTMLInputElement>
-    | undefined
-  @ViewChild('datepickerElRef') public datepickerElRef:
-    | ElementRef<HTMLElement>
-    | undefined
+  @ViewChild('datepickerDialogElRef')
+  public datepickerDialogElRef?: ElementRef<HTMLElement>
+  @ViewChild('dateInputElRef')
+  public dateInputElRef?: ElementRef<HTMLInputElement>
+  @ViewChild('datepickerElRef') public datepickerElRef?: ElementRef<HTMLElement>
+  @ViewChild('datepickerTriggerElRef')
+  public datepickerTriggerElRef?: ElementRef<HTMLButtonElement>
 
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
@@ -144,6 +142,10 @@ export class NggDatepickerComponent
       this.onChangeFn && this.onChangeFn(data.selectedDate)
       this.data = data
     }
+
+    if (data || state) {
+      this._cdr.markForCheck()
+    }
   }
   trackWeek(index: any, week: any) {
     return week
@@ -155,6 +157,7 @@ export class NggDatepickerComponent
       this.datepickerElRef &&
       this.datepickerDialogElRef &&
       this.dateInputElRef &&
+      this.datepickerTriggerElRef &&
       !this.dp
     ) {
       this.dp = createDatepicker(
@@ -165,7 +168,8 @@ export class NggDatepickerComponent
         },
         this.datepickerElRef.nativeElement,
         this.datepickerDialogElRef.nativeElement,
-        this.dateInputElRef.nativeElement
+        this.dateInputElRef.nativeElement,
+        this.datepickerTriggerElRef.nativeElement
       )
       this._cdr.detectChanges()
     } else {

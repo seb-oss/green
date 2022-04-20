@@ -16,6 +16,7 @@ describe('datepicker', () => {
   let datepickerEl: HTMLElement
   let datepickerDialogEl: HTMLElement
   let dateInputEl: HTMLElement
+  let datepickerTriggerEl: HTMLButtonElement
   let listener: DatepickerListener
   let state: DatepickerState
   beforeEach(() => {
@@ -28,6 +29,7 @@ describe('datepicker', () => {
     datepickerEl = document.createElement('div')
     datepickerDialogEl = document.createElement('div')
     dateInputEl = document.createElement('input')
+    datepickerTriggerEl = document.createElement('button')
     listener = jest.fn()
     state = { isActive: false }
   })
@@ -40,7 +42,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       date: now,
@@ -54,7 +57,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       year: 2022,
@@ -68,7 +72,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       year: 2022,
@@ -82,7 +87,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       month: 2,
@@ -96,7 +102,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       day: 4,
@@ -110,7 +117,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       weekday: 'fredag',
@@ -124,7 +132,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<DeepPartial<DatepickerData>>({
       calendar: expect.any(Object),
@@ -140,7 +149,8 @@ describe('datepicker', () => {
       options,
       datepickerEl,
       datepickerDialogEl,
-      dateInputEl
+      dateInputEl,
+      datepickerTriggerEl
     )
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       selectedDate: selected,
@@ -159,7 +169,8 @@ describe('datepicker', () => {
         options,
         datepickerEl,
         datepickerDialogEl,
-        dateInputEl
+        dateInputEl,
+        datepickerTriggerEl
       )
     })
     describe('days', () => {
@@ -266,7 +277,8 @@ describe('datepicker', () => {
         options,
         datepickerEl,
         datepickerDialogEl,
-        dateInputEl
+        dateInputEl,
+        datepickerTriggerEl
       )
     })
     describe('days', () => {
@@ -372,7 +384,8 @@ describe('datepicker', () => {
         options,
         datepickerEl,
         datepickerDialogEl,
-        dateInputEl
+        dateInputEl,
+        datepickerTriggerEl
       )
     })
     it('sets current date', () => {
@@ -400,7 +413,8 @@ describe('datepicker', () => {
         options,
         datepickerEl,
         datepickerDialogEl,
-        dateInputEl
+        dateInputEl,
+        datepickerTriggerEl
       )
     })
     it.skip('sets selectedDate', () => {

@@ -19,6 +19,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
     datepickerRef,
     datepickerDialogRef,
     dateInputRef,
+    datepickerTriggerRef,
     options
   )
   const classNames = (day: CalendarDay) =>
@@ -33,7 +34,6 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
     <>
       <div className="form-group">
         <label htmlFor={id}>Date</label>
-
         <div className="group" ref={datepickerRef}>
           <input
             ref={dateInputRef}
@@ -56,72 +56,94 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
       </div>
       <div
         ref={datepickerDialogRef}
-        className={`sg-date ${state.isActive ? 'active' : ''}`}
+        className={`popover popover-datepicker ${
+          state.isActive ? 'active' : ''
+        }`}
         role="dialog"
         aria-modal="true"
         aria-label="Choose Date"
       >
-        <header>
-          <button className="link" onClick={() => datepicker.sub(1, 'months')}>
-            <i className="sg-icon sg-icon-previous">Previous month</i>
-          </button>
-          <Dropdown options={months({})}>{data.monthName}</Dropdown>
-          <Dropdown options={years({})}>{data.year + ''}</Dropdown>
-          <button className="link" onClick={() => datepicker.add(1, 'months')}>
-            <i className="sg-icon sg-icon-next">Next month</i>
-          </button>
-        </header>
-        <main>
-          <table role="grid">
-            <thead>
-              <tr>
-                {data.calendar.headers.map((header, ix) => (
-                  <th
-                    scope="col"
-                    abbr={header.abbr}
-                    key={`week_${ix}`}
-                    className={
-                      header.type === 'week'
-                        ? 'sg-week-header'
-                        : 'sg-day-header'
-                    }
-                  >
-                    {header.displayText}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.calendar.calendarGrid.map((week, ix) => (
-                <tr key={`week_${ix}`}>
-                  {data.calendar.weekNumbers ? (
-                    <th className="sg-week-number">
-                      {data.calendar.weekNumbers[ix]}
-                    </th>
-                  ) : (
-                    ''
-                  )}
-                  {week.map((day) => (
-                    <td
-                      key={day.day}
-                      data-date={day.formattedDate}
-                      className={classNames(day)}
-                      title={day.today ? 'Today' : ''}
-                      tabIndex={-1}
-                      role={day.selected ? 'gridcell' : undefined}
-                      aria-selected={day.selected ? true : undefined}
-                      onClick={() => {
-                        day.currentMonth && datepicker.select(day.date)
-                      }}
+        <div className="sg-date">
+          <header>
+            <button
+              className="link"
+              onClick={() => datepicker.sub(1, 'months')}
+            >
+              <i className="sg-icon sg-icon-previous">Previous month</i>
+            </button>
+            <Dropdown options={months({})}>{data.monthName}</Dropdown>
+            <Dropdown options={years({})}>{data.year + ''}</Dropdown>
+            <button
+              className="link"
+              onClick={() => datepicker.add(1, 'months')}
+            >
+              <i className="sg-icon sg-icon-next">Next month</i>
+            </button>
+          </header>
+          <main>
+            <table role="grid">
+              <thead>
+                <tr>
+                  {data.calendar.headers.map((header, ix) => (
+                    <th
+                      scope="col"
+                      abbr={header.abbr}
+                      key={`week_${ix}`}
+                      className={
+                        header.type === 'week'
+                          ? 'sg-week-header'
+                          : 'sg-day-header'
+                      }
                     >
-                      {day.day}
-                    </td>
+                      {header.displayText}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </main>
+              </thead>
+              <tbody>
+                {data.calendar.calendarGrid.map((week, ix) => (
+                  <tr key={`week_${ix}`}>
+                    {data.calendar.weekNumbers ? (
+                      <th className="sg-week-number">
+                        {data.calendar.weekNumbers[ix]}
+                      </th>
+                    ) : (
+                      ''
+                    )}
+                    {week.map((day) => (
+                      <td
+                        key={day.day}
+                        data-date={day.formattedDate}
+                        className={classNames(day)}
+                        title={day.today ? 'Today' : ''}
+                        tabIndex={
+                          day.highlighted ||
+                          (day.selected && !data?.highlightedDate) ||
+                          (day.today &&
+                            !data?.highlightedDate &&
+                            !data?.selectedDate)
+                            ? 0
+                            : -1
+                        }
+                        role={day.selected ? 'gridcell' : undefined}
+                        aria-selected={
+                          day.selected && !data?.highlightedDate
+                            ? true
+                            : undefined
+                        }
+                        onClick={() => {
+                          day.currentMonth && datepicker.select(day.date)
+                        }}
+                      >
+                        {day.day}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </main>
+        </div>
       </div>
     </>
   )

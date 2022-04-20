@@ -17,6 +17,7 @@ interface DatepickerHook {
     datepickerRef: RefObject<HTMLElement>,
     datepickerDialogRef: RefObject<HTMLElement>,
     dateInputRef: RefObject<HTMLInputElement>,
+    datepickerTriggerRef: RefObject<HTMLButtonElement>,
     options?: DatepickerOptions
   ): HookResult
 }
@@ -24,6 +25,7 @@ export const useDatepicker: DatepickerHook = (
   datepickerRef,
   datepickerDialogRef,
   dateInputRef,
+  datepickerTriggerRef,
   options = {}
 ) => {
   const dataStub: Partial<DatepickerData> = {
@@ -46,7 +48,8 @@ export const useDatepicker: DatepickerHook = (
       !datepicker.open &&
       datepickerRef.current &&
       datepickerDialogRef.current &&
-      dateInputRef.current
+      dateInputRef.current &&
+      datepickerTriggerRef.current
     ) {
       setDatepicker(
         createDatepicker(
@@ -57,7 +60,8 @@ export const useDatepicker: DatepickerHook = (
           options,
           datepickerRef.current,
           datepickerDialogRef.current,
-          dateInputRef.current
+          dateInputRef.current,
+          datepickerTriggerRef.current
         )
       )
     }

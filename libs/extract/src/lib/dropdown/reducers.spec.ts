@@ -109,7 +109,10 @@ describe('dropdown/reducers', () => {
       it('sets correct listbox classes', () => {
         const dropdown = create({ id, options })
 
-        expect(dropdown.elements.listbox.classes).toEqual(['popover'])
+        expect(dropdown.elements.listbox.classes).toEqual([
+          'popover',
+          'popover-dropdown',
+        ])
       })
     })
   })
