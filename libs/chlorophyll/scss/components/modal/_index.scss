@@ -2,7 +2,7 @@
 @use 'mixins';
 
 // base styles for modal
-div[role='dialog']:not(.sg-date),
+div[role='dialog']:not(.sg-date, .popover),
 section[role='dialog'],
 main[role='dialog'],
 aside[role='dialog'] {
@@ -10,7 +10,7 @@ aside[role='dialog'] {
 }
 
 // normal dialog modal
-div[role='dialog']:not(.sg-date),
+div[role='dialog']:not(.sg-date, .popover),
 section[role='dialog'] {
   @include mixins.dialog-modal;
 }
