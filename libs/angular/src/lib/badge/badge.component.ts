@@ -6,14 +6,17 @@ import { BadgeType } from '@sebgroup/extract'
   template: `
     <span [ngClass]="'badge ' + badgeType">
       <strong>{{ title }}</strong>
-      <button *ngIf="isCloseable" class="close" (click)="close()"></button>
+      <button *ngIf="isCloseable" class="close" (click)="close()">
+        <span class="sr-only">{closeText}</span>
+      </button>
     </span>
   `,
 })
 export class NggBadgeComponent {
+  @Input() title!: string
   @Input() badgeType?: BadgeType
   @Input() isCloseable?: boolean
-  @Input() title!: string
+  @Input() closeText?: string
 
   constructor(private viewContainerRef: ViewContainerRef) {}
 

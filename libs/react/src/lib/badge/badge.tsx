@@ -22,7 +22,7 @@ export function Badge({
       <strong>{title}</strong>
       {isCloseable && (
         <button className="close" onClick={() => setIsClosed(true)}>
-          {/* <span className="sr-only">{closeText}</span> */}
+          <span className="sr-only">{closeText}</span>
         </button>
       )}
     </span>
