@@ -3,19 +3,18 @@
 
 // dependencies
 @use '../../components/list';
-@use '../../components/close';
+@use '../../components/popover';
 @use '../../components/utility';
 
 button[aria-haspopup='listbox'] {
   @include mixins.dropdown-trigger();
 }
-
-.popover {
-  @include mixins.popover();
-}
-
 ul[role='menu'] {
   @include mixins.menu();
+}
+
+.popover-dropdown {
+  --z-index: var(--sg-z-index-dropdown);
 }
 
 ul[role='listbox'] {
