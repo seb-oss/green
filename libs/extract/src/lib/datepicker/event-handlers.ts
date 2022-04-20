@@ -8,7 +8,7 @@ import {
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { fromEvent, merge, of } from 'rxjs'
 import { createPopper } from '@popperjs/core'
-import { Datepicker } from '@sebgroup/extract'
+import { Datepicker } from '../datepicker'
 
 const _mobileViewHandler = (
   dp: Datepicker,
