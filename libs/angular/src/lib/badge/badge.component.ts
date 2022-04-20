@@ -7,7 +7,7 @@ import { BadgeType } from '@sebgroup/extract'
     <span [ngClass]="'badge ' + badgeType">
       <strong>{{ title }}</strong>
       <button *ngIf="isCloseable" class="close" (click)="close()">
-        <span class="sr-only">{closeText}</span>
+        <span class="sr-only">{{ closeText }}</span>
       </button>
     </span>
   `,
