@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.10...@sebgroup/extract@1.0.0-beta.11) (2022-04-21)
+
+
+### Bug Fixes
+
+* **deps:** add missing dependency ([8f216d2](https://github.com/sebgroup/green/commit/8f216d2a83ae4fbff0f3f25c90e8a290b0904a2b))
+
+
+
 # [1.0.0-beta.10](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.9...@sebgroup/extract@1.0.0-beta.10) (2022-04-20)
 
 
