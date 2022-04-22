@@ -109,9 +109,7 @@ export const close = (dropdown: AbstractDropdown): AbstractDropdown =>
     },
   })
 export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
-  console.log('toggle, isOpen: ', dropdown.isOpen)
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
-  console.log(newDD.elements.toggler)
   return newDD
 }
 export const select = (
