@@ -65,15 +65,15 @@ describe('Dropdown', () => {
       const user = userEvent.setup()
 
       // initial
-      expect(listbox.className).toEqual('popover')
+      expect(listbox.className).toEqual('popover popover-dropdown')
       
       // open
       await act(() => user.click(toggleButton))
-      await waitFor(() => expect(listbox.className).toEqual('popover active'))
+      await waitFor(() => expect(listbox.className).toEqual('popover popover-dropdown active'))
         
       // close
       await act(() => user.click(toggleButton))
-      await waitFor(() => expect(listbox.className).toEqual('popover'))
+      await waitFor(() => expect(listbox.className).toEqual('popover popover-dropdown'))
     })
   })
   describe('mouse interaction', () => {
@@ -93,7 +93,7 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         await act(() => user.click(options[1]))
         await waitFor(() => expect(toggleButton.getAttribute('aria-expanded')).toEqual('false'))
-        await waitFor(() => expect(listbox.className).toEqual('popover'))
+        await waitFor(() => expect(listbox.className).toEqual('popover popover-dropdown'))
       })
       it('sets toggler text', async () => {
         const user = userEvent.setup()
