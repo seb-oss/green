@@ -14,10 +14,10 @@ describe('Dropdown', () => {
   beforeEach(async () => {
     props = {
       options: [
-        {key: 'A', value: 1},
-        {key: 'B', value: 2},
-        {key: 'C', value: 3},
-      ]
+        { key: 'A', value: 1 },
+        { key: 'B', value: 2 },
+        { key: 'C', value: 3 },
+      ],
     }
     component = render(<Dropdown {...props} />)
     await act(() => tick())

@@ -33,6 +33,11 @@ $selected-range-background: hsla(var(--sg-hsl-blue-2), 0.5);
 $selected-border-radius: $border-radius;
 $selected-range-border-radius: 0;
 
+// highlighted
+$highlighted-color: hsl(var(--sg-hsl-white));
+$highlighted-background: hsl(var(--sg-hsl-blue-2));
+$highlighted-border-radius: $border-radius;
+
 // active
 $active-color: $selected-color;
 $active-background: $selected-background;
@@ -54,7 +59,7 @@ $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
 @mixin calendar() {
-  background: $background;
+  /*background: $background;
   box-shadow: $box-shadow;
   border-radius: $border-radius;
   @include common.add-border();
@@ -69,7 +74,7 @@ $weekend-background: $background;
   &.active {
     visibility: visible;
     opacity: 1;
-  }
+  }*/
 
   // use full width on small screens
   @include common.media-breakpoint-down(sm) {
@@ -182,6 +187,14 @@ $weekend-background: $background;
             border-radius: $selected-border-radius;
             border: solid 1px $background;
             color: $selected-color;
+          }
+
+          // highlighted
+          &[tabindex='0'] {
+            background: $highlighted-background;
+            border-radius: $highlighted-border-radius;
+            border: solid 1px $background;
+            color: $highlighted-color;
           }
 
           // active (pressed)

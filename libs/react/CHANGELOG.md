@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.10...@sebgroup/green-react@1.0.0-beta.11) (2022-04-21)
+
+
+
+# [1.0.0-beta.10](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.9...@sebgroup/green-react@1.0.0-beta.10) (2022-04-20)
+
+
+### Bug Fixes
+
+* 🐛 added missing imports ([bdd8fd6](https://github.com/sebgroup/green/commit/bdd8fd6e01b879e7f6d7116f5d59bd07f3cfdc58))
+* **react:** datepicker keyboard navigation, background scroll, swipe ([fba27e5](https://github.com/sebgroup/green/commit/fba27e5a8b94a85d480dd601249fc58b84ae6db9))
+
+
+
 # [1.0.0-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.8...@sebgroup/green-react@1.0.0-beta.9) (2022-04-15)
 
 

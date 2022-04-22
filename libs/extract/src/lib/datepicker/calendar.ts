@@ -17,6 +17,7 @@ export interface CalendarDay {
   currentMonth: boolean
   currentDay: boolean
   today: boolean
+  highlighted: boolean
   selected: boolean
   rangeSelected: boolean
 }
@@ -39,7 +40,8 @@ export const createCalendar = (
   selectedDate: Date | undefined,
   showWeeks: boolean,
   useCurrentTime: boolean,
-  weekName: { abbr: string; displayText: string }
+  weekName: { abbr: string; displayText: string },
+  highlightedDate?: Date | undefined
 ): Calendar => {
   let calendar: Partial<Calendar> = {}
   const today = new Date()
@@ -80,6 +82,9 @@ export const createCalendar = (
       currentDay: isSameDay(currentDay, date),
       currentMonth: isSameMonth(currentDay, date),
       today: isSameDay(currentDay, today),
+      highlighted: highlightedDate
+        ? isSameDay(currentDay, highlightedDate)
+        : false,
       selected: selectedDate ? isSameDay(currentDay, selectedDate) : false,
       rangeSelected: false,
     })

@@ -1,0 +1,82 @@
+@use '../../tokens/shame' as tokens;
+@use '../button' as button;
+@use '../../common';
+@use 'sass:map';
+
+$box-shadow: tokens.$elevation-1-box-shadow;
+$z-index: var(--sg-z-index-popover);
+$border-color: map.get(tokens.$blue, 'light', 0);
+$popover-bg: tokens.$elevation-1-bg;
+$max-height: 400px;
+
+@mixin popover {
+  --z-index: #{$z-index};
+  max-height: calc(100% - 1rem);
+  background-color: $popover-bg;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  position: fixed;
+  visibility: hidden;
+  z-index: var(--z-index);
+  @include common.media-breakpoint-only(xs) {
+    @include common.add-border('top');
+    @include common.add-border-color();
+    @include common.padding-bottom(3);
+    border-radius: 1rem 1rem 0 0;
+    bottom: 0;
+    box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
+    left: 0;
+    transform: translate3d(0, 100%, 0);
+    transition: all 300ms ease-in-out;
+    width: 100%;
+  }
+
+  @include common.media-breakpoint-up(sm) {
+    @include common.padding-bottom(0);
+    @include common.add-border();
+    @include common.add-border-color($border-color);
+    @include common.add-border-radius();
+    max-height: $max-height;
+    box-shadow: $box-shadow;
+    min-width: 90px;
+    position: absolute;
+  }
+
+  > ul[role='listbox'] {
+    width: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
+  &.active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  .close {
+    @include common.margin(4);
+    flex-shrink: 0;
+    align-self: flex-end;
+    @include common.media-breakpoint-up(sm) {
+      display: none;
+    }
+  }
+}
+
+// prevent drag to refresh
+@mixin lock-for-swipe() {
+  @include common.media-breakpoint-down(sm) {
+    overscroll-behavior-y: contain;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    > * {
+      height: calc(100% + 450px);
+      overflow-y: auto;
+    }
+  }
+}
