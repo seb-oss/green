@@ -2,13 +2,18 @@ import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
+import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
 
 @Component({
   selector: 'green-dropdown',
   templateUrl: './dropdown.component.html',
 })
 export class DropdownComponent {
-  options: Array<{ key: string; value: string }> = [
+  texts: DropdownTexts = {
+    placeholder: 'Select',
+  }
+
+  options: Array<DropdownOption> = [
     {
       key: 'Tacos',
       value: 'tacos',
@@ -39,102 +44,147 @@ export class DropdownComponent {
     },
   ]
 
+  customOptionsInitial = [
+    {
+      name: 'Tacos',
+      val: 'tacos',
+      kitchen: 'mexican',
+    },
+    {
+      name: 'Pizza',
+      val: 'pizza',
+      selected: true,
+      kitchen: 'italian',
+    },
+    {
+      name: 'Sushi',
+      val: 'sushi',
+      selected: true,
+      kitchen: 'japanese',
+    },
+  ]
+
+  customOptions = [
+    {
+      name: 'Tacos',
+      val: 'tacos',
+      kitchen: 'mexican',
+    },
+    {
+      name: 'Pizza',
+      val: 'pizza',
+      kitchen: 'italian',
+    },
+    {
+      name: 'Sushi',
+      val: 'sushi',
+      kitchen: 'japanese',
+    },
+  ]
+
   dropdownForm = this._fb.group({
     select1: undefined,
     select2: 'pizza',
+    select3: this.options[2].value,
+    select4: undefined,
   })
 
   options$ = of([
     {
-      key: 'Sweden',
+      name: 'Sweden',
       value: 'sweden',
     },
     {
-      key: 'Denmark',
+      name: 'Denmark',
       value: 'denmark',
     },
     {
-      key: 'Finland',
+      name: 'Finland',
       value: 'Finland',
     },
     {
-      key: 'Norway',
+      name: 'Norway',
       value: 'norway',
     },
     {
-      key: 'England',
+      name: 'England',
       value: 'england',
     },
     {
-      key: 'Germany',
+      name: 'Germany',
       value: 'germany',
     },
     {
-      key: 'Estonia',
+      name: 'Estonia',
       value: 'estonia',
     },
     {
-      key: 'Lithuania',
+      name: 'Lithuania',
       value: 'lithuania',
     },
     {
-      key: 'Belarus',
+      name: 'Belarus',
       value: 'belarus',
     },
     {
-      key: 'Latvia',
+      name: 'Latvia',
       value: 'latvia',
     },
     {
-      key: 'Greece',
+      name: 'Greece',
       value: 'greece',
     },
     {
-      key: 'Italy',
+      name: 'Italy',
       value: 'italy',
     },
     {
-      key: 'Austria',
+      name: 'Austria',
       value: 'austria',
     },
     {
-      key: 'Switzerland',
+      name: 'Switzerland',
       value: 'switzerland',
     },
     {
-      key: 'Netherlands',
+      name: 'Netherlands',
       value: 'netherlands',
     },
     {
-      key: 'Belgium',
+      name: 'Belgium',
       value: 'belgium',
     },
     {
-      key: 'France',
+      name: 'France',
       value: 'france',
     },
     {
-      key: 'Spain',
+      name: 'Spain',
       value: 'spain',
     },
     {
-      key: 'Portugal',
+      name: 'Portugal',
       value: 'portugal',
     },
     {
-      key: 'Poland',
+      name: 'Poland',
       value: 'poland',
     },
   ]).pipe(delay(3000))
 
   validationForm = this._fb.group({
     country: ['sweden', [Validators.required]],
-    otherCountry: [null, [Validators.required]],
+    otherCountries: [null, [Validators.required, Validators.minLength(2)]],
   })
 
   dropdownValue0: any = undefined
   dropdownValue1: any = undefined
   dropdownValue2 = 'sushi'
+
+  dropdownMultiValue0: any = undefined
+  dropdownMultiValue1: any = undefined
+  dropdownMultiValue2 = 'sushi'
+
   dropdownValue3: any = undefined
   dropdownValue4 = 'tacos'
 
