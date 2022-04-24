@@ -3,9 +3,19 @@ import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
 
 export interface DropdownOption {
-  key: string
-  value: unknown
+  key?: string
+  value?: unknown
   selected?: boolean
+  active?: boolean
+  [key: string]: any
+}
+
+export interface DropdownTexts {
+  select?: string
+  selected?: string
+  placeholder?: string
+  close?: string
+  optionsDescription?: string
 }
 
 export interface ExtendedDropdownOption extends DropdownOption, ElementProps {}
@@ -24,14 +34,19 @@ export interface ElementProps {
 
 export interface AbstractDropdown {
   id: string
-  text: string
+  texts: DropdownTexts
   isActive: boolean
   isOpen: boolean
   isLooping: boolean
+  isMultiSelect: boolean
+  useValue: string
+  display: string
+  selectValue: string
   options: ExtendedDropdownOption[]
   elements: Partial<{
     toggler: Partial<ElementProps>
     listbox: Partial<ElementProps>
+    fieldset: Partial<ElementProps>
   }>
   keyboardEvents: Observable<KeyboardEvent>
   subscription: Subscription
@@ -42,9 +57,13 @@ export type DropdownListener = (dropdown: AbstractDropdown) => void
 export interface DropdownArgs {
   id?: string
   options: DropdownOption[]
+  useValue?: string
+  display?: string
+  selectValue?: string
   loop?: boolean
-  text?: string
+  texts?: DropdownTexts
   value?: any
+  multiSelect?: boolean
 }
 
 export interface DropdownHandler {
@@ -61,6 +80,9 @@ export interface DropdownHandler {
   open: () => Promise<void>
   close: () => Promise<void>
   toggle: () => Promise<void>
-  select: (selection: ExtendedDropdownOption | number) => Promise<void>
+  select: (
+    selection: ExtendedDropdownOption,
+    selectOnClose?: boolean
+  ) => Promise<void>
   destroy: () => void
 }
