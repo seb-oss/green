@@ -97,6 +97,7 @@
     "@nrwl/web": "13.8.0",
     "@nrwl/workspace": "13.8.0",
     "@sebgroup/fonts": "^1.1.0",
+    "@storybook/addon-a11y": "^6.4.22",
     "@storybook/addon-docs": "6.4.18",
     "@storybook/addon-essentials": "6.4.18",
     "@storybook/addon-links": "6.4.18",
