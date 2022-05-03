@@ -1,12 +1,40 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
+export const Template = ({ variant, dismissible, text }) => {
+  return `
+    <span class="badge ${variant}">
+      <strong>${text}</strong>
+      ${dismissible ?
+        `<button class="close">
+          <span class="sr-only">Remove</span>
+        </button>` : ``}
+    </span>`
+}
+
 <Meta
   title="Components/Badge"
   argTypes={{
-    variant: { control: 'text' },
-    children: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['', 'info', 'success', 'warning', 'danger', 'light', 'dark'],
+    },
+    dismissible: {
+      control: 'boolean'
+    },
+    text: { control: 'text' },
   }}
 />
+
+<Story
+  name="Badge"
+  args={{
+    text: 'Badge',
+    dismissible: false
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 # Badge
 
