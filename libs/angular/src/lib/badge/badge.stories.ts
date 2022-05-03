@@ -21,13 +21,13 @@ export default {
 
 const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   template: `
-    <ngg-badge title="Default" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Information" badgeType="info" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Success" badgeType="success" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Warning" badgeType="warning" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Danger" badgeType="danger" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Light" badgeType="light" [isCloseable]="isCloseable"></ngg-badge>
-    <ngg-badge title="Dark" badgeType="dark" [isCloseable]="isCloseable"></ngg-badge>
+    <ngg-badge [isCloseable]="isCloseable">Default</ngg-badge>
+    <ngg-badge badgeType="info" [isCloseable]="isCloseable">Information</ngg-badge>
+    <ngg-badge badgeType="success" [isCloseable]="isCloseable">Success</ngg-badge>
+    <ngg-badge badgeType="warning" [isCloseable]="isCloseable">Warning</ngg-badge>
+    <ngg-badge badgeType="danger" [isCloseable]="isCloseable">Danger</ngg-badge>
+    <ngg-badge badgeType="light" [isCloseable]="isCloseable">Light</ngg-badge>
+    <ngg-badge badgeType="dark" [isCloseable]="isCloseable">Dark</ngg-badge>
     `,
   props: args,
 })

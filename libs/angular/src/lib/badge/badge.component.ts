@@ -2,10 +2,10 @@ import { Component, Input, ViewContainerRef } from '@angular/core'
 import { BadgeType } from '@sebgroup/extract'
 
 @Component({
-  selector: 'ngg-badge[title]',
+  selector: 'ngg-badge',
   template: `
     <span [ngClass]="'badge ' + badgeType">
-      <strong>{{ title }}</strong>
+      <strong><ng-content></ng-content></strong>
       <button *ngIf="isCloseable" class="close" (click)="close()">
         <span class="sr-only">{{ closeText }}</span>
       </button>
