@@ -57,9 +57,9 @@ export type DropdownListener = (dropdown: AbstractDropdown) => void
 export interface DropdownArgs {
   id?: string
   options: DropdownOption[]
-  useValue?: string
-  display?: string
-  selectValue?: string
+  useValue?: string // option key to use as value
+  display?: string // option key to display
+  selectValue?: string // option key to output as value
   loop?: boolean
   texts?: DropdownTexts
   value?: any
@@ -77,12 +77,13 @@ export interface DropdownHandler {
   update: (props: DropdownArgs) => Promise<void>
   active: (isActive: boolean) => Promise<void>
   loop: (isLooping: boolean) => Promise<void>
+  multiSelect: (isMultiSelect: boolean) => Promise<void>
   open: () => Promise<void>
   close: () => Promise<void>
   toggle: () => Promise<void>
   select: (
     selection: ExtendedDropdownOption,
-    selectOnClose?: boolean
+    closeOnSelect?: boolean
   ) => Promise<void>
   destroy: () => void
 }
