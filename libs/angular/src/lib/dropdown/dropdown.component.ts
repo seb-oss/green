@@ -119,7 +119,7 @@ import {
             >
               <input
                 type="checkbox"
-                (click)="handler?.select(option, false)"
+                (change)="handler?.select(option, false)"
                 [checked]="option.selected"
               />
               <span>{{ option[dropdown!.display] }}</span>
