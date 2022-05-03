@@ -1,6 +1,33 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 
-<Meta title="Components/Navbar" />
+export const Template = ({ text }) => {
+  return `
+    <nav role="navigation">
+      <a
+        aria-label="Open seb.se in new tab"
+        href="http://www.seb.se"
+        target="_blank"
+        class="brand"
+      /></a>
+      <h1 class="mx-5">${text}</h1>
+    </nav>`
+}
+
+<Meta
+  title="Components/Navbar"
+  argTypes={{
+    text: { control: 'text' },
+  }} />
+
+<Story
+  name="Navbar"
+  args={{
+    text: 'Page heading',
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 # Navbar
 
