@@ -29,14 +29,14 @@ export default {
 } as Meta<NggDropdownComponent>
 
 const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
-  template: `<ngg-dropdown text="Select" [options]='options' [(value)]="value" [loop]="loop" [text]="text"></ngg-dropdown>`,
+  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop"></ngg-dropdown>`,
   props: args,
 })
 
 export const Select = Template.bind({})
 Select.args = {
   id: '',
-  text: 'Select Meal',
+  texts: { placeholder: 'Select meal' },
   value: '',
   loop: true,
   options: [
@@ -149,7 +149,6 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
       label="Country"
       [options]="options$ | async"
       formControlName="country"
-      text="Select"
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
     >

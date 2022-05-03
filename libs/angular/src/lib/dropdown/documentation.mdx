@@ -62,7 +62,7 @@ If you just need a simple select without any form, validation etc. it's possible
 ```
 
 ## Options
-The dropdown options should be provided as an array of key value pairs. When a user chooses an option that `value` will be selected.
+The dropdown options should be provided as an array of objects. When a user chooses an option the object will be selected.
 
 ```typescript
 const options = [
@@ -73,11 +73,24 @@ const options = [
 ```
 Set an initial value by assigning the option `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
 
-## Placeholder
+By default, the dropdown will look for a key and value pair for the data (`key` property will be used as display value when selected). It's possible to use any object and bind different keys to for both display value and as selected value. The following inputs can be set to alter the options.
 
-The text input can be used to set a placeholder that will be shown when no value is selected.
+|Attribute|Description|Default|
+|:--------|:----------|:------|
+|selectValue|If specified, the value of this key will be emitted when option is selected instead of object. | n/a |
+|useValue|Which key to use as value.|`value`|
+|display|Which key to use as display value when selected and in options list.|`key`|
 
+## Texts and placeholder
 
+Custom texts can be set using the texts input which takes an object with the following keys.
+
+|Text|Description|Default|
+|:--------|:----------|:------|
+|selected|Used when multiple items are selected e.g. 5 selected.|`selected`|
+|placeholder|Text to display when no option is selected.|`Select`|
+|close|Text for close button displayed on mobiles.|`Close`|
+|optionsDescription|Text to describe options.|`Options`|
 
 ## Example usage in reactive form
 
@@ -94,7 +107,7 @@ Below is an example of how the component can be used with reactive forms and val
       label="Country"
       [options]="(options$ | async)!"
       formControlName="country"
-      text="Select"
+      [texts]="texts"
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
     >
