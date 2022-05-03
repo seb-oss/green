@@ -3,17 +3,17 @@ import Badge from './badge'
 
 describe('Badge', () => {
   it('Should render badge with title', () => {
-    render(<Badge title="title" />)
+    render(<Badge>title</Badge>)
 
     expect(screen.getByText('title')).toBeVisible()
   })
   it('Should set badge type class', () => {
-    render(<Badge title="title" badgeType="success" />)
+    render(<Badge badgeType="success">title</Badge>)
 
     expect(document.body.querySelector('.success')).not.toBeNull()
   })
   it('Should render close button', () => {
-    render(<Badge title="title" badgeType="success" isCloseable />)
+    render(<Badge badgeType="success" isCloseable>title</Badge>)
 
     expect(screen.getByRole('button')).toHaveClass('close')
   })

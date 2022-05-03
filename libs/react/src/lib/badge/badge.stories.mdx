@@ -12,7 +12,7 @@ Simple Badge Component
 <Story
   name="Badge"
   args={{
-    title: 'Primary',
+    children: 'Primary',
     badgeType: 'info',
     isCloseable: false,
   }}
@@ -27,13 +27,13 @@ Simple Badge Component
 Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
 
 <Canvas>
-  <Badge title="Badge" />
-  <Badge title="Information" badgeType="info" />
-  <Badge title="Information" badgeType="success" />
-  <Badge title="Information" badgeType="warning" />
-  <Badge title="Information" badgeType="danger" />
-  <Badge title="Information" badgeType="light" />
-  <Badge title="Information" badgeType="dark" />
+  <Badge>Badge</Badge>
+  <Badge badgeType="info">Information</Badge>
+  <Badge badgeType="success">Information</Badge>
+  <Badge badgeType="warning">Information</Badge>
+  <Badge badgeType="danger">Information</Badge>
+  <Badge badgeType="light">Information</Badge>
+  <Badge badgeType="dark">Information</Badge>
 </Canvas>
 
 ### Dismissible Badges
@@ -41,11 +41,23 @@ Badges are available in a number of different variants. Please note that the col
 Badges that can be dismissed/removed
 
 <Canvas>
-  <Badge title="Badge" isCloseable />
-  <Badge title="Information" badgeType="info" isCloseable />
-  <Badge title="Information" badgeType="success" isCloseable />
-  <Badge title="Information" badgeType="warning" isCloseable />
-  <Badge title="Information" badgeType="danger" isCloseable />
-  <Badge title="Information" badgeType="light" isCloseable />
-  <Badge title="Information" badgeType="dark" isCloseable />
+  <Badge isCloseable>Badge</Badge>
+  <Badge badgeType="info" isCloseable>
+    Information
+  </Badge>
+  <Badge badgeType="success" isCloseable>
+    Information
+  </Badge>
+  <Badge badgeType="warning" isCloseable>
+    Information
+  </Badge>
+  <Badge badgeType="danger" isCloseable>
+    Information
+  </Badge>
+  <Badge badgeType="light" isCloseable>
+    Information
+  </Badge>
+  <Badge badgeType="dark" isCloseable>
+    Information
+  </Badge>
 </Canvas>

@@ -1,15 +1,15 @@
-import React, { HTMLProps } from 'react'
+import React, { HTMLProps, ReactNode } from 'react'
 import { BadgeType } from '@sebgroup/extract'
 
 export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
-  title: string
+  children?: ReactNode
   badgeType?: BadgeType
   isCloseable?: boolean
   closeText?: string
 }
 
 export function Badge({
-  title,
+  children,
   badgeType,
   isCloseable,
   closeText,
@@ -19,7 +19,7 @@ export function Badge({
 
   return !isClosed ? 
     <span {...props} className={`badge ${badgeType}`}>
-      <strong>{title}</strong>
+      <strong>{children}</strong>
       {isCloseable && (
         <button className="close" onClick={() => setIsClosed(true)}>
           <span className="sr-only">{closeText}</span>
