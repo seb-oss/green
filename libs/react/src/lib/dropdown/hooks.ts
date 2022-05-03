@@ -47,7 +47,9 @@ export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }:
       ...toggler?.attributes as unknown as Props,
       className: toggler?.classes?.join(' '),
       children: dropdown.text,
-      onClick: () => handler?.toggle(),
+      onClick: () => {
+        handler?.toggle()
+      },
     }
     setTogglerProps(newToggleProps)
 
@@ -78,7 +80,7 @@ export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }:
   // Create dropdown handler
   useEffect(() => {
     if (!handler && togglerRef.current && listboxRef.current) {
-      setHandler(createDropdown({ id, text, options, loop }, togglerRef.current, listboxRef.current, setDropdown))
+      setHandler(createDropdown({ id, text, options, loop }, togglerRef.current, listboxRef.current, (dd) => setDropdown(dd)))
     }
     return () => handler?.destroy()
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -108,8 +108,10 @@ export const close = (dropdown: AbstractDropdown): AbstractDropdown =>
       },
     },
   })
-export const toggle = (dropdown: AbstractDropdown): AbstractDropdown =>
-  dropdown.isOpen ? close(dropdown) : open(dropdown)
+export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
+  const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
+  return newDD
+}
 export const select = (
   dropdown: AbstractDropdown,
   selection: ExtendedDropdownOption | number
