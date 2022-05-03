@@ -92,6 +92,20 @@ Custom texts can be set using the texts input which takes an object with the fol
 |close|Text for close button displayed on mobiles.|`Close`|
 |optionsDescription|Text to describe options.|`Options`|
 
+## Multi select
+
+Just add `multiSelect` to add support for multi select.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown formControlName="dropdownSelect" [options]="options" multiSelect></ngg-dropdown>
+</form>
+```
+
+<Story id="components-dropdown--multi-select" />
+
+
+
 ## Example usage in reactive form
 
 Below is an example of how the component can be used with reactive forms and validations.
