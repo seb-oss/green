@@ -63,7 +63,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
         aria-modal="true"
         aria-label="Choose Date"
       >
-        { state.isActive && (
+        {state.isActive && (
           <div className="sg-date">
             <header>
               <button
@@ -72,8 +72,14 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
               >
                 <i className="sg-icon sg-icon-previous">Previous month</i>
               </button>
-              <Dropdown options={months({})}>{data.monthName}</Dropdown>
-              <Dropdown options={years({})}>{data.year + ''}</Dropdown>
+              <Dropdown
+                options={months({})}
+                texts={{ placeholder: data.monthName }}
+              />
+              <Dropdown
+                options={years({})}
+                texts={{ placeholder: data.year + '' }}
+              />
               <button
                 className="link"
                 onClick={() => datepicker.add(1, 'months')}
@@ -145,7 +151,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
               </table>
             </main>
           </div>
-        ) }
+        )}
       </div>
     </>
   )
