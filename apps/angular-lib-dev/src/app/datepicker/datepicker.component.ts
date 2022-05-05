@@ -26,4 +26,7 @@ export class DatepickerComponent {
   save() {
     console.log(this.validationForm.value)
   }
+  test($event: any) {
+    console.log($event)
+  }
 }
