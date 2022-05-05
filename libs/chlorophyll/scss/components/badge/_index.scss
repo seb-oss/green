@@ -18,3 +18,7 @@
     }
   }
 }
+
+.badge-container {
+  @include mixins.badge-container();
+}
