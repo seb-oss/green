@@ -1,22 +1,37 @@
-import { Component, Input, ViewContainerRef } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  ViewContainerRef,
+} from '@angular/core'
 import { BadgeType } from '@sebgroup/extract'
 
 @Component({
-  selector: 'ngg-badge',
+  selector: '[ngg-badge]',
   template: `
-    <span [ngClass]="'badge ' + badgeType">
-      <strong><ng-content></ng-content></strong>
-      <button *ngIf="isCloseable" class="close" (click)="close()">
-        <span class="sr-only">{{ closeText }}</span>
-      </button>
-    </span>
+    <strong>
+      <ng-content></ng-content>
+    </strong>
+    <button *ngIf="isCloseable" class="close" (click)="close()">
+      {{ closeText }}
+    </button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggBadgeComponent {
-  @Input() title!: string
+  @Input() set isCloseable(value: boolean | '') {
+    this._isCloseable = value
+  }
+  get isCloseable(): boolean {
+    return this._isCloseable === '' || !!this._isCloseable
+  }
   @Input() badgeType?: BadgeType
-  @Input() isCloseable?: boolean
+  private _isCloseable?: boolean | ''
   @Input() closeText?: string
+  @HostBinding('class') get class(): string {
+    return ['badge', this.badgeType].join(' ')
+  }
 
   constructor(private viewContainerRef: ViewContainerRef) {}
 
