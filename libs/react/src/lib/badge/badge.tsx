@@ -17,16 +17,20 @@ export function Badge({
 }: BadgeProps) {
   const [isClosed, setIsClosed] = React.useState<boolean>(false)
 
-  return !isClosed ? 
+  return !isClosed ? (
     <span {...props} className={`badge ${badgeType}`}>
       <strong>{children}</strong>
       {isCloseable && (
-        <button className="close" onClick={() => setIsClosed(true)}>
-          <span className="sr-only">{closeText}</span>
+        <button
+          type="button"
+          className="close"
+          onClick={() => setIsClosed(true)}
+        >
+          {closeText}
         </button>
       )}
     </span>
-  : null
+  ) : null
 }
 
 export default Badge
