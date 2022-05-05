@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
@@ -7,6 +7,7 @@ import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
 @Component({
   selector: 'green-dropdown',
   templateUrl: './dropdown.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownComponent {
   texts: DropdownTexts = {
@@ -192,5 +193,9 @@ export class DropdownComponent {
 
   save() {
     console.log(this.validationForm.value)
+  }
+
+  test($event: any) {
+    console.log($event)
   }
 }

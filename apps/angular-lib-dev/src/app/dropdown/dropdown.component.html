@@ -6,6 +6,7 @@
         [options]="options"
         [texts]="texts"
         [(value)]="dropdownValue0"
+        (valueChange)="test($event)"
       ></ngg-dropdown>
       <ngg-dropdown
         [options]="optionsWithInitial"
@@ -31,6 +32,7 @@
         [options]="options"
         [texts]="texts"
         [(value)]="dropdownMultiValue0"
+        (valueChange)="test($event)"
       ></ngg-dropdown>
       <ngg-dropdown
         multiSelect

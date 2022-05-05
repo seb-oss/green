@@ -202,12 +202,17 @@ export class NggDropdownComponent
           this.listbox = dropdown.elements.listbox
           this.fieldset = dropdown.elements.fieldset
 
+          // TODO: refactor state handling to only emit value changes when value changes (not on state change), perhaps using rxjs?
           if (!dropdown.isMultiSelect) {
             let selectedOption = this.dropdown.options?.find(
               (option) => option.selected
             )
-
-            if (selectedOption && this._value !== selectedOption) {
+            if (
+              (selectedOption && !this._value) ||
+              (selectedOption &&
+                selectedOption[dropdown.useValue] !==
+                  this._value[dropdown.useValue])
+            ) {
               const { attributes, classes, active, selected, ...data } =
                 selectedOption
               selectedOption = dropdown.selectValue
@@ -229,7 +234,12 @@ export class NggDropdownComponent
                 return dropdown.selectValue ? data[dropdown.selectValue] : data
               })
 
-            if (selectedOption && this._value !== selectedOption) {
+            if (
+              (this._value !== undefined || selectedOption.length > 0) &&
+              this._value !== [] &&
+              selectedOption &&
+              JSON.stringify(this._value) !== JSON.stringify(selectedOption)
+            ) {
               setTimeout(() => {
                 this._value = selectedOption
                 this.valueChange.emit(selectedOption)
