@@ -8,6 +8,8 @@ import {
 import { BadgeType } from '@sebgroup/extract'
 
 @Component({
+  // we need to disable this warning since we don't want the badge component to create a new element
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[ngg-badge]',
   template: `
     <strong>
