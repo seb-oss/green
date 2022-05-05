@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.11...@sebgroup/extract@1.0.0-beta.12) (2022-05-05)
+
+
+### Bug Fixes
+
+* 🐛 add close logic to react badge component ([5616017](https://github.com/sebgroup/green/commit/56160175b546266e6c807b0f68ffe5c75b0e3260))
+* **dropdown:** add types for multi select ([2b161b5](https://github.com/sebgroup/green/commit/2b161b53a96f6b03ca05ab11ab40f98e51a0a917))
+
+
+### Features
+
+* 🎸 extract file for badge components ([060dac3](https://github.com/sebgroup/green/commit/060dac34e9af693ec96f330f16b049ee92b5c70c)), closes [#476](https://github.com/sebgroup/green/issues/476)
+* **dropdown:** support multi select and custom options ([b687713](https://github.com/sebgroup/green/commit/b6877130a210d9a88ec944c8b6030f48ada57b2c)), closes [#472](https://github.com/sebgroup/green/issues/472) [#488](https://github.com/sebgroup/green/issues/488) [#464](https://github.com/sebgroup/green/issues/464)
+
+
+
 # [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.10...@sebgroup/extract@1.0.0-beta.11) (2022-04-21)
 
 
