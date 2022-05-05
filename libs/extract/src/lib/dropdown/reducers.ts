@@ -49,22 +49,40 @@ const extendOptions = (
 
 export const create = ({
   id = randomId(),
-  text,
+  texts,
   options: _options,
+  useValue,
+  display,
+  selectValue,
   loop,
   value,
+  multiSelect,
 }: DropdownArgs): AbstractDropdown => {
+  useValue = useValue || 'value'
+  display = display || 'key'
+
   if (value) {
     _options = _options?.map((option) => ({
       ...option,
-      selected: option.value === value,
+      selected: option[<string>useValue] === value,
     }))
   }
   const options = extendOptions(_options, id)
-  const selected = options?.find((option) => option.selected)
+  const selected = options
+    ?.filter((option) => option.selected)
+    .map((option) => option[<string>display])
   const dropdown: Partial<AbstractDropdown> = {
     id,
-    text: selected?.key || text || 'dropdown',
+    texts: {
+      close: texts?.close || 'Close',
+      optionsDescription: texts?.optionsDescription || 'Options',
+      placeholder: texts?.placeholder || 'Select',
+      selected: texts?.selected || 'selected',
+      select:
+        selected?.length > 2
+          ? `${selected.length} ${texts?.selected} `
+          : selected?.join(', '),
+    },
     elements: {
       toggler: {
         attributes: { id: `${id}_toggle`, 'aria-owns': id },
@@ -72,9 +90,16 @@ export const create = ({
       listbox: {
         attributes: { id },
       },
+      fieldset: {
+        attributes: { id: `${id}_legend` },
+      },
     },
     options,
     isLooping: loop,
+    isMultiSelect: multiSelect,
+    useValue,
+    display,
+    selectValue,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -112,14 +137,14 @@ export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
   return newDD
 }
-export const select = (
+export const highlight = (
   dropdown: AbstractDropdown,
   selection: ExtendedDropdownOption | number
 ): AbstractDropdown => {
   let option: ExtendedDropdownOption
   if (typeof selection === 'number') {
     const opts = dropdown.options
-    const currentlySelectedIndex = opts.findIndex((o) => o.selected)
+    const currentlySelectedIndex = opts.findIndex((o) => o.active)
     let newSelectedIndex = currentlySelectedIndex + selection
     if (newSelectedIndex < 0)
       newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
@@ -130,7 +155,6 @@ export const select = (
     option = selection
   }
   return reduce(dropdown, {
-    text: option.key,
     elements: {
       listbox: {
         attributes: {
@@ -140,9 +164,57 @@ export const select = (
     },
     options: dropdown.options.map((o) =>
       reduce(o, {
-        selected: o === option,
+        active: option === o,
+        attributes: {},
+        classes: option === o ? ['active', 'sg-highlighted'] : [],
+      })
+    ),
+  })
+}
+
+export const select = (
+  dropdown: AbstractDropdown,
+  selection: ExtendedDropdownOption
+): AbstractDropdown => {
+  let options: Array<ExtendedDropdownOption>
+  const isSelected = !!dropdown.options
+    .filter((option) => option.selected)
+    .find((option) => option === selection)
+  if (isSelected) {
+    options = dropdown.isMultiSelect
+      ? [
+          ...dropdown.options.filter(
+            (option) => option.selected && option !== selection
+          ),
+        ]
+      : [selection]
+  } else {
+    options = dropdown.isMultiSelect
+      ? [...dropdown.options.filter((option) => option.selected), selection]
+      : [selection]
+  }
+  const selected = options.map((option) => option[dropdown.display])
+  return reduce(dropdown, {
+    texts: {
+      select:
+        selected?.length > 2
+          ? `${selected.length} ${dropdown.texts?.selected} `
+          : selected?.join(', ') || dropdown.texts?.placeholder || 'Select',
+    },
+    elements: {
+      listbox: {
         attributes: {
-          'aria-selected': o === option || undefined,
+          'aria-activedescendant':
+            options.length > 0 ? options[0].attributes.id : undefined,
+        },
+      },
+    },
+    options: dropdown.options.map((o) =>
+      reduce(o, {
+        selected: !!options.find((option) => option === o), //o === option,
+        attributes: {
+          'aria-selected':
+            !!options.find((option) => option === o) || undefined,
         },
       })
     ),
@@ -166,32 +238,45 @@ export const keypress = (
   const opts = dropdown.options
   let action
   switch (key) {
-    case ' ':
-      action = toggle(dropdown)
-      break
+    //case ' ':
+    //  action = toggle(dropdown)
+    //  break
     case 'Escape':
       if (dropdown.isOpen) action = close(dropdown)
       break
     case 'ArrowDown':
       action = dropdown.isOpen
-        ? select(dropdown, 1)
-        : open(select(dropdown, opts[0]))
+        ? highlight(dropdown, 1)
+        : open(highlight(dropdown, opts[0]))
       break
     case 'ArrowUp':
       action = dropdown.isOpen
-        ? select(dropdown, -1)
+        ? highlight(dropdown, -1)
         : open(
-            select(
+            highlight(
               dropdown,
               dropdown.isLooping ? opts[opts.length - 1] : opts[0]
             )
           )
       break
     case 'Home':
-      action = open(select(dropdown, opts[0]))
+      action = open(highlight(dropdown, opts[0]))
       break
     case 'End':
-      action = open(select(dropdown, opts[opts.length - 1]))
+      action = open(highlight(dropdown, opts[opts.length - 1]))
+      break
+    case ' ':
+    case 'Enter':
+      // eslint-disable-next-line no-case-declarations
+      const activeOption = opts.find((option) => option.active)
+      action =
+        dropdown.isOpen && activeOption
+          ? dropdown.isMultiSelect && key === ' '
+            ? select(dropdown, activeOption)
+            : dropdown.isMultiSelect
+            ? close(dropdown)
+            : close(select(dropdown, activeOption))
+          : toggle(dropdown)
       break
     default:
       break

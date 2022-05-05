@@ -22,6 +22,7 @@ import {
   ElementProps,
   DropdownArgs,
   dropdownValues,
+  DropdownTexts,
 } from '@sebgroup/extract'
 
 @Component({
@@ -56,7 +57,9 @@ import {
         [class.is-valid]="valid"
         [class.is-invalid]="invalid"
       >
-        <span>{{ dropdown?.text }}</span>
+        <span>{{
+          dropdown?.texts?.select || dropdown?.texts?.placeholder
+        }}</span>
       </button>
       <span
         class="form-info"
@@ -80,9 +83,9 @@ import {
           class="close m-4 m-sm-2 d-block d-sm-none"
           (click)="handler?.close()"
         >
-          <span class="sr-only">Close</span>
+          <span class="sr-only">{{ dropdown?.texts?.close }}</span>
         </button>
-        <ul role="listbox">
+        <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
           <li
             *ngFor="let option of dropdown?.options; trackBy: trackByKey"
             [id]="option.attributes.id"
@@ -92,9 +95,38 @@ import {
             [class]="option.classes"
             (click)="handler?.select(option)"
           >
-            {{ option.key }}
+            {{ option[dropdown!.display] }}
           </li>
         </ul>
+        <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
+          <fieldset
+            #fieldsetRef
+            [attr.aria-describedby]="fieldset?.attributes?.id"
+            role="listbox"
+            tabIndex="-1"
+            aria-multiselectable="true"
+          >
+            <legend class="sr-only" [id]="fieldset?.attributes?.id">
+              Options
+            </legend>
+            <label
+              class="form-control"
+              [attr.role]="option.attributes.role"
+              [id]="option.attributes.id"
+              [attr.aria-selected]="option.attributes['aria-selected']"
+              [class]="option.classes"
+              *ngFor="let option of dropdown?.options; trackBy: trackByKey"
+            >
+              <input
+                type="checkbox"
+                (change)="handler?.select(option, false)"
+                [checked]="option.selected"
+              />
+              <span>{{ option[dropdown!.display] }}</span>
+              <i></i>
+            </label>
+          </fieldset>
+        </div>
       </div>
     </div>
   `,
@@ -111,8 +143,20 @@ export class NggDropdownComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges
 {
   @Input() id?: string
-  @Input() text?: string
+  @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
+  @Input() display?: string
+  @Input() selectValue?: string
+  @Input() useValue?: string
+
+  @Input() set multiSelect(value: string | boolean) {
+    this._multiSelect =
+      value === '' || value === 'true' || value.toString() === 'true' || false
+  }
+  get multiSelect(): boolean {
+    return this._multiSelect
+  }
+  private _multiSelect = false
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
@@ -129,13 +173,10 @@ export class NggDropdownComponent
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
 
-  @ViewChild('togglerRef') public togglerRef:
-    | ElementRef<HTMLElement>
-    | undefined
+  @ViewChild('togglerRef') public togglerRef?: ElementRef<HTMLElement>
 
-  @ViewChild('listboxRef') public listboxRef:
-    | ElementRef<HTMLElement>
-    | undefined
+  @ViewChild('listboxRef') public listboxRef?: ElementRef<HTMLElement>
+  @ViewChild('fieldsetRef') public fieldsetRef?: ElementRef<HTMLElement>
 
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
@@ -144,6 +185,7 @@ export class NggDropdownComponent
   handler?: DropdownHandler
   toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
   listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
+  fieldset?: Partial<ElementProps> = dropdownValues.elements?.fieldset
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -153,22 +195,50 @@ export class NggDropdownComponent
         this.props,
         this.togglerRef.nativeElement,
         this.listboxRef.nativeElement,
+        this.fieldsetRef?.nativeElement,
         (dropdown) => {
           this.dropdown = dropdown
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
+          this.fieldset = dropdown.elements.fieldset
 
-          const selected = this.dropdown.options?.find(
-            (option) => option.selected
-          )
-          if (selected && this._value !== selected?.value) {
-            setTimeout(() => {
-              this._value = selected.value
-              this.valueChange.emit(selected.value)
-              this.onChangeFn && this.onChangeFn(selected.value)
-              this.onTouchedFn && this.onTouchedFn()
-            }, 0)
+          if (!dropdown.isMultiSelect) {
+            let selectedOption = this.dropdown.options?.find(
+              (option) => option.selected
+            )
+
+            if (selectedOption && this._value !== selectedOption) {
+              const { attributes, classes, active, selected, ...data } =
+                selectedOption
+              selectedOption = dropdown.selectValue
+                ? data[dropdown.selectValue]
+                : data
+              setTimeout(() => {
+                this._value = selectedOption
+                this.valueChange.emit(selectedOption)
+                this.onChangeFn && this.onChangeFn(selectedOption)
+                this.onTouchedFn && this.onTouchedFn()
+              }, 0)
+            }
+          } else {
+            const selectedOption = this.dropdown.options
+              ?.filter((option) => option.selected)
+              .map((option) => {
+                const { attributes, classes, active, selected, ...data } =
+                  option
+                return dropdown.selectValue ? data[dropdown.selectValue] : data
+              })
+
+            if (selectedOption && this._value !== selectedOption) {
+              setTimeout(() => {
+                this._value = selectedOption
+                this.valueChange.emit(selectedOption)
+                this.onChangeFn && this.onChangeFn(selectedOption)
+                this.onTouchedFn && this.onTouchedFn()
+              }, 0)
+            }
           }
+
           this.cd.detectChanges()
         }
       )
@@ -200,25 +270,21 @@ export class NggDropdownComponent
     this.onTouchedFn = fn
   }
 
-  select(option: ExtendedDropdownOption) {
-    this.handler?.select(option)
-    this._value = option.value
-    this.valueChange.emit(option.value)
-    this.onChangeFn && this.onChangeFn(option.value)
-    this.onTouchedFn && this.onTouchedFn()
-  }
-
   trackByKey = (index: number, option: ExtendedDropdownOption): string => {
-    return option.key
+    return option[''] || option.key
   }
 
   private get props(): DropdownArgs {
     return {
       id: this.id || this.dropdown?.id,
-      text: this.text,
+      texts: this.texts,
+      useValue: this.useValue,
+      display: this.display,
+      selectValue: this.selectValue,
       options: this.options,
       loop: this.loop,
       value: this.value,
+      multiSelect: this.multiSelect,
     }
   }
 

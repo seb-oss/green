@@ -29,20 +29,41 @@ export default {
 } as Meta<NggDropdownComponent>
 
 const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
-  template: `<ngg-dropdown text="Select" [options]='options' [(value)]="value" [loop]="loop" [text]="text"></ngg-dropdown>`,
+  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id"></ngg-dropdown>`,
   props: args,
 })
 
 export const Select = Template.bind({})
 Select.args = {
   id: '',
-  text: 'Select Meal',
+  texts: { placeholder: 'Select meal' },
   value: '',
   loop: true,
+  multiSelect: false,
+  useValue: 'value',
+  display: 'key',
+  selectValue: undefined,
   options: [
     { key: 'Tacos', value: 'tacos' },
     { key: 'Pizza', value: 'pizza' },
     { key: 'Sushi', value: 'sushi' },
+  ],
+}
+
+export const MultiSelect = Template.bind({})
+MultiSelect.args = {
+  id: '',
+  texts: { placeholder: 'Select meal(s)' },
+  value: '',
+  loop: true,
+  multiSelect: true,
+  useValue: 'value',
+  display: 'name',
+  selectValue: undefined,
+  options: [
+    { name: 'Tacos', value: 'tacos' },
+    { name: 'Pizza', value: 'pizza' },
+    { name: 'Sushi', value: 'sushi' },
   ],
 }
 
@@ -149,7 +170,6 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
       label="Country"
       [options]="options$ | async"
       formControlName="country"
-      text="Select"
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
     >

@@ -3,9 +3,11 @@ import {
   AbstractDropdown,
   DropdownHandler,
   DropdownOption,
+  DropdownTexts,
 } from '@sebgroup/extract'
 import {
   HTMLAttributes,
+  InputHTMLAttributes,
   RefObject,
   useEffect,
   useState,
@@ -13,84 +15,163 @@ import {
 
 interface HookArgs {
   id?: string
-  text?: string
+  texts?: DropdownTexts
   options: DropdownOption[]
+  multiSelect?: boolean
   loop?: boolean
+  selectValue?: string
+  useValue?: string
+  display?: string
   togglerRef: RefObject<HTMLElement>
   listboxRef: RefObject<HTMLElement>
 }
 
 type Props = HTMLAttributes<HTMLElement>
 
+interface CheckboxItem {
+  labelProps: Props
+  inputProps: InputHTMLAttributes<HTMLInputElement>
+  spanProps: Props
+}
+
+interface MultiSelectProps {
+  fieldsetProps?: Props
+  legendProps?: Props
+  checkboxes?: CheckboxItem[]
+}
+
 interface HookResult {
   dropdown?: DropdownHandler
-
   togglerProps: Props
   listboxProps: Props
   listItems: Props[]
+  multiSelectProps: MultiSelectProps
 }
 
-export const useDropdown = ({ id, text, options, loop, togglerRef, listboxRef }: HookArgs): HookResult => {
+export const useDropdown = ({
+  id,
+  texts,
+  options,
+  loop,
+  multiSelect,
+  selectValue,
+  useValue,
+  display,
+  togglerRef,
+  listboxRef,
+}: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
   const [togglerProps, setTogglerProps] = useState<Props>({})
   const [listboxProps, setListboxProps] = useState<Props>({})
   const [listItems, setListItems] = useState<Props[]>([])
+  const [multiSelectProps, setMultiSelectProps] = useState<MultiSelectProps>({})
 
   // When dropdown data changes
   useEffect(() => {
     if (!dropdown) return
 
-    const { elements: { toggler, listbox } } = dropdown
+    const {
+      elements: { toggler, listbox },
+    } = dropdown
 
     const newToggleProps: Props = {
-      ...toggler?.attributes as unknown as Props,
+      ...(toggler?.attributes as unknown as Props),
       className: toggler?.classes?.join(' '),
-      children: dropdown.text,
-      onClick: () => {
-        handler?.toggle()
-      },
+      children: dropdown?.texts?.select || dropdown?.texts?.placeholder,
+      onClick: () => handler?.toggle(),
     }
     setTogglerProps(newToggleProps)
 
     const newListboxProps: Props = {
-      ...listbox?.attributes as unknown as Props,
+      ...(listbox?.attributes as unknown as Props),
       className: listbox?.classes?.join(' '),
     }
     setListboxProps(newListboxProps)
 
-    const newListItems: Props[] = dropdown.options.map((o) => ({
-      ...o.attributes as unknown as Props,
-      className: o.classes?.join(' '),
-      children: o.key,
-      onClick: () => handler?.select(o),
-    }))
-    setListItems(newListItems)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!dropdown.isMultiSelect) {
+      const newListItems: Props[] = dropdown.options.map((o) => ({
+        ...(o.attributes as unknown as Props),
+        className: o.classes?.join(' '),
+        children: o[dropdown.display],
+        selected: o.selected,
+        onClick: () => handler?.select(o),
+      }))
+      setListItems(newListItems)
+    } else {
+      const checkboxes: CheckboxItem[] = dropdown.options.map((o) => ({
+        labelProps: {
+          ...(o.attributes as unknown as Props),
+          className: ['form-control', ...o.classes].join(' '),
+        },
+        inputProps: {
+          defaultChecked: o.selected,
+          type: 'checkbox',
+          onChange: () => handler?.select(o, false),
+        },
+        spanProps: {
+          children: o[dropdown.display],
+        },
+      }))
+      const newMultiselect: MultiSelectProps = {
+        fieldsetProps: {
+          'aria-describedby': dropdown?.elements?.fieldset?.attributes?.id,
+          'aria-multiselectable': true,
+          role: 'listbox',
+          tabIndex: -1,
+        },
+        legendProps: {
+          className: 'sr-only',
+          id: dropdown?.elements?.fieldset?.attributes?.id,
+          children: dropdown.texts.optionsDescription,
+        },
+        checkboxes,
+      }
+      setMultiSelectProps(newMultiselect)
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dropdown])
 
   // When dropdown properties change
   useEffect(() => {
     if (!dropdown) return
-    handler?.update({ id, text, options, loop })
-    
+    handler?.update({ id, texts, options, loop, multiSelect })
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, text, options, loop])
+  }, [id, texts, options, loop, multiSelect, selectValue, useValue, display])
 
   // Create dropdown handler
   useEffect(() => {
     if (!handler && togglerRef.current && listboxRef.current) {
-      setHandler(createDropdown({ id, text, options, loop }, togglerRef.current, listboxRef.current, (dd) => setDropdown(dd)))
+      setHandler(
+        createDropdown(
+          {
+            id,
+            texts,
+            options,
+            loop,
+            multiSelect,
+            selectValue,
+            useValue,
+            display,
+          },
+          togglerRef.current,
+          listboxRef.current,
+          listboxRef.current,
+          (dd) => setDropdown(dd)
+        )
+      )
     }
     return () => handler?.destroy()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [togglerRef, listboxRef])
 
   return {
     dropdown: handler,
-
     togglerProps,
     listboxProps,
     listItems,
+    multiSelectProps,
   }
 }
