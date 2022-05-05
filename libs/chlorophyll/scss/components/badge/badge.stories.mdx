@@ -15,6 +15,7 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
 
 <Canvas>
+  <div class="badge-container">
   <span class="badge">
     <strong>Badge</strong>
   </span>
@@ -36,6 +37,7 @@ Badges are available in a number of different variants. Please note that the col
   <span class="badge dark">
     <strong>Dark</strong>
   </span>
+  </div>
 </Canvas>
 
 ### Dismissible Badges
@@ -43,40 +45,135 @@ Badges are available in a number of different variants. Please note that the col
 Badges that can be dismissed/removed
 
 <Canvas>
+  <div class="badge-container">
   <span class="badge">
     <strong>Badge</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>
   </span>
   <span class="badge info">
     <strong>Information</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
   <span class="badge success">
     <strong>Success</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
   <span class="badge warning">
     <strong>Warning</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
   <span class="badge danger">
     <strong>Danger</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
   <span class="badge light">
     <strong>Light</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
   <span class="badge dark">
     <strong>Dark</strong>
-    <button class="close">
-      <span class="sr-only">Remove</span>
+    <button type="button" class="close">
+      Remove
+    </button>
+  </span>
+  </div>
+</Canvas>
+
+### Layout
+
+Badges don't have any margin by default, instead they rely on the context in which they are used to provide the layout. Typically, you want multiple badges to have spacing (margin) in between, they should wrap if they don't fit on a single line. By placing badges inside an element with `.badge-container` we will get this behaviour by default.
+
+<Canvas>
+  <div class="badge-container">
+    <span class="badge">
+      <strong>Badge</strong>
+      <button type="button" class="close">
+        Remove
+      </button>
+    </span>
+    <span class="badge info">
+    <strong>Information</strong>
+    <button type="button" class="close">
+      Remove
     </button>  </span>
+    <span class="badge success">
+    <strong>Success</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge warning">
+    <strong>Warning</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge danger">
+    <strong>Danger</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge light">
+    <strong>Light</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge dark">
+    <strong>Dark</strong>
+    <button type="button" class="close">
+      Remove
+    </button>
+  </span>
+  </div>
+</Canvas>
+
+## Modify layout
+
+We can use utility classes to modify the behaviour, eg. applying `.justify-content-end` would align badges to the right.
+
+<Canvas>
+  <div class="badge-container justify-content-end">
+    <span class="badge">
+      <strong>Badge</strong>
+      <button type="button" class="close">
+        Remove
+      </button>
+    </span>
+    <span class="badge info">
+    <strong>Information</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge success">
+    <strong>Success</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge warning">
+    <strong>Warning</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge danger">
+    <strong>Danger</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge light">
+    <strong>Light</strong>
+    <button type="button" class="close">
+      Remove
+    </button>  </span>
+    <span class="badge dark">
+    <strong>Dark</strong>
+    <button type="button" class="close">
+      Remove
+    </button>
+  </span>
+  </div>
 </Canvas>

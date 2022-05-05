@@ -31,6 +31,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./datepicker/datepicker.module').then((m) => m.DatepickerModule),
   },
+  {
+    path: 'badge',
+    data: { name: 'Badge' },
+    loadChildren: () =>
+      import('./badge/badge.module').then((m) => m.BadgeModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 

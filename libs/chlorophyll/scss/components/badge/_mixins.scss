@@ -1,5 +1,7 @@
 @use '../../common';
+@use '../../tokens/spacing';
 @use 'sass:math';
+@use 'sass:map';
 
 $variants: (
   'info': (
@@ -81,5 +83,15 @@ $close-icon-thickness: 3px;
   // badge close
   .close {
     --color: #{$color};
+  }
+}
+
+@mixin badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -(map.get(spacing.$spacing, 2));
+  // todo: should use selector used by badge
+  .badge {
+    @include common.margin(2);
   }
 }
