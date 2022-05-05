@@ -12,6 +12,7 @@ describe('Dropdown', () => {
   let props: DropdownArgs
   let toggleButton: HTMLElement
   let listbox: HTMLElement
+  let fieldset: HTMLElement
   let options: HTMLElement[]
   beforeEach(async () => {
     props = {
@@ -25,14 +26,16 @@ describe('Dropdown', () => {
       componentProperties: { ...props },
     })
 
-    const [_buttons, _listboxes, _options] = [
+    const [_buttons, _listboxes, _fieldset, _options] = [
       await component.findAllByRole('button'),
+      await component.findAllByRole('listbox'),
       await component.findAllByRole('listbox'),
       await component.findAllByRole('option'),
     ]
 
     toggleButton = _buttons[0]
     listbox = _listboxes[0]
+    fieldset = _fieldset[1]
     options = _options
   })
   it('renders', () => {
@@ -213,14 +216,14 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it('stops on last when not looping', async () => {
@@ -230,28 +233,28 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it.skip('loops to first when looping', async () => {
@@ -330,21 +333,21 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it('stops on first when not looping', async () => {
@@ -361,7 +364,7 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         // spam up
@@ -381,7 +384,7 @@ describe('Dropdown', () => {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it.skip('loops to first when looping', async () => {
@@ -393,28 +396,28 @@ describe('Dropdown', () => {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowUp',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
     })
@@ -437,7 +440,7 @@ describe('Dropdown', () => {
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
         )
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it('selects first when open', async () => {
@@ -452,12 +455,12 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, { key: 'Home' })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
     })
@@ -480,7 +483,7 @@ describe('Dropdown', () => {
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
         )
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it('selects last when open', async () => {
@@ -489,12 +492,12 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         fireEvent.keyDown(document, { key: 'End' })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
     })

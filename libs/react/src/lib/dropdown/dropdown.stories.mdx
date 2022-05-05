@@ -3,7 +3,7 @@ import { Dropdown } from './dropdown'
 
 export const Template = ({ align, ...props }) => (
   <div style={{ paddingBottom: '150px' }}>
-    <Dropdown {...props}>Select a dropdown option</Dropdown>
+    <Dropdown {...props}></Dropdown>
   </div>
 )
 
@@ -31,6 +31,16 @@ Dropdown Component
         value: 3,
       },
     ],
+    display: 'key',
+    useValue: 'value',
+    selectValue: undefined,
+    multiSelect: false,
+    texts: {
+      selected: 'selected',
+      placeholder: 'Select',
+      close: 'Close',
+      optionsDescription: 'Options'
+    }
   }}
 >
   {Template.bind({})}
@@ -48,9 +58,24 @@ Code preview for Dropdown component
         { key: 'Option 2', value: 2 },
         { key: 'Option 3', value: 3 },
       ]}
-    >
-      Select option
-    </Dropdown>
+    ></Dropdown>
+  </div>
+</Canvas>
+
+### Multi select
+
+<Canvas>
+  <div style={{ height: '200px' }}>
+    <Dropdown
+      multiSelect
+      display="name"
+      useValue="index"
+      options={[
+        { name: 'Option 1', index: 1 },
+        { name: 'Option 2', index: 2 },
+        { name: 'Option 3', index: 3 },
+      ]}
+    ></Dropdown>
   </div>
 </Canvas>
 

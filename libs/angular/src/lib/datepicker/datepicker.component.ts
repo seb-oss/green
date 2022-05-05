@@ -115,10 +115,6 @@ export class NggDatepickerComponent
     this.onTouchedFn = fn
   }
 
-  trackByKey = (index: number, option: ExtendedDropdownOption): string => {
-    return option.key
-  }
-
   get data(): DatepickerData | undefined {
     return this._data
   }
