@@ -36,11 +36,15 @@ export const Default = Template.bind({})
 Default.args = {
   isCloseable: undefined,
   badgeType: undefined,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   text: 'Badge',
 }
 export const Dismissible = Template.bind({})
 Dismissible.args = {
   isCloseable: true,
   badgeType: 'success',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   text: 'Badge',
 }
