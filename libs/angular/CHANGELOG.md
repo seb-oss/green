@@ -2,6 +2,25 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.11...@sebgroup/green-angular@1.0.0-beta.12) (2022-05-05)
+
+
+### Bug Fixes
+
+* 🐛 syntax error on component template ([7bb99dc](https://github.com/sebgroup/green/commit/7bb99dc2c710fbda087e9e062585765ff76cc34e)), closes [#476](https://github.com/sebgroup/green/issues/476)
+* **angular:** datepicker - only emit if value has changed ([70efa07](https://github.com/sebgroup/green/commit/70efa074f1788a611a2dbb9639fcb490d53a6389))
+* **angular:** dropdown - only emit if value has changed ([05c9532](https://github.com/sebgroup/green/commit/05c95329cccb8345da0e42f795c8b4a4e733f57e))
+
+
+### Features
+
+* 🎸 add sr utilities to react and angular badge components ([3ef7da3](https://github.com/sebgroup/green/commit/3ef7da32de275a1a66e4f165f5a809099cb2c573))
+* 🎸 badge component for angular ([ce6c6ad](https://github.com/sebgroup/green/commit/ce6c6adeeea008ddc55158ed4c749f29058fa998)), closes [#476](https://github.com/sebgroup/green/issues/476)
+* 🎸 Moved text content to ng-content ([ea0a708](https://github.com/sebgroup/green/commit/ea0a708a3d083a3913f5b2417585f3f20533ca3f))
+* **angular:** dropdown support multi select and custom option ([61d9ba6](https://github.com/sebgroup/green/commit/61d9ba6e5260306e40fe9d53f3377f2fed58baf0))
+
+
+
 # [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.10...@sebgroup/green-angular@1.0.0-beta.11) (2022-04-21)
 
 
