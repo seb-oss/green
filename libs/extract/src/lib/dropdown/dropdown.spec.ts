@@ -19,12 +19,14 @@ describe('dropdown', () => {
 
   let toggler: HTMLElement
   let listbox: HTMLElement
+  let fieldset: HTMLElement
 
   let popper: Partial<Instance>
 
   beforeEach(async () => {
     toggler = document.createElement('button')
     listbox = document.createElement('div')
+    fieldset = document.createElement('fieldset')
     listener = jest.fn<never, [AbstractDropdown]>().mockName('listener')
     const options: DropdownOption[] = [
       { key: 'A', value: 1 },
@@ -40,13 +42,20 @@ describe('dropdown', () => {
     }
     ;(createPopper as jest.Mock<Instance>).mockReturnValue(popper as Instance)
 
-    handler = createDropdown({ id: 'foo', options }, toggler, listbox, listener)
+    handler = createDropdown(
+      { id: 'foo', options },
+      toggler,
+      listbox,
+      fieldset,
+      listener
+    )
     await tick()
   })
 
   afterEach(() => {
     toggler.remove()
     listbox.remove()
+    fieldset.remove()
     handler.destroy()
     ;(createPopper as jest.Mock<Instance>).mockReset()
   })
@@ -78,7 +87,7 @@ describe('dropdown', () => {
       expect(listener).toHaveBeenCalledWith(handler.dropdown)
     })
     it('calls back on select', async () => {
-      await handler.select(1)
+      await handler.select(handler.dropdown.options[0])
       expect(listener).toHaveBeenCalledWith(handler.dropdown)
     })
   })
@@ -156,7 +165,7 @@ describe('dropdown', () => {
           const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
-        it('selects first option', async () => {
+        it('highlight first option', async () => {
           document.dispatchEvent(
             new KeyboardEvent('keydown', { key: 'ArrowDown' })
           )
@@ -164,7 +173,7 @@ describe('dropdown', () => {
 
           expect(listener).toHaveBeenCalledTimes(4)
           const [dd] = listener.mock.calls[3]
-          expect(dd.options[0].selected).toBe(true)
+          expect(dd.options[0].active).toBe(true)
         })
       })
       describe('Arrow up', () => {
@@ -178,7 +187,7 @@ describe('dropdown', () => {
           const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
-        it('selects first option', async () => {
+        it('highlight first option', async () => {
           document.dispatchEvent(
             new KeyboardEvent('keydown', { key: 'ArrowUp' })
           )
@@ -186,9 +195,9 @@ describe('dropdown', () => {
 
           expect(listener).toHaveBeenCalledTimes(4)
           const [dd] = listener.mock.calls[3]
-          expect(dd.options[0].selected).toBe(true)
+          expect(dd.options[0].active).toBe(true)
         })
-        it('selects last option if looped', async () => {
+        it('highlight last option if looped', async () => {
           handler.loop(true)
           document.dispatchEvent(
             new KeyboardEvent('keydown', { key: 'ArrowUp' })
@@ -197,7 +206,7 @@ describe('dropdown', () => {
 
           expect(listener).toHaveBeenCalledTimes(5)
           const [dd] = listener.mock.calls[4]
-          expect(dd.options[2].selected).toBe(true)
+          expect(dd.options[2].active).toBe(true)
         })
       })
       describe('Home', () => {
@@ -209,13 +218,13 @@ describe('dropdown', () => {
           const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
-        it('selects first option', async () => {
+        it('highlight first option', async () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }))
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(4)
           const [dd] = listener.mock.calls[3]
-          expect(dd.options[0].selected).toBe(true)
+          expect(dd.options[0].active).toBe(true)
         })
       })
       describe('End', () => {
@@ -227,13 +236,13 @@ describe('dropdown', () => {
           const [dd] = listener.mock.calls[3]
           expect(dd.isOpen).toBe(true)
         })
-        it('selects last option', async () => {
+        it('highlight last option', async () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }))
           await tick()
 
           expect(listener).toHaveBeenCalledTimes(4)
           const [dd] = listener.mock.calls[3]
-          expect(dd.options[2].selected).toBe(true)
+          expect(dd.options[2].active).toBe(true)
         })
       })
     })

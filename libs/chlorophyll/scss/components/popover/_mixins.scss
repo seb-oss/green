@@ -44,7 +44,7 @@ $max-height: 400px;
     position: absolute;
   }
 
-  > ul[role='listbox'] {
+  > [role='listbox'] {
     width: 100%;
     overflow-y: auto;
     scroll-behavior: smooth;

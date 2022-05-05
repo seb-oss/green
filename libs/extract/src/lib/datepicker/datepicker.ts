@@ -34,7 +34,7 @@ export interface DatepickerData {
   weekday: string
   calendar: Calendar
   selectedDate?: Date
-  formattedSelectedDate?: string
+  formattedSelectedDate: string
   highlightedDate?: Date
 }
 
@@ -88,7 +88,7 @@ const createData = (
     ? typeof preSelectedDate === 'string'
       ? preSelectedDate
       : format(preSelectedDate, 'yyyy-MM-dd')
-    : undefined
+    : ''
   const highlightedDate = preHighlightedDate
     ? typeof preHighlightedDate === 'string'
       ? new Date(preHighlightedDate + ' 12:00:00')

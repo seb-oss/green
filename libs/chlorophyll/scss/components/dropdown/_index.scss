@@ -9,18 +9,30 @@
 button[aria-haspopup='listbox'] {
   @include mixins.dropdown-trigger();
 }
-ul[role='menu'] {
-  @include mixins.menu();
-}
 
 .popover-dropdown {
   --z-index: var(--sg-z-index-dropdown);
-}
+  fieldset {
+    display: flex;
+    flex-direction: column;
+  }
 
-ul[role='listbox'] {
-  @include mixins.select();
-}
+  // menu
+  ul[role='menu'] {
+    @include mixins.menu();
+  }
 
-fieldset[role='listbox'][aria-multiselectable='true'] {
-  @include mixins.multi-select();
+  // dropdown select
+  ul[role='listbox'] {
+    @include mixins.select();
+  }
+
+  // dropdown multi-select
+  .sg-fieldset-container {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    fieldset[role='listbox'][aria-multiselectable='true'] {
+      @include mixins.multi-select();
+    }
+  }
 }
