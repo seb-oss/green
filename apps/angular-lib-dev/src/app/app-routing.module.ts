@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./badge/badge.module').then((m) => m.BadgeModule),
   },
+  {
+    path: 'card',
+    data: { name: 'Card' },
+    loadChildren: () => import('./card/card.module').then((m) => m.CardModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 
