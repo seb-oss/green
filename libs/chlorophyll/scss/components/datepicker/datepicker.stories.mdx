@@ -3,7 +3,7 @@ import { Meta, Canvas } from '@storybook/addon-docs'
 export const Template = ({ validation, enabled, text }) => {
   const attrValidation = validation ? `class="${validation}" ` : ``
   const attrEnabled = enabled ? `` : `disabled`
-  return `<div>
+  return `<div style="height: 402px">
     <div class="group mb-3">
       <input type="text" placeholder="yyyy-mm-dd" />
       <button type="button" class="primary"><i class="sg-icon sg-icon-calendar">Select date</i></button>
