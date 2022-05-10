@@ -1,8 +1,43 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 
+export const Template = ({ validation, enabled, text, formInfo }) => {
+  const attrValidation = validation ? `class="${validation}" ` : ``
+  const attrEnabled = enabled ? `` : `disabled`
+  return `
+    <div class="form-group">
+      <label for="inputInvalid">${text}</label>
+      <span class="form-info">${formInfo}</span>
+      <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
+      <span class="form-info">${validation ? validation : 'Neutral'}</span>
+    </div>`
+}
+
 <Meta
   title="Components/Form/Elements/Input"
+  argTypes={{
+    validation: {
+      control: 'select',
+      options: ['', 'is-valid', 'is-invalid'],
+    },
+    enabled: {
+      control: 'boolean'
+    },
+    text: { control: 'text' },
+    formInfo: { control: 'text' }
+  }}
 />
+
+<Story
+  name="Input"
+  args={{
+    text: 'Input label',
+    formInfo: 'Lorem ipsum very long description of input and what should be entered',
+    enabled: true
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 # Input
 

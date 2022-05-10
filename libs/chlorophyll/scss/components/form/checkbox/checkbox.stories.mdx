@@ -1,6 +1,39 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Components/Form/Elements/Checkbox" />
+export const Template = ({ validation, enabled, text }) => {
+  const attrValidation = validation ? `class="${validation}" ` : ``
+  const attrEnabled = enabled ? `` : `disabled`
+  return `
+    <label class="form-control">
+      <input type="checkbox" ${attrValidation} ${attrEnabled} />
+      <span>${text}</span>
+      <i />
+    </label>`
+}
+
+<Meta
+  title="Components/Form/Elements/Checkbox"
+  argTypes={{
+    validation: {
+      control: 'select',
+      options: ['', 'is-valid', 'is-invalid'],
+    },
+    enabled: {
+      control: 'boolean'
+    },
+    text: { control: 'text' },
+  }} />
+
+<Story
+  name="Checkbox"
+  args={{
+    text: 'Click me!',
+    enabled: true
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 # Checkbox
 

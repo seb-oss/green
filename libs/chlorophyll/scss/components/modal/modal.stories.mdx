@@ -1,6 +1,43 @@
 import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks'; import {background} from "@storybook/theming";
 
-<Meta title="Components/Modal" />
+export const Template = ({ headline, body }) => {
+  return `
+    <section role='dialog'
+           aria-modal="true"
+           aria-labelledby="modal_header"
+           aria-describedby="modal_body">
+    <header>
+      <h3 id="modal_header">${headline}</h3>
+      <button class='close'>
+        <span class='sr-only'>Close</span>
+      </button>
+    </header>
+    <div class='body' id="modal_body">
+      ${body}
+    </div>
+    <footer>
+      <button type="button">Secondary</button><button type="submit">Primary</button>
+    </footer>
+  </section>`
+}
+
+<Meta
+  title="Components/Modal"
+  argTypes={{
+    headline: { control: 'text' },
+    body: { control: 'text' },
+  }} />
+
+<Story
+  name="Modal"
+  args={{
+    headline: 'Modal headline',
+    body: '<p>Modal body text. Lorem ipsum dolor sit amet.</p>'
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 <style>{
   `

@@ -1,6 +1,43 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 
-<Meta title="Components/Dropdown" />
+export const Template = ({ validation, enabled, text }) => {
+  const attrValidation = validation ? `class="${validation}" ` : ``
+  const attrEnabled = enabled ? `` : `disabled`
+  return `
+    <div class="form-group" style="height: 182px; display: block;">
+      <button type="button" aria-haspopup="listbox" ${attrValidation} ${attrEnabled}>${text}</button>
+      <span class="form-info" id="dropdown3_info"></span>
+      <ul role="listbox" class="popover" style="visibility:visible;opacity:1;margin-top:4px;" aria-activedescendant="option_2" tabIndex="-1">
+        <li id="option_1" role="option">Option 1</li>
+        <li id="option_2" role="option" aria-selected>${text}</li>
+        <li id="option_3" role="option">Option 3</li>
+      </ul>
+    </div>`
+}
+
+<Meta
+  title="Components/Dropdown"
+  argTypes={{
+    validation: {
+      control: 'select',
+      options: ['', 'is-valid', 'is-invalid'],
+    },
+    enabled: {
+      control: 'boolean'
+    },
+    text: { control: 'text' },
+  }} />
+
+<Story
+  name="Dropdown"
+  args={{
+    text: 'Option 2',
+    enabled: true
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 <style>{
   `
