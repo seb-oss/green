@@ -40,7 +40,7 @@ import {
           label ? toggler?.attributes?.id + '_label' : null
         "
         [attr.aria-describedby]="
-          formInfo?.innerText && formInfo.innerText.length > 0
+          formInfo?.textContent && (formInfo?.textContent?.length ?? 0 > 0)
             ? toggler?.attributes?.id + '_info'
             : null
         "
