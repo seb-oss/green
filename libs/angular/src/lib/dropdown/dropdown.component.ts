@@ -162,11 +162,10 @@ export class NggDropdownComponent
   @Input() valid?: boolean
   @Input() invalid?: boolean
 
-  @Input()
   get value(): any {
     return this._value
   }
-  set value(newValue: any) {
+  @Input() set value(newValue: any) {
     this.setSelectionByValue(newValue)
   }
   private _value: any
@@ -235,7 +234,7 @@ export class NggDropdownComponent
               })
 
             if (
-              (this._value !== undefined || selectedOption.length > 0) &&
+              (this._value !== undefined || selectedOption?.length > 0) &&
               this._value !== [] &&
               selectedOption &&
               JSON.stringify(this._value) !== JSON.stringify(selectedOption)
@@ -299,13 +298,16 @@ export class NggDropdownComponent
   }
 
   private setSelectionByValue(value: any) {
-    if (this._value !== value) {
-      this._value = value
-
-      const selected = this.handler?.dropdown?.options.find(
-        (option) => option.value === value
-      )
-      if (selected) this.handler?.select(selected)
+    if (!this.dropdown?.isMultiSelect) {
+      if (this._value !== value && value !== undefined) {
+        this._value = value
+        const valueKey = <string>this.handler?.dropdown.useValue
+        const selected = this.handler?.dropdown?.options.find(
+          (option) =>
+            option[valueKey] === value[valueKey] || option[valueKey] === value
+        )
+        if (selected) this.handler?.select(selected)
+      }
     }
   }
 }
