@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.11...@sebgroup/chlorophyll@1.0.0-beta.12) (2022-05-05)
+
+
+### Features
+
+* **badge:** add container for badge layout ([e4dcf49](https://github.com/sebgroup/green/commit/e4dcf4949105582d656bcf966206c7338d40bbc8))
+
+
+
 # [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.10...@sebgroup/chlorophyll@1.0.0-beta.11) (2022-04-21)
 
 

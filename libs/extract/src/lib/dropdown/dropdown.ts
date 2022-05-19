@@ -23,6 +23,7 @@ export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
   listbox: HTMLElement,
+  fieldset: HTMLElement | undefined = undefined,
   listener: DropdownListener
 ): DropdownHandler => {
   const _handler: Partial<DropdownHandler> = {
@@ -40,8 +41,14 @@ export const createDropdown = (
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
-  handler.select = (selection) =>
-    update(handler, listener, close(select(handler.dropdown, selection)))
+  handler.select = (selection, selectOnClose = true) =>
+    update(
+      handler,
+      listener,
+      selectOnClose
+        ? close(select(handler.dropdown, selection))
+        : select(handler.dropdown, selection)
+    )
   handler.update = (props) => update(handler, listener, create(props))
 
   handler.subscription = merge(

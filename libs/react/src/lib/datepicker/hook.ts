@@ -29,6 +29,7 @@ export const useDatepicker: DatepickerHook = (
   options = {}
 ) => {
   const dataStub: Partial<DatepickerData> = {
+    formattedSelectedDate: '',
     calendar: {
       headers: [],
       calendarGrid: [],

@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.11...@sebgroup/green-react@1.0.0-beta.12) (2022-05-05)
+
+
+### Bug Fixes
+
+* 🐛 add close logic to react badge component ([5616017](https://github.com/sebgroup/green/commit/56160175b546266e6c807b0f68ffe5c75b0e3260))
+* 🐛 Fixed tests that broke in merge ([34c46dd](https://github.com/sebgroup/green/commit/34c46dd42d66ad6842bf04917708b1316a9dc129))
+
+
+### Features
+
+* 🎸 add sr utilities to react and angular badge components ([3ef7da3](https://github.com/sebgroup/green/commit/3ef7da32de275a1a66e4f165f5a809099cb2c573))
+* 🎸 Moved title to children ([acf3a12](https://github.com/sebgroup/green/commit/acf3a12329542a4875227c84c65d37e047d7de41))
+* **react:** dropdown support multi select and custom option ([f703574](https://github.com/sebgroup/green/commit/f703574a6769adc6580795d3c27e6d79fb7b43d3))
+
+
+
 # [1.0.0-beta.11](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.10...@sebgroup/green-react@1.0.0-beta.11) (2022-04-21)
 
 

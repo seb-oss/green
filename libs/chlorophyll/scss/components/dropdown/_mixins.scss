@@ -8,6 +8,7 @@ $z-index: tokens.$zindex-dropdown;
 $color: tokens.$text-primary-color;
 $border-color: map.get(tokens.$blue, 'light', 0);
 $background: tokens.$form-control-bg;
+$highlighted-background: hsl(var(--sg-hsl-blue-1));
 
 @mixin dropdown-trigger {
   @include button.reset;
@@ -64,12 +65,25 @@ $background: tokens.$form-control-bg;
     @include common.add-hover-active-state();
     line-height: 1.25;
     cursor: pointer;
+
+    // highlighted option
+    &.active.sg-highlighted {
+      background: $highlighted-background;
+    }
   }
 }
 
 @mixin multi-select {
   [role='option'] {
     @include common.margin-horizontal(4);
+
+    // highlighted option
+    &.active.sg-highlighted input[type='checkbox'] ~ i {
+      border-color: #007ac7 !important;
+      box-shadow: 0 0 0.25em 0.0625em #41b0ee;
+      outline-color: transparent;
+      outline-style: solid;
+    }
   }
 }
 

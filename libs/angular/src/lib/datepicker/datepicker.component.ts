@@ -115,10 +115,6 @@ export class NggDatepickerComponent
     this.onTouchedFn = fn
   }
 
-  trackByKey = (index: number, option: ExtendedDropdownOption): string => {
-    return option.key
-  }
-
   get data(): DatepickerData | undefined {
     return this._data
   }
@@ -138,8 +134,11 @@ export class NggDatepickerComponent
     this.onTouchedFn && this.onTouchedFn()
 
     if (data) {
-      this.valueChange.emit(data.selectedDate)
-      this.onChangeFn && this.onChangeFn(data.selectedDate)
+      // only emit change event if date has changed
+      if (this.data?.selectedDate !== data.selectedDate) {
+        this.valueChange.emit(data.selectedDate)
+        this.onChangeFn && this.onChangeFn(data.selectedDate)
+      }
       this.data = data
     }
 

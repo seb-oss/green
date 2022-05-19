@@ -1,13 +1,28 @@
-import { active, close, create, open, select, toggle, loop } from './reducers'
-import { AbstractDropdown, DropdownOption } from './types'
+import {
+  active,
+  close,
+  create,
+  open,
+  select,
+  toggle,
+  loop,
+  highlight,
+} from './reducers'
+import { AbstractDropdown, DropdownOption, DropdownTexts } from './types'
 
 describe('dropdown/reducers', () => {
   let id: string
-  let text: string
+  let texts: DropdownTexts
   let options: DropdownOption[]
   beforeEach(() => {
     id = 'foo'
-    text = 'dropdown_text'
+    texts = {
+      close: 'Close',
+      optionsDescription: 'Options',
+      select: 'Selected',
+      selected: 'selected',
+      placeholder: 'Select',
+    }
     options = [
       { key: 'A', value: 1 },
       { key: 'B', value: 2 },
@@ -19,8 +34,8 @@ describe('dropdown/reducers', () => {
       expect(dropdown.id).toEqual('foo')
     })
     it('uses passed in text', () => {
-      const dropdown = create({ id, options, text })
-      expect(dropdown.text).toEqual(text)
+      const dropdown = create({ id, options, texts })
+      expect(dropdown.texts).toEqual({ ...texts, select: '' })
     })
     it('uses default option text', () => {
       const defaultOption = {
@@ -29,8 +44,8 @@ describe('dropdown/reducers', () => {
         selected: true,
       }
       const _options = [...options, defaultOption]
-      const dropdown = create({ id, options: _options, text })
-      expect(dropdown.text).toEqual(defaultOption.key)
+      const dropdown = create({ id, options: _options, texts })
+      expect(dropdown.texts.select).toEqual(defaultOption.key)
     })
     it('creates an id if not supplied', () => {
       const dropdown = create({ options })
@@ -204,7 +219,7 @@ describe('dropdown/reducers', () => {
       it('sets text', () => {
         const selectedOption = dropdown.options[1]
         dropdown = select(dropdown, selectedOption)
-        expect(dropdown.text).toEqual(selectedOption.key)
+        expect(dropdown.texts.select).toEqual(selectedOption.key)
       })
       it('sets activedecendant', () => {
         const selectedOption = dropdown.options[1]
@@ -219,61 +234,70 @@ describe('dropdown/reducers', () => {
         dropdown = select(dropdown, dropdown.options[1])
         expect(dropdown.isOpen).toBe(true)
       })
+    })
+    describe('highlight', () => {
+      beforeEach(() => {
+        dropdown = open(dropdown)
+      })
+      it('does not close dropdown', () => {
+        dropdown = highlight(dropdown, dropdown.options[1])
+        expect(dropdown.isOpen).toBe(true)
+      })
       describe('with step', () => {
-        it('sets first if no selection and step is 1', () => {
-          dropdown = select(dropdown, 1)
+        it('highlight first if no selection and step is 1', () => {
+          dropdown = highlight(dropdown, dropdown.options[0])
 
-          expect(dropdown.options[0].selected).toBe(true)
+          expect(dropdown.options[0].active).toBe(true)
         })
-        it('sets first if no selection and step is -1', () => {
-          dropdown = select(dropdown, -1)
+        it('highlight first if no selection and step is -1', () => {
+          dropdown = highlight(dropdown, -1)
 
-          expect(dropdown.options[0].selected).toBe(true)
+          expect(dropdown.options[0].active).toBe(true)
         })
-        it('sets second if first is selected and step is 1', () => {
-          dropdown.options[0].selected = true
-          dropdown = select(dropdown, 1)
+        it('highlight second if first is selected and step is 1', () => {
+          dropdown.options[0].active = true
+          dropdown = highlight(dropdown, 1)
 
-          expect(dropdown.options[1].selected).toBe(true)
+          expect(dropdown.options[1].active).toBe(true)
         })
         it('stays if last is selected and step is 1', () => {
-          dropdown.options[1].selected = true
-          dropdown = select(dropdown, 1)
+          dropdown.options[1].active = true
+          dropdown = highlight(dropdown, 1)
 
-          expect(dropdown.options[1].selected).toBe(true)
+          expect(dropdown.options[1].active).toBe(true)
         })
-        it('sets second if first is selected and step is 1', () => {
-          dropdown.options[1].selected = true
-          dropdown = select(dropdown, -1)
+        it('highlight second if first is selected and step is 1', () => {
+          dropdown.options[1].active = true
+          dropdown = highlight(dropdown, -1)
 
-          expect(dropdown.options[0].selected).toBe(true)
+          expect(dropdown.options[0].active).toBe(true)
         })
         it('stays if first is selected and step is -1', () => {
-          dropdown.options[0].selected = true
-          dropdown = select(dropdown, -1)
+          dropdown.options[0].active = true
+          dropdown = highlight(dropdown, -1)
 
-          expect(dropdown.options[0].selected).toBe(true)
+          expect(dropdown.options[0].active).toBe(true)
         })
         describe('loop', () => {
           beforeEach(() => {
             dropdown = active(loop(dropdown, true), true)
           })
-          it('sets last if no selection and step is -1', () => {
-            dropdown = select(dropdown, -1)
+          it('highlight last if no selection and step is -1', () => {
+            dropdown = highlight(dropdown, -1)
 
-            expect(dropdown.options[1].selected).toBe(true)
+            expect(dropdown.options[1].active).toBe(true)
           })
-          it('sets first if last is selected and step is 1', () => {
-            dropdown.options[1].selected = true
-            dropdown = select(dropdown, 1)
+          it('highlight first if last is selected and step is 1', () => {
+            dropdown.options[1].active = true
+            dropdown = highlight(dropdown, 1)
 
-            expect(dropdown.options[0].selected).toBe(true)
+            expect(dropdown.options[0].active).toBe(true)
           })
           it('sets last if first is selected and step is -1', () => {
-            dropdown.options[0].selected = true
-            dropdown = select(dropdown, -1)
+            dropdown.options[0].active = true
+            dropdown = highlight(dropdown, -1)
 
-            expect(dropdown.options[1].selected).toBe(true)
+            expect(dropdown.options[1].active).toBe(true)
           })
         })
       })
