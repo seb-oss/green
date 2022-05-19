@@ -7,11 +7,14 @@ export const Template = ({ validation, enabled, text }) => {
     <div class="form-group" style="height: 182px; display: block;">
       <button type="button" aria-haspopup="listbox" ${attrValidation} ${attrEnabled}>${text}</button>
       <span class="form-info" id="dropdown3_info"></span>
-      <ul role="listbox" class="popover" style="visibility:visible;opacity:1;margin-top:4px;" aria-activedescendant="option_2" tabIndex="-1">
-        <li id="option_1" role="option">Option 1</li>
-        <li id="option_2" role="option" aria-selected>${text}</li>
-        <li id="option_3" role="option">Option 3</li>
-      </ul>
+      <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+        <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+        <ul role="listbox" style="visibility:visible;opacity:1;margin-top:4px;" aria-activedescendant="option_2" tabIndex="-1">
+          <li id="option_1" role="option">Option 1</li>
+          <li id="option_2" role="option" aria-selected>${text}</li>
+          <li id="option_3" role="option">Option 3</li>
+        </ul>
+      </div>
     </div>`
 }
 
@@ -68,11 +71,14 @@ export const Template = ({ validation, enabled, text }) => {
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2</button>
-    <ul role="listbox" class="popover" aria-activedescendant="option_2" tabIndex="-1">
-      <li id="option_1" role="option">Option 1</li>
-      <li id="option_2" role="option" aria-selected>Option 2</li>
-      <li id="option_3" role="option">Option 3</li>
-    </ul>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul role="listbox" aria-activedescendant="option_2" tabIndex="-1">
+        <li id="option_1" role="option">Option 1</li>
+        <li id="option_2" role="option" aria-selected>Option 2</li>
+        <li id="option_3" role="option">Option 3</li>
+      </ul>
+    </div>
   </div>
 </Canvas>
 
@@ -80,19 +86,24 @@ export const Template = ({ validation, enabled, text }) => {
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
-    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover" tabIndex="-1" aria-multiselectable="true">
-      <legend class="sr-only">Checkbox group</legend>
-      <label class="form-control" role="option">
-        <input required type="checkbox" />
-        <span>One</span>
-        <i/>
-      </label>
-      <label class="form-control" role="option">
-        <input required type="checkbox" required />
-        <span>Two</span>
-        <i/>
-      </label>
-    </fieldset>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <div class="sg-fieldset-container">
+        <fieldset aria-describedby="checkboxGroupHelp" role="listbox" aria-multiselectable="true">
+          <legend class="sr-only">Checkbox group</legend>
+          <label class="form-control" role="option">
+            <input required type="checkbox" />
+            <span>One</span>
+            <i/>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" required />
+            <span>Two</span>
+            <i/>
+          </label>
+        </fieldset>
+      </div>
+    </div>
   </div>
 </Canvas>
 
@@ -100,20 +111,25 @@ export const Template = ({ validation, enabled, text }) => {
 <Canvas>
   <div style={{height: '300px'}}>
     <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
-    <fieldset aria-describedby="checkboxGroupHelp" role="listbox" class="popover" tabIndex="-1" aria-multiselectable="true">
-      <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
-      <legend class="sr-only">Checkbox group</legend>
-      <label class="form-control" role="option">
-        <input required type="checkbox" />
-        <span>One</span>
-        <i/>
-      </label>
-      <label class="form-control" role="option">
-        <input required type="checkbox" required />
-        <span>Two</span>
-        <i/>
-      </label>
-    </fieldset>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <div class="sg-fieldset-container">
+        <fieldset aria-describedby="checkboxGroupHelp" role="listbox" aria-multiselectable="true">
+          <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
+          <legend class="sr-only">Checkbox group</legend>
+          <label class="form-control" role="option">
+            <input required type="checkbox" />
+            <span>One</span>
+            <i/>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" required />
+            <span>Two</span>
+            <i/>
+          </label>
+        </fieldset>
+      </div>
+    </div>
   </div>
 </Canvas>
 
@@ -126,11 +142,14 @@ export const Template = ({ validation, enabled, text }) => {
            aria-autocomplete="list"
            aria-controls="autocompleteListbox"
            class="dropdown-menu"/>
-    <ul id="autocompleteListbox" role="listbox" class="popover" tabIndex="-1">
-      <li id="option_1" role="option">Option 1</li>
-      <li id="option_2" role="option">Option 2</li>
-      <li id="option_3" role="option">Option 3</li>
-    </ul>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul id="autocompleteListbox" role="listbox">
+        <li id="option_1" role="option">Option 1</li>
+        <li id="option_2" role="option">Option 2</li>
+        <li id="option_3" role="option">Option 3</li>
+      </ul>
+    </div>
   </div>
 </Canvas>
 
@@ -143,11 +162,14 @@ export const Template = ({ validation, enabled, text }) => {
             aria-haspopup="menu"
             aria-controls="drownMenu"
             class="dropdown-menu">Menu Icon</button>
-    <ul id="dropdownMenu" role="menu" class="popover" tabIndex="-1">
-      <li id="option_1" role="menuitem">Action 1</li>
-      <li id="option_2" role="menuitem">Action 2</li>
-      <li id="option_3" role="menuitem">Action 3</li>
-    </ul>
+    <div class="popover popover-dropdown active" tabindex="-1" role="menu">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul id="dropdownMenu" role="menu" tabIndex="-1">
+        <li id="option_1" role="menuitem">Action 1</li>
+        <li id="option_2" role="menuitem">Action 2</li>
+        <li id="option_3" role="menuitem">Action 3</li>
+      </ul>
+    </div>
   </div>
 </Canvas>
 
