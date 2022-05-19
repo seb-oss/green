@@ -21,7 +21,11 @@
     </div>
     <code>
       <div>Value: {{ dropdownValue0 | json }}</div>
+    </code>
+    <code>
       <div>Value: {{ dropdownValue1 | json }}</div>
+    </code>
+    <code>
       <div>Value: {{ dropdownValue2 | json }}</div>
     </code>
   </div>
@@ -53,7 +57,11 @@
     </div>
     <code>
       <div>Value: {{ dropdownMultiValue0 | json }}</div>
+    </code>
+    <code>
       <div>Value: {{ dropdownMultiValue1 | json }}</div>
+    </code>
+    <code>
       <div>Value: {{ dropdownMultiValue2 | json }}</div>
     </code>
   </div>
@@ -103,11 +111,35 @@
     [options]="options"
     [texts]="texts"
   ></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue5"
+    [options]="customOptions"
+    useValue="val"
+    display="name"
+    selectValue="val"
+    [texts]="texts"
+  ></ngg-dropdown>
+<ngg-dropdown
+  [(ngModel)]="dropdownValue6"
+  [options]="customOptionsInitial"
+  useValue="val"
+  display="name"
+  multiSelect
+  [texts]="texts"
+></ngg-dropdown>
 </div>
 
 <code>
   <div>Value: {{ dropdownValue3 | json }}</div>
+</code>
+<code>
   <div>Value: {{ dropdownValue4 | json }}</div>
+</code>
+<code>
+  <div>Value: {{ dropdownValue5 | json }}</div>
+</code>
+<code>
+  <div>Value: {{ dropdownValue6 | json }}</div>
 </code>
 
 <h3 class="mb-4 mt-5">Form group and validation</h3>
@@ -123,17 +155,17 @@
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
     >
-      <!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']"
-        >Select country</ng-container
-      >
-      <ng-container data-form-info *ngIf="ngForm['submitted']">
-        <!-- Text when form control contains one or more errors -->
-        <ng-container *ngIf="dropdown.errors as errors">
-          <!-- Text for each error (only one will be displayed at a time) -->
-          <ng-container *ngIf="errors['required']">Select country</ng-container>
-        </ng-container>
+    <!-- Hint text when not submitted -->
+    <ng-container data-form-info *ngIf="!ngForm['submitted']"
+      >Select country</ng-container
+    >
+    <ng-container data-form-info *ngIf="ngForm['submitted']">
+      <!-- Text when form control contains one or more errors -->
+      <ng-container *ngIf="dropdown.errors as errors">
+        <!-- Text for each error (only one will be displayed at a time) -->
+        <ng-container *ngIf="errors['required']">Select country</ng-container>
       </ng-container>
+    </ng-container>
     </ngg-dropdown>
   </div>
   <div
@@ -151,16 +183,16 @@
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
       ><!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']"
-        >Select country</ng-container
-      >
-      <ng-container data-form-info *ngIf="ngForm['submitted']">
-        <!-- Text when form control contains one or more errors -->
-        <ng-container *ngIf="dropdown.errors as errors">
-          <!-- Text for each error (only one will be displayed at a time) -->
-          <ng-container *ngIf="errors['required']">Select country</ng-container>
-        </ng-container>
+    <ng-container data-form-info *ngIf="!ngForm['submitted']"
+      >Select country</ng-container
+    >
+    <ng-container data-form-info *ngIf="ngForm['submitted']">
+      <!-- Text when form control contains one or more errors -->
+      <ng-container *ngIf="dropdown.errors as errors">
+        <!-- Text for each error (only one will be displayed at a time) -->
+        <ng-container *ngIf="errors['required']">Select country</ng-container>
       </ng-container>
+    </ng-container>
     </ngg-dropdown>
   </div>
   <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
