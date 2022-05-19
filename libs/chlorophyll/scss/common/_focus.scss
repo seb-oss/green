@@ -24,7 +24,6 @@
 
   @if $suffix != '' {
     &:focus:not(:focus-visible) {
-      border-color: initial;
       box-shadow: none;
       outline: 0;
     }
