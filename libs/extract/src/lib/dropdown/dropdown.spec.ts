@@ -253,6 +253,7 @@ describe('dropdown', () => {
     })
     afterEach(() => {
       global.innerWidth = 1024
+      global.dispatchEvent(new UIEvent('resize'))
     })
     it('calls createPopper (since standard width is 1024)', () => {
       expect(createPopper).toHaveBeenCalledTimes(1)
