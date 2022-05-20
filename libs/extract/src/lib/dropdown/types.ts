@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs'
+import { Observable, Subscription, Subject } from 'rxjs'
 import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
 
@@ -48,8 +48,6 @@ export interface AbstractDropdown {
     listbox: Partial<ElementProps>
     fieldset: Partial<ElementProps>
   }>
-  keyboardEvents: Observable<KeyboardEvent>
-  subscription: Subscription
 }
 
 export type DropdownListener = (dropdown: AbstractDropdown) => void
@@ -73,6 +71,7 @@ export interface DropdownHandler {
   popper?: Instance
   subscription: Subscription
   isAlive: boolean
+  onDestroy$: Subject<void>
 
   update: (props: DropdownArgs) => Promise<void>
   active: (isActive: boolean) => Promise<void>
