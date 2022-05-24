@@ -1,0 +1,45 @@
+import { NggAlert } from './alert.component'
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# Alert
+
+Alerts are used to display a short message which captures the user's attention without having to interrupt the user's task.
+
+### Importing module
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggAlert } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggAlert],
+  exports: [],
+})
+export class AppModule {}
+```
+
+### Usage
+
+```html
+<div ngg-alert>Alert text here!</div>
+```
+
+### Variants
+
+Alerts are available in a number of different variants based on the intent of the alert.
+
+<Canvas>
+  <Story id="components-alert--default" />
+</Canvas>
+
+### Dismissible Alerts
+
+Alerts that can be dismissed/removed.
+
+<Canvas>
+  <Story id="components-alert--dismissible" />
+</Canvas>
