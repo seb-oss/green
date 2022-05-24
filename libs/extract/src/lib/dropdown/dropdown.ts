@@ -10,7 +10,8 @@ import {
   popper,
   keypress,
 } from './reducers'
-import { fromEvent, merge } from 'rxjs'
+import { fromEvent, merge, Subject } from 'rxjs'
+import { take, takeUntil } from 'rxjs/operators'
 import {
   AbstractDropdown,
   DropdownHandler,
@@ -18,6 +19,7 @@ import {
   DropdownArgs,
 } from './types'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { isMobileViewport$ } from '../common/viewport-size'
 
 export const createDropdown = (
   init: DropdownArgs,
@@ -31,6 +33,7 @@ export const createDropdown = (
     listbox,
     dropdown: create(init),
     isAlive: true,
+    onDestroy$: new Subject<void>(),
   }
   const handler = _handler as DropdownHandler
 
@@ -51,62 +54,62 @@ export const createDropdown = (
     )
   handler.update = (props) => update(handler, listener, create(props))
 
-  handler.subscription = merge(
+  merge(
     fromEvent<KeyboardEvent>(document, 'keydown'),
-    fromEvent<UIEvent>(window, 'resize'),
     fromEvent<FocusEvent>(document, 'focusin'),
     fromEvent<MouseEvent>(document, 'click')
-  ).subscribe((event) => {
-    switch (event.type) {
-      case 'keydown': {
-        if (!handler.dropdown.isActive) return
-        const { key } = event as KeyboardEvent
-        update(
-          handler,
-          listener,
-          keypress(handler.dropdown, key, event as KeyboardEvent)
-        )
-        break
-      }
-      case 'resize': {
-        const innerWidth = (event.target as Window).innerWidth
-        lockBodyScroll(handler, innerWidth)
-        pop(handler, listener, innerWidth)
-        break
-      }
-      case 'focusin': {
-        const component = toggler.parentElement as HTMLElement
-        const focused = event.target as HTMLElement
-        const componentWasFocuesd = component.contains(focused)
-        if (handler.dropdown.isActive && !componentWasFocuesd) {
-          update(handler, listener, active(handler.dropdown, false))
-        } else if (!handler.dropdown.isActive && componentWasFocuesd) {
-          update(handler, listener, active(handler.dropdown, true))
+  )
+    .pipe(takeUntil(handler.onDestroy$))
+    .subscribe((event) => {
+      switch (event.type) {
+        case 'keydown': {
+          if (!handler.dropdown.isActive) return
+          const { key } = event as KeyboardEvent
+          update(
+            handler,
+            listener,
+            keypress(handler.dropdown, key, event as KeyboardEvent)
+          )
+          break
         }
-        break
-      }
-      case 'click': {
-        const clickedOn = event.target as HTMLElement
-        if (
-          !handler.toggler.contains(clickedOn) &&
-          !handler.listbox.contains(clickedOn)
-        ) {
-          update(handler, listener, active(close(handler.dropdown), false))
+        case 'focusin': {
+          const component = toggler.parentElement as HTMLElement
+          const focused = event.target as HTMLElement
+          const componentWasFocuesd = component.contains(focused)
+          if (handler.dropdown.isActive && !componentWasFocuesd) {
+            update(handler, listener, active(handler.dropdown, false))
+          } else if (!handler.dropdown.isActive && componentWasFocuesd) {
+            update(handler, listener, active(handler.dropdown, true))
+          }
+          break
+        }
+        case 'click': {
+          const clickedOn = event.target as HTMLElement
+          if (
+            !handler.toggler.contains(clickedOn) &&
+            !handler.listbox.contains(clickedOn)
+          ) {
+            update(handler, listener, active(close(handler.dropdown), false))
+          }
         }
       }
-    }
-  })
+    })
+
+  isMobileViewport$
+    .pipe(takeUntil(handler.onDestroy$))
+    .subscribe((isMobile) => {
+      lockBodyScroll(handler, isMobile)
+      pop(handler, listener, isMobile)
+    })
 
   handler.destroy = () => {
-    handler.subscription?.unsubscribe()
+    handler.onDestroy$.next()
     handler.popper?.destroy()
     handler.isAlive = false
 
     const scrollableListbox = handler.listbox.querySelector('ul')
     scrollableListbox && enableBodyScroll(scrollableListbox)
   }
-
-  pop(handler, listener)
 
   // Trigger initial render
   listener(handler.dropdown)
@@ -125,7 +128,9 @@ const update = async (
   if (newState) handler.dropdown = newState
 
   if (oldState.isOpen !== handler.dropdown.isOpen) {
-    lockBodyScroll(handler)
+    isMobileViewport$
+      .pipe(take(1))
+      .subscribe((isMobile) => lockBodyScroll(handler, isMobile))
   }
 
   if (handler.popper) {
@@ -148,14 +153,14 @@ const update = async (
 const pop = (
   handler: DropdownHandler,
   listener: DropdownListener,
-  innerWidth: number = window.innerWidth
+  isMobile: boolean
 ) => {
-  if (innerWidth < 576 && handler.popper) {
+  if (isMobile && handler.popper) {
     handler.popper.destroy()
     handler.popper = undefined
 
     update(handler, listener, popper(handler.dropdown))
-  } else if (innerWidth >= 576 && !handler.popper) {
+  } else if (!isMobile && !handler.popper) {
     handler.popper = createPopper(handler.toggler, handler.listbox, {
       placement: 'bottom-start',
       modifiers: [
@@ -172,13 +177,12 @@ const pop = (
   }
 }
 
-const lockBodyScroll = (
-  handler: DropdownHandler,
-  width = window.innerWidth
-) => {
-  const scrollableListbox = handler.listbox.querySelector('ul')
+const lockBodyScroll = (handler: DropdownHandler, isMobile: boolean) => {
+  const scrollableListbox = handler.listbox.querySelector(
+    'ul, .sg-fieldset-container'
+  )
   if (scrollableListbox) {
-    handler.dropdown.isOpen && width < 576
+    handler.dropdown.isOpen && isMobile
       ? disableBodyScroll(scrollableListbox)
       : enableBodyScroll(scrollableListbox)
   }
