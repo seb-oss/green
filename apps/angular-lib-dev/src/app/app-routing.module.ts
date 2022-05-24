@@ -32,6 +32,12 @@ const routes: Routes = [
       import('./datepicker/datepicker.module').then((m) => m.DatepickerModule),
   },
   {
+    path: 'alert',
+    data: { name: 'Alert' },
+    loadChildren: () =>
+      import('./alert/alert.module').then((m) => m.AlertModule),
+  },
+  {
     path: 'badge',
     data: { name: 'Badge' },
     loadChildren: () =>
