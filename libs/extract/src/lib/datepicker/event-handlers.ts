@@ -37,7 +37,7 @@ const _mobileViewHandler = (
             take(1),
             takeUntil(dp.active$.pipe(filter((active) => !active)))
           )
-          .subscribe((res) => {
+          .subscribe(() => {
             dp.close()
           })
       }
@@ -136,7 +136,7 @@ export const onInactiveHandler = (
   datepickerDialogElRef: HTMLElement
 ) =>
   of(dp).pipe(
-    tap((_) => {
+    tap(() => {
       resetScroll()
       enableBodyScroll(datepickerDialogElRef)
     }),
