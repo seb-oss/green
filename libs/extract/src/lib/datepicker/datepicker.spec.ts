@@ -15,7 +15,7 @@ describe('datepicker', () => {
   let options: DatepickerOptions
   let datepickerEl: HTMLElement
   let datepickerDialogEl: HTMLElement
-  let dateInputEl: HTMLElement
+  let dateInputEl: HTMLInputElement
   let datepickerTriggerEl: HTMLButtonElement
   let listener: DatepickerListener
   let state: DatepickerState
@@ -434,6 +434,46 @@ describe('datepicker', () => {
 
       expect(data).toEqual(expected)
       expect(calendar).toContainEqual(selectedDay)
+    })
+  })
+  describe('input mask', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    beforeEach(() => {
+      datepicker = createDatepicker(
+        (_data) => {
+          data = _data
+        },
+        options,
+        datepickerEl,
+        datepickerDialogEl,
+        dateInputEl,
+        datepickerTriggerEl
+      )
+    })
+    it('applies input mask correctly', () => {
+      dateInputEl.value = '20220308';
+      expect(dateInputEl.value).toBe('2022-03-08')
+    })
+    it('applies input mask correctly with dash', () => {
+      dateInputEl.value = '2022-03-08';
+      expect(dateInputEl.value).toBe('2022-03-08')
+    })
+    it('only accepts valid input value for day', () => {
+      dateInputEl.value = '20220332';
+      expect(dateInputEl.value).toBe('2022-03-3d')
+    })
+    it('only accepts valid input for month', () => {
+      dateInputEl.value = '202213';
+      expect(dateInputEl.value).toBe('2022-1m-dd')
+    })
+    it('only accepts valid values', () => {
+      dateInputEl.value = '2 not a date';
+      expect(dateInputEl.value).toBe('2yyy-mm-dd')
+    })
+    it('only accepts digits', () => {
+      dateInputEl.value = 'not a date';
+      expect(dateInputEl.value).toBe('')
     })
   })
 })
