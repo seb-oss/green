@@ -5,6 +5,7 @@ import { iif, Observable, ReplaySubject, Subject } from 'rxjs'
 import { switchMap, takeUntil } from 'rxjs/operators'
 import { onActiveHandler, onInactiveHandler } from './event-handlers'
 import { setFocus } from './helper-functions'
+import inputmask from 'inputmask'
 
 type DateUnit = 'years' | 'months' | 'weeks' | 'days'
 export interface Datepicker {
@@ -145,6 +146,8 @@ export const createDatepicker = (
   )
   const unsubscribe$ = new Subject()
   const active$ = new ReplaySubject<boolean>(1)
+  // add input mask to date input // TODO: add support for other date formats
+  inputmask({ alias: 'datetime', inputFormat: 'yyyy-mm-dd', outputFormat: 'yyyymmdd'}).mask(dateInputElRef)
   const dp: Datepicker = {
     add: (amount, unit, select = false) => {
       data = createData(
