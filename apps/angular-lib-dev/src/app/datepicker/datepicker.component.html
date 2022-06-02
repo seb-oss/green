@@ -5,7 +5,7 @@
 </code>
 <div class="border p-4 mt-4 mb-5" style="height: 420px">
   <form [formGroup]="dateForm">
-    <ngg-datepicker formControlName="date" label="Date">
+    <ngg-datepicker formControlName="date" label="Date" [options]="options">
       <span class="form-info">Select a date</span>
     </ngg-datepicker>
     <ngg-datepicker formControlName="dateEmpty"></ngg-datepicker>

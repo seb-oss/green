@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { DatepickerOptions } from '@sebgroup/extract'
+import { startOfYear, subYears } from 'date-fns'
 
 @Component({
   selector: 'green-datepicker',
@@ -18,6 +20,11 @@ export class DatepickerComponent {
   ngModelDateEmpty = ''
   value = new Date()
   valueEmpty = ''
+
+  options: DatepickerOptions = {
+    minDate: startOfYear(subYears(new Date(), 100)),
+    maxDate: new Date(),
+  }
 
   validationForm = this._fb.group({
     date: [null, [Validators.required]],
