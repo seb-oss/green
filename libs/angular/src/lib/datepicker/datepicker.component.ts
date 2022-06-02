@@ -13,7 +13,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   AbstractDropdown,
   DropdownHandler,
-  ExtendedDropdownOption,
   ElementProps,
   DatepickerData,
   Datepicker,
@@ -89,7 +88,7 @@ export class NggDatepickerComponent
   listbox?: Partial<ElementProps>
   _value: string | Date | undefined
   private _months: Array<DropdownOption> = months({})
-  years: Array<DropdownOption> = years({})
+  years?: Array<DropdownOption>
   private _options?: DatepickerOptions
 
   dp: Datepicker | undefined
@@ -129,6 +128,10 @@ export class NggDatepickerComponent
   ) => {
     if (this.dp && state) {
       this.dp.state = { ...state }
+      this.years = years({
+        from: this.dp.state?.minDate?.getFullYear(),
+        to: this.dp.state?.maxDate?.getFullYear(),
+      })
     }
 
     this.onTouchedFn && this.onTouchedFn()
