@@ -68,8 +68,7 @@ export class NggDatepickerComponent
   }
   @Input() id?: string = randomId()
   @Input() label?: string
-  @Input() valid?: boolean
-  @Input() invalid?: boolean
+  @Input() isValid: boolean | null = null
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @ViewChild('datepickerDialogElRef')
   public datepickerDialogElRef?: ElementRef<HTMLElement>

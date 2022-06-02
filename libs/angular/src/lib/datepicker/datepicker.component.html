@@ -3,8 +3,8 @@
   <div
     class="group"
     #datepickerElRef
-    [class.is-valid]="valid"
-    [class.is-invalid]="invalid"
+    [class.is-valid]="isValid"
+    [class.is-invalid]="isValid === false"
   >
     <input
       [attr.id]="id"

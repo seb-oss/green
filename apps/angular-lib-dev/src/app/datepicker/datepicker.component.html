@@ -42,8 +42,7 @@
     <ngg-datepicker
       formControlName="date"
       label="Date"
-      [valid]="date.valid && ngForm.submitted"
-      [invalid]="date.invalid && ngForm.submitted"
+      [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
       <ng-container data-form-info *ngIf="!ngForm['submitted']"
@@ -61,6 +60,7 @@
   <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
     Save
   </button>
+  <button type="reset" (click)="ngForm.reset()">Reset</button>
 </form>
 <code>
   <h5 class="mb-0">Form data</h5>
