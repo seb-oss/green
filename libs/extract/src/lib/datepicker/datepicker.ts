@@ -1,11 +1,22 @@
-import { add, format, sub } from 'date-fns'
+import {
+  add,
+  addYears,
+  endOfDay,
+  endOfMonth,
+  endOfYear,
+  format,
+  startOfDay,
+  startOfMonth,
+  startOfYear,
+  sub,
+} from 'date-fns'
 import { Calendar, createCalendar } from '.'
 import { Instance } from '@popperjs/core'
 import { iif, Observable, ReplaySubject, Subject } from 'rxjs'
 import { switchMap, takeUntil } from 'rxjs/operators'
 import { onActiveHandler, onInactiveHandler } from './event-handlers'
 import { setFocus } from './helper-functions'
-import inputmask from 'inputmask'
+import Inputmask from 'inputmask'
 
 type DateUnit = 'years' | 'months' | 'weeks' | 'days'
 export interface Datepicker {
@@ -41,6 +52,8 @@ export interface DatepickerData {
 
 export interface DatepickerState {
   isActive: boolean
+  minDate?: Date
+  maxDate?: Date
 }
 
 export type DatepickerListener = (
@@ -56,11 +69,19 @@ export interface DatepickerOptions {
   useCurrentTime?: boolean
   weekName?: { abbr: string; displayText: string }
   showWeeks?: boolean
+  minDate?: Date | number
+  maxDate?: Date | number
 }
 
-const createState = (isActive = false): DatepickerState => {
+const createState = (
+  isActive = false,
+  minDate?: Date,
+  maxDate?: Date
+): DatepickerState => {
   return {
     isActive,
+    minDate,
+    maxDate,
   }
 }
 
@@ -71,7 +92,9 @@ const createData = (
   useCurrentTime?: boolean,
   showWeeks?: boolean,
   weekName?: { abbr: string; displayText: string },
-  preHighlightedDate?: Date | string
+  preHighlightedDate?: Date | string | null,
+  startOfMinDate?: Date | undefined,
+  endOfMaxDate?: Date | undefined
 ): DatepickerData => {
   const date =
     typeof currentDate === 'string'
@@ -114,7 +137,9 @@ const createData = (
       <boolean>showWeeks,
       <boolean>useCurrentTime,
       <{ abbr: string; displayText: string }>weekName,
-      highlightedDate
+      highlightedDate,
+      startOfMinDate,
+      endOfMaxDate
     ),
   }
 }
@@ -129,6 +154,8 @@ export const createDatepicker = (
     useCurrentTime = true,
     showWeeks = false,
     weekName = { abbr: 'Week', displayText: 'wk' },
+    minDate = startOfYear(addYears(new Date(), -5)),
+    maxDate = endOfYear(addYears(new Date(), 5)),
   }: DatepickerOptions,
   datepickerElRef: HTMLElement,
   datepickerDialogElRef: HTMLElement,
@@ -136,27 +163,49 @@ export const createDatepicker = (
   dateInputElRef: HTMLElement,
   datepickerTriggerElRef: HTMLButtonElement
 ): Datepicker => {
+  const startOfMinDate = startOfDay(minDate)
+  const startOfMonthMinDate = startOfMonth(minDate)
+  const endOfMaxDate = endOfDay(maxDate)
+  const endOfMonthMaxDate = endOfMonth(maxDate)
   let data = createData(
     locale,
     currentDate,
     selectedDate,
     useCurrentTime,
     showWeeks,
-    weekName
+    weekName,
+    null,
+    startOfMinDate,
+    endOfMaxDate
   )
   const unsubscribe$ = new Subject()
   const active$ = new ReplaySubject<boolean>(1)
   // add input mask to date input // TODO: add support for other date formats
-  inputmask({ alias: 'datetime', inputFormat: 'yyyy-mm-dd', outputFormat: 'yyyymmdd'}).mask(dateInputElRef)
+  Inputmask({
+    alias: 'datetime',
+    inputFormat: 'yyyy-mm-dd',
+    outputFormat: 'yyyymmdd',
+  }).mask(dateInputElRef)
+
   const dp: Datepicker = {
     add: (amount, unit, select = false) => {
+      const newDate = add(data.date, { [unit]: amount })
+      if (unit === 'days' && newDate > endOfMaxDate) {
+        return
+      }
+      if (unit === 'months' && newDate > endOfMonthMaxDate) {
+        return
+      }
       data = createData(
         locale,
-        add(data.date, { [unit]: amount }),
+        newDate,
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       if (select) {
         dp.highlight(data.date)
@@ -164,13 +213,23 @@ export const createDatepicker = (
       listener(data)
     },
     sub: (amount, unit, select = false) => {
+      const newDate = sub(data.date, { [unit]: amount })
+      if (unit === 'days' && newDate < startOfMinDate) {
+        return
+      }
+      if (unit === 'months' && newDate < startOfMonthMinDate) {
+        return
+      }
       data = createData(
         locale,
-        sub(data.date, { [unit]: amount }),
+        newDate,
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       if (select) {
         dp.highlight(data.date)
@@ -178,48 +237,72 @@ export const createDatepicker = (
       listener(data)
     },
     set: (date) => {
+      if (date < startOfMinDate || date > endOfMaxDate) {
+        return
+      }
       data = createData(
         locale,
         date,
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       listener(data)
     },
     setMonth: (number) => {
       const date = new Date(data.date.setMonth(number))
+      if (date < startOfMonthMinDate || date > endOfMonthMaxDate) {
+        return
+      }
       data = createData(
         locale,
         date,
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       listener(data)
     },
     setYear: (number) => {
       const date = new Date(data.date.setFullYear(number))
+      if (date < startOfMonthMinDate || date > endOfMonthMaxDate) {
+        return
+      }
       data = createData(
         locale,
         date,
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       listener(data)
     },
     select: (date) => {
+      if (date < startOfMinDate || date > endOfMaxDate) {
+        return
+      }
       data = createData(
         locale,
         data.date,
         date,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        data.highlightedDate,
+        startOfMinDate,
+        endOfMaxDate
       )
       listener(data)
       if (closeOnSelect) {
@@ -227,6 +310,9 @@ export const createDatepicker = (
       }
     },
     highlight: (date) => {
+      if (date < startOfMinDate || date > endOfMaxDate) {
+        return
+      }
       data = createData(
         locale,
         data.date,
@@ -234,7 +320,9 @@ export const createDatepicker = (
         useCurrentTime,
         showWeeks,
         weekName,
-        date
+        date,
+        startOfMinDate,
+        endOfMaxDate
       )
       listener(data)
       // set focus on focusable calendar day
@@ -247,10 +335,13 @@ export const createDatepicker = (
         data.selectedDate,
         useCurrentTime,
         showWeeks,
-        weekName
+        weekName,
+        null,
+        startOfMinDate,
+        endOfMaxDate
       )
 
-      const state = createState(true)
+      const state = createState(true, startOfMinDate, endOfMaxDate)
       active$.next(true)
       listener(data, state)
 
@@ -268,11 +359,14 @@ export const createDatepicker = (
           data.highlightedDate || data.selectedDate,
           useCurrentTime,
           showWeeks,
-          weekName
+          weekName,
+          null,
+          startOfMinDate,
+          endOfMaxDate
         )
       }
 
-      const state = createState(false)
+      const state = createState(false, startOfMinDate, endOfMaxDate)
       active$.next(false)
       listener(data, state)
 
@@ -290,7 +384,7 @@ export const createDatepicker = (
       unsubscribe$.next(true)
       unsubscribe$.complete()
     },
-    state: createState(),
+    state: createState(false, startOfMinDate, endOfMaxDate),
     active$: active$.asObservable(),
   }
 

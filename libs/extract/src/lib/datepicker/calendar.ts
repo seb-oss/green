@@ -7,6 +7,7 @@ import {
   isSameMonth,
   format,
   getWeek,
+  isWithinInterval,
 } from 'date-fns'
 import { getNameForWeek, getWeekday, weekdays } from './values'
 
@@ -20,6 +21,7 @@ export interface CalendarDay {
   highlighted: boolean
   selected: boolean
   rangeSelected: boolean
+  disabled: boolean
 }
 export type CalendarGrid = CalendarDay[][]
 
@@ -41,7 +43,9 @@ export const createCalendar = (
   showWeeks: boolean,
   useCurrentTime: boolean,
   weekName: { abbr: string; displayText: string },
-  highlightedDate?: Date | undefined
+  highlightedDate?: Date | undefined,
+  startOfMinDate?: Date | undefined,
+  endOfMaxDate?: Date | undefined
 ): Calendar => {
   let calendar: Partial<Calendar> = {}
   const today = new Date()
@@ -57,7 +61,6 @@ export const createCalendar = (
   const cm = today.getMinutes()
   const cs = today.getSeconds()
   const cms = today.getMilliseconds()
-
   let currentDay = soc
   let currentWeek: CalendarDay[] = []
   let daysInCalendar = 0
@@ -73,6 +76,13 @@ export const createCalendar = (
         weekNumbers = [...(weekNumbers || []), weekNumber]
       }
     }
+    let withinInterval = true
+    if (startOfMinDate && endOfMaxDate) {
+      withinInterval = isWithinInterval(currentDay, {
+        start: startOfMinDate,
+        end: endOfMaxDate,
+      })
+    }
     currentWeek.push({
       date: useCurrentTime
         ? new Date(currentDay.setHours(ch, cm, cs, cms))
@@ -87,6 +97,7 @@ export const createCalendar = (
         : false,
       selected: selectedDate ? isSameDay(currentDay, selectedDate) : false,
       rangeSelected: false,
+      disabled: !isSameMonth(currentDay, date) || !withinInterval,
     })
     currentDay = addDays(currentDay, 1)
   }
