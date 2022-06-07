@@ -42,6 +42,7 @@
     <ngg-datepicker
       formControlName="date"
       label="Date"
+      [options]="options"
       [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
@@ -53,6 +54,21 @@
         <ng-container *ngIf="date.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->
           <ng-container *ngIf="errors['required']">Select a date</ng-container>
+          <ng-container *ngIf="errors['validDate'] === true"
+            >Enter valid date</ng-container
+          >
+          <ng-container *ngIf="errors['validDate']['minDate']"
+            >Enter date after
+            {{
+              errors['validDate']['minDate'] | date: 'shortDate'
+            }}</ng-container
+          >
+          <ng-container *ngIf="errors['validDate']['maxDate']"
+            >Enter date before
+            {{
+              errors['validDate']['maxDate'] | date: 'shortDate'
+            }}</ng-container
+          >
         </ng-container>
       </ng-container>
     </ngg-datepicker>
