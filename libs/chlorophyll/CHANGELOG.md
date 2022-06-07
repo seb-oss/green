@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.13](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.12...@sebgroup/chlorophyll@1.0.0-beta.13) (2022-06-07)
+
+
+### Bug Fixes
+
+* remove border color reset on focus ([ca42542](https://github.com/sebgroup/green/commit/ca42542403fe909a88e7832694b76bfb089b9ecd))
+
+
+
 # [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.11...@sebgroup/chlorophyll@1.0.0-beta.12) (2022-05-05)
 
 
