@@ -9,7 +9,13 @@ import {
   EventEmitter,
   ChangeDetectorRef,
 } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms'
 import {
   AbstractDropdown,
   DropdownHandler,
@@ -24,6 +30,7 @@ import {
   randomId,
   DatepickerOptions,
 } from '@sebgroup/extract'
+import { endOfDay, startOfDay } from 'date-fns'
 
 @Component({
   selector: 'ngg-datepicker',
@@ -187,5 +194,41 @@ export class NggDatepickerComponent
     } else {
       throw 'Missing one or more elements...'
     }
+  }
+}
+
+export function dateValidator(dates?: { min?: Date; max?: Date }): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value
+    if (!value) {
+      return null
+    }
+    const newDate = new Date(value)
+    const isValidDate = !isNaN(newDate.getTime())
+    if (!isValidDate) {
+      return { validDate: true }
+    }
+
+    const validMinDate = dates?.min ? newDate >= startOfDay(dates.min) : true
+    const validMaxDate = dates?.max ? newDate <= endOfDay(dates.max) : true
+
+    if (!validMinDate && dates?.min) {
+      return {
+        validDate: {
+          minDate: startOfDay(dates.min),
+          actualDate: newDate,
+        },
+      }
+    }
+    if (!validMaxDate && dates?.max) {
+      return {
+        validDate: {
+          maxDate: endOfDay(dates.max),
+          actualDate: newDate,
+        },
+      }
+    }
+
+    return null
   }
 }
