@@ -57,13 +57,15 @@
           <ng-container *ngIf="errors['validDate'] === true"
             >Enter valid date</ng-container
           >
-          <ng-container *ngIf="errors['validDate']['minDate']"
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['minDate']"
             >Enter date after
             {{
               errors['validDate']['minDate'] | date: 'shortDate'
             }}</ng-container
           >
-          <ng-container *ngIf="errors['validDate']['maxDate']"
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
             >Enter date before
             {{
               errors['validDate']['maxDate'] | date: 'shortDate'
