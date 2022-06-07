@@ -2,6 +2,27 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.13](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.12...@sebgroup/extract@1.0.0-beta.13) (2022-06-07)
+
+
+### Bug Fixes
+
+* **datepicker:** handle invalid dates ([5197505](https://github.com/sebgroup/green/commit/51975054e6dc6898eb095c8075006d7a3b95c251))
+* **dropdown:** popover transitions out on init ([b22c8cf](https://github.com/sebgroup/green/commit/b22c8cf9b18b026a4f764c249243b68a0c163c53))
+
+
+### Features
+
+* **datepicker:** add input mask ([7c2212f](https://github.com/sebgroup/green/commit/7c2212f6ca0eb6f6cb43376f53c42080e7ff4ec9)), closes [#510](https://github.com/sebgroup/green/issues/510)
+* **datepicker:** add support for min and max date ([78321f1](https://github.com/sebgroup/green/commit/78321f19d6df213b18c169023ecf188763fe4e6c)), closes [#503](https://github.com/sebgroup/green/issues/503)
+
+
+### Performance Improvements
+
+* **extracts:** share value to all subscribers ([2d08cf4](https://github.com/sebgroup/green/commit/2d08cf4bc58877c3905b4b2504052d29dd9c25d0))
+
+
+
 # [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.11...@sebgroup/extract@1.0.0-beta.12) (2022-05-05)
 
 
