@@ -9,6 +9,7 @@ import {
   startOfMonth,
   startOfYear,
   sub,
+  subYears,
 } from 'date-fns'
 import { Calendar, createCalendar } from '.'
 import { Instance } from '@popperjs/core'
@@ -69,8 +70,8 @@ export interface DatepickerOptions {
   useCurrentTime?: boolean
   weekName?: { abbr: string; displayText: string }
   showWeeks?: boolean
-  minDate?: Date | number
-  maxDate?: Date | number
+  minDate?: Date
+  maxDate?: Date
 }
 
 const createState = (
@@ -103,11 +104,15 @@ const createData = (
   const formattedDate =
     typeof currentDate === 'string' ? currentDate : format(date, 'yyyy-MM-dd')
 
-  const selectedDate = preSelectedDate
-    ? typeof preSelectedDate === 'string'
-      ? new Date(preSelectedDate + ' 12:00:00')
-      : preSelectedDate
-    : undefined
+  let selectedDate
+  if (typeof preSelectedDate === 'string') {
+    const preSelectedDateFromString = new Date(preSelectedDate + ' 12:00:00')
+    selectedDate = isNaN(preSelectedDateFromString.getTime())
+      ? undefined
+      : preSelectedDateFromString
+  } else {
+    selectedDate = preSelectedDate
+  }
   const formattedSelectedDate = preSelectedDate
     ? typeof preSelectedDate === 'string'
       ? preSelectedDate
@@ -154,7 +159,7 @@ export const createDatepicker = (
     useCurrentTime = true,
     showWeeks = false,
     weekName = { abbr: 'Week', displayText: 'wk' },
-    minDate = startOfYear(addYears(new Date(), -5)),
+    minDate = startOfYear(subYears(new Date(), 5)),
     maxDate = endOfYear(addYears(new Date(), 5)),
   }: DatepickerOptions,
   datepickerElRef: HTMLElement,
