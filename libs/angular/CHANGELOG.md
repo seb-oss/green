@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.13](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.12...@sebgroup/green-angular@1.0.0-beta.13) (2022-06-07)
+
+
+### Bug Fixes
+
+* **angular:** datepicker - only pass valid date to datepicker ([4b652ad](https://github.com/sebgroup/green/commit/4b652ad08b1fc8039754a71e432284a05f49bc5c))
+* **angular:** dropdown - select by value ([fbf0cd2](https://github.com/sebgroup/green/commit/fbf0cd2f0a5c777691cc2177099b5d38cd5ddd9e))
+* **dropdown:** popover transitions out on init ([dc0b36e](https://github.com/sebgroup/green/commit/dc0b36e51733775f73e20a9c435550063586100d))
+
+
+### Features
+
+* **angular:** add date validator ([5c96635](https://github.com/sebgroup/green/commit/5c966357e5f3e3096a45306c3a1f9a13b679e77b))
+* **angular:** datepicker - add support for min and max date ([fd282ac](https://github.com/sebgroup/green/commit/fd282ac8284e15da4d93b20d5535e6bf4daa5835)), closes [#503](https://github.com/sebgroup/green/issues/503)
+
+
+
 # [1.0.0-beta.12](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.11...@sebgroup/green-angular@1.0.0-beta.12) (2022-05-05)
 
 
