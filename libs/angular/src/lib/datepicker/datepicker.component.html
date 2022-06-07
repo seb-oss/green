@@ -3,8 +3,8 @@
   <div
     class="group"
     #datepickerElRef
-    [class.is-valid]="valid"
-    [class.is-invalid]="invalid"
+    [class.is-valid]="isValid"
+    [class.is-invalid]="isValid === false"
   >
     <input
       [attr.id]="id"
@@ -17,7 +17,7 @@
       placeholder="yyyy-mm-dd"
       #dateInputElRef
       [value]="data?.formattedSelectedDate || ''"
-      (change)="dp?.select(dateInputElRef.value)"
+      (change)="onDateChange(dateInputElRef.value)"
     />
     <button
       #datepickerTriggerElRef
@@ -55,6 +55,7 @@
         (valueChange)="dp?.setMonth($event)"
       ></ngg-dropdown>
       <ngg-dropdown
+        *ngIf="years"
         [options]="years"
         text="Select"
         [value]="data?.year"
@@ -101,7 +102,7 @@
               [attr.aria-selected]="
                 day.selected && !data?.highlightedDate ? true : null
               "
-              [class.disabled]="!day.currentMonth"
+              [class.disabled]="day.disabled"
               [class.sg-date-today]="day.today"
               [title]="day.today ? 'Today' : ''"
               [tabIndex]="

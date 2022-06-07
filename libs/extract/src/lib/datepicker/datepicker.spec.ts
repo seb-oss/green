@@ -8,6 +8,14 @@ import {
   DatepickerState,
 } from '.'
 import { DeepPartial } from '../../helpers'
+import {
+  addYears,
+  endOfDay,
+  endOfYear,
+  startOfDay,
+  startOfYear,
+  subYears,
+} from 'date-fns'
 
 describe('datepicker', () => {
   let locale: string
@@ -31,7 +39,6 @@ describe('datepicker', () => {
     dateInputEl = document.createElement('input')
     datepickerTriggerEl = document.createElement('button')
     listener = jest.fn()
-    state = { isActive: false }
   })
   afterEach(() => {
     jest.useRealTimers()
@@ -48,8 +55,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       date: now,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with year', () => {
     createDatepicker(
@@ -63,8 +75,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       year: 2022,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with year', () => {
     createDatepicker(
@@ -78,8 +95,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       year: 2022,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with month', () => {
     createDatepicker(
@@ -93,8 +115,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       month: 2,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with day', () => {
     createDatepicker(
@@ -108,8 +135,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       day: 4,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with weekday', () => {
     createDatepicker(
@@ -123,8 +155,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       weekday: 'fredag',
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with calendar', () => {
     createDatepicker(
@@ -138,8 +175,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<DeepPartial<DatepickerData>>({
       calendar: expect.any(Object),
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   it('calls listener with selectedDate', () => {
     const selected = new Date('2022-03-08 12:00:00')
@@ -155,8 +197,13 @@ describe('datepicker', () => {
     const expected = expect.objectContaining<Partial<DatepickerData>>({
       selectedDate: selected,
     })
+    const expectedState = {
+      isActive: false,
+      minDate: startOfYear(subYears(now, 5)),
+      maxDate: endOfYear(addYears(now, 5)),
+    }
 
-    expect(listener).toHaveBeenCalledWith(expected, state)
+    expect(listener).toHaveBeenCalledWith(expected, expectedState)
   })
   describe('.add', () => {
     let datepicker: Datepicker
@@ -452,28 +499,102 @@ describe('datepicker', () => {
       )
     })
     it('applies input mask correctly', () => {
-      dateInputEl.value = '20220308';
+      dateInputEl.value = '20220308'
       expect(dateInputEl.value).toBe('2022-03-08')
     })
     it('applies input mask correctly with dash', () => {
-      dateInputEl.value = '2022-03-08';
+      dateInputEl.value = '2022-03-08'
       expect(dateInputEl.value).toBe('2022-03-08')
     })
     it('only accepts valid input value for day', () => {
-      dateInputEl.value = '20220332';
+      dateInputEl.value = '20220332'
       expect(dateInputEl.value).toBe('2022-03-3d')
     })
     it('only accepts valid input for month', () => {
-      dateInputEl.value = '202213';
+      dateInputEl.value = '202213'
       expect(dateInputEl.value).toBe('2022-1m-dd')
     })
     it('only accepts valid values', () => {
-      dateInputEl.value = '2 not a date';
+      dateInputEl.value = '2 not a date'
       expect(dateInputEl.value).toBe('2yyy-mm-dd')
     })
     it('only accepts digits', () => {
-      dateInputEl.value = 'not a date';
+      dateInputEl.value = 'not a date'
       expect(dateInputEl.value).toBe('')
+    })
+  })
+  describe('min date', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    let state: DatepickerState
+    now = new Date('2022-03-04 12:00:00')
+    const minDate = now
+    const options = {
+      minDate,
+    }
+    beforeEach(() => {
+      datepicker = createDatepicker(
+        (_data, _state) => {
+          data = _data
+          state = _state
+        },
+        options,
+        datepickerEl,
+        datepickerDialogEl,
+        dateInputEl,
+        datepickerTriggerEl
+      )
+    })
+    it('should use value from options', () => {
+      const expected = {
+        isActive: false,
+        minDate: startOfDay(minDate),
+        maxDate: state.maxDate,
+      }
+      expect(state).toStrictEqual(expected)
+    })
+    it('should disable dates before minDate and dates outside current month', () => {
+      const calendar = data.calendar.calendarGrid.flatMap((week) => week)
+      calendar.forEach((day) => {
+        expect(day.disabled).toBe(day.date < minDate || !day.currentMonth)
+      })
+    })
+  })
+  describe('max date', () => {
+    let datepicker: Datepicker
+    let data: DatepickerData
+    let state: DatepickerState
+    now = new Date('2022-03-04 12:00:00')
+    const maxDate = now
+    const options = {
+      maxDate,
+    }
+    beforeEach(() => {
+      datepicker = createDatepicker(
+        (_data, _state) => {
+          data = _data
+          state = _state
+        },
+        options,
+        datepickerEl,
+        datepickerDialogEl,
+        dateInputEl,
+        datepickerTriggerEl
+      )
+    })
+    it('should use value from options', () => {
+      const expected = {
+        isActive: false,
+        minDate: state.minDate,
+        maxDate: endOfDay(maxDate),
+      }
+      expect(state).toStrictEqual(expected)
+    })
+    it('should disable dates after maxDate and dates outside current month', () => {
+      const calendar = data.calendar.calendarGrid.flatMap((week) => week)
+      calendar.forEach((day) => {
+        expect(day.disabled).toBe(day.date > maxDate || !day.currentMonth)
+      })
     })
   })
 })

@@ -61,10 +61,53 @@ If you just need a simple select without any form, validation etc. it's possible
 ```
 
 
+## Inputs
+|Input (attribute)|Description|Default|
+|:--------|:----------|:------|
+|options|`DatepickerOptions` for datepicker see more info below. | n/a |
+|label|Text to use as label for datepicker input.| n/a |
+|id|Id applied to datepicker elements.|`random id`|
+|isValid|Mark datepicker as invalid/valid.| `null` |
+
+## DatepickerOptions
+|Option|Description|Default|
+|:--------|:----------|:------|
+|locale|Locale used with datepicker. | `navigator.language` |
+|currentDate|Initial date used by datepicker. | `new Date()` |
+|selectedDate|Selected date.|n/a|
+|closeOnSelect|Should datepicker close on select.| `true` |
+|useCurrentTime| Use current time when selecting date.| `true` |
+|showWeeks|Show week numbers.| `false` |
+|weekName|Header for week numbers.| `{ abbr: 'Week', displayText: 'wk' }` |
+|minDate|Min date for datepicker, dates before this date are disabled.| `startOfYear(subYears(new Date(), 5))` |
+|maxDate|Max date for datepicker, dates after this date are disabled.| `endOfYear(addYears(new Date(), 5))` |
+
+
+```html
+  <ngg-datepicker [(value)]="date" label="Birthday" options="{showWeeks: true, minDate: startOfYear(subYears(new Date(), 100)), maxDate: new Date() }"></ngg-datepicker>
+```
+
+<Story id="components-datepicker--custom-options" />
 
 ## Example usage in reactive form
 
-Below is an example of how the component can be used with reactive forms and validations.
+Below is an example of how the component can be used with reactive forms and validations. The example uses a custom date validator provided by Angular Green called `validDate` which can be used like this:
+
+```ts
+validationForm = this._fb.group({
+    date: [
+      null,
+      [
+        Validators.required,
+        dateValidator({
+          min: this.options.minDate,
+          max: this.options.maxDate,
+        }),
+      ],
+    ],
+  })
+```
+
 
 <Story id="components-datepicker--form" />
 
@@ -75,8 +118,7 @@ Below is an example of how the component can be used with reactive forms and val
     <ngg-datepicker
       formControlName="date"
       label="Date"
-      [valid]="date.valid && ngForm.submitted"
-      [invalid]="date.invalid && ngForm.submitted"
+      [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
       <ng-container data-form-info *ngIf="!ngForm['submitted']">Select date</ng-container>
@@ -85,11 +127,27 @@ Below is an example of how the component can be used with reactive forms and val
         <ng-container *ngIf="date.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->
           <ng-container *ngIf="errors['required']">Select a date</ng-container>
+          <ng-container *ngIf="errors['validDate'] === true"
+            >Enter valid date</ng-container
+          >
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['minDate']"
+            >Enter date after
+            {{
+              errors['validDate']['minDate'] | date: 'shortDate'
+            }}</ng-container>
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
+            >Enter date before
+            {{
+              errors['validDate']['maxDate'] | date: 'shortDate'
+            }}</ng-container>
         </ng-container>
       </ng-container>
     </ngg-datepicker>
   </ng-container>
-  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+  <button type="reset" (click)="ngForm.reset()">Reset</button>
+  <button class="ms-3" type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
     Save
   </button>
 </form>

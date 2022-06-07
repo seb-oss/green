@@ -9,11 +9,16 @@ import {
   EventEmitter,
   ChangeDetectorRef,
 } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms'
 import {
   AbstractDropdown,
   DropdownHandler,
-  ExtendedDropdownOption,
   ElementProps,
   DatepickerData,
   Datepicker,
@@ -25,6 +30,7 @@ import {
   randomId,
   DatepickerOptions,
 } from '@sebgroup/extract'
+import { endOfDay, startOfDay } from 'date-fns'
 
 @Component({
   selector: 'ngg-datepicker',
@@ -69,8 +75,7 @@ export class NggDatepickerComponent
   }
   @Input() id?: string = randomId()
   @Input() label?: string
-  @Input() valid?: boolean
-  @Input() invalid?: boolean
+  @Input() isValid: boolean | null = null
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @ViewChild('datepickerDialogElRef')
   public datepickerDialogElRef?: ElementRef<HTMLElement>
@@ -89,7 +94,7 @@ export class NggDatepickerComponent
   listbox?: Partial<ElementProps>
   _value: string | Date | undefined
   private _months: Array<DropdownOption> = months({})
-  years: Array<DropdownOption> = years({})
+  years?: Array<DropdownOption>
   private _options?: DatepickerOptions
 
   dp: Datepicker | undefined
@@ -123,12 +128,27 @@ export class NggDatepickerComponent
     this._data = value
   }
 
+  onDateChange(value: string) {
+    const newDate = new Date(value)
+    // Only pass valid date to date picker
+    if (!isNaN(newDate.getTime())) {
+      this.dp?.select(value)
+    } else {
+      this.valueChange.emit(value)
+      this.onChangeFn && this.onChangeFn(value)
+    }
+  }
+
   listener = (
     data: DatepickerData | undefined,
     state: DatepickerState | undefined
   ) => {
     if (this.dp && state) {
       this.dp.state = { ...state }
+      this.years = years({
+        from: this.dp.state?.minDate?.getFullYear(),
+        to: this.dp.state?.maxDate?.getFullYear(),
+      })
     }
 
     this.onTouchedFn && this.onTouchedFn()
@@ -174,5 +194,41 @@ export class NggDatepickerComponent
     } else {
       throw 'Missing one or more elements...'
     }
+  }
+}
+
+export function dateValidator(dates?: { min?: Date; max?: Date }): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value
+    if (!value) {
+      return null
+    }
+    const newDate = new Date(value)
+    const isValidDate = !isNaN(newDate.getTime())
+    if (!isValidDate) {
+      return { validDate: true }
+    }
+
+    const validMinDate = dates?.min ? newDate >= startOfDay(dates.min) : true
+    const validMaxDate = dates?.max ? newDate <= endOfDay(dates.max) : true
+
+    if (!validMinDate && dates?.min) {
+      return {
+        validDate: {
+          minDate: startOfDay(dates.min),
+          actualDate: newDate,
+        },
+      }
+    }
+    if (!validMaxDate && dates?.max) {
+      return {
+        validDate: {
+          maxDate: endOfDay(dates.max),
+          actualDate: newDate,
+        },
+      }
+    }
+
+    return null
   }
 }

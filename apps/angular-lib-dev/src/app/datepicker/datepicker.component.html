@@ -5,7 +5,7 @@
 </code>
 <div class="border p-4 mt-4 mb-5" style="height: 420px">
   <form [formGroup]="dateForm">
-    <ngg-datepicker formControlName="date" label="Date">
+    <ngg-datepicker formControlName="date" label="Date" [options]="options">
       <span class="form-info">Select a date</span>
     </ngg-datepicker>
     <ngg-datepicker formControlName="dateEmpty"></ngg-datepicker>
@@ -42,8 +42,8 @@
     <ngg-datepicker
       formControlName="date"
       label="Date"
-      [valid]="date.valid && ngForm.submitted"
-      [invalid]="date.invalid && ngForm.submitted"
+      [options]="options"
+      [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
       <ng-container data-form-info *ngIf="!ngForm['submitted']"
@@ -54,6 +54,23 @@
         <ng-container *ngIf="date.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->
           <ng-container *ngIf="errors['required']">Select a date</ng-container>
+          <ng-container *ngIf="errors['validDate'] === true"
+            >Enter valid date</ng-container
+          >
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['minDate']"
+            >Enter date after
+            {{
+              errors['validDate']['minDate'] | date: 'shortDate'
+            }}</ng-container
+          >
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
+            >Enter date before
+            {{
+              errors['validDate']['maxDate'] | date: 'shortDate'
+            }}</ng-container
+          >
         </ng-container>
       </ng-container>
     </ngg-datepicker>
@@ -61,6 +78,7 @@
   <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
     Save
   </button>
+  <button type="reset" (click)="ngForm.reset()">Reset</button>
 </form>
 <code>
   <h5 class="mb-0">Form data</h5>
