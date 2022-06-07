@@ -121,6 +121,17 @@ export class NggDatepickerComponent
     this._data = value
   }
 
+  onDateChange(value: string) {
+    const newDate = new Date(value)
+    // Only pass valid date to date picker
+    if (!isNaN(newDate.getTime())) {
+      this.dp?.select(value)
+    } else {
+      this.valueChange.emit(value)
+      this.onChangeFn && this.onChangeFn(value)
+    }
+  }
+
   listener = (
     data: DatepickerData | undefined,
     state: DatepickerState | undefined

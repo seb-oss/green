@@ -17,7 +17,7 @@
       placeholder="yyyy-mm-dd"
       #dateInputElRef
       [value]="data?.formattedSelectedDate || ''"
-      (change)="dp?.select(dateInputElRef.value)"
+      (change)="onDateChange(dateInputElRef.value)"
     />
     <button
       #datepickerTriggerElRef
