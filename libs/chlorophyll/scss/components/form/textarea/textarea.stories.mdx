@@ -31,8 +31,8 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 <Story
   name="Textarea"
   args={{
-    text: 'Input label',
-    formInfo: 'Lorem ipsum very long description of input and what should be entered',
+    text: 'Textarea label',
+    formInfo: 'Lorem ipsum very long description of textarea and what should be entered',
     enabled: true
   }}
   parameters={{ docs: { disable: true }}}
@@ -40,13 +40,13 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   {Template.bind({})}
 </Story>
 
-# Input
+# Textarea
 
 <Canvas>
   <div class="form-group">
-    <label for="exampleTextarea">Input label</label>
-    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
-    <textarea id="exampleTextarea"/>
+    <label for="exampleTextarea">Textarea label</label>
+    <span class="form-info">Lorem ipsum very long description of textarea and what should be entered</span>
+    <textarea id="exampleTextarea"></textarea>
     <span class="form-info">Neutral</span>
   </div>
 </Canvas>
