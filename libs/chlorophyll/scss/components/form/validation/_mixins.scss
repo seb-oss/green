@@ -40,24 +40,29 @@
 }
 
 @mixin add-validation() {
-  .was-validated input + .form-info {
+  .was-validated input + .form-info,
+  .was-validated textarea + .form-info {
     opacity: 0;
   }
 
   .was-validated input:not(.is-invalid):valid + .form-info,
+  .was-validated textarea:not(.is-invalid):valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
 
   .was-validated input:not(.is-valid):invalid + .form-info,
+  .was-validated textarea:not(.is-valid):invalid + .form-info,
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }
 
   .horizontal {
     .was-validated input:not(.is-invalid):valid + .form-info,
+    .was-validated textarea:not(.is-invalid):valid + .form-info,
     .is-valid ~ .form-info,
     .was-validated input:not(.is-valid):invalid + .form-info,
+    .was-validated textarea:not(.is-valid):invalid + .form-info,
     .is-invalid ~ .form-info {
       @include common.margin-top(3);
     }

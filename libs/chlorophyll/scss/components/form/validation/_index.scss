@@ -12,6 +12,7 @@ label + .form-info,
 }
 
 input + .form-info,
+textarea + .form-info,
 [aria-haspopup='listbox'] ~ .form-info,
 .group + .form-info {
   @include mixins.add-feedback-element();

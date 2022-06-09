@@ -113,6 +113,7 @@
   }
 
   > input,
+  > textarea,
   > button,
   button[aria-haspopup='listbox'] {
     @include common.margin-bottom(3);
