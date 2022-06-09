@@ -6,15 +6,15 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   const hasExtraInfo = formInfo.length > 0
   return `
     <div class="form-group">
-      <label for="inputInvalid">${text}</label>
+      <label for="exampleTextarea">${text}</label>
       ${ hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-      <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
+      <textarea id="exampleTextarea" ${attrValidation} ${attrEnabled}></textarea>
       <span class="form-info">${validation ? validation : 'Neutral'}</span>
     </div>`
 }
 
 <Meta
-  title="Components/Form/Elements/Input"
+  title="Components/Form/Elements/Textarea"
   argTypes={{
     validation: {
       control: 'select',
@@ -29,10 +29,10 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 />
 
 <Story
-  name="Input"
+  name="Textarea"
   args={{
-    text: 'Input label',
-    formInfo: 'Lorem ipsum very long description of input and what should be entered',
+    text: 'Textarea label',
+    formInfo: 'Lorem ipsum very long description of textarea and what should be entered',
     enabled: true
   }}
   parameters={{ docs: { disable: true }}}
@@ -40,13 +40,13 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   {Template.bind({})}
 </Story>
 
-# Input
+# Textarea
 
 <Canvas>
   <div class="form-group">
-    <label for="inputInvalid">Input label</label>
-    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
-    <input id="inputInvalid" type="text" />
+    <label for="exampleTextarea">Textarea label</label>
+    <span class="form-info">Lorem ipsum very long description of textarea and what should be entered</span>
+    <textarea id="exampleTextarea"></textarea>
     <span class="form-info">Neutral</span>
   </div>
 </Canvas>
