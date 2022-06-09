@@ -12,7 +12,7 @@ $border-width: newTokens.$border-width;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.font-weight($font-weight);
-  @include common.min-width(10);
+  //@include common.min-width(10);
 
   @include common.add-hover-state;
   @include common.add-focus;
@@ -20,6 +20,7 @@ $border-width: newTokens.$border-width;
   color: $color;
   text-align: center;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 @mixin tab--selected {
@@ -39,6 +40,12 @@ $border-width: newTokens.$border-width;
 
 @mixin tabs-bar {
   display: flex;
+  overflow-x: auto;
+
+  // hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &::after {
     @include common.add-border(
