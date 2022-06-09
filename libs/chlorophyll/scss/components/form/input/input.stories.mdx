@@ -3,10 +3,11 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs'
 export const Template = ({ validation, enabled, text, formInfo }) => {
   const attrValidation = validation ? `class="${validation}" ` : ``
   const attrEnabled = enabled ? `` : `disabled`
+  const hasExtraInfo = formInfo.length > 0
   return `
     <div class="form-group">
       <label for="inputInvalid">${text}</label>
-      <span class="form-info">${formInfo}</span>
+      ${ hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
       <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
       <span class="form-info">${validation ? validation : 'Neutral'}</span>
     </div>`
