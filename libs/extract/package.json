@@ -18,8 +18,8 @@
   },
   "homepage": "https://sebgroup.github.io/green/latest/extract/",
   "dependencies": {
-    "@types/react": "^17.0.39",
-    "@types/inputmask": "^3.3.9",
+    "@types/react": "^17 || ^18",
+    "@types/inputmask": "^5.0.3",
     "body-scroll-lock": "^3.1.5",
     "merge": "^2.1.1",
     "inputmask": "^5.0.7",
