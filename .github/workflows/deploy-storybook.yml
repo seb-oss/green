@@ -1,6 +1,7 @@
 name: Triggered deploy of all storybooks
-on: workflow_dispatch
-  push:
+on:
+  workflow_dispatch:
+  pull_request:
     branches: [ beta ]
 
 jobs:
@@ -44,6 +45,8 @@ jobs:
             echo "##[set-output name=target;]$(echo latest)"
           elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
             echo "##[set-output name=target;]$(echo alpha)"
+          elif [[ "${{ steps.branch.outputs.branch }}" == "beta" ]]; then
+            echo "##[set-output name=target;]$(echo latest)"
           else
             echo "##[set-output name=target;]$(echo pr-${{ github.event.number }})"
           fi
