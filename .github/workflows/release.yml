@@ -1,6 +1,5 @@
 name: Release to Github and NPM
-on:
-  workflow_dispatch
+on: workflow_dispatch
   push:
     branches: [ beta ]
 
