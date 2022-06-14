@@ -1,6 +1,5 @@
 name: Triggered deploy of all storybooks
-on:
-  workflow_dispatch
+on: workflow_dispatch
   push:
     branches: [ beta ]
 
