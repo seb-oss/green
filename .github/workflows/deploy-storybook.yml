@@ -1,5 +1,8 @@
-name: Manually triggered deploy of all storybook
-on: workflow_dispatch
+name: Triggered deploy of all storybooks
+on:
+  workflow_dispatch
+  push:
+    branches: [ beta ]
 
 jobs:
   build:
