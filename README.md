@@ -160,3 +160,8 @@ SET GIT_SSL_NO_VERIFY=true
 git config --global http.sslVerify false
 yarn config set strict-ssl false --global
 ```
+
+## Release
+
+Currently, beta releases are published automatically for all libs when merging from "main" to "beta".
+It's also possible to manually do release or deploy storybooks by running the actions manually [here](https://github.com/sebgroup/green/actions).
