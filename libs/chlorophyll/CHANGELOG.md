@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.14](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.13...@sebgroup/chlorophyll@1.0.0-beta.14) (2022-06-15)
+
+
+### Bug Fixes
+
+* **tabs:** add overflow scroll and don't wrap tab content ([df90f95](https://github.com/sebgroup/green/commit/df90f958d3a2f627eb276ee9e29f722852138f5e))
+
+
+### Features
+
+* **textarea:** add styles ([32ef5d8](https://github.com/sebgroup/green/commit/32ef5d8293556b767f8336b5cc2b1399aae41c6f)), closes [#14](https://github.com/sebgroup/green/issues/14)
+
+
+
 # [1.0.0-beta.13](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.12...@sebgroup/chlorophyll@1.0.0-beta.13) (2022-06-07)
 
 
