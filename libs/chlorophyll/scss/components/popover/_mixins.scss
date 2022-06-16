@@ -1,18 +1,19 @@
-@use '../../tokens/shame' as tokens;
 @use '../button' as button;
 @use '../../common';
 @use 'sass:map';
 
-$box-shadow: tokens.$elevation-1-box-shadow;
-$z-index: var(--sg-z-index-popover);
-$border-color: map.get(tokens.$blue, 'light', 0);
-$popover-bg: tokens.$elevation-1-bg;
-$max-height: 400px;
+$_box-shadow: var(--sg-popover-box-shadow);
+$_box-shadow-mobile: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
+$_z-index: var(--sg-z-index-popover);
+$_border-color: var(--sg-popover-border-color);
+$_popover-bg: var(--sg-popover-background);
+$_max-height-mobile: calc(100% - 1rem);
+$_max-height: 400px;
 
 @mixin popover {
-  --z-index: #{$z-index};
-  max-height: calc(100% - 1rem);
-  background-color: $popover-bg;
+  --z-index: #{$_z-index};
+  max-height: $_max-height-mobile;
+  background-color: $_popover-bg;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -26,7 +27,7 @@ $max-height: 400px;
     @include common.padding-bottom(3);
     border-radius: 1rem 1rem 0 0;
     bottom: 0;
-    box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: $_box-shadow-mobile;
     left: 0;
     transform: translate3d(0, 100%, 0);
     transition: all 300ms ease-in-out;
@@ -36,10 +37,10 @@ $max-height: 400px;
   @include common.media-breakpoint-up(sm) {
     @include common.padding-bottom(0);
     @include common.add-border();
-    @include common.add-border-color($border-color);
+    @include common.add-border-color($_border-color);
     @include common.add-border-radius();
-    max-height: $max-height;
-    box-shadow: $box-shadow;
+    max-height: $_max-height;
+    box-shadow: $_box-shadow;
     min-width: 90px;
     position: absolute;
   }

@@ -1,6 +1,7 @@
 @use '../../tokens/shame' as tokens;
 @use 'sass:map';
 
+$_background: var(--sg-bg-level-0);
 $colors: (
   'light': (
     color: tokens.get(tokens.$grey, 200),
@@ -12,34 +13,34 @@ $colors: (
   ),
   'primary': (
     color: tokens.$text-primary-color,
-    contrast: tokens.$elevation-0-bg,
+    contrast: $_background,
   ),
   'secondary': (
     color: tokens.$text-secondary-color,
-    contrast: tokens.$elevation-0-bg,
+    contrast: $_background,
   ),
   'info': (
-    color: tokens.$intent-info-background,
-    contrast: tokens.$intent-info-color,
+    color: hsl(var(--sg-intent-info-hsl)),
+    contrast: hsl(var(--sg-intent-info-hsl-contrast)),
   ),
   'success': (
-    color: tokens.$intent-success-background,
-    contrast: tokens.$intent-success-color,
+    color: hsl(var(--sg-intent-success-hsl)),
+    contrast: hsl(var(--sg-intent-success-hsl-contrast)),
   ),
   'warning': (
-    color: tokens.$intent-warning-background,
-    contrast: tokens.$intent-warning-color,
+    color: hsl(var(--sg-intent-warning-hsl)),
+    contrast: hsl(var(--sg-intent-warning-hsl-contrast)),
   ),
   'danger': (
-    color: tokens.$intent-danger-background,
-    contrast: tokens.$intent-danger-color,
+    color: hsl(var(--sg-intent-critical-hsl)),
+    contrast: hsl(var(--sg-intent-critical-hsl-contrast)),
   ),
   'reset': (
     color: inherit,
     contrast: null,
   ),
   'background': (
-    color: tokens.$elevation-0-bg,
+    color: $_background,
     contrast: null,
   ),
   'transparent': (
@@ -55,6 +56,7 @@ $colors: (
 
   .bg-#{$key} {
     background: map.get($variant, 'color') !important;
+    --background: map.get($variant, 'color') !important;
     @if (map.get($variant, 'contrast') != null) {
       color: map.get($variant, 'contrast') !important;
     }
