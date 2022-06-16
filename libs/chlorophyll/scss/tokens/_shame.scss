@@ -220,7 +220,7 @@ $intent: (
   ),
 );
 
-$border-color: var(--border-color);
+$border-color: var(--sg-border-color);
 $border-secondary-color: var(--border-secondary-color);
 $border-width: 1px;
 $border-radius: 4px;
@@ -258,8 +258,8 @@ $intent-light-background: var(--intent-light-background);
 $intent-dark-background: var(--intent-dark-background);
 
 $checkbox-checkmark-disabled-color: var(--checkbox-checkmark-disabled-color);
-$form-control-bg: var(--form-control-bg);
-$form-control-bg-disabled: var(--form-control-bg-disabled);
+$form-control-bg: var(--sg-form-control-bg);
+$form-control-bg-disabled: var(--sg-form-control-bg-disabled);
 $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 
 /* stylelint-disable */
@@ -276,8 +276,6 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --border-color-invalid: #{get($intent, 'danger', 'dark')};
   --border-color-valid: #{get($intent, 'success', 'dark')};
   --checkbox-checkmark-disabled-color: #{get($grey, 500, 'dark')};
-  --form-control-bg: #{transparentize($black, 0.9)};
-  --form-control-bg-disabled: #{get($disabled, 'background', 'dark')};
   --form-control-primary-bg-disabled: #{get(
       $disabled,
       'primary-background',
@@ -301,8 +299,6 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --border-color-invalid: #{get($intent, 'danger')};
   --border-color-valid: #{get($intent, 'success')};
   --checkbox-checkmark-disabled-color: #{$white};
-  --form-control-bg: #{$white};
-  --form-control-bg-disabled: #{get($disabled, 'background')};
   --form-control-primary-bg-disabled: #{get($disabled, 'primary-background')};
   @include generate-intent-variables($intent);
   @include grey-colors($grey);

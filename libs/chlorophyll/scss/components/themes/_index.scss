@@ -45,7 +45,10 @@
     // grey-100
     $text-secondary: #ababab,
     // grey-200
-    $border-color: #333333 // grey-500
+    $border-color: #333333,
+    // grey-500
+    $form-control-bg: #{transparentize(#000000, 0.9)},
+    $form-control-bg-disabled: transparentize(#ffffff, 0.98)
   );
 }
 

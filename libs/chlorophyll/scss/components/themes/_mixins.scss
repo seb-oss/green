@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:math';
 @use '../../common/functions';
 
 /* Mixin for adding themes,
@@ -93,14 +94,23 @@ Values for light mode are used by default.
     primary: $text-primary,
     secondary: $text-secondary,
   )
+  /* form */,
+  $form-control-bg: $white,
+  $form-control-bg-disabled: #eeeeee,
+  $_form: (
+    control-bg: $form-control-bg,
+    control-bg-disabled: $form-control-bg-disabled,
+  )
   /* border */,
-  $border-color: transparentize($black, 0.83),
+  $border-color: $grey-400,
+  // transparentize($black, 0.83),
   // #CECECE against white
   $border-width: 1px,
   $border-radius: 4px,
   $_border: (
     color: $border-color,
     width: $border-width,
+    width-50: math.div($border-width, 2),
     radius: $border-radius,
   )
   /* intent */,
@@ -192,6 +202,7 @@ Values for light mode are used by default.
   /* generate css variables */
   @include _generate-variables($_z-index, 'sg-z-index');
   @include _generate-variables($_text, 'sg-text');
+  @include _generate-variables($_form, 'sg-form');
   @include _generate-variables($_border, 'sg-border');
   @include _generate-variables(functions.hsl-map($_colors), 'sg-hsl');
   @include _generate-variables($_greys, 'sg-grey');
