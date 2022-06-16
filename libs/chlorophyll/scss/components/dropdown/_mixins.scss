@@ -3,7 +3,7 @@
 @use '../../common';
 @use 'sass:map';
 
-$box-shadow: tokens.$elevation-1-box-shadow;
+$box-shadow: var(--sg-popover-box-shadow);
 $z-index: tokens.$zindex-dropdown;
 $color: tokens.$text-primary-color;
 $border-color: map.get(tokens.$blue, 'light', 0);

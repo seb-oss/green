@@ -1,8 +1,8 @@
 @use '../common';
 @use '../tokens';
-
+$_background: var(--sg-bg-level-0);
 .bg-color {
-  background: var(--elevation-0-bg);
+  background: $_background;
 }
 
 .size-sm:not(.group),

@@ -220,16 +220,6 @@ $intent: (
   ),
 );
 
-$elevation-0-bg: var(--elevation-0-bg);
-$elevation-0-box-shadow: var(--elevation-0-box-shadow);
-$elevation-0-border-color: var(--elevation-0-border-color);
-$elevation-1-bg: var(--elevation-1-bg);
-$elevation-1-box-shadow: var(--elevation-1-box-shadow);
-$elevation-1-border-color: var(--elevation-1-border-color);
-$elevation-2-bg: var(--elevation-2-bg);
-$elevation-2-box-shadow: var(--elevation-2-box-shadow);
-$elevation-2-border-color: var(--elevation-2-border-color);
-
 $border-color: var(--border-color);
 $border-secondary-color: var(--border-secondary-color);
 $border-width: 1px;
@@ -293,15 +283,6 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
       'primary-background',
       'dark'
     )};
-  --elevation-0-bg: #{get($grey, 100, 'dark')};
-  --elevation-0-box-shadow: #{get($shadows, 'none', 'dark')};
-  --elevation-0-border-color: #{get($grey, 100, 'dark')};
-  --elevation-1-bg: #{get($grey, 200, 'dark')};
-  --elevation-1-box-shadow: #{get($shadows, 'none', 'dark')};
-  --elevation-1-border-color: #{get($grey, 200, 'dark')};
-  --elevation-2-bg: #{get($grey, 300, 'dark')};
-  --elevation-2-box-shadow: #{get($shadows, 'none', 'dark')};
-  --elevation-2-border-color: #{get($grey, 300, 'dark')};
   @include generate-intent-variables($intent, 'dark');
   @include grey-colors($grey, 'dark');
   color: var(--text-primary-color);
@@ -323,22 +304,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --form-control-bg: #{$white};
   --form-control-bg-disabled: #{get($disabled, 'background')};
   --form-control-primary-bg-disabled: #{get($disabled, 'primary-background')};
-  --elevation-0-bg: #{get($grey, 300)};
-  --elevation-0-box-shadow: #{get($shadows, 'none')};
-  --elevation-0-border-color: #{get($grey, 100)};
-  --elevation-1-bg: #{get($grey, 100)};
-  --elevation-1-box-shadow: #{get($shadows, 'sm')};
-  --elevation-1-border-color: #{get($grey, 100)};
-  --elevation-2-bg: #{get($grey, 100)};
-  --elevation-2-box-shadow: #{get($shadows, 'md')};
-  --elevation-2-border-color: #{get($grey, 100)};
   @include generate-intent-variables($intent);
   @include grey-colors($grey);
   color: var(--text-primary-color);
 }
 /* stylelint-enable */
-
-/* For testing purposes only! TODO: remove */
-.elevation-2 {
-  background: var(--elevation-2-bg);
-}

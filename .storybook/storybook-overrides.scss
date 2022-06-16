@@ -1,6 +1,6 @@
 // styling for storybook
 body {
-  background: var(--elevation-0-bg);
+  background: var(--sg-bg-level-0);
 }
 
 .sbdocs {
@@ -15,7 +15,7 @@ body {
   color: inherit !important;
 }
 
-button.docblock-code-toggle{
+button.docblock-code-toggle {
   border-radius: 5px 0;
   background: var(--border-color) !important;
   font-weight: 700;
@@ -46,13 +46,15 @@ button.docblock-code-toggle{
 }
 
 .sbdocs.sbdocs-preview {
-  box-shadow: var(--elevation-1-box-shadow);
-  border: solid 1px var(--border-color);
-  border-radius: 5px;
-  background: var(--elevation-1-bg);
+  box-shadow: var(--sg-card-box-shadow);
+  border: none;
+  border-radius: var(--sg-card-border-radius);
+  background: var(--sg-card-background) !important;
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
-div[role=alert] {
+div[role='alert'] {
   background: var(--background) !important;
   color: var(--color) !important;
 }
