@@ -86,6 +86,23 @@ Values for light mode are used by default.
     background: $disabled-background,
     color: $disabled-color,
   )
+  /* text */,
+  $text-primary: $grey-800,
+  $text-secondary: $grey-800,
+  $_text: (
+    primary: $text-primary,
+    secondary: $text-secondary,
+  )
+  /* border */,
+  $border-color: transparentize($black, 0.83),
+  // #CECECE against white
+  $border-width: 1px,
+  $border-radius: 4px,
+  $_border: (
+    color: $border-color,
+    width: $border-width,
+    radius: $border-radius,
+  )
   /* intent */,
   $intent-neutral:
     nth(functions.desired-color-combination($white, $grey-200), 1),
@@ -147,9 +164,35 @@ Values for light mode are used by default.
     box-shadow: $modal-box-shadow,
     backdrop-background: $modal-backdrop-background,
   )
+  /* popover */,
+  $popover-box-shadow: $box-shadow-1,
+  $popover-background: $bg-level-1,
+  $popover-border-color: $blue-2,
+  $_popover: (
+    box-shadow: $popover-box-shadow,
+    background: $popover-background,
+    border-color: $popover-border-color,
+  )
+  /* card */,
+  $card-box-shadow: $box-shadow-1,
+  $card-background: $bg-level-1,
+  $card-heading-color: $text-primary,
+  $card-color: $text-primary,
+  $card-border: solid $border-width $card-background,
+  $card-border-radius: 0,
+  $_card: (
+    box-shadow: $card-box-shadow,
+    background: $card-background,
+    heading-color: $card-heading-color,
+    color: $card-color,
+    border: $card-border,
+    border-radius: $card-border-radius,
+  )
 ) {
   /* generate css variables */
   @include _generate-variables($_z-index, 'sg-z-index');
+  @include _generate-variables($_text, 'sg-text');
+  @include _generate-variables($_border, 'sg-border');
   @include _generate-variables(functions.hsl-map($_colors), 'sg-hsl');
   @include _generate-variables($_greys, 'sg-grey');
   @include _generate-variables($_intent, 'sg-intent');
@@ -159,6 +202,8 @@ Values for light mode are used by default.
   );
   @include _generate-variables($_bg-level, 'sg-bg-level');
   @include _generate-variables($_modal, 'sg-modal');
+  @include _generate-variables($_popover, 'sg-popover');
+  @include _generate-variables($_card, 'sg-card');
 }
 
 /* mixin for generating css variables from map with optional prefix */

@@ -1,23 +1,22 @@
-@use '../../tokens/shame' as tokens;
 @use '../../common';
 
-$box-shadow: tokens.$elevation-1-box-shadow;
-$background: tokens.$elevation-1-bg;
-$heading-color: tokens.$heading-primary-color;
-$color: tokens.$text-inherit-color;
-$border: solid 1px tokens.$elevation-1-border-color;
-$border-radius: 0;
-$layout-direction: column;
+$_box-shadow: var(--sg-card-box-shadow);
+$_background: var(--sg-card-background);
+$_heading-color: var(--sg-card-heading-color);
+$_color: var(--sg-card-color);
+$_border: var(--sg-card-border);
+$_border-radius: var(--sg-card-border-radius);
+$_layout-direction: column;
 
 @mixin card() {
   background-clip: border-box;
-  background: $background;
-  border: $border;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  color: $color;
+  background: $_background;
+  border: $_border;
+  border-radius: $_border-radius;
+  box-shadow: $_box-shadow;
+  color: $_color;
   display: flex;
-  flex-direction: $layout-direction;
+  flex-direction: $_layout-direction;
   @include common.padding(5);
 
   > header {
