@@ -1,8 +1,13 @@
-@use '../../../tokens/shame' as tokens;
 @use '../../../common';
+@use '../input';
+@use 'sass:math';
 
-$border-width: tokens.$border-width;
-$border-color: tokens.$border-color;
+$_border-width: var(--sg-border-width);
+$_border-width-negative: calc(var(--sg-border-width) * -1);
+$_border-width-50: var(--sg-border-width-50);
+$_border-width-50-negative: calc(var(--sg-border-width-50) * -1);
+$_border-color: var(--sg-border-color);
+$_background: input.$background;
 
 @mixin add-group() {
   display: flex;
@@ -28,20 +33,20 @@ $border-color: tokens.$border-color;
 
   &:not(.group-border) > * + *:not(:last-child) {
     border-radius: 0 !important;
-    margin-left: -($border-width);
-    padding-left: calc(1rem + #{$border-width});
+    border-left-width: $_border-width-50;
+    border-right-width: $_border-width-50;
   }
 
   > *:first-child {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
+    border-right-width: $_border-width-50;
   }
 
   > *:last-child {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    margin-left: -($border-width);
-    padding-left: calc(1rem + #{$border-width});
+    border-left-width: $_border-width-50;
   }
 
   &.group-border {
@@ -72,14 +77,18 @@ $border-color: tokens.$border-color;
 
     > button,
     > .button {
-      border-bottom: solid $border-width $border-color;
-      border-top: solid $border-width $border-color;
-      margin: -($border-width);
+      border-bottom: solid $_border-width $_border-color;
+      border-top: solid $_border-width $_border-color;
+      margin: $_border-width-negative $_border-width-50-negative;
       min-width: auto !important;
-      padding-left: calc(1rem + #{$border-width});
 
+      &:first-child {
+        border-left: solid $_border-width $_border-color;
+        margin-left: $_border-width-negative;
+      }
       &:last-child {
-        border-right: solid $border-width $border-color;
+        border-right: solid $_border-width $_border-color;
+        margin-right: $_border-width-negative;
       }
     }
 
@@ -94,7 +103,7 @@ $border-color: tokens.$border-color;
 
   .form-text {
     @include common.padding-vertical(4);
-    background: tokens.$form-control-bg;
+    background: $_background;
     border-radius: inherit;
   }
 
@@ -109,7 +118,7 @@ $border-color: tokens.$border-color;
   .button,
   button {
     &:not(.primary, .active, [type='submit']) {
-      background: tokens.$form-control-bg;
+      background: $_background;
     }
 
     &.disabled,

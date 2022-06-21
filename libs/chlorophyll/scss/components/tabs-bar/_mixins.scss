@@ -4,7 +4,7 @@
 $font-weight: 'medium';
 $color: newTokens.$link-color;
 $color-active: newTokens.$text-primary-color;
-$border-width: newTokens.$border-width;
+$_border-width: var(--sg-border-width);
 
 @mixin tab {
   @include common.add-border($sides: 'bottom');
@@ -34,7 +34,7 @@ $border-width: newTokens.$border-width;
 
   @include common.add-hover-state;
 
-  border-bottom: $border-width transparent;
+  border-bottom: $_border-width transparent;
   color: $color-active;
 }
 

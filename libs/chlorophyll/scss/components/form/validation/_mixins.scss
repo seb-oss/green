@@ -1,6 +1,8 @@
 @use '../../../tokens/shame' as tokens;
 @use '../../../common';
 
+$_border-width: var(--sg-border-width);
+
 @mixin add-feedback-element() {
   position: relative;
   transition: 200ms ease-in-out;
@@ -77,11 +79,11 @@
     border: 0;
 
     &.is-valid {
-      box-shadow: 0 0 0 tokens.$border-width tokens.$intent-success-background;
+      box-shadow: 0 0 0 $_border-width tokens.$intent-success-background;
     }
 
     &.is-invalid {
-      box-shadow: 0 0 0 tokens.$border-width tokens.$intent-danger-background;
+      box-shadow: 0 0 0 $_border-width tokens.$intent-danger-background;
     }
   }
 

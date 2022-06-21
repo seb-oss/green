@@ -1,0 +1,22 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Stepper, StepperProps } from './stepper'
+
+export const Template = (props) => <Stepper {...props} />
+
+<Meta title="Components/Stepper" component={Stepper} />
+
+# Stepper
+
+Stepper Component
+
+<Story
+  name="Stepper"
+  args={{
+    id: undefined,
+    min: undefined,
+    max: undefined,
+    step: undefined,
+  }}
+>
+  {Template.bind({})}
+</Story>

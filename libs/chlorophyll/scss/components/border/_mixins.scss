@@ -1,16 +1,16 @@
 @use '../../tokens/shame' as tokens;
 
-$radius: tokens.$border-radius;
-$width: tokens.$border-width;
-$color: tokens.$border-color;
+$_radius: var(--sg-border-radius);
+$_width: var(--sg-border-width);
+$_color: var(--sg-border-color); //tokens.$border-color;
 $color-invalid: tokens.$border-color-invalid;
 $color-valid: tokens.$border-color-valid;
 
-@mixin add-border-radius($radius: $radius) {
+@mixin add-border-radius($radius: $_radius) {
   border-radius: $radius;
 }
 
-@mixin add-border($sides: false, $width: $width, $color: $color) {
+@mixin add-border($sides: false, $width: $_width, $color: $_color) {
   @if not $sides {
     border: solid $width $color;
   } @else {
@@ -20,9 +20,12 @@ $color-valid: tokens.$border-color-valid;
   }
 }
 
-@mixin add-border-color($color: $color) {
+@mixin add-border-color($color: $_color) {
   @if not($color == var(--border-color)) {
     --border-color: #{$color};
+  }
+  @if not($color == var(--sg-border-color)) {
+    --sg-border-color: #{$color};
   }
 }
 

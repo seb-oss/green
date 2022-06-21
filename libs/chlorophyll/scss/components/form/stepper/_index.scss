@@ -1,0 +1,6 @@
+@use '../../../common';
+@use 'mixins';
+
+.group-stepper {
+  @include mixins.add-stepper;
+}
