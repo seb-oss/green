@@ -61,7 +61,7 @@ export const createStepper = (
   return stepper
 }
 
-const isNumber = (val: number | undefined): boolean => ((val + 1 - 1) === val)
+const isNumber = (val: number | undefined): boolean => (typeof val === 'number')
 
 const compute = (data: StepperData, change: Partial<StepperData>): StepperData => {
   if (change.step) data.step = Math.max(change.step, 1)
@@ -72,8 +72,8 @@ const compute = (data: StepperData, change: Partial<StepperData>): StepperData =
     const newValue = oldValue + change.value
     data.value = newValue
   }
-  if (isNumber(data.value) && isNumber(data.min)) data.value = Math.max(data.value, data.min)
-  if (isNumber(data.value) && isNumber(data.max)) data.value = Math.min(data.value, data.max)
+  if (isNumber(data.value) && isNumber(data.min)) data.value = Math.max(data.value as number, data.min as number)
+  if (isNumber(data.value) && isNumber(data.max)) data.value = Math.min(data.value as number, data.max as number)
 
   return { ...data }
 }
