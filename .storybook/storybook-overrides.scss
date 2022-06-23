@@ -15,7 +15,8 @@ body {
   color: inherit !important;
 }
 
-button.docblock-code-toggle {
+button.docblock-code-toggle,
+.docblock-source > div > button {
   border-radius: 5px 0;
   background: var(--border-color) !important;
   font-weight: 700;
@@ -45,13 +46,18 @@ button.docblock-code-toggle {
   padding-bottom: 2rem;
 }
 
-.sbdocs.sbdocs-preview {
-  box-shadow: var(--sg-card-box-shadow);
+.docblock-source > div {
+  background: transparent;
+}
+
+.sbdocs.sbdocs-preview,
+.docblock-source {
+  box-shadow: var(--sg-card-box-shadow) !important;
   border: none;
-  border-radius: var(--sg-card-border-radius);
+  border-radius: var(--sg-card-border-radius) !important;
   background: var(--sg-card-background) !important;
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -20px !important;
+  margin-right: -20px !important;
 }
 
 div[role='alert'] {
