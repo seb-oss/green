@@ -7,7 +7,7 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1320px
+  xxl: 1320px,
 );
 // Container widths
 //
@@ -25,7 +25,6 @@ $container-max-widths: (
   // Responsive containers that are 100% wide until a breakpoint
   @each $breakpoint, $container-max-width in $container-max-widths {
     @include common.media-breakpoint-up($breakpoint, tokens.$grid-breakpoints) {
-
       // Extend each breakpoint which is smaller or equal to the current breakpoint
       $extend-breakpoint: true;
       %responsive-container-#{$breakpoint} {
@@ -35,7 +34,7 @@ $container-max-widths: (
       @each $name, $width in tokens.$grid-breakpoints {
         @if ($extend-breakpoint) {
           .container#{common.breakpoint-infix($name, tokens.$grid-breakpoints)} {
-            @extend %responsive-container-#{$breakpoint};
+            @extend %responsive-container-#{$breakpoint} !optional;
           }
 
           // Once the current breakpoint is reached, stop extending
@@ -46,7 +45,7 @@ $container-max-widths: (
       }
     }
     .container-#{$breakpoint} {
-      @extend %container-fluid;
+      @extend %container-fluid !optional;
     }
   }
 }
