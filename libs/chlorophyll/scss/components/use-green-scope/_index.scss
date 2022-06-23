@@ -1,9 +1,11 @@
 @use '../../tokens/shame' as tokens;
 @use '../reset/mixins' as mixins;
+@use '../themes/mixins' as themes;
 
 /* add variables for light mode to `.use-green` class */
 .use-green {
   @include tokens.light-mode;
+  @include themes.add-theme();
 }
 /* apply reset mixin on `.use-green` class to reset container and child elements */
 @include mixins.reset('.use-green');
