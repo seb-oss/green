@@ -1,8 +1,7 @@
-@use '../../../tokens/shame' as tokens;
 @use '../../../common';
 
-$color: tokens.$text-primary-color;
-$background: tokens.$form-control-bg;
+$_color: var(--sg-text-primary);
+$background: var(--sg-form-control-bg);
 
 @mixin add-text-input() {
   input:not([type]),
@@ -27,7 +26,7 @@ $background: tokens.$form-control-bg;
     @include common.add-focus();
     align-items: center;
     background-color: $background;
-    color: $color;
+    color: $_color;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -40,6 +39,14 @@ $background: tokens.$form-control-bg;
     &.disabled,
     &[aria-disabled='true'] {
       @include common.add-disable(true, true, true);
+    }
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 }

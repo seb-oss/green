@@ -10,7 +10,7 @@ $check-icon: common.str-replace(
   '%23'
 ) !default;
 $table-caption-bg: tokens.$grey-400;
-$border-color: tokens.$border-color;
+$_border-color: var(--sg-border-color);
 
 @mixin base-list {
   @include common.padding-start(0);
@@ -56,7 +56,7 @@ $border-color: tokens.$border-color;
     @include common.padding-vertical(3);
     @include common.padding-horizontal(5);
     @include common.add-border('bottom');
-    @include common.add-border-color($border-color);
+    @include common.add-border-color($_border-color);
     display: flex;
     justify-content: space-between;
 
