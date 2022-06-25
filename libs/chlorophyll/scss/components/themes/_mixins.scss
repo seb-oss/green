@@ -165,6 +165,25 @@ Values for light mode are used by default.
     popover: $z-index-popover,
     tooltip: $z-index-tooltip,
   )
+  /* table */,
+  $table-header-background: $grey-900,
+  $table-header-color: functions.most-legible-color($table-header-background),
+  $table-cell-padding-x: 0.5rem,
+  $table-cell-padding-y: 0.6875rem,
+  $table-border-width: $border-width,
+  $table-border-color: $border-color,
+  $table-sort-icon-color: $border-color,
+  $table-sort-icon-color-active: $table-header-color,
+  $_table: (
+    header-background: $table-header-background,
+    header-color: $table-header-color,
+    cell-padding-x: $table-cell-padding-x,
+    cell-padding-y: $table-cell-padding-y,
+    border-width: $table-border-width,
+    border-color: $table-border-color,
+    sort-icon-color: $table-sort-icon-color,
+    sort-icon-color-active: $table-sort-icon-color-active,
+  )
   /* modal */,
   $modal-bg: $bg-level-2,
   $modal-box-shadow: $box-shadow-2,
@@ -212,6 +231,7 @@ Values for light mode are used by default.
     'sg-hsl-disabled'
   );
   @include _generate-variables($_bg-level, 'sg-bg-level');
+  @include _generate-variables($_table, 'sg-table');
   @include _generate-variables($_modal, 'sg-modal');
   @include _generate-variables($_popover, 'sg-popover');
   @include _generate-variables($_card, 'sg-card');
