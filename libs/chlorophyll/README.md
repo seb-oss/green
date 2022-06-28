@@ -1,16 +1,16 @@
 # ![image](https://user-images.githubusercontent.com/11420341/124561174-e3bb3400-de3d-11eb-98a2-bd3305326de2.png) @sebgroup/chlorophyll
 
 
-Chlorophyll is the design token and css part of Green. It is used in all high level component libraries. If you are not useing a framework, you can use chlorophyll directly to style your `html`.
+Chlorophyll is the design token and css part of Green. It is used in all high level component libraries. If you are not using a framework, you can use chlorophyll directly to style your `html`.
 
 ## Install
 
 ## Use
 
-The Green design system has an unrelenting focus on sensible defaults and ease of use. All you have to do to start using it is import the css, mark the area in which you intend to start using Green (use the `html` tag if the whole application uses it), and add the class `green`.
+The Green design system has an unrelenting focus on sensible defaults and ease of use. All you have to do to start using it is import the css, mark the area in which you intend to start using Green (use the `html` tag if the whole application uses it), and add the class `use-green` (we recommend that you scope the CSS so that it only affects elements yo intend to style).
 
 ```html
-<body class="green">
+<body class="use-green">
   <h1>Hello!</h1>
   <p>Everything you see here will be correctly styled :smile:</p>
 </body>
@@ -19,12 +19,13 @@ The Green design system has an unrelenting focus on sensible defaults and ease o
 All your basic styling will now be correct. Additional classes will only be needed when you want to deviate from the defaults. So this:
 
 ```html
-<div class="green">
-  <h2>This is a pretty form</h2>
+<div class="use-green">
   <form>
-    <label for="pretty-first-name">First name</label>
-    <input name="firstName" id="pretty-first-name" />
-    <hr />
+    <div class="form-group">
+      <label for="formInput1">Input</label>
+      <span class="form-info" id="formInfo1">Some info or help</span>
+      <input id="formInput1" type="text" aria-describedby="formInfo1" />
+    </div>
     <button type="submit">Send</button>
   </form>
 </div>
@@ -32,11 +33,11 @@ All your basic styling will now be correct. Additional classes will only be need
 
 ...will look like this:
 
-![form preview](https://user-images.githubusercontent.com/548783/120811253-11197700-c54c-11eb-9bfe-1091a810c4e0.png)
+<img width="358" alt="Screenshot 2022-06-28 at 09 47 52" src="https://user-images.githubusercontent.com/1632755/176124198-3ee45eff-4900-4cd5-b453-4bc6f51b8b20.png">
 
 ### Additional styling
 
-Styling is made by expressing intent – not design. A button is not green, it is intended to express a succesful operation. So:
+Styling is made by expressing intent – not design. A button is not green, it is intended to express a successful operation. So:
 
 ```html
 <!-- This -->
@@ -64,10 +65,5 @@ This is part of a monorepo. If you want to contribute, see [Green](https://githu
 
 - Watch all changes and auto generate css
   ```bash
-  yarn dev
-  ```
-- Run linter in editor
-- Run tests on editor or console
-  ```bash
-  yarn test --watchAll
+  nx run chlorophyll:storybook
   ```
