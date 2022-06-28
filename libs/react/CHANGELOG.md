@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.14...@sebgroup/green-react@1.0.0-beta.15) (2022-06-28)
+
+
+### Features
+
+* 🎸 Added onChange handler ([ea9e62e](https://github.com/sebgroup/green/commit/ea9e62e5432a5dcb6e9f2f9db4eed81f46609953))
+* 🎸 Implemented AbstractStepper in React ([1ad78f6](https://github.com/sebgroup/green/commit/1ad78f65d8494888f8385daa1815083fdb780bb4))
+
+
+
 # [1.0.0-beta.14](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.13...@sebgroup/green-react@1.0.0-beta.14) (2022-06-15)
 
 
