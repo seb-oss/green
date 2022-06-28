@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.14...@sebgroup/chlorophyll@1.0.0-beta.15) (2022-06-28)
+
+
+### Bug Fixes
+
+* **use-green:** ability to scope all of green ([9daf8bc](https://github.com/sebgroup/green/commit/9daf8bc5e65c34825db04ab27c8d2f78b791a5ce)), closes [#526](https://github.com/sebgroup/green/issues/526)
+
+
+### Features
+
+* 🎸 Added story for Table ([583eb1e](https://github.com/sebgroup/green/commit/583eb1e3f126296274c1dbf81beee8e3befa44a0)), closes [#360](https://github.com/sebgroup/green/issues/360)
+* **stepper:** add markup and css ([2c9254d](https://github.com/sebgroup/green/commit/2c9254de1a79728c98cbf1833011d45220d4f593)), closes [#523](https://github.com/sebgroup/green/issues/523)
+* **table:** add styles ([adb9af2](https://github.com/sebgroup/green/commit/adb9af2eddb67fe84a9cba3f9054512c17ab0c57)), closes [#360](https://github.com/sebgroup/green/issues/360)
+
+
+
 # [1.0.0-beta.14](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.13...@sebgroup/chlorophyll@1.0.0-beta.14) (2022-06-15)
 
 
