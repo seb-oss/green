@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.14...@sebgroup/extract@1.0.0-beta.15) (2022-06-28)
+
+
+### Features
+
+* 🎸 Created AbstractStepper ([510a8bc](https://github.com/sebgroup/green/commit/510a8bc84057fe964827d32367ea6cd0c59affb4))
+
+
+
 # [1.0.0-beta.14](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.13...@sebgroup/extract@1.0.0-beta.14) (2022-06-15)
 
 
