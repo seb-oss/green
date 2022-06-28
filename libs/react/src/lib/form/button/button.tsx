@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react'
+import { ButtonHTMLAttributes, forwardRef, MouseEventHandler, ReactNode } from 'react'
 import { ButtonType, ButtonVariant } from '@sebgroup/extract'
 
 /* eslint-disable-next-line */
@@ -10,13 +10,13 @@ export interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export function Button({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   children,
   variant,
   onClick,
   active = false,
   type = 'button',
-}: ButtonProps) {
+}, ref) => {
   const props: ButtonHTMLAttributes<HTMLButtonElement> = { type }
   const classNames: string[] = []
   if (variant) classNames.push(variant)
@@ -25,7 +25,7 @@ export function Button({
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
 
-  return <button {...props}>{children}</button>
-}
+  return <button {...props} ref={ref}>{children}</button>
+})
 
 export default Button
