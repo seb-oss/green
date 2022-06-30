@@ -119,20 +119,26 @@ export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
       },
     },
   })
-export const close = (dropdown: AbstractDropdown): AbstractDropdown =>
-  reduce(dropdown, {
-    isOpen: false,
-    elements: {
-      toggler: {
-        attributes: {
-          'aria-expanded': false,
+export const close = (dropdown: AbstractDropdown): AbstractDropdown => {
+  if (dropdown.isOpen) {
+    return reduce(dropdown, {
+      isOpen: false,
+      isTouched: true,
+      elements: {
+        toggler: {
+          attributes: {
+            'aria-expanded': false,
+          },
+        },
+        listbox: {
+          classes: removeClass(dropdown.elements?.listbox?.classes, 'active'),
         },
       },
-      listbox: {
-        classes: removeClass(dropdown.elements?.listbox?.classes, 'active'),
-      },
-    },
-  })
+    })
+  }
+  return dropdown
+}
+
 export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
   return newDD
@@ -220,6 +226,15 @@ export const select = (
     ),
   })
 }
+
+/**
+ * Only set isTouched if the panel is closed. Otherwise, the trigger will
+ * "blur" to the panel when it opens, causing a false positive.
+ */
+export const blur = (dropdown: AbstractDropdown): AbstractDropdown =>
+  reduce(dropdown, {
+    isTouched: dropdown.isTouched || !dropdown.isOpen,
+  } as Partial<AbstractDropdown>)
 export const active = (
   dropdown: AbstractDropdown,
   isActive: boolean

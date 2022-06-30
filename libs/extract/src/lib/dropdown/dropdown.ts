@@ -2,6 +2,7 @@ import { createPopper } from '@popperjs/core'
 import {
   create,
   active,
+  blur,
   open,
   close,
   toggle,
@@ -34,6 +35,7 @@ export const createDropdown = (
     dropdown: create(init),
     isAlive: true,
     onDestroy$: new Subject<void>(),
+    onTouched: init.onTouched,
   }
   const handler = _handler as DropdownHandler
 
@@ -41,6 +43,7 @@ export const createDropdown = (
     update(handler, listener, active(handler.dropdown, isActive))
   handler.loop = (isLooping) =>
     update(handler, listener, loop(handler.dropdown, isLooping))
+  handler.blur = () => update(handler, listener, blur(handler.dropdown))
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
@@ -54,6 +57,18 @@ export const createDropdown = (
     )
   handler.update = (props) => update(handler, listener, create(props))
 
+  fromEvent(toggler, 'blur')
+    .pipe(takeUntil(handler.onDestroy$))
+    .subscribe(() => {
+      handler.blur()
+    })
+
+  merge(fromEvent(toggler, 'focusin'), fromEvent(toggler, 'click'))
+    .pipe(takeUntil(handler.onDestroy$))
+    .subscribe(() => {
+      handler.active(true)
+    })
+
   merge(
     fromEvent<KeyboardEvent>(document, 'keydown'),
     fromEvent<FocusEvent>(document, 'focusin'),
@@ -61,9 +76,10 @@ export const createDropdown = (
   )
     .pipe(takeUntil(handler.onDestroy$))
     .subscribe((event) => {
+      if (!handler.dropdown.isActive) return
+
       switch (event.type) {
         case 'keydown': {
-          if (!handler.dropdown.isActive) return
           const { key } = event as KeyboardEvent
           update(
             handler,
@@ -72,23 +88,13 @@ export const createDropdown = (
           )
           break
         }
+        case 'click':
         case 'focusin': {
-          const component = toggler.parentElement as HTMLElement
-          const focused = event.target as HTMLElement
-          const componentWasFocuesd = component.contains(focused)
-          if (handler.dropdown.isActive && !componentWasFocuesd) {
-            update(handler, listener, active(handler.dropdown, false))
-          } else if (!handler.dropdown.isActive && componentWasFocuesd) {
-            update(handler, listener, active(handler.dropdown, true))
-          }
-          break
-        }
-        case 'click': {
-          const clickedOn = event.target as HTMLElement
-          if (
-            !handler.toggler.contains(clickedOn) &&
-            !handler.listbox.contains(clickedOn)
-          ) {
+          const target = event.target as HTMLElement
+          const targetIsOutside =
+            !handler.toggler.contains(target) &&
+            !handler.listbox.contains(target)
+          if (targetIsOutside) {
             update(handler, listener, active(close(handler.dropdown), false))
           }
         }
@@ -126,6 +132,10 @@ const update = async (
 
   const oldState = handler.dropdown
   if (newState) handler.dropdown = newState
+
+  if (oldState.isTouched !== handler.dropdown.isTouched) {
+    handler.onTouched?.()
+  }
 
   if (oldState.isOpen !== handler.dropdown.isOpen) {
     isMobileViewport$
