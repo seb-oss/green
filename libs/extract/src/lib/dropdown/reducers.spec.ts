@@ -1,5 +1,6 @@
 import {
   active,
+  blur,
   close,
   create,
   open,
@@ -172,6 +173,22 @@ describe('dropdown/reducers', () => {
           const { classes } = dropdown.elements.listbox
           expect(classes).not.toContain('active')
         })
+      })
+    })
+    describe('blur', () => {
+      it('sets isTouched to true', () => {
+        dropdown = blur(dropdown)
+        expect(dropdown.isTouched).toBe(true)
+      })
+      it('keep isTouched as false on opening', () => {
+        dropdown = open(dropdown)
+        dropdown = blur(dropdown)
+        expect(dropdown.isTouched).toBe(false)
+      })
+      it('sets isTouched to true on close', () => {
+        dropdown = open(dropdown)
+        dropdown = close(dropdown)
+        expect(dropdown.isTouched).toBe(true)
       })
     })
     describe('active', () => {
