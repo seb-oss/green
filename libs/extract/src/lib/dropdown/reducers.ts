@@ -74,10 +74,10 @@ export const create = ({
   const dropdown: Partial<AbstractDropdown> = {
     id,
     texts: {
-      close: texts?.close || 'Close',
-      optionsDescription: texts?.optionsDescription || 'Options',
-      placeholder: texts?.placeholder || 'Select',
-      selected: texts?.selected || 'selected',
+      close: texts?.close ?? 'Close',
+      optionsDescription: texts?.optionsDescription ?? 'Options',
+      placeholder: texts?.placeholder ?? 'Select',
+      selected: texts?.selected ?? 'selected',
       select:
         selected?.length > 2
           ? `${selected.length} ${texts?.selected} `
@@ -205,7 +205,7 @@ export const select = (
       select:
         selected?.length > 2
           ? `${selected.length} ${dropdown.texts?.selected} `
-          : selected?.join(', ') || dropdown.texts?.placeholder || 'Select',
+          : selected?.join(', ') || (dropdown.texts?.placeholder ?? 'Select'),
     },
     elements: {
       listbox: {
