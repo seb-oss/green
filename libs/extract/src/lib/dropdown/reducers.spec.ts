@@ -252,6 +252,28 @@ describe('dropdown/reducers', () => {
         expect(dropdown.isOpen).toBe(true)
       })
     })
+    describe('select multiple', () => {
+      beforeEach(() => {
+        dropdown = create({ id, options, multiSelect: true })
+        dropdown = open(dropdown)
+      })
+      it('sets 2 options selected', () => {
+        dropdown = select(dropdown, dropdown.options[0])
+        dropdown = select(dropdown, dropdown.options[1])
+        const selectedOptions = dropdown.options.map((o) => o.selected)
+
+        expect(selectedOptions).toEqual([true, true])
+      })
+      it('invert selected option', () => {
+        // select
+        dropdown = select(dropdown, dropdown.options[0])
+        expect(dropdown.options[0].selected).toEqual(true)
+
+        // deselect
+        dropdown = select(dropdown, dropdown.options[0])
+        expect(dropdown.options[0].selected).toEqual(false)
+      })
+    })
     describe('highlight', () => {
       beforeEach(() => {
         dropdown = open(dropdown)
