@@ -1,4 +1,4 @@
-import { Observable, Subscription, Subject } from 'rxjs'
+import { Subscription, Subject } from 'rxjs'
 import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
 
@@ -39,6 +39,7 @@ export interface AbstractDropdown {
   isOpen: boolean
   isLooping: boolean
   isMultiSelect: boolean
+  isTouched: boolean
   useValue: string
   display: string
   selectValue: string
@@ -62,6 +63,7 @@ export interface DropdownArgs {
   texts?: DropdownTexts
   value?: any
   multiSelect?: boolean
+  onTouched?: () => void
 }
 
 export interface DropdownHandler {
@@ -72,8 +74,10 @@ export interface DropdownHandler {
   subscription: Subscription
   isAlive: boolean
   onDestroy$: Subject<void>
+  onTouched?: () => void
 
   update: (props: DropdownArgs) => Promise<void>
+  blur: () => Promise<void>
   active: (isActive: boolean) => Promise<void>
   loop: (isLooping: boolean) => Promise<void>
   multiSelect: (isMultiSelect: boolean) => Promise<void>

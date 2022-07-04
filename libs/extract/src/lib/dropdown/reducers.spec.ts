@@ -1,5 +1,6 @@
 import {
   active,
+  blur,
   close,
   create,
   open,
@@ -174,6 +175,22 @@ describe('dropdown/reducers', () => {
         })
       })
     })
+    describe('blur', () => {
+      it('sets isTouched to true', () => {
+        dropdown = blur(dropdown)
+        expect(dropdown.isTouched).toBe(true)
+      })
+      it('keep isTouched as false on opening', () => {
+        dropdown = open(dropdown)
+        dropdown = blur(dropdown)
+        expect(dropdown.isTouched).toBe(false)
+      })
+      it('sets isTouched to true on close', () => {
+        dropdown = open(dropdown)
+        dropdown = close(dropdown)
+        expect(dropdown.isTouched).toBe(true)
+      })
+    })
     describe('active', () => {
       it('sets isActive to true', () => {
         dropdown = active(dropdown, true)
@@ -233,6 +250,28 @@ describe('dropdown/reducers', () => {
       it('does not close dropdown', () => {
         dropdown = select(dropdown, dropdown.options[1])
         expect(dropdown.isOpen).toBe(true)
+      })
+    })
+    describe('select multiple', () => {
+      beforeEach(() => {
+        dropdown = create({ id, options, multiSelect: true })
+        dropdown = open(dropdown)
+      })
+      it('sets 2 options selected', () => {
+        dropdown = select(dropdown, dropdown.options[0])
+        dropdown = select(dropdown, dropdown.options[1])
+        const selectedOptions = dropdown.options.map((o) => o.selected)
+
+        expect(selectedOptions).toEqual([true, true])
+      })
+      it('invert selected option', () => {
+        // select
+        dropdown = select(dropdown, dropdown.options[0])
+        expect(dropdown.options[0].selected).toEqual(true)
+
+        // deselect
+        dropdown = select(dropdown, dropdown.options[0])
+        expect(dropdown.options[0].selected).toEqual(false)
       })
     })
     describe('highlight', () => {

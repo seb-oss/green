@@ -19,6 +19,7 @@ export const dropdownValues: Partial<AbstractDropdown> = {
   },
   isActive: false,
   isOpen: false,
+  isTouched: false,
 }
 
 export const optionValues: Partial<ExtendedDropdownOption> = {

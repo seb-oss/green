@@ -119,14 +119,14 @@
     selectValue="val"
     [texts]="texts"
   ></ngg-dropdown>
-<ngg-dropdown
-  [(ngModel)]="dropdownValue6"
-  [options]="customOptionsInitial"
-  useValue="val"
-  display="name"
-  multiSelect
-  [texts]="texts"
-></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue6"
+    [options]="customOptionsInitial"
+    useValue="val"
+    display="name"
+    multiSelect
+    [texts]="texts"
+  ></ngg-dropdown>
 </div>
 
 <code>
@@ -152,20 +152,18 @@
       display="name"
       selectValue="value"
       [texts]="texts"
-      [valid]="dropdown.valid && ngForm.submitted"
-      [invalid]="dropdown.invalid && ngForm.submitted"
+      [valid]="dropdown.valid && dropdown.touched"
+      [invalid]="dropdown.invalid && dropdown.touched"
     >
-    <!-- Hint text when not submitted -->
-    <ng-container data-form-info *ngIf="!ngForm['submitted']"
-      >Select country</ng-container
-    >
-    <ng-container data-form-info *ngIf="ngForm['submitted']">
-      <!-- Text when form control contains one or more errors -->
-      <ng-container *ngIf="dropdown.errors as errors">
-        <!-- Text for each error (only one will be displayed at a time) -->
-        <ng-container *ngIf="errors['required']">Select country</ng-container>
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="dropdown.untouched || dropdown.valid"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="dropdown.touched && dropdown.invalid">
+        <ng-container *ngIf="dropdown.getError('required') as error"
+          >Required</ng-container
+        >
       </ng-container>
-    </ng-container>
     </ngg-dropdown>
   </div>
   <div
@@ -180,19 +178,20 @@
       selectValue="value"
       multiSelect
       [texts]="texts"
-      [valid]="dropdown.valid && ngForm.submitted"
-      [invalid]="dropdown.invalid && ngForm.submitted"
+      [valid]="dropdown.valid && dropdown.touched"
+      [invalid]="dropdown.invalid && dropdown.touched"
       ><!-- Hint text when not submitted -->
-    <ng-container data-form-info *ngIf="!ngForm['submitted']"
-      >Select country</ng-container
-    >
-    <ng-container data-form-info *ngIf="ngForm['submitted']">
-      <!-- Text when form control contains one or more errors -->
-      <ng-container *ngIf="dropdown.errors as errors">
-        <!-- Text for each error (only one will be displayed at a time) -->
-        <ng-container *ngIf="errors['required']">Select country</ng-container>
+      <ng-container data-form-info *ngIf="dropdown.untouched || dropdown.valid"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="dropdown.touched && dropdown.invalid">
+        <ng-container *ngIf="dropdown.getError('required') as error"
+          >Required</ng-container
+        >
+        <ng-container *ngIf="dropdown.getError('minlength') as error"
+          >Min {{ error.requiredLength }} countries</ng-container
+        >
       </ng-container>
-    </ng-container>
     </ngg-dropdown>
   </div>
   <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
