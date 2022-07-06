@@ -11,7 +11,7 @@ export function Card({ children, header, footer }: CardProps) {
   return (
     <section className="card">
       <header>{header}</header>
-      <p>{children}</p>
+        {children}
       <footer>{footer}</footer>
     </section>
   )
