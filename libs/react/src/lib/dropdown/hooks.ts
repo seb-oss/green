@@ -99,7 +99,11 @@ export const useDropdown = ({
         selected: o.selected,
         onClick: () => {
           handler?.select(o).then(() => {
-            onChange && onChange(o)
+            if (onChange) {
+              const result = options.find((item) => item.key === o.key)
+
+              result && onChange(result)
+            }
           })
         },
       }))
@@ -115,7 +119,12 @@ export const useDropdown = ({
           type: 'checkbox',
           onChange: () => {
             handler?.select(o, false).then(() => {
-              onChange && onChange(o)
+
+              if (onChange) {
+                const result = options.find((item) => item.key === o.key)
+
+                result && onChange(result)
+              }
             })
           }
         },
