@@ -1,0 +1,28 @@
+{
+  "root": "apps/react-lib-dev-e2e",
+  "sourceRoot": "apps/react-lib-dev-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-lib-dev-e2e/cypress.json",
+        "devServerTarget": "react-lib-dev:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "react-lib-dev:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/react-lib-dev-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react-lib-dev"]
+}

@@ -21,10 +21,7 @@
           "e2e",
           "build-storybook"
         ],
-        "strictlyOrderedTargets": [
-          "build",
-          "release"
-        ],
+        "strictlyOrderedTargets": ["build", "release"],
         "parallel": 3
       }
     }
@@ -57,7 +54,16 @@
     },
     "@nrwl/react": {
       "application": {
+        "style": "none",
+        "linter": "eslint",
         "babel": true
+      },
+      "component": {
+        "style": "none"
+      },
+      "library": {
+        "style": "none",
+        "linter": "eslint"
       }
     }
   }

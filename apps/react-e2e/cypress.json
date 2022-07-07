@@ -9,5 +9,5 @@
   "videosFolder": "../../dist/cypress/apps/react-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/react-e2e/screenshots",
   "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:4400"
+  "baseUrl": "http://localhost:4200"
 }
