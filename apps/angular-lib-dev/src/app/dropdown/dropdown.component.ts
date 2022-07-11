@@ -194,6 +194,7 @@ export class DropdownComponent {
   constructor(private _fb: FormBuilder) {}
 
   save() {
+    this.validationForm.markAllAsTouched()
     console.log(this.validationForm.value)
   }
 

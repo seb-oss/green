@@ -74,10 +74,10 @@ export const create = ({
   const dropdown: Partial<AbstractDropdown> = {
     id,
     texts: {
-      close: texts?.close || 'Close',
-      optionsDescription: texts?.optionsDescription || 'Options',
-      placeholder: texts?.placeholder || 'Select',
-      selected: texts?.selected || 'selected',
+      close: texts?.close ?? 'Close',
+      optionsDescription: texts?.optionsDescription ?? 'Options',
+      placeholder: texts?.placeholder ?? 'Select',
+      selected: texts?.selected ?? 'selected',
       select:
         selected?.length > 2
           ? `${selected.length} ${texts?.selected} `
@@ -119,20 +119,26 @@ export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
       },
     },
   })
-export const close = (dropdown: AbstractDropdown): AbstractDropdown =>
-  reduce(dropdown, {
-    isOpen: false,
-    elements: {
-      toggler: {
-        attributes: {
-          'aria-expanded': false,
+export const close = (dropdown: AbstractDropdown): AbstractDropdown => {
+  if (dropdown.isOpen) {
+    return reduce(dropdown, {
+      isOpen: false,
+      isTouched: true,
+      elements: {
+        toggler: {
+          attributes: {
+            'aria-expanded': false,
+          },
+        },
+        listbox: {
+          classes: removeClass(dropdown.elements?.listbox?.classes, 'active'),
         },
       },
-      listbox: {
-        classes: removeClass(dropdown.elements?.listbox?.classes, 'active'),
-      },
-    },
-  })
+    })
+  }
+  return dropdown
+}
+
 export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
   return newDD
@@ -176,50 +182,56 @@ export const select = (
   dropdown: AbstractDropdown,
   selection: ExtendedDropdownOption
 ): AbstractDropdown => {
-  let options: Array<ExtendedDropdownOption>
-  const isSelected = !!dropdown.options
-    .filter((option) => option.selected)
-    .find((option) => option === selection)
-  if (isSelected) {
-    options = dropdown.isMultiSelect
-      ? [
-          ...dropdown.options.filter(
-            (option) => option.selected && option !== selection
-          ),
-        ]
-      : [selection]
-  } else {
-    options = dropdown.isMultiSelect
-      ? [...dropdown.options.filter((option) => option.selected), selection]
-      : [selection]
+  const isSelected = (option: ExtendedDropdownOption) => {
+    const isTarget = selection[dropdown.useValue] === option[dropdown.useValue]
+
+    if (dropdown.isMultiSelect) {
+      //Invert the selected option and keep others like previously
+      return isTarget ? !option.selected : option.selected
+    } else {
+      return isTarget
+    }
   }
-  const selected = options.map((option) => option[dropdown.display])
+
+  const options = dropdown.options.map((option) => {
+    const selected = isSelected(option)
+    return reduce(option, {
+      selected,
+      attributes: {
+        'aria-selected': selected || undefined,
+      },
+    })
+  })
+
+  const selectedOptions = options.filter((o) => o.selected)
+  const displayValues = selectedOptions.map((o) => o[dropdown.display])
   return reduce(dropdown, {
     texts: {
       select:
-        selected?.length > 2
-          ? `${selected.length} ${dropdown.texts?.selected} `
-          : selected?.join(', ') || dropdown.texts?.placeholder || 'Select',
+        displayValues?.length > 2
+          ? `${displayValues.length} ${dropdown.texts?.selected} `
+          : displayValues?.join(', ') ||
+            (dropdown.texts?.placeholder ?? 'Select'),
     },
     elements: {
       listbox: {
         attributes: {
-          'aria-activedescendant':
-            options.length > 0 ? options[0].attributes.id : undefined,
+          'aria-activedescendant': selectedOptions?.[0]?.attributes.id,
         },
       },
     },
-    options: dropdown.options.map((o) =>
-      reduce(o, {
-        selected: !!options.find((option) => option === o), //o === option,
-        attributes: {
-          'aria-selected':
-            !!options.find((option) => option === o) || undefined,
-        },
-      })
-    ),
+    options,
   })
 }
+
+/**
+ * Only set isTouched if the panel is closed. Otherwise, the trigger will
+ * "blur" to the panel when it opens, causing a false positive.
+ */
+export const blur = (dropdown: AbstractDropdown): AbstractDropdown =>
+  reduce(dropdown, {
+    isTouched: dropdown.isTouched || !dropdown.isOpen,
+  } as Partial<AbstractDropdown>)
 export const active = (
   dropdown: AbstractDropdown,
   isActive: boolean

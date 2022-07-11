@@ -13,6 +13,8 @@
     "react": "libs/react",
     "react-charts": "libs/react-charts",
     "react-charts-e2e": "apps/react-charts-e2e",
-    "react-e2e": "apps/react-e2e"
+    "react-e2e": "apps/react-e2e",
+    "react-lib-dev": "apps/react-lib-dev",
+    "react-lib-dev-e2e": "apps/react-lib-dev-e2e"
   }
 }

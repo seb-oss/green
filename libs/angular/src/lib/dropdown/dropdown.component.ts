@@ -121,6 +121,7 @@ import {
                 type="checkbox"
                 (change)="handler?.select(option, false)"
                 [checked]="option.selected"
+                tabIndex="-1"
               />
               <span>{{ option[dropdown!.display] }}</span>
               <i></i>
@@ -171,6 +172,8 @@ export class NggDropdownComponent
   private _value: any
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
+  @Output() readonly touched: EventEmitter<boolean> =
+    new EventEmitter<boolean>()
 
   @ViewChild('togglerRef') public togglerRef?: ElementRef<HTMLElement>
 
@@ -178,7 +181,7 @@ export class NggDropdownComponent
   @ViewChild('fieldsetRef') public fieldsetRef?: ElementRef<HTMLElement>
 
   onChangeFn?: (value: any) => void
-  onTouchedFn?: any
+  onTouchedFn?: () => void
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
@@ -217,12 +220,8 @@ export class NggDropdownComponent
               selectedOption = dropdown.selectValue
                 ? data[dropdown.selectValue]
                 : data
-              setTimeout(() => {
-                this._value = selectedOption
-                this.valueChange.emit(selectedOption)
-                this.onChangeFn && this.onChangeFn(selectedOption)
-                this.onTouchedFn && this.onTouchedFn()
-              }, 0)
+
+              this.updateValue(selectedOption)
             }
           } else {
             const selectedOption = this.dropdown.options
@@ -239,12 +238,7 @@ export class NggDropdownComponent
               selectedOption &&
               JSON.stringify(this._value) !== JSON.stringify(selectedOption)
             ) {
-              setTimeout(() => {
-                this._value = selectedOption
-                this.valueChange.emit(selectedOption)
-                this.onChangeFn && this.onChangeFn(selectedOption)
-                this.onTouchedFn && this.onTouchedFn()
-              }, 0)
+              this.updateValue(selectedOption)
             }
           }
 
@@ -294,7 +288,18 @@ export class NggDropdownComponent
       loop: this.loop,
       value: this.value,
       multiSelect: this.multiSelect,
+      onTouched: () => {
+        this.onTouchedFn?.()
+        this.touched.emit(true)
+        this.cd.markForCheck()
+      },
     }
+  }
+
+  private updateValue(option: any) {
+    this._value = option
+    this.valueChange.emit(option)
+    this.onChangeFn?.(option)
   }
 
   private setSelectionByValue(value: any) {

@@ -1,24 +1,24 @@
 {
   "projectType": "application",
-      "root": "apps/angular-handle-legacy",
-      "sourceRoot": "apps/angular-handle-legacy/src",
+  "root": "apps/angular-handle-legacy",
+  "sourceRoot": "apps/angular-handle-legacy/src",
   "prefix": "green",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-            "outputPath": "dist/apps/angular-handle-legacy",
-            "index": "apps/angular-handle-legacy/src/index.html",
-            "main": "apps/angular-handle-legacy/src/main.ts",
-            "polyfills": "apps/angular-handle-legacy/src/polyfills.ts",
-            "tsConfig": "apps/angular-handle-legacy/tsconfig.app.json",
+        "outputPath": "dist/apps/angular-handle-legacy",
+        "index": "apps/angular-handle-legacy/src/index.html",
+        "main": "apps/angular-handle-legacy/src/main.ts",
+        "polyfills": "apps/angular-handle-legacy/src/polyfills.ts",
+        "tsConfig": "apps/angular-handle-legacy/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-              "apps/angular-handle-legacy/src/favicon.ico",
-              "apps/angular-handle-legacy/src/assets"
+          "apps/angular-handle-legacy/src/favicon.ico",
+          "apps/angular-handle-legacy/src/assets"
         ],
-            "styles": ["apps/angular-handle-legacy/src/styles.scss"],
+        "styles": ["apps/angular-handle-legacy/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -37,8 +37,8 @@
           ],
           "fileReplacements": [
             {
-                  "replace": "apps/angular-handle-legacy/src/environments/environment.ts",
-                  "with": "apps/angular-handle-legacy/src/environments/environment.prod.ts"
+              "replace": "apps/angular-handle-legacy/src/environments/environment.ts",
+              "with": "apps/angular-handle-legacy/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -58,10 +58,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-              "browserTarget": "angular-handle-legacy:build:production"
+          "browserTarget": "angular-handle-legacy:build:production"
         },
         "development": {
-              "browserTarget": "angular-handle-legacy:build:development"
+          "browserTarget": "angular-handle-legacy:build:development"
         }
       },
       "defaultConfiguration": "development",
@@ -72,23 +72,23 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-            "browserTarget": "angular-handle-legacy:build"
+        "browserTarget": "angular-handle-legacy:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-              "apps/angular-handle-legacy/src/**/*.ts",
-              "apps/angular-handle-legacy/src/**/*.html"
+          "apps/angular-handle-legacy/src/**/*.ts",
+          "apps/angular-handle-legacy/src/**/*.html"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/angular-handle-legacy"],
+      "outputs": ["coverage/apps/angular-handle-legacy"],
       "options": {
-            "jestConfig": "apps/angular-handle-legacy/jest.config.js",
+        "jestConfig": "apps/angular-handle-legacy/jest.config.js",
         "passWithNoTests": true
       }
     }
