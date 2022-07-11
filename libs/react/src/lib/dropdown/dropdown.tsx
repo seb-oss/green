@@ -11,6 +11,7 @@ export interface DropdownProps {
   selectValue?: string
   loop?: boolean
   multiSelect?: boolean
+  onChange?: (o: DropdownOption) => void
 }
 
 export const Dropdown = ({
@@ -22,7 +23,9 @@ export const Dropdown = ({
   useValue,
   display,
   texts,
+  onChange,
 }: DropdownProps) => {
+
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
   const { dropdown, listboxProps, togglerProps, listItems, multiSelectProps } =
@@ -37,6 +40,7 @@ export const Dropdown = ({
       togglerRef,
       listboxRef,
       texts,
+      onChange
     })
 
   return (

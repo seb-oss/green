@@ -24,6 +24,7 @@ interface HookArgs {
   display?: string
   togglerRef: RefObject<HTMLElement>
   listboxRef: RefObject<HTMLElement>
+  onChange?: (o: DropdownOption) => void
 }
 
 type Props = HTMLAttributes<HTMLElement>
@@ -59,6 +60,7 @@ export const useDropdown = ({
   display,
   togglerRef,
   listboxRef,
+  onChange
 }: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
@@ -95,7 +97,15 @@ export const useDropdown = ({
         className: o.classes?.join(' '),
         children: o[dropdown.display],
         selected: o.selected,
-        onClick: () => handler?.select(o),
+        onClick: () => {
+          handler?.select(o).then(() => {
+            if (onChange) {
+              const result = options.find((item) => item.key === o.key)
+
+              result && onChange(result)
+            }
+          })
+        },
       }))
       setListItems(newListItems)
     } else {
@@ -107,7 +117,16 @@ export const useDropdown = ({
         inputProps: {
           defaultChecked: o.selected,
           type: 'checkbox',
-          onChange: () => handler?.select(o, false),
+          onChange: () => {
+            handler?.select(o, false).then(() => {
+
+              if (onChange) {
+                const result = options.find((item) => item.key === o.key)
+
+                result && onChange(result)
+              }
+            })
+          }
         },
         spanProps: {
           children: o[dropdown.display],

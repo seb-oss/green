@@ -4,6 +4,7 @@ import { IndicatorType, validateClassName } from '@sebgroup/extract'
 
 export interface RadioGroupProps {
   title?: string
+  defaultSelected?: string
   description?: string
   validator?: IValidator
   onChangeRadio?: (value: string) => string
@@ -11,7 +12,7 @@ export interface RadioGroupProps {
   name?: string
 }
 
-export const RadioGroup = ({ description, title, validator, onChangeRadio, onChange, name, children }: React.PropsWithChildren<RadioGroupProps>) => {
+export const RadioGroup = ({ defaultSelected, description, title, validator, onChangeRadio, onChange, name, children }: React.PropsWithChildren<RadioGroupProps>) => {
   const [checked, setChecked] = React.useState<string>()
   const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
 
@@ -25,6 +26,7 @@ export const RadioGroup = ({ description, title, validator, onChangeRadio, onCha
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
+      if (defaultSelected) setChecked(defaultSelected)
       const form: HTMLFormElement = radioBtnRef?.current?.form as HTMLFormElement
       const resetListner = () => {
         setChecked(undefined)
