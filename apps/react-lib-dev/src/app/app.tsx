@@ -1,4 +1,4 @@
-import {Navbar, Dropdown, RadioGroup, RadioButton, Form} from "@sebgroup/green-react";
+import {Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems} from "@sebgroup/green-react";
 
 const dropDownKeyValueArray = [
   {
@@ -20,13 +20,17 @@ export function App() {
             <h1>This is a form</h1>
             <p>If you are developing a React app this is a great form to work on.</p>
             <Form>
-              <Dropdown options={dropDownKeyValueArray} onChange={(value) => {
-              }} />
-              <RadioGroup onChange={(value) => console.log(value)} defaultSelected={'farfalle'}>
-                <RadioButton label={'Fusilli'} value={'fusilli'} />
-                <RadioButton label={'Penne'} value={'penne'} />
-                <RadioButton label={'Farfalle'} value={'farfalle'} />
-              </RadioGroup>
+              <FormItems name="text" validate={{ message: 'Required', indicator: 'error', rules: { type: 'Required' } }} >
+                <Dropdown options={dropDownKeyValueArray} />
+              </FormItems>
+              <FormItems name="text" validate={{ message: 'Required', indicator: 'error', rules: { type: 'Required' } }} >
+                <RadioGroup title="Radio Group" onChange={(value) => console.log(value)}>
+                  <RadioButton label={'Fusilli'} value={'fusilli'} />
+                  <RadioButton label={'Penne'} value={'penne'} />
+                  <RadioButton label={'Farfalle'} value={'farfalle'} />
+                </RadioGroup>
+              </FormItems>
+              <button type="submit">Submit</button>
             </Form>
           </div>
         </div>
