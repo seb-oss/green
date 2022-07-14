@@ -7,6 +7,7 @@ import {
   DropdownOption,
   ExtendedDropdownOption,
 } from './types'
+import {validateClassName} from "@sebgroup/extract";
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
@@ -57,6 +58,7 @@ export const create = ({
   loop,
   value,
   multiSelect,
+  validator
 }: DropdownArgs): AbstractDropdown => {
   useValue = useValue || 'value'
   display = display || 'key'
@@ -100,6 +102,7 @@ export const create = ({
     useValue,
     display,
     selectValue,
+    validator
   }
 
   return reduce(dropdown, dropdownValues)
@@ -305,3 +308,13 @@ export const popper = (
   style?: CSSStyleDeclaration
 ): AbstractDropdown =>
   reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
+
+export const validate = (dropdown: AbstractDropdown, validator: any) => reduce(
+  dropdown, {
+    elements: {
+      toggler: {
+        classes: addClass(dropdown.elements?.toggler?.classes, validateClassName(validator?.indicator))
+      }
+    }
+  }
+)

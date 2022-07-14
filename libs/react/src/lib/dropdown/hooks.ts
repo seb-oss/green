@@ -12,6 +12,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import {IValidator} from "@sebgroup/extract";
 
 interface HookArgs {
   id?: string
@@ -25,6 +26,7 @@ interface HookArgs {
   togglerRef: RefObject<HTMLElement>
   listboxRef: RefObject<HTMLElement>
   onChange?: (o: DropdownOption) => void
+  validator?: IValidator
 }
 
 type Props = HTMLAttributes<HTMLElement>
@@ -60,7 +62,8 @@ export const useDropdown = ({
   display,
   togglerRef,
   listboxRef,
-  onChange
+  onChange,
+  validator
 }: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
@@ -122,7 +125,6 @@ export const useDropdown = ({
 
               if (onChange) {
                 const result = options.find((item) => item.key === o.key)
-
                 result && onChange(result)
               }
             })
@@ -160,6 +162,14 @@ export const useDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, texts, options, loop, multiSelect, selectValue, useValue, display])
 
+  // When validator changes
+  useEffect(() => {
+    if (!dropdown) return
+
+    if (validator) handler?.validate(validator)
+
+  }, [validator])
+
   // Create dropdown handler
   useEffect(() => {
     if (!handler && togglerRef.current && listboxRef.current) {
@@ -174,6 +184,7 @@ export const useDropdown = ({
             selectValue,
             useValue,
             display,
+            validator
           },
           togglerRef.current,
           listboxRef.current,

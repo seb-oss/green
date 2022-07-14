@@ -43,6 +43,7 @@ export interface AbstractDropdown {
   useValue: string
   display: string
   selectValue: string
+  validator: any
   options: ExtendedDropdownOption[]
   elements: Partial<{
     toggler: Partial<ElementProps>
@@ -64,6 +65,7 @@ export interface DropdownArgs {
   value?: any
   multiSelect?: boolean
   onTouched?: () => void
+  validator?: any
 }
 
 export interface DropdownHandler {
@@ -88,5 +90,6 @@ export interface DropdownHandler {
     selection: ExtendedDropdownOption,
     closeOnSelect?: boolean
   ) => Promise<void>
+  validate: (validator: any) => Promise<void>
   destroy: () => void
 }

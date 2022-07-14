@@ -10,6 +10,7 @@ import {
   loop,
   popper,
   keypress,
+  validate
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -56,6 +57,7 @@ export const createDropdown = (
         : select(handler.dropdown, selection)
     )
   handler.update = (props) => update(handler, listener, create(props))
+  handler.validate = (validator: any) => update(handler, listener, validate(handler.dropdown, validator))
 
   fromEvent(toggler, 'blur')
     .pipe(takeUntil(handler.onDestroy$))

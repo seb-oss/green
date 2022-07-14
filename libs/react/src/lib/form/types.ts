@@ -1,4 +1,4 @@
-import { IndicatorType, ValidatorRules } from '@sebgroup/extract'
+import { IValidator } from '@sebgroup/extract'
 import { HTMLProps } from 'react'
 
 export interface TextInputProps extends HTMLProps<HTMLInputElement> {
@@ -26,9 +26,3 @@ export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
 }
 
 export type InputListener<T> = (newValue?: T) => unknown
-
-export interface IValidator {
-  message: string
-  indicator: IndicatorType
-  rules?: ValidatorRules
-}

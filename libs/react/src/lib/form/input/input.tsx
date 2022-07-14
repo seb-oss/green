@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react'
 import useInput from '../useInput'
-import { CheckboxProps, InputListener, IValidator, NumberInputProps, RadioButtonProps, TextInputProps } from '../types'
-import { IndicatorType, validateClassName } from '@sebgroup/extract'
+import { CheckboxProps, NumberInputProps, RadioButtonProps, TextInputProps } from '../types'
+import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
 import React from 'react'
 
 export type Renderer = (
