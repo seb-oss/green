@@ -7,7 +7,7 @@ import {
   DropdownOption,
   ExtendedDropdownOption,
 } from './types'
-import {validateClassName} from "@sebgroup/extract";
+import {validateClassName} from "../helperFunction";
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
