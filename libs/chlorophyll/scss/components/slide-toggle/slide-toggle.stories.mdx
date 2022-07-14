@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+import { toggle } from './mock'
+
+export const Template = ({ text, className }) => `
+  <a href="#" class="${className}">${text}</a>
+`
+
+<Meta
+  title="Components/SlideToggle"
+/>
+
+# Slide Toggle
+
+<Canvas>
+  <div>
+    <button class="slide-toggle" aria-pressed="false" onClick={toggle}>
+      <span class="sr-only">Button label</span>
+    </button>
+  </div>
+</Canvas>

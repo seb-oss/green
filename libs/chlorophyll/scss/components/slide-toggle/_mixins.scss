@@ -1,0 +1,43 @@
+@use 'sass:map';
+@use '../../tokens';
+@use '../../common';
+
+$selector-class: '.slide-toggle';
+$selector-base: 'button[aria-pressed]' + $selector-class;
+$selector-pressed: 'button[aria-pressed=true]' + $selector-class;
+$selector-not-pressed: 'button[aria-pressed=false]' + $selector-class;
+
+$_track_height: map.get(tokens.$spacing, 6);
+$_track_color: var(--sg-grey-400);
+$_track_color_pressed: hsl(var(--sg-hsl-green-1));
+$_thumb_height: 1.25rem;
+$_thumb_color: white;
+
+@mixin add-slide-toggle-base {
+  @include common.padding(1);
+
+  height: $_track_height;
+  border-radius: $_thumb_height;
+  appearance: none;
+  background: $_track_color;
+  text-align: left;
+  aspect-ratio: 1.83;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    background-color: $_thumb_color;
+    height: $_thumb_height;
+    border-radius: 1.8rem;
+    aspect-ratio: 1;
+    box-shadow:
+      0 2px 8px 0 rgba(0,0,0,0.15),
+      0 1px 2px 0 rgba(0,0,0,0.15),
+      0 1px 0 0 rgba(0,0,0,0.06);
+  }
+}
+
+@mixin add-slide-toggle-state-pressed {
+  text-align: right;
+  background: $_track_color_pressed;
+}
