@@ -19,6 +19,7 @@ $_thumb_color: white;
 
 @mixin add-slide-toggle-base {
   @include common.padding(1);
+  @include common.add-focus();
 
   width: $_track_width;
   height: $_track_height;
