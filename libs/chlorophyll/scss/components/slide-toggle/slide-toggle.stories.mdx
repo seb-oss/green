@@ -1,13 +1,33 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 import { toggle } from './mock'
 
-export const Template = ({ text, className }) => `
-  <a href="#" class="${className}">${text}</a>
+export const Template = ({ label, pressed }) => `
+<div>
+  <span id="slide-toggle-label-1">${label}</span>
+  <button class="slide-toggle" aria-pressed="${pressed}" aria-labelledby="slide-toggle-label-1"></button>
+</div>
 `
 
 <Meta
-  title="Components/SlideToggle"
+  title="Components/Slide Toggle"
+  argTypes={{
+    label: { control: 'text' },
+    pressed: {
+      control: 'boolean'
+    }
+  }}
 />
+
+<Story
+  name="Slide Toggle"
+  args={{
+    label: 'Toggle me',
+    pressed: false
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
 
 # Slide Toggle
 
