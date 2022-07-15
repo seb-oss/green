@@ -27,6 +27,7 @@ $_thumb_color: white;
   background: $_track_color;
   text-align: left;
   transition: 300ms;
+  vertical-align: middle;
   
   &:hover {
     background-color: $_track_color_hover;
