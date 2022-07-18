@@ -9,6 +9,12 @@ export interface ValidatorRules {
   custom?: () => string | undefined
 }
 
+export interface IValidator {
+  message: string
+  indicator: IndicatorType
+  rules?: ValidatorRules
+}
+
 export const validateClassName = (value: IndicatorType) => {
   switch (value) {
     case 'success':

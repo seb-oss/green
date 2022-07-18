@@ -1,6 +1,7 @@
-import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
-import { useRef } from 'react'
+import {DropdownOption, DropdownTexts} from '@sebgroup/extract'
+import {useEffect, useRef} from 'react'
 import { useDropdown } from './hooks'
+import {IValidator} from "@sebgroup/extract";
 
 export interface DropdownProps {
   id?: string
@@ -12,6 +13,7 @@ export interface DropdownProps {
   loop?: boolean
   multiSelect?: boolean
   onChange?: (o: DropdownOption) => void
+  validator?: IValidator
 }
 
 export const Dropdown = ({
@@ -24,10 +26,12 @@ export const Dropdown = ({
   display,
   texts,
   onChange,
+  validator
 }: DropdownProps) => {
 
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
+
   const { dropdown, listboxProps, togglerProps, listItems, multiSelectProps } =
     useDropdown({
       id,
@@ -40,11 +44,12 @@ export const Dropdown = ({
       togglerRef,
       listboxRef,
       texts,
-      onChange
+      onChange,
+      validator
     })
 
   return (
-    <div>
+    <div className="form-group">
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>
       </button>
@@ -80,6 +85,7 @@ export const Dropdown = ({
           </ul>
         )}
       </div>
+      { validator && <span className="form-info">{validator?.message}</span> }
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
-import { IValidator, RadioButtonProps } from '../types'
-import { IndicatorType, validateClassName } from '@sebgroup/extract'
+import { RadioButtonProps } from '../types'
+import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
 
 export interface RadioGroupProps {
   title?: string
