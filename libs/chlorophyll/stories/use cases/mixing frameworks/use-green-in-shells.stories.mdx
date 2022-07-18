@@ -16,6 +16,10 @@ It could look something like this:
 ```css
 /* Add use-green scope i.e. ability to use (`.use-green`) */
 @use '@sebgroup/chlorophyll/scss/components/use-green-scope';
+/* if you need to configure $font-path variable you do it here by adding like this:
+@use '@sebgroup/chlorophyll/scss/components/use-green-scope' with (
+  $font-path: './path/to/seb/font'
+); /*
 
 /* Import green and scope it to `.use-green` class and our root element (by default app-root in angular but you should change it).
 We use app-root here to make sure no CSS is applied to other elements except our MFE which will be rendered inside the `<app-root>` tag.
