@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.15...@sebgroup/extract@1.0.0-beta.16) (2022-07-18)
+
+
+### Bug Fixes
+
+* **dropdown:** allow empty texts ([6d4c125](https://github.com/sebgroup/green/commit/6d4c1250e3b5a625d5f300e4c50d2fddda31a3df))
+* **dropdown:** compare by value ([9fafa75](https://github.com/sebgroup/green/commit/9fafa75d49ea6a5c1fc33af5b8808019044907ae))
+* **dropdown:** touched behavior ([d8e9bac](https://github.com/sebgroup/green/commit/d8e9baca16e7331f244d4e88e6d204b24f2c2e60))
+
+
+### Features
+
+* 🎸 Validator prop on Dropdown ([dd76d9a](https://github.com/sebgroup/green/commit/dd76d9a4eb75eb81cd50b9ef37790782ad9b3a9d))
+
+
+
 # [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.14...@sebgroup/extract@1.0.0-beta.15) (2022-06-28)
 
 
