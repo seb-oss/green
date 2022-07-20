@@ -1,0 +1,39 @@
+import { NggBadge } from './badge.component'
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# Badge
+
+Simple Badge Component
+
+### Importing module
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggBadge } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggBadge],
+  exports: [],
+})
+export class AppModule {}
+```
+
+### Default
+
+Default badge
+
+<Canvas>
+  <Story id="components-badge--default"/>
+</Canvas>
+
+### Dismissible Badges
+
+Badges that can be dismissed/removed.
+
+<Canvas>
+  <Story id="components-badge--dismissible" />
+</Canvas>

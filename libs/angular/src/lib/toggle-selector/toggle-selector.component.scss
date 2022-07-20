@@ -1,0 +1,83 @@
+@import '~@sebgroup/bootstrap/scss/variables';
+
+@mixin toggle-color($color) {
+  > * {
+    color: $color;
+    fill: $color;
+  }
+}
+
+.ac.toggle-selector {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 4.5em;
+  background-color: $white;
+  border: 1px solid $gray-400;
+  padding: 0 1.5rem;
+  font-weight: $font-weight-medium;
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: $gray-800;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  &.custom-label {
+    padding: 0;
+  }
+  &.icon-right {
+    flex-direction: row-reverse;
+    .icon-container {
+      margin-left: 1.5rem;
+      margin-right: 0;
+    }
+  }
+  &:not(.disabled) {
+    &.error {
+      border-color: $danger;
+      border-width: 1px;
+    }
+    &:hover {
+      border-color: $blue;
+      @include toggle-color($blue);
+    }
+    &.focus {
+      color: $blue-dark;
+      border-color: $blue-dark;
+      box-shadow: 0 0 0 3px rgba($blue-darker, 0.2);
+      transition: box-shadow 250ms;
+      @include toggle-color($blue);
+    }
+    &.checked {
+      border-color: $blue-darker;
+      border-width: 2px;
+      @include toggle-color($blue-darker);
+    }
+  }
+  &.disabled {
+    background-color: $gray-200;
+    border-color: $gray-200;
+    @include toggle-color($gray-300);
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+  .icon-container {
+    margin-right: 1.5rem;
+    &.icon-only {
+      margin: 0;
+    }
+    ::ng-deep {
+      > svg {
+        width: 40px;
+      }
+    }
+  }
+}
+
+.text-disabled {
+    color: $gray-400;
+}

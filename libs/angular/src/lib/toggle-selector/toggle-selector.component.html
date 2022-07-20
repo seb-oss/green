@@ -1,0 +1,47 @@
+<ng-container
+  *ngFor="let item of displayList; let idx = index; trackBy: trackByFn"
+>
+  <div
+    class="ac toggle-selector"
+    [class.error]="error"
+    [class.checked]="item.selected"
+    [class.disabled]="disabled || item.optionItem.disabled"
+    [class.focus]="focusedItem === idx"
+    [class.icon-right]="item.optionItem.iconPosition === 'right'"
+    [class.custom-label]="item.optionItem.customLabel"
+    (click)="handleItemOnClick($event, idx)"
+  >
+    <input
+      [type]="inputType"
+      [attr.aria-label]="item.optionItem.label"
+      [id]="item.optionItem.value"
+      [name]="name"
+      [disabled]="disabled || item.optionItem.disabled"
+      (focus)="focus(idx)"
+      (blur)="blur()"
+      [defaultChecked]="item.selected"
+    />
+    <div
+      class="icon-container"
+      [class.icon-only]="!item.optionItem.label"
+      *ngIf="item.optionItem.icon"
+      [innerHTML]="item.optionItem.icon | safeHtml"
+    ></div>
+    <label
+      [attr.for]="item.optionItem.value"
+      *ngIf="!item.optionItem.customLabel; customLabel"
+      >{{ item.optionItem.label }}</label
+    >
+    <div #customLabel [outerHTML]="item.optionItem.customLabel"></div>
+  </div>
+
+  <p
+    *ngIf="!!item.optionItem.description"
+    class="small"
+    [class.text-disabled]="disabled || item.optionItem.disabled"
+  >
+    {{ item.optionItem.description }}
+  </p>
+</ng-container>
+
+<span *ngIf="error" class="text-danger">{{ errorMessage }}</span>
