@@ -1,7 +1,7 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 
 import Documentation from './documentation.mdx'
-import { NggBadgeModule } from './toggle-selector.module'
+import { NggToggleSelectorModule } from './toggle-selector.module'
 import { NggToggleSelectorComponent } from './toggle-selector.component'
 
 export default {
@@ -9,7 +9,7 @@ export default {
   component: NggToggleSelectorComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggBadgeModule],
+      imports: [NggToggleSelectorModule],
     }),
   ],
   argTypes: {
