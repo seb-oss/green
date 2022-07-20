@@ -134,7 +134,7 @@ export class NggToggleSelectorComponent
         if (this.multi) {
           let selected: boolean = false
 
-          if (Array.isArray(this.value) && this.value.length > 0) {
+          if (Array.isArray(this.value)) {
             selected = !!this.value.find(
               (element: IToggleSelector) => element.value === e.value
             )
