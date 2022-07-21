@@ -8,7 +8,7 @@ import { IToggleSelector } from "@sebgroup/extract";
 import { NggToggleSelectorComponent } from "./toggle-selector.component"
 
 @Component({
-    selector: "test-ngg-toggle-selector",
+    selector: "ngg-toggle-selector-test",
     template: `<ngg-toggle-selector
         #toggleSelector
         [multi]="multi"
@@ -20,11 +20,10 @@ import { NggToggleSelectorComponent } from "./toggle-selector.component"
     ></ngg-toggle-selector>`,
 })
 class NggToggleSelectorTestComponent {
-    //@ts-ignore
-    @ViewChild("toggleSelector") toggleSelector: NggToggleSelectorComponent;
+    @ViewChild("toggleSelector") toggleSelector: NggToggleSelectorComponent | undefined = undefined;
 
     list: Array<IToggleSelector>;
-    multi: boolean = false;
+    multi = false;
     disabled?: boolean = false;
     model?: any;
     error?: boolean;
@@ -60,8 +59,8 @@ describe("ToggleSelectorComponent", () => {
     it("Testing two-way data binding", async () => {
         component.model = component.list[1];
 
-        const ngModelChange = spyOn(component.toggleSelector, "writeValue").and.callThrough();
-        const generateDisplayArray = spyOn(component.toggleSelector, "generateCheckedItems");
+        const ngModelChange = spyOn(component.toggleSelector as NggToggleSelectorComponent, "writeValue").and.callThrough();
+        const generateDisplayArray = spyOn(component.toggleSelector as NggToggleSelectorComponent, "generateCheckedItems");
         fixture.detectChanges();
         await fixture.whenStable().then(() => {
             expect(ngModelChange).toHaveBeenCalled();

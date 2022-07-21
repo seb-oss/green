@@ -52,18 +52,19 @@ export class NggToggleSelectorComponent
   /**  Array that will be used to render */
   displayList: Array<IDisplayToggleSelector> = []
 
-  constructor() {}
-
-  ngOnChanges(): void {
-    this.generateCheckedItems()
-  }
-
   /**
    * Placeholders for the callbacks which are later provided
    * by the Control Value Accessor
    */
   private onTouchedCallback?: () => void
   private onChangeCallback?: (_: any) => void
+
+  //eslint-disable-next-line
+  constructor() {}
+
+  ngOnChanges(): void {
+    this.generateCheckedItems()
+  }
 
   writeValue(value: ToggleSelectorType): void {
     this.value = value
@@ -131,7 +132,7 @@ export class NggToggleSelectorComponent
       this.list &&
       this.list.map((e) => {
         if (this.multi) {
-          let selected: boolean = false
+          let selected = false
 
           if (Array.isArray(this.value)) {
             selected = !!this.value.find(
@@ -141,7 +142,7 @@ export class NggToggleSelectorComponent
 
           return { optionItem: e, selected } as IDisplayToggleSelector
         } else {
-          let selected: boolean =
+          const selected: boolean =
             (this.value as IToggleSelector)?.value === e.value
           return { optionItem: e, selected } as IDisplayToggleSelector
         }
