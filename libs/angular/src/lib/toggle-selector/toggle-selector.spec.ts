@@ -15,7 +15,6 @@ import { NggToggleSelectorComponent } from "./toggle-selector.component"
         [list]="list"
         [(ngModel)]="model"
         [disabled]="disabled"
-        [error]="error"
         [errorMessage]="errorMessage"
     ></ngg-toggle-selector>`,
 })
@@ -26,7 +25,6 @@ class NggToggleSelectorTestComponent {
     multi = false;
     disabled?: boolean = false;
     model?: any;
-    error?: boolean;
     errorMessage?: string;
 
     constructor() {
@@ -88,8 +86,8 @@ describe("ToggleSelectorComponent", () => {
         expect(inputEl.every(el => el.nativeElement.disabled === true)).toBeFalsy();
     });
 
-    it("should have error class name and text when error is passed", () => {
-        component.error = true;
+    it("should have error class name and text when error message is passed", () => {
+        component.errorMessage = "Error message";
         fixture.detectChanges();
         const container: DebugElement = fixture.debugElement.query(By.css(".error"));
         const span: DebugElement = fixture.debugElement.query(By.css(".text-danger"));
