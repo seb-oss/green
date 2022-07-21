@@ -46,20 +46,8 @@ export class AppModule {}
 
 ## Examples
 
-### Single Select
-
-Default badge
-
 <Canvas>
-  <Story id="components-badge--default"/>
-</Canvas>
-
-### Multi-select
-
-Badges that can be dismissed/removed.
-
-<Canvas>
-  <Story id="components-badge--dismissible" />
+  <Story id="components-toggle-selector--default"/>
 </Canvas>
 
 ## Reactive forms
@@ -67,6 +55,6 @@ We recommend using <a href="https://angular.io/guide/reactive-forms" target="_bl
 
 ```html
 <form [formGroup]="reactiveForm">
-    <ngg-toggle-selector formControlName="options"></ngg-toggle-selector>
+    <ngg-toggle-selector formControlName="options" [list]="list"></ngg-toggle-selector>
 </form>
 ```
