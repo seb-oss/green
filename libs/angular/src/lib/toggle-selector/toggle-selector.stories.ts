@@ -14,6 +14,12 @@ export default {
     }),
   ],
   argTypes: {
+    list: {
+      control: {
+        type: 'object'
+      },
+      name: "List",
+    },
     multi: {
       control: 'boolean',
       name: 'Multi-select',
@@ -54,8 +60,8 @@ const list: Array<IToggleSelector> = [
     icon: icon,
     iconPosition: 'right',
   },
-  { value: '4', label: '', icon: icon },
-  { value: '5', label: 'Five mississipi', disabled: true },
+  { value: '4', label: 'Four mississipi', disabled: true },
+  { value: '5', label: '', icon: icon },
 ]
 
 const Template: Story<NggToggleSelectorComponent> = (
