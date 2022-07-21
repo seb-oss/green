@@ -3,7 +3,7 @@
 >
   <div
     class="ac toggle-selector"
-    [class.error]="error"
+    [class.error]="!!errorMessage"
     [class.checked]="item.selected"
     [class.disabled]="disabled || item.optionItem.disabled"
     [class.focus]="focusedItem === idx"
@@ -44,4 +44,4 @@
   </p>
 </ng-container>
 
-<span *ngIf="error" class="text-danger">{{ errorMessage }}</span>
+<span *ngIf="!!errorMessage" class="text-danger">{{ errorMessage }}</span>

@@ -37,8 +37,6 @@ export class NggToggleSelectorComponent
   @Input() multi?: boolean = false
   /** Flag whether the component is disabled */
   @Input() disabled?: boolean = false
-  /** Flag whether the component is in an invalid state */
-  @Input() error?: boolean = false
   /** Error message */
   @Input() errorMessage?: string
 
