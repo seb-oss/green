@@ -9,6 +9,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   IDisplayToggleSelector,
   IToggleSelector,
+  randomName,
   ToggleSelectorInputType,
   ToggleSelectorType,
 } from '@sebgroup/extract'
@@ -32,7 +33,7 @@ export class NggToggleSelectorComponent
   /** List of option items for the component */
   @Input() list: Array<IToggleSelector> = []
   /** Option item control name */
-  @Input() name?: string = 'name' // randomId('name') // TODO: add randomId from front-end tools
+  @Input() name?: string = randomName('name')
   /** Flag whether the component is allowed to select multiple options */
   @Input() multi?: boolean = false
   /** Flag whether the component is disabled */

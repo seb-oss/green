@@ -9,9 +9,9 @@ export interface IToggleSelector {
   label?: string
   icon?: string
   iconPosition?: ToggleSelectorIconPosition
-  customLabel?: HTMLElement
   description?: string
   disabled?: boolean
+  customLabel?: HTMLElement
 }
 
 export interface IDisplayToggleSelector extends IToggleSelector {
