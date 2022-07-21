@@ -8,6 +8,7 @@
     [class.disabled]="disabled || item.optionItem.disabled"
     [class.focus]="focusedItem === idx"
     [class.icon-right]="item.optionItem.iconPosition === 'right'"
+    [class.margin-bottom]="!item.optionItem.description"
     [class.custom-label]="item.optionItem.customLabel"
     (click)="handleItemOnClick($event, idx)"
   >
@@ -37,7 +38,7 @@
 
   <p
     *ngIf="!!item.optionItem.description"
-    class="small"
+    class="small margin-bottom"
     [class.text-disabled]="disabled || item.optionItem.disabled"
   >
     {{ item.optionItem.description }}

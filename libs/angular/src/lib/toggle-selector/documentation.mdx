@@ -38,11 +38,22 @@ export class AppModule {}
 ## Toggle Selector Options
 |Input|Type|Description|
 |:--------|:----------|:------|
-|list|`Array<IToggleSelector>`|List of option items for the component|
+|list|`Array<IToggleSelector>`*|List of option items for the component|
 |name|`string`|Option item control name|
 |multi|`boolean`|Flag whether the component is allowed to select multiple options|
 |disabled|`boolean`|Flag whether the component is disabled|
 |errorMessage|`string`|Error message|
+
+#### *Toggle Selector Interface (IToggleSelector)
+|Attribute|Type|Description|
+|:--------|:----------|:------|
+|value|`string`|Form control value of option item|
+|label?|`string`|Label|
+|icon?|`string`|SVG Icon|
+|iconPosition?|`ToggleSelectorIconPosition`|Icon position: `left` or `right`|
+|description?|`string`|Short text describing the option item|
+|disabled?|`boolean`|Flag whether option item is disabled|
+|customLabel?|`HTMLElement`|HTML for custom label|
 
 ## Examples
 

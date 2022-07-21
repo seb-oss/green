@@ -22,7 +22,6 @@
   justify-content: center;
   color: $gray-800;
   text-align: center;
-  margin-bottom: 0.25rem;
   &.custom-label {
     padding: 0;
   }
@@ -80,4 +79,8 @@
 
 .text-disabled {
     color: $gray-400;
+}
+
+.margin-bottom {
+  margin-bottom: 1.5rem;
 }
