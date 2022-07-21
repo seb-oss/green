@@ -54,18 +54,6 @@ describe("ToggleSelectorComponent", () => {
         expect(component).toBeTruthy();
     });
 
-    it("Testing two-way data binding", async () => {
-        component.model = component.list[1];
-
-        const ngModelChange = spyOn(component.toggleSelector as NggToggleSelectorComponent, "writeValue").and.callThrough();
-        const generateDisplayArray = spyOn(component.toggleSelector as NggToggleSelectorComponent, "generateCheckedItems");
-        fixture.detectChanges();
-        await fixture.whenStable().then(() => {
-            expect(ngModelChange).toHaveBeenCalled();
-            expect(generateDisplayArray).toHaveBeenCalled();
-        });
-    });
-
     it("Should disable the element when disabled prop is set to true", () => {
         component.disabled = true;
         fixture.detectChanges();
