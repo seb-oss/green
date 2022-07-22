@@ -21,7 +21,6 @@ import { BadgeType } from '@sebgroup/extract'
       {{ closeText }}
     </button>
   `,
-  styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggBadgeComponent implements OnInit {
@@ -44,11 +43,6 @@ export class NggBadgeComponent implements OnInit {
   @HostBinding('class') get class(): string {
     return ['badge', this.badgeType].join(' ')
   }
-
-  @HostBinding('style.line-height') height = '20px'
-  @HostBinding('style.display') display = 'inline-flex'
-  @HostBinding('style.justify-content') justifyContent = 'center'
-  @HostBinding('style.align-items') alignItems = 'center'
 
   /** Callback when component is dismissed */
   @Output() handleClose: EventEmitter<Event> = new EventEmitter()
