@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnInit,
   Output,
 } from '@angular/core'
 import { BadgeType } from '@sebgroup/extract'
@@ -13,16 +14,19 @@ import { BadgeType } from '@sebgroup/extract'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[ngg-badge]',
   template: `
-    <strong>
-      <ng-content></ng-content>
-    </strong>
-    <button *ngIf="isCloseable" class="close" (click)="close($event)">
-      {{ closeText }}
-    </button>
+    <div class="ngg-badge">
+      <strong>
+        <ng-content></ng-content>
+      </strong>
+      <button *ngIf="isCloseable" class="close" (click)="close($event)">
+        {{ closeText }}
+      </button>
+    </div>
   `,
+  styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggBadgeComponent {
+export class NggBadgeComponent implements OnInit {
   /** The color of the component */
   @Input() badgeType?: BadgeType
   /** Flag whether the component can be dismissed */
@@ -34,10 +38,16 @@ export class NggBadgeComponent {
   }
   /** Close text */
   @Input() closeText?: string
+  /** Custom text color */
+  @HostBinding('style.color') @Input() customColor?: string
+  /** Custom background color */
+  @HostBinding('style.background-color') @Input() customBackgroundColor?: string
 
   @HostBinding('class') get class(): string {
     return ['badge', this.badgeType].join(' ')
   }
+
+  @HostBinding('style.line-height') height: string = '20px'
 
   /** Callback when component is dismissed */
   @Output() onClose: EventEmitter<Event> = new EventEmitter()
@@ -46,6 +56,12 @@ export class NggBadgeComponent {
 
   //eslint-disable-next-line
   constructor() {}
+
+  ngOnInit(): void {
+    if (this.customColor || this.customBackgroundColor) {
+      this.badgeType = 'custom'
+    }
+  }
 
   close(e: Event) {
     this.onClose.emit(e)
