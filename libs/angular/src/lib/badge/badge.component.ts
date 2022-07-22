@@ -45,13 +45,13 @@ export class NggBadgeComponent implements OnInit {
     return ['badge', this.badgeType].join(' ')
   }
 
-  @HostBinding('style.line-height') height: string = '20px'
-  @HostBinding('style.display') display: string = 'inline-flex'
-  @HostBinding('style.justify-content') justifyContent: string = 'center'
-  @HostBinding('style.align-items') alignItems: string = 'center'
+  @HostBinding('style.line-height') height = '20px'
+  @HostBinding('style.display') display = 'inline-flex'
+  @HostBinding('style.justify-content') justifyContent = 'center'
+  @HostBinding('style.align-items') alignItems = 'center'
 
   /** Callback when component is dismissed */
-  @Output() onClose: EventEmitter<Event> = new EventEmitter()
+  @Output() handleClose: EventEmitter<Event> = new EventEmitter()
 
   private _isCloseable?: boolean | ''
 
@@ -65,6 +65,6 @@ export class NggBadgeComponent implements OnInit {
   }
 
   close(e: Event) {
-    this.onClose.emit(e)
+    this.handleClose.emit(e)
   }
 }

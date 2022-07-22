@@ -50,12 +50,13 @@ Default.args = {
 const DismissibleTemplate: Story<NggBadgeComponent> = (
   args: NggBadgeComponent
 ) => {
+  //eslint-disable-next-line
   let isDismissed = false
 
   return {
     template: `
       <div *ngIf="!isDismissed">
-        <span ngg-badge [badgeType]="badgeType" [isCloseable]="true" (onClose)="isDismissed=true;">Dismissible Badge</span>
+        <span ngg-badge [badgeType]="badgeType" [isCloseable]="true" (handleClose)="isDismissed=true;">Dismissible Badge</span>
       </div>
       <br />
       <div>
