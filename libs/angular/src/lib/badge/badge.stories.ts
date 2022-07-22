@@ -16,6 +16,8 @@ export default {
     badgeType: {
       options: ['info', 'success', 'warning', 'danger', 'light', 'dark', null],
       control: 'radio',
+      name: 'Badge Type',
+      defaultValue: 'info',
     },
   },
   parameters: {
@@ -23,28 +25,42 @@ export default {
       page: Documentation,
     },
   },
-} as Meta
+} as Meta<NggBadgeComponent>
 
 const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   template: `
-    <span ngg-badge [badgeType]="badgeType" [isCloseable]="isCloseable">{{text}}</span>
+    <span ngg-badge [badgeType]="badgeType">Badge</span>
     `,
   props: args,
 })
 
 export const Default = Template.bind({})
 Default.args = {
-  isCloseable: undefined,
-  badgeType: undefined,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  text: 'Badge',
+  badgeType: 'info',
+  isCloseable: false,
 }
-export const Dismissible = Template.bind({})
+
+const DismissibleTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => {
+  let isDismissed = false;
+
+  return {
+    template: `
+      <div *ngIf="!isDismissed">
+        <span ngg-badge [badgeType]="badgeType" [isCloseable]="true" (onClose)="isDismissed=true;">Dismissible Badge</span>
+      </div>
+      <br />
+      <div>
+        <button (click)="isDismissed=false;" [disabled]="!isDismissed">Reset</button>
+      </div>
+    `,
+    props: {
+      ...args,
+      isDismissed,
+    }
+  }
+}
+
+export const Dismissible = DismissibleTemplate.bind({})
 Dismissible.args = {
-  isCloseable: true,
-  badgeType: 'success',
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  text: 'Badge',
+  badgeType: 'warning',
 }

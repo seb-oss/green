@@ -1,9 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
   Input,
-  ViewContainerRef,
+  Output,
 } from '@angular/core'
 import { BadgeType } from '@sebgroup/extract'
 
@@ -15,29 +16,38 @@ import { BadgeType } from '@sebgroup/extract'
     <strong>
       <ng-content></ng-content>
     </strong>
-    <button *ngIf="isCloseable" class="close" (click)="close()">
+    <button *ngIf="isCloseable" class="close" (click)="close($event)">
       {{ closeText }}
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggBadgeComponent {
+  /** The color of the component */
+  @Input() badgeType?: BadgeType
+  /** Flag whether the component can be dismissed */
   @Input() set isCloseable(value: boolean | '') {
     this._isCloseable = value
   }
   get isCloseable(): boolean {
     return this._isCloseable === '' || !!this._isCloseable
   }
-  @Input() badgeType?: BadgeType
-  private _isCloseable?: boolean | ''
+  /** Close text */
   @Input() closeText?: string
+
   @HostBinding('class') get class(): string {
     return ['badge', this.badgeType].join(' ')
   }
 
-  constructor(private viewContainerRef: ViewContainerRef) {}
+  /** Callback when component is dismissed */
+  @Output() onClose: EventEmitter<Event> = new EventEmitter()
 
-  close() {
-    this.viewContainerRef.element.nativeElement.remove()
+  private _isCloseable?: boolean | ''
+
+  //eslint-disable-next-line
+  constructor() {}
+
+  close(e: Event) {
+    this.onClose.emit(e)
   }
 }
