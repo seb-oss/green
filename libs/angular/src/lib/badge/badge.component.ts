@@ -58,7 +58,7 @@ export class NggBadgeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.customColor || this.customBackgroundColor) {
+    if (!!this.customColor || !!this.customBackgroundColor) {
       this.badgeType = 'custom'
     }
   }
