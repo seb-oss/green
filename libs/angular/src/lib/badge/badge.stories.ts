@@ -44,7 +44,7 @@ const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-  badgeType: 'info',
+  badgeType: 'success',
   isCloseable: false,
 }
 
@@ -76,7 +76,7 @@ Dismissible.args = {
 }
 
 const CustomTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
-  template: `<span ngg-badge [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>`,
+  template: `<span ngg-badge [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Custom</span>`,
   props: args,
 })
 

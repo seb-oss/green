@@ -28,7 +28,7 @@ import { BadgeType } from '@sebgroup/extract'
 })
 export class NggBadgeComponent implements OnInit {
   /** The color of the component */
-  @Input() badgeType?: BadgeType
+  @Input() badgeType?: BadgeType | '' = ''
   /** Flag whether the component can be dismissed */
   @Input() set isCloseable(value: boolean | '') {
     this._isCloseable = value
