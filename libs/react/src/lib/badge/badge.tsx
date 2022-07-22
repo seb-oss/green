@@ -6,6 +6,8 @@ export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
   badgeType?: BadgeType
   isCloseable?: boolean
   closeText?: string
+  customColor?: string
+  customBackgroundColor?: string
 }
 
 export function Badge({
@@ -13,12 +15,32 @@ export function Badge({
   badgeType,
   isCloseable,
   closeText,
+  customColor,
+  customBackgroundColor,
   ...props
 }: BadgeProps) {
   const [isClosed, setIsClosed] = React.useState<boolean>(false)
+  const [type, setType] = React.useState<BadgeType | ''>('')
+
+  React.useEffect(() => {
+    if (badgeType) {
+      setType(badgeType as BadgeType)
+    }
+
+    if (!!customColor || !!customBackgroundColor) {
+      setType('custom')
+    }
+  }, [])
 
   return !isClosed ? (
-    <span {...props} className={`badge ${badgeType}`}>
+    <span
+      {...props}
+      className={`badge ${type}`}
+      style={{
+        color: customColor,
+        backgroundColor: customBackgroundColor,
+      }}
+    >
       <strong>{children}</strong>
       {isCloseable && (
         <button

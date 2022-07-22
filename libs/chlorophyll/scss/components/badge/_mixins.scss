@@ -30,6 +30,7 @@ $variants: (
   ),
 );
 
+$height: 24px;
 $border-radius: 0;
 $color: var(--color);
 $background: var(--background);
@@ -41,15 +42,25 @@ $close-width: $close-height;
 
 $close-icon-thickness: 3px;
 
+$label-font-weight: 500;
+$label-font-size: 14px;
+
 @mixin badge {
   --background: hsl(var(--sg-intent-neutral-hsl));
   --color: hsl(var(--sg-intent-neutral-hsl-contrast));
   background: var(--background);
   border-radius: $border-radius;
   color: var(--color);
+  height: $height;
   display: inline-flex;
-  @include common.padding-vertical(2);
-  @include common.padding-horizontal(3);
+  justify-content: center;
+  align-items: center;
+  @include common.padding(3);
+
+  strong {
+    font-size: $label-font-size;
+    font-weight: $label-font-weight;
+  }
 
   // adjust size of close button
   .close {
