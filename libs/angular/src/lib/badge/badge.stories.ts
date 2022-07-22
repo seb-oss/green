@@ -14,7 +14,15 @@ export default {
   ],
   argTypes: {
     badgeType: {
-      options: ['info', 'success', 'warning', 'danger', 'light', 'dark', 'custom'],
+      options: [
+        'info',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'dark',
+        'custom',
+      ],
       control: 'radio',
       name: 'Badge Type',
       defaultValue: 'info',
@@ -40,8 +48,10 @@ Default.args = {
   isCloseable: false,
 }
 
-const DismissibleTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => {
-  let isDismissed = false;
+const DismissibleTemplate: Story<NggBadgeComponent> = (
+  args: NggBadgeComponent
+) => {
+  let isDismissed = false
 
   return {
     template: `
@@ -56,7 +66,7 @@ const DismissibleTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) 
     props: {
       ...args,
       isDismissed,
-    }
+    },
   }
 }
 
