@@ -10,24 +10,6 @@ export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
   customBackgroundColor?: string
 }
 
-interface BadgeStyles {
-  container: React.CSSProperties,
-  label: React.CSSProperties
-}
-
-const badgeStyles: BadgeStyles = {
-  container: {
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    lineHeight: '20px',
-  },
-  label: {
-    fontSize: '16px',
-    fontWeight: 500,
-  }
-}
-
 export function Badge({
   children,
   badgeType,
@@ -57,10 +39,9 @@ export function Badge({
       style={{
         color: customColor,
         backgroundColor: customBackgroundColor,
-        ...badgeStyles.container,
       }}
     >
-      <strong style={badgeStyles.label}>{children}</strong>
+      <strong>{children}</strong>
       {isCloseable && (
         <button
           type="button"
