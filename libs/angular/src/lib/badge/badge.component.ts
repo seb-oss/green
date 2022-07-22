@@ -14,14 +14,12 @@ import { BadgeType } from '@sebgroup/extract'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[ngg-badge]',
   template: `
-    <div class="ngg-badge">
-      <strong>
-        <ng-content></ng-content>
-      </strong>
-      <button *ngIf="isCloseable" class="close" (click)="close($event)">
-        {{ closeText }}
-      </button>
-    </div>
+    <strong>
+      <ng-content></ng-content>
+    </strong>
+    <button *ngIf="isCloseable" class="close" (click)="close($event)">
+      {{ closeText }}
+    </button>
   `,
   styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,6 +46,9 @@ export class NggBadgeComponent implements OnInit {
   }
 
   @HostBinding('style.line-height') height: string = '20px'
+  @HostBinding('style.display') display: string = 'inline-flex'
+  @HostBinding('style.justify-content') justifyContent: string = 'center'
+  @HostBinding('style.align-items') alignItems: string = 'center'
 
   /** Callback when component is dismissed */
   @Output() onClose: EventEmitter<Event> = new EventEmitter()
