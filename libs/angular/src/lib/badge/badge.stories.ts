@@ -21,7 +21,6 @@ export default {
         'danger',
         'light',
         'dark',
-        'custom',
       ],
       control: 'radio',
       name: 'Badge Type',

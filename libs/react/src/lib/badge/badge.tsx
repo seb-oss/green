@@ -28,7 +28,7 @@ export function Badge({
     }
 
     if (!!customColor || !!customBackgroundColor) {
-      setType('custom')
+      setType('')
     }
   }, [])
 

@@ -5,4 +5,3 @@ export type BadgeType =
   | 'danger'
   | 'light'
   | 'dark'
-  | 'custom'
