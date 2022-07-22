@@ -41,7 +41,7 @@ export function Badge({
   const [type, setType] = React.useState<BadgeType | ''>('')
 
   React.useEffect(() => {
-    if (!!badgeType) {
+    if (badgeType) {
       setType(badgeType as BadgeType)
     }
 
