@@ -37,7 +37,7 @@ export default {
 
 const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   template: `
-    <span ngg-badge [badgeType]="badgeType">Badge</span>
+    <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
   props: args,
 })
@@ -45,7 +45,6 @@ const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
 export const Default = Template.bind({})
 Default.args = {
   badgeType: 'success',
-  isCloseable: false,
 }
 
 const DismissibleTemplate: Story<NggBadgeComponent> = (
@@ -75,12 +74,7 @@ Dismissible.args = {
   badgeType: 'warning',
 }
 
-const CustomTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
-  template: `<span ngg-badge [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Custom</span>`,
-  props: args,
-})
-
-export const Custom = CustomTemplate.bind({})
+export const Custom = Template.bind({})
 Custom.args = {
   customColor: '#062BCC',
   customBackgroundColor: '#E6F5FF',
