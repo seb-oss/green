@@ -1,0 +1,33 @@
+<div
+  class="radio-group"
+  [ngClass]="!!classNames ? classNames : ''"
+  [class.row]="inline"
+  [class.disabled]="disabled"
+>
+  <div
+    *ngFor="let item of displayList"
+    [ngClass]="item.customClassNames"
+    [class.condensed]="condensed"
+    [class.normal]="!condensed"
+    [class.col]="inline"
+    (click)="!(item.disabled || disabled) ? handleItemOnClick(item) : null"
+  >
+    <input
+      #radioRefs
+      type="radio"
+      [attr.name]="name"
+      [id]="item.id"
+      [defaultChecked]="item.selected"
+      [autofocus]="item.selected"
+      [disabled]="item.disabled || disabled"
+    />
+    <label
+      class="radio-group-item-label"
+      [attr.for]="!(item.disabled || disabled) ? item.id : null"
+      [innerHtml]="item.label | safeHtml"
+    ></label>
+    <div *ngIf="!!item.description" class="radio-group-item-description">
+      {{ item.description }}
+    </div>
+  </div>
+</div>

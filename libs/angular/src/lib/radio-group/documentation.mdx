@@ -1,0 +1,73 @@
+import { NggRadioGroupComponent } from './radio-group.component'
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# Toggle Selector
+
+A selector to display and select options in a flow.
+
+## Description 
+
+The toggle selector emphasizes to the user that this is an important choice. We also think it can make choosing more attractive.
+
+## Usage
+
+This component is an alternative to radio buttons, drop down lists and checkboxes. It can be used for both single and multiple selections and works well for both desktop and mobile contexts.
+
+Place it in a flow or widget, where several options are displayed next to each other. An icon can contribute to the understanding of the options. Make sure you keep texts short and sweet, and never more than two lines long.
+
+## Importing module
+
+If you're only using the toggle selector component, you just need to import the `NggToggleSelectorModule`. The example below uses reactive forms hence it needs the `ReactiveFormsModule` too.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { ReactiveFormsModule } from '@angular/forms'
+import { NggToggleSelectorModule } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, ReactiveFormsModule, NggToggleSelectorModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Toggle Selector Options
+
+|Input|Type|Description|
+|:--------|:----------|:------|
+|list|`Array<IToggleSelector>`*|List of option items for the component|
+|name?|`string`|Option item control name|
+|multi?|`boolean`|Flag whether the component is allowed to select multiple options|
+|disabled?|`boolean`|Flag whether the component is disabled|
+|errorMessage?|`string`|Error message|
+
+#### *Toggle Selector Interface (IToggleSelector)
+
+|Attribute|Type|Description|
+|:--------|:----------|:------|
+|value|`string`|Form control value of option item|
+|label?|`string`|Label|
+|icon?|`string`|SVG Icon|
+|iconPosition?|`ToggleSelectorIconPosition`|Icon position: `left` or `right`|
+|description?|`string`|Short text describing the option item|
+|disabled?|`boolean`|Flag whether option item is disabled|
+|customLabel?|`HTMLElement`|HTML for custom label|
+
+## Example
+
+<Canvas>
+  <Story id="components-toggle-selector--default"/>
+</Canvas>
+
+## Reactive forms
+We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially if you're dealing with complex or dynamic forms.
+
+```html
+<form [formGroup]="reactiveForm">
+    <ngg-toggle-selector formControlName="options" [list]="list"></ngg-toggle-selector>
+</form>
+```
