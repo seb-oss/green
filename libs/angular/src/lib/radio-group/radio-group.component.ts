@@ -11,7 +11,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
 import { RadioGroupItem, randomId } from '@sebgroup/extract'
 
 @Component({
-  selector: 'sebng-radio-group',
+  selector: 'ngg-radio-group',
   templateUrl: './radio-group.component.html',
   providers: [
     {
@@ -26,7 +26,7 @@ export class NggRadioGroupComponent
 {
   private _list: Array<RadioGroupItem> = []
   private _selectedItem: RadioGroupItem | null = null
-  private isItemFocused: boolean = false
+  private isItemFocused = false
 
   displayList: Array<RadioGroupItem> = []
 
@@ -70,8 +70,6 @@ export class NggRadioGroupComponent
   // by the Control Value Accessor
   private onTouchedCallback?: () => void
   private onChangeCallback?: (_: any) => void
-
-  constructor() {}
 
   ngAfterViewChecked(): void {
     this.focusCurrentItem()
