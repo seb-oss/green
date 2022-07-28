@@ -17,7 +17,6 @@ import {
 @Component({
   selector: 'ngg-toggle-selector',
   templateUrl: './toggle-selector.component.html',
-  styleUrls: ['./toggle-selector.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -58,9 +57,6 @@ export class NggToggleSelectorComponent
    */
   private onTouchedCallback?: () => void
   private onChangeCallback?: (_: any) => void
-
-  //eslint-disable-next-line
-  constructor() {}
 
   ngOnChanges(): void {
     this.generateCheckedItems()

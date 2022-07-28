@@ -1,11 +1,6 @@
-@import '~@sebgroup/bootstrap/scss/variables';
+@use 'mixins';
 
-@mixin toggle-color($color) {
-  > * {
-    color: $color;
-    fill: $color;
-  }
-}
+@import '~@sebgroup/bootstrap/scss/variables';
 
 .ac.toggle-selector {
   box-sizing: border-box;
@@ -39,25 +34,25 @@
     }
     &:hover {
       border-color: $blue;
-      @include toggle-color($blue);
+      @include mixins.toggle-color($blue);
     }
     &.focus {
       color: $blue-dark;
       border-color: $blue-dark;
       box-shadow: 0 0 0 3px rgba($blue-darker, 0.2);
       transition: box-shadow 250ms;
-      @include toggle-color($blue);
+      @include mixins.toggle-color($blue);
     }
     &.checked {
       border-color: $blue-darker;
       border-width: 2px;
-      @include toggle-color($blue-darker);
+      @include mixins.toggle-color($blue-darker);
     }
   }
   &.disabled {
     background-color: $gray-200;
     border-color: $gray-200;
-    @include toggle-color($gray-300);
+    @include mixins.toggle-color($gray-300);
   }
 
   input {
@@ -69,16 +64,15 @@
     &.icon-only {
       margin: 0;
     }
-    ::ng-deep {
-      > svg {
-        width: 40px;
-      }
+
+    > svg {
+      width: 40px;
     }
   }
 }
 
 .text-disabled {
-    color: $gray-400;
+  color: $gray-400;
 }
 
 .margin-bottom {

@@ -1,0 +1,7 @@
+@mixin toggle-color($color) {
+    > * {
+      color: $color;
+      fill: $color;
+    }
+  }
+  
