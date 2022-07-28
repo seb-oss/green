@@ -1,41 +1,41 @@
 import { NggRadioGroupComponent } from './radio-group.component'
 import { Canvas, Story } from '@storybook/addon-docs'
 
-# Toggle Selector
+# Radio Group
 
-A selector to display and select options in a flow.
+Use radio buttons when users must select one option in a list with exclusive options out of a set of two or more options. Radio buttons are common to use in forms, i.e when you apply for a loan and need to enter "Yes" or "No".
 
 ## Description 
 
-The toggle selector emphasizes to the user that this is an important choice. We also think it can make choosing more attractive.
+A radio button allows a user to select a single item from a predefined list of options. Radio buttons are common to use in forms, i.e when you apply for a loan and need to enter "Yes" or "No".
+
+Users should be able to understand their options as well as undo and redo their actions. For that reason radio buttons should always have one option pre-selected. List the options in a logical order such as; least complex to most complex, least risk to most risk, or most likely to be selected to least likely.
 
 ## Usage
 
-This component is an alternative to radio buttons, drop down lists and checkboxes. It can be used for both single and multiple selections and works well for both desktop and mobile contexts.
-
-Place it in a flow or widget, where several options are displayed next to each other. An icon can contribute to the understanding of the options. Make sure you keep texts short and sweet, and never more than two lines long.
+Radio buttons are almost always the preferred option to a dropdown. With radio buttons a user can immediately scan how many and what options there are, without having to click anything. Unless you have to present a lot of options (more than 7), or have a lack of space, use radio buttons.
 
 ## Importing module
 
-If you're only using the toggle selector component, you just need to import the `NggToggleSelectorModule`. The example below uses reactive forms hence it needs the `ReactiveFormsModule` too.
+If you're only using the toggle selector component, you just need to import the `NggRadioGroupModule`. The example below uses reactive forms hence it needs the `ReactiveFormsModule` too.
 
 ```typescript
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { ReactiveFormsModule } from '@angular/forms'
-import { NggToggleSelectorModule } from '@sebgroup/green-angular'
+import { NggRadioGroupModule } from '@sebgroup/green-angular'
 
 import { AppComponent } from './app.component'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, ReactiveFormsModule, NggToggleSelectorModule],
+  imports: [BrowserModule, ReactiveFormsModule, NggRadioGroupModule],
   exports: [],
 })
 export class AppModule {}
 ```
 
-## Toggle Selector Options
+## Radio Group Options
 
 |Input|Type|Description|
 |:--------|:----------|:------|
@@ -45,7 +45,7 @@ export class AppModule {}
 |disabled?|`boolean`|Flag whether the component is disabled|
 |errorMessage?|`string`|Error message|
 
-#### *Toggle Selector Interface (IToggleSelector)
+#### *Radio Group Item Interface (IRadioGroupItem)
 
 |Attribute|Type|Description|
 |:--------|:----------|:------|
@@ -60,7 +60,7 @@ export class AppModule {}
 ## Example
 
 <Canvas>
-  <Story id="components-toggle-selector--default"/>
+  <Story id="components-radio-group--default"/>
 </Canvas>
 
 ## Reactive forms
@@ -68,6 +68,6 @@ We recommend using <a href="https://angular.io/guide/reactive-forms" target="_bl
 
 ```html
 <form [formGroup]="reactiveForm">
-    <ngg-toggle-selector formControlName="options" [list]="list"></ngg-toggle-selector>
+    <ngg-radio-group formControlName="options" [list]="list"></ngg-radio-group>
 </form>
 ```

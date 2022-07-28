@@ -8,7 +8,7 @@ import {
   AfterViewChecked,
 } from '@angular/core'
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms'
-import { RadioGroupItem, randomId } from '@sebgroup/extract'
+import { IRadioGroupItem, randomId } from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-radio-group',
@@ -24,11 +24,11 @@ import { RadioGroupItem, randomId } from '@sebgroup/extract'
 export class NggRadioGroupComponent
   implements ControlValueAccessor, AfterViewChecked
 {
-  private _list: Array<RadioGroupItem> = []
-  private _selectedItem: RadioGroupItem | null = null
+  private _list: Array<IRadioGroupItem> = []
+  private _selectedItem: IRadioGroupItem | null = null
   private isItemFocused = false
 
-  displayList: Array<RadioGroupItem> = []
+  displayList: Array<IRadioGroupItem> = []
 
   @ViewChildren('radioRefs') radioRefs: QueryList<ElementRef> | undefined =
     undefined
@@ -44,15 +44,15 @@ export class NggRadioGroupComponent
   @Input() inline?: boolean = false
   /** List of option items */
   @Input()
-  set list(value: Array<RadioGroupItem>) {
+  set list(value: Array<IRadioGroupItem>) {
     this._list = value
     this.generateDisplayList()
   }
-  get list(): Array<RadioGroupItem> {
+  get list(): Array<IRadioGroupItem> {
     return this._list
   }
 
-  set selectedItem(item: RadioGroupItem | null) {
+  set selectedItem(item: IRadioGroupItem | null) {
     if (item?.value !== this._selectedItem?.value) {
       this._selectedItem = item
 
@@ -62,7 +62,7 @@ export class NggRadioGroupComponent
       this.generateDisplayList()
     }
   }
-  get selectedItem(): RadioGroupItem | null {
+  get selectedItem(): IRadioGroupItem | null {
     return this._selectedItem
   }
 
@@ -75,7 +75,7 @@ export class NggRadioGroupComponent
     this.focusCurrentItem()
   }
 
-  writeValue(value: RadioGroupItem): void {
+  writeValue(value: IRadioGroupItem): void {
     this.selectedItem = value
   }
   registerOnChange(fn: any): void {
@@ -85,7 +85,7 @@ export class NggRadioGroupComponent
     this.onTouchedCallback = fn
   }
 
-  handleItemOnClick(item: RadioGroupItem): void {
+  handleItemOnClick(item: IRadioGroupItem): void {
     this.isItemFocused = false
     this.selectedItem = item
   }
@@ -94,7 +94,7 @@ export class NggRadioGroupComponent
     if (this.isItemFocused || this.list?.length === 0) return
 
     const currentFocused: number = this.list.findIndex(
-      (item: RadioGroupItem) => item.value === this.selectedItem?.value
+      (item: IRadioGroupItem) => item.value === this.selectedItem?.value
     )
 
     if (currentFocused > -1 && this.radioRefs?.toArray()[currentFocused]) {
@@ -107,8 +107,8 @@ export class NggRadioGroupComponent
 
   private generateDisplayList(): void {
     this.displayList = this.list
-      ?.filter((item: RadioGroupItem) => item.label && item.value)
-      .map((item: RadioGroupItem) => {
+      ?.filter((item: IRadioGroupItem) => item.label && item.value)
+      .map((item: IRadioGroupItem) => {
         const id: string = randomId()
         const selected: boolean = item.value === this.selectedItem?.value
         const customClassNames: Array<string> = ['radio-group-item']

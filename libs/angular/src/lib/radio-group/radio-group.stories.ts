@@ -5,7 +5,7 @@ import { NggRadioGroupModule } from './radio-group.module'
 import { NggRadioGroupComponent } from './radio-group.component'
 
 export default {
-  title: 'Components/Forms/Radio Group',
+  title: 'Components/Radio Group',
   component: NggRadioGroupComponent,
   decorators: [
     moduleMetadata({
@@ -25,14 +25,22 @@ export default {
   },
 } as Meta<NggRadioGroupComponent>
 
-const Template: Story<NggRadioGroupComponent> = (args: NggRadioGroupComponent) => ({
-  template: `
-    <span ngg-badge [badgeType]="badgeType" [isCloseable]="isCloseable">{{text}}</span>
-    `,
-  props: args,
-})
+const Template: Story<NggRadioGroupComponent> = (
+  args: NggRadioGroupComponent
+) => {
+  const list = [
+    { label: '<strong>Malaysia</strong>', value: 'MY' },
+    { label: 'Philippines', value: 'PH' },
+  ]
+
+  return {
+    template: `<ngg-radio-group [list]="list"></ngg-radio-group>`,
+    props: {
+      ...args,
+      list,
+    },
+  }
+}
 
 export const Default = Template.bind({})
-Default.args = {
-  isCloseable: undefined,
-}
+Default.args = {}

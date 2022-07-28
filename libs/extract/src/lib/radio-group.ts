@@ -1,4 +1,4 @@
-export interface RadioGroupItem {
+export interface IRadioGroupItem {
   id: string
   label: string
   value: any
