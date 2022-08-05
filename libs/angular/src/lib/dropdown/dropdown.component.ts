@@ -11,6 +11,7 @@ import {
   ViewChild,
   EventEmitter,
   SimpleChanges,
+  ContentChild,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
@@ -24,6 +25,7 @@ import {
   dropdownValues,
   DropdownTexts,
 } from '@sebgroup/extract'
+import { NggDropdownOptionDirective } from './dropdown-option.directive'
 
 @Component({
   selector: 'ngg-dropdown',
@@ -87,7 +89,11 @@ import {
         </button>
         <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
           <li
-            *ngFor="let option of dropdown?.options; trackBy: trackByKey"
+            *ngFor="
+              let option of dropdown?.options;
+              let index = index;
+              trackBy: trackByKey
+            "
             [id]="option.attributes.id"
             [attr.role]="option.attributes.role"
             [attr.aria-selected]="option.attributes['aria-selected']"
@@ -95,7 +101,14 @@ import {
             [class]="option.classes"
             (click)="handler?.select(option)"
           >
-            {{ option[dropdown!.display] }}
+            <ng-container
+              *ngTemplateOutlet="
+                customOption?.templateRef
+                  ? customOption!.templateRef
+                  : defaultOption;
+                context: { option: option, index: index }
+              "
+            ></ng-container>
           </li>
         </ul>
         <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
@@ -115,7 +128,11 @@ import {
               [id]="option.attributes.id"
               [attr.aria-selected]="option.attributes['aria-selected']"
               [class]="option.classes"
-              *ngFor="let option of dropdown?.options; trackBy: trackByKey"
+              *ngFor="
+                let option of dropdown?.options;
+                let index = index;
+                trackBy: trackByKey
+              "
             >
               <input
                 type="checkbox"
@@ -123,13 +140,24 @@ import {
                 [checked]="option.selected"
                 tabIndex="-1"
               />
-              <span>{{ option[dropdown!.display] }}</span>
+              <ng-container
+                *ngTemplateOutlet="
+                  customOption?.templateRef
+                    ? customOption!.templateRef
+                    : defaultOption;
+                  context: { option: option, index: index }
+                "
+              ></ng-container>
               <i></i>
             </label>
           </fieldset>
         </div>
       </div>
     </div>
+
+    <ng-template #defaultOption let-option="option">
+      {{ option[dropdown!.display] }}
+    </ng-template>
   `,
   providers: [
     {
@@ -176,9 +204,11 @@ export class NggDropdownComponent
     new EventEmitter<boolean>()
 
   @ViewChild('togglerRef') public togglerRef?: ElementRef<HTMLElement>
-
   @ViewChild('listboxRef') public listboxRef?: ElementRef<HTMLElement>
   @ViewChild('fieldsetRef') public fieldsetRef?: ElementRef<HTMLElement>
+
+  @ContentChild(NggDropdownOptionDirective)
+  customOption?: NggDropdownOptionDirective
 
   onChangeFn?: (value: any) => void
   onTouchedFn?: () => void
