@@ -21,11 +21,11 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
   @include common.add-hover-state();
   background: $background;
   color: $color;
+  min-height: 2.75rem;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-
-  min-height: 44px;
+  align-items: center;
 
   max-width: 100%;
   @include common.media-breakpoint-down('sm') {
@@ -44,10 +44,12 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
     border-left: solid 2px map.get(tokens.$blue, 'light', 0);
     content: '';
     display: block;
-    height: 12px;
+    height: 0.75rem;
+    width: 0.75rem;
+    position: relative;
+    top: -0.1875rem;
     transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, -1);
     transition: transform 300ms ease-in;
-    width: 12px;
     flex-shrink: 0;
   }
 
