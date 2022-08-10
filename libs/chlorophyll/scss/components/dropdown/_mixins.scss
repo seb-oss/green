@@ -25,7 +25,7 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
   flex-wrap: nowrap;
   justify-content: space-between;
 
-  min-height: 2.75em;
+  min-height: 44px;
 
   max-width: 100%;
   @include common.media-breakpoint-down('sm') {
