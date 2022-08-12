@@ -50,9 +50,7 @@ export class GreenChartsComponent {
       },
     ],
     style: {
-      axis: {
-        show: false,
-      },
+      axis: false,
       point: {
         show: 'focus',
       },

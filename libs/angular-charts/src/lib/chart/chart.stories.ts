@@ -51,6 +51,13 @@ SimpleBar.args = {
       'Aktiverade prenumerationer',
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
+    style: {
+      axis: {
+        y: {
+          label: 'Antal',
+        },
+      },
+    },
   },
 }
 
@@ -176,9 +183,7 @@ HideAxes.args = {
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
     style: {
-      axis: {
-        show: false,
-      },
+      axis: false,
       point: {
         show: 'focus',
       },

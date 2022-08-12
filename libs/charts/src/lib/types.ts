@@ -28,17 +28,20 @@ export interface Legend {
   placement: LegendPlacement
 }
 
+export interface ChartAxis {
+  show?: boolean
+  label?: string
+}
+
 export interface ChartStyle {
   fitHeightToParent?: boolean
-  axis?: {
-    show:
-      | {
-          x?: boolean
-          y?: boolean
-          y2?: boolean
-        }
-      | boolean
-  }
+  axis?:
+    | boolean
+    | {
+        x?: ChartAxis
+        y?: ChartAxis
+        y2?: ChartAxis
+      }
   point?: {
     show?: boolean | 'focus'
   }
