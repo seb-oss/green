@@ -99,7 +99,7 @@ export const createOptions = ({
   if (settings?.style?.axis != null) {
     let axesSetting: Axis
 
-    if (settings?.style.axis.show === false) {
+    if (settings?.style.axis === false) {
       // hide all axes
       axesSetting = {
         y: { show: false },
@@ -107,12 +107,13 @@ export const createOptions = ({
         x: { show: false },
       }
     } else {
-      axesSetting = Object.entries(settings?.style.axis.show).reduce(
-        (axes, [axis, show]) => ({
+      axesSetting = Object.entries(settings?.style.axis).reduce(
+        (axes, [axis, settings]) => ({
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
-            show,
+            show: settings?.show,
+            label: settings?.label,
           },
         }),
         {
@@ -201,9 +202,8 @@ export const createInfo = (
 
   // expose values for axis unless hidden
   if (
-    settings.style?.axis?.show === true ||
-    (settings.style?.axis?.show !== false &&
-      settings.style?.axis?.show?.x !== false)
+    settings.style?.axis === true ||
+    (settings.style?.axis !== false && settings.style?.axis?.x?.show !== false)
   ) {
     info.xAxis = {
       ticks: chart.categories().map((text) => ({ text })),
