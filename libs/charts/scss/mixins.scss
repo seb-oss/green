@@ -500,6 +500,7 @@ $min-height: 3.5rem;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
 
     li {
       @include _chart-series-list-item();
