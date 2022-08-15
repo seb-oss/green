@@ -131,6 +131,8 @@
 /* form text */
 @mixin add-form-text() {
   border: solid transparent 1px; // correct vertical alignment
+  min-height: 2.75rem;
   display: flex;
+  align-items: center;
   font: inherit;
 }

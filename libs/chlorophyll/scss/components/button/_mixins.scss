@@ -24,6 +24,7 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   @include common.add-border();
   @include common.font-weight('medium');
   @include common.add-focus();
+  min-height: 2.75rem;
   align-items: center;
   display: inline-flex;
   justify-content: center;

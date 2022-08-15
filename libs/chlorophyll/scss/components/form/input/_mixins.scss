@@ -24,11 +24,12 @@ $background: var(--sg-form-control-bg);
     @include common.add-border();
     @include common.add-border-color();
     @include common.add-focus();
-    align-items: center;
     background-color: $background;
     color: $_color;
     cursor: pointer;
+    min-height: 2.75rem;
     display: flex;
+    align-items: center;
     justify-content: center;
 
     @media screen and (-ms-high-contrast: active) {
