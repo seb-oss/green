@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.16...@sebgroup/extract@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **dropdown:** scroll to option on arrow navigation ([02c7b2c](https://github.com/sebgroup/green/commit/02c7b2c2c22892fb0b9f6ea2dcbec18f39d006f0)), closes [#463](https://github.com/sebgroup/green/issues/463)
+* **extract:** id should not start with a number ([02039c5](https://github.com/sebgroup/green/commit/02039c5cbf2b33881b40e5b7fa9b7eba7c1e6813))
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.15...@sebgroup/extract@1.0.0-beta.16) (2022-07-18)
 
 
