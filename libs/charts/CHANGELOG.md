@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.16...@sebgroup/green-charts@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **charts:** legend overflows ([481ba15](https://github.com/sebgroup/green/commit/481ba155546dad884e706b52ecfbcc52e32ff060))
+
+
+### Features
+
+* **charts:** axis labels ([55e7814](https://github.com/sebgroup/green/commit/55e781413c90c3dc477cff6d506ebf2a26b763e2))
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.15...@sebgroup/green-charts@1.0.0-beta.16) (2022-07-18)
 
 
