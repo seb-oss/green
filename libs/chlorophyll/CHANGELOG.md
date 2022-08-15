@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.16...@sebgroup/chlorophyll@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **chlorophyll:** form component responsive sizes ([e0295da](https://github.com/sebgroup/green/commit/e0295daa121934a19526b199d6aaaa22b3766a29)), closes [#554](https://github.com/sebgroup/green/issues/554)
+* **dropdown:** scroll to option on arrow navigation ([02c7b2c](https://github.com/sebgroup/green/commit/02c7b2c2c22892fb0b9f6ea2dcbec18f39d006f0)), closes [#463](https://github.com/sebgroup/green/issues/463)
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.15...@sebgroup/chlorophyll@1.0.0-beta.16) (2022-07-18)
 
 
