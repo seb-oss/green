@@ -30,7 +30,6 @@ button[aria-haspopup='listbox'] {
   // dropdown multi-select
   .sg-fieldset-container {
     overflow-y: auto;
-    scroll-behavior: smooth;
     fieldset[role='listbox'][aria-multiselectable='true'] {
       @include mixins.multi-select();
     }

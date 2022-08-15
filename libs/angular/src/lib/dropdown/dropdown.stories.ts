@@ -67,6 +67,54 @@ MultiSelect.args = {
   ],
 }
 
+const CustomOptionTemplate: Story<NggDropdownComponent> = (
+  args: NggDropdownComponent
+) => {
+  return {
+    component: NggDropdownComponent,
+    template: `
+    <ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id">
+      <ng-template nggDropdownOption let-option="option" let-index="index">
+        <div>
+          <div>{{ index }}. {{ option.name }}</div>
+          <div style="font-size: 0.8em">{{ option.kitchen }}</div>
+        </div>
+      </ng-template>
+    </ngg-dropdown>
+    `,
+    props: args,
+  }
+}
+
+export const CustomOption = CustomOptionTemplate.bind({})
+CustomOption.args = {
+  id: '',
+  texts: { placeholder: 'Select meal(s)' },
+  value: '',
+  loop: true,
+  multiSelect: true,
+  useValue: 'value',
+  display: 'name',
+  selectValue: undefined,
+  options: [
+    {
+      name: 'Tacos',
+      value: 'tacos',
+      kitchen: 'mexican',
+    },
+    {
+      name: 'Pizza',
+      value: 'pizza',
+      kitchen: 'italian',
+    },
+    {
+      name: 'Sushi',
+      value: 'sushi',
+      kitchen: 'japanese',
+    },
+  ],
+}
+
 const FormControlTemplate: Story<NggDropdownComponent> = (
   args: NggDropdownComponent
 ) => {
