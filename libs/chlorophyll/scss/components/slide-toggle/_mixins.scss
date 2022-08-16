@@ -25,6 +25,7 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
 @mixin add-slide-toggle-base {
   @include common.padding(1);
   @include common.margin-horizontal(3);
+  @include common.margin-vertical(2);
   @include common.add-focus();
 
   width: $_track_width;
