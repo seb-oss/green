@@ -2,10 +2,9 @@
 @use '../../tokens';
 @use '../../common';
 
-$selector-class: '.slide-toggle';
-$selector-base: 'button[aria-pressed]' + $selector-class;
-$selector-pressed: 'button[aria-pressed=true]' + $selector-class;
-$selector-not-pressed: 'button[aria-pressed=false]' + $selector-class;
+$selector-base: 'button[aria-role="switch"]';
+$selector-checked: $selector-base + '[aria-checked=true]';
+$selector-not-checked: $selector-base + '[aria-checked=false]';
 
 $_track_height: 1.5rem;
 $_track_width: 2.75rem;
@@ -66,7 +65,7 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   }
 }
 
-@mixin add-slide-toggle-state-pressed {
+@mixin add-slide-toggle-state-checked {
   //                                            Padding
   $thumb_pressed_translateX: $_track_width - (0.125rem * 2) - $_thumb_width;
   $thumb_pressed_translateX_mobile: $_track_width_mobile - (0.125rem * 2) - $_thumb_width_mobile;

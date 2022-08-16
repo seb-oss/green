@@ -1,5 +1,5 @@
 export const toggle = e => {
     const st = e.currentTarget
-    const pressed = st.getAttribute('aria-pressed') === 'true'
-    st.setAttribute('aria-pressed', !pressed)
+    const checked = st.getAttribute('aria-checked') === 'true'
+    st.setAttribute('aria-checked', !checked)
 }

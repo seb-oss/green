@@ -4,6 +4,6 @@
   @include mixins.add-slide-toggle-base;
 }
 
-#{mixins.$selector-pressed} {
-  @include mixins.add-slide-toggle-state-pressed;
+#{mixins.$selector-checked} {
+  @include mixins.add-slide-toggle-state-checked;
 }
