@@ -2,6 +2,28 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.17...@sebgroup/green-angular@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.16...@sebgroup/green-angular@1.0.0-beta.17) (2022-08-15)
+
+
+### Features
+
+* **angular:** dropdown custom template ([7a40c35](https://github.com/sebgroup/green/commit/7a40c35b867a32a80671bc78057a243425836af5)), closes [#219](https://github.com/sebgroup/green/issues/219)
+
+
+
+# [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.15...@sebgroup/green-angular@1.0.0-beta.16) (2022-07-18)
+
+
+### Bug Fixes
+
+* **dropdown:** touched behavior ([d8e9bac](https://github.com/sebgroup/green/commit/d8e9baca16e7331f244d4e88e6d204b24f2c2e60))
+
+
+
 # [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.14...@sebgroup/green-angular@1.0.0-beta.15) (2022-06-28)
 
 

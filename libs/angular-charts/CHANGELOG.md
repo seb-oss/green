@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.17...@sebgroup/green-angular-charts@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.16...@sebgroup/green-angular-charts@1.0.0-beta.17) (2022-08-15)
+
+
+### Features
+
+* **charts:** axis labels ([55e7814](https://github.com/sebgroup/green/commit/55e781413c90c3dc477cff6d506ebf2a26b763e2))
+
+
+
+# [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.15...@sebgroup/green-angular-charts@1.0.0-beta.16) (2022-07-18)
+
+
+
 # [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.14...@sebgroup/green-angular-charts@1.0.0-beta.15) (2022-06-28)
 
 

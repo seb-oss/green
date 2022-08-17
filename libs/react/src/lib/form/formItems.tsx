@@ -1,7 +1,6 @@
-import { ValidatorRules } from '@sebgroup/extract'
+import { IValidator, ValidatorRules } from '@sebgroup/extract'
 import React from 'react'
 import { useFormContext } from './formContext'
-import { IValidator } from './types'
 import { validateInputValue } from './validateInput'
 
 export interface FormItemsProps {
@@ -33,7 +32,11 @@ export const FormItems: React.FC<FormItemsProps> = ({ children, validate, name }
   }, [])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    if (!event.target) return
+
     const { value, name, type, checked } = event.target
+
     let inputValue
     if (type === 'checkbox') {
       inputValue = checked ? value : null

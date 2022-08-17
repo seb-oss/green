@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import RadioGroup from './radioGroup'
 import { RadioButton } from '../input/input'
-import { IValidator, RadioButtonProps } from '../types'
+import { IValidator } from '@sebgroup/extract'
 
 describe('RadioButton Group Component', () => {
   const radioBtnValues: any = [

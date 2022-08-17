@@ -276,8 +276,8 @@ describe('billboard', () => {
         data: [{ name: 'Foo', values: [1] }],
         style: {
           axis: {
-            show: {
-              y: false,
+            y: {
+              show: false,
             },
           },
         },
@@ -296,8 +296,8 @@ describe('billboard', () => {
         data: [{ name: 'Foo', values: [1] }],
         style: {
           axis: {
-            show: {
-              x: false,
+            x: {
+              show: false,
             },
           },
         },
@@ -316,8 +316,8 @@ describe('billboard', () => {
         data: [{ name: 'Foo', values: [1], axis: 'y2' }],
         style: {
           axis: {
-            show: {
-              y2: false,
+            y2: {
+              show: false,
             },
           },
         },
@@ -378,7 +378,7 @@ describe('billboard', () => {
     })
     it('omit xAxis if hidden', () => {
       settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
-      settings.style = { axis: { show: false } }
+      settings.style = { axis: false }
 
       const info = createInfo(settings, chart)
       expect(info.xAxis).toBeUndefined()
@@ -387,8 +387,8 @@ describe('billboard', () => {
       settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
       settings.style = {
         axis: {
-          show: {
-            x: false,
+          x: {
+            show: false,
           },
         },
       }
@@ -404,7 +404,7 @@ describe('billboard', () => {
     })
     it("don't omit xAxis if shown", () => {
       settings.data = [{ name: 'Foo', values: [1, 2, 3] }]
-      settings.style = { axis: { show: true } }
+      settings.style = { axis: true }
 
       const info = createInfo(settings, chart)
       expect(info.xAxis).not.toBeUndefined()

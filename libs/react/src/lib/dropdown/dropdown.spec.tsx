@@ -1,6 +1,7 @@
 import { act, render, RenderResult, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Dropdown, DropdownProps } from './dropdown'
+import button from "../form/button/button";
 
 const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
 jest.setTimeout(50000)

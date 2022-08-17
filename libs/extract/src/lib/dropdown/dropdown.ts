@@ -10,6 +10,7 @@ import {
   loop,
   popper,
   keypress,
+  validate,
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -21,6 +22,7 @@ import {
 } from './types'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { isMobileViewport$ } from '../common/viewport-size'
+import { getOptionScrollPosition } from './helper-functions'
 
 export const createDropdown = (
   init: DropdownArgs,
@@ -56,6 +58,8 @@ export const createDropdown = (
         : select(handler.dropdown, selection)
     )
   handler.update = (props) => update(handler, listener, create(props))
+  handler.validate = (validator: any) =>
+    update(handler, listener, validate(handler.dropdown, validator))
 
   fromEvent(toggler, 'blur')
     .pipe(takeUntil(handler.onDestroy$))
@@ -86,6 +90,11 @@ export const createDropdown = (
             listener,
             keypress(handler.dropdown, key, event as KeyboardEvent)
           )
+
+          if (handler.dropdown.isOpen) {
+            scrollOptionIntoView(handler)
+          }
+
           break
         }
         case 'click':
@@ -195,6 +204,25 @@ const lockBodyScroll = (handler: DropdownHandler, isMobile: boolean) => {
     handler.dropdown.isOpen && isMobile
       ? disableBodyScroll(scrollableListbox)
       : enableBodyScroll(scrollableListbox)
+  }
+}
+
+const scrollOptionIntoView = (handler: DropdownHandler) => {
+  const activeDescendant =
+    handler.dropdown.elements.listbox?.attributes?.['aria-activedescendant']
+
+  const container = handler.listbox.querySelector<HTMLElement>(
+    '[role="listbox"], .sg-fieldset-container'
+  )
+  const option = container?.querySelector<HTMLElement>('#' + activeDescendant)
+
+  if (container && option) {
+    container.scrollTop = getOptionScrollPosition(
+      option.offsetTop,
+      option.offsetHeight,
+      container.scrollTop,
+      container.offsetHeight
+    )
   }
 }
 

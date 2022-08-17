@@ -2,6 +2,25 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.18...@sebgroup/green-react@1.0.0-beta.19) (2022-08-15)
+
+
+
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.17...@sebgroup/green-react@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.15...@sebgroup/green-react@1.0.0-beta.16) (2022-07-18)
+
+
+### Features
+
+* 🎸 Adding prop "defaultSelected" to RadioGroup React ([04c5507](https://github.com/sebgroup/green/commit/04c55077373fdd8b380be1056d0e78a61690b8f8))
+* 🎸 onChange handler prop for react ([072032e](https://github.com/sebgroup/green/commit/072032e557c62d6f4cb45787c52c0c62832a9492))
+* 🎸 Validator prop on Dropdown ([dd76d9a](https://github.com/sebgroup/green/commit/dd76d9a4eb75eb81cd50b9ef37790782ad9b3a9d))
+
+
+
 # [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.14...@sebgroup/green-react@1.0.0-beta.15) (2022-06-28)
 
 

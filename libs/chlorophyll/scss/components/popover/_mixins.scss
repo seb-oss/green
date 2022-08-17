@@ -48,7 +48,6 @@ $_max-height: 400px;
   > [role='listbox'] {
     width: 100%;
     overflow-y: auto;
-    scroll-behavior: smooth;
   }
 
   &.active {

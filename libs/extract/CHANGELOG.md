@@ -2,6 +2,36 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.17...@sebgroup/extract@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.16...@sebgroup/extract@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **dropdown:** scroll to option on arrow navigation ([02c7b2c](https://github.com/sebgroup/green/commit/02c7b2c2c22892fb0b9f6ea2dcbec18f39d006f0)), closes [#463](https://github.com/sebgroup/green/issues/463)
+* **extract:** id should not start with a number ([02039c5](https://github.com/sebgroup/green/commit/02039c5cbf2b33881b40e5b7fa9b7eba7c1e6813))
+
+
+
+# [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.15...@sebgroup/extract@1.0.0-beta.16) (2022-07-18)
+
+
+### Bug Fixes
+
+* **dropdown:** allow empty texts ([6d4c125](https://github.com/sebgroup/green/commit/6d4c1250e3b5a625d5f300e4c50d2fddda31a3df))
+* **dropdown:** compare by value ([9fafa75](https://github.com/sebgroup/green/commit/9fafa75d49ea6a5c1fc33af5b8808019044907ae))
+* **dropdown:** touched behavior ([d8e9bac](https://github.com/sebgroup/green/commit/d8e9baca16e7331f244d4e88e6d204b24f2c2e60))
+
+
+### Features
+
+* 🎸 Validator prop on Dropdown ([dd76d9a](https://github.com/sebgroup/green/commit/dd76d9a4eb75eb81cd50b9ef37790782ad9b3a9d))
+
+
+
 # [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.14...@sebgroup/extract@1.0.0-beta.15) (2022-06-28)
 
 
