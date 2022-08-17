@@ -36,10 +36,6 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   text-align: left;
   transition: 150ms;
   vertical-align: sub;
-  
-  &:hover {
-    background-color: $_track_color_hover;
-  }
 
   // Thumb
   &::after {
@@ -56,8 +52,13 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
       0 1px 0 0 rgba(0,0,0,0.06);
   }
 
-  &:hover::after {
-    transform: translateX($_thumb_hover_nudge);
+  @media (hover: hover) { 
+    &:hover {
+      background-color: $_track_color_hover;
+    }
+    &:hover::after {
+      transform: translateX($_thumb_hover_nudge);
+    }
   }
 
   @media (max-width: $_breakpoint-mobile-layout) {
@@ -73,24 +74,27 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
 
   background: $_track_color_pressed;
 
-  &:hover {
-    background-color: $_track_color_pressed_hover;
-  }
-
   &::after {
     transform: translateX($thumb_pressed_translateX);
   }
 
-  &:hover::after {
-   transform: translateX($thumb_pressed_translateX - $_thumb_hover_nudge);
+  @media (hover: hover) { 
+    &:hover {
+      background-color: $_track_color_pressed_hover;
+    }
+    &:hover::after {
+    transform: translateX($thumb_pressed_translateX - $_thumb_hover_nudge);
+    }
   }
 
   @media (max-width: $_breakpoint-mobile-layout) {
     &::after {
       transform: translateX($thumb_pressed_translateX_mobile);
     }
-    &:hover::after {
-      transform: translateX($thumb_pressed_translateX_mobile - $_thumb_hover_nudge);
-     }
+    @media (hover: hover) {
+      &:hover::after {
+        transform: translateX($thumb_pressed_translateX_mobile - $_thumb_hover_nudge);
+      }
+    } 
   }
 }
