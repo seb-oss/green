@@ -2,7 +2,7 @@
 @use '../../tokens';
 @use '../../common';
 
-$selector-base: 'button[aria-role="switch"]';
+$selector-base: 'button[role="switch"]';
 $selector-checked: $selector-base + '[aria-checked=true]';
 $selector-not-checked: $selector-base + '[aria-checked=false]';
 
