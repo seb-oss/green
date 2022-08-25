@@ -27,10 +27,15 @@ export function initIFrameCanvasMode() {
       },
     })
     
-    if (localStorage["storybook-layout"]) {
-      const storybookLayout = JSON.parse(localStorage["storybook-layout"]);
-      const newLayout = { resizerPanel: { x: window.innerWidth - 320, y: 0 }};
-      localStorage["storybook-layout"] = JSON.stringify({...storybookLayout, ...newLayout});
+    let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'));
+    if (typeof storybookConfig === 'object' && storybookConfig !== null && storybookConfig.resizerNav.x < 320) {
+      storybookConfig.resizerPanel.x = window.innerWidth - 320;
+      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig));
+      document.location.reload();
+    } else if (storybookConfig === null) {
+      storybookConfig = { resizerNav: { x: 320, y: 0 }, resizerPanel: { x: window.innerWidth - 320, y: 0 } };
+      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig));
+      document.location.reload();
     }
 
     const style = document.createElement('style')
