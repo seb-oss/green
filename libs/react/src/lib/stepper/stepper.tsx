@@ -1,4 +1,4 @@
-import React, { useEffect, ChangeEvent } from 'react'
+import React, {useEffect, ChangeEvent} from 'react'
 import { StepperArgs, useStepper } from './hook'
 
 export interface StepperProps extends StepperArgs {
@@ -15,18 +15,21 @@ export function Stepper({
   onChange,
   ...props
 }: StepperProps) {
+
   const [stepper, data] = useStepper(props)
+
   useEffect(() => {
     if (onChange && data.value) onChange(data.value)
-  }, [data.value, onChange])
-  
+  }, [data.value])
+
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
     stepper.setValue(e.target.valueAsNumber)
   }
+
   return (
     <div className="form-group">
       { label && (
-        <label htmlFor={data.id}>{ label }</label> 
+        <label htmlFor={data.id}>{ label }</label>
       )}
       { description && (
         <span className="form-info">{ description }</span>
