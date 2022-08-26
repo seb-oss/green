@@ -14,8 +14,17 @@ export default {
   ],
   argTypes: {
     badgeType: {
-      options: ['info', 'success', 'warning', 'danger', 'light', 'dark', null],
+      options: [
+        'info',
+        'success',
+        'warning',
+        'danger',
+        'light',
+        'dark',
+      ],
       control: 'radio',
+      name: 'Badge Type',
+      defaultValue: 'info',
     },
   },
   parameters: {
@@ -23,28 +32,50 @@ export default {
       page: Documentation,
     },
   },
-} as Meta
+} as Meta<NggBadgeComponent>
 
 const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   template: `
-    <span ngg-badge [badgeType]="badgeType" [isCloseable]="isCloseable">{{text}}</span>
+    <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
   props: args,
 })
 
 export const Default = Template.bind({})
 Default.args = {
-  isCloseable: undefined,
-  badgeType: undefined,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  text: 'Badge',
-}
-export const Dismissible = Template.bind({})
-Dismissible.args = {
-  isCloseable: true,
   badgeType: 'success',
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  text: 'Badge',
+}
+
+const DismissibleTemplate: Story<NggBadgeComponent> = (
+  args: NggBadgeComponent
+) => {
+  //eslint-disable-next-line
+  let isDismissed = false
+
+  return {
+    template: `
+      <div *ngIf="!isDismissed">
+        <span ngg-badge [badgeType]="badgeType" [isCloseable]="true" (handleClose)="isDismissed=true;">Dismissible Badge</span>
+      </div>
+      <br />
+      <div>
+        <button (click)="isDismissed=false;" [disabled]="!isDismissed">Reset</button>
+      </div>
+    `,
+    props: {
+      ...args,
+      isDismissed,
+    },
+  }
+}
+
+export const Dismissible = DismissibleTemplate.bind({})
+Dismissible.args = {
+  badgeType: 'warning',
+}
+
+export const Custom = Template.bind({})
+Custom.args = {
+  customColor: '#062BCC',
+  customBackgroundColor: '#E6F5FF',
 }
