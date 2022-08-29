@@ -2,6 +2,26 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.18...@sebgroup/chlorophyll@1.0.0-beta.19) (2022-08-29)
+
+
+### Bug Fixes
+
+* 🐛 remove inline styles ([e97db73](https://github.com/sebgroup/green/commit/e97db737838ee24b5406229400b6a70047a3aa04))
+* **slide-toggle:** correct `aria-role` -> `role` ([b157bf4](https://github.com/sebgroup/green/commit/b157bf40a8e8aa3e22fbd3792ccbc46bc4e76d32))
+* **slide-toggle:** remove hover effect for touch devices ([2e56e35](https://github.com/sebgroup/green/commit/2e56e351f92853c0a28ad55e75c11fbbe2a1da86))
+
+
+### Features
+
+* **slide-toggle:** add base styles (WIP) ([2a9eca4](https://github.com/sebgroup/green/commit/2a9eca4933424755a3e1583f92e7b7a7ce432236))
+* **slide-toggle:** add Canvas section ([3e46119](https://github.com/sebgroup/green/commit/3e46119ba15d27d2ae8a0af171457104b09644b3))
+* **slide-toggle:** add focus styling ([a6d4180](https://github.com/sebgroup/green/commit/a6d4180526b1b837b1f92a67242c141f2bf81600))
+* **slide-toggle:** add hover states and transition ([79f03f6](https://github.com/sebgroup/green/commit/79f03f6459f7bff8d3cbeffa08a27c0e15af48f6))
+* **slide-toggle:** add mobile styles ([727e154](https://github.com/sebgroup/green/commit/727e1549dc7b475e9ba3e7cb65245017d24adca0))
+
+
+
 # [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.17...@sebgroup/chlorophyll@1.0.0-beta.18) (2022-08-15)
 
 
