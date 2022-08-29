@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.19...@sebgroup/green-react@1.0.0-beta.20) (2022-08-29)
+
+
+### Bug Fixes
+
+* 🐛 Exporting Stepper from @sebgroup/green-react ([a34fcc5](https://github.com/sebgroup/green/commit/a34fcc56b69a958ce4600a468aba71d54083e32b))
+* 🐛 lint issues ([b7fa6ec](https://github.com/sebgroup/green/commit/b7fa6ecef6b6ca4e22c944de409985db6e9e12d3))
+* 🐛 new custom color and bg color props and style changes ([df225d0](https://github.com/sebgroup/green/commit/df225d0464f867af2ce82c2b485b8a2c6fb43ca7)), closes [#535](https://github.com/sebgroup/green/issues/535)
+* 🐛 remove inline styles ([e97db73](https://github.com/sebgroup/green/commit/e97db737838ee24b5406229400b6a70047a3aa04))
+* 🐛 Stepper state loop with onChange ([d83bacb](https://github.com/sebgroup/green/commit/d83bacbf5890f0b35d404bfc1bc79a30d1a0c31e))
+
+
+
 # [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.18...@sebgroup/green-react@1.0.0-beta.19) (2022-08-15)
 
 
