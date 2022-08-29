@@ -141,7 +141,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
-  width: -webkit-fill-available;
+  width: stretch;
 }
 @mixin add-skeleton-chart-area() {
   @keyframes skeleton-loader {
@@ -167,7 +167,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
-  width: -webkit-fill-available;
+  width: stretch;
 }
 @mixin add-skeleton-chart-bubble() {
   @keyframes skeleton-loader {
