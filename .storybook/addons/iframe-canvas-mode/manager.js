@@ -4,7 +4,7 @@
  * Useful for embeddning a component canvas with controls on another website.
 */
 
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/addons'
 
 export function initIFrameCanvasMode() {
   const queryParams = new URLSearchParams(window.location.search)
@@ -27,15 +27,18 @@ export function initIFrameCanvasMode() {
       },
     })
     
-    let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'));
-    if (typeof storybookConfig === 'object' && storybookConfig !== null && storybookConfig.resizerNav.x < 320) {
-      storybookConfig.resizerPanel.x = window.innerWidth - 320;
-      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig));
-      document.location.reload();
+    let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'))
+    const isPanelWithinSpec = c => c.resizerNav.x === 320 && c.resizerPanel.x === window.innerWidth - 320
+
+    if (typeof storybookConfig === 'object' && storybookConfig !== null && !isPanelWithinSpec(storybookConfig)) {
+      storybookConfig.resizerPanel.x = window.innerWidth - 320
+      storybookConfig.resizerNav.x = 320
+      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
+      document.location.reload()
     } else if (storybookConfig === null) {
-      storybookConfig = { resizerNav: { x: 320, y: 0 }, resizerPanel: { x: window.innerWidth - 320, y: 0 } };
-      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig));
-      document.location.reload();
+      storybookConfig = { resizerNav: { x: 320, y: 0 }, resizerPanel: { x: window.innerWidth - 320, y: 0 } }
+      localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
+      document.location.reload()
     }
 
     const style = document.createElement('style')
