@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.19...@sebgroup/chlorophyll@1.0.0-beta.20) (2022-08-31)
+
+
+### Bug Fixes
+
+* 🐛 fizes aurtoprefixer warnings ([8ef81ad](https://github.com/sebgroup/green/commit/8ef81ad224b5feedef26861c4a0373f0e847e59f))
+
+
+
 # [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.18...@sebgroup/chlorophyll@1.0.0-beta.19) (2022-08-29)
 
 
