@@ -88,7 +88,13 @@ import { NggDropdownOptionDirective } from './dropdown-option.directive'
           <span class="sr-only">{{ dropdown?.texts?.close }}</span>
         </button>
         <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
-          <li
+        <input *ngIf="dropdown?.isSearchable" 
+            type="search"
+            (input)="search($event)"  
+            placeholder="{{dropdown?.texts?.searchPlaceholder}}" 
+            class="rounded-0 rounded-top border-0 border-bottom border-info" 
+        />  
+        <li
             *ngFor="
               let option of dropdown?.options;
               let index = index;
@@ -112,6 +118,12 @@ import { NggDropdownOptionDirective } from './dropdown-option.directive'
           </li>
         </ul>
         <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
+          <input *ngIf="dropdown?.isSearchable" 
+            type="search"
+            (input)="search($event)"  
+            placeholder="{{dropdown?.texts?.searchPlaceholder}}" 
+            class="rounded-0 rounded-top border-0 border-bottom border-info" 
+          />  
           <fieldset
             #fieldsetRef
             [attr.aria-describedby]="fieldset?.attributes?.id"
@@ -177,25 +189,33 @@ export class NggDropdownComponent
   @Input() display?: string
   @Input() selectValue?: string
   @Input() useValue?: string
+  @Input() label?: string
+  @Input() options: DropdownOption[] = [];
+  @Input() valid?: boolean
+  @Input() invalid?: boolean
+  @Input() searchableProperties?: string[];
 
   @Input() set multiSelect(value: string | boolean) {
-    this._multiSelect =
-      value === '' || value === 'true' || value.toString() === 'true' || false
+    this._multiSelect = this.convertToBoolean(value);
   }
   get multiSelect(): boolean {
     return this._multiSelect
   }
   private _multiSelect = false
-  @Input() label?: string
-  @Input() options: DropdownOption[] = []
-  @Input() valid?: boolean
-  @Input() invalid?: boolean
 
-  get value(): any {
-    return this._value
+  @Input() set searchable(value: string | boolean) {
+    this._searchable = this.convertToBoolean(value);
   }
+  get searchable(): boolean {
+    return this._searchable
+  }
+  private _searchable = false
+
   @Input() set value(newValue: any) {
     this.setSelectionByValue(newValue)
+  }
+  get value(): any {
+    return this._value
   }
   private _value: any
 
@@ -307,6 +327,10 @@ export class NggDropdownComponent
     return option[''] || option.key
   }
 
+  search($event: any): void {
+    this.handler?.search($event.target.value);
+  }
+
   private get props(): DropdownArgs {
     return {
       id: this.id || this.dropdown?.id,
@@ -318,6 +342,8 @@ export class NggDropdownComponent
       loop: this.loop,
       value: this.value,
       multiSelect: this.multiSelect,
+      searchable: this.searchable,
+      searchableProperties: this.searchableProperties,
       onTouched: () => {
         this.onTouchedFn?.()
         this.touched.emit(true)
@@ -344,5 +370,9 @@ export class NggDropdownComponent
         if (selected) this.handler?.select(selected)
       }
     }
+  }
+
+  private convertToBoolean(value: string | boolean): boolean {
+    return value === '' || value === 'true' || value.toString() === 'true' || false    
   }
 }

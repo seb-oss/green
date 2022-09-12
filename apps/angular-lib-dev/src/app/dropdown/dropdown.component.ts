@@ -12,7 +12,10 @@ import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
 export class DropdownComponent {
   texts: DropdownTexts = {
     placeholder: 'Select',
+    searchPlaceholder: 'Search'
   }
+
+  searchableProperties: string[]= ['kitchen'];
 
   options: Array<DropdownOption> = [
     {

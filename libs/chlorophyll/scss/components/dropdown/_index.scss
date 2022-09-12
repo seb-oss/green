@@ -17,6 +17,11 @@ button[aria-haspopup='listbox'] {
     flex-direction: column;
   }
 
+  .hidden{
+    visibility: hidden;
+    display: none;
+  }
+
   // menu
   ul[role='menu'] {
     @include mixins.menu();

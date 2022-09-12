@@ -58,6 +58,8 @@ export const create = ({
   loop,
   value,
   multiSelect,
+  searchable,
+  searchableProperties,
   validator
 }: DropdownArgs): AbstractDropdown => {
   useValue = useValue || 'value'
@@ -79,6 +81,7 @@ export const create = ({
       close: texts?.close ?? 'Close',
       optionsDescription: texts?.optionsDescription ?? 'Options',
       placeholder: texts?.placeholder ?? 'Select',
+      searchPlaceholder: texts?.searchPlaceholder ?? 'Search',
       selected: texts?.selected ?? 'selected',
       select:
         selected?.length > 2
@@ -99,6 +102,8 @@ export const create = ({
     options,
     isLooping: loop,
     isMultiSelect: multiSelect,
+    isSearchable: searchable,
+    searchableProperties,
     useValue,
     display,
     selectValue,
@@ -122,6 +127,7 @@ export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
       },
     },
   })
+
 export const close = (dropdown: AbstractDropdown): AbstractDropdown => {
   if (dropdown.isOpen) {
     return reduce(dropdown, {
@@ -146,6 +152,7 @@ export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
   return newDD
 }
+
 export const highlight = (
   dropdown: AbstractDropdown,
   selection: ExtendedDropdownOption | number
@@ -317,4 +324,24 @@ export const validate = (dropdown: AbstractDropdown, validator: any) => reduce(
       }
     }
   }
+)
+
+export const search = (dropdown: AbstractDropdown, searchInput: string ) : AbstractDropdown => reduce(
+  dropdown, {
+    options: dropdown.options.map(option => {
+      let isMatch = false;
+      const propNames = [...[dropdown.display], ...dropdown.searchableProperties||[]]
+
+      propNames.forEach(prop=> {
+        isMatch = option[prop]  
+          ? searchInput.length === 0 || option[prop].toString().toLowerCase().includes(searchInput.toLowerCase())
+          : isMatch;
+      });
+
+      return isMatch
+        ? { ...option, classes: removeClass(option.classes, 'hidden')}
+        : { ...option, classes: addClass(option.classes, 'hidden')} 
+    })
+         
+  } as Partial<AbstractDropdown>
 )

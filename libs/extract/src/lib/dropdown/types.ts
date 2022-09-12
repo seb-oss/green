@@ -7,6 +7,7 @@ export interface DropdownOption {
   value?: unknown
   selected?: boolean
   active?: boolean
+  hidden?: boolean
   [key: string]: any
 }
 
@@ -14,6 +15,7 @@ export interface DropdownTexts {
   select?: string
   selected?: string
   placeholder?: string
+  searchPlaceholder?: string
   close?: string
   optionsDescription?: string
 }
@@ -39,6 +41,8 @@ export interface AbstractDropdown {
   isOpen: boolean
   isLooping: boolean
   isMultiSelect: boolean
+  isSearchable: boolean
+  searchableProperties: string[]
   isTouched: boolean
   useValue: string
   display: string
@@ -64,6 +68,8 @@ export interface DropdownArgs {
   texts?: DropdownTexts
   value?: any
   multiSelect?: boolean
+  searchable?: boolean
+  searchableProperties?: string[]
   onTouched?: () => void
   validator?: any
 }
@@ -83,6 +89,7 @@ export interface DropdownHandler {
   active: (isActive: boolean) => Promise<void>
   loop: (isLooping: boolean) => Promise<void>
   multiSelect: (isMultiSelect: boolean) => Promise<void>
+  searchable: (isSearchable: boolean) => Promise<void>
   open: () => Promise<void>
   close: () => Promise<void>
   toggle: () => Promise<void>
@@ -91,5 +98,6 @@ export interface DropdownHandler {
     closeOnSelect?: boolean
   ) => Promise<void>
   validate: (validator: any) => Promise<void>
+  search: (searchInput: string) => Promise<void>
   destroy: () => void
 }

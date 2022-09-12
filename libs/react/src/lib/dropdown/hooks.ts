@@ -19,6 +19,8 @@ interface HookArgs {
   texts?: DropdownTexts
   options: DropdownOption[]
   multiSelect?: boolean
+  searchable?: boolean
+  searchableProperties?: string[]
   loop?: boolean
   selectValue?: string
   useValue?: string
@@ -57,6 +59,8 @@ export const useDropdown = ({
   options,
   loop,
   multiSelect,
+  searchable,
+  searchableProperties,
   selectValue,
   useValue,
   display,
@@ -160,7 +164,7 @@ export const useDropdown = ({
     handler?.update({ id, texts, options, loop, multiSelect })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, texts, options, loop, multiSelect, selectValue, useValue, display])
+  }, [id, texts, options, loop, multiSelect, searchable, searchableProperties, selectValue, useValue, display])
 
   // When validator changes
   useEffect(() => {
@@ -181,6 +185,8 @@ export const useDropdown = ({
             options,
             loop,
             multiSelect,
+            searchable,
+            searchableProperties,
             selectValue,
             useValue,
             display,
