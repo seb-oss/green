@@ -332,10 +332,12 @@ export const search = (dropdown: AbstractDropdown, searchInput: string ) : Abstr
       let isMatch = false;
       const propNames = [...[dropdown.display], ...dropdown.searchableProperties||[]]
 
-      propNames.forEach(prop=> {
+      propNames.every(prop=> {
         isMatch = option[prop]  
           ? searchInput.length === 0 || option[prop].toString().toLowerCase().includes(searchInput.toLowerCase())
           : isMatch;
+        if (isMatch) return false; 
+        return true;
       });
 
       return isMatch
