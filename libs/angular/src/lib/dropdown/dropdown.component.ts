@@ -88,13 +88,8 @@ import { NggDropdownOptionDirective } from './dropdown-option.directive'
           <span class="sr-only">{{ dropdown?.texts?.close }}</span>
         </button>
         <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
-        <input *ngIf="dropdown?.isSearchable" 
-            type="search"
-            (input)="search($event)"  
-            placeholder="{{dropdown?.texts?.searchPlaceholder}}" 
-            class="rounded-0 rounded-top border-0 border-bottom border-info" 
-        />  
-        <li
+          <ng-container *ngTemplateOutlet="searchInput"></ng-container>
+          <li
             *ngFor="
               let option of dropdown?.options;
               let index = index;
@@ -118,12 +113,7 @@ import { NggDropdownOptionDirective } from './dropdown-option.directive'
           </li>
         </ul>
         <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
-          <input *ngIf="dropdown?.isSearchable" 
-            type="search"
-            (input)="search($event)"  
-            placeholder="{{dropdown?.texts?.searchPlaceholder}}" 
-            class="rounded-0 rounded-top border-0 border-bottom border-info" 
-          />  
+          <ng-container *ngTemplateOutlet="searchInput"></ng-container>
           <fieldset
             #fieldsetRef
             [attr.aria-describedby]="fieldset?.attributes?.id"
@@ -170,6 +160,16 @@ import { NggDropdownOptionDirective } from './dropdown-option.directive'
     <ng-template #defaultOption let-option="option">
       {{ option[dropdown!.display] }}
     </ng-template>
+
+    <ng-template #searchInput>
+      <input
+        *ngIf="dropdown?.isSearchable"
+        type="search"
+        (input)="search($event)"
+        placeholder="{{ dropdown?.texts?.searchPlaceholder }}"
+        class="rounded-0 rounded-top border-0 border-bottom border-info"
+      />
+    </ng-template>
   `,
   providers: [
     {
@@ -190,13 +190,13 @@ export class NggDropdownComponent
   @Input() selectValue?: string
   @Input() useValue?: string
   @Input() label?: string
-  @Input() options: DropdownOption[] = [];
+  @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
   @Input() invalid?: boolean
-  @Input() searchableProperties?: string[];
+  @Input() searchableProperties?: string[]
 
   @Input() set multiSelect(value: string | boolean) {
-    this._multiSelect = this.convertToBoolean(value);
+    this._multiSelect = this.convertToBoolean(value)
   }
   get multiSelect(): boolean {
     return this._multiSelect
@@ -204,7 +204,7 @@ export class NggDropdownComponent
   private _multiSelect = false
 
   @Input() set searchable(value: string | boolean) {
-    this._searchable = this.convertToBoolean(value);
+    this._searchable = this.convertToBoolean(value)
   }
   get searchable(): boolean {
     return this._searchable
@@ -328,7 +328,7 @@ export class NggDropdownComponent
   }
 
   search($event: any): void {
-    this.handler?.search($event.target.value);
+    this.handler?.search($event.target.value)
   }
 
   private get props(): DropdownArgs {
@@ -373,6 +373,8 @@ export class NggDropdownComponent
   }
 
   private convertToBoolean(value: string | boolean): boolean {
-    return value === '' || value === 'true' || value.toString() === 'true' || false    
+    return (
+      value === '' || value === 'true' || value.toString() === 'true' || false
+    )
   }
 }

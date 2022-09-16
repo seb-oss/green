@@ -7,7 +7,7 @@ import {
   DropdownOption,
   ExtendedDropdownOption,
 } from './types'
-import {validateClassName} from "../helperFunction";
+import { validateClassName } from '../helperFunction'
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
@@ -60,7 +60,7 @@ export const create = ({
   multiSelect,
   searchable,
   searchableProperties,
-  validator
+  validator,
 }: DropdownArgs): AbstractDropdown => {
   useValue = useValue || 'value'
   display = display || 'key'
@@ -107,7 +107,7 @@ export const create = ({
     useValue,
     display,
     selectValue,
-    validator
+    validator,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -316,34 +316,40 @@ export const popper = (
 ): AbstractDropdown =>
   reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
 
-export const validate = (dropdown: AbstractDropdown, validator: any) => reduce(
-  dropdown, {
+export const validate = (dropdown: AbstractDropdown, validator: any) =>
+  reduce(dropdown, {
     elements: {
       toggler: {
-        classes: addClass(dropdown.elements?.toggler?.classes, validateClassName(validator?.indicator))
-      }
-    }
-  }
-)
+        classes: addClass(
+          dropdown.elements?.toggler?.classes,
+          validateClassName(validator?.indicator)
+        ),
+      },
+    },
+  })
 
-export const search = (dropdown: AbstractDropdown, searchInput: string ) : AbstractDropdown => reduce(
-  dropdown, {
-    options: dropdown.options.map(option => {
-      let isMatch = false;
-      const propNames = [...[dropdown.display], ...dropdown.searchableProperties||[]]
+export const search = (
+  dropdown: AbstractDropdown,
+  searchInput: string
+): AbstractDropdown =>
+  reduce(dropdown, {
+    options: dropdown.options.map((option) => {
+      const propNames = [
+        dropdown.display,
+        ...(dropdown.searchableProperties || []),
+      ]
 
-      propNames.every(prop=> {
-        isMatch = option[prop]  
-          ? searchInput.length === 0 || option[prop].toString().toLowerCase().includes(searchInput.toLowerCase())
-          : isMatch;
-        if (isMatch) return false; 
-        return true;
-      });
+      const isMatch =
+        searchInput.length === 0 ||
+        propNames.some((prop) =>
+          option[prop]
+            ?.toString()
+            .toLowerCase()
+            .includes(searchInput.toLowerCase())
+        )
 
       return isMatch
-        ? { ...option, classes: removeClass(option.classes, 'hidden')}
-        : { ...option, classes: addClass(option.classes, 'hidden')} 
-    })
-         
-  } as Partial<AbstractDropdown>
-)
+        ? { ...option, classes: removeClass(option.classes, 'hidden') }
+        : { ...option, classes: addClass(option.classes, 'hidden') }
+    }),
+  } as Partial<AbstractDropdown>)
