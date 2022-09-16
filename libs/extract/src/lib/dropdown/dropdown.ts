@@ -11,6 +11,7 @@ import {
   popper,
   keypress,
   validate,
+  search,
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -49,6 +50,11 @@ export const createDropdown = (
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
+  handler.search = (seachInput: string) => 
+    update(handler, 
+      listener, 
+      search(handler.dropdown, seachInput)
+    )
   handler.select = (selection, selectOnClose = true) =>
     update(
       handler,

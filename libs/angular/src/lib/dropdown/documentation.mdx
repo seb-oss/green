@@ -93,6 +93,7 @@ Custom texts can be set using the texts input which takes an object with the fol
 | :----------------- | :----------------------------------------------------- | :--------- |
 | selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
 | placeholder        | Text to display when no option is selected.            | `Select`   |
+| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
 | close              | Text for close button displayed on mobiles.            | `Close`    |
 | optionsDescription | Text to describe options.                              | `Options`  |
 
@@ -112,12 +113,36 @@ Just add `multiSelect` to add support for multi select.
 
 <Story id="components-dropdown--multi-select" />
 
-## Custom option template
+## Searchable
 
-Use an ng-template with the nggDropdownOption directive to provide the dropdown list with an alternative template for the list.
+For search functionality add `searchable`. By default search will filter on 'display' provided to dropdown. 
 
 ```html
-<ngg-dropdown...>
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown
+    searchable
+    formControlName="dropdownSelect"
+    [options]="options"
+  ></ngg-dropdown>
+</form>
+```
+
+<Story id="components-dropdown--searchable" />
+
+## Custom option template
+
+Use an ng-template with the nggDropdownOption directive to provide the dropdown list with an alternative template for the list. 
+To be able to search in custom properties, you should provide an array of property names to search into "searchableProperties".
+
+```typescript
+  const searchableProperties = ['kitchen', 'customProperty2']
+```
+
+```html
+<ngg-dropdown
+  searchableProperties="searchableProperties" 
+  ...
+>
   <ng-template nggDropdownOption let-option="option" let-index="index">
     <div>
       <div>{{ index }}. {{ option.name }}</div>
@@ -126,7 +151,6 @@ Use an ng-template with the nggDropdownOption directive to provide the dropdown 
   </ng-template>
 </ngg-dropdown>
 ```
-
 <Story id="components-dropdown--custom-option" />
 
 ## Example usage in reactive form

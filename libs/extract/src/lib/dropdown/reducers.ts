@@ -7,7 +7,7 @@ import {
   DropdownOption,
   ExtendedDropdownOption,
 } from './types'
-import {validateClassName} from "../helperFunction";
+import { validateClassName } from '../helperFunction'
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
@@ -58,7 +58,9 @@ export const create = ({
   loop,
   value,
   multiSelect,
-  validator
+  searchable,
+  searchableProperties,
+  validator,
 }: DropdownArgs): AbstractDropdown => {
   useValue = useValue || 'value'
   display = display || 'key'
@@ -79,6 +81,7 @@ export const create = ({
       close: texts?.close ?? 'Close',
       optionsDescription: texts?.optionsDescription ?? 'Options',
       placeholder: texts?.placeholder ?? 'Select',
+      searchPlaceholder: texts?.searchPlaceholder ?? 'Search',
       selected: texts?.selected ?? 'selected',
       select:
         selected?.length > 2
@@ -99,10 +102,12 @@ export const create = ({
     options,
     isLooping: loop,
     isMultiSelect: multiSelect,
+    isSearchable: searchable,
+    searchableProperties,
     useValue,
     display,
     selectValue,
-    validator
+    validator,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -122,6 +127,7 @@ export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
       },
     },
   })
+
 export const close = (dropdown: AbstractDropdown): AbstractDropdown => {
   if (dropdown.isOpen) {
     return reduce(dropdown, {
@@ -146,6 +152,7 @@ export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
   const newDD = dropdown.isOpen ? close(dropdown) : open(dropdown)
   return newDD
 }
+
 export const highlight = (
   dropdown: AbstractDropdown,
   selection: ExtendedDropdownOption | number
@@ -309,12 +316,40 @@ export const popper = (
 ): AbstractDropdown =>
   reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
 
-export const validate = (dropdown: AbstractDropdown, validator: any) => reduce(
-  dropdown, {
+export const validate = (dropdown: AbstractDropdown, validator: any) =>
+  reduce(dropdown, {
     elements: {
       toggler: {
-        classes: addClass(dropdown.elements?.toggler?.classes, validateClassName(validator?.indicator))
-      }
-    }
-  }
-)
+        classes: addClass(
+          dropdown.elements?.toggler?.classes,
+          validateClassName(validator?.indicator)
+        ),
+      },
+    },
+  })
+
+export const search = (
+  dropdown: AbstractDropdown,
+  searchInput: string
+): AbstractDropdown =>
+  reduce(dropdown, {
+    options: dropdown.options.map((option) => {
+      const propNames = [
+        dropdown.display,
+        ...(dropdown.searchableProperties || []),
+      ]
+
+      const isMatch =
+        searchInput.length === 0 ||
+        propNames.some((prop) =>
+          option[prop]
+            ?.toString()
+            .toLowerCase()
+            .includes(searchInput.toLowerCase())
+        )
+
+      return isMatch
+        ? { ...option, classes: removeClass(option.classes, 'hidden') }
+        : { ...option, classes: addClass(option.classes, 'hidden') }
+    }),
+  } as Partial<AbstractDropdown>)

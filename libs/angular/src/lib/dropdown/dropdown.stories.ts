@@ -29,7 +29,7 @@ export default {
 } as Meta<NggDropdownComponent>
 
 const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
-  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id"></ngg-dropdown>`,
+  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id"></ngg-dropdown>`,
   props: args,
 })
 
@@ -40,6 +40,7 @@ Select.args = {
   value: '',
   loop: true,
   multiSelect: false,
+  searchable: false,
   useValue: 'value',
   display: 'key',
   selectValue: undefined,
@@ -57,6 +58,7 @@ MultiSelect.args = {
   value: '',
   loop: true,
   multiSelect: true,
+  searchable: false,
   useValue: 'value',
   display: 'name',
   selectValue: undefined,
@@ -67,13 +69,38 @@ MultiSelect.args = {
   ],
 }
 
+export const Searchable = Template.bind({})
+Searchable.args = {
+  id: '',
+  texts: { placeholder: 'Select meal(s)', searchPlaceholder: 'Search meal' },
+  value: '',
+  loop: true,
+  multiSelect: false,
+  searchable: true,
+  useValue: 'value',
+  display: 'name',
+  selectValue: undefined,
+  options: [
+    { name: 'Tacos', value: 'tacos' },
+    { name: 'Pizza', value: 'pizza' },
+    { name: 'Sushi', value: 'sushi' },
+    { name: 'Ramen', value: 'ramen' },
+    { name: 'Tori Ramen', value: 'tori' },
+    { name: 'Tokyo Ramen', value: 'tokyo' },
+    { name: 'Kyoto Ramen', value: 'kyoto' },
+    { name: 'Sriracha Ramen', value: 'sriracha' },
+    { name: 'Kimchi Ramen', value: 'kimchi' },
+    { name: 'Hakodate Ramen', value: 'hakodate' },
+  ],
+}
+
 const CustomOptionTemplate: Story<NggDropdownComponent> = (
   args: NggDropdownComponent
 ) => {
   return {
     component: NggDropdownComponent,
     template: `
-    <ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id">
+    <ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [searchableProperties]="searchableProperties" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id">
       <ng-template nggDropdownOption let-option="option" let-index="index">
         <div>
           <div>{{ index }}. {{ option.name }}</div>
@@ -89,10 +116,12 @@ const CustomOptionTemplate: Story<NggDropdownComponent> = (
 export const CustomOption = CustomOptionTemplate.bind({})
 CustomOption.args = {
   id: '',
-  texts: { placeholder: 'Select meal(s)' },
+  texts: { placeholder: 'Select meal(s)'},
   value: '',
   loop: true,
   multiSelect: true,
+  searchable: true,
+  searchableProperties: [ 'kitchen'],
   useValue: 'value',
   display: 'name',
   selectValue: undefined,

@@ -90,6 +90,10 @@ describe('dropdown', () => {
       await handler.select(handler.dropdown.options[0])
       expect(listener).toHaveBeenCalledWith(handler.dropdown)
     })
+    it('calls back on search', async () => {
+      await handler.search('A')
+      expect(listener).toHaveBeenCalledWith(handler.dropdown)
+    })
   })
 
   describe('keyboard', () => {

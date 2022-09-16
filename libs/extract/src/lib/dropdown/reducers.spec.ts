@@ -8,6 +8,7 @@ import {
   toggle,
   loop,
   highlight,
+  search,
 } from './reducers'
 import { AbstractDropdown, DropdownOption, DropdownTexts } from './types'
 
@@ -23,6 +24,7 @@ describe('dropdown/reducers', () => {
       select: 'Selected',
       selected: 'selected',
       placeholder: 'Select',
+      searchPlaceholder: 'Search',
     }
     options = [
       { key: 'A', value: 1 },
@@ -339,6 +341,42 @@ describe('dropdown/reducers', () => {
             expect(dropdown.options[1].active).toBe(true)
           })
         })
+      })
+    })
+    describe('search', () => {
+      it('adds hidden class from options not containing search text', () => {
+        dropdown = search(dropdown, 'A')
+
+        expect(dropdown.options[1].classes).toContain('hidden');
+      })
+      it('removes hidden class from options containing search text', () => {
+        dropdown = search(dropdown, 'A')
+        dropdown = search(dropdown, 'B')
+
+        expect(dropdown.options[0].classes).toContain('hidden');
+        expect(dropdown.options[1].classes).not.toContain('hidden');
+      })
+      it('removes hidden class from options containing search text from searchableProperties', () => {
+        dropdown.searchableProperties = ['value']
+        dropdown = search(dropdown, '1')
+        dropdown = search(dropdown, '2')
+
+        expect(dropdown.options[0].classes).toContain('hidden');
+        expect(dropdown.options[1].classes).not.toContain('hidden');
+      })
+      it('does not error out and unhides options if searchableProperties contains not existing props', () => {
+        dropdown.searchableProperties = ['missing', 'missingtoo']
+        dropdown = search(dropdown, '')
+
+        expect(dropdown.options[0].classes).not.toContain('hidden');
+        expect(dropdown.options[1].classes).not.toContain('hidden');
+      })
+      it('removes hidden class from all options when search text is empty', () => {
+        dropdown = search(dropdown, 'A')
+        dropdown = search(dropdown, '')
+
+        expect(dropdown.options[0].classes).not.toContain('hidden');
+        expect(dropdown.options[1].classes).not.toContain('hidden');
       })
     })
   })

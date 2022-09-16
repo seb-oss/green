@@ -12,6 +12,7 @@ export interface DropdownProps {
   selectValue?: string
   loop?: boolean
   multiSelect?: boolean
+  searchable?: boolean
   onChange?: (o: DropdownOption) => void
   validator?: IValidator
 }
@@ -21,6 +22,7 @@ export const Dropdown = ({
   options,
   loop,
   multiSelect,
+  searchable,
   selectValue,
   useValue,
   display,
@@ -38,6 +40,7 @@ export const Dropdown = ({
       options,
       loop,
       multiSelect,
+      searchable,
       selectValue,
       useValue,
       display,
