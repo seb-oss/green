@@ -22,6 +22,26 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 
 
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.21...@sebgroup/extract@1.0.0-beta.22) (2022-09-19)
+
+
+### Bug Fixes
+
+* 🐛 Fixing search property looping ([71d22f0](https://github.com/sebgroup/green/commit/71d22f0921085628240baa7dbb7e9e4705130e0a)), closes [#473](https://github.com/sebgroup/green/issues/473)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+* 🧨 -
+
+
+
 # [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.20...@sebgroup/extract@1.0.0-beta.21) (2022-08-31)
 
 
