@@ -1,13 +1,13 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "1.0.0-beta.22",
+  "version": "1.0.0-beta.23",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/chlorophyll": "^1.0.0-beta.23",
-    "@sebgroup/extract": "^1.0.0-beta.22"
+    "@sebgroup/chlorophyll": "^1.0.0-beta.24",
+    "@sebgroup/extract": "^1.0.0-beta.23"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
   "repository": {
