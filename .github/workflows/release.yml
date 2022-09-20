@@ -47,7 +47,6 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Prepare release of chlorophyll and extract
-        if: ${{ false }}
         run: npx nx run-many --target=version --projects=chlorophyll,extract --baseBranch='main' --origin='origin' --parallel=1
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
