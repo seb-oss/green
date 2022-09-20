@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.21...@sebgroup/green-react@1.0.0-beta.22) (2022-09-20)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+
+
 # [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.20...@sebgroup/green-react@1.0.0-beta.21) (2022-08-31)
 
 
