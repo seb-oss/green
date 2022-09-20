@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.23...@sebgroup/chlorophyll@1.0.0-beta.24) (2022-09-20)
+
+
+
 # [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.22...@sebgroup/chlorophyll@1.0.0-beta.23) (2022-09-19)
 
 
