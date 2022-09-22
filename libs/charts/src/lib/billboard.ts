@@ -112,6 +112,12 @@ export const createOptions = ({
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
+            ...((settings?.ticksCount || settings?.stepSize) && {
+              tick: {
+                count: settings?.ticksCount || null,
+                stepSize: settings?.stepSize || null
+              }
+            }),
             show: settings?.show,
             label: settings?.label,
           },
