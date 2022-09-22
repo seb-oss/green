@@ -62,10 +62,18 @@ export const create = ({
   compareWith = (o1, o2) => o1 === o2,
   searchFilter,
 }: DropdownArgs): AbstractDropdown => {
+  const isSelected = (option: DropdownOption) => {
+    if (multiSelect && Array.isArray(value)) {
+      return value.some((v) => compareWith(option[useValue], v))
+    } else {
+      return compareWith(option[useValue], value)
+    }
+  }
+
   if (value) {
     _options = _options?.map((option) => ({
       ...option,
-      selected: compareWith(option[useValue], value),
+      selected: isSelected(option),
     }))
   }
   const options = extendOptions(_options, id)
