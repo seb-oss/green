@@ -197,7 +197,7 @@ export class DropdownComponent {
 
   dropdownMultiValue0: any = undefined
   dropdownMultiValue1: any = undefined
-  dropdownMultiValue2 = this.customOptions[2].val
+  dropdownMultiValue2 = [this.customOptions[2].val]
 
   dropdownValue3: any = undefined
   dropdownValue4 = 'tacos'
@@ -213,6 +213,10 @@ export class DropdownComponent {
 
   test($event: any) {
     console.log('Test', $event)
+  }
+
+  compareWith(o1: any, o2: any) {
+    return o1.id === o2.id
   }
 
   searchFilter(search: string, value: any) {

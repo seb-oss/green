@@ -43,12 +43,14 @@
         useValue="val"
         display="name"
         [options]="customOptionsInitial"
+        [compareWith]="compareWith"
         [texts]="texts"
         [(value)]="dropdownMultiValue1"
       ></ngg-dropdown>
       <ngg-dropdown
         multiSelect
         [options]="customOptions"
+        [compareWith]="compareWith"
         useValue="val"
         display="name"
         [texts]="texts"
@@ -96,6 +98,7 @@
     ></ngg-dropdown>
     <ngg-dropdown
       [options]="customOptionsInitial"
+      [compareWith]="compareWith"
       multiSelect
       useValue="val"
       display="name"
@@ -123,6 +126,7 @@
   <ngg-dropdown
     [(ngModel)]="dropdownValue5"
     [options]="customOptions"
+    [compareWith]="compareWith"
     useValue="val"
     display="name"
     [texts]="texts"
@@ -130,6 +134,7 @@
   <ngg-dropdown
     [(ngModel)]="dropdownValue6"
     [options]="customOptionsInitial"
+    [compareWith]="compareWith"
     useValue="val"
     display="name"
     multiSelect
