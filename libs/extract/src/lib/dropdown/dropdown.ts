@@ -20,23 +20,27 @@ import {
   DropdownHandler,
   DropdownListener,
   DropdownArgs,
+  OnChange,
 } from './types'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { isMobileViewport$ } from '../common/viewport-size'
 import { getOptionScrollPosition } from './helper-functions'
+import { IValidator } from '../helperFunction'
 
 export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
   listbox: HTMLElement,
   fieldset: HTMLElement | undefined = undefined,
-  listener: DropdownListener
+  listener: DropdownListener,
+  onChange: OnChange
 ): DropdownHandler => {
   const _handler: Partial<DropdownHandler> = {
     toggler,
     listbox,
     dropdown: create(init),
     isAlive: true,
+    onChange,
     onDestroy$: new Subject<void>(),
     onTouched: init.onTouched,
   }
@@ -50,11 +54,8 @@ export const createDropdown = (
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
-  handler.search = (seachInput: string) => 
-    update(handler, 
-      listener, 
-      search(handler.dropdown, seachInput)
-    )
+  handler.search = (seachInput: string) =>
+    update(handler, listener, search(handler.dropdown, seachInput))
   handler.select = (selection, selectOnClose = true) =>
     update(
       handler,
@@ -64,7 +65,7 @@ export const createDropdown = (
         : select(handler.dropdown, selection)
     )
   handler.update = (props) => update(handler, listener, create(props))
-  handler.validate = (validator: any) =>
+  handler.validate = (validator: IValidator) =>
     update(handler, listener, validate(handler.dropdown, validator))
 
   fromEvent(toggler, 'blur')
@@ -147,6 +148,12 @@ const update = async (
 
   const oldState = handler.dropdown
   if (newState) handler.dropdown = newState
+
+  if (
+    JSON.stringify(oldState.value) !== JSON.stringify(handler.dropdown.value)
+  ) {
+    handler.onChange(handler.dropdown.value)
+  }
 
   if (oldState.isTouched !== handler.dropdown.isTouched) {
     handler.onTouched?.()

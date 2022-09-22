@@ -49,17 +49,17 @@
       </button>
       <ngg-dropdown
         [options]="months"
+        display="key"
         text="Select"
         [value]="data?.month"
-        selectValue="value"
         (valueChange)="dp?.setMonth($event)"
       ></ngg-dropdown>
       <ngg-dropdown
         *ngIf="years"
         [options]="years"
+        display="key"
         text="Select"
         [value]="data?.year"
-        selectValue="value"
         (valueChange)="dp?.setYear($event)"
       ></ngg-dropdown>
       <button type="button" class="link" (click)="dp?.add(1, 'months')">

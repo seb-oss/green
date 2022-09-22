@@ -5,9 +5,9 @@ import {
   AbstractDropdown,
   DropdownArgs,
   DropdownOption,
-  ExtendedDropdownOption,
+  DropdownOptionElement,
 } from './types'
-import { validateClassName } from '../helperFunction'
+import { IValidator, validateClassName } from '../helperFunction'
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
@@ -33,8 +33,8 @@ const extendOption = (
   id: string,
   option: DropdownOption,
   ix: number
-): ExtendedDropdownOption =>
-  reduce<ExtendedDropdownOption>(optionValues, option, {
+): DropdownOptionElement =>
+  reduce<DropdownOptionElement>(optionValues, option, {
     attributes: {
       id: `${id}_option${ix}`,
       role: 'option',
@@ -45,30 +45,35 @@ const extendOption = (
 const extendOptions = (
   options: DropdownOption[],
   id: string
-): ExtendedDropdownOption[] =>
+): DropdownOptionElement[] =>
   options?.map((option, ix) => extendOption(id, option, ix))
 
 export const create = ({
   id = randomId(),
   texts,
   options: _options,
-  useValue,
-  display,
-  selectValue,
+  useValue = 'value',
+  display = 'label',
   loop,
   value,
   multiSelect,
   searchable,
-  searchableProperties,
   validator,
+  compareWith = (o1, o2) => o1 === o2,
+  searchFilter,
 }: DropdownArgs): AbstractDropdown => {
-  useValue = useValue || 'value'
-  display = display || 'key'
+  const isSelected = (option: DropdownOption) => {
+    if (multiSelect && Array.isArray(value)) {
+      return value.some((v) => compareWith(option[useValue], v))
+    } else {
+      return compareWith(option[useValue], value)
+    }
+  }
 
   if (value) {
     _options = _options?.map((option) => ({
       ...option,
-      selected: option[<string>useValue] === value,
+      selected: isSelected(option),
     }))
   }
   const options = extendOptions(_options, id)
@@ -77,6 +82,7 @@ export const create = ({
     .map((option) => option[<string>display])
   const dropdown: Partial<AbstractDropdown> = {
     id,
+    value,
     texts: {
       close: texts?.close ?? 'Close',
       optionsDescription: texts?.optionsDescription ?? 'Options',
@@ -103,11 +109,11 @@ export const create = ({
     isLooping: loop,
     isMultiSelect: multiSelect,
     isSearchable: searchable,
-    searchableProperties,
     useValue,
     display,
-    selectValue,
     validator,
+    compareWith,
+    searchFilter,
   }
 
   return reduce(dropdown, dropdownValues)
@@ -155,9 +161,9 @@ export const toggle = (dropdown: AbstractDropdown): AbstractDropdown => {
 
 export const highlight = (
   dropdown: AbstractDropdown,
-  selection: ExtendedDropdownOption | number
+  selection: DropdownOptionElement | number
 ): AbstractDropdown => {
-  let option: ExtendedDropdownOption
+  let option: DropdownOptionElement
   if (typeof selection === 'number') {
     const opts = dropdown.options
     const currentlySelectedIndex = opts.findIndex((o) => o.active)
@@ -190,10 +196,13 @@ export const highlight = (
 
 export const select = (
   dropdown: AbstractDropdown,
-  selection: ExtendedDropdownOption
+  selection: DropdownOptionElement
 ): AbstractDropdown => {
-  const isSelected = (option: ExtendedDropdownOption) => {
-    const isTarget = selection[dropdown.useValue] === option[dropdown.useValue]
+  const isSelected = (option: DropdownOptionElement) => {
+    const isTarget = dropdown.compareWith(
+      selection[dropdown.useValue],
+      option[dropdown.useValue]
+    )
 
     if (dropdown.isMultiSelect) {
       //Invert the selected option and keep others like previously
@@ -215,7 +224,9 @@ export const select = (
 
   const selectedOptions = options.filter((o) => o.selected)
   const displayValues = selectedOptions.map((o) => o[dropdown.display])
+  const value = selectedOptions.map((option) => option[dropdown.useValue])
   return reduce(dropdown, {
+    value: dropdown.isMultiSelect ? value : value[0],
     texts: {
       select:
         displayValues?.length > 2
@@ -316,7 +327,7 @@ export const popper = (
 ): AbstractDropdown =>
   reduce(dropdown, { elements: { listbox: { attributes: { style } } } })
 
-export const validate = (dropdown: AbstractDropdown, validator: any) =>
+export const validate = (dropdown: AbstractDropdown, validator: IValidator) =>
   reduce(dropdown, {
     elements: {
       toggler: {
@@ -334,19 +345,13 @@ export const search = (
 ): AbstractDropdown =>
   reduce(dropdown, {
     options: dropdown.options.map((option) => {
-      const propNames = [
-        dropdown.display,
-        ...(dropdown.searchableProperties || []),
-      ]
+      const searchIncludes = (value: any): boolean =>
+        value?.toString().toLowerCase().includes(searchInput.toLowerCase())
 
       const isMatch =
         searchInput.length === 0 ||
-        propNames.some((prop) =>
-          option[prop]
-            ?.toString()
-            .toLowerCase()
-            .includes(searchInput.toLowerCase())
-        )
+        searchIncludes(option[dropdown.display]) ||
+        dropdown.searchFilter?.(searchInput, option[dropdown.useValue])
 
       return isMatch
         ? { ...option, classes: removeClass(option.classes, 'hidden') }

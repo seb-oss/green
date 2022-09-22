@@ -3,12 +3,15 @@ export * from './dropdown'
 export {
   AbstractDropdown,
   DropdownOption,
-  ExtendedDropdownOption,
+  DropdownOptionElement,
   DropdownHandler,
   DropdownListener,
+  OnChange,
   ElementProps,
   DropdownArgs,
   DropdownTexts,
+  CompareWith,
+  SearchFilter,
 } from './types'
 
 export { dropdownValues, optionValues } from './defaultValues'
