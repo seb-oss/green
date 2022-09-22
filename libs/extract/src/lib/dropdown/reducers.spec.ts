@@ -27,8 +27,8 @@ describe('dropdown/reducers', () => {
       searchPlaceholder: 'Search',
     }
     options = [
-      { key: 'A', value: 1 },
-      { key: 'B', value: 2 },
+      { label: 'A', value: 1 },
+      { label: 'B', value: 2 },
     ]
   })
   describe('create', () => {
@@ -42,13 +42,13 @@ describe('dropdown/reducers', () => {
     })
     it('uses default option text', () => {
       const defaultOption = {
-        key: 'C',
+        label: 'C',
         value: 3,
         selected: true,
       }
       const _options = [...options, defaultOption]
       const dropdown = create({ id, options: _options, texts })
-      expect(dropdown.texts.select).toEqual(defaultOption.key)
+      expect(dropdown.texts.select).toEqual(defaultOption.label)
     })
     it('creates an id if not supplied', () => {
       const dropdown = create({ options })
@@ -234,11 +234,12 @@ describe('dropdown/reducers', () => {
           undefined,
           true,
         ])
+        expect(dropdown.value).toEqual(2)
       })
       it('sets text', () => {
         const selectedOption = dropdown.options[1]
         dropdown = select(dropdown, selectedOption)
-        expect(dropdown.texts.select).toEqual(selectedOption.key)
+        expect(dropdown.texts.select).toEqual(selectedOption.label)
       })
       it('sets activedecendant', () => {
         const selectedOption = dropdown.options[1]
@@ -265,6 +266,7 @@ describe('dropdown/reducers', () => {
         const selectedOptions = dropdown.options.map((o) => o.selected)
 
         expect(selectedOptions).toEqual([true, true])
+        expect(JSON.stringify(dropdown.value)).toEqual(JSON.stringify([1, 2]))
       })
       it('invert selected option', () => {
         // select
@@ -347,36 +349,32 @@ describe('dropdown/reducers', () => {
       it('adds hidden class from options not containing search text', () => {
         dropdown = search(dropdown, 'A')
 
-        expect(dropdown.options[1].classes).toContain('hidden');
+        expect(dropdown.options[0].classes).not.toContain('hidden')
+        expect(dropdown.options[1].classes).toContain('hidden')
       })
       it('removes hidden class from options containing search text', () => {
         dropdown = search(dropdown, 'A')
         dropdown = search(dropdown, 'B')
 
-        expect(dropdown.options[0].classes).toContain('hidden');
-        expect(dropdown.options[1].classes).not.toContain('hidden');
+        expect(dropdown.options[0].classes).toContain('hidden')
+        expect(dropdown.options[1].classes).not.toContain('hidden')
       })
-      it('removes hidden class from options containing search text from searchableProperties', () => {
-        dropdown.searchableProperties = ['value']
+      it('removes hidden class from options containing custom search filter', () => {
+        dropdown.searchFilter = (search, value) => {
+          return value.toString().includes(search)
+        }
         dropdown = search(dropdown, '1')
         dropdown = search(dropdown, '2')
 
-        expect(dropdown.options[0].classes).toContain('hidden');
-        expect(dropdown.options[1].classes).not.toContain('hidden');
-      })
-      it('does not error out and unhides options if searchableProperties contains not existing props', () => {
-        dropdown.searchableProperties = ['missing', 'missingtoo']
-        dropdown = search(dropdown, '')
-
-        expect(dropdown.options[0].classes).not.toContain('hidden');
-        expect(dropdown.options[1].classes).not.toContain('hidden');
+        expect(dropdown.options[0].classes).toContain('hidden')
+        expect(dropdown.options[1].classes).not.toContain('hidden')
       })
       it('removes hidden class from all options when search text is empty', () => {
         dropdown = search(dropdown, 'A')
         dropdown = search(dropdown, '')
 
-        expect(dropdown.options[0].classes).not.toContain('hidden');
-        expect(dropdown.options[1].classes).not.toContain('hidden');
+        expect(dropdown.options[0].classes).not.toContain('hidden')
+        expect(dropdown.options[1].classes).not.toContain('hidden')
       })
     })
   })

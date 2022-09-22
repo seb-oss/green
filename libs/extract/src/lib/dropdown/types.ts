@@ -1,13 +1,20 @@
 import { Subscription, Subject } from 'rxjs'
 import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
+import { IValidator } from '../helperFunction'
+
+export type CompareWith<T = unknown> = (o1: T, o2: T) => boolean
+
+export type SearchFilter<T = unknown> = (search: string, value: T) => boolean
+
+export type OnChange<T = unknown> = (value: T) => void
+
+export type DropdownListener = (dropdown: AbstractDropdown) => void
 
 export interface DropdownOption {
-  key?: string
+  label?: string
   value?: unknown
   selected?: boolean
-  active?: boolean
-  hidden?: boolean
   [key: string]: any
 }
 
@@ -20,7 +27,10 @@ export interface DropdownTexts {
   optionsDescription?: string
 }
 
-export interface ExtendedDropdownOption extends DropdownOption, ElementProps {}
+export interface DropdownOptionElement extends DropdownOption, ElementProps {
+  active?: boolean
+  hidden?: boolean
+}
 
 export interface Attributes extends AriaAttributes {
   id?: string
@@ -36,19 +46,20 @@ export interface ElementProps {
 
 export interface AbstractDropdown {
   id: string
+  value: unknown
   texts: DropdownTexts
   isActive: boolean
   isOpen: boolean
   isLooping: boolean
   isMultiSelect: boolean
   isSearchable: boolean
-  searchableProperties: string[]
   isTouched: boolean
   useValue: string
   display: string
-  selectValue: string
-  validator: any
-  options: ExtendedDropdownOption[]
+  validator: IValidator
+  compareWith: CompareWith
+  searchFilter?: SearchFilter
+  options: DropdownOptionElement[]
   elements: Partial<{
     toggler: Partial<ElementProps>
     listbox: Partial<ElementProps>
@@ -56,22 +67,20 @@ export interface AbstractDropdown {
   }>
 }
 
-export type DropdownListener = (dropdown: AbstractDropdown) => void
-
 export interface DropdownArgs {
   id?: string
   options: DropdownOption[]
   useValue?: string // option key to use as value
   display?: string // option key to display
-  selectValue?: string // option key to output as value
   loop?: boolean
   texts?: DropdownTexts
-  value?: any
+  value?: unknown
   multiSelect?: boolean
   searchable?: boolean
-  searchableProperties?: string[]
   onTouched?: () => void
-  validator?: any
+  validator?: IValidator
+  compareWith?: CompareWith
+  searchFilter?: SearchFilter
 }
 
 export interface DropdownHandler {
@@ -81,6 +90,7 @@ export interface DropdownHandler {
   popper?: Instance
   subscription: Subscription
   isAlive: boolean
+  onChange: OnChange
   onDestroy$: Subject<void>
   onTouched?: () => void
 
@@ -94,10 +104,10 @@ export interface DropdownHandler {
   close: () => Promise<void>
   toggle: () => Promise<void>
   select: (
-    selection: ExtendedDropdownOption,
+    selection: DropdownOptionElement,
     closeOnSelect?: boolean
   ) => Promise<void>
-  validate: (validator: any) => Promise<void>
+  validate: (validator: IValidator) => Promise<void>
   search: (searchInput: string) => Promise<void>
   destroy: () => void
 }

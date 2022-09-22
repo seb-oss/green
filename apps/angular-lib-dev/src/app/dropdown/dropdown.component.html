@@ -53,11 +53,13 @@
         display="name"
         [texts]="texts"
         [(value)]="dropdownMultiValue2"
+        [searchable]="true"
+        [searchFilter]="searchFilter"
       >
         <ng-template nggDropdownOption let-option="option" let-index="index">
           <div>
             <div>{{ index }}. {{ option.name }}</div>
-            <div style="font-size: 0.8em">{{ option.kitchen }}</div>
+            <div style="font-size: 0.8em">{{ option.val.kitchen }}</div>
           </div>
         </ng-template>
       </ngg-dropdown>
@@ -123,7 +125,6 @@
     [options]="customOptions"
     useValue="val"
     display="name"
-    selectValue="val"
     [texts]="texts"
   ></ngg-dropdown>
   <ngg-dropdown
@@ -157,7 +158,6 @@
       [options]="(options$ | async)!"
       formControlName="country"
       display="name"
-      selectValue="value"
       [texts]="texts"
       [valid]="dropdown.valid && dropdown.touched"
       [invalid]="dropdown.invalid && dropdown.touched"
@@ -182,7 +182,6 @@
       [options]="(options$ | async)!"
       formControlName="otherCountries"
       display="name"
-      selectValue="value"
       multiSelect
       [texts]="texts"
       [valid]="dropdown.valid && dropdown.touched"

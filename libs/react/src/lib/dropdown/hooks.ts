@@ -2,8 +2,8 @@ import {
   createDropdown,
   AbstractDropdown,
   DropdownHandler,
-  DropdownOption,
-  DropdownTexts,
+  OnChange,
+  DropdownArgs,
 } from '@sebgroup/extract'
 import {
   HTMLAttributes,
@@ -12,22 +12,12 @@ import {
   useEffect,
   useState,
 } from 'react'
-import {IValidator} from "@sebgroup/extract";
+import { IValidator } from '@sebgroup/extract'
 
-interface HookArgs {
-  id?: string
-  texts?: DropdownTexts
-  options: DropdownOption[]
-  multiSelect?: boolean
-  searchable?: boolean
-  searchableProperties?: string[]
-  loop?: boolean
-  selectValue?: string
-  useValue?: string
-  display?: string
+interface HookArgs extends DropdownArgs {
   togglerRef: RefObject<HTMLElement>
   listboxRef: RefObject<HTMLElement>
-  onChange?: (o: DropdownOption) => void
+  onChange?: OnChange
   validator?: IValidator
 }
 
@@ -60,14 +50,14 @@ export const useDropdown = ({
   loop,
   multiSelect,
   searchable,
-  searchableProperties,
-  selectValue,
+  searchFilter,
+  compareWith,
   useValue,
   display,
   togglerRef,
   listboxRef,
   onChange,
-  validator
+  validator,
 }: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
@@ -104,15 +94,7 @@ export const useDropdown = ({
         className: o.classes?.join(' '),
         children: o[dropdown.display],
         selected: o.selected,
-        onClick: () => {
-          handler?.select(o).then(() => {
-            if (onChange) {
-              const result = options.find((item) => item.key === o.key)
-
-              result && onChange(result)
-            }
-          })
-        },
+        onClick: () => handler?.select(o),
       }))
       setListItems(newListItems)
     } else {
@@ -124,15 +106,7 @@ export const useDropdown = ({
         inputProps: {
           defaultChecked: o.selected,
           type: 'checkbox',
-          onChange: () => {
-            handler?.select(o, false).then(() => {
-
-              if (onChange) {
-                const result = options.find((item) => item.key === o.key)
-                result && onChange(result)
-              }
-            })
-          }
+          onClick: () => handler?.select(o, false),
         },
         spanProps: {
           children: o[dropdown.display],
@@ -164,14 +138,24 @@ export const useDropdown = ({
     handler?.update({ id, texts, options, loop, multiSelect })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, texts, options, loop, multiSelect, searchable, searchableProperties, selectValue, useValue, display])
+  }, [
+    id,
+    texts,
+    options,
+    loop,
+    multiSelect,
+    searchable,
+    searchFilter,
+    compareWith,
+    useValue,
+    display,
+  ])
 
   // When validator changes
   useEffect(() => {
     if (!dropdown) return
 
     if (validator) handler?.validate(validator)
-
   }, [validator])
 
   // Create dropdown handler
@@ -186,16 +170,17 @@ export const useDropdown = ({
             loop,
             multiSelect,
             searchable,
-            searchableProperties,
-            selectValue,
+            searchFilter,
+            compareWith,
             useValue,
             display,
-            validator
+            validator,
           },
           togglerRef.current,
           listboxRef.current,
           listboxRef.current,
-          (dd) => setDropdown(dd)
+          (dd) => setDropdown(dd),
+          (value) => onChange?.(value)
         )
       )
     }

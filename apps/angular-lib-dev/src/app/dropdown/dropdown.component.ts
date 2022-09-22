@@ -12,77 +12,87 @@ import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
 export class DropdownComponent {
   texts: DropdownTexts = {
     placeholder: 'Select',
-    searchPlaceholder: 'Search'
+    searchPlaceholder: 'Search',
   }
 
-  searchableProperties: string[]= ['kitchen'];
-
-  options: Array<DropdownOption> = [
+  options: DropdownOption[] = [
     {
-      key: 'Tacos',
+      label: 'Tacos',
       value: 'tacos',
     },
     {
-      key: 'Pizza',
+      label: 'Pizza',
       value: 'pizza',
     },
     {
-      key: 'Sushi',
+      label: 'Sushi',
       value: 'sushi',
     },
   ]
 
-  optionsWithInitial = [
+  optionsWithInitial: DropdownOption[] = [
     {
-      key: 'Tacos',
+      label: 'Tacos',
       value: 'tacos',
     },
     {
-      key: 'Pizza',
+      label: 'Pizza',
       value: 'pizza',
       selected: true,
     },
     {
-      key: 'Sushi',
+      label: 'Sushi',
       value: 'sushi',
     },
   ]
 
-  customOptionsInitial = [
+  customOptionsInitial: DropdownOption[] = [
     {
       name: 'Tacos',
-      val: 'tacos',
-      kitchen: 'mexican',
+      val: {
+        id: 'tacos',
+        kitchen: 'mexican',
+      },
     },
     {
       name: 'Pizza',
-      val: 'pizza',
+      val: {
+        id: 'pizza',
+        kitchen: 'italian',
+      },
       selected: true,
-      kitchen: 'italian',
     },
     {
       name: 'Sushi',
-      val: 'sushi',
+      val: {
+        id: 'sushi',
+        kitchen: 'japanese',
+      },
       selected: true,
-      kitchen: 'japanese',
     },
   ]
 
-  customOptions = [
+  customOptions: DropdownOption[] = [
     {
       name: 'Tacos',
-      val: 'tacos',
-      kitchen: 'mexican',
+      val: {
+        id: 'tacos',
+        kitchen: 'mexican',
+      },
     },
     {
       name: 'Pizza',
-      val: 'pizza',
-      kitchen: 'italian',
+      val: {
+        id: 'pizza',
+        kitchen: 'italian',
+      },
     },
     {
       name: 'Sushi',
-      val: 'sushi',
-      kitchen: 'japanese',
+      val: {
+        id: 'sushi',
+        kitchen: 'japanese',
+      },
     },
   ]
 
@@ -181,17 +191,17 @@ export class DropdownComponent {
     otherCountries: [null, [Validators.required, Validators.minLength(2)]],
   })
 
-  dropdownValue0: any = undefined
+  dropdownValue0: any = 'sushi'
   dropdownValue1: any = undefined
   dropdownValue2 = 'sushi'
 
   dropdownMultiValue0: any = undefined
   dropdownMultiValue1: any = undefined
-  dropdownMultiValue2 = 'sushi'
+  dropdownMultiValue2 = this.customOptions[2].val
 
   dropdownValue3: any = undefined
   dropdownValue4 = 'tacos'
-  dropdownValue5 = 'pizza'
+  dropdownValue5 = this.customOptions[1].val
   dropdownValue6 = undefined
 
   constructor(private _fb: FormBuilder) {}
@@ -202,6 +212,10 @@ export class DropdownComponent {
   }
 
   test($event: any) {
-    console.log($event)
+    console.log('Test', $event)
+  }
+
+  searchFilter(search: string, value: any) {
+    return value.kitchen.toLowerCase().includes(search.toLowerCase())
   }
 }

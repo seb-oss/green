@@ -19,11 +19,13 @@ import {
   AbstractDropdown,
   DropdownHandler,
   DropdownOption,
-  ExtendedDropdownOption,
+  DropdownOptionElement,
   ElementProps,
   DropdownArgs,
   dropdownValues,
   DropdownTexts,
+  CompareWith,
+  SearchFilter,
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 
@@ -187,13 +189,13 @@ export class NggDropdownComponent
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
   @Input() display?: string
-  @Input() selectValue?: string
   @Input() useValue?: string
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
   @Input() invalid?: boolean
-  @Input() searchableProperties?: string[]
+  @Input() compareWith?: CompareWith
+  @Input() searchFilter?: SearchFilter
 
   @Input() set multiSelect(value: string | boolean) {
     this._multiSelect = this.convertToBoolean(value)
@@ -230,7 +232,7 @@ export class NggDropdownComponent
   @ContentChild(NggDropdownOptionDirective)
   customOption?: NggDropdownOptionDirective
 
-  onChangeFn?: (value: any) => void
+  onChangeFn?: (value: unknown) => void
   onTouchedFn?: () => void
 
   dropdown?: AbstractDropdown
@@ -253,46 +255,10 @@ export class NggDropdownComponent
           this.toggler = dropdown.elements.toggler
           this.listbox = dropdown.elements.listbox
           this.fieldset = dropdown.elements.fieldset
-
-          // TODO: refactor state handling to only emit value changes when value changes (not on state change), perhaps using rxjs?
-          if (!dropdown.isMultiSelect) {
-            let selectedOption = this.dropdown.options?.find(
-              (option) => option.selected
-            )
-            if (
-              (selectedOption && !this._value) ||
-              (selectedOption &&
-                selectedOption[dropdown.useValue] !==
-                  this._value[dropdown.useValue])
-            ) {
-              const { attributes, classes, active, selected, ...data } =
-                selectedOption
-              selectedOption = dropdown.selectValue
-                ? data[dropdown.selectValue]
-                : data
-
-              this.updateValue(selectedOption)
-            }
-          } else {
-            const selectedOption = this.dropdown.options
-              ?.filter((option) => option.selected)
-              .map((option) => {
-                const { attributes, classes, active, selected, ...data } =
-                  option
-                return dropdown.selectValue ? data[dropdown.selectValue] : data
-              })
-
-            if (
-              (this._value !== undefined || selectedOption?.length > 0) &&
-              this._value !== [] &&
-              selectedOption &&
-              JSON.stringify(this._value) !== JSON.stringify(selectedOption)
-            ) {
-              this.updateValue(selectedOption)
-            }
-          }
-
           this.cd.detectChanges()
+        },
+        (value) => {
+          this.updateValue(value)
         }
       )
     }
@@ -315,20 +281,22 @@ export class NggDropdownComponent
     this.value = value
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: () => unknown): void {
     this.onChangeFn = fn
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouchedFn = fn
   }
 
-  trackByKey = (index: number, option: ExtendedDropdownOption): string => {
-    return option[''] || option.key
+  trackByKey = (index: number, option: DropdownOptionElement): string => {
+    return this.dropdown?.display
+      ? (option[this.dropdown.display] as string)
+      : option.label ?? JSON.stringify(option.value)
   }
 
-  search($event: any): void {
-    this.handler?.search($event.target.value)
+  search($event: Event): void {
+    this.handler?.search(($event.target as HTMLInputElement).value)
   }
 
   private get props(): DropdownArgs {
@@ -337,13 +305,13 @@ export class NggDropdownComponent
       texts: this.texts,
       useValue: this.useValue,
       display: this.display,
-      selectValue: this.selectValue,
       options: this.options,
       loop: this.loop,
       value: this.value,
       multiSelect: this.multiSelect,
       searchable: this.searchable,
-      searchableProperties: this.searchableProperties,
+      searchFilter: this.searchFilter,
+      compareWith: this.compareWith,
       onTouched: () => {
         this.onTouchedFn?.()
         this.touched.emit(true)
@@ -363,9 +331,8 @@ export class NggDropdownComponent
       if (this._value !== value && value !== undefined) {
         this._value = value
         const valueKey = <string>this.handler?.dropdown.useValue
-        const selected = this.handler?.dropdown?.options.find(
-          (option) =>
-            option[valueKey] === value[valueKey] || option[valueKey] === value
+        const selected = this.handler?.dropdown?.options.find((option) =>
+          this.dropdown?.compareWith(option[valueKey], value)
         )
         if (selected) this.handler?.select(selected)
       }

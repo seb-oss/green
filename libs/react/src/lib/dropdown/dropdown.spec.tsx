@@ -1,7 +1,6 @@
 import { act, render, RenderResult, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Dropdown, DropdownProps } from './dropdown'
-import button from "../form/button/button";
 
 const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
 jest.setTimeout(50000)
@@ -15,9 +14,9 @@ describe('Dropdown', () => {
   beforeEach(async () => {
     props = {
       options: [
-        { key: 'A', value: 1 },
-        { key: 'B', value: 2 },
-        { key: 'C', value: 3 },
+        { label: 'A', value: 1 },
+        { label: 'B', value: 2 },
+        { label: 'C', value: 3 },
       ],
     }
     component = render(<Dropdown {...props} />)

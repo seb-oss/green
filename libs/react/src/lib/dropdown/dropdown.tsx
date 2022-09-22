@@ -1,20 +1,9 @@
-import {DropdownOption, DropdownTexts} from '@sebgroup/extract'
-import {useEffect, useRef} from 'react'
+import { DropdownArgs, OnChange } from '@sebgroup/extract'
+import { useRef } from 'react'
 import { useDropdown } from './hooks'
-import {IValidator} from "@sebgroup/extract";
 
-export interface DropdownProps {
-  id?: string
-  texts?: DropdownTexts
-  options: DropdownOption[]
-  useValue?: string
-  display?: string
-  selectValue?: string
-  loop?: boolean
-  multiSelect?: boolean
-  searchable?: boolean
-  onChange?: (o: DropdownOption) => void
-  validator?: IValidator
+export interface DropdownProps extends DropdownArgs {
+  onChange?: OnChange
 }
 
 export const Dropdown = ({
@@ -23,14 +12,14 @@ export const Dropdown = ({
   loop,
   multiSelect,
   searchable,
-  selectValue,
+  searchFilter,
+  compareWith,
   useValue,
   display,
   texts,
   onChange,
-  validator
+  validator,
 }: DropdownProps) => {
-
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
 
@@ -41,14 +30,15 @@ export const Dropdown = ({
       loop,
       multiSelect,
       searchable,
-      selectValue,
+      searchFilter,
+      compareWith,
       useValue,
       display,
       togglerRef,
       listboxRef,
       texts,
       onChange,
-      validator
+      validator,
     })
 
   return (
@@ -88,7 +78,7 @@ export const Dropdown = ({
           </ul>
         )}
       </div>
-      { validator && <span className="form-info">{validator?.message}</span> }
+      {validator && <span className="form-info">{validator?.message}</span>}
     </div>
   )
 }
