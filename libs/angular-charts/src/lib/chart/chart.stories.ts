@@ -55,8 +55,9 @@ SimpleBar.args = {
       axis: {
         y: {
           label: 'Antal',
+          stepSize: 50
         },
-      },
+      }
     },
   },
 }
