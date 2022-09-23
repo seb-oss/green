@@ -57,6 +57,7 @@ SimpleBar.args = {
           label: 'Antal',
         },
       },
+      tooltipNumberFormat: value => `${value} kr`
     },
   },
 }
