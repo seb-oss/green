@@ -191,18 +191,18 @@ export class DropdownComponent {
     otherCountries: [null, [Validators.required, Validators.minLength(2)]],
   })
 
-  dropdownValue0: any = 'sushi'
-  dropdownValue1: any = undefined
-  dropdownValue2 = 'sushi'
+  dropdownValue0: string | undefined = 'sushi'
+  dropdownValue1: string | undefined
+  dropdownValue2: string | undefined = 'sushi'
 
-  dropdownMultiValue0: any = undefined
-  dropdownMultiValue1: any = undefined
-  dropdownMultiValue2 = [this.customOptions[2].val]
+  dropdownMultiValue0: string[] | undefined = undefined
+  dropdownMultiValue1: unknown[] | undefined = undefined
+  dropdownMultiValue2: unknown[] | undefined = [this.customOptions[2].val]
 
-  dropdownValue3: any = undefined
-  dropdownValue4 = 'tacos'
-  dropdownValue5 = this.customOptions[1].val
-  dropdownValue6 = undefined
+  dropdownValue3: string | undefined = undefined
+  dropdownValue4: string | undefined = 'tacos'
+  dropdownValue5: unknown[] | undefined = this.customOptions[1].val
+  dropdownValue6: unknown[] | undefined = undefined
 
   constructor(private _fb: FormBuilder) {}
 
@@ -211,15 +211,15 @@ export class DropdownComponent {
     console.log(this.validationForm.value)
   }
 
-  test($event: any) {
+  test($event: Event) {
     console.log('Test', $event)
   }
 
-  compareWith(o1: any, o2: any) {
+  compareWith(o1: { id: string }, o2: { id: string }) {
     return o1.id === o2.id
   }
 
-  searchFilter(search: string, value: any) {
+  searchFilter(search: string, value: { id: string; kitchen: string }) {
     return value.kitchen.toLowerCase().includes(search.toLowerCase())
   }
 }
