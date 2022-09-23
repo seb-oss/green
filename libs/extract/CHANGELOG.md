@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.23...@sebgroup/extract@1.0.0-beta.24) (2022-09-23)
+
+
+### Bug Fixes
+
+* **dropdown:** compareWith value array ([54861ab](https://github.com/sebgroup/green/commit/54861ab9d2983bacb80b90868d3765dd19d8bf57))
+
+
+
 # [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.22...@sebgroup/extract@1.0.0-beta.23) (2022-09-20)
 
 
