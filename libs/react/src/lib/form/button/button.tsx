@@ -19,14 +19,13 @@ export function Button({
   active = false,
   type = 'button',
 }: ButtonProps) {
-  const props: ButtonHTMLAttributes<HTMLButtonElement> = { type }
+  const props: ButtonHTMLAttributes<HTMLButtonElement> = { type, disabled }
   const classNames: string[] = []
   if (variant) classNames.push(variant)
   if (active) classNames.push('active')
- 
+
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
-  if (disabled) props.disabled = disabled
 
   return <button {...props}>{children}</button>
 }
