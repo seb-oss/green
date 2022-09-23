@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.23...@sebgroup/green-react@1.0.0-beta.24) (2022-09-23)
+
+
+### Features
+
+* Button (React) - add disabled property ([480d70f](https://github.com/sebgroup/green/commit/480d70f08ee43cc8ccd2897f70276588d563ef78))
+
+
+
 # [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.22...@sebgroup/green-react@1.0.0-beta.23) (2022-09-20)
 
 
