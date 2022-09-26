@@ -27,11 +27,9 @@ describe('billboard', () => {
           axes: {
             Foo: 'y',
           },
-        },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
+        }
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('parses ChartData with named x-axis', () => {
       const chartElement = '#foo'
@@ -68,11 +66,9 @@ describe('billboard', () => {
             },
             height: 10,
           },
-        },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
+        }
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('sets types from Chart to ChartData', () => {
       const chartElement = '#foo'
@@ -100,10 +96,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('makes ChartData type overrides Chart type', () => {
       const chartElement = '#foo'
@@ -131,10 +125,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y2 axis when defined in data', () => {
       const chartElement = '#foo'
@@ -165,10 +157,8 @@ describe('billboard', () => {
             show: true,
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('sets bar as default', () => {
       const chartElement = '#foo'
@@ -195,10 +185,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y base line if any value is negative', () => {
       const chartElement = '#foo'
@@ -225,15 +213,13 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
         grid: {
           y: {
             lines: [{ value: 0, class: 'base-line' }],
           },
         },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y base line if any value is negative', () => {
       const chartElement = '#foo'
@@ -260,15 +246,13 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
         grid: {
           y: {
             lines: [{ value: 0, class: 'base-line' }],
           },
         },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('hide y axis if hidden', () => {
       const chartElement = '#foo'
