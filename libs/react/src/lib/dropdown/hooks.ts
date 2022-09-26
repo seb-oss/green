@@ -45,6 +45,7 @@ interface HookResult {
 
 export const useDropdown = ({
   id,
+  value,
   texts,
   options,
   loop,
@@ -135,11 +136,24 @@ export const useDropdown = ({
   // When dropdown properties change
   useEffect(() => {
     if (!dropdown) return
-    handler?.update({ id, texts, options, loop, multiSelect })
-
+    handler?.update({
+      id,
+      value,
+      texts,
+      options,
+      loop,
+      multiSelect,
+      searchable,
+      searchFilter,
+      compareWith,
+      useValue,
+      display,
+      validator,
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     id,
+    value,
     texts,
     options,
     loop,
@@ -165,6 +179,7 @@ export const useDropdown = ({
         createDropdown(
           {
             id,
+            value,
             texts,
             options,
             loop,

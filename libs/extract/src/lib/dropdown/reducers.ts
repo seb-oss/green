@@ -76,13 +76,14 @@ export const create = ({
       selected: isSelected(option),
     }))
   }
+
   const options = extendOptions(_options, id)
-  const selected = options
-    ?.filter((option) => option.selected)
-    .map((option) => option[<string>display])
+  const selectedOptions = options.filter((o) => o.selected)
+  const displayValues = selectedOptions.map((option) => option[<string>display])
+  const values = selectedOptions.map((option) => option[useValue])
   const dropdown: Partial<AbstractDropdown> = {
     id,
-    value,
+    value: multiSelect ? values : values[0],
     texts: {
       close: texts?.close ?? 'Close',
       optionsDescription: texts?.optionsDescription ?? 'Options',
@@ -90,9 +91,9 @@ export const create = ({
       searchPlaceholder: texts?.searchPlaceholder ?? 'Search',
       selected: texts?.selected ?? 'selected',
       select:
-        selected?.length > 2
-          ? `${selected.length} ${texts?.selected} `
-          : selected?.join(', '),
+        displayValues?.length > 2
+          ? `${displayValues.length} ${texts?.selected} `
+          : displayValues?.join(', '),
     },
     elements: {
       toggler: {
