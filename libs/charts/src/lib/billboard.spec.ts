@@ -1,7 +1,6 @@
 import { ChartOptions, Chart, Axis } from 'billboard.js'
 import { ChartSettings, ChartProperties, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
-import { tmplTooltip } from './templates'
 
 describe('billboard', () => {
   describe('createOptions', () => {
@@ -313,6 +312,30 @@ describe('billboard', () => {
         },
       }
       expect(parsed.axis).toEqual(expected)
+    })
+    it('overrides tooltip number format', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
+        style: {
+          tooltipNumberFormat: value => `${value} kr`
+        }
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formattedNumber = (parsed.tooltip.format.value.bind({}))(100, undefined, undefined, undefined)
+      expect(formattedNumber).toEqual('100 kr')
+    })
+    it('does not override tooltip percentages', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
+        style: {
+          tooltipNumberFormat: value => `${value} kr`
+        }
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formattedNumber = (parsed.tooltip.format.value.bind({}))(100, 0.1, undefined, undefined)
+      expect(formattedNumber).toEqual('10%')
     })
   })
   describe('createInfo', () => {
