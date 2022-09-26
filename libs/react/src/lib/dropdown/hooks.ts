@@ -92,7 +92,7 @@ export const useDropdown = ({
       const newListItems: Props[] = dropdown.options.map((o) => ({
         ...(o.attributes as unknown as Props),
         className: o.classes?.join(' '),
-        children: o[dropdown.display],
+        children: o[dropdown.display] as string,
         selected: o.selected,
         onClick: () => handler?.select(o),
       }))
@@ -109,7 +109,7 @@ export const useDropdown = ({
           onClick: () => handler?.select(o, false),
         },
         spanProps: {
-          children: o[dropdown.display],
+          children: o[dropdown.display] as string,
         },
       }))
       const newMultiselect: MultiSelectProps = {
