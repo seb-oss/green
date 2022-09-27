@@ -306,4 +306,55 @@ describe('dropdown', () => {
       expect(handler.popper).toBe(popper)
     })
   })
+
+  describe('events', () => {
+    it('trigger OnChange on select', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      await handler.select(handler.dropdown.options[1])
+      expect(onChange).toHaveBeenCalledWith(2)
+      await handler.select(handler.dropdown.options[2])
+      expect(onChange).toHaveBeenCalledWith(3)
+
+      expect(onChange).toHaveBeenCalledTimes(3)
+    })
+    it('skip trigger OnChange for select on same value', async () => {
+      await handler.select(handler.dropdown.options[0])
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+    it('skip trigger OnChange on update if values does not differ', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await handler.update({
+        options: [
+          { key: 'A', value: 1, selected: true },
+          { key: 'B', value: 2 },
+          { key: 'C', value: 3 },
+        ],
+      })
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('trigger OnChange on update if values differ', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await handler.update({
+        options: [
+          { key: 'A', value: 1 },
+          { key: 'B', value: 2, selected: true },
+          { key: 'C', value: 3 },
+        ],
+      })
+      expect(onChange).toHaveBeenCalledWith(2)
+      expect(onChange).toHaveBeenCalledTimes(2)
+    })
+  })
 })

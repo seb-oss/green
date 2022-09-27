@@ -3,11 +3,11 @@ import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
 import { IValidator } from '../helperFunction'
 
-export type CompareWith<T = unknown> = (o1: T, o2: T) => boolean
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 
-export type SearchFilter<T = unknown> = (search: string, value: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
 
-export type OnChange<T = unknown> = (value: T) => void
+export type OnChange<T = any> = (value: T) => void
 
 export type DropdownListener = (dropdown: AbstractDropdown) => void
 
