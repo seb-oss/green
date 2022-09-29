@@ -61,7 +61,7 @@ const list: Array<IToggleSelector> = [
     iconPosition: 'right',
   },
   { value: '4', label: 'Four mississipi', disabled: true },
-  { value: '5', label: '', icon: icon },
+  { value: '5', label: 'Bad icon', icon: `<div>not an svg</div>` },
 ]
 
 const Template: Story<NggToggleSelectorComponent> = (

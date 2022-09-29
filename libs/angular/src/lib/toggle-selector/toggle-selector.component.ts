@@ -126,21 +126,33 @@ export class NggToggleSelectorComponent
   generateCheckedItems(): void {
     this.displayList =
       this.list &&
-      this.list.map((e) => {
+      this.list.map((e: IToggleSelector) => {
+        let _e: IToggleSelector = { ...e }
+
+        if (_e.icon) {
+          const domParser = new DOMParser()
+          const document = domParser.parseFromString(_e.icon, 'text/html')
+
+          if (document.body.firstChild?.nodeName !== 'svg') {
+            // set icon attribute to undefined when the parsed element is not an svg element
+            _e = { ...e, icon: undefined }
+          }
+        }
+
         if (this.multi) {
           let selected = false
 
           if (Array.isArray(this.value)) {
             selected = !!this.value.find(
-              (element: IToggleSelector) => element.value === e.value
+              (element: IToggleSelector) => element.value === _e.value
             )
           }
 
-          return { optionItem: e, selected } as IDisplayToggleSelector
+          return { optionItem: _e, selected } as IDisplayToggleSelector
         } else {
           const selected: boolean =
-            (this.value as IToggleSelector)?.value === e.value
-          return { optionItem: e, selected } as IDisplayToggleSelector
+            (this.value as IToggleSelector)?.value === _e.value
+          return { optionItem: _e, selected } as IDisplayToggleSelector
         }
       })
   }
