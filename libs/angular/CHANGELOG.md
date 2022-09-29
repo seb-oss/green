@@ -2,6 +2,66 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.23...@sebgroup/green-angular@1.0.0-beta.24) (2022-09-27)
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.22...@sebgroup/green-angular@1.0.0-beta.23) (2022-09-23)
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.21...@sebgroup/green-angular@1.0.0-beta.22) (2022-09-20)
+
+
+
+# [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.20...@sebgroup/green-angular@1.0.0-beta.21) (2022-09-20)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+
+
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.19...@sebgroup/green-angular@1.0.0-beta.20) (2022-08-31)
+
+
+
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.18...@sebgroup/green-angular@1.0.0-beta.19) (2022-08-29)
+
+
+### Bug Fixes
+
+* 🐛 initialize badge type ([b1d4aad](https://github.com/sebgroup/green/commit/b1d4aad748482130b43afea856068d6754d29823))
+* 🐛 lint issues ([8bafc63](https://github.com/sebgroup/green/commit/8bafc63975fcc5c0f3a64251f6901d346e3745a7))
+* 🐛 remove component styles ([f62a9d3](https://github.com/sebgroup/green/commit/f62a9d3cf80ecdd6c11b5212b02b842777f6a76a))
+* 🐛 remove div container ([e24b9e0](https://github.com/sebgroup/green/commit/e24b9e0ef647e597d29211a831742d0c2e60c46e))
+
+
+### Features
+
+* 🎸 new custom color and bg color inputs ([b16d0bb](https://github.com/sebgroup/green/commit/b16d0bb38274e5b6d7f4f1afd4f53e5d85f83482)), closes [#535](https://github.com/sebgroup/green/issues/535)
+
+
+
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.17...@sebgroup/green-angular@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.16...@sebgroup/green-angular@1.0.0-beta.17) (2022-08-15)
+
+
+### Features
+
+* **angular:** dropdown custom template ([7a40c35](https://github.com/sebgroup/green/commit/7a40c35b867a32a80671bc78057a243425836af5)), closes [#219](https://github.com/sebgroup/green/issues/219)
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.15...@sebgroup/green-angular@1.0.0-beta.16) (2022-07-18)
 
 

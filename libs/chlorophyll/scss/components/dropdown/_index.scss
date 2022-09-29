@@ -17,6 +17,11 @@ button[aria-haspopup='listbox'] {
     flex-direction: column;
   }
 
+  .hidden{
+    visibility: hidden;
+    display: none;
+  }
+
   // menu
   ul[role='menu'] {
     @include mixins.menu();
@@ -30,7 +35,6 @@ button[aria-haspopup='listbox'] {
   // dropdown multi-select
   .sg-fieldset-container {
     overflow-y: auto;
-    scroll-behavior: smooth;
     fieldset[role='listbox'][aria-multiselectable='true'] {
       @include mixins.multi-select();
     }

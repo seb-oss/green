@@ -2,6 +2,95 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.24...@sebgroup/extract@1.0.0-beta.25) (2022-09-27)
+
+
+### Bug Fixes
+
+* **dropdown:** revert generic to any ([732e933](https://github.com/sebgroup/green/commit/732e933118240ce543fe666cefbc2c3f36833b8f))
+* **dropdown:** sync value with selected options ([2637a95](https://github.com/sebgroup/green/commit/2637a95cb36a08fbb06a8f18926c3383b7803ea8))
+
+
+
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.23...@sebgroup/extract@1.0.0-beta.24) (2022-09-23)
+
+
+### Bug Fixes
+
+* **dropdown:** compareWith value array ([54861ab](https://github.com/sebgroup/green/commit/54861ab9d2983bacb80b90868d3765dd19d8bf57))
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.22...@sebgroup/extract@1.0.0-beta.23) (2022-09-20)
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.21...@sebgroup/extract@1.0.0-beta.22) (2022-09-19)
+
+
+### Bug Fixes
+
+* 🐛 Fixing search property looping ([71d22f0](https://github.com/sebgroup/green/commit/71d22f0921085628240baa7dbb7e9e4705130e0a)), closes [#473](https://github.com/sebgroup/green/issues/473)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+* 🧨 -
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.21...@sebgroup/extract@1.0.0-beta.22) (2022-09-19)
+
+
+### Bug Fixes
+
+* 🐛 Fixing search property looping ([71d22f0](https://github.com/sebgroup/green/commit/71d22f0921085628240baa7dbb7e9e4705130e0a)), closes [#473](https://github.com/sebgroup/green/issues/473)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+* 🧨 -
+
+
+
+# [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.20...@sebgroup/extract@1.0.0-beta.21) (2022-08-31)
+
+
+
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.19...@sebgroup/extract@1.0.0-beta.20) (2022-08-31)
+
+
+
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.18...@sebgroup/extract@1.0.0-beta.19) (2022-08-29)
+
+
+
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.17...@sebgroup/extract@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.16...@sebgroup/extract@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **dropdown:** scroll to option on arrow navigation ([02c7b2c](https://github.com/sebgroup/green/commit/02c7b2c2c22892fb0b9f6ea2dcbec18f39d006f0)), closes [#463](https://github.com/sebgroup/green/issues/463)
+* **extract:** id should not start with a number ([02039c5](https://github.com/sebgroup/green/commit/02039c5cbf2b33881b40e5b7fa9b7eba7c1e6813))
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.15...@sebgroup/extract@1.0.0-beta.16) (2022-07-18)
 
 

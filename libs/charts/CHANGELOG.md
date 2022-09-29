@@ -2,6 +2,48 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.23...@sebgroup/green-charts@1.0.0-beta.24) (2022-09-27)
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.22...@sebgroup/green-charts@1.0.0-beta.23) (2022-09-23)
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.21...@sebgroup/green-charts@1.0.0-beta.22) (2022-09-20)
+
+
+
+# [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.20...@sebgroup/green-charts@1.0.0-beta.21) (2022-09-20)
+
+
+
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.19...@sebgroup/green-charts@1.0.0-beta.20) (2022-08-31)
+
+
+
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.18...@sebgroup/green-charts@1.0.0-beta.19) (2022-08-29)
+
+
+
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.17...@sebgroup/green-charts@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.16...@sebgroup/green-charts@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **charts:** legend overflows ([481ba15](https://github.com/sebgroup/green/commit/481ba155546dad884e706b52ecfbcc52e32ff060))
+
+
+### Features
+
+* **charts:** axis labels ([55e7814](https://github.com/sebgroup/green/commit/55e781413c90c3dc477cff6d506ebf2a26b763e2))
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.15...@sebgroup/green-charts@1.0.0-beta.16) (2022-07-18)
 
 

@@ -10,7 +10,8 @@ import {
   loop,
   popper,
   keypress,
-  validate
+  validate,
+  search,
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -19,26 +20,30 @@ import {
   DropdownHandler,
   DropdownListener,
   DropdownArgs,
+  OnChange,
 } from './types'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { isMobileViewport$ } from '../common/viewport-size'
+import { getOptionScrollPosition } from './helper-functions'
+import { IValidator } from '../helperFunction'
 
 export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
   listbox: HTMLElement,
   fieldset: HTMLElement | undefined = undefined,
-  listener: DropdownListener
+  listener: DropdownListener,
+  onChange: OnChange
 ): DropdownHandler => {
-  const _handler: Partial<DropdownHandler> = {
+  const handler: DropdownHandler = {
     toggler,
     listbox,
     dropdown: create(init),
     isAlive: true,
+    onChange,
     onDestroy$: new Subject<void>(),
     onTouched: init.onTouched,
-  }
-  const handler = _handler as DropdownHandler
+  } as DropdownHandler
 
   handler.active = (isActive) =>
     update(handler, listener, active(handler.dropdown, isActive))
@@ -48,6 +53,8 @@ export const createDropdown = (
   handler.open = () => update(handler, listener, open(handler.dropdown))
   handler.close = () => update(handler, listener, close(handler.dropdown))
   handler.toggle = () => update(handler, listener, toggle(handler.dropdown))
+  handler.search = (seachInput: string) =>
+    update(handler, listener, search(handler.dropdown, seachInput))
   handler.select = (selection, selectOnClose = true) =>
     update(
       handler,
@@ -57,7 +64,8 @@ export const createDropdown = (
         : select(handler.dropdown, selection)
     )
   handler.update = (props) => update(handler, listener, create(props))
-  handler.validate = (validator: any) => update(handler, listener, validate(handler.dropdown, validator))
+  handler.validate = (validator: IValidator) =>
+    update(handler, listener, validate(handler.dropdown, validator))
 
   fromEvent(toggler, 'blur')
     .pipe(takeUntil(handler.onDestroy$))
@@ -88,6 +96,11 @@ export const createDropdown = (
             listener,
             keypress(handler.dropdown, key, event as KeyboardEvent)
           )
+
+          if (handler.dropdown.isOpen) {
+            scrollOptionIntoView(handler)
+          }
+
           break
         }
         case 'click':
@@ -134,6 +147,12 @@ const update = async (
 
   const oldState = handler.dropdown
   if (newState) handler.dropdown = newState
+
+  if (
+    JSON.stringify(oldState.value) !== JSON.stringify(handler.dropdown.value)
+  ) {
+    handler.onChange(handler.dropdown.value)
+  }
 
   if (oldState.isTouched !== handler.dropdown.isTouched) {
     handler.onTouched?.()
@@ -197,6 +216,25 @@ const lockBodyScroll = (handler: DropdownHandler, isMobile: boolean) => {
     handler.dropdown.isOpen && isMobile
       ? disableBodyScroll(scrollableListbox)
       : enableBodyScroll(scrollableListbox)
+  }
+}
+
+const scrollOptionIntoView = (handler: DropdownHandler) => {
+  const activeDescendant =
+    handler.dropdown.elements.listbox?.attributes?.['aria-activedescendant']
+
+  const container = handler.listbox.querySelector<HTMLElement>(
+    '[role="listbox"], .sg-fieldset-container'
+  )
+  const option = container?.querySelector<HTMLElement>('#' + activeDescendant)
+
+  if (container && option) {
+    container.scrollTop = getOptionScrollPosition(
+      option.offsetTop,
+      option.offsetHeight,
+      container.scrollTop,
+      container.offsetHeight
+    )
   }
 }
 

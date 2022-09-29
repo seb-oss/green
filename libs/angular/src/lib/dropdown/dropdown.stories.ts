@@ -29,7 +29,7 @@ export default {
 } as Meta<NggDropdownComponent>
 
 const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
-  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [useValue]="useValue" [display]="display" [selectValue]="selectValue" [id]="id"></ngg-dropdown>`,
+  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [id]="id"></ngg-dropdown>`,
   props: args,
 })
 
@@ -40,13 +40,11 @@ Select.args = {
   value: '',
   loop: true,
   multiSelect: false,
-  useValue: 'value',
-  display: 'key',
-  selectValue: undefined,
+  searchable: false,
   options: [
-    { key: 'Tacos', value: 'tacos' },
-    { key: 'Pizza', value: 'pizza' },
-    { key: 'Sushi', value: 'sushi' },
+    { label: 'Tacos', value: 'tacos' },
+    { label: 'Pizza', value: 'pizza' },
+    { label: 'Sushi', value: 'sushi' },
   ],
 }
 
@@ -57,13 +55,105 @@ MultiSelect.args = {
   value: '',
   loop: true,
   multiSelect: true,
-  useValue: 'value',
+  searchable: false,
   display: 'name',
-  selectValue: undefined,
   options: [
     { name: 'Tacos', value: 'tacos' },
     { name: 'Pizza', value: 'pizza' },
     { name: 'Sushi', value: 'sushi' },
+  ],
+}
+
+export const Searchable = Template.bind({})
+Searchable.args = {
+  id: '',
+  texts: { placeholder: 'Select meal(s)', searchPlaceholder: 'Search meal' },
+  value: '',
+  loop: true,
+  multiSelect: false,
+  searchable: true,
+  display: 'name',
+  options: [
+    { name: 'Tacos', value: 'tacos' },
+    { name: 'Pizza', value: 'pizza' },
+    { name: 'Sushi', value: 'sushi' },
+    { name: 'Ramen', value: 'ramen' },
+    { name: 'Tori Ramen', value: 'tori' },
+    { name: 'Tokyo Ramen', value: 'tokyo' },
+    { name: 'Kyoto Ramen', value: 'kyoto' },
+    { name: 'Sriracha Ramen', value: 'sriracha' },
+    { name: 'Kimchi Ramen', value: 'kimchi' },
+    { name: 'Hakodate Ramen', value: 'hakodate' },
+  ],
+}
+
+const CustomOptionTemplate: Story<NggDropdownComponent> = (
+  args: NggDropdownComponent
+) => {
+  args.compareWith = (o1: any, o2: any) => o1.id === o2.id
+  args.searchFilter = (search: string, value: any) =>
+    ['kitchen', 'id'].some((key) =>
+      value[key].toLowerCase().includes(search.toLowerCase())
+    )
+  return {
+    component: NggDropdownComponent,
+    template: `
+    <ngg-dropdown 
+      [texts]="texts" 
+      [options]="options" 
+      [(value)]="value" 
+      [loop]="loop" 
+      [multiSelect]="multiSelect" 
+      [searchable]="searchable" 
+      [searchFilter]="searchFilter" 
+      [compareWith]="compareWith" 
+      [useValue]="useValue" 
+      [display]="display" 
+      [id]="id">
+      <ng-template nggDropdownOption let-option="option" let-index="index">
+        <div>
+          <div>{{ index }}. {{ option.name }}</div>
+          <div style="font-size: 0.8em">{{ option.val.kitchen }}</div>
+        </div>
+      </ng-template>
+    </ngg-dropdown>
+    `,
+    props: args,
+  }
+}
+
+export const CustomOption = CustomOptionTemplate.bind({})
+CustomOption.args = {
+  id: '',
+  texts: { placeholder: 'Select meal(s)' },
+  value: '',
+  loop: true,
+  multiSelect: true,
+  searchable: true,
+  useValue: 'val',
+  display: 'name',
+  options: [
+    {
+      name: 'Tacos',
+      val: {
+        id: 'tacos',
+        kitchen: 'mexican',
+      },
+    },
+    {
+      name: 'Pizza',
+      val: {
+        id: 'pizza',
+        kitchen: 'italian',
+      },
+    },
+    {
+      name: 'Sushi',
+      val: {
+        id: 'sushi',
+        kitchen: 'japanese',
+      },
+    },
   ],
 }
 
@@ -76,83 +166,83 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
 
   const options$ = of([
     {
-      key: 'Sweden',
+      label: 'Sweden',
       value: 'sweden',
     },
     {
-      key: 'Denmark',
+      label: 'Denmark',
       value: 'denmark',
     },
     {
-      key: 'Finland',
+      label: 'Finland',
       value: 'Finland',
     },
     {
-      key: 'Norway',
+      label: 'Norway',
       value: 'norway',
     },
     {
-      key: 'England',
+      label: 'England',
       value: 'england',
     },
     {
-      key: 'Germany',
+      label: 'Germany',
       value: 'germany',
     },
     {
-      key: 'Estonia',
+      label: 'Estonia',
       value: 'estonia',
     },
     {
-      key: 'Lithuania',
+      label: 'Lithuania',
       value: 'lithuania',
     },
     {
-      key: 'Belarus',
+      label: 'Belarus',
       value: 'belarus',
     },
     {
-      key: 'Latvia',
+      label: 'Latvia',
       value: 'latvia',
     },
     {
-      key: 'Greece',
+      label: 'Greece',
       value: 'greece',
     },
     {
-      key: 'Italy',
+      label: 'Italy',
       value: 'italy',
     },
     {
-      key: 'Austria',
+      label: 'Austria',
       value: 'austria',
     },
     {
-      key: 'Switzerland',
+      label: 'Switzerland',
       value: 'switzerland',
     },
     {
-      key: 'Netherlands',
+      label: 'Netherlands',
       value: 'netherlands',
     },
     {
-      key: 'Belgium',
+      klabeley: 'Belgium',
       value: 'belgium',
     },
     {
-      key: 'France',
+      label: 'France',
       value: 'france',
     },
     {
-      key: 'Spain',
+      label: 'Spain',
       value: 'spain',
     },
     {
-      key: 'Portugal',
+      label: 'Portugal',
       value: 'portugal',
     },
     {
-      key: 'Poland',
+      label: 'Poland',
       value: 'poland',
     },
   ]).pipe(delay(3000))

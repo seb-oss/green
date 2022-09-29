@@ -19,29 +19,30 @@ Dropdown Component
     loop: true,
     options: [
       {
-        key: 'Really long option value 1',
+        label: 'Really long option value 1',
         value: 1,
       },
       {
-        key: 'Really long option value 2',
+        label: 'Really long option value 2',
         value: 2,
       },
       {
-        key: 'Really long option value 3',
+        label: 'Really long option value 3',
         value: 3,
       },
     ],
-    display: 'key',
     useValue: 'value',
-    selectValue: undefined,
     multiSelect: false,
+    searchable: false,
     texts: {
       selected: 'selected',
       placeholder: 'Select',
       close: 'Close',
-      optionsDescription: 'Options'
+      optionsDescription: 'Options',
     },
-    onChange: (value) => {console.log(value)}
+    onChange: (value) => {
+      console.log('OnChange', value)
+    },
   }}
 >
   {Template.bind({})}
@@ -55,9 +56,9 @@ Code preview for Dropdown component
   <div style={{ height: '200px' }}>
     <Dropdown
       options={[
-        { key: 'Option 1', value: 1 },
-        { key: 'Option 2', value: 2 },
-        { key: 'Option 3', value: 3 },
+        { label: 'Option 1', value: 1 },
+        { label: 'Option 2', value: 2 },
+        { label: 'Option 3', value: 3 },
       ]}
     ></Dropdown>
   </div>

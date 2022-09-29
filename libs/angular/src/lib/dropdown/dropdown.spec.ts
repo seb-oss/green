@@ -17,9 +17,9 @@ describe('Dropdown', () => {
   beforeEach(async () => {
     props = {
       options: [
-        { key: 'A', value: 1 },
-        { key: 'B', value: 2 },
-        { key: 'C', value: 3 },
+        { label: 'A', value: 1 },
+        { label: 'B', value: 2 },
+        { label: 'C', value: 3 },
       ],
     }
     component = await render(NggDropdownComponent, {

@@ -2,6 +2,97 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.25...@sebgroup/chlorophyll@1.0.0-beta.26) (2022-09-27)
+
+
+
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.24...@sebgroup/chlorophyll@1.0.0-beta.25) (2022-09-23)
+
+
+
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.23...@sebgroup/chlorophyll@1.0.0-beta.24) (2022-09-20)
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.22...@sebgroup/chlorophyll@1.0.0-beta.23) (2022-09-19)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.22...@sebgroup/chlorophyll@1.0.0-beta.23) (2022-09-19)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.21...@sebgroup/chlorophyll@1.0.0-beta.22) (2022-08-31)
+
+
+
+# [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.20...@sebgroup/chlorophyll@1.0.0-beta.21) (2022-08-31)
+
+
+
+# [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.19...@sebgroup/chlorophyll@1.0.0-beta.20) (2022-08-31)
+
+
+### Bug Fixes
+
+* 🐛 fizes aurtoprefixer warnings ([8ef81ad](https://github.com/sebgroup/green/commit/8ef81ad224b5feedef26861c4a0373f0e847e59f))
+
+
+
+# [1.0.0-beta.19](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.18...@sebgroup/chlorophyll@1.0.0-beta.19) (2022-08-29)
+
+
+### Bug Fixes
+
+* 🐛 remove inline styles ([e97db73](https://github.com/sebgroup/green/commit/e97db737838ee24b5406229400b6a70047a3aa04))
+* **slide-toggle:** correct `aria-role` -> `role` ([b157bf4](https://github.com/sebgroup/green/commit/b157bf40a8e8aa3e22fbd3792ccbc46bc4e76d32))
+* **slide-toggle:** remove hover effect for touch devices ([2e56e35](https://github.com/sebgroup/green/commit/2e56e351f92853c0a28ad55e75c11fbbe2a1da86))
+
+
+### Features
+
+* **slide-toggle:** add base styles (WIP) ([2a9eca4](https://github.com/sebgroup/green/commit/2a9eca4933424755a3e1583f92e7b7a7ce432236))
+* **slide-toggle:** add Canvas section ([3e46119](https://github.com/sebgroup/green/commit/3e46119ba15d27d2ae8a0af171457104b09644b3))
+* **slide-toggle:** add focus styling ([a6d4180](https://github.com/sebgroup/green/commit/a6d4180526b1b837b1f92a67242c141f2bf81600))
+* **slide-toggle:** add hover states and transition ([79f03f6](https://github.com/sebgroup/green/commit/79f03f6459f7bff8d3cbeffa08a27c0e15af48f6))
+* **slide-toggle:** add mobile styles ([727e154](https://github.com/sebgroup/green/commit/727e1549dc7b475e9ba3e7cb65245017d24adca0))
+
+
+
+# [1.0.0-beta.18](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.17...@sebgroup/chlorophyll@1.0.0-beta.18) (2022-08-15)
+
+
+
+# [1.0.0-beta.17](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.16...@sebgroup/chlorophyll@1.0.0-beta.17) (2022-08-15)
+
+
+### Bug Fixes
+
+* **chlorophyll:** form component responsive sizes ([e0295da](https://github.com/sebgroup/green/commit/e0295daa121934a19526b199d6aaaa22b3766a29)), closes [#554](https://github.com/sebgroup/green/issues/554)
+* **dropdown:** scroll to option on arrow navigation ([02c7b2c](https://github.com/sebgroup/green/commit/02c7b2c2c22892fb0b9f6ea2dcbec18f39d006f0)), closes [#463](https://github.com/sebgroup/green/issues/463)
+
+
+
 # [1.0.0-beta.16](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.15...@sebgroup/chlorophyll@1.0.0-beta.16) (2022-07-18)
 
 

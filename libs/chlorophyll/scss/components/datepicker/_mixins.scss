@@ -79,7 +79,7 @@ $weekend-background: $background;
   // use full width on small screens
   @include common.media-breakpoint-down(sm) {
     width: 100%;
-    max-height: -webkit-fill-available;
+    max-height: stretch;
   }
 
   header {

@@ -95,8 +95,10 @@
   font: inherit;
   justify-content: flex-end;
   max-width: fit-content;
+  max-width: -moz-fit-content;
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   white-space: nowrap;
 }
 
@@ -110,6 +112,7 @@
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
     width: fit-content;
+    width: -moz-fit-content;
   }
 
   > input,
@@ -131,6 +134,8 @@
 /* form text */
 @mixin add-form-text() {
   border: solid transparent 1px; // correct vertical alignment
+  min-height: 2.75rem;
   display: flex;
+  align-items: center;
   font: inherit;
 }

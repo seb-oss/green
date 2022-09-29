@@ -1,5 +1,5 @@
-import {NggDropdownComponent} from "./dropdown.component";
-import {Story} from '@storybook/addon-docs'
+import { NggDropdownComponent } from './dropdown.component'
+import { Story } from '@storybook/addon-docs'
 
 # Dropdown
 
@@ -16,17 +16,14 @@ import { NggDropdownModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    NggDropdownModule
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, NggDropdownModule],
   exports: [],
 })
 export class AppModule {}
 ```
 
 ## Dropdown Select
+
 NggDropdownComponent is a form control for selecting a value from a set of options.
 
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
@@ -35,16 +32,21 @@ and supports all the form directives from the core FormsModule (NgModel) and Rea
 <Story id="components-dropdown--select" />
 
 ## Reactive forms
+
 We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
 if you're dealing with complex or dynamic forms.
 
 ```html
 <form [formGroup]="dropdownForm">
-  <ngg-dropdown formControlName="dropdownSelect" [options]="options"></ngg-dropdown>
+  <ngg-dropdown
+    formControlName="dropdownSelect"
+    [options]="options"
+  ></ngg-dropdown>
 </form>
 ```
 
 ## Template-driven forms
+
 Another approach is to use <a href="https://angular.io/guide/forms" target="_blank">Template-driven forms</a>.
 
 ```html
@@ -54,43 +56,85 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 ```
 
 ## 2-way binding without forms
-If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
 
+If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
 
 ```html
 <ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
 ```
 
 ## Options
-The dropdown options should be provided as an array of objects. When a user chooses an option the object will be selected.
+
+The dropdown options should be provided as an array of objects with label and value. When a user chooses an option the value will be selected.
 
 ```typescript
 const options = [
-    { key: 'Tacos', value: 'tacos' },
-    { key: 'Pizza', value: 'pizza' },
-    { key: 'Sushi', value: 'sushi', selected: true }
-  ]
+  { label: 'Tacos', value: 'tacos' },
+  { label: 'Pizza', value: 'pizza' },
+  { label: 'Sushi', value: 'sushi', selected: true },
+]
 ```
-Set an initial value by assigning the option `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
 
-By default, the dropdown will look for a key and value pair for the data (`key` property will be used as display value when selected). It's possible to use any object and bind different keys to for both display value and as selected value. The following inputs can be set to alter the options.
+Set an initial value by assigning the `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
 
-|Input (attribute) |Description|Default|
-|:--------|:----------|:------|
-|selectValue|If specified, the value of this key will be emitted when option is selected instead of object. | n/a |
-|useValue|Which key to use as value.|`value`|
-|display|Which key to use as display value when selected and in options list.|`key`|
+By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
+
+| Input (attribute) | Description                                                          | Default |
+| :---------------- | :------------------------------------------------------------------- | :------ |
+| useValue          | Which key to use as value.                                           | `value` |
+| display           | Which key to use as display value when selected and in options list. | `label` |
+
+The value does not have to be a primitive value, it can be assigned an object but it requires that a `compareWith` function is provided to uniquely identify each object. Eg:
+
+```typescript
+const options = [
+  {
+    label: 'Tacos',
+    value: {
+      id: 'tacos',
+      kitchen: 'mexican',
+    },
+  },
+  {
+    label: 'Pizza',
+    value: {
+      id: 'pizza',
+      kitchen: 'italian',
+    },
+  },
+  {
+    label: 'Sushi',
+    value: {
+      id: 'sushi',
+      kitchen: 'japanese',
+    },
+  },
+]
+
+const compareWith = (o1: any, o2: any): boolean => {
+  return o1.id === o2.id
+}
+```
+
+```html
+<ngg-dropdown
+  [(value)]="selected"
+  [options]="options"
+  [compareWith]="compareWith"
+></ngg-dropdown>
+```
 
 ## Texts and placeholder
 
 Custom texts can be set using the texts input which takes an object with the following keys.
 
-|Text|Description|Default|
-|:--------|:----------|:------|
-|selected|Used when multiple items are selected e.g. 5 selected.|`selected`|
-|placeholder|Text to display when no option is selected.|`Select`|
-|close|Text for close button displayed on mobiles.|`Close`|
-|optionsDescription|Text to describe options.|`Options`|
+| Text               | Description                                            | Default    |
+| :----------------- | :----------------------------------------------------- | :--------- |
+| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
+| placeholder        | Text to display when no option is selected.            | `Select`   |
+| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
+| close              | Text for close button displayed on mobiles.            | `Close`    |
+| optionsDescription | Text to describe options.                              | `Options`  |
 
 ## Multi select
 
@@ -98,13 +142,54 @@ Just add `multiSelect` to add support for multi select.
 
 ```html
 <form [formGroup]="dropdownForm">
-  <ngg-dropdown formControlName="dropdownSelect" [options]="options" multiSelect></ngg-dropdown>
+  <ngg-dropdown
+    formControlName="dropdownSelect"
+    [options]="options"
+    multiSelect
+  ></ngg-dropdown>
 </form>
 ```
 
 <Story id="components-dropdown--multi-select" />
 
+## Searchable
 
+For search functionality add `searchable`. By default search will filter on 'display' provided to dropdown.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown
+    searchable
+    formControlName="dropdownSelect"
+    [options]="options"
+  ></ngg-dropdown>
+</form>
+```
+
+<Story id="components-dropdown--searchable" />
+
+## Custom option template
+
+Use an ng-template with the nggDropdownOption directive to provide the dropdown list with an alternative template for the list.
+
+```html
+<ngg-dropdown searchFilter="searchFilter" ...>
+  <ng-template nggDropdownOption let-option="option" let-index="index">
+    <div>
+      <div>{{ index }}. {{ option.name }}</div>
+      <div style="font-size: 0.8em">{{ option.kitchen }}</div>
+    </div>
+  </ng-template>
+</ngg-dropdown>
+```
+
+<Story id="components-dropdown--custom-option" />
+
+To be able to search in custom properties, you should provide an a search filter function.
+
+```typescript
+const searchFilter: (search, value) => ['kitchen', 'id'].some((key) => value[key].toLowerCase().includes(search.toLowerCase())),
+```
 
 ## Example usage in reactive form
 
@@ -112,8 +197,8 @@ Below is an example of how the component can be used with reactive forms and val
 
 <Story id="components-dropdown--form" />
 
-
 ### Markup
+
 ```html
 <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
   <div class="form-group" *ngIf="validationForm.get('country') as dropdown">

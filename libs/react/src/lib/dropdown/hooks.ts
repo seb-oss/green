@@ -2,8 +2,8 @@ import {
   createDropdown,
   AbstractDropdown,
   DropdownHandler,
-  DropdownOption,
-  DropdownTexts,
+  OnChange,
+  DropdownArgs,
 } from '@sebgroup/extract'
 import {
   HTMLAttributes,
@@ -12,20 +12,12 @@ import {
   useEffect,
   useState,
 } from 'react'
-import {IValidator} from "@sebgroup/extract";
+import { IValidator } from '@sebgroup/extract'
 
-interface HookArgs {
-  id?: string
-  texts?: DropdownTexts
-  options: DropdownOption[]
-  multiSelect?: boolean
-  loop?: boolean
-  selectValue?: string
-  useValue?: string
-  display?: string
+interface HookArgs extends DropdownArgs {
   togglerRef: RefObject<HTMLElement>
   listboxRef: RefObject<HTMLElement>
-  onChange?: (o: DropdownOption) => void
+  onChange?: OnChange
   validator?: IValidator
 }
 
@@ -53,17 +45,20 @@ interface HookResult {
 
 export const useDropdown = ({
   id,
+  value,
   texts,
   options,
   loop,
   multiSelect,
-  selectValue,
+  searchable,
+  searchFilter,
+  compareWith,
   useValue,
   display,
   togglerRef,
   listboxRef,
   onChange,
-  validator
+  validator,
 }: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
@@ -98,17 +93,9 @@ export const useDropdown = ({
       const newListItems: Props[] = dropdown.options.map((o) => ({
         ...(o.attributes as unknown as Props),
         className: o.classes?.join(' '),
-        children: o[dropdown.display],
+        children: o[dropdown.display] as string,
         selected: o.selected,
-        onClick: () => {
-          handler?.select(o).then(() => {
-            if (onChange) {
-              const result = options.find((item) => item.key === o.key)
-
-              result && onChange(result)
-            }
-          })
-        },
+        onClick: () => handler?.select(o),
       }))
       setListItems(newListItems)
     } else {
@@ -120,18 +107,10 @@ export const useDropdown = ({
         inputProps: {
           defaultChecked: o.selected,
           type: 'checkbox',
-          onChange: () => {
-            handler?.select(o, false).then(() => {
-
-              if (onChange) {
-                const result = options.find((item) => item.key === o.key)
-                result && onChange(result)
-              }
-            })
-          }
+          onClick: () => handler?.select(o, false),
         },
         spanProps: {
-          children: o[dropdown.display],
+          children: o[dropdown.display] as string,
         },
       }))
       const newMultiselect: MultiSelectProps = {
@@ -157,17 +136,40 @@ export const useDropdown = ({
   // When dropdown properties change
   useEffect(() => {
     if (!dropdown) return
-    handler?.update({ id, texts, options, loop, multiSelect })
-
+    handler?.update({
+      id,
+      value,
+      texts,
+      options,
+      loop,
+      multiSelect,
+      searchable,
+      searchFilter,
+      compareWith,
+      useValue,
+      display,
+      validator,
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, texts, options, loop, multiSelect, selectValue, useValue, display])
+  }, [
+    id,
+    value,
+    texts,
+    options,
+    loop,
+    multiSelect,
+    searchable,
+    searchFilter,
+    compareWith,
+    useValue,
+    display,
+  ])
 
   // When validator changes
   useEffect(() => {
     if (!dropdown) return
 
     if (validator) handler?.validate(validator)
-
   }, [validator])
 
   // Create dropdown handler
@@ -177,19 +179,23 @@ export const useDropdown = ({
         createDropdown(
           {
             id,
+            value,
             texts,
             options,
             loop,
             multiSelect,
-            selectValue,
+            searchable,
+            searchFilter,
+            compareWith,
             useValue,
             display,
-            validator
+            validator,
           },
           togglerRef.current,
           listboxRef.current,
           listboxRef.current,
-          (dd) => setDropdown(dd)
+          (dd) => setDropdown(dd),
+          (value) => onChange?.(value)
         )
       )
     }
