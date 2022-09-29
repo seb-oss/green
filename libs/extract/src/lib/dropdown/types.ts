@@ -13,7 +13,7 @@ export type DropdownListener = (dropdown: AbstractDropdown) => void
 
 export interface DropdownOption {
   label?: string
-  value?: unknown
+  value?: any
   selected?: boolean
   [key: string]: any
 }
@@ -46,7 +46,7 @@ export interface ElementProps {
 
 export interface AbstractDropdown {
   id: string
-  value: unknown
+  value: any
   texts: DropdownTexts
   isActive: boolean
   isOpen: boolean
@@ -74,7 +74,7 @@ export interface DropdownArgs {
   display?: string // option key to display
   loop?: boolean
   texts?: DropdownTexts
-  value?: unknown
+  value?: any
   multiSelect?: boolean
   searchable?: boolean
   onTouched?: () => void
