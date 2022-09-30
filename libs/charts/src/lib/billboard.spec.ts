@@ -330,6 +330,56 @@ describe('billboard', () => {
       }
       expect(parsed.axis).toEqual(expected)
     })
+    it('add tick config if ticksCount is specified in style', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [1], axis: 'y2' }],
+        style: {
+          axis: {
+            y2: {
+              show: false,
+              ticksCount: 5
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        y2: {
+          show: false,
+          tick: {
+            count: 5,
+            stepSize: null
+          }
+        },
+      }
+      expect(parsed.axis).toEqual(expected)
+    })
+    it('add tick config if stepSize is specified in style', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [1], axis: 'y2' }],
+        style: {
+          axis: {
+            y2: {
+              show: false,
+              stepSize: 5
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        y2: {
+          show: false,
+          tick: {
+            count: null,
+            stepSize: 5
+          }
+        },
+      }
+      expect(parsed.axis).toEqual(expected)
+    })
   })
   describe('createInfo', () => {
     let settings: ChartSettings

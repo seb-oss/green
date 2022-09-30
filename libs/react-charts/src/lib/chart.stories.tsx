@@ -24,6 +24,13 @@ SimpleBar.args = {
       'Aktiverade prenumerationer',
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
+    style: {
+      axis: {
+        y: {
+          stepSize: 50
+        }
+      }
+    }
   },
 }
 
