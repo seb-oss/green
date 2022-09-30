@@ -153,7 +153,6 @@ export const useDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     id,
-    value,
     texts,
     options,
     loop,

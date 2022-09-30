@@ -8,6 +8,7 @@ export interface DropdownProps extends DropdownArgs {
 
 export const Dropdown = ({
   id,
+  value,
   options,
   loop,
   multiSelect,
@@ -26,6 +27,7 @@ export const Dropdown = ({
   const { dropdown, listboxProps, togglerProps, listItems, multiSelectProps } =
     useDropdown({
       id,
+      value,
       options,
       loop,
       multiSelect,
