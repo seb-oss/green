@@ -46,7 +46,8 @@ export interface ChartStyle {
       }
   point?: {
     show?: boolean | 'focus'
-  }
+  },
+  tooltipNumberFormat?: (value: number) => string
 }
 
 interface Tick {

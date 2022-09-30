@@ -57,7 +57,8 @@ SimpleBar.args = {
           label: 'Antal',
           stepSize: 50
         },
-      }
+      },
+      tooltipNumberFormat: value => `${value} st`
     },
   },
 }

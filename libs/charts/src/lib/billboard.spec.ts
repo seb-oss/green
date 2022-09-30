@@ -1,7 +1,6 @@
 import { ChartOptions, Chart, Axis } from 'billboard.js'
 import { ChartSettings, ChartProperties, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
-import { tmplTooltip } from './templates'
 
 describe('billboard', () => {
   describe('createOptions', () => {
@@ -27,11 +26,9 @@ describe('billboard', () => {
           axes: {
             Foo: 'y',
           },
-        },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
+        }
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('parses ChartData with named x-axis', () => {
       const chartElement = '#foo'
@@ -68,11 +65,9 @@ describe('billboard', () => {
             },
             height: 10,
           },
-        },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
+        }
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('sets types from Chart to ChartData', () => {
       const chartElement = '#foo'
@@ -100,10 +95,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('makes ChartData type overrides Chart type', () => {
       const chartElement = '#foo'
@@ -131,10 +124,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y2 axis when defined in data', () => {
       const chartElement = '#foo'
@@ -165,10 +156,8 @@ describe('billboard', () => {
             show: true,
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('sets bar as default', () => {
       const chartElement = '#foo'
@@ -195,10 +184,8 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y base line if any value is negative', () => {
       const chartElement = '#foo'
@@ -225,15 +212,13 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
         grid: {
           y: {
             lines: [{ value: 0, class: 'base-line' }],
           },
         },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('adds y base line if any value is negative', () => {
       const chartElement = '#foo'
@@ -260,15 +245,13 @@ describe('billboard', () => {
             Bar: 'y',
           },
         },
-        legend: { show: false },
-        tooltip: { contents: { template: tmplTooltip } },
         grid: {
           y: {
             lines: [{ value: 0, class: 'base-line' }],
           },
         },
       }
-      expect(parsed).toEqual(expected)
+      expect(parsed).toMatchObject(expected)
     })
     it('hide y axis if hidden', () => {
       const chartElement = '#foo'
@@ -329,6 +312,30 @@ describe('billboard', () => {
         },
       }
       expect(parsed.axis).toEqual(expected)
+    })
+    it('overrides tooltip number format', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
+        style: {
+          tooltipNumberFormat: value => `${value} kr`
+        }
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formattedNumber = (parsed.tooltip.format.value.bind({}))(100, undefined, undefined, undefined)
+      expect(formattedNumber).toEqual('100 kr')
+    })
+    it('does not override tooltip percentages', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
+        style: {
+          tooltipNumberFormat: value => `${value} kr`
+        }
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formattedNumber = (parsed.tooltip.format.value.bind({}))(100, 0.1, undefined, undefined)
+      expect(formattedNumber).toEqual('10%')
     })
     it('add tick config if ticksCount is specified in style', () => {
       const chartElement = '#foo'
