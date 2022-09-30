@@ -55,6 +55,7 @@ SimpleBar.args = {
       axis: {
         y: {
           label: 'Antal',
+          stepSize: 50
         },
       },
       tooltipNumberFormat: value => `${value} st`

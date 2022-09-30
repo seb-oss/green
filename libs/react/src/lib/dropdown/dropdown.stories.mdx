@@ -18,21 +18,10 @@ Dropdown Component
   args={{
     loop: true,
     options: [
-      {
-        label: 'Really long option value 1',
-        value: 1,
-      },
-      {
-        label: 'Really long option value 2',
-        value: 2,
-      },
-      {
-        label: 'Really long option value 3',
-        value: 3,
-      },
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
     ],
-    useValue: 'value',
-    selectValue: undefined,
     multiSelect: false,
     searchable: false,
     texts: {
@@ -49,39 +38,73 @@ Dropdown Component
   {Template.bind({})}
 </Story>
 
-## Dropdown
+## Options
 
-Code preview for Dropdown component
+The dropdown options should be provided as an array of objects with label and value. When a user chooses an option the value will be selected and emitted to onChange.
+
+```typescript
+const options = [
+  { label: 'Tacos', value: 'tacos' },
+  { label: 'Pizza', value: 'pizza' },
+  { label: 'Sushi', value: 'sushi', selected: true },
+]
+```
+
+Provide an initial value by assigning the `value` property of the dropdown or declare the optional `selected?: boolean` to individual options as in the example above.
+
+By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
+
+| Input (attribute) | Description                                                          | Default |
+| :---------------- | :------------------------------------------------------------------- | :------ |
+| useValue          | Which key to use as value.                                           | `value` |
+| display           | Which key to use as display value when selected and in options list. | `label` |
+
+## Value Object
+
+Dropdown option values can even be an object, but not that it requires a `compareWith` function to uniquely identify each object. Eg:
 
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
       options={[
-        { label: 'Option 1', value: 1 },
-        { label: 'Option 2', value: 2 },
-        { label: 'Option 3', value: 3 },
+        { label: 'Tacos', value: { id: 'tacos', kitchen: 'mexican' } },
+        { label: 'Pizza', value: { id: 'pizza', kitchen: 'italian' } },
+        { label: 'Sushi', value: { id: 'sushi', kitchen: 'japanese' } },
       ]}
+      compareWith={(meal1, meal2) => meal1.id === meal2.id}
+      onChange={(value) => console.log('OnChange', value)}
     ></Dropdown>
   </div>
 </Canvas>
 
-### Multi select
+## Texts and placeholder
+
+Custom texts can be set using the texts input which takes an object with the following keys.
+
+| Text               | Description                                            | Default    |
+| :----------------- | :----------------------------------------------------- | :--------- |
+| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
+| placeholder        | Text to display when no option is selected.            | `Select`   |
+| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
+| close              | Text for close button displayed on mobiles.            | `Close`    |
+| optionsDescription | Text to describe options.                              | `Options`  |
+
+## Multi select
 
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
       multiSelect
-      display="name"
-      useValue="index"
       options={[
-        { name: 'Option 1', index: 1 },
-        { name: 'Option 2', index: 2 },
-        { name: 'Option 3', index: 3 },
+        { label: 'Tacos', value: 'tacos' },
+        { label: 'Pizza', value: 'pizza' },
+        { label: 'Sushi', value: 'sushi' },
       ]}
+      onChange={(value) => console.log('OnChange', value)}
     ></Dropdown>
   </div>
 </Canvas>
 
-### Available props
+## Available props
 
 <ArgsTable of={Dropdown} />

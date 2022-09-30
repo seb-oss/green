@@ -31,6 +31,8 @@ export interface Legend {
 export interface ChartAxis {
   show?: boolean
   label?: string
+  ticksCount?: number
+  stepSize?: number
 }
 
 export interface ChartStyle {

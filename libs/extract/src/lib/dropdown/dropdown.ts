@@ -35,7 +35,7 @@ export const createDropdown = (
   listener: DropdownListener,
   onChange: OnChange
 ): DropdownHandler => {
-  const _handler: Partial<DropdownHandler> = {
+  const handler: DropdownHandler = {
     toggler,
     listbox,
     dropdown: create(init),
@@ -43,8 +43,7 @@ export const createDropdown = (
     onChange,
     onDestroy$: new Subject<void>(),
     onTouched: init.onTouched,
-  }
-  const handler = _handler as DropdownHandler
+  } as DropdownHandler
 
   handler.active = (isActive) =>
     update(handler, listener, active(handler.dropdown, isActive))

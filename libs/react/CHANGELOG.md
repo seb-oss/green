@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.24...@sebgroup/green-react@1.0.0-beta.25) (2022-09-27)
+
+
+### Bug Fixes
+
+* **dropdown:** revert generic to any ([732e933](https://github.com/sebgroup/green/commit/732e933118240ce543fe666cefbc2c3f36833b8f))
+* **dropdown:** sync value with selected options ([2637a95](https://github.com/sebgroup/green/commit/2637a95cb36a08fbb06a8f18926c3383b7803ea8))
+
+
+
 # [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.23...@sebgroup/green-react@1.0.0-beta.24) (2022-09-23)
 
 

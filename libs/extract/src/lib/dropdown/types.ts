@@ -3,17 +3,17 @@ import { AriaAttributes } from 'react'
 import { Instance } from '@popperjs/core'
 import { IValidator } from '../helperFunction'
 
-export type CompareWith<T = unknown> = (o1: T, o2: T) => boolean
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 
-export type SearchFilter<T = unknown> = (search: string, value: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
 
-export type OnChange<T = unknown> = (value: T) => void
+export type OnChange<T = any> = (value: T) => void
 
 export type DropdownListener = (dropdown: AbstractDropdown) => void
 
 export interface DropdownOption {
   label?: string
-  value?: unknown
+  value?: any
   selected?: boolean
   [key: string]: any
 }
@@ -46,7 +46,7 @@ export interface ElementProps {
 
 export interface AbstractDropdown {
   id: string
-  value: unknown
+  value: any
   texts: DropdownTexts
   isActive: boolean
   isOpen: boolean
@@ -74,7 +74,7 @@ export interface DropdownArgs {
   display?: string // option key to display
   loop?: boolean
   texts?: DropdownTexts
-  value?: unknown
+  value?: any
   multiSelect?: boolean
   searchable?: boolean
   onTouched?: () => void
