@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.25...@sebgroup/green-react@1.0.0-beta.26) (2022-10-03)
+
+
+### Bug Fixes
+
+* **dropdown:** pass value to hook ([679bcee](https://github.com/sebgroup/green/commit/679bceee076d624ba136ea7287427c8a680258fe))
+
+
+
 # [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.24...@sebgroup/green-react@1.0.0-beta.25) (2022-09-27)
 
 
