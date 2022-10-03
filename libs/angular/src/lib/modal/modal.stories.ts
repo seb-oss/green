@@ -1,5 +1,3 @@
-
-// Modal.stories.ts
 import Documentation from './documentation.mdx'
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 import { NggModalModule } from './modal.module'
@@ -20,19 +18,26 @@ export default {
   },
 } as Meta<NggModalComponent>
 
-const Template: Story<NggModalComponent> = (args: NggModalComponent) => ({
+const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
+  let isOpen = true;
+
+  return {
   template: `
-    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirm]="confirm" [dismiss]="dismiss">
+    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirm]="confirm" [dismiss]="dismiss" (onClose)="isOpen = false">
         <p>Modal Body</p>
     </ngg-modal>
+    <button (click)="isOpen = true">Open Modal</button>
   `,
-  props: args,
-})
+  props: {
+    ...args,
+    isOpen,
+  }
+}
+}
 
 export const Default = Template.bind({})
 Default.args = {
     header: 'Header',
-    isOpen: true,
     dismiss: 'Secondary',
     confirm: 'Primary'
 }
@@ -41,7 +46,6 @@ export const Slideout = Template.bind({})
 Slideout.args = {
     modalType: 'slideout',
     header: 'Header',
-    isOpen: true,
     dismiss: 'Secondary',
     confirm: 'Primary'
 }
@@ -50,7 +54,6 @@ export const Takeover = Template.bind({})
 Takeover.args = {
     modalType: 'takeover',
     header: 'Header',
-    isOpen: true,
     dismiss: 'Secondary',
     confirm: 'Primary'
 }
