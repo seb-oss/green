@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.25...@sebgroup/extract@1.0.0-beta.26) (2022-10-03)
+
+
+### Reverts
+
+* **dropdown:** value type to any ([6364d62](https://github.com/sebgroup/green/commit/6364d62c905d5d14e57fefb567e45da3cca7b766))
+
+
+
 # [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.24...@sebgroup/extract@1.0.0-beta.25) (2022-09-27)
 
 
