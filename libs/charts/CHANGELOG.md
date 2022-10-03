@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.24...@sebgroup/green-charts@1.0.0-beta.25) (2022-10-03)
+
+
+### Features
+
+* **charts:** add number formatting to tooltip ([3c4c7f2](https://github.com/sebgroup/green/commit/3c4c7f26685e5d08827ec3d7514c1270b7c82810))
+* **charts:** add ticksCount and stepSize options ([590f738](https://github.com/sebgroup/green/commit/590f738d2a652f4ebb09506656756f033cd26894)), closes [#556](https://github.com/sebgroup/green/issues/556)
+
+
+
 # [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.23...@sebgroup/green-charts@1.0.0-beta.24) (2022-09-27)
 
 
