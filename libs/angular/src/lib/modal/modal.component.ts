@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ModalType, Size } from '@sebgroup/extract';
 import { NggModalService } from './modal.service';
 
@@ -6,6 +6,7 @@ import { NggModalService } from './modal.service';
     selector: 'ngg-modal',
     styleUrls: ['./modal.component.scss'],
     templateUrl: './modal.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NggModalComponent implements OnDestroy {
     @Input() public modalType?: ModalType
