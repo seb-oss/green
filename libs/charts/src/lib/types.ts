@@ -33,6 +33,7 @@ export interface ChartAxis {
   label?: string
   ticksCount?: number
   stepSize?: number
+  values?: Array<number> | (() => Array<number>)
 }
 
 export interface ChartStyle {

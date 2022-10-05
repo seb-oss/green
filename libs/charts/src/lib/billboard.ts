@@ -128,13 +128,16 @@ export const createOptions = ({
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
-            ...((settings?.ticksCount || settings?.stepSize) && {
+            ...((settings?.ticksCount || settings?.stepSize || settings?.values) && {
               tick: {
                 count: settings?.ticksCount || null,
-                stepSize: settings?.stepSize || null
+                stepSize: settings?.stepSize || null,
+                ...(settings?.values && {
+                  values: settings.values
+                })
               }
             }),
-            show: settings?.show,
+            show: settings?.show === false ? false : true,
             label: settings?.label,
           },
         }),
