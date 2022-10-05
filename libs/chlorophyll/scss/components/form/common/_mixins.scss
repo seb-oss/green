@@ -109,7 +109,6 @@
   width: 100%;
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
-    width: fit-content;
   }
 
   > input,
@@ -123,8 +122,7 @@
   label:not(.form-control),
   .label:not(.form-control) {
     @include common.font-weight('medium');
-    @include common.margin-bottom(3, true);
-    display: block !important;
+    @include common.line-height(4);
   }
 }
 

@@ -1,4 +1,4 @@
-import {Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button} from "@sebgroup/green-react";
+import { Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button, Stepper, TextInput } from "@sebgroup/green-react";
 import {useState} from "react";
 import {IValidator} from "@sebgroup/extract";
 
@@ -12,8 +12,24 @@ const dropDownKeyValueArray = [
   }
 ]
 
+
+
 export function App() {
   const [validator, setValidator] = useState<undefined | IValidator>(undefined)
+
+  const [adults, setAdults] = useState<any>();
+
+  const onStepperChange = (value: any) => {
+    console.log('** START **');
+    console.log('value:', value);
+    setAdults({
+      value,
+      id: 45
+    });
+    console.log('adults:', adults);
+    console.log('** END **');
+  }
+
   return (
     <>
       <Navbar title="Green React Dev" />
@@ -26,7 +42,7 @@ export function App() {
               <Button onClick={() => {
                 setValidator((prevState) => prevState ? undefined : { message: 'This field is required', indicator: 'error', rules: { type: 'Required' } })
               }}>Change validation</Button>
-              <Dropdown options={dropDownKeyValueArray} validator={validator} />
+              <Dropdown id={'my-dropdown'} options={dropDownKeyValueArray} validator={validator} />
               <FormItems name="radio" validate={{ message: 'Required', indicator: 'error', rules: { type: 'Required' } }} >
                 <RadioGroup title="Radio Group"
                             onChange={(value) => console.log(value)}>
@@ -35,6 +51,8 @@ export function App() {
                   <RadioButton label={'Farfalle'} value={'farfalle'} />
                 </RadioGroup>
               </FormItems>
+              <TextInput label={'Label'} info={'This is some information about the thing that gets longer if i say so'} validator={validator}  />
+              <Stepper onChange={onStepperChange} />
               <button type="submit">Submit</button>
             </Form>
           </div>

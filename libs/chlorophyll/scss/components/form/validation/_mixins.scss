@@ -34,8 +34,9 @@ $_border-width: var(--sg-border-width);
 }
 
 @mixin add-form-info() {
-  @include common.font-size('s');
-  color: tokens.$text-secondary-color; //map-get(tokens.$grey, 3);
+  @include common.font-scale(2);
+  @include common.line-height(4);
+  color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
   display: block;
   max-width: fit-content;
   min-width: 100%;
