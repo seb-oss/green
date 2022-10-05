@@ -387,6 +387,38 @@ describe('billboard', () => {
       }
       expect(parsed.axis).toEqual(expected)
     })
+    it('add tick config if values is specified for axis in style', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [] }],
+        style: {
+          axis: {
+            y: {
+              values: [1, 2, 3, 4]
+            },
+            y2: {
+              values: [100, 200, 300, 400]
+            },
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const expected: Axis = {
+        y: {
+          tick: {
+            count: null,
+            values: [1, 2, 3, 4]
+          },
+        },
+        y2: {
+          tick: {
+            count: null,
+            values: [100, 200, 300, 400]
+          },
+        },
+      }
+      expect(parsed.axis).toMatchObject(expected)
+    })
   })
   describe('createInfo', () => {
     let settings: ChartSettings
