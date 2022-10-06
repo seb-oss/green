@@ -1,4 +1,4 @@
-import {Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button} from "@sebgroup/green-react";
+import {Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button, Stepper} from "@sebgroup/green-react";
 import {useState} from "react";
 import {IValidator} from "@sebgroup/extract";
 
@@ -35,6 +35,7 @@ export function App() {
                   <RadioButton label={'Farfalle'} value={'farfalle'} />
                 </RadioGroup>
               </FormItems>
+              <Stepper onChange={(value) => console.log(value)} />
               <button type="submit">Submit</button>
             </Form>
           </div>

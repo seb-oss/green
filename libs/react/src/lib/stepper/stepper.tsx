@@ -19,7 +19,8 @@ export function Stepper({
   const [stepper, data] = useStepper(props)
 
   useEffect(() => {
-    if (onChange && data.value) onChange(data.value)
+    if ( typeof data.value === 'undefined' ) return
+    if (onChange) onChange(data.value)
   }, [data.value])
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
