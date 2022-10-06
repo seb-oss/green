@@ -5,6 +5,7 @@ import {
   create,
   open,
   select,
+  selectByValue,
   toggle,
   loop,
   highlight,
@@ -253,6 +254,18 @@ describe('dropdown/reducers', () => {
       it('does not close dropdown', () => {
         dropdown = select(dropdown, dropdown.options[1])
         expect(dropdown.isOpen).toBe(true)
+      })
+    })
+    describe('selectByValue', () => {
+      it('sets option selected', () => {
+        dropdown = selectByValue(dropdown, dropdown.options[1].value)
+        expect(dropdown.value).toEqual(2)
+      })
+      it('sets empty value to reset previous selection', () => {
+        dropdown = selectByValue(dropdown, dropdown.options[1].value)
+        dropdown = selectByValue(dropdown, undefined)
+        expect(dropdown.value).toEqual(undefined)
+        expect(dropdown.texts.select).toEqual(texts.placeholder)
       })
     })
     describe('select multiple', () => {

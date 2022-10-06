@@ -74,27 +74,12 @@ export const create = ({
   compareWith = (o1, o2) => o1 === o2,
   searchFilter,
 }: DropdownArgs): AbstractDropdown => {
-  const isSelected = (option: DropdownOption) => {
-    if (multiSelect && Array.isArray(value)) {
-      return value.some((v) => compareWith(option[useValue], v))
-    } else {
-      return compareWith(option[useValue], value)
-    }
-  }
-
-  if (value) {
-    _options = _options?.map((option) => ({
-      ...option,
-      selected: isSelected(option),
-    }))
-  }
-
-  const options = extendOptions(_options, id)
+  const options = extendOptions(_options, id) ?? []
   const selectedOptions = options.filter((o) => o.selected)
-  const values = selectedOptions.map((option) => option[useValue])
-  const dropdown: Partial<AbstractDropdown> = {
+  const selectedValues = selectedOptions.map((option) => option[useValue])
+  let dropdown: Partial<AbstractDropdown> = {
     id,
-    value: multiSelect ? values : values[0],
+    value: multiSelect ? selectedValues : selectedValues[0],
     texts: {
       close: texts?.close ?? 'Close',
       optionsDescription: texts?.optionsDescription ?? 'Options',
@@ -123,6 +108,11 @@ export const create = ({
     validator,
     compareWith,
     searchFilter,
+  }
+
+  // Override intital selected property options if value is provided
+  if (value) {
+    dropdown = selectByValue(dropdown as AbstractDropdown, value)
   }
 
   return reduce(dropdown, dropdownValues)
@@ -207,22 +197,54 @@ export const select = (
   dropdown: AbstractDropdown,
   selection: DropdownOptionElement
 ): AbstractDropdown => {
-  const isSelected = (option: DropdownOptionElement) => {
-    const isTarget = dropdown.compareWith(
-      selection[dropdown.useValue],
-      option[dropdown.useValue]
+  const selectedValue = selection[dropdown.useValue]
+  const currentValue = dropdown.value
+  let value
+
+  if (dropdown.isMultiSelect && Array.isArray(currentValue)) {
+    const index = currentValue.findIndex((v: any) =>
+      dropdown.compareWith(v, selectedValue)
     )
 
-    if (dropdown.isMultiSelect) {
-      //Invert the selected option and keep others like previously
-      return isTarget ? !option.selected : option.selected
+    // Toggle selected value
+    if (index < 0) {
+      value = [...currentValue, selectedValue]
     } else {
-      return isTarget
+      value = [
+        ...currentValue.slice(0, index),
+        ...currentValue.slice(index + 1),
+      ]
+    }
+  } else {
+    value = dropdown.isMultiSelect ? [selectedValue] : selectedValue
+  }
+
+  return selectByValue(dropdown, value)
+}
+
+export const selectByValue = (
+  dropdown: AbstractDropdown,
+  selection?: any
+): AbstractDropdown => {
+  const isSelected = (value1: any) => {
+    if (!selection) {
+      return false
+    } else if (dropdown.isMultiSelect && Array.isArray(selection)) {
+      return selection.some((value2) => dropdown.compareWith(value1, value2))
+    } else {
+      return dropdown.compareWith(selection, value1)
     }
   }
 
+  if (selection && dropdown.isMultiSelect && !Array.isArray(selection)) {
+    console.warn(
+      'Dropdown is marked as multiselect but recieved a non-array value:',
+      selection
+    )
+  }
+
   const options = dropdown.options.map((option) => {
-    const selected = isSelected(option)
+    const selected = isSelected(option[dropdown.useValue])
     return reduce(option, {
       selected,
       attributes: {
@@ -230,11 +252,10 @@ export const select = (
       },
     })
   })
-
   const selectedOptions = options.filter((o) => o.selected)
-  const value = selectedOptions.map((option) => option[dropdown.useValue])
+
   return reduce(dropdown, {
-    value: dropdown.isMultiSelect ? value : value[0],
+    value: selection,
     texts: {
       select: selectionText(selectedOptions, dropdown.display, dropdown.texts),
     },
