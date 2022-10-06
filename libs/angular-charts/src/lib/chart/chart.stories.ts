@@ -317,7 +317,8 @@ CustomTickValues.args = {
           values: [100,200,300,400]
         },
         y2: {
-          values: () => [0,2,4,6,8,10]
+          values: () => [0,2,4,6,8,10],
+          format: v => `${v} st`
         }
       }
     }
