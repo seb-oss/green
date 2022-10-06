@@ -32,6 +32,7 @@ export function App() {
 
   return (
     <>
+    <div className="use-green">
       <Navbar title="Green React Dev" />
       <div className="container">
         <div className="row">
@@ -56,6 +57,13 @@ export function App() {
               <button type="submit">Submit</button>
             </Form>
           </div>
+        </div>
+      </div>
+    </div>
+      <div>
+        <span>Outside Green</span>
+        <div className="popover" style={{border: '2px solid grey', padding: 15, background: 'red'}}>
+          This is a popper
         </div>
       </div>
     </>

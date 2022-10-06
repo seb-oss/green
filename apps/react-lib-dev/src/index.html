@@ -7,8 +7,24 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      $('body').on('touchend click', function (event) {
+        if (!$(event.target).hasClass('m-help-popup') && !$(event.target).hasClass('popover-content')) {
+          /* OLD var popovers = document.getElementsByClassName('popover'); */
+          /* NEW */ var popovers = $('.popover:not([data-popper-placement])')
+          if (popovers && popovers.length > 0) {
+          /* OLD $('.popover').remove(); */
+          /* NEW */  $(popovers).remove();
+          }
+        }
+      });
+    </script>
   </body>
 </html>
