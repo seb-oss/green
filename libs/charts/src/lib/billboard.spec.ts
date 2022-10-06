@@ -356,7 +356,6 @@ describe('billboard', () => {
           show: false,
           tick: {
             count: 5,
-            stepSize: null
           }
         },
       }
@@ -380,7 +379,6 @@ describe('billboard', () => {
         y2: {
           show: false,
           tick: {
-            count: null,
             stepSize: 5
           }
         },
@@ -406,18 +404,32 @@ describe('billboard', () => {
       const expected: Axis = {
         y: {
           tick: {
-            count: null,
             values: [1, 2, 3, 4]
           },
         },
         y2: {
           tick: {
-            count: null,
             values: [100, 200, 300, 400]
           },
         },
       }
       expect(parsed.axis).toMatchObject(expected)
+    })
+    it('add tick config if tick format function is specified in style', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [{ name: 'Foo', values: [] }],
+        style: {
+          axis: {
+            y2: {
+              format: v => `fmt:${v}`
+            }
+          },
+        },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formatted = (parsed.axis.y2.tick.format.bind({}))(123)
+      expect(formatted).toMatch("fmt:123")
     })
   })
   describe('createInfo', () => {
