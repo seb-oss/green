@@ -78,7 +78,7 @@ export const useDropdown = ({
     const newToggleProps: Props = {
       ...(toggler?.attributes as unknown as Props),
       className: toggler?.classes?.join(' '),
-      children: dropdown?.texts?.select || dropdown?.texts?.placeholder,
+      children: dropdown?.texts?.select,
       onClick: () => handler?.toggle(),
     }
     setTogglerProps(newToggleProps)

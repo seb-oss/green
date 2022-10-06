@@ -38,7 +38,7 @@ describe('dropdown/reducers', () => {
     })
     it('uses passed in text', () => {
       const dropdown = create({ id, options, texts })
-      expect(dropdown.texts).toEqual({ ...texts, select: '' })
+      expect(dropdown.texts).toEqual({ ...texts, select: texts.placeholder })
     })
     it('uses default option text', () => {
       const defaultOption = {

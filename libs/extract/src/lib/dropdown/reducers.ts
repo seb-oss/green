@@ -6,8 +6,20 @@ import {
   DropdownArgs,
   DropdownOption,
   DropdownOptionElement,
+  DropdownTexts,
 } from './types'
 import { IValidator, validateClassName } from '../helperFunction'
+
+const selectionText = (
+  selectedOptions: DropdownOptionElement[],
+  display: string,
+  texts?: DropdownTexts
+) => {
+  const displayValues = selectedOptions.map((option) => option[display])
+  return displayValues?.length > 2
+    ? `${displayValues.length} ${texts?.selected} `
+    : displayValues?.join(', ') || (texts?.placeholder ?? 'Select')
+}
 
 const distinct = <T>(arr: T[]): T[] => {
   const map: Record<string, boolean> = {}
@@ -79,7 +91,6 @@ export const create = ({
 
   const options = extendOptions(_options, id)
   const selectedOptions = options.filter((o) => o.selected)
-  const displayValues = selectedOptions.map((option) => option[<string>display])
   const values = selectedOptions.map((option) => option[useValue])
   const dropdown: Partial<AbstractDropdown> = {
     id,
@@ -90,10 +101,7 @@ export const create = ({
       placeholder: texts?.placeholder ?? 'Select',
       searchPlaceholder: texts?.searchPlaceholder ?? 'Search',
       selected: texts?.selected ?? 'selected',
-      select:
-        displayValues?.length > 2
-          ? `${displayValues.length} ${texts?.selected} `
-          : displayValues?.join(', '),
+      select: selectionText(selectedOptions, display, texts),
     },
     elements: {
       toggler: {
@@ -224,16 +232,11 @@ export const select = (
   })
 
   const selectedOptions = options.filter((o) => o.selected)
-  const displayValues = selectedOptions.map((o) => o[dropdown.display])
   const value = selectedOptions.map((option) => option[dropdown.useValue])
   return reduce(dropdown, {
     value: dropdown.isMultiSelect ? value : value[0],
     texts: {
-      select:
-        displayValues?.length > 2
-          ? `${displayValues.length} ${dropdown.texts?.selected} `
-          : displayValues?.join(', ') ||
-            (dropdown.texts?.placeholder ?? 'Select'),
+      select: selectionText(selectedOptions, dropdown.display, dropdown.texts),
     },
     elements: {
       listbox: {
