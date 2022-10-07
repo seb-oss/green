@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.25...@sebgroup/green-charts@1.0.0-beta.26) (2022-10-07)
+
+
+### Features
+
+* allow custom tick values in charts ([a7c615f](https://github.com/sebgroup/green/commit/a7c615fe2194eec114e6e8176b5df658a12cc7e2)), closes [#601](https://github.com/sebgroup/green/issues/601)
+* allow formatting tick labels ([90d4e9f](https://github.com/sebgroup/green/commit/90d4e9f24ae32be4b6c48514aad13d5aeaea7e08)), closes [#602](https://github.com/sebgroup/green/issues/602)
+
+
+
 # [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.24...@sebgroup/green-charts@1.0.0-beta.25) (2022-10-03)
 
 
