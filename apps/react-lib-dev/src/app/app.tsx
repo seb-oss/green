@@ -4,10 +4,10 @@ import {IValidator} from "@sebgroup/extract";
 
 const dropDownKeyValueArray = [
   {
-    key: 'Apple',
+    label: 'Apple',
     value: 'apple'
   }, {
-    key: 'Banana',
+    label: 'Banana',
     value: 'banana'
   }
 ]

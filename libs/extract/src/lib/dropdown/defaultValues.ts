@@ -14,7 +14,7 @@ export const dropdownValues: Partial<AbstractDropdown> = {
         role: 'listbox',
         tabIndex: -1,
       },
-      classes: ['popover', 'popover-dropdown'],
+      classes: ['_popover', 'popover-dropdown'],
     },
   },
   isActive: false,
