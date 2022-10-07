@@ -78,7 +78,7 @@ export const useDropdown = ({
     const newToggleProps: Props = {
       ...(toggler?.attributes as unknown as Props),
       className: toggler?.classes?.join(' '),
-      children: dropdown?.texts?.select || dropdown?.texts?.placeholder,
+      children: dropdown?.texts?.select,
       onClick: () => handler?.toggle(),
     }
     setTogglerProps(newToggleProps)
@@ -164,11 +164,19 @@ export const useDropdown = ({
     display,
   ])
 
+  useEffect(() => {
+    if (!dropdown) return
+    handler?.selectByValue(value)
+    console.log('new value')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
   // When validator changes
   useEffect(() => {
     if (!dropdown) return
 
     if (validator) handler?.validate(validator)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validator])
 
   // Create dropdown handler

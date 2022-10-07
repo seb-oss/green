@@ -73,7 +73,8 @@ export class NggDropdownComponent
   private _searchable = false
 
   @Input() set value(newValue: any) {
-    this.setSelectionByValue(newValue)
+    this.handler?.selectByValue(newValue)
+    this._value = newValue
   }
   get value(): any {
     return this._value
@@ -181,19 +182,6 @@ export class NggDropdownComponent
     this._value = option
     this.valueChange.emit(option)
     this.onChangeFn?.(option)
-  }
-
-  private setSelectionByValue(value: any) {
-    if (!this.dropdown?.isMultiSelect) {
-      if (this._value !== value && value !== undefined) {
-        this._value = value
-        const valueKey = <string>this.handler?.dropdown.useValue
-        const selected = this.handler?.dropdown?.options.find((option) =>
-          this.dropdown?.compareWith(option[valueKey], value)
-        )
-        if (selected) this.handler?.select(selected)
-      }
-    }
   }
 
   private convertToBoolean(value: string | boolean): boolean {

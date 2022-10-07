@@ -107,6 +107,7 @@ export interface DropdownHandler {
     selection: DropdownOptionElement,
     closeOnSelect?: boolean
   ) => Promise<void>
+  selectByValue: (selection: any) => Promise<void>
   validate: (validator: IValidator) => Promise<void>
   search: (searchInput: string) => Promise<void>
   destroy: () => void

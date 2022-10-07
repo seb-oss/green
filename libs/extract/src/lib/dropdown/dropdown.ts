@@ -12,6 +12,7 @@ import {
   keypress,
   validate,
   search,
+  selectByValue,
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -63,6 +64,8 @@ export const createDropdown = (
         ? close(select(handler.dropdown, selection))
         : select(handler.dropdown, selection)
     )
+  handler.selectByValue = (selection) =>
+    update(handler, listener, selectByValue(handler.dropdown, selection))
   handler.update = (props) => update(handler, listener, create(props))
   handler.validate = (validator: IValidator) =>
     update(handler, listener, validate(handler.dropdown, validator))

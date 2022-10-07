@@ -99,7 +99,7 @@ export class DropdownComponent {
   dropdownForm = this._fb.group({
     select1: undefined,
     select2: 'pizza',
-    select3: this.options[2].value,
+    select3: [[this.options[2].value]],
     select4: undefined,
   })
 
@@ -201,13 +201,18 @@ export class DropdownComponent {
 
   dropdownValue3: string | undefined = undefined
   dropdownValue4: string | undefined = 'tacos'
-  dropdownValue5: unknown[] | undefined = this.customOptions[1].val
+  dropdownValue5: unknown | undefined = this.customOptions[1].val
   dropdownValue6: unknown[] | undefined = undefined
 
   constructor(private _fb: FormBuilder) {}
 
   save() {
     this.validationForm.markAllAsTouched()
+    console.log(this.validationForm.value)
+  }
+
+  resetForms() {
+    this.validationForm.reset()
     console.log(this.validationForm.value)
   }
 
