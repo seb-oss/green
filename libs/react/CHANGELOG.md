@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.27](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.26...@sebgroup/green-react@1.0.0-beta.27) (2022-10-07)
+
+
+### Bug Fixes
+
+* **dropdown:** update select when value changes ([c72b615](https://github.com/sebgroup/green/commit/c72b615d0714b49023836b81b7a66f035d575aa8))
+
+
+
 # [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.25...@sebgroup/green-react@1.0.0-beta.26) (2022-10-03)
 
 
