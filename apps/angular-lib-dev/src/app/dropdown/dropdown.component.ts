@@ -211,6 +211,11 @@ export class DropdownComponent {
     console.log(this.validationForm.value)
   }
 
+  resetForms() {
+    this.validationForm.reset()
+    console.log(this.validationForm.value)
+  }
+
   test($event: Event) {
     console.log('Test', $event)
   }
