@@ -49,7 +49,8 @@ $max-content-width: 768px;
   border-radius: $border-radius;
   border: $border;
   color: var(--color);
-  @include common.padding(5);
+  @include common.padding-vertical(3);
+  @include common.padding-horizontal(5);
 
   // layout
   display: inline-grid;
@@ -98,7 +99,7 @@ $max-content-width: 768px;
   button.close {
     grid-area: dismiss;
     justify-self: flex-end;
-    margin: -0.5rem -0.5rem 0 0.5rem;
+    margin: 0 -0.5rem 0 0.5rem;
     --background-hsl: #{$close-bg-hover};
     --color: #{$color};
     @include common.media-breakpoint-up('sm') {
@@ -131,13 +132,15 @@ $max-content-width: 768px;
     > a {
       display: flex;
     }
-    a,
-    button,
-    .button {
-      &:not(.primary, [type='submit']) {
+    > a,
+    > button,
+    > button[type=button],
+    > .button {
+      &:not(.primary,.ghost,.close,.link, [type='submit'], :disabled,.disabled,[aria-disabled]) {
         border-color: currentColor;
         color: currentColor;
       }
+
       + {
         a,
         button,
