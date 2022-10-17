@@ -4,22 +4,18 @@ import {
     RenderResult,
     waitFor,
 } from '@testing-library/angular'
-import { createMock, Mock, provideMockWithValues } from '@testing-library/angular/jest-utils';
+import * as bodyScrollLock from 'body-scroll-lock';
+import { createMock } from '@testing-library/angular/jest-utils';
 import { NggModalBodyComponent, NggModalComponent, NggModalFooterComponent, NggModalHeaderComponent } from '.';
-import { NggModalService } from './modal.service';
 
-describe(NggModalComponent.name, () => {
+fdescribe(NggModalComponent.name, () => {
     let component: RenderResult<NggModalComponent>
-    let fakeModalService: Mock<NggModalService>;
 
     beforeEach(async () => {
 
-        fakeModalService = createMock<NggModalService>(NggModalService);
         component = await render(NggModalComponent, {
             declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
-            providers: [
-                provideMockWithValues(NggModalService, fakeModalService),
-            ]
+            providers: []
         });
     });
 
@@ -29,39 +25,44 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should destroy', () => {
+        // Mock
+        (bodyScrollLock.enableBodyScroll as unknown) = jest.fn();
+
+        component.change({ modalType: 'default', isOpen: true });
         const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
 
         // Destroy modal
         modal.ngOnDestroy();
 
-        expect(fakeModalService.releaseBody).toHaveBeenCalled();
+        expect(bodyScrollLock.enableBodyScroll).toHaveBeenCalled();
     });
 
     it('should be closed', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = false;
+        // Mock
+        (bodyScrollLock.enableBodyScroll as unknown) = jest.fn();
+
+        component.change({ modalType: 'default', isOpen: false });
 
         expect(component.queryByTestId('modal')).toBeFalsy();
         expect(component.container.classList.length).toEqual(0);
-        expect(fakeModalService.releaseBody).toHaveBeenCalled();
+        expect(bodyScrollLock.enableBodyScroll).toHaveBeenCalled();
     });
 
     it('should be open', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
+        // Mock
+        (bodyScrollLock.disableBodyScroll as unknown) = jest.fn();
+
+        component.change({ modalType: 'default', isOpen: true });
 
         const modalElement = await component.findByTestId('modal');
 
         expect(modalElement).toBeDefined();
         expect(component.container.classList.contains('open')).toEqual(true);
-        expect(fakeModalService.lockBody).toHaveBeenCalled();
+        expect(bodyScrollLock.disableBodyScroll).toHaveBeenCalled();
     });
 
     it('should show dialog', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.modalType = 'default';
-        modal.isOpen = true;
+        component.change({ modalType: 'default', isOpen: true });
 
         const modalElement = await component.findByTestId('modal');
 
@@ -69,19 +70,14 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should show slideout', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.modalType = 'slideout';
-        modal.isOpen = true;
-
+        component.change({ modalType: 'slideout', isOpen: true });
         const modalElement = await component.findByTestId('modal');
 
         expect(modalElement.tagName).toEqual('ASIDE')
     });
 
     it('should show takeover', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.modalType = 'takeover';
-        modal.isOpen = true;
+        component.change({ modalType: 'takeover', isOpen: true });
 
         const modalElement = await component.findByTestId('modal');
 
@@ -89,9 +85,7 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should set header', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.header = 'FakeHeader';
+        component.change({ isOpen: true, header: 'FakeHeader' });
 
         const modalHeaderText = await component.findByTestId('modal-header-text');
 
@@ -99,9 +93,7 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should set confirm', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.confirm = 'FakeConfirm'
+        component.change({ isOpen: true, confirm: 'FakeConfirm' });
 
         const modalConfirmButton = await component.findByTestId('modal-confirm-button');
 
@@ -109,9 +101,7 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should set dismiss', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.dismiss = 'FakeDismiss'
+        component.change({ isOpen: true, dismiss: 'FakeDismiss' });
 
         const modalDismissButton = await component.findByTestId('modal-dismiss-button');
 
@@ -119,9 +109,7 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should set size', async () => {
-        const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.size = 'lg'
+        component.change({ isOpen: true, size: 'lg' });
 
         const modalElement = await component.findByTestId('modal');
 
@@ -129,22 +117,23 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should close on close button click', async () => {
+        component.change({ isOpen: true });
+
         const modal = component.fixture.componentInstance as NggModalComponent;
-        modal.isOpen = true;
 
         // Listen for isOpenChange event
         let isOpen: boolean | undefined = undefined;
         modal.isOpenChange.subscribe((value: boolean) => {
             isOpen = value;
         });
-        
+
         const closeButton = await component.findByTestId('modal-close-button');
 
         // Trigger event
         fireEvent.click(closeButton);
 
         await waitFor(() =>
-          expect(component.queryByTestId('modal')).toBeFalsy()
+            expect(component.queryByTestId('modal')).toBeFalsy()
         );
 
         expect(isOpen).toEqual(false)
@@ -153,8 +142,9 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should close on backdrop click', async () => {
+        component.change({ isOpen: true });
+
         const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
 
         // Listen for isOpenChange event
         let isOpen: boolean | undefined = undefined;
@@ -170,15 +160,16 @@ describe(NggModalComponent.name, () => {
         await waitFor(() => {
             expect(component.queryByTestId('modal')).toBeFalsy()
         });
-        
+
         expect(isOpen).toEqual(false)
         expect(component.queryByTestId('modal')).toBeFalsy();
         expect(modal.isOpen).toEqual(false);
     });
 
     it('should send close event', async () => {
+        component.change({ isOpen: true });
+
         const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
 
         // Listen for onClose event
         let event: MouseEvent = createMock(MouseEvent);
@@ -199,9 +190,9 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should send confirm event', async () => {
+        component.change({ isOpen: true, confirm: 'FakeConfirm' });
+
         const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.confirm = 'FakeConfirm'
 
         // Listen for onConfirm event
         let event: MouseEvent = createMock(MouseEvent);
@@ -209,7 +200,7 @@ describe(NggModalComponent.name, () => {
             event = value;
         });
 
-        const confirmButton  = await component.findByTestId('modal-confirm-button');
+        const confirmButton = await component.findByTestId('modal-confirm-button');
 
         // Trigger event
         fireEvent.click(confirmButton, { target: confirmButton });
@@ -218,9 +209,9 @@ describe(NggModalComponent.name, () => {
     });
 
     it('should send dismiss event', async () => {
+        component.change({ isOpen: true, dismiss: 'FakeDismiss' });
+
         const modal = component.fixture.componentInstance;
-        modal.isOpen = true;
-        modal.dismiss = 'FakeDismiss'
 
         // Listen for onDismiss event
         let event: MouseEvent = createMock(MouseEvent);
@@ -228,7 +219,7 @@ describe(NggModalComponent.name, () => {
             event = value;
         });
 
-        const dismissButton  = await component.findByTestId('modal-dismiss-button');
+        const dismissButton = await component.findByTestId('modal-dismiss-button');
 
         // Trigger event
         fireEvent.click(dismissButton, { target: dismissButton });

@@ -19,7 +19,7 @@ export default {
 } as Meta<NggModalComponent>
 
 const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
-  let isOpen = true;
+  const isOpen = true;
 
   return {
   template: `

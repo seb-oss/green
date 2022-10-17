@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ModalType, Size } from '@sebgroup/extract';
-import { NggModalService } from './modal.service';
+import {
+    disableBodyScroll,
+    enableBodyScroll,
+  } from "body-scroll-lock";
 
 @Component({
     selector: 'ngg-modal',
@@ -23,22 +26,25 @@ export class NggModalComponent implements OnDestroy {
         this._isOpen = value;
 
         if (value) {
-            this.modalService.lockBody(this.ref.nativeElement);
+            disableBodyScroll(this.ref.nativeElement);
         } else {
-            this.modalService.releaseBody(this.ref.nativeElement);
+            enableBodyScroll(this.ref.nativeElement);
         }
     }
 
     @Output() public isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() public onClose: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() public onConfirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() public onDismiss: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
     
     @HostBinding('class.open') get open() { return this.isOpen; }
     @ViewChild('backdrop') private backdropRef?: ElementRef<HTMLInputElement>;
     private _isOpen?: boolean;
     
-    constructor(private ref: ElementRef<HTMLElement>, private modalService: NggModalService) {
+    constructor(private ref: ElementRef<HTMLElement>) {
     }
     
     public handleCloseClick(event: MouseEvent) {
@@ -71,11 +77,12 @@ export class NggModalComponent implements OnDestroy {
     }
     
     ngOnDestroy(): void {
-        this.modalService.releaseBody(this.ref.nativeElement);
+        enableBodyScroll(this.ref.nativeElement);
     }
 }
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[ngg-modal-header]',
     styleUrls: ['./modal.component.scss'],
     template: `
@@ -87,6 +94,7 @@ export class NggModalComponent implements OnDestroy {
 })
 export class NggModalHeaderComponent {
     @Input() header?: string;
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onClose: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     handleClose(event: MouseEvent) {
@@ -97,6 +105,7 @@ export class NggModalHeaderComponent {
 }
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[ngg-modal-body]',
     styleUrls: ['./modal.component.scss'],
     template: `<ng-content></ng-content>`
@@ -105,6 +114,7 @@ export class NggModalBodyComponent {
 }
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[ngg-modal-footer]',
     styleUrls: ['./modal.component.scss'],
     template: `
@@ -115,7 +125,9 @@ export class NggModalBodyComponent {
 export class NggModalFooterComponent {
     @Input() dismiss?: string;
     @Input() confirm?: string;
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDismiss: EventEmitter<MouseEvent> = new EventEmitter();
+    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onConfirm: EventEmitter<MouseEvent> = new EventEmitter();
 
     handleDismiss(event: MouseEvent) {
