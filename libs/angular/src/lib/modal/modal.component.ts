@@ -57,12 +57,10 @@ export class NggModalComponent implements OnDestroy {
     }
     
     public handleDismiss(event: MouseEvent) {
-        if (this.onDismiss.observers.length > 0)
             this.onDismiss.emit(event);
     }
     
     public handleConfirm(event: MouseEvent) {
-        if (this.onConfirm.observers.length > 0)
             this.onConfirm.emit(event);
     }
 
@@ -98,7 +96,6 @@ export class NggModalHeaderComponent {
     @Output() onClose: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     handleClose(event: MouseEvent) {
-        if (this.onClose.observers.length > 0)
             this.onClose.emit(event);
     }
 
@@ -131,12 +128,10 @@ export class NggModalFooterComponent {
     @Output() onConfirm: EventEmitter<MouseEvent> = new EventEmitter();
 
     handleDismiss(event: MouseEvent) {
-        if (this.onDismiss.observers.length > 0)
             this.onDismiss.emit(event);
     }
 
     handleConfirm(event: MouseEvent) {
-        if (this.onConfirm.observers.length > 0)
             this.onConfirm.emit(event);
     }
 }
