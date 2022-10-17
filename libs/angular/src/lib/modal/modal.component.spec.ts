@@ -93,7 +93,7 @@ fdescribe(NggModalComponent.name, () => {
     });
 
     it('should set confirm', async () => {
-        component.change({ isOpen: true, confirm: 'FakeConfirm' });
+        component.change({ isOpen: true, confirmLabel: 'FakeConfirm' });
 
         const modalConfirmButton = await component.findByTestId('modal-confirm-button');
 
@@ -101,7 +101,7 @@ fdescribe(NggModalComponent.name, () => {
     });
 
     it('should set dismiss', async () => {
-        component.change({ isOpen: true, dismiss: 'FakeDismiss' });
+        component.change({ isOpen: true, dismissLabel: 'FakeDismiss' });
 
         const modalDismissButton = await component.findByTestId('modal-dismiss-button');
 
@@ -173,7 +173,7 @@ fdescribe(NggModalComponent.name, () => {
 
         // Listen for onClose event
         let event: MouseEvent = createMock(MouseEvent);
-        modal.onClose.subscribe((value: MouseEvent) => {
+        modal.closed.subscribe((value: MouseEvent) => {
             event = value;
         });
 
@@ -190,13 +190,13 @@ fdescribe(NggModalComponent.name, () => {
     });
 
     it('should send confirm event', async () => {
-        component.change({ isOpen: true, confirm: 'FakeConfirm' });
+        component.change({ isOpen: true, confirmLabel: 'FakeConfirm' });
 
         const modal = component.fixture.componentInstance;
 
         // Listen for onConfirm event
         let event: MouseEvent = createMock(MouseEvent);
-        modal.onConfirm.subscribe((value: MouseEvent) => {
+        modal.confirm.subscribe((value: MouseEvent) => {
             event = value;
         });
 
@@ -209,13 +209,13 @@ fdescribe(NggModalComponent.name, () => {
     });
 
     it('should send dismiss event', async () => {
-        component.change({ isOpen: true, dismiss: 'FakeDismiss' });
+        component.change({ isOpen: true, dismissLabel: 'FakeDismiss' });
 
         const modal = component.fixture.componentInstance;
 
         // Listen for onDismiss event
         let event: MouseEvent = createMock(MouseEvent);
-        modal.onDismiss.subscribe((value: MouseEvent) => {
+        modal.dismiss.subscribe((value: MouseEvent) => {
             event = value;
         });
 

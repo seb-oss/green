@@ -1,24 +1,24 @@
 <ng-container *ngIf="isOpen" [ngSwitch]="modalType">
     <aside data-testid="modal" *ngSwitchCase="'slideout'" role="dialog" aria-modal="true" [class.small]="size === 'sm'" [class.medium]="size === 'md'" [class.large]="size === 'lg'">
-        <header ngg-modal-header data-testid="modal-header" [header]="header" (onClose)="this.handleCloseClick($event)"></header>
+        <header ngg-modal-header data-testid="modal-header" [header]="header" (closed)="this.handleCloseClick($event)"></header>
         <div ngg-modal-body data-testid="modal-body" class="body">
             <ng-container *ngTemplateOutlet="contentTpl"></ng-container> 
         </div>
-        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismiss || confirm" [dismiss]="dismiss" [confirm]="confirm" (onDismiss)="this.handleDismiss($event)" (onConfirm)="this.handleConfirm($event)"></footer>
+        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismissLabel || confirmLabel" [dismissLabel]="dismissLabel" [confirmLabel]="confirmLabel" (dismiss)="this.handleDismiss($event)" (confirm)="this.handleConfirm($event)"></footer>
     </aside>
     <main data-testid="modal" *ngSwitchCase="'takeover'" role="dialog" aria-modal="true">
-        <header ngg-modal-header data-testid="modal-header" [header]="header" (onClose)="this.handleCloseClick($event)"></header>
+        <header ngg-modal-header data-testid="modal-header" [header]="header" (closed)="this.handleCloseClick($event)"></header>
         <div ngg-modal-body data-testid="modal-body" class="body">
             <ng-container *ngTemplateOutlet="contentTpl"></ng-container> 
         </div>
-        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismiss || confirm" [dismiss]="dismiss" [confirm]="confirm" (onDismiss)="this.handleDismiss($event)" (onConfirm)="this.handleConfirm($event)"></footer>
+        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismissLabel || confirmLabel" [dismissLabel]="dismissLabel" [confirmLabel]="confirmLabel" (dismiss)="this.handleDismiss($event)" (confirm)="this.handleConfirm($event)"></footer>
     </main>
     <section data-testid="modal" *ngSwitchDefault role="dialog" aria-modal="true" [class.small]="size === 'sm'" [class.medium]="size === 'md'" [class.large]="size === 'lg'">
-        <header ngg-modal-header data-testid="modal-header" [header]="header" (onClose)="this.handleCloseClick($event)"></header>
+        <header ngg-modal-header data-testid="modal-header" [header]="header" (closed)="this.handleCloseClick($event)"></header>
         <div ngg-modal-body data-testid="modal-body" class="body">
             <ng-container *ngTemplateOutlet="contentTpl"></ng-container> 
         </div>
-        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismiss || confirm" [dismiss]="dismiss" [confirm]="confirm" (onDismiss)="this.handleDismiss($event)" (onConfirm)="this.handleConfirm($event)"></footer>
+        <footer ngg-modal-footer data-testid="modal-footer" *ngIf="dismissLabel || confirmLabel" [dismissLabel]="dismissLabel" [confirmLabel]="confirmLabel" (dismiss)="this.handleDismiss($event)" (confirm)="this.handleConfirm($event)"></footer>
     </section>
     <ng-template #contentTpl>
             <ng-content></ng-content>

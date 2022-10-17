@@ -14,8 +14,8 @@ import {
 export class NggModalComponent implements OnDestroy {
     @Input() public modalType?: ModalType
     @Input() public header?: string
-    @Input() public confirm?: string
-    @Input() public dismiss?: string
+    @Input() public confirmLabel?: string
+    @Input() public dismissLabel?: string
     @Input() public size?: Size
 
     @Input() 
@@ -33,12 +33,9 @@ export class NggModalComponent implements OnDestroy {
     }
 
     @Output() public isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() public onClose: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() public onConfirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() public onDismiss: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    @Output() public closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    @Output() public confirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    @Output() public dismiss: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
     
     @HostBinding('class.open') get open() { return this.isOpen; }
     @ViewChild('backdrop') private backdropRef?: ElementRef<HTMLInputElement>;
@@ -57,16 +54,16 @@ export class NggModalComponent implements OnDestroy {
     }
     
     public handleDismiss(event: MouseEvent) {
-            this.onDismiss.emit(event);
+            this.dismiss.emit(event);
     }
     
     public handleConfirm(event: MouseEvent) {
-            this.onConfirm.emit(event);
+            this.confirm.emit(event);
     }
 
     private closeModal(event: MouseEvent) {
-        if (this.onClose.observers.length > 0) {
-            this.onClose.emit(event);
+        if (this.closed.observers.length > 0) {
+            this.closed.emit(event);
         }
         else {
             this.isOpen = false;
@@ -92,11 +89,10 @@ export class NggModalComponent implements OnDestroy {
 })
 export class NggModalHeaderComponent {
     @Input() header?: string;
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onClose: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+    @Output() closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     handleClose(event: MouseEvent) {
-            this.onClose.emit(event);
+            this.closed.emit(event);
     }
 
 }
@@ -115,23 +111,21 @@ export class NggModalBodyComponent {
     selector: '[ngg-modal-footer]',
     styleUrls: ['./modal.component.scss'],
     template: `
-    <button data-testid="modal-dismiss-button" *ngIf="dismiss" class="secondary" (click)="this.handleDismiss($event)">{{dismiss}}</button>
-    <button data-testid="modal-confirm-button" *ngIf="confirm" class="primary" (click)="this.handleConfirm($event)">{{confirm}}</button>
+    <button data-testid="modal-dismiss-button" *ngIf="dismissLabel" class="secondary" (click)="this.handleDismiss($event)">{{dismissLabel}}</button>
+    <button data-testid="modal-confirm-button" *ngIf="confirmLabel" class="primary" (click)="this.handleConfirm($event)">{{confirmLabel}}</button>
     `
 })
 export class NggModalFooterComponent {
-    @Input() dismiss?: string;
-    @Input() confirm?: string;
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onDismiss: EventEmitter<MouseEvent> = new EventEmitter();
-    // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    @Output() onConfirm: EventEmitter<MouseEvent> = new EventEmitter();
+    @Input() dismissLabel?: string;
+    @Input() confirmLabel?: string;
+    @Output() dismiss: EventEmitter<MouseEvent> = new EventEmitter();
+    @Output() confirm: EventEmitter<MouseEvent> = new EventEmitter();
 
     handleDismiss(event: MouseEvent) {
-            this.onDismiss.emit(event);
+            this.dismiss.emit(event);
     }
 
     handleConfirm(event: MouseEvent) {
-            this.onConfirm.emit(event);
+            this.confirm.emit(event);
     }
 }
