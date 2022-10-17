@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NggModalBodyComponent, NggModalComponent, NggModalFooterComponent, NggModalHeaderComponent } from './modal.component';
 
-const EXPORTED_DECLARATIONS = [
+const DECLARATIONS = [
     NggModalComponent,
     NggModalHeaderComponent,
     NggModalBodyComponent,
     NggModalFooterComponent
 ];
 
+const EXPORTS = [
+    NggModalComponent,
+];
+
 @NgModule({
     imports: [ CommonModule ],
-    exports: EXPORTED_DECLARATIONS,
-    declarations: EXPORTED_DECLARATIONS,
+    exports: EXPORTS,
+    declarations: DECLARATIONS,
 })
 export class NggModalModule { }
