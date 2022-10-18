@@ -46,7 +46,7 @@ module.exports = {
           customParams:
             csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
               ...acc,
-              ...{ [cur.key.name]: cur.value.value }
+              ...{ [cur.key.name]: cur.value.value || cur.value.elements.map(e => e.value) }
             }), {}) || {},
         }
       })
