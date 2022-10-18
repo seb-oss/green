@@ -44,9 +44,10 @@ module.exports = {
           name: csf.stories[0].name,
           title: csf.meta.title,
           customParams:
-            csf._metaAnnotations.parameters?.properties.map((p) => ({
-              [p.key.name]: p.value.value,
-            })) || [],
+            csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
+              ...acc,
+              ...{ [cur.key.name]: cur.value.value }
+            }), {}) || {},
         }
       })
     )
