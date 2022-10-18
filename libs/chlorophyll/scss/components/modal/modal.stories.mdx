@@ -23,6 +23,15 @@ export const Template = ({ headline, body }) => {
 
 <Meta
   title="Components/Modal"
+  parameters={{ 
+    componentIds: [
+      'component-dialogue',
+      'component-foldout',
+      'component-slideout',
+      'component-slideup',
+      'component-takeover'
+    ]
+  }}
   argTypes={{
     headline: { control: 'text' },
     body: { control: 'text' },

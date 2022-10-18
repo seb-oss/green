@@ -31,6 +31,9 @@ export const Template = ({
 
 <Meta
   title="Components/Alert"
+  parameters={{
+    componentIds: ['component-alertribbon']
+  }}
   argTypes={{
     type: {
       control: 'select',
@@ -54,7 +57,7 @@ export const Template = ({
 # Alert
 
 <Story
-    name="example"
+    name="examples"
     args={{
       type: 'success',
       heading: 'Success!',
@@ -63,6 +66,9 @@ export const Template = ({
       button: '',
       primaryButton: '',
       closeButton: false
+    }}
+    parameters={{ 
+      testParam: 'derp'
     }}
   >
     {Template.bind({})}
