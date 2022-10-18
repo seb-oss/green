@@ -64,7 +64,7 @@ module.exports = {
         nodeLogger.logger.info(`Design Library json written to ${dlJsonPath}`)
       })
     } catch(error) {
-      nodeLogger.logger.warn(`An error has occurred while generating json for Design Library`, error)
+      nodeLogger.logger.warn(`An error has occurred while generating json for Design Library`)
       nodeLogger.logger.warn(error)
     }
 
