@@ -1,0 +1,44 @@
+[
+  {
+    "id": "components-form-button--default",
+    "name": "Default",
+    "title": "Components/Form/Button",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-input--default",
+    "name": "Default",
+    "title": "Components/Form/Input",
+    "customParams": {}
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {}
+  },
+  {
+    "id": "components-datepicker--simple",
+    "name": "Simple",
+    "title": "Components/Datepicker",
+    "customParams": {}
+  },
+  {
+    "id": "components-dropdown--select",
+    "name": "Select",
+    "title": "Components/Dropdown",
+    "customParams": {}
+  },
+  {
+    "id": "components-segmented-control--with-router",
+    "name": "With Router",
+    "title": "Components/Segmented control",
+    "customParams": {}
+  }
+]

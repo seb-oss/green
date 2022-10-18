@@ -1,0 +1,14 @@
+[
+  {
+    "id": "use-cases-lighthouse-1--bar-chart",
+    "name": "Bar chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "chart--simple-bar",
+    "name": "Simple Bar",
+    "title": "Chart",
+    "customParams": {}
+  }
+]
