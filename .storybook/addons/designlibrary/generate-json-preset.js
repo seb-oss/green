@@ -36,30 +36,37 @@ module.exports = {
       })
     )
 
-    const jsonOutput = await Promise.all(
-      Object.keys(storyPaths).map(async (absPath) => {
-        const csf = (await csfTools.readCsfOrMdx(absPath, {})).parse()
-        return {
-          id: csf.stories[0].id,
-          name: csf.stories[0].name,
-          title: csf.meta.title,
-          customParams:
-            csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
-              ...acc,
-              ...{ [cur.key.name]: cur.value.value || cur.value.elements.map(e => e.value) }
-            }), {}) || {},
+    try {
+      const jsonOutput = await Promise.all(
+        Object.keys(storyPaths).map(async (absPath) => {
+          const csf = (await csfTools.readCsfOrMdx(absPath, {})).parse()
+          return {
+            id: csf.stories[0].id,
+            name: csf.stories[0].name,
+            title: csf.meta.title,
+            customParams:
+              csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
+                ...acc,
+                ...{ [cur.key.name]: cur.value.value || cur.value.elements?.map(e => e.value) }
+              }), {}) || {},
+          }
+        })
+      )
+
+      const dlJsonPath = path.join(options.outputDir, 'designlibrary.json')
+      fs.writeFile(dlJsonPath, JSON.stringify(jsonOutput, null, 2), (error) => {
+        if (error) {
+          nodeLogger.logger.warn(`An error has occurred writing Design Library json to ${dlJsonPath}`)
+          nodeLogger.logger.warn(error)
+
+          return
         }
+        nodeLogger.logger.info(`Design Library json written to ${dlJsonPath}`)
       })
-    )
-    
-    const dlJsonPath = path.join(options.outputDir, 'designlibrary.json')
-    fs.writeFile(dlJsonPath, JSON.stringify(jsonOutput, null, 2), (error) => {
-      if (error) {
-        nodeLogger.logger.error(`=> An error has occurred writing Design Library json to ${dlJsonPath}`, error)
-        return
-      }
-      nodeLogger.logger.info(`=> Design Library json written to ${dlJsonPath}`)
-    })
+    } catch(error) {
+      nodeLogger.logger.warn(`An error has occurred while generating json for Design Library`, error)
+      nodeLogger.logger.warn(error)
+    }
 
     return config
   },
