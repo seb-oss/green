@@ -1,5 +1,6 @@
 import { DropdownArgs, OnChange } from '@sebgroup/extract'
-import { useRef } from 'react'
+import {HTMLAttributes, useRef} from 'react'
+import {dropdownValues} from '@sebgroup/extract'
 import { useDropdown } from './hooks'
 
 export interface DropdownProps extends DropdownArgs {
@@ -43,12 +44,19 @@ export const Dropdown = ({
       validator,
     })
 
+  const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
+    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues.elements?.listbox?.classes.join(' ')}
+    return props
+  }
+
+  console.log(getListBoxProps(listboxProps))
+
   return (
     <div className="form-group">
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>
       </button>
-      <div {...listboxProps} ref={listboxRef}>
+      <div {...getListBoxProps(listboxProps)} ref={listboxRef}>
         <button
           type="button"
           className="close m-4 m-sm-2 d-block d-sm-none"
