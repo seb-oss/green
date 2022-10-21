@@ -31,7 +31,7 @@ object-assign
  * billboard.js, JavaScript chart library
  * https://naver.github.io/billboard.js/
  * 
- * @version 3.4.1
+ * @version 3.6.0
 */
 
 /**
