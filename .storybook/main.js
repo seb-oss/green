@@ -17,6 +17,7 @@ module.exports = {
     '@storybook/addon-a11y',
     'storybook-dark-mode',
     path.resolve('./.storybook/addons/run-in-iframe/run-in-iframe-preset.js'),
+    path.resolve('./.storybook/addons/designlibrary/generate-json-preset.js'),
     {
       name: '@storybook/addon-postcss',
       options: {
