@@ -42,18 +42,13 @@ module.exports = {
       const jsonOutput = await Promise.all(
         Object.keys(storyPaths).map(async (absPath) => {
           const csf = (await csfTools.readCsfOrMdx(absPath, {})).parse()
-          //if (csf.meta.title == 'Components/Modal')
-            //console.log(util.inspect(csf._storyAnnotations, {showHidden: false, depth: null, colors: true}))
           return csf.stories.map(story => ({
             id: story.id,
             name: story.name,
             title: csf.meta.title,
             customParams: {
-              ...csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
-                ...acc,
-                ...{ [cur.key.name]: cur.value.value || cur.value.elements?.map(e => e.value) }
-              }), {}),
-              ...getParametersFromCSF(csf, story.name)
+              ...getMetaParametersFromCSF(csf),
+              ...getStoryParametersFromCSF(csf, story.name)
             },
           }))
         })
@@ -83,7 +78,13 @@ module.exports = {
   },
 }
 
-getParametersFromCSF = (csf, storyName) => {
+const getMetaParametersFromCSF = (csf) =>
+  csf._metaAnnotations.parameters?.properties.reduce((acc, cur) => ({
+    ...acc,
+    ...{ [cur.key.name]: cur.value.value || cur.value.elements?.map(e => e.value) }
+  }), {})
+
+const getStoryParametersFromCSF = (csf, storyName) => {
   const storyAnnotations = csf._storyAnnotations;
   
   let storyParams;
