@@ -1,10 +1,12 @@
 import React, {useEffect, ChangeEvent} from 'react'
 import { StepperArgs, useStepper } from './hook'
+import {StepperData} from "@sebgroup/extract";
 
 export interface StepperProps extends StepperArgs {
   label?: string
   description?: string
   statusMessage?: string
+  disabled?: boolean
   onChange?: (value: number) => void
 }
 
@@ -13,13 +15,21 @@ export function Stepper({
   description,
   statusMessage,
   onChange,
+  disabled,
   ...props
 }: StepperProps) {
 
   const [stepper, data] = useStepper(props)
 
+  const handleOnChange = (value: number) => {
+    if (disabled) return
+    if (!onChange) return
+
+    onChange(value);
+  }
+
   useEffect(() => {
-    if (onChange && data.value) onChange(data.value)
+    if (data.value !== undefined) handleOnChange(data.value)
   }, [data.value])
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
