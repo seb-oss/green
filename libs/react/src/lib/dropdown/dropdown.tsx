@@ -49,8 +49,6 @@ export const Dropdown = ({
     return props
   }
 
-  console.log(getListBoxProps(listboxProps))
-
   return (
     <div className="form-group">
       <button type="button" {...togglerProps} ref={togglerRef}>
