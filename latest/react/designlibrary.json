@@ -3,19 +3,40 @@
     "id": "components-modal--modal-default",
     "name": "Modal Default",
     "title": "Components/Modal",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
   },
   {
     "id": "components-modal--slide-out",
     "name": "Slide Out",
     "title": "Components/Modal",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
   },
   {
     "id": "components-modal--take-over",
     "name": "Take Over",
     "title": "Components/Modal",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
   },
   {
     "id": "components-layout-flexbox--flexbox",
@@ -33,13 +54,21 @@
     "id": "components-form-radiobutton--radio-button",
     "name": "RadioButton",
     "title": "Components/Form/RadioButton",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-radiobutton"
+      ]
+    }
   },
   {
     "id": "components-form-input--text-input",
     "name": "TextInput",
     "title": "Components/Form/Input",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
   },
   {
     "id": "components-form-input--email-input",
@@ -63,31 +92,51 @@
     "id": "components-form--checkbox",
     "name": "Checkbox",
     "title": "Components/Form",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-checkbox"
+      ]
+    }
   },
   {
     "id": "components-form--button-group",
     "name": "Button Group",
     "title": "Components/Form",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-segmented-control"
+      ]
+    }
   },
   {
     "id": "components-form-button--button",
     "name": "Button",
     "title": "Components/Form/Button",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
   },
   {
     "id": "components-tabs--tabs",
     "name": "Tabs",
     "title": "Components/Tabs",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-tabs"
+      ]
+    }
   },
   {
     "id": "components-stepper--stepper",
     "name": "Stepper",
     "title": "Components/Stepper",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-stepper"
+      ]
+    }
   },
   {
     "id": "components-navbar--component",
@@ -117,13 +166,21 @@
     "id": "components-list--table-list",
     "name": "Table-list",
     "title": "Components/List",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-list"
+      ]
+    }
   },
   {
     "id": "components-link--link",
     "name": "Link",
     "title": "Components/Link",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-inlinelinks"
+      ]
+    }
   },
   {
     "id": "components-form--form",
@@ -135,31 +192,51 @@
     "id": "components-dropdown--dropdown",
     "name": "Dropdown",
     "title": "Components/Dropdown",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
   },
   {
     "id": "components-datepicker--datepicker",
     "name": "Datepicker",
     "title": "Components/Datepicker",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
   },
   {
     "id": "components-card--card",
     "name": "Card",
     "title": "Components/Card",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-card"
+      ]
+    }
   },
   {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
   },
   {
     "id": "components-alert--alert",
     "name": "Alert",
     "title": "Components/Alert",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
+      ]
+    }
   },
   {
     "id": "use--page",
