@@ -11,7 +11,12 @@ export const Template = ({ children, ...props }) => (
 
 Simple Button Component
 
-<Story name="Button" args={{ children: 'Button', className: 'size-sm' }}>
+<Story
+  name="Button"
+  parameters={{
+    componentIds: ['component-button']
+  }}
+  args={{ children: 'Button', className: 'size-sm' }}>
   {Template.bind({})}
 </Story>
 

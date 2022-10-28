@@ -7,6 +7,9 @@ import { NggChartsModule } from '../ngg-charts.module'
 
 export default {
   title: 'Chart',
+  parameters: {
+    componentIds: ['component-chart']
+  },
   decorators: [
     moduleMetadata({
       imports: [BrowserModule, CommonModule, NggChartsModule],

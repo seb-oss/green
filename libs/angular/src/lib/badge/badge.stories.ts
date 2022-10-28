@@ -31,6 +31,7 @@ export default {
     docs: {
       page: Documentation,
     },
+    componentIds: ['component-badge'],
   },
 } as Meta<NggBadgeComponent>
 

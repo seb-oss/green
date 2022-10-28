@@ -32,6 +32,9 @@ const routes: Routes = [
 export default {
   title: 'Components/Segmented control',
   component: NggSegmentedControlComponent,
+  parameters: {
+    componentIds: ['component-segmented-control']
+  },
   decorators: [
     moduleMetadata({
       declarations: [OptionAComponent, OptionBComponent],

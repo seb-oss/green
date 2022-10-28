@@ -25,6 +25,7 @@ export default {
     docs: {
       page: Documentation,
     },
+    componentIds: ['component-dropdown'],
   },
 } as Meta<NggDropdownComponent>
 

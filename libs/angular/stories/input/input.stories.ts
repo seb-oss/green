@@ -18,6 +18,7 @@ export default {
     docs: {
       page: Documentation,
     },
+    componentIds: ['component-input'],
   },
 } as Meta
 
