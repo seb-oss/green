@@ -50,7 +50,12 @@ Tabs make it easy to explore and switch between different views or functional as
 <hr />
 <br />
 
-<Story name="Tabs" args={{ children: 'Test' }}>
+<Story
+  name="Tabs"
+  parameters={{
+    componentIds: ['component-tabs']
+  }}
+  args={{ children: 'Test' }}>
   {Template.bind({})}
 </Story>
 

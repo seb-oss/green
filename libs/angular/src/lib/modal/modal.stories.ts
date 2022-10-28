@@ -15,6 +15,7 @@ export default {
     docs: {
       page: Documentation,
     },
+    componentIds: ['component-dialogue', 'component-slideout', 'component-foldout', 'component-takeover'],
   },
 } as Meta<NggModalComponent>
 

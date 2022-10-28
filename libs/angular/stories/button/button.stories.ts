@@ -7,6 +7,7 @@ export default {
     docs: {
       page: Documentation,
     },
+    componentIds: ['component-button']
   },
 } as Meta
 

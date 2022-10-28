@@ -9,7 +9,12 @@ export const Template = ({ align, ...props }) => <Datepicker {...props} />
 
 Datepicker Component
 
-<Story name="Datepicker" args={{}}>
+<Story 
+  name="Datepicker"
+  args={{}} 
+  parameters={{
+    componentIds: ['component-datepicker']
+  }}>
   {Template.bind({})}
 </Story>
 
