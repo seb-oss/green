@@ -4,24 +4,24 @@
 
 @mixin add-outline($color: tokens.$grey-1000, $offset: 2px) {
   outline: 2px solid $color;
-  outline-offset: 2px;
+  outline-offset: $offset;
 }
 
-@mixin add-focus($suffix: 'visible', $target: '') {
+@mixin add-focus($suffix: 'visible', $target: '', $offset: 2px) {
   @if $suffix != '' {
     $suffix: '-' + $suffix;
   }
 
   @if $target != '' {
     #{$target} {
-      @include add-outline(transparent);
+      @include add-outline(transparent, $offset);
       transition: all tokens.$transition-time;
       @media (prefers-reduced-motion: reduce) {
         transition: none;
       }
     }
   } @else {
-    @include add-outline(transparent);
+    @include add-outline(transparent, $offset);
     transition: all tokens.$transition-time;
     @media (prefers-reduced-motion: reduce) {
       transition: none;
@@ -38,7 +38,7 @@
   }
 
   &:focus#{$suffix} #{$target} {
-    @include add-outline();
+    @include add-outline(tokens.$grey-1000, $offset);
 
     &:active {
       outline-offset: 0px;

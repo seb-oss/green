@@ -28,7 +28,7 @@ $variants: (
 );
 
 @mixin base {
-  @include common.add-focus();
+  @include common.add-focus('visible', '', 3px);
   color: $color;
   font-weight: $font-weight;
   text-decoration: none;
@@ -63,9 +63,7 @@ $variants: (
 
 /* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
 @mixin variant($color, $outline-color) {
-  a:link {
-    @include common.add-focus();
-  }
+
   a:link:not(.button, [aria-disabled]) {
     color: $color;
     &:hover,
