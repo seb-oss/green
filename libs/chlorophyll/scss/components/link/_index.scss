@@ -1,18 +1,16 @@
 @use 'mixins';
 @use 'sass:map';
 
-
 a:not(:link, :visited) {
  @include mixins.disabled
 }
+
 // default
 a:link:not(.button, [role=tab]),
 a:visited:not(.button, [role=tab]),
 .link {
   @include mixins.base;
 }
-
-
 
 a.button {
   @include mixins.button;
