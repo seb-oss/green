@@ -45,7 +45,7 @@ export const Dropdown = ({
     })
 
   const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
-    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues.elements?.listbox?.classes.join(' ')}
+    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues.elements?.listbox?.classes?.join(' ')}
     return props
   }
 

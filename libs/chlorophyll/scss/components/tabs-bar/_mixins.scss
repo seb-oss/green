@@ -42,6 +42,11 @@ $_border-width: var(--sg-border-width);
   display: flex;
   overflow-x: auto;
 
+  // fix for not clipping outline of child elements
+  @include common.padding-vertical(2);
+  @include common.padding-start(2);
+  margin-inline-start: -4px;
+
   // hide scrollbar
   &::-webkit-scrollbar {
     display: none;

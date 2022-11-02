@@ -28,7 +28,7 @@ $variants: (
 );
 
 @mixin base {
-  @include common.add-outline-focus-state();
+  @include common.add-focus();
   color: $color;
   font-weight: $font-weight;
   text-decoration: none;
@@ -59,7 +59,7 @@ $variants: (
 /* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
 @mixin variant($color, $outline-color) {
   a:link {
-    @include common.add-outline-focus-state($outline-color);
+    @include common.add-focus();
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;
@@ -69,5 +69,4 @@ $variants: (
       color: inherit;
     }
   }
-
 }
