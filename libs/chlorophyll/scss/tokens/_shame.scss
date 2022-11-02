@@ -130,37 +130,30 @@ $purple: (
 /* stylelint-disable */
 $grey: (
   light: (
-    1100: rgb(26, 26, 26),
-    1000: rgb(51, 51, 51),
-    900: rgb(73, 73, 73),
-    800: rgb(134, 134, 134),
-    700: rgb(173, 173, 173),
-    600: rgb(206, 206, 206),
-    500: rgb(222, 222, 222),
-    400: rgb(233, 233, 233),
-    300: rgb(238, 238, 238),
-    // missing?
-    // background
-    200: rgb(248, 248, 248),
-    100: rgb(255, 255, 255),
-    // missing?
+    000: rgb(255, 255, 255),
+    100: rgb(248, 248, 248),
+    200: rgb(233, 233, 233),
+    300: rgb(222, 222, 222),
+    400: rgb(206, 206, 206),
+    500: rgb(173, 173, 173),
+    600: rgb(134, 134, 134),
+    700: rgb(73, 73, 73),
+    800: rgb(51, 51, 51),
+    900: rgb(26, 26, 26),
+    1000: rgb(0, 0, 0),
   ),
   dark: (
+    000: rgb(0, 0, 0),
     100: rgb(18, 18, 18),
-    // background
     200: rgb(34, 34, 34),
     300: rgb(39, 39, 39),
     400: rgb(44, 44, 44),
     500: rgb(51, 51, 51),
-    600: rgb(60, 60, 60),
-    // missing?
-    700: rgb(67, 67, 67),
-    // missing?
-    800: rgb(73, 73, 73),
-    900: rgb(117, 117, 117),
-    1000: rgb(171, 171, 171),
-    1100: rgb(179, 179, 179),
-    // missing?
+    600: rgb(73, 73, 73),
+    700: rgb(117, 117, 117),
+    800: rgb(171, 171, 171),
+    900: rgb(222, 222, 222),
+    1000: rgb(255, 255, 255),
   ),
 );
 /* stylelint-enable */
@@ -231,6 +224,7 @@ $border-color-valid: var(--border-color-valid);
 
 $grey-400: var(--grey-400);
 $grey-700: var(--grey-700);
+$grey-1000: var(--grey-1000);
 
 $intent-primary-color: var(--intent-primary-color);
 $intent-secondary-color: var(--intent-secondary-color);

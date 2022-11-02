@@ -36,6 +36,7 @@ $variants: (
 
   p > & {
     border-radius: 2px;
+    outline-offset: 3px;
   }
 
   &:hover,

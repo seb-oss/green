@@ -2,7 +2,7 @@
 @use 'functions';
 @use 'sass:map';
 
-@mixin add-outline($color: tokens.$black) {
+@mixin add-outline($color: tokens.$grey-1000, $offset: 2px) {
   outline: 2px solid $color;
   outline-offset: 2px;
 }

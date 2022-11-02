@@ -2,7 +2,7 @@
 @use 'sass:map';
 
 a:not(:link, :visited) {
- @include mixins.disabled
+ @include mixins.disabled;
 }
 
 // default
