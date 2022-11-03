@@ -2,12 +2,20 @@
 @use 'functions';
 @use 'sass:map';
 
-@mixin add-outline($color: tokens.$grey-1000, $offset: 2px) {
-  outline: 2px solid $color;
+@mixin add-outline($color: tokens.$grey-1000, $offset: .125rem) {
+  outline: .125rem solid $color;
   outline-offset: $offset;
 }
 
-@mixin add-focus($suffix: 'visible', $target: '', $offset: 2px) {
+/**
+  Styling for focus state
+
+  @param string $suffix - a suffix for focus so mixin can be used for focus, focus-visible and focus-within
+  @param string $target - selector for a target that is a child of seletor where you place mixin
+  @param length $offset - param used to set outline-offset
+ */
+
+@mixin add-focus($suffix: 'visible', $target: '', $offset: .125rem) {
   @if $suffix != '' {
     $suffix: '-' + $suffix;
   }
@@ -41,7 +49,7 @@
     @include add-outline(tokens.$grey-1000, $offset);
 
     &:active {
-      outline-offset: 0px;
+      outline-offset: 0;
     }
   }
 }
@@ -51,8 +59,8 @@
     $color: transparentize($color, 0.35);
   }
   &:focus {
-    outline: $color solid 2px;
-    outline-offset: 2px;
+    outline: $color solid .125rem;
+    outline-offset: .125rem;
   }
 
   &:focus:not(:focus-visible) {
@@ -60,8 +68,8 @@
   }
 
   &:focus-visible {
-    outline: $color solid 2px;
-    outline-offset: 2px;
+    outline: $color solid .125rem;
+    outline-offset: .125rem;
   }
 }
 
