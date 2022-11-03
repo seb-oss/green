@@ -166,24 +166,24 @@ export const highlight = (
   if (typeof selection === 'number') {
     const opts = dropdown.options
 
-    const VisibleDropdownOptions = opts.filter(
+    const visibleDropdownOptions = opts.filter(
       (element) => !element.classes.includes('hidden')
     )
 
-    const currentlySelectedIndex = VisibleDropdownOptions.findIndex(
+    const currentlySelectedIndex = visibleDropdownOptions.findIndex(
       (o) => o.active
     )
     let newSelectedIndex = currentlySelectedIndex + selection
 
     if (newSelectedIndex < 0)
       newSelectedIndex = dropdown.isLooping
-        ? VisibleDropdownOptions.length - 1
+        ? visibleDropdownOptions.length - 1
         : 0
-    if (newSelectedIndex >= VisibleDropdownOptions.length)
+    if (newSelectedIndex >= visibleDropdownOptions.length)
       newSelectedIndex = dropdown.isLooping
         ? 0
-        : VisibleDropdownOptions.length - 1
-    option = VisibleDropdownOptions[newSelectedIndex]
+        : visibleDropdownOptions.length - 1
+    option = visibleDropdownOptions[newSelectedIndex]
   } else {
     option = selection
   }
@@ -201,8 +201,8 @@ export const highlight = (
         attributes: {},
         classes:
           option === o
-            ? [...new Set([...option.classes, 'sg-highlighted', 'active'])]
-            : [...(o.classes.includes('hidden') ? ['hidden'] : [])],
+            ? ['active', 'sg-highlighted']
+            : o.classes.filter((obj) => obj !== 'active' && 'sg-highlighted'),
       })
     ),
   })
