@@ -166,18 +166,24 @@ export const highlight = (
   if (typeof selection === 'number') {
     const opts = dropdown.options
 
-    const mockedArray = opts.filter(
+    const VisibleDropdownOptions = opts.filter(
       (element) => !element.classes.includes('hidden')
     )
 
-    const currentlySelectedIndex = mockedArray.findIndex((o) => o.active)
+    const currentlySelectedIndex = VisibleDropdownOptions.findIndex(
+      (o) => o.active
+    )
     let newSelectedIndex = currentlySelectedIndex + selection
 
     if (newSelectedIndex < 0)
-      newSelectedIndex = dropdown.isLooping ? mockedArray.length - 1 : 0
-    if (newSelectedIndex >= mockedArray.length)
-      newSelectedIndex = dropdown.isLooping ? 0 : mockedArray.length - 1
-    option = mockedArray[newSelectedIndex]
+      newSelectedIndex = dropdown.isLooping
+        ? VisibleDropdownOptions.length - 1
+        : 0
+    if (newSelectedIndex >= VisibleDropdownOptions.length)
+      newSelectedIndex = dropdown.isLooping
+        ? 0
+        : VisibleDropdownOptions.length - 1
+    option = VisibleDropdownOptions[newSelectedIndex]
   } else {
     option = selection
   }
