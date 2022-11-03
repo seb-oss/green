@@ -40,7 +40,6 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
 @mixin secondary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  @include common.add-active-focus-state();
   background: $button-secondary-bg;
   border-color: $button-secondary-border-color;
   color: $button-secondary-color;
@@ -55,7 +54,6 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
 
 @mixin primary {
   @include common.add-hover-active-state();
-  @include common.add-active-focus-state();
   background: $button-primary-bg;
   border-color: $button-primary-border-color;
   color: $button-primary-color;
@@ -81,7 +79,6 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
     $ghost-color: tokens.$white;
   }
   @include common.add-hover-active-state($ghost-color, $ghost-color, true);
-  @include common.add-active-focus-state($ghost-color);
   border-color: $ghost-color;
   color: $ghost-color;
   --color: #{$ghost-color};

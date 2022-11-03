@@ -40,8 +40,7 @@
 
   @if $suffix != '' {
     &:focus:not(:focus-visible) {
-      box-shadow: none;
-      outline: 0;
+      outline: none;
     }
   }
 
@@ -124,13 +123,15 @@
   @include add-active-state($active, $fadeActiveHover);
 }
 
-/** add background color, color and border-color to element when it has focus-visible i.e. tab focus */
+/**
+  add background color, color and border-color to element when it has focus-visible i.e. tab focus
+*/
 @mixin add-active-focus-state($color: tokens.$black) {
   &:focus-visible {
-    //@include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    /*border-color: nth(
+    @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
+    border-color: nth(
       functions.desired-color-combination(tokens.$white, $color, 20%, 3),
       1
-    ) !important;*/
+    ) !important;
   }
 }
