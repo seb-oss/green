@@ -2,30 +2,16 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
+  Component, ContentChild, ElementRef, EventEmitter, Input,
   OnChanges,
   OnDestroy,
-  Output,
-  ViewChild,
-  EventEmitter,
-  SimpleChanges,
-  ContentChild,
+  Output, SimpleChanges, ViewChild
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
-  createDropdown,
-  AbstractDropdown,
-  DropdownHandler,
+  AbstractDropdown, CompareWith, createDropdown, DropdownArgs, DropdownHandler,
   DropdownOption,
-  DropdownOptionElement,
-  ElementProps,
-  DropdownArgs,
-  dropdownValues,
-  DropdownTexts,
-  CompareWith,
-  SearchFilter,
+  DropdownOptionElement, DropdownTexts, dropdownValues, ElementProps, SearchFilter
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 
@@ -178,7 +164,7 @@ export class NggDropdownComponent
     }
   }
 
-  private updateValue(option: any) {
+  private updateValue(option: any): void {
     this._value = option
     this.valueChange.emit(option)
     this.onChangeFn?.(option)

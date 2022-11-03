@@ -1,6 +1,7 @@
-import { dropdownValues, optionValues } from './defaultValues'
+import { IValidator, validateClassName } from '../helperFunction'
 import { randomId } from '../id'
 import reduce from '../reduce'
+import { dropdownValues, optionValues } from './defaultValues'
 import {
   AbstractDropdown,
   DropdownArgs,
@@ -8,7 +9,6 @@ import {
   DropdownOptionElement,
   DropdownTexts,
 } from './types'
-import { IValidator, validateClassName } from '../helperFunction'
 
 const selectionText = (
   selectedOptions: DropdownOptionElement[],
@@ -165,13 +165,19 @@ export const highlight = (
   let option: DropdownOptionElement
   if (typeof selection === 'number') {
     const opts = dropdown.options
-    const currentlySelectedIndex = opts.findIndex((o) => o.active)
+
+    const mockedArray = opts.filter(
+      (element) => !element.classes.includes('hidden')
+    )
+
+    const currentlySelectedIndex = mockedArray.findIndex((o) => o.active)
     let newSelectedIndex = currentlySelectedIndex + selection
+
     if (newSelectedIndex < 0)
-      newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
-    if (newSelectedIndex >= opts.length)
-      newSelectedIndex = dropdown.isLooping ? 0 : opts.length - 1
-    option = opts[newSelectedIndex]
+      newSelectedIndex = dropdown.isLooping ? mockedArray.length - 1 : 0
+    if (newSelectedIndex >= mockedArray.length)
+      newSelectedIndex = dropdown.isLooping ? 0 : mockedArray.length - 1
+    option = mockedArray[newSelectedIndex]
   } else {
     option = selection
   }
@@ -187,7 +193,10 @@ export const highlight = (
       reduce(o, {
         active: option === o,
         attributes: {},
-        classes: option === o ? ['active', 'sg-highlighted'] : [],
+        classes:
+          option === o
+            ? [...new Set([...option.classes, 'sg-highlighted', 'active'])]
+            : [...(o.classes.includes('hidden') ? ['hidden'] : [])],
       })
     ),
   })
@@ -278,27 +287,33 @@ export const blur = (dropdown: AbstractDropdown): AbstractDropdown =>
   reduce(dropdown, {
     isTouched: dropdown.isTouched || !dropdown.isOpen,
   } as Partial<AbstractDropdown>)
+
 export const active = (
   dropdown: AbstractDropdown,
   isActive: boolean
 ): AbstractDropdown =>
   reduce(dropdown, { isActive } as Partial<AbstractDropdown>)
+
 export const loop = (
   dropdown: AbstractDropdown,
   isLooping: boolean
 ): AbstractDropdown =>
   reduce(dropdown, { isLooping } as Partial<AbstractDropdown>)
+
 export const keypress = (
   dropdown: AbstractDropdown,
   key: string,
   event: KeyboardEvent
 ): AbstractDropdown | undefined => {
-  const opts = dropdown.options
+  const opts = dropdown.options.filter(
+    (option) => !option.classes.includes('hidden')
+  )
+
   let action
+
+  const searchInputElement = document.querySelector('#dropdown-search-input')
+
   switch (key) {
-    //case ' ':
-    //  action = toggle(dropdown)
-    //  break
     case 'Escape':
       if (dropdown.isOpen) action = close(dropdown)
       break
@@ -324,14 +339,23 @@ export const keypress = (
       action = open(highlight(dropdown, opts[opts.length - 1]))
       break
     case ' ':
+      if (searchInputElement !== document.activeElement) {
+        console.log(searchInputElement)
+        const activeOption = opts.find((option) => option.active)
+        action =
+          dropdown.isOpen && activeOption
+            ? dropdown.isMultiSelect
+              ? close(dropdown)
+              : close(select(dropdown, activeOption))
+            : toggle(dropdown)
+      }
+      break
     case 'Enter':
       // eslint-disable-next-line no-case-declarations
       const activeOption = opts.find((option) => option.active)
       action =
         dropdown.isOpen && activeOption
-          ? dropdown.isMultiSelect && key === ' '
-            ? select(dropdown, activeOption)
-            : dropdown.isMultiSelect
+          ? dropdown.isMultiSelect
             ? close(dropdown)
             : close(select(dropdown, activeOption))
           : toggle(dropdown)
