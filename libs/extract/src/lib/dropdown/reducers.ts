@@ -340,7 +340,6 @@ export const keypress = (
       break
     case ' ':
       if (searchInputElement !== document.activeElement) {
-        console.log(searchInputElement)
         const activeOption = opts.find((option) => option.active)
         action =
           dropdown.isOpen && activeOption
