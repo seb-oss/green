@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.30...@sebgroup/chlorophyll@1.0.0-beta.31) (2022-11-08)
+
+
+### Features
+
+* 🎸 Styling for headers ([d5c0597](https://github.com/sebgroup/green/commit/d5c0597b48f878817d7af118bb8b980b00035075))
+
+
+
 # [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.29...@sebgroup/chlorophyll@1.0.0-beta.30) (2022-10-26)
 
 
