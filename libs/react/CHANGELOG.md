@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.29...@sebgroup/green-react@1.0.0-beta.30) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 drop down flicker when mounted in react ([350f02f](https://github.com/sebgroup/green/commit/350f02fa882da8f8c6ca909ddc6e94129ce19589))
+* 🐛 Stepper can go to 0 ([cf17e4b](https://github.com/sebgroup/green/commit/cf17e4b7013f80687043354535b49e684af92741))
+
+
+
 # [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.28...@sebgroup/green-react@1.0.0-beta.29) (2022-10-26)
 
 
