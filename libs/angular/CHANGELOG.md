@@ -2,6 +2,26 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.28...@sebgroup/green-angular@1.0.0-beta.29) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 Removed check of observers ([23d8465](https://github.com/sebgroup/green/commit/23d846564bacbbbf329947ff6da37d113de8f081))
+* 🐛 Removed unnecessary module exports ([4fc6418](https://github.com/sebgroup/green/commit/4fc6418820685db4f0c9d92837d96ec5b5d352ed))
+
+
+### Features
+
+* 🎸 Modal (Angular) ([0ad1797](https://github.com/sebgroup/green/commit/0ad17974928a966070b02cf0c86ba1c9c7c9117c))
+
+
+### Performance Improvements
+
+* **modal:** onpush strategy ([7b30b2b](https://github.com/sebgroup/green/commit/7b30b2b3f48fcf4977708730cef9789458d319cc))
+
+
+
 # [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.27...@sebgroup/green-angular@1.0.0-beta.28) (2022-10-26)
 
 
