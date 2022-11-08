@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.29...@sebgroup/green-angular@1.0.0-beta.30) (2022-11-08)
+
+
+
 # [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.28...@sebgroup/green-angular@1.0.0-beta.29) (2022-11-08)
 
 
