@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.33...@sebgroup/green-angular@1.0.0-beta.34) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
 # [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.32...@sebgroup/green-angular@1.0.0-beta.33) (2022-11-08)
 
 
