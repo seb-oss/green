@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '/libs/chlorophyll/scss/tokens' as *;
+@use '../../../../chlorophyll/scss/tokens' as *;
 
 :host.open {
   height: 100vh;
@@ -9,7 +9,7 @@
   top: 0;
   width: 100%;
   z-index: var(--sg-z-index-modal-backdrop);
-    
+
   // Center dialog
   > section[role='dialog'] {
     left: 50%;
