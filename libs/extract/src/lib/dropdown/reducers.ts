@@ -317,7 +317,9 @@ export const keypress = (
 
   let action
 
-  const searchInputElement = document.querySelector('#dropdown-search-input')
+  const searchInputElement = document.querySelector(
+    `#${dropdown.elements.toggler.attributes.id}_search-input`
+  )
 
   switch (key) {
     case 'Escape':

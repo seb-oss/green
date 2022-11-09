@@ -123,7 +123,7 @@
 <ng-template #searchInput>
   <input
     *ngIf="dropdown?.isSearchable"
-     id="dropdown-search-input"
+    [id]="toggler?.attributes?.id + '_search-input'"
     type="search"
     (input)="search($event)"
     placeholder="{{ dropdown?.texts?.searchPlaceholder }}"
