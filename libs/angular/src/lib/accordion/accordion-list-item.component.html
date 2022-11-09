@@ -1,0 +1,28 @@
+<div class="accordion-list-item" data-testid="accordion-list-item-root">    
+    <div role="button" class="accordion-listItem-header-area" (click)="toggleExpanded()" tabindex="0" (keyup.enter)="toggleExpanded()">
+        <div class="accordion-list-item-header-row">
+            <div class="accordion-expander-button" data-testid="accordion-list-item-expander-button">
+                <!--Arrow down-->
+                <svg class="accordion-expander-button-icon" *ngIf="!this.isExpanded" width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-testid="mma-accordion-item-downarrow">
+                    <path d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z" />
+                </svg>
+                <!--Arrow up-->
+                <svg class="accordion-expander-button-icon" [attr.id]="id + '_arrowUp'" *ngIf="this.isExpanded" width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-testid="mma-accordion-item-uparrow">
+                    <path d="M17.6569 16.2427L19.0711 14.8285L12.0001 7.75739L4.92896 14.8285L6.34317 16.2427L12.0001 10.5858L17.6569 16.2427Z" />
+                </svg>
+            </div>
+            <div data-testid="accordion-list-item-header">
+                <h4>{{listItemHeader}}</h4>
+            </div>
+        </div>
+        <div class="accordion-list-item-header-row">
+            <div class="accordion-list-item-empty-column"></div>
+            <div class="accordion-list-item-sub-header" data-testid="accordion-list-item-subheader">
+                <h6>{{listItemSubHeader}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-list-item-content" [ngClass]="{'content-hidden' : !this.isExpanded}" [ngStyle]="{height: this.contentHeight}" data-testid="accordion-list-item-content">
+        <ng-content></ng-content>
+    </div>
+</div>
