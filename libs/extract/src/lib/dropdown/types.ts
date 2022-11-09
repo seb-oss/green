@@ -78,6 +78,7 @@ export interface DropdownArgs {
   multiSelect?: boolean
   searchable?: boolean
   onTouched?: () => void
+  onBlur?: () => void
   validator?: IValidator
   compareWith?: CompareWith
   searchFilter?: SearchFilter
@@ -93,6 +94,7 @@ export interface DropdownHandler {
   onChange: OnChange
   onDestroy$: Subject<void>
   onTouched?: () => void
+  onBlur?: () => void
 
   update: (props: DropdownArgs) => Promise<void>
   blur: () => Promise<void>

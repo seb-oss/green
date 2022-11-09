@@ -44,6 +44,7 @@ export const createDropdown = (
     onChange,
     onDestroy$: new Subject<void>(),
     onTouched: init.onTouched,
+    onBlur: init?.onBlur,
   } as DropdownHandler
 
   handler.active = (isActive) =>
@@ -74,6 +75,7 @@ export const createDropdown = (
     .pipe(takeUntil(handler.onDestroy$))
     .subscribe(() => {
       handler.blur()
+      handler.onBlur?.()
     })
 
   merge(fromEvent(toggler, 'focusin'), fromEvent(toggler, 'click'))

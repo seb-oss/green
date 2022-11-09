@@ -171,10 +171,12 @@ export class NggDropdownComponent
       searchFilter: this.searchFilter,
       compareWith: this.compareWith,
       onTouched: () => {
-        this.onTouchedFn?.()
         this.touched.emit(true)
         this.cd.markForCheck()
       },
+      onBlur: () => {
+        this.onTouchedFn?.()
+      }
     }
   }
 
