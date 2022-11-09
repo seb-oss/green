@@ -24,7 +24,7 @@ export const Template = ({
         ${link ? `<a href="#">${link}</a>.` : ''}
       </p>
     </div>
-    ${closeButton ? `<button className="close" type="button"><span className="sr-only">Close</span></button>` : ''}
+    ${closeButton ? `<button class="close" type="button"><span className="sr-only">Close</span></button>` : ''}
     ${button || primaryButton  ?
     `<footer>
         ${button ? `<button type="button">${button}</button>` : ''}
@@ -62,12 +62,12 @@ export const Template = ({
     name="Alert"
     args={{
       type: '',
-      heading: 'Success!',
-      content: 'Text content',
-      link: 'inline link',
-      button: '',
+      heading: 'Heading!',
+      content: 'Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.',
+      link: 'Another inline link',
+      button: false,
       primaryButton: '',
-      closeButton: false
+      closeButton: true
     }}
   >
     {Template.bind({})}
