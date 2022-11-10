@@ -358,7 +358,9 @@ export const keypress = (
       const activeOption = opts.find((option) => option.active)
       action =
         dropdown.isOpen && activeOption
-          ? dropdown.isMultiSelect
+          ? dropdown.isMultiSelect && key === ' '
+            ? select(dropdown, activeOption)
+            : dropdown.isMultiSelect
             ? close(dropdown)
             : close(select(dropdown, activeOption))
           : toggle(dropdown)
