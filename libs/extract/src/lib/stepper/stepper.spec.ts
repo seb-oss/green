@@ -1,11 +1,17 @@
+import { SetStateAction } from 'react'
 import { createStepper, AbstractStepper, StepperData } from './stepper'
 
 describe('stepper', () => {
   let stepper: AbstractStepper
   let data: StepperData
 
-
-  const setData = (_data: StepperData) => { data = _data }
+  const setData = (state: SetStateAction<StepperData>) => {
+    if (typeof state === 'function') {
+      data = state(data)
+    } else if (typeof state === 'object') {
+      data = state
+    }
+  }
 
   it('instantiates and sets data', () => {
     stepper = createStepper({ }, setData)
