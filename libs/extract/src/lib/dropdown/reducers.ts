@@ -317,10 +317,6 @@ export const keypress = (
 
   let action
 
-  const searchInputElement = document.querySelector(
-    `#${dropdown.elements.toggler.attributes.id}_search-input`
-  )
-
   switch (key) {
     case 'Escape':
       if (dropdown.isOpen) action = close(dropdown)
@@ -347,15 +343,23 @@ export const keypress = (
       action = open(highlight(dropdown, opts[opts.length - 1]))
       break
     case ' ':
-      if (searchInputElement !== document.activeElement) {
+      if (document.activeElement) {
+        debugger
         const activeOption = opts.find((option) => option.active)
-        action =
-          dropdown.isOpen && activeOption
-            ? dropdown.isMultiSelect
-              ? close(dropdown)
-              : close(select(dropdown, activeOption))
-            : toggle(dropdown)
+
+        if (dropdown.isOpen && activeOption && dropdown.isMultiSelect) {
+          action = select(dropdown, activeOption)
+        }
+
+        if (
+          dropdown.isOpen &&
+          !dropdown.isSearchable &&
+          !dropdown.isMultiSelect
+        ) {
+          action = close(select(dropdown, activeOption))
+        }
       }
+
       break
     case 'Enter':
       // eslint-disable-next-line no-case-declarations
