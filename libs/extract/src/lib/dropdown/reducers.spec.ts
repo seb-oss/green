@@ -129,7 +129,7 @@ describe('dropdown/reducers', () => {
         const dropdown = create({ id, options })
 
         expect(dropdown.elements.listbox.classes).toEqual([
-          'popover',
+          '_popover',
           'popover-dropdown',
         ])
       })

@@ -66,18 +66,18 @@ describe('Dropdown', () => {
     })
     it('sets class active on listbox', async () => {
       // initial
-      expect(listbox.className).toEqual('popover popover-dropdown')
+      expect(listbox.className).toEqual('_popover popover-dropdown')
 
       // open
       fireEvent.click(toggleButton)
       await waitFor(() =>
-        expect(listbox.className).toEqual('popover popover-dropdown active')
+        expect(listbox.className).toEqual('_popover popover-dropdown active')
       )
 
       // close
       fireEvent.click(toggleButton)
       await waitFor(() =>
-        expect(listbox.className).toEqual('popover popover-dropdown')
+        expect(listbox.className).toEqual('_popover popover-dropdown')
       )
     })
   })
@@ -98,7 +98,7 @@ describe('Dropdown', () => {
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
         await waitFor(() =>
-          expect(listbox.className).toEqual('popover popover-dropdown')
+          expect(listbox.className).toEqual('_popover popover-dropdown')
         )
       })
       it('sets toggler text', async () => {
