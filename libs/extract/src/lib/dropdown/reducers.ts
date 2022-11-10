@@ -343,25 +343,18 @@ export const keypress = (
       action = open(highlight(dropdown, opts[opts.length - 1]))
       break
     case ' ':
-      if (document.activeElement) {
-        const activeOption = opts.find((option) => option.active)
-
-        if (dropdown.isOpen && activeOption && dropdown.isMultiSelect) {
-          action = select(dropdown, activeOption)
-        }
-
-        if (
-          dropdown.isOpen &&
-          !dropdown.isSearchable &&
-          !dropdown.isMultiSelect
-        ) {
-          action = close(select(dropdown, activeOption))
+    case 'Enter': {
+      if (dropdown.isSearchable && dropdown.isOpen && key === ' ') {
+        const searchFieldIsActive =
+          document.activeElement ===
+          document.getElementById(
+            dropdown.elements.toggler?.attributes?.id + '_search-input'
+          )
+        if (searchFieldIsActive) {
+          break
         }
       }
 
-      break
-    case 'Enter':
-      // eslint-disable-next-line no-case-declarations
       const activeOption = opts.find((option) => option.active)
       action =
         dropdown.isOpen && activeOption
@@ -370,6 +363,7 @@ export const keypress = (
             : close(select(dropdown, activeOption))
           : toggle(dropdown)
       break
+    }
     default:
       break
   }
