@@ -344,7 +344,6 @@ export const keypress = (
       break
     case ' ':
       if (document.activeElement) {
-        debugger
         const activeOption = opts.find((option) => option.active)
 
         if (dropdown.isOpen && activeOption && dropdown.isMultiSelect) {
