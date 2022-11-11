@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.34...@sebgroup/green-react@1.0.0-beta.35) (2022-11-11)
+
+
+### Bug Fixes
+
+* **stepper:** only emit onChange on user events ([5ae5e38](https://github.com/sebgroup/green/commit/5ae5e38f90f56ef5044d9a2ac61e0961ed4ea0c4))
+
+
+
 # [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.33...@sebgroup/green-react@1.0.0-beta.34) (2022-11-10)
 
 
