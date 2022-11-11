@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.35...@sebgroup/green-angular@1.0.0-beta.36) (2022-11-11)
+
+
+### Features
+
+* 🎸 allow angular 14 ([5f61848](https://github.com/sebgroup/green/commit/5f618487f97807e28f7796707f9055bee9c79e1d)), closes [#620](https://github.com/sebgroup/green/issues/620)
+
+
+
 # [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.34...@sebgroup/green-angular@1.0.0-beta.35) (2022-11-10)
 
 
