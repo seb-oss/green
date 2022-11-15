@@ -7,6 +7,9 @@ import { NggChartsModule } from '../ngg-charts.module'
 
 export default {
   title: 'Chart',
+  parameters: {
+    componentIds: ['component-chart']
+  },
   decorators: [
     moduleMetadata({
       imports: [BrowserModule, CommonModule, NggChartsModule],
@@ -55,8 +58,10 @@ SimpleBar.args = {
       axis: {
         y: {
           label: 'Antal',
+          stepSize: 50
         },
       },
+      tooltipNumberFormat: value => `${value} st`
     },
   },
 }
@@ -289,4 +294,37 @@ FitToHeight.args = {
       'Avslutade prenumerationer',
     ],
   },
+}
+
+export const CustomTickValues = ChartStory.bind({})
+CustomTickValues.args = {
+  settings: {
+    data: [
+      {
+        type: 'spline',
+        name: 'Signerade avtal SEB',
+        values: [100, 140, 250, 380],
+      },
+      {
+        type: 'bar',
+        name: 'Aktiverade prenumerationer',
+        values: [3, 7, 9, 2],
+        axis: 'y2',
+      },
+    ],
+    categories: ['jan', 'feb', 'mar', 'apr'],
+    legend: 'top',
+    style: {
+      axis: {
+        y: {
+          values: [100,200,300,400]
+        },
+        y2: {
+          values: () => [0,2,4,6,8,10],
+          format: v => `${v} st`
+        }
+      }
+    }
+  },
+  theme: '',
 }

@@ -102,7 +102,7 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
-        "versionTagPrefix": "@sebgroup/green-${target}@",
+        "tagPrefix": "@sebgroup/green-${projectName}@",
         "releaseAs": "prerelease",
         "preid": "beta",
         "trackDeps": true,

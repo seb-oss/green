@@ -99,8 +99,10 @@
   font: inherit;
   justify-content: flex-end;
   max-width: fit-content;
+  max-width: -moz-fit-content;
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   white-space: nowrap;
 }
 

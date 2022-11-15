@@ -1,10 +1,10 @@
 {
   "name": "@sebgroup/green-charts",
-  "version": "1.0.0-beta.20",
+  "version": "1.0.0-beta.33",
   "dependencies": {
-    "@sebgroup/chlorophyll": "^1.0.0-beta.22",
+    "@sebgroup/chlorophyll": "^1.0.0-beta.36",
     "@types/d3-selection": "^3.0.2",
-    "billboard.js": "^3.4.1"
+    "billboard.js": "^3.6.0"
   },
   "description": "Base library for charts.",
   "repository": {

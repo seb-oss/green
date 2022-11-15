@@ -31,6 +31,10 @@ export interface Legend {
 export interface ChartAxis {
   show?: boolean
   label?: string
+  ticksCount?: number
+  stepSize?: number
+  values?: Array<number> | (() => Array<number>)
+  format?: (value: number) => string
 }
 
 export interface ChartStyle {
@@ -44,7 +48,8 @@ export interface ChartStyle {
       }
   point?: {
     show?: boolean | 'focus'
-  }
+  },
+  tooltipNumberFormat?: (value: number) => string
 }
 
 interface Tick {

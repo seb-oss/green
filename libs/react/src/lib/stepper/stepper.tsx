@@ -1,26 +1,20 @@
-import React, {useEffect, ChangeEvent} from 'react'
+import {ChangeEvent} from 'react'
 import { StepperArgs, useStepper } from './hook'
 
 export interface StepperProps extends StepperArgs {
   label?: string
   description?: string
   statusMessage?: string
-  onChange?: (value: number) => void
 }
 
 export function Stepper({
   label,
   description,
   statusMessage,
-  onChange,
-  ...props
+  ...stepperArgs
 }: StepperProps) {
 
-  const [stepper, data] = useStepper(props)
-
-  useEffect(() => {
-    if (onChange && data.value) onChange(data.value)
-  }, [data.value])
+  const [stepper, data] = useStepper(stepperArgs)
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
     stepper.setValue(e.target.valueAsNumber)

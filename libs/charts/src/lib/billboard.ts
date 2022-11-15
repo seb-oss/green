@@ -54,6 +54,8 @@ export const createOptions = ({
     {}
   )
 
+  const defaultTooltipNumberFormat = (num: number) =>
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
@@ -62,7 +64,21 @@ export const createOptions = ({
       axes,
     },
     legend: { show: false },
-    tooltip: { contents: { template: tmplTooltip } },
+    tooltip: {
+      format: {
+        value: (value, ratio) => {
+          if (typeof ratio == 'number')
+            return `${ratio * 100}%`
+          else {
+            const formatOverride = settings?.style?.tooltipNumberFormat;
+            return typeof formatOverride == 'function'
+                   ? formatOverride(value)
+                   : defaultTooltipNumberFormat(value)
+          }
+         }
+      },
+      contents: { template: tmplTooltip }
+    },
   }
 
   let hasY2Axis = false
@@ -112,7 +128,23 @@ export const createOptions = ({
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
-            show: settings?.show,
+            ...((settings?.ticksCount || settings?.stepSize || settings?.values || settings?.format) && {
+              tick: {
+                ...(settings?.ticksCount && {
+                  count: settings?.ticksCount
+                }),
+                ...(settings?.stepSize && {
+                  stepSize: settings?.stepSize,
+                }),
+                ...(settings?.values && {
+                  values: settings.values
+                }),
+                ...(settings?.format && {
+                  format: settings.format
+                })
+              }
+            }),
+            show: settings?.show === false ? false : true,
             label: settings?.label,
           },
         }),

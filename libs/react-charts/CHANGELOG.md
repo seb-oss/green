@@ -2,6 +2,62 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.33...@sebgroup/green-react-charts@1.0.0-beta.34) (2022-11-11)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.32...@sebgroup/green-react-charts@1.0.0-beta.33) (2022-11-10)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.31...@sebgroup/green-react-charts@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.30...@sebgroup/green-react-charts@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.29...@sebgroup/green-react-charts@1.0.0-beta.30) (2022-11-08)
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.28...@sebgroup/green-react-charts@1.0.0-beta.29) (2022-11-08)
+
+
+
+# [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.27...@sebgroup/green-react-charts@1.0.0-beta.28) (2022-10-26)
+
+
+
+# [1.0.0-beta.27](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.26...@sebgroup/green-react-charts@1.0.0-beta.27) (2022-10-12)
+
+
+
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.25...@sebgroup/green-react-charts@1.0.0-beta.26) (2022-10-07)
+
+
+
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.24...@sebgroup/green-react-charts@1.0.0-beta.25) (2022-10-03)
+
+
+
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.23...@sebgroup/green-react-charts@1.0.0-beta.24) (2022-09-27)
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.22...@sebgroup/green-react-charts@1.0.0-beta.23) (2022-09-23)
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.21...@sebgroup/green-react-charts@1.0.0-beta.22) (2022-09-20)
+
+
+
+# [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.20...@sebgroup/green-react-charts@1.0.0-beta.21) (2022-09-20)
+
+
+
 # [1.0.0-beta.20](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.19...@sebgroup/green-react-charts@1.0.0-beta.20) (2022-08-31)
 
 

@@ -88,4 +88,7 @@ TakeOver.args = {
 export default {
   title: 'Components/Modal',
   component: Modal,
+  parameters: {
+    componentIds: ['component-dialogue', 'component-slideout', 'component-foldout', 'component-takeover'],
+  }
 } as Meta

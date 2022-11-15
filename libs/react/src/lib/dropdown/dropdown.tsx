@@ -1,59 +1,60 @@
-import {DropdownOption, DropdownTexts} from '@sebgroup/extract'
-import {useEffect, useRef} from 'react'
+import { DropdownArgs, OnChange } from '@sebgroup/extract'
+import {HTMLAttributes, useRef} from 'react'
+import {dropdownValues} from '@sebgroup/extract'
 import { useDropdown } from './hooks'
-import {IValidator} from "@sebgroup/extract";
 
-export interface DropdownProps {
-  id?: string
-  texts?: DropdownTexts
-  options: DropdownOption[]
-  useValue?: string
-  display?: string
-  selectValue?: string
-  loop?: boolean
-  multiSelect?: boolean
-  onChange?: (o: DropdownOption) => void
-  validator?: IValidator
+export interface DropdownProps extends DropdownArgs {
+  onChange?: OnChange
 }
 
 export const Dropdown = ({
   id,
+  value,
   options,
   loop,
   multiSelect,
-  selectValue,
+  searchable,
+  searchFilter,
+  compareWith,
   useValue,
   display,
   texts,
   onChange,
-  validator
+  validator,
 }: DropdownProps) => {
-
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
 
   const { dropdown, listboxProps, togglerProps, listItems, multiSelectProps } =
     useDropdown({
       id,
+      value,
       options,
       loop,
       multiSelect,
-      selectValue,
+      searchable,
+      searchFilter,
+      compareWith,
       useValue,
       display,
       togglerRef,
       listboxRef,
       texts,
       onChange,
-      validator
+      validator,
     })
+
+  const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
+    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues.elements?.listbox?.classes?.join(' ')}
+    return props
+  }
 
   return (
     <div className="form-group">
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>
       </button>
-      <div {...listboxProps} ref={listboxRef}>
+      <div {...getListBoxProps(listboxProps)} ref={listboxRef}>
         <button
           type="button"
           className="close m-4 m-sm-2 d-block d-sm-none"
@@ -85,7 +86,7 @@ export const Dropdown = ({
           </ul>
         )}
       </div>
-      { validator && <span className="form-info">{validator?.message}</span> }
+      {validator && <span className="form-info">{validator?.message}</span>}
     </div>
   )
 }
