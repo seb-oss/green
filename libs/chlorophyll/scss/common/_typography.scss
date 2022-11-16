@@ -1,9 +1,17 @@
 @use '../tokens';
 
+@mixin font-scale($step) {
+  font-size: map-get(tokens.$font-scale, $step);
+}
+
 @mixin font-size($size) {
   font-size: map-get(tokens.$font-size, $size);
 }
 
 @mixin font-weight($weight) {
   font-weight: map-get(tokens.$font-weights, $weight);
+}
+
+@mixin line-height($step) {
+  line-height: map-get(tokens.$line-height-scale, $step);
 }

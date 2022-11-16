@@ -31,16 +31,16 @@ $variants: (
 );
 
 $height: 24px;
-$border-radius: 0;
+$border-radius: 2px;
 $color: var(--color);
 $background: var(--background);
 $close-bg-hover: hsla(var(--sg-hsl-black), 0.2);
 $close-bg-active: hsla(var(--sg-hsl-black), 0.3);
 
-$close-height: 1.5rem;
+$close-height: 1.25rem;
 $close-width: $close-height;
 
-$close-icon-thickness: 3px;
+$close-icon-thickness: 2px;
 
 $label-font-weight: 500;
 $label-font-size: 14px;
@@ -55,7 +55,8 @@ $label-font-size: 14px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  @include common.padding(3);
+  @include common.padding-horizontal(3);
+  @include common.padding-vertical(1);
 
   strong {
     font-size: $label-font-size;
@@ -71,7 +72,7 @@ $label-font-size: 14px;
     &:before,
     &:after {
       height: math.div($close-height, 1.5);
-      width: 3px;
+      width: $close-icon-thickness;
       top: calc(50% - #{math.div($close-height, 3)});
       left: calc(50% - #{math.div($close-icon-thickness, 2)});
     }

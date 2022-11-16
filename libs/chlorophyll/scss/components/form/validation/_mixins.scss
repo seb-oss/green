@@ -34,9 +34,9 @@ $_border-width: var(--sg-border-width);
 }
 
 @mixin add-form-info() {
-  @include common.font-size('s');
-  color: tokens.$text-secondary-color; //map-get(tokens.$grey, 3);
-  display: block;
+  @include common.font-scale(2);
+  @include common.line-height(4);
+  color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
   max-width: fit-content;
   max-width: -moz-fit-content;
   min-width: 100%;
@@ -76,8 +76,18 @@ $_border-width: var(--sg-border-width);
 @mixin add-fieldset-validation() {
   fieldset {
     @include common.padding(0);
-    @include common.margin(0);
     border: 0;
+    width: fit-content;
+    margin-block-start: 1.75rem;
+
+    &:has(.form-info) {
+      margin-block-start: 3rem;
+    }
+
+    .form-info {
+      top: 1.25rem;
+      position: absolute;
+    }
 
     &.is-valid {
       box-shadow: 0 0 0 $_border-width tokens.$intent-success-background;
@@ -91,24 +101,23 @@ $_border-width: var(--sg-border-width);
   fieldset.is-valid,
   fieldset.is-invalid {
     @include common.add-border-radius();
-    @include common.padding-bottom(2);
-    @include common.padding-horizontal(5);
+    @include common.padding-start(5);
     @include common.margin-bottom(4);
 
     legend {
-      margin-bottom: -1.5rem;
       margin-left: -1rem;
-      padding-bottom: 2.5rem;
-      /* hide prepended form-info when fieldset/group is valid/invalid */
-      + .form-info {
-        display: none;
-      }
+    }
+
+    .form-info {
+      margin-inline-start: -1rem;
     }
   }
 
   legend {
     @include common.font-weight('medium');
-    @include common.margin-bottom(3);
+    line-height: 1.25rem;
     padding: 0;
+    position: absolute;
+    top: 0;
   }
 }

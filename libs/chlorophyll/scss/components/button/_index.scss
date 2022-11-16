@@ -43,5 +43,5 @@ a.button.primary {
 // ghost
 button.ghost,
 .button.ghost {
-  @include mixins.ghost;
+  @include mixins.ghost-dark;
 }

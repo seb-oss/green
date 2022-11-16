@@ -1,0 +1,34 @@
+:root {
+  /******************************************/
+  /************ Reference Tokens ************/
+  /******************************************/
+  --gds-ref-pallet-base000: hsl(0 0% 100%);
+  --gds-ref-pallet-base100: hsl(0 0% 90%);
+  --gds-ref-pallet-base200: hsl(0 0% 80%);
+  --gds-ref-pallet-base300: hsl(0 0% 70%);
+  --gds-ref-pallet-base400: hsl(0 0% 60%);
+  --gds-ref-pallet-base500: hsl(0 0% 50%);
+  --gds-ref-pallet-base600: hsl(0 0% 40%);
+  --gds-ref-pallet-base700: hsl(0 0% 30%);
+  --gds-ref-pallet-base800: hsl(0 0% 20%);
+  --gds-ref-pallet-base900: hsl(0 0% 10%);
+  --gds-ref-pallet-base1000: hsl(0 0% 0%);
+
+  /******************************************/
+  /************* System Tokens **************/
+  /******************************************/
+
+  --gds-sys-color-blue: #41B0EE;
+  --gds-sys-color-blue-dark-1: #0092E1;
+  --gds-sys-color-blue-dark-2: #007AC7;
+
+  --gds-sys-color-surface: var(--gds-ref-pallet-base000);
+  --gds-sys-color-base: var(--gds-ref-pallet-base800);
+  --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
+
+  @media (prefers-color-scheme: dark) {
+    --gds-sys-color-blue: #58B8EE;
+    --gds-sys-color-blue-dark-1: #00ADFF;
+    --gds-sys-color-blue-dark-2: #2C9CD9;
+  }
+}
