@@ -13,7 +13,7 @@ $_background: input.$background;
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
-  width: fit-content;
+
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
@@ -24,6 +24,12 @@ $_background: input.$background;
     min-width: 0 !important;
     @include common.media-breakpoint-up('sm') {
       flex: 0 1 auto;
+    }
+  }
+
+  @include common.media-breakpoint-up('sm') {
+    > input {
+      flex: 1 1 auto;
     }
   }
 
