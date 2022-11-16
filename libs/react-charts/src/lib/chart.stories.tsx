@@ -4,6 +4,9 @@ import { Chart, ChartProps } from './chart'
 export default {
   component: Chart,
   title: 'Chart',
+  parameters: {
+    componentIds: ['component-chart']
+  },
 } as Meta
 
 const Template: Story<ChartProps> = (args) => <Chart {...args} />
@@ -24,6 +27,13 @@ SimpleBar.args = {
       'Aktiverade prenumerationer',
       'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
+    style: {
+      axis: {
+        y: {
+          stepSize: 50
+        }
+      }
+    }
   },
 }
 

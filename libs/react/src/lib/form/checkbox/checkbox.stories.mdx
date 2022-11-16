@@ -10,7 +10,12 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 Simple Checkbox component
 
 <Canvas>
-  <Story name="Checkbox" args={{ label: 'Checkbox input', checked: true }}>
+  <Story
+    name="Checkbox"
+    parameters={{
+      componentIds: ['component-checkbox']
+    }}
+    args={{ label: 'Checkbox input', checked: true }}>
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>

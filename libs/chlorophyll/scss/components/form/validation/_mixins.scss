@@ -38,6 +38,7 @@ $_border-width: var(--sg-border-width);
   @include common.line-height(4);
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
   max-width: fit-content;
+  max-width: -moz-fit-content;
   min-width: 100%;
 }
 

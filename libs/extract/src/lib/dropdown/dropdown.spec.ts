@@ -4,6 +4,7 @@ import {
   DropdownHandler,
   DropdownListener,
   DropdownOption,
+  OnChange,
 } from './types'
 import { createDropdown } from './dropdown'
 
@@ -16,6 +17,7 @@ const tick = (t = 0) => new Promise((r) => setTimeout(r, t))
 describe('dropdown', () => {
   let handler: DropdownHandler
   let listener: jest.Mock<DropdownListener>
+  let onChange: jest.Mock<OnChange>
 
   let toggler: HTMLElement
   let listbox: HTMLElement
@@ -28,6 +30,7 @@ describe('dropdown', () => {
     listbox = document.createElement('div')
     fieldset = document.createElement('fieldset')
     listener = jest.fn<never, [AbstractDropdown]>().mockName('listener')
+    onChange = jest.fn().mockName('onChange')
     const options: DropdownOption[] = [
       { key: 'A', value: 1 },
       { key: 'B', value: 2 },
@@ -47,7 +50,8 @@ describe('dropdown', () => {
       toggler,
       listbox,
       fieldset,
-      listener
+      listener,
+      onChange
     )
     await tick()
   })
@@ -89,6 +93,11 @@ describe('dropdown', () => {
     it('calls back on select', async () => {
       await handler.select(handler.dropdown.options[0])
       expect(listener).toHaveBeenCalledWith(handler.dropdown)
+      expect(onChange).toHaveBeenCalledWith(handler.dropdown.value)
+    })
+    it('calls back on search', async () => {
+      await handler.search('A')
+      expect(listener).toHaveBeenCalledWith(handler.dropdown)
     })
   })
 
@@ -106,6 +115,7 @@ describe('dropdown', () => {
         await tick()
 
         expect(listener).toHaveBeenCalledTimes(2)
+        expect(onChange).toHaveBeenCalledTimes(0)
       })
     })
     describe('when active', () => {
@@ -127,6 +137,7 @@ describe('dropdown', () => {
           document.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }))
           await tick()
 
+          expect(onChange).toHaveBeenCalledTimes(0)
           expect(listener).toHaveBeenCalledTimes(5)
           const [dd] = listener.mock.calls[4]
           expect(dd.isOpen).toBe(false)
@@ -245,6 +256,17 @@ describe('dropdown', () => {
           expect(dd.options[2].active).toBe(true)
         })
       })
+      describe('Enter', () => {
+        it('selects active item', async () => {
+          document.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown' })
+          )
+          document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
+          await tick()
+
+          expect(onChange).toHaveBeenCalledTimes(1)
+        })
+      })
     })
   })
   describe('popper', () => {
@@ -282,6 +304,57 @@ describe('dropdown', () => {
       expect(listener).toHaveBeenCalledTimes(4)
       expect(createPopper).toHaveBeenCalledTimes(2)
       expect(handler.popper).toBe(popper)
+    })
+  })
+
+  describe('events', () => {
+    it('trigger OnChange on select', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      await handler.select(handler.dropdown.options[1])
+      expect(onChange).toHaveBeenCalledWith(2)
+      await handler.select(handler.dropdown.options[2])
+      expect(onChange).toHaveBeenCalledWith(3)
+
+      expect(onChange).toHaveBeenCalledTimes(3)
+    })
+    it('skip trigger OnChange for select on same value', async () => {
+      await handler.select(handler.dropdown.options[0])
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+    it('skip trigger OnChange on update if values does not differ', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await handler.update({
+        options: [
+          { key: 'A', value: 1, selected: true },
+          { key: 'B', value: 2 },
+          { key: 'C', value: 3 },
+        ],
+      })
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+    })
+
+    it('trigger OnChange on update if values differ', async () => {
+      await handler.select(handler.dropdown.options[0])
+      expect(onChange).toHaveBeenCalledWith(1)
+      expect(onChange).toHaveBeenCalledTimes(1)
+
+      await handler.update({
+        options: [
+          { key: 'A', value: 1 },
+          { key: 'B', value: 2, selected: true },
+          { key: 'C', value: 3 },
+        ],
+      })
+      expect(onChange).toHaveBeenCalledWith(2)
+      expect(onChange).toHaveBeenCalledTimes(2)
     })
   })
 })

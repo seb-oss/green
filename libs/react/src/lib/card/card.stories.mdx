@@ -34,6 +34,9 @@ Simple Card Component
 
 <Story
   name="Card"
+  parameters={{
+    componentIds: ['component-card']
+  }}
   args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
 >
   {Template.bind({})}

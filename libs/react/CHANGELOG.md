@@ -2,6 +2,109 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.34...@sebgroup/green-react@1.0.0-beta.35) (2022-11-11)
+
+
+### Bug Fixes
+
+* **stepper:** only emit onChange on user events ([5ae5e38](https://github.com/sebgroup/green/commit/5ae5e38f90f56ef5044d9a2ac61e0961ed4ea0c4))
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.33...@sebgroup/green-react@1.0.0-beta.34) (2022-11-10)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.32...@sebgroup/green-react@1.0.0-beta.33) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.31...@sebgroup/green-react@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.30...@sebgroup/green-react@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.29...@sebgroup/green-react@1.0.0-beta.30) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 drop down flicker when mounted in react ([350f02f](https://github.com/sebgroup/green/commit/350f02fa882da8f8c6ca909ddc6e94129ce19589))
+* 🐛 Stepper can go to 0 ([cf17e4b](https://github.com/sebgroup/green/commit/cf17e4b7013f80687043354535b49e684af92741))
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.28...@sebgroup/green-react@1.0.0-beta.29) (2022-10-26)
+
+
+
+# [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.27...@sebgroup/green-react@1.0.0-beta.28) (2022-10-12)
+
+
+
+# [1.0.0-beta.27](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.26...@sebgroup/green-react@1.0.0-beta.27) (2022-10-07)
+
+
+### Bug Fixes
+
+* **dropdown:** update select when value changes ([c72b615](https://github.com/sebgroup/green/commit/c72b615d0714b49023836b81b7a66f035d575aa8))
+
+
+
+# [1.0.0-beta.26](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.25...@sebgroup/green-react@1.0.0-beta.26) (2022-10-03)
+
+
+### Bug Fixes
+
+* **dropdown:** pass value to hook ([679bcee](https://github.com/sebgroup/green/commit/679bceee076d624ba136ea7287427c8a680258fe))
+
+
+
+# [1.0.0-beta.25](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.24...@sebgroup/green-react@1.0.0-beta.25) (2022-09-27)
+
+
+### Bug Fixes
+
+* **dropdown:** revert generic to any ([732e933](https://github.com/sebgroup/green/commit/732e933118240ce543fe666cefbc2c3f36833b8f))
+* **dropdown:** sync value with selected options ([2637a95](https://github.com/sebgroup/green/commit/2637a95cb36a08fbb06a8f18926c3383b7803ea8))
+
+
+
+# [1.0.0-beta.24](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.23...@sebgroup/green-react@1.0.0-beta.24) (2022-09-23)
+
+
+### Features
+
+* Button (React) - add disabled property ([480d70f](https://github.com/sebgroup/green/commit/480d70f08ee43cc8ccd2897f70276588d563ef78))
+
+
+
+# [1.0.0-beta.23](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.22...@sebgroup/green-react@1.0.0-beta.23) (2022-09-20)
+
+
+
+# [1.0.0-beta.22](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.21...@sebgroup/green-react@1.0.0-beta.22) (2022-09-20)
+
+
+### Features
+
+* 🎸 Dropdown - support search filter [#473](https://github.com/sebgroup/green/issues/473) ([4883331](https://github.com/sebgroup/green/commit/48833313c99661d83fa26066c42f12ff93e26d3c))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+
+
 # [1.0.0-beta.21](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.20...@sebgroup/green-react@1.0.0-beta.21) (2022-08-31)
 
 

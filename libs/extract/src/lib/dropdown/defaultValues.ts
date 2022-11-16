@@ -1,4 +1,4 @@
-import { AbstractDropdown, ExtendedDropdownOption } from './types'
+import { AbstractDropdown, DropdownOptionElement } from './types'
 
 export const dropdownValues: Partial<AbstractDropdown> = {
   elements: {
@@ -14,7 +14,7 @@ export const dropdownValues: Partial<AbstractDropdown> = {
         role: 'listbox',
         tabIndex: -1,
       },
-      classes: ['popover', 'popover-dropdown'],
+      classes: ['_popover', 'popover-dropdown'],
     },
   },
   isActive: false,
@@ -22,7 +22,7 @@ export const dropdownValues: Partial<AbstractDropdown> = {
   isTouched: false,
 }
 
-export const optionValues: Partial<ExtendedDropdownOption> = {
+export const optionValues: Partial<DropdownOptionElement> = {
   attributes: {
     role: 'option',
   },

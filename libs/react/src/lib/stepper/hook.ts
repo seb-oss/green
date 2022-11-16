@@ -7,7 +7,7 @@ export { StepperArgs }
 const noop = () => {}
 
 export const useStepper = (
-  { min, max, value = 0, step = 1, id = randomId() }: StepperArgs,
+  { min, max, value = 0, step = 1, id = randomId(), onChange }: StepperArgs,
 ): [AbstractStepper, StepperData] => {
   const pStepper: Partial<AbstractStepper> = {
     down: noop,
@@ -23,10 +23,10 @@ export const useStepper = (
   useEffect(() => { if (max !== data.max) stepper.setMax(max) }, [stepper, max])
   useEffect(() => { if (min !== data.min) stepper.setMin(min) }, [stepper, min])
   useEffect(() => { if (step !== data.step) stepper.setStep(step || 1) }, [stepper, step])
-  useEffect(() => { if (value !== data.value) stepper.setValue(value || 0) }, [stepper, value])
+  useEffect(() => { if (value !== data.value) stepper.setValue(value || 0, false) }, [stepper, value])
 
   useEffect(() => {
-    setStepper(createStepper({ id, value, min, max, step }, setData))
+    setStepper(createStepper({ id, value, min, max, step, onChange }, setData))
   }, [])
 
   return [stepper, data]
