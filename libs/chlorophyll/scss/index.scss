@@ -1,4 +1,4 @@
 @forward 'tokens';
-@use '../css/tokens/_colors.css';
-@use '../css/tokens/_shape.css';
+@use 'tokens/colors';
+@use 'tokens/shape';
 @use 'components';
