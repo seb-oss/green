@@ -2,6 +2,25 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.36...@sebgroup/chlorophyll@1.0.0-beta.37) (2022-11-17)
+
+
+### Bug Fixes
+
+* 🐛 changing to correct font size for p tags ([a5eafbb](https://github.com/sebgroup/green/commit/a5eafbb7836b5b87721dfb4d00987e6c62f4b832))
+
+
+### Styles
+
+* 💄 Fixed input group sizing ([f80dbaf](https://github.com/sebgroup/green/commit/f80dbafa6d1a3269f4f40dfba76945ef8556692c))
+
+
+### BREAKING CHANGES
+
+* 🧨 Will break input layouts since form group take up 100% of container
+
+
+
 # [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.35...@sebgroup/chlorophyll@1.0.0-beta.36) (2022-11-11)
 
 
