@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'angular-charts',
+/* eslint-disable */
+export default {
+  displayName: 'angular',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/angular-charts',
+  coverageDirectory: '../../coverage/libs/angular',
   transform: {
     '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

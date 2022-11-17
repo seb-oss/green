@@ -1,11 +1,12 @@
 {
-  "root": "libs/react-charts",
+  "name": "react-charts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/react-charts/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/react-charts",
@@ -34,9 +35,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/react-charts"],
+      "outputs": ["{workspaceRoot}/coverage/libs/react-charts"],
       "options": {
-        "jestConfig": "libs/react-charts/jest.config.js",
+        "jestConfig": "libs/react-charts/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -72,7 +73,7 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
@@ -82,7 +83,7 @@
       }
     },
     "prepare-release": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {

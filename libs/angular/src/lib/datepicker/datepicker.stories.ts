@@ -4,8 +4,8 @@ import { startOfYear, subYears } from 'date-fns'
 
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -65,8 +65,8 @@ CustomOptions.args = {
 const FormControlTemplate: Story<NggDatepickerComponent> = (
   args: NggDatepickerComponent
 ) => {
-  const validationForm = new FormGroup({
-    date: new FormControl(undefined, [
+  const validationForm = new UntypedFormGroup({
+    date: new UntypedFormControl(undefined, [
       Validators.required,
       dateValidator({
         min: args.options?.minDate,

@@ -1,5 +1,6 @@
 {
-  "root": "libs/chlorophyll",
+  "name": "chlorophyll",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/chlorophyll/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +12,7 @@
       }
     },
     "compile-scss": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
@@ -32,16 +33,16 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "npx stylelint libs/chlorophyll/**/*.scss"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/chlorophyll"],
+      "outputs": ["{workspaceRoot}/coverage/libs/chlorophyll"],
       "options": {
-        "jestConfig": "libs/chlorophyll/jest.config.js",
+        "jestConfig": "libs/chlorophyll/jest.config.ts",
         "passWithNoTests": true
       }
     },

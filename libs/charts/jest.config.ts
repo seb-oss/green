@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'charts',
   preset: '../../jest.preset.js',
   globals: {
@@ -10,9 +11,7 @@ module.exports = {
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/(?!billboard.js/.*)"
-  ],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!billboard.js/.*)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/charts',
 }

@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "target": "es2015",
+    "target": "es2020",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
@@ -14,7 +14,8 @@
     "**/*.spec.ts",
     "**/*.test.ts",
     "**/*.stories.ts",
-    "**/*.stories.js"
+    "**/*.stories.js",
+    "jest.config.ts"
   ],
   "include": ["**/*.ts"]
 }

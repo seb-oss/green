@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms'
 import { DatepickerOptions } from '@sebgroup/extract'
 import { startOfYear, subYears } from 'date-fns'
 import { dateValidator } from '@sebgroup/green-angular'
@@ -10,8 +10,8 @@ import { dateValidator } from '@sebgroup/green-angular'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent {
-  dateForm: FormGroup
-  constructor(private _fb: FormBuilder) {
+  dateForm: UntypedFormGroup
+  constructor(private _fb: UntypedFormBuilder) {
     this.dateForm = this._fb.group({
       date: [new Date(), [Validators.required]],
       dateEmpty: ['', [Validators.required]],

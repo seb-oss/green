@@ -1,13 +1,14 @@
 {
+  "name": "angular-charts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/angular-charts",
   "sourceRoot": "libs/angular-charts/src",
   "prefix": "green",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/angular-charts"],
+      "outputs": ["{workspaceRoot}/dist/libs/angular-charts"],
       "options": {
         "project": "libs/angular-charts/ng-package.json",
         "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json",
@@ -25,9 +26,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/angular-charts"],
+      "outputs": ["{workspaceRoot}/coverage/libs/angular-charts"],
       "options": {
-        "jestConfig": "libs/angular-charts/jest.config.js",
+        "jestConfig": "libs/angular-charts/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -41,14 +42,12 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@storybook/angular:start-storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/angular-charts/.storybook"
-        },
-        "projectBuildConfig": "angular-charts:build-storybook"
+        "configDir": "libs/angular-charts/.storybook",
+        "browserTarget": "angular-charts:build-storybook",
+        "compodoc": false
       },
       "configurations": {
         "ci": {
@@ -57,15 +56,13 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "uiFramework": "@storybook/angular",
-        "outputPath": "dist/storybook/angular-charts",
-        "config": {
-          "configFolder": "libs/angular-charts/.storybook"
-        },
-        "projectBuildConfig": "angular-charts:build-storybook"
+        "outputDir": "dist/storybook/angular-charts",
+        "configDir": "libs/angular-charts/.storybook",
+        "browserTarget": "angular-charts:build-storybook",
+        "compodoc": false
       },
       "configurations": {
         "ci": {
@@ -74,7 +71,7 @@
       }
     },
     "prepare-release": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {

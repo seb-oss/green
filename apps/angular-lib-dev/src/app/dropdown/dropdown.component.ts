@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
+import { UntypedFormBuilder, Validators } from '@angular/forms'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
 import { DropdownOption, DropdownTexts } from '@sebgroup/extract'
@@ -204,7 +204,7 @@ export class DropdownComponent {
   dropdownValue5: unknown | undefined = this.customOptions[1].val
   dropdownValue6: unknown[] | undefined = undefined
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: UntypedFormBuilder) {}
 
   save() {
     this.validationForm.markAllAsTouched()

@@ -1,10 +1,11 @@
 {
-  "root": "libs/extract",
+  "name": "extract",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/extract/src",
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nrwl/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "packageJson": "libs/extract/package.json",
@@ -33,9 +34,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/extract"],
+      "outputs": ["{workspaceRoot}/coverage/libs/extract"],
       "options": {
-        "jestConfig": "libs/extract/jest.config.js",
+        "jestConfig": "libs/extract/jest.config.ts",
         "passWithNoTests": true
       }
     },

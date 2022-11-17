@@ -16,5 +16,6 @@
     "react-e2e": "apps/react-e2e",
     "react-lib-dev": "apps/react-lib-dev",
     "react-lib-dev-e2e": "apps/react-lib-dev-e2e"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

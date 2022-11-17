@@ -1,10 +1,11 @@
 {
-  "root": "apps/react-lib-dev",
+  "name": "react-lib-dev",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/react-lib-dev/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -37,11 +38,17 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         }
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "options": {
         "buildTarget": "react-lib-dev:build",
         "hmr": true
@@ -50,8 +57,12 @@
         "production": {
           "buildTarget": "react-lib-dev:build:production",
           "hmr": false
+        },
+        "development": {
+          "buildTarget": "react-lib-dev:build:development"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
@@ -62,9 +73,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/react-lib-dev"],
+      "outputs": ["{workspaceRoot}/coverage/apps/react-lib-dev"],
       "options": {
-        "jestConfig": "apps/react-lib-dev/jest.config.js",
+        "jestConfig": "apps/react-lib-dev/jest.config.ts",
         "passWithNoTests": true
       }
     }

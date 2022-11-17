@@ -1,5 +1,5 @@
 import {
-  FormControl,
+  UntypedFormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -60,7 +60,7 @@ const TemplateReactiveForms: Story = (args) => {
     `,
     props: {
       ...args,
-      control: new FormControl('Hello'),
+      control: new UntypedFormControl('Hello'),
     },
   }
 }

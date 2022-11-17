@@ -1,10 +1,11 @@
 {
-  "root": "libs/charts",
+  "name": "charts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/charts/src",
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "outputPath": "dist/libs/charts",
         "commands": [
@@ -36,7 +37,7 @@
       }
     },
     "compile-scss": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
@@ -57,7 +58,7 @@
       }
     },
     "copy-scss": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
@@ -78,14 +79,14 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/charts"],
+      "outputs": ["{workspaceRoot}/coverage/libs/charts"],
       "options": {
-        "jestConfig": "libs/charts/jest.config.js",
+        "jestConfig": "libs/charts/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "prepare-release": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "commands": [
           {

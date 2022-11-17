@@ -2,8 +2,8 @@
 import Documentation from './documentation.mdx'
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -161,8 +161,8 @@ CustomOption.args = {
 const FormControlTemplate: Story<NggDropdownComponent> = (
   args: NggDropdownComponent
 ) => {
-  const validationForm = new FormGroup({
-    country: new FormControl(undefined, [Validators.required]),
+  const validationForm = new UntypedFormGroup({
+    country: new UntypedFormControl(undefined, [Validators.required]),
   })
 
   const options$ = of([

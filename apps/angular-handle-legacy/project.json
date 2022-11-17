@@ -1,6 +1,7 @@
 {
+  "name": "angular-handle-legacy",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/angular-handle-legacy",
   "sourceRoot": "apps/angular-handle-legacy/src",
   "prefix": "green",
   "targets": {
@@ -86,9 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/angular-handle-legacy"],
+      "outputs": ["{workspaceRoot}/coverage/apps/angular-handle-legacy"],
       "options": {
-        "jestConfig": "apps/angular-handle-legacy/jest.config.js",
+        "jestConfig": "apps/angular-handle-legacy/jest.config.ts",
         "passWithNoTests": true
       }
     }
