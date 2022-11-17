@@ -1,7 +1,6 @@
 name: Deploy affected storybook(s)
 on:
-  push:
-    branches: [main, alpha, beta]
+  pull_request:
 
 jobs:
   check:
@@ -9,9 +8,6 @@ jobs:
     outputs:
       status: ${{ steps.check-updated-storybooks.outputs.any }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Check updated storybooks
         uses: dorny/paths-filter@v2
         id: check-updated-storybooks
