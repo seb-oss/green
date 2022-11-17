@@ -9,7 +9,6 @@
 }
 
 @mixin add-heading-style($heading-map) {
-  @debug "$heading-map";
   @include properties(
     map-get($heading-map, mobile)
   );
