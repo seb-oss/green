@@ -330,8 +330,8 @@
     }
   },
   {
-    "id": "components-card--example",
-    "name": "example",
+    "id": "components-card--card",
+    "name": "Card",
     "title": "Components/Card",
     "customParams": {
       "componentIds": [
@@ -360,8 +360,8 @@
     }
   },
   {
-    "id": "components-alert--example",
-    "name": "example",
+    "id": "components-alert--alert",
+    "name": "Alert",
     "title": "Components/Alert",
     "customParams": {
       "componentIds": [
