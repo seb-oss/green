@@ -12,10 +12,6 @@
   }
 }
 
-p {
-  @include mixins.properties(tokens.$body-01);
-}
-
 p.small,
 small {
   @include mixins.properties(tokens.$body-02);
