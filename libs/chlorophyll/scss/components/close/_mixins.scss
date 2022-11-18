@@ -12,8 +12,8 @@ $close-thickness: 2px;
 $close-thickness-sm: 2px;
 $close-bg-hsl: var(--sg-hsl-contrast);
 $close-bg: hsla(var(--background-hsl), 0);
-$close-bg-hover: hsla(var(--background-hsl), 0.1);
-$close-bg-active: hsla(var(--background-hsl), 0.2);
+$close-bg-hover: var(--grey-500);
+$close-bg-active: var(--grey-500);
 $close-icon-color: var(--text-primary-color);
 
 @mixin close {
@@ -29,7 +29,9 @@ $close-icon-color: var(--text-primary-color);
 
       &::after,
       &::before {
-        height: $close-height-sm - $close-padding-sm;
+        height: 12.63px;
+        width: 2.09px;
+        border-radius: 0.5px;
         top: math.div($close-padding-sm, 2);
       }
     }
@@ -63,11 +65,12 @@ $close-icon-color: var(--text-primary-color);
     background: var(--color);
     content: '';
     display: block;
-    height: $close-height - $close-padding;
+    height: 0.789375rem;
+    width: 0.130625rem;
+    border-radius: 0.5px;
     left: calc(50% - #{math.div($close-thickness, 2)});
     position: absolute;
-    top: math.div($close-padding, 2);
-    width: $close-thickness;
+    top: 0.606875rem;
   }
 
   &::after {
@@ -76,5 +79,9 @@ $close-icon-color: var(--text-primary-color);
 
   &::before {
     transform: rotateZ(-45deg);
+  }
+
+  > svg path {
+    fill: var(--color);
   }
 }
