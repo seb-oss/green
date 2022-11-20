@@ -80,7 +80,7 @@ export const Template = ({
 
 ## Variants
 
-Alerts are available in a number of different variants based on the intent of the alert. Please note that the colors used in the examples below are not final yet.
+An alert ribbon is a message used to inform the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
 
 <Canvas>
   <div role="alert">
@@ -205,42 +205,16 @@ The alert should either be dismissible by a close button or a button with an act
       <button type="button">Action</button>
     </footer>
   </div>
+  <br />
+  <br />
   <div role="alert">
     <div>
       <h3>Neutral</h3>
       <p>
-        Alert without dismiss (close) button or actions in footer.
+        Alert with dismiss (close) button.
       </p>
     </div>
-  </div>
-  <div role="alert" className="success">
-    <div>
-      <h3>Success!</h3>
-      <p>
-        Alert with single link in footer and no dismiss (close) button.
-      </p>
-    </div>
-    <footer>
-      <a href="#">Take me somewhere</a>
-    </footer>
+    <button class="close" type="button"><span className="sr-only">Close</span></button>
   </div>
   </div>
 </Canvas>
-
-
-
-<!--
-<Canvas>
-  <div role="alert" className="alert-icon">
-    <div>
-      <h3>Success!</h3>
-      <p>
-        Alert with icon and single link in footer and no dismiss (close) button.
-      </p>
-    </div>
-    <footer>
-      <a href="#">Take me somewhere</a>
-    </footer>
-  </div>
-</Canvas>
--->
