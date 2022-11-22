@@ -34,3 +34,13 @@
     --gds-sys-color-blue-dark-2: #2c9cd9;
   }
 }
+
+.light {
+  --gds-sys-color-blue: #41b0ee;
+  --gds-sys-color-blue-dark-1: #0092e1;
+  --gds-sys-color-blue-dark-2: #007ac7;
+
+  --gds-sys-color-surface: var(--gds-ref-pallet-base000);
+  --gds-sys-color-base: var(--gds-ref-pallet-base800);
+  --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
+}

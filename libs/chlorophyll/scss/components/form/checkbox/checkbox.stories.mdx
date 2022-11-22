@@ -13,7 +13,7 @@ export const Template = ({ validation, enabled, text }) => {
 
 <Meta
   title="Components/Form/Elements/Checkbox"
-  parameters={{ 
+  parameters={{
     componentIds: ['component-checkbox']
   }}
   argTypes={{
@@ -61,18 +61,20 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
     <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp">
         <legend class="sr-only">Checkbox group</legend>
-        <label class="form-control">
-          One
-          <input required type="checkbox" />
-          <span></span>
-          <i />
-        </label>
-        <label class="form-control">
-          Two
-          <input required type="checkbox" required />
-          <span></span>
-          <i />
-        </label>
+        <div>
+          <label class="form-control">
+            One
+            <input required type="checkbox" />
+            <span></span>
+            <i />
+          </label>
+          <label class="form-control">
+            Two
+            <input required type="checkbox" required />
+            <span></span>
+            <i />
+          </label>
+        </div>
       </fieldset>
     </div>
   </form>
@@ -85,6 +87,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
     <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp">
         <legend>Checkbox group</legend>
+        <div>
         <label class="form-control">
           One
           <input required type="checkbox" />
@@ -97,6 +100,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
     </div>
   </form>
@@ -114,18 +118,20 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <span id="checkboxGroupHelp" class="form-info">
           Checkbox group description
         </span>
-        <label class="form-control">
-          One
-          <input required type="checkbox" />
-          <span></span>
-          <i />
-        </label>
-        <label class="form-control">
-          Two
-          <input required type="checkbox" required />
-          <span></span>
-          <i />
-        </label>
+        <div>
+          <label class="form-control">
+            One
+            <input required type="checkbox" />
+            <span></span>
+            <i />
+          </label>
+          <label class="form-control">
+            Two
+            <input required type="checkbox" required />
+            <span></span>
+            <i />
+          </label>
+          </div>
       </fieldset>
       <span class="form-info">Neutral</span>
     </div>
@@ -135,6 +141,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <span id="checkboxGroupHelp1" class="form-info">
           Checkbox group description
         </span>
+        <div>
         <label class="form-control">
           One
           <input required class="is-valid" type="checkbox" />
@@ -147,6 +154,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
       <span class="form-info">Valid</span>
     </div>
@@ -154,6 +162,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
       <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
         <legend>Invalid checkbox group</legend>
         <span class="form-info">Checkbox group description</span>
+        <div>
         <label class="form-control">
           One
           <input required class="is-invalid" type="checkbox" />
@@ -166,6 +175,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
       <span class="form-info">Error</span>
     </div>
@@ -182,6 +192,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <span id="checkboxGroupHelp" class="form-info">
           Checkbox group description
         </span>
+        <div>
         <label class="form-control">
           One
           <input required type="checkbox" />
@@ -194,6 +205,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
       <span class="form-info">Neutral</span>
     </div>
@@ -203,6 +215,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <span id="checkboxGroupHelp1" class="form-info">
           Checkbox group description
         </span>
+        <div>
         <label class="form-control">
           One
           <input required class="is-valid" type="checkbox" />
@@ -215,6 +228,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
       <span class="form-info">Valid</span>
     </div>
@@ -222,6 +236,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
       <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
         <legend>Invalid checkbox group</legend>
         <span class="form-info">Checkbox group description</span>
+        <div>
         <label class="form-control">
           One
           <input required class="is-invalid" type="checkbox" />
@@ -234,6 +249,7 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           <span></span>
           <i />
         </label>
+        </div>
       </fieldset>
       <span class="form-info">Error</span>
     </div>

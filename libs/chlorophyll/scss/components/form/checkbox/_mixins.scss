@@ -22,7 +22,7 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Add focus to form-control field */
-  #{$selector} {
+  #{$selector}:has( input[type="checkbox"]:focus-visible) {
     @include common.add-focus('within');
   }
 
