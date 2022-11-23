@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = () => {
+  return `
+    <button class="close" type="button">
+      <span className="sr-only">Close</span>
+      <i></i>
+    </button>
+  `
+}
+
+<Meta
+  title="Components/Close button"
+  parameters={{
+    componentIds: ['component-close-button']
+  }} />
+
+<Story name="Close button">
+  {Template.bind({})}
+</Story>
