@@ -30,13 +30,12 @@
     fieldset {
       @include common.margin-bottom(0);
 
-      .form-info {
-        display: inline-flex;
+      legend {
+        @include common.padding(0);
       }
 
-      label.form-control:first-of-type,
-      .label.form-control:first-of-type {
-        margin-inline-start: -1rem;
+      .form-info {
+        display: inline-flex;
       }
     }
 
@@ -89,7 +88,6 @@
 @mixin add-form-control {
   @include common.padding-vertical(4);
   @include common.padding-horizontal(5);
-  margin-inline-start: -1rem;
   border: 1px solid transparent;
   border-radius: var(--gds-sys-shape-corner-medium);
   align-items: center;
