@@ -19,6 +19,7 @@ import { BadgeType } from '@sebgroup/extract'
     </strong>
     <button *ngIf="isCloseable" class="close" (click)="close($event)">
       {{ closeText }}
+      <i></i>
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
