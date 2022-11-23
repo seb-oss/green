@@ -413,3 +413,10 @@ export const search = (
         : { ...option, classes: addClass(option.classes, 'hidden') }
     }),
   } as Partial<AbstractDropdown>)
+
+export const resetTouchedProperty = (
+  dropdown: AbstractDropdown
+): AbstractDropdown =>
+  reduce(dropdown, {
+    isTouched: false,
+  } as Partial<AbstractDropdown>)

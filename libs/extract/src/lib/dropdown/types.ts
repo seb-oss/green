@@ -110,5 +110,6 @@ export interface DropdownHandler {
   selectByValue: (selection: any) => Promise<void>
   validate: (validator: IValidator) => Promise<void>
   search: (searchInput: string) => Promise<void>
+  resetTouchedState: () => Promise<void>
   destroy: () => void
 }
