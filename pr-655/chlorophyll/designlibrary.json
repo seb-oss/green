@@ -330,6 +330,16 @@
     }
   },
   {
+    "id": "components-close-button--close-button",
+    "name": "Close button",
+    "title": "Components/Close button",
+    "customParams": {
+      "componentIds": [
+        "component-close-button"
+      ]
+    }
+  },
+  {
     "id": "components-card--card",
     "name": "Card",
     "title": "Components/Card",
