@@ -1,0 +1,41 @@
+:root {
+  /******************************************/
+  /*********** Component Tokens *************/
+  /******************************************/
+
+  --gds-comp-radio-container-height: 1rem;
+  --gds-comp-radio-container-width: 1rem;
+
+  --gds-comp-radio-container-color: var(--gds-sys-color-surface);
+  --gds-comp-radio-border-color: var(--gds-sys-color-base);
+  --gds-comp-radio-border-radius: var(--gds-sys-shape-corner-round);
+
+  --gds-comp-radio-hover-dot-color: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-surface);
+  --gds-comp-radio-hover-container-color-selected: var(--gds-sys-color-surface);
+
+  --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
+  --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);
+
+  @media (prefers-color-scheme: dark) {
+    --gds-comp-radio-container-color: var(--gds-sys-color-base-container);
+    --gds-comp-radio-border-color: transparent;
+
+    --gds-comp-radio-hover-dot-color: var(--gds-sys-color-base-container);
+    --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-base-container);
+    --gds-comp-radio-hover-container-color-selected: var(--gds-sys-color-blue-dark-2);
+
+    --gds-comp-radio-dot-color-selected: var(--gds-sys-color-surface);
+    --gds-comp-radio-border-color-selected: var(--gds-sys-color-blue-dark-2);
+  }
+
+  .light {
+    --gds-comp-radio-container-color: var(--gds-sys-color-surface);
+    --gds-comp-radio-border-color: var(--gds-sys-color-base);
+    --gds-comp-radio-hover-dot-color: var(--gds-ref-pallet-base600);
+    --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-surface);
+
+    --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
+    --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);
+  }
+}
