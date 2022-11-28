@@ -62,7 +62,6 @@ export const Dropdown = ({
         >
           <span className="sr-only">{dropdown?.dropdown.texts.close}</span>
         </button>
-        // TODO: Improve checkboxes in dropdown react
         {dropdown?.dropdown.isMultiSelect ? (
           <div className="sg-fieldset-container">
             <fieldset {...multiSelectProps.fieldsetProps}>
