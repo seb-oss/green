@@ -129,6 +129,36 @@
     }
   },
   {
+    "id": "components-form-button--default",
+    "name": "Default",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--types",
+    "name": "Types",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--variants",
+    "name": "Variants",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
     "id": "components-badge--default",
     "name": "Default",
     "title": "Components/Badge",
@@ -191,26 +221,6 @@
     "customParams": {
       "componentIds": [
         "component-input"
-      ]
-    }
-  },
-  {
-    "id": "components-form-button--default",
-    "name": "Default",
-    "title": "Components/Form/Button",
-    "customParams": {
-      "componentIds": [
-        "component-button"
-      ]
-    }
-  },
-  {
-    "id": "components-form-button--primary",
-    "name": "Primary",
-    "title": "Components/Form/Button",
-    "customParams": {
-      "componentIds": [
-        "component-button"
       ]
     }
   }
