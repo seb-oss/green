@@ -34,7 +34,7 @@ $invalid-color: tokens.$intent-danger-background;
     position: relative;
     border-radius: var(--gds-comp-radio-border-radius);
     background-color: var(--gds-comp-radio-container-color);
-    flex: 0 0 auto;
+    display: flex;
     height: var(--gds-comp-radio-container-width);
     width: var(--gds-comp-radio-container-width);
   }
@@ -45,19 +45,19 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Hover state */
-  #{$selector}:hover #{$radio-selector}:not(.disabled,:disabled,:checked) ~ i {
-    background-color: var(--gds-comp-radio-hover-container-color-selected);
+  #{$selector}:hover #{$radio-selector}:not(.disabled,:disabled) ~ i {
+    border-color: var(--gds-comp-radio-border-color-selected-hover);
+    background-color: var(--gds-comp-radio-hover-container-color);
 
     &::after {
-      background-color: var(--gds-comp-radio-hover-dot-color);
-      border-color: var(--gds-comp-radio-hover-border-color-selected);
+      background-color: var(--gds-comp-radio-dot-color-hover);
       opacity: 1;
     }
   }
 
   /* Checked state */
   #{$selector} #{$radio-selector}:checked ~ i {
-    background-color: var(--gds-comp-checkbox-container-color-selected);
+    //background-color: var(--gds-comp-checkbox-container-color-selected);
   }
 
   /* Valid state */
@@ -101,7 +101,8 @@ $invalid-color: tokens.$intent-danger-background;
     content: '';
     opacity: 0;
     position: absolute;
-    border: 3px solid var(--gds-comp-radio-border-color-selected,#fff);
+    transform: scale(calc(8 / 14));
+    inset: 0;
     height: 100%;
     width: 100%;
     border-radius: var(--gds-comp-radio-border-radius);

@@ -10,9 +10,10 @@
   --gds-comp-radio-border-color: var(--gds-sys-color-base);
   --gds-comp-radio-border-radius: var(--gds-sys-shape-corner-round);
 
-  --gds-comp-radio-hover-dot-color: var(--gds-ref-pallet-base600);
-  --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-surface);
-  --gds-comp-radio-hover-container-color-selected: var(--gds-sys-color-surface);
+  --gds-comp-radio-dot-color-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-border-color-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-border-color-selected-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-container-color-selected-hover: var(--gds-sys-color-surface);
 
   --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
   --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);
@@ -21,9 +22,9 @@
     --gds-comp-radio-container-color: var(--gds-sys-color-base-container);
     --gds-comp-radio-border-color: transparent;
 
-    --gds-comp-radio-hover-dot-color: var(--gds-sys-color-base-container);
-    --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-base-container);
-    --gds-comp-radio-hover-container-color-selected: var(--gds-sys-color-blue-dark-2);
+    --gds-comp-radio-dot-color-hover: var(--gds-sys-color-base-container);
+    --gds-comp-radio-border-color-selected-hover: var(--gds-sys-color-base-container);
+    --gds-comp-radio-container-color-selected-hover: var(--gds-sys-color-blue-dark-2);
 
     --gds-comp-radio-dot-color-selected: var(--gds-sys-color-surface);
     --gds-comp-radio-border-color-selected: var(--gds-sys-color-blue-dark-2);
@@ -32,8 +33,12 @@
   .light {
     --gds-comp-radio-container-color: var(--gds-sys-color-surface);
     --gds-comp-radio-border-color: var(--gds-sys-color-base);
-    --gds-comp-radio-hover-dot-color: var(--gds-ref-pallet-base600);
-    --gds-comp-radio-hover-border-color-selected: var(--gds-sys-color-surface);
+
+    --gds-comp-radio-dot-color-hover: var(--gds-ref-pallet-base600);
+
+    --gds-comp-radio-dot-color-selected-hover: var(--gds-ref-pallet-base600);
+    --gds-comp-radio-border-color-selected-hover: var(--gds-ref-pallet-base600);
+    --gds-comp-radio-container-color-selected-hover: var(--gds-ref-pallet-base600);
 
     --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
     --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);

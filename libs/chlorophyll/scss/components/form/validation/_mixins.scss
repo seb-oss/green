@@ -23,8 +23,7 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-feedback($color) {
   color: $color;
-  //height: auto;
-  //min-height: 1rem;
+  font-weight: 500;
   opacity: 1;
 
   &::before {
@@ -35,7 +34,7 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-form-info() {
   @include common.font-scale(1);
-  @include common.line-height(3);
+  @include common.line-height(2);
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
   max-width: fit-content;
   max-width: -moz-fit-content;
