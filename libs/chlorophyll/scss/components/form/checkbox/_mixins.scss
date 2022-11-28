@@ -1,33 +1,18 @@
 @use '../../../tokens/shame' as tokens;
 @use '../../../common';
+@use './tokens' as component-tokens;
 
-/* checkbox */
-$background: tokens.$form-control-bg;
-// currently not adjusted for light/dark mode...
-$background-hover: transparentize(tokens.get(tokens.$blue, 2), 0.25);
-$background-checked: tokens.get(tokens.$blue, 1);
-
-$border-checked: $background-checked;
-
-/* checkbox checkmark */
-$checkmark-color: tokens.$white;
-$checkmark-disabled-color: tokens.$checkbox-checkmark-disabled-color;
 
 $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
-/* selectors */
-$selector: '.form-control';
-$checkbox-selector: 'input[type="checkbox"]';
-$validated-selector: '.was-validated';
-
 @mixin add-checkbox(
-  $selector: $selector,
-  $checkbox-selector: $checkbox-selector
+  $selector: '.form-control',
+  $checkbox-selector: 'input[type="checkbox"]',
+  $validated-selector: '.was-validated'
 ) {
   /* Hide the browser's default checkbox */
   #{$selector} #{$checkbox-selector} {
-    @include common.add-focus('visible', '~ i');
     cursor: pointer;
     height: 0;
     opacity: 0;
@@ -36,30 +21,40 @@ $validated-selector: '.was-validated';
     z-index: -1;
   }
 
+  /* Add focus to form-control field */
+  #{$selector}:has( input[type="checkbox"]:focus-visible) {
+    @include common.add-focus('within');
+  }
+
   /* Style for custom checkbox */
   #{$selector} #{$checkbox-selector} ~ i {
-    @include common.add-border();
-    @include common.add-border-color();
+    @include common.add-border(false, 1px, var(--gds-comp-checkbox-border-color));
     @include common.margin-end(4);
-    background-color: $background;
+    position: relative;
+    border-radius: var(--gds-comp-checkbox-border-radius);
+    background-color: var(--gds-comp-checkbox-container-color);
     flex: 0 0 auto;
-    height: 1.25rem;
-    transition: 300ms;
-    width: 1.25rem;
+    height: var(--gds-comp-checkbox-container-width);
+    width: var(--gds-comp-checkbox-container-width);
+  }
+
+  #{$selector} #{$checkbox-selector}:not(:checked):focus-visible ~ i {
+    border: 1px solid var(--gds-sys-color-blue-dark-2);
   }
 
   /* Hover state */
-  #{$selector} {
-    @include common.add-hover-state(
-      $background-hover,
-      '#{$checkbox-selector}:not(.disabled,:disabled) ~ i'
-    );
+  #{$selector}:hover #{$checkbox-selector}:not(.disabled,:disabled,:checked) ~ i {
+    border-color: var(--gds-comp-checkbox-hover-border-color);
+  }
+
+  #{$selector}:hover #{$checkbox-selector}:not(:checked) ~ i::after {
+    border-color: var(--gds-comp-checkbox-hover-border-color);
+    opacity: 1;
   }
 
   /* Checked state */
   #{$selector} #{$checkbox-selector}:checked ~ i {
-    @include common.add-border-color($border-checked);
-    background-color: $background-checked;
+    background-color: var(--gds-comp-checkbox-container-color-selected);
   }
 
   /* Valid state */
@@ -70,10 +65,6 @@ $validated-selector: '.was-validated';
     ~ i {
       @include common.add-border-color($valid-color);
     }
-
-    &:checked ~ i {
-      background-color: $valid-color;
-    }
   }
 
   /* Invalid state */
@@ -83,10 +74,6 @@ $validated-selector: '.was-validated';
   #{$selector} #{$checkbox-selector}.is-invalid {
     ~ i {
       @include common.add-border-color($invalid-color);
-    }
-
-    &:checked ~ i {
-      background-color: $invalid-color;
     }
   }
 
@@ -99,11 +86,6 @@ $validated-selector: '.was-validated';
 
     &:checked ~ i {
       @include common.add-disable(true, false, true);
-
-      &::after,
-      &::before {
-        background: $checkmark-disabled-color;
-      }
     }
 
     ~ span {
@@ -112,43 +94,24 @@ $validated-selector: '.was-validated';
   }
 
   /* Checkmark */
-  #{$selector} #{$checkbox-selector} ~ i::after,
-  #{$selector} #{$checkbox-selector} ~ i::before {
-    background: $checkmark-color;
+  #{$selector} #{$checkbox-selector} ~ i::after {
     content: '';
     opacity: 0;
     position: absolute;
-    width: 3px;
   }
 
   #{$selector} #{$checkbox-selector} ~ i::after {
-    height: 13px;
-    transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(0);
-    transform-origin: bottom right;
-    transition: 100ms 0s ease-out;
-  }
-
-  #{$selector} #{$checkbox-selector} ~ i::before {
-    height: 9px;
-    transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(0);
-    transform-origin: bottom left;
-    transition: 100ms 100ms ease-in;
+    border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    border-left: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    height: 0.3125rem;
+    left: .125rem;
+    top: 0.21875rem;
+    width: 0.625rem;
+    transform: scale(1) rotate(-45deg);
   }
 
   /* Show the checkmark when checked */
-  #{$selector} #{$checkbox-selector}:checked ~ i::before,
   #{$selector} #{$checkbox-selector}:checked ~ i::after {
     opacity: 1;
-    transition-timing-function: ease-in-out;
-  }
-
-  #{$selector} #{$checkbox-selector}:checked ~ i::after {
-    transform: rotate3d(0, 0, 1, 45deg) translate3d(4.5px, -2.5px, 0) scaleY(1);
-    transition-delay: 100ms;
-  }
-
-  #{$selector} #{$checkbox-selector}:checked ~ i::before {
-    transform: rotate3d(0, 0, 1, 135deg) translate3d(-4px, -0.5px, 0) scaleY(1);
-    transition-delay: 0s;
   }
 }

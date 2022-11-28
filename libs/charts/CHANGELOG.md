@@ -2,6 +2,34 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.34...@sebgroup/green-charts@1.0.0-beta.35) (2022-11-17)
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.33...@sebgroup/green-charts@1.0.0-beta.34) (2022-11-17)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.32...@sebgroup/green-charts@1.0.0-beta.33) (2022-11-11)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.31...@sebgroup/green-charts@1.0.0-beta.32) (2022-11-10)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.30...@sebgroup/green-charts@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.29...@sebgroup/green-charts@1.0.0-beta.30) (2022-11-08)
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.28...@sebgroup/green-charts@1.0.0-beta.29) (2022-11-08)
+
+
+
 # [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.0.0-beta.27...@sebgroup/green-charts@1.0.0-beta.28) (2022-10-26)
 
 

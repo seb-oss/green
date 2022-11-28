@@ -2,6 +2,54 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.36...@sebgroup/green-react@1.0.0-beta.37) (2022-11-17)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.35...@sebgroup/green-react@1.0.0-beta.36) (2022-11-17)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.34...@sebgroup/green-react@1.0.0-beta.35) (2022-11-11)
+
+
+### Bug Fixes
+
+* **stepper:** only emit onChange on user events ([5ae5e38](https://github.com/sebgroup/green/commit/5ae5e38f90f56ef5044d9a2ac61e0961ed4ea0c4))
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.33...@sebgroup/green-react@1.0.0-beta.34) (2022-11-10)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.32...@sebgroup/green-react@1.0.0-beta.33) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.31...@sebgroup/green-react@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.30...@sebgroup/green-react@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.29...@sebgroup/green-react@1.0.0-beta.30) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 drop down flicker when mounted in react ([350f02f](https://github.com/sebgroup/green/commit/350f02fa882da8f8c6ca909ddc6e94129ce19589))
+* 🐛 Stepper can go to 0 ([cf17e4b](https://github.com/sebgroup/green/commit/cf17e4b7013f80687043354535b49e684af92741))
+
+
+
 # [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.28...@sebgroup/green-react@1.0.0-beta.29) (2022-10-26)
 
 

@@ -9,8 +9,13 @@ export const Template = ({
   primaryButton,
   closeButton,
 }) => `
-  <div role="alert" class="${type}">
-    <main>
+  <div role="alert" className="${type}">
+    <i>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+      </svg>
+    </i>
+    <div>
       ${heading ?
         `<h3>${heading}</h3>` : ''
       }
@@ -18,13 +23,13 @@ export const Template = ({
         ${content}
         ${link ? `<a href="#">${link}</a>.` : ''}
       </p>
-    </main>
-    ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
+    </div>
+    ${closeButton ? `<button class="close" type="button"><span className="sr-only">Close</span></button>` : ''}
     ${button || primaryButton  ?
     `<footer>
         ${button ? `<button type="button">${button}</button>` : ''}
-        ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
-       </footer>` : ''
+        ${primaryButton ? `<button type="button" className="primary">${primaryButton}</button>` : ''}
+     </footer>` : ''
     }
   </div>
 `
@@ -57,15 +62,15 @@ export const Template = ({
 # Alert
 
 <Story
-    name="example"
+    name="Alert"
     args={{
-      type: 'success',
-      heading: 'Success!',
-      content: 'Text content',
-      link: 'inline link',
-      button: '',
+      type: '',
+      heading: 'Heading!',
+      content: 'Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.',
+      link: 'Another inline link',
+      button: false,
       primaryButton: '',
-      closeButton: false
+      closeButton: true
     }}
   >
     {Template.bind({})}
@@ -81,16 +86,16 @@ Alerts are available in a number of different variants based on the intent of th
   <div role="alert">
     Neutral (no class)
   </div>
-  <div role="alert" class="info">
+  <div role="alert" className="info">
     Info
   </div>
-  <div role="alert" class="success">
+  <div role="alert" className="success">
     Success
   </div>
-  <div role="alert" class="warning">
+  <div role="alert" className="warning">
     Warning
   </div>
-  <div role="alert" class="danger">
+  <div role="alert" className="danger">
     Danger
   </div>
 </Canvas>
@@ -99,11 +104,11 @@ Alerts are available in a number of different variants based on the intent of th
 
 Alerts can contain the following elements:
 
-**Main**<br/>
-Content should be placed inside `<main>...</main>` and may in turn contain a heading `<h1>, <h2>, <h3>, <h4>, <h5>` and a `<p>` with additional content like links etc.
+**Content**<br/>
+Content should be placed inside `<div>...</div>` and may in turn contain a heading `<h1>, <h2>, <h3>, <h4>, <h5>` and a `<p>` with additional content like links etc.
 
 **Close button**<br/>
-`<button class="close">...</button>` if the alert is dismissible.
+`<button className="close">...</button>` if the alert is dismissible.
 
 **Footer** (optional)<br/>
 If the alert has actions like buttons or links they should be placed inside a `<footer>...</footer>`.
@@ -111,104 +116,117 @@ If the alert has actions like buttons or links they should be placed inside a `<
 <Canvas>
   <div>
     <div role="alert">
-      <main>
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
         <h3>Heading!</h3>
         <p>
           Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
         </p>
-      </main>
-      <button class="close"><span class="sr-only">Close</span></button>
+      </div>
+      <button className="close"><span className="sr-only">Close</span></button>
+    </div>
+    <div role="alert" className="info">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </div>
+      <button className="close"><span className="sr-only">Close</span></button>
+    </div>
+    <div role="alert" className="success">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Heading!</h3>
+        <p>
+          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
+        </p>
+      </div>
       <footer>
-        <button type="button">Default button</button>
-        <button type="button" class="primary">Primary button</button>
+        <button>Button</button>
       </footer>
     </div>
-    <div role="alert" class="info">
-      <main>
+    <div role="alert" className="warning">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
         <h3>Heading!</h3>
         <p>
           Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
         </p>
-      </main>
-      <button class="close"><span class="sr-only">Close</span></button>
+      </div>
       <footer>
-        <button type="button">Default button</button>
-        <button type="button" class="primary">Primary button</button>
+        <button>Button</button>
       </footer>
     </div>
-    <div role="alert" class="success">
-      <main>
+    <div role="alert" className="danger">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
         <h3>Heading!</h3>
         <p>
           Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
         </p>
-      </main>
-      <button class="close"><span class="sr-only">Close</span></button>
+      </div>
       <footer>
-        <button>Default button</button>
-        <button class="primary">Primary button</button>
-      </footer>
-    </div>
-    <div role="alert" class="warning">
-      <main>
-        <h3>Heading!</h3>
-        <p>
-          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-        </p>
-      </main>
-      <button class="close"><span class="sr-only">Close</span></button>
-      <footer>
-        <button>Default button</button>
-        <button class="primary">Primary button</button>
-      </footer>
-    </div>
-    <div role="alert" class="danger">
-      <main>
-        <h3>Heading!</h3>
-        <p>
-          Alert content placed inside a paragraph. Inline <a href="#">links</a> will inherit color from alert to make sure contrast is okay.
-        </p>
-      </main>
-      <button class="close"><span class="sr-only">Close</span></button>
-      <footer>
-        <button>Default button</button>
-        <button class="primary">Primary button</button>
+        <button>Button</button>
       </footer>
     </div>
   </div>
 </Canvas>
 
+## Dismissable by close or action
 
-### More examples
+The alert should either be dismissible by a close button or a button with an action tied to it. Don't include both since it causes confusion.
+
 <Canvas>
   <div>
-  <div role="alert" class="warning">
-    <main>
+  <div role="alert" className="warning">
+    <div>
       <h3>Warning!</h3>
       <p>
         Alert with single action in footer and no dismiss (close) button.<br/>
         Foo bar warning alert lorem ipsum dolar sit amet.
       </p>
-    </main>
+    </div>
     <footer>
       <button type="button">Action</button>
     </footer>
   </div>
   <div role="alert">
-    <main>
+    <div>
       <h3>Neutral</h3>
       <p>
         Alert without dismiss (close) button or actions in footer.
       </p>
-    </main>
+    </div>
   </div>
-  <div role="alert" class="success">
-    <main>
+  <div role="alert" className="success">
+    <div>
       <h3>Success!</h3>
       <p>
         Alert with single link in footer and no dismiss (close) button.
       </p>
-    </main>
+    </div>
     <footer>
       <a href="#">Take me somewhere</a>
     </footer>
@@ -216,15 +234,17 @@ If the alert has actions like buttons or links they should be placed inside a `<
   </div>
 </Canvas>
 
+
+
 <!--
 <Canvas>
-  <div role="alert" class="alert-icon">
-    <main>
+  <div role="alert" className="alert-icon">
+    <div>
       <h3>Success!</h3>
       <p>
         Alert with icon and single link in footer and no dismiss (close) button.
       </p>
-    </main>
+    </div>
     <footer>
       <a href="#">Take me somewhere</a>
     </footer>

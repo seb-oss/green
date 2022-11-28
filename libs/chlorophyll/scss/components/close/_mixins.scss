@@ -2,19 +2,20 @@
 @use 'sass:map';
 @use '../../common';
 
-$close-height: 42px;
+$close-height: 32px;
 $close-width: $close-height;
-$close-height-sm: 30px;
+$close-height-sm: 42px;
 $close-width-sm: $close-height-sm;
-$close-padding: 20px;
+$close-padding: 16px;
 $close-padding-sm: 16px;
-$close-thickness: 4px;
+$close-thickness: 2px;
 $close-thickness-sm: 2px;
 $close-bg-hsl: var(--sg-hsl-contrast);
 $close-bg: hsla(var(--background-hsl), 0);
 $close-bg-hover: hsla(var(--background-hsl), 0.1);
 $close-bg-active: hsla(var(--background-hsl), 0.2);
 $close-icon-color: var(--text-primary-color);
+
 @mixin close {
   --background-hsl: #{$close-bg-hsl};
   --color: #{$close-icon-color};

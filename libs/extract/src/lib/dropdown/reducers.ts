@@ -1,6 +1,7 @@
-import { dropdownValues, optionValues } from './defaultValues'
+import { IValidator, validateClassName } from '../helperFunction'
 import { randomId } from '../id'
 import reduce from '../reduce'
+import { dropdownValues, optionValues } from './defaultValues'
 import {
   AbstractDropdown,
   DropdownArgs,
@@ -8,7 +9,6 @@ import {
   DropdownOptionElement,
   DropdownTexts,
 } from './types'
-import { IValidator, validateClassName } from '../helperFunction'
 
 const selectionText = (
   selectedOptions: DropdownOptionElement[],
@@ -165,13 +165,25 @@ export const highlight = (
   let option: DropdownOptionElement
   if (typeof selection === 'number') {
     const opts = dropdown.options
-    const currentlySelectedIndex = opts.findIndex((o) => o.active)
+
+    const visibleDropdownOptions = opts.filter(
+      (element) => !element.classes.includes('hidden')
+    )
+
+    const currentlySelectedIndex = visibleDropdownOptions.findIndex(
+      (o) => o.active
+    )
     let newSelectedIndex = currentlySelectedIndex + selection
+
     if (newSelectedIndex < 0)
-      newSelectedIndex = dropdown.isLooping ? opts.length - 1 : 0
-    if (newSelectedIndex >= opts.length)
-      newSelectedIndex = dropdown.isLooping ? 0 : opts.length - 1
-    option = opts[newSelectedIndex]
+      newSelectedIndex = dropdown.isLooping
+        ? visibleDropdownOptions.length - 1
+        : 0
+    if (newSelectedIndex >= visibleDropdownOptions.length)
+      newSelectedIndex = dropdown.isLooping
+        ? 0
+        : visibleDropdownOptions.length - 1
+    option = visibleDropdownOptions[newSelectedIndex]
   } else {
     option = selection
   }
@@ -187,7 +199,10 @@ export const highlight = (
       reduce(o, {
         active: option === o,
         attributes: {},
-        classes: option === o ? ['active', 'sg-highlighted'] : [],
+        classes:
+          option === o
+            ? ['active', 'sg-highlighted']
+            : o.classes.filter((obj) => obj !== 'active' && 'sg-highlighted'),
       })
     ),
   })
@@ -278,27 +293,31 @@ export const blur = (dropdown: AbstractDropdown): AbstractDropdown =>
   reduce(dropdown, {
     isTouched: dropdown.isTouched || !dropdown.isOpen,
   } as Partial<AbstractDropdown>)
+
 export const active = (
   dropdown: AbstractDropdown,
   isActive: boolean
 ): AbstractDropdown =>
   reduce(dropdown, { isActive } as Partial<AbstractDropdown>)
+
 export const loop = (
   dropdown: AbstractDropdown,
   isLooping: boolean
 ): AbstractDropdown =>
   reduce(dropdown, { isLooping } as Partial<AbstractDropdown>)
+
 export const keypress = (
   dropdown: AbstractDropdown,
   key: string,
   event: KeyboardEvent
 ): AbstractDropdown | undefined => {
-  const opts = dropdown.options
+  const opts = dropdown.options.filter(
+    (option) => !option.classes.includes('hidden')
+  )
+
   let action
+
   switch (key) {
-    //case ' ':
-    //  action = toggle(dropdown)
-    //  break
     case 'Escape':
       if (dropdown.isOpen) action = close(dropdown)
       break
@@ -324,8 +343,18 @@ export const keypress = (
       action = open(highlight(dropdown, opts[opts.length - 1]))
       break
     case ' ':
-    case 'Enter':
-      // eslint-disable-next-line no-case-declarations
+    case 'Enter': {
+      if (dropdown.isSearchable && dropdown.isOpen && key === ' ') {
+        const searchFieldIsActive =
+          document.activeElement ===
+          document.getElementById(
+            dropdown.elements.toggler?.attributes?.id + '_search-input'
+          )
+        if (searchFieldIsActive) {
+          break
+        }
+      }
+
       const activeOption = opts.find((option) => option.active)
       action =
         dropdown.isOpen && activeOption
@@ -336,6 +365,7 @@ export const keypress = (
             : close(select(dropdown, activeOption))
           : toggle(dropdown)
       break
+    }
     default:
       break
   }
@@ -382,4 +412,11 @@ export const search = (
         ? { ...option, classes: removeClass(option.classes, 'hidden') }
         : { ...option, classes: addClass(option.classes, 'hidden') }
     }),
+  } as Partial<AbstractDropdown>)
+
+export const resetTouchedProperty = (
+  dropdown: AbstractDropdown
+): AbstractDropdown =>
+  reduce(dropdown, {
+    isTouched: false,
   } as Partial<AbstractDropdown>)

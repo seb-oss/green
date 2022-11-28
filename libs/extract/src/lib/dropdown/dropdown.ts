@@ -13,6 +13,7 @@ import {
   validate,
   search,
   selectByValue,
+  resetTouchedProperty,
 } from './reducers'
 import { fromEvent, merge, Subject } from 'rxjs'
 import { take, takeUntil } from 'rxjs/operators'
@@ -69,6 +70,8 @@ export const createDropdown = (
   handler.update = (props) => update(handler, listener, create(props))
   handler.validate = (validator: IValidator) =>
     update(handler, listener, validate(handler.dropdown, validator))
+  handler.resetTouchedState = () =>
+    update(handler, listener, resetTouchedProperty(handler.dropdown))
 
   fromEvent(toggler, 'blur')
     .pipe(takeUntil(handler.onDestroy$))
@@ -157,7 +160,10 @@ const update = async (
     handler.onChange(handler.dropdown.value)
   }
 
-  if (oldState.isTouched !== handler.dropdown.isTouched) {
+  if (
+    handler.dropdown.isTouched &&
+    oldState.isTouched !== handler.dropdown.isTouched
+  ) {
     handler.onTouched?.()
   }
 

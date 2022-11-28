@@ -12,6 +12,7 @@ form,
 .form-control {
   @include mixins.add-form-control;
 }
+
 .form-group {
   @include mixins.add-form-group;
 }

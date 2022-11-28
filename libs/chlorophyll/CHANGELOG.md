@@ -2,6 +2,58 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.37...@sebgroup/chlorophyll@1.0.0-beta.38) (2022-11-17)
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.36...@sebgroup/chlorophyll@1.0.0-beta.37) (2022-11-17)
+
+
+### Bug Fixes
+
+* 🐛 changing to correct font size for p tags ([a5eafbb](https://github.com/sebgroup/green/commit/a5eafbb7836b5b87721dfb4d00987e6c62f4b832))
+
+
+### Styles
+
+* 💄 Fixed input group sizing ([f80dbaf](https://github.com/sebgroup/green/commit/f80dbafa6d1a3269f4f40dfba76945ef8556692c))
+
+
+### BREAKING CHANGES
+
+* 🧨 Will break input layouts since form group take up 100% of container
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.35...@sebgroup/chlorophyll@1.0.0-beta.36) (2022-11-11)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.34...@sebgroup/chlorophyll@1.0.0-beta.35) (2022-11-10)
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.33...@sebgroup/chlorophyll@1.0.0-beta.34) (2022-11-08)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.32...@sebgroup/chlorophyll@1.0.0-beta.33) (2022-11-08)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.31...@sebgroup/chlorophyll@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.30...@sebgroup/chlorophyll@1.0.0-beta.31) (2022-11-08)
+
+
+### Features
+
+* 🎸 Styling for headers ([d5c0597](https://github.com/sebgroup/green/commit/d5c0597b48f878817d7af118bb8b980b00035075))
+
+
+
 # [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.29...@sebgroup/chlorophyll@1.0.0-beta.30) (2022-10-26)
 
 

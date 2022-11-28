@@ -2,6 +2,84 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.37...@sebgroup/green-angular@1.0.0-beta.38) (2022-11-17)
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.36...@sebgroup/green-angular@1.0.0-beta.37) (2022-11-17)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.35...@sebgroup/green-angular@1.0.0-beta.36) (2022-11-11)
+
+
+### Features
+
+* 🎸 allow angular 14 ([5f61848](https://github.com/sebgroup/green/commit/5f618487f97807e28f7796707f9055bee9c79e1d)), closes [#620](https://github.com/sebgroup/green/issues/620)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.34...@sebgroup/green-angular@1.0.0-beta.35) (2022-11-10)
+
+
+### Bug Fixes
+
+* 🐛 Dropdown search input space bar and arrows keys fixes ([ff6785c](https://github.com/sebgroup/green/commit/ff6785c842320838b462b5901099e54143144f1a))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: -
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.33...@sebgroup/green-angular@1.0.0-beta.34) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.32...@sebgroup/green-angular@1.0.0-beta.33) (2022-11-08)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.31...@sebgroup/green-angular@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.30...@sebgroup/green-angular@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.29...@sebgroup/green-angular@1.0.0-beta.30) (2022-11-08)
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.28...@sebgroup/green-angular@1.0.0-beta.29) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 Removed check of observers ([23d8465](https://github.com/sebgroup/green/commit/23d846564bacbbbf329947ff6da37d113de8f081))
+* 🐛 Removed unnecessary module exports ([4fc6418](https://github.com/sebgroup/green/commit/4fc6418820685db4f0c9d92837d96ec5b5d352ed))
+
+
+### Features
+
+* 🎸 Modal (Angular) ([0ad1797](https://github.com/sebgroup/green/commit/0ad17974928a966070b02cf0c86ba1c9c7c9117c))
+
+
+### Performance Improvements
+
+* **modal:** onpush strategy ([7b30b2b](https://github.com/sebgroup/green/commit/7b30b2b3f48fcf4977708730cef9789458d319cc))
+
+
+
 # [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.27...@sebgroup/green-angular@1.0.0-beta.28) (2022-10-26)
 
 
