@@ -330,6 +330,16 @@
     }
   },
   {
+    "id": "components-close-button--close-button",
+    "name": "Close button",
+    "title": "Components/Close button",
+    "customParams": {
+      "componentIds": [
+        "component-close-button"
+      ]
+    }
+  },
+  {
     "id": "components-card--card",
     "name": "Card",
     "title": "Components/Card",
@@ -360,9 +370,9 @@
     }
   },
   {
-    "id": "components-alert--alert",
-    "name": "Alert",
-    "title": "Components/Alert",
+    "id": "components-alert-ribbon--alert-ribbon",
+    "name": "Alert ribbon",
+    "title": "Components/Alert ribbon",
     "customParams": {
       "componentIds": [
         "component-alertribbon"
