@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.37...@sebgroup/green-react@1.0.0-beta.38) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+
 # [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.36...@sebgroup/green-react@1.0.0-beta.37) (2022-11-17)
 
 
