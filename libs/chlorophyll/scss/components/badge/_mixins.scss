@@ -55,8 +55,13 @@ $label-font-size: 14px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   @include common.padding-horizontal(3);
   @include common.padding-vertical(1);
+
+  &:has(.close) {
+    padding-right: 1.75rem;
+  }
 
   strong {
     font-size: $label-font-size;
@@ -66,18 +71,21 @@ $label-font-size: 14px;
   // adjust size of close button
   .close {
     --color: hsl(var(--sg-intent-neutral-hsl-contrast));
-    height: $close-height;
+    position: absolute;
+    inset-inline-end: -0.4375rem;
+
+    /*height: $close-height;
     width: $close-height;
-    margin: calc(-0.25rem + 1px) calc(-0.5rem + 1px) -0.25rem 0.125rem;
-    &:before,
+    margin: calc(-0.25rem + 1px) calc(-0.5rem + 1px) -0.25rem 0.125rem;*/
+/*    &:before,
     &:after {
       height: math.div($close-height, 1.5);
       width: $close-icon-thickness;
       top: calc(50% - #{math.div($close-height, 3)});
       left: calc(50% - #{math.div($close-icon-thickness, 2)});
-    }
+    }*/
 
-    &:not(:disabled, .disabled):hover {
+/*    &:not(:disabled, .disabled):hover {
       background: $close-bg-hover;
       border-color: $close-bg-hover;
     }
@@ -85,7 +93,7 @@ $label-font-size: 14px;
     &:not(:disabled, .disabled):hover:active {
       background: $close-bg-active;
       border-color: $close-bg-active;
-    }
+    }*/
   }
 }
 
@@ -95,6 +103,11 @@ $label-font-size: 14px;
   // badge close
   .close {
     --color: #{$color};
+
+    & > i,
+    & > .close:not(:disabled):not(.disabled) > i {
+      background: transparent;
+    }
   }
 }
 

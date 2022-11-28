@@ -28,12 +28,19 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   align-items: center;
   display: inline-flex;
   justify-content: center;
+
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
+  }
+
+  &.small {
+    min-height: 2rem;
+    padding: 0.4375rem 0.75rem;
+    line-height: 1.125rem;
   }
 }
 

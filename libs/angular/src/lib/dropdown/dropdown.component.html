@@ -47,6 +47,7 @@
       (click)="handler?.close()"
     >
       <span class="sr-only">{{ dropdown?.texts?.close }}</span>
+      <i></i>
     </button>
     <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
       <ng-container *ngTemplateOutlet="searchInput"></ng-container>

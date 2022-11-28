@@ -232,6 +232,7 @@ $border-color-invalid: var(--border-color-invalid);
 $border-color-valid: var(--border-color-valid);
 
 $grey-400: var(--grey-400);
+$grey-500: var(--grey-500);
 $grey-700: var(--grey-700);
 
 $intent-primary-color: var(--intent-primary-color);
@@ -290,8 +291,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 
 @mixin light-mode() {
   --heading-primary-color: #{$black};
-  --text-primary-color: #{transparentize($black, 0.1)};
-  --text-secondary-color: #{transparentize($black, 0.475)}; // #767676 against white 4.5 contrast
+  --text-primary-color: #{get($grey, 1000, 'light')};
+  --text-secondary-color: #{get($grey, 800, 'light')};
   --text-disabled-color: #{get($disabled, 'color')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
   --border-color: #{transparentize($black, 0.83)}; // #CECECE against white

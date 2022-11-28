@@ -1,0 +1,220 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+export const Template = ({
+  type,
+  heading,
+  content,
+  link,
+  button,
+  primaryButton,
+  closeButton,
+}) => `
+  <div role="alert" className="${type}">
+    <i>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM12 7.07143C12.8284 7.07143 13.5 7.743 13.5 8.57143C13.5 9.39986 12.8284 10.0714 12 10.0714C11.1716 10.0714 10.5 9.39986 10.5 8.57143C10.5 7.743 11.1716 7.07143 12 7.07143ZM14 16.1429C14 16.3795 13.8081 16.5714 13.5714 16.5714H10.4286C10.1919 16.5714 10 16.3795 10 16.1429V15.2857C10 15.049 10.1919 14.8571 10.4286 14.8571H10.8571V12.5714H10.4286C10.1919 12.5714 10 12.3795 10 12.1429V11.2857C10 11.049 10.1919 10.8571 10.4286 10.8571H12.7143C12.951 10.8571 13.1429 11.049 13.1429 11.2857V14.8571H13.5714C13.8081 14.8571 14 15.049 14 15.2857V16.1429Z" fill="#333333"/>
+      </svg>
+    </i>
+    <div>
+      ${heading ?
+        `<h3>${heading}</h3>` : ''
+      }
+      <p>
+        ${content}
+        ${link ? `<a href="#">${link}</a>.` : ''}
+      </p>
+    </div>
+    ${closeButton ? `<button class="close" type="button"><span className="sr-only">Close</span><i></i></button>` : ''}
+    ${button || primaryButton  ?
+    `<footer>
+        ${button ? `<button type="button">${button}</button>` : ''}
+        ${primaryButton ? `<button type="button" className="primary">${primaryButton}</button>` : ''}
+     </footer>` : ''
+    }
+  </div>
+`
+
+<Meta
+  title="Components/Alert ribbon"
+  parameters={{
+    componentIds: ['component-alertribbon']
+  }}
+  argTypes={{
+    type: {
+      control: 'select',
+      options: ['success', 'warning', 'danger', ''],
+    },
+    heading: { control: 'text' },
+    content: { control: 'text' },
+    link: { control: 'text' },
+    button: { control: 'text' },
+    primaryButton: { control: 'text' },
+    closeButton: { control: 'boolean' },
+  }}
+/>
+
+<style>{`
+  [role="alert"] + [role="alert"] {
+    margin-top: 1.5rem;
+  }`}
+</style>
+
+# Alert ribbon
+
+<Story
+    name="Alert ribbon"
+    args={{
+      type: '',
+      heading: 'Can contain a heading.',
+      content: 'Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or',
+      link: 'part of the sentence.',
+      button: false,
+      primaryButton: '',
+      closeButton: true
+    }}
+  >
+    {Template.bind({})}
+</Story>
+
+<br/>
+
+## Variants
+
+An alert ribbon is a message used to inform the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
+
+<Canvas>
+  <div role="alert">
+    <div>
+      <p>Neutral (no class)</p>
+    </div>
+  </div>
+  <div role="alert" className="success">
+    <div>
+      <p>Success</p>
+    </div>
+  </div>
+  <div role="alert" className="warning">
+    <div>
+      <p>Warning</p>
+    </div>
+  </div>
+  <div role="alert" className="danger">
+    <div>
+      <p>Danger</p>
+    </div>
+  </div>
+</Canvas>
+
+## Element structure
+
+Alerts can contain the following elements:
+
+**Content**<br/>
+Content should be placed inside `<div>...</div>` and may in turn contain a heading `<h1>, <h2>, <h3>, <h4>, <h5>` and a `<p>` with additional content like links etc.
+
+**Close button**<br/>
+`<button className="close">...</button>` if the alert is dismissible.
+
+**Footer** (optional)<br/>
+If the alert has actions like buttons or links they should be placed inside a `<footer>...</footer>`.
+
+<Canvas>
+  <div>
+    <div role="alert">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM12 7.07143C12.8284 7.07143 13.5 7.743 13.5 8.57143C13.5 9.39986 12.8284 10.0714 12 10.0714C11.1716 10.0714 10.5 9.39986 10.5 8.57143C10.5 7.743 11.1716 7.07143 12 7.07143ZM14 16.1429C14 16.3795 13.8081 16.5714 13.5714 16.5714H10.4286C10.1919 16.5714 10 16.3795 10 16.1429V15.2857C10 15.049 10.1919 14.8571 10.4286 14.8571H10.8571V12.5714H10.4286C10.1919 12.5714 10 12.3795 10 12.1429V11.2857C10 11.049 10.1919 10.8571 10.4286 10.8571H12.7143C12.951 10.8571 13.1429 11.049 13.1429 11.2857V14.8571H13.5714C13.8081 14.8571 14 15.049 14 15.2857V16.1429Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Can contain a heading.</h3>
+        <p>
+          Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or <a href="#">part of the sentence.</a>
+        </p>
+      </div>
+      <button className="close">
+        <span className="sr-only">Close</span>
+      </button>
+    </div>
+    <div role="alert" className="success">
+      <i>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.6203 6.60836L9.40014 14.8285L6.37976 11.8081C6.23332 11.6617 5.99588 11.6617 5.84942 11.8081L4.96554 12.692C4.8191 12.8384 4.8191 13.0759 4.96554 13.2223L9.13495 17.3917C9.28138 17.5382 9.51882 17.5382 9.66529 17.3917L19.0344 8.02258C19.1809 7.87614 19.1809 7.63871 19.0344 7.49224L18.1506 6.60836C18.0041 6.46193 17.7667 6.46193 17.6203 6.60836Z" fill="white"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Can contain a heading.</h3>
+        <p>
+          Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or <a href="#">part of the sentence.</a>
+        </p>
+      </div>
+      <footer>
+        <button>Button</button>
+      </footer>
+    </div>
+    <div role="alert" className="warning">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Can contain a heading.</h3>
+        <p>
+          Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or <a href="#">part of the sentence.</a>
+        </p>
+      </div>
+      <footer>
+        <button>Button</button>
+      </footer>
+    </div>
+    <div role="alert" className="danger">
+      <i>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.2857 4H5.71429C4.7675 4 4 4.7675 4 5.71429V18.2857C4 19.2325 4.7675 20 5.71429 20H18.2857C19.2325 20 20 19.2325 20 18.2857V5.71429C20 4.7675 19.2325 4 18.2857 4ZM10.8682 7.42857H13.1318C13.3777 7.42857 13.5731 7.635 13.5597 7.8805L13.2948 12.7376C13.2824 12.9649 13.0945 13.1429 12.8669 13.1429H11.1331C10.9055 13.1429 10.7176 12.9649 10.7052 12.7376L10.4402 7.8805C10.4269 7.635 10.6223 7.42857 10.8682 7.42857ZM12 17.0714C11.0927 17.0714 10.3571 16.3359 10.3571 15.4286C10.3571 14.5213 11.0927 13.7857 12 13.7857C12.9073 13.7857 13.6429 14.5213 13.6429 15.4286C13.6429 16.3359 12.9073 17.0714 12 17.0714Z" fill="#333333"/>
+        </svg>
+      </i>
+      <div>
+        <h3>Can contain a heading.</h3>
+        <p>
+          Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or <a href="#">part of the sentence.</a>
+        </p>
+      </div>
+      <footer>
+        <button>Button</button>
+      </footer>
+    </div>
+  </div>
+</Canvas>
+
+## Dismissable by close or action
+
+The alert should either be dismissible by a close button or a button with an action tied to it. Don't include both since it causes confusion.
+
+<Canvas>
+  <div>
+  <div role="alert" className="warning">
+    <div>
+      <h3>Warning!</h3>
+      <p>
+        Alert with single action in footer and no dismiss (close) button.<br/>
+        Foo bar warning alert lorem ipsum dolar sit amet.
+      </p>
+    </div>
+    <footer>
+      <button type="button">Action</button>
+    </footer>
+  </div>
+  <br />
+  <br />
+  <div role="alert">
+    <div>
+      <h3>Neutral</h3>
+      <p>
+        Alert with dismiss (close) button.
+      </p>
+    </div>
+    <button class="close" type="button"><span className="sr-only">Close</span></button>
+  </div>
+  </div>
+</Canvas>
