@@ -66,16 +66,18 @@ export const Dropdown = ({
           <div className="sg-fieldset-container">
             <fieldset {...multiSelectProps.fieldsetProps}>
               <legend {...multiSelectProps.legendProps} />
-              {multiSelectProps.checkboxes?.map((checkboxItem) => (
-                <label
-                  key={checkboxItem.labelProps.id}
-                  {...checkboxItem.labelProps}
-                >
-                  <input {...checkboxItem.inputProps} />
-                  <span {...checkboxItem.spanProps} />
-                  <i></i>
-                </label>
-              ))}
+              <div>
+                {multiSelectProps.checkboxes?.map((checkboxItem) => (
+                  <label
+                    key={checkboxItem.labelProps.id}
+                    {...checkboxItem.labelProps}
+                  >
+                    <input {...checkboxItem.inputProps} />
+                    <span {...checkboxItem.spanProps} />
+                    <i></i>
+                  </label>
+                ))}
+              </div>
             </fieldset>
           </div>
         ) : (

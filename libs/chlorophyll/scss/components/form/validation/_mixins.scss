@@ -43,18 +43,22 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-validation() {
   .was-validated input + .form-info,
-  .was-validated textarea + .form-info {
+  .was-validated textarea + .form-info,
+  .was-validated fieldset + .form-info{
     opacity: 0;
+    font-weight: 500;
   }
 
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
+  .was-validated fieldset:valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
 
   .was-validated input:not(.is-valid):invalid + .form-info,
   .was-validated textarea:not(.is-valid):invalid + .form-info,
+  .was-validated fieldset + .form-info,
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }

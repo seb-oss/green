@@ -63,14 +63,16 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
     <div class="form-group">
       <fieldset>
         <legend class="sr-only">Radio group</legend>
-        <label class="form-control">
-          <input type="radio" name="radioGroup"/>
-          <span>One</span><i/>
-        </label>
-        <label class="form-control">
-          <input type="radio" name="radioGroup"/>
-          <span>Two</span><i/>
-        </label>
+        <div>
+          <label class="form-control">
+            <input type="radio" name="radioGroup"/>
+            <span>One</span><i/>
+          </label>
+          <label class="form-control">
+            <input type="radio" name="radioGroup"/>
+            <span>Two</span><i/>
+          </label>
+        </div>
       </fieldset>
     </div>
   </form>
@@ -164,14 +166,16 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
       <fieldset aria-describedby="radioGroupHelp">
         <legend>Radio group</legend>
         <span id="radioGroupHelp" class="form-info">Radio group description</span>
-        <label class="form-control">
-          <input required type="radio" name="radioGroupNormalHorizontal"/>
-          <span>One</span><i/>
-        </label>
-        <label class="form-control">
-          <input required type="radio" name="radioGroupNormalHorizontal" required/>
-          <span>Two</span><i/>
-        </label>
+        <div>
+          <label class="form-control">
+            <input required type="radio" name="radioGroupNormalHorizontal"/>
+            <span>One</span><i/>
+          </label>
+          <label class="form-control">
+            <input required type="radio" name="radioGroupNormalHorizontal" required/>
+            <span>Two</span><i/>
+          </label>
+        </div>
       </fieldset>
       <span class="form-info">Neutral</span>
     </div>

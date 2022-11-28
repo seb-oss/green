@@ -44,11 +44,13 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
       <fieldset className={validatorClassName}>
         <legend>{title}</legend>
         <span className="form-info">{description}</span>
-        {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
-          return React.isValidElement<React.FC<RadioButtonProps>>(Child)
-            ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name, ref: radioBtnRef })
-            : Child
-        })}
+        <div>
+          {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
+            return React.isValidElement<React.FC<RadioButtonProps>>(Child)
+              ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name, ref: radioBtnRef })
+              : Child
+          })}
+        </div>
       </fieldset>
       {validator?.message && <span className="form-info">{validator?.message}</span>}
     </div>
