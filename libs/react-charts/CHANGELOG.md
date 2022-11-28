@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.36...@sebgroup/green-react-charts@1.0.0-beta.37) (2022-11-28)
+
+
+
 # [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.35...@sebgroup/green-react-charts@1.0.0-beta.36) (2022-11-17)
 
 
