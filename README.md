@@ -156,7 +156,7 @@ proxy=null
 If you get `SSL certificate problem: unable to get local issuer certificate` you can try:
 
 ```cmd
-SET GIT_SSL_NO_VERIFY=true
+set GIT_SSL_NO_VERIFY=true
 git config --global http.sslVerify false
 yarn config set strict-ssl false --global
 ```
