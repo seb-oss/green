@@ -1,29 +1,19 @@
 @use '../../../tokens/shame' as tokens;
 @use '../../../common';
-
-$background: tokens.$form-control-bg;
-$background-hover: tokens.$form-control-bg;
-$background-active: tokens.$form-control-bg;
-$diameter: 1.25rem;
-$border-width: 1px;
-$border-color-active: tokens.get(tokens.$blue, 2);
-$border-color-hover: tokens.get(tokens.$blue, 0);
-$radiomark-diameter-percentage: 0.5;
-$radiomark-color: tokens.get(tokens.$blue, 1);
-$radiomark-disabled-color: tokens.$black;
+@use './tokens' as component-tokens;
 
 $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
 /* selectors */
-$selector: '.form-control';
-$radio-selector: 'input[type="radio"]';
-$validated-selector: '.was-validated';
 
-@mixin add-radio() {
+@mixin add-radio(
+  $selector: '.form-control',
+  $radio-selector: 'input[type="radio"]',
+  $validated-selector: '.was-validated'
+) {
   /* Hide the browser's default checkbox */
   #{$selector} #{$radio-selector} {
-    @include common.add-focus('visible', '~ i');
     cursor: pointer;
     height: 0;
     opacity: 0;
@@ -32,39 +22,42 @@ $validated-selector: '.was-validated';
     z-index: -1;
   }
 
+  /* Add focus to form-control field */
+  #{$selector}:has( input[type="radio"]:focus-visible) {
+    @include common.add-focus('within');
+  }
+
   /* Style for custom radio */
   #{$selector} #{$radio-selector} ~ i {
-    @include common.add-border(null, $border-width);
-    @include common.add-border-color();
+    @include common.add-border(false, 1px, var(--gds-comp-radio-border-color));
     @include common.margin-end(4);
-    @include common.add-border-radius(50%);
-    background-color: $background;
-    flex: 0 0 auto;
-    height: $diameter;
-    transition: 300ms;
-    width: $diameter;
+    position: relative;
+    border-radius: var(--gds-comp-radio-border-radius);
+    background-color: var(--gds-comp-radio-container-color);
+    display: flex;
+    height: var(--gds-comp-radio-container-width);
+    width: var(--gds-comp-radio-container-width);
+  }
+
+
+  #{$selector} #{$radio-selector}:not(:checked):focus-visible ~ i {
+    border: 1px solid var(--gds-sys-color-blue-dark-2);
   }
 
   /* Hover state */
-  #{$selector}:hover
-    #{$radio-selector}:not(:checked, .disabled, :disabled)
-    ~ i {
-    @include common.add-border-color($border-color-hover);
+  #{$selector}:hover #{$radio-selector}:not(.disabled,:disabled) ~ i {
+    border-color: var(--gds-comp-radio-border-color-selected-hover);
+    background-color: var(--gds-comp-radio-hover-container-color);
 
-    &::before {
-      opacity: 0.35;
-      transform: scale3d(
-        $radiomark-diameter-percentage,
-        $radiomark-diameter-percentage,
-        1
-      );
-      transition-timing-function: ease-in-out;
+    &::after {
+      background-color: var(--gds-comp-radio-dot-color-hover);
+      opacity: 1;
     }
   }
 
   /* Checked state */
   #{$selector} #{$radio-selector}:checked ~ i {
-    @include common.add-border-color($border-color-active);
+    //background-color: var(--gds-comp-checkbox-container-color-selected);
   }
 
   /* Valid state */
@@ -73,10 +66,6 @@ $validated-selector: '.was-validated';
     ~ i {
       @include common.add-border-color($valid-color);
     }
-
-    &:checked ~ i::before {
-      background-color: $valid-color;
-    }
   }
 
   /* Invalid state */
@@ -84,10 +73,6 @@ $validated-selector: '.was-validated';
   #{$selector} #{$radio-selector}.is-invalid {
     ~ i {
       @include common.add-border-color($invalid-color);
-    }
-
-    &:checked ~ i::before {
-      background-color: $invalid-color;
     }
   }
 
@@ -98,8 +83,12 @@ $validated-selector: '.was-validated';
       @include common.add-disable(false, false, true);
     }
 
-    &:checked ~ i::before {
-      @include common.add-disable($radiomark-disabled-color, false, true);
+    &:checked ~ i {
+      @include common.add-disable(true, false, true);
+    }
+
+    &:checked ~ i::after {
+      @include common.add-disable(true, false, false);
     }
 
     ~ span {
@@ -108,29 +97,19 @@ $validated-selector: '.was-validated';
   }
 
   /* Checkmark */
-  #{$selector} #{$radio-selector} ~ i::before {
-    background: $radiomark-color;
-    border-radius: 50%;
+  #{$selector} #{$radio-selector} ~ i::after {
     content: '';
-    height: $diameter;
-    margin-left: -($border-width);
-    margin-top: -($border-width);
     opacity: 0;
     position: absolute;
-    transform: scale3d(0, 0, 0);
-    transform-origin: center;
-    transition: 200ms ease-in;
-    width: $diameter;
+    transform: scale(calc(8 / 14));
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--gds-comp-radio-border-radius);
+    background-color: var(--gds-comp-radio-dot-color-selected);
   }
 
-  /* Show the checkmark when checked */
-  #{$selector} #{$radio-selector}:checked ~ i::before {
+  #{$selector} #{$radio-selector}:checked ~ i::after {
     opacity: 1;
-    transform: scale3d(
-      $radiomark-diameter-percentage,
-      $radiomark-diameter-percentage,
-      1
-    );
-    transition-timing-function: ease-in-out;
   }
 }

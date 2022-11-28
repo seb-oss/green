@@ -204,7 +204,8 @@ $intent: (
     'info': get($blue, 0),
     'success': get($green, 0),
     'warning': get($yellow, 2),
-    'danger': get($red, 1),
+    //TODO: base color from on pallet
+    'danger': rgba(159, 0, 10, 1),
     'light': get($grey, 300),
     'dark': get($grey, 1000),
   ),
@@ -214,7 +215,8 @@ $intent: (
     'info': get($blue, 2, 'dark'),
     'success': get($green, 2, 'dark'),
     'warning': get($yellow, 0, 'dark'),
-    'danger': get($red, 1, 'dark'),
+    //TODO: base color from on pallet
+    'danger': rgba(255, 89, 79, 1),
     'light': get($grey, 300, 'dark'),
     'dark': get($grey, 1000, 'dark'),
   ),
