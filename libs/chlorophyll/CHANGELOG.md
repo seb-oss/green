@@ -2,6 +2,37 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.38...@sebgroup/chlorophyll@1.0.0-beta.39) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 fixing import to alert-ribbon ([bc649a2](https://github.com/sebgroup/green/commit/bc649a29a8a84382df8bc07f2f8583f8feec8474))
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+### Features
+
+* 🎸 radio button with latest figma design ([76d38aa](https://github.com/sebgroup/green/commit/76d38aa6a998136929c5d849a52f8d8429ff23f5)), closes [#459](https://github.com/sebgroup/green/issues/459)
+
+
+### Styles
+
+* 💄 Checkbox, fieldset, forminfo and validation ([c8be77c](https://github.com/sebgroup/green/commit/c8be77c93814ac38cc43c5013d9f16926de67cc2))
+* 💄 Close button, Alert ribbon ([e622480](https://github.com/sebgroup/green/commit/e6224806649ebb841721130046cfd3d2815b5515))
+
+
+### BREAKING CHANGES
+
+* 🧨 change to html structure for fieldset form groups. checkboxes and radios
+should be wrapped in a div
+* 🧨 Close button need to have a i-elemented added as a child to the button
+tag in order to display the cross icon.
+* 🧨 -Breaks fieldset styling since we need to add a div to to wrap the form
+items.
+
+
+
 # [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.37...@sebgroup/chlorophyll@1.0.0-beta.38) (2022-11-17)
 
 
