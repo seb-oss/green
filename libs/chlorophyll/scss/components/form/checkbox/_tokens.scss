@@ -1,4 +1,4 @@
-:root {
+@mixin add-tokens () {
   /******************************************/
   /*********** Component Tokens *************/
   /******************************************/
@@ -15,7 +15,7 @@
   --gds-comp-checkbox-container-color-selected: var(--gds-sys-color-base);
   --gds-comp-checkbox-border-color-selected: var(--gds-sys-color-surface);
 
-  @media (prefers-color-scheme: dark) {
+/*  @media (prefers-color-scheme: dark) {
     --gds-comp-checkbox-container-color: var(--gds-sys-color-base-container);
     --gds-comp-checkbox-border-color: transparent;
     --gds-comp-checkbox-hover-border-color: var(--gds-sys-color-blue);
@@ -30,5 +30,5 @@
     --gds-comp-checkbox-hover-border-color: var(--gds-ref-pallet-base600);
     --gds-comp-checkbox-container-color-selected: var(--gds-sys-color-base);
     --gds-comp-checkbox-border-color-selected: var(--gds-sys-color-surface);
-  }
+  }*/
 }
