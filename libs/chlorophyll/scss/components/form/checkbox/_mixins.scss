@@ -74,11 +74,9 @@ $invalid-color: tokens.$intent-danger-background;
   #{$selector} #{$checkbox-selector}.is-invalid {
     ~ i {
       @include common.add-border-color($invalid-color);
-      @include common.margin-end(2)
     }
   }
 
-  #{$selector}:has( #{$checkbox-selector}:invalid),
   #{$selector}:has( #{$checkbox-selector}.is-invalid) {
     border: 1px solid $invalid-color;
     @include common.margin-bottom(3);
