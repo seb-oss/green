@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.38...@sebgroup/green-react@1.0.0-beta.39) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 checkbox, radio, use-green scope, variables ([1fd9154](https://github.com/sebgroup/green/commit/1fd915463e9c8c3bf1db2fa6179da5f4ccbdf2f8))
+
+
+
 # [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.37...@sebgroup/green-react@1.0.0-beta.38) (2022-11-28)
 
 
