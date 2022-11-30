@@ -1,4 +1,4 @@
-:root {
+@mixin add-radio-tokens() {
   /******************************************/
   /*********** Component Tokens *************/
   /******************************************/
@@ -17,7 +17,7 @@
 
   --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
   --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);
-
+/*
   @media (prefers-color-scheme: dark) {
     --gds-comp-radio-container-color: var(--gds-sys-color-base-container);
     --gds-comp-radio-border-color: transparent;
@@ -42,5 +42,5 @@
 
     --gds-comp-radio-dot-color-selected: var(--gds-sys-color-base);
     --gds-comp-radio-border-color-selected: var(--gds-sys-color-surface);
-  }
+  }*/
 }

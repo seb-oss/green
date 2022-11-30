@@ -22,14 +22,15 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Add focus to form-control field */
-  #{$selector}:has( input[type="checkbox"]:focus-visible) {
+  #{$selector}:has( #{$checkbox-selector}:focus-visible) {
     @include common.add-focus('within');
   }
 
   /* Style for custom checkbox */
   #{$selector} #{$checkbox-selector} ~ i {
-    @include common.add-border(false, 1px, var(--gds-comp-checkbox-border-color));
+
     @include common.margin-end(4);
+    box-shadow:inset 0 0 0 1px var(--gds-comp-checkbox-border-color);
     position: relative;
     border-radius: var(--gds-comp-checkbox-border-radius);
     background-color: var(--gds-comp-checkbox-container-color);
@@ -58,24 +59,36 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Valid state */
-  #{$validated-selector}
+/*  #{$validated-selector}
     #{$selector}
     #{$checkbox-selector}:not(.is-invalid):valid,
   #{$selector} #{$checkbox-selector}.is-valid {
     ~ i {
       @include common.add-border-color($valid-color);
     }
-  }
+  }*/
 
   /* Invalid state */
-  #{$validated-selector}
+/*  #{$validated-selector}
     #{$selector}
     #{$checkbox-selector}:not(.is-valid):invalid,
   #{$selector} #{$checkbox-selector}.is-invalid {
     ~ i {
       @include common.add-border-color($invalid-color);
     }
+  }*/
+
+  #{$selector}:has( #{$checkbox-selector}.is-invalid) {
+    border: 1px solid $invalid-color;
+    @include common.margin-bottom(3);
   }
+
+  .is-invalid #{$selector}:has( #{$checkbox-selector}.is-invalid) {
+    border: none;
+    margin: 0;
+  }
+
+
 
   /* Disabled state */
   #{$selector} #{$checkbox-selector}:disabled,
@@ -104,8 +117,8 @@ $invalid-color: tokens.$intent-danger-background;
     border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
     border-left: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
     height: 0.3125rem;
-    left: .125rem;
-    top: 0.21875rem;
+    left: 0.1875rem;
+    top: 0.25rem;
     width: 0.625rem;
     transform: scale(1) rotate(-45deg);
   }

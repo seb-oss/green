@@ -42,8 +42,8 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
   return (
     <div className="form-group">
       <fieldset className={validatorClassName}>
-        <legend>{title}</legend>
-        <span className="form-info">{description}</span>
+        { title && <legend>{title}</legend>}
+        { description && <span className="form-info">{description}</span> }
         <div>
           {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
             return React.isValidElement<React.FC<RadioButtonProps>>(Child)
