@@ -1,4 +1,7 @@
 @use '../../tokens/shame' as tokens;
+@use '../../tokens/components' as components;
+@use '../../tokens/colors' as colors;
+@use '../../tokens/shape' as shape;
 @use 'mixins';
 
 @mixin _dark-theme() {
@@ -76,6 +79,10 @@
 
 /* apps will use light mode by default */
 :root {
+  @include shape.add-tokens;
+  @include colors.add-color-tokens;
+  @include components.add-checkbox-tokens;
+  @include components.add-radio-tokens;
   @include tokens.light-mode;
   @include mixins.add-theme();
 }

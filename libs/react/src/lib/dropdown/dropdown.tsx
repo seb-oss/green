@@ -61,6 +61,7 @@ export const Dropdown = ({
           onClick={dropdown?.close}
         >
           <span className="sr-only">{dropdown?.dropdown.texts.close}</span>
+          <i></i>
         </button>
         {dropdown?.dropdown.isMultiSelect ? (
           <div className="sg-fieldset-container">

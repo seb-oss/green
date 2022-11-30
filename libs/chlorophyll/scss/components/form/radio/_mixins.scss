@@ -23,7 +23,7 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Add focus to form-control field */
-  #{$selector}:has( input[type="radio"]:focus-visible) {
+  #{$selector}:has( #{$radio-selector}:focus-visible) {
     @include common.add-focus('within');
   }
 
@@ -35,6 +35,7 @@ $invalid-color: tokens.$intent-danger-background;
     display: flex;
     height: var(--gds-comp-radio-container-width);
     width: var(--gds-comp-radio-container-width);
+    // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
     box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border);
 
     &::after {
@@ -42,6 +43,7 @@ $invalid-color: tokens.$intent-danger-background;
       width: 100%;
       border-radius: var(--gds-comp-radio-border-radius);
       background-color: var(--gds-comp-radio-dot);
+      // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
       box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring);
     }
   }
