@@ -102,12 +102,12 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
       display: inline;
       font-size: 1rem;
       font-weight: 500;
-      @include common.line-height(3);
+      line-height: 1.5rem;
       margin-right: 0.25rem;
     }
     > p {
       display: inline;
-      @include common.line-height(3);
+      line-height: 1.5rem;
       @include common.margin-vertical(0);
 
       a, a:visited:not(.button,[role=tab]) {

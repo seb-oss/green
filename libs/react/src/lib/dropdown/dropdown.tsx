@@ -8,19 +8,21 @@ export interface DropdownProps extends DropdownArgs {
 }
 
 export const Dropdown = ({
+  compareWith,
+  display,
   id,
-  value,
-  options,
+  informationLabel,
+  label,
   loop,
   multiSelect,
-  searchable,
-  searchFilter,
-  compareWith,
-  useValue,
-  display,
-  texts,
   onChange,
+  options,
+  searchFilter,
+  searchable,
+  texts,
+  useValue,
   validator,
+  value,
 }: DropdownProps) => {
   const togglerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
@@ -45,12 +47,14 @@ export const Dropdown = ({
     })
 
   const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
-    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues.elements?.listbox?.classes?.join(' ')}
+    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues().elements?.listbox?.classes?.join(' ')}
     return props
   }
 
   return (
     <div className="form-group">
+      { label && <label>{label}</label>}
+      { informationLabel && <div className="form-info">{informationLabel}</div>}
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>
       </button>

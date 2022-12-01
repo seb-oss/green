@@ -111,23 +111,21 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
   }
 
-  > input,
-  > textarea,
-  > button,
-  button[aria-haspopup='listbox'] {
+  > input:not(:last-child),
+  > textarea:not(:last-child),
+  > button:not(:last-child),
+  button[aria-haspopup='listbox']:not(:last-child) {
     @include common.margin-bottom(3);
   }
 
-  // label
-  label:not(.form-control),
-  .label:not(.form-control) {
-    @include common.font-weight('medium');
-    @include common.line-height(4);
-  }
+
+
+
 }
 
 /* form text */
@@ -138,3 +136,22 @@
   align-items: center;
   font: inherit;
 }
+
+@mixin add-label() {
+
+  &:not(.form-control) {
+    @include common.font-weight('medium');
+    line-height: 1.25rem;
+    margin-bottom: .5rem;
+  }
+
+  &:has(+ .form-info) {
+    margin-bottom: 0;
+  }
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+}
+
+

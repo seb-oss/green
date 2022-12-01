@@ -34,15 +34,11 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-form-info() {
   @include common.font-scale(1);
-  @include common.line-height(2);
+  line-height: 1.25rem;
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
   max-width: -moz-fit-content;
   max-width: fit-content;
   min-width: 100%;
-
-  label + & {
-    font-weight: 500;
-  }
 }
 
 @mixin add-validation() {
@@ -87,7 +83,6 @@ $_border-width: var(--sg-border-width);
     width: fit-content;
 
     > div {
-      @include common.margin-top(3);
       width: fit-content;
     }
 
@@ -115,6 +110,6 @@ $_border-width: var(--sg-border-width);
   legend {
     @include common.padding(0);
     @include common.font-weight('medium');
-    @include common.line-height(2);
+    line-height: 1.25rem;
   }
 }

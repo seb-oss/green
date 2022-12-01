@@ -20,3 +20,8 @@ form,
 .form-text {
   @include mixins.add-form-text;
 }
+
+label, .label, legend {
+  @include mixins.add-label();
+}
+
