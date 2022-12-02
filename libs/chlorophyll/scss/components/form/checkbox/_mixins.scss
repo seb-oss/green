@@ -44,11 +44,11 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Hover state */
-  #{$selector}:hover #{$checkbox-selector}:not(.disabled,:disabled,:checked) ~ i {
+  #{$selector}:hover #{$checkbox-selector}:not(.disabled,:disabled,:checked,:indeterminate) ~ i {
     border-color: var(--gds-comp-checkbox-hover-border-color);
   }
 
-  #{$selector}:hover #{$checkbox-selector}:not(:checked) ~ i::after {
+  #{$selector}:hover #{$checkbox-selector}:not(:checked,:indeterminate) ~ i::after {
     border-color: var(--gds-comp-checkbox-hover-border-color);
     opacity: 1;
   }
@@ -56,6 +56,18 @@ $invalid-color: tokens.$intent-danger-background;
   /* Checked state */
   #{$selector} #{$checkbox-selector}:checked ~ i {
     background-color: var(--gds-comp-checkbox-container-color-selected);
+  }
+
+  /* Indeterminate state */
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i {
+    background-color: var(--gds-comp-checkbox-container-color-selected);
+  }
+
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i::after {
+    border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    border-left: none;
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
   }
 
   /* Valid state */
