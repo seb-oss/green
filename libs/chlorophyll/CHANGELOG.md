@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.40...@sebgroup/chlorophyll@1.0.0-beta.41) (2022-11-30)
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.39...@sebgroup/chlorophyll@1.0.0-beta.40) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 checkbox, radio, use-green scope, variables ([1fd9154](https://github.com/sebgroup/green/commit/1fd915463e9c8c3bf1db2fa6179da5f4ccbdf2f8))
+* 🐛 tokens not imported correctly ([14defce](https://github.com/sebgroup/green/commit/14defceaa01221d36722feb193e6bece8768c024))
+
+
+
 # [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.38...@sebgroup/chlorophyll@1.0.0-beta.39) (2022-11-28)
 
 
