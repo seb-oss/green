@@ -5,14 +5,12 @@
 $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
-/* selectors */
-
 @mixin add-radio(
   $selector: '.form-control',
   $radio-selector: 'input[type="radio"]',
   $validated-selector: '.was-validated'
 ) {
-  /* Hide the browser's default checkbox */
+  /* Hide the browser's default radio */
   #{$selector} #{$radio-selector} {
     cursor: pointer;
     height: 0;
@@ -36,46 +34,43 @@ $invalid-color: tokens.$intent-danger-background;
     height: var(--gds-comp-radio-container-width);
     width: var(--gds-comp-radio-container-width);
     // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
-    box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border);
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border);
 
     &::after {
       content: '';
       width: 100%;
+      height: 100%;
       border-radius: var(--gds-comp-radio-border-radius);
       background-color: var(--gds-comp-radio-dot);
-      // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
-      box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring);
+      transform: scale(.5);
     }
   }
 
 
   /* Hover state */
   #{$selector}:hover #{$radio-selector}:not(.disabled,:disabled) ~ i {
-    box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border-hover);
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-hover);
 
     &::after {
       background-color: var(--gds-comp-radio-dot-hover);
-      box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring-hover);
     }
   }
 
   /* Checked state */
   #{$selector} #{$radio-selector}:checked:not(.disabled,:disabled) ~ i {
-    box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked);
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked);
 
     &::after {
       background-color: var(--gds-comp-radio-dot-checked);
-      box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring-checked);
     }
   }
 
   /* Checked Hover state */
   #{$selector}:hover #{$radio-selector}:checked:not(.disabled,:disabled) ~ i {
-    box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked-hover);
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked-hover);
 
     &::after {
       background-color: var(--gds-comp-radio-dot-checked-hover);
-      box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring-checked-hover);
     }
   }
 
@@ -99,12 +94,11 @@ $invalid-color: tokens.$intent-danger-background;
   #{$selector} #{$radio-selector}:disabled,
   #{$selector} #{$radio-selector}.disabled {
     ~ i {
-      box-shadow: 0px 0px 0px 0.05rem var(--gds-comp-radio-border-disabled);
+      box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-disabled);
     }
 
     ~ i::after {
       background-color: var(--gds-comp-radio-dot-disabled);
-      box-shadow: inset 0px 0px 0px var(--gds-comp-radio-ring-width) var(--gds-comp-radio-ring-disabled);
     }
 
     ~ span {
