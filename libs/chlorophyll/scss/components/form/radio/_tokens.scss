@@ -26,7 +26,10 @@
   --gds-comp-radio-dot-checked-hover: var(--gds-ref-pallet-base600);
   --gds-comp-radio-dot-disabled: var(--gds-sys-color-surface);
 
-  @media (prefers-color-scheme: dark) {
+/*
+TODO: add colorscheme support
+
+@media (prefers-color-scheme: dark) {
     --gds-comp-radio-border: transparent;
     --gds-comp-radio-border-checked: transparent;
     --gds-comp-radio-border-hover: var(--gds-sys-color-blue-dark-1);
@@ -64,5 +67,5 @@
     --gds-comp-radio-dot-hover: var(--gds-ref-pallet-base600);
     --gds-comp-radio-dot-checked-hover: var(--gds-ref-pallet-base600);
     --gds-comp-radio-dot-disabled: var(--gds-sys-color-surface);
-  }
+  }*/
 }
