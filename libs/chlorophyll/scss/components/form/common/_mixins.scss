@@ -141,6 +141,7 @@
 
   &:not(.form-control) {
     @include common.font-weight('medium');
+    width: 100%;
     line-height: 1.25rem;
     margin-bottom: .5rem;
   }

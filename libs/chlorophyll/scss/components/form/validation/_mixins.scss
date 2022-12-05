@@ -34,11 +34,10 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-form-info() {
   @include common.font-scale(1);
+  display: inline-block;
   line-height: 1.25rem;
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  min-width: 100%;
+  width: 100%;
 }
 
 @mixin add-validation() {
@@ -50,7 +49,7 @@ $_border-width: var(--sg-border-width);
 
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
-  .was-validated fieldset:not(.is-invalid):valid + .form-info,
+  .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
