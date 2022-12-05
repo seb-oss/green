@@ -36,7 +36,7 @@ $invalid-color: tokens.$intent-danger-background;
     border-radius: var(--gds-comp-radio-border-radius);
     background-color: var(--gds-comp-radio-container-color);
     display: flex;
-    height: var(--gds-comp-radio-container-width);
+    height: var(--gds-comp-radio-container-height);
     width: var(--gds-comp-radio-container-width);
   }
 

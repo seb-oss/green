@@ -79,10 +79,8 @@ $_border-width: var(--sg-border-width);
     @include common.padding(0);
     @include common.margin(0);
     border: 0;
-    width: fit-content;
-
     > div {
-      width: fit-content;
+      width: max-content;
     }
 
     + .form-info {
