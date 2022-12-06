@@ -11,23 +11,20 @@ input[type='reset'],
 }
 
 // base
-button:not(.link, .close, .sg-table-sort, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch']),
-input[type='button'],
-input[type='submit'],
-input[type='reset'],
+button:where(:not(.link, .close, .sg-table-sort, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'])),
+input:where([type='button'], [type='submit'], [type='reset']),
 .button {
   @include mixins.base;
 }
 
 // secondary
-button:not(.primary, .ghost, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch']),
-a.button:not(.primary, .ghost, .close, .link),
+button:where(:not(.primary, .ghost, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'])),
+a.button:where(:not(.primary, .ghost, .close, .link)),
 button.secondary,
 a.button.secondary,
-input[type='button'],
-input[type='reset'],
-button[type='button']:not(.primary, .ghost, .close, .link, [aria-haspopup='listbox'], [aria-haspopup='menu']),
-button[type='reset']:not(.primary, .ghost, .close, .link) {
+input:is([type='button'], [type='reset']),
+button[type='button']:where(:not(.primary, .ghost, .close, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'])),
+button[type='reset']:where(:not(.primary, .ghost, .close, .link)) {
   @include mixins.secondary;
 }
 
