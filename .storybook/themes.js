@@ -16,10 +16,10 @@ const common = {
 export const light = create({
   ...common,
   base: 'light',
-  appBg: '#eee',
+  appBg: '#EEE',
   appBorderColor: '#CECECE',
-  appContentBg: '#ffffff',
-  barBg: '#E9E9E9',
+  appContentBg: 'white',
+  barBg: '#fff',
   barSelectedColor: '#333',
   barTextColor: '#333',
   colorSecondary: '#bbb',
