@@ -9,6 +9,7 @@ export interface ButtonProps {
   active?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
+  size?: 'small'
 }
 
 export function Button({
@@ -18,11 +19,13 @@ export function Button({
   disabled,
   active = false,
   type = 'button',
+  size
 }: ButtonProps) {
   const props: ButtonHTMLAttributes<HTMLButtonElement> = { type, disabled }
   const classNames: string[] = []
   if (variant) classNames.push(variant)
   if (active) classNames.push('active')
+  if (size) classNames.push('small')
 
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick

@@ -44,10 +44,6 @@
     button[aria-haspopup='listbox'] {
       @include common.margin-bottom(0);
     }
-
-    .form-info {
-      @include common.margin-top(3);
-    }
   }
 
   // vertically align siblings and adjust for missing label
@@ -96,8 +92,6 @@
   flex-direction: row-reverse;
   font: inherit;
   justify-content: flex-end;
-  max-width: fit-content;
-  max-width: -moz-fit-content;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
@@ -111,22 +105,16 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
   }
 
-  > input,
-  > textarea,
-  > button,
-  button[aria-haspopup='listbox'] {
+  > input:not(:last-child),
+  > textarea:not(:last-child),
+  > button:not(:last-child),
+  button[aria-haspopup='listbox']:not(:last-child) {
     @include common.margin-bottom(3);
-  }
-
-  // label
-  label:not(.form-control),
-  .label:not(.form-control) {
-    @include common.font-weight('medium');
-    @include common.line-height(4);
   }
 }
 
@@ -138,3 +126,42 @@
   align-items: center;
   font: inherit;
 }
+
+@mixin add-label() {
+
+  &.form-control {
+    width: max-content;
+
+    // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
+    @supports (-moz-appearance:none) {
+        @include common.add-focus('within');
+    }
+  }
+
+  &:not(.form-control) {
+    @include common.font-weight('medium');
+    width: 100%;
+    line-height: 1.25rem;
+  }
+
+  & + input, & + textarea,  fieldset & + div {
+    margin-top: .5rem;
+  }
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+}
+
+@mixin add-form-info() {
+  &:last-child {
+    font-weight: 500;
+  }
+}
+
+

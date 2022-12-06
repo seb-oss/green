@@ -90,7 +90,7 @@ export const create = ({
     },
     elements: {
       toggler: {
-        attributes: { id: `${id}_toggle`, 'aria-owns': id },
+        attributes: { id: `${id}_toggle`, 'aria-owns': id},
       },
       listbox: {
         attributes: { id },
@@ -115,7 +115,7 @@ export const create = ({
     dropdown = selectByValue(dropdown as AbstractDropdown, value)
   }
 
-  return reduce(dropdown, dropdownValues)
+  return reduce(dropdown, dropdownValues(validator))
 }
 
 export const open = (dropdown: AbstractDropdown): AbstractDropdown =>

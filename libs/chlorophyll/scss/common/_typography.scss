@@ -13,5 +13,6 @@
 }
 
 @mixin line-height($step) {
+  @warn 'This mixing: "@mixin line-height" is deprecated and should not be used. Use explicit rem values instead.';
   line-height: map-get(tokens.$line-height-scale, $step);
 }
