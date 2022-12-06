@@ -44,10 +44,6 @@
     button[aria-haspopup='listbox'] {
       @include common.margin-bottom(0);
     }
-
-    .form-info {
-      @include common.margin-top(3);
-    }
   }
 
   // vertically align siblings and adjust for missing label
@@ -120,10 +116,6 @@
   button[aria-haspopup='listbox']:not(:last-child) {
     @include common.margin-bottom(3);
   }
-
-
-
-
 }
 
 /* form text */
@@ -150,15 +142,25 @@
     @include common.font-weight('medium');
     width: 100%;
     line-height: 1.25rem;
-    margin-bottom: .5rem;
   }
 
-  &:has(+ .form-info) {
-    margin-bottom: 0;
+  & + input, & + textarea,  fieldset & + div {
+    margin-top: .5rem;
   }
 
   & + .form-info {
     margin-bottom: .5rem;
+  }
+
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+}
+
+@mixin add-form-info() {
+  &:last-child {
+    font-weight: 500;
   }
 }
 

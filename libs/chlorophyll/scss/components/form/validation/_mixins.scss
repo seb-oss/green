@@ -60,17 +60,6 @@ $_border-width: var(--sg-border-width);
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }
-
-  .horizontal {
-    .was-validated input:not(.is-invalid):valid + .form-info,
-    .was-validated textarea:not(.is-invalid):valid + .form-info,
-    .is-valid ~ .form-info,
-    .was-validated input:not(.is-valid):invalid + .form-info,
-    .was-validated textarea:not(.is-valid):invalid + .form-info,
-    .is-invalid ~ .form-info {
-      @include common.margin-top(3);
-    }
-  }
 }
 
 /* rules for groups of checkboxes and radio buttons*/
@@ -81,10 +70,6 @@ $_border-width: var(--sg-border-width);
     border: 0;
     > div {
       width: max-content;
-    }
-
-    + .form-info {
-      font-weight: 500;
     }
 
     &.is-valid > div {
