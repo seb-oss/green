@@ -6,7 +6,7 @@ $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
 @mixin add-radio(
-  $selector: '.form-control',
+  $selector: 'label.form-control',
   $radio-selector: 'input[type="radio"]',
   $validated-selector: '.was-validated'
 ) {
@@ -20,8 +20,10 @@ $invalid-color: tokens.$intent-danger-background;
     z-index: -1;
   }
 
-  /* Add focus to form-control field */
-  #{$selector}:has( #{$radio-selector}:focus-visible) {
+  // Add focus to form-control field
+  // This doesn't work for Firefox so there is a fallback solution on label.form-control
+  //
+  #{$selector}:has( #{$radio-selector}:focus-visible ) {
     @include common.add-focus('within');
   }
 

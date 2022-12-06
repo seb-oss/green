@@ -7,7 +7,7 @@ $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
 @mixin add-checkbox(
-  $selector: '.form-control',
+  $selector: 'label.form-control',
   $checkbox-selector: 'input[type="checkbox"]',
   $validated-selector: '.was-validated'
 ) {
@@ -32,7 +32,6 @@ $invalid-color: tokens.$intent-danger-background;
 
   /* Style for custom checkbox */
   #{$selector} #{$checkbox-selector} ~ i {
-
     @include common.margin-end(4);
     box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-border-color);
     position: relative;
@@ -57,33 +56,14 @@ $invalid-color: tokens.$intent-danger-background;
     opacity: 1;
   }
 
-  /* Checked state */
+  // Checked state
   #{$selector} #{$checkbox-selector}:checked ~ i {
     background-color: var(--gds-comp-checkbox-container-color-selected);
   }
 
-  /* Valid state */
-/*  #{$validated-selector}
-    #{$selector}
-    #{$checkbox-selector}:not(.is-invalid):valid,
-  #{$selector} #{$checkbox-selector}.is-valid {
-    ~ i {
-      @include common.add-border-color($valid-color);
-    }
-  }*/
-
-  /* Invalid state */
-/*  #{$validated-selector}
-    #{$selector}
-    #{$checkbox-selector}:not(.is-valid):invalid,
-  #{$selector} #{$checkbox-selector}.is-invalid {
-    ~ i {
-      @include common.add-border-color($invalid-color);
-    }
-  }*/
-
+  // Invalid state
   #{$selector}:has( #{$checkbox-selector}.is-invalid) {
-    border: 1px solid $invalid-color;
+    border: 0.0625rem solid $invalid-color;
     @include common.margin-bottom(3);
   }
 
@@ -92,6 +72,17 @@ $invalid-color: tokens.$intent-danger-background;
     margin: 0;
   }
 
+  @supports (-moz-appearance:none) {
+    #{$selector}.is-invalid {
+      border: 0.0625rem solid $invalid-color;
+      @include common.margin-bottom(3);
+    }
+
+    .is-invalid #{$selector}.is-invalid {
+      border: none;
+      margin: 0;
+    }
+  }
 
 
   /* Disabled state */

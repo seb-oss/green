@@ -137,6 +137,15 @@
 
 @mixin add-label() {
 
+  &.form-control {
+    width: max-content;
+
+    // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
+    @supports (-moz-appearance:none) {
+        @include common.add-focus('within');
+    }
+  }
+
   &:not(.form-control) {
     @include common.font-weight('medium');
     width: 100%;
