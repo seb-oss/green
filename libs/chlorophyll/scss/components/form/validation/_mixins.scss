@@ -34,15 +34,10 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-form-info() {
   @include common.font-scale(1);
-  @include common.line-height(2);
+  display: inline-block;
+  line-height: 1.25rem;
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  min-width: 100%;
-
-  label + & {
-    font-weight: 500;
-  }
+  width: 100%;
 }
 
 @mixin add-validation() {
@@ -54,7 +49,7 @@ $_border-width: var(--sg-border-width);
 
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
-  .was-validated fieldset:not(.is-invalid):valid + .form-info,
+  .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
@@ -65,17 +60,6 @@ $_border-width: var(--sg-border-width);
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }
-
-  .horizontal {
-    .was-validated input:not(.is-invalid):valid + .form-info,
-    .was-validated textarea:not(.is-invalid):valid + .form-info,
-    .is-valid ~ .form-info,
-    .was-validated input:not(.is-valid):invalid + .form-info,
-    .was-validated textarea:not(.is-valid):invalid + .form-info,
-    .is-invalid ~ .form-info {
-      @include common.margin-top(3);
-    }
-  }
 }
 
 /* rules for groups of checkboxes and radio buttons*/
@@ -84,15 +68,8 @@ $_border-width: var(--sg-border-width);
     @include common.padding(0);
     @include common.margin(0);
     border: 0;
-    width: fit-content;
-
     > div {
-      @include common.margin-top(3);
-      width: fit-content;
-    }
-
-    + .form-info {
-      font-weight: 500;
+      width: max-content;
     }
 
     &.is-valid > div {
@@ -115,6 +92,6 @@ $_border-width: var(--sg-border-width);
   legend {
     @include common.padding(0);
     @include common.font-weight('medium');
-    @include common.line-height(2);
+    line-height: 1.25rem;
   }
 }

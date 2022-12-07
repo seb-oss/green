@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.40...@sebgroup/extract@1.0.0-beta.41) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+
+
+
 # [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.39...@sebgroup/extract@1.0.0-beta.40) (2022-11-30)
 
 

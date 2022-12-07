@@ -103,9 +103,9 @@ export class NggDropdownComponent
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
-  toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
-  listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
-  fieldset?: Partial<ElementProps> = dropdownValues.elements?.fieldset
+  toggler?: Partial<ElementProps> = dropdownValues().elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues().elements?.listbox
+  fieldset?: Partial<ElementProps> = dropdownValues().elements?.fieldset
 
   get control(): NgControl | undefined {
     return this.injector.get(NgControl)

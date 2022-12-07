@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.41...@sebgroup/chlorophyll@1.0.0-beta.42) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Checkbox styling ([d86c713](https://github.com/sebgroup/green/commit/d86c7137223896088aa22d98ac5b15d2f972e61a))
+* 🐛 fixed :has fallback for Firefox ([cdc2b97](https://github.com/sebgroup/green/commit/cdc2b97f9864e9d36268b2b75bdcca91215ec09b))
+* 🐛 form info misaligning ([7395c2c](https://github.com/sebgroup/green/commit/7395c2c293f27ab6a9cecb53b3fdd6ce3528ab68))
+* 🐛 merge radio with latest changes ([034458e](https://github.com/sebgroup/green/commit/034458e8ab0d14524acba99a336e3c969ee290ad))
+* 🐛 radio alignment and colors ([333b70d](https://github.com/sebgroup/green/commit/333b70db3bc2be528f63ab73d9b378aa11738d54))
+* 🐛 removing darkmode tokens ([a3ac3d5](https://github.com/sebgroup/green/commit/a3ac3d514bfb4269386fc9970f9d7b2ce54ffdb2))
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+* 🐛 sizing bug in firefox ([9e074d2](https://github.com/sebgroup/green/commit/9e074d266fca1e2118a2a7609bb06462bb41274d))
+
+
+
 # [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.40...@sebgroup/chlorophyll@1.0.0-beta.41) (2022-11-30)
 
 
