@@ -1,0 +1,5 @@
+@use './mixins';
+
+.accordion {
+  @include mixins.add-accordion;
+}
