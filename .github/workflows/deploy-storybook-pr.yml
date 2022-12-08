@@ -1,8 +1,6 @@
-name: Deploy affected storybook(s)
+name: Deploy affected storybook(s) [PR]
 on:
   pull_request:
-  push:
-    branches: [main, alpha, beta]
 
 jobs:
   check:

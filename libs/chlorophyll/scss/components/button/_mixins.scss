@@ -28,12 +28,19 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   align-items: center;
   display: inline-flex;
   justify-content: center;
+
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
   }
 
   @media screen and (-ms-high-contrast: active) {
     border: 2px solid currentcolor;
+  }
+
+  &.small {
+    min-height: 2rem;
+    padding: 0.4375rem 0.75rem;
+    line-height: 1.125rem;
   }
 }
 
@@ -73,13 +80,24 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
 }
 
 // TODO: handle themes (dark/light mode)
-@mixin ghost($bg: $button-ghost-bg) {
-  $ghost-color: transparent;
-  @if (common.light-or-dark($bg) == 'light') {
-    $ghost-color: tokens.get(tokens.$grey, 1000);
-  } @else {
-    $ghost-color: tokens.$white;
+@mixin ghost-dark() {
+  $ghost-color: tokens.get(tokens.$grey, 1000);
+  @include common.add-hover-active-state($ghost-color, $ghost-color, true);
+  @include common.add-active-focus-state($ghost-color);
+  border-color: $ghost-color;
+  color: $ghost-color;
+  --color: #{$ghost-color};
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(false, true, true);
   }
+}
+
+// TODO: handle themes (dark/light mode)
+@mixin ghost-light() {
+  $ghost-color: tokens.$white;
   @include common.add-hover-active-state($ghost-color, $ghost-color, true);
   @include common.add-active-focus-state($ghost-color);
   border-color: $ghost-color;

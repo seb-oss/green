@@ -2,16 +2,36 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, ContentChild, ElementRef, EventEmitter, Input,
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Injector,
+  Input,
   OnChanges,
   OnDestroy,
-  Output, SimpleChanges, ViewChild
+  Output,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
-  AbstractDropdown, CompareWith, createDropdown, DropdownArgs, DropdownHandler,
+  ControlValueAccessor,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms'
+import {
+  AbstractDropdown,
+  CompareWith,
+  createDropdown,
+  DropdownArgs,
+  DropdownHandler,
   DropdownOption,
-  DropdownOptionElement, DropdownTexts, dropdownValues, ElementProps, SearchFilter
+  DropdownOptionElement,
+  DropdownTexts,
+  dropdownValues,
+  ElementProps,
+  SearchFilter,
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 
@@ -83,11 +103,18 @@ export class NggDropdownComponent
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
-  toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
-  listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
-  fieldset?: Partial<ElementProps> = dropdownValues.elements?.fieldset
+  toggler?: Partial<ElementProps> = dropdownValues().elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues().elements?.listbox
+  fieldset?: Partial<ElementProps> = dropdownValues().elements?.fieldset
 
-  constructor(private cd: ChangeDetectorRef) {}
+  get control(): NgControl | undefined {
+    return this.injector.get(NgControl)
+  }
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    @Inject(Injector) private injector: Injector
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.togglerRef?.nativeElement && this.listboxRef?.nativeElement) {
@@ -125,6 +152,14 @@ export class NggDropdownComponent
 
   writeValue(value: any): void {
     this.value = value
+    if (
+      value === null &&
+      this.dropdown?.isTouched &&
+      this.control?.control?.untouched
+    ) {
+      this.handler?.resetTouchedState()
+      this.cd.detectChanges()
+    }
   }
 
   registerOnChange(fn: () => unknown): void {

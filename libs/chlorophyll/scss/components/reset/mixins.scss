@@ -48,7 +48,7 @@ with minor modifications as well as splitting in to mixins */
 /* Set core body defaults */
 @mixin _body-default($selector: body) {
   #{$selector} {
-    line-height: 1.125;
+    line-height: 1.125rem;
     @if ($selector == body) {
       min-height: 100vh;
     }

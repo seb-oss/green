@@ -2,6 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.39...@sebgroup/green-react-charts@1.0.0-beta.40) (2022-12-06)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.38...@sebgroup/green-react-charts@1.0.0-beta.39) (2022-11-30)
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.37...@sebgroup/green-react-charts@1.0.0-beta.38) (2022-11-30)
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.36...@sebgroup/green-react-charts@1.0.0-beta.37) (2022-11-28)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.35...@sebgroup/green-react-charts@1.0.0-beta.36) (2022-11-17)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.34...@sebgroup/green-react-charts@1.0.0-beta.35) (2022-11-17)
+
+
+
 # [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0-beta.33...@sebgroup/green-react-charts@1.0.0-beta.34) (2022-11-11)
 
 

@@ -90,7 +90,7 @@ export const create = ({
     },
     elements: {
       toggler: {
-        attributes: { id: `${id}_toggle`, 'aria-owns': id },
+        attributes: { id: `${id}_toggle`, 'aria-owns': id},
       },
       listbox: {
         attributes: { id },
@@ -115,7 +115,7 @@ export const create = ({
     dropdown = selectByValue(dropdown as AbstractDropdown, value)
   }
 
-  return reduce(dropdown, dropdownValues)
+  return reduce(dropdown, dropdownValues(validator))
 }
 
 export const open = (dropdown: AbstractDropdown): AbstractDropdown =>
@@ -412,4 +412,11 @@ export const search = (
         ? { ...option, classes: removeClass(option.classes, 'hidden') }
         : { ...option, classes: addClass(option.classes, 'hidden') }
     }),
+  } as Partial<AbstractDropdown>)
+
+export const resetTouchedProperty = (
+  dropdown: AbstractDropdown
+): AbstractDropdown =>
+  reduce(dropdown, {
+    isTouched: false,
   } as Partial<AbstractDropdown>)

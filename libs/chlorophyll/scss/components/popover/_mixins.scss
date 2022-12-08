@@ -57,7 +57,7 @@ $_max-height: 400px;
   }
 
   .close {
-    @include common.margin(4);
+    @include common.margin(2);
     flex-shrink: 0;
     align-self: flex-end;
     @include common.media-breakpoint-up(sm) {

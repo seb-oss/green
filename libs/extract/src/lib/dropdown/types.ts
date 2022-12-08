@@ -68,19 +68,21 @@ export interface AbstractDropdown {
 }
 
 export interface DropdownArgs {
-  id?: string
-  options: DropdownOption[]
-  useValue?: string // option key to use as value
-  display?: string // option key to display
-  loop?: boolean
-  texts?: DropdownTexts
-  value?: any
-  multiSelect?: boolean
-  searchable?: boolean
-  onTouched?: () => void
-  validator?: IValidator
   compareWith?: CompareWith
+  display?: string // option key to display
+  id?: string
+  informationLabel?: string
+  label?: string
+  loop?: boolean
+  multiSelect?: boolean
+  onTouched?: () => void
+  options: DropdownOption[]
   searchFilter?: SearchFilter
+  searchable?: boolean
+  texts?: DropdownTexts
+  useValue?: string // option key to use as value
+  validator?: IValidator
+  value?: any
 }
 
 export interface DropdownHandler {
@@ -110,5 +112,6 @@ export interface DropdownHandler {
   selectByValue: (selection: any) => Promise<void>
   validate: (validator: IValidator) => Promise<void>
   search: (searchInput: string) => Promise<void>
+  resetTouchedState: () => Promise<void>
   destroy: () => void
 }
