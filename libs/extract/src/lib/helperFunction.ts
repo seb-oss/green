@@ -25,3 +25,14 @@ export const validateClassName = (value: IndicatorType) => {
       return ''
   }
 }
+
+export const debounce = (func, ms) => {
+  let timer
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      timer = null
+      func.apply(this, args)
+    }, ms)
+  }
+}

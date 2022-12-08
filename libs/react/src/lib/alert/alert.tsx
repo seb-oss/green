@@ -1,5 +1,5 @@
-import { AlertType } from '@sebgroup/extract'
 import React, { ReactNode, useEffect, useState } from 'react'
+import { AlertType } from '@sebgroup/extract'
 import Button from '../form/button/button'
 
 export interface AlertProps {
