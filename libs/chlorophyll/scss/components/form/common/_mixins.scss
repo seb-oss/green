@@ -39,6 +39,10 @@
       }
     }
 
+    fieldset + .form-info {
+      margin-top: .5rem;
+    }
+
     input,
     button,
     button[aria-haspopup='listbox'] {
@@ -95,7 +99,6 @@
   position: relative;
   user-select: none;
   -webkit-user-select: none;
-  white-space: nowrap;
 }
 
 /* form group */
@@ -130,8 +133,7 @@
 @mixin add-label() {
 
   &.form-control {
-    width: max-content;
-
+    width: fit-content;
     // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
     @supports (-moz-appearance:none) {
         @include common.add-focus('within');

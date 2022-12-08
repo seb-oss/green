@@ -86,7 +86,7 @@ $_border-width: var(--sg-border-width);
   fieldset.is-valid,
   fieldset.is-invalid {
     @include common.add-border-radius();
-    @include common.margin-bottom(2);
+    @include common.margin-bottom(3);
   }
 
   legend {
