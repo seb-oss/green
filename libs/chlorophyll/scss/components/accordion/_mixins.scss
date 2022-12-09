@@ -9,7 +9,7 @@
     &:has(button[aria-expanded="true"]) {
       background-color: var(--gds-ref-pallet-base100);
 
-      &:hover {
+      & button:hover {
         background-color: var(--gds-ref-pallet-base200);
       }
 
@@ -49,6 +49,7 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
+        transition: transform tokens.$transition-time;
       }
 
       &:not([aria-expanded="true"]):hover {
