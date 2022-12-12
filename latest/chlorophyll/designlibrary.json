@@ -380,6 +380,16 @@
     }
   },
   {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
     "id": "utilities-text--page",
     "name": "Page",
     "title": "Utilities/Text",
