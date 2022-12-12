@@ -2,6 +2,39 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.40...@sebgroup/extract@1.0.0-beta.41) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.39...@sebgroup/extract@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.38...@sebgroup/extract@1.0.0-beta.39) (2022-11-30)
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.37...@sebgroup/extract@1.0.0-beta.38) (2022-11-28)
+
+
+### Features
+
+* 🎸 dropdown add formControl reset functionality ([88b3a55](https://github.com/sebgroup/green/commit/88b3a553a495b233e4287a8d23e8476be1ce0ea4))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: 643
+
+
+
 # [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.36...@sebgroup/extract@1.0.0-beta.37) (2022-11-17)
 
 

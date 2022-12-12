@@ -2,6 +2,37 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.40...@sebgroup/green-react@1.0.0-beta.41) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.39...@sebgroup/green-react@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.38...@sebgroup/green-react@1.0.0-beta.39) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 checkbox, radio, use-green scope, variables ([1fd9154](https://github.com/sebgroup/green/commit/1fd915463e9c8c3bf1db2fa6179da5f4ccbdf2f8))
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.37...@sebgroup/green-react@1.0.0-beta.38) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+
 # [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.36...@sebgroup/green-react@1.0.0-beta.37) (2022-11-17)
 
 

@@ -28,28 +28,6 @@ $font-scale: (
   9: 6rem       // 96px
 );
 
-$line-height-scale: (
-  1: 0.75rem,
-  // 12px
-  2: 0.875rem,
-  // 14px
-  3: 1rem,
-  // 16px
-  4: 1.25rem,
-  // 20px
-  5: 1.5rem,
-  // 24px
-  6: 2rem,
-  // 32px
-  7: 2.5rem,
-  // 40px
-  8: 3rem,
-  // 48px
-  9: 4rem,
-  // 64px
-  10: 6rem // 92px,,,,,,
-);
-
 @function font-scale($step) {
   @return map-get($font-scale, $step);
 }
@@ -237,7 +215,7 @@ $heading-06: (
 $body-01: (
   font-size: font-scale(2),
   font-weight: font-weight('regular'),
-  line-height: line-height-scale(4),
+  line-height: line-height-scale(3),
   letter-spacing: 0,
 );
 

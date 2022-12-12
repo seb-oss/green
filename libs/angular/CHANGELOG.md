@@ -2,6 +2,40 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.41...@sebgroup/green-angular@1.0.0-beta.42) (2022-12-06)
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.40...@sebgroup/green-angular@1.0.0-beta.41) (2022-11-30)
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.39...@sebgroup/green-angular@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.38...@sebgroup/green-angular@1.0.0-beta.39) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+### Features
+
+* 🎸 angular button ([13dac17](https://github.com/sebgroup/green/commit/13dac17f86de47c5720dade6f1734edbf9585566))
+* 🎸 dropdown add formControl reset functionality ([88b3a55](https://github.com/sebgroup/green/commit/88b3a553a495b233e4287a8d23e8476be1ce0ea4))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: 643
+
+
+
 # [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.37...@sebgroup/green-angular@1.0.0-beta.38) (2022-11-17)
 
 

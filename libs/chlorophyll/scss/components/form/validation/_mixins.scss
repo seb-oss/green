@@ -23,8 +23,7 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-feedback($color) {
   color: $color;
-  //height: auto;
-  //min-height: 1rem;
+  font-weight: 500;
   opacity: 1;
 
   &::before {
@@ -35,40 +34,31 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-form-info() {
   @include common.font-scale(1);
-  @include common.line-height(3);
+  display: inline-block;
+  line-height: 1.25rem;
   color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
-  max-width: fit-content;
-  max-width: -moz-fit-content;
-  min-width: 100%;
+  width: 100%;
 }
 
 @mixin add-validation() {
   .was-validated input + .form-info,
-  .was-validated textarea + .form-info {
-    opacity: 0;
+  .was-validated textarea + .form-info,
+  .was-validated fieldset + .form-info{
+    font-weight: 500;
   }
 
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
+  .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
 
   .was-validated input:not(.is-valid):invalid + .form-info,
   .was-validated textarea:not(.is-valid):invalid + .form-info,
+  .was-validated fieldset:not(.is-valid).is-invalid + .form-info,
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
-  }
-
-  .horizontal {
-    .was-validated input:not(.is-invalid):valid + .form-info,
-    .was-validated textarea:not(.is-invalid):valid + .form-info,
-    .is-valid ~ .form-info,
-    .was-validated input:not(.is-valid):invalid + .form-info,
-    .was-validated textarea:not(.is-valid):invalid + .form-info,
-    .is-invalid ~ .form-info {
-      @include common.margin-top(3);
-    }
   }
 }
 
@@ -78,11 +68,8 @@ $_border-width: var(--sg-border-width);
     @include common.padding(0);
     @include common.margin(0);
     border: 0;
-    width: fit-content;
-
     > div {
-      @include common.margin-top(3);
-      width: fit-content;
+      width: max-content;
     }
 
     &.is-valid > div {
@@ -99,12 +86,12 @@ $_border-width: var(--sg-border-width);
   fieldset.is-valid,
   fieldset.is-invalid {
     @include common.add-border-radius();
-    @include common.margin-bottom(2);
+    @include common.margin-bottom(3);
   }
 
   legend {
     @include common.padding(0);
     @include common.font-weight('medium');
-    @include common.line-height(2);
+    line-height: 1.25rem;
   }
 }

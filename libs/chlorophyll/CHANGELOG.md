@@ -2,6 +2,67 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.41...@sebgroup/chlorophyll@1.0.0-beta.42) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 Checkbox styling ([d86c713](https://github.com/sebgroup/green/commit/d86c7137223896088aa22d98ac5b15d2f972e61a))
+* 🐛 fixed :has fallback for Firefox ([cdc2b97](https://github.com/sebgroup/green/commit/cdc2b97f9864e9d36268b2b75bdcca91215ec09b))
+* 🐛 form info misaligning ([7395c2c](https://github.com/sebgroup/green/commit/7395c2c293f27ab6a9cecb53b3fdd6ce3528ab68))
+* 🐛 merge radio with latest changes ([034458e](https://github.com/sebgroup/green/commit/034458e8ab0d14524acba99a336e3c969ee290ad))
+* 🐛 radio alignment and colors ([333b70d](https://github.com/sebgroup/green/commit/333b70db3bc2be528f63ab73d9b378aa11738d54))
+* 🐛 removing darkmode tokens ([a3ac3d5](https://github.com/sebgroup/green/commit/a3ac3d514bfb4269386fc9970f9d7b2ce54ffdb2))
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+* 🐛 sizing bug in firefox ([9e074d2](https://github.com/sebgroup/green/commit/9e074d266fca1e2118a2a7609bb06462bb41274d))
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.40...@sebgroup/chlorophyll@1.0.0-beta.41) (2022-11-30)
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.39...@sebgroup/chlorophyll@1.0.0-beta.40) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 checkbox, radio, use-green scope, variables ([1fd9154](https://github.com/sebgroup/green/commit/1fd915463e9c8c3bf1db2fa6179da5f4ccbdf2f8))
+* 🐛 tokens not imported correctly ([14defce](https://github.com/sebgroup/green/commit/14defceaa01221d36722feb193e6bece8768c024))
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.38...@sebgroup/chlorophyll@1.0.0-beta.39) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 fixing import to alert-ribbon ([bc649a2](https://github.com/sebgroup/green/commit/bc649a29a8a84382df8bc07f2f8583f8feec8474))
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+### Features
+
+* 🎸 radio button with latest figma design ([76d38aa](https://github.com/sebgroup/green/commit/76d38aa6a998136929c5d849a52f8d8429ff23f5)), closes [#459](https://github.com/sebgroup/green/issues/459)
+
+
+### Styles
+
+* 💄 Checkbox, fieldset, forminfo and validation ([c8be77c](https://github.com/sebgroup/green/commit/c8be77c93814ac38cc43c5013d9f16926de67cc2))
+* 💄 Close button, Alert ribbon ([e622480](https://github.com/sebgroup/green/commit/e6224806649ebb841721130046cfd3d2815b5515))
+
+
+### BREAKING CHANGES
+
+* 🧨 change to html structure for fieldset form groups. checkboxes and radios
+should be wrapped in a div
+* 🧨 Close button need to have a i-elemented added as a child to the button
+tag in order to display the cross icon.
+* 🧨 -Breaks fieldset styling since we need to add a div to to wrap the form
+items.
+
+
+
 # [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.37...@sebgroup/chlorophyll@1.0.0-beta.38) (2022-11-17)
 
 

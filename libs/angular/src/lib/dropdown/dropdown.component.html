@@ -47,6 +47,7 @@
       (click)="handler?.close()"
     >
       <span class="sr-only">{{ dropdown?.texts?.close }}</span>
+      <i></i>
     </button>
     <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
       <ng-container *ngTemplateOutlet="searchInput"></ng-container>
@@ -75,6 +76,7 @@
     </ul>
     <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
       <ng-container *ngTemplateOutlet="searchInput"></ng-container>
+      <!--TODO: Improve checkboxes in dropdown angular-->
       <fieldset
         #fieldsetRef
         [attr.aria-describedby]="fieldset?.attributes?.id"
@@ -83,34 +85,36 @@
         aria-multiselectable="true"
       >
         <legend class="sr-only" [id]="fieldset?.attributes?.id">Options</legend>
-        <label
-          class="form-control"
-          [attr.role]="option.attributes.role"
-          [id]="option.attributes.id"
-          [attr.aria-selected]="option.attributes['aria-selected']"
-          [class]="option.classes"
-          *ngFor="
+        <div>
+          <label
+            class="form-control"
+            [attr.role]="option.attributes.role"
+            [id]="option.attributes.id"
+            [attr.aria-selected]="option.attributes['aria-selected']"
+            [class]="option.classes"
+            *ngFor="
             let option of dropdown?.options;
             let index = index;
             trackBy: trackByKey
           "
-        >
-          <input
-            type="checkbox"
-            (change)="handler?.select(option, false)"
-            [checked]="option.selected"
-            tabIndex="-1"
-          />
-          <ng-container
-            *ngTemplateOutlet="
+          >
+            <input
+              type="checkbox"
+              (change)="handler?.select(option, false)"
+              [checked]="option.selected"
+              tabIndex="-1"
+            />
+            <ng-container
+              *ngTemplateOutlet="
               customOption?.templateRef
                 ? customOption!.templateRef
                 : defaultOption;
               context: { option: option, index: index }
             "
-          ></ng-container>
-          <i></i>
-        </label>
+            ></ng-container>
+            <i></i>
+          </label>
+        </div>
       </fieldset>
     </div>
   </div>

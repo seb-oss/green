@@ -44,11 +44,10 @@ $background: hsl(var(--sg-intent-neutral-hsl));
 $border-radius: 0;
 $border: solid 1px var(--border-color);
 $close-bg-hover: var(--sg-hsl-black);
-$color: hsl(var(--sg-intent-neutral-hsl-contrast));
+$color: var(--text-primary-color);
 $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-opacity );
-$max-content-width: 768px;
 
-@mixin alert {
+@mixin alert-ribbon {
   --background: #{$background};
   --color: #{$color};
   --border-color: #{$color};
@@ -89,7 +88,10 @@ $max-content-width: 768px;
   // content
   > div {
     grid-area: content;
-    max-width: $max-content-width;
+
+    &:has(+ button) {
+      @include common.padding-end(3);
+    }
 
     > h1,
     h2,
@@ -105,7 +107,16 @@ $max-content-width: 768px;
     }
     > p {
       display: inline;
+      line-height: 1.5rem;
       @include common.margin-vertical(0);
+
+      a, a:visited:not(.button,[role=tab]) {
+        color: var(--color);
+
+        &:hover {
+          color: var(--color);
+        }
+      }
     }
   }
 
@@ -113,7 +124,7 @@ $max-content-width: 768px;
   button.close {
     grid-area: dismiss;
     justify-self: flex-end;
-    margin: 0 -0.5rem 0 0.5rem;
+    margin: -0.5rem -0.375rem 0 0.375rem;
     --background-hsl: #{$close-bg-hover};
     --color: #{$color};
     @include common.media-breakpoint-up('sm') {
@@ -128,15 +139,12 @@ $max-content-width: 768px;
   a {
     text-decoration: underline !important;
     transition: opacity 300ms ease-in-out;
-    &:hover {
-      opacity: 0.5;
-    }
   }
 
   // footer
   > footer {
     grid-area: footer;
-    align-self: center;
+    align-self: end;
     @include common.media-breakpoint-only('xs') {
       @include common.margin-top(4);
     }
@@ -152,8 +160,10 @@ $max-content-width: 768px;
     > .button {
       &:not(.primary,.ghost,.close,.link, [type='submit'], :disabled,.disabled,[aria-disabled]) {
         @include button.ghost-dark();
-        /*border-color: currentColor;
-        color: currentColor;*/
+        //force small size TODO: improve how to do sizing with mixin
+        min-height: 2rem;
+        padding: 0.4375rem 0.75rem;
+        line-height: 1.125rem;
       }
 
       + {
@@ -193,7 +203,7 @@ $max-content-width: 768px;
   --background: #{$background};
   --color: #{$color};
   --border-color: #{$border-color};
-  // alert close
+  // alert-ribbon close
   .close {
     --color: #{$color};
   }

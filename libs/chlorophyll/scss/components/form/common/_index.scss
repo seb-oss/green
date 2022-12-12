@@ -17,6 +17,15 @@ form,
   @include mixins.add-form-group;
 }
 
+.form-info {
+  @include mixins.add-form-info;
+}
+
 .form-text {
   @include mixins.add-form-text;
 }
+
+label, .label, legend {
+  @include mixins.add-label();
+}
+

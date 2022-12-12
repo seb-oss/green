@@ -1,15 +1,15 @@
 {
   "name": "@sebgroup/green-angular-charts",
-  "version": "1.0.0-beta.36",
+  "version": "1.0.0-beta.40",
   "peerDependencies": {
     "@angular/common": "^12.0.0 || ^13.0.0",
     "@angular/core": "^12.0.0 || ^13.0.0",
     "@angular/platform-browser": "^12.0.0 || ^13.0.0",
-    "@sebgroup/chlorophyll": "^1.0.0-beta.38",
+    "@sebgroup/chlorophyll": "^1.0.0-beta.42",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
-    "@sebgroup/green-charts": "^1.0.0-beta.35",
+    "@sebgroup/green-charts": "^1.0.0-beta.39",
     "tslib": "^2.3.1"
   },
   "description": "Angular charts built on top of @sebgroup/green-charts.",

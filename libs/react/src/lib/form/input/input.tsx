@@ -47,13 +47,14 @@ export const Checkbox = ({ label, onChange, validator, ...props }: CheckboxProps
 
   return (
     <>
-      <label htmlFor={inputProps.id} className={`form-control ${validatorClassName}`}>
-        {label}
-        <input type="checkbox" {...inputProps} />
-        <span></span>
-        <i />
-      </label>
-      {validator && <span className="form-info">{validator.message}</span>}
+      <div className="form-group">
+        <label htmlFor={inputProps.id} className={`form-control ${validatorClassName}`}>
+          {label}
+          <input type="checkbox" {...inputProps} className={validatorClassName} />
+          <i />
+        </label>
+        {validator && <span className="form-info">{validator.message}</span>}
+      </div>
     </>
   )
 }

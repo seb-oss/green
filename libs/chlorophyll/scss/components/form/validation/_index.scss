@@ -6,10 +6,12 @@
   @include mixins.add-form-info;
 }
 
+/*
 label + .form-info,
 .label + .form-info {
   @include common.margin-bottom(3);
 }
+*/
 
 input + .form-info,
 textarea + .form-info,

@@ -1,17 +1,17 @@
-:root {
+@mixin add-color-tokens () {
   /******************************************/
   /************ Reference Tokens ************/
   /******************************************/
   --gds-ref-pallet-base000: hsl(0 0% 100%);
-  --gds-ref-pallet-base100: hsl(0 0% 90%);
-  --gds-ref-pallet-base200: hsl(0 0% 80%);
-  --gds-ref-pallet-base300: hsl(0 0% 70%);
-  --gds-ref-pallet-base400: hsl(0 0% 60%);
-  --gds-ref-pallet-base500: hsl(0 0% 50%);
-  --gds-ref-pallet-base600: hsl(0 0% 40%);
-  --gds-ref-pallet-base700: hsl(0 0% 30%);
-  --gds-ref-pallet-base800: hsl(0 0% 20%);
-  --gds-ref-pallet-base900: hsl(0 0% 10%);
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --gds-ref-pallet-base200: hsl(0, 0%, 91%);
+  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
+  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --gds-ref-pallet-base700: hsl(0, 0%, 29%);
+  --gds-ref-pallet-base800: hsl(0, 0%, 20%);
+  --gds-ref-pallet-base900: hsl(0, 0%, 10%);
   --gds-ref-pallet-base1000: hsl(0 0% 0%);
 
   /******************************************/
@@ -24,9 +24,10 @@
 
   --gds-sys-color-surface: var(--gds-ref-pallet-base000);
   --gds-sys-color-base: var(--gds-ref-pallet-base800);
+  --gds-sys-color-font: var(--gds-ref-pallet-base800);
   --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
 }
-
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --gds-sys-color-blue: #58b8ee;
@@ -43,4 +44,4 @@
   --gds-sys-color-surface: var(--gds-ref-pallet-base000);
   --gds-sys-color-base: var(--gds-ref-pallet-base800);
   --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
-}
+}*/

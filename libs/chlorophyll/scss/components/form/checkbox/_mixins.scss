@@ -7,7 +7,7 @@ $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
 @mixin add-checkbox(
-  $selector: '.form-control',
+  $selector: 'label.form-control',
   $checkbox-selector: 'input[type="checkbox"]',
   $validated-selector: '.was-validated'
 ) {
@@ -22,14 +22,18 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Add focus to form-control field */
-  #{$selector}:has( input[type="checkbox"]:focus-visible) {
-    @include common.add-focus('within');
+  #{$selector}:has( #{$checkbox-selector} ) {
+    padding: 0.6875rem 1rem 0.5625rem;
+  }
+
+  #{$selector}:has( #{$checkbox-selector}:focus-visible ) {
+      @include common.add-focus('within');
   }
 
   /* Style for custom checkbox */
   #{$selector} #{$checkbox-selector} ~ i {
-    @include common.add-border(false, 1px, var(--gds-comp-checkbox-border-color));
     @include common.margin-end(4);
+    box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-border-color);
     position: relative;
     border-radius: var(--gds-comp-checkbox-border-radius);
     background-color: var(--gds-comp-checkbox-container-color);
@@ -39,43 +43,59 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector} #{$checkbox-selector}:not(:checked):focus-visible ~ i {
-    border: 1px solid var(--gds-sys-color-blue-dark-2);
+    box-shadow:inset 0 0 0 1px var(--gds-comp-checkbox-border-color-focus);
   }
 
   /* Hover state */
-  #{$selector}:hover #{$checkbox-selector}:not(.disabled,:disabled,:checked) ~ i {
+  #{$selector}:hover #{$checkbox-selector}:not(.disabled,:disabled,:checked,:indeterminate) ~ i {
     border-color: var(--gds-comp-checkbox-hover-border-color);
   }
 
-  #{$selector}:hover #{$checkbox-selector}:not(:checked) ~ i::after {
+  #{$selector}:hover #{$checkbox-selector}:not(:checked,:indeterminate) ~ i::after {
     border-color: var(--gds-comp-checkbox-hover-border-color);
     opacity: 1;
   }
 
-  /* Checked state */
+  // Checked state
   #{$selector} #{$checkbox-selector}:checked ~ i {
     background-color: var(--gds-comp-checkbox-container-color-selected);
   }
 
-  /* Valid state */
-  #{$validated-selector}
-    #{$selector}
-    #{$checkbox-selector}:not(.is-invalid):valid,
-  #{$selector} #{$checkbox-selector}.is-valid {
-    ~ i {
-      @include common.add-border-color($valid-color);
+  /* Indeterminate state */
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i {
+    background-color: var(--gds-comp-checkbox-container-color-selected);
+  }
+
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i::after {
+    border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    border-left: none;
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  // Invalid state
+  #{$selector}:has( #{$checkbox-selector}.is-invalid) {
+    border: 0.0625rem solid $invalid-color;
+    @include common.margin-bottom(3);
+  }
+
+  .is-invalid #{$selector}:has( #{$checkbox-selector}.is-invalid) {
+    border: none;
+    margin: 0;
+  }
+
+  @supports (-moz-appearance:none) {
+    #{$selector}.is-invalid {
+      border: 0.0625rem solid $invalid-color;
+      @include common.margin-bottom(3);
+    }
+
+    .is-invalid #{$selector}.is-invalid {
+      border: none;
+      margin: 0;
     }
   }
 
-  /* Invalid state */
-  #{$validated-selector}
-    #{$selector}
-    #{$checkbox-selector}:not(.is-valid):invalid,
-  #{$selector} #{$checkbox-selector}.is-invalid {
-    ~ i {
-      @include common.add-border-color($invalid-color);
-    }
-  }
 
   /* Disabled state */
   #{$selector} #{$checkbox-selector}:disabled,
@@ -101,13 +121,14 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector} #{$checkbox-selector} ~ i::after {
-    border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
-    border-left: 2px solid var(--gds-comp-checkbox-border-color-selected,#fff);
-    height: 0.3125rem;
-    left: .125rem;
-    top: 0.21875rem;
-    width: 0.625rem;
-    transform: scale(1) rotate(-45deg);
+    border-bottom: 3px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    border-left: 3px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    height: 0.5rem;
+    width: 1rem;
+    left: 0;
+    top: 0.1875rem;
+    transform: scale(.601) rotate(-45deg);
+    transform-origin: center;
   }
 
   /* Show the checkmark when checked */
