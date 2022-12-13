@@ -8,40 +8,40 @@ $ring-width: 11px;
 $size: 220px;
 
 .outer-circle {
-    @include mixins.use-circle($size, false);
-    background: colors.$grey-400;
-  
-    .ring {
-      @include mixins.use-circle($size);
-      clip: rect(0px, $size, $size, functions.get-radius($size));
-  
-      &-progress {
-        @include mixins.use-circle($size);
-        @include mixins.use-animation();
-        clip: rect(0px, functions.get-radius($size), $size, 0px);
-      }
+  @include mixins.use-circle($size, false);
+  background: colors.$grey-400;
 
-      @each $variant, $colors in mixins.$variants {
-        .#{$variant} {
-          @include mixins.background-variant(
-            map.get($colors, 'background')
-          );
-        }
-      }
-    }
-  
-    .full-ring {
+  .ring {
+    @include mixins.use-circle($size);
+    clip: rect(0px, $size, $size, functions.get-radius($size));
+
+    &-progress {
+      @include mixins.use-circle($size);
       @include mixins.use-animation();
+      clip: rect(0px, functions.get-radius($size), $size, 0px);
     }
-  
-    .inner-circle {
-      @include mixins.use-circle(functions.get-inner-circle-size($size, $ring-width));
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: $ring-width 0 0 $ring-width;
-      background: colors.$white;
-      overflow: hidden;
+
+    @each $variant, $colors in mixins.$variants {
+      .#{$variant} {
+        @include mixins.background-variant(map.get($colors, 'background'));
+      }
     }
   }
+
+  .full-ring {
+    @include mixins.use-animation();
+  }
+
+  .inner-circle {
+    @include mixins.use-circle(
+      functions.get-inner-circle-size($size, $ring-width)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: $ring-width 0 0 $ring-width;
+    background: colors.$white;
+    overflow: hidden;
+  }
+}
