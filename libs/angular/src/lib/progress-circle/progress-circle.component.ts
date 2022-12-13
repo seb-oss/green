@@ -6,8 +6,8 @@ import { ProgressCircleThemes, randomId } from '@sebgroup/extract'
   templateUrl: './progress-circle.component.html',
 })
 export class NggProgressCircleComponent {
-  @HostBinding('style.--start-value') private _startValue: string = '0deg'
-  @HostBinding('style.--end-value') private _endValue: string = '0deg'
+  @HostBinding('style.--start-value') private _startValue = '0deg'
+  @HostBinding('style.--end-value') private _endValue = '0deg'
 
   /** id of the progress circle */
   @Input() id?: string = `progress-circle-${randomId()}`
@@ -18,8 +18,6 @@ export class NggProgressCircleComponent {
     const degrees = this.calculateDegrees(percent)
     this._endValue = `${degrees}deg`
   }
-
-  constructor() {}
 
   calculateDegrees(percent: number): number {
     if (percent > 100) {
