@@ -24,7 +24,9 @@ export class NggProgressCircleComponent {
   calculateDegrees(percent: number): number {
     if (percent > 100) {
       return 180
-    } else if (percent < 0) {
+    } 
+    
+    if (percent < 0) {
       return 0
     }
 
