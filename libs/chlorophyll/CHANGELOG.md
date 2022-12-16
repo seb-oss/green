@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.42...@sebgroup/chlorophyll@1.0.0-beta.43) (2022-12-12)
+
+
+### Bug Fixes
+
+* 🐛 align with latest changes from main ([2088798](https://github.com/sebgroup/green/commit/208879857ff5c48888dbb662cb454f943025b6b7))
+* 🐛 checkbox lables could grow larger than parent element ([e53dff6](https://github.com/sebgroup/green/commit/e53dff6d0c6e12c91182d4913af8611104c2ab6a))
+* 🐛 close button size in dropdown ([85b0f5e](https://github.com/sebgroup/green/commit/85b0f5e639487a884c30eb58011869d5c05d3398))
+* 🐛 correct margin for dropdown labels ([7ed1725](https://github.com/sebgroup/green/commit/7ed17253e8d8f2e15b8156d515fcdb5c1f26a5ac))
+* 🐛 rendering issues on low pixel density displays ([69c6611](https://github.com/sebgroup/green/commit/69c66110f09d1fead47b2e21e1ca98b191e47cb2))
+
+
+### Features
+
+* 🎸 indeterminate checkbox ([50175c1](https://github.com/sebgroup/green/commit/50175c166b0c911d47547b9474aef2ff103fc3d6))
+
+
+
 # [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.41...@sebgroup/chlorophyll@1.0.0-beta.42) (2022-12-06)
 
 
