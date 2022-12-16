@@ -10,6 +10,12 @@
     }
   },
   {
+    "id": "components-progress-circle--default",
+    "name": "Default",
+    "title": "Components/Progress Circle",
+    "customParams": {}
+  },
+  {
     "id": "components-modal--default",
     "name": "Default",
     "title": "Components/Modal",
