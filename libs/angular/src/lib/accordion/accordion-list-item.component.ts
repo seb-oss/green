@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { randomId } from '@sebgroup/extract';
 
 @Component({
-    selector: 'ngg-accordion-list-item',
-    templateUrl: './accordion-list-item.component.html',
-    styleUrls: ['./accordion-list-item.component.scss'],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'div[ngg-accordion-list-item]',
+    templateUrl: './accordion-list-item.component.html',    
 })
 export class NggAccordionListItemComponent {
    
+    @Input() public id: string = randomId();
     @Input() public listItemHeader = '';
     @Input() public listItemSubHeader = '';
     @Output() public expandedChange: EventEmitter<NggAccordionListItemComponent> = new EventEmitter<NggAccordionListItemComponent>();

@@ -125,8 +125,8 @@ describe(NggAccordionComponent.name, ()=>{
     selector: 'ngg-fake-accordion',
     template: `
         <ngg-accordion>
-            <ngg-accordion-list-item listItemHeader ="1"></ngg-accordion-list-item>
-            <ngg-accordion-list-item listItemHeader="2"></ngg-accordion-list-item>
+            <div ngg-accordion-list-item listItemHeader ="1"></div>
+            <div ngg-accordion-list-item listItemHeader="2"></div>
         </ngg-accordion>    
     `
 })

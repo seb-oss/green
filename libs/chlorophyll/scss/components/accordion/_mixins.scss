@@ -1,3 +1,4 @@
+@use '../../tokens/spacing';
 
 @mixin add-accordion() {
   border-bottom: .0625rem solid var(--gds-ref-pallet-base300);
@@ -89,4 +90,20 @@
       }
     }
   }
+
 }
+
+@mixin accordion-list-item-content() {
+  overflow: hidden;
+  transition: height 200ms linear, opacity 200ms linear;
+  margin-left: 1em;
+
+  &.content-hidden {
+      opacity: 0;
+      visibility:hidden;
+  }
+
+  &:not(.content-hidden) {
+      padding-top: map-get(spacing.$spacing,5);
+  }
+} 
