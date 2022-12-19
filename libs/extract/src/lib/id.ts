@@ -1,2 +1,2 @@
 export const randomId = (): string =>
-  'sg_' + Math.random().toString(36).substr(2, 9)
+  'gds-' + Math.random().toString(36).substring(2, 9)
