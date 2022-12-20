@@ -8,22 +8,18 @@ const items: AccordionItemInterface[] = [
   {
     label: 'This the first Accordion label',
     subLabel: 'This is the first Accordion sub label',
-    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found
-      by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for
-      best readability.</p><a href="#">And this is a link</a> </>,
+    content: <> <p>First accordion region</p><a href="#">And this is a link</a> </>,
     labelElementLevel: 2
   },
   {
     label: 'This is the second Accordion label',
     subLabel: 'This is the second Accordion sub label',
-    content: <> <p>This is a paragraph</p><a href="#">And this is a link</a> </>,
+    content: <> <p>Second accordion region</p><a href="#">And this is a link</a> </>,
     labelElementLevel: 2
   },
   {
     label: 'This is the third Accordion label',
-    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found
-      by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for
-      best readability.</p><a href="#">And this is a link</a> </>,
+    content: <> <p>Third accordion region</p><a href="#">And this is a link</a> </>,
     labelElementLevel: 2
   }
 ]
@@ -115,14 +111,18 @@ describe('Accordion', () => {
     userEvent.type(screen.getAllByRole('button')[0], '{enter}', {
       skipClick: true,
     });
+
+    expect(screen.getByText('First accordion region')).toBeDefined()
   });
   it('should open with space', function () {
     const user = userEvent.setup()
-q
+
     render(<Accordion items={items} />)
 
     userEvent.type(screen.getAllByRole('button')[0], '{space}', {
       skipClick: true,
     });
+
+    expect(screen.getByText('First accordion region')).toBeDefined()
   });
 })
