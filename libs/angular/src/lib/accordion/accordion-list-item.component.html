@@ -10,10 +10,12 @@
                     fill="#333333" />
             </svg>
         </button>
-        <div role="region" class="accordion-list-item-content" [ngClass]="{'content-hidden' : !this.isExpanded}"
+        <div role="region" [hidden]="!this.isExpanded"
             [ngStyle]="{height: this.contentHeight}" [id]="id + '_section'" [attr.aria-labelledby]="id + '_header'"
             data-testid="accordion-list-item-content">
-            <ng-content></ng-content>
+            <div>
+                <ng-content></ng-content>
+            </div>
         </div>
     </div>
 </ng-container>

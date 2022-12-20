@@ -3,7 +3,3 @@
 .accordion {
   @include mixins.add-accordion;
 }
-
-.accordion-list-item-content {
-  @include mixins.accordion-list-item-content;
-}
