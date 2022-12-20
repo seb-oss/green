@@ -10,6 +10,12 @@
     }
   },
   {
+    "id": "components-progress-circle--default",
+    "name": "Default",
+    "title": "Components/Progress Circle",
+    "customParams": {}
+  },
+  {
     "id": "components-modal--default",
     "name": "Default",
     "title": "Components/Modal",
@@ -185,6 +191,36 @@
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--simple",
+    "name": "Simple",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--nosubheaders",
+    "name": "Nosubheaders",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--closeothers",
+    "name": "Closeothers",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
       ]
     }
   },
