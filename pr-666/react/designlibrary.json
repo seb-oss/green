@@ -245,6 +245,16 @@
     }
   },
   {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
     "id": "use--page",
     "name": "Page",
     "title": "Use",
