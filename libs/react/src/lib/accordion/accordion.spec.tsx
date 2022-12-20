@@ -1,5 +1,6 @@
 import React from 'react'
 import {fireEvent, render, screen} from '@testing-library/react'
+import userEvent from "@testing-library/user-event";
 import Accordion from './accordion'
 import {AccordionItemInterface} from "./accordion-item";
 
@@ -7,7 +8,9 @@ const items: AccordionItemInterface[] = [
   {
     label: 'This the first Accordion label',
     subLabel: 'This is the first Accordion sub label',
-    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for best readability.</p><a href="#">And this is a link</a> </>,
+    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found
+      by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for
+      best readability.</p><a href="#">And this is a link</a> </>,
     labelElementLevel: 2
   },
   {
@@ -18,13 +21,15 @@ const items: AccordionItemInterface[] = [
   },
   {
     label: 'This is the third Accordion label',
-    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for best readability.</p><a href="#">And this is a link</a> </>,
+    content: <> <p>This is the expanded content. Please consider the use of accordion as the content might not be found
+      by search engines. Use if you really need to. The text should not contain more than 75 characters in a row for
+      best readability.</p><a href="#">And this is a link</a> </>,
     labelElementLevel: 2
   }
 ]
 
 describe('Accordion', () => {
-  it('renders',  () => {
+  it('renders', () => {
     render(<Accordion items={items}/>)
     expect(screen.getByText('This the first Accordion label')).toBeTruthy()
   });
@@ -48,7 +53,76 @@ describe('Accordion', () => {
   it('should have correct aria attributes', () => {
     render(<Accordion items={items}/>)
 
-    expect(screen.getAllByRole('button')[0].getAttribute('aria-expanded')).toEqual("false")
+    fireEvent.click(screen.getAllByRole('button')[0])
+
     expect(screen.getAllByRole('button')[0].id).toEqual(screen.getAllByRole('region')[0].getAttribute("aria-labelledby"))
+    expect(screen.getAllByRole('region')[0].id).toEqual(screen.getAllByRole('button')[0].getAttribute("aria-controls"))
+  });
+
+  it('should call the onClick handler passed as prop', function () {
+    const mockFunction = jest.fn();
+
+    render(<Accordion
+      items={[
+        {...items[0], onClick: mockFunction},
+        {...items[1], onClick: mockFunction},
+        {...items[2], onClick: mockFunction}
+      ]}/>)
+
+    fireEvent.click(screen.getAllByRole('button')[0])
+    fireEvent.click(screen.getAllByRole('button')[1])
+    fireEvent.click(screen.getAllByRole('button')[2])
+
+    expect(mockFunction).toHaveBeenCalledTimes(3)
+
+  });
+
+  it('should call the onOpen and onClose handler passed as prop when opening/closing', function () {
+    const mockFunctionOnOpen = jest.fn();
+    const mockFunctionOnClose = jest.fn();
+
+    render(<Accordion
+      items={[
+        {...items[0], onOpen: mockFunctionOnOpen, onClose: mockFunctionOnClose},
+        {...items[1]},
+        {...items[2]}
+      ]}/>)
+
+    fireEvent.click(screen.getAllByRole('button')[0])
+    fireEvent.click(screen.getAllByRole('button')[0])
+
+    expect(mockFunctionOnOpen).toHaveBeenCalledTimes(1)
+    expect(mockFunctionOnClose).toHaveBeenCalledTimes(1)
+  });
+
+  it('should be able to tab to buttons', async () => {
+    const user = userEvent.setup()
+
+    render(<Accordion items={items} />)
+
+    await user.tab()
+    await user.tab()
+    await user.tab()
+
+    expect(document.activeElement).toBe(screen.getAllByRole('button')[2])
+  });
+
+  it('should open with enter', function () {
+    const user = userEvent.setup()
+
+    render(<Accordion items={items} />)
+
+    userEvent.type(screen.getAllByRole('button')[0], '{enter}', {
+      skipClick: true,
+    });
+  });
+  it('should open with space', function () {
+    const user = userEvent.setup()
+q
+    render(<Accordion items={items} />)
+
+    userEvent.type(screen.getAllByRole('button')[0], '{space}', {
+      skipClick: true,
+    });
   });
 })
