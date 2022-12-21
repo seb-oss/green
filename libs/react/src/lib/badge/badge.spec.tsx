@@ -5,7 +5,7 @@ describe('Badge', () => {
   it('Should render badge with title', () => {
     render(<Badge>title</Badge>)
 
-    expect(screen.getByText('title')).toBeVisible()
+    expect(screen.getByText('title')).toBeDefined()
   })
   it('Should set badge type class', () => {
     render(<Badge badgeType="success">title</Badge>)
@@ -15,6 +15,6 @@ describe('Badge', () => {
   it('Should render close button', () => {
     render(<Badge badgeType="success" isCloseable>title</Badge>)
 
-    expect(screen.getByRole('button')).toHaveClass('close')
+    expect(screen.getByRole('button').classList.contains('close')).toBe(true)
   })
 })

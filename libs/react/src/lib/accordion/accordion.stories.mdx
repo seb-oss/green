@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import Accordion from './accordion'
 
 export const Template = (args) => <Accordion {...args} />
@@ -15,6 +15,9 @@ Accordion component
     componentIds: ['component-accordion']
   }}
   args={{
+    /*
+    * This is the items that you pass into the accordion
+     */
     items: [
       {
         label: 'This is an Accordion label',
@@ -32,6 +35,15 @@ Accordion component
       }
     ]
   }}
+  argTypes={{
+    items: {
+      description: 'overwritten description',
+      defaultValue: 'null',
+      type: { name: "array", required: true}
+    }
+  }}
 >
   {Template.bind({})}
 </Story>
+
+<ArgsTable story={'Accordion'}/>
