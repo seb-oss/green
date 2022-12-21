@@ -26,11 +26,17 @@ export function Alert({
     } else {
       if (closeText)
         setCloseButton(
-          <Button variant="ghost">
+          <button className="close">
             <span className="sr-only">{closeText}</span>
-          </Button>
+            <i></i>
+          </button>
         )
-      else setCloseButton(<button className="close" />)
+      else setCloseButton(
+        <button className="close">
+              <span className="sr-only">Close</span>
+              <i></i>
+        </button>
+      )
     }
   }, [isCloseable, closeText])
 

@@ -27,6 +27,7 @@ const ModalHeader = ({ header = '', onClose }: Partial<ModalProps>) => {
       <h3>{header}</h3>
       <button className="close" onClick={handleClose}>
         <span className="sr-only">Close</span>
+        <i></i>
       </button>
     </div>
   )

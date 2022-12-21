@@ -49,6 +49,7 @@ export function Badge({
           onClick={() => setIsClosed(true)}
         >
           {closeText}
+          <i></i>
         </button>
       )}
     </span>
