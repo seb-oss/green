@@ -9,9 +9,17 @@ interface AccordionItemProps {
 
 export interface AccordionItemInterface {
   label: string
+  /*
+  * https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
+  * Each accordion button needs to be wrapped in a heading that has a set value for aria-level.
+  * This can be done on a div by setting the heading role and the correct aria-level for the element
+  * */
   labelElementLevel: 2 | 3 | 4 | 5 | 6
   subLabel?: string
   content: JSX.Element
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const AccordionItem = ({item, index, uuid}: AccordionItemProps) => {
@@ -20,12 +28,25 @@ const AccordionItem = ({item, index, uuid}: AccordionItemProps) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    item.onClick && item.onClick(event)
+    setIsOpen((state) => {
+      if (!state) {
+        item.onOpen && item.onOpen(event)
+      } else {
+        item.onClose && item.onClose(event)
+      }
+      return !state
+    })
+  }
+
   return (
     <div>
       <div role="heading" aria-level={labelElementLevel}>
         <button id={`accordion-item-button-${index}-${uuid}`} aria-expanded={isOpen}
-                aria-controls={`accordion-item-region-${index}-${uuid}`} onClick={() => {
-          setIsOpen((state) => !state)
+                aria-controls={`accordion-item-region-${index}-${uuid}`}
+                onClick={(event) => {
+                  handleOnClick(event)
         }}>
           <span>{label}</span>
           {subLabel && <span>{subLabel}</span>}
