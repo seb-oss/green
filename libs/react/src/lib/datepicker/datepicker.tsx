@@ -3,13 +3,15 @@ import {
   DatepickerOptions,
   months,
   years,
+  randomId
 } from '@sebgroup/extract'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useDatepicker } from './hook'
 import Dropdown from '../dropdown/dropdown'
 
 export const Datepicker = (options: DatepickerOptions = {}) => {
-  const id = 'input'
+  const [uuid] = useState(randomId());
+  const id = `sgr-datepicker-${uuid}`
   const datepickerRef = useRef<HTMLDivElement>(null)
   const datepickerTriggerRef = useRef<HTMLButtonElement>(null)
   const datepickerDialogRef = useRef<HTMLDivElement>(null)
@@ -22,6 +24,13 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
     datepickerTriggerRef,
     options
   )
+
+  useEffect(() => {
+    const selDateSub = datepicker.selectedDate$?.subscribe(
+      newDate => options.onChange && options.onChange(newDate))
+    return () => selDateSub?.unsubscribe()
+  }, [datepicker])
+
   const classNames = (day: CalendarDay) =>
     Object.entries({
       disabled: !day.currentMonth,

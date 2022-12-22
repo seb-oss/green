@@ -76,5 +76,25 @@ describe('Datepicker', () => {
       await act(() => tick())
       expect(calendar.className.trim()).toEqual('popover popover-datepicker')
     })
+    it('returns chosen date in onChange', async () => {
+      const user = userEvent.setup()
+      const onChangeMock = jest.fn();
+      const { findByRole, findByText } = render(<Datepicker onChange={date => onChangeMock(formatISO(date, { representation: 'date' }))} />)
+      await act(() => tick())
+
+      const button = await findByRole('button')
+      await act(() => user.click(button))
+
+      const _15th = await findByText('15')
+      user.click(_15th)
+      
+      const calendar = await findByRole('dialog')
+      await act(() => tick())
+
+      const todaysDate = new Date()
+      const expectedDate = `${todaysDate.getUTCFullYear()}-${todaysDate.getUTCMonth()+1}-15`
+      expect(onChangeMock).toBeCalledTimes(1)
+      expect(onChangeMock).toBeCalledWith(expectedDate);
+    })
   })
 })
