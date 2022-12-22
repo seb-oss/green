@@ -16,45 +16,6 @@
     "customParams": {}
   },
   {
-    "id": "components-modal--default",
-    "name": "Default",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slideout",
-    "name": "Slideout",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--takeover",
-    "name": "Takeover",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
@@ -101,6 +62,45 @@
     "customParams": {
       "componentIds": [
         "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--default",
+    "name": "Default",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slideout",
+    "name": "Slideout",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--takeover",
+    "name": "Takeover",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
       ]
     }
   },
