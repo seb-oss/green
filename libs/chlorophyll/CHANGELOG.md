@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.43...@sebgroup/chlorophyll@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 header 3 size on mobile ([0362098](https://github.com/sebgroup/green/commit/03620987ab32978e3026786a6221aacb0bc8ff41))
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
 # [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.42...@sebgroup/chlorophyll@1.0.0-beta.43) (2022-12-12)
 
 
