@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 export type IndicatorType = 'success' | 'error' | 'info'
 
 export type ValidatorType = 'Required' | 'Email'
@@ -35,3 +33,5 @@ export const debounce = (func: () => void, ms: number) => {
     }, ms)
   }
 }
+
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))

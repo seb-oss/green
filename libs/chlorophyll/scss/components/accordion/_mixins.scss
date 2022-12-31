@@ -69,7 +69,7 @@
     line-height: 1.5rem;
     transition: height tokens.$transition-time;
 
-    @media (prefers-reduced-motion) {
+    @media (prefers-reduced-motion: reduce) {
       transition: none;
     }
 

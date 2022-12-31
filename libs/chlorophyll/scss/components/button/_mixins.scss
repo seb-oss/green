@@ -118,6 +118,11 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   padding: 0.625rem;
   height: 2.75rem;
   width: 2.75rem;
+  min-width: auto;
+
+  .form-group & {
+    margin-top: -.625rem;
+  }
 
   svg {
     height: 1.25rem;

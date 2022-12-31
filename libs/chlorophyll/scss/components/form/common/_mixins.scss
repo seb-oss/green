@@ -1,4 +1,5 @@
 @use '../../../common';
+@use '../../../tokens';
 
 /* base style for forms */
 @mixin add-form {
@@ -108,10 +109,56 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+  z-index: 0;
 
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
   }
+
+  .form-group_header {
+    display: flex;
+
+    .form-info {
+      font-weight: normal;
+    }
+  }
+
+  .form-group_labels {
+    flex: 1;
+    > * {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .form-group_expandable-info {
+    overflow: hidden;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    transition: height tokens.$transition-time;
+
+    > div {
+      padding-bottom: .5rem;
+    }
+  }
+
+  .form-group_backdrop {
+    position: absolute;
+    inset: 0;
+    background: #dadada;
+    border-radius: 2px;
+    z-index: -1;
+    margin: -1rem;
+    opacity: 0;
+    transition: opacity tokens.$transition-time;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &:has(.expanded) {}
 
   > input:not(:last-child),
   > textarea:not(:last-child),
