@@ -228,3 +228,51 @@ Below is an example of how the component can be used with reactive forms and val
   </button>
 </form>
 ```
+
+## Example usage in reactive form with reset functionality
+
+Below is an example of reset functionality for dropdown
+
+<Story id="components-dropdown--form-with-reset" />
+
+### Markup
+
+```html
+<form
+  [formGroup]="validationFormAdvance"
+  #ngForm="ngForm"
+  (submit)="save(validationFormAdvance.value)"
+>
+  <div
+    class="form-group"
+    *ngIf="validationFormAdvance.get('country') as dropdown"
+  >
+    <ngg-dropdown
+      label="Country"
+      [options]="options$ | async"
+      formControlName="country"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="dropdown.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button
+    type="submit"
+    [disabled]="ngForm?.submitted && validationFormAdvance.invalid"
+  >
+    Save
+  </button>
+  <button (click)="validationFormAdvance.reset()">Reset</button>
+</form>
+```

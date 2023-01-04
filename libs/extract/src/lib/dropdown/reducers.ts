@@ -253,7 +253,7 @@ export const selectByValue = (
 
   if (selection && dropdown.isMultiSelect && !Array.isArray(selection)) {
     console.warn(
-      'Dropdown is marked as multiselect but recieved a non-array value:',
+      'Dropdown is marked as multiselect but received a non-array value:',
       selection
     )
   }
@@ -268,8 +268,7 @@ export const selectByValue = (
     })
   })
   const selectedOptions = options.filter((o) => o.selected)
-
-  return reduce(dropdown, {
+  const newDropdown = reduce(dropdown, {
     value: selection,
     texts: {
       select: selectionText(selectedOptions, dropdown.display, dropdown.texts),
@@ -283,6 +282,8 @@ export const selectByValue = (
     },
     options,
   })
+
+  return { ...newDropdown, value: selection }
 }
 
 /**
