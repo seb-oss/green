@@ -7,6 +7,7 @@ import { NggDropdownModule } from './dropdown/dropdown.module'
 import { NggModalModule } from './modal'
 import { NggProgressCircleModule } from './progress-circle/progress-circle.module'
 import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
+import { NggButtonModule } from './button/button.module'
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { NggSegmentedControlModule } from './segmented-control/segmented-control
   exports: [
     NggAccordionModule,
     NggBadgeModule,
+    NggButtonModule,
     NggDatepickerModule,
     NggDropdownModule,
     NggModalModule,
