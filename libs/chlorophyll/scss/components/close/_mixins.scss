@@ -18,9 +18,6 @@ $close-bg-active: var(--grey-500);
 $close-icon-color: var(--text-primary-color);
 
 @mixin close {
-  --background-hsl: #{$close-bg-hsl};
-  --color: #{$close-icon-color};
-
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
     &:not(:disabled):not(.disabled) {
@@ -29,7 +26,7 @@ $close-icon-color: var(--text-primary-color);
       width: $close-touch-target-size;
 
       > i {
-        background: $close-bg-hover;
+        background: var(--gds-ref-pallet-base200);
         height: $close-height-sm;
         width: $close-width-sm;
         border-radius: 50%;
@@ -45,7 +42,7 @@ $close-icon-color: var(--text-primary-color);
     }
   }
 
-  @include common.add-focus();
+  outline: none;
   font-size: 0;
   background: $close-bg;
   border: 0;
@@ -58,14 +55,23 @@ $close-icon-color: var(--text-primary-color);
   position: relative;
   width: $close-width;
 
+  &:focus-visible > i {
+    border-color: var(--gds-sys-color-blue-dark-2);
+    box-shadow: 0 0 0.0625rem 0 var(--gds-sys-color-blue-dark-2), 0 0 0.25rem 0.0625rem var(--gds-sys-color-blue-dark-2);
+    outline-color: transparent;
+    outline-style: solid;
+  }
+
   > i {
+    border-radius: var(--gds-sys-shape-corner-round);
+    display: block;
     width: 100%;
     height: 100%;
   }
 
   & > i::after,
   & > i::before {
-    background: var(--color);
+    background: var(--gds-sys-color-font);
     content: '';
     display: block;
     height: 0.789375rem;
@@ -85,19 +91,17 @@ $close-icon-color: var(--text-primary-color);
   }
 
   > svg path {
-    fill: var(--color);
+    fill: var(--gds-sys-color-font);
   }
 
   @include common.media-breakpoint-up('md') {
-    &:not(:disabled, .disabled):hover {
-      background: $close-bg-hover;
-      border-color: $close-bg-hover;
+    &:not(:disabled, .disabled):hover > i {
+      background: var(--gds-ref-pallet-base200);
     }
 
 
-    &:not(:disabled, .disabled):hover:active {
-      background: $close-bg-active;
-      border-color: $close-bg-active;
+    &:not(:disabled, .disabled):hover:active > i {
+      background: var(--gds-ref-pallet-base500);
     }
   }
 }

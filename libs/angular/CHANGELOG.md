@@ -2,6 +2,25 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.43...@sebgroup/green-angular@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 lint issues ([803b402](https://github.com/sebgroup/green/commit/803b402a23a69dbb21fac75963768074ffb85132))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.42...@sebgroup/green-angular@1.0.0-beta.43) (2022-12-12)
+
+
+
 # [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.41...@sebgroup/green-angular@1.0.0-beta.42) (2022-12-06)
 
 

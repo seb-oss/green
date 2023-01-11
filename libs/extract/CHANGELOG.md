@@ -2,6 +2,27 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.42...@sebgroup/extract@1.0.0-beta.43) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 fixed ts errors ([ba5cf71](https://github.com/sebgroup/green/commit/ba5cf71d3e55b5bfaf25943cd7799fd4cc282dfb))
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+* **datepicker:** implement onChange ([d253bc6](https://github.com/sebgroup/green/commit/d253bc6131383be4ec9ccde71dd87e3386394176))
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.41...@sebgroup/extract@1.0.0-beta.42) (2022-12-12)
+
+
+
 # [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.40...@sebgroup/extract@1.0.0-beta.41) (2022-12-06)
 
 

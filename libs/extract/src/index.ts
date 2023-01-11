@@ -1,6 +1,7 @@
 export * from './lib/alert'
 export * from './lib/badge'
 export * from './lib/button'
+export * from './lib/progress-circle'
 export * from './lib/datepicker'
 export * from './lib/dropdown'
 export * from './lib/form'

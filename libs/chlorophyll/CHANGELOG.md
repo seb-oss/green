@@ -2,6 +2,41 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.43...@sebgroup/chlorophyll@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 header 3 size on mobile ([0362098](https://github.com/sebgroup/green/commit/03620987ab32978e3026786a6221aacb0bc8ff41))
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.42...@sebgroup/chlorophyll@1.0.0-beta.43) (2022-12-12)
+
+
+### Bug Fixes
+
+* 🐛 align with latest changes from main ([2088798](https://github.com/sebgroup/green/commit/208879857ff5c48888dbb662cb454f943025b6b7))
+* 🐛 checkbox lables could grow larger than parent element ([e53dff6](https://github.com/sebgroup/green/commit/e53dff6d0c6e12c91182d4913af8611104c2ab6a))
+* 🐛 close button size in dropdown ([85b0f5e](https://github.com/sebgroup/green/commit/85b0f5e639487a884c30eb58011869d5c05d3398))
+* 🐛 correct margin for dropdown labels ([7ed1725](https://github.com/sebgroup/green/commit/7ed17253e8d8f2e15b8156d515fcdb5c1f26a5ac))
+* 🐛 rendering issues on low pixel density displays ([69c6611](https://github.com/sebgroup/green/commit/69c66110f09d1fead47b2e21e1ca98b191e47cb2))
+
+
+### Features
+
+* 🎸 indeterminate checkbox ([50175c1](https://github.com/sebgroup/green/commit/50175c166b0c911d47547b9474aef2ff103fc3d6))
+
+
+
 # [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.41...@sebgroup/chlorophyll@1.0.0-beta.42) (2022-12-06)
 
 

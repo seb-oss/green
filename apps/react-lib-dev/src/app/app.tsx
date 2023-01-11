@@ -1,4 +1,4 @@
-import { Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button, Stepper, TextInput } from "@sebgroup/green-react";
+import { Navbar, Dropdown, RadioGroup, RadioButton, Form, FormItems, Button, Stepper, TextInput, Datepicker } from "@sebgroup/green-react";
 import {useState} from "react";
 import {IValidator} from "@sebgroup/extract";
 
@@ -43,7 +43,8 @@ export function App() {
               <Button onClick={() => {
                 setValidator((prevState) => prevState ? undefined : { message: 'This field is required', indicator: 'error', rules: { type: 'Required' } })
               }}>Change validation</Button>
-              <Dropdown id={'my-dropdown'} options={dropDownKeyValueArray} validator={validator} />
+              <Dropdown id={'my-dropdown'} options={dropDownKeyValueArray} validator={validator} onChange={console.log} />
+              <Datepicker onChange={date => console.log('Selected date: ', date)} />
               <FormItems name="radio" validate={{ message: 'Required', indicator: 'error', rules: { type: 'Required' } }} >
                 <RadioGroup title="Radio Group"
                             onChange={(value) => console.log(value)}>

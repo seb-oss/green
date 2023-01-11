@@ -2,6 +2,28 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.42...@sebgroup/green-react@1.0.0-beta.43) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 onChange, onOpen and onClose for Accordion ([d25814c](https://github.com/sebgroup/green/commit/d25814c6c0d4725f7a9313a1d11d972cbe8f4da4))
+* **datepicker:** export Datepicker ([fe212ea](https://github.com/sebgroup/green/commit/fe212ea55b00e2375f63bc8d9ecb4ed8e936724f))
+* **datepicker:** implement onChange ([d253bc6](https://github.com/sebgroup/green/commit/d253bc6131383be4ec9ccde71dd87e3386394176))
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.41...@sebgroup/green-react@1.0.0-beta.42) (2022-12-12)
+
+
+
 # [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.40...@sebgroup/green-react@1.0.0-beta.41) (2022-12-06)
 
 

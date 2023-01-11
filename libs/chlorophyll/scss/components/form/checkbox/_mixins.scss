@@ -121,13 +121,13 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector} #{$checkbox-selector} ~ i::after {
-    border-bottom: 1.5px solid var(--gds-comp-checkbox-border-color-selected,#fff);
-    border-left: 1.5px solid var(--gds-comp-checkbox-border-color-selected,#fff);
-    height: 0.288125rem;
-    left: 0.21875rem;
-    top: 0.28125rem;
-    width: 0.60125rem;
-    transform: scale(1) rotate(-45deg);
+    border-bottom: 3px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    border-left: 3px solid var(--gds-comp-checkbox-border-color-selected,#fff);
+    height: 0.5rem;
+    width: 1rem;
+    left: 0;
+    top: 0.1875rem;
+    transform: scale(.601) rotate(-45deg);
     transform-origin: center;
   }
 

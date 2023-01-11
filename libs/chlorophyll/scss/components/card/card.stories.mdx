@@ -5,7 +5,7 @@ export const Template = ({ heading,closeButton, body, button, primaryButton, lin
       ${heading || closeButton ?
       `<header>
         <h3>${heading}</h3>
-        ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
+        ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
        </header>` : ''
       }
       <p>${body}</p>
