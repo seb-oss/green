@@ -10,9 +10,8 @@ const items: AccordionItemInterface[] = [
     subLabel: 'This is the first Accordion sub label',
     content: (
       <>
-        {' '}
         <p>First accordion region</p>
-        <a href="/#">And this is a link</a>{' '}
+        <a href="/#">And this is a link</a>
       </>
     ),
     labelElementLevel: 2,
@@ -22,9 +21,8 @@ const items: AccordionItemInterface[] = [
     subLabel: 'This is the second Accordion sub label',
     content: (
       <>
-        {' '}
         <p>Second accordion region</p>
-        <a href="/#">And this is a link</a>{' '}
+        <a href="/#">And this is a link</a>
       </>
     ),
     labelElementLevel: 2,
@@ -33,9 +31,8 @@ const items: AccordionItemInterface[] = [
     label: 'This is the third Accordion label',
     content: (
       <>
-        {' '}
         <p>Third accordion region</p>
-        <a href="/#">And this is a link</a>{' '}
+        <a href="/#">And this is a link</a>
       </>
     ),
     labelElementLevel: 2,
