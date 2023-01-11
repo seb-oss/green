@@ -1,5 +1,4 @@
-import React, {useRef, useState, useLayoutEffect, useEffect} from "react";
-import {debounce} from "@sebgroup/extract";
+import React, { useState } from "react";
 
 interface AccordionItemProps {
   item: AccordionItemInterface
