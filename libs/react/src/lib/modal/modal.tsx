@@ -1,4 +1,4 @@
-import { ModalRole, ModalType, Size } from '@sebgroup/extract'
+import { ModalType, Size } from '@sebgroup/extract'
 import { MouseEvent, ReactNode } from 'react'
 import Button from '../form/button/button'
 

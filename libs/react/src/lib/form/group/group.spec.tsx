@@ -1,4 +1,4 @@
-import { getByText, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Group from './group'
 
 describe('Group', () => {
