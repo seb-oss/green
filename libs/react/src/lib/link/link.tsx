@@ -25,7 +25,8 @@ export const Link = ({
       ...props,
     }
     setAnchorProps(newProps)
-  }, [button, props])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [button])
 
   return <a {...anchorProps}>{children}</a>
 }
