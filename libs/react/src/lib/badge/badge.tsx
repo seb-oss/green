@@ -30,7 +30,7 @@ export function Badge({
     if (!!customColor || !!customBackgroundColor) {
       setType('')
     }
-  }, [])
+  }, [badgeType, customColor, customBackgroundColor])
 
   return !isClosed ? (
     <span

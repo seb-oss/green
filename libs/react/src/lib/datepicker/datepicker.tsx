@@ -29,7 +29,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
     const selDateSub = datepicker.selectedDate$?.subscribe(
       newDate => options.onChange && options.onChange(newDate))
     return () => selDateSub?.unsubscribe()
-  }, [datepicker])
+  }, [datepicker, options])
 
   const classNames = (day: CalendarDay) =>
     Object.entries({
