@@ -90,7 +90,7 @@ export const create = ({
     },
     elements: {
       toggler: {
-        attributes: { id: `${id}_toggle`, 'aria-owns': id},
+        attributes: { id: `${id}_toggle`, 'aria-owns': id },
       },
       listbox: {
         attributes: { id },
@@ -283,7 +283,12 @@ export const selectByValue = (
     options,
   })
 
-  return { ...newDropdown, value: selection }
+  // reset (null) value does not override previous value in the reduce function
+  if (selection === null) {
+    newDropdown.value = null
+  }
+
+  return newDropdown
 }
 
 /**
