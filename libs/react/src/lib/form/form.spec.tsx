@@ -6,6 +6,7 @@ import Form from './form'
 import { Checkbox, RadioButton } from './input/input'
 
 type MockComponentProps = {
+  /* eslint-disable-next-line */
   mockOnSubmit?: (values: any) => void
 }
 
