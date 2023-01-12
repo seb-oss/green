@@ -35,7 +35,7 @@ export const FormItems: React.FC<FormItemsProps> = ({ children, validate, name }
       /* eslint-disable-next-line */
       setErrors((errors: Record<string, any>) => removeValues(errors))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
