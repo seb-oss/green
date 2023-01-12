@@ -227,7 +227,7 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
       value: 'netherlands',
     },
     {
-      klabeley: 'Belgium',
+      label: 'Belgium',
       value: 'belgium',
     },
     {
@@ -292,3 +292,68 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
 
 export const Form = FormControlTemplate.bind({})
 Form.args = {}
+
+const FormControlWithResetTemplate: Story<NggDropdownComponent> = (
+  args: NggDropdownComponent
+) => {
+  const validationFormAdvance = new FormGroup({
+    country: new FormControl(undefined, [Validators.required]),
+  })
+
+  const options$ = of([
+    {
+      label: 'Sweden',
+      value: { country: 'sweden', id: '1' },
+    },
+    {
+      label: 'Australia',
+      value: { country: 'Australia', id: '2' },
+    },
+  ]).pipe(delay(3000))
+
+  const save = (form: any) => {
+    console.log('Saved!', form)
+  }
+
+  return {
+    component: NggDropdownComponent,
+    template: `
+    <form [formGroup]="validationFormAdvance" #ngForm="ngForm" (submit)="save(validationFormAdvance.value)">
+    <div class="form-group" *ngIf="validationFormAdvance.get('country') as dropdown">
+      <ngg-dropdown
+        label="Country"
+        [options]="options$ | async"
+        formControlName="country"
+        [invalid]="validationFormAdvance.get('country').invalid && validationFormAdvance.get('country').touched"
+      >
+        <!-- Hint text when not submitted -->
+        <ng-container data-form-info *ngIf="!ngForm['submitted']"
+          >Select country</ng-container
+        >
+        <ng-container data-form-info *ngIf="ngForm['submitted']">
+          <!-- Text when form control contains one or more errors -->
+          <ng-container *ngIf="dropdown.errors as errors">
+            <!-- Text for each error (only one will be displayed at a time) -->
+            <ng-container *ngIf="errors['required']">Select country</ng-container>
+          </ng-container>
+        </ng-container>
+      </ngg-dropdown>
+    </div>
+    <button type="submit" [disabled]="ngForm?.submitted && validationFormAdvance.invalid">
+      Save
+    </button>
+    <button (click)="validationFormAdvance.reset()">
+    Reset
+    </button>
+    `,
+    props: {
+      ...args,
+      validationFormAdvance,
+      options$,
+      save,
+    },
+  }
+}
+
+export const FormWithReset = FormControlWithResetTemplate.bind({})
+FormWithReset.args = {}
