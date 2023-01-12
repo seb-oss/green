@@ -23,7 +23,9 @@ const validateInputValueErrors = (rules: ValidatorRules, target: InputTargetType
   return validateTextInputValues(value, rules)
 }
 
+/* eslint-disable-next-line */
 const setErrorInsert = (setError: React.Dispatch<React.SetStateAction<Record<string, any>>>, name: string) => {
+  /* eslint-disable-next-line */
   setError((errors: Record<string, any>) => {
     return {
       ...errors,
@@ -32,8 +34,11 @@ const setErrorInsert = (setError: React.Dispatch<React.SetStateAction<Record<str
   })
 }
 
+/* eslint-disable-next-line */
 const setErrorRemove = (setError: React.Dispatch<React.SetStateAction<Record<string, any>>>, name: string) => {
+  /* eslint-disable-next-line */
   setError((errors: Record<string, any>) => {
+    /* eslint-disable-next-line */
     const newError: Record<string, any> = { ...errors }
     delete newError[name]
     return newError

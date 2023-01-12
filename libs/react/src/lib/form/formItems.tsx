@@ -58,6 +58,7 @@ export const FormItems: React.FC<FormItemsProps> = ({ children, validate, name }
     validateInputValue({ value: inputValue as string, name, type, checked }, validate?.rules as ValidatorRules, setErrors)
   }
 
+  /* eslint-disable-next-line */
   return React.cloneElement(children as any, {
     validator: errors?.[name] && validate,
     name,

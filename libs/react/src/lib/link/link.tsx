@@ -25,7 +25,7 @@ export const Link = ({
       ...props,
     }
     setAnchorProps(newProps)
-  }, [button])
+  }, [button, props])
 
   return <a {...anchorProps}>{children}</a>
 }
