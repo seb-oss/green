@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { render, screen, fireEvent } from '@testing-library/react'
-import { TextInputProps } from '../types'
 import { Checkbox, EmailInput, NumberInput, TextInput, RadioButton } from './input'
 
 describe('Inputs', () => {

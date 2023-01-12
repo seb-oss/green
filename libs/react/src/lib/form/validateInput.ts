@@ -7,6 +7,7 @@ interface InputTargetType {
   checked?: boolean
 }
 
+/* eslint-disable-next-line */
 export const validateInputValue = (target: InputTargetType, rules: ValidatorRules, setError: React.Dispatch<React.SetStateAction<Record<string, any>>>) => {
   const errorMessage: string | undefined = validateInputValueErrors(rules, target) as string
   errorMessage ? setErrorInsert(setError, target.name) : setErrorRemove(setError, target.name)

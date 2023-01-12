@@ -37,6 +37,7 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       return () => {}
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
