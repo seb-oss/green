@@ -2,7 +2,6 @@ import { FormDirection, Size } from '@sebgroup/extract'
 import { HTMLProps, ReactNode } from 'react'
 import { FormProvider } from './formContext'
 
-/* eslint-disable-next-line */
 export interface FormProps extends HTMLProps<HTMLFormElement> {
   children?: ReactNode
   direction?: FormDirection
