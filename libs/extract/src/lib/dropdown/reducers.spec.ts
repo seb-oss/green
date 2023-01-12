@@ -10,7 +10,6 @@ import {
   loop,
   highlight,
   search,
-  resetTouchedProperty,
 } from './reducers'
 import { AbstractDropdown, DropdownOption, DropdownTexts } from './types'
 
@@ -393,8 +392,15 @@ describe('dropdown/reducers', () => {
     })
 
     describe('reset', () => {
-      it('resets dropdown property to false', () => {
-        dropdown = resetTouchedProperty({ ...dropdown, isTouched: true })
+      it('resets dropdown value and isTouched state', () => {
+        dropdown = open(dropdown)
+        dropdown = select(dropdown, dropdown.options[1])
+        dropdown = close(dropdown)
+        expect(dropdown.value).toEqual(2)
+        expect(dropdown.isTouched).toEqual(true)
+
+        dropdown = selectByValue(dropdown, null)
+        expect(dropdown.value).toEqual(null)
         expect(dropdown.isTouched).toEqual(false)
       })
     })
