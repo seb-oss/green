@@ -7,6 +7,7 @@ export interface FormProps extends HTMLProps<HTMLFormElement> {
   children?: ReactNode
   direction?: FormDirection
   formSize?: Size
+  /* eslint-disable-next-line */
   onFormSubmit?: (values: any) => void
 }
 

@@ -75,6 +75,7 @@ describe('Form component', () => {
   })
 
   it('Should call onSubmitForm fn', async () => {
+    /* eslint-disable-next-line */
     const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
     fireEvent.change(screen.getByPlaceholderText('eg: cat'), { target: { value: 'cat cat' } })
@@ -84,6 +85,7 @@ describe('Form component', () => {
   })
 
   it('Should call not onSubmitForm fn when input empty', () => {
+    /* eslint-disable-next-line */
     const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
     fireEvent.click(screen.getByText('submit'))
