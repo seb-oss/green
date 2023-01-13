@@ -89,14 +89,20 @@
     "customParams": {}
   },
   {
-    "id": "components-form--checkbox",
-    "name": "Checkbox",
-    "title": "Components/Form",
+    "id": "components-form-checkbox--default-story",
+    "name": "Default",
+    "title": "Components/Form/Checkbox",
     "customParams": {
       "componentIds": [
         "component-checkbox"
       ]
     }
+  },
+  {
+    "id": "components-form-checkbox--invalid",
+    "name": "invalid",
+    "title": "Components/Form/Checkbox",
+    "customParams": {}
   },
   {
     "id": "components-form--button-group",
@@ -235,6 +241,16 @@
     "customParams": {
       "componentIds": [
         "component-alertribbon"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
       ]
     }
   },

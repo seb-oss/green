@@ -10,6 +10,12 @@
     }
   },
   {
+    "id": "components-progress-circle--default",
+    "name": "Default",
+    "title": "Components/Progress Circle",
+    "customParams": {}
+  },
+  {
     "id": "components-modal--default",
     "name": "Default",
     "title": "Components/Modal",
@@ -99,6 +105,16 @@
     }
   },
   {
+    "id": "components-dropdown--form-with-reset",
+    "name": "Form With Reset",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
     "id": "components-datepicker--simple",
     "name": "Simple",
     "title": "Components/Datepicker",
@@ -129,6 +145,36 @@
     }
   },
   {
+    "id": "components-form-button--default",
+    "name": "Default",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--types",
+    "name": "Types",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--variants",
+    "name": "Variants",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
     "id": "components-badge--default",
     "name": "Default",
     "title": "Components/Badge",
@@ -155,6 +201,36 @@
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--simple",
+    "name": "Simple",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--nosubheaders",
+    "name": "Nosubheaders",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--closeothers",
+    "name": "Closeothers",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
       ]
     }
   },
@@ -191,26 +267,6 @@
     "customParams": {
       "componentIds": [
         "component-input"
-      ]
-    }
-  },
-  {
-    "id": "components-form-button--default",
-    "name": "Default",
-    "title": "Components/Form/Button",
-    "customParams": {
-      "componentIds": [
-        "component-button"
-      ]
-    }
-  },
-  {
-    "id": "components-form-button--primary",
-    "name": "Primary",
-    "title": "Components/Form/Button",
-    "customParams": {
-      "componentIds": [
-        "component-button"
       ]
     }
   }
