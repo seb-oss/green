@@ -105,6 +105,16 @@
     }
   },
   {
+    "id": "components-dropdown--form-with-reset",
+    "name": "Form With Reset",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
     "id": "components-datepicker--simple",
     "name": "Simple",
     "title": "Components/Datepicker",
