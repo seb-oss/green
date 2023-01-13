@@ -46,15 +46,14 @@ export const Checkbox = ({ label, onChange, validator, ...props }: CheckboxProps
   const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
 
   return (
-    <>
+    <div className="form-group">
       <label htmlFor={inputProps.id} className={`form-control ${validatorClassName}`}>
         {label}
-        <input type="checkbox" {...inputProps} />
-        <span></span>
+        <input type="checkbox" {...inputProps} className={validatorClassName} />
         <i />
       </label>
       {validator && <span className="form-info">{validator.message}</span>}
-    </>
+    </div>
   )
 }
 

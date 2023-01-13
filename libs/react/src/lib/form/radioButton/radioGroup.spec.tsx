@@ -4,7 +4,7 @@ import { RadioButton } from '../input/input'
 import { IValidator } from '@sebgroup/extract'
 
 describe('RadioButton Group Component', () => {
-  const radioBtnValues: any = [
+  const radioBtnValues: Array<{ label: string, value: string }> = [
     {
       value: 'Car 1',
       label: 'Car 1',
@@ -19,7 +19,7 @@ describe('RadioButton Group Component', () => {
 
   const MockComponent = (props: MockComponentProps) => (
     <RadioGroup title="Radio Group title" description="Description" {...props}>
-      {radioBtnValues.map((value: any, index: number) => (
+      {radioBtnValues.map((value: { label: string, value: string }, index: number) => (
         <RadioButton key={index} {...value} />
       ))}
     </RadioGroup>

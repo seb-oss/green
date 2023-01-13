@@ -2,6 +2,118 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.43...@sebgroup/green-react@1.0.0-beta.44) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 add jest-dom in tsconfig ([a96d1c0](https://github.com/sebgroup/green/commit/a96d1c04b233025b01af558962726abc57d531f9))
+* 🐛 remove dependency ([10bce05](https://github.com/sebgroup/green/commit/10bce0547ec9ab04165a6735ba22f774e62b72b8))
+* 🐛 reorder stories ([a57f47f](https://github.com/sebgroup/green/commit/a57f47fd844abfddf58d2d697a033b8de5a07482))
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.42...@sebgroup/green-react@1.0.0-beta.43) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 onChange, onOpen and onClose for Accordion ([d25814c](https://github.com/sebgroup/green/commit/d25814c6c0d4725f7a9313a1d11d972cbe8f4da4))
+* **datepicker:** export Datepicker ([fe212ea](https://github.com/sebgroup/green/commit/fe212ea55b00e2375f63bc8d9ecb4ed8e936724f))
+* **datepicker:** implement onChange ([d253bc6](https://github.com/sebgroup/green/commit/d253bc6131383be4ec9ccde71dd87e3386394176))
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.41...@sebgroup/green-react@1.0.0-beta.42) (2022-12-12)
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.40...@sebgroup/green-react@1.0.0-beta.41) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.39...@sebgroup/green-react@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.38...@sebgroup/green-react@1.0.0-beta.39) (2022-11-30)
+
+
+### Bug Fixes
+
+* 🐛 checkbox, radio, use-green scope, variables ([1fd9154](https://github.com/sebgroup/green/commit/1fd915463e9c8c3bf1db2fa6179da5f4ccbdf2f8))
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.37...@sebgroup/green-react@1.0.0-beta.38) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.36...@sebgroup/green-react@1.0.0-beta.37) (2022-11-17)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.35...@sebgroup/green-react@1.0.0-beta.36) (2022-11-17)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.34...@sebgroup/green-react@1.0.0-beta.35) (2022-11-11)
+
+
+### Bug Fixes
+
+* **stepper:** only emit onChange on user events ([5ae5e38](https://github.com/sebgroup/green/commit/5ae5e38f90f56ef5044d9a2ac61e0961ed4ea0c4))
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.33...@sebgroup/green-react@1.0.0-beta.34) (2022-11-10)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.32...@sebgroup/green-react@1.0.0-beta.33) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.31...@sebgroup/green-react@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.30...@sebgroup/green-react@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.29...@sebgroup/green-react@1.0.0-beta.30) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 drop down flicker when mounted in react ([350f02f](https://github.com/sebgroup/green/commit/350f02fa882da8f8c6ca909ddc6e94129ce19589))
+* 🐛 Stepper can go to 0 ([cf17e4b](https://github.com/sebgroup/green/commit/cf17e4b7013f80687043354535b49e684af92741))
+
+
+
 # [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.28...@sebgroup/green-react@1.0.0-beta.29) (2022-10-26)
 
 

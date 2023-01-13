@@ -29,25 +29,24 @@
   .form-group > {
     fieldset {
       @include common.margin-bottom(0);
-      @include common.media-breakpoint-up('sm') {
-        margin-bottom: auto;
-        margin-top: 1.625rem;
+
+      legend {
+        @include common.padding(0);
       }
 
-      label.form-control:last-of-type,
-      .label.form-control:last-of-type {
-        padding-right: 0;
+      .form-info {
+        display: inline-flex;
       }
+    }
+
+    fieldset + .form-info {
+      margin-top: .5rem;
     }
 
     input,
     button,
     button[aria-haspopup='listbox'] {
       @include common.margin-bottom(0);
-    }
-
-    .form-info {
-      @include common.margin-top(3);
     }
   }
 
@@ -65,6 +64,7 @@
 
   .form-control {
     display: inline-flex;
+    margin-inline-start: 0;
   }
 
   // hide form info as it's not positioned correctly
@@ -87,19 +87,18 @@
 /* label for checkboxes and radio buttons */
 @mixin add-form-control {
   @include common.padding-vertical(4);
-  @include common.padding-end(4);
+  @include common.padding-horizontal(5);
+  border: 1px solid transparent;
+  border-radius: var(--gds-sys-shape-corner-medium);
   align-items: center;
   cursor: pointer;
   display: flex;
   flex-direction: row-reverse;
   font: inherit;
   justify-content: flex-end;
-  max-width: fit-content;
-  max-width: -moz-fit-content;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
-  white-space: nowrap;
 }
 
 /* form group */
@@ -109,25 +108,16 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
-    width: fit-content;
-    width: -moz-fit-content;
   }
 
-  > input,
-  > textarea,
-  > button,
-  button[aria-haspopup='listbox'] {
+  > input:not(:last-child),
+  > textarea:not(:last-child),
+  > button:not(:last-child),
+  button[aria-haspopup='listbox']:not(:last-child) {
     @include common.margin-bottom(3);
-  }
-
-  // label
-  label:not(.form-control),
-  .label:not(.form-control) {
-    @include common.font-weight('medium');
-    @include common.margin-bottom(3, true);
-    display: block !important;
   }
 }
 
@@ -139,3 +129,41 @@
   align-items: center;
   font: inherit;
 }
+
+@mixin add-label() {
+
+  &.form-control {
+    width: fit-content;
+    // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
+    @supports (-moz-appearance:none) {
+        @include common.add-focus('within');
+    }
+  }
+
+  &:not(.form-control) {
+    @include common.font-weight('medium');
+    width: 100%;
+    line-height: 1.25rem;
+  }
+
+  & + input, & + textarea,  fieldset & + div, & + button {
+    margin-top: .5rem;
+  }
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+
+
+  & + .form-info {
+    margin-bottom: .5rem;
+  }
+}
+
+@mixin add-form-info() {
+  &:last-child {
+    font-weight: 500;
+  }
+}
+
+

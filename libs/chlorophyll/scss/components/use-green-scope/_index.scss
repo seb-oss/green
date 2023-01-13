@@ -4,12 +4,21 @@ $font-path: '../fonts' !default;
  $font-path: $font-path
 );
 
+@use '../../tokens/colors';
+@use '../../components/form/radio';
+@use '../../components/form/checkbox';
+@use '../../tokens/shape';
+
 @use '../reset/mixins' as mixins;
 @use '../themes/mixins' as themes;
 
 
 /* add variables for light mode to `.use-green` class */
 .use-green {
+  @include  shape.add-tokens();
+  @include  colors.add-color-tokens();
+  @include  radio.add-radio-tokens();
+  @include  checkbox.add-checkbox-tokens();
   @include tokens.light-mode;
   @include themes.add-theme();
 }

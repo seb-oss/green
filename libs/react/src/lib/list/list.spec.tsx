@@ -1,6 +1,5 @@
 import { screen, render } from '@testing-library/react'
 import List, { TableListProps } from './list'
-import ListItem from './listItem'
 
 const list: string[] = ['First', 'Second', 'Third']
 const tableData: TableListProps[] = [

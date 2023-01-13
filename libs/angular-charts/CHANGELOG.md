@@ -2,6 +2,66 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.42...@sebgroup/green-angular-charts@1.0.0-beta.43) (2023-01-12)
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.41...@sebgroup/green-angular-charts@1.0.0-beta.42) (2022-12-23)
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.40...@sebgroup/green-angular-charts@1.0.0-beta.41) (2022-12-12)
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.39...@sebgroup/green-angular-charts@1.0.0-beta.40) (2022-12-06)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.38...@sebgroup/green-angular-charts@1.0.0-beta.39) (2022-11-30)
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.37...@sebgroup/green-angular-charts@1.0.0-beta.38) (2022-11-30)
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.36...@sebgroup/green-angular-charts@1.0.0-beta.37) (2022-11-28)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.35...@sebgroup/green-angular-charts@1.0.0-beta.36) (2022-11-17)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.34...@sebgroup/green-angular-charts@1.0.0-beta.35) (2022-11-17)
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.33...@sebgroup/green-angular-charts@1.0.0-beta.34) (2022-11-11)
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.32...@sebgroup/green-angular-charts@1.0.0-beta.33) (2022-11-10)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.31...@sebgroup/green-angular-charts@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.30...@sebgroup/green-angular-charts@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.29...@sebgroup/green-angular-charts@1.0.0-beta.30) (2022-11-08)
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.28...@sebgroup/green-angular-charts@1.0.0-beta.29) (2022-11-08)
+
+
+
 # [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.27...@sebgroup/green-angular-charts@1.0.0-beta.28) (2022-10-26)
 
 

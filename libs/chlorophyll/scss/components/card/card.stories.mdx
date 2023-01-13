@@ -5,7 +5,7 @@ export const Template = ({ heading,closeButton, body, button, primaryButton, lin
       ${heading || closeButton ?
       `<header>
         <h3>${heading}</h3>
-        ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span></button>` : ''}
+        ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
        </header>` : ''
       }
       <p>${body}</p>
@@ -22,7 +22,7 @@ export const Template = ({ heading,closeButton, body, button, primaryButton, lin
 
 <Meta
   title="Components/Card"
-  parameters={{ 
+  parameters={{
     componentIds: ['component-card']
   }}
   argTypes={{
@@ -59,7 +59,7 @@ To add contrast between its background and the surface it appears on, the cards 
 
 <Canvas>
   <Story
-    name="example"
+    name="Card"
     args={{
       heading: 'Card headline',
       body: 'Card body',
@@ -90,7 +90,7 @@ If the card has actions (like buttons) or contain links, they should be placed i
     <section class="card">
       <header>
         <h3>Heading</h3>
-        <button class="close"><span class="sr-only">Close</span></button>
+        <button class="close"><i></i><span class="sr-only">Close</span></button>
       </header>
       <p>
         Card content placed here.

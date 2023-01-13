@@ -23,7 +23,8 @@ $_layout-direction: column;
     align-items: center;
     display: flex;
     justify-content: space-between;
-    @include common.margin-bottom(4);
+    margin-bottom: 1rem;
+    margin-block-end: 1rem;
     .close {
       margin: -0.5rem -0.5rem -0.5rem 0.5rem;
     }

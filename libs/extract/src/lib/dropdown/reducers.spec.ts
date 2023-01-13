@@ -129,7 +129,7 @@ describe('dropdown/reducers', () => {
         const dropdown = create({ id, options })
 
         expect(dropdown.elements.listbox.classes).toEqual([
-          'popover',
+          '_popover',
           'popover-dropdown',
         ])
       })
@@ -388,6 +388,20 @@ describe('dropdown/reducers', () => {
 
         expect(dropdown.options[0].classes).not.toContain('hidden')
         expect(dropdown.options[1].classes).not.toContain('hidden')
+      })
+    })
+
+    describe('reset', () => {
+      it('resets dropdown value and isTouched state', () => {
+        dropdown = open(dropdown)
+        dropdown = select(dropdown, dropdown.options[1])
+        dropdown = close(dropdown)
+        expect(dropdown.value).toEqual(2)
+        expect(dropdown.isTouched).toEqual(true)
+
+        dropdown = selectByValue(dropdown, null)
+        expect(dropdown.value).toEqual(null)
+        expect(dropdown.isTouched).toEqual(false)
       })
     })
   })

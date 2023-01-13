@@ -2,6 +2,141 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.43...@sebgroup/extract@1.0.0-beta.44) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 dropdown formControl reset functionality ([c0716ad](https://github.com/sebgroup/green/commit/c0716ad47aa92dac2152471654c4bfba2893beea)), closes [#690](https://github.com/sebgroup/green/issues/690)
+
+
+### BREAKING CHANGES
+
+* 🧨 --
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.42...@sebgroup/extract@1.0.0-beta.43) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 fixed ts errors ([ba5cf71](https://github.com/sebgroup/green/commit/ba5cf71d3e55b5bfaf25943cd7799fd4cc282dfb))
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+* **datepicker:** implement onChange ([d253bc6](https://github.com/sebgroup/green/commit/d253bc6131383be4ec9ccde71dd87e3386394176))
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.41...@sebgroup/extract@1.0.0-beta.42) (2022-12-12)
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.40...@sebgroup/extract@1.0.0-beta.41) (2022-12-06)
+
+
+### Bug Fixes
+
+* 🐛 session with isak fixing bugs ([23d42d4](https://github.com/sebgroup/green/commit/23d42d473a314f27a8ea8376994ce0557d3d3747))
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.39...@sebgroup/extract@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.38...@sebgroup/extract@1.0.0-beta.39) (2022-11-30)
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.37...@sebgroup/extract@1.0.0-beta.38) (2022-11-28)
+
+
+### Features
+
+* 🎸 dropdown add formControl reset functionality ([88b3a55](https://github.com/sebgroup/green/commit/88b3a553a495b233e4287a8d23e8476be1ce0ea4))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: 643
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.36...@sebgroup/extract@1.0.0-beta.37) (2022-11-17)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.35...@sebgroup/extract@1.0.0-beta.36) (2022-11-17)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.34...@sebgroup/extract@1.0.0-beta.35) (2022-11-11)
+
+
+### Bug Fixes
+
+* **stepper:** only emit onChange on user events ([5ae5e38](https://github.com/sebgroup/green/commit/5ae5e38f90f56ef5044d9a2ac61e0961ed4ea0c4))
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.33...@sebgroup/extract@1.0.0-beta.34) (2022-11-10)
+
+
+### Bug Fixes
+
+* 🐛 Dropdown search input space bar and arrows keys fixes ([ff6785c](https://github.com/sebgroup/green/commit/ff6785c842320838b462b5901099e54143144f1a))
+* **dropdown:** missing condition ([9093adf](https://github.com/sebgroup/green/commit/9093adfb95509c7dd66f38cc72d4fc0fff5a4637))
+* **dropdown:** toggle with space when not searching ([a980235](https://github.com/sebgroup/green/commit/a980235c5c1f95e4c3aac55314b99b955e414599))
+
+
+### Code Refactoring
+
+* 💡 Change variable naming ([373806a](https://github.com/sebgroup/green/commit/373806a18ae11ab7219df3db3154ddd818c80321))
+* 💡 remove some code which was used for testing ([a00c9ec](https://github.com/sebgroup/green/commit/a00c9ec13927f8a08993c9d2d2c4de800f83d2d7))
+* 💡 Variable naming ([354ba51](https://github.com/sebgroup/green/commit/354ba5118e10d6847ff0ad46045b6c6e65fb18d5))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: -
+* 🧨 -
+
+✅ Closes: -
+* 🧨 -
+
+✅ Closes: -
+* 🧨 -
+
+✅ Closes: -
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.32...@sebgroup/extract@1.0.0-beta.33) (2022-11-08)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.31...@sebgroup/extract@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.30...@sebgroup/extract@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.29...@sebgroup/extract@1.0.0-beta.30) (2022-11-08)
+
+
+
 # [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.28...@sebgroup/extract@1.0.0-beta.29) (2022-10-26)
 
 

@@ -1,5 +1,5 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import { Datepicker } from './datepicker'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 
 export const Template = ({ align, ...props }) => <Datepicker {...props} />
 
@@ -11,7 +11,10 @@ Datepicker Component
 
 <Story 
   name="Datepicker"
-  args={{}} 
+  args={{
+    onChange: (newDate) => console.log('New date selected: ', newDate),
+    selectedDate: new Date()
+  }} 
   parameters={{
     componentIds: ['component-datepicker']
   }}>
@@ -20,5 +23,7 @@ Datepicker Component
 
 ### Available props
 
-<ArgsTable of={Datepicker} />
-const{' '}
+| Input (attribute) | Description                                                          | Default |
+| :---------------- | :------------------------------------------------------------------- | :------ |
+| onChange          | A function of the signature `(Date) => void`.                        |         |
+| selectedDate      | A value of type `Date` or `string`. Sets the currently selected date.|         |

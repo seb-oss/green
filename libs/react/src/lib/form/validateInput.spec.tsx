@@ -1,6 +1,7 @@
 import { validateInputValue } from './validateInput'
 
 describe('ValidateInput Function', () => {
+  /* eslint-disable-next-line */
   const args: any = {
     target: {},
     rules: { type: 'Required' },

@@ -8,7 +8,7 @@ export const Template = ({ type, variant, text }) => {
 
 <Meta
   title="Components/Form/Elements/Button"
-  parameters={{ 
+  parameters={{
     componentIds: ['component-button']
   }}
   argTypes={{
@@ -60,6 +60,17 @@ Styling can also be achieved by class
   <button class="ghost">Ghost button</button>
 </Canvas>
 
+## Sizes
+
+Sizes can changed with size classes
+
+<Canvas>
+  <button class="primary">Default size</button>
+  <button class="primary small">Small size</button>
+  <button class="ghost">Default size</button>
+  <button class="ghost small">Small size</button>
+</Canvas>
+
 ## Special buttons
 
 ### Close button
@@ -67,6 +78,7 @@ Styling can also be achieved by class
 <Canvas>
   <button class="close">
     <span class="sr-only">Close</span>
+    <i></i>
   </button>
 </Canvas>
 

@@ -3,7 +3,7 @@ import { Checkbox } from '../input/input'
 
 export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
-<Meta title="Components/Form" component={Checkbox} />
+<Meta title="Components/Form/Checkbox" component={Checkbox} />
 
 # Checkbox
 
@@ -11,7 +11,7 @@ Simple Checkbox component
 
 <Canvas>
   <Story
-    name="Checkbox"
+    name="Default"
     parameters={{
       componentIds: ['component-checkbox']
     }}
@@ -43,82 +43,14 @@ Simple Checkbox component
 
 ## Validation
 
-### Default form (vertical)
-
 <Canvas>
-  <form>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" required />
-        <Checkbox label="Two" required />
-      </fieldset>
-      <span class="form-info">Neutral</span>
-    </div>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp" className="is-valid">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" className="is-valid" required />
-        <Checkbox label="Two" className="is-valid" required />
-      </fieldset>
-      <span class="form-info">Valid</span>
-    </div>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp" className="is-invalid">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" className="is-invalid" required />
-        <Checkbox label="Two" className="is-invalid" required />
-      </fieldset>
-      <span class="form-info">Error</span>
-    </div>
-  </form>
+  <Story name="invalid"
+    args={{ label: 'Invalid', validator: {
+                                    indicator: 'error',
+                                    message: 'Error'
+                                   }}}
+     >
+    {CheckboxTemplate.bind({})}
+  </Story>
 </Canvas>
 
-### Horizontal
-
-<Canvas>
-  <form className="horizontal">
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" required />
-        <Checkbox label="Two" required />
-      </fieldset>
-      <span class="form-info">Neutral</span>
-    </div>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp" className="is-valid">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" className="is-valid" required />
-        <Checkbox label="Two" className="is-valid" required />
-      </fieldset>
-      <span class="form-info">Valid</span>
-    </div>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp" className="is-invalid">
-        <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" class="form-info">
-          Check group description
-        </span>
-        <Checkbox label="One" className="is-invalid" required />
-        <Checkbox label="Two" className="is-invalid" required />
-      </fieldset>
-      <span class="form-info">Error</span>
-    </div>
-  </form>
-</Canvas>

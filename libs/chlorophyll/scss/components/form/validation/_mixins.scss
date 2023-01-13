@@ -23,8 +23,7 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-feedback($color) {
   color: $color;
-  //height: auto;
-  //min-height: 1rem;
+  font-weight: 500;
   opacity: 1;
 
   &::before {
@@ -34,41 +33,32 @@ $_border-width: var(--sg-border-width);
 }
 
 @mixin add-form-info() {
-  @include common.font-size('s');
-  color: tokens.$text-secondary-color; //map-get(tokens.$grey, 3);
-  display: block;
-  max-width: fit-content;
-  max-width: -moz-fit-content;
-  min-width: 100%;
+  @include common.font-scale(1);
+  display: inline-block;
+  line-height: 1.25rem;
+  color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
+  width: 100%;
 }
 
 @mixin add-validation() {
   .was-validated input + .form-info,
-  .was-validated textarea + .form-info {
-    opacity: 0;
+  .was-validated textarea + .form-info,
+  .was-validated fieldset + .form-info{
+    font-weight: 500;
   }
 
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
+  .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
   .is-valid ~ .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
 
   .was-validated input:not(.is-valid):invalid + .form-info,
   .was-validated textarea:not(.is-valid):invalid + .form-info,
+  .was-validated fieldset:not(.is-valid).is-invalid + .form-info,
   .is-invalid ~ .form-info {
     @include add-feedback(tokens.$intent-danger-background);
-  }
-
-  .horizontal {
-    .was-validated input:not(.is-invalid):valid + .form-info,
-    .was-validated textarea:not(.is-invalid):valid + .form-info,
-    .is-valid ~ .form-info,
-    .was-validated input:not(.is-valid):invalid + .form-info,
-    .was-validated textarea:not(.is-valid):invalid + .form-info,
-    .is-invalid ~ .form-info {
-      @include common.margin-top(3);
-    }
   }
 }
 
@@ -78,37 +68,30 @@ $_border-width: var(--sg-border-width);
     @include common.padding(0);
     @include common.margin(0);
     border: 0;
-
-    &.is-valid {
-      box-shadow: 0 0 0 $_border-width tokens.$intent-success-background;
+    > div {
+      width: max-content;
     }
 
-    &.is-invalid {
-      box-shadow: 0 0 0 $_border-width tokens.$intent-danger-background;
+    &.is-valid > div {
+      border: $_border-width solid tokens.$intent-success-background;
+      border-radius: var(--gds-sys-shape-corner-medium);
+    }
+
+    &.is-invalid > div {
+      border: $_border-width solid tokens.$intent-danger-background;
+      border-radius: var(--gds-sys-shape-corner-medium);
     }
   }
 
   fieldset.is-valid,
   fieldset.is-invalid {
     @include common.add-border-radius();
-    @include common.padding-bottom(2);
-    @include common.padding-horizontal(5);
-    @include common.margin-bottom(4);
-
-    legend {
-      margin-bottom: -1.5rem;
-      margin-left: -1rem;
-      padding-bottom: 2.5rem;
-      /* hide prepended form-info when fieldset/group is valid/invalid */
-      + .form-info {
-        display: none;
-      }
-    }
+    @include common.margin-bottom(3);
   }
 
   legend {
+    @include common.padding(0);
     @include common.font-weight('medium');
-    @include common.margin-bottom(3);
-    padding: 0;
+    line-height: 1.25rem;
   }
 }

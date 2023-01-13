@@ -66,7 +66,7 @@ export const useDatepicker: DatepickerHook = (
         )
       )
     }
-  }, [datepicker, datepickerRef, datepickerDialogRef, dateInputRef, options])
+  }, [datepicker, datepickerRef, datepickerDialogRef, dateInputRef, datepickerTriggerRef, options])
 
   return { datepicker, data, state }
 }

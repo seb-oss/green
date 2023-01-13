@@ -3,28 +3,34 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ElementRef,
+  EventEmitter,
+  Inject,
+  Injector,
   Input,
   OnChanges,
   OnDestroy,
   Output,
-  ViewChild,
-  EventEmitter,
   SimpleChanges,
-  ContentChild,
+  ViewChild,
 } from '@angular/core'
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
-  createDropdown,
+  ControlValueAccessor,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms'
+import {
   AbstractDropdown,
+  CompareWith,
+  createDropdown,
+  DropdownArgs,
   DropdownHandler,
   DropdownOption,
   DropdownOptionElement,
-  ElementProps,
-  DropdownArgs,
-  dropdownValues,
   DropdownTexts,
-  CompareWith,
+  dropdownValues,
+  ElementProps,
   SearchFilter,
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
@@ -97,11 +103,18 @@ export class NggDropdownComponent
 
   dropdown?: AbstractDropdown
   handler?: DropdownHandler
-  toggler?: Partial<ElementProps> = dropdownValues.elements?.toggler
-  listbox?: Partial<ElementProps> = dropdownValues.elements?.listbox
-  fieldset?: Partial<ElementProps> = dropdownValues.elements?.fieldset
+  toggler?: Partial<ElementProps> = dropdownValues().elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues().elements?.listbox
+  fieldset?: Partial<ElementProps> = dropdownValues().elements?.fieldset
 
-  constructor(private cd: ChangeDetectorRef) {}
+  get control(): NgControl | undefined {
+    return this.injector.get(NgControl)
+  }
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    @Inject(Injector) private injector: Injector
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.togglerRef?.nativeElement && this.listboxRef?.nativeElement) {
@@ -178,7 +191,7 @@ export class NggDropdownComponent
     }
   }
 
-  private updateValue(option: any) {
+  private updateValue(option: any): void {
     this._value = option
     this.valueChange.emit(option)
     this.onChangeFn?.(option)

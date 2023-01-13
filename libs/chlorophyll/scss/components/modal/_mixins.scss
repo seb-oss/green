@@ -41,6 +41,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   @include common.add-border-color();
   display: inline-flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 
   h3,

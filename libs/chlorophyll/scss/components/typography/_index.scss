@@ -2,18 +2,18 @@
 @use '../../tokens/typography' as tokens;
 
 .display-01 {
-  @include mixins.properties(tokens.$display-01);
+  @include mixins.add-heading-style(tokens.$display-01);
 }
 
 @for $i from 1 through 6 {
   h#{$i},
   .h#{$i} {
-    @include mixins.properties(map-get(tokens.$headings, $i));
+    @include mixins.add-heading-style(map-get(tokens.$headings, $i));
   }
 }
 
 p {
-  @include mixins.properties(tokens.$body-01);
+  line-height: 1.5rem;
 }
 
 p.small,

@@ -2,6 +2,152 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.44...@sebgroup/green-angular@1.0.0-beta.45) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 dropdown formControl reset functionality ([c0716ad](https://github.com/sebgroup/green/commit/c0716ad47aa92dac2152471654c4bfba2893beea)), closes [#690](https://github.com/sebgroup/green/issues/690)
+* 🐛 export button module ([98fa6f4](https://github.com/sebgroup/green/commit/98fa6f4ba328abf772188a642062feb47ec1f6b2))
+
+
+### BREAKING CHANGES
+
+* 🧨 --
+
+
+
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.43...@sebgroup/green-angular@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 lint issues ([803b402](https://github.com/sebgroup/green/commit/803b402a23a69dbb21fac75963768074ffb85132))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.42...@sebgroup/green-angular@1.0.0-beta.43) (2022-12-12)
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.41...@sebgroup/green-angular@1.0.0-beta.42) (2022-12-06)
+
+
+
+# [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.40...@sebgroup/green-angular@1.0.0-beta.41) (2022-11-30)
+
+
+
+# [1.0.0-beta.40](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.39...@sebgroup/green-angular@1.0.0-beta.40) (2022-11-30)
+
+
+
+# [1.0.0-beta.39](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.38...@sebgroup/green-angular@1.0.0-beta.39) (2022-11-28)
+
+
+### Bug Fixes
+
+* 🐛 Updated react & angular components that has fieldsets ([f4525a1](https://github.com/sebgroup/green/commit/f4525a19d0963122801a0102b928481cb4ec1414))
+
+
+### Features
+
+* 🎸 angular button ([13dac17](https://github.com/sebgroup/green/commit/13dac17f86de47c5720dade6f1734edbf9585566))
+* 🎸 dropdown add formControl reset functionality ([88b3a55](https://github.com/sebgroup/green/commit/88b3a553a495b233e4287a8d23e8476be1ce0ea4))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: 643
+
+
+
+# [1.0.0-beta.38](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.37...@sebgroup/green-angular@1.0.0-beta.38) (2022-11-17)
+
+
+
+# [1.0.0-beta.37](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.36...@sebgroup/green-angular@1.0.0-beta.37) (2022-11-17)
+
+
+
+# [1.0.0-beta.36](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.35...@sebgroup/green-angular@1.0.0-beta.36) (2022-11-11)
+
+
+### Features
+
+* 🎸 allow angular 14 ([5f61848](https://github.com/sebgroup/green/commit/5f618487f97807e28f7796707f9055bee9c79e1d)), closes [#620](https://github.com/sebgroup/green/issues/620)
+
+
+
+# [1.0.0-beta.35](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.34...@sebgroup/green-angular@1.0.0-beta.35) (2022-11-10)
+
+
+### Bug Fixes
+
+* 🐛 Dropdown search input space bar and arrows keys fixes ([ff6785c](https://github.com/sebgroup/green/commit/ff6785c842320838b462b5901099e54143144f1a))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: -
+
+
+
+# [1.0.0-beta.34](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.33...@sebgroup/green-angular@1.0.0-beta.34) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 failing import, style-lint, ts error ([1556856](https://github.com/sebgroup/green/commit/15568561339d04cad5a146319df51bb43c2e1934))
+
+
+
+# [1.0.0-beta.33](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.32...@sebgroup/green-angular@1.0.0-beta.33) (2022-11-08)
+
+
+
+# [1.0.0-beta.32](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.31...@sebgroup/green-angular@1.0.0-beta.32) (2022-11-08)
+
+
+
+# [1.0.0-beta.31](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.30...@sebgroup/green-angular@1.0.0-beta.31) (2022-11-08)
+
+
+
+# [1.0.0-beta.30](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.29...@sebgroup/green-angular@1.0.0-beta.30) (2022-11-08)
+
+
+
+# [1.0.0-beta.29](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.28...@sebgroup/green-angular@1.0.0-beta.29) (2022-11-08)
+
+
+### Bug Fixes
+
+* 🐛 Removed check of observers ([23d8465](https://github.com/sebgroup/green/commit/23d846564bacbbbf329947ff6da37d113de8f081))
+* 🐛 Removed unnecessary module exports ([4fc6418](https://github.com/sebgroup/green/commit/4fc6418820685db4f0c9d92837d96ec5b5d352ed))
+
+
+### Features
+
+* 🎸 Modal (Angular) ([0ad1797](https://github.com/sebgroup/green/commit/0ad17974928a966070b02cf0c86ba1c9c7c9117c))
+
+
+### Performance Improvements
+
+* **modal:** onpush strategy ([7b30b2b](https://github.com/sebgroup/green/commit/7b30b2b3f48fcf4977708730cef9789458d319cc))
+
+
+
 # [1.0.0-beta.28](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.27...@sebgroup/green-angular@1.0.0-beta.28) (2022-10-26)
 
 

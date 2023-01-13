@@ -1,29 +1,17 @@
 @use '../../../tokens/shame' as tokens;
 @use '../../../common';
-
-$background: tokens.$form-control-bg;
-$background-hover: tokens.$form-control-bg;
-$background-active: tokens.$form-control-bg;
-$diameter: 1.25rem;
-$border-width: 1px;
-$border-color-active: tokens.get(tokens.$blue, 2);
-$border-color-hover: tokens.get(tokens.$blue, 0);
-$radiomark-diameter-percentage: 0.5;
-$radiomark-color: tokens.get(tokens.$blue, 1);
-$radiomark-disabled-color: tokens.$black;
+@use './tokens' as component-tokens;
 
 $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
-/* selectors */
-$selector: '.form-control';
-$radio-selector: 'input[type="radio"]';
-$validated-selector: '.was-validated';
-
-@mixin add-radio() {
-  /* Hide the browser's default checkbox */
+@mixin add-radio(
+  $selector: 'label.form-control',
+  $radio-selector: 'input[type="radio"]',
+  $validated-selector: '.was-validated'
+) {
+  /* Hide the browser's default radio */
   #{$selector} #{$radio-selector} {
-    @include common.add-focus('visible', '~ i');
     cursor: pointer;
     height: 0;
     opacity: 0;
@@ -32,39 +20,60 @@ $validated-selector: '.was-validated';
     z-index: -1;
   }
 
-  /* Style for custom radio */
-  #{$selector} #{$radio-selector} ~ i {
-    @include common.add-border(null, $border-width);
-    @include common.add-border-color();
-    @include common.margin-end(4);
-    @include common.add-border-radius(50%);
-    background-color: $background;
-    flex: 0 0 auto;
-    height: $diameter;
-    transition: 300ms;
-    width: $diameter;
+  // Add focus to form-control field
+  // This doesn't work for Firefox so there is a fallback solution on label.form-control
+  //
+  #{$selector}:has( #{$radio-selector}:focus-visible ) {
+    @include common.add-focus('within');
   }
 
-  /* Hover state */
-  #{$selector}:hover
-    #{$radio-selector}:not(:checked, .disabled, :disabled)
-    ~ i {
-    @include common.add-border-color($border-color-hover);
+  /* Style for custom radio */
+  #{$selector} #{$radio-selector} ~ i {
+    @include common.margin-end(4);
+    position: relative;
+    border-radius: var(--gds-comp-radio-border-radius);
+    display: flex;
+    height: var(--gds-comp-radio-container-height);
+    width: var(--gds-comp-radio-container-width);
+    // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border);
 
-    &::before {
-      opacity: 0.35;
-      transform: scale3d(
-        $radiomark-diameter-percentage,
-        $radiomark-diameter-percentage,
-        1
-      );
-      transition-timing-function: ease-in-out;
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: var(--gds-comp-radio-border-radius);
+      background-color: var(--gds-comp-radio-dot);
+      transform: scale(.5);
+    }
+  }
+
+
+  /* Hover state */
+  #{$selector}:hover #{$radio-selector}:not(.disabled,:disabled) ~ i {
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-hover);
+
+    &::after {
+      background-color: var(--gds-comp-radio-dot-hover);
     }
   }
 
   /* Checked state */
-  #{$selector} #{$radio-selector}:checked ~ i {
-    @include common.add-border-color($border-color-active);
+  #{$selector} #{$radio-selector}:checked:not(.disabled,:disabled) ~ i {
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked);
+
+    &::after {
+      background-color: var(--gds-comp-radio-dot-checked);
+    }
+  }
+
+  /* Checked Hover state */
+  #{$selector}:hover #{$radio-selector}:checked:not(.disabled,:disabled) ~ i {
+    box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked-hover);
+
+    &::after {
+      background-color: var(--gds-comp-radio-dot-checked-hover);
+    }
   }
 
   /* Valid state */
@@ -72,10 +81,6 @@ $validated-selector: '.was-validated';
   #{$selector} #{$radio-selector}.is-valid {
     ~ i {
       @include common.add-border-color($valid-color);
-    }
-
-    &:checked ~ i::before {
-      background-color: $valid-color;
     }
   }
 
@@ -85,52 +90,21 @@ $validated-selector: '.was-validated';
     ~ i {
       @include common.add-border-color($invalid-color);
     }
-
-    &:checked ~ i::before {
-      background-color: $invalid-color;
-    }
   }
 
   /* Disabled state */
   #{$selector} #{$radio-selector}:disabled,
   #{$selector} #{$radio-selector}.disabled {
     ~ i {
-      @include common.add-disable(false, false, true);
+      box-shadow:inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-disabled);
     }
 
-    &:checked ~ i::before {
-      @include common.add-disable($radiomark-disabled-color, false, true);
+    ~ i::after {
+      background-color: var(--gds-comp-radio-dot-disabled);
     }
 
     ~ span {
       @include common.add-disable(false, true, false);
     }
-  }
-
-  /* Checkmark */
-  #{$selector} #{$radio-selector} ~ i::before {
-    background: $radiomark-color;
-    border-radius: 50%;
-    content: '';
-    height: $diameter;
-    margin-left: -($border-width);
-    margin-top: -($border-width);
-    opacity: 0;
-    position: absolute;
-    transform: scale3d(0, 0, 0);
-    transform-origin: center;
-    transition: 200ms ease-in;
-    width: $diameter;
-  }
-
-  /* Show the checkmark when checked */
-  #{$selector} #{$radio-selector}:checked ~ i::before {
-    opacity: 1;
-    transform: scale3d(
-      $radiomark-diameter-percentage,
-      $radiomark-diameter-percentage,
-      1
-    );
-    transition-timing-function: ease-in-out;
   }
 }

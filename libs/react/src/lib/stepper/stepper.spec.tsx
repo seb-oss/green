@@ -2,7 +2,6 @@ import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Stepper, StepperProps } from './stepper'
 
-const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
 jest.setTimeout(50000)
 
 describe('Dropdown', () => {

@@ -157,7 +157,10 @@ const update = async (
     handler.onChange(handler.dropdown.value)
   }
 
-  if (oldState.isTouched !== handler.dropdown.isTouched) {
+  if (
+    handler.dropdown.isTouched &&
+    oldState.isTouched !== handler.dropdown.isTouched
+  ) {
     handler.onTouched?.()
   }
 
