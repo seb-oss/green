@@ -24,7 +24,7 @@ const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
 
   return {
   template: `
-    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" (closed)="isOpen = false">
+    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="true" (closed)="isOpen = false">
         <p>Modal Body</p>
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
