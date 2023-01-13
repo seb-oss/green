@@ -286,6 +286,7 @@ export const selectByValue = (
   // reset (null) value does not override previous value in the reduce function
   if (selection === null) {
     newDropdown.value = null
+    newDropdown.isTouched = false
   }
 
   return newDropdown
@@ -418,11 +419,4 @@ export const search = (
         ? { ...option, classes: removeClass(option.classes, 'hidden') }
         : { ...option, classes: addClass(option.classes, 'hidden') }
     }),
-  } as Partial<AbstractDropdown>)
-
-export const resetTouchedProperty = (
-  dropdown: AbstractDropdown
-): AbstractDropdown =>
-  reduce(dropdown, {
-    isTouched: false,
   } as Partial<AbstractDropdown>)
