@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.43...@sebgroup/green-react@1.0.0-beta.44) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 add jest-dom in tsconfig ([a96d1c0](https://github.com/sebgroup/green/commit/a96d1c04b233025b01af558962726abc57d531f9))
+* 🐛 remove dependency ([10bce05](https://github.com/sebgroup/green/commit/10bce0547ec9ab04165a6735ba22f774e62b72b8))
+* 🐛 reorder stories ([a57f47f](https://github.com/sebgroup/green/commit/a57f47fd844abfddf58d2d697a033b8de5a07482))
+
+
+
 # [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.42...@sebgroup/green-react@1.0.0-beta.43) (2022-12-23)
 
 
