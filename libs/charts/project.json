@@ -103,8 +103,6 @@
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-${projectName}@",
-        "releaseAs": "prerelease",
-        "preid": "beta",
         "trackDeps": true,
         "push": true,
         "postTargets": ["charts:publish", "charts:github"]
@@ -114,8 +112,7 @@
       "executor": "@jscutlery/semver:github",
       "options": {
         "tag": "${tag}",
-        "notes": "${notes}",
-        "prerelease": true
+        "notes": "${notes}"
       }
     },
     "publish": {
