@@ -8,11 +8,10 @@ import * as bodyScrollLock from 'body-scroll-lock';
 import { createMock } from '@testing-library/angular/jest-utils';
 import { NggModalBodyComponent, NggModalComponent, NggModalFooterComponent, NggModalHeaderComponent } from '.';
 
-fdescribe(NggModalComponent.name, () => {
+describe(NggModalComponent.name, () => {
     let component: RenderResult<NggModalComponent>
 
     beforeEach(async () => {
-
         component = await render(NggModalComponent, {
             declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
             providers: []
