@@ -88,6 +88,7 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
   // content
   > div {
     grid-area: content;
+    max-width: 75ch;
 
     &:has(+ button) {
       @include common.padding-end(3);
@@ -127,11 +128,21 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
     margin: -0.5rem -0.375rem 0 0.375rem;
     --background-hsl: #{$close-bg-hover};
     --color: #{$color};
+
+    & > i:after, &>i:before {
+      background-color: var(--color);
+    }
+
+    &:hover > i:after, &:hover > i:before {
+      background-color: var(--text-primary-color);
+    }
+
     @include common.media-breakpoint-up('sm') {
       + footer {
         @include common.margin-top(4);
       }
     }
+
   }
 
   // links
