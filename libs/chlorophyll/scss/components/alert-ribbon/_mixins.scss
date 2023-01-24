@@ -138,7 +138,7 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
     }
 
     @include common.media-breakpoint-up('sm') {
-      + footer {
+      + footer, .alert-ribbon__footer {
         @include common.margin-top(4);
       }
     }
@@ -153,7 +153,7 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
   }
 
   // footer
-  > footer {
+  > footer, .alert-ribbon__footer {
     grid-area: footer;
     align-self: end;
     @include common.media-breakpoint-only('xs') {
@@ -223,7 +223,7 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
     fill: $color;
   }
 
-  > footer {
+  > footer, .alert-ribbon__footer {
     > a,
     > button,
     > button[type=button],

@@ -1,0 +1,105 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import AlertRibbon from './alert-ribbon'
+import { Button } from '../form/button/button'
+
+export const Template = ({ children, ...props }) => (
+  <AlertRibbon {...props}>{children}</AlertRibbon>
+)
+
+export const Footer = () => (
+  <>
+    <Button>Default button</Button>
+  </>
+)
+
+<Meta title="Components/AlertRibbon" component={AlertRibbon} />
+
+# AlertRibbons
+
+Simple AlertRibbon Component
+
+<Story
+  name="AlertRibbon"
+  parameters={{
+    componentIds: ['component-alertribbon']
+  }}
+  args={{
+    type: '',
+    header: 'Heading',
+    footer: <Footer />,
+    children: 'Eftersom du vill låna med någon annan än din partner vill vi prata med dig. Du är välkommen att kontakta oss på 0771-365 365 eller boka ett rådgivningsmöte',
+    isCloseable: false,
+    closeText: '',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+#
+
+## Types
+
+Set a alert type for color coded alerts.
+
+<Canvas>
+  <AlertRibbon header="Info" isCloseable={false}>
+    AlertRibbon content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </AlertRibbon>
+  <AlertRibbon type="success" header="Success" isCloseable={false}>
+    AlertRibbon content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </AlertRibbon>
+  <AlertRibbon type="warning" header="Warning" isCloseable={false}>
+    AlertRibbon content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </AlertRibbon>
+  <AlertRibbon type="danger" header="Danger" isCloseable={false}>
+    AlertRibbon content placed inside a paragraph. Inline <a href="#">links</a> will
+    inherit color from alert to make sure contrast is applied.
+  </AlertRibbon>
+</Canvas>
+
+## AlertRibbon with Close button
+
+Close button icon
+
+<Canvas>
+  <AlertRibbon header="Info" isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="success" header="Success" isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="warning" header="Warning" isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="danger" header="Danger" isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+</Canvas>
+
+## AlertRibbon with Footer Buttons
+
+Button components can be passed in as a footer
+
+<Canvas>
+  <AlertRibbon header="Info" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="success" header="Success" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="warning" header="Warning" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+  <AlertRibbon type="danger" header="Danger" footer={<Footer />} isCloseable={true}>
+    This is an alert <a href="#">with a link</a>.
+  </AlertRibbon>
+</Canvas>
+
+## Props
+
+| Prop  | Type                            | Description                    |
+| :---- | :------------------------------ | :----------------------------- |
+| items | `Array<AccordionItemInterface>` | List of items in the accordion |
