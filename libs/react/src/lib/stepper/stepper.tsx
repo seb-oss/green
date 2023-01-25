@@ -1,10 +1,12 @@
 import {ChangeEvent} from 'react'
 import { StepperArgs, useStepper } from './hook'
+import {IValidator, validateClassName, IndicatorType} from "@sebgroup/extract";
 
 export interface StepperProps extends StepperArgs {
   label?: string
   description?: string
   statusMessage?: string
+  validator?: IValidator
 }
 
 
@@ -14,6 +16,7 @@ export function Stepper({
   label,
   description,
   statusMessage,
+  validator,
   ...stepperArgs
 }: StepperProps) {
 
@@ -24,7 +27,7 @@ export function Stepper({
   }
 
   const PrimitiveStepper = (
-    <div className="group group-border group-stepper">
+    <div className={`group group-border group-stepper ${validator && validateClassName(validator?.indicator as IndicatorType)}`}>
       <button onClick={() => stepper.down()}>-</button>
       <input
         id={data.id}
@@ -38,7 +41,7 @@ export function Stepper({
     </div>
   )
 
-  if (!label && !description && ! statusMessage) return PrimitiveStepper;
+  if (!label && !description && !statusMessage && !validator) return PrimitiveStepper;
 
   return (
     <div className="form-group">
@@ -48,10 +51,12 @@ export function Stepper({
       { description && (
         <span className="form-info">{ description }</span>
       )}
-      { PrimitiveStepper }
-      { statusMessage && (
-        <span className="form-info">{ statusMessage }</span>
-      )}
+      <div className="stepper-wrapper">
+        { PrimitiveStepper }
+        { validator && (
+          <span className="form-info">{ validator.message }</span>
+        )}
+      </div>
     </div>
   )
 }

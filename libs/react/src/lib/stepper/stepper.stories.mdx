@@ -81,6 +81,25 @@ We can then custom build our `form-group`as needed.
   </div>
 </Canvas>
 
+## Validation
+
+
+
+<Canvas>
+  <Story
+    name="Stepper validation"
+    args={{
+      min: 0,
+      max: 10,
+      step: 2,
+      validator: {
+        message: "Must be a number",
+        indicator: "error"
+      }
+    }}
+  />
+</Canvas>
+
 ## Stepper props
 
 These props can be passed to the stepper component
@@ -90,6 +109,7 @@ These props can be passed to the stepper component
 | label?         | `string`                  |
 | description?   | `string`                  |
 | statusMessage? | `string`                  |
+| validator?     | `IValidator`              |
 | id?            | `string`                  |
 | value?         | `number`                  |
 | min?           | `number`                  |

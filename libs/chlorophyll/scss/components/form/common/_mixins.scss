@@ -151,7 +151,7 @@
     line-height: 1.25rem;
   }
 
-  & + input, & + textarea,  fieldset & + div, & + button, + .group-stepper {
+  & + input, & + textarea,  fieldset & + div, & + button, & + .group-stepper, & + .stepper-wrapper {
     margin-top: .5rem;
   }
 
