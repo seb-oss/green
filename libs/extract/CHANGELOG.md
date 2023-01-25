@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.43...@sebgroup/extract@1.0.0-beta.44) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 dropdown formControl reset functionality ([c0716ad](https://github.com/sebgroup/green/commit/c0716ad47aa92dac2152471654c4bfba2893beea)), closes [#690](https://github.com/sebgroup/green/issues/690)
+
+
+### BREAKING CHANGES
+
+* 🧨 --
+
+
+
 # [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.42...@sebgroup/extract@1.0.0-beta.43) (2022-12-23)
 
 

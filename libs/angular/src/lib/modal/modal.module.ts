@@ -1,6 +1,7 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
 import { NggModalBodyComponent, NggModalComponent, NggModalFooterComponent, NggModalHeaderComponent } from './modal.component';
 
 const DECLARATIONS = [
@@ -15,7 +16,7 @@ const EXPORTS = [
 ];
 
 @NgModule({
-    imports: [ CommonModule ],
+    imports: [ A11yModule, CommonModule ],
     exports: EXPORTS,
     declarations: DECLARATIONS,
 })

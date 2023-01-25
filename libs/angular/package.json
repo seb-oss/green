@@ -1,7 +1,8 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "1.0.0-beta.44",
+  "version": "1.0.0-beta.45",
   "peerDependencies": {
+    "@angular/cdk": "^12 || ^13 || ^14",
     "@angular/common": "^12 || ^13 || ^14",
     "@angular/core": "^12 || ^13 || ^14",
     "@angular/forms": "^12 || ^13 || ^14",
@@ -10,8 +11,8 @@
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
-    "@sebgroup/chlorophyll": "^1.0.0-beta.44",
-    "@sebgroup/extract": "^1.0.0-beta.43",
+    "@sebgroup/chlorophyll": "^1.0.0-beta.45",
+    "@sebgroup/extract": "^1.0.0-beta.44",
     "tslib": "^2.3.1"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",
