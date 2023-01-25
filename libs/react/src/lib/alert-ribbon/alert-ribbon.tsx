@@ -63,7 +63,7 @@ export function AlertRibbon({
       <i aria-hidden="true">
         { renderIcon() }
       </i>
-      <div>
+      <div className="alert-ribbon__content">
         { header &&  React.isValidElement(header) ? header : <span className="header">{header}</span> }
         <p>
           { children }
