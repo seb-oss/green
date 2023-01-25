@@ -80,7 +80,7 @@ describe('Datepicker', () => {
     })
     it('returns chosen date in onChange', async () => {
       const user = userEvent.setup()
-      const onChangeMock = jest.fn();
+      const onChangeMock = jest.fn()
       const { findByRole, findByText } = render(<Datepicker onChange={date => onChangeMock(formatISO(date, { representation: 'date' }))} />)
       await act(() => tick())
 
@@ -94,7 +94,7 @@ describe('Datepicker', () => {
       const todaysDate = new Date()
       const expectedDate = `${todaysDate.getUTCFullYear()}-${pad(todaysDate.getUTCMonth()+1)}-15`
       expect(onChangeMock).toBeCalledTimes(1)
-      expect(onChangeMock).toBeCalledWith(expectedDate);
+      expect(onChangeMock).toBeCalledWith(expectedDate)
     })
   })
 })

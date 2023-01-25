@@ -1,4 +1,4 @@
-import { fromEvent } from 'rxjs'
+import { fromEvent, Observable } from 'rxjs'
 import {
   distinctUntilChanged,
   map,
@@ -16,27 +16,33 @@ export type ViewportSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
  *  xl: 1200px,
  *  xxl: 1400px
  */
-export const viewportSize$ = fromEvent<UIEvent>(window, 'resize').pipe(
-  map((event) => (event.target as Window).innerWidth),
-  startWith(window.innerWidth),
-  map((viewportWidth): ViewportSize => {
-    if (viewportWidth < 576) {
-      return 'xs'
-    } else if (viewportWidth < 768) {
-      return 'sm'
-    } else if (viewportWidth < 992) {
-      return 'md'
-    } else if (viewportWidth < 1200) {
-      return 'lg'
-    } else if (viewportWidth < 1400) {
-      return 'xl'
-    } else {
-      return 'xxl'
-    }
-  }),
-  distinctUntilChanged(),
-  shareReplay(1)
-)
+export const viewportSize$ =
+  typeof window === 'undefined'
+    ? // If `window` is undefined (server side render for example),
+      // return empty observable, cause there's nothing to observe here.
+      new Observable()
+    : // Otherwise, continue as normal
+      fromEvent<UIEvent>(window, 'resize').pipe(
+        map((event) => (event.target as Window).innerWidth),
+        startWith(window.innerWidth),
+        map((viewportWidth): ViewportSize => {
+          if (viewportWidth < 576) {
+            return 'xs'
+          } else if (viewportWidth < 768) {
+            return 'sm'
+          } else if (viewportWidth < 992) {
+            return 'md'
+          } else if (viewportWidth < 1200) {
+            return 'lg'
+          } else if (viewportWidth < 1400) {
+            return 'xl'
+          } else {
+            return 'xxl'
+          }
+        }),
+        distinctUntilChanged(),
+        shareReplay(1)
+      )
 
 /** isMobileViewport$ - Observable for mobile viewport based on screen size
  * @returns Observable<boolean>
