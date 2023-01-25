@@ -1,13 +1,11 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { Stepper, StepperProps } from './stepper'
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs'
+import {Stepper, StepperProps} from './stepper'
 
 export const Template = (props) => <Stepper {...props} />
 
-<Meta title="Components/Stepper" component={Stepper} />
+<Meta title="Components/Stepper" component={Stepper}/>
 
 # Stepper
-
-Stepper Component
 
 <Story
   name="Stepper"
@@ -15,11 +13,87 @@ Stepper Component
     componentIds: ['component-stepper']
   }}
   args={{
-    id: undefined,
-    min: undefined,
-    max: undefined,
-    step: undefined,
+    label: "Label",
+    description: "Label information"
   }}
 >
   {Template.bind({})}
 </Story>
+
+A stepper makes it easier to input values that are in a narrow range.
+
+## Basic stepper
+
+Create a basic Stepper that can be placed within a form by passing a label. The component has a `form-group` wrapping to simplify form building.
+<Canvas>
+  <Story
+    name="Basic stepper"
+    args={{
+      label: "Label"
+    }}
+  />
+</Canvas>
+
+## Primitive stepper
+
+By omitting `label`, `description` and `statusMessage` props we don't wrap the component in a `form-group` and you can use it more unrestricted.
+
+<Canvas>
+  <Story
+    name="Primitive Stepper"
+    args={{
+      min: 0,
+      max: 10,
+      step: 2,
+    }}
+  />
+</Canvas>
+
+We can then custom build our `form-group`as needed.
+
+***If using the component in this way you have to handle rendering of error messages yourself***.
+
+<Canvas>
+  <div className="form-group">
+    <label htmlFor="multiple-steppers" className="mb-5">How many people will live in your new home?</label>
+    <div id="multiple-steppers" className="horizontal">
+      <div>
+        <div>
+          <div className="form-info">Adults</div>
+          <Stepper
+            min={0}
+            max={10}
+            step={1}
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <div className="form-info">Children under 18</div>
+          <Stepper
+            min={0}
+            max={10}
+            step={1}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</Canvas>
+
+## Stepper props
+
+These props can be passed to the stepper component
+
+| Key         | Type                         |
+| :-------       | :------------------------ |
+| label?         | `string`                  |
+| description?   | `string`                  |
+| statusMessage? | `string`                  |
+| id?            | `string`                  |
+| value?         | `number`                  |
+| min?           | `number`                  |
+| max?           | `number`                  |
+| step?          | `number`                  |
+| onChange?      | `(value: number) => void` |
+

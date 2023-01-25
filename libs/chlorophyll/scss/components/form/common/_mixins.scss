@@ -132,6 +132,11 @@
 
 @mixin add-label() {
 
+  &:is(label) {
+    // Overriding bootstraps reset.scss for label
+    margin-bottom: 0;
+  }
+
   &.form-control {
     width: fit-content;
     // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
@@ -146,14 +151,9 @@
     line-height: 1.25rem;
   }
 
-  & + input, & + textarea,  fieldset & + div, & + button {
+  & + input, & + textarea,  fieldset & + div, & + button, + .group-stepper {
     margin-top: .5rem;
   }
-
-  & + .form-info {
-    margin-bottom: .5rem;
-  }
-
 
   & + .form-info {
     margin-bottom: .5rem;

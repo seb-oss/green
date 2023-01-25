@@ -7,6 +7,9 @@ export interface StepperProps extends StepperArgs {
   statusMessage?: string
 }
 
+
+// TODO: Should be named "Numeric input" instead of stepper?
+
 export function Stepper({
   label,
   description,
@@ -20,6 +23,23 @@ export function Stepper({
     stepper.setValue(e.target.valueAsNumber)
   }
 
+  const PrimitiveStepper = (
+    <div className="group group-border group-stepper">
+      <button onClick={() => stepper.down()}>-</button>
+      <input
+        id={data.id}
+        type="number"
+        onChange={onChangeEvent}
+        onFocus={({target}) => target.select()}
+        placeholder="0"
+        value={data.value}
+      />
+      <button onClick={() => stepper.up()}>+</button>
+    </div>
+  )
+
+  if (!label && !description && ! statusMessage) return PrimitiveStepper;
+
   return (
     <div className="form-group">
       { label && (
@@ -28,18 +48,7 @@ export function Stepper({
       { description && (
         <span className="form-info">{ description }</span>
       )}
-      <div className="group group-border group-stepper">
-        <button onClick={() => stepper.down()}>-</button>
-        <input
-          id={data.id}
-          type="number"
-          onChange={onChangeEvent}
-          onFocus={({target}) => target.select()}
-          placeholder="0"
-          value={data.value}
-        />
-        <button onClick={() => stepper.up()}>+</button>
-      </div>
+      { PrimitiveStepper }
       { statusMessage && (
         <span className="form-info">{ statusMessage }</span>
       )}
