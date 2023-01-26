@@ -1,17 +1,17 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import {Meta, Story, Canvas} from '@storybook/addon-docs'
 
-export const Template = ({ validation, enabled, text, formInfo }) => {
+export const Template = ({validation, enabled, text, formInfo}) => {
   const attrValidation = validation ? validation : ``
   const attrEnabled = enabled ? `` : `disabled`
   const hasExtraInfo = formInfo.length > 0
   return `
     <div class="form-group">
         <label for="stepperInput">${text}</label>
-        ${ hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
+        ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
         <div class="group group-border group-stepper ${attrValidation} ${attrEnabled}">
-            <button ${attrEnabled}>-</button>
+            <button class="tertiary" ${attrEnabled}>-</button>
             <input id="stepperInput" type="number" placeholder="0" ${attrEnabled} />
-            <button ${attrEnabled}>+</button>
+            <button class="tertiary" ${attrEnabled}>+</button>
         </div>
         <span class="form-info">${validation ? validation : 'Neutral'}</span>
     </div>`
@@ -19,7 +19,7 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 
 <Meta
   title="Components/Form/Elements/Stepper"
-  parameters={{ 
+  parameters={{
     componentIds: ['component-stepper']
   }}
   argTypes={{
@@ -30,8 +30,8 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
     enabled: {
       control: 'boolean'
     },
-    text: { control: 'text' },
-    formInfo: { control: 'text' }
+    text: {control: 'text'},
+    formInfo: {control: 'text'}
   }}
 />
 
@@ -42,7 +42,7 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
     formInfo: 'Lorem ipsum very long description of stepper and what should be entered',
     enabled: true
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{docs: {disable: true}}}
 >
   {Template.bind({})}
 </Story>
@@ -55,11 +55,41 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
       <label for="stepperInput">Stepper label</label>
       <span class="form-info">Lorem ipsum very long description of stepper and what should be entered</span>
       <div class="group group-border group-stepper">
-        <button>-</button>
-        <input id="stepperInput" type="number" placeholder="0" />
-        <button>+</button>
+        <button className="tertiary">-</button>
+        <input id="stepperInput" type="number" placeholder="0"/>
+        <button className="tertiary">+</button>
       </div>
       <span class="form-info">Neutral</span>
+    </div>
+  </form>
+</Canvas>
+
+<Canvas>
+  <form>
+    <div class="form-group">
+      <label for="stepperInput">Stepper label</label>
+      <div className="horizontal">
+        <div>
+        <div>
+          <span class="form-info">Vuxna</span>
+          <div class="group group-border group-stepper">
+            <button className="tertiary">-</button>
+            <input id="stepperInput" type="number" placeholder="0"/>
+            <button className="tertiary">+</button>
+          </div>
+        </div>
+        </div>
+        <div>
+        <div>
+          <span class="form-info">Barn under 18</span>
+          <div class="group group-border group-stepper">
+            <button className="tertiary">-</button>
+            <input id="stepperInput" type="number" placeholder="0"/>
+            <button className="tertiary">+</button>
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
   </form>
 </Canvas>
