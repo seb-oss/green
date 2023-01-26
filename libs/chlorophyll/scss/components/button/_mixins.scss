@@ -42,14 +42,37 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
     padding: 0.4375rem 0.75rem;
     line-height: 1.125rem;
   }
+
+  &.large {
+    min-height: 4rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 @mixin secondary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  @include common.add-active-focus-state();
+  //@include common.add-active-focus-state();
   background: $button-secondary-bg;
   border-color: $button-secondary-border-color;
+  color: $button-secondary-color;
+  --color: #{$button-secondary-color};
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(false, true, true);
+  }
+}
+
+@mixin tertiary {
+  @include common.add-focus();
+  @include common.add-hover-active-state();
+  //@include common.add-active-focus-state();
+  background: $button-secondary-bg;
+  border-color: transparent;
   color: $button-secondary-color;
   --color: #{$button-secondary-color};
 

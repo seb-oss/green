@@ -53,7 +53,7 @@ export const Dropdown = ({
 
   return (
     <div className="form-group">
-      { label && <label>{label}</label>}
+      { label && <label htmlFor={togglerProps.id}>{label}</label>}
       { informationLabel && <div className="form-info">{informationLabel}</div>}
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>

@@ -15,7 +15,7 @@ export default {
     docs: {
       page: Documentation,
     },
-    componentIds: ['component-button']
+    componentIds: ['component-button'],
   },
 } as Meta<NggButtonComponent>
 
@@ -54,3 +54,16 @@ const TemplateVariants: Story = () => {
   }
 }
 export const Variants = TemplateVariants.bind({})
+
+const TemplateSizes: Story = () => {
+  return {
+    template: `
+    <div class="horizontal">
+      <button ngg-button>Default</button>
+      <button ngg-button size="small">Small</button>
+      <button ngg-button size="large">Large</button>
+    </div>
+    `,
+  }
+}
+export const Sizes = TemplateSizes.bind({})

@@ -12,7 +12,10 @@ export interface AlertRibbonProps {
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void
   role?: 'alert'
   ["aria-live"]?: AriaAttributes["aria-live"]
+<<<<<<< feature/alert-react
   closeAriaLabel?: string
+=======
+>>>>>>> main
 }
 
 export function AlertRibbon({
@@ -24,8 +27,12 @@ export function AlertRibbon({
   isCloseable = true,
   onClose,
   role,
+<<<<<<< feature/alert-react
   ["aria-live"]: ariaLive,
   closeAriaLabel
+=======
+  ["aria-live"]: ariaLive
+>>>>>>> main
 }: AlertRibbonProps) {
   const [closeButton, setCloseButton] = useState<ReactNode>()
   useEffect(() => {
@@ -71,7 +78,11 @@ export function AlertRibbon({
           { children }
         </p>
       </div>
+<<<<<<< feature/alert-react
       { closeButton && <button className="close" type="button" aria-label={ closeAriaLabel ?? "Close alert" } onClick={ (event) => { onClose && onClose(event)} }><i></i></button> }
+=======
+      { closeButton && <button className="close" type="button" onClick={ (event) => { onClose && onClose(event)} }><span className="sr-only">Close</span><i></i></button> }
+>>>>>>> main
       { footer && <div className="alert-ribbon__footer"> {footer} </div> }
     </div>
   )
