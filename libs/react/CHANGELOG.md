@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.45...@sebgroup/green-react@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 removing empty files ([922e332](https://github.com/sebgroup/green/commit/922e33296e09a7975b47fb0559f49b2469db2dc6))
+
+
+
 # [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.44...@sebgroup/green-react@1.0.0-beta.45) (2023-01-26)
 
 
