@@ -8,12 +8,12 @@ describe('AlertRibbon', () => {
   const Footer = () => <Button>Default Button</Button>
 
   it('renders', () => {
-    render(<AlertRibbon>AlertRibbon</AlertRibbon>)
+    const {container} = render(<AlertRibbon>AlertRibbon</AlertRibbon>)
 
-    expect(screen.getByRole('alert')).toBeTruthy()
+    expect(container.getElementsByClassName('alert-ribbon')[0]).toBeTruthy()
   })
   it('sets type class', () => {
-    render(<AlertRibbon type="warning">AlertRibbon</AlertRibbon>)
+    render(<AlertRibbon type="warning" role="alert">AlertRibbon</AlertRibbon>)
 
     expect(screen.getByRole('alert').classList.contains('warning')).toEqual(true)
   })
@@ -41,7 +41,7 @@ describe('AlertRibbon', () => {
     )
 
     expect(screen.getByText('header').tagName).toEqual('SPAN')
-    expect(screen.getByText('header').classList.contains('h3')).toEqual(true)
+    expect(screen.getByText('header').classList.contains('header')).toEqual(true)
   })
 
   it('renders footer', () => {
