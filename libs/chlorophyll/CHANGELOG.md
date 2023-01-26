@@ -2,6 +2,37 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.45...@sebgroup/chlorophyll@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 adding max-width 75ch to alert-ribbon content ([9afcca4](https://github.com/sebgroup/green/commit/9afcca4c020e0dad5ee3d96d0c79d851ed533342))
+
+
+### Code Refactoring
+
+* 💡 AlertRibbon ([1f31705](https://github.com/sebgroup/green/commit/1f31705235e7edcc63a35cd16018c881d72323a0))
+* 💡 changing to alert-ribbon__content class ([db04684](https://github.com/sebgroup/green/commit/db046843b852744d420494faa6428156979f77bc))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+* 🎸 adding tertiary button variant ([0c9f8bc](https://github.com/sebgroup/green/commit/0c9f8bcbe41e3ea5a162851a00a00e3bd2ad140f))
+
+
+### BREAKING CHANGES
+
+* 🧨 Not using footer element in Alert Ribbon because it's incorrect
+according to html spec
+* 🧨 Renaming Alert export to AlertRibbon, changing styling form
+[role="alert"] to .alert-ribbon
+
+✅ Closes: 659
+
+
+
 # [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.44...@sebgroup/chlorophyll@1.0.0-beta.45) (2023-01-12)
 
 
