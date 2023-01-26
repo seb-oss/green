@@ -9,6 +9,7 @@ import {
   Stepper,
   TextInput,
   Datepicker,
+  Alert
 } from '@sebgroup/green-react'
 import { useState } from 'react'
 import { IValidator } from '@sebgroup/extract'
@@ -44,6 +45,7 @@ export function App() {
     <>
       <div className="use-green">
         <Navbar title="Green React Dev" />
+        <Alert type={"warning"} isCloseable={false}>This is my alert</Alert>
         <div className="container">
           <div className="row">
             <div className="col">
