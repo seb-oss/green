@@ -2,6 +2,33 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.44...@sebgroup/extract@1.0.0-beta.45) (2023-01-26)
+
+
+### Bug Fixes
+
+* **extract:** make `viewport-size` ssr compatible ([7cc0707](https://github.com/sebgroup/green/commit/7cc0707cd94632c38bb5a4432a9c43839c23654b))
+
+
+### Code Refactoring
+
+* 💡 AlertRibbon ([1f31705](https://github.com/sebgroup/green/commit/1f31705235e7edcc63a35cd16018c881d72323a0))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+
+
+### BREAKING CHANGES
+
+* 🧨 Renaming Alert export to AlertRibbon, changing styling form
+[role="alert"] to .alert-ribbon
+
+✅ Closes: 659
+
+
+
 # [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0-beta.43...@sebgroup/extract@1.0.0-beta.44) (2023-01-12)
 
 
