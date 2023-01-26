@@ -63,4 +63,15 @@ describe('AlertRibbon', () => {
 
     expect(screen.getByRole('alert')).not.toContain(<button />)
   })
+
+  it('should show the passed aria-label for close button', () => {
+    render(
+      <AlertRibbon isCloseable={true} closeAriaLabel={'Close message'}>
+        AlertRibbon
+      </AlertRibbon>
+    )
+
+    expect(screen.getByLabelText("Close message").tagName).toEqual('BUTTON')
+    expect(screen.getByLabelText("Close message").classList.contains('close')).toEqual(true)
+  })
 })
