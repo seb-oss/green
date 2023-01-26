@@ -8,21 +8,12 @@ describe('AlertRibbon', () => {
   const Footer = () => <Button>Default Button</Button>
 
   it('renders', () => {
-<<<<<<< feature/alert-react
     const {container} = render(<AlertRibbon>AlertRibbon</AlertRibbon>)
 
     expect(container.getElementsByClassName('alert-ribbon')[0]).toBeTruthy()
   })
   it('sets type class', () => {
     render(<AlertRibbon type="warning" role="alert">AlertRibbon</AlertRibbon>)
-=======
-    render(<AlertRibbon>AlertRibbon</AlertRibbon>)
-
-    expect(screen.getByRole('alert')).toBeTruthy()
-  })
-  it('sets type class', () => {
-    render(<AlertRibbon type="warning">AlertRibbon</AlertRibbon>)
->>>>>>> main
 
     expect(screen.getByRole('alert').classList.contains('warning')).toEqual(true)
   })
@@ -50,11 +41,7 @@ describe('AlertRibbon', () => {
     )
 
     expect(screen.getByText('header').tagName).toEqual('SPAN')
-<<<<<<< feature/alert-react
     expect(screen.getByText('header').classList.contains('header')).toEqual(true)
-=======
-    expect(screen.getByText('header').classList.contains('h3')).toEqual(true)
->>>>>>> main
   })
 
   it('renders footer', () => {
@@ -76,7 +63,6 @@ describe('AlertRibbon', () => {
 
     expect(screen.getByRole('alert')).not.toContain(<button />)
   })
-<<<<<<< feature/alert-react
 
   it('should show the passed aria-label for close button', () => {
     render(
@@ -88,6 +74,4 @@ describe('AlertRibbon', () => {
     expect(screen.getByLabelText("Close message").tagName).toEqual('BUTTON')
     expect(screen.getByLabelText("Close message").classList.contains('close')).toEqual(true)
   })
-=======
->>>>>>> main
 })
