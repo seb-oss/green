@@ -42,6 +42,13 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
     padding: 0.4375rem 0.75rem;
     line-height: 1.125rem;
   }
+
+  &.large {
+    min-height: 4rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 @mixin secondary {

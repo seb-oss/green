@@ -86,7 +86,7 @@ $link-outline-color: hsla( var(--sg-intent-neutral-hsl-contrast), link.$outline-
   }
 
   // content
-  > div {
+  > div:not(.alert-ribbon__footer), .alert-ribbon__content {
     grid-area: content;
     max-width: 75ch;
 
