@@ -2,6 +2,29 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.45...@sebgroup/green-angular@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 not updated translations on texts changes fix ([c572b1c](https://github.com/sebgroup/green/commit/c572b1ce0675cc438f4a21ab8a48c6dd6d641273))
+* **accordion:** build error missing export ([746a250](https://github.com/sebgroup/green/commit/746a250a490e22d7a97e43eac56f587b16a28c0c))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+* 🎸 Angular modal focus functionality ([bd41200](https://github.com/sebgroup/green/commit/bd41200a3c0e398ff68deaf40ba83d2ecc4b0f9a))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: -
+
+
+
 # [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.44...@sebgroup/green-angular@1.0.0-beta.45) (2023-01-12)
 
 
