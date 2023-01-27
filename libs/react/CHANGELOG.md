@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.46...@sebgroup/green-react@0.1.0) (2023-01-27)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+* `extract` updated to version `1.0.0`
+
+### Features
+
+* 🎸 adding validation on stepper component ([afacee1](https://github.com/sebgroup/green/commit/afacee1fe0e6b8a6a0b57a34cbe6d192dab0d1a9))
+
+
+
 # [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.45...@sebgroup/green-react@1.0.0-beta.46) (2023-01-26)
 
 
