@@ -2,6 +2,19 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.47...@sebgroup/green-angular@0.0.1) (2023-01-27)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+* `extract` updated to version `1.0.0`
+
+### Bug Fixes
+
+* 🐛 removing trailing comma ([a0ff496](https://github.com/sebgroup/green/commit/a0ff4965a8f1a85e0d1fde9f037e2b0061ed2560))
+
+
+
 # [1.0.0-beta.47](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.46...@sebgroup/green-angular@1.0.0-beta.47) (2023-01-26)
 
 
