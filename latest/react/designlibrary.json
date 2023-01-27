@@ -145,6 +145,24 @@
     }
   },
   {
+    "id": "components-stepper--basic-stepper",
+    "name": "Basic stepper",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
+    "id": "components-stepper--primitive-stepper",
+    "name": "Primitive Stepper",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
+    "id": "components-stepper--stepper-validation",
+    "name": "Stepper validation",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
     "id": "components-navbar--component",
     "name": "Component",
     "title": "Components/Navbar",
@@ -235,9 +253,9 @@
     }
   },
   {
-    "id": "components-alert--alert",
-    "name": "Alert",
-    "title": "Components/Alert",
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
     "customParams": {
       "componentIds": [
         "component-alertribbon"

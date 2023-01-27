@@ -175,6 +175,16 @@
     }
   },
   {
+    "id": "components-form-button--sizes",
+    "name": "Sizes",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
     "id": "components-badge--default",
     "name": "Default",
     "title": "Components/Badge",
