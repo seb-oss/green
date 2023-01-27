@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.47...@sebgroup/chlorophyll@0.1.0) (2023-01-27)
+
+
+### Features
+
+* 🎸 adding validation on stepper component ([afacee1](https://github.com/sebgroup/green/commit/afacee1fe0e6b8a6a0b57a34cbe6d192dab0d1a9))
+
+
+
 # [1.0.0-beta.47](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.46...@sebgroup/chlorophyll@1.0.0-beta.47) (2023-01-26)
 
 
