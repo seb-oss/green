@@ -3,7 +3,7 @@
 
 $_border-width: var(--sg-border-width);
 
-@mixin add-feedback-element() {
+@mixin add-feedback-element($transform: true) {
   position: relative;
   transition: 200ms ease-in-out;
 
@@ -15,7 +15,11 @@ $_border-width: var(--sg-border-width);
     display: block;
     height: 4px;
     position: absolute;
-    transform: translate3d(0, -12px, 0);
+
+    @if($transform) {
+      transform: translate3d(0, -12px, 0);
+    }
+
     transition: 300ms ease-in-out;
     width: 100%;
   }
@@ -50,14 +54,16 @@ $_border-width: var(--sg-border-width);
   .was-validated input:not(.is-invalid):valid + .form-info,
   .was-validated textarea:not(.is-invalid):valid + .form-info,
   .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
-  .is-valid ~ .form-info {
+  .is-valid:not(.group) ~ .form-info,
+  .is-valid:is(.group){
     @include add-feedback(tokens.$intent-success-background);
   }
 
   .was-validated input:not(.is-valid):invalid + .form-info,
   .was-validated textarea:not(.is-valid):invalid + .form-info,
   .was-validated fieldset:not(.is-valid).is-invalid + .form-info,
-  .is-invalid ~ .form-info {
+  .is-invalid:not(.group) ~ .form-info,
+  .is-invalid:is(.group) {
     @include add-feedback(tokens.$intent-danger-background);
   }
 }

@@ -13,6 +13,7 @@ $_background: input.$background;
   display: flex;
   flex-wrap: nowrap;
   max-width: 100%;
+  position: relative;
 
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
