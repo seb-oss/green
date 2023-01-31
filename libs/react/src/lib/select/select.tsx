@@ -9,15 +9,16 @@ import {ChevronDown} from "../icons";
 
 interface SelectProps {
   id?: string,
-  className: string
+  className?: string
   label?: string
   labelInformation?: string
   children: ReactNode
   validator?: IValidator
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   onSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void
-  defaultValue: string | number
+  defaultValue?: string | number
   value?: string | number
+  testId?: string
 }
 
 interface OptionProps {
@@ -36,7 +37,7 @@ interface OptionProps {
 
 interface OptionGroupProps {
   label: string
-  children: React.ReactElement<OptionProps>
+  children: React.ReactElement<OptionProps> | React.ReactElement<OptionProps>[]
   disabled?: boolean
 }
 
@@ -50,6 +51,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
      labelInformation,
      defaultValue,
      value,
+     testId,
      onChange,
      onSelect
    }, ref) => {
@@ -65,7 +67,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             {label && <label htmlFor={selectId}>{label}</label>}
             {labelInformation && <div className="form-info">{labelInformation}</div>}
             <div className={`gsd--select-wrapper ${validatorClassName}`}>
-              <select id={selectId} className={className} defaultValue={defaultValue} value={value} ref={ref}
+              <select id={selectId} data-testid={testId} className={className} defaultValue={defaultValue} value={value} ref={ref}
                       onChange={(event) => {
                         onChange && onChange(event)
                       }}>
