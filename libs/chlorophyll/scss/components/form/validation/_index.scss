@@ -15,9 +15,16 @@ label + .form-info,
 
 input + .form-info,
 textarea + .form-info,
-[aria-haspopup='listbox'] ~ .form-info,
-.group + .form-info {
+[aria-haspopup='listbox'] ~ .form-info, {
   @include mixins.add-feedback-element();
+}
+
+.group {
+  @include mixins.add-feedback-element(false);
+
+  &:before {
+    bottom: 0;
+  }
 }
 
 @include mixins.add-validation;
