@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.1...@sebgroup/chlorophyll@0.1.2) (2023-02-01)
+
+
+### Bug Fixes
+
+* 🐛 move transition to hover ([b1444a2](https://github.com/sebgroup/green/commit/b1444a2151bf8743570db2062d5b8570bc4f3b15))
+
+
+
 ## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.0...@sebgroup/chlorophyll@0.1.1) (2023-02-01)
 
 
