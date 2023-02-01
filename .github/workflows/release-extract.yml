@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
+      - name: Build extract
+        run: npx nx run extract:build
+
       - name: Prepare release of extract
         run: npx nx run extract:version --baseBranch='main' --origin='origin'
         env:

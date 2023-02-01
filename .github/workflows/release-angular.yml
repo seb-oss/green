@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
+      - name: Build angular
+        run: npx nx run angular:build
+
       - name: Prepare release of angular
         run: npx nx run angular:version --baseBranch='main' --origin='origin'
         env:
