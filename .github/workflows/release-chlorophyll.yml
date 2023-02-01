@@ -45,7 +45,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Prepare release of chlorophyll
-        run: npx nx chlorophyll:version --baseBranch='main' --origin='origin'
+        run: npx nx run chlorophyll:version --baseBranch='main' --origin='origin'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
