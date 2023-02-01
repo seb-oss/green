@@ -21,5 +21,13 @@ textarea + .form-info,
   @include mixins.add-feedback-element();
 }
 
+.group {
+  @include mixins.add-feedback-element(false);
+
+  &:before {
+    bottom: 0;
+  }
+}
+
 @include mixins.add-validation;
 @include mixins.add-fieldset-validation;

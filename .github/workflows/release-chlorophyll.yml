@@ -1,4 +1,4 @@
-name: Release to Github and NPM
+name: Green Chlorophyll - release to Github and NPM
 on:
   workflow_dispatch:
 
