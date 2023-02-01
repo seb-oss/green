@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.0...@sebgroup/chlorophyll@0.1.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* 🐛 validation indicator does not exceed group element ([9da4031](https://github.com/sebgroup/green/commit/9da40317ad930681c2aa8d72a55fb47665fd49a0))
+
+
+
 # [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.47...@sebgroup/chlorophyll@0.1.0) (2023-01-27)
 
 
