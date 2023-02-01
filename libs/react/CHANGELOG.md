@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.0...@sebgroup/green-react@0.1.1) (2023-02-01)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+
+
 # [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.46...@sebgroup/green-react@0.1.0) (2023-01-27)
 
 ### Dependency Updates
