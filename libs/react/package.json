@@ -6,7 +6,7 @@
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/chlorophyll": "^0.1.0",
+    "@sebgroup/chlorophyll": "^0.1.1",
     "@sebgroup/extract": "^0.0.1"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
