@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.2...@sebgroup/chlorophyll@0.2.0) (2023-02-02)
+
+
+### Features
+
+* 🎸 react select component ([91f6fa8](https://github.com/sebgroup/green/commit/91f6fa883a68ac0dd3dd6c03ef282edb877ede08))
+
+
+
 ## [0.1.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.1...@sebgroup/chlorophyll@0.1.2) (2023-02-01)
 
 
