@@ -1,6 +1,6 @@
 import React, {AriaAttributes, ReactNode, useEffect, useState} from 'react'
 import { AlertRibbonType } from '@sebgroup/extract'
-import {squareInfoIcon, squareExclamationIcon, checkIcon} from "../icons";
+import {SquareInfo, SquareExclamation, Check} from "../icons";
 
 export interface AlertRibbonProps {
   children: ReactNode
@@ -52,11 +52,11 @@ export function AlertRibbon({
     switch (type) {
       case "danger":
       case  "warning":
-        return squareExclamationIcon
+        return SquareExclamation
       case "success":
-        return checkIcon
+        return Check
       default:
-        return squareInfoIcon
+        return SquareInfo
     }
   }
 

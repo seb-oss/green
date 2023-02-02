@@ -116,7 +116,8 @@
   > input:not(:last-child),
   > textarea:not(:last-child),
   > button:not(:last-child),
-  button[aria-haspopup='listbox']:not(:last-child) {
+  button[aria-haspopup='listbox']:not(:last-child),
+  .gsd--select-wrapper {
     @include common.margin-bottom(3);
   }
 }
