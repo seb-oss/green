@@ -163,6 +163,36 @@
     "customParams": {}
   },
   {
+    "id": "components-select--with-options",
+    "name": "With options",
+    "title": "Components/Select",
+    "customParams": {}
+  },
+  {
+    "id": "components-select--with-placeholder",
+    "name": "With placeholder",
+    "title": "Components/Select",
+    "customParams": {}
+  },
+  {
+    "id": "components-select--with-option-groups",
+    "name": "With option groups",
+    "title": "Components/Select",
+    "customParams": {}
+  },
+  {
+    "id": "components-select--with-disabled-group",
+    "name": "With disabled group",
+    "title": "Components/Select",
+    "customParams": {}
+  },
+  {
+    "id": "components-select--with-validation",
+    "name": "With validation",
+    "title": "Components/Select",
+    "customParams": {}
+  },
+  {
     "id": "components-navbar--component",
     "name": "Component",
     "title": "Components/Navbar",
