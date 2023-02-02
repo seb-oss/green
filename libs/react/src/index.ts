@@ -8,8 +8,9 @@ export * from './lib/navbar/navbar'
 export * from './lib/link/link'
 export * from './lib/badge/badge'
 export * from './lib/stepper/stepper'
+export * from './lib/select'
 export * from './lib/dropdown/dropdown'
 export * from './lib/datepicker/datepicker'
 
 // Backwards compatibility export
-export { AlertRibbon as Alert } from './lib/alert-ribbon/alert-ribbon';
+export { AlertRibbon as Alert } from './lib/alert-ribbon/alert-ribbon'
