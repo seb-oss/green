@@ -2,13 +2,13 @@
   "name": "@sebgroup/green-angular",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/cdk": "^12 || ^13 || ^14",
-    "@angular/common": "^12 || ^13 || ^14",
-    "@angular/core": "^12 || ^13 || ^14",
-    "@angular/forms": "^12 || ^13 || ^14",
-    "@angular/platform-browser": "^12 || ^13 || ^14",
-    "@angular/router": "^12 || ^13 || ^14",
-    "rxjs": "^6.5.3 || ^7.4.0"
+    "@angular/cdk": ">=12",
+    "@angular/common": ">=12",
+    "@angular/core": ">=12",
+    "@angular/forms": ">=12",
+    "@angular/platform-browser": ">=12",
+    "@angular/router": ">=12",
+    "rxjs": ">=6.5.3"
   },
   "dependencies": {
     "@sebgroup/chlorophyll": "^0.1.1",
