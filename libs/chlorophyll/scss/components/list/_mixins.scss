@@ -51,7 +51,20 @@ $_border-color: var(--sg-border-color);
   }
 }
 
-@mixin table-list() {
+@mixin check-list() {
+  > li {
+    @include common.padding-horizontal(7);
+
+    &::before {
+      content: $check-icon;
+      height: 1rem;
+      left: 0.5rem;
+      width: 1rem;
+    }
+  }
+}
+
+@mixin add-list-group() {
   > div {
     @include common.padding-vertical(3);
     @include common.padding-horizontal(5);
@@ -71,20 +84,7 @@ $_border-color: var(--sg-border-color);
   }
 }
 
-@mixin check-list() {
-  > li {
-    @include common.padding-horizontal(7);
-
-    &::before {
-      content: $check-icon;
-      height: 1rem;
-      left: 0.5rem;
-      width: 1rem;
-    }
-  }
-}
-
-@mixin table-list-caption() {
+@mixin add-list-group-caption() {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(3);
   @include common.font-size('s');
@@ -104,4 +104,59 @@ $_border-color: var(--sg-border-color);
       width: 1.5rem;
     }
   }
+}
+
+@mixin add-value-list() {
+  dt, dd {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  dd {
+    font-weight: 400;
+  }
+
+  &:not(.gds-list--horizontal) dd {
+    margin-block-end: 1rem;
+  }
+
+  &.gds-list--inverted {
+    dt {
+      font-weight: 400;
+    }
+
+    dd {
+      font-weight: 500;
+    }
+  }
+
+  &.gds-list--horizontal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    dt, dd {
+      padding: .5rem 0;
+    }
+
+    dt {
+      text-align: start;
+      justify-content: start;
+    }
+
+    dd {
+      text-align: end;
+      justify-content: end;
+    }
+  }
+
+}
+
+@mixin table-list() {
+  @debug 'table-list mixin is deprecated, use the add-list-group mixin instead';
+  @include add-list-group()
+}
+
+@mixin table-list-caption() {
+  @debug 'table-list-caption mixin is deprecated, use the add-list-group-caption mixin instead';
+  @include add-list-group-caption()
 }

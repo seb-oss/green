@@ -7,7 +7,7 @@ export const Template = ({ children, ...props }) => (
 
 export const TableListTemplate = ({ ...props }) => <List {...props} />
 
-<Meta title="Components/List" component={List} />
+<Meta title="Components/Lists" component={List} />
 
 # List
 
@@ -24,8 +24,6 @@ export const TableListTemplate = ({ ...props }) => <List {...props} />
     {Template.bind({})}
   </Story>
 </Canvas>
-
-### Unordered List
 
 <Canvas>
   <Story
@@ -53,17 +51,21 @@ export const TableListTemplate = ({ ...props }) => <List {...props} />
   </Story>
 </Canvas>
 
-### Table List
+### Value list
+
+
+
+### List group
 
 <Canvas>
   <Story
-    name="Table-list"
+    name="List group"
     parameters={{
       componentIds: ['component-list']
     }}
     args={{
       listType: 'table',
-      tableCaption: 'Table List',
+      tableCaption: 'List group',
       tableData: [
         { title: 'First', definition: ['Value 1', 'Value 2'] },
         { title: 'Second', definition: ['Value 1', 'Value 2'] },
