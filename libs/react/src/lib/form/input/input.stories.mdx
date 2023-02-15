@@ -70,11 +70,14 @@ When placed after an input the form info also shows the state of the input if ei
 ### Expandable information
 
 <Canvas>
-  <TextInput
-    label="Text Input"
-    info="Info"
-    expandableInfo="This is some expandable information that is very long as was created that way in order to test how it preforms in such a situation"
-  />
+  <Story name="Expandable information">
+    <NumberInput
+      label="Hur mycket vill du låna?"
+      info="För att du ska kunna få låna pengar behöver vi veta hur mycket"
+      expandableInfo="This is some expandable information that is very long as was created that way in order to test how it preforms in such a situation"
+      expandableInfoButtonLabel="Toggle additional information"
+    />
+  </Story>
 </Canvas>
 
 <ArgsTable story="TextInput" />

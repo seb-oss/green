@@ -1,10 +1,5 @@
 import IconButton from '../form/iconButton/iconButton'
-import {
-  delay,
-  IndicatorType,
-  IValidator,
-  validateClassName,
-} from '@sebgroup/extract'
+import { debounce, delay, IValidator } from '@sebgroup/extract'
 import React, {
   ReactNode,
   useEffect,
@@ -20,9 +15,9 @@ interface FormItemProps {
   labelInformation?: string
   validator?: IValidator
   expandableInfo?: string
-  inputId?: string | number
+  inputId?: string
   children: ReactNode
-  iconLabel?: string
+  expandableInfoButtonLabel?: string
 }
 
 export const FormItem = ({
@@ -32,7 +27,7 @@ export const FormItem = ({
   validator,
   inputId,
   children,
-  iconLabel,
+  expandableInfoButtonLabel,
 }: FormItemProps) => {
   const expandableInnerRef = useRef<HTMLDivElement>(null)
   const expandableRef = useRef<HTMLDivElement>(null)
@@ -47,23 +42,26 @@ export const FormItem = ({
   }, [])
 
   useEffect(() => {
-    function transitionListener(event: TransitionEvent) {
-      console.log('transitionend', event)
-    }
+    const handleResize = debounce(function setExpandableHeightAfterResize() {
+      isExpanded &&
+        expandableInnerRef.current &&
+        setExpandableHeight(expandableInnerRef.current['clientHeight'])
+    }, 300)
 
     if (expandableRef.current) {
-      expandableRef.current.addEventListener(
-        'transitionend',
-        transitionListener
-      )
+      window.addEventListener('resize', handleResize)
     }
-  }, [])
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isExpanded, expandableInnerRef])
 
   return (
     <div className="gds-form-item">
       {expandableInfo && <div className="form-item_backdrop"></div>}
       <div className="gds-form-item__header">
-        <div className="form-item_labels">
+        <div className="gds-form-item__labels">
           {label && <label htmlFor={inputId}>{label}</label>}
           {labelInformation && (
             <div className="form-info" id={`${inputId}_info`}>
@@ -79,6 +77,10 @@ export const FormItem = ({
               if (!isExpanded) {
                 setIsHidden(false)
                 await delay(10)
+                expandableInnerRef.current &&
+                  setExpandableHeight(
+                    expandableInnerRef.current['clientHeight']
+                  )
                 setIsExpanded(true)
               } else {
                 setIsExpanded(false)
@@ -93,7 +95,9 @@ export const FormItem = ({
               focusable="false"
               aria-labelledby={`gds-${inputId}-icon-label`}
             >
-              <title id={`gds-${inputId}-icon-label`}>{iconLabel}</title>
+              <title id={`gds-${inputId}-icon-label`}>
+                {expandableInfoButtonLabel}
+              </title>
               <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" />
             </svg>
           </IconButton>

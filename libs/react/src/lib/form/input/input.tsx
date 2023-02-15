@@ -23,7 +23,8 @@ export type Renderer = (
   label?: string,
   info?: string,
   validator?: IValidator,
-  expandableInfo?: string
+  expandableInfo?: string,
+  expandableInfoButtonLabel?: string
 ) => JSX.Element
 
 export const RenderInput: Renderer = (
@@ -34,7 +35,8 @@ export const RenderInput: Renderer = (
   label,
   info,
   validator,
-  expandableInfo
+  expandableInfo,
+  expandableInfoButtonLabel
 ) => {
   const { value, ...inputProps } = useInput(props, onChange, onChangeInput)
 
@@ -52,6 +54,7 @@ export const RenderInput: Renderer = (
       labelInformation={info}
       label={label}
       expandableInfo={expandableInfo}
+      expandableInfoButtonLabel={expandableInfoButtonLabel}
       inputId={inputProps.id}
     >
       <input
@@ -131,6 +134,7 @@ export const TextInput = ({
   onChangeInput,
   validator,
   expandableInfo,
+  expandableInfoButtonLabel,
   ...props
 }: TextInputProps) =>
   RenderInput(
@@ -141,7 +145,8 @@ export const TextInput = ({
     label,
     info,
     validator,
-    expandableInfo
+    expandableInfo,
+    expandableInfoButtonLabel
   )
 
 export const EmailInput = ({
@@ -160,9 +165,21 @@ export const NumberInput = ({
   onChange,
   onChangeInput,
   validator,
+  expandableInfo,
+  expandableInfoButtonLabel,
   ...props
 }: NumberInputProps) =>
-  RenderInput('number', props, onChange, onChangeInput, label, info, validator)
+  RenderInput(
+    'number',
+    props,
+    onChange,
+    onChangeInput,
+    label,
+    info,
+    validator,
+    expandableInfo,
+    expandableInfoButtonLabel
+  )
 
 export const Checkbox = ({
   label,

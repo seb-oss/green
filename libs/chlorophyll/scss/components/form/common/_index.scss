@@ -13,8 +13,12 @@ form,
   @include mixins.add-form-control;
 }
 
-.form-group {
+.form-group, .gds-form-item {
   @include mixins.add-form-group;
+}
+
+.gds-form-item {
+  @include mixins.add-form-item;
 }
 
 .form-info {
