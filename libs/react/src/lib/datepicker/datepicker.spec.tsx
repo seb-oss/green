@@ -6,6 +6,8 @@ import { Datepicker } from './datepicker'
 
 const tick = (ms?: number) => new Promise<void>((r) => setTimeout(r, ms || 0))
 
+const pad = (num: number): string => `${num < 10 ? '0' : ''}${num}`
+
 describe('Datepicker', () => {
   it('renders', async () => {
     const component = render(<Datepicker />)
@@ -75,6 +77,24 @@ describe('Datepicker', () => {
       const calendar = await findByRole('dialog')
       await act(() => tick())
       expect(calendar.className.trim()).toEqual('popover popover-datepicker')
+    })
+    it('returns chosen date in onChange', async () => {
+      const user = userEvent.setup()
+      const onChangeMock = jest.fn()
+      const { findByRole, findByText } = render(<Datepicker onChange={date => onChangeMock(formatISO(date, { representation: 'date' }))} />)
+      await act(() => tick())
+
+      const button = await findByRole('button')
+      await act(() => user.click(button))
+
+      const _15th = await findByText('15')
+      user.click(_15th)      
+      await act(() => tick())
+
+      const todaysDate = new Date()
+      const expectedDate = `${todaysDate.getUTCFullYear()}-${pad(todaysDate.getUTCMonth()+1)}-15`
+      expect(onChangeMock).toBeCalledTimes(1)
+      expect(onChangeMock).toBeCalledWith(expectedDate)
     })
   })
 })

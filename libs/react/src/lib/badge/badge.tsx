@@ -30,7 +30,7 @@ export function Badge({
     if (!!customColor || !!customBackgroundColor) {
       setType('')
     }
-  }, [])
+  }, [badgeType, customColor, customBackgroundColor])
 
   return !isClosed ? (
     <span
@@ -49,6 +49,7 @@ export function Badge({
           onClick={() => setIsClosed(true)}
         >
           {closeText}
+          <i></i>
         </button>
       )}
     </span>

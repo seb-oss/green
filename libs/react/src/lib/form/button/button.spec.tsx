@@ -5,7 +5,7 @@ describe('Button', () => {
   it('renders', () => {
     render(<Button>Hello</Button>)
 
-    expect(screen.getByRole('button')).toHaveTextContent('Hello')
+    expect(screen.getByRole('button').textContent).toEqual('Hello')
   })
   it('sets type', () => {
     render(<Button type="submit">Hello</Button>)

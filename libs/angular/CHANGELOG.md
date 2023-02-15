@@ -2,6 +2,76 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.47...@sebgroup/green-angular@0.0.1) (2023-01-27)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+* `extract` updated to version `1.0.0`
+
+### Bug Fixes
+
+* 🐛 removing trailing comma ([a0ff496](https://github.com/sebgroup/green/commit/a0ff4965a8f1a85e0d1fde9f037e2b0061ed2560))
+
+
+
+# [1.0.0-beta.47](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.46...@sebgroup/green-angular@1.0.0-beta.47) (2023-01-26)
+
+
+
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.45...@sebgroup/green-angular@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 not updated translations on texts changes fix ([c572b1c](https://github.com/sebgroup/green/commit/c572b1ce0675cc438f4a21ab8a48c6dd6d641273))
+* **accordion:** build error missing export ([746a250](https://github.com/sebgroup/green/commit/746a250a490e22d7a97e43eac56f587b16a28c0c))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+* 🎸 Angular modal focus functionality ([bd41200](https://github.com/sebgroup/green/commit/bd41200a3c0e398ff68deaf40ba83d2ecc4b0f9a))
+
+
+### BREAKING CHANGES
+
+* 🧨 -
+
+✅ Closes: -
+
+
+
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.44...@sebgroup/green-angular@1.0.0-beta.45) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 dropdown formControl reset functionality ([c0716ad](https://github.com/sebgroup/green/commit/c0716ad47aa92dac2152471654c4bfba2893beea)), closes [#690](https://github.com/sebgroup/green/issues/690)
+* 🐛 export button module ([98fa6f4](https://github.com/sebgroup/green/commit/98fa6f4ba328abf772188a642062feb47ec1f6b2))
+
+
+### BREAKING CHANGES
+
+* 🧨 --
+
+
+
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.43...@sebgroup/green-angular@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 lint issues ([803b402](https://github.com/sebgroup/green/commit/803b402a23a69dbb21fac75963768074ffb85132))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
 # [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0-beta.42...@sebgroup/green-angular@1.0.0-beta.43) (2022-12-12)
 
 

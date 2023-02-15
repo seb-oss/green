@@ -2,10 +2,9 @@ import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Stepper, StepperProps } from './stepper'
 
-const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
 jest.setTimeout(50000)
 
-describe('Dropdown', () => {
+describe('Stepper', () => {
   let props: StepperProps
   beforeEach(() => {
     props = {}
@@ -33,7 +32,10 @@ describe('Dropdown', () => {
     expect(await findByText('Description')).toBeTruthy()
   })
   it('renders status message', async () => {
-    props.statusMessage = 'Status'
+    props.validator = {
+      message: 'Status',
+      indicator: 'error'
+    }
     const { findByText } = render(<Stepper {...props} />)
 
     expect(await findByText('Status')).toBeTruthy()
@@ -53,7 +55,7 @@ describe('Dropdown', () => {
     it('goes up', async () => {
       const user = userEvent.setup()
       const { buttonUp, input } = await renderComponent()
-      
+
       await user.click(buttonUp)
       await waitFor(() =>
         expect(input.value).toEqual('1')
@@ -62,7 +64,7 @@ describe('Dropdown', () => {
     it('goes down', async () => {
       const user = userEvent.setup()
       const { buttonDown, input } = await renderComponent()
-      
+
       await user.click(buttonDown)
       await waitFor(() =>
         expect(input.value).toEqual('-1')
@@ -71,7 +73,7 @@ describe('Dropdown', () => {
     it('respects max', async () => {
       const user = userEvent.setup()
       const { buttonUp, input } = await renderComponent({ value: 8, max: 10 })
-      
+
       await user.click(buttonUp)
       expect(input.value).toEqual('9')
 
@@ -84,7 +86,7 @@ describe('Dropdown', () => {
     it('respects min', async () => {
       const user = userEvent.setup()
       const { buttonDown, input } = await renderComponent({ value: 2, min: 0 })
-      
+
       await user.click(buttonDown)
       expect(input.value).toEqual('1')
 

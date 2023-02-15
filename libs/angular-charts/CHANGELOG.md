@@ -2,6 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.45...@sebgroup/green-angular-charts@0.0.1) (2023-01-27)
+
+### Dependency Updates
+
+* `charts` updated to version `0.1.0`
+* `chlorophyll` updated to version `1.0.0`
+
+
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.44...@sebgroup/green-angular-charts@1.0.0-beta.45) (2023-01-26)
+
+
+
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.43...@sebgroup/green-angular-charts@1.0.0-beta.44) (2023-01-26)
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.42...@sebgroup/green-angular-charts@1.0.0-beta.43) (2023-01-12)
+
+
+
+# [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.41...@sebgroup/green-angular-charts@1.0.0-beta.42) (2022-12-23)
+
+
+
 # [1.0.0-beta.41](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0-beta.40...@sebgroup/green-angular-charts@1.0.0-beta.41) (2022-12-12)
 
 

@@ -1,4 +1,4 @@
-import { ModalRole, ModalType, Size } from '@sebgroup/extract'
+import { ModalType, Size } from '@sebgroup/extract'
 import { MouseEvent, ReactNode } from 'react'
 import Button from '../form/button/button'
 
@@ -27,6 +27,7 @@ const ModalHeader = ({ header = '', onClose }: Partial<ModalProps>) => {
       <h3>{header}</h3>
       <button className="close" onClick={handleClose}>
         <span className="sr-only">Close</span>
+        <i></i>
       </button>
     </div>
   )

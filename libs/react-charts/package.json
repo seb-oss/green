@@ -1,13 +1,13 @@
 {
   "name": "@sebgroup/green-react-charts",
-  "version": "1.0.0-beta.41",
+  "version": "0.0.1",
   "peerDependencies": {
-    "@sebgroup/chlorophyll": "^1.0.0-beta.43",
+    "@sebgroup/chlorophyll": "^0.1.0",
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-charts": "^1.0.0-beta.40"
+    "@sebgroup/green-charts": "^0.0.1"
   },
   "description": "React components built on top of @sebgroup/green-charts.",
   "repository": {

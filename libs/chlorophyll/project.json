@@ -82,8 +82,6 @@
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/${projectName}@",
-        "releaseAs": "prerelease",
-        "preid": "beta",
         "trackDeps": true,
         "push": true,
         "postTargets": ["chlorophyll:publish", "chlorophyll:github"]
@@ -93,8 +91,7 @@
       "executor": "@jscutlery/semver:github",
       "options": {
         "tag": "${tag}",
-        "notes": "${notes}",
-        "prerelease": true
+        "notes": "${notes}"
       }
     },
     "publish": {

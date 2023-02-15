@@ -1,0 +1,22 @@
+@mixin add-select {
+  .gsd--select-wrapper {
+    display: flex;
+    position: relative;
+
+    select {
+      flex: 1;
+      display: block;
+      padding: .625rem 3rem .625rem 1rem;
+      border-radius: .25rem;
+      border: 1px solid var(--gds-ref-pallet-base600);
+    }
+
+    svg {
+      position: absolute;
+      inset: 0 1rem 0 auto;
+      margin: auto;
+      transform: scale(0.5766666667);
+      transform-origin: 50%;
+    }
+  }
+}

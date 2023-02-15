@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react'
-import { ButtonType, ButtonVariant } from '@sebgroup/extract'
+import { ButtonSize, ButtonType, ButtonVariant } from '@sebgroup/extract'
 
 /* eslint-disable-next-line */
 export interface ButtonProps {
@@ -9,7 +9,7 @@ export interface ButtonProps {
   active?: boolean
   onClick?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
-  size?: 'small'
+  size?: ButtonSize
 }
 
 export function Button ({
@@ -25,7 +25,7 @@ export function Button ({
   const classNames: string[] = []
   if (variant) classNames.push(variant)
   if (active) classNames.push('active')
-  if (size) classNames.push('small')
+  if (size) classNames.push(size)
 
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick

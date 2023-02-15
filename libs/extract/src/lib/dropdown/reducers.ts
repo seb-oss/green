@@ -90,7 +90,7 @@ export const create = ({
     },
     elements: {
       toggler: {
-        attributes: { id: `${id}_toggle`, 'aria-owns': id},
+        attributes: { id: `${id}_toggle`, 'aria-owns': id },
       },
       listbox: {
         attributes: { id },
@@ -253,7 +253,7 @@ export const selectByValue = (
 
   if (selection && dropdown.isMultiSelect && !Array.isArray(selection)) {
     console.warn(
-      'Dropdown is marked as multiselect but recieved a non-array value:',
+      'Dropdown is marked as multiselect but received a non-array value:',
       selection
     )
   }
@@ -268,8 +268,7 @@ export const selectByValue = (
     })
   })
   const selectedOptions = options.filter((o) => o.selected)
-
-  return reduce(dropdown, {
+  const newDropdown = reduce(dropdown, {
     value: selection,
     texts: {
       select: selectionText(selectedOptions, dropdown.display, dropdown.texts),
@@ -283,6 +282,14 @@ export const selectByValue = (
     },
     options,
   })
+
+  // reset (null) value does not override previous value in the reduce function
+  if (selection === null) {
+    newDropdown.value = null
+    newDropdown.isTouched = false
+  }
+
+  return newDropdown
 }
 
 /**
@@ -412,11 +419,4 @@ export const search = (
         ? { ...option, classes: removeClass(option.classes, 'hidden') }
         : { ...option, classes: addClass(option.classes, 'hidden') }
     }),
-  } as Partial<AbstractDropdown>)
-
-export const resetTouchedProperty = (
-  dropdown: AbstractDropdown
-): AbstractDropdown =>
-  reduce(dropdown, {
-    isTouched: false,
   } as Partial<AbstractDropdown>)

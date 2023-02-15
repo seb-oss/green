@@ -2,6 +2,119 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.2...@sebgroup/green-react@0.2.0) (2023-02-02)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+* `extract` updated to version `1.0.0`
+
+### Features
+
+* 🎸 react select component ([91f6fa8](https://github.com/sebgroup/green/commit/91f6fa883a68ac0dd3dd6c03ef282edb877ede08))
+
+
+
+## [0.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.1...@sebgroup/green-react@0.1.2) (2023-02-01)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+
+
+## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.0...@sebgroup/green-react@0.1.1) (2023-02-01)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+
+
+## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.0...@sebgroup/green-react@0.1.1) (2023-02-01)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+
+
+# [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.46...@sebgroup/green-react@0.1.0) (2023-01-27)
+
+### Dependency Updates
+
+* `chlorophyll` updated to version `1.0.0`
+* `extract` updated to version `1.0.0`
+
+### Features
+
+* 🎸 adding validation on stepper component ([afacee1](https://github.com/sebgroup/green/commit/afacee1fe0e6b8a6a0b57a34cbe6d192dab0d1a9))
+
+
+
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.45...@sebgroup/green-react@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 removing empty files ([922e332](https://github.com/sebgroup/green/commit/922e33296e09a7975b47fb0559f49b2469db2dc6))
+
+
+
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.44...@sebgroup/green-react@1.0.0-beta.45) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 adding for attribute to dropdown label ([2b6b47d](https://github.com/sebgroup/green/commit/2b6b47d1cc191d6ff5078875668504f234af0440))
+* 🐛 fixing alert ribbon close button aria-label ([7fe0649](https://github.com/sebgroup/green/commit/7fe0649508252addbaaffc3e78be93fdff69e108))
+
+
+### Code Refactoring
+
+* 💡 AlertRibbon ([1f31705](https://github.com/sebgroup/green/commit/1f31705235e7edcc63a35cd16018c881d72323a0))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+
+
+### BREAKING CHANGES
+
+* 🧨 Renaming Alert export to AlertRibbon, changing styling form
+[role="alert"] to .alert-ribbon
+
+✅ Closes: 659
+
+
+
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.43...@sebgroup/green-react@1.0.0-beta.44) (2023-01-12)
+
+
+### Bug Fixes
+
+* 🐛 add jest-dom in tsconfig ([a96d1c0](https://github.com/sebgroup/green/commit/a96d1c04b233025b01af558962726abc57d531f9))
+* 🐛 remove dependency ([10bce05](https://github.com/sebgroup/green/commit/10bce0547ec9ab04165a6735ba22f774e62b72b8))
+* 🐛 reorder stories ([a57f47f](https://github.com/sebgroup/green/commit/a57f47fd844abfddf58d2d697a033b8de5a07482))
+
+
+
+# [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.42...@sebgroup/green-react@1.0.0-beta.43) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 onChange, onOpen and onClose for Accordion ([d25814c](https://github.com/sebgroup/green/commit/d25814c6c0d4725f7a9313a1d11d972cbe8f4da4))
+* **datepicker:** export Datepicker ([fe212ea](https://github.com/sebgroup/green/commit/fe212ea55b00e2375f63bc8d9ecb4ed8e936724f))
+* **datepicker:** implement onChange ([d253bc6](https://github.com/sebgroup/green/commit/d253bc6131383be4ec9ccde71dd87e3386394176))
+
+
+
 # [1.0.0-beta.42](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0-beta.41...@sebgroup/green-react@1.0.0-beta.42) (2022-12-12)
 
 

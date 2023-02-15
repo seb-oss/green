@@ -144,22 +144,15 @@ export class NggDropdownComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (
       this.handler &&
-      (changes.id || changes.text || changes.loop || changes.options)
+      (changes.id || changes.texts || changes.loop || changes.options)
     ) {
+      
       this.handler.update(this.props)
     }
   }
 
   writeValue(value: any): void {
     this.value = value
-    if (
-      value === null &&
-      this.dropdown?.isTouched &&
-      this.control?.control?.untouched
-    ) {
-      this.handler?.resetTouchedState()
-      this.cd.detectChanges()
-    }
   }
 
   registerOnChange(fn: () => unknown): void {

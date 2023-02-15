@@ -35,6 +35,7 @@ export interface Datepicker {
   toggle: () => void
   destroy: () => void
   active$: Observable<boolean>
+  selectedDate$: Observable<Date>
 }
 
 export interface DatepickerData {
@@ -72,6 +73,7 @@ export interface DatepickerOptions {
   showWeeks?: boolean
   minDate?: Date
   maxDate?: Date
+  onChange?: (selectedDate: Date) => void
 }
 
 const createState = (
@@ -183,9 +185,13 @@ export const createDatepicker = (
     startOfMinDate,
     endOfMaxDate
   )
+  
   const unsubscribe$ = new Subject()
   const active$ = new ReplaySubject<boolean>(1)
-  // add input mask to date input // TODO: add support for other date formats
+  const selectedDate$ = new Subject<Date>()
+
+  // add input mask to date input
+  // TODO: add support for other date formats
   Inputmask({
     alias: 'datetime',
     inputFormat: 'yyyy-mm-dd',
@@ -310,6 +316,7 @@ export const createDatepicker = (
         endOfMaxDate
       )
       listener(data)
+      selectedDate$.next(new Date(date))
       if (closeOnSelect) {
         dp.close()
       }
@@ -391,6 +398,7 @@ export const createDatepicker = (
     },
     state: createState(false, startOfMinDate, endOfMaxDate),
     active$: active$.asObservable(),
+    selectedDate$: selectedDate$.asObservable()
   }
 
   listener(data, dp.state)

@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ModalType, Size } from '@sebgroup/extract';
+import { ConfigurableFocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 import {
     disableBodyScroll,
     enableBodyScroll,
-  } from "body-scroll-lock";
+} from "body-scroll-lock";
 
 @Component({
     selector: 'ngg-modal',
@@ -11,14 +12,28 @@ import {
     templateUrl: './modal.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NggModalComponent implements OnDestroy {
+export class NggModalComponent implements OnDestroy, OnInit {
     @Input() public modalType?: ModalType
     @Input() public header?: string
     @Input() public confirmLabel?: string
     @Input() public dismissLabel?: string
     @Input() public size?: Size
+    @Input() public get trapFocus(): boolean | undefined {
+        return this._trapFocus;
+    }
+    public set trapFocus(value: boolean | undefined) {
+        this._trapFocus = value;
+        
+        if (value) {
+            if (this._isOpen) {
+                this.enableFocusTrap();
+            }
+        } else {
+            this.disableFocusTrap();
+        }
+    }
 
-    @Input() 
+    @Input()
     public get isOpen(): boolean | undefined {
         return this._isOpen;
     }
@@ -26,8 +41,13 @@ export class NggModalComponent implements OnDestroy {
         this._isOpen = value;
 
         if (value) {
+            if (this.trapFocus) {
+                this.enableFocusTrap();
+            }
+
             disableBodyScroll(this.ref.nativeElement);
         } else {
+            this.disableFocusTrap();
             enableBodyScroll(this.ref.nativeElement);
         }
     }
@@ -36,14 +56,24 @@ export class NggModalComponent implements OnDestroy {
     @Output() public closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
     @Output() public confirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
     @Output() public dismiss: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-    
+
     @HostBinding('class.open') get open() { return this.isOpen; }
     @ViewChild('backdrop') private backdropRef?: ElementRef<HTMLInputElement>;
     private _isOpen?: boolean;
-    
-    constructor(private ref: ElementRef<HTMLElement>) {
+    private _trapFocus?: boolean;
+    private configurableFocusTrap: ConfigurableFocusTrap;
+
+    constructor(private ref: ElementRef<HTMLElement>, private configurableFocusTrapFactory: ConfigurableFocusTrapFactory) {
+        this.configurableFocusTrap = this.configurableFocusTrapFactory.create(this.ref.nativeElement);
     }
-    
+
+    ngOnInit(): void {
+        if (this._isOpen && this.trapFocus) 
+           this.enableFocusTrap(); 
+        else
+            this.disableFocusTrap();
+    }
+
     public handleCloseClick(event: MouseEvent) {
         this.closeModal(event);
     }
@@ -52,13 +82,13 @@ export class NggModalComponent implements OnDestroy {
         if (event.target == this.backdropRef?.nativeElement)
             this.closeModal(event);
     }
-    
+
     public handleDismiss(event: MouseEvent) {
-            this.dismiss.emit(event);
+        this.dismiss.emit(event);
     }
-    
+
     public handleConfirm(event: MouseEvent) {
-            this.confirm.emit(event);
+        this.confirm.emit(event);
     }
 
     private closeModal(event: MouseEvent) {
@@ -70,8 +100,22 @@ export class NggModalComponent implements OnDestroy {
             this.isOpenChange.emit(this.isOpen);
         }
     }
+
+    private enableFocusTrap() {
+        if (this.configurableFocusTrap) {
+            this.configurableFocusTrap.enabled = true;
+            this.configurableFocusTrap.focusInitialElementWhenReady();
+        }
+    }
     
+    private disableFocusTrap() {
+        if (this.configurableFocusTrap) {
+            this.configurableFocusTrap.enabled = false;
+        }
+    }
+
     ngOnDestroy(): void {
+        this.configurableFocusTrap?.destroy();
         enableBodyScroll(this.ref.nativeElement);
     }
 }
@@ -84,6 +128,7 @@ export class NggModalComponent implements OnDestroy {
     <h3 data-testid="modal-header-text">{{header}}</h3>
     <button data-testid="modal-close-button" class="close" (click)="this.handleClose($event)">
         <span className="sr-only">Close</span>
+        <i></i>
     </button>
     `
 })
@@ -92,7 +137,7 @@ export class NggModalHeaderComponent {
     @Output() closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     handleClose(event: MouseEvent) {
-            this.closed.emit(event);
+        this.closed.emit(event);
     }
 
 }
@@ -122,10 +167,10 @@ export class NggModalFooterComponent {
     @Output() confirm: EventEmitter<MouseEvent> = new EventEmitter();
 
     handleDismiss(event: MouseEvent) {
-            this.dismiss.emit(event);
+        this.dismiss.emit(event);
     }
 
     handleConfirm(event: MouseEvent) {
-            this.confirm.emit(event);
+        this.confirm.emit(event);
     }
 }

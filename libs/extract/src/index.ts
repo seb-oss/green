@@ -1,4 +1,4 @@
-export * from './lib/alert'
+export * from './lib/alert-ribbon'
 export * from './lib/badge'
 export * from './lib/button'
 export * from './lib/progress-circle'

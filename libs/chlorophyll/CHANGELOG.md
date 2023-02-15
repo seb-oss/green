@@ -2,6 +2,98 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [0.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.2...@sebgroup/chlorophyll@0.2.0) (2023-02-02)
+
+
+### Features
+
+* 🎸 react select component ([91f6fa8](https://github.com/sebgroup/green/commit/91f6fa883a68ac0dd3dd6c03ef282edb877ede08))
+
+
+
+## [0.1.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.1...@sebgroup/chlorophyll@0.1.2) (2023-02-01)
+
+
+### Bug Fixes
+
+* 🐛 move transition to hover ([b1444a2](https://github.com/sebgroup/green/commit/b1444a2151bf8743570db2062d5b8570bc4f3b15))
+
+
+
+## [0.1.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.0...@sebgroup/chlorophyll@0.1.1) (2023-02-01)
+
+
+### Bug Fixes
+
+* 🐛 validation indicator does not exceed group element ([9da4031](https://github.com/sebgroup/green/commit/9da40317ad930681c2aa8d72a55fb47665fd49a0))
+
+
+
+# [0.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.47...@sebgroup/chlorophyll@0.1.0) (2023-01-27)
+
+
+### Features
+
+* 🎸 adding validation on stepper component ([afacee1](https://github.com/sebgroup/green/commit/afacee1fe0e6b8a6a0b57a34cbe6d192dab0d1a9))
+
+
+
+# [1.0.0-beta.47](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.46...@sebgroup/chlorophyll@1.0.0-beta.47) (2023-01-26)
+
+
+
+# [1.0.0-beta.46](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.45...@sebgroup/chlorophyll@1.0.0-beta.46) (2023-01-26)
+
+
+### Bug Fixes
+
+* 🐛 adding max-width 75ch to alert-ribbon content ([9afcca4](https://github.com/sebgroup/green/commit/9afcca4c020e0dad5ee3d96d0c79d851ed533342))
+
+
+### Code Refactoring
+
+* 💡 AlertRibbon ([1f31705](https://github.com/sebgroup/green/commit/1f31705235e7edcc63a35cd16018c881d72323a0))
+* 💡 changing to alert-ribbon__content class ([db04684](https://github.com/sebgroup/green/commit/db046843b852744d420494faa6428156979f77bc))
+
+
+### Features
+
+* 🎸 add new large button size for jumbotrons/heroes ([2b2c41c](https://github.com/sebgroup/green/commit/2b2c41cbd0d28ca28f65e598b92ccaec65107d65))
+* 🎸 adding tertiary button variant ([0c9f8bc](https://github.com/sebgroup/green/commit/0c9f8bcbe41e3ea5a162851a00a00e3bd2ad140f))
+
+
+### BREAKING CHANGES
+
+* 🧨 Not using footer element in Alert Ribbon because it's incorrect
+according to html spec
+* 🧨 Renaming Alert export to AlertRibbon, changing styling form
+[role="alert"] to .alert-ribbon
+
+✅ Closes: 659
+
+
+
+# [1.0.0-beta.45](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.44...@sebgroup/chlorophyll@1.0.0-beta.45) (2023-01-12)
+
+
+
+# [1.0.0-beta.44](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.43...@sebgroup/chlorophyll@1.0.0-beta.44) (2022-12-23)
+
+
+### Bug Fixes
+
+* 🐛 header 3 size on mobile ([0362098](https://github.com/sebgroup/green/commit/03620987ab32978e3026786a6221aacb0bc8ff41))
+* 🐛 hiding closed accordion items and removing transitioning ([5952197](https://github.com/sebgroup/green/commit/5952197e03dbe44ea8124c95e2e6595e7f472a34))
+* 🐛 Usage of close in alert, badge, button, card & modal ([71f2cb3](https://github.com/sebgroup/green/commit/71f2cb32b4a002118e8500c90115ccb294091ce5))
+
+
+### Features
+
+* 🎸 Accordion ([71c902a](https://github.com/sebgroup/green/commit/71c902a338584f4a7108db4776bda6eea48b884b))
+* 🎸 new progress circle component for angular ([31a1fd2](https://github.com/sebgroup/green/commit/31a1fd21b4cab41ad6590646cd110dea5db629db))
+
+
+
 # [1.0.0-beta.43](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0-beta.42...@sebgroup/chlorophyll@1.0.0-beta.43) (2022-12-12)
 
 

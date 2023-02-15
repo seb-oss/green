@@ -20,13 +20,18 @@ export const useStepper = (
   const [stepper, setStepper] = useState<AbstractStepper>(pStepper as AbstractStepper)
   const [data, setData] = useState<StepperData>({ id, value, min, max, step })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (max !== data.max) stepper.setMax(max) }, [stepper, max])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (min !== data.min) stepper.setMin(min) }, [stepper, min])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (step !== data.step) stepper.setStep(step || 1) }, [stepper, step])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (value !== data.value) stepper.setValue(value || 0, false) }, [stepper, value])
 
   useEffect(() => {
     setStepper(createStepper({ id, value, min, max, step, onChange }, setData))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [stepper, data]
