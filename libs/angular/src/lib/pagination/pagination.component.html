@@ -1,0 +1,81 @@
+<nav
+  [class]="'pagination ' + size"
+  role="navigation"
+  aria-label="Pagination"
+  *ngIf="totalPages > 1"
+>
+  <ul>
+    <li *ngIf="hasPrevious()">
+      <a
+        tabindex="0"
+        (click)="gotoPrevious()"
+        aria-label="Goto Previous Page"
+        role="button"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+          />
+        </svg>
+      </a>
+    </li>
+
+    <li>
+      <a
+        tabindex="0"
+        (click)="gotoFirst()"
+        [attr.aria-current]="pageIndex === 0 ? 'page' : null"
+        aria-label="Goto First Page"
+        role="button"
+      >
+        1
+      </a>
+    </li>
+    <li *ngIf="pageIndicies[0] > 1" aria-hidden="true">...</li>
+
+    <li *ngFor="let index of pageIndicies">
+      <a
+        tabindex="0"
+        (click)="goto(index)"
+        [attr.aria-current]="pageIndex === index ? 'page' : null"
+        [attr.aria-label]="'Goto Page ' + (index + 1)"
+        role="button"
+      >
+        {{ index + 1 }}
+      </a>
+    </li>
+
+    <li
+      *ngIf="pageIndicies[pageIndicies.length - 1] < totalPages - 2"
+      aria-hidden="true"
+    >
+      ...
+    </li>
+
+    <li>
+      <a
+        tabindex="0"
+        (click)="gotoLast()"
+        [attr.aria-current]="pageIndex === totalPages - 1 ? 'page' : null"
+        aria-label="Goto Last Page"
+        role="button"
+      >
+        {{ totalPages }}
+      </a>
+    </li>
+    <li *ngIf="hasNext()">
+      <a
+        tabindex="0"
+        (click)="gotoNext()"
+        aria-label="Goto Next Page"
+        role="button"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+          />
+        </svg>
+      </a>
+    </li>
+  </ul>
+</nav>
