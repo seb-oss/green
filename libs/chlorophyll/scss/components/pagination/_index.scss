@@ -1,0 +1,5 @@
+@use './mixins';
+
+nav.pagination {
+  @include mixins.add-pagination();
+}
