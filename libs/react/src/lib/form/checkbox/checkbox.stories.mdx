@@ -3,7 +3,7 @@ import { Checkbox } from '../input/input'
 
 export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
-<Meta title="Components/Form/Checkbox" component={Checkbox} />
+<Meta title="Components/Checkbox" component={Checkbox} />
 
 # Checkbox
 
@@ -39,6 +39,21 @@ Simple Checkbox component
     <Checkbox label="Checkbox" disabled />
     <Checkbox label="Checkbox" disabled checked />
   </form>
+</Canvas>
+
+## Validation
+
+<Canvas>
+  <Story name="invalid"
+         args={{
+           label: 'Invalid',
+           validator: {
+             indicator: 'error',
+             message: 'Error'
+           }}}
+  >
+    {CheckboxTemplate.bind({})}
+  </Story>
 </Canvas>
 
 ## Validation

@@ -182,6 +182,29 @@ Select component.
   </Story>
 </Canvas>
 
+### Expandlable information
+<Canvas>
+  <Story
+    name="Expandable information"
+    args={{
+      label: "How many will live in your house?",
+      labelInformation: "Include both children and adults",
+      expandableInfo: "In order for us to give a correct estimation we need you to eneter how many will live in your house",
+      expandableInfoButtonLabel: "Toggle additional information",
+      children: (
+        <>
+          <Option value={1}>Label 1</Option>
+          <Option value={2}>Label 2</Option>
+          <Option value={3}>Label 3</Option>
+          <Option value={4}>Label 4</Option>
+        </>
+      )
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
 
 #### Available props
 

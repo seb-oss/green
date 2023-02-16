@@ -1,0 +1,49 @@
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs'
+import {RadioButton} from '../input/input'
+import {RadioGroup} from './radioGroup'
+
+export const RadioButtonTemplate = ({...props}) => <RadioButton {...props} />
+
+export const RadioGroupTemplate = ({...props}) => <RadioGroup {...props}>
+  <RadioButton value={'value-1'} label="First label"/>
+  <RadioButton value={'value-2'} label="Second label"/>
+</RadioGroup>
+
+<Meta title="Components/RadioGroup" component={RadioGroup}/>
+
+# Radio Group
+
+Simple Radio Button Component
+
+### Default Radio Group
+
+<Canvas>
+  <Story
+    name="Default"
+    parameters={{
+      componentIds: ['component-radiogroup']
+    }}
+    args={{
+      label: 'Radio group',
+      labelInformation: 'This is longer information describing the input'
+    }}
+  >
+    {RadioGroupTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Expandable information
+
+<Canvas>
+  <RadioGroup label="Radio Group"
+              labelInformation="Radio Group Description"
+              expandableInfo="This is a long expandable information that can be sent to the radio group component"
+              expandableInfoButtonLabel="Toggle additional information"
+  >
+    <RadioButton label="Radio Button 1" name="name" value="button1"/>
+    <RadioButton label="Radio Button 2" name="name" value="button2"/>
+  </RadioGroup>
+</Canvas>
+
+
+<ArgsTable of={RadioButton}/>

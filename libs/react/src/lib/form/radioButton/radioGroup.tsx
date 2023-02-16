@@ -1,20 +1,43 @@
 import React from 'react'
 import { RadioButtonProps } from '../types'
-import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
+import {
+  IValidator,
+  IndicatorType,
+  validateClassName,
+  randomId,
+} from '@sebgroup/extract'
+import { FormItem } from '../../formItem'
 
 export interface RadioGroupProps {
-  title?: string
+  label?: string
+  labelInformation?: string
+  expandableInfo?: string
+  expandableInfoButtonLabel?: string
   defaultSelected?: string
-  description?: string
   validator?: IValidator
   onChangeRadio?: (value: string) => string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   name?: string
 }
 
-export const RadioGroup = ({ defaultSelected, description, title, validator, onChangeRadio, onChange, name, children }: React.PropsWithChildren<RadioGroupProps>) => {
+export const RadioGroup = ({
+  defaultSelected,
+  label,
+  labelInformation,
+  expandableInfo,
+  expandableInfoButtonLabel,
+  validator,
+  onChangeRadio,
+  onChange,
+  name,
+  children,
+}: React.PropsWithChildren<RadioGroupProps>) => {
   const [checked, setChecked] = React.useState<string>()
-  const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
+  const validatorClassName: string = validateClassName(
+    validator?.indicator as IndicatorType
+  )
+
+  console.log(label, labelInformation)
 
   const onChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.value)
@@ -27,7 +50,8 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
       if (defaultSelected) setChecked(defaultSelected)
-      const form: HTMLFormElement = radioBtnRef?.current?.form as HTMLFormElement
+      const form: HTMLFormElement = radioBtnRef?.current
+        ?.form as HTMLFormElement
       const resetListner = () => {
         setChecked(undefined)
       }
@@ -37,24 +61,37 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       return () => {}
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const formItemProps = {
+    validator,
+    labelInformation,
+    label,
+    expandableInfo,
+    expandableInfoButtonLabel,
+    role: 'radiogroup',
+  }
+
+  if (!name) name = randomId()
+
   return (
-    <div className="form-group">
-      <fieldset className={validatorClassName}>
-        { title && <legend>{title}</legend>}
-        { description && <span className="form-info">{description}</span> }
-        <div>
-          {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
-            return React.isValidElement<React.FC<RadioButtonProps>>(Child)
-              ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name, ref: radioBtnRef })
-              : Child
-          })}
-        </div>
-      </fieldset>
-      {validator?.message && <span className="form-info">{validator?.message}</span>}
-    </div>
+    <FormItem {...formItemProps}>
+      {React.Children.map(
+        children as React.ReactElement,
+        (Child: React.ReactElement<RadioButtonProps>) => {
+          return React.isValidElement<React.FC<RadioButtonProps>>(Child)
+            ? React.cloneElement(Child, {
+                validator: validatorClassName,
+                onChange: onChanges,
+                checked: checked === Child.props.value,
+                name,
+                ref: radioBtnRef,
+              })
+            : Child
+        }
+      )}
+    </FormItem>
   )
 }
 

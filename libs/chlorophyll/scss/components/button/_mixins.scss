@@ -1,4 +1,4 @@
-@use '../../tokens/shame' as tokens;
+@use '../../tokens' as tokens;
 @use '../../common';
 @use 'sass:map';
 
@@ -148,13 +148,14 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   }
 
   svg {
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1rem;
+    width: 1rem;
   }
 
   path, line, circle, rect, ellipse, polyline, text {
     fill: var(--gds-ref-pallet-base800);
     stroke: var(--gds-ref-pallet-base800);
+    transition: all tokens.$transition-time;
   }
 
   &:hover {
