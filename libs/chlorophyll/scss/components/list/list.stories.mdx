@@ -1,44 +1,80 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import {Meta, Canvas, Story} from '@storybook/addon-docs/blocks'
+
+export const Template = ({ text, className }) => `
+  <ol>
+      <li>First</li>
+      <li>Second</li>
+      <li>Third</li>
+  </ol>
+`
 
 <Meta
-  title="Components/List/Ordered"
-  parameters={{ 
+  title="Components/List"
+  parameters={{
     componentIds: ['component-list']
   }}
 />
 
-### Ordered list
-<Canvas>
-  <ol>
-    <li>First</li>
-    <li>Second</li>
-    <li>Third</li>
-  </ol>
-</Canvas>
-
 ### Unordered list
 <Canvas>
-  <ul>
-    <li>First</li>
-    <li>Second</li>
-    <li>Third</li>
-  </ul>
+    <ul>
+      <li>First</li>
+      <li>Second</li>
+      <li>Third</li>
+    </ul>
 </Canvas>
 
 ### Check list
 
 <Canvas>
-  <ul class="check">
-    <li>First</li>
-    <li>Second</li>
-    <li>Third</li>
-  </ul>
+    <ul class="check">
+      <li>First</li>
+      <li>Second</li>
+      <li>Third</li>
+    </ul>
 </Canvas>
 
-### Table list
+### Value list
+<Canvas>
+    <dl className="gds-list">
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+    </dl>
+</Canvas>
+
+#### Inverted
+<Canvas>
+    <dl className="gds-list gds-list--inverted">
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+    </dl>
+</Canvas>
+
+#### Horizontal
+<Canvas>
+    <dl className="gds-list gds-list--horizontal">
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+      <dt>Label</dt>
+      <dd>Value</dd>
+    </dl>
+</Canvas>
+
+### List Group
+
 <Canvas>
   <figure>
-    <figcaption class="table-list-caption">Table list</figcaption>
+    <figcaption class="table-list-caption">List group</figcaption>
     <dl>
       <div>
         <dt>First</dt>
@@ -59,7 +95,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 <Canvas>
   <div>
     <figure>
-      <figcaption class="table-list-caption">Table list</figcaption>
+      <figcaption class="table-list-caption">List group</figcaption>
       <dl>
         <div>
           <dt>First</dt>
@@ -76,7 +112,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
       </dl>
     </figure>
     <figure>
-      <figcaption class="table-list-caption">Table list 2</figcaption>
+      <figcaption class="table-list-caption">List group 2</figcaption>
       <dl>
         <div>
           <dt>First</dt>

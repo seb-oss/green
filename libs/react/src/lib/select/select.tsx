@@ -7,21 +7,16 @@ import {
 } from '@sebgroup/extract'
 import { ChevronDown } from '../icons'
 
-export interface SelectProps {
-  id?: string
-  className?: string
-  label?: string
-  labelInformation?: string
+export interface SelectProps extends SelectorAttributesProps, LabelProps {
   children: ReactNode
   validator?: IValidator
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   onSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   defaultValue?: string | number
   value?: string | number
-  testId?: string
 }
 
-export interface OptionProps {
+interface OptionProps {
   children: string
   value: string | number
   disabled?: boolean
@@ -35,7 +30,7 @@ export interface OptionProps {
   selected?: boolean
 }
 
-export interface OptionGroupProps {
+interface OptionGroupProps {
   label: string
   children: React.ReactElement<OptionProps> | React.ReactElement<OptionProps>[]
   disabled?: boolean
@@ -117,5 +112,4 @@ export const OptionGroup = ({
     </optgroup>
   )
 }
-
 export default { Select, Option, OptionGroup }
