@@ -252,9 +252,9 @@
     }
   },
   {
-    "id": "components-list-ordered--page",
+    "id": "components-list--page",
     "name": "Page",
-    "title": "Components/List/Ordered",
+    "title": "Components/List",
     "customParams": {
       "componentIds": [
         "component-list"
