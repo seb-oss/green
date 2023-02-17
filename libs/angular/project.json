@@ -80,7 +80,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx run angular:update-dependencies && nx run angular:version"
+            "command": "nx run angular:update-dependencies && nx run angular:version --releaseAs=major"
           }
         ]
       }
