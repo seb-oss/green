@@ -78,7 +78,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx run angular-charts:update-dependencies && nx run angular-charts:version --releaseAs=major"
+            "command": "nx run angular-charts:update-dependencies && nx run angular-charts:version"
           }
         ]
       }
