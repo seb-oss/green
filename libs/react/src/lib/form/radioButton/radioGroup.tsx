@@ -5,6 +5,7 @@ import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
 export interface RadioGroupProps {
   title?: string
   defaultSelected?: string
+  valueSelected?: string
   description?: string
   validator?: IValidator
   onChangeRadio?: (value: string) => string
@@ -12,24 +13,40 @@ export interface RadioGroupProps {
   name?: string
 }
 
-export const RadioGroup = ({ defaultSelected, description, title, validator, onChangeRadio, onChange, name, children }: React.PropsWithChildren<RadioGroupProps>) => {
-  const [checked, setChecked] = React.useState<string>()
-  const validatorClassName: string = validateClassName(validator?.indicator as IndicatorType)
+export const RadioGroup = ({
+  defaultSelected,
+  valueSelected,
+  description,
+  title,
+  validator,
+  onChangeRadio,
+  onChange,
+  name,
+  children,
+}: React.PropsWithChildren<RadioGroupProps>) => {
+  const [selected, setSelected] = React.useState<string | undefined>(
+    valueSelected ?? defaultSelected
+  )
+  const validatorClassName: string = validateClassName(
+    validator?.indicator as IndicatorType
+  )
 
-  const onChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.value)
-    onChangeRadio && onChangeRadio(event.target.value)
-    onChange && onChange(event)
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value !== selected) {
+      setSelected(event.target.value)
+      onChangeRadio && onChangeRadio(event.target.value)
+      onChange && onChange(event)
+    }
   }
 
   const radioBtnRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
-      if (defaultSelected) setChecked(defaultSelected)
-      const form: HTMLFormElement = radioBtnRef?.current?.form as HTMLFormElement
+      const form: HTMLFormElement = radioBtnRef?.current
+        ?.form as HTMLFormElement
       const resetListner = () => {
-        setChecked(undefined)
+        setSelected(undefined)
       }
       form?.addEventListener('reset', resetListner)
       return () => form?.removeEventListener('reset', resetListner)
@@ -37,23 +54,36 @@ export const RadioGroup = ({ defaultSelected, description, title, validator, onC
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       return () => {}
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <div className="form-group">
       <fieldset className={validatorClassName}>
-        { title && <legend>{title}</legend>}
-        { description && <span className="form-info">{description}</span> }
+        {title && <legend>{title}</legend>}
+        {description && <span className="form-info">{description}</span>}
         <div>
-          {React.Children.map(children as React.ReactElement, (Child: React.ReactElement<RadioButtonProps>) => {
-            return React.isValidElement<React.FC<RadioButtonProps>>(Child)
-              ? React.cloneElement(Child, { validator: validatorClassName, onChange: onChanges, checked: checked === Child.props.value, name, ref: radioBtnRef })
-              : Child
-          })}
+          {React.Children.map(
+            children as React.ReactElement,
+            (radioButton: React.ReactElement<RadioButtonProps>) => {
+              return React.isValidElement<React.FC<RadioButtonProps>>(
+                radioButton
+              )
+                ? React.cloneElement(radioButton, {
+                    validator: validatorClassName,
+                    onChange: handleOnChange,
+                    checked: selected === radioButton.props.value,
+                    name,
+                    ref: radioBtnRef,
+                  })
+                : radioButton
+            }
+          )}
         </div>
       </fieldset>
-      {validator?.message && <span className="form-info">{validator?.message}</span>}
+      {validator?.message && (
+        <span className="form-info">{validator?.message}</span>
+      )}
     </div>
   )
 }
