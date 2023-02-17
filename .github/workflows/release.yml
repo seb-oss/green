@@ -1,4 +1,4 @@
-name: Release All as MAJOR to Github and NPM
+name: Release All to Github and NPM
 on:
   workflow_dispatch:
 
