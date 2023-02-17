@@ -86,7 +86,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx run react-charts:update-dependencies && nx run react-charts:version"
+            "command": "nx run react-charts:update-dependencies && nx run react-charts:version --releaseAs=major"
           }
         ]
       }

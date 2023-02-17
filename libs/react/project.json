@@ -86,7 +86,7 @@
       "options": {
         "commands": [
           {
-            "command": "nx run react:update-dependencies && nx run react:version"
+            "command": "nx run react:update-dependencies && nx run react:version --releaseAs=major"
           }
         ]
       }

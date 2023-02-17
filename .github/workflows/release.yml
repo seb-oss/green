@@ -1,8 +1,6 @@
-name: Release to Github and NPM
+name: Release All as MAJOR to Github and NPM
 on:
   workflow_dispatch:
-  push:
-    branches: [ beta ]
 
 jobs:
   build:
@@ -47,7 +45,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Prepare release of chlorophyll and extract
-        run: npx nx run-many --target=version --projects=chlorophyll,extract --baseBranch='main' --origin='origin' --parallel=1
+        run: npx nx run-many --target=version --projects=chlorophyll,extract --baseBranch='main' --origin='origin' --parallel=1 --releaseAs=major
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
