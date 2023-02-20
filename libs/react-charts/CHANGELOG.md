@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0...@sebgroup/green-react-charts@1.0.1) (2023-02-20)
+
+
+### Bug Fixes
+
+* 🐛 fake fix to bump version ([16ea54c](https://github.com/sebgroup/green/commit/16ea54cc84fd45c8b17087c9e5abc628bbaaea59))
+
+
+
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@0.0.1...@sebgroup/green-react-charts@1.0.0) (2023-02-20)
 
 
