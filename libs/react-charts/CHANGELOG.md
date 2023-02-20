@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@0.0.1...@sebgroup/green-react-charts@1.0.0) (2023-02-20)
+
+
+### chore
+
+* 🤖 bumping react and angular charts version ([31c93e1](https://github.com/sebgroup/green/commit/31c93e18f37119ff033868538c963311ee50db44))
+
+
+### BREAKING CHANGES
+
+* 🧨 bumping to 1.0.0
+
+
+
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@0.0.1...@sebgroup/green-react-charts@1.0.0) (2023-02-17)
 
 
