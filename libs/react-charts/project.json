@@ -100,7 +100,6 @@
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-${projectName}@",
-        "trackDeps": true,
         "push": true,
         "postTargets": ["react-charts:publish", "react-charts:github"]
       }
