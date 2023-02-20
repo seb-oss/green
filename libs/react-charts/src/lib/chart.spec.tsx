@@ -19,10 +19,10 @@ describe('Chart', () => {
         {
           type: 'bar',
           name: 'Foo',
-          values: [1, 2, 3],
+          values: [1, 2, 3, 4],
         },
       ],
-      categories: ['A', 'B', 'C'],
+      categories: ['A', 'B', 'C', 'D'],
     }
     const { baseElement } = render(<Chart settings={settings} />)
     expect(baseElement).toBeTruthy()
