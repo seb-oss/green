@@ -12,7 +12,7 @@
     "@sebgroup/green-charts": "^1.0.0",
     "tslib": "^2.3.1"
   },
-  "description": "Angular charts built on top of @sebgroup/green-charts.",
+  "description": "Angular charts wrapper built on top of @sebgroup/green-charts.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebgroup/green.git"
