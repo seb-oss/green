@@ -91,7 +91,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          {ChevronDown}
+          {<ChevronDown />}
         </div>
       </FormItem>
     )
