@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, ChangeEvent } from 'react'
 import { RadioButtonProps } from '../types'
 import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
 
@@ -24,14 +24,21 @@ export const RadioGroup = ({
   name,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
-  const [selected, setSelected] = React.useState<string | undefined>(
+  const [selected, setSelected] = useState<string | undefined>(
     valueSelected ?? defaultSelected
   )
+  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
+
+  if (valueSelected !== prevValueSelected) {
+    setSelected(valueSelected)
+    setPrevValueSelected(valueSelected)
+  }
+
   const validatorClassName: string = validateClassName(
     validator?.indicator as IndicatorType
   )
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value !== selected) {
       setSelected(event.target.value)
       onChangeRadio && onChangeRadio(event.target.value)
@@ -39,7 +46,7 @@ export const RadioGroup = ({
     }
   }
 
-  const radioBtnRef: React.RefObject<HTMLInputElement> = React.useRef(null)
+  const radioBtnRef: React.RefObject<HTMLInputElement> = useRef(null)
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
