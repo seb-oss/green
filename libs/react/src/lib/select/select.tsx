@@ -6,6 +6,7 @@ import {
   validateClassName,
 } from '@sebgroup/extract'
 import { ChevronDown } from '../icons'
+import { SelectorAttributesProps, LabelProps } from '../../types'
 
 export interface SelectProps extends SelectorAttributesProps, LabelProps {
   children: ReactNode

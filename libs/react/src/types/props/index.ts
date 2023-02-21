@@ -1,10 +1,10 @@
-interface SelectorAttributesProps {
+export interface SelectorAttributesProps {
   id?: string
   className?: string
   testId?: string
 }
 
-interface LabelProps {
+export interface LabelProps {
   label?: string
   labelInformation?: string
 }
