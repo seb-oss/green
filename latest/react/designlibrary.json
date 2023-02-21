@@ -199,27 +199,33 @@
     "customParams": {}
   },
   {
-    "id": "components-list--ordered-list",
+    "id": "components-lists--value-list",
+    "name": "ValueList",
+    "title": "Components/Lists",
+    "customParams": {}
+  },
+  {
+    "id": "components-lists--ordered-list",
     "name": "Ordered-list",
-    "title": "Components/List",
+    "title": "Components/Lists",
     "customParams": {}
   },
   {
-    "id": "components-list--unordered-list",
+    "id": "components-lists--unordered-list",
     "name": "Unordered-list",
-    "title": "Components/List",
+    "title": "Components/Lists",
     "customParams": {}
   },
   {
-    "id": "components-list--check-list",
+    "id": "components-lists--check-list",
     "name": "Check-list",
-    "title": "Components/List",
+    "title": "Components/Lists",
     "customParams": {}
   },
   {
-    "id": "components-list--table-list",
-    "name": "Table-list",
-    "title": "Components/List",
+    "id": "components-lists--list-group",
+    "name": "List group",
+    "title": "Components/Lists",
     "customParams": {
       "componentIds": [
         "component-list"
