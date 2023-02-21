@@ -12,6 +12,7 @@
     }
 
     svg {
+      pointer-events: none;
       position: absolute;
       inset: 0 1rem 0 auto;
       margin: auto;
