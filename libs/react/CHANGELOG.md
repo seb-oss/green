@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0...@sebgroup/green-react@1.0.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* 🐛 including types in build ([8b29fc6](https://github.com/sebgroup/green/commit/8b29fc648841e3406a619b750c6514c10b6fe1a5))
+
+
+
 # [0.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@0.1.2...@sebgroup/green-react@0.2.0) (2023-02-02)
 
 ### Dependency Updates
