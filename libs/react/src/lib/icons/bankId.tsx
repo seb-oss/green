@@ -1,4 +1,5 @@
 import { randomId } from '@sebgroup/extract'
+import { IconProps } from '../../types/props'
 
 export const BankId = ({ fill, focusable, title, ...props }: IconProps) => {
   let id

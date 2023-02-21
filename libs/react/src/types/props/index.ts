@@ -1,4 +1,4 @@
-interface IconProps {
+export interface IconProps {
   focusable?: boolean
   title?: string
   fill?: string

@@ -11,6 +11,7 @@ export * from './lib/stepper/stepper'
 export * from './lib/select'
 export * from './lib/dropdown/dropdown'
 export * from './lib/datepicker/datepicker'
+export * from './types/props'
 
 // Backwards compatibility export
 export { AlertRibbon as Alert } from './lib/alert-ribbon/alert-ribbon'

@@ -1,5 +1,6 @@
 import React from 'react'
 import { randomId } from '@sebgroup/extract'
+import { IconProps } from '../../types/props'
 
 export const Check = ({ focusable = false, title }: IconProps) => {
   let id
