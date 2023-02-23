@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.2...@sebgroup/green-react@1.0.3) (2023-02-23)
+
+
+### Bug Fixes
+
+* 🐛 setting selected value programmatically ([2569929](https://github.com/sebgroup/green/commit/25699297a989608601c04f09746ab798cdcfcb05))
+
+
+
 ## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.1...@sebgroup/green-react@1.0.2) (2023-02-23)
 
 
