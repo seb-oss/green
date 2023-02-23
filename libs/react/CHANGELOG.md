@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.1...@sebgroup/green-react@1.0.2) (2023-02-23)
+
+
+### Bug Fixes
+
+* 🐛 exporting lists correctly ([5d08575](https://github.com/sebgroup/green/commit/5d085752b16647f898a05484af06db7a35d49ed1))
+
+
+
 ## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.0...@sebgroup/green-react@1.0.1) (2023-02-21)
 
 
