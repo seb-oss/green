@@ -34,7 +34,7 @@ const MockComponent = (props: MockComponentProps) => (
 )
 
 describe('RadioButton Group Component', () => {
-  it('Should render component with title and description', () => {
+  it('Should render component with label and label information', () => {
     render(<MockComponent />)
     expect(screen.getByText('Radio group label')).toBeVisible()
     expect(screen.getByText('Radio group label information')).toBeVisible()

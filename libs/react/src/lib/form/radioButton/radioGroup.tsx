@@ -10,7 +10,9 @@ import { FormItem } from '../../formItem'
 
 export interface RadioGroupProps {
   label?: string
+  title?: string
   labelInformation?: string
+  description?: string
   expandableInfo?: string
   expandableInfoButtonLabel?: string
   defaultSelected?: string
@@ -23,7 +25,9 @@ export interface RadioGroupProps {
 export const RadioGroup = ({
   defaultSelected,
   label,
+  title,
   labelInformation,
+  description,
   expandableInfo,
   expandableInfoButtonLabel,
   validator,
@@ -32,6 +36,13 @@ export const RadioGroup = ({
   name,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
+  if (title)
+    console.warn('"title" prop is deprecated. Please use "label" instead.')
+  if (description)
+    console.warn(
+      '"description" prop is deprecated. Please use "labelInformation" instead.'
+    )
+
   const [checked, setChecked] = React.useState<string>()
   const validatorClassName: string = validateClassName(
     validator?.indicator as IndicatorType
@@ -62,10 +73,13 @@ export const RadioGroup = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const labelFromTitle = label || title
+  const labelInformationFromDescription = labelInformation || description
+
   const formItemProps = {
     validator,
     labelInformation,
-    label,
+    label: labelFromTitle,
     expandableInfo,
     expandableInfoButtonLabel,
     role: 'radiogroup',
