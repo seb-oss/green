@@ -37,8 +37,6 @@ export const RadioGroup = ({
     validator?.indicator as IndicatorType
   )
 
-  console.log(label, labelInformation)
-
   const onChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.value)
     onChangeRadio && onChangeRadio(event.target.value)

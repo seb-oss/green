@@ -21,9 +21,11 @@ describe('Card', () => {
       </Card>
     )
 
-    expect(screen.getByRole('heading')).toContain('Card Headline')
+    expect(screen.getByRole('heading').textContent).toEqual('Card Headline')
     expect(screen.getByText('Hello')).toBeDefined()
-    expect(screen.getAllByRole('button')[0]).toContain('Default button')
-    expect(screen.getAllByRole('button')[1]).toContain('Primary')
+    expect(screen.getAllByRole('button')[0].textContent).toContain(
+      'Default button'
+    )
+    expect(screen.getAllByRole('button')[1].textContent).toContain('Primary')
   })
 })

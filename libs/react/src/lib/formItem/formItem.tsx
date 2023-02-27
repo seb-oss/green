@@ -1,5 +1,12 @@
 import IconButton from '../form/iconButton/iconButton'
-import { debounce, delay, IValidator, randomId } from '@sebgroup/extract'
+import {
+  debounce,
+  delay,
+  IndicatorType,
+  IValidator,
+  randomId,
+  validateClassName,
+} from '@sebgroup/extract'
 import React, {
   ReactNode,
   useEffect,
@@ -64,7 +71,9 @@ export const FormItem = ({
 
   return (
     <div
-      className="gds-form-item"
+      className={`gds-form-item ${
+        validator && validateClassName(validator?.indicator)
+      }`}
       role={role ? role : undefined}
       aria-labelledby={role ? `${inputId}-label` : undefined}
     >
