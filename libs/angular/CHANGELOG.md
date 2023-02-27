@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0...@sebgroup/green-angular@1.0.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* **angular:** datepicker detect changed options ([023b858](https://github.com/sebgroup/green/commit/023b858af516d7027ec78620eb86ef6650191f5c))
+
+
+
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@0.0.2...@sebgroup/green-angular@1.0.0) (2023-02-17)
 
 ### Dependency Updates
