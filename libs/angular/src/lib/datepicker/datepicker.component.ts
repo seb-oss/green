@@ -8,6 +8,8 @@ import {
   ViewChild,
   EventEmitter,
   ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -45,7 +47,7 @@ import { endOfDay, startOfDay } from 'date-fns'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDatepickerComponent
-  implements ControlValueAccessor, AfterViewInit
+  implements ControlValueAccessor, AfterViewInit, OnChanges
 {
   get months(): Array<DropdownOption> {
     return this._months
@@ -71,6 +73,9 @@ export class NggDatepickerComponent
   set value(newValue: string | Date | undefined) {
     if (newValue !== this._value) {
       this._value = newValue
+      if (this._value && this.dp) {
+        this.dp.select(this._value)
+      }
     }
   }
   @Input() id?: string = randomId()
@@ -104,12 +109,6 @@ export class NggDatepickerComponent
 
   writeValue(value: any): void {
     this.value = value
-
-    // When binding using ngModel we need to set initial select date
-    // once we get initial value as it's not available when component is created
-    if (value && this.dp && !this.data?.selectedDate) {
-      this.dp.select(value)
-    }
   }
 
   registerOnChange(fn: any): void {
@@ -170,14 +169,26 @@ export class NggDatepickerComponent
     return week
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    //ignore changes until datepicker has been initialised in ngAfterViewInit
+    if (!this.dp) return
+
+    if (changes.options) {
+      this._createDatepicker()
+    }
+  }
+
   ngAfterViewInit(): void {
-    // initialize datepicker
+    this._createDatepicker()
+    this._cdr.detectChanges()
+  }
+
+  private _createDatepicker() {
     if (
       this.datepickerElRef &&
       this.datepickerDialogElRef &&
       this.dateInputElRef &&
-      this.datepickerTriggerElRef &&
-      !this.dp
+      this.datepickerTriggerElRef
     ) {
       this.dp = createDatepicker(
         this.listener,
@@ -190,7 +201,6 @@ export class NggDatepickerComponent
         this.dateInputElRef.nativeElement,
         this.datepickerTriggerElRef.nativeElement
       )
-      this._cdr.detectChanges()
     } else {
       throw 'Missing one or more elements...'
     }
