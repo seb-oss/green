@@ -44,7 +44,6 @@
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/${projectName}@",
-        "trackDeps": true,
         "push": true,
         "postTargets": ["extract:publish", "extract:github"]
       }

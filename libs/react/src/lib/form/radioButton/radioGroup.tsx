@@ -12,6 +12,7 @@ export interface RadioGroupProps {
   label?: string
   title?: string
   labelInformation?: string
+  valueSelected?: string
   description?: string
   expandableInfo?: string
   expandableInfoButtonLabel?: string
@@ -24,6 +25,7 @@ export interface RadioGroupProps {
 
 export const RadioGroup = ({
   defaultSelected,
+  valueSelected,
   label,
   title,
   labelInformation,
@@ -43,26 +45,29 @@ export const RadioGroup = ({
       '"description" prop is deprecated. Please use "labelInformation" instead.'
     )
 
-  const [checked, setChecked] = React.useState<string>()
+  const [selected, setSelected] = React.useState<string | undefined>(
+    valueSelected ?? defaultSelected
+  )
   const validatorClassName: string = validateClassName(
     validator?.indicator as IndicatorType
   )
 
-  const onChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.value)
-    onChangeRadio && onChangeRadio(event.target.value)
-    onChange && onChange(event)
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value !== selected) {
+      setSelected(event.target.value)
+      onChangeRadio && onChangeRadio(event.target.value)
+      onChange && onChange(event)
+    }
   }
 
   const radioBtnRef: React.RefObject<HTMLInputElement> = React.useRef(null)
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
-      if (defaultSelected) setChecked(defaultSelected)
       const form: HTMLFormElement = radioBtnRef?.current
         ?.form as HTMLFormElement
       const resetListner = () => {
-        setChecked(undefined)
+        setSelected(undefined)
       }
       form?.addEventListener('reset', resetListner)
       return () => form?.removeEventListener('reset', resetListner)
@@ -78,7 +83,7 @@ export const RadioGroup = ({
 
   const formItemProps = {
     validator,
-    labelInformation,
+    labelInformation: labelInformationFromDescription,
     label: labelFromTitle,
     expandableInfo,
     expandableInfoButtonLabel,
@@ -91,16 +96,16 @@ export const RadioGroup = ({
     <FormItem {...formItemProps}>
       {React.Children.map(
         children as React.ReactElement,
-        (Child: React.ReactElement<RadioButtonProps>) => {
-          return React.isValidElement<React.FC<RadioButtonProps>>(Child)
-            ? React.cloneElement(Child, {
+        (radioButton: React.ReactElement<RadioButtonProps>) => {
+          return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
+            ? React.cloneElement(radioButton, {
                 validator: validatorClassName,
-                onChange: onChanges,
-                checked: checked === Child.props.value,
+                onChange: handleOnChange,
+                checked: selected === radioButton.props.value,
                 name,
                 ref: radioBtnRef,
               })
-            : Child
+            : radioButton
         }
       )}
     </FormItem>

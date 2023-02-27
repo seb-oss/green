@@ -21,6 +21,10 @@ ul.check {
   @include mixins.table-list-caption();
 }
 
-dl {
+figure dl {
   @include mixins.table-list();
+}
+
+dl.gds-list {
+  @include mixins.add-value-list();
 }

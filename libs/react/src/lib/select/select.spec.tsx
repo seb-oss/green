@@ -1,7 +1,7 @@
 import React from 'react'
-import {fireEvent, render, screen} from '@testing-library/react'
-import {Select, OptionGroup, Option} from './select'
-import userEvent from "@testing-library/user-event";
+import { render, screen } from '@testing-library/react'
+import { Select, OptionGroup, Option } from './select'
+import userEvent from '@testing-library/user-event'
 
 describe('Select', () => {
   it('renders ', function () {
@@ -13,10 +13,10 @@ describe('Select', () => {
     )
     expect(screen.getByText('First value')).toBeTruthy()
     expect(screen.getByText('Second value')).toBeTruthy()
-  });
+  })
 
   it('should render option groups', function () {
-    const {container} = render(
+    const { container } = render(
       <Select>
         <OptionGroup label="first-group">
           <Option value={'first-value'}>First value</Option>
@@ -26,27 +26,35 @@ describe('Select', () => {
           <Option value={'second-first-value'}>Second first value</Option>
           <Option value={'second-second-value'}>Second second value</Option>
         </OptionGroup>
-      </Select>)
+      </Select>
+    )
 
-    expect(container.querySelector('[label="second-group"]')?.tagName).toEqual("OPTGROUP")
-  });
+    expect(container.querySelector('[label="second-group"]')?.tagName).toEqual(
+      'OPTGROUP'
+    )
+  })
 
   it('should trigger onChange when user changes select option', async function () {
-
     const onChangeMock = jest.fn()
 
-    const {container} = render(
-      <Select testId="test-select-id" defaultValue={'first-value'} onChange={(event) => {onChangeMock(event)}}>
+    const { container } = render(
+      <Select
+        testId="test-select-id"
+        defaultValue={'first-value'}
+        onChange={(event) => {
+          onChangeMock(event)
+        }}
+      >
         <Option value={'first-value'}>First value</Option>
         <Option value={'second-value'}>Second value</Option>
       </Select>
     )
 
-    const select = await screen.findByTestId("test-select-id");
+    const select = await screen.findByTestId('test-select-id')
 
-    await userEvent.selectOptions(select, "second-value")
-    await userEvent.selectOptions(select, "first-value")
+    await userEvent.selectOptions(select, 'second-value')
+    await userEvent.selectOptions(select, 'first-value')
 
-    expect(onChangeMock).toBeCalledTimes(2);
-  });
+    expect(onChangeMock).toBeCalledTimes(2)
+  })
 })

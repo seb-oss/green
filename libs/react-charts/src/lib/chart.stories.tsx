@@ -5,7 +5,7 @@ export default {
   component: Chart,
   title: 'Chart',
   parameters: {
-    componentIds: ['component-chart']
+    componentIds: ['component-chart'],
   },
 } as Meta
 
@@ -30,10 +30,10 @@ SimpleBar.args = {
     style: {
       axis: {
         y: {
-          stepSize: 50
-        }
-      }
-    }
+          stepSize: 50,
+        },
+      },
+    },
   },
 }
 

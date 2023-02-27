@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0...@sebgroup/chlorophyll@1.0.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* 🐛 responsive click on select arrow ([3fb18bb](https://github.com/sebgroup/green/commit/3fb18bb24cf57b8accae4e41449ac58dc5d7e8e9))
+
+
+
+# [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.2.0...@sebgroup/chlorophyll@1.0.0) (2023-02-17)
+
+
+### Features
+
+* 🎸 ValueList ([6088988](https://github.com/sebgroup/green/commit/6088988d0976b837df208d9a2f0af6379af2492b))
+
+
+
 # [0.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@0.1.2...@sebgroup/chlorophyll@0.2.0) (2023-02-02)
 
 

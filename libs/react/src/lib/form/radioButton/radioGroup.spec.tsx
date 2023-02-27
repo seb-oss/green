@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import RadioGroup from './radioGroup'
 import { RadioButton } from '../input/input'
 import { IValidator } from '@sebgroup/extract'
+import userEvent from '@testing-library/user-event'
 
 const radioBtnValues: Array<{ label: string; value: string }> = [
   {
@@ -14,10 +15,12 @@ const radioBtnValues: Array<{ label: string; value: string }> = [
   },
 ]
 
-type MockComponentProps = {
-  validator?: IValidator
-  onChangeRadio?: (value: string) => string
-}
+  type MockComponentProps = {
+    validator?: IValidator
+    valueSelected?: string
+    defaultSelected?: string
+    onChangeRadio?: (value: string) => string
+  }
 
 const MockComponent = (props: MockComponentProps) => (
   <RadioGroup
@@ -50,11 +53,22 @@ describe('RadioButton Group Component', () => {
     const mockFn: jest.Mock = jest
       .fn()
       .mockImplementation((value: string) => value)
-    render(<MockComponent onChangeRadio={mockFn} />)
+    const { container } = render(<MockComponent onChangeRadio={mockFn} />)
     fireEvent.click(screen.getByText('Car 1'))
     expect(mockFn).toBeCalled()
     expect(mockFn).lastCalledWith('Car 1')
     expect(mockFn).toBeCalledWith('Car 1')
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
+        ?.checked
+    ).toEqual(true)
+    fireEvent.click(screen.getByText('Car 2'))
+    expect(mockFn).lastCalledWith('Car 2')
+    expect(mockFn).toBeCalledWith('Car 2')
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
+        ?.checked
+    ).toEqual(true)
   })
 
   it('Should render validator: invalid', () => {
@@ -87,5 +101,36 @@ describe('RadioButton Group Component', () => {
     expect(
       container.querySelector<HTMLInputElement>("input[type='radio']")?.checked
     ).toBe(false)
+  })
+
+  it('should select correct input when using default selected', async function () {
+    const { container } = render(<MockComponent defaultSelected={'Car 2'} />)
+
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
+        ?.checked
+    ).toBe(true)
+  })
+
+  it('should be able to set value programmatically', async function () {
+    const { container } = render(
+      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 2'} />
+    )
+
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
+        ?.checked
+    ).toBe(false)
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
+        ?.checked
+    ).toBe(true)
+
+    await userEvent.click(screen.getByText('Car 1'))
+
+    expect(
+      container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
+        ?.checked
+    ).toBe(true)
   })
 })
