@@ -113,7 +113,11 @@ describe('RadioButton Group Component', () => {
   })
 
   it('should be able to set value programmatically', async function () {
-    const { container } = render(
+    const { container, rerender } = render(
+      <MockComponent defaultSelected={'Car 1'} />
+    )
+
+    rerender(
       <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 2'} />
     )
 
@@ -126,7 +130,9 @@ describe('RadioButton Group Component', () => {
         ?.checked
     ).toBe(true)
 
-    await userEvent.click(screen.getByText('Car 1'))
+    rerender(
+      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 1'} />
+    )
 
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
