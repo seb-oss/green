@@ -1,6 +1,6 @@
 import { DropdownArgs, OnChange } from '@sebgroup/extract'
-import {HTMLAttributes, useRef} from 'react'
-import {dropdownValues} from '@sebgroup/extract'
+import { HTMLAttributes, useRef } from 'react'
+import { dropdownValues } from '@sebgroup/extract'
 import { useDropdown } from './hooks'
 
 export interface DropdownProps extends DropdownArgs {
@@ -47,14 +47,19 @@ export const Dropdown = ({
     })
 
   const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
-    if (Object.keys(props).length === 0) return {role: 'listbox', tabIndex: -1, className: dropdownValues().elements?.listbox?.classes?.join(' ')}
+    if (Object.keys(props).length === 0)
+      return {
+        role: 'listbox',
+        tabIndex: -1,
+        className: dropdownValues().elements?.listbox?.classes?.join(' '),
+      }
     return props
   }
 
   return (
     <div className="form-group">
-      { label && <label htmlFor={togglerProps.id}>{label}</label>}
-      { informationLabel && <div className="form-info">{informationLabel}</div>}
+      {label && <label htmlFor={togglerProps.id}>{label}</label>}
+      {informationLabel && <div className="form-info">{informationLabel}</div>}
       <button type="button" {...togglerProps} ref={togglerRef}>
         <span>{togglerProps.children}</span>
       </button>
@@ -71,18 +76,16 @@ export const Dropdown = ({
           <div className="sg-fieldset-container">
             <fieldset {...multiSelectProps.fieldsetProps}>
               <legend {...multiSelectProps.legendProps} />
-              <div>
-                {multiSelectProps.checkboxes?.map((checkboxItem) => (
-                  <label
-                    key={checkboxItem.labelProps.id}
-                    {...checkboxItem.labelProps}
-                  >
-                    <input {...checkboxItem.inputProps} />
-                    <span {...checkboxItem.spanProps} />
-                    <i></i>
-                  </label>
-                ))}
-              </div>
+              {multiSelectProps.checkboxes?.map((checkboxItem) => (
+                <label
+                  key={checkboxItem.labelProps.id}
+                  {...checkboxItem.labelProps}
+                >
+                  <input {...checkboxItem.inputProps} />
+                  <span {...checkboxItem.spanProps} />
+                  <i></i>
+                </label>
+              ))}
             </fieldset>
           </div>
         ) : (

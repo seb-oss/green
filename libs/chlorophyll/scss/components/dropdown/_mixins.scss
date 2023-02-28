@@ -79,7 +79,8 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
 
 @mixin multi-select {
   [role='option'] {
-    @include common.margin-horizontal(4);
+    display: flex;
+    width: 100%;
 
     // highlighted option
     &.active.sg-highlighted input[type='checkbox'] ~ i {
