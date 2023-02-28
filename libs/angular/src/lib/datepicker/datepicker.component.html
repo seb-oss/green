@@ -7,6 +7,7 @@
     [class.is-invalid]="isValid === false"
   >
     <input
+      (blur)="blurInput()"
       [attr.id]="id"
       [attr.aria-describedby]="
         formInfo?.innerText && formInfo.innerText.length > 0
@@ -40,8 +41,11 @@
   role="dialog"
   aria-modal="true"
   aria-label="Choose Date"
+  (focusout)="focusoutDialog($event)"
 >
-  <button type="button" class="close" (click)="dp?.close()"><i></i>Close</button>
+  <button type="button" class="close" (click)="dp?.close()">
+    <i></i>Close
+  </button>
   <div class="sg-date">
     <header>
       <button type="button" class="link" (click)="dp?.sub(1, 'months')">

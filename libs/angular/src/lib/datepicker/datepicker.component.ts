@@ -150,8 +150,6 @@ export class NggDatepickerComponent
       })
     }
 
-    this.onTouchedFn && this.onTouchedFn()
-
     if (data) {
       // only emit change event if date has changed
       if (this.data?.selectedDate !== data.selectedDate) {
@@ -161,9 +159,7 @@ export class NggDatepickerComponent
       this.data = data
     }
 
-    if (data || state) {
-      this._cdr.markForCheck()
-    }
+    this._cdr.detectChanges()
   }
   trackWeek(index: any, week: any) {
     return week
@@ -203,6 +199,18 @@ export class NggDatepickerComponent
       )
     } else {
       throw 'Missing one or more elements...'
+    }
+  }
+
+  blurInput() {
+    this.onTouchedFn && this.onTouchedFn()
+  }
+
+  focusoutDialog(event: any) {
+    if (
+      !this.datepickerDialogElRef?.nativeElement.contains(event.relatedTarget)
+    ) {
+      this.onTouchedFn && this.onTouchedFn()
     }
   }
 }
