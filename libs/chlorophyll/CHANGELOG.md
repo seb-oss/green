@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.1...@sebgroup/chlorophyll@1.0.2) (2023-02-28)
+
+
+### Bug Fixes
+
+* **dropdown:** multiselect inside horizontal container ([5e27cf1](https://github.com/sebgroup/green/commit/5e27cf11095bbda3f0df16b2958b278d6b2eca86))
+
+
+
 ## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.0...@sebgroup/chlorophyll@1.0.1) (2023-02-21)
 
 
