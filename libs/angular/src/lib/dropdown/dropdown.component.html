@@ -1,4 +1,4 @@
-<div>
+<div class="form-group">
   <span class="label" *ngIf="label" [id]="toggler?.attributes?.id + '_label'">{{
     label
   }}</span>
@@ -93,10 +93,10 @@
             [attr.aria-selected]="option.attributes['aria-selected']"
             [class]="option.classes"
             *ngFor="
-            let option of dropdown?.options;
-            let index = index;
-            trackBy: trackByKey
-          "
+              let option of dropdown?.options;
+              let index = index;
+              trackBy: trackByKey
+            "
           >
             <input
               type="checkbox"
@@ -106,11 +106,11 @@
             />
             <ng-container
               *ngTemplateOutlet="
-              customOption?.templateRef
-                ? customOption!.templateRef
-                : defaultOption;
-              context: { option: option, index: index }
-            "
+                customOption?.templateRef
+                  ? customOption!.templateRef
+                  : defaultOption;
+                context: { option: option, index: index }
+              "
             ></ng-container>
             <i></i>
           </label>
