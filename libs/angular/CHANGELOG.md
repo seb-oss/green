@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.1...@sebgroup/green-angular@1.0.2) (2023-02-28)
+
+
+### Bug Fixes
+
+* **angular:** dropdown form group ([42fbaa4](https://github.com/sebgroup/green/commit/42fbaa497b7f068d6f5ad8d8e8890784aff294be))
+
+
+
 ## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.0...@sebgroup/green-angular@1.0.1) (2023-02-27)
 
 
