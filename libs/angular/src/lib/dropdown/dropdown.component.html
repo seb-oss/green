@@ -85,36 +85,34 @@
         aria-multiselectable="true"
       >
         <legend class="sr-only" [id]="fieldset?.attributes?.id">Options</legend>
-        <div>
-          <label
-            class="form-control"
-            [attr.role]="option.attributes.role"
-            [id]="option.attributes.id"
-            [attr.aria-selected]="option.attributes['aria-selected']"
-            [class]="option.classes"
-            *ngFor="
-              let option of dropdown?.options;
-              let index = index;
-              trackBy: trackByKey
+        <label
+          class="form-control"
+          [attr.role]="option.attributes.role"
+          [id]="option.attributes.id"
+          [attr.aria-selected]="option.attributes['aria-selected']"
+          [class]="option.classes"
+          *ngFor="
+            let option of dropdown?.options;
+            let index = index;
+            trackBy: trackByKey
+          "
+        >
+          <input
+            type="checkbox"
+            (change)="handler?.select(option, false)"
+            [checked]="option.selected"
+            tabIndex="-1"
+          />
+          <ng-container
+            *ngTemplateOutlet="
+              customOption?.templateRef
+                ? customOption!.templateRef
+                : defaultOption;
+              context: { option: option, index: index }
             "
-          >
-            <input
-              type="checkbox"
-              (change)="handler?.select(option, false)"
-              [checked]="option.selected"
-              tabIndex="-1"
-            />
-            <ng-container
-              *ngTemplateOutlet="
-                customOption?.templateRef
-                  ? customOption!.templateRef
-                  : defaultOption;
-                context: { option: option, index: index }
-              "
-            ></ng-container>
-            <i></i>
-          </label>
-        </div>
+          ></ng-container>
+          <i></i>
+        </label>
       </fieldset>
     </div>
   </div>

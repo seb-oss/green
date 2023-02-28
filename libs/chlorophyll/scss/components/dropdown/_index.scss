@@ -12,12 +12,8 @@ button[aria-haspopup='listbox'] {
 
 .popover-dropdown {
   --z-index: var(--sg-z-index-dropdown);
-  fieldset {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .hidden{
+  .hidden {
     visibility: hidden;
     display: none;
   }
