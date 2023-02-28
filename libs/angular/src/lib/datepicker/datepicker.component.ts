@@ -159,9 +159,7 @@ export class NggDatepickerComponent
       this.data = data
     }
 
-    if (data || state) {
-      this._cdr.markForCheck()
-    }
+    this._cdr.detectChanges()
   }
   trackWeek(index: any, week: any) {
     return week
