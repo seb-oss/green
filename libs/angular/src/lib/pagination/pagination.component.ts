@@ -7,7 +7,12 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core'
-import { PaginationEvent, PaginationSize } from '@sebgroup/extract'
+import {
+  IPaginationEvent,
+  IPaginationI18n,
+  PaginationI18n,
+  PaginationSize,
+} from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-pagination',
@@ -15,6 +20,10 @@ import { PaginationEvent, PaginationSize } from '@sebgroup/extract'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggPaginationComponent implements OnChanges {
+  /** Internationalization labels */
+  @Input() i18n: IPaginationI18n = PaginationI18n
+
+  /** Rendered size */
   @Input() size: PaginationSize = 'small'
 
   /** Amount of pages to be displayed between the first and last  */
@@ -51,7 +60,7 @@ export class NggPaginationComponent implements OnChanges {
   }
 
   /** Event emitted when a new page index is selected */
-  @Output() page = new EventEmitter<PaginationEvent>()
+  @Output() page = new EventEmitter<IPaginationEvent>()
 
   ngOnChanges(changes: SimpleChanges): void {
     if (

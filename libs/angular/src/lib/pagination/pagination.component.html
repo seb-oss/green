@@ -1,7 +1,7 @@
 <nav
   [class]="'pagination ' + size"
   role="navigation"
-  aria-label="Pagination"
+  [attr.aria-label]="i18n.paginationLabel"
   *ngIf="totalPages > 1"
 >
   <ul class="gds-reset">
@@ -10,7 +10,7 @@
         class="gds-reset"
         tabindex="0"
         (click)="gotoPrevious()"
-        aria-label="Goto Previous Page"
+        [attr.aria-label]="i18n.previousPageLabel"
         role="button"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -27,7 +27,7 @@
         tabindex="0"
         (click)="gotoFirst()"
         [attr.aria-current]="pageIndex === 0 ? 'page' : null"
-        aria-label="Goto First Page"
+        [attr.aria-label]="i18n.firstPageLabel"
         role="button"
       >
         1
@@ -41,7 +41,7 @@
         tabindex="0"
         (click)="goto(index)"
         [attr.aria-current]="pageIndex === index ? 'page' : null"
-        [attr.aria-label]="'Goto Page ' + (index + 1)"
+        [attr.aria-label]="i18n.getPageLabel(index)"
         role="button"
       >
         {{ index + 1 }}
@@ -61,7 +61,7 @@
         tabindex="0"
         (click)="gotoLast()"
         [attr.aria-current]="pageIndex === totalPages - 1 ? 'page' : null"
-        aria-label="Goto Last Page"
+        [attr.aria-label]="i18n.lastPageLabel"
         role="button"
       >
         {{ totalPages }}
@@ -72,7 +72,7 @@
         class="gds-reset"
         tabindex="0"
         (click)="gotoNext()"
-        aria-label="Goto Next Page"
+        [attr.aria-label]="i18n.nextPageLabel"
         role="button"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
