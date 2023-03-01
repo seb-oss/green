@@ -4,9 +4,10 @@
   aria-label="Pagination"
   *ngIf="totalPages > 1"
 >
-  <ul>
+  <ul class="gds-reset">
     <li *ngIf="hasPrevious()">
       <a
+        class="gds-reset"
         tabindex="0"
         (click)="gotoPrevious()"
         aria-label="Goto Previous Page"
@@ -22,6 +23,7 @@
 
     <li>
       <a
+        class="gds-reset"
         tabindex="0"
         (click)="gotoFirst()"
         [attr.aria-current]="pageIndex === 0 ? 'page' : null"
@@ -35,6 +37,7 @@
 
     <li *ngFor="let index of pageIndicies">
       <a
+        class="gds-reset"
         tabindex="0"
         (click)="goto(index)"
         [attr.aria-current]="pageIndex === index ? 'page' : null"
@@ -54,6 +57,7 @@
 
     <li>
       <a
+        class="gds-reset"
         tabindex="0"
         (click)="gotoLast()"
         [attr.aria-current]="pageIndex === totalPages - 1 ? 'page' : null"
@@ -65,6 +69,7 @@
     </li>
     <li *ngIf="hasNext()">
       <a
+        class="gds-reset"
         tabindex="0"
         (click)="gotoNext()"
         aria-label="Goto Next Page"
