@@ -13,17 +13,9 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
   selector: 'ngg-chart',
   template: ` <div
     class="chart"
-    [style]="chart?.info?.properties"
     [class.fit-height]="chart?.settings?.style?.fitHeightToParent"
   >
     <div #chartRef [class]="theme"></div>
-    <div *ngIf="chart?.info?.xAxis as xAxis">
-      <ul class="x-axis">
-        <li *ngFor="let tick of xAxis.ticks">
-          {{ tick.text }}
-        </li>
-      </ul>
-    </div>
     <ng-container *ngIf="chart?.info?.legend as legend">
       <div
         class="legend-container"

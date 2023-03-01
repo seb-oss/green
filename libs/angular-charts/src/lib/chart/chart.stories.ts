@@ -320,13 +320,51 @@ CustomTickValues.args = {
           values: [100, 200, 300, 400],
         },
         y2: {
-          padding: {
-            top: 50,
-          },
-          values: () => [0, 2, 4, 6, 8, 10],
+          values: () => [0, 4, 8, 10],
         },
       },
     },
+  },
+  theme: '',
+}
+
+export const MixedGraphWithNegativeValues = ChartStory.bind({})
+MixedGraphWithNegativeValues.args = {
+  settings: {
+    data: [
+      {
+        type: 'spline',
+        name: 'Signerade avtal SEB',
+        values: [100, 140, 250, 380, -100, 345, 100, 50, 20, 230, -20, 180],
+      },
+      {
+        type: 'line',
+        name: 'Aktiverade prenumerationer',
+        values: [-100],
+        axis: 'y2',
+      },
+      {
+        type: 'bar',
+        name: 'Aktiverade prenumerationer',
+        values: [50, 230, 100, 280, 100, -30, -200, 100, 20, 230, -20, 180],
+        axis: 'y2',
+      },
+    ],
+    categories: [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'maj',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'okt',
+      'nov',
+      'dec',
+    ],
+    legend: 'top',
   },
   theme: '',
 }

@@ -32,6 +32,7 @@ export const init = () => {
   pie()
 }
 
+// TODO: This createOption function should be more of a billboard config with sensible defaults adder rather than being passed a Green Charts settings object that then is converted to a billboard config.
 export const createOptions = ({
   settings,
   chartElement,
@@ -194,12 +195,6 @@ export const createOptions = ({
         ...(options?.axis?.x || {}),
         type: 'category',
         categories: settings.categories,
-        tick: {
-          text: {
-            show: false,
-          },
-        },
-        height: 10,
       },
     }
   }
@@ -245,13 +240,6 @@ export const createInfo = (
     info.xAxis = {
       ticks: chart.categories().map((text) => ({ text })),
     }
-  }
-
-  info.properties = {
-    '--chart-width': '768px',
-    '--chart-height': '500px',
-    '--chart-space-left': '49px',
-    '--chart-space-right': 0,
   }
 
   return info as ChartInfo
