@@ -8,7 +8,7 @@ import { NggChartsModule } from '../ngg-charts.module'
 export default {
   title: 'Chart',
   parameters: {
-    componentIds: ['component-chart']
+    componentIds: ['component-chart'],
   },
   decorators: [
     moduleMetadata({
@@ -58,10 +58,10 @@ SimpleBar.args = {
       axis: {
         y: {
           label: 'Antal',
-          stepSize: 50
+          stepSize: 50,
         },
       },
-      tooltipNumberFormat: value => `${value} st`
+      tooltipNumberFormat: (value) => `${value} st`,
     },
   },
 }
@@ -317,14 +317,16 @@ CustomTickValues.args = {
     style: {
       axis: {
         y: {
-          values: [100,200,300,400]
+          values: [100, 200, 300, 400],
         },
         y2: {
-          values: () => [0,2,4,6,8,10],
-          format: v => `${v} st`
-        }
-      }
-    }
+          padding: {
+            top: 50,
+          },
+          values: () => [0, 2, 4, 6, 8, 10],
+        },
+      },
+    },
   },
   theme: '',
 }
