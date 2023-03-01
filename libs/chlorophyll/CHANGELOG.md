@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.2...@sebgroup/chlorophyll@1.1.0) (2023-03-01)
+
+
+### Bug Fixes
+
+* 🐛 adding correct focus to select ([44c7c92](https://github.com/sebgroup/green/commit/44c7c9295604f9455c6f74b40f4b226550e9684e))
+
+
+### Features
+
+* 🎸 expandable information ([1c9a4a6](https://github.com/sebgroup/green/commit/1c9a4a675969031fcf69d4825ac436bf8954ded5))
+* 🎸 Expandable information ([66cf2d5](https://github.com/sebgroup/green/commit/66cf2d5d923a1d1549b80367149c70d4664bfb02))
+* 🎸 FormItem ([eafe1aa](https://github.com/sebgroup/green/commit/eafe1aada3527ce9fc593901daf9d22fa53f028e))
+* 🎸 IconButton React ([222ab2b](https://github.com/sebgroup/green/commit/222ab2bb1cc2d42a0af3270b40f13347ba3aef20))
+
+
+
 ## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.1...@sebgroup/chlorophyll@1.0.2) (2023-02-28)
 
 
