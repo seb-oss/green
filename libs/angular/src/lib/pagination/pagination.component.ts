@@ -132,6 +132,11 @@ export class NggPaginationComponent implements OnChanges {
   }
 
   private getDisplayedPageIndicies(): number[] {
+    // Do not render
+    if (this.totalPages <= 1) {
+      return []
+    }
+
     // All pages can fit
     if (this.totalPages <= this.displayPages)
       return [...Array(this.totalPages - 2).keys()].map((index) => index + 1)
