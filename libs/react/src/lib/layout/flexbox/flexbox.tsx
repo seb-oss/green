@@ -1,17 +1,33 @@
 import { useState, PropsWithChildren, HTMLProps, useLayoutEffect } from 'react'
-import { AlignContentType, AlignType, FlexDirectionType, FlexWrapType, JustifyContentType } from './types'
+import {
+  AlignContentType,
+  AlignType,
+  FlexDirectionType,
+  FlexWrapType,
+  JustifyContentType,
+} from './types'
 
 export interface FlexboxProps extends HTMLProps<HTMLDivElement> {
   alignContent?: AlignContentType
   alignItems?: AlignType
-  alignSelf?: AlignType
+  alignSelf?: AlignType | 'auto'
   justifyContent?: JustifyContentType
   flexDirection?: FlexDirectionType
   flexWrap?: FlexWrapType
   className?: string
 }
 
-export const Flexbox = ({ alignContent, alignItems, alignSelf, children, justifyContent, flexDirection, flexWrap, className, ...props }: PropsWithChildren<FlexboxProps>) => {
+export const Flexbox = ({
+  alignContent,
+  alignItems,
+  alignSelf,
+  children,
+  justifyContent,
+  flexDirection,
+  flexWrap,
+  className,
+  ...props
+}: PropsWithChildren<FlexboxProps>) => {
   const [classes, setClasses] = useState<string[]>(['d-flex'])
   const [flexClassName, setFlexClassName] = useState<string>('d-flex')
 
@@ -33,7 +49,15 @@ export const Flexbox = ({ alignContent, alignItems, alignSelf, children, justify
     className && newClasses.push(className)
 
     setClasses(newClasses)
-  }, [alignContent, alignItems, alignSelf, justifyContent, flexDirection, flexWrap, className])
+  }, [
+    alignContent,
+    alignItems,
+    alignSelf,
+    justifyContent,
+    flexDirection,
+    flexWrap,
+    className,
+  ])
 
   return (
     <div className={flexClassName} {...props}>

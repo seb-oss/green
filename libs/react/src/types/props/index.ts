@@ -1,3 +1,10 @@
+export interface IconProps {
+  focusable?: boolean
+  title?: string
+  fill?: string
+  'aria-hidden'?: boolean
+}
+
 export interface SelectorAttributesProps {
   id?: string
   className?: string

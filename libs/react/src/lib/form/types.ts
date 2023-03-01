@@ -5,6 +5,8 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   type?: 'text' | 'email' | 'number'
   label?: string
   info?: string
+  expandableInfo?: string
+  expandableInfoButtonLabel?: string
   validator?: IValidator
   onChangeInput?: (value: string) => string
 }

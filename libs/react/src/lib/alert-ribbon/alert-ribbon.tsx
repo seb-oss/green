@@ -1,6 +1,6 @@
-import React, {AriaAttributes, ReactNode, useEffect, useState} from 'react'
+import React, { AriaAttributes, ReactNode, useEffect, useState } from 'react'
 import { AlertRibbonType } from '@sebgroup/extract'
-import {SquareInfo, SquareExclamation, Check} from "../icons";
+import { SquareInfo, SquareExclamation, Check } from '../icons'
 
 export interface AlertRibbonProps {
   children: ReactNode
@@ -11,7 +11,7 @@ export interface AlertRibbonProps {
   closeText?: string
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void
   role?: 'alert'
-  ["aria-live"]?: AriaAttributes["aria-live"]
+  ['aria-live']?: AriaAttributes['aria-live']
   closeAriaLabel?: string
 }
 
@@ -24,8 +24,8 @@ export function AlertRibbon({
   isCloseable = true,
   onClose,
   role,
-  "aria-live": ariaLive,
-  closeAriaLabel
+  'aria-live': ariaLive,
+  closeAriaLabel,
 }: AlertRibbonProps) {
   const [closeButton, setCloseButton] = useState<ReactNode>()
   useEffect(() => {
@@ -39,40 +39,52 @@ export function AlertRibbon({
             <i></i>
           </button>
         )
-      else setCloseButton(
-        <button className="close">
-              <span className="sr-only">Close</span>
-              <i></i>
-        </button>
-      )
+      else
+        setCloseButton(
+          <button className="close">
+            <span className="sr-only">Close</span>
+            <i></i>
+          </button>
+        )
     }
   }, [isCloseable, closeText])
 
   const renderIcon = () => {
     switch (type) {
-      case "danger":
-      case  "warning":
-        return SquareExclamation
-      case "success":
-        return Check
+      case 'danger':
+      case 'warning':
+        return <SquareExclamation aria-hidden={true} />
+      case 'success':
+        return <Check aria-hidden={true} />
       default:
-        return SquareInfo
+        return <SquareInfo aria-hidden={true} />
     }
   }
 
   return (
     <div className={`alert-ribbon ${type}`} role={role} aria-live={ariaLive}>
-      <i aria-hidden="true">
-        { renderIcon() }
-      </i>
+      <i aria-hidden="true">{renderIcon()}</i>
       <div className="alert-ribbon__content">
-        { header &&  React.isValidElement(header) ? header : <span className="header">{header}</span> }
-        <p>
-          { children }
-        </p>
+        {header && React.isValidElement(header) ? (
+          header
+        ) : (
+          <span className="header">{header}</span>
+        )}
+        <p>{children}</p>
       </div>
-      { closeButton && <button className="close" type="button" aria-label={ closeAriaLabel ?? "Close alert" } onClick={ (event) => { onClose && onClose(event)} }><i></i></button> }
-      { footer && <div className="alert-ribbon__footer"> {footer} </div> }
+      {closeButton && (
+        <button
+          className="close"
+          type="button"
+          aria-label={closeAriaLabel ?? 'Close alert'}
+          onClick={(event) => {
+            onClose && onClose(event)
+          }}
+        >
+          <i></i>
+        </button>
+      )}
+      {footer && <div className="alert-ribbon__footer"> {footer} </div>}
     </div>
   )
 }

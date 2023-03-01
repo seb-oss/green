@@ -1,4 +1,5 @@
 @use '../../../common';
+@use '../../../tokens';
 
 /* base style for forms */
 @mixin add-form {
@@ -108,6 +109,7 @@
   max-width: 100%;
   position: relative;
   width: 100%;
+  z-index: 0;
 
   @include common.media-breakpoint-up('sm') {
     @include common.margin-bottom(6);
@@ -117,8 +119,64 @@
   > textarea:not(:last-child),
   > button:not(:last-child),
   button[aria-haspopup='listbox']:not(:last-child),
-  .gsd--select-wrapper {
+  .gsd-select-wrapper {
     @include common.margin-bottom(3);
+  }
+}
+
+@mixin add-form-item() {
+  .gds-form-item__header {
+    display: flex;
+
+    .form-info {
+      font-weight: normal;
+    }
+  }
+
+  .gds-form-item__labels {
+    flex: 1;
+
+    > * {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .gds-form-item__expandable-info {
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: height tokens.$transition-time;
+
+    > div {
+      padding-bottom: .5rem;
+    }
+  }
+
+
+  .gds-form-item__backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--gds-ref-pallet-base100);
+    border-radius: 2px;
+    z-index: -1;
+    margin: -1rem;
+    opacity: 0;
+    transition: all tokens.$transition-time;
+    border: 1px solid transparent;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &:has([aria-expanded="true"]) .gds-form-item__backdrop {
+    opacity: 1;
+    border-radius: .25rem;
+    border-color: var(--gds-ref-pallet-base600);
+  }
+
+  &:has(.expanded) {
   }
 }
 
@@ -142,7 +200,7 @@
     width: fit-content;
     // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
     @supports (-moz-appearance:none) {
-        @include common.add-focus('within');
+      @include common.add-focus('within');
     }
   }
 
@@ -152,7 +210,7 @@
     line-height: 1.25rem;
   }
 
-  & + input, & + textarea,  fieldset & + div, & + button, & + .group-stepper, & + .stepper-wrapper {
+  & + input, & + textarea, fieldset & + div, & + button, & + .group-stepper, & + .stepper-wrapper {
     margin-top: .5rem;
   }
 

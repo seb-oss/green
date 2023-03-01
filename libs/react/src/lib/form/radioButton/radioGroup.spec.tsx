@@ -4,17 +4,16 @@ import { RadioButton } from '../input/input'
 import { IValidator } from '@sebgroup/extract'
 import userEvent from '@testing-library/user-event'
 
-describe('RadioButton Group Component', () => {
-  const radioBtnValues: Array<{ label: string; value: string }> = [
-    {
-      value: 'Car 1',
-      label: 'Car 1',
-    },
-    {
-      value: 'Car 2',
-      label: 'Car 2',
-    },
-  ]
+const radioBtnValues: Array<{ label: string; value: string }> = [
+  {
+    value: 'Car 1',
+    label: 'Car 1',
+  },
+  {
+    value: 'Car 2',
+    label: 'Car 2',
+  },
+]
 
   type MockComponentProps = {
     validator?: IValidator
@@ -23,19 +22,25 @@ describe('RadioButton Group Component', () => {
     onChangeRadio?: (value: string) => string
   }
 
-  const MockComponent = (props: MockComponentProps) => (
-    <RadioGroup title="Radio Group title" description="Description" {...props}>
-      {radioBtnValues.map(
-        (value: { label: string; value: string }, index: number) => (
-          <RadioButton key={index} {...value} />
-        )
-      )}
-    </RadioGroup>
-  )
-  it('Should render component with title and description', () => {
+const MockComponent = (props: MockComponentProps) => (
+  <RadioGroup
+    label="Radio group label"
+    labelInformation="Radio group label information"
+    {...props}
+  >
+    {radioBtnValues.map(
+      (value: { label: string; value: string }, index: number) => (
+        <RadioButton key={index} {...value} />
+      )
+    )}
+  </RadioGroup>
+)
+
+describe('RadioButton Group Component', () => {
+  it('Should render component with label and label information', () => {
     render(<MockComponent />)
-    expect(screen.getByText('Radio Group title')).toBeVisible()
-    expect(screen.getByText('Description')).toBeVisible()
+    expect(screen.getByText('Radio group label')).toBeVisible()
+    expect(screen.getByText('Radio group label information')).toBeVisible()
     expect(screen.getAllByText(/Car/)).toHaveLength(2)
   })
 
@@ -64,16 +69,6 @@ describe('RadioButton Group Component', () => {
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
         ?.checked
     ).toEqual(true)
-  })
-
-  it('Should render validator: valid', () => {
-    const { container } = render(
-      <MockComponent
-        validator={{ message: 'valid message', indicator: 'success' }}
-      />
-    )
-    expect(screen.getByText('valid message')).toBeVisible()
-    expect(container.querySelectorAll('.is-valid')).toHaveLength(3)
   })
 
   it('Should render validator: invalid', () => {

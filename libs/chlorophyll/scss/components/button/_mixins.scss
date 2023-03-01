@@ -1,4 +1,4 @@
-@use '../../tokens/shame' as tokens;
+@use '../../tokens' as tokens;
 @use '../../common';
 @use 'sass:map';
 
@@ -9,6 +9,7 @@ $button-secondary-bg: transparent;
 $button-secondary-color: tokens.get(tokens.$blue, 0);
 $button-secondary-border-color: $button-secondary-color;
 $button-ghost-bg: tokens.get(tokens.$grey, 200);
+
 @mixin reset {
   background-color: transparent;
   border: 0;
@@ -131,5 +132,39 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
   &.disabled,
   &[aria-disabled='true'] {
     @include common.add-disable(false, true, true);
+  }
+}
+
+@mixin icon() {
+  background-color: transparent;
+  border: 0.0625rem solid transparent;
+  padding: 0.625rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  min-width: auto;
+
+  .form-group & {
+    margin-top: -.625rem;
+  }
+
+  svg {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  path, line, circle, rect, ellipse, polyline, text {
+    fill: var(--gds-ref-pallet-base800);
+    stroke: var(--gds-ref-pallet-base800);
+    transition: all tokens.$transition-time;
+  }
+
+  &:hover {
+    background-color: var(--gds-ref-pallet-base800);
+    border-color: var(--gds-ref-pallet-base800);
+
+    path, line, circle, rect, ellipse, polyline, text {
+      fill: var(--gds-ref-pallet-base000);
+      stroke: var(--gds-ref-pallet-base000);
+    }
   }
 }

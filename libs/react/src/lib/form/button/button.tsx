@@ -12,7 +12,7 @@ export interface ButtonProps {
   size?: ButtonSize
 }
 
-export function Button({
+export function Button ({
   children,
   variant,
   onClick,

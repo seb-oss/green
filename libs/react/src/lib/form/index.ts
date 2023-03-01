@@ -1,4 +1,5 @@
 export * from './button/button'
+export * from './iconButton/iconButton'
 export * from './buttonGroup/buttonGroup'
 export * from './form'
 export * from './formItems'

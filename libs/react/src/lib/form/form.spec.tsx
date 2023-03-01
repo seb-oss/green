@@ -35,7 +35,9 @@ describe('Form component', () => {
 
   it('Should render correct form direction', () => {
     const { container } = render(<Form direction="horizontal">i am form</Form>)
-    expect(container.querySelector('form')?.className.includes('horizontal')).toBe(true)
+    expect(
+      container.querySelector('form')?.className.includes('horizontal')
+    ).toBe(true)
   })
 
   it('Should render larger form size', () => {
@@ -46,8 +48,12 @@ describe('Form component', () => {
   it('Should show error message when input value is empty', () => {
     const { container } = render(<MockComponent />)
     expect(screen.queryByText('fill in blank')).toBeNull()
-    fireEvent.change(container.querySelector('input') as HTMLInputElement, { target: { value: 'value' } })
-    fireEvent.change(container.querySelector('input') as HTMLInputElement, { target: { value: '' } })
+    fireEvent.change(container.querySelector('input') as HTMLInputElement, {
+      target: { value: 'value' },
+    })
+    fireEvent.change(container.querySelector('input') as HTMLInputElement, {
+      target: { value: '' },
+    })
     expect(screen.queryByText('fill in blank')).toBeVisible()
   })
 
@@ -60,7 +66,9 @@ describe('Form component', () => {
 
   it('Should reset forms input value', () => {
     const { container } = render(<MockComponent />)
-    fireEvent.change(container.querySelector('input') as HTMLInputElement, { target: { value: 'value' } })
+    fireEvent.change(container.querySelector('input') as HTMLInputElement, {
+      target: { value: 'value' },
+    })
     expect(container.querySelector('input')?.value).toBe('value')
     fireEvent.click(screen.getByText('reset'))
     expect(container.querySelector('input')?.value).toBe('')
@@ -77,9 +85,13 @@ describe('Form component', () => {
 
   it('Should call onSubmitForm fn', async () => {
     /* eslint-disable-next-line */
-    const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
+    const mockFn: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
-    fireEvent.change(screen.getByPlaceholderText('eg: cat'), { target: { value: 'cat cat' } })
+    fireEvent.change(screen.getByPlaceholderText('eg: cat'), {
+      target: { value: 'cat cat' },
+    })
     fireEvent.click(screen.getByText('submit'))
     expect(mockFn).toBeCalled()
     expect(mockFn).toBeCalledWith({ text: 'cat cat' })
@@ -87,7 +99,9 @@ describe('Form component', () => {
 
   it('Should call not onSubmitForm fn when input empty', () => {
     /* eslint-disable-next-line */
-    const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
+    const mockFn: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
     fireEvent.click(screen.getByText('submit'))
     expect(mockFn).not.toBeCalled()
@@ -96,7 +110,14 @@ describe('Form component', () => {
   it('Should validate checkbox', () => {
     render(
       <Form>
-        <FormItems name="checkbox" validate={{ message: 'required', indicator: 'error', rules: { type: 'Required' } }}>
+        <FormItems
+          name="checkbox"
+          validate={{
+            message: 'required',
+            indicator: 'error',
+            rules: { type: 'Required' },
+          }}
+        >
           <Checkbox label="checkbox" value="checkme" />
         </FormItems>
       </Form>
@@ -110,8 +131,15 @@ describe('Form component', () => {
   it('Should validate radio group', () => {
     render(
       <Form>
-        <FormItems name="checkbox" validate={{ message: 'required', indicator: 'error', rules: { type: 'Required' } }}>
-          <RadioGroup title="Radio Group">
+        <FormItems
+          name="checkbox"
+          validate={{
+            message: 'required',
+            indicator: 'error',
+            rules: { type: 'Required' },
+          }}
+        >
+          <RadioGroup label="Radio Group">
             <RadioButton label="Radio Button 1" value="button1" />
             <RadioButton label="Radio Button 2" value="button2" />
           </RadioGroup>
@@ -126,7 +154,10 @@ describe('Form component', () => {
 
   it('Should remove inputs and useEffect cleanup should run', () => {
     const mockFn: jest.Mock = jest.fn().mockImplementation((value) => value())
-    const mockFormContext: jest.SpyInstance = jest.spyOn(FormContext, 'useFormContext')
+    const mockFormContext: jest.SpyInstance = jest.spyOn(
+      FormContext,
+      'useFormContext'
+    )
     mockFormContext.mockImplementation(() => ({
       setValues: mockFn,
       setErrors: mockFn,

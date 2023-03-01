@@ -7,6 +7,7 @@ import {
 } from '@sebgroup/extract'
 import { ChevronDown } from '../icons'
 import { SelectorAttributesProps, LabelProps } from '../../types'
+import { FormItem } from '../formItem'
 
 export interface SelectProps extends SelectorAttributesProps, LabelProps {
   children: ReactNode
@@ -15,6 +16,9 @@ export interface SelectProps extends SelectorAttributesProps, LabelProps {
   onSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   defaultValue?: string | number
   value?: string | number
+  testId?: string
+  expandableInfo?: string
+  expandableInfoButtonLabel?: string
 }
 
 interface OptionProps {
@@ -51,6 +55,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       testId,
       onChange,
       onSelect,
+      expandableInfo,
+      expandableInfoButtonLabel,
     },
     ref
   ) => {
@@ -61,35 +67,30 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     )
 
     return (
-      <>
-        <div className={`form-group ${validator && 'validated'}`}>
-          <div className="gds--select">
-            {label && <label htmlFor={selectId}>{label}</label>}
-            {labelInformation && (
-              <div className="form-info">{labelInformation}</div>
-            )}
-            <div className={`gsd--select-wrapper ${validatorClassName}`}>
-              <select
-                id={selectId}
-                data-testid={testId}
-                className={className}
-                defaultValue={defaultValue}
-                value={value}
-                ref={ref}
-                onChange={(event) => {
-                  onChange && onChange(event)
-                }}
-              >
-                {children}
-              </select>
-              {ChevronDown}
-            </div>
-            {validator?.message && (
-              <div className="form-info">{validator.message}</div>
-            )}
-          </div>
+      <FormItem
+        label={label}
+        labelInformation={labelInformation}
+        expandableInfo={expandableInfo}
+        expandableInfoButtonLabel={expandableInfoButtonLabel}
+        inputId={selectId}
+      >
+        <div className={`gsd-select ${validatorClassName}`}>
+          <select
+            id={selectId}
+            data-testid={testId}
+            className={className}
+            defaultValue={defaultValue}
+            value={value}
+            ref={ref}
+            onChange={(event) => {
+              onChange && onChange(event)
+            }}
+          >
+            {children}
+          </select>
+          {<ChevronDown />}
         </div>
-      </>
+      </FormItem>
     )
   }
 )

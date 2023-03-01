@@ -50,3 +50,9 @@ button.ghost,
 .button.ghost {
   @include mixins.ghost-dark;
 }
+
+// icon
+button.icon,
+.button.icon {
+  @include mixins.icon;
+}

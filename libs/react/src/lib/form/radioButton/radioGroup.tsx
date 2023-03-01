@@ -1,12 +1,22 @@
 import React, { useState, useRef, ChangeEvent } from 'react'
 import { RadioButtonProps } from '../types'
-import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
+import {
+  IValidator,
+  IndicatorType,
+  validateClassName,
+  randomId,
+} from '@sebgroup/extract'
+import { FormItem } from '../../formItem'
 
 export interface RadioGroupProps {
+  label?: string
   title?: string
-  defaultSelected?: string
+  labelInformation?: string
   valueSelected?: string
   description?: string
+  expandableInfo?: string
+  expandableInfoButtonLabel?: string
+  defaultSelected?: string
   validator?: IValidator
   onChangeRadio?: (value: string) => string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -16,14 +26,25 @@ export interface RadioGroupProps {
 export const RadioGroup = ({
   defaultSelected,
   valueSelected,
-  description,
+  label,
   title,
+  labelInformation,
+  description,
+  expandableInfo,
+  expandableInfoButtonLabel,
   validator,
   onChangeRadio,
   onChange,
   name,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
+  if (title)
+    console.warn('"title" prop is deprecated. Please use "label" instead.')
+  if (description)
+    console.warn(
+      '"description" prop is deprecated. Please use "labelInformation" instead.'
+    )
+
   const [selected, setSelected] = useState<string | undefined>(
     valueSelected ?? defaultSelected
   )
@@ -64,34 +85,37 @@ export const RadioGroup = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const labelFromTitle = label || title
+  const labelInformationFromDescription = labelInformation || description
+
+  const formItemProps = {
+    validator,
+    labelInformation: labelInformationFromDescription,
+    label: labelFromTitle,
+    expandableInfo,
+    expandableInfoButtonLabel,
+    role: 'radiogroup',
+  }
+
+  if (!name) name = randomId()
+
   return (
-    <div className="form-group">
-      <fieldset className={validatorClassName}>
-        {title && <legend>{title}</legend>}
-        {description && <span className="form-info">{description}</span>}
-        <div>
-          {React.Children.map(
-            children as React.ReactElement,
-            (radioButton: React.ReactElement<RadioButtonProps>) => {
-              return React.isValidElement<React.FC<RadioButtonProps>>(
-                radioButton
-              )
-                ? React.cloneElement(radioButton, {
-                    validator: validatorClassName,
-                    onChange: handleOnChange,
-                    checked: selected === radioButton.props.value,
-                    name,
-                    ref: radioBtnRef,
-                  })
-                : radioButton
-            }
-          )}
-        </div>
-      </fieldset>
-      {validator?.message && (
-        <span className="form-info">{validator?.message}</span>
+    <FormItem {...formItemProps}>
+      {React.Children.map(
+        children as React.ReactElement,
+        (radioButton: React.ReactElement<RadioButtonProps>) => {
+          return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
+            ? React.cloneElement(radioButton, {
+                validator: validatorClassName,
+                onChange: handleOnChange,
+                checked: selected === radioButton.props.value,
+                name,
+                ref: radioBtnRef,
+              })
+            : radioButton
+        }
       )}
-    </div>
+    </FormItem>
   )
 }
 

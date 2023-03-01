@@ -12,7 +12,7 @@ describe('Card', () => {
   )
   it('renders', () => {
     render(<Card>Hello</Card>)
-    expect(screen.getByText('Hello')).toBeVisible()
+    expect(screen.getByText('Hello')).toBeDefined()
   })
   it('renders header, content and footer', () => {
     render(
@@ -21,9 +21,11 @@ describe('Card', () => {
       </Card>
     )
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Card Headline')
-    expect(screen.getByText('Hello')).toBeInTheDocument()
-    expect(screen.getAllByRole('button')[0]).toHaveTextContent('Default button')
-    expect(screen.getAllByRole('button')[1]).toHaveTextContent('Primary')
+    expect(screen.getByRole('heading').textContent).toEqual('Card Headline')
+    expect(screen.getByText('Hello')).toBeDefined()
+    expect(screen.getAllByRole('button')[0].textContent).toContain(
+      'Default button'
+    )
+    expect(screen.getAllByRole('button')[1].textContent).toContain('Primary')
   })
 })

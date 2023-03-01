@@ -1,0 +1,5 @@
+@use './libs/chlorophyll/scss' as tokens;
+
+& {
+  padding: map-get(tokens.$spacing, 5);
+}

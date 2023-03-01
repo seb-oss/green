@@ -1,9 +1,12 @@
+@use '../../common' as mixins;
+
 @mixin add-select {
   .gsd--select-wrapper {
     display: flex;
     position: relative;
 
     select {
+      @include mixins.add-focus();
       flex: 1;
       display: block;
       padding: .625rem 3rem .625rem 1rem;
