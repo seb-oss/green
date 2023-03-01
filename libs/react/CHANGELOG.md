@@ -2,6 +2,33 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.3...@sebgroup/green-react@1.1.0) (2023-03-01)
+
+
+### Bug Fixes
+
+* 🐛 correct import & export of types ([2a96e89](https://github.com/sebgroup/green/commit/2a96e8975085c5170986f6357d55859be8d42aa8))
+* 🐛 deprecating title and description ([4d0a05d](https://github.com/sebgroup/green/commit/4d0a05dade336f2fb7f2e6bcf22df5e39f29e493))
+* 🐛 failing tests when moving to FormItem component ([db09c95](https://github.com/sebgroup/green/commit/db09c9554d3c38e8d17df71bc7d9d2cad99970c3))
+* 🐛 hiding svg title if label is not present ([c471701](https://github.com/sebgroup/green/commit/c471701d113c030fa01c534ab5ee7e363ba43fef))
+* 🐛 select chevron to jsx element ([c4ba1b8](https://github.com/sebgroup/green/commit/c4ba1b8459fa01cabce60d1b43d6a02b419ce712))
+* **dropdown:** multiselect inside horizontal container ([5e27cf1](https://github.com/sebgroup/green/commit/5e27cf11095bbda3f0df16b2958b278d6b2eca86))
+
+
+### Features
+
+* 🎸 adding bankid icon and title & aria props for icons ([0b24861](https://github.com/sebgroup/green/commit/0b24861556b82ec0eab9ebee45b982732d85fb3d))
+* 🎸 button tertiary ([0d5e83d](https://github.com/sebgroup/green/commit/0d5e83d422a4dc14af0c9d13df1db7829b294909))
+* 🎸 expandable information ([1c9a4a6](https://github.com/sebgroup/green/commit/1c9a4a675969031fcf69d4825ac436bf8954ded5))
+* 🎸 Expandable information ([66cf2d5](https://github.com/sebgroup/green/commit/66cf2d5d923a1d1549b80367149c70d4664bfb02))
+* 🎸 Expandable information ([8f5f1a8](https://github.com/sebgroup/green/commit/8f5f1a8b97afa657836dd482b5679314539c3d5a))
+* 🎸 expandable label information ([79351ca](https://github.com/sebgroup/green/commit/79351ca593ba86cfda1fbf0a775f9445be408786))
+* 🎸 FormItem ([eafe1aa](https://github.com/sebgroup/green/commit/eafe1aada3527ce9fc593901daf9d22fa53f028e))
+* 🎸 IconButton React ([222ab2b](https://github.com/sebgroup/green/commit/222ab2bb1cc2d42a0af3270b40f13347ba3aef20))
+* 🎸 icons ([b3b6711](https://github.com/sebgroup/green/commit/b3b67111950dac913b20f69cbe292fe29be11227))
+
+
+
 ## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.2...@sebgroup/green-react@1.0.3) (2023-02-23)
 
 
