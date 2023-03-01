@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.3...@sebgroup/green-angular@1.0.4) (2023-03-01)
+
+
+### Bug Fixes
+
+* **angular:** datepicker ontouched ([dfa493e](https://github.com/sebgroup/green/commit/dfa493ebcd4571c082e6d8f91ffde1f48a2b48f6))
+* **angular:** datepicker rerender ([ddebf20](https://github.com/sebgroup/green/commit/ddebf20e9a1e3f24879e79b74a326fed8eaaeb01))
+
+
+
 ## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.2...@sebgroup/green-angular@1.0.3) (2023-02-28)
 
 
