@@ -1,11 +1,5 @@
 [
   {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
-  },
-  {
     "id": "components-segmented-control--with-router",
     "name": "With Router",
     "title": "Components/Segmented control",
@@ -259,6 +253,12 @@
         "component-accordion"
       ]
     }
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
   },
   {
     "id": "components-form-input--default",
