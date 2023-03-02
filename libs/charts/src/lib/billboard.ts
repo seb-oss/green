@@ -32,6 +32,7 @@ export const init = () => {
   pie()
 }
 
+// TODO: This createOption function should be more of a billboard config with sensible defaults adder rather than being passed a Green Charts settings object that then is converted to a billboard config.
 export const createOptions = ({
   settings,
   chartElement,
@@ -55,7 +56,7 @@ export const createOptions = ({
   )
 
   const defaultTooltipNumberFormat = (num: number) =>
-    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
@@ -67,17 +68,16 @@ export const createOptions = ({
     tooltip: {
       format: {
         value: (value, ratio) => {
-          if (typeof ratio == 'number')
-            return `${ratio * 100}%`
+          if (typeof ratio == 'number') return `${ratio * 100}%`
           else {
-            const formatOverride = settings?.style?.tooltipNumberFormat;
+            const formatOverride = settings?.style?.tooltipNumberFormat
             return typeof formatOverride == 'function'
-                   ? formatOverride(value)
-                   : defaultTooltipNumberFormat(value)
+              ? formatOverride(value)
+              : defaultTooltipNumberFormat(value)
           }
-         }
+        },
       },
-      contents: { template: tmplTooltip }
+      contents: { template: tmplTooltip },
     },
   }
 
@@ -128,24 +128,30 @@ export const createOptions = ({
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
-            ...((settings?.ticksCount || settings?.stepSize || settings?.values || settings?.format) && {
+            ...((settings?.ticksCount ||
+              settings?.stepSize ||
+              settings?.values ||
+              settings?.format) && {
               tick: {
                 ...(settings?.ticksCount && {
-                  count: settings?.ticksCount
+                  count: settings?.ticksCount,
                 }),
                 ...(settings?.stepSize && {
                   stepSize: settings?.stepSize,
                 }),
                 ...(settings?.values && {
-                  values: settings.values
+                  values: settings.values,
                 }),
                 ...(settings?.format && {
-                  format: settings.format
-                })
-              }
+                  format: settings.format,
+                }),
+              },
             }),
             show: settings?.show === false ? false : true,
             label: settings?.label,
+            min: settings?.min,
+            max: settings?.max,
+            padding: settings?.padding,
           },
         }),
         {
@@ -189,12 +195,6 @@ export const createOptions = ({
         ...(options?.axis?.x || {}),
         type: 'category',
         categories: settings.categories,
-        tick: {
-          text: {
-            show: false,
-          },
-        },
-        height: 10,
       },
     }
   }
@@ -240,13 +240,6 @@ export const createInfo = (
     info.xAxis = {
       ticks: chart.categories().map((text) => ({ text })),
     }
-  }
-
-  info.properties = {
-    '--chart-width': '768px',
-    '--chart-height': '500px',
-    '--chart-space-left': '49px',
-    '--chart-space-right': 0,
   }
 
   return info as ChartInfo

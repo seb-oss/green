@@ -35,6 +35,12 @@ export interface ChartAxis {
   stepSize?: number
   values?: Array<number> | (() => Array<number>)
   format?: (value: number) => string
+  min?: number
+  max?: number
+  padding?: {
+    top?: number
+    bottom?: number
+  }
 }
 
 export interface ChartStyle {
@@ -48,7 +54,7 @@ export interface ChartStyle {
       }
   point?: {
     show?: boolean | 'focus'
-  },
+  }
   tooltipNumberFormat?: (value: number) => string
 }
 
