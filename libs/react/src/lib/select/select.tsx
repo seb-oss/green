@@ -73,8 +73,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         expandableInfo={expandableInfo}
         expandableInfoButtonLabel={expandableInfoButtonLabel}
         inputId={selectId}
+        validator={validator}
       >
-        <div className={`gsd-select ${validatorClassName}`}>
+        <div className={`gds-select ${validatorClassName}`}>
           <select
             id={selectId}
             data-testid={testId}
@@ -88,7 +89,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          {<ChevronDown />}
+          <ChevronDown />
         </div>
       </FormItem>
     )

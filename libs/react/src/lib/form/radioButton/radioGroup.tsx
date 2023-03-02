@@ -7,6 +7,7 @@ import {
   randomId,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
+import classNames from 'classnames'
 
 export interface RadioGroupProps {
   label?: string
@@ -21,6 +22,7 @@ export interface RadioGroupProps {
   onChangeRadio?: (value: string) => string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   name?: string
+  horizontal?: boolean
 }
 
 export const RadioGroup = ({
@@ -36,6 +38,7 @@ export const RadioGroup = ({
   onChangeRadio,
   onChange,
   name,
+  horizontal,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
   if (title)
@@ -99,22 +102,29 @@ export const RadioGroup = ({
 
   if (!name) name = randomId()
 
+  const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
+    'gds-radio-group-wrapper--horizontal': horizontal,
+  })
+
   return (
     <FormItem {...formItemProps}>
-      {React.Children.map(
-        children as React.ReactElement,
-        (radioButton: React.ReactElement<RadioButtonProps>) => {
-          return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
-            ? React.cloneElement(radioButton, {
-                validator: validatorClassName,
-                onChange: handleOnChange,
-                checked: selected === radioButton.props.value,
-                name,
-                ref: radioBtnRef,
-              })
-            : radioButton
-        }
-      )}
+      <div className={radioGroupWrapperClassNames}>
+        {React.Children.map(
+          children as React.ReactElement,
+          (radioButton: React.ReactElement<RadioButtonProps>) => {
+            return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
+              ? React.cloneElement(radioButton, {
+                  validator:
+                    validator && validateClassName(validator?.indicator),
+                  onChange: handleOnChange,
+                  checked: selected === radioButton.props.value,
+                  name,
+                  ref: radioBtnRef,
+                })
+              : radioButton
+          }
+        )}
+      </div>
     </FormItem>
   )
 }

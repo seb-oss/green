@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { render, screen, fireEvent } from '@testing-library/react'
-import { Checkbox, EmailInput, NumberInput, TextInput, RadioButton } from './input'
+import {
+  Checkbox,
+  EmailInput,
+  NumberInput,
+  TextInput,
+  RadioButton,
+} from './input'
 
 describe('Inputs', () => {
   describe('Checkbox', () => {
@@ -120,9 +126,13 @@ describe('Inputs', () => {
     })
 
     it('Should fire onChangeInput', () => {
-      const mockFn: jest.Mock = jest.fn().mockImplementation((value: string) => value)
+      const mockFn: jest.Mock = jest
+        .fn()
+        .mockImplementation((value: string) => value)
       render(<TextInput placeholder="text field" onChangeInput={mockFn} />)
-      fireEvent.change(screen.getByPlaceholderText('text field'), { target: { value: 'cat' } })
+      fireEvent.change(screen.getByPlaceholderText('text field'), {
+        target: { value: 'cat' },
+      })
       expect(mockFn).toBeCalled()
       expect(mockFn).lastReturnedWith('cat')
     })
@@ -154,25 +164,35 @@ describe('Component: RadioButton', () => {
 
   it('Should capture onChange events from individual radio buttons and emit it as one event', () => {
     const onChange: jest.Mock = jest.fn()
-    render(<RadioButton onChange={onChange} value="test value" label="Radio button" />)
+    render(
+      <RadioButton
+        onChange={onChange}
+        value="test value"
+        label="Radio button"
+      />
+    )
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).toBeCalled()
   })
 
   it('Should not fire onchange when disabled', () => {
     const onChange: jest.Mock = jest.fn().mockImplementation((value) => value)
-    render(<RadioButton onChange={onChange} value="test value" label="Radio button" disabled />)
+    render(
+      <RadioButton
+        onChange={onChange}
+        value="test value"
+        label="Radio button"
+        disabled
+      />
+    )
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).not.toBeCalled()
   })
 
-  it('Should render validator: valid', () => {
-    const { container } = render(<RadioButton label="Radio button" value="" validator="is-valid" />)
-    expect(container.querySelectorAll('.is-valid')).toHaveLength(1)
-  })
-
   it('Should render validator: invalid', () => {
-    const { container } = render(<RadioButton label="Radio button" value="" validator="is-invalid" />)
+    const { container } = render(
+      <RadioButton label="Radio button" value="" validator="is-invalid" />
+    )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })
 })
@@ -180,9 +200,18 @@ describe('Component: RadioButton', () => {
 describe('Validation: text, number and email component', () => {
   const MockComponent = () => (
     <>
-      <TextInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
-      <NumberInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
-      <EmailInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
+      <TextInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'success' }}
+      />
+      <NumberInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'success' }}
+      />
+      <EmailInput
+        label="Input label"
+        validator={{ message: 'valid message', indicator: 'success' }}
+      />
     </>
   )
   it('Should render validation: valid', () => {

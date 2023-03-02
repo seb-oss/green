@@ -4,12 +4,16 @@ import {Select, Option} from "../select";
 
 export const Template = () => {
   return (
-    <FormItem>
-      <Select>
+    <>
+      <Select label="This is a label" labelInformation="this is information label">
         <Option>This is an option</Option>
         <Option>This is an option</Option>
       </Select>
-    </FormItem>
+      <Select label="This is a label" labelInformation="this is information label">
+        <Option>This is an option</Option>
+        <Option>This is an option</Option>
+      </Select>
+    </>
   )
 }
 

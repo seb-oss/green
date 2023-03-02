@@ -56,6 +56,7 @@
     "billboard.js": "^3.6.0",
     "body-scroll-lock": "^3.1.5",
     "browserslist": "^4.20.2",
+    "classnames": "^2.3.2",
     "core-js": "^3.22.1",
     "date-fns": "^2.28.0",
     "globby": "^13.1.2",

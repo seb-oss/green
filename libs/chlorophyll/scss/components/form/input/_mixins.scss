@@ -1,4 +1,6 @@
 @use '../../../common';
+@use '../../form/validation/mixins' as validation;
+@use '../../../tokens';
 
 $_color: var(--sg-text-primary);
 $background: var(--sg-form-control-bg);
@@ -49,5 +51,21 @@ $background: var(--sg-form-control-bg);
       -webkit-appearance: none;
       margin: 0;
     }
+  }
+}
+
+@mixin add-input-wrapper() {
+  display: flex;
+  flex-direction: column;
+
+  @include validation.add-feedback-element(false);
+
+
+  &:before {
+    bottom: 0;
+  }
+
+  .is-invalid & {
+    @include validation.add-feedback(tokens.$intent-danger-background);
   }
 }

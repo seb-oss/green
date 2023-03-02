@@ -30,6 +30,8 @@ $invalid-color: tokens.$intent-danger-background;
   /* Style for custom radio */
   #{$selector} #{$radio-selector} ~ i {
     @include common.margin-end(4);
+    margin-top: 0.0625rem;
+    flex-shrink: 0;
     position: relative;
     border-radius: var(--gds-comp-radio-border-radius);
     display: flex;
@@ -106,5 +108,18 @@ $invalid-color: tokens.$intent-danger-background;
     ~ span {
       @include common.add-disable(false, true, false);
     }
+  }
+}
+
+@mixin add-radio-group-wrapper() {
+  width: fit-content;
+
+  .is-invalid & {
+    border: 1px solid tokens.$intent-danger-background;
+    border-radius: var(--gds-sys-shape-corner-medium);
+  }
+
+  &.gds-radio-group-wrapper--horizontal {
+    display: flex;
   }
 }

@@ -13,7 +13,7 @@ form,
   @include mixins.add-form-control;
 }
 
-.form-group, .gds-form-item {
+.form-group {
   @include mixins.add-form-group;
 }
 

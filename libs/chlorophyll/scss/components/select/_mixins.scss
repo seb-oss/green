@@ -1,26 +1,35 @@
 @use '../../common' as mixins;
+@use '../form/validation/mixins' as validation;
+@use '../../tokens/shame' as tokens;
 
 @mixin add-select {
-  .gsd--select-wrapper {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 
-    select {
-      @include mixins.add-focus();
-      flex: 1;
-      display: block;
-      padding: .625rem 3rem .625rem 1rem;
-      border-radius: .25rem;
-      border: 1px solid var(--gds-ref-pallet-base600);
-    }
+  select {
+    @include mixins.add-focus();
+    flex: 1;
+    display: block;
+    padding: .625rem 3rem .625rem 1rem;
+    border-radius: .25rem;
+    border: 1px solid var(--gds-ref-pallet-base600);
+  }
 
-    svg {
-      pointer-events: none;
-      position: absolute;
-      inset: 0 1rem 0 auto;
-      margin: auto;
-      transform: scale(0.5766666667);
-      transform-origin: 50%;
+  svg {
+    pointer-events: none;
+    position: absolute;
+    inset: 0 1rem 0 auto;
+    margin: auto;
+    transform: scale(0.5766666667);
+    transform-origin: 50%;
+  }
+
+  &.is-invalid {
+    @include validation.add-feedback-element(false);
+    @include validation.add-feedback(tokens.$intent-danger-background);
+
+    &::before {
+      bottom: 0;
     }
   }
 }

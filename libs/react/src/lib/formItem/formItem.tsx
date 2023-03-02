@@ -2,7 +2,6 @@ import IconButton from '../form/iconButton/iconButton'
 import {
   debounce,
   delay,
-  IndicatorType,
   IValidator,
   randomId,
   validateClassName,
@@ -15,6 +14,7 @@ import React, {
   useState,
 } from 'react'
 import { InfoCircle, Times } from '../icons'
+import classNames from 'classnames'
 
 interface FormItemProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -69,11 +69,14 @@ export const FormItem = ({
 
   if (!inputId) inputId = randomId()
 
+  const formItemClassNames = classNames(
+    'gds-form-item',
+    validator && validateClassName(validator?.indicator)
+  )
+
   return (
     <div
-      className={`gds-form-item ${
-        validator && validateClassName(validator?.indicator)
-      }`}
+      className={formItemClassNames}
       role={role ? role : undefined}
       aria-labelledby={role ? `${inputId}-label` : undefined}
     >

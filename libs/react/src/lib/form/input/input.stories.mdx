@@ -50,21 +50,18 @@ export const NumberInputTemplate = ({ ...props }) => <NumberInput {...props} />
 When placed after an input the form info also shows the state of the input if either `.is-valid` or `.is-invalid` has been added to the input or if the input is scoped to `.was-validated` (usually added to the form).
 
 <Canvas>
-  <TextInput
-    label="Text Input"
-    info="Info"
-    validator={{ message: 'success', indicator: 'success' }}
-  />
-  <EmailInput
-    label="Email Input"
-    info="Info"
-    validator={{ message: 'error', indicator: 'error' }}
-  />
-  <NumberInput
-    label="Number Input"
-    info="Info"
-    validator={{ message: 'nuetral', indicator: 'info' }}
-  />
+  <Story name="validation">
+    <EmailInput
+      label="Email Input"
+      info="This is a text with additional label information"
+      validator={{ message: 'This is the error message', indicator: 'error' }}
+    />
+    <NumberInput
+      label="Number Input"
+      info="This is a text with additional label information"
+      validator={{ message: 'This is the error message', indicator: 'error' }}
+    />
+  </Story>
 </Canvas>
 
 ### Expandable information

@@ -27,7 +27,6 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-feedback($color) {
   color: $color;
-  font-weight: 500;
   opacity: 1;
 
   &::before {
@@ -47,7 +46,8 @@ $_border-width: var(--sg-border-width);
 @mixin add-validation() {
   .was-validated input + .form-info,
   .was-validated textarea + .form-info,
-  .was-validated fieldset + .form-info{
+  .was-validated fieldset + .form-info,
+  .was-validated .gds-form-item__footer .form-info {
     font-weight: 500;
   }
 
@@ -63,6 +63,7 @@ $_border-width: var(--sg-border-width);
   .was-validated textarea:not(.is-valid):invalid + .form-info,
   .was-validated fieldset:not(.is-valid).is-invalid + .form-info,
   .is-invalid:not(.group) ~ .form-info,
+  .is-invalid .gds-form-item__footer .form-info,
   .is-invalid:is(.group) {
     @include add-feedback(tokens.$intent-danger-background);
   }
