@@ -8,6 +8,7 @@ import {
 } from '../types'
 import { FormItem } from '../../formItem'
 import useInput from '../useInput'
+import classNames from 'classnames'
 
 export type Renderer = (
   type: string,
@@ -51,14 +52,17 @@ export const RenderInput: Renderer = (
       expandableInfoButtonLabel={expandableInfoButtonLabel}
       inputId={inputProps.id}
     >
-      <input
-        type={type}
-        value={value}
-        {...propsWithDescription}
-        className={
-          validator && validateClassName(validator?.indicator as IndicatorType)
-        }
-      />
+      <div className="gds-input-wrapper">
+        <input
+          type={type}
+          value={value}
+          {...propsWithDescription}
+          className={
+            validator &&
+            validateClassName(validator?.indicator as IndicatorType)
+          }
+        />
+      </div>
     </FormItem>
   )
 }
@@ -124,18 +128,21 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const inputProps = useInput(props, onChange)
-  const validatorClassName: string = validateClassName(
-    validator?.indicator as IndicatorType
+
+  const labelClassNames = classNames(
+    'form-control',
+    validator && validateClassName(validator?.indicator)
+  )
+
+  const inputClassNames = classNames(
+    validator && validateClassName(validator?.indicator)
   )
 
   return (
     <div className="form-group">
-      <label
-        htmlFor={inputProps.id}
-        className={`form-control ${validatorClassName}`}
-      >
+      <label htmlFor={inputProps.id} className={labelClassNames}>
         {label}
-        <input type="checkbox" {...inputProps} className={validatorClassName} />
+        <input type="checkbox" {...inputProps} className={inputClassNames} />
         <i />
       </label>
       {validator && <span className="form-info">{validator.message}</span>}
@@ -150,13 +157,17 @@ export const RadioButton = React.forwardRef(
   ) => {
     const { id } = useInput(props)
 
+    const inputClassNames = classNames(
+      validator && validateClassName(validator?.indicator)
+    )
+
     return (
       <label htmlFor={id} className="form-control">
         <input
           id={id}
           type="radio"
           {...props}
-          className={validator}
+          className={inputClassNames}
           ref={ref}
         />
         <span>{label}</span>

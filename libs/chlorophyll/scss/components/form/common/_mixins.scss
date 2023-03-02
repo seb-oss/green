@@ -119,12 +119,23 @@
   > textarea:not(:last-child),
   > button:not(:last-child),
   button[aria-haspopup='listbox']:not(:last-child),
-  .gsd-select-wrapper {
+  .gds-select-wrapper {
     @include common.margin-bottom(3);
   }
 }
 
 @mixin add-form-item() {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+  }
+
   .gds-form-item__header {
     display: flex;
 
@@ -135,6 +146,11 @@
 
   .gds-form-item__labels {
     flex: 1;
+    margin-bottom: .5rem;
+
+    .form-info {
+      margin-bottom: 0;
+    }
 
     > * {
       width: 100%;
@@ -176,7 +192,8 @@
     border-color: var(--gds-ref-pallet-base600);
   }
 
-  &:has(.expanded) {
+  .gds-form-item__footer {
+    margin-top: .5rem;
   }
 }
 

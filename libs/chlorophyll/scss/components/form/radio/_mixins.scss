@@ -108,3 +108,16 @@ $invalid-color: tokens.$intent-danger-background;
     }
   }
 }
+
+@mixin add-radio-group-wrapper() {
+  width: fit-content;
+
+  .is-invalid & {
+    border: 1px solid tokens.$intent-danger-background;
+    border-radius: var(--gds-sys-shape-corner-medium);
+  }
+
+  &.gds-radio-group-wrapper--horizontal {
+    display: flex;
+  }
+}

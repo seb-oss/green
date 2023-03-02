@@ -17,7 +17,7 @@ input + .form-info,
 textarea + .form-info,
 [aria-haspopup='listbox'] ~ .form-info,
 .group + .form-info,
-.gsd-select-wrapper + .form-info {
+.gds-select-wrapper + .form-info {
   @include mixins.add-feedback-element();
 }
 

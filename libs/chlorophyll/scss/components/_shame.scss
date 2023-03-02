@@ -1,5 +1,6 @@
 @use '../common';
 @use '../tokens';
+
 $_background: var(--sg-bg-level-0);
 .bg-color {
   background: $_background;

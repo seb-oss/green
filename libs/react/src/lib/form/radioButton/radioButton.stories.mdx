@@ -1,12 +1,12 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { RadioButton } from '../input/input'
-import { RadioGroup } from './radioGroup'
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs'
+import {RadioButton} from '../input/input'
+import {RadioGroup} from './radioGroup'
 
-export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
+export const RadioButtonTemplate = ({...props}) => <RadioButton {...props} />
 
-export const RadioGroupTemplate = ({ ...props }) => <RadioGroup {...props} />
+export const RadioGroupTemplate = ({...props}) => <RadioGroup {...props} />
 
-<Meta title="Components/Form/RadioButton" component={RadioButton} />
+<Meta title="Components/Form/RadioButton" component={RadioButton}/>
 
 # Radio button
 
@@ -39,8 +39,8 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
 <Canvas>
   <form>
     <RadioGroup label="Radio Group" labelInformation="Radio Group Description">
-      <RadioButton label="Radio Button 1" name="name" value="button1" />
-      <RadioButton label="Radio Button 2" name="name" value="button2" />
+      <RadioButton label="Radio Button 1" name="name" value="button1"/>
+      <RadioButton label="Radio Button 2" name="name" value="button2"/>
     </RadioGroup>
   </form>
 </Canvas>
@@ -50,8 +50,8 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
 <Canvas>
   <form className="horizontal">
     <RadioGroup label="Radio Group" labelInformation="Radio Group Description">
-      <RadioButton label="Radio Button 1" name="name" value="button1" />
-      <RadioButton label="Radio Button 2" name="name" value="button2" />
+      <RadioButton label="Radio Button 1" name="name" value="button1"/>
+      <RadioButton label="Radio Button 2" name="name" value="button2"/>
     </RadioGroup>
   </form>
 </Canvas>
@@ -61,11 +61,11 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
 <Canvas>
   <form>
     <RadioGroup label="Radio Group" labelInformation="Radio Group Description">
-      <RadioButton label="Radio Button 1" name="name" value="button1" />
-      <RadioButton label="Radio Button 2" name="name" value="button2" />
-      <RadioButton label="Radio Button 3" name="name" value="button3" disabled />
-      <RadioButton label="Radio Button 4" name="name" value="button4" disabled />
-      <RadioButton label="Radio Button 5" name="name" value="button5" disabled />
+      <RadioButton label="Radio Button 1" name="name" value="button1"/>
+      <RadioButton label="Radio Button 2" name="name" value="button2"/>
+      <RadioButton label="Radio Button 3" name="name" value="button3" disabled/>
+      <RadioButton label="Radio Button 4" name="name" value="button4" disabled/>
+      <RadioButton label="Radio Button 5" name="name" value="button5" disabled/>
     </RadioGroup>
   </form>
 </Canvas>
@@ -76,17 +76,20 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
 
 <Canvas>
   <form>
-    <RadioGroup label="Radio Group" labelInformation="Radio Group Description" validator={{ message: 'neutral', indicator: 'info' }}>
-      <RadioButton name="name1" label="Radio Button 1" value="button1" />
-      <RadioButton name="name1" label="Radio Button 2" value="button2" />
+    <RadioGroup label="Radio Group" labelInformation="Radio Group Description"
+                validator={{message: 'neutral', indicator: 'info'}}>
+      <RadioButton name="name1" label="Radio Button 1" value="button1"/>
+      <RadioButton name="name1" label="Radio Button 2" value="button2"/>
     </RadioGroup>
-    <RadioGroup label="Valid Radio Group" labelInformation="Radio Group Description" validator={{ message: 'valid', indicator: 'success' }}>
-      <RadioButton name="name2" label="Radio Button 1" value="button1" />
-      <RadioButton name="name2" label="Radio Button 2" value="button2" />
+    <RadioGroup label="Valid Radio Group" labelInformation="Radio Group Description"
+                validator={{message: 'valid', indicator: 'success'}}>
+      <RadioButton name="name2" label="Radio Button 1" value="button1"/>
+      <RadioButton name="name2" label="Radio Button 2" value="button2"/>
     </RadioGroup>
-    <RadioGroup label="Invalid Radio Group" labelInformation="Radio Group Description" validator={{ message: 'Invalid', indicator: 'error' }}>
-      <RadioButton name="name3" label="Radio Button 1" value="button1" />
-      <RadioButton name="name3" label="Radio Button 2" value="button2" />
+    <RadioGroup label="Invalid Radio Group" labelInformation="Radio Group Description"
+                validator={{message: 'Invalid', indicator: 'error'}}>
+      <RadioButton name="name3" label="Radio Button 1" value="button1"/>
+      <RadioButton name="name3" label="Radio Button 2" value="button2"/>
     </RadioGroup>
   </form>
 </Canvas>
@@ -94,16 +97,18 @@ Group form controls such as checkboxes and radio buttons using `fieldset` and ad
 ### Horizontal
 
 <Canvas>
-  <form className="horizontal">
-    <RadioGroup label="Valid Radio Group" labelInformation="Radio Group Description" validator={{ message: 'valid', indicator: 'success' }}>
-      <RadioButton name="name" label="One" value="button1" />
-      <RadioButton name="name" label="Two" value="button2" />
-    </RadioGroup>
-    <RadioGroup label="Invalid Radio Group" labelInformation="Radio Group Description" validator={{ message: 'Invalid', indicator: 'error' }}>
-      <RadioButton name="name1" label="One" value="button1" />
-      <RadioButton name="name1" label="Two" value="button2" />
-    </RadioGroup>
-  </form>
+  <RadioGroup label="Valid Radio Group"
+              labelInformation="Radio Group Description"
+              horizontal>
+    <RadioButton name="name" label="One" value="button1"/>
+    <RadioButton name="name" label="Two" value="button2"/>
+  </RadioGroup>
+  <RadioGroup label="Invalid Radio Group" labelInformation="Radio Group Description"
+              validator={{message: 'Invalid', indicator: 'error'}}
+              horizontal>
+    <RadioButton name="name1" label="One" value="button1"/>
+    <RadioButton name="name1" label="Two" value="button2"/>
+  </RadioGroup>
 </Canvas>
 
-<ArgsTable of={RadioButton} />
+<ArgsTable of={RadioButton}/>
