@@ -30,6 +30,8 @@ $invalid-color: tokens.$intent-danger-background;
   /* Style for custom radio */
   #{$selector} #{$radio-selector} ~ i {
     @include common.margin-end(4);
+    margin-top: 0.0625rem;
+    flex-shrink: 0;
     position: relative;
     border-radius: var(--gds-comp-radio-border-radius);
     display: flex;
