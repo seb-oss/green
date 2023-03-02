@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.0.0...@sebgroup/green-angular-charts@1.1.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* 🐛 removed implementation of x-axis and use default instead ([13c5b6a](https://github.com/sebgroup/green/commit/13c5b6a4296c6e21f0a1b796db3330168cdd1cf0))
+
+
+### Features
+
+* 🎸 adding config option for padding, max and min on axes ([8aeb66a](https://github.com/sebgroup/green/commit/8aeb66a29b76ca3d4282ee0252e3d9e47154af44))
+
+
+
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@0.0.1...@sebgroup/green-angular-charts@1.0.0) (2023-02-20)
 
 
