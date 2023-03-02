@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.1.0...@sebgroup/chlorophyll@1.2.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* 🐛 radio & checkbox alignment ([8425b6b](https://github.com/sebgroup/green/commit/8425b6baa3bfc0a9a91cbbd9dba49928292e45af)), closes [#733](https://github.com/sebgroup/green/issues/733)
+
+
+### Features
+
+* 🎸 horizontal checkbox group, form item validation ([58d768a](https://github.com/sebgroup/green/commit/58d768ae37c941522241d9121cead878a20af70d))
+
+
+
 # [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.0.2...@sebgroup/chlorophyll@1.1.0) (2023-03-01)
 
 
