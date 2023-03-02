@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.1.0...@sebgroup/green-react@1.2.0) (2023-03-02)
+
+
+### Bug Fixes
+
+* 🐛 radio & checkbox alignment ([3e3e6d5](https://github.com/sebgroup/green/commit/3e3e6d5653c2fe4653508345e2798b344246060e)), closes [#733](https://github.com/sebgroup/green/issues/733)
+
+
+### Features
+
+* 🎸 horizontal checkbox group, form item validation ([58d768a](https://github.com/sebgroup/green/commit/58d768ae37c941522241d9121cead878a20af70d))
+
+
+
 # [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.0.3...@sebgroup/green-react@1.1.0) (2023-03-01)
 
 
