@@ -157,9 +157,7 @@ export const RadioButton = React.forwardRef(
   ) => {
     const { id } = useInput(props)
 
-    const inputClassNames = classNames(
-      validator && validateClassName(validator?.indicator)
-    )
+    const inputClassNames = classNames(validator)
 
     return (
       <label htmlFor={id} className="form-control">

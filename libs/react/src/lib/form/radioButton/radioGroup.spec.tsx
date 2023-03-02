@@ -15,12 +15,12 @@ const radioBtnValues: Array<{ label: string; value: string }> = [
   },
 ]
 
-  type MockComponentProps = {
-    validator?: IValidator
-    valueSelected?: string
-    defaultSelected?: string
-    onChangeRadio?: (value: string) => string
-  }
+type MockComponentProps = {
+  validator?: IValidator
+  valueSelected?: string
+  defaultSelected?: string
+  onChangeRadio?: (value: string) => string
+}
 
 const MockComponent = (props: MockComponentProps) => (
   <RadioGroup
@@ -79,6 +79,9 @@ describe('RadioButton Group Component', () => {
     )
     expect(screen.getByText('invalid message')).toBeVisible()
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(3)
+    expect(
+      screen.getByText('invalid message').classList.contains('form-info')
+    ).toEqual(true)
   })
 
   it('Should reset radio values when form reset', () => {

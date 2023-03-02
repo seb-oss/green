@@ -25,6 +25,7 @@ export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
 
 export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
   label: string
+  // TODO: This validator prop should be of type IValidator
   validator?: string
   value: string
 }
