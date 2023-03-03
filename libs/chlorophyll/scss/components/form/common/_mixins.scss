@@ -110,10 +110,7 @@
   position: relative;
   width: 100%;
   z-index: 0;
-
-  @include common.media-breakpoint-up('sm') {
-    @include common.margin-bottom(6);
-  }
+  @include common.margin-bottom(6);
 
   > input:not(:last-child),
   > textarea:not(:last-child),
