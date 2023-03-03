@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.2.0...@sebgroup/chlorophyll@1.2.1) (2023-03-03)
+
+
+### Bug Fixes
+
+* **chlorophyll:** form-group margin in mobile ([2281b06](https://github.com/sebgroup/green/commit/2281b0689ee3fbf619940668c4349964aa813641))
+
+
+
 # [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.1.0...@sebgroup/chlorophyll@1.2.0) (2023-03-02)
 
 
