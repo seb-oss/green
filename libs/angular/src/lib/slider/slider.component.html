@@ -1,6 +1,14 @@
-<div class="flexbox">
+<div class="ngg-slider-label-container">
   <label [attr.for]="name">Slider label text in one line</label>
-  <input type="text" [(ngModel)]="value" (input)="onInput()" />
+  <div *ngIf="hasTextbox" class="form-group">
+    <input
+      type="number"
+      [(ngModel)]="value"
+      [class.is-invalid]="!!errorMessage"
+      [attr.disabled]="disabled"
+    />
+    <span *ngIf="!!errorMessage" class="form-info"></span>
+  </div>
 </div>
 <input
   type="range"
@@ -9,10 +17,10 @@
   [attr.min]="min"
   [attr.max]="max"
   [attr.step]="step"
+  [attr.disabled]="disabled"
   [(ngModel)]="value"
   [ngStyle]="style"
-  (input)="onInput()"
 />
-<div class="error">Error text can be quite long, 14px</div>
-
-
+<p *ngIf="!!errorMessage" class="ngg-slider-error-info">
+  {{ errorMessage }}
+</p>

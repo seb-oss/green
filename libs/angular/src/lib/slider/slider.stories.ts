@@ -1,114 +1,49 @@
+import { Meta, moduleMetadata, Story } from '@storybook/angular'
+
+import { NggSliderComponent } from './slider.component'
+import { NggSliderModule } from './slider.module'
 import Documentation from './documentation.mdx'
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { NggSliderComponent } from './slider.component';
-import { NggSliderModule } from './slider.module';
 
 export default {
-    title: 'Components/Accordion',
-    component: NggSliderComponent,
-    decorators: [
-      moduleMetadata({
-        imports: [NggSliderModule],
-      }),
-    ],
-    parameters: {
-      docs: {
-        page: Documentation,
-      },
-      componentIds: ['component-accordion' ],
+  title: 'Components/Slider',
+  component: NggSliderComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [NggSliderModule],
+    }),
+  ],
+  parameters: {
+    docs: {
+      page: Documentation,
     },
+    componentIds: ['component-slider'],
+  },
 } as Meta<NggSliderComponent>
 
-const Template: Story<NggSliderComponent> = () => {
-    
-    return {
-        template:`
-        <ngg-accordion [closeOthers]=false>
-            <div ngg-accordion-list-item listItemHeader="First section" listItemSubHeader="The first section">
-                <p>This is the content of the first section</p>
-            </div>
-            <div ngg-accordion-list-item listItemHeader="Second section" listItemSubHeader="The second section">
-                <p>This is the content of the second section</p>
-            </div>
-            <div ngg-accordion-list-item listItemHeader="Third section" listItemSubHeader="The third section">
-              <p>This is the content of the second section</p>
-            </div>
-        </ngg-accordion>
-        `,
-    }
-}
-
-const NoSubHeadersTemplate: Story<NggSliderComponent> = () => {
+const Template: Story<NggSliderComponent> = (args: NggSliderComponent) => {
   return {
-    template:`
-    <ngg-accordion [closeOthers]=false>
-        <div ngg-accordion-list-item listItemHeader="First section">
-            <p>This is the content of the first section</p>
-        </div>
-        <div ngg-accordion-list-item listItemHeader="Second section">
-            <p>This is the content of the second section</p>
-        </div>
-        <div ngg-accordion-list-item listItemHeader="Third section">
-          <p>This is the content of the second section</p>
-        </div>
-    </ngg-accordion>
-    `,
+    template: `<ngg-slider [value]="50" [hasTextbox]="hasTextbox" [disabled]="disabled" [errorMessage]="errorMessage"></ngg-slider>`,
+    props: {
+      ...args,
+    },
   }
 }
-
-
-const CheckBoxTemplate: Story<NggSliderComponent> = () => {
-    
-  return {
-      template:`
-      <ngg-accordion [closeOthers]=true>
-          <div ngg-accordion-list-item listItemHeader="First section" listItemSubHeader="First section with just one option">
-            <div>
-              <label class="form-control">
-                <input type="checkbox" />
-                <span>Option one.</span>
-                <i></i>
-              </label>
-            </div>
-          </div>
-          <div ngg-accordion-list-item listItemHeader="Second section" listItemSubHeader="Second section with three options">
-              <div>
-                <label class="form-control">
-                  <input type="checkbox" />
-                  <span>Option one.</span>
-                  <i></i>
-                </label>
-                <label class="form-control">
-                  <input type="checkbox" />
-                  <span>Option two.</span>
-                  <i></i>
-                </label>
-                <label class="form-control">
-                  <input type="checkbox" />
-                  <span>Option three.</span>
-                  <i></i>
-                  </label>
-              </div>
-          </div>
-          <div ngg-accordion-list-item listItemHeader="Third section" listItemSubHeader="Third section with two options">
-            <div>
-              <label class="form-control">
-                <input type="checkbox" />
-                <span>Option one.</span>
-                <i></i>
-              </label>
-            <label class="form-control">
-              <input type="checkbox" />
-              <span>Option two.</span>
-              <i></i>
-            </label>
-          </div>
-          </div>
-      </ngg-accordion>
-      `,
-  }
-} 
 
 export const Simple = Template.bind({})
-export const Nosubheaders = NoSubHeadersTemplate.bind({})
-export const Closeothers = CheckBoxTemplate.bind({})
+
+export const Textbox = Template.bind({})
+Textbox.args = {
+  hasTextbox: true,
+}
+
+export const Error = Template.bind({})
+Error.args = {
+  hasTextbox: true,
+  errorMessage: 'Error text can be quite long',
+}
+
+export const Disabled = Template.bind({})
+Disabled.args = {
+  hasTextbox: true,
+  disabled: true,
+}

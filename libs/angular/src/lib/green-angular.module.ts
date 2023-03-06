@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { NggAccordionModule } from './accordion'
 import { NggBadgeModule } from './badge/badge.module'
+import { NggButtonModule } from './button/button.module'
 import { NggDatepickerModule } from './datepicker/datepicker.module'
 import { NggDropdownModule } from './dropdown/dropdown.module'
 import { NggModalModule } from './modal'
 import { NggProgressCircleModule } from './progress-circle/progress-circle.module'
 import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
-import { NggButtonModule } from './button/button.module'
+import { NggSliderModule } from './slider/slider.module'
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import { NggButtonModule } from './button/button.module'
     NggModalModule,
     NggProgressCircleModule,
     NggSegmentedControlModule,
+    NggSliderModule,
   ],
 })
 export class NggModule {}

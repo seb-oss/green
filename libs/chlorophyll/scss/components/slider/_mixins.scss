@@ -1,16 +1,25 @@
+@use 'sass:map';
+@use '../../tokens/grid';
 @use '../../tokens/shame';
 
-$track-color: shame.$grey-500;
+$spacing: 1rem;
 $dark-blue-1: #0092e1;
 $dark-blue-2: #007ac7;
+$dark-red: #d81a1a;
+$form-info-font-size: 0.875rem;
+$form-group-width: 7.5rem;
 
 $box-shadow: rgba(85, 85, 85, 0.4) 0 2px 5px;
 $box-shadow-focus: 0 0 0 3px rgba($dark-blue-1, 0.4);
 
 $thumb-size: 1.5rem;
+$thumb-hover-scale: 5%;
+$track-border-radius: 0.25rem;
+$track-color: shame.$grey-500;
 $track-height: 0.25rem;
 
-$browserThumbClasses: "-webkit-slider-thumb", "-moz-range-thumb";
+$browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
+$breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
 
 @mixin thumb-styles() {
   background: $dark-blue-1;
@@ -22,12 +31,17 @@ $browserThumbClasses: "-webkit-slider-thumb", "-moz-range-thumb";
   box-shadow: $box-shadow;
   cursor: pointer;
 
-  &:hover:not(:disabled) {
-    transform: scale(105%);
+  &:hover {
+    transform: scale(calc(100% + $thumb-hover-scale));
   }
 }
 
 @mixin thumb-focus-styles() {
   background: $dark-blue-2;
   box-shadow: $box-shadow, $box-shadow-focus;
+}
+
+@mixin thumb-disabled-styles() {
+  background: $track-color;
+  cursor: not-allowed;
 }
