@@ -32,7 +32,7 @@ const Template: Story<NggSliderComponent> = (args: NggSliderComponent) => {
   }
 }
 
-export const Simple = Template.bind({})
+export const Default = Template.bind({})
 
 export const Textbox = Template.bind({})
 Textbox.args = {

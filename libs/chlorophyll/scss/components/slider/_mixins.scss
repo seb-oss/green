@@ -23,6 +23,7 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
 
 @mixin thumb-styles() {
   background: $dark-blue-1;
+  border: none;
   border-radius: 50%;
   -webkit-appearance: none;
   width: $thumb-size;
