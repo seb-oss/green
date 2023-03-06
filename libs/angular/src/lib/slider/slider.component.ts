@@ -34,19 +34,25 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() set value(val: number) {
     this._value = val ?? 0
     this.setTrackBackground()
-    this.onTouchedFn && this.onTouchedFn()
+    this.sliderChange.emit(this.value)
     this.onChangeFn && this.onChangeFn(this.value)
   }
   get value(): number {
     return this._value
   }
-  @Output() change = new EventEmitter()
+  @Output() sliderChange = new EventEmitter<number>()
+  @Output() sliderTouch = new EventEmitter<boolean>()
   onChangeFn?: (val: number) => void
   onTouchedFn?: VoidFunction
   style: SliderStyle = {}
 
   ngOnInit(): void {
     this.setTrackBackground()
+  }
+
+  onFocus(): void {
+    this.sliderTouch.emit(true)
+    this.onTouchedFn && this.onTouchedFn()
   }
 
   setTrackBackground(): void {
@@ -76,7 +82,6 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   }
 
   registerOnTouched(fn: any): void {
-    console.log("HERE")
     this.onTouchedFn = fn
   }
 }

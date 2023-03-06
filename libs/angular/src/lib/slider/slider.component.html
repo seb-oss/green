@@ -6,6 +6,7 @@
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
       [attr.disabled]="disabled"
+      (focus)="onFocus()"
     />
     <span *ngIf="!!errorMessage" class="form-info"></span>
   </div>
@@ -20,6 +21,7 @@
   [attr.disabled]="disabled"
   [(ngModel)]="value"
   [ngStyle]="style"
+  (focus)="onFocus()"
 />
 <p *ngIf="!!errorMessage" class="ngg-slider-error-info">
   {{ errorMessage }}
