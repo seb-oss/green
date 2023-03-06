@@ -30,6 +30,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() step = 1
   @Input() label = ''
   @Input() instruction = ''
+  @Input() placeholder = ''
   @Input() errorMessage = ''
   @Input() hasTextbox = false
   @Input() disabled = false

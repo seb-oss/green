@@ -8,6 +8,7 @@
       type="number"
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
+      [attr.placeholder]="placeholder"
       [attr.disabled]="disabled"
       (blur)="onBlur()"
     />
