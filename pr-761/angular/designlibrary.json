@@ -1,7 +1,7 @@
 [
   {
-    "id": "components-slider--simple",
-    "name": "Simple",
+    "id": "components-slider--default",
+    "name": "Default",
     "title": "Components/Slider",
     "customParams": {
       "componentIds": [
