@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy } from '@angular/compiler'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { randomId } from '@sebgroup/extract'
+import { randomId, sliderColors } from '@sebgroup/extract'
 
 interface SliderStyle {
   background?: string
 }
-
-const SLIDER_TRACK_COLOR = '#007ac7'
-const SLIDER_DISABLED_COLOR = '#dedede'
 
 @Component({
   selector: 'ngg-slider',
@@ -61,7 +58,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
 
   setTrackBackground(): void {
     if (this.disabled) {
-      this.style.background = SLIDER_DISABLED_COLOR
+      this.style.background = sliderColors.disabled
       return
     }
 
@@ -69,10 +66,10 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
     this.style.background = `
       linear-gradient(
         to right,
-        ${SLIDER_TRACK_COLOR} 0%,
-        ${SLIDER_TRACK_COLOR} ${_value}%,
-        ${SLIDER_DISABLED_COLOR} ${_value}%,
-        ${SLIDER_DISABLED_COLOR} 100%
+        ${sliderColors.primary} 0%,
+        ${sliderColors.primary} ${_value}%,
+        ${sliderColors.disabled} ${_value}%,
+        ${sliderColors.disabled} 100%
       )`
   }
 
