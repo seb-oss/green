@@ -20,14 +20,14 @@ interface SliderStyle {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggSliderComponent implements ControlValueAccessor, OnInit {
-  private _value: number = 0
-  @Input() name: string = `${randomId}-slider`
-  @Input() min: number = 0
-  @Input() max: number = 100
-  @Input() step: number = 1
-  @Input() errorMessage: string = ''
-  @Input() hasTextbox: boolean = false
-  @Input() disabled: boolean = false
+  private _value = 0
+  @Input() name = `${randomId}-slider`
+  @Input() min = 0
+  @Input() max = 100
+  @Input() step = 1
+  @Input() errorMessage = ''
+  @Input() hasTextbox = false
+  @Input() disabled = false
   @Input() set value(val: number) {
     this._value = val ?? 0
     this.handleChange()
