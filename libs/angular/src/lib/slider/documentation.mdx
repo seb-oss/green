@@ -43,16 +43,16 @@ export class AppModule {}
 | min          | `number`  | The greatest value in the range of permitted values. Default is 0                     |
 | max          | `number`  | The lowest value in the range of permitted values. Default is 100                     |
 | step         | `number`  | The number that specifies the granularity that the value must adhere to. Default is 1 |
-| disabled     | `boolean` | Whether the input is disabled                                                         |
-| hasTextbox   | `boolean` | Whether should have input textbox with the slider                                     |
-| errorMessage | `string`  | Error message for invalid input                                                       |
+| disabled     | `boolean` | Whether or not the input is disabled                                                  |
+| hasTextbox   | `boolean` | Whether or not should have input textbox along with the slider                        |
+| errorMessage | `string`  | Error message for invalid inputs                                                      |
 
 ### Outputs
 
 | Event        | Description                                                            |
 | :----------- | :--------------------------------------------------------------------- |
 | sliderChange | Event emitted with the slider value when slider value has been changed |
-| sliderTouch  | Event emitted slider has been focused                                  |
+| sliderTouch  | Event emitted with `true` when slider has been focused                 |
 
 ## Examples
 

@@ -33,9 +33,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean = false
   @Input() set value(val: number) {
     this._value = val ?? 0
-    this.setTrackBackground()
-    this.sliderChange.emit(this.value)
-    this.onChangeFn && this.onChangeFn(this.value)
+    this.handleChange()
   }
   get value(): number {
     return this._value
@@ -53,6 +51,12 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   onFocus(): void {
     this.sliderTouch.emit(true)
     this.onTouchedFn && this.onTouchedFn()
+  }
+
+  handleChange(): void {
+    this.setTrackBackground()
+    this.sliderChange.emit(this.value)
+    this.onChangeFn && this.onChangeFn(this.value)
   }
 
   setTrackBackground(): void {
@@ -74,7 +78,10 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
 
   /** control value accessor functions */
   writeValue(val: number): void {
-    this.value = val
+    if (this.value !== val) {
+      this._value = val ?? 0
+      this.handleChange()
+    }
   }
 
   registerOnChange(fn: any): void {
