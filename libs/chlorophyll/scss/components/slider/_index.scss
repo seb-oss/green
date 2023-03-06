@@ -1,0 +1,67 @@
+@use 'mixins' as *;
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: $track-height;
+  background: linear-gradient(
+    to right,
+    $dark-blue-2 0%,
+    $dark-blue-2 0%,
+    $track-color 0%,
+    $track-color 100%
+  );
+  border-radius: $track-border-radius;
+
+  @each $browser in $browser-thumb-classes {
+    &::#{$browser} {
+      @include thumb-styles();
+    }
+  }
+
+  &:focus {
+    outline: none;
+
+    @each $browser in $browser-thumb-classes {
+      &::#{$browser} {
+        @include thumb-focus-styles();
+      }
+    }
+  }
+
+  &:disabled {
+    @each $browser in $browser-thumb-classes {
+      &::#{$browser} {
+        @include thumb-disabled-styles();
+      }
+    }
+  }
+}
+
+.gds-slider {
+  &-label-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $spacing;
+    margin-bottom: $spacing;
+
+    > * {
+      margin: 0;
+    }
+
+    @media (min-width: $breakpoint-mobile-layout) {
+      flex-direction: row;
+
+      > .form-group {
+        max-width: $form-group-width;
+      }
+    }
+  }
+
+  &-error-info {
+    color: $dark-red;
+    font-size: $form-info-font-size;
+    margin-top: $spacing;
+  }
+}

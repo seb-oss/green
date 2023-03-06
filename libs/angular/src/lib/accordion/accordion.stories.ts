@@ -1,12 +1,11 @@
 import Documentation from './documentation.mdx'
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { NggModalComponent } from '../modal/modal.component';
 import { NggAccordionComponent } from './accordion.component';
 import { NggAccordionModule } from './accordion.module';
 
 export default {
     title: 'Components/Accordion',
-    component: NggModalComponent,
+    component: NggAccordionComponent,
     decorators: [
       moduleMetadata({
         imports: [NggAccordionModule],

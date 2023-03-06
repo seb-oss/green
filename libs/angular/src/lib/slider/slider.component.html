@@ -1,0 +1,28 @@
+<div *ngIf="!!label" class="gds-slider-label-container">
+  <label [attr.for]="name">{{ label }}</label>
+  <div *ngIf="hasTextbox" class="form-group">
+    <input
+      type="number"
+      [(ngModel)]="value"
+      [class.is-invalid]="!!errorMessage"
+      [attr.disabled]="disabled"
+      (blur)="onBlur()"
+    />
+    <span *ngIf="!!errorMessage" class="form-info"></span>
+  </div>
+</div>
+<input
+  type="range"
+  [attr.id]="name"
+  [attr.name]="name"
+  [attr.min]="min"
+  [attr.max]="max"
+  [attr.step]="step"
+  [attr.disabled]="disabled"
+  [(ngModel)]="value"
+  [ngStyle]="style"
+  (blur)="onBlur()"
+/>
+<p *ngIf="!!errorMessage" class="gds-slider-error-info">
+  {{ errorMessage }}
+</p>
