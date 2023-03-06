@@ -1,12 +1,12 @@
-<div class="ngg-slider-label-container">
-  <label [attr.for]="name">Slider label text in one line</label>
+<div *ngIf="!!label" class="gds-slider-label-container">
+  <label [attr.for]="name">{{ label }}</label>
   <div *ngIf="hasTextbox" class="form-group">
     <input
       type="number"
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
       [attr.disabled]="disabled"
-      (focus)="onFocus()"
+      (blur)="onBlur()"
     />
     <span *ngIf="!!errorMessage" class="form-info"></span>
   </div>
@@ -21,8 +21,8 @@
   [attr.disabled]="disabled"
   [(ngModel)]="value"
   [ngStyle]="style"
-  (focus)="onFocus()"
+  (blur)="onBlur()"
 />
-<p *ngIf="!!errorMessage" class="ngg-slider-error-info">
+<p *ngIf="!!errorMessage" class="gds-slider-error-info">
   {{ errorMessage }}
 </p>

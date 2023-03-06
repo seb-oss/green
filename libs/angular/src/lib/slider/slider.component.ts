@@ -29,6 +29,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() min = 0
   @Input() max = 100
   @Input() step = 1
+  @Input() label = ''
   @Input() errorMessage = ''
   @Input() hasTextbox = false
   @Input() disabled = false
@@ -49,7 +50,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
     this.setTrackBackground()
   }
 
-  onFocus(): void {
+  onBlur(): void {
     this.sliderTouch.emit(true)
     this.onTouchedFn && this.onTouchedFn()
   }
