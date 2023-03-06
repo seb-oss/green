@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/compiler'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   getSliderTrackBackground,
@@ -30,6 +29,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() max = 100
   @Input() step = 1
   @Input() label = ''
+  @Input() instruction = ''
   @Input() errorMessage = ''
   @Input() hasTextbox = false
   @Input() disabled = false

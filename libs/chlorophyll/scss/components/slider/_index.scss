@@ -50,6 +50,10 @@ input[type='range'] {
       margin: 0;
     }
 
+    label + p {
+      font-size: $form-info-font-size;
+    }
+
     @media (min-width: $breakpoint-mobile-layout) {
       flex-direction: row;
 
