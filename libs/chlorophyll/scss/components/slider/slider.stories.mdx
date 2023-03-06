@@ -2,8 +2,11 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
 export const Template = () => {
   return `
-    <label for="ngg-slider">Slider label text in one line</label>
-    <input type="range" id="ngg-slider" />
+    <div class="gds-slider-label-container">
+        <label for="gds-slider">Slider label text in one line</label>
+        <input type="number" />
+    </div>
+    <input type="range" id="gds-slider" />
     `
 }
 
@@ -27,6 +30,8 @@ The component allows for easy adjustments of a value and check the updated resul
 On pages where the user can experiment or adjust values in a scale, such as "How much can I borrow?".
 
 ## Example
+
+_Note: use javascript to bind values to textbox and to control  track background._
 
 <Canvas>
   <Story name="Slider">{Template.bind({})}</Story>
