@@ -1,0 +1,39 @@
+@use 'mixins' as *;
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: $track-height;
+  margin-top: 2rem;
+  background: linear-gradient(
+    to right,
+    $dark-blue-2 0%,
+    $dark-blue-2 0%,
+    $track-color 0%,
+    $track-color 100%
+  );
+  border-radius: 4px;
+
+  @each $browser in $browserThumbClasses {
+    &::#{$browser} {
+      @include thumb-styles();
+    }
+  }
+
+  &:focus {
+    outline: none;
+
+    @each $browser in $browserThumbClasses {
+      &::#{$browser} {
+        @include thumb-focus-styles();
+      }
+    }
+  }
+
+  &:disabled {
+    &::-webkit-slider-thumb {
+      background: $track-color;
+      cursor: default;
+    }
+  }
+}

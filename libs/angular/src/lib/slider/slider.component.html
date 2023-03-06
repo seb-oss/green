@@ -1,0 +1,18 @@
+<div class="flexbox">
+  <label [attr.for]="name">Slider label text in one line</label>
+  <input type="text" [(ngModel)]="value" (input)="onInput()" />
+</div>
+<input
+  type="range"
+  [attr.id]="name"
+  [attr.name]="name"
+  [attr.min]="min"
+  [attr.max]="max"
+  [attr.step]="step"
+  [(ngModel)]="value"
+  [ngStyle]="style"
+  (input)="onInput()"
+/>
+<div class="error">Error text can be quite long, 14px</div>
+
+

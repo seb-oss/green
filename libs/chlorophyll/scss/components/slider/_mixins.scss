@@ -1,0 +1,33 @@
+@use '../../tokens/shame';
+
+$track-color: shame.$grey-500;
+$dark-blue-1: #0092e1;
+$dark-blue-2: #007ac7;
+
+$box-shadow: rgba(85, 85, 85, 0.4) 0 2px 5px;
+$box-shadow-focus: 0 0 0 3px rgba($dark-blue-1, 0.4);
+
+$thumb-size: 1.5rem;
+$track-height: 0.25rem;
+
+$browserThumbClasses: "-webkit-slider-thumb", "-moz-range-thumb";
+
+@mixin thumb-styles() {
+  background: $dark-blue-1;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  width: $thumb-size;
+  height: $thumb-size;
+  transition: all ease-in-out 0.2s;
+  box-shadow: $box-shadow;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    transform: scale(105%);
+  }
+}
+
+@mixin thumb-focus-styles() {
+  background: $dark-blue-2;
+  box-shadow: $box-shadow, $box-shadow-focus;
+}

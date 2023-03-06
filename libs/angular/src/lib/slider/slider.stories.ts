@@ -1,14 +1,14 @@
 import Documentation from './documentation.mdx'
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { NggAccordionComponent } from './accordion.component';
-import { NggAccordionModule } from './accordion.module';
+import { NggSliderComponent } from './slider.component';
+import { NggSliderModule } from './slider.module';
 
 export default {
     title: 'Components/Accordion',
-    component: NggAccordionComponent,
+    component: NggSliderComponent,
     decorators: [
       moduleMetadata({
-        imports: [NggAccordionModule],
+        imports: [NggSliderModule],
       }),
     ],
     parameters: {
@@ -17,9 +17,9 @@ export default {
       },
       componentIds: ['component-accordion' ],
     },
-} as Meta<NggAccordionComponent>
+} as Meta<NggSliderComponent>
 
-const Template: Story<NggAccordionComponent> = () => {
+const Template: Story<NggSliderComponent> = () => {
     
     return {
         template:`
@@ -38,7 +38,7 @@ const Template: Story<NggAccordionComponent> = () => {
     }
 }
 
-const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
+const NoSubHeadersTemplate: Story<NggSliderComponent> = () => {
   return {
     template:`
     <ngg-accordion [closeOthers]=false>
@@ -57,7 +57,7 @@ const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
 }
 
 
-const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
+const CheckBoxTemplate: Story<NggSliderComponent> = () => {
     
   return {
       template:`
