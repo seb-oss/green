@@ -23,7 +23,15 @@ export default {
 const Template: Story<NggSliderComponent> = (args: NggSliderComponent) => {
   return {
     template: `
-      <ngg-slider label="Slider label text in one line" [value]="50" [hasTextbox]="hasTextbox" [disabled]="disabled" [errorMessage]="errorMessage">
+      <ngg-slider 
+        label="Slider label text in one line"
+        instruction="Element instruction"
+        placeholder="Element placeholder"
+        [value]="50"
+        [hasTextbox]="hasTextbox"
+        [disabled]="disabled"
+        [errorMessage]="errorMessage"
+      >
       </ngg-slider>
     `,
     props: {

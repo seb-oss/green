@@ -1,10 +1,14 @@
 <div *ngIf="!!label" class="gds-slider-label-container">
-  <label [attr.for]="name">{{ label }}</label>
+  <div>
+    <label [attr.for]="name">{{ label }}</label>
+    <p *ngIf="!!instruction">{{ instruction }}</p>
+  </div>
   <div *ngIf="hasTextbox" class="form-group">
     <input
       type="number"
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
+      [attr.placeholder]="placeholder"
       [attr.disabled]="disabled"
       (blur)="onBlur()"
     />
