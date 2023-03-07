@@ -66,6 +66,7 @@ input[type='range'] {
   &-error-info {
     color: $dark-red;
     font-size: $form-info-font-size;
+    font-weight: $form-info-font-weight;
     margin-top: $spacing;
   }
 }
