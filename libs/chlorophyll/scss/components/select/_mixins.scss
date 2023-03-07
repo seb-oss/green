@@ -13,6 +13,9 @@
     padding: .625rem 3rem .625rem 1rem;
     border-radius: .25rem;
     border: 1px solid var(--gds-ref-pallet-base600);
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   svg {
