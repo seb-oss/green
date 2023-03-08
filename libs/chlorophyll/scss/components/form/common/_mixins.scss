@@ -110,7 +110,10 @@
   position: relative;
   width: 100%;
   z-index: 0;
-  @include common.margin-bottom(6);
+
+  &:not(:last-child) {
+    @include common.margin-bottom(6);
+  }
 
   > input:not(:last-child),
   > textarea:not(:last-child),
@@ -129,7 +132,7 @@
   width: 100%;
   z-index: 0;
 
-  &:not(:last-of-type) {
+  &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
 
@@ -189,7 +192,7 @@
     border-color: var(--gds-ref-pallet-base600);
   }
 
-  .gds-form-item__footer {
+  .gds-form-item__footer:not(:empty) {
     margin-top: .5rem;
   }
 }
