@@ -9,7 +9,7 @@
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
       [attr.placeholder]="placeholder"
-      [attr.disabled]="disabled"
+      [disabled]="disabled"
       (blur)="onBlur()"
     />
     <span *ngIf="!!errorMessage" class="form-info"></span>
@@ -22,7 +22,7 @@
   [attr.min]="min"
   [attr.max]="max"
   [attr.step]="step"
-  [attr.disabled]="disabled"
+  [disabled]="disabled"
   [(ngModel)]="value"
   [ngStyle]="style"
   (blur)="onBlur()"
