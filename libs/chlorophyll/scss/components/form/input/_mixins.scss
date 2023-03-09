@@ -28,7 +28,6 @@ $background: var(--sg-form-control-bg);
     @include common.add-focus();
     background-color: $background;
     color: $_color;
-    cursor: pointer;
     min-height: 2.75rem;
     display: flex;
     align-items: center;
