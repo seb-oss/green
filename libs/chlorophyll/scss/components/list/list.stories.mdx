@@ -1,4 +1,4 @@
-import {Meta, Canvas, Story} from '@storybook/addon-docs/blocks'
+import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks'
 
 export const Template = ({ text, className }) => `
   <ol>
@@ -11,63 +11,67 @@ export const Template = ({ text, className }) => `
 <Meta
   title="Components/List"
   parameters={{
-    componentIds: ['component-list']
+    componentIds: ['component-list'],
   }}
 />
 
 ### Unordered list
+
 <Canvas>
-    <ul>
-      <li>First</li>
-      <li>Second</li>
-      <li>Third</li>
-    </ul>
+  <ul>
+    <li>First</li>
+    <li>Second</li>
+    <li>Third</li>
+  </ul>
 </Canvas>
 
 ### Check list
 
 <Canvas>
-    <ul class="check">
-      <li>First</li>
-      <li>Second</li>
-      <li>Third</li>
-    </ul>
+  <ul class="check">
+    <li>First</li>
+    <li>Second</li>
+    <li>Third</li>
+  </ul>
 </Canvas>
 
 ### Value list
+
 <Canvas>
-    <dl className="gds-list">
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-    </dl>
+  <dl class="gds-list">
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+  </dl>
 </Canvas>
 
 #### Inverted
+
 <Canvas>
-    <dl className="gds-list gds-list--inverted">
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-    </dl>
+  <dl class="gds-list gds-list--inverted">
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+  </dl>
 </Canvas>
 
 #### Horizontal
+
 <Canvas>
-    <dl className="gds-list gds-list--horizontal">
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-      <dt>Label</dt>
-      <dd>Value</dd>
-    </dl>
+  <dl class="gds-list gds-list--horizontal">
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+    <dt>Label</dt>
+    <dd>Value</dd>
+  </dl>
 </Canvas>
 
 ### List Group
