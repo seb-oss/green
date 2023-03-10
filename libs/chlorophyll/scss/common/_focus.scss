@@ -2,7 +2,12 @@
 @use 'functions';
 @use 'sass:map';
 
-@mixin add-focus($suffix: 'visible', $target: '') {
+@mixin add-focus(
+  $suffix: 'visible',
+  $target: '',
+  $glow-color: tokens.get(tokens.$blue, 2),
+  $border-color: tokens.get(tokens.$blue, 0)
+) {
   @if $suffix != '' {
     $suffix: '-' + $suffix;
   }
@@ -16,8 +21,8 @@
   }
 
   &:focus {
-    border-color: tokens.get(tokens.$blue, 0);
-    box-shadow: 0 0 0.25rem 0.0625rem tokens.get(tokens.$blue, 2);
+    border-color: $border-color;
+    box-shadow: 0 0 0.25rem 0.0625rem $glow-color;
     outline-color: transparent;
     outline-style: solid;
   }
@@ -30,8 +35,8 @@
   }
 
   &:focus#{$suffix} #{$target} {
-    border-color: tokens.get(tokens.$blue, 0) !important;
-    box-shadow: 0 0 0.25rem 0.0625rem tokens.get(tokens.$blue, 2);
+    border-color: $border-color !important;
+    box-shadow: 0 0 0.25rem 0.0625rem $glow-color;
     outline-color: transparent;
     outline-style: solid;
   }
