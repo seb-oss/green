@@ -7,7 +7,7 @@ $animation-duration: 0.7s;
 $ring-width: 11px;
 $size: 220px;
 
-.outer-circle {
+.gds-progress-circle {
   @include mixins.use-circle($size, false);
   background: colors.$grey-400;
 
