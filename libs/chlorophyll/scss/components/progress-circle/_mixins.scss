@@ -17,6 +17,9 @@ $variants: (
   'dark': (
     background: hsl(var(--sg-hsl-dark)),
   ),
+  'disabled': (
+    background: var(--sg-grey-500),
+  ),
 );
 
 @mixin background-variant($background) {

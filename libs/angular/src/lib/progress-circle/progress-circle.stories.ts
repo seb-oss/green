@@ -3,6 +3,7 @@ import { moduleMetadata, Meta, Story } from '@storybook/angular'
 import Documentation from './documentation.mdx'
 import { NggProgressCircleModule } from './progress-circle.module'
 import { NggProgressCircleComponent } from './progress-circle.component'
+import { ProgressCircleThemes } from '@sebgroup/extract'
 
 export default {
   title: 'Components/Progress Circle',
@@ -14,7 +15,7 @@ export default {
   ],
   argTypes: {
     theme: {
-      options: ['success', 'warning', 'info', 'danger', 'light', 'dark'],
+      options: Object.values(ProgressCircleThemes),
       control: 'radio',
       name: 'Theme',
       defaultValue: 'warning',
@@ -50,6 +51,6 @@ const Template: Story<NggProgressCircleComponent> = (
 
 export const Default = Template.bind({})
 Default.args = {
-  theme: 'warning',
+  theme: ProgressCircleThemes.Warning,
   value: 70,
 }

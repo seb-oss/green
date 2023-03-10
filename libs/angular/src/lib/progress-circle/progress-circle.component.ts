@@ -10,13 +10,16 @@ export class NggProgressCircleComponent {
   @HostBinding('style.--end-value') private _endValue = '0deg'
 
   /** id of the progress circle */
-  @Input() id?: string = `progress-circle-${randomId()}`
+  @Input() id?: string = `${randomId()}-progress-circle`
   /** theme of the progress circle */
-  @Input() theme: ProgressCircleThemes = 'warning'
+  @Input() theme: ProgressCircleThemes = ProgressCircleThemes.Warning
   /** progress circle value in percentage */
-  @Input() set value(percent: number) {
-    const degrees = this.calculateDegrees(percent)
-    this._endValue = `${degrees}deg`
+  @Input() set value(val: number) {
+    const degrees = `${this.calculateDegrees(val)}deg`
+    this._endValue = degrees
+    if (this.theme === ProgressCircleThemes.Disabled) {
+      this._startValue = degrees
+    }
   }
 
   calculateDegrees(percent: number): number {

@@ -1,7 +1,9 @@
-export type ProgressCircleThemes =
-  | 'success'
-  | 'warning'
-  | 'info'
-  | 'danger'
-  | 'light'
-  | 'dark'
+export enum ProgressCircleThemes {
+  Success = 'success',
+  Warning = 'warning',
+  Info = 'info',
+  Danger = 'danger',
+  Light = 'light',
+  Dark = 'dark',
+  Disabled = 'disabled',
+}
