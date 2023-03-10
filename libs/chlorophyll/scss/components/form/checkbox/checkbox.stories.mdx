@@ -1,6 +1,12 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-export const Template = ({ validation, enabled, checked, indeterminate, text }) => {
+export const Template = ({
+  validation,
+  enabled,
+  checked,
+  indeterminate,
+  text,
+}) => {
   const attrValidation = validation ? `class="${validation}" ` : ``
   const attrEnabled = enabled ? `` : `disabled`
   const attrChecked = checked ? `checked` : ``
@@ -18,7 +24,7 @@ export const Template = ({ validation, enabled, checked, indeterminate, text }) 
 <Meta
   title="Components/Form/Elements/Checkbox"
   parameters={{
-    componentIds: ['component-checkbox']
+    componentIds: ['component-checkbox'],
   }}
   argTypes={{
     validation: {
@@ -26,16 +32,17 @@ export const Template = ({ validation, enabled, checked, indeterminate, text }) 
       options: ['', 'is-valid', 'is-invalid'],
     },
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
     checked: {
-      control: 'boolean'
+      control: 'boolean',
     },
     indeterminate: {
-      control: 'boolean'
+      control: 'boolean',
     },
     text: { control: 'text' },
-  }} />
+  }}
+/>
 
 <Story
   name="Checkbox"
@@ -43,9 +50,9 @@ export const Template = ({ validation, enabled, checked, indeterminate, text }) 
     text: 'Click me!',
     enabled: true,
     checked: false,
-    indeterminate: false
+    indeterminate: false,
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>
@@ -57,8 +64,8 @@ Lorem ipsum checkboxes
 ## Default checkbox
 
 <Canvas>
-  <div className="form-group">
-    <label className="form-control">
+  <div class="form-group">
+    <label class="form-control">
       <input type="checkbox" />
       <span>Checkbox</span>
       <i></i>
@@ -69,33 +76,35 @@ Lorem ipsum checkboxes
 ## Invalid checkbox
 
 <Canvas>
-  <div className="form-group">
-    <label className="form-control was-validated is-invalid">
-      <input type="checkbox" className="is-invalid" />
+  <div class="form-group">
+    <label class="form-control was-validated is-invalid">
+      <input type="checkbox" class="is-invalid" />
       <span>Checkbox</span>
       <i></i>
     </label>
-    <span className="form-info">Error</span>
+    <span class="form-info">Error</span>
   </div>
 </Canvas>
 
 ## Group
+
 Group form controls such as checkboxes and radio buttons using `<fieldset>` and add an optional description using a `<legend>`.
 
 ### Default group with hidden legend
+
 <Canvas>
   <form>
-    <div className="form-group">
+    <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp">
-        <legend className="sr-only">Checkbox group</legend>
+        <legend class="sr-only">Checkbox group</legend>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
             <input required type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
             <input required type="checkbox" required />
             <span></span>
@@ -110,18 +119,18 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
 ### Horizontal form with group and visible legend
 
 <Canvas>
-  <form className="horizontal">
-    <div className="form-group">
+  <form class="horizontal">
+    <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp">
         <legend>Checkbox group</legend>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
             <input required type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
             <input required type="checkbox" required />
             <span></span>
@@ -139,72 +148,72 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
 
 <Canvas>
   <form>
-    <div className="form-group was-validated">
+    <div class="form-group was-validated">
       <fieldset aria-describedby="checkboxGroupHelp">
         <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" className="form-info">
+        <span id="checkboxGroupHelp" class="form-info">
           Checkbox group description
         </span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
             <input required type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
             <input required type="checkbox" required />
             <span></span>
             <i></i>
           </label>
-          </div>
+        </div>
       </fieldset>
-      <span className="form-info">Neutral</span>
+      <span class="form-info">Neutral</span>
     </div>
-    <div className="form-group was-validated">
-      <fieldset aria-describedby="checkboxGroupHelp1" className="is-valid">
+    <div class="form-group was-validated">
+      <fieldset aria-describedby="checkboxGroupHelp1" class="is-valid">
         <legend>Valid checkbox group</legend>
-        <span id="checkboxGroupHelp1" className="form-info">
+        <span id="checkboxGroupHelp1" class="form-info">
           Checkbox group description
         </span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
-            <input required className="is-valid" type="checkbox" />
+            <input required class="is-valid" type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
-            <input required className="is-valid" type="checkbox" required />
+            <input required class="is-valid" type="checkbox" required />
             <span></span>
             <i></i>
           </label>
         </div>
       </fieldset>
-      <span className="form-info">Valid</span>
+      <span class="form-info">Valid</span>
     </div>
-    <div className="form-group">
-      <fieldset aria-describedby="checkboxGroupHelp2" className="is-invalid">
+    <div class="form-group">
+      <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
         <legend>Invalid checkbox group</legend>
-        <span className="form-info">Checkbox group description</span>
+        <span class="form-info">Checkbox group description</span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
-            <input required className="is-invalid" type="checkbox" />
+            <input required class="is-invalid" type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
-            <input required className="is-invalid" type="checkbox" required />
+            <input required class="is-invalid" type="checkbox" required />
             <span></span>
             <i></i>
           </label>
         </div>
       </fieldset>
-      <span className="form-info">Error</span>
+      <span class="form-info">Error</span>
     </div>
   </form>
 </Canvas>
@@ -212,21 +221,21 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
 ### Horizontal
 
 <Canvas>
-  <form className="horizontal">
-    <div className="form-group">
+  <form class="horizontal">
+    <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp">
         <legend>Checkbox group</legend>
-        <span id="checkboxGroupHelp" className="form-info">
+        <span id="checkboxGroupHelp" class="form-info">
           Checkbox group description
         </span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
             <input required type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
             <input required type="checkbox" required />
             <span></span>
@@ -234,51 +243,51 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
           </label>
         </div>
       </fieldset>
-      <span className="form-info">Neutral</span>
+      <span class="form-info">Neutral</span>
     </div>
-    <div className="form-group was-validated">
-      <fieldset aria-describedby="checkboxGroupHelp1" className="is-valid">
+    <div class="form-group was-validated">
+      <fieldset aria-describedby="checkboxGroupHelp1" class="is-valid">
         <legend>Valid checkbox group</legend>
-        <span id="checkboxGroupHelp1" className="form-info">
+        <span id="checkboxGroupHelp1" class="form-info">
           Checkbox group description
         </span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
-            <input required className="is-valid" type="checkbox" />
+            <input required class="is-valid" type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
-            <input required className="is-valid" type="checkbox" required />
+            <input required class="is-valid" type="checkbox" required />
             <span></span>
             <i></i>
           </label>
         </div>
       </fieldset>
-      <span className="form-info">Valid</span>
+      <span class="form-info">Valid</span>
     </div>
-    <div className="form-group was-validated">
-      <fieldset aria-describedby="checkboxGroupHelp2" className="is-invalid">
+    <div class="form-group was-validated">
+      <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
         <legend>Invalid checkbox group</legend>
-        <span className="form-info">Checkbox group description</span>
+        <span class="form-info">Checkbox group description</span>
         <div>
-          <label className="form-control">
+          <label class="form-control">
             One
-            <input required className="is-invalid" type="checkbox" />
+            <input required class="is-invalid" type="checkbox" />
             <span></span>
             <i></i>
           </label>
-          <label className="form-control">
+          <label class="form-control">
             Two
-            <input required className="is-invalid" type="checkbox" required />
+            <input required class="is-invalid" type="checkbox" required />
             <span></span>
             <i></i>
           </label>
         </div>
       </fieldset>
-      <span className="form-info">Error</span>
+      <span class="form-info">Error</span>
     </div>
   </form>
 </Canvas>

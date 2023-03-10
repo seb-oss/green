@@ -1,6 +1,6 @@
-import {Meta, Story, Canvas} from '@storybook/addon-docs'
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
 
-export const Template = ({validation, enabled, text, formInfo}) => {
+export const Template = ({ validation, enabled, text, formInfo }) => {
   const attrValidation = validation ? validation : ``
   const attrEnabled = enabled ? `` : `disabled`
   const hasExtraInfo = formInfo.length > 0
@@ -20,7 +20,7 @@ export const Template = ({validation, enabled, text, formInfo}) => {
 <Meta
   title="Components/Form/Elements/Stepper"
   parameters={{
-    componentIds: ['component-stepper']
+    componentIds: ['component-stepper'],
   }}
   argTypes={{
     validation: {
@@ -28,10 +28,10 @@ export const Template = ({validation, enabled, text, formInfo}) => {
       options: ['', 'is-valid', 'is-invalid'],
     },
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
-    text: {control: 'text'},
-    formInfo: {control: 'text'}
+    text: { control: 'text' },
+    formInfo: { control: 'text' },
   }}
 />
 
@@ -39,10 +39,11 @@ export const Template = ({validation, enabled, text, formInfo}) => {
   name="Stepper"
   args={{
     text: 'Stepper label',
-    formInfo: 'Lorem ipsum very long description of stepper and what should be entered',
-    enabled: true
+    formInfo:
+      'Lorem ipsum very long description of stepper and what should be entered',
+    enabled: true,
   }}
-  parameters={{docs: {disable: true}}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>
@@ -53,11 +54,13 @@ export const Template = ({validation, enabled, text, formInfo}) => {
   <form>
     <div class="form-group">
       <label for="stepperInput">Stepper label</label>
-      <span class="form-info">Lorem ipsum very long description of stepper and what should be entered</span>
+      <span class="form-info">
+        Lorem ipsum very long description of stepper and what should be entered
+      </span>
       <div class="group group-border group-stepper">
-        <button className="tertiary">-</button>
-        <input id="stepperInput" type="number" placeholder="0"/>
-        <button className="tertiary">+</button>
+        <button class="tertiary">-</button>
+        <input id="stepperInput" type="number" placeholder="0" />
+        <button class="tertiary">+</button>
       </div>
       <span class="form-info">Neutral</span>
     </div>
@@ -68,29 +71,28 @@ export const Template = ({validation, enabled, text, formInfo}) => {
   <form>
     <div class="form-group">
       <label for="stepperInput">Stepper label</label>
-      <div className="horizontal">
+      <div class="horizontal">
         <div>
-        <div>
-          <span class="form-info">Vuxna</span>
-          <div class="group group-border group-stepper">
-            <button className="tertiary">-</button>
-            <input id="stepperInput" type="number" placeholder="0"/>
-            <button className="tertiary">+</button>
+          <div>
+            <span class="form-info">Vuxna</span>
+            <div class="group group-border group-stepper">
+              <button class="tertiary">-</button>
+              <input id="stepperInput" type="number" placeholder="0" />
+              <button class="tertiary">+</button>
+            </div>
           </div>
         </div>
-        </div>
         <div>
-        <div>
-          <span class="form-info">Barn under 18</span>
-          <div class="group group-border group-stepper">
-            <button className="tertiary">-</button>
-            <input id="stepperInput" type="number" placeholder="0"/>
-            <button className="tertiary">+</button>
+          <div>
+            <span class="form-info">Barn under 18</span>
+            <div class="group group-border group-stepper">
+              <button class="tertiary">-</button>
+              <input id="stepperInput" type="number" placeholder="0" />
+              <button class="tertiary">+</button>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
   </form>
 </Canvas>
-
