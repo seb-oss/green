@@ -5,10 +5,17 @@
 $button-primary-bg: tokens.get(tokens.$blue, 0);
 $button-primary-color: common.most-legible-color($button-primary-bg);
 $button-primary-border-color: $button-primary-bg;
+
 $button-secondary-bg: transparent;
 $button-secondary-color: tokens.get(tokens.$blue, 0);
 $button-secondary-border-color: $button-secondary-color;
+
 $button-ghost-bg: tokens.get(tokens.$grey, 200);
+
+$button-danger-bg: tokens.get(tokens.$red, 0);
+$button-danger-bg-hover: tokens.get(tokens.$red, 1);
+$button-danger-color: common.most-legible-color($button-danger-bg);
+$button-danger-border-color: $button-danger-bg;
 
 @mixin reset {
   background-color: transparent;
@@ -167,4 +174,53 @@ $button-ghost-bg: tokens.get(tokens.$grey, 200);
       stroke: var(--gds-ref-pallet-base000);
     }
   }
+}
+
+@mixin danger-bg {
+  background: $button-danger-bg;
+  border-color: $button-danger-border-color;
+  color: $button-danger-color;
+  --color: #{$button-danger-color};
+
+  @include common.add-hover-active-state(
+    $button-danger-bg-hover,
+    $button-danger-bg,
+    $button-danger-border-color
+  );
+
+  @include common.add-focus(
+    '',
+    '',
+    $button-danger-bg,
+    $button-danger-bg
+  );
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(
+      $button-danger-bg,
+      $button-danger-color,
+      $button-danger-border-color
+    );
+  }
+}
+
+@mixin danger-color {
+  color: $button-danger-bg;
+  --color: #{$button-danger-bg};
+  border-color: transparent;
+
+  @include common.add-hover-active-state(
+    $button-danger-bg-hover,
+    $button-danger-bg,
+    $button-danger-border-color
+  );
+
+  @include common.add-focus(
+    '',
+    '',
+    $button-danger-bg,
+    darken($button-danger-bg, 1%)
+  );
 }

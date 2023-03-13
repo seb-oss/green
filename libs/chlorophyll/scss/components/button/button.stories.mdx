@@ -9,7 +9,7 @@ export const Template = ({ type, variant, text }) => {
 <Meta
   title="Components/Form/Elements/Button"
   parameters={{
-    componentIds: ['component-button']
+    componentIds: ['component-button'],
   }}
   argTypes={{
     type: {
@@ -18,7 +18,7 @@ export const Template = ({ type, variant, text }) => {
     },
     variant: {
       control: 'select',
-      options: ['', 'primary', 'secondary', 'ghost'],
+      options: ['', 'primary', 'secondary', 'ghost', 'danger'],
     },
     text: { control: 'text' },
   }}
@@ -89,10 +89,27 @@ Sizes can changed with size classes
 
 <Canvas>
   <button class="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" />
+    </svg>
   </button>
 </Canvas>
 
+### Danger button
+
+Use the danger variant for destructive actions
+
+<Canvas>
+  <button type="submit" class="danger">
+    Primary danger button
+  </button>
+  <button type="button" class="danger">
+    Secondary danger button
+  </button>
+  <button class="tertiary danger">Tertiary danger button</button>
+</Canvas>
+
+## States
 
 <Canvas>
   <div>
@@ -106,16 +123,26 @@ Sizes can changed with size classes
     <h3 class="mb-4">Active</h3>
     <div class="mb-4">
       <button class="primary active">Primary button</button>
-      <button type="button" class="active">Secondary button</button>
+      <button type="button" class="active">
+        Secondary button
+      </button>
       <button class="secondary active">Secondary button</button>
       <button class="ghost active">Ghost button</button>
     </div>
     <h3 class="mb-4">Disabled</h3>
     <div class="mb-4">
-      <button class="primary" disabled>Primary button</button>
-      <button type="button" disabled>Secondary button</button>
-      <button class="secondary" disabled>Secondary button</button>
-      <button class="ghost" disabled>Ghost button</button>
+      <button class="primary" disabled>
+        Primary button
+      </button>
+      <button type="button" disabled>
+        Secondary button
+      </button>
+      <button class="secondary" disabled>
+        Secondary button
+      </button>
+      <button class="ghost" disabled>
+        Ghost button
+      </button>
     </div>
   </div>
 </Canvas>
