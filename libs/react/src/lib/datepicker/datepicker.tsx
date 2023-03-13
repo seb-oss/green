@@ -83,10 +83,12 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
               </button>
               <Dropdown
                 options={months({})}
+                display="key"
                 texts={{ placeholder: data.monthName }}
               />
               <Dropdown
                 options={years({})}
+                display="key"
                 texts={{ placeholder: data.year + '' }}
               />
               <button
