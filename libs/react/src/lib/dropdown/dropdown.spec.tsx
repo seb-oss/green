@@ -49,13 +49,13 @@ describe('Dropdown', () => {
       expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
       // open
-      await user.click(toggleButton)
+      await act(() => user.click(toggleButton))
       await waitFor(() =>
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
       )
 
       // close
-      await user.click(toggleButton)
+      await act(() => user.click(toggleButton))
       await waitFor(() =>
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
       )
@@ -67,7 +67,7 @@ describe('Dropdown', () => {
       expect(listbox.className).toEqual('_popover popover-dropdown')
 
       // open
-      await user.click(toggleButton)
+      await act(() => user.click(toggleButton))
       await waitFor(() =>
         expect(listbox.className).toEqual('_popover popover-dropdown active')
       )
@@ -82,19 +82,19 @@ describe('Dropdown', () => {
   describe('mouse interaction', () => {
     beforeEach(async () => {
       const user = userEvent.setup()
-      await user.tab()
+      await act(() => user.tab())
     })
     describe('click option', () => {
       it('sets aria-selected', async () => {
         const user = userEvent.setup()
-        await user.click(options[1])
+        await act(() => user.click(options[1]))
         await waitFor(() =>
           expect(options[1].getAttribute('aria-selected')).toEqual('true')
         )
       })
       it('closes dropdown', async () => {
         const user = userEvent.setup()
-        await user.click(options[1])
+        await act(() => user.click(options[1]))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -104,7 +104,7 @@ describe('Dropdown', () => {
       })
       it('sets toggler text', async () => {
         const user = userEvent.setup()
-        await user.click(options[1])
+        await act(() => user.click(options[1]))
         await waitFor(() =>
           expect(toggleButton.innerHTML.trim()).toEqual('<span>B</span>')
         )
@@ -113,7 +113,7 @@ describe('Dropdown', () => {
     describe('click outside', () => {
       it('closes the dropdown', async () => {
         const user = userEvent.setup()
-        await user.click(document.body)
+        await act(() => user.click(document.body))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -126,7 +126,7 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[Space]')
+        await act(() => user.keyboard('[Space]'))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -135,8 +135,8 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[Space]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[Space]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -144,7 +144,7 @@ describe('Dropdown', () => {
       })
       it('closes when open', async () => {
         const user = userEvent.setup()
-        await user.click(toggleButton)
+        await act(() => user.click(toggleButton))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
         )
@@ -160,7 +160,7 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[Escape]')
+        await act(() => user.keyboard('[Escape]'))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -169,8 +169,8 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[Escape]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[Escape]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
@@ -179,13 +179,13 @@ describe('Dropdown', () => {
       it('closes when open', async () => {
         const user = userEvent.setup()
 
-        await user.tab()
-        await user.keyboard('[Space]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[Space]'))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
         )
 
-        await user.keyboard('[Escape]')
+        await act(() => user.keyboard('[Escape]'))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -196,7 +196,7 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
@@ -205,8 +205,8 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[ArrowDown]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -216,36 +216,36 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         await user.tab()
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
       it('stops on last when not looping', async () => {
         const user = userEvent.setup()
-        await user.tab()
+        await act(() => user.tab())
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -257,24 +257,24 @@ describe('Dropdown', () => {
         await act(() => tick())
         const options = await component.findAllByRole('option')
 
-        await user.tab()
+        await act(() => user.tab())
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -285,7 +285,7 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await tick(50)
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
       })
@@ -293,8 +293,8 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[ArrowUp]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -303,18 +303,18 @@ describe('Dropdown', () => {
       it('selects previous when open', async () => {
         const user = userEvent.setup()
 
-        await user.tab()
-        await user.keyboard('[ArrowDown>3/]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[ArrowDown>3/]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -324,13 +324,13 @@ describe('Dropdown', () => {
         await user.tab()
 
         // go to last option
-        await user.keyboard('[ArrowDown>3/]')
+        await act(() => user.keyboard('[ArrowDown>3/]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
         // spam up
-        await user.keyboard('[ArrowUp>9/]')
+        await act(() => user.keyboard('[ArrowUp>9/]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -342,24 +342,24 @@ describe('Dropdown', () => {
         await act(() => tick())
         const options = await component.findAllByRole('option')
 
-        await user.tab()
+        await act(() => user.tab())
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[1].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[ArrowUp]')
+        await act(() => user.keyboard('[ArrowUp]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -370,16 +370,15 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[Home]')
-        await tick(50)
+        await act(() => user.keyboard('[Home]'))
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
       })
       it('opens and selects first when active', async () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[Home]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[Home]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -391,14 +390,14 @@ describe('Dropdown', () => {
       it('selects first when open', async () => {
         const user = userEvent.setup()
 
-        await user.tab()
+        await act(() => user.tab())
 
-        await user.keyboard('[ArrowDown>3/]')
+        await act(() => user.keyboard('[ArrowDown>3/]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[Home]')
+        await act(() => user.keyboard('[Home]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
@@ -409,16 +408,15 @@ describe('Dropdown', () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.keyboard('[End]')
-        await tick(50)
+        await act(() => user.keyboard('[End]'))
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
       })
       it('opens and selects last when active', async () => {
         const user = userEvent.setup()
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
-        await user.tab()
-        await user.keyboard('[End]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[End]'))
 
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -430,13 +428,13 @@ describe('Dropdown', () => {
       it('selects first when open', async () => {
         const user = userEvent.setup()
 
-        await user.tab()
-        await user.keyboard('[ArrowDown]')
+        await act(() => user.tab())
+        await act(() => user.keyboard('[ArrowDown]'))
         await waitFor(() =>
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
 
-        await user.keyboard('[End]')
+        await act(() => user.keyboard('[End]'))
         await waitFor(() =>
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )

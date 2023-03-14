@@ -35,10 +35,9 @@ describe('Datepicker', () => {
       await act(() => user.click(button))
 
       const today = await findByTitle('Today')
-      user.click(today)
+      await act(() => user.click(today))
       
       const input = await findByRole('textbox') as HTMLInputElement
-      await act(() => tick())
 
       const todaysDate = formatISO(new Date(), { representation: 'date' })
       expect(input.value).toEqual(todaysDate)
@@ -52,10 +51,9 @@ describe('Datepicker', () => {
       await act(() => user.click(button))
 
       const today = await findByTitle('Today')
-      user.click(today)
+      await act(() => user.click(today))
       
       const calendar = await findByRole('dialog')
-      await act(() => tick())
       expect(calendar.className.trim()).toEqual('popover popover-datepicker')
     })
     it.skip('closes when clicking outside', async () => {
@@ -72,10 +70,9 @@ describe('Datepicker', () => {
       await act(() => user.click(button))
       
       const outside = await findByTestId('outside')
-      await user.click(outside)
+      await act(() => user.click(outside))
       
       const calendar = await findByRole('dialog')
-      await act(() => tick())
       expect(calendar.className.trim()).toEqual('popover popover-datepicker')
     })
     it('returns chosen date in onChange', async () => {
@@ -87,9 +84,8 @@ describe('Datepicker', () => {
       const button = await findByRole('button')
       await act(() => user.click(button))
 
-      const _15th = await findByText('15')
-      user.click(_15th)      
-      await act(() => tick())
+      const _15th = await findByText('15')      
+      await act(() => user.click(_15th))
 
       const todaysDate = new Date()
       const expectedDate = `${todaysDate.getUTCFullYear()}-${pad(todaysDate.getUTCMonth()+1)}-15`

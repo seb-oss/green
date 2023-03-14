@@ -59,22 +59,6 @@ $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
 @mixin calendar() {
-  /*background: $background;
-  box-shadow: $box-shadow;
-  border-radius: $border-radius;
-  @include common.add-border();
-  @include common.add-border-color($dialog-border-color);
-  display: inline-flex;
-  z-index: $z-index;
-  flex-direction: column;
-  visibility: hidden;
-  opacity: 0;
-
-  // active state
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }*/
 
   // use full width on small screens
   @include common.media-breakpoint-down(sm) {
@@ -95,6 +79,7 @@ $weekend-background: $background;
       }
     }
   }
+
   main {
     display: flex;
     justify-content: center;
@@ -112,7 +97,6 @@ $weekend-background: $background;
       }
       // general
       border-spacing: 0;
-      position: relative;
       tr {
         th,
         td {
