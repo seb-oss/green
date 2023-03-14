@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = ({ label }) => `
+  <div class="gds-chips">
+   ${label}
+  </div>
+`
+
+<Meta
+  title="Components/Chips"
+  parameters={{
+    componentIds: ['component-chips'],
+  }}
+  argTypes={{
+    label: { conrol: 'text' },
+    leadingIcon: {
+      control: {
+        type: 'boolean',
+        options: [false, true],
+      },
+    },
+    theme: {
+      options: ['Dark', 'Light'],
+      control: { type: 'radio' },
+    },
+  }}
+/>
+
+# Chips
+
+Chips are compact elements that represent an input, attribute, or action.
+
+# Behaviour
+
+<Canvas>
+  <Story
+    name="Chips"
+    args={{
+      label: 'Chips',
+      leadingIcon: false,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Element structure
+
+<Canvas>
+  <div class="gds-chips">Label</div>
+</Canvas>
