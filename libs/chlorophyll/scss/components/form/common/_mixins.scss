@@ -109,7 +109,6 @@
   max-width: 100%;
   position: relative;
   width: 100%;
-  z-index: 0;
 
   &:not(:last-child) {
     @include common.margin-bottom(6);
