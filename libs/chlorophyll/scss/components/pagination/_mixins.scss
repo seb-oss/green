@@ -1,0 +1,46 @@
+$default-size: 2.75rem;
+$small-size: 2rem;
+
+@mixin add-pagination() {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: left;
+  flex-direction: row !important;
+  li {
+    padding: 0 !important;
+    &::before {
+      display: none !important;
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      border: 0;
+      color: var(--sg-card-color);
+      width: $default-size;
+      height: $default-size;
+      font-weight: 400;
+      &:hover:not([disabled]) {
+        background-color: var(--sg-table-header-background);
+        color: var(--sg-table-header-color);
+      }
+      &:active,
+      &.active {
+        background-color: var(--sg-table-header-background);
+        color: var(--sg-table-header-color);
+      }
+
+      svg {
+        margin-top: 0.125rem;
+        overflow: visible;
+        box-sizing: content-box;
+        display: inline-block;
+        height: 0.9em;
+        vertical-align: -0.125em;
+      }
+    }
+  }
+}
