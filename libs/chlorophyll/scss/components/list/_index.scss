@@ -1,10 +1,10 @@
 @use 'mixins';
 
-ul:not(.legend) {
+ul:not(.legend, .gds-reset) {
   @include mixins.base-list();
 }
 
-ul:not(.check, .table, [role='listbox'], [role='menu'], .x-axis, .legend) {
+ul:not(.check, .table, [role='listbox'], [role='menu'], .x-axis, .legend, .gds-reset) {
   @include mixins.bullet-list();
 }
 
