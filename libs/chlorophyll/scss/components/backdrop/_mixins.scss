@@ -3,4 +3,6 @@
   inset: 0;
   position: fixed;
   z-index: $z-index;
+  /* Override IBP leakage Todo: remove this if not needed in the future */
+  display: block;
 }
