@@ -184,6 +184,16 @@
     }
   },
   {
+    "id": "components-slider--slider",
+    "name": "Slider",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
     "id": "components-slide-toggle--slide-toggle",
     "name": "Slide Toggle",
     "title": "Components/Slide Toggle",
@@ -204,9 +214,19 @@
     }
   },
   {
-    "id": "components-navbar--navbar",
+    "id": "components-navigation-pagination--pagination",
+    "name": "Pagination",
+    "title": "Components/Navigation/Pagination",
+    "customParams": {
+      "componentIds": [
+        "component-pagination"
+      ]
+    }
+  },
+  {
+    "id": "components-navigation-navbar--navbar",
     "name": "Navbar",
-    "title": "Components/Navbar",
+    "title": "Components/Navigation/Navbar",
     "customParams": {
       "componentIds": []
     }

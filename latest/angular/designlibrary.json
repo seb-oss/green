@@ -1,5 +1,45 @@
 [
   {
+    "id": "components-slider--default",
+    "name": "Default",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--textbox",
+    "name": "Textbox",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--error",
+    "name": "Error",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--disabled",
+    "name": "Disabled",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
     "id": "components-segmented-control--with-router",
     "name": "With Router",
     "title": "Components/Segmented control",
@@ -14,6 +54,16 @@
     "name": "Default",
     "title": "Components/Progress Circle",
     "customParams": {}
+  },
+  {
+    "id": "components-navigation-pagination--default",
+    "name": "Default",
+    "title": "Components/Navigation/Pagination",
+    "customParams": {
+      "componentIds": [
+        "component-pagination"
+      ]
+    }
   },
   {
     "id": "components-modal--default",
