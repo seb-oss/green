@@ -2,6 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.2.1...@sebgroup/chlorophyll@1.3.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* 🐛 margin on form-item and form-group ([4d3b7fd](https://github.com/sebgroup/green/commit/4d3b7fd36878a25ed2584af00bae70f669fd7442))
+* 🐛 match green's form-info styles ([c183f01](https://github.com/sebgroup/green/commit/c183f012c6611ccc7d07342f22b3505df2780699))
+* 🐛 new angular component ([9bcf96b](https://github.com/sebgroup/green/commit/9bcf96b27565e69fc821f23ed131f52d3d4d6434))
+* 🐛 remove border on mozilla browsers ([091a4ce](https://github.com/sebgroup/green/commit/091a4ceabe446d1ae17117a3efa821f850512d23))
+* 🐛 truncating long options for select ([#766](https://github.com/sebgroup/green/issues/766)) ([c383180](https://github.com/sebgroup/green/commit/c3831804b056dfcef42dd7b2fcc600ed604b5c96)), closes [#760](https://github.com/sebgroup/green/issues/760)
+* 🐛 update based on pr comments ([0652fef](https://github.com/sebgroup/green/commit/0652fef5ca3e06601d1fad80d53ff80caee96c28))
+* 🐛 zindex problem on form-group ([ccb6f77](https://github.com/sebgroup/green/commit/ccb6f77dbea6cfd3eb30f6648bc1060bf2d7cdda)), closes [#777](https://github.com/sebgroup/green/issues/777)
+* **input-field:** remove `cursor: pointer` ([29b7c7c](https://github.com/sebgroup/green/commit/29b7c7c317bb6e9e6de6d77755d3bbb55645866a))
+
+
+### Features
+
+* 🎸 add input instruction prop to the component ([d02f204](https://github.com/sebgroup/green/commit/d02f204dc4b6606b9104dcbca21be5c2540dcfb7))
+* 🎸 new chlorophyll slider ([312f05c](https://github.com/sebgroup/green/commit/312f05c0984c0203821573477c6b7784198d9243))
+* 🎸 new progress slider disabled theme ([d4e6870](https://github.com/sebgroup/green/commit/d4e6870529750089d51d08a0c6bab1d6eb9e3ded))
+* **button:** add `danger` variants ([ddf722a](https://github.com/sebgroup/green/commit/ddf722a38ac5db60cd887eca0d480273239df978)), closes [#565](https://github.com/sebgroup/green/issues/565)
+
+
+
 ## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.2.0...@sebgroup/chlorophyll@1.2.1) (2023-03-03)
 
 
