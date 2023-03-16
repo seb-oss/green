@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.1.0...@sebgroup/extract@1.2.0) (2023-03-16)
+
+
+### Features
+
+* 🎸 new progress slider disabled theme ([d4e6870](https://github.com/sebgroup/green/commit/d4e6870529750089d51d08a0c6bab1d6eb9e3ded))
+* **angular:** add pagination ([9c30c95](https://github.com/sebgroup/green/commit/9c30c9558023ba79e52112578ad5c7a35a12318b))
+* **extract:** pagination i18n ([d5b74f6](https://github.com/sebgroup/green/commit/d5b74f6bf394ddfbadaf90e901d49c9e6402ed86))
+
+
+
 # [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.0.0...@sebgroup/extract@1.1.0) (2023-03-01)
 
 
