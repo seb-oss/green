@@ -93,7 +93,7 @@
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-angular": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
-    "@jscutlery/semver": "^2.25.2",
+    "@jscutlery/semver": "2.25.2",
     "@nrwl/angular": "13.10.3",
     "@nrwl/cli": "13.10.3",
     "@nrwl/cypress": "13.10.3",
