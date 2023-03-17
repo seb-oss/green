@@ -49,12 +49,25 @@ $variants: (
 
 @mixin disabled {
   font-weight: $font-weight;
-  @include common.add-disable(false, true, false)
+  @include common.add-disable(false, true, false);
 }
 
 @mixin button {
   text-decoration: none;
 }
+
+// @mixin underline {
+//   display: flex;
+//   position: absolute;
+//   bottom: 0;
+//   pointer-events: none;
+//   left: 0;
+
+//   svg {
+//     width: 300%;
+//     height: 100%;
+//   }
+// }
 
 /* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
 @mixin variant($color, $outline-color) {
@@ -69,5 +82,4 @@ $variants: (
       color: inherit;
     }
   }
-
 }
