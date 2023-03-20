@@ -77,10 +77,6 @@ $variants: (
   display: flex;
   align-items: center;
   gap: 10px;
-  // Text smoothing should be enabled
-  // -webkit-font-smoothing: antialiased;
-  // -webkit-text-size-adjust: 100%;
-  // text-rendering: optimizeLegibility;
   transition: color 468ms;
   transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
 
@@ -130,7 +126,13 @@ $variants: (
   }
 }
 
-/* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
+/* 
+
+Mixin for link variants
+Base on background color of parent element eg. white links on dark backgrounds etc. 
+
+*/
+
 @mixin variant($color, $outline-color) {
   a:link {
     @include common.add-outline-focus-state($outline-color);
