@@ -209,6 +209,30 @@
     "customParams": {}
   },
   {
+    "id": "components-slider--default-story",
+    "name": "Default",
+    "title": "Components/Slider",
+    "customParams": {}
+  },
+  {
+    "id": "components-slider--textbox",
+    "name": "Textbox",
+    "title": "Components/Slider",
+    "customParams": {}
+  },
+  {
+    "id": "components-slider--error",
+    "name": "Error",
+    "title": "Components/Slider",
+    "customParams": {}
+  },
+  {
+    "id": "components-slider--disabled",
+    "name": "Disabled",
+    "title": "Components/Slider",
+    "customParams": {}
+  },
+  {
     "id": "components-select--with-options",
     "name": "With options",
     "title": "Components/Select",
