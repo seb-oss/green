@@ -64,8 +64,6 @@ describe(NggModalComponent.name, () => {
 
     const modalElement = await component.findByTestId('modal')
 
-    console.log(component.container)
-
     expect(modalElement).toBeDefined()
     await waitFor(() =>
       expect(component.container.classList.contains('open')).toEqual(true)
