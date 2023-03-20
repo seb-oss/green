@@ -26,7 +26,7 @@ const Template: Story<NggSliderComponent> = (args: NggSliderComponent) => {
       <ngg-slider 
         label="Slider label text in one line"
         instruction="Element instruction"
-        placeholder="Element placeholder"
+        placeholder="%"
         [value]="50"
         [hasTextbox]="hasTextbox"
         [disabled]="disabled"

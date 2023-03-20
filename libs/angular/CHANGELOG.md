@@ -2,6 +2,32 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.4...@sebgroup/green-angular@1.1.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* 🐛 lint issues ([b49b683](https://github.com/sebgroup/green/commit/b49b6834f13085f829e22597dc642f0ae9e1a027))
+* 🐛 new angular component ([9bcf96b](https://github.com/sebgroup/green/commit/9bcf96b27565e69fc821f23ed131f52d3d4d6434))
+* 🐛 remove border on mozilla browsers ([091a4ce](https://github.com/sebgroup/green/commit/091a4ceabe446d1ae17117a3efa821f850512d23))
+* 🐛 update based on pr comments ([0652fef](https://github.com/sebgroup/green/commit/0652fef5ca3e06601d1fad80d53ff80caee96c28))
+* 🐛 use native disabled attribute ([7b23e73](https://github.com/sebgroup/green/commit/7b23e737774c6be24e9682e3adf07b8634937da8))
+* **angular:** empty pagination ([1fc6e30](https://github.com/sebgroup/green/commit/1fc6e306b393f9bc5f01c5847605f62f66ac17e4))
+* **chlorophyll:** reset green styles ([12c33bd](https://github.com/sebgroup/green/commit/12c33bd2ce41eca65e965f4ddc27c1f4b97b66a1))
+
+
+### Features
+
+* 🎸 add input instruction prop to the component ([d02f204](https://github.com/sebgroup/green/commit/d02f204dc4b6606b9104dcbca21be5c2540dcfb7))
+* 🎸 add output events ([3dd4cf2](https://github.com/sebgroup/green/commit/3dd4cf20e970e0c000497d5464e14e6a78740fcd))
+* 🎸 add placeholder prop ([7443da6](https://github.com/sebgroup/green/commit/7443da6e16660c5908b6f823d91f66a6f0a99ac0))
+* 🎸 new chlorophyll slider ([312f05c](https://github.com/sebgroup/green/commit/312f05c0984c0203821573477c6b7784198d9243))
+* 🎸 new progress slider disabled theme ([d4e6870](https://github.com/sebgroup/green/commit/d4e6870529750089d51d08a0c6bab1d6eb9e3ded))
+* **angular:** add pagination ([9c30c95](https://github.com/sebgroup/green/commit/9c30c9558023ba79e52112578ad5c7a35a12318b))
+* **extract:** pagination i18n ([d5b74f6](https://github.com/sebgroup/green/commit/d5b74f6bf394ddfbadaf90e901d49c9e6402ed86))
+
+
+
 ## [1.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.0.3...@sebgroup/green-angular@1.0.4) (2023-03-01)
 
 

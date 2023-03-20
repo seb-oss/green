@@ -1,0 +1,71 @@
+name: '🐞 Bug Report'
+description: Report a reproducible bug or regression related to extensions API
+labels: ['Type: Bug', 'Angular', 'React']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        Do not forget to update the title above to consisely describe the issue.
+  - type: checkboxes
+    id: previous
+    attributes:
+      label: Bug already reported ?
+      description:
+      options:
+        - label: I confirm that I have checked if the bug already has been reported
+          required: true
+  - type: dropdown
+    id: frameworks
+    attributes:
+      label: For which framework/library you are reporting the bug
+      multiple: true
+      options:
+        - React
+        - React Charts
+        - Angular
+        - Angular Charts
+        - Chlorophyll
+        - extract
+  - type: input
+    id: component
+    attributes:
+      label: Component name
+      description: If the bug is replated to a component please specify
+      placeholder: ex. dropdown
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        Please provide a clear and concise description of what the bug is. Include
+        screenshots if needed. Please test using the latest version of all SEB packages.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps To Reproduce
+      description: Your bug will get fixed much faster if we can easily reproduce it. Issues without reproduction steps may be immediately closed as not actionable.
+      placeholder: |
+        1. In this environment...
+        2. With this config...
+        3. Run '...'
+        4. See error...
+    validations:
+      required: false
+  - type: textarea
+    id: current-behaviour
+    attributes:
+      label: Current Behaviour
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected Behaviour
+    validations:
+      required: false

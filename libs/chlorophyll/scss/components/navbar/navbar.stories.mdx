@@ -14,20 +14,21 @@ export const Template = ({ text }) => {
 }
 
 <Meta
-  title="Components/Navbar"
-  parameters={{ 
-    componentIds: []
+  title="Components/Navigation/Navbar"
+  parameters={{
+    componentIds: [],
   }}
   argTypes={{
     text: { control: 'text' },
-  }} />
+  }}
+/>
 
 <Story
   name="Navbar"
   args={{
     text: 'Page heading',
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>

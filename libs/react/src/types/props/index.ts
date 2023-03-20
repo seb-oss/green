@@ -15,3 +15,16 @@ export interface LabelProps {
   label?: string
   labelInformation?: string
 }
+
+export interface SliderProps {
+  name?: string
+  defaultValue?: number
+  min?: number
+  max?: number
+  step?: number
+  label?: string
+  instruction?: string
+  errorMessage?: string
+  hasTextbox?: boolean
+  disabled?: boolean
+}
