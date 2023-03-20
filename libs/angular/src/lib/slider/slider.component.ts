@@ -42,7 +42,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() errorMessage = ''
   @Input() hasTextbox = false
   @Input() disabled = false
-  @Input() value: number = 0
+  @Input() value = 0
   @Output() sliderChange = new EventEmitter<number>()
   @Output() sliderTouch = new EventEmitter<boolean>()
   onChangeFn?: (val: number) => void
