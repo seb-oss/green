@@ -30,7 +30,7 @@ describe('datepicker', () => {
   beforeEach(() => {
     locale = 'sv-SE'
     now = new Date('2022-03-04 12:00:00')
-    jest.useFakeTimers()
+    jest.useFakeTimers().setSystemTime(now)
     options = {
       locale,
     }
