@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.3.0...@sebgroup/chlorophyll@1.4.0) (2023-03-20)
+
+
+### Bug Fixes
+
+* 🐛 overriding ibp styling for backdrop ([#793](https://github.com/sebgroup/green/issues/793)) ([a8f20dc](https://github.com/sebgroup/green/commit/a8f20dc4946c886c2ba2133b22b85d957546e5f8))
+* **chlorophyll:** reset green styles ([12c33bd](https://github.com/sebgroup/green/commit/12c33bd2ce41eca65e965f4ddc27c1f4b97b66a1))
+* update pagination examples ([71d3ecc](https://github.com/sebgroup/green/commit/71d3ecccecba27f09b53cbb8e9960b406bc5b93b))
+
+
+### Features
+
+* **chlorophyll:** add pagination ([d303e78](https://github.com/sebgroup/green/commit/d303e78885eec8fcf0e111b349450634b8361517))
+
+
+
 # [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.2.1...@sebgroup/chlorophyll@1.3.0) (2023-03-16)
 
 
