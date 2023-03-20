@@ -25,25 +25,18 @@ export function Slider({
   )
 
   React.useLayoutEffect(() => {
-    if (defaultValue) {
-      setTrackBackground(defaultValue)
-    }
-  }, [defaultValue])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setSliderValue(Number(value))
-    setTrackBackground(Number(value))
-  }
-
-  const setTrackBackground = (input: number) => {
     if (disabled) {
       setBackground(sliderColors.disabled)
       return
     }
 
-    const value: number = ((input - min) / (max - min)) * 100
-    setBackground(getSliderTrackBackground(value))
+    const _value: number = ((sliderValue - min) / (max - min)) * 100
+    setBackground(getSliderTrackBackground(_value))
+  }, [disabled, sliderValue])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSliderValue(Number(value))
   }
 
   return (
