@@ -8,6 +8,8 @@
       type="number"
       [(ngModel)]="value"
       [class.is-invalid]="!!errorMessage"
+      [attr.name]="name"
+      [attr.id]="name + '-textbox'"
       [attr.placeholder]="placeholder"
       [disabled]="disabled"
       (blur)="onBlur()"

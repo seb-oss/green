@@ -24,7 +24,7 @@ interface SliderStyle {
 })
 export class NggSliderComponent implements ControlValueAccessor, OnInit {
   private _value = 0
-  @Input() name = `${randomId}-slider`
+  @Input() name = `${randomId()}-slider`
   @Input() min = 0
   @Input() max = 100
   @Input() step = 1
