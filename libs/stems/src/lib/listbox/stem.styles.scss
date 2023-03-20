@@ -1,0 +1,10 @@
+@use '../../../../chlorophyll/scss/primitives/listbox/mixins' as self;
+@use '../../../../chlorophyll/scss/components/list/mixins' as list;
+
+li {
+  @include self.listbox-item;
+}
+
+ul {
+  @include list.base-list;
+}

@@ -1,0 +1,37 @@
+{
+  "root": "libs/stems",
+  "sourceRoot": "libs/stems/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "packageJson": "libs/stems/package.json",
+        "outputPath": "dist/libs/stems",
+        "main": "libs/stems/src/index.ts",
+        "tsConfig": "libs/stems/tsconfig.lib.json",
+        "entryFile": "libs/stems/src/index.ts",
+        "assets": ["libs/stems/*.md"],
+        "rollupConfig": "rollup.config.js",
+        "updateBuildableProjectDepsInPackageJson": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/stems/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/stems"],
+      "options": {
+        "jestConfig": "libs/stems/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

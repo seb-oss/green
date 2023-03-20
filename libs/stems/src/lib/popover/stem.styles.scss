@@ -1,0 +1,5 @@
+@use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
+
+.popover {
+  @include popover.popover;
+}

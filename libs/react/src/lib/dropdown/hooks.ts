@@ -43,23 +43,7 @@ interface HookResult {
   multiSelectProps: MultiSelectProps
 }
 
-export const useDropdown = ({
-  id,
-  value,
-  texts,
-  options,
-  loop,
-  multiSelect,
-  searchable,
-  searchFilter,
-  compareWith,
-  useValue,
-  display,
-  togglerRef,
-  listboxRef,
-  onChange,
-  validator,
-}: HookArgs): HookResult => {
+export const useDropdown = (args: HookArgs): HookResult => {
   const [handler, setHandler] = useState<DropdownHandler>()
   const [dropdown, setDropdown] = useState<AbstractDropdown>()
   const [togglerProps, setTogglerProps] = useState<Props>({})
@@ -136,79 +120,42 @@ export const useDropdown = ({
   // When dropdown properties change
   useEffect(() => {
     if (!dropdown) return
-    handler?.update({
-      id,
-      value,
-      texts,
-      options,
-      loop,
-      multiSelect,
-      searchable,
-      searchFilter,
-      compareWith,
-      useValue,
-      display,
-      validator,
-    })
+    handler?.update(args)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    id,
-    texts,
-    options,
-    loop,
-    multiSelect,
-    searchable,
-    searchFilter,
-    compareWith,
-    useValue,
-    display,
-  ])
+  }, [args])
 
   useEffect(() => {
     if (!dropdown) return
-    handler?.selectByValue(value)
+    handler?.selectByValue(args.value)
     console.log('new value')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
+  }, [args.value])
 
   // When validator changes
   useEffect(() => {
     if (!dropdown) return
 
-    if (validator) handler?.validate(validator)
+    if (args.validator) handler?.validate(args.validator)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validator])
+  }, [args.validator])
 
   // Create dropdown handler
   useEffect(() => {
-    if (!handler && togglerRef.current && listboxRef.current) {
+    if (!handler && args.togglerRef.current && args.listboxRef.current) {
       setHandler(
         createDropdown(
-          {
-            id,
-            value,
-            texts,
-            options,
-            loop,
-            multiSelect,
-            searchable,
-            searchFilter,
-            compareWith,
-            useValue,
-            display,
-            validator,
-          },
-          togglerRef.current,
-          listboxRef.current,
-          listboxRef.current,
+          args,
+          args.togglerRef.current,
+          args.listboxRef.current,
+          args.listboxRef.current,
           (dd) => setDropdown(dd),
-          (value) => onChange?.(value)
+          (value) => args.onChange?.(value)
         )
       )
     }
     return () => handler?.destroy()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [togglerRef, listboxRef])
+  }, [args.togglerRef, args.listboxRef])
 
   return {
     dropdown: handler,
