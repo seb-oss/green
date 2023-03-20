@@ -1,14 +1,16 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'react-charts',
   preset: '../../jest.preset.js',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
+  globals: {},
   transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
+    '^.+\\.[tj]sx?$': [
+      'ts-jest',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!billboard.js/.*)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],

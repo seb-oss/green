@@ -1,5 +1,6 @@
 {
-  "root": "apps/react-charts-e2e",
+  "name": "react-charts-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/react-charts-e2e/src",
   "projectType": "application",
   "tags": [],

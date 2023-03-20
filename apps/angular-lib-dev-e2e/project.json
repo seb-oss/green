@@ -1,5 +1,6 @@
 {
-  "root": "apps/angular-lib-dev-e2e",
+  "name": "angular-lib-dev-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/angular-lib-dev-e2e/src",
   "projectType": "application",
   "tags": [],

@@ -4,7 +4,7 @@
     "types": [],
     "outDir": "../../dist/out-tsc"
   },
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],
   "include": ["**/*.ts"],
   "extends": "./tsconfig.json"
 }

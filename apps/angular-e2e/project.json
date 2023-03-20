@@ -1,5 +1,6 @@
 {
-  "root": "apps/angular-e2e",
+  "name": "angular-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/angular-e2e/src",
   "projectType": "application",
   "tags": [],
