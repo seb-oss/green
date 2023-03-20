@@ -1,0 +1,95 @@
+:root {
+    // These should live on lib level
+    --gds-sys-transition-property: all;
+    --gds-sys-transition-duration: 468ms;
+    --gds-sys-transition-function: cubic-bezier(0, 0.25, 0.5, 1);
+    --gds-sys-transition-delay: 0s;
+    --gds-sys-border-radius-full: 200px;
+}
+
+.gds-chips {
+
+    // Component based break down of transitions
+    --gds-comp-chips-transition-property: 
+        var(--gds-sys-transition-property);
+    --gds-comp-chips-transition-duration: 
+        var(--gds-sys-transition-duration);
+    --gds-comp-chips-transition-function: 
+        var(--gds-sys-transition-function);
+    --gds-comp-chips-transition-delay: 
+        var(--gds-sys-transition-delay);
+
+    // Combine
+    --gds-comp-chips-transition:
+        var(--gds-comp-chips-transition-property) 
+        var(--gds-comp-chips-transition-duration) 
+        var(--gds-comp-chips-transition-function) 
+        var(--gds-comp-chips-transition-delay);
+
+    --gds-comp-chips-icon-gap: 5px;
+    --gds-comp-chips-icon-width: 20px;
+    --gds-comp-chips-padding-inline: 16px;
+    --gds-comp-chips-padding-block: 6px;
+    --gds-comp-chips-border-radius: var(--gds-sys-border-radius-full);
+
+
+
+    --gds-comp-chips-icon-action-selected: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' %3E%3Cpath fill='#494949' d='m10.684.507-6.85 6.85L1.315 4.84a.313.313 0 0 0-.442 0l-.736.737a.313.313 0 0 0 0 .442l3.474 3.474c.122.122.32.122.442 0l7.808-7.807a.313.313 0 0 0 0-.442l-.737-.737a.312.312 0 0 0-.441 0Z'/%3E%3C/svg%3E");
+
+    --gds-comp-chips-icon-action-remove: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none'%3E%3Cpath fill='#494949' d='m5.884 5 2.67-2.67.551-.552a.208.208 0 0 0 0-.294l-.589-.59a.208.208 0 0 0-.294 0L5 4.117 1.778.894a.208.208 0 0 0-.294 0l-.59.59a.208.208 0 0 0 0 .294L4.116 5 .894 8.222a.208.208 0 0 0 0 .294l.59.59a.208.208 0 0 0 .294 0L5 5.883l2.67 2.67.552.551a.208.208 0 0 0 .294 0l.59-.589a.208.208 0 0 0 0-.294L5.883 5Z'/%3E%3C/svg%3E");
+
+    display: inline-flex;
+    border-radius: var(--gds-comp-chips-border-radius);
+    border: 1px solid black;
+    padding-inline: var(--gds-comp-chips-padding-inline);
+    padding-block: var(--gds-comp-chips-padding-block);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: white;
+    transition: var(--gds-comp-chips-transition);
+    color: black;
+    user-select: none;
+
+    &:hover {
+        background-color: #494949;
+        color: #FFFFFF;
+    }
+
+    &:active {
+        background-color: red;
+        color: #FFFFFF;
+    }
+
+    &:focus {
+        color: #333333;
+        background-color: white;
+        outline: 1px solid #41B0EE;
+    }
+
+    &__action {
+        gap: var(--gds-comp-chips-icon-gap);
+        padding-right: calc(var(--gds-comp-chips-padding-inline) / 2);
+
+        &::after {
+            width: var(--gds-comp-chips-icon-width);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-selected {
+            &::after {
+                content: var(--gds-comp-chips-icon-action-selected);
+            }
+        }
+
+        &-remove {
+            &::after {
+                content: var(--gds-comp-chips-icon-action-remove);
+            }
+        }
+    }
+
+}

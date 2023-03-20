@@ -1,7 +1,13 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
 export const Template = ({ label }) => `
-  <div class="gds-chips">
+  <div aria-label="${label}" title="${label}"  class="gds-chips">
+   ${label}
+  </div>
+  <div aria-label="${label}" title="${label}" class="gds-chips gds-chips__action gds-chips__action-selected">
+   ${label}
+  </div>
+  <div aria-label="${label}" title="${label}" class="gds-chips gds-chips__action gds-chips__action-remove">
    ${label}
   </div>
 `
@@ -52,6 +58,12 @@ Chips are compact elements that represent an input, attribute, or action.
 
 <Canvas>
   <div class="gds-chips">Label</div>
+  <div class="gds-chips gds-chips__action gds-chips__action-selected">
+    Selected
+  </div>
+  <div class="gds-chips gds-chips__action gds-chips__action-remove">
+    Removable
+  </div>
 </Canvas>
 
 ### TODO:
