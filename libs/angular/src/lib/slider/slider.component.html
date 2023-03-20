@@ -13,6 +13,7 @@
       [attr.placeholder]="placeholder"
       [disabled]="disabled"
       (blur)="onBlur()"
+      (input)="handleChange()"
     />
     <span *ngIf="!!errorMessage" class="form-info"></span>
   </div>
@@ -28,6 +29,7 @@
   [(ngModel)]="value"
   [ngStyle]="style"
   (blur)="onBlur()"
+  (input)="handleChange()"
 />
 <p *ngIf="!!errorMessage" class="gds-slider-error-info">
   {{ errorMessage }}

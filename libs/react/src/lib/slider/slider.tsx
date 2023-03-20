@@ -30,8 +30,8 @@ export function Slider({
       return
     }
 
-    const _value: number = ((sliderValue - min) / (max - min)) * 100
-    setBackground(getSliderTrackBackground(_value))
+    const percent: number = ((sliderValue - min) / (max - min)) * 100
+    setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
