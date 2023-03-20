@@ -36,6 +36,7 @@
     cursor: pointer;
     color: var(--gds-sys-color-font);
     font-weight: 400;
+    text-decoration: none;
 
     @include common.padding(2);
     @include common.add-border-radius(0.25rem);
