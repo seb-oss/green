@@ -5,9 +5,10 @@ a:not(:link, :visited, .gds-reset) {
   @include mixins.disabled;
 }
 // default
-a:link:not(.button, [role='tab'], .gds-reset),
-a:visited:not(.button, [role='tab'], .gds-reset),
+a:link:not(.button, [role='tab'], .gds-reset, .gds-link-arrow),
+a:visited:not(.button, [role='tab'], .gds-reset, .gds-link-arrow),
 .link {
+  @include mixins.underline;
   @include mixins.base;
 }
 
@@ -16,82 +17,18 @@ a.button {
 }
 
 a.gds-link-underline {
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-
-  &:hover {
-    text-underline-offset: 3px;
-  }
-
-  &:active {
-    text-underline-offset: 2px;
-  }
-}
-
-a.gds-link-animated {
-  //   @include mixins.icon;
-  position: relative;
-  text-decoration: none;
-  overflow: hidden;
-  box-sizing: border-box;
-  display: flex;
-  width: fit-content;
-  text-decoration: none !important;
-  padding-bottom: 4px;
-
-  &:hover .gds-link-graphic {
-    transform: translate3d(-66.6%, 0, 0);
-  }
-  &:active .gds-link-graphic {
-    transform: translate3d(-40%, 0, 0);
-  }
-}
-
-.gds-link-graphic {
-  //   @include mixins.underline;
-
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  pointer-events: none;
-  left: 0;
-  width: 300%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  bottom: 0;
-  stroke-width: 3px;
-  transition: transform 468ms;
-  transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
+  @include mixins.underline;
 }
 
 .gds-link-icon {
-  text-decoration: underline !important;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-underline-offset: 2px;
-  font-size: 16px;
-  line-height: 1.25;
-  font-weight: 500;
-  font-style: normal;
-  font-family: 'SEB SansSerif', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  transition: all 468ms;
-  transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
-
-  svg {
-    fill: none;
-    height: 17px;
-    path {
-      fill: currentColor;
-    }
-  }
+  @include mixins.icon;
 }
 
-// Show aniamtions on touch devices
+.gds-link-arrow {
+  @include mixins.arrow;
+}
+
+// Fix states for touch devices
 @media (hover: none) {
   // Do the style here
 }

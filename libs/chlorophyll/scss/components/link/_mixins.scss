@@ -5,6 +5,8 @@
 $color: tokens.$link-color;
 $color-hover: tokens.get(tokens.$blue, 1);
 $color-visited: tokens.$link-color-visited;
+$color-dark: tokens.$link-color-dark;
+$color-visited-dark: tokens.$link-color-visited-dark;
 $font-weight: tokens.$font-weight-bold;
 $outline-opacity: 0.35;
 
@@ -31,15 +33,17 @@ $variants: (
   @include common.add-outline-focus-state();
   color: $color;
   font-weight: $font-weight;
-  text-decoration: none;
   border: none;
 
-  &:hover,
   &:focus {
     &:not([aria-disabled]) {
       color: $color-hover;
-      text-decoration: underline;
     }
+  }
+
+  &:not(.gds-link-icon__arrow:visited),
+  &.link-history:visited {
+    color: $color-visited;
   }
 
   &.link-history:visited {
@@ -56,18 +60,75 @@ $variants: (
   text-decoration: none;
 }
 
-// @mixin underline {
-//   display: flex;
-//   position: absolute;
-//   bottom: 0;
-//   pointer-events: none;
-//   left: 0;
+@mixin underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 
-//   svg {
-//     width: 300%;
-//     height: 100%;
-//   }
-// }
+  &:hover {
+    text-underline-offset: 2px;
+  }
+
+  &:active {
+    text-underline-offset: 1px;
+  }
+}
+
+@mixin icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  // Text smoothing should be enabled
+  // -webkit-font-smoothing: antialiased;
+  // -webkit-text-size-adjust: 100%;
+  // text-rendering: optimizeLegibility;
+  transition: color 468ms;
+  transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
+
+  svg {
+    fill: none;
+    height: 17px;
+    transition: transform 0.2s ease-in-out;
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+@mixin arrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: $color-dark;
+  font-weight: $font-weight;
+  text-decoration: none;
+  --arrow-transition: transform 0.2s ease-in-out;
+  --arrow-translate: translate3d(5px, 0, 0);
+
+  svg {
+    fill: none;
+    height: 17px;
+    transition: var(--arrow-transition);
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &:visited {
+    color: $color-visited-dark;
+  }
+
+  &:hover svg {
+    transform: var(--arrow-translate);
+  }
+
+  @media (prefers-reduced-motion) {
+    --arrow-transition: none;
+
+    &:hover svg {
+      --arrow-translate: none;
+    }
+  }
+}
 
 /* mixin for link variants (base on background color of parent element eg. white links on dark backgrounds etc. ) */
 @mixin variant($color, $outline-color) {
@@ -76,10 +137,11 @@ $variants: (
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;
+    text-decoration: none;
     &:hover,
     &:focus,
     &:visited {
-      color: inherit;
+      color: currentColor;
     }
   }
 }
