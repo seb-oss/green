@@ -98,7 +98,6 @@
     "@jscutlery/semver": "2.30.1",
     "@nrwl/angular": "15.8.7",
     "@nrwl/cli": "15.8.7",
-    "@nrwl/cypress": "15.8.7",
     "@nrwl/devkit": "^15.8.7",
     "@nrwl/eslint-plugin-nx": "15.8.7",
     "@nrwl/jest": "15.8.7",
