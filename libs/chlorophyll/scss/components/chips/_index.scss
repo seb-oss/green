@@ -4,6 +4,16 @@
     --gds-sys-transition-function: cubic-bezier(0, 0.25, 0.5, 1);
     --gds-sys-transition-delay: 0s;
     --gds-sys-border-radius-full: 200px;
+
+    // Experimental
+    --gds-sys-ripple-spread: 20px;
+    --gds-sys-ripple-bg: hsl(0 0% 0% / 0.5);
+
+    // Outline  
+    --gds-sys-outline-offset: 2px;
+    --gds-sys-outline-color: black;
+    --gds-sys-outline-style: solid;
+    --gds-sys-outline-width: 2px;
 }
 
 .gds-chips {
@@ -33,6 +43,14 @@
 
     --gds-comp-chips-icon-action-remove: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none'%3E%3Cpath fill='#494949' d='m5.884 5 2.67-2.67.551-.552a.208.208 0 0 0 0-.294l-.589-.59a.208.208 0 0 0-.294 0L5 4.117 1.778.894a.208.208 0 0 0-.294 0l-.59.59a.208.208 0 0 0 0 .294L4.116 5 .894 8.222a.208.208 0 0 0 0 .294l.59.59a.208.208 0 0 0 .294 0L5 5.883l2.67 2.67.552.551a.208.208 0 0 0 .294 0l.59-.589a.208.208 0 0 0 0-.294L5.883 5Z'/%3E%3C/svg%3E");
 
+    --gds-ripple-spread: var(--gds-sys-ripple-spread, 20px);
+    --gds-ripple-bg: var(--gds-sys-ripple-bg, hsl(0 0% 0% / 0.5));
+
+    --gds-comp-chips-outline-offset: var(--gds-sys-outline-offset);
+    --gds-comp-chips-outline-color: var(--gds-sys-outline-color);
+    --gds-comp-chips-outline-style: var(--gds-sys-outline-style);
+    --gds-comp-chips-outline-width: var(--gds-sys-outline-width);
+
     display: inline-flex;
     border-radius: var(--gds-comp-chips-border-radius);
     border: 1px solid black;
@@ -46,6 +64,8 @@
     transition: var(--gds-comp-chips-transition);
     color: black;
     user-select: none;
+    position: relative;
+    overflow: hidden;
     
     &:hover {
         background-color: #494949;
@@ -53,14 +73,40 @@
     }
 
     &:active {
-        background-color: red;
+        background-color: #333333;
         color: #FFFFFF;
     }
 
     &:focus {
-        color: #333333;
-        background-color: white;
-        outline: 1px solid #41B0EE;
+        outline-offset: var(--gds-comp-chips-outline-offset);
+        outline-color: var(--gds-comp-chips-outline-color);
+        outline-style: var(--gds-comp-chips-outline-style);
+        outline-width: var(--gds-comp-chips-outline-width);
+    }
+
+    &::before {
+        content: " ";
+        opacity: 0;
+        display: block;
+        background: var(--gds-ripple-bg);
+        position: absolute;
+        inset: 0;
+        left: var(--gds-ripple-left, 50%);
+        top: var(--gds-ripple-top, 50%);
+        overflow: hidden;
+        will-change: transform;
+        pointer-events: none;
+        width: var(--gds-ripple-spread, 50%);
+        height: var(--gds-ripple-spread, 50%);
+        border-radius: 200px;
+        transition: var(--gds-comp-chips-transition);
+        margin-top: -10px;
+        margin-left: -10px;
+        transition-property: transform, opacity;
+    }
+
+    &.gds-ripple-effect::before {
+        animation: ripple 468ms;
     }
 
     &__action {
@@ -91,3 +137,18 @@
         }
     }
 }
+
+@keyframes ripple {
+      0% {
+        transform:scale(0);
+        opacity: 0;
+      }
+      10% {
+        transform:scale(2);
+        opacity: 1;
+      }
+      100% {
+        transform:scale(5);
+        opacity: 0;
+    }
+  }

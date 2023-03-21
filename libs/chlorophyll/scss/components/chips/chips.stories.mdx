@@ -1,27 +1,32 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 import { ripple } from './ripple'
 
-export const Template = ({ label }) =>
-  `
+export const Template = ({ label }) => {
+  return `
   <div 
     aria-label="${label}" 
     title="${label}" 
-    class="gds-chips">
+    class="gds-chips"
+    tabindex="0"
+    >
       ${label}
   </div>
   <div 
     aria-label="${label}" 
     title="${label}" 
+    tabindex="0"
     class="gds-chips gds-chips__action gds-chips__action-selected">
       ${label}
   </div>
   <div 
   aria-label="${label}" 
   title="${label}" 
+  tabindex="0"
   class="gds-chips gds-chips__action gds-chips__action-remove"> 
     ${label} 
   </div>
 `
+}
 
 <Meta
   title="Components/Chips"
@@ -68,11 +73,19 @@ Chips are compact elements that represent an input, attribute, or action.
 ## Element structure
 
 <Canvas>
-  <div class="gds-chips">Label</div>
-  <div class="gds-chips gds-chips__action gds-chips__action-selected">
+  <div class="gds-chips" onClick={ripple}>
+    Label
+  </div>
+  <div
+    class="gds-chips gds-chips__action gds-chips__action-selected"
+    onClick={ripple}
+  >
     Selected
   </div>
-  <div class="gds-chips gds-chips__action gds-chips__action-remove">
+  <div
+    class="gds-chips gds-chips__action gds-chips__action-remove"
+    onClick={ripple}
+  >
     Removable
   </div>
 </Canvas>
