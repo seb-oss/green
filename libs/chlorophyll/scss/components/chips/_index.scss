@@ -1,5 +1,4 @@
 :root {
-    // These should live on lib level
     --gds-sys-transition-property: all;
     --gds-sys-transition-duration: 468ms;
     --gds-sys-transition-function: cubic-bezier(0, 0.25, 0.5, 1);
@@ -9,7 +8,6 @@
 
 .gds-chips {
 
-    // Component based break down of transitions
     --gds-comp-chips-transition-property: 
         var(--gds-sys-transition-property);
     --gds-comp-chips-transition-duration: 
@@ -19,7 +17,6 @@
     --gds-comp-chips-transition-delay: 
         var(--gds-sys-transition-delay);
 
-    // Combine
     --gds-comp-chips-transition:
         var(--gds-comp-chips-transition-property) 
         var(--gds-comp-chips-transition-duration) 
@@ -31,8 +28,6 @@
     --gds-comp-chips-padding-inline: 16px;
     --gds-comp-chips-padding-block: 6px;
     --gds-comp-chips-border-radius: var(--gds-sys-border-radius-full);
-
-
 
     --gds-comp-chips-icon-action-selected: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' %3E%3Cpath fill='#494949' d='m10.684.507-6.85 6.85L1.315 4.84a.313.313 0 0 0-.442 0l-.736.737a.313.313 0 0 0 0 .442l3.474 3.474c.122.122.32.122.442 0l7.808-7.807a.313.313 0 0 0 0-.442l-.737-.737a.312.312 0 0 0-.441 0Z'/%3E%3C/svg%3E");
 
@@ -51,7 +46,7 @@
     transition: var(--gds-comp-chips-transition);
     color: black;
     user-select: none;
-
+    
     &:hover {
         background-color: #494949;
         color: #FFFFFF;
@@ -79,6 +74,10 @@
             justify-content: center;
         }
 
+        &:hover::after {
+            filter: invert(100%) contrast(100);
+        }
+
         &-selected {
             &::after {
                 content: var(--gds-comp-chips-icon-action-selected);
@@ -91,5 +90,4 @@
             }
         }
     }
-
 }
