@@ -1,6 +1,7 @@
 {
+  "name": "angular-lib-dev",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/angular-lib-dev",
   "sourceRoot": "apps/angular-lib-dev/src",
   "prefix": "green",
   "targets": {
@@ -86,9 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/angular-lib-dev"],
+      "outputs": ["{workspaceRoot}/coverage/apps/angular-lib-dev"],
       "options": {
-        "jestConfig": "apps/angular-lib-dev/jest.config.js",
+        "jestConfig": "apps/angular-lib-dev/jest.config.ts",
         "passWithNoTests": true
       }
     }

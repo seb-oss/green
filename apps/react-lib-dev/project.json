@@ -1,10 +1,11 @@
 {
-  "root": "apps/react-lib-dev",
+  "name": "react-lib-dev",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/react-lib-dev/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -21,7 +22,8 @@
         ],
         "styles": ["apps/react-lib-dev/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "apps/react-lib-dev/webpack.config.js",
+        "isolatedConfig": true
       },
       "configurations": {
         "production": {
@@ -41,7 +43,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nrwl/webpack:dev-server",
       "options": {
         "buildTarget": "react-lib-dev:build",
         "hmr": true
@@ -62,9 +64,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/react-lib-dev"],
+      "outputs": ["{workspaceRoot}/coverage/apps/react-lib-dev"],
       "options": {
-        "jestConfig": "apps/react-lib-dev/jest.config.js",
+        "jestConfig": "apps/react-lib-dev/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -8,12 +8,12 @@ module.exports = {
     builder: 'webpack5',
   },
   features: {
-    buildStoriesJson: true
+    buildStoriesJson: true,
   },
-  stories: [],
+
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+
     '@storybook/addon-a11y',
     'storybook-dark-mode',
     path.resolve('./.storybook/addons/run-in-iframe/run-in-iframe-preset.js'),

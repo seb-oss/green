@@ -257,8 +257,8 @@ describe('Dropdown', () => {
           expect(options[2].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
-      it.skip('loops to first when looping', async () => {
-        component.rerender({ ...props, loop: true })
+      it('loops to first when looping', async () => {
+        component.change({ loop: true })
 
         const [_buttons, _listboxes, _options] = [
           await component.findAllByRole('button'),
@@ -276,28 +276,28 @@ describe('Dropdown', () => {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('active')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[1].getAttribute('aria-selected')).toEqual('true')
+          expect(options[1].classList.contains('active')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[2].getAttribute('aria-selected')).toEqual('true')
+          expect(options[2].classList.contains('active')).toEqual(true)
         )
 
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
         })
         await waitFor(() =>
-          expect(options[0].getAttribute('aria-selected')).toEqual('true')
+          expect(options[0].classList.contains('active')).toEqual(true)
         )
       })
     })
@@ -387,8 +387,8 @@ describe('Dropdown', () => {
           expect(options[0].classList.contains('sg-highlighted')).toEqual(true)
         )
       })
-      it.skip('loops to first when looping', async () => {
-        component.rerender({ ...props, loop: true })
+      it('loops to first when looping', async () => {
+        component.change({ loop: true })
 
         toggleButton.focus()
 
