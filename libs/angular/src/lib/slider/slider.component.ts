@@ -31,7 +31,9 @@ interface SliderStyle {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggSliderComponent implements ControlValueAccessor, OnInit {
+export class NggSliderComponent
+  implements ControlValueAccessor, OnInit, OnChanges
+{
   @Input() name = `${randomId()}-slider`
   @Input() min = 0
   @Input() max = 100
@@ -51,6 +53,12 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.setTrackBackground()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      this.setTrackBackground()
+    }
   }
 
   onBlur(): void {
