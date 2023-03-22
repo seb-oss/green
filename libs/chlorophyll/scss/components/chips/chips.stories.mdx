@@ -1,32 +1,22 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 import { ripple } from './ripple'
 
-export const Template = ({ label, languageDir }) => {
+export const Template = ({ label, languageDir, isSelected, isRemovable }) => {
   const langDir = languageDir === 'RTL' ? 'dir="rtl"' : 'dir="ltr"'
+  const attrClass =
+    'gds-chips ' +
+    (isSelected ? ' gds-chips__action gds-chips__action-selected' : '') +
+    (isRemovable ? ' gds-chips__action gds-chips__action-remove' : '')
   return `
-  <button 
-    aria-label="${label}" 
-    title="${label}" 
-    class="gds-chips"
-    ${langDir}
-    >
-      ${label}
-  </button>
-  <button 
-    aria-label="${label}" 
-    title="${label}" 
-    ${langDir}
-    class="gds-chips gds-chips__action gds-chips__action-selected">
-      ${label}
-  </button>
-  <button 
-  aria-label="${label}" 
-  title="${label}"
-  ${langDir} 
-  class="gds-chips gds-chips__action gds-chips__action-remove"> 
-    ${label} 
-  </button>
-`
+    <button 
+      aria-label="${label}" 
+      title="${label}" 
+      class="${attrClass}"
+      ${langDir}
+      >
+        ${label}
+    </button>
+  `
 }
 
 <Meta
@@ -40,14 +30,24 @@ export const Template = ({ label, languageDir }) => {
       options: ['RTL', 'LTR'],
       control: { type: 'radio' },
     },
+    isSelected: {
+      control: {
+        type: 'boolean',
+        options: [false, true],
+      },
+    },
+    isRemovable: {
+      control: {
+        type: 'boolean',
+        options: [false, true],
+      },
+    },
   }}
 />
 
 # Chips
 
 Chips are compact elements that represent an input, attribute, or action.
-
-# Behaviour
 
 <Canvas>
   <Story
@@ -61,6 +61,79 @@ Chips are compact elements that represent an input, attribute, or action.
 </Canvas>
 
 ## Element structure
+
+The elements of a chip are:
+
+- A container element with the class `gds-chips` for base functionality and `gds-chips__action` for interactive functionality.
+
+## Variations
+
+### Selected
+
+Use the `gds-chips__action-selected` class to indicate that a chip is selected.
+
+<Canvas>
+  <Story
+    name="Selected"
+    args={{
+      label: 'Selected',
+      isSelected: true,
+      isRemovable: false,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Removable
+
+Use the `gds-chips__action-remove` class to indicate that a chip is removable.
+
+<Canvas>
+  <Story
+    name="Removable"
+    args={{
+      label: 'Removable',
+      isSelected: false,
+      isRemovable: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Accessibility
+
+Chips are interactive elements that can be selected or removed. They are used to represent an input, attribute, or action.
+
+### Keyboard
+
+- Tab: Moves focus to the next element in the tab order.
+- Shift + Tab: Moves focus to the previous element in the tab order.
+- Enter: Selects or removes the chip.
+
+### Screen readers
+
+- Use the `aria-label` attribute to provide a label for the chip.
+- Use the `title` attribute to provide a tooltip for the chip.
+
+## Usage
+
+### HTML
+
+```html
+<button class="gds-chips">Label</button>
+<button class="gds-chips gds-chips__action gds-chips__action-selected">
+  Selected
+</button>
+<button class="gds-chips gds-chips__action gds-chips__action-remove">
+  Removable
+</button>
+```
+
+### Ripple animation
+
+The filter uses a ripple animation to indicate the click state of the chip. To use the ripple animation, add the `ripple` function to the `onClick` event of the chip.
 
 <Canvas>
   <button class="gds-chips" onClick={ripple}>
