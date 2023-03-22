@@ -1,30 +1,31 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 import { ripple } from './ripple'
 
-export const Template = ({ label }) => {
+export const Template = ({ label, languageDir }) => {
+  const langDir = languageDir === 'RTL' ? 'dir="rtl"' : 'dir="ltr"'
   return `
-  <div 
+  <button 
     aria-label="${label}" 
     title="${label}" 
     class="gds-chips"
-    tabindex="0"
+    ${langDir}
     >
       ${label}
-  </div>
-  <div 
+  </button>
+  <button 
     aria-label="${label}" 
     title="${label}" 
-    tabindex="0"
+    ${langDir}
     class="gds-chips gds-chips__action gds-chips__action-selected">
       ${label}
-  </div>
-  <div 
+  </button>
+  <button 
   aria-label="${label}" 
-  title="${label}" 
-  tabindex="0"
+  title="${label}"
+  ${langDir} 
   class="gds-chips gds-chips__action gds-chips__action-remove"> 
     ${label} 
-  </div>
+  </button>
 `
 }
 
@@ -35,17 +36,7 @@ export const Template = ({ label }) => {
   }}
   argTypes={{
     label: { conrol: 'text' },
-    leadingIcon: {
-      control: {
-        type: 'boolean',
-        options: [false, true],
-      },
-    },
-    theme: {
-      options: ['Dark', 'Light'],
-      control: { type: 'radio' },
-    },
-    language: {
+    languageDir: {
       options: ['RTL', 'LTR'],
       control: { type: 'radio' },
     },
@@ -63,7 +54,6 @@ Chips are compact elements that represent an input, attribute, or action.
     name="Chips"
     args={{
       label: 'Chips',
-      leadingIcon: false,
     }}
   >
     {Template.bind({})}
@@ -73,36 +63,19 @@ Chips are compact elements that represent an input, attribute, or action.
 ## Element structure
 
 <Canvas>
-  <div class="gds-chips" onClick={ripple}>
+  <button class="gds-chips" onClick={ripple}>
     Label
-  </div>
-  <div
+  </button>
+  <button
     class="gds-chips gds-chips__action gds-chips__action-selected"
     onClick={ripple}
   >
     Selected
-  </div>
-  <div
+  </button>
+  <button
     class="gds-chips gds-chips__action gds-chips__action-remove"
     onClick={ripple}
   >
     Removable
-  </div>
+  </button>
 </Canvas>
-
-### TODO:
-
-1. Define the anatomy of the Chips
-2. Implement prefers-reduced-motion and transition on hover and other states
-3. Draw the SVG icon on selected and close state
-4. Set variables to use dark/light mode (color-scheme)
-5. Set line-height to use unitless(number)
-6. Container query
-7. Contain Style
-8. Cascade Layers
-9. Conditional CSS features based on browser support
-10. Implement ripple effect on click
-11. Implement language direction like: rtl, ltr,
-12. Block size box dimensions to support languages
-13. ''Exprimental feature content visibility
-14. Hover/Tap pointer precision

@@ -6,19 +6,20 @@ button,
 input[type='button'],
 input[type='submit'],
 input[type='reset'],
-.button {
+.button,
+.gds-chips {
   @include mixins.reset;
 }
 
 // base
-button:where(:not(.link, .close, .sg-table-sort, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'])),
+button:where(:not(.link, .close, .sg-table-sort, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'], .gds-chips)),
 input:where([type='button'], [type='submit'], [type='reset']),
 .button {
   @include mixins.base;
 }
 
 // secondary
-button:where(:not(.primary, .tertiary, .ghost, .danger, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'])),
+button:where(:not(.primary, .tertiary, .ghost, .danger, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'], .gds-chips)),
 a.button:where(:not(.primary, .tertiary, .ghost, .danger, .close, .link)),
 button.secondary,
 a.button.secondary,
@@ -29,7 +30,7 @@ button[type='reset']:where(:not(.primary, .tertiary, .ghost, .danger, .close, .l
 }
 
 // tertiary
-button:where(:not(.primary, .secondary, .ghost, .danger, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'])),
+button:where(:not(.primary, .secondary, .ghost, .danger, .close, .sg-table-sort, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'], [role='switch'], .gds-chips)),
 a.button:where(:not(.primary, .secondary, .ghost, .close, .link)),
 button.tertiary,
 a.button.tertiary {
@@ -39,7 +40,7 @@ a.button.tertiary {
 // primary
 button.primary,
 input[type='submit'],
-button[type='submit']:not(.secondary, .ghost, .danger, .close, .link),
+button[type='submit']:not(.secondary, .ghost, .danger, .close, .link, .gds-chips),
 input[type='submit']:not(.secondary, .ghost, .danger, .close, .link),
 a.button.primary {
   @include mixins.primary;
@@ -71,7 +72,8 @@ a.button.danger:where(:not(.primary, .tertiary, .ghost, .close, .link)),
 button.secondary.danger,
 a.button.secondary.danger,
 input.danger:is([type='button'], [type='reset']),
-button[type='button'].danger:where(:not(.primary, .tertiary, .ghost, .danger, .close, .link, [aria-haspopup='listbox'], [aria-haspopup='menu'])),
+button[type='button'].danger:where(:not(.primary, .tertiary, .ghost, .danger, .close, .link, .gds-chips
+      [aria-haspopup='listbox'], [aria-haspopup='menu'])),
 button[type='reset'].danger:where(:not(.primary, .tertiary, .ghost, .danger, .close, .link)) {
   @include mixins.danger-color;
 }

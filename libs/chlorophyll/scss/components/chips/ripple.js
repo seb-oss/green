@@ -7,3 +7,15 @@ export const ripple = (e) => {
     e.target.classList.add('gds-ripple-effect')
   }, 20)
 }
+
+// const ripple = (e) => {
+//   const button = document.querySelector('.gds-chips')
+//   const ripple = document.createElement('span')
+//   ripple.classList.add('gds-ripple')
+//   ripple.style.left = `${e.clientX - e.target.offsetLeft}px`
+//   ripple.style.top = `${e.clientY - e.target.offsetTop}px`
+//   button.appendChild(ripple)
+//   setTimeout(() => {
+//     ripple.remove()
+//   }, 1000)
+// }
