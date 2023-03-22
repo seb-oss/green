@@ -1,5 +1,9 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import { ProgressCircleThemes, randomId } from '@sebgroup/extract'
+import {
+  calculateDegrees,
+  ProgressCircleThemes,
+  randomId,
+} from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-progress-circle',
@@ -12,26 +16,13 @@ export class NggProgressCircleComponent {
   /** id of the progress circle */
   @Input() id?: string = `${randomId()}-progress-circle`
   /** theme of the progress circle */
-  @Input() theme: ProgressCircleThemes = ProgressCircleThemes.Warning
+  @Input() theme: ProgressCircleThemes = 'warning'
   /** progress circle value in percentage */
   @Input() set value(val: number) {
-    const degrees = `${this.calculateDegrees(val)}deg`
+    const degrees = `${calculateDegrees(val)}deg`
     this._endValue = degrees
-    if (this.theme === ProgressCircleThemes.Disabled) {
+    if (this.theme === 'disabled') {
       this._startValue = degrees
     }
-  }
-
-  calculateDegrees(percent: number): number {
-    if (percent > 100) {
-      return 180
-    }
-
-    if (percent < 0) {
-      return 0
-    }
-
-    /** formula: ((n% * 360deg) / 100% ) / 2 */
-    return percent * 1.8
   }
 }
