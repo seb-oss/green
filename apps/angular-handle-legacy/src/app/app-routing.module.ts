@@ -21,8 +21,7 @@ const routes: Routes = [
 ]
 
 const routerOptions: ExtraOptions = {
-  anchorScrolling: 'enabled',
-  relativeLinkResolution: 'legacy',
+    anchorScrolling: 'enabled'
 }
 
 @NgModule({
