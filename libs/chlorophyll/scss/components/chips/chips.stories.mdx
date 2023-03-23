@@ -4,7 +4,7 @@ import { ripple } from './ripple'
 export const Template = ({ label, languageDir, isSelected, isRemovable }) => {
   const langDir = languageDir === 'RTL' ? 'dir="rtl"' : 'dir="ltr"'
   const attrClass =
-    'gds-chips ' +
+    'gds-chips' +
     (isSelected ? ' gds-chips__action gds-chips__action-selected' : '') +
     (isRemovable ? ' gds-chips__action gds-chips__action-remove' : '')
   return `
