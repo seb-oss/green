@@ -1,4 +1,4 @@
-export const ripple = (e) => {
+export const handleRippleEffect = (e) => {
   const rect = e.target.getBoundingClientRect()
   e.target.style.setProperty('--gds-ripple-top', `${e.clientY - rect.top}px`)
   e.target.style.setProperty('--gds-ripple-left', `${e.clientX - rect.left}px`)

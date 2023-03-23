@@ -1,8 +1,6 @@
 @mixin global {
-  --gds-sys-transition-property: border-color, background;
-  --gds-sys-transition-duration: 468ms, 468ms;
-  --gds-sys-transition-function: cubic-bezier(0, 0.25, 0.5, 1);
-  --gds-sys-transition-delay: 0s;
+  --gds-sys-transition: color 468ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 468ms cubic-bezier(0.4, 0, 0.2, 1);
   --gds-sys-border-radius-full: 200px;
 
   // Experimental Ripple aniamtion on global level
@@ -33,15 +31,7 @@
 }
 
 @mixin props {
-  --gds-comp-chips-transition-property: var(--gds-sys-transition-property);
-  --gds-comp-chips-transition-duration: var(--gds-sys-transition-duration);
-  --gds-comp-chips-transition-function: var(--gds-sys-transition-function);
-  --gds-comp-chips-transition-delay: var(--gds-sys-transition-delay);
-
-  --gds-comp-chips-transition: var(--gds-comp-chips-transition-property)
-    var(--gds-comp-chips-transition-duration)
-    var(--gds-comp-chips-transition-function)
-    var(--gds-comp-chips-transition-delay);
+  --gds-comp-chips-transition: var(--gds-sys-transition);
 
   --gds-comp-chips-icon-gap: 5px;
   --gds-comp-chips-icon-width: 20px;
@@ -70,10 +60,19 @@
 }
 
 @mixin states {
+  color: var(--gds-comp-chips-fr-color);
+  background-color: var(--gds-comp-chips-bg-color);
+  border-color: var(--gds-comp-chips-br-color);
+
   &:hover {
-    background-color: var(--gds-comp-chips-bg-color-hover);
-    color: var(--gds-comp-chips-fr-color-hover);
-    border-color: var(--gds-comp-chips-br-color-hover);
+    --gds-comp-chips-fr-color: var(--gds-comp-chips-fr-color-hover);
+    --gds-comp-chips-bg-color: var(--gds-comp-chips-bg-color-hover);
+    --gds-comp-chips-br-color: var(--gds-comp-chips-br-color-hover);
+  }
+
+  &:active {
+    --gds-comp-chips-bg-color: var(--gds-comp-chips-bg-color-active);
+    --gds-comp-chips-br-color: var(--gds-comp-chips-bg-color-active);
   }
 
   &:focus {
@@ -133,14 +132,17 @@
 
 @mixin variants {
   &__action {
+    --gds-comp-chips-bg-color: var(--gds-comp-chips-bg-color-action);
     gap: var(--gds-comp-chips-icon-gap);
     padding-inline-end: calc(var(--gds-comp-chips-padding-inline) / 2);
+    color: var(--gds-comp-chips-fr-color-hover);
 
     &::after {
       width: var(--gds-comp-chips-icon-width);
       display: flex;
       align-items: center;
       justify-content: center;
+      will-change: transform;
     }
 
     &-selected {
