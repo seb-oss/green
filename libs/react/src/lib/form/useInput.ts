@@ -1,5 +1,12 @@
 import { randomId } from '@sebgroup/extract'
-import React, { InputHTMLAttributes, RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  InputHTMLAttributes,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 const useInput = (
   props: InputHTMLAttributes<HTMLInputElement>,
@@ -14,6 +21,8 @@ const useInput = (
   const [checked, setChecked] = useState(props.checked ? props.checked : false)
 
   useEffect(() => {
+    if (props.value !== undefined) setValue(props.value)
+
     if (ref.current && ref.current.form) {
       const resetListener = (): void => {
         setValue(props.value ? props.value : '')
@@ -29,7 +38,10 @@ const useInput = (
   }, [props])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
+    if (props.value === undefined) {
+      setValue(event.target.value)
+    }
+
     setChecked(event.currentTarget.checked)
 
     onChanges && onChanges(event)
