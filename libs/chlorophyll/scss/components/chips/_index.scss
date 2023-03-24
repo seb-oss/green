@@ -2,7 +2,7 @@
 @use 'mixins';
 
 :root {
-  @include mixins.global;
+  @include mixins.global-vars;
 }
 
 .gds-chips {

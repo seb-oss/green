@@ -1,9 +1,7 @@
-@mixin global {
+@mixin global-vars {
   --gds-sys-transition: color 468ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 468ms cubic-bezier(0.4, 0, 0.2, 1);
   --gds-sys-border-radius-full: 200px;
-
-  // Experimental Ripple aniamtion on global level
   --gds-sys-ripple-spread: 20px;
   --gds-sys-ripple-bg: hsl(0 0% 0% / 0.5);
   --gds-sys-ripple-animation-duration: 468ms;
@@ -22,44 +20,36 @@
     var(--gds-sys-ripple-animation-fill-mode)
     var(--gds-sys-ripple-animation-play-state)
     var(--gds-sys-ripple-animation-name);
-
-  // Outline
   --gds-sys-outline-offset: 2px;
   --gds-sys-outline-color: currentColor;
   --gds-sys-outline-style: solid;
   --gds-sys-outline-width: 2px;
 }
 
-@mixin props {
+@mixin prop-vars {
   --gds-comp-chips-transition: var(--gds-sys-transition);
-
   --gds-comp-chips-icon-gap: 5px;
   --gds-comp-chips-icon-width: 20px;
   --gds-comp-chips-padding-inline: 16px;
   --gds-comp-chips-padding-block: 6px;
   --gds-comp-chips-border-radius: var(--gds-sys-border-radius-full);
-
   --gds-ripple-spread: var(--gds-sys-ripple-spread, 20px);
   --gds-ripple-bg: var(--gds-sys-ripple-bg, hsl(0 0% 0% / 0.5));
   --gds-ripple-animation: var(--gds-sys-ripple-animation);
-
   --gds-comp-chips-outline-offset: var(--gds-sys-outline-offset);
   --gds-comp-chips-outline-color: var(--gds-sys-outline-color);
   --gds-comp-chips-outline-style: var(--gds-sys-outline-style);
   --gds-comp-chips-outline-width: var(--gds-sys-outline-width);
 }
 
-@mixin icons {
+@mixin icon-vars {
   --gds-comp-chips-icon-action-selected: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' %3E%3Cpath fill='#494949' d='m10.684.507-6.85 6.85L1.315 4.84a.313.313 0 0 0-.442 0l-.736.737a.313.313 0 0 0 0 .442l3.474 3.474c.122.122.32.122.442 0l7.808-7.807a.313.313 0 0 0 0-.442l-.737-.737a.312.312 0 0 0-.441 0Z'/%3E%3C/svg%3E");
-
   --gds-comp-chips-icon-action-remove: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none'%3E%3Cpath fill='#494949' d='m5.884 5 2.67-2.67.551-.552a.208.208 0 0 0 0-.294l-.589-.59a.208.208 0 0 0-.294 0L5 4.117 1.778.894a.208.208 0 0 0-.294 0l-.59.59a.208.208 0 0 0 0 .294L4.116 5 .894 8.222a.208.208 0 0 0 0 .294l.59.59a.208.208 0 0 0 .294 0L5 5.883l2.67 2.67.552.551a.208.208 0 0 0 .294 0l.59-.589a.208.208 0 0 0 0-.294L5.883 5Z'/%3E%3C/svg%3E");
-
   --gds-comp-chips-icon-action-selected-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' %3E%3Cpath fill='#58B8EE' d='m10.684.507-6.85 6.85L1.315 4.84a.313.313 0 0 0-.442 0l-.736.737a.313.313 0 0 0 0 .442l3.474 3.474c.122.122.32.122.442 0l7.808-7.807a.313.313 0 0 0 0-.442l-.737-.737a.312.312 0 0 0-.441 0Z'/%3E%3C/svg%3E");
-
   --gds-comp-chips-icon-action-remove-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none'%3E%3Cpath fill='#58B8EE' d='m5.884 5 2.67-2.67.551-.552a.208.208 0 0 0 0-.294l-.589-.59a.208.208 0 0 0-.294 0L5 4.117 1.778.894a.208.208 0 0 0-.294 0l-.59.59a.208.208 0 0 0 0 .294L4.116 5 .894 8.222a.208.208 0 0 0 0 .294l.59.59a.208.208 0 0 0 .294 0L5 5.883l2.67 2.67.552.551a.208.208 0 0 0 .294 0l.59-.589a.208.208 0 0 0 0-.294L5.883 5Z'/%3E%3C/svg%3E");
 }
 
-@mixin states {
+@mixin state-styles {
   color: var(--gds-comp-chips-fr-color);
   background-color: var(--gds-comp-chips-bg-color);
   border-color: var(--gds-comp-chips-br-color);
@@ -130,7 +120,7 @@
   }
 }
 
-@mixin variants {
+@mixin variant-styles {
   &__action {
     --gds-comp-chips-bg-color: var(--gds-comp-chips-bg-color-action);
     gap: var(--gds-comp-chips-icon-gap);
@@ -174,11 +164,11 @@
 }
 
 @mixin base {
-  @include props;
-  @include icons;
-  @include states;
+  @include prop-vars;
+  @include icon-vars;
+  @include state-styles;
   @include decorator;
-  @include variants;
+  @include variant-styles;
 
   color: var(--gds-comp-chips-fr-color);
   background-color: var(--gds-comp-chips-bg-color);
