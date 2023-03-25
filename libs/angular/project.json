@@ -83,7 +83,7 @@
       }
     },
     "update-dependencies": {
-      "executor": "./tools/executors/update-deps:update-deps",
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
     "version": {
