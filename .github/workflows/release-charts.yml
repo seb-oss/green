@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Configure Git
         run: |
@@ -45,7 +45,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Prepare release of charts
-        run: npx nx run charts:version --baseBranch='main' --origin='origin'
+        run: npx nx run charts:update-deps-and-release --baseBranch='main' --origin='origin'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

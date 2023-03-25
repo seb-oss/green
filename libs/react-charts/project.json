@@ -78,12 +78,12 @@
         ]
       }
     },
-    "prepare-release": {
+    "update-deps-and-release": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "nx run react-charts:update-dependencies && nx run react-charts:version"
+            "command": "nx run react-charts:update-dependencies && nx run react-charts:version-and-release"
           }
         ]
       }
@@ -92,7 +92,7 @@
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
-    "version": {
+    "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",

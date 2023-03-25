@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Configure Git
         run: |
@@ -44,22 +44,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Prepare release of chlorophyll and extract
-        run: npx nx run-many --target=version --projects=chlorophyll,extract --baseBranch='main' --origin='origin' --parallel=1
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          HUSKY: 0
-
-      - name: Prepare release of charts
-        run: npx nx run-many --target=prepare-release --projects=charts --baseBranch='main' --origin='origin' --parallel=1
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          HUSKY: 0
-
-      - name: Prepare release of remaining libs
-        run: npx nx run-many --target=prepare-release --projects=angular,angular-charts,react,react-charts --baseBranch='main' --origin='origin' --parallel=1
+      - name: Version and release all libraries
+        run: npx nx run-many --all --target=update-deps-and-release --baseBranch='main' --origin='origin' --parallel=1
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

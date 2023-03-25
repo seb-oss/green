@@ -72,12 +72,12 @@
         }
       }
     },
-    "prepare-release": {
+    "update-deps-and-release": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "nx run angular:update-dependencies && nx run angular:version"
+            "command": "nx run angular:update-dependencies && nx run angular:version-and-release"
           }
         ]
       }
@@ -86,7 +86,7 @@
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
-    "version": {
+    "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",

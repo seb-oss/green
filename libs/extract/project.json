@@ -40,7 +40,21 @@
         "passWithNoTests": true
       }
     },
-    "version": {
+    "update-deps-and-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run extract:update-dependencies && nx run extract:version-and-release"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
