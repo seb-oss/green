@@ -6,6 +6,13 @@ type DepSpecs = {
   [name: string]: string
 }
 
+type PackageJsonPartial = {
+  name: string
+  version: string
+  dependencies?: DepSpecs
+  peerDependencies?: DepSpecs
+}
+
 export interface UpdateDepsExecutorOptions {}
 
 export default async function updateDeps(
@@ -14,7 +21,6 @@ export default async function updateDeps(
 ): Promise<{ success: boolean }> {
   console.info(`Executing "update-deps"...`)
 
-  const npmScope = context.workspace?.npmScope
   const libName = context.projectName || ''
 
   // Use the project graph to get the list of dependencies
@@ -27,7 +33,7 @@ export default async function updateDeps(
   const latest_dep_versions = graph_deps
     .map((d) => ({ ...d, pkgJson: getLibPkgJson(d.target) }))
     .map((d) => ({
-      [`@${npmScope}/${d.pkgJson.name}`]: `^${d.pkgJson.version}`,
+      [`${d.pkgJson.name}`]: `^${d.pkgJson.version}`,
     }))
     .reduce((acc, cur) => ({ ...acc, ...cur }), {})
 
@@ -49,16 +55,28 @@ export default async function updateDeps(
   }
 }
 
-function getLibPkgJson(libName: string): any {
+function getLibPkgJson(libName: string): PackageJsonPartial {
   return JSON.parse(readFileSync(`libs/${libName}/package.json`).toString())
 }
 
-function pkgJsonWithUpdatedDeps(pkgJson: any, deps: DepSpecs): any {
-  return {
-    ...pkgJson,
-    dependencies: {
-      ...pkgJson.dependencies,
-      ...deps,
-    },
-  }
+function pkgJsonWithUpdatedDeps(
+  pkgJson: PackageJsonPartial,
+  deps: DepSpecs
+): PackageJsonPartial {
+  const depSections = ['dependencies', 'peerDependencies']
+  const updatedPkgJson = { ...pkgJson }
+
+  // For each dependency section that contains one of the specified dependencies,
+  // update the version specifier to the specified version.
+  depSections.forEach((section) => {
+    if (pkgJson[section]) {
+      Object.keys(pkgJson[section]).forEach((dep) => {
+        if (deps[dep]) {
+          updatedPkgJson[section][dep] = deps[dep]
+        }
+      })
+    }
+  })
+
+  return updatedPkgJson
 }
