@@ -48,7 +48,7 @@ jobs:
         run: npx nx run angular:build
 
       - name: Prepare release of angular
-        run: npx nx run angular:update-deps-and-release --baseBranch='main' --origin='origin'
+        run: npx nx run angular:update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
