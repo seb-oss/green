@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@green/repo-tools": ["libs/repo-tools/src/index.ts"],
+      "@sebgroup/repo-tools": ["libs/repo-tools/src/index.ts"],
       "@sebgroup/chlorophyll": ["libs/chlorophyll/src/index.ts"],
       "@sebgroup/extract": ["libs/extract/src/index.ts"],
       "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
