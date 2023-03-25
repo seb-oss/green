@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/schema",
   "version": 2,
   "cli": "nx",
-  "title": "Build executor",
-  "description": "",
+  "title": "Update lib dependencies",
+  "description": "Update local lib dependencies in package.json",
   "type": "object",
   "properties": {},
   "required": []
