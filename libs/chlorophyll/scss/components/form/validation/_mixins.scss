@@ -16,7 +16,7 @@ $_border-width: var(--sg-border-width);
     height: 4px;
     position: absolute;
 
-    @if($transform) {
+    @if ($transform) {
       transform: translate3d(0, -12px, 0);
     }
 
@@ -55,7 +55,8 @@ $_border-width: var(--sg-border-width);
   .was-validated textarea:not(.is-invalid):valid + .form-info,
   .was-validated fieldset:not(.is-invalid).is-valid:valid + .form-info,
   .is-valid:not(.group) ~ .form-info,
-  .is-valid:is(.group){
+  .is-valid .gds-form-item__footer .form-info,
+  .is-valid:is(.group) + .form-info {
     @include add-feedback(tokens.$intent-success-background);
   }
 
@@ -64,7 +65,7 @@ $_border-width: var(--sg-border-width);
   .was-validated fieldset:not(.is-valid).is-invalid + .form-info,
   .is-invalid:not(.group) ~ .form-info,
   .is-invalid .gds-form-item__footer .form-info,
-  .is-invalid:is(.group) {
+  .is-invalid:is(.group) + .form-info {
     @include add-feedback(tokens.$intent-danger-background);
   }
 }

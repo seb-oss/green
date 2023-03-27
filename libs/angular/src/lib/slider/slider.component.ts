@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import {
   getSliderTrackBackground,
@@ -22,9 +31,10 @@ interface SliderStyle {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggSliderComponent implements ControlValueAccessor, OnInit {
-  private _value = 0
-  @Input() name = `${randomId}-slider`
+export class NggSliderComponent
+  implements ControlValueAccessor, OnInit, OnChanges
+{
+  @Input() name = `${randomId()}-slider`
   @Input() min = 0
   @Input() max = 100
   @Input() step = 1
@@ -34,13 +44,7 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
   @Input() errorMessage = ''
   @Input() hasTextbox = false
   @Input() disabled = false
-  @Input() set value(val: number) {
-    this._value = val ?? 0
-    this.handleChange()
-  }
-  get value(): number {
-    return this._value
-  }
+  @Input() value = 0
   @Output() sliderChange = new EventEmitter<number>()
   @Output() sliderTouch = new EventEmitter<boolean>()
   onChangeFn?: (val: number) => void
@@ -51,12 +55,19 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
     this.setTrackBackground()
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      this.setTrackBackground()
+    }
+  }
+
   onBlur(): void {
     this.sliderTouch.emit(true)
     this.onTouchedFn && this.onTouchedFn()
   }
 
   handleChange(): void {
+    this.value = this.value ?? 0
     this.setTrackBackground()
     this.sliderChange.emit(this.value)
     this.onChangeFn && this.onChangeFn(this.value)
@@ -68,14 +79,14 @@ export class NggSliderComponent implements ControlValueAccessor, OnInit {
       return
     }
 
-    const _value = ((this.value - this.min) / (this.max - this.min)) * 100
-    this.style.background = getSliderTrackBackground(_value)
+    const percent = ((this.value - this.min) / (this.max - this.min)) * 100
+    this.style.background = getSliderTrackBackground(percent)
   }
 
   /** control value accessor functions */
   writeValue(val: number): void {
     if (this.value !== val) {
-      this._value = val ?? 0
+      this.value = val ?? 0
       this.handleChange()
     }
   }

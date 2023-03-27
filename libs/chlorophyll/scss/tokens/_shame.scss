@@ -38,6 +38,11 @@ $text-inherit-color: inherit;
 // Todo refactor link color (add to blue swatch)
 $link-color: rgb(0, 98, 188);
 $link-color-visited: rgb(103, 58, 182);
+// $link-color-dark: hsl(0deg 0% 20%);
+// $link-color-visited-dark: #494949;
+
+$link-color-dark: var(--link-color-dark);
+$link-color-visited-dark: var(--link-color-dark-visited);
 
 // font weights
 $font-weight-light: 300;
@@ -279,6 +284,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --border-color-invalid: #{get($intent, 'danger', 'dark')};
   --border-color-valid: #{get($intent, 'success', 'dark')};
   --checkbox-checkmark-disabled-color: #{get($grey, 500, 'dark')};
+  --link-color-dark: #{get($grey, 1100, 'dark')};
+  --link-color-dark-visited: #{get($grey, 1000, 'dark')};
   --form-control-primary-bg-disabled: #{get(
       $disabled,
       'primary-background',
@@ -303,6 +310,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --border-color-valid: #{get($intent, 'success')};
   --checkbox-checkmark-disabled-color: #{$white};
   --form-control-primary-bg-disabled: #{get($disabled, 'primary-background')};
+  --link-color-dark: #{get($grey, 1000, 'light')};
+  --link-color-dark-visited: #{get($grey, 900, 'light')};
   @include generate-intent-variables($intent);
   @include grey-colors($grey);
   color: var(--text-primary-color);

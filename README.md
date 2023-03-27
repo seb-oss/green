@@ -134,34 +134,18 @@ npx nx run angular:build-storybook
 
 ### On SEB Windows computer
 
-These are just an intermediate fixes to turn of security. Should be solved for real later on with certificate/proxy changes.
+For the moment, `yarn` is difficult to use within the SEB environment, so instead you can install the dependencies using `npm`:
 
-#### VPN
-
-Yarn support for our artifactory will be supported later on, but for now you need to logoff the VPN (right click the lock symbol in the tray).
-
-
-#### Proxy
-
-Also if push fails, uncomment (with `;`) proxy settings in `C:\Users\%Username%\.npmrc`.
-Then use:
-```cmd
-strict-ssl=false
-https-proxy=null
-proxy=null
+```bash
+$ npm i --force
 ```
 
-#### SSL certificate problem
+The `--force` flag is necessary in this case to convince `npm` that sub-dependency conflicts are OK.
 
-If you get `SSL certificate problem: unable to get local issuer certificate` you can try:
+Don't commit the generated `package-lock.json` file, since we already have a `yarn.lock` file.
 
-```cmd
-set GIT_SSL_NO_VERIFY=true
-git config --global http.sslVerify false
-yarn config set strict-ssl false --global
-```
+If you need to add a new dependency, the `yarn.lock` file needs to be updated, and in that case you still need to use `yarn`. You can do this by temporarily disconnecting from the SEB network, or by using a non-SEB computer.
 
-## Release
+## Git
 
-Currently, beta releases are published automatically for all libs when merging from "main" to "beta".
-It's also possible to manually do release or deploy storybooks by running the actions manually [here](https://github.com/sebgroup/green/actions).
+We reccommend using [GitHub Desktop](https://desktop.github.com/), as it will work smoothly with both on-prem GitHub and external GitHub without any manual configuration of proxies and certificates. Ask for help on Teams if you need assistance!
