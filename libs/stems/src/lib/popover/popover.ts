@@ -1,54 +1,36 @@
+import { LitElement, html, css } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { createComponent } from '@lit-labs/react'
+import * as React from 'react'
+
 import styles from './stem.styles.scss'
 
-export class Popover extends HTMLElement {
-  private _shadowRoot: ShadowRoot
-  private isOpen: boolean = false
+@customElement('stem-popover')
+export class Popover extends LitElement {
+  static styles = css`
+    // TODO: Figure out how to load scss here
+  `
 
-  constructor() {
-    super()
-    this._shadowRoot = this.attachShadow({ mode: 'closed' })
-    this.render()
-  }
+  open = false
 
-  static get observedAttributes() {
-    return ['open']
-  }
-
-  static register() {
-    customElements.define('stem-popover', Popover)
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === 'open') {
-      this.isOpen = newValue !== 'false' && newValue !== null
-      this.render()
-    }
+  static properties = {
+    open: { type: String, reflect: true },
   }
 
   render() {
-    this._shadowRoot.innerHTML = `
+    return html`
       <style>
         ${styles}
       </style>
-      <div class="popover popover-dropdown ${this.isOpen ? 'active' : ''}">
+      <div class="popover popover-dropdown ${this.open ? 'active' : ''}">
         <slot></slot>
       </div>
     `
   }
 }
 
-interface StemPopoverProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLElement>,
-    HTMLElement
-  > {
-  open?: boolean
-}
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ['stem-popover']: StemPopoverProps
-    }
-  }
-}
+export const PopoverReact = createComponent({
+  tagName: 'stem-popover',
+  elementClass: Popover,
+  react: React,
+})

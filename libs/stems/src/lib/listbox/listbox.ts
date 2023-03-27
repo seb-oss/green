@@ -1,21 +1,14 @@
+import { LitElement, html, css } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { createComponent } from '@lit-labs/react'
+import * as React from 'react'
+
 import styles from './stem.styles.scss'
 
-export class Listbox extends HTMLElement {
-  private _shadowRoot: ShadowRoot
-  private isOpen: boolean = false
-
-  constructor() {
-    super()
-    this._shadowRoot = this.attachShadow({ mode: 'closed' })
-    this.render()
-  }
-
-  static register() {
-    customElements.define('stem-listbox', Listbox)
-  }
-
+@customElement('stem-listbox')
+export class Listbox extends LitElement {
   render() {
-    this._shadowRoot.innerHTML = `
+    return html`
       <style>
         ${styles}
       </style>
@@ -26,43 +19,28 @@ export class Listbox extends HTMLElement {
   }
 }
 
-export class ListboxItem extends HTMLElement {
-  private _shadowRoot: ShadowRoot
-  private isOpen: boolean = false
+export const ListboxReact = createComponent({
+  tagName: 'stem-listbox',
+  elementClass: Listbox,
+  react: React,
+})
 
-  constructor() {
-    super()
-    this._shadowRoot = this.attachShadow({ mode: 'closed' })
-    this.render()
-  }
-
-  static register() {
-    customElements.define('stem-listbox-item', ListboxItem)
-  }
-
+@customElement('stem-listbox-item')
+export class ListboxItem extends LitElement {
   render() {
-    this._shadowRoot.innerHTML = `
-        <style>
-          ${styles}
-        </style>
-        <li aria-role="option">
-          <slot></slot>
-        </li>
-      `
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <li aria-role="option">
+        <slot></slot>
+      </li>
+    `
   }
 }
 
-interface StemProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLElement>,
-    HTMLElement
-  > {}
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ['stem-listbox']: StemProps
-      ['stem-listbox-item']: StemProps
-    }
-  }
-}
+export const ListboxItemReact = createComponent({
+  tagName: 'stem-listbox-item',
+  elementClass: ListboxItem,
+  react: React,
+})
