@@ -13,10 +13,10 @@ type PackageJsonPartial = {
   peerDependencies?: DepSpecs
 }
 
-export interface UpdateDepsExecutorOptions {}
+type NotUsed = Record<string, never>
 
 export default async function updateDeps(
-  _: UpdateDepsExecutorOptions,
+  _: NotUsed,
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
   console.info(`Executing "update-deps"...`)
