@@ -1,6 +1,6 @@
 @mixin global-vars {
-  --gds-sys-transition: color 468ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 468ms cubic-bezier(0.4, 0, 0.2, 1);
+  --gds-sys-transition: color 368ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 368ms cubic-bezier(0.4, 0, 0.2, 1);
   --gds-sys-border-radius-full: 200px;
   --gds-sys-ripple-spread: 20px;
   --gds-sys-ripple-bg: hsl(0 0% 0% / 0.5);
@@ -11,7 +11,7 @@
   --gds-sys-ripple-animation-direction: normal;
   --gds-sys-ripple-animation-fill-mode: none;
   --gds-sys-ripple-animation-play-state: running;
-  --gds-sys-ripple-animation-name: ripple;
+  --gds-sys-ripple-animation-name: ripple-keyframes;
   --gds-sys-ripple-animation: var(--gds-sys-ripple-animation-duration)
     var(--gds-sys-ripple-animation-timing-function)
     var(--gds-sys-ripple-animation-delay)
@@ -77,49 +77,6 @@
   }
 }
 
-@mixin animation {
-  @keyframes ripple {
-    0% {
-      transform: scale(0);
-      opacity: 0;
-    }
-    10% {
-      transform: scale(2);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(5);
-      opacity: 0;
-    }
-  }
-}
-
-@mixin decorator {
-  &::before {
-    content: ' ';
-    inset: 0;
-    opacity: 0;
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    will-change: transform;
-    pointer-events: none;
-    background: var(--gds-ripple-bg);
-    left: var(--gds-ripple-left, 50%);
-    top: var(--gds-ripple-top, 50%);
-    width: var(--gds-ripple-spread, 50%);
-    height: var(--gds-ripple-spread, 50%);
-    border-radius: var(--gds-comp-chips-border-radius);
-    transition: var(--gds-comp-chips-transition);
-    margin-top: calc(var(--gds-ripple-spread) * -1 / 2);
-    margin-left: calc(var(--gds-ripple-spread) * -1 / 2);
-  }
-
-  &.gds-ripple-effect::before {
-    animation: var(--gds-ripple-animation);
-  }
-}
-
 @mixin variant-styles {
   &__action {
     --gds-comp-chips-bg-color: var(--gds-comp-chips-bg-color-action);
@@ -149,25 +106,10 @@
   }
 }
 
-@mixin darkMode {
-  @media (prefers-color-scheme: dark) {
-    .gds-chips {
-      --gds-comp-chips-icon-action-selected: var(
-        --gds-comp-chips-icon-action-selected-dark
-      );
-
-      --gds-comp-chips-icon-action-remove: var(
-        --gds-comp-chips-icon-action-remove-dark
-      );
-    }
-  }
-}
-
 @mixin base {
   @include prop-vars;
   @include icon-vars;
   @include state-styles;
-  @include decorator;
   @include variant-styles;
 
   color: var(--gds-comp-chips-fr-color);
@@ -185,4 +127,23 @@
   user-select: none;
   position: relative;
   overflow: hidden;
+}
+
+@mixin user-preferences {
+  @media (prefers-color-scheme: dark) {
+    .gds-chips {
+      --gds-comp-chips-icon-action-selected: var(
+        --gds-comp-chips-icon-action-selected-dark
+      );
+
+      --gds-comp-chips-icon-action-remove: var(
+        --gds-comp-chips-icon-action-remove-dark
+      );
+    }
+  }
+  @media (prefers-reduced-motion) {
+    .gds-chips {
+      --gds-comp-chips-transition: none;
+    }
+  }
 }

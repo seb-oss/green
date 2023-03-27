@@ -4,7 +4,7 @@ import { handleChipSelection, handleChipRemoval } from './config'
 export const Template = ({ label, languageDir, isSelected, isRemovable }) => {
   const langDir = languageDir === 'RTL' ? 'dir="rtl"' : 'dir="ltr"'
   const attrClass =
-    'gds-chips' +
+    'gds-chips gds-ripple' +
     (isSelected ? ' gds-chips__action gds-chips__action-selected' : '') +
     (isRemovable ? ' gds-chips__action gds-chips__action-remove' : '')
   return `
@@ -122,27 +122,31 @@ Chips are interactive elements that can be selected or removed. They are used to
 ### HTML
 
 ```html
-<button class="gds-chips">Label</button>
-<button class="gds-chips" onClick="{handleChipSelection}">Selected</button>
-<button class="gds-chips" onClick="{handleChipRemoval}">Removable</button>
+<button class="gds-chips gds-ripple">Label</button>
+<button class="gds-chips gds-ripple" onClick="{handleChipSelection}">
+  Selected
+</button>
+<button class="gds-chips gds-ripple" onClick="{handleChipRemoval}">
+  Removable
+</button>
 ```
 
 ### Ripple animation
 
-The filter uses a ripple animation to indicate the click state of the chip. To use the ripple animation, add the `ripple` function to the `onClick` event of the chip.
+The filter uses a ripple animation to indicate the click state of the chip. To use the ripple animation, add the `ripple` function to the `onClick` event of the chip and the class `gds-ripple`.
 
 <Canvas>
-  <button class="gds-chips" onClick={handleChipRemoval}>
+  <button class="gds-chips gds-ripple" onClick={handleChipRemoval}>
     Label
   </button>
   <button
-    class="gds-chips gds-chips__action gds-chips__action-selected"
+    class="gds-chips gds-ripple gds-chips__action gds-chips__action-selected"
     onClick={handleChipSelection}
   >
     Selected
   </button>
   <button
-    class="gds-chips gds-chips__action gds-chips__action-remove"
+    class="gds-chips gds-ripple gds-chips__action gds-chips__action-remove"
     onClick={handleChipRemoval}
   >
     Removable
@@ -152,22 +156,22 @@ The filter uses a ripple animation to indicate the click state of the chip. To u
 ### Multiple chips
 
 <Canvas>
-  <button class="gds-chips" onClick={handleChipRemoval}>
+  <button class="gds-chips gds-ripple" onClick={handleChipRemoval}>
     I am selectable
   </button>
-  <button class="gds-chips" onClick={handleChipSelection}>
+  <button class="gds-chips gds-ripple" onClick={handleChipSelection}>
     I am removable
   </button>
-  <button class="gds-chips" onClick={handleChipRemoval}>
+  <button class="gds-chips gds-ripple" onClick={handleChipRemoval}>
     I am selectable
   </button>
-  <button class="gds-chips" onClick={handleChipSelection}>
+  <button class="gds-chips gds-ripple" onClick={handleChipSelection}>
     I am removable
   </button>
-  <button class="gds-chips" onClick={handleChipRemoval}>
+  <button class="gds-chips gds-ripple" onClick={handleChipRemoval}>
     I am selectable
   </button>
-  <button class="gds-chips" onClick={handleChipSelection}>
+  <button class="gds-chips gds-ripple" onClick={handleChipSelection}>
     I am removable
   </button>
 </Canvas>
@@ -179,18 +183,18 @@ Chips support right-to-left (RTL) languages. To use RTL, add the `dir="rtl"` att
 #### RTL ( Right to Left )
 
 <Canvas>
-  <button class="gds-chips" dir="rtl" onClick={handleChipSelection}>
+  <button class="gds-chips gds-ripple" dir="rtl" onClick={handleChipSelection}>
     Label
   </button>
   <button
-    class="gds-chips gds-chips__action gds-chips__action-selected"
+    class="gds-chips gds-ripple gds-chips__action gds-chips__action-selected"
     dir="rtl"
     onClick={handleChipSelection}
   >
     Selected
   </button>
   <button
-    class="gds-chips gds-chips__action gds-chips__action-remove"
+    class="gds-chips gds-ripple gds-chips__action gds-chips__action-remove"
     dir="rtl"
     onClick={handleChipRemoval}
   >

@@ -1,5 +1,6 @@
 @use '../../tokens/shame' as tokens;
 @use 'mixins';
+@import './ripple';
 
 :root {
   @include mixins.global-vars;
@@ -9,26 +10,5 @@
   @include mixins.base;
 }
 
-@include mixins.animation;
-@include mixins.darkMode;
-
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  opacity: 0.5;
-  pointer-events: none;
-  background-color: white;
-}
-
-.ripple-effect {
-  animation-name: ripple-animation;
-  animation-duration: 1s;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
+@include mixins.user-preferences;
+@include ripple-effect;
