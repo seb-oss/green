@@ -21,7 +21,7 @@
     var(--gds-sys-ripple-animation-play-state)
     var(--gds-sys-ripple-animation-name);
   --gds-sys-outline-offset: 2px;
-  --gds-sys-outline-color: currentColor;
+  --gds-sys-outline-color: var(--gds-sys-outline-color);
   --gds-sys-outline-style: solid;
   --gds-sys-outline-width: 2px;
 }
