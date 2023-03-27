@@ -68,15 +68,13 @@ function pkgJsonWithUpdatedDeps(
 
   // For each dependency section that contains one of the specified dependencies,
   // update the version specifier to the specified version.
-  depSections.forEach((section) => {
-    if (pkgJson[section]) {
-      Object.keys(pkgJson[section]).forEach((dep) => {
-        if (deps[dep]) {
-          updatedPkgJson[section][dep] = deps[dep]
-        }
-      })
+  for (const section of depSections) {
+    if (!pkgJson[section]) continue
+    for (const dep of Object.keys(pkgJson[section])) {
+      if (!deps[dep]) continue
+      updatedPkgJson[section][dep] = deps[dep]
     }
-  })
+  }
 
   return updatedPkgJson
 }
