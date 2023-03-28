@@ -17,7 +17,7 @@ npm install -S @sebgroup/green-react-charts
 First you need to import the base styles for charts:
 
 ```scss
-@use '~@sebgroup/charts/scss';
+@use '~@sebgroup/green-charts/scss';
 ```
 
 Then you can start using the Chart react component:
