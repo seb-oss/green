@@ -2,18 +2,16 @@ import { DropdownArgs, OnChange } from '@sebgroup/extract'
 import { DOMAttributes, HTMLAttributes, useRef } from 'react'
 import { dropdownValues } from '@sebgroup/extract'
 import { useDropdown } from './hooks'
-import { Popover, Listbox, ListboxItem } from '@sebgroup/stems'
+import {
+  PopoverReact as Popover,
+  ListboxReact as Listbox,
+  ListboxItemReact as ListboxItem,
+} from '@sebgroup/stems'
 import React from 'react'
 
 export interface DropdownProps extends DropdownArgs {
   onChange?: OnChange
 }
-
-//type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }> { open: boolean }
-
-Popover.register()
-Listbox.register()
-ListboxItem.register()
 
 export const Dropdown = (props: DropdownProps) => {
   const { label, informationLabel, validator } = props
@@ -31,18 +29,18 @@ export const Dropdown = (props: DropdownProps) => {
       >
         Dropdown
       </button>
-      <stem-popover open={isOpen}>
-        <stem-listbox>
+      <Popover open={isOpen}>
+        <Listbox>
           {props.options.map((o) => (
-            <stem-listbox-item
+            <ListboxItem
               key={o.value}
               onClick={() => setIsOpen((state) => false)}
             >
               {o.label}
-            </stem-listbox-item>
+            </ListboxItem>
           ))}
-        </stem-listbox>
-      </stem-popover>
+        </Listbox>
+      </Popover>
     </div>
   )
 }
