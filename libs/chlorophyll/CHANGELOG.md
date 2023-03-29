@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.4.0...@sebgroup/chlorophyll@1.5.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* 🐛 fix validation border on active ([#811](https://github.com/sebgroup/green/issues/811)) ([bd8cc32](https://github.com/sebgroup/green/commit/bd8cc321e9c061afb912b284d81bfd82fff0f188))
+* 🐛 match form info color to feedback ([#806](https://github.com/sebgroup/green/issues/806)) ([4d52a1e](https://github.com/sebgroup/green/commit/4d52a1e2b8729b8a0b32dc484f98162a33c55162))
+
+
+### Features
+
+* 🎸 Add link variants: animated with arrow, icon on the left or right ([#797](https://github.com/sebgroup/green/issues/797)) ([02dfc85](https://github.com/sebgroup/green/commit/02dfc853e5a59a829299aab02a9be665a231fa9c)), closes [#787](https://github.com/sebgroup/green/issues/787) [#787](https://github.com/sebgroup/green/issues/787) [#787](https://github.com/sebgroup/green/issues/787)
+
+
+
 # [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.3.0...@sebgroup/chlorophyll@1.4.0) (2023-03-20)
 
 ### Bug Fixes
