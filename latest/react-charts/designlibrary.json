@@ -82,5 +82,11 @@
     "name": "Splines chart",
     "title": "Use cases/Lighthouse 1",
     "customParams": {}
+  },
+  {
+    "id": "getting-started--getting-started",
+    "name": "Getting started",
+    "title": "Getting started",
+    "customParams": {}
   }
 ]
