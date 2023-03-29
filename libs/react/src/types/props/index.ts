@@ -27,4 +27,5 @@ export interface SliderProps {
   errorMessage?: string
   hasTextbox?: boolean
   disabled?: boolean
+  onChange?: (value: number) => void
 }
