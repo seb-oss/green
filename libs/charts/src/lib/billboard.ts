@@ -152,6 +152,7 @@ export const createOptions = ({
             min: settings?.min,
             max: settings?.max,
             padding: settings?.padding,
+            height: settings?.height,
           },
         }),
         {

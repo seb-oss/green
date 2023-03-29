@@ -37,6 +37,7 @@ export interface ChartAxis {
   format?: (value: number) => string
   min?: number
   max?: number
+  height?: number
   padding?: {
     top?: number
     bottom?: number
