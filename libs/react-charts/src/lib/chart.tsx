@@ -21,16 +21,6 @@ export function Chart({ settings, theme }: ChartProps) {
     >
       <div className={theme} ref={chartRef} />
 
-      {info?.xAxis && (
-        <div>
-          <ul className="x-axis">
-            {info.xAxis.ticks.map((t, ix) => (
-              <li key={`tick--${ix}`}>{t.text}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       {info?.legend?.placement !== 'none' && (
         <div className={'legend-container ' + info?.legend?.placement}>
           <ul className="legend">
