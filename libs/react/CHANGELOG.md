@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.2.1...@sebgroup/green-react@1.3.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* bump package versions ([#800](https://github.com/sebgroup/green/issues/800)) ([ec5eb19](https://github.com/sebgroup/green/commit/ec5eb19c89f94aa4a322d762138806bedaa176e3))
+* **slider:** add `onChange` event ([#814](https://github.com/sebgroup/green/issues/814)) ([1cd3ac8](https://github.com/sebgroup/green/commit/1cd3ac8d1affcc07fecac7404d3f4f2940fc4d57))
+
+
+### Features
+
+* 🎸 new slider component for react ([8ba92b9](https://github.com/sebgroup/green/commit/8ba92b9e24f51450cc559c54503a0d29a1349f02))
+
+
+
 ## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.2.0...@sebgroup/green-react@1.2.1) (2023-03-16)
 
 

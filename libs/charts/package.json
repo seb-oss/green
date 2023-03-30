@@ -4,7 +4,7 @@
   "dependencies": {
     "@sebgroup/chlorophyll": "^1.0.0",
     "@types/d3-selection": "^3.0.2",
-    "billboard.js": "^3.6.0"
+    "billboard.js": "^3.7.5"
   },
   "description": "Base library for charts.",
   "repository": {

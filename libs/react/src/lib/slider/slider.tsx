@@ -18,6 +18,7 @@ export function Slider({
   errorMessage,
   hasTextbox = false,
   disabled = false,
+  onChange,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number>(
@@ -37,6 +38,7 @@ export function Slider({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setSliderValue(Number(value))
+    if (onChange) onChange(Number(value))
   }
 
   return (

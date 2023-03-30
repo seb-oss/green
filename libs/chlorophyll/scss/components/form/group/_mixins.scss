@@ -28,6 +28,10 @@ $_background: input.$background;
     }
   }
 
+  > span.form-text {
+    justify-content: flex-end;
+  }
+
   @include common.media-breakpoint-up('sm') {
     > input {
       flex: 1 1 auto;
