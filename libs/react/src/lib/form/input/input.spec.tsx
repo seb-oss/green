@@ -194,10 +194,35 @@ describe('Inputs', () => {
       expect(mockFn).toHaveBeenNthCalledWith(2, '12345D')
       expect(mockFn).toHaveBeenNthCalledWith(3, '12345S')
       await rerender(<TextInput testId="text-input" value={'54321'} />)
+      expect(inputElement.value).toEqual('54321')
+    })
+
+    it('value can be changed to empty string', async () => {
+      const user = userEvent.setup()
+
+      let inputElement
+
+      const mockFn = jest.fn()
+
+      const { rerender } = render(
+        <TextInput
+          testId="text-input"
+          value={'12345'}
+          onChange={(e) => {
+            mockFn(e.currentTarget.value)
+          }}
+        />
+      )
+
       inputElement = (await screen.findByTestId(
         'text-input'
       )) as HTMLInputElement
-      expect(inputElement.value).toEqual('54321')
+
+      expect(inputElement.value).toEqual('12345')
+
+      await rerender(<TextInput testId="text-input" value={''} />)
+
+      expect(inputElement.value).toEqual('')
     })
 
     it('resets correctly', async () => {
