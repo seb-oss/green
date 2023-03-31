@@ -18,7 +18,7 @@ export const light = create({
   base: 'light',
   appBg: '#EEE',
   appBorderColor: '#CECECE',
-  appContentBg: 'white',
+  appContentBg: '#f6f6f6',
   barBg: '#fff',
   barSelectedColor: '#333',
   barTextColor: '#333',

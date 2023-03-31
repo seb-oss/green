@@ -83,6 +83,7 @@
   @include colors.add-color-tokens;
   @include components.add-checkbox-tokens;
   @include components.add-radio-tokens;
+  @include components.filter-chip-tokens;
   @include tokens.light-mode;
   @include mixins.add-theme();
 }
