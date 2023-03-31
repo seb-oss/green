@@ -168,8 +168,6 @@ describe('Inputs', () => {
     it('Should be controlled with value prop', async () => {
       const user = userEvent.setup()
 
-      let inputElement
-
       const mockFn = jest.fn()
 
       const { rerender } = render(
@@ -181,7 +179,7 @@ describe('Inputs', () => {
           }}
         />
       )
-      inputElement = (await screen.findByTestId(
+      const inputElement = (await screen.findByTestId(
         'text-input'
       )) as HTMLInputElement
 
@@ -200,8 +198,6 @@ describe('Inputs', () => {
     it('value can be changed to empty string', async () => {
       const user = userEvent.setup()
 
-      let inputElement
-
       const mockFn = jest.fn()
 
       const { rerender } = render(
@@ -214,7 +210,7 @@ describe('Inputs', () => {
         />
       )
 
-      inputElement = (await screen.findByTestId(
+      const inputElement = (await screen.findByTestId(
         'text-input'
       )) as HTMLInputElement
 
