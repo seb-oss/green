@@ -1,12 +1,9 @@
+@forward 'tokens';
 @use '../../tokens/shame' as tokens;
 @use 'mixins';
 @import './ripple';
 
-:root {
-  @include mixins.global-vars;
-}
-
-.gds-chips {
+.gds-filter-chip {
   @include mixins.base;
 }
 

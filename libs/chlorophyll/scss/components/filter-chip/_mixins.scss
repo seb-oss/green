@@ -1,32 +1,4 @@
-@mixin global-vars {
-  --gds-sys-transition: color 368ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 368ms cubic-bezier(0.4, 0, 0.2, 1);
-  --gds-sys-border-radius-full: 200px;
-  --gds-sys-ripple-spread: 20px;
-  --gds-sys-ripple-bg: hsl(0 0% 0% / 0.5);
-  --gds-sys-ripple-animation-duration: 468ms;
-  --gds-sys-ripple-animation-timing-function: ease;
-  --gds-sys-ripple-animation-delay: 0s;
-  --gds-sys-ripple-animation-iteration-count: 1;
-  --gds-sys-ripple-animation-direction: normal;
-  --gds-sys-ripple-animation-fill-mode: none;
-  --gds-sys-ripple-animation-play-state: running;
-  --gds-sys-ripple-animation-name: ripple-keyframes;
-  --gds-sys-ripple-animation: var(--gds-sys-ripple-animation-duration)
-    var(--gds-sys-ripple-animation-timing-function)
-    var(--gds-sys-ripple-animation-delay)
-    var(--gds-sys-ripple-animation-iteration-count)
-    var(--gds-sys-ripple-animation-direction)
-    var(--gds-sys-ripple-animation-fill-mode)
-    var(--gds-sys-ripple-animation-play-state)
-    var(--gds-sys-ripple-animation-name);
-  --gds-sys-outline-offset: 2px;
-  --gds-sys-outline-color: var(--gds-sys-outline-color);
-  --gds-sys-outline-style: solid;
-  --gds-sys-outline-width: 2px;
-}
-
-@mixin prop-vars {
+@mixin component-vars {
   --gds-comp-chips-transition: var(--gds-sys-transition);
   --gds-comp-chips-icon-gap: 5px;
   --gds-comp-chips-icon-width: 20px;
@@ -107,7 +79,7 @@
 }
 
 @mixin base {
-  @include prop-vars;
+  @include component-vars;
   @include icon-vars;
   @include state-styles;
   @include variant-styles;
@@ -131,7 +103,7 @@
 
 @mixin user-preferences {
   @media (prefers-color-scheme: dark) {
-    .gds-chips {
+    .gds-filter-chip {
       --gds-comp-chips-icon-action-selected: var(
         --gds-comp-chips-icon-action-selected-dark
       );
@@ -142,7 +114,7 @@
     }
   }
   @media (prefers-reduced-motion) {
-    .gds-chips {
+    .gds-filter-chip {
       --gds-comp-chips-transition: none;
     }
   }

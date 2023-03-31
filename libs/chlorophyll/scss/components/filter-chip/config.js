@@ -14,13 +14,13 @@ export const handleRippleEffect = (e) => {
 }
 
 export const handleChipSelection = (e) => {
-  e.target.classList.toggle('gds-chips__action')
-  e.target.classList.toggle('gds-chips__action-selected')
+  e.target.classList.toggle('gds-filter-chip__action')
+  e.target.classList.toggle('gds-filter-chip__action-selected')
   handleRippleEffect(e)
 }
 
 export const handleChipRemoval = (e) => {
-  e.target.classList.toggle('gds-chips__action')
-  e.target.classList.toggle('gds-chips__action-remove')
+  e.target.classList.toggle('gds-filter-chip__action')
+  e.target.classList.toggle('gds-filter-chip__action-remove')
   handleRippleEffect(e)
 }
