@@ -5,6 +5,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   type?: 'text' | 'email' | 'number'
   label?: string
   info?: string
+  testId?: string
   expandableInfo?: string
   expandableInfoButtonLabel?: string
   validator?: IValidator
@@ -12,6 +13,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
 }
 
 export interface NumberInputProps extends TextInputProps {
+  testId?: string
   min?: number
   max?: number
   step?: number
@@ -20,11 +22,13 @@ export interface NumberInputProps extends TextInputProps {
 }
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
+  testId?: string
   validator?: IValidator
 }
 
 export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
   label: string
+  testId?: string
   // TODO: This validator prop should be of type IValidator
   validator?: string
   value: string
