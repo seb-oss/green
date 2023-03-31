@@ -1,3 +1,4 @@
 {
-  "jest.jestCommandLine": "yarn test:all"
+  "jest.jestCommandLine": "yarn test:all",
+  "eslint.validate": ["json"]
 }

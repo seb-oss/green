@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Configure Git
         run: |
@@ -48,7 +48,7 @@ jobs:
         run: npx nx run angular:build
 
       - name: Prepare release of angular
-        run: npx nx run angular:version --baseBranch='main' --origin='origin'
+        run: npx nx run angular:update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
 
       - name: Configure Git
         run: |
@@ -45,7 +45,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Prepare release of chlorophyll
-        run: npx nx run chlorophyll:version --baseBranch='main' --origin='origin'
+        run: npx nx run chlorophyll:version-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
