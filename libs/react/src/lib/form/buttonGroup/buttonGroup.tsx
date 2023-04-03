@@ -7,12 +7,14 @@ interface ButtonGroupProps {
   children: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
   selectedIndex?: number
   variant?: ButtonVariant
+  id?: string
 }
 type Props = ButtonProps & JSX.IntrinsicAttributes
 export const ButtonGroup = ({
   children,
   selectedIndex,
   variant,
+  id,
 }: ButtonGroupProps) => {
   const [selected, setSelected] = useState(selectedIndex)
   const [buttons, setButtons] = useState<Props[]>([])
@@ -40,7 +42,7 @@ export const ButtonGroup = ({
   }, [children, selected, variant])
 
   return (
-    <Group>
+    <Group data-label="button-group" id={id}>
       {buttons.map((props) => (
         <Button key={props.key} {...props} />
       ))}

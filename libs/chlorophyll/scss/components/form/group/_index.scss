@@ -8,3 +8,8 @@
 .form-group > .group {
   @include common.margin-bottom(3);
 }
+
+label + .form-group .group {
+  @include common.margin-top(3);
+  @include common.margin-bottom(0);
+}
