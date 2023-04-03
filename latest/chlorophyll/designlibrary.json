@@ -330,6 +330,36 @@
     "customParams": {}
   },
   {
+    "id": "components-filter-chip--filter-chip",
+    "name": "Filter Chip",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
+  },
+  {
+    "id": "components-filter-chip--selected",
+    "name": "Selected",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
+  },
+  {
+    "id": "components-filter-chip--removable",
+    "name": "Removable",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
+  },
+  {
     "id": "components-dropdown--dropdown",
     "name": "Dropdown",
     "title": "Components/Dropdown",
