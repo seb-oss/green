@@ -2,12 +2,17 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
 export const Template = () => {
   return `
+  <div class="form-group">
     <div class="gds-slider-label-container">
         <label for="gds-slider">Slider label text in one line</label>
-        <input type="number" />
+        <div class="group group-border">
+          <input type="number" />
+          <span class="form-text">Kr</span>
+        </div>
     </div>
     <input type="range" id="gds-slider" />
-    `
+  </div>
+  `
 }
 
 <Meta
@@ -31,7 +36,7 @@ On pages where the user can experiment or adjust values in a scale, such as "How
 
 ## Example
 
-_Note: use javascript to bind values to textbox and to control  track background._
+_Note: use javascript to bind values to textbox and to control track background._
 
 <Canvas>
   <Story name="Slider">{Template.bind({})}</Story>

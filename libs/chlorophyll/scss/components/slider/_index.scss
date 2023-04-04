@@ -1,47 +1,12 @@
 @use 'mixins' as *;
 
 input[type='range'] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: $track-height;
-  background: linear-gradient(
-    to right,
-    $dark-blue-2 0%,
-    $dark-blue-2 0%,
-    $track-color 0%,
-    $track-color 100%
-  );
-  border-radius: $track-border-radius;
-
-  @each $browser in $browser-thumb-classes {
-    &::#{$browser} {
-      @include thumb-styles();
-    }
-  }
-
-  &:focus {
-    outline: none;
-
-    @each $browser in $browser-thumb-classes {
-      &::#{$browser} {
-        @include thumb-focus-styles();
-      }
-    }
-  }
-
-  &:disabled {
-    @each $browser in $browser-thumb-classes {
-      &::#{$browser} {
-        @include thumb-disabled-styles();
-      }
-    }
-  }
+  @include add-range-input-styles();
 }
 
 .gds-slider {
   &-label-container {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     gap: $spacing;
     margin-bottom: $spacing;
@@ -50,16 +15,23 @@ input[type='range'] {
       margin: 0;
     }
 
-    label + p {
-      font-size: $form-info-font-size;
+    label {
+      flex-grow: 1;
+      width: 100%;
     }
 
-    @media (min-width: $breakpoint-mobile-layout) {
-      flex-direction: row;
+    input {
+      width: 100%;
+      text-align: end;
+    }
 
-      > .form-group {
-        max-width: $form-group-width;
-      }
+    .group {
+      flex-shrink: 1;
+      min-width: auto;
+    }
+
+    label + p {
+      font-size: $form-info-font-size;
     }
   }
 
