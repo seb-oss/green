@@ -20,14 +20,17 @@ input[type='range'] {
       width: 100%;
     }
 
-    input {
+    .group input {
       width: 100%;
       text-align: end;
     }
 
-    .group {
+    .group,
+    > input {
       flex-shrink: 1;
       min-width: auto;
+      width: 100%;
+      max-width: 12rem;
     }
 
     label + p {
