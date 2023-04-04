@@ -9,7 +9,8 @@ import {
 
 // An array that's looped over to generate a pallet of different tones
 const TONE_ARRAY = [
-  5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 98,
+  5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 88, 90, 92,
+  94, 95, 96, 98, 99,
 ]
 
 // A tone array from 0-100 with an increment of 10
@@ -17,12 +18,12 @@ const TONE_ARRAY = [
 
 // All pallets that will be generated and rendered on screen
 const PALLETS = new Map([
+  ['Spring: #66FF87', TonalPalette.fromInt(argbFromHex('#66FF87'))],
   ['Green: #3d860a', TonalPalette.fromInt(argbFromHex('#3d860a'))],
   ['Red: #E63119', TonalPalette.fromInt(argbFromHex('#E63119'))],
   ['Blue: #0099FF', TonalPalette.fromInt(argbFromHex('#0099FF'))],
   ['Orange: #E68A00', TonalPalette.fromInt(argbFromHex('#E68A00'))],
   ['Yellow: #FFCC00', TonalPalette.fromInt(argbFromHex('#FFCC00'))],
-  ['Grey: #f2f2f2', TonalPalette.fromInt(argbFromHex('#f2f2f2'))],
   ['Grey: #0d0d0d', TonalPalette.fromInt(argbFromHex('#0d0d0d'))],
 ])
 
@@ -49,8 +50,8 @@ const renderAllPallets = () => {
       <div className="col">
         <strong className="mb-2">{item.name}</strong>
         <div className="d-flex">
-          {item.tones.map((color) => (
-            <Swatch color={color} />
+          {item.tones.map((color, index) => (
+            <Swatch color={color} tone={TONE_ARRAY[index].toString()} />
           ))}
         </div>
       </div>
