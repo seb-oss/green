@@ -1,14 +1,19 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-export const Template = () => {
+export const Template = ({ unitLabel }) => {
   return `
   <div class="form-group">
     <div class="gds-slider-label-container">
         <label for="gds-slider">Slider label text in one line</label>
-        <div class="group group-border">
+        ${
+          unitLabel
+            ? `<div class="group group-border">
           <input type="number" />
-          <span class="form-text">Kr</span>
+          <span class="form-text">${unitLabel}</span>
         </div>
+        `
+            : '<input type="number" />'
+        }
     </div>
     <input type="range" id="gds-slider" />
   </div>
@@ -19,6 +24,9 @@ export const Template = () => {
   title="Components/Slider"
   parameters={{
     componentIds: ['component-slider'],
+  }}
+  argTypes={{
+    unitLabel: { control: 'text' },
   }}
 />
 
@@ -34,10 +42,16 @@ The component allows for easy adjustments of a value and check the updated resul
 
 On pages where the user can experiment or adjust values in a scale, such as "How much can I borrow?".
 
-## Example
-
-_Note: use javascript to bind values to textbox and to control track background._
+## Basic example
 
 <Canvas>
   <Story name="Slider">{Template.bind({})}</Story>
+</Canvas>
+
+## Example with unit label
+
+<Canvas>
+  <Story name="Slider with unit label" args={{ unitLabel: 'Kr' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
