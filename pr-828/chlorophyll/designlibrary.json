@@ -194,6 +194,16 @@
     }
   },
   {
+    "id": "components-slider--slider-with-unit-label",
+    "name": "Slider with unit label",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
     "id": "components-slide-toggle--slide-toggle",
     "name": "Slide Toggle",
     "title": "Components/Slide Toggle",
