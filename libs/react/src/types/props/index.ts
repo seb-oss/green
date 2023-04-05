@@ -26,6 +26,7 @@ export interface SliderProps {
   instruction?: string
   errorMessage?: string
   hasTextbox?: boolean
+  unitLabel?: string
   disabled?: boolean
   onChange?: (value: number) => void
 }
