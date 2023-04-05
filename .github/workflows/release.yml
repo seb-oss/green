@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
+      - name: Build all libraries
+        run: npx nx run-many --all --exclude=angular-handle-legacy --target=build
+
       - name: Version and release all libraries
         run: npx nx run-many --all --target=update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build --parallel=1
         env:
