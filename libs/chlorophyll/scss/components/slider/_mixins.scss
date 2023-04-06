@@ -85,3 +85,43 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
     }
   }
 }
+
+@mixin add-slider-label-container-styles() {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing;
+  margin-bottom: $spacing;
+
+  > * {
+    margin: 0;
+  }
+
+  label {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .group input {
+    width: 100%;
+    text-align: end;
+  }
+
+  .group,
+  > input {
+    flex-shrink: 1;
+    min-width: auto;
+    width: 100%;
+    max-width: 12rem;
+  }
+
+  label + p {
+    font-size: $form-info-font-size;
+  }
+}
+
+@mixin add-slider-error-styles() {
+  color: $dark-red;
+  font-size: $form-info-font-size;
+  font-weight: $form-info-font-weight;
+  margin-top: $spacing;
+}
