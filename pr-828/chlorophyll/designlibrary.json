@@ -184,6 +184,16 @@
     }
   },
   {
+    "id": "components-spinner--spinner",
+    "name": "Spinner",
+    "title": "Components/Spinner",
+    "customParams": {
+      "componentIds": [
+        "component-spinners"
+      ]
+    }
+  },
+  {
     "id": "components-slider--slider",
     "name": "Slider",
     "title": "Components/Slider",
