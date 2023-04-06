@@ -17,7 +17,7 @@ import { iif, Observable, ReplaySubject, Subject } from 'rxjs'
 import { switchMap, takeUntil } from 'rxjs/operators'
 import { onActiveHandler, onInactiveHandler } from './event-handlers'
 import { setFocus } from './helper-functions'
-import Inputmask from 'inputmask'
+import IMask from 'imask'
 
 type DateUnit = 'years' | 'months' | 'weeks' | 'days'
 export interface Datepicker {
@@ -185,18 +185,31 @@ export const createDatepicker = (
     startOfMinDate,
     endOfMaxDate
   )
-  
+
   const unsubscribe$ = new Subject()
   const active$ = new ReplaySubject<boolean>(1)
   const selectedDate$ = new Subject<Date>()
 
   // add input mask to date input
   // TODO: add support for other date formats
-  Inputmask({
-    alias: 'datetime',
-    inputFormat: 'yyyy-mm-dd',
-    outputFormat: 'yyyymmdd',
-  }).mask(dateInputElRef)
+  IMask(dateInputElRef, {
+    mask: Date,
+    pattern: 'Y{-}`m{-}`z`d',
+    autofix: 'pad',
+    blocks: {
+      d: {
+        mask: IMask.MaskedRange,
+        from: 1,
+        to: 31,
+        maxLength: 2,
+        autofix: false,
+      },
+      z: {
+        mask: IMask.MaskedDynamic,
+        maskFunction: (v: string) => (v === '0' ? '0' : ''),
+      },
+    },
+  })
 
   const dp: Datepicker = {
     add: (amount, unit, select = false) => {
@@ -398,7 +411,7 @@ export const createDatepicker = (
     },
     state: createState(false, startOfMinDate, endOfMaxDate),
     active$: active$.asObservable(),
-    selectedDate$: selectedDate$.asObservable()
+    selectedDate$: selectedDate$.asObservable(),
   }
 
   listener(data, dp.state)

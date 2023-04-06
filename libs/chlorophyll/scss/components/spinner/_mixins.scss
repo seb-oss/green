@@ -1,0 +1,25 @@
+@use '../../common';
+@use '../../tokens/colors';
+
+$rotation-animation: gdsSpinnerRotation;
+$spinner-size: 3.75rem;
+$track-width: 0.375rem;
+
+@mixin add-spinner {
+  height: $spinner-size;
+  width: $spinner-size;
+  animation: $rotation-animation 1s infinite linear;
+  border-left: $track-width solid var(--gds-ref-pallet-base400);
+  border-right: $track-width solid var(--gds-ref-pallet-base400);
+  border-bottom: $track-width solid var(--gds-ref-pallet-base400);
+  border-top: $track-width solid var(--gds-ref-pallet-base800);
+  border-radius: 50%;
+  display: block;
+}
+
+@mixin add-spinner-animation {
+  @keyframes #{$rotation-animation} {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+}
