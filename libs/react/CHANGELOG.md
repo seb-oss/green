@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.3.1...@sebgroup/green-react@1.4.0) (2023-04-06)
+
+
+### Features
+
+* **button-group:** add `id`-prop ([#827](https://github.com/sebgroup/green/issues/827)) ([6d9fcbd](https://github.com/sebgroup/green/commit/6d9fcbd5043368569a8b9e3356ec1ba33d804e24)), closes [#825](https://github.com/sebgroup/green/issues/825)
+
+
+
 ## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.3.0...@sebgroup/green-react@1.3.1) (2023-04-03)
 
 
