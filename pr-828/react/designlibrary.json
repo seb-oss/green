@@ -221,6 +221,12 @@
     "customParams": {}
   },
   {
+    "id": "components-slider--unit-textbox",
+    "name": "UnitTextbox",
+    "title": "Components/Slider",
+    "customParams": {}
+  },
+  {
     "id": "components-slider--error",
     "name": "Error",
     "title": "Components/Slider",
