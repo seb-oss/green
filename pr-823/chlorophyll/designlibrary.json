@@ -46,6 +46,46 @@
     }
   },
   {
+    "id": "components-wizard-in-page-wizard-with-utility-classes--in-page-wizard-step-card-utility",
+    "name": "In-page Wizard Step Card Utility",
+    "title": "Components/Wizard/In-page Wizard with utility classes",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-with-utility-classes--completed-step",
+    "name": "Completed step",
+    "title": "Components/Wizard/In-page Wizard with utility classes",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-with-utility-classes--current-step",
+    "name": "Current step",
+    "title": "Components/Wizard/In-page Wizard with utility classes",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-with-utility-classes--not-started-step",
+    "name": "Not started step",
+    "title": "Components/Wizard/In-page Wizard with utility classes",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
     "id": "components-form-elements-textarea--textarea",
     "name": "Textarea",
     "title": "Components/Form/Elements/Textarea",
@@ -224,6 +264,16 @@
     }
   },
   {
+    "id": "components-spinner--spinner",
+    "name": "Spinner",
+    "title": "Components/Spinner",
+    "customParams": {
+      "componentIds": [
+        "component-spinners"
+      ]
+    }
+  },
+  {
     "id": "components-slider--slider",
     "name": "Slider",
     "title": "Components/Slider",
@@ -368,6 +418,36 @@
     "name": "Page",
     "title": "Components/Form/Concepts/Disabled",
     "customParams": {}
+  },
+  {
+    "id": "components-filter-chip--filter-chip",
+    "name": "Filter Chip",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
+  },
+  {
+    "id": "components-filter-chip--selected",
+    "name": "Selected",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
+  },
+  {
+    "id": "components-filter-chip--removable",
+    "name": "Removable",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": [
+        "component-filter-chip"
+      ]
+    }
   },
   {
     "id": "components-dropdown--dropdown",
