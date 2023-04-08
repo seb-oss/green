@@ -1,0 +1,146 @@
+import {Meta, Story, Canvas} from '@storybook/addon-docs'
+
+export const Template = ({
+                           isCompleted,
+                           isStarted,
+                           stepText,
+                           title,
+                           content,
+                         }) => {
+  return `
+    <section
+      class="card mb-5">
+      <header class="d-flex mb-0">
+        <div class="me-5">
+          <svg style="fill:  ${
+    isCompleted
+      ? 'var(--intent-success-background)'
+      : 'var(--text-disabled-color)'
+  }" height="32" witdh="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/>
+          </svg>
+        </div>
+        <div class="flex-grow-1">
+          <div class="fs-0">${stepText}</div>
+          <div>
+            <h3>${title}</h3>
+          </div>
+        </div>
+        <div>
+          ${
+    isCompleted
+      ? `<button class="secondary small">
+            <svg class="me-3" style="fill: currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              <path d="M417.8 315.5l20-20c3.8-3.8 10.2-1.1 10.2 4.2V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h292.3c5.3 0 8 6.5 4.2 10.2l-20 20c-1.1 1.1-2.7 1.8-4.2 1.8H48c-8.8 0-16 7.2-16 16v352c0 8.8 7.2 16 16 16h352c8.8 0 16-7.2 16-16V319.7c0-1.6.6-3.1 1.8-4.2zm145.9-191.2L251.2 436.8l-99.9 11.1c-13.4 1.5-24.7-9.8-23.2-23.2l11.1-99.9L451.7 12.3c16.4-16.4 43-16.4 59.4 0l52.6 52.6c16.4 16.4 16.4 43 0 59.4zm-93.6 48.4L403.4 106 169.8 339.5l-8.3 75.1 75.1-8.3 233.5-233.6zm71-85.2l-52.6-52.6c-3.8-3.8-10.2-4-14.1 0L426 83.3l66.7 66.7 48.4-48.4c3.9-3.8 3.9-10.2 0-14.1z"/>
+            </svg>
+            Edit
+          </button>`
+      : ''
+  }
+        </div>
+      </header>
+      ${isStarted ? `<div class="ms-7 ps-5 pb-5 mt-5">${content}</div>` : ''}
+      ${
+    isCompleted || (!isCompleted && !isStarted)
+      ? ``
+      : `<footer class="border-top mx-n5 mb-n5 ps-0 p-5 justify-content-start">
+        <button class="primary ms-8 px-7">
+          Next step
+          <svg class="ms-3 mb-n1" style="fill: currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M443.5 248.5l-7.1-7.1c-4.7-4.7-12.3-4.7-17 0L241 419.9V44c0-6.6-5.4-12-12-12h-10c-6.6 0-12 5.4-12 12v375.9L28.5 241.4c-4.7-4.7-12.3-4.7-17 0l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l211 211.1c4.7 4.7 12.3 4.7 17 0l211-211.1c4.8-4.8 4.8-12.3.1-17z"/>
+          </svg>
+        </button>
+      </footer>`
+  }
+    </section>
+    `
+}
+
+<Meta
+  title="Components/Wizard/In-page Wizard with utility classes"
+  parameters={{
+    componentIds: ['component-inpagewizard'],
+  }}
+  argTypes={{
+    isCompleted: {
+      control: 'boolean',
+    },
+    isStarted: {
+      control: 'boolean',
+    },
+    stepText: {control: 'text'},
+    title: {control: 'text'},
+    content: {control: 'text'},
+  }}
+/>
+
+# In page wizard
+
+Presents a sequence that leads the user through well-defined steps within a page.
+
+
+
+## Utility class example
+<Story
+  name="In-page Wizard Step Card Utility"
+  args={{
+    isCompleted: true,
+    isStarted: true,
+    stepText: 'Step 1 of 6',
+    title: 'Title',
+    content: `<h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
+    <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
+    <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>`,
+  }}
+  parameters={{docs: {disable: true}}}
+>
+  {Template.bind({})}
+</Story>
+
+<Canvas>
+  <Story
+    name="Completed step"
+    args={{
+      isCompleted: true,
+      isStarted: true,
+      stepText: 'Step 1 of 6',
+      title: 'Title',
+      content: `<h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
+  <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>`,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Current step"
+    args={{
+      isCompleted: false,
+      isStarted: true,
+      stepText: 'Step 2 of 6',
+      title: 'Title',
+      content: `<h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
+  <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>`,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Not started step"
+    args={{
+      isCompleted: false,
+      isStarted: false,
+      stepText: 'Step 3 of 6',
+      title: 'Title',
+      content: `<h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
+  <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>`,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

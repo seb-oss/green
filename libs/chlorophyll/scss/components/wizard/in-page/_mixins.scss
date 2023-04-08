@@ -1,15 +1,13 @@
-@use 'scss/common';
+@use '../../../common/index' as common;
+@use '../../../tokens';
 
 @mixin add-in-page-wizard {
   border: 0;
-  @extend .mb-3;
+  margin-bottom: .5rem;
+  padding: 0;
 
-  @include common.media-breakpoint-up(md) {
-    padding: 1.5rem;
-  }
-
-  &.card > footer {
-    margin-top: 0;
+  &:not(.completed, .active) {
+    color: var(--gds-ref-pallet-base500);
   }
 
   .review-content {
@@ -22,16 +20,19 @@
     }
   }
 
-  .gds-in-page-wizard-card__header {
+  .gds-in-page-wizard-step-card__header {
     display: grid;
-    grid-template-columns: 1.75rem 1fr 1fr;
+    grid-template-columns: 2.75rem 1fr 1fr;
     grid-template-rows: 1.25rem 1.75rem;
     grid-template-areas:
-      "progress progress edit"
+      "progress progress progress"
       "title title title";
     grid-template-rows: auto;
+    padding: 1rem 1rem .5rem 1rem;
+    margin-block-end: 0;
 
-    @media (min-width: 576px)  {
+    @media (min-width: 576px) {
+      padding: 1rem 1rem 1rem 1.5rem;
       grid-template-columns: 3rem 1fr 6.25rem;
       grid-template-rows: 1.25rem 1.75rem;
       grid-template-areas:
@@ -40,63 +41,82 @@
     }
   }
 
-  .gds-in-page-wizard-card__header__icon {
+  .gds-in-page-wizard-step-card__header__icon {
     grid-area: icon;
     display: none;
+    border-radius: 50%;
+    background-color: var(--gds-ref-pallet-base500);
+    width: 1.5rem;
+    height: 1.5rem;
+    justify-content: center;
+    align-items: center;
 
-    @media (min-width: 576px)  {
-      display: block;
+    @include common.media-breakpoint-up('sm') {
+      display: flex;
     }
 
     svg {
-      width: 1.25rem;
-      height: 1.25rem;
-
-      @media (min-width: 576px)  {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
+      width: 1rem;
+      height: 1rem;
+      fill: common.$white;
     }
   }
 
-  .gds-in-page-wizard-card__header__progress {
+  .gds-in-page-wizard-step-card__header__progress {
     grid-area: progress;
+    font-size: .875rem;
+    line-height: 1.25rem;
   }
 
-  .gds-in-page-wizard-card__header__title {
+  .gds-in-page-wizard-step-card__header__title {
     grid-area: title;
   }
-  .gds-in-page-wizard-card__header__edit {
+  .gds-in-page-wizard-step-card__header__edit {
     grid-area: edit;
-    display: flex;
+    display: none;
     justify-content: end;
+    @media (min-width: 576px) {
+      display: flex;
+    }
+  }
+
+  .gds-in-page-wizard-step-card__content {
+    padding: .5rem 1rem 1.5rem 1rem;
+    @include common.media-breakpoint-up("sm") {
+      padding: 1rem 1rem 1.5rem 4.5rem;
+    }
+  }
+  .gds-in-page-wizard-step-card__footer {
+    border-top: 1px solid tokens.get(tokens.$grey, 500);
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    margin-top: 0;
+    justify-content: flex-start;
+
+    @include common.media-breakpoint-up('sm') {
+      padding: 1.5rem 1rem 1.5rem 4.5rem;
+
+      button {
+        min-width: 21rem;
+      }
+    }
   }
 
   // Completed section styling
   &.completed {
-    .gds-in-page-wizard-card__header {
+    .gds-in-page-wizard-step-card__header {
       grid-template-areas:
-        "icon progress edit"
-        "title title edit";
+        "icon progress progress"
+        "icon title title";
 
-      @media (min-width: 576px)  {
+      @media (min-width: 576px) {
         grid-template-areas:
           "icon progress edit"
           "icon title edit";
       }
-    }
-    .gds-in-page-wizard-card__header__icon {
-      display: block;
-    }
-  }
 
-  .card {
-    .gds-in-page-wizard-card__applicant-summary {
-      div:nth-child(1) {
-        padding-bottom: 0.75rem;
-      }
-      div:only-child {
-        padding-bottom: 0;
+      .gds-in-page-wizard-step-card__header__icon {
+        display: flex;
+        background-color: tokens.get(tokens.$green, 1);
       }
     }
   }
