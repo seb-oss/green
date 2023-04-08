@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.0...@sebgroup/extract@1.3.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **datepicker:** replace `Inputmask` with `imask.js` ([#835](https://github.com/sebgroup/green/issues/835)) ([2ec6e33](https://github.com/sebgroup/green/commit/2ec6e33bec0002251b96738c98076483ea405e66))
+
+
+
 # [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.2.1...@sebgroup/extract@1.3.0) (2023-04-03)
 
 

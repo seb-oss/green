@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/addon-docs'
 
 <Meta title="Get started" />
 
@@ -9,7 +9,9 @@ npm install @sebgroup/green-angular --save
 ```
 
 # Import module
+
 We recommend that you import `NggModule` (or just the module you need for Angular Green) into a shared module eg. `SharedModule` that can be imported into other, preferably lazy loaded modules when needed.
+
 ```ts
 import { NggModule } from '@sebgroup/green-angular'
 
@@ -27,19 +29,20 @@ export class SharedModule {}
 ```
 
 # Import styling
+
 We recommend setting up your Angular project to use scss (SASS) for css preprocessing.
 
 Once configured to use scss, it's just a matter of including the scss to your main styles file, typically it would be `styles.scss` located at the root of the `src` folder unless you've changed it.
 
 ### Add scss
+
 `{project}/src/styles.scss`
 
 ```css
-// import base styles from green/chlorophyll
-@use '~@sebgroup/chlorophyll/scss';
+// import base styles from @sebgroup/chlorophyll
+@use '@sebgroup/chlorophyll/scss';
 ```
 
 ### Have other needs?
+
 More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/sebgroup/green/issues)
-
-
