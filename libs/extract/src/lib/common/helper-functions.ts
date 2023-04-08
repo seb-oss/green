@@ -1,6 +1,6 @@
 export const addSwipeEvents = () => {
   // https://github.com/john-doherty/swiped-events
-  import('swiped-events/dist/swiped-events.min' as never)
+  import('swiped-events/dist/swiped-events.min.js' as never)
 }
 
 export const scrollElementIntoView = (element: HTMLElement) => {

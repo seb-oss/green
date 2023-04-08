@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.5.0...@sebgroup/chlorophyll@1.6.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* 🐛 make static text fixed at the end of parent element ([#815](https://github.com/sebgroup/green/issues/815)) ([ab8118c](https://github.com/sebgroup/green/commit/ab8118c285edf43ee93b88107736cc365b7f38c1))
+
+
+### Features
+
+* add component filter-chip ([#808](https://github.com/sebgroup/green/issues/808)) ([edd7038](https://github.com/sebgroup/green/commit/edd7038292a732dfd8c03c52cc9cf423b9917461)), closes [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802)
+
+
+
 # [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.4.0...@sebgroup/chlorophyll@1.5.0) (2023-03-29)
 
 

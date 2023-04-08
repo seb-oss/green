@@ -10,8 +10,10 @@
 // styling for storybook
 
 .sidebar-header img {
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  margin-right: auto;
+  height: 80px;
+  width: auto;
 }
 
 .sidebar-subheading {
