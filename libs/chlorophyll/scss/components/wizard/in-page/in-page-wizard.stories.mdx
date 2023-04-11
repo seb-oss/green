@@ -88,6 +88,10 @@ Presents a sequence that leads the user through well-defined steps within a page
   {Template.bind({})}
 </Story>
 
+## Completed step
+
+A completed step has a green check mark icon and an Edit-button which allows the user to change previously entered information.
+
 <Canvas>
   <Story
     name="Completed step"
@@ -104,6 +108,10 @@ Presents a sequence that leads the user through well-defined steps within a page
   </Story>
 </Canvas>
 
+## Current step (active)
+
+The current step is the one the user is currently interacting with.
+
 <Canvas>
   <Story
     name="Current step"
@@ -112,13 +120,25 @@ Presents a sequence that leads the user through well-defined steps within a page
       isStarted: true,
       stepText: 'Step 2 of 6',
       title: 'Title',
-      content: `<h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>
-  <h4 class="fs-1">Sub title</h4><p class="mb-5">Sub section text</p>`,
+      content: `<div class="form-group">
+          <label for="inputInvalid">Input label</label>
+          <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+          <input id="inputInvalid" type="text" />
+        </div>
+        <div class="form-group">
+          <label for="inputInvalid">Input label</label>
+          <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+          <input id="inputInvalid" type="text" />
+        </div>`,
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
+
+## Upcoming, but not yet started, step
+
+An upcoming step only shows the title and step number, but hides the details in order to reduce clutter.
 
 <Canvas>
   <Story
