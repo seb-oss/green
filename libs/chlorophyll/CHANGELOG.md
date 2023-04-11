@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.6.0...@sebgroup/chlorophyll@1.7.0) (2023-04-06)
+
+
+### Features
+
+* **spinner:** add a spinner component to chlorophyll ([#830](https://github.com/sebgroup/green/issues/830)) ([167ccb6](https://github.com/sebgroup/green/commit/167ccb6f35c90e409147747db4c18d61d27778b8))
+
+
+
 # [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.5.0...@sebgroup/chlorophyll@1.6.0) (2023-04-03)
 
 
