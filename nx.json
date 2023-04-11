@@ -38,6 +38,7 @@
       "application": {
         "style": "none",
         "linter": "eslint",
+        "bundler": "vite",
         "babel": true
       },
       "component": {
