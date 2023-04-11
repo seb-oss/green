@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../../tokens/grid';
 @use '../../tokens/shame';
+@use '../../common/breakpoints';
 
 $spacing: 1rem;
 $dark-blue-1: #0092e1;
@@ -8,7 +9,6 @@ $dark-blue-2: #007ac7;
 $dark-red: #9f000a;
 $form-info-font-size: 0.875rem;
 $form-info-font-weight: 500;
-$form-group-width: 7.5rem;
 
 $box-shadow: rgba(85, 85, 85, 0.4) 0 2px 5px;
 $box-shadow-focus: 0 0 0 3px rgba($dark-blue-1, 0.4);
@@ -22,7 +22,7 @@ $track-height: 0.25rem;
 $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
 $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
 
-@mixin thumb-styles() {
+@mixin add-thumb-styles() {
   background: $dark-blue-1;
   border: none;
   border-radius: 50%;
@@ -38,12 +38,90 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
   }
 }
 
-@mixin thumb-focus-styles() {
+@mixin add-thumb-focus-styles() {
   background: $dark-blue-2;
   box-shadow: $box-shadow, $box-shadow-focus;
 }
 
-@mixin thumb-disabled-styles() {
+@mixin add-thumb-disabled-styles() {
   background: $track-color;
   cursor: not-allowed;
+}
+
+@mixin add-range-input-styles() {
+  -webkit-appearance: none;
+  width: 100%;
+  height: $track-height;
+  background: linear-gradient(
+    to right,
+    $dark-blue-2 0%,
+    $dark-blue-2 0%,
+    $track-color 0%,
+    $track-color 100%
+  );
+  border-radius: $track-border-radius;
+
+  @each $browser in $browser-thumb-classes {
+    &::#{$browser} {
+      @include add-thumb-styles();
+    }
+  }
+
+  &:focus {
+    outline: none;
+
+    @each $browser in $browser-thumb-classes {
+      &::#{$browser} {
+        @include add-thumb-focus-styles();
+      }
+    }
+  }
+
+  &:disabled {
+    @each $browser in $browser-thumb-classes {
+      &::#{$browser} {
+        @include add-thumb-disabled-styles();
+      }
+    }
+  }
+}
+
+@mixin add-slider-label-container-styles() {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing;
+  margin-bottom: $spacing;
+
+  > * {
+    margin: 0;
+  }
+
+  label {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .group input {
+    width: 100%;
+    text-align: end;
+  }
+
+  .group,
+  > input {
+    flex-shrink: 1;
+    min-width: auto;
+    width: 100%;
+    max-width: 12rem;
+  }
+
+  label + p {
+    font-size: $form-info-font-size;
+  }
+}
+
+@mixin add-slider-error-styles() {
+  color: $dark-red;
+  font-size: $form-info-font-size;
+  font-weight: $form-info-font-weight;
+  margin-top: $spacing;
 }
