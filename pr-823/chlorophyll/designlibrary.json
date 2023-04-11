@@ -46,46 +46,6 @@
     }
   },
   {
-    "id": "components-wizard-in-page-wizard-with-utility-classes--in-page-wizard-step-card-utility",
-    "name": "In-page Wizard Step Card Utility",
-    "title": "Components/Wizard/In-page Wizard with utility classes",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-with-utility-classes--completed-step",
-    "name": "Completed step",
-    "title": "Components/Wizard/In-page Wizard with utility classes",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-with-utility-classes--current-step",
-    "name": "Current step",
-    "title": "Components/Wizard/In-page Wizard with utility classes",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-with-utility-classes--not-started-step",
-    "name": "Not started step",
-    "title": "Components/Wizard/In-page Wizard with utility classes",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
     "id": "components-form-elements-textarea--textarea",
     "name": "Textarea",
     "title": "Components/Form/Elements/Textarea",
@@ -276,6 +236,16 @@
   {
     "id": "components-slider--slider",
     "name": "Slider",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--slider-with-unit-label",
+    "name": "Slider with unit label",
     "title": "Components/Slider",
     "customParams": {
       "componentIds": [
