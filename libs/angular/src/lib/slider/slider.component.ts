@@ -55,7 +55,6 @@ export class NggSliderComponent
   style: SliderStyle = {}
 
   ngOnInit(): void {
-    console.log('unitLabel on init:', this.unitLabel)
     this.setTrackBackground()
   }
 
