@@ -1,0 +1,7 @@
+@use 'mixins';
+
+.gds-spinner {
+  @include mixins.add-spinner;
+}
+
+@include mixins.add-spinner-animation;

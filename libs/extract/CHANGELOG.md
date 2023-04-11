@@ -2,6 +2,29 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.0...@sebgroup/extract@1.3.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **datepicker:** replace `Inputmask` with `imask.js` ([#835](https://github.com/sebgroup/green/issues/835)) ([2ec6e33](https://github.com/sebgroup/green/commit/2ec6e33bec0002251b96738c98076483ea405e66))
+
+
+
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.2.1...@sebgroup/extract@1.3.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* use fully qualified import for `swiped-events` ([#821](https://github.com/sebgroup/green/issues/821)) ([2b4a6de](https://github.com/sebgroup/green/commit/2b4a6de84314b8f5e06b712a762ae9a0d9cdfb3e))
+
+
+### Features
+
+* add component filter-chip ([#808](https://github.com/sebgroup/green/issues/808)) ([edd7038](https://github.com/sebgroup/green/commit/edd7038292a732dfd8c03c52cc9cf423b9917461)), closes [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802)
+
+
+
 ## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.2.0...@sebgroup/extract@1.2.1) (2023-03-29)
 
 

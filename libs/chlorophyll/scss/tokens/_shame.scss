@@ -38,8 +38,6 @@ $text-inherit-color: inherit;
 // Todo refactor link color (add to blue swatch)
 $link-color: rgb(0, 98, 188);
 $link-color-visited: rgb(103, 58, 182);
-// $link-color-dark: hsl(0deg 0% 20%);
-// $link-color-visited-dark: #494949;
 
 $link-color-dark: var(--link-color-dark);
 $link-color-visited-dark: var(--link-color-dark-visited);
@@ -294,6 +292,15 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   @include generate-intent-variables($intent, 'dark');
   @include grey-colors($grey, 'dark');
   color: var(--text-primary-color);
+  --gds-sys-outline-color: hsla(0, 0%, 87%, 0.2);
+  --gds-comp-chips-fr-color: #dedede;
+  --gds-comp-chips-bg-color: #2c2c2c;
+  --gds-comp-chips-br-color: #2c2c2c;
+  --gds-comp-chips-fr-color-hover: #dedede;
+  --gds-comp-chips-bg-color-hover: #2c2c2c;
+  --gds-comp-chips-br-color-hover: hsla(0, 0%, 87%, 0.2);
+  --gds-comp-chips-bg-color-active: #222222;
+  --gds-comp-chips-bg-color-action: #2c2c2c;
 }
 
 @mixin light-mode() {
@@ -315,5 +322,13 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   @include generate-intent-variables($intent);
   @include grey-colors($grey);
   color: var(--text-primary-color);
+  --gds-sys-outline-color: #333333;
+  --gds-comp-chips-fr-color: #333333;
+  --gds-comp-chips-bg-color: #ffffff;
+  --gds-comp-chips-br-color: #333333;
+  --gds-comp-chips-fr-color-hover: #ffffff;
+  --gds-comp-chips-bg-color-hover: #494949;
+  --gds-comp-chips-br-color-hover: #494949;
+  --gds-comp-chips-bg-color-active: #333333;
+  --gds-comp-chips-bg-color-action: #333333;
 }
-/* stylelint-enable */

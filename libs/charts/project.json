@@ -18,18 +18,14 @@
     },
     "build-lib": {
       "executor": "@nrwl/web:rollup",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "packageJson": "libs/charts/package.json",
         "outputPath": "dist/libs/charts",
         "tsConfig": "libs/charts/tsconfig.lib.json",
         "project": "libs/charts/package.json",
         "entryFile": "libs/charts/src/index.ts",
-        "external": [
-          "react/jsx-runtime"
-        ],
+        "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
         "assets": [
           {
@@ -76,49 +72,40 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/charts/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/charts/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/charts"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/libs/charts"],
       "options": {
         "jestConfig": "libs/charts/jest.config.ts",
         "passWithNoTests": true
       }
     },
-    "prepare-release": {
+    "update-deps-and-release": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           {
-            "command": "nx run charts:update-dependencies && nx run charts:version"
+            "command": "nx run charts:update-dependencies && nx run charts:version-and-release"
           }
         ]
       }
     },
     "update-dependencies": {
-      "executor": "./tools/executors/update-deps:update-deps",
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
-    "version": {
+    "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
         "commitMessageFormat": "chore(${projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-${projectName}@",
         "push": true,
-        "postTargets": [
-          "charts:publish",
-          "charts:github"
-        ]
+        "postTargets": ["charts:publish", "charts:github"]
       }
     },
     "github": {

@@ -19,7 +19,8 @@ export type Renderer = (
   info?: string,
   validator?: IValidator,
   expandableInfo?: string,
-  expandableInfoButtonLabel?: string
+  expandableInfoButtonLabel?: string,
+  testId?: string
 ) => JSX.Element
 
 export const RenderInput: Renderer = (
@@ -31,7 +32,8 @@ export const RenderInput: Renderer = (
   info,
   validator,
   expandableInfo,
-  expandableInfoButtonLabel
+  expandableInfoButtonLabel,
+  testId
 ) => {
   const { value, ...inputProps } = useInput(props, onChange, onChangeInput)
 
@@ -41,7 +43,14 @@ export const RenderInput: Renderer = (
 
   // Render naked
   if (!label && !info && !expandableInfo)
-    return <input type={type} value={value} {...propsWithDescription} />
+    return (
+      <input
+        type={type}
+        value={value}
+        data-testid={testId}
+        {...propsWithDescription}
+      />
+    )
 
   return (
     <FormItem
@@ -61,6 +70,7 @@ export const RenderInput: Renderer = (
             validator &&
             validateClassName(validator?.indicator as IndicatorType)
           }
+          data-testid={testId}
         />
       </div>
     </FormItem>
@@ -70,6 +80,7 @@ export const RenderInput: Renderer = (
 export const TextInput = ({
   label,
   info,
+  testId,
   onChange,
   onChangeInput,
   validator,
@@ -86,7 +97,8 @@ export const TextInput = ({
     info,
     validator,
     expandableInfo,
-    expandableInfoButtonLabel
+    expandableInfoButtonLabel,
+    testId
   )
 
 export const EmailInput = ({
@@ -95,9 +107,19 @@ export const EmailInput = ({
   onChange,
   onChangeInput,
   validator,
+  testId,
   ...props
 }: TextInputProps) =>
-  RenderInput('email', props, onChange, onChangeInput, label, info, validator)
+  RenderInput(
+    'email',
+    props,
+    onChange,
+    onChangeInput,
+    label,
+    info,
+    validator,
+    testId
+  )
 
 export const NumberInput = ({
   label,
@@ -107,6 +129,7 @@ export const NumberInput = ({
   validator,
   expandableInfo,
   expandableInfoButtonLabel,
+  testId,
   ...props
 }: NumberInputProps) =>
   RenderInput(
@@ -118,13 +141,15 @@ export const NumberInput = ({
     info,
     validator,
     expandableInfo,
-    expandableInfoButtonLabel
+    expandableInfoButtonLabel,
+    testId
   )
 
 export const Checkbox = ({
   label,
   onChange,
   validator,
+  testId,
   ...props
 }: CheckboxProps) => {
   const inputProps = useInput(props, onChange)
@@ -142,7 +167,12 @@ export const Checkbox = ({
     <div className="form-group">
       <label htmlFor={inputProps.id} className={labelClassNames}>
         {label}
-        <input type="checkbox" {...inputProps} className={inputClassNames} />
+        <input
+          type="checkbox"
+          data-testid={testId}
+          {...inputProps}
+          className={inputClassNames}
+        />
         <i />
       </label>
       {validator && <span className="form-info">{validator.message}</span>}
@@ -152,7 +182,7 @@ export const Checkbox = ({
 
 export const RadioButton = React.forwardRef(
   (
-    { label, validator, ...props }: RadioButtonProps,
+    { label, validator, testId, ...props }: RadioButtonProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
     const { id } = useInput(props)
@@ -164,6 +194,7 @@ export const RadioButton = React.forwardRef(
         <input
           id={id}
           type="radio"
+          data-testid={testId}
           {...props}
           className={inputClassNames}
           ref={ref}
