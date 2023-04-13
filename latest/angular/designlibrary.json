@@ -20,6 +20,16 @@
     }
   },
   {
+    "id": "components-slider--unit-textbox",
+    "name": "Unit Textbox",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
     "id": "components-slider--error",
     "name": "Error",
     "title": "Components/Slider",
