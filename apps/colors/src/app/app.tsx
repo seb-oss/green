@@ -1,11 +1,13 @@
 import '../assets/styles.scss'
-import { Navbar } from '@sebgroup/green-react'
+import { Navbar, TextInput, Slider } from '@sebgroup/green-react'
 import { Swatch } from '../components'
 import {
   argbFromHex,
   TonalPalette,
   hexFromArgb,
 } from '@material/material-color-utilities'
+import React from 'react'
+import { setDate } from 'date-fns/fp'
 
 // An array that's looped over to generate a pallet of different tones
 const TONE_ARRAY = [
@@ -24,47 +26,98 @@ const PALLETS = new Map([
   ['Blue: #0099FF', TonalPalette.fromInt(argbFromHex('#0099FF'))],
   ['Orange: #E68A00', TonalPalette.fromInt(argbFromHex('#E68A00'))],
   ['Yellow: #FFCC00', TonalPalette.fromInt(argbFromHex('#FFCC00'))],
-  ['Grey: #0d0d0d', TonalPalette.fromInt(argbFromHex('#0d0d0d'))],
+  ['Grey:', TonalPalette.fromHueAndChroma(140, 3)],
 ])
 
 interface ItempToneRange {
   name: string
   tones: string[]
+  hue: number
+  chroma: number
 }
 
-const renderAllPallets = () => {
-  const palletArray: ItempToneRange[] = []
+const Pallet = (props: { pallet: [string, TonalPalette]; tones: number[] }) => {
+  const [pallet, setPallet] = React.useState(props.pallet[1])
+  const name = props.pallet[0]
 
-  PALLETS.forEach((pallet, key, map) => {
-    const tempToneRange: ItempToneRange = { name: key, tones: [] }
+  const tr: ItempToneRange = {
+    name,
+    tones: [],
+    hue: Math.round(pallet.hue),
+    chroma: Math.round(pallet.chroma),
+  }
 
-    TONE_ARRAY.forEach((tone) => {
-      tempToneRange.tones.push(hexFromArgb(pallet.tone(tone)))
-    })
-
-    palletArray.push(tempToneRange)
+  props.tones.forEach((tone) => {
+    tr.tones.push(hexFromArgb(pallet.tone(tone)))
   })
 
-  return palletArray.map((item) => (
+  return (
     <div className="row mb-5">
       <div className="col">
-        <strong className="mb-2">{item.name}</strong>
+        <strong className="mb-2">
+          {tr.name} hue({tr.hue}) chroma({tr.chroma})
+        </strong>
+        <Slider
+          //value={pallet.hue}
+          label="Hue"
+          min={0}
+          max={255}
+          onChange={(e) =>
+            setPallet(TonalPalette.fromHueAndChroma(e, pallet.chroma))
+          }
+        />
+        <Slider
+          //value={pallet.chroma}
+          label="Chroma"
+          min={0}
+          max={255}
+          onChange={(e) =>
+            setPallet(TonalPalette.fromHueAndChroma(pallet.hue, e))
+          }
+        />
         <div className="d-flex">
-          {item.tones.map((color, index) => (
-            <Swatch color={color} tone={TONE_ARRAY[index].toString()} />
+          {tr.tones.map((color, index) => (
+            <Swatch color={color} tone={props.tones[index].toString()} />
           ))}
         </div>
       </div>
     </div>
-  ))
+  )
+}
+
+const Pallets = ({
+  pallets,
+  tones,
+}: {
+  pallets: Map<string, TonalPalette>
+  tones: number[]
+}) => {
+  return (
+    <div className="container">
+      {Array.from(pallets).map((pallet) => (
+        <Pallet pallet={pallet} tones={tones} />
+      ))}
+    </div>
+  )
 }
 
 export function App() {
+  const [pallets, setPallets] = React.useState(PALLETS)
+  const [tones, setTones] = React.useState(TONE_ARRAY)
+
+  const parseTones = (tonesString: string) =>
+    tonesString.split(',').map((v) => parseInt(v))
+
   return (
     <>
       <div className="use-green">
         <Navbar title="Green Color Generator" />
-        <div className="container">{renderAllPallets()}</div>
+        <TextInput
+          value={tones.join(',')}
+          label="Tones"
+          onChange={(e) => setTones(parseTones(e.currentTarget.value))}
+        />
+        <Pallets pallets={pallets} tones={tones} />
       </div>
     </>
   )
