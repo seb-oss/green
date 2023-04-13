@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.4.0...@sebgroup/green-react@1.5.0) (2023-04-13)
+
+
+### Features
+
+* **slider:** add support for unit field ([#828](https://github.com/sebgroup/green/issues/828)) ([55c5f70](https://github.com/sebgroup/green/commit/55c5f70aa2716e526ad781d2a1b71803288e75a2))
+
+
+
 # [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.3.1...@sebgroup/green-react@1.4.0) (2023-04-06)
 
 
