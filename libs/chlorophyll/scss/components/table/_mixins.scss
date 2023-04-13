@@ -23,7 +23,7 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
         padding: $_cell-padding-y $_cell-padding-x;
         vertical-align: top;
         text-align: left;
-        // sort button
+        font-weight: 500;
         .sg-table-sort {
           color: inherit;
           width: 100%;
