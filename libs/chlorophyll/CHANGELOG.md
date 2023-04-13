@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.7.0...@sebgroup/chlorophyll@1.8.0) (2023-04-13)
+
+
+### Features
+
+* **in-page-wizard:** add markup examples for In-page wizard ([#823](https://github.com/sebgroup/green/issues/823)) ([816b086](https://github.com/sebgroup/green/commit/816b0862e1ec531819447c602d4b671900debaa2))
+* **slider:** add support for unit field ([#828](https://github.com/sebgroup/green/issues/828)) ([55c5f70](https://github.com/sebgroup/green/commit/55c5f70aa2716e526ad781d2a1b71803288e75a2))
+
+
+
 # [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.6.0...@sebgroup/chlorophyll@1.7.0) (2023-04-06)
 
 
