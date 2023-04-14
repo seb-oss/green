@@ -22,7 +22,7 @@ On pages where the user can experiment or adjust values in a scale, such as "How
 | Prop          | Type      | Description                                                                           |
 | :------------ | :-------- | :------------------------------------------------------------------------------------ |
 | name?         | `string`  | Name of the input element                                                             |
-| defaultValue? | `number`  | Default value of the input element                                                    |
+| value?        | `number`  | Value of the input element                                                            |
 | min           | `number`  | The greatest value in the range of permitted values. Default is 0                     |
 | max           | `number`  | The lowest value in the range of permitted values. Default is 100                     |
 | step          | `number`  | The number that specifies the granularity that the value must adhere to. Default is 1 |
@@ -43,8 +43,8 @@ On pages where the user can experiment or adjust values in a scale, such as "How
         type: 'text',
       },
     },
-    defaultValue: {
-      name: 'defaultValue',
+    value: {
+      name: 'value',
       defaultValue: 50,
       control: {
         type: 'number',

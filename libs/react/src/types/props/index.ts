@@ -18,7 +18,7 @@ export interface LabelProps {
 
 export interface SliderProps {
   name?: string
-  defaultValue?: number
+  value?: number
   min?: number
   max?: number
   step?: number
@@ -29,4 +29,9 @@ export interface SliderProps {
   unitLabel?: string
   disabled?: boolean
   onChange?: (value: number) => void
+
+  /**
+   * @deprecated Use `value` instead
+   */
+  defaultValue?: number
 }
