@@ -12,7 +12,6 @@
         "compiler": "babel",
         "outputPath": "dist/apps/colors",
         "index": "apps/colors/src/index.html",
-        "baseHref": "/",
         "main": "apps/colors/src/main.tsx",
         "tsConfig": "apps/colors/tsconfig.app.json",
         "assets": ["apps/colors/src/favicon.ico", "apps/colors/src/assets"],
