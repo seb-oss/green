@@ -28,6 +28,7 @@ const InputWrapper = ({
 
 export function Slider({
   name = `${randomId()}-slider`,
+  value,
   defaultValue,
   min = 0,
   max = 100,
@@ -42,7 +43,7 @@ export function Slider({
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number>(
-    defaultValue ?? 0
+    value ?? defaultValue ?? 0
   )
 
   React.useLayoutEffect(() => {
@@ -54,6 +55,10 @@ export function Slider({
     const percent: number = ((sliderValue - min) / (max - min)) * 100
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
+
+  React.useEffect(() => {
+    setSliderValue(Number(value))
+  }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
