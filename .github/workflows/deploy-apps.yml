@@ -1,0 +1,63 @@
+name: Triggered deploy of apps
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile --silent
+
+      - name: Get branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+        id: branch
+
+      - name: Determine deploy target
+        shell: bash
+        run: |
+          if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
+            echo "##[set-output name=target;]$(echo latest)"
+          elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
+            echo "##[set-output name=target;]$(echo alpha)"
+          elif [[ "${{ steps.branch.outputs.branch }}" == "beta" ]]; then
+            echo "##[set-output name=target;]$(echo latest)"
+          else
+            echo "##[set-output name=target;]$(echo pr-${{ github.event.number }})"
+          fi
+        id: target
+
+      - name: Build apps
+        run: yarn run nx run-many --target build-app --all
+
+      - name: Deploy apps to GitHub Pages
+
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist/apps # The folder the action should deploy.
+          target-folder: apps/${{ steps.target.outputs.target }} # The folder the action should deploy to.
