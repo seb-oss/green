@@ -1,0 +1,16 @@
+<div *ngIf="isOpen" class="context-menu" [style.top]="top" [style.left]="left">
+  <ul role="listbox" (click)="onDocumentClick($event)">
+    <ng-container *ngIf="menuItemTemplate; else defaultTemplate">
+      <ng-container *ngFor="let menuItem of menuItems">
+        <li role="option" (click)="onItemClick(menuItem)">
+          <ng-container [ngTemplateOutlet]="menuItemTemplate" [ngTemplateOutletContext]="{ $implicit: menuItem }"></ng-container>
+        </li>
+      </ng-container>
+    </ng-container>
+    <ng-template #defaultTemplate>
+      <li role="option" *ngFor="let menuItem of menuItems" (click)="onItemClick(menuItem)">
+        <span>{{ menuItem.label }}</span>
+      </li>
+    </ng-template>
+  </ul>
+</div>

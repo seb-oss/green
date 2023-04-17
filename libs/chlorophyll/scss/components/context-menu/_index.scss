@@ -1,0 +1,18 @@
+@use 'mixins' as mixins;
+@forward 'mixins';
+
+// dependencies
+@use '../../components/list';
+@use '../../components/popover';
+@use '../../components/utility';
+
+button[aria-haspopup='listbox'] {
+  @include mixins.context-menu();
+}
+
+.context-menu {
+  // dropdown select
+  ul[role='listbox'] {
+    @include mixins.select();
+  }
+}

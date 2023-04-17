@@ -7,7 +7,7 @@ export const parameters = {
     dark,
     light,
     stylePreview: true,
-    darkClass: 'dark-mode',
+   // darkClass: 'dark-mode',
     current: 'light'
   },
   viewMode: 'docs'
