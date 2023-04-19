@@ -1,16 +1,30 @@
-<div *ngIf="isOpen" class="context-menu" [style.top]="top" [style.left]="left">
-  <ul role="listbox" (click)="onDocumentClick($event)">
-    <ng-container *ngIf="menuItemTemplate; else defaultTemplate">
-      <ng-container *ngFor="let menuItem of menuItems">
-        <li role="option" (click)="onItemClick(menuItem)">
-          <ng-container [ngTemplateOutlet]="menuItemTemplate" [ngTemplateOutletContext]="{ $implicit: menuItem }"></ng-container>
-        </li>
+<button (click)="open($event)">...</button>
+
+<div
+  class="popover popover-context-menu"
+  [class.active]="isActive"
+  [style.top]="top"
+  [style.left]="left"
+  #contextMenuPopover
+>
+  <ul role="listbox">
+    <li
+      *ngFor="let menuItem of menuItems; let i = index"
+      (click)="onItemClick(menuItem)"
+      tabindex="0"
+      role="option"
+      (keydown)="onMenuItemKeyDown($event, i)"
+    >
+      <ng-container *ngIf="menuItemTemplate; else defaultTemplate">
+        <ng-container
+          [ngTemplateOutlet]="menuItemTemplate"
+          [ngTemplateOutletContext]="{ $implicit: menuItem }"
+        ></ng-container>
       </ng-container>
-    </ng-container>
-    <ng-template #defaultTemplate>
-      <li role="option" *ngFor="let menuItem of menuItems" (click)="onItemClick(menuItem)">
-        <span>{{ menuItem.label }}</span>
-      </li>
-    </ng-template>
+      <ng-template #defaultTemplate>
+        <span>{{ menuItem.label }}</span
+        ><i class="selected-icon"></i>
+      </ng-template>
+    </li>
   </ul>
 </div>
