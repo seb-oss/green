@@ -10,6 +10,7 @@ import {
   TextInput,
   Datepicker,
   Alert,
+  Slider,
 } from '@sebgroup/green-react'
 import { useState } from 'react'
 import { IValidator } from '@sebgroup/extract'
@@ -29,6 +30,7 @@ export function App() {
   const [validator, setValidator] = useState<undefined | IValidator>(undefined)
 
   const [adults, setAdults] = useState<{ id: number; value: number }>()
+  const [sliderValue, setSliderValue] = useState<number>(0)
 
   const onStepperChange = (value: number) => {
     console.log('** START **')
@@ -106,6 +108,10 @@ export function App() {
                   validator={validator}
                 />
                 <Stepper onChange={onStepperChange} />
+
+                <Slider onChange={(value) => setSliderValue(value)} />
+                <div>Slider value: {sliderValue}</div>
+
                 <button type="submit">Submit</button>
               </Form>
             </div>

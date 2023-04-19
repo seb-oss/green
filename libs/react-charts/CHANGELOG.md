@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.1...@sebgroup/green-react-charts@1.1.0) (2023-04-03)
+
+
+### Features
+
+* add option to set axis height manually and remove custom x-axis from `react-charts` ([#812](https://github.com/sebgroup/green/issues/812)) ([17ca0d5](https://github.com/sebgroup/green/commit/17ca0d544ceaf3bfa53e3cb663a5d3c384f9ea2f)), closes [#609](https://github.com/sebgroup/green/issues/609)
+
+
+
 ## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0...@sebgroup/green-react-charts@1.0.1) (2023-02-20)
 
 

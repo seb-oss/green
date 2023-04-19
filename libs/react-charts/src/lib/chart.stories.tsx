@@ -32,6 +32,9 @@ SimpleBar.args = {
         y: {
           stepSize: 50,
         },
+        x: {
+          height: 60,
+        },
       },
     },
   },

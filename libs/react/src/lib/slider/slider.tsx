@@ -7,8 +7,28 @@ import {
 
 import { SliderProps } from '../../types'
 
+const InputWrapper = ({
+  children,
+  unitLabel,
+}: {
+  children: React.ReactNode
+  unitLabel?: string
+}) => (
+  <>
+    {unitLabel ? (
+      <div className="group group-border">
+        {children}
+        <span className="form-text">{unitLabel}</span>
+      </div>
+    ) : (
+      children
+    )}
+  </>
+)
+
 export function Slider({
   name = `${randomId()}-slider`,
+  value,
   defaultValue,
   min = 0,
   max = 100,
@@ -17,11 +37,13 @@ export function Slider({
   instruction,
   errorMessage,
   hasTextbox = false,
+  unitLabel,
   disabled = false,
+  onChange,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number>(
-    defaultValue ?? 0
+    value ?? defaultValue ?? 0
   )
 
   React.useLayoutEffect(() => {
@@ -34,9 +56,14 @@ export function Slider({
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
+  React.useEffect(() => {
+    setSliderValue(Number(value))
+  }, [value])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setSliderValue(Number(value))
+    if (onChange) onChange(Number(value))
   }
 
   return (
@@ -48,7 +75,7 @@ export function Slider({
             {instruction && <p>{instruction}</p>}
           </div>
           {hasTextbox && (
-            <div className="form-group">
+            <InputWrapper unitLabel={unitLabel}>
               <input
                 type="number"
                 value={sliderValue}
@@ -58,8 +85,7 @@ export function Slider({
                 disabled={disabled}
                 onChange={handleChange}
               />
-              <span className="form-info"></span>
-            </div>
+            </InputWrapper>
           )}
         </div>
       )}

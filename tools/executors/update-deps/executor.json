@@ -1,9 +1,0 @@
-{
-  "executors": {
-    "update-deps": {
-      "implementation": "./impl",
-      "schema": "./schema.json",
-      "description": "Update package dependencies and use new version set by nx version target."
-    }
-  }
-}

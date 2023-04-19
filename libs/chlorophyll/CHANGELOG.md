@@ -2,6 +2,54 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.7.0...@sebgroup/chlorophyll@1.8.0) (2023-04-13)
+
+
+### Features
+
+* **in-page-wizard:** add markup examples for In-page wizard ([#823](https://github.com/sebgroup/green/issues/823)) ([816b086](https://github.com/sebgroup/green/commit/816b0862e1ec531819447c602d4b671900debaa2))
+* **slider:** add support for unit field ([#828](https://github.com/sebgroup/green/issues/828)) ([55c5f70](https://github.com/sebgroup/green/commit/55c5f70aa2716e526ad781d2a1b71803288e75a2))
+
+
+
+# [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.6.0...@sebgroup/chlorophyll@1.7.0) (2023-04-06)
+
+
+### Features
+
+* **spinner:** add a spinner component to chlorophyll ([#830](https://github.com/sebgroup/green/issues/830)) ([167ccb6](https://github.com/sebgroup/green/commit/167ccb6f35c90e409147747db4c18d61d27778b8))
+
+
+
+# [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.5.0...@sebgroup/chlorophyll@1.6.0) (2023-04-03)
+
+
+### Bug Fixes
+
+* 🐛 make static text fixed at the end of parent element ([#815](https://github.com/sebgroup/green/issues/815)) ([ab8118c](https://github.com/sebgroup/green/commit/ab8118c285edf43ee93b88107736cc365b7f38c1))
+
+
+### Features
+
+* add component filter-chip ([#808](https://github.com/sebgroup/green/issues/808)) ([edd7038](https://github.com/sebgroup/green/commit/edd7038292a732dfd8c03c52cc9cf423b9917461)), closes [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802) [#802](https://github.com/sebgroup/green/issues/802)
+
+
+
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.4.0...@sebgroup/chlorophyll@1.5.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* 🐛 fix validation border on active ([#811](https://github.com/sebgroup/green/issues/811)) ([bd8cc32](https://github.com/sebgroup/green/commit/bd8cc321e9c061afb912b284d81bfd82fff0f188))
+* 🐛 match form info color to feedback ([#806](https://github.com/sebgroup/green/issues/806)) ([4d52a1e](https://github.com/sebgroup/green/commit/4d52a1e2b8729b8a0b32dc484f98162a33c55162))
+
+
+### Features
+
+* 🎸 Add link variants: animated with arrow, icon on the left or right ([#797](https://github.com/sebgroup/green/issues/797)) ([02dfc85](https://github.com/sebgroup/green/commit/02dfc853e5a59a829299aab02a9be665a231fa9c)), closes [#787](https://github.com/sebgroup/green/issues/787) [#787](https://github.com/sebgroup/green/issues/787) [#787](https://github.com/sebgroup/green/issues/787)
+
+
+
 # [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.3.0...@sebgroup/chlorophyll@1.4.0) (2023-03-20)
 
 ### Bug Fixes

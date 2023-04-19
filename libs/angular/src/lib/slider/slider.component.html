@@ -3,21 +3,19 @@
     <label [attr.for]="name">{{ label }}</label>
     <p *ngIf="!!instruction">{{ instruction }}</p>
   </div>
-  <div *ngIf="hasTextbox" class="form-group">
-    <input
-      type="number"
-      [(ngModel)]="value"
-      [class.is-invalid]="!!errorMessage"
-      [attr.name]="name"
-      [attr.id]="name + '-textbox'"
-      [attr.placeholder]="placeholder"
-      [disabled]="disabled"
-      (blur)="onBlur()"
-      (input)="handleChange()"
-    />
-    <span *ngIf="!!errorMessage" class="form-info"></span>
-  </div>
+  <ng-container *ngIf="hasTextbox">
+    <ng-container *ngIf="!!unitLabel">
+      <div class="group group-border">
+        <ng-container *ngTemplateOutlet="inputField"></ng-container>
+        <span class="form-text">{{ unitLabel }}</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!unitLabel">
+      <ng-container *ngTemplateOutlet="inputField"></ng-container>
+    </ng-container>
+  </ng-container>
 </div>
+
 <input
   type="range"
   [attr.id]="name"
@@ -31,6 +29,21 @@
   (blur)="onBlur()"
   (input)="handleChange()"
 />
+
 <p *ngIf="!!errorMessage" class="gds-slider-error-info">
   {{ errorMessage }}
 </p>
+
+<ng-template #inputField>
+  <input
+    type="number"
+    [(ngModel)]="value"
+    [class.is-invalid]="!!errorMessage"
+    [attr.name]="name"
+    [attr.id]="name + '-textbox'"
+    [attr.placeholder]="placeholder"
+    [disabled]="disabled"
+    (blur)="onBlur()"
+    (input)="handleChange()"
+  />
+</ng-template>

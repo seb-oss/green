@@ -38,6 +38,7 @@
       "application": {
         "style": "none",
         "linter": "eslint",
+        "bundler": "vite",
         "babel": true
       },
       "component": {
@@ -69,6 +70,12 @@
     },
     "build-nx-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+    },
+    "version-and-release": {
+      "dependsOn": ["^version-and-release"]
+    },
+    "update-deps-and-release": {
+      "dependsOn": ["^update-deps-and-release"]
     }
   },
   "namedInputs": {

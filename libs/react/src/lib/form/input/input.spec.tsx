@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+import React, { useState } from 'react'
 import {
   Checkbox,
   EmailInput,
@@ -7,6 +8,7 @@ import {
   TextInput,
   RadioButton,
 } from './input'
+import userEvent from '@testing-library/user-event'
 
 describe('Inputs', () => {
   describe('Checkbox', () => {
@@ -125,16 +127,98 @@ describe('Inputs', () => {
       expect(screen.getByLabelText('Input')).toHaveValue('Hello')
     })
 
-    it('Should fire onChangeInput', () => {
+    it('Should fire onChangeInput', async () => {
+      const user = userEvent.setup()
       const mockFn: jest.Mock = jest
         .fn()
         .mockImplementation((value: string) => value)
-      render(<TextInput placeholder="text field" onChangeInput={mockFn} />)
-      fireEvent.change(screen.getByPlaceholderText('text field'), {
-        target: { value: 'cat' },
-      })
+
+      render(
+        <TextInput
+          placeholder="text field"
+          testId={'text-input'}
+          onChangeInput={mockFn}
+        />
+      )
+
+      const inputElement = await screen.findByTestId('text-input')
+      await act(async () => user.click(inputElement))
+      await act(async () => user.keyboard('cat'))
+
       expect(mockFn).toBeCalled()
       expect(mockFn).lastReturnedWith('cat')
+    })
+
+    it('Should fire onChange', async () => {
+      const user = userEvent.setup()
+
+      const mockFn: jest.Mock = jest
+        .fn()
+        .mockImplementation((value: string) => value)
+
+      render(<TextInput testId="text-input" onChange={mockFn} />)
+      const inputElement = await screen.findByTestId('text-input')
+
+      await act(async () => user.click(inputElement))
+      await act(async () => user.keyboard('GDS'))
+
+      expect(mockFn).toBeCalledTimes(3)
+    })
+
+    it('Should be controlled with value prop', async () => {
+      const user = userEvent.setup()
+
+      const mockFn = jest.fn()
+
+      const { rerender } = render(
+        <TextInput
+          testId="text-input"
+          value={'12345'}
+          onChange={(e) => {
+            mockFn(e.currentTarget.value)
+          }}
+        />
+      )
+      const inputElement = (await screen.findByTestId(
+        'text-input'
+      )) as HTMLInputElement
+
+      expect(inputElement.value).toEqual('12345')
+
+      await user.click(inputElement)
+      await user.keyboard('GDS')
+      expect(mockFn).toHaveBeenCalledTimes(3)
+      expect(mockFn).toHaveBeenNthCalledWith(1, '12345G')
+      expect(mockFn).toHaveBeenNthCalledWith(2, '12345D')
+      expect(mockFn).toHaveBeenNthCalledWith(3, '12345S')
+      await rerender(<TextInput testId="text-input" value={'54321'} />)
+      expect(inputElement.value).toEqual('54321')
+    })
+
+    it('value can be changed to empty string', async () => {
+      const user = userEvent.setup()
+
+      const mockFn = jest.fn()
+
+      const { rerender } = render(
+        <TextInput
+          testId="text-input"
+          value={'12345'}
+          onChange={(e) => {
+            mockFn(e.currentTarget.value)
+          }}
+        />
+      )
+
+      const inputElement = (await screen.findByTestId(
+        'text-input'
+      )) as HTMLInputElement
+
+      expect(inputElement.value).toEqual('12345')
+
+      await rerender(<TextInput testId="text-input" value={''} />)
+
+      expect(inputElement.value).toEqual('')
     })
 
     it('resets correctly', async () => {

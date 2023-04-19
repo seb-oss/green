@@ -1,0 +1,25 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = ({}) => {
+  return `
+    <span class="gds-spinner"></span>`
+}
+
+<Meta
+  title="Components/Spinner"
+  parameters={{
+    componentIds: ['component-spinners']
+  }}
+/>
+
+# Spinner
+
+Spinners communicate to the user that their action is being processed, without telling them what is happening in the back end.
+
+<Canvas>
+<Story
+  name="Spinner"
+>
+  {Template.bind({})}
+</Story>
+</Canvas>

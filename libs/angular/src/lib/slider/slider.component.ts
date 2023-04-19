@@ -43,10 +43,13 @@ export class NggSliderComponent
   @Input() placeholder = ''
   @Input() errorMessage = ''
   @Input() hasTextbox = false
+  @Input() unitLabel = 'kr'
   @Input() disabled = false
   @Input() value = 0
+
   @Output() sliderChange = new EventEmitter<number>()
   @Output() sliderTouch = new EventEmitter<boolean>()
+
   onChangeFn?: (val: number) => void
   onTouchedFn?: VoidFunction
   style: SliderStyle = {}
