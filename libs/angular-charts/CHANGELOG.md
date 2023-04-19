@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.1.1...@sebgroup/green-angular-charts@1.1.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* **angular:** downgrade base version of Angular to 14.3.0 ([#851](https://github.com/sebgroup/green/issues/851)) ([44b3819](https://github.com/sebgroup/green/commit/44b3819d847f1b255f1fc103fad0c31e3c99bcd0))
+
+
+
 ## [1.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.1.0...@sebgroup/green-angular-charts@1.1.1) (2023-04-03)
 
 
