@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
