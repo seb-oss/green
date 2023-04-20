@@ -4,9 +4,21 @@ import { Meta } from '@storybook/addon-docs'
 
 # Install
 
+If you are using the latest version of Angular, you can simply install `@sebgroup/green-angular` like this:
+
 ```
 npm install @sebgroup/green-angular --save
 ```
+
+However, because `@sebgroup/green-angular` has a peer dependency to `@angular/cdk`, and Angular is very picky about which versions go together, if you use an older version of Angular you need to explicitly install the matching version of `@angular/cdk` as well.
+
+For example, for Angular 14:
+
+```
+npm install @angular/cdk@~14.0.0 @sebgroup/green-angular --save
+```
+
+Currently, our aim is to support the LTS version of Angular as well as the current latest version.
 
 # Import module
 

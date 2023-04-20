@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.5.0...@sebgroup/green-react@1.6.0) (2023-04-19)
+
+
+### Bug Fixes
+
+* **TextInput:** remove redundant state hooks ([#845](https://github.com/sebgroup/green/issues/845)) ([d1b36ce](https://github.com/sebgroup/green/commit/d1b36ce2e1929fc4c9d59cc301fd8a9381a38066))
+
+
+### Features
+
+* **slider:** add value prop ([#848](https://github.com/sebgroup/green/issues/848)) ([d0087b1](https://github.com/sebgroup/green/commit/d0087b1d3f027486770420c0c7d5dc4385e2b279))
+
+
+
 # [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.4.0...@sebgroup/green-react@1.5.0) (2023-04-13)
 
 
