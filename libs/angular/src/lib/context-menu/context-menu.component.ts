@@ -15,8 +15,9 @@ import { DropdownOption } from '@sebgroup/extract'
   templateUrl: './context-menu.component.html',
 })
 export class NggContextMenuComponent {
+  @Input() direction: 'ltr' | 'rtl' = 'ltr'
   @Input() menuItems: DropdownOption[] = []
-  @Input() menuItemTemplate: TemplateRef<any> | null = null
+  @Input() menuItemTemplate: TemplateRef<unknown> | null = null
 
   @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
     new EventEmitter<DropdownOption>()
@@ -43,20 +44,16 @@ export class NggContextMenuComponent {
   }
 
   open(event: MouseEvent): void {
-    const button = event.target as HTMLElement
-    const popover = this.popover?.nativeElement as HTMLElement
+    if (this.isActive) {
+      this.close()
+      return
+    }
 
+    const button = this.getButtonElement(event)
     const buttonRect = button.getBoundingClientRect()
-    console.log(popover?.offsetWidth)
-    const popoverWidth = popover?.offsetWidth || 0
-    const screenRight = window.innerWidth
-    const buttonRight = buttonRect.left + buttonRect.width
 
-    const left = buttonRight
-    // buttonRight + popoverWidth <= screenRight
-    //   ? buttonRight
-    //   : buttonRect.left - popoverWidth
-    const top = buttonRect.top + window.pageYOffset
+    const left = this.calculateLeft(this.direction, buttonRect)
+    const top = this.calculateTop(buttonRect.bottom)
 
     this.left = `${left}px`
     this.top = `${top}px`
@@ -84,5 +81,36 @@ export class NggContextMenuComponent {
       default:
         break
     }
+  }
+
+  calculateTop(buttonRectBottom: number): number {
+    console.log('buttonRectBottom', buttonRectBottom)
+    console.log('window.pageYOffset', window.pageYOffset)
+    return buttonRectBottom + window.pageYOffset
+  }
+
+  calculateLeft(direction: string, buttonRect: DOMRect): number {
+    const popover = this.popover?.nativeElement as HTMLElement
+    const popoverWidth = popover?.offsetWidth || 0
+
+    switch (direction) {
+      case 'rtl':
+        return popoverWidth <= buttonRect.left
+          ? buttonRect.right - popoverWidth
+          : buttonRect.left
+      case 'ltr':
+      default:
+        return buttonRect.right + popoverWidth <= window.innerWidth
+          ? buttonRect.left
+          : buttonRect.right - popoverWidth
+    }
+  }
+
+  getButtonElement(event: MouseEvent): HTMLElement {
+    const element = event.target as HTMLElement
+    if (element instanceof HTMLButtonElement) {
+      return element
+    }
+    return element.parentNode as HTMLElement
   }
 }

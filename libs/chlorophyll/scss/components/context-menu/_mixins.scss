@@ -10,12 +10,13 @@ $font-weight: tokens.$font-weight-bold;
   @include common.add-focus('');
 
   box-shadow: $box-shadow;
-  //display: inline-block;
-  min-width: 10rem;
+  max-width: 10rem;
   right: 0;
 }
 
 @mixin add-select-context-menu {
+  overflow-y: unset;
+
   [role='option'] {
     $grey-200: tokens.get(tokens.$grey, 200);
 
@@ -25,6 +26,11 @@ $font-weight: tokens.$font-weight-bold;
     @include common.add-active-focus-state($grey-200);
     line-height: 1.25;
     cursor: pointer;
+  }
+
+  [role='option']:hover,
+  [role='option']:focus {
+    font-weight: $font-weight;
   }
 }
 
@@ -39,15 +45,13 @@ $font-weight: tokens.$font-weight-bold;
       no-repeat;
   }
 
-  li:hover {
+  li:hover,
+  li:focus {
     display: flex;
     justify-content: space-between;
     .selected-icon {
       opacity: 1;
       align-self: center;
-    }
-    span {
-      font-weight: $font-weight;
     }
   }
 }

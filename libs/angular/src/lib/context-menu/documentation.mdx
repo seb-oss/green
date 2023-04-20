@@ -33,15 +33,16 @@ export class AppModule {}
 
 ### Inputs
 
-| Input (attribute) | Description                             | Default |
-| :---------------- | :-------------------------------------- | :------ |
-| menuItemTemplate  | Template to user for context menu item. | default |
+| Input (attribute) | Description                                    | Default |
+| :---------------- | :--------------------------------------------- | :------ |
+| direction         | Which side to open the menu to 'ltr' or 'rtl'. | ltr     |
+| menuItemTemplate  | Template to user for context menu item.        | default |
+| menuItems         | Uses DropdownOption interface                  | default |
 
-MenuItems use DropdownItem interface
-| Input (attribute) | Description | Default |
+| Input (attribute) | Description                                                          | Default |
 | :---------------- | :------------------------------------------------------------------- | :------ |
-| label | Which key to use as value. | `value` |
-| value | Which key to use as display value when selected and in options list. | `label` |
+| label             | Which key to use as value.                                           | `value` |
+| value             | Which key to use as display value when selected and in options list. | `label` |
 
 ### Outputs
 
@@ -51,8 +52,32 @@ MenuItems use DropdownItem interface
 
 ## Examples
 
-### Default
+Basic use case:
+
+### Markup
+
+```html
+<ngg-context-menu
+  [direction]="rtl"
+  [menuItems]="menuItems"
+  (itemClicked)="onItemClick($event)"
+></ngg-context-menu>
+```
+
+## Default
 
 <Canvas>
-  <Story id="components-slider--default" />
+  <Story id="components-context-menu--default" />
+</Canvas>
+
+## Right to left
+
+<Canvas>
+  <Story id="components-context-menu--right-to-left" />
+</Canvas>
+
+## Custom template
+
+<Canvas>
+  <Story id="components-context-menu--custom-template-default" />
 </Canvas>
