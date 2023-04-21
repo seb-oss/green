@@ -84,8 +84,6 @@ export class NggContextMenuComponent {
   }
 
   calculateTop(buttonRectBottom: number): number {
-    console.log('buttonRectBottom', buttonRectBottom)
-    console.log('window.pageYOffset', window.pageYOffset)
     return buttonRectBottom + window.pageYOffset
   }
 

@@ -1,16 +1,27 @@
 @use 'mixins';
-
+@use '../../common';
 @use '../../components/popover';
 
 .popover-context-menu {
-  @include mixins.add-context-menu();
+  @include common.media-breakpoint-up('sm') {
+    @include mixins.add-context-menu();
+  }
 
   ul[role='listbox'] {
     @include mixins.add-select-context-menu();
     @include mixins.add-selected-icon();
   }
+
+  //TODO Improve design for mobile
+  @include common.media-breakpoint-down('sm') {
+    top: unset !important;
+    left: 0 !important;
+    @include common.add-border-radius();
+  }
 }
 
-.popover {
-  border: none;
+@include common.media-breakpoint-up('sm') {
+  .popover {
+    border: none;
+  }
 }
