@@ -15,7 +15,7 @@ module.exports = {
     '@storybook/addon-links',
 
     '@storybook/addon-a11y',
-  //  'storybook-dark-mode',
+    'storybook-dark-mode',
     path.resolve('./.storybook/addons/run-in-iframe/run-in-iframe-preset.js'),
     path.resolve('./.storybook/addons/designlibrary/generate-json-preset.js'),
     {
