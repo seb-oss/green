@@ -62,9 +62,15 @@ const CustomTemplate: Story<NggContextMenuComponent> = (
   component: NggContextMenuComponent,
   props: args,
   template: `
-    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [menuItemTemplate]="menuItemTemplate">
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [menuItemTemplate]="menuItemTemplate" [menuAnchorTemplate]="menuAnchorTemplate">
     </ngg-context-menu>
 
+    <ng-template #menuAnchorTemplate>
+      <div> 
+        <span>Click me!</span>
+      </div>
+    </ng-template>
+  
     <ng-template #menuItemTemplate let-menuItem>
       <div>
         <div>{{ menuItem.value }}</div>

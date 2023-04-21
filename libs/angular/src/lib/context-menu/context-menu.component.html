@@ -1,5 +1,8 @@
-<button class="ghost small" (click)="open($event)">
-  <i class="sg-icon sg-icon-ellipsis">Open context menu</i>
+<button #contextMenuAnchor class="ghost small" (click)="open()">
+  <ng-container
+    [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
+  >
+  </ng-container>
 </button>
 
 <div
@@ -11,21 +14,26 @@
 >
   <ul role="listbox">
     <li
-      *ngFor="let menuItem of menuItems; let i = index"
+      *ngFor="let menuItem of menuItems"
       (click)="onItemClick(menuItem)"
       role="option"
-      (keydown)="onMenuItemKeyDown($event, i)"
+      tabindex="0"
+      (keydown)="onMenuItemKeyDown($event, menuItem)"
     >
-      <ng-container *ngIf="menuItemTemplate; else defaultTemplate">
-        <ng-container
-          [ngTemplateOutlet]="menuItemTemplate"
-          [ngTemplateOutletContext]="{ $implicit: menuItem }"
-        ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: menuItem }"
+      >
       </ng-container>
-      <ng-template #defaultTemplate>
-        <span>{{ menuItem.label }}</span
-        ><i class="selected-icon"></i>
-      </ng-template>
     </li>
   </ul>
 </div>
+
+<ng-template #defaultMenuItemTemplate let-menuItem>
+  <span>{{ menuItem.label }}</span
+  ><i class="selected-icon"></i>
+</ng-template>
+
+<ng-template #defaultButtonTemplate>
+  <i class="sg-icon sg-icon-ellipsis">Open context menu</i>
+</ng-template>

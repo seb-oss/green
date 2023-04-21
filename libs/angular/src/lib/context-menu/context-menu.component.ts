@@ -18,39 +18,41 @@ export class NggContextMenuComponent {
   @Input() direction: 'ltr' | 'rtl' = 'ltr'
   @Input() menuItems: DropdownOption[] = []
   @Input() menuItemTemplate: TemplateRef<unknown> | null = null
+  @Input() menuAnchorTemplate: TemplateRef<unknown> | null = null
 
   @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
     new EventEmitter<DropdownOption>()
 
-  @ViewChild('contextMenuPopover', { static: false }) popover:
-    | ElementRef
-    | undefined
+  @ViewChild('contextMenuPopover') popover: ElementRef | undefined
+
+  @ViewChild('contextMenuAnchor') anchor: ElementRef | undefined
+
   isActive = false
   top = '0px'
   left = '0px'
 
   constructor(private elementRef: ElementRef) {}
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
+  @HostListener('document:click', ['$event.target'])
+  onDocumentClick(target: HTMLElement): void {
     if (!this.isActive) {
       return
     }
-    const targetElement = event.target as HTMLElement
     const contextMenuElement = this.elementRef.nativeElement as HTMLElement
-    if (!contextMenuElement.contains(targetElement)) {
+
+    if (!contextMenuElement.contains(target)) {
       this.close()
     }
   }
 
-  open(event: MouseEvent): void {
+  open(): void {
     if (this.isActive) {
       this.close()
       return
     }
 
-    const button = this.getButtonElement(event)
-    const buttonRect = button.getBoundingClientRect()
+    const anchor = this.anchor?.nativeElement as HTMLElement
+    const buttonRect = anchor.getBoundingClientRect()
 
     const left = this.calculateLeft(this.direction, buttonRect)
     const top = this.calculateTop(buttonRect.bottom)
@@ -69,14 +71,12 @@ export class NggContextMenuComponent {
     this.close()
   }
 
-  onMenuItemKeyDown(event: KeyboardEvent, index: number): void {
+  onMenuItemKeyDown(event: KeyboardEvent, menuItem: DropdownOption): void {
     switch (event.key) {
       case 'Enter':
       case ' ':
         event.preventDefault()
-        if (index >= 0 && index < this.menuItems.length) {
-          this.onItemClick(this.menuItems[index])
-        }
+        this.onItemClick(menuItem)
         break
       default:
         break
@@ -102,13 +102,5 @@ export class NggContextMenuComponent {
           ? buttonRect.left
           : buttonRect.right - popoverWidth
     }
-  }
-
-  getButtonElement(event: MouseEvent): HTMLElement {
-    const element = event.target as HTMLElement
-    if (element instanceof HTMLButtonElement) {
-      return element
-    }
-    return element.parentNode as HTMLElement
   }
 }
