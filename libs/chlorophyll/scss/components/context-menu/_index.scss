@@ -20,6 +20,10 @@
   }
 }
 
+.small {
+  padding: 0.4375rem 0.5rem !important;
+}
+
 @include common.media-breakpoint-up('sm') {
   .popover {
     border: none;

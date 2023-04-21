@@ -55,4 +55,8 @@ $_icons: (
     transition: transform 0.3s ease-in;
     width: 12px;
   }
+
+  &.sg-icon-ellipsis::before {
+    margin-right: -2px;
+  }
 }
