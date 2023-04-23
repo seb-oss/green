@@ -5,7 +5,7 @@ import * as React from 'react'
 
 import styles from './stem.styles.scss'
 
-@customElement('stem-popover')
+@customElement('gds-popover')
 export class Popover extends LitElement {
   static styles = css`
     // TODO: Figure out how to load scss here
@@ -14,7 +14,7 @@ export class Popover extends LitElement {
   open = false
 
   static properties = {
-    open: { type: String, reflect: true },
+    open: { type: Boolean, reflect: true },
   }
 
   render() {
@@ -30,7 +30,7 @@ export class Popover extends LitElement {
 }
 
 export const PopoverReact = createComponent({
-  tagName: 'stem-popover',
+  tagName: 'gds-popover',
   elementClass: Popover,
   react: React,
 })

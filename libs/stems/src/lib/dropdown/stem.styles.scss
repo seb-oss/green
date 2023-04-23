@@ -1,0 +1,9 @@
+@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+
+button {
+  @include button.reset();
+  @include button.base();
+  @include button.secondary();
+  @include dropdown.dropdown-trigger();
+}
