@@ -1,1 +1,1 @@
-export * from './lib/stems'
+export * from './stems/stems'

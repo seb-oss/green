@@ -17,6 +17,13 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "!/*": ["src/atoms/*"],
+      "@/*": ["src/stems/*"],
+      "#/*": ["src/tools/*"],
+      "$/*": ["src/tokens/*"]
+    },
   }
 }
