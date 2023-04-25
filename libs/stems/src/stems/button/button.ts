@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 
-import styles from './stem.styles.scss'
+import styles from '@/button/stem.styles.scss'
 
 @customElement('gds-button')
 export class Button extends LitElement {

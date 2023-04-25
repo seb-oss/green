@@ -6,8 +6,8 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
-import { Listbox, ListboxItem } from '../listbox/listbox'
-import '../popover/popover'
+import { Listbox, ListboxItem } from '../listbox'
+import '../popover'
 
 import styles from './stem.styles.scss'
 
