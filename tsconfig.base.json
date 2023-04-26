@@ -23,7 +23,11 @@
       "@sebgroup/green-react": ["libs/react/src/index.ts"],
       "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],
       "@sebgroup/repo-tools": ["libs/repo-tools/src/index.ts"],
-      "@sebgroup/stems": ["libs/stems/src/index.ts"]
+      "@sebgroup/stems": ["libs/stems/src/index.ts"],
+      "!/*": ["libs/stems/src/atoms/*"],
+      "@/*": ["libs/stems/src/stems/*"],
+      "#/*": ["libs/stems/src/tools/*"],
+      "$/*": ["libs/stems/src/tokens/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
