@@ -1,5 +1,6 @@
 <section
   class="gds-in-page-wizard-step-card card"
+  data-testid="in-page-wizard-step-card-root"
   [class.active]="!!isActive"
   [class.completed]="!!isCompleted"
 >
@@ -12,10 +13,16 @@
         />
       </svg>
     </div>
-    <div class="gds-in-page-wizard-step-card__header__progress">
+    <div
+      class="gds-in-page-wizard-step-card__header__progress"
+      data-testid="in-page-wizard-step-card-step-text"
+    >
       {{ stepText }}
     </div>
-    <div class="gds-in-page-wizard-step-card__header__title">
+    <div
+      class="gds-in-page-wizard-step-card__header__title"
+      data-testid="in-page-wizard-step-card-title"
+    >
       <h2 class="h4">{{ title }}</h2>
     </div>
 
@@ -23,7 +30,11 @@
       class="gds-in-page-wizard-step-card__header__edit"
       *ngIf="!!isCompleted && !isActive"
     >
-      <button class="secondary small" (click)="toggleActive()">
+      <button
+        class="secondary small"
+        (click)="toggleActive()"
+        data-testid="in-page-wizard-step-card-edit-btn"
+      >
         {{ editBtnText }}
       </button>
     </div>
@@ -32,6 +43,7 @@
   <div
     class="gds-in-page-wizard-step-card__content"
     *ngIf="!!isActive || !!isCompleted"
+    data-testid="in-page-wizard-step-card-content"
   >
     <ng-content></ng-content>
   </div>
@@ -40,6 +52,7 @@
       class="primary"
       [disabled]="disableNext"
       (click)="handleOnNextBtnClick($event)"
+      data-testid="in-page-wizard-step-card-next-btn"
     >
       {{ nextBtnText }}
     </button>
