@@ -1,7 +1,49 @@
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
+// @include button.reset();
+// @include button.base();
+// @include button.secondary();
 
 button {
-  @include button.reset();
-  @include button.base();
-  @include button.secondary();
+  align-items: center;
+  background-color: hsl(0, 0%, 100%);
+  block-size: 100%;
+  border: 1px solid hsl(0, 0%, 0%);
+  border-radius: 200px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+  inline-size: max-content;
+  justify-content: space-between;
+  justify-items: center;
+  padding-block: 12px;
+  padding-inline: 16px;
+}
+
+/* experimental */
+
+::slotted(svg) {
+  height: 12px;
+  width: 12px;
+}
+
+:host([positive]) button {
+  background-color: hsl(120, 100%, 25%);
+}
+
+:host([destructive]) button {
+  background-color: hsl(348, 83%, 47%);
+}
+
+:host([secondary]) button {
+  background-color: hsl(180, 100%, 25%);
+}
+
+:host([tertiary]) button {
+  background-color: hsl(39, 100%, 50%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :host([dark-mode]) button {
+    background-color: hsl(180, 100%, 50%);
+  }
 }
