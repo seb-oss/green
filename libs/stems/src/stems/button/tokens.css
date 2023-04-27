@@ -3,6 +3,7 @@
   --color-hover: #fff;
   --transition: 0;
   --transparency: 0.5;
+  --backdrop-blur: 20px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,5 +33,13 @@
 @media (prefers-contrast: more) {
   :root {
     --color: #000;
+  }
+}
+
+/* Features with less support */
+
+@supports (backdrop-filter: blur(20px)) {
+  [blur] {
+    backdrop-filter: var(--backdrop-blur);
   }
 }
