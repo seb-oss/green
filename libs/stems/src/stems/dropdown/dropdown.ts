@@ -6,8 +6,8 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
-import { Listbox, ListboxItem } from '../listbox'
-import '../popover'
+import { Listbox, ListboxItem } from '../listbox/listbox'
+import '../popover/popover'
 
 import styles from './stem.styles.scss'
 
@@ -30,7 +30,10 @@ class GdsElement extends LitElement {
    *  console.log('DOM changed')
    * }
    */
-  protected mutationCallback() {}
+  protected mutationCallback() {
+    console.log('DOM changed');
+    
+  }
 
   /**
    * @param elementName The name of the element to map
