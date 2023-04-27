@@ -47,3 +47,23 @@ button {
     background-color: hsl(180, 100%, 50%);
   }
 }
+/* Blur */
+@supports (backdrop-filter: blur(20px)) {
+  :host([blur]) button {
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* Container */
+
+@supports (container: button / normal) {
+  button {
+    container: button / normal;
+  }
+
+  @container button (min-width: 138px) {
+    button {
+      padding-inline: 24px;
+    }
+  }
+}
