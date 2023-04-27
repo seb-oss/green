@@ -78,6 +78,23 @@ button {
   }
 }
 
+/* 
+  Isolation 
+  The isolation CSS property determines whether an element must create a new stacking context.
+*/
+@supports (isolation: isolate) {
+  button {
+    isolation: isolate;
+  }
+}
+
+/* Inset */
+@supports (inset: 0) {
+  button {
+    inset: 0;
+  }
+}
+
 /* Blur */
 @supports (backdrop-filter: blur(20px)) {
   :host([blur]) button {
@@ -96,5 +113,15 @@ button {
     button {
       padding-inline: 24px;
     }
+  }
+}
+
+/* 
+  Animate display none 
+  This functionality will animate display none to display block
+*/
+@supports (transition: display 0.2s) {
+  button {
+    transition: display 0.2s;
   }
 }

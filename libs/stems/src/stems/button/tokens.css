@@ -18,6 +18,12 @@
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --transition: 0;
+  }
+}
+
 @media (hover: hover) {
   :root {
     --color-hover: #eee;
