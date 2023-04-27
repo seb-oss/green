@@ -2,6 +2,7 @@
 // @include button.reset();
 // @include button.base();
 // @include button.secondary();
+@layer base, state, special;
 
 button {
   align-items: center;
@@ -42,11 +43,41 @@ button {
   background-color: hsl(39, 100%, 50%);
 }
 
+/* @layers */
+@supports (color: revert-layer) {
+  @layer base {
+    button {
+      color: hsl(0, 100%, 50%);
+    }
+  }
+
+  @layer special {
+    button {
+      color: revert-layer;
+    }
+  }
+
+  @layer state {
+    button {
+      color: hsl(0, 0%, 0%);
+    }
+  }
+}
+
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :host([dark-mode]) button {
     background-color: hsl(180, 100%, 50%);
   }
 }
+
+/* Contain */
+@media (contain: style) {
+  button {
+    contain: layout;
+  }
+}
+
 /* Blur */
 @supports (backdrop-filter: blur(20px)) {
   :host([blur]) button {
