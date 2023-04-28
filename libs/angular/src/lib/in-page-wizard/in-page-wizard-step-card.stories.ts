@@ -1,6 +1,6 @@
 import { moduleMetadata, Meta, Story } from '@storybook/angular'
 
-import { NggInPageWizardStepCardModule } from './in-page-wizard-step-card.module'
+import { NggInPageWizardModule } from './in-page-wizard.module'
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
 import Documentation from './documentation.mdx'
 
@@ -9,7 +9,7 @@ export default {
   component: NggInPageWizardStepCardComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggInPageWizardStepCardModule],
+      imports: [NggInPageWizardModule],
     }),
   ],
   argTypes: {},
@@ -40,7 +40,7 @@ const Template: Story<NggInPageWizardStepCardComponent> = (
       <h4 class="fs-1">Sub title</h4>
       <p class="mb-5">Sub section text</p>
     </div>
-    </ngg-in-page-wizard-step-card>    
+    </ngg-in-page-wizard-step-card>
   `,
     props: {
       ...args,
@@ -85,7 +85,7 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="textInput" type="text" />
     </div>
-  </ngg-in-page-wizard-step-card>    
+  </ngg-in-page-wizard-step-card>
   <ngg-in-page-wizard-step-card
   stepText="Step 2 of 3"
   title="Step 2 active"
@@ -101,7 +101,7 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="textInput" type="text" />
     </div>
-  </ngg-in-page-wizard-step-card>  
+  </ngg-in-page-wizard-step-card>
    <ngg-in-page-wizard-step-card
   stepText="Step 3 of 3"
   title="Step 3 upcoming"
@@ -117,8 +117,8 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
       <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
       <input id="textInput" type="text" />
     </div>
-  </ngg-in-page-wizard-step-card>  
-  
+  </ngg-in-page-wizard-step-card>
+
   `,
     props: {
       ...args,

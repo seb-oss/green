@@ -8,4 +8,4 @@ import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.com
   imports: [CommonModule],
   exports: [NggInPageWizardStepCardComponent],
 })
-export class NggInPageWizardStepCardModule {}
+export class NggInPageWizardModule {}
