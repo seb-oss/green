@@ -4,20 +4,47 @@
 // @include button.secondary();
 @layer base, state, special;
 
+// @import url('./tokens.css');
+
+:host {
+  --gds-button-transition: var(--gds-sys-transition);
+  --gds-button-bg: hsl(60, 4%, 20%);
+  --gds-button-color: hsl(0, 0%, 100%);
+  --gds-button-border-radius: var(--gds-sys-border-radius);
+  --gds-button-border-width: var(--gds-sys-border-width);
+  --gds-button-border-color: var(--gds-sys-border-color);
+  --gds-button-border-style: var(--gds-sys-border-style);
+  --gds-button-padding-inline: var(--gds-sys-padding-inline);
+  --gds-button-padding-block: var(--gds-sys-padding-block);
+  --gds-button-gap: var(--gds-sys-gap);
+}
+
 button {
   align-items: center;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--gds-button-bg);
   block-size: 100%;
-  border: 1px solid hsl(0, 0%, 0%);
-  border-radius: 200px;
+  border-color: var(--gds-button-border-color);
+  border-radius: var(--gds-button-border-radius);
+  border-style: var(--gds-button-border-style);
   box-sizing: border-box;
+  color: var(--gds-button-color);
+  cursor: pointer;
   display: flex;
-  gap: 8px;
+  gap: var(--gds-button-gap);
   inline-size: max-content;
   justify-content: space-between;
   justify-items: center;
-  padding-block: 12px;
-  padding-inline: 16px;
+  padding-block: var(--gds-button-padding-block);
+  padding-inline: var(--gds-button-padding-inline);
+  transition: var(--gds-button-transition);
+}
+
+@media (hover: hover) {
+  button {
+    &:hover {
+      background-color: hsl(0, 0%, 0%);
+    }
+  }
 }
 
 /* experimental */
@@ -120,8 +147,8 @@ button {
   Animate display none 
   This functionality will animate display none to display block
 */
-@supports (transition: display 0.2s) {
-  button {
-    transition: display 0.2s;
-  }
-}
+// @supports (transition: display 0.2s) {
+//   button {
+//     transition: display 0.2s;
+//   }
+// }

@@ -1,6 +1,9 @@
 svg:not([display='none']) {
+  contain: layout style;
   display: flex;
   height: 1lh;
+  isolation: isolate;
+  overflow: hidden;
   width: auto;
 }
 

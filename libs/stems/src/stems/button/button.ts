@@ -5,6 +5,7 @@ import { createComponent } from '@lit-labs/react'
 import '../icon/icon'
 
 import styles from './stem.styles.scss'
+import './tokens.css'
 
 @customElement('gds-button')
 export class Button extends LitElement {

@@ -33,7 +33,7 @@ export class Icon extends LitElement {
           <line x1="5" y1="12" x2="19" y2="12" />
         </symbol>
       </svg>
-      <svg viewBox="0 0 24 24" width="24" height="24">
+      <svg viewBox="0 0 24 24">
         <use href="#${name}" ></use>
       </svg>
     `
