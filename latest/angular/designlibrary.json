@@ -115,6 +115,24 @@
     }
   },
   {
+    "id": "components-wizard-in-page-wizard-step-card--default",
+    "name": "Default",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {}
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--disable-next",
+    "name": "Disable Next",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {}
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--multiple",
+    "name": "Multiple",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {}
+  },
+  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
