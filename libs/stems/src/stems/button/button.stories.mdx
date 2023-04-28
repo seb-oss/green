@@ -1,40 +1,21 @@
 import { Button } from './button'
 import './button.stories.css'
+// import
 
 <Meta title="Components/Button" />
 
 # Button
 
-<svg display="none">
-  <symbol
-    id="plus"
-    stroke="currentColor"
-    strokeWidth="3"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-  >
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <line x1="5" y1="12" x2="19" y2="12" />
-  </symbol>
-</svg>
-
 <gds-main>
   <gds-buttons>
     <gds-row>
       <strong>Neutral Primary</strong>
-      <gds-button active>
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
+      <gds-button lead="plus" active>
         Click me!
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
       </gds-button>
-      <gds-button hover>Hover</gds-button>
+      <gds-button trail="plus" hover>
+        Hover
+      </gds-button>
       <gds-button disabled>Disabled</gds-button>
       <gds-button visited>Visited</gds-button>
       <gds-button focus>Focus</gds-button>
@@ -42,14 +23,8 @@ import './button.stories.css'
     </gds-row>
     <gds-row>
       <strong>Secondary</strong>
-      <gds-button secondary active>
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
+      <gds-button secondary active leadingIcon="plus">
         Click me!
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
       </gds-button>
       <gds-button secondary hover>
         Hover
@@ -70,13 +45,7 @@ import './button.stories.css'
     <gds-row>
       <strong>Tertiary</strong>
       <gds-button tertiary active>
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
         Click me!
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
       </gds-button>
       <gds-button tertiary hover>
         Hover
@@ -97,13 +66,7 @@ import './button.stories.css'
     <gds-row>
       <strong>Dark: Neutral</strong>
       <gds-button dark-mode active>
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
         Click me!
-        <svg viewBox="0 0 24 24">
-          <use href="#plus" />
-        </svg>
       </gds-button>
       <gds-button dark-mode hover>
         Hover

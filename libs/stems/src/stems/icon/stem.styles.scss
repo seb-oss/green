@@ -1,127 +1,14 @@
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
-// @include button.reset();
-// @include button.base();
-// @include button.secondary();
-@layer base, state, special;
-
-button {
-  align-items: center;
-  background-color: hsl(0, 0%, 100%);
-  block-size: 100%;
-  border: 1px solid hsl(0, 0%, 0%);
-  border-radius: 200px;
-  box-sizing: border-box;
+svg:not([display='none']) {
   display: flex;
-  gap: 8px;
-  inline-size: max-content;
-  justify-content: space-between;
-  justify-items: center;
-  padding-block: 12px;
-  padding-inline: 16px;
+  height: 1lh;
+  width: auto;
 }
 
-/* experimental */
-
-::slotted(svg) {
-  height: 12px;
-  width: 12px;
-}
-
-:host([positive]) button {
-  background-color: hsl(120, 100%, 25%);
-}
-
-:host([destructive]) button {
-  background-color: hsl(348, 83%, 47%);
-}
-
-:host([secondary]) button {
-  background-color: hsl(180, 100%, 25%);
-}
-
-:host([tertiary]) button {
-  background-color: hsl(39, 100%, 50%);
-}
-
-/* @layers */
-@supports (color: revert-layer) {
-  @layer base {
-    button {
-      color: hsl(0, 100%, 50%);
-    }
-  }
-
-  @layer special {
-    button {
-      color: revert-layer;
-    }
-  }
-
-  @layer state {
-    button {
-      color: hsl(0, 0%, 0%);
-    }
-  }
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :host([dark-mode]) button {
-    background-color: hsl(180, 100%, 50%);
-  }
-}
-
-/* Contain */
-@media (contain: style) {
-  button {
-    contain: layout;
-  }
-}
-
-/* 
-  Isolation 
-  The isolation CSS property determines whether an element must create a new stacking context.
-*/
-@supports (isolation: isolate) {
-  button {
-    isolation: isolate;
-  }
-}
-
-/* Inset */
-@supports (inset: 0) {
-  button {
-    inset: 0;
-  }
-}
-
-/* Blur */
-@supports (backdrop-filter: blur(20px)) {
-  :host([blur]) button {
-    backdrop-filter: blur(20px);
-  }
-}
-
-/* Container */
-
-@supports (container: button / normal) {
-  button {
-    container: button / normal;
-  }
-
-  @container button (min-width: 138px) {
-    button {
-      padding-inline: 24px;
-    }
-  }
-}
-
-/* 
-  Animate display none 
-  This functionality will animate display none to display block
-*/
-@supports (transition: display 0.2s) {
-  button {
-    transition: display 0.2s;
-  }
+symbol {
+  height: 24px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  width: 24px;
 }
