@@ -24,6 +24,9 @@ export default {
 const Template: Story<NggInPageWizardStepCardComponent> = (
   args: NggInPageWizardStepCardComponent
 ) => {
+  const noop = () => {
+    return
+  }
   return {
     template: `
     <ngg-in-page-wizard-step-card
@@ -34,16 +37,22 @@ const Template: Story<NggInPageWizardStepCardComponent> = (
       [isActive]="!!isActive"
       [isCompleted]="!!isCompleted"
       [disableNext]="!!disableNext"
-      (handleNextClick)="isCompleted = true"
+      (handleEditClick)="noop()"
+      (handleNextClick)="isCompleted = true;"
     >
-    <div>
-      <h4 class="fs-1">Sub title</h4>
-      <p class="mb-5">Sub section text</p>
+    <div *ngIf="!isCompleted">
+      <label for="textInput">Input label</label>
+      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+      <input id="textInput" type="text"/>
+    </div>
+    <div *ngIf="!!isCompleted">
+      <p class="mb-5">Input after completed</p>
     </div>
     </ngg-in-page-wizard-step-card>
   `,
     props: {
       ...args,
+      noop,
     },
   }
 }
@@ -79,6 +88,8 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
   [isCompleted]="true"
   [disableNext]="false"
   (handleNextClick)="noop()"
+  (handleEditClick)="noop()"
+
 >
   <div>
       <label for="textInput">Input label</label>
@@ -95,6 +106,7 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
   [isCompleted]="false"
   [disableNext]="false"
   (handleNextClick)="noop()"
+  (handleEditClick)="noop()"
 >
   <div>
       <label for="textInput">Input label</label>
@@ -111,6 +123,7 @@ const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
   [isCompleted]="false"
   [disableNext]="false"
   (handleNextClick)="noop()"
+  (handleEditClick)="noop()"
 >
   <div>
       <label for="textInput">Input label</label>
