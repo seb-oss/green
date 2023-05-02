@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.4.0...@sebgroup/green-angular@1.5.0) (2023-05-02)
+
+
+### Features
+
+* **wizard-step-card:** 🎸 Add handle edit click event emitter ([#856](https://github.com/sebgroup/green/issues/856)) ([dc21976](https://github.com/sebgroup/green/commit/dc219760024cb06f7d39a3189136ac7c51353b31))
+
+
+
 # [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.3.1...@sebgroup/green-angular@1.4.0) (2023-04-28)
 
 
