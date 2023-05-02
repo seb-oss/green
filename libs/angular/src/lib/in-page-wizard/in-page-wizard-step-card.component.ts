@@ -9,8 +9,10 @@ export class NggInPageWizardStepCardComponent {
   readonly handleNextClick: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>()
 
+  @Output()
   readonly handleEditClick: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>()
+
   @Input() public stepText = ''
 
   @Input() public title = ''
