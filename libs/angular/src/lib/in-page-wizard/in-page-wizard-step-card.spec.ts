@@ -167,6 +167,12 @@ describe('InPageWizardStepCardComponent', () => {
       expect(component.isCompleted).toBeTruthy()
       expect(component.isActive).toBeFalsy()
 
+      let eventEmitted = false
+
+      component.handleEditClick.subscribe(() => {
+        eventEmitted = true
+      })
+
       // Act
       fireEvent.click(editBtn)
 
@@ -176,6 +182,7 @@ describe('InPageWizardStepCardComponent', () => {
         expect(
           fakeComponent.queryByTestId('in-page-wizard-step-card-edit-btn')
         ).toBeNull()
+        expect(eventEmitted).toEqual(true)
       })
     })
   })
