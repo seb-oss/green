@@ -18,6 +18,7 @@ export default {
       page: Documentation,
     },
     controls: { isActive: true, isCompleted: true, disableNext: false },
+    componentIds: ['component-inpagewizard'],
   },
 } as Meta<NggInPageWizardStepCardComponent>
 
