@@ -22,7 +22,14 @@
     [class.is-valid]="valid"
     [class.is-invalid]="invalid"
   >
-    <span>{{ dropdown?.texts?.select }}</span>
+    <ng-container
+      *ngTemplateOutlet="
+        customButton?.templateRef && !multiSelect && selectedOption
+          ? customButton!.templateRef
+          : defaultButton;
+        context: { option: selectedOption }
+      "
+    ></ng-container>
   </button>
   <span
     class="form-info"
@@ -117,6 +124,10 @@
     </div>
   </div>
 </div>
+
+<ng-template #defaultButton let-selected="selected">
+  <span>{{ dropdown?.texts?.select }}</span>
+</ng-template>
 
 <ng-template #defaultOption let-option="option">
   {{ option[dropdown!.display] }}
