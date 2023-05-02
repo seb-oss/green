@@ -104,7 +104,9 @@ describe('Dropdown', () => {
       it('sets toggler text', async () => {
         fireEvent.click(options[1])
         await waitFor(() =>
-          expect(toggleButton.innerHTML.trim()).toEqual('<span>B</span>')
+          expect(
+            toggleButton.innerHTML.trim().replace(/<!--[\s\S]*?-->/g, '')
+          ).toEqual('<span>B</span>')
         )
       })
     })
