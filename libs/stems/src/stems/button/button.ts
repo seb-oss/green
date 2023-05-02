@@ -4,8 +4,8 @@ import { customElement, property, state } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import '../icon/icon'
 
-import styles from './stem.styles.scss'
-import './tokens.css'
+import styles from './style/button.styles.scss'
+import './style/button.tokens.css'
 
 const sets = [
   'positive',
@@ -60,10 +60,10 @@ export class Button extends LitElement {
       ariaPressed: { type: Boolean, reflect: true, attribute: 'aria-pressed' },
       ariaExpanded: { type: Boolean, reflect: true, attribute: 'aria-expanded' },
       ariaLabel: { type: String, reflect: true, attribute: 'aria-label' },
-      variant: { type: String, reflect: false },
-      state: { type: String, reflect: false },
-      set: { type: String, reflect: false },
-      size: { type: String, reflect: false },
+      variant: { type: String, reflect: false, attribute: 'data-variant' },
+      state: { type: String, reflect: false, attribute: 'data-state' },
+      set: { type: String, reflect: false, attribute: 'data-set' },
+      size: { type: String, reflect: false, attribute: 'data-size' },
     }
   }
 

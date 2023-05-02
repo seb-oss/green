@@ -29,6 +29,29 @@
 
   /* Gap */
   --gds-sys-gap: 8px;
+
+  /* Variants Global */
+  --gds-secondary--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--hover--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--hover--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--hover--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--focus--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--focus--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--focus--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--active--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--active--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--active--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--visited--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--visited--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--visited--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--disabled--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--disabled--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--disabled--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--loading--background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--loading--color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary--loading--border-color: hsla(0, 0%, 93%, 0.811);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,7 +74,7 @@
 
 @media (hover: hover) {
   :root {
-    --color-hover: #eee;
+    --color-hover: hsla(0, 0%, 93%, 0.811);
   }
 }
 

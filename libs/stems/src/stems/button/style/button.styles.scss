@@ -1,10 +1,9 @@
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../../chlorophyll/scss/components/button/mixins' as button;
 // @include button.reset();
 // @include button.base();
 // @include button.secondary();
 @layer base, state, special;
-
-// @import url('./tokens.css');
+@use './button.mixins.scss';
 
 :host {
   --gds-button-transition: var(--gds-sys-transition);
@@ -18,28 +17,7 @@
   --gds-button-padding-block: var(--gds-sys-padding-block);
   --gds-button-gap: var(--gds-sys-gap);
 
-  // Secondary version
-  --gds-button--secondary--background-color: ;
-  --gds-button--secondary--color: ;
-  --gds-button--secondary--border-color: ;
-  --gds-button--secondary--hover--background-color: ;
-  --gds-button--secondary--hover--color: ;
-  --gds-button--secondary--hover--border-color: ;
-  --gds-button--secondary--focus--background-color: ;
-  --gds-button--secondary--focus--color: ;
-  --gds-button--secondary--focus--border-color: ;
-  --gds-button--secondary--active--background-color: ;
-  --gds-button--secondary--active--color: ;
-  --gds-button--secondary--active--border-color: ;
-  --gds-button--secondary--visited--background-color: ;
-  --gds-button--secondary--visited--color: ;
-  --gds-button--secondary--visited--border-color: ;
-  --gds-button--secondary--disabled--background-color: ;
-  --gds-button--secondary--disabled--color: ;
-  --gds-button--secondary--disabled--border-color: ;
-  --gds-button--secondary--loading--background-color: ;
-  --gds-button--secondary--loading--color: ;
-  --gds-button--secondary--loading--border-color: ;
+  @include button-tokens('ghost');
 }
 
 button {
@@ -69,50 +47,11 @@ button {
 }
 
 [variant='secondary'] {
-  --gds-button-bg: var(--gds-button--secondary--background-color);
-  --gds-button-color: var(--gds-button--secondary--color);
-  --gds-button-border-color: var(--gds-button--secondary--border-color);
+  @include button-variant('secondary');
+}
 
-  &[state='active'] {
-    --gds-button-bg: var(--gds-button--secondary--active--background-color);
-    --gds-button-color: var(--gds-button--secondary--active--color);
-    --gds-button-border-color: var(--gds-button--secondary--active--border-color);
-  }
-
-  &[state='focus'],
-  &:focus {
-    --gds-button-bg: var(--gds-button--secondary--focus--background-color);
-    --gds-button-color: var(--gds-button--secondary--focus--color);
-    --gds-button-border-color: var(--gds-button--secondary--focus--color);
-  }
-
-  &[state='hover'],
-  &:hover {
-    --gds-button-bg: var(--gds-button--secondary--hover--background-color);
-    --gds-button-color: var(--gds-button--secondary--hover--color);
-    --gds-button-border-color: var(--gds-button--secondary--hover--border-color);
-  }
-
-  &[state='visited'],
-  &:visited {
-    --gds-button-bg: var(--gds-button--secondary--visited--background-color);
-    --gds-button-color: var(--gds-button--secondary--visited--color);
-    --gds-button-border-color: var(--gds-button--secondary--visited--color);
-  }
-
-  &[state='disabled'],
-  &:disabled {
-    --gds-button-bg: var(--gds-button--secondary--disabled--background-color);
-    --gds-button-color: var(--gds-button--secondary--disabled--color);
-    --gds-button-border-color: var(--gds-button--secondary--border-color);
-  }
-
-  &[state='loading'],
-  &:loading {
-    --gds-button-bg: var(--gds-button--secondary--loading--background-color);
-    --gds-button-color: var(--gds-button--secondary--loading--color);
-    --gds-button-border-color: var(--gds-button--secondary--loading--border-color);
-  }
+[variant='tertiary'] {
+  @include button-variant('tertiary');
 }
 
 @media (hover: hover) {
