@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.8.0...@sebgroup/chlorophyll@1.8.1) (2023-05-02)
+
+
+### Bug Fixes
+
+* **links:** fix incorrectly applied `:visited` color ([#857](https://github.com/sebgroup/green/issues/857)) ([31b3f50](https://github.com/sebgroup/green/commit/31b3f5030357e87605da8153f8b05b609a69cd29))
+
+
+
 # [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.7.0...@sebgroup/chlorophyll@1.8.0) (2023-04-13)
 
 
