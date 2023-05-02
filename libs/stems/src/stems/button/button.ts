@@ -7,6 +7,34 @@ import '../icon/icon'
 import styles from './stem.styles.scss'
 import './tokens.css'
 
+const sets = [
+  'positive',
+  'negative',
+]
+
+const variants = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'ghost',
+  'link',
+]
+
+const states = [
+  'active',
+  'focus',
+  'hover',
+  'visited',
+  'disabled',
+  'loading',
+]
+
+const sizes = [
+  'small',
+  'medium',
+  'large',
+]
+
 @customElement('gds-button')
 export class Button extends LitElement {
   static styles = css`
@@ -19,6 +47,10 @@ export class Button extends LitElement {
   ariaPressed = null
   ariaExpanded = null
   ariaLabel = null
+  variant = null
+  state = null
+  set = null
+  size = null
 
   static get properties()  {
     return {
@@ -28,15 +60,37 @@ export class Button extends LitElement {
       ariaPressed: { type: Boolean, reflect: true, attribute: 'aria-pressed' },
       ariaExpanded: { type: Boolean, reflect: true, attribute: 'aria-expanded' },
       ariaLabel: { type: String, reflect: true, attribute: 'aria-label' },
+      variant: { type: String, reflect: false },
+      state: { type: String, reflect: false },
+      set: { type: String, reflect: false },
+      size: { type: String, reflect: false },
     }
   }
 
   render() {
+
+    const variantController = 
+      variants.includes(this.variant || '') ?
+       `gds-button gds-button--${this.variant}` : ''
+
+    const stateController = 
+      states.includes(this.state || '') ?
+       `gds-button-state--${this.state}` : ''
+    
+    const setController = 
+      sets.includes(this.set || '') ?
+       `gds-button-set--${this.set}` : ''
+
+    const sizeController = 
+      sizes.includes(this.size || '') ?
+       `gds-button-size--${this.size}` : ''
+    
     return html`
       <style>
         ${styles}
       </style>
       <button 
+        class=${`${variantController}${stateController}${setController}${sizeController}`}
         ?disabled="${this.disabled}"
         aria-label="${this.textContent}"
         ?aria-pressed="${this.ariaPressed}"

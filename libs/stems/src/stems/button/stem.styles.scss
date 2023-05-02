@@ -17,17 +17,46 @@
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
   --gds-button-gap: var(--gds-sys-gap);
+
+  // Secondary version
+  --gds-button--secondary--background-color: ;
+  --gds-button--secondary--color: ;
+  --gds-button--secondary--border-color: ;
+  --gds-button--secondary--hover--background-color: ;
+  --gds-button--secondary--hover--color: ;
+  --gds-button--secondary--hover--border-color: ;
+  --gds-button--secondary--focus--background-color: ;
+  --gds-button--secondary--focus--color: ;
+  --gds-button--secondary--focus--border-color: ;
+  --gds-button--secondary--active--background-color: ;
+  --gds-button--secondary--active--color: ;
+  --gds-button--secondary--active--border-color: ;
+  --gds-button--secondary--visited--background-color: ;
+  --gds-button--secondary--visited--color: ;
+  --gds-button--secondary--visited--border-color: ;
+  --gds-button--secondary--disabled--background-color: ;
+  --gds-button--secondary--disabled--color: ;
+  --gds-button--secondary--disabled--border-color: ;
+  --gds-button--secondary--loading--background-color: ;
+  --gds-button--secondary--loading--color: ;
+  --gds-button--secondary--loading--border-color: ;
 }
 
 button {
   align-items: center;
   background-color: var(--gds-button-bg);
   block-size: 100%;
+
+  // Coloring
   border-color: var(--gds-button-border-color);
   border-radius: var(--gds-button-border-radius);
   border-style: var(--gds-button-border-style);
   box-sizing: border-box;
   color: var(--gds-button-color);
+  color: var(--gds-button-color);
+
+  // Optional
+  color-scheme: light dark;
   cursor: pointer;
   display: flex;
   gap: var(--gds-button-gap);
@@ -37,6 +66,53 @@ button {
   padding-block: var(--gds-button-padding-block);
   padding-inline: var(--gds-button-padding-inline);
   transition: var(--gds-button-transition);
+}
+
+[variant='secondary'] {
+  --gds-button-bg: var(--gds-button--secondary--background-color);
+  --gds-button-color: var(--gds-button--secondary--color);
+  --gds-button-border-color: var(--gds-button--secondary--border-color);
+
+  &[state='active'] {
+    --gds-button-bg: var(--gds-button--secondary--active--background-color);
+    --gds-button-color: var(--gds-button--secondary--active--color);
+    --gds-button-border-color: var(--gds-button--secondary--active--border-color);
+  }
+
+  &[state='focus'],
+  &:focus {
+    --gds-button-bg: var(--gds-button--secondary--focus--background-color);
+    --gds-button-color: var(--gds-button--secondary--focus--color);
+    --gds-button-border-color: var(--gds-button--secondary--focus--color);
+  }
+
+  &[state='hover'],
+  &:hover {
+    --gds-button-bg: var(--gds-button--secondary--hover--background-color);
+    --gds-button-color: var(--gds-button--secondary--hover--color);
+    --gds-button-border-color: var(--gds-button--secondary--hover--border-color);
+  }
+
+  &[state='visited'],
+  &:visited {
+    --gds-button-bg: var(--gds-button--secondary--visited--background-color);
+    --gds-button-color: var(--gds-button--secondary--visited--color);
+    --gds-button-border-color: var(--gds-button--secondary--visited--color);
+  }
+
+  &[state='disabled'],
+  &:disabled {
+    --gds-button-bg: var(--gds-button--secondary--disabled--background-color);
+    --gds-button-color: var(--gds-button--secondary--disabled--color);
+    --gds-button-border-color: var(--gds-button--secondary--border-color);
+  }
+
+  &[state='loading'],
+  &:loading {
+    --gds-button-bg: var(--gds-button--secondary--loading--background-color);
+    --gds-button-color: var(--gds-button--secondary--loading--color);
+    --gds-button-border-color: var(--gds-button--secondary--loading--border-color);
+  }
 }
 
 @media (hover: hover) {
