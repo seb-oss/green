@@ -12,22 +12,53 @@ import './style/button.stories.css'
       <strong>Neutral Primary</strong>
       <gds-button
         set="positive"
+        variant="primary"
+        lead="plus"
+        trail="plus"
+        effect="ripple"
+      >
+        Click me!
+      </gds-button>
+      <gds-button
+        set="positive"
         variant="secondary"
         state="active"
         lead="plus"
         trail="plus"
+        effect="ripple"
       >
-        Click me!
+        Secondary
       </gds-button>
-      <gds-button trail="plus" hover>
+      <gds-button
+        set="positive"
+        variant="tertiary"
+        state="active"
+        lead="plus"
+        trail="plus"
+        effect="ripple"
+      >
+        Tertiary
+      </gds-button>
+      <gds-button
+        set="positive"
+        variant="primary"
+        state="disabled"
+        lead="plus"
+        trail="plus"
+        effect="ripple"
+      >
+        Disabled
+      </gds-button>
+      {/* <gds-button trail="plus" hover>
         Hover
       </gds-button>
+      <gds-button active>Active</gds-button>
       <gds-button disabled>Disabled</gds-button>
       <gds-button visited>Visited</gds-button>
       <gds-button focus>Focus</gds-button>
-      <gds-button loading>Loading</gds-button>
+      <gds-button loading>Loading</gds-button> */}
     </gds-row>
-    <gds-row>
+    {/* <gds-row>
       <strong>Secondary</strong>
       <gds-button secondary active leadingIcon="plus">
         Click me!
@@ -89,9 +120,9 @@ import './style/button.stories.css'
       <gds-button dark-mode loading>
         Loading
       </gds-button>
-    </gds-row>
+    </gds-row> */}
   </gds-buttons>
-  <gds-buttons positive>
+  {/* <gds-buttons positive>
     <strong>Positive</strong>
     <gds-button positive active>
       Positive active
@@ -132,5 +163,5 @@ import './style/button.stories.css'
     <gds-button destructive loading>
       Destructive loading
     </gds-button>
-  </gds-buttons>
+  </gds-buttons> */}
 </gds-main>

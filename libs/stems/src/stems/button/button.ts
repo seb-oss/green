@@ -37,6 +37,8 @@ const sizes = [
 
 @customElement('gds-button')
 export class Button extends LitElement {
+
+  // TODO: use unsafeCSS from Lit to load scss
   static styles = css`
     // TODO: Figure out how to load scss here
   `

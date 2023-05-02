@@ -1,6 +1,6 @@
 :root {
-  --color: #fff;
-  --color-hover: #fff;
+  -color: #fff;
+  -color-hover: #fff;
   --transition: 0;
   --transparency: 0.5;
   --backdrop-blur: 20px;
@@ -30,33 +30,80 @@
   /* Gap */
   --gds-sys-gap: 8px;
 
+  /* Sets */
+  --gds-set-neutral: hsl(0, 0%, 0%);
+  --gds-set-positive: hsl(0, 0%, 0%);
+  --gds-set-negative: hsl(0, 0%, 0%);
+
   /* Variants Global */
-  --gds-secondary--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--hover--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--hover--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--hover--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--focus--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--focus--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--focus--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--active--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--active--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--active--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--visited--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--visited--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--visited--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--disabled--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--disabled--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--disabled--border-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--loading--background-color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--loading--color: hsla(0, 0%, 93%, 0.811);
-  --gds-secondary--loading--border-color: hsla(0, 0%, 93%, 0.811);
+  --gds-primary-background-color: hsl(60, 4%, 20%);
+  --gds-primary-color: hsl(180, 0%, 100%);
+  --gds-primary-border-color: hsl(60, 4%, 20%);
+
+  --gds-primary-hover-background-color: hsl(319, 25%, 8%);
+  --gds-primary-hover-color: hsl(180, 0%, 100%);
+  --gds-primary-hover-border-color: hsl(319, 25%, 8%);
+
+  --gds-primary-focus-background-color: hsl(60, 4%, 20%);
+  --gds-primary-focus-color: hsl(180, 0%, 100%);
+  --gds-primary-focus-border-color: hsl(60, 4%, 20%);
+
+  --gds-primary-active-background-color: hsl(60, 4%, 20%);
+  --gds-primary-active-color: hsl(180, 0%, 100%);
+  --gds-primary-active-border-color: hsl(60, 4%, 20%);
+
+  --gds-primary-disabled-background-color: red;
+  --gds-primary-disabled-color: red;
+  --gds-primary-disabled-border-color: red;
+
+  --gds-secondary-background-color: hsla(0, 0%, 100%, 1);
+  --gds-secondary-color: hsl(60, 4%, 20%);
+  --gds-secondary-border-color: hsl(60, 4%, 20%);
+
+  --gds-secondary-hover-background-color: hsl(60, 6%, 90%);
+  --gds-secondary-hover-color: hsl(60, 4%, 20%);
+  --gds-secondary-hover-border-color: hsl(60, 4%, 20%);
+
+  --gds-secondary-focus-background-color: hsla(0, 0%, 100%, 1);
+  --gds-secondary-focus-color: hsl(60, 4%, 20%);
+  --gds-secondary-focus-border-color: hsl(60, 4%, 20%);
+
+  --gds-secondary-active-background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-active-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-active-border-color: hsla(0, 0%, 93%, 0.811);
+
+  --gds-secondary-disabled-background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-disabled-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-disabled-border-color: hsla(0, 0%, 93%, 0.811);
+
+  --gds-secondary-loading-background-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-loading-color: hsla(0, 0%, 93%, 0.811);
+  --gds-secondary-loading-border-color: hsla(0, 0%, 93%, 0.811);
+
+  --gds-tertiary-background-color: hsla(0, 0%, 93%, 0);
+  --gds-tertiary-color: hsl(359, 1%, 19%);
+  --gds-tertiary-border-color: hsla(0, 0%, 93%, 0);
+
+  --gds-tertiary-hover-background-color: hsl(60, 6%, 90%);
+  --gds-tertiary-hover-color: hsl(359, 1%, 19%);
+  --gds-tertiary-hover-border-color: hsl(359, 1%, 19%);
+
+  --gds-tertiary-focus-background-color: hsla(0, 0%, 93%, 0);
+  --gds-tertiary-focus-color: hsl(359, 1%, 19%);
+  --gds-tertiary-focus-border-color: hsl(359, 1%, 19%);
+
+  --gds-tertiary-active-background-color: hsla(0, 0%, 100%, 1);
+  --gds-tertiary-active-color: hsl(359, 1%, 19%);
+  --gds-tertiary-active-border-color: hsla(0, 0%, 100%, 1);
+
+  --gds-tertiary-disabled-background-color: hsla(0, 95%, 45%, 0.811);
+  --gds-tertiary-disabled-color: hsla(0, 80%, 38%, 0.811);
+  --gds-tertiary-disabled-border-color: hsla(0, 86%, 25%, 0.811);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color: #000;
+    -color: #000;
   }
 }
 
@@ -74,7 +121,7 @@
 
 @media (hover: hover) {
   :root {
-    --color-hover: hsla(0, 0%, 93%, 0.811);
+    -color-hover: hsla(0, 0%, 93%, 0.811);
   }
 }
 
@@ -86,7 +133,7 @@
 
 @media (prefers-contrast: more) {
   :root {
-    --color: #000;
+    -color: #000;
   }
 }
 
