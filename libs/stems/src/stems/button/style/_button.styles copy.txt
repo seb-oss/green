@@ -169,3 +169,26 @@ button {
 //     transition: display 0.2s;
 //   }
 // }
+
+
+
+Simplified working version 
+
+@mixin button-variant($variant) {
+  :host([variant='#{$variant}']) {
+    --gds-button-bg: var(--gds-button-#{$variant}-background-color);
+    --gds-button-color: var(--gds-button-#{$variant}-color);
+    --gds-button-border-color: var(--gds-button-#{$variant}-border-color);
+  }
+  @each $state in map-get($button-variants, $variant) {
+    :host([variant='#{$variant}'][state='#{$state}']) button,
+    :host([variant='#{$variant}'][state='#{$state}']) button:#{$state} {
+      --gds-button-bg: var(--gds-button-#{$variant}-#{$state}-background-color);
+      --gds-button-color: var(--gds-button-#{$variant}-#{$state}-color);
+      --gds-button-border-color: var(
+        --gds-button-#{$variant}-#{$state}-border-color
+      );
+      outline-color: var(--gds-button-#{$variant}-#{$state}-border-color);
+    }
+  }
+}

@@ -51,24 +51,24 @@ button {
   }
 }
 
-:host([variant='primary']) {
-  @include button-variant('primary');
-}
+// :host([variant='primary']) {
+@include button-variant('primary');
+@include button-variant('secondary');
+// }
 
-:host([variant='secondary']) {
-  @include button-variant('secondary');
-}
+// :host([variant='secondary']) {
+// }
 
-:host([variant='tertiary']) {
-  @include button-variant('tertiary');
-}
+// :host([variant='tertiary']) {
+@include button-variant('tertiary');
+// }
 
-:host([variant='primary'][state='disabled']) {
-  --gds-button-bg: hsl(0, 0%, 98%);
-  --gds-button-color: hsl(60, 4%, 60%);
-  --gds-button-border-color: hsl(0, 0%, 98%);
-  pointer-events: none;
-}
+// :host([variant='primary'][state='disabled']) {
+//   --gds-button-bg: hsl(0, 0%, 98%);
+//   --gds-button-color: hsl(60, 4%, 60%);
+//   --gds-button-border-color: hsl(0, 0%, 98%);
+//   pointer-events: none;
+// }
 
 ::slotted(svg) {
   height: 12px;
