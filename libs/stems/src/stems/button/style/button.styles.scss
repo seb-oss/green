@@ -1,4 +1,4 @@
-@use './button.mixins' as mixins;
+@use './button.mixins' as *;
 
 :host {
   --gds-button-transition: var(--gds-sys-transition);
@@ -11,9 +11,9 @@
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
   --gds-button-gap: var(--gds-sys-gap);
-  @include mixins.button-tokens('primary');
-  @include mixins.button-tokens('secondary');
-  @include mixins.button-tokens('tertiary');
+  @include button-tokens('primary');
+  @include button-tokens('secondary');
+  @include button-tokens('tertiary');
 }
 
 button {
@@ -52,15 +52,15 @@ button {
 }
 
 :host([variant='primary']) {
-  @include mixins.button-variant('primary');
+  @include button-variant('primary');
 }
 
 :host([variant='secondary']) {
-  @include mixins.button-variant('secondary');
+  @include button-variant('secondary');
 }
 
 :host([variant='tertiary']) {
-  @include mixins.button-variant('tertiary');
+  @include button-variant('tertiary');
 }
 
 :host([variant='primary'][state='disabled']) {
