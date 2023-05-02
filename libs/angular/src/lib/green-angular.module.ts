@@ -10,6 +10,7 @@ import { NggProgressCircleModule } from './progress-circle/progress-circle.modul
 import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
 import { NggSliderModule } from './slider/slider.module'
 import { NggContextMenuModule } from './context-menu'
+import { NggInPageWizardModule } from './in-page-wizard'
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { NggContextMenuModule } from './context-menu'
     NggSegmentedControlModule,
     NggSliderModule,
     NggContextMenuModule,
+    NggInPageWizardModule,
   ],
 })
 export class NggModule {}

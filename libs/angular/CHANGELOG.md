@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.3.1...@sebgroup/green-angular@1.4.0) (2023-04-28)
+
+
+### Bug Fixes
+
+* build issue with InPageWizard ([#855](https://github.com/sebgroup/green/issues/855)) ([8949282](https://github.com/sebgroup/green/commit/89492823816d30d78ec87a85410323d34440bdf2))
+
+
+### Features
+
+* 🎸 Angular in-page wizard step card ([#853](https://github.com/sebgroup/green/issues/853)) ([c8b5eb4](https://github.com/sebgroup/green/commit/c8b5eb4d5140e9636538f329096e11f715884fc2))
+
+
+
 ## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.3.0...@sebgroup/green-angular@1.3.1) (2023-04-19)
 
 
