@@ -235,6 +235,36 @@
     }
   },
   {
+    "id": "components-context-menu--default",
+    "name": "Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--right-to-left",
+    "name": "Right To Left",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--custom-template-default",
+    "name": "Custom Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-form-button--default",
     "name": "Default",
     "title": "Components/Form/Button",
