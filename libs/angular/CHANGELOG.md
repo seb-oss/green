@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.1...@sebgroup/green-angular@1.6.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* **context-menu:** add missing export ([#861](https://github.com/sebgroup/green/issues/861)) ([af31fd3](https://github.com/sebgroup/green/commit/af31fd30cb2883cfda09485d23b07dd32f653a2b))
+
+
+### Features
+
+* 🎸 Context Menu ([#852](https://github.com/sebgroup/green/issues/852)) ([8ede687](https://github.com/sebgroup/green/commit/8ede687c363f3fbc9760d958ae17a9c467ca90e6))
+
+
+
 ## [1.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.0...@sebgroup/green-angular@1.5.1) (2023-05-03)
 
 
