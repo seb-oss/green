@@ -17,41 +17,13 @@ $font-weight: tokens.$font-weight-bold;
 @mixin add-select-context-menu {
   overflow-y: unset;
 
-  [role='option'] {
+  li {
     $grey-200: tokens.get(tokens.$grey, 200);
-
     @include common.padding-horizontal(5);
     @include common.padding-vertical(4);
     @include common.add-hover-active-state($grey-200, $grey-200, true);
     @include common.add-active-focus-state($grey-200);
     line-height: 1.25;
     cursor: pointer;
-  }
-
-  [role='option']:hover,
-  [role='option']:focus {
-    font-weight: $font-weight;
-  }
-}
-
-@mixin add-selected-icon {
-  .selected-icon {
-    float: right;
-    width: 12px;
-    height: 10px;
-    opacity: 0;
-    // TODO extract and unify to deduplicate with filter chip icon, but not sure where these should be placed
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' fill='none' %3E%3Cpath fill='#494949' d='m10.684.507-6.85 6.85L1.315 4.84a.313.313 0 0 0-.442 0l-.736.737a.313.313 0 0 0 0 .442l3.474 3.474c.122.122.32.122.442 0l7.808-7.807a.313.313 0 0 0 0-.442l-.737-.737a.312.312 0 0 0-.441 0Z'/%3E%3C/svg%3E")
-      no-repeat;
-  }
-
-  li:hover,
-  li:focus {
-    display: flex;
-    justify-content: space-between;
-    .selected-icon {
-      opacity: 1;
-      align-self: center;
-    }
   }
 }

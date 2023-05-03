@@ -9,7 +9,6 @@
 
   ul[role='listbox'] {
     @include mixins.add-select-context-menu();
-    @include mixins.add-selected-icon();
   }
 
   //TODO Improve design for mobile

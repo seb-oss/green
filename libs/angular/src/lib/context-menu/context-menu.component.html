@@ -16,7 +16,6 @@
     <li
       *ngFor="let menuItem of menuItems"
       (click)="onItemClick(menuItem)"
-      role="option"
       tabindex="0"
       (keydown)="onMenuItemKeyDown($event, menuItem)"
     >
