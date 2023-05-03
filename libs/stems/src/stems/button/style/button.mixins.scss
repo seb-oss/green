@@ -1,0 +1,225 @@
+@mixin tokens() {
+  --gds-button-transition: var(--gds-sys-transition);
+  --gds-button-bg: var(--gds-primary-background-color);
+  --gds-button-color: var(--gds-primary-color);
+  --gds-button-border-radius: var(--gds-sys-border-radius);
+  --gds-button-border-width: var(--gds-sys-border-width);
+  --gds-button-border-color: var(--gds-primary-border-color);
+  --gds-button-border-style: var(--gds-sys-border-style);
+  --gds-button-padding-inline: var(--gds-sys-padding-inline);
+  --gds-button-padding-block: var(--gds-sys-padding-block);
+  --gds-button-gap: var(--gds-sys-gap);
+
+  --gds-primary-color-bg: hsla(60, 4%, 20%, 1);
+  --gds-primary-color-text: hsla(180, 0%, 100%, 1);
+  --gds-primary-disabled-bg: hsla(0, 0%, 98%, 1);
+  --gds-primary-disabled-color: hsla(60, 4%, 60%, 1);
+
+  --gds-secondary-color-text: hsla(359, 1%, 19%, 1);
+  --gds-secondary-color-bg: hsla(60, 6%, 90%, 1);
+
+  --gds-positive-color-text: hsla(144, 100%, 22%, 1);
+  --gds-positive-color-bg: hsla(60, 6%, 90%, 1);
+  --gds-positive-color-hover: hsla(141, 100%, 14%, 1);
+  --gds-positive-color-bg-hover: hsla(109, 97%, 95%, 1);
+  --gds-positive-color-border-hover: hsla(143, 63%, 31%, 1);
+
+  --gds-negative-color-bg: hsla(9, 100%, 37%, 1);
+  --gds-negative-primary-bg-hover: hsla(7, 100%, 24%, 1);
+  --gds-negative-bg-hover: hsla(11, 100%, 96%, 1);
+
+  --gds-button-color-bg: var(--gds-primary-color-bg);
+  --gds-button-color-text: var(--gds-primary-color-text);
+  --gds-button-color-border: var(--gds-primary-color-bg);
+  --gds-button-color-outline: var(--gds-primary-color-bg);
+}
+
+@mixin core() {
+  align-items: center;
+  background-color: var(--gds-button-color-bg);
+  block-size: 100%;
+  border-color: var(--gds-button-color-border);
+
+  // Border style
+  border-radius: var(--gds-button-border-radius);
+  border-style: var(--gds-button-border-style);
+  box-sizing: border-box;
+
+  // Coloring
+  color: var(--gds-button-color-text);
+
+  // Optional
+  color-scheme: dark light;
+  cursor: pointer;
+  display: flex;
+  gap: var(--gds-button-gap);
+  inline-size: max-content;
+  justify-content: space-between;
+  justify-items: center;
+  padding-block: var(--gds-button-padding-block);
+  padding-inline: var(--gds-button-padding-inline);
+  transition: var(--gds-button-transition);
+
+  &:focus {
+    outline-color: var(--gds-button-color-outline);
+    outline-offset: 2px;
+    outline-style: solid;
+    outline-width: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:hover {
+    --gds-button-color-bg: hsla(60, 4%, 5%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-primary-color-bg);
+  }
+
+  &:disabled {
+    background-color: var(--gds-primary-disabled-bg);
+    border-color: var(--gds-primary-disabled-bg);
+    color: var(--gds-primary-disabled-color);
+    pointer-events: none;
+  }
+}
+
+@mixin secondary() {
+  --gds-button-color-bg: var(--gds-primary-color-text);
+  --gds-button-color-text: var(--gds-secondary-color-text);
+  --gds-button-color-border: var(--gds-secondary-color-text);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-secondary-color-bg);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-primary-color-text);
+  }
+}
+
+@mixin tertiary() {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: var(--gds-secondary-color-text);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-secondary-color-bg);
+    --gds-button-color-border: var(--gds-secondary-color-text);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+}
+
+@mixin primary-positive() {
+  --gds-button-color-bg: var(--gds-positive-color-text);
+  --gds-button-color-text: var(--gds-primary-color-text);
+  --gds-button-color-border: var(--gds-positive-color-text);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-positive-color-hover);
+    --gds-button-color-border: var(--gds-positive-color-hover);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-positive-color-text);
+  }
+}
+
+@mixin secondary-positive() {
+  --gds-button-color-bg: var(--gds-primary-color-text);
+  --gds-button-color-text: var(--gds-positive-color-text);
+  --gds-button-color-border: var(--gds-positive-color-text);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-positive-color-bg-hover);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-primary-color-text);
+  }
+}
+
+@mixin tertiary-positive() {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: var(--gds-positive-color-text);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-positive-color-bg-hover);
+    --gds-button-color-border: var(--gds-positive-color-border-hover);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+}
+
+// Negative
+@mixin primary-negative() {
+  --gds-button-color-bg: var(--gds-negative-color-bg);
+  --gds-button-color-text: var(--gds-primary-color-text);
+  --gds-button-color-border: var(--gds-negative-color-bg);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-negative-primary-bg-hover);
+    --gds-button-color-border: var(--gds-negative-primary-bg-hover);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-negative-color-bg);
+    --gds-button-color-border: var(--gds-negative-color-bg);
+  }
+}
+
+@mixin secondary-negative() {
+  --gds-button-color-bg: var(--gds-primary-color-text);
+  --gds-button-color-text: var(--gds-negative-color-bg);
+  --gds-button-color-border: var(--gds-negative-color-bg);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-negative-bg-hover);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-primary-color-text);
+  }
+}
+
+@mixin tertiary-negative() {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: var(--gds-negative-color-bg);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-negative-bg-hover);
+    --gds-button-color-border: var(--gds-negative-color-bg);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+}
+
+// Sizes
+
+@mixin size-small() {
+  --gds-button-padding-inline: 10px;
+  --gds-button-padding-block: 8px;
+}
+@mixin size-medium() {
+  --gds-button-padding-inline: 16px;
+  --gds-button-padding-block: 8px;
+}
+@mixin size-large() {
+  --gds-button-padding-inline: 16px;
+  --gds-button-padding-block: 12px;
+}

@@ -1,123 +1,31 @@
 @use './button.mixins' as *;
 
 :host {
-  --gds-button-transition: var(--gds-sys-transition);
-  --gds-button-bg: var(--gds-primary-background-color);
-  --gds-button-color: var(--gds-primary-color);
-  --gds-button-border-radius: var(--gds-sys-border-radius);
-  --gds-button-border-width: var(--gds-sys-border-width);
-  --gds-button-border-color: var(--gds-primary-border-color);
-  --gds-button-border-style: var(--gds-sys-border-style);
-  --gds-button-padding-inline: var(--gds-sys-padding-inline);
-  --gds-button-padding-block: var(--gds-sys-padding-block);
-  --gds-button-gap: var(--gds-sys-gap);
-
-  // @include button-tokens('primary');
-  // @include button-tokens('secondary');
-  // @include button-tokens('tertiary');
-
-  --gds-button-color-bg: hsla(60, 4%, 20%, 1);
-  --gds-button-color-text: hsla(180, 0%, 100%, 1);
-  --gds-button-color-border: hsla(60, 4%, 20%, 1);
-  --gds-button-color-outline: hsla(60, 4%, 20%, 1);
+  @include tokens;
 }
 
 button {
-  align-items: center;
-  background-color: var(--gds-button-color-bg);
-  block-size: 100%;
-  border-color: var(--gds-button-color-border);
-
-  // Border style
-  border-radius: var(--gds-button-border-radius);
-  border-style: var(--gds-button-border-style);
-  box-sizing: border-box;
-
-  // Coloring
-  color: var(--gds-button-color-text);
-
-  // Optional
-  color-scheme: dark light;
-  cursor: pointer;
-  display: flex;
-  gap: var(--gds-button-gap);
-  inline-size: max-content;
-  justify-content: space-between;
-  justify-items: center;
-  padding-block: var(--gds-button-padding-block);
-  padding-inline: var(--gds-button-padding-inline);
-  transition: var(--gds-button-transition);
-
-  &:focus {
-    outline-color: var(--gds-button-color-outline);
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 2px;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  &:hover {
-    --gds-button-color-bg: hsla(60, 4%, 5%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(60, 4%, 20%, 1);
-  }
-
-  &:disabled {
-    background-color: hsla(0, 0%, 98%, 1);
-    border-color: hsla(0, 0%, 98%, 1);
-    color: hsla(60, 4%, 60%, 1);
-    pointer-events: none;
-  }
+  @include core;
 }
 
 :host([variant='secondary']) button {
-  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  --gds-button-color-text: hsla(359, 1%, 19%, 1);
-  --gds-button-color-border: hsla(359, 1%, 19%, 1);
-
-  &:hover {
-    --gds-button-color-bg: hsla(60, 6%, 90%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  }
+  @include secondary;
 }
 
 :host([variant='tertiary']) button {
-  --gds-button-color-bg: transparent;
-  --gds-button-color-text: hsla(359, 1%, 19%, 1);
-  --gds-button-color-border: transparent;
-
-  &:hover {
-    --gds-button-color-bg: hsla(60, 6%, 90%, 1);
-    --gds-button-color-border: hsla(359, 1%, 19%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: transparent;
-    --gds-button-color-border: transparent;
-  }
+  @include tertiary;
 }
 
 :host([size='small']) button {
-  --gds-button-padding-inline: 10px;
-  --gds-button-padding-block: 8px;
+  @include size-small;
 }
 
 :host([size='medium']) button {
-  --gds-button-padding-inline: 16px;
-  --gds-button-padding-block: 8px;
+  @include size-medium;
 }
 
 :host([size='large']) button {
-  --gds-button-padding-inline: 16px;
-  --gds-button-padding-block: 12px;
+  @include size-large;
 }
 
 ::slotted(svg) {
@@ -128,94 +36,27 @@ button {
 // Sets
 
 :host([variant='primary'][set='positive']) button {
-  --gds-button-color-bg: hsla(144, 100%, 22%, 1);
-  --gds-button-color-text: hsla(180, 0%, 100%, 1);
-  --gds-button-color-border: hsla(144, 100%, 22%, 1);
-
-  &:hover {
-    --gds-button-color-bg: hsla(141, 100%, 14%, 1);
-    --gds-button-color-border: hsla(141, 100%, 14%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(144, 100%, 22%, 1);
-  }
+  @include primary-positive;
 }
 
 :host([variant='secondary'][set='positive']) button {
-  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  --gds-button-color-text: hsla(144, 100%, 22%, 1);
-  --gds-button-color-border: hsla(144, 100%, 22%, 1);
-
-  &:hover {
-    --gds-button-color-bg: hsla(109, 97%, 95%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  }
+  @include secondary-positive;
 }
 
 :host([variant='tertiary'][set='positive']) button {
-  --gds-button-color-bg: transparent;
-  --gds-button-color-text: hsla(144, 100%, 22%, 1);
-  --gds-button-color-border: transparent;
-
-  &:hover {
-    --gds-button-color-bg: hsla(109, 97%, 95%, 1);
-    --gds-button-color-border: hsla(143, 63%, 31%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: transparent;
-    --gds-button-color-border: transparent;
-  }
+  @include tertiary-positive;
 }
 
 // negative
 
 :host([variant='primary'][set='negative']) button {
-  --gds-button-color-bg: hsla(9, 100%, 37%, 1);
-  --gds-button-color-text: hsla(180, 0%, 100%, 1);
-  --gds-button-color-border: hsla(9, 100%, 37%, 1);
-
-  &:hover {
-    --gds-button-color-bg: hsla(7, 100%, 24%, 1);
-    --gds-button-color-border: hsla(7, 100%, 24%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(9, 100%, 37%, 1);
-    --gds-button-color-border: hsla(9, 100%, 37%, 1);
-  }
+  @include primary-negative;
 }
 
 :host([variant='secondary'][set='negative']) button {
-  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  --gds-button-color-text: hsla(9, 100%, 37%, 1);
-  --gds-button-color-border: hsla(9, 100%, 37%, 1);
-
-  &:hover {
-    --gds-button-color-bg: hsla(11, 100%, 96%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
-  }
+  @include secondary-negative;
 }
 
 :host([variant='tertiary'][set='negative']) button {
-  --gds-button-color-bg: transparent;
-  --gds-button-color-text: hsla(9, 100%, 37%, 1);
-  --gds-button-color-border: transparent;
-
-  &:hover {
-    --gds-button-color-bg: hsla(11, 100%, 96%, 1);
-    --gds-button-color-border: hsla(9, 100%, 37%, 1);
-  }
-
-  &:active {
-    --gds-button-color-bg: transparent;
-    --gds-button-color-border: transparent;
-  }
+  @include tertiary-negative;
 }

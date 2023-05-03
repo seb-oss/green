@@ -5,7 +5,6 @@ import { createComponent } from '@lit-labs/react'
 import '../icon/icon'
 
 import styles from './style/button.styles.scss'
-import './style/button.tokens.css'
 
 const sets = [
   'positive',
