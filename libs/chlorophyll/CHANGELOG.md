@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.8.1...@sebgroup/chlorophyll@1.9.0) (2023-05-03)
+
+
+### Features
+
+* 🎸 Context Menu ([#852](https://github.com/sebgroup/green/issues/852)) ([8ede687](https://github.com/sebgroup/green/commit/8ede687c363f3fbc9760d958ae17a9c467ca90e6))
+
+
+
 ## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.8.0...@sebgroup/chlorophyll@1.8.1) (2023-05-02)
 
 
