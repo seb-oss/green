@@ -81,9 +81,6 @@ export class NggDropdownComponent
 
   @Input() set value(newValue: any) {
     this.handler?.selectByValue(newValue)
-    this._selectedOption = this.handler?.dropdown.options.find(
-      (o) => o.selected
-    )
     this._value = newValue
   }
   get value(): any {
@@ -92,9 +89,8 @@ export class NggDropdownComponent
   private _value: any
 
   get selectedOption() {
-    return this._selectedOption
+    return this.handler?.dropdown.options.find((o) => o.selected)
   }
-  private _selectedOption: DropdownOptionElement | undefined
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @Output() readonly touched: EventEmitter<boolean> =
