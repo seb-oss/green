@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { LitElement, html, css, PropertyValues, unsafeCSS } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { LitElement, html, unsafeCSS } from 'lit'
+import { customElement} from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import '../icon/icon'
 
@@ -16,8 +16,6 @@ const variants = [
   'primary',
   'secondary',
   'tertiary',
-  'ghost',
-  'link',
 ]
 
 const sizes = [

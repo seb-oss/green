@@ -11,6 +11,7 @@
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
   --gds-button-gap: var(--gds-sys-gap);
+
   // @include button-tokens('primary');
   // @include button-tokens('secondary');
   // @include button-tokens('tertiary');
@@ -67,9 +68,9 @@ button {
   }
 
   &:disabled {
-    --gds-button-color-bg: hsla(0, 0%, 98%, 1);
-    --gds-button-color-text: hsla(60, 4%, 60%, 1);
-    --gds-button-color-border: hsla(0, 0%, 98%, 1);
+    background-color: hsla(0, 0%, 98%, 1);
+    border-color: hsla(0, 0%, 98%, 1);
+    color: hsla(60, 4%, 60%, 1);
     pointer-events: none;
   }
 }
@@ -88,7 +89,133 @@ button {
   }
 }
 
+:host([variant='tertiary']) button {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: hsla(359, 1%, 19%, 1);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: hsla(60, 6%, 90%, 1);
+    --gds-button-color-border: hsla(359, 1%, 19%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+}
+
+:host([size='small']) button {
+  --gds-button-padding-inline: 10px;
+  --gds-button-padding-block: 8px;
+}
+
+:host([size='medium']) button {
+  --gds-button-padding-inline: 16px;
+  --gds-button-padding-block: 8px;
+}
+
+:host([size='large']) button {
+  --gds-button-padding-inline: 16px;
+  --gds-button-padding-block: 12px;
+}
+
 ::slotted(svg) {
   height: 12px;
   width: 12px;
+}
+
+// Sets
+
+:host([variant='primary'][set='positive']) button {
+  --gds-button-color-bg: hsla(144, 100%, 22%, 1);
+  --gds-button-color-text: hsla(180, 0%, 100%, 1);
+  --gds-button-color-border: hsla(144, 100%, 22%, 1);
+
+  &:hover {
+    --gds-button-color-bg: hsla(141, 100%, 14%, 1);
+    --gds-button-color-border: hsla(141, 100%, 14%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(144, 100%, 22%, 1);
+  }
+}
+
+:host([variant='secondary'][set='positive']) button {
+  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  --gds-button-color-text: hsla(144, 100%, 22%, 1);
+  --gds-button-color-border: hsla(144, 100%, 22%, 1);
+
+  &:hover {
+    --gds-button-color-bg: hsla(109, 97%, 95%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  }
+}
+
+:host([variant='tertiary'][set='positive']) button {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: hsla(144, 100%, 22%, 1);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: hsla(109, 97%, 95%, 1);
+    --gds-button-color-border: hsla(143, 63%, 31%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+}
+
+// negative
+
+:host([variant='primary'][set='negative']) button {
+  --gds-button-color-bg: hsla(9, 100%, 37%, 1);
+  --gds-button-color-text: hsla(180, 0%, 100%, 1);
+  --gds-button-color-border: hsla(9, 100%, 37%, 1);
+
+  &:hover {
+    --gds-button-color-bg: hsla(7, 100%, 24%, 1);
+    --gds-button-color-border: hsla(7, 100%, 24%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(9, 100%, 37%, 1);
+    --gds-button-color-border: hsla(9, 100%, 37%, 1);
+  }
+}
+
+:host([variant='secondary'][set='negative']) button {
+  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  --gds-button-color-text: hsla(9, 100%, 37%, 1);
+  --gds-button-color-border: hsla(9, 100%, 37%, 1);
+
+  &:hover {
+    --gds-button-color-bg: hsla(11, 100%, 96%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  }
+}
+
+:host([variant='tertiary'][set='negative']) button {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: hsla(9, 100%, 37%, 1);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: hsla(11, 100%, 96%, 1);
+    --gds-button-color-border: hsla(9, 100%, 37%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
 }
