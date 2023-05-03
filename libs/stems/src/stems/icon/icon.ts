@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
@@ -7,9 +7,10 @@ import styles from './stem.styles.scss'
 
 @customElement('gds-icon')
 export class Icon extends LitElement {
-  static styles = css`
-    // TODO: Figure out how to load scss here
-  `
+
+  static get styles() {
+    return unsafeCSS(styles);
+  }
 
   open = false
   name = ''
@@ -22,9 +23,6 @@ export class Icon extends LitElement {
   render() {
     const { name } = this;
     return html`
-      <style>
-        ${styles}
-      </style>
       <svg display="none">
         <symbol id="plus">
           <line x1="12" y1="5" x2="12" y2="19" />
