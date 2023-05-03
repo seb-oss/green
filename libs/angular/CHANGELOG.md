@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.0...@sebgroup/green-angular@1.5.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* 🐛 Missing Output decorator to wizard step card ([#859](https://github.com/sebgroup/green/issues/859)) ([68dd83e](https://github.com/sebgroup/green/commit/68dd83ead59181067337932c284d69ca0958befe))
+
+
+
 # [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.4.0...@sebgroup/green-angular@1.5.0) (2023-05-02)
 
 
