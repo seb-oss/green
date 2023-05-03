@@ -11,25 +11,32 @@
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
   --gds-button-gap: var(--gds-sys-gap);
-  @include button-tokens('primary');
-  @include button-tokens('secondary');
-  @include button-tokens('tertiary');
+  // @include button-tokens('primary');
+  // @include button-tokens('secondary');
+  // @include button-tokens('tertiary');
+
+  --gds-button-color-bg: hsla(60, 4%, 20%, 1);
+  --gds-button-color-text: hsla(180, 0%, 100%, 1);
+  --gds-button-color-border: hsla(60, 4%, 20%, 1);
+  --gds-button-color-outline: hsla(60, 4%, 20%, 1);
 }
 
 button {
   align-items: center;
-  background-color: var(--gds-button-bg);
+  background-color: var(--gds-button-color-bg);
   block-size: 100%;
+  border-color: var(--gds-button-color-border);
 
-  // Coloring
-  border-color: var(--gds-button-border-color);
+  // Border style
   border-radius: var(--gds-button-border-radius);
   border-style: var(--gds-button-border-style);
   box-sizing: border-box;
-  color: var(--gds-button-color);
+
+  // Coloring
+  color: var(--gds-button-color-text);
 
   // Optional
-  color-scheme: light dark;
+  color-scheme: dark light;
   cursor: pointer;
   display: flex;
   gap: var(--gds-button-gap);
@@ -41,6 +48,7 @@ button {
   transition: var(--gds-button-transition);
 
   &:focus {
+    outline-color: var(--gds-button-color-outline);
     outline-offset: 2px;
     outline-style: solid;
     outline-width: 2px;
@@ -49,26 +57,36 @@ button {
   &:focus:not(:focus-visible) {
     outline: none;
   }
+
+  &:hover {
+    --gds-button-color-bg: hsla(60, 4%, 5%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(60, 4%, 20%, 1);
+  }
+
+  &:disabled {
+    --gds-button-color-bg: hsla(0, 0%, 98%, 1);
+    --gds-button-color-text: hsla(60, 4%, 60%, 1);
+    --gds-button-color-border: hsla(0, 0%, 98%, 1);
+    pointer-events: none;
+  }
 }
 
-// :host([variant='primary']) {
-@include button-variant('primary');
-@include button-variant('secondary');
-// }
+:host([variant='secondary']) button {
+  --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  --gds-button-color-text: hsla(359, 1%, 19%, 1);
+  --gds-button-color-border: hsla(359, 1%, 19%, 1);
 
-// :host([variant='secondary']) {
-// }
+  &:hover {
+    --gds-button-color-bg: hsla(60, 6%, 90%, 1);
+  }
 
-// :host([variant='tertiary']) {
-@include button-variant('tertiary');
-// }
-
-// :host([variant='primary'][state='disabled']) {
-//   --gds-button-bg: hsl(0, 0%, 98%);
-//   --gds-button-color: hsl(60, 4%, 60%);
-//   --gds-button-border-color: hsl(0, 0%, 98%);
-//   pointer-events: none;
-// }
+  &:active {
+    --gds-button-color-bg: hsla(180, 0%, 100%, 1);
+  }
+}
 
 ::slotted(svg) {
   height: 12px;

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { LitElement, html, css, PropertyValues } from 'lit'
+import { LitElement, html, css, PropertyValues, unsafeCSS } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import '../icon/icon'
@@ -20,15 +20,6 @@ const variants = [
   'link',
 ]
 
-const states = [
-  'active',
-  'focus',
-  'hover',
-  'visited',
-  'disabled',
-  'loading',
-]
-
 const sizes = [
   'small',
   'medium',
@@ -38,11 +29,10 @@ const sizes = [
 @customElement('gds-button')
 export class Button extends LitElement {
 
-  // TODO: use unsafeCSS from Lit to load scss
-  static styles = css`
-    // TODO: Figure out how to load scss here
-  `
-  
+  static get styles() {
+    return unsafeCSS(styles);
+  }
+
   lead = null
   trail  = null
   disabled = false
@@ -50,7 +40,6 @@ export class Button extends LitElement {
   ariaExpanded = null
   ariaLabel = null
   variant = null
-  state = null
   set = null
   size = null
 
@@ -62,10 +51,9 @@ export class Button extends LitElement {
       ariaPressed: { type: Boolean, reflect: true, attribute: 'aria-pressed' },
       ariaExpanded: { type: Boolean, reflect: true, attribute: 'aria-expanded' },
       ariaLabel: { type: String, reflect: true, attribute: 'aria-label' },
-      variant: { type: String, reflect: false, attribute: 'data-variant' },
-      state: { type: String, reflect: false, attribute: 'data-state' },
-      set: { type: String, reflect: false, attribute: 'data-set' },
-      size: { type: String, reflect: false, attribute: 'data-size' },
+      variant: { type: String, reflect: true },
+      set: { type: String, reflect: true },
+      size: { type: String, reflect: true },
     }
   }
 
@@ -73,37 +61,29 @@ export class Button extends LitElement {
 
     const variantController = 
       variants.includes(this.variant || '') ?
-       `gds-button gds-button--${this.variant}` : ''
-
-    const stateController = 
-      states.includes(this.state || '') ?
-       `gds-button-state--${this.state}` : ''
+       `variant-${this.variant}` : ''
     
     const setController = 
       sets.includes(this.set || '') ?
-       `gds-button-set--${this.set}` : ''
+       `set-${this.set}` : ''
 
     const sizeController = 
       sizes.includes(this.size || '') ?
-       `gds-button-size--${this.size}` : ''
-    
+       `size-${this.size}` : ''
+       
     return html`
-      <style>
-        ${styles}
-      </style>
       <button 
-        class=${`${variantController}${stateController}${setController}${sizeController}`}
         ?disabled="${this.disabled}"
         aria-label="${this.textContent}"
         ?aria-pressed="${this.ariaPressed}"
         ?aria-expanded="${this.ariaExpanded}"
         tabindex="0"
+        data-options=${`${variantController} ${setController} ${sizeController}`}
       >   
         ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
         <slot></slot>
         ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
-      </button>
-    `
+      </button>`
   }
 
 }
