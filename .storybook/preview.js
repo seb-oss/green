@@ -8,7 +8,7 @@ export const parameters = {
     light,
     stylePreview: true,
     darkClass: 'dark-mode',
-    current: 'light'
+    current: 'light',
   },
-  viewMode: 'docs'
+  viewMode: 'docs',
 }
