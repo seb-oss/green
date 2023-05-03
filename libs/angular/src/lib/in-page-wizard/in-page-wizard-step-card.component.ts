@@ -9,6 +9,10 @@ export class NggInPageWizardStepCardComponent {
   readonly handleNextClick: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>()
 
+  @Output()
+  readonly handleEditClick: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
+
   @Input() public stepText = ''
 
   @Input() public title = ''
@@ -23,8 +27,9 @@ export class NggInPageWizardStepCardComponent {
 
   @Input() public isActive = false
 
-  public toggleActive(): void {
+  handleOnEditBtnClick(event: MouseEvent): void {
     this.isActive = !this.isActive
+    this.handleEditClick.emit(event)
   }
   handleOnNextBtnClick(event: MouseEvent) {
     this.isActive = false

@@ -41,12 +41,14 @@ export class AppModule {}
 | Event           | Description                                |
 | :-------------- | :----------------------------------------- |
 | handleNextClick | Event emitted when next button is clicked. |
+| handleEditClick | Event emitted when edit button is clicked. |
 
 ## Examples
 
 ### Default
 
-Step card that can be set to active.
+Step card that can be set to active.  
+_Note due to som issue with storybook and angular and input change the edit button change content is not switching as expected_
 
 <Canvas>
   <Story id="components-wizard-in-page-wizard-step-card--default" />
@@ -63,11 +65,16 @@ Usage
   [isActive]="!!isActive"
   [isCompleted]="!!isCompleted"
   [disableNext]="!!disableNext"
-  (handleNextClick)="isCompleted = true"
->
-  <div>
-    <h4 class="fs-1">Sub title</h4>
-    <p class="mb-5">Sub section text</p>
+  (handleEditClick)="noop()"
+  (handleNextClick)="isCompleted = true;"
+  >
+  <div *ngIf="!isCompleted">
+    <label for="textInput">Input label</label>
+    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <input id="textInput" type="text"/>
+  </div>
+  <div *ngIf="!!isCompleted">
+    <p class="mb-5">Input after completed</p>
   </div>
 </ngg-in-page-wizard-step-card>
 ```

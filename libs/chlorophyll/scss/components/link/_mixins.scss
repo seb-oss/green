@@ -41,7 +41,6 @@ $variants: (
     }
   }
 
-  &:not(.gds-link-icon__arrow:visited),
   &.link-history:visited {
     color: $color-visited;
   }
@@ -126,10 +125,10 @@ $variants: (
   }
 }
 
-/* 
+/*
 
 Mixin for link variants
-Base on background color of parent element eg. white links on dark backgrounds etc. 
+Base on background color of parent element eg. white links on dark backgrounds etc.
 
 */
 
