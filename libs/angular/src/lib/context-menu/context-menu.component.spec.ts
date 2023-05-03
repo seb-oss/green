@@ -48,7 +48,8 @@ describe('NggContextMenuComponent', () => {
 
     fireEvent.click(button)
 
-    const menuItems = await component.findAllByRole('option')
+    const menuList = await component.findByRole('listbox')
+    const menuItems = menuList.querySelectorAll('li')
     fireEvent.click(menuItems[0])
 
     expect(
