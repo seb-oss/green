@@ -27,7 +27,7 @@ describe('Dropdown', () => {
     })
 
     const [_buttons, _listboxes, _fieldset, _options] = [
-      await component.findAllByRole('button'),
+      await component.findAllByRole('combobox'),
       await component.findAllByRole('listbox'),
       await component.findAllByRole('listbox'),
       await component.findAllByRole('option'),
@@ -263,7 +263,7 @@ describe('Dropdown', () => {
         component.change({ loop: true })
 
         const [_buttons, _listboxes, _options] = [
-          await component.findAllByRole('button'),
+          await component.findAllByRole('combobox'),
           await component.findAllByRole('listbox'),
           await component.findAllByRole('option'),
         ]
