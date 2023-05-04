@@ -64,14 +64,17 @@ export const Dropdown = ({
         <span>{togglerProps.children}</span>
       </button>
       <div {...getListBoxProps(listboxProps)} ref={listboxRef}>
-        <button
-          type="button"
-          className="close m-4 m-sm-2 d-block d-sm-none"
-          onClick={dropdown?.close}
-        >
-          <span className="sr-only">{dropdown?.dropdown.texts.close}</span>
-          <i></i>
-        </button>
+        <div className="d-flex d-sm-none align-items-center">
+          <span className="flex-grow-1 ps-4 fs-2 fw-bolder">{label}</span>
+          <button
+            type="button"
+            className="close m-4 m-sm-2 d-block d-sm-none"
+            onClick={dropdown?.close}
+            aria-label={dropdown?.dropdown.texts.close}
+          >
+            <i></i>
+          </button>
+        </div>
         {dropdown?.dropdown.isMultiSelect ? (
           <div className="sg-fieldset-container">
             <fieldset {...multiSelectProps.fieldsetProps}>
