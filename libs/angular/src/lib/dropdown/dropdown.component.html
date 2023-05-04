@@ -10,6 +10,7 @@
         : null
     "
     type="button"
+    role="combobox"
     #togglerRef
     [id]="toggler?.attributes?.id"
     [attr.aria-haspopup]="toggler?.attributes?.['aria-haspopup']"
@@ -48,14 +49,17 @@
     [style]="listbox?.attributes?.style"
     [class]="listbox?.classes"
   >
-    <button
-      type="button"
-      class="close m-4 m-sm-2 d-block d-sm-none"
-      (click)="handler?.close()"
-    >
-      <span class="sr-only">{{ dropdown?.texts?.close }}</span>
-      <i></i>
-    </button>
+    <div class="d-flex d-sm-none align-items-center">
+      <span class="flex-grow-1 ps-4 fs-2 fw-bolder">{{ label }}</span>
+      <button
+        type="button"
+        class="close m-4 m-sm-2 d-block d-sm-none"
+        [attr.aria-label]="dropdown?.texts?.close"
+        (click)="handler?.close()"
+      >
+        <i></i>
+      </button>
+    </div>
     <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
       <ng-container *ngTemplateOutlet="searchInput"></ng-container>
       <li
