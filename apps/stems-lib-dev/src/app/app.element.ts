@@ -20,6 +20,8 @@ export class AppElement extends HTMLElement {
             <gds-option value="v2">Value 2</gds-option>
             <gds-option value="v3">Value 3</gds-option>
             <p>Hello</p>
+            <div>Some other crap</div>
+            asdasd
           </gds-dropdown>
         </div>
 
@@ -36,12 +38,16 @@ export class AppElement extends HTMLElement {
     dropdown.addEventListener('ui-state', (e: CustomEvent) =>
       console.log('UI state changed: ', e.detail)
     )
-    console.log('dropdown', dropdown.value)
+
+    dropdown.value = 'v2'
+    console.log('dropdown value', dropdown.value)
 
     const newOption = document.createElement('gds-option') as GdsOption
     newOption.value = { test: 'test' }
     newOption.innerHTML = 'New option'
     dropdown.appendChild(newOption)
+
+    console.log(dropdown.values)
 
     const form = this.querySelector('#my-form') as HTMLFormElement
     form.addEventListener('submit', (e) => {

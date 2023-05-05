@@ -1,5 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 
@@ -15,9 +16,12 @@ export class Listbox extends LitElement {
     delegatesFocus: true,
   }
 
+  private slotRef: Ref<HTMLSlotElement> = createRef()
+
   constructor() {
     super()
     this.addEventListener('keydown', (e) => {
+      console.log('keydown', e.key)
       if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
       if (!(e.target instanceof ListboxItem)) return
 
@@ -26,6 +30,7 @@ export class Listbox extends LitElement {
 
       if (e.key === 'ArrowDown') {
         const nextItem = e.target?.nextElementSibling as ListboxItem
+        console.log(nextItem)
         nextItem?.focus()
       }
       if (e.key === 'ArrowUp') {
@@ -38,7 +43,16 @@ export class Listbox extends LitElement {
   focus(options?: FocusOptions | undefined) {
     super.focus(options)
     console.log('focus listbox')
-    const firstItem = this.querySelector('gds-listbox-item') as ListboxItem
+
+    let slot = this.slotRef.value
+    if (!slot) return
+
+    // Unwrap nested slots
+    while (slot.assignedElements()[0].nodeName === 'SLOT') {
+      slot = slot.assignedElements()[0] as HTMLSlotElement
+    }
+
+    const firstItem = slot.assignedElements()[0] as ListboxItem
     console.log(firstItem)
     firstItem?.focus()
   }
@@ -46,7 +60,7 @@ export class Listbox extends LitElement {
   render() {
     return html`
       <ul role="listbox">
-        <slot></slot>
+        <slot ${ref(this.slotRef)}></slot>
       </ul>
     `
   }
@@ -90,6 +104,7 @@ export class ListboxItem extends LitElement {
   }
 
   select() {
+    this.shadowRoot?.querySelector('li')?.focus()
     this.dispatchEvent(
       new CustomEvent('select', {
         bubbles: true,

@@ -3,6 +3,10 @@
 
 li {
   @include self.listbox-item;
+
+  &:focus {
+    outline: 2px solid;
+  }
 }
 
 ul {

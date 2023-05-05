@@ -6,108 +6,38 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
+import { constrainSlots } from '#/utils'
+
 import { Listbox, ListboxItem } from '../listbox/listbox'
 import '../popover/popover'
 
 import styles from './stem.styles.scss'
 
-class GdsElement extends LitElement {
-  private observer: MutationObserver
-
-  private _mutationCallback(mutationsList: MutationRecord[]) {
-    for (const mutation of mutationsList) {
-      if (mutation.type === 'childList' || mutation.type === 'characterData') {
-        this.requestUpdate()
-        this.mutationCallback()
-      }
-    }
-  }
-
-  /**
-   * @description Override this method to respond to DOM changes
-   * @returns void
-   * @example mutationCallback() {
-   *  console.log('DOM changed')
-   * }
-   */
-  protected mutationCallback() {
-    console.log('DOM changed');
-    
-  }
-
-  /**
-   * @param elementName The name of the element to map
-   * @param callback A mapping function that takes an element and returns a TemplateResult
-   * @returns A list of TemplateResults
-   * @example this.mapChildren('some-element', (el) => html`<some-other-element>${el.innerHTML}</some-other-element>`)
-   *
-   * @description `mapChildren` can be used to transform a list of children to another type of element, or to restrict the children to a specific type of element.
-   */
-  protected mapChildren(
-    elementName: string,
-    callback: (child: Element) => TemplateResult
-  ) {
-    return Array.from(this.querySelectorAll(elementName) || []).map(callback)
-  }
-
-  /**
-   * @param elementName The name of the element to map
-   * @param callback A mapping function that takes an element and returns a TemplateResult
-   * @param fallback A fallback TemplateResult to return if no children are found
-   * @returns A list of TemplateResults or a fallback TemplateResult
-   * @example this.mapChildrenOr('some-element', (el) => html`<some-other-element>${el.innerHTML}</some-other-element>`, html`<p>Default content</p>`)
-   *
-   * @description Like `mapChildren`, but with fallback content if there are no children of the specified type.
-   */
-  protected mapChildrenOr(
-    elementName: string,
-    callback: (child: Element) => TemplateResult,
-    fallback: TemplateResult
-  ) {
-    const mapped = this.mapChildren(elementName, callback)
-    return mapped.length > 0 ? mapped : fallback
-  }
-
-  constructor() {
-    super()
-    this.observer = new MutationObserver(this._mutationCallback.bind(this))
-    this.observer.observe(this, {
-      attributes: false,
-      childList: true,
-      subtree: true,
-      characterData: true,
-    })
-  }
-}
-
 @customElement('gds-dropdown')
-export class Dropdown extends GdsElement {
+export class Dropdown extends LitElement {
   static styles = unsafeCSS(styles)
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   }
-
-  open = false
-  value: any
-
   static properties = {
     open: { type: Boolean, reflect: true },
     value: { reflect: true },
   }
+  static formAssociated = true
 
-  static get formAssociated() {
-    return true
-  }
+  open = false
+  value: any
 
   private internals: ElementInternals
   private listBoxRef: Ref<Listbox> = createRef()
-  private _values: { option: GdsOption; selected: boolean }[] = []
+  private _optionElements: HTMLCollectionOf<GdsOption>
 
   constructor() {
     super()
     this.internals = this.attachInternals() as any
     this.internals.role = 'combobox'
+    constrainSlots(this)
 
     this.addEventListener('keydown', async (e) => {
       if (e.key === 'ArrowDown') {
@@ -120,69 +50,61 @@ export class Dropdown extends GdsElement {
       }
     })
 
-    this.addEventListener('focusout', (e) => {
-      this.open = false
-    })
+    // this.addEventListener('focusout', (e) => {
+    //   this.open = false
+    // })
+
+    this._optionElements = this.getElementsByTagName(
+      'gds-option'
+    ) as HTMLCollectionOf<GdsOption>
   }
 
   get values() {
-    return this._values.map((v) => ({
-      ...v,
-      selected: this.value === v.option.value,
+    return Array.from(this._optionElements).map((o) => ({
+      option: o,
+      selected: this.value === o.value,
     }))
-  }
-
-  mutationCallback() {
-    this._values = Array.from<GdsOption>(
-      this.querySelectorAll('gds-option') || []
-    ).map((option) => ({
-      option: option,
-      selected: false,
-    }))
-    this.value = this.value || this.values[0]?.option.value
   }
 
   connectedCallback(): void {
     super.connectedCallback()
     this.internals.setFormValue(this.value)
     this.internals.ariaExpanded = this.open.toString()
+    this.value = this.value || this.values[0].option.value
   }
 
   render() {
     return html`
-      ${this.mapChildrenOr(
-        'gds-button',
-        (button) => this.buttonTemplate(html`${unsafeHTML(button.innerHTML)}`),
-        this.buttonTemplate(
-          html`${unsafeHTML(
-            this.values.find((v) => v.selected)?.option.innerHTML
-          )}`
-        )
-      )}
-      ${this.open
-        ? html`<gds-popover .open=${this.open}>
-            <gds-listbox ${ref(this.listBoxRef)}
-              >${this.mapChildren('gds-option', (el) => {
-                const option = el as GdsOption
-                return html`<gds-listbox-item
-                  .value="${option.value}"
-                  @select="${() => this.selectOption(option.value)}"
-                  >${unsafeHTML(option.innerHTML)}</gds-listbox-item
-                >`
-              })}
-            </gds-listbox>
-          </gds-popover>`
-        : ''}
+      <button
+        @click="${() => this.setOpen(!this.open)}"
+        aria-haspopup="listbox"
+      >
+        <slot name="button" gds-allow="span">
+          <span
+            >${unsafeHTML(
+              this.values.find((v) => v.selected)?.option.innerHTML
+            )}
+          </span>
+        </slot>
+      </button>
+      <gds-popover .open=${this.open}>
+        <gds-listbox
+          ${ref(this.listBoxRef)}
+          @select="${(e: CustomEvent) =>
+            this.selectOption(e.target as GdsOption)}"
+          ><slot gds-allow="gds-option"></slot
+        ></gds-listbox>
+      </gds-popover>
     `
   }
 
-  private selectOption(optionValue: any) {
-    this.value = optionValue
-    this.internals.setFormValue(optionValue)
+  private selectOption(option: GdsOption) {
+    this.value = option.value
+    this.internals.setFormValue(option.value)
     this.setOpen(false)
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: optionValue },
+        detail: { value: option.value },
         bubbles: true,
         composed: true,
       })
@@ -199,15 +121,6 @@ export class Dropdown extends GdsElement {
         composed: true,
       })
     )
-  }
-
-  private buttonTemplate(content = html`Dropdown button`) {
-    return html`<button
-      @click="${() => this.setOpen(!this.open)}"
-      aria-haspopup="listbox"
-    >
-      <span>${content}</span>
-    </button>`
   }
 }
 
