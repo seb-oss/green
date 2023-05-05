@@ -27,7 +27,7 @@ describe('Dropdown', () => {
     })
 
     const [_buttons, _listboxes, _fieldset, _options] = [
-      await component.findAllByRole('button'),
+      await component.findAllByRole('combobox'),
       await component.findAllByRole('listbox'),
       await component.findAllByRole('listbox'),
       await component.findAllByRole('option'),
@@ -104,7 +104,9 @@ describe('Dropdown', () => {
       it('sets toggler text', async () => {
         fireEvent.click(options[1])
         await waitFor(() =>
-          expect(toggleButton.innerHTML.trim()).toEqual('<span>B</span>')
+          expect(
+            toggleButton.innerHTML.trim().replace(/<!--[\s\S]*?-->/g, '')
+          ).toEqual('<span>B</span>')
         )
       })
     })
@@ -261,7 +263,7 @@ describe('Dropdown', () => {
         component.change({ loop: true })
 
         const [_buttons, _listboxes, _options] = [
-          await component.findAllByRole('button'),
+          await component.findAllByRole('combobox'),
           await component.findAllByRole('listbox'),
           await component.findAllByRole('option'),
         ]

@@ -99,18 +99,24 @@ const CustomOptionTemplate: Story<NggDropdownComponent> = (
   return {
     component: NggDropdownComponent,
     template: `
-    <ngg-dropdown 
-      [texts]="texts" 
-      [options]="options" 
-      [(value)]="value" 
-      [loop]="loop" 
-      [multiSelect]="multiSelect" 
-      [searchable]="searchable" 
-      [searchFilter]="searchFilter" 
-      [compareWith]="compareWith" 
-      [useValue]="useValue" 
-      [display]="display" 
+    <ngg-dropdown
+      [texts]="texts"
+      [options]="options"
+      [(value)]="value"
+      [loop]="loop"
+      [multiSelect]="multiSelect"
+      [searchable]="searchable"
+      [searchFilter]="searchFilter"
+      [compareWith]="compareWith"
+      [useValue]="useValue"
+      [display]="display"
       [id]="id">
+      <ng-template nggDropdownButton let-option="option">
+        <div>
+          <div>{{ option.name }}</div>
+          <div style="font-size: 0.8em">{{ option.val.kitchen }}</div>
+        </div>
+      </ng-template>
       <ng-template nggDropdownOption let-option="option" let-index="index">
         <div>
           <div>{{ index }}. {{ option.name }}</div>
@@ -126,10 +132,10 @@ const CustomOptionTemplate: Story<NggDropdownComponent> = (
 export const CustomOption = CustomOptionTemplate.bind({})
 CustomOption.args = {
   id: '',
-  texts: { placeholder: 'Select meal(s)' },
+  texts: { placeholder: 'Select meal' },
   value: '',
   loop: true,
-  multiSelect: true,
+  multiSelect: false,
   searchable: true,
   useValue: 'val',
   display: 'name',
