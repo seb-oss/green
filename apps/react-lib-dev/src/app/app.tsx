@@ -30,7 +30,8 @@ export function App() {
   const [validator, setValidator] = useState<undefined | IValidator>(undefined)
 
   const [adults, setAdults] = useState<{ id: number; value: number }>()
-  const [sliderValue, setSliderValue] = useState<number>(0)
+
+  const [sliderValue, setSliderValue] = useState<number>()
 
   const onStepperChange = (value: number) => {
     console.log('** START **')
@@ -109,7 +110,12 @@ export function App() {
                 />
                 <Stepper onChange={onStepperChange} />
 
-                <Slider onChange={(value) => setSliderValue(value)} />
+                <Slider
+                  hasTextbox={true}
+                  label={'Slider label'}
+                  value={sliderValue}
+                  onChange={(value) => setSliderValue(value)}
+                />
                 <div>Slider value: {sliderValue}</div>
 
                 <button type="submit">Submit</button>
