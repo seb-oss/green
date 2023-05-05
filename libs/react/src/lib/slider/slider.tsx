@@ -52,7 +52,7 @@ export function Slider({
       return
     }
 
-    let percent: number = 0
+    let percent = 0
     if (sliderValue !== undefined)
       percent = ((sliderValue - min) / (max - min)) * 100
 
