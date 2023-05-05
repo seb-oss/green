@@ -28,7 +28,7 @@ export interface SliderProps {
   hasTextbox?: boolean
   unitLabel?: string
   disabled?: boolean
-  onChange?: (value: number) => void
+  onChange?: (value: number | undefined) => void
 
   /**
    * @deprecated Use `value` instead

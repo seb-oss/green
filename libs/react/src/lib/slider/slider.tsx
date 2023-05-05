@@ -59,16 +59,24 @@ export function Slider({
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
+  const setNumValueOrEmpty = (value: number | undefined | string) => {
+    let numValue: number | undefined = Number(value)
+
+    if (Number.isNaN(numValue) || value === '') numValue = undefined
+
+    setSliderValue(numValue)
+
+    return numValue
+  }
+
   React.useEffect(() => {
-    let numValue = Number(value)
-    if (Number.isNaN(numValue)) setSliderValue(undefined)
-    else setSliderValue(Number(value))
+    setNumValueOrEmpty(value)
   }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    setSliderValue(Number(value))
-    if (onChange) onChange(Number(value))
+    const newVal = setNumValueOrEmpty(value)
+    if (onChange) onChange(newVal)
   }
 
   return (
