@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.6.0...@sebgroup/green-angular@1.7.0) (2023-05-05)
+
+
+### Features
+
+* **dropdown:** allow custom template for dropdown button ([#860](https://github.com/sebgroup/green/issues/860)) ([4a05eea](https://github.com/sebgroup/green/commit/4a05eeac9769d8c7c1a0838e14b76305d8edcd89))
+
+
+
 # [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.1...@sebgroup/green-angular@1.6.0) (2023-05-03)
 
 
