@@ -40,6 +40,8 @@ export function Slider({
   unitLabel,
   disabled = false,
   onChange,
+  enableClamping = true,
+  onClamp,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number | undefined>(
@@ -59,12 +61,31 @@ export function Slider({
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
+  const clamp = (origValue: number | undefined) => {
+    if (!enableClamping || origValue === undefined) return origValue
+
+    let newValue = origValue
+    let hasClamped = false
+
+    if (newValue < min) {
+      hasClamped = true
+      newValue = min
+    }
+    if (newValue > max) {
+      hasClamped = true
+      newValue = max
+    }
+    if (hasClamped && onClamp) onClamp(Number(origValue))
+
+    return newValue
+  }
+
   const setNumValueOrEmpty = (value: number | undefined | string) => {
     let numValue: number | undefined = Number(value)
 
     if (Number.isNaN(numValue) || value === '') numValue = undefined
 
-    setSliderValue(numValue)
+    setSliderValue(clamp(numValue))
 
     return numValue
   }
@@ -97,6 +118,11 @@ export function Slider({
                 className={errorMessage ? 'is-invalid' : ''}
                 disabled={disabled}
                 onChange={handleChange}
+                min={min}
+                max={max}
+                onInvalid={(e) => {
+                  e.preventDefault()
+                }}
               />
             </InputWrapper>
           )}

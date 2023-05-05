@@ -115,6 +115,9 @@ export function App() {
                   label={'Slider label'}
                   value={sliderValue}
                   onChange={(value) => setSliderValue(value)}
+                  onClamp={(value) => {
+                    console.log('onClampValue', value)
+                  }}
                 />
                 <div>Slider value: {sliderValue}</div>
 
