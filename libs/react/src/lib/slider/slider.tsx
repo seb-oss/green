@@ -75,7 +75,7 @@ export function Slider({
       hasClamped = true
       newValue = max
     }
-    if (hasClamped && onClamp) onClamp(Number(origValue))
+    if (hasClamped && onClamp) onClamp(origValue)
 
     return newValue
   }
