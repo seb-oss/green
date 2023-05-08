@@ -42,8 +42,8 @@ export function Slider({
   onChange,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
-  const [sliderValue, setSliderValue] = React.useState<number>(
-    value ?? defaultValue ?? 0
+  const [sliderValue, setSliderValue] = React.useState<number | undefined>(
+    value ?? defaultValue
   )
 
   React.useLayoutEffect(() => {
@@ -52,18 +52,31 @@ export function Slider({
       return
     }
 
-    const percent: number = ((sliderValue - min) / (max - min)) * 100
+    let percent = 0
+    if (sliderValue !== undefined)
+      percent = ((sliderValue - min) / (max - min)) * 100
+
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
+  const setNumValueOrEmpty = (value: number | undefined | string) => {
+    let numValue: number | undefined = Number(value)
+
+    if (Number.isNaN(numValue) || value === '') numValue = undefined
+
+    setSliderValue(numValue)
+
+    return numValue
+  }
+
   React.useEffect(() => {
-    setSliderValue(Number(value))
+    setNumValueOrEmpty(value)
   }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-    setSliderValue(Number(value))
-    if (onChange) onChange(Number(value))
+    const newVal = setNumValueOrEmpty(value)
+    if (onChange) onChange(newVal)
   }
 
   return (
@@ -78,7 +91,7 @@ export function Slider({
             <InputWrapper unitLabel={unitLabel}>
               <input
                 type="number"
-                value={sliderValue}
+                value={sliderValue ?? ''}
                 id={`${name}-textbox`}
                 name={name}
                 className={errorMessage ? 'is-invalid' : ''}
@@ -91,7 +104,7 @@ export function Slider({
       )}
       <input
         type="range"
-        value={sliderValue}
+        value={sliderValue || 0}
         id={name}
         name={name}
         min={min}
