@@ -118,19 +118,31 @@
     "id": "components-wizard-in-page-wizard-step-card--default",
     "name": "Default",
     "title": "Components/Wizard/In page wizard step card",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
   },
   {
     "id": "components-wizard-in-page-wizard-step-card--disable-next",
     "name": "Disable Next",
     "title": "Components/Wizard/In page wizard step card",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
   },
   {
     "id": "components-wizard-in-page-wizard-step-card--multiple",
     "name": "Multiple",
     "title": "Components/Wizard/In page wizard step card",
-    "customParams": {}
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
   },
   {
     "id": "components-dropdown--select",
@@ -219,6 +231,36 @@
     "customParams": {
       "componentIds": [
         "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--default",
+    "name": "Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--right-to-left",
+    "name": "Right To Left",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--custom-template-default",
+    "name": "Custom Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
       ]
     }
   },
