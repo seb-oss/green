@@ -147,32 +147,32 @@
   --gds-fs-label-overline: 1.4rem; /* 14px / 10px = 1.4rem */
 
   /* Line heights */
-  --gds-fs-display-large-lh: 1.1905; /* 98/82 */
-  --gds-fs-display-medium-lh: 1.25; /* 80/64 */
-  --gds-fs-display-small-lh: 1.3077; /* 52/40 */
-  --gds-fs-headline-large-lh: 1.25; /* 40/32 */
-  --gds-fs-headline-medium-lh: 1.125; /* 36/32 */
-  --gds-fs-headline-small-lh: 1.2; /* 30/24 */
-  --gds-fs-title-large-lh: 1.1071; /* 28/22 */
-  --gds-fs-title-medium-lh: 1.5; /* 24/16 */
-  --gds-fs-title-small-lh: 1.4286; /* 20/14 */
-  --gds-fs-body-large-lh: 1.25; /* 20/16 */
-  --gds-fs-body-medium-lh: 1.4286; /* 20/14 */
-  --gds-fs-body-small-lh: 1.3333; /* 16/12 */
-  --gds-fs-label-large-lh: 1.25; /* 20/16 */
-  --gds-fs-label-medium-lh: 1.4286; /* 20/14 */
-  --gds-fs-label-small-lh: 1.3333; /* 16/12 */
-  --gds-fs-label-information-large-lh: 1.25; /* 20/16 */
-  --gds-fs-label-information-medium-lh: 1.4286; /* 20/14 */
-  --gds-fs-label-input-large-lh: 1.25; /* 20/16 */
-  --gds-fs-label-input-medium-lh: 1.4286; /* 20/14 */
-  --gds-fs-label-overline-lh: 1.1667; /* 18/14 */
+  --gds-lh-display-large: 1.1905; /* 98/82 */
+  --gds-lh-display-medium: 1.25; /* 80/64 */
+  --gds-lh-display-small: 1.3077; /* 52/40 */
+  --gds-lh-headline-large: 1.25; /* 40/32 */
+  --gds-lh-headline-medium: 1.125; /* 36/32 */
+  --gds-lh-headline-small: 1.2; /* 30/24 */
+  --gds-lh-title-large: 1.1071; /* 28/22 */
+  --gds-lh-title-medium: 1.5; /* 24/16 */
+  --gds-lh-title-small: 1.4286; /* 20/14 */
+  --gds-lh-body-large: 1.25; /* 20/16 */
+  --gds-lh-body-medium: 1.4286; /* 20/14 */
+  --gds-lh-body-small: 1.3333; /* 16/12 */
+  --gds-lh-label-large: 1.25; /* 20/16 */
+  --gds-lh-label-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-small: 1.3333; /* 16/12 */
+  --gds-lh-label-information-large: 1.25; /* 20/16 */
+  --gds-lh-label-information-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-input-large: 1.25; /* 20/16 */
+  --gds-lh-label-input-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-overline: 1.1667; /* 18/14 */
 
   /* Font weights */
-  --gds-font-weight-light: 300;
-  --gds-font-weight-regular: 400;
-  --gds-font-weight-medium: 500;
-  --gds-font-weight-bold: 700;
+  --gds-fw-light: 300;
+  --gds-fw-regular: 400;
+  --gds-fw-medium: 500;
+  --gds-fw-bold: 700;
 
   /* Spacing */
   --gds-spacing-1: 0.2rem; /* 2px / 10px = 0.2rem */
@@ -189,11 +189,6 @@
   --gds-spacing-12: 9.6rem; /* 96px / 10px = 9.6rem */
   --gds-spacing-13: 11.2rem; /* 112px / 10px = 11.2rem */
   --gds-spacing-14: 12.8rem; /* 128px / 10px = 12.8rem */
-
-  /* Background styles */
-  --gds-bg-a50: 0.5;
-  --gds-bg-a80: 0.8;
-  --gds-bg-blur: 20px;
 
   /* Transitions */
   --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
@@ -221,4 +216,9 @@
   --gds-sys-gap-small: var(--gds-spacing-3);
   --gds-sys-gap-medium: var(--gds-spacing-5);
   --gds-sys-gap-large: var(--gds-spacing-8);
+
+  /* Background styles */
+  --gds-bg-a50: 0.5;
+  --gds-bg-a80: 0.8;
+  --gds-bg-blur: 20px;
 }
