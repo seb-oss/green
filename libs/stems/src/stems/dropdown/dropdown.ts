@@ -6,7 +6,7 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
-import { constrainSlots } from '#/utils'
+import { constrainSlots } from '../../tools/utils'
 
 import { Listbox, ListboxItem } from '../listbox/listbox'
 import '../popover/popover'
