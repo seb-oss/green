@@ -13,6 +13,7 @@ export * from './lib/slider'
 export * from './lib/stepper/stepper'
 export * from './lib/dropdown/dropdown'
 export * from './lib/datepicker/datepicker'
+export * from './lib/accordion/accordion'
 export * from './types'
 
 // Backwards compatibility export
