@@ -2,6 +2,22 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.7.0...@sebgroup/green-react@1.8.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* **accordion:** add missing export for accordion ([#870](https://github.com/sebgroup/green/issues/870)) ([6aeac24](https://github.com/sebgroup/green/commit/6aeac2474c61188406d5fe35e3b858dc649d9b5d))
+* add missing exports and sort exports alphabetically ([#872](https://github.com/sebgroup/green/issues/872)) ([b2c968a](https://github.com/sebgroup/green/commit/b2c968ab176bf47f75dbf26f173b0d6915db1034))
+* **slider:** allow `undefined` values ([#869](https://github.com/sebgroup/green/issues/869)) ([179e82b](https://github.com/sebgroup/green/commit/179e82b127c45eb023285d660b45d5a971af95a2))
+
+
+### Features
+
+* **slider:** add clamping to min-max range ([#871](https://github.com/sebgroup/green/issues/871)) ([d7b0e33](https://github.com/sebgroup/green/commit/d7b0e33ec584ef30f713144d176a4005ac4df6f4))
+
+
+
 # [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.6.0...@sebgroup/green-react@1.7.0) (2023-05-05)
 
 
