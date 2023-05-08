@@ -29,6 +29,8 @@ export interface SliderProps {
   unitLabel?: string
   disabled?: boolean
   onChange?: (value: number | undefined) => void
+  enableClamping?: boolean
+  onClamp?: (value: number) => void
 
   /**
    * @deprecated Use `value` instead
