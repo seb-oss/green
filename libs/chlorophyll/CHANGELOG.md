@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.9.0...@sebgroup/chlorophyll@1.9.1) (2023-05-08)
+
+
+### Bug Fixes
+
+* **checkbox:** animations & hover ([#868](https://github.com/sebgroup/green/issues/868)) ([d2edb2e](https://github.com/sebgroup/green/commit/d2edb2ec92bcfae1e447efecff83517ef6340183))
+
+
+
 # [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.8.1...@sebgroup/chlorophyll@1.9.0) (2023-05-03)
 
 
