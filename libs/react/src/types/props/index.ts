@@ -28,7 +28,7 @@ export interface SliderProps {
   hasTextbox?: boolean
   unitLabel?: string
   disabled?: boolean
-  onChange?: (value: number | undefined) => void
+  onChange?: (value: number) => void
   enableClamping?: boolean
   onClamp?: (value: number) => void
 

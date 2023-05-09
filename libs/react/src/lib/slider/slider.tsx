@@ -6,6 +6,7 @@ import {
 } from '@sebgroup/extract'
 
 import { SliderProps } from '../../types'
+import { set } from 'date-fns'
 
 const InputWrapper = ({
   children,
@@ -47,6 +48,9 @@ export function Slider({
   const [sliderValue, setSliderValue] = React.useState<number | undefined>(
     value ?? defaultValue
   )
+  const [inputFieldValue, setInputFieldValue] = React.useState<string>(
+    sliderValue + ''
+  )
 
   React.useLayoutEffect(() => {
     if (disabled) {
@@ -61,8 +65,11 @@ export function Slider({
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
-  const clamp = (origValue: number | undefined) => {
-    if (!enableClamping || origValue === undefined) return origValue
+  const clamp = (origValue: number | undefined | string): number => {
+    if (!enableClamping || origValue === undefined) return Number(origValue)
+
+    if (!origValue || Number.isNaN(origValue)) return min
+    if (typeof origValue === 'string') origValue = Number(origValue)
 
     let newValue = origValue
     let hasClamped = false
@@ -80,54 +87,67 @@ export function Slider({
     return newValue
   }
 
-  const setNumValueOrEmpty = (value: number | undefined | string) => {
-    let numValue: number | undefined = Number(value)
-
-    if (Number.isNaN(numValue) || value === '') numValue = undefined
-
-    setSliderValue(clamp(numValue))
-
-    return numValue
+  const setNumValue = (value: number | undefined | string) => {
+    if (value === '') value = min
+    const unclamped = Number(value)
+    const clamped = clamp(unclamped)
+    setSliderValue(clamped)
+    return [unclamped, clamped]
   }
 
   React.useEffect(() => {
-    setNumValueOrEmpty(value)
+    setNumValue(value)
   }, [value])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    const newVal = setNumValueOrEmpty(value)
-    if (onChange) onChange(newVal)
+  const handleChange = (value: string) => {
+    const [unclamped, clamped] = setNumValue(value)
+    setInputFieldValue(unclamped + '')
+    if (onChange) onChange(clamped)
+  }
+
+  const handleInputFieldChange = (value: string, shouldClamp = false) => {
+    handleChange(value)
+    if (value === '') setInputFieldValue('')
+    else if (shouldClamp) setInputFieldValue(clamp(value) + '')
   }
 
   return (
     <>
-      {label && (
-        <div className="gds-slider-label-container">
-          <div>
-            <label htmlFor={name}>{label}</label>
-            {instruction && <p>{instruction}</p>}
-          </div>
-          {hasTextbox && (
-            <InputWrapper unitLabel={unitLabel}>
-              <input
-                type="number"
-                value={sliderValue ?? ''}
-                id={`${name}-textbox`}
-                name={name}
-                className={errorMessage ? 'is-invalid' : ''}
-                disabled={disabled}
-                onChange={handleChange}
-                min={min}
-                max={max}
-                onInvalid={(e) => {
-                  e.preventDefault()
-                }}
-              />
-            </InputWrapper>
+      <div className="gds-slider-label-container">
+        <div>
+          {label && (
+            <>
+              <label htmlFor={name}>{label}</label>
+              {instruction && <p>{instruction}</p>}
+            </>
           )}
         </div>
-      )}
+        {hasTextbox && (
+          <InputWrapper unitLabel={unitLabel}>
+            <input
+              type="number"
+              value={inputFieldValue}
+              id={`${name}-textbox`}
+              name={name}
+              className={errorMessage ? 'is-invalid' : ''}
+              disabled={disabled}
+              onChange={(e) => handleInputFieldChange(e.currentTarget.value)}
+              onKeyDown={(e) =>
+                e.key === 'Enter' &&
+                handleInputFieldChange(e.currentTarget.value, true)
+              }
+              onBlur={(e) =>
+                handleInputFieldChange(e.currentTarget.value, true)
+              }
+              min={min}
+              max={max}
+              onInvalid={(e) => {
+                e.preventDefault()
+              }}
+            />
+          </InputWrapper>
+        )}
+      </div>
       <input
         type="range"
         value={sliderValue || 0}
@@ -137,7 +157,7 @@ export function Slider({
         max={max}
         step={step}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.currentTarget.value)}
         style={{
           background,
         }}
