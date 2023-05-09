@@ -1,0 +1,234 @@
+:root {
+  /* Color styles */
+  --gds-color-transparent: transparent;
+  --gds-color-current: currentColor;
+  --gds-color-text-primary: rgba(49, 48, 48, 1);
+  --gds-color-text-secondary: rgba(108, 106, 106, 1);
+  --gds-color-text-disabled: rgba(157, 157, 149, 1);
+  --gds-color-text-inverse: rgba(255, 255, 255, 1);
+  --gds-color-text-red: rgba(186, 29, 0, 1);
+  --gds-color-text-green: rgba(0, 110, 44, 1);
+  --gds-color-text-blue: rgba(0, 95, 172, 1);
+  --gds-color-link-primary: rgba(217, 217, 217, 1);
+  --gds-color-icon-primary: rgba(49, 48, 48, 1);
+  --gds-color-icon-secondary: rgba(106, 106, 98, 1);
+  --gds-color-icon-disabled: rgba(157, 157, 149, 1);
+  --gds-color-icon-inverse: rgba(255, 255, 255, 1);
+  --gds-color-icon-red: rgba(186, 29, 0, 1);
+  --gds-color-icon-green: rgba(0, 110, 44, 1);
+  --gds-color-icon-blue: rgba(0, 95, 172, 1);
+  --gds-color-background-primary: rgba(255, 255, 255, 1);
+  --gds-color-stroke-primary: rgba(133, 133, 122, 1);
+  --gds-color-stroke-secondary: rgba(206, 206, 202, 1);
+  --gds-color-stroke-inverse: rgba(255, 255, 255, 1);
+  --gds-color-stroke-error: rgba(186, 29, 0, 1);
+  --gds-color-grey-5: rgba(13, 13, 12, 1);
+  --gds-color-grey-10: rgba(27, 27, 24, 1);
+  --gds-color-grey-15: rgba(40, 40, 37, 1);
+  --gds-color-grey-20: rgba(53, 53, 49, 1);
+  --gds-color-grey-25: rgba(66, 66, 61, 1);
+  --gds-color-grey-30: rgba(80, 80, 73, 1);
+  --gds-color-grey-35: rgba(93, 93, 86, 1);
+  --gds-color-grey-40: rgba(106, 106, 98, 1);
+  --gds-color-grey-45: rgba(119, 119, 110, 1);
+  --gds-color-grey-50: rgba(133, 133, 122, 1);
+  --gds-color-grey-55: rgba(145, 145, 136, 1);
+  --gds-color-grey-60: rgba(157, 157, 149, 1);
+  --gds-color-grey-65: rgba(169, 169, 162, 1);
+  --gds-color-grey-70: rgba(182, 182, 175, 1);
+  --gds-color-grey-75: rgba(194, 194, 189, 1);
+  --gds-color-grey-80: rgba(206, 206, 202, 1);
+  --gds-color-grey-85: rgba(218, 218, 215, 1);
+  --gds-color-grey-90: rgba(231, 231, 228, 1);
+  --gds-color-grey-95: rgba(243, 243, 242, 1);
+  --gds-color-grey-98: rgba(249, 249, 249, 1);
+  --gds-color-red-5: rgba(43, 2, 0, 1);
+  --gds-color-red-10: rgba(62, 4, 0, 1);
+  --gds-color-red-15: rgba(81, 7, 0, 1);
+  --gds-color-red-20: rgba(101, 11, 0, 1);
+  --gds-color-red-25: rgba(121, 15, 0, 1);
+  --gds-color-red-30: rgba(142, 20, 0, 1);
+  --gds-color-red-35: rgba(163, 24, 0, 1);
+  --gds-color-red-40: rgba(186, 29, 0, 1);
+  --gds-color-red-45: rgba(208, 34, 0, 1);
+  --gds-color-red-50: rgba(226, 48, 16, 1);
+  --gds-color-red-55: rgba(245, 62, 29, 1);
+  --gds-color-red-60: rgba(255, 86, 54, 1);
+  --gds-color-red-65: rgba(255, 114, 87, 1);
+  --gds-color-red-70: rgba(255, 138, 115, 1);
+  --gds-color-red-75: rgba(255, 160, 141, 1);
+  --gds-color-red-80: rgba(255, 180, 165, 1);
+  --gds-color-red-85: rgba(255, 200, 188, 1);
+  --gds-color-red-90: rgba(255, 218, 211, 1);
+  --gds-color-red-95: rgba(255, 237, 233, 1);
+  --gds-color-red-98: rgba(255, 248, 246, 1);
+  --gds-color-green-5: rgba(0, 21, 4, 1);
+  --gds-color-green-10: rgba(0, 33, 8, 1);
+  --gds-color-green-15: rgba(0, 45, 13, 1);
+  --gds-color-green-20: rgba(0, 57, 19, 1);
+  --gds-color-green-25: rgba(0, 70, 25, 1);
+  --gds-color-green-30: rgba(0, 83, 31, 1);
+  --gds-color-green-35: rgba(0, 96, 37, 1);
+  --gds-color-green-40: rgba(0, 110, 44, 1);
+  --gds-color-green-45: rgba(0, 124, 50, 1);
+  --gds-color-green-50: rgba(0, 138, 57, 1);
+  --gds-color-green-55: rgba(0, 152, 64, 1);
+  --gds-color-green-60: rgba(0, 167, 71, 1);
+  --gds-color-green-65: rgba(0, 182, 78, 1);
+  --gds-color-green-70: rgba(0, 197, 85, 1);
+  --gds-color-green-75: rgba(0, 213, 92, 1);
+  --gds-color-green-80: rgba(0, 229, 99, 1);
+  --gds-color-green-85: rgba(0, 244, 107, 1);
+  --gds-color-green-90: rgba(104, 255, 137, 1);
+  --gds-color-green-95: rgba(198, 255, 199, 1);
+  --gds-color-green-98: rgba(235, 255, 231, 1);
+  --gds-color-blue-5: rgba(0, 17, 39, 1);
+  --gds-color-blue-10: rgba(0, 28, 57, 1);
+  --gds-color-blue-15: rgba(0, 38, 75, 1);
+  --gds-color-blue-20: rgba(0, 49, 93, 1);
+  --gds-color-blue-25: rgba(0, 60, 112, 1);
+  --gds-color-blue-30: rgba(0, 72, 131, 1);
+  --gds-color-blue-35: rgba(0, 83, 151, 1);
+  --gds-color-blue-40: rgba(0, 95, 172, 1);
+  --gds-color-blue-45: rgba(0, 108, 193, 1);
+  --gds-color-blue-50: rgba(0, 120, 215, 1);
+  --gds-color-blue-55: rgba(0, 133, 236, 1);
+  --gds-color-blue-60: rgba(25, 146, 255, 1);
+  --gds-color-blue-65: rgba(78, 160, 255, 1);
+  --gds-color-blue-70: rgba(111, 174, 255, 1);
+  --gds-color-blue-75: rgba(138, 187, 255, 1);
+  --gds-color-blue-80: rgba(164, 201, 255, 1);
+  --gds-color-blue-85: rgba(188, 214, 255, 1);
+  --gds-color-blue-90: rgba(212, 227, 255, 1);
+  --gds-color-blue-95: rgba(235, 241, 255, 1);
+  --gds-color-blue-98: rgba(248, 249, 255, 1);
+  --gds-color-orange-5: rgba(26, 15, 0, 1);
+  --gds-color-orange-10: rgba(39, 25, 0, 1);
+  --gds-color-orange-15: rgba(53, 34, 0, 1);
+  --gds-color-orange-20: rgba(66, 44, 0, 1);
+  --gds-color-orange-25: rgba(80, 55, 0, 1);
+  --gds-color-orange-30: rgba(95, 65, 0, 1);
+  --gds-color-orange-35: rgba(110, 76, 0, 1);
+  --gds-color-orange-40: rgba(125, 87, 0, 1);
+  --gds-color-orange-45: rgba(141, 99, 0, 1);
+  --gds-color-orange-50: rgba(157, 110, 0, 1);
+  --gds-color-orange-55: rgba(174, 122, 0, 1);
+  --gds-color-orange-60: rgba(190, 134, 0, 1);
+  --gds-color-orange-65: rgba(207, 147, 0, 1);
+  --gds-color-orange-70: rgba(225, 159, 0, 1);
+  --gds-color-orange-75: rgba(242, 172, 0, 1);
+  --gds-color-orange-80: rgba(255, 186, 48, 1);
+  --gds-color-orange-85: rgba(255, 204, 119, 1);
+  --gds-color-orange-90: rgba(255, 222, 171, 1);
+  --gds-color-orange-95: rgba(255, 238, 217, 1);
+  --gds-color-orange-98: rgba(255, 248, 243, 1);
+
+  /* Text-size styles */
+  --gds-fs-base: 10px;
+  --gds-fs-display-large: 8.2rem; /* 82px / 10px = 8.2rem */
+  --gds-fs-display-medium: 6.4rem; /* 64px / 10px = 6.4rem */
+  --gds-fs-display-small: 4rem; /* 40px / 10px = 4.0rem */
+  --gds-fs-headline-large: 3.2rem; /* 32px / 10px = 3.2rem */
+  --gds-fs-headline-medium: 2.8rem; /* 28px / 10px = 2.8rem */
+  --gds-fs-headline-small: 2.4rem; /* 24px / 10px = 2.4rem */
+  --gds-fs-title-large: 2.2rem; /* 22px / 10px = 2.2rem */
+  --gds-fs-title-medium: 1.6rem; /* 16px / 10px = 1.6rem */
+  --gds-fs-title-small: 1.4rem; /* 14px / 10px = 1.4rem */
+  --gds-fs-body-large: 1.6rem; /* 16px / 10px = 1rem */
+  --gds-fs-body-medium: 1.4rem; /* 14px / 10px = 1.4rem */
+  --gds-fs-body-small: 1.2rem; /* 12px / 10px = 1.2rem */
+  --gds-fs-label-large: 1.6rem; /* 16px / 10px = 1.6rem */
+  --gds-fs-label-medium: 1.4rem; /* 14px / 10px = 1.4rem */
+  --gds-fs-label-small: 1.2rem; /* 12px / 10px = 1.2rem */
+  --gds-fs-label-information-large: 1.6rem; /* 16px / 10px = 1.6rem */
+  --gds-fs-label-information-medium: 1.4rem; /* 14px / 10px = 1.4rem */
+  --gds-fs-label-input-large: 1.6rem; /* 16px / 10px = 1.6rem */
+  --gds-fs-label-input-medium: 1.4rem; /* 14px / 10px = 1.4rem */
+  --gds-fs-label-overline: 1.4rem; /* 14px / 10px = 1.4rem */
+
+  /* Line heights */
+  --gds-lh-display-large: 1.1905; /* 98/82 */
+  --gds-lh-display-medium: 1.25; /* 80/64 */
+  --gds-lh-display-small: 1.3077; /* 52/40 */
+  --gds-lh-headline-large: 1.25; /* 40/32 */
+  --gds-lh-headline-medium: 1.125; /* 36/32 */
+  --gds-lh-headline-small: 1.2; /* 30/24 */
+  --gds-lh-title-large: 1.1071; /* 28/22 */
+  --gds-lh-title-medium: 1.5; /* 24/16 */
+  --gds-lh-title-small: 1.4286; /* 20/14 */
+  --gds-lh-body-large: 1.25; /* 20/16 */
+  --gds-lh-body-medium: 1.4286; /* 20/14 */
+  --gds-lh-body-small: 1.3333; /* 16/12 */
+  --gds-lh-label-large: 1.25; /* 20/16 */
+  --gds-lh-label-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-small: 1.3333; /* 16/12 */
+  --gds-lh-label-information-large: 1.25; /* 20/16 */
+  --gds-lh-label-information-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-input-large: 1.25; /* 20/16 */
+  --gds-lh-label-input-medium: 1.4286; /* 20/14 */
+  --gds-lh-label-overline: 1.1667; /* 18/14 */
+
+  /* Font weights */
+  --gds-fw-light: 300;
+  --gds-fw-regular: 400;
+  --gds-fw-medium: 500;
+  --gds-fw-bold: 700;
+
+  /* Spacing */
+  --gds-spacing-1: 0.2rem; /* 2px / 10px = 0.2rem */
+  --gds-spacing-2: 0.4rem; /* 4px / 10px = 0.4rem */
+  --gds-spacing-3: 0.8rem; /* 8px / 10px = 0.8rem */
+  --gds-spacing-4: 1.2rem; /* 12px / 10px = 1.2rem */
+  --gds-spacing-5: 1.6rem; /* 16px / 10px = 1.6rem */
+  --gds-spacing-6: 2.4rem; /* 24px / 10px = 2.4rem */
+  --gds-spacing-7: 3.2rem; /* 32px / 10px = 3.2rem */
+  --gds-spacing-8: 4rem; /* 40px / 10px = 4.0rem */
+  --gds-spacing-9: 4.8rem; /* 48px / 10px = 4.8rem */
+  --gds-spacing-10: 6.4rem; /* 64px / 10px = 6.4rem */
+  --gds-spacing-11: 8rem; /* 80px / 10px = 8.0rem */
+  --gds-spacing-12: 9.6rem; /* 96px / 10px = 9.6rem */
+  --gds-spacing-13: 11.2rem; /* 112px / 10px = 11.2rem */
+  --gds-spacing-14: 12.8rem; /* 128px / 10px = 12.8rem */
+
+  /* Transitions */
+  --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  --gds-sys-transition-properties: all;
+  --gds-sys-transition-duration: 0.3s;
+  --gds-sys-transition-delay: 0s;
+  --gds-sys-transition-timing-function: var(--gds-sys-transition-easing);
+  --gds-sys-transition: var(--gds-sys-transition-properties)
+    var(--gds-sys-transition-duration) var(--gds-sys-transition-timing-function)
+    var(--gds-sys-transition-delay);
+
+  /* Border */
+  --gds-sys-radii-small: var(--gds-spacing-2);
+  --gds-sys-radii-medium: var(--gds-spacing-3);
+  --gds-sys-radii-large: var(--gds-spacing-4);
+  --gds-sys-radii-full: var(--gds-spacing-14);
+  --gds-sys-border-radius: var(--gds-sys-radii-full);
+  --gds-sys-border-width: 1px;
+  --gds-sys-border-color: hsl(0, 0%, 0%);
+  --gds-sys-border-style: solid;
+  --gds-sys-border: var(--gds-sys-border-width) var(--gds-sys-border-style)
+    var(--gds-sys-border-color);
+
+  /* Base Padding */
+  --gds-sys-padding-inline: var(--gds-spacing-5);
+  --gds-sys-padding-block: var(--gds-spacing-4);
+
+  /* Gap */
+  --gds-sys-gap-small: var(--gds-spacing-3);
+  --gds-sys-gap-medium: var(--gds-spacing-5);
+  --gds-sys-gap-large: var(--gds-spacing-8);
+
+  /* Background styles */
+  --gds-bg-a50: 0.5;
+  --gds-bg-a80: 0.8;
+  --gds-bg-blur: 20px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}

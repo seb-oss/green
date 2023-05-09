@@ -2,7 +2,11 @@ import * as React from 'react'
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement} from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
+import type { PropertyValues } from 'lit';
+
 import '../icon/icon'
+import '../ripple/ripple'
+import '../../tools/ripple/ripple'
 
 import styles from './style/button.styles.scss'
 
@@ -39,6 +43,7 @@ export class Button extends LitElement {
   variant = null
   set = null
   size = null
+  effect = null
 
   static get properties()  {
     return {
@@ -51,11 +56,11 @@ export class Button extends LitElement {
       variant: { type: String, reflect: true },
       set: { type: String, reflect: true },
       size: { type: String, reflect: true },
+      effect: { type: String, reflect: true },
     }
   }
 
   render() {
-
     const variantController = 
       variants.includes(this.variant || '') ?
        `variant-${this.variant}` : ''
@@ -76,14 +81,23 @@ export class Button extends LitElement {
         ?aria-expanded="${this.ariaExpanded}"
         tabindex="0"
         data-options=${`${variantController} ${setController} ${sizeController}`}
+        onclick="${() => {
+          // handleRippleEffect();
+          // your onclick event code here
+        }}
       >   
+      <gds-ripple></gds-ripple>
         ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
         <slot></slot>
         ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
+        ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>`
   }
 
+
+  
 }
+
 
 export const ButtonReact = createComponent({
   tagName: 'gds-button',
