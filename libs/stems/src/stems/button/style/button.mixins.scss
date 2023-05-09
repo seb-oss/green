@@ -1,4 +1,5 @@
 @mixin tokens() {
+  --gds-button-fs: var(--gds-fs-base);
   --gds-button-transition: var(--gds-sys-transition);
   --gds-button-bg: var(--gds-primary-background-color);
   --gds-button-color: var(--gds-primary-color);
@@ -197,10 +198,12 @@
   --gds-button-padding-inline: 10px;
   --gds-button-padding-block: 8px;
 }
+
 @mixin size-medium() {
   --gds-button-padding-inline: 16px;
   --gds-button-padding-block: 8px;
 }
+
 @mixin size-large() {
   --gds-button-padding-inline: 16px;
   --gds-button-padding-block: 12px;
