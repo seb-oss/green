@@ -6,7 +6,7 @@ import type { PropertyValues } from 'lit';
 
 import '../icon/icon'
 import '../ripple/ripple'
-import '../../tools/ripple/ripple'
+import { effectRipple } from '../../tools/ripple/ripple'
 
 import styles from './style/button.styles.scss'
 
@@ -81,26 +81,23 @@ export class Button extends LitElement {
         ?aria-expanded="${this.ariaExpanded}"
         tabindex="0"
         data-options=${`${variantController} ${setController} ${sizeController}`}
-        onclick="${() => {
-          // handleRippleEffect();
-          // your onclick event code here
-        }}
+        @click="${effectRipple}"
       >   
-      <gds-ripple></gds-ripple>
         ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
         <slot></slot>
         ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
         ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>`
   }
-
-
-  
+ 
 }
-
+// <gds-ripple></gds-ripple>
+// ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
 
 export const ButtonReact = createComponent({
   tagName: 'gds-button',
   elementClass: Button,
   react: React,
 })
+
+

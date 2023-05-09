@@ -1,8 +1,7 @@
 /* Styles for high contrast mode */
 @media (prefers-contrast: high) {
   body {
-    background-color: black;
-    color: white;
+    --gds-color-primary: #000;
   }
 }
 
