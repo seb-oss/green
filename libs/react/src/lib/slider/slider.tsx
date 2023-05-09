@@ -67,8 +67,8 @@ export function Slider({
   const clamp = (unclamped: number | undefined | string): number => {
     if (!enableClamping) return Number(unclamped)
 
-    if (!unclamped || Number.isNaN(unclamped)) return min
     if (typeof unclamped === 'string') unclamped = Number(unclamped)
+    if (!unclamped || Number.isNaN(unclamped)) return min
 
     const clamped = Math.min(Math.max(min, unclamped), max)
     if (clamped !== unclamped && onClamp) onClamp(unclamped)
