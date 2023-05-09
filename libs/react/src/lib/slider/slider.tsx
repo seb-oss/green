@@ -64,26 +64,26 @@ export function Slider({
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
 
-  const clamp = (origValue: number | undefined | string): number => {
-    if (!enableClamping || origValue === undefined) return Number(origValue)
+  const clamp = (unclamped: number | undefined | string): number => {
+    if (!enableClamping || unclamped === undefined) return Number(unclamped)
 
-    if (!origValue || Number.isNaN(origValue)) return min
-    if (typeof origValue === 'string') origValue = Number(origValue)
+    if (!unclamped || Number.isNaN(unclamped)) return min
+    if (typeof unclamped === 'string') unclamped = Number(unclamped)
 
-    let newValue = origValue
+    let clamped = unclamped
     let hasClamped = false
 
-    if (newValue < min) {
+    if (clamped < min) {
       hasClamped = true
-      newValue = min
+      clamped = min
     }
-    if (newValue > max) {
+    if (clamped > max) {
       hasClamped = true
-      newValue = max
+      clamped = max
     }
-    if (hasClamped && onClamp) onClamp(origValue)
+    if (hasClamped && onClamp) onClamp(unclamped)
 
-    return newValue
+    return clamped
   }
 
   const setNumValue = (value: number | undefined | string) => {
