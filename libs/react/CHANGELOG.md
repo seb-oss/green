@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.0...@sebgroup/green-react@1.8.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* **slider:** emit `min` value when setting textbox to empty string ([#875](https://github.com/sebgroup/green/issues/875)) ([7ca927e](https://github.com/sebgroup/green/commit/7ca927e32ee81816752fdf5f3ce91a3c431320c5))
+
+
+
 # [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.7.0...@sebgroup/green-react@1.8.0) (2023-05-08)
 
 
