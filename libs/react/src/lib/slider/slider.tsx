@@ -6,7 +6,6 @@ import {
 } from '@sebgroup/extract'
 
 import { SliderProps } from '../../types'
-import { set } from 'date-fns'
 
 const InputWrapper = ({
   children,
