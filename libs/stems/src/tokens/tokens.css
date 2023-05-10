@@ -125,7 +125,9 @@
   --gds-color-orange-98: rgba(255, 248, 243, 1);
 
   /* Text-size styles */
-  --gds-fs-base: 10px;
+  /* font-size: 100%; font-size: large; font-size: larger; font-size: medium; font-size: small; font-size: smaller;  --gds-fs-base: 10px; */
+
+  --gds-fs-base: 62.5%; /* 10/16*100 = 10px — 16px is the default font size */
   --gds-fs-display-large: 8.2rem; /* 82px / 10px = 8.2rem */
   --gds-fs-display-medium: 6.4rem; /* 64px / 10px = 6.4rem */
   --gds-fs-display-small: 4rem; /* 40px / 10px = 4.0rem */
@@ -202,6 +204,15 @@
     var(--gds-sys-transition-duration) var(--gds-sys-transition-timing-function)
     var(--gds-sys-transition-delay);
 
+  /* Animation */
+  --gds-sys-animation-duration: 1.2s;
+  --gds-sys-animation-timing-function: ease;
+  --gds-sys-animation-delay: 0s;
+  --gds-sys-animation-iteration-count: 1;
+  --gds-sys-animation-direction: normal;
+  --gds-sys-animation-fill-mode: none;
+  --gds-sys-animation-play-state: running;
+
   /* Border */
   --gds-sys-radii-small: var(--gds-spacing-2);
   --gds-sys-radii-medium: var(--gds-spacing-3);
@@ -209,7 +220,7 @@
   --gds-sys-radii-full: var(--gds-spacing-14);
   --gds-sys-border-radius: var(--gds-sys-radii-full);
   --gds-sys-border-width: 1px;
-  --gds-sys-border-color: hsl(0, 0%, 0%);
+  --gds-sys-border-color: var(--gds-color-grey-20);
   --gds-sys-border-style: solid;
   --gds-sys-border: var(--gds-sys-border-width) var(--gds-sys-border-style)
     var(--gds-sys-border-color);
@@ -226,13 +237,15 @@
   /* Background styles */
   --gds-bg-a50: 0.5;
   --gds-bg-a80: 0.8;
-  --gds-bg-blur: 20px;
 }
 
-html,
-body {
+html {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   font-size: var(--gds-fs-base);
+}
+
+body {
+  font-size: var(--gds-fs-body-large);
 }

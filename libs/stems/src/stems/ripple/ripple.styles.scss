@@ -1,5 +1,11 @@
 :host {
-  border-radius: 200px;
+  --gds-ripple-animation-name: ripple;
+  --gds-ripple-animation: var(--gds-ripple-animation-name)
+    var(--gds-sys-animation-duration) var(--gds-sys-animation-timing-function)
+    var(--gds-sys-animation-delay) var(--gds-sys-animation-iteration-count)
+    var(--gds-sys-animation-direction) var(--gds-sys-animation-fill-mode)
+    var(--gds-sys-animation-play-state);
+  border-radius: var(--gds-sys-radii-full);
   display: flex;
   height: 100%;
   inset: 0;
@@ -10,7 +16,7 @@
 
 div {
   background-color: currentColor;
-  border-radius: 200%;
+  border-radius: var(--gds-sys-radii-full);
   display: flex;
   height: 20px;
   left: var(--gds-ripple-left, 50%);
@@ -25,7 +31,7 @@ div {
 }
 
 div.gds-ripple-effect {
-  animation: ripple 1.2s;
+  animation: var(--gds-ripple-animation);
 }
 
 @keyframes ripple {

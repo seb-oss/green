@@ -12,7 +12,7 @@
   --gds-button-gap: var(--gds-sys-gap-small);
   --gds-button-color-bg: var(--gds-color-grey-20);
   --gds-button-color-text: var(--gds-color-text-inverse);
-  --gds-button-color-border: var(--gds-color-grey-20);
+  --gds-button-color-border: var(--gds-sys-border-color);
   --gds-button-color-outline: var(--gds-color-grey-20);
 }
 
@@ -30,11 +30,11 @@
 
   // Coloring
   color: var(--gds-button-color-text);
-
-  // Optional
   color-scheme: dark light;
   cursor: pointer;
   display: flex;
+
+  // Optional
   gap: var(--gds-button-gap);
   inline-size: max-content;
   justify-content: space-between;

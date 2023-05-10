@@ -1,0 +1,11 @@
+@keyframes ripple {
+  from {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(calc(3 * var(--mt-ripple-spread, 4)));
+  }
+}
