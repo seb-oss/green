@@ -21,6 +21,7 @@ export interface SliderProps {
   value?: number
   min?: number
   max?: number
+  showMinMax?: boolean
   step?: number
   label?: string
   instruction?: string

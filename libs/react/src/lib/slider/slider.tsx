@@ -32,6 +32,7 @@ export function Slider({
   defaultValue,
   min = 0,
   max = 100,
+  showMinMax = false,
   step = 1,
   label,
   instruction,
@@ -151,6 +152,12 @@ export function Slider({
           background,
         }}
       />
+      {showMinMax && (
+        <div className="gds-slider-min-max">
+          <div>{min}</div>
+          <div>{max}</div>
+        </div>
+      )}
       {errorMessage && <p className="gds-slider-error-info">{errorMessage}</p>}
     </>
   )
