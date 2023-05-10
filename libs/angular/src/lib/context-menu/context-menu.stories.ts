@@ -97,7 +97,7 @@ const DirectiveTemplate: Story<NggContextMenuComponent> = (
   component: NggContextMenuComponent,
   props: args,
   template: `
-  <div class="row" style="height:200px;overflow:scroll;resize: both;" nggOnScrollDirective> 
+  <div class="row" style="height:200px;overflow:scroll;resize: both;" nggOnScroll> 
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>

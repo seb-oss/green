@@ -1,12 +1,21 @@
 import { RenderResult, fireEvent, render } from '@testing-library/angular'
+import { Subject } from 'rxjs'
+import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
 import { NggContextMenuComponent } from './context-menu.component'
 
 describe('NggContextMenuComponent', () => {
   let component: RenderResult<NggContextMenuComponent>
   let buttonElements: HTMLElement[]
   let button: Element
+  const closeContextMenu = new Subject<void>()
 
   beforeEach(async () => {
+    window.ResizeObserver = jest.fn(() => ({
+      observe: jest.fn(),
+      disconnect: jest.fn(),
+      unobserve: jest.fn(),
+    }))
+
     component = await render(NggContextMenuComponent, {
       componentProperties: {
         menuItems: [
@@ -14,6 +23,7 @@ describe('NggContextMenuComponent', () => {
           { value: 'b', label: 'Option b' },
         ],
       },
+      providers: [{ provide: ON_SCROLL_TOKEN, useValue: closeContextMenu }],
     })
 
     buttonElements = await component.findAllByRole('button')
@@ -61,6 +71,14 @@ describe('NggContextMenuComponent', () => {
     fireEvent.click(button)
 
     document.body.click()
+
+    expect(component.fixture.componentInstance.isActive).toBeFalsy()
+  })
+
+  it('should close the context menu when close token is passed', async () => {
+    fireEvent.click(button)
+
+    closeContextMenu.next()
 
     expect(component.fixture.componentInstance.isActive).toBeFalsy()
   })

@@ -11,7 +11,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators'
 export const ON_SCROLL_TOKEN = new InjectionToken<string>('ON_SCROLL_TOKEN')
 
 @Directive({
-  selector: '[nggOnScrollDirective]',
+  selector: '[nggOnScroll]',
   providers: [
     {
       provide: ON_SCROLL_TOKEN,
