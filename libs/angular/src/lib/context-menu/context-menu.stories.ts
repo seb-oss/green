@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { Meta, Story, moduleMetadata } from '@storybook/angular'
+import { NggOnScrollDirective } from '../shared/on-scroll.directive'
 import { NggContextMenuComponent } from './context-menu.component'
 import Documentation from './documentation.mdx'
 
@@ -10,7 +11,7 @@ export default {
   component: NggContextMenuComponent,
   decorators: [
     moduleMetadata({
-      declarations: [NggContextMenuComponent],
+      declarations: [NggContextMenuComponent, NggOnScrollDirective],
       imports: [CommonModule, BrowserModule, BrowserAnimationsModule],
     }),
   ],
@@ -28,7 +29,7 @@ const Template: Story<NggContextMenuComponent> = (
   component: NggContextMenuComponent,
   props: args,
   template: `
-  <div style="display:flex;justify-content:space-between;">
+  <div style="display:flex;justify-content:space-between">
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
@@ -83,6 +84,39 @@ const CustomTemplate: Story<NggContextMenuComponent> = (
 export const CustomTemplateDefault = CustomTemplate.bind({})
 CustomTemplateDefault.args = {
   direction: 'rtl',
+  menuItems: [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+  ],
+}
+
+const DirectiveTemplate: Story<NggContextMenuComponent> = (
+  args: NggContextMenuComponent
+) => ({
+  component: NggContextMenuComponent,
+  props: args,
+  template: `
+  <div class="row" style="height:200px;overflow:scroll;resize: both;" nggOnScrollDirective> 
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+    <span> Lorem Ipsum </span>
+  </div>
+  `,
+})
+
+export const DirectiveTemplateDefault = DirectiveTemplate.bind({})
+DirectiveTemplateDefault.args = {
+  direction: 'ltr',
   menuItems: [
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },

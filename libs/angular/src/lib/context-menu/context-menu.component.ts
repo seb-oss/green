@@ -1,20 +1,30 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
+  OnDestroy,
+  OnInit,
+  Optional,
   Output,
   TemplateRef,
   ViewChild,
 } from '@angular/core'
 import { DropdownOption } from '@sebgroup/extract'
+import { Subject, Subscription } from 'rxjs'
+import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
 
 @Component({
   selector: 'ngg-context-menu',
   templateUrl: './context-menu.component.html',
+  providers: [{ provide: 'CONTEXT_MENU_TOKEN', useValue: new Subject() }],
 })
-export class NggContextMenuComponent {
+export class NggContextMenuComponent
+  implements AfterViewInit, OnDestroy, OnInit
+{
   @Input() direction: 'ltr' | 'rtl' = 'ltr'
   @Input() menuItems: DropdownOption[] = []
   @Input() menuItemTemplate: TemplateRef<unknown> | null = null
@@ -31,7 +41,15 @@ export class NggContextMenuComponent {
   top = '0px'
   left = '0px'
 
-  constructor(private elementRef: ElementRef) {}
+  resizeObserver?: ResizeObserver
+  menuCloseSubscription?: Subscription
+
+  constructor(
+    private elementRef: ElementRef,
+    @Optional()
+    @Inject(ON_SCROLL_TOKEN)
+    public closeContextMenu: Subject<void>
+  ) {}
 
   @HostListener('document:click', ['$event.target'])
   onDocumentClick(target: HTMLElement): void {
@@ -45,6 +63,24 @@ export class NggContextMenuComponent {
     }
   }
 
+  public ngOnInit(): void {
+    this.resizeObserver = new ResizeObserver(() => {
+      this.close()
+    })
+    this.resizeObserver.observe(document.body)
+  }
+
+  public ngAfterViewInit(): void {
+    this.menuCloseSubscription = this.closeContextMenu?.subscribe(() =>
+      this.close()
+    )
+  }
+
+  public ngOnDestroy(): void {
+    this.resizeObserver?.unobserve(document.body)
+    this.menuCloseSubscription?.unsubscribe()
+  }
+
   open(): void {
     if (this.isActive) {
       this.close()
@@ -56,9 +92,10 @@ export class NggContextMenuComponent {
 
     const left = this.calculateLeft(this.direction, buttonRect)
     const top = this.calculateTop(buttonRect.bottom)
+    const gapBetweenButtonAndPopover = 3
 
     this.left = `${left}px`
-    this.top = `${top}px`
+    this.top = `${top + gapBetweenButtonAndPopover}px`
     this.isActive = true
   }
 

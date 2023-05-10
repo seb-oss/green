@@ -1,4 +1,9 @@
-<button #contextMenuAnchor class="ghost small" (click)="open()">
+<button
+  #contextMenuAnchor
+  class="ghost small"
+  [class.active]="isActive"
+  (click)="open()"
+>
   <ng-container
     [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
   >
