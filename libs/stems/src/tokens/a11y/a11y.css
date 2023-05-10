@@ -1,8 +1,6 @@
 /* Styles for high contrast mode */
 @media (prefers-contrast: high) {
-  body {
-    --gds-color-primary: #000;
-  }
+  /* styles for high contrast motion */
 }
 
 /* Styles for reduced motion mode */
@@ -63,6 +61,9 @@
 /* Styles for devices in landscape orientation */
 @media (orientation: landscape) {
   /* styles for landscape orientation */
+  /* :root {
+    --gds-sys-padding-inline: var(--gds-spacing-10);
+  } */
 }
 
 /* Styles for devices with a height of at least 1000px */

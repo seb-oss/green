@@ -2,6 +2,8 @@ import { Button } from './button'
 import './style/button.stories.css'
 import './style/button.tokens.css'
 import '../../tokens/tokens.css'
+import './style/button.a11y.css'
+import '../../tokens/a11y/a11y.css'
 
 <Meta title="Components/Button" />
 
@@ -11,9 +13,7 @@ import '../../tokens/tokens.css'
   <gds-buttons>
     <gds-row>
       <strong>Neutral Primary</strong>
-      <gds-button
-        data-label="test"
-      >
+      <gds-button data-label="test">
         Core Button
       </gds-button>
       <gds-button

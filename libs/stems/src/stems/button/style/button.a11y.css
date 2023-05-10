@@ -1,0 +1,27 @@
+@media (prefers-color-scheme: dark) {
+  /* :root {
+    --gds-color-text-primary: teal;
+  }
+  body {
+    background-color: gray;
+  } */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* :root {
+    --gds-sys-transition-duration: 4s;
+  } */
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  /* :root {
+    --gds-color-transparent: 1;
+  } */
+}
+
+@media (prefers-contrast: more) {
+  /* :root {
+    --gds-color-text-primary: teal;
+    --gds-color-green-40: var(--gds-color-green-60);
+  } */
+}
