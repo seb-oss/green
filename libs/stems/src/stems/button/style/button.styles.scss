@@ -2,6 +2,7 @@
 
 :host {
   @include tokens;
+  font-size: var(--gds-fs-base);
 }
 
 button {
