@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-export const Template = ({ unitLabel }) => {
+export const Template = ({ unitLabel, showMinMax }) => {
   return `
   <div class="form-group">
     <div class="gds-slider-label-container">
@@ -16,6 +16,15 @@ export const Template = ({ unitLabel }) => {
         }
     </div>
     <input type="range" id="gds-slider" />
+    ${
+      showMinMax === true
+        ? `
+          <div class="gds-slider-min-max">
+            <div class="gds-slider-min">0</div>
+            <div class="gds-slider-max">100</div>
+          </div>`
+        : ''
+    }
   </div>
   `
 }
@@ -27,6 +36,7 @@ export const Template = ({ unitLabel }) => {
   }}
   argTypes={{
     unitLabel: { control: 'text' },
+    showMinMax: { control: 'boolean' },
   }}
 />
 
