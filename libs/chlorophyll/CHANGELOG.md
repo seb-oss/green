@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.9.1...@sebgroup/chlorophyll@1.10.0) (2023-05-10)
+
+
+### Bug Fixes
+
+* 🐛 Make wizard step card footber button show flex-start ([#876](https://github.com/sebgroup/green/issues/876)) ([8334baa](https://github.com/sebgroup/green/commit/8334baab6f7527d19e04e0f283a6cc6c3be4182c))
+
+
+### Features
+
+* **slider:** add styles for min max labels ([#878](https://github.com/sebgroup/green/issues/878)) ([79af603](https://github.com/sebgroup/green/commit/79af603d307917cd5aa17dd48d1e221e9eb22cc2))
+
+
+
 ## [1.9.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.9.0...@sebgroup/chlorophyll@1.9.1) (2023-05-08)
 
 
