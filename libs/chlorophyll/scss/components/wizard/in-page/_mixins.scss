@@ -87,11 +87,15 @@
       padding: 1rem 1rem 1.5rem 4.5rem;
     }
   }
+
+  > footer {
+    justify-content: flex-start;
+  }
+  
   &__footer {
     border-top: 1px solid tokens.get(tokens.$grey, 500);
     padding: 1.5rem 1rem 1.5rem 1rem;
     margin-top: 0;
-    justify-content: flex-start;
 
     @include common.media-breakpoint-up('sm') {
       padding: 1.5rem 1rem 1.5rem 4.5rem;
