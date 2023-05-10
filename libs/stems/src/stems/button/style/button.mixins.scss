@@ -9,22 +9,23 @@
   --gds-button-border-style: var(--gds-sys-border-style);
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
-  --gds-button-gap: var(--gds-sys-gap);
-  --gds-button-color-bg: var(--gds-primary-color-bg);
-  --gds-button-color-text: var(--gds-primary-color-text);
-  --gds-button-color-border: var(--gds-primary-color-bg);
-  --gds-button-color-outline: var(--gds-primary-color-bg);
+  --gds-button-gap: var(--gds-sys-gap-small);
+  --gds-button-color-bg: var(--gds-color-grey-20);
+  --gds-button-color-text: var(--gds-color-text-inverse);
+  --gds-button-color-border: var(--gds-color-grey-20);
+  --gds-button-color-outline: var(--gds-color-grey-20);
 }
 
 @mixin core() {
   align-items: center;
   background-color: var(--gds-button-color-bg);
   block-size: 100%;
-  border-color: var(--gds-button-color-border);
 
   // Border style
+  border-color: var(--gds-button-color-border);
   border-radius: var(--gds-button-border-radius);
   border-style: var(--gds-button-border-style);
+  border-width: var(--gds-button-border-width);
   box-sizing: border-box;
 
   // Coloring
@@ -59,39 +60,39 @@
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-primary-color-bg);
+    --gds-button-color-bg: var(--gds-color-grey-20);
   }
 
   &:disabled {
-    background-color: var(--gds-primary-disabled-bg);
-    border-color: var(--gds-primary-disabled-bg);
-    color: var(--gds-primary-disabled-color);
+    background-color: var(--gds-color-grey-98);
+    border-color: var(--gds-color-grey-98);
+    color: var(--gds-color-grey-60);
     pointer-events: none;
   }
 }
 
 @mixin secondary() {
-  --gds-button-color-bg: var(--gds-primary-color-text);
-  --gds-button-color-text: var(--gds-secondary-color-text);
-  --gds-button-color-border: var(--gds-secondary-color-text);
+  --gds-button-color-bg: var(--gds-color-text-inverse);
+  --gds-button-color-text: var(--gds-color-text-primary);
+  --gds-button-color-border: var(--gds-color-text-primary);
 
   &:hover {
-    --gds-button-color-bg: var(--gds-secondary-color-bg);
+    --gds-button-color-bg: var(--gds-color-grey-90);
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-primary-color-text);
+    --gds-button-color-bg: var(--gds-color-text-inverse);
   }
 }
 
 @mixin tertiary() {
   --gds-button-color-bg: transparent;
-  --gds-button-color-text: var(--gds-secondary-color-text);
+  --gds-button-color-text: var(--gds-color-text-primary);
   --gds-button-color-border: transparent;
 
   &:hover {
-    --gds-button-color-bg: var(--gds-secondary-color-bg);
-    --gds-button-color-border: var(--gds-secondary-color-text);
+    --gds-button-color-bg: var(--gds-color-grey-90);
+    --gds-button-color-border: var(--gds-color-text-primary);
   }
 
   &:active {
@@ -101,42 +102,42 @@
 }
 
 @mixin primary-positive() {
-  --gds-button-color-bg: var(--gds-positive-color-text);
-  --gds-button-color-text: var(--gds-primary-color-text);
-  --gds-button-color-border: var(--gds-positive-color-text);
+  --gds-button-color-bg: var(--gds-color-green-40);
+  --gds-button-color-text: var(--gds-color-text-inverse);
+  --gds-button-color-border: var(--gds-color-green-40);
 
   &:hover {
-    --gds-button-color-bg: var(--gds-positive-color-hover);
-    --gds-button-color-border: var(--gds-positive-color-hover);
+    --gds-button-color-bg: var(--gds-color-green-25);
+    --gds-button-color-border: var(--gds-color-green-25);
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-positive-color-text);
+    --gds-button-color-bg: var(--gds-color-green-40);
   }
 }
 
 @mixin secondary-positive() {
-  --gds-button-color-bg: var(--gds-primary-color-text);
-  --gds-button-color-text: var(--gds-positive-color-text);
-  --gds-button-color-border: var(--gds-positive-color-text);
+  --gds-button-color-bg: var(--gds-color-text-inverse);
+  --gds-button-color-text: var(--gds-color-green-40);
+  --gds-button-color-border: var(--gds-color-green-40);
 
   &:hover {
-    --gds-button-color-bg: var(--gds-positive-color-bg-hover);
+    --gds-button-color-bg: var(--gds-color-green-98);
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-primary-color-text);
+    --gds-button-color-bg: var(--gds-color-text-inverse);
   }
 }
 
 @mixin tertiary-positive() {
   --gds-button-color-bg: transparent;
-  --gds-button-color-text: var(--gds-positive-color-text);
+  --gds-button-color-text: var(--gds-color-green-40);
   --gds-button-color-border: transparent;
 
   &:hover {
-    --gds-button-color-bg: var(--gds-positive-color-bg-hover);
-    --gds-button-color-border: var(--gds-positive-color-border-hover);
+    --gds-button-color-bg: var(--gds-color-green-98);
+    --gds-button-color-border: var(--gds-color-green-40);
   }
 
   &:active {
@@ -147,43 +148,43 @@
 
 // Negative
 @mixin primary-negative() {
-  --gds-button-color-bg: var(--gds-negative-color-bg);
-  --gds-button-color-text: var(--gds-primary-color-text);
-  --gds-button-color-border: var(--gds-negative-color-bg);
+  --gds-button-color-bg: var(--gds-color-red-40);
+  --gds-button-color-text: var(--gds-color-text-inverse);
+  --gds-button-color-border: var(--gds-color-red-40);
 
   &:hover {
-    --gds-button-color-bg: var(--gds-negative-primary-bg-hover);
-    --gds-button-color-border: var(--gds-negative-primary-bg-hover);
+    --gds-button-color-bg: var(--gds-color-red-25);
+    --gds-button-color-border: var(--gds-color-red-25);
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-negative-color-bg);
-    --gds-button-color-border: var(--gds-negative-color-bg);
+    --gds-button-color-bg: var(--gds-color-red-40);
+    --gds-button-color-border: var(--gds-color-red-40);
   }
 }
 
 @mixin secondary-negative() {
-  --gds-button-color-bg: var(--gds-primary-color-text);
-  --gds-button-color-text: var(--gds-negative-color-bg);
-  --gds-button-color-border: var(--gds-negative-color-bg);
+  --gds-button-color-bg: var(--gds-color-text-inverse);
+  --gds-button-color-text: var(--gds-color-red-40);
+  --gds-button-color-border: var(--gds-color-red-40);
 
   &:hover {
-    --gds-button-color-bg: var(--gds-negative-bg-hover);
+    --gds-button-color-bg: var(--gds-color-red-95);
   }
 
   &:active {
-    --gds-button-color-bg: var(--gds-primary-color-text);
+    --gds-button-color-bg: var(--gds-color-text-inverse);
   }
 }
 
 @mixin tertiary-negative() {
   --gds-button-color-bg: transparent;
-  --gds-button-color-text: var(--gds-negative-color-bg);
+  --gds-button-color-text: var(--gds-color-red-40);
   --gds-button-color-border: transparent;
 
   &:hover {
-    --gds-button-color-bg: var(--gds-negative-bg-hover);
-    --gds-button-color-border: var(--gds-negative-color-bg);
+    --gds-button-color-bg: var(--gds-color-red-95);
+    --gds-button-color-border: var(--gds-color-red-40);
   }
 
   &:active {
@@ -195,16 +196,16 @@
 // Sizes
 
 @mixin size-small() {
-  --gds-button-padding-inline: 10px;
-  --gds-button-padding-block: 8px;
+  --gds-button-padding-inline: var(--gds-spacing-0);
+  --gds-button-padding-block: var(--gds-spacing-3);
 }
 
 @mixin size-medium() {
-  --gds-button-padding-inline: 16px;
-  --gds-button-padding-block: 8px;
+  --gds-button-padding-inline: var(--gds-spacing-5);
+  --gds-button-padding-block: var(--gds-spacing-3);
 }
 
 @mixin size-large() {
-  --gds-button-padding-inline: 16px;
-  --gds-button-padding-block: 12px;
+  --gds-button-padding-inline: var(--gds-spacing-5);
+  --gds-button-padding-block: var(--gds-spacing-4);
 }

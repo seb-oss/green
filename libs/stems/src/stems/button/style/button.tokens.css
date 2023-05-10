@@ -2,14 +2,14 @@
   --transparency: 0.5;
   --backdrop-blur: 20px;
   --transition: 0;
-  --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  /* --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
   --gds-sys-transition-properties: all;
   --gds-sys-transition-duration: 0.3s;
   --gds-sys-transition-delay: 0s;
   --gds-sys-transition-timing-function: var(--gds-sys-transition-easing);
   --gds-sys-transition: var(--gds-sys-transition-properties)
     var(--gds-sys-transition-duration) var(--gds-sys-transition-timing-function)
-    var(--gds-sys-transition-delay);
+    var(--gds-sys-transition-delay); */
 
   /* Border */
   --gds-sys-border-radius: 200px;
@@ -20,28 +20,9 @@
     var(--gds-sys-border-color);
 
   /* Padding */
-  --gds-sys-padding-inline: 16px;
-  --gds-sys-padding-block: 12px;
+  /* --gds-sys-padding-inline: 16px;
+  --gds-sys-padding-block: 12px; */
 
   /* Gap */
-  --gds-sys-gap: 8px;
-
-  /* Colors */
-  --gds-primary-color-bg: hsla(60, 4%, 20%, 1);
-  --gds-primary-color-text: hsla(180, 0%, 100%, 1);
-  --gds-primary-disabled-bg: hsla(0, 0%, 98%, 1);
-  --gds-primary-disabled-color: hsla(60, 4%, 60%, 1);
-
-  --gds-secondary-color-text: hsla(359, 1%, 19%, 1);
-  --gds-secondary-color-bg: hsla(60, 6%, 90%, 1);
-
-  --gds-positive-color-text: hsla(144, 100%, 22%, 1);
-  --gds-positive-color-bg: hsla(60, 6%, 90%, 1);
-  --gds-positive-color-hover: hsla(141, 100%, 14%, 1);
-  --gds-positive-color-bg-hover: hsla(109, 97%, 95%, 1);
-  --gds-positive-color-border-hover: hsla(143, 63%, 31%, 1);
-
-  --gds-negative-color-bg: hsla(9, 100%, 37%, 1);
-  --gds-negative-primary-bg-hover: hsla(7, 100%, 24%, 1);
-  --gds-negative-bg-hover: hsla(11, 100%, 96%, 1);
+  /* --gds-sys-gap: 8px; */
 }

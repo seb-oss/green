@@ -2,6 +2,7 @@
   /* Color styles */
   --gds-color-transparent: transparent;
   --gds-color-current: currentColor;
+  --gds-color-white: rgba(255, 255, 255, 1);
   --gds-color-text-primary: rgba(49, 48, 48, 1);
   --gds-color-text-secondary: rgba(108, 106, 106, 1);
   --gds-color-text-disabled: rgba(157, 157, 149, 1);
@@ -175,6 +176,7 @@
   --gds-fw-bold: 700;
 
   /* Spacing */
+  --gds-spacing-0: 1rem; /* 2px / 10px = 0.2rem */
   --gds-spacing-1: 0.2rem; /* 2px / 10px = 0.2rem */
   --gds-spacing-2: 0.4rem; /* 4px / 10px = 0.4rem */
   --gds-spacing-3: 0.8rem; /* 8px / 10px = 0.8rem */

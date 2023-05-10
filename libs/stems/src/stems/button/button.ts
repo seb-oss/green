@@ -61,6 +61,7 @@ export class Button extends LitElement {
   }
 
   render() {
+
     const variantController = 
       variants.includes(this.variant || '') ?
        `variant-${this.variant}` : ''
@@ -72,6 +73,8 @@ export class Button extends LitElement {
     const sizeController = 
       sizes.includes(this.size || '') ?
        `size-${this.size}` : ''
+    
+       console.log( variantController + setController + sizeController);
        
     return html`
       <button 
@@ -80,7 +83,6 @@ export class Button extends LitElement {
         ?aria-pressed="${this.ariaPressed}"
         ?aria-expanded="${this.ariaExpanded}"
         tabindex="0"
-        data-options=${`${variantController} ${setController} ${sizeController}`}
         @click="${effectRipple}"
       >   
         ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
@@ -89,10 +91,7 @@ export class Button extends LitElement {
         ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>`
   }
- 
 }
-// <gds-ripple></gds-ripple>
-// ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
 
 export const ButtonReact = createComponent({
   tagName: 'gds-button',
