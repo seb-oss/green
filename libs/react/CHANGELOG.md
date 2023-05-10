@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.1...@sebgroup/green-react@1.9.0) (2023-05-10)
+
+
+### Features
+
+* **slider:** add styles for min max labels ([#878](https://github.com/sebgroup/green/issues/878)) ([79af603](https://github.com/sebgroup/green/commit/79af603d307917cd5aa17dd48d1e221e9eb22cc2))
+
+
+
 ## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.0...@sebgroup/green-react@1.8.1) (2023-05-09)
 
 
