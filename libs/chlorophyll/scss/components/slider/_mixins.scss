@@ -125,3 +125,10 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
   font-weight: $form-info-font-weight;
   margin-top: $spacing;
 }
+
+@mixin add-min-max-styles() {
+  display: flex;
+  justify-content: space-between;
+  font-size: $form-info-font-size;
+  font-weight: $form-info-font-weight;
+}
