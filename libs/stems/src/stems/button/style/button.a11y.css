@@ -3,13 +3,13 @@
     --gds-color-text-primary: teal;
   }
   body {
-    background-color: gray;
+    background-color: rgba(128, 128, 20, 0.2);
   } */
 }
 
 @media (prefers-reduced-motion: reduce) {
   /* :root {
-    --gds-sys-transition-duration: 4s;
+    --gds-sys-transition-duration: 10s;
   } */
 }
 
@@ -21,7 +21,7 @@
 
 @media (prefers-contrast: more) {
   /* :root {
-    --gds-color-text-primary: teal;
+    --gds-color-text-primary: red;
     --gds-color-green-40: var(--gds-color-green-60);
   } */
 }
