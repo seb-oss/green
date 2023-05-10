@@ -26,12 +26,18 @@ const InputWrapper = ({
   </>
 )
 
+const minMaxFormatFn = (value: number, unit?: string) => {
+  if (unit) return `${value} ${unit}`
+  return value.toString()
+}
+
 export function Slider({
   name = `${randomId()}-slider`,
   value,
   defaultValue,
   min = 0,
   max = 100,
+  minMaxFormat = minMaxFormatFn,
   showMinMax = false,
   step = 1,
   label,
@@ -154,8 +160,8 @@ export function Slider({
       />
       {showMinMax && (
         <div className="gds-slider-min-max">
-          <div>{min}</div>
-          <div>{max}</div>
+          <div>{minMaxFormat(min, unitLabel)}</div>
+          <div>{minMaxFormat(max, unitLabel)}</div>
         </div>
       )}
       {errorMessage && <p className="gds-slider-error-info">{errorMessage}</p>}
