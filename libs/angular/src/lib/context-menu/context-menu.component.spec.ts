@@ -18,6 +18,7 @@ describe('NggContextMenuComponent', () => {
 
     component = await render(NggContextMenuComponent, {
       componentProperties: {
+        closeOnScroll: true,
         menuItems: [
           { value: 'a', label: 'Option a' },
           { value: 'b', label: 'Option b' },

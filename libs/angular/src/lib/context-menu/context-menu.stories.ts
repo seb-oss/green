@@ -98,15 +98,15 @@ const DirectiveTemplate: Story<NggContextMenuComponent> = (
   props: args,
   template: `
   <div class="row" style="height:200px;overflow:scroll;resize: both;" nggOnScroll> 
-    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [closeOnScroll]="closeOnScroll"></ngg-context-menu>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
-    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [closeOnScroll]="closeOnScroll"></ngg-context-menu>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
-    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [closeOnScroll]="closeOnScroll"></ngg-context-menu>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
     <span> Lorem Ipsum </span>
@@ -117,6 +117,7 @@ const DirectiveTemplate: Story<NggContextMenuComponent> = (
 export const DirectiveTemplateDefault = DirectiveTemplate.bind({})
 DirectiveTemplateDefault.args = {
   direction: 'ltr',
+  closeOnScroll: true,
   menuItems: [
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },

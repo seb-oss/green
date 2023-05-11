@@ -5,8 +5,8 @@ import {
   InjectionToken,
   OnDestroy,
 } from '@angular/core'
-import { Subject, fromEvent } from 'rxjs'
-import { debounceTime, takeUntil } from 'rxjs/operators'
+import { Subject, fromEvent, interval } from 'rxjs'
+import { takeUntil, throttle } from 'rxjs/operators'
 
 export const ON_SCROLL_TOKEN = new InjectionToken<string>('ON_SCROLL_TOKEN')
 
@@ -30,7 +30,10 @@ export class NggOnScrollDirective implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     if (this.elementRef) {
       fromEvent(this.elementRef?.nativeElement, 'scroll')
-        .pipe(takeUntil(this.destroy$), debounceTime(30))
+        .pipe(
+          takeUntil(this.destroy$),
+          throttle(() => interval(30))
+        )
         .subscribe(() => {
           this.onScroll$.next()
         })

@@ -20,7 +20,6 @@ import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
 @Component({
   selector: 'ngg-context-menu',
   templateUrl: './context-menu.component.html',
-  providers: [{ provide: 'CONTEXT_MENU_TOKEN', useValue: new Subject() }],
 })
 export class NggContextMenuComponent
   implements AfterViewInit, OnDestroy, OnInit
@@ -29,6 +28,7 @@ export class NggContextMenuComponent
   @Input() menuItems: DropdownOption[] = []
   @Input() menuItemTemplate: TemplateRef<unknown> | null = null
   @Input() menuAnchorTemplate: TemplateRef<unknown> | null = null
+  @Input() closeOnScroll = false
 
   @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
     new EventEmitter<DropdownOption>()
@@ -71,9 +71,11 @@ export class NggContextMenuComponent
   }
 
   public ngAfterViewInit(): void {
-    this.menuCloseSubscription = this.closeContextMenu?.subscribe(() =>
-      this.close()
-    )
+    if (this.closeOnScroll) {
+      this.menuCloseSubscription = this.closeContextMenu?.subscribe(() =>
+        this.close()
+      )
+    }
   }
 
   public ngOnDestroy(): void {
