@@ -39,6 +39,14 @@
 
 @supports (container: button / normal) {
   gds-example {
+    /* 
+    font-size: 1cqw;
+    font-size: 1cqh;
+    font-size: 1cqi;
+    font-size: 1cqb;
+    font-size: 1cqmin;
+    font-size: 1cqmax; 
+    */
     container: button / normal;
   }
 
@@ -47,4 +55,13 @@
       padding-inline: 24px;
     }
   }
+}
+
+gds-clamp {
+  text-overflow: 'ellipsis';
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
