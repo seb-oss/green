@@ -11,6 +11,15 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 
 
+## [1.3.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.1...@sebgroup/extract@1.3.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **dropdown:** listbox should have same width as button ([#889](https://github.com/sebgroup/green/issues/889)) ([bdb67e6](https://github.com/sebgroup/green/commit/bdb67e696d64c9ce3928bd6259dffe82b0539249))
+
+
+
 ## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.0...@sebgroup/extract@1.3.1) (2023-04-06)
 
 
