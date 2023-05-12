@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.0...@sebgroup/green-react@1.9.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **accordion:** add missing named export ([#887](https://github.com/sebgroup/green/issues/887)) ([3eb3c60](https://github.com/sebgroup/green/commit/3eb3c609762afd457bda660cdc6a06b3a833488f))
+
+
+
 # [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.1...@sebgroup/green-react@1.9.0) (2023-05-10)
 
 
