@@ -24,4 +24,8 @@ module.exports = {
 
     return config
   },
+  managerWebpack: (config, options) => {
+    options.cache.set = () => Promise.resolve();
+    return config;
+  },
 }
