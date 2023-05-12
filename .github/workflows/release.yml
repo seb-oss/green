@@ -45,7 +45,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Build all libraries
-        run: npx nx run-many -p angular,angular-charts,charts,chlorophyll,extract,react,react-charts  --target=build
+        run: yarn build:libs
 
       - name: Version and release all libraries
         run: npx nx run-many --all --target=update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build --parallel=1
