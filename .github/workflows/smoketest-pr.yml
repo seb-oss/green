@@ -1,8 +1,6 @@
 name: Test and Lint
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -21,7 +19,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -38,8 +36,5 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Lint affected libraries
-        run: yarn affected:lint --base=origin/main
-
-      - name: Test affected libraries
-        run: yarn affected:test --base=origin/main
+      - name: Run smoketest (lint, test and check if build passes)
+        run: yarn smoketest
