@@ -43,16 +43,6 @@
         }
       }
     },
-    "build-app": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "NODE_ENV=production nx run colors:build"
-          }
-        ]
-      }
-    },
     "serve": {
       "executor": "@nrwl/webpack:dev-server",
       "defaultConfiguration": "development",

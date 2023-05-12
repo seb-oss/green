@@ -4,25 +4,21 @@
   "license": "Apache-2.0",
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
-    "build": "nx build",
-    "build:all": "nx run-many --target=build --all",
+    "build:libs": "nx run-many -p angular,angular-charts,charts,chlorophyll,extract,react,react-charts  --target=build",
+    "build:apps": "nx run-many -p colors --target=build",
+    "build:all": "yarn build:libs && yarn build:apps",
     "test": "nx test",
     "test:all": "nx run-many --target=test --all",
     "lint": "nx workspace-lint && nx lint",
     "lint:all": "nx run-many --target=lint --all",
     "smoketest": "yarn lint:all && yarn test:all && yarn build:all",
-    "e2e": "nx e2e",
-    "storybook": "nx build chlorophyll && nx storybook",
-    "affected:apps": "nx affected:apps",
-    "affected:libs": "nx affected:libs",
+    "affected:apps": "nx print-affected --type=app --select=projects",
+    "affected:libs": "nx print-affected --type=lib --select=projects",
     "affected:build": "nx affected:build",
     "affected:build-storybook": "nx affected --target build-storybook",
-    "affected:e2e": "nx affected:e2e",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
-    "affected": "nx affected",
     "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
@@ -239,4 +235,3 @@
     "trim-newlines": "^3.0.1"
   }
 }
-
