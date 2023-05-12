@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.0...@sebgroup/green-angular@1.7.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* 🐛 context-menu close on scroll or resize, button hover ([e5789c5](https://github.com/sebgroup/green/commit/e5789c535c5dfe8d25bafe495acad7687c45fbe3))
+
+
+
 # [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.6.0...@sebgroup/green-angular@1.7.0) (2023-05-05)
 
 
