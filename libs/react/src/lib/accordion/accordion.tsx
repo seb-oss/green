@@ -6,7 +6,7 @@ export interface AccordionInterface {
   items: AccordionItemInterface[]
 }
 
-const Accordion = ({ items }: AccordionInterface) => {
+export const Accordion = ({ items }: AccordionInterface) => {
   const uuid = randomId()
 
   return (
