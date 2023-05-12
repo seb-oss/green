@@ -72,4 +72,8 @@ module.exports = {
     // Return the altered config
     return config
   },
+  managerWebpack: (config, options) => {
+    options.cache?.set = () => Promise.resolve();
+    return config;
+  },
 }
