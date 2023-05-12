@@ -8,6 +8,7 @@ import '../icon/icon'
 import '../ripple/ripple'
 import { effectRipple } from '../../tools/ripple/ripple'
 
+
 import styles from './style/button.styles.scss'
 
 const sets = [
@@ -74,7 +75,7 @@ export class Button extends LitElement {
       sizes.includes(this.size || '') ?
        `size-${this.size}` : ''
     
-       console.log( variantController + setController + sizeController);
+      // console.log( variantController + setController + sizeController);
        
     return html`
       <button 

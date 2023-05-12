@@ -14,7 +14,6 @@ export function effectRipple(e: MouseEvent): void {
         rippleEl.classList.add('gds-ripple-effect');
       }, 20);
     }
-    console.log('esd');
   } catch (e) {
     console.error(e);
   }
