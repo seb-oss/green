@@ -5,8 +5,11 @@ const inspector = (e: MouseEvent) => {
     (e.target as HTMLElement)?.tagName?.toLowerCase()?.startsWith('gds')
   ) {
     const cssVars = getAllCSSVariableNames();
-    const vars = getElementCSSVariables(cssVars, target)
+    const vars = getElementCSSVariables(cssVars, target);
+    const color = window.getComputedStyle(target, null).getPropertyValue('--gds-theme');
+    console.log('%cHello, world!', 'color: ${color}; font-size: 20px;');
     console.log("computedStyles 111 ", vars);
+    // console.log("computedStyles 111 ", window.getComputedStyle(target, null).getPropertyValue('--gds-theme'));
   }
 }
 
