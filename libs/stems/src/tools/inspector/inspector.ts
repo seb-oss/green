@@ -4,22 +4,18 @@ const inspector = (e: MouseEvent) => {
     e.altKey &&
     (e.target as HTMLElement)?.tagName?.toLowerCase()?.startsWith('gds')
   ) {
-   
     const cssVars = getAllCSSVariableNames();
-    const vars = getElementCSSVariables(cssVars, target, "button")
+    const vars = getElementCSSVariables(cssVars, target)
     console.log("computedStyles 111 ", vars);
-    // console.log("computedStyles 111 ", target.shadowRoot?.host);
-    
   }
 }
 
 document.addEventListener('mouseover', inspector)
 
 
-console.clear();
-
 function getAllCSSVariableNames(styleSheets: StyleSheetList = document.styleSheets): string[] {
   const cssVars: string[] = [];
+  
   for (let i = 0; i < styleSheets.length; i++) {
     try {
       const cssRules = styleSheets[i].cssRules;
@@ -49,39 +45,30 @@ function getAllCSSVariableNames(styleSheets: StyleSheetList = document.styleShee
 }
 
 
-// function getElementCSSVariables(allCSSVars: string[], element: Element = document.body, pseudo?: string): Record<string, string> {
-//   const elStyles = window.getComputedStyle(element, pseudo);
-//   const cssVars: Record<string, string> = {};
-//   for (let i = 0; i < allCSSVars.length; i++) {
-//     const key = allCSSVars[i];
-//     const value = elStyles.getPropertyValue(key);
-//     if (value) {
-//       cssVars[key] = value;
-//     }
-//   }
-//   return cssVars;
-// }
-
 function getElementCSSVariables(allCSSVars: string[], element: Element = document.body, pseudo?: string): Record<string, string> {
   const elStyles = window.getComputedStyle(element, pseudo);
   const cssVars: Record<string, string> = {};
+  if (!element) {
+    return {};
+  }
   allCSSVars
-    .filter((name) => name.startsWith('--gds'))
-    .forEach((name) => {
-      const value = elStyles.getPropertyValue(name);
-      if (value) {
-        cssVars[name] = value;
-      }
-    });
+  .filter((name) => name.startsWith('--gds'))
+  .forEach((name) => {
+    const value = elStyles.getPropertyValue(name);
+    if (value) {
+      cssVars[name] = value;
+    }
+  });
   return cssVars;
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const cssVars = getAllCSSVariableNames();
   // console.log("cssVars", cssVars);
-  console.log(":root", getElementCSSVariables(cssVars, document.documentElement));
-  // console.log("body", getElementCSSVariables(cssVars, document.body));
-  // console.log("#test", getElementCSSVariables(cssVars, document.getElementById("test")));
+  // console.log(":root", getElementCSSVariables(cssVars, document.documentElement));
+  console.log("body", getElementCSSVariables(cssVars, document.body));
+  // console.log("#test", getElementCSSVariables(cssVars, document.getElementsByTagName("gds-button") as unknown as HTMLElement ));
   // console.log("#test:after", getElementCSSVariables(cssVars, document.getElementById("test"), ":after"));
 });
 
