@@ -1,66 +1,105 @@
 const inspector = (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
   if (
     e.altKey &&
     (e.target as HTMLElement)?.tagName?.toLowerCase()?.startsWith('gds')
   ) {
-    // Do something with the element here
-    console.log('Inspecting element:', e.target)
+   
+    const cssVars = getAllCSSVariableNames();
+    const vars = getElementCSSVariables(cssVars, target, "button")
+    console.log("computedStyles 111 ", vars);
+    // console.log("computedStyles 111 ", target.shadowRoot?.host);
+    
   }
 }
 
 document.addEventListener('mouseover', inspector)
 
-const onClick = (e: MouseEvent) => {
-  if (
-    e.altKey &&
-    (e.target as HTMLElement)?.tagName?.toLowerCase()?.startsWith('gds')
-  ) {
-    const element = e.target as HTMLElement
-    const computedStyles = window.getComputedStyle(element)
-    const variables: { [key: string]: string } = {}
 
-    for (let i = 0; i < computedStyles.length; i++) {
-      const propertyName = computedStyles[i]
-      if (propertyName.startsWith('--')) {
-        const value = computedStyles.getPropertyValue(propertyName)
-        variables[propertyName] = value
+console.clear();
+
+function getAllCSSVariableNames(styleSheets: StyleSheetList = document.styleSheets): string[] {
+  const cssVars: string[] = [];
+  for (let i = 0; i < styleSheets.length; i++) {
+    try {
+      const cssRules = styleSheets[i].cssRules;
+      for (let j = 0; j < cssRules.length; j++) {
+        try {
+          const rule = cssRules[j];
+          if (rule.type === CSSRule.STYLE_RULE) {
+            const style = (rule as CSSStyleRule).style;
+            for (let k = 0; k < style.length; k++) {
+              const name = style[k];
+              if (name.startsWith("--") && cssVars.indexOf(name) === -1) {
+                cssVars.push(name);
+              }
+            }
+          }
+        } catch (error) {
+          console.log("error", error);
+          
+        }
       }
+    } catch (error) {
+      console.log("error", error);
+      
     }
-
-    const inspectorDiv = document.createElement('div')
-    inspectorDiv.style.position = 'fixed'
-    inspectorDiv.style.top = '0'
-    inspectorDiv.style.left = '0'
-    inspectorDiv.style.width = '100%'
-    inspectorDiv.style.height = '100%'
-    inspectorDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    inspectorDiv.style.display = 'flex'
-    inspectorDiv.style.justifyContent = 'center'
-    inspectorDiv.style.alignItems = 'center'
-
-    const contentDiv = document.createElement('div')
-    contentDiv.style.backgroundColor = 'white'
-    contentDiv.style.padding = '20px'
-    contentDiv.style.borderRadius = '10px'
-
-    Object.entries(variables).forEach(([name, value]) => {
-      const variableDiv = document.createElement('div')
-      variableDiv.innerText = `${name}: ${value}`
-      contentDiv.appendChild(variableDiv)
-    })
-
-    inspectorDiv.appendChild(element.cloneNode(true))
-    document.body.appendChild(inspectorDiv)
-
-    const closeInspector = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        inspectorDiv.remove()
-        document.removeEventListener('keydown', closeInspector)
-      }
-    }
-
-    document.addEventListener('keydown', closeInspector)
   }
+  return cssVars;
 }
 
-document.addEventListener('click', onClick)
+
+// function getElementCSSVariables(allCSSVars: string[], element: Element = document.body, pseudo?: string): Record<string, string> {
+//   const elStyles = window.getComputedStyle(element, pseudo);
+//   const cssVars: Record<string, string> = {};
+//   for (let i = 0; i < allCSSVars.length; i++) {
+//     const key = allCSSVars[i];
+//     const value = elStyles.getPropertyValue(key);
+//     if (value) {
+//       cssVars[key] = value;
+//     }
+//   }
+//   return cssVars;
+// }
+
+function getElementCSSVariables(allCSSVars: string[], element: Element = document.body, pseudo?: string): Record<string, string> {
+  const elStyles = window.getComputedStyle(element, pseudo);
+  const cssVars: Record<string, string> = {};
+  allCSSVars
+    .filter((name) => name.startsWith('--gds'))
+    .forEach((name) => {
+      const value = elStyles.getPropertyValue(name);
+      if (value) {
+        cssVars[name] = value;
+      }
+    });
+  return cssVars;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const cssVars = getAllCSSVariableNames();
+  // console.log("cssVars", cssVars);
+  console.log(":root", getElementCSSVariables(cssVars, document.documentElement));
+  // console.log("body", getElementCSSVariables(cssVars, document.body));
+  // console.log("#test", getElementCSSVariables(cssVars, document.getElementById("test")));
+  // console.log("#test:after", getElementCSSVariables(cssVars, document.getElementById("test"), ":after"));
+});
+
+
+// Theme color 
+document.addEventListener('DOMContentLoaded', () => {
+  function addMetaTag(name: string, variableName: string): void {
+    const meta = document.createElement('meta');
+    const updateMetaTag = () => {
+      const variableValue = getComputedStyle(document.documentElement).getPropertyValue(variableName);
+      meta.setAttribute('content', variableValue);
+    }
+    updateMetaTag();
+    const observer = new MutationObserver(updateMetaTag);
+    observer.observe(document.documentElement, { attributes: true });
+    meta.setAttribute('name', name);
+    document.head.appendChild(meta);
+  }
+
+  addMetaTag("theme-color", "--gds-theme");
+});

@@ -2,6 +2,7 @@
   /* Color styles */
   --gds-color-transparent: transparent;
   --gds-color-current: currentColor;
+  --gds-theme: var(--gds-color-green-40);
   --gds-color-white: rgba(255, 255, 255, 1);
   --gds-color-text-primary: rgba(49, 48, 48, 1);
   --gds-color-text-secondary: rgba(108, 106, 106, 1);
