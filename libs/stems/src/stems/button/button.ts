@@ -87,7 +87,9 @@ export class Button extends LitElement {
         @click="${effectRipple}"
       >   
         ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
-        <slot></slot>
+        <span>
+          <slot></slot>
+        </span>
         ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
         ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>`

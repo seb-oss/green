@@ -16,8 +16,40 @@
   --gds-button-color-outline: var(--gds-color-grey-20);
 }
 
+@mixin containment {
+  /*
+    Containment
+    cqw: 1% of a query container's width
+    cqh: 1% of a query container's height
+    cqi: 1% of a query container's inline size
+    cqb: 1% of a query container's block size
+    cqmin: The smaller value of either cqi or cqb
+    cqmax: The larger value of either cqi or cqb
+  */
+
+  contain: layout;
+  container: button / inline-size;
+  isolation: isolate;
+  max-width: 20ch;
+  width: auto;
+
+  @container button (width < 2000ch) {
+    button span {
+      max-width: 20ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // font-size: max(1.5em, 1.23em + 2cqi);
+    }
+  }
+}
+
 @mixin core() {
+
+  // Spacing
   align-items: center;
+
+  // Coloring
   background-color: var(--gds-button-color-bg);
   block-size: 100%;
 
@@ -27,16 +59,15 @@
   border-style: var(--gds-button-border-style);
   border-width: var(--gds-button-border-width);
   box-sizing: border-box;
-
-  // Coloring
   color: var(--gds-button-color-text);
   color-scheme: dark light;
   cursor: pointer;
-  display: flex;
-
-  // Optional
+  // General
+  display: inline-flex;
   gap: var(--gds-button-gap);
-  inline-size: max-content;
+
+  // Sizing
+  inline-size: inherit;
   justify-content: space-between;
   justify-items: center;
   padding-block: var(--gds-button-padding-block);

@@ -8,3 +8,8 @@
    - Border radius
    - fontsizes
    - spaces
+
+Spacing
+
+- Add justify options
+- Add all accesability features

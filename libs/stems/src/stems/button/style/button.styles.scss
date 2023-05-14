@@ -1,7 +1,9 @@
 @use './button.mixins' as *;
+@layer core, shell, components, button;
 
 :host {
   @include tokens;
+  @include containment;
 }
 
 button {
