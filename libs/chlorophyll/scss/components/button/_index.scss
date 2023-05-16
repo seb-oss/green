@@ -56,6 +56,7 @@ button[type='button']:where(
         .danger,
         .close,
         .link,
+        .icon,
         [aria-haspopup='listbox'],
         [aria-haspopup='menu']
       )
