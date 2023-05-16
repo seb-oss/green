@@ -265,6 +265,16 @@
     }
   },
   {
+    "id": "components-context-menu--directive-template-default",
+    "name": "Directive Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-form-button--default",
     "name": "Default",
     "title": "Components/Form/Button",
