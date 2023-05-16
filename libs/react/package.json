@@ -19,7 +19,7 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "author": "Johan Öbrink <johan.obrink@gmail.com> (http://www.linkedin.com/in/johanobrink/)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
