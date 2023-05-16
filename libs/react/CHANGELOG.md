@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.2...@sebgroup/green-react@1.9.3) (2023-05-16)
+
+
+### Bug Fixes
+
+* **accordion:** don't generate new `uuid` every render ([f559903](https://github.com/sebgroup/green/commit/f5599038210691da287dec3fe3a699d76faccf5d))
+
+
+
 ## [1.9.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.1...@sebgroup/green-react@1.9.2) (2023-05-16)
 
 
