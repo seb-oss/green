@@ -7,7 +7,7 @@ export interface AccordionInterface {
 }
 
 export const Accordion = ({ items }: AccordionInterface) => {
-  const uuid = randomId()
+  const [uuid, _] = React.useState(randomId())
 
   return (
     <div className="accordion">
