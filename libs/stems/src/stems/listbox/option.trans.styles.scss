@@ -1,10 +1,14 @@
-@use '../../../../chlorophyll/scss/primitives/listbox/mixins' as self;
+@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 
 :host {
-  @include self.listbox-item;
+  @include dropdown.select-option;
+}
 
-  &:focus,
-  &:hover {
-    outline: 2px solid;
-  }
+:host(:hover) {
+  @include dropdown.select-option-highlighted;
+}
+
+:host(:focus) {
+  @include dropdown.select-option-highlighted;
+  outline: 2px solid;
 }

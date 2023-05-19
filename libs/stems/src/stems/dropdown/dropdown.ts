@@ -16,6 +16,7 @@ import styles from './stem.styles.scss'
 /**
  * @element gds-dropdown
  * @slot - Options for the dropdown. Accepts `gds-option` elements.
+ * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
  * @fires change - Fired when the value of the dropdown changes.
  * @fires ui-state - Fired when the dropdown is opened or closed.
  *
