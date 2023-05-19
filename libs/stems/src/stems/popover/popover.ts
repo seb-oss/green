@@ -5,6 +5,17 @@ import * as React from 'react'
 
 import styles from './stem.styles.scss'
 
+/**
+ * @element gds-popover
+ * @slot - Content of the popover
+ * @fires ui-state - Fired when the popover is opened or closed
+ *
+ * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
+ *
+ * GdsPopover can be supplied with a trigger through the `trigger` property. If a trigger is specified, the popover will
+ * register a keydown listener on the trigger and listen to `ArrowDown` key presses. When the trigger is focused and
+ * `ArrowDown` is pressed, the popover will open and focus the first slotted child.
+ */
 @customElement('gds-popover')
 export class GdsPopover extends LitElement {
   static styles = unsafeCSS(styles)
@@ -14,11 +25,14 @@ export class GdsPopover extends LitElement {
 
   open = false
 
-  private _trigger?: HTMLElement
+  /**
+   * Optional trigger element for the popover.
+   */
   set trigger(value: HTMLElement) {
     this._trigger = value
     this.registerTriggerEvents()
   }
+  private _trigger?: HTMLElement
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -46,9 +60,6 @@ export class GdsPopover extends LitElement {
     this._trigger?.removeEventListener('keydown', this.triggerKeyDownListener)
   }
 
-  /**
-   * If the popover was triggered by pressing arrow
-   */
   private triggerKeyDownListener = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       this.setOpen(true)

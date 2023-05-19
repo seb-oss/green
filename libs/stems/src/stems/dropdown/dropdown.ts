@@ -13,6 +13,14 @@ import { GdsPopover } from '../popover/popover'
 
 import styles from './stem.styles.scss'
 
+/**
+ * @element gds-dropdown
+ * @slot - Options for the dropdown. Accepts `gds-option` elements.
+ * @fires change - Fired when the value of the dropdown changes.
+ * @fires ui-state - Fired when the dropdown is opened or closed.
+ *
+ * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
+ */
 @customElement('gds-dropdown')
 export class GdsDropdown extends LitElement {
   static styles = unsafeCSS(styles)
@@ -26,7 +34,14 @@ export class GdsDropdown extends LitElement {
   }
   static formAssociated = true
 
+  /**
+   * Sets the open state of the dropdown.
+   */
   open = false
+
+  /**
+   * The value of the dropdown.
+   */
   value: any
 
   private internals: ElementInternals
@@ -36,7 +51,7 @@ export class GdsDropdown extends LitElement {
 
   constructor() {
     super()
-    this.internals = this.attachInternals() as any
+    this.internals = this.attachInternals()
     this.internals.role = 'combobox'
     constrainSlots(this)
 
@@ -45,6 +60,10 @@ export class GdsDropdown extends LitElement {
     ) as HTMLCollectionOf<GdsOption>
   }
 
+  /**
+   * @returns The list of options in the dropdown.
+   * @readonly
+   */
   get values() {
     return Array.from(this._optionElements).map((o) => ({
       option: o,

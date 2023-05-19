@@ -8,6 +8,17 @@ import { TransitionalStyles } from '../../transitional-styles'
 import 'reflect-metadata'
 import style from './listbox.styles'
 
+/**
+ * @element gds-listbox
+ * @slot - The default slot. Only `gds-option` elements should be used here.
+ *
+ * A listbox is a widget that allows the user to select one or more items from a list of choices.
+ * This primitive corresponds to the aria listbox role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role
+ *
+ * The listbox handles keyboard navigation and manages focus and selection of options.
+ *
+ * Can be used together with the `gds-option` primitive.
+ */
 @customElement('gds-listbox')
 export class GdsListbox extends LitElement {
   static styles = unsafeCSS(style)
@@ -18,7 +29,7 @@ export class GdsListbox extends LitElement {
   constructor() {
     super()
 
-    this.internals = this.attachInternals() as any
+    this.internals = this.attachInternals()
     this.internals.role = 'listbox'
   }
 
@@ -44,9 +55,13 @@ export class GdsListbox extends LitElement {
     })
   }
 
+  /**
+   * Focuses the first option in the listbox.
+   * If the listbox is empty, nothing happens.
+   *
+   * @public
+   */
   focus() {
-    console.log('focus listbox')
-
     let slot = this.slotRef.value
     if (!slot) return
 
@@ -70,6 +85,15 @@ export const GdsListboxReact = createComponent({
   react: React,
 })
 
+/**
+ * @element gds-option
+ * @slot - The default slot. Custom content can be used to display the option.
+ *
+ * A listbox option is an option in a listbox widget.
+ * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role
+ *
+ * Can be used together with the `gds-listbox` primitive.
+ */
 @customElement('gds-option')
 export class GdsOption extends LitElement {
   static styles = unsafeCSS(style)
@@ -85,7 +109,7 @@ export class GdsOption extends LitElement {
   constructor() {
     super()
 
-    this.internals = this.attachInternals() as any
+    this.internals = this.attachInternals()
     this.internals.role = 'option'
 
     this.addEventListener('click', () => {
@@ -102,15 +126,12 @@ export class GdsOption extends LitElement {
     TransitionalStyles.instance.apply(this, 'gds-option')
   }
 
-  focus(options?: FocusOptions | undefined): void {
-    this.setAttribute('tabindex', '0')
-    super.focus(options)
-  }
-
-  onblur = () => {
-    this.setAttribute('tabindex', '-1')
-  }
-
+  /**
+   * Selects the option and dispatches a `select` event.
+   *
+   * @fires select
+   * @public
+   */
   select() {
     this.dispatchEvent(
       new CustomEvent('select', {
@@ -121,6 +142,21 @@ export class GdsOption extends LitElement {
         },
       })
     )
+  }
+
+  /**
+   * Focuses the option.
+   *
+   * @public
+   * @param options - Focus options
+   */
+  focus(options?: FocusOptions | undefined): void {
+    this.setAttribute('tabindex', '0')
+    super.focus(options)
+  }
+
+  onblur = () => {
+    this.setAttribute('tabindex', '-1')
   }
 
   render() {
