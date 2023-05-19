@@ -1,13 +1,17 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 
 import { Dropdown } from './dropdown'
+import { GdsListbox, GdsOption } from '../listbox/listbox'
+import { GdsPopover } from '../popover/popover'
+
+import { registerTransitionalStyles } from '../../transitional-styles'
 
 <Meta title="Components/Dropdown" />
 
 # Hello
 
 <Canvas>
-  <div style={{ height: '200px' }}>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-dropdown id="dropdown" name="my-dropdown">
       <gds-option>Select value</gds-option>
       <gds-option value="v1">value 1</gds-option>
