@@ -1,4 +1,7 @@
 import './app.element.scss'
+
+import { registerTransitionalStyles } from '@sebgroup/stems'
+
 import '@sebgroup/stems'
 import { Dropdown, GdsOption } from '@sebgroup/stems'
 
@@ -7,6 +10,8 @@ export class AppElement extends HTMLElement {
 
   connectedCallback() {
     const title = 'stems-lib-dev'
+
+    registerTransitionalStyles()
 
     this.innerHTML = `
     <div class="wrapper">

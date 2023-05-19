@@ -1,16 +1,16 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { LitElement, adoptStyles, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import 'reflect-metadata'
-
-import styles from './stem.styles.scss'
+import style from './listbox.styles'
 
 @customElement('gds-listbox')
 export class Listbox extends LitElement {
-  static styles = unsafeCSS(styles)
+  static styles = unsafeCSS(style)
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -23,14 +23,14 @@ export class Listbox extends LitElement {
     this.addEventListener('keydown', (e) => {
       console.log('keydown', e.key)
       if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
-      if (!(e.target instanceof ListboxItem)) return
+      if (!(e.target instanceof Listbox)) return
 
       e.stopPropagation()
       e.preventDefault()
 
       if (e.key === 'ArrowDown') {
         const nextItem = e.target?.nextElementSibling as ListboxItem
-        console.log(nextItem)
+        console.log('arrowdown', nextItem)
         nextItem?.focus()
       }
       if (e.key === 'ArrowUp') {
@@ -38,6 +38,11 @@ export class Listbox extends LitElement {
         prevItem?.focus()
       }
     })
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-listbox')
   }
 
   focus(options?: FocusOptions | undefined) {
@@ -53,13 +58,12 @@ export class Listbox extends LitElement {
     }
 
     const firstItem = slot.assignedElements()[0] as ListboxItem
-    console.log(firstItem)
     firstItem?.focus()
   }
 
   render() {
     return html`
-      <ul role="listbox">
+      <ul role="listbox" tabindex="0">
         <slot ${ref(this.slotRef)}></slot>
       </ul>
     `
@@ -74,7 +78,7 @@ export const ListboxReact = createComponent({
 
 @customElement('gds-listbox-item')
 export class ListboxItem extends LitElement {
-  static styles = unsafeCSS(styles)
+  static styles = unsafeCSS(style)
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -97,10 +101,15 @@ export class ListboxItem extends LitElement {
     })
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-listbox')
+  }
+
   focus(options?: FocusOptions | undefined): void {
     super.focus(options)
     console.log('focus listbox item')
-    this.shadowRoot?.querySelector('li')?.focus()
+    this.shadowRoot?.querySelector('li')?.classList.add('active')
   }
 
   select() {
@@ -118,7 +127,7 @@ export class ListboxItem extends LitElement {
 
   render() {
     return html`
-      <li role="option" tabindex="0">
+      <li role="option">
         <slot></slot>
       </li>
     `
