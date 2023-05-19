@@ -9,44 +9,42 @@ import 'reflect-metadata'
 import style from './listbox.styles'
 
 @customElement('gds-listbox')
-export class Listbox extends LitElement {
+export class GdsListbox extends LitElement {
   static styles = unsafeCSS(style)
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  }
 
+  private internals: ElementInternals
   private slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {
     super()
-    this.addEventListener('keydown', (e) => {
-      console.log('keydown', e.key)
-      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
-      if (!(e.target instanceof Listbox)) return
 
-      e.stopPropagation()
-      e.preventDefault()
-
-      if (e.key === 'ArrowDown') {
-        const nextItem = e.target?.nextElementSibling as ListboxItem
-        console.log('arrowdown', nextItem)
-        nextItem?.focus()
-      }
-      if (e.key === 'ArrowUp') {
-        const prevItem = e.target?.previousElementSibling as ListboxItem
-        prevItem?.focus()
-      }
-    })
+    this.internals = this.attachInternals() as any
+    this.internals.role = 'listbox'
   }
 
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-listbox')
+
+    this.addEventListener('keydown', (e) => {
+      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
+      if (!(e.target instanceof GdsOption)) return
+
+      e.stopPropagation()
+      e.preventDefault()
+
+      if (e.key === 'ArrowDown') {
+        const nextItem = e.target?.nextElementSibling as GdsOption
+        nextItem?.focus()
+      }
+      if (e.key === 'ArrowUp') {
+        const prevItem = e.target?.previousElementSibling as GdsOption
+        prevItem?.focus()
+      }
+    })
   }
 
-  focus(options?: FocusOptions | undefined) {
-    super.focus(options)
+  focus() {
     console.log('focus listbox')
 
     let slot = this.slotRef.value
@@ -57,32 +55,26 @@ export class Listbox extends LitElement {
       slot = slot.assignedElements()[0] as HTMLSlotElement
     }
 
-    const firstItem = slot.assignedElements()[0] as ListboxItem
+    const firstItem = slot.assignedElements()[0] as GdsOption
     firstItem?.focus()
   }
 
   render() {
-    return html`
-      <ul role="listbox" tabindex="0">
-        <slot ${ref(this.slotRef)}></slot>
-      </ul>
-    `
+    return html`<slot ${ref(this.slotRef)}></slot> `
   }
 }
 
-export const ListboxReact = createComponent({
+export const GdsListboxReact = createComponent({
   tagName: 'gds-listbox',
-  elementClass: Listbox,
+  elementClass: GdsListbox,
   react: React,
 })
 
-@customElement('gds-listbox-item')
-export class ListboxItem extends LitElement {
+@customElement('gds-option')
+export class GdsOption extends LitElement {
   static styles = unsafeCSS(style)
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  }
+
+  private internals: ElementInternals
 
   value: any
 
@@ -92,6 +84,10 @@ export class ListboxItem extends LitElement {
 
   constructor() {
     super()
+
+    this.internals = this.attachInternals() as any
+    this.internals.role = 'option'
+
     this.addEventListener('click', () => {
       this.select()
     })
@@ -103,17 +99,19 @@ export class ListboxItem extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-listbox')
+    TransitionalStyles.instance.apply(this, 'gds-option')
   }
 
   focus(options?: FocusOptions | undefined): void {
+    this.setAttribute('tabindex', '0')
     super.focus(options)
-    console.log('focus listbox item')
-    this.shadowRoot?.querySelector('li')?.classList.add('active')
+  }
+
+  onblur = () => {
+    this.setAttribute('tabindex', '-1')
   }
 
   select() {
-    this.shadowRoot?.querySelector('li')?.focus()
     this.dispatchEvent(
       new CustomEvent('select', {
         bubbles: true,
@@ -126,16 +124,12 @@ export class ListboxItem extends LitElement {
   }
 
   render() {
-    return html`
-      <li role="option">
-        <slot></slot>
-      </li>
-    `
+    return html`<slot></slot> `
   }
 }
 
-export const ListboxItemReact = createComponent({
-  tagName: 'gds-listbox-item',
-  elementClass: ListboxItem,
+export const GdsOptionReact = createComponent({
+  tagName: 'gds-option',
+  elementClass: GdsOption,
   react: React,
 })

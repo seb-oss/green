@@ -1,14 +1,5 @@
-@use '../../../../chlorophyll/scss/primitives/listbox/mixins' as self;
 @use '../../../../chlorophyll/scss/components/list/mixins' as list;
 
-li {
-  @include self.listbox-item;
-
-  &:focus {
-    outline: 2px solid;
-  }
-}
-
-ul {
+:host {
   @include list.base-list;
 }

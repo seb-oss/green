@@ -8,13 +8,13 @@ import 'reflect-metadata'
 
 import { constrainSlots } from '../../tools/utils'
 
-import { Listbox, ListboxItem } from '../listbox/listbox'
-import '../popover/popover'
+import { GdsListbox, GdsOption } from '../listbox/listbox'
+import { GdsPopover } from '../popover/popover'
 
 import styles from './stem.styles.scss'
 
 @customElement('gds-dropdown')
-export class Dropdown extends LitElement {
+export class GdsDropdown extends LitElement {
   static styles = unsafeCSS(styles)
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
@@ -22,7 +22,7 @@ export class Dropdown extends LitElement {
   }
   static properties = {
     open: { type: Boolean, reflect: true },
-    value: { reflect: true },
+    value: { reflect: false },
   }
   static formAssociated = true
 
@@ -30,7 +30,8 @@ export class Dropdown extends LitElement {
   value: any
 
   private internals: ElementInternals
-  private listBoxRef: Ref<Listbox> = createRef()
+  private listBoxRef: Ref<GdsListbox> = createRef()
+  private triggerRef: Ref<HTMLButtonElement> = createRef()
   private _optionElements: HTMLCollectionOf<GdsOption>
 
   constructor() {
@@ -38,29 +39,6 @@ export class Dropdown extends LitElement {
     this.internals = this.attachInternals() as any
     this.internals.role = 'combobox'
     constrainSlots(this)
-
-    this.addEventListener('keydown', async (e) => {
-      if (e.key === 'ArrowDown') {
-        this.open = true
-        await this.updateComplete
-        this.listBoxRef.value?.focus()
-      }
-      if (e.key === 'Escape') {
-        this.open = false
-      }
-    })
-
-    window.addEventListener('click', (e) => {
-      if (!this.contains(e.target as Node)) this.open = false
-    })
-
-    window.addEventListener('keydown', (e) => {
-      if (!this.contains(e.target as Node)) this.open = false
-    })
-
-    window.addEventListener('focus', (e) => {
-      console.log('asdasd')
-    })
 
     this._optionElements = this.getElementsByTagName(
       'gds-option'
@@ -86,6 +64,7 @@ export class Dropdown extends LitElement {
       <button
         @click="${() => this.setOpen(!this.open)}"
         aria-haspopup="listbox"
+        ${ref(this.triggerRef)}
       >
         <slot name="button" gds-allow="span">
           <span
@@ -95,7 +74,11 @@ export class Dropdown extends LitElement {
           </span>
         </slot>
       </button>
-      <gds-popover .open=${this.open}>
+      <gds-popover
+        .open=${this.open}
+        @ui-state=${(e: CustomEvent) => this.setOpen(e.detail.open)}
+        ${ref(this.registerPopoverTrigger)}
+      >
         <gds-listbox
           ${ref(this.listBoxRef)}
           @select="${(e: CustomEvent) =>
@@ -106,7 +89,15 @@ export class Dropdown extends LitElement {
     `
   }
 
+  private registerPopoverTrigger(el?: Element) {
+    if (el) {
+      const popover = el as GdsPopover
+      popover.trigger = this.triggerRef.value as HTMLButtonElement
+    }
+  }
+
   private selectOption(option: GdsOption) {
+    console.log('selectOption', option)
     this.value = option.value
     this.internals.setFormValue(option.value)
     this.setOpen(false)
@@ -122,6 +113,10 @@ export class Dropdown extends LitElement {
   private setOpen(open: boolean) {
     this.open = open
     this.internals.ariaExpanded = open.toString()
+
+    if (open) this.registerAutoCloseListener()
+    else this.unregisterAutoCloseListener()
+
     this.dispatchEvent(
       new CustomEvent('ui-state', {
         detail: { open },
@@ -130,19 +125,26 @@ export class Dropdown extends LitElement {
       })
     )
   }
+
+  private registerAutoCloseListener() {
+    window.addEventListener('click', this.autoCloseListener)
+    window.addEventListener('keydown', this.autoCloseListener)
+  }
+
+  private unregisterAutoCloseListener() {
+    window.removeEventListener('click', this.autoCloseListener)
+    window.removeEventListener('keydown', this.autoCloseListener)
+  }
+
+  private autoCloseListener = (e: Event) => {
+    console.log('auto close listener', e)
+    if (e.target instanceof Node && !this.contains(e.target as Node))
+      this.setOpen(false)
+  }
 }
 
-@customElement('gds-option')
-export class GdsOption extends ListboxItem {}
-
-export const DropdownReact = createComponent({
+export const GdsDropdownReact = createComponent({
   tagName: 'gds-dropdown',
-  elementClass: Dropdown,
-  react: React,
-})
-
-export const DropdownOptionReact = createComponent({
-  tagName: 'gds-option',
-  elementClass: GdsOption,
+  elementClass: GdsDropdown,
   react: React,
 })

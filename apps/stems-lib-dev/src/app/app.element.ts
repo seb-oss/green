@@ -1,9 +1,7 @@
 import './app.element.scss'
 
 import { registerTransitionalStyles } from '@sebgroup/stems'
-
-import '@sebgroup/stems'
-import { Dropdown, GdsOption } from '@sebgroup/stems'
+import { GdsDropdown, GdsOption } from '@sebgroup/stems'
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
@@ -21,7 +19,18 @@ export class AppElement extends HTMLElement {
         <div class="gds-form-item">
           <gds-dropdown id="dropdown" name="my-dropdown">
             <gds-option>Select value</gds-option>
-            <gds-option value="v1"><strong><em>Value</em></strong> 1</gds-option>
+            <gds-option value="v1">
+              <div style="display: flex">
+                <div>
+                  <div><strong>Left side</strong></div>
+                  <div>Under</div>
+                </div>
+                <div>
+                  <div><strong>Right side</strong></div>
+                  <div>Under</div>
+                </div>
+              </div>
+            </gds-option>
             <gds-option value="v2">Value 2</gds-option>
             <gds-option value="v3">Value 3</gds-option>
             <p>Hello</p>
@@ -35,7 +44,7 @@ export class AppElement extends HTMLElement {
     </div>
       `
 
-    const dropdown = this.querySelector('#dropdown') as Dropdown
+    const dropdown = this.querySelector('#dropdown') as GdsDropdown
     dropdown.addEventListener('change', (e: CustomEvent) => {
       console.log('Value changed: ', e.detail.value)
       console.log('dropdown', dropdown.values)

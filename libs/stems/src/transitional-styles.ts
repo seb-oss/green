@@ -17,8 +17,6 @@ export class TransitionalStyles {
   private sheets = new Map<string, CSSStyleSheet>()
 
   apply(element: HTMLElement, styleKey: string) {
-    console.log('apply', styleKey, element)
-    // Apply to a single element
     const sheet = this.sheets.get(styleKey)
     if (!sheet || !element.shadowRoot) return
     element.shadowRoot.adoptedStyleSheets = [sheet]

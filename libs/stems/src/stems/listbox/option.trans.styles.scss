@@ -1,0 +1,10 @@
+@use '../../../../chlorophyll/scss/primitives/listbox/mixins' as self;
+
+:host {
+  @include self.listbox-item;
+
+  &:focus,
+  &:hover {
+    outline: 2px solid;
+  }
+}
