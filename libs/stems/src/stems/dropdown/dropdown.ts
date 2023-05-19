@@ -1,4 +1,4 @@
-import { LitElement, html, css, TemplateResult, unsafeCSS } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { customElement, queryAll } from 'lit/decorators.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
@@ -50,9 +50,17 @@ export class Dropdown extends LitElement {
       }
     })
 
-    // this.addEventListener('focusout', (e) => {
-    //   this.open = false
-    // })
+    window.addEventListener('click', (e) => {
+      if (!this.contains(e.target as Node)) this.open = false
+    })
+
+    window.addEventListener('keydown', (e) => {
+      if (!this.contains(e.target as Node)) this.open = false
+    })
+
+    window.addEventListener('focus', (e) => {
+      console.log('asdasd')
+    })
 
     this._optionElements = this.getElementsByTagName(
       'gds-option'
