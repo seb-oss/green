@@ -1,4 +1,4 @@
-@use './button.mixins' as *;
+@use './button.mixins.scss' as *;
 @layer core, shell, components, button;
 
 :host {

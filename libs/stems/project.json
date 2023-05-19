@@ -5,17 +5,16 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
         "packageJson": "libs/stems/package.json",
         "outputPath": "dist/libs/stems",
         "main": "libs/stems/src/index.ts",
         "tsConfig": "libs/stems/tsconfig.lib.json",
-        "entryFile": "libs/stems/src/index.ts",
-        "assets": ["libs/stems/*.md"],
-        "rollupConfig": "rollup.config.js",
-        "updateBuildableProjectDepsInPackageJson": false
+        "assets": [],
+        "updateBuildableProjectDepsInPackageJson": false,
+        "esbuildConfig": "libs/stems/esbuild.config.js"
       }
     },
     "lint": {
