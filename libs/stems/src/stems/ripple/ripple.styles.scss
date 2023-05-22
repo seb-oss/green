@@ -45,3 +45,9 @@ div.gds-ripple-effect {
     transform: scale(calc(3 * var(--mt-ripple-spread, 4)));
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    --gds-ripple-animation-name: none !important;
+  }
+}
