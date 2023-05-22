@@ -1,4 +1,4 @@
-import { LitElement, adoptStyles, html, unsafeCSS } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
@@ -33,6 +33,21 @@ export class GdsListbox extends LitElement {
     this.internals.role = 'listbox'
   }
 
+  /**
+   * Returns a list of all `gds-option` elements in the listbox.
+   */
+  get optionElements() {
+    let slot = this.slotRef.value
+    if (!slot) return []
+
+    // Unwrap nested slots
+    while (slot.assignedElements()[0].nodeName === 'SLOT') {
+      slot = slot.assignedElements()[0] as HTMLSlotElement
+    }
+
+    return (slot.assignedElements() as GdsOption[]) || []
+  }
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-listbox')
@@ -53,6 +68,13 @@ export class GdsListbox extends LitElement {
         prevItem?.focus()
       }
     })
+
+    this.addEventListener('select', (e) => {
+      const option = e.target as GdsOption
+      Array.from(this.optionElements).forEach((el) => {
+        if (el !== option) el.unselect()
+      })
+    })
   }
 
   /**
@@ -62,15 +84,7 @@ export class GdsListbox extends LitElement {
    * @public
    */
   focus() {
-    let slot = this.slotRef.value
-    if (!slot) return
-
-    // Unwrap nested slots
-    while (slot.assignedElements()[0].nodeName === 'SLOT') {
-      slot = slot.assignedElements()[0] as HTMLSlotElement
-    }
-
-    const firstItem = slot.assignedElements()[0] as GdsOption
+    const firstItem = this.optionElements[0]
     firstItem?.focus()
   }
 
@@ -103,7 +117,7 @@ export class GdsOption extends LitElement {
   value: any
 
   static properties = {
-    value: { reflect: true },
+    value: {},
   }
 
   constructor() {
@@ -133,6 +147,7 @@ export class GdsOption extends LitElement {
    * @public
    */
   select() {
+    this.internals.ariaSelected = 'true'
     this.dispatchEvent(
       new CustomEvent('select', {
         bubbles: true,
@@ -144,6 +159,10 @@ export class GdsOption extends LitElement {
     )
   }
 
+  unselect() {
+    this.internals.ariaSelected = 'false'
+  }
+
   /**
    * Focuses the option.
    *
@@ -153,6 +172,18 @@ export class GdsOption extends LitElement {
   focus(options?: FocusOptions | undefined): void {
     this.setAttribute('tabindex', '0')
     super.focus(options)
+
+    // This hack is here to make sure the option gets focus
+    // when the containing popover is first opened, because
+    // when this is called, the element may not yet be displayed
+    // and therefore `super.focus()` does nothing until some
+    // arbitrary amount of time has passed.
+    if (document.activeElement !== this) {
+      const iv = setInterval(() => {
+        if (document.activeElement === this) clearInterval(iv)
+        super.focus(options)
+      }, 10)
+    }
   }
 
   onblur = () => {
