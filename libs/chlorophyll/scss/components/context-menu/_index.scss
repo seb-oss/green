@@ -5,6 +5,7 @@
 .popover-context-menu {
   @include common.media-breakpoint-up('sm') {
     @include mixins.add-context-menu();
+    border: none;
   }
 
   ul[role='listbox'] {
@@ -19,12 +20,6 @@
   }
 }
 
-.small {
+.small-padding-adjusted {
   padding: 0.4375rem 0.5rem !important;
-}
-
-@include common.media-breakpoint-up('sm') {
-  .popover {
-    border: none;
-  }
 }
