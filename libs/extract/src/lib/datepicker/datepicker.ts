@@ -285,7 +285,6 @@ export const createDatepicker = (
       if (date < startOfMonthMinDate || date > endOfMonthMaxDate) {
         return
       }
-      console.log(date)
       data = createData(
         locale,
         date,
