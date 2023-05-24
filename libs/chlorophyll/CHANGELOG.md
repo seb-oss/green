@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.10.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.2...@sebgroup/chlorophyll@1.10.3) (2023-05-24)
+
+
+### Bug Fixes
+
+* 🐛 Context menu on scroll markForCheck and css fixes ([#897](https://github.com/sebgroup/green/issues/897)) ([89b83fc](https://github.com/sebgroup/green/commit/89b83fc4d09456b8f983eb2ece14fa9ea182fc5a))
+* lists font weight and size ([#896](https://github.com/sebgroup/green/issues/896)) ([d36caac](https://github.com/sebgroup/green/commit/d36caac913986b3f66084707e3697ef8070cacc6))
+
+
+
 ## [1.10.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.1...@sebgroup/chlorophyll@1.10.2) (2023-05-16)
 
 
