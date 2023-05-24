@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.1...@sebgroup/green-angular@1.7.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* 🐛 Context menu on scroll markForCheck and css fixes ([#897](https://github.com/sebgroup/green/issues/897)) ([89b83fc](https://github.com/sebgroup/green/commit/89b83fc4d09456b8f983eb2ece14fa9ea182fc5a))
+
+
+
 ## [1.7.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.0...@sebgroup/green-angular@1.7.1) (2023-05-12)
 
 
