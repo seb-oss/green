@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -45,6 +46,7 @@ export class NggContextMenuComponent
   menuCloseSubscription?: Subscription
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
     private elementRef: ElementRef,
     @Optional()
     @Inject(ON_SCROLL_TOKEN)
@@ -103,6 +105,7 @@ export class NggContextMenuComponent
 
   close(): void {
     this.isActive = false
+    this.changeDetectorRef.markForCheck()
   }
 
   onItemClick(item: DropdownOption): void {
