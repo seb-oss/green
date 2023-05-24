@@ -17,6 +17,8 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
   const datepickerDialogRef = useRef<HTMLDivElement>(null)
   const dateInputRef = useRef<HTMLInputElement>(null)
 
+  options = { label: 'Date', ...options }
+
   const { datepicker, data, state } = useDatepicker(
     datepickerRef,
     datepickerDialogRef,
@@ -44,7 +46,7 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
   return (
     <>
       <div className="form-group">
-        <label htmlFor={id}>Date</label>
+        <label htmlFor={id}>{options.label}</label>
         <div className="group" ref={datepickerRef}>
           <input
             ref={dateInputRef}

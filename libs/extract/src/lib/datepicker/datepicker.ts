@@ -64,6 +64,7 @@ export type DatepickerListener = (
 ) => void
 
 export interface DatepickerOptions {
+  label?: string
   locale?: string
   currentDate?: Date | string
   selectedDate?: Date | string
