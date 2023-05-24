@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.9.4](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.3...@sebgroup/green-react@1.9.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* **datepicker:** broken month and year dropdowns ([#900](https://github.com/sebgroup/green/issues/900)) ([6003b12](https://github.com/sebgroup/green/commit/6003b12b31497a8c7b9ada42c68556bd68ddb080)), closes [#840](https://github.com/sebgroup/green/issues/840)
+* **datepicker:** hard coded label ([#901](https://github.com/sebgroup/green/issues/901)) ([dd127fe](https://github.com/sebgroup/green/commit/dd127feea0933ccac1b2737889f5857f43d7c572)), closes [#881](https://github.com/sebgroup/green/issues/881)
+
+
+
 ## [1.9.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.2...@sebgroup/green-react@1.9.3) (2023-05-16)
 
 
