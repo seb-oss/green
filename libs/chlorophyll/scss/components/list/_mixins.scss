@@ -74,12 +74,12 @@ $_border-color: var(--sg-border-color);
     justify-content: space-between;
 
     dt {
-      @include common.font-weight('medium');
       flex: 1 1 auto;
     }
 
     dd {
       @include common.padding-start(3);
+      @include common.font-weight('medium');
     }
   }
 }
@@ -87,8 +87,8 @@ $_border-color: var(--sg-border-color);
 @mixin add-list-group-caption() {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(3);
-  @include common.font-size('s');
-  @include common.font-weight('medium');
+  font-size: 0.875rem;
+  font-weight: 400;
   background: $table-caption-bg;
   display: flex;
 }
@@ -109,25 +109,15 @@ $_border-color: var(--sg-border-color);
 @mixin add-value-list() {
   dt, dd {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   dd {
-    font-weight: 400;
+    font-weight: 500;
   }
 
   &:not(.gds-list--horizontal) dd {
     margin-block-end: 1rem;
-  }
-
-  &.gds-list--inverted {
-    dt {
-      font-weight: 400;
-    }
-
-    dd {
-      font-weight: 500;
-    }
   }
 
   &.gds-list--horizontal {
