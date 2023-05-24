@@ -278,6 +278,9 @@ export const createDatepicker = (
       listener(data)
     },
     setMonth: (number) => {
+      if (typeof number !== 'number' || number < 0 || number > 11) {
+        return
+      }
       const date = new Date(data.date.setMonth(number))
       if (date < startOfMonthMinDate || date > endOfMonthMaxDate) {
         return
@@ -296,6 +299,9 @@ export const createDatepicker = (
       listener(data)
     },
     setYear: (number) => {
+      if (typeof number !== 'number') {
+        return
+      }
       const date = new Date(data.date.setFullYear(number))
       if (date < startOfMonthMinDate || date > endOfMonthMaxDate) {
         return
