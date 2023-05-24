@@ -46,6 +46,13 @@ export class GdsListbox extends LitElement {
     return (slot.assignedElements() as GdsOption[]) || []
   }
 
+  /**
+   * Returns a list of all visible `gds-option` elements in the listbox.
+   */
+  get visibleOptionElements() {
+    return this.optionElements.filter((el) => !el.hidden)
+  }
+
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'listbox')
@@ -59,11 +66,13 @@ export class GdsListbox extends LitElement {
       e.preventDefault()
 
       if (e.key === 'ArrowDown') {
-        const nextItem = e.target?.nextElementSibling as GdsOption
+        const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
+        const nextItem = this.visibleOptionElements[nextOptionIndex]
         nextItem?.focus()
       }
       if (e.key === 'ArrowUp') {
-        const prevItem = e.target?.previousElementSibling as GdsOption
+        const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
+        const prevItem = this.visibleOptionElements[prevOptionIndex]
         prevItem?.focus()
       }
     })
@@ -71,7 +80,7 @@ export class GdsListbox extends LitElement {
     this.addEventListener('select', (e) => {
       const option = e.target as GdsOption
       Array.from(this.optionElements).forEach((el) => {
-        if (el !== option) el.unselect()
+        if (el !== option) el.selected = false
       })
     })
   }
@@ -83,7 +92,7 @@ export class GdsListbox extends LitElement {
    * @public
    */
   focus() {
-    const firstItem = this.optionElements[0]
+    const firstItem = this.visibleOptionElements[0]
     firstItem?.focus()
   }
 

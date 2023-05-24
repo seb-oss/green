@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { customElement } from 'lit/decorators.js'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+import { when } from 'lit/directives/when.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
@@ -30,7 +31,8 @@ export class GdsDropdown extends LitElement {
 
   static properties = {
     open: { type: Boolean, reflect: true },
-    value: { reflect: false },
+    value: {},
+    searchable: { type: Boolean },
   }
 
   /**
@@ -42,6 +44,11 @@ export class GdsDropdown extends LitElement {
    * The value of the dropdown.
    */
   value: any
+
+  /**
+   * Whether the dropdown should be searchable.
+   */
+  searchable = false
 
   // Private members
   #internals: ElementInternals
@@ -61,10 +68,12 @@ export class GdsDropdown extends LitElement {
   }
 
   /**
-   * @returns The list of options in the dropdown.
+   * Get the options of the dropdown.
+   *
+   * @returns Array<{option: GdsOption, selected: boolean}>
    * @readonly
    */
-  get values() {
+  get options() {
     return Array.from(this.#optionElements).map((o) => ({
       option: o,
       selected: this.value === o.value,
@@ -74,13 +83,13 @@ export class GdsDropdown extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.#internals.setFormValue(this.value)
-    this.value = this.value || this.values[0].option.value
+    this.value = this.value || this.options[0].option.value
   }
 
   render() {
     return html`
       <button
-        @click="${() => this.setOpen(!this.open)}"
+        @click="${() => this.#setOpen(!this.open)}"
         aria-haspopup="listbox"
         role="combobox"
         aria-owns="${this.#listboxId}"
@@ -91,24 +100,35 @@ export class GdsDropdown extends LitElement {
         <slot name="button" gds-allow="span">
           <span
             >${unsafeHTML(
-              this.values.find((v) => v.selected)?.option.innerHTML
+              this.options.find((v) => v.selected)?.option.innerHTML
             )}
           </span>
         </slot>
       </button>
+
       <gds-popover
         .open=${this.open}
-        @ui-state=${(e: CustomEvent) => this.setOpen(e.detail.open)}
-        ${ref(this.registerPopoverTrigger)}
+        @ui-state=${(e: CustomEvent) => this.#setOpen(e.detail.open)}
+        ${ref(this.#registerPopoverTrigger)}
       >
-        <input type="text" @keydown=${this.filterOptions} />
+        ${when(
+          this.searchable,
+          () => html`<input
+            type="text"
+            aria-label="Filter options"
+            @keydown=${this.#arrowDownListener}
+            @keyup=${this.#filterOptions}
+          />`
+        )}
+
         <gds-listbox
           id="${this.#listboxId}"
           ${ref(this.#listBoxRef)}
           @select="${(e: CustomEvent) =>
-            this.selectOption(e.target as GdsOption)}"
-          ><slot gds-allow="gds-option"></slot
-        ></gds-listbox>
+            this.#selectOption(e.target as GdsOption)}"
+        >
+          <slot gds-allow="gds-option"></slot>
+        </gds-listbox>
       </gds-popover>
     `
   }
@@ -119,17 +139,27 @@ export class GdsDropdown extends LitElement {
    *
    * @param e The keyboard event.
    */
-  private filterOptions = (e: KeyboardEvent) => {
+  #filterOptions = (e: KeyboardEvent) => {
+    const input = e.target as HTMLInputElement
+    const options = Array.from(this.#optionElements)
+    options.forEach((o) => (o.hidden = false))
+
+    if (!input.value) return
+    const filteredOptions = options.filter(
+      (o) => !o.innerHTML.toLowerCase().includes(input.value.toLowerCase())
+    )
+    filteredOptions.forEach((o) => (o.hidden = true))
+  }
+
+  /**
+   * Check for ArrowDown in the search field.
+   * If found, focus should be moved to the listbox.
+   */
+  #arrowDownListener = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       this.#listBoxRef.value?.focus()
       return
     }
-    const input = e.target as HTMLInputElement
-    const options = Array.from(this.#optionElements)
-    const filteredOptions = options.filter((o) =>
-      o.innerHTML.toLowerCase().includes(input.value.toLowerCase())
-    )
-    filteredOptions.forEach((o) => (o.hidden = false))
   }
 
   /**
@@ -137,7 +167,7 @@ export class GdsDropdown extends LitElement {
    *
    * @param el The popover element.
    */
-  private registerPopoverTrigger(el?: Element) {
+  #registerPopoverTrigger(el?: Element) {
     if (el) {
       const popover = el as GdsPopover
       popover.trigger = this.#triggerRef.value as HTMLButtonElement
@@ -150,11 +180,11 @@ export class GdsDropdown extends LitElement {
    * @param option The option to select.
    * @fires change
    */
-  private selectOption(option: GdsOption) {
+  #selectOption(option: GdsOption) {
     console.log('selectOption', option)
     this.value = option.value
     this.#internals.setFormValue(option.value)
-    this.setOpen(false)
+    this.#setOpen(false)
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: option.value },
@@ -170,12 +200,12 @@ export class GdsDropdown extends LitElement {
    * @param open The open state.
    * @fires ui-state
    */
-  private setOpen(open: boolean) {
+  #setOpen(open: boolean) {
     this.open = open
     this.#internals.ariaExpanded = open.toString()
 
-    if (open) this.registerAutoCloseListener()
-    else this.unregisterAutoCloseListener()
+    if (open) this.#registerAutoCloseListener()
+    else this.#unregisterAutoCloseListener()
 
     this.dispatchEvent(
       new CustomEvent('ui-state', {
@@ -186,23 +216,23 @@ export class GdsDropdown extends LitElement {
     )
   }
 
-  private registerAutoCloseListener() {
-    window.addEventListener('click', this.autoCloseListener)
-    window.addEventListener('keyup', this.autoCloseListener)
+  #registerAutoCloseListener() {
+    window.addEventListener('click', this.#autoCloseListener)
+    window.addEventListener('keyup', this.#autoCloseListener)
   }
 
-  private unregisterAutoCloseListener() {
-    window.removeEventListener('click', this.autoCloseListener)
-    window.removeEventListener('keyup', this.autoCloseListener)
+  #unregisterAutoCloseListener() {
+    window.removeEventListener('click', this.#autoCloseListener)
+    window.removeEventListener('keyup', this.#autoCloseListener)
   }
 
   /**
    * A listener to close the dropdown when clicking outside of it,
    * or when any other element recieves a keyup event.
    */
-  private autoCloseListener = (e: Event) => {
+  #autoCloseListener = (e: Event) => {
     if (e.target instanceof Node && !this.contains(e.target as Node))
-      this.setOpen(false)
+      this.#setOpen(false)
   }
 }
 

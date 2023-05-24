@@ -1,5 +1,6 @@
 @use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
 
-.popover {
+div {
   @include popover.popover;
+  overflow: hidden;
 }

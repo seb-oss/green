@@ -27,18 +27,18 @@ export class GdsOption extends LitElement {
 
   static properties = {
     value: {},
-    hidden: {},
+    hidden: { attribute: 'aria-hidden', reflect: true },
   }
 
   constructor() {
     super()
 
     this.addEventListener('click', () => {
-      this.select()
+      this.selected = true
     })
     this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return
-      this.select()
+      this.selected = true
     })
   }
 
@@ -49,29 +49,31 @@ export class GdsOption extends LitElement {
   }
 
   /**
-   * Selects the option and dispatches a `select` event.
+   * Returns true if the option is selected.
+   * Setting this property will select or unselect the option.
+   * When set to `true`, the option will dispatch a `select` event.
    *
-   * @fires select
-   * @public
+   * @returns boolean
    */
-  select() {
-    this.setAttribute('aria-selected', 'true')
-    this.dispatchEvent(
-      new CustomEvent('select', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value,
-        },
-      })
-    )
+  get selected() {
+    return this.#selected
   }
 
-  /**
-   * Unselects the option.
-   */
-  unselect() {
-    this.setAttribute('aria-selected', 'false')
+  #selected: boolean = false
+  set selected(val: boolean) {
+    this.setAttribute('aria-selected', val.toString())
+    this.#selected = Boolean(val)
+
+    if (this.#selected)
+      this.dispatchEvent(
+        new CustomEvent('select', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value: this.value,
+          },
+        })
+      )
   }
 
   /**

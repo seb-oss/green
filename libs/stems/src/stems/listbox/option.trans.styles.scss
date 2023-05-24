@@ -12,3 +12,11 @@
   @include dropdown.select-option-highlighted;
   outline: 2px solid;
 }
+
+:host([aria-hidden='true']) {
+  display: none;
+}
+
+:host([aria-selected='true']) {
+  @include dropdown.select-option-highlighted;
+}

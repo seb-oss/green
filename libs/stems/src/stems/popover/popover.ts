@@ -38,6 +38,12 @@ export class GdsPopover extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.registerTriggerEvents()
+
+    this.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        this.setOpen(false)
+      }
+    })
   }
 
   disconnectedCallback(): void {
@@ -47,7 +53,7 @@ export class GdsPopover extends LitElement {
 
   render() {
     return html`
-      <div class="popover popover-dropdown ${this.open ? 'active' : ''}">
+      <div class="${this.open ? 'active' : ''}">
         <slot></slot>
       </div>
     `

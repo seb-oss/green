@@ -1,5 +1,16 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
+
+@include input.add-text-input();
+
+input[type='text'] {
+  border-radius: 0;
+  line-height: 1;
+  margin: -1px;
+  min-height: auto;
+  padding: 0.75rem;
+}
 
 button {
   @include button.reset();
