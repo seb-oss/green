@@ -43,7 +43,17 @@ export class GdsDropdown extends LitElement {
   /**
    * The value of the dropdown.
    */
-  value: any
+  get value() {
+    return this.#value
+  }
+  #value: any
+  set value(value: any) {
+    this.#value = value
+    this.#internals.setFormValue(value)
+    this.options.forEach((o) => {
+      o.selected = o.value === value
+    })
+  }
 
   /**
    * Whether the dropdown should be searchable.
@@ -69,21 +79,15 @@ export class GdsDropdown extends LitElement {
 
   /**
    * Get the options of the dropdown.
-   *
-   * @returns Array<{option: GdsOption, selected: boolean}>
-   * @readonly
    */
   get options() {
-    return Array.from(this.#optionElements).map((o) => ({
-      option: o,
-      selected: this.value === o.value,
-    }))
+    return Array.from(this.#optionElements)
   }
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.#internals.setFormValue(this.value)
-    this.value = this.value || this.options[0].option.value
+    this.#internals.setFormValue(this.#value)
+    this.#value = this.#value || this.options[0].value
   }
 
   render() {
@@ -99,9 +103,7 @@ export class GdsDropdown extends LitElement {
       >
         <slot name="button" gds-allow="span">
           <span
-            >${unsafeHTML(
-              this.options.find((v) => v.selected)?.option.innerHTML
-            )}
+            >${unsafeHTML(this.options.find((v) => v.selected)?.innerHTML)}
           </span>
         </slot>
       </button>
@@ -181,9 +183,7 @@ export class GdsDropdown extends LitElement {
    * @fires change
    */
   #selectOption(option: GdsOption) {
-    console.log('selectOption', option)
     this.value = option.value
-    this.#internals.setFormValue(option.value)
     this.#setOpen(false)
     this.dispatchEvent(
       new CustomEvent('change', {

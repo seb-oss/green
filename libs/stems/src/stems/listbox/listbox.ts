@@ -53,27 +53,62 @@ export class GdsListbox extends LitElement {
     return this.optionElements.filter((el) => !el.hidden)
   }
 
+  /**
+   * Returns a list of all selected `gds-option` elements in the listbox.
+   */
+  get selectedOptionElements() {
+    return this.optionElements.filter((el) => el.selected)
+  }
+
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'listbox')
     TransitionalStyles.instance.apply(this, 'gds-listbox')
 
     this.addEventListener('keydown', (e) => {
-      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
       if (!(e.target instanceof GdsOption)) return
 
-      e.stopPropagation()
-      e.preventDefault()
+      let handled = false
 
       if (e.key === 'ArrowDown') {
         const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
         const nextItem = this.visibleOptionElements[nextOptionIndex]
         nextItem?.focus()
-      }
-      if (e.key === 'ArrowUp') {
+        handled = true
+        //
+      } else if (e.key === 'ArrowUp') {
         const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
         const prevItem = this.visibleOptionElements[prevOptionIndex]
         prevItem?.focus()
+        handled = true
+        //
+      } else if (e.key === 'Home') {
+        this.visibleOptionElements[0]?.focus()
+        handled = true
+        //
+      } else if (e.key === 'End') {
+        this.visibleOptionElements[
+          this.visibleOptionElements.length - 1
+        ]?.focus()
+        handled = true
+        //
+      } else {
+        console.log('other key')
+        const key = e.key.toLowerCase()
+        if (key.length !== 1) {
+          return
+        }
+        const isLetter = key >= 'a' && key <= 'z'
+        const isNumber = key >= '0' && key <= '9'
+        if (isLetter || isNumber) {
+          console.log('letters or numbers')
+          handled = true
+        }
+      }
+
+      if (handled) {
+        e.preventDefault()
+        e.stopPropagation()
       }
     })
 
@@ -86,14 +121,13 @@ export class GdsListbox extends LitElement {
   }
 
   /**
-   * Focuses the first option in the listbox.
-   * If the listbox is empty, nothing happens.
+   * Focuses the first selected option in the listbox.
+   * If no option is selected, the first visible option is focused.
    *
    * @public
    */
   focus() {
-    const firstItem = this.visibleOptionElements[0]
-    firstItem?.focus()
+    ;(this.selectedOptionElements[0] || this.visibleOptionElements[0])?.focus()
   }
 
   render() {

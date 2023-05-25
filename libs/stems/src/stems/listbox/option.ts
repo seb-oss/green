@@ -28,6 +28,7 @@ export class GdsOption extends LitElement {
   static properties = {
     value: {},
     hidden: { attribute: 'aria-hidden', reflect: true },
+    selected: { type: Boolean, reflect: true },
   }
 
   constructor() {
@@ -45,6 +46,7 @@ export class GdsOption extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'option')
+    this.setAttribute('aria-selected', this.#selected.toString())
     TransitionalStyles.instance.apply(this, 'gds-option')
   }
 
@@ -61,8 +63,8 @@ export class GdsOption extends LitElement {
 
   #selected: boolean = false
   set selected(val: boolean) {
-    this.setAttribute('aria-selected', val.toString())
     this.#selected = Boolean(val)
+    this.setAttribute('aria-selected', this.#selected.toString())
 
     if (this.#selected)
       this.dispatchEvent(
