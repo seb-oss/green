@@ -35,11 +35,11 @@ export class GdsOption extends LitElement {
     super()
 
     this.addEventListener('click', () => {
-      this.selected = true
+      this.#select()
     })
     this.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return
-      this.selected = true
+      if (e.key !== 'Enter' && e.key !== ' ') return
+      this.#select()
     })
   }
 
@@ -65,17 +65,6 @@ export class GdsOption extends LitElement {
   set selected(val: boolean) {
     this.#selected = Boolean(val)
     this.setAttribute('aria-selected', this.#selected.toString())
-
-    if (this.#selected)
-      this.dispatchEvent(
-        new CustomEvent('select', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            value: this.value,
-          },
-        })
-      )
   }
 
   /**
@@ -98,6 +87,22 @@ export class GdsOption extends LitElement {
         super.focus(options)
       }, 10)
     }
+  }
+
+  /**
+   * Used internally to select this option and emit a `select` event.
+   */
+  #select() {
+    this.selected = true
+    this.dispatchEvent(
+      new CustomEvent('select', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value,
+        },
+      })
+    )
   }
 
   onblur = () => {

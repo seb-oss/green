@@ -65,55 +65,11 @@ export class GdsListbox extends LitElement {
     this.setAttribute('role', 'listbox')
     TransitionalStyles.instance.apply(this, 'gds-listbox')
 
-    this.addEventListener('keydown', (e) => {
-      if (!(e.target instanceof GdsOption)) return
-
-      let handled = false
-
-      if (e.key === 'ArrowDown') {
-        const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
-        const nextItem = this.visibleOptionElements[nextOptionIndex]
-        nextItem?.focus()
-        handled = true
-        //
-      } else if (e.key === 'ArrowUp') {
-        const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
-        const prevItem = this.visibleOptionElements[prevOptionIndex]
-        prevItem?.focus()
-        handled = true
-        //
-      } else if (e.key === 'Home') {
-        this.visibleOptionElements[0]?.focus()
-        handled = true
-        //
-      } else if (e.key === 'End') {
-        this.visibleOptionElements[
-          this.visibleOptionElements.length - 1
-        ]?.focus()
-        handled = true
-        //
-      } else {
-        console.log('other key')
-        const key = e.key.toLowerCase()
-        if (key.length !== 1) {
-          return
-        }
-        const isLetter = key >= 'a' && key <= 'z'
-        const isNumber = key >= '0' && key <= '9'
-        if (isLetter || isNumber) {
-          console.log('letters or numbers')
-          handled = true
-        }
-      }
-
-      if (handled) {
-        e.preventDefault()
-        e.stopPropagation()
-      }
-    })
+    this.addEventListener('keydown', this.#keyboardNavigationHandler)
 
     this.addEventListener('select', (e) => {
       const option = e.target as GdsOption
+      ;(this as any).ariaActiveDescendantElement = option
       Array.from(this.optionElements).forEach((el) => {
         if (el !== option) el.selected = false
       })
@@ -132,6 +88,55 @@ export class GdsListbox extends LitElement {
 
   render() {
     return html`<slot ${ref(this.#slotRef)}></slot>`
+  }
+
+  #keyboardNavigationHandler = (e: KeyboardEvent) => {
+    if (!(e.target instanceof GdsOption)) return
+
+    let handled = false
+
+    if (e.key === 'ArrowDown') {
+      const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
+      const nextItem = this.visibleOptionElements[nextOptionIndex]
+      nextItem?.focus()
+      handled = true
+      //
+    } else if (e.key === 'ArrowUp') {
+      const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
+      const prevItem = this.visibleOptionElements[prevOptionIndex]
+      prevItem?.focus()
+      handled = true
+      //
+    } else if (e.key === 'Home') {
+      this.visibleOptionElements[0]?.focus()
+      handled = true
+      //
+    } else if (e.key === 'End') {
+      this.visibleOptionElements[this.visibleOptionElements.length - 1]?.focus()
+      handled = true
+      //
+    } else {
+      const key = e.key.toLowerCase()
+      if (key.length !== 1) {
+        return
+      }
+      const isLetter = key >= 'a' && key <= 'z'
+      const isNumber = key >= '0' && key <= '9'
+      if (isLetter || isNumber) {
+        // Find the first option that starts with the typed letter
+        const firstMatch = this.visibleOptionElements.find((el) => {
+          const text = el.textContent?.trim().toLowerCase()
+          return text?.startsWith(key)
+        })
+        firstMatch?.focus()
+        handled = true
+      }
+    }
+
+    if (handled) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 }
 

@@ -1,15 +1,18 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/scss/common';
 
 :host {
   @include dropdown.select-option;
 }
 
 :host(:hover) {
-  @include dropdown.select-option-highlighted;
+  background-color: #199be3;
+  color: #fff;
 }
 
 :host(:focus) {
   @include dropdown.select-option-highlighted;
+  color: #fff;
   outline: 2px solid;
 }
 
@@ -19,4 +22,5 @@
 
 :host([aria-selected='true']) {
   @include dropdown.select-option-highlighted;
+  color: #fff;
 }

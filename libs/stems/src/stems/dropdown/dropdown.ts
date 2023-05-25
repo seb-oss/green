@@ -27,13 +27,24 @@ import styles from './stem.styles.scss'
 @customElement('gds-dropdown')
 export class GdsDropdown extends LitElement {
   static styles = unsafeCSS(styles)
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
   static formAssociated = true
 
   static properties = {
+    label: { type: String },
     open: { type: Boolean, reflect: true },
     value: {},
     searchable: { type: Boolean },
   }
+
+  /**
+   * The label of the dropdown.
+   * Will only render if this property is set to a non-empty string.
+   */
+  label = ''
 
   /**
    * Sets the open state of the dropdown.
@@ -53,6 +64,13 @@ export class GdsDropdown extends LitElement {
     this.options.forEach((o) => {
       o.selected = o.value === value
     })
+
+    // Set the ariaActiveDescendant of the trigger button
+    const triggerButton = this.#triggerRef.value as any
+    if (triggerButton)
+      triggerButton.ariaActiveDescendantElement = this.options.find(
+        (o) => o.value === value
+      )
   }
 
   /**
@@ -66,6 +84,7 @@ export class GdsDropdown extends LitElement {
   #triggerRef: Ref<HTMLButtonElement> = createRef()
   #optionElements: HTMLCollectionOf<GdsOption>
   #listboxId = randomId()
+  $triggerId = randomId()
 
   constructor() {
     super()
@@ -92,7 +111,13 @@ export class GdsDropdown extends LitElement {
 
   render() {
     return html`
+      ${when(
+        this.label,
+        () => html`<label for="${this.$triggerId}">${this.label}</label>`
+      )}
+
       <button
+        id="${this.$triggerId}"
         @click="${() => this.#setOpen(!this.open)}"
         aria-haspopup="listbox"
         role="combobox"
@@ -118,6 +143,7 @@ export class GdsDropdown extends LitElement {
           () => html`<input
             type="text"
             aria-label="Filter options"
+            placeholder="Search"
             @keydown=${this.#arrowDownListener}
             @keyup=${this.#filterOptions}
           />`
@@ -185,6 +211,7 @@ export class GdsDropdown extends LitElement {
   #selectOption(option: GdsOption) {
     this.value = option.value
     this.#setOpen(false)
+    setTimeout(() => this.#triggerRef.value?.focus(), 0)
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: option.value },
