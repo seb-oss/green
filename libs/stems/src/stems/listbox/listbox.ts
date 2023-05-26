@@ -11,6 +11,7 @@ import style from './listbox.styles'
 
 /**
  * @element gds-listbox
+ * @internal
  *
  * A listbox is a widget that allows the user to select one or more items from a list of choices.
  * This primitive corresponds to the aria listbox role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role

@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -10,6 +10,7 @@ import 'reflect-metadata'
 
 /**
  * @element gds-option
+ * @internal
  *
  * A listbox option is an option in a listbox widget.
  * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role
@@ -22,14 +23,30 @@ import 'reflect-metadata'
 export class GdsOption extends LitElement {
   static styles = unsafeCSS(style)
 
+  /**
+   * The value of the option.
+   */
+  @property()
   value: any
+
+  /**
+   * Controls whether the option is visible or not.
+   */
+  @property({
+    attribute: 'aria-hidden',
+    reflect: true,
+  })
   hidden: boolean = false
 
-  static properties = {
-    value: {},
-    hidden: { attribute: 'aria-hidden', reflect: true },
-    selected: { type: Boolean, reflect: true },
-  }
+  /**
+   * Returns true if the option is selected.
+   * Setting this property will select or unselect the option.
+   */
+  @property({
+    attribute: 'aria-selected',
+    reflect: true,
+  })
+  selected: boolean = false
 
   constructor() {
     super()
@@ -46,25 +63,7 @@ export class GdsOption extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'option')
-    this.setAttribute('aria-selected', this.#selected.toString())
     TransitionalStyles.instance.apply(this, 'gds-option')
-  }
-
-  /**
-   * Returns true if the option is selected.
-   * Setting this property will select or unselect the option.
-   * When set to `true`, the option will dispatch a `select` event.
-   *
-   * @returns boolean
-   */
-  get selected() {
-    return this.#selected
-  }
-
-  #selected: boolean = false
-  set selected(val: boolean) {
-    this.#selected = Boolean(val)
-    this.setAttribute('aria-selected', this.#selected.toString())
   }
 
   /**

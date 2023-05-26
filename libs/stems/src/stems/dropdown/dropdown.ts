@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property, query } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
@@ -7,7 +7,7 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
-import { randomId, constrainSlots } from '../../tools/utils'
+import { randomId, constrainSlots, watch } from '../../tools/utils'
 
 import { GdsListbox, GdsOption } from '../listbox/index'
 import { GdsPopover } from '../popover/popover'
@@ -16,50 +16,85 @@ import styles from './stem.styles.scss'
 
 /**
  * @element gds-dropdown
- *
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
+ *
+ * @status beta
  *
  * @slot - Options for the dropdown. Accepts `gds-option` elements.
  * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
- * @fires change - Fired when the value of the dropdown changes.
- * @fires ui-state - Fired when the dropdown is opened or closed.
+ * @event change - Fired when the value of the dropdown changes.
+ * @event ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
 export class GdsDropdown extends LitElement {
   static styles = unsafeCSS(styles)
+
+  static formAssociated = true
+
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
-  }
-  static formAssociated = true
-
-  static properties = {
-    label: { type: String },
-    open: { type: Boolean, reflect: true },
-    value: {},
-    searchable: { type: Boolean },
   }
 
   /**
    * The label of the dropdown.
    * Will only render if this property is set to a non-empty string.
    */
+  @property()
   label = ''
 
   /**
    * Sets the open state of the dropdown.
    */
+  @property({ type: Boolean, reflect: true })
   open = false
 
   /**
    * The value of the dropdown.
    */
-  get value() {
-    return this.#value
+  @property()
+  value = ''
+
+  /**
+   * Whether the dropdown should be searchable.
+   */
+  @property({ type: Boolean })
+  searchable = false
+
+  // Private members
+  #internals: ElementInternals
+  #listBoxRef: Ref<GdsListbox> = createRef()
+  #triggerRef: Ref<HTMLButtonElement> = createRef()
+  #optionElements: HTMLCollectionOf<GdsOption>
+  #listboxId = randomId()
+  #triggerId = randomId()
+
+  constructor() {
+    super()
+    this.#internals = this.attachInternals()
+    constrainSlots(this)
+
+    this.#optionElements = this.getElementsByTagName(
+      'gds-option'
+    ) as HTMLCollectionOf<GdsOption>
   }
-  #value: any
-  set value(value: any) {
-    this.#value = value
+
+  connectedCallback() {
+    super.connectedCallback()
+    this.#internals.setFormValue(this.value)
+    this.value = this.value || this.options[0].value
+  }
+
+  /**
+   * Get the options of the dropdown.
+   */
+  get options() {
+    return Array.from(this.#optionElements)
+  }
+
+  @watch('value')
+  handleValueChange() {
+    const value = this.value
     this.#internals.setFormValue(value)
     this.options.forEach((o) => {
       o.selected = o.value === value
@@ -73,51 +108,15 @@ export class GdsDropdown extends LitElement {
       )
   }
 
-  /**
-   * Whether the dropdown should be searchable.
-   */
-  searchable = false
-
-  // Private members
-  #internals: ElementInternals
-  #listBoxRef: Ref<GdsListbox> = createRef()
-  #triggerRef: Ref<HTMLButtonElement> = createRef()
-  #optionElements: HTMLCollectionOf<GdsOption>
-  #listboxId = randomId()
-  $triggerId = randomId()
-
-  constructor() {
-    super()
-    this.#internals = this.attachInternals()
-    constrainSlots(this)
-
-    this.#optionElements = this.getElementsByTagName(
-      'gds-option'
-    ) as HTMLCollectionOf<GdsOption>
-  }
-
-  /**
-   * Get the options of the dropdown.
-   */
-  get options() {
-    return Array.from(this.#optionElements)
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.#internals.setFormValue(this.#value)
-    this.#value = this.#value || this.options[0].value
-  }
-
   render() {
     return html`
       ${when(
         this.label,
-        () => html`<label for="${this.$triggerId}">${this.label}</label>`
+        () => html`<label for="${this.#triggerId}">${this.label}</label>`
       )}
 
       <button
-        id="${this.$triggerId}"
+        id="${this.#triggerId}"
         @click="${() => this.#setOpen(!this.open)}"
         aria-haspopup="listbox"
         role="combobox"
@@ -144,7 +143,7 @@ export class GdsDropdown extends LitElement {
             type="text"
             aria-label="Filter options"
             placeholder="Search"
-            @keydown=${this.#arrowDownListener}
+            @keydown=${this.#handleKeyDown}
             @keyup=${this.#filterOptions}
           />`
         )}
@@ -183,7 +182,7 @@ export class GdsDropdown extends LitElement {
    * Check for ArrowDown in the search field.
    * If found, focus should be moved to the listbox.
    */
-  #arrowDownListener = (e: KeyboardEvent) => {
+  #handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       this.#listBoxRef.value?.focus()
       return
