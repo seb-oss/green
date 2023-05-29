@@ -7,9 +7,11 @@
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
+      "format": ["esm", "cjs"],
+      "platform": "browser",
       "options": {
         "packageJson": "libs/stems/package.json",
-        "outputPath": "dist/libs/stems",
+        "outputPath": "dist/libs/stems/src",
         "main": "libs/stems/src/index.ts",
         "tsConfig": "libs/stems/tsconfig.lib.json",
         "assets": [],

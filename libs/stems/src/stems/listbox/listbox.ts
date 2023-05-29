@@ -1,16 +1,17 @@
-import { LitElement, adoptStyles, html, unsafeCSS } from 'lit'
+import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import { TransitionalStyles } from '../../transitional-styles'
 
+import { GdsOption } from './option'
 import 'reflect-metadata'
 import style from './listbox.styles'
 
 /**
  * @element gds-listbox
- * @slot - The default slot. Only `gds-option` elements should be used here.
+ * @internal
  *
  * A listbox is a widget that allows the user to select one or more items from a list of choices.
  * This primitive corresponds to the aria listbox role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role
@@ -18,154 +19,130 @@ import style from './listbox.styles'
  * The listbox handles keyboard navigation and manages focus and selection of options.
  *
  * Can be used together with the `gds-option` primitive.
+ *
+ * @slot - The default slot. Only `gds-option` elements should be used here.
  */
 @customElement('gds-listbox')
 export class GdsListbox extends LitElement {
   static styles = unsafeCSS(style)
 
-  private internals: ElementInternals
-  private slotRef: Ref<HTMLSlotElement> = createRef()
+  #slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {
     super()
-
-    this.internals = this.attachInternals()
-    this.internals.role = 'listbox'
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-listbox')
-
-    this.addEventListener('keydown', (e) => {
-      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return
-      if (!(e.target instanceof GdsOption)) return
-
-      e.stopPropagation()
-      e.preventDefault()
-
-      if (e.key === 'ArrowDown') {
-        const nextItem = e.target?.nextElementSibling as GdsOption
-        nextItem?.focus()
-      }
-      if (e.key === 'ArrowUp') {
-        const prevItem = e.target?.previousElementSibling as GdsOption
-        prevItem?.focus()
-      }
-    })
   }
 
   /**
-   * Focuses the first option in the listbox.
-   * If the listbox is empty, nothing happens.
-   *
-   * @public
+   * Returns a list of all `gds-option` elements in the listbox.
    */
-  focus() {
-    let slot = this.slotRef.value
-    if (!slot) return
+  get optionElements() {
+    let slot = this.#slotRef.value
+    if (!slot) return []
 
     // Unwrap nested slots
     while (slot.assignedElements()[0].nodeName === 'SLOT') {
       slot = slot.assignedElements()[0] as HTMLSlotElement
     }
 
-    const firstItem = slot.assignedElements()[0] as GdsOption
-    firstItem?.focus()
+    return (slot.assignedElements() as GdsOption[]) || []
+  }
+
+  /**
+   * Returns a list of all visible `gds-option` elements in the listbox.
+   */
+  get visibleOptionElements() {
+    return this.optionElements.filter((el) => !el.hidden)
+  }
+
+  /**
+   * Returns a list of all selected `gds-option` elements in the listbox.
+   */
+  get selectedOptionElements() {
+    return this.optionElements.filter((el) => el.selected)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'listbox')
+    TransitionalStyles.instance.apply(this, 'gds-listbox')
+
+    this.addEventListener('keydown', this.#keyboardNavigationHandler)
+
+    this.addEventListener('select', (e) => {
+      const option = e.target as GdsOption
+      ;(this as any).ariaActiveDescendantElement = option
+      Array.from(this.optionElements).forEach((el) => {
+        if (el !== option) el.selected = false
+      })
+    })
+  }
+
+  /**
+   * Focuses the first selected option in the listbox.
+   * If no option is selected, the first visible option is focused.
+   *
+   * @public
+   */
+  focus() {
+    ;(this.selectedOptionElements[0] || this.visibleOptionElements[0])?.focus()
   }
 
   render() {
-    return html`<slot ${ref(this.slotRef)}></slot> `
+    return html`<slot ${ref(this.#slotRef)}></slot>`
+  }
+
+  #keyboardNavigationHandler = (e: KeyboardEvent) => {
+    if (!(e.target instanceof GdsOption)) return
+
+    let handled = false
+
+    if (e.key === 'ArrowDown') {
+      const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
+      const nextItem = this.visibleOptionElements[nextOptionIndex]
+      nextItem?.focus()
+      handled = true
+      //
+    } else if (e.key === 'ArrowUp') {
+      const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
+      const prevItem = this.visibleOptionElements[prevOptionIndex]
+      prevItem?.focus()
+      handled = true
+      //
+    } else if (e.key === 'Home') {
+      this.visibleOptionElements[0]?.focus()
+      handled = true
+      //
+    } else if (e.key === 'End') {
+      this.visibleOptionElements[this.visibleOptionElements.length - 1]?.focus()
+      handled = true
+      //
+    } else {
+      const key = e.key.toLowerCase()
+      if (key.length !== 1) {
+        return
+      }
+      const isLetter = key >= 'a' && key <= 'z'
+      const isNumber = key >= '0' && key <= '9'
+      if (isLetter || isNumber) {
+        // Find the first option that starts with the typed letter
+        const firstMatch = this.visibleOptionElements.find((el) => {
+          const text = el.textContent?.trim().toLowerCase()
+          return text?.startsWith(key)
+        })
+        firstMatch?.focus()
+        handled = true
+      }
+    }
+
+    if (handled) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 }
 
 export const GdsListboxReact = createComponent({
   tagName: 'gds-listbox',
   elementClass: GdsListbox,
-  react: React,
-})
-
-/**
- * @element gds-option
- * @slot - The default slot. Custom content can be used to display the option.
- *
- * A listbox option is an option in a listbox widget.
- * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role
- *
- * Can be used together with the `gds-listbox` primitive.
- */
-@customElement('gds-option')
-export class GdsOption extends LitElement {
-  static styles = unsafeCSS(style)
-
-  private internals: ElementInternals
-
-  value: any
-
-  static properties = {
-    value: { reflect: true },
-  }
-
-  constructor() {
-    super()
-
-    this.internals = this.attachInternals()
-    this.internals.role = 'option'
-
-    this.addEventListener('click', () => {
-      this.select()
-    })
-    this.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter') return
-      this.select()
-    })
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-option')
-  }
-
-  /**
-   * Selects the option and dispatches a `select` event.
-   *
-   * @fires select
-   * @public
-   */
-  select() {
-    this.dispatchEvent(
-      new CustomEvent('select', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value,
-        },
-      })
-    )
-  }
-
-  /**
-   * Focuses the option.
-   *
-   * @public
-   * @param options - Focus options
-   */
-  focus(options?: FocusOptions | undefined): void {
-    this.setAttribute('tabindex', '0')
-    super.focus(options)
-  }
-
-  onblur = () => {
-    this.setAttribute('tabindex', '-1')
-  }
-
-  render() {
-    return html`<slot></slot> `
-  }
-}
-
-export const GdsOptionReact = createComponent({
-  tagName: 'gds-option',
-  elementClass: GdsOption,
   react: React,
 })
