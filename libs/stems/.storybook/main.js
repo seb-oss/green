@@ -33,16 +33,16 @@ module.exports = {
 
     return config
   },
-  babel: async (options) => {
-    Object.assign(
-      options.plugins.find((plugin) =>
-        plugin[0].includes('plugin-proposal-decorators')
-      )[1],
-      {
-        decoratorsBeforeExport: true,
-        legacy: true,
-      }
-    )
-    return options
-  },
+  // babel: async (options) => {
+  //   Object.assign(
+  //     options.plugins.find((plugin) =>
+  //       plugin[0].includes('plugin-proposal-decorators')
+  //     )[1],
+  //     {
+  //       decoratorsBeforeExport: true,
+  //       legacy: true,
+  //     }
+  //   )
+  //   return options
+  // },
 }

@@ -8,9 +8,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root {
+  /* :root {
     --gds-sys-transition-duration: 0s;
-  }
+  } */
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -20,9 +20,9 @@
 }
 
 @media (prefers-contrast: more) {
-  :root {
+  /* :root {
     --gds-color-text-primary: red;
     --gds-color-green-40: var(--gds-color-green-60);
     --gds-color-grey-20: #000000;
-  }
+  } */
 }
