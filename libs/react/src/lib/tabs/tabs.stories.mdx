@@ -3,6 +3,14 @@ import { Tabs, Tab } from './tabs'
 
 export const Template = (children, ...props) => (
   <Tabs
+   list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+      { text: 'Page 5', href: '#' },
+      { text: 'Page 6', href: '#' },
+    ]}
     {...props}
   />
 )
@@ -22,7 +30,7 @@ Tabs make it easy to explore and switch between different views or functional as
   </Tabs>
 </Canvas>
 
-### Disabled tabs
+#### Disabled tabs
 
 <Canvas>
   <Tabs>
@@ -34,6 +42,34 @@ Tabs make it easy to explore and switch between different views or functional as
 </Canvas>
 
 <br />
+
+# Deprecated Tabs
+<Canvas>
+   <Tabs
+    list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+    ]}
+  />
+</Canvas>
+
+
+#### Disabled tabs
+
+<Canvas>
+  <Tabs
+    list={[
+      { text: 'Page 1', href: '#' },
+      { text: 'Page 2', href: '#' },
+      { text: 'Page 3', href: '#' },
+      { text: 'Page 4', href: '#' },
+      { text: 'Page 5', href: '#', disabled: true },
+      { text: 'Page 6', href: '#', disabled: true },
+    ]}
+  />
+</Canvas>
 
 <Story
   name="Tabs"
