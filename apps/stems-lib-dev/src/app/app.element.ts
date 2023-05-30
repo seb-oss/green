@@ -1,7 +1,7 @@
 import './app.element.scss'
 
-import { registerTransitionalStyles } from '@sebgroup/stems'
-import { GdsDropdown, GdsOption } from '@sebgroup/stems'
+import { registerTransitionalStyles } from '../../../../dist/libs/core/src'
+import { GdsDropdown, GdsOption } from '../../../../dist/libs/core/src'
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
@@ -47,7 +47,7 @@ export class AppElement extends HTMLElement {
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
     dropdown.addEventListener('change', (e: CustomEvent) => {
       console.log('Value changed: ', e.detail.value)
-      console.log('dropdown', dropdown.values)
+      console.log('dropdown', dropdown.options)
     })
     dropdown.addEventListener('ui-state', (e: CustomEvent) =>
       console.log('UI state changed: ', e.detail)
@@ -61,7 +61,7 @@ export class AppElement extends HTMLElement {
     newOption.innerHTML = 'New option'
     dropdown.appendChild(newOption)
 
-    console.log(dropdown.values)
+    console.log(dropdown.options)
 
     const form = this.querySelector('#my-form') as HTMLFormElement
     form.addEventListener('submit', (e) => {
