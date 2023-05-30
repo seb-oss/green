@@ -24,11 +24,12 @@ interface WatchOptions {
  * initial update/render, use `{ waitUntilFirstUpdate: true }` or `this.hasUpdated` in the handler.
  *
  * Usage:
- *
- * @watch('propName')
+ * ```javascript
+ * \@watch('propName')
  * handlePropChange(oldValue, newValue) {
  *   ...
  * }
+ * ```
  */
 export function watch(propertyName: string | string[], options?: WatchOptions) {
   const resolvedOptions: Required<WatchOptions> = {

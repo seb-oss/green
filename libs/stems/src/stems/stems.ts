@@ -1,7 +1,6 @@
 export * from './button/button'
 export * from './popover/popover'
 export * from './listbox'
-export * from './layout/layout'
 export * from './dropdown/dropdown'
 export * from './icon/icon'
 export * from './ripple/ripple'

@@ -7,7 +7,12 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import 'reflect-metadata'
 
-import { randomId, constrainSlots, watch } from '../../tools/utils'
+import {
+  randomId,
+  constrainSlots,
+  watch,
+  observeLightDOM,
+} from '../../tools/utils'
 
 import { GdsListbox, GdsOption } from '../listbox/index'
 import { GdsPopover } from '../popover/popover'
@@ -82,7 +87,8 @@ export class GdsDropdown extends LitElement {
   connectedCallback() {
     super.connectedCallback()
     this.#internals.setFormValue(this.value)
-    this.value = this.value || this.options[0].value
+
+    this.updateComplete.then(() => this.handleLightDOMChange())
   }
 
   /**
@@ -90,6 +96,12 @@ export class GdsDropdown extends LitElement {
    */
   get options() {
     return Array.from(this.#optionElements)
+  }
+
+  @observeLightDOM()
+  handleLightDOMChange() {
+    this.value = this.value || this.options[0]?.value
+    this.requestUpdate()
   }
 
   @watch('value')
@@ -141,10 +153,10 @@ export class GdsDropdown extends LitElement {
           this.searchable,
           () => html`<input
             type="text"
-            aria-label="Filter options"
+            aria-label="Filter available options"
             placeholder="Search"
-            @keydown=${this.#handleKeyDown}
-            @keyup=${this.#filterOptions}
+            @keydown=${this.#handleSearchFieldKeyDown}
+            @keyup=${this.#handleSearchFieldKeyUp}
           />`
         )}
 
@@ -162,11 +174,10 @@ export class GdsDropdown extends LitElement {
 
   /**
    * Event handler for filtering the options in the dropdown.
-   * Arrow down key will move focus to the listbox.
    *
    * @param e The keyboard event.
    */
-  #filterOptions = (e: KeyboardEvent) => {
+  #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
     const input = e.target as HTMLInputElement
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
@@ -182,7 +193,7 @@ export class GdsDropdown extends LitElement {
    * Check for ArrowDown in the search field.
    * If found, focus should be moved to the listbox.
    */
-  #handleKeyDown = (e: KeyboardEvent) => {
+  #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       this.#listBoxRef.value?.focus()
       return

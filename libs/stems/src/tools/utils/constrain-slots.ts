@@ -2,12 +2,16 @@ import { LitElement } from 'lit'
 
 /**
  * This function is used to constrain the slots of a component to only allow
- * certain elements. Add the `gds-allow` attribute to the slot
+ * certain types of slotted elements. Add the `gds-allow` attribute to the slot
  * element and specify the allowed elements as a space-separated list. Slots
  * without the `gds-allow` attribute will not be constrained.
  *
  * Example:
+ * ```html
  * <slot gds-allow="span p"></slot>
+ * ```
+ * This will only allow `span` and `p` elements to be slotted into this slot. Any other
+ * elements will be removed from the shadow DOM.
  *
  * @param self The element to apply the slot constraints to
  */
