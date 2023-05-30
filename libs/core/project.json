@@ -9,7 +9,6 @@
       "outputs": ["{options.outputPath}"],
       "format": ["esm", "cjs"],
       "platform": "browser",
-      "dependsOn": ["generate-types"],
       "options": {
         "packageJson": "libs/core/package.json",
         "outputPath": "dist/libs/core/src",
@@ -20,10 +19,11 @@
         "esbuildConfig": "libs/core/esbuild.config.js"
       }
     },
-    "generate-types": {
+    "build-with-types": {
       "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build"],
       "options": {
-        "command": "npx tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
+        "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
     },
     "lint": {
