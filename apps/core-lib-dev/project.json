@@ -1,8 +1,8 @@
 {
-  "name": "stems-lib-dev",
+  "name": "core-lib-dev",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/stems-lib-dev/src",
+  "sourceRoot": "apps/core-lib-dev/src",
   "tags": [],
   "targets": {
     "build": {
@@ -10,18 +10,18 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/stems-lib-dev",
+        "outputPath": "dist/apps/core-lib-dev",
         "compiler": "babel",
-        "main": "apps/stems-lib-dev/src/main.ts",
-        "tsConfig": "apps/stems-lib-dev/tsconfig.app.json",
-        "webpackConfig": "apps/stems-lib-dev/webpack.config.js",
+        "main": "apps/core-lib-dev/src/main.ts",
+        "tsConfig": "apps/core-lib-dev/tsconfig.app.json",
+        "webpackConfig": "apps/core-lib-dev/webpack.config.js",
         "assets": [
-          "apps/stems-lib-dev/src/favicon.ico",
-          "apps/stems-lib-dev/src/assets"
+          "apps/core-lib-dev/src/favicon.ico",
+          "apps/core-lib-dev/src/assets"
         ],
-        "index": "apps/stems-lib-dev/src/index.html",
+        "index": "apps/core-lib-dev/src/index.html",
         "baseHref": "/",
-        "styles": ["apps/stems-lib-dev/src/styles.scss"],
+        "styles": ["apps/core-lib-dev/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -34,8 +34,8 @@
           "vendorChunk": false,
           "fileReplacements": [
             {
-              "replace": "apps/stems-lib-dev/src/environments/environment.ts",
-              "with": "apps/stems-lib-dev/src/environments/environment.prod.ts"
+              "replace": "apps/core-lib-dev/src/environments/environment.ts",
+              "with": "apps/core-lib-dev/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -44,11 +44,11 @@
     "serve": {
       "executor": "@nrwl/webpack:dev-server",
       "options": {
-        "buildTarget": "stems-lib-dev:build"
+        "buildTarget": "core-lib-dev:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "stems-lib-dev:build:production"
+          "buildTarget": "core-lib-dev:build:production"
         }
       }
     },
@@ -56,14 +56,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/stems-lib-dev/**/*.ts"]
+        "lintFilePatterns": ["apps/core-lib-dev/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/stems-lib-dev/jest.config.ts",
+        "jestConfig": "apps/core-lib-dev/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

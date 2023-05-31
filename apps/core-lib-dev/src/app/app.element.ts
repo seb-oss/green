@@ -14,12 +14,13 @@ export class AppElement extends HTMLElement {
     this.innerHTML = `
     <div class="wrapper">
       <form id="my-form">
-        <input name="my-input">
 
-        <div class="gds-form-item">
-          <gds-dropdown id="dropdown" name="my-dropdown">
+          <input name="my-input">
+
+          <label id="my-label">A dropdown label</label>
+          <gds-dropdown id="dropdown" name="my-dropdown" aria-labelledby="my-label">
             <gds-option>Select value</gds-option>
-            <gds-option value="v1">
+            <gds-option value="v1" aria-label="Custom layout">
               <div style="display: flex">
                 <div>
                   <div><strong>Left side</strong></div>
@@ -36,10 +37,12 @@ export class AppElement extends HTMLElement {
             <p>Hello</p>
             <div>Some other crap</div>
             asdasd
-          </gds-dropdown>
-        </div>
+            </gds-dropdown>
 
-        <button type="submit">Submit</button>
+            <br />
+
+            <button type="submit">Submit</button>
+
       </form>
     </div>
       `
