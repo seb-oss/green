@@ -1,13 +1,13 @@
 import './app.element.scss'
 
-import { registerTransitionalStyles } from '../../../../dist/libs/core/src'
-import { GdsDropdown, GdsOption } from '../../../../dist/libs/core/src'
+import { GdsDropdown, GdsOption } from '@sebgroup/green-core'
+import { registerTransitionalStyles } from '@sebgroup/green-core'
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    const title = 'stems-lib-dev'
+    const title = 'core-lib-dev'
 
     registerTransitionalStyles()
 
