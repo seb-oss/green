@@ -5,8 +5,10 @@ import * as React from 'react'
 
 import styles from './stem.styles.scss'
 
+// Add "lib" Attribute for Font-Awesome or similar packages 
+
 @customElement('gds-icon')
-export class Icon extends LitElement {
+export class GdsIcon extends LitElement {
 
   static get styles() {
     return unsafeCSS(styles);
@@ -45,6 +47,6 @@ export class Icon extends LitElement {
 
 export const IconReact = createComponent({
   tagName: 'gds-icon',
-  elementClass: Icon,
+  elementClass: GdsIcon,
   react: React,
 })

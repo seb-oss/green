@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
+
+import { randomId, constrainSlots } from 'utils/helpers'
+import { watch, observeLightDOM } from 'utils/decorators'
 
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
@@ -9,61 +12,59 @@ import { effectRipple } from '../../utils/ripple/ripple'
 
 import styles from './style/button.styles.scss'
 
-const sets = ['positive', 'negative']
-
-const variants = ['primary', 'secondary', 'tertiary']
-
-const sizes = ['small', 'medium', 'large']
-
 @customElement('gds-button')
 export class GdsButton extends LitElement {
-  static get styles() {
-    return unsafeCSS(styles)
+  static styles = unsafeCSS(styles)
+
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
   }
 
-  lead = null
-  trail = null
-  disabled = false
-  ariaPressed = null
-  ariaExpanded = null
-  ariaLabel = null
-  variant = null
-  set = null
-  size = null
-  effect = null
+  // @property({ type: String, reflect: true }) 
+  // lead = null;
+  
+  // @property({ type: String, reflect: true }) 
+  // trail = null;
+  
+  @property({ type: Boolean, reflect: true }) 
+  disabled = false;
+  
+  @property({ type: Boolean, reflect: true, attribute: 'aria-pressed' }) 
+  ariaPressed = null;
+  
+  @property({ type: Boolean, reflect: true, attribute: 'aria-expanded' }) 
+  ariaExpanded = null;
+  
+  @property({ type: String, reflect: true, attribute: 'aria-label' }) 
+  ariaLabel = null;
+  
+  @property({ type: String, reflect: true }) 
+  variant = null;
+  
+  @property({ type: String, reflect: true }) 
+  set = null;
+  
+  @property({ type: String, reflect: true }) 
+  size = null;
+  
+  @property({ type: String, reflect: true }) 
+  effect = null;
 
-  static get properties() {
-    return {
-      lead: { type: String, reflect: true },
-      trail: { type: String, reflect: true },
-      disabled: { type: Boolean, reflect: true },
-      ariaPressed: { type: Boolean, reflect: true, attribute: 'aria-pressed' },
-      ariaExpanded: {
-        type: Boolean,
-        reflect: true,
-        attribute: 'aria-expanded',
-      },
-      ariaLabel: { type: String, reflect: true, attribute: 'aria-label' },
-      variant: { type: String, reflect: true },
-      set: { type: String, reflect: true },
-      size: { type: String, reflect: true },
-      effect: { type: String, reflect: true },
-    }
+  // Private members
+  #internals: ElementInternals
+
+  constructor() {
+    super()
+    this.#internals = this.attachInternals()
+    constrainSlots(this)
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
   }
 
   render() {
-    const variantController = variants.includes(this.variant || '')
-      ? `variant-${this.variant}`
-      : ''
-
-    const setController = sets.includes(this.set || '') ? `set-${this.set}` : ''
-
-    const sizeController = sizes.includes(this.size || '')
-      ? `size-${this.size}`
-      : ''
-
-    // console.log( variantController + setController + sizeController);
-
     return html` <button
       ?disabled="${this.disabled}"
       aria-label="${this.textContent}"
@@ -72,11 +73,9 @@ export class GdsButton extends LitElement {
       tabindex="0"
       @click="${effectRipple}"
     >
-      ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
-      <span>
-        <slot></slot>
-      </span>
-      ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
+      <slot name="lead" gds-allow="gds-icon"></slot>
+      <span><slot></slot></span>
+      <slot name="trail" gds-allow="gds-icon"></slot>
       ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
     </button>`
   }
@@ -87,3 +86,8 @@ export const ButtonReact = createComponent({
   elementClass: GdsButton,
   react: React,
 })
+
+// ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
+// ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
+// ${this.lead ? html`<slot name="lead"><gds-icon name="${this.lead}"></gds-icon></slot>`: ''}
+// ${this.trail ? html`<slot name="trail"><gds-icon name="${this.trail}"></gds-icon></slot>`: ''}
