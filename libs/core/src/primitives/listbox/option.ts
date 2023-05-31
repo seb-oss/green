@@ -63,7 +63,9 @@ export class GdsOption extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'option')
-    TransitionalStyles.instance.apply(this, 'gds-option')
+    this.updateComplete.then(() =>
+      TransitionalStyles.instance.apply(this, 'gds-option')
+    )
   }
 
   /**
