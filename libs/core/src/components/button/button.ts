@@ -79,8 +79,6 @@ export class GdsButton extends LitElement {
   }
 
   render() {
-
-
     return html` <button
       ?disabled="${this.disabled}"
       aria-label="${this.textContent}"
@@ -98,10 +96,8 @@ export class GdsButton extends LitElement {
 
 }
 
-
 export const ButtonReact = createComponent({
   tagName: 'gds-button',
   elementClass: GdsButton,
   react: React,
 })
-
