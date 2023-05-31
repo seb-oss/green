@@ -17,7 +17,7 @@ interface TabsProps {
    */
   list?: IList[]
   onTabChange?: (index: number) => void
-  children?: ReactNode[] | ReactElement<TabProps>[]
+  children?: ReactElement<TabProps>[]
 }
 
 export interface TabProps {
