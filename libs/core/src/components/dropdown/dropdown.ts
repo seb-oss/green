@@ -10,8 +10,11 @@ import 'reflect-metadata'
 import { randomId, constrainSlots } from 'utils/helpers'
 import { watch, observeLightDOM } from 'utils/decorators'
 
-import { GdsListbox, GdsOption } from '../../primitives/listbox/index'
-import { GdsPopover } from '../../primitives/popover/popover'
+import 'primitives/listbox'
+import 'primitives/popover'
+
+import type { GdsListbox, GdsOption } from 'primitives/listbox'
+import type { GdsPopover } from 'primitives/popover'
 
 import styles from './stem.styles.scss'
 
