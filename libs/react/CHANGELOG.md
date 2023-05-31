@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.4...@sebgroup/green-react@1.10.0) (2023-05-31)
+
+
+### Features
+
+* 🎸 components can be added as tab content ([#903](https://github.com/sebgroup/green/issues/903)) ([6cd6d08](https://github.com/sebgroup/green/commit/6cd6d08b63566fe577e08372da00d362e42f0300))
+
+
+
 ## [1.9.4](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.3...@sebgroup/green-react@1.9.4) (2023-05-24)
 
 
