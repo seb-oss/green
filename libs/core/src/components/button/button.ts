@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state, query } from 'lit/decorators.js'
+import { ifDefined } from 'lit-html/directives/if-defined';
+
 import { createComponent } from '@lit-labs/react'
 
 import { randomId, constrainSlots } from 'utils/helpers'
@@ -12,6 +14,18 @@ import { effectRipple } from '../../utils/ripple/ripple'
 
 import styles from './style/button.styles.scss'
 
+/**
+ * @element gds-button
+ * A button consist of lead and trail icon, the label and ripple effect on click event.
+ *
+ * @status beta
+ *
+ * @slot lead - This slot is optional and allows gds-icon. 
+ * @slot trail - This slot is optional and allows gds-icon.
+ * @slot label - Allows test
+ * @event click - Fired will initiate the ripple effect.
+ */
+
 @customElement('gds-button')
 export class GdsButton extends LitElement {
   static styles = unsafeCSS(styles)
@@ -21,11 +35,11 @@ export class GdsButton extends LitElement {
     delegatesFocus: true,
   }
 
-  // @property({ type: String, reflect: true }) 
-  // lead = null;
+  @property({ type: String, reflect: true }) 
+  lead = null;
   
-  // @property({ type: String, reflect: true }) 
-  // trail = null;
+  @property({ type: String, reflect: true }) 
+  trail = null;
   
   @property({ type: Boolean, reflect: true }) 
   disabled = false;
@@ -65,6 +79,8 @@ export class GdsButton extends LitElement {
   }
 
   render() {
+
+
     return html` <button
       ?disabled="${this.disabled}"
       aria-label="${this.textContent}"
@@ -73,13 +89,15 @@ export class GdsButton extends LitElement {
       tabindex="0"
       @click="${effectRipple}"
     >
-      <slot name="lead" gds-allow="gds-icon"></slot>
-      <span><slot></slot></span>
-      <slot name="trail" gds-allow="gds-icon"></slot>
+      <slot name="lead" gds-allow="gds-icon"></slot> 
+      ${this.textContent ? html`<slot part="label"></slot>` : ''}
+      <slot name="trail" gds-allow="gds-icon"></slot> 
       ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
     </button>`
   }
+
 }
+
 
 export const ButtonReact = createComponent({
   tagName: 'gds-button',
@@ -87,7 +105,3 @@ export const ButtonReact = createComponent({
   react: React,
 })
 
-// ${this.lead ? html`<gds-icon name=${this.lead}></gds-icon>` : ''}
-// ${this.trail ? html`<gds-icon name=${this.trail}></gds-icon>` : ''}
-// ${this.lead ? html`<slot name="lead"><gds-icon name="${this.lead}"></gds-icon></slot>`: ''}
-// ${this.trail ? html`<slot name="trail"><gds-icon name="${this.trail}"></gds-icon></slot>`: ''}

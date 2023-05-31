@@ -13,13 +13,18 @@ import { inspector } from '../../utils/tools/inspector/inspector'
   <gds-buttons>
     <gds-row>
       <strong>Neutral Primary</strong>
+      <gds-button effect="ripple">
+        <gds-icon name="plus" slot="lead"></gds-icon>I am a button
+      </gds-button>
       <gds-button data-label="test" effect="ripple" id="inspect">
-        <gds-icon name="plus" slot="lead" lib="fa"></gds-icon>
+        <gds-icon name="plus" slot="lead"></gds-icon>
         <div slot="lead">I am a div</div>
         Core Button
         <gds-icon name="chevron" slot="trail"></gds-icon>
       </gds-button>
-      <gds-button variant="primary" lead="plus" trail="x" effect="ripple">
+      <gds-button variant="primary" effect="ripple">
+        <gds-icon name="x" slot="lead"></gds-icon>
+        <gds-icon name="plus" slot="trail"></gds-icon>
         Some more text longer button but not too long
       </gds-button>
       <gds-button variant="secondary" trail="chevron" effect="ripple">

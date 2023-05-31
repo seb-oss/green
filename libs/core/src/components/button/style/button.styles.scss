@@ -4,6 +4,11 @@
 :host {
   @include tokens;
   @include containment;
+
+  /* 
+    Consider using:
+    display: contents;
+  */
 }
 
 button {

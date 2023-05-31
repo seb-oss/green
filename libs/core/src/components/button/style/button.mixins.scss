@@ -34,7 +34,8 @@
   width: auto;
 
   @container button (width < 2000ch) {
-    button span {
+    button [part='label'] {
+      display: inline-block;
       max-width: 20ch;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -45,7 +46,6 @@
 }
 
 @mixin core() {
-
   // Spacing
   align-items: center;
 
