@@ -70,6 +70,13 @@ export const createDropdown = (
   handler.validate = (validator: IValidator) =>
     update(handler, listener, validate(handler.dropdown, validator))
 
+  const setListboxWith = () =>
+    (handler.listbox.style.minWidth = `${handler.toggler.offsetWidth}px`)
+  setListboxWith()
+  fromEvent(window, 'resize')
+    .pipe(takeUntil(handler.onDestroy$))
+    .subscribe(() => setListboxWith())
+
   fromEvent(toggler, 'blur')
     .pipe(takeUntil(handler.onDestroy$))
     .subscribe(() => {

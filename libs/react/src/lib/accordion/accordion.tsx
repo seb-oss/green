@@ -6,8 +6,8 @@ export interface AccordionInterface {
   items: AccordionItemInterface[]
 }
 
-const Accordion = ({ items }: AccordionInterface) => {
-  const uuid = randomId()
+export const Accordion = ({ items }: AccordionInterface) => {
+  const [uuid, _] = React.useState(randomId())
 
   return (
     <div className="accordion">

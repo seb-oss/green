@@ -12,11 +12,13 @@ Ping us on Teams in the channel `Green` if you are interested!
 
 ## Issues and PRs
 
-If you have suggestions for how this project could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you have questions, too, we'd love to hear them.
+If you have suggestions for how this project could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you have questions, too, we'd love to hear them. Try to have a short but informative title and longer text in the description. Also try to find labels that fits the subject.
+
+Eg: `Issues with buttons` -> `Button: Fontsize and spacings too big`
 
 We'd also love PRs. If you're thinking of a large PR, we advise opening up an issue first to talk about it, though! Look at the links below if you're not sure how to open a PR.
 
-## Submitting a pull request
+## Submitting a pull request (PR)
 
 1. [Fork][fork] and clone the repository.
 1. Make sure you fulfill the technical pre-requisites

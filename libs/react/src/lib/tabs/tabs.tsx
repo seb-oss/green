@@ -1,4 +1,9 @@
-import React, { useState, ReactNode } from 'react'
+import React, {
+  useState,
+  ReactNode,
+  ReactElement,
+  PropsWithChildren,
+} from 'react'
 
 export interface IList {
   text?: string
@@ -7,10 +12,23 @@ export interface IList {
 }
 
 interface TabsProps {
+  /**
+   * **Deprecated**
+   * @deprecated use `<Tab>` child components instead
+   */
   list?: IList[]
   onTabChange?: (index: number) => void
-  children?: ReactNode[]
+  children?: ReactElement<TabProps>[]
 }
+
+export interface TabProps {
+  title: string
+  disabled?: boolean
+  href?: string
+  children?: ReactNode
+}
+
+export const Tab = (props: PropsWithChildren<TabProps>) => null
 
 export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -27,28 +45,52 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   return (
     <>
       <nav role="tablist">
-        {list?.map((value: IList, index: number) => (
+        {!children &&
+          list?.map((value: IList, index: number) => (
+            <a
+              href={value.disabled ? undefined : value.href || '#'}
+              onClick={onClick}
+              role="tab"
+              key={index}
+              data-index-number={index}
+              aria-disabled={value.disabled}
+              aria-selected={selectedTab === index}
+            >
+              {value.text}
+            </a>
+          ))}
+        {children?.map((tab: ReactElement<TabProps>, index: number) => (
           <a
-            href={value.disabled ? undefined : value.href || '#'}
+            href={tab.props.disabled ? undefined : tab.props.href || '#'}
             onClick={onClick}
             role="tab"
             key={index}
             data-index-number={index}
-            aria-disabled={value.disabled}
+            aria-disabled={tab.props.disabled}
             aria-selected={selectedTab === index}
           >
-            {value.text}
+            {tab.props.title}
           </a>
         ))}
       </nav>
       <section>
-        {list?.map((value: IList, index: number) => (
+        {!children &&
+          list?.map((value: IList, index: number) => (
+            <article
+              role="tabpanel"
+              key={index}
+              aria-hidden={selectedTab !== index}
+            >
+              {value.text}
+            </article>
+          ))}
+        {children?.map((tab: ReactElement<TabProps>, index: number) => (
           <article
             role="tabpanel"
             key={index}
             aria-hidden={selectedTab !== index}
           >
-            {value.text}
+            {tab.props.children}
           </article>
         ))}
       </section>

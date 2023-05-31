@@ -3,19 +3,21 @@ import {
   DatepickerOptions,
   months,
   years,
-  randomId
+  randomId,
 } from '@sebgroup/extract'
 import { useRef, useEffect, useState } from 'react'
 import { useDatepicker } from './hook'
 import Dropdown from '../dropdown/dropdown'
 
 export const Datepicker = (options: DatepickerOptions = {}) => {
-  const [uuid] = useState(randomId());
+  const [uuid] = useState(randomId())
   const id = `sgr-datepicker-${uuid}`
   const datepickerRef = useRef<HTMLDivElement>(null)
   const datepickerTriggerRef = useRef<HTMLButtonElement>(null)
   const datepickerDialogRef = useRef<HTMLDivElement>(null)
   const dateInputRef = useRef<HTMLInputElement>(null)
+
+  options = { label: 'Date', ...options }
 
   const { datepicker, data, state } = useDatepicker(
     datepickerRef,
@@ -27,7 +29,8 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
 
   useEffect(() => {
     const selDateSub = datepicker.selectedDate$?.subscribe(
-      newDate => options.onChange && options.onChange(newDate))
+      (newDate) => options.onChange && options.onChange(newDate)
+    )
     return () => selDateSub?.unsubscribe()
   }, [datepicker, options])
 
@@ -39,10 +42,11 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
     })
       .map(([className, add]) => (add ? className : ''))
       .join(' ')
+
   return (
     <>
       <div className="form-group">
-        <label htmlFor={id}>Date</label>
+        <label htmlFor={id}>{options.label}</label>
         <div className="group" ref={datepickerRef}>
           <input
             ref={dateInputRef}
@@ -85,11 +89,13 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
                 options={months({})}
                 display="key"
                 texts={{ placeholder: data.monthName }}
+                onChange={datepicker.setMonth}
               />
               <Dropdown
                 options={years({})}
                 display="key"
                 texts={{ placeholder: data.year + '' }}
+                onChange={datepicker.setYear}
               />
               <button
                 className="link"

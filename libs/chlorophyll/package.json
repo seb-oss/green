@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/chlorophyll",
-  "version": "1.8.0",
+  "version": "1.10.3",
   "description": "A CSS framework for SEB with accessibility at it's core.",
   "main": "css/green-chlorophyll.min.css",
   "repository": {
@@ -11,7 +11,7 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "author": "Robert Hjalmers <opensource@rhj.se> (http://www.linkedin.com/in/robert-hjalmers/)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

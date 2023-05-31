@@ -1,0 +1,105 @@
+import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# In-page wizard step card
+
+## Description
+
+Presents a sequence that leads the user through well-defined steps within a page.
+
+## Importing Module
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggInPageWizardModule } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggInPageWizardModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Options
+
+| Input       | Type      | Description                                                                      |
+| :---------- | :-------- | :------------------------------------------------------------------------------- |
+| stepText    | `string`  | The header progress text, typically this would be "Step 1 of 2".                 |
+| title       | `string`  | The header title.                                                                |
+| editBtnText | `string`  | Edit button text, typically this would be "Edit"                                 |
+| nextBtnText | `string`  | Next button text, typically this would be "Next"                                 |
+| isActive    | `boolean` | Indicates that this step is active.                                              |
+| isCompleted | `boolean` | Determines that this step has been completed.                                    |
+| disableNext | `boolean` | Set the next button to disabled. E.g. needed if validation fails for step input. |
+
+### Outputs
+
+| Event           | Description                                |
+| :-------------- | :----------------------------------------- |
+| handleNextClick | Event emitted when next button is clicked. |
+| handleEditClick | Event emitted when edit button is clicked. |
+
+## Examples
+
+### Default
+
+Step card that can be set to active.  
+_Note due to som issue with storybook and angular and input change the edit button change content is not switching as expected_
+
+<Canvas>
+  <Story id="components-wizard-in-page-wizard-step-card--default" />
+</Canvas>
+
+Usage
+
+```html
+<ngg-in-page-wizard-step-card
+  stepText="Step 1 of 2"
+  title="Step title"
+  editBtnText="Edit"
+  nextBtnText="Next"
+  [isActive]="!!isActive"
+  [isCompleted]="!!isCompleted"
+  [disableNext]="!!disableNext"
+  (handleEditClick)="noop()"
+  (handleNextClick)="isCompleted = true;"
+  >
+  <div *ngIf="!isCompleted">
+    <label for="textInput">Input label</label>
+    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <input id="textInput" type="text"/>
+  </div>
+  <div *ngIf="!!isCompleted">
+    <p class="mb-5">Input after completed</p>
+  </div>
+</ngg-in-page-wizard-step-card>
+```
+
+### Multiple step cards
+
+Demonstrates multiple step cards.
+
+Step one is completed.
+_A completed step has a green check mark icon and an Edit-button which allows the user to change previously entered information._
+
+Step two is active.
+_The current step is the one the user is currently interacting with._
+
+Step three is upcoming.
+_An upcoming step only shows the title and step number, but hides the details in order to reduce clutter._
+
+<Canvas>
+  <Story id="components-wizard-in-page-wizard-step-card--multiple" />
+</Canvas>
+
+### Disable next button
+
+Disable next button. For example if validation failed for content input
+
+<Canvas>
+  <Story id="components-wizard-in-page-wizard-step-card--disable-next" />
+</Canvas>

@@ -21,6 +21,8 @@ export interface SliderProps {
   value?: number
   min?: number
   max?: number
+  showMinMax?: boolean
+  minMaxFormat?: (value: number, unit?: string) => string
   step?: number
   label?: string
   instruction?: string
@@ -29,6 +31,8 @@ export interface SliderProps {
   unitLabel?: string
   disabled?: boolean
   onChange?: (value: number) => void
+  enableClamping?: boolean
+  onClamp?: (value: number) => void
 
   /**
    * @deprecated Use `value` instead

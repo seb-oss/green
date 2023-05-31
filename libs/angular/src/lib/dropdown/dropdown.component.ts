@@ -34,6 +34,7 @@ import {
   SearchFilter,
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
+import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
 @Component({
   selector: 'ngg-dropdown',
@@ -87,6 +88,10 @@ export class NggDropdownComponent
   }
   private _value: any
 
+  get selectedOption() {
+    return this.handler?.dropdown.options.find((o) => o.selected)
+  }
+
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @Output() readonly touched: EventEmitter<boolean> =
     new EventEmitter<boolean>()
@@ -97,6 +102,9 @@ export class NggDropdownComponent
 
   @ContentChild(NggDropdownOptionDirective)
   customOption?: NggDropdownOptionDirective
+
+  @ContentChild(NggDropdownButtonDirective)
+  customButton?: NggDropdownButtonDirective
 
   onChangeFn?: (value: unknown) => void
   onTouchedFn?: () => void
@@ -146,7 +154,6 @@ export class NggDropdownComponent
       this.handler &&
       (changes.id || changes.texts || changes.loop || changes.options)
     ) {
-      
       this.handler.update(this.props)
     }
   }

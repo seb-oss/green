@@ -2,6 +2,95 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.4...@sebgroup/green-react@1.10.0) (2023-05-31)
+
+
+### Features
+
+* 🎸 components can be added as tab content ([#903](https://github.com/sebgroup/green/issues/903)) ([6cd6d08](https://github.com/sebgroup/green/commit/6cd6d08b63566fe577e08372da00d362e42f0300))
+
+
+
+## [1.9.4](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.3...@sebgroup/green-react@1.9.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* **datepicker:** broken month and year dropdowns ([#900](https://github.com/sebgroup/green/issues/900)) ([6003b12](https://github.com/sebgroup/green/commit/6003b12b31497a8c7b9ada42c68556bd68ddb080)), closes [#840](https://github.com/sebgroup/green/issues/840)
+* **datepicker:** hard coded label ([#901](https://github.com/sebgroup/green/issues/901)) ([dd127fe](https://github.com/sebgroup/green/commit/dd127feea0933ccac1b2737889f5857f43d7c572)), closes [#881](https://github.com/sebgroup/green/issues/881)
+
+
+
+## [1.9.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.2...@sebgroup/green-react@1.9.3) (2023-05-16)
+
+
+### Bug Fixes
+
+* **accordion:** don't generate new `uuid` every render ([f559903](https://github.com/sebgroup/green/commit/f5599038210691da287dec3fe3a699d76faccf5d))
+
+
+
+## [1.9.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.1...@sebgroup/green-react@1.9.2) (2023-05-16)
+
+
+### Bug Fixes
+
+* **icon-button:** add missing type ([#891](https://github.com/sebgroup/green/issues/891)) ([70ea59d](https://github.com/sebgroup/green/commit/70ea59db8e9c499047661d703a5e6826a888039e))
+
+
+
+## [1.9.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.0...@sebgroup/green-react@1.9.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **accordion:** add missing named export ([#887](https://github.com/sebgroup/green/issues/887)) ([3eb3c60](https://github.com/sebgroup/green/commit/3eb3c609762afd457bda660cdc6a06b3a833488f))
+
+
+
+# [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.1...@sebgroup/green-react@1.9.0) (2023-05-10)
+
+
+### Features
+
+* **slider:** add styles for min max labels ([#878](https://github.com/sebgroup/green/issues/878)) ([79af603](https://github.com/sebgroup/green/commit/79af603d307917cd5aa17dd48d1e221e9eb22cc2))
+
+
+
+## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.8.0...@sebgroup/green-react@1.8.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* **slider:** emit `min` value when setting textbox to empty string ([#875](https://github.com/sebgroup/green/issues/875)) ([7ca927e](https://github.com/sebgroup/green/commit/7ca927e32ee81816752fdf5f3ce91a3c431320c5))
+
+
+
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.7.0...@sebgroup/green-react@1.8.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* **accordion:** add missing export for accordion ([#870](https://github.com/sebgroup/green/issues/870)) ([6aeac24](https://github.com/sebgroup/green/commit/6aeac2474c61188406d5fe35e3b858dc649d9b5d))
+* add missing exports and sort exports alphabetically ([#872](https://github.com/sebgroup/green/issues/872)) ([b2c968a](https://github.com/sebgroup/green/commit/b2c968ab176bf47f75dbf26f173b0d6915db1034))
+* **slider:** allow `undefined` values ([#869](https://github.com/sebgroup/green/issues/869)) ([179e82b](https://github.com/sebgroup/green/commit/179e82b127c45eb023285d660b45d5a971af95a2))
+
+
+### Features
+
+* **slider:** add clamping to min-max range ([#871](https://github.com/sebgroup/green/issues/871)) ([d7b0e33](https://github.com/sebgroup/green/commit/d7b0e33ec584ef30f713144d176a4005ac4df6f4))
+
+
+
+# [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.6.0...@sebgroup/green-react@1.7.0) (2023-05-05)
+
+
+### Features
+
+* **dropdown:** allow custom template for dropdown button ([#860](https://github.com/sebgroup/green/issues/860)) ([4a05eea](https://github.com/sebgroup/green/commit/4a05eeac9769d8c7c1a0838e14b76305d8edcd89))
+
+
+
 # [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.5.0...@sebgroup/green-react@1.6.0) (2023-04-19)
 
 

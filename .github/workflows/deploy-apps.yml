@@ -57,7 +57,7 @@ jobs:
 
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
           folder: dist/apps # The folder the action should deploy.
           target-folder: apps/${{ steps.target.outputs.target }} # The folder the action should deploy to.

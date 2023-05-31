@@ -2,6 +2,38 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.3.4](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.3...@sebgroup/extract@1.3.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* **datepicker:** broken month and year dropdowns ([#900](https://github.com/sebgroup/green/issues/900)) ([6003b12](https://github.com/sebgroup/green/commit/6003b12b31497a8c7b9ada42c68556bd68ddb080)), closes [#840](https://github.com/sebgroup/green/issues/840)
+* **datepicker:** hard coded label ([#901](https://github.com/sebgroup/green/issues/901)) ([dd127fe](https://github.com/sebgroup/green/commit/dd127feea0933ccac1b2737889f5857f43d7c572)), closes [#881](https://github.com/sebgroup/green/issues/881)
+
+
+
+## [1.3.3](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.2...@sebgroup/extract@1.3.3) (2023-05-16)
+
+
+
+## [1.3.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.1...@sebgroup/extract@1.3.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **dropdown:** listbox should have same width as button ([#889](https://github.com/sebgroup/green/issues/889)) ([bdb67e6](https://github.com/sebgroup/green/commit/bdb67e696d64c9ce3928bd6259dffe82b0539249))
+
+
+
+## [1.3.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.1...@sebgroup/extract@1.3.2) (2023-05-12)
+
+
+### Bug Fixes
+
+* **dropdown:** listbox should have same width as button ([#889](https://github.com/sebgroup/green/issues/889)) ([bdb67e6](https://github.com/sebgroup/green/commit/bdb67e696d64c9ce3928bd6259dffe82b0539249))
+
+
+
 ## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.0...@sebgroup/extract@1.3.1) (2023-04-06)
 
 

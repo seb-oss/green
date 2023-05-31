@@ -97,7 +97,7 @@ jobs:
         if: steps.check-updated-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
           folder: dist/storybook # The folder the action should deploy.
           target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.
@@ -106,7 +106,7 @@ jobs:
         uses: actions/github-script@v5
         if: github.event.action == 'opened' && steps.check-updated-storybooks.outputs.any == 'true'
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             // Storybooks
             const storybooks = {
@@ -133,4 +133,3 @@ jobs:
               repo: context.repo.repo,
               body
             });
-

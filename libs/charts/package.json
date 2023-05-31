@@ -1,8 +1,8 @@
 {
   "name": "@sebgroup/green-charts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependencies": {
-    "@sebgroup/chlorophyll": "^1.6.0",
+    "@sebgroup/chlorophyll": "^1.10.1",
     "@types/d3-selection": "^3.0.2",
     "billboard.js": "^3.7.5"
   },
@@ -15,7 +15,7 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "author": "Johan Öbrink <johan.obrink@gmail.com> (http://www.linkedin.com/in/johanobrink/)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

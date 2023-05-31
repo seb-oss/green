@@ -54,4 +54,50 @@ describe('Slider', () => {
     fireEvent.change(input, { target: { value: 10 } })
     expect(onChange).toBeCalled()
   })
+
+  it('should clamp to max value', () => {
+    const { container, rerender } = render(<Slider />)
+    const input = container.querySelector('input') as HTMLInputElement
+    act(() => {
+      rerender(<Slider value={200} />)
+    })
+    expect(input.value).toBe('100')
+  })
+
+  it('should clamp to min value', () => {
+    const { container, rerender } = render(<Slider />)
+    const input = container.querySelector('input') as HTMLInputElement
+    act(() => {
+      rerender(<Slider value={-10} />)
+    })
+    expect(input.value).toBe('0')
+  })
+
+  it('should fire onClamp', () => {
+    const onClamp = jest.fn()
+    const { rerender } = render(<Slider onClamp={onClamp} />)
+    act(() => {
+      rerender(<Slider onClamp={onClamp} value={200} />)
+    })
+    expect(onClamp).toBeCalled()
+  })
+
+  it('should emit min value when input field is set to empty', () => {
+    const onChange = jest.fn()
+    const { container } = render(
+      <Slider
+        label={'label'}
+        hasTextbox={true}
+        value={50}
+        min={10}
+        max={60}
+        onChange={onChange}
+      />
+    )
+    const inputField = container.querySelector(
+      'input[type=number]'
+    ) as HTMLInputElement
+    fireEvent.blur(inputField, { target: { value: '' } })
+    expect(onChange).toBeCalledWith(10)
+  })
 })

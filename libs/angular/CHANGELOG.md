@@ -2,6 +2,79 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.7.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.1...@sebgroup/green-angular@1.7.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* 🐛 Context menu on scroll markForCheck and css fixes ([#897](https://github.com/sebgroup/green/issues/897)) ([89b83fc](https://github.com/sebgroup/green/commit/89b83fc4d09456b8f983eb2ece14fa9ea182fc5a))
+
+
+
+## [1.7.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.0...@sebgroup/green-angular@1.7.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* 🐛 context-menu close on scroll or resize, button hover ([e5789c5](https://github.com/sebgroup/green/commit/e5789c535c5dfe8d25bafe495acad7687c45fbe3))
+
+
+
+# [1.7.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.6.0...@sebgroup/green-angular@1.7.0) (2023-05-05)
+
+
+### Features
+
+* **dropdown:** allow custom template for dropdown button ([#860](https://github.com/sebgroup/green/issues/860)) ([4a05eea](https://github.com/sebgroup/green/commit/4a05eeac9769d8c7c1a0838e14b76305d8edcd89))
+
+
+
+# [1.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.1...@sebgroup/green-angular@1.6.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* **context-menu:** add missing export ([#861](https://github.com/sebgroup/green/issues/861)) ([af31fd3](https://github.com/sebgroup/green/commit/af31fd30cb2883cfda09485d23b07dd32f653a2b))
+
+
+### Features
+
+* 🎸 Context Menu ([#852](https://github.com/sebgroup/green/issues/852)) ([8ede687](https://github.com/sebgroup/green/commit/8ede687c363f3fbc9760d958ae17a9c467ca90e6))
+
+
+
+## [1.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.5.0...@sebgroup/green-angular@1.5.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* 🐛 Missing Output decorator to wizard step card ([#859](https://github.com/sebgroup/green/issues/859)) ([68dd83e](https://github.com/sebgroup/green/commit/68dd83ead59181067337932c284d69ca0958befe))
+
+
+
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.4.0...@sebgroup/green-angular@1.5.0) (2023-05-02)
+
+
+### Features
+
+* **wizard-step-card:** 🎸 Add handle edit click event emitter ([#856](https://github.com/sebgroup/green/issues/856)) ([dc21976](https://github.com/sebgroup/green/commit/dc219760024cb06f7d39a3189136ac7c51353b31))
+
+
+
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.3.1...@sebgroup/green-angular@1.4.0) (2023-04-28)
+
+
+### Bug Fixes
+
+* build issue with InPageWizard ([#855](https://github.com/sebgroup/green/issues/855)) ([8949282](https://github.com/sebgroup/green/commit/89492823816d30d78ec87a85410323d34440bdf2))
+
+
+### Features
+
+* 🎸 Angular in-page wizard step card ([#853](https://github.com/sebgroup/green/issues/853)) ([c8b5eb4](https://github.com/sebgroup/green/commit/c8b5eb4d5140e9636538f329096e11f715884fc2))
+
+
+
 ## [1.3.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.3.0...@sebgroup/green-angular@1.3.1) (2023-04-19)
 
 

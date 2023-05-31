@@ -12,4 +12,8 @@ input[type='range'] {
   &-error-info {
     @include add-slider-error-styles();
   }
+
+  &-min-max {
+    @include add-min-max-styles();
+  }
 }
