@@ -1,38 +1,73 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { Tabs } from './tabs'
+import { Tabs, Tab, Card } from '@sebgroup/green-react'
 
 export const Template = (children, ...props) => (
-  <Tabs
-    list={[
-      { text: 'Page 1', href: '#' },
-      { text: 'Page 2', href: '#' },
-      { text: 'Page 3', href: '#' },
-      { text: 'Page 4', href: '#' },
-      { text: 'Page 5', href: '#' },
-      { text: 'Page 6', href: '#' },
-    ]}
-    {...props}
-  />
+  <Card>
+    <Tabs {...props}>
+      <Tab title={'Page 1'}>Page 1 is simple text</Tab>
+      <Tab title={'Page 2'}>
+        <>
+          <h2>Page 2 is a component</h2>
+          <p>With more comlpex content</p>
+        </>
+      </Tab>
+      <Tab title={'Page 3'}>Page 3 Content</Tab>
+      <Tab title={'Page 4'}>
+        <>Page 4 Content</>
+      </Tab>
+    </Tabs>
+  </Card>
 )
 
 <Meta title="Components/Tabs" component={Tabs} />
+
+<Story
+  name="Tabs"
+  parameters={{
+    componentIds: ['component-tabs'],
+    docs: { disable: true },
+  }}
+>
+  {Template.bind({})}
+</Story>
 
 # Tabs
 
 Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
 
 <Canvas>
-  <Tabs
-    list={[
-      { text: 'Page 1', href: '#' },
-      { text: 'Page 2', href: '#' },
-      { text: 'Page 3', href: '#' },
-      { text: 'Page 4', href: '#' },
-    ]}
-  />
+  <Tabs>
+    <Tab title={'Page 1'}>Page 1 is simple text</Tab>
+    <Tab title={'Page 2'}>
+      <>Page 2 is a component</>
+    </Tab>
+    <Tab title={'Page 3'}>Page 3 Content</Tab>
+    <Tab title={'Page 4'}>
+      <>Page 4 Content</>
+    </Tab>
+  </Tabs>
 </Canvas>
 
-### Disabled tabs
+#### Disabled tabs
+
+<Canvas>
+  <Tabs>
+    <Tab title={'Page 1'}>Page 1 Content</Tab>
+    <Tab title={'Page 2'}>Page 2 Content</Tab>
+    <Tab title={'Page 3'} disabled>
+      Page 3 Content
+    </Tab>
+    <Tab title={'Page 4'} disabled>
+      Page 4 Content
+    </Tab>
+  </Tabs>
+</Canvas>
+
+<br />
+
+# Using `list` property _(deprecated)_
+
+This interface only supports text content, and will be removed in a future release.
 
 <Canvas>
   <Tabs
@@ -47,21 +82,14 @@ Tabs make it easy to explore and switch between different views or functional as
   />
 </Canvas>
 
-<hr />
 <br />
-
-<Story
-  name="Tabs"
-  parameters={{
-    componentIds: ['component-tabs']
-  }}
-  args={{ children: 'Test' }}>
-  {Template.bind({})}
-</Story>
-
-<br />
-<hr />
 
 #### Available props
 
+##### Tabs
+
 <ArgsTable of={Tabs} />
+
+##### Tab
+
+<ArgsTable of={Tab} />
