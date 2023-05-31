@@ -13,6 +13,7 @@ export interface IList {
 
 interface TabsProps {
   /**
+   * **Deprecated**
    * @deprecated use `<Tab>` child components instead
    */
   list?: IList[]
