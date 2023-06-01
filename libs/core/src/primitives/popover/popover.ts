@@ -77,6 +77,7 @@ export class GdsPopover extends LitElement {
    */
   #triggerKeyDownListener = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
+      e.preventDefault()
       this.#setOpen(true)
 
       const firstSlottedChild = this.shadowRoot

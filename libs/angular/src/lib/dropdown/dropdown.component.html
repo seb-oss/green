@@ -1,5 +1,15 @@
 <div class="form-group">
-  <gds-dropdown [searchable]="searchable" (change)="onValueChange($event)">
+  <gds-dropdown
+    [value]="value"
+    [searchable]="searchable"
+    (change)="onValueChange($event)"
+  >
+    <!-- Default option with placeholder text -->
+    <gds-option value="" *ngIf="texts?.placeholder">{{
+      texts?.placeholder
+    }}</gds-option>
+
+    <!-- Rest of options -->
     <gds-option
       *ngFor="let option of options; let index = index"
       [value]="option"

@@ -30,7 +30,7 @@ import styles from './stem.styles.scss'
  * @event ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
-export class GdsDropdown extends LitElement {
+export class GdsDropdown<ValueType = any> extends LitElement {
   static styles = unsafeCSS(styles)
 
   static formAssociated = true
@@ -57,7 +57,7 @@ export class GdsDropdown extends LitElement {
    * The value of the dropdown.
    */
   @property()
-  value = ''
+  value: ValueType | undefined
 
   /**
    * Whether the dropdown should be searchable.
@@ -85,9 +85,9 @@ export class GdsDropdown extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-    this.#internals.setFormValue(this.value)
 
     this.updateComplete.then(() => this.handleLightDOMChange())
+    this.handleValueChange()
   }
 
   /**
@@ -99,17 +99,15 @@ export class GdsDropdown extends LitElement {
 
   @observeLightDOM()
   handleLightDOMChange() {
-    this.value = this.value || this.options[0]?.value
+    this.value = this.value ?? this.options[0]?.value
     this.requestUpdate()
   }
 
   @watch('value')
   handleValueChange() {
     const value = this.value
-    this.#internals.setFormValue(value)
-    this.options.forEach((o) => {
-      o.selected = o.value === value
-    })
+    this.#internals.setFormValue(value as any)
+    this.options.forEach((o) => (o.selected = o.value === value))
 
     // Set the ariaActiveDescendant of the trigger button
     const triggerButton = this.#triggerRef.value as any

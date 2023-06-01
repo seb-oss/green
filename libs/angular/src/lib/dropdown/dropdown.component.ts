@@ -30,26 +30,26 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import { registerTransitionalStyles } from '@sebgroup/green-core'
+import { GdsDropdown, registerTransitionalStyles } from '@sebgroup/green-core'
 
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: NggDropdownComponent,
-  //     multi: true,
-  //   },
-  // ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: NggDropdownComponent,
+      multi: true,
+    },
+  ],
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggDropdownComponent {
+export class NggDropdownComponent implements ControlValueAccessor {
   @Input() id?: string
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
-  @Input() display?: string
-  @Input() useValue?: string
+  @Input() display?: string = 'label'
+  @Input() useValue?: string = 'value'
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
@@ -74,10 +74,13 @@ export class NggDropdownComponent {
   private _searchable = false
 
   @Input() set value(newValue: any) {
-    //this.handler?.selectByValue(newValue)
     this._value = newValue
   }
   get value(): any {
+    if (this.options && this.useValue)
+      return this.options.find((o) => o[this.useValue as any] === this._value)
+    else if (this.options) return this.options.find((o) => o === this._value)
+
     return this._value
   }
   private _value: any
@@ -96,20 +99,41 @@ export class NggDropdownComponent {
   @ContentChild(NggDropdownButtonDirective)
   customButton?: NggDropdownButtonDirective
 
-  public onValueChange: (value: unknown) => void = (value) => {
-    this.onChangeFn?.(value)
-    this.valueChange.emit(((value as any).target as any)?.value)
+  public onValueChange: (event: Event) => void = (event) => {
+    const target = event.target as GdsDropdown<DropdownOption>
+    const value = target.value
+    const useValue = this.useValue as string
+    this._value = value ? value[useValue] : value
+
+    this.onChangeFn?.(this._value)
+    this.valueChange.emit(this._value)
+    console.log('onValueChange', this._value)
   }
 
   onChangeFn?: (value: unknown) => void
   onTouchedFn?: () => void
 
-  // get control(): NgControl | undefined {
-  //   return this.injector.get(NgControl)
-  // }
+  get control(): NgControl | undefined {
+    return this.injector.get(NgControl)
+  }
 
-  constructor() {
+  constructor(
+    private cd: ChangeDetectorRef,
+    @Inject(Injector) private injector: Injector
+  ) {
     registerTransitionalStyles()
+  }
+
+  writeValue(value: any): void {
+    this.value = value
+  }
+
+  registerOnChange(fn: () => unknown): void {
+    this.onChangeFn = fn
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouchedFn = fn
   }
 
   trackByKey = (index: number, option: DropdownOptionElement): string => {
