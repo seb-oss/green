@@ -90,7 +90,7 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
             key={index}
             aria-hidden={selectedTab !== index}
           >
-            {tab.props.children}
+            {selectedTab === index && tab.props.children}
           </article>
         ))}
       </section>
