@@ -73,29 +73,6 @@ describe('Tabs allow components as content', () => {
     )
   })
 
-  it('should only render the selected tab element', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab {...tab}>{tab.children}</Tab>)}</Tabs>)
-    const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel', { hidden: true})
-    const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
-    
-    expect(anchorTag).toBeTruthy()
-    expect(tabsContent.length).toEqual(6) 
-    expect(tabsContent[0].textContent).toBe(tabList[0].children);
-    tabsContent?.forEach((tab, index) => {
-      if(index !== 0)
-        expect(tab.textContent).toBe("");
-    })
-    const clickedTab = 2
-    fireEvent.click(anchorTag[clickedTab])
-    expect(tabsContent[clickedTab].textContent).toBe(tabList[clickedTab].children);
-
-    tabsContent?.forEach((tab, index) => {
-      if(index !== clickedTab)
-        expect(tab.textContent).toBe("");
-    }  
-    )
-  })
-
   it('should render the tab set as selected by default', () => {
     render(<Tabs>
         <Tab title='NotSelected'></Tab>
