@@ -6,6 +6,7 @@
     var(--gds-sys-animation-direction) var(--gds-sys-animation-fill-mode)
     var(--gds-sys-animation-play-state);
   border-radius: var(--gds-sys-radii-full);
+  contain: strict;
   display: flex;
   height: 100%;
   inset: 0;

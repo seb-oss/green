@@ -1,17 +1,11 @@
 import * as React from 'react'
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property, state, query } from 'lit/decorators.js'
-import { ifDefined } from 'lit-html/directives/if-defined';
-
+import { customElement, property } from 'lit/decorators.js'
 import { createComponent } from '@lit-labs/react'
-
-import { randomId, constrainSlots } from 'utils/helpers'
-import { watch, observeLightDOM } from 'utils/decorators'
-
+import { constrainSlots } from 'utils/helpers'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
 import { effectRipple } from '../../utils/ripple/ripple'
-
 import styles from './style/button.styles.scss'
 
 /**
@@ -79,21 +73,22 @@ export class GdsButton extends LitElement {
   }
 
   render() {
-    return html` <button
-      ?disabled="${this.disabled}"
-      aria-label="${this.textContent}"
-      ?aria-pressed="${this.ariaPressed}"
-      ?aria-expanded="${this.ariaExpanded}"
-      tabindex="0"
-      @click="${effectRipple}"
-    >
-      <slot name="lead" gds-allow="gds-icon"></slot> 
-      ${this.textContent ? html`<slot part="label" gds-allow="#text"></slot>` : ''}
-      <slot name="trail" gds-allow="gds-icon"></slot> 
-      ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
-    </button>`
+    return html`
+      <button
+          ?disabled="${this.disabled}"
+          aria-label="${this.textContent}"
+          ?aria-pressed="${this.ariaPressed}"
+          ?aria-expanded="${this.ariaExpanded}"
+          tabindex="0"
+          @click="${effectRipple}"
+        >
+        <slot name="lead" gds-allow="gds-icon"></slot>
+        ${this.textContent ? html`<slot part="label" gds-allow="#text"></slot>` : ''}
+        <slot name="trail" gds-allow="gds-icon"></slot>
+        ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
+      </button>
+    `
   }
-
 }
 
 export const ButtonReact = createComponent({
