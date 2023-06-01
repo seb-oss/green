@@ -52,6 +52,7 @@ import { inspector } from '../../utils/tools/inspector/inspector'
         effect="ripple"
         size="medium"
       >
+        <gds-icon name="x" slot="lead"></gds-icon>
         Primary
       </gds-button>
       <gds-button
@@ -87,12 +88,11 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <strong>Small</strong>
       <gds-button
         variant="primary"
-        lead="plus"
-        trail="plus"
-        effect="ripple"
         size="small"
+        effect="ripple"
       >
         Primary
+        <gds-icon name="plus" slot="trail"></gds-icon>
       </gds-button>
       <gds-button
         variant="secondary"

@@ -227,7 +227,7 @@
 // Sizes
 
 @mixin size-small() {
-  --gds-button-padding-inline: var(--gds-spacing-0);
+  --gds-button-padding-inline: var(--gds-spacing-5);
   --gds-button-padding-block: var(--gds-spacing-3);
 }
 
