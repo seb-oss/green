@@ -14,11 +14,7 @@ import {
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-dropdown
-      id="dropdown"
-      name="my-dropdown"
-      onchange="document.getElementById('selected-value').innerText = event.target.value"
-    >
+    <gds-dropdown onchange="document.getElementById('selected-value').innerText = event.target.value">
       <gds-option value="">Select value</gds-option>
       <gds-option value="v1">value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
@@ -35,11 +31,34 @@ import {
 
 <Canvas>
   <div style={{ height: '200px' }}>
-    <gds-dropdown multiple name="my-dropdown2" id="select2">
+    <gds-dropdown
+      multiple
+      onchange="document.getElementById('selected-values').innerText = event.target.value.toString()"
+    >
       <gds-option>Select value</gds-option>
       <gds-option value="v1">value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>
+    </gds-dropdown>
+    <br />
+    <div>
+      Selected values: <span id="selected-values"></span>
+    </div>
+  </div>
+</Canvas>
+
+## Searchable dropdown
+
+<Canvas>
+  <div style={{ height: '300px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown searchable>
+      <gds-option value="">Select tech</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
   </div>
 </Canvas>

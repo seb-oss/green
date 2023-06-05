@@ -78,6 +78,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
   #internals: ElementInternals
   #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
+  #searchInputRef: Ref<HTMLInputElement> = createRef()
   #optionElements: HTMLCollectionOf<GdsOption>
   #listboxId = randomId()
   #triggerId = randomId()
@@ -151,6 +152,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
             type="text"
             aria-label="Filter available options"
             placeholder="Search"
+            ${ref(this.#searchInputRef)}
             @keydown=${this.#handleSearchFieldKeyDown}
             @keyup=${this.#handleSearchFieldKeyUp}
           />`
@@ -278,7 +280,11 @@ export class GdsDropdown<ValueType = any> extends LitElement {
     this.#internals.ariaExpanded = open.toString()
 
     if (open) this.#registerAutoCloseListener()
-    else this.#unregisterAutoCloseListener()
+    else {
+      this.#unregisterAutoCloseListener()
+      this.#searchInputRef.value && (this.#searchInputRef.value.value = '')
+      Array.from(this.#optionElements).forEach((o) => (o.hidden = false))
+    }
 
     this.dispatchEvent(
       new CustomEvent('ui-state', {

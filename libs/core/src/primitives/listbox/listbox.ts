@@ -69,6 +69,13 @@ export class GdsListbox extends LitElement {
   }
 
   /**
+   * Returns a list of all visible `gds-option` elements in the listbox.
+   */
+  get visibleSelectedOptionElements() {
+    return this.optionElements.filter((el) => el.selected && !el.hidden)
+  }
+
+  /**
    * Returns a list of all selected `gds-option` elements in the listbox.
    */
   get selection(): GdsOption[] {
@@ -95,7 +102,9 @@ export class GdsListbox extends LitElement {
    * If no option is selected, the first visible option is focused.
    */
   focus() {
-    ;(this.selection[0] || this.visibleOptionElements[0])?.focus()
+    ;(
+      this.visibleSelectedOptionElements[0] || this.visibleOptionElements[0]
+    )?.focus()
   }
 
   render() {
