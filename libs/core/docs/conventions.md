@@ -2,9 +2,11 @@
 
 ## \# for private properties
 
-Private properties and functions should use the # syntax. This ensures that the field is private at both compile time and runtime.
+Private properties and functions should use the ES2022 private identifier (#) syntax. This ensures that the field is private at both compile-time and run-time.
 
-In the event that # cannot be used, together with decorators for example, then we fall back on the typescript `private` keyword. We should then also prefix the method or property with an underscore. The underscore helps communicate the intended visibility to non-typescript consumers and at runtime.
+There are a few common arguments against using private identifiers, such as added overhead when targeting older JS versions, but in this case the added protection against incorrect use of internal API is worth it. Remember that this is a Web Component library and that it is perfectly valid to use it outside of Typescript, where there's no compiler to yell at you for using conventional Typescript `private` properties.
+
+In the event that # cannot be used, for example together with decorators, then we fall back on the Typescript `private` keyword. We should then also prefix the method or property with an underscore. The underscore helps communicate the intended visibility to non-typescript consumers and at runtime. This means that a component class may contain some private fields with the # syntax and some with the `private` keyword, which may seem confusing. So as a rule of thumb, any field with the `private` keyword should either have a decorator attached, or a comment explaining why an exception is required.
 
 ## Code order
 
@@ -60,8 +62,3 @@ But in addition the the public interface, it is also quite useful to have JSDoc 
 ### Beta or Stable
 
 Newly added components can be marked as Beta until they have been fully review, tested and processed in all relevant aspects. A component marked as Beta is not included in the Semantic Versioning guarantees of the rest of the system. Using a beta component means accepting the risk that breaking changes can, and will, occur even in patch releases of the framework.
-
-### ACE approval
-
-Before a component is marked Stable, a developer will have gone through the appropriate specifications to make sure it implements all appropriate roles and behaviours, but it may not yet have been tested by the Accessibility Centre of Excellence.
-Once it has been rigorously tested by accessibility experts, it will receive this status.
