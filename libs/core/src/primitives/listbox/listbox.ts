@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
@@ -25,6 +25,20 @@ import style from './listbox.styles'
 @customElement('gds-listbox')
 export class GdsListbox extends LitElement {
   static styles = unsafeCSS(style)
+
+  /**
+   * Controls whether the listbox allows multiple selection or not.
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: 'aria-multiselectable',
+    converter: {
+      fromAttribute: Boolean,
+      toAttribute: (value: boolean) => value.toString(),
+    },
+  })
+  multiple = false
 
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
@@ -57,8 +71,14 @@ export class GdsListbox extends LitElement {
   /**
    * Returns a list of all selected `gds-option` elements in the listbox.
    */
-  get selectedOptionElements() {
+  get selection(): GdsOption[] {
     return this.optionElements.filter((el) => el.selected)
+  }
+
+  set selection(values: GdsOption[] | any[]) {
+    this.optionElements.forEach((el) => {
+      el.selected = values.includes(el.value) || values.includes(el)
+    })
   }
 
   connectedCallback(): void {
@@ -67,28 +87,40 @@ export class GdsListbox extends LitElement {
     TransitionalStyles.instance.apply(this, 'gds-listbox')
 
     this.addEventListener('keydown', this.#keyboardNavigationHandler)
-
-    this.addEventListener('select', (e) => {
-      const option = e.target as GdsOption
-      ;(this as any).ariaActiveDescendantElement = option
-      Array.from(this.optionElements).forEach((el) => {
-        if (el !== option) el.selected = false
-      })
-    })
+    this.addEventListener('select', this.#handleSelect)
   }
 
   /**
    * Focuses the first selected option in the listbox.
    * If no option is selected, the first visible option is focused.
-   *
-   * @public
    */
   focus() {
-    ;(this.selectedOptionElements[0] || this.visibleOptionElements[0])?.focus()
+    ;(this.selection[0] || this.visibleOptionElements[0])?.focus()
   }
 
   render() {
     return html`<slot ${ref(this.#slotRef)}></slot>`
+  }
+
+  #handleSelect = (e: Event) => {
+    const option = e.target as GdsOption
+
+    if (this.multiple) option.selected = !option.selected
+    else {
+      option.selected = true
+      Array.from(this.optionElements).forEach((el) => {
+        if (el !== option) el.selected = false
+      })
+    }
+
+    ;(this as any).ariaActiveDescendantElement = option
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        bubbles: false,
+        composed: false,
+      })
+    )
   }
 
   #keyboardNavigationHandler = (e: KeyboardEvent) => {

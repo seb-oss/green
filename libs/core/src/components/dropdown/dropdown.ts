@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, query } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -58,7 +58,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
    * The value of the dropdown.
    */
   @property()
-  value: ValueType | undefined
+  value: ValueType | ValueType[] | undefined
 
   /**
    * Whether the dropdown should be searchable.
@@ -66,9 +66,17 @@ export class GdsDropdown<ValueType = any> extends LitElement {
   @property({ type: Boolean })
   searchable = false
 
+  /**
+   * Wheter the dropdown should support multiple selections.
+   * When set to true, the dropdown will render a checkbox next to each option.
+   * The value of the dropdown will be an array of the selected values.
+   */
+  @property({ type: Boolean })
+  multiple = false
+
   // Private members
   #internals: ElementInternals
-  #listBoxRef: Ref<GdsListbox> = createRef()
+  #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
   #optionElements: HTMLCollectionOf<GdsOption>
   #listboxId = randomId()
@@ -87,8 +95,10 @@ export class GdsDropdown<ValueType = any> extends LitElement {
   connectedCallback() {
     super.connectedCallback()
 
-    this.updateComplete.then(() => this._handleLightDOMChange())
-    this._handleValueChange()
+    this.updateComplete.then(() => {
+      this._handleLightDOMChange()
+      this._handleValueChange()
+    })
   }
 
   /**
@@ -98,30 +108,17 @@ export class GdsDropdown<ValueType = any> extends LitElement {
     return Array.from(this.#optionElements)
   }
 
-  /**
-   * Update value assignment and request update when the light DOM changes.
-   */
-  @observeLightDOM()
-  private _handleLightDOMChange() {
-    this.value = this.value ?? this.options[0]?.value
-    this.requestUpdate()
-  }
-
-  @watch('value')
-  private _handleValueChange() {
-    const value = this.value
-    this.#internals.setFormValue(value as any)
-    this.options.forEach((o) => (o.selected = o.value === value))
-
-    // Set the ariaActiveDescendant of the trigger button
-    const triggerButton = this.#triggerRef.value as any
-    if (triggerButton)
-      triggerButton.ariaActiveDescendantElement = this.options.find(
-        (o) => o.value === value
-      )
-  }
-
   render() {
+    const renderedValue = Array.isArray(this.value)
+      ? this.value
+          .reduce(
+            (acc: string, cur: ValueType) =>
+              acc + this.options.find((v) => v.value === cur)?.innerHTML + ', ',
+            ''
+          )
+          .slice(0, -2)
+      : this.options.find((v) => v.selected)?.innerHTML
+
     return html`
       ${when(
         this.label,
@@ -139,9 +136,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
         ${ref(this.#triggerRef)}
       >
         <slot name="button" gds-allow="span">
-          <span
-            >${unsafeHTML(this.options.find((v) => v.selected)?.innerHTML)}
-          </span>
+          <span>${unsafeHTML(renderedValue)} </span>
         </slot>
       </button>
 
@@ -163,14 +158,47 @@ export class GdsDropdown<ValueType = any> extends LitElement {
 
         <gds-listbox
           id="${this.#listboxId}"
-          ${ref(this.#listBoxRef)}
-          @select="${(e: CustomEvent) =>
-            this.#selectOption(e.target as GdsOption)}"
+          .multiple="${ifDefined(this.multiple)}"
+          ${ref(this.#listboxRef)}
+          @change="${this.#handleSelectionChange}"
         >
           <slot gds-allow="gds-option"></slot>
         </gds-listbox>
       </gds-popover>
     `
+  }
+
+  /**
+   * Update value assignment and request update when the light DOM changes.
+   */
+  @observeLightDOM()
+  private _handleLightDOMChange() {
+    this.value = this.value ?? this.options[0]?.value
+    this.requestUpdate()
+  }
+
+  /**
+   * Called whenever the `value` proptery changes
+   */
+  @watch('value')
+  private _handleValueChange() {
+    const value = this.value
+    this.#internals.setFormValue(value as any)
+
+    const listbox = this.#listboxRef.value as GdsListbox
+    if (listbox) {
+      if (Array.isArray(this.value)) listbox.selection = this.value as any[]
+      else listbox.selection = [this.value as any]
+    }
+
+    console.log(listbox.selection)
+
+    // Set the ariaActiveDescendant of the trigger button
+    const triggerButton = this.#triggerRef.value as any
+    if (triggerButton)
+      triggerButton.ariaActiveDescendantElement = this.options.find(
+        (o) => o.value === value
+      )
   }
 
   /**
@@ -196,7 +224,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
-      this.#listBoxRef.value?.focus()
+      this.#listboxRef.value?.focus()
       return
     }
   }
@@ -219,13 +247,21 @@ export class GdsDropdown<ValueType = any> extends LitElement {
    * @param option The option to select.
    * @fires change
    */
-  #selectOption(option: GdsOption) {
-    this.value = option.value
-    this.#setOpen(false)
+  #handleSelectionChange() {
+    const listbox = this.#listboxRef.value as GdsListbox
+    if (!listbox) return
+
+    if (this.multiple) this.value = listbox.selection.map((s) => s.value)
+    else {
+      this.value = listbox.selection[0]?.value
+      this.#setOpen(false)
+    }
+
     setTimeout(() => this.#triggerRef.value?.focus(), 0)
+
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: option.value },
+        detail: { value: this.value },
         bubbles: true,
         composed: true,
       })

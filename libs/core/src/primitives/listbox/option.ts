@@ -51,12 +51,10 @@ export class GdsOption extends LitElement {
   constructor() {
     super()
 
-    this.addEventListener('click', () => {
-      this.#select()
-    })
+    this.addEventListener('click', this.#emitSelect)
     this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
-      this.#select()
+      this.#emitSelect()
     })
   }
 
@@ -90,11 +88,7 @@ export class GdsOption extends LitElement {
     }
   }
 
-  /**
-   * Used internally to select this option and emit a `select` event.
-   */
-  #select() {
-    this.selected = true
+  #emitSelect() {
     this.dispatchEvent(
       new CustomEvent('select', {
         bubbles: true,
