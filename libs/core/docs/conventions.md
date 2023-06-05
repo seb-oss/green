@@ -2,7 +2,28 @@
 
 ## \# for private properties
 
-Private properties and functions should use the # syntax. This ensures that the field is private for both compile time and runtime. A counter-argument to this might be that it can be useful to access private properties for testing and other edge cases. Cases like that may turn up, but if they do, it would be better to add a more deliberate solution.
+Private properties and functions should use the # syntax. This ensures that the field is private at both compile time and runtime.
+
+In the event that # cannot be used, together with decorators for example, then we fall back on the typescript `private` keyword. We should then also prefix the method or property with an underscore. The underscore helps communicate the intended visibility to non-typescript consumers and at runtime.
+
+## Code order
+
+The preferred order of code in a component is something like this:
+
+1. Static properties
+2. Static functions
+3. Public properties
+4. Private properties
+5. Constructor
+6. Public methods
+7. Render function
+8. Private methods
+
+### What’s what?
+
+**Property:** A field that holds a value. Includes Lit reactive properties. Also commonly referred to as members \
+**Method:** Functions that can be called on an instance of the component. Arrow functions also fall under this category. \
+**Render function:** This the the standard Lit `render()` function that all components use to render their view.
 
 ## Aria- and state attribute reflection
 
