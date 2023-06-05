@@ -2,19 +2,14 @@ import type { LitElement } from 'lit'
 
 type Handler = () => void
 
-type NonUndefined<A> = A extends undefined ? never : A
-
-type HandlerFunctionKeys<T extends object> = {
-  [K in keyof T]-?: NonUndefined<T[K]> extends Handler ? K : never
-}[keyof T]
-
 /**
  * Runs when the light DOM children of the component changes.
  */
 export function observeLightDOM() {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
-    decoratedFnName: HandlerFunctionKeys<ElemClass>
+    _propertyKey: string,
+    descriptor: TypedPropertyDescriptor<Handler>
   ) => {
     const observerConfig = { attributes: true, childList: true, subtree: false }
 
@@ -27,7 +22,7 @@ export function observeLightDOM() {
       connectedCallback?.call(this)
 
       const callback: MutationCallback = (_mutationList, _observer) => {
-        ;(this[decoratedFnName] as unknown as Handler)()
+        descriptor.value?.call(this)
       }
 
       observer = new MutationObserver(callback)

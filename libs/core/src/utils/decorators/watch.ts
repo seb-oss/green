@@ -1,15 +1,9 @@
-// Original source:
+// Adapted from original source:
 // https://github.com/shoelace-style/shoelace/blob/1af711bc89365a50e24da1d23c2bff777b1b8b57/src/internal/watch.ts
 
 import type { LitElement } from 'lit'
 
 type UpdateHandler = (prev?: unknown, next?: unknown) => void
-
-type NonUndefined<A> = A extends undefined ? never : A
-
-type UpdateHandlerFunctionKeys<T extends object> = {
-  [K in keyof T]-?: NonUndefined<T[K]> extends UpdateHandler ? K : never
-}[keyof T]
 
 interface WatchOptions {
   /**
@@ -38,7 +32,8 @@ export function watch(propertyName: string | string[], options?: WatchOptions) {
   }
   return <ElemClass extends LitElement>(
     proto: ElemClass,
-    decoratedFnName: UpdateHandlerFunctionKeys<ElemClass>
+    propertyKey: string,
+    descriptor: TypedPropertyDescriptor<UpdateHandler>
   ) => {
     // @ts-expect-error - update is a protected property
     const { update } = proto
@@ -59,10 +54,7 @@ export function watch(propertyName: string | string[], options?: WatchOptions) {
 
           if (oldValue !== newValue) {
             if (!resolvedOptions.waitUntilFirstUpdate || this.hasUpdated) {
-              ;(this[decoratedFnName] as unknown as UpdateHandler)(
-                oldValue,
-                newValue
-              )
+              descriptor.value?.call(this, oldValue, newValue)
             }
           }
         }

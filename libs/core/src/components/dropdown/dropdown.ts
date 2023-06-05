@@ -1,7 +1,8 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
@@ -86,8 +87,8 @@ export class GdsDropdown<ValueType = any> extends LitElement {
   connectedCallback() {
     super.connectedCallback()
 
-    this.updateComplete.then(() => this.handleLightDOMChange())
-    this.handleValueChange()
+    this.updateComplete.then(() => this._handleLightDOMChange())
+    this._handleValueChange()
   }
 
   /**
@@ -97,14 +98,17 @@ export class GdsDropdown<ValueType = any> extends LitElement {
     return Array.from(this.#optionElements)
   }
 
+  /**
+   * Update value assignment and request update when the light DOM changes.
+   */
   @observeLightDOM()
-  handleLightDOMChange() {
+  private _handleLightDOMChange() {
     this.value = this.value ?? this.options[0]?.value
     this.requestUpdate()
   }
 
   @watch('value')
-  handleValueChange() {
+  private _handleValueChange() {
     const value = this.value
     this.#internals.setFormValue(value as any)
     this.options.forEach((o) => (o.selected = o.value === value))
