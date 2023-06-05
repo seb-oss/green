@@ -255,9 +255,8 @@ export class GdsDropdown<ValueType = any> extends LitElement {
     else {
       this.value = listbox.selection[0]?.value
       this.#setOpen(false)
+      setTimeout(() => this.#triggerRef.value?.focus(), 0)
     }
-
-    setTimeout(() => this.#triggerRef.value?.focus(), 0)
 
     this.dispatchEvent(
       new CustomEvent('change', {
