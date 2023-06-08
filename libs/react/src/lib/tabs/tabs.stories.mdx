@@ -37,7 +37,15 @@ Tabs make it easy to explore and switch between different views or functional as
 
 <Canvas>
   <Tabs>
-    <Tab title={'Page 1'}>Page 1 is simple text</Tab>
+    <Tab title={'Page 1'}>
+      <>
+        <p>Tab content will only render when a tab is selected.</p>
+        <p>
+          If you need to pre-load data, do it separately outside of the component
+          that is rendered in the tab.
+        </p>
+      </>
+    </Tab>
     <Tab title={'Page 2'}>
       <>Page 2 is a component</>
     </Tab>
