@@ -2,16 +2,11 @@ import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { createComponent } from '@lit-labs/react'
-import * as React from 'react'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import style from './listbox.styles'
 
 import 'reflect-metadata'
-import { is } from 'date-fns/locale'
-import { watch } from 'utils/decorators'
-
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean
@@ -142,9 +137,3 @@ export class GdsOption extends LitElement {
     )
   }
 }
-
-export const GdsOptionReact = createComponent({
-  tagName: 'gds-option',
-  elementClass: GdsOption,
-  react: React,
-})

@@ -1,8 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { createComponent } from '@lit-labs/react'
-import * as React from 'react'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import { GdsOption, OptionsContainer } from './option'
@@ -196,9 +194,3 @@ export class GdsListbox extends LitElement implements OptionsContainer {
     }
   }
 }
-
-export const GdsListboxReact = createComponent({
-  tagName: 'gds-listbox',
-  elementClass: GdsListbox,
-  react: React,
-})

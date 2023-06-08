@@ -1,7 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { createComponent } from '@lit-labs/react'
-import * as React from 'react'
 
 import styles from './stem.styles.scss'
 import { watch } from 'utils/decorators'
@@ -17,7 +15,7 @@ import { watch } from 'utils/decorators'
  * `ArrowDown` is pressed, the popover will open and focus the first slotted child.
  *
  * @slot - Content of the popover
- * @fires ui-state - Fired when the popover is opened or closed
+ * @fires gds-ui-state - Fired when the popover is opened or closed
  */
 @customElement('gds-popover')
 export class GdsPopover extends LitElement {
@@ -43,7 +41,7 @@ export class GdsPopover extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.#registerTriggerEvents()
-    this.setAttribute('aria-hidden', 'true')
+    this._updateHidden()
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -66,8 +64,9 @@ export class GdsPopover extends LitElement {
   }
 
   @watch('open')
-  private _updateAriaHidden() {
+  private _updateHidden() {
     this.setAttribute('aria-hidden', String(!this.open))
+    this.hidden = !this.open
   }
 
   #registerTriggerEvents() {
@@ -100,7 +99,7 @@ export class GdsPopover extends LitElement {
   #setOpen(open: boolean) {
     this.open = open
     this.dispatchEvent(
-      new CustomEvent('ui-state', {
+      new CustomEvent('gds-ui-state', {
         detail: { open },
         bubbles: true,
         composed: false,
@@ -108,9 +107,3 @@ export class GdsPopover extends LitElement {
     )
   }
 }
-
-export const PopoverReact = createComponent({
-  tagName: 'gds-popover',
-  elementClass: GdsPopover,
-  react: React,
-})

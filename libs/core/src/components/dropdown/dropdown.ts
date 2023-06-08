@@ -4,8 +4,6 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
-import { createComponent } from '@lit-labs/react'
-import * as React from 'react'
 import 'reflect-metadata'
 
 import { randomId, constrainSlots } from 'utils/helpers'
@@ -32,7 +30,7 @@ import styles from './stem.styles.scss'
  * @slot - Options for the dropdown. Accepts `gds-option` elements.
  * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
  * @event change - Fired when the value of the dropdown changes.
- * @event ui-state - Fired when the dropdown is opened or closed.
+ * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
 export class GdsDropdown<ValueType = any>
@@ -155,7 +153,7 @@ export class GdsDropdown<ValueType = any>
 
       <button
         id="${this.#triggerId}"
-        @click="${() => this.#setOpen(!this.open)}"
+        @click="${() => (this.open = !this.open)}"
         aria-haspopup="listbox"
         role="combobox"
         aria-owns="${this.#listboxId}"
@@ -170,7 +168,7 @@ export class GdsDropdown<ValueType = any>
 
       <gds-popover
         .open=${this.open}
-        @ui-state=${(e: CustomEvent) => this.#setOpen(e.detail.open)}
+        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
         ${ref(this.#registerPopoverTrigger)}
       >
         ${when(
@@ -284,7 +282,7 @@ export class GdsDropdown<ValueType = any>
     if (this.multiple) this.value = listbox.selection.map((s) => s.value)
     else {
       this.value = listbox.selection[0]?.value
-      this.#setOpen(false)
+      this.open = false
       setTimeout(() => this.#triggerRef.value?.focus(), 0)
     }
 
@@ -298,14 +296,11 @@ export class GdsDropdown<ValueType = any>
   }
 
   /**
-   * Sets the open state of the dropdown.
-   *
-   * @param open The open state.
-   * @fires ui-state
+   * Emits `gds-ui-state`event and does some other house-keeping when the open state changes.
    */
-  #setOpen(open: boolean) {
-    this.open = open
-    this.#internals.ariaExpanded = open.toString()
+  @watch('open')
+  private _onOpenChange() {
+    const open = this.open
 
     if (open) this.#registerAutoCloseListener()
     else {
@@ -315,7 +310,7 @@ export class GdsDropdown<ValueType = any>
     }
 
     this.dispatchEvent(
-      new CustomEvent('ui-state', {
+      new CustomEvent('gds-ui-state', {
         detail: { open },
         bubbles: true,
         composed: true,
@@ -339,12 +334,6 @@ export class GdsDropdown<ValueType = any>
    */
   #autoCloseListener = (e: Event) => {
     if (e.target instanceof Node && !this.contains(e.target as Node))
-      this.#setOpen(false)
+      this.open = false
   }
 }
-
-export const GdsDropdownReact = createComponent({
-  tagName: 'gds-dropdown',
-  elementClass: GdsDropdown,
-  react: React,
-})

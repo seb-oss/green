@@ -5,6 +5,11 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts"],
-  "exclude": ["**/*.spec.ts", "**/*.stories.ts", "**/*.stories.js"]
+  "include": ["**/*.ts", "src/components/dropdown/dropdown.test.js"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.react.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ]
 }
