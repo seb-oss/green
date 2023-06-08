@@ -48,7 +48,7 @@ export class GdsButton extends LitElement {
   ariaLabel = null;
   
   @property({ type: String, reflect: true }) 
-  variant = null;
+  variant = '';
   
   @property({ type: String, reflect: true }) 
   set = null;
@@ -87,6 +87,7 @@ export class GdsButton extends LitElement {
         <slot name="trail" gds-allow="gds-icon"></slot>
         ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>
+      ${this.variant && this.variant.includes("split")  ? html`<button><slot name="split" gds-allow="gds-icon">asdasdasdasd</slot>${this.effect ? html`<gds-ripple></gds-ripple>` : ''}</button>` : ''}
     `
   }
 }

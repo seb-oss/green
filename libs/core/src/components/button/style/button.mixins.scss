@@ -240,3 +240,25 @@
   --gds-button-padding-inline: var(--gds-spacing-5);
   --gds-button-padding-block: var(--gds-spacing-4);
 }
+
+// Split variant
+@mixin variant-split() {
+  display: flex;
+  gap: 8px;
+
+  button:last-child {
+    align-items: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    ::slotted(gds-icon) {
+      align-items: center;
+      display: flex;
+      height: 24px;
+      justify-content: center;
+      width: 24px;
+    }
+  }
+}

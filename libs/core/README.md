@@ -17,3 +17,5 @@ Run `nx lint stems` to execute the lint via [ESLint](https://eslint.org/).
 `nx run core:build-with-types`
 
 `nx serve core:storybook`
+
+`nx serve core:storybook`

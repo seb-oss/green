@@ -14,7 +14,8 @@ import { inspector } from '../../utils/tools/inspector/inspector'
     <gds-row>
       <strong>Neutral Primary</strong>
       <gds-button effect="ripple">
-        <gds-icon name="plus" slot="lead"></gds-icon>I am a button
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        I am a button
       </gds-button>
       <gds-button data-label="test" effect="ripple" id="inspect">
         <gds-icon name="plus" slot="lead"></gds-icon>
@@ -27,19 +28,20 @@ import { inspector } from '../../utils/tools/inspector/inspector'
         <gds-icon name="plus" slot="trail"></gds-icon>
         Some more text longer button but not too long
       </gds-button>
-      <gds-button variant="secondary" trail="chevron" effect="ripple">
+      <gds-button variant="secondary" effect="ripple">
+        <gds-icon name="chevron" slot="trail"></gds-icon>
         Secondary
       </gds-button>
-      <gds-button variant="tertiary" lead="x" effect="ripple">
+      <gds-button variant="tertiary" effect="ripple">
+      <gds-icon name="x" slot="lead"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         disabled
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -57,30 +59,30 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       </gds-button>
       <gds-button
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="plus" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
         disabled
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -96,30 +98,30 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       </gds-button>
       <gds-button
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+         <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+         <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
         disabled
       >
+         <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -131,38 +133,38 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="positive"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="positive"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         disabled
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -171,42 +173,42 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="positive"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="positive"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
         disabled
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -215,45 +217,46 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="positive"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="positive"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="positive"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
         disabled
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
+
   </gds-buttons>
   <gds-buttons>
     <gds-row>
@@ -261,38 +264,38 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="negative"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="negative"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         disabled
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -301,42 +304,42 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="negative"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="negative"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="medium"
         disabled
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
     </gds-row>
@@ -345,44 +348,58 @@ import { inspector } from '../../utils/tools/inspector/inspector'
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Primary
       </gds-button>
       <gds-button
         set="negative"
         variant="secondary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Secondary
       </gds-button>
       <gds-button
         set="negative"
         variant="tertiary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Tertiary
       </gds-button>
       <gds-button
         set="negative"
         variant="primary"
-        lead="plus"
-        trail="plus"
         effect="ripple"
         size="small"
         disabled
       >
+      <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="x" slot="trail"></gds-icon>
         Disabled
       </gds-button>
+    </gds-row>
+  </gds-buttons>
+  <gds-buttons>
+    <gds-row>
+    Round
+    </gds-row>
+    <gds-row>
+    Grouped / Split
+    <gds-button variant="split primary" effect="ripple" set="positive">
+      hello
+      <gds-icon name="plus" slot="lead"></gds-icon>
+      <gds-icon name="chevron" slot="trail"></gds-icon>
+      <gds-icon name="x" slot="split"></gds-icon>
+    </gds-button>
     </gds-row>
   </gds-buttons>
 </gds-main>
