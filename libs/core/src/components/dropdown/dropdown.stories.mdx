@@ -15,7 +15,7 @@ import {
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-dropdown onchange="document.getElementById('selected-value').innerText = event.target.value">
-      <gds-option value="">Select value</gds-option>
+      <gds-option placeholder>Select value</gds-option>
       <gds-option value="v1">value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>
@@ -35,7 +35,7 @@ import {
       multiple
       onchange="document.getElementById('selected-values').innerText = event.target.value.toString()"
     >
-      <gds-option>Select value</gds-option>
+      <gds-option placeholder>Select values</gds-option>
       <gds-option value="v1">value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>

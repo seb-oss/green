@@ -14,7 +14,11 @@ import { watch, observeLightDOM } from 'utils/decorators'
 import 'primitives/listbox'
 import 'primitives/popover'
 
-import type { GdsListbox, GdsOption } from 'primitives/listbox'
+import type {
+  GdsListbox,
+  GdsOption,
+  OptionsContainer,
+} from 'primitives/listbox'
 import type { GdsPopover } from 'primitives/popover'
 
 import styles from './stem.styles.scss'
@@ -31,7 +35,10 @@ import styles from './stem.styles.scss'
  * @event ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
-export class GdsDropdown<ValueType = any> extends LitElement {
+export class GdsDropdown<ValueType = any>
+  extends LitElement
+  implements OptionsContainer
+{
   static styles = unsafeCSS(styles)
 
   static formAssociated = true
@@ -106,11 +113,27 @@ export class GdsDropdown<ValueType = any> extends LitElement {
    * Get the options of the dropdown.
    */
   get options() {
-    return Array.from(this.#optionElements)
+    return Array.from(this.#optionElements).filter(
+      (o) => !o.hasAttribute('placeholder')
+    )
   }
 
-  render() {
-    const renderedValue = Array.isArray(this.value)
+  /**
+   * Return the first option with a placeholder attribute.
+   * If no placeholder is found, this will be undefined.
+   */
+  get placeholder() {
+    return Array.from(this.#optionElements).find((o) =>
+      o.hasAttribute('placeholder')
+    )
+  }
+
+  /**
+   * Returns the display value as a string.
+   * If the dropdown is in multiple mode, this will be a comma separated list of the selected values.
+   */
+  get displayValue() {
+    const displayValue = Array.isArray(this.value)
       ? this.value
           .reduce(
             (acc: string, cur: ValueType) =>
@@ -120,6 +143,10 @@ export class GdsDropdown<ValueType = any> extends LitElement {
           .slice(0, -2)
       : this.options.find((v) => v.selected)?.innerHTML
 
+    return displayValue || this.placeholder?.innerHTML || ''
+  }
+
+  render() {
     return html`
       ${when(
         this.label,
@@ -137,7 +164,7 @@ export class GdsDropdown<ValueType = any> extends LitElement {
         ${ref(this.#triggerRef)}
       >
         <slot name="button" gds-allow="span">
-          <span>${unsafeHTML(renderedValue)} </span>
+          <span>${unsafeHTML(this.displayValue)} </span>
         </slot>
       </button>
 
@@ -175,7 +202,10 @@ export class GdsDropdown<ValueType = any> extends LitElement {
    */
   @observeLightDOM()
   private _handleLightDOMChange() {
-    this.value = this.value ?? this.options[0]?.value
+    if (!this.multiple && !this.value) {
+      if (this.placeholder) this.value = this.placeholder.value
+      else this.value = this.options[0]?.value
+    }
     this.requestUpdate()
   }
 
@@ -192,8 +222,6 @@ export class GdsDropdown<ValueType = any> extends LitElement {
       if (Array.isArray(this.value)) listbox.selection = this.value as any[]
       else listbox.selection = [this.value as any]
     }
-
-    console.log(listbox.selection)
 
     // Set the ariaActiveDescendant of the trigger button
     const triggerButton = this.#triggerRef.value as any

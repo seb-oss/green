@@ -43,6 +43,7 @@ export class GdsPopover extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.#registerTriggerEvents()
+    this.setAttribute('aria-hidden', 'true')
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -62,6 +63,11 @@ export class GdsPopover extends LitElement {
         <slot></slot>
       </div>
     `
+  }
+
+  @watch('open')
+  private _updateAriaHidden() {
+    this.setAttribute('aria-hidden', String(!this.open))
   }
 
   #registerTriggerEvents() {
