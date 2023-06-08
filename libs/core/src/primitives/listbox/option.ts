@@ -1,5 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -7,6 +9,12 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import style from './listbox.styles'
 
 import 'reflect-metadata'
+import { is } from 'date-fns/locale'
+
+export interface OptionsContainer extends HTMLElement {
+  options: GdsOption[]
+  multiple: boolean
+}
 
 /**
  * @element gds-option
@@ -61,9 +69,14 @@ export class GdsOption extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'option')
+
     this.updateComplete.then(() =>
       TransitionalStyles.instance.apply(this, 'gds-option')
     )
+  }
+
+  get parentElement() {
+    return super.parentElement as OptionsContainer
   }
 
   /**
@@ -105,7 +118,18 @@ export class GdsOption extends LitElement {
   }
 
   render() {
-    return html`<slot></slot>`
+    const isMultiple = this.parentElement.multiple
+
+    const checkbox = html`<span
+      class="checkbox ${classMap({ checked: this.selected })}"
+    ></span>`
+
+    if (!isMultiple) {
+      if (this.selected) this.setAttribute('highlighted', '')
+      else this.removeAttribute('highlighted')
+    }
+
+    return html`${when(isMultiple, () => checkbox)}<slot></slot>`
   }
 }
 

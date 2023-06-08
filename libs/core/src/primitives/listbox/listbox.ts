@@ -5,9 +5,10 @@ import { createComponent } from '@lit-labs/react'
 import * as React from 'react'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
-import { GdsOption } from './option'
+import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 import style from './listbox.styles'
+import { watch } from 'utils/decorators'
 
 /**
  * @element gds-listbox
@@ -23,7 +24,7 @@ import style from './listbox.styles'
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
 @customElement('gds-listbox')
-export class GdsListbox extends LitElement {
+export class GdsListbox extends LitElement implements OptionsContainer {
   static styles = unsafeCSS(style)
 
   /**
@@ -49,7 +50,7 @@ export class GdsListbox extends LitElement {
   /**
    * Returns a list of all `gds-option` elements in the listbox.
    */
-  get optionElements() {
+  get options() {
     let slot = this.#slotRef.value
     if (!slot) return []
 
@@ -65,25 +66,25 @@ export class GdsListbox extends LitElement {
    * Returns a list of all visible `gds-option` elements in the listbox.
    */
   get visibleOptionElements() {
-    return this.optionElements.filter((el) => !el.hidden)
+    return this.options.filter((el) => !el.hidden)
   }
 
   /**
    * Returns a list of all visible `gds-option` elements in the listbox.
    */
   get visibleSelectedOptionElements() {
-    return this.optionElements.filter((el) => el.selected && !el.hidden)
+    return this.options.filter((el) => el.selected && !el.hidden)
   }
 
   /**
    * Returns a list of all selected `gds-option` elements in the listbox.
    */
   get selection(): GdsOption[] {
-    return this.optionElements.filter((el) => el.selected)
+    return this.options.filter((el) => el.selected)
   }
 
   set selection(values: GdsOption[] | any[]) {
-    this.optionElements.forEach((el) => {
+    this.options.forEach((el) => {
       el.selected = values.includes(el.value) || values.includes(el)
     })
   }
@@ -111,13 +112,23 @@ export class GdsListbox extends LitElement {
     return html`<slot ${ref(this.#slotRef)}></slot>`
   }
 
+  /**
+   * Re-renders all options in the listbox when the `multiple` property changes.
+   */
+  @watch('multiple')
+  private _rerenderOptions() {
+    this.options.forEach((el) => {
+      el.requestUpdate()
+    })
+  }
+
   #handleSelect = (e: Event) => {
     const option = e.target as GdsOption
 
     if (this.multiple) option.selected = !option.selected
     else {
       option.selected = true
-      Array.from(this.optionElements).forEach((el) => {
+      Array.from(this.options).forEach((el) => {
         if (el !== option) el.selected = false
       })
     }

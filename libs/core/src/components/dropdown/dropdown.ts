@@ -14,7 +14,11 @@ import { watch, observeLightDOM } from 'utils/decorators'
 import 'primitives/listbox'
 import 'primitives/popover'
 
-import type { GdsListbox, GdsOption } from 'primitives/listbox'
+import type {
+  GdsListbox,
+  GdsOption,
+  OptionsContainer,
+} from 'primitives/listbox'
 import type { GdsPopover } from 'primitives/popover'
 
 import styles from './stem.styles.scss'
@@ -31,7 +35,10 @@ import styles from './stem.styles.scss'
  * @event ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
-export class GdsDropdown<ValueType = any> extends LitElement {
+export class GdsDropdown<ValueType = any>
+  extends LitElement
+  implements OptionsContainer
+{
   static styles = unsafeCSS(styles)
 
   static formAssociated = true
@@ -192,8 +199,6 @@ export class GdsDropdown<ValueType = any> extends LitElement {
       if (Array.isArray(this.value)) listbox.selection = this.value as any[]
       else listbox.selection = [this.value as any]
     }
-
-    console.log(listbox.selection)
 
     // Set the ariaActiveDescendant of the trigger button
     const triggerButton = this.#triggerRef.value as any
