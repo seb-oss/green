@@ -113,11 +113,27 @@ export class GdsDropdown<ValueType = any>
    * Get the options of the dropdown.
    */
   get options() {
-    return Array.from(this.#optionElements)
+    return Array.from(this.#optionElements).filter(
+      (o) => !o.hasAttribute('placeholder')
+    )
   }
 
-  render() {
-    const renderedValue = Array.isArray(this.value)
+  /**
+   * Return the first option with a placeholder attribute.
+   * If no placeholder is found, this will be undefined.
+   */
+  get placeholder() {
+    return Array.from(this.#optionElements).find((o) =>
+      o.hasAttribute('placeholder')
+    )
+  }
+
+  /**
+   * Returns the display value as a string.
+   * If the dropdown is in multiple mode, this will be a comma separated list of the selected values.
+   */
+  get displayValue() {
+    const displayValue = Array.isArray(this.value)
       ? this.value
           .reduce(
             (acc: string, cur: ValueType) =>
@@ -127,6 +143,10 @@ export class GdsDropdown<ValueType = any>
           .slice(0, -2)
       : this.options.find((v) => v.selected)?.innerHTML
 
+    return displayValue || this.placeholder?.innerHTML || ''
+  }
+
+  render() {
     return html`
       ${when(
         this.label,
@@ -144,7 +164,7 @@ export class GdsDropdown<ValueType = any>
         ${ref(this.#triggerRef)}
       >
         <slot name="button" gds-allow="span">
-          <span>${unsafeHTML(renderedValue)} </span>
+          <span>${unsafeHTML(this.displayValue)} </span>
         </slot>
       </button>
 
@@ -182,7 +202,10 @@ export class GdsDropdown<ValueType = any>
    */
   @observeLightDOM()
   private _handleLightDOMChange() {
-    this.value = this.value ?? this.options[0]?.value
+    if (!this.multiple && !this.value) {
+      if (this.placeholder) this.value = this.placeholder.value
+      else this.value = this.options[0]?.value
+    }
     this.requestUpdate()
   }
 

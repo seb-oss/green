@@ -59,7 +59,11 @@ export class GdsListbox extends LitElement implements OptionsContainer {
       slot = slot.assignedElements()[0] as HTMLSlotElement
     }
 
-    return (slot.assignedElements() as GdsOption[]) || []
+    return (
+      (slot.assignedElements() as GdsOption[]).filter(
+        (o) => !o.hasAttribute('placeholder')
+      ) || []
+    )
   }
 
   /**

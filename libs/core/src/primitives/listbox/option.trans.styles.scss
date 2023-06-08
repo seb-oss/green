@@ -18,6 +18,7 @@
   outline: 2px solid;
 }
 
+:host([placeholder]),
 :host([aria-hidden='true']) {
   display: none;
 }

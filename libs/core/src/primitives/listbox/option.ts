@@ -10,6 +10,7 @@ import style from './listbox.styles'
 
 import 'reflect-metadata'
 import { is } from 'date-fns/locale'
+import { watch } from 'utils/decorators'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
@@ -56,6 +57,15 @@ export class GdsOption extends LitElement {
   })
   selected: boolean = false
 
+  /**
+   * Sets this option as a placeholder.
+   * A placehodler option does not have a value and will act as the default option.
+   *
+   * In a multiple select listbox, placeholder options will not be rendered in the list.
+   */
+  @property({ type: Boolean })
+  placeholder: boolean = false
+
   constructor() {
     super()
 
@@ -101,18 +111,6 @@ export class GdsOption extends LitElement {
     }
   }
 
-  #emitSelect() {
-    this.dispatchEvent(
-      new CustomEvent('select', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value,
-        },
-      })
-    )
-  }
-
   onblur = () => {
     this.setAttribute('tabindex', '-1')
   }
@@ -130,6 +128,18 @@ export class GdsOption extends LitElement {
     }
 
     return html`${when(isMultiple, () => checkbox)}<slot></slot>`
+  }
+
+  #emitSelect() {
+    this.dispatchEvent(
+      new CustomEvent('select', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          value: this.value,
+        },
+      })
+    )
   }
 }
 
