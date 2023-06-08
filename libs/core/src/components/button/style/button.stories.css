@@ -2,6 +2,7 @@ gds-main {
   display: flex;
   gap: 120px;
   flex-direction: column;
+  padding-top: 80px;
 }
 
 gds-buttons {

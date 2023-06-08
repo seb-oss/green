@@ -20,11 +20,11 @@ button {
   @include core;
 }
 
-:host([variant*='secondary']) button {
+:host([variant='secondary']) button {
   @include secondary;
 }
 
-:host([variant*='tertiary']) button {
+:host([variant='tertiary']) button {
   @include tertiary;
 }
 
@@ -47,27 +47,33 @@ button {
 
 // Sets
 
-:host([variant*='split'][variant*='primary'][set='positive']) button {
+:host([variant='primary'][set='positive']) button,
+:host([variant='split primary'][set='positive']) button {
   @include primary-positive;
 }
 
-:host([variant*='split'][variant*='secondary'][set='positive']) button {
+:host([variant='secondary'][set='positive']) button,
+:host([variant='split secondary'][set='positive']) button {
   @include secondary-positive;
 }
 
-:host([variant*='split'][variant*='tertiary'][set='positive']) button {
+:host([variant='tertiary'][set='positive']) button,
+:host([variant='split tertiary'][set='positive']) button {
   @include tertiary-positive;
 }
 
 // negative
-:host([variant*='split'][variant*='primary'][set='negative']) button {
+:host([variant='primary'][set='negative']) button,
+:host([variant='split primary'][set='negative']) button {
   @include primary-negative;
 }
 
-:host([variant*='split'][variant*='secondary'][set='negative']) button {
+:host([variant='secondary'][set='negative']) button,
+:host([variant='split secondary'][set='negative']) button {
   @include secondary-negative;
 }
 
-:host([variant*='split'][variant*='tertiary'][set='negative']) button {
+:host([variant='tertiary'][set='negative']) button,
+:host([variant='split tertiary'][set='negative']) button {
   @include tertiary-negative;
 }

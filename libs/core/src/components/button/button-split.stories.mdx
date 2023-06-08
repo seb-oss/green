@@ -1,0 +1,25 @@
+import { GdsButton, GdsIcon } from '../../../../../dist/libs/core/src'
+import './style/button.stories.css'
+import './style/button.tokens.css'
+import '../../tokens/tokens.css'
+import './style/button.a11y.css'
+import { inspector } from '../../utils/tools/inspector/inspector'
+
+<Meta title="Components/Button/Split" />
+
+# Grouped buttons / Split
+
+<gds-main>
+  <gds-buttons>
+    <gds-row>Round</gds-row>
+    <gds-row>
+      Grouped / Split
+      <gds-button variant="split primary" effect="ripple" set="positive">
+        hello
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+  </gds-buttons>
+</gds-main>
