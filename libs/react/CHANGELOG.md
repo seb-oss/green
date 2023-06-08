@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.10.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.10.0...@sebgroup/green-react@1.10.1) (2023-06-08)
+
+
+### Performance Improvements
+
+* ⚡️ only renders tab content when tab is selected ([#905](https://github.com/sebgroup/green/issues/905)) ([1ea4dbc](https://github.com/sebgroup/green/commit/1ea4dbc6031419b3048aae98a6cf624df3d6f44a)), closes [#904](https://github.com/sebgroup/green/issues/904)
+
+
+
 # [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.4...@sebgroup/green-react@1.10.0) (2023-05-31)
 
 
