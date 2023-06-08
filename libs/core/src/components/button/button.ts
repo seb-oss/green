@@ -73,23 +73,42 @@ export class GdsButton extends LitElement {
     super.connectedCallback()
   }
 
+  slotLead() {
+    return html`<slot name="lead" gds-allow="gds-icon"></slot>`;
+  }
+
+  slotLabel() {
+    return this.textContent ? html`<slot part="label" gds-allow="#text"></slot>` : '';
+  }
+ 
+  slotTrail() {
+    return html`<slot name="trail" gds-allow="gds-icon"></slot>`
+  }
+ 
+  slotEffect() {
+    return this.effect ? html`<gds-ripple></gds-ripple>` : '';
+  }
+
+  slotSplit() {
+    if (!this.variant || !this.variant.includes("split")) { return '' }
+    const slotElement = html`<slot name="split" gds-allow="gds-icon"></slot>`;
+    const rippleElement = this.effect ? html`<gds-ripple></gds-ripple>` : '';
+    const buttonElement = html`<button @click="${effectRipple}">${slotElement}${rippleElement}</button>`;
+    return buttonElement;
+  }
+
   render() {
+    const content = html`${this.slotLead()}${this.slotLabel()}${this.slotTrail()}${this.slotEffect()}`;
     return html`
       <button
-          ?disabled="${this.disabled}"
-          aria-label="${this.textContent}"
-          ?aria-pressed="${this.ariaPressed}"
-          ?aria-expanded="${this.ariaExpanded}"
-          tabindex="0"
-          @click="${effectRipple}"
-        >
-        <slot name="lead" gds-allow="gds-icon"></slot>
-        ${this.textContent ? html`<slot part="label" gds-allow="#text"></slot>` : ''}
-        <slot name="trail" gds-allow="gds-icon"></slot>
-        ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
-      </button>
-      ${this.variant && this.variant.includes("split")  ? html`<button @click="${effectRipple}"><slot name="split" gds-allow="gds-icon"></slot>${this.effect ? html`<gds-ripple></gds-ripple>` : ''}</button>` : ''}
-    `
+        ?disabled="${this.disabled}"
+        aria-label="${this.textContent}"
+        ?aria-pressed="${this.ariaPressed}"
+        ?aria-expanded="${this.ariaExpanded}"
+        tabindex="0"
+        @click="${effectRipple}"
+      >${content}</button>${this.slotSplit()}
+    `;
   }
 }
 
