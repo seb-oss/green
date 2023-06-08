@@ -17,6 +17,7 @@ import styles from './style/button.styles.scss'
  * @slot lead - This slot is optional and allows gds-icon. 
  * @slot trail - This slot is optional and allows gds-icon.
  * @slot label - Allows test
+ * @slot split - Allows icon and changes the button structure
  * @event click - Fired will initiate the ripple effect.
  */
 
@@ -87,7 +88,7 @@ export class GdsButton extends LitElement {
         <slot name="trail" gds-allow="gds-icon"></slot>
         ${this.effect ? html`<gds-ripple></gds-ripple>` : ''}
       </button>
-      ${this.variant && this.variant.includes("split")  ? html`<button><slot name="split" gds-allow="gds-icon">asdasdasdasd</slot>${this.effect ? html`<gds-ripple></gds-ripple>` : ''}</button>` : ''}
+      ${this.variant && this.variant.includes("split")  ? html`<button @click="${effectRipple}"><slot name="split" gds-allow="gds-icon"></slot>${this.effect ? html`<gds-ripple></gds-ripple>` : ''}</button>` : ''}
     `
   }
 }

@@ -11,13 +11,13 @@
   */
 }
 
-button {
-  @include core;
-}
-
 // Split variant
 :host([variant*='split']) {
   @include variant-split;
+}
+
+button {
+  @include core;
 }
 
 :host([variant*='secondary']) button {
