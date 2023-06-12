@@ -1,29 +1,18 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
 import { GdsIcon } from '../../../../../dist/libs/core/src'
 import './icon.stories.css'
-{
-  /* // import { Icon } from './icon' */
-}
 
 <Meta title="Components/Icon" />
 
-# Icon
+# Icons
 
-<svg display="none">
-  <symbol
-    id="plus"
-    stroke="currentColor"
-    strokeWidth="3"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-  >
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <line x1="5" y1="12" x2="19" y2="12" />
-  </symbol>
-</svg>
-
-<gds-icon name="plus"></gds-icon>
-<gds-icon name="chevron"></gds-icon>
-<gds-icon name="x"></gds-icon>
+<gds-main>
+  <gds-icons>
+    <gds-icon name="plus"></gds-icon>
+    <gds-icon name="x"></gds-icon>
+    <gds-icon name="chevron"></gds-icon>
+    <gds-icon name="arrow"></gds-icon>
+    <gds-icon name="bell"></gds-icon>
+    <gds-icon name="calendar"></gds-icon>
+  </gds-icons>
+</gds-main>
