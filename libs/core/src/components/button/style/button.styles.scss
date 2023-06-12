@@ -28,11 +28,11 @@
 @layer variants {
   // Variants
 
-  :host([variant='secondary']) button {
+  :host([variant*='secondary']) button {
     @include secondary;
   }
 
-  :host([variant='tertiary']) button {
+  :host([variant*='tertiary']) button {
     @include tertiary;
   }
 

@@ -90,9 +90,7 @@ export class GdsButton extends LitElement {
   }
 
   slotSplit() {
-    if (!this.variant || !this.variant.includes('split')) {
-      return ''
-    }
+    if (!this.variant || !this.variant.includes('split')) { return ''}
     const slotElement = html`<slot name="split" gds-allow="gds-icon"></slot>`
     const rippleElement = this.effect ? html`<gds-ripple></gds-ripple>` : ''
     const buttonElement = html`<button @click="${effectRipple}">
@@ -101,7 +99,24 @@ export class GdsButton extends LitElement {
     return buttonElement
   }
 
+  slotCircle() {
+    return html`<slot name="circle" gds-allow="gds-icon"></slot>`
+  }
+
   render() {
+    if (this.variant.includes('circle')) { 
+      const content = html`${this.slotCircle()}${this.slotEffect()}`
+      return html`
+      <button
+        ?disabled="${this.disabled}"
+        aria-label="${this.textContent}"
+        ?aria-pressed="${this.ariaPressed}"
+        ?aria-expanded="${this.ariaExpanded}"
+        tabindex="0"
+        @click="${effectRipple}"
+      >${content}</button>`
+
+    } else {
     const content = html`${this.slotLead()}${this.slotLabel()}${this.slotTrail()}${this.slotEffect()}`
     return html`
       <button
@@ -115,5 +130,6 @@ export class GdsButton extends LitElement {
         ${content}</button
       >${this.slotSplit()}
     `
+    }
   }
 }
