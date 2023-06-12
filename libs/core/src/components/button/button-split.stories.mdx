@@ -5,14 +5,356 @@ import { inspector } from '../../utils/tools/inspector/inspector'
 
 <Meta title="Components/Button/Split" />
 
-# Grouped buttons / Split
+# Split Buttons
 
 <gds-main>
   <gds-buttons>
     <gds-row>
-      <h2>Grouped / Split</h2>
+      <strong>Meutral</strong>
+      <gds-button variant="split primary" effect="ripple">
+        Label
+        <gds-icon name="x" slot="lead"></gds-icon>
+        <gds-icon name="arrow" slot="trail"></gds-icon>
+        <gds-icon name="calendar" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split secondary" effect="ripple">
+        Label
+        <gds-icon name="x" slot="lead"></gds-icon>
+        <gds-icon name="arrow" slot="trail"></gds-icon>
+        <gds-icon name="calendar" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" effect="ripple">
+        Label
+        <gds-icon name="x" slot="lead"></gds-icon>
+        <gds-icon name="arrow" slot="trail"></gds-icon>
+        <gds-icon name="calendar" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" effect="ripple" disabled>
+        Label
+        <gds-icon name="x" slot="lead"></gds-icon>
+        <gds-icon name="arrow" slot="trail"></gds-icon>
+        <gds-icon name="calendar" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Medium</strong>
+      <gds-button variant="split primary" size="medium" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split secondary" size="medium" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" size="medium" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="medium"
+        effect="ripple"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Small</strong>
+      <gds-button variant="split primary" size="small" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split secondary" size="small" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" size="small" effect="ripple">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="small"
+        effect="ripple"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+  </gds-buttons>
+  <gds-buttons>
+    <gds-row>
+      <strong>Positive</strong>
       <gds-button variant="split primary" effect="ripple" set="positive">
-        hello
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split secondary" effect="ripple" set="positive">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" effect="ripple" set="positive">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        effect="ripple"
+        set="positive"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Medium</strong>
+      <gds-button
+        variant="split primary"
+        size="medium"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split secondary"
+        size="medium"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="medium"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="medium"
+        effect="ripple"
+        set="positive"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Small</strong>
+      <gds-button
+        variant="split primary"
+        size="small"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split secondary"
+        size="small"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="small"
+        effect="ripple"
+        set="positive"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="small"
+        effect="ripple"
+        set="positive"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+  </gds-buttons>
+  <gds-buttons>
+    <gds-row>
+      <strong>Negative</strong>
+      <gds-button variant="split primary" effect="ripple" set="negative">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split secondary" effect="ripple" set="negative">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button variant="split tertiary" effect="ripple" set="negative">
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        effect="ripple"
+        set="negative"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Medium</strong>
+      <gds-button
+        variant="split primary"
+        size="medium"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split secondary"
+        size="medium"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="medium"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="medium"
+        effect="ripple"
+        set="negative"
+        disabled
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+    </gds-row>
+    <gds-row>
+      <strong>Small</strong>
+      <gds-button
+        variant="split primary"
+        size="small"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split secondary"
+        size="small"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="small"
+        effect="ripple"
+        set="negative"
+      >
+        Label
+        <gds-icon name="plus" slot="lead"></gds-icon>
+        <gds-icon name="chevron" slot="trail"></gds-icon>
+        <gds-icon name="x" slot="split"></gds-icon>
+      </gds-button>
+      <gds-button
+        variant="split tertiary"
+        size="small"
+        effect="ripple"
+        set="negative"
+        disabled
+      >
+        Label
         <gds-icon name="plus" slot="lead"></gds-icon>
         <gds-icon name="chevron" slot="trail"></gds-icon>
         <gds-icon name="x" slot="split"></gds-icon>
