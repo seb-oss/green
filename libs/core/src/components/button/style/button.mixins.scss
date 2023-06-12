@@ -289,3 +289,24 @@
     }
   }
 }
+
+// Circle variant
+@mixin variant-circle() {
+  display: flex;
+
+  button {
+    align-items: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    // padding: 0;
+
+    ::slotted(gds-icon) {
+      align-items: center;
+      display: flex;
+      height: 24px;
+      justify-content: center;
+      width: 24px;
+    }
+  }
+}

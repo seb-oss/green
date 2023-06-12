@@ -16,7 +16,7 @@ export class Ripple extends LitElement {
   }
 
   render() {
-    console.log('is it working')
+    // console.log('is it working')
     return html`<div></div>`
   }
 }

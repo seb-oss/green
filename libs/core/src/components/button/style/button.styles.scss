@@ -1,5 +1,5 @@
 @use './button.mixins.scss' as *;
-@layer tokens, a11y, core, variants, sizes, sets;
+@layer tokens, a11y, core, variants, sizes, sets, slotted;
 
 @layer tokens {
   :host {
@@ -27,9 +27,6 @@
 
 @layer variants {
   // Variants
-  :host([variant*='split']) {
-    @include variant-split;
-  }
 
   :host([variant='secondary']) button {
     @include secondary;
@@ -37,6 +34,14 @@
 
   :host([variant='tertiary']) button {
     @include tertiary;
+  }
+
+  :host([variant*='split']) {
+    @include variant-split;
+  }
+
+  :host([variant*='circle']) {
+    @include variant-circle;
   }
 }
 
@@ -55,42 +60,49 @@
   }
 }
 
-::slotted(svg) {
-  height: 12px;
-  width: 12px;
-}
-
 @layer sets {
   // Sets
 
   :host([variant='primary'][set='positive']) button,
-  :host([variant='split primary'][set='positive']) button {
+  :host([variant='split primary'][set='positive']) button,
+  :host([variant='circle primary'][set='positive']) button {
     @include primary-positive;
   }
 
   :host([variant='secondary'][set='positive']) button,
-  :host([variant='split secondary'][set='positive']) button {
+  :host([variant='split secondary'][set='positive']) button,
+  :host([variant='circle secondary'][set='positive']) button {
     @include secondary-positive;
   }
 
   :host([variant='tertiary'][set='positive']) button,
-  :host([variant='split tertiary'][set='positive']) button {
+  :host([variant='split tertiary'][set='positive']) button,
+  :host([variant='circle tertiary'][set='positive']) button {
     @include tertiary-positive;
   }
 
   // negative
   :host([variant='primary'][set='negative']) button,
-  :host([variant='split primary'][set='negative']) button {
+  :host([variant='split primary'][set='negative']) button,
+  :host([variant='circle primary'][set='negative']) button {
     @include primary-negative;
   }
 
   :host([variant='secondary'][set='negative']) button,
-  :host([variant='split secondary'][set='negative']) button {
+  :host([variant='split secondary'][set='negative']) button,
+  :host([variant='circle secondary'][set='negative']) button {
     @include secondary-negative;
   }
 
   :host([variant='tertiary'][set='negative']) button,
-  :host([variant='split tertiary'][set='negative']) button {
+  :host([variant='split tertiary'][set='negative']) button,
+  :host([variant='circle tertiary'][set='negative']) button {
     @include tertiary-negative;
   }
+}
+
+@layer slotted {
+  // Slotted
+  // ::slotted(svg) {
+  // }
 }
