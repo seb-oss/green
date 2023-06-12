@@ -1,19 +1,46 @@
 @mixin tokens() {
+  // Sizing
   --gds-button-fs: var(--gds-fs-base);
+  --gds-button-gap: var(--gds-sys-gap-small);
+
+  // Motion
   --gds-button-transition: var(--gds-sys-transition);
-  --gds-button-bg: var(--gds-primary-background-color);
-  --gds-button-color: var(--gds-primary-color);
-  --gds-button-border-radius: var(--gds-sys-border-radius);
-  --gds-button-border-width: var(--gds-sys-border-width);
-  --gds-button-border-color: var(--gds-primary-border-color);
-  --gds-button-border-style: var(--gds-sys-border-style);
+
+  // Padding
   --gds-button-padding-inline: var(--gds-sys-padding-inline);
   --gds-button-padding-block: var(--gds-sys-padding-block);
-  --gds-button-gap: var(--gds-sys-gap-small);
+
+  // Border tokens
+  --gds-button-border-radius: var(--gds-sys-border-radius);
+  --gds-button-border-width: var(--gds-sys-border-width);
+  --gds-button-border-style: var(--gds-sys-border-style);
+
+  // Colors
   --gds-button-color-bg: var(--gds-color-grey-20);
   --gds-button-color-text: var(--gds-color-text-inverse);
   --gds-button-color-border: var(--gds-sys-border-color);
   --gds-button-color-outline: var(--gds-color-grey-20);
+
+  //Dark mode tokens
+  --gds-button-color-bg-dark: var(--gds-color-grey-20);
+  --gds-button-color-text-dark: var(--gds-color-text-inverse);
+  --gds-button-color-border-dark: var(--gds-sys-border-color);
+  --gds-button-color-outline-dark: var(--gds-color-grey-20);
+}
+
+@mixin tokens-a11y {
+  @media (prefers-color-scheme: dark) {
+    :host {
+      --gds-button-color-bg: var(--gds-button-color-bg-dark,
+      var(--gds-color-grey-20));
+      --gds-button-color-text: var(--gds-button-color-text-dark,
+      var(--gds-color-text-inverse));
+      --gds-button-color-border: var(--gds-button-color-text-dark,
+      var(--gds-color-text-inverse));
+      --gds-button-color-outline: var(--gds-button-color-text-dark,
+      var(--gds-color-text-inverse));
+    }
+  }
 }
 
 @mixin containment {
@@ -33,7 +60,7 @@
   max-width: 20ch;
   width: auto;
 
-  @container button (width < 2000ch) {
+  @container button (width < 200ch) {
     button [part='label'] {
       display: inline-block;
       max-width: 20ch;

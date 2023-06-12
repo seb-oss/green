@@ -1,43 +1,58 @@
 @use './button.mixins.scss' as *;
-@layer core, shell, components, button;
+@layer tokens, a11y, core, variants, sizes, sets;
 
-:host {
-  @include tokens;
-  @include containment;
+@layer tokens {
+  :host {
+    @include tokens;
+    @include containment;
 
-  /* 
-    Consider using:
-    display: contents;
-  */
+    /* 
+      Consider using:
+      display: contents;
+    */
+  }
 }
 
-// Split variant
-:host([variant*='split']) {
-  @include variant-split;
+@layer a11y {
+  // Accessability
+  @include tokens-a11y;
 }
 
-button {
-  @include core;
+@layer core {
+  // Core
+  button {
+    @include core;
+  }
 }
 
-:host([variant='secondary']) button {
-  @include secondary;
+@layer variants {
+  // Variants
+  :host([variant*='split']) {
+    @include variant-split;
+  }
+
+  :host([variant='secondary']) button {
+    @include secondary;
+  }
+
+  :host([variant='tertiary']) button {
+    @include tertiary;
+  }
 }
 
-:host([variant='tertiary']) button {
-  @include tertiary;
-}
+@layer sizes {
+  // Sizes
+  :host([size='small']) button {
+    @include size-small;
+  }
 
-:host([size='small']) button {
-  @include size-small;
-}
+  :host([size='medium']) button {
+    @include size-medium;
+  }
 
-:host([size='medium']) button {
-  @include size-medium;
-}
-
-:host([size='large']) button {
-  @include size-large;
+  :host([size='large']) button {
+    @include size-large;
+  }
 }
 
 ::slotted(svg) {
@@ -45,35 +60,37 @@ button {
   width: 12px;
 }
 
-// Sets
+@layer sets {
+  // Sets
 
-:host([variant='primary'][set='positive']) button,
-:host([variant='split primary'][set='positive']) button {
-  @include primary-positive;
-}
+  :host([variant='primary'][set='positive']) button,
+  :host([variant='split primary'][set='positive']) button {
+    @include primary-positive;
+  }
 
-:host([variant='secondary'][set='positive']) button,
-:host([variant='split secondary'][set='positive']) button {
-  @include secondary-positive;
-}
+  :host([variant='secondary'][set='positive']) button,
+  :host([variant='split secondary'][set='positive']) button {
+    @include secondary-positive;
+  }
 
-:host([variant='tertiary'][set='positive']) button,
-:host([variant='split tertiary'][set='positive']) button {
-  @include tertiary-positive;
-}
+  :host([variant='tertiary'][set='positive']) button,
+  :host([variant='split tertiary'][set='positive']) button {
+    @include tertiary-positive;
+  }
 
-// negative
-:host([variant='primary'][set='negative']) button,
-:host([variant='split primary'][set='negative']) button {
-  @include primary-negative;
-}
+  // negative
+  :host([variant='primary'][set='negative']) button,
+  :host([variant='split primary'][set='negative']) button {
+    @include primary-negative;
+  }
 
-:host([variant='secondary'][set='negative']) button,
-:host([variant='split secondary'][set='negative']) button {
-  @include secondary-negative;
-}
+  :host([variant='secondary'][set='negative']) button,
+  :host([variant='split secondary'][set='negative']) button {
+    @include secondary-negative;
+  }
 
-:host([variant='tertiary'][set='negative']) button,
-:host([variant='split tertiary'][set='negative']) button {
-  @include tertiary-negative;
+  :host([variant='tertiary'][set='negative']) button,
+  :host([variant='split tertiary'][set='negative']) button {
+    @include tertiary-negative;
+  }
 }
