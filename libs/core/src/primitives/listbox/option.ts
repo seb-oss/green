@@ -106,8 +106,15 @@ export class GdsOption extends LitElement {
     }
   }
 
-  onblur = () => {
+  onblur = (e: FocusEvent) => {
     this.setAttribute('tabindex', '-1')
+    this.dispatchEvent(
+      new FocusEvent('gds-blur', {
+        bubbles: true,
+        composed: true,
+        relatedTarget: e.relatedTarget,
+      })
+    )
   }
 
   render() {

@@ -41,11 +41,6 @@ export class GdsDropdown<ValueType = any>
 
   static formAssociated = true
 
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
-  }
-
   /**
    * The label of the dropdown.
    * Will only render if this property is set to a non-empty string.
@@ -124,6 +119,13 @@ export class GdsDropdown<ValueType = any>
     return Array.from(this.#optionElements).find((o) =>
       o.hasAttribute('placeholder')
     )
+  }
+
+  /**
+   * focuses the trigger button of the dropdown.
+   */
+  focus(options?: FocusOptions | undefined): void {
+    this.#triggerRef.value?.focus(options)
   }
 
   /**
@@ -320,12 +322,14 @@ export class GdsDropdown<ValueType = any>
 
   #registerAutoCloseListener() {
     window.addEventListener('click', this.#autoCloseListener)
-    window.addEventListener('keyup', this.#autoCloseListener)
+    this.addEventListener('blur', this.#autoCloseListener)
+    this.addEventListener('gds-blur', this.#autoCloseListener)
   }
 
   #unregisterAutoCloseListener() {
     window.removeEventListener('click', this.#autoCloseListener)
-    window.removeEventListener('keyup', this.#autoCloseListener)
+    this.removeEventListener('blur', this.#autoCloseListener)
+    this.removeEventListener('gds-blur', this.#autoCloseListener)
   }
 
   /**
@@ -333,7 +337,14 @@ export class GdsDropdown<ValueType = any>
    * or when any other element recieves a keyup event.
    */
   #autoCloseListener = (e: Event) => {
-    if (e.target instanceof Node && !this.contains(e.target as Node))
-      this.open = false
+    const isClickOutside =
+      e instanceof MouseEvent &&
+      e.target instanceof Node &&
+      !this.contains(e.target as Node)
+
+    const isFocusOutside =
+      e instanceof FocusEvent && !this.contains(e.relatedTarget as Node)
+
+    if (isClickOutside || isFocusOutside) this.open = false
   }
 }
