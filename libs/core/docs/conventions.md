@@ -62,3 +62,11 @@ But in addition the the public interface, it is also quite useful to have JSDoc 
 ### Beta or Stable
 
 Newly added components can be marked as Beta until they have been fully review, tested and processed in all relevant aspects. A component marked as Beta is not included in the Semantic Versioning guarantees of the rest of the system. Using a beta component means accepting the risk that breaking changes can, and will, occur even in patch releases of the framework.
+
+## Testing
+
+Every component that is part of the public API should have full test coverage of all of its features.
+
+Preferrably, any new components or features added to existing components should be developed using a test-driven approach.
+
+Tests run in headless browsers using the Modern Web test runner together with Playwright.
