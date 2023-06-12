@@ -343,7 +343,9 @@ export class GdsDropdown<ValueType = any>
       !this.contains(e.target as Node)
 
     const isFocusOutside =
-      e instanceof FocusEvent && !this.contains(e.relatedTarget as Node)
+      e instanceof FocusEvent &&
+      e.relatedTarget &&
+      !this.contains(e.relatedTarget as Node)
 
     if (isClickOutside || isFocusOutside) this.open = false
   }

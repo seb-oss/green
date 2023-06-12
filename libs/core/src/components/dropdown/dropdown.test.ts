@@ -191,6 +191,22 @@ describe('<gds-dropdown>', () => {
     expect(el.open).to.be.true
   })
 
+  it('should select option on click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const option2 = el.querySelectorAll('gds-option')[1]
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+
+    expect(el.value).to.equal('v2')
+  })
+
   it('should close on ESC', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
@@ -240,5 +256,112 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
 
     expect(el.open).to.be.false
+  })
+})
+
+describe('<gds-dropdown searchable>', () => {
+  it('should display a search field', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown searchable open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
+
+    expect(searchField).to.not.be.null
+  })
+
+  it('should filter options when typing in search field', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown searchable open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
+
+    searchField.focus()
+    await sendKeys({ type: '2' })
+    await el.updateComplete
+
+    const options = el.querySelectorAll('gds-option:not([aria-hidden="true"])')
+
+    expect(options.length).to.equal(1)
+    expect(options[0].textContent).to.equal('Option 2')
+  })
+
+  it('should filter options when typing in search field', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown searchable open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
+
+    searchField.focus()
+    await sendKeys({ type: '2' })
+    await el.updateComplete
+
+    const options = el.querySelectorAll('gds-option:not([aria-hidden="true"])')
+
+    expect(options.length).to.equal(1)
+    expect(options[0].textContent).to.equal('Option 2')
+  })
+})
+
+describe('<gds-dropdown multiple>', () => {
+  it('should support multiple selections', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const option2 = el.querySelectorAll('gds-option')[1]
+    const option3 = el.querySelectorAll('gds-option')[2]
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+
+    await clickOnElement(option3, 'center')
+    await el.updateComplete
+
+    expect(el.value.toString()).to.equal(['v2', 'v3'].toString())
+    expect(el.displayValue).to.equal('Option 2, Option 3')
+  })
+
+  it('should not have a default selection', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    expect(el.displayValue).to.equal('')
+  })
+
+  it('should suppoert placeholder option', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple>
+        <gds-option placeholder>Select values</gds-option>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    expect(el.displayValue).to.equal('Select values')
   })
 })
