@@ -67,6 +67,7 @@ export class GdsOption extends LitElement {
     this.addEventListener('click', this.#emitSelect)
     this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
+      e.preventDefault()
       this.#emitSelect()
     })
   }
