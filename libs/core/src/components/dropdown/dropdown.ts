@@ -163,8 +163,8 @@ export class GdsDropdown<ValueType = any>
         aria-expanded="${this.open}"
         ${ref(this.#triggerRef)}
       >
-        <slot name="button" gds-allow="span">
-          <span>${unsafeHTML(this.displayValue)} </span>
+        <slot name="trigger">
+          <span>${unsafeHTML(this.displayValue)}</span>
         </slot>
       </button>
 
@@ -202,9 +202,20 @@ export class GdsDropdown<ValueType = any>
    */
   @observeLightDOM()
   private _handleLightDOMChange() {
-    if (!this.multiple && !this.value) {
+    if (this.multiple) return
+
+    // Set defualt value if none is set
+    if (!this.value) {
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
+    }
+    // Make sure the value is one of the options, unless we have a placeholder
+    else if (
+      !this.placeholder &&
+      this.options.find((o) => o.value === this.value) === undefined
+    ) {
+      this.options[0].selected = true
+      this.value = this.options[0]?.value
     }
     this.requestUpdate()
   }
