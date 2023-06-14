@@ -204,7 +204,7 @@ export class GdsDropdown<ValueType = any>
   private _handleLightDOMChange() {
     if (this.multiple) return
 
-    // Set defualt value if none is set
+    // Set default value if none is set
     if (!this.value) {
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
@@ -214,14 +214,14 @@ export class GdsDropdown<ValueType = any>
       !this.placeholder &&
       this.options.find((o) => o.value === this.value) === undefined
     ) {
-      this.options[0].selected = true
+      this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
     }
     this.requestUpdate()
   }
 
   /**
-   * Called whenever the `value` proptery changes
+   * Called whenever the `value` property changes
    */
   @watch('value')
   private _handleValueChange() {
@@ -285,7 +285,6 @@ export class GdsDropdown<ValueType = any>
   /**
    * Selects an option in the dropdown.
    *
-   * @param option The option to select.
    * @fires change
    */
   #handleSelectionChange() {

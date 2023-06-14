@@ -1,15 +1,24 @@
 <div class="form-group">
+  <span class="form-info" #formInfo
+    ><ng-content select="[data-form-info]"></ng-content
+  ></span>
   <gds-dropdown
-    [value]="value"
+    [value]="selectedOption"
     [searchable]="searchable"
+    [label]="label"
     (change)="onValueChange($event)"
+    [multiple]="multiSelect"
+    #gdsDropdown
   >
-    <!-- Default option with placeholder text -->
-    <gds-option value="" *ngIf="texts?.placeholder">{{
-      texts?.placeholder
-    }}</gds-option>
+    <span slot="trigger"
+      ><ng-container
+        *ngTemplateOutlet="
+          customButton?.templateRef ? customButton!.templateRef : defaultButton;
+          context: { option: selectedOption }
+        "
+      ></ng-container
+    ></span>
 
-    <!-- Rest of options -->
     <gds-option
       *ngFor="let option of options; let index = index"
       [value]="option"
@@ -23,7 +32,7 @@
   </gds-dropdown>
 </div>
 
-<ng-template #defaultButton let-selected="selected">
+<ng-template #defaultButton let-selected="option">
   <span>{{ texts?.select }}</span>
 </ng-template>
 

@@ -53,7 +53,10 @@ export class GdsListbox extends LitElement implements OptionsContainer {
     if (!slot) return []
 
     // Unwrap nested slots
-    while (slot.assignedElements()[0].nodeName === 'SLOT') {
+    while (
+      slot.assignedElements().length > 0 &&
+      slot.assignedElements()[0].nodeName === 'SLOT'
+    ) {
       slot = slot.assignedElements()[0] as HTMLSlotElement
     }
 
