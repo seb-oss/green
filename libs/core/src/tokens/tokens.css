@@ -142,18 +142,18 @@
   --gds-fs-headline-small: 1.5rem; /* 24px / 16px = 1.5rem */
   --gds-fs-title-large: 1.375rem; /* 22px / 16px = 1.375rem */
   --gds-fs-title-medium: 1rem; /* 16px / 16px = 1.6rem */
-  --gds-fs-title-small: .875rem; /* 14px / 16px = .875rem */
+  --gds-fs-title-small: 0.875rem; /* 14px / 16px = .875rem */
   --gds-fs-body-large: 1rem; /* 16px / 16px = 1rem */
-  --gds-fs-body-medium: .875rem; /* 14px / 16px = .875rem */
-  --gds-fs-body-small: .75rem; /* 12px / 16px = .75rem */
+  --gds-fs-body-medium: 0.875rem; /* 14px / 16px = .875rem */
+  --gds-fs-body-small: 0.75rem; /* 12px / 16px = .75rem */
   --gds-fs-label-large: 1rem; /* 16px / 16px = 1rem */
-  --gds-fs-label-medium: .875rem; /* 14px / 16px = .875rem */
-  --gds-fs-label-small: .75rem; /* 12px / 16px = .75rem */
+  --gds-fs-label-medium: 0.875rem; /* 14px / 16px = .875rem */
+  --gds-fs-label-small: 0.75rem; /* 12px / 16px = .75rem */
   --gds-fs-label-information-large: 1rem; /* 16px / 16px = 1rem */
-  --gds-fs-label-information-medium: .875rem; /* 14px / 16px = .75rem */
+  --gds-fs-label-information-medium: 0.875rem; /* 14px / 16px = .75rem */
   --gds-fs-label-input-large: 1rem; /* 16px / 16px = 1rem */
-  --gds-fs-label-input-medium: .875rem; /* 14px / 16px = .875rem */
-  --gds-fs-label-overline: .875rem; /* 14px / 16px = .875rem */
+  --gds-fs-label-input-medium: 0.875rem; /* 14px / 16px = .875rem */
+  --gds-fs-label-overline: 0.875rem; /* 14px / 16px = .875rem */
 
   /* Line heights */
   --gds-lh-display-large: 1.1905; /* 98/82 */
@@ -184,21 +184,21 @@
   --gds-fw-bold: 700;
 
   /* Spacing */
-  --gds-spacing-0: 1rem; /* 2px / 10px = 0.2rem */
-  --gds-spacing-1: 0.2rem; /* 2px / 10px = 0.2rem */
-  --gds-spacing-2: 0.4rem; /* 4px / 10px = 0.4rem */
-  --gds-spacing-3: 0.8rem; /* 8px / 10px = 0.8rem */
-  --gds-spacing-4: 1.2rem; /* 12px / 10px = 1.2rem */
-  --gds-spacing-5: 1.6rem; /* 16px / 10px = 1.6rem */
-  --gds-spacing-6: 2.4rem; /* 24px / 10px = 2.4rem */
-  --gds-spacing-7: 3.2rem; /* 32px / 10px = 3.2rem */
-  --gds-spacing-8: 4rem; /* 40px / 10px = 4.0rem */
-  --gds-spacing-9: 4.8rem; /* 48px / 10px = 4.8rem */
-  --gds-spacing-10: 6.4rem; /* 64px / 10px = 6.4rem */
-  --gds-spacing-11: 8rem; /* 80px / 10px = 8.0rem */
-  --gds-spacing-12: 9.6rem; /* 96px / 10px = 9.6rem */
-  --gds-spacing-13: 11.2rem; /* 112px / 10px = 11.2rem */
-  --gds-spacing-14: 12.8rem; /* 128px / 10px = 12.8rem */
+  --gds-spacing-0: 0;
+  --gds-spacing-1: 0.125rem; /* 2px / 16px = 0.125rem */
+  --gds-spacing-2: 0.25rem; /* 4px / 16px = 0.25rem */
+  --gds-spacing-3: 0.5rem; /* 8px / 16px = 0.5rem */
+  --gds-spacing-4: 0.75rem; /* 12px / 16px = 0.75rem */
+  --gds-spacing-5: 1rem; /* 16px / 16px = 1rem */
+  --gds-spacing-6: 1.5rem; /* 24px / 16px = 1.5rem */
+  --gds-spacing-7: 2rem; /* 32px / 16px = 2rem */
+  --gds-spacing-8: 2.5rem; /* 40px / 16px = 2.5rem */
+  --gds-spacing-9: 3rem; /* 48px / 16px = 3rem */
+  --gds-spacing-10: 4rem; /* 64px / 16px = 4rem */
+  --gds-spacing-11: 5rem; /* 80px / 16px = 5rem */
+  --gds-spacing-12: 6rem; /* 96px / 16px = 6rem */
+  --gds-spacing-13: 7rem; /* 112px / 16px = 7rem */
+  --gds-spacing-14: 8rem; /* 128px / 16px = 8rem */
 
   /* Transitions */
   --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
