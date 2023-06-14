@@ -52,7 +52,7 @@ export class AppElement extends HTMLElement {
       console.log('Value changed: ', e.detail.value)
       console.log('dropdown', dropdown.options)
     })
-    dropdown.addEventListener('ui-state', (e: CustomEvent) =>
+    dropdown.addEventListener('gds-ui-state', (e: CustomEvent) =>
       console.log('UI state changed: ', e.detail)
     )
 
