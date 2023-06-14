@@ -1,0 +1,12 @@
+gds-main {
+  display: flex;
+  gap: 120px;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+fieldset {
+  display: flex;
+  gap: 42px;
+  padding: 48px;
+}

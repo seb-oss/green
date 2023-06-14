@@ -1,0 +1,4 @@
+- Apply all style validation for CSS
+- In range
+- focus within
+- has checked

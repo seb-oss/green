@@ -1,0 +1,23 @@
+@use './form.mixins.scss' as *;
+@layer tokens, a11y, core, variants, sizes, sets, slotted;
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+fieldset {
+  align-items: flex-start;
+  border-color: rgba($color: #000, $alpha: 0.2);
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+}
+
+legend {
+  font-size: 10px;
+  opacity: 0.5;
+}
