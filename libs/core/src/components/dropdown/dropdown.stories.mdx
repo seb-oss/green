@@ -15,7 +15,6 @@ import {
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-dropdown onchange="document.getElementById('selected-value').innerText = event.target.value">
-      <gds-option placeholder>Select value</gds-option>
       <gds-option value="v1">value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>
@@ -59,6 +58,25 @@ import {
       <gds-option value="cloning">Cloning</gds-option>
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>
+
+## Custom trigger content
+
+Custom content for the trigger can be provided by assigning an element to the `trigger` slot. When this slot is occupied,
+the default trigger content will be overridden, and you will have to manage the displayed value yourself.
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown onchange="document.getElementById('trigger-value').innerText = event.target.value">
+      <div slot="trigger">
+        <b>Selected: </b>
+        <span id="trigger-value">v1</span>
+      </div>
+      <gds-option value="v1">value 1</gds-option>
+      <gds-option value="v2">Value 2</gds-option>
+      <gds-option value="v3">Value 3</gds-option>
     </gds-dropdown>
   </div>
 </Canvas>

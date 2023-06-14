@@ -41,11 +41,6 @@ export class GdsDropdown<ValueType = any>
 
   static formAssociated = true
 
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
-  }
-
   /**
    * The label of the dropdown.
    * Will only render if this property is set to a non-empty string.
@@ -127,6 +122,13 @@ export class GdsDropdown<ValueType = any>
   }
 
   /**
+   * focuses the trigger button of the dropdown.
+   */
+  focus(options?: FocusOptions | undefined): void {
+    this.#triggerRef.value?.focus(options)
+  }
+
+  /**
    * Returns the display value as a string.
    * If the dropdown is in multiple mode, this will be a comma separated list of the selected values.
    */
@@ -161,8 +163,8 @@ export class GdsDropdown<ValueType = any>
         aria-expanded="${this.open}"
         ${ref(this.#triggerRef)}
       >
-        <slot name="button" gds-allow="span">
-          <span>${unsafeHTML(this.displayValue)} </span>
+        <slot name="trigger">
+          <span>${unsafeHTML(this.displayValue)}</span>
         </slot>
       </button>
 
@@ -200,9 +202,20 @@ export class GdsDropdown<ValueType = any>
    */
   @observeLightDOM()
   private _handleLightDOMChange() {
-    if (!this.multiple && !this.value) {
+    if (this.multiple) return
+
+    // Set defualt value if none is set
+    if (!this.value) {
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
+    }
+    // Make sure the value is one of the options, unless we have a placeholder
+    else if (
+      !this.placeholder &&
+      this.options.find((o) => o.value === this.value) === undefined
+    ) {
+      this.options[0].selected = true
+      this.value = this.options[0]?.value
     }
     this.requestUpdate()
   }
@@ -320,12 +333,14 @@ export class GdsDropdown<ValueType = any>
 
   #registerAutoCloseListener() {
     window.addEventListener('click', this.#autoCloseListener)
-    window.addEventListener('keyup', this.#autoCloseListener)
+    this.addEventListener('blur', this.#autoCloseListener)
+    this.addEventListener('gds-blur', this.#autoCloseListener)
   }
 
   #unregisterAutoCloseListener() {
     window.removeEventListener('click', this.#autoCloseListener)
-    window.removeEventListener('keyup', this.#autoCloseListener)
+    this.removeEventListener('blur', this.#autoCloseListener)
+    this.removeEventListener('gds-blur', this.#autoCloseListener)
   }
 
   /**
@@ -333,7 +348,16 @@ export class GdsDropdown<ValueType = any>
    * or when any other element recieves a keyup event.
    */
   #autoCloseListener = (e: Event) => {
-    if (e.target instanceof Node && !this.contains(e.target as Node))
-      this.open = false
+    const isClickOutside =
+      e instanceof MouseEvent &&
+      e.target instanceof Node &&
+      !this.contains(e.target as Node)
+
+    const isFocusOutside =
+      e instanceof FocusEvent &&
+      e.relatedTarget &&
+      !this.contains(e.relatedTarget as Node)
+
+    if (isClickOutside || isFocusOutside) this.open = false
   }
 }
