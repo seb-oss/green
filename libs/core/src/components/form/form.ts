@@ -23,25 +23,25 @@ export class GdsForm extends LitElement {
   <fieldset>
   <legend>Type: Text</legend>
   <label for="username">Username:</label>
-  <input type="text" id="username" name="username" />
+  <input type="text" id="username" name="username" placeholder="Username" />
 </fieldset>
 
 <fieldset>
   <legend>Type: Password</legend>
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password" />
+  <input type="password" id="password" name="password" placeholder="Password" />
 </fieldset>
 
 <fieldset>
   <legend>Type: Email</legend>
   <label for="email">Email:</label>
-  <input type="email" id="email" name="email" />
+  <input type="email" id="email" name="email" placeholder="E-Mail" />
 </fieldset>
 
 <fieldset>
   <legend>Type: Number</legend>
   <label for="number">Number:</label>
-  <input type="number" id="number" name="number" />
+  <input type="number" id="number" name="number" placeholder="Number" />
 </fieldset>
 
 <fieldset>

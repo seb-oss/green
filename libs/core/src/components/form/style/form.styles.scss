@@ -21,3 +21,12 @@ legend {
   font-size: 10px;
   opacity: 0.5;
 }
+
+input {
+  appearance: none;
+  background-color: hsla(60, 4%, 95%, 1);
+  border: 0;
+  border-bottom: 1px solid hsla(60, 4%, 50%, 1);
+  border-radius: 8px 8px 0 0;
+  padding: 16px 12px;
+}
