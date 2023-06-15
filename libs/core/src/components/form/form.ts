@@ -1,6 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import styles from './style/form.styles.scss'
+import '../icon/icon'
 
 /**
  * @element gds-form
@@ -22,12 +23,18 @@ export class GdsForm extends LitElement {
     <form>
 
       <gds-input>
-        <div class="lead">Lead</div>
-        <div class="base" data-badge="SEK">
-          <input type="text" id="input" placeholder="placeholder" />
-          <label for="input">Label</label>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base" data-badge="SEK">
+            <label for="input">Label</label>
+            <input type="text" id="input" placeholder="placeholder" />
           </div>  
-        <div class="trail">trail</div>
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Support text</span>
+          <div class="icon"><gds-icon name="bell"></gds-icon></div>
+        </div>
       </gds-input>
 
       <fieldset>

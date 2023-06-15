@@ -34,72 +34,118 @@ fieldset input {
 // The serious stuff
 
 gds-input {
-  background-color: hsla(60, 4%, 95%, 1);
-  border-bottom: 1px solid hsla(60, 4%, 50%, 1);
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  padding: 16px 12px;
-  position: relative;
 
-  &:focus-within {
-    border: 1px solid hsla(60, 4%, 50%, 1);
-  }
-
-  > * {
-    box-sizing: border-box;
-  }
-
-  .base {
+  .main {
+    background-color: hsla(60, 4%, 95%, 1);
+    border: 1px solid transparent;
+    border-bottom-color: hsla(60, 4%, 50%, 1);
+    border-start-end-radius: 8px;
+    border-start-start-radius: 8px;
     display: flex;
+    gap: 8px;
+    padding-block: 12px;
+    padding-inline: 16px;
     position: relative;
-    // flex-direction: column;
 
-    label {
-      background-color: rgba($color: #000, $alpha: 0.2);
-      display: flex;
-      height: 100%;
-      inset: 0;
-      position: absolute;
-      width: 100%;
+    &:has(input:focus-visible) {
+      // &:focus-within {
+      border-color: rgba($color: #000, $alpha: 0.2);
+      box-shadow: 0 0 0 4px rgba($color: #000, $alpha: 0.1);
+
+      label {
+        font-size: 12px;
+        top: 0;
+        transform: translateY(0);
+      }
+
+      input {
+        opacity: 1;
+      }
     }
 
-    input {
-      background-color: #f00;
-      border: 0;
-      border-radius: 0;
-      display: flex;
-      height: 100%;
-      margin: unset;
-      padding: unset;
-      width: 100%;
+    > * {
+      box-sizing: border-box;
     }
 
-    &::after {
-      background-color: #fff;
-      border-radius: 3px;
-      content: attr(data-badge);
+    .base {
+      // display: flex;
+      position: relative;
+      // flex-direction: column;
+      width: 100%;
+
+      label {
+        align-items: center;
+        background-color: transparent;
+        display: block;
+        font-size: 16px;
+        height: max-content;
+        inset: 0;
+        line-height: 20px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+      }
+
+      input {
+        background-color: transparent;
+        border: 0;
+        border-radius: 0;
+        border-radius: 0;
+        box-sizing: border-box;
+        display: flex;
+        font-size: 16px;
+        height: 100%;
+        margin: unset;
+        opacity: 0;
+        outline: none;
+        padding: unset;
+        padding-top: 12px;
+        transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+
+        &:focus:not(:focus-visible) {
+          outline: none;
+        }
+      }
+
+      &::after {
+        background-color: #fff;
+        border-radius: 3px;
+        content: attr(data-badge);
+        display: flex;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 1;
+        padding: 2px 4px;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .lead,
+    .trail {
+      align-items: center;
+      aspect-ratio: 1/1;
+      // background-color: #808080;
       display: flex;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 0;
-      line-height: 1;
-      padding: 2px 4px;
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
+      height: 40px;
+      justify-content: center;
+      width: 40px;
     }
   }
 
-  .lead,
-  .trail {
-    align-items: center;
-    aspect-ratio: 1/1;
-    background-color: #808080;
+  .support {
     display: flex;
-    height: 40px;
-    justify-content: center;
-    width: 40px;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
