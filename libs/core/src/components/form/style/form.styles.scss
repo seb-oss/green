@@ -22,11 +22,84 @@ legend {
   opacity: 0.5;
 }
 
-input {
+fieldset input {
   appearance: none;
   background-color: hsla(60, 4%, 95%, 1);
   border: 0;
   border-bottom: 1px solid hsla(60, 4%, 50%, 1);
   border-radius: 8px 8px 0 0;
   padding: 16px 12px;
+}
+
+// The serious stuff
+
+gds-input {
+  background-color: hsla(60, 4%, 95%, 1);
+  border-bottom: 1px solid hsla(60, 4%, 50%, 1);
+  display: flex;
+  gap: 8px;
+  padding: 16px 12px;
+  position: relative;
+
+  &:focus-within {
+    border: 1px solid hsla(60, 4%, 50%, 1);
+  }
+
+  > * {
+    box-sizing: border-box;
+  }
+
+  .base {
+    display: flex;
+    position: relative;
+    // flex-direction: column;
+
+    label {
+      background-color: rgba($color: #000, $alpha: 0.2);
+      display: flex;
+      height: 100%;
+      inset: 0;
+      position: absolute;
+      width: 100%;
+    }
+
+    input {
+      background-color: #f00;
+      border: 0;
+      border-radius: 0;
+      display: flex;
+      height: 100%;
+      margin: unset;
+      padding: unset;
+      width: 100%;
+    }
+
+    &::after {
+      background-color: #fff;
+      border-radius: 3px;
+      content: attr(data-badge);
+      display: flex;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 1;
+      padding: 2px 4px;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .lead,
+  .trail {
+    align-items: center;
+    aspect-ratio: 1/1;
+    background-color: #808080;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+  }
 }

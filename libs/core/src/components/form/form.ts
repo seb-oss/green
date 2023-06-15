@@ -17,10 +17,19 @@ export class GdsForm extends LitElement {
     delegatesFocus: true,
   }
 
-
   render() { return html`
   
     <form>
+
+      <gds-input>
+        <div class="lead">Lead</div>
+        <div class="base" data-badge="SEK">
+          <input type="text" id="input" placeholder="placeholder" />
+          <label for="input">Label</label>
+          </div>  
+        <div class="trail">trail</div>
+      </gds-input>
+
       <fieldset>
         <legend>Type: Text</legend>
         <label for="username">Username:</label>
@@ -55,6 +64,15 @@ export class GdsForm extends LitElement {
         <input type="number" id="number" name="number" placeholder="Number" min="0" max="100" required />
         <!-- Requires a minimum value of 0, maximum value of 100, and only allows numeric characters -->
       </fieldset>
+
+      <fieldset>
+  <legend>Type: Tel</legend>
+  <label for="tel">Telephone:</label>
+  <input type="tel" id="tel" name="tel" placeholder="Telephone" pattern="[0-9]+" required />
+  <!-- Only allows numeric characters -->
+</fieldset>
+
+
 
       <fieldset>
         <legend>Type: Date</legend>
