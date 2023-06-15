@@ -48,7 +48,7 @@ jobs:
         run: yarn build:libs
 
       - name: Version and release all libraries
-        run: npx nx run-many --all --target=update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,perf,refactor,build --parallel=1
+        run: npx nx run-many --all --target=update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,refactor,build --parallel=1
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
