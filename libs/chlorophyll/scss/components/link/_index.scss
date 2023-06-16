@@ -36,19 +36,18 @@ Specify style on hover only
     // Do the style here
   }
 
-Enable Text smoothing 
+Enable Text smoothing
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 
 */
 
-
 // TODO: maybe move elsewhere?
 @each $variant, $colors in mixins.$variants {
   [class*='-#{$variant}'] {
     @include mixins.variant(
-      map.get($colors, 'color'),
+      currentColor,
       rgba(map.get($colors, 'fadable-color'), mixins.$outline-opacity)
     );
   }
