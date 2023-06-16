@@ -99,6 +99,7 @@ export const FormItem = ({
         </div>
         {expandableInfo && (
           <IconButton
+            size="small"
             aria-expanded={isExpanded}
             aria-controls={`${inputId}-expandable-info`}
             onClick={async (event) => {
