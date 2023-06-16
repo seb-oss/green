@@ -22,7 +22,7 @@ interface FormItemProps {
   label?: string
   labelInformation?: string
   validator?: IValidator
-  expandableInfo?: string
+  expandableInfo?: React.ReactNode
   inputId?: string
   children: ReactNode
   expandableInfoButtonLabel?: string
