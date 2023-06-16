@@ -40,14 +40,16 @@
  *
  * ## Caveats
  *
- * Consumers using the top-level components from Green Core will still need to manually
- * scope the custom elements used in their own templates. The generated version string
- * could be exposed as a constant from Green Core, so that it can be added to the tag names
- * in the consuming app, but this will be cumbersome to work with.
+ * Consumers using the top-level components from Green Core will have to add the version suffix
+ * in some way. One way could be to use the `html` template tag in consuming apps too, but this
+ * will only work if the consumer is using Lit.
+ * A more general workaround could be to expose the generated version string as a constant from
+ * Green Core, so that it can be added to the tag names in the consuming app, but this will be
+ * cumbersome to work with.
  *
  * Therefor the recommendation will be to only consume Green Core though the React or Angular
- * wrappers when building a MFE application, as these wrappers will take care of the scoping
- * automatically.
+ * wrappers, or to use Lit, when building a MFE application, as the wrappers will take care
+ * of the scoping automatically and Lit can use the custom `html` template tag from Green Core.
  *
  * At some point in the future, when the scoped custom element registry proposal has been
  * implemented in all major browsers, we can remove this custom scoping mechanism and
