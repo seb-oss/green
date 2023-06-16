@@ -22,6 +22,10 @@ export interface OptionsContainer extends HTMLElement {
  * Can be used together with the `gds-listbox` primitive.
  *
  * @slot - The default slot. Custom content can be used to display the option.
+ *
+ * @event gds-select - Fired when the option is selected.
+ * @event gds-blur - Fired when the option loses focus.
+ * @event gds-focus - Fired when the option gains focus.
  */
 @customElement('gds-option')
 export class GdsOption extends LitElement {
@@ -111,6 +115,16 @@ export class GdsOption extends LitElement {
     this.setAttribute('tabindex', '-1')
     this.dispatchEvent(
       new FocusEvent('gds-blur', {
+        bubbles: true,
+        composed: true,
+        relatedTarget: e.relatedTarget,
+      })
+    )
+  }
+
+  onfocus = (e: FocusEvent) => {
+    this.dispatchEvent(
+      new FocusEvent('gds-focus', {
         bubbles: true,
         composed: true,
         relatedTarget: e.relatedTarget,

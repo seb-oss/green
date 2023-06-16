@@ -194,6 +194,7 @@ export class GdsDropdown<ValueType = any>
           .multiple="${ifDefined(this.multiple)}"
           ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
+          @gds-focus="${this.#handleOptionFocusChange}"
         >
           <slot gds-allow="gds-option"></slot>
         </gds-listbox>
@@ -237,13 +238,6 @@ export class GdsDropdown<ValueType = any>
       if (Array.isArray(this.value)) listbox.selection = this.value as any[]
       else listbox.selection = [this.value as any]
     }
-
-    // Set the ariaActiveDescendant of the trigger button
-    const triggerButton = this.#triggerRef.value as any
-    if (triggerButton)
-      triggerButton.ariaActiveDescendantElement = this.options.find(
-        (o) => o.value === value
-      )
   }
 
   /**
@@ -272,6 +266,13 @@ export class GdsDropdown<ValueType = any>
       this.#listboxRef.value?.focus()
       return
     }
+  }
+
+  #handleOptionFocusChange = (e: FocusEvent) => {
+    // Set the ariaActiveDescendant of the trigger button
+    const triggerButton = this.#triggerRef.value as any
+    if (triggerButton)
+      triggerButton.ariaActiveDescendantElement = e.target as any
   }
 
   /**
