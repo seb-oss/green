@@ -57,11 +57,9 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   @media (hover: hover) { 
     &:hover {
       background-color: $_track_color_hover;
-      //transition: $_track_transition_time;
     }
     &:hover::after {
       transform: translateX($_thumb_hover_nudge);
-      //transition: $_thumb_transition_time;
     }
   }
 
