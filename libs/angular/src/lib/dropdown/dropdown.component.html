@@ -1,7 +1,4 @@
 <div class="form-group">
-  <span class="form-info" #formInfo
-    ><ng-content select="[data-form-info]"></ng-content
-  ></span>
   <gds-dropdown
     [value]="selectedOption"
     [searchable]="searchable"
@@ -10,6 +7,10 @@
     [multiple]="multiSelect"
     #gdsDropdown
   >
+    <span class="form-info" slot="form-info" #formInfo
+      ><ng-content select="[data-form-info]"></ng-content
+    ></span>
+
     <span slot="trigger"
       ><ng-container
         *ngTemplateOutlet="

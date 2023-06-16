@@ -29,7 +29,9 @@ import styles from './stem.styles.scss'
  *
  * @slot - Options for the dropdown. Accepts `gds-option` elements.
  * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
- * @event change - Fired when the value of the dropdown changes.
+ * @slot form-info - Renders between the label and the trigger button.
+ *
+ * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @customElement('gds-dropdown')
@@ -152,6 +154,8 @@ export class GdsDropdown<ValueType = any>
         this.label,
         () => html`<label for="${this.#triggerId}">${this.label}</label>`
       )}
+
+      <slot name="form-info"></slot>
 
       <button
         id="${this.#triggerId}"
