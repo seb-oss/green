@@ -151,7 +151,14 @@ $button-danger-border-color: $button-danger-bg;
   min-width: auto;
 
   .form-group & {
-    margin-top: -.625rem;
+    margin-top: -0.625rem;
+  }
+
+  &.small {
+    height: 2.125rem;
+    width: 2.125rem;
+    padding: 0.4375rem;
+    line-height: 1.125rem;
   }
 
   svg {
@@ -159,7 +166,13 @@ $button-danger-border-color: $button-danger-bg;
     width: 1rem;
   }
 
-  path, line, circle, rect, ellipse, polyline, text {
+  path,
+  line,
+  circle,
+  rect,
+  ellipse,
+  polyline,
+  text {
     fill: var(--gds-ref-pallet-base800);
     stroke: var(--gds-ref-pallet-base800);
     transition: all tokens.$transition-time;
@@ -169,7 +182,13 @@ $button-danger-border-color: $button-danger-bg;
     background-color: var(--gds-ref-pallet-base800);
     border-color: var(--gds-ref-pallet-base800);
 
-    path, line, circle, rect, ellipse, polyline, text {
+    path,
+    line,
+    circle,
+    rect,
+    ellipse,
+    polyline,
+    text {
       fill: var(--gds-ref-pallet-base000);
       stroke: var(--gds-ref-pallet-base000);
     }
@@ -188,12 +207,7 @@ $button-danger-border-color: $button-danger-bg;
     $button-danger-border-color
   );
 
-  @include common.add-focus(
-    '',
-    '',
-    $button-danger-bg,
-    $button-danger-bg
-  );
+  @include common.add-focus('', '', $button-danger-bg, $button-danger-bg);
 
   &:disabled,
   &.disabled,
