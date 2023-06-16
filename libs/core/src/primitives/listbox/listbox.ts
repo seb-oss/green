@@ -100,7 +100,7 @@ export class GdsListbox extends LitElement implements OptionsContainer {
     TransitionalStyles.instance.apply(this, 'gds-listbox')
 
     this.addEventListener('keydown', this.#keyboardNavigationHandler)
-    this.addEventListener('select', this.#handleSelect)
+    this.addEventListener('gds-select', this.#handleSelect)
   }
 
   /**

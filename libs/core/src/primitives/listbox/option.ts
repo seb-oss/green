@@ -135,7 +135,7 @@ export class GdsOption extends LitElement {
 
   #emitSelect() {
     this.dispatchEvent(
-      new CustomEvent('select', {
+      new CustomEvent('gds-select', {
         bubbles: true,
         composed: true,
         detail: {
