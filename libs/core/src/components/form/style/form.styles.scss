@@ -39,7 +39,6 @@ gds-input {
   gap: 8px;
 
   .main {
-
     --border-color: hsla(60, 4%, 50%, 1);
     background-color: hsla(60, 4%, 95%, 1);
     background-position: bottom center;
@@ -53,7 +52,7 @@ gds-input {
     background-repeat: repeat-x;
     background-size: 100% 1px;
     border: 2px solid transparent;
-    // border-bottom-color: hsla(60, 4%, 50%, 1);
+    border-bottom-color: hsla(60, 4%, 50%, 1);
     border-start-end-radius: 8px;
     border-start-start-radius: 8px;
     box-sizing: border-box;
