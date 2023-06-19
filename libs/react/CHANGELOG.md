@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.11.0...@sebgroup/green-react@1.11.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **button:** adjust small button size ([#915](https://github.com/sebgroup/green/issues/915)) ([32cf177](https://github.com/sebgroup/green/commit/32cf177a4836c76ce6b098ade77c92f6bd8886e5))
+
+
+
 # [1.11.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.10.1...@sebgroup/green-react@1.11.0) (2023-06-16)
 
 
