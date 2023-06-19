@@ -27,7 +27,9 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base" data-badge="SEK">
             <label for="input">Label</label>
-            <input type="text" id="input" placeholder="placeholder" />
+            <!-- <input type="text" id="input" placeholder=" " pattern="\S+.*" required/> -->
+            <!-- <input type="text" id="input" placeholder=" " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required/> -->
+            <input type="text" id="input" placeholder=" " minlength="3" pattern="[a-z]+" required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
