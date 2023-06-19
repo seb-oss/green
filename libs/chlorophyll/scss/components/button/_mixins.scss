@@ -48,7 +48,7 @@ $button-danger-border-color: $button-danger-bg;
   &.small {
     min-height: 2rem;
     padding: 0.4375rem 0.75rem;
-    line-height: 1.125rem;
+    line-height: 1rem;
   }
 
   &.large {
@@ -155,8 +155,8 @@ $button-danger-border-color: $button-danger-bg;
   }
 
   &.small {
-    height: 2.125rem;
-    width: 2.125rem;
+    height: 2rem;
+    width: 2rem;
     padding: 0.4375rem;
     line-height: 1.125rem;
   }
