@@ -34,7 +34,7 @@ export class GdsForm extends LitElement {
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
         <div class="support">
-          <span>Support text</span>
+          <span>Only lowercase, min-length 3 characters</span>
           <div class="icon"><gds-icon name="bell"></gds-icon></div>
         </div>
       </gds-input>

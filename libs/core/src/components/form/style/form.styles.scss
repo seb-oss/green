@@ -39,11 +39,24 @@ gds-input {
   gap: 8px;
 
   .main {
+
+    --border-color: hsla(60, 4%, 50%, 1);
     background-color: hsla(60, 4%, 95%, 1);
-    border: 1px solid transparent;
-    border-bottom-color: hsla(60, 4%, 50%, 1);
+    background-position: bottom center;
+
+    // background-image: linear-gradient(
+    //   to bottom,
+    //   var(--border-color),
+    //   var(--border-color)
+    // );
+
+    background-repeat: repeat-x;
+    background-size: 100% 1px;
+    border: 2px solid transparent;
+    // border-bottom-color: hsla(60, 4%, 50%, 1);
     border-start-end-radius: 8px;
     border-start-start-radius: 8px;
+    box-sizing: border-box;
     display: flex;
     gap: 8px;
     padding-block: 12px;
@@ -51,11 +64,21 @@ gds-input {
     position: relative;
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
+    &:hover {
+      // border-block-end-width: 2px;
+      background-size: 100% 2px;
+      border-bottom-color: #000;
+    }
+
+    &:focus-within:has(input:focus-visible) {
+      border-radius: 8px;
+    }
     // &:has(input:focus-visible) {
     &:focus-within,
     &:has(input:not(:placeholder-shown)) {
       border-color: rgba($color: #000, $alpha: 0.2);
-      box-shadow: 0 0 0 4px rgba($color: #000, $alpha: 0.1);
+
+      // box-shadow: 0 0 0 4px rgba($color: #000, $alpha: 0.1);
 
       .base {
         label {
@@ -70,6 +93,10 @@ gds-input {
           transform: translateY(0);
         }
       }
+    }
+
+    gds-icon {
+      transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     // &:has(input:valid) {
@@ -91,16 +118,31 @@ gds-input {
     //   border-color: hsla(351, 95%, 45%, 0.27);
     //   box-shadow: 0 0 0 4px hsla(351, 95%, 45%, 0.132);
     // }
+    &:has(input:focus-visible:valid:not(:placeholder-shown)) {
+      --border-color: rgb(10, 223, 134);
+      border-color: rgb(10, 223, 134);
+
+      gds-icon {
+        color: rgb(10, 223, 134);
+      }
+    }
+
     &:has(input:valid:not(:placeholder-shown)) {
-      // &:where(input:user-valid) {
-      border-color: hsla(158, 95%, 45%, 0.27);
-      box-shadow: 0 0 0 4px hsla(158, 95%, 45%, 0.132);
+      border-color: rgba($color: #000, $alpha: 0);
+      border-bottom-color: rgb(10, 223, 134);
     }
 
     &:has(input:invalid:not(:placeholder-shown)) {
       // &:where(input:user-invalid) {
-      border-color: hsla(351, 95%, 45%, 0.27);
-      box-shadow: 0 0 0 4px hsla(351, 95%, 45%, 0.132);
+      // --border-color: rgb(247, 140, 121);
+      background-color: hsla(11, 100%, 96%, 1);
+      border-color: rgb(223, 198, 193);
+      // box-shadow: 0 0 0 4px hsla(11, 100%, 96%, 1);
+      // border-bottom-color: rgb(247, 140, 121);
+
+      gds-icon {
+        color: rgb(247, 140, 121);
+      }
     }
 
     > * {
