@@ -7,29 +7,29 @@ form {
   gap: 48px;
 }
 
-fieldset {
-  align-items: flex-start;
-  border-color: rgba($color: #000, $alpha: 0.2);
-  border-width: 1px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 22px;
-}
+// fieldset {
+//   align-items: flex-start;
+//   border-color: rgba($color: #000, $alpha: 0.2);
+//   border-width: 1px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 12px;
+//   padding: 22px;
+// }
 
-legend {
-  font-size: 10px;
-  opacity: 0.5;
-}
+// legend {
+//   font-size: 10px;
+//   opacity: 0.5;
+// }
 
-fieldset input {
-  appearance: none;
-  background-color: hsla(60, 4%, 95%, 1);
-  border: 0;
-  border-bottom: 1px solid hsla(60, 4%, 50%, 1);
-  border-radius: 8px 8px 0 0;
-  padding: 16px 12px;
-}
+// fieldset input {
+//   appearance: none;
+//   background-color: hsla(60, 4%, 95%, 1);
+//   border: 0;
+//   border-bottom: 1px solid hsla(60, 4%, 50%, 1);
+//   border-radius: 8px 8px 0 0;
+//   padding: 16px 12px;
+// }
 
 // The serious stuff
 
@@ -40,6 +40,7 @@ gds-input {
 
   .main {
     --border-color: hsla(60, 4%, 50%, 1);
+    align-items: center;
     background-color: hsla(60, 4%, 95%, 1);
     background-position: bottom center;
 
@@ -51,6 +52,7 @@ gds-input {
 
     background-repeat: repeat-x;
     background-size: 100% 1px;
+    block-size: 56px;
     border: 2px solid transparent;
     border-bottom-color: hsla(60, 4%, 50%, 1);
     border-start-end-radius: 8px;
@@ -58,6 +60,7 @@ gds-input {
     box-sizing: border-box;
     display: flex;
     gap: 8px;
+    min-block-size: 56px;
     padding-block: 12px;
     padding-inline: 16px;
     position: relative;
@@ -84,7 +87,7 @@ gds-input {
           font-size: 12px;
           opacity: 0.5;
           top: 0;
-          transform: translateY(0);
+          transform: translateY(-5px);
         }
 
         input {
@@ -216,9 +219,17 @@ gds-input {
       aspect-ratio: 1/1;
       // background-color: #808080;
       display: flex;
-      height: 40px;
+      height: 24px;
       justify-content: center;
-      width: 40px;
+      width: 24px;
+    }
+
+    .lead {
+      justify-content: flex-start;
+    }
+
+    .trail {
+      justify-content: right;
     }
   }
 
@@ -226,6 +237,6 @@ gds-input {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 22px;
+    padding-inline: 18px;
   }
 }
