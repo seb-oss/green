@@ -38,6 +38,22 @@ export class GdsForm extends LitElement {
           <div class="icon"><gds-icon name="bell"></gds-icon></div>
         </div>
       </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base" data-badge="SEK">
+            <label for="input">Label</label>
+            <!-- <input type="text" id="input" placeholder=" " pattern="\S+.*" required/> -->
+            <!-- <input type="text" id="input" placeholder=" " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required/> -->
+            <input type="number" min="4" max="8" id="input" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Number type, range  min="4" max="8"</span>
+          <div class="icon"><gds-icon name="bell"></gds-icon></div>
+        </div>
+      </gds-input>
 
       <fieldset>
         <legend>Type: Text</legend>
