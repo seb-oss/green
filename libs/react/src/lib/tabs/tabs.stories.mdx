@@ -56,6 +56,16 @@ Tabs make it easy to explore and switch between different views or functional as
   </Tabs>
 </Canvas>
 
+#### Tab selected by default
+<Canvas>
+  <Tabs>
+    <Tab title={'Page 1'}>Page 1 Content</Tab>
+    <Tab title={'Page 2'}>Page 2 Content</Tab>
+    <Tab title={'Page 3'}>Page 3 Content</Tab>
+    <Tab title={'Page 4'} selected>Page 4 Content set as selected </Tab>
+  </Tabs>
+</Canvas>
+
 #### Disabled tabs
 
 <Canvas>
@@ -81,7 +91,7 @@ This interface only supports text content, and will be removed in a future relea
   <Tabs
     list={[
       { text: 'Page 1', href: '#' },
-      { text: 'Page 2', href: '#' },
+      { text: 'Page 2', href: '#', selected: true },
       { text: 'Page 3', href: '#' },
       { text: 'Page 4', href: '#' },
       { text: 'Page 5', href: '#', disabled: true },
