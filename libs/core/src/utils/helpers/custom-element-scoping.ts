@@ -58,40 +58,11 @@
  * in a shadow root with a scoped registry instead.
  */
 
-//
-import {
-  ClassDescriptor,
-  Constructor,
-} from '@lit/reactive-element/decorators/base.js'
 import { html as litHtml } from 'lit'
+import { customElement } from 'lit/decorators.js'
 
 const VER_SUFFIX = '-gdsvsuffix'
-
 const elementLookupTable = new Map<string, string>()
-
-type CustomElementClass = Omit<typeof HTMLElement, 'new'>
-
-const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
-  elementLookupTable.set(tagName, tagName + VER_SUFFIX)
-  customElements.define(tagName + VER_SUFFIX, clazz as CustomElementConstructor)
-  return clazz as any
-}
-
-const standardCustomElement = (
-  tagName: string,
-  descriptor: ClassDescriptor
-) => {
-  const { kind, elements } = descriptor
-  return {
-    kind,
-    elements,
-    // This callback is called once the class is otherwise fully defined
-    finisher(clazz: Constructor<HTMLElement>) {
-      elementLookupTable.set(tagName, tagName + VER_SUFFIX)
-      customElements.define(tagName + VER_SUFFIX, clazz)
-    },
-  }
-}
 
 /**
  * Class decorator factory that defines the decorated class as a custom element, and registers
@@ -108,12 +79,10 @@ const standardCustomElement = (
  * @category Decorator
  * @param tagName The tag name of the custom element to define.
  */
-export const gdsCustomElement =
-  (tagName: string) =>
-  (classOrDescriptor: CustomElementClass | ClassDescriptor) =>
-    typeof classOrDescriptor === 'function'
-      ? legacyCustomElement(tagName, classOrDescriptor)
-      : standardCustomElement(tagName, classOrDescriptor as ClassDescriptor)
+export const gdsCustomElement = (tagName: string) => {
+  elementLookupTable.set(tagName, tagName + VER_SUFFIX)
+  return customElement(tagName + VER_SUFFIX)
+}
 
 /**
  * Template tag that rewrites all custom element names from the lookup table to include the
