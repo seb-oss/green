@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.12.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.11.1...@sebgroup/green-react@1.12.0) (2023-06-21)
+
+
+### Features
+
+* **tabs:** can set any tab as selected by default ([#907](https://github.com/sebgroup/green/issues/907)) ([6a8d62d](https://github.com/sebgroup/green/commit/6a8d62d3b7cf6d0c79723a0f4329d270001d371b)), closes [#373](https://github.com/sebgroup/green/issues/373)
+
+
+
 ## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.11.0...@sebgroup/green-react@1.11.1) (2023-06-19)
 
 
