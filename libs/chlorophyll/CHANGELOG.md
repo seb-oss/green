@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.1...@sebgroup/chlorophyll@1.11.2) (2023-06-21)
+
+
+### Bug Fixes
+
+* **value-list:** added small spacing ([#918](https://github.com/sebgroup/green/issues/918)) ([bc02a99](https://github.com/sebgroup/green/commit/bc02a99262a1f86a76ef596988b3a0b98a73425b))
+
+
+
 ## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.0...@sebgroup/chlorophyll@1.11.1) (2023-06-19)
 
 
