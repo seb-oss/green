@@ -1,5 +1,5 @@
-import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { LitElement, unsafeCSS } from 'lit'
+import { property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
@@ -7,6 +7,7 @@ import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 import style from './listbox.styles'
 import { watch } from 'utils/decorators'
+import { html, gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-listbox
@@ -21,7 +22,7 @@ import { watch } from 'utils/decorators'
  *
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
-@customElement('gds-listbox')
+@gdsCustomElement('gds-listbox')
 export class GdsListbox extends LitElement implements OptionsContainer {
   static styles = unsafeCSS(style)
 

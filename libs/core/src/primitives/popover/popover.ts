@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js'
 
 import styles from './stem.styles.scss'
 import { watch } from 'utils/decorators'
+import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-popover
@@ -17,7 +18,7 @@ import { watch } from 'utils/decorators'
  * @slot - Content of the popover
  * @fires gds-ui-state - Fired when the popover is opened or closed
  */
-@customElement('gds-popover')
+@gdsCustomElement('gds-popover')
 export class GdsPopover extends LitElement {
   static styles = unsafeCSS(styles)
 

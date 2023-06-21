@@ -58,17 +58,76 @@
  * in a shadow root with a scoped registry instead.
  */
 
-// const elNameList = {
-//   'gds-popover-dynamic': 'gds-popover',
-// }
+//
+import {
+  ClassDescriptor,
+  Constructor,
+} from '@lit/reactive-element/decorators/base.js'
+import { html as litHtml } from 'lit'
 
-// function html(strings: TemplateStringsArray, ...values: any[]) {
-//   let modstrings = strings.map((s) => {
-//     for (const [key, value] of Object.entries(elNameList)) {
-//       s = s.replace(key, value)
-//     }
-//     return s
-//   })
-//   ;(modstrings as any).raw = strings.raw
-//   return litHtml(modstrings as any, ...values)
-// }
+const VER_SUFFIX = '-gdsvsuffix'
+
+const elementLookupTable = new Map<string, string>()
+
+type CustomElementClass = Omit<typeof HTMLElement, 'new'>
+
+const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
+  elementLookupTable.set(tagName, tagName + VER_SUFFIX)
+  customElements.define(tagName + VER_SUFFIX, clazz as CustomElementConstructor)
+  return clazz as any
+}
+
+const standardCustomElement = (
+  tagName: string,
+  descriptor: ClassDescriptor
+) => {
+  const { kind, elements } = descriptor
+  return {
+    kind,
+    elements,
+    // This callback is called once the class is otherwise fully defined
+    finisher(clazz: Constructor<HTMLElement>) {
+      elementLookupTable.set(tagName, tagName + VER_SUFFIX)
+      customElements.define(tagName + VER_SUFFIX, clazz)
+    },
+  }
+}
+
+/**
+ * Class decorator factory that defines the decorated class as a custom element, and registers
+ * it with the custom element registry under a versioned name.
+ *
+ * ```js
+ * @gdsCustomElement('my-element')
+ * class MyElement extends LitElement {
+ *   render() {
+ *     return html``;
+ *   }
+ * }
+ * ```
+ * @category Decorator
+ * @param tagName The tag name of the custom element to define.
+ */
+export const gdsCustomElement =
+  (tagName: string) =>
+  (classOrDescriptor: CustomElementClass | ClassDescriptor) =>
+    typeof classOrDescriptor === 'function'
+      ? legacyCustomElement(tagName, classOrDescriptor)
+      : standardCustomElement(tagName, classOrDescriptor as ClassDescriptor)
+
+/**
+ * Template tag that rewrites all custom element names from the lookup table to include the
+ * version suffix, before passing the template on to the Lit `html` tag.
+ */
+export function html(strings: TemplateStringsArray, ...values: any[]) {
+  let modstrings = strings.map((s) => {
+    for (const [key, value] of elementLookupTable.entries()) {
+      s = s.replace(key, value)
+    }
+    return s
+  })
+  ;(modstrings as any).raw = strings.raw
+  return litHtml(modstrings as any, ...values)
+}
+
+export default {}

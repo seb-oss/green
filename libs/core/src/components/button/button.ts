@@ -1,10 +1,12 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { constrainSlots } from 'utils/helpers'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
 import { effectRipple } from '../../utils/ripple/ripple'
 import styles from './style/button.styles.scss'
+
+import { html } from 'utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-button

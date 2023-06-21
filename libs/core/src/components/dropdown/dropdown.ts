@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { LitElement, unsafeCSS } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
@@ -9,6 +9,7 @@ import 'reflect-metadata'
 import { randomId, constrainSlots } from 'utils/helpers'
 import { watch, observeLightDOM } from 'utils/decorators'
 
+import { html } from 'utils/helpers/custom-element-scoping'
 import 'primitives/listbox'
 import 'primitives/popover'
 
