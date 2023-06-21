@@ -7,12 +7,13 @@ interface IconButtonInterface {
   onClick: (event: MouseEvent) => void
   'aria-expanded'?: boolean
   'aria-controls'?: string
+  size?: 'small' | 'normal'
 }
 
 const IconButton = ({ children, onClick, ...props }: IconButtonInterface) => {
   return (
     <button
-      className="icon"
+      className={`icon ${props.size == 'small' && 'small'}`}
       onClick={onClick}
       aria-controls={props['aria-controls']}
       aria-expanded={props['aria-expanded']}

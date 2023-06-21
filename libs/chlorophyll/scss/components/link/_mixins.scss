@@ -138,7 +138,6 @@ Base on background color of parent element eg. white links on dark backgrounds e
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;
-    text-decoration: none;
     &:hover,
     &:focus,
     &:visited {

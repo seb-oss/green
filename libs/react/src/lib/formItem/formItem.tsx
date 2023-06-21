@@ -22,7 +22,7 @@ interface FormItemProps {
   label?: string
   labelInformation?: string
   validator?: IValidator
-  expandableInfo?: string
+  expandableInfo?: React.ReactNode
   inputId?: string
   children: ReactNode
   expandableInfoButtonLabel?: string
@@ -99,6 +99,7 @@ export const FormItem = ({
         </div>
         {expandableInfo && (
           <IconButton
+            size="small"
             aria-expanded={isExpanded}
             aria-controls={`${inputId}-expandable-info`}
             onClick={async (event) => {

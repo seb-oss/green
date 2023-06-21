@@ -18,7 +18,7 @@ export type Renderer = (
   label?: string,
   info?: string,
   validator?: IValidator,
-  expandableInfo?: string,
+  expandableInfo?: React.ReactNode,
   expandableInfoButtonLabel?: string,
   testId?: string
 ) => JSX.Element

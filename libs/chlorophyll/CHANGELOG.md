@@ -2,6 +2,31 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.0...@sebgroup/chlorophyll@1.11.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **button:** adjust small button size ([#915](https://github.com/sebgroup/green/issues/915)) ([32cf177](https://github.com/sebgroup/green/commit/32cf177a4836c76ce6b098ade77c92f6bd8886e5))
+
+
+
+# [1.11.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.3...@sebgroup/chlorophyll@1.11.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* **expandable-form-info:** use small icon button ([9eb4cd6](https://github.com/sebgroup/green/commit/9eb4cd6ba9aee9d77157c56003e5d5140dbb3e59))
+* **slide-toggle:** darker background and hover-back transition ([#914](https://github.com/sebgroup/green/issues/914)) ([435625d](https://github.com/sebgroup/green/commit/435625dc6dbbf501cf79c82ec9dc790d1e396547))
+
+
+### Features
+
+* **expandable-form-info:** allow custom expandable content ([#913](https://github.com/sebgroup/green/issues/913)) ([bfa6f4e](https://github.com/sebgroup/green/commit/bfa6f4ee6964ae65ec4bdae5ba7b55579495df7d))
+* **icon-button:** add small variant ([6f99ddb](https://github.com/sebgroup/green/commit/6f99ddb4e8ca2c52803d3811e49f0d4bd2e74ede))
+
+
+
 ## [1.10.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.2...@sebgroup/chlorophyll@1.10.3) (2023-05-24)
 
 

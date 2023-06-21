@@ -41,7 +41,7 @@
     }
 
     fieldset + .form-info {
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
 
     input,
@@ -141,11 +141,16 @@
     .form-info {
       font-weight: normal;
     }
+
+    button.icon.small {
+      margin-top: -0.5rem;
+      margin-right: -0.5rem;
+    }
   }
 
   .gds-form-item__labels {
     flex: 1;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 
     .form-info {
       margin-bottom: 0;
@@ -164,10 +169,9 @@
     transition: height tokens.$transition-time;
 
     > div {
-      padding-bottom: .5rem;
+      padding-bottom: 0.5rem;
     }
   }
-
 
   .gds-form-item__backdrop {
     position: absolute;
@@ -185,14 +189,14 @@
     }
   }
 
-  &:has([aria-expanded="true"]) .gds-form-item__backdrop {
+  &:has([aria-expanded='true']) .gds-form-item__backdrop {
     opacity: 1;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     border-color: var(--gds-ref-pallet-base600);
   }
 
   .gds-form-item__footer:not(:empty) {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 }
 
@@ -206,7 +210,6 @@
 }
 
 @mixin add-label() {
-
   &:is(label) {
     // Overriding bootstraps reset.scss for label
     margin-bottom: 0;
@@ -215,7 +218,7 @@
   &.form-control {
     width: fit-content;
     // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
-    @supports (-moz-appearance:none) {
+    @supports (-moz-appearance: none) {
       @include common.add-focus('within');
     }
   }
@@ -226,12 +229,17 @@
     line-height: 1.25rem;
   }
 
-  & + input, & + textarea, fieldset & + div, & + button, & + .group-stepper, & + .stepper-wrapper {
-    margin-top: .5rem;
+  & + input,
+  & + textarea,
+  fieldset & + div,
+  & + button,
+  & + .group-stepper,
+  & + .stepper-wrapper {
+    margin-top: 0.5rem;
   }
 
   & + .form-info {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -240,5 +248,3 @@
     font-weight: 500;
   }
 }
-
-
