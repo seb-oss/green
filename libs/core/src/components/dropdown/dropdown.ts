@@ -1,5 +1,5 @@
 import { LitElement, unsafeCSS } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -9,7 +9,11 @@ import 'reflect-metadata'
 import { randomId, constrainSlots } from 'utils/helpers'
 import { watch, observeLightDOM } from 'utils/decorators'
 
-import { html } from 'utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+  getScopedTagName,
+} from 'utils/helpers/custom-element-scoping'
 import 'primitives/listbox'
 import 'primitives/popover'
 
@@ -35,7 +39,7 @@ import styles from './stem.styles.scss'
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
-@customElement('gds-dropdown')
+@gdsCustomElement('gds-dropdown')
 export class GdsDropdown<ValueType = any>
   extends LitElement
   implements OptionsContainer
@@ -92,7 +96,7 @@ export class GdsDropdown<ValueType = any>
     constrainSlots(this)
 
     this.#optionElements = this.getElementsByTagName(
-      'gds-option'
+      getScopedTagName('gds-option')
     ) as HTMLCollectionOf<GdsOption>
   }
 

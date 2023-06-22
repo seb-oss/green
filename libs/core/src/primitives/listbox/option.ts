@@ -1,8 +1,10 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+
+import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 
 import style from './listbox.styles'
 
@@ -27,7 +29,7 @@ export interface OptionsContainer extends HTMLElement {
  * @event gds-blur - Fired when the option loses focus.
  * @event gds-focus - Fired when the option gains focus.
  */
-@customElement('gds-option')
+@gdsCustomElement('gds-option')
 export class GdsOption extends LitElement {
   static styles = unsafeCSS(style)
 
