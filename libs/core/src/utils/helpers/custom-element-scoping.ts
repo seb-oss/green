@@ -80,23 +80,54 @@ const elementLookupTable = new Map<string, string>()
  * @param tagName The tag name of the custom element to define.
  */
 export const gdsCustomElement = (tagName: string) => {
-  elementLookupTable.set(tagName, tagName + VER_SUFFIX)
-  return customElement(tagName + VER_SUFFIX)
+  if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
+    return customElement(tagName)
+  }
+
+  const versionedTagName = tagName + VER_SUFFIX
+  elementLookupTable.set(tagName, versionedTagName)
+  return customElement(versionedTagName)
+}
+
+function applyElementScoping(
+  strings: TemplateStringsArray,
+  ...values: any[]
+): [string[], ...any[]] {
+  let modstrings = strings.map((s) => {
+    for (const [key, value] of elementLookupTable.entries()) {
+      s = s.split(key).join(value)
+    }
+    return s
+  })
+  ;(modstrings as any).raw = strings.raw
+  return [modstrings as any, ...values]
+}
+
+/**
+ * Template tag factory that creates a new template tag, which rewrites all custom element names from the
+ * lookup table to include the version suffix, and then passes the template on to the provided template tag.
+ */
+export function htmlTemplateTagFactory(
+  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any
+) {
+  return (strings: TemplateStringsArray, ...values: any[]) => {
+    if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
+      return extendedTag(strings, ...values)
+    }
+
+    const [modstrings, ...modvalues] = applyElementScoping(strings, ...values)
+    return extendedTag(modstrings as any, ...modvalues)
+  }
 }
 
 /**
  * Template tag that rewrites all custom element names from the lookup table to include the
  * version suffix, before passing the template on to the Lit `html` tag.
  */
-export function html(strings: TemplateStringsArray, ...values: any[]) {
-  let modstrings = strings.map((s) => {
-    for (const [key, value] of elementLookupTable.entries()) {
-      s = s.replace(key, value)
-    }
-    return s
-  })
-  ;(modstrings as any).raw = strings.raw
-  return litHtml(modstrings as any, ...values)
+export const html = htmlTemplateTagFactory(litHtml)
+
+export function getScopedTagName(tagName: string) {
+  return elementLookupTable.get(tagName) ?? tagName
 }
 
 export default {}
