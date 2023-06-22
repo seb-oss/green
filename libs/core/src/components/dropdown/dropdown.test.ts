@@ -1,11 +1,18 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html, waitUntil } from '@open-wc/testing'
+import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '../../../../../dist/libs/core/src/index.js'
 import type { GdsDropdown } from './dropdown'
+
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '../../../../../dist/libs/core/src/index.js'
+
+const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-dropdown>', () => {
   it('should expose list of options through the `options` field', async () => {
@@ -34,7 +41,9 @@ describe('<gds-dropdown>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const popover = el.shadowRoot!.querySelector<HTMLElement>('gds-popover')!
+    const popover = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-popover')
+    )!
 
     expect(popover.hidden).to.be.false
   })
@@ -185,7 +194,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
 
-    const secondOption = el.querySelectorAll('gds-option')[1]
+    const secondOption = el.querySelectorAll(getScopedTagName('gds-option'))[1]
 
     el.focus()
     await sendKeys({ press: 'ArrowDown' })
@@ -261,7 +270,7 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    const option2 = el.querySelectorAll('gds-option')[1]
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
 
     await clickOnElement(option2, 'center')
     await el.updateComplete
@@ -277,7 +286,7 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    const option2 = el.querySelectorAll('gds-option')[1]
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
 
     const changeHandler = sinon.spy()
     el.addEventListener('change', changeHandler)
@@ -351,7 +360,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
 
-    const option1 = el.querySelectorAll('gds-option')[0]
+    const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
     el.removeChild(option1)
     await el.updateComplete
 
@@ -409,7 +418,9 @@ describe('<gds-dropdown searchable>', () => {
     await sendKeys({ type: '2' })
     await el.updateComplete
 
-    const options = el.querySelectorAll('gds-option:not([aria-hidden="true"])')
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
+    )
 
     expect(options.length).to.equal(1)
     expect(options[0].textContent).to.equal('Option 2')
@@ -430,7 +441,9 @@ describe('<gds-dropdown searchable>', () => {
     await sendKeys({ type: '2' })
     await el.updateComplete
 
-    const options = el.querySelectorAll('gds-option:not([aria-hidden="true"])')
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
+    )
 
     expect(options.length).to.equal(1)
     expect(options[0].textContent).to.equal('Option 2')
@@ -447,8 +460,8 @@ describe('<gds-dropdown multiple>', () => {
       </gds-dropdown>
     `)
 
-    const option2 = el.querySelectorAll('gds-option')[1]
-    const option3 = el.querySelectorAll('gds-option')[2]
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+    const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
 
     await clickOnElement(option2, 'center')
     await el.updateComplete
