@@ -370,9 +370,3 @@ export class GdsDropdown<ValueType = any>
     if (isClickOutside || isFocusOutside) this.open = false
   }
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'gds-dropdown': GdsDropdown
-  }
-}
