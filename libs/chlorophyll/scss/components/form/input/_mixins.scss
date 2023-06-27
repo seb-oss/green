@@ -33,6 +33,12 @@ $background: var(--sg-form-control-bg);
     align-items: center;
     justify-content: center;
 
+    &.small {
+      min-height: 2rem;
+      padding: 0.25rem 0.75rem;
+      line-height: 1rem;
+    }
+
     @media screen and (-ms-high-contrast: active) {
       border: 2px solid currentcolor;
     }

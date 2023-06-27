@@ -43,13 +43,24 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   {Template.bind({})}
 </Story>
 
-# Input
+# Input normal size
 
 <Canvas>
   <div class="form-group">
     <label for="inputInvalid">Input label</label>
     <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
     <input id="inputInvalid" type="text" />
+    <span class="form-info">Neutral</span>
+  </div>
+</Canvas>
+
+# Input small size
+
+<Canvas>
+  <div class="form-group">
+    <label for="inputSmall">Input label</label>
+    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <input id="inputSmall" type="text" class="small" />
     <span class="form-info">Neutral</span>
   </div>
 </Canvas>
