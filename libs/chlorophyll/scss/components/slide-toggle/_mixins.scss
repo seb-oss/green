@@ -19,7 +19,7 @@ $_track_color_pressed_hover: hsl(var(--sg-hsl-green-2));
 $_thumb_width: 1.25rem;
 $_thumb_width_mobile: 1.75rem;
 $_thumb_transition_time: 300ms;
-$_thumb_hover_nudge: .25rem;
+$_thumb_hover_nudge: 0.25rem;
 $_thumb_color: white;
 
 $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
@@ -39,6 +39,11 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   vertical-align: sub;
   transition: $_track_transition_time;
 
+  .dark &,
+  .dark-mode & {
+    border: 1px solid var(--gds-ref-pallet-base200);
+  }
+
   // Thumb
   &::after {
     content: '';
@@ -47,14 +52,12 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
     height: 100%;
     border-radius: 100%;
     aspect-ratio: 1;
-    box-shadow:
-      0 2px 8px 0 rgba(0,0,0,0.15),
-      0 1px 2px 0 rgba(0,0,0,0.15),
-      0 1px 0 0 rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.15),
+      0 1px 0 0 rgba(0, 0, 0, 0.06);
     transition: $_thumb_transition_time;
   }
 
-  @media (hover: hover) { 
+  @media (hover: hover) {
     &:hover {
       background-color: $_track_color_hover;
     }
@@ -72,15 +75,21 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
 @mixin add-slide-toggle-state-checked {
   //                                            Padding
   $thumb_pressed_translateX: $_track_width - (0.125rem * 2) - $_thumb_width;
-  $thumb_pressed_translateX_mobile: $_track_width_mobile - (0.125rem * 2) - $_thumb_width_mobile;
+  $thumb_pressed_translateX_mobile: $_track_width_mobile - (0.125rem * 2) -
+    $_thumb_width_mobile;
 
   background: $_track_color_pressed;
+
+  .dark &,
+  .dark-mode & {
+    border: 1px solid $_track_color_pressed;
+  }
 
   &::after {
     transform: translateX($thumb_pressed_translateX);
   }
 
-  @media (hover: hover) { 
+  @media (hover: hover) {
     &:hover {
       background-color: $_track_color_pressed_hover;
       transition: $_track_transition_time;
@@ -97,9 +106,11 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
     }
     @media (hover: hover) {
       &:hover::after {
-        transform: translateX($thumb_pressed_translateX_mobile - $_thumb_hover_nudge);
+        transform: translateX(
+          $thumb_pressed_translateX_mobile - $_thumb_hover_nudge
+        );
         transition: $_thumb_transition_time;
       }
-    } 
+    }
   }
 }
