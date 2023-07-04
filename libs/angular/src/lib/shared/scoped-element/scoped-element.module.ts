@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { ScopedElementDirective } from './scoped-element.directive'
+import { NggScopedElementDirective } from './scoped-element.directive'
 
 @NgModule({
-  declarations: [ScopedElementDirective],
+  declarations: [NggScopedElementDirective],
   imports: [CommonModule],
-  exports: [ScopedElementDirective],
+  exports: [NggScopedElementDirective],
 })
 export class NggCoreWrapperModule {}

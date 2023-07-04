@@ -15,7 +15,7 @@ import { getScopedTagName } from '@sebgroup/green-core'
 @Directive({
   selector: '[gdsScopedElement]',
 })
-export class ScopedElementDirective implements OnInit {
+export class NggScopedElementDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null
   private readonly document = inject(DOCUMENT)
   private readonly renderer = inject(Renderer2)

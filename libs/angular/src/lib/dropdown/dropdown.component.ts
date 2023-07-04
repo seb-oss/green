@@ -1,7 +1,4 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -9,10 +6,7 @@ import {
   Inject,
   Injector,
   Input,
-  OnChanges,
-  OnDestroy,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core'
 import {
@@ -156,6 +150,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
   }
 
   constructor(@Inject(Injector) private injector: Injector) {
+    console.log('derp: ', registerTransitionalStyles)
     registerTransitionalStyles()
   }
 
