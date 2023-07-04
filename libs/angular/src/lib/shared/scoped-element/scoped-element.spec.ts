@@ -1,8 +1,5 @@
 import { Component } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
-import { By } from '@angular/platform-browser'
-import { fireEvent } from '@testing-library/angular'
-import { Subject } from 'rxjs'
 import { NggScopedElementDirective } from './scoped-element.directive'
 
 @Component({
@@ -10,8 +7,12 @@ import { NggScopedElementDirective } from './scoped-element.directive'
 })
 class TestComponent {}
 
+jest.mock('@sebgroup/green-core', () => ({
+  getScopedTagName: jest.fn(() => 'scoped-tag'),
+}))
+
 describe('NggScopedElementDirective', () => {
-  let component: NggScopedElementDirective
+  let component: TestComponent
   let parent: HTMLElement
 
   beforeEach(async () => {
@@ -21,20 +22,9 @@ describe('NggScopedElementDirective', () => {
     const fixture = TestBed.createComponent(TestComponent)
     parent = fixture.debugElement.nativeElement
     fixture.detectChanges()
-    component = fixture.debugElement
-      .query(By.directive(NggScopedElementDirective))
-      .injector.get(NggScopedElementDirective)
   })
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
-  })
-
-  it('should add scoping to element name', () => {
-    const spy = jest.fn()
-
-    fireEvent.scroll(parent)
-
-    expect(spy).toHaveBeenCalledTimes(1)
+  it('should create an element with the scoped tag name', () => {
+    expect(parent.querySelector('scoped-tag')).toBeTruthy()
   })
 })

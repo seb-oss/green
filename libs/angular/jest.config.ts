@@ -15,6 +15,9 @@ export default {
     ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
+  moduleNameMapper: {
+    '@sebgroup/green-core': '<rootDir>/../../dist/libs/core/src',
+  },
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
