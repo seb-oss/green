@@ -40,7 +40,6 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   vertical-align: sub;
   transition: $_track_transition_time;
 
-  .dark &,
   .dark-mode & {
     border: 1px solid var(--sg-grey-200);
   }
@@ -81,7 +80,6 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
 
   background: $_track_color_pressed;
 
-  .dark &,
   .dark-mode & {
     border: 1px solid $_track_color_pressed_dark_mode;
     background: $_track_color_pressed_dark_mode;
@@ -100,7 +98,6 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
       transform: translateX($thumb_pressed_translateX - $_thumb_hover_nudge);
       transition: $_thumb_transition_time;
     }
-    .dark &:hover,
     .dark-mode &:hover {
       border: 1px solid $_track_color_pressed_hover;
     }
