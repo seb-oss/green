@@ -100,6 +100,10 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
       transform: translateX($thumb_pressed_translateX - $_thumb_hover_nudge);
       transition: $_thumb_transition_time;
     }
+    .dark &:hover,
+    .dark-mode &:hover {
+      border: 1px solid $_track_color_pressed_hover;
+    }
   }
 
   @media (max-width: $_breakpoint-mobile-layout) {
