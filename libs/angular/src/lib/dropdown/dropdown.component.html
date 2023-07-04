@@ -1,11 +1,12 @@
 <div class="form-group">
   <gds-dropdown
+    *gdsScopedElement
+    #gdsDropdown
     [value]="selectedOption"
     [searchable]="searchable"
     [label]="label"
     (change)="onValueChange($event)"
     [multiple]="multiSelect"
-    #gdsDropdown
   >
     <span class="form-info" slot="form-info" #formInfo
       ><ng-content select="[data-form-info]"></ng-content
@@ -20,16 +21,18 @@
       ></ng-container
     ></span>
 
-    <gds-option
-      *ngFor="let option of options; let index = index"
-      [value]="option"
-      ><ng-container
-        *ngTemplateOutlet="
-          customOption?.templateRef ? customOption!.templateRef : defaultOption;
-          context: { option: option, index: index }
-        "
-      ></ng-container
-    ></gds-option>
+    <ng-container *ngFor="let option of options; let index = index">
+      <gds-option *gdsScopedElement [value]="option"
+        ><ng-container
+          *ngTemplateOutlet="
+            customOption?.templateRef
+              ? customOption!.templateRef
+              : defaultOption;
+            context: { option: option, index: index }
+          "
+        ></ng-container
+      ></gds-option>
+    </ng-container>
   </gds-dropdown>
 </div>
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { NggDropdownComponent } from './dropdown.component'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
+import { NggCoreWrapperModule } from '../../scoped-element/scoped-element.module'
 
 @NgModule({
   declarations: [
@@ -10,7 +11,7 @@ import { NggDropdownButtonDirective } from './dropdown-button.directive'
     NggDropdownOptionDirective,
     NggDropdownButtonDirective,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, NggCoreWrapperModule],
   exports: [NggDropdownComponent, NggDropdownOptionDirective],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
