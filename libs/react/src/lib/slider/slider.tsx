@@ -125,6 +125,7 @@ export function Slider({
               value={inputFieldValue}
               id={`${name}-textbox`}
               name={name}
+              aria-label='Slider value'
               className={errorMessage ? 'is-invalid' : ''}
               disabled={disabled}
               onChange={(e) => handleInputFieldChange(e.currentTarget.value)}

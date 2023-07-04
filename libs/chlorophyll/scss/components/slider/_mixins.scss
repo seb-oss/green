@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../tokens/grid';
 @use '../../tokens/shame';
-@use '../../common/breakpoints';
+@use '../../common';
 
 $spacing: 1rem;
 $dark-blue-1: #0092e1;
@@ -20,7 +20,6 @@ $track-color: shame.$grey-500;
 $track-height: 0.25rem;
 
 $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
-$breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
 
 @mixin add-thumb-styles() {
   background: $dark-blue-1;
@@ -87,9 +86,11 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
 }
 
 @mixin add-slider-label-container-styles() {
-  display: flex;
-  justify-content: space-between;
-  gap: $spacing;
+  @include common.media-breakpoint-up('sm') {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing;
+  }
   margin-bottom: $spacing;
 
   > * {
@@ -99,11 +100,26 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
   label {
     flex-grow: 1;
     width: 100%;
+
+    @include common.media-breakpoint-down('sm') {
+      display: block;
+      margin-bottom: 0.75rem;
+    }
   }
 
   .group input {
     width: 100%;
     text-align: end;
+
+    @include common.media-breakpoint-up('sm') {
+      min-height: 2rem;
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
+  .group span {
+    min-height: 2rem;
+    padding: 0.25rem 0.75rem;
   }
 
   .group,
@@ -111,7 +127,16 @@ $breakpoint-mobile-layout: map.get(grid.$grid-breakpoints, 'md');
     flex-shrink: 1;
     min-width: auto;
     width: 100%;
-    max-width: 12rem;
+    @include common.media-breakpoint-up('sm') {
+      max-width: 12rem;
+    }
+  }
+
+  @include common.media-breakpoint-up('sm') {
+    > input {
+      min-height: 2rem;
+      padding: 0.25rem 0.75rem;
+    }
   }
 
   label + p {

@@ -8,11 +8,11 @@ export const Template = ({ unitLabel, showMinMax }) => {
         ${
           unitLabel
             ? `<div class="group group-border">
-          <input type="number" />
+          <input type="number" aria-label="Slider value" />
           <span class="form-text">${unitLabel}</span>
         </div>
         `
-            : '<input type="number" />'
+            : '<input type="number" aria-label="Slider value" />'
         }
     </div>
     <input type="range" id="gds-slider" />
