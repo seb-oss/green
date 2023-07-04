@@ -8,7 +8,7 @@ import { NggScopedElementDirective } from './scoped-element.directive'
 class TestComponent {}
 
 jest.mock('@sebgroup/green-core', () => ({
-  getScopedTagName: jest.fn(() => 'scoped-tag'),
+  getScopedTagName: jest.fn((name) => name + '-scoped'),
 }))
 
 describe('NggScopedElementDirective', () => {
@@ -25,6 +25,6 @@ describe('NggScopedElementDirective', () => {
   })
 
   it('should create an element with the scoped tag name', () => {
-    expect(parent.querySelector('scoped-tag')).toBeTruthy()
+    expect(parent.querySelector('div-scoped')).toBeTruthy()
   })
 })
