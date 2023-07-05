@@ -222,7 +222,9 @@ const pop = (
       _popperModifiers.push({
         name: 'flip',
         options: {
-          allowedAutoPlacements: [],
+          fallbackPlacements: [],
+          flipVariations: false,
+          allowedAutoPlacements: [fixedPlacement],
         },
       })
     }
