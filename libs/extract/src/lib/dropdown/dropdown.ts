@@ -227,8 +227,6 @@ const pop = (
       })
     }
 
-    console.log(_popperModifiers)
-
     handler.popper = createPopper(handler.toggler, handler.listbox, {
       placement: fixedPlacement ?? 'bottom-start',
       modifiers: _popperModifiers,
