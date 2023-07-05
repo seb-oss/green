@@ -218,7 +218,7 @@ const pop = (
       },
     ]
 
-    if (!!fixedPlacement) {
+    if (fixedPlacement) {
       _popperModifiers.push({
         name: 'flip',
         options: {
@@ -226,6 +226,8 @@ const pop = (
         },
       })
     }
+
+    console.log(_popperModifiers)
 
     handler.popper = createPopper(handler.toggler, handler.listbox, {
       placement: fixedPlacement ?? 'bottom-start',
