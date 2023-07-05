@@ -9,6 +9,7 @@ import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 import style from './listbox.styles'
 
 import 'reflect-metadata'
+import { watch } from 'utils/decorators'
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean
@@ -46,7 +47,16 @@ export class GdsOption extends LitElement {
     attribute: 'aria-hidden',
     reflect: true,
   })
-  hidden: boolean = false
+  get hidden(): boolean {
+    return this.#hidden
+  }
+  set hidden(value: string | boolean) {
+    if (this.isPlaceholder) return
+
+    this.#hidden = value === 'true' || value === true
+    this.setAttribute('aria-hidden', value.toString())
+  }
+  #hidden: boolean = false
 
   /**
    * Returns true if the option is selected.
@@ -64,8 +74,8 @@ export class GdsOption extends LitElement {
    *
    * In a multiple select listbox, placeholder options will not be rendered in the list.
    */
-  @property({ type: Boolean })
-  placeholder: boolean = false
+  @property({ type: Boolean, reflect: true })
+  isPlaceholder: boolean = false
 
   constructor() {
     super()
@@ -82,6 +92,11 @@ export class GdsOption extends LitElement {
     super.connectedCallback()
     this.setAttribute('role', 'option')
 
+    if (this.isPlaceholder) {
+      this.#hidden = true
+      this.setAttribute('aria-hidden', 'true')
+    }
+
     this.updateComplete.then(() =>
       TransitionalStyles.instance.apply(this, 'gds-option')
     )
@@ -89,6 +104,17 @@ export class GdsOption extends LitElement {
 
   get parentElement() {
     return super.parentElement as OptionsContainer
+  }
+
+  @watch('isplaceholder')
+  handlePlaceholderStatusChange() {
+    if (this.isPlaceholder) {
+      this.#hidden = true
+      this.setAttribute('aria-hidden', 'true')
+    } else {
+      this.#hidden = false
+      this.setAttribute('aria-hidden', 'false')
+    }
   }
 
   /**

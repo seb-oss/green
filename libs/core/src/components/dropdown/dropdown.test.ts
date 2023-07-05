@@ -93,11 +93,11 @@ describe('<gds-dropdown>', () => {
     expect(label.getAttribute('for')).to.equal(trigger.id)
   })
 
-  it('options marked `placeholder` overrides default value', async () => {
+  it('options marked `isPlaceholder` overrides default value', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
         <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2" placeholder>Option 2</gds-option>
+        <gds-option value="v2" isPlaceholder>Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
@@ -106,11 +106,11 @@ describe('<gds-dropdown>', () => {
     expect(el.displayValue).to.equal('Option 2')
   })
 
-  it('should expose placeholder through `placeholder` field', async () => {
+  it('should expose isPlaceholder through `isPlaceholder` field', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
         <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2" placeholder>Option 2</gds-option>
+        <gds-option value="v2" isPlaceholder>Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
@@ -119,7 +119,7 @@ describe('<gds-dropdown>', () => {
     expect(el.placeholder!.textContent).to.equal('Option 2')
   })
 
-  it('should have undefined `placeholder` if none is specified', async () => {
+  it('should have undefined `isPlaceholder` if none is specified', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
         <gds-option value="v1">Option 1</gds-option>
@@ -151,7 +151,7 @@ describe('<gds-dropdown>', () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
         <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2" placeholder>Option 2</gds-option>
+        <gds-option value="v2" isPlaceholder>Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
@@ -485,10 +485,10 @@ describe('<gds-dropdown multiple>', () => {
     expect(el.displayValue).to.equal('')
   })
 
-  it('should suppoert placeholder option', async () => {
+  it('should suppoert isPlaceholder option', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown multiple>
-        <gds-option placeholder>Select values</gds-option>
+        <gds-option isPlaceholder>Select values</gds-option>
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>

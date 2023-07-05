@@ -114,17 +114,17 @@ export class GdsDropdown<ValueType = any>
    */
   get options() {
     return Array.from(this.#optionElements).filter(
-      (o) => !o.hasAttribute('placeholder')
+      (o) => !o.hasAttribute('isplaceholder')
     )
   }
 
   /**
-   * Return the first option with a placeholder attribute.
+   * Return the first option with a isPlaceholder attribute.
    * If no placeholder is found, this will be undefined.
    */
   get placeholder() {
     return Array.from(this.#optionElements).find((o) =>
-      o.hasAttribute('placeholder')
+      o.hasAttribute('isplaceholder')
     )
   }
 
