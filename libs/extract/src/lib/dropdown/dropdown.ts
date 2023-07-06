@@ -28,13 +28,16 @@ import { isMobileViewport$ } from '../common/viewport-size'
 import { getOptionScrollPosition } from './helper-functions'
 import { IValidator } from '../helperFunction'
 
+export type DropdownPlacements = 'bottom-start' | 'top-start'
+
 export const createDropdown = (
   init: DropdownArgs,
   toggler: HTMLElement,
   listbox: HTMLElement,
   fieldset: HTMLElement | undefined = undefined,
   listener: DropdownListener,
-  onChange: OnChange
+  onChange: OnChange,
+  fixedPlacement?: DropdownPlacements
 ): DropdownHandler => {
   const handler: DropdownHandler = {
     toggler,
@@ -130,7 +133,7 @@ export const createDropdown = (
     .pipe(takeUntil(handler.onDestroy$))
     .subscribe((isMobile) => {
       lockBodyScroll(handler, isMobile)
-      pop(handler, listener, isMobile)
+      pop(handler, listener, isMobile, fixedPlacement)
     })
 
   handler.destroy = () => {
@@ -197,7 +200,8 @@ const update = async (
 const pop = (
   handler: DropdownHandler,
   listener: DropdownListener,
-  isMobile: boolean
+  isMobile: boolean,
+  fixedPlacement?: DropdownPlacements
 ) => {
   if (isMobile && handler.popper) {
     handler.popper.destroy()
@@ -205,16 +209,29 @@ const pop = (
 
     update(handler, listener, popper(handler.dropdown))
   } else if (!isMobile && !handler.popper) {
-    handler.popper = createPopper(handler.toggler, handler.listbox, {
-      placement: 'bottom-start',
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 4],
-          },
+    const _popperModifiers: Array<{ name: string; options: any }> = [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 4],
         },
-      ],
+      },
+    ]
+
+    if (fixedPlacement) {
+      _popperModifiers.push({
+        name: 'flip',
+        options: {
+          fallbackPlacements: [],
+          flipVariations: false,
+          allowedAutoPlacements: [fixedPlacement],
+        },
+      })
+    }
+
+    handler.popper = createPopper(handler.toggler, handler.listbox, {
+      placement: fixedPlacement ?? 'bottom-start',
+      modifiers: _popperModifiers,
     })
 
     update(handler, listener, handler.dropdown)

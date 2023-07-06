@@ -28,6 +28,7 @@ import {
   DropdownHandler,
   DropdownOption,
   DropdownOptionElement,
+  DropdownPlacements,
   DropdownTexts,
   dropdownValues,
   ElementProps,
@@ -62,6 +63,7 @@ export class NggDropdownComponent
   @Input() invalid?: boolean
   @Input() compareWith?: CompareWith
   @Input() searchFilter?: SearchFilter
+  @Input() fixedPlacement?: DropdownPlacements
 
   @Input() set multiSelect(value: string | boolean) {
     this._multiSelect = this.convertToBoolean(value)
@@ -140,7 +142,8 @@ export class NggDropdownComponent
         },
         (value) => {
           this.updateValue(value)
-        }
+        },
+        this.fixedPlacement
       )
     }
   }
