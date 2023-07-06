@@ -140,15 +140,23 @@ export class GdsDropdown<ValueType = any>
    * If the dropdown is in multiple mode, this will be a comma separated list of the selected values.
    */
   get displayValue() {
-    const displayValue = Array.isArray(this.value)
-      ? this.value
-          .reduce(
-            (acc: string, cur: ValueType) =>
-              acc + this.options.find((v) => v.value === cur)?.innerHTML + ', ',
-            ''
-          )
-          .slice(0, -2)
-      : this.options.find((v) => v.selected)?.innerHTML
+    let displayValue: string | undefined
+
+    if (Array.isArray(this.value)) {
+      this.value.length > 2
+        ? (displayValue = `${this.value.length} selected`)
+        : (displayValue = this.value
+            .reduce(
+              (acc: string, cur: ValueType) =>
+                acc +
+                this.options.find((v) => v.value === cur)?.innerHTML +
+                ', ',
+              ''
+            )
+            .slice(0, -2))
+    } else {
+      displayValue = this.options.find((v) => v.selected)?.innerHTML
+    }
 
     return displayValue || this.placeholder?.innerHTML || ''
   }
