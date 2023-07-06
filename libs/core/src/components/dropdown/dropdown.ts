@@ -4,6 +4,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
+import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import 'reflect-metadata'
 
 import { randomId, constrainSlots } from 'utils/helpers'
@@ -94,6 +95,7 @@ export class GdsDropdown<ValueType = any>
     super()
     this.#internals = this.attachInternals()
     constrainSlots(this)
+    updateWhenLocaleChanges(this)
 
     this.#optionElements = this.getElementsByTagName(
       getScopedTagName('gds-option')
@@ -144,7 +146,7 @@ export class GdsDropdown<ValueType = any>
 
     if (Array.isArray(this.value)) {
       this.value.length > 2
-        ? (displayValue = `${this.value.length} selected`)
+        ? (displayValue = msg(str`${this.value.length} selected`))
         : (displayValue = this.value
             .reduce(
               (acc: string, cur: ValueType) =>
@@ -194,8 +196,8 @@ export class GdsDropdown<ValueType = any>
           this.searchable,
           () => html`<input
             type="text"
-            aria-label="Filter available options"
-            placeholder="Search"
+            aria-label="${msg('Filter available options')}"
+            placeholder="${msg('Search')}"
             ${ref(this.#searchInputRef)}
             @keydown=${this.#handleSearchFieldKeyDown}
             @keyup=${this.#handleSearchFieldKeyUp}
