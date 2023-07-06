@@ -70,7 +70,7 @@ export class GdsDropdown<ValueType = any>
   /**
    * Whether the dropdown should be searchable.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   searchable = false
 
   /**
@@ -78,7 +78,7 @@ export class GdsDropdown<ValueType = any>
    * When set to true, the dropdown will render a checkbox next to each option.
    * The value of the dropdown will be an array of the selected values.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   multiple = false
 
   // Private members
@@ -212,6 +212,7 @@ export class GdsDropdown<ValueType = any>
    */
   @observeLightDOM()
   private _handleLightDOMChange() {
+    this.requestUpdate()
     if (this.multiple) return
 
     // Set default value if none is set
@@ -227,7 +228,6 @@ export class GdsDropdown<ValueType = any>
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
     }
-    this.requestUpdate()
   }
 
   /**
