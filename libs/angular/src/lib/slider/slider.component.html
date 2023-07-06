@@ -1,6 +1,6 @@
 <div *ngIf="!!label" class="gds-slider-label-container">
   <div>
-    <label [attr.for]="name">{{ label }}</label>
+    <label [attr.for]="name" [attr.id]="name + '-label'">{{ label }}</label>
     <p *ngIf="!!instruction">{{ instruction }}</p>
   </div>
   <ng-container *ngIf="hasTextbox">
@@ -42,7 +42,7 @@
     [attr.name]="name"
     [attr.id]="name + '-textbox'"
     [attr.placeholder]="placeholder"
-    [attr.aria-label]="'Slider value'"
+    [attr.aria-labelledby]="name + '-label'"
     [disabled]="disabled"
     (blur)="onBlur()"
     (input)="handleChange()"

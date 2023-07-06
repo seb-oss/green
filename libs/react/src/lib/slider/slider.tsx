@@ -113,7 +113,7 @@ export function Slider({
         <div>
           {label && (
             <>
-              <label htmlFor={name}>{label}</label>
+              <label htmlFor={name} id={`${name}-label`}>{label}</label>
               {instruction && <p>{instruction}</p>}
             </>
           )}
@@ -125,7 +125,7 @@ export function Slider({
               value={inputFieldValue}
               id={`${name}-textbox`}
               name={name}
-              aria-label='Slider value'
+              aria-labelledby={`${name}-label`}
               className={errorMessage ? 'is-invalid' : ''}
               disabled={disabled}
               onChange={(e) => handleInputFieldChange(e.currentTarget.value)}
