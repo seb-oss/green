@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.4...@sebgroup/extract@1.4.0) (2023-07-07)
+
+
+### Features
+
+* **dropdown:** 🎸 new input to set fixed placement of popover ([#930](https://github.com/sebgroup/green/issues/930)) ([ff782d6](https://github.com/sebgroup/green/commit/ff782d67602883e7f56af239d08a8c44a264f321))
+
+
+
 ## [1.3.4](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.3...@sebgroup/extract@1.3.4) (2023-05-24)
 
 
