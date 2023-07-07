@@ -25,7 +25,8 @@ import type {
 } from 'primitives/listbox'
 import type { GdsPopover } from 'primitives/popover'
 
-import styles from './stem.styles.scss'
+import styles from './dropdown.styles'
+import { TransitionalStyles } from 'utils/helpers/transitional-styles'
 
 /**
  * @element gds-dropdown
@@ -45,8 +46,7 @@ export class GdsDropdown<ValueType = any>
   extends LitElement
   implements OptionsContainer
 {
-  static styles = unsafeCSS(styles)
-
+  static styles = styles
   static formAssociated = true
 
   /**
@@ -106,6 +106,7 @@ export class GdsDropdown<ValueType = any>
 
   connectedCallback() {
     super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-dropdown')
 
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
