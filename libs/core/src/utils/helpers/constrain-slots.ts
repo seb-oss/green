@@ -37,9 +37,8 @@ export function constrainSlots(self: LitElement) {
       }
     }
 
-    slots.forEach(constrain)
-
-    slots?.forEach((slot) => {
+    slots.forEach((slot) => {
+      constrain(slot)
       slot.addEventListener('slotchange', () => constrain(slot))
     })
   })
