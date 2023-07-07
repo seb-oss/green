@@ -1,7 +1,11 @@
-import * as Listbox from 'primitives/listbox/listbox.styles.trans'
+import * as Listbox from 'primitives/listbox/listbox.trans.styles'
+import * as Popover from 'primitives/popover/popover.trans.styles'
+import * as Dropdown from 'components/dropdown/dropdown.trans.styles'
 
 export const registerTransitionalStyles = () => {
+  Dropdown.register()
   Listbox.register()
+  Popover.register()
 }
 
 export class TransitionalStyles {

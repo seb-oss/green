@@ -6,7 +6,7 @@ import { TransitionalStyles } from 'utils/helpers/transitional-styles'
 
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 
-import style from './listbox.styles'
+import style from './option.styles'
 
 import 'reflect-metadata'
 import { watch } from 'utils/decorators'
@@ -32,7 +32,7 @@ export interface OptionsContainer extends HTMLElement {
  */
 @gdsCustomElement('gds-option')
 export class GdsOption extends LitElement {
-  static styles = unsafeCSS(style)
+  static styles = style
 
   /**
    * The value of the option.

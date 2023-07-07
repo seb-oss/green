@@ -24,7 +24,7 @@ import { html, gdsCustomElement } from 'utils/helpers/custom-element-scoping'
  */
 @gdsCustomElement('gds-listbox')
 export class GdsListbox extends LitElement implements OptionsContainer {
-  static styles = unsafeCSS(style)
+  static styles = style
 
   /**
    * Controls whether the listbox allows multiple selection or not.

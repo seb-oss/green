@@ -1,9 +1,11 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import styles from './stem.styles.scss'
 import { watch } from 'utils/decorators'
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+
+import styles from './popover.styles'
 
 /**
  * @element gds-popover
@@ -41,6 +43,7 @@ export class GdsPopover extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-popover')
     this.#registerTriggerEvents()
     this._updateHidden()
 
