@@ -14,6 +14,8 @@ import {
   registerTransitionalStyles,
 } from '@sebgroup/green-core'
 
+registerTransitionalStyles()
+
 export const CoreDropdown = createComponent({
   tagName: getScopedTagName('gds-dropdown'),
   elementClass: GdsDropdown,
@@ -48,10 +50,6 @@ export const Dropdown = ({
   validator,
   value,
 }: DropdownProps) => {
-  React.useEffect(() => {
-    registerTransitionalStyles()
-  }, [])
-
   const [selectedOption, setSelectedOption] = React.useState<
     DropdownOption | undefined
   >(options.find((o) => o.value === value))
