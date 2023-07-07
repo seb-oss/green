@@ -90,6 +90,7 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
     display: flex;
     justify-content: space-between;
     gap: $spacing;
+    align-items: flex-start;
   }
   margin-bottom: $spacing;
 
