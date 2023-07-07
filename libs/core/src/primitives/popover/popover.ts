@@ -93,7 +93,9 @@ export class GdsPopover extends LitElement {
         ?.querySelector('slot')
         ?.assignedElements()[0] as HTMLElement
 
-      firstSlottedChild?.focus()
+      this.updateComplete.then(() => {
+        firstSlottedChild?.focus()
+      })
     }
     if (e.key === 'Escape') {
       this.#setOpen(false)
