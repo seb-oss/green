@@ -5,7 +5,7 @@
 @include input.add-text-input();
 
 :host {
-  display: contents;
+  display: inline-block;
 }
 
 input[type='text'] {
@@ -24,4 +24,12 @@ button {
 
   font-size: inherit;
   font-weight: normal;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  line-height: 1.25rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
