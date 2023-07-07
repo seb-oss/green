@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.2...@sebgroup/chlorophyll@1.11.3) (2023-07-07)
+
+
+### Bug Fixes
+
+* **input:** added small version ([#921](https://github.com/sebgroup/green/issues/921)) ([cbaff51](https://github.com/sebgroup/green/commit/cbaff51539c9a72741521f772c3889852e7411ea))
+* **slide-toggle:** dark mode border ([#927](https://github.com/sebgroup/green/issues/927)) ([3803917](https://github.com/sebgroup/green/commit/3803917cf19815b67b6a4821f2c4f1da066ae4c6))
+* **slider:** mobile version, small input on desktop, added `aria-labelledby` ([#929](https://github.com/sebgroup/green/issues/929)) ([456c934](https://github.com/sebgroup/green/commit/456c934443e94766231c284b3f1eaa4e8bc6b040)), closes [#902](https://github.com/sebgroup/green/issues/902) [#920](https://github.com/sebgroup/green/issues/920) [#923](https://github.com/sebgroup/green/issues/923)
+
+
+
 ## [1.11.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.1...@sebgroup/chlorophyll@1.11.2) (2023-06-21)
 
 
