@@ -124,8 +124,22 @@ export function htmlTemplateTagFactory(
  */
 export const html = htmlTemplateTagFactory(litHtml)
 
+/**
+ * Returns the correctly scoped tag name for the given tag.
+ * @param tagName The tag name to scope
+ */
 export function getScopedTagName(tagName: string) {
   return elementLookupTable.get(tagName) ?? tagName
+}
+
+/**
+ * Returns the unscoped tag name for the given scoped tag.
+ * @param tagName The scoped tag name to unscope
+ */
+export function getUnscopedTagName(tagName: string) {
+  return [...elementLookupTable.entries()].find(
+    ([, value]) => value === tagName
+  )?.[0]
 }
 
 export default {}
