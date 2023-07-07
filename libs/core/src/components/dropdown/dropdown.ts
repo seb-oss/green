@@ -97,6 +97,8 @@ export class GdsDropdown<ValueType = any>
     constrainSlots(this)
     updateWhenLocaleChanges(this)
 
+    this.setAttribute('tabindex', '0')
+
     this.#optionElements = this.getElementsByTagName(
       getScopedTagName('gds-option')
     ) as HTMLCollectionOf<GdsOption>
@@ -130,11 +132,8 @@ export class GdsDropdown<ValueType = any>
     )
   }
 
-  /**
-   * focuses the trigger button of the dropdown.
-   */
-  focus(options?: FocusOptions | undefined): void {
-    this.#triggerRef.value?.focus(options)
+  onfocus = (ev: FocusEvent) => {
+    this.#triggerRef.value?.focus()
   }
 
   /**
