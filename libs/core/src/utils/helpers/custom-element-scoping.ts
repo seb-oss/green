@@ -87,19 +87,35 @@ export const gdsCustomElement = (tagName: string) => {
   return customElement(versionedTagName)
 }
 
+/**
+ * This function replaces all custom element names from the lookup table to include the
+ * version suffix. We also cache the result, so that we don't have to do the replacement
+ * more than once for each template, and also so that the Lit template caching works properly,
+ * since it expects the same TemplateStringArray instance to be passed in each time.
+ */
+const templateCache = new WeakMap<TemplateStringsArray, string[]>()
 function applyElementScoping(
   strings: TemplateStringsArray,
   ...values: any[]
 ): [string[], ...any[]] {
-  let modstrings = strings.map((s) => {
+  let modstrings = templateCache.get(strings)
+
+  if (!modstrings) {
+    modstrings = replaceTags(strings)
+    ;(modstrings as any).raw = replaceTags(strings.raw)
+    templateCache.set(strings, modstrings)
+  }
+
+  return [modstrings as any, ...values]
+}
+
+const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
+  inStr.map((s) => {
     for (const [key, value] of elementLookupTable.entries()) {
       s = s.split(key).join(value)
     }
     return s
   })
-  ;(modstrings as any).raw = strings.raw
-  return [modstrings as any, ...values]
-}
 
 /**
  * Template tag factory that creates a new template tag, which rewrites all custom element names from the
