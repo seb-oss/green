@@ -48,6 +48,10 @@ export class GdsDropdown<ValueType = any>
 {
   static styles = styles
   static formAssociated = true
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
 
   /**
    * The label of the dropdown.
@@ -97,8 +101,6 @@ export class GdsDropdown<ValueType = any>
     constrainSlots(this)
     updateWhenLocaleChanges(this)
 
-    this.setAttribute('tabindex', '0')
-
     this.#optionElements = this.getElementsByTagName(
       getScopedTagName('gds-option')
     ) as HTMLCollectionOf<GdsOption>
@@ -131,10 +133,6 @@ export class GdsDropdown<ValueType = any>
     return Array.from(this.#optionElements).find((o) =>
       o.hasAttribute('isplaceholder')
     )
-  }
-
-  onfocus = (ev: FocusEvent) => {
-    this.#triggerRef.value?.focus()
   }
 
   /**
