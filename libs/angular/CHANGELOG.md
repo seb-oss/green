@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.2...@sebgroup/green-angular@1.8.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* **slider:** mobile version, small input on desktop, added `aria-labelledby` ([#929](https://github.com/sebgroup/green/issues/929)) ([456c934](https://github.com/sebgroup/green/commit/456c934443e94766231c284b3f1eaa4e8bc6b040)), closes [#902](https://github.com/sebgroup/green/issues/902) [#920](https://github.com/sebgroup/green/issues/920) [#923](https://github.com/sebgroup/green/issues/923)
+
+
+### Features
+
+* **dropdown:** 🎸 new input to set fixed placement of popover ([#930](https://github.com/sebgroup/green/issues/930)) ([ff782d6](https://github.com/sebgroup/green/commit/ff782d67602883e7f56af239d08a8c44a264f321))
+
+
+
 ## [1.7.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.1...@sebgroup/green-angular@1.7.2) (2023-05-24)
 
 
