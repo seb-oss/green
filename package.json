@@ -197,7 +197,7 @@
     "sass-loader": "^13.2.1",
     "storybook-dark-mode": "^1.0.9",
     "style-loader": "^3.3.0",
-    "stylelint": "^14.7.1",
+    "stylelint": "^15.10.1",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-scss": "^4.2.0",
     "stylus": "^0.55.0",
