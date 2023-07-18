@@ -8,15 +8,39 @@ export const Template = ({ children, ...props }) => (
 
 export const Footer = () => (
   <>
-    <Button>Default button</Button>
+    <Button>Stäng</Button>
+  </>
+)
+
+export const FooterInfo = () => (
+  <>
+    <Button>Info button</Button>
+  </>
+)
+
+export const FooterSuccess = () => (
+  <>
+    <Button>Success button</Button>
+  </>
+)
+
+export const FooterWarning = () => (
+  <>
+    <Button>Warning button</Button>
+  </>
+)
+
+export const FooterDanger = () => (
+  <>
+    <Button>Danger button</Button>
   </>
 )
 
 <Meta title="Components/AlertRibbon" component={AlertRibbon} />
 
-# AlertRibbons
+# Alert ribbon
 
-Simple AlertRibbon Component
+Simple Alert ribbon component
 
 <Story
   name="AlertRibbon"
@@ -66,16 +90,16 @@ Close button icon
 
 <Canvas>
   <AlertRibbon header="Info" isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+    This is an alert type <a href="#">info with a link</a>.
   </AlertRibbon>
   <AlertRibbon type="success" header="Success" isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+    This is an alert type <a href="#">success with a link</a>.
   </AlertRibbon>
   <AlertRibbon type="warning" header="Warning" isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+    This is an alert type <a href="#">warning with a link</a>.
   </AlertRibbon>
   <AlertRibbon type="danger" header="Danger" isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+    This is an alert type <a href="#">danger with a link</a>.
   </AlertRibbon>
 </Canvas>
 
@@ -84,17 +108,17 @@ Close button icon
 Button components can be passed in as a footer
 
 <Canvas>
-  <AlertRibbon header="Info" footer={<Footer />} isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+  <AlertRibbon header="Info" footer={<FooterInfo />} isCloseable={true}>
+    This is an alert type <a href="#">info with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="success" header="Success" footer={<Footer />} isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+  <AlertRibbon type="success" header="Success" footer={<FooterSuccess />} isCloseable={true}>
+    This is an alert type <a href="#">success with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="warning" header="Warning" footer={<Footer />} isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+  <AlertRibbon type="warning" header="Warning" footer={<FooterWarning />} isCloseable={true}>
+    This is an alert type <a href="#">warning with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="danger" header="Danger" footer={<Footer />} isCloseable={true}>
-    This is an alert <a href="#">with a link</a>.
+  <AlertRibbon type="danger" header="Danger" footer={<FooterDanger />} isCloseable={true}>
+    This is an alert type <a href="#">danger with a link</a>.
   </AlertRibbon>
 </Canvas>
 
