@@ -242,7 +242,7 @@ export const selectByValue = (
   selection?: any
 ): AbstractDropdown => {
   const isSelected = (value1: any) => {
-    if (!selection) {
+    if (!selection && typeof selection !== 'number') {
       return false
     } else if (dropdown.isMultiSelect && Array.isArray(selection)) {
       return selection.some((value2) => dropdown.compareWith(value1, value2))
