@@ -45,32 +45,32 @@ export type Screen = 'desktop' | 'tablet' | 'mobile'
 export const typography: Record<Screen, Typography> = {
   desktop: {
     display: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '96px',
       lineHeight: '100px',
     },
     h1: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '48px',
       lineHeight: '56px',
     },
     h2: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '32px',
       lineHeight: '40px',
     },
     h3: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '24px',
       lineHeight: '32px',
     },
     h4: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '20px',
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '16px',
       lineHeight: '24px',
     },
@@ -92,32 +92,32 @@ export const typography: Record<Screen, Typography> = {
   },
   tablet: {
     display: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '64px',
       lineHeight: '72px',
     },
     h1: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '40px',
       lineHeight: '48px',
     },
     h2: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '24px',
       lineHeight: '32px',
     },
     h3: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '20px',
       lineHeight: '28px',
     },
     h4: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '20px',
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '16px',
       lineHeight: '24px',
     },
@@ -139,32 +139,32 @@ export const typography: Record<Screen, Typography> = {
   },
   mobile: {
     display: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '48px',
       lineHeight: '56px',
     },
     h1: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '32px',
       lineHeight: '40px',
     },
     h2: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '24px',
       lineHeight: '32px',
     },
     h3: {
-      ...fonts.bold,
+      ...fonts.regular,
       size: '20px',
       lineHeight: '28px',
     },
     h4: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '20px',
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.medium,
+      ...fonts.regular,
       size: '16px',
       lineHeight: '24px',
     },
