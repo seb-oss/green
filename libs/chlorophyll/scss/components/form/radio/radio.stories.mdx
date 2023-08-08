@@ -45,7 +45,7 @@ export const Template = ({ validation, enabled, text1, text2 }) => {
 
 # Radio
 
-Lorem ipsum radio
+Simple Radio Button component
 
 ## Default radio
 <Canvas>
@@ -67,11 +67,11 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <div>
           <label class="form-control">
             <input type="radio" name="radioGroup"/>
-            <span>One</span><i></i>
+            <span>Normal one</span><i></i>
           </label>
           <label class="form-control">
             <input type="radio" name="radioGroup"/>
-            <span>Two</span><i></i>
+            <span>Normal two</span><i></i>
           </label>
         </div>
       </fieldset>
@@ -88,11 +88,11 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <div>
           <label class="form-control">
             <input type="radio" name="horizontal"/>
-            <span>One</span><i></i>
+            <span>Horizontal one</span><i></i>
           </label>
           <label class="form-control">
             <input type="radio" name="horizontal"/>
-            <span>Two</span><i></i>
+            <span>Horizontal two</span><i></i>
           </label>
         </div>
       </fieldset>
@@ -113,11 +113,11 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
         <div>
           <label class="form-control">
             <input required type="radio" name="radioGroupNormal"/>
-            <span>One</span><i></i>
+            <span>Normal one</span><i></i>
           </label>
           <label class="form-control">
             <input required type="radio" name="radioGroupNormal" required/>
-            <span>Two</span><i></i>
+            <span>Normal two</span><i></i>
           </label>
         </div>
       </fieldset>
@@ -126,15 +126,15 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
     <div class="form-group">
       <fieldset aria-describedby="radioGroupHelp1" class="is-valid">
         <legend>Valid radio group</legend>
-        <span id="radioGroupHelp1" class="form-info">Radio group description</span>
+        <span id="radioGroupHelp1" class="form-info">Valid radio group description</span>
         <div>
           <label class="form-control">
             <input required class="is-valid" name="radioGroupValid" type="radio"/>
-            <span>One</span><i></i>
+            <span>Valid one</span><i></i>
           </label>
           <label class="form-control">
             <input required class="is-valid" name="radioGroupValid" type="radio" required/>
-            <span>Two</span><i></i>
+            <span>Valid two</span><i></i>
           </label>
         </div>
       </fieldset>
@@ -143,15 +143,15 @@ Group form controls such as checkboxes and radio buttons using `<fieldset>` and 
     <div class="form-group">
       <fieldset aria-describedby="radioGroupHelp2" class="is-invalid">
         <legend>Invalid radio group</legend>
-        <span class="form-info">Radio group description</span>
+        <span class="form-info">Invalid radio group description</span>
         <div>
           <label class="form-control">
             <input required class="is-invalid" name="radioGroupInvalid" type="radio"/>
-            <span>One</span><i></i>
+            <span>Invalid one</span><i></i>
           </label>
           <label class="form-control">
             <input required class="is-invalid" name="radioGroupInvalid" type="radio" required/>
-            <span>One</span><i></i>
+            <span>Invalid one</span><i></i>
           </label>
         </div>
       </fieldset>
