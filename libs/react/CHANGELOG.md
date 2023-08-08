@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.12.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.1...@sebgroup/green-react@1.12.2) (2023-08-08)
+
+
+### Bug Fixes
+
+* 🐛 add onchange support to form items component ([#954](https://github.com/sebgroup/green/issues/954)) ([e1f6b50](https://github.com/sebgroup/green/commit/e1f6b50b5035ed672eb2bf73e2851fb46019cbca))
+
+
+
 ## [1.12.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.0...@sebgroup/green-react@1.12.1) (2023-07-07)
 
 
