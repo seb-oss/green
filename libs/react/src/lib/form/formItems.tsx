@@ -81,7 +81,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
     name,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
       if (typeof _onFormItemsChanged === 'function') {
-        _onFormItemsChanged?.(event)
+        _onFormItemsChanged(event)
       }
 
       onChange(event)
