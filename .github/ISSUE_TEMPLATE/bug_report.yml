@@ -11,7 +11,7 @@ body:
   - type: checkboxes
     id: previous
     attributes:
-      label: Bug already reported ?
+      label: Bug already reported?
       description:
       options:
         - label: I confirm that I have checked if the bug already has been reported
