@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.3...@sebgroup/chlorophyll@1.11.4) (2023-08-08)
+
+
+### Bug Fixes
+
+* filter chip icons ([#951](https://github.com/sebgroup/green/issues/951)) ([3bf6d6a](https://github.com/sebgroup/green/commit/3bf6d6a128d793af4eb66f0effe30a960bfbe172)), closes [#945](https://github.com/sebgroup/green/issues/945)
+
+
+
 ## [1.11.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.2...@sebgroup/chlorophyll@1.11.3) (2023-07-07)
 
 
