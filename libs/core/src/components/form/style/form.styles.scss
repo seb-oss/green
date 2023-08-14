@@ -218,7 +218,7 @@ gds-input {
         }
       }
 
-      &::after {
+      &[data-badge]::after {
         background-color: #fff;
         border-radius: 3px;
         content: attr(data-badge);
