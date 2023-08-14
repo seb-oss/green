@@ -69,9 +69,10 @@ export const Dropdown = ({
         multiple={multiSelect}
         value={selectedOption?.value}
         onchange={handleOnChange}
+        invalid={validator?.indicator === 'error'}
       >
-        {informationLabel && <span slot="form-info">{informationLabel}</span>}
-        {validator && <span slot="form-info-after">{validator?.message}</span>}
+        {informationLabel && <span slot="sub-label">{informationLabel}</span>}
+        {validator && <span slot="message">{validator.message}</span>}
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>
