@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.5](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.4...@sebgroup/chlorophyll@1.11.5) (2023-08-14)
+
+
+### Bug Fixes
+
+* **dropdown:** increase default z-index of popover ([#956](https://github.com/sebgroup/green/issues/956)) ([acf2267](https://github.com/sebgroup/green/commit/acf2267c54bafd1be70405617fc659c05c2e2d6a))
+
+
+
 ## [1.11.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.3...@sebgroup/chlorophyll@1.11.4) (2023-08-08)
 
 
