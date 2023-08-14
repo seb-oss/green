@@ -35,7 +35,7 @@ export class GdsForm extends LitElement {
         </div>
         <div class="support">
           <span>Only lowercase, min-length 3 characters</span>
-          <div class="icon"><gds-icon name="bell"></gds-icon></div>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
         </div>
       </gds-input>
       <gds-input>
@@ -49,7 +49,7 @@ export class GdsForm extends LitElement {
         </div>
         <div class="support">
           <span>Number type, range  min="4" max="8"</span>
-          <div class="icon"><gds-icon name="bell"></gds-icon></div>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
         </div>
       </gds-input>
       <gds-input>
@@ -62,8 +62,64 @@ export class GdsForm extends LitElement {
           <div class="trail"><gds-icon name="eye"></gds-icon></div>
         </div>
         <div class="support">
-          <span>Number type, range  min="4" max="8"</span>
-          <div class="icon"><gds-icon name="bell"></gds-icon></div>
+          <span>Password type</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="mail"></gds-icon></div>
+          <div class="base">
+            <label for="email">E-Mail</label>
+            <input type="email" min="4" max="8" id="email" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="send"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Email type</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="tel"></gds-icon></div>
+          <div class="base">
+            <label for="tel">Telephone</label>
+            <input type="tel" pattern="[0-9\+]{4,18}" id="tel" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Tel type, Pattern [0-9\+]{4,18}</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base">
+            <label for="date">Date</label>
+            <input type="date" pattern="[0-9\+]{4,18}" id="date" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Tel type, Pattern [0-9\+]{4,18}</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base">
+            <label for="date">Date</label>
+            <input type="month" pattern="[0-9\+]{4,18}" id="date" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Tel type, Pattern [0-9\+]{4,18}</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
         </div>
       </gds-input>
 
