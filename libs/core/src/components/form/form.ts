@@ -112,6 +112,48 @@ export class GdsForm extends LitElement {
         <div class="main">
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
+            <label for="week">Week</label>
+            <input type="week" min="2018-W18" max="2018-W26" id="week" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Tel type, Pattern [0-9\+]{4,18}</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base">
+            <label for="time">Time</label>
+            <input type="time" min="09:00" max="18:00" id="time" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Tel type, Pattern [0-9\+]{4,18}</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base">
+            <label for="datetime-local">Datetime Local</label>
+            <input type="datetime-local" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00" id="datetime-local" placeholder=" " required/>
+          </div>  
+          <div class="trail"><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Datetime local</span>
+          <div class="icon"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base">
             <label for="date">Date</label>
             <input type="month" pattern="[0-9\+]{4,18}" id="date" placeholder=" " required/>
           </div>  
