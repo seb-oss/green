@@ -18,10 +18,12 @@ export class GdsForm extends LitElement {
     delegatesFocus: true,
   }
 
-  render() { return html`
-  
-    <form>
+  // TODO:
+  // Might be neccessary to use something like the stopPropagation() event: 
+  // This behavior is known as "bubbling" or "propagation," where the click event on the <div> is propagated to its child elements, and the first focusable element receives focus.
 
+  render() { return html`
+    <form>
       <gds-input>
         <div class="main">
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
