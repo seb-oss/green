@@ -99,7 +99,7 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
             <label for="date">Date</label>
-            <input type="date" pattern="[0-9\+]{4,18}" id="date" placeholder=" " required/>
+            <input type="date" pattern="[0-9\+]{4,18}" id="date" placeholder=" " onfocus="this.showPicker()"  required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
@@ -113,7 +113,7 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
             <label for="week">Week</label>
-            <input type="week" min="2018-W18" max="2018-W26" id="week" placeholder=" " required/>
+            <input type="week" min="2018-W18" max="2018-W26" id="week" placeholder=" " onfocus="this.showPicker()"  required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
@@ -127,7 +127,7 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
             <label for="time">Time</label>
-            <input type="time" min="09:00" max="18:00" id="time" placeholder=" " required/>
+            <input type="time" min="09:00" max="18:00" id="time" placeholder=" " onfocus="this.showPicker()"  required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
@@ -141,7 +141,7 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
             <label for="datetime-local">Datetime Local</label>
-            <input type="datetime-local" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00" id="datetime-local" placeholder=" " required/>
+            <input type="datetime-local" value="2018-06-12T19:30" min="2018-06-07T00:00" max="2018-06-14T00:00" id="datetime-local" placeholder=" " onfocus="this.showPicker()"  required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
@@ -155,7 +155,7 @@ export class GdsForm extends LitElement {
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base">
             <label for="date">Date</label>
-            <input type="month" pattern="[0-9\+]{4,18}" id="date" placeholder=" " required/>
+            <input type="month" pattern="[0-9\+]{4,18}" id="date" placeholder=" " onfocus="this.showPicker()"  required/>
           </div>  
           <div class="trail"><gds-icon name="x"></gds-icon></div>
         </div>
