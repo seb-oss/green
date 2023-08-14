@@ -34,15 +34,9 @@ Also, primitives should generally be responsible for setting their own role attr
 At some point in the future, when the Accessibility Object Model (AOM) has matured a bit more and gained better browser support, we might move the aria attributes there instead, and set them though ElementInternals as the AOM spec suggests.
 Other than that, attribute reflection should be avoided.
 
-## Form components
+## Form controls
 
-Form components should implement the same standard properties as native form components:
-
-- onChange event when the value changes
-- A value prop for setting the value (should not emit change event)
-- Have the static formAssociated property set to true on the class
-- Use ElementInternals setFormValue to set the form value whenever the value changes
--
+Form control components should extend the `GdsFormControlElement` abstract class. This ensures that the component gets set up as a native form control, and has all the expected attributes and methods.
 
 ## Consider which primitive or component should be responsible for behaviours
 
@@ -50,7 +44,7 @@ Many types of UI widgets have certain expected behaviours, such as keyboard navi
 
 ## Composition over inheritance
 
-When we build components in Green Core, we come across many aspects that are either shared among many or unique to a certain component. When we come across shared features, it may be tempting to organise those features in a shared base class. But instead we should work with composition, through helper functions, class mixing or decorators. That way we avoid creating complex inheritance hierarchies that get difficult to maintain over time.
+When we build components in Green Core, we come across many aspects that are either shared among many or unique to a certain component. When we come across shared features, it may be tempting to organise those features in a shared base class. But instead we should work with composition, through helper functions, class mixins or decorators. That way we avoid creating complex inheritance hierarchies that get difficult to maintain over time.
 
 ## Documentation
 

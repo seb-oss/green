@@ -1,4 +1,3 @@
-import { LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
@@ -15,15 +14,18 @@ import {
   html,
   getScopedTagName,
 } from 'utils/helpers/custom-element-scoping'
-import 'primitives/listbox'
-import 'primitives/popover'
 
+import 'primitives/listbox'
 import type {
   GdsListbox,
   GdsOption,
   OptionsContainer,
 } from 'primitives/listbox'
+
+import 'primitives/popover'
 import type { GdsPopover } from 'primitives/popover'
+
+import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from 'utils/helpers/transitional-styles'
@@ -43,12 +45,11 @@ import { TransitionalStyles } from 'utils/helpers/transitional-styles'
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-dropdown')
-export class GdsDropdown<ValueType = any>
-  extends LitElement
+export class GdsDropdown<ValueT = any>
+  extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
   static styles = styles
-  static formAssociated = true
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -68,12 +69,6 @@ export class GdsDropdown<ValueType = any>
   open = false
 
   /**
-   * The value of the dropdown.
-   */
-  @property()
-  value: ValueType | ValueType[] | undefined
-
-  /**
    * Whether the dropdown should be searchable.
    */
   @property({ type: Boolean, reflect: true })
@@ -88,7 +83,6 @@ export class GdsDropdown<ValueType = any>
   multiple = false
 
   // Private members
-  #internals: ElementInternals
   #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
   #searchInputRef: Ref<HTMLInputElement> = createRef()
@@ -98,7 +92,6 @@ export class GdsDropdown<ValueType = any>
 
   constructor() {
     super()
-    this.#internals = this.attachInternals()
     constrainSlots(this)
     updateWhenLocaleChanges(this)
 
@@ -148,7 +141,7 @@ export class GdsDropdown<ValueType = any>
         ? (displayValue = msg(str`${this.value.length} selected`))
         : (displayValue = this.value
             .reduce(
-              (acc: string, cur: ValueType) =>
+              (acc: string, cur: ValueT) =>
                 acc +
                 this.options.find((v) => v.value === cur)?.innerHTML +
                 ', ',
@@ -246,9 +239,6 @@ export class GdsDropdown<ValueType = any>
    */
   @watch('value')
   private _handleValueChange() {
-    const value = this.value
-    this.#internals.setFormValue(value as any)
-
     const listbox = this.#listboxRef.value as GdsListbox
     if (listbox) {
       if (Array.isArray(this.value)) listbox.selection = this.value as any[]
