@@ -224,19 +224,51 @@ gds-input {
           outline: none;
         }
 
+        // Customize the input datepicker
+        // accent-color: rgb(215, 10, 99) !important;
+
+        // &::-webkit-datetime-edit {
+        //   padding: 1em;
+        // }
+
+        // &::-webkit-datetime-edit-fields-wrapper {
+        //   background: silver;
+        // }
+
+        // &::-webkit-datetime-edit-text {
+        //   color: red;
+        //   padding: 0 0.3em;
+        // }
+
+        // &::-webkit-datetime-edit-month-field {
+        //   color: blue;
+        // }
+        // &::-webkit-datetime-edit-day-field {
+        //   color: green;
+        // }
+        // &::-webkit-datetime-edit-year-field {
+        //   color: purple;
+        // }
+        // &::-webkit-inner-spin-button {
+        //   display: none;
+        // }
+        // &::-webkit-calendar-picker-indicator {
+        //   background: orange;
+        // }
+
         &::-webkit-inner-spin-button,
         &::-webkit-calendar-picker-indicator {
           appearance: none;
-          display: none;
+          background-color: rgb(195, 0, 255);
+          // display: none;
 
           // Or customize them:
-          // background-image: none;
-          // width: 40px;
-          // height: 100%;
-          // background-color: red;
-          // position: absolute;
-          // right: 0;
-          // top: 0;
+          background-image: none;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 40px;
         }
       }
 
