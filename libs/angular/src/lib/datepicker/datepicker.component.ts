@@ -72,8 +72,8 @@ export class NggDatepickerComponent
   }
   set value(newValue: string | Date | undefined) {
     if (newValue !== this._value) {
-      this._value = newValue
-      if (this._value && this.dp) {
+      this._value = newValue || ''
+      if (this._value !== undefined && this.dp) {
         this.dp.select(this._value)
       }
     }
