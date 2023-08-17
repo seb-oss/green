@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.1...@sebgroup/extract@1.4.2) (2023-08-17)
+
+
+### Bug Fixes
+
+* **datepicker:** close when clicking outside ([#965](https://github.com/sebgroup/green/issues/965)) ([4c799bf](https://github.com/sebgroup/green/commit/4c799bfe95366e412c076bfc6f36f737bea1a060))
+
+
+
 ## [1.4.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.0...@sebgroup/extract@1.4.1) (2023-08-08)
 
 
