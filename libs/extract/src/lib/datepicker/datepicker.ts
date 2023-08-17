@@ -13,7 +13,7 @@ import {
 } from 'date-fns'
 import { Calendar, createCalendar } from '.'
 import { Instance } from '@popperjs/core'
-import { iif, Observable, ReplaySubject, Subject } from 'rxjs'
+import { merge, fromEvent, iif, Observable, ReplaySubject, Subject } from 'rxjs'
 import { switchMap, takeUntil } from 'rxjs/operators'
 import { onActiveHandler, onInactiveHandler } from './event-handlers'
 import { setFocus } from './helper-functions'
@@ -435,6 +435,31 @@ export const createDatepicker = (
       takeUntil(unsubscribe$)
     )
     .subscribe()
+
+  merge(
+    fromEvent<KeyboardEvent>(document, 'keydown'),
+    fromEvent<FocusEvent>(document, 'focusin'),
+    fromEvent<MouseEvent>(document, 'click')
+  )
+    .pipe(takeUntil(unsubscribe$))
+    .subscribe((event) => {
+      if (!dp.state.isActive) return
+
+      switch (event.type) {
+        case 'click':
+        case 'focusin': {
+          const target = event.target as HTMLElement
+          const targetIsOutside =
+            !datepickerElRef.contains(target) &&
+            !datepickerDialogElRef.contains(target) &&
+            !dateInputElRef.contains(target) &&
+            !datepickerTriggerElRef.contains(target)
+          if (targetIsOutside) {
+            dp.close()
+          }
+        }
+      }
+    })
 
   return dp
 }
