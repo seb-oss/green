@@ -7,8 +7,9 @@
     [label]="label"
     (change)="onValueChange($event)"
     [multiple]="multiSelect"
+    [invalid]="invalid"
   >
-    <span class="form-info" slot="form-info" #formInfo
+    <span slot="message" #formInfo
       ><ng-content select="[data-form-info]"></ng-content
     ></span>
 

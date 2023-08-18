@@ -152,7 +152,6 @@ export class NggDropdownComponent implements ControlValueAccessor {
   }
 
   constructor(@Inject(Injector) private injector: Injector) {
-    console.log('derp: ', registerTransitionalStyles)
     registerTransitionalStyles()
   }
 

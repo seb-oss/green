@@ -37,7 +37,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     attribute: 'aria-invalid',
     converter: {
       fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value.toString(),
+      toAttribute: (value: boolean) => value?.toString(),
     },
   })
   invalid = false
