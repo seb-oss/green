@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.1...@sebgroup/green-angular@1.8.2) (2023-08-17)
+
+
+### Bug Fixes
+
+* **datepicker:** correctly reflect state after formGroup reset ([#964](https://github.com/sebgroup/green/issues/964)) ([b300d36](https://github.com/sebgroup/green/commit/b300d360232f8fcbabc84dd42ce6867e023e92a8))
+
+
+
 ## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.0...@sebgroup/green-angular@1.8.1) (2023-08-08)
 
 
