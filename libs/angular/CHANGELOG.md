@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.2...@sebgroup/green-angular@1.8.3) (2023-08-21)
+
+
+### Bug Fixes
+
+* 🐛 fix context menu position in relative parent ([#970](https://github.com/sebgroup/green/issues/970)) ([d8f208e](https://github.com/sebgroup/green/commit/d8f208ed4766e0b940ebf4491ca4158715380d0f))
+
+
+
 ## [1.8.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.1...@sebgroup/green-angular@1.8.2) (2023-08-17)
 
 
