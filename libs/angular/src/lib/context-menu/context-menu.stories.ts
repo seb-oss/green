@@ -124,3 +124,30 @@ DirectiveTemplateDefault.args = {
     { label: 'Option 3', value: 'option3' },
   ],
 }
+
+
+const TemplatePositionRelative: Story<NggContextMenuComponent> = (
+  args: NggContextMenuComponent
+) => ({
+  component: NggContextMenuComponent,
+  props: args,
+  template: `
+  <div style="position: relative; width: 50%; margin: 20px auto;">
+    <div style="display:flex;justify-content:space-between;">
+      <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+      <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+      <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
+    </div>
+  </div>
+  `,
+})
+
+export const PositionRelative = TemplatePositionRelative.bind({})
+PositionRelative.args = {
+  direction: 'ltr',
+  menuItems: [
+    { label: 'Option 1', value: 'option1' },
+    { label: 'Option 2', value: 'option2' },
+    { label: 'Option 3', value: 'option3' },
+  ],
+}

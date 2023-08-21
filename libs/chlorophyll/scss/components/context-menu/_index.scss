@@ -2,7 +2,13 @@
 @use '../../common';
 @use '../../components/popover';
 
+.context-menu-overlay {
+  @include mixins.add-context-menu-overlay();
+}
+
 .popover-context-menu {
+  pointer-events: auto;
+
   @include common.media-breakpoint-up('sm') {
     @include mixins.add-context-menu();
     border: none;
