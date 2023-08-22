@@ -35,8 +35,7 @@ const selectionText = (
   if (!Array.isArray(value))
     return value?.[display] || (texts?.placeholder ?? 'Select')
 
-  let selectedOptions = value
-  const displayValues = selectedOptions.map((option) => option?.[display])
+  const displayValues = value.map((option) => option?.[display])
   return displayValues?.length > 2
     ? `${displayValues.length} ${texts?.selected} `
     : displayValues?.join(', ') || (texts?.placeholder ?? 'Select')
@@ -58,8 +57,8 @@ export class NggDropdownComponent implements ControlValueAccessor {
   @Input() id?: string
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
-  @Input() display: string = 'label'
-  @Input() useValue: string = 'value'
+  @Input() display = 'label'
+  @Input() useValue = 'value'
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
@@ -119,6 +118,9 @@ export class NggDropdownComponent implements ControlValueAccessor {
     return this._value
   }
 
+  onChangeFn?: (value: unknown) => void
+  onTouchedFn?: () => void
+
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @Output() readonly touched: EventEmitter<boolean> =
     new EventEmitter<boolean>()
@@ -143,9 +145,6 @@ export class NggDropdownComponent implements ControlValueAccessor {
     this.onChangeFn?.(this.value)
     this.valueChange.emit(this.value)
   }
-
-  onChangeFn?: (value: unknown) => void
-  onTouchedFn?: () => void
 
   get control(): NgControl | undefined {
     return this.injector.get(NgControl)

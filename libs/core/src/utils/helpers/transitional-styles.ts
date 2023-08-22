@@ -10,7 +10,6 @@ export const registerTransitionalStyles = () => {
 
 export class TransitionalStyles {
   private static singleton: TransitionalStyles
-  private constructor() {}
 
   static get instance() {
     if (!TransitionalStyles.singleton)

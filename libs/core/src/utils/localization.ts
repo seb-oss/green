@@ -10,7 +10,7 @@ export const { getLocale, setLocale } = configureLocalization({
   sourceLocale,
   targetLocales,
   loadLocale: async (locale) => {
-    let localModule = localizedTemplates.get(locale)
+    const localModule = localizedTemplates.get(locale)
     if (localModule) {
       return localModule
     }
