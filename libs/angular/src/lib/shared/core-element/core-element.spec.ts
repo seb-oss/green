@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
-import { NggScopedElementDirective } from './scoped-element.directive'
+import { NggCoreElementDirective } from './core-element.directive'
 
 @Component({
-  template: '<div *gdsScopedElement></div>',
+  template: '<div *nggCoreElement></div>',
 })
 class TestComponent {}
 
@@ -11,13 +11,13 @@ jest.mock('@sebgroup/green-core', () => ({
   getScopedTagName: jest.fn((name) => name + '-scoped'),
 }))
 
-describe('NggScopedElementDirective', () => {
+describe('NggCoreElementDirective', () => {
   let component: TestComponent
   let parent: HTMLElement
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent, NggScopedElementDirective],
+      declarations: [TestComponent, NggCoreElementDirective],
     })
     const fixture = TestBed.createComponent(TestComponent)
     parent = fixture.debugElement.nativeElement

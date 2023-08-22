@@ -13,9 +13,9 @@ import {
 import { getScopedTagName } from '@sebgroup/green-core'
 
 @Directive({
-  selector: '[gdsScopedElement]',
+  selector: '[nggCoreElement]',
 })
-export class NggScopedElementDirective implements OnInit {
+export class NggCoreElementDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null
   private readonly document = inject(DOCUMENT)
   private readonly renderer = inject(Renderer2)
@@ -27,7 +27,7 @@ export class NggScopedElementDirective implements OnInit {
     this.vcr.clear()
     const originalCreateElement = this.renderer.createElement
 
-    this.renderer.createElement = (name: string, namespace: string) => {
+    this.renderer.createElement = (name: string, _namespace: string) => {
       return this.document.createElement(getScopedTagName(name))
     }
 
