@@ -37,7 +37,7 @@ export class GdsForm extends LitElement {
         </div>
         <div class="support">
           <span>Only lowercase, min-length 3 characters</span>
-          <div class="icon"><gds-icon name="info"></gds-icon></div>
+          <div class="icon" data-badge="120"><gds-icon name="info"></gds-icon></div>
         </div>
       </gds-input>
       <gds-input>
@@ -187,7 +187,7 @@ export class GdsForm extends LitElement {
             <label for="select">Select Account</label>
             <input type="text" id="select" placeholder=" "  required/>
           </div>  
-          <div class="base">
+          <div class="base" data-badge="SEK">
             <label for="select">Select Account</label>
             <input type="text" id="select" placeholder=" "  required/>
           </div>  
@@ -195,6 +195,20 @@ export class GdsForm extends LitElement {
         </div>
         <div class="support">
           <span>This is account select</span>
+          <div class="icon" data-badge="120"><gds-icon name="info"></gds-icon></div>
+        </div>
+      </gds-input>
+      <gds-input>
+        <div class="main">
+          <div class="lead"><gds-icon name="calendar"></gds-icon></div>
+          <div class="base" data-badge="SEK">
+            <label for="textarea">Freetext</label>
+            <textarea id="textarea" name="textarea" rows="1" minlength="10" maxlength="200" oninput="this.parentNode.dataset.value = this.value" required></textarea>
+          </div>  
+          <div class="trail" ><gds-icon name="x"></gds-icon></div>
+        </div>
+        <div class="support">
+          <span>Only lowercase, min-length 3 characters</span>
           <div class="icon"><gds-icon name="info"></gds-icon></div>
         </div>
       </gds-input>
@@ -202,11 +216,10 @@ export class GdsForm extends LitElement {
         <div class="main">
           <div class="lead"><gds-icon name="calendar"></gds-icon></div>
           <div class="base" data-badge="SEK">
-            <label for="input">Freetext</label>
-            <textarea id="textarea" name="textarea" minlength="10" maxlength="200" required></textarea>
-            <!-- <input type="text" id="input" placeholder=" " minlength="3" pattern="[a-z]+" required/> -->
+            <label for="span">Span with role</label>
+            <span role="textbox" id="span" contenteditable>hello</span>
           </div>  
-          <div class="trail"><gds-icon name="x"></gds-icon></div>
+          <div class="trail" ><gds-icon name="x"></gds-icon></div>
         </div>
         <div class="support">
           <span>Only lowercase, min-length 3 characters</span>
@@ -216,13 +229,18 @@ export class GdsForm extends LitElement {
       <fieldset>
         <legend>Type: Textarea</legend>
         <label for="textarea">Textarea:</label>
-        <textarea id="textarea" name="textarea" minlength="10" maxlength="200" required></textarea>
+        <textarea id="textarea" placeholder=" " name="textarea" minlength="10" maxlength="200" required></textarea>
         <!-- Requires a minimum length of 10, maximum length of 200 -->
       </fieldset>
 
       <fieldset>
         <legend>Type: Submit</legend>
         <input type="submit" id="submit" value="Submit" />
+        <!-- Triggering a form submission when clicked -->
+      </fieldset>
+      <fieldset>
+        <legend>Type: Range</legend>
+        <input type="range" id="volume" name="volume" min="0" max="11"/>
         <!-- Triggering a form submission when clicked -->
       </fieldset>
     </form>

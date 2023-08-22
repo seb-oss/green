@@ -1,0 +1,12 @@
+@mixin tokens() {
+  // Input Tokens
+}
+
+@mixin tokens-a11y {
+  @media (prefers-color-scheme: dark) {
+    :host {
+      // Input Accessability Tokens
+      --transition: 0s;
+    }
+  }
+}

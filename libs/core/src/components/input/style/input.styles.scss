@@ -1,37 +1,5 @@
-@use './form.mixins.scss' as *;
+@use './input.mixins.scss' as *;
 @layer tokens, a11y, core, variants, sizes, sets, slotted;
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-// fieldset {
-//   align-items: flex-start;
-//   border-color: rgba($color: #000, $alpha: 0.2);
-//   border-width: 1px;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 12px;
-//   padding: 22px;
-// }
-
-// legend {
-//   font-size: 10px;
-//   opacity: 0.5;
-// }
-
-// fieldset input {
-//   appearance: none;
-//   background-color: hsla(60, 4%, 95%, 1);
-//   border: 0;
-//   border-bottom: 1px solid hsla(60, 4%, 50%, 1);
-//   border-radius: 8px 8px 0 0;
-//   padding: 16px 12px;
-// }
-
-// The serious stuff
 
 gds-input {
   display: flex;
@@ -43,13 +11,6 @@ gds-input {
     align-items: center;
     background-color: hsla(60, 4%, 95%, 1);
     background-position: bottom center;
-
-    // background-image: linear-gradient(
-    //   to bottom,
-    //   var(--border-color),
-    //   var(--border-color)
-    // );
-
     background-repeat: repeat-x;
     background-size: 100% 1px;
     block-size: 56px;
@@ -67,7 +28,6 @@ gds-input {
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
-      // border-block-end-width: 2px;
       background-size: 100% 2px;
       border-bottom-color: #000;
     }
@@ -75,12 +35,10 @@ gds-input {
     &:focus-within:has(input:focus-visible) {
       border-radius: 8px;
     }
-    // &:has(input:focus-visible) {
+
     &:focus-within,
     &:has(input:not(:placeholder-shown)) {
       border-color: currentColor;
-
-      // box-shadow: 0 0 0 4px rgba($color: #000, $alpha: 0.1);
 
       .base {
         label {
@@ -103,25 +61,6 @@ gds-input {
     input[type='number']::-webkit-inner-spin-button {
       display: none;
     }
-    // &:has(input:valid) {
-    //   border-color: hsla(158, 95%, 45%, 0.27);
-    //   box-shadow: 0 0 0 4px hsla(158, 95%, 45%, 0.132);
-    // }
-
-    // &:has(input:invalid) {
-    //   border-color: hsla(351, 95%, 45%, 0.27);
-    //   box-shadow: 0 0 0 4px hsla(351, 95%, 45%, 0.132);
-    // }
-    // &:has(input:valid:not(:placeholder-shown)),
-    // &:has(input:invalid:focus:not(:placeholder-shown)) {
-    //   border-color: hsla(158, 95%, 45%, 0.27);
-    //   box-shadow: 0 0 0 4px hsla(158, 95%, 45%, 0.132);
-    // }
-
-    // &:has(input:invalid:not(:focus):not(:valid):not(:placeholder-shown)) {
-    //   border-color: hsla(351, 95%, 45%, 0.27);
-    //   box-shadow: 0 0 0 4px hsla(351, 95%, 45%, 0.132);
-    // }
 
     &:has(input:focus-visible:valid:not(:placeholder-shown)) {
       background-color: var(--gds-color-green-98);
@@ -178,9 +117,7 @@ gds-input {
     }
 
     .base {
-      // display: flex;
       position: relative;
-      // flex-direction: column;
       width: 100%;
 
       label {
@@ -226,45 +163,10 @@ gds-input {
           outline: none;
         }
 
-        // Customize the input datepicker
-        // accent-color: rgb(215, 10, 99) !important;
-
-        // &::-webkit-datetime-edit {
-        //   padding: 1em;
-        // }
-
-        // &::-webkit-datetime-edit-fields-wrapper {
-        //   background: silver;
-        // }
-
-        // &::-webkit-datetime-edit-text {
-        //   color: red;
-        //   padding: 0 0.3em;
-        // }
-
-        // &::-webkit-datetime-edit-month-field {
-        //   color: blue;
-        // }
-        // &::-webkit-datetime-edit-day-field {
-        //   color: green;
-        // }
-        // &::-webkit-datetime-edit-year-field {
-        //   color: purple;
-        // }
-        // &::-webkit-inner-spin-button {
-        //   display: none;
-        // }
-        // &::-webkit-calendar-picker-indicator {
-        //   background: orange;
-        // }
-
         &::-webkit-inner-spin-button,
         &::-webkit-calendar-picker-indicator {
           appearance: none;
           background-color: rgb(195, 0, 255);
-          // display: none;
-
-          // Or customize them:
           background-image: none;
           height: 100%;
           position: absolute;
@@ -297,7 +199,6 @@ gds-input {
     .trail {
       align-items: center;
       aspect-ratio: 1/1;
-      // background-color: #808080;
       display: flex;
       height: 24px;
       justify-content: center;
@@ -338,52 +239,7 @@ gds-input {
         font-weight: 500;
         line-height: 1;
         padding: 6px 10px;
-        // width: 20px;
-        // height: 20px;
       }
-    }
-  }
-}
-
-// indeterminate
-// input:indeterminate {
-//   background: rgb(255, 0, 208);
-// }
-
-// in and out of range
-// input:in-range {
-//   background-color: rgba(0, 255, 0, 0.25);
-// }
-
-// input:out-of-range {
-//   background-color: rgba(255, 0, 0, 0.25);
-//   border: 2px solid rgba(255, 0, 0, 0.25);
-// }
-
-// Textarea experiments
-//
-
-gds-input .main:has(textarea) {
-  block-size: auto;
-
-  .base {
-    &::before {
-      content: attr(data-value) ' ';
-      visibility: hidden;
-      white-space: pre-wrap;
-    }
-
-    textarea {
-      box-sizing: border-box;
-      display: flex;
-      height: 100%;
-      max-height: 100%;
-      max-width: 100%;
-      min-height: 100%;
-      min-width: 100%;
-      position: relative;
-      resize: none;
-      width: 100%;
     }
   }
 }
