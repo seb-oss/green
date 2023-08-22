@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.5...@sebgroup/chlorophyll@1.11.6) (2023-08-21)
+
+
+### Bug Fixes
+
+* 🐛 fix context menu position in relative parent ([#970](https://github.com/sebgroup/green/issues/970)) ([d8f208e](https://github.com/sebgroup/green/commit/d8f208ed4766e0b940ebf4491ca4158715380d0f))
+
+
+
 ## [1.11.5](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.4...@sebgroup/chlorophyll@1.11.5) (2023-08-14)
 
 
