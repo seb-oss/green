@@ -26,6 +26,13 @@
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
     },
+    "build-with-types-and-scoping": {
+      "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build-with-types"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-scope-suffix.js"
+      }
+    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
