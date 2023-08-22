@@ -10,27 +10,29 @@
   </ng-container>
 </button>
 
-<div
-  class="popover popover-context-menu"
-  [class.active]="isActive"
-  [style.top]="top"
-  [style.left]="left"
-  #contextMenuPopover
->
-  <ul role="listbox">
-    <li
-      *ngFor="let menuItem of menuItems"
-      (click)="onItemClick(menuItem)"
-      tabindex="0"
-      (keydown)="onMenuItemKeyDown($event, menuItem)"
-    >
-      <ng-container
-        [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
-        [ngTemplateOutletContext]="{ $implicit: menuItem }"
+<div class="context-menu-overlay">
+  <div
+    class="popover popover-context-menu"
+    [class.active]="isActive"
+    [style.top]="top"
+    [style.left]="left"
+    #contextMenuPopover
+  >
+    <ul role="listbox">
+      <li
+        *ngFor="let menuItem of menuItems"
+        (click)="onItemClick(menuItem)"
+        tabindex="0"
+        (keydown)="onMenuItemKeyDown($event, menuItem)"
       >
-      </ng-container>
-    </li>
-  </ul>
+        <ng-container
+          [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
+          [ngTemplateOutletContext]="{ $implicit: menuItem }"
+        >
+        </ng-container>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <ng-template #defaultMenuItemTemplate let-menuItem>
