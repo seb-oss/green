@@ -36,5 +36,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
+
       - name: Run smoketest (lint, test and check if build passes)
         run: yarn smoketest
