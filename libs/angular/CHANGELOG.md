@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.3...@sebgroup/green-angular@1.8.4) (2023-08-23)
+
+
+### Bug Fixes
+
+* 🐛 wrong calculation of y position for context menu ([#973](https://github.com/sebgroup/green/issues/973)) ([d90ccc8](https://github.com/sebgroup/green/commit/d90ccc87cd62c0eecdca01f04e705c5127af69ca))
+
+
+
 ## [1.8.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.2...@sebgroup/green-angular@1.8.3) (2023-08-21)
 
 
