@@ -325,12 +325,6 @@
     }
   },
   {
-    "id": "components-form--form",
-    "name": "Form",
-    "title": "Components/Form",
-    "customParams": {}
-  },
-  {
     "id": "components-formitem--text-input",
     "name": "TextInput",
     "title": "Components/FormItem",
@@ -350,6 +344,12 @@
     "id": "components-formitem--expandable-information-jsx",
     "name": "Expandable information JSX",
     "title": "Components/FormItem",
+    "customParams": {}
+  },
+  {
+    "id": "components-form--form",
+    "name": "Form",
+    "title": "Components/Form",
     "customParams": {}
   },
   {
