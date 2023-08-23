@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.6...@sebgroup/chlorophyll@1.11.7) (2023-08-23)
+
+
+### Bug Fixes
+
+* **color:** dark green color updated (dark2) ([7d32f59](https://github.com/sebgroup/green/commit/7d32f5997d16746f81fe40065aef12db8aa8cd1d)), closes [#961](https://github.com/sebgroup/green/issues/961)
+
+
+
 ## [1.11.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.5...@sebgroup/chlorophyll@1.11.6) (2023-08-21)
 
 

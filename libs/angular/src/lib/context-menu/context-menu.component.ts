@@ -94,12 +94,12 @@ export class NggContextMenuComponent
     const anchor = this.anchor?.nativeElement as HTMLElement
     const buttonRect = anchor.getBoundingClientRect()
 
-    const left = this.calculateLeft(this.direction, buttonRect)
-    const top = this.calculateTop(buttonRect.bottom)
     const gapBetweenButtonAndPopover = 3
+    const left = this.calculateLeft(this.direction, buttonRect)
+    const top = buttonRect.bottom + gapBetweenButtonAndPopover;
 
     this.left = `${left}px`
-    this.top = `${top + gapBetweenButtonAndPopover}px`
+    this.top = `${top}px`
     this.isActive = true
   }
 
@@ -123,10 +123,6 @@ export class NggContextMenuComponent
       default:
         break
     }
-  }
-
-  calculateTop(buttonRectBottom: number): number {
-    return buttonRectBottom + window.pageYOffset
   }
 
   calculateLeft(direction: string, buttonRect: DOMRect): number {
