@@ -65,7 +65,7 @@
       "outputs": ["{options.outputDir}"],
       "dependsOn": ["build-with-types-and-scoping"],
       "options": {
-        "outputDir": "dist/storybook/stems",
+        "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
