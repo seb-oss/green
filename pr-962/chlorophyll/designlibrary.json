@@ -86,12 +86,6 @@
     }
   },
   {
-    "id": "components-form-elements-group--page",
-    "name": "Page",
-    "title": "Components/Form/Elements/Group",
-    "customParams": {}
-  },
-  {
     "id": "components-form-elements-text--page",
     "name": "Page",
     "title": "Components/Form/Elements/Text",
@@ -101,6 +95,12 @@
     "id": "components-form-elements-info--page",
     "name": "Page",
     "title": "Components/Form/Elements/Info",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-elements-group--page",
+    "name": "Page",
+    "title": "Components/Form/Elements/Group",
     "customParams": {}
   },
   {
