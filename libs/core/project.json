@@ -63,6 +63,7 @@
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
+      "dependsOn": ["build-with-types-and-scoping"],
       "options": {
         "outputDir": "dist/storybook/stems",
         "configDir": "libs/core/.storybook",
