@@ -15,8 +15,8 @@ jobs:
           filters: |
             any:
               - libs/**
-              core:
-                - libs/core/**
+            core:
+              - libs/core/**
             chlorophyll:
               - libs/chlorophyll/**
             react:
@@ -40,6 +40,8 @@ jobs:
           filters: |
             any:
               - libs/**
+            core:
+              - libs/core/**
             chlorophyll:
               - libs/chlorophyll/**
             react:
