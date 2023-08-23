@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { NggDropdownComponent } from './dropdown.component'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
-import { NggCoreWrapperModule } from '../shared/scoped-element/scoped-element.module'
+import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
 
 @NgModule({
   declarations: [

@@ -4,7 +4,6 @@ export default {
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/libs/angular',
   transform: {
     '^.+.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -14,7 +13,9 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs/)',
+  ],
   moduleNameMapper: {
     '@sebgroup/green-core': '<rootDir>/../../dist/libs/core/src',
   },
