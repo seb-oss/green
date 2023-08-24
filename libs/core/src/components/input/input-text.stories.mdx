@@ -1,12 +1,19 @@
 import '../../tokens/tokens.css'
 import './style/input.stories.css'
 import { inspector } from '../../utils/tools/inspector/inspector'
-import { GdsButton, GdsInput } from '../../../../../dist/libs/core/src'
+import { GdsButton, GdsInput, GdsIcon } from '../../../../../dist/libs/core/src'
 
 <Meta title="Components/Input/Text" />
 
 # Input
 
 <gds-main>
-  <div>{/* <gds-input></gds-input> */}</div>
+  <div>
+    <gds-input label="Input Label">
+      <gds-icon name="calendar" slot="lead"></gds-icon>
+      Label Text
+      <gds-icon name="x" slot="trail"></gds-icon>
+    </gds-input>
+    test
+  </div>
 </gds-main>
