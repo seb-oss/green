@@ -15,9 +15,10 @@
     background-size: 100% 1px;
     block-size: 56px;
     border: 2px solid transparent;
-    border-bottom-color: hsla(60, 4%, 50%, 1);
+    border-block-end-color: hsla(60, 4%, 50%, 0);
     border-start-end-radius: 8px;
     border-start-start-radius: 8px;
+    box-shadow: 0 2px 0 hsla(60, 4%, 50%, 1);
     box-sizing: border-box;
     display: flex;
     gap: 8px;
@@ -29,7 +30,8 @@
 
     &:hover {
       background-size: 100% 2px;
-      border-bottom-color: #000;
+      // border-bottom-color: #000;
+      box-shadow: 0 2px 0 #000;
     }
 
     &:focus-within:has(input:focus-visible) {
@@ -39,6 +41,7 @@
     &:focus-within,
     &:has(input:not(:placeholder-shown)) {
       border-color: currentColor;
+      box-shadow: none;
 
       .base {
         label {
