@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/extract",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Base library for framework components.",
   "repository": {
     "type": "git",
