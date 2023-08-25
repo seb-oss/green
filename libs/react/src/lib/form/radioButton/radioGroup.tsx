@@ -5,18 +5,17 @@ import {
   IndicatorType,
   validateClassName,
   randomId,
+  IExpandableInformation,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends IExpandableInformation {
   label?: string
   title?: string
   labelInformation?: string
   valueSelected?: string
   description?: string
-  expandableInfo?: string
-  expandableInfoButtonLabel?: string
   defaultSelected?: string
   validator?: IValidator
   onChangeRadio?: (value: string) => string
