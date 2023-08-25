@@ -145,36 +145,6 @@
     }
   },
   {
-    "id": "components-datepicker--simple",
-    "name": "Simple",
-    "title": "Components/Datepicker",
-    "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
-    }
-  },
-  {
-    "id": "components-datepicker--custom-options",
-    "name": "Custom Options",
-    "title": "Components/Datepicker",
-    "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
-    }
-  },
-  {
-    "id": "components-datepicker--form",
-    "name": "Form",
-    "title": "Components/Datepicker",
-    "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
-    }
-  },
-  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
@@ -231,6 +201,36 @@
     "customParams": {
       "componentIds": [
         "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--simple",
+    "name": "Simple",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--custom-options",
+    "name": "Custom Options",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--form",
+    "name": "Form",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
       ]
     }
   },
