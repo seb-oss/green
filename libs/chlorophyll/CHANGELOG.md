@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.11.8](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.7...@sebgroup/chlorophyll@1.11.8) (2023-08-25)
+
+
+### Bug Fixes
+
+* **typography:** switch back to unitless line-height for body ([#974](https://github.com/sebgroup/green/issues/974)) ([7ed3760](https://github.com/sebgroup/green/commit/7ed376026985f405443d775690c0a8bee3ea3613))
+
+
+
 ## [1.11.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.6...@sebgroup/chlorophyll@1.11.7) (2023-08-23)
 
 
