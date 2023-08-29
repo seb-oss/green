@@ -1,7 +1,7 @@
 import { NggModalComponent } from './modal.component'
 import { Canvas, Story } from '@storybook/addon-docs'
 
-# Modal 
+# Modal
 
 ## Importing module
 
@@ -32,8 +32,8 @@ Green currently provides three different variants of the modal - **dialog** (def
 |:--------|:----------|:------|
 |modalType|`ModalType`|The type of modal. Can be: `default` (dialog), `slideout` (slide-out), `takeover` (fullscreen).|
 |header|`string`|The header text of the modal.|
-|confirm|`string`|The text of the confirm button.|
-|dismiss|`string`|The text of the dismiss button.|
+|confirmLabel|`string`|The text of the confirm button.|
+|dismissLabel|`string`|The text of the dismiss button.|
 |size|`string`|The size of the modal.|
 |isOpen|`boolean`|Determines whether the modal is open of closed.|
 |trapFocus|`boolean`|Determines whether focus should be trapped inside the modal or not.|
@@ -43,9 +43,9 @@ Green currently provides three different variants of the modal - **dialog** (def
 |Event|Description|
 |:--------|:------|
 |isOpenChange|Event emitted when modal is opened or closed. Note that the event is not emitted if subscribed to `onClose`.|
-|onClose|Event emitted when modal is usually closed (but modal is not closed and will not close by itself). When subscribed to this event you will need to close the modal manually e.g. by updating the `isOpen` property.|
-|onConfirm|Event emitted when confirm button is clicked.|
-|onDismiss|Event emitted when dismiss button is clicked.|
+|closed|Event emitted when modal is usually closed (but modal is not closed and will not close by itself). When subscribed to this event you will need to close the modal manually e.g. by updating the `isOpen` property.|
+|confirm|Event emitted when confirm button is clicked.|
+|dismiss|Event emitted when dismiss button is clicked.|
 
 ## Examples
 
