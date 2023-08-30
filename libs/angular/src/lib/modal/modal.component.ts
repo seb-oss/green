@@ -23,7 +23,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
     }
     public set trapFocus(value: boolean | undefined) {
         this._trapFocus = value;
-        
+
         if (value) {
             if (this._isOpen) {
                 this.enableFocusTrap();
@@ -45,7 +45,12 @@ export class NggModalComponent implements OnDestroy, OnInit {
                 this.enableFocusTrap();
             }
 
-            disableBodyScroll(this.ref.nativeElement);
+            disableBodyScroll(this.ref.nativeElement, {
+                allowTouchMove: (el) => {
+                    // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
+                    return this.ref.nativeElement.contains(el);
+                }
+            });
         } else {
             this.disableFocusTrap();
             enableBodyScroll(this.ref.nativeElement);
@@ -68,8 +73,8 @@ export class NggModalComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        if (this._isOpen && this.trapFocus) 
-           this.enableFocusTrap(); 
+        if (this._isOpen && this.trapFocus)
+            this.enableFocusTrap();
         else
             this.disableFocusTrap();
     }
@@ -107,7 +112,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
             this.configurableFocusTrap.focusInitialElementWhenReady();
         }
     }
-    
+
     private disableFocusTrap() {
         if (this.configurableFocusTrap) {
             this.configurableFocusTrap.enabled = false;

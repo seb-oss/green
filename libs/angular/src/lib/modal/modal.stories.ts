@@ -24,8 +24,8 @@ const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
 
   return {
   template: `
-    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="true" (closed)="isOpen = false">
-        <p>Modal Body</p>
+    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" (closed)="isOpen = false">
+      <p>Modal Body</p>
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
   `,
@@ -40,7 +40,8 @@ export const Default = Template.bind({})
 Default.args = {
     header: 'Header',
     dismissLabel: 'Secondary',
-    confirmLabel: 'Primary'
+    confirmLabel: 'Primary',
+    trapFocus: false
 }
 
 export const Slideout = Template.bind({})
@@ -48,7 +49,8 @@ Slideout.args = {
     modalType: 'slideout',
     header: 'Header',
     dismissLabel: 'Secondary',
-    confirmLabel: 'Primary'
+    confirmLabel: 'Primary',
+    trapFocus: false
 }
 
 export const Takeover = Template.bind({})
@@ -56,5 +58,6 @@ Takeover.args = {
     modalType: 'takeover',
     header: 'Header',
     dismissLabel: 'Secondary',
-    confirmLabel: 'Primary'
+    confirmLabel: 'Primary',
+    trapFocus: false
 }
