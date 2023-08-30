@@ -94,6 +94,34 @@ describe(NggModalComponent.name, () => {
     expect(modalElement.tagName).toEqual('MAIN')
   })
 
+  it('should show header', async () => {
+    component.change({ isOpen: true })
+
+    const modalHeader = await component.findByTestId('modal-header')
+
+    expect(modalHeader).toBeDefined();
+  })
+
+  it('should not show header', async () => {
+    component.change({ isOpen: true, hideHeader: true })
+
+    await waitFor(() => expect(component.queryByTestId('modal-header')).toBeFalsy())
+  })
+
+  it('should show footer', async () => {
+    component.change({ isOpen: true, confirmLabel: 'FakeConfirm' })
+
+    const modalFooter = await component.findByTestId('modal-footer')
+
+    expect(modalFooter).toBeDefined();
+  })
+
+  it('should not show footer', async () => {
+    component.change({ isOpen: true, confirmLabel: 'FakeConfirm', hideFooter: true })
+
+    await waitFor(() => expect(component.queryByTestId('modal-footer')).toBeFalsy())
+  })
+
   it('should set header', async () => {
     component.change({ isOpen: true, header: 'FakeHeader' })
 

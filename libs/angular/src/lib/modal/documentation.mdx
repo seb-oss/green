@@ -37,6 +37,8 @@ Green currently provides three different variants of the modal - **dialog** (def
 |size|`string`|The size of the modal.|
 |isOpen|`boolean`|Determines whether the modal is open of closed.|
 |trapFocus|`boolean`|Determines whether focus should be trapped inside the modal or not.|
+|hideHeader|`boolean`|Determines whether the header part of the modal is hidden or not.|
+|hideFooter|`boolean`|Determines wheather the footer part of the modal is hidden or not.|
 
 ### Outputs
 
@@ -46,6 +48,13 @@ Green currently provides three different variants of the modal - **dialog** (def
 |closed|Event emitted when modal is usually closed (but modal is not closed and will not close by itself). When subscribed to this event you will need to close the modal manually e.g. by updating the `isOpen` property.|
 |confirm|Event emitted when confirm button is clicked.|
 |dismiss|Event emitted when dismiss button is clicked.|
+
+### Directives
+
+|Directive|Selector|Description|
+|:--------|:----------|:------|
+|NggModalHeaderDirective|nggModalHeader|Used for customizing the header part of the modal.|
+|NggModalFooterDirective|nggModalFooter|Used for customizing the footer part of the modal.|
 
 ## Examples
 
@@ -71,4 +80,12 @@ To use this component:
 
 <Canvas>
   <Story id="components-modal--takeover" />
+</Canvas>
+
+### Custom modal
+
+Uses `nggModalHeader` (NggModalHeaderDirective) and `nggModalFooter` (NggModalFooterDirective) directives to customize header and footer part of the modal.
+
+<Canvas>
+  <Story id="components-modal--custom" />
 </Canvas>
