@@ -68,8 +68,8 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
     @HostBinding('class.open') get open() { return this.isOpen; }
     @ViewChild('backdrop') private backdropRef?: ElementRef<HTMLInputElement>;
-    @ContentChild(NggModalHeaderDirective) private modalHeaderContent?: NggModalHeaderDirective;
-    @ContentChild(NggModalFooterDirective) private modalFooterContent?: NggModalFooterDirective;
+    @ContentChild(NggModalHeaderDirective) public modalHeaderContent?: NggModalHeaderDirective;
+    @ContentChild(NggModalFooterDirective) public modalFooterContent?: NggModalFooterDirective;
     private _isOpen?: boolean;
     private _trapFocus?: boolean;
     private configurableFocusTrap: ConfigurableFocusTrap;
