@@ -21,10 +21,9 @@ export default {
 
 const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
   const isOpen = true;
-
   return {
   template: `
-    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" (closed)="isOpen = false">
+    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" (closed)="isOpen = false">
       <p>Modal Body</p>
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
@@ -60,4 +59,40 @@ Takeover.args = {
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false
+}
+
+
+const CustomTemplate: Story<NggModalComponent> = (args: NggModalComponent) => {
+  const isOpen = true;
+  return {
+  template: `
+    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
+      <ng-container nggModalHeader>
+        <div style="display:flex;align-items:center;">
+          <h3>{{header}}</h3>
+          <span style="margin-left:10px;" class="badge info">!</span>
+        </div>
+      </ng-container>
+      <p>Modal Body</p>
+      <ng-container nggModalFooter>
+          <button class="danger" (click)="isOpen = false">Close</button>
+      </ng-container>
+    </ngg-modal>
+    <button (click)="isOpen = true">Open Modal</button>
+  `,
+  props: {
+    ...args,
+    isOpen
+  }
+}
+}
+
+export const Custom = CustomTemplate.bind({})
+Custom.args = {
+    header: 'Header',
+    dismissLabel: 'Secondary',
+    confirmLabel: 'Primary',
+    trapFocus: false,
+    hideHeader: false,
+    hideFooter: false
 }
