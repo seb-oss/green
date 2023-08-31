@@ -106,7 +106,7 @@ export class NggContextMenuComponent
     this.isActive = false
     this.top = CONTEXT_MENU_TOP
     this.left = CONTEXT_MENU_LEFT
-    this.changeDetectorRef.markForCheck()
+    this.changeDetectorRef.detectChanges()
   }
 
   onItemClick(item: DropdownOption): void {
