@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.2...@sebgroup/extract@1.4.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* **react:** fixed radio group prop type expandableInfo ([#975](https://github.com/sebgroup/green/issues/975)) ([72b0289](https://github.com/sebgroup/green/commit/72b028949a325bff4dca61970244f965e8c03d62))
+
+
+
 ## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.1...@sebgroup/extract@1.4.2) (2023-08-17)
 
 
