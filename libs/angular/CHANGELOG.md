@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.5...@sebgroup/green-angular@1.9.0) (2023-09-01)
+
+
+### Features
+
+* **angular:** modal customizable header and footer ([#982](https://github.com/sebgroup/green/issues/982)) ([cdc1668](https://github.com/sebgroup/green/commit/cdc1668013316459c36d13f55a6cc981e16f377b))
+
+
+
 ## [1.8.5](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.4...@sebgroup/green-angular@1.8.5) (2023-08-30)
 
 
