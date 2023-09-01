@@ -115,6 +115,19 @@
     }
   },
   {
+    "id": "components-modal--custom",
+    "name": "Custom",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
     "id": "components-wizard-in-page-wizard-step-card--default",
     "name": "Default",
     "title": "Components/Wizard/In page wizard step card",
