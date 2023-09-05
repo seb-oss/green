@@ -33,7 +33,7 @@ export class GdsInput extends LitElement {
 
   slotLead() {
       return html`
-        <div class="lead">
+        <div class="gds-input-core-lead">
           <slot name="lead" gds-allow="gds-icon"></slot>
         </div>
       `;
@@ -41,7 +41,7 @@ export class GdsInput extends LitElement {
 
   slotTrail() {
     return html`
-      <div class="trail">
+      <div class="gds-input-core-trail">
         <slot name="trail" gds-allow="gds-icon"></slot>
       </div>
     `;
@@ -49,15 +49,15 @@ export class GdsInput extends LitElement {
 
   slotBase() {
     return html`  
-      <div class="base" data-badge="SEK">
+      <div class="gds-input-core-base" data-badge="SEK">
         <label for="input">${this.slotLabel()}</label>
         <input type="text" id="input" placeholder=" " minlength="3" pattern="[a-z]+" required/>
       </div>
       `
   }
 
-  @property({ type: String, reflect: true, attribute: 'label' })
-  label = 'Label'
+  // @property({ type: String, reflect: true, attribute: 'label' })
+  // label = 'Label'
   
   render() { 
     const hasLeadSlot = this.querySelector('[slot="lead"]') !== null;
@@ -65,13 +65,13 @@ export class GdsInput extends LitElement {
     const content = html`${when( hasLeadSlot, () => this.slotLead())}${this.slotBase()}${when( hasTrailSlot, () => this.slotTrail())}`
 
     return html`
-    <div class="input">
-      <div class="main">
+    <div class="gds-input">
+      <div class="gds-input-core">
         ${content}
       </div>
-      <div class="support">
-        <span>Only lowercase, min-length 3 characters</span>
-        <div class="icon" data-badge="120">
+      <div class="gds-input-help">
+        <span class="gds-input-help-text">Only lowercase, min-length 3 characters</span>
+        <div class="gds-input-help-icon" data-badge="120">
           <gds-icon name="info"></gds-icon>
         </div>
       </div>

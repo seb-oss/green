@@ -1,12 +1,22 @@
 @use './input.mixins.scss' as *;
 @layer tokens, a11y, core, variants, sizes, sets, slotted;
 
-.input {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+@layer tokens {
+  :host {
+    @include tokens;
+    @include containment;
 
-  .main {
+    /* 
+      Consider using:
+      display: contents;
+    */
+  }
+}
+
+.gds-input {
+  @include core;
+
+  &-core {
     --border-color: hsla(60, 4%, 50%, 1);
     align-items: center;
     background-color: hsla(60, 4%, 95%, 1);
@@ -43,7 +53,7 @@
       border-color: currentColor;
       box-shadow: none;
 
-      .base {
+      .gds-input-core-base {
         label {
           font-size: 12px;
           top: 0;
@@ -74,7 +84,7 @@
         color: currentColor;
       }
 
-      .base::after {
+      .gds-input-core-base::after {
         background-color: var(--gds-color-green-85);
       }
 
@@ -97,7 +107,7 @@
         color: currentColor;
       }
 
-      .base::after {
+      .gds-input-core-base::after {
         background-color: var(--gds-color-red-85);
       }
 
@@ -119,7 +129,7 @@
       box-sizing: border-box;
     }
 
-    .base {
+    .gds-input-core-base {
       position: relative;
       width: 100%;
 
@@ -198,8 +208,8 @@
       }
     }
 
-    .lead,
-    .trail {
+    .gds-input-core-lead,
+    .gds-input-core-trail {
       align-items: center;
       aspect-ratio: 1/1;
       display: flex;
@@ -208,16 +218,16 @@
       width: 24px;
     }
 
-    .lead {
+    .gds-input-core-lead {
       justify-content: flex-start;
     }
 
-    .trail {
+    .gds-input-core-trail {
       justify-content: right;
     }
   }
 
-  .support {
+  .gds-input-help {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -227,7 +237,7 @@
       padding-inline-end: 0;
     }
 
-    .icon {
+    .gds-input-help-icon {
       align-items: center;
       display: flex;
       gap: 16px;
