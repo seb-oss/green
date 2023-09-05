@@ -1,5 +1,44 @@
 [
   {
+    "id": "components-modal--modal-default",
+    "name": "Modal Default",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out",
+    "name": "Slide Out",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--take-over",
+    "name": "Take Over",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
     "id": "components-layout-flexbox--flexbox",
     "name": "Flexbox",
     "title": "Components/Layout/Flexbox",
@@ -370,45 +409,6 @@
     "customParams": {
       "componentIds": [
         "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--modal-default",
-    "name": "Modal Default",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out",
-    "name": "Slide Out",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--take-over",
-    "name": "Take Over",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
       ]
     }
   },
