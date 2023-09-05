@@ -19,14 +19,46 @@ import {
       <gds-icon name="calendar" slot="lead" />
       <gds-icon name="x" slot="trail" />
       <gds-icon name="info" slot="help" />
-      <gds-badge content="EUR" slot="badge"  />
+      <gds-badge content="EUR" slot="badge" />
       This won't show up at all
       <gds-input-helper slot="helper" data-tooltip="Tooltip content">
         <gds-icon name="info" slot="action"></gds-icon>
-        <gds-badge slot="badge" content="SEK" />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        <gds-badge slot="badge" content="120" />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
       </gds-input-helper>
     </gds-input>
-
+  </div>
+  <div>
+    <gds-input placeholder="Placeholder only"></gds-input>
+  </div>
+  <div>
+    <gds-input placeholder="Lead icon">
+      <gds-icon name="calendar" slot="lead" />
+    </gds-input>
+  </div>
+  <div>
+    <gds-input placeholder="Trail icon">
+      <gds-icon name="x" slot="trail" />
+    </gds-input>
+  </div>
+  <div>
+    <gds-input placeholder="Trail & Lead">
+      <gds-icon name="calendar" slot="lead" />
+      <gds-icon name="x" slot="trail" />
+    </gds-input>
+  </div>
+  <div>
+    <gds-input placeholder="Lead & Badge">
+      <gds-icon name="calendar" slot="lead" />
+      <gds-badge content="USD" slot="badge" />
+    </gds-input>
+  </div>
+  <div>
+    <gds-input placeholder="Lead, Trail& Badge">
+      <gds-icon name="calendar" slot="lead" />
+      <gds-icon name="x" slot="trail" />
+      <gds-badge content="USD" slot="badge" />
+    </gds-input>
   </div>
 </gds-main>
