@@ -1,7 +1,12 @@
 import '../../tokens/tokens.css'
 import './style/input.stories.css'
 import { inspector } from '../../utils/tools/inspector/inspector'
-import { GdsButton, GdsInput, GdsIcon } from '../../../../../dist/libs/core/src'
+import {
+  GdsButton,
+  GdsInput,
+  GdsInputHelper,
+  GdsIcon,
+} from '../../../../../dist/libs/core/src'
 
 <Meta title="Components/Input/Text" />
 
@@ -9,10 +14,23 @@ import { GdsButton, GdsInput, GdsIcon } from '../../../../../dist/libs/core/src'
 
 <gds-main>
   <div>
-    <gds-input placeholder="Input Label">
+    <gds-input placeholder="I act as placeholder" data-badge="EUR">
       <gds-icon name="calendar" slot="lead"></gds-icon>
-      Label Text asdasd
       <gds-icon name="x" slot="trail"></gds-icon>
+      <gds-icon name="info" slot="help"></gds-icon>
+      Text from content
+      <gds-input-helper slot="helper" data-tooltip="Tooltip content">
+        <gds-icon name="info" slot="action"></gds-icon>
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        {/* <gds-badge content="test"></gds-badge> */}
+        Hello there some text
+      </gds-input-helper>
     </gds-input>
+
   </div>
 </gds-main>
