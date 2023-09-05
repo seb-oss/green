@@ -4,6 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import styles from './style/helper.styles.scss'
 import '../../icon/icon'
+import '../../badge/badge'
 
 /**
  * @element gds-input-helper
@@ -33,22 +34,26 @@ export class GdsInputHelper extends LitElement {
     `;
   }
 
+  slotBadge() {
+    return html`
+        <slot name="badge" gds-allow="gds-badge"></slot>
+    `;
+  }
+
   slotContent() {
     return this.textContent
     ? html`<slot part="content" gds-allow="#text"></slot>`
     : ''
   }
 
-  // This should be a component on its own or a primitive badge
-  @property({ type: String, reflect: true, attribute: 'data-badge' })
-  badgeHelper = '120'
- 
+  
   @property({ type: String, reflect: true, attribute: 'data-tooltip' })
   helperTooltip = null
 
   render() { 
     const hasIconSlot = this.querySelector('[slot="action"]') !== null;
     const hasContentSlot = this.querySelector('[slot="action"]') !== null;
+    const hasBadgeSlot = this.querySelector('[slot="badge"]') !== null;
     const IconSlot = html`${when( hasIconSlot, () => this.slotIcon())}`
     const ContentSlot = html`${when( hasContentSlot, () => this.slotContent())}`
 
@@ -56,12 +61,14 @@ export class GdsInputHelper extends LitElement {
       <div class="gds-input-helper">
         <div class="gds-input-helper-header">
           <span class="gds-input-helper-title">Some text</span>
-          <button 
-            class="gds-input-helper-action" 
-            data-badge=${this.badgeHelper} 
-            data-tooltip=${ifDefined(this.helperTooltip)}>
-               ${IconSlot}
-          </button>
+          <div class="gds-input-helper-options">
+            <button 
+              class="gds-input-helper-option" 
+              data-tooltip=${ifDefined(this.helperTooltip)}>
+              ${IconSlot}
+            </button>
+            ${when( hasBadgeSlot, () => this.slotBadge())}
+          </div>
         </div>
         ${ContentSlot}
       </div>

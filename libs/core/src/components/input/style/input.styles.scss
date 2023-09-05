@@ -188,24 +188,15 @@
           width: 40px;
         }
       }
+    }
 
-      &[data-badge]::after {
-        background-color: #fff;
-        border-radius: 3px;
-        content: attr(data-badge);
-        display: flex;
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 0;
-        line-height: 1;
-        padding: 2px 4px;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
+    .gds-input-badge {
+      pointer-events: none;
+      // position: absolute;
+      // right: 46px;
+      // top: 50%;
+      // transform: translateY(-50%);
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .gds-input-core-lead,
@@ -224,35 +215,6 @@
 
     .gds-input-core-trail {
       justify-content: right;
-    }
-  }
-
-  .gds-input-help {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-inline: 18px;
-
-    &:has([data-badge]) {
-      padding-inline-end: 0;
-    }
-
-    .gds-input-help-icon {
-      align-items: center;
-      display: flex;
-      gap: 16px;
-
-      &[data-badge]::after {
-        background-color: hsla(108, 91%, 96%, 1);
-        border-radius: 4px;
-        color: hsla(130, 40%, 30%, 1);
-        content: attr(data-badge);
-        display: flex;
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 1;
-        padding: 6px 10px;
-      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { inspector } from '../../utils/tools/inspector/inspector'
 import {
   GdsButton,
   GdsInput,
+  GdsBadge,
   GdsInputHelper,
   GdsIcon,
 } from '../../../../../dist/libs/core/src'
@@ -14,21 +15,16 @@ import {
 
 <gds-main>
   <div>
-    <gds-input placeholder="I act as placeholder" data-badge="EUR">
-      <gds-icon name="calendar" slot="lead"></gds-icon>
-      <gds-icon name="x" slot="trail"></gds-icon>
-      <gds-icon name="info" slot="help"></gds-icon>
-      Text from content
+    <gds-input placeholder="I act as placeholder">
+      <gds-icon name="calendar" slot="lead" />
+      <gds-icon name="x" slot="trail" />
+      <gds-icon name="info" slot="help" />
+      <gds-badge content="EUR" slot="badge"  />
+      This won't show up at all
       <gds-input-helper slot="helper" data-tooltip="Tooltip content">
         <gds-icon name="info" slot="action"></gds-icon>
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        {/* <gds-badge content="test"></gds-badge> */}
-        Hello there some text
+        <gds-badge slot="badge" content="SEK" />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
       </gds-input-helper>
     </gds-input>
 

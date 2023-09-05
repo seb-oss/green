@@ -1,9 +1,12 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
-
+import { customElement, property } from 'lit/decorators.js'
 import styles from './style/badge.styles.scss'
 
-// Add "lib" Attribute for Font-Awesome or similar packages
+/**
+ * @element gds-badge
+ *
+ * @status beta
+ */
 
 @customElement('gds-badge')
 export class GdsBadge extends LitElement {
@@ -14,9 +17,10 @@ export class GdsBadge extends LitElement {
     delegatesFocus: true,
   }
 
-  render() {
-    return html`
-      <div class="gds-badge>BADGE</div>
-    `
-  }
+  @property({ type: String, reflect: true, attribute: 'content' })
+  badgeContent = 'SEK'
+    // Disable content this.textContent
+  render() { 
+    const truncatedText = this.badgeContent ? this.badgeContent.substring(0, 3) : '';
+    return html`<div class="gds-badge">${truncatedText}</div>` }
 }
