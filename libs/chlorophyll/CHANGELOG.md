@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.12.0...@sebgroup/chlorophyll@1.13.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* **links:** links now have thicker underline on hover on all browsers ([#985](https://github.com/sebgroup/green/issues/985)) ([f3a2a95](https://github.com/sebgroup/green/commit/f3a2a95b41cced07b26382ca0d2ba5aa0114839a))
+* use correct key for font-weight ([bd6c947](https://github.com/sebgroup/green/commit/bd6c9475102a2cc6a6aaf4593c574b2607529627))
+
+
+### Features
+
+* 🎸 add support for black color check icons on check lists ([#986](https://github.com/sebgroup/green/issues/986)) ([ff9d1b7](https://github.com/sebgroup/green/commit/ff9d1b731e36a6661a4f643dc0f982cbb255677a))
+
+
+
 # [1.12.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.8...@sebgroup/chlorophyll@1.12.0) (2023-08-30)
 
 
