@@ -21,6 +21,6 @@ small {
   @include mixins.properties(tokens.$body-02);
 }
 
-strong {
-  font-weight: tokens.font-weight('semibold');
+strong, .strong {
+  font-weight: tokens.font-weight('medium');
 }
