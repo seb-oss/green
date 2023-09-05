@@ -15,7 +15,15 @@ import {
 
 <gds-main>
   <div>
-    <gds-input placeholder="I act as placeholder">
+    <gds-input
+      label="I am a label"
+      id="test"
+      pattern="[a-z]+"
+      type="text"
+      minlength="3"
+      name="test"
+      required
+    >
       <gds-icon name="calendar" slot="lead" />
       <gds-icon name="x" slot="trail" />
       <gds-icon name="info" slot="help" />
@@ -30,32 +38,32 @@ import {
     </gds-input>
   </div>
   <div>
-    <gds-input placeholder="Placeholder only"></gds-input>
+    <gds-input label="Label only"></gds-input>
   </div>
   <div>
-    <gds-input placeholder="Lead icon">
+    <gds-input label="Lead icon">
       <gds-icon name="calendar" slot="lead" />
     </gds-input>
   </div>
   <div>
-    <gds-input placeholder="Trail icon">
+    <gds-input label="Trail icon">
       <gds-icon name="x" slot="trail" />
     </gds-input>
   </div>
   <div>
-    <gds-input placeholder="Trail & Lead">
+    <gds-input label="Trail & Lead">
       <gds-icon name="calendar" slot="lead" />
       <gds-icon name="x" slot="trail" />
     </gds-input>
   </div>
   <div>
-    <gds-input placeholder="Lead & Badge">
+    <gds-input label="Lead & Badge">
       <gds-icon name="calendar" slot="lead" />
       <gds-badge content="USD" slot="badge" />
     </gds-input>
   </div>
   <div>
-    <gds-input placeholder="Lead, Trail& Badge">
+    <gds-input label="Lead, Trail& Badge">
       <gds-icon name="calendar" slot="lead" />
       <gds-icon name="x" slot="trail" />
       <gds-badge content="USD" slot="badge" />

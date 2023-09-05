@@ -27,8 +27,8 @@ export class GdsInput extends LitElement {
   @property({ type: String, reflect: true })
   trail = null
 
-  /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  @property({ type: String, reflect: true, attribute: "label" })
+  label = "Label"
   
   slotLabel() {
     return this.textContent
@@ -47,7 +47,7 @@ export class GdsInput extends LitElement {
   slotTrail() {
     return html`
       <div class="gds-input-core-trail">
-        <!-- This should be a button and hold -->
+        <!-- This should be a button -->
         <slot name="trail" gds-allow="gds-icon"></slot>
       </div>
     `;
@@ -56,8 +56,8 @@ export class GdsInput extends LitElement {
   slotBase() {
     return html`  
       <div class="gds-input-core-base">
-        <label for="input">${this.placeholder}</label>
-        <input type="text" id="input" placeholder=" " minlength="3" pattern="[a-z]+" required/>
+        <label for="input">${this.label}</label>
+        <input id="input" placeholder=" " />
       </div>
       `
   }
@@ -68,6 +68,29 @@ export class GdsInput extends LitElement {
         <slot name="badge" gds-allow="gds-badge"></slot>
       </div>
     `;
+  }
+  
+  private inputElement: HTMLInputElement | null = null;
+  private exludeAttr = ['placeholder', 'id', 'label'];
+
+  private reflectAttributesToInput() {
+    if (this.inputElement) {
+      const attributes = this.attributes;
+      for (let i = 0; i < attributes.length; i++) {
+        const attribute = attributes[i];
+        if (!this.exludeAttr.includes(attribute.name)) {
+          this.inputElement.setAttribute(attribute.name, attribute.value);
+        }
+      }
+    }
+  }
+
+  update(changedProperties: Map<PropertyKey, unknown>) {
+    super.update(changedProperties);
+    if (!this.inputElement) {
+      this.inputElement = this.shadowRoot?.getElementById('input') as HTMLInputElement;
+    }
+    this.reflectAttributesToInput();
   }
 
   render() { 
