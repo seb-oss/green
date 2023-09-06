@@ -154,6 +154,10 @@
 
     .form-info {
       margin-bottom: 0;
+
+      a:link:not(.button,[aria-disabled]) {
+        color: tokens.$link-color
+      }
     }
 
     > * {

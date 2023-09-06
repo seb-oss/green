@@ -3,6 +3,7 @@ import {
   debounce,
   delay,
   IExpandableInformation,
+  ILableAndLableInformation,
   IValidator,
   randomId,
   validateClassName,
@@ -17,11 +18,11 @@ import React, {
 import { InfoCircle, Times } from '../icons'
 import classNames from 'classnames'
 
-interface FormItemProps extends IExpandableInformation {
+interface FormItemProps
+  extends IExpandableInformation,
+    ILableAndLableInformation {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeInput?: (value: string) => string
-  label?: string
-  labelInformation?: string
   validator?: IValidator
   inputId?: string
   children: ReactNode

@@ -83,6 +83,11 @@ export const FormExample = () => {
         >
           <RadioGroup
             label="Radio Group"
+            labelInformation={
+              <>
+                This is a lable information with <a href="/to-a-page">a link</a>
+              </>
+            }
             onChange={(value) => console.log(value)}
           >
             <RadioButton label={'Fusilli'} value={'fusilli'} />

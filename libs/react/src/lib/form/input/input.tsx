@@ -16,7 +16,7 @@ export type Renderer = (
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   onChangeInput?: (value: string) => string,
   label?: string,
-  info?: string,
+  info?: string | React.ReactNode,
   validator?: IValidator,
   expandableInfo?: React.ReactNode,
   expandableInfoButtonLabel?: string,
