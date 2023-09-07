@@ -6,14 +6,15 @@ import {
   validateClassName,
   randomId,
   IExpandableInformation,
+  ILabelAndLabelInformation,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 
-export interface RadioGroupProps extends IExpandableInformation {
-  label?: string
+export interface RadioGroupProps
+  extends IExpandableInformation,
+    ILabelAndLabelInformation {
   title?: string
-  labelInformation?: string
   valueSelected?: string
   description?: string
   defaultSelected?: string
@@ -75,11 +76,11 @@ export const RadioGroup = ({
     if (radioBtnRef && radioBtnRef.current) {
       const form: HTMLFormElement = radioBtnRef?.current
         ?.form as HTMLFormElement
-      const resetListner = () => {
+      const resetListener = () => {
         setSelected(undefined)
       }
-      form?.addEventListener('reset', resetListner)
-      return () => form?.removeEventListener('reset', resetListner)
+      form?.addEventListener('reset', resetListener)
+      return () => form?.removeEventListener('reset', resetListener)
     } else {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       return () => {}
