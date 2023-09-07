@@ -7,7 +7,7 @@ export interface IExpandableInformation {
   expandableInfoButtonLabel?: string
 }
 
-export interface ILableAndLableInformation {
+export interface ILabelAndLabelInformation {
   label?: string
   labelInformation?: ReactNode
 }
