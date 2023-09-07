@@ -6,14 +6,14 @@ import {
   validateClassName,
   randomId,
   IExpandableInformation,
-  ILabelAndLableInformation,
+  ILabelAndLabelInformation,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 
 export interface RadioGroupProps
   extends IExpandableInformation,
-    ILabelAndLableInformation {
+    ILabelAndLabelInformation {
   title?: string
   valueSelected?: string
   description?: string

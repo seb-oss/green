@@ -3,7 +3,7 @@ import {
   debounce,
   delay,
   IExpandableInformation,
-  ILabelAndLableInformation,
+  ILabelAndLabelInformation,
   IValidator,
   randomId,
   validateClassName,
@@ -20,7 +20,7 @@ import classNames from 'classnames'
 
 interface FormItemProps
   extends IExpandableInformation,
-    ILabelAndLableInformation {
+    ILabelAndLabelInformation {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeInput?: (value: string) => string
   validator?: IValidator
