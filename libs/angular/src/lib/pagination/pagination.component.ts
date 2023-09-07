@@ -71,6 +71,10 @@ export class NggPaginationComponent implements OnChanges {
     ) {
       this._pageIndicies = this.getDisplayedPageIndicies()
     }
+
+    if (changes.length && this.pageIndex >= this.totalPages) {
+      this.goto(this.totalPages - 1)
+    }
   }
 
   hasPrevious(): boolean {
