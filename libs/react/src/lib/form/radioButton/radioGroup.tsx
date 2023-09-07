@@ -102,13 +102,9 @@ export const RadioGroup = ({
 
   if (!name) name = randomId()
 
-  const radioGroupWrapperClassNames = classNames(
-    'gds-radio-group-wrapper',
-    {
-      'gds-radio-group-wrapper--horizontal': horizontal,
-    },
-    validatorClassName
-  )
+  const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
+    'gds-radio-group-wrapper--horizontal': horizontal,
+  })
 
   return (
     <FormItem {...formItemProps}>

@@ -8,6 +8,7 @@ interface IconButtonInterface {
   'aria-expanded'?: boolean
   'aria-controls'?: string
   size?: 'small' | 'normal'
+  name: string
 }
 
 const IconButton = ({ children, onClick, ...props }: IconButtonInterface) => {
@@ -18,6 +19,7 @@ const IconButton = ({ children, onClick, ...props }: IconButtonInterface) => {
       aria-controls={props['aria-controls']}
       aria-expanded={props['aria-expanded']}
       type={props.type ?? 'button'}
+      name={props.name}
     >
       {children}
     </button>
