@@ -5,7 +5,6 @@ import {
   GdsOption,
   htmlTemplateTagFactory,
   getScopedTagName,
-  GdsFormExp,
 } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles, setLocale } from '@sebgroup/green-core'
@@ -49,6 +48,7 @@ export class AppElement extends HTMLElement {
             <input name="my-text" />
 
             <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
           </form>
         </div>
       </div>
