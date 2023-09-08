@@ -19,6 +19,7 @@ export interface SelectProps extends SelectorAttributesProps, LabelProps {
   testId?: string
   expandableInfo?: string
   expandableInfoButtonLabel?: string
+  name?: string
 }
 
 interface OptionProps {
@@ -57,6 +58,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onSelect,
       expandableInfo,
       expandableInfoButtonLabel,
+      name,
     },
     ref
   ) => {
@@ -80,6 +82,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             data-testid={testId}
             className={className}
+            name={name}
             defaultValue={defaultValue}
             value={value}
             ref={ref}
