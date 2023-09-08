@@ -1,5 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
+import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
 import { watch } from 'utils/decorators'
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
@@ -37,7 +38,7 @@ export class GdsPopover extends LitElement {
   trigger: HTMLElement | undefined = undefined
 
   @watch('trigger')
-  handleTriggerChanged() {
+  private _handleTriggerChanged() {
     this.#registerTriggerEvents()
   }
 
@@ -60,11 +61,7 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html`
-      <div class="${this.open ? 'active' : ''}">
-        <slot></slot>
-      </div>
-    `
+    return html` <slot></slot> `
   }
 
   @watch('open')
@@ -73,12 +70,31 @@ export class GdsPopover extends LitElement {
     this.hidden = !this.open
   }
 
+  #autoPositionCleanup: (() => void) | undefined
+
   #registerTriggerEvents() {
-    this.trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
+    if (!this.trigger) return
+
+    this.trigger.addEventListener('keydown', this.#triggerKeyDownListener)
+
+    const referenceEl = this.trigger
+    const floatingEl = this
+    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+      computePosition(referenceEl, floatingEl, {
+        placement: 'bottom-start',
+        middleware: [offset(8), flip()],
+      }).then(({ x, y }) => {
+        Object.assign(floatingEl.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        })
+      })
+    })
   }
 
   #unregisterTriggerEvents() {
     this.trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
+    this.#autoPositionCleanup?.()
   }
 
   /**
