@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.3...@sebgroup/extract@1.5.0) (2023-09-08)
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
 ## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.2...@sebgroup/extract@1.4.3) (2023-08-25)
 
 
