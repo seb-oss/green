@@ -2,6 +2,48 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.14.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.13.0...@sebgroup/chlorophyll@1.14.0) (2023-09-08)
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+# [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.12.0...@sebgroup/chlorophyll@1.13.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* **links:** links now have thicker underline on hover on all browsers ([#985](https://github.com/sebgroup/green/issues/985)) ([f3a2a95](https://github.com/sebgroup/green/commit/f3a2a95b41cced07b26382ca0d2ba5aa0114839a))
+* use correct key for font-weight ([bd6c947](https://github.com/sebgroup/green/commit/bd6c9475102a2cc6a6aaf4593c574b2607529627))
+
+
+### Features
+
+* 🎸 add support for black color check icons on check lists ([#986](https://github.com/sebgroup/green/issues/986)) ([ff9d1b7](https://github.com/sebgroup/green/commit/ff9d1b731e36a6661a4f643dc0f982cbb255677a))
+
+
+
+# [1.12.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.8...@sebgroup/chlorophyll@1.12.0) (2023-08-30)
+
+
+### Features
+
+* 💡 multiple sizes of spinner component ([#978](https://github.com/sebgroup/green/issues/978)) ([6c1c180](https://github.com/sebgroup/green/commit/6c1c180fbf63955e2b0c74c4a129cdd42368bc0c))
+
+
+
+## [1.11.8](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.7...@sebgroup/chlorophyll@1.11.8) (2023-08-25)
+
+
+### Bug Fixes
+
+* **typography:** switch back to unitless line-height for body ([#974](https://github.com/sebgroup/green/issues/974)) ([7ed3760](https://github.com/sebgroup/green/commit/7ed376026985f405443d775690c0a8bee3ea3613))
+
+
+
 ## [1.11.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.6...@sebgroup/chlorophyll@1.11.7) (2023-08-23)
 
 

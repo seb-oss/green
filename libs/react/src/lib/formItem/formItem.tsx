@@ -2,6 +2,8 @@ import IconButton from '../form/iconButton/iconButton'
 import {
   debounce,
   delay,
+  IExpandableInformation,
+  ILabelAndLabelInformation,
   IValidator,
   randomId,
   validateClassName,
@@ -16,16 +18,14 @@ import React, {
 import { InfoCircle, Times } from '../icons'
 import classNames from 'classnames'
 
-interface FormItemProps {
+interface FormItemProps
+  extends IExpandableInformation,
+    ILabelAndLabelInformation {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeInput?: (value: string) => string
-  label?: string
-  labelInformation?: string
   validator?: IValidator
-  expandableInfo?: React.ReactNode
   inputId?: string
   children: ReactNode
-  expandableInfoButtonLabel?: string
   role?: string
 }
 

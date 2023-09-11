@@ -14,7 +14,11 @@ ol {
 }
 
 ul.check {
-  @include mixins.check-list();
+  @include mixins.check-list(green);
+
+  &.primary {
+    @include mixins.check-list(black);
+  }
 }
 
 .table-list-caption {

@@ -2,6 +2,29 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.3...@sebgroup/green-react@1.13.0) (2023-09-08)
+
+
+### Bug Fixes
+
+* **react:** adding name attribute to select ([#992](https://github.com/sebgroup/green/issues/992)) ([872daf2](https://github.com/sebgroup/green/commit/872daf26af50119a3550d433706062c91e425064))
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+## [1.12.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.2...@sebgroup/green-react@1.12.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* **react:** fixed radio group prop type expandableInfo ([#975](https://github.com/sebgroup/green/issues/975)) ([72b0289](https://github.com/sebgroup/green/commit/72b028949a325bff4dca61970244f965e8c03d62))
+
+
+
 ## [1.12.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.1...@sebgroup/green-react@1.12.2) (2023-08-08)
 
 

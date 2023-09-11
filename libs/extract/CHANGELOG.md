@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.3...@sebgroup/extract@1.5.0) (2023-09-08)
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.2...@sebgroup/extract@1.4.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* **react:** fixed radio group prop type expandableInfo ([#975](https://github.com/sebgroup/green/issues/975)) ([72b0289](https://github.com/sebgroup/green/commit/72b028949a325bff4dca61970244f965e8c03d62))
+
+
+
 ## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.1...@sebgroup/extract@1.4.2) (2023-08-17)
 
 
