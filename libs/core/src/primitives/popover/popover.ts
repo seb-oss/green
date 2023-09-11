@@ -78,13 +78,12 @@ export class GdsPopover extends LitElement {
     this.trigger.addEventListener('keydown', this.#triggerKeyDownListener)
 
     const referenceEl = this.trigger
-    const floatingEl = this
-    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
-      computePosition(referenceEl, floatingEl, {
+    this.#autoPositionCleanup = autoUpdate(referenceEl, this, () => {
+      computePosition(referenceEl, this, {
         placement: 'bottom-start',
         middleware: [offset(8), flip()],
       }).then(({ x, y }) => {
-        Object.assign(floatingEl.style, {
+        Object.assign(this.style, {
           left: `${x}px`,
           top: `${y}px`,
         })
