@@ -13,10 +13,14 @@
         "packageJson": "libs/core/package.json",
         "outputPath": "dist/libs/core/src",
         "main": "libs/core/src/index.ts",
+        "additionalEntryPoints": [
+          "libs/core/src/transitional-styles.ts",
+          "libs/core/src/localization.ts"
+        ],
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [],
         "updateBuildableProjectDepsInPackageJson": false,
-        "esbuildConfig": "libs/core/esbuild.config.js"
+        "esbuildConfig": "libs/core/esbuild.config.cjs"
       }
     },
     "build-with-types": {
@@ -30,7 +34,7 @@
       "executor": "@nrwl/workspace:run-commands",
       "dependsOn": ["build-with-types"],
       "options": {
-        "command": "node libs/core/build-scripts/generate-scope-suffix.js"
+        "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
     },
     "lint": {
