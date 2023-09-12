@@ -9,7 +9,7 @@ export const registerTransitionalStyles = () => {
 }
 
 declare global {
-  var __gdsTransitionalStyles: TransitionalStyles
+  var __gdsTransitionalStyles: TransitionalStyles // eslint-disable-line no-var
 }
 
 export class TransitionalStyles {
