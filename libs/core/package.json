@@ -6,7 +6,10 @@
   "module": "index.js",
   "type": "module",
   "exports": {
-    ".": "./index.js",
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
     "./transitional-styles": {
       "types": "./transitional-styles.d.ts",
       "default": "./transitional-styles.js"

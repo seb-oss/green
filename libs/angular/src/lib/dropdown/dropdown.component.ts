@@ -25,7 +25,9 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import { GdsDropdown, registerTransitionalStyles } from '@sebgroup/green-core'
+import { GdsDropdown } from '@sebgroup/green-core'
+
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 const selectionText = (
   value: DropdownOption | DropdownOption[] | undefined,

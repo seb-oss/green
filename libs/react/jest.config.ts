@@ -1,4 +1,7 @@
 /* eslint-disable */
+const { pathsToModuleNameMapper } = require('ts-jest')
+const { compilerOptions } = require('../../tsconfig.base')
+
 export default {
   displayName: 'react',
   preset: '../../jest.preset.js',
@@ -11,7 +14,7 @@ export default {
   transformIgnorePatterns: [
     'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs/)',
   ],
-  moduleNameMapper: {
-    '@sebgroup/green-core': '<rootDir>/../../dist/libs/core/src',
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/../..',
+  }),
 }

@@ -2,12 +2,9 @@ import { DropdownArgs, DropdownOption, OnChange } from '@sebgroup/extract'
 import React from 'react'
 import { createComponent } from '@lit-labs/react'
 
-import {
-  GdsDropdown,
-  GdsOption,
-  getScopedTagName,
-  registerTransitionalStyles,
-} from '@sebgroup/green-core'
+import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
+
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 registerTransitionalStyles()
 
