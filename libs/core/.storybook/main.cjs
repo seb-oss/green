@@ -1,4 +1,4 @@
-const rootMain = require('../../../.storybook/main')
+const rootMain = require('../../../.storybook/main.js')
 
 module.exports = {
   core: { builder: 'webpack5' },
