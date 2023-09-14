@@ -107,7 +107,11 @@
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
-        "postTargets": ["core:publish", "core:github"]
+        "postTargets": [
+          "core:build-with-types-and-scoping",
+          "core:publish",
+          "core:github"
+        ]
       }
     },
     "github": {
