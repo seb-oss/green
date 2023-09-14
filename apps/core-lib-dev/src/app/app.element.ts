@@ -7,7 +7,8 @@ import {
   getScopedTagName,
 } from '@sebgroup/green-core'
 
-import { registerTransitionalStyles, setLocale } from '@sebgroup/green-core'
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { setLocale } from '@sebgroup/green-core/localization'
 
 const html = htmlTemplateTagFactory((strs: TemplateStringsArray) =>
   strs.join('')
@@ -28,6 +29,7 @@ export class AppElement extends HTMLElement {
         <div class="card">
           <form id="my-form">
             <gds-form-validator></gds-form-validator>
+
             <gds-dropdown
               searchable
               multiple
@@ -57,7 +59,6 @@ export class AppElement extends HTMLElement {
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
 
     dropdown.addEventListener('change', (e: CustomEvent) => {
-      console.log('Is Droopdown? ', e.target instanceof GdsDropdown)
       console.log('Value changed: ', e.detail.value)
       console.log('dropdown', dropdown.options)
       console.log('dd name', dropdown.name)
