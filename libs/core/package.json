@@ -5,6 +5,21 @@
   "main": "index.js",
   "module": "index.js",
   "type": "module",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/core/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "exports": {
     ".": {
       "types": "./index.d.ts",

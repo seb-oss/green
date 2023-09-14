@@ -2,5 +2,3 @@
 
 Green Core is a carefully crafted set of Web Components\
 that lays the foundation for the Green Design System.
-
-![color](#EAFFE8)
