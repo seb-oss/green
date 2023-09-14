@@ -5,6 +5,12 @@
   "projectType": "library",
   "targets": {
     "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nx run core:build-with-types-and-scoping"
+      }
+    },
+    "build-src": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "format": ["esm", "cjs"],
@@ -31,7 +37,7 @@
     },
     "build-with-types": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
+      "dependsOn": ["build-src"],
       "options": {
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
@@ -107,11 +113,7 @@
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
-        "postTargets": [
-          "core:build-with-types-and-scoping",
-          "core:publish",
-          "core:github"
-        ]
+        "postTargets": ["core:publish", "core:github"]
       }
     },
     "github": {
@@ -125,7 +127,7 @@
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "access": "public",
-        "noBuild": true
+        "distFolderPath": "dist/libs/core/src"
       }
     }
   },
