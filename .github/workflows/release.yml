@@ -44,9 +44,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Build core library
-        run: yarn build:core
-
       - name: Build rest of libraries
         run: yarn build:libs
 
