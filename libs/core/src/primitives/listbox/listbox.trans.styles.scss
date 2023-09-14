@@ -1,0 +1,5 @@
+@use '../../../../chlorophyll/scss/components/list/mixins' as list;
+
+:host {
+  @include list.base-list;
+}

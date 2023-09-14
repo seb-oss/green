@@ -1,4 +1,7 @@
 /* eslint-disable */
+const { pathsToModuleNameMapper } = require('ts-jest')
+const { compilerOptions } = require('../../tsconfig.base')
+
 export default {
   displayName: 'react-lib-dev',
   preset: '../../jest.preset.js',
@@ -8,4 +11,10 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/react-lib-dev',
+  transformIgnorePatterns: [
+    'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs|dist/)',
+  ],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/../..',
+  }),
 }

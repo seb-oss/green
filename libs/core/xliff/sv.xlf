@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="sv" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="s58bfb494feb8eb02">
+  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
+  <target><x id="0" equiv-text="${this.value.length}"/> valda</target>
+</trans-unit>
+<trans-unit id="sd898d99fd9c13de6">
+  <source>Filter available options</source>
+  <target>Sök i listan av val</target>
+</trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Sök</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

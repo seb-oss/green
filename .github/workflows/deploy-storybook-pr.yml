@@ -15,6 +15,8 @@ jobs:
           filters: |
             any:
               - libs/**
+            core:
+              - libs/core/**
             chlorophyll:
               - libs/chlorophyll/**
             react:
@@ -38,6 +40,8 @@ jobs:
           filters: |
             any:
               - libs/**
+            core:
+              - libs/core/**
             chlorophyll:
               - libs/chlorophyll/**
             react:
@@ -56,7 +60,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: lts/*
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -110,6 +114,7 @@ jobs:
           script: |
             // Storybooks
             const storybooks = {
+                'core': ${{steps.check-updated-storybooks.outputs.core}},
                 'chlorophyll': ${{steps.check-updated-storybooks.outputs.chlorophyll}},
                 'react': ${{steps.check-updated-storybooks.outputs.react}},
                 'react-charts': ${{steps.check-updated-storybooks.outputs.react-charts}},

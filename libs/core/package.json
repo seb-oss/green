@@ -1,0 +1,22 @@
+{
+  "name": "@sebgroup/green-core",
+  "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
+  "version": "1.0.0-beta.1",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./transitional-styles": {
+      "types": "./transitional-styles.d.ts",
+      "default": "./transitional-styles.js"
+    },
+    "./localization": {
+      "types": "./localization.d.ts",
+      "default": "./localization.js"
+    }
+  }
+}

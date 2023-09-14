@@ -62,18 +62,26 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
   }
 }
 
+@mixin select-option-highlighted {
+  background: $highlighted-background;
+}
+
+@mixin select-option {
+  @include common.padding-horizontal(4);
+  @include common.padding-vertical(4);
+  @include common.add-hover-active-state();
+  line-height: 1.25;
+  cursor: pointer;
+
+  // highlighted option
+  &.active.sg-highlighted {
+    @include select-option-highlighted;
+  }
+}
+
 @mixin select {
   [role='option'] {
-    @include common.padding-horizontal(4);
-    @include common.padding-vertical(4);
-    @include common.add-hover-active-state();
-    line-height: 1.25;
-    cursor: pointer;
-
-    // highlighted option
-    &.active.sg-highlighted {
-      background: $highlighted-background;
-    }
+    @include select-option;
   }
 }
 

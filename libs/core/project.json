@@ -1,0 +1,122 @@
+{
+  "name": "core",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "format": ["esm", "cjs"],
+      "platform": "browser",
+      "options": {
+        "packageJson": "libs/core/package.json",
+        "outputPath": "dist/libs/core/src",
+        "main": "libs/core/src/index.ts",
+        "additionalEntryPoints": [
+          "libs/core/src/transitional-styles.ts",
+          "libs/core/src/localization.ts"
+        ],
+        "tsConfig": "libs/core/tsconfig.lib.json",
+        "assets": [],
+        "updateBuildableProjectDepsInPackageJson": false,
+        "esbuildConfig": "libs/core/esbuild.config.cjs"
+      }
+    },
+    "build-with-types": {
+      "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
+      }
+    },
+    "build-with-types-and-scoping": {
+      "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build-with-types"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/workspace:run-commands",
+      "dependsOn": ["build-with-types"],
+      "options": {
+        "command": "npx wtr --node-resolve --playwright --browsers chromium firefox webkit"
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/core/.storybook",
+        "uiFramework": "@storybook/web-components"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "dependsOn": ["build-with-types-and-scoping"],
+      "options": {
+        "outputDir": "dist/storybook/core",
+        "configDir": "libs/core/.storybook",
+        "uiFramework": "@storybook/web-components"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "update-deps-and-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run core:update-dependencies && nx run core:version-and-release"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-and-release": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-${projectName}@",
+        "push": true,
+        "preid": "beta",
+        "releaseAs": "prerelease",
+        "dryRun": true
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "access": "public"
+      }
+    }
+  },
+  "tags": []
+}

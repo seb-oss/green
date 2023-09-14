@@ -48,6 +48,17 @@
         "style": "none",
         "linter": "eslint"
       }
+    },
+    "@nrwl/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/web:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
@@ -66,7 +77,12 @@
       "inputs": ["default", "^production"]
     },
     "build-storybook": {
-      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/.storybook/**/*",
+        "!{projectRoot}/.storybook/**/*"
+      ]
     },
     "build-nx-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
