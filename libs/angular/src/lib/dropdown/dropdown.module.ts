@@ -1,9 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { NggDropdownComponent } from './dropdown.component'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
-import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
 
 @NgModule({
   declarations: [
@@ -11,8 +10,11 @@ import { NggCoreWrapperModule } from '../shared/core-element/core-element.module
     NggDropdownOptionDirective,
     NggDropdownButtonDirective,
   ],
-  imports: [CommonModule, NggCoreWrapperModule],
-  exports: [NggDropdownComponent, NggDropdownOptionDirective],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [CommonModule],
+  exports: [
+    NggDropdownComponent,
+    NggDropdownOptionDirective,
+    NggDropdownButtonDirective,
+  ],
 })
 export class NggDropdownModule {}
