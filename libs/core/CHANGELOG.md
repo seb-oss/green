@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.2...@sebgroup/green-core@1.0.0-beta.3) (2023-09-14)
+
+
+### Bug Fixes
+
+* **core:** fix incorrectly referencing React project targets in release ([#998](https://github.com/sebgroup/green/issues/998)) ([f3180e1](https://github.com/sebgroup/green/commit/f3180e1d75d2c5a2ef63ee25d6c9600fcf4b23bc))
+
+
+
 # [1.0.0-beta.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.1...@sebgroup/green-core@1.0.0-beta.2) (2023-09-14)
 
 
