@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.3...@sebgroup/green-core@1.0.0-beta.4) (2023-09-14)
+
+
+### Bug Fixes
+
+* **core:** break out to separate build command ([#999](https://github.com/sebgroup/green/issues/999)) ([8db3476](https://github.com/sebgroup/green/commit/8db3476ce9e507557fc47b3a0df6e7c3d894a192))
+
+
+
 # [1.0.0-beta.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.2...@sebgroup/green-core@1.0.0-beta.3) (2023-09-14)
 
 
