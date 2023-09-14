@@ -107,7 +107,7 @@
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
-        "postTargets": ["react:publish", "react:github"]
+        "postTargets": ["core:publish", "core:github"]
       }
     },
     "github": {
