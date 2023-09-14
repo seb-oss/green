@@ -18,7 +18,13 @@
           "libs/core/src/localization.ts"
         ],
         "tsConfig": "libs/core/tsconfig.lib.json",
-        "assets": [],
+        "assets": [
+          {
+            "glob": "README.md",
+            "input": ".",
+            "output": "."
+          }
+        ],
         "updateBuildableProjectDepsInPackageJson": false,
         "esbuildConfig": "libs/core/esbuild.config.cjs"
       }
@@ -114,7 +120,8 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public"
+        "access": "public",
+        "noBuild": true
       }
     }
   },
