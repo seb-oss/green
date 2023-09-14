@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.5](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.4...@sebgroup/green-core@1.0.0-beta.5) (2023-09-14)
+
+
+### Bug Fixes
+
+* **core:** missing files in package ([5c245ba](https://github.com/sebgroup/green/commit/5c245ba58387a430f9289137d476ae4a8e34d290))
+
+
+
 # [1.0.0-beta.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.3...@sebgroup/green-core@1.0.0-beta.4) (2023-09-14)
 
 
