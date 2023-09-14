@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "nx": "nx",
-    "build:libs": "nx run-many -p angular,angular-charts,charts,chlorophyll,extract,react,react-charts  --target=build",
+    "build:libs": "nx run-many -p core,angular,angular-charts,charts,chlorophyll,extract,react,react-charts  --target=build",
     "build:apps": "nx run-many -p colors --target=build",
     "build:all": "yarn build:libs && yarn build:apps",
     "test": "nx test",

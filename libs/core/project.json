@@ -100,8 +100,7 @@
         "tagPrefix": "@sebgroup/green-${projectName}@",
         "push": true,
         "preid": "beta",
-        "releaseAs": "prerelease",
-        "dryRun": true
+        "releaseAs": "prerelease"
       }
     },
     "github": {
