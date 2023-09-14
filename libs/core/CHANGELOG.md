@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.7...@sebgroup/green-core@1.0.0-beta.8) (2023-09-14)
+
+
+### Bug Fixes
+
+* **core:** try duplicating `outputPath` in dummy `build` target ([#1003](https://github.com/sebgroup/green/issues/1003)) ([6b61c5e](https://github.com/sebgroup/green/commit/6b61c5e25ea33ecfa41375ed39649299f01eb4f8))
+
+
+
 # [1.0.0-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.6...@sebgroup/green-core@1.0.0-beta.7) (2023-09-14)
 
 
