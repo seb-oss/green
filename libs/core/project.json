@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
       "options": {
+        "outputPath": "dist/libs/core/src",
         "command": "nx run core:build-with-types-and-scoping"
       }
     },
@@ -126,8 +128,7 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public",
-        "distFolderPath": "dist/libs/core/src"
+        "access": "public"
       }
     }
   },
