@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.14.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.14.1...@sebgroup/chlorophyll@1.14.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* **slider:** fix layout when instruction field is used ([#1010](https://github.com/sebgroup/green/issues/1010)) ([7f5010f](https://github.com/sebgroup/green/commit/7f5010f0fdad840fcbf308bf898f6368cee62315))
+* **slider:** remove mobile multi-row layout ([#1005](https://github.com/sebgroup/green/issues/1005)) ([9676106](https://github.com/sebgroup/green/commit/9676106eb07ffe7066b3c947e9d04eb84a5bc4da)), closes [#994](https://github.com/sebgroup/green/issues/994)
+
+
+
 ## [1.14.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.14.0...@sebgroup/chlorophyll@1.14.1) (2023-09-14)
 
 
