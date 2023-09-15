@@ -94,12 +94,11 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
 
   > * {
     margin: 0;
+    flex-grow: 1;
+    width: 100%;
   }
 
   label {
-    flex-grow: 1;
-    width: 100%;
-
     @include common.media-breakpoint-down('sm') {
       display: block;
       margin-bottom: 0.75rem;
