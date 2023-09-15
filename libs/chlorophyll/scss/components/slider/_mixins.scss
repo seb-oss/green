@@ -86,12 +86,10 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
 }
 
 @mixin add-slider-label-container-styles() {
-  @include common.media-breakpoint-up('sm') {
-    display: flex;
-    justify-content: space-between;
-    gap: $spacing;
-    align-items: flex-start;
-  }
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing;
+  align-items: flex-start;
   margin-bottom: $spacing;
 
   > * {
