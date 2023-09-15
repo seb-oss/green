@@ -460,13 +460,16 @@ describe('<gds-dropdown multiple>', () => {
       </gds-dropdown>
     `)
 
-    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
-    const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
-
-    await clickOnElement(option2, 'center')
+    el.focus()
+    await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
-
-    await clickOnElement(option3, 'center')
+    await sendKeys({ press: 'ArrowDown' })
+    await el.updateComplete
+    await sendKeys({ press: 'Space' })
+    await el.updateComplete
+    await sendKeys({ press: 'ArrowDown' })
+    await el.updateComplete
+    await sendKeys({ press: 'Space' })
     await el.updateComplete
 
     expect(el.value.toString()).to.equal(['v2', 'v3'].toString())

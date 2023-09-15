@@ -55,31 +55,32 @@ export const Template = ({ validation, enabled, text }) => {
 `}
 </style>
 
-# Dropdowns
+# Dropdown
 
 <div role="alert" class="info mb-7 mt-5">
   <main>
     <h3>Missing JavaScript!</h3>
     <p>
-      Please note that the examples below just represent the html markup and they won't work without JavaScript. Please checkout the framework implementations for "working" examples.
+      Please note that the examples below just represent the html markup and they won't work
+      without JavaScript. Please checkout the framework implementations for "working" examples.
     </p>
   </main>
   <footer>
-    <a target="_blank" href="./../angular/?path=/docs/components-dropdown--select">View Angular component</a>
-    <a target="_blank" href="./../react/?path=/docs/components-dropdown--dropdown">View React component</a>
+    <a target="_blank" href="./../angular/?path=/docs/components-dropdown">View Angular component</a>
+    <a target="_blank" href="./../react/?path=/docs/components-dropdown">View React component</a>
   </footer>
 </div>
 
 ### Dropdown select
 <Canvas>
   <div style={{height: '300px'}}>
-    <button type="button" aria-haspopup="listbox">Option 2</button>
+    <button type="button" aria-haspopup="listbox">Pizza</button>
     <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
       <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
       <ul role="listbox" aria-activedescendant="option_2" tabIndex="-1">
-        <li id="option_1" role="option">Option 1</li>
-        <li id="option_2" role="option" aria-selected>Option 2</li>
-        <li id="option_3" role="option">Option 3</li>
+        <li id="option_1" role="option">Tacos</li>
+        <li id="option_2" role="option" aria-selected>Pizza</li>
+        <li id="option_3" role="option">Sushi</li>
       </ul>
     </div>
   </div>
@@ -88,7 +89,7 @@ export const Template = ({ validation, enabled, text }) => {
 ### Dropdown multiselect
 <Canvas>
   <div style={{height: '300px'}}>
-    <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
+    <button type="button" aria-haspopup="listbox">Pizza, Sushi</button>
     <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
       <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
       <div class="sg-fieldset-container">
@@ -96,12 +97,17 @@ export const Template = ({ validation, enabled, text }) => {
           <legend class="sr-only">Checkbox group</legend>
           <label class="form-control" role="option">
             <input required type="checkbox" />
-            <span>One</span>
+            <span>Tacos</span>
             <i></i>
           </label>
           <label class="form-control" role="option">
-            <input required type="checkbox" required />
-            <span>Two</span>
+            <input required type="checkbox" checked />
+            <span>Pizza</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Sushi</span>
             <i></i>
           </label>
         </fieldset>
@@ -113,7 +119,7 @@ export const Template = ({ validation, enabled, text }) => {
 ### Dropdown multiselect with search
 <Canvas>
   <div style={{height: '300px'}}>
-    <button type="button" aria-haspopup="listbox">Option 2, Option 3</button>
+    <button type="button" aria-haspopup="listbox">Tacos, Sushi</button>
     <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
       <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
       <div class="sg-fieldset-container">
@@ -121,13 +127,18 @@ export const Template = ({ validation, enabled, text }) => {
           <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
           <legend class="sr-only">Checkbox group</legend>
           <label class="form-control" role="option">
-            <input required type="checkbox" />
-            <span>One</span>
+            <input required type="checkbox" checked />
+            <span>Tacos</span>
             <i></i>
           </label>
           <label class="form-control" role="option">
-            <input required type="checkbox" required />
-            <span>Two</span>
+            <input required type="checkbox" />
+            <span>Pizza</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Sushi</span>
             <i></i>
           </label>
         </fieldset>
@@ -148,9 +159,9 @@ export const Template = ({ validation, enabled, text }) => {
     <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
       <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
       <ul id="autocompleteListbox" role="listbox">
-        <li id="option_1" role="option">Option 1</li>
-        <li id="option_2" role="option">Option 2</li>
-        <li id="option_3" role="option">Option 3</li>
+        <li id="option_1" role="option">Tacos</li>
+        <li id="option_2" role="option">Pizza</li>
+        <li id="option_3" role="option">Sushi</li>
       </ul>
     </div>
   </div>
@@ -168,9 +179,9 @@ export const Template = ({ validation, enabled, text }) => {
     <div class="popover popover-dropdown active" tabindex="-1" role="menu">
       <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
       <ul id="dropdownMenu" role="menu" tabIndex="-1">
-        <li id="option_1" role="menuitem">Action 1</li>
-        <li id="option_2" role="menuitem">Action 2</li>
-        <li id="option_3" role="menuitem">Action 3</li>
+        <li id="option_1" role="menuitem">Save</li>
+        <li id="option_2" role="menuitem">Load</li>
+        <li id="option_3" role="menuitem">Change</li>
       </ul>
     </div>
   </div>
@@ -181,17 +192,20 @@ export const Template = ({ validation, enabled, text }) => {
   <div>
     <div class="form-group">
       <span class="label" id="dropdown1_label">Label</span>
-      <button type="button" aria-labelledby="dropdown1_label" aria-describedby="dropdown1_info" aria-haspopup="listbox">Option 2</button>
+      <button type="button" aria-labelledby="dropdown1_label" aria-describedby="dropdown1_info"
+        aria-haspopup="listbox">Tacos</button>
       <span class="form-info" id="dropdown1_info">Neutral</span>
     </div>
     <div class="form-group">
       <span class="label" id="dropdown2_label">Label</span>
-      <button type="button" aria-labelledby="dropdown2_label" aria-describedby="dropdown2_info" aria-haspopup="listbox" class="is-valid">Option 2</button>
+      <button type="button" aria-labelledby="dropdown2_label" aria-describedby="dropdown2_info"
+        aria-haspopup="listbox" class="is-valid">Pizza</button>
       <span class="form-info" id="dropdown2_info">Valid</span>
     </div>
     <div class="form-group">
       <span class="label" id="dropdown3_label">Label</span>
-      <button type="button" aria-labelledby="dropdown3_label" aria-describedby="dropdown3_info" aria-haspopup="listbox" class="is-invalid">Option 2</button>
+      <button type="button" aria-labelledby="dropdown3_label" aria-describedby="dropdown3_info"
+        aria-haspopup="listbox" class="is-invalid">Sushi</button>
       <span class="form-info" id="dropdown3_info">Error</span>
     </div>
   </div>

@@ -443,7 +443,7 @@ describe('billboard', () => {
       settings = { data: [] }
       const pChart: Partial<Chart> = {
         categories: jest.fn().mockReturnValue([]),
-        color: jest.fn().mockReturnValue('#379D00FF'),
+        color: jest.fn().mockReturnValue('#308800'),
       }
       chart = pChart as Chart
     })
@@ -458,8 +458,8 @@ describe('billboard', () => {
       const expected: Legend = {
         placement: 'top',
         items: [
-          { title: 'Foo', color: '#379D00FF' },
-          { title: 'Bar', color: '#379D00FF' },
+          { title: 'Foo', color: '#308800' },
+          { title: 'Bar', color: '#308800' },
         ],
       }
 

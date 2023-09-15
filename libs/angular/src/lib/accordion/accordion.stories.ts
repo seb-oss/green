@@ -20,17 +20,16 @@ export default {
 } as Meta<NggAccordionComponent>
 
 const Template: Story<NggAccordionComponent> = () => {
-    
     return {
         template:`
         <ngg-accordion [closeOthers]=false>
-            <div ngg-accordion-list-item listItemHeader="First section" listItemSubHeader="The first section">
+            <div ngg-accordion-list-item listItemHeader="First accordion heading" listItemSubHeader="First accordion sublabel">
                 <p>This is the content of the first section</p>
             </div>
-            <div ngg-accordion-list-item listItemHeader="Second section" listItemSubHeader="The second section">
+            <div ngg-accordion-list-item listItemHeader="Second accordion heading" listItemSubHeader="Second accordion sublabel">
                 <p>This is the content of the second section</p>
             </div>
-            <div ngg-accordion-list-item listItemHeader="Third section" listItemSubHeader="The third section">
+            <div ngg-accordion-list-item listItemHeader="Third accordion heading" listItemSubHeader="Third accordion sublabel">
               <p>This is the content of the second section</p>
             </div>
         </ngg-accordion>
@@ -39,30 +38,28 @@ const Template: Story<NggAccordionComponent> = () => {
 }
 
 const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
-  return {
-    template:`
-    <ngg-accordion [closeOthers]=false>
-        <div ngg-accordion-list-item listItemHeader="First section">
-            <p>This is the content of the first section</p>
-        </div>
-        <div ngg-accordion-list-item listItemHeader="Second section">
-            <p>This is the content of the second section</p>
-        </div>
-        <div ngg-accordion-list-item listItemHeader="Third section">
-          <p>This is the content of the second section</p>
-        </div>
-    </ngg-accordion>
-    `,
-  }
+    return {
+        template:`
+        <ngg-accordion [closeOthers]=false>
+            <div ngg-accordion-list-item listItemHeader="First accordion heading">
+                <p>This is the content of the first section</p>
+            </div>
+            <div ngg-accordion-list-item listItemHeader="Second accordion heading">
+                <p>This is the content of the second section</p>
+            </div>
+            <div ngg-accordion-list-item listItemHeader="Third accordion heading">
+              <p>This is the content of the second section</p>
+            </div>
+        </ngg-accordion>
+        `,
+    }
 }
 
-
 const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
-    
   return {
       template:`
       <ngg-accordion [closeOthers]=true>
-          <div ngg-accordion-list-item listItemHeader="First section" listItemSubHeader="First section with just one option">
+          <div ngg-accordion-list-item listItemHeader="First accordion accordion" listItemSubHeader="First accordion with just one option">
             <div>
               <label class="form-control">
                 <input type="checkbox" />
@@ -71,7 +68,7 @@ const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
               </label>
             </div>
           </div>
-          <div ngg-accordion-list-item listItemHeader="Second section" listItemSubHeader="Second section with three options">
+          <div ngg-accordion-list-item listItemHeader="Second accordion accordion" listItemSubHeader="Second accordion with three options">
               <div>
                 <label class="form-control">
                   <input type="checkbox" />
@@ -90,7 +87,7 @@ const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
                   </label>
               </div>
           </div>
-          <div ngg-accordion-list-item listItemHeader="Third section" listItemSubHeader="Third section with two options">
+          <div ngg-accordion-list-item listItemHeader="Third accordion accordion" listItemSubHeader="Third accordion with two options">
             <div>
               <label class="form-control">
                 <input type="checkbox" />

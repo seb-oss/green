@@ -9,20 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: lts/*
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -35,20 +35,20 @@ jobs:
 
       - name: Get branch name
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+        run: echo "branch=${GITHUB_REF}" >> "$GITHUB_OUTPUT"
         id: branch
 
       - name: Determine deploy target
         shell: bash
         run: |
           if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
-            echo "##[set-output name=target;]$(echo latest)"
+            echo "target=latest" >> "$GITHUB_OUTPUT"
           elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
-            echo "##[set-output name=target;]$(echo alpha)"
+            echo "target=alpha" >> "$GITHUB_OUTPUT"
           elif [[ "${{ steps.branch.outputs.branch }}" == "beta" ]]; then
-            echo "##[set-output name=target;]$(echo latest)"
+            echo "target=latest" >> "$GITHUB_OUTPUT"
           else
-            echo "##[set-output name=target;]$(echo pr-${{ github.event.number }})"
+            echo "target=pr-${{ github.event.number }}" >> "$GITHUB_OUTPUT"
           fi
         id: target
 

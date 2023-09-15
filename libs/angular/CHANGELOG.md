@@ -2,6 +2,70 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.5...@sebgroup/green-angular@1.9.0) (2023-09-01)
+
+
+### Features
+
+* **angular:** modal customizable header and footer ([#982](https://github.com/sebgroup/green/issues/982)) ([cdc1668](https://github.com/sebgroup/green/commit/cdc1668013316459c36d13f55a6cc981e16f377b))
+
+
+
+## [1.8.5](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.4...@sebgroup/green-angular@1.8.5) (2023-08-30)
+
+
+### Bug Fixes
+
+* 🐛 wrong position after zoom-in due to cached position ([#976](https://github.com/sebgroup/green/issues/976)) ([b114586](https://github.com/sebgroup/green/commit/b11458689acfcf2f6c7683c31684c86d69696357))
+* Angular modal scroll iOS ([#979](https://github.com/sebgroup/green/issues/979)) ([6a165a2](https://github.com/sebgroup/green/commit/6a165a2e532af64b194097e43e67c218230f49a2))
+
+
+
+## [1.8.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.3...@sebgroup/green-angular@1.8.4) (2023-08-23)
+
+
+### Bug Fixes
+
+* 🐛 wrong calculation of y position for context menu ([#973](https://github.com/sebgroup/green/issues/973)) ([d90ccc8](https://github.com/sebgroup/green/commit/d90ccc87cd62c0eecdca01f04e705c5127af69ca))
+
+
+
+## [1.8.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.2...@sebgroup/green-angular@1.8.3) (2023-08-21)
+
+
+### Bug Fixes
+
+* 🐛 fix context menu position in relative parent ([#970](https://github.com/sebgroup/green/issues/970)) ([d8f208e](https://github.com/sebgroup/green/commit/d8f208ed4766e0b940ebf4491ca4158715380d0f))
+
+
+
+## [1.8.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.1...@sebgroup/green-angular@1.8.2) (2023-08-17)
+
+
+### Bug Fixes
+
+* **datepicker:** correctly reflect state after formGroup reset ([#964](https://github.com/sebgroup/green/issues/964)) ([b300d36](https://github.com/sebgroup/green/commit/b300d360232f8fcbabc84dd42ce6867e023e92a8))
+
+
+
+## [1.8.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.0...@sebgroup/green-angular@1.8.1) (2023-08-08)
+
+
+
+# [1.8.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.2...@sebgroup/green-angular@1.8.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* **slider:** mobile version, small input on desktop, added `aria-labelledby` ([#929](https://github.com/sebgroup/green/issues/929)) ([456c934](https://github.com/sebgroup/green/commit/456c934443e94766231c284b3f1eaa4e8bc6b040)), closes [#902](https://github.com/sebgroup/green/issues/902) [#920](https://github.com/sebgroup/green/issues/920) [#923](https://github.com/sebgroup/green/issues/923)
+
+
+### Features
+
+* **dropdown:** 🎸 new input to set fixed placement of popover ([#930](https://github.com/sebgroup/green/issues/930)) ([ff782d6](https://github.com/sebgroup/green/commit/ff782d67602883e7f56af239d08a8c44a264f321))
+
+
+
 ## [1.7.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.7.1...@sebgroup/green-angular@1.7.2) (2023-05-24)
 
 

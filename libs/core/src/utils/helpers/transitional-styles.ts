@@ -8,14 +8,15 @@ export const registerTransitionalStyles = () => {
   Popover.register()
 }
 
-export class TransitionalStyles {
-  private static singleton: TransitionalStyles
-  private constructor() {}
+declare global {
+  var __gdsTransitionalStyles: TransitionalStyles // eslint-disable-line no-var
+}
 
+export class TransitionalStyles {
   static get instance() {
-    if (!TransitionalStyles.singleton)
-      TransitionalStyles.singleton = new TransitionalStyles()
-    return TransitionalStyles.singleton
+    if (!globalThis.__gdsTransitionalStyles)
+      globalThis.__gdsTransitionalStyles = new TransitionalStyles()
+    return globalThis.__gdsTransitionalStyles
   }
 
   private sheets = new Map<string, CSSStyleSheet>()

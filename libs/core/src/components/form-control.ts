@@ -37,7 +37,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     attribute: 'aria-invalid',
     converter: {
       fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value.toString(),
+      toAttribute: (value: boolean) => value?.toString(),
     },
   })
   invalid = false
@@ -79,6 +79,16 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.#internals.form?.addEventListener('reset', this.#handleFormReset)
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.#internals.form?.removeEventListener('reset', this.#handleFormReset)
+  }
+
   @watch('invalid')
   private __handleValidityChange() {
     this.#internals.setValidity(
@@ -100,10 +110,13 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   @watch('value')
   private __handleValueChange() {
-    this.setFormValue(this.value as any)
+    this.#internals.setFormValue(this.value as any)
   }
 
-  protected setFormValue(value: any) {
-    this.#internals.setFormValue(value as any)
+  /**
+   * Event handler for the form reset event.
+   */
+  #handleFormReset = () => {
+    this.value = undefined
   }
 }

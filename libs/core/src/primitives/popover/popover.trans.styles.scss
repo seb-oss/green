@@ -1,6 +1,12 @@
 @use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
 
-div {
+:host {
   @include popover.popover;
   overflow: hidden;
+}
+
+:host([open]) {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
 }

@@ -2,6 +2,133 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.14.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.14.0...@sebgroup/chlorophyll@1.14.1) (2023-09-14)
+
+
+
+# [1.14.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.13.0...@sebgroup/chlorophyll@1.14.0) (2023-09-08)
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+# [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.12.0...@sebgroup/chlorophyll@1.13.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* **links:** links now have thicker underline on hover on all browsers ([#985](https://github.com/sebgroup/green/issues/985)) ([f3a2a95](https://github.com/sebgroup/green/commit/f3a2a95b41cced07b26382ca0d2ba5aa0114839a))
+* use correct key for font-weight ([bd6c947](https://github.com/sebgroup/green/commit/bd6c9475102a2cc6a6aaf4593c574b2607529627))
+
+
+### Features
+
+* 🎸 add support for black color check icons on check lists ([#986](https://github.com/sebgroup/green/issues/986)) ([ff9d1b7](https://github.com/sebgroup/green/commit/ff9d1b731e36a6661a4f643dc0f982cbb255677a))
+
+
+
+# [1.12.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.8...@sebgroup/chlorophyll@1.12.0) (2023-08-30)
+
+
+### Features
+
+* 💡 multiple sizes of spinner component ([#978](https://github.com/sebgroup/green/issues/978)) ([6c1c180](https://github.com/sebgroup/green/commit/6c1c180fbf63955e2b0c74c4a129cdd42368bc0c))
+
+
+
+## [1.11.8](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.7...@sebgroup/chlorophyll@1.11.8) (2023-08-25)
+
+
+### Bug Fixes
+
+* **typography:** switch back to unitless line-height for body ([#974](https://github.com/sebgroup/green/issues/974)) ([7ed3760](https://github.com/sebgroup/green/commit/7ed376026985f405443d775690c0a8bee3ea3613))
+
+
+
+## [1.11.7](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.6...@sebgroup/chlorophyll@1.11.7) (2023-08-23)
+
+
+### Bug Fixes
+
+* **color:** dark green color updated (dark2) ([7d32f59](https://github.com/sebgroup/green/commit/7d32f5997d16746f81fe40065aef12db8aa8cd1d)), closes [#961](https://github.com/sebgroup/green/issues/961)
+
+
+
+## [1.11.6](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.5...@sebgroup/chlorophyll@1.11.6) (2023-08-21)
+
+
+### Bug Fixes
+
+* 🐛 fix context menu position in relative parent ([#970](https://github.com/sebgroup/green/issues/970)) ([d8f208e](https://github.com/sebgroup/green/commit/d8f208ed4766e0b940ebf4491ca4158715380d0f))
+
+
+
+## [1.11.5](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.4...@sebgroup/chlorophyll@1.11.5) (2023-08-14)
+
+
+### Bug Fixes
+
+* **dropdown:** increase default z-index of popover ([#956](https://github.com/sebgroup/green/issues/956)) ([acf2267](https://github.com/sebgroup/green/commit/acf2267c54bafd1be70405617fc659c05c2e2d6a))
+
+
+
+## [1.11.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.3...@sebgroup/chlorophyll@1.11.4) (2023-08-08)
+
+
+### Bug Fixes
+
+* filter chip icons ([#951](https://github.com/sebgroup/green/issues/951)) ([3bf6d6a](https://github.com/sebgroup/green/commit/3bf6d6a128d793af4eb66f0effe30a960bfbe172)), closes [#945](https://github.com/sebgroup/green/issues/945)
+
+
+
+## [1.11.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.2...@sebgroup/chlorophyll@1.11.3) (2023-07-07)
+
+
+### Bug Fixes
+
+* **input:** added small version ([#921](https://github.com/sebgroup/green/issues/921)) ([cbaff51](https://github.com/sebgroup/green/commit/cbaff51539c9a72741521f772c3889852e7411ea))
+* **slide-toggle:** dark mode border ([#927](https://github.com/sebgroup/green/issues/927)) ([3803917](https://github.com/sebgroup/green/commit/3803917cf19815b67b6a4821f2c4f1da066ae4c6))
+* **slider:** mobile version, small input on desktop, added `aria-labelledby` ([#929](https://github.com/sebgroup/green/issues/929)) ([456c934](https://github.com/sebgroup/green/commit/456c934443e94766231c284b3f1eaa4e8bc6b040)), closes [#902](https://github.com/sebgroup/green/issues/902) [#920](https://github.com/sebgroup/green/issues/920) [#923](https://github.com/sebgroup/green/issues/923)
+
+
+
+## [1.11.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.1...@sebgroup/chlorophyll@1.11.2) (2023-06-21)
+
+
+### Bug Fixes
+
+* **value-list:** added small spacing ([#918](https://github.com/sebgroup/green/issues/918)) ([bc02a99](https://github.com/sebgroup/green/commit/bc02a99262a1f86a76ef596988b3a0b98a73425b))
+
+
+
+## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.11.0...@sebgroup/chlorophyll@1.11.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **button:** adjust small button size ([#915](https://github.com/sebgroup/green/issues/915)) ([32cf177](https://github.com/sebgroup/green/commit/32cf177a4836c76ce6b098ade77c92f6bd8886e5))
+
+
+
+# [1.11.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.3...@sebgroup/chlorophyll@1.11.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* **expandable-form-info:** use small icon button ([9eb4cd6](https://github.com/sebgroup/green/commit/9eb4cd6ba9aee9d77157c56003e5d5140dbb3e59))
+* **slide-toggle:** darker background and hover-back transition ([#914](https://github.com/sebgroup/green/issues/914)) ([435625d](https://github.com/sebgroup/green/commit/435625dc6dbbf501cf79c82ec9dc790d1e396547))
+
+
+### Features
+
+* **expandable-form-info:** allow custom expandable content ([#913](https://github.com/sebgroup/green/issues/913)) ([bfa6f4e](https://github.com/sebgroup/green/commit/bfa6f4ee6964ae65ec4bdae5ba7b55579495df7d))
+* **icon-button:** add small variant ([6f99ddb](https://github.com/sebgroup/green/commit/6f99ddb4e8ca2c52803d3811e49f0d4bd2e74ede))
+
+
+
 ## [1.10.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.10.2...@sebgroup/chlorophyll@1.10.3) (2023-05-24)
 
 

@@ -1,25 +1,4 @@
-# stems
+# ![image](https://user-images.githubusercontent.com/11420341/121186039-f6eeda00-c866-11eb-9d80-21d01d065f0a.png) core
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test stems` to execute the unit tests via [Jest](https://jestjs.io).
-
-## Running lint
-
-Run `nx lint stems` to execute the lint via [ESLint](https://eslint.org/).
-
-## Build andwatch core
-
-`nx watch --projects=core -- nx run core:build-with-types`
-
-`nx run core:build-with-types`
-
-`nx serve core:storybook`
-
-`nx serve core:storybook`
-
-`nx run core:build-with-types`
-
-`nx run core:test`
+Green Core is a carefully crafted set of Web Components\
+that lays the foundation for the Green Design System.

@@ -2,6 +2,55 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.5.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.5.0...@sebgroup/extract@1.5.1) (2023-09-14)
+
+
+
+# [1.5.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.3...@sebgroup/extract@1.5.0) (2023-09-08)
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.2...@sebgroup/extract@1.4.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* **react:** fixed radio group prop type expandableInfo ([#975](https://github.com/sebgroup/green/issues/975)) ([72b0289](https://github.com/sebgroup/green/commit/72b028949a325bff4dca61970244f965e8c03d62))
+
+
+
+## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.1...@sebgroup/extract@1.4.2) (2023-08-17)
+
+
+### Bug Fixes
+
+* **datepicker:** close when clicking outside ([#965](https://github.com/sebgroup/green/issues/965)) ([4c799bf](https://github.com/sebgroup/green/commit/4c799bfe95366e412c076bfc6f36f737bea1a060))
+
+
+
+## [1.4.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.4.0...@sebgroup/extract@1.4.1) (2023-08-08)
+
+
+### Bug Fixes
+
+* 🐛 fix dropdown options then values is numeric ([#948](https://github.com/sebgroup/green/issues/948)) ([679963e](https://github.com/sebgroup/green/commit/679963ed7f7abd83afcf06855264410c48a81ea1))
+
+
+
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.4...@sebgroup/extract@1.4.0) (2023-07-07)
+
+
+### Features
+
+* **dropdown:** 🎸 new input to set fixed placement of popover ([#930](https://github.com/sebgroup/green/issues/930)) ([ff782d6](https://github.com/sebgroup/green/commit/ff782d67602883e7f56af239d08a8c44a264f321))
+
+
+
 ## [1.3.4](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.3.3...@sebgroup/extract@1.3.4) (2023-05-24)
 
 

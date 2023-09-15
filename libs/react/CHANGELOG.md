@@ -2,6 +2,89 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.3...@sebgroup/green-react@1.13.0) (2023-09-08)
+
+
+### Bug Fixes
+
+* **react:** adding name attribute to select ([#992](https://github.com/sebgroup/green/issues/992)) ([872daf2](https://github.com/sebgroup/green/commit/872daf26af50119a3550d433706062c91e425064))
+
+
+### Features
+
+* **react:** information label can now be react node ([#990](https://github.com/sebgroup/green/issues/990)) ([448b9f6](https://github.com/sebgroup/green/commit/448b9f6de32ee58429fa7465f61d2618d0b6c6bb))
+
+
+
+## [1.12.3](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.2...@sebgroup/green-react@1.12.3) (2023-08-25)
+
+
+### Bug Fixes
+
+* **react:** fixed radio group prop type expandableInfo ([#975](https://github.com/sebgroup/green/issues/975)) ([72b0289](https://github.com/sebgroup/green/commit/72b028949a325bff4dca61970244f965e8c03d62))
+
+
+
+## [1.12.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.1...@sebgroup/green-react@1.12.2) (2023-08-08)
+
+
+### Bug Fixes
+
+* 🐛 add onchange support to form items component ([#954](https://github.com/sebgroup/green/issues/954)) ([e1f6b50](https://github.com/sebgroup/green/commit/e1f6b50b5035ed672eb2bf73e2851fb46019cbca))
+
+
+
+## [1.12.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.0...@sebgroup/green-react@1.12.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* **slider:** mobile version, small input on desktop, added `aria-labelledby` ([#929](https://github.com/sebgroup/green/issues/929)) ([456c934](https://github.com/sebgroup/green/commit/456c934443e94766231c284b3f1eaa4e8bc6b040)), closes [#902](https://github.com/sebgroup/green/issues/902) [#920](https://github.com/sebgroup/green/issues/920) [#923](https://github.com/sebgroup/green/issues/923)
+
+
+
+# [1.12.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.11.1...@sebgroup/green-react@1.12.0) (2023-06-21)
+
+
+### Features
+
+* **tabs:** can set any tab as selected by default ([#907](https://github.com/sebgroup/green/issues/907)) ([6a8d62d](https://github.com/sebgroup/green/commit/6a8d62d3b7cf6d0c79723a0f4329d270001d371b)), closes [#373](https://github.com/sebgroup/green/issues/373)
+
+
+
+## [1.11.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.11.0...@sebgroup/green-react@1.11.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **button:** adjust small button size ([#915](https://github.com/sebgroup/green/issues/915)) ([32cf177](https://github.com/sebgroup/green/commit/32cf177a4836c76ce6b098ade77c92f6bd8886e5))
+
+
+
+# [1.11.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.10.1...@sebgroup/green-react@1.11.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* **expandable-form-info:** use small icon button ([9eb4cd6](https://github.com/sebgroup/green/commit/9eb4cd6ba9aee9d77157c56003e5d5140dbb3e59))
+
+
+### Features
+
+* **expandable-form-info:** allow custom expandable content ([#913](https://github.com/sebgroup/green/issues/913)) ([bfa6f4e](https://github.com/sebgroup/green/commit/bfa6f4ee6964ae65ec4bdae5ba7b55579495df7d))
+* **icon-button:** add small variant ([6f99ddb](https://github.com/sebgroup/green/commit/6f99ddb4e8ca2c52803d3811e49f0d4bd2e74ede))
+
+
+
+## [1.10.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.10.0...@sebgroup/green-react@1.10.1) (2023-06-08)
+
+
+### Performance Improvements
+
+* ⚡️ only renders tab content when tab is selected ([#905](https://github.com/sebgroup/green/issues/905)) ([1ea4dbc](https://github.com/sebgroup/green/commit/1ea4dbc6031419b3048aae98a6cf624df3d6f44a)), closes [#904](https://github.com/sebgroup/green/issues/904)
+
+
+
 # [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.9.4...@sebgroup/green-react@1.10.0) (2023-05-31)
 
 

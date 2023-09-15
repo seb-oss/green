@@ -9,6 +9,7 @@ export interface IList {
   text?: string
   href?: string
   disabled?: boolean
+  selected?:boolean
 }
 
 interface TabsProps {
@@ -25,13 +26,14 @@ export interface TabProps {
   title: string
   disabled?: boolean
   href?: string
-  children?: ReactNode
+  children?: ReactNode,
+  selected?: boolean
 }
 
 export const Tab = (props: PropsWithChildren<TabProps>) => null
 
 export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
-  const [selectedTab, setSelectedTab] = useState(0)
+  const [selectedTab, setSelectedTab] = useState(getDefaultSelectedTab())
   const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     if (event.currentTarget.ariaDisabled !== 'true') {
@@ -42,6 +44,19 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
       onTabChange && onTabChange(focusedIndex)
     }
   }
+
+  function getDefaultSelectedTab(): number {
+    let selectedTabIndex = 0;
+    
+    if(children)
+       selectedTabIndex = children.findIndex(x => x.props.selected)
+    else if(list){
+       selectedTabIndex = list.findIndex(x => x.selected)
+    }
+
+    return selectedTabIndex !== -1 ? selectedTabIndex : 0
+  }
+
   return (
     <>
       <nav role="tablist">
@@ -90,7 +105,7 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
             key={index}
             aria-hidden={selectedTab !== index}
           >
-            {tab.props.children}
+             {selectedTab === index && tab.props.children}
           </article>
         ))}
       </section>

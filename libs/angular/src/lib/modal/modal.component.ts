@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ModalType, Size } from '@sebgroup/extract';
 import { ConfigurableFocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 import {
     disableBodyScroll,
     enableBodyScroll,
 } from "body-scroll-lock";
+import { NggModalHeaderDirective } from './modal-header.directive';
+import { NggModalFooterDirective } from './modal-footer.directive';
 
 @Component({
     selector: 'ngg-modal',
@@ -18,12 +20,14 @@ export class NggModalComponent implements OnDestroy, OnInit {
     @Input() public confirmLabel?: string
     @Input() public dismissLabel?: string
     @Input() public size?: Size
+    @Input() public hideHeader?: boolean;
+    @Input() public hideFooter?: boolean;
     @Input() public get trapFocus(): boolean | undefined {
         return this._trapFocus;
     }
     public set trapFocus(value: boolean | undefined) {
         this._trapFocus = value;
-        
+
         if (value) {
             if (this._isOpen) {
                 this.enableFocusTrap();
@@ -45,7 +49,12 @@ export class NggModalComponent implements OnDestroy, OnInit {
                 this.enableFocusTrap();
             }
 
-            disableBodyScroll(this.ref.nativeElement);
+            disableBodyScroll(this.ref.nativeElement, {
+                allowTouchMove: (el) => {
+                    // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
+                    return this.ref.nativeElement.contains(el);
+                }
+            });
         } else {
             this.disableFocusTrap();
             enableBodyScroll(this.ref.nativeElement);
@@ -59,6 +68,8 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
     @HostBinding('class.open') get open() { return this.isOpen; }
     @ViewChild('backdrop') private backdropRef?: ElementRef<HTMLInputElement>;
+    @ContentChild(NggModalHeaderDirective) public modalHeaderContent?: NggModalHeaderDirective;
+    @ContentChild(NggModalFooterDirective) public modalFooterContent?: NggModalFooterDirective;
     private _isOpen?: boolean;
     private _trapFocus?: boolean;
     private configurableFocusTrap: ConfigurableFocusTrap;
@@ -68,8 +79,8 @@ export class NggModalComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        if (this._isOpen && this.trapFocus) 
-           this.enableFocusTrap(); 
+        if (this._isOpen && this.trapFocus)
+            this.enableFocusTrap();
         else
             this.disableFocusTrap();
     }
@@ -107,7 +118,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
             this.configurableFocusTrap.focusInitialElementWhenReady();
         }
     }
-    
+
     private disableFocusTrap() {
         if (this.configurableFocusTrap) {
             this.configurableFocusTrap.enabled = false;

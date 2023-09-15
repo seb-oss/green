@@ -1,4 +1,7 @@
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -6,7 +9,10 @@ import {
   Inject,
   Injector,
   Input,
+  OnChanges,
+  OnDestroy,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core'
 import {
@@ -15,31 +21,21 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms'
 import {
+  AbstractDropdown,
   CompareWith,
+  createDropdown,
+  DropdownArgs,
+  DropdownHandler,
   DropdownOption,
   DropdownOptionElement,
+  DropdownPlacements,
   DropdownTexts,
+  dropdownValues,
+  ElementProps,
   SearchFilter,
 } from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
-
-import { GdsDropdown, registerTransitionalStyles } from '@sebgroup/green-core'
-
-const selectionText = (
-  value: DropdownOption | DropdownOption[] | undefined,
-  display: string,
-  texts?: DropdownTexts
-) => {
-  if (!Array.isArray(value))
-    return value?.[display] || (texts?.placeholder ?? 'Select')
-
-  let selectedOptions = value
-  const displayValues = selectedOptions.map((option) => option?.[display])
-  return displayValues?.length > 2
-    ? `${displayValues.length} ${texts?.selected} `
-    : displayValues?.join(', ') || (texts?.placeholder ?? 'Select')
-}
 
 @Component({
   selector: 'ngg-dropdown',
@@ -51,22 +47,24 @@ const selectionText = (
       multi: true,
     },
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggDropdownComponent implements ControlValueAccessor {
+export class NggDropdownComponent
+  implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges
+{
   @Input() id?: string
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
-  @Input() display: string = 'label'
-  @Input() useValue: string = 'value'
+  @Input() display?: string
+  @Input() useValue?: string
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
   @Input() invalid?: boolean
   @Input() compareWith?: CompareWith
   @Input() searchFilter?: SearchFilter
+  @Input() fixedPlacement?: DropdownPlacements
 
-  //
   @Input() set multiSelect(value: string | boolean) {
     this._multiSelect = this.convertToBoolean(value)
   }
@@ -75,7 +73,6 @@ export class NggDropdownComponent implements ControlValueAccessor {
   }
   private _multiSelect = false
 
-  //
   @Input() set searchable(value: string | boolean) {
     this._searchable = this.convertToBoolean(value)
   }
@@ -84,42 +81,26 @@ export class NggDropdownComponent implements ControlValueAccessor {
   }
   private _searchable = false
 
-  //
   @Input() set value(newValue: any) {
-    if (!newValue || !this.options || newValue === this._value) return
-
-    if (Array.isArray(newValue)) {
-      this._value = this.options.filter((o) =>
-        newValue.includes(o[this.useValue])
-      )
-    } else this._value = this.options.find((o) => o[this.useValue] === newValue)
-
-    this.texts = {
-      ...this.texts,
-      select: selectionText(this._value, this.display, this.texts),
-    }
+    this.handler?.selectByValue(newValue)
+    this._value = newValue
   }
   get value(): any {
-    let value = this._value
-
-    if (Array.isArray(this._value)) {
-      value = this._value.map((o) => o[this.useValue])
-    } else {
-      value = this._value && this._value[this.useValue]
-    }
-
-    return value
-  }
-  private _value: DropdownOption | DropdownOption[] | undefined
-
-  //
-  get selectedOption() {
     return this._value
+  }
+  private _value: any
+
+  get selectedOption() {
+    return this.handler?.dropdown.options.find((o) => o.selected)
   }
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @Output() readonly touched: EventEmitter<boolean> =
     new EventEmitter<boolean>()
+
+  @ViewChild('togglerRef') public togglerRef?: ElementRef<HTMLElement>
+  @ViewChild('listboxRef') public listboxRef?: ElementRef<HTMLElement>
+  @ViewChild('fieldsetRef') public fieldsetRef?: ElementRef<HTMLElement>
 
   @ContentChild(NggDropdownOptionDirective)
   customOption?: NggDropdownOptionDirective
@@ -127,47 +108,56 @@ export class NggDropdownComponent implements ControlValueAccessor {
   @ContentChild(NggDropdownButtonDirective)
   customButton?: NggDropdownButtonDirective
 
-  @ViewChild('gdsDropdown', { static: false }) gdsDropdown?: ElementRef
-
-  public onValueChange: (event: Event) => void = (event) => {
-    const target = event.target as GdsDropdown<DropdownOption>
-    this._value = target.value
-
-    this.texts = {
-      ...this.texts,
-      select: selectionText(this._value, this.display, this.texts),
-    }
-
-    this.onChangeFn?.(this.value)
-    this.valueChange.emit(this.value)
-  }
-
   onChangeFn?: (value: unknown) => void
   onTouchedFn?: () => void
+
+  dropdown?: AbstractDropdown
+  handler?: DropdownHandler
+  toggler?: Partial<ElementProps> = dropdownValues().elements?.toggler
+  listbox?: Partial<ElementProps> = dropdownValues().elements?.listbox
+  fieldset?: Partial<ElementProps> = dropdownValues().elements?.fieldset
 
   get control(): NgControl | undefined {
     return this.injector.get(NgControl)
   }
 
-  constructor(@Inject(Injector) private injector: Injector) {
-    console.log('derp: ', registerTransitionalStyles)
-    registerTransitionalStyles()
-  }
+  constructor(
+    private cd: ChangeDetectorRef,
+    @Inject(Injector) private injector: Injector
+  ) {}
 
   ngAfterViewInit(): void {
-    if (!this._value) {
-      if (this.multiSelect)
-        this._value = this.options?.filter((o) => o.selected === true)
-      else this._value = this.options?.find((o) => o.selected === true)
+    if (this.togglerRef?.nativeElement && this.listboxRef?.nativeElement) {
+      this.handler = createDropdown(
+        this.props,
+        this.togglerRef.nativeElement,
+        this.listboxRef.nativeElement,
+        this.fieldsetRef?.nativeElement,
+        (dropdown) => {
+          this.dropdown = dropdown
+          this.toggler = dropdown.elements.toggler
+          this.listbox = dropdown.elements.listbox
+          this.fieldset = dropdown.elements.fieldset
+          this.cd.detectChanges()
+        },
+        (value) => {
+          this.updateValue(value)
+        },
+        this.fixedPlacement
+      )
     }
+  }
 
-    this.texts = {
-      close: this.texts?.close ?? 'Close',
-      optionsDescription: this.texts?.optionsDescription ?? 'Options',
-      placeholder: this.texts?.placeholder ?? 'Select',
-      searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
-      selected: this.texts?.selected ?? 'selected',
-      select: selectionText(this._value, this.display, this.texts),
+  ngOnDestroy(): void {
+    this.handler?.destroy()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      this.handler &&
+      (changes.id || changes.texts || changes.loop || changes.options)
+    ) {
+      this.handler.update(this.props)
     }
   }
 
@@ -185,6 +175,37 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   trackByKey = (index: number, option: DropdownOptionElement): string => {
     return option.attributes.id ?? ''
+  }
+
+  search($event: Event): void {
+    this.handler?.search(($event.target as HTMLInputElement).value)
+  }
+
+  private get props(): DropdownArgs {
+    return {
+      id: this.id || this.dropdown?.id,
+      texts: this.texts,
+      useValue: this.useValue,
+      display: this.display,
+      options: this.options,
+      loop: this.loop,
+      value: this.value,
+      multiSelect: this.multiSelect,
+      searchable: this.searchable,
+      searchFilter: this.searchFilter,
+      compareWith: this.compareWith,
+      onTouched: () => {
+        this.onTouchedFn?.()
+        this.touched.emit(true)
+        this.cd.markForCheck()
+      },
+    }
+  }
+
+  private updateValue(option: any): void {
+    this._value = option
+    this.valueChange.emit(option)
+    this.onChangeFn?.(option)
   }
 
   private convertToBoolean(value: string | boolean): boolean {

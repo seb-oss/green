@@ -69,6 +69,17 @@ Select component.
       control: {
         type: null
       }
+    },
+    name: {
+      name: 'name',
+      type: {name: 'string'},
+      description: 'This will be used for the name attribute on the select element',
+      table: {
+        type: {summary: 'string'},
+      },
+      control: {
+        type: 'text'
+      }
     }
   }}
 />
@@ -88,7 +99,8 @@ Select component.
         <Option value={7}>7</Option>
         <Option value={8}>8</Option>
         </>
-      )
+      ),
+      name: 'my-select'
     }}
   >
     {Template.bind({})}

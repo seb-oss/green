@@ -1,4 +1,37 @@
 {
   "name": "@sebgroup/green-core",
-  "version": "0.0.1"
+  "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
+  "version": "1.0.0-beta.8",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/core/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./transitional-styles": {
+      "types": "./transitional-styles.d.ts",
+      "default": "./transitional-styles.js"
+    },
+    "./localization": {
+      "types": "./localization.d.ts",
+      "default": "./localization.js"
+    }
+  }
 }

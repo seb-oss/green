@@ -65,6 +65,7 @@ $variants: (
 
   &:hover {
     text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
   }
 
   &:active {
@@ -138,7 +139,6 @@ Base on background color of parent element eg. white links on dark backgrounds e
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;
-    text-decoration: none;
     &:hover,
     &:focus,
     &:visited {

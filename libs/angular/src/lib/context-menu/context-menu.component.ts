@@ -17,6 +17,7 @@ import {
 import { DropdownOption } from '@sebgroup/extract'
 import { Subject, Subscription } from 'rxjs'
 import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
+import { CONTEXT_MENU_LEFT, CONTEXT_MENU_TOP } from './context-menu.constants'
 
 @Component({
   selector: 'ngg-context-menu',
@@ -34,20 +35,20 @@ export class NggContextMenuComponent
   @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
     new EventEmitter<DropdownOption>()
 
-  @ViewChild('contextMenuPopover') popover: ElementRef | undefined
+  @ViewChild('contextMenuPopover') popover!: ElementRef<HTMLElement>
 
-  @ViewChild('contextMenuAnchor') anchor: ElementRef | undefined
+  @ViewChild('contextMenuAnchor') anchor!: ElementRef<HTMLElement>
 
   isActive = false
-  top = '0px'
-  left = '0px'
+  top = CONTEXT_MENU_TOP
+  left = CONTEXT_MENU_LEFT
 
   resizeObserver?: ResizeObserver
   menuCloseSubscription?: Subscription
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<HTMLElement>,
     @Optional()
     @Inject(ON_SCROLL_TOKEN)
     public closeContextMenu: Subject<void>
@@ -58,9 +59,8 @@ export class NggContextMenuComponent
     if (!this.isActive) {
       return
     }
-    const contextMenuElement = this.elementRef.nativeElement as HTMLElement
 
-    if (!contextMenuElement.contains(target)) {
+    if (!this.elementRef.nativeElement.contains(target)) {
       this.close()
     }
   }
@@ -91,20 +91,21 @@ export class NggContextMenuComponent
       return
     }
 
-    const anchor = this.anchor?.nativeElement as HTMLElement
-    const buttonRect = anchor.getBoundingClientRect()
+    const buttonRect = this.anchor?.nativeElement.getBoundingClientRect()
 
-    const left = this.calculateLeft(this.direction, buttonRect)
-    const top = this.calculateTop(buttonRect.bottom)
     const gapBetweenButtonAndPopover = 3
+    const left = this.calculateLeft(this.direction, buttonRect)
+    const top = buttonRect.bottom + gapBetweenButtonAndPopover;
 
     this.left = `${left}px`
-    this.top = `${top + gapBetweenButtonAndPopover}px`
+    this.top = `${top}px`
     this.isActive = true
   }
 
   close(): void {
     this.isActive = false
+    this.top = CONTEXT_MENU_TOP
+    this.left = CONTEXT_MENU_LEFT
     this.changeDetectorRef.markForCheck()
   }
 
@@ -123,10 +124,6 @@ export class NggContextMenuComponent
       default:
         break
     }
-  }
-
-  calculateTop(buttonRectBottom: number): number {
-    return buttonRectBottom + window.pageYOffset
   }
 
   calculateLeft(direction: string, buttonRect: DOMRect): number {

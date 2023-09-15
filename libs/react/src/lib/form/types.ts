@@ -1,13 +1,13 @@
-import { IValidator } from '@sebgroup/extract'
-import { HTMLProps } from 'react'
+import { IValidator, IExpandableInformation } from '@sebgroup/extract'
+import React, { HTMLProps } from 'react'
 
-export interface TextInputProps extends HTMLProps<HTMLInputElement> {
+export interface TextInputProps
+  extends HTMLProps<HTMLInputElement>,
+    IExpandableInformation {
   type?: 'text' | 'email' | 'number'
   label?: string
   info?: string
   testId?: string
-  expandableInfo?: string
-  expandableInfoButtonLabel?: string
   validator?: IValidator
   onChangeInput?: (value: string) => string
 }
@@ -17,8 +17,6 @@ export interface NumberInputProps extends TextInputProps {
   min?: number
   max?: number
   step?: number
-  expandableInfo?: string
-  expandableInfoButtonLabel?: string
 }
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {

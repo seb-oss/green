@@ -56,7 +56,7 @@ export class GdsOption extends LitElement {
     this.#hidden = value === 'true' || value === true
     this.setAttribute('aria-hidden', value.toString())
   }
-  #hidden: boolean = false
+  #hidden = false
 
   /**
    * Returns true if the option is selected.
@@ -66,7 +66,7 @@ export class GdsOption extends LitElement {
     attribute: 'aria-selected',
     reflect: true,
   })
-  selected: boolean = false
+  selected = false
 
   /**
    * Sets this option as a placeholder.
@@ -75,7 +75,7 @@ export class GdsOption extends LitElement {
    * In a multiple select listbox, placeholder options will not be rendered in the list.
    */
   @property({ type: Boolean, reflect: true })
-  isPlaceholder: boolean = false
+  isPlaceholder = false
 
   constructor() {
     super()

@@ -38,9 +38,11 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  line-height: 1.125rem;
+  line-height: 1.125;
   min-height: 100vh;
   text-rendering: optimizeSpeed;
+  font-family: tokens.font-family('sans');
+  font-size: tokens.$base-font-size;
 }
 
 /* A elements that don't have a class get default styles */
@@ -79,9 +81,4 @@ select {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-body {
-  font-family: tokens.font-family('sans');
-  font-size: tokens.$base-font-size;
 }

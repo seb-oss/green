@@ -1,9 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { FormItems, TextInput } from '.'
 import * as FormContext from './formContext'
 
 describe('FormItems Component', () => {
-  const mockFormContext: jest.SpyInstance = jest.spyOn(FormContext, 'useFormContext')
+  const mockFormContext: jest.SpyInstance = jest.spyOn(
+    FormContext,
+    'useFormContext'
+  )
 
   beforeEach(() => {
     mockFormContext.mockImplementation(() => ({
@@ -41,5 +45,19 @@ describe('FormItems Component', () => {
       target: { value: 'new value' },
     })
     expect(mockFn).toBeCalledTimes(2)
+  })
+
+  it('Should propagate onChange event to callback when provided', async () => {
+    const inputText = 'new value'
+    const user = userEvent.setup()
+    const mockFn: jest.Mock = jest.fn()
+    render(
+      <FormItems name="text" onChange={mockFn}>
+        <TextInput label="Some field" />
+      </FormItems>
+    )
+    expect(mockFn).not.toBeCalled()
+    await user.type(screen.getByRole('textbox'), inputText)
+    expect(mockFn).toBeCalledTimes(inputText.length)
   })
 })
