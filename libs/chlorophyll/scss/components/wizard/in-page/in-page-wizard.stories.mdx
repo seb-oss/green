@@ -82,7 +82,7 @@ Presents a sequence that leads the user through well-defined steps within a page
   args={{
     isCompleted: true,
     isStarted: true,
-    isEditable: false,
+    isEditable: true,
     stepText: 'Step 1 of 6',
     title: 'Title',
     content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
@@ -96,13 +96,15 @@ Presents a sequence that leads the user through well-defined steps within a page
 
 A completed step has a green check mark icon and an Edit-button which allows the user to change previously entered information.
 
+Use the `.editable` class in the container element to display the Edit button.
+
 <Canvas>
   <Story
     name="Completed step"
     args={{
       isCompleted: true,
       isStarted: true,
-      isEditable: false,
+      isEditable: true,
       stepText: 'Step 1 of 6',
       title: 'Title',
       content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
@@ -122,7 +124,7 @@ The current step is the one the user is currently interacting with.
     args={{
       isCompleted: false,
       isStarted: true,
-      isEditable: false,
+      isEditable: true,
       stepText: 'Step 2 of 6',
       title: 'Title',
       content: `<div class="form-group">
@@ -151,7 +153,7 @@ An upcoming step only shows the title and step number, but hides the details in 
     args={{
       isCompleted: false,
       isStarted: false,
-      isEditable: false,
+      isEditable: true,
       stepText: 'Step 3 of 6',
       title: 'Title',
       content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
