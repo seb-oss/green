@@ -123,4 +123,10 @@
     display: flex;
     background-color: tokens.get(tokens.$green, 1);
   }
+
+  &.completed &__footer {
+    @media (min-width: 576px) {
+      display: none;
+    }
+  }
 }

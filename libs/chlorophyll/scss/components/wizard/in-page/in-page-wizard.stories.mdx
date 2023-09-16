@@ -31,19 +31,16 @@ export const Template = ({
         }
       </header>
       ${
-        isStarted
-          ? `
-      <div class="gds-in-page-wizard-step-card__content">${content}</div>
-      ${
-        !isCompleted
-          ? `
-      <footer class="gds-in-page-wizard-step-card__footer">
-        <button class="primary">Next</button>
-      </footer>
-      `
-          : ''
-      }
-      `
+        isStarted ? 
+        `<div class="gds-in-page-wizard-step-card__content">${content}</div>
+          <footer class="gds-in-page-wizard-step-card__footer">
+            ${isCompleted ? 
+              `<button class="secondary">Edit</button>`
+              :
+              `<button class="primary">Next</button>`
+            }
+          </footer>
+        `
           : ''
       }
     </section>
