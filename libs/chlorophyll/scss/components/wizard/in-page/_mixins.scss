@@ -2,6 +2,7 @@
 @use '../../../tokens';
 
 @mixin add-in-page-wizard {
+  $prefix: &;
   border: 0;
   margin-bottom: 0.5rem;
   padding: 0;
@@ -71,14 +72,6 @@
   &__header__title {
     grid-area: title;
   }
-  &__header__edit {
-    grid-area: edit;
-    display: none;
-    justify-content: end;
-    @media (min-width: 576px) {
-      display: flex;
-    }
-  }
 
   &__content {
     padding: 0.5rem 1rem 1.5rem 1rem;
@@ -91,7 +84,7 @@
   > footer {
     justify-content: flex-start;
   }
-  
+
   &__footer {
     border-top: 1px solid tokens.get(tokens.$grey, 500);
     padding: 1.5rem 1rem 1.5rem 1rem;
@@ -124,9 +117,29 @@
     background-color: tokens.get(tokens.$green, 1);
   }
 
-  &.completed &__footer {
-    @media (min-width: 576px) {
-      display: none;
+  &.completed {
+    &.editable {
+      #{$prefix}__header__edit {
+        grid-area: edit;
+        display: none;
+        justify-content: end;
+        @media (min-width: 576px) {
+          display: flex;
+        }
+      }
+
+      #{$prefix}__footer {
+        @media (min-width: 576px) {
+          display: none;
+        }
+      }
+    }
+
+    &:not(.editable) {
+      #{$prefix}__header__edit,
+      #{$prefix}__footer {
+        display: none;
+      }
     }
   }
 }
