@@ -23,7 +23,8 @@
             "input": ".",
             "output": "."
           }
-        ]
+        ],
+        "babelUpwardRootMode": true
       }
     },
     "lint": {
