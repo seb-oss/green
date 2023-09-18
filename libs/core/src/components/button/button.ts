@@ -10,15 +10,40 @@ import { html } from 'utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-button
- * A button consist of lead and trail icon, the label and ripple effect on click event.
- *
+ * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
+ * @documentation https://seb.io/docs/component/button
  * @status beta
+ * @since 1.0.0
+ * 
+ * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
+ * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
+ * @slot label - A slot that allows text to be displayed as the button label.
+ * @slot split - An optional slot that allows an icon to be placed in the middle of the button, splitting the label into two parts.
+ * @slot circle - An optional slot that allows a `gds-icon` element to be placed in the center of the button, creating a circular button.
  *
- * @slot lead - This slot is optional and allows gds-icon.
- * @slot trail - This slot is optional and allows gds-icon.
- * @slot label - Allows test
- * @slot split - Allows icon and changes the button structure
- * @event click - Fired will initiate the ripple effect.
+ * @cssprop --gds-button-background-color - The background color of the button.
+ * @cssprop --gds-button-color - The text color of the button.
+ * @cssprop --gds-button-font-size - The font size of the button.
+ * @cssprop --gds-button-height - The height of the button.
+ * @cssprop --gds-button-width - The width of the button.
+ *
+ * @property {string} lead - The name of the lead icon to display.
+ * @property {string} trail - The name of the trail icon to display.
+ * @property {boolean} disabled - Whether the button is disabled.
+ * @property {boolean} ariaPressed - Whether the button is pressed.
+ * @property {boolean} ariaExpanded - Whether the button is expanded.
+ * @property {string} ariaLabel - The label for the button, used for accessibility.
+ * @property {string} variant - The variant of the button, which can include "split" or "circle".
+ * @property {string} set - The set of icons to use for the lead and trail icons.
+ * @property {string} size - The size of the button, which can be "small", "medium", or "large".
+ * @property {string} effect - The type of ripple effect to use, which can be "center" or "full".
+ *
+ * @event click - Fired when the button is clicked, initiating the ripple effect.
+ *
+ * @example
+ * <gds-button>Click me</gds-button>
+ * <gds-button variant="split">Click me</gds-button>
+ * <gds-button variant="circle">Click me</gds-button>
  */
 
 @customElement('gds-button')

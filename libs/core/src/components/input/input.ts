@@ -7,7 +7,33 @@ import '../icon/icon'
 import '../badge/badge'
 
 /**
+ * 
+ * @summary A custom input element that can be used in forms.
+ * @documentation https://seb.io/docs/component/input
+ * @status beta
+ * @since 1.0.0
+ *
+ * @dependency gds-icon, gds-badge
  * @element gds-input
+ *
+ * @fires {CustomEvent} gds-input-changed - Fired when the input value changes.
+ *
+ * @cssprop --gds-input-background-color - The background color of the input.
+ * @cssprop --gds-input-border-color - The border color of the input.
+ *
+ * @slot - The default slot for the input element.
+ * @slot lead - The slot for the input lead icon.
+ * @slot trail - The slot for the input trail icon.
+ * @slot badge - The slot for the input badge.
+ * @slot helper - The slot for the input helper text.
+ *
+ * @csspart gds-input - The input element.
+ * @csspart gds-input-core - The core of the input element.
+ * @csspart gds-input-core-base - The base of the input element.
+ * @csspart gds-input-core-lead - The lead of the input element.
+ * @csspart gds-input-core-trail - The trail of the input element.
+ * @csspart gds-input-badge - The badge of the input element.
+ * @csspart gds-input-helper - The helper text of the input element.
  *
  * @status beta
  */
