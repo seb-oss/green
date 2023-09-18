@@ -17,7 +17,7 @@
       "outputs": ["{workspaceRoot}/dist/libs/charts"]
     },
     "build-lib": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nx/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "packageJson": "libs/charts/package.json",

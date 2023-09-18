@@ -14,10 +14,7 @@
           "e2e",
           "build-storybook"
         ],
-        "strictlyOrderedTargets": [
-          "build",
-          "release"
-        ],
+        "strictlyOrderedTargets": ["build", "release"],
         "parallel": 3
       }
     }
@@ -52,13 +49,13 @@
         "linter": "eslint"
       }
     },
-    "@nrwl/web:application": {
+    "@nx/web:application": {
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nrwl/web:library": {
+    "@nx/web:library": {
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest"
@@ -67,32 +64,17 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "test": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
     "e2e": {
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     },
     "build-storybook": {
       "inputs": [
@@ -103,31 +85,18 @@
       ]
     },
     "build-nx-storybook": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/.storybook/**/*"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
     },
     "version-and-release": {
-      "dependsOn": [
-        "^version-and-release"
-      ]
+      "dependsOn": ["^version-and-release"]
     },
     "update-deps-and-release": {
-      "dependsOn": [
-        "^update-deps-and-release"
-      ]
+      "dependsOn": ["^update-deps-and-release"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [
-      "{workspaceRoot}/babel.config.json"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
