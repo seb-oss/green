@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.10](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.9...@sebgroup/green-core@1.0.0-beta.10) (2023-09-18)
+
+
+### Bug Fixes
+
+* **core:** add dependencies to `package.json` ([#1015](https://github.com/sebgroup/green/issues/1015)) ([4c584d9](https://github.com/sebgroup/green/commit/4c584d96bc4276f0706ffbd23e9a7a2351375700))
+
+
+
 # [1.0.0-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.8...@sebgroup/green-core@1.0.0-beta.9) (2023-09-15)
 
 

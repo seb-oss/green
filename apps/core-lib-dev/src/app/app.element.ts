@@ -10,8 +10,8 @@ import {
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { setLocale } from '@sebgroup/green-core/localization'
 
-const html = htmlTemplateTagFactory((strs: TemplateStringsArray) =>
-  strs.join('')
+const html = htmlTemplateTagFactory((strs, ...values) =>
+  strs.map((s, i) => s + values[i]).join('')
 )
 
 export class AppElement extends HTMLElement {
