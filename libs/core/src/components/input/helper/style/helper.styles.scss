@@ -45,25 +45,12 @@
       position: relative;
       width: max-content;
 
-      // &[data-badge]::after {
-      //   background-color: hsla(108, 91%, 96%, 1);
-      //   border-radius: 4px;
-      //   color: hsla(130, 40%, 30%, 1);
-      //   content: attr(data-badge);
-      //   display: flex;
-      //   font-size: 12px;
-      //   font-weight: 500;
-      //   line-height: 1;
-      //   padding: 6px 10px;
-      // }
-
       &:hover {
         --tooltip-offset: 4px;
 
         &[data-tooltip]::before {
           background-color: hsla(130, 0%, 0%, 1);
           border-radius: 4px;
-          // max-width: 200px;
           bottom: calc(100% + var(--tooltip-offset, 8px));
           color: hsla(108, 91%, 96%, 1);
           content: attr(data-tooltip);

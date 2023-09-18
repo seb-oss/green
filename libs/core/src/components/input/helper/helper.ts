@@ -9,10 +9,23 @@ import '../../badge/badge'
 import '../../tooltip/tooltip'
 
 /**
+ * 
  * @element gds-input-helper
- * @dependency gds-tooltip
+ * @summary A custom input element that can be used in forms.
+ * @documentation https://seb.io/docs/component/input-helper
  * @status beta
- */
+ * @since 1.0.0
+ * 
+ * @cssprop --gds-input-helper - content
+ * 
+ * @csspart gds-input-helper - The input helper element.
+ * 
+ * @slot label - The label or summary text.
+ * @slot icon - The slot for the helper information icon.
+ * @slot badge - The slot for the badge after icon.
+ * @slot content - The slot for the content.
+ * 
+ **/
 
 // TODO
 // - [ ] Add a badge component
@@ -71,26 +84,17 @@ export class GdsInputHelper extends LitElement {
       </div>`
     : ''
   }
-
-  // slotTooltip() {
-  //   return html`
-  //     <div class="gds-input-helper-tooltip">
-  //       <slot name="tooltip" gds-allow="gds-popover"></slot>
-  //     </div>
-  //   `;
-  // }
   
   @property({ type: String, reflect: true, attribute: 'data-tooltip' })
   helperTooltip = null
 
   render() { 
     const hasIconSlot = this.querySelector('[slot="action"]') !== null;
-    // const hasContentSlot = this.querySelector('[part="content"]') !== null;
     const hasBadgeSlot = this.querySelector('[slot="badge"]') !== null;
-    // const hasTooltipSlot = this.querySelector('[slot="tooltip"]') !== null;
     const IconSlot = html`${when( hasIconSlot, () => this.slotIcon())}`
-    // const ContentSlot = html`${when( hasContentSlot, () => this.slotContent())}`
     const ContentSlot = html`${this.slotContent()}`;
+    const hasContent = this.isContentVisible || (this.textContent?.trim() !== '');
+
     return html`
       <div class="gds-input-helper">
         <div class="gds-input-helper-header">
@@ -98,17 +102,19 @@ export class GdsInputHelper extends LitElement {
             class="gds-input-helper-title" 
             @click=${this.toggleContent}
             >
-            Some text
+            Some text label
           </span>
           <div class="gds-input-helper-options">
-            <button 
-              class="gds-input-helper-option" 
-              data-tooltip=${ifDefined(this.helperTooltip)}
-              @click=${this.toggleContent}
-              
+            ${when(hasContent, () => html`
+              <button
+                class="gds-input-helper-option"
+                data-tooltip=${ifDefined(this.helperTooltip)}
+                @click=${this.toggleContent}
               >
+                ${IconSlot}
+              </button>
+              `)}
               ${IconSlot}
-            </button>
             ${when( hasBadgeSlot, () => this.slotBadge())}
           </div>
         </div>
