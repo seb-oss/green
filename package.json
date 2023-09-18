@@ -48,7 +48,6 @@
     "@floating-ui/dom": "^1.5.1",
     "@lit-labs/react": "^1.1.1",
     "@material/material-color-utilities": "^0.2.4",
-    "@nrwl/nx-plugin": "16.8.1",
     "@popperjs/core": "^2.11.5",
     "@sebgroup/bootstrap": "^6.0.1",
     "@sebgroup/fonts": "^1.1.0",
@@ -76,7 +75,8 @@
     "swiped-events": "^1.1.6",
     "tslib": "^2.3.1",
     "webpack-inject-plugin": "^1.5.5",
-    "zone.js": "0.12.0"
+    "zone.js": "0.12.0",
+    "@nx/plugin": "16.8.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.1402.11",
