@@ -34,7 +34,18 @@
     "@nrwl/angular:component": {
       "style": "scss"
     },
-    "@nrwl/react": {
+    "@nx/web:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nx/web:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nx/react": {
       "application": {
         "style": "none",
         "linter": "eslint",
@@ -48,17 +59,6 @@
         "style": "none",
         "linter": "eslint"
       }
-    },
-    "@nx/web:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nx/web:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
