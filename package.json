@@ -108,7 +108,6 @@
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/jest": "16.8.1",
     "@nrwl/react": "16.8.1",
-    "@nrwl/rollup": "16.8.1",
     "@nrwl/storybook": "16.8.1",
     "@nx/webpack": "16.8.1",
     "@nx/esbuild": "16.8.1",
@@ -237,7 +236,8 @@
     "@nx/linter": "16.8.1",
     "@nx/eslint-plugin": "16.8.1",
     "@nx/cypress": "16.8.1",
-    "@nx/web": "16.8.1"
+    "@nx/web": "16.8.1",
+    "@nx/rollup": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",
