@@ -52,7 +52,13 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "projects": "dependencies",
+          "target": "build"
+        }
+      ]
     },
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
@@ -66,7 +72,13 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "projects": "dependencies",
+          "target": "build"
+        }
+      ]
     },
     "build-storybook": {
       "executor": "nx:run-commands",
