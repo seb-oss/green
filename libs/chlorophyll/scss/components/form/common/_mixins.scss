@@ -155,8 +155,8 @@
     .form-info {
       margin-bottom: 0;
 
-      a:link:not(.button,[aria-disabled]) {
-        color: tokens.$link-color
+      a:link:not(.button, [aria-disabled]) {
+        color: tokens.$link-color;
       }
     }
 
@@ -238,7 +238,8 @@
   fieldset & + div,
   & + button,
   & + .group-stepper,
-  & + .stepper-wrapper {
+  & + .stepper-wrapper,
+  & + .group {
     margin-top: 0.5rem;
   }
 
