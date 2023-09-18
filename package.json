@@ -113,7 +113,6 @@
     "@nrwl/react": "16.8.1",
     "@nrwl/rollup": "16.8.1",
     "@nrwl/storybook": "16.8.1",
-    "@nrwl/vite": "16.8.1",
     "@nrwl/web": "16.8.1",
     "@nrwl/webpack": "16.8.1",
     "@nx/esbuild": "16.8.1",
@@ -237,7 +236,8 @@
     "yarn-audit-fix": "^9.2.4",
     "@nx/devkit": "16.8.1",
     "@nx/workspace": "16.8.1",
-    "@nx/js": "16.8.1"
+    "@nx/js": "16.8.1",
+    "@nx/vite": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",

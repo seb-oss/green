@@ -99,9 +99,9 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/vite with @nx/vite",
+      "description": "Replace @nx/vite with @nx/vite",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/vite",
+      "package": "@nx/vite",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
@@ -109,7 +109,7 @@
       "description": "Changes the testFile config in the vite:test exectutor from a string to an array of strings",
       "cli": "nx",
       "implementation": "./src/migrations/update-16-4-1-update-test-file-config/update-16-4-1-test-file-config",
-      "package": "@nrwl/vite",
+      "package": "@nx/vite",
       "name": "update-16-4-1-test-file-config"
     },
     {
@@ -117,7 +117,7 @@
       "description": "Change vite-tsconfig-paths plugin for first party nx-vite-tsconfig-paths plugin",
       "cli": "nx",
       "implementation": "./src/migrations/update-16-6-0-change-ts-paths-plugin/change-ts-paths-plugin",
-      "package": "@nrwl/vite",
+      "package": "@nx/vite",
       "name": "16-6-0-change-ts-paths-plugin"
     },
     {
