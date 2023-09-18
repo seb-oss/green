@@ -171,7 +171,7 @@
     "copyfiles": "^2.4.1",
     "css-loader": "^6.7.3",
     "cssnano": "^5.1.7",
-    "cypress": "^12.2.0",
+    "cypress": "^13.0.0",
     "dotenv": "^16.0.0",
     "esbuild-sass-plugin": "^2.9.0",
     "eslint": "8.46.0",
