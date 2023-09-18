@@ -35,7 +35,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react-charts"],
       "options": {
         "jestConfig": "libs/react-charts/jest.config.ts",

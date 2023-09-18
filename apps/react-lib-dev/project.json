@@ -63,7 +63,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/react-lib-dev"],
       "options": {
         "jestConfig": "apps/react-lib-dev/jest.config.ts",

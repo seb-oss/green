@@ -25,7 +25,7 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular"],
       "options": {
         "jestConfig": "libs/angular/jest.config.ts",

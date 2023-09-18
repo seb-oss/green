@@ -25,7 +25,7 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular-charts"],
       "options": {
         "jestConfig": "libs/angular-charts/jest.config.ts",

@@ -34,7 +34,7 @@
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/extract"],
       "options": {
         "jestConfig": "libs/extract/jest.config.ts",
