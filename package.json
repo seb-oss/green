@@ -106,7 +106,6 @@
     "@lit/localize-tools": "^0.6.9",
     "@nrwl/angular": "16.8.1",
     "@nrwl/cypress": "16.8.1",
-    "@nrwl/devkit": "16.8.1",
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/eslint-plugin-nx": "16.8.1",
     "@nrwl/jest": "16.8.1",
@@ -237,7 +236,8 @@
     "vitest": "0.31.4",
     "webpack": "5.88.2",
     "webpack-merge": "^5.8.0",
-    "yarn-audit-fix": "^9.2.4"
+    "yarn-audit-fix": "^9.2.4",
+    "@nx/devkit": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",

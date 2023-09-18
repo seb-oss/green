@@ -1,4 +1,4 @@
-import type { ExecutorContext } from '@nrwl/devkit'
+import type { ExecutorContext } from '@nx/devkit'
 import { writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 
