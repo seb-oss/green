@@ -7,14 +7,14 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/libs/charts",
         "commands": [
           "nx run charts:build-lib",
           "nx run charts:compile-scss",
           "nx run charts:copy-scss"
         ],
         "parallel": false
-      }
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/charts"]
     },
     "build-lib": {
       "executor": "@nrwl/web:rollup",

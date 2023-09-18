@@ -28,9 +28,9 @@
             "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
           }
         ],
-        "parallel": false,
-        "outputPath": "dist/libs/chlorophyll"
-      }
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
     "lint": {
       "executor": "nx:run-commands",
