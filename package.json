@@ -117,7 +117,6 @@
     "@nrwl/vite": "16.8.1",
     "@nrwl/web": "16.8.1",
     "@nrwl/webpack": "16.8.1",
-    "@nrwl/workspace": "16.8.1",
     "@nx/esbuild": "16.8.1",
     "@open-wc/testing": "^3.1.8",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
@@ -237,7 +236,8 @@
     "webpack": "5.88.2",
     "webpack-merge": "^5.8.0",
     "yarn-audit-fix": "^9.2.4",
-    "@nx/devkit": "16.8.1"
+    "@nx/devkit": "16.8.1",
+    "@nx/workspace": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",
