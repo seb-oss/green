@@ -27,14 +27,23 @@
     }
 
     .gds-input-helper-title {
-      color: hsl(0, 100%, 50%);
+      cursor: pointer;
+      // color: hsl(0, 100%, 50%);
+      font-size: 14px;
     }
 
     .gds-input-helper-option {
       align-items: center;
+      background: unset;
+      border: unset;
+      cursor: pointer;
       display: flex;
       gap: 16px;
+      height: max-content;
+      margin: unset;
+      padding: unset;
       position: relative;
+      width: max-content;
 
       // &[data-badge]::after {
       //   background-color: hsla(108, 91%, 96%, 1);
@@ -49,20 +58,42 @@
       // }
 
       &:hover {
+        --tooltip-offset: 4px;
+
         &[data-tooltip]::before {
           background-color: hsla(130, 0%, 0%, 1);
           border-radius: 4px;
+          // max-width: 200px;
+          bottom: calc(100% + var(--tooltip-offset, 8px));
           color: hsla(108, 91%, 96%, 1);
           content: attr(data-tooltip);
           display: flex;
-          font-size: 12px;
-          margin: 0 auto;
+          font-size: 14px;
+          left: 50%;
+          max-inline-size: 50ch;
+          min-inline-size: 20ch;
           offset-anchor: center top;
-          padding: 4px 8px;
+          overflow: hidden;
+          padding: 8px 14px;
           position: absolute;
-          top: -40px;
+          text-overflow: ellipsis;
+          text-wrap: nowrap;
+          translate: -50% 0;
+          white-space: nowrap;
         }
       }
+    }
+
+    &-content {
+      border-top: 1px solid hsla(130, 0%, 0%, 0.1);
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      gap: 8px;
+      line-height: 1.3;
+      margin-block-start: 8px;
+      padding-block-start: 8px;
+      user-select: all;
     }
   }
 }

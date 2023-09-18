@@ -13,7 +13,7 @@ import '../badge/badge'
  * @status beta
  * @since 1.0.0
  *
- * @dependency gds-icon, gds-badge
+ * @dependency gds-icon, gds-badge, gds-input-helper
  * @element gds-input
  *
  * @fires {CustomEvent} gds-input-changed - Fired when the input value changes.
