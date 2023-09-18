@@ -122,13 +122,13 @@
         grid-area: edit;
         display: none;
         justify-content: end;
-        @media (min-width: 576px) {
+        @include common.media-breakpoint-up('sm') {
           display: flex;
         }
       }
 
       #{$prefix}__footer {
-        @media (min-width: 576px) {
+        @include common.media-breakpoint-up('sm') {
           display: none;
         }
       }
