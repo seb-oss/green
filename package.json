@@ -105,7 +105,6 @@
     "@lit/localize": "^0.11.4",
     "@lit/localize-tools": "^0.6.9",
     "@nrwl/angular": "16.8.1",
-    "@nrwl/cypress": "16.8.1",
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/jest": "16.8.1",
     "@nrwl/react": "16.8.1",
@@ -237,7 +236,8 @@
     "@nx/js": "16.8.1",
     "@nx/vite": "16.8.1",
     "@nx/linter": "16.8.1",
-    "@nx/eslint-plugin": "16.8.1"
+    "@nx/eslint-plugin": "16.8.1",
+    "@nx/cypress": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",
