@@ -109,7 +109,6 @@
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/eslint-plugin-nx": "16.8.1",
     "@nrwl/jest": "16.8.1",
-    "@nrwl/linter": "16.8.1",
     "@nrwl/react": "16.8.1",
     "@nrwl/rollup": "16.8.1",
     "@nrwl/storybook": "16.8.1",
@@ -237,7 +236,8 @@
     "@nx/devkit": "16.8.1",
     "@nx/workspace": "16.8.1",
     "@nx/js": "16.8.1",
-    "@nx/vite": "16.8.1"
+    "@nx/vite": "16.8.1",
+    "@nx/linter": "16.8.1"
   },
   "resolutions": {
     "async": "^3.2.2",
