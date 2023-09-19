@@ -7,17 +7,17 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "outputPath": "dist/libs/charts",
         "commands": [
           "nx run charts:build-lib",
           "nx run charts:compile-scss",
           "nx run charts:copy-scss"
         ],
         "parallel": false
-      }
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/charts"]
     },
     "build-lib": {
-      "executor": "@nrwl/web:rollup",
+      "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
         "packageJson": "libs/charts/package.json",
@@ -26,7 +26,7 @@
         "project": "libs/charts/package.json",
         "entryFile": "libs/charts/src/index.ts",
         "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "assets": [
           {
             "glob": "libs/charts/README.md",
@@ -71,14 +71,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/charts/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/charts"],
       "options": {
         "jestConfig": "libs/charts/jest.config.ts",

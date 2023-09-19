@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.15.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.14.2...@sebgroup/chlorophyll@1.15.0) (2023-09-18)
+
+
+### Features
+
+* **wizard:** new `.editable` class for parent in-wizard-step ([#1014](https://github.com/sebgroup/green/issues/1014)) ([031f99e](https://github.com/sebgroup/green/commit/031f99e941197d374e279d4094bc47d905fca05b))
+
+
+
 ## [1.14.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.14.1...@sebgroup/chlorophyll@1.14.2) (2023-09-15)
 
 
