@@ -59,7 +59,7 @@
       "dependsOn": [
         {
           "projects": "dependencies",
-          "target": "build"
+          "target": "build-src"
         }
       ]
     },
@@ -80,7 +80,7 @@
       "dependsOn": [
         {
           "projects": "dependencies",
-          "target": "build"
+          "target": "build-src"
         }
       ]
     },
