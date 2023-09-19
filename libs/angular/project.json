@@ -59,7 +59,7 @@
       "dependsOn": [
         {
           "projects": "dependencies",
-          "target": "build-src"
+          "target": "build-with-types-and-scoping"
         }
       ]
     },
@@ -80,7 +80,7 @@
       "dependsOn": [
         {
           "projects": "dependencies",
-          "target": "build-src"
+          "target": "build-with-types-and-scoping"
         }
       ]
     },
