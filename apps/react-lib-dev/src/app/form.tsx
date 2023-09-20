@@ -63,15 +63,18 @@ export const FormExample = () => {
       <p>If you are developing a React app this is a great form to work on.</p>
 
       <Form onFormSubmit={(value) => console.log(value)}>
-        <Dropdown
-          label={'Select a fruit'}
-          id={'my-dropdown'}
-          options={dropDownKeyValueArray}
-          validator={validator}
-          onChange={console.log}
-        />
-
-        <Datepicker onChange={(date) => console.log('Selected date: ', date)} />
+        <div className="d-flex" style={{ gap: '1rem' }}>
+          <Dropdown
+            label={'Select a fruit'}
+            id={'my-dropdown'}
+            options={dropDownKeyValueArray}
+            validator={validator}
+            onChange={console.log}
+          />
+          <Datepicker
+            onChange={(date) => console.log('Selected date: ', date)}
+          />
+        </div>
 
         <FormItems
           name="radio"
