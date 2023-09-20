@@ -63,7 +63,7 @@ export class GdsPopover extends LitElement {
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        this.#setOpen(false)
+        this.open = false
       }
     })
   }
@@ -100,6 +100,14 @@ export class GdsPopover extends LitElement {
       this.open
         ? this.#dialogElementRef.value?.showModal()
         : this.#dialogElementRef.value?.close()
+
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { open: this.open },
+        bubbles: true,
+        composed: false,
+      })
+    )
   }
 
   @watchMediaQuery('(max-width: 576px)')
@@ -158,7 +166,7 @@ export class GdsPopover extends LitElement {
   #triggerKeyDownListener = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      this.#setOpen(true)
+      this.open = true
 
       const firstSlottedChild = this.shadowRoot
         ?.querySelector('slot')
@@ -169,18 +177,7 @@ export class GdsPopover extends LitElement {
       })
     }
     if (e.key === 'Escape') {
-      this.#setOpen(false)
+      this.open = false
     }
-  }
-
-  #setOpen(open: boolean) {
-    this.open = open
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open },
-        bubbles: true,
-        composed: false,
-      })
-    )
   }
 }
