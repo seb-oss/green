@@ -182,6 +182,7 @@ export class GdsDropdown<ValueT = any>
       <span class="form-info"><slot name="message"></slot></span>
 
       <gds-popover
+        .label=${this.label}
         .open=${this.open}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
         ${ref(this.#registerPopoverTrigger)}

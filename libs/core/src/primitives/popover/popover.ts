@@ -1,8 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
+import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
-import { watch } from 'utils/decorators'
+import { watch, watchMediaQuery } from 'utils/decorators'
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from 'utils/helpers/transitional-styles'
 
@@ -37,16 +38,28 @@ export class GdsPopover extends LitElement {
   @property()
   trigger: HTMLElement | undefined = undefined
 
+  /**
+   * Optional trigger element for the popover.
+   */
+  @property()
+  label: string | undefined = undefined
+
+  @state()
+  private _isMobileLayout = false
+
   @watch('trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
   }
 
+  #popoverElementRef: Ref<HTMLDivElement> = createRef()
+  #dialogElementRef: Ref<HTMLDialogElement> = createRef()
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-popover')
     this.#registerTriggerEvents()
-    this._updateHidden()
+    this._handleOpenChange()
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -61,39 +74,82 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html` <slot></slot> `
+    return this._isMobileLayout
+      ? html`<dialog ${ref(this.#dialogElementRef)}>
+          <div>
+            <header>
+              <h2>${this.label}</h2>
+              <button class="close" @click=${() => (this.open = false)}>
+                <i></i>
+              </button>
+            </header>
+            <slot></slot>
+          </div>
+        </dialog>`
+      : html`<div ${ref(this.#popoverElementRef)} aria-label=${this.label}>
+          <slot></slot>
+        </div>`
   }
 
   @watch('open')
-  private _updateHidden() {
+  private _handleOpenChange() {
     this.setAttribute('aria-hidden', String(!this.open))
     this.hidden = !this.open
+
+    if (this._isMobileLayout)
+      this.open
+        ? this.#dialogElementRef.value?.showModal()
+        : this.#dialogElementRef.value?.close()
   }
 
-  #autoPositionCleanup: (() => void) | undefined
+  @watchMediaQuery('(max-width: 576px)')
+  private _handleMobileLayout(matches: boolean) {
+    if (matches) {
+      this._isMobileLayout = true
+      this.#autoPositionCleanup?.()
+      this.#popoverElementRef.value?.style.removeProperty('left')
+      this.#popoverElementRef.value?.style.removeProperty('top')
+
+      this.updateComplete.then(() => {
+        if (this.open) this.#dialogElementRef.value?.showModal()
+      })
+    } else {
+      this._isMobileLayout = false
+      this.updateComplete.then(() => {
+        this.#registerAutoPositioning()
+      })
+    }
+  }
 
   #registerTriggerEvents() {
-    if (!this.trigger) return
-
-    this.trigger.addEventListener('keydown', this.#triggerKeyDownListener)
-
-    const referenceEl = this.trigger
-    this.#autoPositionCleanup = autoUpdate(referenceEl, this, () => {
-      computePosition(referenceEl, this, {
-        placement: 'bottom-start',
-        middleware: [offset(8), flip()],
-      }).then(({ x, y }) => {
-        Object.assign(this.style, {
-          left: `${x}px`,
-          top: `${y}px`,
-        })
-      })
-    })
+    this.trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
   }
 
   #unregisterTriggerEvents() {
     this.trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
     this.#autoPositionCleanup?.()
+  }
+
+  #autoPositionCleanup: (() => void) | undefined
+  #registerAutoPositioning() {
+    if (this._isMobileLayout === false) {
+      const referenceEl = this.trigger
+      const floatingEl = this.#popoverElementRef.value
+
+      if (!referenceEl || !floatingEl) return
+
+      this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+        computePosition(referenceEl, floatingEl, {
+          placement: 'bottom-start',
+          middleware: [offset(8), flip()],
+        }).then(({ x, y }) => {
+          Object.assign(floatingEl.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+          })
+        })
+      })
+    }
   }
 
   /**

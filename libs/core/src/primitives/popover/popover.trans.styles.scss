@@ -1,12 +1,38 @@
 @use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
+@use '../../../../chlorophyll/scss/components/close';
 
-:host {
+div {
   @include popover.popover;
   overflow: hidden;
 }
 
-:host([open]) {
+:host([open]) div {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   visibility: visible;
+}
+
+header {
+  display: flex;
+  padding: 0.75rem;
+}
+
+header h2 {
+  flex-grow: 1;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+dialog {
+  border-width: 0;
+  padding: 0;
+  position: static;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: block;
+  pointer-events: none;
+  position: fixed;
 }
