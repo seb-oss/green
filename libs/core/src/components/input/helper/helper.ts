@@ -63,11 +63,18 @@ export class GdsInputHelper extends LitElement {
     this.isContentVisible = !this.isContentVisible;
   }
 
+  // slotIcon() {
+  //   return html`
+  //       <slot name="action" gds-allow="gds-icon"></slot>
+  //   `;
+  // }
+
   slotIcon() {
-    return html`
-        <slot name="action" gds-allow="gds-icon"></slot>
-    `;
+    return this.isContentVisible
+      ? html`<gds-icon name="x" slot="action"></gds-icon>`
+      : html`<slot name="action" gds-allow="gds-icon"></slot>`;
   }
+  
 
   slotBadge() {
     return html`
@@ -116,8 +123,7 @@ export class GdsInputHelper extends LitElement {
               >
                 ${IconSlot}
               </button>
-              `)}
-              ${IconSlot}
+            `)}
             ${when( hasBadgeSlot, () => this.slotBadge())}
           </div>
         </div>
