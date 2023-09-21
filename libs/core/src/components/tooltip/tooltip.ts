@@ -22,20 +22,16 @@ export class GdsTooltip extends LitElement {
   }
 
   @property({ type: String, reflect: true, attribute: 'content' })
-  tooltip = null
+  content = null
 
-  @property() content = '';
 
   render() { 
     return html`
       <div 
         class="gds-tooltip" 
-        content=${this.tooltip}
+        content=${this.content}
       >
         <slot slot="anchor"></slot>
-        <div part="body" class="gds-tooltip-body" >
-          <slot name="content">${this.content}</slot>
-        </div>
       </div>
     ` }
 }
