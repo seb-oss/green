@@ -85,8 +85,11 @@ export class GdsInputHelper extends LitElement {
     : ''
   }
   
-  @property({ type: String, reflect: true, attribute: 'data-tooltip' })
+  @property({ type: String, reflect: true, attribute: 'tooltip' })
   helperTooltip = null
+
+  @property({ type: String, reflect: true, attribute: 'label' })
+  helperLabel = null
 
   render() { 
     const hasIconSlot = this.querySelector('[slot="action"]') !== null;
@@ -102,13 +105,13 @@ export class GdsInputHelper extends LitElement {
             class="gds-input-helper-title" 
             @click=${this.toggleContent}
             >
-            Some text label
+            ${this.helperLabel}
           </span>
           <div class="gds-input-helper-options">
             ${when(hasContent, () => html`
               <button
                 class="gds-input-helper-option"
-                data-tooltip=${ifDefined(this.helperTooltip)}
+                tooltip=${ifDefined(this.helperTooltip)}
                 @click=${this.toggleContent}
               >
                 ${IconSlot}
