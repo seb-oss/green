@@ -1,12 +1,8 @@
 @use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
 @use '../../../../chlorophyll/scss/components/close';
+@use '../../../../chlorophyll/scss/common';
 
-div {
-  @include popover.popover;
-  overflow: hidden;
-}
-
-:host([open]) div {
+:host([open]) dialog {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   visibility: visible;
@@ -15,6 +11,10 @@ div {
 header {
   display: flex;
   padding: 0.75rem;
+
+  @include common.media-breakpoint-up('sm') {
+    display: none;
+  }
 }
 
 header h2 {
@@ -25,9 +25,20 @@ header h2 {
 }
 
 dialog {
+  @include popover.popover;
   border-width: 0;
+  overflow: hidden;
   padding: 0;
-  position: static;
+  right: 0;
+
+  @include common.media-breakpoint-down('sm') {
+    border-radius: 1rem;
+  }
+
+  @include common.media-breakpoint-up('sm') {
+    inset: auto;
+    position: absolute;
+  }
 }
 
 dialog::backdrop {
@@ -35,4 +46,7 @@ dialog::backdrop {
   display: block;
   pointer-events: none;
   position: fixed;
+  @include common.media-breakpoint-up('sm') {
+    display: none;
+  }
 }

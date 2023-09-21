@@ -44,9 +44,6 @@ export class GdsPopover extends LitElement {
   @property()
   label: string | undefined = undefined
 
-  @state()
-  private _isMobileLayout = false
-
   @watch('trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
@@ -74,21 +71,15 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return this._isMobileLayout
-      ? html`<dialog ${ref(this.#dialogElementRef)}>
-          <div>
-            <header>
-              <h2>${this.label}</h2>
-              <button class="close" @click=${() => (this.open = false)}>
-                <i></i>
-              </button>
-            </header>
-            <slot></slot>
-          </div>
-        </dialog>`
-      : html`<div ${ref(this.#popoverElementRef)} aria-label=${this.label}>
-          <slot></slot>
-        </div>`
+    return html`<dialog ${ref(this.#dialogElementRef)}>
+      <header>
+        <h2>${this.label}</h2>
+        <button class="close" @click=${() => (this.open = false)}>
+          <i></i>
+        </button>
+      </header>
+      <slot></slot>
+    </dialog>`
   }
 
   @watch('open')
@@ -96,10 +87,9 @@ export class GdsPopover extends LitElement {
     this.setAttribute('aria-hidden', String(!this.open))
     this.hidden = !this.open
 
-    if (this._isMobileLayout)
-      this.open
-        ? this.#dialogElementRef.value?.showModal()
-        : this.#dialogElementRef.value?.close()
+    this.open
+      ? this.#dialogElementRef.value?.showModal()
+      : this.#dialogElementRef.value?.close()
 
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
@@ -108,25 +98,6 @@ export class GdsPopover extends LitElement {
         composed: false,
       })
     )
-  }
-
-  @watchMediaQuery('(max-width: 576px)')
-  private _handleMobileLayout(matches: boolean) {
-    if (matches) {
-      this._isMobileLayout = true
-      this.#autoPositionCleanup?.()
-      this.#popoverElementRef.value?.style.removeProperty('left')
-      this.#popoverElementRef.value?.style.removeProperty('top')
-
-      this.updateComplete.then(() => {
-        if (this.open) this.#dialogElementRef.value?.showModal()
-      })
-    } else {
-      this._isMobileLayout = false
-      this.updateComplete.then(() => {
-        this.#registerAutoPositioning()
-      })
-    }
   }
 
   #registerTriggerEvents() {
@@ -138,26 +109,43 @@ export class GdsPopover extends LitElement {
     this.#autoPositionCleanup?.()
   }
 
-  #autoPositionCleanup: (() => void) | undefined
-  #registerAutoPositioning() {
-    if (this._isMobileLayout === false) {
-      const referenceEl = this.trigger
-      const floatingEl = this.#popoverElementRef.value
+  @watchMediaQuery('(max-width: 576px)')
+  private _handleMobileLayout(matches: boolean) {
+    if (matches) {
+      //this._isMobileLayout = true
+      this.#autoPositionCleanup?.()
+      this.#dialogElementRef.value?.style.removeProperty('left')
+      this.#dialogElementRef.value?.style.removeProperty('top')
 
-      if (!referenceEl || !floatingEl) return
-
-      this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
-        computePosition(referenceEl, floatingEl, {
-          placement: 'bottom-start',
-          middleware: [offset(8), flip()],
-        }).then(({ x, y }) => {
-          Object.assign(floatingEl.style, {
-            left: `${x}px`,
-            top: `${y}px`,
-          })
-        })
+      this.updateComplete.then(() => {
+        if (this.open) this.#dialogElementRef.value?.showModal()
+      })
+    } else {
+      //this._isMobileLayout = false
+      this.updateComplete.then(() => {
+        this.#registerAutoPositioning()
       })
     }
+  }
+
+  #autoPositionCleanup: (() => void) | undefined
+  #registerAutoPositioning() {
+    const referenceEl = this.trigger
+    const floatingEl = this.#dialogElementRef.value
+
+    if (!referenceEl || !floatingEl) return
+
+    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+      computePosition(referenceEl, floatingEl, {
+        placement: 'bottom-start',
+        middleware: [offset(8), flip()],
+      }).then(({ x, y }) => {
+        Object.assign(floatingEl.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        })
+      })
+    })
   }
 
   /**
