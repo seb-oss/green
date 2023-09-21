@@ -87,9 +87,23 @@ export class GdsPopover extends LitElement {
     this.setAttribute('aria-hidden', String(!this.open))
     this.hidden = !this.open
 
-    this.open
-      ? this.#dialogElementRef.value?.showModal()
-      : this.#dialogElementRef.value?.close()
+    if (this.open) {
+      this.#dialogElementRef.value?.showModal()
+      this.#dialogElementRef.value?.style.setProperty('opacity', '0')
+      this.#dialogElementRef.value?.style.setProperty(
+        'transform',
+        'translate3d(0px, 100%, 0px)'
+      )
+      setTimeout(() => {
+        this.#dialogElementRef.value?.style.setProperty('opacity', '1')
+        this.#dialogElementRef.value?.style.setProperty(
+          'transform',
+          'translate3d(0px, 0px, 0px)'
+        )
+      }, 0)
+    } else {
+      this.#dialogElementRef.value?.close()
+    }
 
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
