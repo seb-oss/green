@@ -253,7 +253,7 @@ export class GdsDropdown<ValueT = any>
    * @param e The keyboard event.
    */
   #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
-    const input = e.target as HTMLInputElement
+    const input = this.#searchInputRef.value!
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
 

@@ -49,7 +49,6 @@ export class GdsPopover extends LitElement {
     this.#registerTriggerEvents()
   }
 
-  #popoverElementRef: Ref<HTMLDivElement> = createRef()
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
 
   connectedCallback(): void {
