@@ -319,6 +319,31 @@ describe('<gds-dropdown> keyboard navigation', () => {
     expect(document.activeElement).to.equal(secondOption)
   })
 
+  it('should focus option using keyboard navigation when opened with click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await clickOnElement(trigger, 'center')
+    await el.updateComplete
+
+    expect(el.open).to.be.true
+
+    await sendKeys({ press: 'ArrowDown' })
+    await timeout(50)
+    await sendKeys({ press: 'Enter' })
+    await timeout(50)
+
+    expect(el.value).to.equal('v2')
+    expect(el.open).to.be.false
+  })
+
   it('should select option with Enter key', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
