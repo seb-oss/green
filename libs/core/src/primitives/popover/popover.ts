@@ -117,7 +117,6 @@ export class GdsPopover extends LitElement {
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
     if (matches) {
-      //this._isMobileLayout = true
       this.#autoPositionCleanup?.()
       this.#dialogElementRef.value?.style.removeProperty('left')
       this.#dialogElementRef.value?.style.removeProperty('top')
@@ -126,7 +125,6 @@ export class GdsPopover extends LitElement {
         if (this.open) this.#dialogElementRef.value?.showModal()
       })
     } else {
-      //this._isMobileLayout = false
       this.updateComplete.then(() => {
         this.#registerAutoPositioning()
       })
