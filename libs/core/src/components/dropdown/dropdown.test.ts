@@ -410,29 +410,6 @@ describe('<gds-dropdown searchable>', () => {
     expect(options.length).to.equal(1)
     expect(options[0].textContent).to.equal('Option 2')
   })
-
-  it('should filter options when typing in search field', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown searchable open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-    `)
-    const searchField =
-      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
-
-    searchField.focus()
-    await sendKeys({ type: '2' })
-    await el.updateComplete
-
-    const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
-    )
-
-    expect(options.length).to.equal(1)
-    expect(options[0].textContent).to.equal('Option 2')
-  })
 })
 
 describe('<gds-dropdown multiple>', () => {
