@@ -205,6 +205,7 @@ export class GdsDropdown<ValueT = any>
           ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
           @gds-focus="${this.#handleOptionFocusChange}"
+          @keydown=${this.#handleListboxKeyDown}
         >
           <slot gds-allow="gds-option"></slot>
         </gds-listbox>
@@ -265,12 +266,25 @@ export class GdsDropdown<ValueT = any>
   }
 
   /**
-   * Check for ArrowDown in the search field.
+   * Check for ArrowDown or Tab in the search field.
    * If found, focus should be moved to the listbox.
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'ArrowDown' || e.key === 'Tab') {
+      e.preventDefault()
       this.#listboxRef.value?.focus()
+      return
+    }
+  }
+
+  /**
+   * Check for Tab in the listbox.
+   * If found, focus should be moved to the search field.
+   */
+  #handleListboxKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Tab' && this.searchable) {
+      e.preventDefault()
+      this.#searchInputRef.value?.focus()
       return
     }
   }
@@ -346,12 +360,14 @@ export class GdsDropdown<ValueT = any>
     window.addEventListener('click', this.#autoCloseListener)
     this.addEventListener('blur', this.#autoCloseListener)
     this.addEventListener('gds-blur', this.#autoCloseListener)
+    this.addEventListener('keydown', this.#tabCloseListener)
   }
 
   #unregisterAutoCloseListener() {
     window.removeEventListener('click', this.#autoCloseListener)
     this.removeEventListener('blur', this.#autoCloseListener)
     this.removeEventListener('gds-blur', this.#autoCloseListener)
+    this.removeEventListener('keydown', this.#tabCloseListener)
   }
 
   /**
@@ -370,5 +386,13 @@ export class GdsDropdown<ValueT = any>
       !this.contains(e.relatedTarget as Node)
 
     if (isClickOutside || isFocusOutside) this.open = false
+  }
+
+  #tabCloseListener = (e: KeyboardEvent) => {
+    if (e.key === 'Tab' && !this.searchable) {
+      e.preventDefault()
+      this.open = false
+      this.#triggerRef.value?.focus()
+    }
   }
 }
