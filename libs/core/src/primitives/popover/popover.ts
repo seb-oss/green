@@ -92,6 +92,10 @@ export class GdsPopover extends LitElement {
         : this.#dialogElementRef.value?.close()
     })
 
+    if (this.open) {
+      this.#focusFirstSlottedChild()
+    }
+
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         detail: { open: this.open },
@@ -156,17 +160,22 @@ export class GdsPopover extends LitElement {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       this.open = true
-
-      const firstSlottedChild = this.shadowRoot
-        ?.querySelector('slot')
-        ?.assignedElements()[0] as HTMLElement
-
-      this.updateComplete.then(() => {
-        firstSlottedChild?.focus()
-      })
     }
     if (e.key === 'Escape') {
       this.open = false
     }
+  }
+
+  /**
+   * Move focus to the first slotted child.
+   */
+  #focusFirstSlottedChild = () => {
+    const firstSlottedChild = this.shadowRoot
+      ?.querySelector('slot')
+      ?.assignedElements()[0] as HTMLElement
+
+    this.updateComplete.then(() => {
+      firstSlottedChild?.focus()
+    })
   }
 }
