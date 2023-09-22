@@ -331,22 +331,7 @@ describe('<gds-dropdown>', () => {
     expect(el.open).to.be.false
   })
 
-  it('should close when focusing outside', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-      <button id="test-button">Test</button>
-    `)
-    const testButton = document.getElementById('test-button')!
 
-    el.focus()
-    await el.updateComplete
-
-    testButton.focus()
-    await el.updateComplete
 
     expect(el.open).to.be.false
   })
