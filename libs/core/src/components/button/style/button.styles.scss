@@ -5,11 +5,15 @@
   :host {
     @include tokens;
     @include containment;
+  }
 
-    /* 
-      Consider using:
-      display: contents;
-    */
+  :host(:not([slot])) {
+    contain: layout;
+    container-name: button;
+    container-type: inline-size;
+    isolation: isolate;
+    max-width: 20ch;
+    width: auto;
   }
 }
 

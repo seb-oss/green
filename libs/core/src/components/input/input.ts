@@ -5,6 +5,7 @@ import { when } from 'lit/directives/when.js'
 import styles from './style/input.styles.scss'
 import '../icon/icon'
 import '../badge/badge'
+// import '../button/button'
 
 /**
  * 
@@ -73,8 +74,7 @@ export class GdsInput extends LitElement {
   slotTrail() {
     return html`
       <div class="gds-input-core-trail">
-        <!-- This should be a button -->
-        <slot name="trail" gds-allow="gds-icon"></slot>
+        <slot name="trail" gds-allow="gds-icon gds-button"></slot>
       </div>
     `;
   }

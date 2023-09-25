@@ -53,12 +53,14 @@
     cqmin: The smaller value of either cqi or cqb
     cqmax: The larger value of either cqi or cqb
   */
-
-  contain: layout;
-  container: button / inline-size;
-  isolation: isolate;
-  max-width: 20ch;
-  width: auto;
+  // ::sloted(:not([slot])) {
+  //   contain: layout;
+  //   container-type: inline-size;
+  //   container-name: button;
+  //   isolation: isolate;
+  //   max-width: 20ch;
+  //   width: auto;
+  // }
 
   @container button (width < 200ch) {
     button [part='label'] {
@@ -67,7 +69,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      // font-size: max(1.5em, 1.23em + 2cqi);
     }
   }
 }

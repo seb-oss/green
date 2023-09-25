@@ -19,13 +19,20 @@ import {
       label="I am a label"
       id="test"
       pattern="[a-z]+"
-      type="number"
+      type="text"
       minlength="3"
       name="test"
       required
     >
       <gds-icon name="calendar" slot="lead" />
-      <gds-icon name="x" slot="trail" />
+      <gds-button
+        variant="circle tertiary"
+        data-label="test"
+        effect="ripple"
+        size="small"
+        slot="trail" >
+        <gds-icon name="plus" slot="circle" />
+      </gds-button>
       <gds-icon name="info" slot="help" />
       <gds-badge content="EUR" slot="badge" />
       This won't show up at all
@@ -34,7 +41,7 @@ import {
         <gds-badge slot="badge" content="120" />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. <br /> incididunt ut labore et dolore
-        magna aliqua. <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        magna aliqua. <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </gds-input-helper>
     </gds-input>
 

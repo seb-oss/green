@@ -5,16 +5,14 @@
   :host {
     @include tokens;
     @include containment;
-
-    /* 
-      Consider using:
-      display: contents;
-    */
   }
 }
 
 .gds-input {
   @include core;
+  contain: layout;
+  container: input / inline-size;
+  isolation: isolate;
 
   &-core {
     --border-color: hsla(60, 4%, 50%, 1);
@@ -214,7 +212,7 @@
     }
 
     .gds-input-core-trail {
-      justify-content: right;
+      width: max-content;
     }
   }
 }
