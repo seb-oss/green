@@ -21,13 +21,16 @@ export class GdsTooltip extends LitElement {
     mode: 'open',
     delegatesFocus: true,
   }
+  
+
+  @property({ type: Boolean, reflect: true }) open = false;
 
   @property({ type: String, reflect: true, attribute: 'content' })
   content = null
 
   @property({ type: String, reflect: true, attribute: 'position' })
   position = null
-
+ 
 
   render() { 
     return html`
@@ -35,8 +38,15 @@ export class GdsTooltip extends LitElement {
         class="gds-tooltip" 
         content=${this.content}
         position=${this.position}
+        role="tooltip"
       >
         <slot slot="anchor"></slot>
+        <button popovertarget="popover"
+        popovertargetaction="show">Trigger</button>
+        <details part="body" id="popover" popover>
+          <summary>${this.content}</summary>
+          <slot name="content">${this.content}</slot>
+        </details>
       </div>
     ` }
 }
