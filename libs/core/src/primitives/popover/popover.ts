@@ -93,15 +93,15 @@ export class GdsPopover extends LitElement {
       } else {
         this.#dialogElementRef.value?.close()
       }
-
-      this.dispatchEvent(
-        new CustomEvent('gds-ui-state', {
-          detail: { open: this.open },
-          bubbles: true,
-          composed: false,
-        })
-      )
     })
+
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { open: this.open },
+        bubbles: true,
+        composed: false,
+      })
+    )
   }
 
   #handleCloseButton = (e: MouseEvent) => {
