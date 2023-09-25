@@ -9,8 +9,9 @@
 }
 
 header {
+  border-bottom: 1px solid var(--border-color);
   display: flex;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
 
   @include common.media-breakpoint-up('sm') {
     display: none;
