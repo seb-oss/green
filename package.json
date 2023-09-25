@@ -101,7 +101,7 @@
     "@commitlint/config-angular": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@esm-bundle/chai": "^4.3.4-fix.0",
-    "@jscutlery/semver": "2.30.1",
+    "@jscutlery/semver": "3.1.0",
     "@lit/localize": "^0.11.4",
     "@lit/localize-tools": "^0.6.9",
     "@nrwl/esbuild": "16.8.1",
