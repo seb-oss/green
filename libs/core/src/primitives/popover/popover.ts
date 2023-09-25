@@ -73,7 +73,7 @@ export class GdsPopover extends LitElement {
     return html`<dialog ${ref(this.#dialogElementRef)}>
       <header>
         <h2>${this.label}</h2>
-        <button class="close" @click=${() => (this.open = false)}>
+        <button class="close" @click=${this.#handleCloseButton}>
           <i></i>
         </button>
       </header>
@@ -87,22 +87,33 @@ export class GdsPopover extends LitElement {
     this.hidden = !this.open
 
     this.updateComplete.then(() => {
-      this.open
-        ? this.#dialogElementRef.value?.showModal()
-        : this.#dialogElementRef.value?.close()
+      if (this.open) {
+        this.#dialogElementRef.value?.showModal()
+        this.#focusFirstSlottedChild()
+      } else {
+        this.#dialogElementRef.value?.close()
+      }
+
+      this.dispatchEvent(
+        new CustomEvent('gds-ui-state', {
+          detail: { open: this.open },
+          bubbles: true,
+          composed: false,
+        })
+      )
     })
+  }
 
-    if (this.open) {
-      this.#focusFirstSlottedChild()
-    }
+  #handleCloseButton = (e: MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+    this.open = false
 
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: this.open },
-        bubbles: true,
-        composed: false,
-      })
-    )
+    // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
+    // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
+    // dialog (close button in this case.)
+    // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
+    setTimeout(() => this.trigger?.focus(), 250)
   }
 
   #registerTriggerEvents() {
