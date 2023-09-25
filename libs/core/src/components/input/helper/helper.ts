@@ -116,13 +116,15 @@ export class GdsInputHelper extends LitElement {
           </span>
           <div class="gds-input-helper-options">
             ${when(hasContent, () => html`
-              <button
-                class="gds-input-helper-option"
-                tooltip=${ifDefined(this.helperTooltip)}
-                @click=${this.toggleContent}
-              >
-                ${IconSlot}
-              </button>
+            <gds-tooltip content="${this.helperTooltip}" position="up">
+              <!-- tooltip=${ifDefined(this.helperTooltip)} -->
+                <button
+                  class="gds-input-helper-option"
+                  @click=${this.toggleContent}
+                >
+                  ${IconSlot}
+                </button>
+              </gds-tooltip>
             `)}
             ${when( hasBadgeSlot, () => this.slotBadge())}
           </div>

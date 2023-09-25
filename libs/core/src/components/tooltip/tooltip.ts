@@ -10,9 +10,6 @@ import styles from './style/tooltip.styles.css';
  * @status beta
  */
 
-// TODO: 
-// Use popover component
-
 @customElement('gds-tooltip')
 export class GdsTooltip extends LitElement {
   static styles = unsafeCSS(styles)
@@ -22,7 +19,6 @@ export class GdsTooltip extends LitElement {
     delegatesFocus: true,
   }
   
-
   @property({ type: Boolean, reflect: true }) open = false;
 
   @property({ type: String, reflect: true, attribute: 'content' })
@@ -41,12 +37,6 @@ export class GdsTooltip extends LitElement {
         role="tooltip"
       >
         <slot slot="anchor"></slot>
-        <button popovertarget="popover"
-        popovertargetaction="show">Trigger</button>
-        <details part="body" id="popover" popover>
-          <summary>${this.content}</summary>
-          <slot name="content">${this.content}</slot>
-        </details>
       </div>
     ` }
 }

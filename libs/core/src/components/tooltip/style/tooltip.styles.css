@@ -1,10 +1,5 @@
 @layer gds-tooltip, tokens, a11y, parts, position, trigger, keyframes;
 
-/* 
-TODO:
-https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-positioning/
-*/
-
 @layer gds-tooltip {
   @layer tokens {
     :host {
@@ -17,7 +12,7 @@ https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-
         transparent
       );
       --gds-tooltip-color: #fff;
-      --gds-tooltip-offset: 4px;
+      --gds-tooltip-offset: 8px;
       --gds-tooltip-arrow: 6px;
       --gds-tooltip-radii: 8px;
       --gds-tooltip-transition-easing: var(--gds-sys-transition-easing);
@@ -90,7 +85,7 @@ https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-
     @layer position {
       &:not([position])::before,
       &[position^='up']::before {
-        bottom: 100%;
+        bottom: calc(100% + 2px);
         border-bottom-width: 0;
         border-top-color: var(--gds-tooltip-bg);
       }
@@ -108,7 +103,7 @@ https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-
       }
 
       &[position^='down']::before {
-        top: 100%;
+        top: calc(100% + 2px);
         border-top-width: 0;
         border-bottom-color: var(--gds-tooltip-bg);
       }
@@ -194,24 +189,4 @@ https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-
       }
     }
   }
-}
-
-/* Popover styles  */
-
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.1) !important;
-}
-
-[popover] {
-  position: absolute;
-  color: CanvasText;
-  inset: unset;
-  bottom: 5px;
-  right: 5px;
-  margin: 0;
-}
-
-:popover-open {
-  position: absolute;
-  display: flex;
 }
