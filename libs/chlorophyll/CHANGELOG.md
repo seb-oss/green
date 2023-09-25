@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.0...@sebgroup/chlorophyll@1.15.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* **border-color:** use a lighter border in dark mode for better contrast ([#1023](https://github.com/sebgroup/green/issues/1023)) ([99f6203](https://github.com/sebgroup/green/commit/99f62034be3ca1140e5ddf56337b5675fbf0aea6)), closes [#928](https://github.com/sebgroup/green/issues/928)
+* **datepicker:** label spacing ([#1020](https://github.com/sebgroup/green/issues/1020)) ([fcb24eb](https://github.com/sebgroup/green/commit/fcb24ebba371ad19d56bcdab9b2af26f8fd67e66))
+
+
+
 # 1.0.0 (2023-09-25)
 
 
