@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-charts",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "dependencies": {
     "@sebgroup/chlorophyll": "^1.15.1",
     "@types/d3-selection": "^3.0.2",
