@@ -36,16 +36,18 @@ export const Template = ({
         }
       </header>
       ${
-        isStarted ? 
-        `<div class="gds-in-page-wizard-step-card__content">${content}</div>
-          <footer class="gds-in-page-wizard-step-card__footer">
-            ${isCompleted ?
-              `<button class="secondary">Edit</button>`
-              :
-              `<button class="primary">Next</button>`
-            }
-          </footer>
-        `
+        isStarted ?
+          `<div class="gds-in-page-wizard-step-card__content">${content}</div>
+            <footer class="gds-in-page-wizard-step-card__footer">
+              <button class="primary">Next</button>
+            </footer>
+          `
+          : isCompleted ?
+            `<div class="gds-in-page-wizard-step-card__content">${content}</div>
+              <footer class="gds-in-page-wizard-step-card__footer">
+                <button class="secondary">Edit</button>
+              </footer>
+            `
           : ''
       }
     </section>
@@ -81,7 +83,7 @@ Presents a sequence that leads the user through well-defined steps within a page
   name="In-page Wizard Step Card"
   args={{
     isCompleted: true,
-    isStarted: true,
+    isStarted: false,
     isEditable: true,
     stepText: 'Step 1 of 6',
     title: 'Title',
@@ -103,7 +105,7 @@ Use the `.editable` class in the container element to display the Edit button.
     name="Completed step"
     args={{
       isCompleted: true,
-      isStarted: true,
+      isStarted: false,
       isEditable: true,
       stepText: 'Step 1 of 6',
       title: 'Title',

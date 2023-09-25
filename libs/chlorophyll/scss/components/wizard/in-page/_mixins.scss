@@ -1,6 +1,14 @@
 @use '../../../common/index' as common;
 @use '../../../tokens';
 
+@mixin add-in-page-wizard-uneditable {
+  $prefix: &;
+  #{$prefix}__header__edit,
+  #{$prefix}__footer {
+    display: none;
+  }
+}
+
 @mixin add-in-page-wizard {
   $prefix: &;
   border: 0;
@@ -135,10 +143,11 @@
     }
 
     &:not(.editable) {
-      #{$prefix}__header__edit,
-      #{$prefix}__footer {
-        display: none;
-      }
+      @include add-in-page-wizard-uneditable;
     }
+  }
+
+  &.editable:not(.active):not(.completed) {
+    @include add-in-page-wizard-uneditable;
   }
 }
