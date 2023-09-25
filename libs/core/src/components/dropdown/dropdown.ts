@@ -340,11 +340,12 @@ export class GdsDropdown<ValueT = any>
   private _onOpenChange() {
     const open = this.open
 
+    Array.from(this.#optionElements).forEach((o) => (o.hidden = !open))
+
     if (open) this.#registerAutoCloseListener()
     else {
       this.#unregisterAutoCloseListener()
       this.#searchInputRef.value && (this.#searchInputRef.value.value = '')
-      Array.from(this.#optionElements).forEach((o) => (o.hidden = false))
     }
 
     this.dispatchEvent(
