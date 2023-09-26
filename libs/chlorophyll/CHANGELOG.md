@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.15.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.1...@sebgroup/chlorophyll@1.15.2) (2023-09-26)
+
+
+### Bug Fixes
+
+* 🐛 edit buttons should be hidden on active state ([#1030](https://github.com/sebgroup/green/issues/1030)) ([e5fb857](https://github.com/sebgroup/green/commit/e5fb857d00e41aa40a7401551a32553d2a8c17ac))
+
+
+
 ## [1.15.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.0...@sebgroup/chlorophyll@1.15.1) (2023-09-25)
 
 
