@@ -3,7 +3,6 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs'
 export const Template = ({
   isCompleted,
   isStarted,
-  isEditable,
   stepText,
   title,
   content,
@@ -13,8 +12,6 @@ export const Template = ({
       isCompleted ? ' completed' : ''
     }${
       isStarted ? ' active' : ''
-    }${
-      isEditable ? ' editable' : ''
     }">
       <header class="gds-in-page-wizard-step-card__header">
         <div class="gds-in-page-wizard-step-card__header__icon">
@@ -36,16 +33,18 @@ export const Template = ({
         }
       </header>
       ${
-        isStarted ? 
-        `<div class="gds-in-page-wizard-step-card__content">${content}</div>
-          <footer class="gds-in-page-wizard-step-card__footer">
-            ${isCompleted ?
-              `<button class="secondary">Edit</button>`
-              :
-              `<button class="primary">Next</button>`
-            }
-          </footer>
-        `
+        isStarted ?
+          `<div class="gds-in-page-wizard-step-card__content">${content}</div>
+            <footer class="gds-in-page-wizard-step-card__footer">
+              <button class="primary">Next</button>
+            </footer>
+          `
+          : isCompleted ?
+            `<div class="gds-in-page-wizard-step-card__content">${content}</div>
+              <footer class="gds-in-page-wizard-step-card__footer__edit">
+                <button class="secondary">Edit</button>
+              </footer>
+            `
           : ''
       }
     </section>
@@ -64,9 +63,6 @@ export const Template = ({
     isStarted: {
       control: 'boolean',
     },
-    isEditable: {
-      control: 'boolean',
-    },
     stepText: { control: 'text' },
     title: { control: 'text' },
     content: { control: 'text' },
@@ -81,8 +77,7 @@ Presents a sequence that leads the user through well-defined steps within a page
   name="In-page Wizard Step Card"
   args={{
     isCompleted: true,
-    isStarted: true,
-    isEditable: true,
+    isStarted: false,
     stepText: 'Step 1 of 6',
     title: 'Title',
     content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
@@ -96,15 +91,12 @@ Presents a sequence that leads the user through well-defined steps within a page
 
 A completed step has a green check mark icon and an Edit-button which allows the user to change previously entered information.
 
-Use the `.editable` class in the container element to display the Edit button.
-
 <Canvas>
   <Story
     name="Completed step"
     args={{
       isCompleted: true,
-      isStarted: true,
-      isEditable: true,
+      isStarted: false,
       stepText: 'Step 1 of 6',
       title: 'Title',
       content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
@@ -124,7 +116,6 @@ The current step is the one the user is currently interacting with.
     args={{
       isCompleted: false,
       isStarted: true,
-      isEditable: true,
       stepText: 'Step 2 of 6',
       title: 'Title',
       content: `<div class="form-group">
@@ -153,7 +144,6 @@ An upcoming step only shows the title and step number, but hides the details in 
     args={{
       isCompleted: false,
       isStarted: false,
-      isEditable: true,
       stepText: 'Step 3 of 6',
       title: 'Title',
       content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
