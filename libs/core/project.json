@@ -109,8 +109,8 @@
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-${projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
@@ -127,7 +127,8 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public"
+        "access": "public",
+        "distFolderPath": "{workspaceRoot}/dist/libs/core/src"
       }
     }
   },

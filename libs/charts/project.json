@@ -102,8 +102,8 @@
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-${projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
         "postTargets": ["charts:publish", "charts:github"]
       }
@@ -118,7 +118,8 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public"
+        "access": "public",
+        "distFolderPath": "{workspaceRoot}/dist/libs/charts"
       }
     }
   }
