@@ -1,16 +1,21 @@
 @use '../../../common/index' as common;
 @use '../../../tokens';
 
-@mixin add-in-page-wizard-uneditable {
-  $prefix: &;
-  #{$prefix}__header__edit,
-  #{$prefix}__footer {
-    display: none;
+@mixin add-in-page-wizard-footer {
+  border-top: 1px solid tokens.get(tokens.$grey, 500);
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  margin-top: 0;
+
+  @include common.media-breakpoint-up('sm') {
+    padding: 1.5rem 1rem 1.5rem 4.5rem;
+
+    button {
+      min-width: 21rem;
+    }
   }
 }
 
 @mixin add-in-page-wizard {
-  $prefix: &;
   border: 0;
   margin-bottom: 0.5rem;
   padding: 0;
@@ -81,6 +86,15 @@
     grid-area: title;
   }
 
+  &__header__edit {
+    grid-area: edit;
+    display: none;
+    justify-content: end;
+    @media (min-width: 576px) {
+      display: flex;
+    }
+  }
+
   &__content {
     padding: 0.5rem 1rem 1.5rem 1rem;
     max-width: 50rem;
@@ -92,17 +106,15 @@
   > footer {
     justify-content: flex-start;
   }
+
   &__footer {
-    border-top: 1px solid tokens.get(tokens.$grey, 500);
-    padding: 1.5rem 1rem 1.5rem 1rem;
-    margin-top: 0;
+    @include add-in-page-wizard-footer;
+  }
 
+  &__footer__edit {
+    @include add-in-page-wizard-footer;
     @include common.media-breakpoint-up('sm') {
-      padding: 1.5rem 1rem 1.5rem 4.5rem;
-
-      button {
-        min-width: 21rem;
-      }
+      display: none !important;
     }
   }
 
@@ -122,32 +134,5 @@
   &.completed &__header__icon {
     display: flex;
     background-color: tokens.get(tokens.$green, 1);
-  }
-
-  &.completed {
-    &.editable {
-      #{$prefix}__header__edit {
-        grid-area: edit;
-        display: none;
-        justify-content: end;
-        @include common.media-breakpoint-up('sm') {
-          display: flex;
-        }
-      }
-
-      #{$prefix}__footer {
-        @include common.media-breakpoint-up('sm') {
-          display: none;
-        }
-      }
-    }
-
-    &:not(.editable) {
-      @include add-in-page-wizard-uneditable;
-    }
-  }
-
-  &.editable:not(.active):not(.completed) {
-    @include add-in-page-wizard-uneditable;
   }
 }
