@@ -353,22 +353,22 @@
     "customParams": {}
   },
   {
-    "id": "components-dropdown--dropdown",
-    "name": "Dropdown",
-    "title": "Components/Dropdown",
-    "customParams": {
-      "componentIds": [
-        "component-dropdown"
-      ]
-    }
-  },
-  {
     "id": "components-datepicker--datepicker",
     "name": "Datepicker",
     "title": "Components/Datepicker",
     "customParams": {
       "componentIds": [
         "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--dropdown",
+    "name": "Dropdown",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
       ]
     }
   },
