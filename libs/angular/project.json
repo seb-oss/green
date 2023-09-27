@@ -101,8 +101,8 @@
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-${projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
         "postTargets": ["angular:publish", "angular:github"]
       }
