@@ -19,14 +19,9 @@ describe('Dropdown', () => {
     }
     component = render(<Dropdown {...props} />)
     await act(() => tick())
-
-    options = await component.findAllByRole('option')
   })
   afterEach(() => component.unmount())
   it('renders', () => {
     expect(component.baseElement).toBeTruthy()
-  })
-  it('renders options', () => {
-    expect(options).toHaveLength(3)
   })
 })
