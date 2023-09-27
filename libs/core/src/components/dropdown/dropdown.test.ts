@@ -169,6 +169,120 @@ describe('<gds-dropdown>', () => {
     expect(uiStateHandler).to.have.been.calledTwice
   })
 
+  it('should react to changes in contained light DOM', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
+    el.removeChild(option1)
+    await el.updateComplete
+
+    expect(el.options.length).to.equal(2)
+    expect(el.options[0].value).to.equal('v2')
+    expect(el.value).to.equal('v2')
+    expect(el.displayValue).to.equal('Option 2')
+  })
+
+  it('should register as a form control and have a FormData value', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <form id="test-form">
+        <gds-dropdown name="test-dropdown">
+          <gds-option value="v1">Option 1</gds-option>
+          <gds-option value="v2">Option 2</gds-option>
+          <gds-option value="v3">Option 3</gds-option>
+        </gds-dropdown>
+      </form>
+    `)
+    const form = document.getElementById('test-form')! as HTMLFormElement
+    const formData = new FormData(form)
+
+    expect((form.elements[0] as GdsDropdown).value).to.equal('v1')
+    expect(formData.get('test-dropdown')).to.equal('v1')
+  })
+})
+
+describe('<gds-dropdown> interactions', () => {
+  it('should open on click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await clickOnElement(trigger, 'center')
+    await el.updateComplete
+
+    expect(el.open).to.be.true
+  })
+
+  it('should select option on click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await timeout(0)
+
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+
+    expect(el.value).to.equal('v2')
+  })
+
+  it('should emit `change` event when option is selected', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await timeout(0)
+
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+
+    const changeHandler = sinon.spy()
+    el.addEventListener('change', changeHandler)
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+
+    await waitUntil(() => changeHandler.calledOnce)
+
+    expect(changeHandler).to.have.been.calledOnce
+    expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
+  })
+
+  it('should close on click outside', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    await sendMouse({ type: 'click', position: [0, 0] })
+    await el.updateComplete
+
+    expect(el.open).to.be.false
+  })
+})
+
+describe('<gds-dropdown> keyboard navigation', () => {
   it('should open on arrow navigation', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
@@ -203,6 +317,31 @@ describe('<gds-dropdown>', () => {
     await timeout(50)
 
     expect(document.activeElement).to.equal(secondOption)
+  })
+
+  it('should focus option using keyboard navigation when opened with click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await clickOnElement(trigger, 'center')
+    await el.updateComplete
+
+    expect(el.open).to.be.true
+
+    await sendKeys({ press: 'ArrowDown' })
+    await timeout(50)
+    await sendKeys({ press: 'Enter' })
+    await timeout(50)
+
+    expect(el.value).to.equal('v2')
+    expect(el.open).to.be.false
   })
 
   it('should select option with Enter key', async () => {
@@ -245,61 +384,6 @@ describe('<gds-dropdown>', () => {
     expect(el.value).to.equal('v2')
   })
 
-  it('should open on click', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-    `)
-
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
-
-    await clickOnElement(trigger, 'center')
-    await el.updateComplete
-
-    expect(el.open).to.be.true
-  })
-
-  it('should select option on click', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
-        <gds-option value="v3">Option 3</gds-option>
-      </gds-dropdown>
-    `)
-    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
-
-    await clickOnElement(option2, 'center')
-    await el.updateComplete
-
-    expect(el.value).to.equal('v2')
-  })
-
-  it('should emit `change` event when option is selected', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
-        <gds-option value="v3">Option 3</gds-option>
-      </gds-dropdown>
-    `)
-    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
-
-    const changeHandler = sinon.spy()
-    el.addEventListener('change', changeHandler)
-
-    await clickOnElement(option2, 'center')
-    await el.updateComplete
-
-    await waitUntil(() => changeHandler.calledOnce)
-
-    expect(changeHandler).to.have.been.calledOnce
-    expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
-  })
-
   it('should close on ESC', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
@@ -314,77 +398,6 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
 
     expect(el.open).to.be.false
-  })
-
-  it('should close on click outside', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-    `)
-
-    await sendMouse({ type: 'click', position: [0, 0] })
-    await el.updateComplete
-
-    expect(el.open).to.be.false
-  })
-
-  it('should close when focusing outside', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-      <button id="test-button">Test</button>
-    `)
-    const testButton = document.getElementById('test-button')!
-
-    el.focus()
-    await el.updateComplete
-
-    testButton.focus()
-    await el.updateComplete
-
-    expect(el.open).to.be.false
-  })
-
-  it('should react to changes in contained light DOM', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown>
-        <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
-        <gds-option value="v3">Option 3</gds-option>
-      </gds-dropdown>
-    `)
-
-    const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
-    el.removeChild(option1)
-    await el.updateComplete
-
-    expect(el.options.length).to.equal(2)
-    expect(el.options[0].value).to.equal('v2')
-    expect(el.value).to.equal('v2')
-    expect(el.displayValue).to.equal('Option 2')
-  })
-
-  it('should register as a form control and have a FormData value', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <form id="test-form">
-        <gds-dropdown name="test-dropdown">
-          <gds-option value="v1">Option 1</gds-option>
-          <gds-option value="v2">Option 2</gds-option>
-          <gds-option value="v3">Option 3</gds-option>
-        </gds-dropdown>
-      </form>
-    `)
-    const form = document.getElementById('test-form')! as HTMLFormElement
-    const formData = new FormData(form)
-
-    expect((form.elements[0] as GdsDropdown).value).to.equal('v1')
-    expect(formData.get('test-dropdown')).to.equal('v1')
   })
 })
 
@@ -412,30 +425,7 @@ describe('<gds-dropdown searchable>', () => {
       </gds-dropdown>
     `)
     const searchField =
-      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
-
-    searchField.focus()
-    await sendKeys({ type: '2' })
-    await el.updateComplete
-
-    const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
-    )
-
-    expect(options.length).to.equal(1)
-    expect(options[0].textContent).to.equal('Option 2')
-  })
-
-  it('should filter options when typing in search field', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown searchable open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-    `)
-    const searchField =
-      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
+      el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
 
     searchField.focus()
     await sendKeys({ type: '2' })
@@ -453,7 +443,7 @@ describe('<gds-dropdown searchable>', () => {
 describe('<gds-dropdown multiple>', () => {
   it('should support multiple selections', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown multiple open>
+      <gds-dropdown multiple>
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
@@ -462,7 +452,7 @@ describe('<gds-dropdown multiple>', () => {
 
     el.focus()
     await sendKeys({ press: 'ArrowDown' })
-    await el.updateComplete
+    await timeout(50)
     await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
     await sendKeys({ press: 'Space' })

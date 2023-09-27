@@ -11,14 +11,17 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-dropdown onchange="document.getElementById('selected-value').innerText = event.target.value">
-      <gds-option value="v1">value 1</gds-option>
-      <gds-option value="v2">Value 2</gds-option>
-      <gds-option value="v3">Value 3</gds-option>
+    <gds-dropdown
+      onchange="document.getElementById('selected-value').innerText = event.target.value"
+      label="Select food"
+    >
+      <gds-option value="pizza">Pizza</gds-option>
+      <gds-option value="spaghetti">Spaghetti</gds-option>
+      <gds-option value="mozarella">Mozarella</gds-option>
     </gds-dropdown>
     <br />
     <div>
-      Selected value: <span id="selected-value"></span>
+      Selected food: <span id="selected-value"></span>
     </div>
   </div>
 </Canvas>
@@ -29,16 +32,19 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
   <div style={{ height: '200px' }}>
     <gds-dropdown
       multiple
+      label="Pick team members"
       onchange="document.getElementById('selected-values').innerText = event.target.value.toString()"
     >
-      <gds-option isPlaceholder>Select values</gds-option>
-      <gds-option value="v1">value 1</gds-option>
-      <gds-option value="v2">Value 2</gds-option>
-      <gds-option value="v3">Value 3</gds-option>
+      <gds-option isPlaceholder>Select people</gds-option>
+      <gds-option value="einstein">Albert Einstein</gds-option>
+      <gds-option value="tesla">Nikola Tesla</gds-option>
+      <gds-option value="curie">Marie Curie</gds-option>
+      <gds-option value="darwin">Charles Darwin</gds-option>
+      <gds-option value="newton">Isaac Newton</gds-option>
     </gds-dropdown>
     <br />
     <div>
-      Selected values: <span id="selected-values"></span>
+      Selected team: <span id="selected-values"></span>
     </div>
   </div>
 </Canvas>
@@ -47,7 +53,7 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 
 <Canvas>
   <div style={{ height: '300px', dummy: registerTransitionalStyles() }}>
-    <gds-dropdown searchable>
+    <gds-dropdown searchable label="Select tech">
       <gds-option value="">Select tech</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -71,7 +77,7 @@ the default trigger content will be overridden, and you will have to manage the 
         <b>Selected: </b>
         <span id="trigger-value">v1</span>
       </div>
-      <gds-option value="v1">value 1</gds-option>
+      <gds-option value="v1">Value 1</gds-option>
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>
     </gds-dropdown>
