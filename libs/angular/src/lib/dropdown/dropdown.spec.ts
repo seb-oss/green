@@ -1,10 +1,9 @@
-import { DropdownArgs } from '@sebgroup/extract'
 import { render, RenderResult } from '@testing-library/angular'
 import { NggDropdownComponent } from './dropdown.component'
 
 describe('Dropdown', () => {
   let component: RenderResult<NggDropdownComponent>
-  let props: DropdownArgs
+  let props: Partial<NggDropdownComponent>
   beforeEach(async () => {
     props = {
       options: [
