@@ -1,4 +1,4 @@
-@layer gds-badge, tokens, a11y, variants;
+@layer gds-badge, shell, tokens, a11y, variants;
 
 @layer gds-badge {
   @layer tokens {
@@ -102,55 +102,59 @@
     }
   }
 
-  .gds-badge {
-    font-size: var(--gds-badge-fs);
-    line-height: var(--gds-badge-lh);
-    font-weight: var(--gds-badge-fw);
-    padding-block: var(--gds-badge-block-padding);
-    padding-inline: var(--gds-badge-inline-padding);
-    color: var(--gds-badge-cl);
-    background-color: var(--gds-badge-bg);
-    border-radius: var(--gds-badge-radii);
-    letter-spacing: normal;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
-    max-width: max-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 1lh;
-    gap: 1ch;
+  @layer shell {
+    .gds-badge {
+      font-size: var(--gds-badge-fs);
+      line-height: var(--gds-badge-lh);
+      font-weight: var(--gds-badge-fw);
+      padding-block: var(--gds-badge-block-padding);
+      padding-inline: var(--gds-badge-inline-padding);
+      color: var(--gds-badge-cl);
+      background-color: var(--gds-badge-bg);
+      border-radius: var(--gds-badge-radii);
+      letter-spacing: normal;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      max-width: max-content;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 1lh;
+      gap: 1ch;
 
-    :host([variant='information']) & {
-      --gds-badge-cl: var(--gds-badge-cl-information);
-      --gds-badge-bg: var(--gds-badge-bg-information);
-    }
+      @layer variants {
+        :host([variant='information']) & {
+          --gds-badge-cl: var(--gds-badge-cl-information);
+          --gds-badge-bg: var(--gds-badge-bg-information);
+        }
 
-    :host([variant='success']) & {
-      --gds-badge-cl: var(--gds-badge-cl-success);
-      --gds-badge-bg: var(--gds-badge-bg-success);
-    }
+        :host([variant='success']) & {
+          --gds-badge-cl: var(--gds-badge-cl-success);
+          --gds-badge-bg: var(--gds-badge-bg-success);
+        }
 
-    :host([variant='warning']) & {
-      --gds-badge-cl: var(--gds-badge-cl-warning);
-      --gds-badge-bg: var(--gds-badge-bg-warning);
-    }
+        :host([variant='warning']) & {
+          --gds-badge-cl: var(--gds-badge-cl-warning);
+          --gds-badge-bg: var(--gds-badge-bg-warning);
+        }
 
-    :host([variant='error']) & {
-      --gds-badge-cl: var(--gds-badge-cl-error);
-      --gds-badge-bg: var(--gds-badge-bg-error);
-    }
+        :host([variant='error']) & {
+          --gds-badge-cl: var(--gds-badge-cl-error);
+          --gds-badge-bg: var(--gds-badge-bg-error);
+        }
 
-    :host([variant='disabled']) & {
-      --gds-badge-cl: var(--gds-badge-cl-disabled);
-      --gds-badge-bg: var(--gds-badge-bg-disabled);
-      pointer-events: none;
-    }
+        :host([variant='disabled']) & {
+          --gds-badge-cl: var(--gds-badge-cl-disabled);
+          --gds-badge-bg: var(--gds-badge-bg-disabled);
+          pointer-events: none;
+        }
 
-    :host([variant='surface']) & {
-      --gds-badge-cl: var(--gds-badge-cl-surface);
-      --gds-badge-bg: var(--gds-badge-bg-surface);
+        :host([variant='surface']) & {
+          --gds-badge-cl: var(--gds-badge-cl-surface);
+          --gds-badge-bg: var(--gds-badge-bg-surface);
+        }
+      }
     }
   }
 }
