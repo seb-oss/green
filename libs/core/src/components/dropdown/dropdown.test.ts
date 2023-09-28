@@ -217,14 +217,14 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    const popover = el
-      .shadowRoot!.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
-      ?.shadowRoot!.querySelector<HTMLElement>('dialog')!
+    const popover = el.shadowRoot
+      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await timeout(50)
 
-    expect(popover.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
+    expect(popover?.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
   })
 })
 
