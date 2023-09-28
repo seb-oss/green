@@ -2,4 +2,5 @@
 
 :host {
   @include list.base-list;
+  overflow-y: auto;
 }
