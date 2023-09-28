@@ -1,0 +1,18 @@
+gds-main {
+  display: flex;
+  gap: 120px;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+gds-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 80px;
+}
+
+gds-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
