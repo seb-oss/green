@@ -14,20 +14,30 @@ import {
   NgControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms'
-import {
-  CompareWith,
-  DropdownOption,
-  DropdownOptionElement,
-  DropdownPlacements,
-  DropdownTexts,
-  SearchFilter,
-} from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
 import { GdsDropdown } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
+export type DropdownPlacements = 'bottom-start' | 'top-start'
+export interface DropdownTexts {
+  select?: string
+  selected?: string
+  placeholder?: string
+  searchPlaceholder?: string
+  close?: string
+  optionsDescription?: string
+}
+export interface DropdownOption {
+  label?: string
+  value?: any
+  selected?: boolean
+  [key: string]: any
+}
 
 const selectionText = (
   value: DropdownOption | DropdownOption[] | undefined,
@@ -183,10 +193,6 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouchedFn = fn
-  }
-
-  trackByKey = (index: number, option: DropdownOptionElement): string => {
-    return option.attributes.id ?? ''
   }
 
   private convertToBoolean(value: string | boolean): boolean {
