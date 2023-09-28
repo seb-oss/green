@@ -204,6 +204,28 @@ describe('<gds-dropdown>', () => {
     expect((form.elements[0] as GdsDropdown).value).to.equal('v1')
     expect(formData.get('test-dropdown')).to.equal('v1')
   })
+
+  it('popover should not be narrower than trigger', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open>
+        <gds-option placeholder
+          >This is a very long string that will cause the trigger to be very
+          wide</gds-option
+        >
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const popover = el.shadowRoot
+      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await timeout(50)
+
+    expect(popover?.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
+  })
 })
 
 describe('<gds-dropdown> interactions', () => {
