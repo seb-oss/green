@@ -157,6 +157,7 @@ export class GdsPopover extends LitElement {
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
+          minWidth: `${referenceEl.offsetWidth}px`,
         })
       })
     })
