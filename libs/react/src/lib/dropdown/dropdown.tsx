@@ -1,10 +1,61 @@
-import { DropdownArgs, DropdownOption, OnChange } from '@sebgroup/extract'
 import React from 'react'
 import { createComponent } from '@lit-labs/react'
 
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
+export type DropdownPlacements = 'bottom-start' | 'top-start'
+export type OnChange<T = any> = (value: T) => void
+
+export type IndicatorType = 'success' | 'error' | 'info'
+
+export type ValidatorType = 'Required' | 'Email'
+
+export interface ValidatorRules {
+  type: ValidatorType
+  custom?: () => string | undefined
+}
+
+export interface IValidator {
+  message: string
+  indicator: IndicatorType
+  rules?: ValidatorRules
+}
+
+export interface DropdownArgs {
+  compareWith?: CompareWith
+  display?: string // option key to display
+  id?: string
+  informationLabel?: string
+  label?: string
+  loop?: boolean
+  multiSelect?: boolean
+  onTouched?: () => void
+  options: DropdownOption[]
+  searchFilter?: SearchFilter
+  searchable?: boolean
+  texts?: DropdownTexts
+  useValue?: string // option key to use as value
+  validator?: IValidator
+  value?: any
+}
+export interface DropdownTexts {
+  select?: string
+  selected?: string
+  placeholder?: string
+  searchPlaceholder?: string
+  close?: string
+  optionsDescription?: string
+}
+export interface DropdownOption {
+  label?: string
+  value?: any
+  selected?: boolean
+  [key: string]: any
+}
 
 registerTransitionalStyles()
 
