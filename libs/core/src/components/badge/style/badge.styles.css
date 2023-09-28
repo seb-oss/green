@@ -53,8 +53,6 @@
       --gds-badge-fw: 500;
       --gds-badge-inline-padding: 10px;
       --gds-badge-block-padding: 6px;
-
-      contain: strict;
     }
   }
   @layer a11y {
