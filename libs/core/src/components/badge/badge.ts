@@ -1,6 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import styles from './style/badge.styles.scss'
+import { constrainSlots } from 'utils/helpers'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
+import styles from './style/badge.styles.css'
 
 /**
  * 
@@ -42,22 +45,45 @@ export class GdsBadge extends LitElement {
     delegatesFocus: true,
   }
 
+  // Private members
+  #internals: ElementInternals
+
+  constructor() {
+    super()
+    this.#internals = this.attachInternals()
+    constrainSlots(this)
+  }
+
   @property({ type: String, reflect: true, attribute: 'content' })
   badgeContent = 'SEK'
-    // Disable content this.textContent
+  
+  @property({ type: String, reflect: true, attribute: 'variant' })
+  variant = '';
 
-  // variants: 
-  // 1. Information
-  // 2. Success
-  // 3. Warning
-  // 4. Error
+  @property({ type: String, reflect: true, attribute: 'type' })
+  type = '';
+  
+  @property({ type: String, reflect: true, attribute: 'icon' })
+  icon = '';
 
-  // Types: 
-  // 1. Status
-  // 3. Counter
-  // 4. Indicator ( icon and percentage )
+  slotIcon() {
+    return html`
+        <slot name="icon" gds-allow="gds-icon"></slot>
+    `;
+  }
+
+  slotLabel() {
+    return this.textContent
+      ? html`<slot part="label" gds-allow="#text"></slot>`
+      : ''
+  }
 
   render() { 
     const truncatedText = this.badgeContent ? this.badgeContent.substring(0, 3) : '';
-    return html`<div class="gds-badge">${truncatedText}</div>` }
+    const hasIconSlot = this.querySelector('[slot="icon"]') !== null;
+    const content = html`${when(hasIconSlot, () => html`<slot name="icon" gds-allow="gds-icon"></slot>`)}${this.slotLabel()}`
+
+    console.log(truncatedText);
+
+    return html`<div class="gds-badge">${content}</div>`}
 }

@@ -1,0 +1,74 @@
+:host {
+  --gds-badge-cl: rgba(53, 53, 49, 1);
+  --gds-badge-bg: rgba(243, 243, 242, 1);
+
+  --gds-badge-cl-information: rgba(53, 53, 49, 1);
+  --gds-badge-bg-information: rgba(243, 243, 242, 1);
+
+  --gds-badge-cl-success: rgba(0, 109, 49, 1);
+  --gds-badge-bg-success: rgba(234, 255, 232, 1);
+
+  --gds-badge-cl-warning: rgba(125, 87, 0, 1);
+  --gds-badge-bg-warning: rgba(255, 238, 217, 1);
+
+  --gds-badge-cl-error: rgba(186, 29, 0, 1);
+  --gds-badge-bg-error: rgba(255, 237, 233, 1);
+
+  --gds-badge-cl-disabled: rgba(157, 157, 149, 1);
+  --gds-badge-bg-disabled: rgba(249, 249, 249, 1);
+
+  --gds-badge-radii: 4px;
+
+  --gds-badge-fs: 12px;
+  --gds-badge-lh: 1;
+  --gds-badge-fw: 500;
+  --gds-badge-inline-padding: 10px;
+  --gds-badge-block-padding: 6px;
+}
+
+.gds-badge {
+  font-size: var(--gds-badge-fs);
+  line-height: var(--gds-badge-lh);
+  font-weight: var(--gds-badge-fw);
+  padding-block: var(--gds-badge-block-padding);
+  padding-inline: var(--gds-badge-inline-padding);
+  color: var(--gds-badge-cl);
+  background-color: var(--gds-badge-bg);
+  border-radius: var(--gds-badge-radii);
+  letter-spacing: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  max-width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1lh;
+  gap: 1ch;
+
+  :host([variant='information']) & {
+    --gds-badge-cl: var(--gds-badge-cl-information);
+    --gds-badge-bg: var(--gds-badge-bg-information);
+  }
+
+  :host([variant='success']) & {
+    --gds-badge-cl: var(--gds-badge-cl-success);
+    --gds-badge-bg: var(--gds-badge-bg-success);
+  }
+
+  :host([variant='warning']) & {
+    --gds-badge-cl: var(--gds-badge-cl-warning);
+    --gds-badge-bg: var(--gds-badge-bg-warning);
+  }
+
+  :host([variant='error']) & {
+    --gds-badge-cl: var(--gds-badge-cl-error);
+    --gds-badge-bg: var(--gds-badge-bg-error);
+  }
+
+  :host([variant='disabled']) & {
+    --gds-badge-cl: var(--gds-badge-cl-disabled);
+    --gds-badge-bg: var(--gds-badge-bg-disabled);
+    pointer-events: none;
+  }
+}

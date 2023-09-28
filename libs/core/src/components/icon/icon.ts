@@ -89,6 +89,14 @@ export class GdsIcon extends LitElement {
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </symbol>
+        <symbol id="arrow-up">
+         <line x1="12" y1="19" x2="12" y2="5" />
+         <polyline points="5 12 12 5 19 12" /> 
+        </symbol>
+        <symbol id="arrow-down">
+          <line x1="12" y1="5" x2="12" y2="19" /> 
+          <polyline points="19 12 12 19 5 12" /> 
+        </symbol>
       </svg>
       <svg viewBox="0 0 24 24">
         <use href="#${name}"></use>

@@ -1,8 +1,37 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
-import { GdsBadge } from '../../../../../dist/libs/core/src'
+import { GdsBadge, GdsIcon } from '../../../../../dist/libs/core/src'
+import './style/badge.stories.css'
 
 <Meta title="Components/Badge" />
 
-# Badge
+## Badge
 
-<gds-badge>Badge content</gds-badge>
+<gds-badge>Some Text</gds-badge>
+
+## Types
+
+<gds-badge type="status"> <button>I am a button</button> Status</gds-badge>
+
+<gds-badge type="counter">100</gds-badge>
+
+<gds-badge type="indicator" content="90%">
+  <gds-icon slot="icon" name="arrow-up"></gds-icon>
+  90%
+</gds-badge>
+
+<gds-badge type="indicator">
+  <gds-icon slot="icon" name="arrow-down"></gds-icon>
+  10%
+</gds-badge>
+
+## Variants
+
+<gds-badge variant="information">Information</gds-badge>
+
+<gds-badge variant="success">Success</gds-badge>
+
+<gds-badge variant="warning">Warning</gds-badge>
+
+<gds-badge variant="error">Error</gds-badge>
+
+<gds-badge variant="disabled">Disabled</gds-badge>
