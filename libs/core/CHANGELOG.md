@@ -2,6 +2,17 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.0.0-beta.15](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.14...@sebgroup/green-core@1.0.0-beta.15) (2023-09-29)
+
+
+### Bug Fixes
+
+* **dropdown:** fix mobile view and add backdrop ([#1027](https://github.com/sebgroup/green/issues/1027)) ([f7111c4](https://github.com/sebgroup/green/commit/f7111c41950ecc44ed94c72bfdcfbac8a9f2f5ad))
+* **dropdown:** popover min width ([#1037](https://github.com/sebgroup/green/issues/1037)) ([9d0cc59](https://github.com/sebgroup/green/commit/9d0cc596b7ba8a6a2b2e5a9cf01bfa86583d0d5f))
+* **listbox:** add `overflow-y` ([#1036](https://github.com/sebgroup/green/issues/1036)) ([33e42dc](https://github.com/sebgroup/green/commit/33e42dcf075f2b1cb0a1611b57c29a47d3e391e2))
+
+
+
 # [1.0.0-beta.14](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.13...@sebgroup/green-core@1.0.0-beta.14) (2023-09-26)
 
 
