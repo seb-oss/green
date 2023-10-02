@@ -47,6 +47,7 @@ export class AppElement extends HTMLElement {
       dropdown.appendChild(o)
     })
 
+    // With this, `dropdown.value = { val: 'test2' }` will select the second option correctly
     dropdown.compareWith = (a, b) => a?.val === b?.val
   }
 }
