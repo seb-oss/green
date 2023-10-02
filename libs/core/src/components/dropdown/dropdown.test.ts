@@ -228,7 +228,7 @@ describe('<gds-dropdown>', () => {
     expect(popover?.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
   })
 
-  it('should select complex values correctly with `compareWith` callback', async () => {
+  it('should select complex value correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
 
     ;[1, 2, 3].forEach((num) => {
@@ -249,6 +249,32 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
 
     expect(el.options[1].selected).equal(true)
+  })
+
+  it('should select multiple complex values correctly with `compareWith` callback', async () => {
+    const el = await fixture<GdsDropdown>(
+      html`<gds-dropdown multiple></gds-dropdown>`
+    )
+
+    ;[1, 2, 3, 4].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option')
+      ) as GdsOption
+      o.value = { val: `test${num}` }
+      o.innerHTML = `Test option ${num}`
+      el.appendChild(o)
+    })
+
+    el.compareWith = (a, b) => a.val === b.val
+
+    await el.updateComplete
+
+    el.value = [{ val: 'test2' }, { val: 'test4' }]
+
+    await el.updateComplete
+
+    expect(el.options[1].selected).equal(true)
+    expect(el.options[3].selected).equal(true)
   })
 })
 
