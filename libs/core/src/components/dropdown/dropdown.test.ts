@@ -10,6 +10,7 @@ import type { GdsDropdown } from './dropdown'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
+  GdsOption,
 } from '../../../../../dist/libs/core/src/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
@@ -225,6 +226,59 @@ describe('<gds-dropdown>', () => {
     await timeout(50)
 
     expect(popover?.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
+  })
+
+  it('should select complex value correctly with `compareWith` callback', async () => {
+    const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
+
+    ;[1, 2, 3].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option')
+      ) as GdsOption
+      o.value = { val: `test${num}` }
+      o.innerHTML = `Test option ${num}`
+      el.appendChild(o)
+    })
+
+    el.compareWith = (a, b) => a.val === b.val
+
+    await el.updateComplete
+
+    el.value = { val: 'test2' }
+
+    await el.updateComplete
+
+    expect(el.options[0].selected).equal(false)
+    expect(el.options[1].selected).equal(true)
+    expect(el.options[2].selected).equal(false)
+  })
+
+  it('should select multiple complex values correctly with `compareWith` callback', async () => {
+    const el = await fixture<GdsDropdown>(
+      html`<gds-dropdown multiple></gds-dropdown>`
+    )
+
+    ;[1, 2, 3, 4].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option')
+      ) as GdsOption
+      o.value = { val: `test${num}` }
+      o.innerHTML = `Test option ${num}`
+      el.appendChild(o)
+    })
+
+    el.compareWith = (a, b) => a.val === b.val
+
+    await el.updateComplete
+
+    el.value = [{ val: 'test2' }, { val: 'test4' }]
+
+    await el.updateComplete
+
+    expect(el.options[0].selected).equal(false)
+    expect(el.options[1].selected).equal(true)
+    expect(el.options[2].selected).equal(false)
+    expect(el.options[3].selected).equal(true)
   })
 })
 
