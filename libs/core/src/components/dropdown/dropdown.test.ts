@@ -514,6 +514,35 @@ describe('<gds-dropdown searchable>', () => {
     expect(options.length).to.equal(1)
     expect(options[0].textContent).to.equal('Option 2')
   })
+
+  it('should should support custom `searchFilter`callback', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown searchable open>
+        <gds-option>foo bar baz</gds-option>
+        <gds-option>qux fred thud</gds-option>
+        <gds-option>waldo corge plugh</gds-option>
+      </gds-dropdown>
+    `)
+
+    el.searchFilter = (q, o) =>
+      o.innerHTML
+        .split(' ')
+        .some((o_part) => q.split(' ').some((q_part) => q_part === o_part))
+
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
+
+    searchField.focus()
+    await sendKeys({ type: 'qux thud' })
+    await el.updateComplete
+
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
+    )
+
+    expect(options.length).to.equal(1)
+    expect(options[0].textContent).to.equal('qux fred thud')
+  })
 })
 
 describe('<gds-dropdown multiple>', () => {
