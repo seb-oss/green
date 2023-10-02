@@ -248,7 +248,9 @@ describe('<gds-dropdown>', () => {
 
     await el.updateComplete
 
+    expect(el.options[0].selected).equal(false)
     expect(el.options[1].selected).equal(true)
+    expect(el.options[2].selected).equal(false)
   })
 
   it('should select multiple complex values correctly with `compareWith` callback', async () => {
@@ -273,7 +275,9 @@ describe('<gds-dropdown>', () => {
 
     await el.updateComplete
 
+    expect(el.options[0].selected).equal(false)
     expect(el.options[1].selected).equal(true)
+    expect(el.options[2].selected).equal(false)
     expect(el.options[3].selected).equal(true)
   })
 })
