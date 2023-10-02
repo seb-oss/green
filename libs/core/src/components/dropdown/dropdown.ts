@@ -82,6 +82,38 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean, reflect: true })
   multiple = false
 
+  /**
+   * Delegate function for comparing option values.
+   * By default the option values are compared using strict equality.
+   * If you want to compare objects by field values, you can provide
+   * a custom compare function here. The function should return true
+   * if the values are considered equal.
+   *
+   * Example:
+   * ```ts
+   * dropdown.compareWith = (a, b) => a.id === b.id
+   * ```
+   */
+  @property()
+  compareWith: (a: ValueT, b: ValueT) => boolean = (a, b) => a === b
+
+  /**
+   * Delegate function for customizing the search filtering.
+   * By default, the search filter will just check if the option label
+   * contains the search string using [String.includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes).
+   *
+   * This property allows you to provide a custom filter function to use instead.
+   *
+   * For example, to filter on value instead of label:
+   * ```ts
+   * dropdown.searchFilter = (query, option) =>
+   *    option.value.toLowerCase().includes(query.toLowerCase())
+   * ```
+   */
+  @property()
+  searchFilter: (q: string, o: GdsOption) => boolean = (q, o) =>
+    o.innerHTML.toLowerCase().includes(q.toLowerCase())
+
   // Private members
   #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
@@ -202,6 +234,7 @@ export class GdsDropdown<ValueT = any>
         <gds-listbox
           id="${this.#listboxId}"
           .multiple="${ifDefined(this.multiple)}"
+          .compareWith="${this.compareWith}"
           ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
           @gds-focus="${this.#handleOptionFocusChange}"
@@ -260,7 +293,7 @@ export class GdsDropdown<ValueT = any>
 
     if (!input.value) return
     const filteredOptions = options.filter(
-      (o) => !o.innerHTML.toLowerCase().includes(input.value.toLowerCase())
+      (o) => !this.searchFilter(input.value, o)
     )
     filteredOptions.forEach((o) => (o.hidden = true))
   }
