@@ -82,6 +82,21 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean, reflect: true })
   multiple = false
 
+  /**
+   * Delegate function for comparing option values.
+   * By default the option values are compared using strict equality.
+   * If you want to compare objects by field values, you can provide
+   * a custom compare function here. The function should return true
+   * if the values are considered equal.
+   *
+   * Example:
+   * ```ts
+   * dropdown.compareWith = (a, b) => a.id === b.id
+   * ```
+   */
+  @property()
+  compareWith: (a: ValueT, b: ValueT) => boolean = (a, b) => a === b
+
   // Private members
   #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
@@ -202,6 +217,7 @@ export class GdsDropdown<ValueT = any>
         <gds-listbox
           id="${this.#listboxId}"
           .multiple="${ifDefined(this.multiple)}"
+          .compareWith="${this.compareWith}"
           ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
           @gds-focus="${this.#handleOptionFocusChange}"
