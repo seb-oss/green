@@ -8,6 +8,7 @@
     (change)="onValueChange($event)"
     [multiple]="multiSelect"
     [invalid]="invalid"
+    [compareWith]="compareWithAdapter"
   >
     <span slot="message" #formInfo
       ><ng-content select="[data-form-info]"></ng-content

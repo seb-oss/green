@@ -75,7 +75,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
   @Input() invalid?: boolean
-  @Input() compareWith?: CompareWith
+  @Input() compareWith: CompareWith = (a, b) => a === b
   @Input() searchFilter?: SearchFilter
   @Input() fixedPlacement?: DropdownPlacements
 
@@ -193,6 +193,11 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouchedFn = fn
+  }
+
+  // This adapter function is used to maintain backwards compatibility with the old interface
+  compareWithAdapter = (o1: any, o2: any) => {
+    return this.compareWith(o1[this.useValue], o2[this.useValue])
   }
 
   private convertToBoolean(value: string | boolean): boolean {
