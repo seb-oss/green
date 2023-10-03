@@ -17,7 +17,7 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import { GdsDropdown } from '@sebgroup/green-core'
+import { GdsDropdown, GdsOption } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -195,10 +195,16 @@ export class NggDropdownComponent implements ControlValueAccessor {
     this.onTouchedFn = fn
   }
 
-  // This adapter function is used to maintain backwards compatibility with the old interface
+  // These adapter functions are used to maintain backwards compatibility with the old interface
   compareWithAdapter = (o1: any, o2: any) => {
     const compareFn = this.compareWith || ((a, b) => a === b)
     return compareFn(o1[this.useValue], o2[this.useValue])
+  }
+  searchFilterAdapter = (q: string, o: GdsOption) => {
+    if (this.searchFilter) return this.searchFilter(q, o.value[this.useValue])
+    else
+      return ((q: string, o: GdsOption) =>
+        o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
   }
 
   private convertToBoolean(value: string | boolean): boolean {
