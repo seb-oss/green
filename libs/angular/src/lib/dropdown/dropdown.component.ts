@@ -99,7 +99,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   //
   @Input() set value(newValue: any) {
-    if (!newValue || !this.options || newValue === this._value) return
+    if (!this.options) return
 
     if (Array.isArray(newValue)) {
       this._value = this.options.filter((o) =>
