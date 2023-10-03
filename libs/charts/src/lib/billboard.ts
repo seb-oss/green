@@ -40,6 +40,7 @@ export const createOptions = ({
   const columns = settings.data.map((d) => [d.name, ...d.values])
 
   const defaultType: ChartType = settings.type || 'bar'
+
   const types = settings.data.reduce(
     (res, d) => ({
       ...res,
@@ -55,8 +56,11 @@ export const createOptions = ({
     {}
   )
 
+  const color = Object.assign({}, settings.style?.color)
+
   const defaultTooltipNumberFormat = (num: number) =>
     num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
@@ -79,9 +83,11 @@ export const createOptions = ({
       },
       contents: { template: tmplTooltip },
     },
+    color,
   }
 
   let hasY2Axis = false
+
   hasY2Axis = Object.values(axes).indexOf('y2') !== -1
 
   if (hasY2Axis) {
@@ -248,6 +254,7 @@ export const createInfo = (
 
 export const create = ({ settings, chartElement }: ChartArgs): Chart => {
   const options = createOptions({ settings, chartElement })
+  console.log(options)
   const chart = bb.generate(options)
   const info = createInfo(settings, chart)
 

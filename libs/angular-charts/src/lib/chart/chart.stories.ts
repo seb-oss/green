@@ -137,6 +137,11 @@ Donut.args = {
         values: [100],
       },
     ],
+    style: {
+      color: {
+        pattern: ['#dadada', '#000000', 'green'],
+      },
+    },
   },
   theme: '',
 }
