@@ -93,7 +93,7 @@
     "@babel/core": "^7.17.9",
     "@babel/plugin-proposal-decorators": "^7.17.9",
     "@babel/plugin-proposal-export-default-from": "^7.16.7",
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.16.7",
@@ -106,6 +106,7 @@
     "@lit/localize-tools": "^0.6.9",
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/storybook": "16.8.1",
+    "@nx/angular": "16.8.1",
     "@nx/devkit": "16.8.1",
     "@nx/esbuild": "16.8.1",
     "@nx/eslint-plugin": "16.8.1",
@@ -232,8 +233,7 @@
     "vitest": "0.31.4",
     "webpack": "5.88.2",
     "webpack-merge": "^5.8.0",
-    "yarn-audit-fix": "^9.2.4",
-    "@nx/angular": "16.8.1"
+    "yarn-audit-fix": "^9.2.4"
   },
   "resolutions": {
     "async": "^3.2.2",
