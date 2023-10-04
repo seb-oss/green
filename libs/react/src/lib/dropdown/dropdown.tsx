@@ -100,7 +100,7 @@ export const Dropdown = ({
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
       setSelectedOption(options.find((o) => o.value === e.detail.value))
-      onChange?.(e)
+      onChange?.(e.detail?.value)
     }
   }
 
