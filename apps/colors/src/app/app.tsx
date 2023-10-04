@@ -6,7 +6,7 @@ import {
   TonalPalette,
   hexFromArgb,
 } from '@material/material-color-utilities'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { setDate } from 'date-fns/fp'
 
 // An array that's looped over to generate a pallet of different tones
@@ -117,33 +117,31 @@ export function App() {
     tonesString.split(',').map((v) => (v ? parseInt(v) : 0))
 
   return (
-    <>
-      <div className="use-green pb-7" style={{ backgroundColor: '#eee' }}>
-        <Navbar title="Green Color Generator" />
-        <div className={'container py-8 pt-5'}>
-          <h1 className="pb-7">Green Color Generator</h1>
-          <Card
-            header={
-              <div>
-                <h2>Tonal steps</h2>
-                <p>
-                  These values specify the tonal steps that should be generated.
-                </p>
-              </div>
-            }
-          >
-            <TextInput
-              value={tones.join(',')}
-              label="Tones"
-              onChange={(e) => setTones(parseTones(e.currentTarget.value))}
-            />
-          </Card>
-        </div>
-        <div className={'container py-8 pt-5'}>
-          <Pallets pallets={pallets} tones={tones} />
-        </div>
+    <div className="use-green pb-7" style={{ backgroundColor: '#eee' }}>
+      <Navbar title="Green Color Generator" />
+      <div className={'container py-8 pt-5'}>
+        <h1 className="pb-7">Green Color Generator</h1>
+        <Card
+          header={
+            <div>
+              <h2>Tonal steps</h2>
+              <p>
+                These values specify the tonal steps that should be generated.
+              </p>
+            </div>
+          }
+        >
+          <TextInput
+            value={tones.join(',')}
+            label="Tones"
+            onChange={(e) => setTones(parseTones(e.currentTarget.value))}
+          />
+        </Card>
       </div>
-    </>
+      <div className={'container py-8 pt-5'}>
+        <Pallets pallets={pallets} tones={tones} />
+      </div>
+    </div>
   )
 }
 
