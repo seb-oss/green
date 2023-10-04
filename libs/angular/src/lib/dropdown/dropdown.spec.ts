@@ -1,54 +1,47 @@
 import { DropdownArgs } from '@sebgroup/extract'
-import {
-  fireEvent,
-  render,
-  RenderResult,
-  waitFor,
-} from '@testing-library/angular'
+import { fireEvent, render, waitFor } from '@testing-library/angular'
 import { NggDropdownComponent } from './dropdown.component'
 
 describe('Dropdown', () => {
-  let component: RenderResult<NggDropdownComponent>
-  let props: DropdownArgs
-  let toggleButton: HTMLElement
-  let listbox: HTMLElement
-  let fieldset: HTMLElement
-  let options: HTMLElement[]
-  beforeEach(async () => {
-    props = {
-      options: [
-        { label: 'A', value: 1 },
-        { label: 'B', value: 2 },
-        { label: 'C', value: 3 },
-      ],
-    }
-    component = await render(NggDropdownComponent, {
+  const props: DropdownArgs = {
+    options: [
+      { label: 'A', value: 1 },
+      { label: 'B', value: 2 },
+      { label: 'C', value: 3 },
+    ],
+  }
+
+  it('renders', async () => {
+    const { fixture } = await render(NggDropdownComponent, {
       componentProperties: { ...props },
     })
-
-    const [_buttons, _listboxes, _fieldset, _options] = [
-      await component.findAllByRole('combobox'),
-      await component.findAllByRole('listbox'),
-      await component.findAllByRole('listbox'),
-      await component.findAllByRole('option'),
-    ]
-
-    toggleButton = _buttons[0]
-    listbox = _listboxes[0]
-    fieldset = _fieldset[1]
-    options = _options
+    expect(fixture.componentInstance).toBeTruthy()
   })
-  it('renders', () => {
-    expect(component.fixture.componentInstance).toBeTruthy()
-  })
+
   it('sets correct classes on dropdown toggle', async () => {
-    expect(toggleButton.className).toEqual('dropdown-toggle')
+    const { findAllByRole } = await render(NggDropdownComponent, {
+      componentProperties: { ...props },
+    })
+    const buttons = await findAllByRole('combobox')
+
+    expect(buttons[0].classList).toContain('dropdown-toggle')
   })
-  it('renders options', () => {
+
+  it('renders options', async () => {
+    const { findAllByRole } = await render(NggDropdownComponent, {
+      componentProperties: { ...props },
+    })
+    const options = await findAllByRole('option')
     expect(options).toHaveLength(3)
   })
+
   describe('toggle', () => {
     it('sets aria-expanded on trigger', async () => {
+      const { findAllByRole } = await render(NggDropdownComponent, {
+        componentProperties: { ...props },
+      })
+      const buttons = await findAllByRole('combobox')
+      const toggleButton = buttons[0]
       // initial
       expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
@@ -65,6 +58,13 @@ describe('Dropdown', () => {
       )
     })
     it('sets class active on listbox', async () => {
+      const { findAllByRole } = await render(NggDropdownComponent, {
+        componentProperties: { ...props },
+      })
+      const listboxes = await findAllByRole('listbox')
+      const listbox = listboxes[0]
+      const buttons = await findAllByRole('combobox')
+      const toggleButton = buttons[0]
       // initial
       expect(listbox.className).toEqual('_popover popover-dropdown')
 
@@ -82,26 +82,45 @@ describe('Dropdown', () => {
     })
   })
   describe('mouse interaction', () => {
-    beforeEach(() => {
-      fireEvent.click(toggleButton)
-    })
     describe('click option', () => {
       it('sets aria-selected', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         fireEvent.click(options[1])
         await waitFor(() =>
           expect(options[1].getAttribute('aria-selected')).toEqual('true')
         )
       })
       it('closes dropdown', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const listboxes = await findAllByRole('listbox')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         fireEvent.click(options[1])
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
         )
         await waitFor(() =>
-          expect(listbox.className).toEqual('_popover popover-dropdown')
+          expect(listboxes[0].className).toEqual('_popover popover-dropdown')
         )
       })
       it('sets toggler text', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         fireEvent.click(options[1])
         await waitFor(() =>
           expect(
@@ -112,6 +131,12 @@ describe('Dropdown', () => {
     })
     describe('click outside', () => {
       it('closes the dropdown', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         fireEvent.click(document.body)
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
@@ -122,6 +147,12 @@ describe('Dropdown', () => {
   describe('keyboard navigation', () => {
     describe('Space', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: ' ' })
@@ -130,6 +161,11 @@ describe('Dropdown', () => {
         )
       })
       it('opens when active', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -140,6 +176,11 @@ describe('Dropdown', () => {
         )
       })
       it('closes when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         fireEvent.click(toggleButton)
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -155,6 +196,12 @@ describe('Dropdown', () => {
     })
     describe('Escape', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: 'Escape' })
@@ -163,6 +210,11 @@ describe('Dropdown', () => {
         )
       })
       it('does nothing when not open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -175,6 +227,11 @@ describe('Dropdown', () => {
         )
       })
       it('closes when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         fireEvent.click(toggleButton)
         await waitFor(() =>
           expect(toggleButton.getAttribute('aria-expanded')).toEqual('true')
@@ -192,6 +249,12 @@ describe('Dropdown', () => {
     })
     describe('ArrowDown', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
+        fireEvent.click(toggleButton)
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: 'ArrowDown' })
@@ -200,6 +263,11 @@ describe('Dropdown', () => {
         )
       })
       it('opens when active', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -212,6 +280,13 @@ describe('Dropdown', () => {
         )
       })
       it('selects next when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
+
         toggleButton.focus()
 
         fireEvent.keyDown(document, {
@@ -229,6 +304,12 @@ describe('Dropdown', () => {
         )
       })
       it('stops on last when not looping', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         toggleButton.focus()
 
         fireEvent.keyDown(document, {
@@ -260,17 +341,18 @@ describe('Dropdown', () => {
         )
       })
       it('loops to first when looping', async () => {
-        component.change({ loop: true })
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props, loop: true },
+        })
 
         const [_buttons, _listboxes, _options] = [
-          await component.findAllByRole('combobox'),
-          await component.findAllByRole('listbox'),
-          await component.findAllByRole('option'),
+          await findAllByRole('combobox'),
+          await findAllByRole('listbox'),
+          await findAllByRole('option'),
         ]
 
-        toggleButton = _buttons[0]
-        listbox = _listboxes[0]
-        options = _options
+        const toggleButton = _buttons[0]
+        const options = _options
 
         toggleButton.focus()
 
@@ -305,6 +387,11 @@ describe('Dropdown', () => {
     })
     describe('ArrowUp', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: 'ArrowUp' })
@@ -312,6 +399,11 @@ describe('Dropdown', () => {
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
       })
       it('opens when active', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -324,6 +416,12 @@ describe('Dropdown', () => {
         )
       })
       it('selects previous when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         toggleButton.focus()
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
@@ -353,6 +451,12 @@ describe('Dropdown', () => {
         )
       })
       it('stops on first when not looping', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         toggleButton.focus()
 
         // go to last option
@@ -390,7 +494,12 @@ describe('Dropdown', () => {
         )
       })
       it('loops to first when looping', async () => {
-        component.change({ loop: true })
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props, loop: true },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
 
         toggleButton.focus()
 
@@ -425,6 +534,11 @@ describe('Dropdown', () => {
     })
     describe('Home', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: 'Home' })
@@ -433,6 +547,12 @@ describe('Dropdown', () => {
         )
       })
       it('opens and selects first when active', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -446,6 +566,12 @@ describe('Dropdown', () => {
         )
       })
       it('selects first when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         toggleButton.focus()
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
@@ -468,6 +594,11 @@ describe('Dropdown', () => {
     })
     describe('End', () => {
       it('does nothing when inactive', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         fireEvent.keyDown(document, { key: 'End' })
@@ -476,6 +607,12 @@ describe('Dropdown', () => {
         )
       })
       it('opens and selects last when active', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         expect(toggleButton.getAttribute('aria-expanded')).toEqual('false')
 
         toggleButton.focus()
@@ -489,6 +626,12 @@ describe('Dropdown', () => {
         )
       })
       it('selects last when open', async () => {
+        const { findAllByRole } = await render(NggDropdownComponent, {
+          componentProperties: { ...props },
+        })
+        const buttons = await findAllByRole('combobox')
+        const options = await findAllByRole('option')
+        const toggleButton = buttons[0]
         toggleButton.focus()
         fireEvent.keyDown(document, {
           key: 'ArrowDown',
