@@ -5570,7 +5570,7 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@testing-library/angular@^14.3.0":
+"@testing-library/angular@14.3.0":
   version "14.3.0"
   resolved "https://registry.yarnpkg.com/@testing-library/angular/-/angular-14.3.0.tgz#cc11e9b8197321fc03eaf4202519422975598d30"
   integrity sha512-HniH9B4+u9unr3xIo0gPrFjC0MFeN83xx1JajdL6Xgalc7pebRowCVMPQHXjry1f/1hb8Eyl8uMdCy4toG+f9A==

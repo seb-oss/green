@@ -13,7 +13,6 @@ module.exports = {
 
   addons: [
     '@storybook/addon-links',
-
     '@storybook/addon-a11y',
     'storybook-dark-mode',
     path.resolve('./.storybook/addons/run-in-iframe/run-in-iframe-preset.js'),
@@ -31,6 +30,7 @@ module.exports = {
   // uncomment the property below if you want to apply some webpack config globally
   webpackFinal: async (config, { configType }) => {
     // Make whatever fine-grained changes you need that should apply to all storybook configs
+
     config = {
       ...config,
       plugins: [
