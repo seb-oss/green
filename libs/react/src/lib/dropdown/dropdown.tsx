@@ -104,6 +104,18 @@ export const Dropdown = ({
     }
   }
 
+  // These adapter functions are used to maintain backwards compatibility with the old interface
+  const compareWithAdapter = (o1: DropdownOption, o2: DropdownOption) => {
+    const compareFn = compareWith || ((a, b) => a === b)
+    return compareFn(o1, o2)
+  }
+  const searchFilterAdapter = (q: string, o: GdsOption) => {
+    if (searchFilter) return searchFilter(q, o.value[useValue])
+    else
+      return ((q: string, o: GdsOption) =>
+        o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
+  }
+
   return (
     <div className="form-group">
       <CoreDropdown
@@ -114,6 +126,8 @@ export const Dropdown = ({
         value={selectedOption?.value}
         onchange={handleOnChange}
         invalid={validator?.indicator === 'error'}
+        compareWith={compareWithAdapter}
+        searchFilter={searchFilterAdapter}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}
