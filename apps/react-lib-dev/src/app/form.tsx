@@ -23,6 +23,18 @@ const dropDownKeyValueArray = [
     label: 'Banana',
     value: 'banana',
   },
+  {
+    label: 'Orange',
+    value: 'orange',
+  },
+  {
+    label: 'Pineapple',
+    value: 'pineapple',
+  },
+  {
+    label: 'Mango',
+    value: 'mango',
+  },
 ]
 
 export const FormExample = () => {
@@ -70,6 +82,7 @@ export const FormExample = () => {
             options={dropDownKeyValueArray}
             validator={validator}
             onChange={console.log}
+            searchable={true}
           />
           <Datepicker
             onChange={(date) => console.log('Selected date: ', date)}
