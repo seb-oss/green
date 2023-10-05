@@ -1,0 +1,121 @@
+@layer gds-input-helper, tokens, a11y, containment, shell, core, parts;
+
+@layer gds-input-helper {
+  @layer tokens {
+    :host {
+      --gds-input-helper-bg: hsla(60, 4%, 95%, 1);
+    }
+  }
+
+  @layer a11y {
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gds-input-helper-bg: var(--gds-input-helper-bg-dark);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host {
+        --gds-input-helper-motion: 0;
+      }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      :host {
+        --gds-input-helper-transparency: 1;
+      }
+    }
+
+    @media (prefers-contrast: more) {
+      :host {
+        --gds-input-helper-contrast: 1;
+      }
+    }
+  }
+
+  @layer containment {
+    :host {
+      display: contents;
+    }
+
+    .gds-input-helper {
+      contain: layout;
+      container-name: gds-input-helper;
+      container-type: inline-size;
+      isolation: isolate;
+
+      @container gds-input-helper (width < 30ch) {
+        .gds-input-badge {
+          display: none;
+        }
+      }
+
+      > * {
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  @layer shell {
+    .gds-input-helper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-inline: 18px;
+    }
+  }
+
+  @layer core {
+    .gds-input-helper {
+      &:has(slot[name='badge']) {
+        padding-inline-end: 0;
+      }
+
+      @layer parts {
+        .gds-input-helper-header {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .gds-input-helper-options {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+          }
+        }
+
+        .gds-input-helper-title {
+          cursor: pointer;
+          font-size: 14px;
+        }
+
+        .gds-input-helper-option {
+          align-items: center;
+          background: unset;
+          border: unset;
+          cursor: pointer;
+          display: flex;
+          gap: 16px;
+          height: max-content;
+          margin: unset;
+          padding: unset;
+          position: relative;
+          width: max-content;
+        }
+
+        .gds-input-helper-content {
+          border-top: 1px solid hsla(130, 0%, 0%, 0.1);
+          display: flex;
+          flex-direction: column;
+          font-size: 14px;
+          gap: 8px;
+          line-height: 1.3;
+          margin-block-start: 8px;
+          padding-block-start: 8px;
+          user-select: all;
+        }
+      }
+    }
+  }
+}
