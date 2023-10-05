@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
@@ -153,13 +153,13 @@ export class GdsPopover extends LitElement {
       computePosition(referenceEl, floatingEl, {
         placement: 'bottom-start',
         middleware: [offset(8), flip()],
-      }).then(({ x, y }) => {
+      }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
           minWidth: `${referenceEl.offsetWidth}px`,
         })
-      })
+      )
     })
   }
 
