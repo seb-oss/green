@@ -122,24 +122,27 @@
         box-shadow: 0 2px 0 #000;
       }
 
-      &:focus-within:has(input:focus-visible) {
-        border-radius: 8px;
-      }
+      &:focus-within {
+        &,
+        &:has(input:focus-visible) {
+          border-radius: 8px;
+        }
 
-      &:focus-within,
-      &:has(input:not(:placeholder-shown)) {
-        border-color: currentColor;
-        box-shadow: none;
+        &,
+        :has(input:not(:placeholder-shown)) & {
+          border-color: currentColor;
+          box-shadow: none;
 
-        .gds-input-core-base {
-          & label {
-            font-size: 12px;
-            top: 0;
-            transform: translateY(-5px);
-          }
-          & input {
-            opacity: 1;
-            transform: translateY(0);
+          .gds-input-core-base {
+            & label {
+              font-size: 12px;
+              top: 0;
+              transform: translateY(-5px);
+            }
+            & input {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         }
       }
