@@ -1,4 +1,4 @@
-@layer gds-input, types, tokens, a11y, containment, shell, core, parts, validation;
+@layer gds-input, types, tokens, a11y, containment, shell, core, parts;
 
 @layer gds-input {
   @layer types {
@@ -138,6 +138,8 @@
         display: none;
       }
 
+      /* Valid */
+
       &:has(input:focus-visible:valid:not(:placeholder-shown)) {
         background-color: var(--gds-color-green-98);
         border-color: var(--gds-color-green-50);
@@ -171,6 +173,8 @@
         box-shadow: 0 2px 0 var(--gds-color-green-50);
       }
 
+      /* Invalid */
+
       &:has(input:focus-visible:invalid:not(:placeholder-shown)) {
         background-color: var(--gds-color-red-98);
         border-color: var(--gds-color-red-50);
@@ -184,10 +188,6 @@
           background-color: var(--gds-color-red-85);
         }
 
-        & + .support {
-          color: currentColor;
-        }
-
         & gds-icon {
           color: var(--gds-color-red-50);
         }
@@ -195,13 +195,20 @@
 
       &:has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
-        border-bottom-color: var(--gds-color-red-50);
+        box-shadow: 0 2px 0 var(--gds-color-red-50);
+      }
+
+      &:focus-within:has(input:focus-visible),
+      &:has(input:focus-visible) {
+        box-shadow: none;
       }
 
       &:not(:focus-within):has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
         box-shadow: 0 2px 0 var(--gds-color-red-50);
       }
+
+      /* Base */
 
       .gds-input-core-base {
         position: relative;

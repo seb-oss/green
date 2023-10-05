@@ -24,7 +24,6 @@
 
     .gds-input-helper-title {
       cursor: pointer;
-      // color: hsl(0, 100%, 50%);
       font-size: 14px;
     }
 
@@ -40,31 +39,6 @@
       padding: unset;
       position: relative;
       width: max-content;
-
-      &:hover {
-        --tooltip-offset: 4px;
-
-        // &[tooltip]::before {
-        //   background-color: hsla(130, 0%, 0%, 1);
-        //   border-radius: 4px;
-        //   bottom: calc(100% + var(--tooltip-offset, 8px));
-        //   color: hsla(108, 91%, 96%, 1);
-        //   content: attr(tooltip);
-        //   display: flex;
-        //   font-size: 14px;
-        //   left: 50%;
-        //   max-inline-size: 50ch;
-        //   min-inline-size: 20ch;
-        //   offset-anchor: center top;
-        //   overflow: hidden;
-        //   padding: 8px 14px;
-        //   position: absolute;
-        //   text-overflow: ellipsis;
-        //   text-wrap: nowrap;
-        //   translate: -50% 0;
-        //   white-space: nowrap;
-        // }
-      }
     }
 
     &-content {
