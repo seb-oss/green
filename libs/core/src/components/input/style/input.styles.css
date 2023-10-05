@@ -122,27 +122,25 @@
         box-shadow: 0 2px 0 #000;
       }
 
-      &:focus-within {
-        &,
-        &:has(input:focus-visible) {
-          border-radius: 8px;
-        }
+      &:focus-within,
+      &:focus-within:has(input:focus-visible) {
+        border-radius: 8px;
+      }
 
-        &,
-        :has(input:not(:placeholder-shown)) & {
-          border-color: currentColor;
-          box-shadow: none;
+      &:focus-within,
+      &:has(input:not(:placeholder-shown)) {
+        border-color: currentColor;
+        box-shadow: none;
 
-          .gds-input-core-base {
-            & label {
-              font-size: 12px;
-              top: 0;
-              transform: translateY(-5px);
-            }
-            & input {
-              opacity: 1;
-              transform: translateY(0);
-            }
+        .gds-input-core-base {
+          & label {
+            font-size: 12px;
+            top: 0;
+            transform: translateY(-5px);
+          }
+          & input {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       }
@@ -178,6 +176,11 @@
         border-bottom-color: var(--gds-color-green-50);
       }
 
+      &:not(:focus-within):has(input:valid:not(:placeholder-shown)) {
+        border-color: transparent;
+        box-shadow: 0 2px 0 var(--gds-color-green-50);
+      }
+
       &:has(input:focus-visible:invalid:not(:placeholder-shown)) {
         background-color: var(--gds-color-red-98);
         border-color: var(--gds-color-red-50);
@@ -203,6 +206,11 @@
       &:has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
         border-bottom-color: var(--gds-color-red-50);
+      }
+
+      &:not(:focus-within):has(input:invalid:not(:placeholder-shown)) {
+        border-color: transparent;
+        box-shadow: 0 2px 0 var(--gds-color-red-50);
       }
 
       .gds-input-core-base {
