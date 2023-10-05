@@ -72,10 +72,29 @@ export class GdsInput extends LitElement {
       `;
   }
 
+  updated(changedProperties: Map<PropertyKey, unknown>) {
+    super.updated(changedProperties);
+    if (changedProperties.has('trail')) {
+      this.updateParentClass();
+    }
+  }
+
+  updateParentClass() {
+    const trailSlotElement = this.renderRoot.querySelector('slot[name="trail"]') as HTMLSlotElement;
+    const assignedElements = trailSlotElement.assignedElements({ flatten: true }) as HTMLElement[];
+    const parentElement = this.renderRoot.querySelector('.gds-input-core-trail') as HTMLElement;
+
+    if (assignedElements.some(element => element.tagName === 'GDS-BUTTON')) {
+      parentElement?.classList.add('gds-input-core-trail-button');
+    } else {
+      parentElement?.classList.remove('gds-input-core-trail-button');
+    }
+  }
+
   slotTrail() {
     return html`
       <div class="gds-input-core-trail">
-        <slot name="trail" gds-allow="gds-icon gds-button"></slot>
+        <slot name="trail" gds-allow="gds-icon gds-button" @slotchange="${this.updateParentClass}"></slot>
       </div>
     `;
   }

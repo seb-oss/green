@@ -212,7 +212,12 @@
     }
 
     .gds-input-core-trail {
+      height: auto;
       width: max-content;
+    }
+
+    &:has(.gds-input-core-trail-button) {
+      padding-inline-end: 8px;
     }
   }
 }
