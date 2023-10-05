@@ -62,7 +62,7 @@
   //   width: auto;
   // }
 
-  @container button (width < 200ch) {
+  @container gds-button (width < 200ch) {
     button [part='label'] {
       display: inline-block;
       max-width: 20ch;

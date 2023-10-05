@@ -9,7 +9,7 @@
 
   :host(:not([slot])) {
     contain: layout;
-    container-name: button;
+    container-name: gds-button;
     container-type: inline-size;
     isolation: isolate;
     max-width: 20ch;

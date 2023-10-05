@@ -1,0 +1,282 @@
+@layer gds-input, types, tokens, a11y, containment, core, validation;
+// @use './input.mixins.scss' as *;
+
+@layer gds-input {
+  @layer types {
+    @property --gds-input-width {
+      syntax: '<length-percentage>';
+      initial-value: 30cqi;
+      inherits: false;
+    }
+  }
+
+  @layer tokens {
+    :host {
+      --gds-input-color-bg: hsla(60, 4%, 95%, 1);
+      --gds-input-color-bg-dark: hsla(60, 4%, 95%, 1);
+      --gds-input-width: 30cqi;
+      --gds-input-color: hsla(60, 4%, 50%, 1);
+    }
+  }
+
+  @layer a11y {
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gds-input-color-bg: var(--gds-input-color-bg-dark);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host {
+        --gds-input-motion: 0;
+      }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      :host {
+        --gds-input-transparency: 1;
+      }
+    }
+
+    @media (prefers-contrast: more) {
+      :host {
+        --gds-input-contrast: 1;
+      }
+    }
+  }
+
+  @layer containment {
+    :host {
+      display: contents;
+    }
+
+    .gds-input {
+      contain: layout;
+      container-name: gds-input;
+      container-type: inline-size;
+      isolation: isolate;
+
+      @container gds-input (width < 30ch) {
+        .gds-input-badge {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @layer core {
+    .gds-input {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-inline-size: var(--gds-input-width);
+
+      &-core {
+        --border-color: hsla(60, 4%, 50%, 1);
+        align-items: center;
+        background-color: var(--gds-input-color-bg);
+        background-position: bottom center;
+        background-repeat: repeat-x;
+        background-size: 100% 1px;
+        block-size: 56px;
+        border: 2px solid transparent;
+        border-block-end-color: hsla(60, 4%, 50%, 0);
+        border-start-end-radius: 8px;
+        border-start-start-radius: 8px;
+        box-shadow: 0 2px 0 hsla(60, 4%, 50%, 1);
+        box-sizing: border-box;
+        display: flex;
+        gap: 8px;
+        min-block-size: 56px;
+        padding-block: 12px;
+        padding-inline: 16px;
+        position: relative;
+        transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+          background-size: 100% 2px;
+          // border-bottom-color: #000;
+          box-shadow: 0 2px 0 #000;
+        }
+
+        &:focus-within:has(input:focus-visible) {
+          border-radius: 8px;
+        }
+
+        &:focus-within,
+        &:has(input:not(:placeholder-shown)) {
+          border-color: currentColor;
+          box-shadow: none;
+
+          .gds-input-core-base {
+            label {
+              font-size: 12px;
+              top: 0;
+              transform: translateY(-5px);
+            }
+
+            input {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        }
+
+        gds-icon {
+          transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input[type='number']::-webkit-inner-spin-button {
+          display: none;
+        }
+
+        &:has(input:focus-visible:valid:not(:placeholder-shown)) {
+          background-color: var(--gds-color-green-98);
+          border-color: var(--gds-color-green-50);
+          color: var(--gds-color-green-50);
+
+          input {
+            color: currentColor;
+          }
+
+          .gds-input-core-base::after {
+            background-color: var(--gds-color-green-85);
+          }
+
+          gds-icon {
+            color: var(--gds-color-green-50);
+          }
+        }
+
+        &:has(input:valid:not(:placeholder-shown)) {
+          border-color: transparent;
+          border-bottom-color: var(--gds-color-green-50);
+        }
+
+        &:has(input:focus-visible:invalid:not(:placeholder-shown)) {
+          background-color: var(--gds-color-red-98);
+          border-color: var(--gds-color-red-50);
+          color: var(--gds-color-red-50);
+
+          input {
+            color: currentColor;
+          }
+
+          .gds-input-core-base::after {
+            background-color: var(--gds-color-red-85);
+          }
+
+          + .support {
+            color: currentColor;
+          }
+
+          gds-icon {
+            color: var(--gds-color-red-50);
+          }
+        }
+
+        &:has(input:invalid:not(:placeholder-shown)) {
+          border-color: transparent;
+          border-bottom-color: var(--gds-color-red-50);
+        }
+
+        > * {
+          box-sizing: border-box;
+        }
+
+        .gds-input-core-base {
+          position: relative;
+          width: 100%;
+
+          label {
+            align-items: center;
+            background-color: transparent;
+            display: block;
+            font-size: 16px;
+            height: max-content;
+            inset: 0;
+            line-height: 20px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+          }
+
+          input {
+            appearance: none;
+            background-color: transparent;
+            border: 0;
+            border-radius: 0;
+            border-radius: 0;
+            box-sizing: border-box;
+            display: flex;
+            font-family: inherit;
+            font-size: 16px;
+            height: 100%;
+            margin: unset;
+            opacity: 0;
+            outline: none;
+            padding: unset;
+            padding-top: 12px;
+            transform: translateY(5px);
+            transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+
+            &::placeholder {
+              font-family: inherit;
+            }
+
+            &:focus:not(:focus-visible) {
+              outline: none;
+            }
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-calendar-picker-indicator {
+              appearance: none;
+              background-color: rgb(195, 0, 255);
+              background-image: none;
+              height: 100%;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 40px;
+            }
+          }
+        }
+
+        .gds-input-badge {
+          pointer-events: none;
+          // position: absolute;
+          // right: 46px;
+          // top: 50%;
+          // transform: translateY(-50%);
+          transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gds-input-core-lead,
+        .gds-input-core-trail {
+          align-items: center;
+          aspect-ratio: 1/1;
+          display: flex;
+          height: 24px;
+          justify-content: center;
+          width: 24px;
+        }
+
+        .gds-input-core-lead {
+          justify-content: flex-start;
+        }
+
+        .gds-input-core-trail {
+          height: auto;
+          width: max-content;
+        }
+
+        &:has(.gds-input-core-trail-button) {
+          padding-inline-end: 8px;
+        }
+      }
+    }
+  }
+}
