@@ -392,35 +392,27 @@ export class GdsDropdown<ValueT = any>
   }
 
   #registerAutoCloseListener() {
-    window.addEventListener('click', this.#autoCloseListener)
-    this.addEventListener('blur', this.#autoCloseListener)
-    this.addEventListener('gds-blur', this.#autoCloseListener)
+    this.addEventListener('blur', this.#blurCloseListener)
+    this.addEventListener('gds-blur', this.#blurCloseListener)
     this.addEventListener('keydown', this.#tabCloseListener)
   }
 
   #unregisterAutoCloseListener() {
-    window.removeEventListener('click', this.#autoCloseListener)
-    this.removeEventListener('blur', this.#autoCloseListener)
-    this.removeEventListener('gds-blur', this.#autoCloseListener)
+    this.removeEventListener('blur', this.#blurCloseListener)
+    this.removeEventListener('gds-blur', this.#blurCloseListener)
     this.removeEventListener('keydown', this.#tabCloseListener)
   }
 
   /**
-   * A listener to close the dropdown when clicking outside of it,
-   * or when any other element recieves a keyup event.
+   * A listener to close the dropdown when any other element is focused.
    */
-  #autoCloseListener = (e: Event) => {
-    const isClickOutside =
-      e instanceof MouseEvent &&
-      e.target instanceof Node &&
-      !this.contains(e.target as Node)
-
+  #blurCloseListener = (e: Event) => {
     const isFocusOutside =
       e instanceof FocusEvent &&
       e.relatedTarget &&
       !this.contains(e.relatedTarget as Node)
 
-    if (isClickOutside || isFocusOutside) this.open = false
+    if (isFocusOutside) this.open = false
   }
 
   #tabCloseListener = (e: KeyboardEvent) => {

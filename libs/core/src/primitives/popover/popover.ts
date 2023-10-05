@@ -60,6 +60,7 @@ export class GdsPopover extends LitElement {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.open = false
+        e.stopImmediatePropagation()
       }
     })
   }
@@ -90,8 +91,13 @@ export class GdsPopover extends LitElement {
       if (this.open) {
         this.#dialogElementRef.value?.showModal()
         this.#focusFirstSlottedChild()
+        setTimeout(
+          () => document.addEventListener('click', this.#clickOutsideListener),
+          100
+        )
       } else {
         this.#dialogElementRef.value?.close()
+        document.removeEventListener('click', this.#clickOutsideListener)
       }
     })
 
@@ -187,5 +193,11 @@ export class GdsPopover extends LitElement {
     this.updateComplete.then(() => {
       firstSlottedChild?.focus()
     })
+  }
+
+  #clickOutsideListener = (e: MouseEvent) => {
+    if (this.open && !this.contains(e.target as Node)) {
+      this.open = false
+    }
   }
 }
