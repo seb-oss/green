@@ -1,6 +1,8 @@
 import { render, RenderResult } from '@testing-library/angular'
 import { NggDropdownComponent } from './dropdown.component'
 
+import { getScopedTagName } from '@sebgroup/green-core'
+
 describe('Dropdown', () => {
   let component: RenderResult<NggDropdownComponent>
   let props: Partial<NggDropdownComponent>

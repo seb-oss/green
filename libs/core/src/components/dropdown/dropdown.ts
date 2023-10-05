@@ -252,6 +252,7 @@ export class GdsDropdown<ValueT = any>
   @observeLightDOM()
   private _handleLightDOMChange() {
     this.requestUpdate()
+    this._handleValueChange()
     if (this.multiple) return
 
     // Set default value if none is set

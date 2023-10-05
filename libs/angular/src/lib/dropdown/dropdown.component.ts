@@ -39,20 +39,6 @@ export interface DropdownOption {
   [key: string]: any
 }
 
-const selectionText = (
-  value: DropdownOption | DropdownOption[] | undefined,
-  display: string,
-  texts?: DropdownTexts
-) => {
-  if (!Array.isArray(value))
-    return value?.[display] || (texts?.placeholder ?? 'Select')
-
-  const displayValues = value.map((option) => option?.[display])
-  return displayValues?.length > 2
-    ? `${displayValues.length} ${texts?.selected} `
-    : displayValues?.join(', ') || (texts?.placeholder ?? 'Select')
-}
-
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',
@@ -101,33 +87,21 @@ export class NggDropdownComponent implements ControlValueAccessor {
   @Input() set value(newValue: any) {
     if (!this.options) return
 
-    if (Array.isArray(newValue)) {
-      this._value = this.options.filter((o) =>
-        newValue.includes(o[this.useValue])
-      )
-    } else this._value = this.options.find((o) => o[this.useValue] === newValue)
+    this._value = newValue
 
     this.texts = {
       ...this.texts,
-      select: selectionText(this._value, this.display, this.texts),
+      select: this.getDisplayText(this._value),
     }
   }
   get value(): any {
-    let value = this._value
-
-    if (Array.isArray(this._value)) {
-      value = this._value.map((o) => o[this.useValue])
-    } else {
-      value = this._value && this._value[this.useValue]
-    }
-
-    return value
+    return this._value
   }
   private _value: DropdownOption | DropdownOption[] | undefined
 
   //
   get selectedOption() {
-    return this._value
+    return this.value
   }
 
   onChangeFn?: (value: unknown) => void
@@ -151,7 +125,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
     this.texts = {
       ...this.texts,
-      select: selectionText(this._value, this.display, this.texts),
+      select: this.getDisplayText(this._value),
     }
 
     this.onChangeFn?.(this.value)
@@ -169,8 +143,13 @@ export class NggDropdownComponent implements ControlValueAccessor {
   ngAfterViewInit(): void {
     if (!this._value) {
       if (this.multiSelect)
-        this._value = this.options?.filter((o) => o.selected === true)
-      else this._value = this.options?.find((o) => o.selected === true)
+        this._value = this.options
+          ?.filter((o) => o.selected === true)
+          ?.map((o) => o[this.useValue])
+      else
+        this._value = this.options?.find((o) => o.selected === true)?.[
+          this.useValue
+        ]
     }
 
     this.texts = {
@@ -179,7 +158,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
       placeholder: this.texts?.placeholder ?? 'Select',
       searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
       selected: this.texts?.selected ?? 'selected',
-      select: selectionText(this._value, this.display, this.texts),
+      select: this.getDisplayText(this._value),
     }
   }
 
@@ -198,7 +177,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
   // These adapter functions are used to maintain backwards compatibility with the old interface
   compareWithAdapter = (o1: any, o2: any) => {
     const compareFn = this.compareWith || ((a, b) => a === b)
-    return compareFn(o1[this.useValue], o2[this.useValue])
+    return compareFn(o1, o2)
   }
   searchFilterAdapter = (q: string, o: GdsOption) => {
     if (this.searchFilter) return this.searchFilter(q, o.value[this.useValue])
@@ -211,5 +190,24 @@ export class NggDropdownComponent implements ControlValueAccessor {
     return (
       value === '' || value === 'true' || value.toString() === 'true' || false
     )
+  }
+
+  private optionByValue = (value: any) => {
+    return this.options?.find((o) => o[this.useValue] === value)
+  }
+
+  private getDisplayText = (value: any) => {
+    if (!Array.isArray(value))
+      return (
+        this.optionByValue(value)?.[this.display] ||
+        (this.texts?.placeholder ?? 'Select')
+      )
+
+    const displayValues = value.map(
+      (v) => this.optionByValue(v)?.[this.display]
+    )
+    return displayValues?.length > 2
+      ? `${displayValues.length} ${this.texts?.selected} `
+      : displayValues?.join(', ') || (this.texts?.placeholder ?? 'Select')
   }
 }

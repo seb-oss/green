@@ -25,7 +25,7 @@
     ></span>
 
     <ng-container *ngFor="let option of options; let index = index">
-      <gds-option *nggCoreElement [value]="option"
+      <gds-option *nggCoreElement [value]="option[useValue]"
         ><ng-container
           *ngTemplateOutlet="
             customOption?.templateRef
