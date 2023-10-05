@@ -97,6 +97,11 @@ export class GdsIcon extends LitElement {
           <line x1="12" y1="5" x2="12" y2="19" /> 
           <polyline points="19 12 12 19 5 12" /> 
         </symbol>
+        <symbol id="warning">
+         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+         <line x1="12" y1="9" x2="12" y2="13" />
+         <path x1="12" y1="17" x2="12.01" y2="17" />
+        </symbol>
       </svg>
       <svg viewBox="0 0 24 24">
         <use href="#${name}"></use>

@@ -49,6 +49,15 @@ export class GdsInput extends LitElement {
     delegatesFocus: true,
   }
 
+  // Private members
+  #internals: ElementInternals
+
+  constructor() {
+    super()
+    this.#internals = this.attachInternals()
+    constrainSlots(this)
+  }
+
   @property({ type: String, reflect: true })
   lead = null
 
@@ -91,22 +100,45 @@ export class GdsInput extends LitElement {
     }
   }
 
+  
+  @property({ type: Boolean })
+  hasInvalidState = false;
+
   slotTrail() {
     return html`
       <div class="gds-input-core-trail">
-        <slot name="trail" gds-allow="gds-icon gds-button" @slotchange="${this.updateParentClass}"></slot>
+        ${this.hasInvalidState
+          ? html`
+              <!-- Invalid state content -->
+              <gds-icon name="warning" slot="trail"></gds-icon>
+            `
+          : html`
+              <!-- Normal state content -->
+              <slot name="trail" gds-allow="gds-icon gds-button"></slot>
+            `}
       </div>
     `;
   }
-
+  
   slotBase() {
-    return html`  
+    const handleInput = () => {
+      const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
+      this.hasInvalidState = inputElement?.checkValidity() === false;
+  
+      const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
+      if (trailElement) {
+        trailElement.classList.toggle('invalid', this.hasInvalidState);
+      }
+    };
+  
+    return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
-        <input id="input" placeholder=" " />
+        <input id="input" @input="${handleInput}" placeholder=" " />
       </div>
-      `
+    `;
   }
+  
 
   slotBadge() {
     return html`
