@@ -204,8 +204,20 @@ export class GdsPopover extends LitElement {
   }
 
   #clickOutsideListener = (e: MouseEvent) => {
-    if (this.open && !this.contains(e.target as Node)) {
-      this.open = false
+    const dialog = this.#dialogElementRef.value
+
+    if (dialog && this.open) {
+      const rect = dialog.getBoundingClientRect()
+
+      const isInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width
+
+      if (!isInDialog) {
+        this.open = false
+      }
     }
   }
 }
