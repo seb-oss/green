@@ -280,6 +280,28 @@ describe('<gds-dropdown>', () => {
     expect(el.options[2].selected).equal(false)
     expect(el.options[3].selected).equal(true)
   })
+
+  it('should pre-select correct option when options where added dynamically', async () => {
+    const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
+
+    el.value = 'test2'
+
+    await el.updateComplete
+    ;[1, 2, 3].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option')
+      ) as GdsOption
+      o.value = `test${num}`
+      o.innerHTML = `Test option ${num}`
+      el.appendChild(o)
+    })
+
+    await el.updateComplete
+
+    expect(el.options[0].selected).equal(false)
+    expect(el.options[1].selected).equal(true)
+    expect(el.options[2].selected).equal(false)
+  })
 })
 
 describe('<gds-dropdown> interactions', () => {
