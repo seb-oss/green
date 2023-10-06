@@ -8,7 +8,7 @@
 @include input.add-text-input();
 
 :host {
-  display: inline-block;
+  display: block;
 }
 
 :host(:invalid) button + .form-info {
