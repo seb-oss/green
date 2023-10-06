@@ -99,7 +99,7 @@ export const Dropdown = ({
 
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
-      setSelectedOption(options.find((o) => o.value === e.detail.value))
+      setSelectedOption(options.find((o) => o[useValue] === e.detail.value))
       onChange?.(e.detail?.value)
     }
   }
@@ -135,7 +135,11 @@ export const Dropdown = ({
           {texts?.placeholder || 'Select'}
         </CoreOption>
         {options.map((option) => (
-          <CoreOption key={option[useValue]} value={option[useValue]}>
+          <CoreOption
+            key={option[useValue]}
+            value={option[useValue]}
+            selected={option.selected}
+          >
             {option[display]}
           </CoreOption>
         ))}
