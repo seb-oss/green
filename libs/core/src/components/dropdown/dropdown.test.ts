@@ -594,6 +594,45 @@ describe('<gds-dropdown multiple>', () => {
     expect(el.displayValue).to.equal('Option 2, Option 3')
   })
 
+  it('should select multiple options on click', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await timeout(0)
+
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+    const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+    await clickOnElement(option3, 'center')
+    await el.updateComplete
+
+    expect(el.value.toString()).to.equal(['v2', 'v3'].toString())
+  })
+
+  it('should remain open after clicking an option', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown multiple open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await timeout(0)
+
+    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+
+    await clickOnElement(option2, 'center')
+    await el.updateComplete
+
+    expect(el.open).to.equal(true)
+  })
+
   it('should not have a default selection', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown multiple>
@@ -606,7 +645,7 @@ describe('<gds-dropdown multiple>', () => {
     expect(el.displayValue).to.equal('')
   })
 
-  it('should suppoert isPlaceholder option', async () => {
+  it('should support isPlaceholder option', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown multiple>
         <gds-option isPlaceholder>Select values</gds-option>
