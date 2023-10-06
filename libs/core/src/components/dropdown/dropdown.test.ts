@@ -373,6 +373,7 @@ describe('<gds-dropdown> interactions', () => {
       </gds-dropdown>
     `)
 
+    await timeout(0)
     await sendMouse({ type: 'click', position: [0, 0] })
     await el.updateComplete
 

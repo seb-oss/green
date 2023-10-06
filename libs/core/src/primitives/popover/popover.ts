@@ -91,13 +91,21 @@ export class GdsPopover extends LitElement {
       if (this.open) {
         this.#dialogElementRef.value?.showModal()
         this.#focusFirstSlottedChild()
+        // Wait one event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
-          () => document.addEventListener('click', this.#clickOutsideListener),
-          100
+          () =>
+            this.#dialogElementRef.value?.addEventListener(
+              'click',
+              this.#clickOutsideListener
+            ),
+          0
         )
       } else {
         this.#dialogElementRef.value?.close()
-        document.removeEventListener('click', this.#clickOutsideListener)
+        this.#dialogElementRef.value?.removeEventListener(
+          'click',
+          this.#clickOutsideListener
+        )
       }
     })
 
