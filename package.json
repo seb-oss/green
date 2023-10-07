@@ -201,7 +201,7 @@
     "ng-packagr": "14.2.2",
     "ngx-deploy-npm": "^7.0.1",
     "nx": "16.8.1",
-    "postcss": "8.4.21",
+    "postcss": "8.4.31",
     "postcss-cli": "^9.1.0",
     "postcss-import": "14.1.0",
     "postcss-loader": "^6.2.1",
