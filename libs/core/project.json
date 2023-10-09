@@ -6,9 +6,8 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
       "options": {
-        "outputPath": "dist/libs/core/src",
         "command": "nx run core:build-with-types-and-scoping"
       }
     },
@@ -52,7 +51,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/core/**/*.ts"]
@@ -60,7 +59,7 @@
     },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types"],
+      "dependsOn": ["build-with-types-and-scoping"],
       "options": {
         "command": "npx wtr --node-resolve --playwright --browsers chromium firefox webkit"
       }
@@ -110,8 +109,8 @@
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "commitMessageFormat": "chore(${projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-${projectName}@",
+        "commitMessageFormat": "chore({projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
@@ -128,7 +127,8 @@
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "access": "public"
+        "access": "public",
+        "distFolderPath": "{workspaceRoot}/dist/libs/core/src"
       }
     }
   },

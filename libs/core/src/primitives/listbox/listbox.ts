@@ -40,6 +40,12 @@ export class GdsListbox extends LitElement implements OptionsContainer {
   })
   multiple = false
 
+  /**
+   * Delegate function for comparing option values.
+   */
+  @property()
+  compareWith: (a: any, b: any) => boolean = (a, b) => a === b
+
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {
@@ -89,9 +95,9 @@ export class GdsListbox extends LitElement implements OptionsContainer {
     return this.options.filter((el) => el.selected)
   }
 
-  set selection(values: GdsOption[] | any[]) {
+  set selection(values: any[]) {
     this.options.forEach((el) => {
-      el.selected = values.includes(el.value) || values.includes(el)
+      el.selected = values.some((v) => this.compareWith(v, el.value))
     })
   }
 

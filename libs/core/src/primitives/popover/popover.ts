@@ -1,8 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
+import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
-import { watch } from 'utils/decorators'
+import { watch, watchMediaQuery } from 'utils/decorators'
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from 'utils/helpers/transitional-styles'
 
@@ -37,20 +38,28 @@ export class GdsPopover extends LitElement {
   @property()
   trigger: HTMLElement | undefined = undefined
 
+  /**
+   * Optional trigger element for the popover.
+   */
+  @property()
+  label: string | undefined = undefined
+
   @watch('trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
   }
 
+  #dialogElementRef: Ref<HTMLDialogElement> = createRef()
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-popover')
     this.#registerTriggerEvents()
-    this._updateHidden()
+    this._handleOpenChange()
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        this.#setOpen(false)
+        this.open = false
       }
     })
   }
@@ -61,39 +70,97 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html` <slot></slot> `
+    return html`<dialog ${ref(this.#dialogElementRef)}>
+      <header>
+        <h2>${this.label}</h2>
+        <button class="close" @click=${this.#handleCloseButton}>
+          <i></i>
+        </button>
+      </header>
+      <slot></slot>
+    </dialog>`
   }
 
   @watch('open')
-  private _updateHidden() {
+  private _handleOpenChange() {
     this.setAttribute('aria-hidden', String(!this.open))
     this.hidden = !this.open
+
+    this.updateComplete.then(() => {
+      if (this.open) {
+        this.#dialogElementRef.value?.showModal()
+        this.#focusFirstSlottedChild()
+      } else {
+        this.#dialogElementRef.value?.close()
+      }
+    })
+
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { open: this.open },
+        bubbles: true,
+        composed: false,
+      })
+    )
   }
 
-  #autoPositionCleanup: (() => void) | undefined
+  #handleCloseButton = (e: MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+    this.open = false
+
+    // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
+    // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
+    // dialog (close button in this case.)
+    // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
+    setTimeout(() => this.trigger?.focus(), 250)
+  }
 
   #registerTriggerEvents() {
-    if (!this.trigger) return
-
-    this.trigger.addEventListener('keydown', this.#triggerKeyDownListener)
-
-    const referenceEl = this.trigger
-    this.#autoPositionCleanup = autoUpdate(referenceEl, this, () => {
-      computePosition(referenceEl, this, {
-        placement: 'bottom-start',
-        middleware: [offset(8), flip()],
-      }).then(({ x, y }) => {
-        Object.assign(this.style, {
-          left: `${x}px`,
-          top: `${y}px`,
-        })
-      })
-    })
+    this.trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
   }
 
   #unregisterTriggerEvents() {
     this.trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
     this.#autoPositionCleanup?.()
+  }
+
+  @watchMediaQuery('(max-width: 576px)')
+  private _handleMobileLayout(matches: boolean) {
+    if (matches) {
+      this.#autoPositionCleanup?.()
+      this.#dialogElementRef.value?.style.removeProperty('left')
+      this.#dialogElementRef.value?.style.removeProperty('top')
+
+      this.updateComplete.then(() => {
+        if (this.open) this.#dialogElementRef.value?.showModal()
+      })
+    } else {
+      this.updateComplete.then(() => {
+        this.#registerAutoPositioning()
+      })
+    }
+  }
+
+  #autoPositionCleanup: (() => void) | undefined
+  #registerAutoPositioning() {
+    const referenceEl = this.trigger
+    const floatingEl = this.#dialogElementRef.value
+
+    if (!referenceEl || !floatingEl) return
+
+    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+      computePosition(referenceEl, floatingEl, {
+        placement: 'bottom-start',
+        middleware: [offset(8), flip()],
+      }).then(({ x, y }) => {
+        Object.assign(floatingEl.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+          minWidth: `${referenceEl.offsetWidth}px`,
+        })
+      })
+    })
   }
 
   /**
@@ -102,29 +169,23 @@ export class GdsPopover extends LitElement {
   #triggerKeyDownListener = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      this.#setOpen(true)
-
-      const firstSlottedChild = this.shadowRoot
-        ?.querySelector('slot')
-        ?.assignedElements()[0] as HTMLElement
-
-      this.updateComplete.then(() => {
-        firstSlottedChild?.focus()
-      })
+      this.open = true
     }
     if (e.key === 'Escape') {
-      this.#setOpen(false)
+      this.open = false
     }
   }
 
-  #setOpen(open: boolean) {
-    this.open = open
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open },
-        bubbles: true,
-        composed: false,
-      })
-    )
+  /**
+   * Move focus to the first slotted child.
+   */
+  #focusFirstSlottedChild = () => {
+    const firstSlottedChild = this.shadowRoot
+      ?.querySelector('slot')
+      ?.assignedElements()[0] as HTMLElement
+
+    this.updateComplete.then(() => {
+      firstSlottedChild?.focus()
+    })
   }
 }

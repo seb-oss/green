@@ -82,6 +82,38 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean, reflect: true })
   multiple = false
 
+  /**
+   * Delegate function for comparing option values.
+   * By default the option values are compared using strict equality.
+   * If you want to compare objects by field values, you can provide
+   * a custom compare function here. The function should return true
+   * if the values are considered equal.
+   *
+   * Example:
+   * ```ts
+   * dropdown.compareWith = (a, b) => a.id === b.id
+   * ```
+   */
+  @property()
+  compareWith: (a: ValueT, b: ValueT) => boolean = (a, b) => a === b
+
+  /**
+   * Delegate function for customizing the search filtering.
+   * By default, the search filter will just check if the option label
+   * contains the search string using [String.includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes).
+   *
+   * This property allows you to provide a custom filter function to use instead.
+   *
+   * For example, to filter on value instead of label:
+   * ```ts
+   * dropdown.searchFilter = (query, option) =>
+   *    option.value.toLowerCase().includes(query.toLowerCase())
+   * ```
+   */
+  @property()
+  searchFilter: (q: string, o: GdsOption) => boolean = (q, o) =>
+    o.innerHTML.toLowerCase().includes(q.toLowerCase())
+
   // Private members
   #listboxRef: Ref<GdsListbox> = createRef()
   #triggerRef: Ref<HTMLButtonElement> = createRef()
@@ -182,6 +214,7 @@ export class GdsDropdown<ValueT = any>
       <span class="form-info"><slot name="message"></slot></span>
 
       <gds-popover
+        .label=${this.label}
         .open=${this.open}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
         ${ref(this.#registerPopoverTrigger)}
@@ -201,9 +234,11 @@ export class GdsDropdown<ValueT = any>
         <gds-listbox
           id="${this.#listboxId}"
           .multiple="${ifDefined(this.multiple)}"
+          .compareWith="${this.compareWith}"
           ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
           @gds-focus="${this.#handleOptionFocusChange}"
+          @keydown=${this.#handleListboxKeyDown}
         >
           <slot gds-allow="gds-option"></slot>
         </gds-listbox>
@@ -252,24 +287,37 @@ export class GdsDropdown<ValueT = any>
    * @param e The keyboard event.
    */
   #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
-    const input = e.target as HTMLInputElement
+    const input = this.#searchInputRef.value!
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
 
     if (!input.value) return
     const filteredOptions = options.filter(
-      (o) => !o.innerHTML.toLowerCase().includes(input.value.toLowerCase())
+      (o) => !this.searchFilter(input.value, o)
     )
     filteredOptions.forEach((o) => (o.hidden = true))
   }
 
   /**
-   * Check for ArrowDown in the search field.
+   * Check for ArrowDown or Tab in the search field.
    * If found, focus should be moved to the listbox.
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'ArrowDown' || e.key === 'Tab') {
+      e.preventDefault()
       this.#listboxRef.value?.focus()
+      return
+    }
+  }
+
+  /**
+   * Check for Tab in the listbox.
+   * If found, focus should be moved to the search field.
+   */
+  #handleListboxKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Tab' && this.searchable) {
+      e.preventDefault()
+      this.#searchInputRef.value?.focus()
       return
     }
   }
@@ -325,11 +373,12 @@ export class GdsDropdown<ValueT = any>
   private _onOpenChange() {
     const open = this.open
 
+    Array.from(this.#optionElements).forEach((o) => (o.hidden = !open))
+
     if (open) this.#registerAutoCloseListener()
     else {
       this.#unregisterAutoCloseListener()
       this.#searchInputRef.value && (this.#searchInputRef.value.value = '')
-      Array.from(this.#optionElements).forEach((o) => (o.hidden = false))
     }
 
     this.dispatchEvent(
@@ -345,12 +394,14 @@ export class GdsDropdown<ValueT = any>
     window.addEventListener('click', this.#autoCloseListener)
     this.addEventListener('blur', this.#autoCloseListener)
     this.addEventListener('gds-blur', this.#autoCloseListener)
+    this.addEventListener('keydown', this.#tabCloseListener)
   }
 
   #unregisterAutoCloseListener() {
     window.removeEventListener('click', this.#autoCloseListener)
     this.removeEventListener('blur', this.#autoCloseListener)
     this.removeEventListener('gds-blur', this.#autoCloseListener)
+    this.removeEventListener('keydown', this.#tabCloseListener)
   }
 
   /**
@@ -369,5 +420,13 @@ export class GdsDropdown<ValueT = any>
       !this.contains(e.relatedTarget as Node)
 
     if (isClickOutside || isFocusOutside) this.open = false
+  }
+
+  #tabCloseListener = (e: KeyboardEvent) => {
+    if (e.key === 'Tab' && !this.searchable) {
+      e.preventDefault()
+      this.open = false
+      this.#triggerRef.value?.focus()
+    }
   }
 }
