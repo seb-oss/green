@@ -113,7 +113,9 @@ export function Slider({
         <div>
           {label && (
             <>
-              <label htmlFor={name} id={`${name}-label`}>{label}</label>
+              <label htmlFor={name} id={`${name}-label`}>
+                {label}
+              </label>
               {instruction && <p>{instruction}</p>}
             </>
           )}
@@ -121,7 +123,9 @@ export function Slider({
         {hasTextbox && (
           <InputWrapper unitLabel={unitLabel}>
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               value={inputFieldValue}
               id={`${name}-textbox`}
               name={name}

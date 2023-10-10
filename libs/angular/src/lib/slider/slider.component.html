@@ -36,7 +36,9 @@
 
 <ng-template #inputField>
   <input
-    type="number"
+    type="text"
+    inputmode="numeric"
+    pattern="[0-9]*"
     [(ngModel)]="value"
     [class.is-invalid]="!!errorMessage"
     [attr.name]="name"
