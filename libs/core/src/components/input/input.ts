@@ -153,16 +153,20 @@ export class GdsInput extends LitElement {
         trailElement.classList.toggle('invalid', this.hasInvalidState);
       }
     };
+
+    const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
   
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
-        <input id="input" @input="${handleInput}" placeholder=" " />
+        <!-- <input id="input" @input="${handleInput}" placeholder=" " /> -->
+
+        ${isTextArea
+        ? html`<textarea id="input" @input="${handleInput}" placeholder=" "></textarea>`
+        : html`<input id="input" @input="${handleInput}" placeholder=" " />`}
       </div>
     `;
   }
-  
-  
 
   slotBadge() {
     return html`
