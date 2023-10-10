@@ -19,7 +19,7 @@ export default {
 
 const ChartStory: Story<NggChartComponent> = (args) => ({
   props: args,
-  template: `<ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>`,
+  template: `<ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>`,
 })
 
 const ChartCardStory: Story<NggChartComponent> = (args) => ({
@@ -27,14 +27,14 @@ const ChartCardStory: Story<NggChartComponent> = (args) => ({
   template: `<div class="card" style="height: 340px">
                 <header><h3>Chart in card with locked height (340px)</h3></header>
                 <div>
-                    <ngg-chart [settings]='settings' [theme]='theme'></ngg-chart>
+                    <ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>
                 </div>
              </div>`,
 })
 
 const ObservableChartStory: Story<NggChartComponent> = (args) => ({
   props: args,
-  template: `<ngg-chart [settings]='settings | async' [theme]='theme'></ngg-chart>`,
+  template: `<ngg-chart [settings]="settings | async" [theme]="theme"></ngg-chart>`,
 })
 
 export const SimpleBar = ChartStory.bind({})
@@ -365,6 +365,29 @@ MixedGraphWithNegativeValues.args = {
       'dec',
     ],
     legend: 'top',
+  },
+  theme: '',
+}
+
+export const CustomColours = ChartStory.bind({})
+CustomColours.args = {
+  settings: {
+    type: 'donut',
+    data: [
+      {
+        name: 'Ej tilldelade',
+        values: [600],
+      },
+      {
+        name: 'Tilldelade',
+        values: [100],
+      },
+    ],
+    style: {
+      color: {
+        pattern: ['#dadada', '#45B400'],
+      },
+    },
   },
   theme: '',
 }
