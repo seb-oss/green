@@ -103,17 +103,20 @@
         box-shadow: 0 2px 0 currentColor;
       }
 
+      &:focus-within:has(textarea:focus-visible),
       &:focus-within:has(input:focus-visible) {
         border-radius: 8px;
         box-shadow: none;
       }
 
+      &:focus-within:has(textarea:placeholder-shown),
       &:focus-within:has(input:placeholder-shown) {
         box-shadow: none;
         border-radius: 8px;
       }
 
       &:focus-within,
+      &:has(textarea:not(:placeholder-shown)),
       &:has(input:not(:placeholder-shown)) {
         border-color: currentColor;
 
@@ -123,7 +126,8 @@
             top: 0;
             transform: translateY(-5px);
           }
-          & input {
+          & input,
+          & textare {
             opacity: 1;
             transform: translateY(0);
           }
@@ -140,11 +144,13 @@
 
       /* Valid */
 
+      &:has(textarea:focus-visible:valid:not(:placeholder-shown)),
       &:has(input:focus-visible:valid:not(:placeholder-shown)) {
         background-color: var(--gds-color-green-98);
         border-color: var(--gds-color-green-50);
         color: var(--gds-color-green-50);
 
+        & textare,
         & input {
           color: currentColor;
         }
@@ -158,16 +164,20 @@
         }
       }
 
+      &:has(textarea:valid:not(:placeholder-shown)),
       &:has(input:valid:not(:placeholder-shown)) {
         border-color: transparent;
         box-shadow: 0 2px 0 var(--gds-color-green-50);
       }
 
+      &:focus-within:has(textarea:focus-visible),
       &:focus-within:has(input:focus-visible),
+      &:has(textarea:focus-visible),
       &:has(input:focus-visible) {
         box-shadow: none;
       }
 
+      &:not(:focus-within):has(textarea:valid:not(:placeholder-shown)),
       &:not(:focus-within):has(input:valid:not(:placeholder-shown)) {
         border-color: transparent;
         box-shadow: 0 2px 0 var(--gds-color-green-50);
@@ -175,11 +185,13 @@
 
       /* Invalid */
 
+      &:has(textarea:focus-visible:invalid:not(:placeholder-shown)),
       &:has(input:focus-visible:invalid:not(:placeholder-shown)) {
         background-color: var(--gds-color-red-98);
         border-color: var(--gds-color-red-50);
         color: var(--gds-color-red-50);
 
+        & textare,
         & input {
           color: currentColor;
         }
@@ -193,16 +205,20 @@
         }
       }
 
+      &:has(textarea:invalid:not(:placeholder-shown)),
       &:has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
         box-shadow: 0 2px 0 var(--gds-color-red-50);
       }
 
+      &:focus-within:has(textarea:focus-visible),
       &:focus-within:has(input:focus-visible),
+      &:has(textarea:focus-visible),
       &:has(input:focus-visible) {
         box-shadow: none;
       }
 
+      &:not(:focus-within):has(textarea:invalid:not(:placeholder-shown)),
       &:not(:focus-within):has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
         box-shadow: 0 2px 0 var(--gds-color-red-50);
@@ -229,6 +245,7 @@
           width: 100%;
         }
 
+        & textare,
         & input {
           appearance: none;
           background-color: transparent;
@@ -319,6 +336,7 @@
 }
 
 textarea {
+  --gds-textarea-lines: 1;
   min-height: calc(1lh * var(--gds-textarea-lines));
   max-height: calc(1lh * var(--gds-textarea-lines));
   height: calc(1lh * var(--gds-textarea-lines));
@@ -328,9 +346,10 @@ textarea {
   appearance: none;
   outline: none;
   padding: unset;
-  font-size: 14px;
+  padding-block-start: 8px;
+  font-size: 16px;
   font-family: inherit;
-  line-height: 1lh;
+  line-height: 1.25;
   border: none;
   background: none;
 }

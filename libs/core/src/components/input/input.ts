@@ -155,26 +155,15 @@ export class GdsInput extends LitElement {
       const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
       inputElement?.style.setProperty('--gds-textarea-lines', lines);
 
-      // const lines = inputElement?.value.split('\n').length || 0;
-      // this.style.setProperty('--gds-textarea-lines', lines.toString());
     };
 
     const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
-    // onInput="this.parentNode.dataset.replicatedValue = this.value"
- 
 
-    // const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
-    // document.documentElement.style.setProperty('--gds-textarea-lines', lines);
-  
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
         ${isTextArea
-        ? html`
-          <div class="grow-wrap">
-            <textarea id="input" @input="${handleInput}" placeholder=" "></textarea>
-          </div>
-          `
+        ? html`<textarea id="input" @input="${handleInput}" placeholder=" "></textarea>`
         : html`<input id="input" @input="${handleInput}" placeholder=" " />`}
       </div>
     `;
