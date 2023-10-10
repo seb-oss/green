@@ -1,6 +1,6 @@
-import * as Listbox from 'primitives/listbox/listbox.trans.styles'
-import * as Popover from 'primitives/popover/popover.trans.styles'
-import * as Dropdown from 'components/dropdown/dropdown.trans.styles'
+import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
+import * as Popover from '../../primitives/popover/popover.trans.styles'
+import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 

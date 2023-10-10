@@ -3,9 +3,9 @@ import { property } from 'lit/decorators.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
-import { watch, watchMediaQuery } from 'utils/decorators'
-import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+import { watch, watchMediaQuery } from '../../utils/decorators'
+import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import styles from './popover.styles'
 
