@@ -18,7 +18,9 @@
     <span slot="trigger"
       ><ng-container
         *ngTemplateOutlet="
-          customButton?.templateRef ? customButton!.templateRef : defaultButton;
+          customButton?.templateRef && selectedOption
+            ? customButton!.templateRef
+            : defaultButton;
           context: { option: selectedOption }
         "
       ></ng-container
