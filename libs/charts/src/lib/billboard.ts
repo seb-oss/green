@@ -254,7 +254,6 @@ export const createInfo = (
 
 export const create = ({ settings, chartElement }: ChartArgs): Chart => {
   const options = createOptions({ settings, chartElement })
-  console.log(options)
   const chart = bb.generate(options)
   const info = createInfo(settings, chart)
 
