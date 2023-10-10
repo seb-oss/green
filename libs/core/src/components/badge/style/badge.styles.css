@@ -1,4 +1,4 @@
-@layer gds-badge, shell, tokens, a11y, variants;
+@layer gds-badge, shell, tokens, a11y, variants, types;
 
 @layer gds-badge {
   @layer tokens {
@@ -151,6 +151,12 @@
         :host([variant='surface']) & {
           --gds-badge-cl: var(--gds-badge-cl-surface);
           --gds-badge-bg: var(--gds-badge-bg-surface);
+        }
+      }
+
+      @layer types {
+        :host([type='counter']) & {
+          max-width: var(--gds-badge-counter-max-width);
         }
       }
     }
