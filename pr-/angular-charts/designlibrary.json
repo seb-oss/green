@@ -130,6 +130,16 @@
     }
   },
   {
+    "id": "chart--custom-colours",
+    "name": "Custom Colours",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": [
+        "component-chart"
+      ]
+    }
+  },
+  {
     "id": "get-started--page",
     "name": "Page",
     "title": "Get started",
