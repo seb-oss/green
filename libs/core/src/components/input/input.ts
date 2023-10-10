@@ -136,33 +136,45 @@ export class GdsInput extends LitElement {
     `;
   }
   
-  
   slotBase() {
     const handleInput = () => {
       const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
       const inputValue = inputElement?.value.trim();
   
       if (inputValue === '') {
-        this.hasInvalidState = false; // Set hasInvalidState to false when input is empty (no value)
+        this.hasInvalidState = false;
       } else {
-        this.hasInvalidState = inputElement?.checkValidity() === false; // Set hasInvalidState based on input validity
+        this.hasInvalidState = inputElement?.checkValidity() === false;
       }
   
       const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
       if (trailElement) {
         trailElement.classList.toggle('invalid', this.hasInvalidState);
       }
+
+      const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
+      inputElement?.style.setProperty('--gds-textarea-lines', lines);
+
+      // const lines = inputElement?.value.split('\n').length || 0;
+      // this.style.setProperty('--gds-textarea-lines', lines.toString());
     };
 
     const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
+    // onInput="this.parentNode.dataset.replicatedValue = this.value"
+ 
+
+    // const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
+    // document.documentElement.style.setProperty('--gds-textarea-lines', lines);
   
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
-        <!-- <input id="input" @input="${handleInput}" placeholder=" " /> -->
-
         ${isTextArea
-        ? html`<textarea id="input" @input="${handleInput}" placeholder=" "></textarea>`
+        ? html`
+          <div class="grow-wrap">
+            <textarea id="input" @input="${handleInput}" placeholder=" "></textarea>
+          </div>
+          `
         : html`<input id="input" @input="${handleInput}" placeholder=" " />`}
       </div>
     `;

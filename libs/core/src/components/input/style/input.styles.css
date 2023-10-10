@@ -1,7 +1,7 @@
-@layer gds-input, types, tokens, a11y, containment, shell, core, parts;
+@layer gds-input, type-safe, tokens, a11y, containment, shell, core, parts, types;
 
 @layer gds-input {
-  @layer types {
+  @layer type-safe {
     @property --gds-input-width {
       syntax: '<length-percentage>';
       initial-value: 30cqi;
@@ -15,6 +15,7 @@
       --gds-input-color-bg-dark: hsla(60, 4%, 95%, 1);
       --gds-input-width: 30cqi;
       --gds-input-color: hsla(60, 4%, 50%, 1);
+      --gds-textarea-height: var(--gds-textarea-lines);
     }
   }
 
@@ -300,4 +301,36 @@
       }
     }
   }
+
+  @layer types {
+    /* textarea {
+        min-height: calc(1lh * var(--gds-textarea-lines));
+        max-height: calc(1lh * var(--gds-textarea-lines));
+        height: calc(1lh * var(--gds-textarea-lines));
+        resize: none;
+        overflow: hidden !important;
+      } */
+  }
+}
+
+:host([type='textarea']) .gds-input-core {
+  block-size: auto !important;
+  align-items: flex-start;
+}
+
+textarea {
+  min-height: calc(1lh * var(--gds-textarea-lines));
+  max-height: calc(1lh * var(--gds-textarea-lines));
+  height: calc(1lh * var(--gds-textarea-lines));
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  appearance: none;
+  outline: none;
+  padding: unset;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1lh;
+  border: none;
+  background: none;
 }
