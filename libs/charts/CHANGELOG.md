@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.2.4...@sebgroup/green-charts@1.3.0) (2023-10-10)
+
+
+### Features
+
+* **charts:** custom colours ([#1043](https://github.com/sebgroup/green/issues/1043)) ([25f1061](https://github.com/sebgroup/green/commit/25f10619840060e86883995c71d2603d224cc196))
+
+
+
 ## [1.2.4](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.2.3...@sebgroup/green-charts@1.2.4) (2023-09-25)
 
 
