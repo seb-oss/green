@@ -105,20 +105,33 @@ export class GdsInput extends LitElement {
   hasInvalidState = false;
 
   slotTrail() {
+    const trailSlotContent = this.querySelector('[slot="trail"]');
+    const hasButtonTag = trailSlotContent && trailSlotContent.tagName.toLowerCase() === 'gds-button';
+   
+    if (this.hasInvalidState && hasButtonTag) {
+      const slottedIcon = trailSlotContent?.querySelector('[slot="circle"]');
+      if (slottedIcon) {
+        slottedIcon.setAttribute('name', 'warning');
+        const buttonParent = slottedIcon.parentElement;
+        if (buttonParent) {
+          buttonParent.setAttribute('set', 'negative');
+        }
+      }
+    }
+    
     return html`
       <div class="gds-input-core-trail">
-        ${this.hasInvalidState
+        ${this.hasInvalidState && !hasButtonTag
           ? html`
-              <!-- Invalid state content -->
-              <gds-icon name="warning" slot="trail"></gds-icon>
+              <gds-icon name="warning"></gds-icon>
             `
           : html`
-              <!-- Normal state content -->
               <slot name="trail" gds-allow="gds-icon gds-button"></slot>
             `}
       </div>
     `;
   }
+  
   
   slotBase() {
     const handleInput = () => {
