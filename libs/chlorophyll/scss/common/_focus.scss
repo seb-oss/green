@@ -21,7 +21,7 @@
   }
 
   &:focus {
-    border-color: $border-color;
+    //border-color: $border-color;
     outline-color: var(--gds-ref-pallet-base1000);
     outline-style: solid;
     outline-width: 0.125rem;
@@ -36,7 +36,10 @@
   }
 
   &:focus#{$suffix} #{$target} {
-    border-color: $border-color !important;
+    outline-color: var(--gds-ref-pallet-base1000);
+    outline-style: solid;
+    outline-width: 0.125rem;
+    outline-offset: 0.125rem;
   }
 }
 
@@ -45,8 +48,10 @@
     $color: transparentize($color, 0.35);
   }
   &:focus {
-    outline: $color solid 2px;
-    outline-offset: 2px;
+    outline-color: var(--gds-ref-pallet-base1000);
+    outline-style: solid;
+    outline-width: 0.125rem;
+    outline-offset: 0.125rem;
   }
 
   &:focus:not(:focus-visible) {
@@ -54,8 +59,10 @@
   }
 
   &:focus-visible {
-    outline: $color solid 2px;
-    outline-offset: 2px;
+    outline-color: var(--gds-ref-pallet-base1000);
+    outline-style: solid;
+    outline-width: 0.125rem;
+    outline-offset: 0.125rem;
   }
 }
 
