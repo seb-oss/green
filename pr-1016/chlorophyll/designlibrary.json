@@ -420,22 +420,22 @@
     }
   },
   {
-    "id": "components-datepicker--datepicker",
-    "name": "Datepicker",
-    "title": "Components/Datepicker",
-    "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
-    }
-  },
-  {
     "id": "components-dropdown--dropdown",
     "name": "Dropdown",
     "title": "Components/Dropdown",
     "customParams": {
       "componentIds": [
         "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--datepicker",
+    "name": "Datepicker",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
       ]
     }
   },
@@ -518,15 +518,15 @@
     "customParams": {}
   },
   {
-    "id": "get-started-use--page",
+    "id": "templates-login--page",
     "name": "Page",
-    "title": "Get started/Use",
+    "title": "Templates/Login",
     "customParams": {}
   },
   {
-    "id": "introduction--page",
+    "id": "get-started-use--page",
     "name": "Page",
-    "title": "Introduction",
+    "title": "Get started/Use",
     "customParams": {}
   },
   {
@@ -542,12 +542,6 @@
     "customParams": {}
   },
   {
-    "id": "templates-login--page",
-    "name": "Page",
-    "title": "Templates/Login",
-    "customParams": {}
-  },
-  {
     "id": "css-spacing--page",
     "name": "Page",
     "title": "CSS/Spacing",
@@ -557,6 +551,12 @@
     "id": "components-charts--page",
     "name": "Page",
     "title": "Components/Charts",
+    "customParams": {}
+  },
+  {
+    "id": "introduction--page",
+    "name": "Page",
+    "title": "Introduction",
     "customParams": {}
   }
 ]
