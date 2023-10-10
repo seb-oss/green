@@ -62,13 +62,14 @@
       flex-direction: column;
       justify-content: space-between;
       padding-inline: 18px;
+      border: 2px solid transparent;
     }
   }
 
   @layer core {
     .gds-input-helper {
       &:has(slot[name='badge']) {
-        padding-inline-end: 0;
+        padding-inline-end: 8px;
       }
 
       @layer parts {

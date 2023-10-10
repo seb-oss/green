@@ -43,16 +43,26 @@ import {
         label="Summary"
         tooltip="Tooltip content is very important"
       >
-        <gds-icon name="info" slot="action"></gds-icon>
+        {/* <gds-icon name="info" slot="action"></gds-icon> */}
         <gds-badge slot="badge" variant="success">
           120
         </gds-badge>
+        <gds-button
+          variant="circle tertiary"
+          data-label="test"
+          effect="ripple"
+          size="small"
+          slot="action"
+        >
+          <gds-icon name="info" slot="circle" />
+        </gds-button>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. <br /> incididunt ut labore
         et dolore magna aliqua. <br /> Lorem ipsum dolor sit amet, consectetur adipiscing
         elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </gds-input-helper>
     </gds-input>
+
   </div>
   <div>
     <gds-input label="Label only"></gds-input>

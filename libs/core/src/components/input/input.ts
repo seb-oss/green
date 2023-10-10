@@ -107,7 +107,8 @@ export class GdsInput extends LitElement {
   slotTrail() {
     const trailSlotContent = this.querySelector('[slot="trail"]');
     const hasButtonTag = trailSlotContent && trailSlotContent.tagName.toLowerCase() === 'gds-button';
-   
+    const inputValue = this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.trim();
+  
     if (this.hasInvalidState && hasButtonTag) {
       const slottedIcon = trailSlotContent?.querySelector('[slot="circle"]');
       if (slottedIcon) {
@@ -117,11 +118,14 @@ export class GdsInput extends LitElement {
           buttonParent.setAttribute('set', 'negative');
         }
       }
+    }  
+    if (inputValue === '') {
+      console.log('inputValue is empty');
     }
-    
+  
     return html`
       <div class="gds-input-core-trail">
-        ${this.hasInvalidState && !hasButtonTag
+        ${this.hasInvalidState && !hasButtonTag 
           ? html`
               <gds-icon name="warning"></gds-icon>
             `
@@ -136,7 +140,13 @@ export class GdsInput extends LitElement {
   slotBase() {
     const handleInput = () => {
       const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
-      this.hasInvalidState = inputElement?.checkValidity() === false;
+      const inputValue = inputElement?.value.trim();
+  
+      if (inputValue === '') {
+        this.hasInvalidState = false; // Set hasInvalidState to false when input is empty (no value)
+      } else {
+        this.hasInvalidState = inputElement?.checkValidity() === false; // Set hasInvalidState based on input validity
+      }
   
       const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
       if (trailElement) {
@@ -151,6 +161,7 @@ export class GdsInput extends LitElement {
       </div>
     `;
   }
+  
   
 
   slotBadge() {

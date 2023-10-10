@@ -70,12 +70,23 @@ export class GdsInputHelper extends LitElement {
   // }
 
   slotIcon() {
-    return this.isContentVisible
-      ? html`<gds-icon name="x" slot="action"></gds-icon>`
-      : html`<slot name="action" gds-allow="gds-icon"></slot>`;
+    const trailSlotContent = this.querySelector('[slot="action"]');
+    const slottedIcon = trailSlotContent?.querySelector('[slot="action"] gds-icon');
+  
+    if (slottedIcon) {
+      if (this.isContentVisible) {
+        slottedIcon.setAttribute('name', 'x');
+      } else {
+        slottedIcon.setAttribute('name', 'info');
+      }
+    }
+  
+    return html`
+      <slot @click=${this.toggleContent} name="action" gds-allow="gds-button"></slot>
+    `;
   }
   
-
+  
   slotBadge() {
     return html`
         <slot name="badge" gds-allow="gds-badge"></slot>
@@ -115,18 +126,19 @@ export class GdsInputHelper extends LitElement {
             ${this.helperLabel}
           </span>
           <div class="gds-input-helper-options">
+            ${when( hasBadgeSlot, () => this.slotBadge())}
             ${when(hasContent, () => html`
             <gds-tooltip content="${this.helperTooltip}" position="up">
               <!-- tooltip=${ifDefined(this.helperTooltip)} -->
-                <button
+                <!-- <button
                   class="gds-input-helper-option"
                   @click=${this.toggleContent}
                 >
                   ${IconSlot}
-                </button>
+                </button> -->
+                ${IconSlot}
               </gds-tooltip>
             `)}
-            ${when( hasBadgeSlot, () => this.slotBadge())}
           </div>
         </div>
         ${ifDefined(ContentSlot)}
