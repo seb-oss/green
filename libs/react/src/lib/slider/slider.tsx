@@ -49,6 +49,7 @@ export function Slider({
   onChange,
   enableClamping = true,
   onClamp,
+  enterKeyHint,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number | undefined>(
@@ -130,6 +131,7 @@ export function Slider({
               id={`${name}-textbox`}
               name={name}
               aria-labelledby={`${name}-label`}
+              enterKeyHint={enterKeyHint}
               className={errorMessage ? 'is-invalid' : ''}
               disabled={disabled}
               onChange={(e) => handleInputFieldChange(e.currentTarget.value)}

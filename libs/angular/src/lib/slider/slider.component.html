@@ -45,6 +45,7 @@
     [attr.id]="name + '-textbox'"
     [attr.placeholder]="placeholder"
     [attr.aria-labelledby]="name + '-label'"
+    [attr.enterkeyhint]="enterkeyhint"
     [disabled]="disabled"
     (blur)="onBlur()"
     (input)="handleChange()"
