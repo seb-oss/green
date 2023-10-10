@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.1.2...@sebgroup/green-angular-charts@1.2.0) (2023-10-10)
+
+
+### Features
+
+* **charts:** custom colours ([#1043](https://github.com/sebgroup/green/issues/1043)) ([25f1061](https://github.com/sebgroup/green/commit/25f10619840060e86883995c71d2603d224cc196))
+
+
+
 ## [1.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.1.1...@sebgroup/green-angular-charts@1.1.2) (2023-04-19)
 
 
