@@ -124,7 +124,7 @@ export function Slider({
         {hasTextbox && (
           <InputWrapper unitLabel={unitLabel}>
             <input
-              type="number"
+              type="text"
               inputMode="numeric"
               pattern="[0-9]*"
               value={inputFieldValue}
