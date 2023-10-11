@@ -56,6 +56,4 @@ export class ModalsComponent {
       value: 'latvia',
     },
   ]
-
-  constructor() {}
 }

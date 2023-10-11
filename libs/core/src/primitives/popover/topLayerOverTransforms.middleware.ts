@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Temporary implemenation of topLayerOverTransforms middleware snagged from here: https://github.com/floating-ui/floating-ui/issues/1842
  *
@@ -127,7 +128,7 @@ function isContainingBlock(element: any) {
 
   return (
     css.transform !== 'none' ||
-    css.perspective !== 'none' || // @ts-ignore (TS 4.1 compat)
+    css.perspective !== 'none' ||
     css.contain === 'paint' ||
     ['transform', 'perspective'].includes(css.willChange) ||
     (isFirefox && css.willChange === 'filter') ||
@@ -154,7 +155,6 @@ export function getParentNode(node: any) {
 
   return (
     // this is a quicker (but less type safe) way to save quite some bytes from the bundle
-    // @ts-ignore
     node.assignedSlot || // step into the shadow DOM of the parent of a slotted node
     node.parentNode || // DOM Element detected
     (isShadowRoot(node) ? node.host : null) || // ShadowRoot detected
