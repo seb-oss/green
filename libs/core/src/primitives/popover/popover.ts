@@ -7,6 +7,8 @@ import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
+import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
+
 import styles from './popover.styles'
 
 /**
@@ -166,7 +168,8 @@ export class GdsPopover extends LitElement {
     this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: 'bottom-start',
-        middleware: [offset(8), flip()],
+        middleware: [offset(8), flip(), topLayerOverTransforms()],
+        strategy: 'fixed',
       }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
           left: `${x}px`,

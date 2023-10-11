@@ -38,7 +38,7 @@ dialog {
 
   @include common.media-breakpoint-up('sm') {
     inset: auto;
-    position: absolute;
+    position: fixed;
   }
 }
 
