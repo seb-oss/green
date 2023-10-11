@@ -85,7 +85,6 @@
       background-position: bottom center;
       background-repeat: repeat-x;
       background-size: 100% 1px;
-      block-size: 56px;
       border: 2px solid transparent;
       border-block-end-color: hsla(60, 4%, 50%, 0);
       border-start-end-radius: 8px;
@@ -93,11 +92,15 @@
       box-shadow: 0 2px 0 hsla(60, 4%, 50%, 1);
       display: flex;
       gap: 8px;
-      min-block-size: 56px;
-      padding-block: 12px;
+      padding-block: 10px;
+      /* padding-block: 12px; */
+      /* padding-inline: 16px; */
       padding-inline: 16px;
       position: relative;
       transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      block-size: max-content;
+      /* block-size: 56px; */
+      /* min-block-size: 56px; */
 
       &:hover {
         box-shadow: 0 2px 0 currentColor;
@@ -331,22 +334,33 @@
 }
 
 :host([type='textarea']) .gds-input-core {
-  block-size: auto !important;
   align-items: flex-start;
+
+  .gds-input-core-lead,
+  .gds-input-core-base,
+  .gds-input-badge,
+  .gds-input-core-trail {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 textarea {
   --gds-textarea-lines: 1;
   min-height: calc(1lh * var(--gds-textarea-lines));
   max-height: calc(1lh * var(--gds-textarea-lines));
-  height: calc(1lh * var(--gds-textarea-lines));
+  height: 100%;
+  /* min-height: calc(1lh * var(--gds-textarea-lines));
+  max-height: calc(1lh * var(--gds-textarea-lines));
+  height: calc(1lh * var(--gds-textarea-lines)); */
   resize: none;
   overflow: hidden;
   width: 100%;
   appearance: none;
   outline: none;
   padding: unset;
-  padding-block-start: 8px;
+  padding-block-start: 12px;
   font-size: 16px;
   font-family: inherit;
   line-height: 1.25;

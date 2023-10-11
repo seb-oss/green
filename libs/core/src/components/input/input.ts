@@ -163,7 +163,15 @@ export class GdsInput extends LitElement {
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
         ${isTextArea
-        ? html`<textarea id="input" @input="${handleInput}" placeholder=" "></textarea>`
+        ? html`
+        <textarea 
+          id="input" 
+          @input="${handleInput}" 
+          placeholder=" " 
+          autocomplete="off" 
+          autocorrect="off" 
+          autocapitalize="off" 
+          spellcheck="false"></textarea>`
         : html`<input id="input" @input="${handleInput}" placeholder=" " />`}
       </div>
     `;
