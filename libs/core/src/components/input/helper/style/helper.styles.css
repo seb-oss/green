@@ -106,6 +106,7 @@
           margin-block-start: 8px;
           padding: 12px 16px;
           border-radius: 4px;
+          user-select: auto;
         }
       }
     }

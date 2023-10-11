@@ -1,1 +1,40 @@
+import '../../tokens/tokens.css'
+import { inspector } from '../../utils/tools/inspector/inspector'
+import {
+  GdsButton,
+  GdsInput,
+  GdsBadge,
+  GdsInputHelper,
+  GdsIcon,
+} from '../../../../../dist/libs/core/src'
+
 <Meta title="Components/Input/Search" />
+
+# Search
+
+<gds-main>
+  <div>
+    <gds-input
+      label="Search label"
+      id="test"
+      pattern="[a-z]+"
+      type="text"
+      minlength="3"
+      name="test"
+      required
+    >
+      <gds-icon name="search" slot="lead" />
+      <gds-button
+        variant="circle tertiary"
+        data-label="test"
+        effect="ripple"
+        size="small"
+        slot="trail"
+      >
+        <gds-icon name="x" slot="circle" />
+      </gds-button>
+      <gds-icon name="info" slot="help" />
+      <gds-input-helper slot="helper" label="Support text"></gds-input-helper>
+    </gds-input>
+  </div>
+</gds-main>
