@@ -1,0 +1,14 @@
+{
+  "sys": {
+    "state": {
+      "hover-state-layer-opacity": {
+        "value": "0.10",
+        "attributes": {
+          "figma": {
+            "type": "FLOAT"
+          }
+        }
+      }
+    }
+  }
+}
