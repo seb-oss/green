@@ -83,6 +83,7 @@
           padding-inline: 18px;
           border-left: var(--gds-input-helper-br-width) solid transparent;
           border-right: var(--gds-input-helper-br-width) solid transparent;
+          min-height: 32px;
 
           .gds-input-helper-options {
             align-items: center;
@@ -92,9 +93,12 @@
         }
 
         .gds-input-helper-title {
-          cursor: pointer;
           font-size: 14px;
           user-select: none;
+
+          &.gds-input-helper-action {
+            cursor: pointer;
+          }
         }
 
         .gds-input-helper-content {
