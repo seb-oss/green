@@ -76,17 +76,18 @@
 
       @layer parts {
         .gds-input-helper-header {
-          align-items: center;
           display: flex;
           flex-direction: row;
+          align-items: center;
           justify-content: space-between;
-          padding-inline: 18px;
           border-left: var(--gds-input-helper-br-width) solid transparent;
           border-right: var(--gds-input-helper-br-width) solid transparent;
+          padding-inline: 18px;
           min-height: 32px;
 
           .gds-input-helper-options {
             align-items: center;
+            margin-inline-start: auto;
             display: flex;
             gap: 8px;
           }
