@@ -2,12 +2,7 @@
 @use 'functions';
 @use 'sass:map';
 
-@mixin add-focus(
-  $suffix: 'visible',
-  $target: '',
-  $glow-color: tokens.get(tokens.$blue, 2),
-  $border-color: tokens.get(tokens.$blue, 0)
-) {
+@mixin add-focus($suffix: 'visible', $target: '') {
   @if $suffix != '' {
     $suffix: '-' + $suffix;
   }
