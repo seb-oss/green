@@ -4,10 +4,10 @@ import { constrainSlots } from 'utils/helpers';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import styles from './style/helper.styles.css';
-import '../../icon/icon';
-import '../../badge/badge';
-import '../../button/button';
-import '../../tooltip/tooltip';
+import '../../../icon/icon';
+import '../../../badge/badge';
+import '../../../button/button';
+import '../../../tooltip/tooltip';
 
 /**
  * A custom input element that can be used in forms.
