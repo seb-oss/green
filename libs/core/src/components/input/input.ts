@@ -157,21 +157,47 @@ export class GdsInput extends LitElement {
 
     };
 
+    const isInput = this.getAttribute('type')?.toLowerCase() === 'text';
     const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
+    const isSelect = this.getAttribute('type')?.toLowerCase() === 'select';
 
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
-        ${isTextArea ? html`
-        <textarea 
-          id="input" 
-          @input="${handleInput}" 
-          placeholder=" " 
-          autocomplete="off" 
-          autocorrect="off" 
-          autocapitalize="off" 
-          spellcheck="false"></textarea>`
-        : html`<input id="input" @input="${handleInput}" placeholder=" " />`}
+        ${ isInput ? html`
+          <input 
+            id="input" 
+            @input="${handleInput}" 
+            placeholder=" " />
+        ` : isTextArea ? html`
+          <textarea 
+            id="input" 
+            @input="${handleInput}" 
+            placeholder=" " 
+            autocomplete="off" 
+            autocorrect="off" 
+            autocapitalize="off" 
+            spellcheck="false">
+          </textarea>
+        ` : isSelect ? html`
+            <input 
+              part="input" 
+              type="text" 
+              autocomplete="off" 
+              spellcheck="false" 
+              autocapitalize="off" 
+              readonly="" 
+              aria-controls="listbox" 
+              aria-haspopup="listbox" 
+              aria-labelledby="label" 
+              aria-describedby="help-text" 
+              role="combobox" 
+              tabindex="0" 
+              placeholder=" "
+              value="Selected item"
+              aria-expanded="false" 
+              aria-disabled="false">
+        ` : ''}
       </div>
     `;
   }
