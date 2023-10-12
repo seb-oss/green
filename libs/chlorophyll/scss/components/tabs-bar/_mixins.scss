@@ -12,7 +12,6 @@ $_border-width: var(--sg-border-width);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.font-weight($font-weight);
-  //@include common.min-width(10);
 
   @include common.add-hover-state;
   @include common.add-focus;
@@ -21,6 +20,7 @@ $_border-width: var(--sg-border-width);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
+  border-radius: 0.25rem 0.25rem 0 0;
 }
 
 @mixin tab--selected {
@@ -41,6 +41,8 @@ $_border-width: var(--sg-border-width);
 @mixin tabs-bar {
   display: flex;
   overflow-x: auto;
+  padding: 0.25rem;
+  margin: -0.25rem;
 
   // hide scrollbar
   &::-webkit-scrollbar {
