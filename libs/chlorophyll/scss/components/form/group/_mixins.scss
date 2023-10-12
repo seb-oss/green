@@ -62,8 +62,6 @@ $_background: input.$background;
   }
 
   &.group-border {
-    @include common.add-focus('within');
-    @include common.add-focus('within', 'button, .button');
     @include common.add-border();
     @include common.add-border-color();
     @include common.add-border-radius();
