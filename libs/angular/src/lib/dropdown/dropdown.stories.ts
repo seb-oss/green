@@ -43,6 +43,7 @@ Select.args = {
   multiSelect: false,
   searchable: false,
   display: 'label',
+  useValue: 'value',
   options: [
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
