@@ -41,12 +41,12 @@ jobs:
       - name: Determine deploy target
         shell: bash
         run: |
-          if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
+          if [[ "${{ steps.branch.outputs.branch }}" == "refs/heads/main" ]]; then
             echo "target=latest" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
+          elif [[ "${{ steps.branch.outputs.branch }}" == "refs/heads/alpha" ]]; then
             echo "target=alpha" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ steps.branch.outputs.branch }}" == "beta" ]]; then
-            echo "target=latest" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ steps.branch.outputs.branch }}" == "refs/heads/beta" ]]; then
+            echo "target=beta" >> "$GITHUB_OUTPUT"
           else
             echo "target=pr-${{ github.event.number }}" >> "$GITHUB_OUTPUT"
           fi
