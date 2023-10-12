@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.14.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.13.0...@sebgroup/green-react@1.14.0) (2023-10-11)
+
+
+### Features
+
+* **slider:** use `inputmode='numeric'` and add `enterkeyhint` support ([#1049](https://github.com/sebgroup/green/issues/1049)) ([44ac574](https://github.com/sebgroup/green/commit/44ac574112b5621c87f3688f02669a9d2071160f))
+
+
+
 # [1.13.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@1.12.3...@sebgroup/green-react@1.13.0) (2023-09-08)
 
 
