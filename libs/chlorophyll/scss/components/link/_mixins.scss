@@ -34,6 +34,7 @@ $variants: (
   color: $color;
   font-weight: $font-weight;
   border: none;
+  border-radius: 0.125rem;
 
   &:focus {
     &:not([aria-disabled]) {
