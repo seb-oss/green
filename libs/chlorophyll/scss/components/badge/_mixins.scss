@@ -74,26 +74,13 @@ $label-font-size: 14px;
     position: absolute;
     inset-inline-end: -0.4375rem;
 
-    /*height: $close-height;
-    width: $close-height;
-    margin: calc(-0.25rem + 1px) calc(-0.5rem + 1px) -0.25rem 0.125rem;*/
-/*    &:before,
-    &:after {
-      height: math.div($close-height, 1.5);
-      width: $close-icon-thickness;
-      top: calc(50% - #{math.div($close-height, 3)});
-      left: calc(50% - #{math.div($close-icon-thickness, 2)});
-    }*/
-
-/*    &:not(:disabled, .disabled):hover {
-      background: $close-bg-hover;
-      border-color: $close-bg-hover;
+    :before, :after {
+      background: var(--color);
     }
 
-    &:not(:disabled, .disabled):hover:active {
-      background: $close-bg-active;
-      border-color: $close-bg-active;
-    }*/
+    &:hover, &:hover > i {
+      background: transparent;
+    }
   }
 }
 

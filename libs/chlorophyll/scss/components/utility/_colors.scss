@@ -2,6 +2,7 @@
 @use 'sass:map';
 
 $_background: var(--sg-bg-level-0);
+
 $colors: (
   'light': (
     color: tokens.get(tokens.$grey, 200),
@@ -50,15 +51,15 @@ $colors: (
 );
 @each $key, $variant in $colors {
   .text-#{$key} {
-    color: map.get($variant, 'color') !important;
-    --color: #{map.get($variant, 'color')} !important;
+    color: map.get($variant, 'color');
+    --color: #{map.get($variant, 'color')};
   }
 
   .bg-#{$key} {
-    background: map.get($variant, 'color') !important;
-    --background: map.get($variant, 'color') !important;
+    background: map.get($variant, 'color');
+    --background: map.get($variant, 'color');
     @if (map.get($variant, 'contrast') != null) {
-      color: map.get($variant, 'contrast') !important;
+      color: map.get($variant, 'contrast');
     }
   }
 }
