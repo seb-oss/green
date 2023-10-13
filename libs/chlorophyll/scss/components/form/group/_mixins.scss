@@ -111,6 +111,20 @@ $_background: input.$background;
     @include common.add-disable(false, false, true);
   }
 
+  /**
+  * Add this to shift the focus outline from the enclosed input the the enclosing group
+  *
+  * Use on groups with one input + static content.
+  * Do not use if there are more than one focusable element in the group!
+  */
+  &.group-focus {
+    @include common.add-focus('within');
+
+    > *:focus {
+      outline: 0;
+    }
+  }
+
   .form-text {
     @include common.padding-vertical(4);
     background: $_background;
