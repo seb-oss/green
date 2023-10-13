@@ -7,14 +7,6 @@
     $suffix: '-' + $suffix;
   }
 
-  @if not $target == '' {
-    #{$target} {
-      transition: box-shadow tokens.$transition-time;
-    }
-  } @else {
-    transition: box-shadow tokens.$transition-time;
-  }
-
   &:focus {
     //border-color: $border-color;
     outline-color: var(--gds-sys-color-focus-outline);
