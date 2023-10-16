@@ -145,6 +145,10 @@ $_background: input.$background;
       background: $_background;
     }
 
+    &.ghost:not(.active):focus-visible {
+      color: var(--gds-sys-color-font);
+    }
+
     &.disabled,
     &:disabled,
     &[aria-disabled='true'] {
