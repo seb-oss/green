@@ -10,7 +10,7 @@ import {
 
 <Meta title="Components/Input/Free Text" />
 
-# Free text
+# Textarea
 
 <gds-main>
   <div>
@@ -20,6 +20,7 @@ import {
       pattern="[a-z]+"
       type="textarea"
       minlength="3"
+      rows="4"
       name="test"
       required
     >
@@ -59,6 +60,32 @@ import {
           sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </>
       </gds-input-helper>
+    </gds-input>
+  </div>
+  <div>
+    <gds-input
+      label="Free text label"
+      id="test"
+      pattern="[a-z]+"
+      type="textarea"
+      minlength="3"
+      name="test"
+      required
+    >
+      <gds-icon name="calendar" slot="lead" />
+      <gds-button
+        variant="circle tertiary"
+        data-label="test"
+        effect="ripple"
+        size="small"
+        slot="trail"
+      >
+        <gds-icon name="plus" slot="circle" />
+      </gds-button>
+      <gds-icon name="info" slot="help" />
+      <gds-badge slot="badge" variant="surface">
+        EUR
+      </gds-badge>
     </gds-input>
   </div>
 </gds-main>

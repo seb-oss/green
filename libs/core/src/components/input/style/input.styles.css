@@ -15,7 +15,7 @@
       --gds-input-color-bg-dark: hsla(60, 4%, 95%, 1);
       --gds-input-width: 30cqi;
       --gds-input-color: hsla(60, 4%, 50%, 1);
-      --gds-textarea-height: var(--gds-textarea-lines);
+      /* --gds-textarea-lines: 1; */
     }
   }
 
@@ -93,14 +93,11 @@
       display: flex;
       gap: 8px;
       padding-block: 10px;
-      /* padding-block: 12px; */
-      /* padding-inline: 16px; */
       padding-inline: 16px;
       position: relative;
       transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
       block-size: max-content;
-      /* block-size: 56px; */
-      /* min-block-size: 56px; */
+      min-block-size: 56px;
 
       &:hover {
         box-shadow: 0 2px 0 currentColor;
@@ -246,6 +243,12 @@
           transform: translateY(-50%);
           transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
           width: 100%;
+
+          :host([rows]) & {
+            inset: unset;
+            top: 5px;
+            transform: translateY(0);
+          }
         }
 
         & textare,
@@ -347,13 +350,10 @@
 }
 
 textarea {
-  --gds-textarea-lines: 1;
+  /* --gds-textarea-lines: 1; */
   min-height: calc(1lh * var(--gds-textarea-lines));
   max-height: calc(1lh * var(--gds-textarea-lines));
   height: 100%;
-  /* min-height: calc(1lh * var(--gds-textarea-lines));
-  max-height: calc(1lh * var(--gds-textarea-lines));
-  height: calc(1lh * var(--gds-textarea-lines)); */
   resize: none;
   overflow: hidden;
   width: 100%;
@@ -361,9 +361,14 @@ textarea {
   outline: none;
   padding: unset;
   padding-block-start: 12px;
+
   font-size: 16px;
   font-family: inherit;
   line-height: 1.25;
   border: none;
   background: none;
+
+  :host([rows]) & {
+    padding-block-start: calc(12px + 10px);
+  }
 }

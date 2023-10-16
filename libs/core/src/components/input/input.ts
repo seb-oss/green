@@ -136,40 +136,54 @@ export class GdsInput extends LitElement {
     `;
   }
   
+
   slotBase() {
+    const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
+    const rows = inputElement?.getAttribute('rows');
+    const maxRows = rows || '1';
+    inputElement?.style.setProperty('--gds-textarea-lines', maxRows.toString());
+
     const handleInput = () => {
       const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
       const inputValue = inputElement?.value.trim();
-  
+    
+    
       if (inputValue === '') {
         this.hasInvalidState = false;
       } else {
         this.hasInvalidState = inputElement?.checkValidity() === false;
       }
-  
+    
       const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
       if (trailElement) {
         trailElement.classList.toggle('invalid', this.hasInvalidState);
       }
+    
+      // const inputLines = inputValue?.split('\n').length || 0;
 
-      const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
-      inputElement?.style.setProperty('--gds-textarea-lines', lines);
+      
+      const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 1).toString();
+      const minRows = parseInt(inputElement?.getAttribute('rows') || '1');
+      const maxRows = Math.max(minRows, parseInt(lines));
+
+      inputElement?.setAttribute('rows', maxRows.toString());
+      inputElement?.style.setProperty('--gds-textarea-lines', maxRows.toString());
 
     };
-
-    const isInput = this.getAttribute('type')?.toLowerCase() === 'text';
-    const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
-    const isSelect = this.getAttribute('type')?.toLowerCase() === 'select';
-
+  
+    const inputType = this.getAttribute('type')?.toLowerCase() || '';
+    const validInputTypes = ['text', 'textarea', 'select'];
+    const hasInput = validInputTypes.includes(inputType);
+  
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
-        ${ isInput ? html`
+        ${!hasInput || inputType === 'text' ? html`
           <input 
             id="input" 
             @input="${handleInput}" 
             placeholder=" " />
-        ` : isTextArea ? html`
+        ` : inputType === 'textarea' ? html`
           <textarea 
             id="input" 
             @input="${handleInput}" 
@@ -177,30 +191,98 @@ export class GdsInput extends LitElement {
             autocomplete="off" 
             autocorrect="off" 
             autocapitalize="off" 
-            spellcheck="false">
-          </textarea>
-        ` : isSelect ? html`
-            <input 
-              part="input" 
-              type="text" 
-              autocomplete="off" 
-              spellcheck="false" 
-              autocapitalize="off" 
-              readonly="" 
-              aria-controls="listbox" 
-              aria-haspopup="listbox" 
-              aria-labelledby="label" 
-              aria-describedby="help-text" 
-              role="combobox" 
-              tabindex="0" 
-              placeholder=" "
-              value="Selected item"
-              aria-expanded="false" 
-              aria-disabled="false">
+            rows="${rows || '1'}"
+            spellcheck="false"></textarea>
+        ` : inputType === 'select' ? html`
+          <input 
+            part="input" 
+            type="text" 
+            autocomplete="off" 
+            spellcheck="false" 
+            autocapitalize="off" 
+            readonly="" 
+            aria-controls="listbox" 
+            aria-haspopup="listbox" 
+            aria-labelledby="label" 
+            aria-describedby="help-text" 
+            role="combobox" 
+            tabindex="0" 
+            placeholder=" "
+            value="Selected item"
+            aria-expanded="false" 
+            aria-disabled="false">
         ` : ''}
       </div>
     `;
   }
+  
+
+
+
+  // slotBase() {
+  //   const handleInput = () => {
+  //     const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
+  //     const inputValue = inputElement?.value.trim();
+  
+  //     if (inputValue === '') {
+  //       this.hasInvalidState = false;
+  //     } else {
+  //       this.hasInvalidState = inputElement?.checkValidity() === false;
+  //     }
+  
+  //     const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
+  //     if (trailElement) {
+  //       trailElement.classList.toggle('invalid', this.hasInvalidState);
+  //     }
+
+  //     const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 0).toString();
+  //     inputElement?.style.setProperty('--gds-textarea-lines', lines);
+
+  //   };
+
+  //   const isInput = this.getAttribute('type')?.toLowerCase() === 'text';
+  //   const isTextArea = this.getAttribute('type')?.toLowerCase() === 'textarea';
+  //   const isSelect = this.getAttribute('type')?.toLowerCase() === 'select';
+
+  //   return html`
+  //     <div class="gds-input-core-base">
+  //       <label for="input">${this.label}</label>
+  //       ${ isInput ? html`
+  //         <input 
+  //           id="input" 
+  //           @input="${handleInput}" 
+  //           placeholder=" " />
+  //       ` : isTextArea ? html`
+  //         <textarea 
+  //           id="input" 
+  //           @input="${handleInput}" 
+  //           placeholder=" " 
+  //           autocomplete="off" 
+  //           autocorrect="off" 
+  //           autocapitalize="off" 
+  //           spellcheck="false"></textarea>
+  //       ` : isSelect ? html`
+  //           <input 
+  //             part="input" 
+  //             type="text" 
+  //             autocomplete="off" 
+  //             spellcheck="false" 
+  //             autocapitalize="off" 
+  //             readonly="" 
+  //             aria-controls="listbox" 
+  //             aria-haspopup="listbox" 
+  //             aria-labelledby="label" 
+  //             aria-describedby="help-text" 
+  //             role="combobox" 
+  //             tabindex="0" 
+  //             placeholder=" "
+  //             value="Selected item"
+  //             aria-expanded="false" 
+  //             aria-disabled="false">
+  //       ` : ''}
+  //     </div>
+  //   `;
+  // }
 
   slotBadge() {
     return html`
