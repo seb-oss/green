@@ -51,15 +51,15 @@ $colors: (
 );
 @each $key, $variant in $colors {
   .text-#{$key} {
-    color: map.get($variant, 'color');
-    --color: #{map.get($variant, 'color')};
+    color: map.get($variant, 'color') !important;
+    --color: #{map.get($variant, 'color')} !important;
   }
 
   .bg-#{$key} {
-    background: map.get($variant, 'color');
-    --background: map.get($variant, 'color');
+    background: map.get($variant, 'color') !important;
+    --background: map.get($variant, 'color') !important;
     @if (map.get($variant, 'contrast') != null) {
-      color: map.get($variant, 'contrast');
+      color: map.get($variant, 'contrast') !important;
     }
   }
 }
