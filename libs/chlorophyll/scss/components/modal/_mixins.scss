@@ -38,9 +38,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(5);
 
-
-
-
   @include common.add-border('bottom');
   @include common.add-border-color();
   display: inline-flex;
@@ -77,14 +74,12 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(5);
   width: 100%;
+
   @include common.media-breakpoint-up('sm') {
     display: flex;
     justify-content: flex-end;
   }
-  @include common.media-breakpoint-up('md') {
-        @include common.padding-horizontal(7);
-        @include common.padding-bottom(7);
-  }
+
   button,
   .button {
     + {
@@ -128,12 +123,19 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
     left: 0;
   }
 
-  .\768, .\960 {
+  &.gds-slide-out--768 {
+      max-width: 48rem;
+  }
+
+  &.gds-slide-out--960 {
+      max-width: 60rem;
+  }
+
+  &.gds-slide-out--768, &.gds-slide-out--960 {
     header {
       @include common.padding-horizontal(7);
       @include common.padding-top(6);
       @include common.padding-bottom(5);
-      max-width: 768px;
     }
     .body {
       @include common.padding-horizontal(7);
