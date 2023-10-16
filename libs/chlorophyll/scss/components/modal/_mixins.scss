@@ -36,7 +36,11 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 
 @mixin modal-header {
   @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
+  @include common.padding-vertical(5);
+
+
+
+
   @include common.add-border('bottom');
   @include common.add-border-color();
   display: inline-flex;
@@ -57,7 +61,10 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 
 @mixin modal-body {
   @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
+  @include common.padding-vertical(5);
+
+
+
   overflow: auto;
   width: 100%;
 
@@ -68,11 +75,15 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 
 @mixin modal-footer {
   @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
+  @include common.padding-vertical(5);
   width: 100%;
   @include common.media-breakpoint-up('sm') {
     display: flex;
     justify-content: flex-end;
+  }
+  @include common.media-breakpoint-up('md') {
+        @include common.padding-horizontal(7);
+        @include common.padding-bottom(7);
   }
   button,
   .button {
@@ -116,6 +127,27 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   &.left {
     left: 0;
   }
+
+  .\768, .\960 {
+    header {
+      @include common.padding-horizontal(7);
+      @include common.padding-top(6);
+      @include common.padding-bottom(5);
+      max-width: 768px;
+    }
+    .body {
+      @include common.padding-horizontal(7);
+      @include common.padding-top(7);
+      @include common.padding-bottom(5);
+    }
+    footer {
+      @include common.padding-top(5);
+      @include common.padding-horizontal(7);
+      @include common.padding-bottom(7);
+    }
+  }
+
+
 }
 
 @mixin fullscreen-modal() {
