@@ -530,6 +530,12 @@
     "customParams": {}
   },
   {
+    "id": "introduction--page",
+    "name": "Page",
+    "title": "Introduction",
+    "customParams": {}
+  },
+  {
     "id": "get-started-install--page",
     "name": "Page",
     "title": "Get started/Install",
@@ -551,12 +557,6 @@
     "id": "components-charts--page",
     "name": "Page",
     "title": "Components/Charts",
-    "customParams": {}
-  },
-  {
-    "id": "introduction--page",
-    "name": "Page",
-    "title": "Introduction",
     "customParams": {}
   }
 ]
