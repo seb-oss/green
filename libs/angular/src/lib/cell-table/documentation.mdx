@@ -1,0 +1,118 @@
+import { Canvas, Story } from '@storybook/addon-docs'
+
+import { NggCellTableComponent } from './cell-table.component'
+
+# Cell Table
+
+A versatile Angular component for presenting tabular data in a stacked format.
+
+## Description
+
+The `NggCellTableComponent` is a flexible and feature-rich Angular component designed for displaying tabular data in a stacked format. This component is highly customizable and can be used for various applications such as data dashboards, reports, and more.
+
+## Usage
+
+Use the `NggCellTableComponent` on pages where you need to display tabular data in a stacked format.
+
+## Importing Module
+
+To use the `NggCellTableComponent`, you need to import the `NggCellTableModule` into your Angular module.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { NggCellTableModule } from '@sebgroup/angular-green' // Replace with your actual module path
+
+@NgModule({
+  imports: [NggCellTableModule],
+})
+export class YourModule {}
+```
+
+## Inputs
+
+| Input           | Type                         | Description                                            |
+| :-------------- | :--------------------------- | :----------------------------------------------------- |
+| headerList      | `Array<TableHeaderListItem>` | An array of table header configurations.               |
+| rows            | `Array<TableRow>`            | An array of data rows.                                 |
+| className       | `string`                     | Custom CSS class name for styling.                     |
+| minWidth        | `number`                     | Cell minimum width to ensure consistent column widths. |
+| overflowReverse | `boolean`                    | Make the most left element wrap.                       |
+| dateFormat      | `string`                     | Date format for date-type data.                        |
+| fixedHeight     | `string`                     | The visible height of the table.                       |
+| arrow           | `boolean`                    | Add an arrow to the most right.                        |
+
+## Outputs
+
+| Output     | Description                                                            |
+| :--------- | :--------------------------------------------------------------------- |
+| rowClicked | Event emitted when a row is clicked, providing the clicked row's data. |
+
+## Models
+
+### TableHeaderListValueType
+
+The type of data values in a column represent:
+
+```typescript
+export type TableHeaderListValueType =
+  | 'number'
+  | 'string'
+  | 'date'
+  | 'datetime'
+  | 'bool'
+  | 'custom-html'
+  | 'sign'
+  | 'streamSign'
+  | ''
+```
+
+### TableHeaderListItem
+
+Table Header List Item Interface:
+
+```typescript
+export interface TableHeaderListItem<T extends {} = {}> {
+  /** The label displayed */
+  label: string
+  /** The key selector corresponding to the TableList Item which this column is targeting */
+  tableKeySelector: string
+  /** The type of value: string, date, or number */
+  valueType?: TableHeaderListValueType
+  /** The main field for the stacked table */
+  main?: boolean
+}
+```
+
+### TableRow
+
+descending:
+
+```typescript
+export interface TableRow {
+  [prop: string]: any
+  rowId: string | number
+}
+```
+
+### SortInfo
+
+The information on the currently selected sort: column name, type, and ascending or descending:
+
+```typescript
+export interface SortInfo<T extends {} = { [k: string]: any }> {
+  /** Column name */
+  column: keyof T
+  /** Is ascending (false for descending) */
+  isAscending: boolean
+}
+```
+
+### Examples
+
+## Default
+
+<Canvas>
+  <Story id="components-cell-table--default" />
+</Canvas>
+
+This documentation provides an overview of the component, how to use it, and its input and output options, similar to the structure of the example you provided for the NggSliderComponent.

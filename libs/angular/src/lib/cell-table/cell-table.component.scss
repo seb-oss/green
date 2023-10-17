@@ -1,34 +1,33 @@
-.stack-table-container {
+.cell-table-container {
   background-color: #fff;
 }
 
-.stack-table-container .stacked-table-main-row:first-child {
+.cell-table-container .cell-table-main-row:first-child {
   border-top: 1px solid var(--sg-border-color);
 }
 
-.stacked-table-main-row {
-  div:not(.overflow-reverse)>.sub-row-cell:first-child {
+.cell-table-main-row {
+  div:not(.overflow-reverse) > .sub-row-cell:first-child {
     text-align: left;
   }
 
-  >div:first-child,
-  >div:last-child {
+  > div:first-child,
+  > div:last-child {
     padding: 0 !important;
   }
 
   &.overflow-reverse {
     flex-direction: row-reverse;
   }
-
 }
 
-.stacked-table-main-row .main-header {
+.cell-table-main-row .main-header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.stacked-table-main-row .main-header .stacked-table-main-row:first-child {
+.cell-table-main-row .main-header .cell-table-main-row:first-child {
   border-top: 1px solid var(--sg-border-color);
 }
 
@@ -37,8 +36,8 @@
   overflow: hidden;
   text-align: right;
 
-  >div:first-child,
-  >div:last-child {
+  > div:first-child,
+  > div:last-child {
     padding: 0 !important;
   }
 

@@ -7,18 +7,22 @@ import {
   Output,
   QueryList,
   ViewChildren,
-} from '@angular/core';
-import { TableHeaderListItem, TableHeaderListValueType, TableRow } from '../../models/stacked-table/stacked-table.models';
-
+} from '@angular/core'
+import {
+  TableHeaderListItem,
+  TableHeaderListValueType,
+  TableRow,
+} from '../../models/cell-table/cell-table.models'
 
 @Component({
-  selector: 'ngg-stacked-table',
-  templateUrl: './stacked-table.component.html',
-  styleUrls: ["./stacked-table.component.scss"],
+  selector: 'ngg-cell-table',
+  templateUrl: './cell-table.component.html',
+  styleUrls: ['./cell-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggStackedTableComponent {
-  @ViewChildren("items") items: QueryList<ElementRef> = new QueryList<ElementRef>;
+export class NggCellTableComponent {
+  @ViewChildren('items') items: QueryList<ElementRef> =
+    new QueryList<ElementRef>()
 
   /** Cell min-width to force same width on small screens */
   @Input() minWidth?: number
@@ -33,7 +37,7 @@ export class NggStackedTableComponent {
   @Input() headerList: Array<TableHeaderListItem> = []
 
   /** Date format for cell value with Date datatype */
-  @Input() dateFormat = "yyyy-MM-dd"
+  @Input() dateFormat = 'yyyy-MM-dd'
 
   /** List of data */
   @Input() rows: TableRow[] = []
@@ -57,30 +61,32 @@ export class NggStackedTableComponent {
   }
 
   getValueTypeFromMain = (): TableHeaderListValueType => {
-    const getMain = this.headerList.find((x) => x.main);
-    if (getMain) return getMain.valueType || ""
+    const getMain = this.headerList.find((x) => x.main)
+    if (getMain) return getMain.valueType || ''
     return ''
   }
 
-  getTableHeaderListValueFromNonMain = (header: TableHeaderListItem): TableHeaderListValueType => {
-    if (header.valueType) return header.valueType || "";
+  getTableHeaderListValueFromNonMain = (
+    header: TableHeaderListItem
+  ): TableHeaderListValueType => {
+    if (header.valueType) return header.valueType || ''
     return ''
   }
 
   mainHeader = (row: TableRow) => {
-    const getMain = this.headerList.find((x) => x.main);
+    const getMain = this.headerList.find((x) => x.main)
     if (row && getMain) {
-      return ({
+      return {
         value: row[getMain.tableKeySelector],
         valueType: getMain.valueType || 'string',
-        tableKeySelector: getMain.tableKeySelector
-      })
+        tableKeySelector: getMain.tableKeySelector,
+      }
     }
-    return ({
+    return {
       value: '-',
       valueType: 'string',
-      tableKeySelector: '-'
-    })
+      tableKeySelector: '-',
+    }
   }
 
   headerNoneMain = (headers: TableHeaderListItem[]) => {
@@ -95,5 +101,4 @@ export class NggStackedTableComponent {
   KeySelector(_: any, b: TableHeaderListItem) {
     return b.tableKeySelector
   }
-
 }

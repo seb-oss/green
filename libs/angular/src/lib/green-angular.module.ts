@@ -12,7 +12,7 @@ import { NggProgressCircleModule } from './progress-circle/progress-circle.modul
 import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
 import { NggSharedModule } from './shared/shared.module'
 import { NggSliderModule } from './slider/slider.module'
-import { NggStackedTableModule } from './stacked-table'
+import { NggCellTableModule } from './cell-table'
 
 @NgModule({
   declarations: [],
@@ -29,7 +29,7 @@ import { NggStackedTableModule } from './stacked-table'
     NggSliderModule,
     NggContextMenuModule,
     NggInPageWizardModule,
-    NggStackedTableModule,
+    NggCellTableModule,
     NggSharedModule,
   ],
 })
