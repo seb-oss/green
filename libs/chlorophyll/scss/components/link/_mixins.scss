@@ -92,7 +92,7 @@ $variants: (
 }
 
 @mixin arrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
   color: $color-dark;
@@ -108,6 +108,10 @@ $variants: (
     path {
       fill: currentColor;
     }
+  }
+
+  &.link:focus {
+    color: $color-dark;
   }
 
   &:visited {
