@@ -54,7 +54,7 @@ $close-icon-color: var(--text-primary-color);
   position: relative;
   width: $close-width;
 
-  @include common.add-focus('-visible', 'i');
+  @include common.add-focus('visible', 'i');
 
   > i {
     border-radius: var(--gds-sys-shape-corner-round);
