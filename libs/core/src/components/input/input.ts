@@ -100,7 +100,7 @@ export class GdsInput extends LitElement {
     }
   }
 
-  
+
   @property({ type: Boolean })
   hasInvalidState = false;
 
@@ -159,7 +159,8 @@ export class GdsInput extends LitElement {
 
       const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 1).toString();
 
-        const minRows = parseInt(inputElement?.getAttribute('rows') || '0');
+      const minRows = inputElement?.getAttribute('rows') ? parseInt(inputElement.getAttribute('rows')!) : 1;
+        
         prevMaxRows = Math.max(minRows, lines?.length > prevMaxRows ? lines.length : prevMaxRows);
         const maxRows = Math.max(minRows, parseInt(lines));
         inputElement?.setAttribute('rows', prevMaxRows.toString());
@@ -167,7 +168,7 @@ export class GdsInput extends LitElement {
     };
 
     const inputType = this.getAttribute('type')?.toLowerCase() || '';
-    const validInputTypes = ['text', 'textarea', 'select'];
+    const validInputTypes = ['text', 'textarea', 'select', 'dual'];
     const hasInput = validInputTypes.includes(inputType);
   
     return html`
@@ -208,6 +209,33 @@ export class GdsInput extends LitElement {
             value="Selected item"
             aria-expanded="false" 
             aria-disabled="false">
+        ` : inputType === 'dual' ? html`
+          <div class="gds-input-core-base-dual">
+            <input 
+              type="text"
+              id="dual-primary" 
+              placeholder="Primary" 
+              part="primary"
+              readonly=""  
+              aria-controls="listbox" 
+              aria-haspopup="listbox" 
+              aria-labelledby="label" 
+              aria-describedby="help-text" 
+              role="combobox" 
+            >
+            <input 
+              type="text"
+              id="dual-secondary" 
+              placeholder="Secondary" 
+              part="secondary" 
+              readonly="" 
+              aria-controls="listbox" 
+              aria-haspopup="listbox" 
+              aria-labelledby="label" 
+              aria-describedby="help-text" 
+              role="combobox" 
+            >
+          </div>
         ` : ''}
       </div>
     `;

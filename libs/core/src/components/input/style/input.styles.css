@@ -387,3 +387,25 @@ input:user-valid {
     align-items: center;
   }
 }
+
+/* The double select style */
+
+:host([type='dual']) .gds-input-core-base-dual {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  input {
+    flex: 1;
+    max-width: 50%;
+  }
+}
+
+/* [selected] */
+/* [selected] */
+/* [selected] */
+/* [selected] */
+/* [selected] */
+/* [selected] */
+/* [selected] */
+/* [selected] */
