@@ -96,7 +96,7 @@ $close-icon-color: var(--text-primary-color);
 
   @include common.media-breakpoint-up('md') {
     &:not(:disabled, .disabled):hover > i {
-      background: var(--gds-ref-pallet-base200);
+      background: var(--gds-ref-pallet-base300);
     }
 
 
