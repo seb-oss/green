@@ -398,6 +398,12 @@
     }
   },
   {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
     "id": "components-form-input--default",
     "name": "Default",
     "title": "Components/Form/Input",
@@ -426,11 +432,5 @@
         "component-input"
       ]
     }
-  },
-  {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
   }
 ]
