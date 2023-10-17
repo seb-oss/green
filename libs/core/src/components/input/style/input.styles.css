@@ -2,16 +2,9 @@
 
 /* 
 
-
-
 input:user-valid {
   border-color:  green;
 }
-
-
-
-
-
 
 */
 
@@ -123,8 +116,13 @@ input:user-valid {
         box-shadow: 0 2px 0 currentColor;
       }
 
+      & input[readonly] {
+        user-select: none !important;
+      }
+
       &:focus-within:has(textarea:focus-visible),
-      &:focus-within:has(input:focus-visible) {
+      &:focus-within:has(input:focus-visible),
+      &:focus-within:has([readonly]) {
         border-radius: 8px;
         box-shadow: none;
       }
@@ -134,35 +132,6 @@ input:user-valid {
         box-shadow: none;
         border-radius: 8px;
       }
-
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-      /* Fix  */
-
-      /* &:has([readonly]) {
-        box-shadow: none;
-        border-radius: 8px;
-        border-color: transparent;
-      } */
 
       &:focus-within,
       &:has(textarea:not(:placeholder-shown)),
@@ -340,6 +309,28 @@ input:user-valid {
             width: 40px;
           }
         }
+
+        & textarea {
+          min-height: calc(1lh * var(--gds-textarea-lines));
+          max-height: calc(1lh * var(--gds-textarea-lines));
+          height: 100%;
+          resize: none;
+          overflow: hidden;
+          width: 100%;
+          appearance: none;
+          outline: none;
+          padding: unset;
+          padding-block-start: 12px;
+          font-size: 16px;
+          font-family: inherit;
+          line-height: 1.25;
+          border: none;
+          background: none;
+
+          :host([rows]) & {
+            padding-block-start: calc(12px + 10px);
+          }
+        }
       }
 
       &:has(.gds-input-core-trail-button) {
@@ -387,7 +378,6 @@ input:user-valid {
 
 :host([type='textarea']) .gds-input-core {
   align-items: flex-start;
-
   .gds-input-core-lead,
   .gds-input-core-base,
   .gds-input-badge,
@@ -395,28 +385,5 @@ input:user-valid {
     min-height: 32px;
     display: flex;
     align-items: center;
-  }
-}
-
-textarea {
-  /* --gds-textarea-lines: 1; */
-  min-height: calc(1lh * var(--gds-textarea-lines));
-  max-height: calc(1lh * var(--gds-textarea-lines));
-  height: 100%;
-  resize: none;
-  overflow: hidden;
-  width: 100%;
-  appearance: none;
-  outline: none;
-  padding: unset;
-  padding-block-start: 12px;
-  font-size: 16px;
-  font-family: inherit;
-  line-height: 1.25;
-  border: none;
-  background: none;
-
-  :host([rows]) & {
-    padding-block-start: calc(12px + 10px);
   }
 }
