@@ -138,9 +138,9 @@ Base on background color of parent element eg. white links on dark backgrounds e
 
 */
 
-@mixin variant($color, $outline-color) {
+@mixin variant($color) {
   a:link {
-    @include common.add-outline-focus-state($outline-color);
+    @include common.add-outline-focus-state();
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;

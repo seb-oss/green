@@ -7,14 +7,6 @@
     $suffix: '-' + $suffix;
   }
 
-  &:focus {
-    //border-color: $border-color;
-    outline-color: var(--gds-sys-color-focus-outline);
-    outline-style: solid;
-    outline-width: 0.125rem;
-    outline-offset: 0.125rem;
-  }
-
   @if $suffix != '' {
     &:focus:not(:focus-visible) {
       box-shadow: none;
@@ -22,6 +14,7 @@
     }
   }
 
+  &:focus,
   &:focus#{$suffix} #{$target} {
     outline-color: var(--gds-sys-color-focus-outline);
     outline-style: solid;
@@ -30,27 +23,12 @@
   }
 }
 
-@mixin add-outline-focus-state($color: tokens.get(tokens.$blue, 1)) {
-  @if (type-of($color) == color) {
-    $color: transparentize($color, 0.35);
-  }
-  &:focus {
-    outline-color: var(--gds-sys-color-focus-outline);
-    outline-style: solid;
-    outline-width: 0.125rem;
-    outline-offset: 0.125rem;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: 0;
-  }
-
-  &:focus-visible {
-    outline-color: var(--gds-sys-color-focus-outline);
-    outline-style: solid;
-    outline-width: 0.125rem;
-    outline-offset: 0.125rem;
-  }
+/**
+* @deprecated
+* Use `add-focus` instead
+*/
+@mixin add-outline-focus-state() {
+  @include add-focus('within');
 }
 
 @mixin add-hover-state($color: tokens.get(tokens.$blue, 2), $target: '') {

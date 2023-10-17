@@ -46,9 +46,6 @@ Enable Text smoothing
 // TODO: maybe move elsewhere?
 @each $variant, $colors in mixins.$variants {
   [class*='-#{$variant}'] {
-    @include mixins.variant(
-      currentColor,
-      rgba(map.get($colors, 'fadable-color'), mixins.$outline-opacity)
-    );
+    @include mixins.variant(currentColor);
   }
 }

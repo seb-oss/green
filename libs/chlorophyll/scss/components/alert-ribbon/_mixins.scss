@@ -153,7 +153,7 @@ $link-outline-color: hsla(
   }
 
   // links
-  @include link.variant($color, $link-outline-color);
+  @include link.variant($color);
   a {
     text-decoration: underline !important;
     transition: opacity 300ms ease-in-out;
@@ -219,10 +219,7 @@ $link-outline-color: hsla(
       );
 
       // style for nested links
-      @include link.variant(
-        map.get($colors, 'color'),
-        map.get($colors, 'link-outline-color')
-      );
+      @include link.variant(map.get($colors, 'color'));
     }
   }
 }
