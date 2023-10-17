@@ -193,6 +193,7 @@ export class GdsInput extends LitElement {
             rows="${rows || '1'}"
             spellcheck="false"></textarea>
         ` : inputType === 'select' ? html`
+        <select> <option>asdas</option> </select>
           <input 
             part="input" 
             type="text" 
