@@ -143,34 +143,31 @@ export class GdsInput extends LitElement {
     const maxRows = rows || '1';
     inputElement?.style.setProperty('--gds-textarea-lines', maxRows.toString());
 
+    let prevMaxRows = 1;
     const handleInput = () => {
       const inputElement = this.renderRoot?.querySelector<HTMLInputElement>('#input');
       const inputValue = inputElement?.value.trim();
     
-    
+      
       if (inputValue === '') {
         this.hasInvalidState = false;
+        inputElement?.style.setProperty('--gds-textarea-lines', '0');
       } else {
         this.hasInvalidState = inputElement?.checkValidity() === false;
       }
-    
-      const trailElement = this.renderRoot?.querySelector('.gds-input-core-trail');
-      if (trailElement) {
-        trailElement.classList.toggle('invalid', this.hasInvalidState);
-      }
-    
-      // const inputLines = inputValue?.split('\n').length || 0;
 
       
       const lines = (this.renderRoot?.querySelector<HTMLInputElement>('#input')?.value.split('\n').length || 1).toString();
-      const minRows = parseInt(inputElement?.getAttribute('rows') || '1');
-      const maxRows = Math.max(minRows, parseInt(lines));
 
-      inputElement?.setAttribute('rows', maxRows.toString());
-      inputElement?.style.setProperty('--gds-textarea-lines', maxRows.toString());
-
+      // if (inputElement?.tagName.toLowerCase() === 'textarea' && lines !== undefined && inputValue !== '' && rows !== undefined) {
+        const minRows = parseInt(inputElement?.getAttribute('rows') || '0');
+        prevMaxRows = Math.max(minRows, lines?.length > prevMaxRows ? lines.length : prevMaxRows);
+        const maxRows = Math.max(minRows, parseInt(lines));
+        inputElement?.setAttribute('rows', prevMaxRows.toString());
+        inputElement?.style.setProperty('--gds-textarea-lines', maxRows.toString());
+      // }
     };
-  
+
     const inputType = this.getAttribute('type')?.toLowerCase() || '';
     const validInputTypes = ['text', 'textarea', 'select'];
     const hasInput = validInputTypes.includes(inputType);
@@ -187,6 +184,9 @@ export class GdsInput extends LitElement {
           <textarea 
             id="input" 
             @input="${handleInput}" 
+            @change="${handleInput}" 
+            @keyup="${handleInput}"
+            @keydown="${handleInput}"
             placeholder=" " 
             autocomplete="off" 
             autocorrect="off" 
@@ -207,7 +207,6 @@ export class GdsInput extends LitElement {
             aria-describedby="help-text" 
             role="combobox" 
             tabindex="0" 
-            placeholder=" "
             value="Selected item"
             aria-expanded="false" 
             aria-disabled="false">

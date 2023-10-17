@@ -1,5 +1,20 @@
 @layer gds-input, type-safe, tokens, a11y, containment, shell, core, parts, types;
 
+/* 
+
+
+
+input:user-valid {
+  border-color:  green;
+}
+
+
+
+
+
+
+*/
+
 @layer gds-input {
   @layer type-safe {
     @property --gds-input-width {
@@ -120,9 +135,38 @@
         border-radius: 8px;
       }
 
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+      /* Fix  */
+
+      /* &:has([readonly]) {
+        box-shadow: none;
+        border-radius: 8px;
+        border-color: transparent;
+      } */
+
       &:focus-within,
       &:has(textarea:not(:placeholder-shown)),
-      &:has(input:not(:placeholder-shown)) {
+      &:has(input:not(:placeholder-shown, [readonly])) {
         border-color: currentColor;
 
         .gds-input-core-base {
