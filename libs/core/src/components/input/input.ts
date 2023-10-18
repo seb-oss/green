@@ -135,6 +135,37 @@ export class GdsInput extends LitElement {
       </div>
     `;
   }
+
+  slotOptions() {
+    const optionElements = Array.from(this.querySelectorAll('option'));
+    const optgroupElements = Array.from(this.querySelectorAll('optgroup'));
+
+    // Check if options are already directly within the gds-input
+    const alreadyDirectOptions = optionElements.filter(option => {
+      const parentElement = option.parentElement;
+      return parentElement && !parentElement.closest('optgroup');
+    }).map(option => option.textContent);
+    
+    return html`
+      ${optgroupElements.map(optgroup => html`
+        <optgroup label="${optgroup.label}">
+          ${Array.from(optgroup.children).map(option => html`
+            <option>${option.textContent}</option>
+          `)}
+        </optgroup>
+      `)}
+      ${optionElements.map(option => {
+        // Exclude options that are already directly within gds-input
+        if (!alreadyDirectOptions.includes (option.textContent)) {
+          return html`
+            <option>${option.textContent}</option>
+          `;
+        }
+        return null;
+      })}
+    `;
+  }
+  
   
 
   slotBase() {
@@ -171,6 +202,21 @@ export class GdsInput extends LitElement {
     const validInputTypes = ['text', 'textarea', 'select', 'select-native', 'duo'];
     const hasInput = validInputTypes.includes(inputType);
   
+
+  if (inputType === 'select-native') {
+    return html`
+      <div class="gds-input-core-base">
+        <label for="input">${this.label}</label>
+        <select id="input" title="test">
+          <option disabled selected hidden>Select your option</option>
+          ${this.slotOptions()}
+        </select>
+      </div>
+    `;
+  }
+
+
+    
     return html`
       <div class="gds-input-core-base">
         <label for="input">${this.label}</label>
@@ -209,10 +255,13 @@ export class GdsInput extends LitElement {
             value="Selected item"
             aria-expanded="false" 
             aria-disabled="false">
-        ` : inputType === 'select-native' ? html`
+        ` : inputType === 'select-nativeer' ? html`
+          <!-- Options for multi select type -->
           <select id="input" title="test">
             <option disabled selected hidden>Select your option</option>
-            <optgroup label="Group 1">
+            <slot name="options"></slot>
+          </select>
+            <!-- <optgroup label="Group 1">
               <option>Option Slot 1</option>
               <option>Option Slot 2</option>
               <option>Option Slot 3</option>
@@ -222,7 +271,7 @@ export class GdsInput extends LitElement {
               <option>Option Slot 4</option>
               <option>Option Slot 5</option>
             </optgroup>
-          </select>
+          </select> -->
           <!-- <select multiple="true" placeholder=" ">
             <option value="" disabled selected hidden>Select your option</option>
             <option>Option Slot 1</option>
