@@ -19,26 +19,17 @@
   --gds-button-color-bg: var(--gds-color-grey-20);
   --gds-button-color-text: var(--gds-color-text-inverse);
   --gds-button-color-border: var(--gds-sys-border-color);
-  --gds-button-color-outline: var(--gds-color-grey-20);
 
-  //Dark mode tokens
-  --gds-button-color-bg-dark: var(--gds-color-grey-20);
-  --gds-button-color-text-dark: var(--gds-color-text-inverse);
-  --gds-button-color-border-dark: var(--gds-sys-border-color);
-  --gds-button-color-outline-dark: var(--gds-color-grey-20);
+  --gds-button-color-outline-alpha: 60%;
+  --gds-button-color-outline: color-mix(in srgb,
+  var(--gds-button-color-border),
+  transparent var(--gds-button-color-outline-alpha));
 }
 
 @mixin tokens-a11y {
   @media (prefers-color-scheme: dark) {
     :host {
-      --gds-button-color-bg: var(--gds-button-color-bg-dark,
-      var(--gds-color-grey-20));
-      --gds-button-color-text: var(--gds-button-color-text-dark,
-      var(--gds-color-text-inverse));
-      --gds-button-color-border: var(--gds-button-color-text-dark,
-      var(--gds-color-text-inverse));
-      --gds-button-color-outline: var(--gds-button-color-text-dark,
-      var(--gds-color-text-inverse));
+      --gds-button-color-bg-dark: var(--gds-color-grey-90);
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -106,18 +97,18 @@
   outline-color: transparent;
   outline-offset: 2px;
   outline-style: solid;
-  outline-width: 1px;
+  outline-width: 2px;
   padding-block: var(--gds-button-padding-block);
   padding-inline: var(--gds-button-padding-inline);
   position: relative;
   transition: var(--gds-button-transition);
 
   &:focus {
-    outline-color: var(--gds-color-black);
-  }
+    outline-color: var(--gds-button-color-outline);
 
-  &:focus:not(:focus-visible) {
-    outline: none;
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 
   &:hover {
@@ -179,6 +170,10 @@
   &:active {
     --gds-button-color-bg: var(--gds-color-green-40);
   }
+
+  &:focus {
+    outline-color: var(--gds-button-color-border);
+  }
 }
 
 @mixin secondary-positive() {
@@ -192,6 +187,10 @@
 
   &:active {
     --gds-button-color-bg: var(--gds-color-text-inverse);
+  }
+
+  &:focus {
+    outline-color: var(--gds-button-color-border);
   }
 }
 
@@ -208,6 +207,10 @@
   &:active {
     --gds-button-color-bg: transparent;
     --gds-button-color-border: transparent;
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-green-40);
   }
 }
 
@@ -226,6 +229,10 @@
     --gds-button-color-bg: var(--gds-color-red-40);
     --gds-button-color-border: var(--gds-color-red-40);
   }
+
+  &:focus {
+    outline-color: var(--gds-color-red-25);
+  }
 }
 
 @mixin secondary-negative() {
@@ -239,6 +246,10 @@
 
   &:active {
     --gds-button-color-bg: var(--gds-color-text-inverse);
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-red-40);
   }
 }
 
@@ -255,6 +266,10 @@
   &:active {
     --gds-button-color-bg: transparent;
     --gds-button-color-border: transparent;
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-red-40);
   }
 }
 
