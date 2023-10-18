@@ -24,11 +24,31 @@ input:user-valid {
 
   @layer tokens {
     :host {
+      --gds-input-color: hsla(60, 4%, 50%, 1);
+      --gds-input-color-border: hsla(60, 4%, 50%, 1);
       --gds-input-color-bg: hsla(60, 4%, 95%, 1);
       --gds-input-color-bg-dark: hsla(60, 4%, 95%, 1);
       --gds-input-width: 30cqi;
-      --gds-input-color: hsla(60, 4%, 50%, 1);
-      /* --gds-textarea-lines: 1; */
+      --gds-input-transition-property: all;
+      --gds-input-transition-duration: 150ms;
+      --gds-input-transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+      --gds-input-transition: var(--gds-input-transition-property)
+        var(--gds-input-transition-duration)
+        var(--gds-input-transition-function);
+      --gds-input-border-radius: 8px;
+      --gds-input-border-width: 2px;
+      --gds-input-fs: 16px;
+      --gds-input-lh: 1.25;
+      --gds-input-core-base-fs: 16px;
+      --gds-input-core-base-focus-fs: 12px;
+      --gds-input-core-min-block-size: 56px;
+      --gds-input-gap: 8px;
+      --gds-input-core-gap: 8px;
+      --gds-input-padding-block: 10px;
+      --gds-input-padding-inline: 16px;
+      --gds-input-core-icon-size: 24px;
+      --gds-input-textarea-min-block-size: 32px;
+      --gds-input-label-translate: 5px;
     }
   }
 
@@ -41,7 +61,7 @@ input:user-valid {
 
     @media (prefers-reduced-motion: reduce) {
       :host {
-        --gds-input-motion: 0;
+        --gds-input-transition: none;
       }
     }
 
@@ -85,39 +105,40 @@ input:user-valid {
     .gds-input {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--gds-input-gap);
       min-inline-size: var(--gds-input-width);
     }
   }
 
   @layer core {
     .gds-input-core {
-      --border-color: hsla(60, 4%, 50%, 1);
       align-items: center;
       background-color: var(--gds-input-color-bg);
-      background-position: bottom center;
-      background-repeat: repeat-x;
-      background-size: 100% 1px;
-      border: 2px solid transparent;
-      border-block-end-color: hsla(60, 4%, 50%, 0);
-      border-start-end-radius: 8px;
-      border-start-start-radius: 8px;
-      box-shadow: 0 2px 0 hsla(60, 4%, 50%, 1);
+      border: var(--gds-input-border-width) solid transparent;
+      border-block-end-color: transparent;
+      border-start-end-radius: var(--gds-input-border-radius);
+      border-start-start-radius: var(--gds-input-border-radius);
+      box-shadow: 0 var(--gds-input-border-width) 0
+        var(--gds-input-color-border);
       display: flex;
-      gap: 8px;
-      padding-block: 10px;
-      padding-inline: 16px;
+      gap: var(--gds-input-core-gap);
+      padding-block: var(--gds-input-padding-block);
+      padding-inline: var(--gds-input-padding-inline);
       position: relative;
-      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      transition: var(--gds-input-transition);
       block-size: max-content;
-      min-block-size: 56px;
+      min-block-size: var(--gds-input-core-min-block-size);
       outline-style: solid;
-      outline-offset: 2px;
-      outline-width: 1px;
+      outline-offset: var(--gds-input-border-width);
+      outline-width: calc(var(--gds-input-border-width) / 2);
       outline-color: transparent;
 
       &:focus-within {
-        outline-color: hsla(60, 4%, 50%, 0.4);
+        outline-color: color-mix(
+          in srgb,
+          var(--gds-input-color-border),
+          transparent 60%
+        );
       }
 
       &:focus:not(:focus-visible) {
@@ -125,7 +146,7 @@ input:user-valid {
       }
 
       &:hover {
-        box-shadow: 0 2px 0 currentColor;
+        box-shadow: 0 var(--gds-input-border-width) 0 currentColor;
       }
 
       & input[readonly] {
@@ -135,14 +156,14 @@ input:user-valid {
       &:focus-within:has(textarea:focus-visible),
       &:focus-within:has(input:focus-visible),
       &:focus-within:has([readonly]) {
-        border-radius: 8px;
+        border-radius: var(--gds-input-border-radius);
         box-shadow: none;
       }
 
       &:focus-within:has(textarea:placeholder-shown),
       &:focus-within:has(input:placeholder-shown) {
         box-shadow: none;
-        border-radius: 8px;
+        border-radius: var(--gds-input-border-radius);
       }
 
       &:focus-within,
@@ -152,12 +173,14 @@ input:user-valid {
 
         .gds-input-core-base {
           & label {
-            font-size: 12px;
+            font-size: var(--gds-input-core-base-focus-fs);
             top: 0;
-            transform: translateY(-5px);
+            transform: translateY(
+              translateY(calc(0px - var(--gds-input-label-translate)))
+            );
           }
           & input,
-          & textare {
+          & textarea {
             opacity: 1;
             transform: translateY(0);
           }
@@ -165,7 +188,8 @@ input:user-valid {
       }
 
       & gds-icon {
-        transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --gds-input-transition-property: color;
+        transition: var(--gds-input-transition);
       }
 
       & input[type='number']::-webkit-inner-spin-button {
@@ -197,7 +221,7 @@ input:user-valid {
       &:has(textarea:valid:not(:placeholder-shown)),
       &:has(input:valid:not(:placeholder-shown)) {
         border-color: transparent;
-        box-shadow: 0 2px 0 var(--gds-color-green-50);
+        box-shadow: 0 var(--gds-input-border-width) 0 var(--gds-color-green-50);
       }
 
       &:focus-within:has(textarea:focus-visible),
@@ -210,7 +234,7 @@ input:user-valid {
       &:not(:focus-within):has(textarea:valid:not(:placeholder-shown)),
       &:not(:focus-within):has(input:valid:not(:placeholder-shown)) {
         border-color: transparent;
-        box-shadow: 0 2px 0 var(--gds-color-green-50);
+        box-shadow: 0 var(--gds-input-border-width) 0 var(--gds-color-green-50);
       }
 
       /* Invalid */
@@ -238,7 +262,7 @@ input:user-valid {
       &:has(textarea:invalid:not(:placeholder-shown)),
       &:has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
-        box-shadow: 0 2px 0 var(--gds-color-red-50);
+        box-shadow: 0 var(--gds-input-border-width) 0 var(--gds-color-red-50);
       }
 
       &:focus-within:has(textarea:focus-visible),
@@ -251,7 +275,7 @@ input:user-valid {
       &:not(:focus-within):has(textarea:invalid:not(:placeholder-shown)),
       &:not(:focus-within):has(input:invalid:not(:placeholder-shown)) {
         border-color: transparent;
-        box-shadow: 0 2px 0 var(--gds-color-red-50);
+        box-shadow: 0 var(--gds-input-border-width) 0 var(--gds-color-red-50);
       }
 
       /* Base */
@@ -264,25 +288,25 @@ input:user-valid {
           align-items: center;
           background-color: transparent;
           display: block;
-          font-size: 16px;
+          font-size: var(--gds-input-core-base-fs);
           height: max-content;
           inset: 0;
-          line-height: 20px;
+          line-height: var(--gds-input-lh);
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+          transition: var(--gds-input-transition);
           width: 100%;
 
           :host([rows]) & {
             inset: unset;
-            top: 5px;
+            top: var(--gds-input-label-translate);
             transform: translateY(0);
           }
         }
 
-        & textare,
-        & input {
+        & input,
+        & textarea {
           appearance: none;
           background-color: transparent;
           border: 0;
@@ -290,16 +314,19 @@ input:user-valid {
           border-radius: 0;
           display: flex;
           font-family: inherit;
-          font-size: 16px;
+          font-size: var(--gds-input-fs);
           height: 100%;
           margin: unset;
           opacity: 0;
           outline: none;
           padding: unset;
-          padding-top: 12px;
-          transform: translateY(5px);
-          transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+          padding-top: var(--gds-input-core-base-focus-fs);
+          transform: translateY(var(--gds-input-label-translate));
+          transition: var(--gds-input-transition);
           width: 100%;
+          line-height: var(--gds-input-lh);
+          caret-color: accent;
+          caret-shape: underscore;
 
           &::placeholder {
             font-family: inherit;
@@ -323,36 +350,28 @@ input:user-valid {
         }
 
         & textarea {
-          min-height: calc(1lh * var(--gds-textarea-lines));
-          max-height: calc(1lh * var(--gds-textarea-lines));
-          height: 100%;
           resize: none;
           overflow: hidden;
-          width: 100%;
-          appearance: none;
-          outline: none;
-          padding: unset;
-          padding-block-start: 12px;
-          font-size: 16px;
-          font-family: inherit;
-          line-height: 1.25;
-          border: none;
-          background: none;
+          transition: unset;
+          min-height: calc(1lh * var(--gds-textarea-lines));
+          max-height: calc(1lh * var(--gds-textarea-lines));
 
           :host([rows]) & {
-            padding-block-start: calc(12px + 10px);
+            padding-block-start: calc(
+              var(--gds-input-core-base-focus-fs) + 10px
+            );
           }
         }
       }
 
       &:has(.gds-input-core-trail-button) {
-        padding-inline-end: 8px;
+        padding-inline-end: calc(var(--gds-input-padding-inline) / 2);
       }
 
       @layer parts {
         .gds-input-badge {
           pointer-events: none;
-          transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+          transition: var(--gds-input-transition);
         }
 
         .gds-input-core-lead,
@@ -360,9 +379,9 @@ input:user-valid {
           align-items: center;
           aspect-ratio: 1/1;
           display: flex;
-          height: 24px;
+          block-size: var(--gds-input-core-icon-size);
+          inline-size: var(--gds-input-core-icon-size);
           justify-content: center;
-          width: 24px;
         }
 
         .gds-input-core-lead {
@@ -394,7 +413,7 @@ input:user-valid {
   .gds-input-core-base,
   .gds-input-badge,
   .gds-input-core-trail {
-    min-height: 32px;
+    min-block-size: var(--gds-input-textarea-min-block-size);
     display: flex;
     align-items: center;
   }
@@ -402,7 +421,7 @@ input:user-valid {
 
 /* The double select style */
 
-:host([type='dual']) .gds-input-core-base-dual {
+:host([type='duo']) .gds-input-core-base-duo {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

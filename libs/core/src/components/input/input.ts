@@ -168,7 +168,7 @@ export class GdsInput extends LitElement {
     };
 
     const inputType = this.getAttribute('type')?.toLowerCase() || '';
-    const validInputTypes = ['text', 'textarea', 'select', 'dual'];
+    const validInputTypes = ['text', 'textarea', 'select', 'duo'];
     const hasInput = validInputTypes.includes(inputType);
   
     return html`
@@ -210,11 +210,11 @@ export class GdsInput extends LitElement {
             value="Selected item"
             aria-expanded="false" 
             aria-disabled="false">
-        ` : inputType === 'dual' ? html`
-          <div class="gds-input-core-base-dual">
+        ` : inputType === 'duo' ? html`
+          <div class="gds-input-core-base-duo">
             <input 
               type="text"
-              id="dual-primary" 
+              id="duo-primary" 
               placeholder="Primary" 
               part="primary"
               readonly=""  
@@ -226,7 +226,7 @@ export class GdsInput extends LitElement {
             >
             <input 
               type="text"
-              id="dual-secondary" 
+              id="duo-secondary" 
               placeholder="Secondary" 
               part="secondary" 
               readonly="" 
