@@ -405,16 +405,6 @@ input:user-valid {
       }
     }
   }
-
-  @layer types {
-    /* textarea {
-        min-height: calc(1lh * var(--gds-textarea-lines));
-        max-height: calc(1lh * var(--gds-textarea-lines));
-        height: calc(1lh * var(--gds-textarea-lines));
-        resize: none;
-        overflow: hidden !important;
-      } */
-  }
 }
 
 :host([type='textarea']) .gds-input-core {
