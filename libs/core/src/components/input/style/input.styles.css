@@ -26,6 +26,12 @@ input:user-valid {
     :host {
       --gds-input-color: hsla(60, 4%, 50%, 1);
       --gds-input-color-border: hsla(60, 4%, 50%, 1);
+      --gds-input-color-outline-alpha: 60%;
+      --gds-input-color-outline: color-mix(
+        in srgb,
+        var(--gds-input-color-border),
+        transparent var(--gds-input-color-outline-alpha)
+      );
       --gds-input-color-bg: hsla(60, 4%, 95%, 1);
       --gds-input-color-bg-dark: hsla(60, 4%, 95%, 1);
       --gds-input-width: 30cqi;
@@ -73,7 +79,8 @@ input:user-valid {
 
     @media (prefers-contrast: more) {
       :host {
-        --gds-input-contrast: 1;
+        --gds-input-color-bg: hsla(60, 4%, 96%, 1);
+        --gds-input-color-outline-alpha: 0%;
       }
     }
   }
@@ -134,11 +141,7 @@ input:user-valid {
       outline-color: transparent;
 
       &:focus-within {
-        outline-color: color-mix(
-          in srgb,
-          var(--gds-input-color-border),
-          transparent 60%
-        );
+        outline-color: var(--gds-input-color-outline);
       }
 
       &:focus:not(:focus-visible) {

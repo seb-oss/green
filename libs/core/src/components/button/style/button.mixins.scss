@@ -41,6 +41,11 @@
       var(--gds-color-text-inverse));
     }
   }
+  @media (prefers-reduced-motion: reduce) {
+    :host {
+      --gds-button-transition: none;
+    }
+  }
 }
 
 @mixin containment {
@@ -98,6 +103,10 @@
   inline-size: inherit;
   justify-content: space-between;
   justify-items: center;
+  outline-color: transparent;
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 1px;
   padding-block: var(--gds-button-padding-block);
   padding-inline: var(--gds-button-padding-inline);
   position: relative;
@@ -105,9 +114,6 @@
 
   &:focus {
     outline-color: var(--gds-color-black);
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 2px;
   }
 
   &:focus:not(:focus-visible) {
