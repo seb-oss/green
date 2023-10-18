@@ -3,12 +3,13 @@ import { customElement, property } from 'lit/decorators.js'
 import { constrainSlots } from 'utils/helpers'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import styles from './radio.css'
-import { GdsRadioGroup } from './radio-group'
+// import styles from './radio.css'
 
-@customElement('gds-radio')
-export class GdsRadio extends LitElement {
-  static styles = unsafeCSS(styles)
+
+
+@customElement('gds-radio-group')
+export class GdsRadioGroup extends LitElement {
+  // static styles = unsafeCSS(styles)
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
@@ -17,13 +18,16 @@ export class GdsRadio extends LitElement {
 
   // Private members
   #internals: ElementInternals
-  value: any
+  selectedValue: any
 
   constructor() {
     super()
     this.#internals = this.attachInternals()
     constrainSlots(this)
   }
+
+  @property({ type: String, reflect: true, attribute: "label" })
+  label = "Label"
 
   private inputElement: HTMLInputElement | null = null;
   private exludeAttr = ['id', 'label'];
@@ -48,19 +52,12 @@ export class GdsRadio extends LitElement {
     this.reflectAttributesToInput();
   }
 
-  handleClick() {
-    const radioGroup = this.closest('gds-radio-group');
-    
-    if (radioGroup instanceof GdsRadioGroup) {
-      radioGroup.selectedValue = this.value; 
-    }
-  }
 
   render() { 
     return html`
-      <div class="gds-radio">
-        <input id="radio" type="radio">
-      </div>
-      <label for="radio">${this.textContent}</label>
+      <fieldset class="gds-radio-group" role="radiogroup" aria-labelledby="label">
+        <label>${this.label}</label>
+        <slot></slot>
+      </fieldset>
   ` }
 }
