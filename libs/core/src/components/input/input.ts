@@ -136,16 +136,16 @@ export class GdsInput extends LitElement {
     `;
   }
 
+
+
+  
   slotOptions() {
     const optionElements = Array.from(this.querySelectorAll('option'));
     const optgroupElements = Array.from(this.querySelectorAll('optgroup'));
 
-    // Check if options are already directly within the gds-input
-    const alreadyDirectOptions = optionElements.filter(option => {
-      const parentElement = option.parentElement;
-      return parentElement && !parentElement.closest('optgroup');
-    }).map(option => option.textContent);
-    
+    const hasOptgroup = optgroupElements.length > 0;
+    const ungroupedOptions = optionElements.filter(option => option.parentElement && option.parentElement.tagName !== 'OPTGROUP');
+  
     return html`
       ${optgroupElements.map(optgroup => html`
         <optgroup label="${optgroup.label}">
@@ -154,18 +154,11 @@ export class GdsInput extends LitElement {
           `)}
         </optgroup>
       `)}
-      ${optionElements.map(option => {
-        // Exclude options that are already directly within gds-input
-        if (!alreadyDirectOptions.includes (option.textContent)) {
-          return html`
-            <option>${option.textContent}</option>
-          `;
-        }
-        return null;
-      })}
+      ${ungroupedOptions.map(option => html`
+        <option>${option.textContent}</option>
+      `)}
     `;
   }
-  
   
 
   slotBase() {
