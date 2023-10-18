@@ -135,10 +135,21 @@ export class GdsInputHelper extends LitElement {
     return html`
       <div class="gds-input-helper">
         <div class="gds-input-helper-header">
-          ${when(hasLabel, () => html`
+          <!-- ${when(hasLabel, () => html`
             <span class="gds-input-helper-title ${hasContent ? 'gds-input-helper-action' : ''}" @click=${this.toggleContent}>
               ${this.helperLabel}
             </span>
+          `)} -->
+          ${when(hasLabel, () => html`
+            ${hasContent ? html`
+              <button class="gds-input-helper-title gds-input-helper-action" @click=${this.toggleContent}>
+                  ${this.helperLabel}
+              </button>
+            ` : html`
+              <span class="gds-input-helper-title">
+                ${this.helperLabel}
+              </span>
+            `}
           `)}
           <div class="gds-input-helper-options">
             ${when(hasBadge, () => this.slotBadge())}

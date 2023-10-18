@@ -99,6 +99,26 @@
 
           &.gds-input-helper-action {
             cursor: pointer;
+            appearance: none;
+            padding: unset;
+            border: unset;
+            background: unset;
+            padding: 4px 8px;
+            outline-offset: 2px;
+            outline-color: transparent;
+            outline-width: 2px;
+            outline-style: solid;
+            font-family: inherit;
+            font-size: 14px;
+
+            &:focus {
+              outline-color: currentColor;
+              border-radius: 200px;
+
+              &:not(:focus-visible) {
+                outline-color: transparent;
+              }
+            }
           }
         }
 

@@ -153,7 +153,8 @@ input:user-valid {
       }
 
       & input[readonly] {
-        user-select: none !important;
+        user-select: none;
+        pointer-events: none;
       }
 
       &:focus-within:has(textarea:focus-visible),
