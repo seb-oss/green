@@ -111,6 +111,18 @@ input:user-valid {
       transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
       block-size: max-content;
       min-block-size: 56px;
+      outline-style: solid;
+      outline-offset: 2px;
+      outline-width: 1px;
+      outline-color: transparent;
+
+      &:focus-within {
+        outline-color: hsla(60, 4%, 50%, 0.4);
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none;
+      }
 
       &:hover {
         box-shadow: 0 2px 0 currentColor;

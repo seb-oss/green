@@ -104,7 +104,7 @@
   transition: var(--gds-button-transition);
 
   &:focus {
-    outline-color: var(--gds-button-color-outline);
+    outline-color: var(--gds-color-black);
     outline-offset: 2px;
     outline-style: solid;
     outline-width: 2px;
