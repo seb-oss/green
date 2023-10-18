@@ -172,7 +172,11 @@
   }
 
   &:focus {
-    outline-color: var(--gds-button-color-border);
+    outline-color: var(--gds-color-green-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
@@ -190,7 +194,11 @@
   }
 
   &:focus {
-    outline-color: var(--gds-button-color-border);
+    outline-color: var(--gds-color-green-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
@@ -211,6 +219,10 @@
 
   &:focus {
     outline-color: var(--gds-color-green-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
@@ -232,6 +244,10 @@
 
   &:focus {
     outline-color: var(--gds-color-red-25);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
@@ -250,6 +266,10 @@
 
   &:focus {
     outline-color: var(--gds-color-red-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
@@ -270,6 +290,10 @@
 
   &:focus {
     outline-color: var(--gds-color-red-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
   }
 }
 
