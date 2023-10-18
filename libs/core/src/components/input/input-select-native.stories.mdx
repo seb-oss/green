@@ -1,0 +1,37 @@
+import '../../tokens/tokens.css'
+import { inspector } from '../../utils/tools/inspector/inspector'
+import {
+  GdsButton,
+  GdsInput,
+  GdsBadge,
+  GdsInputHelper,
+  GdsIcon,
+} from '../../../../../dist/libs/core/src'
+
+<Meta title="Components/Input/Select Native" />
+
+# Select
+
+<gds-main>
+  <div>
+    <gds-input
+      label="Select label"
+      id="test"
+      pattern="[a-z]+"
+      type="select-native"
+      minlength="3"
+      name="test"
+      required
+    >
+      <gds-button
+        variant="circle tertiary"
+        data-label="test"
+        effect="ripple"
+        size="small"
+        slot="trail"
+      >
+        <gds-icon name="chevron-down" slot="circle" />
+      </gds-button>
+    </gds-input>
+  </div>
+</gds-main>

@@ -168,7 +168,7 @@ export class GdsInput extends LitElement {
     };
 
     const inputType = this.getAttribute('type')?.toLowerCase() || '';
-    const validInputTypes = ['text', 'textarea', 'select', 'duo'];
+    const validInputTypes = ['text', 'textarea', 'select', 'select-native', 'duo'];
     const hasInput = validInputTypes.includes(inputType);
   
     return html`
@@ -193,7 +193,6 @@ export class GdsInput extends LitElement {
             rows="${rows || '1'}"
             spellcheck="false"></textarea>
         ` : inputType === 'select' ? html`
-        <select> <option>asdas</option> </select>
           <input 
             part="input" 
             type="text" 
@@ -210,6 +209,27 @@ export class GdsInput extends LitElement {
             value="Selected item"
             aria-expanded="false" 
             aria-disabled="false">
+        ` : inputType === 'select-native' ? html`
+          <select id="input" title="test">
+            <option disabled selected hidden>Select your option</option>
+            <optgroup label="Group 1">
+              <option>Option Slot 1</option>
+              <option>Option Slot 2</option>
+              <option>Option Slot 3</option>
+            </optgroup>
+            <optgroup label="Group 2">
+              <option>Option Slot 3</option>
+              <option>Option Slot 4</option>
+              <option>Option Slot 5</option>
+            </optgroup>
+          </select>
+          <!-- <select multiple="true" placeholder=" ">
+            <option value="" disabled selected hidden>Select your option</option>
+            <option>Option Slot 1</option>
+            <option>Option Slot 2</option>
+            <option>Option Slot 3</option>
+            <option>Option Slot 4</option>
+          </select> -->
         ` : inputType === 'duo' ? html`
           <div class="gds-input-core-base-duo">
             <input 

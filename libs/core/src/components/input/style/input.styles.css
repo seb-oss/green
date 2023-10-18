@@ -157,6 +157,7 @@ input:user-valid {
         pointer-events: none;
       }
 
+      &:focus-within:has(select),
       &:focus-within:has(textarea:focus-visible),
       &:focus-within:has(input:focus-visible),
       &:focus-within:has([readonly]) {
@@ -164,6 +165,7 @@ input:user-valid {
         box-shadow: none;
       }
 
+      &:has(select option:not([hidden]):checked),
       &:focus-within:has(textarea:placeholder-shown),
       &:focus-within:has(input:placeholder-shown) {
         box-shadow: none;
@@ -171,6 +173,7 @@ input:user-valid {
       }
 
       &:focus-within,
+      &:has(select option:not([hidden]):checked),
       &:has(textarea:not(:placeholder-shown)),
       &:has(input:not(:placeholder-shown, [readonly])) {
         border-color: currentColor;
@@ -183,6 +186,7 @@ input:user-valid {
               translateY(calc(0px - var(--gds-input-label-translate)))
             );
           }
+          & select,
           & input,
           & textarea {
             opacity: 1;
@@ -208,6 +212,7 @@ input:user-valid {
         border-color: var(--gds-color-green-50);
         color: var(--gds-color-green-50);
 
+        & select,
         & textare,
         & input {
           color: currentColor;
@@ -309,6 +314,7 @@ input:user-valid {
           }
         }
 
+        & select,
         & input,
         & textarea {
           appearance: none;
