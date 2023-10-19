@@ -45,6 +45,8 @@ input:user-valid {
       --gds-input-border-width: 2px;
       --gds-input-fs: 16px;
       --gds-input-lh: 1.25;
+      /* --gds-input-lh: 1.333333333; */
+      /* --gds-input-lh: 1.25; */
       --gds-input-core-base-fs: 16px;
       --gds-input-core-base-focus-fs: 12px;
       --gds-input-core-min-block-size: 56px;
@@ -181,16 +183,17 @@ input:user-valid {
         .gds-input-core-base {
           & label {
             font-size: var(--gds-input-core-base-focus-fs);
-            top: 0;
-            transform: translateY(
-              translateY(calc(0px - var(--gds-input-label-translate)))
-            );
+            height: var(--gds-input-core-base-focus-fs);
           }
           & select,
           & input,
           & textarea {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(10px);
+
+            :host([rows]) & {
+              /* padding-block-end: 10px; */
+            }
           }
         }
       }
@@ -290,27 +293,26 @@ input:user-valid {
       /* Base */
 
       .gds-input-core-base {
+        display: flex;
+        flex-direction: column;
         position: relative;
         width: 100%;
+        min-block-size: 32px;
 
         & label {
+          display: flex;
           align-items: center;
           background-color: transparent;
-          display: block;
-          font-size: var(--gds-input-core-base-fs);
-          height: max-content;
-          inset: 0;
-          line-height: var(--gds-input-lh);
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          transition: var(--gds-input-transition);
           width: 100%;
+          height: 32px;
+          position: absolute;
+          line-height: 1;
+          font-size: var(--gds-input-core-base-fs);
+          transition: var(--gds-input-transition);
+          /* background-color: aqua; */
 
           :host([rows]) & {
-            inset: unset;
-            top: var(--gds-input-label-translate);
-            transform: translateY(0);
+            /* background-color: orange; */
           }
         }
 
@@ -321,22 +323,22 @@ input:user-valid {
           background-color: transparent;
           border: 0;
           border-radius: 0;
-          border-radius: 0;
           display: flex;
           font-family: inherit;
-          font-size: var(--gds-input-fs);
-          height: 100%;
+          overflow: hidden;
           margin: unset;
-          opacity: 0;
           outline: none;
           padding: unset;
-          padding-top: var(--gds-input-core-base-focus-fs);
-          transform: translateY(var(--gds-input-label-translate));
-          transition: var(--gds-input-transition);
           width: 100%;
-          line-height: var(--gds-input-lh);
+          height: max-content;
           caret-color: accent;
           caret-shape: underscore;
+          box-sizing: border-box;
+          font-size: var(--gds-input-fs);
+          line-height: var(--gds-input-lh);
+          transition: var(--gds-input-transition);
+          opacity: 0;
+          /* background-color: teal; */
 
           &::placeholder {
             font-family: inherit;
@@ -365,11 +367,11 @@ input:user-valid {
           transition: unset;
           min-height: calc(1lh * var(--gds-textarea-lines));
           max-height: calc(1lh * var(--gds-textarea-lines));
+          /* background-color: rgb(10, 207, 141); */
 
           :host([rows]) & {
-            padding-block-start: calc(
-              var(--gds-input-core-base-focus-fs) + 10px
-            );
+            transform: translateY(10px);
+            /* background-color: orangered; */
           }
         }
       }
