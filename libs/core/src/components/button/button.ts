@@ -14,7 +14,7 @@ import { html } from 'utils/helpers/custom-element-scoping'
  * @documentation https://seb.io/docs/component/button
  * @status beta
  * @since 1.0.0
- * 
+ *
  * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
  * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
  * @slot label - A slot that allows text to be displayed as the button label.
@@ -117,11 +117,12 @@ export class GdsButton extends LitElement {
   }
 
   slotSplit() {
-    if (!this.variant || !this.variant.includes('split')) { return ''}
+    if (!this.variant || !this.variant.includes('split')) {
+      return ''
+    }
     const slotElement = html`<slot name="split" gds-allow="gds-icon"></slot>`
     const rippleElement = this.effect ? html`<gds-ripple></gds-ripple>` : ''
-    const buttonElement = html`
-    <button 
+    const buttonElement = html` <button
       ?disabled="${this.disabled}"
       aria-label="${this.textContent}"
       ?aria-pressed="${this.ariaPressed}"
@@ -139,22 +140,9 @@ export class GdsButton extends LitElement {
   }
 
   render() {
-    if (this.variant.includes('circle')) { 
+    if (this.variant.includes('circle')) {
       const content = html`${this.slotCircle()}${this.slotEffect()}`
-      return html`
-      <button
-        ?disabled="${this.disabled}"
-        aria-label="${this.textContent}"
-        ?aria-pressed="${this.ariaPressed}"
-        ?aria-expanded="${this.ariaExpanded}"
-        tabindex="0"
-        @click="${effectRipple}"
-      >${content}</button>`
-
-    } else {
-    const content = html`${this.slotLead()}${this.slotLabel()}${this.slotTrail()}${this.slotEffect()}`
-    return html`
-      <button
+      return html` <button
         ?disabled="${this.disabled}"
         aria-label="${this.textContent}"
         ?aria-pressed="${this.ariaPressed}"
@@ -162,9 +150,22 @@ export class GdsButton extends LitElement {
         tabindex="0"
         @click="${effectRipple}"
       >
-        ${content}</button
-      >${this.slotSplit()}
-    `
+        ${content}
+      </button>`
+    } else {
+      const content = html`${this.slotLead()}${this.slotLabel()}${this.slotTrail()}${this.slotEffect()}`
+      return html`
+        <button
+          ?disabled="${this.disabled}"
+          aria-label="${this.textContent}"
+          ?aria-pressed="${this.ariaPressed}"
+          ?aria-expanded="${this.ariaExpanded}"
+          tabindex="0"
+          @click="${effectRipple}"
+        >
+          ${content}</button
+        >${this.slotSplit()}
+      `
     }
   }
 }
