@@ -58,9 +58,9 @@ export class GdsRadio extends LitElement {
 
   render() { 
     return html`
-      <div class="gds-radio">
+      <label class="gds-radio">
         <input id="radio" type="radio">
-      </div>
+      </label>
       <label for="radio">${this.textContent}</label>
   ` }
 }
