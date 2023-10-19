@@ -6,7 +6,7 @@ import '../../primitives/ripple/ripple'
 import { effectRipple } from '../../utils/ripple/ripple'
 import styles from './style/button.styles.scss'
 
-import { html } from 'utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from 'utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-button
@@ -46,7 +46,7 @@ import { html } from 'utils/helpers/custom-element-scoping'
  * <gds-button variant="circle">Click me</gds-button>
  */
 
-@customElement('gds-button')
+@gdsCustomElement('gds-button')
 export class GdsButton extends LitElement {
   static styles = unsafeCSS(styles)
 
