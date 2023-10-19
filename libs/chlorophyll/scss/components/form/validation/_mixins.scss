@@ -76,6 +76,9 @@ $_border-width: var(--sg-border-width);
     @include common.padding(0);
     @include common.margin(0);
     border: 0;
+    > div {
+      width: fit-content;
+    }
 
     &.is-valid > div {
       border: $_border-width solid tokens.$intent-success-background;
