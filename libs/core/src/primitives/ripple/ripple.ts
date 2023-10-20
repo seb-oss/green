@@ -2,6 +2,7 @@ import { LitElement, html, unsafeCSS } from 'lit'
 
 import styles from './ripple.styles.scss'
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { query } from 'lit/decorators.js'
 
 @gdsCustomElement('gds-ripple')
 export class Ripple extends LitElement {
@@ -9,14 +10,24 @@ export class Ripple extends LitElement {
     return unsafeCSS(styles)
   }
 
-  open = true
-
-  static properties = {
-    open: { type: String, reflect: true },
-  }
+  @query('div') private _rippleEl?: HTMLDivElement
 
   render() {
-    // console.log('is it working')
     return html`<div></div>`
+  }
+
+  onclick = (e: MouseEvent) => {
+    const target = e.target as HTMLElement
+    const rect = target.getBoundingClientRect()
+    const rippleEl = this._rippleEl
+
+    if (rippleEl) {
+      rippleEl.classList.remove('gds-ripple-effect')
+      this.style.setProperty('--gds-ripple-top', `${e.clientY - rect.top}px`)
+      this.style.setProperty('--gds-ripple-left', `${e.clientX - rect.left}px`)
+      setTimeout(() => {
+        rippleEl.classList.add('gds-ripple-effect')
+      }, 20)
+    }
   }
 }
