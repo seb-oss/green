@@ -9,8 +9,7 @@
 }
 
 :host(:hover) {
-  background-color: #199be3;
-  color: #fff;
+  background-color: var(--gds-ref-pallet-base300);
 }
 
 :host(:focus) {
