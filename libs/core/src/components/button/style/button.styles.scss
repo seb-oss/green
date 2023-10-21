@@ -44,7 +44,7 @@
     @include variant-split;
   }
 
-  :host([variant*='circle']) {
+  button.circle {
     @include variant-circle;
   }
 }
