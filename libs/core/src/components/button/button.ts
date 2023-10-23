@@ -5,8 +5,15 @@ import '../icon/icon'
 import '../../primitives/ripple/ripple'
 import styles from './style/button.styles.scss'
 
-import { gdsCustomElement, html } from 'utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html as customElementHtml,
+} from 'utils/helpers/custom-element-scoping'
+import { stripWhitespace } from 'utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
+
+// Create a customized `html` template tag that strips whitespace and applies custom element scoping.
+const html = stripWhitespace(customElementHtml)
 
 /**
  * @element gds-button
@@ -61,14 +68,13 @@ export class GdsButton extends LitElement {
     constrainSlots(this)
   }
 
+  // Check if the button is an icon button.
   #mainSlotChange = () => {
     const assignedNodes = this._mainSlot?.assignedNodes() ?? []
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
       assignedNodes.some((node) => node.nodeName === 'GDS-ICON')
-
-    console.log(this.#isIconButton, assignedNodes)
 
     this.requestUpdate()
   }
