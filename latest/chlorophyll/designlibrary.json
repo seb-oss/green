@@ -46,22 +46,22 @@
     }
   },
   {
-    "id": "components-form-elements-textarea--textarea",
-    "name": "Textarea",
-    "title": "Components/Form/Elements/Textarea",
-    "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
-    }
-  },
-  {
     "id": "components-form-elements-stepper--stepper",
     "name": "Stepper",
     "title": "Components/Form/Elements/Stepper",
     "customParams": {
       "componentIds": [
         "component-stepper"
+      ]
+    }
+  },
+  {
+    "id": "components-form-elements-textarea--textarea",
+    "name": "Textarea",
+    "title": "Components/Form/Elements/Textarea",
+    "customParams": {
+      "componentIds": [
+        "component-input"
       ]
     }
   },
