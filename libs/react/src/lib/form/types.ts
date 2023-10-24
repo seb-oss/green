@@ -20,6 +20,7 @@ export interface NumberInputProps extends TextInputProps {
 }
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
+  defaultChecked?: boolean
   testId?: string
   validator?: IValidator
 }

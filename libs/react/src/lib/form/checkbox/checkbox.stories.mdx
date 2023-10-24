@@ -15,7 +15,22 @@ Simple Checkbox component
     parameters={{
       componentIds: ['component-checkbox']
     }}
-    args={{ label: 'Checkbox input', checked: true }}>
+    args={{ label: 'Checkbox input', defaultChecked: false, onChange: (event) => {console.log(event)} }}>
+    {CheckboxTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Default Checked
+
+Simple Checkbox component
+
+<Canvas>
+  <Story
+    name="DefaultChecked"
+    parameters={{
+      componentIds: ['component-checkbox']
+    }}
+    args={{ label: 'Checkbox input', defaultChecked: true, onChange: (event) => {console.log(event)} }}>
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
@@ -50,9 +65,22 @@ Simple Checkbox component
            validator: {
              indicator: 'error',
              message: 'Error'
-           }}}
+           }
+         }}
   >
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
+
+## Props
+
+| Prop              | Type                                                    | Description                                                                       |
+| :---------------- | :------------------------------------------------------ | :-------------------------------------------------------------------------------- |
+| label             | `string`                                                | The label of the checkbox                                                         |
+| defaultChecked?   | `boolean`                                               | The state of the component when it renders first time                             |
+| onChange?         | `(e: React.FormEvent<HTMLInputElement>) => void`        | A handler function that takes the event and can act on it                         |
+| validator?        | `IValidator`                                            | An object used to render the validation status for the component                  |
+| testId?           | `string`                                                | A test id that will be placed in the `data-testid` attribute on the input element |
+
+
 
