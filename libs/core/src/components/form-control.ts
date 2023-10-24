@@ -55,10 +55,6 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.form
   }
 
-  get type() {
-    return getUnscopedTagName(this.localName) || 'gds-form-control'
-  }
-
   get validity() {
     return this.#internals.validity
   }

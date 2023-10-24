@@ -16,7 +16,7 @@ export class Ripple extends LitElement {
     return html`<div></div>`
   }
 
-  onclick = (e: MouseEvent) => {
+  onmousedown = (e: MouseEvent) => {
     const target = e.target as HTMLElement
     const rect = target.getBoundingClientRect()
     const rippleEl = this._rippleEl

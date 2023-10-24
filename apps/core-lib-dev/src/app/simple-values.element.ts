@@ -1,6 +1,7 @@
 import {
   GdsDropdown,
   GdsOption,
+  GdsButton,
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '@sebgroup/green-core'
@@ -20,35 +21,34 @@ export class SimpleValues extends HTMLElement {
     setLocale('sv')
 
     this.innerHTML = html`
-      <div class="wrapper">
-        <h1 class="mb-5">Green Core test app</h1>
-        <div class="card">
-          <form id="my-form">
-            <gds-form-validator></gds-form-validator>
+      <div class="card">
+        <form id="my-form">
+          <gds-form-validator></gds-form-validator>
 
-            <gds-dropdown
-              searchable
-              multiple
-              name="dropdown"
-              id="dropdown"
-              label="Select a value"
-              required
-            >
-              <span slot="sub-label">Additional <i>label</i> information</span>
-              <span slot="message">A message guiding the user</span>
+          <gds-dropdown
+            searchable
+            multiple
+            name="dropdown"
+            id="dropdown"
+            label="Select a value"
+            required
+          >
+            <span slot="sub-label">Additional <i>label</i> information</span>
+            <span slot="message">A message guiding the user</span>
 
-              <gds-option isplaceholder>Select value</gds-option>
-              <gds-option value="v1">Value 1</gds-option>
-              <gds-option value="v2">Value 2</gds-option>
-              <gds-option value="v3">Value 3</gds-option>
-            </gds-dropdown>
+            <gds-option isplaceholder>Select value</gds-option>
+            <gds-option value="v1">Value 1</gds-option>
+            <gds-option value="v2">Value 2</gds-option>
+            <gds-option value="v3">Value 3</gds-option>
+          </gds-dropdown>
 
-            <input name="my-text" />
+          <input name="my-text" />
 
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
-          </form>
-        </div>
+          <gds-button type="submit" name="the-button" value="derp"
+            >Submit</gds-button
+          >
+          <gds-button type="reset">Reset</gds-button>
+        </form>
       </div>
     `
 

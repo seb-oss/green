@@ -1,37 +1,29 @@
 @use './button.mixins.scss' as *;
-@layer tokens, a11y, core, variants, sizes, sets, slotted;
+@layer tokens, a11y, core, variants, sizes, sets;
 
 @layer tokens {
   :host {
     @include tokens;
     @include containment;
-  }
-
-  :host(:not([slot])) {
     contain: layout;
-    container-name: gds-button;
-    container-type: inline-size;
+    display: inline-block;
     isolation: isolate;
-    max-width: 20ch;
-    width: auto;
+
+    max-width: 100%;
   }
 }
 
 @layer a11y {
-  // Accessability
   @include tokens-a11y;
 }
 
 @layer core {
-  // Core
   button {
     @include core;
   }
 }
 
 @layer variants {
-  // Variants
-
   :host([variant*='secondary']) button {
     @include secondary;
   }
@@ -50,7 +42,6 @@
 }
 
 @layer sizes {
-  // Sizes
   :host([size='small']) button {
     @include size-small;
   }
@@ -59,55 +50,34 @@
     @include size-medium;
   }
 
-  button,
   :host([size='large']) button {
     @include size-large;
   }
 }
 
 @layer sets {
-  // Sets
-
-  :host([variant='primary'][set='positive']) button,
-  :host([variant='split primary'][set='positive']) button,
-  :host([variant='circle primary'][set='positive']) button {
+  :host([variant='primary'][set='positive']) button {
     @include primary-positive;
   }
 
-  :host([variant='secondary'][set='positive']) button,
-  :host([variant='split secondary'][set='positive']) button,
-  :host([variant='circle secondary'][set='positive']) button {
+  :host([variant='secondary'][set='positive']) button {
     @include secondary-positive;
   }
 
-  :host([variant='tertiary'][set='positive']) button,
-  :host([variant='split tertiary'][set='positive']) button,
-  :host([variant='circle tertiary'][set='positive']) button {
+  :host([variant='tertiary'][set='positive']) button {
     @include tertiary-positive;
   }
 
   // negative
-  :host([variant='primary'][set='negative']) button,
-  :host([variant='split primary'][set='negative']) button,
-  :host([variant='circle primary'][set='negative']) button {
+  :host([variant='primary'][set='negative']) button {
     @include primary-negative;
   }
 
-  :host([variant='secondary'][set='negative']) button,
-  :host([variant='split secondary'][set='negative']) button,
-  :host([variant='circle secondary'][set='negative']) button {
+  :host([variant='secondary'][set='negative']) button {
     @include secondary-negative;
   }
 
-  :host([variant='tertiary'][set='negative']) button,
-  :host([variant='split tertiary'][set='negative']) button,
-  :host([variant='circle tertiary'][set='negative']) button {
+  :host([variant='tertiary'][set='negative']) button {
     @include tertiary-negative;
   }
-}
-
-@layer slotted {
-  // Slotted
-  // ::slotted(svg) {
-  // }
 }

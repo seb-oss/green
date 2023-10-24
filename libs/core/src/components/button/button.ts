@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS } from 'lit'
+import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { constrainSlots } from 'utils/helpers'
 import '../icon/icon'
@@ -11,6 +11,7 @@ import {
 } from 'utils/helpers/custom-element-scoping'
 import { stripWhitespace } from 'utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
+import { GdsFormControlElement } from 'components/form-control'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -27,7 +28,7 @@ const html = stripWhitespace(customElementHtml)
  * @event click - Fired when the button is clicked.
  */
 @gdsCustomElement('gds-button')
-export class GdsButton extends LitElement {
+export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = unsafeCSS(styles)
 
   static shadowRootOptions: ShadowRootInit = {
@@ -42,22 +43,28 @@ export class GdsButton extends LitElement {
   disabled = false
 
   /**
+   * The type of the button.
+   */
+  @property({ reflect: true })
+  type?: HTMLButtonElement['type']
+
+  /**
    * The variant of the button. Defaults to "primary".
    */
-  @property({ type: String, reflect: true })
+  @property({ reflect: true })
   variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   /**
    * Defines which set the button belongs to. Defaults to "neutral".
    */
-  @property({ type: String, reflect: true })
+  @property({ reflect: true })
   set: 'neutral' | 'positive' | 'negative' = 'neutral'
 
   /**
    * Sets the size of the button. Defaults to "small".
    */
-  @property({ type: String, reflect: true })
-  size: 'small' | 'medium' | 'large' = 'small'
+  @property({ reflect: true })
+  size: 'small' | 'medium' | 'large' = 'medium'
 
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
 
@@ -79,9 +86,32 @@ export class GdsButton extends LitElement {
     this.requestUpdate()
   }
 
+  #handleClick = (e: MouseEvent) => {
+    this.dispatchEvent(
+      new CustomEvent('gds-click', {
+        bubbles: true,
+        composed: true,
+        detail: e,
+      })
+    )
+
+    if (this.form) {
+      if (this.type === 'submit') {
+        this.form.requestSubmit()
+      } else if (this.type === 'reset') {
+        this.form.reset()
+      }
+    }
+  }
+
   render() {
     return html`
-      <button class="${classMap({ circle: this.#isIconButton })}">
+      <button
+        class="${classMap({ circle: this.#isIconButton })}"
+        ?type="${this.type}"
+        ?disabled="${this.disabled}"
+        @click="${this.#handleClick}"
+      >
         <slot name="lead" gds-allow="gds-icon"></slot>
         <slot
           @slotchange=${this.#mainSlotChange}
