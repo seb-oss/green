@@ -22,8 +22,8 @@ export class AppElement extends HTMLElement {
     this.innerHTML = html`
       <div class="wrapper">
         <h1 class="mb-5">Green Core test app</h1>
-        <!-- <simple-values></simple-values> -->
-        <complex-values></complex-values>
+        <simple-values></simple-values>
+        <!-- <complex-values></complex-values> -->
       </div>
     `
   }
