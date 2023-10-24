@@ -7,8 +7,6 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
 # Checkbox
 
-Simple Checkbox component
-
 <Canvas>
   <Story
     name="Default"
@@ -22,7 +20,7 @@ Simple Checkbox component
 
 ## Default Checked
 
-Simple Checkbox component
+You can set a `defaultChecked` state for the component when it renders. Then use `onChange` to update the state for your checkbox.
 
 <Canvas>
   <Story
@@ -41,18 +39,14 @@ Simple Checkbox component
   <form>
     <Checkbox label="Normal unchecked" />
     <Checkbox label="Normal checked" defaultChecked />
-  </form>
-  <form>
-    <Checkbox label="Valid unchecked" className="is-valid" />
-    <Checkbox label="Valid checked" className="is-valid" defaultChecked />
-  </form>
-  <form>
-    <Checkbox label="Invalid unchecked" className="is-invalid" />
-    <Checkbox label="Invalid checked" className="is-invalid" defaultChecked />
-  </form>
-  <form>
-    <Checkbox label="Disabled unchecked" disabled />
-    <Checkbox label="Disabled checked" disabled defaultChecked />
+    <Checkbox label="Invalid unchecked" validator={{
+             indicator: 'error',
+             message: 'Invalid'
+           }} />
+    <Checkbox label="Invalid checked" validator={{
+             indicator: 'error',
+             message: 'Invalid'
+           }} defaultChecked />
   </form>
 </Canvas>
 
