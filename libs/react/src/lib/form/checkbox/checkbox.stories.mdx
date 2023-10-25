@@ -13,14 +13,33 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
     parameters={{
       componentIds: ['component-checkbox']
     }}
-    args={{ label: 'Checkbox input', defaultChecked: false, onChange: (event) => {console.log(event)} }}>
+    args={{ label: 'Checkbox input', defaultChecked: false }}>
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
 
+## Checkbox state
+
+You control the state of the checkbox by setting the `checked` prop to true or false.
+
+```tsx
+function MyComponent () {
+  const [isChecked, setIsChecked] = useState<boolean>()
+
+  return (
+    <Checkbox
+      label="Example label"
+      checked={isChecked}
+      onChange={(event) => { setIsChecked(event.target.checked) }
+    />
+  )
+}
+
+```
+
 ## Default Checked
 
-You can set a `defaultChecked` state for the component when it renders. Then use `onChange` to update the state for your checkbox.
+If you don't use the `checked` prop and `onChange` handler. You can still control the checked state on initial render with `defaultChecked`. Doing this you probably get the checked value at a later stage, like submitting a form.
 
 <Canvas>
   <Story
@@ -28,7 +47,7 @@ You can set a `defaultChecked` state for the component when it renders. Then use
     parameters={{
       componentIds: ['component-checkbox']
     }}
-    args={{ label: 'Checkbox input', defaultChecked: true, onChange: (event) => {console.log(event)} }}>
+    args={{ label: 'Checkbox input', defaultChecked: true}}>
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
@@ -38,7 +57,7 @@ You can set a `defaultChecked` state for the component when it renders. Then use
 <Canvas>
   <form>
     <Checkbox label="Normal unchecked" />
-    <Checkbox label="Normal checked" defaultChecked />
+    <Checkbox label="Normal checked" checked />
     <Checkbox label="Invalid unchecked" validator={{
              indicator: 'error',
              message: 'Invalid'
@@ -46,7 +65,7 @@ You can set a `defaultChecked` state for the component when it renders. Then use
     <Checkbox label="Invalid checked" validator={{
              indicator: 'error',
              message: 'Invalid'
-           }} defaultChecked />
+           }} checked />
   </form>
 </Canvas>
 
@@ -71,7 +90,8 @@ You can set a `defaultChecked` state for the component when it renders. Then use
 | Prop              | Type                                                    | Description                                                                       |
 | :---------------- | :------------------------------------------------------ | :-------------------------------------------------------------------------------- |
 | label             | `string`                                                | The label of the checkbox                                                         |
-| defaultChecked?   | `boolean`                                               | The state of the component when it renders first time                             |
+| checked?          | `boolean`                                               | Use this prop to control the checked state of the checkbox                        |
+| defaultChecked?   | `boolean`                                               | Use this if you don't control the checkbox with the `checked` prop but still want the checkbox to be checked on render.                     |
 | onChange?         | `(e: React.FormEvent<HTMLInputElement>) => void`        | A handler function that takes the event and can act on it                         |
 | validator?        | `IValidator`                                            | An object used to render the validation status for the component                  |
 | testId?           | `string`                                                | A test id that will be placed in the `data-testid` attribute on the input element |

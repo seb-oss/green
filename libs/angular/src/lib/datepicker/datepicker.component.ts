@@ -105,7 +105,9 @@ export class NggDatepickerComponent
   dp: Datepicker | undefined
   private _data: DatepickerData | undefined
 
-  constructor(private _cdr: ChangeDetectorRef) {}
+  constructor(private _cdr: ChangeDetectorRef) {
+    console.log('Hello from dropdown')
+  }
 
   writeValue(value: any): void {
     this.value = value
@@ -128,6 +130,7 @@ export class NggDatepickerComponent
   }
 
   onDateChange(value: string) {
+    console.log(value)
     const newDate = new Date(value)
     // Only pass valid date to date picker
     if (!isNaN(newDate.getTime())) {
@@ -166,6 +169,7 @@ export class NggDatepickerComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHANGES!!!! ', changes)
     //ignore changes until datepicker has been initialised in ngAfterViewInit
     if (!this.dp) return
 

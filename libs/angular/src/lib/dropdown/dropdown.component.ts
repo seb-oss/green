@@ -153,6 +153,7 @@ export class NggDropdownComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
     if (
       this.handler &&
       (changes.id || changes.texts || changes.loop || changes.options)
