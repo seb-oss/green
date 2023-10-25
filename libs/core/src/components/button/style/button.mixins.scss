@@ -299,6 +299,77 @@
   }
 }
 
+// Accent
+@mixin primary-accent() {
+  --gds-button-color-bg: hsla(40, 89%, 64%, 1);
+  --gds-button-color-text: hsla(60, 4%, 20%, 1);
+  --gds-button-color-border: hsla(40, 89%, 64%, 1);
+
+  &:hover {
+    --gds-button-color-bg: hsla(39, 68%, 57%, 1);
+    --gds-button-color-border: hsla(39, 68%, 57%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: hsla(40, 53%, 51%, 1);
+    --gds-button-color-border: hsla(40, 53%, 51%, 1);
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-red-25);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}
+
+@mixin secondary-accent() {
+  --gds-button-color-bg: var(--gds-color-text-inverse);
+  --gds-button-color-text: hsla(60, 4%, 20%, 1);
+  --gds-button-color-border: hsla(40, 89%, 64%, 1);
+
+  &:hover {
+    --gds-button-color-bg: var(--gds-color-red-95);
+  }
+
+  &:active {
+    --gds-button-color-bg: var(--gds-color-text-inverse);
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-red-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}
+
+@mixin tertiary-accent() {
+  --gds-button-color-bg: transparent;
+  --gds-button-color-text: hsla(60, 4%, 20%, 1);
+  --gds-button-color-border: transparent;
+
+  &:hover {
+    --gds-button-color-bg: hsla(39, 68%, 57%, 1);
+    --gds-button-color-border: hsla(39, 68%, 57%, 1);
+  }
+
+  &:active {
+    --gds-button-color-bg: transparent;
+    --gds-button-color-border: transparent;
+  }
+
+  &:focus {
+    outline-color: var(--gds-color-red-40);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}
+
 // Sizes
 
 @mixin size-small() {

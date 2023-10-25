@@ -80,4 +80,17 @@
   :host([variant='tertiary'][set='negative']) button {
     @include tertiary-negative;
   }
+
+  // accent
+  :host([variant='primary'][set='accent']) button {
+    @include primary-accent;
+  }
+
+  :host([variant='secondary'][set='accent']) button {
+    @include secondary-accent;
+  }
+
+  :host([variant='tertiary'][set='accent']) button {
+    @include tertiary-accent;
+  }
 }
