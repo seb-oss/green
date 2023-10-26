@@ -11,30 +11,30 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
   <Story
     name="Default"
     parameters={{
-      componentIds: ['component-checkbox']
+      componentIds: ['component-checkbox'],
     }}
-    args={{ label: 'Checkbox input', defaultChecked: false }}>
+    args={{ label: 'Checkbox input', defaultChecked: false }}
+  >
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
 
-## Checkbox state
+## Checked state
 
-You control the state of the checkbox by setting the `checked` prop to true or false.
+You control the state of the checkbox by setting the `checked` prop to true or false. You can use the `onChange` handler to listen to user input and update state in your app accordingly.
 
 ```tsx
-function MyComponent () {
-  const [isChecked, setIsChecked] = useState<boolean>()
+function RobotCheckComponent () {
+  const [isRobot, setIsRobot] = useState<boolean>()
 
   return (
     <Checkbox
-      label="Example label"
-      checked={isChecked}
-      onChange={(event) => { setIsChecked(event.target.checked) }
+      label="Check this if you are a robot"
+      checked={isRobot}
+      onChange={(event) => { setIsRobot(event.target.checked) }
     />
   )
 }
-
 ```
 
 ## Default Checked
@@ -45,9 +45,10 @@ If you don't use the `checked` prop and `onChange` handler. You can still contro
   <Story
     name="DefaultChecked"
     parameters={{
-      componentIds: ['component-checkbox']
+      componentIds: ['component-checkbox'],
     }}
-    args={{ label: 'Checkbox input', defaultChecked: true}}>
+    args={{ label: 'Checkbox input', defaultChecked: true }}
+  >
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
@@ -58,28 +59,36 @@ If you don't use the `checked` prop and `onChange` handler. You can still contro
   <form>
     <Checkbox label="Normal unchecked" />
     <Checkbox label="Normal checked" checked />
-    <Checkbox label="Invalid unchecked" validator={{
-             indicator: 'error',
-             message: 'Invalid'
-           }} />
-    <Checkbox label="Invalid checked" validator={{
-             indicator: 'error',
-             message: 'Invalid'
-           }} checked />
+    <Checkbox
+      label="Invalid unchecked"
+      validator={{
+        indicator: 'error',
+        message: 'Invalid',
+      }}
+    />
+    <Checkbox
+      label="Invalid checked"
+      validator={{
+        indicator: 'error',
+        message: 'Invalid',
+      }}
+      checked
+    />
   </form>
 </Canvas>
 
 ## Validation
 
 <Canvas>
-  <Story name="invalid"
-         args={{
-           label: 'Invalid',
-           validator: {
-             indicator: 'error',
-             message: 'Error'
-           }
-         }}
+  <Story
+    name="invalid"
+    args={{
+      label: 'Invalid',
+      validator: {
+        indicator: 'error',
+        message: 'Error',
+      },
+    }}
   >
     {CheckboxTemplate.bind({})}
   </Story>
@@ -87,14 +96,11 @@ If you don't use the `checked` prop and `onChange` handler. You can still contro
 
 ## Props
 
-| Prop              | Type                                                    | Description                                                                       |
-| :---------------- | :------------------------------------------------------ | :-------------------------------------------------------------------------------- |
-| label             | `string`                                                | The label of the checkbox                                                         |
-| checked?          | `boolean`                                               | Use this prop to control the checked state of the checkbox                        |
-| defaultChecked?   | `boolean`                                               | Use this if you don't control the checkbox with the `checked` prop but still want the checkbox to be checked on render.                     |
-| onChange?         | `(e: React.FormEvent<HTMLInputElement>) => void`        | A handler function that takes the event and can act on it                         |
-| validator?        | `IValidator`                                            | An object used to render the validation status for the component                  |
-| testId?           | `string`                                                | A test id that will be placed in the `data-testid` attribute on the input element |
-
-
-
+| Prop            | Type                                             | Description                                                                                                             |
+| :-------------- | :----------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| label           | `string`                                         | The label of the checkbox                                                                                               |
+| checked?        | `boolean`                                        | Use this prop to control the checked state of the checkbox                                                              |
+| defaultChecked? | `boolean`                                        | Use this if you don't control the checkbox with the `checked` prop but still want the checkbox to be checked on render. |
+| onChange?       | `(e: React.FormEvent<HTMLInputElement>) => void` | A handler function that takes the event and can act on it                                                               |
+| validator?      | `IValidator`                                     | An object used to render the validation status for the component                                                        |
+| testId?         | `string`                                         | A test id that will be placed in the `data-testid` attribute on the input element                                       |
