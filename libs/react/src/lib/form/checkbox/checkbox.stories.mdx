@@ -37,22 +37,6 @@ function RobotCheckComponent () {
 }
 ```
 
-## Default Checked
-
-If you don't use the `checked` prop and `onChange` handler. You can still control the checked state on initial render with `defaultChecked`. Doing this you probably get the checked value at a later stage, like submitting a form.
-
-<Canvas>
-  <Story
-    name="DefaultChecked"
-    parameters={{
-      componentIds: ['component-checkbox'],
-    }}
-    args={{ label: 'Checkbox input', defaultChecked: true }}
-  >
-    {CheckboxTemplate.bind({})}
-  </Story>
-</Canvas>
-
 ## States and variants checkbox
 
 <Canvas>
@@ -96,11 +80,10 @@ If you don't use the `checked` prop and `onChange` handler. You can still contro
 
 ## Props
 
-| Prop            | Type                                             | Description                                                                                                             |
-| :-------------- | :----------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| label           | `string`                                         | The label of the checkbox                                                                                               |
-| checked?        | `boolean`                                        | Use this prop to control the checked state of the checkbox                                                              |
-| defaultChecked? | `boolean`                                        | Use this if you don't control the checkbox with the `checked` prop but still want the checkbox to be checked on render. |
-| onChange?       | `(e: React.FormEvent<HTMLInputElement>) => void` | A handler function that takes the event and can act on it                                                               |
-| validator?      | `IValidator`                                     | An object used to render the validation status for the component                                                        |
-| testId?         | `string`                                         | A test id that will be placed in the `data-testid` attribute on the input element                                       |
+| Prop       | Type                                             | Description                                                                       |
+| :--------- | :----------------------------------------------- | :-------------------------------------------------------------------------------- |
+| label      | `string`                                         | The label of the checkbox                                                         |
+| checked?   | `boolean`                                        | Use this prop to control the checked state of the checkbox                        |
+| onChange?  | `(e: React.FormEvent<HTMLInputElement>) => void` | A handler function that takes the event and can act on it                         |
+| validator? | `IValidator`                                     | An object used to render the validation status for the component                  |
+| testId?    | `string`                                         | A test id that will be placed in the `data-testid` attribute on the input element |
