@@ -145,16 +145,6 @@
     }
   },
   {
-    "id": "components-checkbox--default-checked",
-    "name": "DefaultChecked",
-    "title": "Components/Checkbox",
-    "customParams": {
-      "componentIds": [
-        "component-checkbox"
-      ]
-    }
-  },
-  {
     "id": "components-checkbox--invalid",
     "name": "invalid",
     "title": "Components/Checkbox",
