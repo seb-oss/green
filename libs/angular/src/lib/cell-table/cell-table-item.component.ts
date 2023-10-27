@@ -6,29 +6,26 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
   selector: '[nggCellTableItem]',
   template: `
     <ng-container [ngSwitch]="valueType">
-      <span role="cell" *ngSwitchCase="'string'">{{ row || '–' }}</span>
-      <span role="cell" *ngSwitchCase="'number'">{{
-        (row | number) || '–'
-      }}</span>
-      <span role="cell" *ngSwitchCase="'datetime'">{{
+      <span *ngSwitchCase="'string'">{{ row || '–' }}</span>
+      <span *ngSwitchCase="'number'">{{ (row | number) || '–' }}</span>
+      <span *ngSwitchCase="'datetime'">{{
         (row | date : 'HH:mm:ss') || '–'
       }}</span>
-      <span role="cell" *ngSwitchCase="'date'">{{
+      <span *ngSwitchCase="'date'">{{
         (row | date : 'YYYY-MM-dd') || '–'
       }}</span>
       <span
-        role="cell"
         *ngSwitchCase="'custom-html'"
         [innerHtml]="transformHTML(row) || '–'"
       ></span>
-      <span role="cell" *ngSwitchCase="'sign'" [ngClass]="getSignColor(row)">{{
+      <span *ngSwitchCase="'sign'" [ngClass]="getSignColor(row)">{{
         row || '–'
       }}</span>
-      <span role="cell" *ngSwitchCase="'pct'">{{ row || '–' }}</span>
-      <span role="cell" *ngSwitchCase="'streamSign'" [slidingUnderline]="row">{{
+      <span *ngSwitchCase="'pct'">{{ row || '–' }}</span>
+      <span *ngSwitchCase="'streamSign'" [slidingUnderline]="row">{{
         row || '–'
       }}</span>
-      <span role="cell" *ngSwitchDefault>–</span>
+      <span *ngSwitchDefault>–</span>
     </ng-container>
   `,
 })

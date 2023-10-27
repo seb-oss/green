@@ -1,54 +1,46 @@
-<div
-  #targetElement
-  class="cell-table-container"
-  role="table"
-  [ngClass]="className"
->
+<div #targetElement role="table" [ngClass]="className">
   <div class="cell-table-table d-flex flex-column">
     <div
       *ngFor="let row of rows; trackBy: trackByrowId"
-      role="row"
       (click)="handleClickRow(row)"
+      class="cell-table--row-wrapper"
     >
-      <div
-        class="cell-table-main-row border-bottom py-3 d-flex flex-row"
-        role="rowgroup"
-      >
-        <div class="flex-1 overflow-hidden item-container">
-          <!-- Main header -->
+      <div>
+        <div #items [class.overflow-reverse]="overflowReverse" role="rowgroup">
           <div
-            nggCellTableItem
-            class="main-header py-3"
-            role="cell"
-            [row]="mainHeader(row).value"
-            [valueType]="getValueTypeFromMain()"
-            [attr.tableKey]="mainHeader(row).tableKeySelector"
-          ></div>
-          <!-- Sub Row -->
-          <div
-            #items
-            [class.overflow-reverse]="overflowReverse"
-            class="sub-row d-flex position-relative justify-content-between"
+            role="row"
+            [attr.aria-describedby]="mainHeader(row).tableKeySelector"
           >
+            <!-- Main header -->
             <div
-              [style.min-width.px]="minWidth"
-              class="sub-row-cell px-3"
-              *ngFor="
-                let header of headerNoneMain(headerList);
-                trackBy: KeySelector
-              "
-              role="cell"
-              [attr.tableKey]="header.tableKeySelector"
-            >
+              nggCellTableItem
+              [row]="mainHeader(row).value"
+              [valueType]="getValueTypeFromMain()"
+              [attr.valueType]="getValueTypeFromMain()"
+              [attr.id]="mainHeader(row).tableKeySelector"
+              role="rowheader"
+              aria-rowspan="2"
+            ></div>
+            <div class="d-flex">
               <!-- Sub Header -->
               <div
                 nggCellTableItem
                 class="sub-header py-0 fw-bold"
                 [row]="header.label"
                 [valueType]="getTableHeaderListValueFromNonMain(header)"
-                role="cell"
+                role="columnheader"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
               ></div>
-              <!-- Sub Values -->
+            </div>
+          </div>
+
+          <div role="row">
+            <div role="cell"></div>
+            <!-- Sub Values -->
+            <div class="d-flex">
               <div
                 nggCellTableItem
                 class="sub-value py-0"
@@ -56,31 +48,37 @@
                 [valueType]="getTableHeaderListValueFromNonMain(header)"
                 [attr.valueType]="header.valueType"
                 role="cell"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
               ></div>
             </div>
           </div>
+
+          <!-- </div> -->
         </div>
-        <div
-          *ngIf="arrow"
-          class="d-flex justify-content-end align-items-center ms-4 me-4 arrow-container"
+      </div>
+      <div
+        *ngIf="arrow"
+        class="d-flex justify-content-end align-items-center ms-4 me-4 cell-table--arrow-container"
+      >
+        <svg
+          role="img"
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="far"
+          data-icon="chevron-right"
+          class="svg-inline--fa fa-chevron-right fa-w-10"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          aria-hidden="true"
         >
-          <svg
-            role="img"
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="far"
-            data-icon="chevron-right"
-            class="svg-inline--fa fa-chevron-right fa-w-10"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 320 512"
-            aria-hidden="true"
-          >
-            <path
-              fill="currentColor"
-              d="M113.3 47.41l183.1 191.1c4.469 4.625 6.688 10.62 6.688 16.59s-2.219 11.97-6.688 16.59l-183.1 191.1c-9.152 9.594-24.34 9.906-33.9 .7187c-9.625-9.125-9.938-24.38-.7187-33.91l168-175.4L78.71 80.6c-9.219-9.5-8.906-24.78 .7187-33.91C88.99 37.5 104.2 37.82 113.3 47.41z"
-            ></path>
-          </svg>
-        </div>
+          <path
+            fill="currentColor"
+            d="M113.3 47.41l183.1 191.1c4.469 4.625 6.688 10.62 6.688 16.59s-2.219 11.97-6.688 16.59l-183.1 191.1c-9.152 9.594-24.34 9.906-33.9 .7187c-9.625-9.125-9.938-24.38-.7187-33.91l168-175.4L78.71 80.6c-9.219-9.5-8.906-24.78 .7187-33.91C88.99 37.5 104.2 37.82 113.3 47.41z"
+          ></path>
+        </svg>
       </div>
     </div>
   </div>
