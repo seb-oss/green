@@ -46,7 +46,9 @@ export async function coreComponentGeneratorGenerator(
   options: CoreComponentGeneratorGeneratorSchema
 ) {
   const filePath = `libs/core/src/${options.sub_path}/${options.name}/`
-  generateFiles(tree, path.join(__dirname, 'files'), filePath, {
+  const templatePath = path.join(__dirname, `templates/${options.sub_path}`)
+
+  generateFiles(tree, templatePath, filePath, {
     uppercase,
     capitalize,
     camelCase,
@@ -54,6 +56,7 @@ export async function coreComponentGeneratorGenerator(
     pascalCase,
     ...options,
   })
+
   await formatFiles(tree)
 }
 
