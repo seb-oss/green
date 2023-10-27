@@ -1,6 +1,12 @@
 import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
 import { LitElement } from 'lit'
 
+/**
+ * @element gds-<%= name %>
+ * @internal
+ *
+ * TODO: Add documentation
+ */
 @gdsCustomElement('gds-<%= name %>')
 export class Gds<%= pascalCase(name) %> extends LitElement {
   render() {}

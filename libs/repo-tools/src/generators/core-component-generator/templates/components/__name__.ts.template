@@ -5,6 +5,12 @@ import { GdsFormControlElement } from 'components/form-control'
 import { LitElement } from 'lit'
 <% } %>
 
+/**
+ * @element gds-<%= name %>
+ * @status beta
+ *
+ * TODO: Add documentation
+ */
 @gdsCustomElement('gds-<%= name %>')
 export class Gds<%= pascalCase(name) %> extends <%= is_form_control ? 'GdsFormControlElement' : 'LitElement' %> {
   render() {}
