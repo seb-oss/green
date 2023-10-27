@@ -61,15 +61,14 @@ export function AlertRibbon({
     }
   }
 
+  let renderedHeader: ReactNode = React.isValidElement(header) ? header : null;
+  renderedHeader = renderedHeader ?? <span className="header">{header}</span>;
+
   return (
     <div className={`alert-ribbon ${type}`} role={role} aria-live={ariaLive}>
       <i aria-hidden="true">{renderIcon()}</i>
       <div className="alert-ribbon__content">
-        {header && React.isValidElement(header) ? (
-          header
-        ) : (
-          <span className="header">{header}</span>
-        )}
+        {renderedHeader}
         <p>{children}</p>
       </div>
       {closeButton && (
