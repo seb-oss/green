@@ -301,6 +301,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --gds-comp-chips-br-color-hover: hsla(0, 0%, 87%, 0.2);
   --gds-comp-chips-bg-color-active: #222222;
   --gds-comp-chips-bg-color-action: #2c2c2c;
+  --gds-sys-color-focus-outline: white;
 }
 
 @mixin light-mode() {

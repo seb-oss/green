@@ -8,7 +8,7 @@
 @include input.add-text-input();
 
 :host {
-  display: inline-block;
+  display: block;
 }
 
 :host(:invalid) button + .form-info {
@@ -38,6 +38,7 @@ button {
   @include button.base();
   @include button.secondary();
   @include dropdown.dropdown-trigger();
+
   font-size: inherit;
   font-weight: normal;
   margin-bottom: 0.5rem;

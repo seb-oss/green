@@ -45,6 +45,12 @@ const routes: Routes = [
         (m) => m.ContextMenuModule
       ),
   },
+  {
+    path: 'modals',
+    data: { name: 'Modals' },
+    loadChildren: () =>
+      import('./modals/modals.module').then((m) => m.ModalsModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 
