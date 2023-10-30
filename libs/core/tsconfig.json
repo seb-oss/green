@@ -21,12 +21,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "target": "es2022",
-    "baseUrl": ".",
-    "paths": {
-      "components/*": ["src/components/*"],
-      "primitives/*": ["src/primitives/*"],
-      "utils/*": ["src/utils/*"],
-      "tokens/*": ["src/tokens/*"]
-    }
+    "baseUrl": "."
   }
 }

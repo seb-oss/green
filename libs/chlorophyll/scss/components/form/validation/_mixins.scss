@@ -77,7 +77,7 @@ $_border-width: var(--sg-border-width);
     @include common.margin(0);
     border: 0;
     > div {
-      width: max-content;
+      width: fit-content;
     }
 
     &.is-valid > div {

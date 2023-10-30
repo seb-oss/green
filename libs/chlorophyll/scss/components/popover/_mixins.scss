@@ -5,7 +5,7 @@
 $_box-shadow: var(--sg-popover-box-shadow);
 $_box-shadow-mobile: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
 $_z-index: var(--sg-z-index-popover);
-$_border-color: var(--sg-popover-border-color);
+$_border-color: var(--gds-ref-pallet-base800);
 $_popover-bg: var(--sg-popover-background);
 $_max-height-mobile: calc(100% - 1rem);
 $_max-height: 400px;
@@ -29,7 +29,6 @@ $_max-height: 400px;
     bottom: 0;
     box-shadow: $_box-shadow-mobile;
     left: 0;
-    transform: translate3d(0, 100%, 0);
     transition: all 300ms ease-in-out;
     width: 100%;
   }
@@ -52,7 +51,6 @@ $_max-height: 400px;
 
   &.active {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
     visibility: visible;
   }
 

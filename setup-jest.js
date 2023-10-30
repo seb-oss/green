@@ -8,3 +8,13 @@ global.HTMLElement.prototype.attachInternals = () => {
 global.ElementInternals = function () {}
 global.ElementInternals.prototype.setValidity = () => {}
 global.ElementInternals.prototype.setFormValue = () => {}
+
+window.matchMedia = () => {
+  return {
+    matches: false,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }
+}
+
+global.HTMLElement.prototype.close = () => {}

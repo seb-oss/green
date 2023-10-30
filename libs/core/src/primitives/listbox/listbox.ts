@@ -6,8 +6,11 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 import style from './listbox.styles'
-import { watch } from 'utils/decorators'
-import { html, gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { watch } from '../../utils/decorators'
+import {
+  html,
+  gdsCustomElement,
+} from '../../utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-listbox

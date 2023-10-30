@@ -59,7 +59,7 @@
 import { html as litHtml } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-const VER_SUFFIX = '-gdsvsuffix'
+export const VER_SUFFIX = '-gdsvsuffix'
 const elementLookupTable = new Map<string, string>()
 
 /**
@@ -84,6 +84,11 @@ export const gdsCustomElement = (tagName: string) => {
 
   const versionedTagName = tagName + VER_SUFFIX
   elementLookupTable.set(tagName, versionedTagName)
+
+  // Bail out if the element is already registered
+  if (customElements.get(versionedTagName))
+    return (_classOrDescriptor: any) => false
+
   return customElement(versionedTagName)
 }
 

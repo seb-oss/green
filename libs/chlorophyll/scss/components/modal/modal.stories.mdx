@@ -15,7 +15,7 @@ export const DialogueTemplate = ({ headline, body }) => {
            aria-labelledby="modal_header"
            aria-describedby="modal_body">
     <header>
-      <h3 id="modal_header">${headline}</h3>
+      <div id="modal_header" class="heading-m">${headline}</div>
       <button class='close'>
         <span class='sr-only'>Close</span>
         <i></i>
@@ -30,15 +30,17 @@ export const DialogueTemplate = ({ headline, body }) => {
   </section>`
 }
 
-export const SlideoutTemplate = ({ headline, body }) => {
+export const SlideoutTemplate = ({ headline, body, variant }) => {
   return `
     <aside role='dialog'
          role='dialog'
          aria-modal="true"
          aria-labelledby="modal_header"
-         aria-describedby="modal_body">
+         aria-describedby="modal_body"
+         class="${variant !== 'default' ? `gds-slide-out--${variant}` : ''}"
+         >
     <header>
-      <h3 id="modal_header">${headline}</h3>
+      <h3 id="modal_header" class="heading-m">${headline}</h3>
       <button class='close'>
         <span class='sr-only'>Close</span>
         <i></i>
@@ -128,7 +130,7 @@ Dialog modals are typically used for confirming actions or displaying informatio
 <Canvas>
   <Story
     name="Dialogue"
-    parameters={{ 
+    parameters={{
       componentIds: [
         'component-dialogue'
       ]
@@ -149,18 +151,85 @@ Aside modals or slide out modals are typically used for displaying details regar
 <Canvas>
   <Story
     name="Slide-out"
-    parameters={{ 
+    parameters={{
       componentIds: [
         'component-slideout'
       ]
     }}
     args={{
-      headline: 'Slideout headline',
+      headline: 'Slide-out headline',
       body: '<p>Modal body text. Lorem ipsum dolor sit amet.</p>'
     }}
+    argTypes={{
+        headline: { control: 'text' },
+        body: { control: 'text' },
+        variant: {
+           control: 'select',
+           options: ['default', '768', '960'],
+         }
+      }}
   >
     {SlideoutTemplate.bind({})}
   </Story>
+</Canvas>
+
+
+### Slide-out variants
+
+#### Slide-out 768
+
+<Canvas>
+    <Story
+    name="Slide-out 768"
+    parameters={{
+      componentIds: [
+        'component-slideout'
+      ]
+    }}
+    args={{
+      headline: 'Slide-out headline',
+      body: '<p>Modal body text. Lorem ipsum dolor sit amet.</p>',
+      variant: '768'
+    }}
+    argTypes={{
+        headline: { control: 'text' },
+        body: { control: 'text' },
+        variant: {
+           control: 'select',
+           options: ['default', '768', '960'],
+         }
+      }}
+    >
+    {SlideoutTemplate.bind({})}
+    </Story>
+</Canvas>
+
+#### Slide-out 960
+
+<Canvas>
+    <Story
+    name="Slide-out 960"
+    parameters={{
+      componentIds: [
+        'component-slideout'
+      ]
+    }}
+    args={{
+      headline: 'Slide-out headline',
+      body: '<p>Modal body text. Lorem ipsum dolor sit amet.</p>',
+      variant: '960'
+    }}
+    argTypes={{
+        headline: { control: 'text' },
+        body: { control: 'text' },
+        variant: {
+           control: 'select',
+           options: ['default', '768', '960'],
+         }
+      }}
+    >
+    {SlideoutTemplate.bind({})}
+    </Story>
 </Canvas>
 
 ### Fullscreen
@@ -170,7 +239,7 @@ Fullscreen modals or takeovers are typically used for wizards or for complex flo
 <Canvas>
   <Story
     name="Takeover"
-    parameters={{ 
+    parameters={{
       componentIds: [
         'component-takeover'
       ]
