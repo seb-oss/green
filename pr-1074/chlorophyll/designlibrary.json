@@ -312,6 +312,26 @@
     }
   },
   {
+    "id": "components-modal--slide-out-768",
+    "name": "Slide-out 768",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-slideout"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-960",
+    "name": "Slide-out 960",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-slideout"
+      ]
+    }
+  },
+  {
     "id": "components-modal--takeover",
     "name": "Takeover",
     "title": "Components/Modal",

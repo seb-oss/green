@@ -338,8 +338,8 @@
     }
   },
   {
-    "id": "components-badge--default",
-    "name": "Default",
+    "id": "components-badge--multiple",
+    "name": "Multiple",
     "title": "Components/Badge",
     "customParams": {
       "componentIds": [
@@ -348,8 +348,8 @@
     }
   },
   {
-    "id": "components-badge--dismissible",
-    "name": "Dismissible",
+    "id": "components-badge--default",
+    "name": "Default",
     "title": "Components/Badge",
     "customParams": {
       "componentIds": [
