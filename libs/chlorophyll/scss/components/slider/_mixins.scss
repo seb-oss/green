@@ -28,7 +28,6 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
   -webkit-appearance: none;
   width: $thumb-size;
   height: $thumb-size;
-  transition: all ease-in-out 0.2s;
   box-shadow: $box-shadow;
   cursor: pointer;
 
@@ -38,8 +37,8 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
 }
 
 @mixin add-thumb-focus-styles() {
-  background: $dark-blue-2;
-  box-shadow: $box-shadow, $box-shadow-focus;
+  box-shadow: 0 0 0rem 0.125rem white,
+    0 0 0rem 0.25rem var(--gds-sys-color-focus-outline);
 }
 
 @mixin add-thumb-disabled-styles() {

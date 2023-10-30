@@ -1,4 +1,4 @@
-@mixin add-color-tokens () {
+@mixin add-color-tokens() {
   /******************************************/
   /************ Reference Tokens ************/
   /******************************************/
@@ -29,6 +29,8 @@
   --gds-sys-color-base: var(--gds-ref-pallet-base800);
   --gds-sys-color-font: var(--gds-ref-pallet-base800);
   --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
+
+  --gds-sys-color-focus-outline: var(--gds-ref-pallet-base1000);
 }
 /*
 @media (prefers-color-scheme: dark) {
