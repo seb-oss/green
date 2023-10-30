@@ -13,6 +13,7 @@ $greyScale: map-get(newTokens.$grey, light);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.font-weight($font-weight);
+  @include common.add-hover-state;
   @include common.add-focus;
 
   display: flex;
@@ -21,7 +22,7 @@ $greyScale: map-get(newTokens.$grey, light);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-
+  border-radius: 0.25rem 0.25rem 0 0;
 
   .gds-tabs--fluid & {
     flex: 1;
@@ -41,10 +42,12 @@ $greyScale: map-get(newTokens.$grey, light);
     )
   );
 
-  @include common.add-hover-state(map-get($greyScale, 1000)); // This is actually Base800
+  @include common.add-hover-state(
+    map-get($greyScale, 1000)
+  ); // This is actually Base800
 
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
   border-bottom: $_border-width transparent;
   color: $color-active;
 }
@@ -52,6 +55,8 @@ $greyScale: map-get(newTokens.$grey, light);
 @mixin tabs-bar {
   display: flex;
   overflow-x: auto;
+  padding: 0.25rem;
+  margin: -0.25rem;
   --sg-border-color: var(--gds-ref-pallet-base600);
 
   // hide scrollbar
@@ -59,7 +64,7 @@ $greyScale: map-get(newTokens.$grey, light);
     display: none;
   }
 
-   &:not(.gds-tabs--fluid)::after {
+  &:not(.gds-tabs--fluid)::after {
     @include common.add-border(
       $sides: (
         'bottom',
