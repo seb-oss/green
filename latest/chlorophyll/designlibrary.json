@@ -46,22 +46,22 @@
     }
   },
   {
-    "id": "components-form-elements-stepper--stepper",
-    "name": "Stepper",
-    "title": "Components/Form/Elements/Stepper",
-    "customParams": {
-      "componentIds": [
-        "component-stepper"
-      ]
-    }
-  },
-  {
     "id": "components-form-elements-textarea--textarea",
     "name": "Textarea",
     "title": "Components/Form/Elements/Textarea",
     "customParams": {
       "componentIds": [
         "component-input"
+      ]
+    }
+  },
+  {
+    "id": "components-form-elements-stepper--stepper",
+    "name": "Stepper",
+    "title": "Components/Form/Elements/Stepper",
+    "customParams": {
+      "componentIds": [
+        "component-stepper"
       ]
     }
   },
@@ -304,6 +304,26 @@
   {
     "id": "components-modal--slide-out",
     "name": "Slide-out",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-slideout"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-768",
+    "name": "Slide-out 768",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-slideout"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-960",
+    "name": "Slide-out 960",
     "title": "Components/Modal",
     "customParams": {
       "componentIds": [
