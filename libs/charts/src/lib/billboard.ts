@@ -245,7 +245,7 @@ export const createInfo = (
     (settings.style?.axis !== false && settings.style?.axis?.x?.show !== false)
   ) {
     info.xAxis = {
-      ticks: chart.categories().map((text) => ({ text })),
+      ticks: chart.categories()?.map((text) => ({ text })),
     }
   }
 

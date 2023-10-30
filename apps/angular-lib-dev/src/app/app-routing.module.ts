@@ -37,11 +37,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('./badge/badge.module').then((m) => m.BadgeModule),
   },
+  {
+    path: 'modals',
+    data: { name: 'Modals' },
+    loadChildren: () =>
+      import('./modals/modals.module').then((m) => m.ModalsModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 
 const routerOptions: ExtraOptions = {
-    anchorScrolling: 'enabled'
+  anchorScrolling: 'enabled',
 }
 
 @NgModule({
