@@ -1,4 +1,5 @@
 import * as StyleDictionary from 'style-dictionary'
+import * as tinycolor from 'tinycolor2'
 
 const transforms: Record<
   string,
@@ -19,7 +20,22 @@ const transforms: Record<
       return token.alpha
     },
     transformer: (token: StyleDictionary.DesignToken) => {
-      console.log(token)
+      let value: tinycolor.Instance, darkValue: tinycolor.Instance
+
+      if (token.value) {
+        value = tinycolor(token.value)
+        if (token.alpha) {
+          token.value = value.setAlpha(token.alpha).toString()
+        }
+      }
+      if (token.darkValue) {
+        darkValue = tinycolor(token.darkValue)
+        if (token.alpha) {
+          token.darkValue = darkValue.setAlpha(token.alpha).toString()
+        }
+      }
+
+      return value.setAlpha(token.alpha).toString()
     },
   },
 }

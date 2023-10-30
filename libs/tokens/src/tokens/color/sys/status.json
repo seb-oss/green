@@ -210,44 +210,6 @@
               }
             }
           }
-        },
-        "custom": {
-          "customBlue": {
-            "value": "{ref.color.blue.40}",
-            "darkValue": "{ref.color.blue.40}",
-            "attributes": {
-              "figma": {
-                "resolvedType": "ALIAS"
-              }
-            }
-          },
-          "onCustomBlue": {
-            "value": "{ref.color.white}",
-            "darkValue": "{ref.color.white}",
-            "attributes": {
-              "figma": {
-                "resolvedType": "ALIAS"
-              }
-            }
-          },
-          "customBlueBright": {
-            "value": "{ref.color.blue.95}",
-            "darkValue": "{ref.color.blue.10}",
-            "attributes": {
-              "figma": {
-                "resolvedType": "ALIAS"
-              }
-            }
-          },
-          "onCustomBlueBright": {
-            "value": "{ref.color.blue.20}",
-            "darkValue": "{ref.color.blue.95}",
-            "attributes": {
-              "figma": {
-                "resolvedType": "ALIAS"
-              }
-            }
-          }
         }
       }
     }
