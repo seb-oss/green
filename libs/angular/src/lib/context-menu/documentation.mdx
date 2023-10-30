@@ -17,13 +17,13 @@ If you're only using the NggContextMenuComponent component, you just need to imp
 ```typescript
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { NggContextModule } from '@sebgroup/green-angular'
+import { NggContextMenuModule } from '@sebgroup/green-angular'
 
 import { AppComponent } from './app.component'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, NggContextModule],
+  imports: [BrowserModule, NggContextMenuModule],
   exports: [],
 })
 export class AppModule {}
@@ -47,9 +47,9 @@ export class AppModule {}
 
 ### Outputs
 
-| Event                  | Description                                                            |
-| :--------------------- | :--------------------------------------------------------------------- |
-| contextMenuItemClicked | Event emitted with the slider value when slider value has been changed |
+| Event                  | Description                                                                                 |
+| :--------------------- | :------------------------------------------------------------------------------------------ |
+| contextMenuItemClicked | Event emitted when one of the items are click. The clicked item is supplied to the handler. |
 
 ## Examples
 
@@ -61,7 +61,7 @@ Basic use case:
 <ngg-context-menu
   [direction]="rtl"
   [menuItems]="menuItems"
-  (itemClicked)="onItemClick($event)"
+  (contextMenuItemClicked)="onItemClick($event)"
 ></ngg-context-menu>
 ```
 
@@ -100,7 +100,6 @@ Example with directive for close on scroll used
 <Canvas>
   <Story id="components-context-menu--custom-template-default" />
 </Canvas>
-
 
 ## Relative position
 

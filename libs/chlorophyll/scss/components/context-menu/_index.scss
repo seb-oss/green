@@ -1,6 +1,7 @@
 @use 'mixins';
 @use '../../common';
 @use '../../components/popover';
+@use '../../components/icon';
 
 .context-menu-overlay {
   @include mixins.add-context-menu-overlay();
