@@ -3,8 +3,6 @@ import formats from './src/formats'
 import transforms from './src/transforms'
 import filters from './src/filters'
 
-console.log(formats)
-
 for (const entry of Object.entries(formats)) {
   StyleDictionary.registerFormat(entry[1])
 }
@@ -89,9 +87,30 @@ const config: StyleDictionary.Config = {
         },
       ],
     },
+    js: {
+      transformGroup: 'js',
+      buildPath: 'js/',
+      prefix: 'gds',
+      files: [
+        {
+          destination: 'ref-tokens.js',
+          format: 'javascript/module',
+          filter: function (token) {
+            return token.path.includes('ref')
+          },
+        },
+        {
+          destination: 'sys-tokens.js',
+          format: 'javascript/module',
+          filter: function (token) {
+            return token.path.includes('sys')
+          },
+        },
+      ],
+    },
     figma: {
       buildPath: 'figma/',
-      transforms: ['name/figma'],
+      transforms: ['name/figma', 'color/alpha'],
       files: [
         {
           format: 'json/figma',
@@ -105,7 +124,7 @@ const config: StyleDictionary.Config = {
 
             let returnValue = false
 
-            token.path.forEach((item) => {
+            token.path?.forEach((item) => {
               if (['color', 'size'].includes(item)) {
                 returnValue = true
               }
