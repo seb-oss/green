@@ -2,6 +2,11 @@ import * as StyleDictionary from 'style-dictionary'
 import formats from './src/formats'
 import transforms from './src/transforms'
 import filters from './src/filters'
+import actions from './src/actions'
+
+for (const entry of Object.entries(actions)) {
+  StyleDictionary.registerAction(entry[1])
+}
 
 for (const entry of Object.entries(formats)) {
   StyleDictionary.registerFormat(entry[1])

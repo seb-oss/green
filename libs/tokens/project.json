@@ -57,20 +57,21 @@
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
-      "dependsOn": ["copy-package-json"],
+      "dependsOn": ["copy-package-json","build"],
       "options": {
         "tag": "beta",
         "access": "public",
+        "noBuild": true,
         "dryRun": true
       }
     },
     "copy-package-json": {
       "executor": "nx:run-commands",
+      "dependsOn": ["build"],
       "options": {
-        "command": "mkdir -p dist/libs/tokens && cp libs/tokens/package.json dist/libs/tokens"
+        "command": "cp libs/tokens/package.json dist/libs/tokens"
       }
     }
-
 },
   "tags": []
 }
