@@ -118,10 +118,7 @@ with minor modifications as well as splitting in to mixins */
     }
   }
 }
-@mixin _default-font($bodySelector: body, $htmlSelector: html) {
-  #{$htmlSelector} {
-    font-size: tokens.$root-font-size;
-  }
+@mixin _default-font($bodySelector: body) {
   #{$bodySelector} {
     font-family: tokens.$font-family-sans-serif;
     font-size: tokens.$base-font-size;
