@@ -1,5 +1,5 @@
-import { IValidator } from '@sebgroup/extract'
-import React from 'react'
+import {IValidator} from '@sebgroup/extract'
+import React, {useState} from 'react'
 
 import {
   Dropdown,
@@ -12,6 +12,7 @@ import {
   TextInput,
   Datepicker,
   Slider,
+  Checkbox
 } from '@sebgroup/green-react'
 
 const dropDownKeyValueArray = [
@@ -62,12 +63,14 @@ export const FormExample = () => {
       prevState
         ? undefined
         : {
-            message: 'This field is required',
-            indicator: 'error',
-            rules: { type: 'Required' },
-          }
+          message: 'This field is required',
+          indicator: 'error',
+          rules: {type: 'Required'},
+        }
     )
   }
+
+  const [checkedState, setCheckedState] = useState<boolean>(true)
 
   return (
     <>
@@ -75,7 +78,7 @@ export const FormExample = () => {
       <p>If you are developing a React app this is a great form to work on.</p>
 
       <Form onFormSubmit={(value) => console.log(value)}>
-        <div className="d-flex" style={{ gap: '1rem' }}>
+        <div className="d-flex" style={{gap: '1rem'}}>
           <Dropdown
             label={'Select a fruit'}
             id={'my-dropdown'}
@@ -89,12 +92,17 @@ export const FormExample = () => {
           />
         </div>
 
+        <Checkbox label="This is label" checked={checkedState} onChange={(event) => {
+          const target = event.target as HTMLInputElement
+          setCheckedState(target.checked)
+        }}/>
+
         <FormItems
           name="radio"
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' },
+            rules: {type: 'Required'},
           }}
         >
           <RadioGroup
@@ -106,9 +114,9 @@ export const FormExample = () => {
             }
             onChange={(value) => console.log(value)}
           >
-            <RadioButton label={'Fusilli'} value={'fusilli'} />
-            <RadioButton label={'Penne'} value={'penne'} />
-            <RadioButton label={'Farfalle'} value={'farfalle'} />
+            <RadioButton label={'Fusilli'} value={'fusilli'}/>
+            <RadioButton label={'Penne'} value={'penne'}/>
+            <RadioButton label={'Farfalle'} value={'farfalle'}/>
           </RadioGroup>
         </FormItems>
 
@@ -138,7 +146,7 @@ export const FormExample = () => {
           validator={validator}
         />
 
-        <Stepper onChange={onStepperChange} />
+        <Stepper onChange={onStepperChange}/>
 
         <Slider
           hasTextbox={true}
