@@ -8,7 +8,7 @@ $z-index: tokens.$zindex-dropdown;
 $color: tokens.$text-primary-color;
 $border-color: map.get(tokens.$blue, 'light', 0);
 $background: tokens.$form-control-bg;
-$highlighted-background: hsl(var(--sg-hsl-blue-1));
+$highlighted-background: var(--gds-ref-pallet-base800);
 
 @mixin dropdown-trigger {
   @include button.reset;
@@ -16,9 +16,9 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
-  @include common.add-border-color();
+  @include common.add-border-color(var(--gds-ref-pallet-base600));
   @include common.add-focus('');
-  @include common.add-hover-state();
+  //@include common.add-hover-state(#E9E9E9);
   background: $background;
   color: $color;
   min-height: 2.75rem;
@@ -26,10 +26,18 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-
   max-width: 100%;
+
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
+  }
+
+  &:not(:disabled, .disabled, [aria-disabled]):hover {
+    --background: var(--gds-ref-pallet-base200);
+    --color: var(--gds-ref-pallet-base800);
+    background-color: var(--gds-ref-pallet-base200);
+    color: var(--gds-ref-pallet-base800);
+    border-color: var(--gds-ref-pallet-base800);
   }
 
   > span {
@@ -40,8 +48,8 @@ $highlighted-background: hsl(var(--sg-hsl-blue-1));
 
   &::after {
     @include common.margin-horizontal(3);
-    border-bottom: solid 2px map.get(tokens.$blue, 'light', 0);
-    border-left: solid 2px map.get(tokens.$blue, 'light', 0);
+    border-bottom: solid 2px var(--gds-ref-pallet-base800);
+    border-left: solid 2px var(--gds-ref-pallet-base800);
     content: '';
     display: block;
     height: 0.75rem;

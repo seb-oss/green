@@ -78,19 +78,19 @@
   <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
     Save
   </button>
-  <button type="reset" (click)="ngForm.reset()">Reset</button>
+  <button (click)="validationForm.reset()">Reset</button>
 </form>
 <code>
   <h5 class="mb-0">Form data</h5>
   <div>
-    Submitted: {{ ngForm?.submitted }} Invalid: {{ validationForm?.invalid }}
+    Submitted: {{ ngForm.submitted }} Invalid: {{ validationForm.invalid }}
   </div>
   <h5 class="mb-0">Values</h5>
   <div>
-    {{ validationForm?.value | json }}
+    {{ validationForm.value | json }}
   </div>
   <h5 class="mb-0">Errors</h5>
-  <div *ngFor="let f of validationForm?.controls | keyvalue">
+  <div *ngFor="let f of validationForm.controls | keyvalue">
     {{ f.key }}:{{ f.value.errors | json }}
   </div>
 </code>
