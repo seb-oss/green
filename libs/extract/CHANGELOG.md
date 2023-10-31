@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.5.2...@sebgroup/extract@2.0.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+### BREAKING CHANGES
+
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
 ## [1.5.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.5.1...@sebgroup/extract@1.5.2) (2023-09-25)
 
 

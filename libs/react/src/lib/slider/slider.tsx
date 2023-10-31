@@ -16,7 +16,7 @@ const InputWrapper = ({
 }) => (
   <>
     {unitLabel ? (
-      <div className="group group-border">
+      <div className="group group-border group-focus">
         {children}
         <span className="form-text">{unitLabel}</span>
       </div>

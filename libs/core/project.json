@@ -112,8 +112,6 @@
         "commitMessageFormat": "chore({projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
-        "preid": "beta",
-        "releaseAs": "prerelease",
         "postTargets": ["core:publish", "core:github"]
       }
     },

@@ -12,7 +12,7 @@ hashElement(path.join(__dirname, '../src'), options)
     const suffix = hash.hash.substring(0, 6)
     console.log(`Scope suffix: ${suffix}`)
     const results = replace.sync({
-      files: 'dist/libs/core/src/index.js',
+      files: 'dist/libs/core/src/*.js',
       from: /-gdsvsuffix/g,
       to: `-${suffix}`,
     })

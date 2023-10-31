@@ -19,20 +19,29 @@ import {
   ValidatorFn,
 } from '@angular/forms'
 import {
-  AbstractDropdown,
-  DropdownHandler,
-  ElementProps,
   DatepickerData,
   Datepicker,
   createDatepicker,
   DatepickerState,
-  DropdownOption,
   months,
   years,
   randomId,
   DatepickerOptions,
 } from '@sebgroup/extract'
+import { DropdownOption } from '../dropdown/dropdown.component'
 import { endOfDay, startOfDay } from 'date-fns'
+
+export interface Attributes {
+  id?: string
+  role?: string
+  style?: CSSStyleDeclaration
+  tabIndex?: number
+}
+
+export interface ElementProps {
+  attributes: Attributes
+  classes: string[]
+}
 
 @Component({
   selector: 'ngg-datepicker',
@@ -93,8 +102,6 @@ export class NggDatepickerComponent
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
-  dropdown?: AbstractDropdown
-  handler?: DropdownHandler
   toggler?: Partial<ElementProps>
   listbox?: Partial<ElementProps>
   _value: string | Date | undefined

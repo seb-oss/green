@@ -6,29 +6,29 @@ import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import 'reflect-metadata'
 
-import { randomId, constrainSlots } from 'utils/helpers'
-import { watch, observeLightDOM } from 'utils/decorators'
+import { randomId, constrainSlots } from '../../utils/helpers'
+import { watch, observeLightDOM } from '../../utils/decorators'
 
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
-} from 'utils/helpers/custom-element-scoping'
+} from '../../utils/helpers/custom-element-scoping'
 
-import 'primitives/listbox'
+import '../../primitives/listbox'
 import type {
   GdsListbox,
   GdsOption,
   OptionsContainer,
-} from 'primitives/listbox'
+} from '../../primitives/listbox'
 
-import 'primitives/popover'
-import type { GdsPopover } from 'primitives/popover'
+import '../../primitives/popover'
+import type { GdsPopover } from '../../primitives/popover'
 
 import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
-import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 /**
  * @element gds-dropdown
@@ -252,6 +252,7 @@ export class GdsDropdown<ValueT = any>
   @observeLightDOM()
   private _handleLightDOMChange() {
     this.requestUpdate()
+    this._handleValueChange()
     if (this.multiple) return
 
     // Set default value if none is set
@@ -391,35 +392,27 @@ export class GdsDropdown<ValueT = any>
   }
 
   #registerAutoCloseListener() {
-    window.addEventListener('click', this.#autoCloseListener)
-    this.addEventListener('blur', this.#autoCloseListener)
-    this.addEventListener('gds-blur', this.#autoCloseListener)
+    this.addEventListener('blur', this.#blurCloseListener)
+    this.addEventListener('gds-blur', this.#blurCloseListener)
     this.addEventListener('keydown', this.#tabCloseListener)
   }
 
   #unregisterAutoCloseListener() {
-    window.removeEventListener('click', this.#autoCloseListener)
-    this.removeEventListener('blur', this.#autoCloseListener)
-    this.removeEventListener('gds-blur', this.#autoCloseListener)
+    this.removeEventListener('blur', this.#blurCloseListener)
+    this.removeEventListener('gds-blur', this.#blurCloseListener)
     this.removeEventListener('keydown', this.#tabCloseListener)
   }
 
   /**
-   * A listener to close the dropdown when clicking outside of it,
-   * or when any other element recieves a keyup event.
+   * A listener to close the dropdown when any other element is focused.
    */
-  #autoCloseListener = (e: Event) => {
-    const isClickOutside =
-      e instanceof MouseEvent &&
-      e.target instanceof Node &&
-      !this.contains(e.target as Node)
-
+  #blurCloseListener = (e: Event) => {
     const isFocusOutside =
       e instanceof FocusEvent &&
       e.relatedTarget &&
       !this.contains(e.relatedTarget as Node)
 
-    if (isClickOutside || isFocusOutside) this.open = false
+    if (isFocusOutside) this.open = false
   }
 
   #tabCloseListener = (e: KeyboardEvent) => {

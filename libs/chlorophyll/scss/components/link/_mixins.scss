@@ -34,6 +34,7 @@ $variants: (
   color: $color;
   font-weight: $font-weight;
   border: none;
+  border-radius: 0.125rem;
 
   &:focus {
     &:not([aria-disabled]) {
@@ -91,7 +92,7 @@ $variants: (
 }
 
 @mixin arrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
   color: $color-dark;
@@ -107,6 +108,10 @@ $variants: (
     path {
       fill: currentColor;
     }
+  }
+
+  &.link:focus {
+    color: $color-dark;
   }
 
   &:visited {
@@ -133,9 +138,9 @@ Base on background color of parent element eg. white links on dark backgrounds e
 
 */
 
-@mixin variant($color, $outline-color) {
+@mixin variant($color) {
   a:link {
-    @include common.add-outline-focus-state($outline-color);
+    @include common.add-outline-focus-state();
   }
   a:link:not(.button, [aria-disabled]) {
     color: $color;
