@@ -22,7 +22,56 @@
           "libs/tokens/package.json"
         ]
       }
+    },
+    "update-deps-and-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run tokens:update-dependencies && nx run tokens:version-and-release"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-and-release": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore({projectName}): release version ${version}",
+        "tagPrefix": "@sebgroup/green-{projectName}@",
+        "push": true,
+        "preid": "beta",
+        "releaseAs": "prerelease",
+        "postTargets": ["tokens:publish", "tokens:github"]
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "dependsOn": ["build", "copy-package-json"],
+      "options": {
+        "tag": "${tag}",
+        "notes": "${notes}"
+      }
+    },
+    "publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "dependsOn": ["copy-package-json","build"],
+      "options": {
+        "tag": "beta",
+        "access": "public",
+        "noBuild": true
+      }
+    },
+    "copy-package-json": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "cp libs/tokens/package.json dist/libs/tokens"
+      }
     }
-  },
+},
   "tags": []
 }
