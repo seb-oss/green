@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -49,7 +50,7 @@ export interface DropdownOption {
       multi: true,
     },
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDropdownComponent implements ControlValueAccessor {
   @Input() id?: string
@@ -101,7 +102,9 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   //
   get selectedOption() {
-    return this.optionByValue(this.value)
+    return Array.isArray(this.value)
+      ? this.value.map((v: any) => this.optionByValue(v))
+      : this.optionByValue(this.value)
   }
 
   onChangeFn?: (value: unknown) => void
