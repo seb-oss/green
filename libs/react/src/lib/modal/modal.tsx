@@ -1,5 +1,5 @@
 import { ModalType, Size } from '@sebgroup/extract'
-import { MouseEvent, ReactNode } from 'react'
+import { MouseEvent, ReactNode, memo } from 'react'
 import Button from '../form/button/button'
 
 type ModalEventListener = (event: MouseEvent<HTMLButtonElement>) => unknown
@@ -18,26 +18,26 @@ export interface ModalProps {
   onDismiss?: ModalEventListener
 }
 
-const ModalHeader = ({ header = '', onClose }: Partial<ModalProps>) => {
+const ModalHeader = memo(({ header = '', onClose }: Partial<ModalProps>) => {
   const handleClose: ModalEventListener = (event) => {
     if (onClose) onClose(event)
   }
   return (
     <div className="header">
-      <h3>{header}</h3>
+      <h3 id="modal_header">{header}</h3>
       <button className="close" onClick={handleClose}>
         <span className="sr-only">Close</span>
         <i></i>
       </button>
     </div>
   )
-}
+})
 
-const ModalBody = ({ children }: Partial<ModalProps>) => {
-  return <div className="body">{children}</div>
-}
+const ModalBody = memo(({ children }: Partial<ModalProps>) => {
+  return <div className="body" id="modal_body">{children}</div>
+})
 
-const ModalFooter = ({
+const ModalFooter = memo(({
   confirm,
   dismiss,
   onClose,
@@ -66,14 +66,18 @@ const ModalFooter = ({
       )}
     </div>
   )
-}
+})
 
-export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
+export const Modal = memo(({ type = 'default', isOpen, size = 'sm', ...props }: ModalProps) => {
   const modalContent = () => {
     switch (type) {
       case 'slideout': {
+        let className: string | undefined = undefined;
+        if (size === "lg") className = 'gds-slide-out--960';
+        if (size === "md") className = 'gds-slide-out--768';
+
         return (
-          <aside role="dialog">
+          <aside role="dialog" className={className} aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
             <ModalHeader {...props} />
             <ModalBody {...props} />
             <ModalFooter {...props} />
@@ -82,7 +86,7 @@ export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
       }
       case 'takeover': {
         return (
-          <main role="dialog">
+          <main role="dialog" aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
             <ModalHeader {...props} />
             <ModalBody {...props} />
             <ModalFooter {...props} />
@@ -91,7 +95,7 @@ export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
       }
       default: {
         return (
-          <section role="dialog">
+          <section role="dialog" aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
             <ModalHeader {...props} />
             <ModalBody {...props} />
             <ModalFooter {...props} />
@@ -102,6 +106,6 @@ export const Modal = ({ type = 'default', isOpen, ...props }: ModalProps) => {
   }
 
   return isOpen ? modalContent() : null
-}
+})
 
 export default Modal
