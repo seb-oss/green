@@ -39,6 +39,7 @@
     },
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
+      "dependsOn": ["build", "copy-package-json"],
       "options": {
         "commitMessageFormat": "chore({projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-{projectName}@",
