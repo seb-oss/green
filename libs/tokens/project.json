@@ -5,6 +5,16 @@
   "sourceRoot": "libs/tokens/src",
   "targets": {
     "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run tokens:build-style-dictionary",
+          "nx run tokens:copy-package-json"
+        ],
+        "parallel": false
+      }
+    },
+    "build-style-dictionary": {
       "executor": "@nxkit/style-dictionary:build",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -15,7 +25,9 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "libs/tokens/**/*.{js,ts}",
@@ -27,10 +39,10 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          {
-            "command": "nx run tokens:update-dependencies && nx run tokens:version-and-release"
-          }
-        ]
+          "nx run tokens:update-dependencies",
+          "nx run tokens:version-and-release"
+        ],
+        "parallel": false
       }
     },
     "update-dependencies": {
@@ -39,19 +51,20 @@
     },
     "version-and-release": {
       "executor": "@jscutlery/semver:version",
-      "dependsOn": ["build", "copy-package-json"],
       "options": {
         "commitMessageFormat": "chore({projectName}): release version ${version}",
         "tagPrefix": "@sebgroup/green-{projectName}@",
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
-        "postTargets": ["tokens:publish", "tokens:github"]
+        "postTargets": [
+          "tokens:publish",
+          "tokens:github"
+        ]
       }
     },
     "github": {
       "executor": "@jscutlery/semver:github",
-      "dependsOn": ["build", "copy-package-json"],
       "options": {
         "tag": "${tag}",
         "notes": "${notes}"
@@ -59,20 +72,17 @@
     },
     "publish": {
       "executor": "ngx-deploy-npm:deploy",
-      "dependsOn": ["copy-package-json","build"],
       "options": {
         "tag": "beta",
-        "access": "public",
-        "noBuild": true
+        "access": "public"
       }
     },
     "copy-package-json": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
       "options": {
         "command": "cp libs/tokens/package.json dist/libs/tokens"
       }
     }
-},
+  },
   "tags": []
 }
