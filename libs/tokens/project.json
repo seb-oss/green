@@ -71,9 +71,8 @@
       }
     },
     "publish": {
-      "executor": "ngx-deploy-npm:deploy",
+        "executor": "ngx-deploy-npm:deploy",
       "options": {
-        "tag": "beta",
         "access": "public",
         "distFolderPath": "dist/libs/tokens"
       }
