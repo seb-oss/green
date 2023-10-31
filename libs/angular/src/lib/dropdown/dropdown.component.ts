@@ -101,7 +101,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   //
   get selectedOption() {
-    return this.value
+    return this.optionByValue(this.value)
   }
 
   onChangeFn?: (value: unknown) => void
