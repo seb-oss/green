@@ -74,7 +74,8 @@
       "executor": "ngx-deploy-npm:deploy",
       "options": {
         "tag": "beta",
-        "access": "public"
+        "access": "public",
+        "distFolderPath": "dist/libs/tokens"
       }
     },
     "copy-package-json": {
