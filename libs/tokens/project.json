@@ -50,6 +50,7 @@
     },
     "github": {
       "executor": "@jscutlery/semver:github",
+      "dependsOn": ["build", "copy-package-json"],
       "options": {
         "tag": "${tag}",
         "notes": "${notes}"
@@ -61,8 +62,7 @@
       "options": {
         "tag": "beta",
         "access": "public",
-        "noBuild": true,
-        "dryRun": true
+        "noBuild": true
       }
     },
     "copy-package-json": {
