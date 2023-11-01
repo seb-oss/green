@@ -1,0 +1,17 @@
+{
+  "sys": {
+    "color": {
+      "primary": {
+        "primary": {
+          "value": "{ref.color.grey.20}",
+          "darkValue": "{ref.color.grey.20}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

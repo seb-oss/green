@@ -1,0 +1,80 @@
+{
+  "sys": {
+    "color": {
+      "state-layers": {
+        "black": {
+          "value": "{ref.color.black}",
+          "darkValue": "{ref.color.black}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "blackDim1": {
+          "value": "{ref.color.black}",
+          "darkValue": "{ref.color.black}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "blackDim2": {
+          "value": "{ref.color.black}",
+          "darkValue": "{ref.color.black}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "blackShade": {
+          "value": "{ref.color.black}",
+          "darkValue": "{ref.color.black}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "positive": {
+          "value": "{sys.color.status.positive}",
+          "darkValue": "{sys.color.status.positive}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "positiveDim": {
+          "value": "{sys.color.status.positive}",
+          "darkValue": "{sys.color.status.positive}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "negative": {
+          "value": "{sys.color.status.negative}",
+          "darkValue": "{sys.color.status.negative}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "negativeDim": {
+          "value": "{sys.color.status.negative}",
+          "darkValue": "{sys.color.status.negative}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

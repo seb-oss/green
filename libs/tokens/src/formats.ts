@@ -55,9 +55,12 @@ const formats: Record<string, Format> = {
               if (token.attributes) {
                 token.attributes['figma'].originalLightId =
                   ref?.attributes?.['figma'].id
-                token.attributes['figma'].originalLightName = ref.path
-                  .slice(1, ref.path.length)
-                  .join('/')
+
+                if (ref.path) {
+                  token.attributes['figma'].originalLightName = ref.path
+                    .slice(1, ref.path.length)
+                    .join('/')
+                }
               }
             })
 
@@ -73,9 +76,12 @@ const formats: Record<string, Format> = {
                 if (token?.attributes?.['figma']) {
                   token.attributes['figma'].originalDarkId =
                     ref?.attributes?.['figma'].id
-                  token.attributes['figma'].originalDarkName = ref.path
-                    .slice(1, ref.path.length)
-                    .join('/')
+
+                  if (ref.path) {
+                    token.attributes['figma'].originalDarkName = ref.path
+                      .slice(1, ref.path.length)
+                      .join('/')
+                  }
                 }
               })
             }

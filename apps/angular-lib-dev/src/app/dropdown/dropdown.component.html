@@ -17,7 +17,14 @@
         [options]="options"
         [texts]="texts"
         [(value)]="dropdownValue2"
-      ></ngg-dropdown>
+      >
+        <ng-template nggDropdownButton let-option="option" let-index="index">
+          <div>
+            <div>{{ option.label }}</div>
+            <div style="font-size: 0.8em">{{ option.value }}</div>
+          </div>
+        </ng-template></ngg-dropdown
+      >
     </div>
     <code>
       <div>Value: {{ dropdownValue0 | json }}</div>

@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.0...@sebgroup/green-angular@2.0.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** issues with Dropdown custom buttons ([#1084](https://github.com/sebgroup/green/issues/1084)) ([eebb5e4](https://github.com/sebgroup/green/commit/eebb5e4cc75d8415edcb7efc125befac4ca1dde3))
+
+
+
 # [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.10.0...@sebgroup/green-angular@2.0.0) (2023-10-30)
 
 
