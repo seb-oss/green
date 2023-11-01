@@ -325,6 +325,24 @@
     }
   },
   {
+    "id": "components-inpagewizardstepcard--in-page-wizard-step-card",
+    "name": "InPageWizardStepCard",
+    "title": "Components/InPageWizardStepCard",
+    "customParams": {}
+  },
+  {
+    "id": "components-inpagewizardstepcard--in-page-wizard-step-card-2",
+    "name": "InPageWizardStepCard2",
+    "title": "Components/InPageWizardStepCard",
+    "customParams": {}
+  },
+  {
+    "id": "components-inpagewizardstepcard--in-page-wizard-step-card-3",
+    "name": "InPageWizardStepCard3",
+    "title": "Components/InPageWizardStepCard",
+    "customParams": {}
+  },
+  {
     "id": "components-formitem--text-input",
     "name": "TextInput",
     "title": "Components/FormItem",
