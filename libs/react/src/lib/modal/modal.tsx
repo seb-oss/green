@@ -1,5 +1,5 @@
 import { ModalType, Size, randomId } from '@sebgroup/extract'
-import { DetailedHTMLProps, HTMLAttributes, MouseEvent, ReactNode, memo, useState } from 'react'
+import { DetailedHTMLProps, HTMLAttributes, MouseEvent, ReactNode, useState } from 'react'
 import Button from '../form/button/button'
 
 type ModalEventListener = (event: MouseEvent<HTMLButtonElement>) => unknown
@@ -19,7 +19,7 @@ export interface ModalProps {
   onDismiss?: ModalEventListener
 }
 
-const ModalHeader = memo(({ header = '', id, onClose }: Partial<ModalProps>) => {
+const ModalHeader = ({ header = '', id, onClose }: Partial<ModalProps>) => {
   const handleClose: ModalEventListener = (event) => {
     if (onClose) onClose(event)
   }
@@ -32,13 +32,13 @@ const ModalHeader = memo(({ header = '', id, onClose }: Partial<ModalProps>) => 
       </button>
     </div>
   )
-})
+}
 
-const ModalBody = memo(({ children, id }: Partial<ModalProps>) => {
+const ModalBody = ({ children, id }: Partial<ModalProps>) => {
   return <div className="body" id={id}>{children}</div>
-})
+}
 
-const ModalFooter = memo(({
+const ModalFooter = ({
   confirm,
   dismiss,
   onClose,
@@ -67,9 +67,9 @@ const ModalFooter = memo(({
       )}
     </div>
   )
-})
+}
 
-export const Modal = memo(({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
+export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
   const [uuid, _] = useState(id)
 
   if (!isOpen) return null;
@@ -118,6 +118,6 @@ export const Modal = memo(({ type = 'default', id = randomId(), isOpen, size = '
       )
     }
   }
-})
+}
 
 export default Modal
