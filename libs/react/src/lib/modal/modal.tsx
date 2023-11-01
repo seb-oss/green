@@ -1,5 +1,5 @@
-import { ModalType, Size } from '@sebgroup/extract'
-import { MouseEvent, ReactNode, memo } from 'react'
+import { ModalType, Size, randomId } from '@sebgroup/extract'
+import { DetailedHTMLProps, HTMLAttributes, MouseEvent, ReactNode, memo, useState } from 'react'
 import Button from '../form/button/button'
 
 type ModalEventListener = (event: MouseEvent<HTMLButtonElement>) => unknown
@@ -11,6 +11,7 @@ export interface ModalProps {
   confirm?: string
   dismiss?: string
   size?: Size
+  id?: string
 
   isOpen?: boolean
   onClose?: ModalEventListener
@@ -18,13 +19,13 @@ export interface ModalProps {
   onDismiss?: ModalEventListener
 }
 
-const ModalHeader = memo(({ header = '', onClose }: Partial<ModalProps>) => {
+const ModalHeader = memo(({ header = '', id, onClose }: Partial<ModalProps>) => {
   const handleClose: ModalEventListener = (event) => {
     if (onClose) onClose(event)
   }
   return (
     <div className="header">
-      <h3 id="modal_header">{header}</h3>
+      <h3 id={id}>{header}</h3>
       <button className="close" onClick={handleClose}>
         <span className="sr-only">Close</span>
         <i></i>
@@ -33,8 +34,8 @@ const ModalHeader = memo(({ header = '', onClose }: Partial<ModalProps>) => {
   )
 })
 
-const ModalBody = memo(({ children }: Partial<ModalProps>) => {
-  return <div className="body" id="modal_body">{children}</div>
+const ModalBody = memo(({ children, id }: Partial<ModalProps>) => {
+  return <div className="body" id={id}>{children}</div>
 })
 
 const ModalFooter = memo(({
@@ -68,44 +69,55 @@ const ModalFooter = memo(({
   )
 })
 
-export const Modal = memo(({ type = 'default', isOpen, size = 'sm', ...props }: ModalProps) => {
-  const modalContent = () => {
-    switch (type) {
-      case 'slideout': {
-        let className: string | undefined = undefined;
-        if (size === "lg") className = 'gds-slide-out--960';
-        if (size === "md") className = 'gds-slide-out--768';
+export const Modal = memo(({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
+  const [uuid, _] = useState(id)
 
-        return (
-          <aside role="dialog" className={className} aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
-            <ModalHeader {...props} />
-            <ModalBody {...props} />
-            <ModalFooter {...props} />
-          </aside>
-        )
-      }
-      case 'takeover': {
-        return (
-          <main role="dialog" aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
-            <ModalHeader {...props} />
-            <ModalBody {...props} />
-            <ModalFooter {...props} />
-          </main>
-        )
-      }
-      default: {
-        return (
-          <section role="dialog" aria-modal="true" aria-labelledby="modal_header" aria-describedby="modal_body">
-            <ModalHeader {...props} />
-            <ModalBody {...props} />
-            <ModalFooter {...props} />
-          </section>
-        )
-      }
-    }
+  if (!isOpen) return null;
+
+  const bodyId = `${uuid}_body`;
+  const headerId = `${uuid}_header`;
+
+  const dialogProps: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
+    id: uuid,
+    role: 'dialog',
+    "aria-modal": true,
+    "aria-labelledby": headerId,
+    "aria-describedby": bodyId,
   }
 
-  return isOpen ? modalContent() : null
+  switch (type) {
+    case 'slideout': {
+      let className: string | undefined = undefined;
+      if (size === "lg") className = 'gds-slide-out--960';
+      if (size === "md") className = 'gds-slide-out--768';
+
+      return (
+        <aside className={className} {...dialogProps}>
+          <ModalHeader id={headerId} {...props} />
+          <ModalBody id={bodyId} {...props} />
+          <ModalFooter {...props} />
+        </aside>
+      )
+    }
+    case 'takeover': {
+      return (
+        <main {...dialogProps}>
+          <ModalHeader id={headerId} {...props} />
+          <ModalBody id={bodyId} {...props} />
+          <ModalFooter {...props} />
+        </main>
+      )
+    }
+    default: {
+      return (
+        <section {...dialogProps}>
+          <ModalHeader id={headerId} {...props} />
+          <ModalBody id={bodyId} {...props} />
+          <ModalFooter {...props} />
+        </section>
+      )
+    }
+  }
 })
 
 export default Modal
