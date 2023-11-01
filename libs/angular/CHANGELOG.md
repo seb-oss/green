@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.1...@sebgroup/green-angular@2.0.2) (2023-11-01)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** correct additional regressions ([#1087](https://github.com/sebgroup/green/issues/1087)) ([57f7f4b](https://github.com/sebgroup/green/commit/57f7f4b685efab17fba482de3fd66e23f32e3486))
+
+
+
 ## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.0...@sebgroup/green-angular@2.0.1) (2023-10-31)
 
 
