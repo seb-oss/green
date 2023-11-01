@@ -1,0 +1,99 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { InPageWizardStepCard } from './inPageWizardStepCard'
+
+export const Template = ({ children, ...props }) => (
+  <InPageWizardStepCard {...props}>{children}</InPageWizardStepCard>
+)
+
+<Meta
+  title="Components/InPageWizardStepCard"
+  component={InPageWizardStepCard}
+/>
+
+# InPageWizardStepCard
+
+An InPageWizardStepCard lets users add a step on a page.
+
+## An active step
+
+<Canvas>
+  <Story
+    name="InPageWizardStepCard"
+    args={{
+      stepText: 'Steg 1 av 3',
+      title: 'Nya lånet',
+      editBtnText: 'Ändra',
+      nextBtnText: 'Nästa',
+      stepStatus: 'IsActive',
+      onNextClick: () => {},
+      onEditClick: () => {},
+      children: <div>Content of Step 1</div>,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## A not started step
+
+<Canvas>
+  <Story
+    name="InPageWizardStepCard2"
+    args={{
+      stepText: 'Steg 2 av 3',
+      title: 'Sälja bostad',
+      editBtnText: 'Ändra',
+      nextBtnText: 'Nästa',
+      stepStatus: 'NotStarted',
+      onNextClick: () => {},
+      onEditClick: () => {},
+      children: <div>Content of Step 2</div>,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## A complete step
+
+<Canvas>
+  <Story
+    name="InPageWizardStepCard3"
+    args={{
+      stepText: 'Steg 3 av 3',
+      title: 'Hushåll och ekonomi',
+      editBtnText: 'Ändra',
+      nextBtnText: 'Nästa',
+      stepStatus: 'IsComplete',
+      onNextClick: () => {},
+      onEditClick: () => {},
+      children: <div>Content of Step 3</div>,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Description
+
+With InPageWizardStepCard it is possible for a user to quickly create wizard steps. Status for each step has to be provided so that it has the correct styles and renders correct.
+
+## Props
+
+| Prop        | Type         | Description                                            |
+| :---------- | :----------- | :----------------------------------------------------- |
+| title       | `string`     | Title of the step.                                     |
+| stepText    | `string`     | Sub title for the title indicating 'Step X of Y'.      |
+| editBtnText | `string`     | Text on edit button.                                   |
+| nextBtnText | `string`     | Text on next button.                                   |
+| nextBtnIcon | `ReactNode`  | Icon for next button. Optional.                        |
+| stepStatus  | `string`     | Status for the step.                                   |
+| hideFooter  | `boolean`    | Force hiding of footer, regardless of state. Optional. |
+| children    | `string`     | Content for the step.                                  |
+| onNextClick | `() => void` | event for click on next button.                        |
+| onEditClick | `() => void` | event for click on edit button.                        |
+| dataTestid  | `string`     | testid for testing. Optional.                          |
+
+### WizardStepStatus
+
+A step can only be in one of the following statuses: "NotStarted" | "IsActive" | "IsComplete"
