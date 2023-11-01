@@ -28,7 +28,7 @@ header h2 {
 dialog {
   @include popover.popover;
   border-width: 0;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
   right: 0;
 

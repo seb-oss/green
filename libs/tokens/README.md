@@ -1,6 +1,6 @@
 # Green Tokens
 
-In this project you will find design tokens that are used in SEB's **Green Design System**. 
+Design tokens for **Green Design System**. The design system at Skandinaviska Enskilda Banken (SEB). 
 
 ## How it works
 

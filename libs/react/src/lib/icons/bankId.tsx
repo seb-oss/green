@@ -18,7 +18,7 @@ export const BankId = ({ fill, focusable, title, ...props }: IconProps) => {
       focusable={focusable}
       aria-labelledby={id}
     >
-      title && <title id={id}>{title}</title>
+      {title && <title id={id}>{title}</title>}
       <g>
         <path
           fill={fill ? fill : '#479CBE'}
