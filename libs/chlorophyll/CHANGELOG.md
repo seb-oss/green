@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.0.1...@sebgroup/chlorophyll@2.1.0) (2023-11-01)
+
+
+### Features
+
+* **react:** new component InPageWizardStepCard ([#1081](https://github.com/sebgroup/green/issues/1081)) ([32e8d3b](https://github.com/sebgroup/green/commit/32e8d3b45992a5cc851e23b42930ae6710556a7b))
+
+
+
 ## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.0.0...@sebgroup/chlorophyll@2.0.1) (2023-10-30)
 
 
