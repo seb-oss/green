@@ -106,7 +106,7 @@ Values for light mode are used by default.
   // transparentize($black, 0.83),
   // #CECECE against white
   $border-width: 1px,
-  $border-radius: 4px,
+  $border-radius: 0.25rem,
   $_border: (
     'color': $border-color,
     'width': $border-width,
