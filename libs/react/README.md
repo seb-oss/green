@@ -42,7 +42,7 @@ yarn
 3. Start the Storybook
 
 ```bash
-yarn storybook react
+npx nx run react:storybook
 ```
 
 4. Start the test runner (or make sure your IDE runs the tests continuously)
