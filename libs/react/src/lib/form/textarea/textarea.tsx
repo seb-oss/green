@@ -10,6 +10,7 @@ export interface ITextAreaProps
   labelInformation?: string;
   validator?: IValidator | undefined;
   value?: string;
+  'data-testid'?: string;
 }
 
 export const TextArea = memo(
@@ -26,6 +27,7 @@ export const TextArea = memo(
     style = {},
     validator,
     value,
+    "data-testid": dataTestId,
     ...props
   }: ITextAreaProps) => {
     const [uuid] = useState(id);
@@ -68,6 +70,7 @@ export const TextArea = memo(
             rows={rows}
             style={{ ...style, cursor: 'text', resize: 'none' }}
             value={localValue}
+            data-testid={dataTestId}
             {...props}
           />
         </div>
