@@ -263,6 +263,7 @@ describe('billboard', () => {
       const expected: Axis = {
         y: {
           show: false,
+          clipPath: false,
         },
       }
       expect(parsed.axis).toEqual(expected)
@@ -283,6 +284,7 @@ describe('billboard', () => {
       const expected: Axis = {
         x: {
           show: false,
+          clipPath: false,
         },
       }
       expect(parsed.axis).toEqual(expected)

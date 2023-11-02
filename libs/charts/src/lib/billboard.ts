@@ -164,6 +164,7 @@ export const createOptions = ({
             max: settings?.max,
             padding: settings?.padding,
             height: settings?.height,
+            ...(axis === 'y' || axis === 'x' ? { clipPath: false } : {}),
           },
         }),
         {
