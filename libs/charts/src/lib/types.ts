@@ -57,7 +57,8 @@ export interface ChartStyle extends Pick<ChartOptions, 'color'> {
   point?: {
     show?: boolean | 'focus'
   }
-  tooltipNumberFormat?: (value: number) => string
+  tooltipNumberFormat?: (value: number, ratio?: number) => string
+  tooltipNumberPercentageDecimals?: number
 }
 
 interface Tick {

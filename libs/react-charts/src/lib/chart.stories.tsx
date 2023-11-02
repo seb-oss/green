@@ -55,7 +55,7 @@ Pie.args = {
       },
       {
         name: 'Utnyttjade',
-        values: [100],
+        values: [100.656544],
       },
     ],
     legend: 'right',

@@ -324,13 +324,27 @@ describe('billboard', () => {
       )
       expect(formattedNumber).toEqual('100 kr')
     })
-    it('does not override tooltip percentages', () => {
+    it('override tooltip percentages', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
         data: [],
         style: {
           tooltipNumberFormat: (value) => `${value} kr`,
         },
+      }
+      const parsed = createOptions({ settings, chartElement })
+      const formattedNumber = parsed.tooltip.format.value.bind({})(
+        100,
+        0.1,
+        undefined,
+        undefined
+      )
+      expect(formattedNumber).toEqual('100 kr')
+    })
+    it('does not override tooltip percentages', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
       }
       const parsed = createOptions({ settings, chartElement })
       const formattedNumber = parsed.tooltip.format.value.bind({})(

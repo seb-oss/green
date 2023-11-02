@@ -72,13 +72,19 @@ export const createOptions = ({
     tooltip: {
       format: {
         value: (value, ratio) => {
-          if (typeof ratio == 'number') return `${ratio * 100}%`
-          else {
-            const formatOverride = settings?.style?.tooltipNumberFormat
-            return typeof formatOverride == 'function'
-              ? formatOverride(value)
-              : defaultTooltipNumberFormat(value)
+          const formatOverride = settings?.style?.tooltipNumberFormat
+          if(formatOverride && typeof formatOverride == 'function') {
+            return formatOverride(value, ratio)
           }
+
+          if (typeof ratio == 'number') {
+            const percentageDecimals = settings?.style?.tooltipNumberPercentageDecimals ?? 2
+            const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: percentageDecimals, style: "percent" })
+           
+            return formatter.format(ratio)
+          }
+
+          return defaultTooltipNumberFormat(value)
         },
       },
       contents: { template: tmplTooltip },
@@ -175,7 +181,7 @@ export const createOptions = ({
   let hasNegativeValue = false
   for (const dt of columns) {
     for (const val of dt) {
-      if (val < 0) {
+      if (val as number < 0) {
         hasNegativeValue = true
         break
       }
