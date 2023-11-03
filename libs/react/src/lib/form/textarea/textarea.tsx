@@ -70,7 +70,7 @@ export const TextArea = memo(
       >
         <div className="gds-input-wrapper">
           <textarea
-            aria-details={
+            aria-describedby={
               ariaDetails.length > 0 ? ariaDetails.join(' ') : undefined
             }
             autoComplete={autoComplete}
