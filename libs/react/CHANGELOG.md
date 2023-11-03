@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.1.0...@sebgroup/green-react@2.2.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* 🐛 slideout modal size prop ([#1085](https://github.com/sebgroup/green/issues/1085)) ([bac2050](https://github.com/sebgroup/green/commit/bac205051c0c8922a3cb5c09c71adec6e0342be1))
+* **react/dropdown:** simplify how the React wrapper handles state ([#1094](https://github.com/sebgroup/green/issues/1094)) ([7371f5d](https://github.com/sebgroup/green/commit/7371f5d12bd0351f589112dd33f228e893bf1f72))
+
+
+### Features
+
+* **react/textarea:** add Textarea component ([#1093](https://github.com/sebgroup/green/issues/1093)) ([5d06dfc](https://github.com/sebgroup/green/commit/5d06dfcfacdcc6d430e82b2715063f4e6e608924))
+
+
+
 # [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.0.0...@sebgroup/green-react@2.1.0) (2023-11-01)
 
 
