@@ -17,6 +17,7 @@ $background: tokens.$form-control-bg;
     color: $color;
     display: flex;
     justify-content: center;
+    resize: vertical;
 
     @media screen and (-ms-high-contrast: active) {
       border: 2px solid currentcolor;
