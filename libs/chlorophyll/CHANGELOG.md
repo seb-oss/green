@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.1.0...@sebgroup/chlorophyll@2.2.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* **border-color:** 🐛 align default border colours ([#1089](https://github.com/sebgroup/green/issues/1089)) ([d942690](https://github.com/sebgroup/green/commit/d9426908b3c410cd2ed38415f39cd2020c189507))
+* **fonts:** revert path change ([#1095](https://github.com/sebgroup/green/issues/1095)) ([1961db8](https://github.com/sebgroup/green/commit/1961db8eb69892d426e49ce9e445f4590736a8e0))
+
+
+### Features
+
+* **react/textarea:** add Textarea component ([#1093](https://github.com/sebgroup/green/issues/1093)) ([5d06dfc](https://github.com/sebgroup/green/commit/5d06dfcfacdcc6d430e82b2715063f4e6e608924))
+
+
+
 # [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.0.1...@sebgroup/chlorophyll@2.1.0) (2023-11-01)
 
 
