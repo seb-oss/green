@@ -16,7 +16,7 @@ export interface ITextAreaProps
       HTMLTextAreaElement
     > {
   label: string
-  labelInformation?: string
+  info?: string
   validator?: IValidator | undefined
   value?: string
   'data-testid'?: string
@@ -29,7 +29,7 @@ export const TextArea = memo(
     expandableInfoButtonLabel,
     id = randomId(),
     label,
-    labelInformation,
+    info,
     onChange,
     role,
     rows = 4,
@@ -55,7 +55,7 @@ export const TextArea = memo(
     )
 
     const ariaDetails: string[] = []
-    if (labelInformation) ariaDetails.push(`${uuid}_info`)
+    if (info) ariaDetails.push(`${uuid}_info`)
     if (expandableInfo) ariaDetails.push(`gds-expandable-info-${uuid}`)
 
     return (
@@ -64,7 +64,7 @@ export const TextArea = memo(
         expandableInfoButtonLabel={expandableInfoButtonLabel}
         inputId={uuid}
         label={label}
-        labelInformation={labelInformation}
+        labelInformation={info}
         role={role}
         validator={validator}
       >
