@@ -53,7 +53,7 @@ $font-family-sans-serif: 'SEBSansSerif', sans-serif, 'Helvetica Neue', Helvetica
   Arial !default;
 $root-font-size: 16px !default;
 $base-font-size: 1rem !default; // relative to root element font size (html)
-$font-path: '@sebgroup/fonts/fonts' !default;
+$font-path: '../fonts' !default;
 
 // z-index values for managing depth
 // based on what we have and use in bootstrap today
