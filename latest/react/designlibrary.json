@@ -13,8 +13,34 @@
     }
   },
   {
-    "id": "components-modal--slide-out",
-    "name": "Slide Out",
+    "id": "components-modal--slide-out-small",
+    "name": "Slide Out Small",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-medium",
+    "name": "Slide Out Medium",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-large",
+    "name": "Slide Out Large",
     "title": "Components/Modal",
     "customParams": {
       "componentIds": [
@@ -43,6 +69,16 @@
     "name": "Flexbox",
     "title": "Components/Layout/Flexbox",
     "customParams": {}
+  },
+  {
+    "id": "components-form-textarea--text-area",
+    "name": "TextArea",
+    "title": "Components/Form/TextArea",
+    "customParams": {
+      "componentIds": [
+        "component-textarea"
+      ]
+    }
   },
   {
     "id": "components-form--text",
