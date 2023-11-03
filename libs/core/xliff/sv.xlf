@@ -14,6 +14,10 @@
   <source>Search</source>
   <target>Sök</target>
 </trans-unit>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Stäng</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
