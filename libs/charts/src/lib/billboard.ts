@@ -61,6 +61,9 @@ export const createOptions = ({
   const defaultTooltipNumberFormat = (num: number) =>
     num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
+  const defaultTooltipPercentageFormat = (ratio: number) =>
+    `${Number((ratio * 100).toFixed(2))}%`
+
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
@@ -71,13 +74,15 @@ export const createOptions = ({
     legend: { show: false },
     tooltip: {
       format: {
-        value: (value, ratio) => {
-          if (typeof ratio == 'number') return `${ratio * 100}%`
+        value: (value, ratio, id, index) => {
+          const formatOverride = settings?.style?.tooltipNumberFormat
+          if (typeof formatOverride === 'function') {
+            return formatOverride(value, ratio, id, index)
+          }
+          if (typeof ratio == 'number')
+            return defaultTooltipPercentageFormat(ratio)
           else {
-            const formatOverride = settings?.style?.tooltipNumberFormat
-            return typeof formatOverride == 'function'
-              ? formatOverride(value)
-              : defaultTooltipNumberFormat(value)
+            return defaultTooltipNumberFormat(value)
           }
         },
       },
@@ -159,6 +164,7 @@ export const createOptions = ({
             max: settings?.max,
             padding: settings?.padding,
             height: settings?.height,
+            ...(axis === 'y' || axis === 'x' ? { clipPath: false } : {}),
           },
         }),
         {
