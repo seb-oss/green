@@ -30,9 +30,7 @@ export interface DropdownArgs {
   id?: string
   informationLabel?: string
   label?: string
-  loop?: boolean
   multiSelect?: boolean
-  onTouched?: () => void
   options: DropdownOption[]
   searchFilter?: SearchFilter
   searchable?: boolean
@@ -42,12 +40,7 @@ export interface DropdownArgs {
   value?: any
 }
 export interface DropdownTexts {
-  select?: string
-  selected?: string
   placeholder?: string
-  searchPlaceholder?: string
-  close?: string
-  optionsDescription?: string
 }
 export interface DropdownOption {
   label?: string
@@ -81,10 +74,6 @@ export const Dropdown = ({
   id,
   informationLabel,
   label,
-  /**
-   * @deprecated
-   * */
-  loop,
   multiSelect,
   onChange,
   options,
