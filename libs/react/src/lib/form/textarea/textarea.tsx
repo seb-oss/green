@@ -33,7 +33,6 @@ export const TextArea = memo(
     onChange,
     role,
     rows = 4,
-    style = {},
     validator,
     value,
     'data-testid': dataTestId,
@@ -79,7 +78,6 @@ export const TextArea = memo(
             onChange={localOnChange}
             role={role}
             rows={rows}
-            style={{ ...style, cursor: 'text', resize: 'none' }}
             value={localValue}
             data-testid={dataTestId}
             {...props}
