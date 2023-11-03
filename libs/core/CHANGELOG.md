@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.2...@sebgroup/green-core@1.0.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* **border-color:** 🐛 align default border colours ([#1089](https://github.com/sebgroup/green/issues/1089)) ([d942690](https://github.com/sebgroup/green/commit/d9426908b3c410cd2ed38415f39cd2020c189507))
+* **dropdown:** add missing label to close button ([#1096](https://github.com/sebgroup/green/issues/1096)) ([ab721f2](https://github.com/sebgroup/green/commit/ab721f205227dcb2b5181170d5ca30177d3a8951))
+
+
+
 ## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.1...@sebgroup/green-core@1.0.2) (2023-11-01)
 
 
