@@ -75,8 +75,4 @@ module.exports = {
     options.cache && (options.cache.set = () => Promise.resolve())
     return config
   },
-  typescript: {
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {}
-  }
 }
