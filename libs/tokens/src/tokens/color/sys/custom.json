@@ -93,8 +93,8 @@
           }
         },
         "customGreyBright": {
-          "value": "{ref.color.green.90}",
-          "darkValue": "{ref.color.green.90}",
+          "value": "{ref.color.grey.90}",
+          "darkValue": "{ref.color.grey.90}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -102,8 +102,8 @@
           }
         },
         "onCustomGreyBright": {
-          "value": "{ref.color.green.20}",
-          "darkValue": "{ref.color.green.20}",
+          "value": "{ref.color.grey.20}",
+          "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
