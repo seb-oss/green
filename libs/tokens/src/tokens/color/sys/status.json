@@ -87,8 +87,8 @@
         },
         "warning": {
           "warning": {
-            "value": "{ref.color.orange.60}",
-            "darkValue": "{ref.color.orange.20}",
+            "value": "{ref.color.orange.50}",
+            "darkValue": "{ref.color.orange.45}",
             "attributes": {
               "figma": {
                 "id": "VariableID:228:25",
@@ -98,7 +98,7 @@
           },
           "onWarning": {
             "value": "{ref.color.white}",
-            "darkValue": "{ref.color.orange.40}",
+            "darkValue": "{ref.color.orange.98}",
             "attributes": {
               "figma": {
                 "id": "VariableID:228:26",
@@ -130,7 +130,7 @@
         "positive": {
           "positive": {
             "value": "{ref.color.green.40}",
-            "darkValue": "{ref.color.green.35}",
+            "darkValue": "{ref.color.green.45}",
             "attributes": {
               "figma": {
                 "id": "VariableID:228:30",
@@ -140,7 +140,7 @@
           },
           "onPositive": {
             "value": "{ref.color.white}",
-            "darkValue": "{ref.color.green.95}",
+            "darkValue": "{ref.color.green.98}",
             "attributes": {
               "figma": {
                 "id": "VariableID:228:31",
@@ -149,7 +149,7 @@
             }
           },
           "positiveBright": {
-            "value": "{ref.color.green.95}",
+            "value": "{ref.color.green.98}",
             "darkValue": "{ref.color.green.20}",
             "attributes": {
               "figma": {
@@ -159,8 +159,8 @@
             }
           },
           "onPositiveBright": {
-            "value": "{ref.color.green.20}",
-            "darkValue": "{ref.color.green.95}",
+            "value": "{ref.color.green.40}",
+            "darkValue": "{ref.color.green.98}",
             "attributes": {
               "figma": {
                 "id": "VariableID:228:34",
@@ -201,7 +201,7 @@
             }
           },
           "onNoticeBright": {
-            "value": "{ref.color.blue.20}",
+            "value": "{ref.color.blue.40}",
             "darkValue": "{ref.color.blue.95}",
             "attributes": {
               "figma": {
