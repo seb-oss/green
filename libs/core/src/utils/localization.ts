@@ -27,7 +27,7 @@ export const gdsInitLocalization = (
     extraTemplates: new Map(),
   }
 ) => {
-  let _targetLocales = [...targetLocales] as string[]
+  const _targetLocales = [...targetLocales] as string[]
 
   for (const [locale, template] of extraTemplates) {
     localizedTemplates.set(locale, template)
