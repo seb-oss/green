@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1-beta.7](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.6...@sebgroup/green-tokens@0.0.1-beta.7) (2023-11-07)
+
+
+
 ## [0.0.1-beta.6](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.5...@sebgroup/green-tokens@0.0.1-beta.6) (2023-11-03)
 
 

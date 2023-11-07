@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-tokens",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "dependencies": {
     "style-dictionary": "^3.8.0",
     "fs-extra": "^10.1.0",
