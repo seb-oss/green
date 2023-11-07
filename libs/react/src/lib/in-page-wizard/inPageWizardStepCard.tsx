@@ -62,6 +62,15 @@ export const InPageWizardStepCard = (props: InPageWizardStepCardProps) => {
           </button>
         </footer>
       )}
+
+      {props.stepStatus === 'IsComplete' && !props.hideFooter && (
+        <footer className="gds-in-page-wizard-step-card__footer__edit">
+          <button className="secondary" onClick={props.onEditClick}>
+            <Edit fill={'var(--color)'} height={16} width={16} />
+            {props.editBtnText}
+          </button>
+        </footer>
+      )}
     </section>
   )
 }
