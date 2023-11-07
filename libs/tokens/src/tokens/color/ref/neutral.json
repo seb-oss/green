@@ -10,42 +10,6 @@
           }
         }
       },
-      "black10%": {
-        "value": "#000000",
-        "alpha": 0.1,
-        "attributes": {
-          "figma": {
-            "resolvedType": "COLOR"
-          }
-        }
-      },
-      "black20%": {
-        "value": "#000000",
-        "alpha": 0.2,
-        "attributes": {
-          "figma": {
-            "resolvedType": "COLOR"
-          }
-        }
-      },
-      "black40%": {
-        "value": "#000000",
-        "alpha": 0.4,
-        "attributes": {
-          "figma": {
-            "resolvedType": "COLOR"
-          }
-        }
-      },
-      "black60%": {
-        "value": "#000000",
-        "alpha": 0.6,
-        "attributes": {
-          "figma": {
-            "resolvedType": "COLOR"
-          }
-        }
-      },
       "white": {
         "value": "#FFFFFF",
         "attributes": {
