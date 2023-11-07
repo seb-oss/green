@@ -24,7 +24,16 @@ const config: StyleDictionary.Config = {
   source: ['src/tokens/**/*.json'],
   platforms: {
     css: {
-      transformGroup: 'css',
+      // transformGroup: 'css',
+      transforms: [
+        'attribute/cti',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'name/cti/kebab',
+        'color/alpha',
+      ],
       buildPath: 'css/',
       prefix: 'gds-',
       files: [
@@ -57,7 +66,16 @@ const config: StyleDictionary.Config = {
       ],
     },
     scss: {
-      transformGroup: 'scss',
+      //transformGroup: 'scss',
+      transforms: [
+        'attribute/cti',
+        'name/cti/kebab',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'color/alpha',
+      ],
       buildPath: 'scss/',
       prefix: 'gds-',
       files: [
@@ -93,7 +111,14 @@ const config: StyleDictionary.Config = {
       ],
     },
     js: {
-      transformGroup: 'js',
+      //transformGroup: 'js',
+      transforms: [
+        'attribute/cti',
+        'name/cti/pascal',
+        'size/rem',
+        'color/hex',
+        'color/alpha',
+      ],
       buildPath: 'js/',
       prefix: 'gds',
       files: [

@@ -3,8 +3,8 @@
     "color": {
       "custom": {
         "customBlue": {
-          "value": "{ref.color.blue.20}",
-          "darkValue": "{ref.color.blue.10}",
+          "value": "{ref.color.blue.40}",
+          "darkValue": "{ref.color.blue.45}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -22,7 +22,7 @@
         },
         "customBlueBright": {
           "value": "{ref.color.blue.90}",
-          "darkValue": "{ref.color.blue.25}",
+          "darkValue": "{ref.color.blue.60}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -31,7 +31,7 @@
         },
         "onCustomBlueBright": {
           "value": "{ref.color.blue.20}",
-          "darkValue": "{ref.color.blue.95}",
+          "darkValue": "{ref.color.blue.90}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -40,7 +40,7 @@
         },
         "customGreen": {
           "value": "{ref.color.green.20}",
-          "darkValue": "{ref.color.green.10}",
+          "darkValue": "{ref.color.green.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -49,7 +49,7 @@
         },
         "onCustomGreen": {
           "value": "{ref.color.green.98}",
-          "darkValue": "{ref.color.green.85}",
+          "darkValue": "{ref.color.green.98}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -58,7 +58,7 @@
         },
         "customGreenBright": {
           "value": "{ref.color.green.98}",
-          "darkValue": "{ref.color.green.25}",
+          "darkValue": "{ref.color.green.98}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -67,7 +67,7 @@
         },
         "onCustomGreenBright": {
           "value": "{ref.color.green.20}",
-          "darkValue": "{ref.color.green.95}",
+          "darkValue": "{ref.color.green.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -93,8 +93,8 @@
           }
         },
         "customGreyBright": {
-          "value": "{ref.color.green.90}",
-          "darkValue": "{ref.color.green.25}",
+          "value": "{ref.color.grey.90}",
+          "darkValue": "{ref.color.grey.90}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -102,8 +102,8 @@
           }
         },
         "onCustomGreyBright": {
-          "value": "{ref.color.green.20}",
-          "darkValue": "{ref.color.green.80}",
+          "value": "{ref.color.grey.20}",
+          "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
