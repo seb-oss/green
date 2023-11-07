@@ -2,6 +2,45 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.0.0...@sebgroup/chlorophyll@2.0.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* **context-menu:** context menu imports and docs ([#1074](https://github.com/sebgroup/green/issues/1074)) ([34b3a35](https://github.com/sebgroup/green/commit/34b3a35e284e4a6c7c1acc145ca80b869574dee5))
+
+
+
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.4...@sebgroup/chlorophyll@2.0.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **chlorophyll:** only import tokens in use-green-scope ([#1045](https://github.com/sebgroup/green/issues/1045)) ([151f251](https://github.com/sebgroup/green/commit/151f2516f533cf8be6c23bf4b1c975aa71d4654b))
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+* Updated focus states in Chlorophyll (#1050) ([d9ee451](https://github.com/sebgroup/green/commit/d9ee451030387576f2d9b768de665be2876e2ad9)), closes [#1050](https://github.com/sebgroup/green/issues/1050)
+
+
+### BREAKING CHANGES
+
+* Some grouped inputs will need the `group-focus` class added to the wrapper
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
+## [1.15.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.3...@sebgroup/chlorophyll@1.15.4) (2023-10-23)
+
+
+### Bug Fixes
+
+* **chlorophyll:** text colour on success and font path ([#1055](https://github.com/sebgroup/green/issues/1055)) ([d7996e4](https://github.com/sebgroup/green/commit/d7996e489ea7634e03b8625463a675e289c9a866)), closes [#988](https://github.com/sebgroup/green/issues/988) [#1054](https://github.com/sebgroup/green/issues/1054)
+* **form-group:** horizontal layout overflows ([#1064](https://github.com/sebgroup/green/issues/1064)) ([d0216dd](https://github.com/sebgroup/green/commit/d0216ddf477763a8713b43c15490f255488d4cdf))
+
+
+
 ## [1.15.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@1.15.2...@sebgroup/chlorophyll@1.15.3) (2023-09-29)
 
 

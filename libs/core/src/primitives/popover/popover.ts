@@ -1,11 +1,13 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
-import { watch, watchMediaQuery } from 'utils/decorators'
-import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+import { watch, watchMediaQuery } from '../../utils/decorators'
+import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+
+import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
 
 import styles from './popover.styles'
 
@@ -60,6 +62,7 @@ export class GdsPopover extends LitElement {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.open = false
+        e.stopImmediatePropagation()
       }
     })
   }
@@ -90,8 +93,21 @@ export class GdsPopover extends LitElement {
       if (this.open) {
         this.#dialogElementRef.value?.showModal()
         this.#focusFirstSlottedChild()
+        // Wait one event loop cycle before registering the close listener, to avoid the dialog closing immediately
+        setTimeout(
+          () =>
+            this.#dialogElementRef.value?.addEventListener(
+              'click',
+              this.#clickOutsideListener
+            ),
+          0
+        )
       } else {
         this.#dialogElementRef.value?.close()
+        this.#dialogElementRef.value?.removeEventListener(
+          'click',
+          this.#clickOutsideListener
+        )
       }
     })
 
@@ -152,14 +168,15 @@ export class GdsPopover extends LitElement {
     this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: 'bottom-start',
-        middleware: [offset(8), flip()],
-      }).then(({ x, y }) => {
+        middleware: [offset(8), flip(), topLayerOverTransforms()],
+        strategy: 'fixed',
+      }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
           minWidth: `${referenceEl.offsetWidth}px`,
         })
-      })
+      )
     })
   }
 
@@ -187,5 +204,23 @@ export class GdsPopover extends LitElement {
     this.updateComplete.then(() => {
       firstSlottedChild?.focus()
     })
+  }
+
+  #clickOutsideListener = (e: MouseEvent) => {
+    const dialog = this.#dialogElementRef.value
+
+    if (dialog && this.open) {
+      const rect = dialog.getBoundingClientRect()
+
+      const isInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width
+
+      if (!isInDialog) {
+        this.open = false
+      }
+    }
   }
 }

@@ -2,9 +2,10 @@
 @use '../../common';
 
 $font-weight: 'medium';
-$color: newTokens.$link-color;
+$color: newTokens.$text-primary-color;
 $color-active: newTokens.$text-primary-color;
 $_border-width: var(--sg-border-width);
+$greyScale: map-get(newTokens.$grey, light);
 
 @mixin tab {
   @include common.add-border($sides: 'bottom');
@@ -12,15 +13,24 @@ $_border-width: var(--sg-border-width);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.font-weight($font-weight);
-  //@include common.min-width(10);
-
   @include common.add-hover-state;
   @include common.add-focus;
 
+  display: flex;
+  justify-content: center;
   color: $color;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
+  border-radius: 0.25rem 0.25rem 0 0;
+
+  .gds-tabs--fluid & {
+    flex: 1;
+  }
+
+  svg > * {
+    fill: currentColor;
+  }
 }
 
 @mixin tab--selected {
@@ -32,8 +42,12 @@ $_border-width: var(--sg-border-width);
     )
   );
 
-  @include common.add-hover-state;
+  @include common.add-hover-state(
+    map-get($greyScale, 1000)
+  ); // This is actually Base800
 
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
   border-bottom: $_border-width transparent;
   color: $color-active;
 }
@@ -41,19 +55,23 @@ $_border-width: var(--sg-border-width);
 @mixin tabs-bar {
   display: flex;
   overflow-x: auto;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  --sg-border-color: var(--gds-ref-pallet-base600);
 
   // hide scrollbar
   &::-webkit-scrollbar {
     display: none;
   }
 
-  &::after {
+  &:not(.gds-tabs--fluid)::after {
     @include common.add-border(
       $sides: (
         'bottom',
       )
     );
-    @include common.add-border-color;
+    @include common.add-border-color();
+    //border-color: var(--gds-ref-pallets-base-600);
     content: '';
     display: block;
     flex-grow: 1;

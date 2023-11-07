@@ -1,8 +1,8 @@
 import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 
-import { watch } from 'utils/decorators'
-import { getUnscopedTagName } from 'utils/helpers/custom-element-scoping'
+import { watch } from '../utils/decorators'
+import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
 
 /**
  * Abstract base class for Green Core form controls.

@@ -46,6 +46,14 @@ export class NggSliderComponent
   @Input() unitLabel = 'kr'
   @Input() disabled = false
   @Input() value = 0
+  @Input() enterkeyhint?:
+    | 'enter'
+    | 'done'
+    | 'go'
+    | 'next'
+    | 'previous'
+    | 'search'
+    | 'send'
 
   @Output() sliderChange = new EventEmitter<number>()
   @Output() sliderTouch = new EventEmitter<boolean>()

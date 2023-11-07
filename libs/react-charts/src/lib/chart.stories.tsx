@@ -153,3 +153,25 @@ Mixed.args = {
     legend: 'right',
   },
 }
+
+export const CustomColours = Template.bind({})
+CustomColours.args = {
+  settings: {
+    type: 'donut',
+    data: [
+      {
+        name: 'Ej tilldelade',
+        values: [700],
+      },
+      {
+        name: 'Tilldelade',
+        values: [300],
+      },
+    ],
+    style: {
+      color: {
+        pattern: ['#dadada', 'green'],
+      },
+    },
+  },
+}

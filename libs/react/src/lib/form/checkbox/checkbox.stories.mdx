@@ -7,18 +7,35 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
 # Checkbox
 
-Simple Checkbox component
-
 <Canvas>
   <Story
     name="Default"
     parameters={{
-      componentIds: ['component-checkbox']
+      componentIds: ['component-checkbox'],
     }}
-    args={{ label: 'Checkbox input', checked: true }}>
+    args={{ label: 'Checkbox input', defaultChecked: false }}
+  >
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
+
+## Checked state
+
+You control the state of the checkbox by setting the `checked` prop to true or false. You can use the `onChange` handler to listen to user input and update state in your app accordingly.
+
+```tsx
+function RobotCheckComponent () {
+  const [isRobot, setIsRobot] = useState<boolean>()
+
+  return (
+    <Checkbox
+      label="Check this if you are a robot"
+      checked={isRobot}
+      onChange={(event) => { setIsRobot(event.target.checked) }
+    />
+  )
+}
+```
 
 ## States and variants checkbox
 
@@ -26,33 +43,47 @@ Simple Checkbox component
   <form>
     <Checkbox label="Normal unchecked" />
     <Checkbox label="Normal checked" checked />
-  </form>
-  <form>
-    <Checkbox label="Valid unchecked" className="is-valid" />
-    <Checkbox label="Valid checked" className="is-valid" checked />
-  </form>
-  <form>
-    <Checkbox label="Invalid unchecked" className="is-invalid" />
-    <Checkbox label="Invalid checked" className="is-invalid" checked />
-  </form>
-  <form>
-    <Checkbox label="Disabled unchecked" disabled />
-    <Checkbox label="Disabled checked" disabled checked />
+    <Checkbox
+      label="Invalid unchecked"
+      validator={{
+        indicator: 'error',
+        message: 'Invalid',
+      }}
+    />
+    <Checkbox
+      label="Invalid checked"
+      validator={{
+        indicator: 'error',
+        message: 'Invalid',
+      }}
+      checked
+    />
   </form>
 </Canvas>
 
 ## Validation
 
 <Canvas>
-  <Story name="invalid"
-         args={{
-           label: 'Invalid',
-           validator: {
-             indicator: 'error',
-             message: 'Error'
-           }}}
+  <Story
+    name="invalid"
+    args={{
+      label: 'Invalid',
+      validator: {
+        indicator: 'error',
+        message: 'Error',
+      },
+    }}
   >
     {CheckboxTemplate.bind({})}
   </Story>
 </Canvas>
 
+## Props
+
+| Prop       | Type                                             | Description                                                                       |
+| :--------- | :----------------------------------------------- | :-------------------------------------------------------------------------------- |
+| label      | `string`                                         | The label of the checkbox                                                         |
+| checked?   | `boolean`                                        | Use this prop to control the checked state of the checkbox                        |
+| onChange?  | `(e: React.FormEvent<HTMLInputElement>) => void` | A handler function that takes the event and can act on it                         |
+| validator? | `IValidator`                                     | An object used to render the validation status for the component                  |
+| testId?    | `string`                                         | A test id that will be placed in the `data-testid` attribute on the input element |

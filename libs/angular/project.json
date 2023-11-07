@@ -55,7 +55,13 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "projects": "dependencies",
+          "target": "build-with-types-and-scoping"
+        }
+      ]
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
@@ -70,7 +76,13 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "projects": "dependencies",
+          "target": "build-with-types-and-scoping"
+        }
+      ]
     },
     "update-deps-and-release": {
       "executor": "nx:run-commands",

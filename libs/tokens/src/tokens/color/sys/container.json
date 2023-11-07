@@ -1,0 +1,63 @@
+{
+  "sys": {
+    "color": {
+      "container": {
+        "container": {
+          "value": "{ref.color.grey.95}",
+          "darkValue": "{ref.color.grey.10}",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:228:10",
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerDim1": {
+          "value": "{ref.color.grey.90}",
+          "darkValue": "{ref.color.grey.25}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerDim2": {
+          "value": "{ref.color.grey.85}",
+          "darkValue": "{ref.color.grey.10}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerBright": {
+          "value": "{ref.color.white}",
+          "darkValue": "{ref.color.black}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerShade": {
+          "value": "{ref.color.grey.20}",
+          "darkValue": "{ref.color.grey.80}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerDisabled": {
+          "value": "{ref.color.grey.98}",
+          "darkValue": "{ref.color.grey.5}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

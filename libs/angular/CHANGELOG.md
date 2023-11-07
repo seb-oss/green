@@ -2,6 +2,35 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.10.0...@sebgroup/green-angular@2.0.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **context-menu:** context menu imports and docs ([#1074](https://github.com/sebgroup/green/issues/1074)) ([34b3a35](https://github.com/sebgroup/green/commit/34b3a35e284e4a6c7c1acc145ca80b869574dee5))
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+* Updated focus states in Chlorophyll (#1050) ([d9ee451](https://github.com/sebgroup/green/commit/d9ee451030387576f2d9b768de665be2876e2ad9)), closes [#1050](https://github.com/sebgroup/green/issues/1050)
+
+
+### BREAKING CHANGES
+
+* Some grouped inputs will need the `group-focus` class added to the wrapper
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
+# [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.9.0...@sebgroup/green-angular@1.10.0) (2023-10-11)
+
+
+### Features
+
+* **slider:** use `inputmode='numeric'` and add `enterkeyhint` support ([#1049](https://github.com/sebgroup/green/issues/1049)) ([44ac574](https://github.com/sebgroup/green/commit/44ac574112b5621c87f3688f02669a9d2071160f))
+
+
+
 # [1.9.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.8.5...@sebgroup/green-angular@1.9.0) (2023-09-01)
 
 

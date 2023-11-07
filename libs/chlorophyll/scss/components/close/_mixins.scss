@@ -42,7 +42,6 @@ $close-icon-color: var(--text-primary-color);
     }
   }
 
-  outline: none;
   font-size: 0;
   background: $close-bg;
   border: 0;
@@ -55,12 +54,7 @@ $close-icon-color: var(--text-primary-color);
   position: relative;
   width: $close-width;
 
-  &:focus-visible > i {
-    border-color: var(--gds-sys-color-blue-dark-2);
-    box-shadow: 0 0 0.0625rem 0 var(--gds-sys-color-blue-dark-2), 0 0 0.25rem 0.0625rem var(--gds-sys-color-blue-dark-2);
-    outline-color: transparent;
-    outline-style: solid;
-  }
+  @include common.add-focus('visible', 'i');
 
   > i {
     border-radius: var(--gds-sys-shape-corner-round);
@@ -96,9 +90,8 @@ $close-icon-color: var(--text-primary-color);
 
   @include common.media-breakpoint-up('md') {
     &:not(:disabled, .disabled):hover > i {
-      background: var(--gds-ref-pallet-base200);
+      background: var(--gds-ref-pallet-base300);
     }
-
 
     &:not(:disabled, .disabled):hover:active > i {
       background: var(--gds-ref-pallet-base500);

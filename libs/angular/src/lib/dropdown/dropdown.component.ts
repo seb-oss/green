@@ -1,7 +1,4 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -9,10 +6,7 @@ import {
   Inject,
   Injector,
   Input,
-  OnChanges,
-  OnDestroy,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core'
 import {
@@ -20,22 +14,30 @@ import {
   NgControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms'
-import {
-  AbstractDropdown,
-  CompareWith,
-  createDropdown,
-  DropdownArgs,
-  DropdownHandler,
-  DropdownOption,
-  DropdownOptionElement,
-  DropdownPlacements,
-  DropdownTexts,
-  dropdownValues,
-  ElementProps,
-  SearchFilter,
-} from '@sebgroup/extract'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
+
+import { GdsDropdown, GdsOption } from '@sebgroup/green-core'
+
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
+export type DropdownPlacements = 'bottom-start' | 'top-start'
+export interface DropdownTexts {
+  select?: string
+  selected?: string
+  placeholder?: string
+  searchPlaceholder?: string
+  close?: string
+  optionsDescription?: string
+}
+export interface DropdownOption {
+  label?: string
+  value?: any
+  selected?: boolean
+  [key: string]: any
+}
 
 @Component({
   selector: 'ngg-dropdown',
@@ -47,16 +49,14 @@ import { NggDropdownButtonDirective } from './dropdown-button.directive'
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggDropdownComponent
-  implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges
-{
+export class NggDropdownComponent implements ControlValueAccessor {
   @Input() id?: string
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
-  @Input() display?: string
-  @Input() useValue?: string
+  @Input() display = 'label'
+  @Input() useValue = 'value'
   @Input() label?: string
   @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
@@ -65,6 +65,7 @@ export class NggDropdownComponent
   @Input() searchFilter?: SearchFilter
   @Input() fixedPlacement?: DropdownPlacements
 
+  //
   @Input() set multiSelect(value: string | boolean) {
     this._multiSelect = this.convertToBoolean(value)
   }
@@ -73,6 +74,7 @@ export class NggDropdownComponent
   }
   private _multiSelect = false
 
+  //
   @Input() set searchable(value: string | boolean) {
     this._searchable = this.convertToBoolean(value)
   }
@@ -81,26 +83,33 @@ export class NggDropdownComponent
   }
   private _searchable = false
 
+  //
   @Input() set value(newValue: any) {
-    this.handler?.selectByValue(newValue)
+    if (!this.options) return
+
     this._value = newValue
+
+    this.texts = {
+      ...this.texts,
+      select: this.getDisplayText(this._value),
+    }
   }
   get value(): any {
     return this._value
   }
-  private _value: any
+  private _value: DropdownOption | DropdownOption[] | undefined
 
+  //
   get selectedOption() {
-    return this.handler?.dropdown.options.find((o) => o.selected)
+    return this.value
   }
+
+  onChangeFn?: (value: unknown) => void
+  onTouchedFn?: () => void
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
   @Output() readonly touched: EventEmitter<boolean> =
     new EventEmitter<boolean>()
-
-  @ViewChild('togglerRef') public togglerRef?: ElementRef<HTMLElement>
-  @ViewChild('listboxRef') public listboxRef?: ElementRef<HTMLElement>
-  @ViewChild('fieldsetRef') public fieldsetRef?: ElementRef<HTMLElement>
 
   @ContentChild(NggDropdownOptionDirective)
   customOption?: NggDropdownOptionDirective
@@ -108,56 +117,48 @@ export class NggDropdownComponent
   @ContentChild(NggDropdownButtonDirective)
   customButton?: NggDropdownButtonDirective
 
-  onChangeFn?: (value: unknown) => void
-  onTouchedFn?: () => void
+  @ViewChild('gdsDropdown', { static: false }) gdsDropdown?: ElementRef
 
-  dropdown?: AbstractDropdown
-  handler?: DropdownHandler
-  toggler?: Partial<ElementProps> = dropdownValues().elements?.toggler
-  listbox?: Partial<ElementProps> = dropdownValues().elements?.listbox
-  fieldset?: Partial<ElementProps> = dropdownValues().elements?.fieldset
+  public onValueChange: (event: Event) => void = (event) => {
+    const target = event.target as GdsDropdown<DropdownOption>
+    this._value = target.value
+
+    this.texts = {
+      ...this.texts,
+      select: this.getDisplayText(this._value),
+    }
+
+    this.onChangeFn?.(this.value)
+    this.valueChange.emit(this.value)
+  }
 
   get control(): NgControl | undefined {
     return this.injector.get(NgControl)
   }
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    @Inject(Injector) private injector: Injector
-  ) {}
+  constructor(@Inject(Injector) private injector: Injector) {
+    registerTransitionalStyles()
+  }
 
   ngAfterViewInit(): void {
-    if (this.togglerRef?.nativeElement && this.listboxRef?.nativeElement) {
-      this.handler = createDropdown(
-        this.props,
-        this.togglerRef.nativeElement,
-        this.listboxRef.nativeElement,
-        this.fieldsetRef?.nativeElement,
-        (dropdown) => {
-          this.dropdown = dropdown
-          this.toggler = dropdown.elements.toggler
-          this.listbox = dropdown.elements.listbox
-          this.fieldset = dropdown.elements.fieldset
-          this.cd.detectChanges()
-        },
-        (value) => {
-          this.updateValue(value)
-        },
-        this.fixedPlacement
-      )
+    if (!this._value) {
+      if (this.multiSelect)
+        this._value = this.options
+          ?.filter((o) => o.selected === true)
+          ?.map((o) => o[this.useValue])
+      else
+        this._value = this.options?.find((o) => o.selected === true)?.[
+          this.useValue
+        ]
     }
-  }
 
-  ngOnDestroy(): void {
-    this.handler?.destroy()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (
-      this.handler &&
-      (changes.id || changes.texts || changes.loop || changes.options)
-    ) {
-      this.handler.update(this.props)
+    this.texts = {
+      close: this.texts?.close ?? 'Close',
+      optionsDescription: this.texts?.optionsDescription ?? 'Options',
+      placeholder: this.texts?.placeholder ?? 'Select',
+      searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
+      selected: this.texts?.selected ?? 'selected',
+      select: this.getDisplayText(this._value),
     }
   }
 
@@ -173,44 +174,40 @@ export class NggDropdownComponent
     this.onTouchedFn = fn
   }
 
-  trackByKey = (index: number, option: DropdownOptionElement): string => {
-    return option.attributes.id ?? ''
+  // These adapter functions are used to maintain backwards compatibility with the old interface
+  compareWithAdapter = (o1: any, o2: any) => {
+    const compareFn = this.compareWith || ((a, b) => a === b)
+    return compareFn(o1, o2)
   }
-
-  search($event: Event): void {
-    this.handler?.search(($event.target as HTMLInputElement).value)
-  }
-
-  private get props(): DropdownArgs {
-    return {
-      id: this.id || this.dropdown?.id,
-      texts: this.texts,
-      useValue: this.useValue,
-      display: this.display,
-      options: this.options,
-      loop: this.loop,
-      value: this.value,
-      multiSelect: this.multiSelect,
-      searchable: this.searchable,
-      searchFilter: this.searchFilter,
-      compareWith: this.compareWith,
-      onTouched: () => {
-        this.onTouchedFn?.()
-        this.touched.emit(true)
-        this.cd.markForCheck()
-      },
-    }
-  }
-
-  private updateValue(option: any): void {
-    this._value = option
-    this.valueChange.emit(option)
-    this.onChangeFn?.(option)
+  searchFilterAdapter = (q: string, o: GdsOption) => {
+    if (this.searchFilter) return this.searchFilter(q, o.value[this.useValue])
+    else
+      return ((q: string, o: GdsOption) =>
+        o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
   }
 
   private convertToBoolean(value: string | boolean): boolean {
     return (
       value === '' || value === 'true' || value.toString() === 'true' || false
     )
+  }
+
+  private optionByValue = (value: any) => {
+    return this.options?.find((o) => o[this.useValue] === value)
+  }
+
+  private getDisplayText = (value: any) => {
+    if (!Array.isArray(value))
+      return (
+        this.optionByValue(value)?.[this.display] ||
+        (this.texts?.placeholder ?? 'Select')
+      )
+
+    const displayValues = value.map(
+      (v) => this.optionByValue(v)?.[this.display]
+    )
+    return displayValues?.length > 2
+      ? `${displayValues.length} ${this.texts?.selected} `
+      : displayValues?.join(', ') || (this.texts?.placeholder ?? 'Select')
   }
 }

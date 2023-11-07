@@ -51,7 +51,12 @@ export class AppModule {}
 To use this component, simply add an `ngg-badge` directive to an HTML `span` element:
 
 ```html
-<span ngg-badge badgeType="success">Badge</span>
+<span ngg-badge badgeType="success" class="mr-2">Badge</span>
+<span ngg-badge badgeType="info" class="mr-2">Badge</span>
+<span ngg-badge badgeType="warning" class="mr-2">Badge</span>
+<span ngg-badge badgeType="danger" class="mr-2">Badge</span>
+<span ngg-badge badgeType="light" class="mr-2">Badge</span>
+<span ngg-badge badgeType="dark" class="mr-2">Badge</span>
 ```
 
 ### Simple Badge
@@ -60,12 +65,10 @@ To use this component, simply add an `ngg-badge` directive to an HTML `span` ele
   <Story id="components-badge--default" />
 </Canvas>
 
-### Dismissible Badge
-
-Badges that can be dismissed/removed. Please note that this is currently not in the designs in Figma/Design Library and might be removed from code.
+### All badges
 
 <Canvas>
-  <Story id="components-badge--dismissible" />
+  <Story id="components-badge--multiple" />
 </Canvas>
 
 ### Custom Badge

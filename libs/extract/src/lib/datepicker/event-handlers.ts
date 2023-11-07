@@ -54,6 +54,12 @@ const _mobileViewHandler = (
                   offset: [0, 4],
                 },
               },
+              {
+                name: 'computeStyles',
+                options: {
+                  gpuAcceleration: false, // true by default
+                },
+              },
             ],
           })
         }

@@ -38,16 +38,16 @@ dialog {
 
   @include common.media-breakpoint-up('sm') {
     inset: auto;
-    position: absolute;
+    position: fixed;
   }
 }
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.2);
   display: block;
-  pointer-events: none;
+  //pointer-events: none;
   position: fixed;
   @include common.media-breakpoint-up('sm') {
-    display: none;
+    opacity: 0;
   }
 }

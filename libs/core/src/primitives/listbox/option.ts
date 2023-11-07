@@ -2,14 +2,14 @@ import { LitElement, html, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { TransitionalStyles } from 'utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
-import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 
 import style from './option.styles'
 
 import 'reflect-metadata'
-import { watch } from 'utils/decorators'
+import { watch } from '../../utils/decorators'
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean

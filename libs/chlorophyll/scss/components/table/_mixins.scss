@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../tokens';
+@use '../../common';
 
 $selector: 'table.table';
 $_header-background: var(--sg-table-header-background);
@@ -30,6 +31,10 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
           text-align: left;
           display: flex;
           justify-content: space-between;
+
+          @include common.add-focus();
+          border-radius: 0.125rem;
+          --gds-sys-color-focus-outline: $_header-color;
         }
         &[aria-sort],
         &.sg-sortable {

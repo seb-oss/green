@@ -1,0 +1,242 @@
+{
+  "ref": {
+    "color": {
+      "black": {
+        "value": "#000000",
+        "attributes": {
+          "figma": {
+            "id": "VariableID:182:15",
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "black10%": {
+        "value": "#000000",
+        "alpha": 0.1,
+        "attributes": {
+          "figma": {
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "black20%": {
+        "value": "#000000",
+        "alpha": 0.2,
+        "attributes": {
+          "figma": {
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "black40%": {
+        "value": "#000000",
+        "alpha": 0.4,
+        "attributes": {
+          "figma": {
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "black60%": {
+        "value": "#000000",
+        "alpha": 0.6,
+        "attributes": {
+          "figma": {
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "white": {
+        "value": "#FFFFFF",
+        "attributes": {
+          "figma": {
+            "id": "VariableID:182:14",
+            "resolvedType": "COLOR"
+          }
+        }
+      },
+      "grey": {
+        "98": {
+          "value": "#F9F9F9",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:35",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "95": {
+          "value": "#F3F3F2",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:34",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "90": {
+          "value": "#E7E7E4",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:33",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "85": {
+          "value": "#DADAD7",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:32",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "80": {
+          "value": "#CECECA",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:31",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "75": {
+          "value": "#C2C2BD",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:30",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "70": {
+          "value": "#B6B6AF",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:29",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "65": {
+          "value": "#A9A9A2",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:28",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "60": {
+          "value": "#9D9D95",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:27",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "55": {
+          "value": "#919188",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:26",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "50": {
+          "value": "#85857A",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:25",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "45": {
+          "value": "#77776E",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:24",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "40": {
+          "value": "#6A6A62",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:23",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "35": {
+          "value": "#5D5D56",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:22",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "30": {
+          "value": "#505049",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:21",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "25": {
+          "value": "#42423D",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:20",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "20": {
+          "value": "#353531",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:19",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "15": {
+          "value": "#282825",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:18",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "10": {
+          "value": "#1B1B18",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:17",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "5": {
+          "value": "#0D0D0C",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:16",
+              "resolvedType": "COLOR"
+            }
+          }
+        }
+      }
+    }
+  }
+}

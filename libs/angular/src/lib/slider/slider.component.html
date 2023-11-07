@@ -5,7 +5,7 @@
   </div>
   <ng-container *ngIf="hasTextbox">
     <ng-container *ngIf="!!unitLabel">
-      <div class="group group-border">
+      <div class="group group-border group-focus">
         <ng-container *ngTemplateOutlet="inputField"></ng-container>
         <span class="form-text">{{ unitLabel }}</span>
       </div>
@@ -36,13 +36,16 @@
 
 <ng-template #inputField>
   <input
-    type="number"
+    type="text"
+    inputmode="numeric"
+    pattern="[0-9]*"
     [(ngModel)]="value"
     [class.is-invalid]="!!errorMessage"
     [attr.name]="name"
     [attr.id]="name + '-textbox'"
     [attr.placeholder]="placeholder"
     [attr.aria-labelledby]="name + '-label'"
+    [attr.enterkeyhint]="enterkeyhint"
     [disabled]="disabled"
     (blur)="onBlur()"
     (input)="handleChange()"

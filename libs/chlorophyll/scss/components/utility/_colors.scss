@@ -2,6 +2,7 @@
 @use 'sass:map';
 
 $_background: var(--sg-bg-level-0);
+
 $colors: (
   'light': (
     color: tokens.get(tokens.$grey, 200),

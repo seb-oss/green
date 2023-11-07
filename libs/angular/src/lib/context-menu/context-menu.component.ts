@@ -14,7 +14,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core'
-import { DropdownOption } from '@sebgroup/extract'
+import { DropdownOption } from '../dropdown/dropdown.component'
 import { Subject, Subscription } from 'rxjs'
 import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
 import { CONTEXT_MENU_LEFT, CONTEXT_MENU_TOP } from './context-menu.constants'
@@ -95,7 +95,7 @@ export class NggContextMenuComponent
 
     const gapBetweenButtonAndPopover = 3
     const left = this.calculateLeft(this.direction, buttonRect)
-    const top = buttonRect.bottom + gapBetweenButtonAndPopover;
+    const top = buttonRect.bottom + gapBetweenButtonAndPopover
 
     this.left = `${left}px`
     this.top = `${top}px`

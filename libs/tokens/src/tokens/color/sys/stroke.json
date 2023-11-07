@@ -1,0 +1,71 @@
+{
+  "sys": {
+    "color": {
+      "stroke": {
+        "stroke": {
+          "value": "{ref.color.grey.20}",
+          "darkValue": "{ref.color.grey.80}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokeVariant1": {
+          "value": "{ref.color.grey.50}",
+          "darkValue": "{ref.color.grey.30}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokeVariant2": {
+          "value": "{ref.color.grey.80}",
+          "darkValue": "{ref.color.grey.20}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokeNotice": {
+          "value": "{ref.color.blue.40}",
+          "darkValue": "{ref.color.blue.40}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokePositive": {
+          "value": "{ref.color.green.40}",
+          "darkValue": "{ref.color.green.40}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokeWarning": {
+          "value": "{ref.color.orange.40}",
+          "darkValue": "{ref.color.orange.40}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "strokeNegative": {
+          "value": "{ref.color.red.40}",
+          "darkValue": "{ref.color.red.40}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { ArrayOrString } from 'billboard.js'
+import { ChartOptions } from 'billboard.js/types/options'
 
 export type ChartType = 'area' | 'bar' | 'donut' | 'line' | 'spline' | 'pie'
 export type LegendPlacement = 'top' | 'right' | 'none'
@@ -44,7 +45,7 @@ export interface ChartAxis {
   }
 }
 
-export interface ChartStyle {
+export interface ChartStyle extends Pick<ChartOptions, 'color'> {
   fitHeightToParent?: boolean
   axis?:
     | boolean

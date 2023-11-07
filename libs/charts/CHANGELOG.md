@@ -2,6 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.3.0...@sebgroup/green-charts@2.0.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+### BREAKING CHANGES
+
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.2.4...@sebgroup/green-charts@1.3.0) (2023-10-10)
+
+
+### Features
+
+* **charts:** custom colours ([#1043](https://github.com/sebgroup/green/issues/1043)) ([25f1061](https://github.com/sebgroup/green/commit/25f10619840060e86883995c71d2603d224cc196))
+
+
+
 ## [1.2.4](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.2.3...@sebgroup/green-charts@1.2.4) (2023-09-25)
 
 

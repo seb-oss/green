@@ -90,12 +90,14 @@ export const Datepicker = (options: DatepickerOptions = {}) => {
                 display="key"
                 texts={{ placeholder: data.monthName }}
                 onChange={datepicker.setMonth}
+                value={data.month}
               />
               <Dropdown
                 options={years({})}
                 display="key"
                 texts={{ placeholder: data.year + '' }}
                 onChange={datepicker.setYear}
+                value={data.year}
               />
               <button
                 className="link"

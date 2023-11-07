@@ -14,14 +14,7 @@ export default {
   ],
   argTypes: {
     badgeType: {
-      options: [
-        'info',
-        'success',
-        'warning',
-        'danger',
-        'light',
-        'dark',
-      ],
+      options: ['info', 'success', 'warning', 'danger', 'light', 'dark'],
       control: 'radio',
       name: 'Badge Type',
       defaultValue: 'info',
@@ -42,37 +35,25 @@ const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   props: args,
 })
 
+const BadgesTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
+  template: `
+    <div class="d-flex justify-content-between">
+      <span ngg-badge >Badge</span>
+      <span ngg-badge badgeType="info">Badge</span>
+      <span ngg-badge badgeType="success">Badge</span>
+      <span ngg-badge badgeType="warning">Badge</span>
+      <span ngg-badge badgeType="danger">Badge</span>
+      <span ngg-badge badgeType="light">Badge</span>
+      <span ngg-badge badgeType="dark">Badge</span>
+    </div>
+    `,
+  props: args,
+})
+
+export const Multiple = BadgesTemplate.bind({})
 export const Default = Template.bind({})
 Default.args = {
   badgeType: 'success',
-}
-
-const DismissibleTemplate: Story<NggBadgeComponent> = (
-  args: NggBadgeComponent
-) => {
-  //eslint-disable-next-line
-  let isDismissed = false
-
-  return {
-    template: `
-      <div *ngIf="!isDismissed">
-        <span ngg-badge [badgeType]="badgeType" [isCloseable]="true" (handleClose)="isDismissed=true;">Dismissible Badge</span>
-      </div>
-      <br />
-      <div>
-        <button (click)="isDismissed=false;" [disabled]="!isDismissed">Reset</button>
-      </div>
-    `,
-    props: {
-      ...args,
-      isDismissed,
-    },
-  }
-}
-
-export const Dismissible = DismissibleTemplate.bind({})
-Dismissible.args = {
-  badgeType: 'warning',
 }
 
 export const Custom = Template.bind({})

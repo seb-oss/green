@@ -1,0 +1,188 @@
+{
+  "ref": {
+    "color": {
+      "green": {
+        "98": {
+          "value": "#EAFFE8",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:75",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "95": {
+          "value": "#C5FFCA",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:74",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "90": {
+          "value": "#8FF9A4",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:73",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "85": {
+          "value": "#81EA97",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:72",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "80": {
+          "value": "#73DC8A",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:71",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "75": {
+          "value": "#65CE7E",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:70",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "70": {
+          "value": "#57C071",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:69",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "65": {
+          "value": "#48B265",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:68",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "60": {
+          "value": "#39A459",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:67",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "55": {
+          "value": "#29964D",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:66",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "50": {
+          "value": "#138942",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:65",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "45": {
+          "value": "#007B38",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:64",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "40": {
+          "value": "#006D31",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:63",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "35": {
+          "value": "#00602A",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:62",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "30": {
+          "value": "#005323",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:61",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "25": {
+          "value": "#00461D",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:60",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "20": {
+          "value": "#003916",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:59",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "15": {
+          "value": "#002D10",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:58",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "10": {
+          "value": "#00210E",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:57",
+              "resolvedType": "COLOR"
+            }
+          }
+        },
+        "5": {
+          "value": "#001505",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:1:56",
+              "resolvedType": "COLOR"
+            }
+          }
+        }
+      }
+    }
+  }
+}

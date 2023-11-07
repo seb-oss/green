@@ -1,5 +1,5 @@
 import { parameters as baseParameters } from '../../../.storybook/preview'
-// import '!style-loader!css-loader!postcss-loader!sass-loader!./scss-loader.scss'
+import '!style-loader!css-loader!postcss-loader!sass-loader!./preview.scss'
 
 export const parameters = {
   ...baseParameters,

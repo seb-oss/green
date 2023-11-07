@@ -118,6 +118,7 @@ Values for light mode are used by default.
     nth(functions.desired-color-combination($white, $grey-200), 1),
   $intent-info: nth(functions.desired-color-combination($white, $blue-2), 1),
   $intent-success: nth(functions.desired-color-combination($white, $green-2), 1),
+
   $intent-warning:
     nth(functions.desired-color-combination($white, $yellow-0), 1),
   $intent-critical: nth(functions.desired-color-combination($white, $red-1), 1),
@@ -130,7 +131,7 @@ Values for light mode are used by default.
       functions.stripped-hsl(functions.most-legible-color($intent-info)),
     "success-hsl": functions.stripped-hsl($intent-success),
     "success-hsl-contrast":
-      functions.stripped-hsl(functions.most-legible-color($intent-success)),
+      functions.stripped-hsl($white),
     "warning-hsl": functions.stripped-hsl($intent-warning),
     "warning-hsl-contrast":
       functions.stripped-hsl(functions.most-legible-color($intent-warning)),
@@ -138,6 +139,7 @@ Values for light mode are used by default.
     "critical-hsl-contrast":
       functions.stripped-hsl(functions.most-legible-color($intent-critical)),
   )
+
   /* global */,
   $box-shadow-0: 0,
   $box-shadow-1: 0 0.125rem 0.375rem rgba($black, 0.15),
@@ -225,6 +227,7 @@ Values for light mode are used by default.
     "border-radius": $card-border-radius,
   )
 ) {
+
   /* generate css variables */
   @include _generate-variables($_z-index, 'sg-z-index');
   @include _generate-variables($_text, 'sg-text');

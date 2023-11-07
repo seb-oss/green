@@ -42,6 +42,8 @@ Select.args = {
   loop: true,
   multiSelect: false,
   searchable: false,
+  display: 'label',
+  useValue: 'value',
   options: [
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
@@ -58,6 +60,7 @@ MultiSelect.args = {
   multiSelect: true,
   searchable: false,
   display: 'name',
+  useValue: 'value',
   options: [
     { name: 'Tacos', value: 'tacos' },
     { name: 'Pizza', value: 'pizza' },
@@ -74,6 +77,7 @@ Searchable.args = {
   multiSelect: false,
   searchable: true,
   display: 'name',
+  useValue: 'value',
   options: [
     { name: 'Tacos', value: 'tacos' },
     { name: 'Pizza', value: 'pizza' },
@@ -349,7 +353,7 @@ const FormControlWithResetTemplate: Story<NggDropdownComponent> = (
       Save
     </button>
     <button (click)="validationFormAdvance.reset()">
-    Reset
+      Reset
     </button>
     `,
     props: {
