@@ -1,11 +1,9 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { constrainSlots } from 'utils/helpers'
+import { constrainSlots } from '../../../utils/helpers'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import styles from './switch.css'
-
-
 
 @customElement('gds-switch')
 export class GdsSwitch extends LitElement {
@@ -25,34 +23,36 @@ export class GdsSwitch extends LitElement {
     constrainSlots(this)
   }
 
-  private inputElement: HTMLInputElement | null = null;
-  private exludeAttr = ['id', 'label'];
+  private inputElement: HTMLInputElement | null = null
+  private exludeAttr = ['id', 'label']
 
   private reflectAttributesToInput() {
     if (this.inputElement) {
-      const attributes = this.attributes;
+      const attributes = this.attributes
       for (let i = 0; i < attributes.length; i++) {
-        const attribute = attributes[i];
+        const attribute = attributes[i]
         if (!this.exludeAttr.includes(attribute.name)) {
-          this.inputElement.setAttribute(attribute.name, attribute.value);
+          this.inputElement.setAttribute(attribute.name, attribute.value)
         }
       }
     }
   }
 
   update(changedProperties: Map<PropertyKey, unknown>) {
-    super.update(changedProperties);
+    super.update(changedProperties)
     if (!this.inputElement) {
-      this.inputElement = this.shadowRoot?.getElementById('switch') as HTMLInputElement;
+      this.inputElement = this.shadowRoot?.getElementById(
+        'switch'
+      ) as HTMLInputElement
     }
-    this.reflectAttributesToInput();
+    this.reflectAttributesToInput()
   }
 
-
-  render() { 
+  render() {
     return html`
       <label class="gds-switch">
-        <input id="switch" type="checkbox">
+        <input id="switch" type="checkbox" />
       </label>
-  ` }
+    `
+  }
 }

@@ -1,6 +1,6 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
-import { constrainSlots } from 'utils/helpers'
+import { constrainSlots } from '../../utils/helpers'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
 import styles from './style/button.styles.scss'
@@ -8,10 +8,10 @@ import styles from './style/button.styles.scss'
 import {
   gdsCustomElement,
   html as customElementHtml,
-} from 'utils/helpers/custom-element-scoping'
-import { stripWhitespace } from 'utils/helpers/strip-white-space'
+} from '../../utils/helpers/custom-element-scoping'
+import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from 'components/form-control'
+import { GdsFormControlElement } from '../../components/form-control'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)

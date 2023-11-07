@@ -1,18 +1,18 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { constrainSlots } from 'utils/helpers'
+import { constrainSlots } from '../../utils/helpers'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import styles from './style/badge.styles.css'
 
 /**
- * 
+ *
  * @element gds-badge
  * @summary A component that displays a badge with different variants and types.
  * @documentation https://seb.io/docs/component/badge
  * @status beta
  * @since 1.0.0
- * 
+ *
  * @cssprop --gds-badge-background-color - The background color of the badge.
  * @cssprop --gds-badge-color - The text color of the badge.
  * @cssprop --gds-badge-font-size - The font size of the badge.
@@ -53,47 +53,46 @@ export class GdsBadge extends LitElement {
     this.#internals = this.attachInternals()
     constrainSlots(this)
   }
-  
+
   @property({ type: String, reflect: true, attribute: 'variant' })
-  variant = '';
+  variant = ''
 
   @property({ type: String, reflect: true, attribute: 'type' })
-  type = '';
-  
+  type = ''
+
   @property({ type: String, reflect: true, attribute: 'icon' })
-  icon = '';
+  icon = ''
 
   slotIcon() {
-    return html`
-        <slot name="icon" gds-allow="gds-icon"></slot>
-    `;
+    return html` <slot name="icon" gds-allow="gds-icon"></slot> `
   }
 
   slotLabel() {
-    const content = this.textContent?.trim() || '';
-    const hasLabel = content !== '';
-  
-    let label = content;
+    const content = this.textContent?.trim() || ''
+    const hasLabel = content !== ''
+
+    let label = content
     if (this.type.toLowerCase() === 'counter' && label.length > 4) {
-      label = label.substring(0, 4);
-      return hasLabel ? html`${label}` : '';
+      label = label.substring(0, 4)
+      return hasLabel ? html`${label}` : ''
     }
-  
-    return hasLabel ? html`<slot part="label" gds-allow="#text"></slot>` : '';
+
+    return hasLabel ? html`<slot part="label" gds-allow="#text"></slot>` : ''
   }
-  
-  
+
   // slotLabel() {
-  
+
   //   return this.textContent
   //     ? html`<slot part="label" gds-allow="#text"></slot>`
   //     : ''
   // }
 
-  render() { 
-    
-    const hasIconSlot = this.querySelector('[slot="icon"]') !== null;
-    const content = html`${when(hasIconSlot, () => html`<slot name="icon" gds-allow="gds-icon"></slot>`)}${this.slotLabel()}`
+  render() {
+    const hasIconSlot = this.querySelector('[slot="icon"]') !== null
+    const content = html`${when(
+      hasIconSlot,
+      () => html`<slot name="icon" gds-allow="gds-icon"></slot>`
+    )}${this.slotLabel()}`
 
     return html`<div class="gds-badge">${content}</div>`
   }
