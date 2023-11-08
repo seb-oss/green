@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.8...@sebgroup/green-tokens@0.0.1-beta.9) (2023-11-08)
+
+
+### Bug Fixes
+
+* **tokens:** renaming and correct reference ([f4f933a](https://github.com/sebgroup/green/commit/f4f933a6f745ea8bd4fce51e56f704f67372cba9))
+
+
+
 ## [0.0.1-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.7...@sebgroup/green-tokens@0.0.1-beta.8) (2023-11-07)
 
 
