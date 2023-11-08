@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.0.1-beta.8](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.7...@sebgroup/green-tokens@0.0.1-beta.8) (2023-11-08)
+
+
+### Bug Fixes
+
+* **tokens:** renaming and correct reference ([5b19911](https://github.com/sebgroup/green/commit/5b19911cfe22b8da60f9a403fe7ba72be3571076))
+
+
+### Features
+
+* **tokens:** dark mode values updated ([#1105](https://github.com/sebgroup/green/issues/1105)) ([0c11cf7](https://github.com/sebgroup/green/commit/0c11cf706540d26db5a9425183e4d9c5a055f1e0))
+
+
+
 ## [0.0.1-beta.9](https://github.com/sebgroup/green/compare/@sebgroup/green-tokens@0.0.1-beta.8...@sebgroup/green-tokens@0.0.1-beta.9) (2023-11-08)
 
 
