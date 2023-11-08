@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.0...@sebgroup/green-react@2.2.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* **react:** edit button on mobile ([#1102](https://github.com/sebgroup/green/issues/1102)) ([e6a87da](https://github.com/sebgroup/green/commit/e6a87da24d3f4b736a3d0942fa915b0a3de52c12))
+
+
+
 # [2.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.1.0...@sebgroup/green-react@2.2.0) (2023-11-03)
 
 

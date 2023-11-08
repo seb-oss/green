@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: var(--sg-z-index-modal-backdrop);
+  z-index: var(--sg-z-index-modal);
 
   // Center dialog
   > section[role='dialog'] {

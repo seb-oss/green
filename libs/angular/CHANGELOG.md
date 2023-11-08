@@ -2,6 +2,33 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([8c88de3](https://github.com/sebgroup/green/commit/8c88de30c48ddb7e0a4a8abdc3b97d8310183069))
+
+
+
+## [2.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([28b6b83](https://github.com/sebgroup/green/commit/28b6b83fcc1ab7699ee28d20b0a89e6740361b75))
+
+
+
+## [2.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.2...@sebgroup/green-angular@2.0.3) (2023-11-07)
+
+
+### Bug Fixes
+
+* **angular/context-menu:** remove border ([#1097](https://github.com/sebgroup/green/issues/1097)) ([4ce4939](https://github.com/sebgroup/green/commit/4ce493904d5b1e9487debd17cb34385e5d8cbd8b))
+
+
+
 ## [2.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.1...@sebgroup/green-angular@2.0.2) (2023-11-01)
 
 

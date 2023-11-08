@@ -11,6 +11,7 @@ interface ChartProps {
   chartRef: RefObject<HTMLDivElement>
   settings: ChartSettings
 }
+
 export const useChart = ({ chartRef, settings }: ChartProps) => {
   const [chart, setChart] = useState<Chart>()
   const [info, setInfo] = useState<ChartInfo>()

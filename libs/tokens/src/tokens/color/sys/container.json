@@ -14,7 +14,7 @@
         },
         "containerDim1": {
           "value": "{ref.color.grey.90}",
-          "darkValue": "{ref.color.grey.25}",
+          "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -23,7 +23,7 @@
         },
         "containerDim2": {
           "value": "{ref.color.grey.85}",
-          "darkValue": "{ref.color.grey.10}",
+          "darkValue": "{ref.color.grey.30}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -32,16 +32,25 @@
         },
         "containerBright": {
           "value": "{ref.color.white}",
-          "darkValue": "{ref.color.black}",
+          "darkValue": "{ref.color.grey.10}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
             }
           }
         },
-        "containerShade": {
+        "containerShade1": {
           "value": "{ref.color.grey.20}",
-          "darkValue": "{ref.color.grey.80}",
+          "darkValue": "{ref.color.grey.85}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerShade2": {
+          "value": "{ref.color.grey.10}",
+          "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -50,7 +59,25 @@
         },
         "containerDisabled": {
           "value": "{ref.color.grey.98}",
-          "darkValue": "{ref.color.grey.5}",
+          "darkValue": "{ref.color.grey.25}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerPositive": {
+          "value": "{ref.color.green.40}",
+          "darkValue": "{ref.color.green.40}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "containerNegative": {
+          "value": "{ref.color.red.40}",
+          "darkValue": "{ref.color.red.45}",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
