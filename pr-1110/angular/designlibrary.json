@@ -1,0 +1,436 @@
+[
+  {
+    "id": "components-slider--default",
+    "name": "Default",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--textbox",
+    "name": "Textbox",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--unit-textbox",
+    "name": "Unit Textbox",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--error",
+    "name": "Error",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-slider--disabled",
+    "name": "Disabled",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": [
+        "component-slider"
+      ]
+    }
+  },
+  {
+    "id": "components-segmented-control--with-router",
+    "name": "With Router",
+    "title": "Components/Segmented control",
+    "customParams": {
+      "componentIds": [
+        "component-segmented-control"
+      ]
+    }
+  },
+  {
+    "id": "components-progress-circle--default",
+    "name": "Default",
+    "title": "Components/Progress Circle",
+    "customParams": {}
+  },
+  {
+    "id": "components-navigation-pagination--default",
+    "name": "Default",
+    "title": "Components/Navigation/Pagination",
+    "customParams": {
+      "componentIds": [
+        "component-pagination"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--default",
+    "name": "Default",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slideout",
+    "name": "Slideout",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--takeover",
+    "name": "Takeover",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--custom",
+    "name": "Custom",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--default",
+    "name": "Default",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--disable-next",
+    "name": "Disable Next",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--multiple",
+    "name": "Multiple",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--select",
+    "name": "Select",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--multi-select",
+    "name": "Multi Select",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--searchable",
+    "name": "Searchable",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--custom-option",
+    "name": "Custom Option",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--form",
+    "name": "Form",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--form-with-reset",
+    "name": "Form With Reset",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--simple",
+    "name": "Simple",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--custom-options",
+    "name": "Custom Options",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-datepicker--form",
+    "name": "Form",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": [
+        "component-datepicker"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--default",
+    "name": "Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--right-to-left",
+    "name": "Right To Left",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--custom-template-default",
+    "name": "Custom Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--directive-template-default",
+    "name": "Directive Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--position-relative",
+    "name": "Position Relative",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--default",
+    "name": "Default",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--types",
+    "name": "Types",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--variants",
+    "name": "Variants",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--sizes",
+    "name": "Sizes",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--multiple",
+    "name": "Multiple",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--custom",
+    "name": "Custom",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--simple",
+    "name": "Simple",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--nosubheaders",
+    "name": "Nosubheaders",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--closeothers",
+    "name": "Closeothers",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-input--default",
+    "name": "Default",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
+  },
+  {
+    "id": "components-form-input--template-driven",
+    "name": "Template Driven",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
+  },
+  {
+    "id": "components-form-input--reactive-forms",
+    "name": "Reactive Forms",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
+  }
+]
