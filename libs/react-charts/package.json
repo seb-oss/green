@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-react-charts",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "peerDependencies": {
     "@sebgroup/chlorophyll": "^2.2.0",
     "react": "^17 || ^18",
