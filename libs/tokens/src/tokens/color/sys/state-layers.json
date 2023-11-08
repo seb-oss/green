@@ -43,8 +43,8 @@
           }
         },
         "statePositive": {
-          "value": "{sys.color.status.positive}",
-          "darkValue": "{sys.color.status.positive}",
+          "value": "{sys.color.status.positive.positive}",
+          "darkValue": "{sys.color.status.positive.positive}",
           "alpha": 0.1,
           "attributes": {
             "figma": {
@@ -53,8 +53,8 @@
           }
         },
         "statePositiveDim": {
-          "value": "{sys.color.status.positive}",
-          "darkValue": "{sys.color.status.positive}",
+          "value": "{sys.color.status.positive.positive}",
+          "darkValue": "{sys.color.status.positive.positive}",
           "alpha": 0.2,
           "attributes": {
             "figma": {
@@ -63,8 +63,8 @@
           }
         },
         "stateNegative": {
-          "value": "{sys.color.status.negative}",
-          "darkValue": "{sys.color.status.negative}",
+          "value": "{sys.color.status.negative.negative}",
+          "darkValue": "{sys.color.status.negative.negative}",
           "alpha": 0.1,
           "attributes": {
             "figma": {
@@ -73,8 +73,8 @@
           }
         },
         "stateNegativeDim": {
-          "value": "{sys.color.status.negative}",
-          "darkValue": "{sys.color.status.negative}",
+          "value": "{sys.color.status.negative.negative}",
+          "darkValue": "{sys.color.status.negative.negative}",
           "alpha": 0.2,
           "attributes": {
             "figma": {
