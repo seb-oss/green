@@ -1,5 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
 
@@ -76,7 +77,11 @@ export class GdsPopover extends LitElement {
     return html`<dialog ${ref(this.#dialogElementRef)}>
       <header>
         <h2>${this.label}</h2>
-        <button class="close" @click=${this.#handleCloseButton}>
+        <button
+          class="close"
+          @click=${this.#handleCloseButton}
+          aria-label="${msg('Close')}"
+        >
           <i></i>
         </button>
       </header>

@@ -1,10 +1,10 @@
 {
   "name": "@sebgroup/green-tokens",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.8",
   "dependencies": {
     "style-dictionary": "^3.8.0",
     "fs-extra": "^10.1.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.6.0"
   },
   "description": "Design tokens for Green Design System",
   "repository": {

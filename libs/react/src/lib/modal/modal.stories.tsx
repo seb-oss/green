@@ -67,13 +67,34 @@ ModalDefault.args = {
   dismiss: 'Nope',
 }
 
-export const SlideOut: Story<ModalProps> = Template.bind({})
-SlideOut.args = {
+export const SlideOutSmall: Story<ModalProps> = Template.bind({})
+SlideOutSmall.args = {
   type: 'slideout',
   header: 'SlideOut Modal',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
+  size: 'sm'
+}
+
+export const SlideOutMedium: Story<ModalProps> = Template.bind({})
+SlideOutMedium.args = {
+  type: 'slideout',
+  header: 'SlideOut Modal',
+  children: 'Body content',
+  confirm: 'OK',
+  dismiss: 'Nope',
+  size: 'md'
+}
+
+export const SlideOutLarge: Story<ModalProps> = Template.bind({})
+SlideOutLarge.args = {
+  type: 'slideout',
+  header: 'SlideOut Modal',
+  children: 'Body content',
+  confirm: 'OK',
+  dismiss: 'Nope',
+  size: 'lg'
 }
 
 export const TakeOver: Story<ModalProps> = Template.bind({})

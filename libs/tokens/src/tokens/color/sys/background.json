@@ -14,7 +14,7 @@
         },
         "backgroundDim": {
           "value": "{ref.color.grey.95}",
-          "darkValue": "{ref.color.grey.95}",
+          "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
               "id": "VariableID:228:6",

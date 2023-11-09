@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -6,6 +8,7 @@ import {
   Inject,
   Injector,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core'
@@ -49,9 +52,9 @@ export interface DropdownOption {
       multi: true,
     },
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggDropdownComponent implements ControlValueAccessor {
+export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() id?: string
   @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
@@ -91,7 +94,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
     this.texts = {
       ...this.texts,
-      select: this.getDisplayText(this._value),
+      select: this.displayTextByValue(this._value),
     }
   }
   get value(): any {
@@ -101,7 +104,9 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
   //
   get selectedOption() {
-    return this.value
+    return Array.isArray(this.value)
+      ? this.value.map((v: any) => this.optionByValue(v))
+      : this.optionByValue(this.value)
   }
 
   onChangeFn?: (value: unknown) => void
@@ -125,22 +130,27 @@ export class NggDropdownComponent implements ControlValueAccessor {
 
     this.texts = {
       ...this.texts,
-      select: this.getDisplayText(this._value),
+      select: this.displayTextByValue(this._value),
     }
 
     this.onChangeFn?.(this.value)
     this.valueChange.emit(this.value)
+
+    this._cdr.detectChanges()
   }
 
   get control(): NgControl | undefined {
     return this.injector.get(NgControl)
   }
 
-  constructor(@Inject(Injector) private injector: Injector) {
+  constructor(
+    @Inject(Injector) private injector: Injector,
+    private _cdr: ChangeDetectorRef
+  ) {
     registerTransitionalStyles()
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     if (!this._value) {
       if (this.multiSelect)
         this._value = this.options
@@ -150,6 +160,11 @@ export class NggDropdownComponent implements ControlValueAccessor {
         this._value = this.options?.find((o) => o.selected === true)?.[
           this.useValue
         ]
+
+      this.texts = {
+        ...this.texts,
+        select: this.displayTextByValue(this._value),
+      }
     }
 
     this.texts = {
@@ -158,7 +173,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
       placeholder: this.texts?.placeholder ?? 'Select',
       searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
       selected: this.texts?.selected ?? 'selected',
-      select: this.getDisplayText(this._value),
+      select: this.displayTextByValue(this._value),
     }
   }
 
@@ -196,7 +211,7 @@ export class NggDropdownComponent implements ControlValueAccessor {
     return this.options?.find((o) => o[this.useValue] === value)
   }
 
-  private getDisplayText = (value: any) => {
+  private displayTextByValue = (value: any) => {
     if (!Array.isArray(value))
       return (
         this.optionByValue(value)?.[this.display] ||

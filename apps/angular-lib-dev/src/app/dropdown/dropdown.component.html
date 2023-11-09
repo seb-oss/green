@@ -8,16 +8,20 @@
         [(value)]="dropdownValue0"
         (valueChange)="test($event)"
       ></ngg-dropdown>
-      <ngg-dropdown
-        [options]="optionsWithInitial"
-        [texts]="texts"
-        [(value)]="dropdownValue1"
-      ></ngg-dropdown>
+      <ngg-dropdown [options]="optionsWithInitial" [texts]="texts"
+        ><ng-template nggDropdownButton let-option="option" let-index="index">
+          <div>
+            <div>{{ option.label }}</div>
+            <div style="font-size: 0.8em">{{ option.value }}</div>
+          </div>
+        </ng-template></ngg-dropdown
+      >
       <ngg-dropdown
         [options]="options"
         [texts]="texts"
         [(value)]="dropdownValue2"
-      ></ngg-dropdown>
+      >
+      </ngg-dropdown>
     </div>
     <code>
       <div>Value: {{ dropdownValue0 | json }}</div>

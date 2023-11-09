@@ -1,5 +1,5 @@
-import {IValidator} from '@sebgroup/extract'
-import React, {useState} from 'react'
+import { IValidator } from '@sebgroup/extract'
+import React, { useState } from 'react'
 
 import {
   Dropdown,
@@ -12,7 +12,8 @@ import {
   TextInput,
   Datepicker,
   Slider,
-  Checkbox
+  Checkbox,
+  TextArea,
 } from '@sebgroup/green-react'
 
 const dropDownKeyValueArray = [
@@ -47,6 +48,8 @@ export const FormExample = () => {
 
   const [sliderValue, setSliderValue] = React.useState<number>()
 
+  const [textAreaState, setTextAreaState] = React.useState<string>('')
+
   const onStepperChange = (value: number) => {
     console.log('** START **')
     console.log('value:', value)
@@ -63,10 +66,10 @@ export const FormExample = () => {
       prevState
         ? undefined
         : {
-          message: 'This field is required',
-          indicator: 'error',
-          rules: {type: 'Required'},
-        }
+            message: 'This field is required',
+            indicator: 'error',
+            rules: { type: 'Required' },
+          }
     )
   }
 
@@ -78,7 +81,7 @@ export const FormExample = () => {
       <p>If you are developing a React app this is a great form to work on.</p>
 
       <Form onFormSubmit={(value) => console.log(value)}>
-        <div className="d-flex" style={{gap: '1rem'}}>
+        <div className="d-flex" style={{ gap: '1rem' }}>
           <Dropdown
             label={'Select a fruit'}
             id={'my-dropdown'}
@@ -92,17 +95,21 @@ export const FormExample = () => {
           />
         </div>
 
-        <Checkbox label="This is label" checked={checkedState} onChange={(event) => {
-          const target = event.target as HTMLInputElement
-          setCheckedState(target.checked)
-        }}/>
+        <Checkbox
+          label="This is label"
+          checked={checkedState}
+          onChange={(event) => {
+            const target = event.target as HTMLInputElement
+            setCheckedState(target.checked)
+          }}
+        />
 
         <FormItems
           name="radio"
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: {type: 'Required'},
+            rules: { type: 'Required' },
           }}
         >
           <RadioGroup
@@ -114,9 +121,9 @@ export const FormExample = () => {
             }
             onChange={(value) => console.log(value)}
           >
-            <RadioButton label={'Fusilli'} value={'fusilli'}/>
-            <RadioButton label={'Penne'} value={'penne'}/>
-            <RadioButton label={'Farfalle'} value={'farfalle'}/>
+            <RadioButton label={'Fusilli'} value={'fusilli'} />
+            <RadioButton label={'Penne'} value={'penne'} />
+            <RadioButton label={'Farfalle'} value={'farfalle'} />
           </RadioGroup>
         </FormItems>
 
@@ -125,15 +132,20 @@ export const FormExample = () => {
           info={
             'This is some information about the thing that gets longer if i say so'
           }
+          value={textAreaState}
+          onBlur={(event) => setTextAreaState(event.currentTarget.value)}
           expandableInfo="Expandable plain text information"
           validator={validator}
         />
 
-        <TextInput
+        {textAreaState}
+        <TextArea
           label={'Label'}
           info={
             'This is some information about the thing that gets longer if i say so'
           }
+          value={textAreaState}
+          onChange={(event) => setTextAreaState(event.target.value)}
           expandableInfo={
             <>
               <p>
@@ -146,7 +158,7 @@ export const FormExample = () => {
           validator={validator}
         />
 
-        <Stepper onChange={onStepperChange}/>
+        <Stepper onChange={onStepperChange} />
 
         <Slider
           hasTextbox={true}
