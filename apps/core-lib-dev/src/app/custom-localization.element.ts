@@ -30,7 +30,7 @@ const { setLocale } = gdsInitLocalization({
 })
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join('')
+  strs.map((s, i) => s ?? '' + values[i]).join('')
 )
 
 export class AppElement extends HTMLElement {
@@ -64,8 +64,8 @@ export class AppElement extends HTMLElement {
             <gds-option value="4">Option 4</gds-option>
           </gds-dropdown>
 
-          <button type="submit">Submit</button>
-          <button type="reset">Reset</button>
+          <gds-button type="submit">Submit</gds-button>
+          <gds-button variant="secondary" type="reset">Reset</gds-button>
         </form>
       </div>
     `
