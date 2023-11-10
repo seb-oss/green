@@ -24,6 +24,7 @@ export function Group({
     'group',
     { 'group-border': groupBorder },
     { 'group-focus': groupFocus },
+    { 'is-invalid': error },
     className
   )
   const errorMessage = error
