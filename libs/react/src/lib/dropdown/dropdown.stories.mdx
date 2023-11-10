@@ -16,7 +16,7 @@ Dropdown Component
 <Story
   name="Dropdown"
   parameters={{
-    componentIds: ['component-dropdown']
+    componentIds: ['component-dropdown'],
   }}
   args={{
     loop: true,
@@ -36,7 +36,7 @@ Dropdown Component
     onChange: (value) => {
       console.log('OnChange', value)
     },
-    label: 'Dropdown label'
+    label: 'Dropdown label',
   }}
 >
   {Template.bind({})}
@@ -50,11 +50,11 @@ The dropdown options should be provided as an array of objects with label and va
 const options = [
   { label: 'Tacos', value: 'tacos' },
   { label: 'Pizza', value: 'pizza' },
-  { label: 'Sushi', value: 'sushi', selected: true },
+  { label: 'Sushi', value: 'sushi' },
 ]
 ```
 
-Provide an initial value by assigning the `value` property of the dropdown or declare the optional `selected?: boolean` to individual options as in the example above.
+Set the `value` prop to set the selected option/options. In multiple select mode, the value should be an array of values.
 
 By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
 
@@ -65,7 +65,7 @@ By default, the dropdown will look for a label and value pair for the data. The 
 
 ## Value Object
 
-Dropdown option values can even be an object, but not that it requires a `compareWith` function to uniquely identify each object. Eg:
+Dropdown option values can even be an object, but note that it requires a `compareWith` function to uniquely identify each object. Eg:
 
 <Canvas>
   <div style={{ height: '200px' }}>
@@ -85,13 +85,9 @@ Dropdown option values can even be an object, but not that it requires a `compar
 
 Custom texts can be set using the texts input which takes an object with the following keys.
 
-| Text               | Description                                            | Default    |
-| :----------------- | :----------------------------------------------------- | :--------- |
-| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
-| placeholder        | Text to display when no option is selected.            | `Select`   |
-| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
-| close              | Text for close button displayed on mobiles.            | `Close`    |
-| optionsDescription | Text to describe options.                              | `Options`  |
+| Text        | Description                                 | Default  |
+| :---------- | :------------------------------------------ | :------- |
+| placeholder | Text to display when no option is selected. | `Select` |
 
 ## Multi select
 

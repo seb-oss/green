@@ -1,1 +1,1 @@
-export * from './utils/localization'
+export * from './utils/localization/localization'

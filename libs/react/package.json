@@ -1,13 +1,13 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "2.0.0",
+  "version": "2.2.1",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.0.0",
-    "@sebgroup/chlorophyll": "^2.0.1",
+    "@sebgroup/green-core": "^1.0.3",
+    "@sebgroup/chlorophyll": "^2.2.0",
     "@sebgroup/extract": "^2.0.0",
     "classnames": "^2.3.2"
   },

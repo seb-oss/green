@@ -70,8 +70,8 @@
     }
 
     svg {
-      width: 1rem;
-      height: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
       fill: common.$white;
     }
   }
@@ -92,6 +92,15 @@
     justify-content: end;
     @media (min-width: 576px) {
       display: flex;
+    }
+
+    > button > svg {
+      margin-right: .25rem;
+      fill: var(--color);
+
+      path {
+        fill: var(--color);
+      }
     }
   }
 

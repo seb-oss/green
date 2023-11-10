@@ -1,6 +1,6 @@
 {
   "sys": {
-    "size": {
+    "spacing": {
       "padding": {
         "inline": {
           "none": {
@@ -11,7 +11,7 @@
               }
             }
           },
-          "small": {
+          "2 px": {
             "value": "{ref.size.1}",
             "attributes": {
               "figma": {
@@ -19,7 +19,7 @@
               }
             }
           },
-          "medium": {
+          "4 px": {
             "value": "{ref.size.2}",
             "attributes": {
               "figma": {

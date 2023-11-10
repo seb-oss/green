@@ -7,12 +7,17 @@
   position: relative;
 
   select {
+    @include mixins.padding-horizontal(5);
+    @include mixins.padding-vertical(4);
+    @include mixins.add-border-radius();
+    @include mixins.add-border();
+    @include mixins.add-border-color();
     @include mixins.add-focus();
+
+    padding-right: 3rem;
+
     flex: 1;
     display: block;
-    padding: .625rem 3rem .625rem 1rem;
-    border-radius: .25rem;
-    border: 1px solid var(--gds-ref-pallet-base600);
     max-width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;

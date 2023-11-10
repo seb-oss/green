@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@2.0.1...@sebgroup/green-charts@2.1.0) (2023-11-03)
+
+
+### Features
+
+* **charts:** add percentage formatting to tooltip ([#1091](https://github.com/sebgroup/green/issues/1091)) ([9152c47](https://github.com/sebgroup/green/commit/9152c47bb2e5aa4ed5e2041dd0981ea140d5f78f))
+
+
+
+## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@2.0.0...@sebgroup/green-charts@2.0.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* **charts:** re-release ([#1088](https://github.com/sebgroup/green/issues/1088)) ([9072567](https://github.com/sebgroup/green/commit/9072567576efa22a318c7d62f3af77eb973049b5))
+
+
+
 # [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-charts@1.3.0...@sebgroup/green-charts@2.0.0) (2023-10-30)
 
 

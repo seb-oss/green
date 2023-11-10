@@ -7,7 +7,6 @@ import {
 } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import { setLocale } from '@sebgroup/green-core/localization'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join('')
@@ -18,7 +17,6 @@ export class SimpleValues extends HTMLElement {
 
   connectedCallback() {
     registerTransitionalStyles()
-    setLocale('sv')
 
     this.innerHTML = html`
       <div class="card">

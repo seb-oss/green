@@ -2,6 +2,34 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.2...@sebgroup/green-core@1.0.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* **border-color:** 🐛 align default border colours ([#1089](https://github.com/sebgroup/green/issues/1089)) ([d942690](https://github.com/sebgroup/green/commit/d9426908b3c410cd2ed38415f39cd2020c189507))
+* **dropdown:** add missing label to close button ([#1096](https://github.com/sebgroup/green/issues/1096)) ([ab721f2](https://github.com/sebgroup/green/commit/ab721f205227dcb2b5181170d5ca30177d3a8951))
+
+
+
+## [1.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.1...@sebgroup/green-core@1.0.2) (2023-11-01)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** correct additional regressions ([#1087](https://github.com/sebgroup/green/issues/1087)) ([57f7f4b](https://github.com/sebgroup/green/commit/57f7f4b685efab17fba482de3fd66e23f32e3486))
+
+
+
+## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0...@sebgroup/green-core@1.0.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** issues with Dropdown custom buttons ([#1084](https://github.com/sebgroup/green/issues/1084)) ([eebb5e4](https://github.com/sebgroup/green/commit/eebb5e4cc75d8415edcb7efc125befac4ca1dde3))
+
+
+
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.0-beta.18...@sebgroup/green-core@1.0.0) (2023-10-30)
 
 

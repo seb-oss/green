@@ -25,12 +25,17 @@
 }
 
 input[type='text'] {
-  border-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   font-size: 1rem;
   line-height: 1;
   margin: -1px;
   min-height: auto;
   padding: 0.75rem;
+
+  &:focus {
+    outline-offset: -0.25rem;
+  }
 }
 
 button {
@@ -41,6 +46,7 @@ button {
 
   font-size: inherit;
   font-weight: normal;
+  line-height: 1.125;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 

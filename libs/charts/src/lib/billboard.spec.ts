@@ -1,5 +1,5 @@
 import { ChartOptions, Chart, Axis } from 'billboard.js'
-import { ChartSettings, ChartProperties, Legend } from './types'
+import { ChartSettings, Legend } from './types'
 import { createOptions, createInfo } from './billboard'
 
 describe('billboard', () => {
@@ -263,6 +263,7 @@ describe('billboard', () => {
       const expected: Axis = {
         y: {
           show: false,
+          clipPath: false,
         },
       }
       expect(parsed.axis).toEqual(expected)
@@ -283,6 +284,7 @@ describe('billboard', () => {
       const expected: Axis = {
         x: {
           show: false,
+          clipPath: false,
         },
       }
       expect(parsed.axis).toEqual(expected)
@@ -307,6 +309,21 @@ describe('billboard', () => {
       }
       expect(parsed.axis).toEqual(expected)
     })
+    it('tooltip ratio format', () => {
+      const chartElement = '#foo'
+      const settings: ChartSettings = {
+        data: [],
+      }
+      const formatter = createOptions({
+        settings,
+        chartElement,
+      }).tooltip.format.value.bind({})
+      expect(formatter(undefined, 0)).toEqual('0%')
+      expect(formatter(undefined, 0.5)).toEqual('50%')
+      expect(formatter(undefined, 0.505)).toEqual('50.5%')
+      expect(formatter(undefined, 0.5055)).toEqual('50.55%')
+      expect(formatter(undefined, 0.50555)).toEqual('50.56%')
+    })
     it('overrides tooltip number format', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
@@ -324,22 +341,22 @@ describe('billboard', () => {
       )
       expect(formattedNumber).toEqual('100 kr')
     })
-    it('does not override tooltip percentages', () => {
+    it('overrides tooltip percentages', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
         data: [],
         style: {
-          tooltipNumberFormat: (value) => `${value} kr`,
+          tooltipNumberFormat: (value, ratio) => `${value}/${value / ratio}`,
         },
       }
       const parsed = createOptions({ settings, chartElement })
       const formattedNumber = parsed.tooltip.format.value.bind({})(
-        100,
+        10,
         0.1,
         undefined,
         undefined
       )
-      expect(formattedNumber).toEqual('10%')
+      expect(formattedNumber).toEqual('10/100')
     })
     it('add tick config if ticksCount is specified in style', () => {
       const chartElement = '#foo'

@@ -12,7 +12,11 @@ import { NggCoreWrapperModule } from '../shared/core-element/core-element.module
     NggDropdownButtonDirective,
   ],
   imports: [CommonModule, NggCoreWrapperModule],
-  exports: [NggDropdownComponent, NggDropdownOptionDirective],
+  exports: [
+    NggDropdownComponent,
+    NggDropdownOptionDirective,
+    NggDropdownButtonDirective,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NggDropdownModule {}

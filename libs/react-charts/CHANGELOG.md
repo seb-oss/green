@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.2.0...@sebgroup/green-react-charts@1.3.0) (2023-11-08)
+
+
+### Bug Fixes
+
+* **react-charts:** trigger release ([4ff7884](https://github.com/sebgroup/green/commit/4ff7884cc1ec25231a28998fbc68dfd7945d4a82))
+
+
+### Features
+
+* **react-charts:** updating dependencies ([#1103](https://github.com/sebgroup/green/issues/1103)) ([149dda0](https://github.com/sebgroup/green/commit/149dda090f3580cc67862b35c32022f0f2f20923))
+
+
+
 # [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.1.0...@sebgroup/green-react-charts@1.2.0) (2023-10-10)
 
 

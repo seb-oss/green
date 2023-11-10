@@ -11,7 +11,6 @@ export type DropdownPlacements = 'bottom-start' | 'top-start'
 export type OnChange<T = any> = (value: T) => void
 
 export type IndicatorType = 'success' | 'error' | 'info'
-
 export type ValidatorType = 'Required' | 'Email'
 
 export interface ValidatorRules {
@@ -31,9 +30,7 @@ export interface DropdownArgs {
   id?: string
   informationLabel?: string
   label?: string
-  loop?: boolean
   multiSelect?: boolean
-  onTouched?: () => void
   options: DropdownOption[]
   searchFilter?: SearchFilter
   searchable?: boolean
@@ -43,12 +40,7 @@ export interface DropdownArgs {
   value?: any
 }
 export interface DropdownTexts {
-  select?: string
-  selected?: string
   placeholder?: string
-  searchPlaceholder?: string
-  close?: string
-  optionsDescription?: string
 }
 export interface DropdownOption {
   label?: string
@@ -82,7 +74,6 @@ export const Dropdown = ({
   id,
   informationLabel,
   label,
-  loop,
   multiSelect,
   onChange,
   options,
@@ -93,14 +84,9 @@ export const Dropdown = ({
   validator,
   value,
 }: DropdownProps) => {
-  const [selectedOption, setSelectedOption] = React.useState<
-    DropdownOption | undefined
-  >(options.find((o) => o.value === value))
-
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
-      setSelectedOption(options.find((o) => o[useValue] === e.detail.value))
-      onChange?.(e.detail?.value)
+      onChange?.(e.detail.value)
     }
   }
 
@@ -123,10 +109,10 @@ export const Dropdown = ({
         label={label}
         searchable={searchable}
         multiple={multiSelect}
-        value={selectedOption?.value}
         onchange={handleOnChange}
         invalid={validator?.indicator === 'error'}
         compareWith={compareWithAdapter}
+        value={value}
         searchFilter={searchFilterAdapter}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
@@ -135,11 +121,7 @@ export const Dropdown = ({
           {texts?.placeholder || 'Select'}
         </CoreOption>
         {options.map((option) => (
-          <CoreOption
-            key={option[useValue]}
-            value={option[useValue]}
-            selected={option.selected}
-          >
+          <CoreOption key={option[useValue]} value={option[useValue]}>
             {option[display]}
           </CoreOption>
         ))}
