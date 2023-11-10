@@ -23,6 +23,53 @@ for (const entry of Object.entries(filters)) {
 const config: StyleDictionary.Config = {
   source: ['src/tokens/**/*.json'],
   platforms: {
+    // For internal use in Green Core
+    internal: {
+      transforms: [
+        'attribute/cti',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'name/cti/kebab',
+        'color/mix-blend',
+      ],
+      buildPath: 'internal/',
+      prefix: 'gds-',
+      files: [
+        {
+          destination: 'pallet.css',
+          format: 'css/variables',
+          filter: function (token) {
+            if ('darkValue' in token) return false
+            return token?.attributes?.type === 'color'
+          },
+          options: {
+            selector: ':host',
+          },
+        },
+        {
+          destination: 'theme/light.css',
+          format: 'css/theme',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'light',
+            outputReferences: false,
+            selector: ':host',
+          },
+        },
+        {
+          destination: 'theme/dark.css',
+          format: 'css/theme',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'dark',
+            outputReferences: false,
+            selector: ':host',
+          },
+        },
+      ],
+    },
     css: {
       // transformGroup: 'css',
       transforms: [
