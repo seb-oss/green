@@ -2,6 +2,20 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.1...@sebgroup/green-react@2.3.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* **react:** in-page-wizard optional props and icon margin ([#1110](https://github.com/sebgroup/green/issues/1110)) ([857a637](https://github.com/sebgroup/green/commit/857a6379f756023420337703373bb769d1e938ae))
+
+
+### Features
+
+* **react:** groupFocus and className props ([#1111](https://github.com/sebgroup/green/issues/1111)) ([e86a78d](https://github.com/sebgroup/green/commit/e86a78d150676642812f97b995bbf2d14bd4e681))
+
+
+
 ## [2.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.0...@sebgroup/green-react@2.2.1) (2023-11-07)
 
 
