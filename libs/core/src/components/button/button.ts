@@ -3,7 +3,9 @@ import { property, query } from 'lit/decorators.js'
 import { constrainSlots } from '../../utils/helpers'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
-import styles from './style/button.styles.scss'
+
+import { tokens } from '../../tokens.style'
+import style from './button.style.css'
 
 import {
   gdsCustomElement,
@@ -29,7 +31,7 @@ const html = stripWhitespace(customElementHtml)
  */
 @gdsCustomElement('gds-button')
 export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
-  static styles = unsafeCSS(styles)
+  static styles = [tokens, unsafeCSS(style)]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
