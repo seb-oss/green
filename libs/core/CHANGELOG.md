@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.3...@sebgroup/green-core@1.1.0) (2023-11-10)
+
+
+### Features
+
+* **localization:** add possibility to add custom localization in Green Core ([#1106](https://github.com/sebgroup/green/issues/1106)) ([a25a969](https://github.com/sebgroup/green/commit/a25a969bc1618385fc13beb3094df0c8efe3ab5d))
+
+
+
 ## [1.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.2...@sebgroup/green-core@1.0.3) (2023-11-03)
 
 
