@@ -8,12 +8,12 @@ import { inspector } from '../../utils/tools/inspector/inspector'
 
 # Button
 
-## Button varaints
+## Button variants
 
 Buttons exist in three different variants, Primary, Secondary and Tertiary
 
 <Canvas>
-  <gds-button type="submit">Primary</gds-button>
+  <gds-button>Primary</gds-button>
   <gds-button variant="secondary">Secondary</gds-button>
   <gds-button variant="tertiary">Tertiary</gds-button>
 </Canvas>
@@ -88,5 +88,20 @@ If a single `gds-icon` is the only child of a button, it will render as a circul
   </gds-button>
   <gds-button size="large">
     <gds-icon name="arrow" />
+  </gds-button>
+</Canvas>
+
+## Disabled
+
+The buttons support a disabled state, but in general, it should not be used. It can be hard for the user to understand why the button is disabled, so it is often better to keep the button clickable and then show an error message
+instead.
+
+<Canvas>
+  <gds-button disabled>Primary</gds-button>
+  <gds-button variant="secondary" set="positive" disabled>
+    Secondary
+  </gds-button>
+  <gds-button variant="tertiary" disabled>
+    Tertiary
   </gds-button>
 </Canvas>
