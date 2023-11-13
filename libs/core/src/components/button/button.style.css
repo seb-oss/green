@@ -79,6 +79,12 @@
     transition: var(--_transition);
     font-family: inherit;
 
+    /* TODO: Tokens... */
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    line-height: 1.25;
+
     &:focus {
       outline-color: color-mix(in srgb,
         var(--_color-outline),
@@ -169,6 +175,7 @@
     --_padding-inline: var(--gds-spacing-5);
     --_padding-block: var(--gds-spacing-3);
     --_size: 2rem;
+    font-size: 0.875rem;
   }
 
   :host([size='medium']) button {
