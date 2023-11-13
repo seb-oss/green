@@ -77,6 +77,7 @@
     padding-inline: var(--_padding-inline);
     position: relative;
     transition: var(--_transition);
+    font-family: inherit;
 
     &:focus {
       outline-color: color-mix(in srgb,
