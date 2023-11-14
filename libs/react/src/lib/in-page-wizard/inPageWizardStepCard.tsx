@@ -1,73 +1,89 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 import { Edit, Check } from '../icons'
+import classNames from 'classnames'
 
-export interface InPageWizardStepCardProps {
+export interface InPageWizardStepCardProps extends PropsWithChildren {
+  /** Sub title for the title indicating 'Step X of Y'. */
   stepText: string
+  /** Title of the step. */
   title: string
+  /** Text on edit button. */
   editBtnText?: string
-  nextBtnText: string
+  /** Text on next button. */
+  nextBtnText?: string
+  /** Icon for next button. */
   nextBtnIcon?: ReactNode
-  stepStatus: WizardStepStatus
+  /** Status for the step.*/
+  stepStatus: 'NotStarted' | 'IsActive' | 'IsComplete'
+  /** Force hiding of footer, regardless of state. */
   hideFooter?: boolean
-  children: React.ReactNode
-  onNextClick: () => void
+  /** Event for click on next button. */
+  onNextClick?: () => void
+  /** Event for click on edit button. */
   onEditClick?: () => void
+  /** Testid for testing. */
   dataTestid?: string
 }
 
-export type WizardStepStatus = 'NotStarted' | 'IsActive' | 'IsComplete'
+export const InPageWizardStepCard = ({
+  editBtnText = 'Ändra',
+  onNextClick,
+  stepStatus,
+  stepText,
+  title,
+  children,
+  dataTestid,
+  hideFooter = false,
+  nextBtnIcon,
+  nextBtnText = 'Nästa',
+  onEditClick,
+}: InPageWizardStepCardProps) => {
+  const sectionClassName = classNames('gds-in-page-wizard-step-card', 'card', {
+    active: stepStatus === 'IsActive',
+    completed: stepStatus === 'IsComplete',
+  })
 
-export const InPageWizardStepCard = (props: InPageWizardStepCardProps) => {
   return (
-    <section
-      className={`gds-in-page-wizard-step-card card ${
-        props.stepStatus === 'IsActive' ? 'active' : ''
-      } ${props.stepStatus === 'IsComplete' ? 'completed' : ''}`}
-      data-testid={props.dataTestid}
-    >
+    <section className={sectionClassName} data-testid={dataTestid}>
       <header className="gds-in-page-wizard-step-card__header">
         <div className="gds-in-page-wizard-step-card__header__icon">
           <Check />
         </div>
         <div className="gds-in-page-wizard-step-card__header__progress">
-          {props.stepText}
+          {stepText}
         </div>
         <div className="gds-in-page-wizard-step-card__header__title">
-          <h2 className="h4">{props.title}</h2>
+          <h2 className="h4">{title}</h2>
         </div>
 
-        {props.stepStatus === 'IsComplete' && (
+        {stepStatus === 'IsComplete' && (
           <div className="gds-in-page-wizard-step-card__header__edit">
-            <button className="secondary small" onClick={props.onEditClick}>
+            <button className="secondary small" onClick={onEditClick}>
               <Edit fill={'var(--color)'} height={16} width={16} />
-              {props.editBtnText}
+              {editBtnText}
             </button>
           </div>
         )}
       </header>
 
-      {(props.stepStatus === 'IsActive' ||
-        props.stepStatus === 'IsComplete') && (
-        <div className="gds-in-page-wizard-step-card__content">
-          {props.children}
-        </div>
+      {(stepStatus === 'IsActive' || stepStatus === 'IsComplete') && (
+        <div className="gds-in-page-wizard-step-card__content">{children}</div>
       )}
 
-      {props.stepStatus === 'IsActive' && !props.hideFooter && (
+      {stepStatus === 'IsActive' && !hideFooter && (
         <footer className="gds-in-page-wizard-step-card__footer">
-          <button className="primary" onClick={props.onNextClick}>
-            {props.nextBtnText}
-
-            {props.nextBtnIcon}
+          <button className="primary" onClick={onNextClick}>
+            {nextBtnText}
+            {nextBtnIcon}
           </button>
         </footer>
       )}
 
-      {props.stepStatus === 'IsComplete' && !props.hideFooter && (
+      {stepStatus === 'IsComplete' && !hideFooter && (
         <footer className="gds-in-page-wizard-step-card__footer__edit">
-          <button className="secondary" onClick={props.onEditClick}>
+          <button className="secondary" onClick={onEditClick}>
             <Edit fill={'var(--color)'} height={16} width={16} />
-            {props.editBtnText}
+            {editBtnText}
           </button>
         </footer>
       )}
