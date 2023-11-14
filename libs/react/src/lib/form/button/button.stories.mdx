@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
 import Button from './button'
 
 export const Template = ({ children, ...props }) => (
@@ -95,3 +95,7 @@ Button with disabled property
     Ghost Button
   </Button>
 </Canvas>
+
+## Properties
+
+<ArgsTable of={Button} />

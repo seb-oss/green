@@ -1,5 +1,6 @@
-import { HTMLProps, PropsWithChildren, useEffect, useState } from 'react'
+import { HTMLProps, PropsWithChildren } from 'react'
 import { ButtonVariant } from '@sebgroup/extract'
+import classNames from 'classnames'
 
 interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   button?: boolean | ButtonVariant
@@ -8,27 +9,23 @@ interface LinkProps extends HTMLProps<HTMLAnchorElement> {
 export const Link = ({
   button,
   children,
-  ...props
+  className,
+  role,
+  ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const [anchorProps, setAnchorProps] = useState<HTMLProps<HTMLAnchorElement>>(
-    {}
-  )
-  useEffect(() => {
-    const className = button
-      ? typeof button === 'string'
-        ? `button ${button}`
-        : 'button'
-      : undefined
-    const newProps: HTMLProps<HTMLAnchorElement> = {
-      role: button ? 'button' : undefined,
-      className: className,
-      ...props,
-    }
-    setAnchorProps(newProps)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [button])
+  const buttonClassName =
+    classNames(className, 'button', typeof button === 'string' && button) ||
+    undefined
 
-  return <a {...anchorProps}>{children}</a>
+  return (
+    <a
+      className={buttonClassName}
+      role={button ? 'button' : role}
+      {...otherProps}
+    >
+      {children}
+    </a>
+  )
 }
 
 export default Link

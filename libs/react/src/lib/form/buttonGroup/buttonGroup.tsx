@@ -2,9 +2,12 @@ import { ReactElement, useEffect, useState } from 'react'
 import { ButtonVariant } from '@sebgroup/extract'
 import { Button, ButtonProps } from '../button/button'
 import { Group } from '../'
+import classNames from 'classnames'
 
 interface ButtonGroupProps {
   children: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
+  /** Class names passed to the child elements */
+  className?: string
   selectedIndex?: number
   variant?: ButtonVariant
   id?: string
@@ -12,6 +15,7 @@ interface ButtonGroupProps {
 type Props = ButtonProps & JSX.IntrinsicAttributes
 export const ButtonGroup = ({
   children,
+  className,
   selectedIndex,
   variant,
   id,
@@ -35,11 +39,12 @@ export const ButtonGroup = ({
             setSelected(ix)
             if (bp.onClick) bp.onClick(e)
           },
+          className: classNames(bp.className, className),
         }
         return props
       })
     setButtons(buttonProps)
-  }, [children, selected, variant])
+  }, [children, selected, variant, className])
 
   return (
     <Group data-label="button-group" id={id}>
