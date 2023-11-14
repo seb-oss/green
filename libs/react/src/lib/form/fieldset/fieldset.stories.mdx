@@ -1,0 +1,76 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Fieldset } from './fieldset'
+import { Input } from '../input/input' 
+import { RadioButton } from '../radioButton/radioButton';
+import { RadioGroup } from '../radioButton/radioGroup';
+import { Option, Select } from '../../select/select'
+
+export const FieldsetTemplate = ({ ...props }) => <Fieldset {...props} />
+
+<Meta title="Components/Form/Fieldset" component={Fieldset} />
+
+# Fieldset
+
+Fieldset with padding, margin and background used to group inputs.
+
+## Basic
+
+<Canvas>
+  <Story
+    name="Fieldset"
+    parameters={{ componentIds: ['component-fieldset'] }}
+    args={{ children: 'Content' }}
+  >
+    {FieldsetTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Margin
+
+<Canvas>
+  <div>
+    <Fieldset>
+      <Input label="Input 1" />
+    </Fieldset>
+    <Fieldset marginBottom>
+      <Input label="Input 1" />
+    </Fieldset>
+    <Fieldset>
+      <Input label="Input 1" />
+    </Fieldset>
+  </div>
+</Canvas>
+
+## With legend
+
+This is not part of the design library.
+
+<Canvas>
+  <Fieldset>
+    <legend>Legend text</legend>
+    <Input label="Input 1" />
+  </Fieldset>
+</Canvas>
+
+
+
+## Example
+
+<Canvas>
+  <div>
+    <RadioGroup label="Har du fler boenden?" info="Till exempel ett fritidshus eller en bostadsrätt." name="residence" valueSelected="YES" horizontal>
+      <RadioButton label="Ja" value="YES" />
+      <RadioButton label="Nej" value="NO" />
+    </RadioGroup>
+    <Fieldset>
+      <Select label="Typ av boende" value={1}>
+        <Option value={1}>Fritidshus</Option>
+      </Select>
+      <RadioGroup label="Betalar du tomträttsavgälden" expandableInfo="Om du inte äger marken som ditt hus står på betalar du en avgift till markägaren." name="groundRent" valueSelected="YES" horizontal>
+        <RadioButton label="Ja" value="YES" />
+        <RadioButton label="Nej" value="NO" />
+      </RadioGroup>
+      <Input label="Din del av tomträttsavgälden" unit="kr/år" />
+    </Fieldset>
+  </div>
+</Canvas>
