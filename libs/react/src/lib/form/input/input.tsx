@@ -22,10 +22,12 @@ export interface InputProps
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   /** Data test id used for finding elements in test */
   'data-testid'?: string
-  /** Label describing the input */
-  label: string
+  /** Format value on change */
+  formatter?: (value: string | undefined) => string
   /** Extra describing text, below the label */
   info?: ReactNode
+  /** Label describing the input */
+  label: string
   /** Text on the right side of the input, used for unit such as 'kr' or '%' */
   unit?: string
   /** Validation object */
@@ -42,6 +44,7 @@ export const Input = ({
   'data-testid': dataTestId,
   expandableInfo,
   expandableInfoButtonLabel,
+  formatter,
   id = randomId(),
   label,
   info,
@@ -61,10 +64,23 @@ export const Input = ({
 
   const localOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setLocalValue(event.target.value)
-      if (onChange) onChange(event)
+      const newValue = formatter
+        ? formatter(event.target.value)
+        : event.target.value
+      setLocalValue(newValue)
+      if (onChange)
+        onChange({ ...event, target: { ...event.target, value: newValue } })
+
+      // Fixes bug: React loses caret position when you format the input value
+      if (!formatter || newValue.length > event.target.value.length) return
+      const pointer = event.target.selectionStart
+      const element = event.target
+      window.requestAnimationFrame(() => {
+        element.selectionStart = pointer
+        element.selectionEnd = pointer
+      })
     },
-    [setLocalValue, onChange]
+    [formatter, setLocalValue, onChange]
   )
 
   const inputAriaDescribedBy =
