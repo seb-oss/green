@@ -9,7 +9,7 @@ import {
   validateClassName,
 } from '@sebgroup/extract'
 import React, {
-  ReactNode,
+  PropsWithChildren,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -20,13 +20,15 @@ import classNames from 'classnames'
 
 interface FormItemProps
   extends IExpandableInformation,
-    ILabelAndLabelInformation {
+    ILabelAndLabelInformation,
+    PropsWithChildren {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeInput?: (value: string) => string
   validator?: IValidator
   inputId?: string
-  children: ReactNode
   role?: string
+  /** Intended to use together with TextArea to show character counter. */
+  rightAlignedFooterInfo?: string
 }
 
 export const FormItem = ({
@@ -38,6 +40,7 @@ export const FormItem = ({
   children,
   expandableInfoButtonLabel,
   role,
+  rightAlignedFooterInfo,
 }: FormItemProps) => {
   const expandableInnerRef = useRef<HTMLDivElement>(null)
   const expandableRef = useRef<HTMLDivElement>(null)
@@ -140,6 +143,17 @@ export const FormItem = ({
       {children}
       <div className="gds-form-item__footer">
         {validator && <span className="form-info">{validator.message}</span>}
+        {rightAlignedFooterInfo && (
+          <span
+            className="form-info"
+            style={{
+              textAlign: 'right',
+              width: validator ? 'auto' : '100%',
+            }}
+          >
+            {rightAlignedFooterInfo}
+          </span>
+        )}
       </div>
     </div>
   )
