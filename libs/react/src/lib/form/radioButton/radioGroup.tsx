@@ -1,19 +1,17 @@
-import React, { useState, useRef, ChangeEvent } from 'react'
-import { RadioButtonProps } from '../types'
+import React, { useState, useRef, ChangeEvent, ReactNode } from 'react'
 import {
   IValidator,
-  IndicatorType,
   validateClassName,
   randomId,
   IExpandableInformation,
-  ILabelAndLabelInformation,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
+import { RadioButtonProps } from './radioButton'
 
-export interface RadioGroupProps
-  extends IExpandableInformation,
-    ILabelAndLabelInformation {
+export interface RadioGroupProps extends IExpandableInformation {
+  label?: string
+  info?: ReactNode
   title?: string
   valueSelected?: string
   description?: string
@@ -21,7 +19,7 @@ export interface RadioGroupProps
   validator?: IValidator
   onChangeRadio?: (value: string) => string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name?: string
+  name: string
   horizontal?: boolean
 }
 
@@ -30,7 +28,7 @@ export const RadioGroup = ({
   valueSelected,
   label,
   title,
-  labelInformation,
+  info,
   description,
   expandableInfo,
   expandableInfoButtonLabel,
@@ -57,10 +55,6 @@ export const RadioGroup = ({
     setSelected(valueSelected)
     setPrevValueSelected(valueSelected)
   }
-
-  const validatorClassName: string = validateClassName(
-    validator?.indicator as IndicatorType
-  )
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value !== selected) {
@@ -89,7 +83,7 @@ export const RadioGroup = ({
   }, [])
 
   const labelFromTitle = label || title
-  const labelInformationFromDescription = labelInformation || description
+  const labelInformationFromDescription = info || description
 
   const formItemProps = {
     validator,

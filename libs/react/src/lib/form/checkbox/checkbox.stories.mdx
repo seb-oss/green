@@ -1,18 +1,18 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import { Checkbox } from '../input/input'
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Checkbox } from './checkbox'
 
 export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
-<Meta title="Components/Checkbox" component={Checkbox} />
+<Meta title="Components/Form/Checkbox" component={Checkbox} args={{}} />
 
 # Checkbox
 
+## Basic
+
 <Canvas>
   <Story
-    name="Default"
-    parameters={{
-      componentIds: ['component-checkbox'],
-    }}
+    name="Checkbox"
+    parameters={{ componentIds: ['component-checkbox'] }}
     args={{ label: 'Checkbox input', defaultChecked: false }}
   >
     {CheckboxTemplate.bind({})}
@@ -64,26 +64,16 @@ function RobotCheckComponent () {
 ## Validation
 
 <Canvas>
-  <Story
-    name="invalid"
-    args={{
-      label: 'Invalid',
-      validator: {
-        indicator: 'error',
-        message: 'Error',
-      },
+  <Checkbox
+    label="Invalid checked"
+    validator={{
+      indicator: 'error',
+      message: 'Error',
     }}
-  >
-    {CheckboxTemplate.bind({})}
-  </Story>
+    checked
+  />
 </Canvas>
 
-## Props
+## Properties
 
-| Prop       | Type                                             | Description                                                                       |
-| :--------- | :----------------------------------------------- | :-------------------------------------------------------------------------------- |
-| label      | `string`                                         | The label of the checkbox                                                         |
-| checked?   | `boolean`                                        | Use this prop to control the checked state of the checkbox                        |
-| onChange?  | `(e: React.FormEvent<HTMLInputElement>) => void` | A handler function that takes the event and can act on it                         |
-| validator? | `IValidator`                                     | An object used to render the validation status for the component                  |
-| testId?    | `string`                                         | A test id that will be placed in the `data-testid` attribute on the input element |
+<ArgsTable of={Checkbox} />

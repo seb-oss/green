@@ -1,85 +1,101 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { TextInput, EmailInput, NumberInput, RenderInput } from './input'
+import { Input } from './input'
 
-export const TextInputTemplate = ({ ...props }) => <TextInput {...props} />
-export const EmailInputTemplate = ({ ...props }) => <EmailInput {...props} />
-export const NumberInputTemplate = ({ ...props }) => <NumberInput {...props} />
+export const InputTemplate = ({ ...props }) => <Input {...props} />
 
-<Meta title="Components/Form/Input" component={RenderInput} />
+<Meta title="Components/Form/Input" component={Input} />
 
-# Inputs
+# Input
 
-### Text Input
+## Input without FormItem
+
+If an input is requested without a label, info or expandable info, then a pure input is rendered. Can be used together with the Group component.
 
 <Canvas>
   <Story
-    name="TextInput"
-    parameters={{
-      componentIds: ['component-input'],
-    }}
-    args={{ label: 'Text input', info: 'Input some text here' }}
+    name="Input"
+    parameters={{ componentIds: ['component-input'] }}
+    args={{}}
   >
-    {TextInputTemplate.bind({})}
+    {InputTemplate.bind({})}
   </Story>
 </Canvas>
 
-### Email Input
+## Input with FormItem
+
+As soon as one of the properties label, info or expandable info are set, the input will be be surrounded by a FormItem.
+
+### Label Information
 
 <Canvas>
-  <Story
-    name="EmailInput"
-    args={{ label: 'Email input', info: 'Only email input' }}
-  >
-    {EmailInputTemplate.bind({})}
-  </Story>
+  <Input label="Input" info="Label Information" />
 </Canvas>
 
-### Number Input
+### Disabled
 
 <Canvas>
-  <Story
-    name="NumberInput"
-    args={{ label: 'Number input', info: 'Only number input' }}
-  >
-    {NumberInputTemplate.bind({})}
-  </Story>
+  <Input label="Input" disabled />
+</Canvas>
+
+### Expandable Information
+
+<Canvas>
+  <Input label="Input" expandableInfo="Expandable Information" />
+</Canvas>
+
+### Right label
+
+<Canvas>
+  <Input label="Input" unit="kr" />
 </Canvas>
 
 ### Validation
 
-When placed after an input the form info also shows the state of the input if either `.is-valid` or `.is-invalid` has been added to the input or if the input is scoped to `.was-validated` (usually added to the form).
-
 <Canvas>
-  <Story name="validation">
-    <EmailInput
-      label="Email Input"
-      info="This is a text with additional label information"
-      validator={{ message: 'This is the error message', indicator: 'error' }}
+  <div>
+    <Input
+      label="Error input"
+      validator={{
+        indicator: 'error',
+        message: 'Error message',
+      }}
     />
-    <NumberInput
-      label="Number Input"
-      info="This is a text with additional label information"
-      validator={{ message: 'This is the error message', indicator: 'error' }}
+    <Input
+      label="Info input"
+      validator={{
+        indicator: 'info',
+        message: 'Info message',
+      }}
     />
-  </Story>
+    <Input
+      label="Success input"
+      validator={{
+        indicator: 'success',
+        message: 'Success message',
+      }}
+    />
+  </div>
 </Canvas>
 
-### Expandable information
+### Everything On
 
 <Canvas>
-  <Story name="Expandable information">
-    <NumberInput
-      label="Hur mycket vill du låna?"
-      info="För att du ska kunna få låna pengar behöver vi veta hur mycket"
-      expandableInfo={
-        <p>
-          This can be a <strong>React component</strong> or just a plain string
-          (but strings will be escaped)
-        </p>
-      }
-      expandableInfoButtonLabel="Toggle additional information"
-    />
-  </Story>
+  <Input
+    label="Input"
+    expandableInfo="Expandable Information"
+    info="Label information"
+    maxLength={1000}
+    rows={4}
+    validator={{
+      indicator: 'error',
+      message: 'Error message',
+    }}
+    placeholder="Placeholder"
+    disabled
+    unit="kr"
+  />
 </Canvas>
 
-<ArgsTable story="TextInput" />
+## Properties
+
+<ArgsTable of={Input} />

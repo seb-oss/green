@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { RadioButton } from '../input/input'
+import { RadioButton } from './radioButton'
 import { RadioGroup } from './radioGroup'
 
 export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
@@ -11,7 +11,7 @@ export const RadioGroupTemplate = ({ ...props }) => (
   </RadioGroup>
 )
 
-<Meta title="Components/RadioGroup" component={RadioGroup} />
+<Meta title="Components/Form/RadioGroup" component={RadioGroup} />
 
 ## RadioGroup and RadioButton Components
 
@@ -106,7 +106,7 @@ Together, `RadioGroup` and `RadioButton` components facilitate the use of radio 
 | labelInformation?          | `string`                                           | Additional information for the label                                                                          |
 | valueSelected?             | `string`                                           | The currently selected value in the radio group. Needs to match the string value of an enclosed `RadioButton` |
 | description?               | `string`                                           | Description for the radio group                                                                               |
-| expandableInfo?            | `ReactNode`                                           | Expandable information text                                                                                   |
+| expandableInfo?            | `ReactNode`                                        | Expandable information text                                                                                   |
 | expandableInfoButtonLabel? | `string`                                           | Label for the expandable info button                                                                          |
 | defaultSelected?           | `string`                                           | Default selected value in the radio group                                                                     |
 | validator?                 | `IValidator`                                       | Validator function for radio group values                                                                     |
