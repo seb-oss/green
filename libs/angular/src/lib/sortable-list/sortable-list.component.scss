@@ -1,0 +1,129 @@
+.item-list {
+  width: 100%;
+  display: block;
+  background: white;
+  overflow: hidden;
+}
+
+label.item {
+  padding: 0 !important;
+}
+
+.item-box {
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: white;
+  font-size: 14px;
+  margin: 5px 0px;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+}
+
+.form-control {
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.item-list-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.item-list-header-title {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-style: normal;
+}
+
+.item-list-header-subtitle {
+  font-size: 0.75rem;
+  color: #737373;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.item-list-suffix {
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.item-grip-icon {
+  color: #CECECE;
+  font-weight: 400;
+  padding: .75rem 1rem .75rem 0rem;
+}
+
+.cdk-drop-list.cdk-drop-list-dragging {
+  cursor: grabbing !important;
+  pointer-events: all !important;
+}
+
+.item-custom-placeholder.cdk-drag-placeholder {
+  pointer-events: all !important;
+}
+
+.cdk-drop-list:not(.cdk-drag-placeholder) {
+  cursor: grab;
+}
+
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  pointer-events: all !important;
+}
+
+.item-custom-placeholder {
+  background: rgb(237, 237, 237);
+  border: dotted 1px #999;
+  min-height: 44px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 4px;
+  margin: 5px 0px;
+  padding: 12px 12px 12px 16px;
+}
+
+.user-icon {
+  margin-right: 0.5rem;
+}
+
+.item-control {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.assistive-text {
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.form-control.item-layout {
+  display: flex;
+  justify-content: space-between;
+}

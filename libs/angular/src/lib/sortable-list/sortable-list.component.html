@@ -1,0 +1,100 @@
+<span aria-live="assertive" class="assistive-text" id="liveText"></span>
+
+<form>
+  <div class="form-group item-list">
+    <div class="form-group">
+      <ng-container>
+        <div>
+          <p class="item-list-header">
+            <span class="item-list-header-title">{{ header }}</span>
+            <span class="item-list-header-subtitle">{{ subtitle }}</span>
+          </p>
+          <p *ngIf="description.length > 0" class="item-list-header-description">
+            {{ description }}
+          </p>
+          <div #sortableList (cdkDropListDropped)="onDragDrop($event)" cdkDropList>
+            <div *ngFor="let checklistItem of shouldDisplaySeparateUncheckedList ? checkedItems : items; let i = index"
+                 [cdkDragDisabled]="!isDraggable || isReadOnly"
+                 cdkDrag
+                 cdkDragLockAxis="y"
+                 class="item-box">
+              <div *cdkDragPlaceholder class="item-custom-placeholder"></div>
+              <label (keydown.alt.arrowDown)="onKeydown(i, i+1, $event)"
+                     (keydown.alt.arrowUp)="onKeydown(i, i-1, $event)"
+                     class="form-control item-control align-items-center item"
+                     id="selectedItem_{{checklistItem.id}}">
+                <div class="form-control">
+
+                  <input (change)="toggleSelection(checklistItem)" [checked]="checklistItem.selected"
+                         [disabled]="isReadOnly"
+                         [type]="shouldDisplayCheckboxes ? 'checkbox' : 'hidden'" />
+                  <div class="item-box-title">
+                    <span name="agendaItemName">{{ checklistItem.name }}
+                      <span *ngIf="checklistItem.hasCustomSuffix" class="item-list-suffix">
+                        <ng-container *ngTemplateOutlet="suffixTemplate; context: {$implicit: checklistItem}"
+                                      class="user-icon">
+                        </ng-container>
+                      </span>
+                    </span>
+                    <br />
+                    <span *ngIf="!!checklistItem.description">
+                      <span class="item-list-suffix" name="agendaItemToolTip">
+                        {{ checklistItem.description }}
+                      </span>
+                      <br />
+                    </span>
+                  </div>
+                  <i></i>
+                </div>
+                <div *ngIf="shouldDisplayDragHandle" class="item-grip-icon">
+                  <i class="sg-icon sg-icon-grip-vertical text-primary"></i>
+                </div>
+              </label>
+            </div>
+          </div>
+          <ng-container *ngIf="shouldDisplaySeparateUncheckedList && shouldDisplayCheckboxes">
+            <br />
+            <div>
+              <p class="item-list-header">
+                <span class="item-list-header-title">{{ unselectedHeader }}</span>
+                <span class="item-list-header-subtitle">{{ unselectedSubtitle }}</span>
+              </p>
+              <p *ngIf="description.length > 0" class="item-list-header-description">
+                {{ unselectedDescription }}
+              </p>
+              <div>
+                <div *ngFor="let checklistItem of uncheckedItems; let i = index" class="item-box">
+                  <label class="form-control item-control align-items-center item">
+                    <div class="form-control">
+                      <input (change)="toggleSelection(checklistItem)" [checked]="checklistItem.selected"
+                             [disabled]="isReadOnly"
+                             type="checkbox" />
+                      <div class="item-box-title">
+                    <span name="agendaItemName">{{ checklistItem.name }}
+                      <span *ngIf="checklistItem.hasCustomSuffix" class="item-list-suffix">
+                        <ng-container *ngTemplateOutlet="suffixTemplate; context: {$implicit: checklistItem}"
+                                      class="user-icon">
+                        </ng-container>
+                      </span>
+                    </span>
+                        <br />
+                        <span *ngIf="!!checklistItem.description">
+                      <span class="item-list-suffix" name="agendaItemToolTip">
+                        {{ checklistItem.description }}
+                      </span>
+                      <br />
+                    </span>
+                      </div>
+                      <i></i>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>
+
