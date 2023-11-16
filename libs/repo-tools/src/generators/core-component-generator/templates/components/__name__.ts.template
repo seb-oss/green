@@ -1,4 +1,4 @@
-import { gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from 'utils/helpers/custom-element-scoping'
 <% if(is_form_control) { %>
 import { GdsFormControlElement } from 'components/form-control'
 <% } else { %>
@@ -13,5 +13,9 @@ import { LitElement } from 'lit'
  */
 @gdsCustomElement('gds-<%= name %>')
 export class Gds<%= pascalCase(name) %> extends <%= is_form_control ? 'GdsFormControlElement' : 'LitElement' %> {
-  render() {}
+  render() {
+    return html`
+      <span>Replace me!</span>
+    `
+  }
 }

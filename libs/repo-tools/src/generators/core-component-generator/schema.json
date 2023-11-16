@@ -16,6 +16,7 @@
     "is_form_control": {
       "type": "boolean",
       "description": "Whether to extend GdsFormControl or LitElement",
+      "default": false,
       "x-prompt": {
         "message": "Is the component a form control?",
         "type": "boolean",
