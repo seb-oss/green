@@ -23,7 +23,7 @@ export interface InputProps
   /** Data test id used for finding elements in test */
   'data-testid'?: string
   /** Format value on change */
-  formatter?: (value: string | undefined) => string
+  formatter?: (value: string) => string
   /** Extra describing text, below the label */
   info?: ReactNode
   /** Label describing the input */
