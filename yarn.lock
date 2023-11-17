@@ -3257,6 +3257,13 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@lit-labs/react@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@lit-labs/react/-/react-2.1.2.tgz#225ef6564212380fde955ba2014e4cc67a0ab94e"
+  integrity sha512-/Ej0zY/+OVHKRqk97sLSYpUknNq2XZh/GRPDBWi7pwLVumpH5r7b78JGPg0LA7z+qp8UZidndZbMtaGNCXvyqA==
+  dependencies:
+    "@lit/react" "^1.0.0"
+
 "@lit-labs/ssr-dom-shim@^1.0.0", "@lit-labs/ssr-dom-shim@^1.1.0", "@lit-labs/ssr-dom-shim@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.2.tgz#d693d972974a354034454ec1317eb6afd0b00312"
@@ -3287,14 +3294,7 @@
     "@lit/reactive-element" "^1.4.0"
     lit "^2.3.0"
 
-"@lit/localize@^0.12.1":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@lit/localize/-/localize-0.12.1.tgz#e0a15412270c7674ab419f9acfc10844de98ba0d"
-  integrity sha512-uuF6OO6fjqomCf3jXsJ5cTGf1APYuN88S4Gvo/fjt9YkG4OMaMvpEUqd5oWhyzrJfY+HcenAbLJNi2Cq3H7gdg==
-  dependencies:
-    lit "^2.0.0 || ^3.0.0"
-
-"@lit/react@^1.0.2":
+"@lit/react@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@lit/react/-/react-1.0.2.tgz#4951ff1590d69aad912d0a950b3518d19eb7e220"
   integrity sha512-UJ5TQ46DPcJDIzyjbwbj6Iye0XcpCxL2yb03zcWq1BpWchpXS3Z0BPVhg7zDfZLF6JemPml8u/gt/+KwJ/23sg==
@@ -15549,7 +15549,7 @@ lit@^2.0.0, lit@^2.3.0, lit@^2.7.0:
     lit-element "^3.3.0"
     lit-html "^2.8.0"
 
-"lit@^2.0.0 || ^3.0.0", lit@^3.1.0:
+lit@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.0.tgz#76429b85dc1f5169fed499a0f7e89e2e619010c9"
   integrity sha512-rzo/hmUqX8zmOdamDAeydfjsGXbbdtAFqMhmocnh2j9aDYqbu0fjXygjCa0T99Od9VQ/2itwaGrjZz/ZELVl7w==
