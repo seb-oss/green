@@ -13,7 +13,7 @@ export interface ButtonProps {
   testId?: string
 }
 
-export function Button ({
+export function Button({
   children,
   variant,
   onClick,
@@ -32,7 +32,13 @@ export function Button ({
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
 
-  return <button {...props} data-testid={testId}>{children}</button>
+  return variant == 'close' ? (
+    <button {...props} aria-label={children?.toString() ?? 'Close'} data-testid={testId}>
+      <i></i>
+    </button>
+  ) : (
+    <button {...props} data-testid={testId}>{children}</button>
+  )
 }
 
 export default Button
