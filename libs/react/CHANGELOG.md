@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.3.0...@sebgroup/green-react@2.4.0) (2023-11-17)
+
+
+### Features
+
+* **react/button:** `testId` prop added for automated test to button component ([#1122](https://github.com/sebgroup/green/issues/1122)) ([08c0eae](https://github.com/sebgroup/green/commit/08c0eae8250c40766bf238df6d5985d60443e59a))
+* **react/button:** add `close` variant ([0a0899b](https://github.com/sebgroup/green/commit/0a0899b0e6166088b8de1e261834e0ba40283638))
+
+
+
 # [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.1...@sebgroup/green-react@2.3.0) (2023-11-10)
 
 
