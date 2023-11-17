@@ -12,14 +12,14 @@ export interface ButtonProps {
   size?: ButtonSize
 }
 
-export function Button ({
+export function Button({
   children,
   variant,
   onClick,
   disabled,
   active = false,
   type = 'button',
-  size
+  size,
 }: ButtonProps) {
   const props: ButtonHTMLAttributes<HTMLButtonElement> = { type, disabled }
   const classNames: string[] = []
@@ -30,7 +30,13 @@ export function Button ({
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
 
-  return <button {...props}>{children}</button>
+  return variant == 'close' ? (
+    <button {...props} aria-label={children?.toString() ?? 'Close'}>
+      <i></i>
+    </button>
+  ) : (
+    <button {...props}>{children}</button>
+  )
 }
 
 export default Button
