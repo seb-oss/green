@@ -132,6 +132,9 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   }
 
   &.gds-slide-out--768, &.gds-slide-out--960 {
+
+    position: fixed;
+
     header {
       @include common.padding-horizontal(7);
       @include common.padding-top(6);
@@ -148,7 +151,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
       @include common.padding-bottom(7);
     }
   }
-
 
 }
 
