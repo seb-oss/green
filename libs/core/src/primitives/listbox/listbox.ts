@@ -14,7 +14,8 @@ import {
 import {
   GdsListboxKbNavController,
   GdsListboxKbNavigation,
-} from 'src/controllers/listbox-kb-nav'
+} from 'src/controllers/listbox-kb-nav-controller'
+import { unwrap } from 'src/utils/helpers/unwrap-slots'
 
 /**
  * @element gds-listbox
@@ -30,7 +31,10 @@ import {
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
 @gdsCustomElement('gds-listbox')
-export class GdsListbox extends LitElement implements GdsListboxKbNavigation {
+export class GdsListbox
+  extends LitElement
+  implements GdsListboxKbNavigation, OptionsContainer
+{
   static styles = style
 
   /**
@@ -68,16 +72,9 @@ export class GdsListbox extends LitElement implements GdsListboxKbNavigation {
    * Returns a list of all `gds-option` elements in the listbox.
    */
   get options() {
-    let slot = this.#slotRef.value
-    if (!slot) return []
+    if (!this.#slotRef.value) return []
 
-    // Unwrap nested slots
-    while (
-      slot.assignedElements().length > 0 &&
-      slot.assignedElements()[0].nodeName === 'SLOT'
-    ) {
-      slot = slot.assignedElements()[0] as HTMLSlotElement
-    }
+    let slot = unwrap(this.#slotRef.value)
 
     return (
       (slot.assignedElements() as GdsOption[]).filter(
