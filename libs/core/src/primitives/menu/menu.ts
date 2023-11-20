@@ -1,5 +1,5 @@
 import { LitElement } from 'lit'
-import { Ref, createRef, ref } from 'lit/directives/ref'
+import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import {
   gdsCustomElement,
   html,
@@ -22,6 +22,7 @@ export class GdsMenu extends LitElement implements GdsListboxKbNavigation {
 
   constructor() {
     super()
+    console.log('GdsMenu constructor')
     new GdsListboxKbNavController(this)
   }
 
@@ -29,17 +30,15 @@ export class GdsMenu extends LitElement implements GdsListboxKbNavigation {
     super.connectedCallback()
     this.setAttribute('role', 'menu')
 
-    // This component should have the same stile as listbox, so we just apply `gds-listbox` here.
+    // This component should have the same style as listbox, so we just apply `gds-listbox` here.
     TransitionalStyles.instance.apply(this, 'gds-listbox')
   }
 
   get navigableItems() {
     if (!this.#slotRef.value) return []
 
-    let slot = unwrap(this.#slotRef.value)
-
     return (
-      (slot.assignedElements() as GdsMenuItem[]).filter(
+      (unwrap(this.#slotRef.value).assignedElements() as GdsMenuItem[]).filter(
         (o) => !o.hasAttribute('isplaceholder')
       ) || []
     )

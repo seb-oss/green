@@ -8,6 +8,8 @@ import { constrainSlots } from '../../utils/helpers'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { property, queryAsync } from 'lit/decorators.js'
 
+import '../../primitives/menu/menu'
+
 /**
  * @element gds-context-menu
  * @status beta

@@ -74,10 +74,8 @@ export class GdsListbox
   get options() {
     if (!this.#slotRef.value) return []
 
-    let slot = unwrap(this.#slotRef.value)
-
     return (
-      (slot.assignedElements() as GdsOption[]).filter(
+      (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
         (o) => !o.hasAttribute('isplaceholder')
       ) || []
     )
