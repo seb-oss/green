@@ -1,13 +1,16 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
-<Meta title="Components/ContextMenu" />
+<Meta title="Components/Context Menu" />
 
 # Context Menu
 
 <Canvas>
+<div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
   <gds-context-menu>
     <gds-menu-item>Item 1</gds-menu-item>
     <gds-menu-item>Item 2</gds-menu-item>
     <gds-menu-item>Item 3</gds-menu-item>
   </gds-context-menu>
+</div>
 </Canvas>

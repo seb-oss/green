@@ -1,0 +1,19 @@
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+
+:host {
+  display: block;
+}
+
+button {
+  @include button.reset();
+  @include button.base();
+  @include button.ghost-dark();
+
+  font-size: inherit;
+  font-weight: normal;
+  line-height: 1.125;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+
+  width: 100%;
+}
