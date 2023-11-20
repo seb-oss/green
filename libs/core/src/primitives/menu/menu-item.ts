@@ -16,8 +16,23 @@ export class GdsMenuItem extends Focusable(LitElement) {
     super.connectedCallback()
     this.setAttribute('role', 'menuitem')
 
+    this.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return
+      e.preventDefault()
+      this.click()
+    })
+
     // This component should have the same style as option, so we just apply `gds-option` here.
     TransitionalStyles.instance.apply(this, 'gds-option')
+  }
+
+  onclick = () => {
+    this.dispatchEvent(
+      new CustomEvent('gds-menu-item-click', {
+        bubbles: true,
+        composed: true,
+      })
+    )
   }
 
   render() {

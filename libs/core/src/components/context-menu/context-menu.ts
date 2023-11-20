@@ -37,6 +37,16 @@ export class GdsContextMenu extends LitElement {
   connectedCallback() {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
+
+    this.addEventListener('gds-menu-item-click', this.#handleItemClick)
+
+    this.addEventListener('keydown', (e) => {
+      if (this.open && e.key == 'Tab') {
+        e.preventDefault()
+        this.open = false
+        this.elTriggerBtn.then((el) => el.focus())
+      }
+    })
   }
 
   render() {
@@ -58,5 +68,9 @@ export class GdsContextMenu extends LitElement {
           <slot allow="gds-menu-item"></slot>
         </gds-menu>
       </gds-popover>`
+  }
+
+  #handleItemClick() {
+    this.open = false
   }
 }
