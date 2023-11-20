@@ -1,5 +1,7 @@
 import { LitElement } from 'lit-element'
 import { msg } from '@lit/localize'
+import { classMap } from 'lit-html/directives/class-map.js'
+import { property, queryAsync } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
@@ -7,7 +9,6 @@ import {
 import { constrainSlots } from '../../utils/helpers'
 
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
-import { property, queryAsync } from 'lit/decorators.js'
 
 import '../../primitives/menu/menu'
 
@@ -35,10 +36,16 @@ export class GdsContextMenu extends LitElement {
   open = false
 
   /**
-   * The label for the trigger button and popover.
+   * The label for the trigger button.
    */
   @property()
-  label = msg('Open context menu')
+  buttonLabel = msg('Open context menu')
+
+  /**
+   * The label for the popover and menu. Should describe the context of the menu.
+   */
+  @property()
+  label = ''
 
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
@@ -66,20 +73,24 @@ export class GdsContextMenu extends LitElement {
   render() {
     return html`<button
         id="trigger"
-        class="ghost border-0 px-3 small"
-        aria-label="${this.label}"
+        class="ghost border-0 small ${classMap({ highlighted: this.open })}"
+        aria-label="${this.buttonLabel}"
+        aria-haspopup="true"
+        aria-hasmenu="true"
+        aria-controls="menu"
+        aria-expanded=${this.open}
         @click=${() => (this.open = !this.open)}
       >
-        <!-- <i class="sg-icon sg-icon-ellipsis"></i> -->
-        ...
+        <i class="sg-icon sg-icon-ellipsis"></i>
       </button>
       <gds-popover
+        id="menu"
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
         .label=${this.label}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
-        <gds-menu>
+        <gds-menu aria-label=${this.label}>
           <slot allow="gds-menu-item"></slot>
         </gds-menu>
       </gds-popover>`

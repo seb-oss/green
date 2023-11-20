@@ -14,6 +14,7 @@ import {
 import type { GdsContextMenu } from './context-menu'
 import { GdsPopover } from 'src/primitives/popover'
 import { GdsMenuItem } from 'src/primitives/menu/menu-item'
+import { GdsMenu } from 'src/primitives/menu/menu'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -82,7 +83,7 @@ describe('<gds-context-menu>', () => {
   describe('Accessibility', () => {
     it('should use set label on button and popover', async () => {
       const el = await fixture<GdsContextMenu>(html`
-        <gds-context-menu label="My label">
+        <gds-context-menu buttonLabel="Button label" label="Context label">
           <gds-menu-item>Item 1</gds-menu-item>
           <gds-menu-item>Item 2</gds-menu-item>
           <gds-menu-item>Item 3</gds-menu-item>
@@ -91,11 +92,15 @@ describe('<gds-context-menu>', () => {
       const popover = el.shadowRoot!.querySelector<GdsPopover>(
         getScopedTagName('gds-popover')
       )!
+      const menu = el.shadowRoot!.querySelector<GdsMenu>(
+        getScopedTagName('gds-menu')
+      )!
       const button =
         el.shadowRoot!.querySelector<HTMLButtonElement>('#trigger')!
 
-      expect(button.getAttribute('aria-label')).to.equal('My label')
-      expect(popover.label).to.equal('My label')
+      expect(button.getAttribute('aria-label')).to.equal('Button label')
+      expect(popover.label).to.equal('Context label')
+      expect(menu.getAttribute('aria-label')).to.equal('Context label')
     })
 
     it('should active click action on enter', async () => {
