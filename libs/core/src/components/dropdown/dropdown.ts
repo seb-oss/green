@@ -1,4 +1,4 @@
-import { property, query } from 'lit/decorators.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -117,6 +117,9 @@ export class GdsDropdown<ValueT = any>
   @query('#trigger')
   private elTriggerBtn!: HTMLButtonElement
 
+  @queryAsync('#trigger')
+  private elTriggerBtnAsync!: Promise<HTMLButtonElement>
+
   @query('#listbox')
   private elListbox!: GdsListbox
 
@@ -216,7 +219,7 @@ export class GdsDropdown<ValueT = any>
       <gds-popover
         .label=${this.label}
         .open=${this.open}
-        .trigger=${this.elTriggerBtn}
+        .triggerRef=${this.elTriggerBtnAsync}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         ${when(

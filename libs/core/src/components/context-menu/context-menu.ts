@@ -6,7 +6,7 @@ import {
 import { constrainSlots } from '../../utils/helpers'
 
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
-import { property } from 'lit/decorators.js'
+import { property, queryAsync } from 'lit/decorators.js'
 
 /**
  * @element gds-context-menu
@@ -24,6 +24,9 @@ export class GdsContextMenu extends LitElement {
   @property({ type: Boolean, reflect: true })
   open = false
 
+  @queryAsync('#trigger')
+  private elTriggerBtn!: Promise<HTMLButtonElement>
+
   constructor() {
     super()
     constrainSlots(this)
@@ -36,13 +39,19 @@ export class GdsContextMenu extends LitElement {
 
   render() {
     return html`<button
+        id="trigger"
         class="ghost border-0 px-3 small"
         aria-label="Open context menu"
         @click=${() => (this.open = !this.open)}
       >
-        <i class="sg-icon sg-icon-ellipsis"></i>
+        <!-- <i class="sg-icon sg-icon-ellipsis"></i> -->
+        Trigger
       </button>
-      <gds-popover .open=${this.open}>
+      <gds-popover
+        .open=${this.open}
+        .triggerRef=${this.elTriggerBtn}
+        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+      >
         <gds-menu>
           <slot allow="gds-menu-item"></slot>
         </gds-menu>

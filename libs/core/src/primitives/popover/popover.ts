@@ -1,5 +1,5 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
@@ -39,7 +39,7 @@ export class GdsPopover extends LitElement {
    * Optional trigger element for the popover.
    */
   @property()
-  trigger: HTMLElement | undefined = undefined
+  triggerRef: Promise<HTMLElement | undefined> = Promise.resolve(undefined)
 
   /**
    * Optional trigger element for the popover.
@@ -47,9 +47,20 @@ export class GdsPopover extends LitElement {
   @property()
   label: string | undefined = undefined
 
-  @watch('trigger')
+  @state()
+  private _trigger: HTMLElement | undefined = undefined
+
+  @watch('triggerRef')
+  private _handleTriggerRefChanged() {
+    this.triggerRef.then((el) => {
+      if (el) this._trigger = el
+    })
+  }
+
+  @watch('_trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
+    this.#registerAutoPositioning()
   }
 
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
@@ -134,15 +145,15 @@ export class GdsPopover extends LitElement {
     // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
     // dialog (close button in this case.)
     // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
-    setTimeout(() => this.trigger?.focus(), 250)
+    setTimeout(() => this._trigger?.focus(), 250)
   }
 
   #registerTriggerEvents() {
-    this.trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
   }
 
   #unregisterTriggerEvents() {
-    this.trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
     this.#autoPositionCleanup?.()
   }
 
@@ -165,7 +176,7 @@ export class GdsPopover extends LitElement {
 
   #autoPositionCleanup: (() => void) | undefined
   #registerAutoPositioning() {
-    const referenceEl = this.trigger
+    const referenceEl = this._trigger
     const floatingEl = this.#dialogElementRef.value
 
     if (!referenceEl || !floatingEl) return
