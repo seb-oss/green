@@ -1,12 +1,11 @@
-import { property } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import 'reflect-metadata'
 
-import { randomId, constrainSlots } from '../../utils/helpers'
+import { constrainSlots } from '../../utils/helpers'
 import { watch, observeLightDOM } from '../../utils/decorators'
 
 import {
@@ -21,9 +20,7 @@ import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox'
-
 import '../../primitives/popover'
-import type { GdsPopover } from '../../primitives/popover'
 
 import { GdsFormControlElement } from '../form-control'
 
@@ -115,12 +112,16 @@ export class GdsDropdown<ValueT = any>
     o.innerHTML.toLowerCase().includes(q.toLowerCase())
 
   // Private members
-  #listboxRef: Ref<GdsListbox> = createRef()
-  #triggerRef: Ref<HTMLButtonElement> = createRef()
-  #searchInputRef: Ref<HTMLInputElement> = createRef()
   #optionElements: HTMLCollectionOf<GdsOption>
-  #listboxId = randomId()
-  #triggerId = randomId()
+
+  @query('#trigger')
+  private elTriggerBtn!: HTMLButtonElement
+
+  @query('#listbox')
+  private elListbox!: GdsListbox
+
+  @query('#searchinput')
+  private elSearchInput!: HTMLInputElement
 
   constructor() {
     super()
@@ -191,20 +192,19 @@ export class GdsDropdown<ValueT = any>
     return html`
       ${when(
         this.label,
-        () => html`<label for="${this.#triggerId}">${this.label}</label>`
+        () => html`<label for="trigger">${this.label}</label>`
       )}
 
       <span class="form-info"><slot name="sub-label"></slot></span>
 
       <button
-        id="${this.#triggerId}"
+        id="trigger"
         @click="${() => (this.open = !this.open)}"
         aria-haspopup="listbox"
         role="combobox"
-        aria-owns="${this.#listboxId}"
-        aria-controls="${this.#listboxId}"
+        aria-owns="listbox"
+        aria-controls="listbox"
         aria-expanded="${this.open}"
-        ${ref(this.#triggerRef)}
       >
         <slot name="trigger">
           <span>${unsafeHTML(this.displayValue)}</span>
@@ -216,26 +216,25 @@ export class GdsDropdown<ValueT = any>
       <gds-popover
         .label=${this.label}
         .open=${this.open}
+        .trigger=${this.elTriggerBtn}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
-        ${ref(this.#registerPopoverTrigger)}
       >
         ${when(
           this.searchable,
           () => html`<input
+            id="searchinput"
             type="text"
             aria-label="${msg('Filter available options')}"
             placeholder="${msg('Search')}"
-            ${ref(this.#searchInputRef)}
             @keydown=${this.#handleSearchFieldKeyDown}
             @keyup=${this.#handleSearchFieldKeyUp}
           />`
         )}
 
         <gds-listbox
-          id="${this.#listboxId}"
+          id="listbox"
           .multiple="${ifDefined(this.multiple)}"
           .compareWith="${this.compareWith}"
-          ${ref(this.#listboxRef)}
           @change="${this.#handleSelectionChange}"
           @gds-focus="${this.#handleOptionFocusChange}"
           @keydown=${this.#handleListboxKeyDown}
@@ -275,7 +274,7 @@ export class GdsDropdown<ValueT = any>
    */
   @watch('value')
   private _handleValueChange() {
-    const listbox = this.#listboxRef.value as GdsListbox
+    const listbox = this.elListbox
     if (listbox) {
       if (Array.isArray(this.value)) listbox.selection = this.value as any[]
       else listbox.selection = [this.value as any]
@@ -288,7 +287,7 @@ export class GdsDropdown<ValueT = any>
    * @param e The keyboard event.
    */
   #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
-    const input = this.#searchInputRef.value!
+    const input = this.elSearchInput!
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
 
@@ -306,7 +305,7 @@ export class GdsDropdown<ValueT = any>
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown' || e.key === 'Tab') {
       e.preventDefault()
-      this.#listboxRef.value?.focus()
+      this.elListbox?.focus()
       return
     }
   }
@@ -318,28 +317,16 @@ export class GdsDropdown<ValueT = any>
   #handleListboxKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Tab' && this.searchable) {
       e.preventDefault()
-      this.#searchInputRef.value?.focus()
+      this.elSearchInput?.focus()
       return
     }
   }
 
   #handleOptionFocusChange = (e: FocusEvent) => {
     // Set the ariaActiveDescendant of the trigger button
-    const triggerButton = this.#triggerRef.value as any
+    const triggerButton = this.elTriggerBtn as any
     if (triggerButton)
       triggerButton.ariaActiveDescendantElement = e.target as any
-  }
-
-  /**
-   * Registers the trigger button of the dropdown to the popover.
-   *
-   * @param el The popover element.
-   */
-  #registerPopoverTrigger(el?: Element) {
-    if (el) {
-      const popover = el as GdsPopover
-      popover.trigger = this.#triggerRef.value as HTMLButtonElement
-    }
   }
 
   /**
@@ -348,14 +335,14 @@ export class GdsDropdown<ValueT = any>
    * @fires change
    */
   #handleSelectionChange() {
-    const listbox = this.#listboxRef.value as GdsListbox
+    const listbox = this.elListbox
     if (!listbox) return
 
     if (this.multiple) this.value = listbox.selection.map((s) => s.value)
     else {
       this.value = listbox.selection[0]?.value
       this.open = false
-      setTimeout(() => this.#triggerRef.value?.focus(), 0)
+      setTimeout(() => this.elTriggerBtn?.focus(), 0)
     }
 
     this.dispatchEvent(
@@ -379,7 +366,7 @@ export class GdsDropdown<ValueT = any>
     if (open) this.#registerAutoCloseListener()
     else {
       this.#unregisterAutoCloseListener()
-      this.#searchInputRef.value && (this.#searchInputRef.value.value = '')
+      this.elSearchInput && (this.elSearchInput.value = '')
     }
 
     this.dispatchEvent(
@@ -419,7 +406,7 @@ export class GdsDropdown<ValueT = any>
     if (e.key === 'Tab' && !this.searchable) {
       e.preventDefault()
       this.open = false
-      this.#triggerRef.value?.focus()
+      this.elTriggerBtn?.focus()
     }
   }
 }
