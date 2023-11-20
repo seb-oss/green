@@ -3,7 +3,7 @@ import { LitElement, ReactiveController } from 'lit'
 /**
  * Components that use `GdsListboxKbNavController` needs to implement this interface.
  */
-export interface GdsListboxKbNavigation extends LitElement {
+export interface ListboxKbNavigation extends LitElement {
   /**
    * Should return a list of navigable HTMLElements.
    */
@@ -18,10 +18,10 @@ export interface GdsListboxKbNavigation extends LitElement {
  * interaction patterns decribed here:
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role
  */
-export class GdsListboxKbNavController implements ReactiveController {
-  host: GdsListboxKbNavigation
+export class ListboxKbNavController implements ReactiveController {
+  host: ListboxKbNavigation
 
-  constructor(host: GdsListboxKbNavigation) {
+  constructor(host: ListboxKbNavigation) {
     ;(this.host = host).addController(this)
   }
 

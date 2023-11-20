@@ -6,7 +6,7 @@ import {
 } from 'src/utils/helpers/custom-element-scoping'
 import {
   GdsListboxKbNavController,
-  GdsListboxKbNavigation,
+  ListboxKbNavigation,
 } from 'src/controllers/listbox-kb-nav-controller'
 import { unwrap } from 'src/utils/helpers/unwrap-slots'
 import { GdsMenuItem } from './menu-item'
@@ -17,7 +17,7 @@ import { TransitionalStyles } from 'src/transitional-styles'
  * @internal
  */
 @gdsCustomElement('gds-menu')
-export class GdsMenu extends LitElement implements GdsListboxKbNavigation {
+export class GdsMenu extends LitElement implements ListboxKbNavigation {
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {

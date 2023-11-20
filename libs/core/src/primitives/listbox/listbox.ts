@@ -12,8 +12,8 @@ import {
   gdsCustomElement,
 } from '../../utils/helpers/custom-element-scoping'
 import {
-  GdsListboxKbNavController,
-  GdsListboxKbNavigation,
+  ListboxKbNavController,
+  ListboxKbNavigation,
 } from 'src/controllers/listbox-kb-nav-controller'
 import { unwrap } from 'src/utils/helpers/unwrap-slots'
 
@@ -33,7 +33,7 @@ import { unwrap } from 'src/utils/helpers/unwrap-slots'
 @gdsCustomElement('gds-listbox')
 export class GdsListbox
   extends LitElement
-  implements GdsListboxKbNavigation, OptionsContainer
+  implements ListboxKbNavigation, OptionsContainer
 {
   static styles = style
 
@@ -61,7 +61,7 @@ export class GdsListbox
 
   constructor() {
     super()
-    new GdsListboxKbNavController(this)
+    new ListboxKbNavController(this)
   }
 
   get navigableItems() {
