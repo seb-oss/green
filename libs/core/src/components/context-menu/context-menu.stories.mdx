@@ -17,11 +17,11 @@ To handle the user's interaction, you can listen to `click` events on indiviudal
 
 <Canvas>
 <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+Activated action: <span id="display-action"></span><br />
   <gds-context-menu>
     <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 1</gds-menu-item>
     <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 2</gds-menu-item>
     <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 3</gds-menu-item>
   </gds-context-menu>
-  Activated action: <span id="display-action"></span>
 </div>
 </Canvas>

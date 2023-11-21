@@ -10,7 +10,7 @@ module.exports = {
       async transform(source, resolveDir) {
         const { css } = await postcss([
           autoprefixer,
-          postcssPresetEnv({ stage: 0 }),
+          postcssPresetEnv({ stage: false }),
         ]).process(source, { from: undefined })
         return css
       },
