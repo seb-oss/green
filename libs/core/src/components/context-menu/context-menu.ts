@@ -75,13 +75,14 @@ export class GdsContextMenu extends LitElement {
         id="trigger"
         class="ghost border-0 small ${classMap({ highlighted: this.open })}"
         aria-label="${this.buttonLabel}"
-        aria-haspopup="true"
-        aria-hasmenu="true"
+        aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
         @click=${() => (this.open = !this.open)}
       >
-        <i class="sg-icon sg-icon-ellipsis"></i>
+        <slot name="trigger">
+          <i class="sg-icon sg-icon-ellipsis"></i>
+        </slot>
       </button>
       <gds-popover
         id="menu"
