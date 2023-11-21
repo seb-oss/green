@@ -2,7 +2,13 @@ import { LitElement, html, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
-import { computePosition, autoUpdate, offset, flip } from '@floating-ui/dom'
+import {
+  computePosition,
+  autoUpdate,
+  offset,
+  flip,
+  Placement,
+} from '@floating-ui/dom'
 
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
@@ -46,6 +52,13 @@ export class GdsPopover extends LitElement {
    */
   @property()
   label: string | undefined = undefined
+
+  /**
+   * The placement of the popover relative to the trigger.
+   * Accepts any of the placements supported by Floating UI.
+   */
+  @property()
+  placement: Placement = 'bottom-start'
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
@@ -183,7 +196,7 @@ export class GdsPopover extends LitElement {
 
     this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
-        placement: 'bottom-start',
+        placement: this.placement,
         middleware: [offset(8), flip(), topLayerOverTransforms()],
         strategy: 'fixed',
       }).then(({ x, y }) =>

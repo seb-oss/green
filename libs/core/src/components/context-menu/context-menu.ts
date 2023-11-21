@@ -11,6 +11,7 @@ import { constrainSlots } from '../../utils/helpers'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import '../../primitives/menu/menu'
+import { Placement } from '@floating-ui/dom'
 
 /**
  * @element gds-context-menu
@@ -46,6 +47,12 @@ export class GdsContextMenu extends LitElement {
    */
   @property()
   label = ''
+
+  /**
+   * The placement of the popover relative to the trigger.
+   */
+  @property()
+  placement: Placement = 'bottom-start'
 
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
@@ -89,6 +96,7 @@ export class GdsContextMenu extends LitElement {
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
         .label=${this.label}
+        .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <gds-menu aria-label=${this.label}>
