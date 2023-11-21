@@ -1,7 +1,7 @@
 import { LitElement, ReactiveController } from 'lit'
 
 /**
- * Components that use `GdsListboxKbNavController` needs to implement this interface.
+ * Components that use `ListboxKbNavController` needs to implement this interface.
  */
 export interface ListboxKbNavigation extends LitElement {
   /**
@@ -11,7 +11,7 @@ export interface ListboxKbNavigation extends LitElement {
 }
 
 /**
- * Controller that handles keyboard navigation for `GdsListboxKbNavigation` compatible components.
+ * Controller that handles keyboard navigation for `ListboxKbNavigation` compatible components.
  * @internal
  *
  * The purpose of this controller is to provide a reusable implementation of the keyboard

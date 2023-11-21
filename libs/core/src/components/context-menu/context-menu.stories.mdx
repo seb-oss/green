@@ -5,12 +5,23 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 
 # Context Menu
 
+The context menu is presented in-context to the related data, so users don’t lose
+their place in the app. It appears upon interaction with the 3 dot button and
+displays a list of choices, one choice per line.
+
+## Basic usage
+
+Menu items are defined by adding `gds-menu-item` elements as children of the `gds-context-menu` element.
+
+To handle the user's interaction, you can listen to `click` events on indiviudal menu items, or to the `gds-menu-item-click` event on the parent `gds-context-menu` element.
+
 <Canvas>
 <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
   <gds-context-menu>
-    <gds-menu-item>Item 1</gds-menu-item>
-    <gds-menu-item>Item 2</gds-menu-item>
-    <gds-menu-item>Item 3</gds-menu-item>
+    <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 1</gds-menu-item>
+    <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 2</gds-menu-item>
+    <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">Item 3</gds-menu-item>
   </gds-context-menu>
+  Activated action: <span id="display-action"></span>
 </div>
 </Canvas>

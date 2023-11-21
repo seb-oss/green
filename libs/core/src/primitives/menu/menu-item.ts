@@ -22,11 +22,13 @@ export class GdsMenuItem extends Focusable(LitElement) {
       this.click()
     })
 
+    this.addEventListener('click', this.#handleOnClick)
+
     // This component should have the same style as option, so we just apply `gds-option` here.
     TransitionalStyles.instance.apply(this, 'gds-option')
   }
 
-  onclick = () => {
+  #handleOnClick = () => {
     this.dispatchEvent(
       new CustomEvent('gds-menu-item-click', {
         bubbles: true,
