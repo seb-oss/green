@@ -3279,13 +3279,20 @@
     source-map-support "^0.5.19"
     typescript "^4.7.4"
 
-"@lit/localize@^0.11.0", "@lit/localize@^0.11.4":
+"@lit/localize@^0.11.0":
   version "0.11.4"
   resolved "https://registry.yarnpkg.com/@lit/localize/-/localize-0.11.4.tgz#4a5758965977828c10c51738fbb1890decb3d8f6"
   integrity sha512-RRIwIX2tAm3+DuEndoXSJrFjGrAK5cb5IXo5K6jcJ6sbgD829B8rSqHC5MaKVUmXTVLIR1bk5IZOZDf9wFereA==
   dependencies:
     "@lit/reactive-element" "^1.4.0"
     lit "^2.3.0"
+
+"@lit/localize@^0.12.1":
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/@lit/localize/-/localize-0.12.1.tgz#e0a15412270c7674ab419f9acfc10844de98ba0d"
+  integrity sha512-uuF6OO6fjqomCf3jXsJ5cTGf1APYuN88S4Gvo/fjt9YkG4OMaMvpEUqd5oWhyzrJfY+HcenAbLJNi2Cq3H7gdg==
+  dependencies:
+    lit "^2.0.0 || ^3.0.0"
 
 "@lit/react@^1.0.2":
   version "1.0.2"
@@ -15542,7 +15549,7 @@ lit@^2.0.0, lit@^2.3.0, lit@^2.7.0:
     lit-element "^3.3.0"
     lit-html "^2.8.0"
 
-lit@^3.1.0:
+"lit@^2.0.0 || ^3.0.0", lit@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.0.tgz#76429b85dc1f5169fed499a0f7e89e2e619010c9"
   integrity sha512-rzo/hmUqX8zmOdamDAeydfjsGXbbdtAFqMhmocnh2j9aDYqbu0fjXygjCa0T99Od9VQ/2itwaGrjZz/ZELVl7w==
