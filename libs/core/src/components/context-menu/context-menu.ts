@@ -21,6 +21,9 @@ import { Placement } from '@floating-ui/dom'
  * their place in the app. It appears upon interaction with the 3 dot button and
  * displays a list of choices, one choice per line.
  *
+ * @event gds-menu-item-click - Fired when a menu item is clicked.
+ * @event gds-ui-state - Fired when the menu is opened or closed.
+ *
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
 @gdsCustomElement('gds-context-menu')
@@ -66,8 +69,6 @@ export class GdsContextMenu extends LitElement {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
 
-    this.addEventListener('gds-menu-item-click', this.#handleItemClick)
-
     this.addEventListener('keydown', (e) => {
       if (this.open && e.key == 'Tab') {
         e.preventDefault()
@@ -99,7 +100,10 @@ export class GdsContextMenu extends LitElement {
         .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
-        <gds-menu aria-label=${this.label}>
+        <gds-menu
+          aria-label=${this.label}
+          @gds-menu-item-click=${this.#handleItemClick}
+        >
           <slot allow="gds-menu-item"></slot>
         </gds-menu>
       </gds-popover>`
