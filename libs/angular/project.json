@@ -77,12 +77,7 @@
           "quiet": true
         }
       },
-      "dependsOn": [
-        {
-          "projects": "dependencies",
-          "target": "build-with-types-and-scoping"
-        }
-      ]
+      "dependsOn": ["^build-with-types-and-scoping"]
     },
     "update-deps-and-release": {
       "executor": "nx:run-commands",
