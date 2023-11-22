@@ -12,20 +12,20 @@ This React component is a wrapper for the Context Menu component from Green Core
 In the example below, we are listening to the `onMenuItemClick` event on the `ContextMenu` component.
 
 <Canvas>
-<ContextMenu onMenuItemClick={console.log}>
-  <MenuItem><strong>Item 1</strong></MenuItem>
-  <MenuItem>Item 2</MenuItem>
-  <MenuItem>Item 3</MenuItem>
+<ContextMenu label="Choose an action" onMenuItemClick={console.log}>
+  <MenuItem><strong>Action 1</strong></MenuItem>
+  <MenuItem>Action 2</MenuItem>
+  <MenuItem>Action 3</MenuItem>
 </ContextMenu>
 </Canvas>
 
 A more typical usage would be to listen to `onClick` events on individual `MenuItem`s, while mapping to your specific data:
 
 ```jsx
-<ContextMenu>
-  {myListOfItems.map(item => (
-    <MenuItem key={item.id} onClick={() => console.log(item.id)}>
-      {item.name}
+<ContextMenu label="Choose an action">
+  {myListOfActions.map(action => (
+    <MenuItem key={action.id} onClick={() => console.log(action.id)}>
+      {action.name}
     </MenuItem>
   ))}
 </ContextMenu>
