@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.1.1...@sebgroup/green-core@1.2.0) (2023-11-22)
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
 ## [1.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.1.0...@sebgroup/green-core@1.1.1) (2023-11-17)
 
 
