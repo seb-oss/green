@@ -2,6 +2,21 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.1.0) (2023-11-22)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([8c88de3](https://github.com/sebgroup/green/commit/8c88de30c48ddb7e0a4a8abdc3b97d8310183069))
+* **dropdown:** hidden overflow with ellipsis by default ([#1114](https://github.com/sebgroup/green/issues/1114)) ([9a2cce7](https://github.com/sebgroup/green/commit/9a2cce7cb7549ef3bff6b4086407fcb80f49cc72))
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
 ## [2.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.0.4) (2023-11-08)
 
 
