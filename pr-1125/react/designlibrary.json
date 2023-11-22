@@ -427,6 +427,12 @@
     }
   },
   {
+    "id": "components-context-menu--page",
+    "name": "Page",
+    "title": "Components/Context Menu",
+    "customParams": {}
+  },
+  {
     "id": "components-card--card",
     "name": "Card",
     "title": "Components/Card",
