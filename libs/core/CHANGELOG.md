@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.0...@sebgroup/green-core@1.2.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **core:** update localize and correct lit version in package ([#1128](https://github.com/sebgroup/green/issues/1128)) ([29210f6](https://github.com/sebgroup/green/commit/29210f6a22d30ec059b9da7038585d6d21673fb7))
+
+
+
 # [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.1.1...@sebgroup/green-core@1.2.0) (2023-11-22)
 
 
