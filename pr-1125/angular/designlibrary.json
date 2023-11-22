@@ -1,35 +1,5 @@
 [
   {
-    "id": "components-form-input--default",
-    "name": "Default",
-    "title": "Components/Form/Input",
-    "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
-    }
-  },
-  {
-    "id": "components-form-input--template-driven",
-    "name": "Template Driven",
-    "title": "Components/Form/Input",
-    "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
-    }
-  },
-  {
-    "id": "components-form-input--reactive-forms",
-    "name": "Reactive Forms",
-    "title": "Components/Form/Input",
-    "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
-    }
-  },
-  {
     "id": "components-slider--default",
     "name": "Default",
     "title": "Components/Slider",
@@ -422,5 +392,35 @@
     "name": "Page",
     "title": "Get started",
     "customParams": {}
+  },
+  {
+    "id": "components-form-input--default",
+    "name": "Default",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
+  },
+  {
+    "id": "components-form-input--template-driven",
+    "name": "Template Driven",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
+  },
+  {
+    "id": "components-form-input--reactive-forms",
+    "name": "Reactive Forms",
+    "title": "Components/Form/Input",
+    "customParams": {
+      "componentIds": [
+        "component-input"
+      ]
+    }
   }
 ]
