@@ -55,6 +55,13 @@ jobs:
       - name: Build all storybooks
         run: yarn run nx run-many --target build-storybook --all
 
+      - name: Breakpoint if tests failed
+        if: failure()
+        uses: namespacelabs/breakpoint-action@v0
+        with:
+          duration: 30m
+          authorized-users: splashdust
+
       - name: Deploy storybooks to GitHub Pages
 
         uses: JamesIves/github-pages-deploy-action@4.1.4
