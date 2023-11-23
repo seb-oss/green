@@ -53,9 +53,14 @@ jobs:
         id: target
 
       - name: Build all storybooks
-        run: yarn run nx run-many --target build-storybook --all
+        run: yarn nx run-many --target build-storybook --all --exclude=angular
 
-      - name: Breakpoint if tests failed
+        ## For some reason, the angular storybook build fails on the run-many command
+        ## So as a workaroun, we run it separately
+      - name: Build Angular storybook
+        run: yarn nx run angular:build-storybook
+
+      - name: Breakpoint if build failed
         if: failure()
         uses: namespacelabs/breakpoint-action@v0
         with:
