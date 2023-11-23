@@ -278,16 +278,6 @@
     }
   },
   {
-    "id": "components-context-menu--directive-template-default",
-    "name": "Directive Template Default",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
-      ]
-    }
-  },
-  {
     "id": "components-context-menu--position-relative",
     "name": "Position Relative",
     "title": "Components/Context Menu",
