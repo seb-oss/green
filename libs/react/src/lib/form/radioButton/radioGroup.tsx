@@ -108,8 +108,7 @@ export const RadioGroup = ({
           (radioButton: React.ReactElement<RadioButtonProps>) => {
             return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
               ? React.cloneElement(radioButton, {
-                  validator:
-                    validator && validateClassName(validator?.indicator),
+                  validator: validator,
                   onChange: handleOnChange,
                   checked: selected === radioButton.props.value,
                   name,

@@ -1,12 +1,12 @@
 import { forwardRef, HTMLProps } from 'react'
 import useInput from '../useInput'
 import classNames from 'classnames'
+import { IValidator, validateClassName } from '@sebgroup/extract'
 
 export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
   label: string
   testId?: string
-  // TODO: This validator prop should be of type IValidator
-  validator?: string
+  validator?: IValidator
   value: string
 }
 
@@ -17,7 +17,9 @@ export const RadioButton = forwardRef(
   ) => {
     const { id } = useInput(props)
 
-    const inputClassNames = classNames(validator)
+    const inputClassNames = classNames(
+      validator && validateClassName(validator?.indicator)
+    )
 
     return (
       <label htmlFor={id} className="form-control">
