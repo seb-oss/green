@@ -105,6 +105,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 }
 
 @mixin aside-modal() {
+  position: fixed;
   height: 100vh;
   max-width: 512px;
   min-height: stretch;

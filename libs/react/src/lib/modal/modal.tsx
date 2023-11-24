@@ -2,7 +2,7 @@ import { ModalType, Size, randomId } from '@sebgroup/extract'
 import { DetailedHTMLProps, HTMLAttributes, MouseEvent, ReactNode, useState } from 'react'
 import Button from '../form/button/button'
 
-type ModalEventListener = (event: MouseEvent<HTMLButtonElement>) => unknown
+type ModalEventListener = (event: MouseEvent<HTMLButtonElement>|null) => unknown
 
 export interface ModalProps {
   type?: ModalType
@@ -69,9 +69,9 @@ const ModalFooter = ({
   )
 }
 
-export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
+export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm',onClose, ...props }: ModalProps) => {
   const [uuid, _] = useState(id)
-
+  
   if (!isOpen) return null;
 
   const bodyId = `${uuid}_body`;
@@ -85,39 +85,61 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', 
     "aria-describedby": bodyId,
   }
 
+  let modalContent;
+
   switch (type) {
     case 'slideout': {
       let className: string | undefined = undefined;
       if (size === "lg") className = 'gds-slide-out--960';
       if (size === "md") className = 'gds-slide-out--768';
 
-      return (
+      modalContent = (
         <aside className={className} {...dialogProps}>
           <ModalHeader id={headerId} {...props} />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </aside>
-      )
+      );
+      break;
     }
     case 'takeover': {
-      return (
+      modalContent = (
         <main {...dialogProps}>
           <ModalHeader id={headerId} {...props} />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </main>
-      )
+      );
+      break;
     }
     default: {
-      return (
+      modalContent = (
         <section {...dialogProps}>
           <ModalHeader id={headerId} {...props} />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </section>
-      )
+      );
+      break;
     }
   }
+
+  const handleBackdropClick = () => {
+    if (onClose) onClose(null)
+  };
+
+  return (
+    <>
+      {modalContent}
+      {/* Backdrop */}
+      <div
+        data-testid="modal-backdrop"
+        className="backdrop"
+        onClick={handleBackdropClick}
+        aria-hidden="true"
+      ></div>
+    </>
+  );
 }
 
 export default Modal
