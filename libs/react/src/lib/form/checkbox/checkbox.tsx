@@ -5,9 +5,9 @@ import { FormEventHandler, HTMLProps } from 'react'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
-  checked: boolean
+  checked?: boolean
   /** The label of the checkbox */
-  label: string
+  label?: string
   /** A test id that will be placed in the `data-testid` attribute on the input element */
   testId?: string
   /** An object used to render the validation status for the component */
