@@ -21,19 +21,21 @@ export interface InputProps
   extends IExpandableInformation,
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   /** Data test id used for finding elements in test */
-  'data-testid'?: string
+  testId?: string
   /** Format value on change */
   formatter?: (value: string) => string
   /** Extra describing text, below the label */
   info?: ReactNode
   /** Label describing the input */
-  label: string
+  label?: string
   /** Text on the right side of the input, used for unit such as 'kr' or '%' */
   unit?: string
   /** Validation object */
-  validator?: IValidator | undefined
+  validator?: IValidator
   /** Value of input */
-  value?: string
+  value?: string | number
+  /** Function called when input value changes */
+  onChangeInput?: (value: string) => string
 }
 
 export const Input = ({
@@ -41,7 +43,7 @@ export const Input = ({
   autoComplete = 'off',
   children,
   className,
-  'data-testid': dataTestId,
+  testId: dataTestId,
   expandableInfo,
   expandableInfoButtonLabel,
   formatter,
@@ -52,7 +54,8 @@ export const Input = ({
   unit,
   role,
   validator,
-  value,
+  onChangeInput,
+  value = '',
   ...props
 }: InputProps) => {
   const [uuid] = useState(id)
@@ -68,8 +71,11 @@ export const Input = ({
         ? formatter(event.target.value)
         : event.target.value
       setLocalValue(newValue)
+
       if (onChange)
         onChange({ ...event, target: { ...event.target, value: newValue } })
+
+      if (onChangeInput) onChangeInput(event.target.value)
 
       // Fixes bug: React loses caret position when you format the input value
       if (!formatter || newValue.length > event.target.value.length) return
@@ -80,7 +86,7 @@ export const Input = ({
         element.selectionEnd = pointer
       })
     },
-    [formatter, setLocalValue, onChange]
+    [formatter, setLocalValue, onChange, onChangeInput]
   )
 
   const inputAriaDescribedBy =
@@ -143,3 +149,7 @@ export const EmailInput = (props: Omit<InputProps, 'type'>) => {
 export const NumberInput = (props: Omit<InputProps, 'type'>) => {
   return <Input type="number" {...props} />
 }
+
+// For backwards compatibility
+export { RadioButton } from '../radioButton/radioButton'
+export { Checkbox } from '../checkbox/checkbox'
