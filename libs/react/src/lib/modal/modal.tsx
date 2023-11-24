@@ -69,7 +69,7 @@ const ModalFooter = ({
   )
 }
 
-export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm',onClose, ...props }: ModalProps) => {
+export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
   const [uuid, _] = useState(id)
   
   if (!isOpen) return null;
@@ -125,7 +125,7 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm',o
   }
 
   const handleBackdropClick = () => {
-    if (onClose) onClose(null)
+    if (props.onClose) props.onClose(null)
   };
 
   return (
