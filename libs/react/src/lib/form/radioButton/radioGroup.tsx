@@ -4,14 +4,16 @@ import {
   validateClassName,
   randomId,
   IExpandableInformation,
+  ILabelAndLabelInformation,
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 import { RadioButtonProps } from './radioButton'
 
-export interface RadioGroupProps extends IExpandableInformation {
+export interface RadioGroupProps
+  extends IExpandableInformation,
+    ILabelAndLabelInformation {
   label?: string
-  info?: ReactNode
   title?: string
   valueSelected?: string
   description?: string
@@ -19,7 +21,7 @@ export interface RadioGroupProps extends IExpandableInformation {
   validator?: IValidator
   onChangeRadio?: (value: string) => string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
+  name?: string
   horizontal?: boolean
 }
 
@@ -28,14 +30,14 @@ export const RadioGroup = ({
   valueSelected,
   label,
   title,
-  info,
+  labelInformation,
   description,
   expandableInfo,
   expandableInfoButtonLabel,
   validator,
   onChangeRadio,
   onChange,
-  name,
+  name: propName = randomId(),
   horizontal,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
@@ -50,6 +52,7 @@ export const RadioGroup = ({
     valueSelected ?? defaultSelected
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
+  const [name] = useState(propName)
 
   if (valueSelected !== prevValueSelected) {
     setSelected(valueSelected)
@@ -83,7 +86,7 @@ export const RadioGroup = ({
   }, [])
 
   const labelFromTitle = label || title
-  const labelInformationFromDescription = info || description
+  const labelInformationFromDescription = labelInformation || description
 
   const formItemProps = {
     validator,
@@ -93,8 +96,6 @@ export const RadioGroup = ({
     expandableInfoButtonLabel,
     role: 'radiogroup',
   }
-
-  if (!name) name = randomId()
 
   const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
     'gds-radio-group-wrapper--horizontal': horizontal,
