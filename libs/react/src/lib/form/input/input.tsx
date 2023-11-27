@@ -72,8 +72,9 @@ export const Input = ({
         : event.target.value
       setLocalValue(newValue)
 
-      if (onChange)
-        onChange({ ...event, target: { ...event.target, value: newValue } })
+      event.target.value = newValue
+
+      if (onChange) onChange(event)
 
       if (onChangeInput) onChangeInput(event.target.value)
 
