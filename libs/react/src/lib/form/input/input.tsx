@@ -67,19 +67,17 @@ export const Input = ({
 
   const localOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = formatter
-        ? formatter(event.target.value)
-        : event.target.value
+      const oldValue = event.target.value
+      const newValue = formatter ? formatter(oldValue) : oldValue
       setLocalValue(newValue)
 
       event.target.value = newValue
 
       if (onChange) onChange(event)
-
-      if (onChangeInput) onChangeInput(event.target.value)
+      if (onChangeInput) onChangeInput(newValue)
 
       // Fixes bug: React loses caret position when you format the input value
-      if (!formatter || newValue.length > event.target.value.length) return
+      if (!formatter || newValue.length > oldValue.length) return
       const pointer = event.target.selectionStart
       const element = event.target
       window.requestAnimationFrame(() => {

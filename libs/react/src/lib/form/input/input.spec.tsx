@@ -275,7 +275,11 @@ describe('Component: RadioButton', () => {
 
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioButton label="Radio button" value="" validator="is-invalid" />
+      <RadioButton
+        label="Radio button"
+        value=""
+        validator={{ message: 'Error', indicator: 'error' }}
+      />
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })
