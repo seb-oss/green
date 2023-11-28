@@ -1,10 +1,10 @@
 import { LitElement } from 'lit'
 import { Focusable } from '../../mixins/focusable'
-import { TransitionalStyles } from 'src/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
-} from 'src/utils/helpers/custom-element-scoping'
+} from '../../utils/helpers/custom-element-scoping'
 
 /**
  * @element gds-menu-item
