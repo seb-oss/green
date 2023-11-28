@@ -10,6 +10,8 @@ import style from './option.styles'
 
 import 'reflect-metadata'
 import { watch } from '../../utils/decorators'
+import { Focusable } from '../../mixins/focusable'
+
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean
@@ -31,7 +33,7 @@ export interface OptionsContainer extends HTMLElement {
  * @event gds-focus - Fired when the option gains focus.
  */
 @gdsCustomElement('gds-option')
-export class GdsOption extends LitElement {
+export class GdsOption extends Focusable(LitElement) {
   static styles = style
 
   /**
@@ -115,49 +117,6 @@ export class GdsOption extends LitElement {
       this.#hidden = false
       this.setAttribute('aria-hidden', 'false')
     }
-  }
-
-  /**
-   * Focuses the option.
-   *
-   * @param options - Focus options
-   */
-  focus(options?: FocusOptions | undefined): void {
-    this.setAttribute('tabindex', '0')
-    super.focus(options)
-
-    // This hack is here to make sure the option gets focus
-    // when the containing popover is first opened, because
-    // when this is called, the element may not yet be displayed
-    // and therefore `super.focus()` does nothing until some
-    // arbitrary amount of time has passed.
-    if (document.activeElement !== this) {
-      const iv = setInterval(() => {
-        if (document.activeElement === this) clearInterval(iv)
-        super.focus(options)
-      }, 10)
-    }
-  }
-
-  onblur = (e: FocusEvent) => {
-    this.setAttribute('tabindex', '-1')
-    this.dispatchEvent(
-      new FocusEvent('gds-blur', {
-        bubbles: true,
-        composed: true,
-        relatedTarget: e.relatedTarget,
-      })
-    )
-  }
-
-  onfocus = (e: FocusEvent) => {
-    this.dispatchEvent(
-      new FocusEvent('gds-focus', {
-        bubbles: true,
-        composed: true,
-        relatedTarget: e.relatedTarget,
-      })
-    )
   }
 
   render() {

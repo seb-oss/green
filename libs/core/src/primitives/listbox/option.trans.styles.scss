@@ -9,7 +9,7 @@
 }
 
 :host(:hover),
-:host(:focus) {
+:host(:focus-visible) {
   background-color: var(--gds-ref-pallet-base300);
 }
 
