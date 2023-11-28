@@ -124,12 +124,15 @@ export const Input = ({
       label={label}
       labelInformation={info}
       role={role}
-      validator={validator}
     >
       <div className="gds-input-wrapper">
-        <Group groupBorder groupFocus>
+        <Group groupBorder groupFocus error={validator && validator.message}>
           {input}
-          {unit && <span className="form-text">{unit}</span>}
+          {unit && (
+            <span className={`form-text${props.disabled && ' disabled'}`}>
+              {unit}
+            </span>
+          )}
           {children}
         </Group>
       </div>
