@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.0.0...@sebgroup/extract@2.1.0) (2023-11-17)
+
+
+### Features
+
+* **react/button:** add `close` variant ([0a0899b](https://github.com/sebgroup/green/commit/0a0899b0e6166088b8de1e261834e0ba40283638))
+
+
+
 # [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@1.5.2...@sebgroup/extract@2.0.0) (2023-10-30)
 
 
