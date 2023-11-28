@@ -7,7 +7,7 @@ import {
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from 'src/controllers/listbox-kb-nav-controller'
+} from '../../controllers/listbox-kb-nav-controller'
 import { unwrap } from 'src/utils/helpers/unwrap-slots'
 import { GdsMenuItem } from './menu-item'
 import { TransitionalStyles } from 'src/transitional-styles'
