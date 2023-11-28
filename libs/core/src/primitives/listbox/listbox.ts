@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS } from 'lit'
+import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -14,8 +14,8 @@ import {
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from 'src/controllers/listbox-kb-nav-controller'
-import { unwrap } from 'src/utils/helpers/unwrap-slots'
+} from '../../controllers/listbox-kb-nav-controller'
+import { unwrap } from '../../utils/helpers/unwrap-slots'
 
 /**
  * @element gds-listbox
