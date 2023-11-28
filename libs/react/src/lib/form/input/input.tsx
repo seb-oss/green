@@ -129,7 +129,7 @@ export const Input = ({
         <Group groupBorder groupFocus error={validator && validator.message}>
           {input}
           {unit && (
-            <span className={`form-text${props.disabled && ' disabled'}`}>
+            <span className={`form-text${props.disabled ? ' disabled' : ''}`}>
               {unit}
             </span>
           )}

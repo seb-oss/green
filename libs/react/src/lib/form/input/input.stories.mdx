@@ -23,7 +23,7 @@ If an input is requested without a label, info or expandable info, then a pure i
 
 ## Input with FormItem
 
-As soon as one of the properties label, info or expandable info are set, the input will be be surrounded by a FormItem.
+As soon as one of the properties `label`, `info` or `expandable` info are set, the input will be be surrounded by a FormItem.
 
 ### Label Information
 
@@ -50,12 +50,13 @@ As soon as one of the properties label, info or expandable info are set, the inp
 </Canvas>
 
 ### Formatter
-Note that formatting is a bit complicated and requires more from the developer. 
-MaxLength and type props might not work any more and might be needed to be implemented manually in the formatter instead.
-The following example is not error free, more an example of what is possible.
+A formatting callback that takes the current value as an argument and returns the formatted value can be supplied to the Input.
+The returned value will be displayed in the field and outputted in the onChange callback.
+
+The following is just an example. Test thoroughly for your use case before using in production!
 
 <Canvas>
-  <Input label="Input" info='Formats input as swedish number' maxLength={8} formatter={(value) => {
+  <Input label="Input" info='Formats input as swedish number' maxLength={8} unit="Kr" formatter={(value) => {
     const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
     return !trimmedValue || isNaN(Number(trimmedValue)) ? value : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
   }} />
