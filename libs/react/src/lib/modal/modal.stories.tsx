@@ -27,7 +27,6 @@ const Template: Story<ModalProps> = (props) => {
             max-height: 300px;
           }
           aside {
-            position: relative !important;
             max-height: 500px;
             margin-left: auto;
           }
