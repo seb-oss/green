@@ -80,7 +80,7 @@
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": ["build"],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",
@@ -89,7 +89,8 @@
       "configurations": {
         "ci": {
           "quiet": true
-        }
+        },
+        "parallel": false
       }
     },
     "update-deps-and-release": {
