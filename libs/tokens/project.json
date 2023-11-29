@@ -25,9 +25,7 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
           "libs/tokens/**/*.{js,ts}",
@@ -57,10 +55,7 @@
         "push": true,
         "preid": "beta",
         "releaseAs": "prerelease",
-        "postTargets": [
-          "tokens:publish",
-          "tokens:github"
-        ]
+        "postTargets": ["tokens:publish", "tokens:github"]
       }
     },
     "github": {
@@ -71,7 +66,7 @@
       }
     },
     "publish": {
-        "executor": "ngx-deploy-npm:deploy",
+      "executor": "ngx-deploy-npm:deploy",
       "options": {
         "access": "public",
         "distFolderPath": "dist/libs/tokens"

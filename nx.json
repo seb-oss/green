@@ -98,7 +98,7 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
     "fonts": ["{workspaceRoot}/dist/fonts"],
-    "core": ["{workspaceRoot}/dist/core"],
+    "core": ["{workspaceRoot}/dist/libs/core/src"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
