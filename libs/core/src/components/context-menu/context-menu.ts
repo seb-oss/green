@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element'
+import { LitElement } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { property, queryAsync } from 'lit/decorators.js'
