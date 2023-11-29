@@ -44,6 +44,7 @@
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
+      "inputs": ["core"],
       "options": {
         "port": 4100,
         "host": "0.0.0.0",
@@ -66,6 +67,7 @@
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
+      "inputs": ["core"],
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
