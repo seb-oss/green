@@ -95,7 +95,12 @@ jobs:
         id: target
 
       - name: Build storybook
-        run: yarn run nx affected --target build-storybook --base=origin/main
+        run: yarn run nx affected --target build-storybook --base=origin/main --exclude=angular
+
+        ## For some reason, the angular storybook build tends to fail in the previous step
+        ## So as a workaround, we run it separately
+      - name: Build Angular storybook
+        run: yarn run nx affected --target build-storybook --base=origin/main --projects=angular
 
       - name: Deploy built storybooks to GitHub Pages
         if: steps.check-updated-storybooks.outputs.any == 'true'
