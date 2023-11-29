@@ -97,6 +97,8 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "fonts": ["{workspaceRoot}/dist/fonts"],
+    "core": ["{workspaceRoot}/dist/core"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",

@@ -6,7 +6,7 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": ["core"],
       "options": {
         "command": "nx run core:build-with-types-and-scoping"
       }
@@ -71,6 +71,7 @@
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
+      "inputs": ["core"],
       "configurations": {
         "ci": {
           "quiet": true
@@ -80,7 +81,8 @@
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["build"],
+      "inputs": ["core"],
+      "dependsOn": ["build-src"],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",
