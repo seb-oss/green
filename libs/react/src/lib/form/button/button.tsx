@@ -32,7 +32,8 @@ export function Button({
 
   return variant == 'close' ? (
     <button
-      aria-label={otherProps.children?.toString() ?? 'Close'}
+      className={buttonClassName}
+      aria-label={otherProps.children ?? 'Close'}
       data-testid={testId}
       {...otherProps}
     >
