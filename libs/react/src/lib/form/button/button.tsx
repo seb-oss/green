@@ -33,7 +33,7 @@ export function Button({
   return variant == 'close' ? (
     <button
       className={buttonClassName}
-      aria-label={otherProps.children ?? 'Close'}
+      aria-label={otherProps['aria-label'] ?? 'Close'}
       data-testid={testId}
       {...otherProps}
     >
