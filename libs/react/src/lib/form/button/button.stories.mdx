@@ -24,7 +24,7 @@ Simple Button Component
 
 ## Types
 
-Preferably use type to describe the function of a button. Use variant only when necessary.
+Specifying a type will cause the button to automatically render the appropriate variant for that type of button.
 
 <Canvas>
   <Button type="button">Button Type</Button>
@@ -34,7 +34,7 @@ Preferably use type to describe the function of a button. Use variant only when 
 
 ## Variants
 
-Styling can also be achieved by class
+Variant can also be specified explicitly.
 
 <Canvas>
   <Button variant="primary">Primary</Button>
@@ -45,8 +45,6 @@ Styling can also be achieved by class
 
 ## Sizes
 
-Styling can also be achieved by class
-
 <Canvas>
   <Button>Default</Button>
   <Button size="small">Small</Button>
@@ -55,32 +53,18 @@ Styling can also be achieved by class
 
 ## Close button
 
-Close button with text for screen readers
+When using the close button variant, take special care to provide an appropriate label!
 
 <Canvas>
   <Button variant="close" aria-label="Close">
   </Button>
 </Canvas>
 
-## Active button
-
-Button with active state
-
-<Canvas>
-  <Button variant="primary" active>
-    Primary Button
-  </Button>
-  <Button variant="secondary" active>
-    Secondary Button
-  </Button>
-  <Button variant="ghost" active>
-    Ghost Button
-  </Button>
-</Canvas>
-
 ## Disabled button
 
-Button with disabled property
+Buttons can be disabled by setting the `disabled` prop. In general, this should be strictly
+avoided though. Rather than using disabled buttons, you should allow the user to click the
+button and and instead provide an explanation of why the action is not available.
 
 <Canvas>
   <Button variant="primary" disabled>
