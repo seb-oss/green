@@ -189,8 +189,8 @@ describe('Inputs', () => {
       await user.keyboard('GDS')
       expect(mockFn).toHaveBeenCalledTimes(3)
       expect(mockFn).toHaveBeenNthCalledWith(1, '12345G')
-      expect(mockFn).toHaveBeenNthCalledWith(2, '12345D')
-      expect(mockFn).toHaveBeenNthCalledWith(3, '12345S')
+      expect(mockFn).toHaveBeenNthCalledWith(2, '12345GD')
+      expect(mockFn).toHaveBeenNthCalledWith(3, '12345GDS')
       await rerender(<TextInput testId="text-input" value={'54321'} />)
       expect(inputElement.value).toEqual('54321')
     })
@@ -275,7 +275,11 @@ describe('Component: RadioButton', () => {
 
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioButton label="Radio button" value="" validator="is-invalid" />
+      <RadioButton
+        label="Radio button"
+        value=""
+        validator={{ message: 'Error', indicator: 'error' }}
+      />
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })

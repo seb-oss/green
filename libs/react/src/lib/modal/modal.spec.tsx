@@ -108,4 +108,11 @@ describe('Modal', () => {
     fireEvent.click(screen.getByText('Nope'))
     expect(mockOnDismiss).toBeCalled()
   })
+
+  it('Should close modal with backdrop grey area clicked', () => {
+    render(<MockModal />)
+    expect(screen.getByText('This is a modal body')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('modal-backdrop'))
+    expect(screen.queryByText('This is a modal body')).toBe(null)
+  })
 })

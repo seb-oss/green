@@ -56,8 +56,8 @@
       },
       "dependsOn": [
         {
-          "projects": "dependencies",
-          "target": "build-with-types-and-scoping"
+          "target": "build-with-types-and-scoping",
+          "dependencies": true
         }
       ]
     },
@@ -76,8 +76,8 @@
       },
       "dependsOn": [
         {
-          "projects": "dependencies",
-          "target": "build-with-types-and-scoping"
+          "target": "build-with-types-and-scoping",
+          "dependencies": true
         }
       ]
     },

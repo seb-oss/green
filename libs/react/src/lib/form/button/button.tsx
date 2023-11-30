@@ -10,16 +10,18 @@ export interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
   size?: ButtonSize
+  testId?: string
 }
 
-export function Button ({
+export function Button({
   children,
   variant,
   onClick,
   disabled,
   active = false,
   type = 'button',
-  size
+  size,
+  testId
 }: ButtonProps) {
   const props: ButtonHTMLAttributes<HTMLButtonElement> = { type, disabled }
   const classNames: string[] = []
@@ -30,7 +32,13 @@ export function Button ({
   if (classNames.length) props.className = classNames.join(' ')
   if (onClick) props.onClick = onClick
 
-  return <button {...props}>{children}</button>
+  return variant == 'close' ? (
+    <button {...props} aria-label={children?.toString() ?? 'Close'} data-testid={testId}>
+      <i></i>
+    </button>
+  ) : (
+    <button {...props} data-testid={testId}>{children}</button>
+  )
 }
 
 export default Button
