@@ -80,7 +80,7 @@ export const InPageWizardStepCard = ({
       )}
 
       {stepStatus === 'IsComplete' && !hideFooter && (
-        <footer className="gds-in-page-wizard-step-card__footer__edit">
+        <footer className="gds-in-page-wizard-step-card__footer gds-in-page-wizard-step-card__footer--edit">
           <button className="secondary" onClick={onEditClick}>
             <Edit fill={'var(--color)'} height={16} width={16} />
             {editBtnText}

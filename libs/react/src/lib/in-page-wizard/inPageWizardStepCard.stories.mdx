@@ -1,8 +1,8 @@
 import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
 import { InPageWizardStepCard } from './inPageWizardStepCard'
 import { Label, List, Value } from '../list/valueList.tsx'
-import { Input } from '../form/input/input.tsx'
-import { TextArea } from '../form/textarea/textarea.tsx'
+import { TextInput } from '../form/input/input.tsx'
+import { TextArea } from "../form"
 import { Check } from '../icons'
 
 export const Template = ({ children, ...props }) => (
@@ -153,8 +153,8 @@ With InPageWizardStepCard it is possible for a user to quickly create wizard ste
       stepText="Step 2 of 3"
       title="Active step"
     >
-      <Input label="Input 1" />
-      <Input label="Input 2" />
+      <TextInput label="Input 1" />
+      <TextInput label="Input 2" />
       <TextArea label="Text area" />
     </InPageWizardStepCard>
     <InPageWizardStepCard
