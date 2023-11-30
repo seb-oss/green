@@ -1,43 +1,52 @@
-import { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react'
-import { ButtonSize, ButtonType, ButtonVariant } from '@sebgroup/extract'
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
+import classNames from 'classnames'
 
-/* eslint-disable-next-line */
-export interface ButtonProps {
-  children?: ReactNode
-  type?: ButtonType
+export interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  /** Button styling. Available options: 'primary', 'secondary', 'ghost' and 'tertiary'. */
   variant?: ButtonVariant
+  /** Styling button as active or not */
   active?: boolean
-  onClick?: MouseEventHandler<HTMLButtonElement>
-  disabled?: boolean
+  /** Button size. Available options: 'small' and 'large'. */
   size?: ButtonSize
+  /** Renders as a `data-testid` attribute on the `<button>` element, useful in testing scenarios. */
   testId?: string
 }
 
 export function Button({
-  children,
+  className,
   variant,
-  onClick,
-  disabled,
   active = false,
   type = 'button',
   size,
-  testId
+  testId,
+  ...otherProps
 }: ButtonProps) {
-  const props: ButtonHTMLAttributes<HTMLButtonElement> = { type, disabled }
-  const classNames: string[] = []
-  if (variant) classNames.push(variant)
-  if (active) classNames.push('active')
-  if (size) classNames.push(size)
-
-  if (classNames.length) props.className = classNames.join(' ')
-  if (onClick) props.onClick = onClick
+  const buttonClassName =
+    classNames(className, variant, size, {
+      active: active,
+    }) || undefined
 
   return variant == 'close' ? (
-    <button {...props} aria-label={children?.toString() ?? 'Close'} data-testid={testId}>
+    <button
+      className={buttonClassName}
+      aria-label={otherProps['aria-label'] ?? 'Close'}
+      data-testid={testId}
+      {...otherProps}
+    >
       <i></i>
     </button>
   ) : (
-    <button {...props} data-testid={testId}>{children}</button>
+    <button
+      className={buttonClassName}
+      type={type}
+      data-testid={testId}
+      {...otherProps}
+    />
   )
 }
 
