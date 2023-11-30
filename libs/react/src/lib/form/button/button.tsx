@@ -13,6 +13,7 @@ export interface ButtonProps
   active?: boolean
   /** Button size. Available options: 'small' and 'large'. */
   size?: ButtonSize
+  /** Renders as a `data-testid` attribute on the `<button>` element, useful in testing scenarios. */
   testId?: string
 }
 
