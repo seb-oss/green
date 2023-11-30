@@ -32,9 +32,9 @@ export function Button({
 
   return variant == 'close' ? (
     <button
-      {...props}
-      aria-label={children?.toString() ?? 'Close'}
+      aria-label={otherProps.children?.toString() ?? 'Close'}
       data-testid={testId}
+      {...otherProps}
     >
       <i></i>
     </button>
@@ -42,8 +42,8 @@ export function Button({
     <button
       className={buttonClassName}
       type={type}
-      {...otherProps}
       data-testid={testId}
+      {...otherProps}
     />
   )
 }
