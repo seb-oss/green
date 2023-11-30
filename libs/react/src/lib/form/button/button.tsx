@@ -13,6 +13,7 @@ export interface ButtonProps
   active?: boolean
   /** Button size. Available options: 'small' and 'large'. */
   size?: ButtonSize
+  testId?: string
 }
 
 export function Button({
@@ -21,6 +22,7 @@ export function Button({
   active = false,
   type = 'button',
   size,
+  testId,
   ...otherProps
 }: ButtonProps) {
   const buttonClassName =
@@ -28,7 +30,22 @@ export function Button({
       active: active,
     }) || undefined
 
-  return <button className={buttonClassName} type={type} {...otherProps} />
+  return variant == 'close' ? (
+    <button
+      {...props}
+      aria-label={children?.toString() ?? 'Close'}
+      data-testid={testId}
+    >
+      <i></i>
+    </button>
+  ) : (
+    <button
+      className={buttonClassName}
+      type={type}
+      {...otherProps}
+      data-testid={testId}
+    />
+  )
 }
 
 export default Button
