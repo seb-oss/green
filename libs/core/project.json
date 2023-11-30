@@ -72,6 +72,7 @@
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
+      "dependsOn": ["build-src"],
       "inputs": ["core"],
       "configurations": {
         "ci": {
