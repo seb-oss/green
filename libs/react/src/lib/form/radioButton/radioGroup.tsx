@@ -1,8 +1,6 @@
-import React, { useState, useRef, ChangeEvent } from 'react'
-import { RadioButtonProps } from '../types'
+import React, { useState, useRef, ChangeEvent, ReactNode } from 'react'
 import {
   IValidator,
-  IndicatorType,
   validateClassName,
   randomId,
   IExpandableInformation,
@@ -10,10 +8,12 @@ import {
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
+import { RadioButtonProps } from './radioButton'
 
 export interface RadioGroupProps
   extends IExpandableInformation,
     ILabelAndLabelInformation {
+  label?: string
   title?: string
   valueSelected?: string
   description?: string
@@ -37,7 +37,7 @@ export const RadioGroup = ({
   validator,
   onChangeRadio,
   onChange,
-  name,
+  name: propName = randomId(),
   horizontal,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
@@ -52,15 +52,12 @@ export const RadioGroup = ({
     valueSelected ?? defaultSelected
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
+  const [name] = useState(propName)
 
   if (valueSelected !== prevValueSelected) {
     setSelected(valueSelected)
     setPrevValueSelected(valueSelected)
   }
-
-  const validatorClassName: string = validateClassName(
-    validator?.indicator as IndicatorType
-  )
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value !== selected) {
@@ -100,8 +97,6 @@ export const RadioGroup = ({
     role: 'radiogroup',
   }
 
-  if (!name) name = randomId()
-
   const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
     'gds-radio-group-wrapper--horizontal': horizontal,
   })
@@ -114,8 +109,7 @@ export const RadioGroup = ({
           (radioButton: React.ReactElement<RadioButtonProps>) => {
             return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
               ? React.cloneElement(radioButton, {
-                  validator:
-                    validator && validateClassName(validator?.indicator),
+                  validator: validator,
                   onChange: handleOnChange,
                   checked: selected === radioButton.props.value,
                   name,

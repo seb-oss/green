@@ -1,207 +1,157 @@
-import React, { InputHTMLAttributes } from 'react'
-import { IValidator, IndicatorType, validateClassName } from '@sebgroup/extract'
 import {
-  CheckboxProps,
-  NumberInputProps,
-  RadioButtonProps,
-  TextInputProps,
-} from '../types'
+  DetailedHTMLProps,
+  ChangeEvent,
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react'
+import {
+  IExpandableInformation,
+  IValidator,
+  randomId,
+  validateClassName,
+} from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
-import useInput from '../useInput'
+import Group from '../group/group'
 import classNames from 'classnames'
 
-export type Renderer = (
-  type: string,
-  props: InputHTMLAttributes<HTMLInputElement>,
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  onChangeInput?: (value: string) => string,
-  label?: string,
-  info?: string | React.ReactNode,
-  validator?: IValidator,
-  expandableInfo?: React.ReactNode,
-  expandableInfoButtonLabel?: string,
+export interface InputProps
+  extends IExpandableInformation,
+    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  /** Data test id used for finding elements in test */
   testId?: string
-) => JSX.Element
+  /** Format value on change */
+  formatter?: (value: string) => string
+  /** Extra describing text, below the label */
+  info?: ReactNode
+  /** Label describing the input */
+  label?: string
+  /** Text on the right side of the input, used for unit such as 'kr' or '%' */
+  unit?: string
+  /** Validation object */
+  validator?: IValidator
+  /** Value of input */
+  value?: string | number
+  /** Function called when input value changes */
+  onChangeInput?: (value: string) => string
+}
 
-export const RenderInput: Renderer = (
-  type,
-  props,
-  onChange,
-  onChangeInput,
-  label,
-  info,
-  validator,
+export const Input = ({
+  'aria-describedby': ariaDescribedBy,
+  autoComplete = 'off',
+  children,
+  className,
+  testId: dataTestId,
   expandableInfo,
   expandableInfoButtonLabel,
-  testId
-) => {
-  const { value, ...inputProps } = useInput(props, onChange, onChangeInput)
+  formatter,
+  id = randomId(),
+  label,
+  info,
+  onChange,
+  unit,
+  role,
+  validator,
+  onChangeInput,
+  value = '',
+  ...props
+}: InputProps) => {
+  const [uuid] = useState(id)
+  const [localValue, setLocalValue] = useState(value)
 
-  const propsWithDescription = info
-    ? { ...inputProps, 'aria-describedby': `${inputProps.id}_info` }
-    : inputProps
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
 
-  // Render naked
-  if (!label && !info && !expandableInfo)
-    return (
-      <input
-        type={type}
-        value={value}
-        data-testid={testId}
-        {...propsWithDescription}
-      />
-    )
+  const localOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const oldValue = event.target.value
+      const newValue = formatter ? formatter(oldValue) : oldValue
+      setLocalValue(newValue)
+
+      event.target.value = newValue
+
+      if (onChange) onChange(event)
+      if (onChangeInput) onChangeInput(newValue)
+
+      // Fixes bug: React loses caret position when you format the input value
+      if (!formatter || newValue.length > oldValue.length) return
+      const pointer = event.target.selectionStart
+      const element = event.target
+      window.requestAnimationFrame(() => {
+        element.selectionStart = pointer
+        element.selectionEnd = pointer
+      })
+    },
+    [formatter, setLocalValue, onChange, onChangeInput]
+  )
+
+  const inputAriaDescribedBy =
+    classNames(ariaDescribedBy, {
+      [`gds-expandable-info-${uuid}`]: expandableInfo,
+      [`${uuid}_info`]: info,
+    }) || undefined
+
+  const inputClassName =
+    classNames(
+      className,
+      validator && validateClassName(validator.indicator)
+    ) || undefined
+
+  const input = (
+    <input
+      aria-describedby={inputAriaDescribedBy}
+      autoComplete={autoComplete}
+      className={inputClassName}
+      data-testid={dataTestId}
+      id={uuid}
+      onChange={localOnChange}
+      role={role}
+      value={localValue}
+      {...props}
+    />
+  )
+
+  if (!label && !info && !expandableInfo) return input
 
   return (
     <FormItem
-      validator={validator}
-      labelInformation={info}
-      label={label}
       expandableInfo={expandableInfo}
       expandableInfoButtonLabel={expandableInfoButtonLabel}
-      inputId={inputProps.id}
+      inputId={uuid}
+      label={label}
+      labelInformation={info}
+      role={role}
     >
       <div className="gds-input-wrapper">
-        <input
-          type={type}
-          value={value}
-          {...propsWithDescription}
-          className={
-            validator &&
-            validateClassName(validator?.indicator as IndicatorType)
-          }
-          data-testid={testId}
-        />
+        <Group groupBorder groupFocus error={validator && validator.message}>
+          {input}
+          {unit && (
+            <span className={`form-text${props.disabled ? ' disabled' : ''}`}>
+              {unit}
+            </span>
+          )}
+          {children}
+        </Group>
       </div>
     </FormItem>
   )
 }
 
-export const TextInput = ({
-  label,
-  info,
-  testId,
-  onChange,
-  onChangeInput,
-  validator,
-  expandableInfo,
-  expandableInfoButtonLabel,
-  ...props
-}: TextInputProps) =>
-  RenderInput(
-    'text',
-    props,
-    onChange,
-    onChangeInput,
-    label,
-    info,
-    validator,
-    expandableInfo,
-    expandableInfoButtonLabel,
-    testId
-  )
-
-export const EmailInput = ({
-  label,
-  info,
-  onChange,
-  onChangeInput,
-  validator,
-  testId,
-  ...props
-}: TextInputProps) =>
-  RenderInput(
-    'email',
-    props,
-    onChange,
-    onChangeInput,
-    label,
-    info,
-    validator,
-    testId
-  )
-
-export const NumberInput = ({
-  label,
-  info,
-  onChange,
-  onChangeInput,
-  validator,
-  expandableInfo,
-  expandableInfoButtonLabel,
-  testId,
-  ...props
-}: NumberInputProps) =>
-  RenderInput(
-    'number',
-    props,
-    onChange,
-    onChangeInput,
-    label,
-    info,
-    validator,
-    expandableInfo,
-    expandableInfoButtonLabel,
-    testId
-  )
-
-export const Checkbox = ({
-  label,
-  onChange,
-  validator,
-  testId,
-  ...props
-}: CheckboxProps) => {
-  const inputProps = useInput(props, onChange)
-
-  const labelClassNames = classNames(
-    'form-control',
-    validator && validateClassName(validator?.indicator)
-  )
-
-  const inputClassNames = classNames(
-    validator && validateClassName(validator?.indicator)
-  )
-
-  return (
-    <div className="form-group">
-      <label htmlFor={inputProps.id} className={labelClassNames}>
-        {label}
-        <input
-          type="checkbox"
-          data-testid={testId}
-          {...inputProps}
-          className={inputClassNames}
-        />
-        <i />
-      </label>
-      {validator && <span className="form-info">{validator.message}</span>}
-    </div>
-  )
+export const TextInput = (props: Omit<InputProps, 'type'>) => {
+  return <Input type="text" {...props} />
 }
 
-export const RadioButton = React.forwardRef(
-  (
-    { label, validator, testId, ...props }: RadioButtonProps,
-    ref: React.ForwardedRef<HTMLInputElement>
-  ) => {
-    const { id } = useInput(props)
+export const EmailInput = (props: Omit<InputProps, 'type'>) => {
+  return <Input type="email" {...props} />
+}
 
-    const inputClassNames = classNames(validator)
+export const NumberInput = (props: Omit<InputProps, 'type'>) => {
+  return <Input type="number" {...props} />
+}
 
-    return (
-      <label htmlFor={id} className="form-control">
-        <input
-          id={id}
-          type="radio"
-          data-testid={testId}
-          {...props}
-          className={inputClassNames}
-          ref={ref}
-        />
-        <span>{label}</span>
-        <i />
-      </label>
-    )
-  }
-)
+// For backwards compatibility
+export { RadioButton } from '../radioButton/radioButton'
+export { Checkbox } from '../checkbox/checkbox'

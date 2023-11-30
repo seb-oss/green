@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.2.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.1...@sebgroup/chlorophyll@2.2.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+## [2.2.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.0...@sebgroup/chlorophyll@2.2.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* **react:** in-page-wizard optional props and icon margin ([#1110](https://github.com/sebgroup/green/issues/1110)) ([857a637](https://github.com/sebgroup/green/commit/857a6379f756023420337703373bb769d1e938ae))
+
+
+
 # [2.2.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.1.0...@sebgroup/chlorophyll@2.2.0) (2023-11-03)
 
 

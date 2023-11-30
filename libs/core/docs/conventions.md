@@ -47,7 +47,7 @@ Many types of UI widgets have certain expected behaviours, such as keyboard navi
 
 ## Composition over inheritance
 
-When we build components in Green Core, we come across many aspects that are either shared among many or unique to a certain component. When we come across shared features, it may be tempting to organise those features in a shared base class. But instead we should work with composition, through helper functions, class mixins or decorators. That way we avoid creating complex inheritance hierarchies that get difficult to maintain over time.
+When we build components in Green Core, we come across many aspects that are either shared among many or unique to a certain component. When we come across shared features, it may be tempting to organise those features in a shared base class. But instead we should work with composition, through Lit controllers, helper functions, class mixins or decorators. That way we avoid creating complex inheritance hierarchies that get difficult to maintain over time.
 
 ## Documentation
 

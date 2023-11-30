@@ -45,6 +45,7 @@ export interface DropdownOption {
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',
+  styleUrls: ['dropdown.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

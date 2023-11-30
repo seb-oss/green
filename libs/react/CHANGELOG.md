@@ -2,6 +2,48 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.0...@sebgroup/green-react@2.5.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+# [2.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.4.0...@sebgroup/green-react@2.5.0) (2023-11-22)
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
+# [2.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.3.0...@sebgroup/green-react@2.4.0) (2023-11-17)
+
+
+### Features
+
+* **react/button:** `testId` prop added for automated test to button component ([#1122](https://github.com/sebgroup/green/issues/1122)) ([08c0eae](https://github.com/sebgroup/green/commit/08c0eae8250c40766bf238df6d5985d60443e59a))
+* **react/button:** add `close` variant ([0a0899b](https://github.com/sebgroup/green/commit/0a0899b0e6166088b8de1e261834e0ba40283638))
+
+
+
+# [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.1...@sebgroup/green-react@2.3.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* **react:** in-page-wizard optional props and icon margin ([#1110](https://github.com/sebgroup/green/issues/1110)) ([857a637](https://github.com/sebgroup/green/commit/857a6379f756023420337703373bb769d1e938ae))
+
+
+### Features
+
+* **react:** groupFocus and className props ([#1111](https://github.com/sebgroup/green/issues/1111)) ([e86a78d](https://github.com/sebgroup/green/commit/e86a78d150676642812f97b995bbf2d14bd4e681))
+
+
+
 ## [2.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.0...@sebgroup/green-react@2.2.1) (2023-11-07)
 
 

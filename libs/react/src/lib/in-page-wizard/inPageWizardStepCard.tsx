@@ -4,14 +4,14 @@ import { Edit, Check } from '../icons'
 export interface InPageWizardStepCardProps {
   stepText: string
   title: string
-  editBtnText: string
+  editBtnText?: string
   nextBtnText: string
   nextBtnIcon?: ReactNode
   stepStatus: WizardStepStatus
   hideFooter?: boolean
   children: React.ReactNode
   onNextClick: () => void
-  onEditClick: () => void
+  onEditClick?: () => void
   dataTestid?: string
 }
 
