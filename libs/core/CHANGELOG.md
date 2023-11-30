@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.2.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.2...@sebgroup/green-core@1.2.3) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+## [1.2.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.1...@sebgroup/green-core@1.2.2) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core/context-menu:** use the correct relative paths in imports ([#1133](https://github.com/sebgroup/green/issues/1133)) ([6050e60](https://github.com/sebgroup/green/commit/6050e60e52f25ca365b2cc3722ba5a50907ec31e))
+
+
+
 ## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.0...@sebgroup/green-core@1.2.1) (2023-11-22)
 
 

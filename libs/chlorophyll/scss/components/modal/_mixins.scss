@@ -60,8 +60,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(5);
 
-
-
   overflow: auto;
   width: 100%;
 
@@ -105,6 +103,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 }
 
 @mixin aside-modal() {
+  position: fixed;
   height: 100vh;
   max-width: 512px;
   min-height: stretch;
@@ -124,14 +123,15 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   }
 
   &.gds-slide-out--768 {
-      max-width: 48rem;
+    max-width: 48rem;
   }
 
   &.gds-slide-out--960 {
-      max-width: 60rem;
+    max-width: 60rem;
   }
 
-  &.gds-slide-out--768, &.gds-slide-out--960 {
+  &.gds-slide-out--768,
+  &.gds-slide-out--960 {
     header {
       @include common.padding-horizontal(7);
       @include common.padding-top(6);
@@ -148,8 +148,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
       @include common.padding-bottom(7);
     }
   }
-
-
 }
 
 @mixin fullscreen-modal() {

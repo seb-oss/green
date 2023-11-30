@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.0...@sebgroup/green-react@2.5.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
 # [2.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.4.0...@sebgroup/green-react@2.5.0) (2023-11-22)
 
 

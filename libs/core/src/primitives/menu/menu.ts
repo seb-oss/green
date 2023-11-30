@@ -3,14 +3,14 @@ import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import {
   gdsCustomElement,
   html,
-} from 'src/utils/helpers/custom-element-scoping'
+} from '../../utils/helpers/custom-element-scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from 'src/controllers/listbox-kb-nav-controller'
-import { unwrap } from 'src/utils/helpers/unwrap-slots'
+} from '../../controllers/listbox-kb-nav-controller'
+import { unwrap } from '../../utils/helpers/unwrap-slots'
 import { GdsMenuItem } from './menu-item'
-import { TransitionalStyles } from 'src/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 /**
  * @element gds-menu
