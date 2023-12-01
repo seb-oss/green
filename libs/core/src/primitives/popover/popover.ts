@@ -76,7 +76,13 @@ export class GdsPopover extends LitElement {
     this.#registerAutoPositioning()
   }
 
+  // A reference to the dialog element used to make the popover modal
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
+
+  // A function that removes the Floating UI auto positioning. This gets called when we switch to mobile view layout.
+  #autoPositionCleanupFn: (() => void) | undefined
+
+  #isMobileViewport = false
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -167,15 +173,17 @@ export class GdsPopover extends LitElement {
 
   #unregisterTriggerEvents() {
     this._trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
-    this.#autoPositionCleanup?.()
+    this.#autoPositionCleanupFn?.()
   }
 
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
+    this.#isMobileViewport = matches
     if (matches) {
-      this.#autoPositionCleanup?.()
+      this.#autoPositionCleanupFn?.()
       this.#dialogElementRef.value?.style.removeProperty('left')
       this.#dialogElementRef.value?.style.removeProperty('top')
+      this.#dialogElementRef.value?.style.removeProperty('minWidth')
 
       this.updateComplete.then(() => {
         if (this.open) this.#dialogElementRef.value?.showModal()
@@ -187,14 +195,17 @@ export class GdsPopover extends LitElement {
     }
   }
 
-  #autoPositionCleanup: (() => void) | undefined
   #registerAutoPositioning() {
     const referenceEl = this._trigger
     const floatingEl = this.#dialogElementRef.value
 
-    if (!referenceEl || !floatingEl) return
+    if (!referenceEl || !floatingEl || this.#isMobileViewport) return
 
-    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+    if (this.#autoPositionCleanupFn) {
+      this.#autoPositionCleanupFn()
+    }
+
+    this.#autoPositionCleanupFn = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: [offset(8), flip(), topLayerOverTransforms()],
