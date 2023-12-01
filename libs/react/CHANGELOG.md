@@ -2,6 +2,23 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [2.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.1...@sebgroup/green-react@2.6.0) (2023-12-01)
+
+
+### Bug Fixes
+
+* 🐛 Expose button props and pass them to elements ([#1118](https://github.com/sebgroup/green/issues/1118)) ([afc68f9](https://github.com/sebgroup/green/commit/afc68f9d4183c5cd655e70c32fb8b04b1314f0ba))
+* 🐛 wizard next icon margin left ([#1116](https://github.com/sebgroup/green/issues/1116)) ([158faf0](https://github.com/sebgroup/green/commit/158faf08786634b6239a33a8b58296922a4992b3))
+* Modal positioning and backdrop effect in react component ([#1124](https://github.com/sebgroup/green/issues/1124)) ([659a663](https://github.com/sebgroup/green/commit/659a663b7b54da618be5a04556001b2838567a20))
+
+
+### Features
+
+* 🎸 Add unit to input and refactor ([#1119](https://github.com/sebgroup/green/issues/1119)) ([25b06e7](https://github.com/sebgroup/green/commit/25b06e71fcd3985b97aa323712380a0041aeee89)), closes [#926](https://github.com/sebgroup/green/issues/926) [#910](https://github.com/sebgroup/green/issues/910) [#873](https://github.com/sebgroup/green/issues/873) [#713](https://github.com/sebgroup/green/issues/713) [#713](https://github.com/sebgroup/green/issues/713) [#569](https://github.com/sebgroup/green/issues/569)
+* 🎸 Char counter to text area ([#1117](https://github.com/sebgroup/green/issues/1117)) ([2f58b44](https://github.com/sebgroup/green/commit/2f58b44a86d6e82dddcc872ca10c4ea613ba33bb))
+
+
+
 ## [2.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.0...@sebgroup/green-react@2.5.1) (2023-11-29)
 
 
