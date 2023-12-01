@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.1.0...@sebgroup/extract@2.1.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* Modal positioning and backdrop effect in react component ([#1124](https://github.com/sebgroup/green/issues/1124)) ([659a663](https://github.com/sebgroup/green/commit/659a663b7b54da618be5a04556001b2838567a20))
+
+
+
 # [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.0.0...@sebgroup/extract@2.1.0) (2023-11-17)
 
 
