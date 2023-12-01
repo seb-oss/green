@@ -26,7 +26,7 @@ export interface InPageWizardStepCardProps extends PropsWithChildren {
 }
 
 export const InPageWizardStepCard = ({
-  editBtnText = 'Ändra',
+  editBtnText = 'Edit',
   onNextClick,
   stepStatus,
   stepText,
@@ -35,7 +35,7 @@ export const InPageWizardStepCard = ({
   dataTestid,
   hideFooter = false,
   nextBtnIcon,
-  nextBtnText = 'Nästa',
+  nextBtnText = 'Next',
   onEditClick,
 }: InPageWizardStepCardProps) => {
   const sectionClassName = classNames('gds-in-page-wizard-step-card', 'card', {
