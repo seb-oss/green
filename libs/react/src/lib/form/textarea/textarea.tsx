@@ -22,7 +22,7 @@ export interface ITextAreaProps
       HTMLTextAreaElement
     > {
   /** Data test id used for finding elements in test */
-  'data-testid'?: string
+  testId?: string
   /** Label describing the textarea */
   label: string
   /** Extra describing text, below the label */
@@ -47,7 +47,7 @@ export const TextArea = ({
   rows = 4,
   validator,
   value,
-  'data-testid': dataTestId,
+  testId: dataTestId,
   maxLength,
   ...props
 }: ITextAreaProps) => {
