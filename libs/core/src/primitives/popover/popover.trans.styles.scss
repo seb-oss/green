@@ -33,7 +33,14 @@ dialog {
   right: 0;
 
   @include common.media-breakpoint-down('sm') {
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    max-height: 80svh;
+
+    &.v-kb-visible {
+      height: 50svh;
+      inset-block-end: auto;
+      top: 1rem;
+    }
   }
 
   @include common.media-breakpoint-up('sm') {

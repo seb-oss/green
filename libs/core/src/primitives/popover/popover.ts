@@ -1,5 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import {
@@ -63,6 +64,10 @@ export class GdsPopover extends LitElement {
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
+  // Whether the virtual keyboard is visible or not
+  @state()
+  private _isVirtKbVisible = false
+
   @watch('triggerRef')
   private _handleTriggerRefChanged() {
     this.triggerRef.then((el) => {
@@ -96,6 +101,20 @@ export class GdsPopover extends LitElement {
         e.stopImmediatePropagation()
       }
     })
+
+    // This is a hack to check if a virtual keyboard is visible or not.
+    // This should be removed in the future if/when the VirtualKeyboard API is suported on Safari.
+    this.addEventListener('focusin', (e: FocusEvent) => {
+      const t = e.target as HTMLElement
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+        this._isVirtKbVisible = true
+      } else {
+        this._isVirtKbVisible = false
+      }
+    })
+    this.addEventListener('blurin', (_) => {
+      this._isVirtKbVisible = false
+    })
   }
 
   disconnectedCallback(): void {
@@ -104,7 +123,10 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html`<dialog ${ref(this.#dialogElementRef)}>
+    return html`<dialog
+      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+      ${ref(this.#dialogElementRef)}
+    >
       <header>
         <h2>${this.label}</h2>
         <button
