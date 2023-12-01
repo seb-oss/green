@@ -1,5 +1,70 @@
 [
   {
+    "id": "components-modal--modal-default",
+    "name": "Modal Default",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-small",
+    "name": "Slide Out Small",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-medium",
+    "name": "Slide Out Medium",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-large",
+    "name": "Slide Out Large",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--take-over",
+    "name": "Take Over",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
     "id": "components-layout-flexbox--flexbox",
     "name": "Flexbox",
     "title": "Components/Layout/Flexbox",
@@ -22,9 +87,9 @@
     "customParams": {}
   },
   {
-    "id": "components-radiogroup--default-story",
+    "id": "components-form-radiogroup--default-story",
     "name": "Default",
-    "title": "Components/RadioGroup",
+    "title": "Components/Form/RadioGroup",
     "customParams": {
       "componentIds": [
         "component-radiogroup"
@@ -32,21 +97,21 @@
     }
   },
   {
-    "id": "components-radiogroup--expandable-information",
+    "id": "components-form-radiogroup--expandable-information",
     "name": "Expandable information",
-    "title": "Components/RadioGroup",
+    "title": "Components/Form/RadioGroup",
     "customParams": {}
   },
   {
-    "id": "components-radiogroup--validation",
+    "id": "components-form-radiogroup--validation",
     "name": "Validation",
-    "title": "Components/RadioGroup",
+    "title": "Components/Form/RadioGroup",
     "customParams": {}
   },
   {
-    "id": "components-radiogroup--horizontal",
+    "id": "components-form-radiogroup--horizontal",
     "name": "Horizontal",
-    "title": "Components/RadioGroup",
+    "title": "Components/Form/RadioGroup",
     "customParams": {}
   },
   {
@@ -60,38 +125,14 @@
     }
   },
   {
-    "id": "components-form-input--text-input",
-    "name": "TextInput",
+    "id": "components-form-input--input",
+    "name": "Input",
     "title": "Components/Form/Input",
     "customParams": {
       "componentIds": [
         "component-input"
       ]
     }
-  },
-  {
-    "id": "components-form-input--email-input",
-    "name": "EmailInput",
-    "title": "Components/Form/Input",
-    "customParams": {}
-  },
-  {
-    "id": "components-form-input--number-input",
-    "name": "NumberInput",
-    "title": "Components/Form/Input",
-    "customParams": {}
-  },
-  {
-    "id": "components-form-input--validation",
-    "name": "validation",
-    "title": "Components/Form/Input",
-    "customParams": {}
-  },
-  {
-    "id": "components-form-input--expandable-information",
-    "name": "Expandable information",
-    "title": "Components/Form/Input",
-    "customParams": {}
   },
   {
     "id": "components-iconbutton--default-story",
@@ -106,20 +147,14 @@
     "customParams": {}
   },
   {
-    "id": "components-checkbox--default-story",
-    "name": "Default",
-    "title": "Components/Checkbox",
+    "id": "components-form-checkbox--checkbox",
+    "name": "Checkbox",
+    "title": "Components/Form/Checkbox",
     "customParams": {
       "componentIds": [
         "component-checkbox"
       ]
     }
-  },
-  {
-    "id": "components-checkbox--invalid",
-    "name": "invalid",
-    "title": "Components/Checkbox",
-    "customParams": {}
   },
   {
     "id": "components-form--button-group",
@@ -302,18 +337,6 @@
     "customParams": {}
   },
   {
-    "id": "components-inpagewizardstepcard--in-page-wizard-step-card-2",
-    "name": "InPageWizardStepCard2",
-    "title": "Components/InPageWizardStepCard",
-    "customParams": {}
-  },
-  {
-    "id": "components-inpagewizardstepcard--in-page-wizard-step-card-3",
-    "name": "InPageWizardStepCard3",
-    "title": "Components/InPageWizardStepCard",
-    "customParams": {}
-  },
-  {
     "id": "components-formitem--text-input",
     "name": "TextInput",
     "title": "Components/FormItem",
@@ -404,71 +427,6 @@
     "customParams": {
       "componentIds": [
         "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--modal-default",
-    "name": "Modal Default",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-small",
-    "name": "Slide Out Small",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-medium",
-    "name": "Slide Out Medium",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-large",
-    "name": "Slide Out Large",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--take-over",
-    "name": "Take Over",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
       ]
     }
   },
