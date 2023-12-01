@@ -154,6 +154,7 @@ export const FormExample = () => {
           expandableInfo="Expandable plain text information"
           unit="kr"
           validator={validator}
+          testId="test-id"
         />
 
         {textAreaState}
@@ -162,6 +163,7 @@ export const FormExample = () => {
           info={
             'This is some information about the thing that gets longer if i say so'
           }
+          testId="test-id"
           value={textAreaState}
           onBlur={(event) => setTextAreaState(event.target.value)}
           expandableInfo={
