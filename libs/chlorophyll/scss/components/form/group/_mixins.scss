@@ -49,13 +49,13 @@ $_background: input.$background;
     border-right-width: $_border-width-50;
   }
 
-  > *:first-child {
+  > *:first-child:not(:last-child) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     border-right-width: $_border-width-50;
   }
 
-  > *:last-child {
+  > *:last-child:not(:first-child) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-left-width: $_border-width-50;
@@ -104,6 +104,10 @@ $_background: input.$background;
 
     .form-text {
       @include common.padding-end(5);
+
+      &.disabled {
+        background: var(--sg-form-control-bg-disabled);
+      }
     }
   }
 
