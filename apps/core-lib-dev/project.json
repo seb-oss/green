@@ -43,6 +43,7 @@
     },
     "serve": {
       "executor": "@nx/webpack:dev-server",
+      "inputs": ["core"],
       "options": {
         "buildTarget": "core-lib-dev:build",
         "port": 4210,

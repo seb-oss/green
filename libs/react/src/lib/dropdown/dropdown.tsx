@@ -1,5 +1,5 @@
 import React from 'react'
-import { createComponent } from '@lit-labs/react'
+import { createComponent } from '@lit/react'
 
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
 
