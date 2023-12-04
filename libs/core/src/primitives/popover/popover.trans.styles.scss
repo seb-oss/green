@@ -11,10 +11,14 @@
 header {
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  padding: 0.5rem 0.75rem;
+  padding: 0.25rem 0.75rem;
 
   @include common.media-breakpoint-up('sm') {
     display: none;
+  }
+
+  button.close {
+    margin: -0.25rem;
   }
 }
 
@@ -33,7 +37,14 @@ dialog {
   right: 0;
 
   @include common.media-breakpoint-down('sm') {
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    max-height: 80svh;
+
+    &.v-kb-visible {
+      inset-block-end: auto;
+      max-height: 50svh;
+      top: 1rem;
+    }
   }
 
   @include common.media-breakpoint-up('sm') {

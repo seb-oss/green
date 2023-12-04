@@ -14,6 +14,7 @@ import {
   Slider,
   Checkbox,
   TextArea,
+  NumberInput,
 } from '@sebgroup/green-react'
 
 const dropDownKeyValueArray = [
@@ -75,6 +76,9 @@ export const FormExample = () => {
 
   const [checkedState, setCheckedState] = useState<boolean>(true)
 
+  const [value, setValue] = useState(0)
+  const [ddValue, setDdValue] = useState()
+
   return (
     <>
       <h2>This is a form</h2>
@@ -87,12 +91,18 @@ export const FormExample = () => {
             id={'my-dropdown'}
             options={dropDownKeyValueArray}
             validator={validator}
-            onChange={console.log}
+            value={ddValue}
+            onChange={setDdValue}
             searchable={true}
           />
           <Datepicker
             onChange={(date) => console.log('Selected date: ', date)}
           />
+        </div>
+
+        <div>
+          Dropdown value:
+          {ddValue}
         </div>
 
         <Checkbox
@@ -127,15 +137,24 @@ export const FormExample = () => {
           </RadioGroup>
         </FormItems>
 
+        <NumberInput
+          onChange={(event) =>
+            setValue(Number(event.currentTarget.value.replace(/[^0-9]/g, '')))
+          }
+          value={value}
+        />
+
         <TextInput
           label={'Label'}
           info={
             'This is some information about the thing that gets longer if i say so'
           }
           value={textAreaState}
-          onBlur={(event) => setTextAreaState(event.currentTarget.value)}
+          onChange={(event) => setTextAreaState(event.target.value)}
           expandableInfo="Expandable plain text information"
+          unit="kr"
           validator={validator}
+          testId="test-id"
         />
 
         {textAreaState}
@@ -144,8 +163,9 @@ export const FormExample = () => {
           info={
             'This is some information about the thing that gets longer if i say so'
           }
+          testId="test-id"
           value={textAreaState}
-          onChange={(event) => setTextAreaState(event.target.value)}
+          onBlur={(event) => setTextAreaState(event.target.value)}
           expandableInfo={
             <>
               <p>
@@ -169,10 +189,12 @@ export const FormExample = () => {
             console.log('onClampValue', value)
           }}
         />
+
         <div>Slider value: {sliderValue}</div>
 
         <Button onClick={toggleValidation}>Toggle validation</Button>
         <Button type="submit">Submit</Button>
+        <Button type="reset">Reset</Button>
       </Form>
     </>
   )

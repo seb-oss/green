@@ -16,6 +16,17 @@
   @include validation.add-feedback(tokens.$intent-danger-background);
 }
 
+::slotted([slot='trigger']) {
+  overflow: hidden;
+}
+
+slot[name='trigger'] > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
 .form-info {
   color: var(--text-primary-color);
   display: block;

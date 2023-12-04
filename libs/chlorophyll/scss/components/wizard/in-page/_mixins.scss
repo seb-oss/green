@@ -6,6 +6,12 @@
   padding: 1.5rem 1rem 1.5rem 1rem;
   margin-top: 0;
 
+  button svg {
+    margin-left: .5rem;
+  }
+
+
+
   @include common.media-breakpoint-up('sm') {
     padding: 1.5rem 1rem 1.5rem 4.5rem;
 
@@ -120,8 +126,12 @@
     @include add-in-page-wizard-footer;
   }
 
-  &__footer__edit {
-    @include add-in-page-wizard-footer;
+  &__footer--edit {
+    button svg {
+      margin-right: .25rem;
+      margin-left: 0;
+    }
+
     @include common.media-breakpoint-up('sm') {
       display: none !important;
     }
