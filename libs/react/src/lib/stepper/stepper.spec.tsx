@@ -34,7 +34,7 @@ describe('Stepper', () => {
   it('renders status message', async () => {
     props.validator = {
       message: 'Status',
-      indicator: 'error'
+      indicator: 'error',
     }
     const { findByText } = render(<Stepper {...props} />)
 
@@ -44,7 +44,9 @@ describe('Stepper', () => {
     const renderComponent = async (props: StepperProps = {}) => {
       const component = render(<Stepper {...props} />)
       const [buttonDown, buttonUp] = await component.findAllByRole('button')
-      const input = component.baseElement.getElementsByTagName('input')[0] as HTMLInputElement
+      const input = component.baseElement.getElementsByTagName(
+        'input'
+      )[0] as HTMLInputElement
       return {
         component,
         buttonDown,
@@ -57,18 +59,14 @@ describe('Stepper', () => {
       const { buttonUp, input } = await renderComponent()
 
       await user.click(buttonUp)
-      await waitFor(() =>
-        expect(input.value).toEqual('1')
-      )
+      await waitFor(() => expect(input.value).toEqual('1'))
     })
     it('goes down', async () => {
       const user = userEvent.setup()
       const { buttonDown, input } = await renderComponent()
 
       await user.click(buttonDown)
-      await waitFor(() =>
-        expect(input.value).toEqual('-1')
-      )
+      await waitFor(() => expect(input.value).toEqual('-1'))
     })
     it('respects max', async () => {
       const user = userEvent.setup()
@@ -99,7 +97,10 @@ describe('Stepper', () => {
     it('calls onChange', async () => {
       const onChange = jest.fn()
       const user = userEvent.setup()
-      const { buttonDown, buttonUp } = await renderComponent({ value: 0, onChange })
+      const { buttonDown, buttonUp } = await renderComponent({
+        value: 0,
+        onChange,
+      })
 
       await user.click(buttonUp)
       expect(onChange).toHaveBeenCalledWith(1)
