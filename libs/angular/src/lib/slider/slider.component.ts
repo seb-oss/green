@@ -67,7 +67,7 @@ export class NggSliderComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['value']) {
+    if (['min', 'max', 'value'].some((x: string) => changes.hasOwnProperty(x))) {
       this.setTrackBackground()
     }
   }
