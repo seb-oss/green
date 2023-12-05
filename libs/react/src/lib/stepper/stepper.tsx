@@ -16,22 +16,20 @@ export interface StepperProps extends StepperArgs {
 // TODO: Should be named "Numeric input" instead of stepper?
 
 export function Stepper({
+  id,
   label,
   description,
   statusMessage,
   validator,
-  value,
+  value = 0,
   onChange,
   min = 0,
   max = 100,
   step = 1,
-  ...stepperArgs
 }: StepperProps) {
-  const [localValue, setLocalValue] = useState<number | undefined>(value)
+  const [localValue, setLocalValue] = useState<number>(value)
 
-  const clamp = (value: number) => {
-    return Math.max(min, Math.min(value, max))
-  }
+  const clamp = (v: number) => Math.max(min, Math.min(v, max))
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
     if (isNaN(e.target.valueAsNumber)) return
@@ -47,7 +45,7 @@ export function Stepper({
   }, [value])
 
   const down = () => {
-    if (localValue && localValue > min) {
+    if (localValue > min) {
       const newValue = clamp(localValue - step)
       setLocalValue(newValue)
       if (onChange) {
@@ -57,7 +55,7 @@ export function Stepper({
   }
 
   const up = () => {
-    if (localValue && localValue < max) {
+    if (localValue < max) {
       const newValue = clamp(localValue + step)
       setLocalValue(newValue)
       if (onChange) {
@@ -86,7 +84,7 @@ export function Stepper({
         -
       </button>
       <input
-        id={stepperArgs.id}
+        id={id}
         type="number"
         onChange={onChangeEvent}
         onFocus={({ target }) => target.select()}
@@ -105,7 +103,7 @@ export function Stepper({
 
   return (
     <div className="form-group">
-      {label && <label htmlFor={stepperArgs.id}>{label}</label>}
+      {label && <label htmlFor={id}>{label}</label>}
       {description && <span className="form-info">{description}</span>}
       <div className="stepper-wrapper">
         {PrimitiveStepper}
