@@ -23,8 +23,8 @@ export function Stepper({
   validator,
   value = 0,
   onChange,
-  min = 0,
-  max = 100,
+  min = Number.MIN_SAFE_INTEGER,
+  max = Number.MAX_SAFE_INTEGER,
   step = 1,
 }: StepperProps) {
   const [localValue, setLocalValue] = useState<number>(value)
