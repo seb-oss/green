@@ -1,10 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import {
   IValidator,
   validateClassName,
   IndicatorType,
   StepperArgs,
 } from '@sebgroup/extract'
+import { on } from 'events'
 
 export interface StepperProps extends StepperArgs {
   label?: string
@@ -22,7 +23,7 @@ export function Stepper({
   statusMessage,
   validator,
   value = 0,
-  onChange,
+  onChange = () => undefined,
   min = Number.MIN_SAFE_INTEGER,
   max = Number.MAX_SAFE_INTEGER,
   step = 1,
@@ -31,14 +32,15 @@ export function Stepper({
 
   const clamp = (v: number) => Math.max(min, Math.min(v, max))
 
-  const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
-    if (isNaN(e.target.valueAsNumber)) return
-    const value = clamp(e.target.valueAsNumber)
-    setLocalValue(value)
-    if (onChange) {
+  const onChangeEvent = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (isNaN(e.target.valueAsNumber)) return
+      const value = clamp(e.target.valueAsNumber)
+      setLocalValue(value)
       onChange(value)
-    }
-  }
+    },
+    [onChange]
+  )
 
   useEffect(() => {
     setLocalValue(value)
@@ -48,9 +50,7 @@ export function Stepper({
     if (localValue > min) {
       const newValue = clamp(localValue - step)
       setLocalValue(newValue)
-      if (onChange) {
-        onChange(newValue)
-      }
+      onChange(newValue)
     }
   }
 
@@ -58,9 +58,7 @@ export function Stepper({
     if (localValue < max) {
       const newValue = clamp(localValue + step)
       setLocalValue(newValue)
-      if (onChange) {
-        onChange(newValue)
-      }
+      onChange(newValue)
     }
   }
 
