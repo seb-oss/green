@@ -33,7 +33,7 @@ export function Stepper({
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
     if (isNaN(e.target.valueAsNumber)) return
-    let value = clamp(e.target.valueAsNumber)
+    const value = clamp(e.target.valueAsNumber)
     setLocalValue(value)
     if (onChange) {
       onChange(value)
