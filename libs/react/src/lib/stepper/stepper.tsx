@@ -27,17 +27,10 @@ export function Stepper({
   step = 1,
   ...stepperArgs
 }: StepperProps) {
-  // const [stepper, data] = useStepper(stepperArgs)
   const [localValue, setLocalValue] = useState<number | undefined>(value)
 
   const clamp = (value: number) => {
-    let clamped = value
-    if (clamped < min) {
-      clamped = min
-    } else if (clamped > max) {
-      clamped = max
-    }
-    return clamped
+    return Math.max(min, Math.min(value, max))
   }
 
   const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +66,16 @@ export function Stepper({
     }
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      up()
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      down()
+    }
+  }
+
   const PrimitiveStepper = (
     <div
       className={`group group-border group-stepper ${
@@ -87,6 +90,7 @@ export function Stepper({
         type="number"
         onChange={onChangeEvent}
         onFocus={({ target }) => target.select()}
+        onKeyDown={handleKeyDown}
         placeholder="0"
         value={localValue}
       />
