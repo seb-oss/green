@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.6.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.0...@sebgroup/green-react@2.6.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* **react/link:** default styling should be inline link ([#1148](https://github.com/sebgroup/green/issues/1148)) ([f108be3](https://github.com/sebgroup/green/commit/f108be3d7ea03da86dfde261a2cdc2dd07f56e5f))
+
+
+
 # [2.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.1...@sebgroup/green-react@2.6.0) (2023-12-01)
 
 
