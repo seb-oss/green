@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.1...@sebgroup/green-angular@2.1.2) (2023-12-06)
+
+
+### Bug Fixes
+
+* 🐛 update track background when min and max values change ([#1146](https://github.com/sebgroup/green/issues/1146)) ([17d0b80](https://github.com/sebgroup/green/commit/17d0b80283a0601821c5205e4a3d719b8c572586))
+
+
+
 ## [2.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.0...@sebgroup/green-angular@2.1.1) (2023-11-29)
 
 
