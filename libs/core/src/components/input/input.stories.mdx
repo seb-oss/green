@@ -13,15 +13,16 @@ import {
 <Canvas>
   <gds-input
     label="Label"
-    clearable="false"
-    value="some text"
-    maxchars="140"
+    maxlength="50"
     supporting-text="Supporting text"
+    clearable
   >
-    <gds-icon icon="mail" slot="icon"></gds-icon>
-    <gds-badge slot="badge">kr</gds-badge>
+    <gds-icon name="mail" slot="icon"></gds-icon>
+    <gds-badge slot="badge" variant="surface">kr</gds-badge>
     <gds-panel slot="extended-supporting-text">
-      Extended supporting text as markup
+      Extended supporting text as <strong>markup</strong>
+      <br/>
+      <a href="#">Can contain links</a>
     </gds-panel>
   </gds-input>
 </Canvas>

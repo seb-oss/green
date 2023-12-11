@@ -29,7 +29,7 @@ import { tokens } from '../../tokens.style'
  */
 @gdsCustomElement('gds-input')
 export class GdsInput extends GdsFormControlElement<string> {
-  static styles = [tokens, unsafeCSS(sharedStyles), unsafeCSS(styles)]
+  static styles = [tokens, unsafeCSS(styles)]
 
   @property()
   value = ''
