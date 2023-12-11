@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.6.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.1...@sebgroup/green-react@2.6.2) (2023-12-11)
+
+
+### Bug Fixes
+
+* **react/stepper:** refactor internal state handling ([#1147](https://github.com/sebgroup/green/issues/1147)) ([0cbbe10](https://github.com/sebgroup/green/commit/0cbbe100707ee742d23b81bc1b4410f2bcc62a6c)), closes [#1062](https://github.com/sebgroup/green/issues/1062)
+* **react:** exporting context menu ([#1151](https://github.com/sebgroup/green/issues/1151)) ([ee0123e](https://github.com/sebgroup/green/commit/ee0123e9f5ebec2c3e528f955d2620595e83663c))
+
+
+
 ## [2.6.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.0...@sebgroup/green-react@2.6.1) (2023-12-06)
 
 
