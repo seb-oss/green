@@ -368,6 +368,12 @@
     "customParams": {}
   },
   {
+    "id": "css-grid--page",
+    "name": "Page",
+    "title": "CSS/Grid",
+    "customParams": {}
+  },
+  {
     "id": "components-form-concepts-validation--page",
     "name": "Page",
     "title": "Components/Form/Concepts/Validation",
@@ -401,12 +407,6 @@
     "id": "components-form-concepts-disabled--page",
     "name": "Page",
     "title": "Components/Form/Concepts/Disabled",
-    "customParams": {}
-  },
-  {
-    "id": "css-grid--page",
-    "name": "Page",
-    "title": "CSS/Grid",
     "customParams": {}
   },
   {
