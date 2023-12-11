@@ -3,6 +3,8 @@ import { property, query, queryAsync } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
 import { when } from 'lit/directives/when.js'
+import { msg } from '@lit/localize'
+
 import { constrainSlots } from '../../utils/helpers'
 import { forwardAttributes } from '../../utils/directives'
 import styles from './style/input.styles.css'
@@ -25,7 +27,6 @@ import { tokens } from '../../tokens.style'
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
  */
-
 @gdsCustomElement('gds-input')
 export class GdsInput extends GdsFormControlElement<string> {
   static styles = [tokens, unsafeCSS(sharedStyles), unsafeCSS(styles)]
@@ -46,6 +47,16 @@ export class GdsInput extends GdsFormControlElement<string> {
   supportingText = ''
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * Whether the field should be clearable or not. Clearable fields will display a clear button when
    * the field has a value.
    */
@@ -62,7 +73,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   private elInput!: HTMLInputElement
 
   @queryAsync('slot[name="extended-supporting-text"]')
-  private elExtTextSlot!: Promise<HTMLSlotElement>
+  private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
   constructor() {
     super()
@@ -73,12 +84,17 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <div class="head">
         <label for="input">${this.label}</label>
-        ${until(this.#extSupportingTextBtn, nothing)}
+        ${until(this.#extendedSupportingTextBtn, nothing)}
       </div>
 
       <div class="supporting-text">${this.supportingText}</div>
 
-      <slot name="extended-supporting-text" hidden></slot>
+      <div
+        class="extended-supporting-text"
+        aria-hidden="${!this.showExtendedSupportingText}"
+      >
+        <div><slot name="extended-supporting-text"></slot></div>
+      </div>
 
       <div class="field" @click=${this.#handleFieldClick}>
         <slot name="icon" gds-allow="gds-icon"></slot>
@@ -86,9 +102,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           @input=${this.#handleOnInput}
           .value=${this.value}
           id="input"
-          ${forwardAttributes((attr) =>
-            ['type', 'placeholder'].includes(attr.name)
-          )}
+          ${forwardAttributes(this.#forwardableAttrs)}
         />
         <slot name="badge" gds-allow="gds-badge"></slot>
         ${when(
@@ -97,7 +111,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             <gds-button
               size="small"
               variant="tertiary"
-              aria-label="Clear input"
+              aria-label="${msg('Clear input')}"
               @click=${this.#handleClearBtnClick}
             >
               <gds-icon name="x"></gds-icon>
@@ -118,6 +132,10 @@ export class GdsInput extends GdsFormControlElement<string> {
     `
   }
 
+  // Any attribute name added here will get forwarded to the native <input> element.
+  #forwardableAttrs = (attr: Attr) =>
+    ['type', 'placeholder', 'required'].includes(attr.name)
+
   #handleOnInput = (e: Event) => {
     this.value = (e.target as HTMLInputElement).value
   }
@@ -131,9 +149,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #handleSupportingTextBtnClick = () =>
-    this.elExtTextSlot.then((slot) => {
-      slot.hidden = !slot.hidden
-    })
+    (this.showExtendedSupportingText = !this.showExtendedSupportingText)
 
   get #showRemainingChars() {
     return this.maxlength < Number.MAX_SAFE_INTEGER
@@ -156,8 +172,8 @@ export class GdsInput extends GdsFormControlElement<string> {
    * Returns a promise that resolves when the DOM query for the extended supporting text slot has resolved.
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
-  get #extSupportingTextBtn(): Promise<TemplateResult> {
-    return this.elExtTextSlot.then((slot) => {
+  get #extendedSupportingTextBtn(): Promise<TemplateResult> {
+    return this.elExtendedSupportingTextSlot.then((slot) => {
       if (slot.assignedElements().length === 0) {
         return html``
       }
@@ -165,7 +181,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         <gds-button
           size="small"
           variant="tertiary"
-          aria-label="Show extended supporting text"
+          aria-label="${msg('Show extended supporting text')}"
           @click=${this.#handleSupportingTextBtnClick}
         >
           <gds-icon name="info"></gds-icon>

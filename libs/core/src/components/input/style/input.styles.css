@@ -3,21 +3,20 @@
 @layer tokens {
   :host {
     --_color-bg: var(--gds-sys-color-container-container);
+
     --_color-border: var(--gds-sys-color-stroke-stroke);
-    --_color-outline-alpha: 40%;
+    --_border-radius: .5rem;
+    --_border-width: 0.0625rem;
+    --_border-width-hover: 0.125rem;
+
+    --_color-outline-alpha: 60%;
     --_color-outline: color-mix(
       in srgb,
       var(--_color-border),
       transparent var(--_color-outline-alpha)
     );
-    --_transition-property: all;
-    --_transition-duration: 150ms;
-    --_transition-function: cubic-bezier(0.4, 0, 0.2, 1);
-    --_transition: var(--_transition-property)
-      var(--_transition-duration)
-      var(--_transition-function);
-    --_border-radius: .5rem;
-    --_border-width: .125rem;
+
+    --_transition: var(--gds-sys-transition);
     --_lh: 1.25;
     --_core-min-block-size: 3.5rem;
     --_gap: .5rem;
@@ -74,7 +73,7 @@
 
   label {
     font-weight: 400;
-    transition: var(--gds-input-transition);
+    transition: var(--_transition);
   }
 
   .foot {
@@ -96,13 +95,33 @@
     display: block;
     font-size: .875rem;
     background-color: #eee;
-    padding: 1rem;
     margin-top: 0.5rem;
+    padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid #ccc;
+    opacity: 0;
+    transition: var(--_transition);
+
+    [aria-hidden="false"] & {
+      opacity: 1;
+    }
   }
-  slot[name="extended-supporting-text"][hidden] {
-    display: none;
+
+  div.extended-supporting-text {
+    /* max-height: 0; */
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: var(--_transition);
+
+    & > * {
+      overflow: hidden;
+    }
+
+    &[aria-hidden="false"] {
+      /* max-height: 500px; */
+      opacity: 1;
+      grid-template-rows: 1fr;
+    }
   }
 
   input[type='number']::-webkit-inner-spin-button {
@@ -162,7 +181,7 @@
 
     background-color: var(--_color-bg);
 
-    border: var(--_border-width) solid transparent;
+    border: var(--_border-width-hover) solid transparent;
     border-block-end-color: transparent;
     border-start-end-radius: var(--_border-radius);
     border-start-start-radius: var(--_border-radius);
@@ -179,7 +198,7 @@
 
     outline-style: solid;
     outline-offset: var(--_border-width);
-    outline-width: calc(var(--_border-width));
+    outline-width: var(--_border-width-hover);
     outline-color: transparent;
 
     &:focus:not(:focus-visible) {
@@ -187,12 +206,14 @@
     }
 
     &:hover {
-      box-shadow: 0 var(--_border-width) 0 currentColor;
+      --_border-width: var(--_border-width-hover);
     }
 
     &:has(input:focus) {
+      --_border-width: var(--_border-width-hover);
       outline-color: var(--_color-outline);
       border-radius: var(--_border-radius);
+      border: var(--_border-width) solid var(--_color-border);
       box-shadow: none;
       transition: var(--_transition);
     }
@@ -205,6 +226,9 @@
     color: var(--gds-sys-color-status-negative-on-negative-bright);
   }
   :host(:invalid) .error-text {
+    color: var(--gds-sys-color-status-negative-on-negative-bright);
+  }
+  :host(:invalid) label {
     color: var(--gds-sys-color-status-negative-on-negative-bright);
   }
 }
