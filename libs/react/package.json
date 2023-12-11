@@ -9,6 +9,7 @@
     "@sebgroup/green-core": "^1.2.4",
     "@sebgroup/chlorophyll": "^2.3.0",
     "@sebgroup/extract": "^2.1.1",
+    "@lit/react": "^1.0.2",
     "classnames": "^2.3.2"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
