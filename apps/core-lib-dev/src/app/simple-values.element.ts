@@ -40,12 +40,27 @@ export class SimpleValues extends HTMLElement {
             <gds-option value="v3">Value 3</gds-option>
           </gds-dropdown>
 
-          <input name="my-text" />
+          <gds-input
+            name="my-text"
+            type="email"
+            label="Label goes here"
+            supporting-text="Supporting text goes here"
+            clearable
+            maxlength="140"
+            required
+          >
+            <gds-icon name="mail" slot="icon"></gds-icon>
+            <gds-badge slot="badge" variant="surface">kr</gds-badge>
+            <span slot="extended-supporting-text">
+              Extended supporting text goes here.
+              <a href="#">Can contain links</a>
+            </span>
+          </gds-input>
 
           <gds-button type="submit" name="the-button" value="derp"
             >Submit</gds-button
           >
-          <gds-button type="reset">Reset</gds-button>
+          <gds-button type="reset" variant="secondary">Reset</gds-button>
         </form>
       </div>
     `

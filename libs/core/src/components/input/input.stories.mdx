@@ -1,0 +1,27 @@
+import '../../tokens/tokens.css'
+import { inspector } from '../../utils/tools/inspector/inspector'
+import {
+  GdsButton,
+  GdsInput,
+  GdsBadge,
+  GdsInputHelper,
+  GdsIcon,
+} from '../../../../../dist/libs/core/src'
+
+<Meta title="Components/Input/Text" />
+
+<Canvas>
+  <gds-input
+    label="Label"
+    clearable="false"
+    value="some text"
+    maxchars="140"
+    supporting-text="Supporting text"
+  >
+    <gds-icon icon="mail" slot="icon"></gds-icon>
+    <gds-badge slot="badge">kr</gds-badge>
+    <gds-panel slot="extended-supporting-text">
+      Extended supporting text as markup
+    </gds-panel>
+  </gds-input>
+</Canvas>

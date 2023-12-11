@@ -201,6 +201,8 @@
 
   .gds-form-item__footer:not(:empty) {
     margin-top: 0.5rem;
+    display: flex;
+    column-gap: 1rem;
   }
 }
 

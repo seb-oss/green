@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.2.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.3...@sebgroup/green-core@1.2.4) (2023-12-01)
+
+
+### Bug Fixes
+
+* **core/popover:** positioning regression in mobile views ([#1143](https://github.com/sebgroup/green/issues/1143)) ([5fb8736](https://github.com/sebgroup/green/commit/5fb8736e7a69a46af916280f9738361693f787d9))
+
+
+
 ## [1.2.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.2...@sebgroup/green-core@1.2.3) (2023-11-29)
 
 

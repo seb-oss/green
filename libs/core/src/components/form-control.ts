@@ -2,7 +2,6 @@ import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { watch } from '../utils/decorators'
-import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
 
 /**
  * Abstract base class for Green Core form controls.
@@ -77,12 +76,12 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.#internals.form?.addEventListener('reset', this.#handleFormReset)
+    this.#internals.form?.addEventListener('reset', this._handleFormReset)
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
-    this.#internals.form?.removeEventListener('reset', this.#handleFormReset)
+    this.#internals.form?.removeEventListener('reset', this._handleFormReset)
   }
 
   @watch('invalid')
@@ -111,8 +110,9 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   /**
    * Event handler for the form reset event.
+   * Can be overridden by subclasses to rcustomize the reset value.
    */
-  #handleFormReset = () => {
+  protected _handleFormReset = () => {
     this.value = undefined
   }
 }

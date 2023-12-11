@@ -1,5 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import {
@@ -63,6 +64,10 @@ export class GdsPopover extends LitElement {
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
+  // Whether the virtual keyboard is visible or not
+  @state()
+  private _isVirtKbVisible = false
+
   @watch('triggerRef')
   private _handleTriggerRefChanged() {
     this.triggerRef.then((el) => {
@@ -76,7 +81,13 @@ export class GdsPopover extends LitElement {
     this.#registerAutoPositioning()
   }
 
+  // A reference to the dialog element used to make the popover modal
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
+
+  // A function that removes the Floating UI auto positioning. This gets called when we switch to mobile view layout.
+  #autoPositionCleanupFn: (() => void) | undefined
+
+  #isMobileViewport = false
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -90,6 +101,20 @@ export class GdsPopover extends LitElement {
         e.stopImmediatePropagation()
       }
     })
+
+    // This is a hack to check if a virtual keyboard is visible or not.
+    // This should be removed in the future if/when the VirtualKeyboard API is suported on Safari.
+    this.addEventListener('focusin', (e: FocusEvent) => {
+      const t = e.target as HTMLElement
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+        this._isVirtKbVisible = true
+      } else {
+        this._isVirtKbVisible = false
+      }
+    })
+    this.addEventListener('blurin', (_) => {
+      this._isVirtKbVisible = false
+    })
   }
 
   disconnectedCallback(): void {
@@ -98,7 +123,10 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html`<dialog ${ref(this.#dialogElementRef)}>
+    return html`<dialog
+      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+      ${ref(this.#dialogElementRef)}
+    >
       <header>
         <h2>${this.label}</h2>
         <button
@@ -167,15 +195,17 @@ export class GdsPopover extends LitElement {
 
   #unregisterTriggerEvents() {
     this._trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
-    this.#autoPositionCleanup?.()
+    this.#autoPositionCleanupFn?.()
   }
 
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
+    this.#isMobileViewport = matches
     if (matches) {
-      this.#autoPositionCleanup?.()
+      this.#autoPositionCleanupFn?.()
       this.#dialogElementRef.value?.style.removeProperty('left')
       this.#dialogElementRef.value?.style.removeProperty('top')
+      this.#dialogElementRef.value?.style.removeProperty('minWidth')
 
       this.updateComplete.then(() => {
         if (this.open) this.#dialogElementRef.value?.showModal()
@@ -187,14 +217,17 @@ export class GdsPopover extends LitElement {
     }
   }
 
-  #autoPositionCleanup: (() => void) | undefined
   #registerAutoPositioning() {
     const referenceEl = this._trigger
     const floatingEl = this.#dialogElementRef.value
 
-    if (!referenceEl || !floatingEl) return
+    if (!referenceEl || !floatingEl || this.#isMobileViewport) return
 
-    this.#autoPositionCleanup = autoUpdate(referenceEl, floatingEl, () => {
+    if (this.#autoPositionCleanupFn) {
+      this.#autoPositionCleanupFn()
+    }
+
+    this.#autoPositionCleanupFn = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: [offset(8), flip(), topLayerOverTransforms()],

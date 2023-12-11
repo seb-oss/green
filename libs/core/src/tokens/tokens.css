@@ -101,7 +101,7 @@
   /* Transitions */
   --gds-sys-transition-easing: cubic-bezier(0.46, 0.03, 0.52, 0.96);
   --gds-sys-transition-properties: all;
-  --gds-sys-transition-duration: 0.3s;
+  --gds-sys-transition-duration: 0.15s;
   --gds-sys-transition-delay: 0s;
   --gds-sys-transition-timing-function: var(--gds-sys-transition-easing);
   --gds-sys-transition: var(--gds-sys-transition-properties)
