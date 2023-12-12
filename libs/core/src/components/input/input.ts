@@ -3,18 +3,19 @@ import { property, query, queryAsync } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
 import { when } from 'lit/directives/when.js'
+import { choose } from 'lit/directives/choose.js'
 import { msg } from '@lit/localize'
 
 import { constrainSlots } from '../../utils/helpers'
 import { forwardAttributes } from '../../utils/directives'
-import styles from './style/input.styles.css'
-import sharedStyles from './style/input.shared.styles.css'
 import { GdsFormControlElement } from '../form-control'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../tokens.style'
+
+import styles from './input.styles.css'
 
 /**
  * @summary A custom input element that can be used in forms.
@@ -69,6 +70,19 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: Number })
   maxlength = Number.MAX_SAFE_INTEGER
 
+  /**
+   * The variant of the input field. The default variant displays a label, supporting text, and
+   * extended supporting text. The simplified variant only displays the field itself and the
+   * supporting text below.
+   *
+   * The simplified variant should only be used in specific cases, for example when the input field
+   * is placed inside a table cell or in a space-constrained layout.
+   *
+   * A typical form should use the default variant.
+   */
+  @property()
+  variant: 'default' | 'simplified' = 'default'
+
   @query('input')
   private elInput!: HTMLInputElement
 
@@ -81,10 +95,18 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   render() {
+    return html`${choose(this.variant, [
+      ['default', () => this.#renderDefault()],
+      ['simplified', () => this.#renderSimplified()],
+    ])}`
+  }
+
+  // variant="default"
+  #renderDefault() {
     return html`
       <div class="head">
         <label for="input">${this.label}</label>
-        ${until(this.#extendedSupportingTextBtn, nothing)}
+        ${until(this.#maybeRenderExtendedSupportingTextButton(), nothing)}
       </div>
 
       <div class="supporting-text">${this.supportingText}</div>
@@ -110,19 +132,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           ${forwardAttributes(this.#forwardableAttrs)}
         />
         <slot name="badge" gds-allow="gds-badge"></slot>
-        ${when(
-          this.clearable && this.value.length > 0,
-          () => html`
-            <gds-button
-              size="small"
-              variant="tertiary"
-              aria-label="${msg('Clear input')}"
-              @click=${this.#handleClearBtnClick}
-            >
-              <gds-icon name="x"></gds-icon>
-            </gds-button>
-          `
-        )}
+        ${this.#renderClearButton()}
       </div>
 
       <div class="foot">
@@ -132,8 +142,28 @@ export class GdsInput extends GdsFormControlElement<string> {
             () => html`<span class="error-text">Error information</span>`
           )}
         </div>
-        ${when(this.#showRemainingChars, () => this.#remainingCharsBadge)}
+        ${when(this.#shouldShowRemainingChars, () =>
+          this.#renderRemainingCharsBadge()
+        )}
       </div>
+    `
+  }
+
+  // variant="simplified"
+  #renderSimplified() {
+    return html`
+      <div class="field" @click=${this.#handleFieldClick}>
+        <slot name="icon" gds-allow="gds-icon"></slot>
+        <label for="input">${this.label}</label>
+        <input
+          @input=${this.#handleOnInput}
+          .value=${this.value}
+          id="input"
+          ${forwardAttributes(this.#forwardableAttrs)}
+        />
+        <slot name="badge" gds-allow="gds-badge"></slot>
+      </div>
+      <div class="supporting-text">${this.supportingText}</div>
     `
   }
 
@@ -156,11 +186,27 @@ export class GdsInput extends GdsFormControlElement<string> {
   #handleSupportingTextBtnClick = () =>
     (this.showExtendedSupportingText = !this.showExtendedSupportingText)
 
-  get #showRemainingChars() {
+  #renderClearButton() {
+    return html`${when(
+      this.clearable && this.value.length > 0,
+      () => html`
+        <gds-button
+          size="small"
+          variant="tertiary"
+          aria-label="${msg('Clear input')}"
+          @click=${this.#handleClearBtnClick}
+        >
+          <gds-icon name="x"></gds-icon>
+        </gds-button>
+      `
+    )}`
+  }
+
+  get #shouldShowRemainingChars() {
     return this.maxlength < Number.MAX_SAFE_INTEGER
   }
 
-  get #remainingCharsBadge() {
+  #renderRemainingCharsBadge() {
     const remaining = this.maxlength - this.value.length
     let variant
     if (remaining < 0) {
@@ -177,7 +223,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    * Returns a promise that resolves when the DOM query for the extended supporting text slot has resolved.
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
-  get #extendedSupportingTextBtn(): Promise<TemplateResult> {
+  #maybeRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
       if (slot.assignedElements().length === 0) {
         return html``

@@ -45,8 +45,9 @@ export class SimpleValues extends HTMLElement {
             type="email"
             label="Label goes here"
             supporting-text="Supporting text goes here"
-            clearable
             maxlength="140"
+            variant="simplified"
+            clearable
             required
           >
             <gds-icon name="mail" slot="icon"></gds-icon>
