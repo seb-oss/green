@@ -93,7 +93,12 @@ export class GdsInput extends GdsFormControlElement<string> {
         class="extended-supporting-text"
         aria-hidden="${!this.showExtendedSupportingText}"
       >
-        <div><slot name="extended-supporting-text"></slot></div>
+        <div>
+          <slot
+            name="extended-supporting-text"
+            @slotchange=${() => this.requestUpdate()}
+          ></slot>
+        </div>
       </div>
 
       <div class="field" @click=${this.#handleFieldClick}>
