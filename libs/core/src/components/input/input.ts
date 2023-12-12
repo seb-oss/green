@@ -109,7 +109,9 @@ export class GdsInput extends GdsFormControlElement<string> {
         ${until(this.#maybeRenderExtendedSupportingTextButton(), nothing)}
       </div>
 
-      <div class="supporting-text">${this.supportingText}</div>
+      <div class="supporting-text" id="supporting-text">
+        ${this.supportingText}
+      </div>
 
       <div
         class="extended-supporting-text"
@@ -129,6 +131,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           @input=${this.#handleOnInput}
           .value=${this.value}
           id="input"
+          aria-describedby="supporting-text"
           ${forwardAttributes(this.#forwardableAttrs)}
         />
         <slot name="badge" gds-allow="gds-badge"></slot>
@@ -163,7 +166,12 @@ export class GdsInput extends GdsFormControlElement<string> {
         />
         <slot name="badge" gds-allow="gds-badge"></slot>
       </div>
-      <div class="supporting-text">${this.supportingText}</div>
+      <div class="foot">
+        <div class="supporting-text">${this.supportingText}</div>
+        ${when(this.#shouldShowRemainingChars, () =>
+          this.#renderRemainingCharsBadge()
+        )}
+      </div>
     `
   }
 
@@ -223,7 +231,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    * Returns a promise that resolves when the DOM query for the extended supporting text slot has resolved.
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
-  #maybeRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
+  async #maybeRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
       if (slot.assignedElements().length === 0) {
         return html``
