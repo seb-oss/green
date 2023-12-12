@@ -1,12 +1,13 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { constrainSlots } from '../../../utils/helpers'
+import { constrainSlots } from '../../utils/helpers'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import styles from './checkbox.css'
+import styles from './radio.css'
+import { GdsRadioGroup } from './radio-group'
 
-@customElement('gds-checkbox')
-export class GdsCheckbox extends LitElement {
+@customElement('gds-radio')
+export class GdsRadio extends LitElement {
   static styles = unsafeCSS(styles)
 
   static shadowRootOptions: ShadowRootInit = {
@@ -16,6 +17,7 @@ export class GdsCheckbox extends LitElement {
 
   // Private members
   #internals: ElementInternals
+  value: any
 
   constructor() {
     super()
@@ -42,17 +44,26 @@ export class GdsCheckbox extends LitElement {
     super.update(changedProperties)
     if (!this.inputElement) {
       this.inputElement = this.shadowRoot?.getElementById(
-        'checkbox'
+        'radio'
       ) as HTMLInputElement
     }
     this.reflectAttributesToInput()
   }
 
+  handleClick() {
+    const radioGroup = this.closest('gds-radio-group')
+
+    if (radioGroup instanceof GdsRadioGroup) {
+      radioGroup.selectedValue = this.value
+    }
+  }
+
   render() {
     return html`
-      <label class="gds-checkbox">
-        <input id="checkbox" type="checkbox" />
+      <label class="gds-radio">
+        <input id="radio" type="radio" />
       </label>
+      <label for="radio">${this.textContent}</label>
     `
   }
 }
