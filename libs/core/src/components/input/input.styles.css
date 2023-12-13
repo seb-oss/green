@@ -1,4 +1,4 @@
-@layer tokens, a11y, base;
+@layer tokens, a11y, base, simplified;
 
 @layer tokens {
   :host {
@@ -73,7 +73,6 @@
 
   label {
     font-weight: 400;
-    transition: var(--_transition);
   }
 
   .foot {
@@ -84,6 +83,10 @@
 
     gds-badge {
       align-self: flex-end;
+    }
+
+    :first-child {
+      flex-grow: 1;
     }
   }
 
@@ -108,7 +111,6 @@
   }
 
   div.extended-supporting-text {
-    /* max-height: 0; */
     display: grid;
     grid-template-rows: 0fr;
     transition: var(--_transition);
@@ -118,7 +120,6 @@
     }
 
     &[aria-hidden="false"] {
-      /* max-height: 500px; */
       opacity: 1;
       grid-template-rows: 1fr;
     }
@@ -138,8 +139,6 @@
     outline: none;
     padding: unset;
     height: max-content;
-    /* caret-color: accent;
-    caret-shape: underscore; */
     box-sizing: border-box;
     font-size: var(--_fs);
     line-height: var(--_lh);
@@ -176,7 +175,6 @@
     cursor: text;
 
     block-size: max-content;
-    /* min-inline-size: var(--_width); */
     min-block-size: var(--_core-min-block-size);
 
     background-color: var(--_color-bg);
@@ -230,5 +228,39 @@
   }
   :host(:invalid) label {
     color: var(--gds-sys-color-status-negative-on-negative-bright);
+  }
+}
+
+@layer simplified {
+  :host([variant="simplified"]) label {
+    align-items: center;
+    background-color: transparent;
+    display: block;
+    height: max-content;
+    inset: 0;
+    width: 100%;
+
+    div {
+      line-height: var(--_lh);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: var(--_transition);
+    }
+  }
+
+  :host([variant="simplified"]) label:has(input:not(:placeholder-shown, [readonly])),
+  :host([variant="simplified"]) label:focus-within {
+    div {
+      font-size: 0.75rem;
+      top: 0.375rem;
+      font-weight: 500;
+      transform: translateY(
+        translateY(calc(0px - var(--gds-input-label-translate)))
+      );
+    }
+    input {
+      margin-top: 0.75rem;
+    }
   }
 }

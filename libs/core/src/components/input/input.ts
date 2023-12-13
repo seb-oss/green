@@ -141,9 +141,12 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <div class="field" @click=${this.#handleFieldClick}>
         <slot name="lead" gds-allow="gds-icon"></slot>
-        <label for="input">${this.label}</label>
-        ${this.#renderNativeInput()}
+        <label for="input">
+          <div>${this.label}</div>
+          ${this.#renderNativeInput()}
+        </label>
         <slot name="trail" gds-allow="gds-badge"></slot>
+        ${this.#renderClearButton()}
       </div>
 
       <div class="foot">
@@ -184,6 +187,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .value=${this.value}
         id="input"
         aria-describedby="supporting-text"
+        placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       />
     `
