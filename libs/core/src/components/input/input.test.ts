@@ -82,7 +82,7 @@ for (const variant of ['default', 'simplified'] as const) {
         )
 
         const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [aria-label="Clear input"]'
+          '.field [label="Clear input"]'
         )
 
         expect(clearButtonEl).to.exist
@@ -100,7 +100,7 @@ for (const variant of ['default', 'simplified'] as const) {
         )
 
         const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [aria-label="Clear input"]'
+          '.field [label="Clear input"]'
         )
 
         await clickOnElement(clearButtonEl as Element)
@@ -110,6 +110,27 @@ for (const variant of ['default', 'simplified'] as const) {
     })
 
     describe('Accessibility', () => {
+      it('should pass axe smoketest', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input
+            variant="${variant}"
+            label="My label"
+            value="Not empty"
+            supporting-text="Text"
+            clearable
+          >
+            <gds-icon name="mail" slot="lead"></gds-icon>
+            <gds-badge slot="trail" variant="surface">kr</gds-badge>
+            <span slot="extended-supporting-text">
+              Extended supporting text goes here.
+              <a href="#">Can contain links</a>
+            </span>
+          </gds-input>`
+        )
+
+        await expect(el).to.be.accessible()
+      })
+
       it('label should have a for attribute that matches the input id', async () => {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}" label="My label"></gds-input>`

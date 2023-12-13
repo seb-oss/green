@@ -202,6 +202,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       <div
         class="extended-supporting-text"
         aria-hidden="${!this.showExtendedSupportingText}"
+        ?inert="${!this.showExtendedSupportingText}"
       >
         <div>
           <slot
@@ -219,7 +220,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         <gds-button
           size="small"
           variant="tertiary"
-          aria-label="${msg('Clear input')}"
+          label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
         >
           <gds-icon name="x"></gds-icon>
@@ -256,7 +257,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           <gds-button
             size="small"
             variant="tertiary"
-            aria-label="${msg('Show extended supporting text')}"
+            label="${msg('Show extended supporting text')}"
             @click=${this.#handleSupportingTextBtnClick}
           >
             <gds-icon name="info"></gds-icon>
