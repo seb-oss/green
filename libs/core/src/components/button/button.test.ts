@@ -116,6 +116,8 @@ describe('<gds-button>', () => {
 
       await sendKeys({ press: 'Enter' })
 
+      await timeout(1)
+
       expect(spy.calledOnce).to.be.true
     })
 
