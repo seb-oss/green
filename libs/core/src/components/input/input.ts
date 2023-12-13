@@ -23,8 +23,8 @@ import styles from './input.styles.css'
  *
  * @element gds-input
  *.
- * @slot icon - Use this to place an icon in the start of the field.
- * @slot badge - Use this to place a badge in the field, for displaying currency for example.
+ * @slot lead - Accepts `gds-icon`. Use this to place an icon in the start of the field.
+ * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
  */
@@ -106,35 +106,19 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <div class="head">
         <label for="input">${this.label}</label>
-        ${until(this.#maybeRenderExtendedSupportingTextButton(), nothing)}
+        ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
       </div>
 
       <div class="supporting-text" id="supporting-text">
         ${this.supportingText}
       </div>
 
-      <div
-        class="extended-supporting-text"
-        aria-hidden="${!this.showExtendedSupportingText}"
-      >
-        <div>
-          <slot
-            name="extended-supporting-text"
-            @slotchange=${() => this.requestUpdate()}
-          ></slot>
-        </div>
-      </div>
+      ${this.#renderExtendedSupportingText()}
 
       <div class="field" @click=${this.#handleFieldClick}>
-        <slot name="icon" gds-allow="gds-icon"></slot>
-        <input
-          @input=${this.#handleOnInput}
-          .value=${this.value}
-          id="input"
-          aria-describedby="supporting-text"
-          ${forwardAttributes(this.#forwardableAttrs)}
-        />
-        <slot name="badge" gds-allow="gds-badge"></slot>
+        <slot name="lead" gds-allow="gds-icon"></slot>
+        ${this.#renderNativeInput()}
+        <slot name="trail" gds-allow="gds-badge"></slot>
         ${this.#renderClearButton()}
       </div>
 
@@ -156,22 +140,21 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderSimplified() {
     return html`
       <div class="field" @click=${this.#handleFieldClick}>
-        <slot name="icon" gds-allow="gds-icon"></slot>
+        <slot name="lead" gds-allow="gds-icon"></slot>
         <label for="input">${this.label}</label>
-        <input
-          @input=${this.#handleOnInput}
-          .value=${this.value}
-          id="input"
-          ${forwardAttributes(this.#forwardableAttrs)}
-        />
-        <slot name="badge" gds-allow="gds-badge"></slot>
+        ${this.#renderNativeInput()}
+        <slot name="trail" gds-allow="gds-badge"></slot>
       </div>
+
       <div class="foot">
         <div class="supporting-text">${this.supportingText}</div>
         ${when(this.#shouldShowRemainingChars, () =>
           this.#renderRemainingCharsBadge()
         )}
+        ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
       </div>
+
+      ${this.#renderExtendedSupportingText()}
     `
   }
 
@@ -194,10 +177,37 @@ export class GdsInput extends GdsFormControlElement<string> {
   #handleSupportingTextBtnClick = () =>
     (this.showExtendedSupportingText = !this.showExtendedSupportingText)
 
+  #renderNativeInput() {
+    return html`
+      <input
+        @input=${this.#handleOnInput}
+        .value=${this.value}
+        id="input"
+        aria-describedby="supporting-text"
+        ${forwardAttributes(this.#forwardableAttrs)}
+      />
+    `
+  }
+
+  #renderExtendedSupportingText() {
+    return html`
+      <div
+        class="extended-supporting-text"
+        aria-hidden="${!this.showExtendedSupportingText}"
+      >
+        <div>
+          <slot
+            name="extended-supporting-text"
+            @slotchange=${() => this.requestUpdate()}
+          ></slot>
+        </div>
+      </div>
+    `
+  }
+
   #renderClearButton() {
-    return html`${when(
-      this.clearable && this.value.length > 0,
-      () => html`
+    if (this.clearable && this.value.length > 0)
+      return html`
         <gds-button
           size="small"
           variant="tertiary"
@@ -207,7 +217,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           <gds-icon name="x"></gds-icon>
         </gds-button>
       `
-    )}`
+    else return nothing
   }
 
   get #shouldShowRemainingChars() {
@@ -231,21 +241,20 @@ export class GdsInput extends GdsFormControlElement<string> {
    * Returns a promise that resolves when the DOM query for the extended supporting text slot has resolved.
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
-  async #maybeRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
+  async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
-      if (slot.assignedElements().length === 0) {
-        return html``
-      }
-      return html`
-        <gds-button
-          size="small"
-          variant="tertiary"
-          aria-label="${msg('Show extended supporting text')}"
-          @click=${this.#handleSupportingTextBtnClick}
-        >
-          <gds-icon name="info"></gds-icon>
-        </gds-button>
-      `
+      if (slot.assignedElements().length > 0)
+        return html`
+          <gds-button
+            size="small"
+            variant="tertiary"
+            aria-label="${msg('Show extended supporting text')}"
+            @click=${this.#handleSupportingTextBtnClick}
+          >
+            <gds-icon name="info"></gds-icon>
+          </gds-button>
+        `
+      else return nothing
     })
   }
 
