@@ -14,6 +14,7 @@ import {
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '../../components/form-control'
+import { forwardAttributes } from '../../utils/directives'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -68,6 +69,12 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   @property({ reflect: true })
   size: 'small' | 'medium' | 'large' = 'medium'
 
+  /**
+   * The label of the button. Use this to add an accessible label to the button when no text is provided in the default slot.
+   */
+  @property()
+  label = ''
+
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
 
   #isIconButton = false
@@ -75,6 +82,26 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   constructor() {
     super()
     constrainSlots(this)
+  }
+
+  render() {
+    return html`
+      <button
+        class="${classMap({ circle: this.#isIconButton })}"
+        ?type="${this.type}"
+        ?disabled="${this.disabled}"
+        @click="${this.#handleClick}"
+        aria-label="${this.label}"
+      >
+        <slot name="lead" gds-allow="gds-icon"></slot>
+        <slot
+          @slotchange=${this.#mainSlotChange}
+          gds-allow="#text gds-icon"
+        ></slot>
+        <slot name="trail" gds-allow="gds-icon"></slot>
+        <gds-ripple></gds-ripple>
+      </button>
+    `
   }
 
   // Check if the button is an icon button.
@@ -104,24 +131,5 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         this.form.reset()
       }
     }
-  }
-
-  render() {
-    return html`
-      <button
-        class="${classMap({ circle: this.#isIconButton })}"
-        ?type="${this.type}"
-        ?disabled="${this.disabled}"
-        @click="${this.#handleClick}"
-      >
-        <slot name="lead" gds-allow="gds-icon"></slot>
-        <slot
-          @slotchange=${this.#mainSlotChange}
-          gds-allow="#text gds-icon"
-        ></slot>
-        <slot name="trail" gds-allow="gds-icon"></slot>
-        <gds-ripple></gds-ripple>
-      </button>
-    `
   }
 }
