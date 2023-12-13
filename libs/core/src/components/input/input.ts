@@ -109,11 +109,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
       </div>
 
-      <div class="supporting-text" id="supporting-text">
-        ${this.supportingText}
-      </div>
-
-      ${this.#renderExtendedSupportingText()}
+      ${this.#renderSupportingText()} ${this.#renderExtendedSupportingText()}
 
       <div class="field" @click=${this.#handleFieldClick}>
         <slot name="lead" gds-allow="gds-icon"></slot>
@@ -150,7 +146,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       </div>
 
       <div class="foot">
-        <div class="supporting-text">${this.supportingText}</div>
+        ${this.#renderSupportingText()}
         ${when(this.#shouldShowRemainingChars, () =>
           this.#renderRemainingCharsBadge()
         )}
@@ -190,6 +186,14 @@ export class GdsInput extends GdsFormControlElement<string> {
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       />
+    `
+  }
+
+  #renderSupportingText() {
+    return html`
+      <div class="supporting-text" id="supporting-text">
+        ${this.supportingText}
+      </div>
     `
   }
 
