@@ -1,4 +1,4 @@
-import { TemplateResult, unsafeCSS } from 'lit'
+import { LitElement, TemplateResult, unsafeCSS } from 'lit'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
@@ -31,6 +31,10 @@ import styles from './input.styles.css'
  */
 @gdsCustomElement('gds-input')
 export class GdsInput extends GdsFormControlElement<string> {
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  }
   static styles = [tokens, unsafeCSS(styles)]
 
   @property()
@@ -187,6 +191,17 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.value = element.value
   }
 
+  #handleOnChange = (e: Event) => {
+    const element = e.target as HTMLInputElement
+    this.value = element.value
+    this.dispatchEvent(
+      new Event('change', {
+        bubbles: true,
+        composed: true,
+      })
+    )
+  }
+
   @watch('value')
   private _setAutoHeight() {
     if (!this.multiline) return
@@ -204,13 +219,22 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.value = ''
   }
 
-  #handleSupportingTextBtnClick = () =>
-    (this.showExtendedSupportingText = !this.showExtendedSupportingText)
+  #handleSupportingTextBtnClick = () => {
+    this.showExtendedSupportingText = !this.showExtendedSupportingText
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        bubbles: true,
+        composed: true,
+        detail: this.showExtendedSupportingText,
+      })
+    )
+  }
 
   #renderNativeInput() {
     return html`
       <input
         @input=${this.#handleOnInput}
+        @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
         aria-describedby="supporting-text"
@@ -224,6 +248,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <textarea
         @input=${this.#handleOnInput}
+        @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
         aria-describedby="supporting-text"

@@ -39,7 +39,9 @@ for (const variant of ['default', 'simplified'] as const) {
 
     describe('API', () => {
       it('should set the value', async () => {
-        const el = await fixture<GdsInput>(html`<gds-input></gds-input>`)
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}"></gds-input>`
+        )
         el.value = 'My value'
 
         expect(el.value).to.equal('My value')
@@ -50,6 +52,38 @@ for (const variant of ['default', 'simplified'] as const) {
           html`<gds-input variant="${variant}" name="my-name"></gds-input>`
         )
         expect(el.name).to.equal('my-name')
+      })
+
+      it('should fire a change event when the value has changed and focus has shifted away', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}"></gds-input>`
+        )
+
+        const changeSpy = sinon.spy()
+        el.addEventListener('change', changeSpy)
+
+        el.focus()
+        await el.updateComplete
+        await sendKeys({ press: 'a' })
+        await sendKeys({ press: 'Tab' })
+        await el.updateComplete
+
+        expect(changeSpy).to.have.been.calledOnce
+      })
+
+      it('should fire an input event when the value changes', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}"></gds-input>`
+        )
+
+        const inputSpy = sinon.spy()
+        el.addEventListener('input', inputSpy)
+
+        el.focus()
+        await el.updateComplete
+        await sendKeys({ press: 'a' })
+
+        expect(inputSpy).to.have.been.calledOnce
       })
 
       it('should show remaining characters when maxlength is set', async () => {
@@ -87,6 +121,23 @@ for (const variant of ['default', 'simplified'] as const) {
 
         expect(clearButtonEl).to.exist
       })
+
+      it('should fire a gds-ui-state event when the extended supporting text is toggled', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}"></gds-input>`
+        )
+
+        const stateChangeSpy = sinon.spy()
+        el.addEventListener('gds-ui-state', stateChangeSpy)
+
+        const supportingTextBtnEl = el.shadowRoot?.querySelector(
+          'gds-button[label="Show extended supporting text"]'
+        )
+
+        await clickOnElement(supportingTextBtnEl as Element)
+
+        expect(stateChangeSpy).to.have.been.calledOnce
+      })
     })
 
     describe('Interactions', async () => {
@@ -117,6 +168,7 @@ for (const variant of ['default', 'simplified'] as const) {
             label="My label"
             value="Not empty"
             supporting-text="Text"
+            maxlength="50"
             clearable
           >
             <gds-icon name="mail" slot="lead"></gds-icon>
@@ -173,6 +225,16 @@ for (const variant of ['default', 'simplified'] as const) {
         )
 
         await clickOnElement(el.shadowRoot?.querySelector('label') as Element)
+
+        expect(document.activeElement).to.equal(el)
+      })
+
+      it('should focus when calling focus()', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input variant="${variant}"></gds-input>`
+        )
+
+        el.focus()
 
         expect(document.activeElement).to.equal(el)
       })
