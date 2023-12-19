@@ -7,6 +7,7 @@ import { choose } from 'lit/directives/choose.js'
 import { msg } from '@lit/localize'
 
 import { constrainSlots } from '../../utils/helpers'
+import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form-control'
 import {
@@ -83,8 +84,15 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property()
   variant: 'default' | 'simplified' = 'default'
 
-  @query('input')
-  private elInput!: HTMLInputElement
+  /**
+   * Whether the input field should be multiline or not. Multiline fields will render a textarea
+   * internally instead of an input.
+   */
+  @property({ type: Boolean })
+  multiline = false
+
+  @queryAsync('input, textarea')
+  private elInput!: Promise<HTMLInputElement | HTMLTextAreaElement>
 
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
@@ -92,6 +100,11 @@ export class GdsInput extends GdsFormControlElement<string> {
   constructor() {
     super()
     constrainSlots(this)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this._setAutoHeight()
   }
 
   render() {
@@ -113,7 +126,11 @@ export class GdsInput extends GdsFormControlElement<string> {
 
       <div class="field" @click=${this.#handleFieldClick}>
         <slot name="lead" gds-allow="gds-icon"></slot>
-        ${this.#renderNativeInput()}
+        ${when(
+          this.multiline,
+          () => html`${this.#renderNativeTextarea()}`,
+          () => html`${this.#renderNativeInput()}`
+        )}
         <slot name="trail" gds-allow="gds-badge"></slot>
         ${this.#renderClearButton()}
       </div>
@@ -139,7 +156,11 @@ export class GdsInput extends GdsFormControlElement<string> {
         <slot name="lead" gds-allow="gds-icon"></slot>
         <label for="input">
           <div>${this.label}</div>
-          ${this.#renderNativeInput()}
+          ${when(
+            this.multiline,
+            () => html`${this.#renderNativeTextarea()}`,
+            () => html`${this.#renderNativeInput()}`
+          )}
         </label>
         <slot name="trail" gds-allow="gds-badge"></slot>
         ${this.#renderClearButton()}
@@ -162,11 +183,21 @@ export class GdsInput extends GdsFormControlElement<string> {
     ['type', 'placeholder', 'required'].includes(attr.name)
 
   #handleOnInput = (e: Event) => {
-    this.value = (e.target as HTMLInputElement).value
+    const element = e.target as HTMLInputElement
+    this.value = element.value
+  }
+
+  @watch('value')
+  private _setAutoHeight() {
+    if (!this.multiline) return
+    this.elInput.then((element) => {
+      const lines = (element.value.split('\n').length || 1).toString()
+      element?.style.setProperty('--_lines', lines.toString())
+    })
   }
 
   #handleFieldClick = () => {
-    this.elInput.focus()
+    this.elInput.then((el) => el.focus())
   }
 
   #handleClearBtnClick = () => {
@@ -186,6 +217,19 @@ export class GdsInput extends GdsFormControlElement<string> {
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       />
+    `
+  }
+
+  #renderNativeTextarea() {
+    return html`
+      <textarea
+        @input=${this.#handleOnInput}
+        .value=${this.value}
+        id="input"
+        aria-describedby="supporting-text"
+        placeholder=" "
+        ${forwardAttributes(this.#forwardableAttrs)}
+      ></textarea>
     `
   }
 

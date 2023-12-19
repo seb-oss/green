@@ -23,7 +23,6 @@
     --_padding-block: .625rem;
     --_padding-inline: 1rem;
     --_core-icon-size: 1.5rem;
-    --_textarea-min-block-size: 2rem;
   }
 }
 
@@ -61,7 +60,8 @@
 
   :host {
     display: block;
-    position: relative;
+    contain: layout;
+    isolation: isolate;
   }
 
   .head {
@@ -129,7 +129,7 @@
     display: none;
   }
 
-  input {
+  input, textarea {
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -143,10 +143,7 @@
     font-size: var(--_fs);
     line-height: var(--_lh);
     transition: var(--_transition);
-
-    &::placeholder {
-      font-family: inherit;
-    }
+    font-family: inherit;
 
     &:focus:not(:focus-visible) {
       outline: none;
@@ -165,10 +162,18 @@
     }
   }
 
+  textarea {
+    resize: none;
+    overflow: hidden;
+    transition: unset;
+    min-height: calc(1lh * var(--_lines));
+    max-height: calc(1lh * var(--_lines));
+  }
+
   .field {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: var(--_gap);
 
@@ -207,13 +212,19 @@
       --_border-width: var(--_border-width-hover);
     }
 
-    &:has(input:focus) {
+    &:has(input:focus, textarea:focus) {
       --_border-width: var(--_border-width-hover);
       outline-color: var(--_color-outline);
       border-radius: var(--_border-radius);
       border: var(--_border-width) solid var(--_color-border);
       box-shadow: none;
       transition: var(--_transition);
+    }
+
+    & slot {
+      display: flex;
+      height: 2rem;
+      align-items: center;
     }
   }
 
@@ -249,7 +260,9 @@
     }
   }
 
-  :host([variant="simplified"]) label:has(input:not(:placeholder-shown, [readonly])),
+  :host([variant="simplified"]) label:has(
+    input:not(:placeholder-shown, [readonly]),
+    textarea:not(:placeholder-shown, [readonly])),
   :host([variant="simplified"]) label:focus-within {
     div {
       font-size: 0.75rem;
@@ -259,7 +272,7 @@
         translateY(calc(0px - var(--gds-input-label-translate)))
       );
     }
-    input {
+    input, textarea {
       margin-top: 0.75rem;
     }
   }
