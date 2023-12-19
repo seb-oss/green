@@ -12,6 +12,9 @@
       's58bfb494feb8eb02': str`${0} valda`,
 's5d929ff1619ac0c9': `Sök`,
 's5e8250fb85d64c23': `Stäng`,
+'s7fd3469f78111589': `Öppna meny`,
 'sd898d99fd9c13de6': `Sök i listan av val`,
+'sdc27791837e94961': `Visa utökad beskrivning`,
+'sdc42f1da42d6411a': `Rensa text`,
     };
   
