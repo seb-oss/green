@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.1.1...@sebgroup/extract@2.1.2) (2023-12-11)
+
+
+### Bug Fixes
+
+* **react/stepper:** refactor internal state handling ([#1147](https://github.com/sebgroup/green/issues/1147)) ([0cbbe10](https://github.com/sebgroup/green/commit/0cbbe100707ee742d23b81bc1b4410f2bcc62a6c)), closes [#1062](https://github.com/sebgroup/green/issues/1062)
+
+
+
 ## [2.1.1](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.1.0...@sebgroup/extract@2.1.1) (2023-12-01)
 
 
