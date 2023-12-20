@@ -42,16 +42,16 @@ export class SimpleValues extends HTMLElement {
 
           <gds-input
             name="my-text"
-            type="email"
             label="Label goes here"
             supporting-text="Supporting text goes here"
             maxlength="140"
             variant="simplified"
             clearable
             required
+            multiline
           >
-            <gds-icon name="mail" slot="icon"></gds-icon>
-            <gds-badge slot="badge" variant="surface">kr</gds-badge>
+            <gds-icon name="mail" slot="lead"></gds-icon>
+            <gds-badge slot="trail" variant="surface">kr</gds-badge>
             <span slot="extended-supporting-text">
               Extended supporting text goes here.
               <a href="#">Can contain links</a>
