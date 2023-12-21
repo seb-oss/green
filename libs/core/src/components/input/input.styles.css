@@ -23,6 +23,7 @@
     --_padding-block: .625rem;
     --_padding-inline: 1rem;
     --_core-icon-size: 1.5rem;
+    --_inner-height: 2rem;
   }
 }
 
@@ -138,7 +139,7 @@
     margin: unset;
     outline: none;
     padding: unset;
-    height: max-content;
+    min-height: var(--_inner-height);
     box-sizing: border-box;
     font-size: var(--_fs);
     line-height: var(--_lh);
@@ -166,8 +167,8 @@
     resize: none;
     overflow: hidden;
     transition: unset;
-    min-height: calc(1lh * var(--_lines));
-    max-height: calc(1lh * var(--_lines));
+    min-height: max(var(--_inner-height), calc(1lh * var(--_lines)));
+    max-height: max(var(--_inner-height), calc(1lh * var(--_lines)));
   }
 
   .field {
@@ -223,7 +224,7 @@
 
     & slot {
       display: flex;
-      height: 2rem;
+      height: var(--_inner-height);
       align-items: center;
     }
   }
