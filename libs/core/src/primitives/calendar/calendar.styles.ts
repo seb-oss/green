@@ -5,6 +5,9 @@ const style = css`
     color: #999;
     cursor: default;
   }
+  td.today {
+    background-color: #eee;
+  }
 `
 
 export default style

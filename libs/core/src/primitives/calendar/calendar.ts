@@ -1,21 +1,52 @@
 import { LitElement, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
+import { query, state } from 'lit/decorators.js'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { renderMonthGridView } from './functions'
 
 import style from './calendar.styles'
-import { isSameMonth } from 'date-fns'
+import { addDays, isSameDay, isSameMonth } from 'date-fns'
 
 @gdsCustomElement('gds-calendar')
 export class GdsCalendar extends LitElement {
   static styles = [style]
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
+
+  @state()
+  currentFocus = new Date()
+
+  @query('td[tabindex="0"]')
+  private _elFocusedCell?: HTMLElement
+
+  connectedCallback(): void {
+    super.connectedCallback()
+
+    this.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        this.currentFocus = addDays(this.currentFocus, -1)
+      } else if (e.key === 'ArrowRight') {
+        this.currentFocus = addDays(this.currentFocus, 1)
+      } else if (e.key === 'ArrowUp') {
+        this.currentFocus = addDays(this.currentFocus, -7)
+      } else if (e.key === 'ArrowDown') {
+        this.currentFocus = addDays(this.currentFocus, 7)
+      }
+
+      this.updateComplete.then(() => {
+        this._elFocusedCell?.focus()
+      })
+    })
+  }
 
   render() {
-    const currentMonth = new Date()
+    const currentDate = new Date()
 
     return html`<table>
-      ${renderMonthGridView(currentMonth, {
+      ${renderMonthGridView(this.currentFocus, {
         header: () =>
           html`<tr>
             <th>Mon</th>
@@ -32,7 +63,11 @@ export class GdsCalendar extends LitElement {
           </tr>`,
         dayCell: (day) =>
           html`<td
-            class="${classMap({ disabled: !isSameMonth(currentMonth, day) })}"
+            class="${classMap({
+              disabled: !isSameMonth(this.currentFocus, day),
+              today: isSameDay(currentDate, day),
+            })}"
+            tabindex="${isSameDay(this.currentFocus, day) ? 0 : -1}"
           >
             ${day.getDate()}
           </td>`,
