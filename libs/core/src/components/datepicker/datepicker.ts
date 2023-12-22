@@ -1,7 +1,14 @@
 import { GdsFormControlElement } from '../../components/form-control'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
+
+import '../../primitives/calendar/calendar'
 
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement {
-  render() {}
+  render() {
+    return html`<gds-calendar></gds-calendar>`
+  }
 }
