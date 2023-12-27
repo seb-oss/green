@@ -1,9 +1,12 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Datepicker" />
 
 # Datepicker
 
 <Canvas>
+<div style={{ height: '300px', dummy: registerTransitionalStyles() }}>
 <gds-datepicker></gds-datepicker>
+</div>
 </Canvas>

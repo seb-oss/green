@@ -2,6 +2,7 @@ import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
 import * as Popover from '../../primitives/popover/popover.trans.styles'
 import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
+import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 
@@ -10,6 +11,7 @@ export const registerTransitionalStyles = () => {
   Listbox.register()
   Popover.register()
   ContextMenu.register()
+  Calendar.register()
 }
 
 declare global {

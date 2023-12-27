@@ -1,12 +1,13 @@
 import { LitElement, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { query, state } from 'lit/decorators.js'
+import { addDays, isSameDay, isSameMonth } from 'date-fns'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { renderMonthGridView } from './functions'
 
 import style from './calendar.styles'
-import { addDays, isSameDay, isSameMonth } from 'date-fns'
 
 @gdsCustomElement('gds-calendar')
 export class GdsCalendar extends LitElement {
@@ -24,6 +25,7 @@ export class GdsCalendar extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-calendar')
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -46,32 +48,43 @@ export class GdsCalendar extends LitElement {
     const currentDate = new Date()
 
     return html`<table>
-      ${renderMonthGridView(this.currentFocus, {
-        header: () =>
-          html`<tr>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-          </tr>`,
-        weekRow: (days) =>
-          html`<tr>
-            ${days}
-          </tr>`,
-        dayCell: (day) =>
-          html`<td
-            class="${classMap({
-              disabled: !isSameMonth(this.currentFocus, day),
-              today: isSameDay(currentDate, day),
-            })}"
-            tabindex="${isSameDay(this.currentFocus, day) ? 0 : -1}"
-          >
-            ${day.getDate()}
-          </td>`,
-      })}
+      <thead>
+        <tr>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${renderMonthGridView(
+          this.currentFocus,
+          (weeks) => html`
+            ${weeks.map(
+              (week) => html`
+                <tr>
+                  ${week.days.map(
+                    (day) => html`
+                      <td
+                        class="${classMap({
+                          disabled: !isSameMonth(this.currentFocus, day),
+                          today: isSameDay(currentDate, day),
+                        })}"
+                        tabindex="${isSameDay(this.currentFocus, day) ? 0 : -1}"
+                      >
+                        ${day.getDate()}
+                      </td>
+                    `
+                  )}
+                </tr>
+              `
+            )}
+          `
+        )}
+      </tbody>
     </table>`
   }
 }

@@ -1,0 +1,5 @@
+@use './mixins';
+
+:host {
+  @include mixins.calendar();
+}
