@@ -1,0 +1,17 @@
+@use '../../../../chlorophyll/scss/common';
+
+.header {
+  @include common.padding-top(3);
+  @include common.padding-horizontal(3);
+  display: flex;
+  justify-content: space-between;
+
+  > * {
+    @include common.margin-horizontal(2);
+    min-width: auto;
+
+    &.link {
+      flex: 1 1;
+    }
+  }
+}

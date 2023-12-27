@@ -3,6 +3,7 @@ import * as Popover from '../../primitives/popover/popover.trans.styles'
 import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
 import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
+import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 
@@ -12,6 +13,7 @@ export const registerTransitionalStyles = () => {
   Popover.register()
   ContextMenu.register()
   Calendar.register()
+  Datepicker.register()
 }
 
 declare global {
@@ -22,6 +24,7 @@ export class TransitionalStyles {
   static get instance() {
     if (!globalThis.__gdsTransitionalStyles?.[VER_SUFFIX])
       globalThis.__gdsTransitionalStyles = {
+        ...globalThis.__gdsTransitionalStyles,
         [VER_SUFFIX]: new TransitionalStyles(),
       }
 

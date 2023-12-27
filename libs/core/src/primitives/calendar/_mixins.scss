@@ -67,20 +67,6 @@ $weekend-background: $background;
   //   max-height: stretch;
   // }
 
-  // .header {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   @include common.padding-top(3);
-  //   @include common.padding-horizontal(3);
-  //   > * {
-  //     @include common.margin-horizontal(2);
-  //     min-width: auto;
-  //     &.link {
-  //       flex: 1 1;
-  //     }
-  //   }
-  // }
-
   //.main {
   display: flex;
   justify-content: center;
@@ -138,7 +124,7 @@ $weekend-background: $background;
         }
 
         // today
-        &.sg-date-today {
+        &.today {
           background: $today-background;
           border-radius: $today-border-radius;
           box-shadow: $today-box-shadow;
