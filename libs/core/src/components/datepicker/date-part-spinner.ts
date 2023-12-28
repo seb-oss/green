@@ -14,7 +14,7 @@ import { Focusable } from '../../mixins/focusable'
  * A spinner for a date part. Only inteded to be used by the datepicker component.
  */
 @gdsCustomElement('gds-date-part-spinner')
-export class GdsDatePartSpinner extends Focusable(LitElement) {
+export class GdsDatePartSpinner extends LitElement {
   @property({ type: Number })
   value = 0
 
@@ -34,10 +34,11 @@ export class GdsDatePartSpinner extends Focusable(LitElement) {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'spinbutton')
+    this.setAttribute('tabindex', '0')
 
     this.addEventListener('wheel', this.#handleWheel)
     this.addEventListener('keydown', this.#handleKeyDown)
-    this.addEventListener('blur', this.#clearInputBuffer)
+    this.addEventListener('blur', this.#handleBlur)
     this.addEventListener('focus', this.#handleFocus)
     this.addEventListener('click', this.#handleClick)
     this.addEventListener('mousedown', this.#handleClick)
@@ -86,6 +87,11 @@ export class GdsDatePartSpinner extends Focusable(LitElement) {
     document.getSelection()?.addRange(range)
   }
 
+  #handleBlur = () => {
+    this.#clearInputBuffer()
+    document.getSelection()?.removeAllRanges()
+  }
+
   #handleWheel = (e: WheelEvent) => {
     e.stopPropagation()
     e.preventDefault()
@@ -98,13 +104,13 @@ export class GdsDatePartSpinner extends Focusable(LitElement) {
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-
+    let handled = false
     if (e.key === 'ArrowUp') {
       this.#increment()
+      handled = true
     } else if (e.key === 'ArrowDown') {
       this.#decrement()
+      handled = true
     } else {
       const key = parseInt(e.key)
       if (!isNaN(key)) {
@@ -115,7 +121,13 @@ export class GdsDatePartSpinner extends Focusable(LitElement) {
             detail: { value: this.value },
           })
         )
+        handled = true
       }
+    }
+
+    if (handled) {
+      e.preventDefault()
+      e.stopPropagation()
     }
   }
 

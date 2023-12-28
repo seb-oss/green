@@ -1,4 +1,4 @@
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { join } from 'lit/directives/join.js'
 import { map } from 'lit/directives/map.js'
 
@@ -18,6 +18,7 @@ import type { GdsCalendar } from '../../primitives/calendar/calendar'
 import { GdsDropdown } from '../dropdown/dropdown'
 
 import './date-part-spinner'
+import type { GdsDatePartSpinner } from './date-part-spinner'
 
 type StructuredDateFormat = {
   delimiter: string
@@ -69,6 +70,9 @@ export class GdsDatepicker extends GdsFormControlElement {
   @queryAsync('#trigger')
   private _elTrigger!: Promise<HTMLButtonElement>
 
+  @queryAll('gds-date-part-spinner')
+  private _elSpinners!: NodeListOf<GdsDatePartSpinner>
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
@@ -87,6 +91,7 @@ export class GdsDatepicker extends GdsFormControlElement {
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate()[f.name]}
+                  @keydown=${this.#handleSpinnerKeydown}
                 ></gds-date-part-spinner>`
             ),
             html`<span>${this.#structuredDateFormat.delimiter}</span>`
@@ -149,6 +154,20 @@ export class GdsDatepicker extends GdsFormControlElement {
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (e.target !== e.currentTarget) return
     this.open = e.detail.open
+  }
+
+  #handleSpinnerKeydown = (e: KeyboardEvent) => {
+    const index = Array.from(this._elSpinners).findIndex(
+      (spinner) => spinner === e.target
+    )
+    if (e.key === 'ArrowRight') {
+      const next = this._elSpinners[index + 1]
+      if (next) next.focus()
+    }
+    if (e.key === 'ArrowLeft') {
+      const prev = this._elSpinners[index - 1]
+      if (prev) prev.focus()
+    }
   }
 
   #parseDateFormat(dateformat: string): StructuredDateFormat {
