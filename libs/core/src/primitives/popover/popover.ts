@@ -281,6 +281,7 @@ export class GdsPopover extends LitElement {
         e.clientX <= rect.left + rect.width
 
       if (!isInDialog) {
+        e.stopPropagation()
         this.open = false
       }
     }

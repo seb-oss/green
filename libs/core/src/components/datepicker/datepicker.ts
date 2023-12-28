@@ -8,8 +8,11 @@ import {
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import '../../primitives/popover/popover'
+import type { GdsPopover } from '../../primitives/popover/popover'
+
 import '../../primitives/calendar/calendar'
 import type { GdsCalendar } from '../../primitives/calendar/calendar'
+
 import { GdsDropdown } from '../dropdown/dropdown'
 
 @gdsCustomElement('gds-datepicker')
@@ -44,7 +47,7 @@ export class GdsDatepicker extends GdsFormControlElement {
       <gds-popover
         .triggerRef=${this._elTrigger}
         .open=${this.open}
-        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+        @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <div class="header">
           <gds-dropdown
@@ -91,5 +94,10 @@ export class GdsDatepicker extends GdsFormControlElement {
   #handleFocusChange = (e: CustomEvent) => {
     this.focusedMonth = this._elCalendar.focusedMonth
     this.focusedYear = this._elCalendar.focusedYear
+  }
+
+  #handlePopoverStateChange = (e: CustomEvent) => {
+    if (e.target !== e.currentTarget) return
+    this.open = e.detail.open
   }
 }
