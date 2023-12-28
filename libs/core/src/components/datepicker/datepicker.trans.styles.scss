@@ -1,5 +1,25 @@
 @use '../../../../chlorophyll/scss/common';
 
+.field {
+  border: solid 1px #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  span {
+    cursor: default;
+  }
+
+  gds-date-part-spinner {
+    cursor: default;
+    display: inline-block;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
 .header {
   @include common.padding-top(3);
   @include common.padding-horizontal(3);

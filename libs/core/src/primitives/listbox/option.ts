@@ -109,7 +109,7 @@ export class GdsOption extends Focusable(LitElement) {
   }
 
   @watch('isplaceholder')
-  handlePlaceholderStatusChange() {
+  private _handlePlaceholderStatusChange() {
     if (this.isPlaceholder) {
       this.#hidden = true
       this.setAttribute('aria-hidden', 'true')
