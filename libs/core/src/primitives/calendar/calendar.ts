@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { property, query, state } from 'lit/decorators.js'
+import { msg } from '@lit/localize'
 import { addDays, isSameDay, isSameMonth } from 'date-fns'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
@@ -100,13 +101,13 @@ export class GdsCalendar extends LitElement {
     return html`<table>
       <thead>
         <tr>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-          <th>Sun</th>
+          <th>${msg('Mon')}</th>
+          <th>${msg('Tue')}</th>
+          <th>${msg('Wed')}</th>
+          <th>${msg('Thu')}</th>
+          <th>${msg('Fri')}</th>
+          <th>${msg('Sat')}</th>
+          <th>${msg('Sun')}</th>
         </tr>
       </thead>
       <tbody>

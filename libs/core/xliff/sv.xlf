@@ -18,6 +18,102 @@
   <source>Close</source>
   <target>Stäng</target>
 </trans-unit>
+<trans-unit id="s7fd3469f78111589">
+  <source>Open context menu</source>
+  <target>Öppna meny</target>
+</trans-unit>
+<trans-unit id="s1e118319b5202c41">
+  <source>Mon</source>
+  <target>Mån</target>
+</trans-unit>
+<trans-unit id="s6d24cd19e23b8185">
+  <source>Tue</source>
+  <target>Tis</target>
+</trans-unit>
+<trans-unit id="s74aa0319e62b2eb7">
+  <source>Wed</source>
+  <target>Ons</target>
+</trans-unit>
+<trans-unit id="s6cfed919e21ac6ac">
+  <source>Thu</source>
+  <target>Tor</target>
+</trans-unit>
+<trans-unit id="sf295af199c723ec8">
+  <source>Fri</source>
+  <target>Fre</target>
+</trans-unit>
+<trans-unit id="s9836b719fa8ef857">
+  <source>Sat</source>
+  <target>Lör</target>
+</trans-unit>
+<trans-unit id="s987ac119fac8d621">
+  <source>Sun</source>
+  <target>Sön</target>
+</trans-unit>
+<trans-unit id="s17e3edbe032f79ec">
+  <source>Open calendar modal</source>
+  <target>Öppna kalender</target>
+</trans-unit>
+<trans-unit id="s1a2dda8f763a68bd">
+  <source>January</source>
+  <target>Januari</target>
+</trans-unit>
+<trans-unit id="sbc083a1dbee9af73">
+  <source>February</source>
+  <target>Februari</target>
+</trans-unit>
+<trans-unit id="s5052d10b539eabf0">
+  <source>March</source>
+  <target>Mars</target>
+</trans-unit>
+<trans-unit id="scb6b9cb49cf93277">
+  <source>April</source>
+  <target>April</target>
+</trans-unit>
+<trans-unit id="s1e187019b5262aa6">
+  <source>May</source>
+  <target>Maj</target>
+</trans-unit>
+<trans-unit id="s15a852e9f9a50fa5">
+  <source>June</source>
+  <target>Juni</target>
+</trans-unit>
+<trans-unit id="s15a16ae9f99f19bf">
+  <source>July</source>
+  <target>Juli</target>
+</trans-unit>
+<trans-unit id="s407a88a592a0987c">
+  <source>August</source>
+  <target>Augusti</target>
+</trans-unit>
+<trans-unit id="s39938ecdae568740">
+  <source>September</source>
+  <target>September</target>
+</trans-unit>
+<trans-unit id="sa7cd5c2ff6d266e7">
+  <source>October</source>
+  <target>Oktober</target>
+</trans-unit>
+<trans-unit id="s281846ef0421c71f">
+  <source>November</source>
+  <target>November</target>
+</trans-unit>
+<trans-unit id="s7793b811d20184fe">
+  <source>December</source>
+  <target>December</target>
+</trans-unit>
+<trans-unit id="sa6f2645578b2d2bc">
+  <source>Year</source>
+  <target>År</target>
+</trans-unit>
+<trans-unit id="sb47daaf9e1c4a905">
+  <source>Month</source>
+  <target>Månad</target>
+</trans-unit>
+<trans-unit id="se0955919920ee87d">
+  <source>Day</source>
+  <target>Dag</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

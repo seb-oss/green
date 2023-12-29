@@ -1,6 +1,7 @@
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { join } from 'lit/directives/join.js'
 import { map } from 'lit/directives/map.js'
+import { msg } from '@lit/localize'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import {
@@ -21,9 +22,11 @@ import { GdsDropdown } from '../dropdown/dropdown'
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
+type DatePart = 'year' | 'month' | 'day'
+
 type StructuredDateFormat = {
   delimiter: string
-  orderedFormat: { token: 'y' | 'm' | 'd'; name: 'year' | 'month' | 'day' }[]
+  orderedFormat: { token: 'y' | 'm' | 'd'; name: DatePart }[]
 }
 
 /**
@@ -99,7 +102,7 @@ export class GdsDatepicker extends GdsFormControlElement {
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate()[f.name]}
-                  aria-label=${f.name}
+                  aria-label=${this.#getSpinnerLabel(f.name)}
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
@@ -109,7 +112,7 @@ export class GdsDatepicker extends GdsFormControlElement {
           )}
         </div>
         <button
-          aria-label="Open calendar modal"
+          aria-label="${msg('Open calendar modal')}"
           @click=${() => (this.open = !this.open)}
         >
           <svg
@@ -135,18 +138,18 @@ export class GdsDatepicker extends GdsFormControlElement {
               (this.focusedMonth = (e.target as GdsDropdown)?.value)}
             label="Month"
           >
-            <gds-option value="0">January</gds-option>
-            <gds-option value="1">February</gds-option>
-            <gds-option value="2">March</gds-option>
-            <gds-option value="3">April</gds-option>
-            <gds-option value="4">May</gds-option>
-            <gds-option value="5">June</gds-option>
-            <gds-option value="6">July</gds-option>
-            <gds-option value="7">August</gds-option>
-            <gds-option value="8">September</gds-option>
-            <gds-option value="9">October</gds-option>
-            <gds-option value="10">November</gds-option>
-            <gds-option value="11">December</gds-option>
+            <gds-option value="0">${msg('January')}</gds-option>
+            <gds-option value="1">${msg('February')}</gds-option>
+            <gds-option value="2">${msg('March')}</gds-option>
+            <gds-option value="3">${msg('April')}</gds-option>
+            <gds-option value="4">${msg('May')}</gds-option>
+            <gds-option value="5">${msg('June')}</gds-option>
+            <gds-option value="6">${msg('July')}</gds-option>
+            <gds-option value="7">${msg('August')}</gds-option>
+            <gds-option value="8">${msg('September')}</gds-option>
+            <gds-option value="9">${msg('October')}</gds-option>
+            <gds-option value="10">${msg('November')}</gds-option>
+            <gds-option value="11">${msg('December')}</gds-option>
           </gds-dropdown>
           <gds-dropdown
             .value=${this.focusedYear.toString()}
@@ -180,7 +183,16 @@ export class GdsDatepicker extends GdsFormControlElement {
     this.focusedYear = this.value.getFullYear()
   }
 
-  #handleSpinnerChange = (val: string, name: 'year' | 'month' | 'day') => {
+  #getSpinnerLabel(name: DatePart) {
+    const labels = {
+      year: msg('Year'),
+      month: msg('Month'),
+      day: msg('Day'),
+    }
+    return labels[name]
+  }
+
+  #handleSpinnerChange = (val: string, name: DatePart) => {
     const structuredDate = this.#structuredDate()
     structuredDate[name] = val
     this.value = new Date(
