@@ -1,11 +1,8 @@
 @use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/scss/components/icon';
 
 .field {
-  @include common.padding-horizontal(5);
-  @include common.padding-vertical(4);
   @include common.add-border-radius();
-  @include common.add-border();
-  @include common.add-border-color();
   @include common.add-focus('within');
   align-items: center;
   background-color: var(--sg-form-control-bg);
@@ -15,6 +12,15 @@
   justify-content: center;
   justify-content: space-between;
   min-height: 2.75rem;
+  overflow: hidden;
+
+  .input {
+    @include common.padding-horizontal(5);
+    @include common.padding-vertical(4);
+    @include common.add-border(('top', 'bottom', 'left'));
+    @include common.add-border-color();
+    border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
+  }
 
   span {
     cursor: default;
@@ -26,6 +32,20 @@
 
     &:focus-visible {
       outline: none;
+    }
+  }
+
+  button {
+    appearance: none;
+    background: var(--intent-info-background);
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    width: 3rem;
+
+    svg path {
+      fill: #fff;
     }
   }
 }

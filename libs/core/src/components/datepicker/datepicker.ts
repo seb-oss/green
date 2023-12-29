@@ -35,9 +35,15 @@ type StructuredDateFormat = {
 export class GdsDatepicker extends GdsFormControlElement {
   #years = [2020, 2021, 2022, 2023, 2024, 2025]
 
-  @property()
+  /**
+   * The currently selected date.
+   */
+  @property({ type: Date })
   value = new Date()
 
+  /**
+   * Controls wheter the datepicker popover is open.
+   */
   @property({ type: Boolean })
   open = false
 
@@ -85,7 +91,7 @@ export class GdsDatepicker extends GdsFormControlElement {
   render() {
     return html`
       <div class="field" id="trigger">
-        <div>
+        <div class="input">
           ${join(
             map(
               this._structuredDateFormat.orderedFormat,
@@ -93,20 +99,29 @@ export class GdsDatepicker extends GdsFormControlElement {
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate()[f.name]}
+                  aria-label=${f.name}
                   @keydown=${this.#handleSpinnerKeydown}
-                  @change=${(e: CustomEvent) => {
-                    const structuredDate = this.#structuredDate()
-                    structuredDate[f.name] = e.detail.value
-                    this.value = new Date(
-                      `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
-                    )
-                  }}
+                  @change=${(e: CustomEvent) =>
+                    this.#handleSpinnerChange(e.detail.value, f.name)}
                 ></gds-date-part-spinner>`
             ),
             html`<span>${this._structuredDateFormat.delimiter}</span>`
           )}
         </div>
-        <button @click=${() => (this.open = !this.open)}>Open</button>
+        <button
+          aria-label="Open calendar modal"
+          @click=${() => (this.open = !this.open)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            style="width:100%;height:100%"
+          >
+            <path
+              d="M152 64h144V24c0-13.25 10.7-24 24-24s24 10.75 24 24v40h40c35.3 0 64 28.65 64 64v320c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V128c0-35.35 28.65-64 64-64h40V24c0-13.25 10.7-24 24-24s24 10.75 24 24v40zM48 248h80v-56H48v56zm0 48v64h80v-64H48zm128 0v64h96v-64h-96zm144 0v64h80v-64h-80zm80-104h-80v56h80v-56zm0 216h-80v56h64c8.8 0 16-7.2 16-16v-40zm-128 0h-96v56h96v-56zm-144 0H48v40c0 8.8 7.16 16 16 16h64v-56zm144-216h-96v56h96v-56z "
+            />
+          </svg>
+        </button>
       </div>
       <gds-popover
         .triggerRef=${this._elTrigger}
@@ -146,7 +161,10 @@ export class GdsDatepicker extends GdsFormControlElement {
         </div>
 
         <gds-calendar
-          @change=${(e: CustomEvent<Date>) => (this.value = e.detail)}
+          @change=${(e: CustomEvent<Date>) => {
+            this.value = e.detail
+            this.#fireChangeEvent()
+          }}
           @gds-date-focused=${this.#handleFocusChange}
           .focusedMonth=${this.focusedMonth}
           .focusedYear=${this.focusedYear}
@@ -162,7 +180,24 @@ export class GdsDatepicker extends GdsFormControlElement {
     this.focusedYear = this.value.getFullYear()
   }
 
-  #handleFocusChange = (e: CustomEvent) => {
+  #handleSpinnerChange = (val: string, name: 'year' | 'month' | 'day') => {
+    const structuredDate = this.#structuredDate()
+    structuredDate[name] = val
+    this.value = new Date(
+      `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
+    )
+    this.#fireChangeEvent()
+  }
+
+  #fireChangeEvent() {
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+      })
+    )
+  }
+
+  #handleFocusChange = (_e: CustomEvent) => {
     this.focusedMonth = this._elCalendar.focusedMonth
     this.focusedYear = this._elCalendar.focusedYear
   }
