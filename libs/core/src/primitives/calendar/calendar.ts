@@ -34,6 +34,18 @@ export class GdsCalendar extends LitElement {
   value: Date = new Date()
 
   /**
+   * The minimum date that can be selected.
+   */
+  @property({ type: Date })
+  min = new Date(new Date().getFullYear() - 10, 0, 1)
+
+  /**
+   * The maximum date that can be selected.
+   */
+  @property({ type: Date })
+  max = new Date(new Date().getFullYear() + 10, 0, 1)
+
+  /**
    * The date that is currently focused.
    */
   @property()
@@ -121,7 +133,10 @@ export class GdsCalendar extends LitElement {
                     (day) => html`
                       <td
                         class="${classMap({
-                          disabled: !isSameMonth(this.focusedDate, day),
+                          disabled:
+                            !isSameMonth(this.focusedDate, day) ||
+                            day < this.min ||
+                            day > this.max,
                           today: isSameDay(currentDate, day),
                         })}"
                         tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"

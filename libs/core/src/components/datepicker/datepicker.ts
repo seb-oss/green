@@ -2,6 +2,7 @@ import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { join } from 'lit/directives/join.js'
 import { map } from 'lit/directives/map.js'
 import { msg } from '@lit/localize'
+import { eachYearOfInterval } from 'date-fns'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import {
@@ -36,8 +37,6 @@ type StructuredDateFormat = {
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement {
-  #years = [2020, 2021, 2022, 2023, 2024, 2025]
-
   /**
    * The currently selected date.
    */
@@ -81,10 +80,10 @@ export class GdsDatepicker extends GdsFormControlElement {
   }
 
   @state()
-  focusedMonth = new Date().getMonth()
+  private _focusedMonth = new Date().getMonth()
 
   @state()
-  focusedYear = new Date().getFullYear()
+  private _focusedYear = new Date().getFullYear()
 
   @query('gds-calendar')
   private _elCalendar!: GdsCalendar
@@ -113,7 +112,7 @@ export class GdsDatepicker extends GdsFormControlElement {
               (f) =>
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
-                  .value=${this.#structuredDate()[f.name]}
+                  .value=${this.#structuredDate[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
@@ -147,9 +146,9 @@ export class GdsDatepicker extends GdsFormControlElement {
       >
         <div class="header">
           <gds-dropdown
-            .value=${this.focusedMonth.toString()}
+            .value=${this._focusedMonth.toString()}
             @change=${(e: CustomEvent) =>
-              (this.focusedMonth = (e.target as GdsDropdown)?.value)}
+              (this._focusedMonth = (e.target as GdsDropdown)?.value)}
             label="Month"
           >
             <gds-option value="0">${msg('January')}</gds-option>
@@ -166,9 +165,9 @@ export class GdsDatepicker extends GdsFormControlElement {
             <gds-option value="11">${msg('December')}</gds-option>
           </gds-dropdown>
           <gds-dropdown
-            .value=${this.focusedYear.toString()}
+            .value=${this._focusedYear.toString()}
             @change=${(e: CustomEvent) =>
-              (this.focusedYear = (e.target as GdsDropdown)?.value)}
+              (this._focusedYear = (e.target as GdsDropdown)?.value)}
             label="Year"
           >
             ${this.#years.map(
@@ -183,9 +182,11 @@ export class GdsDatepicker extends GdsFormControlElement {
             this.#fireChangeEvent()
           }}
           @gds-date-focused=${this.#handleFocusChange}
-          .focusedMonth=${this.focusedMonth}
-          .focusedYear=${this.focusedYear}
+          .focusedMonth=${this._focusedMonth}
+          .focusedYear=${this._focusedYear}
           .value=${this.value}
+          .min=${this.min}
+          .max=${this.max}
         ></gds-calendar>
       </gds-popover>
     `
@@ -193,8 +194,8 @@ export class GdsDatepicker extends GdsFormControlElement {
 
   @watch('value')
   private _handleValueChange() {
-    this.focusedMonth = this.value.getMonth()
-    this.focusedYear = this.value.getFullYear()
+    this._focusedMonth = this.value.getMonth()
+    this._focusedYear = this.value.getFullYear()
   }
 
   #getSpinnerLabel(name: DatePart) {
@@ -225,7 +226,7 @@ export class GdsDatepicker extends GdsFormControlElement {
   }
 
   #handleSpinnerChange = (val: string, name: DatePart) => {
-    const structuredDate = this.#structuredDate()
+    const structuredDate = this.#structuredDate
     structuredDate[name] = val
     this.value = new Date(
       `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
@@ -242,8 +243,8 @@ export class GdsDatepicker extends GdsFormControlElement {
   }
 
   #handleFocusChange = (_e: CustomEvent) => {
-    this.focusedMonth = this._elCalendar.focusedMonth
-    this.focusedYear = this._elCalendar.focusedYear
+    this._focusedMonth = this._elCalendar.focusedMonth
+    this._focusedYear = this._elCalendar.focusedYear
   }
 
   #handlePopoverStateChange = (e: CustomEvent) => {
@@ -286,7 +287,7 @@ export class GdsDatepicker extends GdsFormControlElement {
     return { delimiter, orderedFormat }
   }
 
-  #structuredDate() {
+  get #structuredDate() {
     const date = this.value
     const year = date.getFullYear().toString()
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -297,5 +298,12 @@ export class GdsDatepicker extends GdsFormControlElement {
       month: month,
       day: day,
     }
+  }
+
+  get #years() {
+    return eachYearOfInterval({
+      start: this.min,
+      end: this.max,
+    }).map((date) => date.getFullYear())
   }
 }

@@ -142,7 +142,6 @@ export class GdsDatePartSpinner extends LitElement {
   }
 
   #clamp(value: number) {
-    console.log('clamping', value)
     return Math.max(this.min, Math.min(this.max, value))
   }
 
