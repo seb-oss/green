@@ -8,6 +8,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { watch } from '../../utils/decorators'
 
 import '../../primitives/popover/popover'
 import type { GdsPopover } from '../../primitives/popover/popover'
@@ -50,12 +51,12 @@ export class GdsDatepicker extends GdsFormControlElement {
    */
   @property()
   get dateformat() {
-    return this.#structuredDateFormat.orderedFormat
+    return this._structuredDateFormat.orderedFormat
       .map((f) => f.token)
-      .join(this.#structuredDateFormat.delimiter)
+      .join(this._structuredDateFormat.delimiter)
   }
   set dateformat(dateformat: string) {
-    this.#structuredDateFormat = this.#parseDateFormat(dateformat)
+    this._structuredDateFormat = this.#parseDateFormat(dateformat)
   }
 
   @state()
@@ -78,7 +79,8 @@ export class GdsDatepicker extends GdsFormControlElement {
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
-  #structuredDateFormat = this.#parseDateFormat('y-m-d')
+  @state()
+  private _structuredDateFormat = this.#parseDateFormat('y-m-d')
 
   render() {
     return html`
@@ -86,15 +88,22 @@ export class GdsDatepicker extends GdsFormControlElement {
         <div>
           ${join(
             map(
-              this.#structuredDateFormat.orderedFormat,
+              this._structuredDateFormat.orderedFormat,
               (f) =>
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate()[f.name]}
                   @keydown=${this.#handleSpinnerKeydown}
+                  @change=${(e: CustomEvent) => {
+                    const structuredDate = this.#structuredDate()
+                    structuredDate[f.name] = e.detail.value
+                    this.value = new Date(
+                      `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
+                    )
+                  }}
                 ></gds-date-part-spinner>`
             ),
-            html`<span>${this.#structuredDateFormat.delimiter}</span>`
+            html`<span>${this._structuredDateFormat.delimiter}</span>`
           )}
         </div>
         <button @click=${() => (this.open = !this.open)}>Open</button>
@@ -137,13 +146,20 @@ export class GdsDatepicker extends GdsFormControlElement {
         </div>
 
         <gds-calendar
-          @gds-date-selected=${console.log}
+          @change=${(e: CustomEvent<Date>) => (this.value = e.detail)}
           @gds-date-focused=${this.#handleFocusChange}
           .focusedMonth=${this.focusedMonth}
           .focusedYear=${this.focusedYear}
+          .value=${this.value}
         ></gds-calendar>
       </gds-popover>
     `
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    this.focusedMonth = this.value.getMonth()
+    this.focusedYear = this.value.getFullYear()
   }
 
   #handleFocusChange = (e: CustomEvent) => {

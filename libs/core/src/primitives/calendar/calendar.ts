@@ -15,7 +15,7 @@ import style from './calendar.styles'
  *
  * A calendar is a widget that allows the user to select a date.
  *
- * @event gds-date-selected - Fired when a date is selected.
+ * @event change - Fired when a date is selected.
  * @event gds-date-focused - Fired when focus has changed.
  */
 @gdsCustomElement('gds-calendar')
@@ -144,7 +144,7 @@ export class GdsCalendar extends LitElement {
     this.value = date
 
     this.dispatchEvent(
-      new CustomEvent('gds-date-selected', {
+      new CustomEvent('change', {
         detail: date,
         bubbles: true,
         composed: true,
