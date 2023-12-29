@@ -13,7 +13,6 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { watch } from '../../utils/decorators'
 
 import '../../primitives/popover/popover'
-import type { GdsPopover } from '../../primitives/popover/popover'
 
 import '../../primitives/calendar/calendar'
 import type { GdsCalendar } from '../../primitives/calendar/calendar'
@@ -85,6 +84,9 @@ export class GdsDatepicker extends GdsFormControlElement {
   @state()
   private _focusedYear = new Date().getFullYear()
 
+  @state()
+  private _structuredDateFormat = this.#parseDateFormat('y-m-d')
+
   @query('gds-calendar')
   private _elCalendar!: GdsCalendar
 
@@ -98,9 +100,6 @@ export class GdsDatepicker extends GdsFormControlElement {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
-
-  @state()
-  private _structuredDateFormat = this.#parseDateFormat('y-m-d')
 
   render() {
     return html`
@@ -145,6 +144,10 @@ export class GdsDatepicker extends GdsFormControlElement {
         @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <div class="header">
+          <button
+            class="previous"
+            @click=${this.#handleDecrementFocusedMonth}
+          ></button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${(e: CustomEvent) =>
@@ -174,11 +177,16 @@ export class GdsDatepicker extends GdsFormControlElement {
               (year) => html`<gds-option value=${year}>${year}</gds-option>`
             )}
           </gds-dropdown>
+          <button
+            class="next"
+            @click=${this.#handleIncrementFocusedMonth}
+          ></button>
         </div>
 
         <gds-calendar
           @change=${(e: CustomEvent<Date>) => {
             this.value = e.detail
+            this.open = false
             this.#fireChangeEvent()
           }}
           @gds-date-focused=${this.#handleFocusChange}
@@ -188,6 +196,18 @@ export class GdsDatepicker extends GdsFormControlElement {
           .min=${this.min}
           .max=${this.max}
         ></gds-calendar>
+
+        <div class="footer">
+          <button
+            class="today"
+            @click=${() => {
+              this.value = new Date()
+              this.#fireChangeEvent()
+            }}
+          >
+            ${msg('Today')}
+          </button>
+        </div>
       </gds-popover>
     `
   }
@@ -225,6 +245,30 @@ export class GdsDatepicker extends GdsFormControlElement {
     return max[name]
   }
 
+  #fireChangeEvent() {
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+      })
+    )
+  }
+
+  #handleIncrementFocusedMonth = (_e: MouseEvent) => {
+    this._focusedMonth++
+    if (this._focusedMonth > 11) {
+      this._focusedMonth = 0
+      this._focusedYear++
+    }
+  }
+
+  #handleDecrementFocusedMonth = (_e: MouseEvent) => {
+    this._focusedMonth--
+    if (this._focusedMonth < 0) {
+      this._focusedMonth = 11
+      this._focusedYear--
+    }
+  }
+
   #handleSpinnerChange = (val: string, name: DatePart) => {
     const structuredDate = this.#structuredDate
     structuredDate[name] = val
@@ -232,14 +276,6 @@ export class GdsDatepicker extends GdsFormControlElement {
       `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
     )
     this.#fireChangeEvent()
-  }
-
-  #fireChangeEvent() {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-      })
-    )
   }
 
   #handleFocusChange = (_e: CustomEvent) => {

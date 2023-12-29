@@ -81,29 +81,41 @@ export class GdsCalendar extends LitElement {
     TransitionalStyles.instance.apply(this, 'gds-calendar')
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
+      let handled = false
+
       if (e.key === 'ArrowLeft') {
         this.focusedDate = addDays(this.focusedDate, -1)
+        handled = true
       } else if (e.key === 'ArrowRight') {
         this.focusedDate = addDays(this.focusedDate, 1)
+        handled = true
       } else if (e.key === 'ArrowUp') {
         this.focusedDate = addDays(this.focusedDate, -7)
+        handled = true
       } else if (e.key === 'ArrowDown') {
         this.focusedDate = addDays(this.focusedDate, 7)
+        handled = true
       } else if (e.key === 'Enter' || e.key === ' ') {
-        this.#setSelectDate(this.focusedDate)
+        this.#setSelectedDate(this.focusedDate)
+        handled = true
       }
 
-      this.updateComplete.then(() => {
-        this._elFocusedCell?.focus()
+      if (handled) {
+        e.preventDefault()
+        e.stopPropagation()
 
-        this.dispatchEvent(
-          new CustomEvent('gds-date-focused', {
-            detail: this.focusedDate,
-            bubbles: true,
-            composed: true,
-          })
-        )
-      })
+        this.updateComplete.then(() => {
+          this._elFocusedCell?.focus()
+
+          this.dispatchEvent(
+            new CustomEvent('gds-date-focused', {
+              detail: this.focusedDate,
+              bubbles: true,
+              composed: true,
+            })
+          )
+        })
+      }
     })
   }
 
@@ -141,7 +153,7 @@ export class GdsCalendar extends LitElement {
                         })}"
                         tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
                         aria-selected="${isSameDay(this.value, day)}"
-                        @click=${() => this.#setSelectDate(day)}
+                        @click=${() => this.#setSelectedDate(day)}
                       >
                         ${day.getDate()}
                       </td>
@@ -156,7 +168,7 @@ export class GdsCalendar extends LitElement {
     </table>`
   }
 
-  #setSelectDate(date: Date) {
+  #setSelectedDate(date: Date) {
     this.value = date
 
     this.dispatchEvent(
