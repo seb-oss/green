@@ -1,10 +1,20 @@
 @use '../../../../chlorophyll/scss/common';
 
 .field {
-  border: solid 1px #000;
-  display: flex;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color();
+  @include common.add-focus('within');
+  align-items: center;
+  background-color: var(--sg-form-control-bg);
+  box-sizing: border-box;
+  color: var(--sg-text-primary);
+  display: inline-flex;
+  justify-content: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  min-height: 2.75rem;
 
   span {
     cursor: default;
