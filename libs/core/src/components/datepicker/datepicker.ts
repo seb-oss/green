@@ -45,6 +45,18 @@ export class GdsDatepicker extends GdsFormControlElement {
   value = new Date()
 
   /**
+   * The minimum date that can be selected.
+   */
+  @property({ type: Date })
+  min = new Date(new Date().getFullYear() - 10, 0, 1)
+
+  /**
+   * The maximum date that can be selected.
+   */
+  @property({ type: Date })
+  max = new Date(new Date().getFullYear() + 10, 0, 1)
+
+  /**
    * Controls wheter the datepicker popover is open.
    */
   @property({ type: Boolean })
@@ -102,6 +114,8 @@ export class GdsDatepicker extends GdsFormControlElement {
                 html`<gds-date-part-spinner
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate()[f.name]}
+                  aria-valuemin=${this.#getMinSpinnerValue(f.name)}
+                  aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
@@ -190,6 +204,24 @@ export class GdsDatepicker extends GdsFormControlElement {
       day: msg('Day'),
     }
     return labels[name]
+  }
+
+  #getMinSpinnerValue(name: DatePart) {
+    const min = {
+      year: this.min.getFullYear(),
+      month: 1,
+      day: 1,
+    }
+    return min[name]
+  }
+
+  #getMaxSpinnerValue(name: DatePart) {
+    const max = {
+      year: this.max.getFullYear(),
+      month: 12,
+      day: 31,
+    }
+    return max[name]
   }
 
   #handleSpinnerChange = (val: string, name: DatePart) => {

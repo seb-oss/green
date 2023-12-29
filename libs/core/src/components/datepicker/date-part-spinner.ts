@@ -21,6 +21,12 @@ export class GdsDatePartSpinner extends LitElement {
   @property({ type: Number })
   length = 2
 
+  @property({ type: Number, attribute: 'aria-valuemin' })
+  min = 0
+
+  @property({ type: Number, attribute: 'aria-valuemax' })
+  max = Number.MAX_SAFE_INTEGER
+
   @state()
   displayValue = this.#formatNumber(this.value, this.length)
 
@@ -54,7 +60,7 @@ export class GdsDatePartSpinner extends LitElement {
   }
 
   #increment = () => {
-    this.value++
+    this.value = this.#clamp(parseInt(this.value.toString()) + 1)
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: this.value },
@@ -63,7 +69,7 @@ export class GdsDatePartSpinner extends LitElement {
   }
 
   #decrement = () => {
-    this.value--
+    this.value = this.#clamp(this.value - 1)
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: this.value },
@@ -115,7 +121,7 @@ export class GdsDatePartSpinner extends LitElement {
       const key = parseInt(e.key)
       if (!isNaN(key)) {
         this.#inputBuffer += key
-        this.value = parseInt(this.#inputBuffer)
+        this.value = this.#clamp(parseInt(this.#inputBuffer))
         this.dispatchEvent(
           new CustomEvent('change', {
             detail: { value: this.value },
@@ -133,6 +139,11 @@ export class GdsDatePartSpinner extends LitElement {
 
   #formatNumber(num: number | string, padZeros: number) {
     return String(num).padStart(padZeros, '0')
+  }
+
+  #clamp(value: number) {
+    console.log('clamping', value)
+    return Math.max(this.min, Math.min(this.max, value))
   }
 
   #clearInputBuffer() {
