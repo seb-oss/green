@@ -15,6 +15,8 @@ import { Focusable } from '../../mixins/focusable'
  */
 @gdsCustomElement('gds-date-part-spinner')
 export class GdsDatePartSpinner extends LitElement {
+  static formAssociated = true
+
   @property({ type: Number })
   value = 0
 

@@ -1,6 +1,15 @@
 @use '../../../../chlorophyll/scss/common';
 @use '../../../../chlorophyll/scss/components/icon';
 
+label {
+  display: block;
+  font-weight: 500;
+}
+
+label + .field {
+  margin-top: 0.5rem;
+}
+
 .field {
   @include common.add-border-radius();
   @include common.add-focus('within');

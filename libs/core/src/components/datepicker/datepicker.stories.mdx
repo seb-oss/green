@@ -3,13 +3,14 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 
 <Meta title="Components/Datepicker" />
 
-# Datepicker
+# Date picker
 
 <Canvas>
 <div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker></gds-datepicker>
+<gds-datepicker label="Payment date"></gds-datepicker>
 <br/>
 <br/>
-<input type="date" />
+<label for="my-date">A native date picker</label>
+<input id="my-date" type="date" />
 </div>
 </Canvas>

@@ -61,6 +61,12 @@ export class GdsDatepicker extends GdsFormControlElement {
   open = false
 
   /**
+   * The label of the datepicker.
+   */
+  @property()
+  label = ''
+
+  /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
    * For example, `y-m-d` or `d/m/y`. All three characters must be present.
    *
@@ -103,18 +109,21 @@ export class GdsDatepicker extends GdsFormControlElement {
 
   render() {
     return html`
+      <label for="spinner-0" id="label">${this.label}</label>
       <div class="field" id="trigger">
         <div class="input">
           ${join(
             map(
               this._structuredDateFormat.orderedFormat,
-              (f) =>
+              (f, i) =>
                 html`<gds-date-part-spinner
+                  id="spinner-${i}"
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#structuredDate[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
+                  aria-describedby="label"
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
@@ -128,6 +137,7 @@ export class GdsDatepicker extends GdsFormControlElement {
           aria-haspopup="menu"
           aria-expanded=${this.open}
           aria-controls="calendar"
+          aria-describedby="label"
           @click=${() => (this.open = !this.open)}
         >
           <svg
