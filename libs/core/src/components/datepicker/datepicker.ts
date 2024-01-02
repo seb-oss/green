@@ -22,6 +22,8 @@ import { GdsDropdown } from '../dropdown/dropdown'
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
+import { styles } from './datepicker.styles'
+
 type DatePart = 'year' | 'month' | 'day'
 
 type StructuredDateFormat = {
@@ -45,6 +47,12 @@ const dateConverter = {
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement {
+  static styles = [styles]
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
+
   /**
    * The currently selected date.
    */

@@ -52,6 +52,11 @@ export class GdsDatePartSpinner extends LitElement {
     this.addEventListener('mousedown', this.#handleClick)
   }
 
+  focus(options?: FocusOptions | undefined): void {
+    super.focus(options)
+    this.#handleFocus()
+  }
+
   render() {
     return html`${this.displayValue}`
   }

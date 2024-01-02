@@ -14,6 +14,7 @@ import {
 import type { GdsDatepicker } from './datepicker'
 import { GdsPopover } from 'src/primitives/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
+import exp from 'constants'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -53,7 +54,6 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`
       )
-
       const popover = el.shadowRoot!.querySelector<GdsPopover>('#calendar')!
 
       expect(popover.open).to.be.true
@@ -71,11 +71,9 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker dateformat="d/m/y"></gds-datepicker>`
       )
-
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner')
       )!
-
       const separator = el.shadowRoot!.querySelector<HTMLSpanElement>(
         '.field .input > span'
       )!
@@ -96,18 +94,81 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`
       )
-
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar"]'
       )!
-      await clickOnElement(button)
-
       const popover = el.shadowRoot!.querySelector<GdsPopover>('#calendar')!
 
+      await clickOnElement(button)
       await el.updateComplete
 
       expect(popover.open).to.be.true
       expect(el.open).to.be.true
+    })
+
+    it('should focus the first date part spinner when clicking on the label', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker label="Date"></gds-datepicker>`
+      )
+      const label = el.shadowRoot!.querySelector<HTMLLabelElement>('#label')!
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+
+      const focusHandler = sinon.fake()
+      spinners[0].addEventListener('focus', focusHandler)
+
+      await clickOnElement(label)
+
+      expect(focusHandler.calledOnce).to.be.true
+    })
+
+    it('should focus the first date part spinner when clicking on the element', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker label="Date"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+
+      const focusHandler = sinon.fake()
+      spinners[0].addEventListener('focus', focusHandler)
+
+      await clickOnElement(el)
+
+      expect(focusHandler.calledOnce).to.be.true
+    })
+
+    it('should increment the spinner value when pressing the up arrow', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        press: 'ArrowUp',
+      })
+
+      expect(spinners[0].value).to.equal('2025')
+    })
+
+    it('should decrement the spinner value when pressing the down arrow', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        press: 'ArrowDown',
+      })
+
+      expect(spinners[0].value).to.equal('2023')
     })
   })
 
