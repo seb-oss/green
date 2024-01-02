@@ -57,6 +57,7 @@ export class GdsDatePartSpinner extends LitElement {
   @watch('value')
   private _refreshDisplayValue() {
     this.displayValue = this.#formatNumber(this.value, this.length)
+    this.setAttribute('aria-valuetext', this.value.toString())
   }
 
   #increment = () => {

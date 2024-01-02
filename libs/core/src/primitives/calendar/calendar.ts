@@ -153,6 +153,7 @@ export class GdsCalendar extends LitElement {
                         })}"
                         tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
                         aria-selected="${isSameDay(this.value, day)}"
+                        aria-label="${day.toDateString()}"
                         @click=${() => this.#setSelectedDate(day)}
                       >
                         ${day.getDate()}

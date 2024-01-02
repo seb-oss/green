@@ -125,6 +125,9 @@ export class GdsDatepicker extends GdsFormControlElement {
         </div>
         <button
           aria-label="${msg('Open calendar modal')}"
+          aria-haspopup="menu"
+          aria-expanded=${this.open}
+          aria-controls="calendar"
           @click=${() => (this.open = !this.open)}
         >
           <svg
@@ -142,6 +145,7 @@ export class GdsDatepicker extends GdsFormControlElement {
         .triggerRef=${this._elTrigger}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
+        id="calendar"
       >
         <div class="header">
           <button @click=${this.#handleDecrementFocusedMonth}>
