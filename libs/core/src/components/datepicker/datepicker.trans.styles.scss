@@ -64,4 +64,62 @@
       flex: 1 1;
     }
   }
+
+  button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    width: 3rem;
+
+    // TODO: Replace with proper icons
+    .icon::before {
+      background: none;
+      border-bottom: 2px solid;
+      border-left: 2px solid;
+      content: '';
+      display: block;
+      height: 12px;
+      margin-top: 2px;
+      width: 12px;
+    }
+
+    .icon.prev::before {
+      margin-left: -4px;
+      transform: translate(75%) rotate(45deg) scaleZ(-1);
+    }
+
+    .icon.next::before {
+      margin-left: -10px;
+      transform: translate(75%) rotate(-135deg) scaleZ(-1);
+    }
+  }
+}
+
+.footer {
+  @include common.padding-horizontal(3);
+  @include common.padding-vertical(3);
+  @include common.add-border(('top'));
+  border-color: #ddd;
+
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    @include common.add-border-radius();
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--intent-info-background);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      background: var(--intent-info-background);
+      color: #fff;
+    }
+  }
 }

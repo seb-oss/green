@@ -144,15 +144,14 @@ export class GdsDatepicker extends GdsFormControlElement {
         @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <div class="header">
-          <button
-            class="previous"
-            @click=${this.#handleDecrementFocusedMonth}
-          ></button>
+          <button @click=${this.#handleDecrementFocusedMonth}>
+            <i class="icon prev"></i>
+          </button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${(e: CustomEvent) =>
               (this._focusedMonth = (e.target as GdsDropdown)?.value)}
-            label="Month"
+            aria-label="${msg('Month')}"
           >
             <gds-option value="0">${msg('January')}</gds-option>
             <gds-option value="1">${msg('February')}</gds-option>
@@ -171,16 +170,15 @@ export class GdsDatepicker extends GdsFormControlElement {
             .value=${this._focusedYear.toString()}
             @change=${(e: CustomEvent) =>
               (this._focusedYear = (e.target as GdsDropdown)?.value)}
-            label="Year"
+            aria-label="${msg('Year')}"
           >
             ${this.#years.map(
               (year) => html`<gds-option value=${year}>${year}</gds-option>`
             )}
           </gds-dropdown>
-          <button
-            class="next"
-            @click=${this.#handleIncrementFocusedMonth}
-          ></button>
+          <button @click=${this.#handleIncrementFocusedMonth}>
+            <i class="icon next"></i>
+          </button>
         </div>
 
         <gds-calendar
@@ -199,7 +197,16 @@ export class GdsDatepicker extends GdsFormControlElement {
 
         <div class="footer">
           <button
-            class="today"
+            class="tertiary clear"
+            @click=${() => {
+              this.value = new Date()
+              this.#fireChangeEvent()
+            }}
+          >
+            ${msg('Clear')}
+          </button>
+          <button
+            class="tertiary today"
             @click=${() => {
               this.value = new Date()
               this.#fireChangeEvent()

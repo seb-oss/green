@@ -3,3 +3,7 @@
 :host {
   @include mixins.calendar();
 }
+
+table {
+  flex-grow: 1;
+}
