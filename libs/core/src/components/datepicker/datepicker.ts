@@ -29,6 +29,15 @@ type StructuredDateFormat = {
   orderedFormat: { token: 'y' | 'm' | 'd'; name: DatePart }[]
 }
 
+const dateConverter = {
+  fromAttribute(value: string) {
+    return new Date(value)
+  },
+  toAttribute(value: Date) {
+    return value.toISOString()
+  },
+}
+
 /**
  * @element gds-datepicker
  *
@@ -39,19 +48,19 @@ export class GdsDatepicker extends GdsFormControlElement {
   /**
    * The currently selected date.
    */
-  @property({ type: Date })
+  @property({ converter: dateConverter })
   value = new Date()
 
   /**
    * The minimum date that can be selected.
    */
-  @property({ type: Date })
+  @property({ converter: dateConverter })
   min = new Date(new Date().getFullYear() - 10, 0, 1)
 
   /**
    * The maximum date that can be selected.
    */
-  @property({ type: Date })
+  @property({ converter: dateConverter })
   max = new Date(new Date().getFullYear() + 10, 0, 1)
 
   /**
