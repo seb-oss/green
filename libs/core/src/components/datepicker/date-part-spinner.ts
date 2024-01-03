@@ -69,6 +69,7 @@ export class GdsDatePartSpinner extends LitElement {
 
   #increment = () => {
     this.value = this.#clamp(parseInt(this.value.toString()) + 1)
+
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: this.value },
@@ -93,12 +94,6 @@ export class GdsDatePartSpinner extends LitElement {
 
   #handleFocus = () => {
     this.#clearInputBuffer()
-
-    const range = new Range()
-    range.setStart(this, 0)
-    range.setEnd(this, 4)
-    document.getSelection()?.removeAllRanges()
-    document.getSelection()?.addRange(range)
   }
 
   #handleBlur = () => {

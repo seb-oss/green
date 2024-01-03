@@ -39,7 +39,10 @@ label + .field {
     cursor: default;
     display: inline-block;
 
-    &:focus-visible {
+    &:focus {
+      background: color-mix(in srgb,
+      var(--gds-sys-color-blue) 50%,
+      transparent);
       outline: none;
     }
   }

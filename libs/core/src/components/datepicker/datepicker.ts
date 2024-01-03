@@ -312,9 +312,14 @@ export class GdsDatepicker extends GdsFormControlElement {
   #handleSpinnerChange = (val: string, name: DatePart) => {
     const structuredDate = this.#structuredDate
     structuredDate[name] = val
-    this.value = new Date(
-      `${structuredDate.year}-${structuredDate.month}-${structuredDate.day}`
-    )
+
+    let newDate = new Date()
+    newDate.setFullYear(parseInt(structuredDate.year))
+    newDate.setMonth(parseInt(structuredDate.month) - 1)
+    newDate.setDate(parseInt(structuredDate.day))
+
+    this.value = newDate
+
     this.#dispatchChangeEvent()
   }
 
