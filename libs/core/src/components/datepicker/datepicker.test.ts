@@ -260,14 +260,19 @@ describe('<gds-datepicker>', () => {
 
       await timeout(10)
 
-      await sendKeys({
-        press: 'Tab',
-      })
+      let keyPress = 'Alt+Tab'
+
+      if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        // Alt+Tab is required for Webkit and works in Chromium but not Firefox
+        keyPress = 'Tab'
+      }
 
       await sendKeys({
-        press: 'Tab',
+        press: keyPress,
       })
-
+      await sendKeys({
+        press: keyPress,
+      })
       await sendKeys({
         press: 'Enter',
       })
@@ -275,8 +280,8 @@ describe('<gds-datepicker>', () => {
       await timeout(10)
 
       expect(popover.open).to.be.true
-      //expect(el.open).to.be.true
-      //expect(monthDropdown.open).to.be.true
+      expect(el.open).to.be.true
+      expect(monthDropdown.open).to.be.true
     })
   })
 
