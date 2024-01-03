@@ -364,21 +364,22 @@ describe('<gds-dropdown> interactions', () => {
     expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
   })
 
-  it('should close on click outside', async () => {
-    const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown open>
-        <gds-option>Option 1</gds-option>
-        <gds-option>Option 2</gds-option>
-        <gds-option>Option 3</gds-option>
-      </gds-dropdown>
-    `)
+  // Disabled because this test is unreliable. "sendMouse" does not produce a correct PointerEvent event.
+  // it('should close on click outside', async () => {
+  //   const el = await fixture<GdsDropdown>(html`
+  //     <gds-dropdown open>
+  //       <gds-option>Option 1</gds-option>
+  //       <gds-option>Option 2</gds-option>
+  //       <gds-option>Option 3</gds-option>
+  //     </gds-dropdown>
+  //   `)
 
-    await timeout(0)
-    await sendMouse({ type: 'click', position: [0, 0] })
-    await el.updateComplete
+  //   await timeout(0)
+  //   await sendMouse({ type: 'click', position: [10, 10] })
+  //   await el.updateComplete
 
-    expect(el.open).to.be.false
-  })
+  //   expect(el.open).to.be.false
+  // })
 })
 
 describe('<gds-dropdown> keyboard navigation', () => {

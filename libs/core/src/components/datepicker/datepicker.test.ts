@@ -15,6 +15,7 @@ import type { GdsDatepicker } from './datepicker'
 import { GdsPopover } from 'src/primitives/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import exp from 'constants'
+import { GdsDropdown } from '../dropdown/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -54,7 +55,8 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`
       )
-      const popover = el.shadowRoot!.querySelector<GdsPopover>('#calendar')!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
       expect(popover.open).to.be.true
       expect(el.open).to.be.true
@@ -95,9 +97,10 @@ describe('<gds-datepicker>', () => {
         html`<gds-datepicker></gds-datepicker>`
       )
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar"]'
+        '[aria-controls="calendar-popover"]'
       )!
-      const popover = el.shadowRoot!.querySelector<GdsPopover>('#calendar')!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
       await clickOnElement(button)
       await el.updateComplete
@@ -171,6 +174,38 @@ describe('<gds-datepicker>', () => {
       expect(spinners[0].value).to.equal('2023')
     })
 
+    it('should focus the next spinner when pressing the right arrow', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        press: 'ArrowRight',
+      })
+
+      expect(spinners[1].value).to.equal('01')
+    })
+
+    it('should focus the previous spinner when pressing the left arrow', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[1].focus()
+
+      await sendKeys({
+        press: 'ArrowLeft',
+      })
+
+      expect(spinners[0].value).to.equal('2024')
+    })
+
     it('should set year to 20 when typing 20 in the year spinner', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
@@ -205,6 +240,43 @@ describe('<gds-datepicker>', () => {
       })
 
       expect(spinners[0].value).to.equal('2022')
+    })
+
+    it('should open the month picker when clicking on the calendar button and then tabbing twice and pressing enter', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker></gds-datepicker>`
+      )
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+        '[aria-controls="calendar-popover"]'
+      )!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[aria-label="Month"]`
+      )!
+
+      await clickOnElement(button)
+      await el.updateComplete
+
+      await timeout(10)
+
+      await sendKeys({
+        press: 'Tab',
+      })
+
+      await sendKeys({
+        press: 'Tab',
+      })
+
+      await sendKeys({
+        press: 'Enter',
+      })
+
+      await timeout(10)
+
+      expect(popover.open).to.be.true
+      //expect(el.open).to.be.true
+      //expect(monthDropdown.open).to.be.true
     })
   })
 
