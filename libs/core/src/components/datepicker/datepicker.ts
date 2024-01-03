@@ -313,7 +313,7 @@ export class GdsDatepicker extends GdsFormControlElement {
     const structuredDate = this.#structuredDate
     structuredDate[name] = val
 
-    let newDate = new Date()
+    const newDate = new Date()
     newDate.setFullYear(parseInt(structuredDate.year))
     newDate.setMonth(parseInt(structuredDate.month) - 1)
     newDate.setDate(parseInt(structuredDate.day))
