@@ -170,6 +170,42 @@ describe('<gds-datepicker>', () => {
 
       expect(spinners[0].value).to.equal('2023')
     })
+
+    it('should set year to 20 when typing 20 in the year spinner', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        type: '20',
+      })
+
+      expect(spinners[0].value.toString()).to.equal('20')
+    })
+
+    it('should set year to min when blurring the year spinner with a value below min', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker min="2022-01-01"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        type: '1',
+      })
+
+      await sendKeys({
+        press: 'Tab',
+      })
+
+      expect(spinners[0].value).to.equal('2022')
+    })
   })
 
   describe('Accessibility', () => {

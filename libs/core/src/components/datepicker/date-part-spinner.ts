@@ -102,7 +102,17 @@ export class GdsDatePartSpinner extends LitElement {
   }
 
   #handleBlur = () => {
+    if (this.#inputBuffer === '') return
+
     this.#clearInputBuffer()
+    this.value = this.#clamp(parseInt(this.value.toString()))
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+      })
+    )
+
     document.getSelection()?.removeAllRanges()
   }
 
@@ -128,13 +138,8 @@ export class GdsDatePartSpinner extends LitElement {
     } else {
       const key = parseInt(e.key)
       if (!isNaN(key)) {
-        this.#inputBuffer += key
-        this.value = this.#clamp(parseInt(this.#inputBuffer))
-        this.dispatchEvent(
-          new CustomEvent('change', {
-            detail: { value: this.value },
-          })
-        )
+        this.#inputBuffer += key.toString()
+        this.value = parseInt(this.#inputBuffer)
         handled = true
       }
     }
