@@ -89,6 +89,29 @@ describe('<gds-datepicker>', () => {
       expect(separator.textContent).to.equal('/')
       expect(el.dateformat).to.equal('d/m/y')
     })
+
+    it('should dispatch a change event when the value is changed by the user', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker></gds-datepicker>`
+      )
+      const changeHandler = sinon.fake()
+      el.addEventListener('change', changeHandler)
+
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+      spinners[0].focus()
+
+      await sendKeys({
+        type: '20',
+      })
+
+      await sendKeys({
+        press: 'Tab',
+      })
+
+      expect(changeHandler.calledOnce).to.be.true
+    })
   })
 
   describe('Interactions', () => {
@@ -261,7 +284,6 @@ describe('<gds-datepicker>', () => {
       await timeout(10)
 
       let keyPress = 'Alt+Tab'
-
       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
         // Alt+Tab is required for Webkit and works in Chromium but not Firefox
         keyPress = 'Tab'
