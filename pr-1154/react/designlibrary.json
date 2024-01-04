@@ -147,22 +147,22 @@
     "customParams": {}
   },
   {
-    "id": "components-form--button-group",
-    "name": "Button Group",
-    "title": "Components/Form",
-    "customParams": {
-      "componentIds": [
-        "component-segmented-control"
-      ]
-    }
-  },
-  {
     "id": "components-form-checkbox--checkbox",
     "name": "Checkbox",
     "title": "Components/Form/Checkbox",
     "customParams": {
       "componentIds": [
         "component-checkbox"
+      ]
+    }
+  },
+  {
+    "id": "components-form--button-group",
+    "name": "Button Group",
+    "title": "Components/Form",
+    "customParams": {
+      "componentIds": [
+        "component-segmented-control"
       ]
     }
   },
@@ -401,22 +401,22 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
-    "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
-    }
-  },
-  {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
       ]
     }
   },
