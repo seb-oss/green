@@ -290,6 +290,7 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`
       )
+
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar-popover"]'
       )!
@@ -302,20 +303,22 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(button)
       await conditionToBeTrue(() => popover.open)
 
-      let keyPress = 'Alt+Tab'
-      if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-        // Alt+Tab is required for Webkit and works in Chromium but not Firefox
-        keyPress = 'Tab'
+      let keyPress = 'Tab'
+      if (
+        navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
+        navigator.userAgent.toLowerCase().indexOf('chrome') < -1
+      ) {
+        keyPress = 'Alt+Tab'
       }
 
       await sendKeys({
         press: keyPress,
       })
-      await timeout(0)
+      await timeout(100)
       await sendKeys({
         press: keyPress,
       })
-      await timeout(0)
+      await timeout(100)
       await sendKeys({
         press: 'Enter',
       })
