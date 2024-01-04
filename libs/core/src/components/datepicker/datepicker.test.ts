@@ -4,7 +4,7 @@ import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 import { time } from 'console'
 
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import '../../../../../dist/libs/core/src/index.js'
 import {
   htmlTemplateTagFactory,
@@ -300,7 +300,7 @@ describe('<gds-datepicker>', () => {
       )!
 
       await clickOnElement(button)
-      await el.updateComplete
+      await conditionToBeTrue(() => popover.open)
 
       let keyPress = 'Alt+Tab'
       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
@@ -311,18 +311,17 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: keyPress,
       })
+      await timeout(0)
       await sendKeys({
         press: keyPress,
       })
+      await timeout(0)
       await sendKeys({
         press: 'Enter',
       })
 
-      await timeout(0)
-      await el.updateComplete
+      await conditionToBeTrue(() => monthDropdown.open)
 
-      await expect(popover.open).to.be.true
-      await expect(el.open).to.be.true
       await expect(monthDropdown.open).to.be.true
     })
   })
@@ -333,7 +332,7 @@ describe('<gds-datepicker>', () => {
         html`<gds-datepicker></gds-datepicker>`
       )
 
-      await await expect(el).to.be.accessible()
+      await expect(el).to.be.accessible()
     })
   })
 })

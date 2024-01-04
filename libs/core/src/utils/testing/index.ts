@@ -106,3 +106,19 @@ export async function dragElement(
 export async function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+/**
+ * Returns a promise that resolves when the provided condition is true.
+ * Will never resolve if the condition does not turn true.
+ */
+export async function conditionToBeTrue(condition: () => boolean) {
+  let interval: number
+  return new Promise<void>((resolve) => {
+    interval = window.setInterval(() => {
+      if (condition()) {
+        window.clearInterval(interval)
+        resolve()
+      }
+    }, 10)
+  })
+}

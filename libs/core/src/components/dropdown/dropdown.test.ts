@@ -456,6 +456,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
     `)
 
     el.focus()
+    await timeout(0)
     await sendKeys({ press: 'ArrowDown' })
     await timeout(50)
     await sendKeys({ press: 'ArrowDown' })
