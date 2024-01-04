@@ -122,3 +122,18 @@ export async function conditionToBeTrue(condition: () => boolean) {
     }, 10)
   })
 }
+
+export function isWebKit() {
+  return (
+    navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
+    navigator.userAgent.toLowerCase().indexOf('chrome') < 0
+  )
+}
+
+export function isChromium() {
+  return navigator.userAgent.toLowerCase().indexOf('chrome') > -1
+}
+
+export function isFirefox() {
+  return navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+}

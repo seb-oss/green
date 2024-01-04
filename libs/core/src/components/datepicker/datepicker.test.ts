@@ -4,7 +4,12 @@ import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 import { time } from 'console'
 
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import {
+  clickOnElement,
+  conditionToBeTrue,
+  isWebKit,
+  timeout,
+} from '../../utils/testing'
 import '../../../../../dist/libs/core/src/index.js'
 import {
   htmlTemplateTagFactory,
@@ -304,21 +309,18 @@ describe('<gds-datepicker>', () => {
       await conditionToBeTrue(() => popover.open)
 
       let keyPress = 'Tab'
-      if (
-        navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
-        navigator.userAgent.toLowerCase().indexOf('chrome') < -1
-      ) {
+      if (isWebKit()) {
         keyPress = 'Alt+Tab'
       }
 
       await sendKeys({
         press: keyPress,
       })
-      await timeout(100)
+      await timeout(0)
       await sendKeys({
         press: keyPress,
       })
-      await timeout(100)
+      await timeout(0)
       await sendKeys({
         press: 'Enter',
       })
