@@ -25,7 +25,7 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`
       )
-      expect(el).shadowDom.to.exist
+      await expect(el).shadowDom.to.exist
     })
   })
 
@@ -34,21 +34,21 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
       )
-      expect(el.value).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.value).to.deep.equal(new Date('2024-01-01'))
     })
 
     it('should set the min', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker min="2024-01-01"></gds-datepicker>`
       )
-      expect(el.min).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.min).to.deep.equal(new Date('2024-01-01'))
     })
 
     it('should set the max', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker max="2024-01-01"></gds-datepicker>`
       )
-      expect(el.max).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.max).to.deep.equal(new Date('2024-01-01'))
     })
 
     it('should set open', async () => {
@@ -58,15 +58,15 @@ describe('<gds-datepicker>', () => {
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
-      expect(popover.open).to.be.true
-      expect(el.open).to.be.true
+      await expect(popover.open).to.be.true
+      await expect(el.open).to.be.true
     })
 
     it('should set the label', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`
       )
-      expect(el.label).to.equal('Date')
+      await expect(el.label).to.equal('Date')
     })
 
     it('should set the date format', async () => {
@@ -80,14 +80,14 @@ describe('<gds-datepicker>', () => {
         '.field .input > span'
       )!
 
-      expect(spinners[0].getAttribute('aria-label')).to.equal('Day')
-      expect(spinners[0].length).to.equal(2)
-      expect(spinners[1].getAttribute('aria-label')).to.equal('Month')
-      expect(spinners[1].length).to.equal(2)
-      expect(spinners[2].getAttribute('aria-label')).to.equal('Year')
-      expect(spinners[2].length).to.equal(4)
-      expect(separator.textContent).to.equal('/')
-      expect(el.dateformat).to.equal('d/m/y')
+      await expect(spinners[0].getAttribute('aria-label')).to.equal('Day')
+      await expect(spinners[0].length).to.equal(2)
+      await expect(spinners[1].getAttribute('aria-label')).to.equal('Month')
+      await expect(spinners[1].length).to.equal(2)
+      await expect(spinners[2].getAttribute('aria-label')).to.equal('Year')
+      await expect(spinners[2].length).to.equal(4)
+      await expect(separator.textContent).to.equal('/')
+      await expect(el.dateformat).to.equal('d/m/y')
     })
 
     it('should dispatch a change event when the value is changed by the user', async () => {
@@ -110,7 +110,7 @@ describe('<gds-datepicker>', () => {
         press: 'Tab',
       })
 
-      expect(changeHandler.calledOnce).to.be.true
+      await expect(changeHandler.calledOnce).to.be.true
     })
   })
 
@@ -128,8 +128,8 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(button)
       await el.updateComplete
 
-      expect(popover.open).to.be.true
-      expect(el.open).to.be.true
+      await expect(popover.open).to.be.true
+      await expect(el.open).to.be.true
     })
 
     it('should focus the first date part spinner when clicking on the label', async () => {
@@ -146,7 +146,7 @@ describe('<gds-datepicker>', () => {
 
       await clickOnElement(label)
 
-      expect(focusHandler.calledOnce).to.be.true
+      await expect(focusHandler.calledOnce).to.be.true
     })
 
     it('should focus the first date part spinner when clicking on the element', async () => {
@@ -162,7 +162,10 @@ describe('<gds-datepicker>', () => {
 
       await clickOnElement(el)
 
-      expect(focusHandler.calledOnce).to.be.true
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(focusHandler.calledOnce).to.be.true
     })
 
     it('should increment the spinner value when pressing the up arrow', async () => {
@@ -178,7 +181,10 @@ describe('<gds-datepicker>', () => {
         press: 'ArrowUp',
       })
 
-      expect(spinners[0].value).to.equal('2025')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value).to.equal('2025')
     })
 
     it('should decrement the spinner value when pressing the down arrow', async () => {
@@ -194,7 +200,10 @@ describe('<gds-datepicker>', () => {
         press: 'ArrowDown',
       })
 
-      expect(spinners[0].value).to.equal('2023')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value).to.equal('2023')
     })
 
     it('should focus the next spinner when pressing the right arrow', async () => {
@@ -210,7 +219,10 @@ describe('<gds-datepicker>', () => {
         press: 'ArrowRight',
       })
 
-      expect(spinners[1].value).to.equal('01')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[1].value).to.equal('01')
     })
 
     it('should focus the previous spinner when pressing the left arrow', async () => {
@@ -226,7 +238,10 @@ describe('<gds-datepicker>', () => {
         press: 'ArrowLeft',
       })
 
-      expect(spinners[0].value).to.equal('2024')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value).to.equal('2024')
     })
 
     it('should set year to 20 when typing 20 in the year spinner', async () => {
@@ -242,7 +257,10 @@ describe('<gds-datepicker>', () => {
         type: '20',
       })
 
-      expect(spinners[0].value.toString()).to.equal('20')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value.toString()).to.equal('20')
     })
 
     it('should set year to min when blurring the year spinner with a value below min', async () => {
@@ -262,7 +280,10 @@ describe('<gds-datepicker>', () => {
         press: 'Tab',
       })
 
-      expect(spinners[0].value).to.equal('2022')
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value).to.equal('2022')
     })
 
     it('should open the month picker when clicking on the calendar button and then tabbing twice and pressing enter', async () => {
@@ -281,8 +302,6 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(button)
       await el.updateComplete
 
-      await timeout(10)
-
       let keyPress = 'Alt+Tab'
       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
         // Alt+Tab is required for Webkit and works in Chromium but not Firefox
@@ -299,11 +318,12 @@ describe('<gds-datepicker>', () => {
         press: 'Enter',
       })
 
-      await timeout(10)
+      await timeout(0)
+      await el.updateComplete
 
-      expect(popover.open).to.be.true
-      expect(el.open).to.be.true
-      expect(monthDropdown.open).to.be.true
+      await expect(popover.open).to.be.true
+      await expect(el.open).to.be.true
+      await expect(monthDropdown.open).to.be.true
     })
   })
 
@@ -313,7 +333,7 @@ describe('<gds-datepicker>', () => {
         html`<gds-datepicker></gds-datepicker>`
       )
 
-      await expect(el).to.be.accessible()
+      await await expect(el).to.be.accessible()
     })
   })
 })
