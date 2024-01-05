@@ -40,8 +40,8 @@ export const Datepicker = ({
   if (currentDate && !value) value = currentDate
   if (selectedDate && !value) value = selectedDate
 
-  let min = minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
-  let max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
+  const min = minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
+  const max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
 
   const onChangeHandler = (e: any) => {
     if (onChange) {
