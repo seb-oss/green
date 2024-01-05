@@ -108,6 +108,21 @@ export class GdsDatepicker extends GdsFormControlElement {
     this._structuredDateFormat = this.#parseDateFormat(dateformat)
   }
 
+  /**
+   * A reference to the calendar button element inside the shadow root.
+   * Inteded for use in integration tests.
+   */
+  @queryAsync('#calendar-button')
+  test_calendarButton!: Promise<HTMLButtonElement>
+
+  /**
+   * A reference to a date cell element (<td>) inside the shadow root of the calendar primitive.
+   * Inteded for use in integration tests.
+   */
+  async test_getDateCell(dayNumber: number) {
+    return this._elCalendar.then((el) => el.getDateCell(dayNumber))
+  }
+
   @state()
   private _focusedMonth = new Date().getMonth()
 
@@ -157,6 +172,7 @@ export class GdsDatepicker extends GdsFormControlElement {
           )}
         </div>
         <button
+          id="calendar-button"
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
           aria-expanded=${this.open}

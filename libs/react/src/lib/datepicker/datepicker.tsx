@@ -20,6 +20,7 @@ export interface DatepickerOptions {
   maxDate?: Date
   value?: Date
   showWeeks?: boolean
+  testId?: string
 
   /** @deprecated Use `value` instead */
   selectedDate?: Date
@@ -34,6 +35,7 @@ export const Datepicker = ({
   maxDate,
   value,
   showWeeks,
+  testId,
   selectedDate,
   currentDate,
 }: DatepickerOptions) => {
@@ -44,6 +46,7 @@ export const Datepicker = ({
   const max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
 
   const onChangeHandler = (e: any) => {
+    console.log('OnChange event handler')
     if (onChange) {
       onChange(e.detail.value)
     }
@@ -51,6 +54,7 @@ export const Datepicker = ({
 
   return (
     <CoreDatepicker
+      data-testid={testId}
       label={label}
       min={min}
       max={max}

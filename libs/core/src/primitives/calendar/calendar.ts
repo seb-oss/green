@@ -80,6 +80,13 @@ export class GdsCalendar extends LitElement {
   @property({ type: Boolean })
   showWeekNumbers = false
 
+  /**
+   * Returns the date cell element for the given day number.
+   */
+  getDateCell(dayNumber: number) {
+    return this.shadowRoot?.querySelector(`#dateCell-${dayNumber}`)
+  }
+
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
 
@@ -170,6 +177,7 @@ export class GdsCalendar extends LitElement {
                         aria-selected="${isSameDay(this.value, day)}"
                         aria-label="${day.toDateString()}"
                         @click=${() => this.#setSelectedDate(day)}
+                        id="dateCell-${day.getDate()}"
                       >
                         ${day.getDate()}
                       </td>
