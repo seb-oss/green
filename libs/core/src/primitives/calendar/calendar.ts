@@ -1,8 +1,9 @@
 import { LitElement, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
-import { property, query, state } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
+import { property, query } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
-import { addDays, isSameDay, isSameMonth } from 'date-fns'
+import { addDays, isSameDay, isSameMonth, getWeek } from 'date-fns'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -73,6 +74,12 @@ export class GdsCalendar extends LitElement {
     this.focusedDate = new Date(this.focusedDate.setFullYear(year))
   }
 
+  /**
+   * Whether to show week numbers or not.
+   */
+  @property({ type: Boolean })
+  showWeekNumbers = false
+
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
 
@@ -125,6 +132,7 @@ export class GdsCalendar extends LitElement {
     return html`<table>
       <thead>
         <tr>
+          ${when(this.showWeekNumbers, () => html`<th></th>`)}
           <th>${msg('Mon')}</th>
           <th>${msg('Tue')}</th>
           <th>${msg('Wed')}</th>
@@ -141,6 +149,13 @@ export class GdsCalendar extends LitElement {
             ${weeks.map(
               (week) => html`
                 <tr>
+                  ${when(
+                    this.showWeekNumbers,
+                    () =>
+                      html`<td class="week-number">
+                        ${getWeek(week.days[0])}
+                      </td>`
+                  )}
                   ${week.days.map(
                     (day) => html`
                       <td

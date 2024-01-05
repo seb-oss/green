@@ -54,6 +54,7 @@ export const Datepicker = ({
       label={label}
       min={min}
       max={max}
+      showWeekNumbers={showWeeks}
       onchange={onChangeHandler}
       value={value}
     />

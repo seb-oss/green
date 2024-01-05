@@ -85,6 +85,12 @@ export class GdsDatepicker extends GdsFormControlElement {
   label = ''
 
   /**
+   * Whether to show week numbers in the calendar.
+   */
+  @property({ type: Boolean })
+  showWeekNumbers = false
+
+  /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
    * For example, `y-m-d` or `d/m/y`. All three characters must be present.
    *
@@ -226,6 +232,7 @@ export class GdsDatepicker extends GdsFormControlElement {
           .value=${this.value}
           .min=${this.min}
           .max=${this.max}
+          .showWeekNumbers=${this.showWeekNumbers}
         ></gds-calendar>
 
         <div class="footer">
