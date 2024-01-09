@@ -64,6 +64,20 @@ export class AppElement extends HTMLElement {
             <gds-option value="4">Option 4</gds-option>
           </gds-dropdown>
 
+          <gds-datepicker
+            id="datepicker"
+            name="datepicker"
+            label="Pick a date"
+            dateformat="y/m/d"
+            showWeekNumbers
+          >
+            <span slot="sub-label"
+              >This text sits in a slot, so app can handle translation however
+              it likes</span
+            >
+            <span slot="message">Same here</span>
+          </gds-datepicker>
+
           <button type="submit">Submit</button>
           <button type="reset">Reset</button>
         </form>

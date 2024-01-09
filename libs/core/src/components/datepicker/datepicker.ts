@@ -27,9 +27,9 @@ import { styles } from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
 
-type StructuredDateFormat = {
+type DateFormatLayout = {
   delimiter: string
-  orderedFormat: { token: 'y' | 'm' | 'd'; name: DatePart }[]
+  layout: { token: 'y' | 'm' | 'd'; name: DatePart }[]
 }
 
 const dateConverter = {
@@ -43,13 +43,18 @@ const dateConverter = {
 
 /**
  * @element gds-datepicker
- *
  * A form control that allows the user to select a date.
  *
+ * @status beta
+ *
  * @slot message - Message to show below the input field. Will be red if there is a validation error.
+ * @slot sub-label - Renders between the label and the trigger button.
+ * *
+ * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
+ * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-datepicker')
-export class GdsDatepicker extends GdsFormControlElement {
+export class GdsDatepicker extends GdsFormControlElement<Date> {
   static styles = [styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
@@ -60,7 +65,7 @@ export class GdsDatepicker extends GdsFormControlElement {
    * The currently selected date.
    */
   @property({ converter: dateConverter })
-  value = new Date()
+  value?: Date
 
   /**
    * The minimum date that can be selected.
@@ -102,12 +107,12 @@ export class GdsDatepicker extends GdsFormControlElement {
    */
   @property()
   get dateformat() {
-    return this._structuredDateFormat.orderedFormat
+    return this._dateFormatLayout.layout
       .map((f) => f.token)
-      .join(this._structuredDateFormat.delimiter)
+      .join(this._dateFormatLayout.delimiter)
   }
   set dateformat(dateformat: string) {
-    this._structuredDateFormat = this.#parseDateFormat(dateformat)
+    this._dateFormatLayout = this.#parseDateFormat(dateformat)
   }
 
   /**
@@ -132,7 +137,7 @@ export class GdsDatepicker extends GdsFormControlElement {
   private _focusedYear = new Date().getFullYear()
 
   @state()
-  private _structuredDateFormat = this.#parseDateFormat('y-m-d')
+  private _dateFormatLayout = this.#parseDateFormat('y-m-d')
 
   @queryAsync('#calendar')
   private _elCalendar!: Promise<GdsCalendar>
@@ -152,16 +157,18 @@ export class GdsDatepicker extends GdsFormControlElement {
     return html`
       <label for="spinner-0" id="label">${this.label}</label>
 
+      <div class="form-info"><slot name="sub-label"></slot></div>
+
       <div class="field" id="trigger">
         <div class="input">
           ${join(
             map(
-              this._structuredDateFormat.orderedFormat,
+              this._dateFormatLayout.layout,
               (f, i) =>
                 html`<gds-date-part-spinner
                   id="spinner-${i}"
                   .length=${f.token === 'y' ? 4 : 2}
-                  .value=${this.#structuredDate[f.name]}
+                  .value=${this.#spinnerState[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
@@ -171,7 +178,7 @@ export class GdsDatepicker extends GdsFormControlElement {
                     this.#handleSpinnerChange(e.detail.value, f.name)}
                 ></gds-date-part-spinner>`
             ),
-            html`<span>${this._structuredDateFormat.delimiter}</span>`
+            html`<span>${this._dateFormatLayout.delimiter}</span>`
           )}
         </div>
         <button
@@ -283,8 +290,9 @@ export class GdsDatepicker extends GdsFormControlElement {
 
   @watch('value')
   private _handleValueChange() {
-    this._focusedMonth = this.value.getMonth()
-    this._focusedYear = this.value.getFullYear()
+    let date = this.value || new Date()
+    this._focusedMonth = date.getMonth()
+    this._focusedYear = date.getFullYear()
   }
 
   #getSpinnerLabel(name: DatePart) {
@@ -338,20 +346,6 @@ export class GdsDatepicker extends GdsFormControlElement {
     }
   }
 
-  #handleSpinnerChange = (val: string, name: DatePart) => {
-    const structuredDate = this.#structuredDate
-    structuredDate[name] = val
-
-    const newDate = new Date()
-    newDate.setFullYear(parseInt(structuredDate.year))
-    newDate.setMonth(parseInt(structuredDate.month) - 1)
-    newDate.setDate(parseInt(structuredDate.day))
-
-    this.value = newDate
-
-    this.#dispatchChangeEvent()
-  }
-
   #handleFocusChange = async (_e: CustomEvent) => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
@@ -360,6 +354,21 @@ export class GdsDatepicker extends GdsFormControlElement {
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (e.target !== e.currentTarget) return
     this.open = e.detail.open
+  }
+
+  #handleSpinnerChange = (val: string, name: DatePart) => {
+    this.#spinnerState[name] = val
+
+    const newDate = new Date()
+    newDate.setFullYear(parseInt(this.#spinnerState.year))
+    newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
+    newDate.setDate(parseInt(this.#spinnerState.day))
+
+    if (newDate.toString() === 'Invalid Date') return
+
+    this.value = newDate
+
+    this.#dispatchChangeEvent()
   }
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
@@ -376,7 +385,7 @@ export class GdsDatepicker extends GdsFormControlElement {
     }
   }
 
-  #parseDateFormat(dateformat: string): StructuredDateFormat {
+  #parseDateFormat(dateformat: string): DateFormatLayout {
     const delimiter = dateformat.replace(/[a-z0-9]/gi, '')[0]
     const format = dateformat.split(delimiter)
     const year = format.findIndex((f) => f === 'y')
@@ -392,13 +401,21 @@ export class GdsDatepicker extends GdsFormControlElement {
       .map((f) => ({
         token: f,
         name: f === 'y' ? 'year' : f === 'm' ? 'month' : 'day',
-      })) as StructuredDateFormat['orderedFormat']
+      })) as DateFormatLayout['layout']
 
-    return { delimiter, orderedFormat }
+    return { delimiter, layout: orderedFormat }
   }
 
-  get #structuredDate() {
+  #_spinnerState = {
+    year: 'yyyy',
+    month: 'mm',
+    day: 'dd',
+  }
+  get #spinnerState() {
     const date = this.value
+
+    if (!date) return this.#_spinnerState
+
     const year = date.getFullYear().toString()
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
     const day = date.getDate().toString().padStart(2, '0')
@@ -409,11 +426,23 @@ export class GdsDatepicker extends GdsFormControlElement {
       day: day,
     }
   }
+  set #spinnerState(state: { year: string; month: string; day: string }) {
+    this.#_spinnerState = state
+  }
 
   get #years() {
     return eachYearOfInterval({
       start: this.min,
       end: this.max,
     }).map((date) => date.getFullYear())
+  }
+
+  _handleFormReset = () => {
+    this.value = undefined
+    this.#spinnerState = {
+      year: 'yyyy',
+      month: 'mm',
+      day: 'dd',
+    }
   }
 }

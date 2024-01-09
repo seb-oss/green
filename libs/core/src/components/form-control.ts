@@ -46,7 +46,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * Get or set the value of the form control.
    */
   @property()
-  value: ValueT | undefined
+  value?: ValueT
 
   @property({ reflect: true })
   name = ''
@@ -81,12 +81,12 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.#internals.form?.addEventListener('reset', this.#handleFormReset)
+    this.#internals.form?.addEventListener('reset', this._handleFormReset)
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback()
-    this.#internals.form?.removeEventListener('reset', this.#handleFormReset)
+    this.#internals.form?.removeEventListener('reset', this._handleFormReset)
   }
 
   @watch('invalid')
@@ -115,8 +115,9 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   /**
    * Event handler for the form reset event.
+   * Can be overridden by subclasses to rcustomize the reset value.
    */
-  #handleFormReset = () => {
+  protected _handleFormReset = () => {
     this.value = undefined
   }
 }
