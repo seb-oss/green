@@ -48,23 +48,12 @@ export interface ElementProps {
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit
 {
-  get months(): Array<DropdownOption> {
-    return this._months
-  }
-
-  set months(value: Array<DropdownOption>) {
-    this._months = value
-  }
-
   @Input()
   get options(): DatepickerOptions {
     return <DatepickerOptions>this._options
   }
   set options(value: DatepickerOptions) {
     this._options = value
-    if (value.locale) {
-      this.months = months({ locale: this.options?.locale })
-    }
   }
 
   @Input()
@@ -86,9 +75,17 @@ export class NggDatepickerComponent
   onTouchedFn?: any
 
   _value: string | Date | undefined
-  private _months: Array<DropdownOption> = months({})
-  years?: Array<DropdownOption>
   private _options?: DatepickerOptions
+
+  get min(): Date | undefined {
+    const minDate = this.options?.minDate
+    return minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
+  }
+
+  get max(): Date | undefined {
+    const maxDate = this.options?.maxDate
+    return maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
+  }
 
   constructor(private _cdr: ChangeDetectorRef) {
     registerTransitionalStyles()

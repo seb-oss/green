@@ -251,6 +251,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         <gds-calendar
           id="calendar"
           @change=${(e: CustomEvent<Date>) => {
+            e.stopPropagation()
             this.value = e.detail
             this.open = false
             this.#dispatchChangeEvent()

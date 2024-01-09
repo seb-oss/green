@@ -2,8 +2,11 @@
   <gds-datepicker
     *nggCoreElement
     [label]="label"
+    [value]="value"
     (change)="onGdsDatepickerChange($event)"
     [invalid]="isValid === false"
+    [min]="min"
+    [max]="max"
   >
     <span slot="message">
       <ng-content select="[data-form-info]"></ng-content>
