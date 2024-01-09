@@ -3,5 +3,10 @@
     *nggCoreElement
     [label]="label"
     (change)="onGdsDatepickerChange($event)"
-  ></gds-datepicker>
+    [invalid]="isValid === false"
+  >
+    <span slot="message">
+      <ng-content select="[data-form-info]"></ng-content>
+    </span>
+  </gds-datepicker>
 </div>

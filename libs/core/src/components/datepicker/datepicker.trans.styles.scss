@@ -1,5 +1,12 @@
 @use '../../../../chlorophyll/scss/common';
 @use '../../../../chlorophyll/scss/components/icon';
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
+@use '../../../../chlorophyll/scss/tokens' as tokens;
+
+:host {
+  display: block;
+}
 
 label {
   display: block;
@@ -17,9 +24,10 @@ label + .field {
   background-color: var(--sg-form-control-bg);
   box-sizing: border-box;
   color: var(--sg-text-primary);
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
   min-height: 2.75rem;
   overflow: hidden;
 
@@ -29,6 +37,7 @@ label + .field {
     @include common.add-border(('top', 'bottom', 'left'));
     @include common.add-border-color();
     border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
+    flex-grow: 1;
   }
 
   span {
@@ -60,6 +69,11 @@ label + .field {
       fill: #fff;
     }
   }
+}
+
+:host(:invalid) .field + .form-info {
+  @include validation.add-feedback-element();
+  @include validation.add-feedback(tokens.$intent-danger-background);
 }
 
 .header {

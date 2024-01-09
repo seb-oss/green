@@ -45,6 +45,8 @@ const dateConverter = {
  * @element gds-datepicker
  *
  * A form control that allows the user to select a date.
+ *
+ * @slot message - Message to show below the input field. Will be red if there is a validation error.
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement {
@@ -149,6 +151,7 @@ export class GdsDatepicker extends GdsFormControlElement {
   render() {
     return html`
       <label for="spinner-0" id="label">${this.label}</label>
+
       <div class="field" id="trigger">
         <div class="input">
           ${join(
@@ -191,6 +194,9 @@ export class GdsDatepicker extends GdsFormControlElement {
           </svg>
         </button>
       </div>
+
+      <div class="form-info"><slot name="message"></slot></div>
+
       <gds-popover
         .triggerRef=${this._elTrigger}
         .open=${this.open}

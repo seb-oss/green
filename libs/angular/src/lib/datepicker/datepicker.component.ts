@@ -121,10 +121,6 @@ export class NggDatepickerComponent
     this.onChangeFn && this.onChangeFn(e.detail.value)
   }
 
-  trackWeek(index: any, week: any) {
-    return week
-  }
-
   ngAfterViewInit(): void {
     this._cdr.detectChanges()
   }
