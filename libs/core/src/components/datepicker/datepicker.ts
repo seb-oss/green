@@ -62,7 +62,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
-   * The currently selected date.
+   * The Date value of the datepicker. This can be set to undefined to clear the datepicker.
+   * This can be a string if set via the value attribute in markup, or via the setAttribute DOM API.
    */
   @property({ converter: dateConverter })
   value?: Date
@@ -86,13 +87,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   open = false
 
   /**
-   * The label of the datepicker.
+   * The label text displayed above the datepicker. This should always be set to a descriptive label.
    */
   @property()
   label = ''
 
   /**
-   * Whether to show week numbers in the calendar.
+   * Whether to show a column of week numbers in the calendar.
    */
   @property({ type: Boolean })
   showWeekNumbers = false
@@ -395,6 +396,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     }
   }
 
+  /**
+   * Takes a dateformat string from the dateformat attribute and turnes it to a DateFormatLayout object used in rendering the template.
+   */
   #parseDateFormat(dateformat: string): DateFormatLayout {
     const delimiter = dateformat.replace(/[a-z0-9]/gi, '')[0]
     const format = dateformat.split(delimiter)
@@ -416,11 +420,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return { delimiter, layout: orderedFormat }
   }
 
-  #_spinnerState = {
-    year: 'yyyy',
-    month: 'mm',
-    day: 'dd',
-  }
+  /**
+   * The spinner state keeps track of the spinner values regardless of wheter a complete date has been enter yet.
+   */
   get #spinnerState() {
     const date = this.value
 
@@ -439,15 +441,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   set #spinnerState(state: { year: string; month: string; day: string }) {
     this.#_spinnerState = state
   }
+  #_spinnerState = {
+    year: 'yyyy',
+    month: 'mm',
+    day: 'dd',
+  }
 
+  /**
+   * Returns an array of years between the min and max dates for use in the year dropdown.
+   */
   get #years() {
     return eachYearOfInterval({
       start: this.min,
       end: this.max,
     }).map((date) => date.getFullYear())
-  }
-
-  _handleFormReset = () => {
-    this.value = undefined
   }
 }
