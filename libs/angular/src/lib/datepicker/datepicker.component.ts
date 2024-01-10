@@ -6,6 +6,8 @@ import {
   Output,
   EventEmitter,
   ChangeDetectorRef,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -14,8 +16,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
-import { months, randomId, DatepickerOptions } from '@sebgroup/extract'
-import { DropdownOption } from '../dropdown/dropdown.component'
+import { randomId, DatepickerOptions } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
 import { GdsDatepicker } from '@sebgroup/green-core'
@@ -62,8 +63,9 @@ export class NggDatepickerComponent
   }
   set value(newValue: string | Date | undefined) {
     if (newValue !== this._value) {
-      this._value = newValue || ''
+      this._value = newValue || undefined
     }
+    console.log('value', this._value)
   }
 
   @Input() id?: string = randomId()
@@ -92,6 +94,7 @@ export class NggDatepickerComponent
   }
 
   writeValue(value: any): void {
+    console.log('writeValue', value)
     this.value = value
   }
 
@@ -103,17 +106,11 @@ export class NggDatepickerComponent
     this.onTouchedFn = fn
   }
 
-  onDateChange(value: string) {
-    const newDate = new Date(value)
-    // Only pass valid date to date picker
-    if (isNaN(newDate.getTime())) {
-      this.valueChange.emit(value)
-      this.onChangeFn && this.onChangeFn(value)
-    }
-  }
-
-  onGdsDatepickerChange(evt: Event) {
+  onDateChange(evt: Event) {
     const e = evt as CustomEvent
+
+    this.value = e.detail.value
+
     this.valueChange.emit(e.detail.value)
     this.onChangeFn && this.onChangeFn(e.detail.value)
   }

@@ -291,6 +291,15 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @watch('value')
   private _handleValueChange() {
+    // Reset spinner state if value is unset
+    if (!this.value) {
+      this.#spinnerState = {
+        year: 'yyyy',
+        month: 'mm',
+        day: 'dd',
+      }
+    }
+
     let date = this.value || new Date()
     this._focusedMonth = date.getMonth()
     this._focusedYear = date.getFullYear()
@@ -440,10 +449,5 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   _handleFormReset = () => {
     this.value = undefined
-    this.#spinnerState = {
-      year: 'yyyy',
-      month: 'mm',
-      day: 'dd',
-    }
   }
 }
