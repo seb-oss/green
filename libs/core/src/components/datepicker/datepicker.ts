@@ -306,6 +306,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const date = this.value || new Date()
     this._focusedMonth = date.getMonth()
     this._focusedYear = date.getFullYear()
+
+    // Update spinner state
+    const year = date.getFullYear().toString()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    this.#spinnerState = { year, month, day }
   }
 
   #getSpinnerLabel(name: DatePart) {
@@ -369,21 +375,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.open = e.detail.open
   }
 
-  #handleSpinnerChange = (val: string, name: DatePart) => {
-    this.#spinnerState[name] = val
-
-    const newDate = new Date()
-    newDate.setFullYear(parseInt(this.#spinnerState.year))
-    newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
-    newDate.setDate(parseInt(this.#spinnerState.day))
-
-    if (newDate.toString() === 'Invalid Date') return
-
-    this.value = newDate
-
-    this.#dispatchChangeEvent()
-  }
-
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
     const index = Array.from(this._elSpinners).findIndex(
       (spinner) => spinner === e.target
@@ -422,28 +413,25 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return { delimiter, layout: orderedFormat }
   }
 
+  #handleSpinnerChange = (val: string, name: DatePart) => {
+    this.#spinnerState[name] = val
+
+    const newDate = new Date()
+    newDate.setFullYear(parseInt(this.#spinnerState.year))
+    newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
+    newDate.setDate(parseInt(this.#spinnerState.day))
+
+    if (newDate.toString() === 'Invalid Date') return
+
+    this.value = newDate
+
+    this.#dispatchChangeEvent()
+  }
+
   /**
    * The spinner state keeps track of the spinner values regardless of wheter a complete date has been enter yet.
    */
-  get #spinnerState() {
-    const date = this.value
-
-    if (!date) return this.#_spinnerState
-
-    const year = date.getFullYear().toString()
-    const month = (date.getMonth() + 1).toString().padStart(2, '0')
-    const day = date.getDate().toString().padStart(2, '0')
-
-    return {
-      year: year,
-      month: month,
-      day: day,
-    }
-  }
-  set #spinnerState(state: { year: string; month: string; day: string }) {
-    this.#_spinnerState = state
-  }
-  #_spinnerState = {
+  #spinnerState = {
     year: 'yyyy',
     month: 'mm',
     day: 'dd',

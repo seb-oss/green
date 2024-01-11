@@ -77,7 +77,7 @@ export class GdsDatePartSpinner extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: this.value },
+        detail: { value: this.value.toString() },
       })
     )
   }
@@ -92,7 +92,7 @@ export class GdsDatePartSpinner extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: this.value },
+        detail: { value: this.value.toString() },
       })
     )
   }
@@ -115,7 +115,7 @@ export class GdsDatePartSpinner extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: this.value },
+        detail: { value: this.value.toString() },
       })
     )
 
