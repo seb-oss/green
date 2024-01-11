@@ -97,7 +97,7 @@ describe('<gds-datepicker>', () => {
 
     it('should dispatch a change event when the value is changed by the user', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker></gds-datepicker>`
+        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`
       )
       const changeHandler = sinon.fake()
       el.addEventListener('change', changeHandler)
@@ -114,6 +114,8 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'Tab',
       })
+
+      await timeout(0)
 
       await expect(changeHandler.calledOnce).to.be.true
     })
@@ -189,7 +191,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value).to.equal('2025')
+      await expect(spinners[0].value.toString()).to.equal('2025')
     })
 
     it('should decrement the spinner value when pressing the down arrow', async () => {
@@ -208,7 +210,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value).to.equal('2023')
+      await expect(spinners[0].value.toString()).to.equal('2023')
     })
 
     it('should focus the next spinner when pressing the right arrow', async () => {
@@ -227,7 +229,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[1].value).to.equal('01')
+      await expect(spinners[1].value.toString()).to.equal('01')
     })
 
     it('should focus the previous spinner when pressing the left arrow', async () => {
@@ -246,7 +248,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value).to.equal('2024')
+      await expect(spinners[0].value.toString()).to.equal('2024')
     })
 
     it('should set year to 20 when typing 20 in the year spinner', async () => {
@@ -288,7 +290,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value).to.equal('2022')
+      await expect(spinners[0].value.toString()).to.equal('2022')
     })
 
     it('should open the month picker when clicking on the calendar button and then tabbing twice and pressing enter', async () => {

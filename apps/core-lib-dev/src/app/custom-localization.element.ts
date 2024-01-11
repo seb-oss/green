@@ -70,6 +70,7 @@ export class AppElement extends HTMLElement {
             label="Pick a date"
             dateformat="y/m/d"
             showWeekNumbers
+            onchange="console.log('date changed', this.value)"
           >
             <span slot="sub-label"
               >This text sits in a slot, so app can handle translation however
