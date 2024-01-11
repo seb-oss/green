@@ -133,6 +133,11 @@ export class GdsCalendar extends LitElement {
     })
   }
 
+  focus() {
+    super.focus()
+    this._elFocusedCell?.focus()
+  }
+
   render() {
     const currentDate = new Date()
 
@@ -163,26 +168,29 @@ export class GdsCalendar extends LitElement {
                         ${getWeek(week.days[0])}
                       </td>`
                   )}
-                  ${week.days.map(
-                    (day) => html`
+                  ${week.days.map((day) => {
+                    const isDisabled =
+                      !isSameMonth(this.focusedDate, day) ||
+                      day < this.min ||
+                      day > this.max
+                    return html`
                       <td
                         class="${classMap({
-                          disabled:
-                            !isSameMonth(this.focusedDate, day) ||
-                            day < this.min ||
-                            day > this.max,
+                          disabled: isDisabled,
                           today: isSameDay(currentDate, day),
                         })}"
+                        ?disabled=${isDisabled}
                         tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
                         aria-selected="${isSameDay(this.value, day)}"
                         aria-label="${day.toDateString()}"
-                        @click=${() => this.#setSelectedDate(day)}
+                        @click=${() =>
+                          isDisabled ? null : this.#setSelectedDate(day)}
                         id="dateCell-${day.getDate()}"
                       >
                         ${day.getDate()}
                       </td>
                     `
-                  )}
+                  })}
                 </tr>
               `
             )}

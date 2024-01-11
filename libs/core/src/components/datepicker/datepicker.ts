@@ -24,6 +24,7 @@ import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
+import { GdsPopover } from '../../primitives/popover/popover'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -212,6 +213,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         id="calendar-popover"
         .placement=${'bottom-end'}
         .calcMinWidth=${() => 'auto'}
+        @focusin=${async (e: FocusEvent) => {
+          const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
+          if (!isPopover) return
+          this._elCalendar.then((cal) => cal.focus())
+        }}
       >
         <div class="header">
           <button @click=${this.#handleDecrementFocusedMonth}>

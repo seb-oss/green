@@ -293,7 +293,7 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('2022')
     })
 
-    it('should open the month picker when clicking on the calendar button and then tabbing twice and pressing enter', async () => {
+    it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`
       )
@@ -310,11 +310,15 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(button)
       await conditionToBeTrue(() => popover.open)
 
-      let keyPress = 'Tab'
+      let keyPress = 'Shift+Tab'
       if (isWebKit()) {
-        keyPress = 'Alt+Tab'
+        keyPress = 'Shift+Alt+Tab'
       }
 
+      await sendKeys({
+        press: keyPress,
+      })
+      await timeout(0)
       await sendKeys({
         press: keyPress,
       })
