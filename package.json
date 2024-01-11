@@ -45,7 +45,7 @@
     "@angular/platform-browser": "15.2.9",
     "@angular/platform-browser-dynamic": "15.2.9",
     "@angular/router": "15.2.9",
-    "@floating-ui/dom": "^1.5.3",
+    "@floating-ui/dom": "^1.5.4",
     "@lit/react": "^1.0.2",
     "@material/material-color-utilities": "^0.2.4",
     "@nx/plugin": "16.8.1",
