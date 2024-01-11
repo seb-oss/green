@@ -210,6 +210,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
         id="calendar-popover"
+        .placement=${'bottom-end'}
+        .calcMinWidth=${() => 'auto'}
       >
         <div class="header">
           <button @click=${this.#handleDecrementFocusedMonth}>

@@ -18,6 +18,7 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
 
 import styles from './popover.styles'
+import { reference } from '@popperjs/core'
 
 /**
  * @element gds-popover
@@ -60,6 +61,13 @@ export class GdsPopover extends LitElement {
    */
   @property()
   placement: Placement = 'bottom-start'
+
+  /**
+   * A callback that returns the minimum width of the popover.
+   * By default, the popover minWidth will be as wide as the trigger element.
+   */
+  @property()
+  calcMinWidth = (referenceEl: HTMLElement) => referenceEl.offsetWidth
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
@@ -240,7 +248,7 @@ export class GdsPopover extends LitElement {
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
-          minWidth: `${referenceEl.offsetWidth}px`,
+          minWidth: `${this.calcMinWidth(referenceEl)}px`,
         })
       )
     })
