@@ -1,11 +1,5 @@
 [
   {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
-  },
-  {
     "id": "chart--simple-bar",
     "name": "Simple Bar",
     "title": "Chart",
@@ -144,5 +138,11 @@
         "component-chart"
       ]
     }
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
   }
 ]
