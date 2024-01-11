@@ -147,22 +147,22 @@
     "customParams": {}
   },
   {
-    "id": "components-form-checkbox--checkbox",
-    "name": "Checkbox",
-    "title": "Components/Form/Checkbox",
-    "customParams": {
-      "componentIds": [
-        "component-checkbox"
-      ]
-    }
-  },
-  {
     "id": "components-form--button-group",
     "name": "Button Group",
     "title": "Components/Form",
     "customParams": {
       "componentIds": [
         "component-segmented-control"
+      ]
+    }
+  },
+  {
+    "id": "components-form-checkbox--checkbox",
+    "name": "Checkbox",
+    "title": "Components/Form/Checkbox",
+    "customParams": {
+      "componentIds": [
+        "component-checkbox"
       ]
     }
   },
