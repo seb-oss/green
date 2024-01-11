@@ -345,5 +345,22 @@ describe('<gds-datepicker>', () => {
 
       await expect(el).to.be.accessible()
     })
+
+    it('should be accessible with more options', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          label="Datepicker"
+          value="2024-01-02"
+          min="2022-10-10"
+          max="2025-10-10"
+          showWeekNumbers
+        >
+          <span slot="sub-label">A sub-label</span>
+          <span slot="message">Instructive message</span>
+        </gds-datepicker>`
+      )
+
+      await expect(el).to.be.accessible()
+    })
   })
 })
