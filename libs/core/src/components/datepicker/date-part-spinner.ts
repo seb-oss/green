@@ -71,7 +71,7 @@ export class GdsDatePartSpinner extends LitElement {
     let current = parseInt(this.value.toString())
 
     if (Number.isNaN(current))
-      current = this.length === 2 ? this.min : new Date().getFullYear()
+      current = this.length === 2 ? this.min : new Date().getFullYear() - 1
 
     this.value = this.#clamp(current + 1)
 
@@ -86,7 +86,7 @@ export class GdsDatePartSpinner extends LitElement {
     let current = parseInt(this.value.toString())
 
     if (Number.isNaN(current))
-      current = this.length === 2 ? this.max : new Date().getFullYear()
+      current = this.length === 2 ? this.max : new Date().getFullYear() + 1
 
     this.value = this.#clamp(current - 1)
 
