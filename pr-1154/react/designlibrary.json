@@ -1,70 +1,5 @@
 [
   {
-    "id": "components-modal--modal-default",
-    "name": "Modal Default",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-small",
-    "name": "Slide Out Small",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-medium",
-    "name": "Slide Out Medium",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--slide-out-large",
-    "name": "Slide Out Large",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--take-over",
-    "name": "Take Over",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
     "id": "components-layout-flexbox--flexbox",
     "name": "Flexbox",
     "title": "Components/Layout/Flexbox",
@@ -411,6 +346,16 @@
     }
   },
   {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
     "id": "components-alertribbon--alert-ribbon",
     "name": "AlertRibbon",
     "title": "Components/AlertRibbon",
@@ -421,12 +366,67 @@
     }
   },
   {
-    "id": "components-accordion--accordion",
-    "name": "Accordion",
-    "title": "Components/Accordion",
+    "id": "components-modal--modal-default",
+    "name": "Modal Default",
+    "title": "Components/Modal",
     "customParams": {
       "componentIds": [
-        "component-accordion"
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-small",
+    "name": "Slide Out Small",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-medium",
+    "name": "Slide Out Medium",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-large",
+    "name": "Slide Out Large",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--take-over",
+    "name": "Take Over",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
       ]
     }
   },
