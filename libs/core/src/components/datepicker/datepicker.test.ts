@@ -119,6 +119,44 @@ describe('<gds-datepicker>', () => {
 
       await expect(changeHandler.calledOnce).to.be.true
     })
+
+    it('should reset when setting value to undefined', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+
+      await expect(spinners[0].value.toString()).to.equal('2024')
+
+      el.value = undefined
+      await el.updateComplete
+
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
+    })
+
+    it('should reset when form is reset', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<form>
+          <gds-datepicker id="datepicker" value="2024-01-10"></gds-datepicker>
+          <button type="reset">Reset</button>
+        </form>`
+      )
+      const resetButton = el.querySelector<HTMLButtonElement>('button')!
+      const spinners = el
+        .querySelector('#datepicker')!
+        .shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+          getScopedTagName('gds-date-part-spinner')
+        )!
+
+      await expect(spinners[0].value.toString()).to.equal('2024')
+
+      resetButton.click()
+      await timeout(0)
+
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
+    })
   })
 
   describe('Interactions', () => {
