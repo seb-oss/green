@@ -57,6 +57,10 @@ export class NggDatepickerComponent
     this._options = value
   }
 
+  get showWeekNumbers(): boolean {
+    return this.options?.showWeeks ?? false
+  }
+
   @Input()
   get value(): string | Date | undefined {
     return this._value
