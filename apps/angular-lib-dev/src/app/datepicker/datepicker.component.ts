@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { DatepickerOptions } from '@sebgroup/extract'
 import { startOfYear, subYears } from 'date-fns'
-import { dateValidator } from '@sebgroup/green-angular'
+import { dateValidator, DatepickerOptions } from '@sebgroup/green-angular'
 
 @Component({
   selector: 'green-datepicker',
