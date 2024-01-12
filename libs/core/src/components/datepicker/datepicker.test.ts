@@ -373,6 +373,40 @@ describe('<gds-datepicker>', () => {
 
       await expect(monthDropdown.open).to.be.true
     })
+
+    it('should be possible to type out a date without tabbing', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker></gds-datepicker>`
+      )
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+
+      spinners[0].focus()
+
+      await sendKeys({
+        type: '2024',
+      })
+
+      await sendKeys({
+        type: '05',
+      })
+
+      await sendKeys({
+        type: '10',
+      })
+
+      await sendKeys({
+        press: 'Tab',
+      })
+
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(el.value!.toISOString().split('T')[0]).to.equal(
+        new Date('2024-05-10').toISOString().split('T')[0]
+      )
+    })
   })
 
   describe('Accessibility', () => {

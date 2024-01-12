@@ -75,11 +75,7 @@ export class GdsDatePartSpinner extends LitElement {
 
     this.value = this.#clamp(current + 1)
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value.toString() },
-      })
-    )
+    this.#dispatchChangeEvent()
   }
 
   #decrement = () => {
@@ -90,11 +86,7 @@ export class GdsDatePartSpinner extends LitElement {
 
     this.value = this.#clamp(current - 1)
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value.toString() },
-      })
-    )
+    this.#dispatchChangeEvent()
   }
 
   #handleClick = (e: MouseEvent) => {
@@ -113,11 +105,7 @@ export class GdsDatePartSpinner extends LitElement {
     this.#clearInputBuffer()
     this.value = this.#clamp(parseInt(this.value.toString()))
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value.toString() },
-      })
-    )
+    this.#dispatchChangeEvent()
 
     document.getSelection()?.removeAllRanges()
   }
@@ -146,6 +134,12 @@ export class GdsDatePartSpinner extends LitElement {
       if (!isNaN(key)) {
         this.#inputBuffer += key.toString()
         this.value = parseInt(this.#inputBuffer)
+
+        if (this.#inputBuffer.length == this.length) {
+          this.#focusNextSpinner()
+          this.#dispatchChangeEvent()
+        }
+
         handled = true
       }
     }
@@ -154,6 +148,25 @@ export class GdsDatePartSpinner extends LitElement {
       e.preventDefault()
       e.stopPropagation()
     }
+  }
+
+  #focusNextSpinner() {
+    let nextSpinner = this.nextElementSibling
+    while (nextSpinner) {
+      if (nextSpinner instanceof GdsDatePartSpinner) {
+        nextSpinner.focus()
+        break
+      }
+      nextSpinner = nextSpinner.nextElementSibling
+    }
+  }
+
+  #dispatchChangeEvent() {
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value.toString() },
+      })
+    )
   }
 
   #formatNumber(num: number | string, padZeros: number) {
