@@ -6,8 +6,6 @@ import {
   Output,
   EventEmitter,
   ChangeDetectorRef,
-  SimpleChanges,
-  OnChanges,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -16,7 +14,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
-import { randomId, DatepickerOptions } from '@sebgroup/extract'
+import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
 import { GdsDatepicker } from '@sebgroup/green-core'
@@ -32,6 +30,20 @@ export interface Attributes {
 export interface ElementProps {
   attributes: Attributes
   classes: string[]
+}
+
+export interface DatepickerOptions {
+  label?: string
+  locale?: string
+  currentDate?: Date | string
+  selectedDate?: Date | string
+  closeOnSelect?: boolean
+  useCurrentTime?: boolean
+  weekName?: { abbr: string; displayText: string }
+  showWeeks?: boolean
+  minDate?: Date
+  maxDate?: Date
+  onChange?: (selectedDate: Date) => void
 }
 
 @Component({
