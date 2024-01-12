@@ -307,9 +307,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         month: 'mm',
         day: 'dd',
       }
+      return
     }
 
-    const date = this.value || new Date()
+    const date = this.value
     this._focusedMonth = date.getMonth()
     this._focusedYear = date.getFullYear()
 
