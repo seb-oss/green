@@ -254,22 +254,22 @@
     }
   },
   {
-    "id": "components-skeleton-loader--page",
-    "name": "Page",
-    "title": "Components/Skeleton loader",
-    "customParams": {
-      "componentIds": [
-        "component-skeleton-loader"
-      ]
-    }
-  },
-  {
     "id": "components-slide-toggle--slide-toggle",
     "name": "Slide Toggle",
     "title": "Components/Slide Toggle",
     "customParams": {
       "componentIds": [
         "component-slidetoggle"
+      ]
+    }
+  },
+  {
+    "id": "components-skeleton-loader--page",
+    "name": "Page",
+    "title": "Components/Skeleton loader",
+    "customParams": {
+      "componentIds": [
+        "component-skeleton-loader"
       ]
     }
   },
