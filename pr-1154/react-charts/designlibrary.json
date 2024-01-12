@@ -1,29 +1,5 @@
 [
   {
-    "id": "use-cases-lighthouse-1--bar-chart",
-    "name": "Bar chart",
-    "title": "Use cases/Lighthouse 1",
-    "customParams": {}
-  },
-  {
-    "id": "use-cases-lighthouse-1--bar-chart-with-negative",
-    "name": "Bar chart with negative",
-    "title": "Use cases/Lighthouse 1",
-    "customParams": {}
-  },
-  {
-    "id": "use-cases-lighthouse-1--pie-chart",
-    "name": "Pie chart",
-    "title": "Use cases/Lighthouse 1",
-    "customParams": {}
-  },
-  {
-    "id": "use-cases-lighthouse-1--splines-chart",
-    "name": "Splines chart",
-    "title": "Use cases/Lighthouse 1",
-    "customParams": {}
-  },
-  {
     "id": "chart--simple-bar",
     "name": "Simple Bar",
     "title": "Chart",
@@ -92,6 +68,30 @@
         "component-chart"
       ]
     }
+  },
+  {
+    "id": "use-cases-lighthouse-1--bar-chart",
+    "name": "Bar chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--bar-chart-with-negative",
+    "name": "Bar chart with negative",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--pie-chart",
+    "name": "Pie chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--splines-chart",
+    "name": "Splines chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
   },
   {
     "id": "getting-started--getting-started",
