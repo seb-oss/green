@@ -3,7 +3,14 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 import { property, query } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
-import { addDays, isSameDay, isSameMonth, getWeek } from 'date-fns'
+import {
+  addDays,
+  isSameDay,
+  isSameMonth,
+  getWeek,
+  subMonths,
+  addMonths,
+} from 'date-fns'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -94,43 +101,7 @@ export class GdsCalendar extends LitElement {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-calendar')
 
-    this.addEventListener('keydown', (e: KeyboardEvent) => {
-      let handled = false
-
-      if (e.key === 'ArrowLeft') {
-        this.focusedDate = addDays(this.focusedDate, -1)
-        handled = true
-      } else if (e.key === 'ArrowRight') {
-        this.focusedDate = addDays(this.focusedDate, 1)
-        handled = true
-      } else if (e.key === 'ArrowUp') {
-        this.focusedDate = addDays(this.focusedDate, -7)
-        handled = true
-      } else if (e.key === 'ArrowDown') {
-        this.focusedDate = addDays(this.focusedDate, 7)
-        handled = true
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        this.#setSelectedDate(this.focusedDate)
-        handled = true
-      }
-
-      if (handled) {
-        e.preventDefault()
-        e.stopPropagation()
-
-        this.updateComplete.then(() => {
-          this._elFocusedCell?.focus()
-
-          this.dispatchEvent(
-            new CustomEvent('gds-date-focused', {
-              detail: this.focusedDate,
-              bubbles: true,
-              composed: true,
-            })
-          )
-        })
-      }
-    })
+    this.addEventListener('keydown', this.#handleKeyDown)
   }
 
   focus() {
@@ -210,5 +181,55 @@ export class GdsCalendar extends LitElement {
         composed: true,
       })
     )
+  }
+
+  #handleKeyDown(e: KeyboardEvent) {
+    let handled = false
+
+    if (e.key === 'ArrowLeft') {
+      this.focusedDate = addDays(this.focusedDate, -1)
+      handled = true
+    } else if (e.key === 'ArrowRight') {
+      this.focusedDate = addDays(this.focusedDate, 1)
+      handled = true
+    } else if (e.key === 'ArrowUp') {
+      this.focusedDate = addDays(this.focusedDate, -7)
+      handled = true
+    } else if (e.key === 'ArrowDown') {
+      this.focusedDate = addDays(this.focusedDate, 7)
+      handled = true
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      this.#setSelectedDate(this.focusedDate)
+      handled = true
+    } else if (e.key === 'Home') {
+      this.focusedDate = new Date(this.focusedYear, this.focusedMonth, 1)
+      handled = true
+    } else if (e.key === 'End') {
+      this.focusedDate = new Date(this.focusedYear, this.focusedMonth + 1, 0)
+      handled = true
+    } else if (e.key === 'PageUp') {
+      this.focusedDate = subMonths(this.focusedDate, 1)
+      handled = true
+    } else if (e.key === 'PageDown') {
+      this.focusedDate = addMonths(this.focusedDate, 1)
+      handled = true
+    }
+
+    if (handled) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      this.updateComplete.then(() => {
+        this._elFocusedCell?.focus()
+
+        this.dispatchEvent(
+          new CustomEvent('gds-date-focused', {
+            detail: this.focusedDate,
+            bubbles: true,
+            composed: true,
+          })
+        )
+      })
+    }
   }
 }

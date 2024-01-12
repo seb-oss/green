@@ -137,3 +137,7 @@ export function isChromium() {
 export function isFirefox() {
   return navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 }
+
+export function onlyDate(date: Date) {
+  return date.toISOString().split('T')[0]
+}

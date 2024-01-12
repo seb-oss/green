@@ -79,6 +79,8 @@ export class AppElement extends HTMLElement {
             <span slot="message">Same here</span>
           </gds-datepicker>
 
+          <gds-calendar></gds-calendar>
+
           <button type="submit">Submit</button>
           <button type="reset">Reset</button>
         </form>

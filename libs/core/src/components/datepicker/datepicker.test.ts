@@ -2,12 +2,12 @@ import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { time } from 'console'
 
 import {
   clickOnElement,
   conditionToBeTrue,
   isWebKit,
+  onlyDate,
   timeout,
 } from '../../utils/testing'
 import '../../../../../dist/libs/core/src/index.js'
@@ -19,7 +19,6 @@ import {
 import type { GdsDatepicker } from './datepicker'
 import { GdsPopover } from 'src/primitives/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
-import exp from 'constants'
 import { GdsDropdown } from '../dropdown/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
@@ -403,9 +402,30 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(el.value!.toISOString().split('T')[0]).to.equal(
-        new Date('2024-05-10').toISOString().split('T')[0]
+      await expect(onlyDate(el.value!)).to.equal(
+        onlyDate(new Date('2024-05-10'))
       )
+    })
+
+    it('should give calendar keyboard focus after opening the popover', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker></gds-datepicker>`
+      )
+
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+        '[aria-controls="calendar-popover"]'
+      )!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
+      await clickOnElement(button)
+      await conditionToBeTrue(() => popover.open)
+
+      await sendKeys({
+        press: 'Enter',
+      })
+
+      expect(onlyDate(el.value!)).to.equal(onlyDate(new Date()))
     })
   })
 
