@@ -28,7 +28,6 @@ label + .field {
 
 .field {
   @include common.add-border-radius();
-  @include common.add-focus('within');
   align-items: center;
   background-color: var(--sg-form-control-bg);
   box-sizing: border-box;
@@ -38,15 +37,17 @@ label + .field {
   justify-content: space-between;
   margin: 0.5rem 0;
   min-height: 2.75rem;
-  overflow: hidden;
+  //overflow: hidden;
 
   .input {
     @include common.padding-horizontal(5);
     @include common.padding-vertical(4);
     @include common.add-border(('top', 'bottom', 'left'));
     @include common.add-border-color();
+    @include common.add-focus('within');
     border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
     flex-grow: 1;
+    isolation: isolate;
   }
 
   span {
@@ -66,9 +67,12 @@ label + .field {
   }
 
   button {
+
+    @include common.add-focus();
     appearance: none;
     background: var(--intent-info-background);
     border: 0;
+    border-radius: 0 var(--sg-border-radius) var(--sg-border-radius) 0;
     box-sizing: border-box;
     cursor: pointer;
     padding: 0.7rem 1rem;
