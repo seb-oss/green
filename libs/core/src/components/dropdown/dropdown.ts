@@ -111,6 +111,17 @@ export class GdsDropdown<ValueT = any>
   searchFilter: (q: string, o: GdsOption) => boolean = (q, o) =>
     o.innerHTML.toLowerCase().includes(q.toLowerCase())
 
+  /**
+   * Whether the popover should sync its width to the trigger button. When this is
+   * set to `true`, the popover will always have the same width as the trigger button.
+   *
+   * By default, line-breaks will be applied to the option content if it is wider than
+   * the popover width. If you use this option, make sure to verify that your options
+   * are still readable and apply appropriate custom layout or truncation if neccecary.
+   */
+  @property({ type: Boolean })
+  syncPopoverWidth = false
+
   // Private members
   #optionElements: HTMLCollectionOf<GdsOption>
 
@@ -220,6 +231,8 @@ export class GdsDropdown<ValueT = any>
         .label=${this.label}
         .open=${this.open}
         .triggerRef=${this.elTriggerBtnAsync}
+        .calcMaxWidth=${(trigger: HTMLElement) =>
+          this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         ${when(
