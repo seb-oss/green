@@ -427,6 +427,25 @@ describe('<gds-datepicker>', () => {
 
       expect(onlyDate(el.value!)).to.equal(onlyDate(new Date()))
     })
+
+    it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner')
+      )!
+
+      el.value = undefined
+
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[1].value.toString()).to.equal('mm')
+      await expect(spinners[2].value.toString()).to.equal('dd')
+    })
   })
 
   describe('Accessibility', () => {
