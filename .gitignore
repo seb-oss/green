@@ -41,3 +41,4 @@ package-lock.json # we should only have yarn.lock
 Thumbs.db
 
 .angular
+.nx
