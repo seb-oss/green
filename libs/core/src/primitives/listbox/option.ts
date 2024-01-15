@@ -120,7 +120,7 @@ export class GdsOption extends Focusable(LitElement) {
   }
 
   render() {
-    const isMultiple = this.parentElement.multiple
+    const isMultiple = this.parentElement?.multiple
 
     const checkbox = html`<span
       class="checkbox ${classMap({ checked: this.selected })}"
