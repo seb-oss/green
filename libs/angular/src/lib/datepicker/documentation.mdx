@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { ReactiveFormsModule } from '@angular/forms'
-import {NggDatepickerModule} from '@sebgroup/green-angular'
+import { NggDatepickerModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [AppComponent],
@@ -72,13 +72,7 @@ If you just need a simple select without any form, validation etc. it's possible
 ## DatepickerOptions
 |Option|Description|Default|
 |:--------|:----------|:------|
-|locale|Locale used with datepicker. | `navigator.language` |
-|currentDate|Initial date used by datepicker. | `new Date()` |
-|selectedDate|Selected date.|n/a|
-|closeOnSelect|Should datepicker close on select.| `true` |
-|useCurrentTime| Use current time when selecting date.| `true` |
 |showWeeks|Show week numbers.| `false` |
-|weekName|Header for week numbers.| `{ abbr: 'Week', displayText: 'wk' }` |
 |minDate|Min date for datepicker, dates before this date are disabled.| `startOfYear(subYears(new Date(), 5))` |
 |maxDate|Max date for datepicker, dates after this date are disabled.| `endOfYear(addYears(new Date(), 5))` |
 
