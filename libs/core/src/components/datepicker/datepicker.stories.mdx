@@ -19,8 +19,8 @@ Clicking the calendar icon opens a popover with a calendar view where a date can
 
 <Canvas>
 <div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker label="Label" onchange="document.getElementById('chosen-date').innerHTML = this.value.toISOString()"></gds-datepicker>
-Chosen date: <span id="chosen-date"></span>
+<gds-datepicker label="Label" onchange="document.getElementById('chosen-date').innerHTML = this.value?.toISOString() || 'None'"></gds-datepicker>
+Chosen date: <span id="chosen-date">None</span>
 </div>
 </Canvas>
 
