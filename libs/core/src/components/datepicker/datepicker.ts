@@ -278,7 +278,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <button
             class="tertiary clear"
             @click=${() => {
-              this.value = new Date()
+              this.value = undefined
               this.#dispatchChangeEvent()
             }}
           >
