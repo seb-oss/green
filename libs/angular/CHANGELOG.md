@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.1.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.2...@sebgroup/green-angular@2.1.3) (2024-01-16)
+
+
+### Bug Fixes
+
+* **angular/pagination:** fix keyboard navigation ([#1157](https://github.com/sebgroup/green/issues/1157)) ([cb9ba95](https://github.com/sebgroup/green/commit/cb9ba9575bc6533ab154e0d15c9f46aa29a74fba))
+
+
+
 ## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.1...@sebgroup/green-angular@2.1.2) (2023-12-06)
 
 
