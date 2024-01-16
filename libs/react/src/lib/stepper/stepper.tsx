@@ -1,17 +1,19 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import {
   IValidator,
   validateClassName,
   IndicatorType,
   StepperArgs,
 } from '@sebgroup/extract'
-import { on } from 'events'
 
 export interface StepperProps extends StepperArgs {
   label?: string
   description?: string
   statusMessage?: string
   validator?: IValidator
+  onIncrease?: () => void
+  onDecrease?: () => void
+  inputMode?: 'numeric' | 'decimal'
+  testId?: string
 }
 
 // TODO: Should be named "Numeric input" instead of stepper?
@@ -24,73 +26,43 @@ export function Stepper({
   validator,
   value = 0,
   onChange = () => undefined,
-  min = Number.MIN_SAFE_INTEGER,
-  max = Number.MAX_SAFE_INTEGER,
-  step = 1,
+  onIncrease = () => undefined,
+  onDecrease = () => undefined,
+  inputMode = 'numeric',
+  testId,
 }: StepperProps) {
-  const [localValue, setLocalValue] = useState<number>(value)
-
-  const clamp = (v: number) => Math.max(min, Math.min(v, max))
-
-  const onChangeEvent = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (isNaN(e.target.valueAsNumber)) return
-      const value = clamp(e.target.valueAsNumber)
-      setLocalValue(value)
-      onChange(value)
-    },
-    [onChange]
-  )
-
-  useEffect(() => {
-    setLocalValue(value)
-  }, [value])
-
-  const down = () => {
-    if (localValue > min) {
-      const newValue = clamp(localValue - step)
-      setLocalValue(newValue)
-      onChange(newValue)
-    }
-  }
-
-  const up = () => {
-    if (localValue < max) {
-      const newValue = clamp(localValue + step)
-      setLocalValue(newValue)
-      onChange(newValue)
-    }
-  }
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp') {
       e.preventDefault()
-      up()
+      onIncrease()
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
-      down()
+      onDecrease()
     }
   }
 
   const PrimitiveStepper = (
     <div
+      data-testid={testId}
       className={`group group-border group-stepper ${
         validator && validateClassName(validator?.indicator as IndicatorType)
       }`}
     >
-      <button type="button" onClick={down}>
+      <button type="button" onClick={onDecrease}>
         -
       </button>
       <input
         id={id}
-        type="number"
-        onChange={onChangeEvent}
+        type="text"
+        inputMode={inputMode}
+        pattern="[0-9]*"
+        onChange={onChange}
         onFocus={({ target }) => target.select()}
         onKeyDown={handleKeyDown}
         placeholder="0"
-        value={localValue}
+        value={value}
       />
-      <button type="button" onClick={up}>
+      <button type="button" onClick={onIncrease}>
         +
       </button>
     </div>
