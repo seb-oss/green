@@ -3,6 +3,7 @@
 @use '../../../../chlorophyll/scss/common';
 
 :host([open]) dialog {
+  box-sizing: border-box;
   opacity: 1;
   transform: translate3d(0, 0, 0);
   visibility: visible;
