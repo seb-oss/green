@@ -230,6 +230,31 @@ describe('<gds-dropdown>', () => {
     )
   })
 
+  it('should be the same width as the trigger when `syncPopoverWidth`attribute is set', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown syncPopoverWidth open>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+        <gds-option
+          >This is a very long option text that will cause the popover to be
+          very wide</gds-option
+        >
+      </gds-dropdown>
+    `)
+
+    await el.updateComplete
+
+    const popover = el.shadowRoot
+      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await timeout(50)
+
+    expect(popover?.clientWidth).to.equal(trigger.clientWidth)
+  })
+
   it('should select complex value correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
 
