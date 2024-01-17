@@ -631,7 +631,10 @@ describe('<gds-dropdown multiple>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await timeout(0)
+
+    await timeout(10)
+    el.requestUpdate()
+    await el.updateComplete
 
     const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
     const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
