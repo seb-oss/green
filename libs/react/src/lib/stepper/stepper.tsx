@@ -1,18 +1,24 @@
+import { IValidator, validateClassName, IndicatorType } from '@sebgroup/extract'
 import {
-  IValidator,
-  validateClassName,
-  IndicatorType,
-  StepperArgs,
-} from '@sebgroup/extract'
+  ChangeEventHandler,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+} from 'react'
 
-export interface StepperProps extends StepperArgs {
+export interface StepperProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  id?: string
+  value?: string | number
+  onChange?: ChangeEventHandler<HTMLInputElement>
   label?: string
   description?: string
   statusMessage?: string
   validator?: IValidator
   onIncrease?: () => void
   onDecrease?: () => void
-  inputMode?: 'numeric' | 'decimal'
   testId?: string
 }
 
@@ -28,8 +34,8 @@ export function Stepper({
   onChange = () => undefined,
   onIncrease = () => undefined,
   onDecrease = () => undefined,
-  inputMode = 'numeric',
   testId,
+  ...props
 }: StepperProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowUp') {
@@ -54,13 +60,14 @@ export function Stepper({
       <input
         id={id}
         type="text"
-        inputMode={inputMode}
+        inputMode="numeric"
         pattern="[0-9]*"
         onChange={onChange}
         onFocus={({ target }) => target.select()}
         onKeyDown={handleKeyDown}
         placeholder="0"
         value={value}
+        {...props}
       />
       <button type="button" onClick={onIncrease}>
         +
