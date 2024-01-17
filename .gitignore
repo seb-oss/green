@@ -30,6 +30,7 @@
 /coverage
 /libpeerconnection.log
 /.yarn
+/.nx
 npm-debug.log
 yarn-error.log
 testem.log

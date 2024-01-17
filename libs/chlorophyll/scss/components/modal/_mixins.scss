@@ -109,6 +109,17 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   min-height: stretch;
   right: 0;
   top: 0;
+  transition: transform 350ms cubic-bezier(0.33, 1, 0.68, 1);
+  transform: translateX(100%);
+
+  &.is-entering,
+  &.entered {
+    transform: translateX(0%);
+  }
+
+  &.is-exiting {
+    transform: translateX(100%);
+  }
 
   &.large {
     max-width: 720px;

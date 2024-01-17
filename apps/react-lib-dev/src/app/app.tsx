@@ -1,10 +1,11 @@
-import { Navbar, Tabs, Tab, AlertRibbon } from '@sebgroup/green-react'
+import { Navbar, Tabs, Tab, AlertRibbon, Badge } from '@sebgroup/green-react'
 import { FormExample } from './form'
 import { AlertRibbons } from './alert-ribbons'
+import { Modals } from './modals'
 
 export function App() {
   return (
-    <div className="use-green">
+    <div>
       <Navbar title="Green React Dev" />
       <div className="container">
         <div className="row">
@@ -18,6 +19,9 @@ export function App() {
               </Tab>
               <Tab title={'Alert ribbons'}>
                 <AlertRibbons />
+              </Tab>
+              <Tab title={'Modal'}>
+                <Modals />
               </Tab>
             </Tabs>
           </div>

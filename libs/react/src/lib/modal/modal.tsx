@@ -4,9 +4,11 @@ import {
   HTMLAttributes,
   MouseEvent,
   ReactNode,
+  useEffect,
   useState,
 } from 'react'
 import Button from '../form/button/button'
+import classNames from 'classnames'
 
 type ModalEventListener = (
   event: MouseEvent<HTMLButtonElement> | null
@@ -20,16 +22,40 @@ export interface ModalProps {
   dismiss?: string
   size?: Size
   id?: string
-
   isOpen?: boolean
   onClose?: ModalEventListener
   onConfirm?: ModalEventListener
   onDismiss?: ModalEventListener
+  preventBackdropClose?: boolean
 }
 
-const ModalHeader = ({ header = '', id, onClose }: Partial<ModalProps>) => {
+interface ModalHeaderProps
+  extends Pick<ModalProps, 'type' | 'header' | 'id' | 'onClose'> {
+  setStatus?: (status: string) => void
+  setShouldRender?: (shouldRender: boolean) => void
+}
+
+const ModalHeader = ({
+  type,
+  setStatus,
+  setShouldRender,
+  header = '',
+  id,
+  onClose,
+}: ModalHeaderProps) => {
   const handleClose: ModalEventListener = (event) => {
-    if (onClose) onClose(event)
+    if (type === 'slideout') {
+      setStatus && setStatus(IS_EXITING)
+      setTimeout(() => {
+        if (onClose) onClose(event)
+        setStatus && setStatus(UNMOUNTED)
+        setShouldRender && setShouldRender(false)
+      }, DELAY)
+    } else {
+      if (onClose) onClose(event)
+      setStatus && setStatus(UNMOUNTED)
+      setShouldRender && setShouldRender(false)
+    }
   }
   return (
     <div className="header">
@@ -56,6 +82,7 @@ const ModalFooter = ({
   onClose,
   onConfirm,
   onDismiss,
+  preventBackdropClose = false,
 }: Partial<ModalProps>) => {
   const handleConfirm: ModalEventListener = (event) => {
     if (onConfirm) onConfirm(event)
@@ -81,6 +108,15 @@ const ModalFooter = ({
   )
 }
 
+/* This delay is the same as the one used in the aside modal mixin: /libs/chlorophyll/scss/components/modal/_mixins.scss */
+const DELAY = 500
+
+const UNMOUNTED = 'unmounted'
+const IS_MOUNTING = 'is-mounting'
+const IS_ENTERING = 'is-entering'
+const ENTERED = 'entered'
+const IS_EXITING = 'is-exiting'
+
 export const Modal = ({
   type = 'default',
   id = randomId(),
@@ -89,6 +125,30 @@ export const Modal = ({
   ...props
 }: ModalProps) => {
   const [uuid, _] = useState(id)
+  const [status, setStatus] = useState<string>(UNMOUNTED)
+  const [shouldRender, setShouldRender] = useState<boolean | undefined>(isOpen)
+
+  useEffect(() => {
+    if (isOpen && !shouldRender && status === UNMOUNTED) {
+      setShouldRender(true)
+      setStatus(IS_MOUNTING)
+    }
+
+    if (isOpen && shouldRender && status === IS_MOUNTING) {
+      setStatus(IS_ENTERING)
+      setTimeout(() => {
+        setStatus(ENTERED)
+      }, DELAY)
+    }
+
+    if (!isOpen && status === ENTERED) {
+      setStatus(IS_EXITING)
+      setTimeout(() => {
+        setStatus(UNMOUNTED)
+        setShouldRender(false)
+      }, DELAY)
+    }
+  }, [isOpen, shouldRender, status])
 
   if (!isOpen) return null
 
@@ -110,13 +170,20 @@ export const Modal = ({
 
   switch (type) {
     case 'slideout': {
-      let className: string | undefined = undefined
-      if (size === 'lg') className = 'gds-slide-out--960'
-      if (size === 'md') className = 'gds-slide-out--768'
+      const className: string | undefined = classNames(status, {
+        'gds-slide-out--960': size === 'lg',
+        'gds-slide-out--768': size === 'md',
+      })
 
       modalContent = (
         <aside className={className} {...dialogProps}>
-          <ModalHeader id={headerId} {...props} />
+          <ModalHeader
+            id={headerId}
+            setStatus={setStatus}
+            setShouldRender={setShouldRender}
+            type={type}
+            {...props}
+          />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </aside>
@@ -145,8 +212,24 @@ export const Modal = ({
     }
   }
 
+  const backdropClassnames: string | undefined = classNames(
+    'backdrop',
+    'backdrop--transparent',
+    status
+  )
+
   const handleBackdropClick = () => {
-    if (props.onClose) props.onClose(null)
+    if (props.onClose && !props.preventBackdropClose) {
+      if (type === 'slideout') {
+        setTimeout(() => {
+          if (props.onClose) {
+            props.onClose(null)
+          }
+        }, DELAY)
+      } else {
+        props.onClose(null)
+      }
+    }
   }
 
   return (
@@ -155,7 +238,7 @@ export const Modal = ({
       {/* Backdrop */}
       <div
         data-testid="modal-backdrop"
-        className="backdrop"
+        className={backdropClassnames}
         onClick={handleBackdropClick}
         aria-hidden="true"
       ></div>
