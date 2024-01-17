@@ -67,7 +67,7 @@ export class GdsPopover extends LitElement {
    * By default, the popover minWidth will be as wide as the trigger element.
    */
   @property()
-  calcMinWidth = (referenceEl: HTMLElement) => referenceEl.offsetWidth
+  calcMinWidth = (referenceEl: HTMLElement) => `${referenceEl.offsetWidth}px`
 
   /**
    * A callback that returns the maximum width of the popover.
@@ -255,8 +255,8 @@ export class GdsPopover extends LitElement {
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
-          minWidth: `${referenceEl.offsetWidth}px`,
-          maxWidth: `${this.calcMaxWidth(referenceEl)}`,
+          minWidth: referenceEl.offsetWidth,
+          maxWidth: this.calcMaxWidth(referenceEl),
         })
       )
     })
