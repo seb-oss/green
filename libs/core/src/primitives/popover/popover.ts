@@ -294,7 +294,7 @@ export class GdsPopover extends LitElement {
     const e = evt as PointerEvent
     const dialog = this.#dialogElementRef.value
 
-    if (e.pointerType == 'mouse' && dialog && this.open) {
+    if (e.type == 'click' && dialog && this.open) {
       const rect = dialog.getBoundingClientRect()
 
       const isInDialog =

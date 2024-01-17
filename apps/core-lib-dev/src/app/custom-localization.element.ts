@@ -27,7 +27,7 @@ const extraTemplates = new Map([
 const { setLocale } = gdsInitLocalization({
   extraLocales,
   extraTemplates,
-})
+} as any)
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join('')
