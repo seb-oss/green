@@ -645,6 +645,8 @@ describe('<gds-dropdown multiple>', () => {
     await clickOnElement(option3, 'center')
     await el.updateComplete
 
+    await timeout(10)
+
     await expect(el.value.toString()).to.equal(['v2', 'v3'].toString())
   })
 
