@@ -212,7 +212,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @gds-ui-state=${this.#handlePopoverStateChange}
         id="calendar-popover"
         .placement=${'bottom-end'}
-        .calcMinWidth=${() => 'auto'}
+        .calcMinWidth=${() => '390px'}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return
