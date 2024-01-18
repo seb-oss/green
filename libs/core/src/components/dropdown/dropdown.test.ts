@@ -625,15 +625,16 @@ describe('<gds-dropdown multiple>', () => {
 
   it('should select multiple options on click', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown multiple open>
+      <gds-dropdown multiple>
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
 
-    await timeout(10)
-    el.requestUpdate()
+    const triggerButton = el.shadowRoot!.querySelector<HTMLElement>('button')!
+
+    await clickOnElement(triggerButton, 'center')
     await el.updateComplete
 
     const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
