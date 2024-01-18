@@ -112,7 +112,6 @@ $weekend-background: $background;
       tr td {
         border: solid 1px transparent;
         font-weight: $date-weight;
-        transition: all 200ms ease-in-out;
         user-select: none;
 
         // weekend

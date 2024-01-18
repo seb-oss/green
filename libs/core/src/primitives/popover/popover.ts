@@ -114,7 +114,8 @@ export class GdsPopover extends LitElement {
       if (e.key === 'Escape') {
         this.open = false
         this.#dispatchUiStateEvent()
-        e.stopImmediatePropagation()
+        e.stopPropagation()
+        e.preventDefault()
       }
     })
 
@@ -189,7 +190,7 @@ export class GdsPopover extends LitElement {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         detail: { open: this.open },
-        bubbles: true,
+        bubbles: false,
         composed: false,
       })
     )
@@ -293,8 +294,9 @@ export class GdsPopover extends LitElement {
   #clickOutsideListener = (evt: Event) => {
     const e = evt as PointerEvent
     const dialog = this.#dialogElementRef.value
+    const isNotEnterKey = e.clientX > 0 || e.clientY > 0
 
-    if (e.type == 'click' && dialog && this.open) {
+    if (isNotEnterKey && dialog && this.open) {
       const rect = dialog.getBoundingClientRect()
 
       const isInDialog =
