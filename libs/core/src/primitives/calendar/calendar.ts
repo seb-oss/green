@@ -199,7 +199,9 @@ export class GdsCalendar extends LitElement {
       this.focusedDate = addDays(this.focusedDate, 7)
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
-      this.#setSelectedDate(this.focusedDate)
+      if (!this._elFocusedCell?.hasAttribute('disabled')) {
+        this.#setSelectedDate(this.focusedDate)
+      }
       handled = true
     } else if (e.key === 'Home') {
       this.focusedDate = new Date(this.focusedYear, this.focusedMonth, 1)

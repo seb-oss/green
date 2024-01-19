@@ -142,5 +142,52 @@ describe('<gds-calendar>', () => {
         new Date(el.value.getFullYear(), el.value.getMonth() + 1, 0).getDate()
       )
     })
+
+    it('should select the focused date when pressing enter', async () => {
+      const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
+      el.focus()
+
+      const focusedDate = addDays(new Date(), 7)
+
+      el.focusedDate = focusedDate
+
+      await timeout(0)
+      await sendKeys({ press: 'Enter' })
+      await timeout(0)
+
+      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+    })
+
+    it('should select the focused date when pressing space', async () => {
+      const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
+      el.focus()
+
+      const focusedDate = addDays(new Date(), 7)
+
+      el.focusedDate = focusedDate
+
+      await timeout(0)
+      await sendKeys({ press: ' ' })
+      await timeout(0)
+
+      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+    })
+
+    it('should not select the focused date when pressing enter if it is disabled', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`
+      )
+      el.focus()
+
+      const focusedDate = new Date('2024-02-02')
+      el.focusedDate = focusedDate
+      await el.updateComplete
+
+      await timeout(0)
+      await sendKeys({ press: 'Enter' })
+      await timeout(0)
+
+      await expect(onlyDate(el.value)).to.not.equal(onlyDate(focusedDate))
+    })
   })
 })
