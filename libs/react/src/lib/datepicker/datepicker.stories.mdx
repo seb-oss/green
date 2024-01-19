@@ -31,3 +31,21 @@ Datepicker Component
 | minDate        | The minimum selectable date as a `Date` object.                     |         |
 | maxDate        | The maximum selectable date as a `Date` object.                     |         |
 | onChange       | A function that is called when the selected date changes.           |         |
+
+
+### Localization
+
+Localization is handled by Lit Localize in the underlying web component. You can set the locale like this:
+
+```ts
+// Import the `gdsInitLocalization` function from Green Core
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+
+// Then initialize Lit Localize by calling our wrapper function. This returns a `setLocale` function which you can use to set the locale.
+const { setLocale } = gdsInitLocalization()
+
+// Later in your code you can set the locale like this:
+setLocale('sv')
+```
+
+Currently, only translations for Swedish and English is built in.
