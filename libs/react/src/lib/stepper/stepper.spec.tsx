@@ -1,6 +1,7 @@
 import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Stepper, StepperProps } from './stepper'
+import { ChangeEvent } from 'react'
 
 jest.setTimeout(50000)
 
@@ -55,59 +56,34 @@ describe('Stepper', () => {
       }
     }
     it('goes up', async () => {
+      const onIncrease = jest.fn()
       const user = userEvent.setup()
-      const { buttonUp, input } = await renderComponent()
+      const { buttonUp } = await renderComponent({ onIncrease })
 
       await user.click(buttonUp)
-      await waitFor(() => expect(input.value).toEqual('1'))
+
+      expect(onIncrease).toHaveBeenCalledTimes(1)
     })
     it('goes down', async () => {
+      const onDecrease = jest.fn()
       const user = userEvent.setup()
-      const { buttonDown, input } = await renderComponent()
+      const { buttonDown } = await renderComponent({ onDecrease })
 
       await user.click(buttonDown)
-      await waitFor(() => expect(input.value).toEqual('-1'))
-    })
-    it('respects max', async () => {
-      const user = userEvent.setup()
-      const { buttonUp, input } = await renderComponent({ value: 8, max: 10 })
 
-      await user.click(buttonUp)
-      expect(input.value).toEqual('9')
-
-      await user.click(buttonUp)
-      expect(input.value).toEqual('10')
-
-      await user.click(buttonUp)
-      expect(input.value).toEqual('10')
-    })
-    it('respects min', async () => {
-      const user = userEvent.setup()
-      const { buttonDown, input } = await renderComponent({ value: 2, min: 0 })
-
-      await user.click(buttonDown)
-      expect(input.value).toEqual('1')
-
-      await user.click(buttonDown)
-      expect(input.value).toEqual('0')
-
-      await user.click(buttonDown)
-      expect(input.value).toEqual('0')
+      expect(onDecrease).toHaveBeenCalledTimes(1)
     })
     it('calls onChange', async () => {
       const onChange = jest.fn()
       const user = userEvent.setup()
-      const { buttonDown, buttonUp } = await renderComponent({
+      const { input } = await renderComponent({
         value: 0,
         onChange,
       })
 
-      await user.click(buttonUp)
-      expect(onChange).toHaveBeenCalledWith(1)
+      await user.type(input, '1')
 
-      await user.click(buttonDown)
-      await user.click(buttonDown)
-      expect(onChange).toHaveBeenCalledWith(-1)
+      expect(onChange).toHaveBeenCalledTimes(1)
     })
   })
 })
