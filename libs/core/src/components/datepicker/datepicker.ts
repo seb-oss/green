@@ -318,7 +318,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const focusedDate = await this.getFocusedDate()
 
     let buttonTxt = ''
-    let buttonAction = () => {}
+    let buttonAction: () => void
 
     if (focusedDate && focusedDate > this.max) {
       buttonTxt = msg('Last available date')
