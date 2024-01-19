@@ -2,6 +2,35 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.1.2...@sebgroup/extract@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **react/stepper:** convert to pure controlled component ([#1160](https://github.com/sebgroup/green/issues/1160)) ([55191b1](https://github.com/sebgroup/green/commit/55191b130fab5afe3413b865e2adf2fbacdc56d8))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **datepicker:** replace underlying implementation in React and Angular ([#1164](https://github.com/sebgroup/green/issues/1164)) ([ececf0a](https://github.com/sebgroup/green/commit/ececf0aa12078a7b4fbeeae95861cf75e9194e31))
+
+
+### BREAKING CHANGES
+
+* **datepicker:** * `locale` option has been removed. Localization is handled
+    in Green Core by `@lit/localize`
+* `currentDate` is deprecated.  Use `value` instead.
+* `selectedDate` is deprecated. Use `value` instead.
+* `useCurrentTime` is removed
+* `closeOnSelect` is removed (popover will now always close when a value is selected)
+* `DatepickerOptions` moved from Extract and can be imported from React or Angular package instead.
+* **react/stepper:** * value is now only owned by host application. This means `onIncrease` and `onDecrease` have to be implemented for the stepper to work.
+* `onChange` now takes a ChangeEvent<HTMLInputElement> as param.
+* These props have been removed: `step`, `min`, `max`
+
+
+
 ## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/extract@2.1.1...@sebgroup/extract@2.1.2) (2023-12-11)
 
 
