@@ -52,7 +52,7 @@ export function sortArray<T>(
 
   const sortedItems: Array<any> = [...items].sort(
     (firstItem: T, secondItem: T) => {
-      let result: number = 0
+      let result = 0
       if (sortDirection === SortDirection.ASC) {
         if (
           isNaN(secondItem[columnName] as number) &&
@@ -124,11 +124,11 @@ export function searchTextByColumns<T>(
   searchFields: Array<keyof T>
 ): Array<T> {
   return [...data].filter((row: T) => {
-    const searchText: string = String(keyword)
+    const searchText = String(keyword)
 
     return searchFields?.some((searchColumn: keyof T) => {
-      let result: boolean = false
-      const regEx: RegExp = new RegExp(searchText, 'gi')
+      let result = false
+      const regEx = new RegExp(searchText, 'gi')
       if (row[searchColumn] === null || row[searchColumn] === undefined) {
         result = false
       } else if (typeof row[searchColumn] === 'string') {

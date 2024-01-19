@@ -257,7 +257,7 @@ describe('Table helper functions:', () => {
         rowId: 'andrew',
         data: null,
         result: {
-          data: undefined,
+          data: undefined as any,
           isAllSelected: false,
           isIndeterminate: false,
         },

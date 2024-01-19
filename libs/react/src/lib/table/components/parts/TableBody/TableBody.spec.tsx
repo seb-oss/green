@@ -25,7 +25,7 @@ describe('Component: Table body', () => {
   })
 
   it('Should render append parent key to sub row correctly', () => {
-    const uniqueKey: string = 'test'
+    const uniqueKey = 'test'
     render(
       <table>
         <TableBody>
@@ -38,7 +38,7 @@ describe('Component: Table body', () => {
   })
 
   it('Should render append parent key to sub row correctly within fragment', () => {
-    const uniqueKey: string = 'test'
+    const uniqueKey = 'test'
     render(
       <table>
         <TableBody>

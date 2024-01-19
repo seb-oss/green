@@ -25,7 +25,7 @@ describe('Component: Table row', () => {
 
   it('Should be able to expand sub rows', async () => {
     const user: UserEvent = userEvent.setup()
-    const parentUniqueKey: string = 'test'
+    const parentUniqueKey = 'test'
     const onRowExpand: jest.Mock = jest.fn()
     const setTableStateFn: jest.Mock = jest.fn()
     const mockProviderValue: any = {
@@ -48,7 +48,7 @@ describe('Component: Table row', () => {
   })
 
   it('Should be able to set row to be expanded by default', () => {
-    const parentUniqueKey: string = 'test'
+    const parentUniqueKey = 'test'
     const onRowExpand: jest.Mock = jest.fn()
     const setTableStateFn: jest.Mock = jest.fn()
     const mockProviderValue: any = {
@@ -77,7 +77,7 @@ describe('Component: Table row', () => {
 
   it('Should be able to select row', async () => {
     const user: UserEvent = userEvent.setup()
-    const uniqueKey: string = 'test'
+    const uniqueKey = 'test'
     const onRowSelect: jest.Mock = jest.fn()
     const mockProviderValue: any = {
       tableState: { sortedColumn: null, expandedRows: [] },
