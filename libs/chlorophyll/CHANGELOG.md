@@ -2,6 +2,28 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.3.0...@sebgroup/chlorophyll@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **react/stepper:** convert to pure controlled component ([#1160](https://github.com/sebgroup/green/issues/1160)) ([55191b1](https://github.com/sebgroup/green/commit/55191b130fab5afe3413b865e2adf2fbacdc56d8))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **react/table:** add react table component ([#1162](https://github.com/sebgroup/green/issues/1162)) ([6439fb9](https://github.com/sebgroup/green/commit/6439fb9f23bebec48405513799bf1c79045f5a8c))
+
+
+### BREAKING CHANGES
+
+* **react/stepper:** * value is now only owned by host application. This means `onIncrease` and `onDecrease` have to be implemented for the stepper to work.
+* `onChange` now takes a ChangeEvent<HTMLInputElement> as param.
+* These props have been removed: `step`, `min`, `max`
+
+
+
 # [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.2...@sebgroup/chlorophyll@2.3.0) (2023-12-01)
 
 
