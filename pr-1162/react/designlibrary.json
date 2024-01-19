@@ -1,66 +1,41 @@
 [
   {
-    "id": "components-modal--modal-default",
-    "name": "Modal Default",
-    "title": "Components/Modal",
+    "id": "components-table--table",
+    "name": "Table",
+    "title": "Components/Table",
     "customParams": {
       "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
+        "component-table"
       ]
     }
   },
   {
-    "id": "components-modal--slide-out-small",
-    "name": "Slide Out Small",
-    "title": "Components/Modal",
+    "id": "components-table--sortable-table",
+    "name": "Sortable table",
+    "title": "Components/Table",
     "customParams": {
       "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
+        "component-sortable"
       ]
     }
   },
   {
-    "id": "components-modal--slide-out-medium",
-    "name": "Slide Out Medium",
-    "title": "Components/Modal",
+    "id": "components-table--selectable-table",
+    "name": "Selectable table",
+    "title": "Components/Table",
     "customParams": {
       "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
+        "component-selectable"
       ]
     }
   },
   {
-    "id": "components-modal--slide-out-large",
-    "name": "Slide Out Large",
-    "title": "Components/Modal",
+    "id": "components-table--expandable-table",
+    "name": "Expandable table",
+    "title": "Components/Table",
     "customParams": {
       "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-modal--take-over",
-    "name": "Take Over",
-    "title": "Components/Modal",
-    "customParams": {
-      "componentIds": [
-        "component-dialogue",
-        "component-slideout",
-        "component-foldout",
-        "component-takeover"
+        "component-expandable"
       ]
     }
   },
@@ -427,6 +402,71 @@
     "customParams": {
       "componentIds": [
         "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--modal-default",
+    "name": "Modal Default",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-small",
+    "name": "Slide Out Small",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-medium",
+    "name": "Slide Out Medium",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-large",
+    "name": "Slide Out Large",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
+    }
+  },
+  {
+    "id": "components-modal--take-over",
+    "name": "Take Over",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
       ]
     }
   },
