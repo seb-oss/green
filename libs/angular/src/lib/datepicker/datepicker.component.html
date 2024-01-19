@@ -1,128 +1,17 @@
 <div class="form-group">
-  <label *ngIf="label" [for]="id">{{ label }}</label>
-  <div
-    class="group"
-    #datepickerElRef
-    [class.is-valid]="isValid"
-    [class.is-invalid]="isValid === false"
+  <gds-datepicker
+    *nggCoreElement
+    [attr.id]="id"
+    [label]="label"
+    [value]="value"
+    (change)="onDateChange($event)"
+    [invalid]="isValid === false"
+    [min]="min"
+    [max]="max"
+    [showWeekNumbers]="showWeekNumbers"
   >
-    <input
-      (blur)="blurInput()"
-      [attr.id]="id"
-      [attr.aria-describedby]="
-        formInfo?.innerText && formInfo.innerText.length > 0
-          ? id + '_info'
-          : null
-      "
-      type="text"
-      placeholder="yyyy-mm-dd"
-      #dateInputElRef
-      [value]="data?.formattedSelectedDate || ''"
-      (change)="onDateChange(dateInputElRef.value)"
-    />
-    <button
-      #datepickerTriggerElRef
-      (click)="dp?.toggle()"
-      type="button"
-      class="primary"
-    >
-      <i class="sg-icon sg-icon-calendar">Select date</i>
-    </button>
-  </div>
-  <span class="form-info" #formInfo [attr.id]="id + '_info'"
-    ><ng-content select="[data-form-info]"></ng-content
-  ></span>
-</div>
-<!-- TODO: get or set attributes from within datepicker instance (dp) -->
-<div
-  #datepickerDialogElRef
-  class="popover popover-datepicker"
-  [class.active]="dp?.state?.isActive"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Choose Date"
-  (focusout)="focusoutDialog($event)"
->
-  <button type="button" class="close" (click)="dp?.close()">
-    <i></i>Close
-  </button>
-  <div class="sg-date">
-    <header>
-      <button type="button" class="link" (click)="dp?.sub(1, 'months')">
-        <i class="sg-icon sg-icon-previous">Previous month</i>
-      </button>
-      <ngg-dropdown
-        [options]="months"
-        display="key"
-        text="Select"
-        [value]="data?.month"
-        (valueChange)="dp?.setMonth($event)"
-      ></ngg-dropdown>
-      <ngg-dropdown
-        *ngIf="years"
-        [options]="years"
-        display="key"
-        text="Select"
-        [value]="data?.year"
-        (valueChange)="dp?.setYear($event)"
-      ></ngg-dropdown>
-      <button type="button" class="link" (click)="dp?.add(1, 'months')">
-        <i class="sg-icon sg-icon-next">Next month</i>
-      </button>
-    </header>
-    <main>
-      <table role="grid">
-        <thead>
-          <tr>
-            <th
-              scope="col"
-              *ngFor="let header of data?.calendar?.headers"
-              [abbr]="header.abbr"
-              [class.sg-week-header]="header.type === 'week'"
-              [class.sg-day-header]="header.type === 'day'"
-            >
-              {{ header.displayText }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="
-              let week of data?.calendar?.calendarGrid;
-              trackBy: trackWeek;
-              let i = index
-            "
-          >
-            <th
-              *ngIf="data?.calendar?.weekNumbers as weekNumbers"
-              class="sg-week-number"
-            >
-              {{ weekNumbers[i] }}
-            </th>
-            <td
-              *ngFor="let day of week"
-              [attr.data-date]="day.formattedDate"
-              [attr.role]="day.selected ? 'gridcell' : null"
-              [attr.aria-selected]="
-                day.selected && !data?.highlightedDate ? true : null
-              "
-              [class.disabled]="day.disabled"
-              [class.sg-date-today]="day.today"
-              [title]="day.today ? 'Today' : ''"
-              [tabIndex]="
-                day.highlighted ||
-                (day.selected && !data?.highlightedDate) ||
-                (day.today && !data?.highlightedDate && !data?.selectedDate)
-                  ? 0
-                  : -1
-              "
-              (click)="day.currentMonth && dp?.select(day.date)"
-            >
-              {{ day.day }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </main>
-  </div>
+    <span slot="message">
+      <ng-content select="[data-form-info]"></ng-content>
+    </span>
+  </gds-datepicker>
 </div>

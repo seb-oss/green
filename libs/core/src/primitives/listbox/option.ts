@@ -86,7 +86,7 @@ export class GdsOption extends Focusable(LitElement) {
     this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
       e.preventDefault()
-      this.#emitSelect()
+      this.#emitSelect(e)
     })
   }
 
@@ -109,7 +109,7 @@ export class GdsOption extends Focusable(LitElement) {
   }
 
   @watch('isplaceholder')
-  handlePlaceholderStatusChange() {
+  private _handlePlaceholderStatusChange() {
     if (this.isPlaceholder) {
       this.#hidden = true
       this.setAttribute('aria-hidden', 'true')
@@ -134,7 +134,8 @@ export class GdsOption extends Focusable(LitElement) {
     return html`${when(isMultiple, () => checkbox)}<slot></slot>`
   }
 
-  #emitSelect() {
+  #emitSelect(e: MouseEvent | KeyboardEvent) {
+    e.stopPropagation()
     this.dispatchEvent(
       new CustomEvent('gds-select', {
         bubbles: true,
