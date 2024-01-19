@@ -53,14 +53,16 @@ export const Datepicker = ({
   }
 
   return (
-    <CoreDatepicker
-      data-testid={testId}
-      label={label}
-      min={min}
-      max={max}
-      showWeekNumbers={showWeeks}
-      onchange={onChangeHandler}
-      value={value}
-    />
+    <div className="form-group">
+      <CoreDatepicker
+        data-testid={testId}
+        label={label}
+        min={min}
+        max={max}
+        showWeekNumbers={showWeeks}
+        onchange={onChangeHandler}
+        value={value}
+      />
+    </div>
   )
 }
