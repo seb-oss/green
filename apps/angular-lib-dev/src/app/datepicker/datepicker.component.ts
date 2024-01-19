@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { startOfYear, subYears } from 'date-fns'
 import { dateValidator, DatepickerOptions } from '@sebgroup/green-angular'
 
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+
+const { setLocale } = gdsInitLocalization()
+
 @Component({
   selector: 'green-datepicker',
   templateUrl: './datepicker.component.html',
@@ -15,6 +19,8 @@ export class DatepickerComponent {
       date: [new Date(), [Validators.required]],
       dateEmpty: ['', [Validators.required]],
     })
+
+    setLocale('sv')
   }
   ngModelDate = new Date()
   ngModelDateEmpty = ''
