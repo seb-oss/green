@@ -65,6 +65,46 @@
     }
   },
   {
+    "id": "components-table--table",
+    "name": "Table",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": [
+        "component-table"
+      ]
+    }
+  },
+  {
+    "id": "components-table--sortable-table",
+    "name": "Sortable table",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": [
+        "component-sortable"
+      ]
+    }
+  },
+  {
+    "id": "components-table--selectable-table",
+    "name": "Selectable table",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": [
+        "component-selectable"
+      ]
+    }
+  },
+  {
+    "id": "components-table--expandable-table",
+    "name": "Expandable table",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": [
+        "component-expandable"
+      ]
+    }
+  },
+  {
     "id": "components-layout-flexbox--flexbox",
     "name": "Flexbox",
     "title": "Components/Layout/Flexbox",
