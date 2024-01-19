@@ -149,13 +149,13 @@ validationForm = this._fb.group({
 
 ### Localization
 
-Localization is handled by Lit Localize in the underlying web component. You can set the currently used locale like this:
+Localization is handled by Lit Localize in the underlying web component. You can set the locale like this:
 
 ```ts
 // Import the gdsInitLocalization function from Green Core
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
-// Then initialize Lit Localize by calling our wrapper function. This returns a `setLocale` function which you can use to set the locale.
+// Then initialize Lit Localize by calling the imported init function. This returns a `setLocale` function which you can use to set the locale.
 const { setLocale } = gdsInitLocalization()
 
 // Later in your code you can set the locale like this:
