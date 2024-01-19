@@ -114,6 +114,14 @@
   <source>Day</source>
   <target>Dag</target>
 </trans-unit>
+<trans-unit id="sb4f1dffbb6be6302">
+  <source>Clear</source>
+  <target>Rensa</target>
+</trans-unit>
+<trans-unit id="s63d040e37887f17e">
+  <source>Today</source>
+  <target>Idag</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
