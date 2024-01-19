@@ -156,6 +156,24 @@ describe('<gds-datepicker>', () => {
 
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
+
+    it('should return a focused date', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-10" open></gds-datepicker>`
+      )
+      const focusedDate = await el.getFocusedDate()
+
+      await expect(onlyDate(focusedDate!)).to.equal(onlyDate(new Date()))
+    })
+
+    it('should not return a focused date if the popover is closed', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`
+      )
+      const focusedDate = await el.getFocusedDate()
+
+      await expect(focusedDate).to.be.undefined
+    })
   })
 
   describe('Interactions', () => {

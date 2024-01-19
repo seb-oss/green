@@ -1,6 +1,9 @@
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { join } from 'lit/directives/join.js'
+import { when } from 'lit/directives/when.js'
+import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
+import { repeat } from 'lit/directives/repeat.js'
 import { msg } from '@lit/localize'
 import { eachYearOfInterval } from 'date-fns'
 
@@ -25,6 +28,7 @@ import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
 import { GdsPopover } from '../../primitives/popover/popover'
+import { nothing } from 'lit'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -115,6 +119,15 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
   set dateformat(dateformat: string) {
     this._dateFormatLayout = this.#parseDateFormat(dateformat)
+  }
+
+  /**
+   * Get the currently focused date in the calendar popover. If no date is focused, or the calendar popover
+   * is closed, the value will be undefined.
+   */
+  async getFocusedDate(): Promise<Date | undefined> {
+    if (this.open) return this._elCalendar.then((el) => el.focusedDate)
+    else return undefined
   }
 
   /**
@@ -248,7 +261,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (this._focusedYear = (e.target as GdsDropdown)?.value)}
             aria-label="${msg('Year')}"
           >
-            ${this.#years.map(
+            ${repeat(
+              this.#years,
+              (year) => year,
               (year) => html`<gds-option value=${year}>${year}</gds-option>`
             )}
           </gds-dropdown>
@@ -284,6 +299,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           >
             ${msg('Clear')}
           </button>
+          ${until(this.#renderBackToValidRangeButton(), nothing)}
           <button
             class="tertiary today"
             @click=${() => {
@@ -296,6 +312,37 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         </div>
       </gds-popover>
     `
+  }
+
+  async #renderBackToValidRangeButton() {
+    const focusedDate = await this.getFocusedDate()
+
+    let buttonTxt = ''
+    let buttonAction = () => {}
+
+    if (focusedDate && focusedDate > this.max) {
+      buttonTxt = msg('Last available date')
+      buttonAction = () => this.#focusDate(this.max)
+    } else if (focusedDate && focusedDate < this.min) {
+      buttonTxt = msg('First available date')
+      buttonAction = () => this.#focusDate(this.min)
+    }
+
+    return html`${when(
+      buttonTxt.length > 0,
+      () =>
+        html`<button class="tertiary back-to-range" @click=${buttonAction}>
+          ${buttonTxt}
+        </button>`,
+      () => nothing
+    )}`
+  }
+
+  #focusDate(d: Date) {
+    const firstValidDate = new Date(d)
+    this._elCalendar
+      .then((el) => (el.focusedDate = firstValidDate))
+      .then(this.#handleFocusChange)
   }
 
   @watch('value')
@@ -372,9 +419,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     }
   }
 
-  #handleFocusChange = async (_e: CustomEvent) => {
+  #handleFocusChange = async () => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
+    this.requestUpdate()
   }
 
   #handlePopoverStateChange = (e: CustomEvent) => {
@@ -446,11 +494,25 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   /**
    * Returns an array of years between the min and max dates for use in the year dropdown.
+   * If the value is set to a year outside the range, it will be added to the array until the value is changed.
    */
   get #years() {
-    return eachYearOfInterval({
+    const years = eachYearOfInterval({
       start: this.min,
       end: this.max,
     }).map((date) => date.getFullYear())
+
+    if (!this.value) return years
+
+    const selectedYear = this.value.getFullYear()
+    const valueIsInrage =
+      years[0] <= selectedYear && years[years.length - 1] >= selectedYear
+
+    if (!valueIsInrage) {
+      years.push(selectedYear)
+      years.sort((a, b) => a - b)
+    }
+
+    return years
   }
 }

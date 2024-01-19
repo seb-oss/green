@@ -177,8 +177,8 @@ export class GdsCalendar extends LitElement {
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: date,
-        bubbles: true,
-        composed: true,
+        bubbles: false,
+        composed: false,
       })
     )
   }
@@ -186,17 +186,19 @@ export class GdsCalendar extends LitElement {
   #handleKeyDown(e: KeyboardEvent) {
     let handled = false
 
+    let newFocusedDate = new Date(this.focusedDate)
+
     if (e.key === 'ArrowLeft') {
-      this.focusedDate = addDays(this.focusedDate, -1)
+      newFocusedDate = addDays(this.focusedDate, -1)
       handled = true
     } else if (e.key === 'ArrowRight') {
-      this.focusedDate = addDays(this.focusedDate, 1)
+      newFocusedDate = addDays(this.focusedDate, 1)
       handled = true
     } else if (e.key === 'ArrowUp') {
-      this.focusedDate = addDays(this.focusedDate, -7)
+      newFocusedDate = addDays(this.focusedDate, -7)
       handled = true
     } else if (e.key === 'ArrowDown') {
-      this.focusedDate = addDays(this.focusedDate, 7)
+      newFocusedDate = addDays(this.focusedDate, 7)
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
@@ -204,17 +206,24 @@ export class GdsCalendar extends LitElement {
       }
       handled = true
     } else if (e.key === 'Home') {
-      this.focusedDate = new Date(this.focusedYear, this.focusedMonth, 1)
+      newFocusedDate = new Date(this.focusedYear, this.focusedMonth, 1)
       handled = true
     } else if (e.key === 'End') {
-      this.focusedDate = new Date(this.focusedYear, this.focusedMonth + 1, 0)
+      newFocusedDate = new Date(this.focusedYear, this.focusedMonth + 1, 0)
       handled = true
     } else if (e.key === 'PageUp') {
-      this.focusedDate = subMonths(this.focusedDate, 1)
+      newFocusedDate = subMonths(this.focusedDate, 1)
       handled = true
     } else if (e.key === 'PageDown') {
-      this.focusedDate = addMonths(this.focusedDate, 1)
+      newFocusedDate = addMonths(this.focusedDate, 1)
       handled = true
+    }
+
+    if (
+      newFocusedDate.getFullYear() >= this.min.getFullYear() &&
+      newFocusedDate.getFullYear() <= this.max.getFullYear()
+    ) {
+      this.focusedDate = newFocusedDate
     }
 
     if (handled) {
@@ -227,8 +236,8 @@ export class GdsCalendar extends LitElement {
         this.dispatchEvent(
           new CustomEvent('gds-date-focused', {
             detail: this.focusedDate,
-            bubbles: true,
-            composed: true,
+            bubbles: false,
+            composed: false,
           })
         )
       })
