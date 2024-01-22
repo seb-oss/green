@@ -79,7 +79,7 @@ If you just need a simple select without any form, validation etc. it's possible
 
 
 ```html
-  <ngg-datepicker [(value)]="date" label="Birthday" options="{showWeeks: true, minDate: startOfYear(subYears(new Date(), 100)), maxDate: new Date() }"></ngg-datepicker>
+  <ngg-datepicker [(value)]="date" label="Birthday" options="{showWeeks: true, minDate: startOfYear(subYears(new Date(), 100)), maxDate: new Date(), dateFormat: 'd/m/y' }"></ngg-datepicker>
 ```
 
 <Story id="components-datepicker--custom-options" />
