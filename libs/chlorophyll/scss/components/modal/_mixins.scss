@@ -95,11 +95,20 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 }
 
 @mixin dialog-modal() {
-  max-width: 375px;
+  position: initial;
+  width: 375px;
 
   &.large {
-    max-width: 720px;
+    width: 720px;
   }
+}
+
+@mixin dialog-modal-wrapper() {
+  inset: 0;
+  position: fixed;
+  display: grid;
+  place-content: center;
+  z-index: calc($backdrop-z-index + 1);
 }
 
 @mixin aside-modal() {
@@ -166,6 +175,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   inset: 0;
   min-height: stretch;
   width: 100vw;
+  position: fixed;
 
   > .body {
     flex: 1 0;

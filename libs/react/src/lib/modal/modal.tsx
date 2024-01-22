@@ -11,7 +11,7 @@ import Button from '../form/button/button'
 import classNames from 'classnames'
 
 type ModalEventListener = (
-  event: MouseEvent<HTMLButtonElement> | null
+  event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null
 ) => unknown
 
 export interface ModalProps {
@@ -126,9 +126,10 @@ export const Modal = ({
 }: ModalProps) => {
   const [uuid, _] = useState(id)
   const [status, setStatus] = useState<string>(UNMOUNTED)
-  const [shouldRender, setShouldRender] = useState<boolean | undefined>(isOpen)
+  const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 
   useEffect(() => {
+    console.log('useEffect', { isOpen, shouldRender, status })
     if (isOpen && !shouldRender && status === UNMOUNTED) {
       setShouldRender(true)
       setStatus(IS_MOUNTING)
@@ -202,11 +203,13 @@ export const Modal = ({
     }
     default: {
       modalContent = (
-        <section {...dialogProps}>
-          <ModalHeader id={headerId} {...props} />
-          <ModalBody id={bodyId} {...props} />
-          <ModalFooter {...props} />
-        </section>
+        <div className="gds-dialog-wrapper">
+          <section {...dialogProps}>
+            <ModalHeader id={headerId} {...props} />
+            <ModalBody id={bodyId} {...props} />
+            <ModalFooter {...props} />
+          </section>
+        </div>
       )
       break
     }
@@ -214,20 +217,25 @@ export const Modal = ({
 
   const backdropClassnames: string | undefined = classNames(
     'backdrop',
-    'backdrop--transparent',
+    {
+      'backdrop--transparent': type === 'slideout',
+    },
     status
   )
 
-  const handleBackdropClick = () => {
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (props.onClose && !props.preventBackdropClose) {
       if (type === 'slideout') {
+        setStatus && setStatus(IS_EXITING)
         setTimeout(() => {
-          if (props.onClose) {
-            props.onClose(null)
-          }
+          if (props.onClose) props.onClose(event)
+          setStatus && setStatus(UNMOUNTED)
+          setShouldRender && setShouldRender(false)
         }, DELAY)
       } else {
-        props.onClose(null)
+        if (props.onClose) props.onClose(event)
+        setStatus && setStatus(UNMOUNTED)
+        setShouldRender && setShouldRender(false)
       }
     }
   }
@@ -239,7 +247,7 @@ export const Modal = ({
       <div
         data-testid="modal-backdrop"
         className={backdropClassnames}
-        onClick={handleBackdropClick}
+        onClick={(e) => handleBackdropClick(e)}
         aria-hidden="true"
       ></div>
     </>
