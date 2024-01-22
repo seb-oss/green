@@ -43,6 +43,7 @@ export interface DatepickerOptions {
   showWeeks?: boolean
   minDate?: Date
   maxDate?: Date
+  dateFormat?: string
   onChange?: (selectedDate: Date) => void
 }
 
@@ -71,6 +72,10 @@ export class NggDatepickerComponent
 
   get showWeekNumbers(): boolean {
     return this.options?.showWeeks ?? false
+  }
+
+  get dateFormat(): string {
+    return this.options?.dateFormat ?? 'y-m-d'
   }
 
   @Input()
