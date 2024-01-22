@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.0...@sebgroup/chlorophyll@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **chlorophyll:** update readme ([#1166](https://github.com/sebgroup/green/issues/1166)) ([a0d3333](https://github.com/sebgroup/green/commit/a0d333353b495715db882351ca78006fa7cd72a7))
+
+
+
 # [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.3.0...@sebgroup/chlorophyll@3.0.0) (2024-01-22)
 
 
