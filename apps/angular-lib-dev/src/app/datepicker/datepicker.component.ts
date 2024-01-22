@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { DatepickerOptions } from '@sebgroup/extract'
 import { startOfYear, subYears } from 'date-fns'
-import { dateValidator } from '@sebgroup/green-angular'
+import { dateValidator, DatepickerOptions } from '@sebgroup/green-angular'
+
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+
+const { setLocale } = gdsInitLocalization()
 
 @Component({
   selector: 'green-datepicker',
@@ -16,6 +19,8 @@ export class DatepickerComponent {
       date: [new Date(), [Validators.required]],
       dateEmpty: ['', [Validators.required]],
     })
+
+    setLocale('sv')
   }
   ngModelDate = new Date()
   ngModelDateEmpty = ''

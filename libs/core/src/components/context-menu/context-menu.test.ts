@@ -32,7 +32,7 @@ describe('<gds-context-menu>', () => {
         getScopedTagName('gds-popover')
       )!
 
-      expect(popover.hidden).to.be.false
+      await expect(popover.hidden).to.be.false
     })
   })
 
@@ -53,8 +53,8 @@ describe('<gds-context-menu>', () => {
       const item = el.querySelector(getScopedTagName('gds-menu-item'))!
       await clickOnElement(item, 'center')
 
-      expect(spy).to.have.been.calledOnce
-      expect(spy.firstCall.args[0].target).to.equal(item)
+      await expect(spy).to.have.been.calledOnce
+      await expect(spy.firstCall.args[0].target).to.equal(item)
     })
 
     it('"gds-menu-item" should fire "click" event on click', async () => {
@@ -75,8 +75,8 @@ describe('<gds-context-menu>', () => {
       )!
       await clickOnElement(item)
 
-      expect(spy).to.have.been.calledOnce
-      expect(spy.firstCall.args[0].target).to.equal(item)
+      await expect(spy).to.have.been.calledOnce
+      await expect(spy.firstCall.args[0].target).to.equal(item)
     })
   })
 
@@ -98,9 +98,9 @@ describe('<gds-context-menu>', () => {
       const button =
         el.shadowRoot!.querySelector<HTMLButtonElement>('#trigger')!
 
-      expect(button.getAttribute('aria-label')).to.equal('Button label')
-      expect(popover.label).to.equal('Context label')
-      expect(menu.getAttribute('aria-label')).to.equal('Context label')
+      await expect(button.getAttribute('aria-label')).to.equal('Button label')
+      await expect(popover.label).to.equal('Context label')
+      await expect(menu.getAttribute('aria-label')).to.equal('Context label')
     })
 
     it('should active click action on enter', async () => {
@@ -122,8 +122,8 @@ describe('<gds-context-menu>', () => {
       item.focus()
       await sendKeys({ press: 'Enter' })
 
-      expect(spy).to.have.been.calledOnce
-      expect(spy.firstCall.args[0].target).to.equal(item)
+      await expect(spy).to.have.been.calledOnce
+      await expect(spy.firstCall.args[0].target).to.equal(item)
     })
 
     it('should active click action on space', async () => {
@@ -145,8 +145,8 @@ describe('<gds-context-menu>', () => {
       item.focus()
       await sendKeys({ press: 'Space' })
 
-      expect(spy).to.have.been.calledOnce
-      expect(spy.firstCall.args[0].target).to.equal(item)
+      await expect(spy).to.have.been.calledOnce
+      await expect(spy.firstCall.args[0].target).to.equal(item)
     })
 
     it('should close on tab and focus trigger', async () => {
@@ -167,8 +167,8 @@ describe('<gds-context-menu>', () => {
 
       await el.updateComplete
 
-      expect(el.open).to.be.false
-      expect(document.activeElement).to.equal(el)
+      await expect(el.open).to.be.false
+      await expect(document.activeElement).to.equal(el)
     })
   })
 })

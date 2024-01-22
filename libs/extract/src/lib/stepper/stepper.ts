@@ -1,8 +1,10 @@
+import { ChangeEventHandler } from 'react'
+
 export interface StepperArgs {
   id?: string
-  value?: number
+  value?: string | number
   min?: number
   max?: number
   step?: number
-  onChange?: (value: number) => void
+  onChange?: ChangeEventHandler<HTMLInputElement>
 }

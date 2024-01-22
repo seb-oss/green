@@ -1,7 +1,6 @@
 export * from './lib/alert-ribbon'
 export * from './lib/badge'
 export * from './lib/button'
-export * from './lib/datepicker'
 export * from './lib/form'
 export * from './lib/helperFunction'
 export * from './lib/id'

@@ -2,6 +2,29 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.3.0...@sebgroup/green-core@1.4.0) (2024-01-19)
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+
+
+
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.4...@sebgroup/green-core@1.3.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* **core/dropdown:** add null-check when accessing parentElement ([#1158](https://github.com/sebgroup/green/issues/1158)) ([a1b610d](https://github.com/sebgroup/green/commit/a1b610d7959d96310b110574dd464c730b9f297c))
+
+
+### Features
+
+* **core/dropdown:** add `syncPopoverWidth` option ([#1159](https://github.com/sebgroup/green/issues/1159)) ([fe88611](https://github.com/sebgroup/green/commit/fe88611430adcac76d84ff4c3132243fde3fc968))
+
+
+
 ## [1.2.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.3...@sebgroup/green-core@1.2.4) (2023-12-01)
 
 
