@@ -130,6 +130,12 @@
   <source>Today</source>
   <target>Idag</target>
 </trans-unit>
+<trans-unit id="se4129fd6b9d7b4c2">
+  <source>Last available date</source>
+</trans-unit>
+<trans-unit id="s8ade4e9d5e804d6a">
+  <source>First available date</source>
+</trans-unit>
 </body>
 </file>
 </xliff>
