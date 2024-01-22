@@ -238,8 +238,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           </button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
-            @change=${(e: CustomEvent) =>
-              (this._focusedMonth = (e.target as GdsDropdown)?.value)}
+            @change=${this.#handleMonthChange}
             aria-label="${msg('Month')}"
           >
             <gds-option value="0">${msg('January')}</gds-option>
@@ -257,8 +256,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           </gds-dropdown>
           <gds-dropdown
             .value=${this._focusedYear.toString()}
-            @change=${(e: CustomEvent) =>
-              (this._focusedYear = (e.target as GdsDropdown)?.value)}
+            @change=${this.#handleYearChange}
             aria-label="${msg('Year')}"
           >
             ${repeat(
@@ -274,12 +272,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
         <gds-calendar
           id="calendar"
-          @change=${(e: CustomEvent<Date>) => {
-            e.stopPropagation()
-            this.value = e.detail
-            this.open = false
-            this.#dispatchChangeEvent()
-          }}
+          @change=${this.#handleCalendarChange}
           @gds-date-focused=${this.#handleFocusChange}
           .focusedMonth=${this._focusedMonth}
           .focusedYear=${this._focusedYear}
@@ -401,6 +394,23 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         detail: { value: this.value },
       })
     )
+  }
+
+  #handleCalendarChange = (e: CustomEvent<Date>) => {
+    e.stopPropagation()
+    this.value = e.detail
+    this.open = false
+    this.#dispatchChangeEvent()
+  }
+
+  #handleMonthChange = (e: CustomEvent) => {
+    e.stopPropagation()
+    this._focusedMonth = (e.target as GdsDropdown)?.value
+  }
+
+  #handleYearChange = (e: CustomEvent) => {
+    e.stopPropagation()
+    this._focusedYear = (e.target as GdsDropdown)?.value
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
