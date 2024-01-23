@@ -13,7 +13,7 @@ import {
 export class SlidingUnderlineDirective implements OnInit, OnChanges {
   constructor(private element: ElementRef<HTMLElement>) {}
 
-  @Input() public slidingUnderline: any
+  @Input() public nggSlidingUnderline: any
   @Input() public key?: any
   @Input() public disabled?: boolean
 
