@@ -2,14 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   Input,
   Output,
-  ViewChild,
   EventEmitter,
   ChangeDetectorRef,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -18,18 +14,11 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
-import {
-  DatepickerData,
-  Datepicker,
-  createDatepicker,
-  DatepickerState,
-  months,
-  years,
-  randomId,
-  DatepickerOptions,
-} from '@sebgroup/extract'
-import { DropdownOption } from '../dropdown/dropdown.component'
+import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
+
+import { GdsDatepicker } from '@sebgroup/green-core'
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 export interface Attributes {
   id?: string
@@ -41,6 +30,20 @@ export interface Attributes {
 export interface ElementProps {
   attributes: Attributes
   classes: string[]
+}
+
+export interface DatepickerOptions {
+  label?: string
+  locale?: string
+  currentDate?: Date | string
+  selectedDate?: Date | string
+  closeOnSelect?: boolean
+  useCurrentTime?: boolean
+  weekName?: { abbr: string; displayText: string }
+  showWeeks?: boolean
+  minDate?: Date
+  maxDate?: Date
+  onChange?: (selectedDate: Date) => void
 }
 
 @Component({
@@ -56,65 +59,58 @@ export interface ElementProps {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDatepickerComponent
-  implements ControlValueAccessor, AfterViewInit, OnChanges
+  implements ControlValueAccessor, AfterViewInit
 {
-  get months(): Array<DropdownOption> {
-    return this._months
-  }
-
-  set months(value: Array<DropdownOption>) {
-    this._months = value
-  }
   @Input()
   get options(): DatepickerOptions {
     return <DatepickerOptions>this._options
   }
   set options(value: DatepickerOptions) {
     this._options = value
-    if (value.locale) {
-      this.months = months({ locale: this.options?.locale })
-    }
   }
+
+  get showWeekNumbers(): boolean {
+    return this.options?.showWeeks ?? false
+  }
+
   @Input()
   get value(): string | Date | undefined {
     return this._value
   }
   set value(newValue: string | Date | undefined) {
     if (newValue !== this._value) {
-      this._value = newValue || ''
-      if (this._value !== undefined && this.dp) {
-        this.dp.select(this._value)
-      }
+      this._value = newValue || undefined
     }
+    console.log('value', this._value)
   }
+
   @Input() id?: string = randomId()
   @Input() label?: string
   @Input() isValid: boolean | null = null
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
-  @ViewChild('datepickerDialogElRef')
-  public datepickerDialogElRef?: ElementRef<HTMLElement>
-  @ViewChild('dateInputElRef')
-  public dateInputElRef?: ElementRef<HTMLInputElement>
-  @ViewChild('datepickerElRef') public datepickerElRef?: ElementRef<HTMLElement>
-  @ViewChild('datepickerTriggerElRef')
-  public datepickerTriggerElRef?: ElementRef<HTMLButtonElement>
 
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
-  toggler?: Partial<ElementProps>
-  listbox?: Partial<ElementProps>
   _value: string | Date | undefined
-  private _months: Array<DropdownOption> = months({})
-  years?: Array<DropdownOption>
   private _options?: DatepickerOptions
 
-  dp: Datepicker | undefined
-  private _data: DatepickerData | undefined
+  get min(): Date | undefined {
+    const minDate = this.options?.minDate
+    return minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
+  }
 
-  constructor(private _cdr: ChangeDetectorRef) {}
+  get max(): Date | undefined {
+    const maxDate = this.options?.maxDate
+    return maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
+  }
+
+  constructor(private _cdr: ChangeDetectorRef) {
+    registerTransitionalStyles()
+  }
 
   writeValue(value: any): void {
+    console.log('writeValue', value)
     this.value = value
   }
 
@@ -126,99 +122,17 @@ export class NggDatepickerComponent
     this.onTouchedFn = fn
   }
 
-  get data(): DatepickerData | undefined {
-    return this._data
-  }
+  onDateChange(evt: Event) {
+    const e = evt as CustomEvent
 
-  set data(value: DatepickerData | undefined) {
-    this._data = value
-  }
+    this.value = e.detail.value
 
-  onDateChange(value: string) {
-    const newDate = new Date(value)
-    // Only pass valid date to date picker
-    if (!isNaN(newDate.getTime())) {
-      this.dp?.select(value)
-    } else {
-      this.valueChange.emit(value)
-      this.onChangeFn && this.onChangeFn(value)
-    }
-  }
-
-  listener = (
-    data: DatepickerData | undefined,
-    state: DatepickerState | undefined
-  ) => {
-    if (this.dp && state) {
-      this.dp.state = { ...state }
-      this.years = years({
-        from: this.dp.state?.minDate?.getFullYear(),
-        to: this.dp.state?.maxDate?.getFullYear(),
-      })
-    }
-
-    if (data) {
-      // only emit change event if date has changed
-      if (this.data?.selectedDate !== data.selectedDate) {
-        this.valueChange.emit(data.selectedDate)
-        this.onChangeFn && this.onChangeFn(data.selectedDate)
-      }
-      this.data = data
-    }
-
-    this._cdr.detectChanges()
-  }
-  trackWeek(index: any, week: any) {
-    return week
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //ignore changes until datepicker has been initialised in ngAfterViewInit
-    if (!this.dp) return
-
-    if (changes.options) {
-      this._createDatepicker()
-    }
+    this.valueChange.emit(e.detail.value)
+    this.onChangeFn && this.onChangeFn(e.detail.value)
   }
 
   ngAfterViewInit(): void {
-    this._createDatepicker()
     this._cdr.detectChanges()
-  }
-
-  private _createDatepicker() {
-    if (
-      this.datepickerElRef &&
-      this.datepickerDialogElRef &&
-      this.dateInputElRef &&
-      this.datepickerTriggerElRef
-    ) {
-      this.dp = createDatepicker(
-        this.listener,
-        {
-          ...this.options,
-          selectedDate: this.value,
-        },
-        this.datepickerElRef.nativeElement,
-        this.datepickerDialogElRef.nativeElement,
-        this.dateInputElRef.nativeElement,
-        this.datepickerTriggerElRef.nativeElement
-      )
-    } else {
-      throw 'Missing one or more elements...'
-    }
-  }
-
-  blurInput() {
-    this.onTouchedFn && this.onTouchedFn()
-  }
-
-  focusoutDialog(event: any) {
-    if (
-      !this.datepickerDialogElRef?.nativeElement.contains(event.relatedTarget)
-    ) {
-      this.onTouchedFn && this.onTouchedFn()
-    }
   }
 }
 

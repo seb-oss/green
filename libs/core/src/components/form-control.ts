@@ -45,7 +45,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * Get or set the value of the form control.
    */
   @property()
-  value: ValueT | undefined
+  value?: ValueT
 
   @property({ reflect: true })
   name = ''

@@ -18,6 +18,7 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
 
 import styles from './popover.styles'
+import { reference } from '@popperjs/core'
 
 /**
  * @element gds-popover
@@ -61,6 +62,20 @@ export class GdsPopover extends LitElement {
   @property()
   placement: Placement = 'bottom-start'
 
+  /**
+   * A callback that returns the minimum width of the popover.
+   * By default, the popover minWidth will be as wide as the trigger element.
+   */
+  @property()
+  calcMinWidth = (referenceEl: HTMLElement) => `${referenceEl.offsetWidth}px`
+
+  /**
+   * A callback that returns the maximum width of the popover.
+   * By default, the popover maxWidth will be set to `auto` and will grow as needed.
+   */
+  @property()
+  calcMaxWidth = (_referenceEl: HTMLElement) => `auto`
+
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
@@ -98,7 +113,9 @@ export class GdsPopover extends LitElement {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.open = false
-        e.stopImmediatePropagation()
+        this.#dispatchUiStateEvent()
+        e.stopPropagation()
+        e.preventDefault()
       }
     })
 
@@ -167,11 +184,13 @@ export class GdsPopover extends LitElement {
         )
       }
     })
+  }
 
+  #dispatchUiStateEvent = () => {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         detail: { open: this.open },
-        bubbles: true,
+        bubbles: false,
         composed: false,
       })
     )
@@ -181,6 +200,7 @@ export class GdsPopover extends LitElement {
     e.stopPropagation()
     e.preventDefault()
     this.open = false
+    this.#dispatchUiStateEvent()
 
     // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
     // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
@@ -236,7 +256,8 @@ export class GdsPopover extends LitElement {
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
-          minWidth: `${referenceEl.offsetWidth}px`,
+          minWidth: this.calcMinWidth(referenceEl),
+          maxWidth: this.calcMaxWidth(referenceEl),
         })
       )
     })
@@ -249,9 +270,11 @@ export class GdsPopover extends LitElement {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       this.open = true
+      this.#dispatchUiStateEvent()
     }
     if (e.key === 'Escape') {
       this.open = false
+      this.#dispatchUiStateEvent()
     }
   }
 
@@ -268,10 +291,12 @@ export class GdsPopover extends LitElement {
     })
   }
 
-  #clickOutsideListener = (e: MouseEvent) => {
+  #clickOutsideListener = (evt: Event) => {
+    const e = evt as PointerEvent
     const dialog = this.#dialogElementRef.value
+    const isNotEnterKey = e.clientX > 0 || e.clientY > 0
 
-    if (dialog && this.open) {
+    if (isNotEnterKey && dialog && this.open) {
       const rect = dialog.getBoundingClientRect()
 
       const isInDialog =
@@ -281,7 +306,9 @@ export class GdsPopover extends LitElement {
         e.clientX <= rect.left + rect.width
 
       if (!isInDialog) {
+        e.stopPropagation()
         this.open = false
+        this.#dispatchUiStateEvent()
       }
     }
   }

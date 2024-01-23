@@ -19,7 +19,6 @@ Dropdown Component
     componentIds: ['component-dropdown'],
   }}
   args={{
-    loop: true,
     options: [
       { label: 'Tacos', value: 'tacos' },
       { label: 'Pizza', value: 'pizza' },
@@ -37,6 +36,7 @@ Dropdown Component
       console.log('OnChange', value)
     },
     label: 'Dropdown label',
+    syncPopoverWidth: false,
   }}
 >
   {Template.bind({})}

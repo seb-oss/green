@@ -10,6 +10,7 @@ const style = css`
     color: white;
     padding: 0.7rem 2rem;
     margin: 0.5rem 0;
+    box-sizing: border-box;
   }
 `
 

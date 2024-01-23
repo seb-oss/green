@@ -2,6 +2,41 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.3...@sebgroup/green-angular@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **dropdown:** pass down `syncPopoverWidth` to core component ([#1161](https://github.com/sebgroup/green/issues/1161)) ([4c48135](https://github.com/sebgroup/green/commit/4c48135e465af81ef5074753f2d819244ac3a9d5))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **datepicker:** replace underlying implementation in React and Angular ([#1164](https://github.com/sebgroup/green/issues/1164)) ([ececf0a](https://github.com/sebgroup/green/commit/ececf0aa12078a7b4fbeeae95861cf75e9194e31))
+
+
+### BREAKING CHANGES
+
+* **datepicker:** * `locale` option has been removed. Localization is handled
+    in Green Core by `@lit/localize`
+* `currentDate` is deprecated.  Use `value` instead.
+* `selectedDate` is deprecated. Use `value` instead.
+* `useCurrentTime` is removed
+* `closeOnSelect` is removed (popover will now always close when a value is selected)
+* `DatepickerOptions` moved from Extract and can be imported from React or Angular package instead.
+
+
+
+## [2.1.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.2...@sebgroup/green-angular@2.1.3) (2024-01-16)
+
+
+### Bug Fixes
+
+* **angular/pagination:** fix keyboard navigation ([#1157](https://github.com/sebgroup/green/issues/1157)) ([cb9ba95](https://github.com/sebgroup/green/commit/cb9ba9575bc6533ab154e0d15c9f46aa29a74fba))
+
+
+
 ## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.1...@sebgroup/green-angular@2.1.2) (2023-12-06)
 
 

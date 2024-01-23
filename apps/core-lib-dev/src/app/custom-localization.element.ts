@@ -27,10 +27,10 @@ const extraTemplates = new Map([
 const { setLocale } = gdsInitLocalization({
   extraLocales,
   extraTemplates,
-})
+} as any)
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s ?? '' + values[i]).join('')
+  strs.map((s, i) => s + values[i]).join('')
 )
 
 export class AppElement extends HTMLElement {
@@ -64,8 +64,25 @@ export class AppElement extends HTMLElement {
             <gds-option value="4">Option 4</gds-option>
           </gds-dropdown>
 
-          <gds-button type="submit">Submit</gds-button>
-          <gds-button variant="secondary" type="reset">Reset</gds-button>
+          <gds-datepicker
+            id="datepicker"
+            name="datepicker"
+            label="Pick a date"
+            dateformat="y/m/d"
+            showWeekNumbers
+            onchange="console.log('date changed', this.value)"
+          >
+            <span slot="sub-label"
+              >This text sits in a slot, so app can handle translation however
+              it likes</span
+            >
+            <span slot="message">Same here</span>
+          </gds-datepicker>
+
+          <gds-calendar></gds-calendar>
+
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
         </form>
       </div>
     `
