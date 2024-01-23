@@ -129,7 +129,6 @@ export const Modal = ({
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 
   useEffect(() => {
-    console.log('useEffect', { isOpen, shouldRender, status })
     if (isOpen && !shouldRender && status === UNMOUNTED) {
       setShouldRender(true)
       setStatus(IS_MOUNTING)
