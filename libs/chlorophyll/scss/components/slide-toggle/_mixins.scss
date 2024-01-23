@@ -38,7 +38,7 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   background: $_track_color;
   text-align: left;
   vertical-align: sub;
-  transition: $_track_transition_time;
+  transition: all $_track_transition_time, outline-offset 0s, outline-width 0s;
 
   .dark-mode & {
     border: 1px solid var(--sg-grey-200);

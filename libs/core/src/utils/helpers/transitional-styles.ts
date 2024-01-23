@@ -1,22 +1,34 @@
-import * as Listbox from 'primitives/listbox/listbox.trans.styles'
-import * as Popover from 'primitives/popover/popover.trans.styles'
-import * as Dropdown from 'components/dropdown/dropdown.trans.styles'
+import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
+import * as Popover from '../../primitives/popover/popover.trans.styles'
+import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
+import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
+import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
+import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
+
+import { VER_SUFFIX } from './custom-element-scoping'
 
 export const registerTransitionalStyles = () => {
   Dropdown.register()
   Listbox.register()
   Popover.register()
+  ContextMenu.register()
+  Calendar.register()
+  Datepicker.register()
 }
 
 declare global {
-  var __gdsTransitionalStyles: TransitionalStyles // eslint-disable-line no-var
+  var __gdsTransitionalStyles: { [VER_SUFFIX]: TransitionalStyles } // eslint-disable-line no-var
 }
 
 export class TransitionalStyles {
   static get instance() {
-    if (!globalThis.__gdsTransitionalStyles)
-      globalThis.__gdsTransitionalStyles = new TransitionalStyles()
-    return globalThis.__gdsTransitionalStyles
+    if (!globalThis.__gdsTransitionalStyles?.[VER_SUFFIX])
+      globalThis.__gdsTransitionalStyles = {
+        ...globalThis.__gdsTransitionalStyles,
+        [VER_SUFFIX]: new TransitionalStyles(),
+      }
+
+    return globalThis.__gdsTransitionalStyles[VER_SUFFIX]
   }
 
   private sheets = new Map<string, CSSStyleSheet>()

@@ -2,8 +2,11 @@ import * as StyleDictionary from 'style-dictionary'
 import formats from './src/formats'
 import transforms from './src/transforms'
 import filters from './src/filters'
+import actions from './src/actions'
 
-console.log(formats)
+for (const entry of Object.entries(actions)) {
+  StyleDictionary.registerAction(entry[1])
+}
 
 for (const entry of Object.entries(formats)) {
   StyleDictionary.registerFormat(entry[1])
@@ -21,7 +24,16 @@ const config: StyleDictionary.Config = {
   source: ['src/tokens/**/*.json'],
   platforms: {
     css: {
-      transformGroup: 'css',
+      // transformGroup: 'css',
+      transforms: [
+        'attribute/cti',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'name/cti/kebab',
+        'color/alpha',
+      ],
       buildPath: 'css/',
       prefix: 'gds-',
       files: [
@@ -54,7 +66,16 @@ const config: StyleDictionary.Config = {
       ],
     },
     scss: {
-      transformGroup: 'scss',
+      //transformGroup: 'scss',
+      transforms: [
+        'attribute/cti',
+        'name/cti/kebab',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'color/alpha',
+      ],
       buildPath: 'scss/',
       prefix: 'gds-',
       files: [
@@ -89,9 +110,37 @@ const config: StyleDictionary.Config = {
         },
       ],
     },
+    js: {
+      //transformGroup: 'js',
+      transforms: [
+        'attribute/cti',
+        'name/cti/pascal',
+        'size/rem',
+        'color/hex',
+        'color/alpha',
+      ],
+      buildPath: 'js/',
+      prefix: 'gds',
+      files: [
+        {
+          destination: 'ref-tokens.js',
+          format: 'javascript/module',
+          filter: function (token) {
+            return token.path.includes('ref')
+          },
+        },
+        {
+          destination: 'sys-tokens.js',
+          format: 'javascript/module',
+          filter: function (token) {
+            return token.path.includes('sys')
+          },
+        },
+      ],
+    },
     figma: {
       buildPath: 'figma/',
-      transforms: ['name/figma'],
+      transforms: ['name/figma', 'color/alpha'],
       files: [
         {
           format: 'json/figma',
@@ -105,7 +154,7 @@ const config: StyleDictionary.Config = {
 
             let returnValue = false
 
-            token.path.forEach((item) => {
+            token.path?.forEach((item) => {
               if (['color', 'size'].includes(item)) {
                 returnValue = true
               }

@@ -8,15 +8,14 @@
   user-select: none;
 }
 
-:host(:hover) {
-  background-color: #199be3;
-  color: #fff;
+:host(:hover),
+:host(:focus-visible) {
+  background-color: var(--gds-ref-pallet-base300);
 }
 
 :host(:focus) {
-  @include dropdown.select-option-highlighted;
-  color: #fff;
-  outline: 2px solid;
+  outline-color: #000;
+  outline-offset: -0.25rem;
 }
 
 :host([aria-hidden='true']) {

@@ -2,6 +2,30 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@2.0.0...@sebgroup/green-angular-charts@2.0.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* **charts:** re-release ([#1088](https://github.com/sebgroup/green/issues/1088)) ([9072567](https://github.com/sebgroup/green/commit/9072567576efa22a318c7d62f3af77eb973049b5))
+
+
+
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.2.0...@sebgroup/green-angular-charts@2.0.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+### BREAKING CHANGES
+
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
 # [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@1.1.2...@sebgroup/green-angular-charts@1.2.0) (2023-10-10)
 
 

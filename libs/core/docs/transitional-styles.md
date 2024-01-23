@@ -11,3 +11,12 @@ The mechanism consist of a few different parts:
 - A call to apply transitional styles in the `connectedCallback()` method in each component. The call can look like this `TransitionalStyles.instance.apply(this, 'gds-dropdown')`. This will replace the stylesheet of the component with the on that has been registered with the singleton, if it exists.
 
 If `registerTransitionalStyles()` has not been called, the components will simple use the default 2023 styling.
+
+# How to add transitional styles to a component
+
+1. Create these files in the component directory: `component-name.trans.styles.ts` and `component-name.trans.styles.scss`. The `scss`-file can import styles from Chlorophyll, through releative paths (not from node_modules). If necessarary, the styles can be copied from Chlorophyll and modified as needed.
+2. The `.ts` module should a) import the `scss`, and b) export a `register()` function. The register function should register the imported styles with the `TransistionalStyles` singleton. Check for example `gds-dropdown` for reference.
+3. Import the `.ts` file in the `transitional-styles.ts` module and add a call to the `register()` function in the `registerTransitionalStyles()` function.
+4. In the `connectedCallback()` function of the component, call `TransitionalStyles.instance.apply(this, 'component-name')`
+
+That should be it! Now, when the `registerTransitionalStyles()` function is called, the component should switch to the transitional styles.

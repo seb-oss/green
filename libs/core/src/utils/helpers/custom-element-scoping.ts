@@ -59,7 +59,7 @@
 import { html as litHtml } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-const VER_SUFFIX = '-gdsvsuffix'
+export const VER_SUFFIX = '-gdsvsuffix'
 const elementLookupTable = new Map<string, string>()
 
 /**
@@ -84,6 +84,11 @@ export const gdsCustomElement = (tagName: string) => {
 
   const versionedTagName = tagName + VER_SUFFIX
   elementLookupTable.set(tagName, versionedTagName)
+
+  // Bail out if the element is already registered
+  if (customElements.get(versionedTagName))
+    return (_classOrDescriptor: any) => false
+
   return customElement(versionedTagName)
 }
 
@@ -112,7 +117,9 @@ function applyElementScoping(
 const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
   inStr.map((s) => {
     for (const [key, value] of elementLookupTable.entries()) {
-      s = s.split(key).join(value)
+      // Match the key, as long as it is not followed by a dash or lowercase letter.
+      // The key `gds-menu` should only match `gds-menu` and not `gds-menu-item` or `gds-menuitem`, for example.
+      s = s.replace(new RegExp(`${key}(?![-a-z])`, 'mg'), value)
     }
     return s
   })

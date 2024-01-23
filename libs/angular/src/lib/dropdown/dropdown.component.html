@@ -1,149 +1,51 @@
 <div class="form-group">
-  <span class="label" *ngIf="label" [id]="toggler?.attributes?.id + '_label'">{{
-    label
-  }}</span>
-  <button
-    [attr.aria-labelledby]="label ? toggler?.attributes?.id + '_label' : null"
-    [attr.aria-describedby]="
-      formInfo?.textContent && (formInfo?.textContent?.length ?? 0 > 0)
-        ? toggler?.attributes?.id + '_info'
-        : null
-    "
-    type="button"
-    role="combobox"
-    #togglerRef
-    [id]="toggler?.attributes?.id"
-    [attr.aria-haspopup]="toggler?.attributes?.['aria-haspopup']"
-    [attr.aria-expanded]="toggler?.attributes?.['aria-expanded']"
-    [attr.aria-owns]="toggler?.attributes?.['aria-owns']"
-    [tabindex]="toggler?.attributes?.tabIndex"
-    [style]="toggler?.attributes?.style"
-    [class]="toggler?.classes"
-    (click)="handler?.toggle()"
-    [class.is-valid]="valid"
-    [class.is-invalid]="invalid"
+  <gds-dropdown
+    *nggCoreElement
+    #gdsDropdown
+    [value]="value"
+    [searchable]="searchable"
+    [label]="label"
+    (change)="onValueChange($event)"
+    [multiple]="multiSelect"
+    [invalid]="invalid"
+    [compareWith]="compareWithAdapter"
+    [searchFilter]="searchFilterAdapter"
+    [syncPopoverWidth]="syncPopoverWidth"
   >
-    <ng-container
-      *ngTemplateOutlet="
-        customButton?.templateRef && !multiSelect && selectedOption
-          ? customButton!.templateRef
-          : defaultButton;
-        context: { option: selectedOption }
-      "
-    ></ng-container>
-  </button>
-  <span
-    class="form-info"
-    #formInfo
-    [attr.id]="toggler?.attributes?.id + '_info'"
-    ><ng-content select="[data-form-info]"></ng-content
-  ></span>
-  <div
-    #listboxRef
-    [id]="listbox?.attributes?.id"
-    [attr.role]="listbox?.attributes?.role"
-    [attr.aria-activedescendant]="
-        listbox?.attributes?.['aria-activedescendant']
-      "
-    [tabindex]="listbox?.attributes?.tabIndex"
-    [style]="listbox?.attributes?.style"
-    [class]="listbox?.classes"
-  >
-    <div class="d-flex d-sm-none align-items-center">
-      <span class="flex-grow-1 ps-4 fs-2 fw-bolder">{{ label }}</span>
-      <button
-        type="button"
-        class="close m-4 m-sm-2 d-block d-sm-none"
-        [attr.aria-label]="dropdown?.texts?.close"
-        (click)="handler?.close()"
-      >
-        <i></i>
-      </button>
-    </div>
-    <ul role="listbox" *ngIf="!dropdown?.isMultiSelect">
-      <ng-container *ngTemplateOutlet="searchInput"></ng-container>
-      <li
-        *ngFor="
-          let option of dropdown?.options;
-          let index = index;
-          trackBy: trackByKey
+    <span slot="message" #formInfo
+      ><ng-content select="[data-form-info]"></ng-content
+    ></span>
+
+    <span slot="trigger"
+      ><ng-container
+        *ngTemplateOutlet="
+          customButton?.templateRef && selectedOption
+            ? customButton!.templateRef
+            : defaultButton;
+          context: { option: selectedOption }
         "
-        [id]="option.attributes.id"
-        [attr.role]="option.attributes.role"
-        [attr.aria-selected]="option.attributes['aria-selected']"
-        [style]="option.attributes.style"
-        [class]="option.classes"
-        (click)="handler?.select(option)"
-      >
-        <ng-container
+      ></ng-container
+    ></span>
+
+    <ng-container *ngFor="let option of options; let index = index">
+      <gds-option *nggCoreElement [value]="option[useValue]"
+        ><ng-container
           *ngTemplateOutlet="
             customOption?.templateRef
               ? customOption!.templateRef
               : defaultOption;
             context: { option: option, index: index }
           "
-        ></ng-container>
-      </li>
-    </ul>
-    <div *ngIf="dropdown?.isMultiSelect" class="sg-fieldset-container">
-      <ng-container *ngTemplateOutlet="searchInput"></ng-container>
-      <!--TODO: Improve checkboxes in dropdown angular-->
-      <fieldset
-        #fieldsetRef
-        [attr.aria-describedby]="fieldset?.attributes?.id"
-        role="listbox"
-        tabIndex="-1"
-        aria-multiselectable="true"
-      >
-        <legend class="sr-only" [id]="fieldset?.attributes?.id">Options</legend>
-        <label
-          class="form-control"
-          [attr.role]="option.attributes.role"
-          [id]="option.attributes.id"
-          [attr.aria-selected]="option.attributes['aria-selected']"
-          [class]="option.classes"
-          *ngFor="
-            let option of dropdown?.options;
-            let index = index;
-            trackBy: trackByKey
-          "
-        >
-          <input
-            type="checkbox"
-            (change)="handler?.select(option, false)"
-            [checked]="option.selected"
-            tabIndex="-1"
-          />
-          <ng-container
-            *ngTemplateOutlet="
-              customOption?.templateRef
-                ? customOption!.templateRef
-                : defaultOption;
-              context: { option: option, index: index }
-            "
-          ></ng-container>
-          <i></i>
-        </label>
-      </fieldset>
-    </div>
-  </div>
+        ></ng-container
+      ></gds-option>
+    </ng-container>
+  </gds-dropdown>
 </div>
 
-<ng-template #defaultButton let-selected="selected">
-  <span>{{ dropdown?.texts?.select }}</span>
+<ng-template #defaultButton let-selected="option">
+  <span class="trigger">{{ texts?.select }}</span>
 </ng-template>
 
 <ng-template #defaultOption let-option="option">
-  {{ option[dropdown!.display] }}
-</ng-template>
-
-<ng-template #searchInput>
-  <input
-    *ngIf="dropdown?.isSearchable"
-    [id]="toggler?.attributes?.id + '_search-input'"
-    type="search"
-    (input)="search($event)"
-    placeholder="{{ dropdown?.texts?.searchPlaceholder }}"
-    class="rounded-0 rounded-top border-0 border-bottom border-info"
-  />
+  {{ display ? option[display] : option.name }}
 </ng-template>

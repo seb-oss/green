@@ -1,0 +1,34 @@
+{
+  "sys": {
+    "spacing": {
+      "padding": {
+        "inline": {
+          "none": {
+            "value": "{ref.size.0}",
+            "attributes": {
+              "figma": {
+                "resolvedType": "ALIAS"
+              }
+            }
+          },
+          "2 px": {
+            "value": "{ref.size.1}",
+            "attributes": {
+              "figma": {
+                "resolvedType": "ALIAS"
+              }
+            }
+          },
+          "4 px": {
+            "value": "{ref.size.2}",
+            "attributes": {
+              "figma": {
+                "resolvedType": "ALIAS"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

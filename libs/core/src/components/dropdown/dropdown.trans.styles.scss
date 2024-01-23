@@ -8,12 +8,23 @@
 @include input.add-text-input();
 
 :host {
-  display: inline-block;
+  display: block;
 }
 
 :host(:invalid) button + .form-info {
   @include validation.add-feedback-element();
   @include validation.add-feedback(tokens.$intent-danger-background);
+}
+
+::slotted([slot='trigger']) {
+  overflow: hidden;
+}
+
+slot[name='trigger'] > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 
 .form-info {
@@ -25,12 +36,17 @@
 }
 
 input[type='text'] {
-  border-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   font-size: 1rem;
   line-height: 1;
   margin: -1px;
   min-height: auto;
   padding: 0.75rem;
+
+  &:focus {
+    outline-offset: -0.25rem;
+  }
 }
 
 button {
@@ -38,8 +54,10 @@ button {
   @include button.base();
   @include button.secondary();
   @include dropdown.dropdown-trigger();
+
   font-size: inherit;
   font-weight: normal;
+  line-height: 1.125;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 

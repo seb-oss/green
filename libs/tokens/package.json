@@ -1,0 +1,25 @@
+{
+  "name": "@sebgroup/green-tokens",
+  "version": "0.0.1-beta.8",
+  "dependencies": {
+    "style-dictionary": "^3.8.0",
+    "fs-extra": "^10.1.0",
+    "tinycolor2": "^1.6.0"
+  },
+  "description": "Design tokens for Green Design System",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/labels/tokens"
+  },
+  "homepage": "https://sebgroup.github.io/green"
+}

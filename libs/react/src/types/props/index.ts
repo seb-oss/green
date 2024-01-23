@@ -2,6 +2,8 @@ export interface IconProps {
   focusable?: boolean
   title?: string
   fill?: string
+  width?: number
+  height?: number
   'aria-hidden'?: boolean
 }
 

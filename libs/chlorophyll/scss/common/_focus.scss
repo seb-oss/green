@@ -2,29 +2,9 @@
 @use 'functions';
 @use 'sass:map';
 
-@mixin add-focus(
-  $suffix: 'visible',
-  $target: '',
-  $glow-color: tokens.get(tokens.$blue, 2),
-  $border-color: tokens.get(tokens.$blue, 0)
-) {
+@mixin add-focus($suffix: 'visible', $target: '') {
   @if $suffix != '' {
     $suffix: '-' + $suffix;
-  }
-
-  @if not $target == '' {
-    #{$target} {
-      transition: box-shadow tokens.$transition-time;
-    }
-  } @else {
-    transition: box-shadow tokens.$transition-time;
-  }
-
-  &:focus {
-    border-color: $border-color;
-    box-shadow: 0 0 0.25rem 0.0625rem $glow-color;
-    outline-color: transparent;
-    outline-style: solid;
   }
 
   @if $suffix != '' {
@@ -34,41 +14,31 @@
     }
   }
 
+  &:focus,
   &:focus#{$suffix} #{$target} {
-    border-color: $border-color !important;
-    box-shadow: 0 0 0.25rem 0.0625rem $glow-color;
-    outline-color: transparent;
+    outline-color: var(--gds-sys-color-focus-outline);
     outline-style: solid;
+    outline-width: 0.125rem;
+    outline-offset: 0.125rem;
   }
 }
 
-@mixin add-outline-focus-state($color: tokens.get(tokens.$blue, 1)) {
-  @if (type-of($color) == color) {
-    $color: transparentize($color, 0.35);
-  }
-  &:focus {
-    outline: $color solid 2px;
-    outline-offset: 2px;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: 0;
-  }
-
-  &:focus-visible {
-    outline: $color solid 2px;
-    outline-offset: 2px;
-  }
+/**
+* @deprecated
+* Use `add-focus` instead
+*/
+@mixin add-outline-focus-state() {
+  @include add-focus('within');
 }
 
 @mixin add-hover-state($color: tokens.get(tokens.$blue, 2), $target: '') {
   @if not $target == '' {
     #{$target} {
-      transition: all
-        tokens.$transition-time; // TODO: append transition rule...
+      transition: all tokens.$transition-time, outline-offset 0s,
+        outline-width 0s; // TODO: append transition rule...
     }
   } @else {
-    transition: all tokens.$transition-time; // TODO: append transition rule...
+    transition: all tokens.$transition-time, outline-offset 0s, outline-width 0s; // TODO: append transition rule...
   }
 
   &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {

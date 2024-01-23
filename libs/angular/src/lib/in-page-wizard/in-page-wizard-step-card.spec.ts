@@ -1,84 +1,136 @@
-import { Component } from '@angular/core'
-import {
-  render,
-  fireEvent,
-  RenderResult,
-  waitFor,
-} from '@testing-library/angular'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { render, fireEvent, waitFor } from '@testing-library/angular'
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
 
 describe('InPageWizardStepCardComponent', () => {
-  let component: NggInPageWizardStepCardComponent
-  let fakeComponent: RenderResult<NggFakeInPageWizardStepCardComponent>
-
-  beforeEach(async () => {
-    fakeComponent = await render(NggFakeInPageWizardStepCardComponent, {
-      declarations: [
-        NggFakeInPageWizardStepCardComponent,
-        NggInPageWizardStepCardComponent,
-      ],
-      providers: [],
-    })
-    fakeComponent.detectChanges()
-    component = fakeComponent.fixture.debugElement.children[0].componentInstance
-  })
-
-  it('should create', () => {
-    const rootElement = component
+  it('should create', async () => {
+    const { findByTestId } = await render(
+      NggFakeInPageWizardStepCardComponent,
+      {
+        declarations: [
+          NggFakeInPageWizardStepCardComponent,
+          NggInPageWizardStepCardComponent,
+        ],
+        providers: [],
+        componentInputs: {
+          title: 'Test Title',
+          stepText: 'Test Step Text',
+        },
+      }
+    )
+    const rootElement = findByTestId('in-page-wizard-step-card-root')
     expect(rootElement).toBeDefined()
   })
+
   describe('Text input', () => {
     it('should shown text inputs', async () => {
-      component.title = 'Test Title'
-      component.stepText = 'Test Step Text'
-
-      const title = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-title'
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            title: 'Test Title',
+            stepText: 'Test Step Text',
+          },
+        }
       )
+
+      const title = await findByTestId('in-page-wizard-step-card-title')
+
       expect(title).toBeDefined()
       expect(title.textContent).toEqual('Test Title')
 
-      const stepText = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-step-text'
-      )
+      const stepText = await findByTestId('in-page-wizard-step-card-step-text')
       expect(stepText).toBeDefined()
       expect(stepText.textContent?.trim()).toEqual('Test Step Text')
     })
   })
   describe('Active', () => {
-    beforeEach(() => {
-      component.nextBtnText = 'Test Next'
-      component.isActive = true
-    })
-
     it('should set class active', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+          },
+        }
+      )
+
       await waitFor(() => {
-        const root = fakeComponent.queryByTestId(
-          'in-page-wizard-step-card-root'
-        )
+        const root = queryByTestId('in-page-wizard-step-card-root')
         expect(root).toBeDefined()
         expect(root?.classList).toContain('active')
       })
     })
 
     it('should show next button', async () => {
-      const nextBtn = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-next-btn'
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+          },
+        }
       )
+
+      const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
       expect(nextBtn).toBeDefined()
       expect(nextBtn.textContent?.trim()).toEqual('Test Next')
     })
 
     it('should not show edit btn', async () => {
-      expect(
-        fakeComponent.queryByTestId('in-page-wizard-step-card-edit-btn')
-      ).toBeNull()
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+          },
+        }
+      )
+
+      const el = queryByTestId('in-page-wizard-step-card-edit-btn')
+      expect(el).toBeNull()
     })
 
     it('should show content', async () => {
-      const content = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-content'
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+          },
+        }
       )
+
+      const content = await findByTestId('in-page-wizard-step-card-content')
       expect(content).toBeDefined()
       expect(content.childNodes.length).toEqual(1)
 
@@ -88,68 +140,121 @@ describe('InPageWizardStepCardComponent', () => {
     })
 
     it('should on next btn click change state to completed', async () => {
-      // Arrange
-      const nextBtn = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-next-btn'
+      const nextSpy = jest.fn()
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+            handleNextClick: nextSpy,
+          },
+        }
       )
+      // Arrange
+      const root = await findByTestId('in-page-wizard-step-card-root')
+      const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
       expect(nextBtn).toBeDefined()
-      expect(component.isActive).toBeTruthy()
-      expect(component.isCompleted).toBeFalsy()
-
-      let eventEmitted = false
-
-      component.handleNextClick.subscribe(() => {
-        eventEmitted = true
-      })
+      expect(root.classList).toContain('active')
+      expect(root.classList).not.toContain('completed')
 
       // Act
       fireEvent.click(nextBtn)
 
       // Assert
       await waitFor(() => {
-        expect(component.isCompleted).toBeTruthy()
-        expect(component.isActive).toBeFalsy()
-        expect(eventEmitted).toEqual(true)
+        expect(nextSpy).toBeCalledTimes(1)
+        expect(root.classList).not.toContain('active')
       })
     })
   })
 
   describe('Completed', () => {
-    beforeEach(() => {
-      component.editBtnText = 'Test Edit'
-      component.isCompleted = true
-    })
-
     it('should set class completed', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            editBtnText: 'Test Edit',
+            isCompleted: true,
+          },
+        }
+      )
+
       await waitFor(() => {
-        const root = fakeComponent.queryByTestId(
-          'in-page-wizard-step-card-root'
-        )
+        const root = queryByTestId('in-page-wizard-step-card-root')
         expect(root).toBeDefined()
         expect(root?.classList).toContain('completed')
       })
     })
 
     it('should show edit button', async () => {
-      const editBtn = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-edit-btn'
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            editBtnText: 'Test Edit',
+            isCompleted: true,
+            isActive: false,
+          },
+        }
       )
+      const editBtn = await findByTestId('in-page-wizard-step-card-edit-btn')
       expect(editBtn).toBeDefined()
       expect(editBtn.textContent?.trim()).toEqual('Test Edit')
     })
 
     it('should not show next btn', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            editBtnText: 'Test Edit',
+            isCompleted: true,
+          },
+        }
+      )
       await waitFor(() => {
-        expect(
-          fakeComponent.queryByTestId('in-page-wizard-step-card-next-btn')
-        ).toBeNull()
+        expect(queryByTestId('in-page-wizard-step-card-next-btn')).toBeNull()
       })
     })
 
     it('should show content', async () => {
-      const content = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-content'
+      const { findByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            editBtnText: 'Test Edit',
+            isCompleted: true,
+          },
+        }
       )
+      const content = await findByTestId('in-page-wizard-step-card-content')
       expect(content).toBeDefined()
       expect(content.childNodes.length).toEqual(1)
 
@@ -159,60 +264,100 @@ describe('InPageWizardStepCardComponent', () => {
     })
 
     it('should on edit btn click change state to active', async () => {
-      // Arrange
-      const editBtn = await fakeComponent.findByTestId(
-        'in-page-wizard-step-card-edit-btn'
+      const editSpy = jest.fn()
+      const { findByTestId, queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            editBtnText: 'Edit',
+            isCompleted: true,
+            isActive: false,
+          },
+          componentOutputs: {
+            handleEditClick: editSpy,
+          },
+        }
       )
+      // Arrange
+      const editBtn = await findByTestId('in-page-wizard-step-card-edit-btn')
+      const root = await findByTestId('in-page-wizard-step-card-root')
       expect(editBtn).toBeDefined()
-      expect(component.isCompleted).toBeTruthy()
-      expect(component.isActive).toBeFalsy()
-
-      let eventEmitted = false
-
-      component.handleEditClick.subscribe(() => {
-        eventEmitted = true
-      })
+      expect(root?.classList).toContain('completed')
+      expect(root?.classList).not.toContain('active')
 
       // Act
       fireEvent.click(editBtn)
 
       // Assert
       await waitFor(() => {
-        expect(component.isActive).toBeTruthy()
-        expect(
-          fakeComponent.queryByTestId('in-page-wizard-step-card-edit-btn')
-        ).toBeNull()
-        expect(eventEmitted).toEqual(true)
+        expect(queryByTestId('in-page-wizard-step-card-edit-btn')).toBeNull()
+        expect(editSpy).toBeCalledTimes(1)
       })
     })
   })
 
   describe('Upcoming', () => {
-    beforeEach(() => {
-      component.isActive = false
-      component.isCompleted = false
-    })
-
     it('should not show next btn', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            isActive: false,
+            isCompleted: false,
+          },
+        }
+      )
       await waitFor(() => {
-        expect(
-          fakeComponent.queryByTestId('in-page-wizard-step-card-next-btn')
-        ).toBeNull()
+        expect(queryByTestId('in-page-wizard-step-card-next-btn')).toBeNull()
       })
     })
     it('should not show edit btn', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            isActive: false,
+            isCompleted: false,
+          },
+        }
+      )
       await waitFor(() => {
-        expect(
-          fakeComponent.queryByTestId('in-page-wizard-step-card-edit-btn')
-        ).toBeNull()
+        expect(queryByTestId('in-page-wizard-step-card-edit-btn')).toBeNull()
       })
     })
 
     it('should not show content', async () => {
+      const { queryByTestId } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            isActive: false,
+            isCompleted: false,
+          },
+        }
+      )
       await waitFor(() => {
-        expect(
-          fakeComponent.queryByTestId('in-page-wizard-step-card-content')
-        ).toBeNull()
+        expect(queryByTestId('in-page-wizard-step-card-content')).toBeNull()
       })
     })
   })
@@ -221,9 +366,49 @@ describe('InPageWizardStepCardComponent', () => {
 @Component({
   selector: 'ngg-fake-step-card',
   template: `
-    <ngg-in-page-wizard-step-card>
+    <ngg-in-page-wizard-step-card
+      [isActive]="isActive"
+      [isCompleted]="isCompleted"
+      [disableNext]="disableNext"
+      [title]="title"
+      [stepText]="stepText"
+      [editBtnText]="editBtnText"
+      [nextBtnText]="nextBtnText"
+      (handleNextClick)="_handleNextClick()"
+      (handleEditClick)="_handleEditClick()"
+    >
       <h2 data-testid="fake-step-card-content">Content</h2>
     </ngg-in-page-wizard-step-card>
   `,
 })
-class NggFakeInPageWizardStepCardComponent {}
+class NggFakeInPageWizardStepCardComponent {
+  @Input() public stepText = ''
+
+  @Input() public title = ''
+
+  @Input() public editBtnText = ''
+
+  @Input() public nextBtnText = ''
+
+  @Input() public isCompleted = false
+
+  @Input() public disableNext = false
+
+  @Input() public isActive = false
+
+  @Input() public handleNextClick?: () => void
+
+  @Input() public handleEditClick?: () => void
+
+  _handleNextClick() {
+    if (this.handleNextClick) {
+      this.handleNextClick()
+    }
+  }
+
+  _handleEditClick() {
+    if (this.handleEditClick) {
+      this.handleEditClick()
+    }
+  }
+}

@@ -1,61 +1,90 @@
-import {ChangeEvent} from 'react'
-import { StepperArgs, useStepper } from './hook'
-import {IValidator, validateClassName, IndicatorType} from "@sebgroup/extract";
+import { IValidator, validateClassName, IndicatorType } from '@sebgroup/extract'
+import {
+  ChangeEventHandler,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+} from 'react'
 
-export interface StepperProps extends StepperArgs {
+export interface StepperProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  id?: string
+  value?: string | number
+  onChange?: ChangeEventHandler<HTMLInputElement>
   label?: string
   description?: string
   statusMessage?: string
   validator?: IValidator
+  onIncrease?: () => void
+  onDecrease?: () => void
+  testId?: string
 }
-
 
 // TODO: Should be named "Numeric input" instead of stepper?
 
 export function Stepper({
+  id,
   label,
   description,
   statusMessage,
   validator,
-  ...stepperArgs
+  value = 0,
+  onChange = () => undefined,
+  onIncrease = () => undefined,
+  onDecrease = () => undefined,
+  testId,
+  ...props
 }: StepperProps) {
-
-  const [stepper, data] = useStepper(stepperArgs)
-
-  const onChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
-    stepper.setValue(e.target.valueAsNumber)
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      onIncrease()
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      onDecrease()
+    }
   }
 
   const PrimitiveStepper = (
-    <div className={`group group-border group-stepper ${validator && validateClassName(validator?.indicator as IndicatorType)}`}>
-      <button onClick={() => stepper.down()}>-</button>
+    <div
+      data-testid={testId}
+      className={`group group-border group-stepper ${
+        validator && validateClassName(validator?.indicator as IndicatorType)
+      }`}
+    >
+      <button type="button" onClick={onDecrease}>
+        -
+      </button>
       <input
-        id={data.id}
-        type="number"
-        onChange={onChangeEvent}
-        onFocus={({target}) => target.select()}
+        id={id}
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        onChange={onChange}
+        onFocus={({ target }) => target.select()}
+        onKeyDown={handleKeyDown}
         placeholder="0"
-        value={data.value}
+        value={value}
+        {...props}
       />
-      <button onClick={() => stepper.up()}>+</button>
+      <button type="button" onClick={onIncrease}>
+        +
+      </button>
     </div>
   )
 
-  if (!label && !description && !statusMessage && !validator) return PrimitiveStepper;
+  if (!label && !description && !statusMessage && !validator)
+    return PrimitiveStepper
 
   return (
     <div className="form-group">
-      { label && (
-        <label htmlFor={data.id}>{ label }</label>
-      )}
-      { description && (
-        <span className="form-info">{ description }</span>
-      )}
+      {label && <label htmlFor={id}>{label}</label>}
+      {description && <span className="form-info">{description}</span>}
       <div className="stepper-wrapper">
-        { PrimitiveStepper }
-        { validator && (
-          <span className="form-info">{ validator.message }</span>
-        )}
+        {PrimitiveStepper}
+        {validator && <span className="form-info">{validator.message}</span>}
       </div>
     </div>
   )

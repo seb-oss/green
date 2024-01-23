@@ -2,6 +2,149 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@3.0.0...@sebgroup/green-angular@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** incorrectly supplying value in filter callback adapter ([#1167](https://github.com/sebgroup/green/issues/1167)) ([101a23c](https://github.com/sebgroup/green/commit/101a23c08b8b70f0179ae0829f7e8b772ea7317e))
+* **datepicker:** forward all props to web component ([#1168](https://github.com/sebgroup/green/issues/1168)) ([00b0922](https://github.com/sebgroup/green/commit/00b092271f345abe521e8af74b7c4392d8b8db4c))
+
+
+
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.3...@sebgroup/green-angular@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **dropdown:** pass down `syncPopoverWidth` to core component ([#1161](https://github.com/sebgroup/green/issues/1161)) ([4c48135](https://github.com/sebgroup/green/commit/4c48135e465af81ef5074753f2d819244ac3a9d5))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **datepicker:** replace underlying implementation in React and Angular ([#1164](https://github.com/sebgroup/green/issues/1164)) ([ececf0a](https://github.com/sebgroup/green/commit/ececf0aa12078a7b4fbeeae95861cf75e9194e31))
+
+
+### BREAKING CHANGES
+
+* **datepicker:** * `locale` option has been removed. Localization is handled
+    in Green Core by `@lit/localize`
+* `currentDate` is deprecated.  Use `value` instead.
+* `selectedDate` is deprecated. Use `value` instead.
+* `useCurrentTime` is removed
+* `closeOnSelect` is removed (popover will now always close when a value is selected)
+* `DatepickerOptions` moved from Extract and can be imported from React or Angular package instead.
+
+
+
+## [2.1.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.2...@sebgroup/green-angular@2.1.3) (2024-01-16)
+
+
+### Bug Fixes
+
+* **angular/pagination:** fix keyboard navigation ([#1157](https://github.com/sebgroup/green/issues/1157)) ([cb9ba95](https://github.com/sebgroup/green/commit/cb9ba9575bc6533ab154e0d15c9f46aa29a74fba))
+
+
+
+## [2.1.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.1...@sebgroup/green-angular@2.1.2) (2023-12-06)
+
+
+### Bug Fixes
+
+* 🐛 update track background when min and max values change ([#1146](https://github.com/sebgroup/green/issues/1146)) ([17d0b80](https://github.com/sebgroup/green/commit/17d0b80283a0601821c5205e4a3d719b8c572586))
+
+
+
+## [2.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.0...@sebgroup/green-angular@2.1.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+# [2.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.1.0) (2023-11-22)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([8c88de3](https://github.com/sebgroup/green/commit/8c88de30c48ddb7e0a4a8abdc3b97d8310183069))
+* **dropdown:** hidden overflow with ellipsis by default ([#1114](https://github.com/sebgroup/green/issues/1114)) ([9a2cce7](https://github.com/sebgroup/green/commit/9a2cce7cb7549ef3bff6b4086407fcb80f49cc72))
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
+## [2.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([8c88de3](https://github.com/sebgroup/green/commit/8c88de30c48ddb7e0a4a8abdc3b97d8310183069))
+
+
+
+## [2.0.4](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.3...@sebgroup/green-angular@2.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* 🐛 angular modal z-index ([#1104](https://github.com/sebgroup/green/issues/1104)) ([28b6b83](https://github.com/sebgroup/green/commit/28b6b83fcc1ab7699ee28d20b0a89e6740361b75))
+
+
+
+## [2.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.2...@sebgroup/green-angular@2.0.3) (2023-11-07)
+
+
+### Bug Fixes
+
+* **angular/context-menu:** remove border ([#1097](https://github.com/sebgroup/green/issues/1097)) ([4ce4939](https://github.com/sebgroup/green/commit/4ce493904d5b1e9487debd17cb34385e5d8cbd8b))
+
+
+
+## [2.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.1...@sebgroup/green-angular@2.0.2) (2023-11-01)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** correct additional regressions ([#1087](https://github.com/sebgroup/green/issues/1087)) ([57f7f4b](https://github.com/sebgroup/green/commit/57f7f4b685efab17fba482de3fd66e23f32e3486))
+
+
+
+## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.0.0...@sebgroup/green-angular@2.0.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** issues with Dropdown custom buttons ([#1084](https://github.com/sebgroup/green/issues/1084)) ([eebb5e4](https://github.com/sebgroup/green/commit/eebb5e4cc75d8415edcb7efc125befac4ca1dde3))
+
+
+
+# [2.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.10.0...@sebgroup/green-angular@2.0.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **context-menu:** context menu imports and docs ([#1074](https://github.com/sebgroup/green/issues/1074)) ([34b3a35](https://github.com/sebgroup/green/commit/34b3a35e284e4a6c7c1acc145ca80b869574dee5))
+* **dropdown:** start using Core Dropdown in Angular and React ([#1016](https://github.com/sebgroup/green/issues/1016)) ([7f6f8f5](https://github.com/sebgroup/green/commit/7f6f8f514cdbc4c1881f9f2652cbc774246a91a6))
+
+
+* Updated focus states in Chlorophyll (#1050) ([d9ee451](https://github.com/sebgroup/green/commit/d9ee451030387576f2d9b768de665be2876e2ad9)), closes [#1050](https://github.com/sebgroup/green/issues/1050)
+
+
+### BREAKING CHANGES
+
+* Some grouped inputs will need the `group-focus` class added to the wrapper
+* **dropdown:** Updated Angular, Replaced Dropdown component internals,
+removed Dropdown from Extract
+
+
+
 # [1.10.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@1.9.0...@sebgroup/green-angular@1.10.0) (2023-10-11)
 
 

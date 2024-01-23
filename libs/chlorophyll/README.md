@@ -1,7 +1,8 @@
 # ![image](https://user-images.githubusercontent.com/11420341/124561174-e3bb3400-de3d-11eb-98a2-bd3305326de2.png) @sebgroup/chlorophyll
 
+Chlorophyll is the design token and css part of Green. It is primarily used to style the components in the React and Angular libraries, but also contains grid and utility classes.
 
-Chlorophyll is the design token and css part of Green. It is used in all high level component libraries. If you are not using a framework, you can use chlorophyll directly to style your `html`.
+It is not recommended to use Chlorophyll directly to style your own components - instead use what is available in the React or Angular libraries, or contribute what you are missing.
 
 ## Install
 

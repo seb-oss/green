@@ -49,21 +49,19 @@ $_background: input.$background;
     border-right-width: $_border-width-50;
   }
 
-  > *:first-child {
+  > *:first-child:not(:last-child) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     border-right-width: $_border-width-50;
   }
 
-  > *:last-child {
+  > *:last-child:not(:first-child) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-left-width: $_border-width-50;
   }
 
   &.group-border {
-    @include common.add-focus('within');
-    @include common.add-focus('within', 'button, .button');
     @include common.add-border();
     @include common.add-border-color();
     @include common.add-border-radius();
@@ -106,11 +104,29 @@ $_background: input.$background;
 
     .form-text {
       @include common.padding-end(5);
+
+      &.disabled {
+        background: var(--sg-form-control-bg-disabled);
+      }
     }
   }
 
   &.group-border.disabled {
     @include common.add-disable(false, false, true);
+  }
+
+  /**
+  * Add this to shift the focus outline from the enclosed input the the enclosing group
+  *
+  * Use on groups with one input + static content.
+  * Do not use if there are more than one focusable element in the group!
+  */
+  &.group-focus {
+    @include common.add-focus('within');
+
+    > *:focus {
+      outline: 0;
+    }
   }
 
   .form-text {
@@ -131,6 +147,10 @@ $_background: input.$background;
   button {
     &:not(.primary, .active, [type='submit']) {
       background: $_background;
+    }
+
+    &.ghost:not(.active):focus-visible {
+      color: var(--gds-sys-color-font);
     }
 
     &.disabled,

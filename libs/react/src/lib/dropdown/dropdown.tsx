@@ -1,7 +1,71 @@
-import { DropdownArgs, OnChange } from '@sebgroup/extract'
-import { HTMLAttributes, useRef } from 'react'
-import { dropdownValues } from '@sebgroup/extract'
-import { useDropdown } from './hooks'
+import React from 'react'
+import { createComponent } from '@lit/react'
+
+import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
+
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+export type CompareWith<T = any> = (o1: T, o2: T) => boolean
+export type SearchFilter<T = any> = (search: string, value: T) => boolean
+export type DropdownPlacements = 'bottom-start' | 'top-start'
+export type OnChange<T = any> = (value: T) => void
+
+export type IndicatorType = 'success' | 'error' | 'info'
+export type ValidatorType = 'Required' | 'Email'
+
+export interface ValidatorRules {
+  type: ValidatorType
+  custom?: () => string | undefined
+}
+
+export interface IValidator {
+  message: string
+  indicator: IndicatorType
+  rules?: ValidatorRules
+}
+
+export interface DropdownArgs {
+  compareWith?: CompareWith
+  display?: string // option key to display
+  id?: string
+  informationLabel?: string
+  label?: string
+  multiSelect?: boolean
+  options: DropdownOption[]
+  searchFilter?: SearchFilter
+  searchable?: boolean
+  texts?: DropdownTexts
+  useValue?: string // option key to use as value
+  validator?: IValidator
+  value?: any
+
+  /** Force width of the popover to match trigger */
+  syncPopoverWidth?: boolean
+}
+export interface DropdownTexts {
+  placeholder?: string
+}
+export interface DropdownOption {
+  label?: string
+  value?: any
+  selected?: boolean
+  [key: string]: any
+}
+
+registerTransitionalStyles()
+
+export const CoreDropdown = createComponent({
+  tagName: getScopedTagName('gds-dropdown'),
+  elementClass: GdsDropdown,
+  events: { onchange: 'change' },
+  react: React,
+})
+
+export const CoreOption = createComponent({
+  tagName: getScopedTagName('gds-option'),
+  elementClass: GdsOption,
+  react: React,
+})
 
 export interface DropdownProps extends DropdownArgs {
   onChange?: OnChange
@@ -9,97 +73,64 @@ export interface DropdownProps extends DropdownArgs {
 
 export const Dropdown = ({
   compareWith,
-  display,
+  display = 'label',
   id,
   informationLabel,
   label,
-  loop,
   multiSelect,
   onChange,
   options,
   searchFilter,
   searchable,
   texts,
-  useValue,
+  useValue = 'value',
   validator,
   value,
+  syncPopoverWidth,
 }: DropdownProps) => {
-  const togglerRef = useRef<HTMLButtonElement>(null)
-  const listboxRef = useRef<HTMLDivElement>(null)
+  const handleOnChange = (e: any) => {
+    if (e.detail?.value) {
+      onChange?.(e.detail.value)
+    }
+  }
 
-  const { dropdown, listboxProps, togglerProps, listItems, multiSelectProps } =
-    useDropdown({
-      id,
-      value,
-      options,
-      loop,
-      multiSelect,
-      searchable,
-      searchFilter,
-      compareWith,
-      useValue,
-      display,
-      togglerRef,
-      listboxRef,
-      texts,
-      onChange,
-      validator,
-    })
-
-  const getListBoxProps = (props: HTMLAttributes<HTMLElement>) => {
-    if (Object.keys(props).length === 0)
-      return {
-        role: 'listbox',
-        tabIndex: -1,
-        className: dropdownValues().elements?.listbox?.classes?.join(' '),
-      }
-    return props
+  // These adapter functions are used to maintain backwards compatibility with the old interface
+  const compareWithAdapter = (o1: DropdownOption, o2: DropdownOption) => {
+    const compareFn = compareWith || ((a, b) => a === b)
+    return compareFn(o1, o2)
+  }
+  const searchFilterAdapter = (q: string, o: GdsOption) => {
+    if (searchFilter) return searchFilter(q, o.value[useValue])
+    else
+      return ((q: string, o: GdsOption) =>
+        o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
   }
 
   return (
     <div className="form-group">
-      {label && <label htmlFor={togglerProps.id}>{label}</label>}
-      {informationLabel && <div className="form-info">{informationLabel}</div>}
-      <button type="button" {...togglerProps} ref={togglerRef}>
-        <span>{togglerProps.children}</span>
-      </button>
-      <div {...getListBoxProps(listboxProps)} ref={listboxRef}>
-        <div className="d-flex d-sm-none align-items-center">
-          <span className="flex-grow-1 ps-4 fs-2 fw-bolder">{label}</span>
-          <button
-            type="button"
-            className="close m-4 m-sm-2 d-block d-sm-none"
-            onClick={dropdown?.close}
-            aria-label={dropdown?.dropdown.texts.close}
-          >
-            <i></i>
-          </button>
-        </div>
-        {dropdown?.dropdown.isMultiSelect ? (
-          <div className="sg-fieldset-container">
-            <fieldset {...multiSelectProps.fieldsetProps}>
-              <legend {...multiSelectProps.legendProps} />
-              {multiSelectProps.checkboxes?.map((checkboxItem) => (
-                <label
-                  key={checkboxItem.labelProps.id}
-                  {...checkboxItem.labelProps}
-                >
-                  <input {...checkboxItem.inputProps} />
-                  <span {...checkboxItem.spanProps} />
-                  <i></i>
-                </label>
-              ))}
-            </fieldset>
-          </div>
-        ) : (
-          <ul role="listbox">
-            {listItems.map((liProps) => (
-              <li key={liProps.id} {...liProps} />
-            ))}
-          </ul>
-        )}
-      </div>
-      {validator && <span className="form-info">{validator?.message}</span>}
+      <CoreDropdown
+        id={id}
+        label={label}
+        searchable={searchable}
+        multiple={multiSelect}
+        onchange={handleOnChange}
+        invalid={validator?.indicator === 'error'}
+        compareWith={compareWithAdapter}
+        value={value}
+        searchFilter={searchFilterAdapter}
+        syncPopoverWidth={syncPopoverWidth}
+      >
+        {informationLabel && <span slot="sub-label">{informationLabel}</span>}
+        {validator && <span slot="message">{validator.message}</span>}
+        <CoreOption isPlaceholder aria-hidden>
+          {texts?.placeholder || 'Select'}
+        </CoreOption>
+        {options.map((option) => (
+          <CoreOption key={option[useValue]} value={option[useValue]}>
+            {option[display]}
+          </CoreOption>
+        ))}
+      </CoreDropdown>
     </div>
   )
 }

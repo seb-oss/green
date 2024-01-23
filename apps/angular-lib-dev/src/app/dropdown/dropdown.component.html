@@ -8,16 +8,20 @@
         [(value)]="dropdownValue0"
         (valueChange)="test($event)"
       ></ngg-dropdown>
-      <ngg-dropdown
-        [options]="optionsWithInitial"
-        [texts]="texts"
-        [(value)]="dropdownValue1"
-      ></ngg-dropdown>
+      <ngg-dropdown [options]="optionsWithInitial" [texts]="texts"
+        ><ng-template nggDropdownButton let-option="option" let-index="index">
+          <div>
+            <div>{{ option.label }}</div>
+            <div style="font-size: 0.8em">{{ option.value }}</div>
+          </div>
+        </ng-template></ngg-dropdown
+      >
       <ngg-dropdown
         [options]="options"
         [texts]="texts"
         [(value)]="dropdownValue2"
-      ></ngg-dropdown>
+      >
+      </ngg-dropdown>
     </div>
     <code>
       <div>Value: {{ dropdownValue0 | json }}</div>
@@ -213,14 +217,14 @@
 <code>
   <h5 class="mb-0">Form data</h5>
   <div>
-    Submitted: {{ ngForm?.submitted }} Invalid: {{ validationForm?.invalid }}
+    Submitted: {{ ngForm.submitted }} Invalid: {{ validationForm.invalid }}
   </div>
   <h5 class="mb-0">Values</h5>
   <div>
-    {{ validationForm?.value | json }}
+    {{ validationForm.value | json }}
   </div>
   <h5 class="mb-0">Errors</h5>
-  <div *ngFor="let f of validationForm?.controls | keyvalue">
+  <div *ngFor="let f of validationForm.controls | keyvalue">
     {{ f.key }}:{{ f.value.errors | json }}
   </div>
 </code>

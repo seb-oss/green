@@ -2,6 +2,8 @@ import { Meta, Canvas } from '@storybook/addon-docs'
 
 <Meta title="CSS/Typography" />
 
+## Fallback styling for heading elements
+
 <Canvas>
   <div>
     <div class="display-01">Display 01</div>
@@ -13,6 +15,24 @@ import { Meta, Canvas } from '@storybook/addon-docs'
     <h6>H6</h6>
   </div>
 </Canvas>
+
+## Altering styling for heading elements
+
+Styling shouldn't be coupled too hard with semantic html elements. In some cases you want to style your `h2` a bit bigger than the default style. In this case use the typography classes like this:
+
+<Canvas>
+  <div>
+    <div class="heading-l">Display 01</div>
+    <h1 class="heading-m">H1</h1>
+    <h2 class="display-01">H2</h2>
+    <h3 class="heading-xl">H3</h3>
+    <h4 class="heading-xs">H4</h4>
+    <h5 class="heading-xxl">H5</h5>
+    <h6 class="heading-sm">H6</h6>
+  </div>
+</Canvas>
+
+## Paragraphs
 
 <Canvas>
   <p>

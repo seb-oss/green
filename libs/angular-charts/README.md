@@ -1,4 +1,4 @@
-# angular-charts
+# Angular Charts
 
 This library was generated with [Nx](https://nx.dev).
 

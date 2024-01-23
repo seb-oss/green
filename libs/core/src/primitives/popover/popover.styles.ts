@@ -1,14 +1,20 @@
 import { css } from 'lit'
 
 const style = css`
-  :host {
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 1rem 1rem 1rem rgba(0, 0, 0, 0.1);
+  :host([open]) dialog {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
   }
 
-  dialog::backdrop {
-    pointer-events: none;
+  dialog {
+    inset: auto;
+    position: fixed;
+    overflow: hidden;
+    padding: 0px;
+    box-sizing: border-box;
+    border-width: 0;
+    right: 0;
   }
 `
 

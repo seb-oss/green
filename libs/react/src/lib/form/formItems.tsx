@@ -16,7 +16,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
   validate,
   onChange: _onFormItemsChanged,
 }) => {
-  const { setValues, setErrors, setFields, errors } = useFormContext()
+  const { values, setValues, setErrors, setFields, errors } = useFormContext()
 
   React.useEffect(() => {
     /* eslint-disable-next-line */
@@ -79,6 +79,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
   return React.cloneElement(children as React.ReactElement, {
     validator: errors?.[name] && validate,
     name,
+    value: values?.[name],
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
       if (typeof _onFormItemsChanged === 'function') {
         _onFormItemsChanged(event)

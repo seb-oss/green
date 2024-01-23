@@ -12,6 +12,12 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'pagination',
+    data: { name: 'Pagination' },
+    loadChildren: () =>
+      import('./pagination/pagination.module').then((m) => m.PaginationModule),
+  },
+  {
     path: 'dropdown',
     data: { name: 'Dropdown' },
     loadChildren: () =>
@@ -37,11 +43,25 @@ const routes: Routes = [
     loadChildren: () =>
       import('./badge/badge.module').then((m) => m.BadgeModule),
   },
+  {
+    path: 'context-menu',
+    data: { name: 'Context Menu' },
+    loadChildren: () =>
+      import('./context-menu/context-menu.module').then(
+        (m) => m.ContextMenuModule
+      ),
+  },
+  {
+    path: 'modals',
+    data: { name: 'Modals' },
+    loadChildren: () =>
+      import('./modals/modals.module').then((m) => m.ModalsModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 
 const routerOptions: ExtraOptions = {
-    anchorScrolling: 'enabled'
+  anchorScrolling: 'enabled',
 }
 
 @NgModule({

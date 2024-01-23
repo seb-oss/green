@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS } from 'lit'
+import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -6,8 +6,16 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 import style from './listbox.styles'
-import { watch } from 'utils/decorators'
-import { html, gdsCustomElement } from 'utils/helpers/custom-element-scoping'
+import { watch } from '../../utils/decorators'
+import {
+  html,
+  gdsCustomElement,
+} from '../../utils/helpers/custom-element-scoping'
+import {
+  ListboxKbNavController,
+  ListboxKbNavigation,
+} from '../../controllers/listbox-kb-nav-controller'
+import { unwrap } from '../../utils/helpers/unwrap-slots'
 
 /**
  * @element gds-listbox
@@ -23,7 +31,10 @@ import { html, gdsCustomElement } from 'utils/helpers/custom-element-scoping'
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
 @gdsCustomElement('gds-listbox')
-export class GdsListbox extends LitElement implements OptionsContainer {
+export class GdsListbox
+  extends LitElement
+  implements ListboxKbNavigation, OptionsContainer
+{
   static styles = style
 
   /**
@@ -50,25 +61,21 @@ export class GdsListbox extends LitElement implements OptionsContainer {
 
   constructor() {
     super()
+    new ListboxKbNavController(this)
+  }
+
+  get navigableItems() {
+    return this.visibleOptionElements
   }
 
   /**
    * Returns a list of all `gds-option` elements in the listbox.
    */
   get options() {
-    let slot = this.#slotRef.value
-    if (!slot) return []
-
-    // Unwrap nested slots
-    while (
-      slot.assignedElements().length > 0 &&
-      slot.assignedElements()[0].nodeName === 'SLOT'
-    ) {
-      slot = slot.assignedElements()[0] as HTMLSlotElement
-    }
+    if (!this.#slotRef.value) return []
 
     return (
-      (slot.assignedElements() as GdsOption[]).filter(
+      (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
         (o) => !o.hasAttribute('isplaceholder')
       ) || []
     )
@@ -106,7 +113,6 @@ export class GdsListbox extends LitElement implements OptionsContainer {
     this.setAttribute('role', 'listbox')
     TransitionalStyles.instance.apply(this, 'gds-listbox')
 
-    this.addEventListener('keydown', this.#keyboardNavigationHandler)
     this.addEventListener('gds-select', this.#handleSelect)
   }
 
@@ -153,54 +159,5 @@ export class GdsListbox extends LitElement implements OptionsContainer {
         composed: false,
       })
     )
-  }
-
-  #keyboardNavigationHandler = (e: KeyboardEvent) => {
-    if (!(e.target instanceof GdsOption)) return
-
-    let handled = false
-
-    if (e.key === 'ArrowDown') {
-      const nextOptionIndex = this.visibleOptionElements.indexOf(e.target) + 1
-      const nextItem = this.visibleOptionElements[nextOptionIndex]
-      nextItem?.focus()
-      handled = true
-      //
-    } else if (e.key === 'ArrowUp') {
-      const prevOptionIndex = this.visibleOptionElements.indexOf(e.target) - 1
-      const prevItem = this.visibleOptionElements[prevOptionIndex]
-      prevItem?.focus()
-      handled = true
-      //
-    } else if (e.key === 'Home') {
-      this.visibleOptionElements[0]?.focus()
-      handled = true
-      //
-    } else if (e.key === 'End') {
-      this.visibleOptionElements[this.visibleOptionElements.length - 1]?.focus()
-      handled = true
-      //
-    } else {
-      const key = e.key.toLowerCase()
-      if (key.length !== 1) {
-        return
-      }
-      const isLetter = key >= 'a' && key <= 'z'
-      const isNumber = key >= '0' && key <= '9'
-      if (isLetter || isNumber) {
-        // Find the first option that starts with the typed letter
-        const firstMatch = this.visibleOptionElements.find((el) => {
-          const text = el.textContent?.trim().toLowerCase()
-          return text?.startsWith(key)
-        })
-        firstMatch?.focus()
-        handled = true
-      }
-    }
-
-    if (handled) {
-      e.preventDefault()
-      e.stopPropagation()
-    }
   }
 }

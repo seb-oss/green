@@ -1,0 +1,164 @@
+@use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/scss/components/icon';
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
+@use '../../../../chlorophyll/scss/tokens' as tokens;
+
+:host {
+  display: block;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+label + .field {
+  margin-top: 0.5rem;
+}
+
+.form-info {
+  color: var(--text-primary-color);
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 100%;
+}
+
+.field {
+  @include common.add-border-radius();
+  align-items: center;
+  background-color: var(--sg-form-control-bg);
+  box-sizing: border-box;
+  color: var(--sg-text-primary);
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  min-height: 2.75rem;
+  //overflow: hidden;
+
+  .input {
+    @include common.padding-horizontal(5);
+    @include common.padding-vertical(4);
+    @include common.add-border(('top', 'bottom', 'left'));
+    @include common.add-border-color();
+    @include common.add-focus('within');
+    border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
+    flex-grow: 1;
+    isolation: isolate;
+  }
+
+  span {
+    cursor: default;
+  }
+
+  [role='spinbutton'] {
+    cursor: default;
+    display: inline-block;
+
+    &:focus {
+      background: color-mix(in srgb,
+      var(--gds-sys-color-blue) 50%,
+      transparent);
+      outline: none;
+    }
+  }
+
+  button {
+
+    @include common.add-focus();
+    appearance: none;
+    background: var(--intent-info-background);
+    border: 0;
+    border-radius: 0 var(--sg-border-radius) var(--sg-border-radius) 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    width: 3rem;
+
+    svg path {
+      fill: #fff;
+    }
+  }
+}
+
+:host(:invalid) .field + .form-info {
+  @include validation.add-feedback-element();
+  @include validation.add-feedback(tokens.$intent-danger-background);
+}
+
+.header {
+  @include common.padding-top(3);
+  @include common.padding-horizontal(3);
+  display: flex;
+  justify-content: space-between;
+
+  > * {
+    @include common.margin-horizontal(2);
+    min-width: auto;
+
+    &.link {
+      flex: 1 1;
+    }
+  }
+
+  button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    width: 3rem;
+
+    // TODO: Replace with proper icons
+    .icon::before {
+      background: none;
+      border-bottom: 2px solid;
+      border-left: 2px solid;
+      content: '';
+      display: block;
+      height: 12px;
+      margin-top: 2px;
+      width: 12px;
+    }
+
+    .icon.prev::before {
+      margin-left: -4px;
+      transform: translate(75%) rotate(45deg) scaleZ(-1);
+    }
+
+    .icon.next::before {
+      margin-left: -10px;
+      transform: translate(75%) rotate(-135deg) scaleZ(-1);
+    }
+  }
+}
+
+.footer {
+  @include common.padding-horizontal(3);
+  @include common.padding-vertical(3);
+  @include common.add-border(('top'));
+  border-color: #ddd;
+
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    @include common.add-border-radius();
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--intent-info-background);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      background: var(--intent-info-background);
+      color: #fff;
+    }
+  }
+}

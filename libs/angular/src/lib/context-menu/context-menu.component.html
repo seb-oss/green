@@ -1,39 +1,25 @@
-<button
-  #contextMenuAnchor
-  class="ghost small px-3"
-  [class.active]="isActive"
-  (click)="open()"
+<gds-context-menu
+  *nggCoreElement
+  data-testid="context-menu"
+  [placement]="placement"
+  [open]="isActive"
 >
-  <ng-container
-    [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
-  >
-  </ng-container>
-</button>
-
-<div class="context-menu-overlay">
-  <div
-    class="popover popover-context-menu"
-    [class.active]="isActive"
-    [style.top]="top"
-    [style.left]="left"
-    #contextMenuPopover
-  >
-    <ul role="listbox">
-      <li
-        *ngFor="let menuItem of menuItems"
-        (click)="onItemClick(menuItem)"
-        tabindex="0"
-        (keydown)="onMenuItemKeyDown($event, menuItem)"
+  <span slot="trigger">
+    <ng-container
+      [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
+    >
+    </ng-container>
+  </span>
+  <ng-container *ngFor="let menuItem of menuItems">
+    <gds-menu-item *nggCoreElement (click)="onItemClick(menuItem)">
+      <ng-container
+        [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: menuItem }"
       >
-        <ng-container
-          [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
-          [ngTemplateOutletContext]="{ $implicit: menuItem }"
-        >
-        </ng-container>
-      </li>
-    </ul>
-  </div>
-</div>
+      </ng-container>
+    </gds-menu-item>
+  </ng-container>
+</gds-context-menu>
 
 <ng-template #defaultMenuItemTemplate let-menuItem>
   <span>{{ menuItem.label }}</span>

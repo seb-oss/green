@@ -207,7 +207,7 @@ $button-danger-border-color: $button-danger-bg;
     $button-danger-border-color
   );
 
-  @include common.add-focus('', '', $button-danger-bg, $button-danger-bg);
+  @include common.add-focus();
 
   &:disabled,
   &.disabled,
@@ -231,10 +231,5 @@ $button-danger-border-color: $button-danger-bg;
     $button-danger-border-color
   );
 
-  @include common.add-focus(
-    '',
-    '',
-    $button-danger-bg,
-    darken($button-danger-bg, 1%)
-  );
+  @include common.add-focus();
 }

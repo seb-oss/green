@@ -1,5 +1,5 @@
 import { IValidator } from '@sebgroup/extract'
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Dropdown,
@@ -12,6 +12,9 @@ import {
   TextInput,
   Datepicker,
   Slider,
+  Checkbox,
+  TextArea,
+  NumberInput,
 } from '@sebgroup/green-react'
 
 const dropDownKeyValueArray = [
@@ -23,6 +26,18 @@ const dropDownKeyValueArray = [
     label: 'Banana',
     value: 'banana',
   },
+  {
+    label: 'Orange',
+    value: 'orange',
+  },
+  {
+    label: 'Pineapple',
+    value: 'pineapple',
+  },
+  {
+    label: 'Mango',
+    value: 'mango',
+  },
 ]
 
 export const FormExample = () => {
@@ -33,6 +48,8 @@ export const FormExample = () => {
   const [adults, setAdults] = React.useState<{ id: number; value: number }>()
 
   const [sliderValue, setSliderValue] = React.useState<number>()
+
+  const [textAreaState, setTextAreaState] = React.useState<string>('')
 
   const onStepperChange = (value: number) => {
     console.log('** START **')
@@ -57,6 +74,13 @@ export const FormExample = () => {
     )
   }
 
+  const [checkedState, setCheckedState] = useState<boolean>(true)
+
+  const [value, setValue] = useState(0)
+  const [ddValue, setDdValue] = useState()
+
+  const [stepperVal, setStepperVal] = useState(0)
+
   return (
     <>
       <h2>This is a form</h2>
@@ -69,12 +93,28 @@ export const FormExample = () => {
             id={'my-dropdown'}
             options={dropDownKeyValueArray}
             validator={validator}
-            onChange={console.log}
+            value={ddValue}
+            onChange={setDdValue}
+            searchable={true}
           />
           <Datepicker
             onChange={(date) => console.log('Selected date: ', date)}
           />
         </div>
+
+        <div>
+          Dropdown value:
+          {ddValue}
+        </div>
+
+        <Checkbox
+          label="This is label"
+          checked={checkedState}
+          onChange={(event) => {
+            const target = event.target as HTMLInputElement
+            setCheckedState(target.checked)
+          }}
+        />
 
         <FormItems
           name="radio"
@@ -99,13 +139,11 @@ export const FormExample = () => {
           </RadioGroup>
         </FormItems>
 
-        <TextInput
-          label={'Label'}
-          info={
-            'This is some information about the thing that gets longer if i say so'
+        <NumberInput
+          onChange={(event) =>
+            setValue(Number(event.currentTarget.value.replace(/[^0-9]/g, '')))
           }
-          expandableInfo="Expandable plain text information"
-          validator={validator}
+          value={value}
         />
 
         <TextInput
@@ -113,6 +151,23 @@ export const FormExample = () => {
           info={
             'This is some information about the thing that gets longer if i say so'
           }
+          value={textAreaState}
+          onChange={(event) => setTextAreaState(event.target.value)}
+          expandableInfo="Expandable plain text information"
+          unit="kr"
+          validator={validator}
+          testId="test-id"
+        />
+
+        {textAreaState}
+        <TextArea
+          label={'Label'}
+          info={
+            'This is some information about the thing that gets longer if i say so'
+          }
+          testId="test-id"
+          value={textAreaState}
+          onBlur={(event) => setTextAreaState(event.target.value)}
           expandableInfo={
             <>
               <p>
@@ -125,7 +180,12 @@ export const FormExample = () => {
           validator={validator}
         />
 
-        <Stepper onChange={onStepperChange} />
+        <Stepper
+          onChange={(e) => setStepperVal(Number(e.target.value))}
+          value={stepperVal.toFixed(4)}
+          onIncrease={() => setStepperVal((v) => v + 0.0001)}
+          onDecrease={() => setStepperVal((v) => v - 0.0001)}
+        />
 
         <Slider
           hasTextbox={true}
@@ -136,10 +196,12 @@ export const FormExample = () => {
             console.log('onClampValue', value)
           }}
         />
+
         <div>Slider value: {sliderValue}</div>
 
         <Button onClick={toggleValidation}>Toggle validation</Button>
         <Button type="submit">Submit</Button>
+        <Button type="reset">Reset</Button>
       </Form>
     </>
   )
