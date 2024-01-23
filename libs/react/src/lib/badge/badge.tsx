@@ -10,6 +10,17 @@ export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
   customBackgroundColor?: string
 }
 
+/**
+ * Renders a badge component.
+ *
+ * @param {React.ReactNode} props.children - The content of the badge.
+ * @param {string} props.badgeType - The type of the badge.
+ * @param {boolean} props.isCloseable - Indicates if the badge is closeable.
+ * @param {string} props.closeText - The text for the close button.
+ * @param {string} props.customColor - The custom color for the badge.
+ * @param {string} props.customBackgroundColor - The custom background color for the badge.
+ * @returns {React.ReactNode} The rendered badge component.
+ */
 export function Badge({
   children,
   badgeType,

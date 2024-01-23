@@ -302,6 +302,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --gds-comp-chips-bg-color-active: #222222;
   --gds-comp-chips-bg-color-action: #2c2c2c;
   --gds-sys-color-focus-outline: white;
+  --gds-sys-color-font: var(--gds-ref-pallet-base300);
 }
 
 @mixin light-mode() {
