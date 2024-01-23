@@ -3,6 +3,7 @@ import { TableHeaderListValueType } from '../../models/cell-table/cell-table.mod
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nggCellTableItem]',
   template: `
     <ng-container [ngSwitch]="valueType">
@@ -22,7 +23,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
         row || '–'
       }}</span>
       <span *ngSwitchCase="'pct'">{{ row || '–' }}</span>
-      <span *ngSwitchCase="'streamSign'" [slidingUnderline]="row">{{
+      <span *ngSwitchCase="'streamSign'" [nggSlidingUnderline]="row">{{
         row || '–'
       }}</span>
       <span *ngSwitchDefault>–</span>
@@ -32,7 +33,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 export class CellTableItemComponent {
   @Input() row: any
   @Input() valueType: TableHeaderListValueType = 'string'
-  @Input() id: string = ''
+  @Input() id = ''
 
   constructor(private sanitizer: DomSanitizer) {}
 
