@@ -1,5 +1,5 @@
-import { LitElement } from 'lit'
-import { property } from 'lit/decorators.js'
+import { HTMLTemplateResult, LitElement } from 'lit'
+import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
@@ -56,6 +56,10 @@ export class GdsListbox
    */
   @property()
   compareWith: (a: any, b: any) => boolean = (a, b) => a === b
+
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
 
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
@@ -127,7 +131,7 @@ export class GdsListbox
   }
 
   render() {
-    return html`<slot ${ref(this.#slotRef)}></slot>`
+    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
   }
 
   /**

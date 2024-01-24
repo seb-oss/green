@@ -1,5 +1,6 @@
-import { LitElement } from 'lit'
+import { HTMLTemplateResult, LitElement } from 'lit'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
+import { state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
@@ -24,6 +25,10 @@ import { TransitionalStyles } from '../../transitional-styles'
 @gdsCustomElement('gds-menu')
 export class GdsMenu extends LitElement implements ListboxKbNavigation {
   #slotRef: Ref<HTMLSlotElement> = createRef()
+
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
 
   constructor() {
     super()
@@ -56,6 +61,6 @@ export class GdsMenu extends LitElement implements ListboxKbNavigation {
   }
 
   render() {
-    return html`<slot ${ref(this.#slotRef)}></slot>`
+    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
   }
 }

@@ -1,7 +1,7 @@
-import { LitElement } from 'lit'
+import { HTMLTemplateResult, LitElement } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
-import { property, queryAsync } from 'lit/decorators.js'
+import { property, queryAsync, state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
@@ -57,6 +57,10 @@ export class GdsContextMenu extends LitElement {
   @property()
   placement: Placement = 'bottom-start'
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
 
@@ -79,7 +83,8 @@ export class GdsContextMenu extends LitElement {
   }
 
   render() {
-    return html`<button
+    return html`${this._tStyles}
+      <button
         id="trigger"
         class="ghost border-0 small ${classMap({ highlighted: this.open })}"
         aria-label="${this.buttonLabel}"
