@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.2...@sebgroup/chlorophyll@3.0.3) (2024-01-25)
+
+
+### Bug Fixes
+
+* **core:** polyfill/fallback for iOS 15 ([#1173](https://github.com/sebgroup/green/issues/1173)) ([53247c5](https://github.com/sebgroup/green/commit/53247c5068ffdb91be188966a4073dce1bc8f58a))
+
+
+
 ## [3.0.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.1...@sebgroup/chlorophyll@3.0.2) (2024-01-23)
 
 

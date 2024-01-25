@@ -4,6 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 import { eachYearOfInterval } from 'date-fns'
 
@@ -28,7 +29,6 @@ import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
 import { GdsPopover } from '../../primitives/popover/popover'
-import { nothing } from 'lit'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -163,13 +163,17 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAll(getScopedTagName('gds-date-part-spinner'))
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
   render() {
-    return html`
+    return html`${this._tStyles}
       <label for="spinner-0" id="label">${this.label}</label>
 
       <div class="form-info"><slot name="sub-label"></slot></div>
@@ -303,8 +307,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             ${msg('Today')}
           </button>
         </div>
-      </gds-popover>
-    `
+      </gds-popover> `
   }
 
   async #renderBackToValidRangeButton() {

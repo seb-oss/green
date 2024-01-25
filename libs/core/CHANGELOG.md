@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.1...@sebgroup/green-core@1.4.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **core:** polyfill/fallback for iOS 15 ([#1173](https://github.com/sebgroup/green/issues/1173)) ([53247c5](https://github.com/sebgroup/green/commit/53247c5068ffdb91be188966a4073dce1bc8f58a))
+
+
+
 ## [1.4.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.0...@sebgroup/green-core@1.4.1) (2024-01-22)
 
 

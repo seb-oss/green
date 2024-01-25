@@ -1,7 +1,7 @@
-import { LitElement, html } from 'lit'
+import { HTMLTemplateResult, LitElement, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
-import { property, query } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import {
   addDays,
@@ -12,6 +12,7 @@ import {
   addMonths,
 } from 'date-fns'
 
+import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { renderMonthGridView } from './functions'
@@ -28,7 +29,7 @@ import style from './calendar.styles'
  * @event gds-date-focused - Fired when focus has changed.
  */
 @gdsCustomElement('gds-calendar')
-export class GdsCalendar extends LitElement {
+export class GdsCalendar extends GdsElement {
   static styles = [style]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
@@ -97,6 +98,10 @@ export class GdsCalendar extends LitElement {
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-calendar')
@@ -112,63 +117,66 @@ export class GdsCalendar extends LitElement {
   render() {
     const currentDate = new Date()
 
-    return html`<table>
-      <thead>
-        <tr>
-          ${when(this.showWeekNumbers, () => html`<th></th>`)}
-          <th>${msg('Mon')}</th>
-          <th>${msg('Tue')}</th>
-          <th>${msg('Wed')}</th>
-          <th>${msg('Thu')}</th>
-          <th>${msg('Fri')}</th>
-          <th>${msg('Sat')}</th>
-          <th>${msg('Sun')}</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${renderMonthGridView(
-          this.focusedDate,
-          (weeks) => html`
-            ${weeks.map(
-              (week) => html`
-                <tr>
-                  ${when(
-                    this.showWeekNumbers,
-                    () =>
-                      html`<td class="week-number">
-                        ${getWeek(week.days[0])}
-                      </td>`
-                  )}
-                  ${week.days.map((day) => {
-                    const isDisabled =
-                      !isSameMonth(this.focusedDate, day) ||
-                      day < this.min ||
-                      day > this.max
-                    return html`
-                      <td
-                        class="${classMap({
-                          disabled: isDisabled,
-                          today: isSameDay(currentDate, day),
-                        })}"
-                        ?disabled=${isDisabled}
-                        tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
-                        aria-selected="${isSameDay(this.value, day)}"
-                        aria-label="${day.toDateString()}"
-                        @click=${() =>
-                          isDisabled ? null : this.#setSelectedDate(day)}
-                        id="dateCell-${day.getDate()}"
-                      >
-                        ${day.getDate()}
-                      </td>
-                    `
-                  })}
-                </tr>
-              `
-            )}
-          `
-        )}
-      </tbody>
-    </table>`
+    return html`${this._tStyles}
+      <table>
+        <thead>
+          <tr>
+            ${when(this.showWeekNumbers, () => html`<th></th>`)}
+            <th>${msg('Mon')}</th>
+            <th>${msg('Tue')}</th>
+            <th>${msg('Wed')}</th>
+            <th>${msg('Thu')}</th>
+            <th>${msg('Fri')}</th>
+            <th>${msg('Sat')}</th>
+            <th>${msg('Sun')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${renderMonthGridView(
+            this.focusedDate,
+            (weeks) => html`
+              ${weeks.map(
+                (week) => html`
+                  <tr>
+                    ${when(
+                      this.showWeekNumbers,
+                      () =>
+                        html`<td class="week-number">
+                          ${getWeek(week.days[0])}
+                        </td>`
+                    )}
+                    ${week.days.map((day) => {
+                      const isDisabled =
+                        !isSameMonth(this.focusedDate, day) ||
+                        day < this.min ||
+                        day > this.max
+                      return html`
+                        <td
+                          class="${classMap({
+                            disabled: isDisabled,
+                            today: isSameDay(currentDate, day),
+                          })}"
+                          ?disabled=${isDisabled}
+                          tabindex="${isSameDay(this.focusedDate, day)
+                            ? 0
+                            : -1}"
+                          aria-selected="${isSameDay(this.value, day)}"
+                          aria-label="${day.toDateString()}"
+                          @click=${() =>
+                            isDisabled ? null : this.#setSelectedDate(day)}
+                          id="dateCell-${day.getDate()}"
+                        >
+                          ${day.getDate()}
+                        </td>
+                      `
+                    })}
+                  </tr>
+                `
+              )}
+            `
+          )}
+        </tbody>
+      </table>`
   }
 
   #setSelectedDate(date: Date) {
