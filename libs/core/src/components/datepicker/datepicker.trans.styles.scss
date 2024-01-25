@@ -93,7 +93,6 @@
 
   .header {
     @include common.padding-top(3);
-    @include common.padding-horizontal(3);
     display: flex;
     justify-content: space-between;
 
