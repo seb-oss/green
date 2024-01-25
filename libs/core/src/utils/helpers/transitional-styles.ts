@@ -47,7 +47,7 @@ export class TransitionalStyles {
   private elements = new Map<string, HTMLElement>()
 
   private sheetsLegacy = new Map<string, string>()
-  private useLegacyStylesheets = true //!supportsConstructedStylesheets()
+  private useLegacyStylesheets = !supportsConstructedStylesheets()
 
   apply(element: HTMLElement, styleKey: string) {
     if (!element.shadowRoot) return
