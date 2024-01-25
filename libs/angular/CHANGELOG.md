@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@3.0.0...@sebgroup/green-angular@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **angular/dropdown:** incorrectly supplying value in filter callback adapter ([#1167](https://github.com/sebgroup/green/issues/1167)) ([101a23c](https://github.com/sebgroup/green/commit/101a23c08b8b70f0179ae0829f7e8b772ea7317e))
+* **datepicker:** forward all props to web component ([#1168](https://github.com/sebgroup/green/issues/1168)) ([00b0922](https://github.com/sebgroup/green/commit/00b092271f345abe521e8af74b7c4392d8b8db4c))
+
+
+
 # [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@2.1.3...@sebgroup/green-angular@3.0.0) (2024-01-19)
 
 

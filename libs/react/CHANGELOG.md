@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@3.0.1...@sebgroup/green-react@3.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* **react:** slide-out modal transition ([f911a11](https://github.com/sebgroup/green/commit/f911a11f36f3864b0fff9dd36baf6a23e89d8476))
+
+
+
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@3.0.0...@sebgroup/green-react@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **datepicker:** forward all props to web component ([#1168](https://github.com/sebgroup/green/issues/1168)) ([00b0922](https://github.com/sebgroup/green/commit/00b092271f345abe521e8af74b7c4392d8b8db4c))
+
+
+
 # [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.2...@sebgroup/green-react@3.0.0) (2024-01-19)
 
 

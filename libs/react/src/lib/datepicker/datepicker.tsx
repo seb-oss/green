@@ -38,6 +38,7 @@ export const Datepicker = ({
   testId,
   selectedDate,
   currentDate,
+  ...props
 }: DatepickerOptions) => {
   if (currentDate && !value) value = currentDate
   if (selectedDate && !value) value = selectedDate
@@ -62,6 +63,7 @@ export const Datepicker = ({
         showWeekNumbers={showWeeks}
         onchange={onChangeHandler}
         value={value}
+        {...props}
       />
     </div>
   )

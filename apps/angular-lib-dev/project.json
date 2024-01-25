@@ -68,7 +68,8 @@
       "defaultConfiguration": "development",
       "options": {
         "host": "0.0.0.0"
-      }
+      },
+      "dependsOn": ["core:build-with-types"]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

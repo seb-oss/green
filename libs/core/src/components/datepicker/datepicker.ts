@@ -4,6 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 import { eachYearOfInterval } from 'date-fns'
 
@@ -28,7 +29,6 @@ import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
 import { GdsPopover } from '../../primitives/popover/popover'
-import { nothing } from 'lit'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -163,13 +163,17 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAll(getScopedTagName('gds-date-part-spinner'))
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
   render() {
-    return html`
+    return html`${this._tStyles}
       <label for="spinner-0" id="label">${this.label}</label>
 
       <div class="form-info"><slot name="sub-label"></slot></div>
@@ -238,8 +242,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           </button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
-            @change=${(e: CustomEvent) =>
-              (this._focusedMonth = (e.target as GdsDropdown)?.value)}
+            @change=${this.#handleMonthChange}
             aria-label="${msg('Month')}"
           >
             <gds-option value="0">${msg('January')}</gds-option>
@@ -257,8 +260,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           </gds-dropdown>
           <gds-dropdown
             .value=${this._focusedYear.toString()}
-            @change=${(e: CustomEvent) =>
-              (this._focusedYear = (e.target as GdsDropdown)?.value)}
+            @change=${this.#handleYearChange}
             aria-label="${msg('Year')}"
           >
             ${repeat(
@@ -274,12 +276,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
         <gds-calendar
           id="calendar"
-          @change=${(e: CustomEvent<Date>) => {
-            e.stopPropagation()
-            this.value = e.detail
-            this.open = false
-            this.#dispatchChangeEvent()
-          }}
+          @change=${this.#handleCalendarChange}
           @gds-date-focused=${this.#handleFocusChange}
           .focusedMonth=${this._focusedMonth}
           .focusedYear=${this._focusedYear}
@@ -310,8 +307,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             ${msg('Today')}
           </button>
         </div>
-      </gds-popover>
-    `
+      </gds-popover> `
   }
 
   async #renderBackToValidRangeButton() {
@@ -401,6 +397,23 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         detail: { value: this.value },
       })
     )
+  }
+
+  #handleCalendarChange = (e: CustomEvent<Date>) => {
+    e.stopPropagation()
+    this.value = e.detail
+    this.open = false
+    this.#dispatchChangeEvent()
+  }
+
+  #handleMonthChange = (e: CustomEvent) => {
+    e.stopPropagation()
+    this._focusedMonth = (e.target as GdsDropdown)?.value
+  }
+
+  #handleYearChange = (e: CustomEvent) => {
+    e.stopPropagation()
+    this._focusedYear = (e.target as GdsDropdown)?.value
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
