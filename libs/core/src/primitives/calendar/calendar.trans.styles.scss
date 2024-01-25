@@ -1,19 +1,24 @@
 @use './mixins';
 
-@layer base {
-  :host {
-    @include mixins.calendar();
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base {
+    :host {
+      @include mixins.calendar();
+    }
+
+    table {
+      flex-grow: 1;
+      width: 100%;
+    }
   }
 
-  table {
-    flex-grow: 1;
-  }
-}
-
-@layer modifiers {
-  .week-number {
-    border-right: solid 1px var(--sg-grey-300);
-    font-weight: 400;
-    pointer-events: none;
+  @layer _modifiers {
+    .week-number {
+      border-right: solid 1px var(--sg-grey-300);
+      font-weight: 400;
+      pointer-events: none;
+    }
   }
 }

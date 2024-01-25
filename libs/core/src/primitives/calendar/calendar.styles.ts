@@ -1,12 +1,15 @@
 import { css } from 'lit'
 
 const style = css`
-  td.disabled {
-    color: #999;
-    cursor: default;
-  }
-  td.today {
-    background-color: #eee;
+  @layer base, reset, transitional-styles;
+  @layer base {
+    td.disabled {
+      color: #999;
+      cursor: default;
+    }
+    td.today {
+      background-color: #eee;
+    }
   }
 `
 

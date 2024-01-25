@@ -3,6 +3,18 @@ import { property } from 'lit/decorators.js'
 
 import { watch } from '../utils/decorators'
 import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../gds-element'
+
+interface ElementInternalsPolyfill {
+  form: HTMLFormElement | null
+  setFormValue(value: any): void
+  setValidity(validity: ValidityState, validationMessage?: string): void
+  validationMessage: string
+  validity: ValidityState
+  willValidate: boolean
+  checkValidity(): boolean
+  reportValidity(): boolean
+}
 
 /**
  * Abstract base class for Green Core form controls.
@@ -13,17 +25,46 @@ import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
  * @internal
  */
 export abstract class GdsFormControlElement<ValueT = any>
-  extends LitElement
+  extends GdsElement
   // This enables standard JSDoc comments for the form-associated custom element properties.
   implements Partial<Omit<HTMLInputElement, 'value'>>
 {
-  #internals: ElementInternals
+  #internals: ElementInternals | ElementInternalsPolyfill
 
   static formAssociated = true
 
   constructor() {
     super()
-    this.#internals = this.attachInternals()
+    try {
+      this.#internals = this.attachInternals()
+    } catch (e) {
+      this.#internals = {
+        form: this.closest('form'),
+        setFormValue: (value: any) => {
+          this.value = value
+        },
+        setValidity: (validity: ValidityState, validationMessage?: string) => {
+          this.invalid = validity.customError
+        },
+        validationMessage: '',
+        validity: {
+          badInput: false,
+          customError: false,
+          patternMismatch: false,
+          rangeOverflow: false,
+          rangeUnderflow: false,
+          stepMismatch: false,
+          tooLong: false,
+          tooShort: false,
+          typeMismatch: false,
+          valueMissing: false,
+          valid: true,
+        },
+        willValidate: true,
+        checkValidity: () => true,
+        reportValidity: () => true,
+      }
+    }
   }
 
   /**
@@ -103,6 +144,7 @@ export abstract class GdsFormControlElement<ValueT = any>
         tooShort: false,
         typeMismatch: false,
         valueMissing: false,
+        valid: !this.invalid,
       },
       this.validationMessage || 'Error message'
     )
