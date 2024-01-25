@@ -1,6 +1,8 @@
 import { HTMLTemplateResult, LitElement } from 'lit'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { state } from 'lit/decorators.js'
+
+import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
   html,
@@ -23,7 +25,7 @@ import { TransitionalStyles } from '../../transitional-styles'
  * * @slot - The default slot. Only `gds-menu-item` elements should be used here.
  */
 @gdsCustomElement('gds-menu')
-export class GdsMenu extends LitElement implements ListboxKbNavigation {
+export class GdsMenu extends GdsElement implements ListboxKbNavigation {
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
   // Used for Transitional Styles in some legacy browsers

@@ -12,6 +12,7 @@ import {
   addMonths,
 } from 'date-fns'
 
+import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { renderMonthGridView } from './functions'
@@ -28,7 +29,7 @@ import style from './calendar.styles'
  * @event gds-date-focused - Fired when focus has changed.
  */
 @gdsCustomElement('gds-calendar')
-export class GdsCalendar extends LitElement {
+export class GdsCalendar extends GdsElement {
   static styles = [style]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

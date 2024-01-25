@@ -11,6 +11,7 @@ import {
   Placement,
 } from '@floating-ui/dom'
 
+import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -34,7 +35,7 @@ import { reference } from '@popperjs/core'
  * @fires gds-ui-state - Fired when the popover is opened or closed
  */
 @gdsCustomElement('gds-popover')
-export class GdsPopover extends LitElement {
+export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)
 
   /**

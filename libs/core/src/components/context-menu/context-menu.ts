@@ -2,16 +2,17 @@ import { HTMLTemplateResult, LitElement } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { property, queryAsync, state } from 'lit/decorators.js'
+import { Placement } from '@floating-ui/dom'
+
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
 import { constrainSlots } from '../../utils/helpers'
-
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import '../../primitives/menu/menu'
-import { Placement } from '@floating-ui/dom'
 
 /**
  * @element gds-context-menu
@@ -27,7 +28,7 @@ import { Placement } from '@floating-ui/dom'
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
 @gdsCustomElement('gds-context-menu')
-export class GdsContextMenu extends LitElement {
+export class GdsContextMenu extends GdsElement {
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

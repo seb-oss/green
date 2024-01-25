@@ -5,6 +5,8 @@ import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
+
+import { GdsElement } from '../../gds-element'
 import style from './listbox.styles'
 import { watch } from '../../utils/decorators'
 import {
@@ -32,7 +34,7 @@ import { unwrap } from '../../utils/helpers/unwrap-slots'
  */
 @gdsCustomElement('gds-listbox')
 export class GdsListbox
-  extends LitElement
+  extends GdsElement
   implements ListboxKbNavigation, OptionsContainer
 {
   static styles = style

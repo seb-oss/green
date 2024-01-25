@@ -3,6 +3,7 @@ import { property } from 'lit/decorators.js'
 
 import { watch } from '../utils/decorators'
 import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../gds-element'
 
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
@@ -24,7 +25,7 @@ interface ElementInternalsPolyfill {
  * @internal
  */
 export abstract class GdsFormControlElement<ValueT = any>
-  extends LitElement
+  extends GdsElement
   // This enables standard JSDoc comments for the form-associated custom element properties.
   implements Partial<Omit<HTMLInputElement, 'value'>>
 {
