@@ -70,12 +70,12 @@ export const typography: Record<Screen, Typography> = {
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '16px',
       lineHeight: '24px',
     },
     h6: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '14px',
       lineHeight: '20px',
     },
@@ -117,12 +117,12 @@ export const typography: Record<Screen, Typography> = {
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '16px',
       lineHeight: '24px',
     },
     h6: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '14px',
       lineHeight: '20px',
     },
@@ -164,12 +164,12 @@ export const typography: Record<Screen, Typography> = {
       lineHeight: '28px',
     },
     h5: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '16px',
       lineHeight: '24px',
     },
     h6: {
-      ...fonts.regular,
+      ...fonts.medium,
       size: '14px',
       lineHeight: '20px',
     },
