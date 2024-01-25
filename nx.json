@@ -59,6 +59,12 @@
         "style": "none",
         "linter": "eslint"
       }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "css",
+        "linter": "eslint"
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
@@ -74,7 +80,8 @@
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
     "e2e": {
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "cache": true
     },
     "build-storybook": {
       "inputs": [

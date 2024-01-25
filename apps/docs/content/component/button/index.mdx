@@ -1,0 +1,213 @@
+---
+title: Button
+summary: Buttons are an essential element of interaction design. Their primary role is to help people take actions quickly.
+date: 2023-12-22
+global_id: buttonbutton
+status: work in progress
+tags: button, buttons, filter chip, button group
+node: 1614-8789
+---
+
+## Overview
+A button serve as an interactive element that enables users to perform an action or make a choice with a simple click or tap. It's important to decide what type of button and what em in order to give the user action highest prioritised. A good rule of thumb is to use only one primary action in each context.
+
+<Playground component="button" story-id="1" />
+
+<Row>
+<Col>
+### Hierarchy
+It's critical to find the right balance of what buttons to use. It's up to us as designers to guide and inform the users to take the right action.
+
+<ul>
+    <li>Primary buttons require the most attention from your users.</li>
+    <li>Secondary buttons, as the name says, is the second most likely choice.</li>
+    <li>Tertiary buttons are used for less used or unwanted actions that is still relevant to find.</li>
+</ul>
+</Col>
+<Col>
+    <FigmaSVG
+        node="1608-315"
+        caption="From top - Primary, Secondary, Tertiary."
+    />
+</Col>
+</Row>
+
+### Types
+<ul>
+<li>Normal: The normal button!</li>
+<li>Negative: Use for the actions that may be harmful/destructive. A good example is deleting.</li>
+<li>Positive: Use this for buying stocks/funds etc. Transaction-action.</li>
+<li>Inverted: Used to place on other than the normal backgrounds (typically darker tones)</li>
+<li>Tonal: Only used internal in other components</li>
+</ul>
+
+<FigmaSVG node="1608-1209" caption="All types of buttons" height="300" />
+
+<hr />
+
+## Button sets
+Some text about the sets is good to have here. Keep it short.
+<Row>
+  <Col><FigmaSVG node="1609-2970" caption="1. Normal" /></Col>
+  <Col><FigmaSVG node="1609-2974" caption="2. Icon button" /></Col>
+  <Col><FigmaSVG node="1609-2977" caption="3. Extended FAB" /></Col>
+</Row>
+<Row>
+  <Col><FigmaSVG node="1609-2981" caption="4. Split button" /></Col>
+  <Col><FigmaSVG node="1609-2985" caption="5. Next and back button" /></Col>
+  <Col><FigmaSVG node="1609-2988" caption="6. Category button" /></Col>
+</Row>
+
+<Row>
+<Col>
+### Normal button
+The normal button is our most used button.
+Comes in Primary, Secondary, Tertiary.  In the sizes Small, Medium, Large.
+
+The normal button can be used as the Positive, Negative and Inverted type.
+</Col>
+<Col> </Col>
+</Row>
+
+<Row>
+<Col><FigmaSVG node="1609-7673" caption="Normal in Primary, secondary and tertiary" /></Col>
+<Col><FigmaSVG node="1609-7763" caption="Positive and negative button in Primary" /></Col>
+</Row>
+
+<Row>
+<Col>
+### Icon button
+Used for very simple actions, because most people will not understand buttons that don't have a label connected. They are often tightly grouped with other components to create context for the buttons purpose.
+
+The Icon button comes in Primary, Secondary, Tertiary.  In the sizes Small, Medium, Large. The Icon button also comes as tonal in two sets. One Tonal in grey, used mostly on our Container color. And a few custom tonal combinations, used on custom combination cards. Example our Alert ribbons.
+
+The Icon button can be used as the Positive, Negative and Inverted type also when the context needs it.
+</Col>
+</Row>
+
+<Row>
+<Col><FigmaSVG node="1609-7912" caption="Icon button, normal and positive" /></Col>
+<Col><FigmaSVG node="1609-8031" caption="Tonal and custom tonal" /></Col>
+<Col><FigmaSVG node="1609-8159" caption="Tonal custom combinations on Alert ribbon" /></Col>
+</Row>
+
+<hr />
+
+<Row>
+<Col>
+### Floating action button
+Seldom used because they may be disturbing because they are always floating visible in the users viewport, typically in the lower right corner. This button can be used with icon only.
+
+Used only as Primary type.
+</Col>
+<Col><FigmaSVG node="1609-8378" caption="This is the floating action button." /></Col>
+</Row>
+
+<hr />
+
+<Row>
+<Col>
+### Split button
+Used to group a set of actions that would otherwise be separate buttons and clutter the screen. Clicking the arrow-part will trigger a contextual menu with action-options.
+
+Comes in both primary and secondary types.
+</Col>
+<Col><FigmaSVG node="1609-8401" caption="Split button, try it out!" /></Col>
+</Row>
+
+<Row>
+<Col>
+### Next and back button
+Used inside flows to signal the direction forward/backward.
+
+Back button comes in both primary and secondary state depending on what suits the content. The Next button comes only as primary.
+</Col>
+<Col> </Col>
+</Row>
+
+<Row>
+<Col><FigmaSVG node="1609-8419" caption="Next button only in primary" /></Col>
+<Col><FigmaSVG node="1609-8421" caption="Back button primary" /></Col>
+<Col><FigmaSVG node="1609-8423" caption="Back button secondary" /></Col>
+</Row>
+
+
+<Row>
+<Col>
+### Category button
+Text
+</Col>
+<Col><FigmaSVG node="1609-8446" caption="Default and highlighted." /></Col>
+</Row>
+
+<hr />
+
+## Placements
+A general rule is to always strive to place buttons in connection to the items they control. Modals and flows move the user from left to right, therefore the buttons are placed to the right. In overviews and widgets, the user tends to read from top to bottom, therefore the buttons are kept to the left.
+
+<Row>
+<Col>
+### Left
+<ul>
+    <li>Place the affirmative/primary button on the left, and the dismissive/secondary button on the right</li>
+    <li>Used on basic/overview pages, widgets or when content is mostly on the left side of the page</li>
+</ul>
+</Col>
+<Col><Image src="/content/button/image-light.png" dark="/content/button/image-dark.png" alt="test"  /></Col>
+</Row>
+
+<Row>
+<Col>
+### Right
+<ul>
+    <li>Place the affirmative/primary button on the right, the dismissive/secondary button on the left.</li>
+    <li>Used for modals (dialog, slide-out, take-over) and flows (such as wizards)</li>
+</ul>
+</Col>
+<Col><Image src="/content/button/image-light.png" dark="/content/button/image-dark.png" alt="test" /></Col>
+</Row>
+
+<Row>
+<Col>
+### In mobile devices
+<ul>
+    <li>If one button, use the full width of the screen (with margins).</li>
+    <li>If two buttons, aim to place them side by side, with 1 rem between them. It is allowed to stack them if needed.</li>
+    <li>If three buttons, consider the need for all of them. "Cancel/close" might be x in the top right corner. Worst case scenario: place the two buttons side by and one link button under.</li>
+</ul>
+</Col>
+<Col><Image src="/content/button/image-light.png" dark="/content/button/image-dark.png" alt="test" /></Col>
+</Row>
+
+<hr />
+
+## Do’s and dont’s
+
+<Row>
+<Col>
+Do
+<ul>
+    <li>Use only one primary action in the same context of several actions.</li>
+</ul>
+</Col>
+<Col>
+Don’t
+<ul>
+    <li>Use the tonal icon buttons stand-alone, it should only be used inside other components with a toned background.</li>
+    <li>Don't use many buttons of the same kind, make a decision to enforce a hierarchy.</li>
+</ul>
+</Col>
+</Row>
+
+<Row>
+    <Col>
+        <Do>
+            <FigmaSVG node="1630-1648" />
+        </Do>
+    </Col>
+    <Col>
+        <Dont>
+            <FigmaSVG node="1630-1610" />
+        </Dont>
+    </Col>
+</Row>

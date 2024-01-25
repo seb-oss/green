@@ -1,0 +1,79 @@
+@import "reset.css";
+@import "tokens.css";
+@import "layouts.css";
+@import "motion.css";
+@import "typography.css";
+@import "utilities.css";
+@import "responsive.css";
+
+@layer core {
+  :root {
+    --breakpoint-sm: 36rem; /*  576px  */
+    --breakpoint-md: 48rem; /*  768px  */
+    --breakpoint-lg: 62rem; /*  992px  */
+    --breakpoint-xl: 75rem; /*  1200px */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scroll-snap-stop: always;
+    scroll-padding-top: 160px;
+  }
+
+  body {
+    background-color: var(--gds-sys-color-background-background);
+    color: var(--gds-sys-color-content-content);
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  p,
+  li {
+    > a {
+      text-decoration: underline;
+    }
+  }
+
+  * {
+    &:focus-visible {
+      outline-offset: 2px;
+      outline-color: currentColor;
+      outline-width: 2px;
+      outline-style: solid;
+    }
+  }
+
+  @layer blocks;
+}
+
+#story-project {
+  --playground-bar-height: 40px;
+  --playground-code-font-family: var(--font-family-monospace, monospace);
+  --playground-code-font-size: 14px;
+  --playground-code-line-height: 1.5;
+  --playground-code-TOKEN-color: #000000;
+  --playground-highlight-color: #6200ee;
+  --playground-code-background: #ffffff;
+  --playground-code-gutter-background: #ffffff;
+  --playground-code-gutter-box-shadow: inset 0 0 0 1px #e0e0e0;
+  --playground-code-gutter-border-right: 1px solid #e0e0e0;
+  --playground-code-linenumber-color: #999999;
+  --playground-code-cursor-color: #000000;
+  --playground-code-selection-background: #eaeaea;
+  --playground-code-padding: 16px;
+  --playground-code-line-padding: 0 16px;
+  --playground-tab-bar-background: #ffffff;
+  --playground-tab-bar-active-background: #ffffff;
+  --playground-tab-bar-foreground-color: #444444;
+  --playground-tab-bar-active-color: #000000;
+  --playground-tab-bar-indicator-color: #6200ee;
+  --playground-tab-bar-font-size: 14px;
+  --playground-preview-toolbar-background: #ffffff;
+  --playground-preview-toolbar-foreground-color: #444444;
+  --playground-border: 1px solid #e0e0e0;
+  --playground-floating-controls-highlight-color: #6200ee;
+}
