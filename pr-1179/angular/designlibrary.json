@@ -50,12 +50,6 @@
     }
   },
   {
-    "id": "components-progress-circle--default",
-    "name": "Default",
-    "title": "Components/Progress Circle",
-    "customParams": {}
-  },
-  {
     "id": "components-segmented-control--with-router",
     "name": "With Router",
     "title": "Components/Segmented control",
@@ -64,6 +58,12 @@
         "component-segmented-control"
       ]
     }
+  },
+  {
+    "id": "components-progress-circle--default",
+    "name": "Default",
+    "title": "Components/Progress Circle",
+    "customParams": {}
   },
   {
     "id": "components-navigation-pagination--default",
