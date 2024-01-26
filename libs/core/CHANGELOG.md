@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.2...@sebgroup/green-core@1.4.3) (2024-01-26)
+
+
+### Bug Fixes
+
+* **core/datepicker:** properly constrain length of keyboard input ([#1176](https://github.com/sebgroup/green/issues/1176)) ([f4f6750](https://github.com/sebgroup/green/commit/f4f6750441b017f5fe37e4f20061a4a29544f929))
+
+
+
 ## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.1...@sebgroup/green-core@1.4.2) (2024-01-25)
 
 
