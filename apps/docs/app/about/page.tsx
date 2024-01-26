@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Col, Grid, Row } from 'react-flexbox-grid'
 import './style.css'
-import WoodsCabinImage from 'public/content/woods-cabin.png'
+import WoodsCabinImage from '../../public/content/woods-cabin.png'
 
 const tocHeading = [
   {

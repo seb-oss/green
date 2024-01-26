@@ -1,87 +1,86 @@
-"use client"
+'use client'
 
-import Image from "next/image"
-import Link from "next/link"
-import { Accordion, AccordionItem } from "@/core/blocks/accordion"
-import Hero from "@/core/blocks/hero/hero"
-import Spacing from "@/core/blocks/spacing"
-import Stack from "@/core/blocks/stack"
-import TOC from "@/core/blocks/toc/toc"
-import MetallicSurfaceImage from "public/content/metallic-surface.jpg"
-import CirclesImage from "public/content/tonality-circles.jpg"
-import { Col, Grid, Row } from "react-flexbox-grid"
-
-import "./style.css"
+import { Accordion, AccordionItem } from '@/core/blocks/accordion'
+import Hero from '@/core/blocks/hero/hero'
+import Spacing from '@/core/blocks/spacing'
+import Stack from '@/core/blocks/stack'
+import TOC from '@/core/blocks/toc/toc'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Col, Grid, Row } from 'react-flexbox-grid'
+import MetallicSurfaceImage from '../../public/content/metallic-surface.jpg'
+import CirclesImage from '../../public/content/tonality-circles.jpg'
+import './style.css'
 
 const tocHeading = [
   {
-    slug: "our-purpose",
-    text: "Our purpose",
+    slug: 'our-purpose',
+    text: 'Our purpose',
     level: 2,
   },
   {
-    slug: "tonality",
-    text: "Tonality",
+    slug: 'tonality',
+    text: 'Tonality',
     level: 2,
   },
   {
-    slug: "visual-style",
-    text: "Visual style",
+    slug: 'visual-style',
+    text: 'Visual style',
     level: 2,
   },
   {
-    slug: "timeless",
-    text: "Timeless",
+    slug: 'timeless',
+    text: 'Timeless',
     level: 3,
   },
   {
-    slug: "to-the-point",
-    text: "To the point",
+    slug: 'to-the-point',
+    text: 'To the point',
     level: 3,
   },
   {
-    slug: "confidence-in-simplicity",
-    text: "Confidence in simplicity",
+    slug: 'confidence-in-simplicity',
+    text: 'Confidence in simplicity',
     level: 3,
   },
   {
-    slug: "attention-to-detail",
-    text: "Attention to detail",
+    slug: 'attention-to-detail',
+    text: 'Attention to detail',
     level: 3,
   },
   {
-    slug: "effortless",
-    text: "Effortless",
+    slug: 'effortless',
+    text: 'Effortless',
     level: 3,
   },
   {
-    slug: "features",
-    text: "Features",
+    slug: 'features',
+    text: 'Features',
     level: 2,
   },
   {
-    slug: "consistency",
-    text: "Consistency",
+    slug: 'consistency',
+    text: 'Consistency',
     level: 3,
   },
   {
-    slug: "efficiency",
-    text: "Efficiency",
+    slug: 'efficiency',
+    text: 'Efficiency',
     level: 3,
   },
   {
-    slug: "user-centric-principles",
-    text: "User-Centric Principles",
+    slug: 'user-centric-principles',
+    text: 'User-Centric Principles',
     level: 3,
   },
   {
-    slug: "components-and-styles",
-    text: "Components and Styles",
+    slug: 'components-and-styles',
+    text: 'Components and Styles',
     level: 3,
   },
   {
-    slug: "implementation",
-    text: "Implementation",
+    slug: 'implementation',
+    text: 'Implementation',
     level: 3,
   },
 ]
@@ -130,11 +129,11 @@ export default function Foundation() {
               src={CirclesImage}
               alt="A picture of a cabin in the woods"
               style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                objectPosition: "center",
-                aspectRatio: "16 / 9",
+                width: '100%',
+                height: 'auto',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                aspectRatio: '16 / 9',
               }}
             />
           </Col>
@@ -221,11 +220,11 @@ export default function Foundation() {
               src={MetallicSurfaceImage}
               alt="A picture of a cabin in the woods"
               style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                objectPosition: "center",
-                aspectRatio: "16 / 9",
+                width: '100%',
+                height: 'auto',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                aspectRatio: '16 / 9',
               }}
             />
           </Col>
@@ -315,7 +314,7 @@ export default function Foundation() {
         </Row>
       </Stack>
       <div className="toc-sidebar">
-        <TOC headings={tocHeading} component={"About"} />
+        <TOC headings={tocHeading} component={'About'} />
       </div>
     </div>
   )

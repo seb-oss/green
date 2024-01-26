@@ -30,6 +30,7 @@
 /coverage
 /libpeerconnection.log
 /.yarn
+.env
 npm-debug.log
 yarn-error.log
 testem.log
@@ -45,3 +46,4 @@ Thumbs.db
 
 # Next.js
 .next
+.contentlayer

@@ -19,6 +19,7 @@
     "paths": {
       "public": ["/apps/docs/public"],
       "@/*": ["/apps/docs/*"],
+      "@/.contentlayer/*": [".contentlayer/*"],
       "content": [".contentlayer/generated"]
     },
     "types": ["jest", "node"]
