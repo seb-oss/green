@@ -132,10 +132,14 @@ export class GdsDatePartSpinner extends LitElement {
     } else {
       const key = parseInt(e.key)
       if (!isNaN(key)) {
-        this.#inputBuffer += key.toString()
-        this.value = parseInt(this.#inputBuffer)
+        if (this.#inputBuffer.length < this.length) {
+          this.#inputBuffer += key.toString()
+          this.value = parseInt(this.#inputBuffer)
+        }
 
-        if (this.#inputBuffer.length == this.length) {
+        if (this.#inputBuffer.length === this.length) {
+          this.value = this.#clamp(this.value)
+          this.#clearInputBuffer()
           this.#focusNextSpinner()
           this.#dispatchChangeEvent()
         }
