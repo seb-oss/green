@@ -364,6 +364,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.#spinnerState = { year, month, day }
   }
 
+  @watch('open')
+  private _handleOpenChange() {
+    if (this.open) this._elCalendar.then((el) => el.focus())
+  }
+
   #getSpinnerLabel(name: DatePart) {
     const labels = {
       year: msg('Year'),
