@@ -2,7 +2,7 @@
   "name": "@sebgroup/green-charts",
   "version": "2.1.1",
   "dependencies": {
-    "@sebgroup/chlorophyll": "^2.2.2",
+    "@sebgroup/chlorophyll": "^3.0.4",
     "@types/d3-selection": "^3.0.2",
     "billboard.js": "^3.7.5"
   },
