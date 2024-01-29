@@ -2,6 +2,9 @@
   "name": "green",
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "workspaces": [
+    "libs/*"
+  ],
   "scripts": {
     "nx": "nx",
     "build:libs": "nx run-many -p core,angular,angular-charts,charts,chlorophyll,extract,react,react-charts  --target=build",
@@ -45,6 +48,7 @@
     "@angular/platform-browser": "15.2.9",
     "@angular/platform-browser-dynamic": "15.2.9",
     "@angular/router": "15.2.9",
+    "@changesets/cli": "^2.27.1",
     "@floating-ui/dom": "^1.5.4",
     "@lit/react": "^1.0.2",
     "@material/material-color-utilities": "^0.2.4",
