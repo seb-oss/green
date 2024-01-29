@@ -178,7 +178,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
-      <div class="field" id="trigger">
+      <div class="field" id="trigger" @click=${this.#handleFieldClick}>
         <div class="input">
           ${join(
             map(
@@ -397,6 +397,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         detail: { value: this.value },
       })
     )
+  }
+
+  #handleFieldClick = (e: MouseEvent) => {
+    this._elSpinners[0].focus()
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
