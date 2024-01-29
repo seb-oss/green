@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.3...@sebgroup/green-core@1.4.4) (2024-01-29)
+
+
+### Bug Fixes
+
+* **core/datepicker:** today highlight style & focus handling ([#1181](https://github.com/sebgroup/green/issues/1181)) ([6878fdf](https://github.com/sebgroup/green/commit/6878fdf8655613dc87f143c09d82760d74522889))
+
+
+
 ## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.2...@sebgroup/green-core@1.4.3) (2024-01-26)
 
 
