@@ -1,33 +1,24 @@
-name: Release All to Github and NPM
+name: Release
+
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Setup Node.js LTS
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-
-      - name: Configure Git
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-      - name: Add auth to .npmrc
-        run: |
-          echo '
-            registry=https://registry.npmjs.org
-            always-auth=true
-            //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          ' >> .npmrc
-        shell: bash
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -44,12 +35,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Build libraries
-        run: yarn build:libs
-
-      - name: Version and release all libraries
-        run: npx nx run-many --all --target=update-deps-and-release --skipCommitTypes=docs,ci,chore,style,test,refactor,build --parallel=1
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: yarn release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HUSKY: 0
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

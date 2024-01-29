@@ -15,22 +15,13 @@
     "lint": "nx workspace-lint && nx lint",
     "lint:all": "nx run-many --target=lint --all",
     "smoketest": "yarn lint:all && yarn test:all && yarn build:all",
-    "affected:apps": "nx print-affected --type=app --select=projects",
-    "affected:libs": "nx print-affected --type=lib --select=projects",
-    "affected:build": "nx affected:build",
-    "affected:build-storybook": "nx affected --target build-storybook",
-    "affected:test": "nx affected:test",
-    "affected:lint": "nx affected:lint",
-    "affected:dep-graph": "nx affected:dep-graph",
     "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
-    "update": "nx migrate latest",
-    "workspace-generator": "nx workspace-generator",
-    "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2020 browser module main && npm run copy-fonts",
-    "copy-fonts": "copyfiles node_modules/@sebgroup/fonts/fonts/**/* dist/fonts -f"
+    "copy-fonts": "copyfiles node_modules/@sebgroup/fonts/fonts/**/* dist/fonts -f",
+    "changeset:publish": "yarn build:libs && yarn changeset publish"
   },
   "lint-staged": {
     "libs/**/src/**/*.scss": [
