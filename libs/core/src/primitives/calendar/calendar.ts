@@ -16,6 +16,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 import { renderMonthGridView } from './functions'
+import { watch } from '../../utils/decorators'
 
 import style from './calendar.styles'
 
@@ -189,6 +190,11 @@ export class GdsCalendar extends GdsElement {
         composed: false,
       })
     )
+  }
+
+  @watch('value')
+  private _valueChanged() {
+    this.focusedDate = this.value
   }
 
   #handleKeyDown(e: KeyboardEvent) {

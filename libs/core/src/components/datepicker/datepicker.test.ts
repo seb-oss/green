@@ -163,7 +163,9 @@ describe('<gds-datepicker>', () => {
       )
       const focusedDate = await el.getFocusedDate()
 
-      await expect(onlyDate(focusedDate!)).to.equal(onlyDate(new Date()))
+      await expect(onlyDate(focusedDate!)).to.equal(
+        onlyDate(new Date('2024-01-10'))
+      )
     })
 
     it('should not return a focused date if the popover is closed', async () => {

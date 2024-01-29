@@ -189,5 +189,16 @@ describe('<gds-calendar>', () => {
 
       await expect(onlyDate(el.value)).to.not.equal(onlyDate(focusedDate))
     })
+
+    it('should update the focused date when value is changed', async () => {
+      const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
+
+      el.value = new Date('2024-02-02')
+      await el.updateComplete
+
+      await expect(onlyDate(el.focusedDate)).to.equal(
+        onlyDate(new Date('2024-02-02'))
+      )
+    })
   })
 })
