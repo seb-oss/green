@@ -13,4 +13,4 @@ export * from './lib/slider'
 export * from './lib/in-page-wizard'
 export * from './lib/context-menu'
 
-export { NggCoreWrapperModule } from './lib/shared/core-element/core-element.module'
+export * from './lib/shared/core-element'
