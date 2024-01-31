@@ -76,6 +76,36 @@
     }
   },
   {
+    "id": "components-wizard-in-page-wizard-step-card--default",
+    "name": "Default",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--disable-next",
+    "name": "Disable Next",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard-step-card--multiple",
+    "name": "Multiple",
+    "title": "Components/Wizard/In page wizard step card",
+    "customParams": {
+      "componentIds": [
+        "component-inpagewizard"
+      ]
+    }
+  },
+  {
     "id": "components-modal--default",
     "name": "Default",
     "title": "Components/Modal",
@@ -124,36 +154,6 @@
         "component-slideout",
         "component-foldout",
         "component-takeover"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-step-card--default",
-    "name": "Default",
-    "title": "Components/Wizard/In page wizard step card",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-step-card--disable-next",
-    "name": "Disable Next",
-    "title": "Components/Wizard/In page wizard step card",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
-    }
-  },
-  {
-    "id": "components-wizard-in-page-wizard-step-card--multiple",
-    "name": "Multiple",
-    "title": "Components/Wizard/In page wizard step card",
-    "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
       ]
     }
   },
