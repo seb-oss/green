@@ -1,7 +1,8 @@
-import { LitElement, html } from 'lit'
-import { property } from 'lit/decorators.js'
+import { HTMLTemplateResult, LitElement, html } from 'lit'
+import { property, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
@@ -33,7 +34,7 @@ export interface OptionsContainer extends HTMLElement {
  * @event gds-focus - Fired when the option gains focus.
  */
 @gdsCustomElement('gds-option')
-export class GdsOption extends Focusable(LitElement) {
+export class GdsOption extends Focusable(GdsElement) {
   static styles = style
 
   /**
@@ -79,6 +80,10 @@ export class GdsOption extends Focusable(LitElement) {
   @property({ type: Boolean, reflect: true })
   isPlaceholder = false
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   constructor() {
     super()
 
@@ -86,7 +91,7 @@ export class GdsOption extends Focusable(LitElement) {
     this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
       e.preventDefault()
-      this.#emitSelect()
+      this.#emitSelect(e)
     })
   }
 
@@ -109,7 +114,7 @@ export class GdsOption extends Focusable(LitElement) {
   }
 
   @watch('isplaceholder')
-  handlePlaceholderStatusChange() {
+  private _handlePlaceholderStatusChange() {
     if (this.isPlaceholder) {
       this.#hidden = true
       this.setAttribute('aria-hidden', 'true')
@@ -120,9 +125,9 @@ export class GdsOption extends Focusable(LitElement) {
   }
 
   render() {
-    const isMultiple = this.parentElement.multiple
+    const isMultiple = this.parentElement?.multiple
 
-    const checkbox = html`<span
+    const checkbox = html` <span
       class="checkbox ${classMap({ checked: this.selected })}"
     ></span>`
 
@@ -131,10 +136,12 @@ export class GdsOption extends Focusable(LitElement) {
       else this.removeAttribute('highlighted')
     }
 
-    return html`${when(isMultiple, () => checkbox)}<slot></slot>`
+    return html`${this._tStyles}${when(isMultiple, () => checkbox)}
+      <slot></slot>`
   }
 
-  #emitSelect() {
+  #emitSelect(e: MouseEvent | KeyboardEvent) {
+    e.stopPropagation()
     this.dispatchEvent(
       new CustomEvent('gds-select', {
         bubbles: true,

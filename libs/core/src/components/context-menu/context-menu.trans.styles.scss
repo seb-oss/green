@@ -3,28 +3,32 @@
 @use '../../../../chlorophyll/scss/tokens/shame' as tokens;
 @use '../../../../chlorophyll/scss/common';
 
-@layer base, overrides;
+@layer base, reset, transitional-styles;
 
-:host {
-  display: inline-block;
-}
+@layer transitional-styles {
+  @layer _base, _overrides;
 
-@layer base {
-  button {
-    @include button.reset();
-    @include button.base();
-    @include button.ghost-dark();
-  }
-}
-
-@layer overrides {
-  button {
-    border-color: transparent;
-    line-height: 0.75;
-    padding-inline: 0.4375rem;
+  :host {
+    display: inline-block;
   }
 
-  button.highlighted {
-    background-color: var(--gds-ref-pallet-base300);
+  @layer _base {
+    button {
+      @include button.reset();
+      @include button.base();
+      @include button.ghost-dark();
+    }
+  }
+
+  @layer _overrides {
+    button {
+      border-color: transparent;
+      line-height: 0.75;
+      padding-inline: 0.4375rem;
+    }
+
+    button.highlighted {
+      background-color: var(--gds-ref-pallet-base300);
+    }
   }
 }

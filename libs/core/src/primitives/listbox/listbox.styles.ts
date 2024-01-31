@@ -1,9 +1,12 @@
 import { css } from 'lit'
 
 const style = css`
-  :host {
-    display: flex;
-    flex-direction: column;
+  @layer base, reset, transitional-styles;
+  @layer base {
+    :host {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `
 

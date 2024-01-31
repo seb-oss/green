@@ -15,6 +15,10 @@ section[role='dialog'] {
   @include mixins.dialog-modal;
 }
 
+.gds-dialog-wrapper {
+  @include mixins.dialog-modal-wrapper;
+}
+
 // aside aka slide out modal
 aside[role='dialog'] {
   @include mixins.aside-modal;
@@ -28,7 +32,8 @@ main[role='dialog'] {
 // backdrop for all modal styles except fullscreen
 div[role='dialog'],
 section[role='dialog'],
-aside[role='dialog'] {
+aside[role='dialog'],
+.gds-dialog-wrapper {
   ~ .backdrop {
     @include mixins.modal-backdrop();
   }

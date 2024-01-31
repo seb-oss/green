@@ -1,0 +1,63 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+
+<Meta title="Components/Datepicker" />
+
+# Date picker
+
+Date pickers simplify the task of selecting a date in a visual representation of a calendar.
+
+The date picker in Green Core mimics the behaviour of the native date input element as it is
+implemented in Chromium browsers.
+
+The input field shows three parts of the date: the day, the month and the year. The user can
+navigate between these parts using the arrow keys. The user can also navigate between the parts
+by clicking on them or tabbing. When a part has focus, it can be changed using the arrow keys or
+by typing a number.
+
+Clicking the calendar icon opens a popover with a calendar view where a date can be chosen.
+
+<Canvas>
+<div style={{ dummy: registerTransitionalStyles() }}>
+<gds-datepicker label="Label" onchange="document.getElementById('chosen-date').innerHTML = this.value?.toISOString() || 'None'"></gds-datepicker>
+Chosen date: <span id="chosen-date">None</span>
+</div>
+</Canvas>
+
+## Basic usage
+
+The date picker takes a `label` attribute for setting the label text, and has two slots for adding
+additional information.
+
+The `sub-label` slot sits between the label and the input, and the `message` slot sits below the
+input. The `message` slot is used to display instructions and/or validation errors.
+
+When the value is changed by a user, a `change` event is fired.
+
+<Canvas>
+<div style={{ dummy: registerTransitionalStyles() }}>
+<gds-datepicker label="Label" onchange="console.log(this.value)">
+  <span slot="sub-label">A sub-label can be added as additional description</span>
+  <span slot="message">Instructive message. Will turn red if there is a validation error</span>
+</gds-datepicker>
+</div>
+</Canvas>
+
+## Other attributes
+
+In this example, all the available attributes are used.
+
+<Canvas>
+<div style={{ dummy: registerTransitionalStyles() }}>
+<gds-datepicker
+  label="Label"
+  onchange="console.log(this.value)"
+  min="2022-11-11"
+  max="2024-02-20"
+  showWeekNumbers>
+  <span slot="sub-label">A sub-label can be added as additional description</span>
+  <span slot="message">Instructive message. Will turn red if there is a validation error</span>
+</gds-datepicker>
+</div>
+</Canvas>
+

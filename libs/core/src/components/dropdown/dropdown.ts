@@ -1,4 +1,4 @@
-import { property, query, queryAsync } from 'lit/decorators.js'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -26,6 +26,7 @@ import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { CSSResult, HTMLTemplateResult } from 'lit'
 
 /**
  * @element gds-dropdown
@@ -111,7 +112,21 @@ export class GdsDropdown<ValueT = any>
   searchFilter: (q: string, o: GdsOption) => boolean = (q, o) =>
     o.innerHTML.toLowerCase().includes(q.toLowerCase())
 
-  // Private members
+  /**
+   * Whether the popover should sync its width to the trigger button. When this is
+   * set to `true`, the popover will always have the same width as the trigger button.
+   *
+   * By default, line-breaks will be applied to the option content if it is wider than
+   * the popover width. If you use this option, make sure to verify that your options
+   * are still readable and apply appropriate custom layout or truncation if neccecary.
+   */
+  @property({ type: Boolean })
+  syncPopoverWidth = false
+
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   #optionElements: HTMLCollectionOf<GdsOption>
 
   @query('#trigger')
@@ -193,6 +208,7 @@ export class GdsDropdown<ValueT = any>
 
   render() {
     return html`
+      ${this._tStyles}
       ${when(
         this.label,
         () => html`<label for="trigger">${this.label}</label>`
@@ -220,6 +236,8 @@ export class GdsDropdown<ValueT = any>
         .label=${this.label}
         .open=${this.open}
         .triggerRef=${this.elTriggerBtnAsync}
+        .calcMaxWidth=${(trigger: HTMLElement) =>
+          this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         ${when(

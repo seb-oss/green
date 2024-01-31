@@ -6,8 +6,6 @@ $_width: 4rem;
 $_font-size: 1.5rem;
 
 @mixin add-stepper() {
-  width: fit-content;
-  
   .button,
   button {
     width: 44px;

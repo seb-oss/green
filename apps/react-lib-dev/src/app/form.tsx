@@ -79,6 +79,8 @@ export const FormExample = () => {
   const [value, setValue] = useState(0)
   const [ddValue, setDdValue] = useState()
 
+  const [stepperVal, setStepperVal] = useState(0)
+
   return (
     <>
       <h2>This is a form</h2>
@@ -178,7 +180,12 @@ export const FormExample = () => {
           validator={validator}
         />
 
-        <Stepper onChange={onStepperChange} />
+        <Stepper
+          onChange={(e) => setStepperVal(Number(e.target.value))}
+          value={stepperVal.toFixed(4)}
+          onIncrease={() => setStepperVal((v) => v + 0.0001)}
+          onDecrease={() => setStepperVal((v) => v - 0.0001)}
+        />
 
         <Slider
           hasTextbox={true}

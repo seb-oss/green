@@ -13,9 +13,7 @@ export const Link = ({
   role,
   ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const buttonClassName =
-    classNames(className, 'button', typeof button === 'string' && button) ||
-    undefined
+  const buttonClassName = classNames(className, { "button": button }, button)
 
   return (
     <a

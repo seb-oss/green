@@ -10,18 +10,6 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
     focus(options?: FocusOptions | undefined): void {
       this.setAttribute('tabindex', '0')
       super.focus(options)
-
-      // This hack is here to make sure the elemnt gets focus
-      // if the containing element was initally hidden, because
-      // when this is called, the element may not yet be displayed
-      // and therefore `super.focus()` does nothing until some
-      // arbitrary amount of time has passed.
-      if (document.activeElement !== this) {
-        const iv = setInterval(() => {
-          if (document.activeElement === this) clearInterval(iv)
-          super.focus(options)
-        }, 10)
-      }
     }
 
     onblur = (e: FocusEvent) => {

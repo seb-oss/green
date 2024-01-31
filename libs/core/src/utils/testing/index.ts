@@ -106,3 +106,38 @@ export async function dragElement(
 export async function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+/**
+ * Returns a promise that resolves when the provided condition is true.
+ * Will never resolve if the condition does not turn true.
+ */
+export async function conditionToBeTrue(condition: () => boolean) {
+  let interval: number
+  return new Promise<void>((resolve) => {
+    interval = window.setInterval(() => {
+      if (condition()) {
+        window.clearInterval(interval)
+        resolve()
+      }
+    }, 10)
+  })
+}
+
+export function isWebKit() {
+  return (
+    navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
+    navigator.userAgent.toLowerCase().indexOf('chrome') < 0
+  )
+}
+
+export function isChromium() {
+  return navigator.userAgent.toLowerCase().indexOf('chrome') > -1
+}
+
+export function isFirefox() {
+  return navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+}
+
+export function onlyDate(date: Date) {
+  return date.toISOString().split('T')[0]
+}

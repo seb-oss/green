@@ -1,17 +1,18 @@
-import { LitElement } from 'lit'
+import { HTMLTemplateResult, LitElement } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
-import { property, queryAsync } from 'lit/decorators.js'
+import { property, queryAsync, state } from 'lit/decorators.js'
+import { Placement } from '@floating-ui/dom'
+
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
 import { constrainSlots } from '../../utils/helpers'
-
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import '../../primitives/menu/menu'
-import { Placement } from '@floating-ui/dom'
 
 /**
  * @element gds-context-menu
@@ -27,7 +28,7 @@ import { Placement } from '@floating-ui/dom'
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
 @gdsCustomElement('gds-context-menu')
-export class GdsContextMenu extends LitElement {
+export class GdsContextMenu extends GdsElement {
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -57,6 +58,10 @@ export class GdsContextMenu extends LitElement {
   @property()
   placement: Placement = 'bottom-start'
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
 
@@ -79,7 +84,8 @@ export class GdsContextMenu extends LitElement {
   }
 
   render() {
-    return html`<button
+    return html`${this._tStyles}
+      <button
         id="trigger"
         class="ghost border-0 small ${classMap({ highlighted: this.open })}"
         aria-label="${this.buttonLabel}"

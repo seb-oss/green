@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/extract",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Base library for framework components.",
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "directory": "../../dist/libs/extract"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],

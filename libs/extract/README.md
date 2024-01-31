@@ -1,5 +1,9 @@
 # `@sebgroup/extract`
 
+Extract is considered deprectaed in favor of implementing shared functionality as Web Components. See https://github.com/sebgroup/green/tree/main/libs/core
+
+---
+
 Extract is where all the business logic of Green components lives so that it
 can be shared between Angular and React implementations. It is called Extract
 since the normal way of creating a component is within Angular and React and
@@ -49,10 +53,7 @@ export interface CalculatorOptions {
   containerEl: HTMLElement
 }
 
-export const createCalculator = (
-  listener: (data: CalculatorData) => void,
-  options: CalculatorOptions
-): Calculator => {
+export const createCalculator = (listener: (data: CalculatorData) => void, options: CalculatorOptions): Calculator => {
   // Create initial data
   let data: CalculatorData = {
     currentValue: 0,

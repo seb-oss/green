@@ -1,10 +1,12 @@
-import { LitElement } from 'lit'
-import { property } from 'lit/decorators.js'
+import { HTMLTemplateResult, LitElement } from 'lit'
+import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
+
+import { GdsElement } from '../../gds-element'
 import style from './listbox.styles'
 import { watch } from '../../utils/decorators'
 import {
@@ -32,7 +34,7 @@ import { unwrap } from '../../utils/helpers/unwrap-slots'
  */
 @gdsCustomElement('gds-listbox')
 export class GdsListbox
-  extends LitElement
+  extends GdsElement
   implements ListboxKbNavigation, OptionsContainer
 {
   static styles = style
@@ -56,6 +58,10 @@ export class GdsListbox
    */
   @property()
   compareWith: (a: any, b: any) => boolean = (a, b) => a === b
+
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
 
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
@@ -127,7 +133,7 @@ export class GdsListbox
   }
 
   render() {
-    return html`<slot ${ref(this.#slotRef)}></slot>`
+    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
   }
 
   /**
