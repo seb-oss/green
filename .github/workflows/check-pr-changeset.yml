@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js LTS
         uses: actions/setup-node@v3
@@ -34,7 +36,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Status check
-        run: yarn changeset status --since HEAD --output changeset-status.json
+        run: yarn changeset status --output changeset-status.json
 
       - name: Comment when changeset is not found
         if: failure()
@@ -42,7 +44,7 @@ jobs:
         with:
           message: |
             ## Changeset status
-            No changeset found. You can add a changeset by running `yarn changeset`, and then commiting the resulting changeset file.
+            No changeset found. You can add a changeset by running `npx changeset`, and then commiting the resulting changeset file.
 
             If this PR should not cause a new release of any package, then an empty changeset should be added: \
             `npx changeset add --empty`.
