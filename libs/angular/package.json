@@ -23,7 +23,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "directory": "../../dist/libs/angular"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],
