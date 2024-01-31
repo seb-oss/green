@@ -59,8 +59,9 @@ jobs:
             return changesetStatus.releases.map((release) => {
               const packageName = release.name;
               const type = release.type;
+              const oldVersion = release.oldVersion;
               const newVersion = release.newVersion;
-              return `- ${packageName}: ${type} ${newVersion}`;
+              return `- **${packageName}**: ${newVersion} &rarr; ${newVersion} (**${type}** bump)`;
             }).join('\n');
 
       - name: Comment when changeset is found
