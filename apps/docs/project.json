@@ -17,7 +17,8 @@
           "outputPath": "apps/docs"
         },
         "production": {}
-      }
+      },
+      "dependsOn": ["core:build-with-types"]
     },
     "serve": {
       "executor": "@nx/next:server",

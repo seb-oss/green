@@ -39,7 +39,7 @@
     },
     "build-with-types": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-src"],
+      "dependsOn": ["build-src", "tokens:build"],
       "options": {
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
