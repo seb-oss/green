@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.5](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.4...@sebgroup/green-core@1.4.5) (2024-01-30)
+
+
+### Bug Fixes
+
+* **angular:** add export for Core Wrapper Module ([#1184](https://github.com/sebgroup/green/issues/1184)) ([5b23830](https://github.com/sebgroup/green/commit/5b23830f4c4db8119c1f4d606d9f016801500b70))
+
+
+
 ## [1.4.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.3...@sebgroup/green-core@1.4.4) (2024-01-29)
 
 
