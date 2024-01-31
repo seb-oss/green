@@ -36,7 +36,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Status check
-        run: yarn changeset status --output changeset-status.json
+        run: yarn changeset status --since=`git log origin/main..HEAD --pretty=format:"%h" | tail -1` --output=changeset-status.json
 
       - name: Comment when changeset is not found
         if: failure()
@@ -71,7 +71,10 @@ jobs:
             ## Changeset status
             Based on the included changeset, the following releases will be published as a result of this PR:
 
-            ${{ steps.generate-comment-text.outputs.result }}
+            ${{ fromJSON(steps.generate-comment-text.outputs.result) }}
+
+            *Note:* If unpublished changesets exists on `main`, and `main` has been merged into this PR, this
+            list will include those changes in addition to the ones specific to this PR.
 
       - name: Comment when empty changeset is found
         if: steps.generate-comment-text.outputs.result == '""'
