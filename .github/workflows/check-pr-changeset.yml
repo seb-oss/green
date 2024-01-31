@@ -36,7 +36,7 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Status check
-        run: yarn changeset status --since=`git log origin/main..HEAD --pretty=format:"%h" | tail -1` --output=cs_status.json
+        run: yarn changeset status --since=`git log origin/main..HEAD --pretty=format:"%h" | tail -1` --output=changeset-status.json
 
       - name: Comment when changeset is not found
         if: failure()
