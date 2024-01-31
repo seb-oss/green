@@ -2,6 +2,111 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.3...@sebgroup/chlorophyll@3.0.4) (2024-01-26)
+
+
+### Bug Fixes
+
+* **chlorophyll:** change font weight for h5 and h6 [#1172](https://github.com/sebgroup/green/issues/1172) ([#1175](https://github.com/sebgroup/green/issues/1175)) ([d7c8a81](https://github.com/sebgroup/green/commit/d7c8a814ef965659275c945214cbb830d957b370))
+
+
+
+## [3.0.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.2...@sebgroup/chlorophyll@3.0.3) (2024-01-25)
+
+
+### Bug Fixes
+
+* **core:** polyfill/fallback for iOS 15 ([#1173](https://github.com/sebgroup/green/issues/1173)) ([53247c5](https://github.com/sebgroup/green/commit/53247c5068ffdb91be188966a4073dce1bc8f58a))
+
+
+
+## [3.0.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.1...@sebgroup/chlorophyll@3.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* **react:** slide-out modal transition ([f911a11](https://github.com/sebgroup/green/commit/f911a11f36f3864b0fff9dd36baf6a23e89d8476))
+
+
+
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.0...@sebgroup/chlorophyll@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **chlorophyll:** update readme ([#1166](https://github.com/sebgroup/green/issues/1166)) ([a0d3333](https://github.com/sebgroup/green/commit/a0d333353b495715db882351ca78006fa7cd72a7))
+
+
+
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.3.0...@sebgroup/chlorophyll@3.0.0) (2024-01-22)
+
+
+### Bug Fixes
+
+* **react/stepper:** convert to pure controlled component ([#1160](https://github.com/sebgroup/green/issues/1160)) ([55191b1](https://github.com/sebgroup/green/commit/55191b130fab5afe3413b865e2adf2fbacdc56d8))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **react/table:** add react table component ([#1162](https://github.com/sebgroup/green/issues/1162)) ([6439fb9](https://github.com/sebgroup/green/commit/6439fb9f23bebec48405513799bf1c79045f5a8c))
+
+
+### BREAKING CHANGES
+
+* **react/stepper:** * value is now only owned by host application. This means `onIncrease` and `onDecrease` have to be implemented for the stepper to work.
+* `onChange` now takes a ChangeEvent<HTMLInputElement> as param.
+* These props have been removed: `step`, `min`, `max`
+
+
+
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.3.0...@sebgroup/chlorophyll@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **react/stepper:** convert to pure controlled component ([#1160](https://github.com/sebgroup/green/issues/1160)) ([55191b1](https://github.com/sebgroup/green/commit/55191b130fab5afe3413b865e2adf2fbacdc56d8))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **react/table:** add react table component ([#1162](https://github.com/sebgroup/green/issues/1162)) ([6439fb9](https://github.com/sebgroup/green/commit/6439fb9f23bebec48405513799bf1c79045f5a8c))
+
+
+### BREAKING CHANGES
+
+* **react/stepper:** * value is now only owned by host application. This means `onIncrease` and `onDecrease` have to be implemented for the stepper to work.
+* `onChange` now takes a ChangeEvent<HTMLInputElement> as param.
+* These props have been removed: `step`, `min`, `max`
+
+
+
+# [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.2...@sebgroup/chlorophyll@2.3.0) (2023-12-01)
+
+
+### Bug Fixes
+
+* 🐛 wizard next icon margin left ([#1116](https://github.com/sebgroup/green/issues/1116)) ([158faf0](https://github.com/sebgroup/green/commit/158faf08786634b6239a33a8b58296922a4992b3))
+* Modal positioning and backdrop effect in react component ([#1124](https://github.com/sebgroup/green/issues/1124)) ([659a663](https://github.com/sebgroup/green/commit/659a663b7b54da618be5a04556001b2838567a20))
+
+
+### Features
+
+* 🎸 Add unit to input and refactor ([#1119](https://github.com/sebgroup/green/issues/1119)) ([25b06e7](https://github.com/sebgroup/green/commit/25b06e71fcd3985b97aa323712380a0041aeee89)), closes [#926](https://github.com/sebgroup/green/issues/926) [#910](https://github.com/sebgroup/green/issues/910) [#873](https://github.com/sebgroup/green/issues/873) [#713](https://github.com/sebgroup/green/issues/713) [#713](https://github.com/sebgroup/green/issues/713) [#569](https://github.com/sebgroup/green/issues/569)
+* 🎸 Char counter to text area ([#1117](https://github.com/sebgroup/green/issues/1117)) ([2f58b44](https://github.com/sebgroup/green/commit/2f58b44a86d6e82dddcc872ca10c4ea613ba33bb))
+
+
+
+## [2.2.2](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.1...@sebgroup/chlorophyll@2.2.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
 ## [2.2.1](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@2.2.0...@sebgroup/chlorophyll@2.2.1) (2023-11-10)
 
 

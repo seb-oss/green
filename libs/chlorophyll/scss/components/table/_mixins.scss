@@ -13,6 +13,10 @@ $_sort-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' v
 $_sort-icon-color: var(--sg-table-sort-icon-color);
 $_sort-icon-color-active: var(--sg-table-sort-icon-color-active);
 $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
+
+$icon-size: 12px;
+$gray-800: map.get(map.get(tokens.$grey, light), 800);
+
 @mixin add-table() {
   border-collapse: collapse;
   thead {
@@ -75,6 +79,40 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
         border-top: $_border-width solid $_border-color;
         padding: $_cell-padding-y $_cell-padding-x;
         vertical-align: top;
+      }
+      &.collapsible {
+        ~ .sub-row {
+          display: none;
+        }
+        &.expanded {
+          ~ .sub-row.show {
+            display: table-row;
+          }
+        }
+      }
+      td {
+        &.collapse-control,
+        &.select-control {
+          width: 15px;
+        }
+        &.collapse-control {
+          > .collapse-btn {
+            min-height: unset;
+            padding: 0;
+            background: transparent;
+            > .icon-holder {
+              cursor: pointer;
+              width: $icon-size;
+              svg {
+                width: $icon-size;
+                fill: $gray-800;
+                &[name='angle-right'] {
+                  width: 9px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

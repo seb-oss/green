@@ -8,7 +8,7 @@ $_z-index: var(--sg-z-index-popover);
 $_border-color: var(--gds-ref-pallet-base800);
 $_popover-bg: var(--sg-popover-background);
 $_max-height-mobile: calc(100% - 1rem);
-$_max-height: 400px;
+$_max-height: 500px;
 
 @mixin popover {
   --z-index: #{$_z-index};

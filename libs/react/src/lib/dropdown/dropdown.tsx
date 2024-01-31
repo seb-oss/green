@@ -1,5 +1,5 @@
 import React from 'react'
-import { createComponent } from '@lit-labs/react'
+import { createComponent } from '@lit/react'
 
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
 
@@ -38,6 +38,9 @@ export interface DropdownArgs {
   useValue?: string // option key to use as value
   validator?: IValidator
   value?: any
+
+  /** Force width of the popover to match trigger */
+  syncPopoverWidth?: boolean
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -83,6 +86,7 @@ export const Dropdown = ({
   useValue = 'value',
   validator,
   value,
+  syncPopoverWidth,
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
@@ -114,6 +118,7 @@ export const Dropdown = ({
         compareWith={compareWithAdapter}
         value={value}
         searchFilter={searchFilterAdapter}
+        syncPopoverWidth={syncPopoverWidth}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}

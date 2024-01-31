@@ -2,6 +2,128 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.5](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.4...@sebgroup/green-core@1.4.5) (2024-01-30)
+
+
+### Bug Fixes
+
+* **angular:** add export for Core Wrapper Module ([#1184](https://github.com/sebgroup/green/issues/1184)) ([5b23830](https://github.com/sebgroup/green/commit/5b23830f4c4db8119c1f4d606d9f016801500b70))
+
+
+
+## [1.4.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.3...@sebgroup/green-core@1.4.4) (2024-01-29)
+
+
+### Bug Fixes
+
+* **core/datepicker:** today highlight style & focus handling ([#1181](https://github.com/sebgroup/green/issues/1181)) ([6878fdf](https://github.com/sebgroup/green/commit/6878fdf8655613dc87f143c09d82760d74522889))
+
+
+
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.2...@sebgroup/green-core@1.4.3) (2024-01-26)
+
+
+### Bug Fixes
+
+* **core/datepicker:** properly constrain length of keyboard input ([#1176](https://github.com/sebgroup/green/issues/1176)) ([f4f6750](https://github.com/sebgroup/green/commit/f4f6750441b017f5fe37e4f20061a4a29544f929))
+
+
+
+## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.1...@sebgroup/green-core@1.4.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **core:** polyfill/fallback for iOS 15 ([#1173](https://github.com/sebgroup/green/issues/1173)) ([53247c5](https://github.com/sebgroup/green/commit/53247c5068ffdb91be188966a4073dce1bc8f58a))
+
+
+
+## [1.4.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.0...@sebgroup/green-core@1.4.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **datepicker:** forward all props to web component ([#1168](https://github.com/sebgroup/green/issues/1168)) ([00b0922](https://github.com/sebgroup/green/commit/00b092271f345abe521e8af74b7c4392d8b8db4c))
+
+
+
+# [1.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.3.0...@sebgroup/green-core@1.4.0) (2024-01-19)
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+
+
+
+# [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.4...@sebgroup/green-core@1.3.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* **core/dropdown:** add null-check when accessing parentElement ([#1158](https://github.com/sebgroup/green/issues/1158)) ([a1b610d](https://github.com/sebgroup/green/commit/a1b610d7959d96310b110574dd464c730b9f297c))
+
+
+### Features
+
+* **core/dropdown:** add `syncPopoverWidth` option ([#1159](https://github.com/sebgroup/green/issues/1159)) ([fe88611](https://github.com/sebgroup/green/commit/fe88611430adcac76d84ff4c3132243fde3fc968))
+
+
+
+## [1.2.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.3...@sebgroup/green-core@1.2.4) (2023-12-01)
+
+
+### Bug Fixes
+
+* **core/popover:** positioning regression in mobile views ([#1143](https://github.com/sebgroup/green/issues/1143)) ([5fb8736](https://github.com/sebgroup/green/commit/5fb8736e7a69a46af916280f9738361693f787d9))
+
+
+
+## [1.2.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.2...@sebgroup/green-core@1.2.3) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+## [1.2.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.1...@sebgroup/green-core@1.2.2) (2023-11-28)
+
+
+### Bug Fixes
+
+* **core/context-menu:** use the correct relative paths in imports ([#1133](https://github.com/sebgroup/green/issues/1133)) ([6050e60](https://github.com/sebgroup/green/commit/6050e60e52f25ca365b2cc3722ba5a50907ec31e))
+
+
+
+## [1.2.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.2.0...@sebgroup/green-core@1.2.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **core:** update localize and correct lit version in package ([#1128](https://github.com/sebgroup/green/issues/1128)) ([29210f6](https://github.com/sebgroup/green/commit/29210f6a22d30ec059b9da7038585d6d21673fb7))
+
+
+
+# [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.1.1...@sebgroup/green-core@1.2.0) (2023-11-22)
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
+## [1.1.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.1.0...@sebgroup/green-core@1.1.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* **dropdown:** hidden overflow with ellipsis by default ([#1114](https://github.com/sebgroup/green/issues/1114)) ([9a2cce7](https://github.com/sebgroup/green/commit/9a2cce7cb7549ef3bff6b4086407fcb80f49cc72))
+
+
+
 # [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.0.3...@sebgroup/green-core@1.1.0) (2023-11-10)
 
 

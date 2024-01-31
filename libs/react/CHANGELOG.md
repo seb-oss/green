@@ -2,6 +2,119 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@3.0.1...@sebgroup/green-react@3.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* **react:** slide-out modal transition ([f911a11](https://github.com/sebgroup/green/commit/f911a11f36f3864b0fff9dd36baf6a23e89d8476))
+
+
+
+## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@3.0.0...@sebgroup/green-react@3.0.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **datepicker:** forward all props to web component ([#1168](https://github.com/sebgroup/green/issues/1168)) ([00b0922](https://github.com/sebgroup/green/commit/00b092271f345abe521e8af74b7c4392d8b8db4c))
+
+
+
+# [3.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.2...@sebgroup/green-react@3.0.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* **dropdown:** pass down `syncPopoverWidth` to core component ([#1161](https://github.com/sebgroup/green/issues/1161)) ([4c48135](https://github.com/sebgroup/green/commit/4c48135e465af81ef5074753f2d819244ac3a9d5))
+* **react/stepper:** convert to pure controlled component ([#1160](https://github.com/sebgroup/green/issues/1160)) ([55191b1](https://github.com/sebgroup/green/commit/55191b130fab5afe3413b865e2adf2fbacdc56d8))
+
+
+### Features
+
+* Datepicker web component in Green Core ([#1154](https://github.com/sebgroup/green/issues/1154)) ([707d456](https://github.com/sebgroup/green/commit/707d45602ebf157af432ee85c41c98be01b655a3))
+* **datepicker:** replace underlying implementation in React and Angular ([#1164](https://github.com/sebgroup/green/issues/1164)) ([ececf0a](https://github.com/sebgroup/green/commit/ececf0aa12078a7b4fbeeae95861cf75e9194e31))
+* **react/table:** add react table component ([#1162](https://github.com/sebgroup/green/issues/1162)) ([6439fb9](https://github.com/sebgroup/green/commit/6439fb9f23bebec48405513799bf1c79045f5a8c))
+
+
+### BREAKING CHANGES
+
+* **datepicker:** * `locale` option has been removed. Localization is handled
+    in Green Core by `@lit/localize`
+* `currentDate` is deprecated.  Use `value` instead.
+* `selectedDate` is deprecated. Use `value` instead.
+* `useCurrentTime` is removed
+* `closeOnSelect` is removed (popover will now always close when a value is selected)
+* `DatepickerOptions` moved from Extract and can be imported from React or Angular package instead.
+* **react/stepper:** * value is now only owned by host application. This means `onIncrease` and `onDecrease` have to be implemented for the stepper to work.
+* `onChange` now takes a ChangeEvent<HTMLInputElement> as param.
+* These props have been removed: `step`, `min`, `max`
+
+
+
+## [2.6.2](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.1...@sebgroup/green-react@2.6.2) (2023-12-11)
+
+
+### Bug Fixes
+
+* **react/stepper:** refactor internal state handling ([#1147](https://github.com/sebgroup/green/issues/1147)) ([0cbbe10](https://github.com/sebgroup/green/commit/0cbbe100707ee742d23b81bc1b4410f2bcc62a6c)), closes [#1062](https://github.com/sebgroup/green/issues/1062)
+* **react:** exporting context menu ([#1151](https://github.com/sebgroup/green/issues/1151)) ([ee0123e](https://github.com/sebgroup/green/commit/ee0123e9f5ebec2c3e528f955d2620595e83663c))
+
+
+
+## [2.6.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.6.0...@sebgroup/green-react@2.6.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* **react/link:** default styling should be inline link ([#1148](https://github.com/sebgroup/green/issues/1148)) ([f108be3](https://github.com/sebgroup/green/commit/f108be3d7ea03da86dfde261a2cdc2dd07f56e5f))
+
+
+
+# [2.6.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.1...@sebgroup/green-react@2.6.0) (2023-12-01)
+
+
+### Bug Fixes
+
+* 🐛 Expose button props and pass them to elements ([#1118](https://github.com/sebgroup/green/issues/1118)) ([afc68f9](https://github.com/sebgroup/green/commit/afc68f9d4183c5cd655e70c32fb8b04b1314f0ba))
+* 🐛 wizard next icon margin left ([#1116](https://github.com/sebgroup/green/issues/1116)) ([158faf0](https://github.com/sebgroup/green/commit/158faf08786634b6239a33a8b58296922a4992b3))
+* Modal positioning and backdrop effect in react component ([#1124](https://github.com/sebgroup/green/issues/1124)) ([659a663](https://github.com/sebgroup/green/commit/659a663b7b54da618be5a04556001b2838567a20))
+
+
+### Features
+
+* 🎸 Add unit to input and refactor ([#1119](https://github.com/sebgroup/green/issues/1119)) ([25b06e7](https://github.com/sebgroup/green/commit/25b06e71fcd3985b97aa323712380a0041aeee89)), closes [#926](https://github.com/sebgroup/green/issues/926) [#910](https://github.com/sebgroup/green/issues/910) [#873](https://github.com/sebgroup/green/issues/873) [#713](https://github.com/sebgroup/green/issues/713) [#713](https://github.com/sebgroup/green/issues/713) [#569](https://github.com/sebgroup/green/issues/569)
+* 🎸 Char counter to text area ([#1117](https://github.com/sebgroup/green/issues/1117)) ([2f58b44](https://github.com/sebgroup/green/commit/2f58b44a86d6e82dddcc872ca10c4ea613ba33bb))
+
+
+
+## [2.5.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.5.0...@sebgroup/green-react@2.5.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **core:** downgrade to `lit@ˆ2.8.0` ([#1134](https://github.com/sebgroup/green/issues/1134)) ([bee1a90](https://github.com/sebgroup/green/commit/bee1a90bb48c2855b23849fbb30daaa991138dc8))
+
+
+
+# [2.5.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.4.0...@sebgroup/green-react@2.5.0) (2023-11-22)
+
+
+### Features
+
+* **core/context-menu:** add context menu component to Green Core, and use for Angular and React ([#1125](https://github.com/sebgroup/green/issues/1125)) ([1aacb43](https://github.com/sebgroup/green/commit/1aacb43d9afedd34316f2c96c10d534b5d487aa6))
+
+
+
+# [2.4.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.3.0...@sebgroup/green-react@2.4.0) (2023-11-17)
+
+
+### Features
+
+* **react/button:** `testId` prop added for automated test to button component ([#1122](https://github.com/sebgroup/green/issues/1122)) ([08c0eae](https://github.com/sebgroup/green/commit/08c0eae8250c40766bf238df6d5985d60443e59a))
+* **react/button:** add `close` variant ([0a0899b](https://github.com/sebgroup/green/commit/0a0899b0e6166088b8de1e261834e0ba40283638))
+
+
+
 # [2.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react@2.2.1...@sebgroup/green-react@2.3.0) (2023-11-10)
 
 

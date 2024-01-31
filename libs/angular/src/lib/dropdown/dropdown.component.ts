@@ -45,6 +45,7 @@ export interface DropdownOption {
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',
+  styleUrls: ['dropdown.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -66,6 +67,9 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() invalid?: boolean
   @Input() compareWith?: CompareWith
   @Input() searchFilter?: SearchFilter
+  @Input() syncPopoverWidth?: boolean
+
+  /** @deprecated */
   @Input() fixedPlacement?: DropdownPlacements
 
   //
@@ -195,7 +199,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
     return compareFn(o1, o2)
   }
   searchFilterAdapter = (q: string, o: GdsOption) => {
-    if (this.searchFilter) return this.searchFilter(q, o.value[this.useValue])
+    if (this.searchFilter) return this.searchFilter(q, o.value)
     else
       return ((q: string, o: GdsOption) =>
         o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)

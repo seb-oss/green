@@ -16,7 +16,9 @@ export * from './lib/slider'
 export * from './lib/stepper/stepper'
 export * from './lib/tabs/tabs'
 export * from './lib/modal/modal'
+export * from './lib/context-menu/context-menu'
 export * from './types'
+export * from './lib/table/components'
 
 // Backwards compatibility export
 export { AlertRibbon as Alert } from './lib/alert-ribbon/alert-ribbon'

@@ -6,9 +6,21 @@
   "targets": {
     "build": {
       "executor": "./tools/executors/scss:build-lib",
+      "dependsOn": ["copy-fonts"],
       "options": {
         "packageJson": "libs/chlorophyll/package.json",
         "outputPath": "dist/libs/chlorophyll"
+      }
+    },
+    "copy-fonts": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputDir}/fonts"],
+      "options": {
+        "commands": [
+          {
+            "command": "yarn copy-fonts"
+          }
+        ]
       }
     },
     "compile-scss": {
@@ -63,6 +75,7 @@
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
+      "dependsOn": ["copy-fonts"],
       "options": {
         "uiFramework": "@storybook/html",
         "configDir": "libs/chlorophyll/.storybook",
@@ -74,41 +87,9 @@
         }
       }
     },
-    "update-deps-and-release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run chlorophyll:update-dependencies && nx run chlorophyll:version-and-release"
-          }
-        ]
-      }
-    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
-    },
-    "version-and-release": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "commitMessageFormat": "chore({projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/{projectName}@",
-        "push": true,
-        "postTargets": ["chlorophyll:publish", "chlorophyll:github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "${tag}",
-        "notes": "${notes}"
-      }
-    },
-    "publish": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public"
-      }
     }
   }
 }

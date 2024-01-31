@@ -53,9 +53,9 @@
             "command": "npx postcss dist/libs/charts/css/green-charts.css --use=cssnano -m -o=dist/libs/charts/css/green-charts.min.css"
           }
         ],
-        "parallel": false,
-        "outputPath": "dist/libs/chlorophyll"
-      }
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
     "copy-scss": {
       "executor": "nx:run-commands",
@@ -66,9 +66,9 @@
             "command": "npx copyfiles libs/charts/scss/**/* dist/libs/charts/scss -f"
           }
         ],
-        "parallel": false,
-        "outputPath": "dist/libs/chlorophyll"
-      }
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
@@ -85,42 +85,9 @@
         "passWithNoTests": true
       }
     },
-    "update-deps-and-release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run charts:update-dependencies && nx run charts:version-and-release"
-          }
-        ]
-      }
-    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
-    },
-    "version-and-release": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "commitMessageFormat": "chore({projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-{projectName}@",
-        "push": true,
-        "postTargets": ["charts:publish", "charts:github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "${tag}",
-        "notes": "${notes}"
-      }
-    },
-    "publish": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public",
-        "distFolderPath": "{workspaceRoot}/dist/libs/charts"
-      }
     }
   }
 }

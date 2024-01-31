@@ -12,6 +12,12 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'pagination',
+    data: { name: 'Pagination' },
+    loadChildren: () =>
+      import('./pagination/pagination.module').then((m) => m.PaginationModule),
+  },
+  {
     path: 'dropdown',
     data: { name: 'Dropdown' },
     loadChildren: () =>

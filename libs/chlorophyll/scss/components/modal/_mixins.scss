@@ -60,8 +60,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   @include common.padding-horizontal(5);
   @include common.padding-vertical(5);
 
-
-
   overflow: auto;
   width: 100%;
 
@@ -97,19 +95,40 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 }
 
 @mixin dialog-modal() {
-  max-width: 375px;
+  position: initial;
+  width: 375px;
 
   &.large {
-    max-width: 720px;
+    width: 720px;
   }
 }
 
+@mixin dialog-modal-wrapper() {
+  inset: 0;
+  position: fixed;
+  display: grid;
+  place-content: center;
+  z-index: calc($backdrop-z-index + 1);
+}
+
 @mixin aside-modal() {
+  position: fixed;
   height: 100vh;
   max-width: 512px;
   min-height: stretch;
   right: 0;
   top: 0;
+  transition: transform 350ms cubic-bezier(0.33, 1, 0.68, 1);
+  transform: translateX(100%);
+
+  &.is-entering,
+  &.entered {
+    transform: translateX(0%);
+  }
+
+  &.is-exiting {
+    transform: translateX(100%);
+  }
 
   &.large {
     max-width: 720px;
@@ -124,14 +143,15 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   }
 
   &.gds-slide-out--768 {
-      max-width: 48rem;
+    max-width: 48rem;
   }
 
   &.gds-slide-out--960 {
-      max-width: 60rem;
+    max-width: 60rem;
   }
 
-  &.gds-slide-out--768, &.gds-slide-out--960 {
+  &.gds-slide-out--768,
+  &.gds-slide-out--960 {
     header {
       @include common.padding-horizontal(7);
       @include common.padding-top(6);
@@ -148,8 +168,6 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
       @include common.padding-bottom(7);
     }
   }
-
-
 }
 
 @mixin fullscreen-modal() {
@@ -157,6 +175,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   inset: 0;
   min-height: stretch;
   width: 100vw;
+  position: fixed;
 
   > .body {
     flex: 1 0;

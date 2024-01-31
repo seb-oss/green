@@ -117,7 +117,9 @@ function applyElementScoping(
 const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
   inStr.map((s) => {
     for (const [key, value] of elementLookupTable.entries()) {
-      s = s.split(key).join(value)
+      // Match the key, as long as it is not followed by a dash or lowercase letter.
+      // The key `gds-menu` should only match `gds-menu` and not `gds-menu-item` or `gds-menuitem`, for example.
+      s = s.replace(new RegExp(`${key}(?![-a-z])`, 'mg'), value)
     }
     return s
   })

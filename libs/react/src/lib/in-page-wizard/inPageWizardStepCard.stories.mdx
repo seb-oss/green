@@ -1,5 +1,9 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
 import { InPageWizardStepCard } from './inPageWizardStepCard'
+import { Label, List, Value } from '../list/valueList.tsx'
+import { TextInput } from '../form/input/input.tsx'
+import { TextArea } from "../form"
+import { Check } from '../icons'
 
 export const Template = ({ children, ...props }) => (
   <InPageWizardStepCard {...props}>{children}</InPageWizardStepCard>
@@ -12,88 +16,159 @@ export const Template = ({ children, ...props }) => (
 
 # InPageWizardStepCard
 
-An InPageWizardStepCard lets users add a step on a page.
+With InPageWizardStepCard it is possible for a user to quickly create wizard steps. Status for each step has to be provided so that it has the correct styles and renders correct.
 
-## An active step
+## Default
 
 <Canvas>
   <Story
     name="InPageWizardStepCard"
     args={{
-      stepText: 'Steg 1 av 3',
-      title: 'Nya lånet',
-      editBtnText: 'Ändra',
-      nextBtnText: 'Nästa',
+      children: 'Active step content',
+      nextBtnText: 'Next',
       stepStatus: 'IsActive',
-      onNextClick: () => {},
-      onEditClick: () => {},
-      children: <div>Content of Step 1</div>,
+      stepText: 'Active step text',
+      title: 'Active step title',
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-## A not started step
+## Next button text
 
 <Canvas>
-  <Story
-    name="InPageWizardStepCard2"
-    args={{
-      stepText: 'Steg 2 av 3',
-      title: 'Sälja bostad',
-      editBtnText: 'Ändra',
-      nextBtnText: 'Nästa',
-      stepStatus: 'NotStarted',
-      onNextClick: () => {},
-      onEditClick: () => {},
-      children: <div>Content of Step 2</div>,
-    }}
+  <InPageWizardStepCard
+    editBtnText="Edit"
+    nextBtnText="My next button text"
+    stepStatus="IsActive"
+    stepText="Active step text"
+    title="Active step title"
   >
-    {Template.bind({})}
-  </Story>
+    Active step content
+  </InPageWizardStepCard>
 </Canvas>
 
-## A complete step
+## Next button icon
 
 <Canvas>
-  <Story
-    name="InPageWizardStepCard3"
-    args={{
-      stepText: 'Steg 3 av 3',
-      title: 'Hushåll och ekonomi',
-      editBtnText: 'Ändra',
-      nextBtnText: 'Nästa',
-      stepStatus: 'IsComplete',
-      onNextClick: () => {},
-      onEditClick: () => {},
-      children: <div>Content of Step 3</div>,
-    }}
+  <InPageWizardStepCard
+    editBtnText="Edit"
+    nextBtnText="Next"
+    nextBtnIcon={<Check />}
+    stepStatus="IsActive"
+    stepText="Active step text"
+    title="Active step title"
   >
-    {Template.bind({})}
-  </Story>
+    Active step content
+  </InPageWizardStepCard>
 </Canvas>
 
-## Description
+## Hidden footer
 
-With InPageWizardStepCard it is possible for a user to quickly create wizard steps. Status for each step has to be provided so that it has the correct styles and renders correct.
+<Canvas>
+  <InPageWizardStepCard
+    editBtnText="Edit"
+    nextBtnText="Next"
+    nextBtnIcon={<Check />}
+    stepStatus="IsActive"
+    stepText="Active step text"
+    title="Active step title"
+    hideFooter={true}
+  >
+    Active step content
+  </InPageWizardStepCard>
+</Canvas>
 
-## Props
+## Edit button text
 
-| Prop        | Type         | Description                                            |
-| :---------- | :----------- | :----------------------------------------------------- |
-| title       | `string`     | Title of the step.                                     |
-| stepText    | `string`     | Sub title for the title indicating 'Step X of Y'.      |
-| editBtnText | `string`     | Text on edit button.                                   |
-| nextBtnText | `string`     | Text on next button.                                   |
-| nextBtnIcon | `ReactNode`  | Icon for next button. Optional.                        |
-| stepStatus  | `string`     | Status for the step.                                   |
-| hideFooter  | `boolean`    | Force hiding of footer, regardless of state. Optional. |
-| children    | `string`     | Content for the step.                                  |
-| onNextClick | `() => void` | event for click on next button.                        |
-| onEditClick | `() => void` | event for click on edit button.                        |
-| dataTestid  | `string`     | testid for testing. Optional.                          |
+<Canvas>
+  <InPageWizardStepCard
+    editBtnText="Redigera"
+    nextBtnText="Next"
+    stepStatus="IsComplete"
+    stepText="Completed step text"
+    title="Completed step title"
+  >
+    Completed step content
+  </InPageWizardStepCard>
+</Canvas>
 
-### WizardStepStatus
+## Status
 
-A step can only be in one of the following statuses: "NotStarted" | "IsActive" | "IsComplete"
+<Canvas>
+  <div>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Nästa"
+      stepStatus="IsComplete"
+      stepText="Step 1 of 3"
+      title="Completed step"
+    >
+      Content of Step 1
+    </InPageWizardStepCard>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Next"
+      stepStatus="IsActive"
+      stepText="Step 2 of 3"
+      title="Active step"
+    >
+      Content of Step 2
+    </InPageWizardStepCard>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Nästa"
+      stepStatus="NotStarted"
+      stepText="Step 3 of 3"
+      title="Not started step"
+    >
+      Content of Step 3
+    </InPageWizardStepCard>
+  </div>
+</Canvas>
+
+## Example
+
+<Canvas>
+  <div>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Nästa"
+      stepStatus="IsComplete"
+      stepText="Step 1 of 3"
+      title="Completed step"
+    >
+      <List>
+        <Label>Summary item 1</Label>
+        <Value>Summary value 1</Value>
+        <Label>Summary item 2</Label>
+        <Value>Summary value 2</Value>
+      </List>
+    </InPageWizardStepCard>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Next"
+      stepStatus="IsActive"
+      stepText="Step 2 of 3"
+      title="Active step"
+    >
+      <TextInput label="Input 1" />
+      <TextInput label="Input 2" />
+      <TextArea label="Text area" />
+    </InPageWizardStepCard>
+    <InPageWizardStepCard
+      editBtnText="Edit"
+      nextBtnText="Nästa"
+      stepStatus="NotStarted"
+      stepText="Step 3 of 3"
+      title="Not started step"
+    >
+      Content of Step 3
+    </InPageWizardStepCard>
+  </div>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={InPageWizardStepCard} />

@@ -86,17 +86,13 @@
     },
     "build-nx-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
-    },
-    "version-and-release": {
-      "dependsOn": ["^version-and-release"]
-    },
-    "update-deps-and-release": {
-      "dependsOn": ["^update-deps-and-release"]
     }
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "fonts": ["{workspaceRoot}/dist/fonts"],
+    "core": ["{workspaceRoot}/dist/libs/core/src"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",

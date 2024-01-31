@@ -110,3 +110,22 @@ the default trigger content will be overridden, and you will have to manage the 
     </gds-dropdown>
   </div>
 </Canvas>
+
+## Synced popover width
+
+Normally, the popover will never be narrower than the trigger, but may be wider if the option contents are wider.
+Optionally, the width of the popover can be locked to the width of the trigger by setting the `syncPopoverWidth` attribute.
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown syncPopoverWidth style={{width: '200px'}}>
+      <gds-option value="1701-D-1">Enterprise 1701-D is a starship from the TNG series</gds-option>
+      <gds-option value="falcon-1">Millenium Falcon</gds-option>
+      <gds-option value="defiant-1">Defiant</gds-option>
+      <gds-option value="voyager-1">Voyager</gds-option>
+      <gds-option value="prometheus-1">Prometheus</gds-option>
+      <gds-option value="discovery-1">Discovery</gds-option>
+      <gds-option value="columbia-1">Columbia</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>

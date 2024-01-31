@@ -59,6 +59,7 @@ CustomOptions.args = {
     minDate: startOfYear(subYears(new Date(), 100)),
     maxDate: new Date(),
     showWeeks: true,
+    dateFormat: 'd/m/y',
   },
 }
 

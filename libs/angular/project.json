@@ -9,6 +9,7 @@
     "build": {
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/libs/angular"],
+      "inputs": ["core"],
       "options": {
         "project": "libs/angular/ng-package.json",
         "tsConfig": "libs/angular/tsconfig.lib.prod.json",
@@ -44,6 +45,7 @@
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
+      "inputs": ["core"],
       "options": {
         "port": 4100,
         "host": "0.0.0.0",
@@ -58,14 +60,15 @@
       },
       "dependsOn": [
         {
-          "projects": "dependencies",
-          "target": "build-with-types-and-scoping"
+          "target": "build-with-types-and-scoping",
+          "dependencies": true
         }
       ]
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
+      "inputs": ["core"],
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
@@ -79,47 +82,14 @@
       },
       "dependsOn": [
         {
-          "projects": "dependencies",
-          "target": "build-with-types-and-scoping"
+          "target": "build-with-types-and-scoping",
+          "dependencies": true
         }
       ]
-    },
-    "update-deps-and-release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run angular:update-dependencies && nx run angular:version-and-release"
-          }
-        ]
-      }
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
-    },
-    "version-and-release": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "commitMessageFormat": "chore({projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-{projectName}@",
-        "push": true,
-        "postTargets": ["angular:publish", "angular:github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "${tag}",
-        "notes": "${notes}"
-      }
-    },
-    "publish": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public",
-        "buildTarget": "production"
-      }
     }
   }
 }
