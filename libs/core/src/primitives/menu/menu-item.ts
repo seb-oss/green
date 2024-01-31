@@ -1,4 +1,7 @@
-import { LitElement } from 'lit'
+import { HTMLTemplateResult, LitElement } from 'lit'
+import { state } from 'lit/decorators.js'
+
+import { GdsElement } from '../../gds-element'
 import { Focusable } from '../../mixins/focusable'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
@@ -11,7 +14,11 @@ import {
  * @internal
  */
 @gdsCustomElement('gds-menu-item')
-export class GdsMenuItem extends Focusable(LitElement) {
+export class GdsMenuItem extends Focusable(GdsElement) {
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'menuitem')
@@ -38,6 +45,6 @@ export class GdsMenuItem extends Focusable(LitElement) {
   }
 
   render() {
-    return html`<slot></slot>`
+    return html`${this._tStyles}<slot></slot>`
   }
 }

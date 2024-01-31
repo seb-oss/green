@@ -5,7 +5,7 @@
     "@angular/common": ">=15.2.9",
     "@angular/core": ">=15.2.9",
     "@angular/platform-browser": ">=15.2.9",
-    "@sebgroup/chlorophyll": "^2.1.0",
+    "@sebgroup/chlorophyll": "^3.0.4",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
@@ -19,7 +19,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "directory": "../../dist/libs/angular-charts"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],

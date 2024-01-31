@@ -2,6 +2,42 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.4.5](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.4...@sebgroup/green-core@1.4.5) (2024-01-30)
+
+
+### Bug Fixes
+
+* **angular:** add export for Core Wrapper Module ([#1184](https://github.com/sebgroup/green/issues/1184)) ([5b23830](https://github.com/sebgroup/green/commit/5b23830f4c4db8119c1f4d606d9f016801500b70))
+
+
+
+## [1.4.4](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.3...@sebgroup/green-core@1.4.4) (2024-01-29)
+
+
+### Bug Fixes
+
+* **core/datepicker:** today highlight style & focus handling ([#1181](https://github.com/sebgroup/green/issues/1181)) ([6878fdf](https://github.com/sebgroup/green/commit/6878fdf8655613dc87f143c09d82760d74522889))
+
+
+
+## [1.4.3](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.2...@sebgroup/green-core@1.4.3) (2024-01-26)
+
+
+### Bug Fixes
+
+* **core/datepicker:** properly constrain length of keyboard input ([#1176](https://github.com/sebgroup/green/issues/1176)) ([f4f6750](https://github.com/sebgroup/green/commit/f4f6750441b017f5fe37e4f20061a4a29544f929))
+
+
+
+## [1.4.2](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.1...@sebgroup/green-core@1.4.2) (2024-01-25)
+
+
+### Bug Fixes
+
+* **core:** polyfill/fallback for iOS 15 ([#1173](https://github.com/sebgroup/green/issues/1173)) ([53247c5](https://github.com/sebgroup/green/commit/53247c5068ffdb91be188966a4073dce1bc8f58a))
+
+
+
 ## [1.4.1](https://github.com/sebgroup/green/compare/@sebgroup/green-core@1.4.0...@sebgroup/green-core@1.4.1) (2024-01-22)
 
 

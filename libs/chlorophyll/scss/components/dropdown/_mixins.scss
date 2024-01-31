@@ -1,5 +1,5 @@
 @use '../../tokens/shame' as tokens;
-@use '../button' as button;
+@use '../button/mixins' as button;
 @use '../../common';
 @use 'sass:map';
 

@@ -2,6 +2,24 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.3](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@3.0.2...@sebgroup/green-angular@3.0.3) (2024-01-30)
+
+
+### Bug Fixes
+
+* **angular:** add export for Core Wrapper Module ([#1184](https://github.com/sebgroup/green/issues/1184)) ([5b23830](https://github.com/sebgroup/green/commit/5b23830f4c4db8119c1f4d606d9f016801500b70))
+
+
+
+## [3.0.2](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@3.0.1...@sebgroup/green-angular@3.0.2) (2024-01-26)
+
+
+### Bug Fixes
+
+* **angular/modals:** apply updated class names ([#1179](https://github.com/sebgroup/green/issues/1179)) ([9985503](https://github.com/sebgroup/green/commit/9985503fcac7e09bb6ca5d58810a5c09ea15023a))
+
+
+
 ## [3.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular@3.0.0...@sebgroup/green-angular@3.0.1) (2024-01-22)
 
 

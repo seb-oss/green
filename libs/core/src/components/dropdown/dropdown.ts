@@ -1,4 +1,4 @@
-import { property, query, queryAsync } from 'lit/decorators.js'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -26,6 +26,7 @@ import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { CSSResult, HTMLTemplateResult } from 'lit'
 
 /**
  * @element gds-dropdown
@@ -122,7 +123,10 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean })
   syncPopoverWidth = false
 
-  // Private members
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   #optionElements: HTMLCollectionOf<GdsOption>
 
   @query('#trigger')
@@ -204,6 +208,7 @@ export class GdsDropdown<ValueT = any>
 
   render() {
     return html`
+      ${this._tStyles}
       ${when(
         this.label,
         () => html`<label for="trigger">${this.label}</label>`

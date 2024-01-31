@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { HTMLTemplateResult, LitElement, html, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
@@ -11,6 +11,7 @@ import {
   Placement,
 } from '@floating-ui/dom'
 
+import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
@@ -34,7 +35,7 @@ import { reference } from '@popperjs/core'
  * @fires gds-ui-state - Fired when the popover is opened or closed
  */
 @gdsCustomElement('gds-popover')
-export class GdsPopover extends LitElement {
+export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)
 
   /**
@@ -96,6 +97,10 @@ export class GdsPopover extends LitElement {
     this.#registerAutoPositioning()
   }
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
   // A reference to the dialog element used to make the popover modal
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
 
@@ -140,22 +145,23 @@ export class GdsPopover extends LitElement {
   }
 
   render() {
-    return html`<dialog
-      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
-      ${ref(this.#dialogElementRef)}
-    >
-      <header>
-        <h2>${this.label}</h2>
-        <button
-          class="close"
-          @click=${this.#handleCloseButton}
-          aria-label="${msg('Close')}"
-        >
-          <i></i>
-        </button>
-      </header>
-      <slot></slot>
-    </dialog>`
+    return html`${this._tStyles}
+      <dialog
+        class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+        ${ref(this.#dialogElementRef)}
+      >
+        <header>
+          <h2>${this.label}</h2>
+          <button
+            class="close"
+            @click=${this.#handleCloseButton}
+            aria-label="${msg('Close')}"
+          >
+            <i></i>
+          </button>
+        </header>
+        <slot></slot>
+      </dialog>`
   }
 
   @watch('open')
