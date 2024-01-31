@@ -63,16 +63,16 @@ jobs:
 
       - name: Comment when changeset is found
         uses: mshick/add-pr-comment@v2
-        if: steps.generate-comment-text.outputs.result != ''
+        if: steps.generate-comment-text.outputs.result != '""'
         with:
           message: |
             ## Changeset status
             Based on the included changeset, the following releases will be published as a result of this PR:
-            \n
+
             ${{ steps.generate-comment-text.outputs.result }}
 
       - name: Comment when empty changeset is found
-        if: steps.generate-comment-text.outputs.result == ''
+        if: steps.generate-comment-text.outputs.result == '""'
         uses: mshick/add-pr-comment@v2
         with:
           message: |
