@@ -44,7 +44,7 @@ jobs:
         with:
           message: |
             ## Changeset status
-            No changeset found. You can add a changeset by running `yarn changeset`, and then commiting the resulting changeset file.
+            No changeset found. You can add a changeset by running `npx changeset`, and then commiting the resulting changeset file.
 
             If this PR should not cause a new release of any package, then an empty changeset should be added: \
             `npx changeset add --empty`.
