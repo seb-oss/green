@@ -61,7 +61,7 @@ jobs:
               const type = release.type;
               const oldVersion = release.oldVersion;
               const newVersion = release.newVersion;
-              return `- **${packageName}**: ${newVersion} &rarr; ${newVersion} (**${type}** bump)`;
+              return `- **${packageName}**: ${oldVersion} &rarr; ${newVersion} (**${type}** bump)`;
             }).join('\n');
 
       - name: Comment when changeset is found
