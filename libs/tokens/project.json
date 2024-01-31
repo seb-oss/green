@@ -47,31 +47,6 @@
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     },
-    "version-and-release": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "commitMessageFormat": "chore({projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-{projectName}@",
-        "push": true,
-        "preid": "beta",
-        "releaseAs": "prerelease",
-        "postTargets": ["tokens:publish", "tokens:github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "${tag}",
-        "notes": "${notes}"
-      }
-    },
-    "publish": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public",
-        "distFolderPath": "dist/libs/tokens"
-      }
-    },
     "copy-package-json": {
       "executor": "nx:run-commands",
       "options": {
