@@ -10,6 +10,9 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
       - name: Status check
         run: yarn changeset status --output changeset-status.json
 
