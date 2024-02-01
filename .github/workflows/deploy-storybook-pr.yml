@@ -55,11 +55,11 @@ jobs:
             return 'pr-' + Number(fs.readFileSync('./PR_NUMBER'));
 
       - name: Deploy built storybooks to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@4.5.0
         with:
           token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
-          folder: ./ # The folder the action should deploy.
+          folder: . # The folder the action should deploy.
           target-folder: ${{ steps.pr_number.outputs.result }} # The folder the action should deploy to.
 
       - name: Add Storybook link to pull request

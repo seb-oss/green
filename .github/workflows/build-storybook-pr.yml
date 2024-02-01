@@ -58,11 +58,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
-      - name: Get branch name
-        shell: bash
-        run: echo "branch=${GITHUB_REF}" >> "$GITHUB_OUTPUT"
-        id: branch
-
       - name: Build storybook
         run: yarn nx affected --target build-storybook --base=origin/main --parallel=false
 
