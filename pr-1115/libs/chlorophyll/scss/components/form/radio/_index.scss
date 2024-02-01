@@ -1,8 +1,0 @@
-@use 'mixins';
-@forward "tokens";
-
-@include mixins.add-radio;
-
-.gds-radio-group-wrapper {
-  @include mixins.add-radio-group-wrapper;
-}
