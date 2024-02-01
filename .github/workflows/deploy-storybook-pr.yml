@@ -40,8 +40,11 @@ jobs:
             });
             var fs = require('fs');
             fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+
       - run: unzip pr.zip
+
       - name: Get PR number
+        id: pr_number
         uses: actions/github-script@v3
         with:
           script: |
@@ -49,17 +52,16 @@ jobs:
             return 'pr-' + Number(fs.readFileSync('./PR_NUMBER'));
 
       - name: Deploy built storybooks to GitHub Pages
-        if: steps.check-updated-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
           folder: ./ # The folder the action should deploy.
-          target-folder: ${{ steps.get_pr_number.outputs.result }} # The folder the action should deploy to.
+          target-folder: ${{ steps.pr_number.outputs.result }} # The folder the action should deploy to.
 
       - name: Add Storybook link to pull request
         uses: actions/github-script@v5
-        if: github.event.action == 'opened' && steps.check-updated-storybooks.outputs.any == 'true'
+        if: github.event.action == 'opened'
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
@@ -69,7 +71,7 @@ jobs:
 
             // Create link list
             const links = '<ul>' + updatedStorybooks
-              .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.get_pr_number.outputs.result }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
+              .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.pr_number.outputs.result }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
 
             // Create comment body
             const body = `👋 Thanks for creating a pull request! 🚀 Checkout the ${updatedStorybooks.length > 1 ? 'storybooks' : 'storybook'} we've created for it: ${links}`;

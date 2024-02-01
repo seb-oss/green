@@ -43,6 +43,7 @@ jobs:
       - run: unzip pr.zip
 
       - name: Get PR number
+        id: pr_number
         uses: actions/github-script@v3
         with:
           script: |
@@ -53,5 +54,5 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           repo-token: ${{ steps.get_token.outputs.token }}
-          issue: ${{ steps.get_pr_number.outputs.result }}
+          issue: ${{ steps.pr_number.outputs.result }}
           message-path: ./COMMENT
