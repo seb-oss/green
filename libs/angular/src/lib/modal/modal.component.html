@@ -71,12 +71,12 @@
         <ng-content select="[nggModalFooter]"></ng-content>
       </footer>
     </ng-template>
+    <div
+      #backdrop
+      data-testid="modal-backdrop"
+      class="backdrop entered"
+      (click)="this.handleBackdropClick($event)"
+      [attr.aria-hidden]="true"
+    ></div>
   </div>
-  <div
-    #backdrop
-    data-testid="modal-backdrop"
-    class="backdrop entered"
-    (click)="this.handleBackdropClick($event)"
-    [attr.aria-hidden]="true"
-  ></div>
 </ng-container>

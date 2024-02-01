@@ -233,7 +233,7 @@ describe(NggModalComponent.name, () => {
       'modal-confirm-button'
     )
 
-    expect(modalConfirmButton.textContent).toEqual('FakeConfirm')
+    expect(modalConfirmButton.textContent?.trim()).toEqual('FakeConfirm')
   })
 
   it('should set dismiss', async () => {
@@ -251,7 +251,7 @@ describe(NggModalComponent.name, () => {
       'modal-dismiss-button'
     )
 
-    expect(modalDismissButton.textContent).toEqual('FakeDismiss')
+    expect(modalDismissButton.textContent?.trim()).toEqual('FakeDismiss')
   })
 
   it('should set size', async () => {

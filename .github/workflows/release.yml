@@ -12,6 +12,13 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+
       - name: Checkout Repo
         uses: actions/checkout@v4
 
@@ -41,5 +48,5 @@ jobs:
         with:
           publish: yarn changeset:publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
