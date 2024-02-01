@@ -91,41 +91,9 @@
         ]
       }
     },
-    "update-deps-and-release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run react:update-dependencies && nx run react:version-and-release"
-          }
-        ]
-      }
-    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
-    },
-    "version-and-release": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "commitMessageFormat": "chore({projectName}): release version ${version}",
-        "tagPrefix": "@sebgroup/green-{projectName}@",
-        "push": true,
-        "postTargets": ["react:publish", "react:github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "${tag}",
-        "notes": "${notes}"
-      }
-    },
-    "publish": {
-      "executor": "ngx-deploy-npm:deploy",
-      "options": {
-        "access": "public"
-      }
     }
   }
 }
