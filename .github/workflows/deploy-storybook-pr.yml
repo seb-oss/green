@@ -91,3 +91,4 @@ jobs:
           repo-token: ${{ steps.get_token.outputs.token }}
           issue: ${{ steps.pr_number.outputs.result }}
           message: ${{ fromJSON(steps.comment.outputs.result) }}
+          message-id: storybook-comment
