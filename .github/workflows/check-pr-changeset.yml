@@ -10,6 +10,13 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
@@ -42,6 +49,7 @@ jobs:
         if: failure()
         uses: mshick/add-pr-comment@v2
         with:
+          repo-token: ${{ steps.get_token.outputs.token }}
           message: |
             ## Changeset status
             No changeset found. You can add a changeset by running `npx changeset`, and then commiting the resulting changeset file.
@@ -68,6 +76,7 @@ jobs:
         uses: mshick/add-pr-comment@v2
         if: steps.generate-comment-text.outputs.result != '""'
         with:
+          repo-token: ${{ steps.get_token.outputs.token }}
           message: |
             ## Changeset status
             Based on the included changeset, the following releases will be published as a result of this PR:
@@ -81,6 +90,7 @@ jobs:
         if: steps.generate-comment-text.outputs.result == '""'
         uses: mshick/add-pr-comment@v2
         with:
+          repo-token: ${{ steps.get_token.outputs.token }}
           message: |
             ## Changeset status
             Empty changeset found. This PR will not cause any new releases.
