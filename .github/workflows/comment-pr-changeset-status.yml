@@ -53,5 +53,5 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           repo-token: ${{ steps.get_token.outputs.token }}
-          issue-number: ${{ steps.get_pr_number.outputs.result }}
+          issue: ${{ steps.get_pr_number.outputs.result }}
           message-path: ./COMMENT
