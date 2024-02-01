@@ -1,38 +1,21 @@
-name: Deploy affected storybook(s) [PR]
+name: Deploy PR Storybooks
+
 on:
-  pull_request:
+  workflow_run:
+    workflows: ['Build PR Storybooks']
+    types:
+      - completed
 
 jobs:
-  check:
+  upload:
     runs-on: ubuntu-latest
-    outputs:
-      status: ${{ steps.check-updated-storybooks.outputs.any }}
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
     steps:
-      - name: Check updated storybooks
-        uses: dorny/paths-filter@v2
-        id: check-updated-storybooks
-        with:
-          filters: |
-            any:
-              - libs/**
-            core:
-              - libs/core/**
-            chlorophyll:
-              - libs/chlorophyll/**
-            react:
-              - libs/react/**
-            react-charts:
-              - libs/react-charts/**
-            angular:
-              - libs/angular/**
-            angular-charts:
-              - libs/angular-charts/**
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-  build:
-    runs-on: ubuntu-latest
-    needs: check
-    if: needs.check.outputs.status == 'true'
-    steps:
       - name: Get token
         id: get_token
         uses: actions/create-github-app-token@v1
@@ -40,102 +23,58 @@ jobs:
           app-id: ${{ secrets.GREEN_BOT_APP_ID }}
           private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
 
-      - name: Check updated storybooks
-        uses: dorny/paths-filter@v2
-        id: check-updated-storybooks
+      - name: 'Download artifact'
+        uses: actions/github-script@v3.1.0
         with:
-          filters: |
-            any:
-              - libs/**
-            core:
-              - libs/core/**
-            chlorophyll:
-              - libs/chlorophyll/**
-            react:
-              - libs/react/**
-            react-charts:
-              - libs/react-charts/**
-            angular:
-              - libs/angular/**
-            angular-charts:
-              - libs/angular-charts/**
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: ${{github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "pr"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: matchArtifact.id,
+                archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
 
-      - uses: actions/checkout@v4
+      - run: unzip pr.zip
+
+      - name: Get PR number
+        id: pr_number
+        uses: actions/github-script@v3
         with:
-          fetch-depth: 0
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies
-        run: yarn install --prefer-offline --frozen-lockfile --silent
-
-      - name: Get branch name
-        shell: bash
-        run: echo "branch=${GITHUB_REF}" >> "$GITHUB_OUTPUT"
-        id: branch
-
-      - name: Determine deploy target
-        shell: bash
-        run: |
-          if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
-            echo "target=latest" >> "$GITHUB_OUTPUT"
-          elif [[ "${{ steps.branch.outputs.branch }}" == "alpha" ]]; then
-            echo "target=alpha" >> "$GITHUB_OUTPUT"
-          else
-          echo "target=pr-${{ github.event.number }}" >> "$GITHUB_OUTPUT"
-          fi
-        id: target
-
-      - name: Build storybook
-        run: yarn nx affected --target build-storybook --base=origin/main --parallel=false
+          script: |
+            var fs = require('fs');
+            return 'pr-' + Number(fs.readFileSync('./PR_NUMBER'));
 
       - name: Deploy built storybooks to GitHub Pages
-        if: steps.check-updated-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
-          folder: dist/storybook # The folder the action should deploy.
-          target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.
+          folder: ./ # The folder the action should deploy.
+          target-folder: ${{ steps.pr_number.outputs.result }} # The folder the action should deploy to.
 
       - name: Add Storybook link to pull request
         uses: actions/github-script@v5
-        if: github.event.action == 'opened' && steps.check-updated-storybooks.outputs.any == 'true'
+        if: github.event.action == 'opened'
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
-            // Storybooks
-            const storybooks = {
-                'core': ${{steps.check-updated-storybooks.outputs.core}},
-                'chlorophyll': ${{steps.check-updated-storybooks.outputs.chlorophyll}},
-                'react': ${{steps.check-updated-storybooks.outputs.react}},
-                'react-charts': ${{steps.check-updated-storybooks.outputs.react-charts}},
-                'angular': ${{steps.check-updated-storybooks.outputs.angular}},
-                'angular-charts': ${{steps.check-updated-storybooks.outputs.angular-charts}}
-              }
-
-            // Filter updated storybooks (based on file changes not affected storybooks)
-            const updatedStorybooks = Object.keys(storybooks)
-              .filter((storybook) => storybooks[storybook]);
+            // Get list of folders
+            const updatedStorybooks = require('fs').readdirSync('./')
+              .filter((file) => require('fs').statSync(file).isDirectory());
 
             // Create link list
             const links = '<ul>' + updatedStorybooks
-              .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.target.outputs.target }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
+              .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.pr_number.outputs.result }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
 
             // Create comment body
             const body = `👋 Thanks for creating a pull request! 🚀 Checkout the ${updatedStorybooks.length > 1 ? 'storybooks' : 'storybook'} we've created for it: ${links}`;
