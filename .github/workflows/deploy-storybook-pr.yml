@@ -33,6 +33,13 @@ jobs:
     needs: check
     if: needs.check.outputs.status == 'true'
     steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+
       - name: Check updated storybooks
         uses: dorny/paths-filter@v2
         id: check-updated-storybooks
@@ -101,7 +108,7 @@ jobs:
         if: steps.check-updated-storybooks.outputs.any == 'true'
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
           folder: dist/storybook # The folder the action should deploy.
           target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.
@@ -110,7 +117,7 @@ jobs:
         uses: actions/github-script@v5
         if: github.event.action == 'opened' && steps.check-updated-storybooks.outputs.any == 'true'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.get_token.outputs.token }}
           script: |
             // Storybooks
             const storybooks = {
