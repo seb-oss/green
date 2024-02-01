@@ -1,0 +1,45 @@
+{
+  "name": "@sebgroup/green-core",
+  "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
+  "version": "1.4.5",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/core/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "../../dist/libs/core/src"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.5.4",
+    "@lit/localize": "0.11.4",
+    "lit": "^2.8.0",
+    "reflect-metadata": "^0.1.13",
+    "date-fns": "^2.28.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./transitional-styles": {
+      "types": "./transitional-styles.d.ts",
+      "default": "./transitional-styles.js"
+    },
+    "./localization": {
+      "types": "./localization.d.ts",
+      "default": "./localization.js"
+    }
+  }
+}

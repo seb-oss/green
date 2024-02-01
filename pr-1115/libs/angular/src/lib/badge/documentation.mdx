@@ -1,0 +1,78 @@
+import { NggBadgeComponent } from './badge.component'
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# Badge
+
+This component calls attention to a status/tag/category and highlights it from the surrounding content.
+
+## Description
+
+To display a status in an intuitive and easy way
+
+## Usage
+
+Use this component to display a status in a more prominent way than just typing out the status. Use the respective colour for alert messages.
+
+## Importing module
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggBadgeModule } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggBadgeModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Badge Options
+
+|Input|Type|Description|
+|:--------|:----------|:------|
+|badgeType|`BadgeType`|The color of the component. Can be: `info`, `success`, `warning`, `danger`, `light`, and `dark`|
+|isCloseable|`boolean`|Flag whether the component can be dismissed|
+|closeText|`string`|Close text|
+|customColor|`string`|Custom text color|
+|customBackgroundColor|`string`|Custom background color|
+
+### Outputs
+
+|Event|Description|
+|:--------|:------|
+|handleClose|Event emitted when badge is dismissed.|
+
+## Examples
+
+To use this component, simply add an `ngg-badge` directive to an HTML `span` element:
+
+```html
+<span ngg-badge badgeType="success" class="mr-2">Badge</span>
+<span ngg-badge badgeType="info" class="mr-2">Badge</span>
+<span ngg-badge badgeType="warning" class="mr-2">Badge</span>
+<span ngg-badge badgeType="danger" class="mr-2">Badge</span>
+<span ngg-badge badgeType="light" class="mr-2">Badge</span>
+<span ngg-badge badgeType="dark" class="mr-2">Badge</span>
+```
+
+### Simple Badge
+
+<Canvas>
+  <Story id="components-badge--default" />
+</Canvas>
+
+### All badges
+
+<Canvas>
+  <Story id="components-badge--multiple" />
+</Canvas>
+
+### Custom Badge
+
+<Canvas>
+  <Story id="components-badge--custom" />
+</Canvas>

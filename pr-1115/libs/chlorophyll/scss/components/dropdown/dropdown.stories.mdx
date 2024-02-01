@@ -1,0 +1,212 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+
+export const Template = ({ validation, enabled, text }) => {
+  const attrValidation = validation ? `class="${validation}" ` : ``
+  const attrEnabled = enabled ? `` : `disabled`
+  return `
+    <div class="form-group" style="height: 182px; display: block;">
+      <button type="button" aria-haspopup="listbox" ${attrValidation} ${attrEnabled}>${text}</button>
+      <span class="form-info" id="dropdown3_info"></span>
+      <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+        <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+        <ul role="listbox" style="visibility:visible;opacity:1;margin-top:4px;" aria-activedescendant="option_2" tabIndex="-1">
+          <li id="option_1" role="option">Option 1</li>
+          <li id="option_2" role="option" aria-selected>${text}</li>
+          <li id="option_3" role="option">Option 3</li>
+        </ul>
+      </div>
+    </div>`
+}
+
+<Meta
+  title="Components/Dropdown"
+  parameters={{
+    componentIds: ['component-dropdown']
+  }}
+  argTypes={{
+    validation: {
+      control: 'select',
+      options: ['', 'is-valid', 'is-invalid'],
+    },
+    enabled: {
+      control: 'boolean'
+    },
+    text: { control: 'text' },
+  }} />
+
+<Story
+  name="Dropdown"
+  args={{
+    text: 'Option 2',
+    enabled: true
+  }}
+  parameters={{ docs: { disable: true }}}
+>
+  {Template.bind({})}
+</Story>
+
+<style>{
+  `
+    .popover {
+    visibility: visible;
+    opacity: 1;
+    margin-top:4px !important;
+  }
+`}
+</style>
+
+# Dropdown
+
+<div role="alert" class="info mb-7 mt-5">
+  <main>
+    <h3>Missing JavaScript!</h3>
+    <p>
+      Please note that the examples below just represent the html markup and they won't work
+      without JavaScript. Please checkout the framework implementations for "working" examples.
+    </p>
+  </main>
+  <footer>
+    <a target="_blank" href="./../angular/?path=/docs/components-dropdown">View Angular component</a>
+    <a target="_blank" href="./../react/?path=/docs/components-dropdown">View React component</a>
+  </footer>
+</div>
+
+### Dropdown select
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Pizza</button>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul role="listbox" aria-activedescendant="option_2" tabIndex="-1">
+        <li id="option_1" role="option">Tacos</li>
+        <li id="option_2" role="option" aria-selected>Pizza</li>
+        <li id="option_3" role="option">Sushi</li>
+      </ul>
+    </div>
+  </div>
+</Canvas>
+
+### Dropdown multiselect
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Pizza, Sushi</button>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <div class="sg-fieldset-container">
+        <fieldset aria-describedby="checkboxGroupHelp" role="listbox" aria-multiselectable="true">
+          <legend class="sr-only">Checkbox group</legend>
+          <label class="form-control" role="option">
+            <input required type="checkbox" />
+            <span>Tacos</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Pizza</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Sushi</span>
+            <i></i>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</Canvas>
+
+### Dropdown multiselect with search
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button" aria-haspopup="listbox">Tacos, Sushi</button>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <div class="sg-fieldset-container">
+        <fieldset aria-describedby="checkboxGroupHelp" role="listbox" aria-multiselectable="true">
+          <input type="text" placeholder="Search" class="rounded-0 rounded-top border-0 border-bottom border-info"/>
+          <legend class="sr-only">Checkbox group</legend>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Tacos</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" />
+            <span>Pizza</span>
+            <i></i>
+          </label>
+          <label class="form-control" role="option">
+            <input required type="checkbox" checked />
+            <span>Sushi</span>
+            <i></i>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</Canvas>
+
+### Dropdown autocomplete
+<Canvas>
+  <div style={{height: '300px'}}>
+    <input type="text"
+           role="combobox"
+           aria-expanded="true"
+           aria-autocomplete="list"
+           aria-controls="autocompleteListbox"
+           class="dropdown-menu"/>
+    <div class="popover popover-dropdown active" tabindex="-1" role="listbox">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul id="autocompleteListbox" role="listbox">
+        <li id="option_1" role="option">Tacos</li>
+        <li id="option_2" role="option">Pizza</li>
+        <li id="option_3" role="option">Sushi</li>
+      </ul>
+    </div>
+  </div>
+</Canvas>
+
+### Dropdown menu
+<Canvas>
+  <div style={{height: '300px'}}>
+    <button type="button"
+            role="button"
+            aria-expanded="true"
+            aria-haspopup="menu"
+            aria-controls="drownMenu"
+            class="dropdown-menu">Menu Icon</button>
+    <div class="popover popover-dropdown active" tabindex="-1" role="menu">
+      <button type="button" class="close m-4 m-sm-2 d-block d-sm-none">Close</button>
+      <ul id="dropdownMenu" role="menu" tabIndex="-1">
+        <li id="option_1" role="menuitem">Save</li>
+        <li id="option_2" role="menuitem">Load</li>
+        <li id="option_3" role="menuitem">Change</li>
+      </ul>
+    </div>
+  </div>
+</Canvas>
+
+### Dropdown with form group and validation
+<Canvas>
+  <div>
+    <div class="form-group">
+      <span class="label" id="dropdown1_label">Label</span>
+      <button type="button" aria-labelledby="dropdown1_label" aria-describedby="dropdown1_info"
+        aria-haspopup="listbox">Tacos</button>
+      <span class="form-info" id="dropdown1_info">Neutral</span>
+    </div>
+    <div class="form-group">
+      <span class="label" id="dropdown2_label">Label</span>
+      <button type="button" aria-labelledby="dropdown2_label" aria-describedby="dropdown2_info"
+        aria-haspopup="listbox" class="is-valid">Pizza</button>
+      <span class="form-info" id="dropdown2_info">Valid</span>
+    </div>
+    <div class="form-group">
+      <span class="label" id="dropdown3_label">Label</span>
+      <button type="button" aria-labelledby="dropdown3_label" aria-describedby="dropdown3_info"
+        aria-haspopup="listbox" class="is-invalid">Sushi</button>
+      <span class="form-info" id="dropdown3_info">Error</span>
+    </div>
+  </div>
+</Canvas>

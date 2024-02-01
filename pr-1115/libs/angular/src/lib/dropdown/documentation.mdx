@@ -1,0 +1,279 @@
+import { NggDropdownComponent } from './dropdown.component'
+import { Story } from '@storybook/addon-docs'
+
+# Dropdown
+
+## Importing module
+
+If you're only using the dropdown component, you just need to import the `NggDropdownModule`. The example below uses reactive forms hence it needs the `ReactiveFormsModule` too.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { AppComponent } from './app.component'
+import { ReactiveFormsModule } from '@angular/forms'
+import { NggDropdownModule } from '@sebgroup/green-angular'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, ReactiveFormsModule, NggDropdownModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Dropdown Select
+
+NggDropdownComponent is a form control for selecting a single or multiple values from a set of options.
+
+The dropdown supports 2-way binding to the value property without the need for Angular forms,
+and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
+
+<Story id="components-dropdown--select" />
+
+## Reactive forms
+
+We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
+if you're dealing with complex or dynamic forms.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown
+    formControlName="dropdownSelect"
+    [options]="options"
+  ></ngg-dropdown>
+</form>
+```
+
+## Template-driven forms
+
+Another approach is to use <a href="https://angular.io/guide/forms" target="_blank">Template-driven forms</a>.
+
+```html
+<form #dropdownForm="ngForm">
+  <ngg-dropdown [(ngModel)]="selected" [options]="options"></ngg-dropdown>
+</form>
+```
+
+## 2-way binding without forms
+
+If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
+
+```html
+<ngg-dropdown [(value)]="selected" [options]="options"></ngg-dropdown>
+```
+
+## Options
+
+The dropdown options should be provided as an array of objects with label and value. When a user chooses an option the value will be selected.
+
+```typescript
+const options = [
+  { label: 'Tacos', value: 'tacos' },
+  { label: 'Pizza', value: 'pizza' },
+  { label: 'Sushi', value: 'sushi', selected: true },
+]
+```
+
+Set an initial value by assigning the `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
+
+By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
+
+| Input (attribute) | Description                                                                           | Default     |
+| :---------------- | :------------------------------------------------------------------------------------ | :---------- |
+| useValue          | Which key to use as value.                                                            | `value`     |
+| display           | Which key to use as display value when selected and in options list.                  | `label`     |
+| syncPopoverWidth? | Force the popover to have the same widtgh as the trigger                              | `undefined` |
+
+The value does not have to be a primitive value, it can be assigned an object but it requires that a `compareWith` function is provided to uniquely identify each object. Eg:
+
+```typescript
+const options = [
+  {
+    label: 'Tacos',
+    value: {
+      id: 'tacos',
+      kitchen: 'mexican',
+    },
+  },
+  {
+    label: 'Pizza',
+    value: {
+      id: 'pizza',
+      kitchen: 'italian',
+    },
+  },
+  {
+    label: 'Sushi',
+    value: {
+      id: 'sushi',
+      kitchen: 'japanese',
+    },
+  },
+]
+
+const compareWith = (o1: any, o2: any): boolean => {
+  return o1.id === o2.id
+}
+```
+
+```html
+<ngg-dropdown
+  [(value)]="selected"
+  [options]="options"
+  [compareWith]="compareWith"
+></ngg-dropdown>
+```
+
+## Texts and placeholder
+
+Custom texts can be set using the texts input which takes an object with the following keys.
+
+| Text               | Description                                            | Default    |
+| :----------------- | :----------------------------------------------------- | :--------- |
+| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
+| placeholder        | Text to display when no option is selected.            | `Select`   |
+| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
+| close              | Text for close button displayed on mobiles.            | `Close`    |
+| optionsDescription | Text to describe options.                              | `Options`  |
+
+## Multi select
+
+Just add `multiSelect` to add support for multi select.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown
+    formControlName="dropdownSelect"
+    [options]="options"
+    multiSelect
+  ></ngg-dropdown>
+</form>
+```
+
+<Story id="components-dropdown--multi-select" />
+
+## Searchable
+
+For search functionality add `searchable`. By default search will filter on 'display' provided to dropdown.
+
+```html
+<form [formGroup]="dropdownForm">
+  <ngg-dropdown
+    searchable
+    formControlName="dropdownSelect"
+    [options]="options"
+  ></ngg-dropdown>
+</form>
+```
+
+<Story id="components-dropdown--searchable" />
+
+## Custom option template
+
+Use an ng-template with the nggDropdownOption directive to provide the dropdown list with an alternative template for the list.
+
+```html
+<ngg-dropdown searchFilter="searchFilter" ...>
+  <ng-template nggDropdownOption let-option="option" let-index="index">
+    <div>
+      <div>{{ index }}. {{ option.name }}</div>
+      <div style="font-size: 0.8em">{{ option.kitchen }}</div>
+    </div>
+  </ng-template>
+</ngg-dropdown>
+```
+
+<Story id="components-dropdown--custom-option" />
+
+To be able to search in custom properties, you should provide an a search filter function.
+
+```typescript
+const searchFilter: (search, value) => ['kitchen', 'id'].some((key) => value[key].toLowerCase().includes(search.toLowerCase())),
+```
+
+## Example usage in reactive form
+
+Below is an example of how the component can be used with reactive forms and validations.
+
+<Story id="components-dropdown--form" />
+
+### Markup
+
+```html
+<form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
+  <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
+    <ngg-dropdown
+      label="Country"
+      [options]="(options$ | async)!"
+      formControlName="country"
+      [texts]="texts"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="dropdown.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+    Save
+  </button>
+</form>
+```
+
+## Example usage in reactive form with reset functionality
+
+Below is an example of reset functionality for dropdown
+
+<Story id="components-dropdown--form-with-reset" />
+
+### Markup
+
+```html
+<form
+  [formGroup]="validationFormAdvance"
+  #ngForm="ngForm"
+  (submit)="save(validationFormAdvance.value)"
+>
+  <div
+    class="form-group"
+    *ngIf="validationFormAdvance.get('country') as dropdown"
+  >
+    <ngg-dropdown
+      label="Country"
+      [options]="options$ | async"
+      formControlName="country"
+      [valid]="dropdown.valid && ngForm.submitted"
+      [invalid]="dropdown.invalid && ngForm.submitted"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="ngForm['submitted']">
+        <!-- Text when form control contains one or more errors -->
+        <ng-container *ngIf="dropdown.errors as errors">
+          <!-- Text for each error (only one will be displayed at a time) -->
+          <ng-container *ngIf="errors['required']">Select country</ng-container>
+        </ng-container>
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button
+    type="submit"
+    [disabled]="ngForm?.submitted && validationFormAdvance.invalid"
+  >
+    Save
+  </button>
+  <button (click)="validationFormAdvance.reset()">Reset</button>
+</form>
+```

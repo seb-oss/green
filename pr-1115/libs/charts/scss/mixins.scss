@@ -1,0 +1,625 @@
+@use '../../chlorophyll/scss/tokens/shame' as tokens;
+@use '../../chlorophyll/scss/common/spacing' as common;
+@use '../../chlorophyll/scss/common/breakpoints' as breakpoints;
+@use '../../chlorophyll/scss/components/list';
+$font-family: tokens.$font-family-sans-serif;
+$axis-color: #8c8c8c;
+
+$axis-text-color: tokens.$text-primary-color;
+$axis-text-size: tokens.$base-font-size;
+$axis-text-weight: tokens.$font-weight-normal;
+
+$y-axis-text-color: $axis-text-color;
+
+$y-axis-color: transparent;
+$y-axis-thickness: 0;
+$y-axis-tick-color: $y-axis-color;
+$y-axis-tick-thickness: $y-axis-thickness;
+
+$x-axis-text-color: $axis-text-color;
+
+$x-axis-color: tokens.$border-secondary-color;
+$x-axis-thickness: 1px;
+$x-axis-tick-color: $x-axis-color;
+$x-axis-tick-thickness: $x-axis-thickness;
+
+$grid-focus-line-color: tokens.get(tokens.$blue, 2);
+$grid-base-line-color: tokens.$border-secondary-color;
+
+$min-height: 3.5rem;
+
+@mixin add-color-palettes() {
+  /*-- Default color pattern --*/
+  .bb-color-pattern {
+    background-image: url('#45B400;#0092E1;#FFB400;#4F2C99;#8AAEC7;#898EFE;#FFAC35;#70B0FF;');
+
+    &.blue {
+      background-image: url('#0000ff;0000cc;#000099;#EF65A2;#A377FE;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
+    }
+
+    &.green {
+      background-image: url('#65CFC2;#D0A45F;#64A4F5;#EF65A2;#A377FE;#8AAEC7;#FF7E5A;#898EFE;#FFAC35;#70B0FF;');
+    }
+  }
+}
+@mixin _chart-series-list-item() {
+  @include common.margin-end(3);
+  align-items: center;
+  display: flex;
+
+  &::before {
+    background: var(--color);
+    border-radius: 50%;
+    content: '';
+    height: 0.75rem;
+    margin-right: 0.5rem;
+    width: 0.75rem;
+    flex-shrink: 0;
+  }
+}
+@mixin add-chart-styles() {
+  // layout using grid
+  .chart {
+    display: grid;
+
+    // stack by default in a one column layout
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      'legend-right'
+      'legend-top'
+      'chart'
+      'axis';
+    justify-items: center;
+
+    // use a two column layout on medium sized screens and up
+    @include breakpoints.media-breakpoint-up('md') {
+      justify-items: start;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'legend-top legend-top'
+        'chart legend-right'
+        'axis .';
+    }
+
+    // chart
+    > .bb {
+      grid-area: chart;
+      place-self: stretch;
+    }
+
+    // axis
+    > .bb + div {
+      grid-area: axis;
+      place-self: stretch;
+    }
+
+    .legend-container {
+      grid-area: legend-right;
+      ul.legend {
+        @include common.margin-bottom(4);
+      }
+      &.top {
+        justify-self: center;
+        grid-area: legend-top;
+        ul.legend {
+          @include common.margin-bottom(4);
+        }
+      }
+      @include breakpoints.media-breakpoint-up('md') {
+        align-self: center;
+      }
+      // align list items vertically on medium screens and up if not placement equals top
+      &:not(.top) > ul.legend {
+        @include breakpoints.media-breakpoint-up('md') {
+          flex-direction: column;
+          @include common.margin-bottom(0);
+        }
+      }
+    }
+  }
+
+  /* Html x-axis */
+  .chart .bb + div ul.x-axis {
+    flex-direction: row;
+    padding-left: var(--chart-space-left);
+    padding-right: var(--chart-space-right);
+    width: 100%;
+
+    li {
+      flex: 1 1;
+      padding: 0 0.5rem;
+      text-align: center;
+      word-break: break-word;
+    }
+  }
+
+  /*-- Chart --*/
+  .chart {
+    position: relative;
+  }
+
+  // use height of chart parent for chart and svg
+  .chart.fit-height {
+    height: 100%;
+    grid-template-rows: auto auto minmax(#{$min-height}, 1fr) auto;
+
+    @include breakpoints.media-breakpoint-up('md') {
+      grid-template-rows: auto minmax(#{$min-height}, 1fr) auto;
+    }
+    .bb {
+      svg {
+        position: absolute;
+        height: 100%;
+      }
+    }
+  }
+
+  .bb {
+    svg {
+      font-family: $font-family;
+      font-size: 12px;
+      line-height: 1;
+      width: 100%;
+    }
+
+    path,
+    line {
+      fill: none;
+      //stroke: $axis-color;
+    }
+
+    text,
+    .bb-button {
+      user-select: none;
+      fill: #555;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+  }
+
+  .bb-legend-item-title,
+  .bb-xgrid-focus,
+  .bb-ygrid-focus,
+  .bb-ygrid,
+  .bb-event-rect,
+  .bb-bars path {
+    shape-rendering: crispEdges;
+  }
+
+  /*-- Axis --*/
+  .bb-axis {
+    shape-rendering: crispEdges;
+  }
+
+  .bb-axis-y,
+  .bb-axis-y2 {
+    text {
+      fill: $y-axis-text-color;
+      font-size: $axis-text-size;
+      font-weight: $axis-text-weight;
+    }
+
+    path {
+      stroke: $y-axis-color;
+      stroke-width: $y-axis-thickness;
+    }
+
+    .tick line {
+      stroke: $y-axis-tick-color;
+      stroke-width: $y-axis-tick-thickness;
+    }
+  }
+
+  .bb-axis-x {
+    text {
+      fill: $x-axis-text-color;
+      font-size: $axis-text-size;
+      font-weight: $axis-text-weight;
+    }
+
+    path {
+      stroke: $x-axis-color;
+      stroke-width: $x-axis-thickness;
+    }
+
+    .tick line {
+      stroke: $x-axis-tick-color;
+      stroke-width: $x-axis-tick-thickness;
+    }
+  }
+
+  /* stylelint-disable */
+
+  .bb-event-rects {
+    fill-opacity: 1 !important;
+
+    .bb-event-rect {
+      fill: transparent;
+    }
+
+    .bb-event-rect._active_ {
+      fill: rgba(39, 201, 3, 0.05);
+    }
+  }
+
+  .tick._active_ text {
+    fill: #00c83c !important;
+  }
+
+  /*-- Grid --*/
+  .bb-grid {
+    line {
+      stroke: #f1f1f1;
+    }
+    .base-line line {
+      stroke: $grid-base-line-color;
+    }
+  }
+
+  .bb-xgrid-focus line,
+  .bb-ygrid-focus line {
+    stroke: $grid-focus-line-color;
+    stroke-dasharray: 3px;
+  }
+
+  /*-- Text on Chart --*/
+  .bb-text {
+    &.bb-empty {
+      fill: #767676;
+    }
+  }
+
+  /*-- Line --*/
+  .bb-line {
+    stroke-width: 1px;
+  }
+
+  /*-- Point --*/
+  .bb-circle {
+    &._expanded_ {
+      stroke-width: 2px;
+    }
+  }
+
+  rect.bb-circle,
+  use.bb-circle {
+    &._expanded_ {
+      stroke-width: 2px;
+    }
+  }
+
+  .bb-selected-circle {
+    fill: white;
+    stroke-width: 2px;
+  }
+
+  /*-- Bar --*/
+  .bb-bar {
+    stroke-width: 0;
+
+    &._expanded_ {
+      fill-opacity: 0.75;
+    }
+  }
+
+  /*-- Candlestick --*/
+  .bb-candlestick {
+    stroke-width: 1px;
+
+    &._expanded_ {
+      fill-opacity: 0.75;
+    }
+  }
+
+  /*-- Focus --*/
+  .bb-target,
+  .bb-circles {
+    &.bb-focused {
+      opacity: 1;
+
+      path {
+        &.bb-line,
+        &.bb-step {
+          stroke-width: 2px;
+        }
+      }
+    }
+
+    &.bb-defocused {
+      opacity: 0.3 !important;
+
+      .text-overlapping {
+        opacity: 0.05 !important;
+      }
+    }
+  }
+
+  /*-- Region --*/
+  .bb-region {
+    fill: steelblue;
+    fill-opacity: 0.1;
+
+    &.selected rect {
+      fill: rgb(39, 201, 3);
+    }
+  }
+
+  /*-- Zoom region --*/
+  .bb-zoom-brush {
+    fill-opacity: 0.1;
+  }
+
+  /*-- Brush --*/
+  .bb-brush {
+    .extent {
+      fill-opacity: 0.1;
+    }
+  }
+
+  /*-- Select - Drag --*/
+  /*-- Legend --*/
+  .bb-legend-item {
+    user-select: none;
+  }
+
+  .bb-legend-item-hidden {
+    opacity: 0.15;
+  }
+
+  .bb-legend-background {
+    fill: white;
+    opacity: 0.75;
+    stroke: lightgray;
+    stroke-width: 1px;
+  }
+
+  .bb-legend-item line {
+    stroke-dasharray: 1px;
+  }
+
+  /*-- Title --*/
+  .bb-title {
+    font-size: 14px;
+  }
+
+  /*-- Tooltip --*/
+  .bb-tooltip-container {
+    font-family: $font-family;
+    user-select: none;
+    z-index: 10;
+  }
+
+  .bb-tooltip-list {
+    background: tokens.$black;
+    color: tokens.$white;
+    padding: 0.5rem;
+
+    dt {
+      font-weight: tokens.$font-weight-bold;
+      margin-bottom: 0.25rem;
+    }
+
+    dd {
+      @include _chart-series-list-item();
+    }
+  }
+
+  .bb-tooltip {
+    user-select: none;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-collapse: separate;
+    border-radius: 2px;
+    border-spacing: 0;
+    box-shadow: 0.5px 0.5px 1px #999;
+    empty-cells: show;
+    font-size: 12px;
+    text-align: left;
+
+    th {
+      background-color: #efefef;
+      border-bottom: dotted 1px #000;
+      color: #000;
+      font-size: 12px;
+      padding: 4px 8px;
+      text-align: center;
+    }
+
+    tr {
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      background-color: #fff;
+      border-bottom: solid 1px #eee;
+      padding: 3px 6px;
+
+      &:first-child {
+        border-right: solid 1px #eee;
+        padding-left: 5px;
+      }
+
+      &:last-child {
+        padding-right: 5px;
+      }
+
+      > span,
+      > svg {
+        display: inline-block;
+        height: 12px;
+        margin-right: 6px;
+        vertical-align: middle;
+        width: 5px;
+      }
+
+      &.value {
+        border-left: 1px solid transparent;
+        text-align: right;
+      }
+    }
+
+    .bb-tooltip-title {
+      color: #aaa;
+      display: inline-block;
+      line-height: 20px;
+    }
+
+    .bb-tooltip-detail {
+      table {
+        border-collapse: collapse;
+        border-spacing: 1px;
+        font-size: 12px;
+      }
+
+      .bb-tooltip-name,
+      .bb-tooltip-value {
+        color: #444;
+        font-weight: normal;
+        line-height: 13px;
+        padding: 4px 0 3px;
+        text-align: left;
+      }
+
+      .bb-tooltip-value {
+        font-weight: 800;
+        padding-left: 5px;
+      }
+    }
+  }
+
+  ul.legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      @include _chart-series-list-item();
+    }
+  }
+
+  /*-- Area --*/
+  .bb-area {
+    opacity: 0.2;
+    stroke-width: 0;
+  }
+
+  /*-- Arc --*/
+  .bb-chart-arcs-title {
+    dominant-baseline: middle;
+    font-size: 1.3em;
+  }
+
+  .bb-chart-arcs-gauge-title {
+    dominant-baseline: middle;
+    font-size: 2.7em;
+  }
+
+  .bb-chart-arcs {
+    .bb-chart-arcs-background {
+      fill: #e0e0e0;
+      stroke: #fff;
+    }
+
+    .bb-chart-arcs-gauge-unit {
+      fill: #000;
+      font-size: 16px;
+    }
+
+    .bb-chart-arcs-gauge-min,
+    .bb-chart-arcs-gauge-max {
+      fill: #777;
+    }
+
+    .bb-chart-arcs-title {
+      fill: $axis-color;
+      font-size: 16px !important;
+      font-style: italic;
+    }
+
+    path.empty {
+      fill: #eaeaea;
+      stroke-width: 0;
+    }
+  }
+
+  .bb-chart-arc {
+    .bb-gauge-value {
+      fill: $axis-color;
+      font-style: italic;
+    }
+
+    path {
+      stroke: transparent;
+    }
+
+    rect {
+      stroke: white;
+      stroke-width: 1;
+    }
+
+    text {
+      fill: #fff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  /*-- Radar --*/
+  .bb-chart-radars {
+    .bb-levels {
+      polygon {
+        fill: none;
+        stroke: $axis-color;
+        stroke-width: 0.5px;
+      }
+
+      text {
+        fill: $axis-color;
+      }
+    }
+
+    .bb-axis {
+      line {
+        stroke: $axis-color;
+        stroke-width: 0.5px;
+      }
+
+      text {
+        cursor: default;
+        font-size: 1.15em;
+        font-weight: bold;
+      }
+    }
+
+    .bb-shapes {
+      polygon {
+        fill-opacity: 0.2;
+        stroke-width: 1px;
+      }
+    }
+  }
+
+  /*-- Button --*/
+  .bb-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    .bb-zoom-reset {
+      background-color: #fff;
+      border: solid 1px #ccc;
+      border-radius: 5px;
+      box-shadow: 1px 1px 2px #ccc;
+      cursor: pointer;
+      opacity: 0.8;
+      padding: 5px;
+    }
+  }
+  /* stylelint-enable */
+}

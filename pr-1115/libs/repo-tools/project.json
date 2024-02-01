@@ -1,0 +1,68 @@
+{
+  "name": "repo-tools",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/repo-tools/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/repo-tools",
+        "main": "libs/repo-tools/src/index.ts",
+        "tsConfig": "libs/repo-tools/tsconfig.lib.json",
+        "assets": [
+          "libs/repo-tools/*.md",
+          {
+            "input": "./libs/repo-tools/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/repo-tools/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/repo-tools",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/repo-tools",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ],
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/repo-tools/**/*.ts",
+          "libs/repo-tools/generators.json",
+          "libs/repo-tools/executors.json",
+          "libs/repo-tools/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/repo-tools/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

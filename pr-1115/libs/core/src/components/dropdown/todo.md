@@ -1,0 +1,3 @@
+- Would be nice to support selectmenu in the future
+- https://open-ui.org/prototypes/selectmenu/
+- https://codepen.io/astrit/pen/qBJVOPd

@@ -1,0 +1,32 @@
+{
+  "name": "@sebgroup/green-angular-charts",
+  "version": "2.0.1",
+  "peerDependencies": {
+    "@angular/common": ">=15.2.9",
+    "@angular/core": ">=15.2.9",
+    "@angular/platform-browser": ">=15.2.9",
+    "@sebgroup/chlorophyll": "^3.0.4",
+    "rxjs": "^6.5.3 || ^7.4.0"
+  },
+  "dependencies": {
+    "@sebgroup/green-charts": "^2.0.1",
+    "tslib": "^2.3.1"
+  },
+  "description": "Angular charts wrapper built on top of @sebgroup/green-charts.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "../../dist/libs/angular-charts"
+  },
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/labels/angular"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/angular-charts/"
+}

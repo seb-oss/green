@@ -1,0 +1,169 @@
+@use 'sass:map';
+@use '../../tokens';
+@use '../../common';
+
+$selector: 'table.table';
+$_header-background: var(--sg-table-header-background);
+$_header-color: var(--sg-table-header-color);
+$_cell-padding-x: var(--sg-table-cell-padding-x);
+$_cell-padding-y: var(--sg-table-cell-padding-y);
+$_border-width: var(--sg-table-border-width);
+$_border-color: var(--sg-table-border-color);
+$_sort-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath transform='translate(0 240)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath transform='translate(0 -100)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+$_sort-icon-color: var(--sg-table-sort-icon-color);
+$_sort-icon-color-active: var(--sg-table-sort-icon-color-active);
+$_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
+
+$icon-size: 12px;
+$gray-800: map.get(map.get(tokens.$grey, light), 800);
+
+@mixin add-table() {
+  border-collapse: collapse;
+  thead {
+    tr {
+      th {
+        border-top: $_border-width solid $_border-color;
+        background: $_header-background;
+        color: $_header-color;
+        padding: $_cell-padding-y $_cell-padding-x;
+        vertical-align: top;
+        text-align: left;
+        font-weight: 500;
+        .sg-table-sort {
+          color: inherit;
+          width: 100%;
+          text-align: left;
+          display: flex;
+          justify-content: space-between;
+
+          @include common.add-focus();
+          border-radius: 0.125rem;
+          --gds-sys-color-focus-outline: $_header-color;
+        }
+        &[aria-sort],
+        &.sg-sortable {
+          .sg-table-sort::after {
+            content: '';
+            background: $_sort-icon-color;
+            width: 1.25rem;
+            height: 1rem;
+            mask-image: $_sort_icon;
+            mask-repeat: no-repeat;
+            mask-position: right;
+            display: block;
+          }
+        }
+        &[aria-sort='ascending'] {
+          .sg-table-sort::after {
+            background: linear-gradient(
+              $_sort-icon-color-active 50%,
+              $_sort-icon-color 50%
+            );
+          }
+        }
+        &[aria-sort='descending'] {
+          .sg-table-sort::after {
+            background: linear-gradient(
+              $_sort-icon-color 50%,
+              $_sort-icon-color-active 50%
+            );
+          }
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td,
+      th {
+        border-top: $_border-width solid $_border-color;
+        padding: $_cell-padding-y $_cell-padding-x;
+        vertical-align: top;
+      }
+      &.collapsible {
+        ~ .sub-row {
+          display: none;
+        }
+        &.expanded {
+          ~ .sub-row.show {
+            display: table-row;
+          }
+        }
+      }
+      td {
+        &.collapse-control,
+        &.select-control {
+          width: 15px;
+        }
+        &.collapse-control {
+          > .collapse-btn {
+            min-height: unset;
+            padding: 0;
+            background: transparent;
+            > .icon-holder {
+              cursor: pointer;
+              width: $icon-size;
+              svg {
+                width: $icon-size;
+                fill: $gray-800;
+                &[name='angle-right'] {
+                  width: 9px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  border-bottom: $_border-width solid $_border-color;
+  @include add-mobile-version;
+}
+
+@mixin add-mobile-version() {
+  @media (max-width: $_breakpoint-mobile-layout) {
+    &.table-mobile {
+      width: 100%;
+      table-layout: fixed;
+      border-bottom: none;
+      thead {
+        position: sticky;
+        top: 0;
+        display: block;
+        @media (hover: none) and (pointer: coarse) {
+          display: table-header-group;
+        }
+        background: $_header-background;
+        tr {
+          display: flex;
+          overflow: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          th {
+            flex: auto;
+            text-align: left !important;
+            white-space: nowrap;
+          }
+        }
+      }
+      tbody {
+        tr {
+          display: flex;
+          flex-direction: column;
+          border-bottom: $_border-width solid $_border-color;
+          td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: none !important;
+            &::before {
+              content: attr(data-label);
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

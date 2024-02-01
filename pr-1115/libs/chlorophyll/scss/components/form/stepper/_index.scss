@@ -1,0 +1,14 @@
+@use '../../../common';
+@use 'mixins';
+
+.stepper-wrapper {
+  width: fit-content;
+
+  .group-stepper {
+    margin-bottom: .5rem;
+  }
+}
+
+.group-stepper {
+  @include mixins.add-stepper;
+}

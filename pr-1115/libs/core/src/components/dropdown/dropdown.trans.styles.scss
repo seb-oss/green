@@ -1,0 +1,77 @@
+@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
+@use '../../../../chlorophyll/scss/tokens' as tokens;
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @include input.add-text-input();
+
+  :host {
+    display: block;
+  }
+
+  :host(:invalid) button + .form-info {
+    @include validation.add-feedback-element();
+    @include validation.add-feedback(tokens.$intent-danger-background);
+  }
+
+  ::slotted([slot='trigger']) {
+    overflow: hidden;
+  }
+
+  slot[name='trigger'] > span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+  }
+
+  .form-info {
+    color: var(--text-primary-color);
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  input[type='text'] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 1rem;
+    line-height: 1;
+    margin: -1px;
+    min-height: auto;
+    padding: 0.75rem;
+
+    &:focus {
+      outline-offset: -0.25rem;
+    }
+  }
+
+  button {
+    @include button.reset();
+    @include button.base();
+    @include button.secondary();
+    @include dropdown.dropdown-trigger();
+
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1.125;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    font-weight: 500;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+}

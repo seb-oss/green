@@ -1,0 +1,18 @@
+{
+  "presets": [
+    [
+      "@nx/react/babel",
+      {
+        "runtime": "automatic"
+      }
+    ],
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "3.22"
+      }
+    ]
+  ],
+  "plugins": []
+}

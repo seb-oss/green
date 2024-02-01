@@ -1,0 +1,55 @@
+import { Datepicker } from './datepicker'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+
+export const Template = ({ align, ...props }) => <Datepicker {...props} />
+
+<Meta title="Components/Datepicker" component={Datepicker} />
+
+# Datepicker
+
+Datepicker Component
+
+<Story
+  name="Datepicker"
+  args={{
+    onChange: (newDate) => console.log('New date selected: ', newDate),
+    selectedDate: new Date(),
+  }}
+  parameters={{
+    componentIds: ['component-datepicker'],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+### Available props
+
+| Property       | Description                                                         | Default |
+| :------------- | :------------------------------------------------------------------ | :------ |
+| label          | The label for the Datepicker.                                       | "Date"  |
+| showWeeks      | A boolean indicating whether week numbers should be shown.          |         |
+| minDate        | The minimum selectable date as a `Date` object.                     |         |
+| maxDate        | The maximum selectable date as a `Date` object.                     |         |
+| onChange       | A function that is called when the selected date changes.           |         |
+| dateFormat     | Date format for the input field. Use letters `d`, `m`, `y` to specify the order of day, month, year, separated by a delimiter. For example `y-m-d` or `d/m/y`         | y-m-d |
+
+
+Props are forwarded to the underlying web component, so anything supported by `gds-datepicker` can be used. See https://sebgroup.github.io/green/latest/core/?path=/docs/components-datepicker--page for more details.
+
+
+### Localization
+
+Localization is handled by Lit Localize in the underlying web component. You can set the locale like this:
+
+```ts
+// Import the `gdsInitLocalization` function from Green Core
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+
+// Then initialize Lit Localize by calling our wrapper function. This returns a `setLocale` function which you can use to set the locale.
+const { setLocale } = gdsInitLocalization()
+
+// Later in your code you can set the locale like this:
+setLocale('sv')
+```
+
+Currently, only translations for Swedish and English is built in.

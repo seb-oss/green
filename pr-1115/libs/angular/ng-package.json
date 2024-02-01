@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/libs/angular",
+  "allowedNonPeerDependencies": [
+    "@sebgroup/chlorophyll",
+    "@sebgroup/extract",
+    "@sebgroup/green-core"
+  ],
+  "lib": {
+    "entryFile": "src/index.ts"
+  }
+}

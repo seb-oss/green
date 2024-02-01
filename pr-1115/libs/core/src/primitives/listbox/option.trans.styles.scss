@@ -1,0 +1,63 @@
+@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/scss/common';
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  :host {
+    @include dropdown.select-option;
+    display: flex;
+    gap: 0.75rem;
+    user-select: none;
+  }
+
+  :host(:hover),
+  :host(:focus-visible) {
+    background-color: var(--gds-ref-pallet-base300);
+  }
+
+  :host(:focus) {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
+
+  :host([aria-hidden='true']) {
+    display: none;
+  }
+
+  :host([highlighted]) {
+    @include dropdown.select-option-highlighted;
+    color: #fff;
+  }
+
+  .checkbox {
+    background-color: var(--gds-comp-checkbox-container-color);
+    border-radius: var(--gds-comp-checkbox-border-radius);
+    box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-border-color);
+    flex: 0 0 auto;
+    flex-shrink: 0;
+    height: var(--gds-comp-checkbox-container-width);
+    margin-top: 0.15rem;
+    position: relative;
+    width: var(--gds-comp-checkbox-container-width);
+
+    &.checked {
+      background-color: var(--gds-comp-checkbox-container-color-selected);
+
+      &::after {
+        border-bottom: 3px solid
+          var(--gds-comp-checkbox-border-color-selected, #fff);
+        border-left: 3px solid
+          var(--gds-comp-checkbox-border-color-selected, #fff);
+        content: '';
+        height: 0.5rem;
+        left: -1px;
+        position: absolute;
+        top: 0.05rem;
+        transform: scale(0.55) rotate(-45deg);
+        transform-origin: center center;
+        width: 1rem;
+      }
+    }
+  }
+}

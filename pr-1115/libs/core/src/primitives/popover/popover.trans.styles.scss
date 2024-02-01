@@ -1,0 +1,70 @@
+@use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
+@use '../../../../chlorophyll/scss/components/close';
+@use '../../../../chlorophyll/scss/common';
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  :host([open]) dialog {
+    box-sizing: border-box;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    padding: 0.25rem 0.75rem;
+
+    @include common.media-breakpoint-up('sm') {
+      display: none;
+    }
+
+    button.close {
+      margin: -0.25rem;
+    }
+  }
+
+  header h2 {
+    flex-grow: 1;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  dialog {
+    @include popover.popover;
+    border-width: 0;
+    inset: 0;
+    overflow: hidden;
+    padding: 0;
+    right: 0;
+
+    @include common.media-breakpoint-down('sm') {
+      border-radius: 0.5rem;
+      max-height: 80svh;
+
+      &.v-kb-visible {
+        inset-block-end: auto;
+        max-height: 50svh;
+        top: 1rem;
+      }
+    }
+
+    @include common.media-breakpoint-up('sm') {
+      inset: auto;
+      position: fixed;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+    display: block;
+    //pointer-events: none;
+    position: fixed;
+    @include common.media-breakpoint-up('sm') {
+      opacity: 0;
+    }
+  }
+}

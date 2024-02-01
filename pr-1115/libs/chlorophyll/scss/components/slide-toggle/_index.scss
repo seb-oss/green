@@ -1,0 +1,9 @@
+@use "mixins";
+
+#{mixins.$selector-base} {
+  @include mixins.add-slide-toggle-base;
+}
+
+#{mixins.$selector-checked} {
+  @include mixins.add-slide-toggle-state-checked;
+}

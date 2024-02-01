@@ -1,0 +1,131 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+
+import { GdsDropdown, GdsOption } from '../../../../../dist/libs/core/src'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+
+<Meta title="Components/Dropdown" />
+
+# Dropdown
+
+## Regular dropdown
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown
+      onchange="document.getElementById('selected-value').innerText = event.target.value"
+      label="Select a starship"
+    >
+      <gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
+      <gds-option value="falcon-1">Millenium Falcon</gds-option>
+      <gds-option value="defiant-1">Defiant</gds-option>
+      <gds-option value="voyager-1">Voyager</gds-option>
+      <gds-option value="prometheus-1">Prometheus</gds-option>
+      <gds-option value="discovery-1">Discovery</gds-option>
+      <gds-option value="columbia-1">Columbia</gds-option>
+      <gds-option value="yamato-1">Yamato</gds-option>
+      <gds-option value="equinox-1">Equinox</gds-option>
+      <gds-option value="daedalus-1">Daedalus</gds-option>
+      <gds-option value="1701-D-2">Enterprise 1701-D</gds-option>
+      <gds-option value="falcon-2">Millenium Falcon</gds-option>
+      <gds-option value="defiant-2">Defiant</gds-option>
+      <gds-option value="voyager-2">Voyager</gds-option>
+      <gds-option value="prometheus-2">Prometheus</gds-option>
+      <gds-option value="discovery-2">Discovery</gds-option>
+      <gds-option value="columbia-2">Columbia</gds-option>
+      <gds-option value="yamato-2">Yamato</gds-option>
+      <gds-option value="equinox-2">Equinox</gds-option>
+      <gds-option value="daedalus-2">Daedalus</gds-option>
+      <gds-option value="1701-D-3">Enterprise 1701-D</gds-option>
+      <gds-option value="falcon-3">Millenium Falcon</gds-option>
+      <gds-option value="defiant-3">Defiant</gds-option>
+      <gds-option value="voyager-3">Voyager</gds-option>
+      <gds-option value="prometheus-3">Prometheus</gds-option>
+      <gds-option value="discovery-3">Discovery</gds-option>
+      <gds-option value="columbia-3">Columbia</gds-option>
+      <gds-option value="yamato-3">Yamato</gds-option>
+      <gds-option value="equinox-3">Equinox</gds-option>
+      <gds-option value="daedalus-3">Daedalus</gds-option>
+    </gds-dropdown>
+    <br />
+    <div>
+      Selected starship: <span id="selected-value"></span>
+    </div>
+  </div>
+</Canvas>
+
+## Multiple selection dropdown
+
+<Canvas>
+  <div style={{ height: '200px' }}>
+    <gds-dropdown
+      multiple
+      label="Pick team members"
+      onchange="document.getElementById('selected-values').innerText = event.target.value.toString()"
+    >
+      <gds-option isPlaceholder>Select people</gds-option>
+      <gds-option value="einstein">Albert Einstein</gds-option>
+      <gds-option value="tesla">Nikola Tesla</gds-option>
+      <gds-option value="curie">Marie Curie</gds-option>
+      <gds-option value="darwin">Charles Darwin</gds-option>
+      <gds-option value="newton">Isaac Newton</gds-option>
+    </gds-dropdown>
+    <br />
+    <div>
+      Selected team: <span id="selected-values"></span>
+    </div>
+  </div>
+</Canvas>
+
+## Searchable dropdown
+
+<Canvas>
+  <div style={{ height: '300px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown searchable label="Select tech">
+      <gds-option value="">Select tech</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>
+
+## Custom trigger content
+
+Custom content for the trigger can be provided by assigning an element to the `trigger` slot. When this slot is occupied,
+the default trigger content will be overridden, and you will have to manage the displayed value yourself.
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown onchange="document.getElementById('trigger-value').innerText = event.target.value">
+      <div slot="trigger">
+        <b>Selected: </b>
+        <span id="trigger-value">v1</span>
+      </div>
+      <gds-option value="v1">Value 1</gds-option>
+      <gds-option value="v2">Value 2</gds-option>
+      <gds-option value="v3">Value 3</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>
+
+## Synced popover width
+
+Normally, the popover will never be narrower than the trigger, but may be wider if the option contents are wider.
+Optionally, the width of the popover can be locked to the width of the trigger by setting the `syncPopoverWidth` attribute.
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown syncPopoverWidth style={{width: '200px'}}>
+      <gds-option value="1701-D-1">Enterprise 1701-D is a starship from the TNG series</gds-option>
+      <gds-option value="falcon-1">Millenium Falcon</gds-option>
+      <gds-option value="defiant-1">Defiant</gds-option>
+      <gds-option value="voyager-1">Voyager</gds-option>
+      <gds-option value="prometheus-1">Prometheus</gds-option>
+      <gds-option value="discovery-1">Discovery</gds-option>
+      <gds-option value="columbia-1">Columbia</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>

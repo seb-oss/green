@@ -1,0 +1,5 @@
+@use 'sass:map';
+@use 'mixins';
+
+@include mixins.add-color-palettes;
+@include mixins.add-chart-styles;

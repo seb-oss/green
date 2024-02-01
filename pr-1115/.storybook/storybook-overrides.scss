@@ -1,0 +1,92 @@
+// styling for storybook
+
+.sbdocs {
+  font-family: inherit !important;
+}
+
+.sbdocs,
+.sbdocs code,
+.docs-story > div,
+.docs-story > div > button:not(.docblock-code-toggle) {
+  background: inherit !important;
+  color: inherit !important;
+}
+
+button.docblock-code-toggle,
+.docblock-source > div > button,
+.docs-story + div > div > button {
+  border-radius: 200px !important;
+  background: black !important;
+  font-weight: normal;
+  font-size: 10px;
+  padding: 5px 10px !important;
+  min-height: auto;
+  border: none;
+  color: white;
+  margin: 5px;
+  opacity: 0.6;
+  transition: all 300ms;
+  &:hover {
+    opacity: 1;
+    color: white !important;
+    background-color: black !important;
+  }
+  &--disabled:disabled {
+    background: none !important;
+    border: solid 1px var(--border-color) !important;
+    &:hover {
+      color: var(--border-color) !important;
+    }
+  }
+}
+
+.docs-story + div > div > button {
+  border-radius: 5px 0;
+}
+
+.docs-story {
+  padding-bottom: 2rem;
+}
+
+.docblock-source > div {
+  background: transparent;
+}
+
+.sbdocs.sbdocs-preview,
+.docblock-source {
+  box-shadow: none !important;
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  border-radius: 8px !important;
+  background: var(--sg-card-background) !important;
+  // margin-left: -20px !important;
+  // margin-right: -20px !important;
+}
+
+div[role='alert'] {
+  background: var(--background) !important;
+  color: var(--color) !important;
+}
+
+.sbdocs.sbdocs-a.link-item {
+  border-radius: 8px;
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  transform: none !important;
+
+  &:hover {
+    background: white !important;
+    box-shadow: none !important;
+  }
+}
+
+#docs-root {
+  // background: #f6f6f6 !important;
+  box-shadow: none !important;
+}
+
+#docs-root > div > div > div:nth-child(11) > div.css-1dt41f3 > div.css-1az4em2 {
+  background: transparent !important;
+}
+
+.sto-l8z9zc {
+  padding: 20px !important;
+}

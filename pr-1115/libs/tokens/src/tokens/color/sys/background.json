@@ -1,0 +1,28 @@
+{
+  "sys": {
+    "color": {
+      "background": {
+        "background": {
+          "value": "{ref.color.white}",
+          "darkValue": "{ref.color.grey.15}",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:228:6",
+              "resolvedType": "ALIAS"
+            }
+          }
+        },
+        "backgroundDim": {
+          "value": "{ref.color.grey.95}",
+          "darkValue": "{ref.color.grey.20}",
+          "attributes": {
+            "figma": {
+              "id": "VariableID:228:6",
+              "resolvedType": "ALIAS"
+            }
+          }
+        }
+      }
+    }
+  }
+}

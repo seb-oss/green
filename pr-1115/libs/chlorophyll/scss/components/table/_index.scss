@@ -1,0 +1,6 @@
+@use 'mixins';
+@use 'sass:map';
+
+#{mixins.$selector} {
+  @include mixins.add-table;
+}

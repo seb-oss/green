@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@nx/react/babel",
+      {
+        "runtime": "automatic",
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+  ]
+}

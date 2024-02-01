@@ -1,0 +1,95 @@
+{
+  "name": "chlorophyll",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/chlorophyll/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "./tools/executors/scss:build-lib",
+      "dependsOn": ["copy-fonts"],
+      "options": {
+        "packageJson": "libs/chlorophyll/package.json",
+        "outputPath": "dist/libs/chlorophyll"
+      }
+    },
+    "copy-fonts": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputDir}/fonts"],
+      "options": {
+        "commands": [
+          {
+            "command": "yarn copy-fonts"
+          }
+        ]
+      }
+    },
+    "compile-scss": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "description": "compile scss",
+            "command": "npx sass --no-source-map --load-path=node_modules/ libs/chlorophyll/scss/index.scss dist/libs/chlorophyll/css/green-chlorophyll.css"
+          },
+          {
+            "description": "auto prefix compiled css overwrite file and output maps",
+            "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=autoprefixer -m -r"
+          },
+          {
+            "description": "minify compiled and auto prefixed css and output maps",
+            "command": "npx postcss dist/libs/chlorophyll/css/green-chlorophyll.css --use=cssnano -m -o=dist/libs/chlorophyll/css/green-chlorophyll.min.css"
+          }
+        ],
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx stylelint libs/chlorophyll/**/*.scss"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/chlorophyll"],
+      "options": {
+        "jestConfig": "libs/chlorophyll/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/html",
+        "port": 4000,
+        "host": "0.0.0.0",
+        "configDir": "libs/chlorophyll/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "dependsOn": ["copy-fonts"],
+      "options": {
+        "uiFramework": "@storybook/html",
+        "configDir": "libs/chlorophyll/.storybook",
+        "outputDir": "dist/storybook/chlorophyll"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    }
+  }
+}

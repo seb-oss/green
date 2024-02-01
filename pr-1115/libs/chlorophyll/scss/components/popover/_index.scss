@@ -1,0 +1,14 @@
+@use 'mixins';
+@forward 'mixins';
+
+// dependencies
+@use '../../components/close';
+@use '../../components/utility';
+
+.popover, ._popover {
+  @include mixins.popover;
+}
+
+.lock-for-swipe {
+  @include mixins.lock-for-swipe;
+}

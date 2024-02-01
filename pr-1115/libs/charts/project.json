@@ -1,0 +1,93 @@
+{
+  "name": "charts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/charts/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run charts:build-lib",
+          "nx run charts:compile-scss",
+          "nx run charts:copy-scss"
+        ],
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/charts"]
+    },
+    "build-lib": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "packageJson": "libs/charts/package.json",
+        "outputPath": "dist/libs/charts",
+        "tsConfig": "libs/charts/tsconfig.lib.json",
+        "project": "libs/charts/package.json",
+        "entryFile": "libs/charts/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/charts/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "compile-scss": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "description": "compile scss",
+            "command": "npx sass --no-source-map --load-path=node_modules/ --load-path=libs/chlorophyll/ libs/charts/scss/index.scss dist/libs/charts/css/green-charts.css"
+          },
+          {
+            "description": "auto prefix compiled css overwrite file and output maps",
+            "command": "npx postcss dist/libs/charts/css/green-charts.css --use=autoprefixer -m -r"
+          },
+          {
+            "description": "minify compiled and auto prefixed css and output maps",
+            "command": "npx postcss dist/libs/charts/css/green-charts.css --use=cssnano -m -o=dist/libs/charts/css/green-charts.min.css"
+          }
+        ],
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
+    },
+    "copy-scss": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "description": "copy scss",
+            "command": "npx copyfiles libs/charts/scss/**/* dist/libs/charts/scss -f"
+          }
+        ],
+        "parallel": false
+      },
+      "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/charts/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/charts"],
+      "options": {
+        "jestConfig": "libs/charts/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    }
+  }
+}

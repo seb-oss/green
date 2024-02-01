@@ -1,0 +1,6 @@
+// load global styles used by storybook
+@use '../libs/chlorophyll/scss' with (
+  $font-path: '../dist/fonts'
+);
+
+@use 'storybook-overrides';

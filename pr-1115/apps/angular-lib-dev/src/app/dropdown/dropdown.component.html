@@ -1,0 +1,230 @@
+<h3 class="mb-4">Dropdown (value)</h3>
+<div class="row">
+  <div class="col-12 col-sm-6">
+    <div style="height: 200px" class="border p-4 mb-5 horizontal">
+      <ngg-dropdown
+        [options]="options"
+        [texts]="texts"
+        [(value)]="dropdownValue0"
+        (valueChange)="test($event)"
+      ></ngg-dropdown>
+      <ngg-dropdown [options]="optionsWithInitial" [texts]="texts"
+        ><ng-template nggDropdownButton let-option="option" let-index="index">
+          <div>
+            <div>{{ option.label }}</div>
+            <div style="font-size: 0.8em">{{ option.value }}</div>
+          </div>
+        </ng-template></ngg-dropdown
+      >
+      <ngg-dropdown
+        [options]="options"
+        [texts]="texts"
+        [(value)]="dropdownValue2"
+      >
+      </ngg-dropdown>
+    </div>
+    <code>
+      <div>Value: {{ dropdownValue0 | json }}</div>
+    </code>
+    <code>
+      <div>Value: {{ dropdownValue1 | json }}</div>
+    </code>
+    <code>
+      <div>Value: {{ dropdownValue2 | json }}</div>
+    </code>
+  </div>
+  <div class="col-12 col-sm-6">
+    <div style="height: 200px" class="border p-4 mb-5 horizontal">
+      <ngg-dropdown
+        multiSelect
+        [options]="options"
+        [texts]="texts"
+        [(value)]="dropdownMultiValue0"
+        (valueChange)="test($event)"
+      ></ngg-dropdown>
+      <ngg-dropdown
+        multiSelect
+        useValue="val"
+        display="name"
+        [options]="customOptionsInitial"
+        [compareWith]="compareWith"
+        [texts]="texts"
+        [(value)]="dropdownMultiValue1"
+      ></ngg-dropdown>
+      <ngg-dropdown
+        multiSelect
+        [options]="customOptions"
+        [compareWith]="compareWith"
+        useValue="val"
+        display="name"
+        [texts]="texts"
+        [(value)]="dropdownMultiValue2"
+        [searchable]="true"
+        [searchFilter]="searchFilter"
+      >
+        <ng-template nggDropdownOption let-option="option" let-index="index">
+          <div>
+            <div>{{ index }}. {{ option.name }}</div>
+            <div style="font-size: 0.8em">{{ option.val.kitchen }}</div>
+          </div>
+        </ng-template>
+      </ngg-dropdown>
+    </div>
+    <code>
+      <div>Value: {{ dropdownMultiValue0 | json }}</div>
+    </code>
+    <code>
+      <div>Value: {{ dropdownMultiValue1 | json }}</div>
+    </code>
+    <code>
+      <div>Value: {{ dropdownMultiValue2 | json }}</div>
+    </code>
+  </div>
+</div>
+<h3 class="mb-4 mt-5">Dropdown (FormControl)</h3>
+<div style="height: 200px" class="border p-4 mb-5">
+  <form [formGroup]="dropdownForm" class="horizontal">
+    <ngg-dropdown
+      [options]="options"
+      formControlName="select1"
+      [texts]="texts"
+    ></ngg-dropdown>
+    <ngg-dropdown
+      [options]="options"
+      formControlName="select2"
+      [texts]="texts"
+    ></ngg-dropdown>
+    <ngg-dropdown
+      [options]="options"
+      multiSelect
+      formControlName="select3"
+      [texts]="texts"
+    ></ngg-dropdown>
+    <ngg-dropdown
+      [options]="customOptionsInitial"
+      [compareWith]="compareWith"
+      multiSelect
+      useValue="val"
+      display="name"
+      formControlName="select4"
+      [texts]="texts"
+    ></ngg-dropdown>
+  </form>
+</div>
+<code>
+  <div>Value: {{ dropdownForm.value | json }}</div>
+</code>
+
+<h3 class="mb-4 mt-5">Dropdown (NgModel)</h3>
+<div style="height: 200px" class="border p-4 mb-5 horizontal">
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue3"
+    [options]="options"
+    [texts]="texts"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue4"
+    [options]="options"
+    [texts]="texts"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue5"
+    [options]="customOptions"
+    [compareWith]="compareWith"
+    useValue="val"
+    display="name"
+    [texts]="texts"
+  ></ngg-dropdown>
+  <ngg-dropdown
+    [(ngModel)]="dropdownValue6"
+    [options]="customOptionsInitial"
+    [compareWith]="compareWith"
+    useValue="val"
+    display="name"
+    multiSelect
+    [texts]="texts"
+  ></ngg-dropdown>
+</div>
+
+<code>
+  <div>Value: {{ dropdownValue3 | json }}</div>
+</code>
+<code>
+  <div>Value: {{ dropdownValue4 | json }}</div>
+</code>
+<code>
+  <div>Value: {{ dropdownValue5 | json }}</div>
+</code>
+<code>
+  <div>Value: {{ dropdownValue6 | json }}</div>
+</code>
+
+<h3 class="mb-4 mt-5">Form group and validation</h3>
+<form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
+  <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
+    <ngg-dropdown
+      label="Country"
+      [options]="(options$ | async)!"
+      formControlName="country"
+      display="name"
+      [texts]="texts"
+      [valid]="dropdown.valid && dropdown.touched"
+      [invalid]="dropdown.invalid && dropdown.touched"
+    >
+      <!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="dropdown.untouched || dropdown.valid"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="dropdown.touched && dropdown.invalid">
+        <ng-container *ngIf="dropdown.getError('required') as error"
+          >Required</ng-container
+        >
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <div
+    class="form-group"
+    *ngIf="validationForm.get('otherCountries') as dropdown"
+  >
+    <ngg-dropdown
+      label="Other country"
+      [options]="(options$ | async)!"
+      formControlName="otherCountries"
+      display="name"
+      multiSelect
+      [texts]="texts"
+      [valid]="dropdown.valid && dropdown.touched"
+      [invalid]="dropdown.invalid && dropdown.touched"
+      ><!-- Hint text when not submitted -->
+      <ng-container data-form-info *ngIf="dropdown.untouched || dropdown.valid"
+        >Select country</ng-container
+      >
+      <ng-container data-form-info *ngIf="dropdown.touched && dropdown.invalid">
+        <ng-container *ngIf="dropdown.getError('required') as error"
+          >Required</ng-container
+        >
+        <ng-container *ngIf="dropdown.getError('minlength') as error"
+          >Min {{ error.requiredLength }} countries</ng-container
+        >
+      </ng-container>
+    </ngg-dropdown>
+  </div>
+  <button type="button" (click)="resetForms()">Reset</button>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+    Save
+  </button>
+</form>
+<code>
+  <h5 class="mb-0">Form data</h5>
+  <div>
+    Submitted: {{ ngForm.submitted }} Invalid: {{ validationForm.invalid }}
+  </div>
+  <h5 class="mb-0">Values</h5>
+  <div>
+    {{ validationForm.value | json }}
+  </div>
+  <h5 class="mb-0">Errors</h5>
+  <div *ngFor="let f of validationForm.controls | keyvalue">
+    {{ f.key }}:{{ f.value.errors | json }}
+  </div>
+</code>

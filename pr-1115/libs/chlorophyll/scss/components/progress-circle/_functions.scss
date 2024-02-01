@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+@function get-inner-circle-size($input-size, $input-ring-width) {
+  @return $input-size - ($input-ring-width * 2);
+}
+
+@function get-radius($input) {
+  @return math.div($input, 2);
+}

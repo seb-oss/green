@@ -1,0 +1,49 @@
+{
+  "name": "extract",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/extract/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "packageJson": "libs/extract/package.json",
+        "outputPath": "dist/libs/extract",
+        "tsConfig": "libs/extract/tsconfig.lib.json",
+        "project": "libs/extract/package.json",
+        "entryFile": "libs/extract/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "updateBuildableProjectDepsInPackageJson": false,
+        "assets": [
+          {
+            "glob": "libs/extract/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ],
+        "babelUpwardRootMode": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/extract/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/extract"],
+      "options": {
+        "jestConfig": "libs/extract/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    }
+  }
+}

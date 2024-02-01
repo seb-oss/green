@@ -1,0 +1,6 @@
+@use '../../common/spacing';
+@use 'mixins' as mixins;
+
+.card {
+  @include mixins.card;
+}

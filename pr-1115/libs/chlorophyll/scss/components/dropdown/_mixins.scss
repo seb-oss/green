@@ -1,0 +1,118 @@
+@use '../../tokens/shame' as tokens;
+@use '../button/mixins' as button;
+@use '../../common';
+@use 'sass:map';
+
+$box-shadow: var(--sg-popover-box-shadow);
+$z-index: tokens.$zindex-dropdown;
+$color: tokens.$text-primary-color;
+$border-color: map.get(tokens.$blue, 'light', 0);
+$background: tokens.$form-control-bg;
+$highlighted-background: var(--gds-ref-pallet-base800);
+
+@mixin dropdown-trigger {
+  @include button.reset;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color(var(--gds-ref-pallet-base600));
+  @include common.add-focus('');
+  //@include common.add-hover-state(#E9E9E9);
+  background: $background;
+  color: $color;
+  min-height: 2.75rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
+
+  &:not(:disabled, .disabled, [aria-disabled]):hover {
+    --background: var(--gds-ref-pallet-base200);
+    --color: var(--gds-ref-pallet-base800);
+    background-color: var(--gds-ref-pallet-base200);
+    color: var(--gds-ref-pallet-base800);
+    border-color: var(--gds-ref-pallet-base800);
+  }
+
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &::after {
+    @include common.margin-horizontal(3);
+    border-bottom: solid 2px var(--gds-ref-pallet-base800);
+    border-left: solid 2px var(--gds-ref-pallet-base800);
+    content: '';
+    display: block;
+    height: 0.75rem;
+    width: 0.75rem;
+    position: relative;
+    top: -0.1875rem;
+    transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, -1);
+    transition: transform 300ms ease-in;
+    flex-shrink: 0;
+  }
+
+  &[aria-expanded='true']::after {
+    transform: translate(75%, 6px) rotate3d(0, 0, 1, -45deg) scale3d(-1, -1, 1);
+  }
+
+  &:hover::after {
+    border-color: currentColor;
+  }
+}
+
+@mixin select-option-highlighted {
+  background: $highlighted-background;
+}
+
+@mixin select-option {
+  @include common.padding-horizontal(4);
+  @include common.padding-vertical(4);
+  @include common.add-hover-active-state();
+  line-height: 1.25;
+  cursor: pointer;
+
+  // highlighted option
+  &.active.sg-highlighted {
+    @include select-option-highlighted;
+  }
+}
+
+@mixin select {
+  [role='option'] {
+    @include select-option;
+  }
+}
+
+@mixin multi-select {
+  [role='option'] {
+    display: flex;
+    width: 100%;
+
+    // highlighted option
+    &.active.sg-highlighted input[type='checkbox'] ~ i {
+      border-color: #007ac7 !important;
+      box-shadow: 0 0 0.25em 0.0625em #41b0ee;
+      outline-color: transparent;
+      outline-style: solid;
+    }
+  }
+}
+
+@mixin menu {
+  [role='menuitem'] {
+    @include common.padding-horizontal(4);
+    @include common.padding-vertical(4);
+    @include common.add-hover-state();
+    cursor: pointer;
+  }
+}

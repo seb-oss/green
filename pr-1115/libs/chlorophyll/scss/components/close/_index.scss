@@ -1,0 +1,6 @@
+@use 'mixins';
+
+// close
+.close {
+  @include mixins.close;
+}

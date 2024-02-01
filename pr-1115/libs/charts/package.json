@@ -1,0 +1,26 @@
+{
+  "name": "@sebgroup/green-charts",
+  "version": "2.1.1",
+  "dependencies": {
+    "@sebgroup/chlorophyll": "^3.0.4",
+    "@types/d3-selection": "^3.0.2",
+    "billboard.js": "^3.7.5"
+  },
+  "description": "Base library for charts.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "../../dist/libs/charts"
+  },
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/labels/charts"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/charts/"
+}

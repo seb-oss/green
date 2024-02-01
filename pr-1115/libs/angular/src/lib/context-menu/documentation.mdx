@@ -1,0 +1,90 @@
+import { Canvas, Story } from '@storybook/addon-docs'
+
+import { NggContextMenuComponent } from './context-menu.component'
+
+# Context Menu
+
+A context menu.
+
+## Description
+
+Context menu with possibility to provide your template
+
+## Importing module
+
+If you're only using the NggContextMenuComponent component, you just need to import the `NggContextMenuModule`.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { NggContextMenuModule } from '@sebgroup/green-angular'
+
+import { AppComponent } from './app.component'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggContextMenuModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Context Menu Options
+
+### Inputs
+
+| Input (attribute)  | Description                                    | Default |
+| :----------------- | :--------------------------------------------- | :------ |
+| direction          | Which side to open the menu to 'ltr' or 'rtl'. | ltr     |
+| menuItemTemplate   | Template to user for context menu item.        | default |
+| menuAnchorTemplate | Template to user for context menu button.      | default |
+| menuItems          | Uses DropdownOption interface                  | default |
+
+| Input (attribute) | Description                                                          | Default |
+| :---------------- | :------------------------------------------------------------------- | :------ |
+| label             | Which key to use as value.                                           | `value` |
+| value             | Which key to use as display value when selected and in options list. | `label` |
+
+### Outputs
+
+| Event                  | Description                                                                                 |
+| :--------------------- | :------------------------------------------------------------------------------------------ |
+| contextMenuItemClicked | Event emitted when one of the items are click. The clicked item is supplied to the handler. |
+
+## Examples
+
+Basic use case:
+
+### Markup
+
+```html
+<ngg-context-menu
+  [direction]="rtl"
+  [menuItems]="menuItems"
+  (contextMenuItemClicked)="onItemClick($event)"
+></ngg-context-menu>
+```
+
+## Default
+
+<Canvas>
+  <Story id="components-context-menu--default" />
+</Canvas>
+
+## Right to left
+
+<Canvas>
+  <Story id="components-context-menu--right-to-left" />
+</Canvas>
+
+## Custom template
+
+<Canvas>
+  <Story id="components-context-menu--custom-template-default" />
+</Canvas>
+
+## Relative position
+
+<Canvas>
+  <Story id="components-context-menu--position-relative" />
+</Canvas>

@@ -1,0 +1,18 @@
+<div
+  class="gds-progress-circle"
+  role="progressbar"
+  [attr.aria-valuenow]="value"
+  [attr.aria-valuemin]="0"
+  [attr.aria-valuemax]="100"
+  [attr.aria-label]="id"
+>
+  <div class="ring full-ring">
+    <div class="ring-progress" [ngClass]="theme"></div>
+  </div>
+  <div class="ring">
+    <div class="ring-progress" [ngClass]="theme"></div>
+  </div>
+  <div class="inner-circle">
+    <ng-content></ng-content>
+  </div>
+</div>

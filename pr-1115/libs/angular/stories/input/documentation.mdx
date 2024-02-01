@@ -1,0 +1,31 @@
+import { Canvas, Story } from '@storybook/addon-docs'
+
+<style>{`
+    div[id^=story--] > div{
+        height: auto !important;
+    }
+`}</style>
+
+# Input
+
+The regular `<input>` element has all the functionality required for a simple input and is accessible and semantically correct by default. It does not have to be wrapped in an Angular component.
+
+## Input
+
+<Canvas>
+  <Story id="components-form-input--default" />
+</Canvas>
+
+## Template-driven Input
+
+<Canvas>
+  <Story id="components-form-input--template-driven" />
+</Canvas>
+
+## Reactive Forms Input
+
+<Canvas>
+  <Story id="components-form-input--reactive-forms" />
+</Canvas>
+
+For more information on how to use inputs in Green, have a look at the [Chlorophyll documention for input](https://sebgroup.github.io/green/latest/chlorophyll/?path=/docs/components-form-elements-input--input).

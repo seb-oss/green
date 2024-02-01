@@ -1,0 +1,87 @@
+{
+  "name": "react-charts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react-charts/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react-charts",
+        "packageJson": "libs/react-charts/package.json",
+        "tsConfig": "libs/react-charts/tsconfig.lib.json",
+        "project": "libs/react-charts/package.json",
+        "entryFile": "libs/react-charts/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "updateBuildableProjectDepsInPackageJson": false,
+        "assets": [
+          {
+            "glob": "libs/react-charts/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ],
+        "babelUpwardRootMode": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/react-charts/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/react-charts"],
+      "options": {
+        "jestConfig": "libs/react-charts/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/react",
+        "port": 4300,
+        "configDir": "libs/react-charts/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-nx-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "uiFramework": "@storybook/react",
+        "configDir": "libs/react-charts/.storybook",
+        "outputDir": "dist/storybook/react-charts"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "NODE_ENV=production nx run react-charts:build-nx-storybook"
+          }
+        ]
+      }
+    },
+    "update-dependencies": {
+      "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    }
+  }
+}

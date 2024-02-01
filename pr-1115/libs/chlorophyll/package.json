@@ -1,0 +1,25 @@
+{
+  "name": "@sebgroup/chlorophyll",
+  "version": "3.0.4",
+  "description": "A CSS framework for SEB with accessibility at it's core.",
+  "main": "css/green-chlorophyll.min.css",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebgroup/green.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "directory": "../../dist/libs/chlorophyll"
+  },
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "contributors": [],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sebgroup/green/issues"
+  },
+  "homepage": "https://sebgroup.github.io/green/latest/chlorophyll/",
+  "dependencies": {
+    "@sebgroup/fonts": "^1.1.0"
+  }
+}

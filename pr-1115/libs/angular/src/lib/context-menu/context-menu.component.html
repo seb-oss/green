@@ -1,0 +1,30 @@
+<gds-context-menu
+  *nggCoreElement
+  data-testid="context-menu"
+  [placement]="placement"
+  [open]="isActive"
+>
+  <span slot="trigger">
+    <ng-container
+      [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
+    >
+    </ng-container>
+  </span>
+  <ng-container *ngFor="let menuItem of menuItems">
+    <gds-menu-item *nggCoreElement (click)="onItemClick(menuItem)">
+      <ng-container
+        [ngTemplateOutlet]="menuItemTemplate ?? defaultMenuItemTemplate"
+        [ngTemplateOutletContext]="{ $implicit: menuItem }"
+      >
+      </ng-container>
+    </gds-menu-item>
+  </ng-container>
+</gds-context-menu>
+
+<ng-template #defaultMenuItemTemplate let-menuItem>
+  <span>{{ menuItem.label }}</span>
+</ng-template>
+
+<ng-template #defaultButtonTemplate>
+  <i class="sg-icon sg-icon-ellipsis">Open context menu</i>
+</ng-template>

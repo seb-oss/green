@@ -1,0 +1,51 @@
+<div class="form-group">
+  <gds-dropdown
+    *nggCoreElement
+    #gdsDropdown
+    [value]="value"
+    [searchable]="searchable"
+    [label]="label"
+    (change)="onValueChange($event)"
+    [multiple]="multiSelect"
+    [invalid]="invalid"
+    [compareWith]="compareWithAdapter"
+    [searchFilter]="searchFilterAdapter"
+    [syncPopoverWidth]="syncPopoverWidth"
+  >
+    <span slot="message" #formInfo
+      ><ng-content select="[data-form-info]"></ng-content
+    ></span>
+
+    <span slot="trigger"
+      ><ng-container
+        *ngTemplateOutlet="
+          customButton?.templateRef && selectedOption
+            ? customButton!.templateRef
+            : defaultButton;
+          context: { option: selectedOption }
+        "
+      ></ng-container
+    ></span>
+
+    <ng-container *ngFor="let option of options; let index = index">
+      <gds-option *nggCoreElement [value]="option[useValue]"
+        ><ng-container
+          *ngTemplateOutlet="
+            customOption?.templateRef
+              ? customOption!.templateRef
+              : defaultOption;
+            context: { option: option, index: index }
+          "
+        ></ng-container
+      ></gds-option>
+    </ng-container>
+  </gds-dropdown>
+</div>
+
+<ng-template #defaultButton let-selected="option">
+  <span class="trigger">{{ texts?.select }}</span>
+</ng-template>
+
+<ng-template #defaultOption let-option="option">
+  {{ display ? option[display] : option.name }}
+</ng-template>
