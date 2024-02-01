@@ -70,7 +70,7 @@ jobs:
           script: |
             // Get list of folders
             const updatedStorybooks = require('fs').readdirSync('./artifact')
-              .filter((file) => require('fs').statSync(file).isDirectory());
+              .filter((file) => require('fs').statSync(`./artifact/${file}`).isDirectory());
 
             // Create link list
             const links = updatedStorybooks
