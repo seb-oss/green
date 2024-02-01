@@ -47,10 +47,11 @@ jobs:
         if: failure()
         run: |
           cat > ./pr/COMMENT <<- EOM
-          No changeset found. You can add a changeset by running `npx changeset`, and then commiting the resulting changeset file.
+          ## 🦋 Changeset status
+          No changeset found. You can add a changeset by running \`npx changeset\`, and then commiting the resulting changeset file.
 
           If this PR should not cause a new release of any package, then an empty changeset should be added: \
-          `npx changeset add --empty`.
+          \`npx changeset add --empty\`.
           EOM
 
       - name: Generate comment text from changeset status
@@ -72,12 +73,12 @@ jobs:
         if: steps.generate-comment-text.outputs.result != '""'
         run: |
           cat > ./pr/COMMENT <<- EOM
-          ## Changeset status
+          ## 🦋 Changeset status
           Based on the included changeset, the following releases will be published as a result of this PR:
 
           ${{ fromJSON(steps.generate-comment-text.outputs.result) }}
 
-          *Note:* If unpublished changesets exists on `main`, and `main` has been merged into this PR, this
+          *Note:* If unpublished changesets exists on \`main\`, and \`main\` has been merged into this PR, this
           list will include those changes in addition to the ones specific to this PR.
           EOM
 
@@ -85,7 +86,7 @@ jobs:
         if: steps.generate-comment-text.outputs.result == '""'
         run: |
           cat > ./pr/COMMENT <<- EOM
-          ## Changeset status
+          ## 🦋 Changeset status
           Empty changeset found. This PR will not cause any new releases.
           EOM
 
