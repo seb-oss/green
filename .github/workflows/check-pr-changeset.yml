@@ -5,18 +5,11 @@ on:
 
 jobs:
   check-changeset:
-    name: Check PR changeset
+    name: Run check
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
-      - name: Get token
-        id: get_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
-          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
-
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
@@ -42,20 +35,24 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
+      - name: Save PR number
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/NR
+
       - name: Status check
         run: yarn changeset status --since=`git log origin/main..HEAD --pretty=format:"%h" | tail -1` --output=changeset-status.json
 
       - name: Comment when changeset is not found
         if: failure()
-        uses: mshick/add-pr-comment@v2
-        with:
-          repo-token: ${{ steps.get_token.outputs.token }}
-          message: |
-            ## Changeset status
-            No changeset found. You can add a changeset by running `npx changeset`, and then commiting the resulting changeset file.
+        run: |
+          cat > ./pr/COMMENT <<- EOM
+          ## 🦋 Changeset status
+          No changeset found. You can add a changeset by running \`npx changeset\`, and then commiting the resulting changeset file.
 
-            If this PR should not cause a new release of any package, then an empty changeset should be added: \
-            `npx changeset add --empty`.
+          If this PR should not cause a new release of any package, then an empty changeset should be added:
+          \`npx changeset add --empty\`.
+          EOM
 
       - name: Generate comment text from changeset status
         uses: actions/github-script@v7
@@ -73,24 +70,29 @@ jobs:
             }).join('\n');
 
       - name: Comment when changeset is found
-        uses: mshick/add-pr-comment@v2
         if: steps.generate-comment-text.outputs.result != '""'
-        with:
-          repo-token: ${{ steps.get_token.outputs.token }}
-          message: |
-            ## Changeset status
-            Based on the included changeset, the following releases will be published as a result of this PR:
+        run: |
+          cat > ./pr/COMMENT <<- EOM
+          ## 🦋 Changeset status
+          Based on the included changeset, the following releases will be published as a result of this PR:
 
-            ${{ fromJSON(steps.generate-comment-text.outputs.result) }}
+          ${{ fromJSON(steps.generate-comment-text.outputs.result) }}
 
-            *Note:* If unpublished changesets exists on `main`, and `main` has been merged into this PR, this
-            list will include those changes in addition to the ones specific to this PR.
+          *Note:* If unpublished changesets exists on \`main\`, and \`main\` has been merged into this PR, this
+          list will include those changes in addition to the ones specific to this PR.
+          EOM
 
       - name: Comment when empty changeset is found
         if: steps.generate-comment-text.outputs.result == '""'
-        uses: mshick/add-pr-comment@v2
+        run: |
+          cat > ./pr/COMMENT <<- EOM
+          ## 🦋 Changeset status
+          Empty changeset found. This PR will not cause any new releases.
+          EOM
+
+      - name: Upload Artifact
+        if: always()
+        uses: actions/upload-artifact@v2
         with:
-          repo-token: ${{ steps.get_token.outputs.token }}
-          message: |
-            ## Changeset status
-            Empty changeset found. This PR will not cause any new releases.
+          name: pr
+          path: pr/
