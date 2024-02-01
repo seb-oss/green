@@ -52,7 +52,7 @@ jobs:
         with:
           script: |
             var fs = require('fs');
-            return 'pr-' + Number(fs.readFileSync('./PR_NUMBER'));
+            return Number(fs.readFileSync('./PR_NUMBER'));
 
       - name: Deploy built storybooks to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.5.0
@@ -60,11 +60,11 @@ jobs:
           token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
           folder: . # The folder the action should deploy.
-          target-folder: ${{ steps.pr_number.outputs.result }} # The folder the action should deploy to.
+          target-folder: pr-${{ steps.pr_number.outputs.result }} # The folder the action should deploy to.
 
       - name: Add Storybook link to pull request
         uses: actions/github-script@v5
-        if: github.event.action == 'opened'
+        id: comment
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
@@ -77,10 +77,11 @@ jobs:
               .reduce((initial, storybook) => (initial + `<li><a target="_blank" href="https://sebgroup.github.io/green/${{ steps.pr_number.outputs.result }}/${storybook}/">${storybook}</a></li>`),'') + '</ul>';
 
             // Create comment body
-            const body = `👋 Thanks for creating a pull request! 🚀 Checkout the ${updatedStorybooks.length > 1 ? 'storybooks' : 'storybook'} we've created for it: ${links}`;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body
-            });
+            return `👋 Thanks for creating a pull request! 🚀 Checkout the ${updatedStorybooks.length > 1 ? 'storybooks' : 'storybook'} we've created for it: ${links}`;
+
+      - name: Comment on PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          repo-token: ${{ steps.get_token.outputs.token }}
+          issue: ${{ steps.pr_number.outputs.result }}
+          message: ${{ steps.comment.outputs.result }}
