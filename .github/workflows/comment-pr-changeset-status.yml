@@ -56,3 +56,4 @@ jobs:
           repo-token: ${{ steps.get_token.outputs.token }}
           issue: ${{ steps.pr_number.outputs.result }}
           message-path: ./COMMENT
+          message-id: pr-changeset-status
