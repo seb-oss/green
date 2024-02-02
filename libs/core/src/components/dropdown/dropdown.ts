@@ -135,8 +135,8 @@ export class GdsDropdown<ValueT = any>
   @queryAsync('#trigger')
   private elTriggerBtnAsync!: Promise<HTMLButtonElement>
 
-  @query('#listbox')
-  private elListbox!: GdsListbox
+  @queryAsync('#listbox')
+  private elListbox!: Promise<GdsListbox>
 
   @query('#searchinput')
   private elSearchInput!: HTMLInputElement
@@ -277,8 +277,11 @@ export class GdsDropdown<ValueT = any>
   })
   private _handleLightDOMChange() {
     this.requestUpdate()
-    this._handleValueChange()
-    if (this.multiple) return
+
+    if (this.multiple) {
+      this._handleValueChange()
+      return
+    }
 
     // Set default value if none is set
     if (!this.value) {
@@ -302,11 +305,12 @@ export class GdsDropdown<ValueT = any>
    */
   @watch('value')
   private _handleValueChange() {
-    const listbox = this.elListbox
-    if (listbox) {
-      if (Array.isArray(this.value)) listbox.selection = this.value as any[]
-      else listbox.selection = [this.value as any]
-    }
+    this.elListbox.then((listbox) => {
+      if (listbox) {
+        if (Array.isArray(this.value)) listbox.selection = this.value as any[]
+        else listbox.selection = [this.value as any]
+      }
+    })
   }
 
   /**
@@ -331,11 +335,13 @@ export class GdsDropdown<ValueT = any>
    * If found, focus should be moved to the listbox.
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown' || e.key === 'Tab') {
-      e.preventDefault()
-      this.elListbox?.focus()
-      return
-    }
+    this.elListbox?.then((listbox) => {
+      if (e.key === 'ArrowDown' || e.key === 'Tab') {
+        e.preventDefault()
+        listbox.focus()
+        return
+      }
+    })
   }
 
   /**
@@ -363,23 +369,22 @@ export class GdsDropdown<ValueT = any>
    * @fires change
    */
   #handleSelectionChange() {
-    const listbox = this.elListbox
-    if (!listbox) return
+    this.elListbox.then((listbox) => {
+      if (this.multiple) this.value = listbox.selection.map((s) => s.value)
+      else {
+        this.value = listbox.selection[0]?.value
+        this.open = false
+        setTimeout(() => this.elTriggerBtn?.focus(), 0)
+      }
 
-    if (this.multiple) this.value = listbox.selection.map((s) => s.value)
-    else {
-      this.value = listbox.selection[0]?.value
-      this.open = false
-      setTimeout(() => this.elTriggerBtn?.focus(), 0)
-    }
-
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      })
-    )
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { value: this.value },
+          bubbles: true,
+          composed: true,
+        })
+      )
+    })
   }
 
   /**
