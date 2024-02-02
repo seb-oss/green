@@ -5,14 +5,19 @@ type Handler = () => void
 /**
  * Runs when the light DOM children of the component changes.
  */
-export function observeLightDOM() {
+export function observeLightDOM(
+  observerConfig: MutationObserverInit = {
+    attributes: true,
+    childList: true,
+    subtree: false,
+    characterData: true,
+  }
+) {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     _propertyKey: string,
     descriptor: TypedPropertyDescriptor<Handler>
   ) => {
-    const observerConfig = { attributes: true, childList: true, subtree: false }
-
     let observer: MutationObserver
 
     const connectedCallback = proto.connectedCallback

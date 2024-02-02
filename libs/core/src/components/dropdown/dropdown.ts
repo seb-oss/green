@@ -123,44 +123,6 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean })
   syncPopoverWidth = false
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
-  #optionElements: HTMLCollectionOf<GdsOption>
-
-  @query('#trigger')
-  private elTriggerBtn!: HTMLButtonElement
-
-  @queryAsync('#trigger')
-  private elTriggerBtnAsync!: Promise<HTMLButtonElement>
-
-  @query('#listbox')
-  private elListbox!: GdsListbox
-
-  @query('#searchinput')
-  private elSearchInput!: HTMLInputElement
-
-  constructor() {
-    super()
-    constrainSlots(this)
-    updateWhenLocaleChanges(this)
-
-    this.#optionElements = this.getElementsByTagName(
-      getScopedTagName('gds-option')
-    ) as HTMLCollectionOf<GdsOption>
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-dropdown')
-
-    this.updateComplete.then(() => {
-      this._handleLightDOMChange()
-      this._handleValueChange()
-    })
-  }
-
   /**
    * Get the options of the dropdown.
    */
@@ -206,6 +168,44 @@ export class GdsDropdown<ValueT = any>
     return displayValue || this.placeholder?.innerHTML || ''
   }
 
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
+  #optionElements: HTMLCollectionOf<GdsOption>
+
+  @query('#trigger')
+  private _elTriggerBtn!: HTMLButtonElement
+
+  @queryAsync('#trigger')
+  private _elTriggerBtnAsync!: Promise<HTMLButtonElement>
+
+  @queryAsync('#listbox')
+  private _elListbox!: Promise<GdsListbox>
+
+  @query('#searchinput')
+  private _elSearchInput!: HTMLInputElement
+
+  constructor() {
+    super()
+    constrainSlots(this)
+    updateWhenLocaleChanges(this)
+
+    this.#optionElements = this.getElementsByTagName(
+      getScopedTagName('gds-option')
+    ) as HTMLCollectionOf<GdsOption>
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-dropdown')
+
+    this.updateComplete.then(() => {
+      this._handleLightDOMChange()
+      this._handleValueChange()
+    })
+  }
+
   render() {
     return html`
       ${this._tStyles}
@@ -235,7 +235,7 @@ export class GdsDropdown<ValueT = any>
       <gds-popover
         .label=${this.label}
         .open=${this.open}
-        .triggerRef=${this.elTriggerBtnAsync}
+        .triggerRef=${this._elTriggerBtnAsync}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
@@ -269,11 +269,19 @@ export class GdsDropdown<ValueT = any>
   /**
    * Update value assignment and request update when the light DOM changes.
    */
-  @observeLightDOM()
+  @observeLightDOM({
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: true,
+  })
   private _handleLightDOMChange() {
     this.requestUpdate()
-    this._handleValueChange()
-    if (this.multiple) return
+
+    if (this.multiple) {
+      this._handleValueChange()
+      return
+    }
 
     // Set default value if none is set
     if (!this.value) {
@@ -283,7 +291,9 @@ export class GdsDropdown<ValueT = any>
     // Make sure the value is one of the options, unless we have a placeholder
     else if (
       !this.placeholder &&
-      this.options.find((o) => o.value === this.value) === undefined
+      this.options.find((o) =>
+        this.compareWith(o.value, this.value as ValueT)
+      ) === undefined
     ) {
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
@@ -295,11 +305,12 @@ export class GdsDropdown<ValueT = any>
    */
   @watch('value')
   private _handleValueChange() {
-    const listbox = this.elListbox
-    if (listbox) {
-      if (Array.isArray(this.value)) listbox.selection = this.value as any[]
-      else listbox.selection = [this.value as any]
-    }
+    this._elListbox.then((listbox) => {
+      if (listbox) {
+        if (Array.isArray(this.value)) listbox.selection = this.value as any[]
+        else listbox.selection = [this.value as any]
+      }
+    })
   }
 
   /**
@@ -308,7 +319,7 @@ export class GdsDropdown<ValueT = any>
    * @param e The keyboard event.
    */
   #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
-    const input = this.elSearchInput!
+    const input = this._elSearchInput!
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
 
@@ -324,11 +335,13 @@ export class GdsDropdown<ValueT = any>
    * If found, focus should be moved to the listbox.
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown' || e.key === 'Tab') {
-      e.preventDefault()
-      this.elListbox?.focus()
-      return
-    }
+    this._elListbox?.then((listbox) => {
+      if (e.key === 'ArrowDown' || e.key === 'Tab') {
+        e.preventDefault()
+        listbox.focus()
+        return
+      }
+    })
   }
 
   /**
@@ -338,14 +351,14 @@ export class GdsDropdown<ValueT = any>
   #handleListboxKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Tab' && this.searchable) {
       e.preventDefault()
-      this.elSearchInput?.focus()
+      this._elSearchInput?.focus()
       return
     }
   }
 
   #handleOptionFocusChange = (e: FocusEvent) => {
     // Set the ariaActiveDescendant of the trigger button
-    const triggerButton = this.elTriggerBtn as any
+    const triggerButton = this._elTriggerBtn as any
     if (triggerButton)
       triggerButton.ariaActiveDescendantElement = e.target as any
   }
@@ -356,23 +369,22 @@ export class GdsDropdown<ValueT = any>
    * @fires change
    */
   #handleSelectionChange() {
-    const listbox = this.elListbox
-    if (!listbox) return
+    this._elListbox.then((listbox) => {
+      if (this.multiple) this.value = listbox.selection.map((s) => s.value)
+      else {
+        this.value = listbox.selection[0]?.value
+        this.open = false
+        setTimeout(() => this._elTriggerBtn?.focus(), 0)
+      }
 
-    if (this.multiple) this.value = listbox.selection.map((s) => s.value)
-    else {
-      this.value = listbox.selection[0]?.value
-      this.open = false
-      setTimeout(() => this.elTriggerBtn?.focus(), 0)
-    }
-
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      })
-    )
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { value: this.value },
+          bubbles: true,
+          composed: true,
+        })
+      )
+    })
   }
 
   /**
@@ -387,7 +399,7 @@ export class GdsDropdown<ValueT = any>
     if (open) this.#registerAutoCloseListener()
     else {
       this.#unregisterAutoCloseListener()
-      this.elSearchInput && (this.elSearchInput.value = '')
+      this._elSearchInput && (this._elSearchInput.value = '')
     }
 
     this.dispatchEvent(
@@ -427,7 +439,7 @@ export class GdsDropdown<ValueT = any>
     if (e.key === 'Tab' && !this.searchable) {
       e.preventDefault()
       this.open = false
-      this.elTriggerBtn?.focus()
+      this._elTriggerBtn?.focus()
     }
   }
 }
