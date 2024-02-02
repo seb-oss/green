@@ -269,7 +269,12 @@ export class GdsDropdown<ValueT = any>
   /**
    * Update value assignment and request update when the light DOM changes.
    */
-  @observeLightDOM()
+  @observeLightDOM({
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: true,
+  })
   private _handleLightDOMChange() {
     this.requestUpdate()
     this._handleValueChange()
@@ -283,7 +288,9 @@ export class GdsDropdown<ValueT = any>
     // Make sure the value is one of the options, unless we have a placeholder
     else if (
       !this.placeholder &&
-      this.options.find((o) => o.value === this.value) === undefined
+      this.options.find((o) =>
+        this.compareWith(o.value, this.value as ValueT)
+      ) === undefined
     ) {
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
