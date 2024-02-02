@@ -6,6 +6,7 @@ on:
 jobs:
   check-changeset:
     name: Run check
+    if: github.event.pull_request.title != 'Version Packages'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
