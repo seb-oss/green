@@ -179,7 +179,7 @@ describe('<gds-calendar>', () => {
       )
       el.focus()
 
-      const focusedDate = new Date('2024-02-02')
+      const focusedDate = new Date('2024-02-01')
       el.focusedDate = focusedDate
       await el.updateComplete
 
@@ -193,11 +193,11 @@ describe('<gds-calendar>', () => {
     it('should update the focused date when value is changed', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
 
-      el.value = new Date('2024-02-02')
+      el.value = new Date('2024-02-01')
       await el.updateComplete
 
       await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-02'))
+        onlyDate(new Date('2024-02-01'))
       )
     })
   })
