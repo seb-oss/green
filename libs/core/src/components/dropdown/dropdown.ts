@@ -123,44 +123,6 @@ export class GdsDropdown<ValueT = any>
   @property({ type: Boolean })
   syncPopoverWidth = false
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
-  #optionElements: HTMLCollectionOf<GdsOption>
-
-  @query('#trigger')
-  private _elTriggerBtn!: HTMLButtonElement
-
-  @queryAsync('#trigger')
-  private _elTriggerBtnAsync!: Promise<HTMLButtonElement>
-
-  @queryAsync('#listbox')
-  private _elListbox!: Promise<GdsListbox>
-
-  @query('#searchinput')
-  private _elSearchInput!: HTMLInputElement
-
-  constructor() {
-    super()
-    constrainSlots(this)
-    updateWhenLocaleChanges(this)
-
-    this.#optionElements = this.getElementsByTagName(
-      getScopedTagName('gds-option')
-    ) as HTMLCollectionOf<GdsOption>
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-dropdown')
-
-    this.updateComplete.then(() => {
-      this._handleLightDOMChange()
-      this._handleValueChange()
-    })
-  }
-
   /**
    * Get the options of the dropdown.
    */
@@ -204,6 +166,44 @@ export class GdsDropdown<ValueT = any>
     }
 
     return displayValue || this.placeholder?.innerHTML || ''
+  }
+
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
+  #optionElements: HTMLCollectionOf<GdsOption>
+
+  @query('#trigger')
+  private _elTriggerBtn!: HTMLButtonElement
+
+  @queryAsync('#trigger')
+  private _elTriggerBtnAsync!: Promise<HTMLButtonElement>
+
+  @queryAsync('#listbox')
+  private _elListbox!: Promise<GdsListbox>
+
+  @query('#searchinput')
+  private _elSearchInput!: HTMLInputElement
+
+  constructor() {
+    super()
+    constrainSlots(this)
+    updateWhenLocaleChanges(this)
+
+    this.#optionElements = this.getElementsByTagName(
+      getScopedTagName('gds-option')
+    ) as HTMLCollectionOf<GdsOption>
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-dropdown')
+
+    this.updateComplete.then(() => {
+      this._handleLightDOMChange()
+      this._handleValueChange()
+    })
   }
 
   render() {
