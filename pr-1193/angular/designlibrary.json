@@ -258,6 +258,16 @@
     }
   },
   {
+    "id": "components-context-menu--with-label",
+    "name": "With Label",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-context-menu--right-to-left",
     "name": "Right To Left",
     "title": "Components/Context Menu",
@@ -284,36 +294,6 @@
     "customParams": {
       "componentIds": [
         "component-context-menu"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--multiple",
-    "name": "Multiple",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--default",
-    "name": "Default",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--custom",
-    "name": "Custom",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
       ]
     }
   },
@@ -354,6 +334,36 @@
     "customParams": {
       "componentIds": [
         "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--multiple",
+    "name": "Multiple",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--custom",
+    "name": "Custom",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
       ]
     }
   },
