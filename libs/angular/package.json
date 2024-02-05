@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "peerDependencies": {
     "@angular/cdk": ">=15.2.9",
     "@angular/common": ">=15.2.9",
@@ -23,7 +23,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "directory": "../../dist/libs/angular"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],
