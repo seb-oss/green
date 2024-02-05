@@ -4,12 +4,12 @@
   [placement]="placement"
   [open]="isActive"
 >
-  <span slot="trigger">
+  <div style="display: contents" slot="trigger">
     <ng-container
       [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
     >
     </ng-container>
-  </span>
+  </div>
   <ng-container *ngFor="let menuItem of menuItems">
     <gds-menu-item *nggCoreElement (click)="onItemClick(menuItem)">
       <ng-container

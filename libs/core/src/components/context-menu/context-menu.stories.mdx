@@ -21,7 +21,7 @@ Note that you should always supply a label for the context menu. The label shoul
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     Activated action: <span id="display-action"></span>
     <br />
-    <gds-context-menu label="Select an action" buttonLabel="Menu">
+    <gds-context-menu popover-label="Select an action" button-label="Menu">
       <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">
         Action 1
       </gds-menu-item>

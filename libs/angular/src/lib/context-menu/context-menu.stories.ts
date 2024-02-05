@@ -51,6 +51,32 @@ Default.args = {
   ],
 }
 
+const WithLabelTemplate: Story<NggContextMenuComponent> = (
+  args: NggContextMenuComponent
+) => ({
+  component: NggContextMenuComponent,
+  props: args,
+  template: `
+    <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems" [menuAnchorTemplate]="menuAnchorTemplate">
+    </ngg-context-menu>
+
+    <ng-template #menuAnchorTemplate>
+        Menu
+        <i class="sg-icon sg-icon-ellipsis"></i>
+    </ng-template>
+    `,
+})
+
+export const WithLabel = WithLabelTemplate.bind({})
+WithLabel.args = {
+  direction: 'rtl',
+  menuItems: [
+    { label: 'Key 1', value: 'option1' },
+    { label: 'Key 2', value: 'option2' },
+    { label: 'Key 3', value: 'option3' },
+  ],
+}
+
 export const RightToLeft = Template.bind({})
 RightToLeft.args = {
   direction: 'rtl',
