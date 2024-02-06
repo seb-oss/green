@@ -382,8 +382,7 @@ describe('<gds-dropdown> interactions', () => {
     const option2 = document.getElementById('option2')!
 
     await clickOnElement(option2, 'center')
-    await el.updateComplete
-    await el.updateComplete
+    await timeout(10)
 
     await expect(el.value).to.equal('v2')
   })
