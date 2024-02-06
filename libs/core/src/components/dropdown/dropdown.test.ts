@@ -12,6 +12,7 @@ import {
   getScopedTagName,
   GdsOption,
 } from '../../../../../dist/libs/core/src/index.js'
+import { send } from 'process'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -381,11 +382,13 @@ describe('<gds-dropdown> interactions', () => {
 
     const option2 = document.getElementById('option2')!
 
-    await clickOnElement(option2, 'center')
+    el.focus()
+    await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
+    await sendKeys({ press: 'Enter' })
     await el.updateComplete
 
-    await expect(el.value).to.equal('v2')
+    await waitUntil(() => el.value === 'v2')
   })
 
   it('should emit `change` event when option is selected', async () => {
@@ -398,17 +401,18 @@ describe('<gds-dropdown> interactions', () => {
     `)
     await timeout(0)
 
-    const option2 = document.getElementById('option2')!
-
     const changeHandler = sinon.spy()
     el.addEventListener('change', changeHandler)
 
-    await clickOnElement(option2, 'center')
+    el.focus()
+    await sendKeys({ press: 'ArrowDown' })
+    await el.updateComplete
+    await sendKeys({ press: 'Enter' })
     await el.updateComplete
 
     await waitUntil(() => changeHandler.calledOnce)
 
-    await expect(changeHandler).to.have.been.calledOnce
+    expect(changeHandler).to.have.been.calledOnce
     await expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
   })
 
