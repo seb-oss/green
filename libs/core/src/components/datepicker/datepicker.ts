@@ -133,19 +133,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
    */
   get displayValue() {
-    const date = this.value || new Date('0001-01-01')
-    const getDatePart = (part: DatePart) => {
-      if (part === 'year') return date.getFullYear().toString().padStart(4, '0')
-      if (part === 'month')
-        return (date.getMonth() + 1).toString().padStart(2, '0')
-      if (part === 'day') return date.getDate().toString().padStart(2, '0')
-      return ''
-    }
-
-    // Format date according to set dateformat
-    return this._dateFormatLayout.layout
-      .map((f) => getDatePart(f.name))
-      .join(this._dateFormatLayout.delimiter)
+    return this._elInput.innerText
   }
 
   /**
@@ -180,6 +168,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @queryAll(getScopedTagName('gds-date-part-spinner'))
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
+
+  @query('.input')
+  private _elInput!: HTMLDivElement
 
   // Used for Transitional Styles in some legacy browsers
   @state()
