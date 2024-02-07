@@ -176,6 +176,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @state()
   private _tStyles?: HTMLTemplateResult
 
+  #valueOnOpen?: Date
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
@@ -381,7 +383,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @watch('open')
   private _handleOpenChange() {
-    if (this.open) this._elCalendar.then((el) => el.focus())
+    if (this.open) {
+      this.#valueOnOpen = this.value
+      this._elCalendar.then((el) => el.focus())
+    }
   }
 
   #getSpinnerLabel(name: DatePart) {
@@ -485,6 +490,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (e.target !== e.currentTarget) return
     this.open = e.detail.open
+    if (e.detail.reason === 'cancel') {
+      this.value = this.#valueOnOpen
+    }
   }
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
