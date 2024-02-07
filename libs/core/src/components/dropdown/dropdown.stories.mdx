@@ -3,7 +3,7 @@ import { Meta, Canvas } from '@storybook/addon-docs'
 import {
   GdsDropdown,
   GdsOption,
-  GdsOptionHeader,
+  GdsOptionHeading,
 } from '../../../../../dist/libs/core/src'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
@@ -57,7 +57,7 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
   </div>
 </Canvas>
 
-## Option headers
+## Option headings
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
@@ -65,7 +65,7 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
       onchange="document.getElementById('selected-value').innerText = event.target.value"
       label="Select a starship"
     >
-      <gds-option-header>Space vehicles</gds-option-header>
+      <gds-option-heading>Space vehicles</gds-option-heading>
       <gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
       <gds-option value="falcon-1">Millenium Falcon</gds-option>
       <gds-option value="defiant-1">Defiant</gds-option>
@@ -76,7 +76,7 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
       <gds-option value="yamato-1">Yamato</gds-option>
       <gds-option value="equinox-1">Equinox</gds-option>
       <gds-option value="daedalus-1">Daedalus</gds-option>
-      <gds-option-header>Ground vehicles</gds-option-header>
+      <gds-option-heading>Ground vehicles</gds-option-heading>
       <gds-option value="at-at">AT-AT</gds-option>
       <gds-option value="at-st">AT-ST</gds-option>
       <gds-option value="at-te">AT-TE</gds-option>

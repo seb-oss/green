@@ -1,7 +1,12 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
+import {
+  GdsDropdown,
+  GdsOption,
+  GdsOptionHeading,
+  getScopedTagName,
+} from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -49,6 +54,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 
@@ -64,6 +70,12 @@ export const CoreDropdown = createComponent({
 export const CoreOption = createComponent({
   tagName: getScopedTagName('gds-option'),
   elementClass: GdsOption,
+  react: React,
+})
+
+export const CoreOptionHeading = createComponent({
+  tagName: getScopedTagName('gds-option-header'),
+  elementClass: GdsOptionHeading,
   react: React,
 })
 
@@ -99,6 +111,7 @@ export const Dropdown = ({
     const compareFn = compareWith || ((a, b) => a === b)
     return compareFn(o1, o2)
   }
+
   const searchFilterAdapter = (q: string, o: GdsOption) => {
     if (searchFilter) return searchFilter(q, o.value[useValue])
     else
@@ -125,11 +138,20 @@ export const Dropdown = ({
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>
-        {options.map((option) => (
-          <CoreOption key={option[useValue]} value={option[useValue]}>
-            {option[display]}
-          </CoreOption>
-        ))}
+        {options.map((option) => {
+          if (option.heading) {
+            return (
+              <CoreOptionHeading key={option.label}>
+                {option[display]}
+              </CoreOptionHeading>
+            )
+          }
+          return (
+            <CoreOption key={option[useValue]} value={option[useValue]}>
+              {option[display]}
+            </CoreOption>
+          )
+        })}
       </CoreDropdown>
     </div>
   )

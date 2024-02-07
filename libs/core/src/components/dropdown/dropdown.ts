@@ -260,7 +260,7 @@ export class GdsDropdown<ValueT = any>
           @gds-focus="${this.#handleOptionFocusChange}"
           @keydown=${this.#handleListboxKeyDown}
         >
-          <slot gds-allow="gds-option gds-option-header"></slot>
+          <slot gds-allow="gds-option gds-option-heading"></slot>
         </gds-listbox>
       </gds-popover>
     `

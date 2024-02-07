@@ -82,7 +82,8 @@ export class GdsListbox
 
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
-        (o) => !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
+        (o) =>
+          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
       ) || []
     )
   }
@@ -99,7 +100,7 @@ export class GdsListbox
    */
   get visibleSelectedOptionElements() {
     return this.options.filter((el) => el.selected && !el.hidden)
-  }´
+  }
 
   /**
    * Returns a list of all selected `gds-option` elements in the listbox.

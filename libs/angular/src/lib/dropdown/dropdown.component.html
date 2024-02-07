@@ -28,16 +28,23 @@
     ></span>
 
     <ng-container *ngFor="let option of options; let index = index">
-      <gds-option *nggCoreElement [value]="option[useValue]"
-        ><ng-container
-          *ngTemplateOutlet="
-            customOption?.templateRef
-              ? customOption!.templateRef
-              : defaultOption;
-            context: { option: option, index: index }
-          "
-        ></ng-container
-      ></gds-option>
+      <ng-container *ngIf="!option.heading; else optionHeading">
+        <gds-option *nggCoreElement [value]="option[useValue]"
+          ><ng-container
+            *ngTemplateOutlet="
+              customOption?.templateRef
+                ? customOption!.templateRef
+                : defaultOption;
+              context: { option: option, index: index }
+            "
+          ></ng-container
+        ></gds-option>
+      </ng-container>
+      <ng-template #optionHeading>
+        <gds-option-heading *nggCoreElement>{{
+          option.label
+        }}</gds-option-heading>
+      </ng-template>
     </ng-container>
   </gds-dropdown>
 </div>

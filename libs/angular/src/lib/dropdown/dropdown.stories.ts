@@ -51,6 +51,32 @@ Select.args = {
   ],
 }
 
+export const Test = Template.bind({})
+Test.args = {
+  id: '',
+  texts: { placeholder: 'Select meal' },
+  value: '',
+  loop: true,
+  multiSelect: false,
+  searchable: false,
+  display: 'label',
+  useValue: 'value',
+  options: [
+    { label: 'Lunch', value: 'tacos', heading: true },
+    { label: 'Tacos', value: 'tacos' },
+    { label: 'Pizza', value: 'pizza' },
+    { label: 'Sushi', value: 'sushi' },
+    { label: 'Dinner', value: 'tacos', heading: true },
+    { label: 'Ramen', value: 'ramen' },
+    { label: 'Tori Ramen', value: 'tori' },
+    { label: 'Tokyo Ramen', value: 'tokyo' },
+    { label: 'Kyoto Ramen', value: 'kyoto' },
+    { label: 'Sriracha Ramen', value: 'sriracha' },
+    { label: 'Kimchi Ramen', value: 'kimchi' },
+    { label: 'Hakodate Ramen', value: 'hakodate' },
+  ],
+}
+
 export const MultiSelect = Template.bind({})
 MultiSelect.args = {
   id: '',
