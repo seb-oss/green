@@ -27,7 +27,7 @@ In the example below, we are listening to the `onMenuItemClick` event on the `Co
 
 <Canvas>
   <ContextMenu
-    ariaLabel="Choose an action"
+    buttonLabel="Choose an action"
     onMenuItemClick={(e) => console.log(e)}
   >
     <MenuItem>Action 1</MenuItem>
@@ -39,7 +39,7 @@ In the example below, we are listening to the `onMenuItemClick` event on the `Co
 A more typical usage would be to listen to `onClick` events on individual `MenuItem`s, while mapping to your specific data:
 
 ```jsx
-<ContextMenu label="Choose an action">
+<ContextMenu buttonLabel="Choose an action">
   {myListOfActions.map((action) => (
     <MenuItem key={action.id} onClick={() => console.log(action.id)}>
       {action.name}
@@ -47,6 +47,22 @@ A more typical usage would be to listen to `onClick` events on individual `MenuI
   ))}
 </ContextMenu>
 ```
+
+### Hide label
+
+You can hide the label by setting the `hideLabel` prop to `true`.
+
+<Canvas>
+  <ContextMenu
+    hideLabel
+    buttonLabel="Choose an action"
+    onMenuItemClick={(e) => console.log(e)}
+  >
+    <MenuItem>Action 1</MenuItem>
+    <MenuItem>Action 2</MenuItem>
+    <MenuItem>Action 3</MenuItem>
+  </ContextMenu>
+</Canvas>
 
 ### Custom menu item content
 
@@ -70,6 +86,7 @@ You can put any type of content within the `MenuItem` component, including icons
 | buttonLabel     | `string`                       | label for button next to icon                                                |
 | ariaLabel       | `string`                       | aria-label of icon button                                                    |
 | label           | `string`                       | List of items in the accordion                                               |
+| hideLabel       | `boolean`                      | Control if the label should be visually shown                                |
 | onMenuItemClick | `(event: CustomEvent) => void` | A callback function to trigger when item is clicked, is applied to all items |
 
 ### MenuItem
