@@ -327,9 +327,9 @@
     "customParams": {}
   },
   {
-    "id": "components-lists--value-list",
+    "id": "components-valuelist--value-list",
     "name": "ValueList",
-    "title": "Components/Lists",
+    "title": "Components/ValueList",
     "customParams": {}
   },
   {

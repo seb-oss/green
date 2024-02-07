@@ -168,6 +168,16 @@
     }
   },
   {
+    "id": "components-dropdown--test",
+    "name": "Test",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
     "id": "components-dropdown--multi-select",
     "name": "Multi Select",
     "title": "Components/Dropdown",
