@@ -292,7 +292,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         <gds-calendar
           id="calendar"
           @change=${this.#handleCalendarChange}
-          @gds-date-focused=${this.#handleFocusChange}
+          @gds-date-focused=${this.#handleCalendarFocusChange}
           .focusedMonth=${this._focusedMonth}
           .focusedYear=${this._focusedYear}
           .value=${this.value}
@@ -353,7 +353,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const firstValidDate = new Date(d)
     this._elCalendar
       .then((el) => (el.focusedDate = firstValidDate))
-      .then(this.#handleFocusChange)
+      .then(this.#handleCalendarFocusChange)
   }
 
   @watch('value')
@@ -474,10 +474,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     }
   }
 
-  #handleFocusChange = async () => {
+  #handleCalendarFocusChange = async () => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
+    this.value = (await this._elCalendar).focusedDate
     this.requestUpdate()
+    this.#dispatchChangeEvent()
   }
 
   #handlePopoverStateChange = (e: CustomEvent) => {
