@@ -6,7 +6,6 @@ import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { eachYearOfInterval } from 'date-fns'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import {
@@ -131,6 +130,25 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
+   * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
+   */
+  get displayValue() {
+    const date = this.value || new Date('0001-01-01')
+    const getDatePart = (part: DatePart) => {
+      if (part === 'year') return date.getFullYear().toString().padStart(4, '0')
+      if (part === 'month')
+        return (date.getMonth() + 1).toString().padStart(2, '0')
+      if (part === 'day') return date.getDate().toString().padStart(2, '0')
+      return ''
+    }
+
+    // Format date according to set dateformat
+    return this._dateFormatLayout.layout
+      .map((f) => getDatePart(f.name))
+      .join(this._dateFormatLayout.delimiter)
+  }
+
+  /**
    * A reference to the calendar button element inside the shadow root.
    * Inteded for use in integration tests.
    */
@@ -178,7 +196,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
-      <div class="field" id="trigger" @click=${this.#handleFieldClick}>
+      <div
+        class="field"
+        id="trigger"
+        @click=${this.#handleFieldClick}
+        @copy=${this.#handleClipboardCopy}
+        @paste=${this.#handleClipboardPaste}
+      >
         <div class="input">
           ${join(
             map(
@@ -404,8 +428,26 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     )
   }
 
+  #handleClipboardCopy = (e: ClipboardEvent) => {
+    e.preventDefault()
+    e.clipboardData?.setData('text/plain', this.displayValue)
+  }
+
+  #handleClipboardPaste = (e: ClipboardEvent) => {
+    e.preventDefault()
+    const pasted = e.clipboardData?.getData('text/plain')
+    if (!pasted) return
+
+    const pastedDate = new Date(pasted)
+    if (pastedDate.toString() === 'Invalid Date') return
+
+    this.value = pastedDate
+    this.#dispatchChangeEvent()
+  }
+
   #handleFieldClick = (e: MouseEvent) => {
     this._elSpinners[0].focus()
+    window.getSelection()?.selectAllChildren(this._elSpinners[0])
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
