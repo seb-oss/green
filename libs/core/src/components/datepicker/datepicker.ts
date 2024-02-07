@@ -492,6 +492,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.open = e.detail.open
     if (e.detail.reason === 'cancel') {
       this.value = this.#valueOnOpen
+      this.#dispatchChangeEvent()
     }
   }
 
