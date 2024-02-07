@@ -52,17 +52,15 @@ export class GdsContextMenu extends GdsElement {
    * The label for the trigger button.
    */
   @property({
-    attribute: 'hide-label',
+    attribute: 'show-label',
   })
-  hideLabel = false
+  showLabel = false
 
   /**
    * The label for the popover and menu. Should describe the context of the menu.
    */
-  @property({
-    attribute: 'popover-label',
-  })
-  popoverLabel = ''
+  @property()
+  label = ''
 
   /**
    * The placement of the popover relative to the trigger.
@@ -107,7 +105,7 @@ export class GdsContextMenu extends GdsElement {
         @click=${() => (this.open = !this.open)}
       >
         <slot name="trigger">
-          ${this.hideLabel ? nothing : this.buttonLabel}
+          ${this.showLabel ? this.buttonLabel : nothing}
           <i class="sg-icon sg-icon-ellipsis"></i>
         </slot>
       </button>
@@ -115,12 +113,12 @@ export class GdsContextMenu extends GdsElement {
         id="menu"
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
-        .label=${this.popoverLabel}
+        .label=${this.label}
         .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <gds-menu
-          aria-label=${this.popoverLabel}
+          aria-label=${this.label}
           @gds-menu-item-click=${this.#handleItemClick}
         >
           <slot allow="gds-menu-item"></slot>

@@ -48,13 +48,13 @@ A more typical usage would be to listen to `onClick` events on individual `MenuI
 </ContextMenu>
 ```
 
-### Hide label
+### Show label
 
-You can hide the label by setting the `hideLabel` prop to `true`.
+You can show the label by setting the `showLabel` prop to `true`.
 
 <Canvas>
   <ContextMenu
-    hideLabel
+    showLabel
     buttonLabel="Choose an action"
     onMenuItemClick={(e) => console.log(e)}
   >
@@ -86,7 +86,7 @@ You can put any type of content within the `MenuItem` component, including icons
 | buttonLabel     | `string`                       | label for button next to icon                                                |
 | ariaLabel       | `string`                       | aria-label of icon button                                                    |
 | label           | `string`                       | List of items in the accordion                                               |
-| hideLabel       | `boolean`                      | Control if the label should be visually shown                                |
+| showLabel       | `boolean`                      | Control if the label should be visually shown                                |
 | onMenuItemClick | `(event: CustomEvent) => void` | A callback function to trigger when item is clicked, is applied to all items |
 
 ### MenuItem

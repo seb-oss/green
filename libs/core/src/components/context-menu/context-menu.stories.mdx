@@ -11,7 +11,7 @@ displays a list of choices, one choice per line.
 
 ## Basic usage
 
-Menu items are defined by adding `gds-menu-item` elements as children of the `gds-context-menu` element.
+Menu items are defined by adding `gds-menu-item` elements as children of the `gds-context-menu` element. You should always provide a `button-label` so the button is accessibible. Consider to show the label aswell with `show-label` set to `true`;
 
 To handle the user's interaction, you can listen to `click` events on indiviudal menu items, or to the `gds-menu-item-click` event on the parent `gds-context-menu` element.
 
@@ -37,17 +37,13 @@ Note that you should always supply a label for the context menu. The label shoul
 
 ## Customization
 
-### Hide label
+### Show label
 
-You can hide the label by setting the `hide-label` attribute on the `<gds-context-menu>` element. You should still provide a `button-label` so the button remains accessibible.
+You can show the label by setting the `show-label` attribute on the `<gds-context-menu>` element.
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-context-menu
-      popover-label="Select an action"
-      button-label="Menu"
-      hide-label
-    >
+    <gds-context-menu label="Select an action" button-label="Menu" show-label>
       <gds-menu-item>Action 1</gds-menu-item>
       <gds-menu-item>Action 2</gds-menu-item>
       <gds-menu-item>Action 3</gds-menu-item>
@@ -120,13 +116,13 @@ The context menu can be customized using slots. The content of each menu item is
 
 ### Attributes
 
-| Attributes      | Type      | Description                                                                                                                                                                |
-| --------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `popover-label` | String    | The label for the context menu.                                                                                                                                            |
-| `button-label`  | String    | The label for the trigger button.                                                                                                                                          |
-| `hide-label`    | Boolean   | Hides the popover label.                                                                                                                                                   |
-| `open`          | Boolean   | Opens the context menu.                                                                                                                                                    |
-| `placement`     | Placement | The placement of the context menu. Using floating-ui and the type can be found [here](https://github.com/floating-ui/floating-ui/blob/master/packages/utils/src/index.ts). |
+| Attributes     | Type      | Description                                                                                                                                                                |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `label`        | String    | The label for the context menu.                                                                                                                                            |
+| `button-label` | String    | The label for the trigger button.                                                                                                                                          |
+| `show-label`   | Boolean   | Shows the label inside the button.                                                                                                                                         |
+| `open`         | Boolean   | Opens the context menu.                                                                                                                                                    |
+| `placement`    | Placement | The placement of the context menu. Using floating-ui and the type can be found [here](https://github.com/floating-ui/floating-ui/blob/master/packages/utils/src/index.ts). |
 
 ### Events
 
