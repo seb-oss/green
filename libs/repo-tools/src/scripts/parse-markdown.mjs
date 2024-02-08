@@ -1,10 +1,11 @@
-import util from 'util'
 import { finished } from 'node:stream/promises'
-import { makeSource, defineDocumentType } from '@contentlayer/source-files'
+import util from 'util'
+import { defineDocumentType, makeSource } from '@contentlayer/source-files'
 
 const Component = defineDocumentType(() => ({
   name: 'Component',
-  filePathPattern: '**/*.mdx',
+  filePathPattern: '*.mdx',
+  contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
@@ -19,8 +20,11 @@ const Component = defineDocumentType(() => ({
 }))
 
 const source = makeSource({
-  contentDirPath: '/libs/core/src/components',
+  contentDirPath: '.',
   documentTypes: [Component],
+  onSuccess: (res) => {
+    console.log(res)
+  },
 })
 
 async function logChunks(readable) {
