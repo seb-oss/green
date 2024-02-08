@@ -118,7 +118,7 @@ export class GdsPopover extends GdsElement {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.open = false
-        this.#dispatchUiStateEvent()
+        this.#dispatchUiStateEvent('cancel')
         e.stopPropagation()
         e.preventDefault()
       }
@@ -192,10 +192,10 @@ export class GdsPopover extends GdsElement {
     })
   }
 
-  #dispatchUiStateEvent = () => {
+  #dispatchUiStateEvent = (reason: 'show' | 'close' | 'cancel') => {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
-        detail: { open: this.open },
+        detail: { open: this.open, reason },
         bubbles: false,
         composed: false,
       })
@@ -206,7 +206,7 @@ export class GdsPopover extends GdsElement {
     e.stopPropagation()
     e.preventDefault()
     this.open = false
-    this.#dispatchUiStateEvent()
+    this.#dispatchUiStateEvent('close')
 
     // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
     // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
@@ -276,11 +276,11 @@ export class GdsPopover extends GdsElement {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       this.open = true
-      this.#dispatchUiStateEvent()
+      this.#dispatchUiStateEvent('show')
     }
     if (e.key === 'Escape') {
       this.open = false
-      this.#dispatchUiStateEvent()
+      this.#dispatchUiStateEvent('cancel')
     }
   }
 
@@ -314,7 +314,7 @@ export class GdsPopover extends GdsElement {
       if (!isInDialog) {
         e.stopPropagation()
         this.open = false
-        this.#dispatchUiStateEvent()
+        this.#dispatchUiStateEvent('close')
       }
     }
   }
