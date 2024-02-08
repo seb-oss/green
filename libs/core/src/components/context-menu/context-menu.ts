@@ -98,14 +98,14 @@ export class GdsContextMenu extends GdsElement {
       <button
         id="trigger"
         class="icon border-0 small ${classMap({ highlighted: this.open })}"
-        aria-label=${this.buttonLabel}
+        aria-label=${this.buttonLabel ?? this.label}
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
         @click=${() => (this.open = !this.open)}
       >
         <slot name="trigger">
-          ${this.showLabel ? this.buttonLabel : nothing}
+          ${this.showLabel ? this.buttonLabel ?? this.label : nothing}
           <i class="sg-icon sg-icon-ellipsis"></i>
         </slot>
       </button>
@@ -118,7 +118,7 @@ export class GdsContextMenu extends GdsElement {
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <gds-menu
-          aria-label=${this.label}
+          aria-label=${this.label ?? this.buttonLabel}
           @gds-menu-item-click=${this.#handleItemClick}
         >
           <slot allow="gds-menu-item"></slot>
