@@ -163,7 +163,9 @@ describe('<gds-datepicker>', () => {
       )
       const focusedDate = await el.getFocusedDate()
 
-      await expect(onlyDate(focusedDate!)).to.equal(onlyDate(new Date()))
+      await expect(onlyDate(focusedDate!)).to.equal(
+        onlyDate(new Date('2024-01-10'))
+      )
     })
 
     it('should not return a focused date if the popover is closed', async () => {
@@ -325,7 +327,7 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('20')
     })
 
-    it('should set year to min when blurring the year spinner with a value below min', async () => {
+    it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker min="2022-01-01"></gds-datepicker>`
       )
@@ -345,7 +347,7 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value.toString()).to.equal('2022')
+      await expect(spinners[0].value.toString()).to.equal('1900')
     })
 
     it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {

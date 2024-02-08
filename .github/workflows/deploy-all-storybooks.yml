@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -71,7 +78,7 @@ jobs:
 
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.get_token.outputs.token }}
           branch: gh-pages # The branch the action should deploy to.
           folder: dist/storybook # The folder the action should deploy.
           target-folder: ${{ steps.target.outputs.target }} # The folder the action should deploy to.

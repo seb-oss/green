@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "3.0.1",
+  "version": "3.0.4",
   "peerDependencies": {
     "@angular/cdk": ">=15.2.9",
     "@angular/common": ">=15.2.9",
@@ -11,8 +11,8 @@
     "rxjs": ">=6.5.3"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.4.1",
-    "@sebgroup/chlorophyll": "^3.0.1",
+    "@sebgroup/green-core": "^1.4.5",
+    "@sebgroup/chlorophyll": "^3.0.4",
     "@sebgroup/extract": "^3.0.0",
     "tslib": "^2.3.1"
   },
@@ -23,7 +23,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "directory": "../../dist/libs/angular"
   },
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "contributors": [],

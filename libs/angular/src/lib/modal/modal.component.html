@@ -1,36 +1,82 @@
 <ng-container *ngIf="isOpen" [ngSwitch]="modalType">
-    <aside data-testid="modal" *ngSwitchCase="'slideout'" role="dialog" aria-modal="true" [class.small]="size === 'sm'" [class.medium]="size === 'md'" [class.large]="size === 'lg'">
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+  <div class="gds-dialog-wrapper">
+    <aside
+      data-testid="modal"
+      *ngSwitchCase="'slideout'"
+      role="dialog"
+      aria-modal="true"
+      [class.small]="size === 'sm'"
+      [class.medium]="size === 'md'"
+      [class.large]="size === 'lg'"
+      [class.entered]="isOpen"
+    >
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </aside>
-    <main data-testid="modal" *ngSwitchCase="'takeover'" role="dialog" aria-modal="true">
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    <main
+      data-testid="modal"
+      *ngSwitchCase="'takeover'"
+      role="dialog"
+      aria-modal="true"
+      [class.entered]="isOpen"
+    >
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </main>
-    <section data-testid="modal" *ngSwitchDefault role="dialog" aria-modal="true" [class.small]="size === 'sm'" [class.medium]="size === 'md'" [class.large]="size === 'lg'">
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    <section
+      data-testid="modal"
+      *ngSwitchDefault
+      role="dialog"
+      aria-modal="true"
+      [class.small]="size === 'sm'"
+      [class.medium]="size === 'md'"
+      [class.large]="size === 'lg'"
+      [class.entered]="isOpen"
+    >
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </section>
     <ng-template #contentTemplate>
-        <ng-container *ngIf="!hideHeader">
-            <header *ngIf="!modalHeaderContent; else headerContentTemplate" ngg-modal-header data-testid="modal-header" [header]="header" (closed)="this.handleCloseClick($event)"></header>
-        </ng-container>
-        <div ngg-modal-body data-testid="modal-body" class="body">
-            <ng-container *ngTemplateOutlet="bodyContentTemplate"></ng-container>
-        </div>
-        <ng-container *ngIf="!hideFooter && (dismissLabel || confirmLabel)">
-            <footer *ngIf="!modalFooterContent; else footerContentTemplate" ngg-modal-footer data-testid="modal-footer" [dismissLabel]="dismissLabel" [confirmLabel]="confirmLabel" (dismiss)="this.handleDismiss($event)" (confirm)="this.handleConfirm($event)"></footer>
-        </ng-container>
+      <ng-container *ngIf="!hideHeader">
+        <header
+          *ngIf="!modalHeaderContent; else headerContentTemplate"
+          ngg-modal-header
+          data-testid="modal-header"
+          [header]="header"
+          (closed)="this.handleCloseClick($event)"
+        ></header>
+      </ng-container>
+      <div ngg-modal-body data-testid="modal-body" class="body">
+        <ng-container *ngTemplateOutlet="bodyContentTemplate"></ng-container>
+      </div>
+      <ng-container *ngIf="!hideFooter && (dismissLabel || confirmLabel)">
+        <footer
+          *ngIf="!modalFooterContent; else footerContentTemplate"
+          ngg-modal-footer
+          data-testid="modal-footer"
+          [dismissLabel]="dismissLabel"
+          [confirmLabel]="confirmLabel"
+          (dismiss)="this.handleDismiss($event)"
+          (confirm)="this.handleConfirm($event)"
+        ></footer>
+      </ng-container>
     </ng-template>
     <ng-template #headerContentTemplate>
-        <header data-testid="modal-header">
-            <ng-content select="[nggModalHeader]"></ng-content>
-        </header>
+      <header data-testid="modal-header">
+        <ng-content select="[nggModalHeader]"></ng-content>
+      </header>
     </ng-template>
     <ng-template #bodyContentTemplate>
-        <ng-content></ng-content>
+      <ng-content></ng-content>
     </ng-template>
     <ng-template #footerContentTemplate>
-        <footer data-testid="modal-footer">
-            <ng-content select="[nggModalFooter]"></ng-content>
-        </footer>
+      <footer data-testid="modal-footer">
+        <ng-content select="[nggModalFooter]"></ng-content>
+      </footer>
     </ng-template>
-    <div #backdrop data-testid="modal-backdrop" class="backdrop" (click)="this.handleBackdropClick($event)" [attr.aria-hidden]="true"></div>
+    <div
+      #backdrop
+      data-testid="modal-backdrop"
+      class="backdrop entered"
+      (click)="this.handleBackdropClick($event)"
+      [attr.aria-hidden]="true"
+    ></div>
+  </div>
 </ng-container>

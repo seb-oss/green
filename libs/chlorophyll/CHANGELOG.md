@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [3.0.4](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.3...@sebgroup/chlorophyll@3.0.4) (2024-01-26)
+
+
+### Bug Fixes
+
+* **chlorophyll:** change font weight for h5 and h6 [#1172](https://github.com/sebgroup/green/issues/1172) ([#1175](https://github.com/sebgroup/green/issues/1175)) ([d7c8a81](https://github.com/sebgroup/green/commit/d7c8a814ef965659275c945214cbb830d957b370))
+
+
+
 ## [3.0.3](https://github.com/sebgroup/green/compare/@sebgroup/chlorophyll@3.0.2...@sebgroup/chlorophyll@3.0.3) (2024-01-25)
 
 

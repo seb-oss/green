@@ -178,7 +178,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
-      <div class="field" id="trigger">
+      <div class="field" id="trigger" @click=${this.#handleFieldClick}>
         <div class="input">
           ${join(
             map(
@@ -364,6 +364,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.#spinnerState = { year, month, day }
   }
 
+  @watch('open')
+  private _handleOpenChange() {
+    if (this.open) this._elCalendar.then((el) => el.focus())
+  }
+
   #getSpinnerLabel(name: DatePart) {
     const labels = {
       year: msg('Year'),
@@ -375,7 +380,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   #getMinSpinnerValue(name: DatePart) {
     const min = {
-      year: this.min.getFullYear(),
+      year: 1900,
       month: 1,
       day: 1,
     }
@@ -384,7 +389,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   #getMaxSpinnerValue(name: DatePart) {
     const max = {
-      year: this.max.getFullYear(),
+      year: 9999,
       month: 12,
       day: 31,
     }
@@ -397,6 +402,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         detail: { value: this.value },
       })
     )
+  }
+
+  #handleFieldClick = (e: MouseEvent) => {
+    this._elSpinners[0].focus()
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
@@ -506,26 +515,26 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
-   * Returns an array of years between the min and max dates for use in the year dropdown.
-   * If the value is set to a year outside the range, it will be added to the array until the value is changed.
+   * Returns a year iterator between the min and max dates for use in the year dropdown.
    */
   get #years() {
-    const years = eachYearOfInterval({
-      start: this.min,
-      end: this.max,
-    }).map((date) => date.getFullYear())
-
-    if (!this.value) return years
-
-    const selectedYear = this.value.getFullYear()
-    const valueIsInrage =
-      years[0] <= selectedYear && years[years.length - 1] >= selectedYear
-
-    if (!valueIsInrage) {
-      years.push(selectedYear)
-      years.sort((a, b) => a - b)
+    const minYear = this.min.getFullYear()
+    const maxYear = this.max.getFullYear()
+    const isOutsideRange = this.#isValueOutsideRange
+    const valueYear = this.value?.getFullYear()
+    return {
+      *[Symbol.iterator]() {
+        if (isOutsideRange) yield valueYear
+        for (let i = minYear; i <= maxYear; i++) yield i
+      },
     }
+  }
 
-    return years
+  get #isValueOutsideRange() {
+    if (!this.value) return false
+    return (
+      this.value.getFullYear() < this.min.getFullYear() ||
+      this.value.getFullYear() > this.max.getFullYear()
+    )
   }
 }

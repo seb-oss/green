@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '../../../../../dist/libs/core/src/index.js'
@@ -12,6 +12,7 @@ import {
   getScopedTagName,
   GdsOption,
 } from '../../../../../dist/libs/core/src/index.js'
+import { send } from 'process'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -75,7 +76,7 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
 
     await expect(el.value).to.equal('v2')
-    await expect(el.displayValue).to.equal('Option 2')
+    await conditionToBeTrue(() => el.displayValue === 'Option 2')
   })
 
   it('should have a label element connected to trigger if `label` attribute is set', async () => {
@@ -329,6 +330,26 @@ describe('<gds-dropdown>', () => {
     await expect(el.options[1].selected).equal(true)
     await expect(el.options[2].selected).equal(false)
   })
+
+  it('should update `displayValue` when the text in the selected option element is changed', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    el.value = 'v3'
+    await el.updateComplete
+
+    const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
+    option3.textContent = 'Option 3 (updated)'
+
+    await el.updateComplete
+
+    await expect(el.displayValue).to.equal('Option 3 (updated)')
+  })
 })
 
 describe('<gds-dropdown> interactions', () => {
@@ -353,41 +374,45 @@ describe('<gds-dropdown> interactions', () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
         <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
+        <gds-option id="option2" value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
     await timeout(0)
 
-    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
+    const option2 = document.getElementById('option2')!
 
-    await clickOnElement(option2, 'center')
+    el.focus()
+    await sendKeys({ press: 'ArrowDown' })
+    await el.updateComplete
+    await sendKeys({ press: 'Enter' })
     await el.updateComplete
 
-    await expect(el.value).to.equal('v2')
+    await waitUntil(() => el.value === 'v2')
   })
 
   it('should emit `change` event when option is selected', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
         <gds-option value="v1">Option 1</gds-option>
-        <gds-option value="v2">Option 2</gds-option>
+        <gds-option id="option2" value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
     await timeout(0)
 
-    const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
-
     const changeHandler = sinon.spy()
     el.addEventListener('change', changeHandler)
 
-    await clickOnElement(option2, 'center')
+    el.focus()
+    await sendKeys({ press: 'ArrowDown' })
+    await el.updateComplete
+    await sendKeys({ press: 'Enter' })
     await el.updateComplete
 
     await waitUntil(() => changeHandler.calledOnce)
 
-    await expect(changeHandler).to.have.been.calledOnce
+    expect(changeHandler).to.have.been.calledOnce
     await expect(changeHandler.firstCall.args[0].detail.value).to.equal('v2')
   })
 

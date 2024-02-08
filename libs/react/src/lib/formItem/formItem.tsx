@@ -1,4 +1,4 @@
-import IconButton from '../form/iconButton/iconButton'
+import { IconButton } from '../form'
 import {
   debounce,
   delay,
