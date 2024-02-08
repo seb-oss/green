@@ -195,6 +195,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: any): void {
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: () => unknown): void {

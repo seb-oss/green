@@ -117,6 +117,7 @@ export class NggDatepickerComponent
   writeValue(value: any): void {
     console.log('writeValue', value)
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: any): void {
