@@ -13,6 +13,10 @@
 
   :host(:hover),
   :host(:focus-visible) {
+    background-color: var(--gds-ref-pallet-base200);
+  }
+
+  :host(:active) {
     background-color: var(--gds-ref-pallet-base300);
   }
 
