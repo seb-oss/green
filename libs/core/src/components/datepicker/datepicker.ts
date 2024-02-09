@@ -424,6 +424,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     )
   }
 
+  #dispatchInputEvent() {
+    this.dispatchEvent(
+      new CustomEvent('input', {
+        detail: { value: this.value },
+      })
+    )
+  }
+
   #handleClipboardCopy = (e: ClipboardEvent) => {
     e.preventDefault()
     e.clipboardData?.setData('text/plain', this.displayValue)
@@ -484,15 +492,20 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this._focusedYear = (await this._elCalendar).focusedYear
     this.value = (await this._elCalendar).focusedDate
     this.requestUpdate()
-    this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
-  #handlePopoverStateChange = (e: CustomEvent) => {
+  #handlePopoverStateChange = async (e: CustomEvent) => {
     if (e.target !== e.currentTarget) return
     this.open = e.detail.open
+
+    if (e.detail.reason === 'close') {
+      this.value = (await this._elCalendar).focusedDate
+      this.#dispatchChangeEvent()
+    }
+
     if (e.detail.reason === 'cancel') {
       this.value = this.#valueOnOpen
-      this.#dispatchChangeEvent()
     }
   }
 
