@@ -1,97 +1,77 @@
-import React, { ReactNode } from 'react'
+import React, { useState } from 'react'
 import {
-  IndicatorType,
+  IExpandableInformation,
+  ILabelAndLabelInformation,
   IValidator,
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
 import { ChevronDown } from '../icons'
-import { SelectorAttributesProps, LabelProps } from '../../types'
 import { FormItem } from '../formItem'
+import classNames from 'classnames'
 
-export interface SelectProps extends SelectorAttributesProps, LabelProps {
-  children: ReactNode
-  validator?: IValidator
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
-  onSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void
-  defaultValue?: string | number
-  value?: string | number
-  testId?: string
-  expandableInfo?: string
-  expandableInfoButtonLabel?: string
-  name?: string
-}
-
-interface OptionProps {
-  children: string
-  value: string | number
-  disabled?: boolean
-  invalid?: boolean
-  autocomplete?: string
-  autofocus?: boolean
-  form?: string
-  name?: string
-  required?: boolean
-  size?: number
-  selected?: boolean
-}
-
-interface OptionGroupProps {
+export interface SelectProps 
+  extends IExpandableInformation,
+    ILabelAndLabelInformation,
+    React.DetailedHTMLProps<
+      React.SelectHTMLAttributes<HTMLSelectElement>, 
+      HTMLSelectElement
+    > {
   label: string
-  children: React.ReactElement<OptionProps> | React.ReactElement<OptionProps>[]
-  disabled?: boolean
+  info?: string
+  validator?: IValidator | undefined
+  value?: string
+  testId?: string
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
-      id,
-      className,
-      children,
+      'aria-describedby': ariaDescribedBy,
+      id = randomId(),
       validator,
       label,
-      labelInformation,
-      defaultValue,
-      value,
+      info,
       testId,
-      onChange,
-      onSelect,
       expandableInfo,
       expandableInfoButtonLabel,
-      name,
+      required,
+      ...props
     },
     ref
   ) => {
-    const selectId = id ?? randomId()
+    const [uuid] = useState(id)
 
-    const validatorClassName = validateClassName(
-      validator?.indicator as IndicatorType
-    )
+    const selectClassName = classNames('gds-select', {
+      [`${validateClassName(validator?.indicator)}`]: validator
+    })
+
+    const describedBy = classNames(ariaDescribedBy, {
+      [`${uuid}_info`]: info,
+      [`gds-expandable-info-${uuid}`]: expandableInfo,
+      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+    })
 
     return (
       <FormItem
         label={label}
-        labelInformation={labelInformation}
+        labelInformation={info}
         expandableInfo={expandableInfo}
         expandableInfoButtonLabel={expandableInfoButtonLabel}
-        inputId={selectId}
+        inputId={uuid}
         validator={validator}
       >
-        <div className={`gds-select ${validatorClassName}`}>
+        <div className={selectClassName}>
           <select
-            id={selectId}
+            aria-describedby={describedBy || undefined}
+            aria-invalid={validator?.indicator === 'error'}
+            aria-required={required}
+            id={uuid}
             data-testid={testId}
-            className={className}
-            name={name}
-            defaultValue={defaultValue}
-            value={value}
             ref={ref}
-            onChange={(event) => {
-              onChange && onChange(event)
-            }}
-          >
-            {children}
-          </select>
+            required={required}
+            {...props}
+          />
           <ChevronDown />
         </div>
       </FormItem>
@@ -99,23 +79,20 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   }
 )
 
-export const Option = ({ value, children, ...rest }: OptionProps) => {
+type OptionProps = React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>;
+
+export const Option = (props: OptionProps) => {
   return (
-    <option value={value} {...rest}>
-      {children}
-    </option>
+    <option {...props} />
   )
 }
 
-export const OptionGroup = ({
-  label,
-  disabled,
-  children,
-}: OptionGroupProps) => {
+type OptGroupProps = React.DetailedHTMLProps<React.OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>;
+
+export const OptionGroup = (props: OptGroupProps) => {
   return (
-    <optgroup label={label} disabled={disabled}>
-      {children}
-    </optgroup>
+    <optgroup {...props} />
   )
 }
+
 export default { Select, Option, OptionGroup }

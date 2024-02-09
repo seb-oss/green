@@ -49,6 +49,7 @@ export const TextArea = ({
   value,
   testId: dataTestId,
   maxLength,
+  required,
   ...props
 }: ITextAreaProps) => {
   const [uuid] = useState(id)
@@ -58,7 +59,7 @@ export const TextArea = ({
     setLocalValue(value)
   }, [value])
 
-  const localOnChange = useCallback(
+  const handleChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
       setLocalValue(event.target.value)
       if (onChange) onChange(event)
@@ -66,16 +67,17 @@ export const TextArea = ({
     [setLocalValue, onChange]
   )
 
-  const inputAriaDescribedBy =
+  const describedBy =
     classNames(ariaDescribedBy, {
       [`gds-expandable-info-${uuid}`]: expandableInfo,
       [`${uuid}_info`]: info,
-    }) || undefined
+      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+    })
 
   const inputClassName =
     classNames(
       className,
-      validator && validateClassName(validator.indicator)
+      { [validateClassName(validator?.indicator)]: validator }
     ) || undefined
 
   const rightAlignedFooterInfo = maxLength
@@ -95,16 +97,19 @@ export const TextArea = ({
     >
       <div className="gds-input-wrapper">
         <textarea
-          aria-describedby={inputAriaDescribedBy}
+          aria-describedby={describedBy || undefined}
+          aria-invalid={validator?.indicator === 'error'}
+          aria-required={required}
           autoComplete={autoComplete}
-          className={inputClassName}
+          className={inputClassName || undefined}
           id={uuid}
-          onChange={localOnChange}
+          onChange={handleChange}
           role={role}
           rows={rows}
           value={localValue}
           data-testid={dataTestId}
           maxLength={maxLength}
+          required={required}
           {...props}
         />
       </div>
