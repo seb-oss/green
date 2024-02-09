@@ -16,8 +16,6 @@ import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
-import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
-
 import styles from './popover.styles'
 import { reference } from '@popperjs/core'
 
@@ -256,7 +254,7 @@ export class GdsPopover extends GdsElement {
     this.#autoPositionCleanupFn = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
-        middleware: [offset(8), flip(), topLayerOverTransforms()],
+        middleware: [offset(8), flip()],
         strategy: 'fixed',
       }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
