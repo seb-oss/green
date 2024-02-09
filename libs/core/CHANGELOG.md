@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.1
+
+### Patch Changes
+
+- 943d785: Datepicker should emit `ìnput` event when focus is changed in the calendar
+- 204747d: Update `@floating-ui/dom` and remove previous `topLayerOverTransforms` hack
+
 ## 1.5.0
 
 ### Minor Changes
