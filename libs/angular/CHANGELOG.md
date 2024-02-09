@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.1.0
+
+### Minor Changes
+
+- 5a70b2f: Context menu: updated style and functionality
+
+### Patch Changes
+
+- 88d15d6: Update visible value when Dropdown/Datepicker formGroup changed programatically
+- 90672d7: Dropdown: Recalculate display text when options list changes. Closes #1192
+- Updated dependencies [5a70b2f]
+- Updated dependencies [cace30b]
+  - @sebgroup/green-core@1.5.0
+
 ## 3.0.4
 
 ### Patch Changes

@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.5.1
+
+### Patch Changes
+
+- 943d785: Datepicker should emit `ìnput` event when focus is changed in the calendar
+- 204747d: Update `@floating-ui/dom` and remove previous `topLayerOverTransforms` hack
+
+## 1.5.0
+
+### Minor Changes
+
+- 5a70b2f: Context menu: updated style and functionality
+- cace30b: Datepicker: Implment copy/paste. Closes #1202
+  Datepicker: Update colors to match Dropdown. Closes #1183
+  Datepicker: Update focus behaviour to match native datepicker. Closes #1183
+  Datepicker: Update Esc key behaviour to match native datepicker
+
 ## 1.4.6
 
 ### Patch Changes

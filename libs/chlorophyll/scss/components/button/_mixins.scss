@@ -149,6 +149,7 @@ $button-danger-border-color: $button-danger-bg;
   height: 2.75rem;
   width: 2.75rem;
   min-width: auto;
+  --color: var(--gds-ref-pallet-base800);
 
   .form-group & {
     margin-top: -0.625rem;
@@ -178,20 +179,16 @@ $button-danger-border-color: $button-danger-bg;
     transition: all tokens.$transition-time;
   }
 
-  &:hover {
-    background-color: var(--gds-ref-pallet-base800);
-    border-color: var(--gds-ref-pallet-base800);
+  &:hover,
+  &.highlighted {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
 
-    path,
-    line,
-    circle,
-    rect,
-    ellipse,
-    polyline,
-    text {
-      fill: var(--gds-ref-pallet-base000);
-      stroke: var(--gds-ref-pallet-base000);
-    }
+  &:active,
+  &.highlighted:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: transparent;
   }
 }
 

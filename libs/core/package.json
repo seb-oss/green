@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.4.6",
+  "version": "1.5.1",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -22,11 +22,11 @@
     "directory": "../../dist/libs/core/src"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.5.4",
+    "@floating-ui/dom": "^1.6.1",
     "@lit/localize": "0.11.4",
+    "date-fns": "^2.28.0",
     "lit": "^2.8.0",
-    "reflect-metadata": "^0.1.13",
-    "date-fns": "^2.28.0"
+    "reflect-metadata": "^0.1.13"
   },
   "exports": {
     ".": {
