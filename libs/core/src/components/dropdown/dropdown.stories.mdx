@@ -1,5 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
-
+import { Canvas, Meta } from '@storybook/addon-docs'
 import { GdsDropdown, GdsOption } from '../../../../../dist/libs/core/src'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
@@ -118,8 +117,10 @@ Optionally, the width of the popover can be locked to the width of the trigger b
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-dropdown syncPopoverWidth style={{width: '200px'}}>
-      <gds-option value="1701-D-1">Enterprise 1701-D is a starship from the TNG series</gds-option>
+    <gds-dropdown syncPopoverWidth style={{ width: '200px' }}>
+      <gds-option value="1701-D-1">
+        Enterprise 1701-D is a starship from the TNG series
+      </gds-option>
       <gds-option value="falcon-1">Millenium Falcon</gds-option>
       <gds-option value="defiant-1">Defiant</gds-option>
       <gds-option value="voyager-1">Voyager</gds-option>

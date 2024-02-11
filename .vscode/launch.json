@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
+  "configurations": [
+    {
+      "name": "Debug Next",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "run", "docs:build"],
+      "outputCapture": "console",
+      "internalConsoleOptions": "openOnSessionStart",
+      "console": "internalConsole"
+    },
+    {
+      "name": "Debug Markdown",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["libs/repo-tools/src/scripts/parse-markdown.mjs"],
+      "internalConsoleOptions": "openOnSessionStart",
+      "console": "internalConsole",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug Contentlayer",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "contentlayer",
+        "build",
+        "-c",
+        "libs/repo-tools/src/scripts/contentlayer.config.js"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "console": "internalConsole",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
