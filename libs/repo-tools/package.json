@@ -4,5 +4,8 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@nx/devkit": "16.8.1"
+  }
 }
