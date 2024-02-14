@@ -34,7 +34,7 @@ import { CSSResult, HTMLTemplateResult } from 'lit'
  *
  * @status beta
  *
- * @slot - Options for the dropdown. Accepts `gds-option` elements.
+ * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
  * @slot sub-label - Renders between the label and the trigger button.
  * @slot message - Renders below the trigger button. Will be red if there is a validation error.
@@ -260,7 +260,7 @@ export class GdsDropdown<ValueT = any>
           @gds-focus="${this.#handleOptionFocusChange}"
           @keydown=${this.#handleListboxKeyDown}
         >
-          <slot gds-allow="gds-option"></slot>
+          <slot gds-allow="gds-option gds-menu-heading"></slot>
         </gds-listbox>
       </gds-popover>
     `

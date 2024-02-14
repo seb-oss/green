@@ -1,0 +1,16 @@
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  :host {
+    padding: 0.5rem 1rem;
+    background-color: var(--gds-ref-pallet-base100);
+    color: var(--gds-ref-pallet-base800);
+    display: flex;
+    user-select: none;
+    font-size: 0.875rem;
+  }
+
+  :host([aria-hidden='true']) {
+    display: none;
+  }
+}

@@ -40,6 +40,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 

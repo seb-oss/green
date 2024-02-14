@@ -4,6 +4,7 @@ import { createComponent } from '@lit/react'
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { CoreMenuHeading } from '../context-menu/context-menu'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -49,6 +50,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 
@@ -99,6 +101,7 @@ export const Dropdown = ({
     const compareFn = compareWith || ((a, b) => a === b)
     return compareFn(o1, o2)
   }
+
   const searchFilterAdapter = (q: string, o: GdsOption) => {
     if (searchFilter) return searchFilter(q, o.value[useValue])
     else
@@ -125,11 +128,20 @@ export const Dropdown = ({
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>
-        {options.map((option) => (
-          <CoreOption key={option[useValue]} value={option[useValue]}>
-            {option[display]}
-          </CoreOption>
-        ))}
+        {options.map((option) => {
+          if (option.heading) {
+            return (
+              <CoreMenuHeading key={option.label}>
+                {option[display]}
+              </CoreMenuHeading>
+            )
+          }
+          return (
+            <CoreOption key={option[useValue]} value={option[useValue]}>
+              {option[display]}
+            </CoreOption>
+          )
+        })}
       </CoreDropdown>
     </div>
   )

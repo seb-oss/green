@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, LitElement, html } from 'lit'
+import { HTMLTemplateResult, html } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
