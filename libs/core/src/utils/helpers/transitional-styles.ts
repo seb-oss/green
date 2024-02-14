@@ -7,7 +7,6 @@ import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
 import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
-import * as List from '../../components/list/list.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 
@@ -18,9 +17,6 @@ export const registerTransitionalStyles = () => {
   ContextMenu.register()
   Calendar.register()
   Datepicker.register()
-  console.log(List)
-
-  List.register()
 }
 
 declare global {
