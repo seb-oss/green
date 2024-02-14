@@ -1,0 +1,29 @@
+import { HTMLTemplateResult } from 'lit'
+import { state } from 'lit/decorators.js'
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
+
+/**
+ * @element gds-<%= name %>
+ * @internal
+ */
+@gdsCustomElement('gds-<%= toKebabCase(name) %>')
+export class Gds<%= toPascalCase(name) %> extends GdsElement {
+  // Used for Transitional Styles in some legacy browsers
+  @state()
+  private _tStyles?: HTMLTemplateResult
+
+  connectedCallback(): void {
+    super.connectedCallback()
+
+    TransitionalStyles.instance.apply(this, 'gds-<%= toKebabCase(name) %>')
+  }
+
+  render() {
+    return html`${this._tStyles}<slot></slot>`
+  }
+}

@@ -61,11 +61,18 @@ jobs:
       - name: Build storybook
         run: yarn nx affected --target build-storybook --base=origin/main --parallel=false
 
+      - name: Did we build any?
+        id: has_storybooks
+        uses: andstor/file-existence-action@v3
+        with:
+          files: './dist/storybook'
+
       - name: Store PR number
+        if: steps.has_storybooks.outputs.files_exists == 'true'
         run: echo ${{ github.event.number }} > ./dist/storybook/PR_NUMBER
 
       - name: Upload Artifact
-        if: always()
+        if: steps.has_storybooks.outputs.files_exists == 'true'
         uses: actions/upload-artifact@v2
         with:
           name: pr
