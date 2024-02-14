@@ -1,5 +1,7 @@
 ---
 '@sebgroup/green-core': minor
+'@sebgroup/green-angular': minor
+'@sebgroup/green-react': minor
 ---
 
-Dropdown: adding option heading to core, react and angular
+Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
