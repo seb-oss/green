@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.2.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- Updated dependencies [158d93a]
+- Updated dependencies [e0d3f09]
+- Updated dependencies [d8de14a]
+  - @sebgroup/green-core@1.6.0
+  - @sebgroup/chlorophyll@3.0.5
+
 ## 3.1.0
 
 ### Minor Changes

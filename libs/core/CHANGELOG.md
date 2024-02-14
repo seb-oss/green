@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- e0d3f09: Datepicker: Fix copy/paste when there are multiple instances of Datepicker in the document
+
 ## 1.5.1
 
 ### Patch Changes
