@@ -444,7 +444,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #handleSpinnerFocus = (e: FocusEvent) => {
     this._elTrigger.then((field) => {
       document.getSelection()?.removeAllRanges()
-      let range = new Range()
+      const range = new Range()
       range.setStart(field.firstChild!, 0)
       range.setEnd(field.lastChild!, 4)
       document.getSelection()?.addRange(range)
