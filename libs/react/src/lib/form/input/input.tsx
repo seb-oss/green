@@ -72,9 +72,7 @@ export const Input = ({
       const newValue = formatter ? formatter(oldValue) : oldValue
       setLocalValue(newValue)
 
-      event.target.value = newValue
-
-      if (onChange) onChange(event)
+      if (onChange) onChange({ ...event, target: { ...event.target, value: newValue } });
       if (onChangeInput) onChangeInput(newValue)
 
       // Fixes bug: React loses caret position when you format the input value
