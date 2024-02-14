@@ -39,6 +39,7 @@ const htmlTemplate = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true</script>
 </head>
 <body>
     <ul>${components
@@ -48,6 +49,7 @@ const htmlTemplate = `
       )
       .join('')}</ul>
     <div id="root">
+        <gds-button>Hello</gds-button>
     </div>
 </body>
 </html>
