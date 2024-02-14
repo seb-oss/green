@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../libs/repo-tools/src/scripts/contentlayer.config.js"],
+  "sourcesContent": ["import { defineDocumentType, makeSource } from '@contentlayer/source-files'\n\nconst Component = defineDocumentType(() => ({\n  name: 'Component',\n  filePathPattern: '**/*.mdx',\n  contentType: 'mdx',\n  fields: {\n    title: {\n      type: 'string',\n    },\n    date: {\n      type: 'string',\n    },\n    global_id: {\n      type: 'string',\n    },\n  },\n}))\n\nconst Todo = defineDocumentType(() => ({\n  name: 'Todo',\n  filePathPattern: '**/*.md',\n  contentType: 'markdown',\n  fields: {\n    title: {\n      type: 'string',\n    },\n    date: {\n      type: 'string',\n    },\n    global_id: {\n      type: 'string',\n    },\n  },\n}))\n\nexport default makeSource({\n  contentDirPath: 'libs/core/src/components',\n  documentTypes: [Component, Todo],\n})\n"],
+  "mappings": ";AAAA,SAAS,oBAAoB,kBAAkB;AAE/C,IAAM,YAAY,mBAAmB,OAAO;AAAA,EAC1C,MAAM;AAAA,EACN,iBAAiB;AAAA,EACjB,aAAa;AAAA,EACb,QAAQ;AAAA,IACN,OAAO;AAAA,MACL,MAAM;AAAA,IACR;AAAA,IACA,MAAM;AAAA,MACJ,MAAM;AAAA,IACR;AAAA,IACA,WAAW;AAAA,MACT,MAAM;AAAA,IACR;AAAA,EACF;AACF,EAAE;AAEF,IAAM,OAAO,mBAAmB,OAAO;AAAA,EACrC,MAAM;AAAA,EACN,iBAAiB;AAAA,EACjB,aAAa;AAAA,EACb,QAAQ;AAAA,IACN,OAAO;AAAA,MACL,MAAM;AAAA,IACR;AAAA,IACA,MAAM;AAAA,MACJ,MAAM;AAAA,IACR;AAAA,IACA,WAAW;AAAA,MACT,MAAM;AAAA,IACR;AAAA,EACF;AACF,EAAE;AAEF,IAAO,8BAAQ,WAAW;AAAA,EACxB,gBAAgB;AAAA,EAChB,eAAe,CAAC,WAAW,IAAI;AACjC,CAAC;",
+  "names": []
+}

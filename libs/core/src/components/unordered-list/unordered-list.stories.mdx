@@ -1,12 +1,18 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
 
-import { GdsList } from '../../../../../dist/libs/core/src'
+import { GdsUnorderedList } from '../../../../../dist/libs/core/src'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Lists/Unordered List" />
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-list>Does hthis mf work?</gds-list>
+    <gds-unordered-list>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+    </gds-unordered-list>
   </div>
 </Canvas>

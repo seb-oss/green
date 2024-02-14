@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../libs/repo-tools/src/scripts/contentlayer.config.js"],
+  "sourcesContent": ["import { defineDocumentType, makeSource } from '@contentlayer/source-files'\n\nconst Component = defineDocumentType(() => ({\n  name: 'Component',\n  filePathPattern: '*.mdx',\n  contentType: 'mdx',\n  fields: {\n    title: {\n      type: 'string',\n    },\n    date: {\n      type: 'string',\n    },\n    global_id: {\n      type: 'string',\n    },\n  },\n}))\n\nexport default makeSource({\n  pluginType: 'local',\n  contentDirPath: 'libs/core/src/components',\n  documentTypes: [Component],\n  onExtraFieldData: 'warn',\n  onMissingOrIncompatibleData: 'warn',\n  onUnknownDocuments: 'warn',\n  onSuccess: (res) => {\n    console.log(res)\n  },\n})\n"],
+  "mappings": ";AAAA,SAAS,oBAAoB,kBAAkB;AAE/C,IAAM,YAAY,mBAAmB,OAAO;AAAA,EAC1C,MAAM;AAAA,EACN,iBAAiB;AAAA,EACjB,aAAa;AAAA,EACb,QAAQ;AAAA,IACN,OAAO;AAAA,MACL,MAAM;AAAA,IACR;AAAA,IACA,MAAM;AAAA,MACJ,MAAM;AAAA,IACR;AAAA,IACA,WAAW;AAAA,MACT,MAAM;AAAA,IACR;AAAA,EACF;AACF,EAAE;AAEF,IAAO,8BAAQ,WAAW;AAAA,EACxB,YAAY;AAAA,EACZ,gBAAgB;AAAA,EAChB,eAAe,CAAC,SAAS;AAAA,EACzB,kBAAkB;AAAA,EAClB,6BAA6B;AAAA,EAC7B,oBAAoB;AAAA,EACpB,WAAW,CAAC,QAAQ;AAClB,YAAQ,IAAI,GAAG;AAAA,EACjB;AACF,CAAC;",
+  "names": []
+}

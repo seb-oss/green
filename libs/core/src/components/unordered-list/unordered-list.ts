@@ -20,6 +20,9 @@ export class GdsUnorderedList extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
 
+    console.log(this)
+
+    this.setAttribute('role', 'list')
     // This component should have the same style as option, so we just apply `gds-option` here.
     TransitionalStyles.instance.apply(this, 'gds-unordered-list')
   }
