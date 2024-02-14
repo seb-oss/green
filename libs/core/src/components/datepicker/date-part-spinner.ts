@@ -106,8 +106,6 @@ export class GdsDatePartSpinner extends LitElement {
     this.value = this.#clamp(parseInt(this.value.toString()))
 
     this.#dispatchChangeEvent()
-
-    document.getSelection()?.removeAllRanges()
   }
 
   #handleWheel = (e: WheelEvent) => {

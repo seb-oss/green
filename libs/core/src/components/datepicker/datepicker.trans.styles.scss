@@ -51,23 +51,26 @@
       border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
       flex-grow: 1;
       isolation: isolate;
+      &::selection {
+        background: transparent;
+      }
     }
 
     span {
-      cursor: default;
+      cursor: text;
     }
 
     [role='spinbutton'] {
-      cursor: default;
+      cursor: text;
       display: inline-block;
 
       &:focus {
+        outline: none;
         background: color-mix(
           in srgb,
           var(--gds-sys-color-blue) 50%,
           transparent
         );
-        outline: none;
       }
       &::selection {
         background: transparent;
