@@ -227,6 +227,34 @@
     }
   },
   {
+    "id": "components-stepper--stepper",
+    "name": "Stepper",
+    "title": "Components/Stepper",
+    "customParams": {
+      "componentIds": [
+        "component-stepper"
+      ]
+    }
+  },
+  {
+    "id": "components-stepper--basic-stepper",
+    "name": "Basic stepper",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
+    "id": "components-stepper--primitive-stepper",
+    "name": "Primitive Stepper",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
+    "id": "components-stepper--stepper-validation",
+    "name": "Stepper validation",
+    "title": "Components/Stepper",
+    "customParams": {}
+  },
+  {
     "id": "components-slider--default-story",
     "name": "Default",
     "title": "Components/Slider",
@@ -254,34 +282,6 @@
     "id": "components-slider--disabled",
     "name": "Disabled",
     "title": "Components/Slider",
-    "customParams": {}
-  },
-  {
-    "id": "components-stepper--stepper",
-    "name": "Stepper",
-    "title": "Components/Stepper",
-    "customParams": {
-      "componentIds": [
-        "component-stepper"
-      ]
-    }
-  },
-  {
-    "id": "components-stepper--basic-stepper",
-    "name": "Basic stepper",
-    "title": "Components/Stepper",
-    "customParams": {}
-  },
-  {
-    "id": "components-stepper--primitive-stepper",
-    "name": "Primitive Stepper",
-    "title": "Components/Stepper",
-    "customParams": {}
-  },
-  {
-    "id": "components-stepper--stepper-validation",
-    "name": "Stepper validation",
-    "title": "Components/Stepper",
     "customParams": {}
   },
   {
@@ -441,22 +441,22 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
-    "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
-    }
-  },
-  {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
       ]
     }
   },
