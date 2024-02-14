@@ -3,10 +3,10 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
-import style from './option-heading.styles'
+import style from './menu-heading.styles'
 
-@gdsCustomElement('gds-option-heading')
-export class GdsOptionHeading extends GdsElement {
+@gdsCustomElement('gds-menu-heading')
+export class GdsMenuHeading extends GdsElement {
   static styles = style
 
   connectedCallback(): void {
@@ -15,7 +15,7 @@ export class GdsOptionHeading extends GdsElement {
     this.setAttribute('inert', 'true')
 
     this.updateComplete.then(() =>
-      TransitionalStyles.instance.apply(this, 'gds-option-heading')
+      TransitionalStyles.instance.apply(this, 'gds-menu-heading')
     )
   }
 
