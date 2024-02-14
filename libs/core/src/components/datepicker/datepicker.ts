@@ -196,7 +196,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
       >
-        <div class="input">
+        <div class="input" @focusout=${this.#handleFieldFocusOut}>
           ${join(
             map(
               this._dateFormatLayout.layout,
@@ -212,6 +212,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
+                  @focus=${this.#handleSpinnerFocus}
                 ></gds-date-part-spinner>`
             ),
             html`<span>${this._dateFormatLayout.delimiter}</span>`
@@ -432,26 +433,49 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     )
   }
 
+  #handleFieldFocusOut = (e: FocusEvent) => {
+    this._elTrigger.then((_) => {
+      const parent = (e.relatedTarget as HTMLElement)?.parentElement
+      if (parent === e.target) return
+      document.getSelection()?.removeAllRanges()
+    })
+  }
+
+  #handleSpinnerFocus = (e: FocusEvent) => {
+    this._elTrigger.then((field) => {
+      document.getSelection()?.removeAllRanges()
+      const range = new Range()
+      range.setStart(field.firstChild!, 0)
+      range.setEnd(field.lastChild!, 4)
+      document.getSelection()?.addRange(range)
+    })
+  }
+
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    e.preventDefault()
-    e.clipboardData?.setData('text/plain', this.displayValue)
+    this._elTrigger.then((field) => {
+      if (e.currentTarget !== field) return
+      e.preventDefault()
+      e.clipboardData?.setData('text/plain', this.displayValue)
+    })
   }
 
   #handleClipboardPaste = (e: ClipboardEvent) => {
-    e.preventDefault()
-    const pasted = e.clipboardData?.getData('text/plain')
-    if (!pasted) return
+    this._elTrigger.then((field) => {
+      if (e.currentTarget !== field) return
+      e.preventDefault()
+      const pasted = e.clipboardData?.getData('text/plain')
+      if (!pasted) return
 
-    const pastedDate = new Date(pasted)
-    if (pastedDate.toString() === 'Invalid Date') return
+      const pastedDate = new Date(pasted)
+      if (pastedDate.toString() === 'Invalid Date') return
 
-    this.value = pastedDate
-    this.#dispatchChangeEvent()
+      this.value = pastedDate
+      this.#dispatchChangeEvent()
+    })
   }
 
   #handleFieldClick = (e: MouseEvent) => {
     this._elSpinners[0].focus()
-    window.getSelection()?.selectAllChildren(this._elSpinners[0])
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
