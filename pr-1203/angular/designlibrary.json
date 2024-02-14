@@ -268,6 +268,16 @@
     }
   },
   {
+    "id": "components-context-menu--with-label",
+    "name": "With Label",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-context-menu--right-to-left",
     "name": "Right To Left",
     "title": "Components/Context Menu",
