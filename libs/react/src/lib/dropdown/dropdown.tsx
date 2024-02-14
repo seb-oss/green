@@ -1,14 +1,10 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import {
-  GdsDropdown,
-  GdsOption,
-  GdsOptionHeading,
-  getScopedTagName,
-} from '@sebgroup/green-core'
+import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { CoreMenuHeading } from '../context-menu/context-menu'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -70,12 +66,6 @@ export const CoreDropdown = createComponent({
 export const CoreOption = createComponent({
   tagName: getScopedTagName('gds-option'),
   elementClass: GdsOption,
-  react: React,
-})
-
-export const CoreOptionHeading = createComponent({
-  tagName: getScopedTagName('gds-option-header'),
-  elementClass: GdsOptionHeading,
   react: React,
 })
 
@@ -141,9 +131,9 @@ export const Dropdown = ({
         {options.map((option) => {
           if (option.heading) {
             return (
-              <CoreOptionHeading key={option.label}>
+              <CoreMenuHeading key={option.label}>
                 {option[display]}
-              </CoreOptionHeading>
+              </CoreMenuHeading>
             )
           }
           return (
