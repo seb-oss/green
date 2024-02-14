@@ -31,7 +31,7 @@ $close-icon-color: var(--text-primary-color);
         width: $close-width-sm;
         border-radius: 50%;
         position: relative;
-        --color: $close-icon-color;
+        --color: var(--gds-sys-color-base);
       }
 
       & > div::after,
