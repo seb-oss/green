@@ -1,0 +1,3 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+
+<Meta title="Components/Lists/<%= name %>" />

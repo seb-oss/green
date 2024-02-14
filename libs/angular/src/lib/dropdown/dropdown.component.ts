@@ -17,6 +17,7 @@ import {
   NgControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms'
+
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
@@ -196,6 +197,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: any): void {
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: () => unknown): void {

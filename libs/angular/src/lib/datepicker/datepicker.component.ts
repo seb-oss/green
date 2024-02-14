@@ -86,7 +86,6 @@ export class NggDatepickerComponent
     if (newValue !== this._value) {
       this._value = newValue || undefined
     }
-    console.log('value', this._value)
   }
 
   @Input() id?: string = randomId()
@@ -115,8 +114,8 @@ export class NggDatepickerComponent
   }
 
   writeValue(value: any): void {
-    console.log('writeValue', value)
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: any): void {

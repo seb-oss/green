@@ -4,6 +4,6 @@ export const parameters = {
   ...baseParameters,
   docs: {
     ...baseParameters.docs,
-    iframeHeight: 400,
+    iframeHeight: 300,
   },
 }

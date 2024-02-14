@@ -1,14 +1,16 @@
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, ArgsTable } from '@storybook/addon-docs'
 
 import { NggContextMenuComponent } from './context-menu.component'
 
 # Context Menu
 
-A context menu.
+[Source code](https://github.com/sebgroup/green/tree/main/libs/angular/src/lib/context-menu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
 
-## Description
+## Overview
 
-Context menu with possibility to provide your template
+The context menu is a clickable button that opens a menu where you can find the action connected to an area or item. This component uses the [Green Core Context Menu](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu) component under the hood.
 
 ## Importing module
 
@@ -29,7 +31,51 @@ import { AppComponent } from './app.component'
 export class AppModule {}
 ```
 
-## Context Menu Options
+Then use the following in your templates to use the component:
+
+```html
+<ngg-context-menu
+  [direction]="rtl"
+  [menuItems]="menuItems"
+  (contextMenuItemClicked)="onItemClick($event)"
+></ngg-context-menu>
+```
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story id="components-context-menu--default" />
+</Canvas>
+
+### With label
+
+<Canvas>
+  <Story id="components-context-menu--with-label" />
+</Canvas>
+
+### Right to left
+
+<Canvas>
+  <Story id="components-context-menu--right-to-left" />
+</Canvas>
+
+### Custom template
+
+You can alter the look of a menu item by providing a custom template to the `menuItemTemplate`input. The template will be provided with the `item` object as context. You can also alter what's should be rendered in the button by providing a custom template to the `menuAnchorTemplate` input.
+
+<Canvas>
+  <Story id="components-context-menu--custom-template-default" />
+</Canvas>
+
+### Relative position
+
+<Canvas>
+  <Story id="components-context-menu--position-relative" />
+</Canvas>
+
+## Component API
 
 ### Inputs
 
@@ -50,41 +96,3 @@ export class AppModule {}
 | Event                  | Description                                                                                 |
 | :--------------------- | :------------------------------------------------------------------------------------------ |
 | contextMenuItemClicked | Event emitted when one of the items are click. The clicked item is supplied to the handler. |
-
-## Examples
-
-Basic use case:
-
-### Markup
-
-```html
-<ngg-context-menu
-  [direction]="rtl"
-  [menuItems]="menuItems"
-  (contextMenuItemClicked)="onItemClick($event)"
-></ngg-context-menu>
-```
-
-## Default
-
-<Canvas>
-  <Story id="components-context-menu--default" />
-</Canvas>
-
-## Right to left
-
-<Canvas>
-  <Story id="components-context-menu--right-to-left" />
-</Canvas>
-
-## Custom template
-
-<Canvas>
-  <Story id="components-context-menu--custom-template-default" />
-</Canvas>
-
-## Relative position
-
-<Canvas>
-  <Story id="components-context-menu--position-relative" />
-</Canvas>

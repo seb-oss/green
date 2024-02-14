@@ -6,7 +6,6 @@ import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { eachYearOfInterval } from 'date-fns'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import {
@@ -131,6 +130,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
+   * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
+   */
+  get displayValue() {
+    return this._elInput.innerText
+  }
+
+  /**
    * A reference to the calendar button element inside the shadow root.
    * Inteded for use in integration tests.
    */
@@ -163,9 +169,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAll(getScopedTagName('gds-date-part-spinner'))
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
+  @query('.input')
+  private _elInput!: HTMLDivElement
+
   // Used for Transitional Styles in some legacy browsers
   @state()
   private _tStyles?: HTMLTemplateResult
+
+  #valueOnOpen?: Date
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -178,7 +189,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
-      <div class="field" id="trigger" @click=${this.#handleFieldClick}>
+      <div
+        class="field"
+        id="trigger"
+        @click=${this.#handleFieldClick}
+        @copy=${this.#handleClipboardCopy}
+        @paste=${this.#handleClipboardPaste}
+      >
         <div class="input">
           ${join(
             map(
@@ -277,7 +294,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         <gds-calendar
           id="calendar"
           @change=${this.#handleCalendarChange}
-          @gds-date-focused=${this.#handleFocusChange}
+          @gds-date-focused=${this.#handleCalendarFocusChange}
           .focusedMonth=${this._focusedMonth}
           .focusedYear=${this._focusedYear}
           .value=${this.value}
@@ -338,7 +355,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const firstValidDate = new Date(d)
     this._elCalendar
       .then((el) => (el.focusedDate = firstValidDate))
-      .then(this.#handleFocusChange)
+      .then(this.#handleCalendarFocusChange)
   }
 
   @watch('value')
@@ -366,7 +383,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @watch('open')
   private _handleOpenChange() {
-    if (this.open) this._elCalendar.then((el) => el.focus())
+    if (this.open) {
+      this.#valueOnOpen = this.value
+      this._elCalendar.then((el) => el.focus())
+    }
   }
 
   #getSpinnerLabel(name: DatePart) {
@@ -404,8 +424,26 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     )
   }
 
+  #handleClipboardCopy = (e: ClipboardEvent) => {
+    e.preventDefault()
+    e.clipboardData?.setData('text/plain', this.displayValue)
+  }
+
+  #handleClipboardPaste = (e: ClipboardEvent) => {
+    e.preventDefault()
+    const pasted = e.clipboardData?.getData('text/plain')
+    if (!pasted) return
+
+    const pastedDate = new Date(pasted)
+    if (pastedDate.toString() === 'Invalid Date') return
+
+    this.value = pastedDate
+    this.#dispatchChangeEvent()
+  }
+
   #handleFieldClick = (e: MouseEvent) => {
     this._elSpinners[0].focus()
+    window.getSelection()?.selectAllChildren(this._elSpinners[0])
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
@@ -441,15 +479,21 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     }
   }
 
-  #handleFocusChange = async () => {
+  #handleCalendarFocusChange = async () => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
+    this.value = (await this._elCalendar).focusedDate
     this.requestUpdate()
+    this.#dispatchChangeEvent()
   }
 
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (e.target !== e.currentTarget) return
     this.open = e.detail.open
+    if (e.detail.reason === 'cancel') {
+      this.value = this.#valueOnOpen
+      this.#dispatchChangeEvent()
+    }
   }
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
