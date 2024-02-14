@@ -110,7 +110,7 @@ export class GdsContextMenu extends GdsElement {
           aria-label=${this.label}
           @gds-menu-item-click=${this.#handleItemClick}
         >
-          <slot allow="gds-menu-item"></slot>
+          <slot allow="gds-menu-item gds-menu-heading"></slot>
         </gds-menu>
       </gds-popover>`
   }
