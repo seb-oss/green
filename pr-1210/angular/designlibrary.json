@@ -298,36 +298,6 @@
     }
   },
   {
-    "id": "components-badge--multiple",
-    "name": "Multiple",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--default",
-    "name": "Default",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--custom",
-    "name": "Custom",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
     "id": "components-form-button--default",
     "name": "Default",
     "title": "Components/Form/Button",
@@ -364,6 +334,36 @@
     "customParams": {
       "componentIds": [
         "component-button"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--multiple",
+    "name": "Multiple",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--custom",
+    "name": "Custom",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
       ]
     }
   },
