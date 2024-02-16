@@ -71,7 +71,7 @@ export const Input = ({
       const { selectionStart, value } = event.target;
       const formattedValue = formatter ? formatter(value) : value;
       const nrAddedChars = formattedValue.length - value.length;
-      const updateCaretPosition = nrAddedChars > 0;
+      const updateCaretPosition = nrAddedChars !== 0;
       const newSelectionStart = updateCaretPosition && selectionStart ? selectionStart + nrAddedChars : selectionStart;
 
       // Fixes bug: React loses caret position when you format the input value
