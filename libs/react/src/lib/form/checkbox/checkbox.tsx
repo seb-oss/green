@@ -1,6 +1,6 @@
 import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
 import classNames from 'classnames'
-import { ChangeEvent, FormEventHandler, HTMLProps, useState } from 'react'
+import { FormEventHandler, HTMLProps, useState } from 'react'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */

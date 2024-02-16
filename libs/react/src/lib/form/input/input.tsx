@@ -68,24 +68,24 @@ export const Input = ({
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const oldValue = event.target.value
-      const newValue = formatter ? formatter(oldValue) : oldValue
-      setLocalValue(newValue)
-
-      if (onChange) onChange({ ...event, target: { ...event.target, value: newValue } });
-      if (onChangeInput) onChangeInput(newValue)
+      const { selectionStart, value } = event.target;
+      const formattedValue = formatter ? formatter(value) : value;
+      const nrAddedChars = formattedValue.length - value.length;
+      const updateCaretPosition = nrAddedChars > 0;
+      const newSelectionStart = updateCaretPosition && selectionStart ? selectionStart + nrAddedChars : selectionStart;
 
       // Fixes bug: React loses caret position when you format the input value
-      if (!formatter || newValue.length > oldValue.length) return
-      const pointer = event.target.selectionStart
-      const element = event.target
       window.requestAnimationFrame(() => {
-        element.selectionStart = pointer
-        element.selectionEnd = pointer
-      })
+        event.target.selectionStart = newSelectionStart;
+        event.target.selectionEnd = newSelectionStart;
+      });
+
+      setLocalValue(formattedValue);
+      if (onChange) onChange(event);
+      if (onChangeInput) onChangeInput(formattedValue);
     },
     [formatter, setLocalValue, onChange, onChangeInput]
-  )
+  );
 
   const showSimpleInput = !label && !info && !expandableInfo;
   
