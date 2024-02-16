@@ -2,7 +2,9 @@ import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { HTMLTemplateResult } from 'lit'
 import 'reflect-metadata'
 
 import { constrainSlots } from '../../utils/helpers'
@@ -26,7 +28,6 @@ import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
-import { CSSResult, HTMLTemplateResult } from 'lit'
 
 /**
  * @element gds-dropdown
@@ -124,6 +125,18 @@ export class GdsDropdown<ValueT = any>
   syncPopoverWidth = false
 
   /**
+   * Whether to use the small input field style.
+   */
+  @property({ type: Boolean })
+  small = false
+
+  /**
+   * Whether to hide the label.
+   */
+  @property({ type: Boolean })
+  hideLabel = false
+
+  /**
    * Get the options of the dropdown.
    */
   get options() {
@@ -210,7 +223,7 @@ export class GdsDropdown<ValueT = any>
     return html`
       ${this._tStyles}
       ${when(
-        this.label,
+        this.label && !this.hideLabel,
         () => html`<label for="trigger">${this.label}</label>`
       )}
 
@@ -224,6 +237,8 @@ export class GdsDropdown<ValueT = any>
         aria-owns="listbox"
         aria-controls="listbox"
         aria-expanded="${this.open}"
+        aria-label="${this.label}"
+        class=${classMap({ small: this.small })}
       >
         <slot name="trigger">
           <span>${unsafeHTML(this.displayValue)}</span>
