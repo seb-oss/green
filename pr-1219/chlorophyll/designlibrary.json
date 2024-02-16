@@ -126,24 +126,6 @@
     "customParams": {}
   },
   {
-    "id": "use-cases-mixing-frameworks-use-green-with-bootstrap--page",
-    "name": "Page",
-    "title": "Use cases/Mixing frameworks/Use Green with Bootstrap",
-    "customParams": {}
-  },
-  {
-    "id": "use-cases-use-green-for-mfe-in-shell-application--page",
-    "name": "Page",
-    "title": "Use cases/Use Green for MFE in shell application",
-    "customParams": {}
-  },
-  {
-    "id": "use-cases-mixing-frameworks-introduction--page",
-    "name": "Page",
-    "title": "Use cases/Mixing frameworks/Introduction",
-    "customParams": {}
-  },
-  {
     "id": "utilities-flexbox-order--page",
     "name": "Page",
     "title": "Utilities/Flexbox/Order",
@@ -171,6 +153,24 @@
     "id": "utilities-flexbox-align-content--page",
     "name": "Page",
     "title": "Utilities/Flexbox/Align content",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-mixing-frameworks-use-green-with-bootstrap--page",
+    "name": "Page",
+    "title": "Use cases/Mixing frameworks/Use Green with Bootstrap",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-use-green-for-mfe-in-shell-application--page",
+    "name": "Page",
+    "title": "Use cases/Use Green for MFE in shell application",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-mixing-frameworks-introduction--page",
+    "name": "Page",
+    "title": "Use cases/Mixing frameworks/Introduction",
     "customParams": {}
   },
   {
