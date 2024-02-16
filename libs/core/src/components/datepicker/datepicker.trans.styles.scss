@@ -131,13 +131,23 @@
     }
 
     button {
+      @include common.add-border-radius();
+      @include common.add-focus();
       appearance: none;
       background: transparent;
       border: 0;
       cursor: pointer;
-      padding: 0.7rem 1rem;
-      width: 3rem;
+      padding: 0.5rem 0.5rem;
+      width: 2.75rem;
+      margin: 0.125rem 0.25rem;
 
+      &:hover {
+        background: var(--gds-ref-pallet-base300);
+      }
+
+      &:focus-visible {
+        outline-offset: 0;
+      }
       // TODO: Replace with proper icons
       .icon::before {
         background: none;
@@ -145,18 +155,18 @@
         border-left: 2px solid;
         content: '';
         display: block;
-        height: 12px;
+        height: 8px;
         margin-top: 2px;
-        width: 12px;
+        width: 8px;
       }
 
       .icon.prev::before {
-        margin-left: -4px;
+        margin-left: 3px;
         transform: translate(75%) rotate(45deg) scaleZ(-1);
       }
 
       .icon.next::before {
-        margin-left: -10px;
+        margin-left: -1px;
         transform: translate(75%) rotate(-135deg) scaleZ(-1);
       }
     }
@@ -173,6 +183,7 @@
 
     button {
       @include common.add-border-radius();
+      @include common.add-focus();
       appearance: none;
       background: transparent;
       border: 0;

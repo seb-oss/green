@@ -248,7 +248,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @gds-ui-state=${this.#handlePopoverStateChange}
         id="calendar-popover"
         .placement=${'bottom-end'}
-        .calcMinWidth=${() => '350px'}
+        .calcMinWidth=${() => (this.showWeekNumbers ? '350px' : '305px')}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return
@@ -263,6 +263,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             .value=${this._focusedMonth.toString()}
             @change=${this.#handleMonthChange}
             label="${msg('Month')}"
+            style="width:120px"
             hideLabel
             small
           >
