@@ -4,6 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 
@@ -244,7 +245,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @gds-ui-state=${this.#handlePopoverStateChange}
         id="calendar-popover"
         .placement=${'bottom-end'}
-        .calcMinWidth=${() => '390px'}
+        .calcMinWidth=${() => '350px'}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return

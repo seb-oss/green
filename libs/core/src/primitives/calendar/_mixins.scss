@@ -58,34 +58,24 @@ $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
 @mixin calendar() {
-  // use full width on small screens
-  // @include common.media-breakpoint-down(sm) {
-  //   width: 100%;
-  //   max-height: stretch;
-  // }
-
-  //.main {
   display: flex;
   justify-content: center;
+
   @include common.media-breakpoint-down(sm) {
     flex-wrap: wrap;
     overflow-y: auto;
   }
 
   table {
-    // general
     border-spacing: 0;
-    // use full width on small screens
-    @include common.media-breakpoint-down(sm) {
-      width: 100%;
-    }
 
     tr {
       th,
       td {
-        height: 2.5rem;
+        height: 2.75rem;
         text-align: center;
-        width: 2.5rem;
+        width: 2.75rem;
+        box-sizing: border-box;
       }
     }
 
@@ -173,6 +163,8 @@ $weekend-background: $background;
           color: $disabled-color;
           cursor: not-allowed;
           font-weight: $disabled-weight;
+          border-radius: $date-border-radius;
+          border: solid 1px $background;
 
           &.sg-date-holiday {
             color: $disabled-weekend-color;
