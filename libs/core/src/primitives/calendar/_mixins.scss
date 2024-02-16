@@ -127,8 +127,10 @@ $weekend-background: $background;
         }
 
         // focus
-        &:focus-visible:not(.disabled) {
+        &:focus-visible {
           @include common.add-focus();
+        }
+        &:focus-visible:not(.disabled) {
           border: solid 1px $background;
           border-radius: $focus-border-radius;
           cursor: pointer;
