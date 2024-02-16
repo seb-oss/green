@@ -1,6 +1,6 @@
 import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
 import classNames from 'classnames'
-import { FormEventHandler, HTMLProps, useState } from 'react'
+import { ChangeEvent, FormEventHandler, HTMLProps, useState } from 'react'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
@@ -19,7 +19,6 @@ export const Checkbox = ({
   'aria-describedby': ariaDescribedBy,
   id = randomId(),
   label,
-  onChange,
   validator,
   testId,
   required,
