@@ -197,7 +197,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
       >
-        <div class="input" @focusout=${this.#handleFieldFocusOut}>
+        <div
+          class=${classMap({ input: true, 'is-placeholder': !this.value })}
+          @focusout=${this.#handleFieldFocusOut}
+        >
           ${join(
             map(
               this._dateFormatLayout.layout,
