@@ -51,7 +51,8 @@
       @include common.add-border-radius();
       flex-grow: 1;
       isolation: isolate;
-      &::selection {
+      &::selection,
+      span::selection {
         background: transparent;
       }
     }
