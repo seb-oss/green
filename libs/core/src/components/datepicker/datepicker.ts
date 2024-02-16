@@ -223,6 +223,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
                   @focus=${this.#handleSpinnerFocus}
+                  @touchend=${(e: MouseEvent) => {
+                    this.open = true
+                    e.preventDefault()
+                  }}
                 ></gds-date-part-spinner>`
             ),
             html`<span>${this._dateFormatLayout.delimiter}</span>`
