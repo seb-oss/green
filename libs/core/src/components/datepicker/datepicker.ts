@@ -104,6 +104,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   showWeekNumbers = false
 
   /**
+   * Whether to use the small variant of the datepicker field.
+   */
+  @property({ type: Boolean })
+  small = false
+
+  /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
    * For example, `y-m-d` or `d/m/y`. All three characters must be present.
    *
@@ -191,7 +197,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       <div class="form-info"><slot name="sub-label"></slot></div>
 
       <div
-        class="field"
+        class=${classMap({ field: true, small: this.small })}
         id="trigger"
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
