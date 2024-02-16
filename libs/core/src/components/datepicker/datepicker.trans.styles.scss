@@ -31,6 +31,8 @@
 
   .field {
     @include common.add-border-radius();
+    @include common.add-border();
+    @include common.add-border-color();
     align-items: center;
     background-color: var(--sg-form-control-bg);
     box-sizing: border-box;
@@ -45,10 +47,8 @@
     .input {
       @include common.padding-horizontal(5);
       @include common.padding-vertical(4);
-      @include common.add-border(('top', 'bottom', 'left'));
-      @include common.add-border-color();
       @include common.add-focus('within');
-      border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
+      @include common.add-border-radius();
       flex-grow: 1;
       isolation: isolate;
       &::selection {
@@ -79,17 +79,29 @@
 
     button {
       @include common.add-focus();
+      @include common.add-border-radius();
       appearance: none;
-      background: var(--intent-info-background);
       border: 0;
-      border-radius: 0 var(--sg-border-radius) var(--sg-border-radius) 0;
       box-sizing: border-box;
       cursor: pointer;
       padding: 0.7rem 1rem;
       width: 3rem;
+      background: transparent;
 
-      svg path {
-        fill: #fff;
+      &:hover {
+        background: var(--gds-ref-pallet-base300);
+      }
+
+      svg {
+        width: auto;
+      }
+
+      svg > * {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
       }
     }
   }
