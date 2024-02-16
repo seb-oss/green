@@ -262,7 +262,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${this.#handleMonthChange}
-            aria-label="${msg('Month')}"
+            label="${msg('Month')}"
+            hideLabel
+            small
           >
             <gds-option value="0">${msg('January')}</gds-option>
             <gds-option value="1">${msg('February')}</gds-option>
@@ -280,7 +282,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-dropdown
             .value=${this._focusedYear.toString()}
             @change=${this.#handleYearChange}
-            aria-label="${msg('Year')}"
+            label="${msg('Year')}"
+            hideLabel
+            small
           >
             ${repeat(
               this.#years,
