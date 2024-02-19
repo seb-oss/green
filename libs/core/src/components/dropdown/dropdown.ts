@@ -121,19 +121,20 @@ export class GdsDropdown<ValueT = any>
    * the popover width. If you use this option, make sure to verify that your options
    * are still readable and apply appropriate custom layout or truncation if neccecary.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'sync-popover-width' })
   syncPopoverWidth = false
 
   /**
-   * Whether to use the small input field style.
+   * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
+   * `medium` is the default size.
    */
-  @property({ type: Boolean })
-  small = false
+  @property()
+  size: 'medium' | 'small' = 'medium'
 
   /**
    * Whether to hide the label.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'hide-label' })
   hideLabel = false
 
   /**
@@ -238,7 +239,7 @@ export class GdsDropdown<ValueT = any>
         aria-controls="listbox"
         aria-expanded="${this.open}"
         aria-label="${this.label}"
-        class=${classMap({ small: this.small })}
+        class=${classMap({ small: this.size === 'small' })}
       >
         <slot name="trigger">
           <span>${unsafeHTML(this.displayValue)}</span>

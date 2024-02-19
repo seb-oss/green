@@ -231,9 +231,9 @@ describe('<gds-dropdown>', () => {
     )
   })
 
-  it('should be the same width as the trigger when `syncPopoverWidth`attribute is set', async () => {
+  it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown syncPopoverWidth open>
+      <gds-dropdown sync-popover-width open>
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
