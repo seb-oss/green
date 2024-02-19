@@ -100,14 +100,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   /**
    * Whether to show a column of week numbers in the calendar.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'show-week-numbers' })
   showWeekNumbers = false
 
   /**
    * Whether to use the small variant of the datepicker field.
    */
-  @property({ type: Boolean })
-  small = false
+  @property()
+  size: 'small' | 'medium' = 'medium'
 
   /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
@@ -197,7 +197,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       <div class="form-info"><slot name="sub-label"></slot></div>
 
       <div
-        class=${classMap({ field: true, small: this.small })}
+        class=${classMap({ field: true, small: this.size === 'small' })}
         id="trigger"
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
@@ -277,8 +277,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @change=${this.#handleMonthChange}
             label="${msg('Month')}"
             style="width:120px"
-            hideLabel
-            small
+            size="small"
+            hide-label
           >
             <gds-option value="0">${msg('January')}</gds-option>
             <gds-option value="1">${msg('February')}</gds-option>
@@ -297,8 +297,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             .value=${this._focusedYear.toString()}
             @change=${this.#handleYearChange}
             label="${msg('Year')}"
-            hideLabel
-            small
+            size="small"
+            hide-label
           >
             ${repeat(
               this.#years,
