@@ -42,6 +42,12 @@ export interface DropdownArgs {
 
   /** Force width of the popover to match trigger */
   syncPopoverWidth?: boolean
+
+  /** Size of the dropdown trigger */
+  size?: 'small' | 'medium'
+
+  /** Hide the label */
+  hideLabel?: boolean
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -89,6 +95,7 @@ export const Dropdown = ({
   validator,
   value,
   syncPopoverWidth,
+  ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
@@ -122,6 +129,8 @@ export const Dropdown = ({
         value={value}
         searchFilter={searchFilterAdapter}
         syncPopoverWidth={syncPopoverWidth}
+        size={props.size}
+        hideLabel={props.hideLabel}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}
