@@ -1,35 +1,61 @@
-import { readdirSync } from 'fs'
-import http from 'node:http'
+import { mkdir, readdirSync, writeFile } from 'fs'
 import htmlPkg from '@craftamap/esbuild-plugin-html'
+import tscpp from '@esbuild-plugins/tsconfig-paths'
 import mdx from '@mdx-js/esbuild'
 import * as esbuild from 'esbuild'
+import esp from 'esbuild-sass-plugin'
 import { globby } from 'globby'
 
+const { TsconfigPathsPlugin } = tscpp
 const { htmlPlugin } = htmlPkg
+const { sassPlugin } = esp
+const COMPONENT_DIR = 'libs/core/src/components'
 
 const getDirectories = (source) =>
   readdirSync(source, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
 
-const componentNames = getDirectories('libs/core/src/components')
+const componentNames = getDirectories(COMPONENT_DIR)
 
 const cleanPath = (path) => {
   const stringArr = path.split('/')
-
   return stringArr.slice(3, stringArr.length - 1).join('/')
 }
 
 const paths = await globby([
-  'libs/core/src/components/**/*.stories.md',
-  'libs/core/src/components/**/*.stories.mdx',
+  COMPONENT_DIR + '/**/*.stories.md',
+  COMPONENT_DIR + '/**/*.stories.mdx',
 ])
 
+const jsTemplate = (componentName, mdxPath) => `
+import * as React from 'react'
+import MDXContent from '${mdxPath}'
+import * as ReactDOM from 'react-dom'
+
+ReactDOM.render(<MDXContent />, document.getElementById('root'))
+`
+mkdir('libs/core/.esbuild/generated', { recursive: true }, (err) => {
+  if (err) {
+    console.log(err)
+  }
+})
+
 const components = componentNames.map((componentName) => {
+  writeFile(
+    'libs/core/.esbuild/generated/' + componentName + '.jsx',
+    jsTemplate(
+      componentName,
+      '../../../../' + paths.find((path) => path.includes(componentName))
+    ),
+    (err) => {
+      if (err) throw err
+    }
+  )
   return {
     name: componentName,
-    entryPoints: paths.filter((path) => path.includes(componentName)),
-    path: 'components/' + componentName,
+    entryPoint: 'generated/' + componentName + '.jsx',
+    path: componentName,
   }
 })
 
@@ -39,7 +65,10 @@ const htmlTemplate = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true</script>
+    <script>
+      globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true;
+      new EventSource('/esbuild').addEventListener('change', () => location.reload());
+    </script>
 </head>
 <body>
     <ul>${components
@@ -49,71 +78,53 @@ const htmlTemplate = `
       )
       .join('')}</ul>
     <div id="root">
-        <gds-button>Hello</gds-button>
     </div>
 </body>
 </html>
 `
 
+const generatedEntrypoints = []
+
 const files = paths.map((path) => {
   const prePath = cleanPath(path)
 
+  const componentName = prePath.split('/')[1]
+
+  generatedEntrypoints.push(
+    'libs/core/.esbuild/generated/' + componentName + '.jsx'
+  )
+
   return {
-    entryPoints: [path],
-    filename: prePath + '/index.html',
+    entryPoints: ['libs/core/.esbuild/generated/' + componentName + '.jsx'],
+    filename: componentName + '/index.html',
     title: 'Hello World',
     htmlTemplate,
   }
 })
 
 let ctx = await esbuild.context({
-  entryPoints: [].concat(paths),
+  entryPoints: generatedEntrypoints,
   entryNames: '[dir]/[name]',
   metafile: true,
   bundle: true,
   outdir: 'libs/core/.esbuild/www',
-  outbase: 'libs/core/src',
+  outbase: 'libs/core/.esbuild/generated',
   plugins: [
     mdx({ format: 'detect' }),
     htmlPlugin({
       files: files,
     }),
+    sassPlugin({
+      type: 'css-text',
+    }),
+    TsconfigPathsPlugin({ tsconfig: 'tsconfig.base.json' }),
   ],
 })
 
 await ctx.watch()
 
-let { host, port } = await ctx.serve({
+ctx.serve({
   servedir: 'libs/core/.esbuild/www',
 })
 
-http
-  .createServer((req, res) => {
-    const options = {
-      hostname: host,
-      port: port,
-      path: req.url,
-      method: req.method,
-      headers: req.headers,
-    }
-
-    // Forward each incoming request to esbuild
-    const proxyReq = http.request(options, (proxyRes) => {
-      // If esbuild returns "not found", send a custom 404 page
-      if (proxyRes.statusCode === 404) {
-        res.writeHead(404, { 'Content-Type': 'text/html' })
-        res.end('<h1>A custom 404 page</h1>')
-        return
-      }
-
-      // Otherwise, forward the response from esbuild to the client
-      res.writeHead(proxyRes.statusCode, proxyRes.headers)
-      proxyRes.pipe(res, { end: true })
-    })
-
-    // Forward the body of the request to esbuild
-    req.pipe(proxyReq, { end: true })
-  })
-  .listen(3000)
-
-console.log(`Server running at http://${host}:3000`)
+console.log(`Server running at http://localhost:8000`)

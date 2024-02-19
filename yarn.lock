@@ -2552,6 +2552,15 @@
     escape-string-regexp "^4.0.0"
     resolve "^1.19.0"
 
+"@esbuild-plugins/tsconfig-paths@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@esbuild-plugins/tsconfig-paths/-/tsconfig-paths-0.1.2.tgz#1955de0a124ecf4364717a2fadbfbea876955232"
+  integrity sha512-TusFR26Y+Ze+Zm+NdfqZTSG4XyrXKxIaAfYCL3jASEI/gHjSdoCujATjzNWaaXs6Sk6Bv2D7NLr4Jdz1gysy/Q==
+  dependencies:
+    debug "^4.3.1"
+    find-up "^5.0.0"
+    strip-json-comments "^3.1.1"
+
 "@esbuild/aix-ppc64@0.19.11":
   version "0.19.11"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.19.11.tgz#2acd20be6d4f0458bc8c784103495ff24f13b1d3"
