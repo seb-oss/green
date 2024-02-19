@@ -140,7 +140,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
    */
   get displayValue() {
-    return this._elInput.innerText
+    return this._elInput.innerText.replace(/\s+/g, '')
   }
 
   /**
@@ -476,7 +476,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardPaste = (e: ClipboardEvent) => {
-    this._elTrigger.then((field) => {
+    this._elTrigger.then((field: HTMLElement) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       const pasted = e.clipboardData?.getData('text/plain')
