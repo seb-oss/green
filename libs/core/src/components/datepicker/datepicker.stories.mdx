@@ -74,10 +74,13 @@ Use the `min` and `max` attributes to set the minimum and maximum dates that can
 
 The date picker has two sizes: `small` and `medium`. The default size is `medium`.
 
+Optionally, the label can be hidden by using the `hide-label` attribute.
+
 <Canvas>
-<div style={{ dummy: registerTransitionalStyles() }}>
+<div style={{ dummy: registerTransitionalStyles(), display: 'inline-block' }}>
 <gds-datepicker
   label="A small datepicker"
+  hide-label
   size="small">
 </gds-datepicker>
 </div>

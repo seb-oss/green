@@ -110,6 +110,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   size: 'small' | 'medium' = 'medium'
 
   /**
+   * Whether to hide the label above the input field.
+   */
+  @property({ type: Boolean, attribute: 'hide-label' })
+  hideLabel = false
+
+  /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
    * For example, `y-m-d` or `d/m/y`. All three characters must be present.
    *
@@ -192,7 +198,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   render() {
     return html`${this._tStyles}
-      <label for="spinner-0" id="label">${this.label}</label>
+      ${when(
+        this.label && !this.hideLabel,
+        () => html`<label for="spinner-0" id="label">${this.label}</label>`
+      )}
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
