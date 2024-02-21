@@ -214,22 +214,22 @@
     }
   },
   {
-    "id": "components-spinner--spinner",
-    "name": "Spinner",
-    "title": "Components/Spinner",
-    "customParams": {
-      "componentIds": [
-        "component-spinners"
-      ]
-    }
-  },
-  {
     "id": "components-table--page",
     "name": "Page",
     "title": "Components/Table",
     "customParams": {
       "componentIds": [
         "component-table"
+      ]
+    }
+  },
+  {
+    "id": "components-spinner--spinner",
+    "name": "Spinner",
+    "title": "Components/Spinner",
+    "customParams": {
+      "componentIds": [
+        "component-spinners"
       ]
     }
   },
