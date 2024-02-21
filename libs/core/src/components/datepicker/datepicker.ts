@@ -555,7 +555,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.open = e.detail.open
 
     if (e.detail.reason === 'close') {
-      this.value = (await this._elCalendar).focusedDate
+      this.value = (await this._elCalendar).value
       this.#dispatchChangeEvent()
     }
 
