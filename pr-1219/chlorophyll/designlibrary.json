@@ -1,5 +1,11 @@
 [
   {
+    "id": "frameworks--page",
+    "name": "Page",
+    "title": "Frameworks",
+    "customParams": {}
+  },
+  {
     "id": "components-wizard-in-page-wizard--in-page-wizard-step-card",
     "name": "In-page Wizard Step Card",
     "title": "Components/Wizard/In-page Wizard",
@@ -108,12 +114,6 @@
     }
   },
   {
-    "id": "frameworks--page",
-    "name": "Page",
-    "title": "Frameworks",
-    "customParams": {}
-  },
-  {
     "id": "utilities-spacing-padding--page",
     "name": "Page",
     "title": "Utilities/Spacing/Padding",
@@ -214,22 +214,22 @@
     }
   },
   {
-    "id": "components-table--page",
-    "name": "Page",
-    "title": "Components/Table",
-    "customParams": {
-      "componentIds": [
-        "component-table"
-      ]
-    }
-  },
-  {
     "id": "components-spinner--spinner",
     "name": "Spinner",
     "title": "Components/Spinner",
     "customParams": {
       "componentIds": [
         "component-spinners"
+      ]
+    }
+  },
+  {
+    "id": "components-table--page",
+    "name": "Page",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": [
+        "component-table"
       ]
     }
   },
