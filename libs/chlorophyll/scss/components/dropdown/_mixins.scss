@@ -75,7 +75,7 @@ $highlighted-background: var(--gds-ref-pallet-base800);
 }
 
 @mixin select-option {
-  @include common.padding-horizontal(4);
+  @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
   @include common.add-hover-active-state();
   line-height: 1.25;
