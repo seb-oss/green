@@ -44,6 +44,10 @@
     min-height: 2.75rem;
     cursor: text;
 
+    &:hover {
+      background-color: var(--gds-ref-pallet-base100);
+    }
+
     .input {
       @include common.padding-horizontal(5);
       @include common.add-focus('within');
