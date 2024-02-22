@@ -451,22 +451,22 @@
     }
   },
   {
-    "id": "components-accordion--accordion",
-    "name": "Accordion",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
     "id": "components-alertribbon--alert-ribbon",
     "name": "AlertRibbon",
     "title": "Components/AlertRibbon",
     "customParams": {
       "componentIds": [
         "component-alertribbon"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
       ]
     }
   },
