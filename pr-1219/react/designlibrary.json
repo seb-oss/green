@@ -207,22 +207,22 @@
     }
   },
   {
-    "id": "components-form-button--button",
-    "name": "Button",
-    "title": "Components/Form/Button",
-    "customParams": {
-      "componentIds": [
-        "component-button"
-      ]
-    }
-  },
-  {
     "id": "components-tabs--tabs",
     "name": "Tabs",
     "title": "Components/Tabs",
     "customParams": {
       "componentIds": [
         "component-tabs"
+      ]
+    }
+  },
+  {
+    "id": "components-form-button--button",
+    "name": "Button",
+    "title": "Components/Form/Button",
+    "customParams": {
+      "componentIds": [
+        "component-button"
       ]
     }
   },
@@ -451,22 +451,22 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
-    "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
-    }
-  },
-  {
     "id": "components-accordion--accordion",
     "name": "Accordion",
     "title": "Components/Accordion",
     "customParams": {
       "componentIds": [
         "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
       ]
     }
   },
