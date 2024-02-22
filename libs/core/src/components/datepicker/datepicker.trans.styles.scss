@@ -130,6 +130,10 @@
     display: flex;
     justify-content: space-between;
 
+    @include common.media-breakpoint-down('sm') {
+      padding-top: 0;
+    }
+
     > * {
       @include common.margin-horizontal(2);
       min-width: auto;

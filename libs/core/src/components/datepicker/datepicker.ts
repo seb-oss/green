@@ -265,6 +265,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         .triggerRef=${this._elTrigger}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
+        label=${this.label}
         id="calendar-popover"
         .placement=${'bottom-end'}
         .calcMinWidth=${() => (this.showWeekNumbers ? '350px' : '305px')}

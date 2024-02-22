@@ -13,37 +13,37 @@
   }
 
   header {
-    border-bottom: 1px solid var(--border-color);
     display: flex;
-    padding: 0.25rem 0.75rem;
 
     @include common.media-breakpoint-up('sm') {
       display: none;
     }
 
     button.close {
-      margin: -0.25rem;
+      margin: 0rem;
+      padding: 0;
     }
   }
 
   header h2 {
     flex-grow: 1;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.5;
-    margin: 0;
+    margin: 0.25rem 0 0 0.75rem;
   }
 
   dialog {
     @include popover.popover;
-    border-width: 0;
     inset: 0;
     overflow: hidden;
     padding: 0;
     right: 0;
 
     @include common.media-breakpoint-down('sm') {
-      border-radius: 0.5rem;
       max-height: 80svh;
+      border-radius: 0.25rem;
+      border: 1px solid var(--border-color);
+      padding-bottom: 0;
 
       &.v-kb-visible {
         inset-block-end: auto;
