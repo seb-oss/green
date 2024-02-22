@@ -18,7 +18,7 @@ $highlighted-background: var(--gds-ref-pallet-base800);
   @include common.add-border();
   @include common.add-border-color(var(--gds-ref-pallet-base600));
   @include common.add-focus('');
-  //@include common.add-hover-state(#E9E9E9);
+
   background: $background;
   color: $color;
   min-height: 2.75rem;
@@ -77,13 +77,28 @@ $highlighted-background: var(--gds-ref-pallet-base800);
 @mixin select-option {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  @include common.add-hover-active-state();
+
   line-height: 1.25;
   cursor: pointer;
 
-  // highlighted option
-  &.active.sg-highlighted {
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gds-ref-pallet-base200);
+  }
+
+  &:active {
+    background-color: var(--gds-ref-pallet-base300);
+  }
+
+  &:focus {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
+
+  &.active.sg-highlighted,
+  &[aria-selected='true'] {
     @include select-option-highlighted;
+    color: #fff;
   }
 }
 
@@ -112,7 +127,21 @@ $highlighted-background: var(--gds-ref-pallet-base800);
   [role='menuitem'] {
     @include common.padding-horizontal(4);
     @include common.padding-vertical(4);
-    @include common.add-hover-state();
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--gds-ref-pallet-base200);
+    }
+
+    &:active {
+      background-color: var(--gds-ref-pallet-base300);
+    }
+
+    &:focus {
+      outline-color: #000;
+      outline-offset: -0.25rem;
+    }
+
     cursor: pointer;
   }
 }
