@@ -33,7 +33,7 @@ export function Group({
   return (
     <div className="form-group" id={id}>
       <div className={groupClassName}>{children}</div>
-      {error && <span className="form-info">{errorMessage}</span>}
+      {error && <span className="form-info" id={id && `${id}-message`}>{errorMessage}</span>}
     </div>
   )
 }
