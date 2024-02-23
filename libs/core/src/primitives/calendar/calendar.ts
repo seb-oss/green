@@ -41,7 +41,7 @@ export class GdsCalendar extends GdsElement {
    * The currently selected date.
    */
   @property()
-  value: Date = new Date()
+  value?: Date
 
   /**
    * The minimum date that can be selected.
@@ -161,7 +161,8 @@ export class GdsCalendar extends GdsElement {
                           tabindex="${isSameDay(this.focusedDate, day)
                             ? 0
                             : -1}"
-                          aria-selected="${isSameDay(this.value, day)}"
+                          aria-selected="${this.value &&
+                          isSameDay(this.value, day)}"
                           aria-label="${day.toDateString()}"
                           @click=${() =>
                             isDisabled ? null : this.#setSelectedDate(day)}

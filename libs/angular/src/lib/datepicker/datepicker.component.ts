@@ -62,6 +62,9 @@ export interface DatepickerOptions {
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit
 {
+  @Input() size?: 'small' | 'medium'
+  @Input() hideLabel?: boolean
+
   @Input()
   get options(): DatepickerOptions {
     return <DatepickerOptions>this._options

@@ -361,7 +361,7 @@ describe('<gds-datepicker>', () => {
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
       const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
-        `${getScopedTagName('gds-dropdown')}[aria-label="Month"]`
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`
       )!
 
       await clickOnElement(button)

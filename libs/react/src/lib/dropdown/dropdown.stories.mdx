@@ -24,6 +24,7 @@ Dropdown Component
       { label: 'Pizza', value: 'pizza' },
       { label: 'Sushi', value: 'sushi' },
     ],
+    label: 'Dropdown label',
     multiSelect: false,
     searchable: false,
     texts: {
@@ -70,6 +71,7 @@ Dropdown option values can even be an object, but note that it requires a `compa
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
+      label="Complex values"
       options={[
         { label: 'Tacos', value: { id: 'tacos', kitchen: 'mexican' } },
         { label: 'Pizza', value: { id: 'pizza', kitchen: 'italian' } },
@@ -114,6 +116,7 @@ You can add an option heading by adding the `heading` property to the to the opt
 
 <Canvas>
   <Dropdown
+    label='Option headings'
     options={[
       { label: 'Lunch', heading: true },
       { label: 'Tacos', value: 'tacos' },
@@ -132,7 +135,30 @@ You can add an option heading by adding the `heading` property to the to the opt
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
+      label='Multi select'
       multiSelect
+      options={[
+        { label: 'Tacos', value: 'tacos' },
+        { label: 'Pizza', value: 'pizza' },
+        { label: 'Sushi', value: 'sushi' },
+      ]}
+      onChange={(value) => console.log('OnChange', value)}
+    ></Dropdown>
+  </div>
+</Canvas>
+
+## Small dropdown
+
+Size can be controlled using the `size` prop. The default size is `medium`.
+
+Optionally, the label can also be hidden using the `hideLabel` prop.
+
+<Canvas>
+  <div style={{ height: '200px' }}>
+    <Dropdown
+      label='Small dropdown'
+      size='small'
+      hideLabel
       options={[
         { label: 'Tacos', value: 'tacos' },
         { label: 'Pizza', value: 'pizza' },
