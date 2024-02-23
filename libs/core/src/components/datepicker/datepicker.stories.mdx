@@ -36,28 +36,52 @@ When the value is changed by a user, a `change` event is fired.
 
 <Canvas>
 <div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker label="Label" onchange="console.log(this.value)">
+<gds-datepicker label="Using slots" onchange="console.log(this.value)">
   <span slot="sub-label">A sub-label can be added as additional description</span>
   <span slot="message">Instructive message. Will turn red if there is a validation error</span>
 </gds-datepicker>
 </div>
 </Canvas>
 
-## Other attributes
+## Week numbers
 
-In this example, all the available attributes are used.
+Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
 
 <Canvas>
 <div style={{ dummy: registerTransitionalStyles() }}>
 <gds-datepicker
-  label="Label"
-  onchange="console.log(this.value)"
-  min="2022-11-11"
-  max="2024-02-20"
-  showWeekNumbers>
-  <span slot="sub-label">A sub-label can be added as additional description</span>
-  <span slot="message">Instructive message. Will turn red if there is a validation error</span>
+  label="With week numbers"
+  show-week-numbers>
 </gds-datepicker>
 </div>
 </Canvas>
 
+## Min and max dates
+
+Use the `min` and `max` attributes to set the minimum and maximum dates that can be selected. Dates outside of this range will be disabled in the calendar view.
+
+<Canvas>
+<div style={{ dummy: registerTransitionalStyles() }}>
+<gds-datepicker
+  label="Using min and max dates"
+  min="2022-11-11"
+  max="2024-02-20">
+</gds-datepicker>
+</div>
+</Canvas>
+
+## Input field size
+
+The date picker has two sizes: `small` and `medium`. The default size is `medium`.
+
+Optionally, the label can be hidden by using the `hide-label` attribute.
+
+<Canvas>
+<div style={{ dummy: registerTransitionalStyles(), display: 'inline-block' }}>
+<gds-datepicker
+  label="A small datepicker"
+  hide-label
+  size="small">
+</gds-datepicker>
+</div>
+</Canvas>

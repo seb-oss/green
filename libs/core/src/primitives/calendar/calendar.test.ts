@@ -20,9 +20,9 @@ describe('<gds-calendar>', () => {
   })
 
   describe('Interactions', () => {
-    it('should default to the current date', async () => {
+    it('should default to undefined', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
-      expect(onlyDate(el.value)).to.equal(onlyDate(new Date()))
+      expect(el.value).to.equal(undefined)
     })
 
     it('should increment by 7 days when pressing key down', async () => {
@@ -179,7 +179,7 @@ describe('<gds-calendar>', () => {
       )
       el.focus()
 
-      const focusedDate = new Date('2024-02-02')
+      const focusedDate = new Date('2024-02-01')
       el.focusedDate = focusedDate
       await el.updateComplete
 
@@ -187,17 +187,17 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(onlyDate(el.value)).to.not.equal(onlyDate(focusedDate))
+      await expect(el.value).to.equal(undefined)
     })
 
     it('should update the focused date when value is changed', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
 
-      el.value = new Date('2024-02-02')
+      el.value = new Date('2024-02-01')
       await el.updateComplete
 
       await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-02'))
+        onlyDate(new Date('2024-02-01'))
       )
     })
   })

@@ -17,6 +17,7 @@ import {
   NgControl,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms'
+
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
@@ -39,6 +40,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 
@@ -62,15 +64,29 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() display = 'label'
   @Input() useValue = 'value'
   @Input() label?: string
-  @Input() options: DropdownOption[] = []
   @Input() valid?: boolean
   @Input() invalid?: boolean
   @Input() compareWith?: CompareWith
   @Input() searchFilter?: SearchFilter
   @Input() syncPopoverWidth?: boolean
+  @Input() size?: 'small' | 'medium'
+  @Input() hideLabel?: boolean
 
   /** @deprecated */
   @Input() fixedPlacement?: DropdownPlacements
+
+  //
+  @Input() set options(value: DropdownOption[] | undefined) {
+    this._options = value
+    this.texts = {
+      ...this.texts,
+      select: this.displayTextByValue(this._value),
+    }
+  }
+  get options(): DropdownOption[] | undefined {
+    return this._options
+  }
+  private _options: DropdownOption[] | undefined
 
   //
   @Input() set multiSelect(value: string | boolean) {
@@ -183,6 +199,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   writeValue(value: any): void {
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: () => unknown): void {

@@ -9,6 +9,13 @@ import {
 } from '@angular/core'
 import { DropdownOption } from '../dropdown/dropdown.component'
 
+/**
+ * MenuItems extends DropDown option and adds the posibility to pass a custom template for just one item.
+ */
+interface MenuItems extends DropdownOption {
+  template?: TemplateRef<unknown>
+}
+
 import '@sebgroup/green-core'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -25,7 +32,7 @@ export class NggContextMenuComponent {
   /**
    * List of items to be displayed in the context menu.
    */
-  @Input() menuItems: DropdownOption[] = []
+  @Input() menuItems: MenuItems[] = []
 
   /**
    * Custom menu item template.

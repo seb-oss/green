@@ -31,58 +31,92 @@
 
   .field {
     @include common.add-border-radius();
+    @include common.add-border();
+    @include common.add-border-color();
     align-items: center;
     background-color: var(--sg-form-control-bg);
     box-sizing: border-box;
     color: var(--sg-text-primary);
     display: flex;
-    justify-content: center;
     justify-content: space-between;
+    align-items: stretch;
     margin: 0.5rem 0;
     min-height: 2.75rem;
-    //overflow: hidden;
+    cursor: text;
+
+    &:hover {
+      background-color: var(--gds-ref-pallet-base100);
+    }
 
     .input {
       @include common.padding-horizontal(5);
-      @include common.padding-vertical(4);
-      @include common.add-border(('top', 'bottom', 'left'));
-      @include common.add-border-color();
       @include common.add-focus('within');
-      border-radius: var(--sg-border-radius) 0 0 var(--sg-border-radius);
+      @include common.add-border-radius();
       flex-grow: 1;
-      isolation: isolate;
+      display: flex;
+      align-items: center;
+      &::selection,
+      span::selection {
+        background: transparent;
+      }
     }
 
-    span {
-      cursor: default;
+    .input.is-placeholder {
+      opacity: 0;
+      &:hover,
+      &:focus,
+      &:has(:focus) {
+        opacity: 0.7;
+      }
     }
 
     [role='spinbutton'] {
-      cursor: default;
       display: inline-block;
 
       &:focus {
-        background: color-mix(in srgb,
-        var(--gds-sys-color-blue) 50%,
-        transparent);
         outline: none;
+        background: color-mix(
+          in srgb,
+          var(--gds-sys-color-blue) 50%,
+          transparent
+        );
+      }
+      &::selection {
+        background: transparent;
       }
     }
 
     button {
       @include common.add-focus();
+      @include common.add-border-radius();
       appearance: none;
-      background: var(--intent-info-background);
       border: 0;
-      border-radius: 0 var(--sg-border-radius) var(--sg-border-radius) 0;
       box-sizing: border-box;
       cursor: pointer;
-      padding: 0.7rem 1rem;
-      width: 3rem;
+      width: 2.75rem;
+      background: transparent;
 
-      svg path {
-        fill: #fff;
+      &:hover {
+        background: var(--gds-ref-pallet-base300);
       }
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      svg > * {
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    }
+
+    &.small {
+      min-height: 2rem;
+      font-size: 0.875rem;
     }
   }
 
@@ -96,6 +130,10 @@
     display: flex;
     justify-content: space-between;
 
+    @include common.media-breakpoint-down('sm') {
+      padding-top: 0;
+    }
+
     > * {
       @include common.margin-horizontal(2);
       min-width: auto;
@@ -106,13 +144,23 @@
     }
 
     button {
+      @include common.add-border-radius();
+      @include common.add-focus();
       appearance: none;
       background: transparent;
       border: 0;
       cursor: pointer;
-      padding: 0.7rem 1rem;
-      width: 3rem;
+      padding: 0.5rem 0.5rem;
+      width: 2.75rem;
+      margin: 0.125rem 0.25rem;
 
+      &:hover {
+        background: var(--gds-ref-pallet-base300);
+      }
+
+      &:focus-visible {
+        outline-offset: 0;
+      }
       // TODO: Replace with proper icons
       .icon::before {
         background: none;
@@ -120,18 +168,18 @@
         border-left: 2px solid;
         content: '';
         display: block;
-        height: 12px;
+        height: 8px;
         margin-top: 2px;
-        width: 12px;
+        width: 8px;
       }
 
       .icon.prev::before {
-        margin-left: -4px;
+        margin-left: 3px;
         transform: translate(75%) rotate(45deg) scaleZ(-1);
       }
 
       .icon.next::before {
-        margin-left: -10px;
+        margin-left: -1px;
         transform: translate(75%) rotate(-135deg) scaleZ(-1);
       }
     }
@@ -148,6 +196,7 @@
 
     button {
       @include common.add-border-radius();
+      @include common.add-focus();
       appearance: none;
       background: transparent;
       border: 0;
@@ -161,6 +210,10 @@
         background: var(--intent-info-background);
         color: #fff;
       }
+    }
+
+    .clear {
+      margin-right: auto;
     }
   }
 }

@@ -10,10 +10,14 @@ interface IconButtonInterface {
   size?: 'small' | 'normal'
 }
 
-const IconButton = ({ children, onClick, ...props }: IconButtonInterface) => {
+export const IconButton = ({
+  children,
+  onClick,
+  ...props
+}: IconButtonInterface) => {
   return (
     <button
-      className={`icon ${props.size == 'small' && 'small'}`}
+      className={`icon ${props.size === 'small' && 'small'}`}
       onClick={onClick}
       aria-controls={props['aria-controls']}
       aria-expanded={props['aria-expanded']}
@@ -23,5 +27,3 @@ const IconButton = ({ children, onClick, ...props }: IconButtonInterface) => {
     </button>
   )
 }
-
-export default IconButton

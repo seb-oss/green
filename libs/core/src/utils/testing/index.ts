@@ -138,6 +138,7 @@ export function isFirefox() {
   return navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 }
 
-export function onlyDate(date: Date) {
+export function onlyDate(date: Date | undefined) {
+  if (!date) return undefined
   return date.toISOString().split('T')[0]
 }

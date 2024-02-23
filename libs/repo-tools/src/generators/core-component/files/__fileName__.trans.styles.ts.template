@@ -1,0 +1,9 @@
+import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import styles from './<%= toKebabCase(name) %>.trans.styles.scss'
+
+export function register() {
+  console.log(styles.toString())
+  TransitionalStyles.instance.register('gds-<%= toKebabCase(name) %>', styles.toString())
+}
+
+export default register

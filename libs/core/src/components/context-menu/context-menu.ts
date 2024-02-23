@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult, LitElement, nothing } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { property, queryAsync, state } from 'lit/decorators.js'
@@ -43,8 +43,18 @@ export class GdsContextMenu extends GdsElement {
   /**
    * The label for the trigger button.
    */
-  @property()
+  @property({
+    attribute: 'button-label',
+  })
   buttonLabel = msg('Open context menu')
+
+  /**
+   * The label for the trigger button.
+   */
+  @property({
+    attribute: 'show-label',
+  })
+  showLabel = false
 
   /**
    * The label for the popover and menu. Should describe the context of the menu.
@@ -87,14 +97,15 @@ export class GdsContextMenu extends GdsElement {
     return html`${this._tStyles}
       <button
         id="trigger"
-        class="ghost border-0 small ${classMap({ highlighted: this.open })}"
-        aria-label="${this.buttonLabel}"
+        class="icon border-0 small ${classMap({ highlighted: this.open })}"
+        aria-label=${this.buttonLabel ?? this.label}
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
         @click=${() => (this.open = !this.open)}
       >
         <slot name="trigger">
+          ${this.showLabel ? this.buttonLabel ?? this.label : nothing}
           <i class="sg-icon sg-icon-ellipsis"></i>
         </slot>
       </button>
@@ -107,10 +118,10 @@ export class GdsContextMenu extends GdsElement {
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <gds-menu
-          aria-label=${this.label}
+          aria-label=${this.label ?? this.buttonLabel}
           @gds-menu-item-click=${this.#handleItemClick}
         >
-          <slot allow="gds-menu-item"></slot>
+          <slot allow="gds-menu-item gds-menu-heading"></slot>
         </gds-menu>
       </gds-popover>`
   }

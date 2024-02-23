@@ -6,6 +6,7 @@ on:
 jobs:
   check-changeset:
     name: Run check
+    if: github.event.pull_request.title != 'Version Packages'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -69,6 +70,19 @@ jobs:
               return `- **${packageName}**: ${oldVersion} &rarr; ${newVersion} (**${type}** bump)`;
             }).join('\n');
 
+      - name: Comment when empty changeset is found
+        if: ${{ failure() || steps.generate-comment-text.outputs.result == '""' }}
+        run: |
+          cat > ./pr/COMMENT <<- EOM
+          ## 🦋 Changeset status
+          None or empty changeset found. This PR will not result any new releases.
+
+          If you believe this is incorrect, please add a changeset by running \`npx changeset\`, and then commiting the resulting changeset file.
+
+          You can also explicitly add an empty changeset by running:
+          \`npx changeset add --empty\`
+          EOM
+
       - name: Comment when changeset is found
         if: steps.generate-comment-text.outputs.result != '""'
         run: |
@@ -78,16 +92,8 @@ jobs:
 
           ${{ fromJSON(steps.generate-comment-text.outputs.result) }}
 
-          *Note:* If unpublished changesets exists on \`main\`, and \`main\` has been merged into this PR, this
+          *Note:* If unpublished changesets where merged to \`main\` after the first commit of this PR, this
           list will include those changes in addition to the ones specific to this PR.
-          EOM
-
-      - name: Comment when empty changeset is found
-        if: steps.generate-comment-text.outputs.result == '""'
-        run: |
-          cat > ./pr/COMMENT <<- EOM
-          ## 🦋 Changeset status
-          Empty changeset found. This PR will not cause any new releases.
           EOM
 
       - name: Upload Artifact

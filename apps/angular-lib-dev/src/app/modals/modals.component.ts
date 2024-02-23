@@ -14,6 +14,8 @@ export class ModalsComponent {
   public deafultModalDismissLabel = 'Dismiss'
   public defaultModalType: ModalType = 'default'
 
+  public slideoutModalIsOpen = false
+
   public countries: DropdownOption[] = [
     {
       name: 'Sweden',
