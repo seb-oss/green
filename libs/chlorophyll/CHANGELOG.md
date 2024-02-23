@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.0
+
+### Minor Changes
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
 ## 3.0.5
 
 ### Patch Changes
