@@ -12,7 +12,7 @@ import {
   TableHeaderListItem,
   TableHeaderListValueType,
   TableRow,
-} from '../../models/cell-table/cell-table.models'
+} from './cell-table.types'
 
 @Component({
   selector: 'ngg-cell-table',
@@ -34,7 +34,7 @@ export class NggCellTableComponent {
   @Input() className?: string
 
   /** List of table headers */
-  @Input() headerList: Array<TableHeaderListItem> = []
+  @Input() headerList: TableHeaderListItem[] = []
 
   /** Date format for cell value with Date datatype */
   @Input() dateFormat = 'yyyy-MM-dd'

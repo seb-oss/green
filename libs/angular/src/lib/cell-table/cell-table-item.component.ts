@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { TableHeaderListValueType } from '../../models/cell-table/cell-table.models'
+import { TableHeaderListValueType } from './cell-table.types'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
