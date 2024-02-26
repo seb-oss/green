@@ -2,17 +2,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-bottom: 0.25rem;
 }
 
 [role='cell'],
 [role='columnheader'] {
   flex: 1 1 0;
+  margin-bottom: 0.25rem;
 }
 
 .cell-table--row-wrapper {
-  border-top: 1px solid var(--sg-border-color);
+  border-top: 1px solid var(--gds-ref-pallet-base400);
   display: flex;
-  padding: 0.5rem;
+  padding: 1rem;
 
   > div:first-child {
     flex: 1 1 0;
