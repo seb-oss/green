@@ -2,13 +2,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 [role='cell'],
 [role='columnheader'] {
   flex: 1 1 0;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.125rem;
 }
 
 .cell-table--row-wrapper {

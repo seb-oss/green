@@ -7,7 +7,7 @@ const tmp = [
   {
     rowId: 0,
     FullName:
-      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt='Swedish flag'><span>ABB Ltd</span></a>",
+      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt=''><span>ABB Ltd</span></a>",
     PreLastTradedAt: 397.3,
     ChangePercent: '−1,39%',
     Change: 5,
@@ -15,7 +15,7 @@ const tmp = [
   {
     rowId: 1,
     FullName:
-      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt='Swedish flag'><span>H&M</span></a>",
+      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt=''><span>H&M</span></a>",
     PreLastTradedAt: 200.3,
     ChangePercent: '−1,39%',
     Change: 5,
@@ -23,7 +23,7 @@ const tmp = [
   {
     rowId: 2,
     FullName:
-      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt='Swedish flag'><span>SBB</span></a>",
+      "<a href='#/sv/security/17921/ABB'><img class='pe-3 d-inline' src='https://content.seb.se/ssc/channels/savings-investments/financial-market-intra/assets/flags/se.svg' alt=''><span>SBB</span></a>",
     PreLastTradedAt: 100.3,
     ChangePercent: '−1,39%',
     Change: 5,

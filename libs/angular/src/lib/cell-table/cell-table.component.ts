@@ -94,6 +94,10 @@ export class NggCellTableComponent {
     return headers.filter((x) => !x.main)
   }
 
+  getTableKeySelector = (row: TableRow) => {
+    return this.mainHeader(row).tableKeySelector + row.rowId
+  }
+
   // ------- TRACKBY FOR STREAM ------------
   trackByrowId(_: any, b: TableRow) {
     return b.rowId

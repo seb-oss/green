@@ -7,20 +7,20 @@
     >
       <div>
         <div #items [class.overflow-reverse]="overflowReverse" role="rowgroup">
-          <div
-            role="row"
-            [attr.aria-describedby]="mainHeader(row).tableKeySelector"
-          >
-            <!-- Main header -->
+          <!-- Main header -->
+          <div role="row">
             <div
               nggCellTableItem
               [row]="mainHeader(row).value"
               [valueType]="getValueTypeFromMain()"
               [attr.valueType]="getValueTypeFromMain()"
-              [attr.id]="mainHeader(row).tableKeySelector"
+              [attr.id]="getTableKeySelector(row)"
               role="rowheader"
-              aria-rowspan="2"
+              aria-rowspan="3"
+              aria-colspan="3"
             ></div>
+          </div>
+          <div role="row">
             <div class="d-flex">
               <!-- Sub Header -->
               <div
@@ -38,7 +38,6 @@
           </div>
 
           <div role="row">
-            <div role="cell"></div>
             <!-- Sub Values -->
             <div class="d-flex">
               <div
