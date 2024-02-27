@@ -10,6 +10,8 @@ const { TsconfigPathsPlugin } = tscpp
 const { htmlPlugin } = htmlPkg
 const { sassPlugin } = esp
 const COMPONENT_DIR = 'libs/core/src/components'
+const LIB = 'core'
+const OUT_DIR = '.greenbook/'
 
 const getDirectories = (source) =>
   readdirSync(source, { withFileTypes: true })
@@ -35,7 +37,7 @@ import * as ReactDOM from 'react-dom'
 
 ReactDOM.render(<MDXContent />, document.getElementById('root'))
 `
-mkdir('libs/core/.esbuild/generated', { recursive: true }, (err) => {
+mkdir(`${OUT_DIR + LIB}/generated/`, { recursive: true }, (err) => {
   if (err) {
     console.log(err)
   }
@@ -43,7 +45,7 @@ mkdir('libs/core/.esbuild/generated', { recursive: true }, (err) => {
 
 const components = componentNames.map((componentName) => {
   writeFile(
-    'libs/core/.esbuild/generated/' + componentName + '.jsx',
+    OUT_DIR + 'generated/' + componentName + '.jsx',
     jsTemplate(
       componentName,
       '../../../../' + paths.find((path) => path.includes(componentName))
@@ -90,12 +92,10 @@ const files = paths.map((path) => {
 
   const componentName = prePath.split('/')[1]
 
-  generatedEntrypoints.push(
-    'libs/core/.esbuild/generated/' + componentName + '.jsx'
-  )
+  generatedEntrypoints.push(OUT_DIR + 'generated/' + componentName + '.jsx')
 
   return {
-    entryPoints: ['libs/core/.esbuild/generated/' + componentName + '.jsx'],
+    entryPoints: [OUT_DIR + 'generated/' + componentName + '.jsx'],
     filename: componentName + '/index.html',
     title: 'Hello World',
     htmlTemplate,
@@ -107,8 +107,8 @@ let ctx = await esbuild.context({
   entryNames: '[dir]/[name]',
   metafile: true,
   bundle: true,
-  outdir: 'libs/core/.esbuild/www',
-  outbase: 'libs/core/.esbuild/generated',
+  outdir: OUT_DIR + 'www',
+  outbase: OUT_DIR + 'generated',
   plugins: [
     mdx({ format: 'detect' }),
     htmlPlugin({
@@ -124,7 +124,7 @@ let ctx = await esbuild.context({
 await ctx.watch()
 
 ctx.serve({
-  servedir: 'libs/core/.esbuild/www',
+  servedir: OUT_DIR + 'www',
 })
 
 console.log(`Server running at http://localhost:8000`)

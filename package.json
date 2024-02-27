@@ -28,7 +28,8 @@
     "help": "nx help",
     "postinstall": "ngcc --properties es2020 browser module main && npm run copy-fonts",
     "copy-fonts": "copyfiles node_modules/@sebgroup/fonts/fonts/**/* dist/fonts -f",
-    "prepare": "husky install && cp -a .husky/. .git/hooks/"
+    "prepare": "husky install && cp -a .husky/. .git/hooks/",
+    "greenbook": "node libs/repo-tools/src/green-book/server.js"
   },
   "lint-staged": {
     "libs/**/src/**/*.scss": [
