@@ -56,6 +56,7 @@ export const Input = ({
   validator,
   onChangeInput,
   value = '',
+  required,
   ...props
 }: InputProps) => {
   const [uuid] = useState(id)
@@ -65,56 +66,62 @@ export const Input = ({
     setLocalValue(value)
   }, [value])
 
-  const localOnChange = useCallback(
+  const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const oldValue = event.target.value
-      const newValue = formatter ? formatter(oldValue) : oldValue
-      setLocalValue(newValue)
-
-      event.target.value = newValue
-
-      if (onChange) onChange(event)
-      if (onChangeInput) onChangeInput(newValue)
+      const { selectionStart, value } = event.target;
+      const formattedValue = formatter ? formatter(value) : value;
+      const nrAddedChars = formattedValue.length - value.length;
+      const updateCaretPosition = nrAddedChars !== 0;
+      const newSelectionStart = updateCaretPosition && selectionStart ? selectionStart + nrAddedChars : selectionStart;
 
       // Fixes bug: React loses caret position when you format the input value
-      if (!formatter || newValue.length > oldValue.length) return
-      const pointer = event.target.selectionStart
-      const element = event.target
       window.requestAnimationFrame(() => {
-        element.selectionStart = pointer
-        element.selectionEnd = pointer
-      })
+        event.target.selectionStart = newSelectionStart;
+        event.target.selectionEnd = newSelectionStart;
+      });
+
+      setLocalValue(formattedValue);
+      if (onChange) onChange(event);
+      if (onChangeInput) onChangeInput(formattedValue);
     },
     [formatter, setLocalValue, onChange, onChangeInput]
-  )
+  );
 
-  const inputAriaDescribedBy =
+  const showSimpleInput = !label && !info && !expandableInfo;
+  
+  const describedBy =
     classNames(ariaDescribedBy, {
-      [`gds-expandable-info-${uuid}`]: expandableInfo,
-      [`${uuid}_info`]: info,
-    }) || undefined
+      [`${uuid}_group-message`]: !showSimpleInput && validator?.message !== undefined && validator.message.length > 0,
+      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
+      [`${uuid}_info`]: !showSimpleInput && info,
+    })
 
   const inputClassName =
     classNames(
       className,
-      validator && validateClassName(validator.indicator)
-    ) || undefined
+      { [validateClassName(validator?.indicator)]: validator }
+    )
 
   const input = (
     <input
-      aria-describedby={inputAriaDescribedBy}
+      aria-describedby={describedBy || undefined}
+      aria-invalid={validator?.indicator === 'error'}
+      aria-required={required}
       autoComplete={autoComplete}
-      className={inputClassName}
+      className={inputClassName || undefined}
       data-testid={dataTestId}
       id={uuid}
-      onChange={localOnChange}
+      onChange={handleChange}
       role={role}
       value={localValue}
+      required={required}
       {...props}
     />
   )
 
-  if (!label && !info && !expandableInfo) return input
+  if (showSimpleInput) return input
+
+  const spanClassName = classNames('form-text', { 'disabled': props.disabled });
 
   return (
     <FormItem
@@ -126,10 +133,10 @@ export const Input = ({
       role={role}
     >
       <div className="gds-input-wrapper">
-        <Group groupBorder groupFocus error={validator && validator.message}>
+        <Group groupBorder groupFocus error={validator?.message} id={`${uuid}_group`}>
           {input}
           {unit && (
-            <span className={`form-text${props.disabled ? ' disabled' : ''}`}>
+            <span className={spanClassName}>
               {unit}
             </span>
           )}

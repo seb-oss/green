@@ -1,7 +1,6 @@
-import { IValidator, validateClassName } from '@sebgroup/extract'
-import useInput from '../useInput'
+import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
 import classNames from 'classnames'
-import { FormEventHandler, HTMLProps } from 'react'
+import { FormEventHandler, HTMLProps, useState } from 'react'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
@@ -17,36 +16,49 @@ export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
 }
 
 export const Checkbox = ({
+  'aria-describedby': ariaDescribedBy,
+  id = randomId(),
   label,
-  onChange,
   validator,
   testId,
+  required,
+  className,
   ...props
 }: CheckboxProps) => {
-  const inputProps = useInput(props, onChange)
+  const [uuid] = useState(id)
 
-  const labelClassNames = classNames(
-    'form-control',
-    validator && validateClassName(validator?.indicator)
+  const validationClassName = validateClassName(validator?.indicator);
+
+  const labelClassNames = classNames('form-control',
+    { [validationClassName]: validator }
   )
 
-  const inputClassNames = classNames(
-    validator && validateClassName(validator?.indicator)
+  const inputClassNames = classNames(className,
+    { [validationClassName]: validator }
   )
+
+  const describedBy = classNames(ariaDescribedBy, {
+    [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+  })
 
   return (
     <div className="form-group">
-      <label htmlFor={inputProps.id} className={labelClassNames}>
+      <label htmlFor={uuid} className={labelClassNames}>
         {label}
         <input
+          aria-describedby={describedBy || undefined}
+          aria-invalid={validator?.indicator === 'error'}
+          aria-required={required}
+          className={inputClassNames || undefined}
           type="checkbox"
           data-testid={testId}
-          {...inputProps}
-          className={inputClassNames}
+          id={uuid}
+          required={required}
+          {...props}
         />
         <i />
       </label>
-      {validator && <span className="form-info">{validator.message}</span>}
+      {validator && <span className="form-info" id={`${uuid}_message`}>{validator.message}</span>}
     </div>
   )
 }

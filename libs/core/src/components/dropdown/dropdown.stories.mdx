@@ -1,9 +1,8 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
-
+import { Canvas, Meta } from '@storybook/addon-docs'
 import {
   GdsDropdown,
-  GdsOption,
   GdsMenuHeading,
+  GdsOption,
 } from '../../../../../dist/libs/core/src'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
@@ -151,11 +150,11 @@ the default trigger content will be overridden, and you will have to manage the 
 ## Synced popover width
 
 Normally, the popover will never be narrower than the trigger, but may be wider if the option contents are wider.
-Optionally, the width of the popover can be locked to the width of the trigger by setting the `syncPopoverWidth` attribute.
+Optionally, the width of the popover can be locked to the width of the trigger by setting the `sync-popover-width` attribute.
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-dropdown syncPopoverWidth style={{ width: '200px' }}>
+    <gds-dropdown sync-popover-width style={{ width: '200px' }}>
       <gds-option value="1701-D-1">
         Enterprise 1701-D is a starship from the TNG series
       </gds-option>
@@ -165,6 +164,48 @@ Optionally, the width of the popover can be locked to the width of the trigger b
       <gds-option value="prometheus-1">Prometheus</gds-option>
       <gds-option value="discovery-1">Discovery</gds-option>
       <gds-option value="columbia-1">Columbia</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>
+
+## Size
+
+The Dropdown is available in two sizes: `small` and `medium`. `medium` is the default.
+
+<Canvas>
+  <div style={{ height: '300px', dummy: registerTransitionalStyles() }}>
+    <gds-dropdown size="small" label="Select tech">
+      <gds-option value="">Select tech</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  </div>
+</Canvas>
+
+A common use case for the small version is in constrained areas, such as table cells. In those cases, it is also often desirable to hide the label. This can be done with the `hide-label` attribute.
+
+Omitting the label attribute itself is not recommended, as it would make the dropdown inaccessible to screen readers.
+
+<Canvas>
+  <div
+    style={{
+      height: '300px',
+      display: 'inline-block',
+      dummy: registerTransitionalStyles(),
+    }}
+  >
+    <gds-dropdown size="small" label="Select tech" hide-label>
+      <gds-option value="">Select tech</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
   </div>
 </Canvas>

@@ -1,5 +1,45 @@
 # Changelog
 
+## 3.3.0
+
+### Minor Changes
+
+- 78e09aa: **Accessibility improvements:**
+
+  - Checkbox. Input, Textarea: Add aria attributes for validation
+  - Input: Fix bug with caret position when using formatter
+  - Select:
+    - Use native props
+    - Deprecate `labelInformation` in favor of `info` (like in other components)
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
+### Patch Changes
+
+- Updated dependencies [78e09aa]
+- Updated dependencies [007f8ac]
+  - @sebgroup/extract@3.0.1
+  - @sebgroup/chlorophyll@3.1.0
+  - @sebgroup/green-core@1.7.0
+
+## 3.2.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- Updated dependencies [158d93a]
+- Updated dependencies [e0d3f09]
+- Updated dependencies [d8de14a]
+  - @sebgroup/green-core@1.6.0
+  - @sebgroup/chlorophyll@3.0.5
+
 ## 3.1.0
 
 ### Minor Changes

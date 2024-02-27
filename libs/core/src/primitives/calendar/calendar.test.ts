@@ -20,9 +20,9 @@ describe('<gds-calendar>', () => {
   })
 
   describe('Interactions', () => {
-    it('should default to the current date', async () => {
+    it('should default to undefined', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
-      expect(onlyDate(el.value)).to.equal(onlyDate(new Date()))
+      expect(el.value).to.equal(undefined)
     })
 
     it('should increment by 7 days when pressing key down', async () => {
@@ -187,7 +187,7 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(onlyDate(el.value)).to.not.equal(onlyDate(focusedDate))
+      await expect(el.value).to.equal(undefined)
     })
 
     it('should update the focused date when value is changed', async () => {

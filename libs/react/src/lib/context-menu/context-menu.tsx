@@ -5,6 +5,7 @@ import {
   GdsContextMenu,
   GdsMenuItem,
   getScopedTagName,
+  GdsMenuHeading,
 } from '@sebgroup/green-core'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -24,5 +25,11 @@ export const MenuItem = createComponent({
   tagName: getScopedTagName('gds-menu-item'),
   elementClass: GdsMenuItem,
   events: { onMenuItemClick: 'gds-menu-item-click' },
+  react: React,
+})
+
+export const CoreMenuHeading = createComponent({
+  tagName: getScopedTagName('gds-menu-heading'),
+  elementClass: GdsMenuHeading,
   react: React,
 })

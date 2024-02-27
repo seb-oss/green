@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.7.0
+
+### Minor Changes
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
+## 1.6.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- e0d3f09: Datepicker: Fix copy/paste when there are multiple instances of Datepicker in the document
+
+## 1.5.1
+
+### Patch Changes
+
+- 943d785: Datepicker should emit `ìnput` event when focus is changed in the calendar
+- 204747d: Update `@floating-ui/dom` and remove previous `topLayerOverTransforms` hack
+
 ## 1.5.0
 
 ### Minor Changes

@@ -18,7 +18,7 @@ $highlighted-background: var(--gds-ref-pallet-base800);
   @include common.add-border();
   @include common.add-border-color(var(--gds-ref-pallet-base600));
   @include common.add-focus('');
-  //@include common.add-hover-state(#E9E9E9);
+
   background: $background;
   color: $color;
   min-height: 2.75rem;
@@ -52,10 +52,10 @@ $highlighted-background: var(--gds-ref-pallet-base800);
     border-left: solid 2px var(--gds-ref-pallet-base800);
     content: '';
     display: block;
-    height: 0.75rem;
-    width: 0.75rem;
+    height: 0.5rem;
+    width: 0.5rem;
     position: relative;
-    top: -0.1875rem;
+    top: -0.15rem;
     transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, -1);
     transition: transform 300ms ease-in;
     flex-shrink: 0;
@@ -75,15 +75,30 @@ $highlighted-background: var(--gds-ref-pallet-base800);
 }
 
 @mixin select-option {
-  @include common.padding-horizontal(4);
+  @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  @include common.add-hover-active-state();
+
   line-height: 1.25;
   cursor: pointer;
 
-  // highlighted option
-  &.active.sg-highlighted {
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gds-ref-pallet-base200);
+  }
+
+  &:active {
+    background-color: var(--gds-ref-pallet-base300);
+  }
+
+  &:focus {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
+
+  &.active.sg-highlighted,
+  &[aria-selected='true'] {
     @include select-option-highlighted;
+    color: #fff;
   }
 }
 
@@ -112,7 +127,21 @@ $highlighted-background: var(--gds-ref-pallet-base800);
   [role='menuitem'] {
     @include common.padding-horizontal(4);
     @include common.padding-vertical(4);
-    @include common.add-hover-state();
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--gds-ref-pallet-base200);
+    }
+
+    &:active {
+      background-color: var(--gds-ref-pallet-base300);
+    }
+
+    &:focus {
+      outline-color: #000;
+      outline-offset: -0.25rem;
+    }
+
     cursor: pointer;
   }
 }

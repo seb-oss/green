@@ -9,6 +9,7 @@ import {
 } from '@sebgroup/green-core'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { CoreMenuHeading } from '../context-menu/context-menu'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -46,6 +47,12 @@ export interface DropdownArgs {
 
   /** Force width of the popover to match trigger */
   syncPopoverWidth?: boolean
+
+  /** Size of the dropdown trigger */
+  size?: 'small' | 'medium'
+
+  /** Hide the label */
+  hideLabel?: boolean
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -99,6 +106,7 @@ export const Dropdown = ({
   validator,
   value,
   syncPopoverWidth,
+  ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
     if (e.detail?.value) {
@@ -132,6 +140,8 @@ export const Dropdown = ({
         value={value}
         searchFilter={searchFilterAdapter}
         syncPopoverWidth={syncPopoverWidth}
+        size={props.size}
+        hideLabel={props.hideLabel}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}
@@ -141,9 +151,15 @@ export const Dropdown = ({
         {options.map((option) => {
           if (option.heading) {
             return (
+<<<<<<< HEAD
               <CoreOptionHeading key={option.label}>
                 {option[display]}
               </CoreOptionHeading>
+=======
+              <CoreMenuHeading key={option.label}>
+                {option[display]}
+              </CoreMenuHeading>
+>>>>>>> main
             )
           }
           return (
