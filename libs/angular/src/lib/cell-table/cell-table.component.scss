@@ -22,6 +22,10 @@
 
   &.is-clickable {
     cursor: pointer;
+
+    &:hover {
+      background-color: var(--gds-ref-pallet-base100);
+    }
   }
 }
 

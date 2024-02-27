@@ -36,18 +36,13 @@ export class NggCellTableComponent {
   /** List of table headers */
   @Input() headerList: TableHeaderListItem[] = []
 
-  /** Date format for cell value with Date datatype */
-  @Input() dateFormat = 'yyyy-MM-dd'
-
   /** List of data */
   @Input() rows: TableRow[] = []
 
-  /** The visible height of table */
-  @Input() fixedHeight?: string
-
   /** Make rows clickable and add arrow to the right */
-  @Input() clickableRows?: boolean
+  @Input() clickableRows = false
 
+  /** Label for the chevron of clickable rows */
   @Input() clickLabel = 'View details'
 
   /** Callback when a row is clicked */

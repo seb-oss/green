@@ -6,6 +6,9 @@ import { NggCellTableComponent } from './cell-table.component'
 
 A component for presenting tabular data in a stacked format.
 
+Status: **Beta**<br/>
+*You can use this component, but breaking changes may occur even in minor releases*
+
 ## Description
 
 The `NggCellTableComponent` is primarily used as a mobile alternative to regular tables. All, or prioritized
@@ -42,8 +45,6 @@ will be the only focusable element that can be used to trigger the click action,
 | className       | `string`                     | Custom CSS class name for styling.                     |
 | minWidth        | `number`                     | Cell minimum width to ensure consistent column widths. |
 | overflowReverse | `boolean`                    | Make the most left element wrap.                       |
-| dateFormat      | `string`                     | Date format for date-type data.                        |
-| fixedHeight     | `string`                     | The visible height of the table.                       |
 | clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right.                     |
 | clickLabel      | `string`                     | The label for the chevron button.                      |
 
@@ -120,5 +121,3 @@ export interface SortInfo<T extends {} = { [k: string]: any }> {
 <Canvas>
   <Story id="components-cell-table--default" />
 </Canvas>
-
-This documentation provides an overview of the component, how to use it, and its input and output options, similar to the structure of the example you provided for the NggSliderComponent.
