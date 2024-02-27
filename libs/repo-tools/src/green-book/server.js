@@ -48,7 +48,7 @@ const components = componentNames.map((componentName) => {
     OUT_DIR + 'generated/' + componentName + '.jsx',
     jsTemplate(
       componentName,
-      '../../../../' + paths.find((path) => path.includes(componentName))
+      '../../' + paths.find((path) => path.includes(componentName))
     ),
     (err) => {
       if (err) throw err

@@ -1,7 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs"
+    "module": "ES2015",
+    "paths": {
+      "@sebgroup/green-core": ["libs/core/src"],
+      "@sebgroup/green-core/*": ["libs/core/src/*"]
+    }
   },
   "files": [],
   "include": [],

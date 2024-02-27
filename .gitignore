@@ -37,6 +37,7 @@ yarn-error.log
 testem.log
 /typings
 package-lock.json # we should only have yarn.lock
+.greenbook
 
 # System Files
 .DS_Store
