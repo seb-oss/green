@@ -48,7 +48,7 @@ export class NggCellTableComponent {
   /** Make rows clickable and add arrow to the right */
   @Input() clickableRows?: boolean
 
-  @Input() clickLabel: string = 'View details'
+  @Input() clickLabel = 'View details'
 
   /** Callback when a row is clicked */
   @Output() rowClicked: EventEmitter<TableRow> = new EventEmitter()
