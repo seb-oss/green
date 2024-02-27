@@ -57,7 +57,7 @@ const Template: Story<NggCellTableComponent> = (
 ) => {
   return {
     template: `
-      <ngg-cell-table [rows]="rows" [headerList]="headerList" [className]="className" [arrow]="arrow">
+      <ngg-cell-table [rows]="rows" [headerList]="headerList" [className]="className">
       </ngg-cell-table>
     `,
     props: args,

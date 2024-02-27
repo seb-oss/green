@@ -15,13 +15,6 @@ columns, are grouped into one cell that may be spread on multiple lines to summa
 
 To use the `NggCellTableComponent`, you need to import the `NggCellTableModule` into your Angular module.
 
-## Accessibility
-
-When using `clickableRows`, you must also make sure to add the `clickLabel` input to provide a label for the chevron.
-
-The full row is clickable with a mouse or touch input, but when navigating using keyboard or screen reader, the chevron
-will be the only focusable element that can be used to trigger the click action.
-
 ```typescript
 import { NgModule } from '@angular/core'
 import { NggCellTableModule } from '@sebgroup/angular-green' // Replace with your actual module path
@@ -31,6 +24,14 @@ import { NggCellTableModule } from '@sebgroup/angular-green' // Replace with you
 })
 export class YourModule {}
 ```
+
+## Accessibility
+
+When using the `clickableRows` input, you must also make sure to add the `clickLabel` input to provide a label for the chevron.
+
+The full row is clickable with a mouse or touch input, but when navigating using keyboard or screen reader, the chevron
+will be the only focusable element that can be used to trigger the click action, so it is important to provide a good label for it.
+
 
 ## Inputs
 
@@ -44,7 +45,7 @@ export class YourModule {}
 | dateFormat      | `string`                     | Date format for date-type data.                        |
 | fixedHeight     | `string`                     | The visible height of the table.                       |
 | clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right.                     |
-| clickLabel      | `string`                     | The label for the chevron.                      |
+| clickLabel      | `string`                     | The label for the chevron button.                      |
 
 ## Outputs
 
