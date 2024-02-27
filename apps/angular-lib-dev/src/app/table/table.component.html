@@ -6,7 +6,8 @@
     [rows]="rows"
     [headerList]="headerList"
     [className]="className"
-    [arrow]="arrow"
+    [clickableRows]="arrow"
+    (rowClicked)="rowClicked($event)"
   >
   </ngg-cell-table>
 
