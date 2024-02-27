@@ -45,8 +45,10 @@ export class NggCellTableComponent {
   /** The visible height of table */
   @Input() fixedHeight?: string
 
-  /** Add arrow to the most right */
-  @Input() arrow?: boolean
+  /** Make rows clickable and add arrow to the right */
+  @Input() clickableRows?: boolean
+
+  @Input() clickLabel: string = 'View details'
 
   /** Callback when a row is clicked */
   @Output() rowClicked: EventEmitter<TableRow> = new EventEmitter()
@@ -57,7 +59,7 @@ export class NggCellTableComponent {
    * @param {TableRowClickedEvent} value the TableRowClickedEvent
    */
   handleClickRow = (value: TableRow): void => {
-    this.rowClicked.emit(value)
+    if (this.clickableRows) this.rowClicked.emit(value)
   }
 
   getValueTypeFromMain = (): TableHeaderListValueType => {

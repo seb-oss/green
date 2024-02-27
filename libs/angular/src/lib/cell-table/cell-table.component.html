@@ -4,9 +4,11 @@
       *ngFor="let row of rows; trackBy: trackByrowId"
       (click)="handleClickRow(row)"
       class="cell-table--row-wrapper"
+      role="rowgroup"
+      [class.is-clickable]="clickableRows"
     >
       <div>
-        <div #items [class.overflow-reverse]="overflowReverse" role="rowgroup">
+        <div #items [class.overflow-reverse]="overflowReverse">
           <!-- Main header -->
           <div role="row">
             <div
@@ -54,30 +56,35 @@
               ></div>
             </div>
           </div>
-
-          <!-- </div> -->
         </div>
       </div>
       <div
-        *ngIf="arrow"
-        class="d-flex justify-content-end align-items-center ms-4 me-4 cell-table--arrow-container"
+        *ngIf="clickableRows"
+        role="row"
+        class="d-grid align-items-center ms-4 me-4 cell-table--arrow-container"
       >
-        <svg
-          role="img"
-          aria-hidden="true"
-          focusable="false"
-          data-prefix="far"
-          data-icon="chevron-right"
-          class="svg-inline--fa fa-chevron-right fa-w-10"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 320 512"
-          aria-hidden="true"
-        >
-          <path
-            fill="currentColor"
-            d="M113.3 47.41l183.1 191.1c4.469 4.625 6.688 10.62 6.688 16.59s-2.219 11.97-6.688 16.59l-183.1 191.1c-9.152 9.594-24.34 9.906-33.9 .7187c-9.625-9.125-9.938-24.38-.7187-33.91l168-175.4L78.71 80.6c-9.219-9.5-8.906-24.78 .7187-33.91C88.99 37.5 104.2 37.82 113.3 47.41z"
-          ></path>
-        </svg>
+        <div role="cell">
+          <div
+            role="button"
+            [attr.aria-label]="clickLabel"
+            tabindex="0"
+            [attr.aria-describedby]="getTableKeySelector(row)"
+            (keydown.enter)="handleClickRow(row)"
+          >
+            <svg
+              data-prefix="far"
+              data-icon="chevron-right"
+              class="svg-inline--fa fa-chevron-right fa-w-10"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                fill="currentColor"
+                d="M113.3 47.41l183.1 191.1c4.469 4.625 6.688 10.62 6.688 16.59s-2.219 11.97-6.688 16.59l-183.1 191.1c-9.152 9.594-24.34 9.906-33.9 .7187c-9.625-9.125-9.938-24.38-.7187-33.91l168-175.4L78.71 80.6c-9.219-9.5-8.906-24.78 .7187-33.91C88.99 37.5 104.2 37.82 113.3 47.41z"
+              ></path>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>

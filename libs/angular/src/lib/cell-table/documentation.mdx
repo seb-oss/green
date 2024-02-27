@@ -8,11 +8,19 @@ A component for presenting tabular data in a stacked format.
 
 ## Description
 
-The `NggCellTableComponent` is primarily used as a mobile alternative to regular tables. All, or prioritized columns, are grouped into one cell that may be spread on multiple lines to summarize the columns of the table.
+The `NggCellTableComponent` is primarily used as a mobile alternative to regular tables. All, or prioritized
+columns, are grouped into one cell that may be spread on multiple lines to summarize the columns of the table.
 
 ## Importing Module
 
 To use the `NggCellTableComponent`, you need to import the `NggCellTableModule` into your Angular module.
+
+## Accessibility
+
+When using `clickableRows`, you must also make sure to add the `clickLabel` input to provide a label for the chevron.
+
+The full row is clickable with a mouse or touch input, but when navigating using keyboard or screen reader, the chevron
+will be the only focusable element that can be used to trigger the click action.
 
 ```typescript
 import { NgModule } from '@angular/core'
@@ -35,7 +43,8 @@ export class YourModule {}
 | overflowReverse | `boolean`                    | Make the most left element wrap.                       |
 | dateFormat      | `string`                     | Date format for date-type data.                        |
 | fixedHeight     | `string`                     | The visible height of the table.                       |
-| arrow           | `boolean`                    | Add an arrow to the most right.                        |
+| clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right.                     |
+| clickLabel      | `string`                     | The label for the chevron.                      |
 
 ## Outputs
 

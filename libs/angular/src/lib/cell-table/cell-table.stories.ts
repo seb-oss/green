@@ -91,5 +91,5 @@ Default.args = {
       valueType: 'sign',
     },
   ],
-  arrow: true,
+  clickableRows: true,
 }

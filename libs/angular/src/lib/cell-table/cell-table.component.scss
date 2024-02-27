@@ -19,9 +19,19 @@
   > div:first-child {
     flex: 1 1 0;
   }
+
+  &.is-clickable {
+    cursor: pointer;
+  }
 }
 
 .cell-table--arrow-container {
   flex: 0 0 auto;
   width: 10px;
+
+  [tabindex='0'] {
+    &:focus {
+      outline: 2px solid var(--gds-ref-pallet-base800);
+    }
+  }
 }
