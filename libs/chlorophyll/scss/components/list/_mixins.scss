@@ -77,6 +77,9 @@ $_border-color: var(--gds-ref-pallet-base200);
   }
 }
 
+/** 
+  * @deprecated in favor of Grouped list component
+  */
 @mixin add-list-group() {
   > div {
     @include common.padding-vertical(5);
@@ -97,6 +100,9 @@ $_border-color: var(--gds-ref-pallet-base200);
   }
 }
 
+/** 
+  * @deprecated in favor of Grouped list component
+  */
 @mixin add-list-group-caption() {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(3);
@@ -120,7 +126,8 @@ $_border-color: var(--gds-ref-pallet-base200);
 }
 
 @mixin add-value-list() {
-  dt, dd {
+  dt,
+  dd {
     font-size: 1rem;
     font-weight: 400;
   }
@@ -141,8 +148,9 @@ $_border-color: var(--gds-ref-pallet-base200);
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    dt, dd {
-      padding: .5rem 0;
+    dt,
+    dd {
+      padding: 0.5rem 0;
     }
 
     dt {
@@ -155,15 +163,14 @@ $_border-color: var(--gds-ref-pallet-base200);
       justify-content: end;
     }
   }
-
 }
 
 @mixin table-list() {
   @debug 'table-list mixin is deprecated, use the add-list-group mixin instead';
-  @include add-list-group()
+  @include add-list-group();
 }
 
 @mixin table-list-caption() {
   @debug 'table-list-caption mixin is deprecated, use the add-list-group-caption mixin instead';
-  @include add-list-group-caption()
+  @include add-list-group-caption();
 }

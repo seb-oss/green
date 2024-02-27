@@ -1,28 +1,62 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
-import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
-import { A } from '@storybook/components'
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { GroupedList } from './grouped-list'
 
-<Meta title="Components/Grouped List" />
+<Meta title="Components/Grouped list" component={GroupedList} />
 
-## Grouped list
+# Grouped List
+
+[Source code](https://github.com/sebgroup/green/tree/main/libs/react/src/lib/grouped-list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/lists)
+
+## Overview
+
+List are used to list many datapoints with labels in a structured way. They may be grouped under heading and they may have a link or button added to act on the data being displayed.
+
+## Importing the component
+
+In order to use the `GroupedList` component, you need to import the component:
+
+```jsx
+import { GroupedList } from '@sebgroup/green-react'
+
+// Use as JSX element in your app
+return (
+  <GroupedList label="List heading">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </GroupedList>
+)
+```
+
+## Register transitional styles
+
+This component does not need you to import styles from `Chlorophyll` it handles it with "transitional styles" that you need to register.
+
+```jsx
+import { registerTransitionalStyles } from '@sebgroup/green-react'
+// Register the styles once in your apps entrypoint (main.tsx, app.tsx) file
+registerTransitionalStyles()
+```
+
+## Examples
+
+### Default
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Item 4</li>
-      <li>Item 5</li>
-    </gds-grouped-list>
-  </div>
+  <GroupedList label="List heading">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </GroupedList>
 </Canvas>
 
 ## Grouped list with values
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+  <div style={{ height: '200px' }}>
+    <GroupedList label="List heading">
       <li
         style={{
           gap: '.25rem',
@@ -78,15 +112,15 @@ import { A } from '@storybook/components'
         <div>Key 5</div>
         <strong>Value 5</strong>
       </li>
-    </gds-grouped-list>
+    </GroupedList>
   </div>
 </Canvas>
 
 ## Grouped list with values and action
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+  <div style={{ height: '200px' }}>
+    <GroupedList label="List label">
       <li
         style={{
           gap: '.25rem',
@@ -157,6 +191,6 @@ import { A } from '@storybook/components'
           <a href="#">Link</a>
         </div>
       </li>
-    </gds-grouped-list>
+    </GroupedList>
   </div>
 </Canvas>
