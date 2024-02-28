@@ -8,6 +8,8 @@ export * from './radio/radio-group'
 export * from './switch/switch'
 export * from './badge/badge'
 export * from './tooltip/tooltip'
+export * from './flex/flex'
+export * from './grid/grid'
 export * from '../primitives/listbox/option'
 
 export * from './context-menu/context-menu'
