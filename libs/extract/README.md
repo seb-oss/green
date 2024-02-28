@@ -95,8 +95,3 @@ side effects using a reducer pattern (basically a data structure goes in and
 a new, changed data structure comes out). These are easily testable. The
 resulting updated data model is communicated to the framewoek of choice which
 can then re-render making it easily bindable.
-
-## And then...
-
-This is work in progress. Please reah out to us for clarifications or suggested
-improvements!

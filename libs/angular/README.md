@@ -1,27 +1,68 @@
-# GreenAngular
+<div align="center">
+<img width="600" alt="green-angular" src="https://github.com/sebgroup/green/assets/11420341/c776109a-c980-4c33-92dd-109f1ff31ba2">
+<h1>@sebgroup/green-angular</h1>
+<p>
+Angular components with SEB's look and feel.
+</p>
+</div>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+## Install
 
-## Development server
+If you are using the latest version of Angular, you can simply install `@sebgroup/green-angular` like this:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+// If you are using yarn
+yarn install @sebgroup/green-angular --save
 
-## Code scaffolding
+// If you are using npm
+npm install @sebgroup/green-angular --save
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+However, because `@sebgroup/green-angular` has a peer dependency to `@angular/cdk`, and Angular is very picky about which versions go together, if you use an older version of Angular you need to explicitly install the matching version of `@angular/cdk` as well.
 
-## Build
+For example, for Angular 14:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm install @angular/cdk@~14.0.0 @sebgroup/green-angular --save
+```
 
-## Running unit tests
+Currently, our aim is to support the LTS version of Angular as well as the current latest version.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Import module
 
-## Running end-to-end tests
+We recommend that you import `NggModule` (or just the module you need for Angular Green) into a shared module eg. `SharedModule` that can be imported into other, preferably lazy loaded modules when needed.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```ts
+import { NggModule } from '@sebgroup/green-angular'
 
-## Further help
+@NgModule({
+  declarations: [...],
+  imports: [
+    ...
+    NggModule
+  ],
+  exports: [
+    NggModule
+  ]
+})
+export class SharedModule {}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Import styling
+
+We recommend setting up your Angular project to use scss (SASS) for css preprocessing.
+
+Once configured to use scss, it's just a matter of including the scss to your main styles file, typically it would be `styles.scss` located at the root of the `src` folder unless you've changed it.
+
+### Add scss
+
+`{project}/src/styles.scss`
+
+```css
+// import base styles from @sebgroup/chlorophyll
+@use '@sebgroup/chlorophyll/scss';
+```
+
+### Have other needs?
+
+More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/sebgroup/green/issues)
