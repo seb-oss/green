@@ -314,6 +314,16 @@
     }
   },
   {
+    "id": "components-cell-table--default",
+    "name": "Default",
+    "title": "Components/Cell Table",
+    "customParams": {
+      "componentIds": [
+        "components-cell-table"
+      ]
+    }
+  },
+  {
     "id": "components-form-button--default",
     "name": "Default",
     "title": "Components/Form/Button",
