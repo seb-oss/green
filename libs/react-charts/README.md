@@ -1,6 +1,6 @@
-# Green React Charts
+# @sebgroup/react-charts
 
-React Green charting components
+An React wrapper of [@sebgroup/charts](https://github.com/sebgroup/green/tree/main/libs/charts) that is in itself a wrapper of [Billboard.js](https://naver.github.io/billboard.js/)
 
 ## Install
 
