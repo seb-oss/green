@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0
+
+### Minor Changes
+
+- a1c5e60: New component: Grouped list
+
 ## 1.7.0
 
 ### Minor Changes
