@@ -1,13 +1,13 @@
 import { screen, render } from '@testing-library/react'
-import { GroupedList } from './grouped-list'
+import { GroupedList, ListItem } from './grouped-list'
 
 describe('GroupedList', () => {
   it('renders the list items', () => {
     render(
       <GroupedList>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <ListItem>Item 1</ListItem>
+        <ListItem>Item 2</ListItem>
+        <ListItem>Item 3</ListItem>
       </GroupedList>
     )
 

@@ -10,3 +10,9 @@ export const GroupedList = createComponent({
   elementClass: GdsGroupedList,
   react: React,
 })
+
+export const ListItem = createComponent({
+  tagName: getScopedTagName('gds-list-item'),
+  elementClass: GdsGroupedList,
+  react: React,
+})
