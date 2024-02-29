@@ -4,12 +4,5 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "type": "module",
-  "dependencies": {
-    "@craftamap/esbuild-plugin-html": "^0.6.1",
-    "@esbuild-plugins/tsconfig-paths": "^0.1.2",
-    "@mdx-js/esbuild": "^3.0.1",
-    "@nx/devkit": "16.8.1",
-    "find-config": "^1.0.0"
-  }
+  "type": "module"
 }

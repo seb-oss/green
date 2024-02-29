@@ -1,4 +1,4 @@
 {
-  "outDir": ".green-book",
+  "outDir": ".greenbook",
   "componentDir": "libs/core/src/components"
 }
