@@ -11,7 +11,9 @@ import { constrainSlots } from '../../utils/helpers'
 
 /**
  * @element gds-grouped-list
- * @internal
+ * @status beta
+ *
+ * Grouped lists are used to list many datapoints with labels in a structured way.
  */
 @gdsCustomElement('gds-grouped-list')
 export class GdsGroupedList extends GdsElement {
