@@ -5,7 +5,7 @@ import '../icon/icon'
 import '../../primitives/ripple/ripple'
 
 import { tokens } from '../../tokens.style'
-import style from 'flex.style.css';
+import style from './flex.style.css';
 
 
 import {
@@ -25,7 +25,7 @@ const html = stripWhitespace(customElementHtml)
  * @status beta
  */
 
-@gdsCustomElement('gds-grid')
+@gdsCustomElement('gds-flex')
 
 export class GdsFlex extends LitElement {
     static styles = [tokens, unsafeCSS(style)];

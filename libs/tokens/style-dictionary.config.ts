@@ -202,7 +202,7 @@ const config: StyleDictionary.Config = {
             let returnValue = false
 
             token.path?.forEach((item) => {
-              if (['color', 'size'].includes(item)) {
+              if (['color', 'size', 'space', 'motion', 'state', 'typography'].includes(item)) {
                 returnValue = true
               }
             })

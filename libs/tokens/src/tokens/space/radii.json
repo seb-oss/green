@@ -1,9 +1,9 @@
 {
   "sys": {
-    "size": {
+    "space": {
       "radii": {
         "none": {
-          "value": "{ref.size.0}",
+          "value": "20",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -11,7 +11,7 @@
           }
         },
         "small": {
-          "value": "{ref.size.2}",
+          "value": "40",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -19,7 +19,7 @@
           }
         },
         "medium": {
-          "value": "{ref.size.4}",
+          "value": "60",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -27,7 +27,7 @@
           }
         },
         "large": {
-          "value": "{ref.size.5}",
+          "value": "70",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
@@ -35,7 +35,7 @@
           }
         },
         "extraLarge": {
-          "value": "{ref.size.6}",
+          "value": "80",
           "attributes": {
             "figma": {
               "resolvedType": "ALIAS"
