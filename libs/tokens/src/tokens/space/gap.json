@@ -4,10 +4,8 @@
       "gap": {
         "small": {
           "value": "420",
-          "darkValue": "420",
           "attributes": {
             "figma": {
-              "id": "VariableID:902:001",
               "resolvedType": "FLOAT"
             }
           }

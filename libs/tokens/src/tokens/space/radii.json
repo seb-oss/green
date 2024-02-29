@@ -6,7 +6,7 @@
           "value": "20",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         },
@@ -14,7 +14,7 @@
           "value": "40",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         },
@@ -22,7 +22,7 @@
           "value": "60",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         },
@@ -30,7 +30,7 @@
           "value": "70",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         },
@@ -38,7 +38,7 @@
           "value": "80",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         },
@@ -46,7 +46,7 @@
           "value": "9999",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "FLOAT"
             }
           }
         }

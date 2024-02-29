@@ -7,7 +7,7 @@
           "darkValue": "{ref.color.blue.45}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -16,7 +16,7 @@
           "darkValue": "{ref.color.blue.85}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -25,7 +25,7 @@
           "darkValue": "{ref.color.blue.60}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -34,7 +34,7 @@
           "darkValue": "{ref.color.blue.90}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -43,7 +43,7 @@
           "darkValue": "{ref.color.green.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -52,7 +52,7 @@
           "darkValue": "{ref.color.green.98}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -61,7 +61,7 @@
           "darkValue": "{ref.color.green.98}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -70,7 +70,7 @@
           "darkValue": "{ref.color.green.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -79,7 +79,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -88,7 +88,7 @@
           "darkValue": "{ref.color.grey.90}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -97,7 +97,7 @@
           "darkValue": "{ref.color.grey.90}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -106,7 +106,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }

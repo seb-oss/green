@@ -4,10 +4,8 @@
             "breakpoint": {
                 "mobile": {
                     "value": "420",
-                    "darkValue": "420",
                     "attributes": {
                         "figma": {
-                            "id": "VariableID:901:001",
                             "resolvedType": "FLOAT"
                         }
                     }

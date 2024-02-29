@@ -8,7 +8,7 @@
           "attributes": {
             "figma": {
               "id": "VariableID:228:10",
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -17,7 +17,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -26,7 +26,7 @@
           "darkValue": "{ref.color.grey.30}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -35,7 +35,7 @@
           "darkValue": "{ref.color.grey.10}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -44,7 +44,7 @@
           "darkValue": "{ref.color.grey.85}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -53,7 +53,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -62,7 +62,7 @@
           "darkValue": "{ref.color.grey.25}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -71,7 +71,7 @@
           "darkValue": "{ref.color.green.40}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -80,7 +80,7 @@
           "darkValue": "{ref.color.red.45}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }

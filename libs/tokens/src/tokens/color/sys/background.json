@@ -8,7 +8,7 @@
           "attributes": {
             "figma": {
               "id": "VariableID:228:6",
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -18,7 +18,7 @@
           "attributes": {
             "figma": {
               "id": "VariableID:228:6",
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }
