@@ -19,7 +19,7 @@ export class GdsGroupedList extends GdsElement {
   /**
    * The label for the list that will render in the shadowDOM as the first <li> element in the list with the class `gds-list-heading`
    */
-  @property({ reflect: true })
+  @property()
   label = ''
 
   connectedCallback(): void {
