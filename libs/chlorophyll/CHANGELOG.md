@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.1
+
+### Patch Changes
+
+- a1c5e60: New component: Grouped list
+
 ## 3.1.0
 
 ### Minor Changes

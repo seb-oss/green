@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.4.0
+
+### Minor Changes
+
+- a1c5e60: New component: Grouped list
+
+### Patch Changes
+
+- Updated dependencies [a1c5e60]
+  - @sebgroup/green-core@1.8.0
+  - @sebgroup/chlorophyll@3.1.1
+
 ## 3.3.0
 
 ### Minor Changes
