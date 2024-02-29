@@ -1,21 +1,20 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
-import { A } from '@storybook/components'
 
 <Meta title="Components/Grouped List" />
 
 ## Grouped list
 
-The `<gds-grouped-list>` element accepts regular list items (`<li>`) as children.
+The `<gds-grouped-list>` element accepts `<gds-list-item>` elements as children.
 
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Item 4</li>
-      <li>Item 5</li>
+      <gds-list-item>Item 1</gds-list-item>
+      <gds-list-item>Item 2</gds-list-item>
+      <gds-list-item>Item 3</gds-list-item>
+      <gds-list-item>Item 4</gds-list-item>
+      <gds-list-item>Item 5</gds-list-item>
     </gds-grouped-list>
   </div>
 </Canvas>
@@ -27,26 +26,26 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li>
+      <gds-list-item>
         <div>Key 1</div>
         <strong>Value 1</strong>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 2</div>
         <strong>Value 2</strong>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 3</div>
         <strong>Value 3</strong>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 4</div>
         <strong>Value 4</strong>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 5</div>
         <strong>Value 5</strong>
-      </li>
+      </gds-list-item>
     </gds-grouped-list>
   </div>
 </Canvas>
@@ -56,41 +55,41 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li>
+      <gds-list-item>
         <div>Key 1</div>
         <strong>Value 1</strong>
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 2</div>
         <strong>Value 2</strong>
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 3</div>
         <strong>Value 3</strong>
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 4</div>
         <strong>Value 4</strong>
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li>
+      </gds-list-item>
+      <gds-list-item>
         <div>Key 5</div>
         <strong>Value 5</strong>
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
+      </gds-list-item>
     </gds-grouped-list>
   </div>
 </Canvas>
@@ -102,7 +101,7 @@ The slotted elements can be styled using inline styles or CSS classes.
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li style={{
+      <gds-list-item style={{
         justifyContent: 'left',
       }}>
         <div>Key 1</div>
@@ -110,8 +109,8 @@ The slotted elements can be styled using inline styles or CSS classes.
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li style={{
+      </gds-list-item>
+      <gds-list-item style={{
         justifyContent: 'left',
       }}>
         <div>Key 2</div>
@@ -119,8 +118,8 @@ The slotted elements can be styled using inline styles or CSS classes.
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
-      <li style={{
+      </gds-list-item>
+      <gds-list-item style={{
         justifyContent: 'left',
       }}>
         <div>Key 3</div>
@@ -128,7 +127,7 @@ The slotted elements can be styled using inline styles or CSS classes.
         <div>
           <a href="#">Link</a>
         </div>
-      </li>
+      </gds-list-item>
     </gds-grouped-list>
   </div>
 </Canvas>

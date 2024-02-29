@@ -8,6 +8,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { constrainSlots } from '../../utils/helpers'
+import './list-item'
 
 /**
  * @element gds-grouped-list
@@ -30,8 +31,6 @@ export class GdsGroupedList extends GdsElement {
     super.connectedCallback()
     constrainSlots(this)
 
-    this.setAttribute('role', 'list')
-    this.setAttribute('aria-label', this.label)
     TransitionalStyles.instance.apply(this, 'gds-grouped-list')
   }
 
@@ -39,9 +38,12 @@ export class GdsGroupedList extends GdsElement {
     return html`${this._tStyles}${when(
         this.label,
         () =>
-          html`<li class="gds-list-heading" role="none" aria-hidden="true">
+          html`<div class="gds-list-heading" aria-hidden="true" id="label">
             ${this.label}
-          </li>`
-      )}<slot gds-allow="li"></slot>`
+          </div>`
+      )}
+      <div role="list" aria-labelledby="label">
+        <slot gds-allow="gds-list-item"></slot>
+      </div>`
   }
 }
