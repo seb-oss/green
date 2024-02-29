@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import { GroupedList } from './grouped-list'
+import { GroupedList, ListItem } from './grouped-list'
 
 <Meta title="Components/Grouped list" component={GroupedList} />
 
@@ -29,6 +29,14 @@ return (
   </GroupedList>
 )
 ```
+
+<Canvas>
+  <GroupedList label="List heading">
+    <ListItem>Item 1</ListItem>
+    <ListItem>Item 2</ListItem>
+    <ListItem>Item 3</ListItem>
+  </GroupedList>
+</Canvas>
 
 ## Register transitional styles
 
