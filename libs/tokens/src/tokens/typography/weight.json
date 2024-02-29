@@ -2,160 +2,40 @@
     "sys": {
         "typography": {
             "weight": {
-                "display-large": {
-                    "value": "98",
+                "light": {
+                    "value": "300",
                     "attributes": {
                         "figma": {
                             "resolvedType": "FLOAT"
                         }
                     }
                 },
-                "display-medium": {
-                    "value": "80",
+                "regular": {
+                    "value": "400",
                     "attributes": {
                         "figma": {
                             "resolvedType": "FLOAT"
                         }
                     }
                 },
-                "display-small": {
-                    "value": "52",
+                "book": {
+                    "value": "450",
                     "attributes": {
                         "figma": {
                             "resolvedType": "FLOAT"
                         }
                     }
                 },
-                "headline-large": {
-                    "value": "40",
+                "medium": {
+                    "value": "500",
                     "attributes": {
                         "figma": {
                             "resolvedType": "FLOAT"
                         }
                     }
                 },
-                "headline-medium": {
-                    "value": "36",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "headline-small": {
-                    "value": "30",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "title-large": {
-                    "value": "28",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "title-medium": {
-                    "value": "24",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "title-small": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "body-large": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "body-medium": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "body-small": {
-                    "value": "16",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-large": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-medium": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-small": {
-                    "value": "16",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-information-large": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-information-medium": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-input-large": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-input-medium": {
-                    "value": "20",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "label-overline": {
-                    "value": "18",
+                "bold": {
+                    "value": "700",
                     "attributes": {
                         "figma": {
                             "resolvedType": "FLOAT"
