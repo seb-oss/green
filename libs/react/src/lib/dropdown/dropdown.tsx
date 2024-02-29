@@ -1,9 +1,7 @@
-import React from 'react'
 import { createComponent } from '@lit/react'
-
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
-
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import React from 'react'
 import { CoreMenuHeading } from '../context-menu/context-menu'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean

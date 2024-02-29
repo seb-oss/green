@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
 import { Dropdown } from './dropdown'
 
 export const Template = ({ align, ...props }) => (
@@ -116,7 +116,7 @@ You can add an option heading by adding the `heading` property to the to the opt
 
 <Canvas>
   <Dropdown
-    label='Option headings'
+    label="Option headings"
     options={[
       { label: 'Lunch', heading: true },
       { label: 'Tacos', value: 'tacos' },
@@ -135,7 +135,7 @@ You can add an option heading by adding the `heading` property to the to the opt
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
-      label='Multi select'
+      label="Multi select"
       multiSelect
       options={[
         { label: 'Tacos', value: 'tacos' },
@@ -156,8 +156,8 @@ Optionally, the label can also be hidden using the `hideLabel` prop.
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
-      label='Small dropdown'
-      size='small'
+      label="Small dropdown"
+      size="small"
       hideLabel
       options={[
         { label: 'Tacos', value: 'tacos' },
