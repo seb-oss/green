@@ -18,6 +18,9 @@
 
     ::slotted(li) {
       all: revert;
+      display: flex;
+      gap: 0.25rem;
+      justify-content: space-between;
       padding: 1rem;
       border-bottom: 1px solid var(--gds-ref-pallet-base200, #e9e9e9);
     }

@@ -6,6 +6,8 @@ import { A } from '@storybook/components'
 
 ## Grouped list
 
+The `<gds-grouped-list>` element accepts regular list items (`<li>`) as children.
+
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
@@ -20,61 +22,28 @@ import { A } from '@storybook/components'
 
 ## Grouped list with values
 
+By default, the list items are displayed as `flex` containers with `space-between` alignment.
+
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 1</div>
         <strong>Value 1</strong>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 2</div>
         <strong>Value 2</strong>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 3</div>
         <strong>Value 3</strong>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 4</div>
         <strong>Value 4</strong>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 5</div>
         <strong>Value 5</strong>
       </li>
@@ -87,72 +56,75 @@ import { A } from '@storybook/components'
 <Canvas>
   <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 1</div>
         <strong>Value 1</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 2</div>
         <strong>Value 2</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 3</div>
         <strong>Value 3</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 4</div>
         <strong>Value 4</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </li>
-      <li
-        style={{
-          gap: '.25rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          paddingBlockEnd: '1rem',
-        }}
-      >
+      <li>
         <div>Key 5</div>
         <strong>Value 5</strong>
+        <div>
+          <a href="#">Link</a>
+        </div>
+      </li>
+    </gds-grouped-list>
+  </div>
+</Canvas>
+
+## Adjusting apparence
+
+The slotted elements can be styled using inline styles or CSS classes.
+
+<Canvas>
+  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+    <gds-grouped-list label="List label">
+      <li style={{
+        justifyContent: 'left',
+      }}>
+        <div>Key 1</div>
+        <strong>Value 1</strong>
+        <div>
+          <a href="#">Link</a>
+        </div>
+      </li>
+      <li style={{
+        justifyContent: 'left',
+      }}>
+        <div>Key 2</div>
+        <strong>Value 2</strong>
+        <div>
+          <a href="#">Link</a>
+        </div>
+      </li>
+      <li style={{
+        justifyContent: 'left',
+      }}>
+        <div>Key 3</div>
+        <strong>Value 3</strong>
         <div>
           <a href="#">Link</a>
         </div>
