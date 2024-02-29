@@ -158,6 +158,12 @@
     }
   },
   {
+    "id": "components-grouped-list--default",
+    "name": "Default",
+    "title": "Components/Grouped List",
+    "customParams": {}
+  },
+  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
@@ -304,6 +310,16 @@
     "customParams": {
       "componentIds": [
         "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-cell-table--default",
+    "name": "Default",
+    "title": "Components/Cell Table",
+    "customParams": {
+      "componentIds": [
+        "components-cell-table"
       ]
     }
   },
