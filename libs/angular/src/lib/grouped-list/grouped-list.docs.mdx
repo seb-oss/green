@@ -8,9 +8,9 @@ import { Story, Canvas } from '@storybook/addon-docs'
 
 The Grouped List component is used to list many datapoints with labels in a structured way. They may be grouped under heading and they may have a link or button added to act on the data being displayed.
 
-## Use Webcomponent in Angular
+## Use Web component in Angular
 
-This is a Webcomponent that comes from the `Green Core` library. Angular has support for using webcomponents directly in the template. To use this webcomponent in Angular, you need to do the following:
+This is a Web component that comes from the `Green Core` library. Angular has support for using web components directly in the template. To use this webcomponent in Angular, you need to do the following:
 
 Add the `CUSTOM_ELEMENTS_SCHEMA` in the module that uses this component.
 
@@ -41,9 +41,9 @@ Use the webcomponent in your template with the `*nggCoreElement` directive.
 
 ```html
 <gds-grouped-list *nggCoreElement label="Grouped list label">
-  <li>Item 1</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
+  <gds-list-item *nggCoreElement>Item 1</gds-list-item>
+  <gds-list-item *nggCoreElement>Item 2</gds-list-item>
+  <gds-list-item *nggCoreElement>Item 3</gds-list-item>
 </gds-grouped-list>
 ```
 
@@ -65,6 +65,6 @@ Use the webcomponent in your template with the `*nggCoreElement` directive.
 
 ### Slots
 
-| Slot         | Description                                        |
-| ------------ | -------------------------------------------------- |
-| `(default))` | The default slot that accepts only `<li>` elements |
+| Slot        | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `(default)` | The default slot that accepts only `<gds-list-item>` elements |

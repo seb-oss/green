@@ -22,9 +22,9 @@ export default {
 const Template: Story = (args) => ({
   template: `
     <gds-grouped-list *nggCoreElement label="${args.label}">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <gds-list-item *nggCoreElement>Item 1</gds-list-item>
+        <gds-list-item *nggCoreElement>Item 2</gds-list-item>
+        <gds-list-item *nggCoreElement>Item 3</gds-list-item>
     </gds-grouped-list>
     `,
   props: args,
