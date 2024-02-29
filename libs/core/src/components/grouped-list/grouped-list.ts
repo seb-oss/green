@@ -1,5 +1,6 @@
 import { HTMLTemplateResult } from 'lit'
 import { state, property } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
@@ -28,13 +29,17 @@ export class GdsGroupedList extends GdsElement {
     constrainSlots(this)
 
     this.setAttribute('role', 'list')
+    this.setAttribute('aria-label', this.label)
     TransitionalStyles.instance.apply(this, 'gds-grouped-list')
   }
 
   render() {
-    return html`${this._tStyles}${this.label
-        ? html`<li class="gds-list-heading">${this.label}</li>`
-        : ''}<slot></slot>`
+    return html`${this._tStyles}${when(
+        this.label,
+        () =>
+          html`<li class="gds-list-heading" role="none" aria-hidden="true">
+            ${this.label}
+          </li>`
       )}<slot gds-allow="li"></slot>`
   }
 }
