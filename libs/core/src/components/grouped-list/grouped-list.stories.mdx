@@ -8,7 +8,7 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 The `<gds-grouped-list>` element accepts `<gds-list-item>` elements as children.
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+  <div style={{ dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
       <gds-list-item>Item 1</gds-list-item>
       <gds-list-item>Item 2</gds-list-item>
@@ -24,7 +24,7 @@ The `<gds-grouped-list>` element accepts `<gds-list-item>` elements as children.
 By default, the list items are displayed as `flex` containers with `space-between` alignment.
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+  <div style={{ dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
       <gds-list-item>
         <div>Key 1</div>
@@ -53,7 +53,7 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 ## Grouped list with values and action
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+  <div style={{ dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
       <gds-list-item>
         <div>Key 1</div>
@@ -99,29 +99,35 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 The slotted elements can be styled using inline styles or CSS classes.
 
 <Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+  <div style={{ dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="List label">
-      <gds-list-item style={{
-        justifyContent: 'left',
-      }}>
+      <gds-list-item
+        style={{
+          justifyContent: 'left',
+        }}
+      >
         <div>Key 1</div>
         <strong>Value 1</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </gds-list-item>
-      <gds-list-item style={{
-        justifyContent: 'left',
-      }}>
+      <gds-list-item
+        style={{
+          justifyContent: 'left',
+        }}
+      >
         <div>Key 2</div>
         <strong>Value 2</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </gds-list-item>
-      <gds-list-item style={{
-        justifyContent: 'left',
-      }}>
+      <gds-list-item
+        style={{
+          justifyContent: 'left',
+        }}
+      >
         <div>Key 3</div>
         <strong>Value 3</strong>
         <div>
