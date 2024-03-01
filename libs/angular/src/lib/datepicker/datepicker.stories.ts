@@ -55,6 +55,8 @@ Simple.args = {
 export const CustomOptions = Template.bind({})
 CustomOptions.args = {
   label: 'Birthday',
+  disabledWeekends: true,
+  disabledDates: [new Date(2024, 1, 6), new Date(2023, 12, 4)],
   options: {
     minDate: startOfYear(subYears(new Date(), 100)),
     maxDate: new Date(),

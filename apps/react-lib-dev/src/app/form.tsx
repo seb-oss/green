@@ -100,7 +100,12 @@ export const FormExample = () => {
             onChange={setDdValue}
             searchable={true}
           />
-          <Datepicker value={date} onChange={setDate} />
+          <Datepicker
+            value={date}
+            onChange={setDate}
+            disabledWeekends={true}
+            disabledDates={[new Date(2024, 2, 13)]}
+          />
         </div>
 
         <div>

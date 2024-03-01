@@ -23,6 +23,8 @@ export interface DatepickerOptions {
   testId?: string
   size?: 'small' | 'medium'
   hideLabel?: boolean
+  disabledWeekends?: boolean
+  disabledDates?: Date[]
 
   /** @deprecated Use `value` instead */
   selectedDate?: Date
