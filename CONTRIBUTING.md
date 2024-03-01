@@ -14,24 +14,24 @@ Ping us on Teams in the channel `Green` if you are interested!
 
 If you have suggestions for how this project could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you have questions, too, we'd love to hear them. Try to have a short but informative title and longer text in the description. Also try to find labels that fits the subject.
 
-Eg: `Issues with buttons` -> `Button: Fontsize and spacings too big`
+Eg: `Button: Fontsize and spacings too big` could be tagged with the `Comp: Button` label.
 
-We'd also love PRs. If you're thinking of a large PR, we advise opening up an issue first to talk about it, though! Look at the links below if you're not sure how to open a PR.
+We also love PRs. If you're thinking of a large PR, we advise opening up an issue first to talk about it, though! Look at the links below if you're not sure how to open a PR.
 
 ## Submitting a pull request (PR)
 
 1. [Fork][fork] and clone the repository.
 1. Make sure you fulfill the technical pre-requisites
 
-- Node version 14 or later
+- Node LTS version. Check here for supported versions: https://nodejs.org/en/about/previous-releases
 - Yarn (`npm install -g yarn`)
-- git-cz (`npm install -g git-cz`)
 
 1. Install the dependencies: `yarn`.
 1. Make sure the tests pass on your machine: `yarn test`, note: these tests also apply the linter, so there's no need to lint separately.
 1. Create a new branch: `git checkout -b feat/my-new-cool-component`.
 1. Write the tests, write the code, and make sure the tests pass.
-1. Add your changes and commit by running `git-cz`.
+1. Commit your changes
+1. Add a changeset by running `npx changeset`
 1. Push to your fork and [submit a pull request][pr].
 1. Pat your self on the back and wait for your pull request to be reviewed and merged.
 
@@ -39,13 +39,13 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
 - Follow the [style guide][style] which is using standard. Any linting errors should be shown when running `yarn test`.
 - Write and update tests.
-- Keep your changes as focused as possible. If there are multiple changes you would like to make that are not dependent upon each other, consider submitting them as separate pull requests.
+- Keep your changes as focused as possible. If there are multiple changes you would like to make that are not dependent upon each other, it is better to submit them as separate pull requests.
 - Write a good commit message.
-  - Use `git-cz` and select an appropriate commit type
   - Write an easy to understand description of your changes
   - If you have registered an issue, reference it with `#[issue number]` or `closes #[issue number]`if applicable
+- Add a `changeset` describing how the change should affect the next version of the related packages. [Read this](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md) for more information on changesets.
 
-Work in Progress pull requests are also welcome to get feedback early on, or if there is something blocked you.
+Draft pull requests are also welcome to get feedback early on, or if there is something blocked you.
 
 ## Resources
 
