@@ -1,35 +1,19 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import styles from '@sebgroup/chlorophyll/scss/index.scss'
 import Badge from './badge'
 
-export const Template = ({ ...props }) => <Badge {...props} />
-
-<Meta title="Components/Badge" component={Badge} />
+<style dangerouslySetInnerHTML={{ __html: styles }}></style>
 
 # Badge
 
+<Badge>Badge</Badge>
+
 Simple Badge Component
-
-<Story
-  name="Badge"
-  parameters={{
-    componentIds: ['component-badge'],
-  }}
-  args={{
-    children: 'Primary',
-    badgeType: 'info',
-    isCloseable: false,
-  }}
->
-  {Template.bind({})}
-</Story>
-
-#
 
 ### Types
 
 Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
 
-<Canvas>
+<div>
   <div className="badge-container">
     <Badge>Badge</Badge>
     <Badge badgeType="info">Information</Badge>
@@ -42,4 +26,4 @@ Badges are available in a number of different variants. Please note that the col
       Custom
     </Badge>
   </div>
-</Canvas>
+</div>

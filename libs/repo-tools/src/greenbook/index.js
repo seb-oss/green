@@ -1,17 +1,18 @@
-import { mkdir, readdirSync, writeFile } from 'fs';
+import { promises as fs } from 'fs';
+import nodePath from 'path';
 import { htmlPlugin, } from '@craftamap/esbuild-plugin-html';
-import { TsconfigPathsPlugin } from '@esbuild-plugins/tsconfig-paths';
 import mdx from '@mdx-js/esbuild';
 import chalk from 'chalk';
 import * as esbuild from 'esbuild';
 import { sassPlugin } from 'esbuild-sass-plugin';
 import findConfig from 'find-config';
 import { globby } from 'globby';
+import remarkGfm from 'remark-gfm';
 /**
  * Standard config settings
  */
 const config = {
-    outDir: '.green-book',
+    outDir: '.greenbook/_generated_',
     componentDir: 'libs/core/src/components',
     lib: 'core',
     port: 8000,
@@ -23,84 +24,115 @@ const configJSON = findConfig.read('.greenbookrc');
 const importedConfig = JSON.parse(configJSON);
 Object.assign(config, importedConfig);
 /**
+ * @description - A function that clears a directory
+ * @param path - The path to the directory you want to clear
+ */
+const clearDir = async (path) => {
+    await fs.rm(path, { recursive: true }).catch((err) => {
+        console.log(`${chalk.red('error')} => ${err}`);
+    });
+};
+/**
  * Get the names of the directories in a given path
  * @param path - The path to the directory where you want to look for directories
  * @returns string[] - An array of directory names
  */
-const getDirectories = (path) => readdirSync(path, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
+const getDirectories = (path) => fs
+    .readdir(path, { withFileTypes: true })
+    .then((dirents) => {
+    return dirents
+        .filter((dirent) => dirent.isDirectory())
+        .map((dirent) => dirent.name);
+})
+    .catch((err) => {
+    console.log(`${chalk.red('error')} => ${err}`);
+});
 /**
- * @param dir string - the path to the directory you want to get the component names from
- * @returns string[] - an array of component names
+ *
+ * @param path string - The path to clean
+ * @returns
  */
-const getComponentNamesBasedOnDir = (dir) => {
-    try {
-        return getDirectories(dir);
-    }
-    catch (error) {
-        console.log(`${chalk.red('error')} => No component directory found in: ` + dir);
-        process.exit(1);
-    }
-};
-const componentNames = [...getComponentNamesBasedOnDir(config.componentDir)];
 const cleanPath = (path) => {
     const stringArr = path.split('/');
     return stringArr.slice(3, stringArr.length - 1).join('/');
 };
+const createOutDir = async () => {
+    fs.mkdir(config.outDir + '/' + config.lib, {
+        recursive: true,
+    }).catch((err) => {
+        console.log(`${chalk.red('error')} => ${err}`);
+    });
+};
+const copyFonts = async () => {
+    console.log(`${chalk.green('info')} => Copying fonts...`);
+    fs.cp(process.cwd() + '/node_modules/@sebgroup/fonts/css', config.outDir + '/' + config.lib + '/www/assets/css', { recursive: true }).catch((err) => {
+        console.log(`${chalk.red('error')} => ${err}`);
+    });
+    fs.cp(process.cwd() + '/node_modules/@sebgroup/fonts/fonts', config.outDir + '/' + config.lib + '/www/assets/fonts', { recursive: true }).catch((err) => {
+        console.log(`${chalk.red('error')} => ${err}`);
+    });
+};
+const getMDXFiles = async (path) => {
+    return globby([path + '/**/*.stories.md', path + '/**/*.stories.mdx']);
+};
+/**
+ * @description - A template for generating .jsx files that will be used as entrypoints for esbuild
+ * @param componentName - The name of the component
+ * @param mdxPath - The path to the mdx file
+ * @returns string - A string that will be written to a .jsx file
+ */
+const jsTemplate = (components, mdxPath) => `
+import * as React from 'react'
+import MDXContent from '${mdxPath}'
+import * as ReactDOM from 'react-dom'
+
+ReactDOM.render(<MDXContent />, document.getElementById('root'))
+`;
+/**
+ * @description - A function that creates the component structure
+ * @param components - An array of component names
+ * @param paths - An array of paths to the .md and .mdx files
+ * @returns object[] - An array of objects that contain the component name, entrypoint, and path
+ */
+const createComponentSrc = async (components, paths) => components
+    .filter((name) => paths.find((path) => path.includes(name)))
+    .map((componentName) => {
+    const jsxDir = config.outDir + '/' + config.lib + '/';
+    const mdxPath = nodePath.relative(jsxDir, paths.find((path) => path.includes(componentName)));
+    fs.writeFile(jsxDir + '/' + componentName + '.jsx', jsTemplate(componentName, mdxPath)).catch((err) => {
+        console.log(`${chalk.red('error')} => ${err}`);
+    });
+    return {
+        name: componentName,
+        entryPoint: componentName + '.jsx',
+        path: componentName,
+    };
+});
 /**
  * @description - The main function that starts the Greenbook process
  */
 const init = async () => {
     console.log(`${chalk.green('info')} => Starting Greenbook...`);
-    console.log(`${chalk.green('info')} => Creating directories...`);
+    console.log(`${chalk.green('info')} => Clearing output directory...`);
+    await clearDir(config.outDir);
+    console.log(`${chalk.green('info')} => Creating new output directories...`);
     /**
      * Create the outDir if it doesn't exist
      */
-    mkdir(`${config.outDir + '/' + config.lib}/generated/`, { recursive: true }, (err) => {
-        if (err) {
-            console.log(chalk.green(err));
-        }
-    });
+    createOutDir();
+    copyFonts();
     console.log(`${chalk.green('info')} => Reading .md and .mdx files...`);
     /**
      * Get all the .md and .mdx files in the component directory
      */
-    const paths = await globby([
-        config.componentDir + '/**/*.stories.md',
-        config.componentDir + '/**/*.stories.mdx',
-    ]);
-    /**
-     * @description - A template for generating .jsx files that will be used as entrypoints for esbuild
-     * @param componentName - The name of the component
-     * @param mdxPath - The path to the mdx file
-     * @returns string - A string that will be written to a .jsx file
-     */
-    const jsTemplate = (componentName, mdxPath) => `
-      import * as React from 'react'
-      import MDXContent from '${mdxPath}'
-      import * as ReactDOM from 'react-dom'
-
-      ReactDOM.render(<MDXContent />, document.getElementById('root'))
-      `;
+    const mdxPaths = await getMDXFiles(config.componentDir);
+    const componentNames = await getDirectories(config.componentDir);
+    if (!Array.isArray(componentNames)) {
+        console.log(`${chalk.red('error')} => No components found in directory: ${config.componentDir}`);
+        process.exit(1);
+    }
     console.log(`${chalk.green('info')} => Generating component structure...`);
-    const createComponentStructure = (components) => components.map((componentName) => {
-        writeFile(config.outDir +
-            '/' +
-            config.lib +
-            '/generated/' +
-            componentName +
-            '.jsx', jsTemplate(componentName, '../../../' + paths.find((path) => path.includes(componentName))), (err) => {
-            if (err)
-                throw err;
-        });
-        return {
-            name: componentName,
-            entryPoint: '/generated/' + componentName + '.jsx',
-            path: componentName,
-        };
-    });
-    const components = createComponentStructure(componentNames);
+    const componentSrc = await createComponentSrc(componentNames, mdxPaths);
     const htmlTemplate = `
       <!DOCTYPE html>
       <html lang="en">
@@ -111,10 +143,12 @@ const init = async () => {
             globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true;
             new EventSource('/esbuild').addEventListener('change', () => location.reload());
           </script>
+          <link rel="stylesheet" href="/assets/css/seb-fonts.css">
           <style>
-          body {
+          body, html {
             margin: 0;
             padding: 0;
+            font-family: 'SEBSansSerif', sans-serif;
           }
 
           #greenbook {
@@ -137,7 +171,7 @@ const init = async () => {
       </head>
       <body>
           <div id="greenbook">
-            <ul>${components
+            <ul>${componentSrc
         .map((component) => `<li><a href="/${component.path}">${component.name}</a></li>`)
         .join('')}</ul>
             <div id="root">
@@ -148,28 +182,27 @@ const init = async () => {
       `;
     const generatedEntrypoints = [];
     console.log(`${chalk.green('info')} => Generating entrypoints...`);
-    const htmlFilesSource = paths.map((path) => {
-        const prePath = cleanPath(path);
-        const componentName = prePath.split('/')[1];
-        generatedEntrypoints.push(config.outDir + '/' + config.lib + '/generated/' + componentName + '.jsx');
+    const htmlFilesSource = mdxPaths.map((path) => {
+        const componentName = path
+            .split('/')
+            .find((part) => componentNames.find((name) => name === part));
+        if (!componentName) {
+            console.log(`${chalk.red('error')} => No component name found for path: ${path}`);
+        }
+        generatedEntrypoints.push(config.outDir + '/' + config.lib + '/' + componentName + '.jsx');
         return {
             entryPoints: [
-                config.outDir +
-                    '/' +
-                    config.lib +
-                    '/generated/' +
-                    componentName +
-                    '.jsx',
+                config.outDir + '/' + config.lib + '/' + componentName + '.jsx',
             ],
             filename: componentName + '/index.html',
-            title: 'Hello World',
+            title: componentName,
             htmlTemplate,
         };
     });
     htmlFilesSource.push({
         entryPoints: [],
         filename: 'index.html',
-        title: 'Hello World',
+        title: 'Greenbook',
         htmlTemplate,
     });
     console.log(`${chalk.green('info')} => Starting esbuild...`);
@@ -178,24 +211,27 @@ const init = async () => {
         entryNames: '[dir]/[name]',
         metafile: true,
         bundle: true,
-        outdir: config.outDir + '/www',
-        outbase: config.outDir + '/generated',
+        outdir: config.outDir + '/' + config.lib + '/www',
+        outbase: config.outDir + '/' + config.lib,
         plugins: [
-            mdx({ format: 'detect' }),
+            mdx({ format: 'detect', remarkPlugins: [remarkGfm] }),
             htmlPlugin({
                 files: htmlFilesSource,
             }),
             sassPlugin({
                 type: 'css-text',
+                // importMapper: (path) => {
+                //   console.log(path)
+                //   return path
+                // },
             }),
-            TsconfigPathsPlugin({ tsconfig: 'tsconfig.base.json' }),
         ],
     });
     console.log(`${chalk.green('info')} => Watching files...`);
     await ctx.watch();
     console.log(`${chalk.green('info')} => Starting esbuild server...`);
     ctx.serve({
-        servedir: config.outDir + '/www',
+        servedir: config.outDir + '/' + config.lib + '/www',
     });
     console.log(`${chalk.green('success!')} => Server running at ${chalk.blue('http://localhost:' + config.port)}`);
 };

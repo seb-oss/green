@@ -1,4 +1,4 @@
 {
-  "outDir": ".greenbook",
-  "componentDir": "libs/core/src/components"
+  "componentDir": "libs/react/src/lib",
+  "lib": "react"
 }

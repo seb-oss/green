@@ -1,11 +1,9 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import Card from './card'
+import styles from '@sebgroup/chlorophyll/scss/index.scss'
 import Button from '../form/button/button'
 import Link from '../link/link'
+import Card from './card'
 
-export const Template = ({ children, ...props }) => (
-  <Card {...props}>{children}</Card>
-)
+;<style dangerouslySetInnerHTML={{ __html: styles }}></style>
 
 export const Header = () => (
   <>
@@ -27,37 +25,27 @@ export const Footer = () => (
   </>
 )
 
-<Meta title="Components/Card" component={Card} />
-
 # Cards
 
 Simple Card Component
 
-<Story
-  name="Card"
-  parameters={{
-    componentIds: ['component-card']
-  }}
-  args={{ header: <Header />, footer: <Footer />, children: 'Card content' }}
->
-  {Template.bind({})}
-</Story>
+<Card
+  {...{ header: <Header />, footer: <Footer />, children: 'Card content' }}
+></Card>
 
 #
 
 ## Headline and text content
 
-<Canvas>
+<div>
   <Card header={<h3>Card one headline</h3>}>Card one content text</Card>
   <Card header={<h3>Card two headline</h3>}></Card>
-</Canvas>
+</div>
 
 ## Card with button
 
-<Canvas>
+<div>
   <Card header={<Header />} footer={<Footer />}>
     Here is some content with link and two buttons footer
   </Card>
-</Canvas>
-
-<ArgsTable of={Card} />
+</div>

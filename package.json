@@ -55,7 +55,6 @@
     "@nx/plugin": "16.8.1",
     "@popperjs/core": "^2.11.5",
     "@sebgroup/bootstrap": "^6.0.1",
-    "@sebgroup/fonts": "^1.1.0",
     "@sebgroup/green-tokens": "^0.0.1-beta.9",
     "@storybook/core-server": "6.5.16",
     "@swc/helpers": "0.5.2",

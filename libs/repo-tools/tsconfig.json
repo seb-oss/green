@@ -1,14 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "ES2015",
-    "paths": {
-      "@sebgroup/green-core": ["libs/core/src"],
-      "@sebgroup/green-core/*": ["libs/core/src/*"]
-    }
+    "module": "ES2015"
   },
   "files": [],
-  "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

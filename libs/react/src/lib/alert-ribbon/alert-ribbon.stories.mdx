@@ -1,6 +1,8 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import AlertRibbon from './alert-ribbon'
+import styles from '@sebgroup/chlorophyll/scss/index.scss'
 import { Button } from '../form/button/button'
+import AlertRibbon from './alert-ribbon'
+
+<style dangerouslySetInnerHTML={{ __html: styles }}></style>
 
 export const Template = ({ children, ...props }) => (
   <AlertRibbon {...props}>{children}</AlertRibbon>
@@ -36,28 +38,9 @@ export const FooterDanger = () => (
   </>
 )
 
-<Meta title="Components/AlertRibbon" component={AlertRibbon} />
-
 # Alert ribbon
 
 Simple Alert ribbon component
-
-<Story
-  name="AlertRibbon"
-  parameters={{
-    componentIds: ['component-alertribbon']
-  }}
-  args={{
-    type: '',
-    header: 'Heading',
-    footer: <Footer />,
-    children: 'Eftersom du vill låna med någon annan än din partner vill vi prata med dig. Du är välkommen att kontakta oss på 0771-365 365 eller boka ett rådgivningsmöte',
-    isCloseable: false,
-    closeText: '',
-  }}
->
-  {Template.bind({})}
-</Story>
 
 #
 
@@ -65,30 +48,34 @@ Simple Alert ribbon component
 
 Set a alert type for color coded alerts. Please note that inline links can only be in the end of the AlertRibbon in Figma/Design Library so this code might be utpdated to that.
 
-<Canvas>
+<div>
   <AlertRibbon header="Info heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links, <a href="#">info</a>, will
-    inherit color from alert to make sure contrast is applied.
+    AlertRibbon content placed inside a paragraph. Inline links,{' '}
+    <a href="#">info</a>, will inherit color from alert to make sure contrast is
+    applied.
   </AlertRibbon>
   <AlertRibbon type="success" header="Success heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links, <a href="#">success</a>, will
-    inherit color from alert to make sure contrast is applied.
+    AlertRibbon content placed inside a paragraph. Inline links,{' '}
+    <a href="#">success</a>, will inherit color from alert to make sure contrast
+    is applied.
   </AlertRibbon>
   <AlertRibbon type="warning" header="Warning heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links, <a href="#">warning</a>, will
-    inherit color from alert to make sure contrast is applied, like this .
+    AlertRibbon content placed inside a paragraph. Inline links,{' '}
+    <a href="#">warning</a>, will inherit color from alert to make sure contrast
+    is applied, like this .
   </AlertRibbon>
   <AlertRibbon type="danger" header="Danger heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links, <a href="#">danger</a>, will
-    inherit color from alert to make sure contrast is applied, like this .
+    AlertRibbon content placed inside a paragraph. Inline links,{' '}
+    <a href="#">danger</a>, will inherit color from alert to make sure contrast
+    is applied, like this .
   </AlertRibbon>
-</Canvas>
+</div>
 
 ## AlertRibbon with Close button
 
 Close button icon
 
-<Canvas>
+<div>
   <AlertRibbon header="Info" isCloseable={true}>
     This is an alert type <a href="#">info with a link</a>.
   </AlertRibbon>
@@ -101,26 +88,41 @@ Close button icon
   <AlertRibbon type="danger" header="Danger" isCloseable={true}>
     This is an alert type <a href="#">danger with a link</a>.
   </AlertRibbon>
-</Canvas>
+</div>
 
 ## AlertRibbon with Footer Buttons
 
 Button components can be passed in as a footer
 
-<Canvas>
+<div>
   <AlertRibbon header="Info" footer={<FooterInfo />} isCloseable={true}>
     This is an alert type <a href="#">info with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="success" header="Success" footer={<FooterSuccess />} isCloseable={true}>
+  <AlertRibbon
+    type="success"
+    header="Success"
+    footer={<FooterSuccess />}
+    isCloseable={true}
+  >
     This is an alert type <a href="#">success with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="warning" header="Warning" footer={<FooterWarning />} isCloseable={true}>
+  <AlertRibbon
+    type="warning"
+    header="Warning"
+    footer={<FooterWarning />}
+    isCloseable={true}
+  >
     This is an alert type <a href="#">warning with a link</a>.
   </AlertRibbon>
-  <AlertRibbon type="danger" header="Danger" footer={<FooterDanger />} isCloseable={true}>
+  <AlertRibbon
+    type="danger"
+    header="Danger"
+    footer={<FooterDanger />}
+    isCloseable={true}
+  >
     This is an alert type <a href="#">danger with a link</a>.
   </AlertRibbon>
-</Canvas>
+</div>
 
 ## Props
 

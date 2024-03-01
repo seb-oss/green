@@ -1,24 +1,14 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import styles from '@sebgroup/chlorophyll/scss/index.scss'
 import { Dropdown } from './dropdown'
 
-export const Template = ({ align, ...props }) => (
-  <div style={{ paddingBottom: '150px' }}>
-    <Dropdown {...props}></Dropdown>
-  </div>
-)
-
-<Meta title="Components/Dropdown" component={Dropdown} />
+<style dangerouslySetInnerHTML={{ __html: styles }}></style>
 
 # Dropdown
 
 Dropdown Component
 
-<Story
-  name="Dropdown"
-  parameters={{
-    componentIds: ['component-dropdown'],
-  }}
-  args={{
+<Dropdown
+  {...{
     options: [
       { label: 'Tacos', value: 'tacos' },
       { label: 'Pizza', value: 'pizza' },
@@ -38,9 +28,7 @@ Dropdown Component
     label: 'Dropdown label',
     syncPopoverWidth: false,
   }}
->
-  {Template.bind({})}
-</Story>
+></Dropdown>
 
 ## Options
 
@@ -67,7 +55,7 @@ By default, the dropdown will look for a label and value pair for the data. The 
 
 Dropdown option values can even be an object, but note that it requires a `compareWith` function to uniquely identify each object. Eg:
 
-<Canvas>
+<div>
   <div style={{ height: '200px' }}>
     <Dropdown
       options={[
@@ -79,7 +67,7 @@ Dropdown option values can even be an object, but note that it requires a `compa
       onChange={(value) => console.log('OnChange', value)}
     ></Dropdown>
   </div>
-</Canvas>
+</div>
 
 ## Texts and placeholder
 
@@ -91,7 +79,7 @@ Custom texts can be set using the texts input which takes an object with the fol
 
 ## Multi select
 
-<Canvas>
+<div>
   <div style={{ height: '200px' }}>
     <Dropdown
       multiSelect
@@ -103,8 +91,6 @@ Custom texts can be set using the texts input which takes an object with the fol
       onChange={(value) => console.log('OnChange', value)}
     ></Dropdown>
   </div>
-</Canvas>
+</div>
 
 ## Available props
-
-<ArgsTable of={Dropdown} />

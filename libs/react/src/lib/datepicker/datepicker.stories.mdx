@@ -1,37 +1,28 @@
+import styles from '@sebgroup/chlorophyll/scss/index.scss'
 import { Datepicker } from './datepicker'
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 
-export const Template = ({ align, ...props }) => <Datepicker {...props} />
-
-<Meta title="Components/Datepicker" component={Datepicker} />
+;<style dangerouslySetInnerHTML={{ __html: styles }}></style>
 
 # Datepicker
 
 Datepicker Component
 
-<Story
-  name="Datepicker"
-  args={{
+<Datepicker
+  {...{
     onChange: (newDate) => console.log('New date selected: ', newDate),
     selectedDate: new Date(),
   }}
-  parameters={{
-    componentIds: ['component-datepicker'],
-  }}
->
-  {Template.bind({})}
-</Story>
+/>
 
 ### Available props
 
-| Property       | Description                                                         | Default |
-| :------------- | :------------------------------------------------------------------ | :------ |
-| label          | The label for the Datepicker.                                       | "Date"  |
-| showWeeks      | A boolean indicating whether week numbers should be shown.          |         |
-| minDate        | The minimum selectable date as a `Date` object.                     |         |
-| maxDate        | The maximum selectable date as a `Date` object.                     |         |
-| onChange       | A function that is called when the selected date changes.           |         |
-
+| Property  | Description                                                | Default |
+| :-------- | :--------------------------------------------------------- | :------ |
+| label     | The label for the Datepicker.                              | "Date"  |
+| showWeeks | A boolean indicating whether week numbers should be shown. |         |
+| minDate   | The minimum selectable date as a `Date` object.            |         |
+| maxDate   | The maximum selectable date as a `Date` object.            |         |
+| onChange  | A function that is called when the selected date changes.  |         |
 
 ### Localization
 
