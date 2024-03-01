@@ -96,8 +96,8 @@ export const Dropdown = ({
   ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
-    if (e.detail?.value) {
-      onChange?.(e.detail.value)
+    if ('value' in e.detail) {
+        onChange?.(e.detail.value)
     }
   }
 
