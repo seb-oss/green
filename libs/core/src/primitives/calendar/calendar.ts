@@ -62,6 +62,18 @@ export class GdsCalendar extends GdsElement {
   focusedDate = new Date()
 
   /**
+   * Whether to disable weekends or not.
+   */
+  @property({ type: Boolean, attribute: 'disabled-weekends' })
+  disabledWeekends = false
+
+  /**
+   * An array of dates that should be disabled in the calendar.
+   */
+  @property({ type: Array<Date>, attribute: 'disabled-dates' })
+  disabledDates?: Date[]
+
+  /**
    * The month that is currently focused.
    */
   @property({ type: Number })
@@ -147,14 +159,23 @@ export class GdsCalendar extends GdsElement {
                         </td>`
                     )}
                     ${week.days.map((day) => {
-                      const isDisabled =
+                      const isOutsideCurrentMonth =
                         !isSameMonth(this.focusedDate, day) ||
                         day < this.min ||
                         day > this.max
+
+                      const isWeekend = day.getDay() === 0 || day.getDay() === 6
+
+                      const isDisabled =
+                        isOutsideCurrentMonth ||
+                        (this.disabledWeekends && isWeekend) ||
+                        (this.disabledDates &&
+                          this.disabledDates.some((d) => isSameDay(d, day)))
+
                       return html`
                         <td
                           class="${classMap({
-                            disabled: isDisabled,
+                            disabled: Boolean(isDisabled),
                             today: isSameDay(currentDate, day),
                           })}"
                           ?disabled=${isDisabled}

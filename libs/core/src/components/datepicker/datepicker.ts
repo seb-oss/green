@@ -46,6 +46,15 @@ const dateConverter = {
   },
 }
 
+const dateArrayConverter = {
+  fromAttribute(value: string) {
+    return value.split(',').map((d) => new Date(d.trim()))
+  },
+  toAttribute(value: Date[]) {
+    return JSON.stringify(value.map((d) => d.toISOString()))
+  },
+}
+
 /**
  * @element gds-datepicker
  * A form control that allows the user to select a date.
@@ -132,6 +141,18 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   set dateformat(dateformat: string) {
     this._dateFormatLayout = this.#parseDateFormat(dateformat)
   }
+
+  /**
+   * Whether to disable weekends in the calendar.
+   */
+  @property({ type: Boolean, attribute: 'disabled-weekends' })
+  disabledWeekends = false
+
+  /**
+   * An array of dates that should be disabled in the calendar.
+   */
+  @property({ converter: dateArrayConverter, attribute: 'disabled-dates' })
+  disabledDates?: Date[]
 
   /**
    * Get the currently focused date in the calendar popover. If no date is focused, or the calendar popover
@@ -334,6 +355,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           .min=${this.min}
           .max=${this.max}
           .showWeekNumbers=${this.showWeekNumbers}
+          .disabledWeekends=${this.disabledWeekends}
+          .disabledDates=${this.disabledDates}
         ></gds-calendar>
 
         <div class="footer">
