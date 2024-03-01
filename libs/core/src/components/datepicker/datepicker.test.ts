@@ -176,6 +176,38 @@ describe('<gds-datepicker>', () => {
 
       await expect(focusedDate).to.be.undefined
     })
+
+    it('Setting `disabled-weekends` should disable weekends', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2024-01-10"
+          disabled-weekends
+          open
+        ></gds-datepicker>`
+      )
+
+      await el.updateComplete
+
+      const disabledDatecell = await el.test_getDateCell(13)
+
+      await expect(disabledDatecell).to.have.attribute('disabled')
+    })
+
+    it('Setting `disabled-dates` should disable dates', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2024-01-10"
+          disabled-dates="2024-01-13"
+          open
+        ></gds-datepicker>`
+      )
+
+      await el.updateComplete
+
+      const disabledDatecell = await el.test_getDateCell(13)
+
+      await expect(disabledDatecell).to.have.attribute('disabled')
+    })
   })
 
   describe('Interactions', () => {
