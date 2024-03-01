@@ -17,7 +17,7 @@ If you are new to Green, checkout [@sebgroup/green-core](https://github.com/sebg
 We also provide components for the following technologies:
 
 - [React](https://github.com/sebgroup/green/tree/main/libs/react)
-- [Angular](https://github.com/sebgroup/green/tree/main/libs/react)
+- [Angular](https://github.com/sebgroup/green/tree/main/libs/angular)
 
 If you're trying to find something specific, here's a full list of packages that we support!
 
