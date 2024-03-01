@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.1
+
+### Patch Changes
+
+- c297e1a: Dropdown: Fix issue with the component not calling `onChange` for falsy values
+
 ## 3.4.0
 
 ### Minor Changes
