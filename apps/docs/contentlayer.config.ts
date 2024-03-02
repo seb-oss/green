@@ -8,8 +8,6 @@ import * as documentTypes from './utils/content/types'
 export default makeSource({
   contentDirPath: 'apps/docs/content',
   documentTypes,
-  // mdx: { rehypePlugins: [highlight] },
-
   mdx: {
     remarkPlugins: [remarkGfm],
 
@@ -49,6 +47,5 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allDocuments } = await importData()
-    // await validateDuplicateIds(allDocuments)
   },
 })
