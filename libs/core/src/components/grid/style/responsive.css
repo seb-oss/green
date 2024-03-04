@@ -11,7 +11,7 @@ Mobile: 425px
   /* Desktop: 1024px - 2560px */
   /* prettier-ignore */
   .gds-grid {
-    &[columns="1"]  { --gds-c: 1;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    /* &[columns="1"]  { --gds-c: 1;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="2"]  { --gds-c: 2;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="3"]  { --gds-c: 3;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="4"]  { --gds-c: 4;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
@@ -34,7 +34,7 @@ Mobile: 425px
     &[columns="21"] { --gds-c: 21; --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="22"] { --gds-c: 22; --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="23"] { --gds-c: 23; --gds-grid-col: repeat(var(--gds-c), 1fr) }
-    &[columns="24"] { --gds-c: 24; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="24"] { --gds-c: 24; --gds-grid-col: repeat(var(--gds-c), 1fr) } */
   }
 }
 

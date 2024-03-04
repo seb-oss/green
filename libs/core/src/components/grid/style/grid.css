@@ -1,20 +1,17 @@
 @layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
 
 @layer grid {
-  :root {
-    --gds-grid-col: repeat(4, 1fr);
+  :host {
+    --gds-c: 12;
+    /* --gds-grid-col: repeat(12, 1fr); */
+    --gds-grid-col: repeat(var(--gds-c), 1fr);
+    /* --gds-grid-col: repeat(12, 1fr); */
     --gds-grid-col-start: 1;
     --gds-grid-col-end: -1;
     --gds-debug-color: hsla(241, 100%, 66%, 0.4);
     --gds-debug-color-container: rgba(255, 82, 197, 0.4);
     --gds-grid-col-gap: 0px;
-  }
 
-  gds-grid {
-    display: contents;
-  }
-
-  .gds-grid {
     display: grid;
     width: 100%;
     grid-template-columns: var(--gds-grid-col);
@@ -55,5 +52,22 @@
     &[inline-size='max-content'] {
       max-width: max-content;
     }
+  }
+}
+
+/* Responsive */
+:host {
+  --gds-c: var(--gds-columns-desktop);
+}
+
+@media only screen and (max-width: 768px) {
+  :host {
+    --gds-c: var(--gds-columns-tablet);
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  :host {
+    --gds-c: var(--gds-columns-mobile);
   }
 }

@@ -1,57 +1,66 @@
 import { LitElement, unsafeCSS } from 'lit'
-import { property, query } from 'lit/decorators.js'
-import { constrainSlots } from '../../utils/helpers'
-import '../icon/icon'
-import '../../primitives/ripple/ripple'
-
-import { tokens } from '../../tokens.style'
-import style from './style/grid.css';
-import align from './style/align.css';
-import debug from './style/debug.css';
-import grid from './style/grid.css';
-import responsive from './style/responsive.css';
-import space from './style/space.css';
-import span from './style/span.css';
-
-const alignCSS = unsafeCSS(align);
-const debugCSS = unsafeCSS(debug);
-const gridCSS = unsafeCSS(grid);
-const responsiveCSS = unsafeCSS(responsive);
-const spaceCSS = unsafeCSS(space);
-const spanCSS = unsafeCSS(span);
-
+import { property } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html as customElementHtml,
 } from '../../utils/helpers/custom-element-scoping'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
-import { classMap } from 'lit/directives/class-map.js'
-import { forwardAttributes } from '../../utils/directives'
 
-// Create a customized `html` template tag that strips whitespace and applies custom element scoping.
+import grid from './style/grid.css'
+const gridCSS = unsafeCSS(grid)
+
 const html = stripWhitespace(customElementHtml)
 
-/**
- * @element gds-grid
- * @summary The grid component is a layout component that allows you to create a grid-based layout.
- * @status beta
- */
-
 @gdsCustomElement('gds-grid')
-
 export class GdsGrid extends LitElement {
-    static styles = [tokens, alignCSS, gridCSS, spaceCSS, spanCSS, debugCSS, responsiveCSS];
-    
-    static shadowRootOptions: ShadowRootInit = {
-        mode: 'closed',
-        delegatesFocus: true,
-    }
+  static styles = [gridCSS]
 
-    render() {
-        return html`
-            <div class="gds-grid" columns="3">
-                <slot></slot>
-            </div>
-        `
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
+
+  @property({ attribute: 'columns-mobile', type: Number })
+  columnsMobile?: number
+
+  @property({ attribute: 'columns-tablet', type: Number })
+  columnsTablet?: number
+
+  @property({ attribute: 'columns-desktop', type: Number })
+  columnsDesktop?: number
+
+  updated(changedProperties: Map<string | number | symbol, unknown>) {
+    super.updated(changedProperties)
+
+    if (
+      changedProperties.has('columnsMobile') ||
+      changedProperties.has('columnsTablet') ||
+      changedProperties.has('columnsDesktop')
+    ) {
+      const columnProperties = [
+        { name: 'gds-columns-mobile', value: this.columnsMobile },
+        { name: 'gds-columns-tablet', value: this.columnsTablet },
+        { name: 'gds-columns-desktop', value: this.columnsDesktop },
+      ]
+
+      const cssVariables = columnProperties
+        .filter(({ value }) => value !== undefined)
+        .map(({ name, value }) => `--${name}: ${value};`)
+        .join(' ')
+
+      const sheet = new CSSStyleSheet()
+      sheet.replaceSync(`:host {${cssVariables}}`)
+
+      if (this.shadowRoot) {
+        this.shadowRoot.adoptedStyleSheets = [
+          ...this.shadowRoot.adoptedStyleSheets,
+          sheet,
+        ]
+      }
     }
+  }
+
+  render() {
+    return html` <slot></slot> `
+  }
 }
