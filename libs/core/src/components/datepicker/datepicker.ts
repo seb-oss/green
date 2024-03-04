@@ -306,6 +306,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${this.#handleMonthChange}
+            .maxHeight=${300}
             label="${msg('Month')}"
             style="width:120px"
             size="small"
@@ -327,6 +328,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-dropdown
             .value=${this._focusedYear.toString()}
             @change=${this.#handleYearChange}
+            .maxHeight=${300}
             label="${msg('Year')}"
             size="small"
             hide-label
