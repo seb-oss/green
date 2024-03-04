@@ -86,10 +86,12 @@ If you just need a simple select without any form, validation etc. it's possible
   [(value)]="date"
   label="Birthday"
   [disabledWeekends]="true"
-  [disabledDates]="[new Date(2024, 1, 6), new Date(2023, 12, 4)]"
-  options="{showWeeks: true, minDate: startOfYear(subYears(new Date(), 100)), maxDate: new Date(), dateFormat: 'd/m/y' }"
+  [disabledDates]="disabledDates"
+  [options]="options"
 ></ngg-datepicker>
 ```
+
+_Note:_ `disabledDates` and `options` in the example above are properties that you need to add in the component class.
 
 <Canvas>
   <Story id="components-datepicker--custom-options" />
