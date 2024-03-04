@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.5.0
+
+### Minor Changes
+
+- 7820e8c: **Dropdown**
+
+  - Add `maxHeight` input
+
+- bb83849: **Datepicker:** Added support for disabling dates
+
+  - `disabled-weekends` will disable all weekend days in the calendar view
+  - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
+
+### Patch Changes
+
+- Updated dependencies [bb83849]
+- Updated dependencies [7820e8c]
+- Updated dependencies [7820e8c]
+  - @sebgroup/green-core@1.9.0
+
 ## 3.4.0
 
 ### Minor Changes
