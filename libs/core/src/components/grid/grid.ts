@@ -10,6 +10,8 @@ import grid from './grid.style.css'
 const gridCSS = unsafeCSS(grid)
 
 type GridGap = 'none' | 'xd' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
+type GridPadding = 'none' | 'xd' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
+
 type GridJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
 type GridAlign = 'start' | 'end' | 'center'
 
@@ -70,6 +72,9 @@ export class GdsGrid extends LitElement {
   @property({ attribute: 'gap', type: String })
   gap?: GridGap
 
+  @property({ attribute: 'padding', type: String })
+  padding?: GridPadding
+
   @property({ attribute: 'fluid', type: String })
   fluid?: boolean
 
@@ -106,6 +111,22 @@ export class GdsGrid extends LitElement {
       cssVariables += gapProperties
         .filter(({ value }) => value !== undefined)
         .map(({ name, value }) => `--${name}: var(--gds-gap-${value});`)
+        .join(' ')
+    }
+
+    if (changedProperties.has('padding')) {
+      const [paddingDesktop, paddingTablet, paddingMobile] =
+        this.padding?.split(' ') || []
+
+      const paddingProperties = [
+        { name: 'gds-padding-desktop', value: paddingDesktop },
+        { name: 'gds-padding-tablet', value: paddingTablet },
+        { name: 'gds-padding-mobile', value: paddingMobile },
+      ]
+
+      cssVariables += paddingProperties
+        .filter(({ value }) => value !== undefined)
+        .map(({ name, value }) => `--${name}: var(--gds-padding-${value});`)
         .join(' ')
     }
 
