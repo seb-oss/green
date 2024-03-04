@@ -27,7 +27,11 @@
       "@sebgroup/green-react": ["libs/react/src/index.ts"],
       "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],
       "@sebgroup/repo-tools": ["libs/repo-tools/src/index.ts"],
-      "@sebgroup/tokens": ["libs/tokens/src/index.ts"]
+      "@sebgroup/tokens": ["libs/tokens/src/index.ts"],
+      "@public": ["apps/docs/public"],
+      "@/.contentlayer/*": [".contentlayer/*"],
+      "@content": [".contentlayer/generated"],
+      "@/*": ["apps/docs/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

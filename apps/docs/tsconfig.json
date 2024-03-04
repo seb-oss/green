@@ -11,18 +11,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "types": ["jest", "node"],
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "public": ["/apps/docs/public"],
-      "@/*": ["/apps/docs/*"],
-      "@/.contentlayer/*": [".contentlayer/*"],
-      "content": [".contentlayer/generated"]
-    },
-    "types": ["jest", "node"]
+    ]
   },
   "include": [
     "**/*.ts",
@@ -34,12 +28,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "../../.contentlayer/generated",
-    "app/api/figma.js"
+    "app/api/figma.js",
+    "../../libs/**/*"
   ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts"
-  ]
+  "exclude": ["jest.config.ts"]
 }
