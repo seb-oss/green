@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.9.0
+
+### Minor Changes
+
+- bb83849: **Datepicker:** Added support for disabling dates
+
+  - `disabled-weekends` will disable all weekend days in the calendar view
+  - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
+
+- 7820e8c: **Dropdown**
+
+  - Add `max-height` attrbute for controlling maximum height of dropdown popover box.
+
+### Patch Changes
+
+- 7820e8c: **Datepicker**
+
+  - Limit height of month and year dropdowns to less than height of calendar popover to prevent them getting cut off outside viewport.
+
 ## 1.8.0
 
 ### Minor Changes
