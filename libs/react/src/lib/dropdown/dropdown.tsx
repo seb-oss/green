@@ -46,6 +46,9 @@ export interface DropdownArgs {
 
   /** Hide the label */
   hideLabel?: boolean
+
+  /** Max height of the dropdown */
+  maxHeight?: number
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -97,7 +100,7 @@ export const Dropdown = ({
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
     if ('value' in e.detail) {
-        onChange?.(e.detail.value)
+      onChange?.(e.detail.value)
     }
   }
 
@@ -129,6 +132,7 @@ export const Dropdown = ({
         syncPopoverWidth={syncPopoverWidth}
         size={props.size}
         hideLabel={props.hideLabel}
+        maxHeight={props.maxHeight}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}

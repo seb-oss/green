@@ -256,6 +256,32 @@ describe('<gds-dropdown>', () => {
     expect(popover?.clientWidth).to.equal(trigger.clientWidth)
   })
 
+  it('should limit the height of the popover to max-height attribute', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown open max-height="50">
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+        <gds-option value="v4">Option 4</gds-option>
+        <gds-option value="v5">Option 5</gds-option>
+        <gds-option value="v6">Option 6</gds-option>
+        <gds-option value="v7">Option 7</gds-option>
+        <gds-option value="v8">Option 8</gds-option>
+        <gds-option value="v9">Option 9</gds-option>
+      </gds-dropdown>
+    `)
+
+    await el.updateComplete
+
+    const popover = el.shadowRoot
+      ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
+      ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+
+    await timeout(50)
+
+    await expect(popover?.clientHeight).to.be.lessThanOrEqual(50)
+  })
+
   it('should select complex value correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
 
