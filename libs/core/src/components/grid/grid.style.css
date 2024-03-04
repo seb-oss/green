@@ -8,13 +8,26 @@
     --gds-grid-col-end: -1;
     --gds-debug-color: hsla(241, 100%, 66%, 0.4);
     --gds-debug-color-container: rgba(255, 82, 197, 0.4);
-    --gds-grid-col-gap: 0px;
+    --gds-gap-column: 0px;
+
+    /* THESE NEED TO BE MOVED TO TOKENS */
+
+    --gds-gap-none: 0px;
+    --gds-gap-xs: 4px;
+    --gds-gap-s: 8px;
+    --gds-gap-m: 16px;
+    --gds-gap-l: 24px;
+    --gds-gap-xl: 32px;
+    --gds-gap-xxl: 48px;
+    --gds-gap-xxxl: 96px;
+
+    /* THESE NEED TO BE MOVED TO TOKENS */
 
     display: grid;
     width: 100%;
     grid-template-columns: var(--gds-grid-col);
-    grid-column-gap: var(--gds-grid-col-gap);
-    grid-row-gap: var(--gds-grid-row-gap);
+    grid-column-gap: var(--gds-gap-column);
+    /* grid-row-gap: var(--gds-gap-row); */
     text-wrap: balance;
 
     & > gds-cell {
@@ -25,7 +38,7 @@
       --gds-grid-col-count: var(--gds-c);
       --gds-grid-col-width: 200px;
       --gap-count: calc(var(--gds-grid-col-count) - 1);
-      --total-gap-width: calc(var(--gap-count) * var(--gds-grid-col-gap));
+      --total-gap-width: calc(var(--gap-count) * var(--gds-gap-column));
       --gds-grid-col-width-max: calc(
         (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
       );
@@ -56,16 +69,19 @@
 /* Responsive */
 :host {
   --gds-c: var(--gds-columns-desktop);
+  --gds-gap-column: var(--gds-gap-desktop);
 }
 
 @media only screen and (max-width: 768px) {
   :host {
     --gds-c: var(--gds-columns-tablet);
+    --gds-gap-column: var(--gds-gap-tablet);
   }
 }
 
 @media only screen and (max-width: 425px) {
   :host {
     --gds-c: var(--gds-columns-mobile);
+    --gds-gap-column: var(--gds-gap-mobile);
   }
 }

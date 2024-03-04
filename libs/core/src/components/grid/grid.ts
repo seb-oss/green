@@ -9,6 +9,10 @@ import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import grid from './grid.style.css'
 const gridCSS = unsafeCSS(grid)
 
+type GridGap = 'none' | 'xd' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
+type GridJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
+type GridAlign = 'start' | 'end' | 'center'
+
 const html = stripWhitespace(customElementHtml)
 
 @gdsCustomElement('gds-grid')
@@ -64,10 +68,12 @@ export class GdsGrid extends LitElement {
   columns?: string
 
   @property({ attribute: 'gap', type: String })
-  gap?: string
+  gap?: GridGap
 
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     super.updated(changedProperties)
+
+    let cssVariables = ''
 
     if (changedProperties.has('columns')) {
       const [columnsDesktop, columnsTablet, columnsMobile] =
@@ -79,20 +85,35 @@ export class GdsGrid extends LitElement {
         { name: 'gds-columns-desktop', value: columnsDesktop },
       ]
 
-      const cssVariables = columnProperties
+      cssVariables += columnProperties
         .filter(({ value }) => value !== undefined)
         .map(({ name, value }) => `--${name}: ${value};`)
         .join(' ')
+    }
 
-      const sheet = new CSSStyleSheet()
-      sheet.replaceSync(`:host {${cssVariables}}`)
+    if (changedProperties.has('gap')) {
+      const [gapDesktop, gapTablet, gapMobile] = this.gap?.split(' ') || []
 
-      if (this.shadowRoot) {
-        this.shadowRoot.adoptedStyleSheets = [
-          ...this.shadowRoot.adoptedStyleSheets,
-          sheet,
-        ]
-      }
+      const gapProperties = [
+        { name: 'gds-gap-desktop', value: gapDesktop },
+        { name: 'gds-gap-tablet', value: gapTablet },
+        { name: 'gds-gap-mobile', value: gapMobile },
+      ]
+
+      cssVariables += gapProperties
+        .filter(({ value }) => value !== undefined)
+        .map(({ name, value }) => `--${name}: var(--gds-gap-${value});`)
+        .join(' ')
+    }
+
+    const sheet = new CSSStyleSheet()
+    sheet.replaceSync(`:host {${cssVariables}}`)
+
+    if (this.shadowRoot) {
+      this.shadowRoot.adoptedStyleSheets = [
+        ...this.shadowRoot.adoptedStyleSheets,
+        sheet,
+      ]
     }
   }
 
