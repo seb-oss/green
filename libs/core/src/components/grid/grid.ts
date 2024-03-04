@@ -6,7 +6,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 
-import grid from './style/grid.css'
+import grid from './grid.style.css'
 const gridCSS = unsafeCSS(grid)
 
 const html = stripWhitespace(customElementHtml)
