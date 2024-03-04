@@ -125,6 +125,12 @@ export class GdsDropdown<ValueT = any>
   syncPopoverWidth = false
 
   /**
+   * Maximum height of the dropdown list.
+   */
+  @property({ type: Number, attribute: 'max-height' })
+  maxHeight = 500
+
+  /**
    * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
    * `medium` is the default size.
    */
@@ -254,6 +260,7 @@ export class GdsDropdown<ValueT = any>
         .triggerRef=${this._elTriggerBtnAsync}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
+        .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         ${when(
