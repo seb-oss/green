@@ -7,9 +7,34 @@ import '../../tokens/tokens.css'
 
 # Grid
 
-<gds-grid columns-desktop="12" columns-tablet="2" columns-mobile="1">
+The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns.
+
+## Usage
+
+To use the `gds-grid`, you add it to your HTML and specify the number of columns for desktop, tablet, and mobile devices using the `columns` attribute. The `columns` attribute takes a string of three numbers separated by spaces. The first number is for desktop, the second for tablet, and the third for mobile.
+
+In the example below, the grid will have 12 columns on desktop, 4 on tablet, and 1 on mobile:
+
+## Example
+<gds-grid columns="12 4 1">
     <div>Column</div>
     <div>Column</div>
     <div>Column</div>
     <div>Column</div>
 </gds-grid>
+
+
+## Code
+```html
+<!-- 
+Desktop: 12
+Tablet: 4
+Mobile: 1
+-->
+<gds-grid columns="12 4 1">
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+</gds-grid>
+```
