@@ -27,42 +27,7 @@
     width: 100%;
     grid-template-columns: var(--gds-grid-col);
     grid-column-gap: var(--gds-gap-column);
-    /* grid-row-gap: var(--gds-gap-row); */
     text-wrap: balance;
-
-    & > gds-cell {
-      height: 100%;
-    }
-
-    &[fluid] {
-      --gds-grid-col-count: var(--gds-c);
-      --gds-grid-col-width: 200px;
-      --gap-count: calc(var(--gds-grid-col-count) - 1);
-      --total-gap-width: calc(var(--gap-count) * var(--gds-gap-column));
-      --gds-grid-col-width-max: calc(
-        (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
-      );
-
-      grid-template-columns: repeat(
-        auto-fill,
-        minmax(
-          max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)),
-          1fr
-        )
-      );
-      text-wrap: balance;
-    }
-
-    &[content-inline='auto'] {
-      display: grid;
-      grid-auto-columns: auto;
-      grid-auto-flow: column;
-      grid-template-columns: none;
-    }
-
-    &[inline-size='max-content'] {
-      max-width: max-content;
-    }
   }
 }
 
@@ -84,4 +49,20 @@
     --gds-c: var(--gds-columns-mobile);
     --gds-gap-column: var(--gds-gap-mobile);
   }
+}
+
+/* These features should be added back */
+/* These features should be added back */
+/* These features should be added back */
+/* These features should be added back */
+
+&[content-inline='auto'] {
+  display: grid;
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  grid-template-columns: none;
+}
+
+&[inline-size='max-content'] {
+  max-width: max-content;
 }

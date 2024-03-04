@@ -70,6 +70,9 @@ export class GdsGrid extends LitElement {
   @property({ attribute: 'gap', type: String })
   gap?: GridGap
 
+  @property({ attribute: 'fluid', type: String })
+  fluid?: boolean
+
   updated(changedProperties: Map<string | number | symbol, unknown>) {
     super.updated(changedProperties)
 
@@ -104,6 +107,24 @@ export class GdsGrid extends LitElement {
         .filter(({ value }) => value !== undefined)
         .map(({ name, value }) => `--${name}: var(--gds-gap-${value});`)
         .join(' ')
+    }
+
+    if (changedProperties.has('fluid') && this.fluid) {
+      cssVariables += `
+        --gds-grid-col-count: var(--gds-c);
+        --gds-grid-col-width: 200px;
+        --gap-count: calc(var(--gds-grid-col-count) - 1);
+        --total-gap-width: calc(var(--gap-count) * var(--gds-gap-column));
+        --gds-grid-col-width-max: calc(
+          (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
+        );
+  
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)), 1fr)
+        );
+        text-wrap: balance;
+      `
     }
 
     const sheet = new CSSStyleSheet()
