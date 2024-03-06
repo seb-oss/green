@@ -29,7 +29,8 @@
     "postinstall": "ngcc --properties es2020 browser module main && npm run copy-fonts",
     "copy-fonts": "copyfiles node_modules/@sebgroup/fonts/fonts/**/* dist/fonts -f",
     "prepare": "husky install && cp -a .husky/. .git/hooks/",
-    "greenbook": "node libs/repo-tools/src/greenbook/index.js"
+    "greenbook": "node libs/repo-tools/src/greenbook/index.js",
+    "greenbook:dev": "npx tsc --watch --skipLibCheck --module nodenext --moduleResolution nodenext libs/repo-tools/src/greenbook/index.ts"
   },
   "lint-staged": {
     "libs/**/src/**/*.scss": [

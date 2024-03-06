@@ -30,7 +30,7 @@
       "@sebgroup/tokens": ["libs/tokens/src/index.ts"],
       "@public": ["apps/docs/public"],
       "@/.contentlayer/*": [".contentlayer/*"],
-      "@content": [".contentlayer/generated"],
+      "content": [".contentlayer/generated"],
       "@/*": ["apps/docs/*"]
     }
   },

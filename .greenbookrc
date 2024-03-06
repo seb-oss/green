@@ -1,4 +1,4 @@
 {
-  "componentDir": "libs/react/src/lib",
-  "lib": "react"
+  "componentDir": "libs/core/src/components",
+  "lib": "core"
 }

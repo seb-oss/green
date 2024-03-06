@@ -19,6 +19,7 @@
     ]
   },
   "include": [
+    "**/*.css",
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
@@ -28,8 +29,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "../../.contentlayer/generated",
-    "app/api/figma.js",
-    "../../libs/**/*"
+    "app/api/figma.js"
   ],
   "exclude": ["jest.config.ts"]
 }

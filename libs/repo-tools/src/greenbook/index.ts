@@ -4,6 +4,7 @@ import {
   HtmlFileConfiguration,
   htmlPlugin,
 } from '@craftamap/esbuild-plugin-html'
+import { TsconfigPathsPlugin } from '@esbuild-plugins/tsconfig-paths'
 import mdx from '@mdx-js/esbuild'
 import chalk from 'chalk'
 import * as esbuild from 'esbuild'
@@ -288,12 +289,8 @@ const init = async () => {
       }),
       sassPlugin({
         type: 'css-text',
-        // importMapper: (path) => {
-        //   console.log(path)
-
-        //   return path
-        // },
       }),
+      TsconfigPathsPlugin({ tsconfig: 'tsconfig.base.json' }),
     ],
   })
 

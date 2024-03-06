@@ -9,8 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/docs",
-        "nextConfig": "apps/docs/next.config.js"
+        "outputPath": "dist/apps/docs"
       },
       "configurations": {
         "development": {
