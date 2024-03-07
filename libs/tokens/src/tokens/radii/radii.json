@@ -66,7 +66,7 @@
         }
       },
       "full": {
-        "value": "{ref.size.16}",
+        "value": "{ref.size.15}",
         "attributes": {
           "figma": {
             "resolvedType": "FLOAT"

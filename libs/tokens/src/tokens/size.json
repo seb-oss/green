@@ -135,6 +135,15 @@
             "resolvedType": "FLOAT"
           }
         }
+      },
+      "15": {
+        "value": "999",
+        "attributes": {
+          "figma": {
+            "id": "VariableID:182:52",
+            "resolvedType": "FLOAT"
+          }
+        }
       }
     }
   }

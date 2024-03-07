@@ -40,6 +40,23 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  tokens: {
+    name: 'tokens',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':root' }, args.options)
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences: options.outputReferences,
+        }) +
+        `\n}\n`
+      )
+    },
+  },
   'figma/json': {
     name: 'json/figma',
     formatter: function ({ dictionary, options }) {

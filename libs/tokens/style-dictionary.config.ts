@@ -110,6 +110,13 @@ const config: StyleDictionary.Config = {
             outputReferences: false,
           },
         },
+        {
+          destination: 'tokens.css',
+          format: 'tokens',
+          options: {
+            outputReferences: true,
+          },
+        },
       ],
     },
     scss: {
@@ -202,7 +209,16 @@ const config: StyleDictionary.Config = {
             let returnValue = false
 
             token.path?.forEach((item) => {
-              if (['color', 'size', 'space', 'motion', 'state', 'typography'].includes(item)) {
+              if (
+                [
+                  'color',
+                  'size',
+                  'space',
+                  'motion',
+                  'state',
+                  'typography',
+                ].includes(item)
+              ) {
                 returnValue = true
               }
             })
