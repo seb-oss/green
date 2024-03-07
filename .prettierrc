@@ -1,4 +1,14 @@
 {
   "singleQuote": true,
-  "semi": false
+  "semi": false,
+  "overrides": [
+    {
+      "files": "*.mdx",
+      "options": {
+        "singleAttributePerLine": false,
+        "printWidth": 200,
+        "bracketSpacing": true
+      }
+    }
+  ]
 }

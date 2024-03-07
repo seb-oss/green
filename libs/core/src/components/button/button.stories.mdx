@@ -3,8 +3,6 @@ import { inspector } from '../../utils/tools/inspector/inspector'
 
 # Button
 
-# whaat
-
 ## Button variants
 
 Buttons exist in three different variants, Primary, Secondary and Tertiary
@@ -17,7 +15,7 @@ Buttons exist in three different variants, Primary, Secondary and Tertiary
 
 Each variant can belong to one of three sets, Neutral, Positive and Negative
 
-{' '}
+{/* <!-- prettier-ignore-start --> */}
 <story-grid>
 <story-row>
 <gds-button>Neutral primary</gds-button>
@@ -26,23 +24,16 @@ Each variant can belong to one of three sets, Neutral, Positive and Negative
 </story-row>
 <story-row>
 <gds-button set="positive">Positive primary</gds-button>
-<gds-button set="positive" variant="secondary">
-Positive secondary
-</gds-button>
-<gds-button set="positive" variant="tertiary">
-Positive tertiary
-</gds-button>
+<gds-button set="positive" variant="secondary">Positive secondary</gds-button>
+<gds-button set="positive" variant="tertiary">Positive tertiary</gds-button>
 </story-row>
 <story-row>
 <gds-button set="negative">Negative primary</gds-button>
-<gds-button set="negative" variant="secondary">
-Negative secondary
-</gds-button>
-<gds-button set="negative" variant="tertiary">
-Negative tertiary
-</gds-button>
+<gds-button set="negative" variant="secondary">Negative secondary</gds-button>
+<gds-button set="negative" variant="tertiary">Negative tertiary</gds-button>
 </story-row>
 </story-grid>
+{/* <!-- prettier-ignore-end --> */}
 
 ## Button sizes
 
@@ -56,15 +47,10 @@ Buttons can be small, medium or large. The default size is medium.
 
 Buttons can have an icon on the left or right side of the text. These are called leading or trailing icons, and are added by placing a `gds-icon` component in either the `lead` or `trail` slot.
 
-{' '}
-<gds-button>
-<gds-icon slot="lead" name="arrow-down" />
-Leading icon
-</gds-button>
-<gds-button>
-Trailing icon
-<gds-icon slot="trail" name="arrow-up" />
-</gds-button>
+{/* <!-- prettier-ignore-start --> */}
+<gds-button><gds-icon slot="lead" name="arrow-down" />Leading icon</gds-button>
+<gds-button>Trailing icon<gds-icon slot="trail" name="arrow-up" /></gds-button>
+{/* <!-- prettier-ignore-end --> */}
 
 ## Button with icon only
 
@@ -86,10 +72,8 @@ If a single `gds-icon` is the only child of a button, it will render as a circul
 The buttons support a disabled state, but in general, it should not be used. It can be hard for the user to understand why the button is disabled, so it is often better to keep the button clickable and then show an error message
 instead.
 
+{/* <!-- prettier-ignore-start --> */}
 <gds-button disabled>Primary</gds-button>
-<gds-button variant="secondary" set="positive" disabled>
-Secondary
-</gds-button>
-<gds-button variant="tertiary" disabled>
-Tertiary
-</gds-button>
+<gds-button variant="secondary" set="positive" disabled>Secondary</gds-button>
+<gds-button variant="tertiary" disabled>Tertiary</gds-button>
+{/* <!-- prettier-ignore-end --> */}
