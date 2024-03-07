@@ -1,0 +1,16 @@
+{
+    "sys": {
+        "space": {
+            "breakpoint": {
+                "mobile": {
+                    "value": "420",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "sys": {
+    "space": {
+      "padding": {
+        "small": {
+          "value": "420",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        }
+      }
+    }
+  }
+}

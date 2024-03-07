@@ -8,7 +8,7 @@
             "darkValue": "{ref.color.grey.80}",
             "attributes": {
               "figma": {
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -18,7 +18,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:35",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -28,7 +28,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:38",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -38,7 +38,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:39",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           }
@@ -50,7 +50,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:19",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -60,7 +60,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:20",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -70,7 +70,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:23",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -80,7 +80,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:24",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           }
@@ -92,7 +92,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:25",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -102,7 +102,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:26",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -112,7 +112,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:28",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -122,7 +122,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:29",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           }
@@ -134,7 +134,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:30",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -144,7 +144,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:31",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -154,7 +154,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:33",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -164,7 +164,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:34",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           }
@@ -176,7 +176,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:40",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -186,7 +186,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:41",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -196,7 +196,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:42",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           },
@@ -206,7 +206,7 @@
             "attributes": {
               "figma": {
                 "id": "VariableID:228:43",
-                "resolvedType": "ALIAS"
+                "resolvedType": "VARIABLE_ALIAS"
               }
             }
           }

@@ -1,0 +1,16 @@
+{
+  "sys": {
+    "space": {
+      "gap": {
+        "small": {
+          "value": "420",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        }
+      }
+    }
+  }
+}

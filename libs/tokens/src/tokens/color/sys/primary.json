@@ -7,7 +7,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }
