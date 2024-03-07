@@ -1,5 +1,11 @@
 [
   {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
     "id": "components-slider--default",
     "name": "Default",
     "title": "Components/Slider",
@@ -422,12 +428,6 @@
         "component-accordion"
       ]
     }
-  },
-  {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
   },
   {
     "id": "components-form-input--default",
