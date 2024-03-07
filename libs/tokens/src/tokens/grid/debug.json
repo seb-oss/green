@@ -1,12 +1,12 @@
 {
     "sys": {
-        "space": {
-            "breakpoint": {
-                "mobile": {
-                    "value": "420",
+        "grid": {
+            "debug": {
+                "lines": {
+                    "value": "#5551FF",
                     "attributes": {
                         "figma": {
-                            "resolvedType": "FLOAT"
+                            "resolvedType": "COLOR"
                         }
                     }
                 }

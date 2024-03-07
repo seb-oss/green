@@ -1,7 +1,7 @@
 {
   "sys": {
     "space": {
-      "padding": {
+      "spacer": {
         "0": {
           "value": "{ref.size.0}",
           "attributes": {
