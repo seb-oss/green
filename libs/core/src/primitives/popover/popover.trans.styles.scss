@@ -38,6 +38,7 @@
     overflow: hidden;
     padding: 0;
     right: 0;
+    color: var(--text-primary-color);
 
     @include common.media-breakpoint-down('sm') {
       max-height: 80svh;

@@ -18,7 +18,7 @@ $disabled-weight: 400; // regular
 
 // hover
 $hover-color: var(--gds-sys-color-font);
-$hover-background: var(--gds-ref-pallet-base300);
+$hover-background: var(--grey-500);
 $hover-border-radius: $border-radius;
 
 // focus
@@ -28,7 +28,7 @@ $focus-border-radius: $hover-border-radius;
 
 // selected
 $selected-color: hsl(var(--sg-hsl-white));
-$selected-background: var(--gds-ref-pallet-base800);
+$selected-background: var(--grey-1000);
 $selected-range-background: hsla(var(--sg-hsl-blue-2), 0.5);
 $selected-border-radius: $border-radius;
 $selected-range-border-radius: 0;
