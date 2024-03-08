@@ -582,6 +582,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
     if (e.detail.reason === 'close') {
       this.value = (await this._elCalendar).value
+      if (this.value) {
+        this._focusedMonth = this.value.getMonth()
+        this._focusedYear = this.value.getFullYear()
+      }
       this.#dispatchChangeEvent()
     }
 
