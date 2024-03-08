@@ -30,7 +30,7 @@ export default {
 } as Meta<NggDropdownComponent>
 
 const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
-  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [id]="id"></ngg-dropdown>`,
+  template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
   props: args,
 })
 
@@ -51,6 +51,24 @@ Select.args = {
   ],
 }
 
+export const Small = Template.bind({})
+Small.args = {
+  id: '',
+  texts: { placeholder: 'Select meal' },
+  value: '',
+  loop: true,
+  multiSelect: false,
+  searchable: false,
+  display: 'label',
+  useValue: 'value',
+  size: 'small',
+  options: [
+    { label: 'Tacos', value: 'tacos' },
+    { label: 'Pizza', value: 'pizza' },
+    { label: 'Sushi', value: 'sushi' },
+  ],
+}
+
 export const Test = Template.bind({})
 Test.args = {
   id: '',
@@ -62,11 +80,11 @@ Test.args = {
   display: 'label',
   useValue: 'value',
   options: [
-    { label: 'Lunch', value: 'tacos', heading: true },
+    { label: 'Lunch', value: 'lunch', heading: true },
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
     { label: 'Sushi', value: 'sushi' },
-    { label: 'Dinner', value: 'tacos', heading: true },
+    { label: 'Dinner', value: 'dinner', heading: true },
     { label: 'Ramen', value: 'ramen' },
     { label: 'Tori Ramen', value: 'tori' },
     { label: 'Tokyo Ramen', value: 'tokyo' },
