@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.2
+
+### Patch Changes
+
+- 80c0cdf: **Datepicker, Dropdown**
+
+  - Fix broken dark mode styles
+
 ## 3.1.1
 
 ### Patch Changes

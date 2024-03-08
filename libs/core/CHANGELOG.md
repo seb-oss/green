@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.9.1
+
+### Patch Changes
+
+- f4d7fe7: fixed value change when browsing months
+- 80c0cdf: **Datepicker, Dropdown**
+
+  - Fix broken dark mode styles
+
 ## 1.9.0
 
 ### Minor Changes
