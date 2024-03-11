@@ -9,4 +9,49 @@ import { Canvas, Story } from '@storybook/addon-docs'
 
 # Pagination
 
-<Story id="components-navigation-pagination--default" />
+## Usage
+
+If you're only using the Pagination component, you just need to import the `NggPaginationModule`.
+
+```typescript
+import { NggAccordionModule } from '@sebgroup/green-angular'
+
+@NgModule({
+  imports: [NggAccordionModule]
+})
+```
+
+```html
+<ngg-pagination
+  [size]="size"
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [displayPages]="displayPages"
+></ngg-pagination>
+```
+
+## Accordion Options
+
+### Inputs
+
+| Input        | Type              | Description                                                                         |
+| :----------- | :---------------- | :---------------------------------------------------------------------------------- |
+| size         | `PaginationSize`  | Rendered size - small or large                                                      |
+| displayPages | `number`          | Amount of pages to be displayed between the `go to first` and `go to last` buttons. |
+| length       | `number`          | Total amount of items to be paginated                                               |
+| pageSize     | `number`          | Displayed items per page                                                            |
+| pageIndex    | `number`          | The current page index. Defaulted to 0.                                             |
+| i18n         | `IPaginationI18n` | Internationalization labels                                                         |
+
+### Outputs
+
+| Event | Description      |
+| :---- | :--------------- | ----------------------------------------------- |
+| page  | IPaginationEvent | Event emitted when a new page index is selected |
+
+## Examples
+
+<Canvas>
+  <Story id="components-navigation-pagination--default" />
+</Canvas>
