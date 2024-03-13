@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.2
+
+### Patch Changes
+
+- 7cb209f: Datepicker to take strings as value
+- Updated dependencies [feb1712]
+  - @sebgroup/chlorophyll@3.1.3
+
 ## 3.5.1
 
 ### Patch Changes
