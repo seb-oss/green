@@ -50,29 +50,3 @@ export const TableListTemplate = ({ ...props }) => <List {...props} />
     {Template.bind({})}
   </Story>
 </Canvas>
-
-### Value list
-
-
-
-### List group
-
-<Canvas>
-  <Story
-    name="List group"
-    parameters={{
-      componentIds: ['component-list']
-    }}
-    args={{
-      listType: 'table',
-      tableCaption: 'List group',
-      tableData: [
-        { title: 'First', definition: ['Value 1', 'Value 2'] },
-        { title: 'Second', definition: ['Value 1', 'Value 2'] },
-        { title: 'Third', definition: ['Value 1', 'Value 2'] },
-      ],
-    }}
-  >
-    {TableListTemplate.bind({})}
-  </Story>
-</Canvas>

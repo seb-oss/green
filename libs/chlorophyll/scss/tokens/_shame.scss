@@ -170,12 +170,12 @@ $grey: (
 
 $disabled: (
   light: (
-    'background': get($grey, 300),
-    'color': get($grey, 600),
-    'border': get($grey, 400),
-    'primary-background': get($grey, 300),
-    'primary-color': get($grey, 600),
-    'primary-border': get($grey, 400),
+    'background': var(--gds-ref-pallet-base200),
+    'color': var(--gds-ref-pallet-base600),
+    'border': var(--gds-ref-pallet-base500),
+    'primary-background': var(--gds-ref-pallet-base200),
+    'primary-color': var(--gds-ref-pallet-base600),
+    'primary-border': var(--gds-ref-pallet-base500),
   ),
   dark: (
     'background': transparentize($white, 0.98),
@@ -309,7 +309,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --heading-primary-color: #{$black};
   --text-primary-color: #{get($grey, 1000, 'light')};
   --text-secondary-color: #{get($grey, 800, 'light')};
-  --text-disabled-color: #{get($disabled, 'color')};
+  --text-disabled-color: var(--gds-ref-pallet-base600);
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
   --border-color: #{transparentize($black, 0.83)}; // #CECECE against white
   --border-secondary-color: #{transparentize($black, 0.9)};

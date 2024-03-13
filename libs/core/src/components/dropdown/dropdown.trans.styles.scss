@@ -65,6 +65,13 @@
     margin-top: 0.5rem;
 
     width: 100%;
+
+    &.small {
+      font-size: 0.875rem;
+    }
+    &:hover {
+      background: var(--grey-400);
+    }
   }
 
   label {

@@ -57,6 +57,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modals/modals.module').then((m) => m.ModalsModule),
   },
+  {
+    path: 'tables',
+    data: { name: 'Tables' },
+    loadChildren: () =>
+      import('./table/table.module').then((m) => m.TableModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 

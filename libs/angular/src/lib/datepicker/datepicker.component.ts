@@ -62,6 +62,11 @@ export interface DatepickerOptions {
 export class NggDatepickerComponent
   implements ControlValueAccessor, AfterViewInit
 {
+  @Input() size?: 'small' | 'medium'
+  @Input() hideLabel?: boolean
+  @Input() disabledWeekends?: boolean
+  @Input() disabledDates?: Date[]
+
   @Input()
   get options(): DatepickerOptions {
     return <DatepickerOptions>this._options
@@ -83,10 +88,12 @@ export class NggDatepickerComponent
     return this._value
   }
   set value(newValue: string | Date | undefined) {
+    if (typeof newValue === 'string') {
+      newValue = new Date(newValue)
+    }
     if (newValue !== this._value) {
       this._value = newValue || undefined
     }
-    console.log('value', this._value)
   }
 
   @Input() id?: string = randomId()
@@ -97,7 +104,7 @@ export class NggDatepickerComponent
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
-  _value: string | Date | undefined
+  _value: Date | undefined
   private _options?: DatepickerOptions
 
   get min(): Date | undefined {
@@ -115,8 +122,8 @@ export class NggDatepickerComponent
   }
 
   writeValue(value: any): void {
-    console.log('writeValue', value)
     this.value = value
+    this._cdr.detectChanges()
   }
 
   registerOnChange(fn: any): void {

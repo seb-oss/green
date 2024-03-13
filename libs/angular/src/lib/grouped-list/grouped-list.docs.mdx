@@ -1,0 +1,70 @@
+import { Story, Canvas } from '@storybook/addon-docs'
+
+# Grouped list
+
+[Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grouped-list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/component-list)
+
+The Grouped List component is used to list many datapoints with labels in a structured way. They may be grouped under heading and they may have a link or button added to act on the data being displayed.
+
+## Use Web component in Angular
+
+This is a Web component that comes from the `Green Core` library. Angular has support for using web components directly in the template. To use this webcomponent in Angular, you need to do the following:
+
+Add the `CUSTOM_ELEMENTS_SCHEMA` in the module that uses this component.
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/shared/core-element/core-element.module'
+
+@NgModule({
+    // Add the NggCoreWrapperModule to the `imports` array
+    imports: [NggCoreWrapperModule],
+    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+Import `GdsGroupedList`, `registerTransitionalStyles` and `NggCoreWrapperModule` from `@sebgroup/green-core` in the Angular component that uses it.
+
+```ts
+import { GdsGroupedList } from '@sebgroup/green-core'
+
+// Transitional styles will make the component get 2016 design
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+// Call this fuction to register the transitional styles
+registerTransitionalStyles()
+```
+
+Use the webcomponent in your template with the `*nggCoreElement` directive.
+
+```html
+<gds-grouped-list *nggCoreElement label="Grouped list label">
+  <gds-list-item *nggCoreElement>Item 1</gds-list-item>
+  <gds-list-item *nggCoreElement>Item 2</gds-list-item>
+  <gds-list-item *nggCoreElement>Item 3</gds-list-item>
+</gds-grouped-list>
+```
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story id="components-grouped-list--default" />
+</Canvas>
+
+## Component API
+
+### Attributes
+
+| Attributes | Type   | Description                     |
+| ---------- | ------ | ------------------------------- |
+| `label`    | String | The label for the grouped list. |
+
+### Slots
+
+| Slot        | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `(default)` | The default slot that accepts only `<gds-list-item>` elements |

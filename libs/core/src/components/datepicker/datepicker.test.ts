@@ -176,6 +176,38 @@ describe('<gds-datepicker>', () => {
 
       await expect(focusedDate).to.be.undefined
     })
+
+    it('Setting `disabled-weekends` should disable weekends', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2024-01-10"
+          disabled-weekends
+          open
+        ></gds-datepicker>`
+      )
+
+      await el.updateComplete
+
+      const disabledDatecell = await el.test_getDateCell(13)
+
+      await expect(disabledDatecell).to.have.attribute('disabled')
+    })
+
+    it('Setting `disabled-dates` should disable dates', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2024-01-10"
+          disabled-dates="2024-01-13"
+          open
+        ></gds-datepicker>`
+      )
+
+      await el.updateComplete
+
+      const disabledDatecell = await el.test_getDateCell(13)
+
+      await expect(disabledDatecell).to.have.attribute('disabled')
+    })
   })
 
   describe('Interactions', () => {
@@ -361,7 +393,7 @@ describe('<gds-datepicker>', () => {
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
       const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
-        `${getScopedTagName('gds-dropdown')}[aria-label="Month"]`
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`
       )!
 
       await clickOnElement(button)
@@ -465,6 +497,64 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('yyyy')
       await expect(spinners[1].value.toString()).to.equal('mm')
       await expect(spinners[2].value.toString()).to.equal('dd')
+    })
+
+    it('should emit input event when navigating with arrow keys in calendar popover', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+        '[aria-controls="calendar-popover"]'
+      )!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
+      const inputHandler = sinon.fake()
+      el.addEventListener('input', inputHandler)
+
+      await clickOnElement(button)
+      await conditionToBeTrue(() => popover.open)
+
+      await sendKeys({
+        press: 'ArrowRight',
+      })
+
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(inputHandler.calledOnce).to.be.true
+    })
+
+    it('should reset to initial value when pressing escape in the popover', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
+      )
+
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+        '[aria-controls="calendar-popover"]'
+      )!
+      const popover =
+        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
+      await clickOnElement(button)
+      await conditionToBeTrue(() => popover.open)
+
+      await sendKeys({
+        press: 'ArrowRight',
+      })
+
+      await el.updateComplete
+
+      await sendKeys({
+        press: 'Escape',
+      })
+
+      await timeout(0)
+      await el.updateComplete
+
+      await expect(onlyDate(el.value!)).to.equal(
+        onlyDate(new Date('2024-01-01'))
+      )
     })
   })
 

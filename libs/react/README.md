@@ -1,8 +1,12 @@
-# `@sebgroup/green-react`
+<div align="center">
+<img width="600" alt="green-react" src="https://github.com/sebgroup/green/assets/11420341/ad4c9fe3-137f-4230-9ea7-a4de87752aa9">
+<h1>@sebgroup/green-react</h1>
+<p>
+React components with SEB's look and feel.
+</p>
+</div>
 
-> TODO: description
-
-## Install \*
+## Install
 
 ```bash
 npm install --save @sebgroup/green-react
@@ -12,17 +16,18 @@ npm install --save @sebgroup/green-react
 yarn add @sebgroup/green-react
 ```
 
-## Usage \*
+## Use
 
-```
-const greenReact = require('@sebgroup/green-react');
+```tsx
+import { Button } from '@sebgroup/green-react'
 
-// TODO: DEMONSTRATE API
+// Use in your JSX
+<Button>A Green React Button!</Button>
 ```
 
 ### Components
 
-View all components in the Storybook
+View all components in the [React Storybook](https://sebgroup.github.io/green/latest/react/)
 
 ## Develop \*
 
@@ -57,5 +62,3 @@ yarn test react --watch
    1. Test
    2. Code
    3. Refactor
-
-## Commands \*

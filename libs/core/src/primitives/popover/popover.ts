@@ -16,8 +16,6 @@ import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
-import { topLayerOverTransforms } from './topLayerOverTransforms.middleware'
-
 import styles from './popover.styles'
 import { reference } from '@popperjs/core'
 
@@ -77,6 +75,20 @@ export class GdsPopover extends GdsElement {
   @property()
   calcMaxWidth = (_referenceEl: HTMLElement) => `auto`
 
+  /**
+   * A callback that returns the minimum height of the popover.
+   * By default, the popover minHeight will be set to `auto`
+   */
+  @property()
+  calcMinHeight = (referenceEl: HTMLElement) => `auto`
+
+  /**
+   * A callback that returns the maximum height of the popover.
+   * By default, the popover maxHeight will be set to a hard coded pixel value (check source).
+   */
+  @property()
+  calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
+
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
@@ -118,7 +130,7 @@ export class GdsPopover extends GdsElement {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.open = false
-        this.#dispatchUiStateEvent()
+        this.#dispatchUiStateEvent('cancel')
         e.stopPropagation()
         e.preventDefault()
       }
@@ -192,10 +204,10 @@ export class GdsPopover extends GdsElement {
     })
   }
 
-  #dispatchUiStateEvent = () => {
+  #dispatchUiStateEvent = (reason: 'show' | 'close' | 'cancel') => {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
-        detail: { open: this.open },
+        detail: { open: this.open, reason },
         bubbles: false,
         composed: false,
       })
@@ -206,7 +218,7 @@ export class GdsPopover extends GdsElement {
     e.stopPropagation()
     e.preventDefault()
     this.open = false
-    this.#dispatchUiStateEvent()
+    this.#dispatchUiStateEvent('close')
 
     // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
     // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
@@ -256,7 +268,7 @@ export class GdsPopover extends GdsElement {
     this.#autoPositionCleanupFn = autoUpdate(referenceEl, floatingEl, () => {
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
-        middleware: [offset(8), flip(), topLayerOverTransforms()],
+        middleware: [offset(8), flip()],
         strategy: 'fixed',
       }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
@@ -264,6 +276,8 @@ export class GdsPopover extends GdsElement {
           top: `${y}px`,
           minWidth: this.calcMinWidth(referenceEl),
           maxWidth: this.calcMaxWidth(referenceEl),
+          minHeight: this.calcMinHeight(referenceEl),
+          maxHeight: this.calcMaxHeight(referenceEl),
         })
       )
     })
@@ -276,11 +290,11 @@ export class GdsPopover extends GdsElement {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       this.open = true
-      this.#dispatchUiStateEvent()
+      this.#dispatchUiStateEvent('show')
     }
     if (e.key === 'Escape') {
       this.open = false
-      this.#dispatchUiStateEvent()
+      this.#dispatchUiStateEvent('cancel')
     }
   }
 
@@ -314,7 +328,7 @@ export class GdsPopover extends GdsElement {
       if (!isInDialog) {
         e.stopPropagation()
         this.open = false
-        this.#dispatchUiStateEvent()
+        this.#dispatchUiStateEvent('close')
       }
     }
   }

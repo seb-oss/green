@@ -48,6 +48,10 @@ $background: var(--sg-form-control-bg);
     &[aria-disabled='true'] {
       @include common.add-disable(true, true, true);
     }
+
+    &:hover {
+      background-color: var(--gds-ref-pallet-base100);
+    }
   }
   input[type='number'] {
     -moz-appearance: textfield;
@@ -64,7 +68,6 @@ $background: var(--sg-form-control-bg);
   flex-direction: column;
 
   @include validation.add-feedback-element(false);
-
 
   &:before {
     bottom: 0;

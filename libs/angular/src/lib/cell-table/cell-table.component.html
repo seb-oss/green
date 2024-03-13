@@ -1,0 +1,91 @@
+<div #targetElement role="table" [ngClass]="className">
+  <div class="cell-table-table d-flex flex-column">
+    <div
+      *ngFor="let row of rows; trackBy: trackByrowId"
+      (click)="handleClickRow(row)"
+      class="cell-table--row-wrapper"
+      role="rowgroup"
+      [class.is-clickable]="clickableRows"
+    >
+      <div>
+        <div #items [class.overflow-reverse]="overflowReverse">
+          <!-- Main header -->
+          <div role="row">
+            <div
+              nggCellTableItem
+              [row]="mainHeader(row).value"
+              [valueType]="getValueTypeFromMain()"
+              [attr.valueType]="getValueTypeFromMain()"
+              [attr.id]="getTableKeySelector(row)"
+              role="rowheader"
+              aria-rowspan="3"
+              aria-colspan="3"
+            ></div>
+          </div>
+          <div role="row">
+            <div class="d-flex">
+              <!-- Sub Header -->
+              <div
+                nggCellTableItem
+                class="sub-header py-0 fw-bold"
+                [row]="header.label"
+                [valueType]="getTableHeaderListValueFromNonMain(header)"
+                role="columnheader"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
+              ></div>
+            </div>
+          </div>
+
+          <div role="row">
+            <!-- Sub Values -->
+            <div class="d-flex">
+              <div
+                nggCellTableItem
+                class="sub-value py-0"
+                [row]="row[header.tableKeySelector]"
+                [valueType]="getTableHeaderListValueFromNonMain(header)"
+                [attr.valueType]="header.valueType"
+                role="cell"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="clickableRows"
+        role="row"
+        class="d-grid align-items-center ms-4 me-4 cell-table--arrow-container"
+      >
+        <div role="cell">
+          <div
+            role="button"
+            [attr.aria-label]="clickLabel"
+            tabindex="0"
+            [attr.aria-describedby]="getTableKeySelector(row)"
+            (keydown.enter)="handleClickRow(row)"
+          >
+            <svg
+              data-prefix="far"
+              data-icon="chevron-right"
+              class="svg-inline--fa fa-chevron-right fa-w-10"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                fill="currentColor"
+                d="M113.3 47.41l183.1 191.1c4.469 4.625 6.688 10.62 6.688 16.59s-2.219 11.97-6.688 16.59l-183.1 191.1c-9.152 9.594-24.34 9.906-33.9 .7187c-9.625-9.125-9.938-24.38-.7187-33.91l168-175.4L78.71 80.6c-9.219-9.5-8.906-24.78 .7187-33.91C88.99 37.5 104.2 37.82 113.3 47.41z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

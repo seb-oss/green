@@ -1,4 +1,4 @@
-import {Story} from '@storybook/addon-docs'
+import { Story } from '@storybook/addon-docs'
 
 # Datepicker
 
@@ -15,17 +15,14 @@ import { NggDatepickerModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    NggDatepickerModule
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, NggDatepickerModule],
   exports: [],
 })
 export class AppModule {}
 ```
 
 ## Datepicker
+
 NggDatepickerComponent is a form control for picking dates.
 
 It supports 2-way binding to the value property without the need for Angular forms,
@@ -34,16 +31,18 @@ and supports all the form directives from the core FormsModule (NgModel) and Rea
 <Story id="components-datepicker--simple" />
 
 ## Reactive forms
+
 We recommend using <a href="https://angular.io/guide/reactive-forms" target="_blank">Reactive forms</a> in Angular together with the <a href="https://angular.io/api/forms/FormBuilder" target="_blank">From builder</a> especially
 if you're dealing with complex or dynamic forms.
 
 ```html
 <form [formGroup]="reactiveForm">
-    <ngg-datepicker formControlName="date" label="Date"></ngg-datepicker>
+  <ngg-datepicker formControlName="date" label="Date"></ngg-datepicker>
 </form>
 ```
 
 ## Template-driven forms
+
 Another approach is to use <a href="https://angular.io/guide/forms" target="_blank">Template-driven forms</a> and bind value using `ngModel`.
 
 ```html
@@ -53,36 +52,50 @@ Another approach is to use <a href="https://angular.io/guide/forms" target="_bla
 ```
 
 ## 2-way binding without forms
+
 If you just need a simple select without any form, validation etc. it's possible to bind the dropdown directly to a value.
 
-
 ```html
-  <ngg-datepicker [(value)]="date" label="Date"></ngg-datepicker>
+<ngg-datepicker [(value)]="date" label="Date"></ngg-datepicker>
 ```
-
 
 ## Inputs
-|Input (attribute)|Description|Default|
-|:--------|:----------|:------|
-|options|`DatepickerOptions` for datepicker see more info below. | n/a |
-|label|Text to use as label for datepicker input.| n/a |
-|id|Id applied to datepicker elements.|`random id`|
-|isValid|Mark datepicker as invalid/valid.| `null` |
+
+| Input (attribute) | Description                                                             | Default     |
+| :---------------- | :---------------------------------------------------------------------- | :---------- |
+| options           | `DatepickerOptions` for datepicker see more info below.                 | n/a         |
+| label             | Text to use as label for datepicker input.                              | n/a         |
+| id                | Id applied to datepicker elements.                                      | `random id` |
+| isValid           | Mark datepicker as invalid/valid.                                       | `null`      |
+| size              | Size of the datepicker input. Possible values are `small` and `medium`. | `medium`    |
+| hideLabel         | Hide the label for the datepicker input.                                | `false`     |
+| disabledDates     | Array of dates to disable                                               | `[]`        |
+| disabledWeekends  | Disable all weekends in the calendar view                               | `false`     |
 
 ## DatepickerOptions
-|Option|Description|Default|
-|:--------|:----------|:------|
-|showWeeks|Show week numbers.| `false` |
-|minDate|Min date for datepicker, dates before this date are disabled.| `startOfYear(subYears(new Date(), 5))` |
-|maxDate|Max date for datepicker, dates after this date are disabled.| `endOfYear(addYears(new Date(), 5))` |
-|dateFormat|Date format for the input field. Use letters `d`, `m`, `y` to specify the order of day, month, year, separated by a delimiter. For example `y-m-d` or `d/m/y` | `y-m-d` |
 
+| Option     | Description                                                                                                                                                   | Default                                |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------- |
+| showWeeks  | Show week numbers.                                                                                                                                            | `false`                                |
+| minDate    | Min date for datepicker, dates before this date are disabled.                                                                                                 | `startOfYear(subYears(new Date(), 5))` |
+| maxDate    | Max date for datepicker, dates after this date are disabled.                                                                                                  | `endOfYear(addYears(new Date(), 5))`   |
+| dateFormat | Date format for the input field. Use letters `d`, `m`, `y` to specify the order of day, month, year, separated by a delimiter. For example `y-m-d` or `d/m/y` | `y-m-d`                                |
 
 ```html
-  <ngg-datepicker [(value)]="date" label="Birthday" options="{showWeeks: true, minDate: startOfYear(subYears(new Date(), 100)), maxDate: new Date(), dateFormat: 'd/m/y' }"></ngg-datepicker>
+<ngg-datepicker
+  [(value)]="date"
+  label="Birthday"
+  [disabledWeekends]="true"
+  [disabledDates]="disabledDates"
+  [options]="options"
+></ngg-datepicker>
 ```
 
-<Story id="components-datepicker--custom-options" />
+_Note:_ `disabledDates` and `options` in the example above are properties that you need to add in the component class.
+
+<Canvas>
+  <Story id="components-datepicker--custom-options" />
+</Canvas>
 
 ## Example usage in reactive form
 
@@ -90,23 +103,23 @@ Below is an example of how the component can be used with reactive forms and val
 
 ```ts
 validationForm = this._fb.group({
-    date: [
-      null,
-      [
-        Validators.required,
-        dateValidator({
-          min: this.options.minDate,
-          max: this.options.maxDate,
-        }),
-      ],
+  date: [
+    null,
+    [
+      Validators.required,
+      dateValidator({
+        min: this.options.minDate,
+        max: this.options.maxDate,
+      }),
     ],
-  })
+  ],
+})
 ```
-
 
 <Story id="components-datepicker--form" />
 
 ### Markup
+
 ```html
 <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save()">
   <ng-container *ngIf="validationForm.get('date') as date">
@@ -116,7 +129,9 @@ validationForm = this._fb.group({
       [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']">Select date</ng-container>
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select date</ng-container
+      >
       <ng-container data-form-info *ngIf="ngForm['submitted']">
         <!-- Text when form control contains one or more errors -->
         <ng-container *ngIf="date.errors as errors">
@@ -127,22 +142,24 @@ validationForm = this._fb.group({
           >
           <ng-container
             *ngIf="errors['validDate'] && errors['validDate']['minDate']"
-            >Enter date after
-            {{
-              errors['validDate']['minDate'] | date: 'shortDate'
-            }}</ng-container>
+            >Enter date after {{ errors['validDate']['minDate'] | date:
+            'shortDate' }}</ng-container
+          >
           <ng-container
             *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
-            >Enter date before
-            {{
-              errors['validDate']['maxDate'] | date: 'shortDate'
-            }}</ng-container>
+            >Enter date before {{ errors['validDate']['maxDate'] | date:
+            'shortDate' }}</ng-container
+          >
         </ng-container>
       </ng-container>
     </ngg-datepicker>
   </ng-container>
   <button type="reset" (click)="ngForm.reset()">Reset</button>
-  <button class="ms-3" type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+  <button
+    class="ms-3"
+    type="submit"
+    [disabled]="ngForm.submitted && validationForm.invalid"
+  >
     Save
   </button>
 </form>

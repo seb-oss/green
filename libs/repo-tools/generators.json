@@ -2,5 +2,11 @@
   "$schema": "http://json-schema.org/schema",
   "name": "repo-tools",
   "version": "0.0.1",
-  "generators": {}
+  "generators": {
+    "core-component": {
+      "factory": "./src/generators/core-component/generator",
+      "schema": "./src/generators/core-component/schema.json",
+      "description": "core-component generator"
+    }
+  }
 }

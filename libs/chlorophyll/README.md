@@ -1,10 +1,14 @@
-# ![image](https://user-images.githubusercontent.com/11420341/124561174-e3bb3400-de3d-11eb-98a2-bd3305326de2.png) @sebgroup/chlorophyll
-
-Chlorophyll is the design token and css part of Green. It is primarily used to style the components in the React and Angular libraries, but also contains grid and utility classes.
-
-It is not recommended to use Chlorophyll directly to style your own components - instead use what is available in the React or Angular libraries, or contribute what you are missing.
+<div align="center">
+<img width="600" alt="chlorophyll" src="https://github.com/sebgroup/green/assets/11420341/8368cfdf-5335-42b3-9a7f-b03fd0d6433b">
+<h1>@sebgroup/green-core</h1>
+<p>
+Chlorophyll a styling framework for Green Design System front-end components. It is primarily used to style the components in the React and Angular libraries, but also contains grid and utility classes.
+</p>
+</div>
 
 ## Install
+
+It is not recommended to use Chlorophyll directly to style your own components - instead use what is available in the React or Angular libraries, or contribute what you are missing.
 
 ## Use
 
@@ -60,11 +64,6 @@ If you cannot find the component you're looking for and/or want help switching t
 
 If you are up and running with Green and want to contribute a new component, see [Contributions](https://github.com/sebgroup/green/CONTRIBUTING.md)
 
-## Develop / Contribute
+## Contribute
 
 This is part of a monorepo. If you want to contribute, see [Green](https://github.com/sebgroup/green)
-
-- Watch all changes and auto generate css
-  ```bash
-  nx run chlorophyll:storybook
-  ```

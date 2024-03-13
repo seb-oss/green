@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
 import { Dropdown } from './dropdown'
 
 export const Template = ({ align, ...props }) => (
@@ -20,10 +20,12 @@ Dropdown Component
   }}
   args={{
     options: [
+      { label: 'Select', value: null },
       { label: 'Tacos', value: 'tacos' },
       { label: 'Pizza', value: 'pizza' },
       { label: 'Sushi', value: 'sushi' },
     ],
+    label: 'Dropdown label',
     multiSelect: false,
     searchable: false,
     texts: {
@@ -48,6 +50,7 @@ The dropdown options should be provided as an array of objects with label and va
 
 ```typescript
 const options = [
+  { label: 'Select', value: null },
   { label: 'Tacos', value: 'tacos' },
   { label: 'Pizza', value: 'pizza' },
   { label: 'Sushi', value: 'sushi' },
@@ -70,6 +73,7 @@ Dropdown option values can even be an object, but note that it requires a `compa
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
+      label="Complex values"
       options={[
         { label: 'Tacos', value: { id: 'tacos', kitchen: 'mexican' } },
         { label: 'Pizza', value: { id: 'pizza', kitchen: 'italian' } },
@@ -83,18 +87,80 @@ Dropdown option values can even be an object, but note that it requires a `compa
 
 ## Texts and placeholder
 
-Custom texts can be set using the texts input which takes an object with the following keys.
+Custom texts can be set using the `texts` prop which takes an object with the following keys:
 
-| Text        | Description                                 | Default  |
-| :---------- | :------------------------------------------ | :------- |
-| placeholder | Text to display when no option is selected. | `Select` |
+| Key           | Description                                 | Default  |
+| :------------ | :------------------------------------------ | :------- |
+| `placeholder` | Text to display when no option is selected. | `Select` |
+
+<Canvas>
+  <div style={{ height: '200px' }}>
+    <Dropdown
+      label="Awesome label!!"
+      informationLabel="Awesome informationLabel!!"
+      texts={{
+        placeholder: 'Select me please!',
+      }}
+      options={[
+        { label: 'Tacos', value: { id: 'tacos', kitchen: 'mexican' } },
+        { label: 'Pizza', value: { id: 'pizza', kitchen: 'italian' } },
+        { label: 'Sushi', value: { id: 'sushi', kitchen: 'japanese' } },
+      ]}
+      compareWith={(meal1, meal2) => meal1.id === meal2.id}
+      onChange={(value) => console.log('OnChange', value)}
+    ></Dropdown>
+  </div>
+</Canvas>
+
+## Option headings
+
+You can add an option heading by adding the `heading` property to the to the option object and set it to `true`.
+
+<Canvas>
+  <Dropdown
+    label="Option headings"
+    options={[
+      { label: 'Lunch', heading: true },
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
+      { label: 'Dinner', heading: true },
+      { label: 'Burger', value: 'burger' },
+      { label: 'Pasta', value: 'pasta' },
+      { label: 'Ramen', value: 'ramen' },
+    ]}
+  ></Dropdown>
+</Canvas>
 
 ## Multi select
 
 <Canvas>
   <div style={{ height: '200px' }}>
     <Dropdown
+      label="Multi select"
       multiSelect
+      options={[
+        { label: 'Tacos', value: 'tacos' },
+        { label: 'Pizza', value: 'pizza' },
+        { label: 'Sushi', value: 'sushi' },
+      ]}
+      onChange={(value) => console.log('OnChange', value)}
+    ></Dropdown>
+  </div>
+</Canvas>
+
+## Small dropdown
+
+Size can be controlled using the `size` prop. The default size is `medium`.
+
+Optionally, the label can also be hidden using the `hideLabel` prop.
+
+<Canvas>
+  <div style={{ height: '200px' }}>
+    <Dropdown
+      label="Small dropdown"
+      size="small"
+      hideLabel
       options={[
         { label: 'Tacos', value: 'tacos' },
         { label: 'Pizza', value: 'pizza' },

@@ -64,7 +64,7 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector}:hover
-    #{$checkbox-selector}:not(:checked, :indeterminate)
+    #{$checkbox-selector}:not(:checked, :indeterminate, :disabled, .disabled)
     ~ i::after {
     border-color: var(--gds-comp-checkbox-hover-border-color);
     opacity: 1;
@@ -120,11 +120,17 @@ $invalid-color: tokens.$intent-danger-background;
   #{$selector} #{$checkbox-selector}:disabled,
   #{$selector} #{$checkbox-selector}.disabled {
     ~ i {
-      @include common.add-disable(false, false, true);
+      @include common.add-disable(true, false, true);
+      box-shadow: inset 0 0 0 1px var(--border-disabled-color);
     }
 
     &:checked ~ i {
       @include common.add-disable(true, false, true);
+      box-shadow: inset 0 0 0 1px var(--border-disabled-color);
+
+      &:after {
+        border-color: var(--border-disabled-color);
+      }
     }
 
     ~ span {

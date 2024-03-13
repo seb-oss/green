@@ -2,20 +2,22 @@
 
 //@use './libs/chlorophyll/scss';
 
-@use './libs/chlorophyll/scss/components/themes/' as themes;
-@use './libs/chlorophyll/scss/components/reset/' as reset;
+@use '@sebgroup/chlorophyll/scss/components/themes/' as themes;
+@use '@sebgroup/chlorophyll/scss/components/reset/' as reset;
 @use '@sebgroup/fonts/scss/seb-fonts';
 
-@use './libs/chlorophyll/scss/components/utility';
-@use './libs/chlorophyll/scss/components/grid';
-@use './libs/chlorophyll/scss/components/form';
+@use '@sebgroup/chlorophyll/scss/components/utility';
+@use '@sebgroup/chlorophyll/scss/components/grid';
+@use '@sebgroup/chlorophyll/scss/components/form';
+@use '@sebgroup/chlorophyll/scss/components/link';
 
-//@use '@sebgroup/chlorophyll/scss/components/button';
-@use './libs/chlorophyll/scss/components/tabs-bar';
-@use './libs/chlorophyll/scss/components/navbar';
-@use './libs/chlorophyll/scss/components/dropdown';
-@use './libs/chlorophyll/scss/components/datepicker';
-@use './libs/chlorophyll/scss/components/context-menu';
-@use './libs/chlorophyll/scss/components/modal';
+@use '@sebgroup/chlorophyll/scss/components/container';
+@use '@sebgroup/chlorophyll/scss/components/tabs-bar';
+@use '@sebgroup/chlorophyll/scss/components/navbar';
+@use '@sebgroup/chlorophyll/scss/components/dropdown';
+@use '@sebgroup/chlorophyll/scss/components/datepicker';
+@use '@sebgroup/chlorophyll/scss/components/context-menu';
+@use '@sebgroup/chlorophyll/scss/components/modal';
+@use '@sebgroup/chlorophyll/scss/components/badge';
 
-@use './libs/charts/scss' as charts;
+@use '@sebgroup/green-charts/scss' as charts;

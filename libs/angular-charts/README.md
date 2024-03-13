@@ -1,7 +1,3 @@
-# Angular Charts
+# @sebgroup/angular-charts
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test angular-charts` to execute the unit tests.
+An Angular wrapper of [@sebgroup/charts](https://github.com/sebgroup/green/tree/main/libs/charts) that is in itself a wrapper of [Billboard.js](https://naver.github.io/billboard.js/)

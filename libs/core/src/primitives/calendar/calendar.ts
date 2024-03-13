@@ -41,7 +41,7 @@ export class GdsCalendar extends GdsElement {
    * The currently selected date.
    */
   @property()
-  value: Date = new Date()
+  value?: Date
 
   /**
    * The minimum date that can be selected.
@@ -62,6 +62,18 @@ export class GdsCalendar extends GdsElement {
   focusedDate = new Date()
 
   /**
+   * Whether to disable weekends or not.
+   */
+  @property({ type: Boolean, attribute: 'disabled-weekends' })
+  disabledWeekends = false
+
+  /**
+   * An array of dates that should be disabled in the calendar.
+   */
+  @property({ type: Array<Date>, attribute: 'disabled-dates' })
+  disabledDates?: Date[]
+
+  /**
    * The month that is currently focused.
    */
   @property({ type: Number })
@@ -69,7 +81,10 @@ export class GdsCalendar extends GdsElement {
     return this.focusedDate.getMonth()
   }
   set focusedMonth(month: number) {
-    this.focusedDate = new Date(this.focusedDate.setMonth(month))
+    const newDate = new Date(this.focusedDate)
+    newDate.setMonth(month)
+    newDate.setHours(0, 0, 0, 0)
+    this.focusedDate = newDate
   }
 
   /**
@@ -147,21 +162,31 @@ export class GdsCalendar extends GdsElement {
                         </td>`
                     )}
                     ${week.days.map((day) => {
-                      const isDisabled =
+                      const isOutsideCurrentMonth =
                         !isSameMonth(this.focusedDate, day) ||
                         day < this.min ||
                         day > this.max
+
+                      const isWeekend = day.getDay() === 0 || day.getDay() === 6
+
+                      const isDisabled =
+                        isOutsideCurrentMonth ||
+                        (this.disabledWeekends && isWeekend) ||
+                        (this.disabledDates &&
+                          this.disabledDates.some((d) => isSameDay(d, day)))
+
                       return html`
                         <td
                           class="${classMap({
-                            disabled: isDisabled,
+                            disabled: Boolean(isDisabled),
                             today: isSameDay(currentDate, day),
                           })}"
                           ?disabled=${isDisabled}
                           tabindex="${isSameDay(this.focusedDate, day)
                             ? 0
                             : -1}"
-                          aria-selected="${isSameDay(this.value, day)}"
+                          aria-selected="${this.value &&
+                          isSameDay(this.value, day)}"
                           aria-label="${day.toDateString()}"
                           @click=${() =>
                             isDisabled ? null : this.#setSelectedDate(day)}
@@ -194,6 +219,7 @@ export class GdsCalendar extends GdsElement {
 
   @watch('value')
   private _valueChanged() {
+    if (!this.value) return
     this.focusedDate = this.value
   }
 

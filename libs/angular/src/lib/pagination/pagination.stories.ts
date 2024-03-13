@@ -17,6 +17,12 @@ export default {
     },
     componentIds: ['component-pagination'],
   },
+  argTypes: {
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta<NggPaginationComponent>
 
 const Template: Story<NggPaginationComponent> = (
@@ -24,7 +30,7 @@ const Template: Story<NggPaginationComponent> = (
 ) => {
   return {
     template: `
-    <ngg-pagination [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"></ngg-pagination>
+    <ngg-pagination [size]="size" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [displayPages]="displayPages"></ngg-pagination>
     `,
     props: args,
   }
@@ -35,4 +41,6 @@ Default.args = {
   length: 100,
   pageSize: 10,
   pageIndex: 4,
+  displayPages: 5,
+  size: 'small',
 }

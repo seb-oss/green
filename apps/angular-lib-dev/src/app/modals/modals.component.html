@@ -22,4 +22,25 @@
     <ngg-datepicker></ngg-datepicker>
   </ngg-modal>
   <button (click)="defaultModalIsOpen = true">Open Modal</button>
+
+  <ngg-modal
+    [modalType]="'slideout'"
+    [header]="defaultModalHeader"
+    [isOpen]="slideoutModalIsOpen"
+    [confirmLabel]="defaultModalConfirmLabel"
+    [dismissLabel]="deafultModalDismissLabel"
+    [hideHeader]="false"
+    [hideFooter]="false"
+    (closed)="slideoutModalIsOpen = false"
+  >
+    <p>This modal has a Dropdown inside of it</p>
+    <ngg-dropdown
+      label="Countries"
+      [options]="countries"
+      display="name"
+    ></ngg-dropdown>
+
+    <ngg-datepicker></ngg-datepicker>
+  </ngg-modal>
+  <button (click)="slideoutModalIsOpen = true">Open Slideout Modal</button>
 </div>

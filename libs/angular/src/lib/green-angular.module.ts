@@ -13,6 +13,7 @@ import { NggSegmentedControlModule } from './segmented-control/segmented-control
 import { NggSharedModule } from './shared/shared.module'
 import { NggSliderModule } from './slider/slider.module'
 import { NggSortableListModule } from './sortable-list/sortable-list.module'
+import { NggCellTableModule } from './cell-table'
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { NggSortableListModule } from './sortable-list/sortable-list.module'
     NggSliderModule,
     NggContextMenuModule,
     NggInPageWizardModule,
+    NggCellTableModule,
     NggSharedModule,
     NggSortableListModule,
   ],

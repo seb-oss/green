@@ -13,6 +13,8 @@ import {
   Datepicker,
   Slider,
   Checkbox,
+  Select,
+  Option,
   TextArea,
   NumberInput,
 } from '@sebgroup/green-react'
@@ -78,6 +80,7 @@ export const FormExample = () => {
 
   const [value, setValue] = useState(0)
   const [ddValue, setDdValue] = useState()
+  const [date, setDate] = useState<Date | undefined>(undefined)
 
   const [stepperVal, setStepperVal] = useState(0)
 
@@ -98,7 +101,10 @@ export const FormExample = () => {
             searchable={true}
           />
           <Datepicker
-            onChange={(date) => console.log('Selected date: ', date)}
+            value={date}
+            onChange={setDate}
+            disabledWeekends={true}
+            disabledDates={[new Date(2024, 2, 13)]}
           />
         </div>
 
@@ -179,6 +185,17 @@ export const FormExample = () => {
           }
           validator={validator}
         />
+
+        <Select
+          label="Select something"
+          info="Hello"
+          expandableInfo="Hello"
+          expandableInfoButtonLabel="Hej"
+        >
+          <Option value="1">Option 1</Option>
+          <Option value="2">Option 2</Option>
+          <Option value="3">Option 3</Option>
+        </Select>
 
         <Stepper
           onChange={(e) => setStepperVal(Number(e.target.value))}
