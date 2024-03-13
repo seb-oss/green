@@ -327,9 +327,9 @@
     "customParams": {}
   },
   {
-    "id": "components-lists--value-list",
+    "id": "components-valuelist--value-list",
     "name": "ValueList",
-    "title": "Components/Lists",
+    "title": "Components/ValueList",
     "customParams": {}
   },
   {
@@ -351,16 +351,6 @@
     "customParams": {}
   },
   {
-    "id": "components-lists--list-group",
-    "name": "List group",
-    "title": "Components/Lists",
-    "customParams": {
-      "componentIds": [
-        "component-list"
-      ]
-    }
-  },
-  {
     "id": "components-link--link",
     "name": "Link",
     "title": "Components/Link",
@@ -374,6 +364,12 @@
     "id": "components-inpagewizardstepcard--in-page-wizard-step-card",
     "name": "InPageWizardStepCard",
     "title": "Components/InPageWizardStepCard",
+    "customParams": {}
+  },
+  {
+    "id": "components-grouped-list--page",
+    "name": "Page",
+    "title": "Components/Grouped list",
     "customParams": {}
   },
   {

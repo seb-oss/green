@@ -218,8 +218,34 @@
     }
   },
   {
+    "id": "components-grouped-list--default",
+    "name": "Default",
+    "title": "Components/Grouped List",
+    "customParams": {}
+  },
+  {
     "id": "components-dropdown--select",
     "name": "Select",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--small",
+    "name": "Small",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": [
+        "component-dropdown"
+      ]
+    }
+  },
+  {
+    "id": "components-dropdown--test",
+    "name": "Test",
     "title": "Components/Dropdown",
     "customParams": {
       "componentIds": [
@@ -318,6 +344,16 @@
     }
   },
   {
+    "id": "components-context-menu--with-label",
+    "name": "With Label",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-context-menu--right-to-left",
     "name": "Right To Left",
     "title": "Components/Context Menu",
@@ -344,6 +380,16 @@
     "customParams": {
       "componentIds": [
         "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-cell-table--default",
+    "name": "Default",
+    "title": "Components/Cell Table",
+    "customParams": {
+      "componentIds": [
+        "components-cell-table"
       ]
     }
   },
