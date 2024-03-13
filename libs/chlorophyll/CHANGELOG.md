@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.3
+
+### Patch Changes
+
+- feb1712: fix for contrast on disabled inputs
+
 ## 3.1.2
 
 ### Patch Changes
