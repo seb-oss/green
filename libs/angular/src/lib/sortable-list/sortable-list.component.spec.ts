@@ -153,7 +153,7 @@ describe('NggSortableListComponent', () => {
     })
   })
 
-  describe('onKeydown', () => {
+  describe('Keyboard sorting', () => {
     it('should handle keydown event and reorder items', () => {
       // Arrange
       const spy = jest.spyOn(component.itemOrderChanged, 'emit')
@@ -162,7 +162,7 @@ describe('NggSortableListComponent', () => {
       })
 
       // Act
-      component.onKeydown(0, 1, keyboardEvent)
+      component.onAltArrowKeydown(0, 1, keyboardEvent)
 
       // Assert
       expect(component.items[1].id).toBe(1)
@@ -179,7 +179,7 @@ describe('NggSortableListComponent', () => {
       const keyboardEvent = new KeyboardEvent('keydown', { code: 'ArrowUp' })
 
       // Act
-      component.onKeydown(0, -1, keyboardEvent)
+      component.onAltArrowKeydown(0, -1, keyboardEvent)
 
       // Assert
       expect(spy).not.toHaveBeenCalled()

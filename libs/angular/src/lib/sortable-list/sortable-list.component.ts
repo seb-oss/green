@@ -55,6 +55,7 @@ export class NggSortableListComponent implements OnInit {
 
   checkedItems: SortableListItem[] = []
   uncheckedItems: SortableListItem[] = []
+  focusedIndex = 0
   @ViewChild('sortableList') sortableList!: ElementRef
 
   ngOnInit() {
@@ -116,14 +117,16 @@ export class NggSortableListComponent implements OnInit {
   }
 
   /**
-   * Handles the keydown event.
+   * Handles moving items up or down using the alt + arrow up or alt + arrow down keys.
    *
    * @param {number} previousIndex - The previous index of the item.
    * @param {number} currentIndex - The current index of the item.
    * @param {KeyboardEvent} event - The keyboard event.
    */
-  onKeydown(previousIndex: number, currentIndex: number, event: any) {
+  onAltArrowKeydown(previousIndex: number, currentIndex: number, event: any) {
     if (!this.validateDrag(event, currentIndex)) return
+
+    event.preventDefault()
 
     moveItemInArray(
       this.shouldDisplaySeparateUncheckedList ? this.checkedItems : this.items,
@@ -135,6 +138,19 @@ export class NggSortableListComponent implements OnInit {
 
     setTimeout(() => {
       this.focusItem(currentIndex)
+    })
+  }
+
+  /**
+   * Handles focus by arrow keydown event.
+   *
+   * @param {number} index - The index of the item.
+   * @param {KeyboardEvent} event - The keyboard event.
+   */
+  onArrowKeydown(index: number, event: Event) {
+    event.preventDefault()
+    setTimeout(() => {
+      this.focusItem(index)
     })
   }
 
@@ -217,6 +233,16 @@ export class NggSortableListComponent implements OnInit {
       this.sortableList.nativeElement.querySelectorAll('.item')
     if (itemElements && itemElements.length > index) {
       itemElements[index].focus()
+      this.focusedIndex = index
     }
+  }
+
+  /**
+   * Checks if an item has focus.
+   *
+   * @param {number} index - The index of the item.
+   */
+  itemHasFocus(index: number) {
+    return index === this.focusedIndex
   }
 }
