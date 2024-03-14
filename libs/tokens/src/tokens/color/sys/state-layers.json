@@ -8,7 +8,7 @@
           "alpha": 0.1,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -18,7 +18,7 @@
           "alpha": 0.2,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -28,7 +28,7 @@
           "alpha": 0.4,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -38,7 +38,7 @@
           "alpha": 0.6,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -48,7 +48,7 @@
           "alpha": 0.1,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -58,7 +58,7 @@
           "alpha": 0.2,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -68,7 +68,7 @@
           "alpha": 0.1,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -78,7 +78,7 @@
           "alpha": 0.2,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -88,7 +88,7 @@
           "alpha": 0.2,
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }

@@ -1,0 +1,24 @@
+{
+  "sys": {
+    "state": {
+      "hover-state-layer-opacity": {
+        "value": "0.10",
+        "attributes": {
+          "figma": {
+            "resolvedType": "FLOAT",
+            "valuesByMode": {
+              "223:0": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1:119"
+              },
+              "228:0": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:1:119"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

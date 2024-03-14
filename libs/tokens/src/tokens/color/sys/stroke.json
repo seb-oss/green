@@ -7,7 +7,7 @@
           "darkValue": "{ref.color.grey.80}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -16,7 +16,7 @@
           "darkValue": "{ref.color.grey.30}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -25,7 +25,7 @@
           "darkValue": "{ref.color.grey.20}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -34,7 +34,7 @@
           "darkValue": "{ref.color.grey.60}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -43,7 +43,7 @@
           "darkValue": "{ref.color.blue.60}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -52,7 +52,7 @@
           "darkValue": "{ref.color.green.65}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -61,7 +61,7 @@
           "darkValue": "{ref.color.orange.55}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -70,7 +70,7 @@
           "darkValue": "{ref.color.red.65}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -79,7 +79,7 @@
           "darkValue": "{ref.color.red.60}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }

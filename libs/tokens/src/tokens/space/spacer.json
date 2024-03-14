@@ -1,0 +1,128 @@
+{
+  "sys": {
+    "space": {
+      "spacer": {
+        "0": {
+          "value": "{ref.size.0}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "2": {
+          "value": "{ref.size.1}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "4": {
+          "value": "{ref.size.2}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "8": {
+          "value": "{ref.size.3}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "12": {
+          "value": "{ref.size.4}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "16": {
+          "value": "{ref.size.5}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "24": {
+          "value": "{ref.size.6}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "32": {
+          "value": "{ref.size.7}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "40": {
+          "value": "{ref.size.8}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "48": {
+          "value": "{ref.size.9}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "64": {
+          "value": "{ref.size.10}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "80": {
+          "value": "{ref.size.11}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "96": {
+          "value": "{ref.size.12}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "112": {
+          "value": "{ref.size.13}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        },
+        "120": {
+          "value": "{ref.size.14}",
+          "attributes": {
+            "figma": {
+              "resolvedType": "FLOAT"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
           "darkValue": "{ref.color.green.40}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         },
@@ -16,7 +16,7 @@
           "darkValue": "{ref.color.orange.80}",
           "attributes": {
             "figma": {
-              "resolvedType": "ALIAS"
+              "resolvedType": "VARIABLE_ALIAS"
             }
           }
         }
@@ -24,4 +24,3 @@
     }
   }
 }
-

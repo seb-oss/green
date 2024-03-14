@@ -23,6 +23,53 @@ for (const entry of Object.entries(filters)) {
 const config: StyleDictionary.Config = {
   source: ['src/tokens/**/*.json'],
   platforms: {
+    // For internal use in Green Core
+    internal: {
+      transforms: [
+        'attribute/cti',
+        'time/seconds',
+        'content/icon',
+        'size/rem',
+        'color/css',
+        'name/cti/kebab',
+        'color/mix-blend',
+      ],
+      buildPath: 'internal/',
+      prefix: 'gds-',
+      files: [
+        {
+          destination: 'pallet.css',
+          format: 'css/variables',
+          filter: function (token) {
+            if ('darkValue' in token) return false
+            return token?.attributes?.type === 'color'
+          },
+          options: {
+            selector: ':host',
+          },
+        },
+        {
+          destination: 'theme/light.css',
+          format: 'css/theme',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'light',
+            outputReferences: false,
+            selector: ':host',
+          },
+        },
+        {
+          destination: 'theme/dark.css',
+          format: 'css/theme',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'dark',
+            outputReferences: false,
+            selector: ':host',
+          },
+        },
+      ],
+    },
     css: {
       // transformGroup: 'css',
       transforms: [
@@ -30,6 +77,7 @@ const config: StyleDictionary.Config = {
         'time/seconds',
         'content/icon',
         'size/rem',
+        'size/px',
         'color/css',
         'name/cti/kebab',
         'color/alpha',
@@ -63,6 +111,16 @@ const config: StyleDictionary.Config = {
             outputReferences: false,
           },
         },
+        {
+          destination: 'size.css',
+          format: 'size',
+          filter: function (token) {
+            return token.attributes.figma.resolvedType === 'FLOAT'
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
       ],
     },
     scss: {
@@ -73,6 +131,7 @@ const config: StyleDictionary.Config = {
         'time/seconds',
         'content/icon',
         'size/rem',
+        'size/px',
         'color/css',
         'color/alpha',
       ],
@@ -155,7 +214,16 @@ const config: StyleDictionary.Config = {
             let returnValue = false
 
             token.path?.forEach((item) => {
-              if (['color', 'size'].includes(item)) {
+              if (
+                [
+                  'color',
+                  'size',
+                  'space',
+                  'motion',
+                  'state',
+                  'typography',
+                ].includes(item)
+              ) {
                 returnValue = true
               }
             })

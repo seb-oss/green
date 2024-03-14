@@ -1,0 +1,16 @@
+{
+    "sys": {
+        "grid": {
+            "debug": {
+                "lines": {
+                    "value": "#5551FF",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "COLOR"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
