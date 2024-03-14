@@ -1,0 +1,42 @@
+@layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
+
+@layer grid {
+  :host {
+    --gds-c: 12;
+    --gds-grid-col: repeat(var(--gds-c), 1fr);
+    --gds-grid-col-start: 1;
+    --gds-grid-col-end: -1;
+    --gds-debug-color: hsla(241, 100%, 66%, 0.4);
+    --gds-debug-color-container: rgba(255, 82, 197, 0.4);
+    --gds-gap-column: 0px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: var(--gds-grid-col);
+    grid-column-gap: var(--gds-gap-column);
+    padding: var(--gds-grid-padding);
+    text-wrap: balance;
+  }
+}
+
+/* Responsive */
+:host {
+  --gds-c: var(--gds-columns-desktop);
+  --gds-gap-column: var(--gds-gap-desktop);
+  --gds-grid-padding: var(--gds-padding-desktop);
+}
+
+@media only screen and (max-width: 768px) {
+  :host {
+    --gds-c: var(--gds-columns-tablet);
+    --gds-gap-column: var(--gds-gap-tablet);
+    --gds-grid-padding: var(--gds-padding-tablet);
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  :host {
+    --gds-c: var(--gds-columns-mobile);
+    --gds-gap-column: var(--gds-gap-mobile);
+    --gds-grid-padding: var(--gds-padding-mobile);
+  }
+}

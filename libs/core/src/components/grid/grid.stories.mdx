@@ -1,0 +1,111 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { GdsGrid } from '../../../../../dist/libs/core/src'
+import "./grid.stories.css"
+
+<Meta title="Components/Grid" />
+
+# Grid
+
+The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `fluid` attribute.
+
+## Usage
+
+To use the `gds-grid`, you add it to your HTML and specify the number of columns for desktop, tablet, and mobile devices using the `columns` attribute. The `columns`, `gap` and `padding` attribute takes a string of three tokens separated by spaces. The first number is for `desktop`, the second for `tablet`, and the third for `mobile`.
+
+```html
+<gds-grid columns="8 4 2">
+    <!-- Child elements here -->
+</gds-grid>
+```
+In the example above, the grid will have `8` columns on `desktop`, `4` on `tablet`, and `2` on `mobile`.
+
+## Columns
+
+The `columns` attribute is used to define the number of columns for different devices.
+
+The format is `columns="[DESKTOP] [TABLET] [MOBILE]"`.
+
+The default `columns` is `12` if not specified.
+
+```html
+<gds-grid columns="8 4 2">
+    <!-- Child elements here -->
+</gds-grid>
+```
+
+## Gap
+
+The `gap` attribute is used to define the gap between columns for different devices.
+The format is `gap="[DESKTOP] [TABLET] [MOBILE]"`.
+The default `gap` is `m` for all devices if not specified.
+
+```html
+<gds-grid columns="8 4 2" gap="xxl xs xxxl">
+    <!-- Child elements here -->
+</gds-grid>
+```
+
+## Padding
+
+The `padding` attribute is used to define the padding around the grid for different devices.
+The format is `padding="[DESKTOP] [TABLET] [MOBILE]"`.
+The default `padding` is `m` for all devices if not specified.
+
+```html
+<gds-grid columns="8 4 2" padding="xxl xs xxxl">
+    <!-- Child elements here -->
+</gds-grid>
+```
+
+## Fluid attribute
+
+The `fluid` attribute is used to make the grid fluid. When fluid is set to true, the grid will automatically adjust the number of columns based on the available width and content size. When speficied columns it will try to respect that depending on content inline size and will have a minimum width of `200px`
+
+
+```html
+<gds-grid columns="8 4 2" fluid>
+    <!-- Child elements here -->
+</gds-grid>
+```
+
+## Sizes
+Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
+```css
+xxxl: size/1
+xxl:  size/9
+xl:   size/7
+l:    size/6
+m:    size/5
+s:    size/3
+xs:   size/2
+none: size/0
+```
+
+## Example 
+This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobile. It also has a gap of `xxl` on desktop, `m` on tablet, and `xs` on mobile. The padding is `xxl` on desktop, `xs` on tablet, and `xxxl` on mobile.
+<Canvas>
+    <gds-grid columns="8 4 2" gap="s m xs" padding="xs s m">
+        <div>COL: 01</div>
+        <div>COL: 02</div>
+        <div>COL: 03</div>
+        <div>COL: 04</div>
+        <div>COL: 05</div>
+        <div>COL: 06</div>
+        <div>COL: 07</div>
+        <div>COL: 08</div>
+    </gds-grid>
+</Canvas>
+
+## Example: Fluid
+This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
+
+<Canvas>
+    <gds-grid columns="8 4 2" gap="xxl m xs" fluid>
+        <div>COL: 01</div>
+        <div>COL: 02</div>
+        <div>COL: 03</div>
+        <div>COL: 04</div>
+        <div>COL: 05</div>
+        <div>COL: 06</div>
+    </gds-grid>
+</Canvas>

@@ -1,0 +1,11 @@
+gds-grid > div {
+  display: flex;
+  border: 1px solid var(--gds-debug-color);
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+}
