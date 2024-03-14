@@ -40,7 +40,7 @@ The format is `gap="[DESKTOP] [TABLET] [MOBILE]"`.
 The default `gap` is `m` for all devices if not specified.
 
 ```html
-<gds-grid columns="8 4 2" gap="xxl xs xxxl">
+<gds-grid columns="8 4 2" gap="2xl xs 3xl">
     <!-- Child elements here -->
 </gds-grid>
 ```
@@ -52,7 +52,7 @@ The format is `padding="[DESKTOP] [TABLET] [MOBILE]"`.
 The default `padding` is `m` for all devices if not specified.
 
 ```html
-<gds-grid columns="8 4 2" padding="xxl xs xxxl">
+<gds-grid columns="8 4 2" padding="2xl xs 3xl">
     <!-- Child elements here -->
 </gds-grid>
 ```
@@ -71,8 +71,8 @@ The `fluid` attribute is used to make the grid fluid. When fluid is set to true,
 ## Sizes
 Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
 ```css
-xxxl: size/1
-xxl:  size/9
+3xl:  size/1
+2xl:  size/9
 xl:   size/7
 l:    size/6
 m:    size/5
@@ -82,7 +82,7 @@ none: size/0
 ```
 
 ## Example 
-This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobile. It also has a gap of `xxl` on desktop, `m` on tablet, and `xs` on mobile. The padding is `xxl` on desktop, `xs` on tablet, and `xxxl` on mobile.
+This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobile. It also has a gap of `2xl` on desktop, `m` on tablet, and `xs` on mobile. The padding is `2xl` on desktop, `xs` on tablet, and `3xl` on mobile.
 <Canvas>
     <gds-grid columns="8 4 2" gap="s m xs" padding="xs s m">
         <div>COL: 01</div>
@@ -100,7 +100,7 @@ This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobil
 This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
 
 <Canvas>
-    <gds-grid columns="8 4 2" gap="xxl m xs" fluid>
+    <gds-grid columns="8 4 2" gap="2xl m xs" fluid>
         <div>COL: 01</div>
         <div>COL: 02</div>
         <div>COL: 03</div>

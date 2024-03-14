@@ -49,7 +49,7 @@
           }
         }
       },
-      "xxl": {
+      "2xl": {
         "value": "{ref.size.7}",
         "attributes": {
           "figma": {
@@ -57,7 +57,7 @@
           }
         }
       },
-      "xxxl": {
+      "3xl": {
         "value": "{ref.size.9}",
         "attributes": {
           "figma": {
@@ -65,7 +65,7 @@
           }
         }
       },
-      "xxxxl": {
+      "4xl": {
         "value": "{ref.size.12}",
         "attributes": {
           "figma": {

@@ -22,7 +22,7 @@ describe('GdsGrid', () => {
   })
 
   it('accepts only valid GridSizes for columns, gap, and padding', () => {
-    const validSizes = ['none', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl']
+    const validSizes = ['none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl']
     const invalidSize = 'invalid'
 
     validSizes.forEach((size) => {
