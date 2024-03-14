@@ -46,6 +46,7 @@
     "@popperjs/core": "^2.11.5",
     "@sebgroup/bootstrap": "^6.0.1",
     "@sebgroup/fonts": "^1.1.0",
+    "@sebgroup/vanilla": "^6.0.0",
     "@storybook/core-server": "6.5.16",
     "@swc/helpers": "0.5.2",
     "billboard.js": "^3.7.5",

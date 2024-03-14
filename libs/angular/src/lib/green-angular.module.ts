@@ -14,6 +14,20 @@ import { NggSharedModule } from './shared/shared.module'
 import { NggSliderModule } from './slider/slider.module'
 import { NggCellTableModule } from './cell-table'
 
+import { NggBreadcrumbsModule } from './breadcrumbs'
+import { NggCardModule } from './card'
+import { NggCheckboxModule } from './checkbox'
+import { NgvDragDropModule } from './drag-drop'
+import { NggInfoCircleModule } from './info-circle'
+import { NggInputModule } from './input'
+import { NggRadioModule } from './radio'
+
+import { NgvTableModule } from './table'
+import { NgvTabsModule } from './tabs'
+import { NggTextareaModule } from './textarea'
+import { NgvTooltipModule } from './tooltip'
+import { NggTypeaheadModule } from './typeahead'
+
 @NgModule({
   declarations: [],
   imports: [CommonModule],
@@ -31,6 +45,18 @@ import { NggCellTableModule } from './cell-table'
     NggInPageWizardModule,
     NggCellTableModule,
     NggSharedModule,
+    NggBreadcrumbsModule,
+    NggCardModule,
+    NggCheckboxModule,
+    NgvDragDropModule,
+    NggInfoCircleModule,
+    NggInputModule,
+    NggRadioModule,
+    NgvTableModule,
+    NgvTabsModule,
+    NggTextareaModule,
+    NgvTooltipModule,
+    NggTypeaheadModule,
   ],
 })
 export class NggModule {}

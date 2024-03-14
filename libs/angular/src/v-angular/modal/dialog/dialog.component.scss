@@ -1,0 +1,48 @@
+@use '@sebgroup/vanilla/src/functions' as functions;
+@use '@sebgroup/vanilla/src/colors' as colors;
+@use 'include-media/dist/include-media' as include-media;
+
+:host {
+  z-index: 1040;
+
+  .sdv-modal-dialog__container {
+    @include include-media.media('<tablet') {
+      width: auto;
+    }
+    @include include-media.media('>=tablet') {
+      width: functions.vanilla-px-to-em(512);
+    }
+  }
+  .sdv-modal-dialog__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+      margin: 0;
+    }
+    button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: none;
+      font-size: 1rem;
+      background: 0;
+      color: colors.$vanilla-color-text;
+      cursor: pointer;
+
+      &:hover {
+        background-color: colors.$vanilla-color-grey200;
+      }
+
+      &:active {
+        background-color: colors.$vanilla-color-grey500;
+      }
+
+      fa-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

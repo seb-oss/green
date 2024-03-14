@@ -1,0 +1,26 @@
+@use 'sass:math';
+@use 'node_modules/@sebgroup/vanilla/src/functions.scss' as func;
+
+:host {
+  .flex-right {
+    right: 0;
+  }
+
+  .fold-out-button {
+    width: func.vanilla-px-to-em(44 - 2);
+    border: none;
+    padding: 0;
+  }
+
+  ::ng-deep [ngvOption] {
+    border-radius: 0;
+    &:first-of-type {
+      border-top-right-radius: math.div(4, 16) * 1em;
+      border-top-left-radius: math.div(4, 16) * 1em;
+    }
+    &:last-of-type {
+      border-bottom-right-radius: math.div(4, 16) * 1em;
+      border-bottom-left-radius: math.div(4, 16) * 1em;
+    }
+  }
+}

@@ -7,6 +7,7 @@
     "@sebgroup/green-core"
   ],
   "lib": {
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "styleIncludePaths": ["../../"]
   }
 }

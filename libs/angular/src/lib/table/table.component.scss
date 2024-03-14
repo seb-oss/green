@@ -1,0 +1,61 @@
+@use 'node_modules/@sebgroup/vanilla/src/mixins';
+@use 'node_modules/@sebgroup/vanilla/src/variables';
+@import 'node_modules/@sebgroup/vanilla/src/components/tables/table-mixins';
+
+.sdv-table {
+  @include vanilla-table();
+
+  th,
+  td {
+    &.sdv-table__numeric-col + :not(.sdv-table__numeric-col) {
+      padding-left: 1rem;
+    }
+  }
+
+  td {
+    cursor: pointer;
+  }
+}
+
+th.column {
+  &__check {
+    height: vanilla-px-to-rem(40px - 8px);
+    width: vanilla-px-to-rem(40px);
+
+    div {
+      min-height: 100%;
+    }
+
+    input:checked + label {
+      &::after {
+        top: 0.6rem;
+        display: inline;
+      }
+    }
+
+    label {
+      display: inline;
+      padding: 0;
+      &::before {
+        top: 0.55rem;
+      }
+    }
+  }
+}
+
+td.column {
+  &__check {
+    width: vanilla-px-to-rem(40px);
+
+    div {
+      min-height: unset;
+    }
+
+    label {
+      padding: 0;
+      &::before {
+        margin: 0;
+      }
+    }
+  }
+}

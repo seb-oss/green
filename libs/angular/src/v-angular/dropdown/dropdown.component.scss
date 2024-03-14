@@ -1,0 +1,71 @@
+@use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+@use 'node_modules/@sebgroup/vanilla/src/components/inputs/dropdown-mixins' as dropdown;
+@use 'node_modules/@sebgroup/vanilla/src/functions' as functions;
+@use 'node_modules/@sebgroup/vanilla/src/mixins' as mixins;
+@use '../core-mixins' as ngv;
+@use '../fontawesome-variables' as fa;
+
+:host {
+  display: block;
+
+  .dropdown {
+    width: 100%;
+    position: relative;
+
+    ngv-dropdown-list {
+      width: 100%;
+    }
+  }
+
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  .unset-state {
+    padding-left: 0.5rem;
+  }
+
+  .sdv-field-label--optional {
+    font-weight: 400;
+  }
+
+  .toggle {
+    width: 100%;
+    text-align: left;
+    text-align: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .ngv-field--error {
+    @include ngv.text-field--error();
+  }
+
+  .ngv-field-dropdown__label {
+    @include dropdown.vanilla-field-dropdown-button();
+
+    &::after {
+      display: none;
+    }
+
+    &::before {
+      @include mixins.vanilla-icon(
+        $_glyph: '\F078',
+        $_color: colors.$vanilla-color-text,
+        $_space: functions.vanilla-px-to-em(44 - 2)
+      );
+      font-family: fa.$fa-font-family;
+      float: right;
+      background-color: inherit;
+    }
+
+    &[aria-expanded='false']::before {
+      @include mixins.vanilla-icon-rotate(0);
+    }
+
+    &[aria-expanded='true']::before {
+      @include mixins.vanilla-icon-rotate(180);
+    }
+  }
+}

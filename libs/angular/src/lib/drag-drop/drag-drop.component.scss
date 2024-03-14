@@ -1,0 +1,83 @@
+@import 'node_modules/@sebgroup/vanilla/src/typography-mixins';
+
+:host {
+  // TODO: change vanilla design library pattern to handle not selectable
+  .file-list {
+    th:first-child,
+    td:first-child {
+      width: auto;
+    }
+  }
+
+  .filename {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .col-name {
+    width: 40%;
+  }
+
+  .col-status {
+    width: 30%;
+  }
+
+  .col-actions {
+    width: 0.1%;
+  }
+
+  .progress-wrapper {
+    display: flex;
+  }
+
+  .progress,
+  .indicator {
+    height: 0.5rem;
+  }
+
+  .sdv-progress-indicator__step {
+    margin-right: 0;
+  }
+
+  .progress {
+    color: $vanilla-color-darkgreen1; // IE fallback for ::-ms-fill
+
+    // Progress
+    &::-webkit-progress-value {
+      background-color: $vanilla-color-darkgreen1;
+    }
+
+    &::-moz-progress-bar {
+      background-color: $vanilla-color-darkgreen1;
+    }
+
+    &::-ms-fill {
+      background-color: $vanilla-color-darkgreen1;
+    }
+  }
+
+  .progress-text {
+    display: block;
+    margin-top: 0.125rem;
+  }
+
+  .error-text {
+    color: $vanilla-color-darkred2;
+  }
+
+  .success-text {
+    color: $vanilla-color-darkgreen2;
+  }
+
+  .remove {
+    padding: 0 vanilla-px-to-rem(8);
+    font-size: 1.5em;
+    color: $vanilla-color-grey600;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $vanilla-color-darkred2;
+    }
+  }
+}

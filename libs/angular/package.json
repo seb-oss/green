@@ -8,12 +8,20 @@
     "@angular/forms": ">=15.2.9",
     "@angular/platform-browser": ">=15.2.9",
     "@angular/router": ">=15.2.9",
+    "@fortawesome/angular-fontawesome": "^0.13.0",
+    "@fortawesome/fontawesome-pro": "^6.1.2",
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/pro-light-svg-icons": "^6.1.2",
+    "@fortawesome/pro-regular-svg-icons": "^6.1.2",
     "rxjs": ">=6.5.3"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.9.1",
+    "@ngneat/transloco": "^5.0.7",
+    "@ngneat/transloco-locale": "^5.1.1",
     "@sebgroup/chlorophyll": "^3.1.2",
     "@sebgroup/extract": "^3.0.1",
+    "@sebgroup/green-core": "^1.9.1",
+    "include-media": "^2.0.0",
     "tslib": "^2.3.1"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",
