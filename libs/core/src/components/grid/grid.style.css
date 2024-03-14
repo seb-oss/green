@@ -9,31 +9,6 @@
     --gds-debug-color: hsla(241, 100%, 66%, 0.4);
     --gds-debug-color-container: rgba(255, 82, 197, 0.4);
     --gds-gap-column: 0px;
-
-    /* THESE NEED TO BE MOVED TO TOKENS */
-
-    /* --gds-gap-none: 0px;
-    --gds-gap-xs: 4px;
-    --gds-gap-s: 8px;
-    --gds-gap-m: 16px;
-    --gds-gap-l: 24px;
-    --gds-gap-xl: 32px;
-    --gds-gap-xxl: 48px;
-    --gds-gap-xxxl: 96px; */
-
-    /* THESE NEED TO BE MOVED TO TOKENS */
-
-    /* --gds-padding-none: 0px;
-    --gds-padding-xs: 4px;
-    --gds-padding-s: 8px;
-    --gds-padding-m: 16px;
-    --gds-padding-l: 24px;
-    --gds-padding-xl: 32px;
-    --gds-padding-xxl: 48px;
-    --gds-padding-xxxl: 96px; */
-
-    /* THESE NEED TO BE MOVED TO TOKENS */
-
     display: grid;
     width: 100%;
     grid-template-columns: var(--gds-grid-col);
@@ -64,20 +39,4 @@
     --gds-gap-column: var(--gds-gap-mobile);
     --gds-grid-padding: var(--gds-padding-mobile);
   }
-}
-
-/* These features should be added back */
-/* These features should be added back */
-/* These features should be added back */
-/* These features should be added back */
-
-&[content-inline='auto'] {
-  display: grid;
-  grid-auto-columns: auto;
-  grid-auto-flow: column;
-  grid-template-columns: none;
-}
-
-&[inline-size='max-content'] {
-  max-width: max-content;
 }

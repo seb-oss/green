@@ -10,17 +10,7 @@ import { tokens } from '../../tokens.style'
 import grid from './grid.style.css'
 const gridCSS = unsafeCSS(grid)
 
-type GridSizes =
-  | 'none'
-  | 'xd'
-  | 's'
-  | 'm'
-  | 'l'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl'
-  | 'xxxxl'
-  | 'full'
+type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
 type GridGap = GridSizes
 type GridPadding = GridSizes
 
