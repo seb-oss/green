@@ -26,7 +26,7 @@
         }
       },
       "m": {
-        "value": "{ref.size.5}",
+        "value": "{ref.size.4}",
         "attributes": {
           "figma": {
             "resolvedType": "FLOAT"
@@ -34,7 +34,7 @@
         }
       },
       "l": {
-        "value": "{ref.size.6}",
+        "value": "{ref.size.5}",
         "attributes": {
           "figma": {
             "resolvedType": "FLOAT"
@@ -42,7 +42,7 @@
         }
       },
       "xl": {
-        "value": "{ref.size.7}",
+        "value": "{ref.size.6}",
         "attributes": {
           "figma": {
             "resolvedType": "FLOAT"
@@ -50,7 +50,7 @@
         }
       },
       "xxl": {
-        "value": "{ref.size.9}",
+        "value": "{ref.size.7}",
         "attributes": {
           "figma": {
             "resolvedType": "FLOAT"
@@ -58,6 +58,14 @@
         }
       },
       "xxxl": {
+        "value": "{ref.size.9}",
+        "attributes": {
+          "figma": {
+            "resolvedType": "FLOAT"
+          }
+        }
+      },
+      "xxxxl": {
         "value": "{ref.size.12}",
         "attributes": {
           "figma": {

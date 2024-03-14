@@ -77,6 +77,7 @@ const config: StyleDictionary.Config = {
         'time/seconds',
         'content/icon',
         'size/rem',
+        'size/px',
         'color/css',
         'name/cti/kebab',
         'color/alpha',
@@ -111,8 +112,11 @@ const config: StyleDictionary.Config = {
           },
         },
         {
-          destination: 'tokens.css',
-          format: 'tokens',
+          destination: 'size.css',
+          format: 'size',
+          filter: function (token) {
+            return token.attributes.figma.resolvedType === 'FLOAT'
+          },
           options: {
             outputReferences: true,
           },
@@ -127,6 +131,7 @@ const config: StyleDictionary.Config = {
         'time/seconds',
         'content/icon',
         'size/rem',
+        'size/px',
         'color/css',
         'color/alpha',
       ],

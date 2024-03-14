@@ -12,6 +12,16 @@ const transforms: Record<
       return token.path.slice(1, token.path.length).join('/')
     },
   },
+  'size/px': {
+    name: 'size/px',
+    type: 'name',
+    matcher: function (prop) {
+      return prop.attributes.category === 'size'
+    },
+    transformer: function (prop) {
+      return `${prop.original.value}px`
+    },
+  },
   // For use with css `mix-color` function
   'color/mix-blend': {
     name: 'color/mix-blend',
