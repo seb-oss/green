@@ -2,9 +2,8 @@ import { LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import {
   gdsCustomElement,
-  html as customElementHtml,
+  html,
 } from '../../utils/helpers/custom-element-scoping'
-import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 
 import { tokens } from '../../tokens.style'
 import grid from './grid.style.css'
@@ -13,8 +12,6 @@ const gridCSS = unsafeCSS(grid)
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl'
 type GridGap = GridSizes
 type GridPadding = GridSizes
-
-const html = stripWhitespace(customElementHtml)
 
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends LitElement {
