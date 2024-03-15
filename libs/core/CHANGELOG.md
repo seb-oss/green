@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.2
+
+### Patch Changes
+
+- c59d1ea: Dropdown: fix issue where falsy values where considered as no values (only `undefined` should be explicitly considered as "no value") (closes #1259)
+
 ## 1.9.1
 
 ### Patch Changes
