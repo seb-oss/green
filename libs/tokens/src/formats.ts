@@ -82,35 +82,6 @@ const formats: Record<string, Format> = {
       )
     },
   },
-  // size: {
-  //   name: 'size',
-  //   formatter: function (args) {
-  //     const dictionary = Object.assign({}, args.dictionary)
-  //     const options = Object.assign({ selector: ':host' }, args.options)
-
-  //     dictionary.allTokens = dictionary.allTokens.map((token) => {
-  //       if (token.value && token.attributes.figma.resolvedType === 'FLOAT') {
-  //         return Object.assign({}, token, {
-  //           value: `${token.value}px`,
-  //           original: { value: `${token.value}px` },
-  //         })
-  //       } else {
-  //         return token
-  //       }
-  //     })
-
-  //     return (
-  //       formatHelpers.fileHeader({ file: args.file }) +
-  //       `${options.selector} {\n` +
-  //       formatHelpers.formattedVariables({
-  //         format: 'css',
-  //         dictionary,
-  //         outputReferences: options.outputReferences,
-  //       }) +
-  //       `\n}\n`
-  //     )
-  //   },
-  // },
   'figma/json': {
     name: 'json/figma',
     formatter: function ({ dictionary, options }) {
