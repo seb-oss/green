@@ -8,7 +8,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core'
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop'
 
 export interface SortableListItem {
   id: any
@@ -16,6 +20,12 @@ export interface SortableListItem {
   description?: string
   selected?: boolean
   hasCustomSuffix?: boolean
+}
+
+export interface SortableListGroup {
+  items: SortableListItem[]
+  title: string
+  description?: string
 }
 
 enum KeyCode {
@@ -28,63 +38,27 @@ enum KeyCode {
   templateUrl: './sortable-list.component.html',
   styleUrls: ['./sortable-list.component.scss'],
 })
-export class NggSortableListComponent implements OnInit {
-  @Input() items: SortableListItem[] = []
-  @Input() shouldDisplaySeparateUncheckedList = false
+export class NggSortableListComponent {
+  @Input() groups: SortableListGroup[] = []
   @Input() shouldDisplayCheckboxes = false
   @Input() isReadOnly = false
-  @Input() shouldDisplayDragHandle = true
   @Input() isDraggable = true
-  @Input() header = ''
-  @Input() subtitle = ''
   @Input() description = ''
   @Input() suffixTemplate: TemplateRef<any> | null = null
-  @Input() unselectedHeader = ''
-  @Input() unselectedSubtitle = ''
-  @Input() unselectedDescription = ''
 
   @Output() itemSelectionChanged = new EventEmitter<{
     changedItem: SortableListItem
-    items: SortableListItem[]
+    groups: SortableListGroup[]
   }>()
   @Output() itemOrderChanged = new EventEmitter<{
     previousIndex: number
     currentIndex: number
-    items: SortableListItem[]
+    groups: SortableListGroup[]
   }>()
 
-  checkedItems: SortableListItem[] = []
-  uncheckedItems: SortableListItem[] = []
+  @ViewChild('sortableListGroups') sortableListGroups!: ElementRef
+
   focusedIndex = 0
-  @ViewChild('sortableList') sortableList!: ElementRef
-
-  ngOnInit() {
-    this.updateLists()
-  }
-
-  /**
-   * Updates the checkedItems and uncheckedItems arrays based on the selected property of each item in the items array.
-   * Also calls the updateOriginalItemsArray method.
-   */
-  updateLists() {
-    if (!this.shouldDisplayCheckboxes) return
-    this.checkedItems = []
-    this.uncheckedItems = []
-    this.items.forEach((item) =>
-      item.selected
-        ? this.checkedItems.push(item)
-        : this.uncheckedItems.push(item)
-    )
-
-    this.updateOriginalItemsArray()
-  }
-
-  updateOriginalItemsArray() {
-    if (!this.shouldDisplayCheckboxes) return
-    if (this.shouldDisplaySeparateUncheckedList) {
-      this.items = [...this.checkedItems, ...this.uncheckedItems]
-    }
-  }
 
   /**
    * Toggles the selection of a checklist item and updates its position in the list.
@@ -95,9 +69,7 @@ export class NggSortableListComponent implements OnInit {
    */
   toggleSelection(item: SortableListItem) {
     item.selected = !item.selected
-    this.shouldDisplaySeparateUncheckedList
-      ? this.handleSeparateListsToggle(item)
-      : this.handleCombinedListToggle(item)
+    this.handleCombinedListToggle(item)
     this.emitCheckListItem(item)
   }
 
@@ -107,12 +79,24 @@ export class NggSortableListComponent implements OnInit {
    * @param {CdkDragDrop<SortableListItem[]>} event - The drag and drop event.
    */
   onDragDrop(event: CdkDragDrop<SortableListItem[]>) {
-    moveItemInArray(
-      this.shouldDisplaySeparateUncheckedList ? this.checkedItems : this.items,
-      event.previousIndex,
-      event.currentIndex
-    )
-    this.updateOriginalItemsArray()
+    console.log(event)
+    //moveItemInArray(this.items, event.previousIndex, event.currentIndex)
+
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      )
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      )
+    }
+
     this.emitItemOrderChanged(event.previousIndex, event.currentIndex)
   }
 
@@ -128,12 +112,7 @@ export class NggSortableListComponent implements OnInit {
 
     event.preventDefault()
 
-    moveItemInArray(
-      this.shouldDisplaySeparateUncheckedList ? this.checkedItems : this.items,
-      previousIndex,
-      currentIndex
-    )
-    this.updateOriginalItemsArray()
+    //moveItemInArray(this.items, previousIndex, currentIndex)
     this.emitItemOrderChanged(previousIndex, currentIndex)
 
     setTimeout(() => {
@@ -164,7 +143,7 @@ export class NggSortableListComponent implements OnInit {
     this.itemOrderChanged.emit({
       previousIndex,
       currentIndex,
-      items: [...this.items],
+      groups: [...this.groups],
     })
   }
 
@@ -174,23 +153,7 @@ export class NggSortableListComponent implements OnInit {
    * @param {SortableListItem} item - The checklist item that was toggled.
    */
   private emitCheckListItem(item: SortableListItem) {
-    this.itemSelectionChanged.emit({ changedItem: item, items: this.items })
-  }
-
-  /**
-   * Handles the toggle action for separate lists of checked and unchecked items.
-   *
-   * @param {SortableListItem} item - The item to be toggled.
-   */
-  private handleSeparateListsToggle(item: SortableListItem) {
-    if (item.selected) {
-      this.uncheckedItems = this.uncheckedItems.filter((i) => i.id !== item.id)
-      this.checkedItems.push(item)
-    } else {
-      this.checkedItems = this.checkedItems.filter((i) => i.id !== item.id)
-      this.uncheckedItems.push(item)
-    }
-    this.updateOriginalItemsArray()
+    this.itemSelectionChanged.emit({ changedItem: item, groups: this.groups })
   }
 
   /**
@@ -199,15 +162,10 @@ export class NggSortableListComponent implements OnInit {
    * @param {SortableListItem} item - The item to be toggled.
    */
   private handleCombinedListToggle(item: SortableListItem) {
-    const index = this.items.findIndex((i) => i.id === item.id)
-    if (index !== -1) {
-      this.items[index] = item
-    }
-  }
-
-  private moveToCheckedItems(item: SortableListItem) {
-    this.uncheckedItems = this.uncheckedItems.filter((i) => i.id !== item.id)
-    this.checkedItems.push(item)
+    // const index = this.items.findIndex((i) => i.id === item.id)
+    // if (index !== -1) {
+    //   this.items[index] = item
+    // }
   }
 
   /**
@@ -219,7 +177,9 @@ export class NggSortableListComponent implements OnInit {
   private validateDrag(event: KeyboardEvent, focusIndex: number) {
     if (event.code === KeyCode.ArrowUp && focusIndex < 0) return false
     return !(
-      event.code === KeyCode.ArrowDown && focusIndex == this.items?.length
+      event.code === KeyCode.ArrowDown &&
+      focusIndex ==
+        this.groups.reduce((acc, curr) => (acc += curr.items.length), 0) - 1
     )
   }
 
@@ -230,7 +190,7 @@ export class NggSortableListComponent implements OnInit {
    */
   private focusItem(index: number): void {
     const itemElements =
-      this.sortableList.nativeElement.querySelectorAll('.item')
+      this.sortableListGroups.nativeElement.querySelectorAll('.item')
     if (itemElements && itemElements.length > index) {
       itemElements[index].focus()
       this.focusedIndex = index

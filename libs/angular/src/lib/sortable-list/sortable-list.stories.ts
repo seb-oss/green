@@ -208,7 +208,6 @@ Default.args = {
     },
   ],
   isReadOnly: false,
-  shouldDisplayDragHandle: true,
   isDraggable: true,
 }
 
@@ -227,10 +226,6 @@ export const DefaultSortableChecklist = createTemplate().bind({})
 DefaultSortableChecklist.args = {
   ...Default.args,
   shouldDisplayCheckboxes: true,
-  shouldDisplaySeparateUncheckedList: true,
-  unselectedHeader: 'Unselected Items',
-  unselectedSubtitle: 'Tasks to be completed',
-  unselectedDescription: 'Items that have not been checked yet.',
 }
 DefaultSortableChecklist.storyName = 'Separate Unchecked List'
 
@@ -244,7 +239,6 @@ export const NotDraggable = createTemplate().bind({})
 NotDraggable.args = {
   ...DefaultSortableChecklist.args,
   isDraggable: false,
-  shouldDisplayDragHandle: false,
 }
 NotDraggable.storyName = 'Disabled reordering and displaying drag handle'
 
@@ -259,5 +253,4 @@ Minimal.args = {
     { id: 3, name: 'Elegant', selected: false, hasCustomSuffix: false },
   ],
   shouldDisplayCheckboxes: true,
-  shouldDisplayDragHandle: false,
 }

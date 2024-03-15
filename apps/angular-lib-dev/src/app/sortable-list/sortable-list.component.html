@@ -1,9 +1,7 @@
 <h2>Sortable List</h2>
 <div class="container">
   <ngg-sortable-list
-    [items]="items"
-    [header]="'Sortable list header'"
-    [subtitle]="'Sub-title'"
+    [groups]="groups"
     [description]="'Description'"
     (itemSelectionChanged)="onItemSelected($event)"
     (itemOrderChanged)="onItemOrderChanged($event)"
