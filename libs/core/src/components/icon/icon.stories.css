@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'green-icons';
+  src: url('assets/green-icons.eot?j5uujk');
+  src: url('assets/green-icons.eot?j5uujk#iefix') format('embedded-opentype'),
+    url('assets/green-icons.ttf?j5uujk') format('truetype'),
+    url('assets/green-icons.woff?j5uujk') format('woff'),
+    url('assets/green-icons.svg?j5uujk#green-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.gds-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1ch;
+
+  gds-icon {
+    font-size: 200px;
+    user-select: none;
+  }
+}
