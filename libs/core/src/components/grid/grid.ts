@@ -1,9 +1,13 @@
-import { LitElement, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { css, CSSResult, LitElement, unsafeCSS } from 'lit'
+import type { CSSResultGroup } from 'lit'
+
+import { property, state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+
+import { watch } from '../../utils/decorators'
 
 import { tokens } from '../../tokens.style'
 import grid from './grid.style.css'
@@ -38,7 +42,7 @@ export class GdsGrid extends LitElement {
    * ```
    */
   @property({ attribute: 'columns', type: String })
-  columns?: string
+  columns?: string | undefined
 
   /**
    * @property {string} gap - The size of the gap between grid items. This can be a space-separated string of three sizes ('none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'), specifying the gap size for desktop, tablet, and mobile devices, respectively.
@@ -70,89 +74,153 @@ export class GdsGrid extends LitElement {
   @property({ attribute: 'fluid', type: String })
   fluid?: boolean
 
-  updated(changedProperties: Map<string | number | symbol, unknown>) {
-    super.updated(changedProperties)
+  /**
+   * Lifecycle method called when the element is connected to the DOM.
+   * It updates the column, gap, and padding variables.
+   */
+  connectedCallback() {
+    super.connectedCallback()
+    this._updateColumnVariables()
+    this._updateGapVariables()
+    this._updatePaddingVariables()
+  }
 
-    let cssVariables = ''
+  /**
+   * State variable that holds the CSS variables for column, gap, and padding.
+   */
+  @state()
+  private _gridVariables = {
+    column: css``,
+    gap: css``,
+    padding: css``,
+  }
 
-    if (changedProperties.has('columns')) {
-      const [columnsDesktop, columnsTablet, columnsMobile] =
-        this.columns?.split(' ').map(Number) || []
+  /**
+   * Watcher for the 'columns' property.
+   * It updates the column CSS variables when the 'columns' property changes.
+   */
+  @watch('columns')
+  private _updateColumnVariables() {
+    const [columnsDesktop, columnsTablet, columnsMobile] =
+      this.columns?.split(' ').map(Number) || []
 
-      const columnProperties = [
-        { name: 'gds-columns-mobile', value: columnsMobile },
-        { name: 'gds-columns-tablet', value: columnsTablet },
-        { name: 'gds-columns-desktop', value: columnsDesktop },
-      ]
+    const columnProperties = [
+      { name: '_columns-mobile', value: columnsMobile },
+      { name: '_columns-tablet', value: columnsTablet },
+      { name: '_columns-desktop', value: columnsDesktop },
+    ]
 
-      cssVariables += columnProperties
-        .filter(({ value }) => value !== undefined)
-        .map(({ name, value }) => `--${name}: ${value};`)
-        .join(' ')
+    const cssVariables = columnProperties
+      .filter(({ value }) => value !== undefined)
+      .map(({ name, value }) => `--${name}: ${value};`)
+      .join(' ')
+
+    this._gridVariables = {
+      ...this._gridVariables,
+      column: css`
+        ${unsafeCSS(cssVariables)}
+      `,
     }
 
-    if (changedProperties.has('gap')) {
-      const [gapDesktop, gapTablet, gapMobile] = this.gap?.split(' ') || []
+    this.requestUpdate('_gridVariables')
+  }
 
-      const gapProperties = [
-        { name: 'gds-gap-desktop', value: gapDesktop },
-        { name: 'gds-gap-tablet', value: gapTablet },
-        { name: 'gds-gap-mobile', value: gapMobile },
-      ]
+  /**
+   * Watcher for the 'gap' property.
+   * It updates the gap CSS variables when the 'gap' property changes.
+   */
+  @watch('gap')
+  private _updateGapVariables() {
+    const [gapDesktop, gapTablet, gapMobile] =
+      this.gap?.split(' ').map((val) => val || '0') || []
 
-      cssVariables += gapProperties
-        .filter(({ value }) => value !== undefined)
-        .map(
-          ({ name, value }) => `--${name}: var(--gds-sys-grid-gap-${value});`
-        )
-        .join(' ')
+    const columnProperties = [
+      { name: '_gap-mobile', value: `var(--gds-sys-grid-gap-${gapMobile})` },
+      { name: '_gap-tablet', value: `var(--gds-sys-grid-gap-${gapTablet})` },
+      { name: '_gap-desktop', value: `var(--gds-sys-grid-gap-${gapDesktop})` },
+    ]
+
+    const cssVariables = columnProperties
+      .filter(({ value }) => value !== undefined)
+      .map(({ name, value }) => `--${name}: ${value};`)
+      .join(' ')
+
+    this._gridVariables = {
+      ...this._gridVariables,
+      gap: css`
+        ${unsafeCSS(cssVariables)}
+      `,
     }
 
-    if (changedProperties.has('padding')) {
-      const [paddingDesktop, paddingTablet, paddingMobile] =
-        this.padding?.split(' ') || []
+    this.requestUpdate('_gridVariables')
+  }
 
-      const paddingProperties = [
-        { name: 'gds-padding-desktop', value: paddingDesktop },
-        { name: 'gds-padding-tablet', value: paddingTablet },
-        { name: 'gds-padding-mobile', value: paddingMobile },
-      ]
+  /**
+   * Watcher for the 'padding' property.
+   * It updates the padding CSS variables when the 'padding' property changes.
+   */
+  @watch('padding')
+  private _updatePaddingVariables() {
+    const [paddingDesktop, paddingTablet, paddingMobile] =
+      this.padding?.split(' ').map((val) => val || '0') || []
 
-      cssVariables += paddingProperties
-        .filter(({ value }) => value !== undefined)
-        .map(
-          ({ name, value }) =>
-            `--${name}: var(--gds-sys-grid-padding-${value});`
-        )
-        .join(' ')
+    const paddingProperties = [
+      {
+        name: '_padding-mobile',
+        value: `var(--gds-sys-grid-gap-${paddingMobile})`,
+      },
+      {
+        name: '_padding-tablet',
+        value: `var(--gds-sys-grid-gap-${paddingTablet})`,
+      },
+      {
+        name: '_padding-desktop',
+        value: `var(--gds-sys-grid-gap-${paddingDesktop})`,
+      },
+    ]
+
+    const cssVariables = paddingProperties
+      .filter(({ value }) => value !== undefined)
+      .map(({ name, value }) => `--${name}: ${value};`)
+      .join(' ')
+
+    this._gridVariables = {
+      ...this._gridVariables,
+      padding: css`
+        ${unsafeCSS(cssVariables)}
+      `,
     }
 
-    if (changedProperties.has('fluid') && this.fluid) {
-      cssVariables += `
-        --gds-grid-col-count: var(--gds-c);
-        --gds-grid-col-width: 200px;
-        --gap-count: calc(var(--gds-grid-col-count) - 1);
-        --total-gap-width: calc(var(--gap-count) * var(--gds-gap-column));
-        --gds-grid-col-width-max: calc(
-          (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
-        );
-  
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)), 1fr)
-        );
-        text-wrap: balance;
-      `
-    }
+    this.requestUpdate('_gridVariables')
+  }
 
+  /**
+   * Watcher for the '_gridVariables' property.
+   * It updates the CSS stylesheet when the '_gridVariables' property changes.
+   */
+  @watch('_gridVariables')
+  private _updateGridCss() {
     const sheet = new CSSStyleSheet()
-    sheet.replaceSync(`:host {${cssVariables}}`)
+    sheet.replaceSync(`:host {${Object.values(this._gridVariables).join('')}} `)
 
     if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot.adoptedStyleSheets,
-        sheet,
-      ]
+      const styles = Array.isArray(GdsGrid.styles)
+        ? GdsGrid.styles
+        : [GdsGrid.styles]
+      const styleSheets = styles.flatMap((style) => {
+        if (Array.isArray(style)) {
+          return style.map((s) => {
+            const newSheet = new CSSStyleSheet()
+            newSheet.replaceSync(s.cssText)
+            return newSheet
+          })
+        } else {
+          const newSheet = new CSSStyleSheet()
+          newSheet.replaceSync(style.cssText)
+          return [newSheet]
+        }
+      })
+      this.shadowRoot.adoptedStyleSheets = [sheet, ...styleSheets]
     }
   }
 

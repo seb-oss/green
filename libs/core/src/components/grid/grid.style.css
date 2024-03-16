@@ -2,41 +2,53 @@
 
 @layer grid {
   :host {
-    --gds-c: 12;
-    --gds-grid-col: repeat(var(--gds-c), 1fr);
-    --gds-grid-col-start: 1;
-    --gds-grid-col-end: -1;
-    --gds-debug-color: hsla(241, 100%, 66%, 0.4);
-    --gds-debug-color-container: rgba(255, 82, 197, 0.4);
-    --gds-gap-column: 0px;
+    --_-c: 12;
+    --_-grid-col: repeat(var(--_-c), 1fr);
+    --_-grid-col-start: 1;
+    --_-grid-col-end: -1;
+    --_-gap-column: 0px;
     display: grid;
     width: 100%;
-    grid-template-columns: var(--gds-grid-col);
-    grid-column-gap: var(--gds-gap-column);
-    padding: var(--gds-grid-padding);
+    grid-template-columns: var(--_-grid-col);
+    grid-column-gap: var(--_-gap-column);
+    padding: var(--_-grid-padding);
     text-wrap: balance;
+  }
+
+  :host([fluid='true']) {
+    --_col-count: var(--_-c);
+    --_col-width: 200px;
+    --_gap-count: calc(var(--_col-count) - 1);
+    --_total-gap-width: calc(var(--_gap-count) * var(--_-gap-column));
+    --_col-width-max: calc(
+      (100% - var(--_total-gap-width)) / var(--_col-count)
+    );
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(max(var(--_col-width), var(--_col-width-max)), 1fr)
+    );
   }
 }
 
 /* Responsive */
 :host {
-  --gds-c: var(--gds-columns-desktop);
-  --gds-gap-column: var(--gds-gap-desktop);
-  --gds-grid-padding: var(--gds-padding-desktop);
+  --_-c: var(--_columns-desktop);
+  --_-gap-column: var(--_gap-desktop);
+  --_-grid-padding: var(--_padding-desktop);
 }
 
 @media only screen and (max-width: 768px) {
   :host {
-    --gds-c: var(--gds-columns-tablet);
-    --gds-gap-column: var(--gds-gap-tablet);
-    --gds-grid-padding: var(--gds-padding-tablet);
+    --_-c: var(--_columns-tablet);
+    --_-gap-column: var(--_gap-tablet);
+    --_-grid-padding: var(--_padding-tablet);
   }
 }
 
 @media only screen and (max-width: 425px) {
   :host {
-    --gds-c: var(--gds-columns-mobile);
-    --gds-gap-column: var(--gds-gap-mobile);
-    --gds-grid-padding: var(--gds-padding-mobile);
+    --_-c: var(--_columns-mobile);
+    --_-gap-column: var(--_gap-mobile);
+    --_-grid-padding: var(--_padding-mobile);
   }
 }
