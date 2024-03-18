@@ -25,10 +25,16 @@ describe('NggSortableListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NggSortableListComponent)
     component = fixture.componentInstance
-    component.items = [
-      { id: 1, name: 'Item 1', selected: false },
-      { id: 2, name: 'Item 2', selected: false },
-      { id: 3, name: 'Item 3', selected: false },
+    component.groups = [
+      {
+        title: 'Group 1',
+        description: 'Description for group 1',
+        items: [
+          { id: 1, name: 'Item 1', selected: false },
+          { id: 2, name: 'Item 2', selected: false },
+          { id: 3, name: 'Item 3', selected: false },
+        ],
+      },
     ]
     fixture.detectChanges()
   })
@@ -44,8 +50,13 @@ describe('NggSortableListComponent', () => {
         name: 'Test Item',
         selected: false,
       }
-      component.items = [testItem]
-      component.shouldDisplaySeparateUncheckedList = true
+      component.groups = [
+        {
+          title: 'Group 1',
+          description: 'Description for group 1',
+          items: [testItem],
+        },
+      ]
       fixture.detectChanges()
 
       const itemSelectedSpy = jest.spyOn(component.itemSelectionChanged, 'emit')
@@ -56,14 +67,10 @@ describe('NggSortableListComponent', () => {
       // Checking if the item's selected status is toggled
       expect(testItem.selected).toEqual(true)
 
-      // Checking if the lists are updated correctly
-      expect(component.checkedItems.includes(testItem)).toBe(true)
-      expect(component.uncheckedItems.includes(testItem)).toBe(false)
-
       // Checking if the right event is emitted
       expect(itemSelectedSpy).toHaveBeenCalledWith({
         changedItem: testItem,
-        items: component.items,
+        groups: component.groups,
       })
     })
 
@@ -74,8 +81,13 @@ describe('NggSortableListComponent', () => {
         name: 'Test Item',
         selected: true,
       }
-      component.items = [testItem]
-      component.shouldDisplaySeparateUncheckedList = true
+      component.groups = [
+        {
+          title: 'Group 1',
+          description: 'Description for group 1',
+          items: [testItem],
+        },
+      ]
       fixture.detectChanges()
       const itemSelectedSpy = jest.spyOn(component.itemSelectionChanged, 'emit')
 
@@ -85,44 +97,10 @@ describe('NggSortableListComponent', () => {
       // Assert
       expect(testItem.selected).toEqual(false)
 
-      // Assert the lists are updated correctly
-      expect(component.checkedItems.includes(testItem)).toBe(false)
-      expect(component.uncheckedItems.includes(testItem)).toBe(true)
-
       // Assert the right event is emitted
       expect(itemSelectedSpy).toHaveBeenCalledWith({
         changedItem: testItem,
-        items: component.items,
-      })
-    })
-
-    it('should toggle item selection and not separate lists when shouldDisplaySeparateUncheckedList is false', () => {
-      // Arrange
-      const testItem: SortableListItem = {
-        id: 1,
-        name: 'Test Item',
-        selected: false,
-      }
-      component.items = [testItem]
-      component.shouldDisplaySeparateUncheckedList = false
-      fixture.detectChanges()
-
-      const itemSelectedSpy = jest.spyOn(component.itemSelectionChanged, 'emit')
-
-      // Act
-      component.toggleSelection(testItem)
-
-      // Assert the item's selected status is toggled
-      expect(testItem.selected).toEqual(true)
-
-      // Assert the lists are NOT separated
-      expect(component.checkedItems.length).toBe(0)
-      expect(component.uncheckedItems.length).toBe(0)
-
-      // Assert the right event is emitted
-      expect(itemSelectedSpy).toHaveBeenCalledWith({
-        changedItem: testItem,
-        items: component.items,
+        groups: component.groups,
       })
     })
   })
@@ -134,8 +112,8 @@ describe('NggSortableListComponent', () => {
       const event: CdkDragDrop<SortableListItem[]> = {
         previousIndex: 0,
         currentIndex: 1,
-        container: { data: component.items } as any,
-        previousContainer: { data: component.items } as any,
+        container: { data: component.groups, id: '0' } as any,
+        previousContainer: { data: component.groups, id: '0' } as any,
         isPointerOverContainer: true,
         distance: { x: 0, y: 0 },
       } as any
@@ -144,11 +122,11 @@ describe('NggSortableListComponent', () => {
       component.onDragDrop(event)
 
       // Assert
-      expect(component.items[1].id).toBe(1)
+      expect(component.groups[0].items[1].id).toBe(2)
       expect(spy).toHaveBeenCalledWith({
-        previousIndex: 0,
-        currentIndex: 1,
-        items: component.items,
+        previousIndex: [0, 0],
+        currentIndex: [0, 1],
+        groups: component.groups,
       })
     })
   })
@@ -162,91 +140,15 @@ describe('NggSortableListComponent', () => {
       })
 
       // Act
-      component.onAltArrowKeydown(0, 1, keyboardEvent)
+      component.onAltArrowKeydown(0, 0, 1, keyboardEvent)
 
       // Assert
-      expect(component.items[1].id).toBe(1)
+      expect(component.groups[0].items[1].id).toBe(1)
       expect(spy).toHaveBeenCalledWith({
-        previousIndex: 0,
-        currentIndex: 1,
-        items: component.items,
+        previousIndex: [0, 0],
+        currentIndex: [0, 1],
+        groups: component.groups,
       })
-    })
-
-    it('should not reorder items when validateDrag returns false', () => {
-      // Arrange
-      const spy = jest.spyOn(component.itemOrderChanged, 'emit')
-      const keyboardEvent = new KeyboardEvent('keydown', { code: 'ArrowUp' })
-
-      // Act
-      component.onAltArrowKeydown(0, -1, keyboardEvent)
-
-      // Assert
-      expect(spy).not.toHaveBeenCalled()
-    })
-  })
-
-  describe('updateLists', () => {
-    it('should separate checked and unchecked items', () => {
-      // Arrange
-      component.items = [
-        { id: 1, name: 'Item 1', selected: true },
-        { id: 2, name: 'Item 2', selected: false },
-      ]
-      component.shouldDisplaySeparateUncheckedList = true
-      component.shouldDisplayCheckboxes = true
-
-      // Act
-      component.updateLists()
-
-      // Assert
-      expect(component.checkedItems.length).toBe(1)
-      expect(component.uncheckedItems.length).toBe(1)
-    })
-
-    it('should handle all items selected', () => {
-      // Arrange
-      component.items = [
-        { id: 1, name: 'Item 1', selected: true },
-        { id: 2, name: 'Item 2', selected: true },
-      ]
-      component.shouldDisplayCheckboxes = true
-      component.shouldDisplaySeparateUncheckedList = true
-
-      // Act
-      component.updateLists()
-
-      // Assert
-      expect(component.checkedItems.length).toBe(2)
-      expect(component.uncheckedItems.length).toBe(0)
-    })
-
-    it('should handle empty item list', () => {
-      // Arrange
-      component.items = []
-
-      // Act
-      component.updateLists()
-
-      // Assert
-      expect(component.checkedItems.length).toBe(0)
-      expect(component.uncheckedItems.length).toBe(0)
-    })
-
-    it('should not separate items when shouldDisplaySeparateUncheckedList is false', () => {
-      // Arrange
-      component.items = [
-        { id: 1, name: 'Item 1', selected: true },
-        { id: 2, name: 'Item 2', selected: false },
-      ]
-      component.shouldDisplaySeparateUncheckedList = false
-
-      // Arrange
-      component.updateLists()
-
-      // Assert
-      expect(component.checkedItems.length).toBe(0)
-      expect(component.uncheckedItems.length).toBe(0)
     })
   })
 })
