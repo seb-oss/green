@@ -10,6 +10,7 @@
         role="list"
         cdkDropList
         [cdkDropListData]="group.items"
+        [id]="g_i.toString()"
         (cdkDropListDropped)="onDragDrop($event)"
       >
         <p

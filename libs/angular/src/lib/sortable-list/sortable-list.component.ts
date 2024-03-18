@@ -28,11 +28,6 @@ export interface SortableListGroup {
   description?: string
 }
 
-enum KeyCode {
-  ArrowUp = 'ArrowUp',
-  ArrowDown = 'ArrowDown',
-}
-
 @Component({
   selector: 'ngg-sortable-list',
   templateUrl: './sortable-list.component.html',
@@ -51,8 +46,8 @@ export class NggSortableListComponent {
     groups: SortableListGroup[]
   }>()
   @Output() itemOrderChanged = new EventEmitter<{
-    previousIndex: number
-    currentIndex: number
+    previousIndex: [number, number]
+    currentIndex: [number, number]
     groups: SortableListGroup[]
   }>()
 
@@ -92,7 +87,10 @@ export class NggSortableListComponent {
       )
     }
 
-    this.emitItemOrderChanged(event.previousIndex, event.currentIndex)
+    this.emitItemOrderChanged(
+      [Number(event.previousContainer.id), event.previousIndex],
+      [Number(event.container.id), event.currentIndex]
+    )
   }
 
   /**
@@ -137,7 +135,10 @@ export class NggSortableListComponent {
       moveItemInArray(this.groups[groupIndex].items, currentItemIndex, newIndex)
     }
 
-    this.emitItemOrderChanged(currentItemIndex, newIndex)
+    this.emitItemOrderChanged(
+      [groupIndex, currentItemIndex],
+      [newGroupIndex, newIndex]
+    )
 
     setTimeout(() => {
       this.focusItem(newGroupIndex, newIndex)
@@ -179,7 +180,10 @@ export class NggSortableListComponent {
    * @param previousIndex - The previous index of the item.
    * @param currentIndex - The current index of the item.
    */
-  private emitItemOrderChanged(previousIndex: number, currentIndex: number) {
+  private emitItemOrderChanged(
+    previousIndex: [number, number],
+    currentIndex: [number, number]
+  ) {
     this.itemOrderChanged.emit({
       previousIndex,
       currentIndex,
