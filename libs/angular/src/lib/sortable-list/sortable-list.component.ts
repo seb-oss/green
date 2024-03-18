@@ -58,14 +58,12 @@ export class NggSortableListComponent {
 
   @ViewChild('sortableListGroups') sortableListGroups!: ElementRef
 
-  focusedIndex = 0
+  focusedIndex: Record<number, number> = { 0: 0 }
 
   /**
    * Toggles the selection of a checklist item and updates its position in the list.
-   * If an item is selected, it moves to the end of the checked items.
-   * If an item is unselected, the lists are updated without changing the position of unchecked items.
    *
-   * @param {SortableListItem} item - The checklist item to update.
+   * @param item - The checklist item to update.
    */
   toggleSelection(item: SortableListItem) {
     item.selected = !item.selected
@@ -76,12 +74,9 @@ export class NggSortableListComponent {
   /**
    * Handles the onDragDrop event.
    *
-   * @param {CdkDragDrop<SortableListItem[]>} event - The drag and drop event.
+   * @param event - The drag and drop event.
    */
   onDragDrop(event: CdkDragDrop<SortableListItem[]>) {
-    console.log(event)
-    //moveItemInArray(this.items, event.previousIndex, event.currentIndex)
-
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -103,41 +98,86 @@ export class NggSortableListComponent {
   /**
    * Handles moving items up or down using the alt + arrow up or alt + arrow down keys.
    *
-   * @param {number} previousIndex - The previous index of the item.
-   * @param {number} currentIndex - The current index of the item.
-   * @param {KeyboardEvent} event - The keyboard event.
+   * @param groupIndex - The index of the group.
+   * @param currentItemIndex - The current index of the item.
+   * @param newItemIndex - The new index of the item.
    */
-  onAltArrowKeydown(previousIndex: number, currentIndex: number, event: any) {
-    if (!this.validateDrag(event, currentIndex)) return
-
+  onAltArrowKeydown(
+    groupIndex: number,
+    currentItemIndex: number,
+    newItemIndex: number,
+    event: any
+  ) {
     event.preventDefault()
 
-    //moveItemInArray(this.items, previousIndex, currentIndex)
-    this.emitItemOrderChanged(previousIndex, currentIndex)
+    let newIndex = newItemIndex
+    let newGroupIndex = groupIndex
+    let transfer = false
+
+    if (newIndex > this.groups[groupIndex].items.length - 1) {
+      newIndex = 0
+      newGroupIndex = groupIndex + 1
+      transfer = true
+      this.focusedIndex[groupIndex] = this.groups[groupIndex].items.length - 2
+    } else if (newIndex < 0) {
+      newGroupIndex = groupIndex - 1
+      newIndex = this.groups[newGroupIndex].items.length
+      transfer = true
+      this.focusedIndex[groupIndex] = 0
+    }
+
+    if (transfer) {
+      transferArrayItem(
+        this.groups[groupIndex].items,
+        this.groups[newGroupIndex].items,
+        currentItemIndex,
+        newIndex
+      )
+    } else {
+      moveItemInArray(this.groups[groupIndex].items, currentItemIndex, newIndex)
+    }
+
+    this.emitItemOrderChanged(currentItemIndex, newIndex)
 
     setTimeout(() => {
-      this.focusItem(currentIndex)
+      this.focusItem(newGroupIndex, newIndex)
     })
   }
 
   /**
    * Handles focus by arrow keydown event.
    *
-   * @param {number} index - The index of the item.
-   * @param {KeyboardEvent} event - The keyboard event.
+   * @param groupIndex - The index of the group.
+   * @param itemIndex - The index of the item.
+   * @param event - The keyboard event.
    */
-  onArrowKeydown(index: number, event: Event) {
+  onArrowKeydown(groupIndex: number, itemIndex: number, event: Event) {
     event.preventDefault()
     setTimeout(() => {
-      this.focusItem(index)
+      let gi = groupIndex
+
+      if (itemIndex > this.groups[groupIndex].items.length - 1) {
+        gi = groupIndex + 1
+        itemIndex = 0
+      }
+
+      if (itemIndex < 0) {
+        gi = groupIndex - 1
+        if (gi < 0) {
+          return
+        }
+        itemIndex = this.groups[gi].items.length - 1
+      }
+
+      this.focusItem(gi, itemIndex)
     })
   }
 
   /**
    * Emits the item order changed event.
    *
-   * @param {number} previousIndex - The previous index of the item.
-   * @param {number} currentIndex - The current index of the item.
+   * @param previousIndex - The previous index of the item.
+   * @param currentIndex - The current index of the item.
    */
   private emitItemOrderChanged(previousIndex: number, currentIndex: number) {
     this.itemOrderChanged.emit({
@@ -150,7 +190,7 @@ export class NggSortableListComponent {
   /**
    * Emits the selected checklist item through an event.
    *
-   * @param {SortableListItem} item - The checklist item that was toggled.
+   * @param item - The checklist item to emit.
    */
   private emitCheckListItem(item: SortableListItem) {
     this.itemSelectionChanged.emit({ changedItem: item, groups: this.groups })
@@ -159,7 +199,7 @@ export class NggSortableListComponent {
   /**
    * Handles the toggle for a combined list item.
    *
-   * @param {SortableListItem} item - The item to be toggled.
+   * @param item - The checklist item to toggle.
    */
   private handleCombinedListToggle(item: SortableListItem) {
     // const index = this.items.findIndex((i) => i.id === item.id)
@@ -169,40 +209,34 @@ export class NggSortableListComponent {
   }
 
   /**
-   * Validates whether a drag event is allowed or not based on the key code and
-   the current focus index.
-   * @param {any} event - The drag event object.
-   * @param {number} focusIndex - The index of the focused item.
-   */
-  private validateDrag(event: KeyboardEvent, focusIndex: number) {
-    if (event.code === KeyCode.ArrowUp && focusIndex < 0) return false
-    return !(
-      event.code === KeyCode.ArrowDown &&
-      focusIndex ==
-        this.groups.reduce((acc, curr) => (acc += curr.items.length), 0) - 1
-    )
-  }
-
-  /**
    * Focuses on a specific item in the sortable list.
    *
-   * @param {number} index - The index of the item to focus on.
+   * @param groupIndex - The index of the group.
+   * @param itemIndex - The index of the item.
    */
-  private focusItem(index: number): void {
-    const itemElements =
-      this.sortableListGroups.nativeElement.querySelectorAll('.item')
-    if (itemElements && itemElements.length > index) {
-      itemElements[index].focus()
-      this.focusedIndex = index
+  private focusItem(groupIndex: number, itemIndex: number): void {
+    const groupElements =
+      this.sortableListGroups.nativeElement.querySelectorAll('.item-list-group')
+
+    if (groupElements && groupElements.length > groupIndex) {
+      const itemElements = groupElements[groupIndex].querySelectorAll('.item')
+      if (itemElements && itemElements.length > itemIndex) {
+        itemElements[itemIndex].focus()
+        this.focusedIndex[groupIndex] = itemIndex
+      }
     }
   }
 
   /**
    * Checks if an item has focus.
    *
-   * @param {number} index - The index of the item.
+   * @param groupIndex - The index of the group.
+   * @param itemIndex - The index of the item.
    */
-  itemHasFocus(index: number) {
-    return index === this.focusedIndex
+  itemHasFocus(groupIndex: number, itemIndex: number) {
+    if (!this.focusedIndex[groupIndex]) {
+      this.focusedIndex[groupIndex] = 0
+    }
+    return this.focusedIndex[groupIndex] === itemIndex
   }
 }

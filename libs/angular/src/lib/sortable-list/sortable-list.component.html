@@ -3,10 +3,10 @@
     <p class="item-list-header">
       <span class="item-list-header-title">{{ description }}</span>
     </p>
-    <div cdkDropListGroup>
+    <div #sortableListGroups cdkDropListGroup>
       <div
         *ngFor="let group of groups; let g_i = index"
-        #sortableListGroups
+        class="item-list-group"
         role="list"
         cdkDropList
         [cdkDropListData]="group.items"
@@ -35,12 +35,12 @@
         >
           <div *cdkDragPlaceholder class="item-custom-placeholder"></div>
           <label
-            (keydown.alt.arrowDown)="onAltArrowKeydown(i, i + 1, $event)"
-            (keydown.alt.arrowUp)="onAltArrowKeydown(i, i - 1, $event)"
-            (keydown.arrowDown)="onArrowKeydown(i + 1, $event)"
-            (keydown.arrowUp)="onArrowKeydown(i - 1, $event)"
+            (keydown.alt.arrowDown)="onAltArrowKeydown(g_i, i, i + 1, $event)"
+            (keydown.alt.arrowUp)="onAltArrowKeydown(g_i, i, i - 1, $event)"
+            (keydown.arrowDown)="onArrowKeydown(g_i, i + 1, $event)"
+            (keydown.arrowUp)="onArrowKeydown(g_i, i - 1, $event)"
             class="form-control item-control align-items-center item"
-            [tabindex]="itemHasFocus(i) ? 0 : -1"
+            [tabindex]="itemHasFocus(g_i, i) ? 0 : -1"
           >
             <div class="form-control">
               <input
