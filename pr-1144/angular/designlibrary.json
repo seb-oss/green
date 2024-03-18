@@ -1,8 +1,8 @@
 [
   {
-    "id": "components-sortablelist--default",
+    "id": "components-sortable-list--default",
     "name": "Default",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -10,9 +10,9 @@
     }
   },
   {
-    "id": "components-sortablelist--with-custom-template",
+    "id": "components-sortable-list--with-custom-template",
     "name": "With Custom suffix template",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -20,9 +20,9 @@
     }
   },
   {
-    "id": "components-sortablelist--default-sortable-checklist",
+    "id": "components-sortable-list--default-sortable-checklist",
     "name": "Separate Unchecked List",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -30,9 +30,9 @@
     }
   },
   {
-    "id": "components-sortablelist--read-only",
+    "id": "components-sortable-list--read-only",
     "name": "Read Only",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -40,9 +40,9 @@
     }
   },
   {
-    "id": "components-sortablelist--not-draggable",
+    "id": "components-sortable-list--not-draggable",
     "name": "Disabled reordering and displaying drag handle",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -50,9 +50,9 @@
     }
   },
   {
-    "id": "components-sortablelist--minimal",
+    "id": "components-sortable-list--minimal",
     "name": "Minimal",
-    "title": "Components/SortableList",
+    "title": "Components/Sortable list",
     "customParams": {
       "componentIds": [
         "sortable-list"
@@ -434,36 +434,6 @@
     }
   },
   {
-    "id": "components-accordion--simple",
-    "name": "Simple",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-accordion--nosubheaders",
-    "name": "Nosubheaders",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-accordion--closeothers",
-    "name": "Closeothers",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
     "id": "components-badge--multiple",
     "name": "Multiple",
     "title": "Components/Badge",
@@ -490,6 +460,36 @@
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--simple",
+    "name": "Simple",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--nosubheaders",
+    "name": "Nosubheaders",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--closeothers",
+    "name": "Closeothers",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
       ]
     }
   },
