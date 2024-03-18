@@ -9,7 +9,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import Documentation from './documentation.mdx'
 
 export default {
-  title: 'Components/SortableList',
+  title: 'Components/Sortable list',
   component: NggSortableListComponent,
   parameters: {
     docs: {
@@ -24,9 +24,9 @@ export default {
     }),
   ],
   argTypes: {
-    items: {
+    groups: {
       name: 'items',
-      description: 'Array of items to be displayed in the checklist.',
+      description: 'Array of groups of items to be displayed in the checklist.',
       control: {
         type: 'object',
       },
@@ -38,14 +38,6 @@ export default {
         type: 'boolean',
       },
       defaultValue: false,
-    },
-    shouldDisplayDragHandle: {
-      name: 'shouldDisplayDragHandle',
-      description: 'Whether to display drag handles on each item.',
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: true,
     },
     isDraggable: {
       name: 'isDraggable',
@@ -76,6 +68,14 @@ export default {
       },
       defaultValue: '',
     },
+    shouldDisplayCheckboxes: {
+      name: 'shouldDisplayCheckboxes',
+      description: 'If true, displays checkboxes next to each item.',
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
     suffixTemplate: {
       name: 'suffixTemplate',
       description: 'Custom template for displaying suffixes.',
@@ -96,17 +96,10 @@ const createTemplate = (
           ? '<ng-template #customTemplate><span>🐞🚀 LGTM!</span></ng-template>'
           : ''
       }
-      <ngg-sortable-list [items]="items"
+      <ngg-sortable-list [groups]="groups"
                               [isReadOnly]="isReadOnly"
                               [isDraggable]="isDraggable"
-                              [shouldDisplayDragHandle]="shouldDisplayDragHandle"
-                              [shouldDisplaySeparateUncheckedList] = "shouldDisplaySeparateUncheckedList"
-                              [unselectedHeader]="unselectedHeader"
-                              [unselectedSubtitle]="unselectedSubtitle"
-                              [unselectedDescription]="unselectedDescription"
                               [shouldDisplayCheckboxes]="shouldDisplayCheckboxes"
-                              [header]="header"
-                              [subtitle]="subtitle"
                               [description]="description"
                               [suffixTemplate]="customTemplate"
                               (itemSelectionChanged)="onItemSelected($event)"
@@ -138,73 +131,83 @@ const onItemOrderChanged = (event: {
 
 export const Default = createTemplate().bind({})
 Default.args = {
-  header: 'Sortable List',
-  subtitle: 'The list that moves! (Subtitle)',
   description: 'My plan for next week! (Description)',
-  items: [
+  groups: [
     {
-      id: 1,
-      name: 'Debugging Marathon Session',
-      selected: true,
-      hasCustomSuffix: true,
-      description: 'Where coffee is your best debugger.',
+      title: 'Group 1',
+      description: 'Description for group 1',
+      items: [
+        {
+          id: 1,
+          name: 'Debugging Marathon Session',
+          selected: true,
+          hasCustomSuffix: true,
+          description: 'Where coffee is your best debugger.',
+        },
+        {
+          id: 2,
+          name: 'Refactor the Legacy Codebase',
+          selected: false,
+          description:
+            '"Surely deleting this unused variable won\'t cause any issues in production."',
+          hasCustomSuffix: false,
+        },
+        {
+          id: 3,
+          name: 'Surviving Code Reviews',
+          selected: true,
+          description: 'Remember to breathe and think of kittens.',
+          hasCustomSuffix: true,
+        },
+        {
+          id: 4,
+          name: 'Deployment Day Dilemmas',
+          selected: true,
+          description: 'Will it work? Flip a coin.',
+          hasCustomSuffix: false,
+        },
+        {
+          id: 5,
+          name: 'Planning the Unrealistic Deadline',
+          selected: false,
+          description: 'Time travel theories welcome.',
+          hasCustomSuffix: true,
+        },
+      ],
     },
     {
-      id: 2,
-      name: 'Refactor the Legacy Codebase',
-      selected: false,
-      description:
-        '"Surely deleting this unused variable won\'t cause any issues in production."',
-      hasCustomSuffix: false,
-    },
-    {
-      id: 3,
-      name: 'Surviving Code Reviews',
-      selected: true,
-      description: 'Remember to breathe and think of kittens.',
-      hasCustomSuffix: true,
-    },
-    {
-      id: 4,
-      name: 'Deployment Day Dilemmas',
-      selected: true,
-      description: 'Will it work? Flip a coin.',
-      hasCustomSuffix: false,
-    },
-    {
-      id: 5,
-      name: 'Planning the Unrealistic Deadline',
-      selected: false,
-      description: 'Time travel theories welcome.',
-      hasCustomSuffix: true,
-    },
-    {
-      id: 6,
-      name: 'Brainstorming the Next Big App',
-      selected: false,
-      description: 'Let’s add blockchain and AI for good measure!',
-      hasCustomSuffix: false,
-    },
-    {
-      id: 7,
-      name: 'Choosing the New JavaScript Framework',
-      selected: true,
-      description: 'Just pick one, we’ll change it next month anyway.',
-      hasCustomSuffix: false,
-    },
-    {
-      id: 8,
-      name: 'Argue Over Tabs vs Spaces',
-      selected: true,
-      description: '01010100 01100001 01100010 01110011 00100001',
-      hasCustomSuffix: false,
-    },
-    {
-      id: 9,
-      name: 'Fixing Production Issues',
-      selected: true,
-      description: 'Also known as "How is this even working?"',
-      hasCustomSuffix: true,
+      title: 'Group 2',
+      description: 'Description for group 2',
+      items: [
+        {
+          id: 6,
+          name: 'Brainstorming the Next Big App',
+          selected: false,
+          description: 'Let’s add blockchain and AI for good measure!',
+          hasCustomSuffix: false,
+        },
+        {
+          id: 7,
+          name: 'Choosing the New JavaScript Framework',
+          selected: true,
+          description: 'Just pick one, we’ll change it next month anyway.',
+          hasCustomSuffix: false,
+        },
+        {
+          id: 8,
+          name: 'Argue Over Tabs vs Spaces',
+          selected: true,
+          description: '01010100 01100001 01100010 01110011 00100001',
+          hasCustomSuffix: false,
+        },
+        {
+          id: 9,
+          name: 'Fixing Production Issues',
+          selected: true,
+          description: 'Also known as "How is this even working?"',
+          hasCustomSuffix: true,
+        },
+      ],
     },
   ],
   isReadOnly: false,
@@ -244,13 +247,17 @@ NotDraggable.storyName = 'Disabled reordering and displaying drag handle'
 
 export const Minimal = createTemplate().bind({})
 Minimal.args = {
-  header: 'Minimal Checklist',
-  subtitle: 'Simplified and Streamlined',
   description: '',
-  items: [
-    { id: 1, name: 'Simple', selected: false, hasCustomSuffix: false },
-    { id: 2, name: 'Yet', selected: true, hasCustomSuffix: false },
-    { id: 3, name: 'Elegant', selected: false, hasCustomSuffix: false },
+  groups: [
+    {
+      title: 'Group 1',
+      description: 'Description for group 1',
+      items: [
+        { id: 1, name: 'Simple', selected: false, hasCustomSuffix: false },
+        { id: 2, name: 'Yet', selected: true, hasCustomSuffix: false },
+        { id: 3, name: 'Elegant', selected: false, hasCustomSuffix: false },
+      ],
+    },
   ],
   shouldDisplayCheckboxes: true,
 }
