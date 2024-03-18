@@ -3,7 +3,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   TemplateRef,
   ViewChild,
@@ -62,7 +61,6 @@ export class NggSortableListComponent {
    */
   toggleSelection(item: SortableListItem) {
     item.selected = !item.selected
-    this.handleCombinedListToggle(item)
     this.emitCheckListItem(item)
   }
 
@@ -198,18 +196,6 @@ export class NggSortableListComponent {
    */
   private emitCheckListItem(item: SortableListItem) {
     this.itemSelectionChanged.emit({ changedItem: item, groups: this.groups })
-  }
-
-  /**
-   * Handles the toggle for a combined list item.
-   *
-   * @param item - The checklist item to toggle.
-   */
-  private handleCombinedListToggle(item: SortableListItem) {
-    // const index = this.items.findIndex((i) => i.id === item.id)
-    // if (index !== -1) {
-    //   this.items[index] = item
-    // }
   }
 
   /**
