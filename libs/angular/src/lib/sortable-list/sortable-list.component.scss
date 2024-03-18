@@ -1,7 +1,6 @@
 .item-list {
   width: 100%;
   display: block;
-  background: white;
 }
 
 label.item {
@@ -9,16 +8,16 @@ label.item {
 }
 
 .item-box {
-  color: rgba(0, 0, 0, 0.87);
+  background-color: var(--sg-card-background);
+  color: var(--text-primary-color);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background: white;
   font-size: 14px;
   margin: 5px 0px;
-  border: 1px solid #cecece;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
 }
 
@@ -44,7 +43,7 @@ label.item {
 
 .item-list-header-subtitle {
   font-size: 0.75rem;
-  color: #737373;
+  color: var(--text-primary-color);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -67,7 +66,6 @@ label.item {
 }
 
 .item-grip-icon {
-  color: #cecece;
   font-weight: 400;
   padding: 0.75rem 1rem 0.75rem 0rem;
 }
@@ -81,7 +79,7 @@ label.item {
   pointer-events: all !important;
 }
 
-.cdk-drop-list:not(.cdk-drag-placeholder) label {
+.cdk-drop-list.drag-enabled:not(.cdk-drag-placeholder) label {
   cursor: grab;
 }
 
@@ -96,7 +94,6 @@ label.item {
 }
 
 .item-custom-placeholder {
-  background: rgb(237, 237, 237);
   border: dotted 1px #999;
   min-height: 44px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);

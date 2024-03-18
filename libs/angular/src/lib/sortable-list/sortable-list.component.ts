@@ -211,7 +211,11 @@ export class NggSortableListComponent {
     if (groupElements && groupElements.length > groupIndex) {
       const itemElements = groupElements[groupIndex].querySelectorAll('.item')
       if (itemElements && itemElements.length > itemIndex) {
-        itemElements[itemIndex].focus()
+        if (this.shouldDisplayCheckboxes) {
+          itemElements[itemIndex].querySelector('input').focus()
+        } else {
+          itemElements[itemIndex].focus()
+        }
         this.focusedIndex[groupIndex] = itemIndex
       }
     }

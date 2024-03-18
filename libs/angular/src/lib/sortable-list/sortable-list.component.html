@@ -7,6 +7,7 @@
       <div
         *ngFor="let group of groups; let g_i = index"
         class="item-list-group"
+        [class.drag-enabled]="isDraggable && !isReadOnly"
         role="list"
         cdkDropList
         [cdkDropListData]="group.items"
@@ -41,7 +42,7 @@
             (keydown.arrowDown)="onArrowKeydown(g_i, i + 1, $event)"
             (keydown.arrowUp)="onArrowKeydown(g_i, i - 1, $event)"
             class="form-control item-control align-items-center item"
-            [tabindex]="itemHasFocus(g_i, i) ? 0 : -1"
+            [tabindex]="shouldDisplayCheckboxes ? '-1' : '0'"
           >
             <div class="form-control">
               <input
@@ -77,7 +78,7 @@
               </div>
               <i></i>
             </div>
-            <div *ngIf="isDraggable" class="item-grip-icon">
+            <div *ngIf="isDraggable && !isReadOnly" class="item-grip-icon">
               <i class="sg-icon sg-icon-grip-vertical text-primary"></i>
             </div>
           </label>
