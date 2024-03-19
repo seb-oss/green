@@ -105,12 +105,6 @@
     }
   },
   {
-    "id": "components-layout-flexbox--flexbox",
-    "name": "Flexbox",
-    "title": "Components/Layout/Flexbox",
-    "customParams": {}
-  },
-  {
     "id": "components-form-textarea--text-area",
     "name": "TextArea",
     "title": "Components/Form/TextArea",
@@ -121,9 +115,9 @@
     }
   },
   {
-    "id": "components-form--text",
-    "name": "Text",
-    "title": "Components/Form",
+    "id": "components-layout-flexbox--flexbox",
+    "name": "Flexbox",
+    "title": "Components/Layout/Flexbox",
     "customParams": {}
   },
   {
@@ -163,6 +157,12 @@
         "component-radiobutton"
       ]
     }
+  },
+  {
+    "id": "components-form--text",
+    "name": "Text",
+    "title": "Components/Form",
+    "customParams": {}
   },
   {
     "id": "components-form-input--input",
@@ -437,22 +437,22 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
-    "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
-    }
-  },
-  {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
     "customParams": {
       "componentIds": [
         "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
       ]
     }
   },

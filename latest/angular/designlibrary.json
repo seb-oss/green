@@ -1,5 +1,65 @@
 [
   {
+    "id": "components-sortable-list--default",
+    "name": "Default",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
+    "id": "components-sortable-list--with-custom-template",
+    "name": "With Custom suffix template",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
+    "id": "components-sortable-list--default-sortable-checklist",
+    "name": "Separate Unchecked List",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
+    "id": "components-sortable-list--read-only",
+    "name": "Read Only",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
+    "id": "components-sortable-list--not-draggable",
+    "name": "Disabled reordering and displaying drag handle",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
+    "id": "components-sortable-list--minimal",
+    "name": "Minimal",
+    "title": "Components/Sortable list",
+    "customParams": {
+      "componentIds": [
+        "sortable-list"
+      ]
+    }
+  },
+  {
     "id": "components-slider--default",
     "name": "Default",
     "title": "Components/Slider",
