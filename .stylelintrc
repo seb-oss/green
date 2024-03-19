@@ -8,9 +8,14 @@
     "max-nesting-depth": 4,
     "selector-max-compound-selectors": 4,
     "scss/at-rule-no-unknown": true,
-    "selector-no-qualifying-type": [true, {
-      "ignore": ["attribute", "class"]
-    }
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": [
+          "attribute",
+          "class"
+        ]
+      }
     ]
   }
 }

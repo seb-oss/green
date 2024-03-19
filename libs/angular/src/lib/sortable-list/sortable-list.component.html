@@ -1,0 +1,89 @@
+<div class="item-list">
+  <ng-container>
+    <p class="item-list-header">
+      <span class="item-list-header-title">{{ description }}</span>
+    </p>
+    <div #sortableListGroups cdkDropListGroup>
+      <div
+        *ngFor="let group of groups; let g_i = index"
+        class="item-list-group"
+        [class.drag-enabled]="isDraggable && !isReadOnly"
+        role="list"
+        cdkDropList
+        [cdkDropListData]="group.items"
+        [id]="g_i.toString()"
+        (cdkDropListDropped)="onDragDrop($event)"
+      >
+        <p
+          *ngIf="group.title && group.title.length > 0"
+          class="item-list-header"
+        >
+          <span class="item-list-header-title">{{ group.title }}</span>
+        </p>
+        <p
+          *ngIf="group.description && group.description.length > 0"
+          class="item-list-header-description"
+        >
+          {{ group.description }}
+        </p>
+        <div
+          *ngFor="let checklistItem of group.items; let i = index"
+          [cdkDragDisabled]="!isDraggable || isReadOnly"
+          [cdkDragData]="checklistItem"
+          cdkDrag
+          cdkDragLockAxis="y"
+          class="item-box"
+          role="listitem"
+        >
+          <div *cdkDragPlaceholder class="item-custom-placeholder"></div>
+          <label
+            (keydown.alt.arrowDown)="onAltArrowKeydown(g_i, i, i + 1, $event)"
+            (keydown.alt.arrowUp)="onAltArrowKeydown(g_i, i, i - 1, $event)"
+            (keydown.arrowDown)="onArrowKeydown(g_i, i + 1, $event)"
+            (keydown.arrowUp)="onArrowKeydown(g_i, i - 1, $event)"
+            class="form-control item-control align-items-center item"
+            [tabindex]="shouldDisplayCheckboxes ? '-1' : '0'"
+          >
+            <div class="form-control">
+              <input
+                (change)="toggleSelection(checklistItem)"
+                [checked]="checklistItem.selected"
+                [disabled]="isReadOnly"
+                [type]="shouldDisplayCheckboxes ? 'checkbox' : 'hidden'"
+              />
+              <div class="item-box-title">
+                <span name="agendaItemName"
+                  >{{ checklistItem.name }}
+                  <span
+                    *ngIf="checklistItem.hasCustomSuffix"
+                    class="item-list-suffix"
+                  >
+                    <ng-container
+                      *ngTemplateOutlet="
+                        suffixTemplate;
+                        context: { $implicit: checklistItem }
+                      "
+                      class="user-icon"
+                    >
+                    </ng-container>
+                  </span>
+                </span>
+                <br />
+                <span *ngIf="!!checklistItem.description">
+                  <span class="item-list-suffix" name="agendaItemToolTip">
+                    {{ checklistItem.description }}
+                  </span>
+                  <br />
+                </span>
+              </div>
+              <i></i>
+            </div>
+            <div *ngIf="isDraggable && !isReadOnly" class="item-grip-icon">
+              <i class="sg-icon sg-icon-grip-vertical text-primary"></i>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
