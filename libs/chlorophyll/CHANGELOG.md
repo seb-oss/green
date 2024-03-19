@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+
+### Minor Changes
+
+- d4e06e7: New icon: `grip-vertical`
+
 ## 3.1.3
 
 ### Patch Changes
