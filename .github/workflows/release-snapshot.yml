@@ -1,0 +1,30 @@
+name: Release Snapshot
+
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+
+jobs:
+  release_snapshot:
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Create snapshot version
+        if: contains(github.event.comment.body, '/release-snapshot')
+        run: yarn changeset version --snapshot snapshot
+
+      - name: Build libraries
+        if: contains(github.event.comment.body, '/release-snapshot')
+        run: yarn build:libs
+
+      - name: Save PR number
+        run: |
+          echo ${{ github.event.issue.number }} > ./dist/libs/PR_NUMBER
+
+      - name: Publish artifact
+        if: contains(github.event.comment.body, '/release-snapshot')
+        run: yarn publish:libs
+
+      - name: Publish snapshot version
+        if: contains(github.event.comment.body, '/release-snapshot')
+        run: yarn changeset publish --tag snapshot --no-git-tag
