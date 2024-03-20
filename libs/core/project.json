@@ -27,8 +27,8 @@
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {
-            "glob": "README.md",
-            "input": ".",
+            "glob": "(README.md|setup-jest.js|jest-preset.cjs)",
+            "input": "libs/core",
             "output": "."
           }
         ],
