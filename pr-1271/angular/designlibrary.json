@@ -1,5 +1,17 @@
 [
   {
+    "id": "testing--page",
+    "name": "Page",
+    "title": "Testing",
+    "customParams": {}
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
     "id": "components-sortable-list--default",
     "name": "Default",
     "title": "Components/Sortable list",
@@ -434,36 +446,6 @@
     }
   },
   {
-    "id": "components-badge--multiple",
-    "name": "Multiple",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--default",
-    "name": "Default",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--custom",
-    "name": "Custom",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
     "id": "components-accordion--simple",
     "name": "Simple",
     "title": "Components/Accordion",
@@ -494,10 +476,34 @@
     }
   },
   {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
+    "id": "components-badge--multiple",
+    "name": "Multiple",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--custom",
+    "name": "Custom",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
   },
   {
     "id": "components-form-input--default",
