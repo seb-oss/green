@@ -175,15 +175,15 @@
     }
   },
   {
-    "id": "components-iconbutton--default-story",
-    "name": "Default",
-    "title": "Components/IconButton",
-    "customParams": {}
-  },
-  {
     "id": "components-form-group--page",
     "name": "Page",
     "title": "Components/Form/Group",
+    "customParams": {}
+  },
+  {
+    "id": "components-iconbutton--default-story",
+    "name": "Default",
+    "title": "Components/IconButton",
     "customParams": {}
   },
   {
