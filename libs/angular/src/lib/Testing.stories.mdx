@@ -1,0 +1,72 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="Testing" />
+
+# Testing Angular applications built with Green
+
+## Default Jasmine + Karma setup
+
+The default Jasmine + Karma setup should work out of the box with Green. For more info, read the official Angular documentation on [testing](https://angular.io/guide/testing).
+
+## Jest
+
+Because some of the components in Green are Web Components, and Jest runs in a Node environment, Jest needs some extra configuration to work with Green.
+
+For example, if you run into errors like `Jest encountered an unexpected token`, this is probably the reason.
+
+To make this is seamless as possible, we provide some pre-packaged configuration that you can add.
+
+First, you need to make sure your jest config is in Javascript and not Typescript. If you have a `jest.config.ts` file, rename it to `jest.config.cjs`.
+
+The, change the `const config = { ... }` to `module.exports = { ... }`. Also remove the `export default config` line.
+
+Then, you can extend your configuration like this:
+
+```js
+// import green jest config
+const greenJestConfig = require('@sebgroup/green-core/green-jest-config.cjs')
+
+// apply the green jest config
+module.exports = greenJestConfig.apply({
+  // Your existing config, for example:
+  clearMocks: true,
+  coverageProvider: 'v8',
+  testEnvironment: 'jsdom',
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+})
+```
+
+This will apply the necessary configuration to make Jest work with Green. Specifically, it will add suitable `transformIgnorePatterns` and run setup that mocks various browser APIs that are not available in Node.
+
+Now you should be able to use jest normally.
+
+### Interacting with Green web components in a test
+
+To interact with Green web components in a test, you can import types from the `@sebgroup/green-core` package, nd use that when querying the DOM.
+
+```ts
+it('should render disply correct value in dropdown', async () => {
+  const fixture = TestBed.createComponent(AppComponent)
+  fixture.detectChanges()
+  const compiled = fixture.nativeElement as HTMLElement
+
+  // Query the DOM using the GdsDropdown type
+  const dropdown = compiled.querySelector<GdsDropdown>(
+    '[gds-element="gds-dropdown"]'
+  )!
+
+  // Now you can access properties of the underlying component, such as setting value
+  dropdown.value = 'some_value'
+
+  // Wait for both `updateComplete` and `setTimeout` (for the next event loop tick)
+  // This is usually enough to let the Web Component work out it's internal state
+  await dropdown.updateComplete
+  await new Promise((resolve) => setTimeout(resolve, 0))
+
+  // Now we can check with expect as usual
+  expect(dropdown?.displayValue).toContain('Some Value')
+})
+```
+
+Check the component's API documentation for more information on how to interact with the components.

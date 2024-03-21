@@ -8,9 +8,17 @@
  */
 
 module.exports = {
-  transformIgnorePatterns: [
-    'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs/)',
-  ],
+  apply: (config) => {
+    config.transformIgnorePatterns = [
+      ...(config.transformIgnorePatterns || []),
+      'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs/)',
+    ]
 
-  setupFilesAfterEnv: [__dirname + '/setup-jest.js'],
+    config.setupFilesAfterEnv = [
+      ...(config.setupFilesAfterEnv || []),
+      __dirname + '/setup-jest.js',
+    ]
+
+    return config
+  },
 }

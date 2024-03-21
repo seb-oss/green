@@ -5,7 +5,7 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts", "src/components/dropdown/dropdown.test.js"],
+  "include": ["**/*.ts"],
   "exclude": [
     "**/*.test.ts",
     "**/*.react.ts",
