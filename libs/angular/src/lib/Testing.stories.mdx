@@ -10,15 +10,13 @@ The default Jasmine + Karma setup should work out of the box with Green. For mor
 
 ## Jest
 
-Because some of the components in Green are Web Components, and Jest runs in a Node environment, Jest needs some extra configuration to work with Green.
+Because some of the components in Green are Web Components, and Jest runs in a Node environment, Jest needs some extra configuration to work with Green. For example, if you run into errors like `Jest encountered an unexpected token`, this is probably the reason.
 
-For example, if you run into errors like `Jest encountered an unexpected token`, this is probably the reason.
+To make this as seamless as possible, Green provides some pre-packaged configuration that you can apply to your Jest configuration.
 
-To make this is seamless as possible, we provide some pre-packaged configuration that you can add.
+First, you need to make sure your Jest config is written in Javascript and not Typescript, or convert it if it is. If you have a `jest.config.ts` file, rename it to `jest.config.cjs`.
 
-First, you need to make sure your jest config is in Javascript and not Typescript. If you have a `jest.config.ts` file, rename it to `jest.config.cjs`.
-
-The, change the `const config = { ... }` to `module.exports = { ... }`. Also remove the `export default config` line.
+Then, change the `const config = { ... }` to `module.exports = { ... }`. Also remove the `export default config` line.
 
 Then, you can extend your configuration like this:
 
@@ -43,17 +41,21 @@ Now you should be able to use jest normally.
 
 ### Interacting with Green web components in a test
 
-To interact with Green web components in a test, you can import types from the `@sebgroup/green-core` package, nd use that when querying the DOM.
+To interact with Green web components in a test, you can import types from the `@sebgroup/green-core` package, and use that when querying the DOM.
 
 ```ts
-it('should render disply correct value in dropdown', async () => {
+// Import types from Green core:
+import type { GdsDropdown } from '@sebgroup/green-core'
+
+// Then in your test:
+it('should display correct value in dropdown', async () => {
   const fixture = TestBed.createComponent(AppComponent)
   fixture.detectChanges()
   const compiled = fixture.nativeElement as HTMLElement
 
   // Query the DOM using the GdsDropdown type
   const dropdown = compiled.querySelector<GdsDropdown>(
-    '[gds-element="gds-dropdown"]'
+    '[gds-element="gds-dropdown"]' // This is the attribute that Green components use to identify themselves, since the element name itself will have a scoping suffix.
   )!
 
   // Now you can access properties of the underlying component, such as setting value
