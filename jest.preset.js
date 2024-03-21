@@ -1,9 +1,8 @@
 const nxPreset = require('@nx/jest/preset').default
-const greenCorePreset = require('./libs/core/jest-preset.cjs')
+const greenConfig = require('./libs/core/green-jest-config.cjs')
 
-module.exports = {
+module.exports = greenConfig.apply({
   ...nxPreset,
-  ...greenCorePreset,
 
   /* TODO: Update to latest Jest snapshotFormat
    * By default Nx has kept the older style of Jest Snapshot formats
@@ -15,4 +14,4 @@ module.exports = {
    * More info: https://jestjs.io/docs/upgrading-to-jest29#snapshot-format
    */
   snapshotFormat: { escapeString: true, printBasicPrototype: true },
-}
+})
