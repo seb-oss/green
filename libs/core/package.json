@@ -40,6 +40,9 @@
     "./localization": {
       "types": "./localization.d.ts",
       "default": "./localization.js"
+    },
+    "./jest-config": {
+      "default": "./green-jest-config.cjs"
     }
   }
 }
