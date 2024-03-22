@@ -69,10 +69,10 @@ import type { GdsDropdown } from '@sebgroup/green-core'
 // Then in your test:
 it('should render correct dropdown text', async () => {
   // arrange
-  const rendered = render(<HelloWorld msg="Hello React!" />)
+  const { container } = render(<HelloWorld msg="Hello React!" />)
 
   // Query the DOM using the GdsDropdown type
-  const dropdown = rendered.baseElement.querySelector<GdsDropdown>(
+  const dropdown = container.querySelector<GdsDropdown>(
     '[gds-element="gds-dropdown"]' // This is the attribute that Green components use to identify themselves, since the element name itself will have a scoping suffix.
   )!
 
