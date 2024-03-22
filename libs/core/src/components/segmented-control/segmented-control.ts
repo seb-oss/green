@@ -1,5 +1,5 @@
 import { HTMLTemplateResult, unsafeCSS } from 'lit'
-import { query, state } from 'lit/decorators.js'
+import { query, queryAsync, state } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
@@ -8,8 +8,8 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 
-import './segment'
-import type { GdsSegment } from './segment'
+import './segment/segment'
+import type { GdsSegment } from './segment/segment'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'
@@ -26,20 +26,40 @@ export class GdsSegmentedControl extends GdsElement {
   @state()
   private _tStyles?: HTMLTemplateResult
 
-  @query('slot')
-  private _elSlot!: HTMLSlotElement
+  @queryAsync('slot')
+  private _elSlot!: Promise<HTMLSlotElement>
+
+  @query('#indicator')
+  private _elIndicator!: HTMLDivElement
 
   connectedCallback(): void {
     super.connectedCallback()
 
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
+    this.#updateIndicator()
   }
 
   render() {
     return html`${this._tStyles}<slot
         gds-allow="gds-segment"
         @click=${this.#handleSegmentClick}
-      ></slot>`
+      ></slot>
+      <div id="indicator"></div>`
+  }
+
+  #updateIndicator = () => {
+    this._elSlot.then((slot) => {
+      const segment = slot
+        .assignedElements()
+        .find((s) => (s as GdsSegment).selected) as GdsSegment
+
+      if (segment) {
+        const { left, width } = segment.getBoundingClientRect()
+
+        this._elIndicator.style.transform = `translateX(${segment.offsetLeft}px)`
+        this._elIndicator.style.width = `${width}px`
+      }
+    })
   }
 
   #handleSegmentClick = (event: Event) => {
@@ -48,19 +68,23 @@ export class GdsSegmentedControl extends GdsElement {
     ) as GdsSegment
 
     if (segment) {
-      this._elSlot
-        .assignedElements()
-        .forEach((s) => ((s as GdsSegment).selected = false))
+      this._elSlot.then((slot) => {
+        slot
+          .assignedElements()
+          .forEach((s) => ((s as GdsSegment).selected = false))
 
-      segment.selected = true
+        segment.selected = true
 
-      this.dispatchEvent(
-        new CustomEvent('gds-segment-click', {
-          detail: { segment },
-          bubbles: true,
-          composed: true,
-        })
-      )
+        this.#updateIndicator()
+
+        this.dispatchEvent(
+          new CustomEvent('gds-segment-click', {
+            detail: { segment },
+            bubbles: true,
+            composed: true,
+          })
+        )
+      })
     }
   }
 }

@@ -5,20 +5,16 @@
   padding: 0.25rem;
   gap: 0.25rem;
   border-radius: calc(infinity * 1px);
+  contain: layout;
 }
 
-::slotted([gds-element=gds-segment]) {
-  padding: 0.5rem 1rem;
-  min-width: 6.625rem;
-  text-align: center;
-  cursor: pointer;
-  border-radius: calc(infinity * 1px);
-}
-
-::slotted([gds-element=gds-segment]:hover) {
-  background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), transparent);
-}
-
-::slotted([gds-element=gds-segment][aria-selected=true]) {
+#indicator {
+  position: absolute;
+  top: 0.25rem;
+  left: 0;
+  height: calc(100% - 0.5rem);
   background-color: var(--gds-sys-color-container-container-bright);
+  border-radius: calc(infinity * 1px);
+  transition: transform 0.2s;
+  z-index: 0;
 }
