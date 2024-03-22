@@ -1,24 +1,56 @@
 
 :host {
-  display: inline-flex;
+  display: inline-block;
   background-color: var(--gds-sys-color-container-container-dim1);
-  padding: 0.25rem;
+  border: 0.25rem solid var(--gds-sys-color-container-container-dim1);
   gap: 0.25rem;
   border-radius: calc(infinity * 1px);
   contain: layout;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+
+#track {
+  box-sizing: border-box;
+  display: inline-flex;
+}
+
+#btn-prev, #btn-next {
+  position: absolute;
+  left:0;
+  border-radius: calc(infinity * 1px);
+  background-color: var(--gds-sys-color-container-container-dim1);
+  border-width: 0;
+  appearance: none;
+  height: 100%;
+  aspect-ratio: 1;
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: 0 0 4rem 0 rgba(0,0,0,0.7);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), var(--gds-sys-color-container-container-dim1));
+  }
+}
+
+#btn-next {
+  right: 0;
+  left: auto;
 }
 
 ::slotted(*) {
+  flex-shrink: 0;
+  flex-grow: 1;
   z-index: 1;
 }
 
 #indicator {
   position: absolute;
-  top: 0.25rem;
   left: 0;
-  height: calc(100% - 0.5rem);
+  height: 100%;
   background-color: var(--gds-sys-color-container-container-bright);
   border-radius: calc(infinity * 1px);
-  transition: transform 0.2s;
+  transition: transform 0.2s, width 0.2s;
   z-index: 0;
 }

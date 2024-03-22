@@ -7,6 +7,7 @@ import {
   getScopedTagName,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { when } from 'lit/directives/when.js'
 
 import './segment/segment'
 import type { GdsSegment } from './segment/segment'
@@ -26,40 +27,87 @@ export class GdsSegmentedControl extends GdsElement {
   @state()
   private _tStyles?: HTMLTemplateResult
 
-  @queryAsync('slot')
-  private _elSlot!: Promise<HTMLSlotElement>
+  @query('slot')
+  private _elSlot!: HTMLSlotElement
 
   @query('#indicator')
   private _elIndicator!: HTMLDivElement
+
+  @query('#track')
+  private _elTrack!: HTMLDivElement
+
+  @state()
+  private _showPrevButton = false
+
+  @state()
+  private _showNextButton = false
 
   connectedCallback(): void {
     super.connectedCallback()
 
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-    this.#updateIndicator()
   }
 
   render() {
-    return html`${this._tStyles}<slot
-        gds-allow="gds-segment"
-        @click=${this.#handleSegmentClick}
-      ></slot>
-      <div id="indicator"></div>`
+    return html`${this._tStyles}
+      <div id="track">
+        ${when(
+          this._showPrevButton,
+          () =>
+            html`<button id="btn-prev" @click=${this.#scrollRight}>
+              &lt;
+            </button>`
+        )}
+
+        <slot
+          @slotchange=${this.#handleSlotChange}
+          gds-allow="gds-segment"
+          @click=${this.#handleSegmentClick}
+        ></slot>
+        <div id="indicator"></div>
+
+        ${when(
+          this._showNextButton,
+          () =>
+            html`<button id="btn-next" @click=${this.#scrollLeft}>&gt;</button>`
+        )}
+      </div>`
+  }
+
+  #handleSlotChange = () => {
+    this.#updateIndicator()
+    this.#updateScrollBtnState()
+  }
+
+  #scrollLeft = () => {
+    this.scrollLeft -= 32
+    this.#updateScrollBtnState()
+  }
+
+  #scrollRight = () => {
+    this.scrollLeft += 32
+    this.#updateScrollBtnState()
+  }
+
+  #updateScrollBtnState = () => {
+    const { clientWidth } = this._elTrack
+    const { scrollLeft, scrollWidth } = this
+
+    console.log(scrollLeft, scrollWidth, clientWidth)
+
+    this._showPrevButton = scrollLeft > 0
+    this._showNextButton = scrollLeft + clientWidth < scrollWidth
   }
 
   #updateIndicator = () => {
-    this._elSlot.then((slot) => {
-      const segment = slot
-        .assignedElements()
-        .find((s) => (s as GdsSegment).selected) as GdsSegment
+    const segment = this._elSlot
+      .assignedElements()
+      .find((s) => (s as GdsSegment).selected) as GdsSegment
 
-      if (segment) {
-        const { left, width } = segment.getBoundingClientRect()
-
-        this._elIndicator.style.transform = `translateX(${segment.offsetLeft}px)`
-        this._elIndicator.style.width = `${width}px`
-      }
-    })
+    if (segment) {
+      this._elIndicator.style.transform = `translateX(${segment.offsetLeft}px)`
+      this._elIndicator.style.width = `${segment.offsetWidth}px`
+    }
   }
 
   #handleSegmentClick = (event: Event) => {
@@ -68,23 +116,21 @@ export class GdsSegmentedControl extends GdsElement {
     ) as GdsSegment
 
     if (segment) {
-      this._elSlot.then((slot) => {
-        slot
-          .assignedElements()
-          .forEach((s) => ((s as GdsSegment).selected = false))
+      this._elSlot
+        .assignedElements()
+        .forEach((s) => ((s as GdsSegment).selected = false))
 
-        segment.selected = true
+      segment.selected = true
 
-        this.#updateIndicator()
+      this.#updateIndicator()
 
-        this.dispatchEvent(
-          new CustomEvent('gds-segment-click', {
-            detail: { segment },
-            bubbles: true,
-            composed: true,
-          })
-        )
-      })
+      this.dispatchEvent(
+        new CustomEvent('gds-segment-click', {
+          detail: { segment },
+          bubbles: true,
+          composed: true,
+        })
+      )
     }
   }
 }
