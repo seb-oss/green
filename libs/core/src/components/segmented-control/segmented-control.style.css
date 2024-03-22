@@ -8,6 +8,10 @@
   contain: layout;
 }
 
+::slotted(*) {
+  z-index: 1;
+}
+
 #indicator {
   position: absolute;
   top: 0.25rem;

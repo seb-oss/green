@@ -26,11 +26,8 @@ export class GdsSegment extends GdsElement {
   }
 
   render() {
-    return html`<button><slot></slot></button>`
-  }
-
-  @watch('selected')
-  private _handleSelectedChange() {
-    this.setAttribute('aria-selected', String(this.selected))
+    return html`<button aria-selected=${String(this.selected)}>
+      <slot></slot>
+    </button>`
   }
 }
