@@ -1,8 +1,8 @@
 /**
- * This preset can be used when using jest for testing an application that directly or
+ * This config can be used when using jest for testing an application that directly or
  * indirectly (through green-react or green-angular) use the Green Core web components.
  *
- * The preset includes the following:
+ * The config includes the following:
  * - `transformIgnorePatterns` to ignore transforming certain Green and Lit files
  * - `setupFilesAfterEnv` that mocks some browser APIs that are used by the web components
  */
