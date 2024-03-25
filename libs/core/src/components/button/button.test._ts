@@ -1,17 +1,16 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement, timeout } from '../../utils/testing/index.js'
 import sinon from 'sinon'
 
 import '../../../../../dist/libs/core/src/index.js'
-import type { GdsButton } from './button'
+import type { GdsButton } from './button.js'
 
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '../../../../../dist/libs/core/src/index.js'
-import { time } from 'console'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -19,6 +18,12 @@ describe('<gds-button>', () => {
   describe('Rendering', () => {
     it('should render button', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
+
+      await el.updateComplete
+
+      console.log(el);
+      console.log(el.shadowRoot?.innerHTML);
+      
 
       const innerButton = el.shadowRoot?.querySelector('button')
 

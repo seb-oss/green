@@ -19,9 +19,6 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/react',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  transformIgnorePatterns: [
-    'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs/)',
-  ],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/../..',
   }),

@@ -4,16 +4,16 @@ import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 import { time } from 'console'
 
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement, timeout } from '../../utils/testing/index.js'
 import '../../../../../dist/libs/core/src/index.js'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '../../../../../dist/libs/core/src/index.js'
 
-import type { GdsInput } from './input'
+import type { GdsInput } from './input.js'
 
-const html = htmlTemplateTagFactory(testingHtml)
+const html = htmlTemplateTagFactory(testingHtml) 
 
 for (const variant of ['default', 'simplified'] as const) {
   describe('<gds-input>', () => {
@@ -22,6 +22,9 @@ for (const variant of ['default', 'simplified'] as const) {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}" label="My label"></gds-input>`
         )
+
+        await el.updateComplete
+
         const labelEl = el.shadowRoot?.querySelector('label')
 
         expect(labelEl).to.exist
