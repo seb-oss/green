@@ -1,7 +1,6 @@
 @use '../../common';
 
 // include components used by modal
-@use '../../components/close';
 @use '../../components/backdrop';
 
 $box-shadow: var(--sg-modal-box-shadow);
