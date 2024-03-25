@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.10.0
+
+### Minor Changes
+
+- 43bc5d7: **Testing:**
+
+  - Export a Jest preset which can be used to make it easier to configure Jest for test apps that use Green Core web components
+
+### Patch Changes
+
+- cc5a664: **Datepicker:** Use uppercase letters in placeholder to align with UX writing guidelines
+
 ## 1.9.2
 
 ### Patch Changes
