@@ -1,4 +1,4 @@
-import { formatHelpers, Format } from 'style-dictionary'
+import { Format, formatHelpers } from 'style-dictionary'
 
 const formats: Record<string, Format> = {
   'css/theme': {
@@ -42,63 +42,21 @@ const formats: Record<string, Format> = {
   },
   'figma/json': {
     name: 'json/figma',
-    formatter: function ({ dictionary, options }) {
-      dictionary.allTokens.map((token) => {
-        if (dictionary.usesReference(token.original.value)) {
-          const refs = dictionary.getReferences(token.original.value)
-          if (options.outputReferences) {
-            refs.forEach((ref) => {
-              token.value = {
-                type: 'VARIABLE_ALIAS',
-                id: ref?.attributes?.['figma'].id,
-              }
-              if (token.attributes) {
-                token.attributes['figma'].originalLightId =
-                  ref?.attributes?.['figma'].id
-
-                if (ref.path) {
-                  token.attributes['figma'].originalLightName = ref.path
-                    .slice(1, ref.path.length)
-                    .join('/')
-                }
-              }
-            })
-
-            if (token['darkValue']) {
-              const darkRefs = dictionary.getReferences(
-                token.original['darkValue']
-              )
-              darkRefs.forEach((ref) => {
-                token['darkValue'] = {
-                  type: 'VARIABLE_ALIAS',
-                  id: ref?.attributes?.['figma'].id,
-                }
-                if (token?.attributes?.['figma']) {
-                  token.attributes['figma'].originalDarkId =
-                    ref?.attributes?.['figma'].id
-
-                  if (ref.path) {
-                    token.attributes['figma'].originalDarkName = ref.path
-                      .slice(1, ref.path.length)
-                      .join('/')
-                  }
-                }
-              })
-            }
-          }
-          refs.forEach((ref) => {
-            if (token?.attributes?.['figma']) {
-              token.attributes['figma'].resolvedType =
-                ref?.attributes?.['figma'].resolvedType
-              token.attributes['figma'].originalId =
-                ref?.attributes?.['figma'].id
-
-              token.attributes['figma'].alias = true
-            }
+    formatter: function ({ dictionary }) {
+      return (
+        '[\n  ' +
+        dictionary.allTokens
+          .map((token) => {
+            return `${JSON.stringify({
+              name: token.name,
+              value: token.value,
+              darkValue: token.darkValue,
+              type: token.type,
+            })}`
           })
-        }
-      })
-      return JSON.stringify(dictionary.tokens, null, 2) + '\n'
+          .join(',\n  ') +
+        '\n]\n'
+      )
     },
   },
 }

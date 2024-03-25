@@ -4,183 +4,83 @@
       "green": {
         "98": {
           "value": "#EAFFE8",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:75",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "95": {
           "value": "#C5FFCA",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:74",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "90": {
           "value": "#8FF9A4",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:73",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "85": {
           "value": "#81EA97",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:72",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "80": {
           "value": "#73DC8A",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:71",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "75": {
           "value": "#65CE7E",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:70",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "70": {
           "value": "#57C071",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:69",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "65": {
           "value": "#48B265",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:68",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "60": {
           "value": "#39A459",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:67",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "55": {
           "value": "#29964D",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:66",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "50": {
           "value": "#138942",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:65",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "45": {
           "value": "#007B38",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:64",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "40": {
           "value": "#006D31",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:63",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "35": {
           "value": "#00602A",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:62",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "30": {
           "value": "#005323",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:61",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "25": {
           "value": "#00461D",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:60",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "20": {
           "value": "#003916",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:59",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "15": {
           "value": "#002D10",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:58",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "10": {
           "value": "#00210E",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:57",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         },
         "5": {
           "value": "#001505",
-          "attributes": {
-            "figma": {
-              "id": "VariableID:1:56",
-              "resolvedType": "COLOR"
-            }
-          }
+          "type": "color"
         }
       }
     }

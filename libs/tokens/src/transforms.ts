@@ -12,6 +12,13 @@ const transforms: Record<
       return token.path.slice(1, token.path.length).join('/')
     },
   },
+  'name/remove-color-scheme': {
+    name: 'name/remove-color-scheme',
+    type: 'name',
+    transformer: (token: StyleDictionary.DesignToken) => {
+      return token.name.replace(/-(light|dark)$/, '')
+    },
+  },
   'color/alpha': {
     name: 'color/alpha',
     transitive: true,
