@@ -105,6 +105,12 @@
     }
   },
   {
+    "id": "components-layout-flexbox--flexbox",
+    "name": "Flexbox",
+    "title": "Components/Layout/Flexbox",
+    "customParams": {}
+  },
+  {
     "id": "components-form-textarea--text-area",
     "name": "TextArea",
     "title": "Components/Form/TextArea",
@@ -115,9 +121,9 @@
     }
   },
   {
-    "id": "components-layout-flexbox--flexbox",
-    "name": "Flexbox",
-    "title": "Components/Layout/Flexbox",
+    "id": "components-form--text",
+    "name": "Text",
+    "title": "Components/Form",
     "customParams": {}
   },
   {
@@ -157,12 +163,6 @@
         "component-radiobutton"
       ]
     }
-  },
-  {
-    "id": "components-form--text",
-    "name": "Text",
-    "title": "Components/Form",
-    "customParams": {}
   },
   {
     "id": "components-form-input--input",
@@ -470,6 +470,12 @@
     "id": "use--page",
     "name": "Page",
     "title": "Use",
+    "customParams": {}
+  },
+  {
+    "id": "testing--page",
+    "name": "Page",
+    "title": "Testing",
     "customParams": {}
   },
   {
