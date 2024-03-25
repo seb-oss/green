@@ -2,7 +2,6 @@
 
 // include components used by modal
 @use '../../components/close';
-@use '../../components/button';
 @use '../../components/backdrop';
 
 $box-shadow: var(--sg-modal-box-shadow);
