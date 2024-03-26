@@ -74,6 +74,43 @@ const config: StyleDictionary.Config = {
             colorScheme: 'dark',
           },
         },
+        {
+          destination: 'pallet-2016.css',
+          format: 'css/variables',
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+            return token.path.includes('ref')
+          },
+        },
+        {
+          destination: 'light-2016.css',
+          format: 'css/theme',
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+            return !!token.darkValue
+          },
+          options: {
+            colorScheme: 'light',
+          },
+        },
+        {
+          destination: 'dark-2016.css',
+          format: 'css/theme',
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+
+            return !!token.darkValue
+          },
+          options: {
+            colorScheme: 'dark',
+          },
+        },
       ],
     },
     scss: {
@@ -124,6 +161,102 @@ const config: StyleDictionary.Config = {
           },
           options: {
             colorScheme: 'dark',
+          },
+        },
+        {
+          destination: '_mixin-sys.scss',
+          format: 'scss/mixin',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return token.type === 'color' && !!token.darkValue
+          },
+        },
+        {
+          destination: '_mixin-ref.scss',
+          format: 'scss/mixin',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return token.type === 'color' && !token.darkValue
+          },
+        },
+        {
+          destination: '_pallet-2016.scss',
+          format: 'scss/variables',
+          filter: (token) => {
+            if (token.darkValue) {
+              return false
+            }
+            return token.version === '2016'
+          },
+          options: {
+            outputReferences: false,
+          },
+        },
+        {
+          destination: '_light-2016.scss',
+          format: 'scss/variables',
+          filter: (token) => {
+            if (!token.darkValue) {
+              return false
+            }
+            return token.version === '2016'
+          },
+          options: {
+            outputReferences: false,
+          },
+        },
+        {
+          destination: '_dark-2016.scss',
+          format: 'scss/variables',
+          filter: (token) => {
+            if (!token.darkValue) {
+              return false
+            }
+            return token.version === '2016'
+          },
+          options: {
+            outputReferences: false,
+          },
+        },
+        {
+          destination: '_mixin-sys-light-2016.scss',
+          format: 'scss/mixin',
+          options: {
+            colorScheme: 'light',
+          },
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+            return token.type === 'color' && !!token.darkValue
+          },
+        },
+
+        {
+          destination: '_mixin-sys-dark-2016.scss',
+          format: 'scss/mixin',
+          options: {
+            colorScheme: 'dark',
+          },
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+            return token.type === 'color' && !!token.darkValue
+          },
+        },
+        {
+          destination: '_mixin-ref-2016.scss',
+          format: 'scss/mixin',
+          filter: (token) => {
+            if (token.version !== '2016') {
+              return false
+            }
+            return token.type === 'color' && !token.darkValue
           },
         },
       ],
@@ -181,120 +314,6 @@ const config: StyleDictionary.Config = {
             return returnValue
           },
         },
-      ],
-    },
-    css2016: {
-      // transformGroup: 'css',
-      transforms: [
-        'attribute/cti',
-        'time/seconds',
-        'content/icon',
-        'size/rem',
-        'color/css',
-        'name/cti/kebab',
-        'color/alpha',
-      ],
-      buildPath: 'css/',
-      prefix: 'gds-',
-      files: [
-        {
-          destination: 'pallet-2016.css',
-          format: 'css/variables',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-            return token.path.includes('ref')
-          },
-        },
-        {
-          destination: 'light-2016.css',
-          format: 'css/theme',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
-          options: {
-            colorScheme: 'light',
-          },
-        },
-        {
-          destination: 'dark-2016.css',
-          format: 'css/theme',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-
-            return !!token.darkValue
-          },
-          options: {
-            colorScheme: 'dark',
-          },
-        },
-      ],
-    },
-    scss2016: {
-      //transformGroup: 'scss',
-      transforms: [
-        'attribute/cti',
-        'name/cti/kebab',
-        'time/seconds',
-        'content/icon',
-        'size/rem',
-        'color/css',
-        'color/alpha',
-      ],
-      buildPath: 'scss/',
-      prefix: 'gds-',
-      files: [
-        {
-          destination: '_pallet-2016.scss',
-          format: 'scss/variables',
-          filter: (token) => {
-            if (token.darkValue) {
-              return false
-            }
-            return token.version === '2016'
-          },
-          options: {
-            outputReferences: false,
-          },
-        },
-        {
-          destination: '_light-2016.scss',
-          format: 'scss/variables',
-          filter: (token) => {
-            if (!token.darkValue) {
-              return false
-            }
-            return token.version === '2016'
-          },
-          options: {
-            outputReferences: false,
-          },
-        },
-        {
-          destination: '_dark-2016.scss',
-          format: 'scss/variables',
-          filter: (token) => {
-            if (!token.darkValue) {
-              return false
-            }
-            return token.version === '2016'
-          },
-          options: {
-            outputReferences: false,
-          },
-        },
-      ],
-    },
-    figma2016: {
-      buildPath: 'figma/',
-      transforms: ['name/figma', 'color/alpha'],
-      files: [
         {
           format: 'json/figma',
           destination: 'variables-2016.json',
