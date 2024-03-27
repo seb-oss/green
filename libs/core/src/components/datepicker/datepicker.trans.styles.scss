@@ -37,24 +37,24 @@
     background-color: var(--sg-form-control-bg);
     box-sizing: border-box;
     color: var(--sg-text-primary);
+    cursor: text;
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
     margin: 0.5rem 0;
     min-height: 2.75rem;
-    cursor: text;
 
     &:hover {
-      background-color: var(--grey-200);
+      background-color: var(--_grey-200);
     }
 
     .input {
       @include common.padding-horizontal(5);
       @include common.add-focus('within');
       @include common.add-border-radius();
-      flex-grow: 1;
-      display: flex;
       align-items: center;
+      display: flex;
+      flex-grow: 1;
+
       &::selection,
       span::selection {
         background: transparent;
@@ -63,6 +63,7 @@
 
     .input.is-placeholder {
       opacity: 0;
+
       &:hover,
       &:focus,
       &:has(:focus) {
@@ -74,13 +75,14 @@
       display: inline-block;
 
       &:focus {
-        outline: none;
         background: color-mix(
           in srgb,
           var(--gds-sys-color-blue) 50%,
           transparent
         );
+        outline: none;
       }
+
       &::selection {
         background: transparent;
       }
@@ -90,20 +92,20 @@
       @include common.add-focus();
       @include common.add-border-radius();
       appearance: none;
+      background: transparent;
       border: 0;
       box-sizing: border-box;
+      color: var(--text-primary-color);
       cursor: pointer;
       width: 2.75rem;
-      background: transparent;
-      color: var(--text-primary-color);
 
       &:hover {
         background: var(--grey-500);
       }
 
       svg {
-        width: 1rem;
         height: 1rem;
+        width: 1rem;
       }
 
       svg > * {
@@ -116,8 +118,8 @@
     }
 
     &.small {
-      min-height: 2rem;
       font-size: 0.875rem;
+      min-height: 2rem;
     }
   }
 
@@ -151,9 +153,9 @@
       background: transparent;
       border: 0;
       cursor: pointer;
-      padding: 0.5rem 0.5rem;
-      width: 2.75rem;
       margin: 0.125rem 0.25rem;
+      padding: 0.5rem;
+      width: 2.75rem;
 
       &:hover {
         background: var(--grey-400);

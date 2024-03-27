@@ -53,8 +53,15 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
+      "dependsOn": ["css-lint"],
       "options": {
         "lintFilePatterns": ["libs/core/**/*.ts"]
+      }
+    },
+    "css-lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx stylelint \"libs/core/**/*.(scss|css)\""
       }
     },
     "test-local": {
