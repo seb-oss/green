@@ -17,7 +17,6 @@ import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import styles from './popover.styles'
-import { reference } from '@popperjs/core'
 
 /**
  * @element gds-popover
