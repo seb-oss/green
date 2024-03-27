@@ -64,7 +64,7 @@ const formats: Record<string, Format> = {
     formatter: function (args) {
       const dictionary = Object.assign({}, args.dictionary)
       const options = Object.assign(
-        { colorScheme: 'light', name: 'addVariables' },
+        { colorScheme: 'light', name: 'add-variables' },
         args.options
       )
 
