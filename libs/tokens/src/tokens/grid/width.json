@@ -1,0 +1,48 @@
+{
+    "sys": {
+        "grid": {
+            "width": {
+                "mobile": {
+                    "value": "425",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "tablet": {
+                    "value": "768",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "desktop-sm": {
+                    "value": "1024",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "desktop-md": {
+                    "value": "1440",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "desktop-lg": {
+                    "value": "2560",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

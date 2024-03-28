@@ -40,6 +40,48 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  size: {
+    name: 'size',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':host' }, args.options)
+
+      // Map each token
+      dictionary.allTokens = dictionary.allTokens.map((token) => {
+        // If the token path starts with 'ref.size' or 'sys.grid.width', convert it to pixels
+        if (
+          (token.path[0] === 'ref' && token.path[1] === 'size') ||
+          (token.path[0] === 'sys' &&
+            token.path[1] === 'grid' &&
+            token.path[2] === 'width') ||
+          (token.path[0] === 'sys' &&
+            token.path[1] === 'typography' &&
+            token.path[2] === 'size') ||
+          (token.path[0] === 'sys' &&
+            token.path[1] === 'typography' &&
+            token.path[2] === 'line-height')
+        ) {
+          return Object.assign({}, token, {
+            value: `${token.value}px`,
+            original: { value: `${token.value}px` },
+          })
+        } else {
+          return token
+        }
+      })
+
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences: options.outputReferences,
+        }) +
+        `\n}\n`
+      )
+    },
+  },
   'figma/json': {
     name: 'json/figma',
     formatter: function ({ dictionary }) {

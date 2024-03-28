@@ -1,0 +1,48 @@
+{
+    "sys": {
+        "grid": {
+            "breakpoint": {
+                "mobile": {
+                    "value": "{sys.grid.columns.4}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "VARIABLE_ALIAS"
+                        }
+                    }
+                },
+                "tablet": {
+                    "value": "{sys.grid.columns.12}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "VARIABLE_ALIAS"
+                        }
+                    }
+                },
+                "desktop-sm": {
+                    "value": "{sys.grid.columns.12}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "VARIABLE_ALIAS"
+                        }
+                    }
+                },
+                "desktop-md": {
+                    "value": "{sys.grid.columns.12}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "VARIABLE_ALIAS"
+                        }
+                    }
+                },
+                "desktop-lg": {
+                    "value": "{sys.grid.columns.12}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "VARIABLE_ALIAS"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

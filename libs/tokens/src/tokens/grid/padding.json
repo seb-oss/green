@@ -1,0 +1,72 @@
+{
+    "sys": {
+        "grid": {
+            "padding": {
+                "none": {
+                    "value": "{ref.size.0}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "xs": {
+                    "value": "{ref.size.2}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "s": {
+                    "value": "{ref.size.3}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "m": {
+                    "value": "{ref.size.5}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "l": {
+                    "value": "{ref.size.6}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "xl": {
+                    "value": "{ref.size.7}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "2xl": {
+                    "value": "{ref.size.9}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "3xl": {
+                    "value": "{ref.size.12}",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

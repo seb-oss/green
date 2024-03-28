@@ -1,0 +1,16 @@
+gds-grid {
+  row-gap: 1lh;
+  --gds-debug-color: hsla(241, 100%, 66%, 0.4);
+  --gds-debug-color-container: rgba(255, 82, 197, 0.4);
+  & > div {
+    display: flex;
+    border: 1px solid var(--gds-debug-color);
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+  }
+}

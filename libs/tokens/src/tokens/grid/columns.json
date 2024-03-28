@@ -1,0 +1,62 @@
+{
+    "sys": {
+        "grid": {
+            "columns": {
+                "2": {
+                    "value": "2",
+                    "darkValue": "2",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "4": {
+                    "value": "4",
+                    "darkValue": "4",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "6": {
+                    "value": "6",
+                    "darkValue": "6",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "8": {
+                    "value": "8",
+                    "darkValue": "8",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "12": {
+                    "value": "12",
+                    "darkValue": "12",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                },
+                "24": {
+                    "value": "24",
+                    "darkValue": "24",
+                    "attributes": {
+                        "figma": {
+                            "resolvedType": "FLOAT"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
