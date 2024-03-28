@@ -4,123 +4,63 @@
       "padding": {
         "0": {
           "value": "{ref.size.0}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "2": {
           "value": "{ref.size.1}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "4": {
           "value": "{ref.size.2}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "8": {
           "value": "{ref.size.3}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "12": {
           "value": "{ref.size.4}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "16": {
           "value": "{ref.size.5}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "24": {
           "value": "{ref.size.6}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "32": {
           "value": "{ref.size.7}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "40": {
           "value": "{ref.size.8}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "48": {
           "value": "{ref.size.9}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "64": {
           "value": "{ref.size.10}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "80": {
           "value": "{ref.size.11}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "96": {
           "value": "{ref.size.12}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "112": {
           "value": "{ref.size.13}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         },
         "120": {
           "value": "{ref.size.14}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "FLOAT"
-            }
-          }
+          "type": "float"
         }
       }
     }
