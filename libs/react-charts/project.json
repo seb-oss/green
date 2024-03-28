@@ -58,6 +58,7 @@
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
+      "dependsOn": ["tokens:build"],
       "options": {
         "uiFramework": "@storybook/react",
         "configDir": "libs/react-charts/.storybook",
@@ -71,6 +72,7 @@
     },
     "build-storybook": {
       "executor": "nx:run-commands",
+      "dependsOn": ["tokens:build"],
       "options": {
         "commands": [
           {
