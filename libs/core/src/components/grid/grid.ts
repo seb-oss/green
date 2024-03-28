@@ -16,10 +16,12 @@ const gridCSS = unsafeCSS(grid)
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
 type GridGap = GridSizes
 type GridPadding = GridSizes
+// const BreakpointPattern = /lg:(\d+)\s*md:(\d+)\s*sm:(\d+)/
+const BreakpointPattern = /(lg:(\d+))?\s*(md:(\d+))?\s*(sm:(\d+))?/
 
 /**
  * @element gds-grid
- * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `fluid` attribute.
+ * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
  *
  * @status beta
  *
@@ -65,14 +67,14 @@ export class GdsGrid extends LitElement {
   padding?: GridPadding
 
   /**
-   * @property {boolean} fluid - A boolean indicating whether the grid should be fluid. If true, the grid will automatically adjust the column size based on the content.
+   * @property {boolean} auto-columns - A boolean indicating whether the grid should be fluid. If true, the grid will automatically adjust the column size based on the content.
    * @example
    * ```html
-   * <gds-grid fluid></gds-grid>
+   * <gds-grid auto-columns></gds-grid>
    * ```
    */
-  @property({ attribute: 'fluid', type: String })
-  fluid?: boolean
+  @property({ attribute: 'auto-columns', type: String })
+  autoColumns?: boolean
 
   /**
    * Lifecycle method called when the element is connected to the DOM.
@@ -83,6 +85,7 @@ export class GdsGrid extends LitElement {
     this._updateColumnVariables()
     this._updateGapVariables()
     this._updatePaddingVariables()
+    this._updateAutoColumnsVariables()
   }
 
   /**
@@ -93,6 +96,7 @@ export class GdsGrid extends LitElement {
     column: css``,
     gap: css``,
     padding: css``,
+    autoColumns: css``,
   }
 
   /**
@@ -101,8 +105,10 @@ export class GdsGrid extends LitElement {
    */
   @watch('columns')
   private _updateColumnVariables() {
-    const [columnsDesktop, columnsTablet, columnsMobile] =
-      this.columns?.split(' ').map(Number) || []
+    const match = this.columns?.match(BreakpointPattern)
+    const columnsMobile = match && match[6] ? Number(match[6]) : undefined
+    const columnsTablet = match && match[4] ? Number(match[4]) : undefined
+    const columnsDesktop = match && match[2] ? Number(match[2]) : undefined
 
     const columnProperties = [
       { name: '_columns-mobile', value: columnsMobile },
@@ -180,6 +186,45 @@ export class GdsGrid extends LitElement {
     ]
 
     const cssVariables = paddingProperties
+      .filter(({ value }) => value !== undefined)
+      .map(({ name, value }) => `--${name}: ${value};`)
+      .join(' ')
+
+    this._gridVariables = {
+      ...this._gridVariables,
+      padding: css`
+        ${unsafeCSS(cssVariables)}
+      `,
+    }
+
+    this.requestUpdate('_gridVariables')
+  }
+
+  /**
+   * Watcher for the 'autoColumns' property.
+   * It updates the min-width for each column on a "--_col-width" variable.
+   */
+  @watch('autoColumns')
+  private _updateAutoColumnsVariables() {
+    const [minWidthDesktop, minWidthTablet, minWidthMobile] =
+      this.padding?.split(' ').map((val) => val || '0') || []
+
+    const minWidthProperties = [
+      {
+        name: '_min-width-mobile',
+        value: `var(--gds-sys-grid-gap-)`,
+      },
+      {
+        name: '_min-width-tablet',
+        value: `var(--gds-sys-grid-gap-)`,
+      },
+      {
+        name: '_min-width--desktop',
+        value: `var(--gds-sys-grid-gap-)`,
+      },
+    ]
+
+    const cssVariables = minWidthProperties
       .filter(({ value }) => value !== undefined)
       .map(({ name, value }) => `--${name}: ${value};`)
       .join(' ')
