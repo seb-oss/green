@@ -285,12 +285,6 @@
     "customParams": {}
   },
   {
-    "id": "components-navbar--component",
-    "name": "Component",
-    "title": "Components/Navbar",
-    "customParams": {}
-  },
-  {
     "id": "components-select--with-options",
     "name": "With options",
     "title": "Components/Select",
@@ -324,6 +318,12 @@
     "id": "components-select--expandable-information",
     "name": "Expandable information",
     "title": "Components/Select",
+    "customParams": {}
+  },
+  {
+    "id": "components-navbar--component",
+    "name": "Component",
+    "title": "Components/Navbar",
     "customParams": {}
   },
   {
