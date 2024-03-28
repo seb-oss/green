@@ -244,11 +244,6 @@ export class GdsGrid extends LitElement {
       widthMobile = s ? `${s.split(':')[1]}px` : undefined
     }
 
-    // const { l, m, s } = match?.groups || {}
-    // const widthDesktop = l ? `${l.split(':')[1]}px` : undefined
-    // const widthTablet = m ? `${m.split(':')[1]}px` : undefined
-    // const widthMobile = s ? `${s.split(':')[1]}px` : undefined
-
     const widthProperties = [
       { name: '_col-width-mobile', value: widthMobile },
       { name: '_col-width-tablet', value: widthTablet },

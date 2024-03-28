@@ -16,9 +16,9 @@
   }
 
   :host([auto-columns]) {
-    --_col-count: var(--_c);
+    --_col-count: var(--_c, 0);
     --_gap-count: calc(var(--_col-count) - 1);
-    --_total-gap-width: calc(var(--_gap-count) * var(--_gap-column));
+    --_total-gap-width: calc(var(--_gap-count) * var(--_gap-column, 0px));
     --_col-width-max: calc(
       (100% - var(--_total-gap-width)) / var(--_col-count)
     );
@@ -34,11 +34,11 @@
   --_c: var(--_columns-desktop);
   --_gap-column: var(--_gap-desktop);
   --_grid-padding: var(--_padding-desktop);
-  --_col-width: var(--_col-width-desktop, 200px);
+  --_col-width: var(--_col-width-desktop);
 }
 
 @media only screen and (max-width: 768px) {
-  :host {
+  :host(:not([auto-columns])) {
     --_c: var(--_columns-tablet);
     --_gap-column: var(--_gap-tablet);
     --_grid-padding: var(--_padding-tablet);
@@ -47,7 +47,7 @@
 }
 
 @media only screen and (max-width: 425px) {
-  :host {
+  :host(:not([auto-columns])) {
     --_c: var(--_columns-mobile);
     --_gap-column: var(--_gap-mobile);
     --_grid-padding: var(--_padding-mobile);
