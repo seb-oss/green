@@ -84,7 +84,12 @@ none: size/0
 ## Example 
 This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobile. It also has a gap of `2xl` on desktop, `m` on tablet, and `xs` on mobile. The padding is `2xl` on desktop, `xs` on tablet, and `3xl` on mobile.
 <Canvas>
-    <gds-grid columns="lg:8 md:4 sm:2" gap="2xl l xs" padding="xs s m">
+    <gds-grid 
+        columns="l:8 m:4 s:2" 
+        gap="l:2xl m:l s:xs" 
+        padding="l:2xl m:l s:xs" 
+        auto-columns="l:200 m:100 s:80"
+    >
         <div>COL: 01</div>
         <div>COL: 02</div>
         <div>COL: 03</div>
@@ -100,7 +105,7 @@ This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobil
 This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
 
 <Canvas>
-    <gds-grid columns="lg:8 md:4 sm:2" gap="2xl m xs" auto-columns>
+    <gds-grid columns="lg:8 md:4 sm:2" gap="2xl m xs" auto-columns=" m:100 s:80">
         <div>COL: 01</div>
         <div>COL: 02</div>
         <div>COL: 03</div>

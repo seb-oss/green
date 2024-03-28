@@ -14,10 +14,8 @@ import grid from './grid.style.css'
 const gridCSS = unsafeCSS(grid)
 
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
-type GridGap = GridSizes
-type GridPadding = GridSizes
-// const BreakpointPattern = /lg:(\d+)\s*md:(\d+)\s*sm:(\d+)/
-const BreakpointPattern = /(lg:(\d+))?\s*(md:(\d+))?\s*(sm:(\d+))?/
+const BreakpointPattern =
+  /(?<l>l:([a-z0-9]+))?\s*(?<m>m:([a-z0-9]+))?\s*(?<s>s:([a-z0-9]+))?/
 
 /**
  * @element gds-grid
@@ -54,7 +52,7 @@ export class GdsGrid extends LitElement {
    * ```
    */
   @property({ attribute: 'gap', type: String })
-  gap?: GridGap
+  gap?: GridSizes
 
   /**
    * @property {string} padding - The size of the padding around the grid. This can be a space-separated string of three sizes ('none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'), specifying the padding size for desktop, tablet, and mobile devices, respectively.
@@ -64,7 +62,7 @@ export class GdsGrid extends LitElement {
    * ```
    */
   @property({ attribute: 'padding', type: String })
-  padding?: GridPadding
+  padding?: GridSizes
 
   /**
    * @property {boolean} auto-columns - A boolean indicating whether the grid should be fluid. If true, the grid will automatically adjust the column size based on the content.
@@ -74,7 +72,7 @@ export class GdsGrid extends LitElement {
    * ```
    */
   @property({ attribute: 'auto-columns', type: String })
-  autoColumns?: boolean
+  autoColumns?: GridSizes
 
   /**
    * Lifecycle method called when the element is connected to the DOM.
@@ -93,10 +91,10 @@ export class GdsGrid extends LitElement {
    */
   @state()
   private _gridVariables = {
-    column: css``,
-    gap: css``,
-    padding: css``,
-    autoColumns: css``,
+    varsColumn: css``,
+    varsGap: css``,
+    varsPadding: css``,
+    varsAutoColumns: css``,
   }
 
   /**
@@ -106,14 +104,22 @@ export class GdsGrid extends LitElement {
   @watch('columns')
   private _updateColumnVariables() {
     const match = this.columns?.match(BreakpointPattern)
-    const columnsMobile = match && match[6] ? Number(match[6]) : undefined
-    const columnsTablet = match && match[4] ? Number(match[4]) : undefined
-    const columnsDesktop = match && match[2] ? Number(match[2]) : undefined
+    let columnsDesktop, columnsTablet, columnsMobile
+
+    if (this.columns && !isNaN(Number(this.columns))) {
+      // If columns is a single number, use it for all screen sizes
+      columnsDesktop = columnsTablet = columnsMobile = Number(this.columns)
+    } else {
+      const { l, m, s } = match?.groups || {}
+      columnsDesktop = l ? Number(l.split(':')[1]) : undefined
+      columnsTablet = m ? Number(m.split(':')[1]) : undefined
+      columnsMobile = s ? Number(s.split(':')[1]) : undefined
+    }
 
     const columnProperties = [
-      { name: '_columns-mobile', value: columnsMobile },
-      { name: '_columns-tablet', value: columnsTablet },
       { name: '_columns-desktop', value: columnsDesktop },
+      { name: '_columns-tablet', value: columnsTablet },
+      { name: '_columns-mobile', value: columnsMobile },
     ]
 
     const cssVariables = columnProperties
@@ -123,7 +129,7 @@ export class GdsGrid extends LitElement {
 
     this._gridVariables = {
       ...this._gridVariables,
-      column: css`
+      varsColumn: css`
         ${unsafeCSS(cssVariables)}
       `,
     }
@@ -137,23 +143,33 @@ export class GdsGrid extends LitElement {
    */
   @watch('gap')
   private _updateGapVariables() {
-    const [gapDesktop, gapTablet, gapMobile] =
-      this.gap?.split(' ').map((val) => val || '0') || []
+    const match = this.gap?.match(BreakpointPattern)
+    let gapDesktop, gapTablet, gapMobile
 
-    const columnProperties = [
-      { name: '_gap-mobile', value: `var(--gds-sys-grid-gap-${gapMobile})` },
-      { name: '_gap-tablet', value: `var(--gds-sys-grid-gap-${gapTablet})` },
-      { name: '_gap-desktop', value: `var(--gds-sys-grid-gap-${gapDesktop})` },
+    if (this.gap && !this.gap.includes(' ')) {
+      // If gap is a single value, use it for all screen sizes
+      gapDesktop = gapTablet = gapMobile = `var(--gds-sys-grid-gap-${this.gap})`
+    } else {
+      const { l, m, s } = match?.groups || {}
+      gapDesktop = l ? `var(--gds-sys-grid-gap-${l.split(':')[1]})` : undefined
+      gapTablet = m ? `var(--gds-sys-grid-gap-${m.split(':')[1]})` : undefined
+      gapMobile = s ? `var(--gds-sys-grid-gap-${s.split(':')[1]})` : undefined
+    }
+
+    const gapProperties = [
+      { name: '_gap-desktop', value: gapDesktop },
+      { name: '_gap-tablet', value: gapTablet },
+      { name: '_gap-mobile', value: gapMobile },
     ]
 
-    const cssVariables = columnProperties
+    const cssVariables = gapProperties
       .filter(({ value }) => value !== undefined)
       .map(({ name, value }) => `--${name}: ${value};`)
       .join(' ')
 
     this._gridVariables = {
       ...this._gridVariables,
-      gap: css`
+      varsGap: css`
         ${unsafeCSS(cssVariables)}
       `,
     }
@@ -167,22 +183,32 @@ export class GdsGrid extends LitElement {
    */
   @watch('padding')
   private _updatePaddingVariables() {
-    const [paddingDesktop, paddingTablet, paddingMobile] =
-      this.padding?.split(' ').map((val) => val || '0') || []
+    const match = this.padding?.match(BreakpointPattern)
+    let paddingDesktop, paddingTablet, paddingMobile
+
+    if (this.padding && !this.padding.includes(' ')) {
+      // If padding is a single value, use it for all screen sizes
+      paddingDesktop =
+        paddingTablet =
+        paddingMobile =
+          `var(--gds-sys-grid-gap-${this.gap})`
+    } else {
+      const { l, m, s } = match?.groups || {}
+      paddingDesktop = l
+        ? `var(--gds-sys-grid-gap-${l.split(':')[1]})`
+        : undefined
+      paddingTablet = m
+        ? `var(--gds-sys-grid-gap-${m.split(':')[1]})`
+        : undefined
+      paddingMobile = s
+        ? `var(--gds-sys-grid-gap-${s.split(':')[1]})`
+        : undefined
+    }
 
     const paddingProperties = [
-      {
-        name: '_padding-mobile',
-        value: `var(--gds-sys-grid-gap-${paddingMobile})`,
-      },
-      {
-        name: '_padding-tablet',
-        value: `var(--gds-sys-grid-gap-${paddingTablet})`,
-      },
-      {
-        name: '_padding-desktop',
-        value: `var(--gds-sys-grid-gap-${paddingDesktop})`,
-      },
+      { name: '_padding-desktop', value: paddingDesktop },
+      { name: '_padding-tablet', value: paddingTablet },
+      { name: '_padding-mobile', value: paddingMobile },
     ]
 
     const cssVariables = paddingProperties
@@ -192,11 +218,10 @@ export class GdsGrid extends LitElement {
 
     this._gridVariables = {
       ...this._gridVariables,
-      padding: css`
+      varsPadding: css`
         ${unsafeCSS(cssVariables)}
       `,
     }
-
     this.requestUpdate('_gridVariables')
   }
 
@@ -206,32 +231,38 @@ export class GdsGrid extends LitElement {
    */
   @watch('autoColumns')
   private _updateAutoColumnsVariables() {
-    const [minWidthDesktop, minWidthTablet, minWidthMobile] =
-      this.padding?.split(' ').map((val) => val || '0') || []
+    const match = this.autoColumns?.match(BreakpointPattern)
+    let widthDesktop, widthTablet, widthMobile
 
-    const minWidthProperties = [
-      {
-        name: '_min-width-mobile',
-        value: `var(--gds-sys-grid-gap-)`,
-      },
-      {
-        name: '_min-width-tablet',
-        value: `var(--gds-sys-grid-gap-)`,
-      },
-      {
-        name: '_min-width--desktop',
-        value: `var(--gds-sys-grid-gap-)`,
-      },
+    if (this.autoColumns && !this.autoColumns.includes(' ')) {
+      // If width is a single value, use it for all screen sizes
+      widthDesktop = widthTablet = widthMobile = `${this.autoColumns}px`
+    } else {
+      const { l, m, s } = match?.groups || {}
+      widthDesktop = l ? `${l.split(':')[1]}px` : undefined
+      widthTablet = m ? `${m.split(':')[1]}px` : undefined
+      widthMobile = s ? `${s.split(':')[1]}px` : undefined
+    }
+
+    // const { l, m, s } = match?.groups || {}
+    // const widthDesktop = l ? `${l.split(':')[1]}px` : undefined
+    // const widthTablet = m ? `${m.split(':')[1]}px` : undefined
+    // const widthMobile = s ? `${s.split(':')[1]}px` : undefined
+
+    const widthProperties = [
+      { name: '_col-width-mobile', value: widthMobile },
+      { name: '_col-width-tablet', value: widthTablet },
+      { name: '_col-width-desktop', value: widthDesktop },
     ]
 
-    const cssVariables = minWidthProperties
+    const cssVariables = widthProperties
       .filter(({ value }) => value !== undefined)
       .map(({ name, value }) => `--${name}: ${value};`)
       .join(' ')
 
     this._gridVariables = {
       ...this._gridVariables,
-      padding: css`
+      varsAutoColumns: css`
         ${unsafeCSS(cssVariables)}
       `,
     }
