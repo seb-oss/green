@@ -1,48 +1,28 @@
 {
-    "sys": {
-        "typography": {
-            "weight": {
-                "light": {
-                    "value": "300",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "regular": {
-                    "value": "400",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "book": {
-                    "value": "450",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "medium": {
-                    "value": "500",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                },
-                "bold": {
-                    "value": "700",
-                    "attributes": {
-                        "figma": {
-                            "resolvedType": "FLOAT"
-                        }
-                    }
-                }
-            }
+  "sys": {
+    "typography": {
+      "weight": {
+        "light": {
+          "value": "300",
+          "type": "float"
+        },
+        "regular": {
+          "value": "400",
+          "type": "float"
+        },
+        "book": {
+          "value": "450",
+          "type": "float"
+        },
+        "medium": {
+          "value": "500",
+          "type": "float"
+        },
+        "bold": {
+          "value": "700",
+          "type": "float"
         }
+      }
     }
+  }
 }

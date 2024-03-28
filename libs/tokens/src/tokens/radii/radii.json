@@ -3,83 +3,43 @@
     "radii": {
       "none": {
         "value": "{ref.size.0}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "xs": {
         "value": "{ref.size.2}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "s": {
         "value": "{ref.size.3}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "m": {
         "value": "{ref.size.4}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "l": {
         "value": "{ref.size.5}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "xl": {
         "value": "{ref.size.6}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "2xl": {
         "value": "{ref.size.7}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "3xl": {
         "value": "{ref.size.9}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "4xl": {
         "value": "{ref.size.12}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "full": {
         "value": "{ref.size.15}",
-        "attributes": {
-          "figma": {
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       }
     }
   }

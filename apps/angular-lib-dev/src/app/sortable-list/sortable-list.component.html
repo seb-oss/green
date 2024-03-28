@@ -1,0 +1,11 @@
+<h2>Sortable List</h2>
+<div class="container">
+  <ngg-sortable-list
+    [groups]="groups"
+    [description]="'Description'"
+    (itemSelectionChanged)="onItemSelected($event)"
+    (itemOrderChanged)="onItemOrderChanged($event)"
+    [shouldDisplayCheckboxes]="true"
+  >
+  </ngg-sortable-list>
+</div>

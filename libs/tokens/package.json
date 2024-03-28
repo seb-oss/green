@@ -12,7 +12,10 @@
     "access": "public",
     "directory": "../../dist/libs/tokens"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": {
+    "name": "Green Design System",
+    "email": "greendesignsystem@seb.se"
+  },
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

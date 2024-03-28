@@ -60,6 +60,7 @@
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
+      "dependsOn": ["copy-fonts", "tokens:build"],
       "options": {
         "uiFramework": "@storybook/html",
         "port": 4000,
@@ -75,7 +76,7 @@
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["copy-fonts"],
+      "dependsOn": ["copy-fonts", "tokens:build"],
       "options": {
         "uiFramework": "@storybook/html",
         "configDir": "libs/chlorophyll/.storybook",

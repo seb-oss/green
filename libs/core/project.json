@@ -73,6 +73,7 @@
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
+      "dependsOn": ["tokens:build"],
       "options": {
         "port": 4400,
         "configDir": "libs/core/.storybook",
@@ -89,7 +90,7 @@
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
       "inputs": ["core"],
-      "dependsOn": ["build-src"],
+      "dependsOn": ["build-src", "tokens:build"],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",
