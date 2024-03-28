@@ -6,7 +6,7 @@
     --_grid-col: repeat(var(--_c), 1fr);
     --_grid-col-start: 1;
     --_grid-col-end: -1;
-    --_gap-column: 0px;
+    --_gap-column: 0;
     display: grid;
     width: 100%;
     grid-template-columns: var(--_grid-col);
