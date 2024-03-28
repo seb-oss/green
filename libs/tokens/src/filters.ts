@@ -16,4 +16,10 @@ export default {
       return getLastWorkInName(token) === 'dark'
     },
   },
+  'color-scheme': {
+    name: 'color-scheme',
+    matcher: function (token) {
+      return 'darkValue' in token
+    },
+  },
 }

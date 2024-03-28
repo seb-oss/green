@@ -163,7 +163,7 @@ const config: StyleDictionary.Config = {
           destination: 'size.css',
           format: 'size',
           filter: function (token) {
-            return token.attributes.figma.resolvedType === 'FLOAT'
+            return token.type === 'float'
           },
           options: {
             outputReferences: true,
