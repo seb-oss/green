@@ -33,7 +33,7 @@
     @include common.add-border-radius();
     @include common.add-border();
     @include common.add-border-color();
-    align-items: center;
+    align-items: stretch;
     background-color: var(--sg-form-control-bg);
     box-sizing: border-box;
     color: var(--sg-text-primary);
@@ -44,7 +44,7 @@
     min-height: 2.75rem;
 
     &:hover {
-      background-color: var(--_grey-200);
+      background-color: var(--grey-200);
     }
 
     .input {
