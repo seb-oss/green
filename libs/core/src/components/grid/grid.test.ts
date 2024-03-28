@@ -18,7 +18,7 @@ describe('GdsGrid', () => {
     expect(element.columns).to.be.undefined
     expect(element.gap).to.be.undefined
     expect(element.padding).to.be.undefined
-    expect(element.fluid).to.be.undefined
+    expect(element.autoColumns).to.be.undefined
   })
 
   it('accepts only valid GridSizes for columns, gap, and padding', () => {

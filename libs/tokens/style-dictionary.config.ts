@@ -68,6 +68,16 @@ const config: StyleDictionary.Config = {
             selector: ':host',
           },
         },
+        {
+          destination: 'size.css',
+          format: 'size',
+          filter: function (token) {
+            return token.type === 'float'
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
       ],
     },
     css: {
@@ -157,16 +167,6 @@ const config: StyleDictionary.Config = {
           },
           options: {
             colorScheme: 'dark',
-          },
-        },
-        {
-          destination: 'size.css',
-          format: 'size',
-          filter: function (token) {
-            return token.type === 'float'
-          },
-          options: {
-            outputReferences: true,
           },
         },
       ],
