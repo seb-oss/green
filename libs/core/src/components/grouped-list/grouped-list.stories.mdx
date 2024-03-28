@@ -9,7 +9,7 @@ The `<gds-grouped-list>` element accepts `<gds-list-item>` elements as children.
 
 <Canvas>
   <div style={{ dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+    <gds-grouped-list label="Example of a basic list of items">
       <gds-list-item>Item 1</gds-list-item>
       <gds-list-item>Item 2</gds-list-item>
       <gds-list-item>Item 3</gds-list-item>
@@ -25,7 +25,7 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 
 <Canvas>
   <div style={{ dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+    <gds-grouped-list label="Example with values">
       <gds-list-item>
         <div>Key 1</div>
         <strong>Value 1</strong>
@@ -54,7 +54,7 @@ By default, the list items are displayed as `flex` containers with `space-betwee
 
 <Canvas>
   <div style={{ dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+    <gds-grouped-list label="Example with links">
       <gds-list-item>
         <div>Key 1</div>
         <strong>Value 1</strong>
@@ -100,7 +100,7 @@ The slotted elements can be styled using inline styles or CSS classes.
 
 <Canvas>
   <div style={{ dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="List label">
+    <gds-grouped-list label="Example of left aligned list">
       <gds-list-item
         style={{
           justifyContent: 'left',
@@ -133,6 +133,42 @@ The slotted elements can be styled using inline styles or CSS classes.
         <div>
           <a href="#">Link</a>
         </div>
+      </gds-list-item>
+    </gds-grouped-list>
+  </div>
+</Canvas>
+
+The slotted elements can be styled using inline styles or CSS classes.
+
+<Canvas>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-grouped-list label="Example of vertical list">
+      <gds-list-item
+        style={{
+          flexDirection: 'column',
+          borderWidth: 0,
+        }}
+      >
+        <div>Key 1</div>
+        <strong>Value 1</strong>
+      </gds-list-item>
+      <gds-list-item
+        style={{
+          flexDirection: 'column',
+          borderWidth: 0,
+        }}
+      >
+        <div>Key 2</div>
+        <strong>Value 2</strong>
+      </gds-list-item>
+      <gds-list-item
+        style={{
+          flexDirection: 'column',
+          borderWidth: 0,
+        }}
+      >
+        <div>Key 3</div>
+        <strong>Value 3</strong>
       </gds-list-item>
     </gds-grouped-list>
   </div>
