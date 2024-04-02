@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 047d2e9: fbee982: Deprecate `ValueList`
+- fbee982: Deprecate `ValueList`
 - Updated dependencies [047d2e9]
   - @sebgroup/green-core@1.11.0
 
