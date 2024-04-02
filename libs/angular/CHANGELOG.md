@@ -1,14 +1,5 @@
 # Changelog
 
-## 3.6.1
-
-### Patch Changes
-
-- feadcba: **Slideout modal**: Update sizes to match Design Library
-- Updated dependencies [43bc5d7]
-- Updated dependencies [cc5a664]
-  - @sebgroup/green-core@1.10.0
-
 ## 3.6.0
 
 ### Minor Changes

@@ -3,18 +3,28 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
+  "implicitDependencies": [
+    "tokens"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/src"
+      ],
       "options": {
         "command": "nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
       "executor": "@nx/esbuild:esbuild",
-      "outputs": ["{options.outputPath}"],
-      "format": ["esm", "cjs"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "format": [
+        "esm",
+        "cjs"
+      ],
       "platform": "browser",
       "options": {
         "packageJson": "libs/core/package.json",
@@ -27,8 +37,8 @@
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {
-            "glob": "(README.md|setup-jest.js|green-jest-config.cjs)",
-            "input": "libs/core",
+            "glob": "README.md",
+            "input": ".",
             "output": "."
           }
         ],
@@ -38,24 +48,32 @@
     },
     "build-with-types": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-src"],
+      "dependsOn": [
+        "build-src"
+      ],
       "options": {
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
     },
     "build-with-types-and-scoping": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types"],
+      "dependsOn": [
+        "build-with-types"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "dependsOn": ["css-lint"],
       "options": {
-        "lintFilePatterns": ["libs/core/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/core/**/*.ts"
+        ]
       }
     },
     "css-lint": {
@@ -66,26 +84,35 @@
     },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": [
+        "build-with-types-and-scoping"
+      ],
       "options": {
         "command": "npx wtr --node-resolve --playwright --browsers chromium firefox webkit"
       }
     },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": [
+        "build-with-types-and-scoping"
+      ],
       "options": {
         "command": "npx wtr --node-resolve --playwright --browsers chromium webkit"
       }
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
+      "dependsOn": [
+        "tokens:build"
+      ],
       "options": {
         "port": 4400,
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
-      "inputs": ["core"],
+      "inputs": [
+        "core"
+      ],
       "configurations": {
         "ci": {
           "quiet": true
@@ -94,9 +121,16 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputDir}"],
-      "inputs": ["core"],
-      "dependsOn": ["build-src"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "inputs": [
+        "core"
+      ],
+      "dependsOn": [
+        "build-src",
+        "tokens:build"
+      ],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",

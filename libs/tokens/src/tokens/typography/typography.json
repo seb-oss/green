@@ -1,0 +1,88 @@
+{
+  "sys": {
+    "typography": {
+      "size": {
+        "display-large": {
+          "value": "82",
+          "type": "float"
+        },
+        "display-medium": {
+          "value": "64",
+          "type": "float"
+        },
+        "display-small": {
+          "value": "40",
+          "type": "float"
+        },
+        "headline-large": {
+          "value": "32",
+          "type": "float"
+        },
+        "headline-medium": {
+          "value": "28",
+          "type": "float"
+        },
+        "headline-small": {
+          "value": "24",
+          "type": "float"
+        },
+        "title-large": {
+          "value": "22",
+          "type": "float"
+        },
+        "title-medium": {
+          "value": "16",
+          "type": "float"
+        },
+        "title-small": {
+          "value": "14",
+          "type": "float"
+        },
+        "body-large": {
+          "value": "16",
+          "type": "float"
+        },
+        "body-medium": {
+          "value": "14",
+          "type": "float"
+        },
+        "body-small": {
+          "value": "12",
+          "type": "float"
+        },
+        "label-large": {
+          "value": "16",
+          "type": "float"
+        },
+        "label-medium": {
+          "value": "14",
+          "type": "float"
+        },
+        "label-small": {
+          "value": "12",
+          "type": "float"
+        },
+        "label-information-large": {
+          "value": "16",
+          "type": "float"
+        },
+        "label-information-medium": {
+          "value": "14",
+          "type": "float"
+        },
+        "label-input-large": {
+          "value": "16",
+          "type": "float"
+        },
+        "label-input-medium": {
+          "value": "14",
+          "type": "float"
+        },
+        "label-overline": {
+          "value": "14",
+          "type": "float"
+        }
+      }
+    }
+  }
+}

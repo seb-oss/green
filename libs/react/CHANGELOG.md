@@ -1,14 +1,5 @@
 # Changelog
 
-## 3.5.1
-
-### Patch Changes
-
-- fe88c22: exporting FormContext so form item can be tested
-- Updated dependencies [43bc5d7]
-- Updated dependencies [cc5a664]
-  - @sebgroup/green-core@1.10.0
-
 ## 3.5.0
 
 ### Minor Changes

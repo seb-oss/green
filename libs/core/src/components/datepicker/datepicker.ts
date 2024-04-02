@@ -421,9 +421,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     // Reset spinner state if value is unset
     if (!this.value) {
       this.#spinnerState = {
-        year: 'YYYY',
-        month: 'MM',
-        day: 'DD',
+        year: 'yyyy',
+        month: 'mm',
+        day: 'dd',
       }
       return
     }
@@ -651,9 +651,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * The spinner state keeps track of the spinner values regardless of wheter a complete date has been enter yet.
    */
   #spinnerState = {
-    year: 'YYYY',
-    month: 'MM',
-    day: 'DD',
+    year: 'yyyy',
+    month: 'mm',
+    day: 'dd',
   }
 
   /**

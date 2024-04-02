@@ -1,0 +1,68 @@
+{
+  "sys": {
+    "space": {
+      "spacer": {
+        "0": {
+          "value": "{ref.size.0}",
+          "type": "float"
+        },
+        "2": {
+          "value": "{ref.size.1}",
+          "type": "float"
+        },
+        "4": {
+          "value": "{ref.size.2}",
+          "type": "float"
+        },
+        "8": {
+          "value": "{ref.size.3}",
+          "type": "float"
+        },
+        "12": {
+          "value": "{ref.size.4}",
+          "type": "float"
+        },
+        "16": {
+          "value": "{ref.size.5}",
+          "type": "float"
+        },
+        "24": {
+          "value": "{ref.size.6}",
+          "type": "float"
+        },
+        "32": {
+          "value": "{ref.size.7}",
+          "type": "float"
+        },
+        "40": {
+          "value": "{ref.size.8}",
+          "type": "float"
+        },
+        "48": {
+          "value": "{ref.size.9}",
+          "type": "float"
+        },
+        "64": {
+          "value": "{ref.size.10}",
+          "type": "float"
+        },
+        "80": {
+          "value": "{ref.size.11}",
+          "type": "float"
+        },
+        "96": {
+          "value": "{ref.size.12}",
+          "type": "float"
+        },
+        "112": {
+          "value": "{ref.size.13}",
+          "type": "float"
+        },
+        "120": {
+          "value": "{ref.size.14}",
+          "type": "float"
+        }
+      }
+    }
+  }
+}

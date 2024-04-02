@@ -6,8 +6,8 @@
       role="dialog"
       aria-modal="true"
       [class.small]="size === 'sm'"
-      [class.gds-slide-out--768]="size === 'md'"
-      [class.gds-slide-out--960]="size === 'lg'"
+      [class.medium]="size === 'md'"
+      [class.large]="size === 'lg'"
       [class.entered]="isOpen"
     >
       <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>

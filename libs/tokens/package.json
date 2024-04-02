@@ -1,6 +1,7 @@
 {
   "name": "@sebgroup/green-tokens",
   "version": "0.0.1-beta.8",
+  "dependencies": {},
   "description": "Design tokens for Green Design System",
   "repository": {
     "type": "git",

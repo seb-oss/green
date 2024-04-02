@@ -132,7 +132,7 @@ describe('<gds-datepicker>', () => {
       el.value = undefined
       await el.updateComplete
 
-      await expect(spinners[0].value.toString()).to.equal('YYYY')
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
     it('should reset when form is reset', async () => {
@@ -154,7 +154,7 @@ describe('<gds-datepicker>', () => {
       resetButton.click()
       await timeout(0)
 
-      await expect(spinners[0].value.toString()).to.equal('YYYY')
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
     it('should return a focused date', async () => {
@@ -480,7 +480,7 @@ describe('<gds-datepicker>', () => {
       expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
     })
 
-    it('should set spinners to YYYY, MM and DD when date is undefined', async () => {
+    it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
       )
@@ -494,9 +494,9 @@ describe('<gds-datepicker>', () => {
       await timeout(0)
       await el.updateComplete
 
-      await expect(spinners[0].value.toString()).to.equal('YYYY')
-      await expect(spinners[1].value.toString()).to.equal('MM')
-      await expect(spinners[2].value.toString()).to.equal('DD')
+      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[1].value.toString()).to.equal('mm')
+      await expect(spinners[2].value.toString()).to.equal('dd')
     })
 
     it('should emit input event when navigating with arrow keys in calendar popover', async () => {
