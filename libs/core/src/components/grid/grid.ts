@@ -10,8 +10,8 @@ import {
 import { watch } from '../../utils/decorators'
 
 import { tokens } from '../../tokens.style'
-import grid from './grid.style.css'
-const gridCSS = unsafeCSS(grid)
+import GridCSS from './grid.style.css'
+// const gridCSS = unsafeCSS(grid)
 
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
 const BreakpointPattern =
@@ -27,7 +27,7 @@ const BreakpointPattern =
 
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends LitElement {
-  static styles = [tokens, gridCSS]
+  static styles = [tokens, GridCSS]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
