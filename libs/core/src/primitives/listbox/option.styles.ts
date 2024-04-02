@@ -16,6 +16,12 @@ const style = css`
     :host(:hover) {
       background-color: #ededed;
     }
+
+    :host(:focus-visible) {
+      outline: auto;
+      outline-offset: -6px;
+      outline-color: #666;
+    }
   }
 `
 

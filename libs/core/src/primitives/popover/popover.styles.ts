@@ -18,9 +18,9 @@ const style = css`
       box-sizing: border-box;
       right: 0;
       margin: 0;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1rem 2rem rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 1rem 28px rgba(0, 0, 0, 0.15);
       border-width: 0;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
     }
 
     header {
