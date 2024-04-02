@@ -473,12 +473,6 @@
     "customParams": {}
   },
   {
-    "id": "testing--page",
-    "name": "Page",
-    "title": "Testing",
-    "customParams": {}
-  },
-  {
     "id": "install--page",
     "name": "Page",
     "title": "Install",

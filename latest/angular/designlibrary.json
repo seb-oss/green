@@ -434,36 +434,6 @@
     }
   },
   {
-    "id": "components-accordion--simple",
-    "name": "Simple",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-accordion--nosubheaders",
-    "name": "Nosubheaders",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
-    "id": "components-accordion--closeothers",
-    "name": "Closeothers",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
-    }
-  },
-  {
     "id": "components-badge--multiple",
     "name": "Multiple",
     "title": "Components/Badge",
@@ -494,10 +464,34 @@
     }
   },
   {
-    "id": "testing--page",
-    "name": "Page",
-    "title": "Testing",
-    "customParams": {}
+    "id": "components-accordion--simple",
+    "name": "Simple",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--nosubheaders",
+    "name": "Nosubheaders",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-accordion--closeothers",
+    "name": "Closeothers",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
   },
   {
     "id": "get-started--page",
