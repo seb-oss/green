@@ -67,7 +67,6 @@ export class GdsSegmentedControl extends GdsElement {
 
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
-
   #dragStartX = 0
   #dragStartLeft = 0
   #isDragging = false
@@ -78,7 +77,9 @@ export class GdsSegmentedControl extends GdsElement {
         ${when(
           this._showPrevButton,
           () =>
-            html`<button id="btn-prev" @click=${this.#scrollLeft}>&lt;</button>`
+            html`<button id="btn-prev" @click=${this.#scrollLeft}>
+              <gds-icon name="chevron-left"></gds-icon>
+            </button>`
         )}
 
         <div
@@ -100,7 +101,7 @@ export class GdsSegmentedControl extends GdsElement {
           this._showNextButton,
           () =>
             html`<button id="btn-next" @click=${this.#scrollRight}>
-              &gt;
+              <gds-icon name="chevron-right"></gds-icon>
             </button>`
         )}
       </div>`

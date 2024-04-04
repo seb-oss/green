@@ -32,8 +32,12 @@
 }
 
 #btn-prev, #btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   position: absolute;
-  left:0;
+  left: 0;
   border-radius: calc(infinity * 1px);
   background-color: var(--gds-sys-color-container-dim1);
   border-width: 0;
@@ -42,7 +46,6 @@
   aspect-ratio: 1;
   z-index: 2;
   cursor: pointer;
-  /* box-shadow: 0 0 4rem 0 rgba(0,0,0,0.7); */
 
   &:hover {
     background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), var(--gds-sys-color-container-dim1));
