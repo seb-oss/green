@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.0
+
+### Minor Changes
+
+- fe36778: **`use-green` scoping:** Allow setting a custom selector for the scoping`
+
 ## 3.2.0
 
 ### Minor Changes
