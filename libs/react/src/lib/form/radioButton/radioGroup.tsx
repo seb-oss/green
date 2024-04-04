@@ -1,7 +1,6 @@
-import React, { useState, useRef, ChangeEvent, ReactNode } from 'react'
+import React, { useState, useRef, ChangeEvent } from 'react'
 import {
   IValidator,
-  validateClassName,
   randomId,
   IExpandableInformation,
   ILabelAndLabelInformation,
@@ -53,6 +52,7 @@ export const RadioGroup = ({
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
   const [name] = useState(propName)
+  const [uniqueId] = useState(randomId())
 
   if (valueSelected !== prevValueSelected) {
     setSelected(valueSelected)
@@ -101,14 +101,21 @@ export const RadioGroup = ({
     'gds-radio-group-wrapper--horizontal': horizontal,
   })
 
+  const describedBy = classNames({
+    [`${uniqueId}_message`]: validator?.message !== undefined && validator.message.length > 0,
+    [`${uniqueId}_info`]: labelInformation,
+    [`gds-expandable-info-${uniqueId}`]: expandableInfo,
+  });
+
   return (
-    <FormItem {...formItemProps}>
+    <FormItem {...formItemProps} inputId={uniqueId}>
       <div className={radioGroupWrapperClassNames}>
         {React.Children.map(
           children as React.ReactElement,
           (radioButton: React.ReactElement<RadioButtonProps>) => {
             return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
               ? React.cloneElement(radioButton, {
+                  "aria-describedby": describedBy,
                   validator: validator,
                   onChange: handleOnChange,
                   checked: selected === radioButton.props.value,
