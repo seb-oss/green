@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.2.0
+
+### Minor Changes
+
+- d4e06e7: New icon: `grip-vertical`
+
+## 3.1.3
+
+### Patch Changes
+
+- feb1712: fix for contrast on disabled inputs
+
+## 3.1.2
+
+### Patch Changes
+
+- 80c0cdf: **Datepicker, Dropdown**
+
+  - Fix broken dark mode styles
+
 ## 3.1.1
 
 ### Patch Changes

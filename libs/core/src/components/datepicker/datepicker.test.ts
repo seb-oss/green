@@ -461,7 +461,7 @@ describe('<gds-datepicker>', () => {
 
     it('should give calendar keyboard focus after opening the popover', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker></gds-datepicker>`
+        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`
       )
 
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
@@ -477,7 +477,7 @@ describe('<gds-datepicker>', () => {
         press: 'Enter',
       })
 
-      expect(onlyDate(el.value!)).to.equal(onlyDate(new Date()))
+      expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
     })
 
     it('should set spinners to yyyy, mm and dd when date is undefined', async () => {

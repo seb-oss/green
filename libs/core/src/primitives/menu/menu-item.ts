@@ -9,12 +9,16 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 
+import styles from '../listbox/option.styles'
+
 /**
  * @element gds-menu-item
  * @internal
  */
 @gdsCustomElement('gds-menu-item')
 export class GdsMenuItem extends Focusable(GdsElement) {
+  static styles = [styles]
+
   // Used for Transitional Styles in some legacy browsers
   @state()
   private _tStyles?: HTMLTemplateResult

@@ -31,7 +31,7 @@ and supports all the form directives from the core FormsModule (NgModel) and Rea
 
 <Story id="components-dropdown--select" />
 
-## Option heading
+## Option headings
 
 You can turn your options into option headings by adding the `heading` property to the option object.
 
@@ -56,6 +56,12 @@ You can turn your options into option headings by adding the `heading` property 
 ```
 
 <Story id="components-dropdown--test" />
+
+## Small dropdown
+
+You can set the size of the dropdown to small by setting the size input to `small`.
+
+<Story id="components-dropdown--small" />
 
 ## Reactive forms
 
@@ -105,15 +111,6 @@ Set an initial value by assigning the `value` to the value input or form control
 
 By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
 
-| Input (attribute) | Description                                                          | Default     |
-| :---------------- | :------------------------------------------------------------------- | :---------- |
-| useValue          | Which key to use as value.                                           | `value`     |
-| display           | Which key to use as display value when selected and in options list. | `label`     |
-| syncPopoverWidth? | Force the popover to have the same widtgh as the trigger             | `undefined` |
-| size              | Size of the dropdown.                                                | `medium`    |
-| hideLabel         | Hide the label.                                                      | `false`     |
-| maxHeight         | Max height of the dropdown.                                          | `500`       |
-
 The value does not have to be a primitive value, it can be assigned an object but it requires that a `compareWith` function is provided to uniquely identify each object. Eg:
 
 ```typescript
@@ -153,18 +150,6 @@ const compareWith = (o1: any, o2: any): boolean => {
   [compareWith]="compareWith"
 ></ngg-dropdown>
 ```
-
-## Texts and placeholder
-
-Custom texts can be set using the texts input which takes an object with the following keys.
-
-| Text               | Description                                            | Default    |
-| :----------------- | :----------------------------------------------------- | :--------- |
-| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
-| placeholder        | Text to display when no option is selected.            | `Select`   |
-| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
-| close              | Text for close button displayed on mobiles.            | `Close`    |
-| optionsDescription | Text to describe options.                              | `Options`  |
 
 ## Multi select
 
@@ -306,3 +291,29 @@ Below is an example of reset functionality for dropdown
   <button (click)="validationFormAdvance.reset()">Reset</button>
 </form>
 ```
+
+## Component API
+
+| Input (attribute) | Description                                                          | Default     |
+| :---------------- | :------------------------------------------------------------------- | :---------- |
+| useValue          | Which key to use as value.                                           | `value`     |
+| display           | Which key to use as display value when selected and in options list. | `label`     |
+| syncPopoverWidth? | Force the popover to have the same widtgh as the trigger             | `undefined` |
+| size              | Size of the dropdown.                                                | `medium`    |
+| hideLabel         | Hide the label.                                                      | `false`     |
+| maxHeight         | Max height of the dropdown.                                          | `500`       |
+| multiSelect       | Enable multi select.                                                 | `false`     |
+| searchable        | Enable search.                                                       | `false`     |
+| texts             | Custom texts, see table below                                        | `Object`    |
+
+### Texts input
+
+Custom texts can be set using the `texts` input which takes an object with the following keys.
+
+| Text               | Description                                            | Default    |
+| :----------------- | :----------------------------------------------------- | :--------- |
+| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
+| placeholder        | Text to display when no option is selected.            | `Select`   |
+| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
+| close              | Text for close button displayed on mobiles.            | `Close`    |
+| optionsDescription | Text to describe options.                              | `Options`  |

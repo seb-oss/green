@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.5.2
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [047d2e9]
+  - @sebgroup/green-core@1.11.0
+
+## 3.5.1
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [7532a30]
+- Updated dependencies [7668dfd]
+- Updated dependencies [7668dfd]
+  - @sebgroup/green-core@1.10.0
+
 ## 3.5.0
 
 ### Minor Changes

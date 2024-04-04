@@ -1,5 +1,34 @@
 # Changelog
 
+## 3.6.0
+
+### Minor Changes
+
+- d4e06e7: New component: Sortable list
+
+### Patch Changes
+
+- Updated dependencies [d4e06e7]
+  - @sebgroup/chlorophyll@3.2.0
+
+## 3.5.2
+
+### Patch Changes
+
+- 7cb209f: Datepicker to take strings as value
+- Updated dependencies [feb1712]
+  - @sebgroup/chlorophyll@3.1.3
+
+## 3.5.1
+
+### Patch Changes
+
+- dc45b5e: fixed dropdown headings
+- Updated dependencies [f4d7fe7]
+- Updated dependencies [80c0cdf]
+  - @sebgroup/green-core@1.9.1
+  - @sebgroup/chlorophyll@3.1.2
+
 ## 3.5.0
 
 ### Minor Changes

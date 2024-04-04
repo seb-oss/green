@@ -1,4 +1,5 @@
 $font-path: '../fonts' !default;
+$use-green-selector: '.use-green' !default;
 
 @use '../../tokens/shame' as tokens with (
   $font-path: $font-path
@@ -12,7 +13,7 @@ $font-path: '../fonts' !default;
 @use '../themes/mixins' as themes;
 
 /* add variables for light mode to `.use-green` class */
-.use-green {
+#{$use-green-selector} {
   @include shape.add-tokens();
   @include colors.add-color-tokens();
   @include components.add-radio-tokens();
@@ -24,4 +25,4 @@ $font-path: '../fonts' !default;
 }
 
 /* apply reset mixin on `.use-green` class to reset container and child elements */
-@include mixins.reset('.use-green');
+@include mixins.reset($use-green-selector);

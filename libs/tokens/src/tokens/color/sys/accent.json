@@ -5,23 +5,14 @@
         "accentGreen": {
           "value": "{ref.color.green.40}",
           "darkValue": "{ref.color.green.40}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "accentOrange": {
           "value": "{ref.color.orange.80}",
           "darkValue": "{ref.color.orange.80}",
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         }
       }
     }
   }
 }
-

@@ -81,7 +81,10 @@ export class GdsCalendar extends GdsElement {
     return this.focusedDate.getMonth()
   }
   set focusedMonth(month: number) {
-    this.focusedDate = new Date(this.focusedDate.setMonth(month))
+    const newDate = new Date(this.focusedDate)
+    newDate.setMonth(month)
+    newDate.setHours(0, 0, 0, 0)
+    this.focusedDate = newDate
   }
 
   /**
