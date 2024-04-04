@@ -1,16 +1,17 @@
 {
   "extends": "stylelint-config-sass-guidelines",
-  "plugins": [
-    "stylelint-scss"
-  ],
+  "plugins": ["stylelint-scss"],
   "rules": {
     "at-rule-no-unknown": null,
     "max-nesting-depth": 4,
     "selector-max-compound-selectors": 4,
     "scss/at-rule-no-unknown": true,
-    "selector-no-qualifying-type": [true, {
-      "ignore": ["attribute", "class"]
-    }
-    ]
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["attribute", "class"]
+      }
+    ],
+    "custom-property-pattern": "^(_?(?!-)[0-9a-z-]+)$"
   }
 }

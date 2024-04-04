@@ -1,0 +1,40 @@
+{
+  "sys": {
+    "grid": {
+      "padding": {
+        "none": {
+          "value": "{ref.size.0}",
+          "type": "float"
+        },
+        "xs": {
+          "value": "{ref.size.2}",
+          "type": "float"
+        },
+        "s": {
+          "value": "{ref.size.3}",
+          "type": "float"
+        },
+        "m": {
+          "value": "{ref.size.5}",
+          "type": "float"
+        },
+        "l": {
+          "value": "{ref.size.6}",
+          "type": "float"
+        },
+        "xl": {
+          "value": "{ref.size.7}",
+          "type": "float"
+        },
+        "2xl": {
+          "value": "{ref.size.9}",
+          "type": "float"
+        },
+        "3xl": {
+          "value": "{ref.size.12}",
+          "type": "float"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,177 @@
+import { Canvas, Story } from '@storybook/addon-docs'
+
+# Sortable list
+
+A dynamic list component that allows users to reorder items through drag and drop & optionally select items.
+
+## Description
+
+The `NggSortableListComponent` is designed for scenarios where an interactive list is needed. It supports draggable sorting, selection of items, and can display custom templates for each item.
+
+Items are added in groups. Each group can contain a title and description. The user can drag items between the groups. Dragging between different Sortabale Lists is not supported.
+
+## Importing Module
+
+To use the Sortable Checklist component, import the `NggSortableListModule`.
+
+```typescript
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { AppComponent } from './app.component'
+import { NggSortableListModule } from './sortable-list.module'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, NggSortableListModule],
+  exports: [],
+})
+export class AppModule {}
+```
+
+## Sortable List Options
+
+### Inputs
+
+| Input                   | Type                  | Description                                           | Default |
+| :---------------------- | :-------------------- | :---------------------------------------------------- | :------ |
+| groups                  | `SortableListGroup[]` | Array of groups of items to be displayed in the list. | `[]`    |
+| shouldDisplayCheckboxes | `boolean`             | If true, checkboxes are displayed next to each item.  | `false` |
+| isReadOnly              | `boolean`             | If true, items cannot be reordered or selected.       | `false` |
+| isDraggable             | `boolean`             | If true, allows items to be reordered.                | `true`  |
+| description             | `string`              | Description text for the sortable list.               | `''`    |
+| suffixTemplate          | `TemplateRef<any>`    | Custom template for displaying suffixes.              | `null`  |
+
+### Event Outputs
+
+#### `itemSelectionChanged`
+
+**Type:** `EventEmitter<{ changedItem: SortableListItem; groups: SortableListGroup[] }>`
+
+**Description:** Emitted when the 'selected' state of a checklist item changes.
+
+The event payload includes:
+
+- `changedItem`: The `SortableListItem` whose selected state has changed.
+- `groups`: The updated array of `SortableListGroup` objects reflecting the new selection state.
+
+#### `itemOrderChanged`
+
+**Type:** `EventEmitter<{ previousIndex: [number, number]; currentIndex: [number, number]; groups: SortableListGroup[] }>`
+
+**Description:**
+
+This event is emitted when the order of the checklist items changes due to drag-and-drop actions or keyboard interactions.
+
+The event payload includes:
+
+- `previousIndex`: A tuple of the previous index of the group and item within the group before it was moved.
+- `currentIndex`: A tuple of the current index of the group and item within the group after it was moved.
+- `groups`: The updated array of `SortableListGroup` objects reflecting the new order.
+
+These events can be used to sync the list/checklist's state with external data sources or trigger additional business logic in response to user actions.
+
+### `SortableListGroup` Interface
+
+| Property      | Type                 | Description                                    | Required |
+| ------------- | -------------------- | ---------------------------------------------- | -------- |
+| `title`       | `string`             | Title displayed above the group                | Yes      |
+| `description` | `string`             | Optional description displayed below the title | No       |
+| `items`       | `SortableListItem[]` | An array of SortableListItem                   | No       |
+
+### `SortableListItem` Interface
+
+Each item is represented by an object conforming to the `SortableListItem` interface.
+
+| Property          | Type      | Description                                                          | Required |
+| ----------------- | --------- | -------------------------------------------------------------------- | -------- |
+| `id`              | `any`     | Unique identifier for the checklist item.                            | Yes      |
+| `name`            | `string`  | Display name of the checklist item.                                  | Yes      |
+| `description`     | `string`  | Optional description or additional details for the item.             | No       |
+| `selected`        | `boolean` | Indicates whether the item is selected.                              | No       |
+| `hasCustomSuffix` | `boolean` | Determines if the item should display a custom suffix (if provided). | No       |
+
+The `id` property is crucial for uniquely identifying each item, especially during drag-and-drop operations.
+The `selected` property is used to track whether an item is selected if the `shouldDisplayCheckboxes` is true.
+
+## Usage
+
+To use the `NggSortableListComponent`, pass an array of objects conforming to the `SortableListGroup` interface to the `groups` input.
+
+```html
+
+      <ngg-sortable-list [groups]="groups" <!-- <== Your SortableListGroup -->
+                          [description]="description"
+                          (itemSelectionChanged)="onItemSelected($event)"
+                          (itemOrderChanged)="onItemOrderChanged($event)">
+      </ngg-sortable-list>
+
+```
+
+### Keyboard Interactions
+
+- **Selecting and Unselecting Items:**
+
+  - To select or unselect an item, navigate to it using the tab key and press the spacebar. This action will toggle the selected state of the item.
+
+- **Reordering Items:**
+  - To reorder items, use the Alt + ArrowUp or Alt + ArrowDown keys.
+  - Pressing Alt + ArrowUp will move the focused item up in the list.
+  - Pressing Alt + ArrowDown will move the focused item down in the list.
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story id="components-sortablelist--default" />
+</Canvas>
+
+### With Custom Template
+
+<Canvas>
+  <Story id="components-sortablelist--with-custom-template" />
+</Canvas>
+
+The provided template will only be displayed for items marked with `hasCustomSuffix`.
+
+```html
+
+      <ng-template #customTemplate><span>🐞🚀 LGTM!</span></ng-template>
+      <ngg-sortable-list [groups]="groups"
+                          [description]="description"
+                          [suffixTemplate]="customTemplate" <!-- <== Your Custom Suffix -->
+                          (itemSelectionChanged)="onItemSelected($event)"
+                          (itemOrderChanged)="onItemOrderChanged($event)">
+      </ngg-sortable-checklist>
+
+```
+
+### With Checkboxes
+
+Showcases how the component handles separate lists for checked and unchecked items. Great for optionally adding agenda points, filtering with ordering.
+
+<Canvas>
+  <Story id="components-sortablelist--default-sortable-checklist" />
+</Canvas>
+
+### Read-Only Mode
+
+Displays the component in a read-only state where items cannot be selected or reordered.
+
+<Canvas>
+  <Story id="components-sortablelist--read-only" />
+</Canvas>
+
+### Disable Reordering and Hide Drag Handle Only
+
+<Canvas>
+  <Story id="components-sortablelist--not-draggable" />
+</Canvas>
+
+### Minimal
+
+A minimal version of the Sortable Checklist without drag handles, descriptions, and custom suffixes.
+
+<Canvas>
+  <Story id="components-sortablelist--minimal" />
+</Canvas>

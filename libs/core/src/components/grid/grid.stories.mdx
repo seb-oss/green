@@ -1,0 +1,120 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { GdsGrid } from '../../../../../dist/libs/core/src'
+import "./grid.stories.css"
+
+<Meta title="Components/Grid" />
+
+# Grid
+
+The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
+
+## Usage
+
+To use the `gds-grid`, you add it to your HTML and specify the number of `columns` for `desktop`, `tablet`, and `mobile` devices using the `columns` attribute. The `columns`, `gap` and `padding` attributes can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for mobile.
+
+If a single value is provided, it will be used for all screen sizes. If three tokens are provided, each screen size will use the value specified for it.
+
+```html
+<!-- Using a single value for all screen sizes -->
+<gds-grid columns="2" gap="xl" padding="2xl">
+    <!-- Child elements here -->
+</gds-grid>
+
+<!-- Using different values for each screen size -->
+<gds-grid columns="l:8 m:4 s:2" gap="l:xl m:l s:xs" padding="l:2xl m:l s:xs">
+    <!-- Child elements here -->
+</gds-grid>
+```
+
+
+
+## Example 
+This example shows a grid with 8 columns on desktop, 4 on tablet, and 2 on mobile. It also has a gap of `l` on desktop, `m` on tablet, and `s` on mobile. The padding is `2xl` on desktop, `l` on tablet, and `xs` on mobile.
+<Canvas>
+    <gds-grid 
+        columns="l:8 m:4 s:2" 
+        gap="l:l m:m s:s" 
+        padding="l:2xl m:l s:xs" 
+    >
+        <div>COL: 01</div>
+        <div>COL: 02</div>
+        <div>COL: 03</div>
+        <div>COL: 04</div>
+        <div>COL: 05</div>
+        <div>COL: 06</div>
+        <div>COL: 07</div>
+        <div>COL: 08</div>
+    </gds-grid>
+</Canvas>
+
+## Example: All breakpoints + Auto Columns
+This example shows a grid with `4` columns on all breakpoints desktop, tablet, and on mobile. It also has a gap of `2xl` on all breakpoints. The padding is `l` on all breakpoints. As well as `auto-columns` attribute is set to `100` which will make the columns to be `~100px` wide.
+<Canvas>
+    <gds-grid 
+        columns="4" 
+        gap="2xl" 
+        padding="l" 
+        auto-columns="100"
+    >
+        <div>COL: 01</div>
+        <div>COL: 02</div>
+        <div>COL: 03</div>
+        <div>COL: 04</div>
+        <div>COL: 05</div>
+        <div>COL: 06</div>
+        <div>COL: 07</div>
+        <div>COL: 08</div>
+    </gds-grid>
+</Canvas>
+
+
+## Auto Columns attribute
+
+The `auto-columns` attribute makes the grid flexible by adjusting column widths based on available space and content size. If space is limited, it reduces the number of columns while maintaining a minimum column width based on the value provided. The `auto-columns` attribute can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for `mobile` respectively.
+
+It can be used without the other attributes and still fit tne content on the available width. But for more granular control it can be used with the `columns`, `gap`, and `padding` attributes.
+
+Auto Columns, while optional, remove the need for breakpoints, adapting to content for a more flexible and responsive grid. However, they can still be used in conjunction with breakpoints to accommodate content in both cases.
+```html
+<!-- Using a single value for all screen sizes -->
+<gds-grid columns="2" gap="xl" auto-columns="200">
+    <!-- Child elements here -->
+</gds-grid>
+
+<!-- Using different values for each screen size -->
+<gds-grid columns="8 4 2" auto-columns="l:200 m:100 s:80">
+    <!-- Child elements here -->
+</gds-grid>
+```
+> The `auto-columns` attribute, used with CSS grid layout, calculates the maximum column width by subtracting the total gap width from the total available width and dividing by the number of columns. This is represented by the formula `MaxColumnWidth = (W - ((C - 1) * G)) / C`, where `W` is the total available width, `C` is the number of columns, and `G` is the width of a single gap. This calculated width is then used to set each column's width, with a minimum width of the `auto-columns` value.
+
+
+## Example: Auto Columns without other attributes
+This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
+The `auto-columns` attribute is set to `l:360 m:200 s:120` which will make the columns to be `360px` wide on desktop, `200px` wide on tablet, and `120px` wide on mobile.
+<Canvas>
+    <gds-grid auto-columns="l:360 m:200 s:120" >
+        <div>COL: 01</div>
+        <div>COL: 02</div>
+        <div>COL: 03</div>
+        <div>COL: 04</div>
+        <div>COL: 05</div>
+        <div>COL: 06</div>
+        <div>COL: 07</div>
+        <div>COL: 08</div>
+    </gds-grid>
+</Canvas>
+
+
+## Sizes
+Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
+```
+3xl:  size/12
+2xl:  size/9
+xl:   size/7
+l:    size/6
+m:    size/5
+s:    size/3
+xs:   size/2
+none: size/0
+```

@@ -48,7 +48,7 @@ const Template: Story<NggDatepickerComponent> = (
 
 export const Simple = Template.bind({})
 Simple.args = {
-  value: new Date(),
+  value: '10/10/2021',
   label: 'Date',
 }
 

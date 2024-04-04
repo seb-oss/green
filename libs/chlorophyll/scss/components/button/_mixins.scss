@@ -71,7 +71,7 @@ $button-danger-border-color: $button-danger-bg;
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable(false, true, true);
+    @include common.add-disable(true, true, true);
   }
 }
 
@@ -87,7 +87,7 @@ $button-danger-border-color: $button-danger-bg;
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable(false, true, true);
+    @include common.add-disable(true, true, true);
   }
 }
 

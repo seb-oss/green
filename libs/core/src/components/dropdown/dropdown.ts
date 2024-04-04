@@ -311,7 +311,7 @@ export class GdsDropdown<ValueT = any>
     }
 
     // Set default value if none is set
-    if (!this.value) {
+    if (this.value === undefined) {
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
     }
