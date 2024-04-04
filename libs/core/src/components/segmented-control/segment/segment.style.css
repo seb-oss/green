@@ -5,6 +5,7 @@
 
 button {
   flex-shrink: 0;
+  flex-grow: 1;
   font-family: inherit;
   padding: 0.5rem 1rem;
   min-width: 6.625rem;
@@ -16,6 +17,10 @@ button {
   border: none;
   cursor: pointer;
   font-size: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 button:hover {

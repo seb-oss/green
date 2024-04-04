@@ -14,6 +14,21 @@
 #track {
   box-sizing: border-box;
   display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width: 100%;
+}
+
+#segments {
+  box-sizing: border-box;
+  display: inline-flex;
+  position: relative;
+  transition: .1s;
+}
+
+#segments > * {
+  flex: 1 1 auto;
+  transition: .1s;
 }
 
 #btn-prev, #btn-next {
@@ -27,7 +42,7 @@
   aspect-ratio: 1;
   z-index: 2;
   cursor: pointer;
-  box-shadow: 0 0 4rem 0 rgba(0,0,0,0.7);
+  /* box-shadow: 0 0 4rem 0 rgba(0,0,0,0.7); */
 
   &:hover {
     background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), var(--gds-sys-color-container-container-dim1));
