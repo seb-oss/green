@@ -6,11 +6,7 @@
     "types": [],
     "composite": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.css",
-    "src/components/dropdown/dropdown.test.js"
-  ],
+  "include": ["**/*.ts", "**/*.css"],
   "exclude": [
     "**/*.test.ts",
     "**/*.react.ts",
