@@ -9,6 +9,8 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { when } from 'lit/directives/when.js'
 
+import { watch } from '../../utils/decorators'
+
 import './segment/segment'
 import type { GdsSegment } from './segment/segment'
 
@@ -134,6 +136,12 @@ export class GdsSegmentedControl extends GdsElement {
 
   get #segments() {
     return this._elSlot.assignedElements() as GdsSegment[]
+  }
+
+  @watch('segMinWidth')
+  @watch('segMaxWidth')
+  private _recalculateMinMaxWidth() {
+    this.updateComplete.then(() => this.#calculateVisibleSegments())
   }
 
   #calculateVisibleSegments = () => {
