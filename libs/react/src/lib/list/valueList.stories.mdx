@@ -1,5 +1,5 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
-import ValueList, { List } from './valueList'
+import ValueList from './valueList'
 
 export const ValueListValueTemplate = ({ children }) => (
   <ValueList.Value>{children}</ValueList.Value>
@@ -28,164 +28,35 @@ export const ValueListTemplate = ({ children, ...props }) => (
 
 <Meta title="Components/ValueList" component={ValueList} />
 
-# Value List
-[Link to the design library](https://designlibrary.sebank.se/components/component-list)
+## Value List
 
 <Canvas>
-  <Story name="ValueList" argTypes={{
-      divided: {
-        control: 'boolean',
-        description: 'Adds divider between each label-value pair'
-      },
-      header: {
-        control: 'text',
-        description: 'Display a text that groups the value list'
-      },
-      horizontal: {
-        control: 'boolean',
-        description: 'Displays label and value in a horizontal way'
-      },
+  <Story
+    name="ValueList"
+    argTypes={{
       inverted: {
-        control: 'boolean',
-        description: 'Makes values bold instead of labels',
+        name: 'inverted',
+        type: {
+          name: 'boolean',
+          required: false,
+        },
+        defaultValue: false,
+        table: {
+          type: { summary: 'Makes values bold instead of labels' },
+          defaultValue: { summary: false },
+        },
       },
-      leftAlign: {
-        control: 'boolean',
-        description: 'Left align horizontal value text',
-      },
-      slim: {
-        control: 'boolean',
-        description: 'Slimmer version of the horizontal layout',
-      },
-    }}>
-    {(options) => <ValueListTemplate {...options}/>}
+    }}
+  >
+    {ValueListTemplate.bind({})}
   </Story>
 </Canvas>
 
-### Props
+### Value List Props
 
-<ArgsTable story='ValueList' />
+<ArgsTable of={ValueList.List} />
 
-# Variations
-
-## Inverted
-
-<Canvas>
-  <Story name="Inverted">
-    <ValueListTemplate inverted />
-  </Story>
-</Canvas>
-
-## Divided
-
-<Canvas>
-  <Story name="Divided">
-    <ValueListTemplate divided />
-  </Story>
-</Canvas>
-
-## Divided Slim
-
-<Canvas>
-  <Story name="DividedSlim">
-    <ValueListTemplate divided slim />
-  </Story>
-</Canvas>
-
-## Grouped Divided
-
-<Canvas>
-  <Story name="GroupedDivided">
-    <ValueListTemplate header="Header" divided />
-  </Story>
-</Canvas>
-
-## Grouped Divided Slim
-
-<Canvas>
-  <Story name="GroupedDividedSlim">
-    <ValueListTemplate header="Header" divided slim />
-  </Story>
-</Canvas>
-
-## Horizontal
-
-<Canvas>
-  <Story name="Horizontal">
-    <ValueListTemplate horizontal />
-  </Story>
-</Canvas>
-
-## Horizontal Divided
-
-<Canvas>
-  <Story name="HorizontalDivided">
-    <ValueListTemplate divided horizontal />
-  </Story>
-</Canvas>
-
-## Horizontal Divided Slim
-
-<Canvas>
-  <Story name="HorizontalDividedSlim">
-    <ValueListTemplate divided horizontal slim />
-  </Story>
-</Canvas>
-
-## Horizontal Divided Slim LeftAlign
-
-<Canvas>
-  <Story name="HorizontalDividedLeftAlign">
-    <ValueListTemplate horizontal divided leftAlign slim />
-  </Story>
-</Canvas>
-
-## Grouped Horizontal Divided
-
-<Canvas>
-  <Story name="GroupedHorizontalDivided">
-    <ValueListTemplate header="Header" horizontal divided />
-  </Story>
-</Canvas>
-
-## Grouped Horizontal Divided Slim
-
-<Canvas>
-  <Story name="GroupedHorizontalDividedSlim">
-    <ValueListTemplate header="Header" horizontal divided slim />
-  </Story>
-</Canvas>
-
-# Multiple
-
-## Grouped Divided
-
-<Canvas>
-  <Story name="TwoGroupedDivided">
-    <ValueListTemplate header="Header 1" divided />
-    <ValueListTemplate header="Header 2" divided />
-  </Story>
-</Canvas>
-
-## Grouped Horizontal Divided
-
-<Canvas>
-  <Story name="TwoGroupedHorizontalDivided">
-    <ValueListTemplate header="Header 1" divided horizontal />
-    <ValueListTemplate header="Header 2" divided horizontal />
-  </Story>
-</Canvas>
-
-## Grouped Horizontal Divided Slim
-
-<Canvas>
-  <Story name="TwoGroupedHorizontalDividedSlim">
-    <ValueListTemplate header="Header 1" divided horizontal slim />
-    <ValueListTemplate header="Header 2" divided horizontal slim />
-  </Story>
-</Canvas>
-
-# Import
+### Import
 
 ```javascript
 import { ValueList } from '@sebgroup/green-react'

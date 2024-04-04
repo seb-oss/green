@@ -38,10 +38,6 @@ figure dl {
   @include mixins.table-list();
 }
 
-figure.gds-list-figure {
-  @include mixins.add-value-list-figure();
-}
-
 dl.gds-list {
   @include mixins.add-value-list();
 }
