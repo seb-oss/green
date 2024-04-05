@@ -123,12 +123,14 @@ export class GdsSegmentedControl extends GdsElement {
   #drag = (event: PointerEvent) => {
     if (!this.#isDragging) return
     event.preventDefault()
+    const delta = event.clientX - this.#dragStartX
+
+    if (Math.abs(delta) < 5) return
 
     if (!this._elSegments.hasPointerCapture(event.pointerId))
       this._elSegments.setPointerCapture(event.pointerId)
 
-    const dx = event.clientX - this.#dragStartX
-    this.#segmentsContainerLeft = this.#dragStartLeft + dx
+    this.#segmentsContainerLeft = this.#dragStartLeft + delta
     this.#applySegmentsTransform()
   }
 
