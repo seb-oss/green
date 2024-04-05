@@ -1,7 +1,7 @@
 :host {
   z-index: 1;
   display: flex;
-  transition: .1s;
+  transition: .2s;
 }
 
 button {
@@ -22,10 +22,13 @@ button {
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
+  color: var(--gds-sys-color-content-content);
 }
 
-button:hover {
-  background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), transparent);
+@media (pointer: fine) {
+  button:hover {
+    background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), transparent);
+  }
 }
 
 button:focus-visible {

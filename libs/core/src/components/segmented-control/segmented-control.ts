@@ -127,18 +127,22 @@ export class GdsSegmentedControl extends GdsElement {
 
     if (Math.abs(delta) < 5) return
 
-    if (!this._elSegments.hasPointerCapture(event.pointerId))
-      this._elSegments.setPointerCapture(event.pointerId)
+    try {
+      if (!this._elSegments.hasPointerCapture(event.pointerId))
+        this._elSegments.setPointerCapture(event.pointerId)
 
-    this.#segmentsContainerLeft = this.#dragStartLeft + delta
-    this.#applySegmentsTransform()
+      this.#segmentsContainerLeft = this.#dragStartLeft + delta
+      this.#applySegmentsTransform()
+    } catch {}
   }
 
   #endDrag = (event: PointerEvent) => {
     if (!this.#isDragging) return
     this.#isDragging = false
-    this._elSegments.releasePointerCapture(event.pointerId)
-    this.#calcVisibleAfterDrag()
+    try {
+      this._elSegments.releasePointerCapture(event.pointerId)
+      this.#calcVisibleAfterDrag()
+    } catch {}
   }
 
   #calcVisibleAfterDrag = () => {
@@ -165,7 +169,7 @@ export class GdsSegmentedControl extends GdsElement {
       const availableWidth = this._elTrack.offsetWidth
 
       // Max avaliable width in the track accounting for the scroll buttons
-      const availableWidthIncBtns = this.offsetWidth - 88
+      const availableWidthIncBtns = this.offsetWidth - 88 // TODO: Fix magic number
 
       const maxVisibleSegments = Math.floor(
         availableWidthIncBtns / this.segMinWidth
