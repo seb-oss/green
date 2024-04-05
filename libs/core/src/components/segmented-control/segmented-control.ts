@@ -88,7 +88,7 @@ export class GdsSegmentedControl extends GdsElement {
     this.addEventListener('focusin', (e) => {
       if (e.target instanceof GdsSegment) {
         this.#focusedIndex = this.#segments.indexOf(e.target as GdsSegment)
-        this.#calcLayout()
+        this.#calcLayout(true)
       }
     })
   }
@@ -188,7 +188,7 @@ export class GdsSegmentedControl extends GdsElement {
 
   // Calculates the layout based on the configured min width
   // and the available space in the track
-  #calcLayout = () => {
+  #calcLayout = (followFocus = false) => {
     const calcNumVisibleSegments = () => {
       // Actual available width in the track
       const availableWidth = this._elTrack.offsetWidth
@@ -211,11 +211,13 @@ export class GdsSegmentedControl extends GdsElement {
     this.#numVisibleSegments = count
 
     // Ensure that the focused segment is always visible
-    if (this.#focusedIndex >= this.#firstVisibleIndex + count) {
-      this.#firstVisibleIndex = this.#focusedIndex - count + 1
-    }
-    if (this.#focusedIndex < this.#firstVisibleIndex) {
-      this.#firstVisibleIndex = this.#focusedIndex
+    if (followFocus) {
+      if (this.#focusedIndex >= this.#firstVisibleIndex + count) {
+        this.#firstVisibleIndex = this.#focusedIndex - count + 1
+      }
+      if (this.#focusedIndex < this.#firstVisibleIndex) {
+        this.#firstVisibleIndex = this.#focusedIndex
+      }
     }
 
     // prevent overscroll by clamping #firstVisibleIndex
@@ -267,16 +269,11 @@ export class GdsSegmentedControl extends GdsElement {
 
   #scrollLeft = () => {
     this.#firstVisibleIndex--
-    this.#focusedIndex = Math.min(
-      this.#focusedIndex,
-      this.#firstVisibleIndex + this.#numVisibleSegments - 1
-    )
     this.#calcLayout()
   }
 
   #scrollRight = () => {
     this.#firstVisibleIndex++
-    this.#focusedIndex = Math.max(this.#focusedIndex, this.#firstVisibleIndex)
     this.#calcLayout()
   }
 
