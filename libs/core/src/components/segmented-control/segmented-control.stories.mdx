@@ -2,17 +2,59 @@ import { Meta, Canvas } from '@storybook/addon-docs'
 
 <Meta title="Components/Segmented Control" />
 
+# Segmented Control
+
+A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+
 <Canvas>
   <gds-segmented-control>
     <gds-segment>First</gds-segment>
-    <gds-segment selected>Second button with very long text</gds-segment>
+    <gds-segment selected>Second</gds-segment>
     <gds-segment>Third</gds-segment>
     <gds-segment>Fourth</gds-segment>
     <gds-segment>Fifth</gds-segment>
-    <gds-segment>Sixth</gds-segment>
-    <gds-segment>Seventh</gds-segment>
-    <gds-segment>Eighth</gds-segment>
-    <gds-segment>Ninth</gds-segment>
-    <gds-segment>Tenth</gds-segment>
+  </gds-segmented-control>
+</Canvas>
+
+## Small
+
+There is a small and a medium version which can be configured using the `size` attribute.
+
+<Canvas>
+  <gds-segmented-control size="small">
+    <gds-segment selected>First</gds-segment>
+    <gds-segment>Second</gds-segment>
+    <gds-segment>Third</gds-segment>
+  </gds-segmented-control>
+</Canvas>
+
+## Segment size
+
+The size of the segments can be configured using the `seg-min-width` attribute. This influences
+how many segments will be visible at the same time. If you have long segment labels and want to
+avoid concatenation, you can increase the `seg-min-width` attribute. But keep in mind that the
+best practice is to keep the segment labels short.
+
+### Long label with default segment width
+
+<Canvas>
+  <gds-segmented-control>
+    <gds-segment>First</gds-segment>
+    <gds-segment selected>Unusually long label text</gds-segment>
+    <gds-segment>Third</gds-segment>
+    <gds-segment>Fourth</gds-segment>
+    <gds-segment>Fifth</gds-segment>
+  </gds-segmented-control>
+</Canvas>
+
+### Using `seg-min-width`
+
+<Canvas>
+  <gds-segmented-control seg-min-width="200">
+    <gds-segment>First</gds-segment>
+    <gds-segment selected>Unusually long label text</gds-segment>
+    <gds-segment>Third</gds-segment>
+    <gds-segment>Fourth</gds-segment>
+    <gds-segment>Fifth</gds-segment>
   </gds-segmented-control>
 </Canvas>
