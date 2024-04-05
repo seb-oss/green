@@ -15,6 +15,11 @@ import { GdsSegment } from './segment/segment'
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'
 
+const btnSize = {
+  small: 36,
+  medium: 44,
+}
+
 /**
  * @element gds-segmented-control
  * @internal
@@ -30,6 +35,13 @@ export class GdsSegmentedControl extends GdsElement {
    */
   @property({ type: Number, attribute: 'seg-min-width' })
   segMinWidth = 100
+
+  /**
+   * Size of the segmented control
+   * @attr size
+   */
+  @property()
+  size: 'small' | 'medium' = 'medium'
 
   // Used for Transitional Styles in some legacy browsers
   @state()
@@ -182,7 +194,7 @@ export class GdsSegmentedControl extends GdsElement {
       const availableWidth = this._elTrack.offsetWidth
 
       // Max avaliable width in the track accounting for the scroll buttons
-      const availableWidthIncBtns = this.offsetWidth - 88 // TODO: Fix magic number
+      const availableWidthIncBtns = this.offsetWidth - btnSize[this.size] * 2
 
       const maxVisibleSegments = Math.floor(
         availableWidthIncBtns / this.segMinWidth

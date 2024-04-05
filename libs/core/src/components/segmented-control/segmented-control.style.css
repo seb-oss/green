@@ -1,5 +1,5 @@
 :host {
-  display: flex;
+  display: inline-flex;
   background-color: var(--gds-sys-color-container-dim1);
   border: 0.25rem solid var(--gds-sys-color-container-dim1);
   gap: 0.25rem;
@@ -8,6 +8,10 @@
   max-width: 100%;
   overflow: hidden;
   height: 3rem;
+}
+
+:host([size='small']) {
+  height: 2.5rem;
 }
 
 #track {
@@ -57,6 +61,11 @@
       );
     }
   }
+}
+
+:host([size='small']) #btn-prev,
+:host([size='small']) #btn-next {
+  width: 2rem;
 }
 
 ::slotted(*) {

@@ -8,7 +8,7 @@ button {
   flex-shrink: 0;
   flex-grow: 1;
   font-family: inherit;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   min-width: 6.625rem;
   text-align: center;
   cursor: pointer;
