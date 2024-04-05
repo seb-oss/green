@@ -52,18 +52,18 @@ export class GdsSegmentedControl extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-
     const resizeObserver = new ResizeObserver((entries) => {
       this.#calculateVisibleSegments()
     })
-
     resizeObserver.observe(this)
   }
 
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
+  #segmentWidth = 0
+  #segmentsContainerLeft = 0
+
   #dragStartX = 0
   #dragStartLeft = 0
   #isDragging = false
@@ -90,8 +90,8 @@ export class GdsSegmentedControl extends GdsElement {
             gds-allow="gds-segment"
             @click=${this.#handleSegmentClick}
           ></slot>
+          <div id="indicator"></div>
         </div>
-        <div id="indicator"></div>
       </div>
       ${when(
         this._showNextButton,
@@ -104,7 +104,7 @@ export class GdsSegmentedControl extends GdsElement {
 
   #startDrag = (event: PointerEvent) => {
     this.#dragStartX = event.clientX
-    this.#dragStartLeft = this._elSegments.offsetLeft
+    this.#dragStartLeft = this.#segmentsContainerLeft
     this.#isDragging = true
   }
 
@@ -112,7 +112,8 @@ export class GdsSegmentedControl extends GdsElement {
     if (!this.#isDragging) return
     this._elSegments.setPointerCapture(event.pointerId)
     const dx = event.clientX - this.#dragStartX
-    this._elSegments.style.left = this.#dragStartLeft + dx + 'px'
+    this.#segmentsContainerLeft = this.#dragStartLeft + dx
+    this.#applySegmentsScroll()
   }
 
   #endDrag = (event: PointerEvent) => {
@@ -123,9 +124,8 @@ export class GdsSegmentedControl extends GdsElement {
   }
 
   #calcVisibleAfterDrag = () => {
-    const scrollLeft = this._elSegments.offsetLeft
     this.#firstVisibleIndex = Math.round(
-      -scrollLeft / this.#calculatedSegmentWidth
+      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth
     )
     this.#calculateVisibleSegments()
   }
@@ -185,13 +185,20 @@ export class GdsSegmentedControl extends GdsElement {
         segment.style.width = segmentWidth + 'px'
       })
 
-      this._elSegments.style.left = `-${
-        this.#firstVisibleIndex * segmentWidth
-      }px`
-      this.#calculatedSegmentWidth = segmentWidth
+      this.#segmentsContainerLeft = -this.#firstVisibleIndex * segmentWidth
+      this.#applySegmentsScroll()
 
-      setTimeout(() => this.#updateIndicator(), 150)
+      this.#calculatedSegmentWidth = segmentWidth
+      this.#segmentWidth = segmentWidth
+
+      this.#updateIndicator()
     })
+  }
+
+  #applySegmentsScroll = () => {
+    this._elSegments.style.transform = `translateX(${
+      this.#segmentsContainerLeft
+    }px)`
   }
 
   #handleSlotChange = () => {
@@ -201,12 +208,10 @@ export class GdsSegmentedControl extends GdsElement {
   #scrollLeft = () => {
     this.#firstVisibleIndex--
     this.#calculateVisibleSegments()
-    this.#calculateVisibleSegments()
   }
 
   #scrollRight = () => {
     this.#firstVisibleIndex++
-    this.#calculateVisibleSegments()
     this.#calculateVisibleSegments()
   }
 
@@ -218,13 +223,14 @@ export class GdsSegmentedControl extends GdsElement {
 
   #updateIndicator = () => {
     const segment = this.#segments.find((s) => s.selected)
-    const btnOffset = this._showPrevButton ? 44 : 0
-
     if (segment) {
-      this._elIndicator.style.transform = `translateX(${
-        segment.offsetLeft - btnOffset
-      }px)`
-      this._elIndicator.style.width = `${segment.offsetWidth}px`
+      const selectedSegmentIndex = this.#segments.indexOf(segment)
+      const offset = selectedSegmentIndex * this.#segmentWidth
+      this._elIndicator.style.transform = `translateX(${offset}px)`
+      this._elIndicator.style.width = `${this.#segmentWidth}px`
+    } else {
+      this._elIndicator.style.transform = `translateX(-100%)`
+      this._elIndicator.style.width = `0px`
     }
   }
 
@@ -232,10 +238,8 @@ export class GdsSegmentedControl extends GdsElement {
     const segment = this.#segments.find(
       (s) => s === event.target || s.contains(event.target as Node)
     )
-
     if (segment) {
       this.#segments.forEach((s) => (s.selected = false))
-
       segment.selected = true
 
       this.#updateIndicator()
