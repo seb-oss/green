@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist",
     "declaration": true,
-    "types": [],
-    "composite": true
+    "types": []
   },
   "include": ["**/*.ts", "**/*.css"],
   "exclude": [
