@@ -1,7 +1,7 @@
 :host {
   z-index: 1;
   display: flex;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 button {
@@ -15,7 +15,7 @@ button {
   border-radius: calc(infinity * 1px);
   appearance: none;
   background: transparent;
-  border: none;
+  border-width: 0;
   cursor: pointer;
   font-size: inherit;
   overflow: hidden;
@@ -27,7 +27,11 @@ button {
 
 @media (pointer: fine) {
   button:hover {
-    background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), transparent);
+    background-color: color-mix(
+      in srgb,
+      var(--gds-sys-color-state-layers-state-black-dim1),
+      transparent
+    );
   }
 }
 
