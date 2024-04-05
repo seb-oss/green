@@ -1,5 +1,3 @@
-@use '../../../../dist/libs/tokens/scss/pallet-2016' as pallet;
-
 @mixin add-color-tokens() {
   --gds-ref-color-white: #ffffff;
   --gds-ref-color-black: #000000;
