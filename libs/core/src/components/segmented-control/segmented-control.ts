@@ -71,7 +71,6 @@ export class GdsSegmentedControl extends GdsElement {
 
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
-  #numVisibleSegments = 0
   #segmentWidth = 0
   #segmentsContainerLeft = 0
   #focusedIndex = 0
@@ -208,7 +207,6 @@ export class GdsSegmentedControl extends GdsElement {
 
     // Run an initial calculation to get the number of visible segments
     const { count } = calcNumVisibleSegments()
-    this.#numVisibleSegments = count
 
     // Ensure that the focused segment is always visible
     if (followFocus) {

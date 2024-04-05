@@ -1,10 +1,26 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Segmented Control" />
 
 # Segmented Control
 
 A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+
+<button
+  onClick={() => {
+    registerTransitionalStyles()
+    document
+      .querySelectorAll('gds-segmented-control, gds-segment')
+      .forEach((el) => {
+        el.connectedCallback()
+      })
+  }}
+>
+  Show 2016 styles
+</button>
+
+<button onClick={() => location.reload()}>Show 2023 styles</button>
 
 <Canvas>
   <gds-segmented-control>

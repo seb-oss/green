@@ -8,6 +8,8 @@ import * as ContextMenu from '../../components/context-menu/context-menu.trans.s
 import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
+import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
+import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 
@@ -19,6 +21,8 @@ export const registerTransitionalStyles = () => {
   Calendar.register()
   Datepicker.register()
   GroupedList.register()
+  SegmentedControl.register()
+  Segment.register()
 }
 
 declare global {

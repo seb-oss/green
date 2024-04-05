@@ -4,6 +4,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '../../../transitional-styles'
 import { watch } from '../../../utils/decorators/watch'
 import { unsafeCSS } from 'lit'
 
@@ -23,6 +24,7 @@ export class GdsSegment extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-segmented')
   }
 
   render() {

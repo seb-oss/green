@@ -1,0 +1,55 @@
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base;
+
+  @layer _base {
+    :host {
+      z-index: 1;
+      display: flex;
+      transition: 0.2s;
+      border-right: 1px solid #333;
+      box-sizing: border-box;
+    }
+
+    :host(:last-child) {
+      border-right: 0;
+    }
+
+    button {
+      flex-shrink: 0;
+      flex-grow: 1;
+      font-family: inherit;
+      font-weight: 500;
+      padding: 0 1rem;
+      min-width: 6.625rem;
+      text-align: center;
+      cursor: pointer;
+      appearance: none;
+      background: transparent;
+      border-width: 0;
+      font-size: inherit;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      color: var(--gds-sys-color-content-content);
+    }
+
+    @media (pointer: fine) {
+      button:hover {
+        background-color: #ccc;
+      }
+    }
+
+    button[aria-selected='true'] {
+      background-color: #333;
+      color: #fff;
+    }
+
+    button:focus-visible {
+      outline: 2px solid #000;
+      outline-offset: -2px;
+    }
+  }
+}
