@@ -4,15 +4,13 @@ import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
-  getScopedTagName,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { when } from 'lit/directives/when.js'
 
 import { watch } from '../../utils/decorators'
 
-import './segment/segment'
-import type { GdsSegment } from './segment/segment'
+import { GdsSegment } from './segment/segment'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'
@@ -63,6 +61,7 @@ export class GdsSegmentedControl extends GdsElement {
   #calculatedSegmentWidth = 0
   #segmentWidth = 0
   #segmentsContainerLeft = 0
+  #focusedIndex = 0
 
   #dragStartX = 0
   #dragStartLeft = 0
@@ -72,6 +71,13 @@ export class GdsSegmentedControl extends GdsElement {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
     this.#resizeObserver.observe(this)
+
+    this.addEventListener('focusin', (e) => {
+      if (e.target instanceof GdsSegment) {
+        this.#focusedIndex = this.#segments.indexOf(e.target as GdsSegment)
+        this.#calcLayout()
+      }
+    })
   }
 
   disconnectedCallback(): void {
@@ -88,7 +94,13 @@ export class GdsSegmentedControl extends GdsElement {
             <gds-icon name="chevron-left"></gds-icon>
           </button>`
       )}
-      <div id="track">
+      <div
+        id="track"
+        @scroll=${() => {
+          // This is here to prevent native scroll on focus
+          this._elTrack.scrollLeft = 0
+        }}
+      >
         <div
           id="segments"
           @pointerdown=${this.#startDrag}
@@ -183,6 +195,14 @@ export class GdsSegmentedControl extends GdsElement {
 
     // Run an initial calculation to get the number of visible segments
     const { count } = calcNumVisibleSegments()
+
+    // Ensure that the focused segment is always visible
+    if (this.#focusedIndex >= this.#firstVisibleIndex + count) {
+      this.#firstVisibleIndex = this.#focusedIndex - count + 1
+    }
+    if (this.#focusedIndex < this.#firstVisibleIndex) {
+      this.#firstVisibleIndex = this.#focusedIndex
+    }
 
     // prevent overscroll by clamping #firstVisibleIndex
     const endFirstIndex = this.#segments.length - count
