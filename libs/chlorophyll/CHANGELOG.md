@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.1
+
+### Patch Changes
+
+- 7a6fd4c: Remove unused collor pallet
+
 ## 3.3.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.3
+
+### Patch Changes
+
+- 304b6aa: **Radiobutton:** Fix screen reader support for error message
+- Updated dependencies [7a6fd4c]
+  - @sebgroup/chlorophyll@3.3.1
+
 ## 3.5.2
 
 ### Patch Changes
