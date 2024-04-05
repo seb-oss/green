@@ -28,9 +28,6 @@ export class GdsSegmentedControl extends GdsElement {
   @property({ type: Number, attribute: 'seg-min-width' })
   segMinWidth = 100
 
-  @property({ type: Number, attribute: 'seg-max-width' })
-  segMaxWidth = 300
-
   // Used for Transitional Styles in some legacy browsers
   @state()
   private _tStyles?: HTMLTemplateResult
@@ -73,15 +70,14 @@ export class GdsSegmentedControl extends GdsElement {
 
   render() {
     return html`${this._tStyles}
+      ${when(
+        this._showPrevButton,
+        () =>
+          html`<button id="btn-prev" @click=${this.#scrollLeft}>
+            <gds-icon name="chevron-left"></gds-icon>
+          </button>`
+      )}
       <div id="track">
-        ${when(
-          this._showPrevButton,
-          () =>
-            html`<button id="btn-prev" @click=${this.#scrollLeft}>
-              <gds-icon name="chevron-left"></gds-icon>
-            </button>`
-        )}
-
         <div
           id="segments"
           @pointerdown=${this.#startDrag}
@@ -96,15 +92,14 @@ export class GdsSegmentedControl extends GdsElement {
           ></slot>
         </div>
         <div id="indicator"></div>
-
-        ${when(
-          this._showNextButton,
-          () =>
-            html`<button id="btn-next" @click=${this.#scrollRight}>
-              <gds-icon name="chevron-right"></gds-icon>
-            </button>`
-        )}
-      </div>`
+      </div>
+      ${when(
+        this._showNextButton,
+        () =>
+          html`<button id="btn-next" @click=${this.#scrollRight}>
+            <gds-icon name="chevron-right"></gds-icon>
+          </button>`
+      )}`
   }
 
   #startDrag = (event: PointerEvent) => {
@@ -140,28 +135,33 @@ export class GdsSegmentedControl extends GdsElement {
   }
 
   @watch('segMinWidth')
-  @watch('segMaxWidth')
-  private _recalculateMinMaxWidth() {
+  private _recalculateMinWidth() {
     this.updateComplete.then(() => this.#calculateVisibleSegments())
   }
 
   #calculateVisibleSegments = () => {
-    const availableWidth = this._elTrack.offsetWidth
-    const numSegments = this.#segments.length
-    const maxVisibleSegments = Math.floor(availableWidth / this.segMinWidth)
-    const segmentWidth = Math.min(
-      this.segMaxWidth,
-      availableWidth / maxVisibleSegments
-    )
-    const calculatedNumVisibleSegments = Math.floor(
-      availableWidth / segmentWidth
-    )
+    const calcNumVisibleSegments = () => {
+      // Actual available width in the track
+      const availableWidth = this._elTrack.offsetWidth
 
-    this.#segments.forEach((segment) => {
-      segment.style.width = segmentWidth + 'px'
-    })
+      // Max avaliable width in the track accounting for the scroll buttons
+      const availableWidthIncBtns = this.offsetWidth - 88
 
-    const endFirstIndex = this.#segments.length - calculatedNumVisibleSegments
+      const maxVisibleSegments = Math.floor(
+        availableWidthIncBtns / this.segMinWidth
+      )
+      const segmentWidth = availableWidth / maxVisibleSegments
+      return {
+        count: maxVisibleSegments,
+        segmentWidth,
+      }
+    }
+
+    // Run an initial calculation to get the number of visible segments
+    const { count } = calcNumVisibleSegments()
+
+    // prevent overscroll by clamping #firstVisibleIndex
+    const endFirstIndex = this.#segments.length - count
     const hasReachedEnd = this.#firstVisibleIndex >= endFirstIndex
     const isAtStart = this.#firstVisibleIndex <= 0
     if (hasReachedEnd) {
@@ -170,13 +170,28 @@ export class GdsSegmentedControl extends GdsElement {
     if (isAtStart) {
       this.#firstVisibleIndex = 0
     }
+    //
 
-    setTimeout(() => this.#updateScrollBtnState(), 150)
+    // Update the visible state of the scroll buttons
+    this.#updateScrollBtnState(count)
 
-    this._elSegments.style.left = `-${this.#firstVisibleIndex * segmentWidth}px`
-    this.#calculatedSegmentWidth = segmentWidth
+    // Wait for lit-html to render updated buttons and then update the segment widths
+    this.updateComplete.then(() => {
+      // Run calculations again to get the final segmentWidth with updated state of the buttons
+      // taken into account
+      const { segmentWidth } = calcNumVisibleSegments()
 
-    setTimeout(() => this.#updateIndicator(), 150)
+      this.#segments.forEach((segment) => {
+        segment.style.width = segmentWidth + 'px'
+      })
+
+      this._elSegments.style.left = `-${
+        this.#firstVisibleIndex * segmentWidth
+      }px`
+      this.#calculatedSegmentWidth = segmentWidth
+
+      setTimeout(() => this.#updateIndicator(), 150)
+    })
   }
 
   #handleSlotChange = () => {
@@ -186,26 +201,29 @@ export class GdsSegmentedControl extends GdsElement {
   #scrollLeft = () => {
     this.#firstVisibleIndex--
     this.#calculateVisibleSegments()
+    this.#calculateVisibleSegments()
   }
 
   #scrollRight = () => {
     this.#firstVisibleIndex++
     this.#calculateVisibleSegments()
+    this.#calculateVisibleSegments()
   }
 
-  #updateScrollBtnState = () => {
-    const { clientWidth } = this._elTrack
-    const { offsetWidth, offsetLeft } = this._elSegments
-
-    this._showPrevButton = offsetLeft < 0
-    this._showNextButton = -offsetLeft + clientWidth < offsetWidth
+  #updateScrollBtnState = (numVisibleSegments: number) => {
+    this._showPrevButton = this.#firstVisibleIndex > 0
+    this._showNextButton =
+      this.#firstVisibleIndex < this.#segments.length - numVisibleSegments
   }
 
   #updateIndicator = () => {
     const segment = this.#segments.find((s) => s.selected)
+    const btnOffset = this._showPrevButton ? 44 : 0
 
     if (segment) {
-      this._elIndicator.style.transform = `translateX(${segment.offsetLeft}px)`
+      this._elIndicator.style.transform = `translateX(${
+        segment.offsetLeft - btnOffset
+      }px)`
       this._elIndicator.style.width = `${segment.offsetWidth}px`
     }
   }

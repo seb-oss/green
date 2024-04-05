@@ -1,6 +1,6 @@
 
 :host {
-  display: inline-block;
+  display: flex;
   background-color: var(--gds-sys-color-container-dim1);
   border: 0.25rem solid var(--gds-sys-color-container-dim1);
   gap: 0.25rem;
@@ -8,22 +8,25 @@
   contain: layout;
   max-width: 100%;
   overflow: hidden;
+  height: 3rem;
 }
 
 
 #track {
   box-sizing: border-box;
-  display: inline-flex;
+  display: flex;
   flex-grow: 0;
   flex-shrink: 1;
   width: 100%;
+  position: relative;
+  overflow:hidden;
 }
 
 #segments {
   box-sizing: border-box;
   display: inline-flex;
-  position: relative;
   transition: .1s;
+  position: relative;
 }
 
 #segments > * {
@@ -36,25 +39,18 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  position: absolute;
-  left: 0;
   border-radius: calc(infinity * 1px);
   background-color: var(--gds-sys-color-container-dim1);
   border-width: 0;
   appearance: none;
-  height: 100%;
   aspect-ratio: 1;
-  z-index: 2;
+  height: 100%;
+  width: 2.5rem;
   cursor: pointer;
 
   &:hover {
     background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), var(--gds-sys-color-container-dim1));
   }
-}
-
-#btn-next {
-  right: 0;
-  left: auto;
 }
 
 ::slotted(*) {
