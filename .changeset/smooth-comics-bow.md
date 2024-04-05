@@ -1,5 +1,5 @@
 ---
-'@sebgroup/chlorophyll': minor
+'@sebgroup/chlorophyll': patch
 ---
 
 Remove unused collor pallet
