@@ -157,7 +157,7 @@ export class GdsSegmentedControl extends GdsElement {
 
       this.#segmentsContainerLeft = this.#dragStartLeft + delta
       this.#applySegmentsTransform()
-    } catch {}
+    } catch {} // eslint-disable-line no-empty
   }
 
   #endDrag = (event: PointerEvent) => {
@@ -166,7 +166,7 @@ export class GdsSegmentedControl extends GdsElement {
     try {
       this._elSegments.releasePointerCapture(event.pointerId)
       this.#calcVisibleAfterDrag()
-    } catch {}
+    } catch {} // eslint-disable-line no-empty
   }
 
   #calcVisibleAfterDrag = () => {
