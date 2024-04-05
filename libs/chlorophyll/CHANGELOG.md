@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.3.1
+
+### Patch Changes
+
+- 7a6fd4c: Remove unused collor pallet
+
+## 3.3.0
+
+### Minor Changes
+
+- fe36778: **`use-green` scoping:** Allow setting a custom selector for the scoping`
+
 ## 3.2.0
 
 ### Minor Changes
