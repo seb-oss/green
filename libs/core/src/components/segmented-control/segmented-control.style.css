@@ -1,4 +1,3 @@
-
 :host {
   display: flex;
   background-color: var(--gds-sys-color-container-dim1);
@@ -11,7 +10,6 @@
   height: 3rem;
 }
 
-
 #track {
   box-sizing: border-box;
   display: flex;
@@ -19,23 +17,23 @@
   flex-shrink: 1;
   width: 100%;
   position: relative;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 #segments {
   box-sizing: border-box;
   display: inline-flex;
-  transition: .1s;
+  transition: 0.2s;
   position: relative;
   z-index: 1;
 }
 
 #segments > * {
   flex: 1 1 auto;
-  transition: .1s;
 }
 
-#btn-prev, #btn-next {
+#btn-prev,
+#btn-next {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,9 +46,16 @@
   height: 100%;
   width: 2.5rem;
   cursor: pointer;
+  color: var(--gds-sys-color-content-content);
 
-  &:hover {
-    background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), var(--gds-sys-color-container-dim1));
+  @media (pointer: fine) {
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-state-layers-state-black-dim1),
+        var(--gds-sys-color-container-dim1)
+      );
+    }
   }
 }
 
@@ -66,6 +71,6 @@
   height: 100%;
   background-color: var(--gds-sys-color-container-bright);
   border-radius: calc(infinity * 1px);
-  transition: transform .1s, width .1s;
+  transition: transform 0.2s, width 0.2s;
   z-index: 0;
 }
