@@ -1,5 +1,11 @@
 [
   {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
     "id": "components-sortable-list--default",
     "name": "Default",
     "title": "Components/Sortable list",
@@ -492,12 +498,6 @@
         "component-accordion"
       ]
     }
-  },
-  {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
   },
   {
     "id": "components-form-input--default",
