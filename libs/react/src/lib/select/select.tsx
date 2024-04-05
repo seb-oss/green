@@ -53,10 +53,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     })
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_info`]: info,
-      [`gds-expandable-info-${uuid}`]: expandableInfo,
       [`${uuid}_message`]:
         validator?.message !== undefined && validator.message.length > 0,
+      [`${uuid}_info`]: info || props.labelInformation,
+      [`gds-expandable-info-${uuid}`]: expandableInfo,
     })
 
     return (
