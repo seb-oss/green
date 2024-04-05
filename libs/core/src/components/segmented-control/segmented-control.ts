@@ -93,6 +93,7 @@ export class GdsSegmentedControl extends GdsElement {
           id="segments"
           @pointerdown=${this.#startDrag}
           @pointermove=${this.#drag}
+          @touchmove=${this.#drag}
           @pointerup=${this.#endDrag}
           @pointercancel=${this.#endDrag}
         >
@@ -121,7 +122,11 @@ export class GdsSegmentedControl extends GdsElement {
 
   #drag = (event: PointerEvent) => {
     if (!this.#isDragging) return
-    this._elSegments.setPointerCapture(event.pointerId)
+    event.preventDefault()
+
+    if (!this._elSegments.hasPointerCapture(event.pointerId))
+      this._elSegments.setPointerCapture(event.pointerId)
+
     const dx = event.clientX - this.#dragStartX
     this.#segmentsContainerLeft = this.#dragStartLeft + dx
     this.#applySegmentsTransform()
@@ -209,9 +214,11 @@ export class GdsSegmentedControl extends GdsElement {
   }
 
   #applySegmentsTransform = () => {
-    this._elSegments.style.transform = `translateX(${
-      this.#segmentsContainerLeft
-    }px)`
+    window.requestAnimationFrame(() => {
+      this._elSegments.style.transform = `translateX(${
+        this.#segmentsContainerLeft
+      }px)`
+    })
   }
 
   #handleSlotChange = () => {
