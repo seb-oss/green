@@ -25,6 +25,11 @@ import style from './segmented-control.style.css'
 export class GdsSegmentedControl extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
+  /**
+   * Minimum width of each segment. Used for calculating the number of visible
+   * segments that can fit based on the available space.
+   * @attr seg-min-width
+   */
   @property({ type: Number, attribute: 'seg-min-width' })
   segMinWidth = 100
 
@@ -50,14 +55,9 @@ export class GdsSegmentedControl extends GdsElement {
   @state()
   private _showNextButton = false
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-    const resizeObserver = new ResizeObserver((entries) => {
-      this.#calculateVisibleSegments()
-    })
-    resizeObserver.observe(this)
-  }
+  #resizeObserver = new ResizeObserver(() => {
+    this.#calcLayout()
+  })
 
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
@@ -67,6 +67,17 @@ export class GdsSegmentedControl extends GdsElement {
   #dragStartX = 0
   #dragStartLeft = 0
   #isDragging = false
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-segmented-control')
+    this.#resizeObserver.observe(this)
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.#resizeObserver.unobserve(this)
+  }
 
   render() {
     return html`${this._tStyles}
@@ -113,7 +124,7 @@ export class GdsSegmentedControl extends GdsElement {
     this._elSegments.setPointerCapture(event.pointerId)
     const dx = event.clientX - this.#dragStartX
     this.#segmentsContainerLeft = this.#dragStartLeft + dx
-    this.#applySegmentsScroll()
+    this.#applySegmentsTransform()
   }
 
   #endDrag = (event: PointerEvent) => {
@@ -127,7 +138,7 @@ export class GdsSegmentedControl extends GdsElement {
     this.#firstVisibleIndex = Math.round(
       -this.#segmentsContainerLeft / this.#calculatedSegmentWidth
     )
-    this.#calculateVisibleSegments()
+    this.#calcLayout()
   }
 
   get #segments() {
@@ -136,10 +147,12 @@ export class GdsSegmentedControl extends GdsElement {
 
   @watch('segMinWidth')
   private _recalculateMinWidth() {
-    this.updateComplete.then(() => this.#calculateVisibleSegments())
+    this.updateComplete.then(() => this.#calcLayout())
   }
 
-  #calculateVisibleSegments = () => {
+  // Calculates the layout based on the configured min width
+  // and the available space in the track
+  #calcLayout = () => {
     const calcNumVisibleSegments = () => {
       // Actual available width in the track
       const availableWidth = this._elTrack.offsetWidth
@@ -186,7 +199,7 @@ export class GdsSegmentedControl extends GdsElement {
       })
 
       this.#segmentsContainerLeft = -this.#firstVisibleIndex * segmentWidth
-      this.#applySegmentsScroll()
+      this.#applySegmentsTransform()
 
       this.#calculatedSegmentWidth = segmentWidth
       this.#segmentWidth = segmentWidth
@@ -195,32 +208,34 @@ export class GdsSegmentedControl extends GdsElement {
     })
   }
 
-  #applySegmentsScroll = () => {
+  #applySegmentsTransform = () => {
     this._elSegments.style.transform = `translateX(${
       this.#segmentsContainerLeft
     }px)`
   }
 
   #handleSlotChange = () => {
-    this.#calculateVisibleSegments()
+    this.#calcLayout()
   }
 
   #scrollLeft = () => {
     this.#firstVisibleIndex--
-    this.#calculateVisibleSegments()
+    this.#calcLayout()
   }
 
   #scrollRight = () => {
     this.#firstVisibleIndex++
-    this.#calculateVisibleSegments()
+    this.#calcLayout()
   }
 
+  // Updates the visibility of the scroll buttons
   #updateScrollBtnState = (numVisibleSegments: number) => {
     this._showPrevButton = this.#firstVisibleIndex > 0
     this._showNextButton =
       this.#firstVisibleIndex < this.#segments.length - numVisibleSegments
   }
 
+  // Updates the selection indicator position
   #updateIndicator = () => {
     const segment = this.#segments.find((s) => s.selected)
     if (segment) {
