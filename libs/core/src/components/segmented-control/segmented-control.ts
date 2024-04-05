@@ -59,6 +59,7 @@ export class GdsSegmentedControl extends GdsElement {
 
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
+  #numVisibleSegments = 0
   #segmentWidth = 0
   #segmentsContainerLeft = 0
   #focusedIndex = 0
@@ -195,6 +196,7 @@ export class GdsSegmentedControl extends GdsElement {
 
     // Run an initial calculation to get the number of visible segments
     const { count } = calcNumVisibleSegments()
+    this.#numVisibleSegments = count
 
     // Ensure that the focused segment is always visible
     if (this.#focusedIndex >= this.#firstVisibleIndex + count) {
@@ -253,11 +255,16 @@ export class GdsSegmentedControl extends GdsElement {
 
   #scrollLeft = () => {
     this.#firstVisibleIndex--
+    this.#focusedIndex = Math.min(
+      this.#focusedIndex,
+      this.#firstVisibleIndex + this.#numVisibleSegments - 1
+    )
     this.#calcLayout()
   }
 
   #scrollRight = () => {
     this.#firstVisibleIndex++
+    this.#focusedIndex = Math.max(this.#focusedIndex, this.#firstVisibleIndex)
     this.#calcLayout()
   }
 
