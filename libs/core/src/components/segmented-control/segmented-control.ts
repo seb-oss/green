@@ -1,14 +1,13 @@
 import { HTMLTemplateResult, unsafeCSS } from 'lit'
 import { query, state, property } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { when } from 'lit/directives/when.js'
-
-import { watch } from '../../utils/decorators'
+import { watch, observeLightDOM } from '../../utils/decorators'
 
 import { GdsSegment } from './segment/segment'
 
@@ -22,10 +21,16 @@ const btnSize = {
 
 /**
  * @element gds-segmented-control
- * @internal
+ * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+ *
+ * @status beta
+ *
+ * @slot - Segments to display in the control
+ *
+ * @event changed - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control')
-export class GdsSegmentedControl extends GdsElement {
+export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
   /**
@@ -42,6 +47,22 @@ export class GdsSegmentedControl extends GdsElement {
    */
   @property()
   size: 'small' | 'medium' = 'medium'
+
+  /**
+   * The value of the currently selected segment. Setting this property will
+   * select the segment with the matching value.
+   * @attr value
+   */
+  @property()
+  value?: ValueT
+
+  /**
+   * Returns the segments in the control
+   * @readonly
+   */
+  get segments() {
+    return this._elSlot.assignedElements() as GdsSegment[]
+  }
 
   // Used for Transitional Styles in some legacy browsers
   @state()
@@ -86,7 +107,7 @@ export class GdsSegmentedControl extends GdsElement {
 
     this.addEventListener('focusin', (e) => {
       if (e.target instanceof GdsSegment) {
-        this.#focusedIndex = this.#segments.indexOf(e.target as GdsSegment)
+        this.#focusedIndex = this.segments.indexOf(e.target as GdsSegment)
         this.#calcLayout(true)
       }
     })
@@ -123,7 +144,6 @@ export class GdsSegmentedControl extends GdsElement {
           role="list"
         >
           <slot
-            @slotchange=${this.#handleSlotChange}
             gds-allow="gds-segment"
             @click=${this.#handleSegmentClick}
             role="none"
@@ -138,6 +158,17 @@ export class GdsSegmentedControl extends GdsElement {
             <gds-icon name="chevron-right"></gds-icon>
           </button>`
       )}`
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    const selectedSegment = this.segments.find((s) => s.value === this.value)
+    if (selectedSegment) {
+      this.segments.forEach((s) => (s.selected = false))
+      selectedSegment.selected = true
+      this.#focusedIndex = this.segments.indexOf(selectedSegment)
+      this.#calcLayout(true)
+    }
   }
 
   #startDrag = (event: PointerEvent) => {
@@ -176,10 +207,6 @@ export class GdsSegmentedControl extends GdsElement {
       -this.#segmentsContainerLeft / this.#calculatedSegmentWidth
     )
     this.#calcLayout()
-  }
-
-  get #segments() {
-    return this._elSlot.assignedElements() as GdsSegment[]
   }
 
   @watch('segMinWidth')
@@ -221,7 +248,7 @@ export class GdsSegmentedControl extends GdsElement {
     }
 
     // prevent overscroll by clamping #firstVisibleIndex
-    const endFirstIndex = this.#segments.length - count
+    const endFirstIndex = this.segments.length - count
     const hasReachedEnd = this.#firstVisibleIndex >= endFirstIndex
     const isAtStart = this.#firstVisibleIndex <= 0
     if (hasReachedEnd) {
@@ -241,7 +268,7 @@ export class GdsSegmentedControl extends GdsElement {
       // taken into account
       const { segmentWidth } = calcNumVisibleSegments()
 
-      this.#segments.forEach((segment) => {
+      this.segments.forEach((segment) => {
         segment.style.width = segmentWidth + 'px'
       })
 
@@ -263,7 +290,16 @@ export class GdsSegmentedControl extends GdsElement {
     })
   }
 
-  #handleSlotChange = () => {
+  // Since we want to get notified of attribute changes in the slotted segments,
+  // we need to use a MutationObserver to listen for changes in the light DOM
+  @observeLightDOM({
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: false,
+  })
+  private _handleSlotChange() {
+    this.value = this.segments.find((s) => s.selected)?.value
     this.#calcLayout()
   }
 
@@ -281,14 +317,14 @@ export class GdsSegmentedControl extends GdsElement {
   #updateScrollBtnState = (numVisibleSegments: number) => {
     this._showPrevButton = this.#firstVisibleIndex > 0
     this._showNextButton =
-      this.#firstVisibleIndex < this.#segments.length - numVisibleSegments
+      this.#firstVisibleIndex < this.segments.length - numVisibleSegments
   }
 
   // Updates the selection indicator position
   #updateIndicator = () => {
-    const segment = this.#segments.find((s) => s.selected)
+    const segment = this.segments.find((s) => s.selected)
     if (segment) {
-      const selectedSegmentIndex = this.#segments.indexOf(segment)
+      const selectedSegmentIndex = this.segments.indexOf(segment)
       const offset = selectedSegmentIndex * this.#segmentWidth
       this._elIndicator.style.transform = `translateX(${offset}px)`
       this._elIndicator.style.width = `${this.#segmentWidth}px`
@@ -299,18 +335,18 @@ export class GdsSegmentedControl extends GdsElement {
   }
 
   #handleSegmentClick = (event: Event) => {
-    const segment = this.#segments.find(
+    const selectedSegment = this.segments.find(
       (s) => s === event.target || s.contains(event.target as Node)
     )
-    if (segment) {
-      this.#segments.forEach((s) => (s.selected = false))
-      segment.selected = true
+    if (selectedSegment) {
+      this.segments.forEach((s) => (s.selected = false))
+      selectedSegment.selected = true
 
       this.#updateIndicator()
 
       this.dispatchEvent(
-        new CustomEvent('gds-segment-click', {
-          detail: { segment },
+        new CustomEvent('changed', {
+          detail: { segment: selectedSegment },
           bubbles: true,
           composed: true,
         })

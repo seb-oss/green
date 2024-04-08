@@ -13,10 +13,9 @@ import style from './segment.style.css'
 
 /**
  * @element gds-segment
- * @internal
  */
 @gdsCustomElement('gds-segment')
-export class GdsSegment extends GdsElement {
+export class GdsSegment<ValueT = any> extends GdsElement {
   static styles = [...tokens, unsafeCSS(style)]
 
   /**
@@ -25,6 +24,13 @@ export class GdsSegment extends GdsElement {
    */
   @property({ type: Boolean, reflect: true })
   selected = false
+
+  /**
+   * Value can be used to tie arbitrary data to the segment.
+   * @attr value
+   */
+  @property()
+  value?: ValueT
 
   connectedCallback(): void {
     super.connectedCallback()
