@@ -19,12 +19,18 @@ import style from './segment.style.css'
 export class GdsSegment extends GdsElement {
   static styles = [...tokens, unsafeCSS(style)]
 
+  /**
+   * Whether the segment is selected
+   * @attr selected
+   */
   @property({ type: Boolean, reflect: true })
   selected = false
 
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented')
+
+    this.setAttribute('role', 'listitem')
   }
 
   render() {

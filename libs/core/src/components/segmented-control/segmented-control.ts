@@ -120,13 +120,15 @@ export class GdsSegmentedControl extends GdsElement {
           @touchmove=${this.#drag}
           @pointerup=${this.#endDrag}
           @pointercancel=${this.#endDrag}
+          role="list"
         >
           <slot
             @slotchange=${this.#handleSlotChange}
             gds-allow="gds-segment"
             @click=${this.#handleSegmentClick}
+            role="none"
           ></slot>
-          <div id="indicator"></div>
+          <div id="indicator" role="none"></div>
         </div>
       </div>
       ${when(
