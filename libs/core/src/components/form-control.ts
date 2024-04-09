@@ -2,8 +2,8 @@ import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { watch } from '../utils/decorators'
-import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../gds-element'
+import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
 
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
@@ -94,10 +94,6 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   get form() {
     return this.#internals.form
-  }
-
-  get type() {
-    return getUnscopedTagName(this.localName) || 'gds-form-control'
   }
 
   get validity() {

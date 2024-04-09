@@ -10,7 +10,7 @@ import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-st
 //import { setLocale } from '@sebgroup/green-core/localization'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join('')
+  strs.map((s, i) => s ?? '' + values[i]).join('')
 )
 
 export class AppElement extends HTMLElement {
@@ -23,9 +23,9 @@ export class AppElement extends HTMLElement {
     this.innerHTML = html`
       <div class="wrapper">
         <h1 class="mb-5">Green Core test app</h1>
-        <!-- <simple-values></simple-values> -->
+        <simple-values></simple-values>
         <!-- <complex-values></complex-values> -->
-        <custom-localization></custom-localization>
+        <!-- <custom-localization></custom-localization> -->
       </div>
     `
   }

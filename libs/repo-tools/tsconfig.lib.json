@@ -5,6 +5,10 @@
     "declaration": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/generators/core-component-generator/files/datepicker.test.ts.template",
+    "src/generators/core-component-generator/files/datepicker.ts.template"
+  ],
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
 }

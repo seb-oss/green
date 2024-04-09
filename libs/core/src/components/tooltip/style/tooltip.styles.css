@@ -1,0 +1,192 @@
+@layer gds-tooltip, tokens, a11y, parts, position, trigger, keyframes;
+
+@layer gds-tooltip {
+  @layer tokens {
+    :host {
+      --gds-tooltip-bg-color: #000;
+      --gds-tooltip-bg-alpha: 90%;
+      --gds-tooltip-fs: 14px;
+      --gds-tooltip-bg: color-mix(
+        in srgb,
+        var(--gds-tooltip-bg-color) var(--gds-tooltip-bg-alpha),
+        transparent
+      );
+      --gds-tooltip-color: #fff;
+      --gds-tooltip-offset: 8px;
+      --gds-tooltip-arrow: 6px;
+      --gds-tooltip-radii: 8px;
+      --gds-tooltip-transition-easing: var(--gds-sys-transition-easing);
+      display: contents;
+      position: relative;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gds-tooltip-color-bg: var(
+          --gds-tooltip-color-bg-dark,
+          var(--gds-color-grey-20)
+        );
+      }
+    }
+  }
+
+  .gds-tooltip {
+    display: inline-block;
+    position: relative;
+
+    @layer a11y {
+      cursor: help;
+      --gds-tooltip-transition: var(--gds-sys-transition);
+      --gds-tooltip-contrast: var(--gds-sys-transition);
+    }
+
+    @layer parts {
+      &::before,
+      &::after {
+        font-size: var(--gds-tooltip-fs);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+        position: absolute;
+        display: none;
+        opacity: 0;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &::before {
+        content: '';
+        border: var(--gds-tooltip-arrow, 6px) solid transparent;
+        z-index: 1001;
+      }
+
+      &::after {
+        content: attr(content);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-inline: 2ch;
+        padding-block: 1.5ex;
+        max-inline-size: 50ch;
+        min-inline-size: max-content;
+        z-index: 1000;
+        offset-anchor: center top;
+        background-color: var(--gds-tooltip-bg);
+        color: var(--gds-tooltip-color);
+        border-radius: var(--gds-tooltip-radii);
+      }
+
+      &:hover::before,
+      &:hover::after {
+        display: flex;
+      }
+    }
+
+    @layer position {
+      &:not([position])::before,
+      &[position^='up']::before {
+        bottom: calc(100% + 2px);
+        border-bottom-width: 0;
+        border-top-color: var(--gds-tooltip-bg);
+      }
+      &:not([position])::after,
+      &[position^='up']::after {
+        bottom: calc(100% + var(--gds-tooltip-offset, 8px));
+      }
+
+      &:not([position])::before,
+      &:not([position])::after,
+      &[position^='up']::before,
+      &[position^='up']::after {
+        left: 50%;
+        transform: translate(-50%, calc(var(--gds-tooltip-offset, 8px) * -1));
+      }
+
+      &[position^='down']::before {
+        top: calc(100% + 2px);
+        border-top-width: 0;
+        border-bottom-color: var(--gds-tooltip-bg);
+      }
+      &[position^='down']::after {
+        top: calc(100% + var(--gds-tooltip-offset, 8px));
+      }
+      &[position^='down']::before,
+      &[position^='down']::after {
+        left: 50%;
+        transform: translate(-50%, var(--gds-tooltip-offset, 8px));
+      }
+
+      &[position^='left']::before {
+        top: 50%;
+        border-right-width: 0;
+        border-left-color: var(--gds-tooltip-bg);
+        left: calc(-1px - var(--gds-tooltip-offset, 8px));
+        transform: translate(calc(var(--gds-tooltip-offset, 8px) * -2), -50%);
+      }
+      &[position^='left']::after {
+        top: 50%;
+        right: calc(100% + var(--gds-tooltip-offset, 8px));
+        transform: translate(calc(var(--gds-tooltip-offset, 8px) * -1), -50%);
+      }
+
+      &[position^='right']::before {
+        top: 50%;
+        border-left-width: 0;
+        border-right-color: var(--gds-tooltip-bg);
+        right: calc(-1px - var(--gds-tooltip-offset, 8px));
+        transform: translate(var(--gds-tooltip-offset, 8px), -50%);
+      }
+      &[position^='right']::after {
+        top: 50%;
+        left: calc(100% + var(--gds-tooltip-offset, 8px));
+        transform: translate(var(--gds-tooltip-offset, 8px), -50%);
+      }
+    }
+
+    @layer trigger {
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::after {
+        animation: gds-tooltip-animation-y 300ms
+          var(--gds-tooltip-transition-easing) forwards;
+      }
+
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::after {
+        animation: gds-tooltip-animation-h 300ms
+          var(--gds-tooltip-transition-easing) forwards;
+      }
+    }
+  }
+
+  @layer keyframes {
+    @keyframes gds-tooltip-animation-y {
+      to {
+        opacity: 0.9;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @keyframes gds-tooltip-animation-h {
+      to {
+        opacity: 0.9;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}

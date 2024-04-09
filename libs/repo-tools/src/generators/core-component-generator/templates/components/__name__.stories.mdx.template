@@ -1,0 +1,7 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+
+<Meta title="Components/<%= pascalCase(name) %>" />
+
+# <%= splitCapitalized(name) %>
+
+TODO: Add documentation and examples

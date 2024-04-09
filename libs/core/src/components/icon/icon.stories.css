@@ -1,0 +1,17 @@
+gds-main {
+  display: flex;
+  gap: 120px;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+gds-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(24px, 48px));
+  gap: 80px;
+}
+
+gds-icons gds-icon {
+  display: flex;
+  align-items: center;
+}

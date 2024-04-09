@@ -3,12 +3,20 @@
     [
       "@nx/react/babel",
       {
-        "runtime": "automatic",
-        "useBuiltIns": "usage"
+        "useBuiltIns": "entry",
+        "corejs": "3"
       }
-    ]
+    ],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+    ["@babel/plugin-proposal-private-property-in-object", { "loose": true }],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "version": "legacy"
+      }
+    ]
   ]
 }

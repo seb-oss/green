@@ -1,0 +1,80 @@
+.gds-flex {
+  display: flex;
+  gap: var(--gds-gap-none);
+}
+
+.gds-flex-justify-start {
+  justify-content: flex-start;
+}
+
+.gds-flex-justify-end {
+  justify-content: flex-end;
+}
+
+.gds-flex-justify-center {
+  justify-content: center;
+}
+
+.gds-flex-justify-between {
+  justify-content: space-between;
+}
+
+.gds-flex-justify-around {
+  justify-content: space-around;
+}
+
+.gds-flex-justify-evenly {
+  justify-content: space-evenly;
+}
+
+.gds-flex-align-start {
+  align-items: flex-start;
+}
+
+.gds-flex-align-end {
+  align-items: flex-end;
+}
+
+.gds-flex-align-center {
+  align-items: center;
+}
+
+.gds-flex-wrap-nowrap {
+  flex-wrap: nowrap;
+}
+
+.gds-flex-wrap-wrap {
+  flex-wrap: wrap;
+}
+
+.gds-flex-wrap-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.gds-flex-direction-row {
+  flex-direction: row;
+}
+
+.gds-flex-direction-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.gds-flex-direction-column {
+  flex-direction: column;
+}
+
+.gds-flex-direction-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.gds-flex-gap-small {
+  gap: var(--gds-gap-sm);
+}
+
+.gds-flex-gap-medium {
+  gap: var(--gds-gap-md);
+}
+
+.gds-flex-gap-large {
+  gap: var(--gds-gap-lg);
+}

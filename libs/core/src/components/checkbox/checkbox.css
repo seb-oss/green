@@ -1,0 +1,149 @@
+:host {
+  --gds-checkbox-bg-color: hsl(0, 0%, 100%);
+  --gds-checkbox-border-color: hsla(60, 4%, 50%, 1);
+  --gds-checkbox-border-width: 2px;
+  --gds-checkbox-border-radius: 4px;
+
+  --gds-checkbox-color-hover: hsla(60, 6%, 90%, 1);
+  --gds-checkbox-color-active: hsla(60, 4%, 85%, 1);
+
+  --gds-checkbox-checked-color: hsla(60, 4%, 20%, 1);
+  --gds-checkbox-color-tick: hsl(0, 0%, 100%);
+}
+
+.gds-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: calc(var(--gds-checkbox-border-radius) * 2);
+  transition: all 248ms ease-in-out;
+  cursor: pointer;
+
+  & input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    aspect-ratio: 1/1;
+    width: 16px;
+    height: 16px;
+    background-color: var(--gds-checkbox-bg-color);
+    border: var(--gds-checkbox-border-width) solid
+      var(--gds-checkbox-border-color);
+    border-radius: var(--gds-checkbox-border-radius);
+    transition: all 248ms cubic-bezier(0.2, 0.85, 0.32, 1.2);
+
+    &::after {
+      content: '';
+      width: 5px;
+      height: 8px;
+      border: var(--gds-checkbox-border-width) solid
+        var(--gds-checkbox-color-tick);
+      border-top: 0;
+      border-left: 0;
+      rotate: 43deg;
+      inset: 1px 0 0 3.5px;
+      position: absolute;
+      pointer-events: none;
+      box-sizing: border-box;
+      transition: all 248ms cubic-bezier(0.2, 0.85, 0.32, 1.2);
+      scale: 0.8;
+      opacity: 0;
+    }
+
+    &:checked {
+      color: var(--gds-checkbox-checked-color-tick);
+      border-color: var(--gds-checkbox-checked-color);
+      background-color: var(--gds-checkbox-checked-color);
+
+      &::after {
+        scale: 1;
+        opacity: 1;
+      }
+    }
+
+    &[indeterminate],
+    &:indeterminate {
+      &::after {
+        border-top: 0;
+        border-left: 0;
+        border-radius: 0;
+        width: 8px;
+        height: var(--gds-checkbox-border-width);
+        inset: 5px 0px 0px 2px;
+        rotate: 0deg;
+        opacity: 1;
+        scale: 1;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  &:hover:has(input:not([disabled])) {
+    background-color: var(--gds-checkbox-color-hover);
+  }
+
+  &:active:has(input:not([disabled])) {
+    background-color: var(--gds-checkbox-color-active);
+    .gds-checkbox-core {
+      border-color: var(--gds-checkbox-checked-color);
+    }
+  }
+
+  &:has(input:checked) {
+    background-color: var(--gds-checkbox-color-hover);
+  }
+
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+
+  /* Invalid state */
+
+  &:has(input:invalid) {
+    --gds-checkbox-bg-color: hsla(13, 75%, 95%, 1);
+    --gds-checkbox-border-color: hsla(9, 75%, 38%, 1);
+    --gds-checkbox-color-hover: hsla(12, 75%, 91%, 1);
+    --gds-checkbox-color-active: hsla(12, 78%, 86%, 1);
+    --gds-checkbox-checked-color: hsla(9, 75%, 38%, 1);
+    --gds-checkbox-color-tick: hsla(0, 0%, 100%, 1);
+
+    & input {
+      &::after {
+        border-color: var(--gds-checkbox-color-tick);
+      }
+
+      &:checked {
+        color: var(--gds-checkbox-checked-color-tick);
+        border-color: var(--gds-checkbox-checked-color);
+        background-color: var(--gds-checkbox-checked-color);
+      }
+    }
+
+    &:hover:has(input:not([disabled])) {
+      background-color: var(--gds-checkbox-color-hover);
+    }
+
+    &:active:has(input:not([disabled])) {
+      background-color: var(--gds-checkbox-color-active);
+      .gds-checkbox-core {
+        border-color: var(--gds-checkbox-checked-color);
+      }
+    }
+
+    &:has(input:checked) {
+      background-color: var(--gds-checkbox-color-hover);
+    }
+  }
+}

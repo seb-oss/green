@@ -40,8 +40,12 @@
 'sbc083a1dbee9af73': `Februari`,
 'scb6b9cb49cf93277': `April`,
 'sd898d99fd9c13de6': `Sök i listan av val`,
+'sdc27791837e94961': `Visa utökad beskrivning`,
+'sdc42f1da42d6411a': `Rensa text`,
 'se0955919920ee87d': `Dag`,
 'se4129fd6b9d7b4c2': `Sista tillgängliga datum`,
 'sf295af199c723ec8': `Fre`,
+'se4129fd6b9d7b4c2': `Last available date`,
+'s8ade4e9d5e804d6a': `First available date`,
     };
   
