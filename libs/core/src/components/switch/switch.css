@@ -3,13 +3,10 @@
   --gds-checkbox-border-color: hsla(60, 4%, 20%, 1);
   --gds-checkbox-border-width: 7.5px;
   --gds-checkbox-border-radius: 200px;
-
   --gds-checkbox-color-hover: hsla(60, 6%, 90%, 1);
   --gds-checkbox-color-active: hsla(60, 4%, 85%, 1);
-
   --gds-checkbox-checked-color: hsla(130, 40%, 30%, 1);
   --gds-checkbox-color-tick: hsl(0, 0%, 100%);
-
   --gds-switch-transition: all 548ms ease-in-out;
   --gds-switch-animaton-on: 248ms;
   --gds-switch-animaton-off: 248ms;
@@ -37,10 +34,8 @@
   cursor: pointer;
   background-color: var(--gds-checkbox-color-hover);
 
-  & input {
+  input {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: relative;
     margin: unset;
     padding: unset;

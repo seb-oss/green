@@ -3,10 +3,8 @@
   --gds-checkbox-border-color: hsla(60, 4%, 50%, 1);
   --gds-checkbox-border-width: 2px;
   --gds-checkbox-border-radius: 4px;
-
   --gds-checkbox-color-hover: hsla(60, 6%, 90%, 1);
   --gds-checkbox-color-active: hsla(60, 4%, 85%, 1);
-
   --gds-checkbox-checked-color: hsla(60, 4%, 20%, 1);
   --gds-checkbox-color-tick: hsl(0, 0%, 100%);
 }
@@ -22,10 +20,8 @@
   transition: all 248ms ease-in-out;
   cursor: pointer;
 
-  & input {
+  input {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: relative;
     margin: unset;
     padding: unset;
@@ -96,6 +92,7 @@
 
   &:active:has(input:not([disabled])) {
     background-color: var(--gds-checkbox-color-active);
+
     .gds-checkbox-core {
       border-color: var(--gds-checkbox-checked-color);
     }
@@ -119,7 +116,7 @@
     --gds-checkbox-checked-color: hsla(9, 75%, 38%, 1);
     --gds-checkbox-color-tick: hsla(0, 0%, 100%, 1);
 
-    & input {
+    input {
       &::after {
         border-color: var(--gds-checkbox-color-tick);
       }
@@ -137,6 +134,7 @@
 
     &:active:has(input:not([disabled])) {
       background-color: var(--gds-checkbox-color-active);
+
       .gds-checkbox-core {
         border-color: var(--gds-checkbox-checked-color);
       }
