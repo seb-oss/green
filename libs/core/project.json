@@ -54,8 +54,15 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
+      "dependsOn": ["css-lint"],
       "options": {
         "lintFilePatterns": ["libs/core/**/*.ts"]
+      }
+    },
+    "css-lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx stylelint \"libs/core/**/*.(scss|css)\""
       }
     },
     "test-local": {
@@ -74,6 +81,7 @@
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
+      "dependsOn": ["tokens:build"],
       "options": {
         "port": 4400,
         "configDir": "libs/core/.storybook",
@@ -91,7 +99,7 @@
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
       "inputs": ["core"],
-      "dependsOn": ["build-src"],
+      "dependsOn": ["build-src", "tokens:build"],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",

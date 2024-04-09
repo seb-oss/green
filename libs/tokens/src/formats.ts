@@ -1,4 +1,4 @@
-import { formatHelpers, Format } from 'style-dictionary'
+import { Format, formatHelpers } from 'style-dictionary'
 
 const formats: Record<string, Format> = {
   'css/theme': {
@@ -82,94 +82,66 @@ const formats: Record<string, Format> = {
       )
     },
   },
-  // size: {
-  //   name: 'size',
-  //   formatter: function (args) {
-  //     const dictionary = Object.assign({}, args.dictionary)
-  //     const options = Object.assign({ selector: ':host' }, args.options)
-
-  //     dictionary.allTokens = dictionary.allTokens.map((token) => {
-  //       if (token.value && token.attributes.figma.resolvedType === 'FLOAT') {
-  //         return Object.assign({}, token, {
-  //           value: `${token.value}px`,
-  //           original: { value: `${token.value}px` },
-  //         })
-  //       } else {
-  //         return token
-  //       }
-  //     })
-
-  //     return (
-  //       formatHelpers.fileHeader({ file: args.file }) +
-  //       `${options.selector} {\n` +
-  //       formatHelpers.formattedVariables({
-  //         format: 'css',
-  //         dictionary,
-  //         outputReferences: options.outputReferences,
-  //       }) +
-  //       `\n}\n`
-  //     )
-  //   },
-  // },
   'figma/json': {
     name: 'json/figma',
-    formatter: function ({ dictionary, options }) {
-      dictionary.allTokens.map((token) => {
-        if (dictionary.usesReference(token.original.value)) {
-          const refs = dictionary.getReferences(token.original.value)
-          if (options.outputReferences) {
-            refs.forEach((ref) => {
-              token.value = {
-                type: 'VARIABLE_ALIAS',
-                id: ref?.attributes?.['figma'].id,
-              }
-              if (token.attributes) {
-                token.attributes['figma'].originalLightId =
-                  ref?.attributes?.['figma'].id
-
-                if (ref.path) {
-                  token.attributes['figma'].originalLightName = ref.path
-                    .slice(1, ref.path.length)
-                    .join('/')
-                }
-              }
-            })
-
-            if (token['darkValue']) {
-              const darkRefs = dictionary.getReferences(
-                token.original['darkValue']
-              )
-              darkRefs.forEach((ref) => {
-                token['darkValue'] = {
-                  type: 'VARIABLE_ALIAS',
-                  id: ref?.attributes?.['figma'].id,
-                }
-                if (token?.attributes?.['figma']) {
-                  token.attributes['figma'].originalDarkId =
-                    ref?.attributes?.['figma'].id
-
-                  if (ref.path) {
-                    token.attributes['figma'].originalDarkName = ref.path
-                      .slice(1, ref.path.length)
-                      .join('/')
-                  }
-                }
-              })
-            }
-          }
-          refs.forEach((ref) => {
-            if (token?.attributes?.['figma']) {
-              token.attributes['figma'].resolvedType =
-                ref?.attributes?.['figma'].resolvedType
-              token.attributes['figma'].originalId =
-                ref?.attributes?.['figma'].id
-
-              token.attributes['figma'].alias = true
-            }
+    formatter: function ({ dictionary }) {
+      return (
+        '[\n  ' +
+        dictionary.allTokens
+          .map((token) => {
+            return `${JSON.stringify({
+              name: token.name,
+              value: token.value,
+              darkValue: token.darkValue,
+              type: token.type,
+            })}`
           })
-        }
-      })
-      return JSON.stringify(dictionary.tokens, null, 2) + '\n'
+          .join(',\n  ') +
+        '\n]\n'
+      )
+    },
+  },
+  'scss/mixin': {
+    name: 'scss/mixin',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign(
+        { colorScheme: 'light', name: 'add-variables' },
+        args.options
+      )
+
+      const { colorScheme, name, outputReferences } = options
+
+      if (colorScheme === 'dark') {
+        // Override each token"s `value` with `darkValue`
+        dictionary.allTokens = dictionary.allTokens.map((token) => {
+          const { darkValue } = token
+          // Only override if the token has a darkValue and that you"ve passed in colorScheme: "dark" in the file options.
+          if (darkValue && colorScheme === 'dark') {
+            return Object.assign({}, token, {
+              value: token['darkValue'],
+              //Also need to override the original value for outputReferences: false to work
+              original: { value: token.original['darkValue'] },
+            })
+          } else {
+            return token
+          }
+        })
+      }
+
+      // Use the built-in format but with our customized dictionary object
+      // so it will output the darkValue instead of the value
+      // return format[format]({ ...args, dictionary })
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `@mixin ${name} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences,
+        }) +
+        `\n}\n`
+      )
     },
   },
 }

@@ -1,9 +1,8 @@
-import React from 'react'
 import { createComponent } from '@lit/react'
-
 import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
-
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import React from 'react'
+import { CoreMenuHeading } from '../context-menu/context-menu'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -41,6 +40,15 @@ export interface DropdownArgs {
 
   /** Force width of the popover to match trigger */
   syncPopoverWidth?: boolean
+
+  /** Size of the dropdown trigger */
+  size?: 'small' | 'medium'
+
+  /** Hide the label */
+  hideLabel?: boolean
+
+  /** Max height of the dropdown */
+  maxHeight?: number
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -49,6 +57,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 
@@ -87,9 +96,10 @@ export const Dropdown = ({
   validator,
   value,
   syncPopoverWidth,
+  ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
-    if (e.detail?.value) {
+    if ('value' in e.detail) {
       onChange?.(e.detail.value)
     }
   }
@@ -99,6 +109,7 @@ export const Dropdown = ({
     const compareFn = compareWith || ((a, b) => a === b)
     return compareFn(o1, o2)
   }
+
   const searchFilterAdapter = (q: string, o: GdsOption) => {
     if (searchFilter) return searchFilter(q, o.value[useValue])
     else
@@ -119,17 +130,29 @@ export const Dropdown = ({
         value={value}
         searchFilter={searchFilterAdapter}
         syncPopoverWidth={syncPopoverWidth}
+        size={props.size}
+        hideLabel={props.hideLabel}
+        maxHeight={props.maxHeight}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>
-        {options.map((option) => (
-          <CoreOption key={option[useValue]} value={option[useValue]}>
-            {option[display]}
-          </CoreOption>
-        ))}
+        {options.map((option) => {
+          if (option.heading) {
+            return (
+              <CoreMenuHeading key={option.label}>
+                {option[display]}
+              </CoreMenuHeading>
+            )
+          }
+          return (
+            <CoreOption key={option[useValue]} value={option[useValue]}>
+              {option[display]}
+            </CoreOption>
+          )
+        })}
       </CoreDropdown>
     </div>
   )

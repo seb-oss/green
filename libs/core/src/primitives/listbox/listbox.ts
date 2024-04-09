@@ -82,7 +82,8 @@ export class GdsListbox
 
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
-        (o) => !o.hasAttribute('isplaceholder')
+        (o) =>
+          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
       ) || []
     )
   }

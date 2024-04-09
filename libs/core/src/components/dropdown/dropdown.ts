@@ -2,7 +2,9 @@ import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { HTMLTemplateResult } from 'lit'
 import 'reflect-metadata'
 
 import { constrainSlots } from '../../utils/helpers'
@@ -26,7 +28,6 @@ import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
-import { CSSResult, HTMLTemplateResult } from 'lit'
 
 /**
  * @element gds-dropdown
@@ -34,7 +35,7 @@ import { CSSResult, HTMLTemplateResult } from 'lit'
  *
  * @status beta
  *
- * @slot - Options for the dropdown. Accepts `gds-option` elements.
+ * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
  * @slot sub-label - Renders between the label and the trigger button.
  * @slot message - Renders below the trigger button. Will be red if there is a validation error.
@@ -120,8 +121,27 @@ export class GdsDropdown<ValueT = any>
    * the popover width. If you use this option, make sure to verify that your options
    * are still readable and apply appropriate custom layout or truncation if neccecary.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, attribute: 'sync-popover-width' })
   syncPopoverWidth = false
+
+  /**
+   * Maximum height of the dropdown list.
+   */
+  @property({ type: Number, attribute: 'max-height' })
+  maxHeight = 500
+
+  /**
+   * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
+   * `medium` is the default size.
+   */
+  @property()
+  size: 'medium' | 'small' = 'medium'
+
+  /**
+   * Whether to hide the label.
+   */
+  @property({ type: Boolean, attribute: 'hide-label' })
+  hideLabel = false
 
   /**
    * Get the options of the dropdown.
@@ -210,7 +230,7 @@ export class GdsDropdown<ValueT = any>
     return html`
       ${this._tStyles}
       ${when(
-        this.label,
+        this.label && !this.hideLabel,
         () => html`<label for="trigger">${this.label}</label>`
       )}
 
@@ -224,6 +244,8 @@ export class GdsDropdown<ValueT = any>
         aria-owns="listbox"
         aria-controls="listbox"
         aria-expanded="${this.open}"
+        aria-label="${this.label}"
+        class=${classMap({ small: this.size === 'small' })}
       >
         <slot name="trigger">
           <span>${unsafeHTML(this.displayValue)}</span>
@@ -238,6 +260,7 @@ export class GdsDropdown<ValueT = any>
         .triggerRef=${this._elTriggerBtnAsync}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
+        .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         ${when(
@@ -260,7 +283,7 @@ export class GdsDropdown<ValueT = any>
           @gds-focus="${this.#handleOptionFocusChange}"
           @keydown=${this.#handleListboxKeyDown}
         >
-          <slot gds-allow="gds-option"></slot>
+          <slot gds-allow="gds-option gds-menu-heading"></slot>
         </gds-listbox>
       </gds-popover>
     `
@@ -284,7 +307,7 @@ export class GdsDropdown<ValueT = any>
     }
 
     // Set default value if none is set
-    if (!this.value) {
+    if (this.value === undefined) {
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
     }

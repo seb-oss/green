@@ -40,6 +40,7 @@ export interface DropdownOption {
   label?: string
   value?: any
   selected?: boolean
+  heading?: boolean
   [key: string]: any
 }
 
@@ -68,6 +69,9 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() compareWith?: CompareWith
   @Input() searchFilter?: SearchFilter
   @Input() syncPopoverWidth?: boolean
+  @Input() size?: 'small' | 'medium'
+  @Input() hideLabel?: boolean
+  @Input() maxHeight?: number
 
   /** @deprecated */
   @Input() fixedPlacement?: DropdownPlacements

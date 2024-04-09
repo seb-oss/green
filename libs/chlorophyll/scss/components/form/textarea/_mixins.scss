@@ -23,6 +23,10 @@ $background: tokens.$form-control-bg;
       border: 2px solid currentcolor;
     }
 
+    &:hover {
+      background-color: var(--gds-ref-pallet-base100);
+    }
+
     &:disabled,
     &.disabled,
     &[aria-disabled='true'] {

@@ -7,6 +7,7 @@
   --gds-comp-checkbox-container-width: 1rem;
 
   --gds-comp-checkbox-container-color: var(--gds-sys-color-surface);
+  --gds-comp-checkbox-container-color-disabled: var(--gds-ref-pallet-base200);
   --gds-comp-checkbox-border-color: var(--gds-sys-color-base);
   --gds-comp-checkbox-border-radius: var(--gds-sys-shape-corner-small);
 
@@ -16,7 +17,7 @@
   --gds-comp-checkbox-border-color-selected: var(--gds-sys-color-surface);
   --gds-comp-checkbox-border-color-focus: var(--gds-sys-color-blue-dark-2);
 
-/*  @media (prefers-color-scheme: dark) {
+  /*  @media (prefers-color-scheme: dark) {
     --gds-comp-checkbox-container-color: var(--gds-sys-color-base-container);
     --gds-comp-checkbox-border-color: transparent;
     --gds-comp-checkbox-hover-border-color: var(--gds-sys-color-blue);

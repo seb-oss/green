@@ -79,6 +79,11 @@ const elementLookupTable = new Map<string, string>()
  */
 export const gdsCustomElement = (tagName: string) => {
   if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
+    /**
+     * We still need to add elements to the lookup table since we use this lookup table to
+     * validate a custom element even though we are not using scoping
+     */
+    elementLookupTable.set(tagName, tagName)
     return customElement(tagName)
   }
 

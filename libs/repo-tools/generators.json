@@ -3,10 +3,10 @@
   "name": "repo-tools",
   "version": "0.0.1",
   "generators": {
-    "core-component-generator": {
-      "factory": "./src/generators/core-component-generator/generator",
-      "schema": "./src/generators/core-component-generator/schema.json",
-      "description": "core-component-generator generator"
+    "core-component": {
+      "factory": "./src/generators/core-component/generator",
+      "schema": "./src/generators/core-component/schema.json",
+      "description": "core-component generator"
     }
   }
 }

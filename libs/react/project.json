@@ -65,6 +65,7 @@
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
+
       "options": {
         "uiFramework": "@storybook/react",
         "configDir": "libs/react/.storybook",
@@ -79,11 +80,13 @@
         {
           "target": "build-with-types-and-scoping",
           "dependencies": true
-        }
+        },
+        "tokens:build"
       ]
     },
     "build-storybook": {
       "executor": "nx:run-commands",
+      "dependsOn": ["copy-fonts", "tokens:build"],
       "options": {
         "commands": [
           {

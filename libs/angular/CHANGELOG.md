@@ -1,5 +1,99 @@
 # Changelog
 
+## 3.6.0
+
+### Minor Changes
+
+- d4e06e7: New component: Sortable list
+
+### Patch Changes
+
+- Updated dependencies [d4e06e7]
+  - @sebgroup/chlorophyll@3.2.0
+
+## 3.5.2
+
+### Patch Changes
+
+- 7cb209f: Datepicker to take strings as value
+- Updated dependencies [feb1712]
+  - @sebgroup/chlorophyll@3.1.3
+
+## 3.5.1
+
+### Patch Changes
+
+- dc45b5e: fixed dropdown headings
+- Updated dependencies [f4d7fe7]
+- Updated dependencies [80c0cdf]
+  - @sebgroup/green-core@1.9.1
+  - @sebgroup/chlorophyll@3.1.2
+
+## 3.5.0
+
+### Minor Changes
+
+- 7820e8c: **Dropdown**
+
+  - Add `maxHeight` input
+
+- bb83849: **Datepicker:** Added support for disabling dates
+
+  - `disabled-weekends` will disable all weekend days in the calendar view
+  - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
+
+### Patch Changes
+
+- Updated dependencies [bb83849]
+- Updated dependencies [7820e8c]
+- Updated dependencies [7820e8c]
+  - @sebgroup/green-core@1.9.0
+
+## 3.4.0
+
+### Minor Changes
+
+- c0a99dd: Adds the Cell Table component
+- a1c5e60: New component: Grouped list
+
+### Patch Changes
+
+- Updated dependencies [a1c5e60]
+  - @sebgroup/green-core@1.8.0
+  - @sebgroup/chlorophyll@3.1.1
+
+## 3.3.0
+
+### Minor Changes
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
+### Patch Changes
+
+- Updated dependencies [78e09aa]
+- Updated dependencies [007f8ac]
+  - @sebgroup/extract@3.0.1
+  - @sebgroup/chlorophyll@3.1.0
+  - @sebgroup/green-core@1.7.0
+
+## 3.2.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- Updated dependencies [158d93a]
+- Updated dependencies [e0d3f09]
+- Updated dependencies [d8de14a]
+  - @sebgroup/green-core@1.6.0
+  - @sebgroup/chlorophyll@3.0.5
+
 ## 3.1.0
 
 ### Minor Changes

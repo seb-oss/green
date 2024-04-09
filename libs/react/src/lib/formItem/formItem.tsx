@@ -142,7 +142,7 @@ export const FormItem = ({
       )}
       {children}
       <div className="gds-form-item__footer">
-        {validator && <span className="form-info">{validator.message}</span>}
+        {validator && <span className="form-info" id={`${inputId}_message`}>{validator.message}</span>}
         {rightAlignedFooterInfo && (
           <span
             className="form-info"

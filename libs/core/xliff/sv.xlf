@@ -130,11 +130,21 @@
   <source>Today</source>
   <target>Idag</target>
 </trans-unit>
+<trans-unit id="s62931b2a50168976">
+  <source>Previous month</source>
+  <target>Föregående månad</target>
+</trans-unit>
+<trans-unit id="s46d6587089bd0356">
+  <source>Next month</source>
+  <target>Nästa månad</target>
+</trans-unit>
 <trans-unit id="se4129fd6b9d7b4c2">
   <source>Last available date</source>
+  <target>Sista tillgängliga datum</target>
 </trans-unit>
 <trans-unit id="s8ade4e9d5e804d6a">
   <source>First available date</source>
+  <target>Första tillgängliga datum</target>
 </trans-unit>
 </body>
 </file>

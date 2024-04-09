@@ -13,7 +13,7 @@ export interface IValidator {
   rules?: ValidatorRules
 }
 
-export const validateClassName = (value: IndicatorType) => {
+export const validateClassName = (value: IndicatorType | undefined) => {
   switch (value) {
     case 'success':
       return 'is-valid'

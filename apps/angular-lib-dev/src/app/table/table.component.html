@@ -1,0 +1,30 @@
+<h2>Tables</h2>
+<div class="container">
+  <h3 class="mb-4">Cell table</h3>
+
+  <ngg-cell-table
+    [rows]="rows"
+    [headerList]="headerList"
+    [className]="className"
+    [clickableRows]="arrow"
+    (rowClicked)="rowClicked($event)"
+  >
+  </ngg-cell-table>
+
+  <br />
+  <br />
+
+  <h3>Regular table</h3>
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of headerList">{{ header.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td *ngFor="let cell of row | keyvalue">{{ cell }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

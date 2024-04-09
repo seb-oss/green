@@ -17,7 +17,6 @@ import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
 
 import styles from './popover.styles'
-import { reference } from '@popperjs/core'
 
 /**
  * @element gds-popover
@@ -74,6 +73,20 @@ export class GdsPopover extends GdsElement {
    */
   @property()
   calcMaxWidth = (_referenceEl: HTMLElement) => `auto`
+
+  /**
+   * A callback that returns the minimum height of the popover.
+   * By default, the popover minHeight will be set to `auto`
+   */
+  @property()
+  calcMinHeight = (referenceEl: HTMLElement) => `auto`
+
+  /**
+   * A callback that returns the maximum height of the popover.
+   * By default, the popover maxHeight will be set to a hard coded pixel value (check source).
+   */
+  @property()
+  calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
@@ -262,6 +275,8 @@ export class GdsPopover extends GdsElement {
           top: `${y}px`,
           minWidth: this.calcMinWidth(referenceEl),
           maxWidth: this.calcMaxWidth(referenceEl),
+          minHeight: this.calcMinHeight(referenceEl),
+          maxHeight: this.calcMaxHeight(referenceEl),
         })
       )
     })

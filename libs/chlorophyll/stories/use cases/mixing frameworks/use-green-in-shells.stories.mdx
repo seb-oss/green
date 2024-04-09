@@ -8,23 +8,21 @@ Whenever you create an MFE (Micro Front End) that will be used or incorporated i
 
 ### Scoping CSS
 
+_Note: not necessary if the MFE uses a shadow DOM_
+
 The example below is for Angular but the same principle applies to other frameworks as well. We recommend setting up Angular with scss and that you add global styles to `styles.scss` located in the `src` folder of your project.
-It could look something like this:
+
+Import green and scope it to the app root. Eg: `app-root.use-green` (app-root is the default root in angular but should be renamed to a unique name).
+We use the app-root here to make sure that no CSS leaks outside of the MFE which will be rendered inside the `<app-root>` tag.
 
 **styles.scss**
 
 ```css
-/* Add use-green scope i.e. ability to use (`.use-green`) */
-@use '@sebgroup/chlorophyll/scss/components/use-green-scope';
-/* if you need to configure $font-path variable you do it here by adding like this:
+/* Add use-green scope. If you need to configure the font-path variable you can do it here as well by setting $font-path. */
 @use '@sebgroup/chlorophyll/scss/components/use-green-scope' with (
+  $use-green-selector: 'app-root.use-green',
   $font-path: './path/to/seb/font'
-); /*
-
-/* Import green and scope it to `.use-green` class and our root element (by default app-root in angular but you should change it).
-We use app-root here to make sure no CSS is applied to other elements except our MFE which will be rendered inside the `<app-root>` tag.
-This goes for any custom CSS we add as well, we should add inside our root element selector.
-Note if MFE or component is rendered using shadow DOM this is not necessary */
+);
 
 app-root.use-green {
   /* declare parts to include in a separate file that you import (to scope it to .use-green) */

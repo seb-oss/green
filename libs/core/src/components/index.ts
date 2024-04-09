@@ -11,8 +11,9 @@ export * from './tooltip/tooltip'
 export * from './flex/flex'
 export * from './grid/grid'
 export * from '../primitives/listbox/option'
-
+export * from '../primitives/menu/menu-heading'
 export * from './context-menu/context-menu'
 export * from '../primitives/menu/menu-item'
-
 export * from './datepicker/datepicker'
+export * from './grid/grid'
+export * from './grouped-list/grouped-list'

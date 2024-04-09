@@ -1,5 +1,81 @@
 # Changelog
 
+## 1.11.0
+
+### Minor Changes
+
+- 7532a30: **Popover**: Add base 2023 style
+- 7668dfd: Added a new component Grid
+- 7668dfd: Update grid to have singular values and better describe breakpoints and tokens moved to internal
+
+## 1.10.0
+
+### Minor Changes
+
+- 7532a30: **Popover**: Add base 2023 style
+- 7668dfd: Added a new component Grid
+- 7668dfd: Update grid to have singular values and better describe breakpoints and tokens moved to internal"
+
+## 1.9.2
+
+### Patch Changes
+
+- c59d1ea: Dropdown: fix issue where falsy values where considered as no values (only `undefined` should be explicitly considered as "no value") (closes #1259)
+
+## 1.9.1
+
+### Patch Changes
+
+- f4d7fe7: fixed value change when browsing months
+- 80c0cdf: **Datepicker, Dropdown**
+
+  - Fix broken dark mode styles
+
+## 1.9.0
+
+### Minor Changes
+
+- bb83849: **Datepicker:** Added support for disabling dates
+
+  - `disabled-weekends` will disable all weekend days in the calendar view
+  - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
+
+- 7820e8c: **Dropdown**
+
+  - Add `max-height` attrbute for controlling maximum height of dropdown popover box.
+
+### Patch Changes
+
+- 7820e8c: **Datepicker**
+
+  - Limit height of month and year dropdowns to less than height of calendar popover to prevent them getting cut off outside viewport.
+
+## 1.8.0
+
+### Minor Changes
+
+- a1c5e60: New component: Grouped list
+
+## 1.7.0
+
+### Minor Changes
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
+## 1.6.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- e0d3f09: Datepicker: Fix copy/paste when there are multiple instances of Datepicker in the document
+
 ## 1.5.1
 
 ### Patch Changes

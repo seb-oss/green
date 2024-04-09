@@ -48,13 +48,15 @@ const Template: Story<NggDatepickerComponent> = (
 
 export const Simple = Template.bind({})
 Simple.args = {
-  value: new Date(),
+  value: '10/10/2021',
   label: 'Date',
 }
 
 export const CustomOptions = Template.bind({})
 CustomOptions.args = {
   label: 'Birthday',
+  disabledWeekends: true,
+  disabledDates: [new Date(2024, 1, 6), new Date(2023, 12, 4)],
   options: {
     minDate: startOfYear(subYears(new Date(), 100)),
     maxDate: new Date(),

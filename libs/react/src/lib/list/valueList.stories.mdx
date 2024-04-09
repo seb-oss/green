@@ -1,34 +1,36 @@
-import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs'
-import ValueList from "./valueList"
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import ValueList from './valueList'
 
-export const ValueListValueTemplate = ({children}) => (
+export const ValueListValueTemplate = ({ children }) => (
   <ValueList.Value>{children}</ValueList.Value>
 )
 
-export const ValueListLabelTemplate = ({children}) => (
+export const ValueListLabelTemplate = ({ children }) => (
   <ValueList.Label>{children}</ValueList.Label>
 )
 
-export const ValueListTemplate = ({children, ...props}) => (
-    <ValueList.List {...props}>
-      <ValueList.Label>Ni vill sälja</ValueList.Label>
-      <ValueList.Value>Fritidshus</ValueList.Value>
-      <ValueList.Label>Lån på bostaden</ValueList.Label>
-      <ValueList.Value>1 000 000 kr</ValueList.Value>
-      <ValueList.Label>Ni köpte bostaden för</ValueList.Label>
-      <ValueList.Value>5 000 000 kr</ValueList.Value>
-      <ValueList.Label>Lägsta försäljningsbelopp</ValueList.Label>
-      <ValueList.Value>2 500 000 kr</ValueList.Value>
-      <ValueList.Label>Mäklararvode</ValueList.Label>
-      <ValueList.Value>50 000 kr</ValueList.Value>
-      <ValueList.Label>Kontantinsats från överskottet</ValueList.Label>
-      <ValueList.Value>375 000 kr</ValueList.Value>
-    </ValueList.List>
+export const ValueListTemplate = ({ children, ...props }) => (
+  <ValueList.List {...props}>
+    <ValueList.Label>Ni vill sälja</ValueList.Label>
+    <ValueList.Value>Fritidshus</ValueList.Value>
+    <ValueList.Label>Lån på bostaden</ValueList.Label>
+    <ValueList.Value>1 000 000 kr</ValueList.Value>
+    <ValueList.Label>Ni köpte bostaden för</ValueList.Label>
+    <ValueList.Value>5 000 000 kr</ValueList.Value>
+    <ValueList.Label>Lägsta försäljningsbelopp</ValueList.Label>
+    <ValueList.Value>2 500 000 kr</ValueList.Value>
+    <ValueList.Label>Mäklararvode</ValueList.Label>
+    <ValueList.Value>50 000 kr</ValueList.Value>
+    <ValueList.Label>Kontantinsats från överskottet</ValueList.Label>
+    <ValueList.Value>375 000 kr</ValueList.Value>
+  </ValueList.List>
 )
 
-<Meta title="Components/Lists" component={ValueList}/>
+<Meta title="Components/ValueList" component={ValueList} />
 
-## Value List
+## Value List <span className="badge warning" style={{ background: 'var(--background)' }}>Deprecated</span>
+
+This component is deprecated in favour of [`GroupedList`](/docs/components-grouped-list--page)
 
 <Canvas>
   <Story
@@ -38,14 +40,14 @@ export const ValueListTemplate = ({children, ...props}) => (
         name: 'inverted',
         type: {
           name: 'boolean',
-          required: false
+          required: false,
         },
         defaultValue: false,
         table: {
           type: { summary: 'Makes values bold instead of labels' },
           defaultValue: { summary: false },
-        }
-      }
+        },
+      },
     }}
   >
     {ValueListTemplate.bind({})}

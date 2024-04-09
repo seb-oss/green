@@ -18,7 +18,7 @@ $disabled-weight: 400; // regular
 
 // hover
 $hover-color: var(--gds-sys-color-font);
-$hover-background: var(--gds-ref-pallet-base300);
+$hover-background: var(--grey-500);
 $hover-border-radius: $border-radius;
 
 // focus
@@ -28,7 +28,7 @@ $focus-border-radius: $hover-border-radius;
 
 // selected
 $selected-color: hsl(var(--sg-hsl-white));
-$selected-background: var(--gds-ref-pallet-base800);
+$selected-background: var(--grey-1000);
 $selected-range-background: hsla(var(--sg-hsl-blue-2), 0.5);
 $selected-border-radius: $border-radius;
 $selected-range-border-radius: 0;
@@ -58,34 +58,24 @@ $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
 @mixin calendar() {
-  // use full width on small screens
-  // @include common.media-breakpoint-down(sm) {
-  //   width: 100%;
-  //   max-height: stretch;
-  // }
-
-  //.main {
   display: flex;
   justify-content: center;
+
   @include common.media-breakpoint-down(sm) {
     flex-wrap: wrap;
     overflow-y: auto;
   }
 
   table {
-    // general
     border-spacing: 0;
-    // use full width on small screens
-    @include common.media-breakpoint-down(sm) {
-      width: 100%;
-    }
 
     tr {
       th,
       td {
-        height: 2.5rem;
+        box-sizing: border-box;
+        height: 2.75rem;
         text-align: center;
-        width: 2.5rem;
+        width: 2.75rem;
       }
     }
 
@@ -123,8 +113,8 @@ $weekend-background: $background;
         &.today {
           background: $today-background;
           border-radius: $today-border-radius;
-          color: $today-color;
           box-shadow: inset 0 0 0 2px $selected-background;
+          color: $today-color;
         }
 
         // hover
@@ -137,8 +127,11 @@ $weekend-background: $background;
         }
 
         // focus
-        &:focus-visible:not(.disabled) {
+        &:focus-visible {
           @include common.add-focus();
+        }
+
+        &:focus-visible:not(.disabled) {
           border: solid 1px $background;
           border-radius: $focus-border-radius;
           cursor: pointer;
@@ -170,6 +163,8 @@ $weekend-background: $background;
         // disabled
         &.disabled {
           background: $disabled-background;
+          border: solid 1px $background;
+          border-radius: $date-border-radius;
           color: $disabled-color;
           cursor: not-allowed;
           font-weight: $disabled-weight;

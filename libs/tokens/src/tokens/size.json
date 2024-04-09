@@ -3,147 +3,67 @@
     "size": {
       "0": {
         "value": "0",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:1:119",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "1": {
         "value": "2",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:1:120",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "2": {
         "value": "4",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:1:121",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "3": {
         "value": "8",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:41",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "4": {
         "value": "12",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:42",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "5": {
         "value": "16",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:43",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "6": {
         "value": "24",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:44",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "7": {
         "value": "32",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:46",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "8": {
         "value": "40",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:47",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "9": {
         "value": "48",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:45",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "10": {
         "value": "64",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:48",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "11": {
         "value": "80",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:49",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "12": {
         "value": "96",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:50",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "13": {
         "value": "112",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:51",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "14": {
         "value": "128",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:52",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "type": "float"
       },
       "15": {
-        "value": "999",
-        "attributes": {
-          "figma": {
-            "id": "VariableID:182:52",
-            "resolvedType": "FLOAT"
-          }
-        }
+        "value": "9999",
+        "type": "float"
       }
     }
   }

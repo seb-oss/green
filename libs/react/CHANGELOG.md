@@ -1,5 +1,109 @@
 # Changelog
 
+## 3.5.3
+
+### Patch Changes
+
+- 304b6aa: **Radiobutton:** Fix screen reader support for error message
+- Updated dependencies [7a6fd4c]
+  - @sebgroup/chlorophyll@3.3.1
+
+## 3.5.2
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [047d2e9]
+  - @sebgroup/green-core@1.11.0
+
+## 3.5.1
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [7532a30]
+- Updated dependencies [7668dfd]
+- Updated dependencies [7668dfd]
+  - @sebgroup/green-core@1.10.0
+
+## 3.5.0
+
+### Minor Changes
+
+- 7820e8c: **Dropdown**
+
+  - Add `maxHeight` prop
+
+- bb83849: **Datepicker:** Added support for disabling dates
+
+  - `disabled-weekends` will disable all weekend days in the calendar view
+  - `disabled-dates` allows to specify an array of dates that should be disabled in the calendar view
+
+### Patch Changes
+
+- Updated dependencies [bb83849]
+- Updated dependencies [7820e8c]
+- Updated dependencies [7820e8c]
+  - @sebgroup/green-core@1.9.0
+
+## 3.4.1
+
+### Patch Changes
+
+- c297e1a: Dropdown: Fix issue with the component not calling `onChange` for falsy values
+
+## 3.4.0
+
+### Minor Changes
+
+- a1c5e60: New component: Grouped list
+
+### Patch Changes
+
+- Updated dependencies [a1c5e60]
+  - @sebgroup/green-core@1.8.0
+  - @sebgroup/chlorophyll@3.1.1
+
+## 3.3.0
+
+### Minor Changes
+
+- 78e09aa: **Accessibility improvements:**
+
+  - Checkbox. Input, Textarea: Add aria attributes for validation
+  - Input: Fix bug with caret position when using formatter
+  - Select:
+    - Use native props
+    - Deprecate `labelInformation` in favor of `info` (like in other components)
+
+- 007f8ac: **Datepicker and Dropdown**
+
+  - Add small variant
+  - Add attribute for hiding label
+  - Align style with Figma
+
+### Patch Changes
+
+- Updated dependencies [78e09aa]
+- Updated dependencies [007f8ac]
+  - @sebgroup/extract@3.0.1
+  - @sebgroup/chlorophyll@3.1.0
+  - @sebgroup/green-core@1.7.0
+
+## 3.2.0
+
+### Minor Changes
+
+- 158d93a: Add `<gds-menu-heading>`, which can be used to group options and menu items in Dropdown and Context menu components.
+
+### Patch Changes
+
+- Updated dependencies [158d93a]
+- Updated dependencies [e0d3f09]
+- Updated dependencies [d8de14a]
+  - @sebgroup/green-core@1.6.0
+  - @sebgroup/chlorophyll@3.0.5
+
 ## 3.1.0
 
 ### Minor Changes

@@ -1,4 +1,4 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
+import { Canvas, Meta } from '@storybook/addon-docs'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Datepicker" />
@@ -18,10 +18,13 @@ by typing a number.
 Clicking the calendar icon opens a popover with a calendar view where a date can be chosen.
 
 <Canvas>
-<div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker label="Label" onchange="document.getElementById('chosen-date').innerHTML = this.value?.toISOString() || 'None'"></gds-datepicker>
-Chosen date: <span id="chosen-date">None</span>
-</div>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-datepicker
+      label="Label"
+      onchange="document.getElementById('chosen-date').innerHTML = this.value?.toISOString() || 'None'"
+    ></gds-datepicker>
+    Chosen date: <span id="chosen-date">None</span>
+  </div>
 </Canvas>
 
 ## Basic usage
@@ -35,29 +38,76 @@ input. The `message` slot is used to display instructions and/or validation erro
 When the value is changed by a user, a `change` event is fired.
 
 <Canvas>
-<div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker label="Label" onchange="console.log(this.value)">
-  <span slot="sub-label">A sub-label can be added as additional description</span>
-  <span slot="message">Instructive message. Will turn red if there is a validation error</span>
-</gds-datepicker>
-</div>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-datepicker label="Using slots" onchange="console.log(this.value)">
+      <span slot="sub-label">
+        A sub-label can be added as additional description
+      </span>
+      <span slot="message">
+        Instructive message. Will turn red if there is a validation error
+      </span>
+    </gds-datepicker>
+  </div>
 </Canvas>
 
-## Other attributes
+## Week numbers
 
-In this example, all the available attributes are used.
+Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
 
 <Canvas>
-<div style={{ dummy: registerTransitionalStyles() }}>
-<gds-datepicker
-  label="Label"
-  onchange="console.log(this.value)"
-  min="2022-11-11"
-  max="2024-02-20"
-  showWeekNumbers>
-  <span slot="sub-label">A sub-label can be added as additional description</span>
-  <span slot="message">Instructive message. Will turn red if there is a validation error</span>
-</gds-datepicker>
-</div>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-datepicker
+      label="With week numbers"
+      show-week-numbers
+    ></gds-datepicker>
+  </div>
 </Canvas>
 
+## Min and max dates
+
+Use the `min` and `max` attributes to set the minimum and maximum dates that can be selected. Dates outside of this range will be disabled in the calendar view.
+
+<Canvas>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-datepicker
+      label="Using min and max dates"
+      min="2022-11-11"
+      max="2024-02-20"
+    ></gds-datepicker>
+  </div>
+</Canvas>
+
+## Disabled dates
+
+Set the `disable-weekends` attribute to disable weekends (saturdays and sundays) in the calendar view.
+
+Additionally, `disabled-dates` can be used to disable specific dates.
+
+- When set via the `disabled-dates` attribute, this should be a comma-separated list of date strings that can be parsed by the Javscript `Date()` constructor.
+- When set via the `disabledDates` property, it should be an array of Javascript `Date` objects.
+
+<Canvas>
+  <div style={{ dummy: registerTransitionalStyles() }}>
+    <gds-datepicker
+      label="Disabled weekends"
+      disabled-weekends
+      disabled-dates="2024-03-08, 2024-04-12, 2024-03-18, 2024-03-19"
+    ></gds-datepicker>
+  </div>
+</Canvas>
+
+## Input field size
+
+The date picker has two sizes: `small` and `medium`. The default size is `medium`.
+
+Optionally, the label can be hidden by using the `hide-label` attribute.
+
+<Canvas>
+  <div style={{ dummy: registerTransitionalStyles(), display: 'inline-block' }}>
+    <gds-datepicker
+      label="A small datepicker"
+      hide-label
+      size="small"
+    ></gds-datepicker>
+  </div>
+</Canvas>

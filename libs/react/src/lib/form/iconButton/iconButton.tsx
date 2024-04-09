@@ -17,7 +17,7 @@ export const IconButton = ({
 }: IconButtonInterface) => {
   return (
     <button
-      className={`icon ${props.size == 'small' && 'small'}`}
+      className={`icon ${props.size === 'small' && 'small'}`}
       onClick={onClick}
       aria-controls={props['aria-controls']}
       aria-expanded={props['aria-expanded']}
