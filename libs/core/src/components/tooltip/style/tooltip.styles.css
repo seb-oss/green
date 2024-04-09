@@ -89,6 +89,7 @@
         border-bottom-width: 0;
         border-top-color: var(--gds-tooltip-bg);
       }
+
       &:not([position])::after,
       &[position^='up']::after {
         bottom: calc(100% + var(--gds-tooltip-offset, 8px));
@@ -107,9 +108,11 @@
         border-top-width: 0;
         border-bottom-color: var(--gds-tooltip-bg);
       }
+
       &[position^='down']::after {
         top: calc(100% + var(--gds-tooltip-offset, 8px));
       }
+
       &[position^='down']::before,
       &[position^='down']::after {
         left: 50%;
@@ -123,6 +126,7 @@
         left: calc(-1px - var(--gds-tooltip-offset, 8px));
         transform: translate(calc(var(--gds-tooltip-offset, 8px) * -2), -50%);
       }
+
       &[position^='left']::after {
         top: 50%;
         right: calc(100% + var(--gds-tooltip-offset, 8px));
@@ -136,6 +140,7 @@
         right: calc(-1px - var(--gds-tooltip-offset, 8px));
         transform: translate(var(--gds-tooltip-offset, 8px), -50%);
       }
+
       &[position^='right']::after {
         top: 50%;
         left: calc(100% + var(--gds-tooltip-offset, 8px));

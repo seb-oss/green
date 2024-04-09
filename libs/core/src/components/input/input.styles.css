@@ -5,7 +5,7 @@
     --_color-bg: var(--gds-sys-color-container-container);
 
     --_color-border: var(--gds-sys-color-stroke-stroke);
-    --_border-radius: .5rem;
+    --_border-radius: 0.5rem;
     --_border-width: 0.0625rem;
     --_border-width-hover: 0.125rem;
 
@@ -19,8 +19,8 @@
     --_transition: var(--gds-sys-transition);
     --_lh: 1.25;
     --_core-min-block-size: 3.5rem;
-    --_gap: .5rem;
-    --_padding-block: .625rem;
+    --_gap: 0.5rem;
+    --_padding-block: 0.625rem;
     --_padding-inline: 1rem;
     --_core-icon-size: 1.5rem;
     --_inner-height: 2rem;
@@ -91,13 +91,14 @@
     }
   }
 
-  .supporting-text, .error-text {
-    font-size: .875rem;
+  .supporting-text,
+  .error-text {
+    font-size: 0.875rem;
   }
 
-  slot[name="extended-supporting-text"] {
+  slot[name='extended-supporting-text'] {
     display: block;
-    font-size: .875rem;
+    font-size: 0.875rem;
     background-color: #eee;
     margin-top: 0.5rem;
     padding: 1rem;
@@ -106,7 +107,7 @@
     opacity: 0;
     transition: var(--_transition);
 
-    [aria-hidden="false"] & {
+    [aria-hidden='false'] & {
       opacity: 1;
     }
   }
@@ -116,11 +117,11 @@
     grid-template-rows: 0fr;
     transition: var(--_transition);
 
-    & > * {
+    > * {
       overflow: hidden;
     }
 
-    &[aria-hidden="false"] {
+    &[aria-hidden='false'] {
       opacity: 1;
       grid-template-rows: 1fr;
     }
@@ -130,7 +131,8 @@
     display: none;
   }
 
-  input, textarea {
+  input,
+  textarea {
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -190,8 +192,7 @@
     border-start-end-radius: var(--_border-radius);
     border-start-start-radius: var(--_border-radius);
 
-    box-shadow: 0 var(--_border-width) 0
-      var(--_color-border);
+    box-shadow: 0 var(--_border-width) 0 var(--_color-border);
     padding-block: var(--_padding-block);
     padding-inline: var(--_padding-inline);
     margin-block: var(--_gap);
@@ -222,7 +223,7 @@
       transition: var(--_transition);
     }
 
-    & slot {
+    slot {
       display: flex;
       height: var(--_inner-height);
       align-items: center;
@@ -235,16 +236,18 @@
     --_color-outline: var(--gds-sys-color-stroke-stroke-negative);
     color: var(--gds-sys-color-status-negative-on-negative-bright);
   }
+
   :host(:invalid) .error-text {
     color: var(--gds-sys-color-status-negative-on-negative-bright);
   }
+
   :host(:invalid) label {
     color: var(--gds-sys-color-status-negative-on-negative-bright);
   }
 }
 
 @layer simplified {
-  :host([variant="simplified"]) label {
+  :host([variant='simplified']) label {
     align-items: center;
     background-color: transparent;
     display: block;
@@ -261,10 +264,12 @@
     }
   }
 
-  :host([variant="simplified"]) label:has(
-    input:not(:placeholder-shown, [readonly]),
-    textarea:not(:placeholder-shown, [readonly])),
-  :host([variant="simplified"]) label:focus-within {
+  :host([variant='simplified'])
+    label:has(
+      input:not(:placeholder-shown, [readonly]),
+      textarea:not(:placeholder-shown, [readonly])
+    ),
+  :host([variant='simplified']) label:focus-within {
     div {
       font-size: 0.75rem;
       top: 0.375rem;
@@ -273,7 +278,9 @@
         translateY(calc(0px - var(--gds-input-label-translate)))
       );
     }
-    input, textarea {
+
+    input,
+    textarea {
       margin-top: 0.75rem;
     }
   }
