@@ -5,7 +5,6 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '../../../transitional-styles'
-import { watch } from '../../../utils/decorators/watch'
 import { unsafeCSS } from 'lit'
 
 import { tokens } from '../../../tokens.style'

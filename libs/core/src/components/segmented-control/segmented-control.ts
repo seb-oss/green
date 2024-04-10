@@ -228,7 +228,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   // Calculates the layout based on the configured min width
   // and the available space in the track
   #calcLayout = (followFocus = false) => {
-    console.log('calcLayout')
     const calcNumVisibleSegments = () => {
       // Actual available width in the track
       const numSegments = this.segments.length
