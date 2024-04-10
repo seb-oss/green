@@ -19,7 +19,7 @@ export class SegmentedControl extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-    //registerTransitionalStyles()
+    registerTransitionalStyles()
   }
 
   #cards = [1, 2, 3, 4, 5]

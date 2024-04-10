@@ -12,6 +12,8 @@ import * as SegmentedControl from '../../components/segmented-control/segmented-
 import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
+import { GdsElement } from '../../gds-element'
+import { el } from 'date-fns/locale'
 
 export const registerTransitionalStyles = () => {
   Dropdown.register()
@@ -72,9 +74,10 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
-    const element = this.elements.get(styleKey) as LitElement
+    const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
     element.shadowRoot.adoptedStyleSheets = [sheet]
+    element.isUsingTransitionalStyles = true
   }
 
   // This is a fallback for browsers that don't support constructed stylesheets.

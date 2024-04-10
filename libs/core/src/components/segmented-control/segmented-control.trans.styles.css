@@ -5,6 +5,7 @@
 
   @layer _base {
     :host {
+      box-sizing: border-box;
       display: inline-flex;
       border: 1px solid #333;
       border-radius: 4px;
@@ -12,6 +13,7 @@
       max-width: 100%;
       overflow: hidden;
       height: 3rem;
+      background-color: #fff;
     }
 
     :host([size='small']) {
@@ -57,11 +59,7 @@
 
       @media (pointer: fine) {
         &:hover {
-          background-color: color-mix(
-            in srgb,
-            var(--gds-sys-color-state-layers-state-black-dim1),
-            var(--gds-sys-color-container-dim1)
-          );
+          background-color: var(--grey-400);
         }
       }
     }
@@ -82,12 +80,7 @@
     }
 
     #indicator {
-      position: absolute;
-      left: 0;
-      height: 100%;
-      background-color: #333;
-      transition: transform 0.2s, width 0.2s;
-      z-index: 0;
+      display: none;
     }
   }
 

@@ -38,7 +38,7 @@
 
     @media (pointer: fine) {
       button:hover {
-        background-color: #ccc;
+        background-color: var(--grey-400);
       }
     }
 
