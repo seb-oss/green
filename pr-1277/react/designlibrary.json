@@ -437,16 +437,6 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
-    "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
-    }
-  },
-  {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
@@ -463,6 +453,16 @@
     "customParams": {
       "componentIds": [
         "component-accordion"
+      ]
+    }
+  },
+  {
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
+    "customParams": {
+      "componentIds": [
+        "component-alertribbon"
       ]
     }
   },
