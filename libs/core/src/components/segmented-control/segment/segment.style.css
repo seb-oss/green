@@ -9,7 +9,6 @@ button {
   flex-grow: 1;
   font-family: inherit;
   padding: 0 1rem;
-  min-width: 6.625rem;
   text-align: center;
   cursor: pointer;
   border-radius: calc(infinity * 1px);
