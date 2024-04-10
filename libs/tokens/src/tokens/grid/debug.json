@@ -1,0 +1,12 @@
+{
+  "sys": {
+    "grid": {
+      "debug": {
+        "lines": {
+          "value": "#5551FF",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

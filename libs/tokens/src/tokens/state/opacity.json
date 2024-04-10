@@ -1,0 +1,10 @@
+{
+  "sys": {
+    "state": {
+      "hover-state-layer-opacity": {
+        "value": "0.10",
+        "type": "float"
+      }
+    }
+  }
+}

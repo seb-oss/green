@@ -88,6 +88,9 @@ export class NggDatepickerComponent
     return this._value
   }
   set value(newValue: string | Date | undefined) {
+    if (typeof newValue === 'string') {
+      newValue = new Date(newValue)
+    }
     if (newValue !== this._value) {
       this._value = newValue || undefined
     }
@@ -101,7 +104,7 @@ export class NggDatepickerComponent
   onChangeFn?: (value: any) => void
   onTouchedFn?: any
 
-  _value: string | Date | undefined
+  _value: Date | undefined
   private _options?: DatepickerOptions
 
   get min(): Date | undefined {

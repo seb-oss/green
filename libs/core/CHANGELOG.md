@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.12.0
+
+### Minor Changes
+
+- 8e7440c: Add new attribute row-gap
+
+## 1.11.0
+
+### Minor Changes
+
+- 7532a30: **Popover**: Add base 2023 style
+- 7668dfd: Added a new component Grid
+- 7668dfd: Update grid to have singular values and better describe breakpoints and tokens moved to internal
+
+## 1.10.0
+
+### Minor Changes
+
+- 7532a30: **Popover**: Add base 2023 style
+- 7668dfd: Added a new component Grid
+- 7668dfd: Update grid to have singular values and better describe breakpoints and tokens moved to internal"
+
+## 1.9.2
+
+### Patch Changes
+
+- c59d1ea: Dropdown: fix issue where falsy values where considered as no values (only `undefined` should be explicitly considered as "no value") (closes #1259)
+
 ## 1.9.1
 
 ### Patch Changes

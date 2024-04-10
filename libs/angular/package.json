@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "3.5.1",
+  "version": "3.6.0",
   "peerDependencies": {
     "@angular/cdk": ">=15.2.9",
     "@angular/common": ">=15.2.9",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@ngneat/transloco": "^5.0.7",
     "@ngneat/transloco-locale": "^5.1.1",
-    "@sebgroup/chlorophyll": "^3.1.2",
+    "@sebgroup/chlorophyll": "^3.2.0",
     "@sebgroup/extract": "^3.0.1",
     "@sebgroup/green-core": "^1.9.1",
     "include-media": "^2.0.0",

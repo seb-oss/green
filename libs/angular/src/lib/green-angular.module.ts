@@ -12,6 +12,7 @@ import { NggProgressCircleModule } from './progress-circle/progress-circle.modul
 import { NggSegmentedControlModule } from './segmented-control/segmented-control.module'
 import { NggSharedModule } from './shared/shared.module'
 import { NggSliderModule } from './slider/slider.module'
+import { NggSortableListModule } from './sortable-list/sortable-list.module'
 import { NggCellTableModule } from './cell-table'
 
 import { NggBreadcrumbsModule } from './breadcrumbs'
@@ -45,6 +46,7 @@ import { NggTypeaheadModule } from './typeahead'
     NggInPageWizardModule,
     NggCellTableModule,
     NggSharedModule,
+    NggSortableListModule,
     NggBreadcrumbsModule,
     NggCardModule,
     NggCheckboxModule,

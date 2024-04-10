@@ -1,11 +1,7 @@
 {
   "name": "@sebgroup/green-tokens",
-  "version": "0.0.1-beta.8",
-  "dependencies": {
-    "style-dictionary": "^3.8.0",
-    "fs-extra": "^10.1.0",
-    "tinycolor2": "^1.6.0"
-  },
+  "version": "0.2.0",
+  "dependencies": {},
   "description": "Design tokens for Green Design System",
   "repository": {
     "type": "git",
@@ -16,7 +12,10 @@
     "access": "public",
     "directory": "../../dist/libs/tokens"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": {
+    "name": "Green Design System",
+    "email": "greendesignsystem@seb.se"
+  },
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {

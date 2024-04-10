@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.6.0
+
+### Minor Changes
+
+- d4e06e7: New component: Sortable list
+
+### Patch Changes
+
+- Updated dependencies [d4e06e7]
+  - @sebgroup/chlorophyll@3.2.0
+
+## 3.5.2
+
+### Patch Changes
+
+- 7cb209f: Datepicker to take strings as value
+- Updated dependencies [feb1712]
+  - @sebgroup/chlorophyll@3.1.3
+
 ## 3.5.1
 
 ### Patch Changes

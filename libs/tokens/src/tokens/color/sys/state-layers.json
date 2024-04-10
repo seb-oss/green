@@ -6,91 +6,55 @@
           "value": "{ref.color.black}",
           "darkValue": "{ref.color.black}",
           "alpha": 0.1,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateBlackDim1": {
           "value": "{ref.color.black}",
           "darkValue": "{ref.color.black}",
           "alpha": 0.2,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateBlackDim2": {
           "value": "{ref.color.black}",
           "darkValue": "{ref.color.black}",
           "alpha": 0.4,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateBlackShade": {
           "value": "{ref.color.black}",
           "darkValue": "{ref.color.black}",
           "alpha": 0.6,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "statePositive": {
           "value": "{sys.color.status.positive.positive}",
           "darkValue": "{sys.color.status.positive.positive}",
           "alpha": 0.1,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "statePositiveDim": {
           "value": "{sys.color.status.positive.positive}",
           "darkValue": "{sys.color.status.positive.positive}",
           "alpha": 0.2,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateNegative": {
           "value": "{sys.color.status.negative.negative}",
           "darkValue": "{sys.color.status.negative.negative}",
           "alpha": 0.1,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateNegativeDim": {
           "value": "{sys.color.status.negative.negative}",
           "darkValue": "{sys.color.status.negative.negative}",
           "alpha": 0.2,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         },
         "stateCustomBlue": {
           "value": "{sys.color.custom.customBlue}",
           "darkValue": "{sys.color.custom.customBlue}",
           "alpha": 0.2,
-          "attributes": {
-            "figma": {
-              "resolvedType": "ALIAS"
-            }
-          }
+          "type": "color"
         }
       }
     }

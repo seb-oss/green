@@ -20,7 +20,7 @@
     }
 
     button.close {
-      margin: 0rem;
+      margin: 0;
       padding: 0;
     }
   }
@@ -34,16 +34,16 @@
 
   dialog {
     @include popover.popover;
+    color: var(--text-primary-color);
     inset: 0;
     overflow: hidden;
     padding: 0;
     right: 0;
-    color: var(--text-primary-color);
 
     @include common.media-breakpoint-down('sm') {
-      max-height: 80svh;
-      border-radius: 0.25rem;
       border: 1px solid var(--border-color);
+      border-radius: 0.25rem;
+      max-height: 80svh;
       padding-bottom: 0;
 
       &.v-kb-visible {

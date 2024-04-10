@@ -6,209 +6,110 @@
           "information": {
             "value": "{ref.color.grey.20}",
             "darkValue": "{ref.color.grey.80}",
-            "attributes": {
-              "figma": {
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onInformation": {
             "value": "{ref.color.white}",
             "darkValue": "{ref.color.grey.20}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:35",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "informationBright": {
             "value": "{ref.color.grey.95}",
             "darkValue": "{ref.color.grey.20}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:38",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onInformationBright": {
             "value": "{ref.color.grey.20}",
             "darkValue": "{ref.color.grey.95}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:39",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           }
         },
         "negative": {
           "negative": {
             "value": "{ref.color.red.40}",
             "darkValue": "{ref.color.red.70}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:19",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onNegative": {
             "value": "{ref.color.white}",
             "darkValue": "{ref.color.red.95}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:20",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "negativeBright": {
             "value": "{ref.color.red.95}",
             "darkValue": "{ref.color.red.20}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:23",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onNegativeBright": {
             "value": "{ref.color.red.40}",
             "darkValue": "{ref.color.red.95}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:24",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           }
         },
         "warning": {
           "warning": {
             "value": "{ref.color.orange.50}",
             "darkValue": "{ref.color.orange.45}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:25",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onWarning": {
             "value": "{ref.color.white}",
             "darkValue": "{ref.color.orange.98}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:26",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "warningBright": {
             "value": "{ref.color.orange.95}",
             "darkValue": "{ref.color.orange.20}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:28",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onWarningBright": {
             "value": "{ref.color.orange.40}",
             "darkValue": "{ref.color.orange.95}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:29",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           }
         },
         "positive": {
           "positive": {
             "value": "{ref.color.green.40}",
             "darkValue": "{ref.color.green.45}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:30",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onPositive": {
             "value": "{ref.color.white}",
             "darkValue": "{ref.color.green.98}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:31",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "positiveBright": {
             "value": "{ref.color.green.98}",
             "darkValue": "{ref.color.green.20}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:33",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onPositiveBright": {
             "value": "{ref.color.green.40}",
             "darkValue": "{ref.color.green.98}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:34",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           }
         },
         "notice": {
           "notice": {
             "value": "{ref.color.blue.40}",
             "darkValue": "{ref.color.blue.60}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:40",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onNotice": {
             "value": "{ref.color.white}",
             "darkValue": "{ref.color.blue.15}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:41",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "noticeBright": {
             "value": "{ref.color.blue.95}",
             "darkValue": "{ref.color.blue.15}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:42",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           },
           "onNoticeBright": {
             "value": "{ref.color.blue.40}",
             "darkValue": "{ref.color.blue.95}",
-            "attributes": {
-              "figma": {
-                "id": "VariableID:228:43",
-                "resolvedType": "ALIAS"
-              }
-            }
+            "type": "color"
           }
         }
       }

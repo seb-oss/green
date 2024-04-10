@@ -72,10 +72,10 @@ $weekend-background: $background;
     tr {
       th,
       td {
+        box-sizing: border-box;
         height: 2.75rem;
         text-align: center;
         width: 2.75rem;
-        box-sizing: border-box;
       }
     }
 
@@ -113,8 +113,8 @@ $weekend-background: $background;
         &.today {
           background: $today-background;
           border-radius: $today-border-radius;
-          color: $today-color;
           box-shadow: inset 0 0 0 2px $selected-background;
+          color: $today-color;
         }
 
         // hover
@@ -130,6 +130,7 @@ $weekend-background: $background;
         &:focus-visible {
           @include common.add-focus();
         }
+
         &:focus-visible:not(.disabled) {
           border: solid 1px $background;
           border-radius: $focus-border-radius;
@@ -162,11 +163,11 @@ $weekend-background: $background;
         // disabled
         &.disabled {
           background: $disabled-background;
+          border: solid 1px $background;
+          border-radius: $date-border-radius;
           color: $disabled-color;
           cursor: not-allowed;
           font-weight: $disabled-weight;
-          border-radius: $date-border-radius;
-          border: solid 1px $background;
 
           &.sg-date-holiday {
             color: $disabled-weekend-color;

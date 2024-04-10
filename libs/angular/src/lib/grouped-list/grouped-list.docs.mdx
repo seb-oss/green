@@ -16,7 +16,7 @@ Add the `CUSTOM_ELEMENTS_SCHEMA` in the module that uses this component.
 
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/shared/core-element/core-element.module'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular'
 
 @NgModule({
     // Add the NggCoreWrapperModule to the `imports` array
@@ -29,12 +29,18 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular/shared/core-elemen
 Import `GdsGroupedList`, `registerTransitionalStyles` and `NggCoreWrapperModule` from `@sebgroup/green-core` in the Angular component that uses it.
 
 ```ts
-import { GdsGroupedList } from '@sebgroup/green-core'
+import '@sebgroup/green-core' // This needs to be imported at least once in your application for the web components to be registered
+
+// if you need to interact with the component through the DOM, you can import the class like this:
+// import { GdsGroupedList } from '@sebgroup/green-core'
+// or types only 
+// import type { GdsGroupedList } from '@sebgroup/green-core'
 
 // Transitional styles will make the component get 2016 design
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 // Call this fuction to register the transitional styles
 registerTransitionalStyles()
+// This will load 2016 styles for all Green Core elements in the current document
 ```
 
 Use the webcomponent in your template with the `*nggCoreElement` directive.

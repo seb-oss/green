@@ -92,8 +92,8 @@ export const Input = ({
   const describedBy =
     classNames(ariaDescribedBy, {
       [`${uuid}_group-message`]: !showSimpleInput && validator?.message !== undefined && validator.message.length > 0,
-      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
       [`${uuid}_info`]: !showSimpleInput && info,
+      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
 
   const inputClassName =

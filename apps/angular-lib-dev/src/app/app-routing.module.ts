@@ -63,6 +63,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./table/table.module').then((m) => m.TableModule),
   },
+  {
+    path: 'sortable-list',
+    data: { name: 'Sortable list' },
+    loadChildren: () =>
+      import('./sortable-list/sortable-list.module').then(
+        (m) => m.SortableListModule
+      ),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 

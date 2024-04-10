@@ -1,5 +1,39 @@
 # Changelog
 
+## 3.5.4
+
+### Patch Changes
+
+- c603cd1: exporting icons
+- Updated dependencies [8e7440c]
+  - @sebgroup/green-core@1.12.0
+
+## 3.5.3
+
+### Patch Changes
+
+- 304b6aa: **Radiobutton:** Fix screen reader support for error message
+- Updated dependencies [7a6fd4c]
+  - @sebgroup/chlorophyll@3.3.1
+
+## 3.5.2
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [047d2e9]
+  - @sebgroup/green-core@1.11.0
+
+## 3.5.1
+
+### Patch Changes
+
+- fbee982: Deprecate `ValueList`
+- Updated dependencies [7532a30]
+- Updated dependencies [7668dfd]
+- Updated dependencies [7668dfd]
+  - @sebgroup/green-core@1.10.0
+
 ## 3.5.0
 
 ### Minor Changes
