@@ -46,7 +46,7 @@ export class GdsGrid extends LitElement {
   columns?: string | undefined
 
   /**
-   * @property {string} gap - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid gap="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -55,6 +55,17 @@ export class GdsGrid extends LitElement {
    */
   @property({ attribute: 'gap', type: String })
   gap?: GridSizes
+
+  /**
+   * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * @example
+   * ```html
+   * <gds-grid row-gap="m"></gds-grid> <!-- applies to all breakpoints -->
+   * <gds-grid row-gap="l:m m:s s:xs"></gds-grid> <!-- different values for each breakpoint -->
+   * ```
+   */
+  @property({ attribute: 'row-gap', type: String })
+  rowGap?: GridSizes
 
   /**
    * @property {string} padding - Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
@@ -86,6 +97,7 @@ export class GdsGrid extends LitElement {
     super.connectedCallback()
     this._updateColumnVariables()
     this._updateGapVariables()
+    this._updateRowGapVariables()
     this._updatePaddingVariables()
     this._updateAutoColumnsVariables()
   }
@@ -97,6 +109,7 @@ export class GdsGrid extends LitElement {
   private _gridVariables = {
     varsColumn: css``,
     varsGap: css``,
+    varsRowGap: css``,
     varsPadding: css``,
     varsAutoColumns: css``,
   }
@@ -174,6 +187,54 @@ export class GdsGrid extends LitElement {
     this._gridVariables = {
       ...this._gridVariables,
       varsGap: css`
+        ${unsafeCSS(cssVariables)}
+      `,
+    }
+
+    this.requestUpdate('_gridVariables')
+  }
+  /**
+   * Watcher for the 'row-gap' property.
+   * It updates the row-gap CSS variables when the 'row-gap' property changes.
+   */
+  @watch('row-gap')
+  private _updateRowGapVariables() {
+    const match = this.rowGap?.match(BreakpointPattern)
+    let rowGapDesktop, rowGapTablet, rowGapMobile
+
+    if (this.rowGap && !this.rowGap.includes(' ')) {
+      // If gap is a single value, use it for all screen sizes
+      rowGapDesktop =
+        rowGapTablet =
+        rowGapMobile =
+          `var(--gds-sys-grid-gap-${this.rowGap})`
+    } else {
+      const { l, m, s } = match?.groups || {}
+      rowGapDesktop = l
+        ? `var(--gds-sys-grid-gap-${l.split(':')[1]})`
+        : undefined
+      rowGapTablet = m
+        ? `var(--gds-sys-grid-gap-${m.split(':')[1]})`
+        : undefined
+      rowGapMobile = s
+        ? `var(--gds-sys-grid-gap-${s.split(':')[1]})`
+        : undefined
+    }
+
+    const gapProperties = [
+      { name: '_row-gap-desktop', value: rowGapDesktop },
+      { name: '_row-gap-tablet', value: rowGapTablet },
+      { name: '_row-gap-mobile', value: rowGapMobile },
+    ]
+
+    const cssVariables = gapProperties
+      .filter(({ value }) => value !== undefined)
+      .map(({ name, value }) => `--${name}: ${value};`)
+      .join(' ')
+
+    this._gridVariables = {
+      ...this._gridVariables,
+      varsRowGap: css`
         ${unsafeCSS(cssVariables)}
       `,
     }

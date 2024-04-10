@@ -52,7 +52,8 @@ This example shows a grid with `4` columns on all breakpoints desktop, tablet, a
 <Canvas>
     <gds-grid 
         columns="4" 
-        gap="2xl" 
+        gap="l:2xl m:2xl s:2xl" 
+        row-gap="l:2xl m:2xl s:2xl" 
         padding="l" 
         auto-columns="100"
     >
@@ -72,7 +73,7 @@ This example shows a grid with `4` columns on all breakpoints desktop, tablet, a
 
 The `auto-columns` attribute makes the grid flexible by adjusting column widths based on available space and content size. If space is limited, it reduces the number of columns while maintaining a minimum column width based on the value provided. The `auto-columns` attribute can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for `mobile` respectively.
 
-It can be used without the other attributes and still fit tne content on the available width. But for more granular control it can be used with the `columns`, `gap`, and `padding` attributes.
+It can be used without the other attributes and still fit the content on the available width. But for more granular control it can be used with the `columns`, `gap`, and `padding` attributes.
 
 Auto Columns, while optional, remove the need for breakpoints, adapting to content for a more flexible and responsive grid. However, they can still be used in conjunction with breakpoints to accommodate content in both cases.
 ```html
@@ -91,9 +92,9 @@ Auto Columns, while optional, remove the need for breakpoints, adapting to conte
 
 ## Example: Auto Columns without other attributes
 This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
-The `auto-columns` attribute is set to `l:360 m:200 s:120` which will make the columns to be `360px` wide on desktop, `200px` wide on tablet, and `120px` wide on mobile.
+The `auto-columns` attribute is set to `240` which will make the columns to be `240px` no matter the screen/container size.
 <Canvas>
-    <gds-grid auto-columns="l:360 m:200 s:120" >
+    <gds-grid columns="2" row-gap="s" gap="s"  padding="2xl"  auto-columns="240">
         <div>COL: 01</div>
         <div>COL: 02</div>
         <div>COL: 03</div>
@@ -109,12 +110,25 @@ The `auto-columns` attribute is set to `l:360 m:200 s:120` which will make the c
 ## Sizes
 Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
 ```
-3xl:  size/12
-2xl:  size/9
-xl:   size/7
-l:    size/6
-m:    size/5
-s:    size/3
-xs:   size/2
-none: size/0
+3xl:  size/12 = 96px
+2xl:  size/9 = 48px
+xl:   size/7 = 32px
+l:    size/6 = 24px
+m:    size/5 = 16px
+s:    size/3 = 8px
+xs:   size/2 = 4px
+none: size/0 = 0px
+```
+
+## Breakpoints
+The grid component has three breakpoints for `desktop`, `tablet`, and `mobile` devices. The following are the available breakpoints:
+```
+L (desktop) 
+    desktop-lg: 2560px
+    desktop-md: 1440px
+    desktop-sm: 1024px
+M (tablet)
+    tablet: 768px
+S (mobile)
+    mobile: 425px
 ```
