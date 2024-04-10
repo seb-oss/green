@@ -1,5 +1,11 @@
 [
   {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  },
+  {
     "id": "components-sortable-list--default",
     "name": "Default",
     "title": "Components/Sortable list",
@@ -224,6 +230,56 @@
     "customParams": {}
   },
   {
+    "id": "components-context-menu--default",
+    "name": "Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--with-label",
+    "name": "With Label",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--right-to-left",
+    "name": "Right To Left",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--custom-template-default",
+    "name": "Custom Template Default",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
+    "id": "components-context-menu--position-relative",
+    "name": "Position Relative",
+    "title": "Components/Context Menu",
+    "customParams": {
+      "componentIds": [
+        "component-context-menu"
+      ]
+    }
+  },
+  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
@@ -330,56 +386,6 @@
     "customParams": {
       "componentIds": [
         "component-datepicker"
-      ]
-    }
-  },
-  {
-    "id": "components-context-menu--default",
-    "name": "Default",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
-      ]
-    }
-  },
-  {
-    "id": "components-context-menu--with-label",
-    "name": "With Label",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
-      ]
-    }
-  },
-  {
-    "id": "components-context-menu--right-to-left",
-    "name": "Right To Left",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
-      ]
-    }
-  },
-  {
-    "id": "components-context-menu--custom-template-default",
-    "name": "Custom Template Default",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
-      ]
-    }
-  },
-  {
-    "id": "components-context-menu--position-relative",
-    "name": "Position Relative",
-    "title": "Components/Context Menu",
-    "customParams": {
-      "componentIds": [
-        "component-context-menu"
       ]
     }
   },
@@ -492,12 +498,6 @@
         "component-accordion"
       ]
     }
-  },
-  {
-    "id": "get-started--page",
-    "name": "Page",
-    "title": "Get started",
-    "customParams": {}
   },
   {
     "id": "components-form-input--default",
