@@ -1,5 +1,4 @@
 gds-grid {
-  row-gap: 1lh;
   --gds-debug-color: hsla(241, 100%, 66%, 0.4);
   --gds-debug-color-container: rgba(255, 82, 197, 0.4);
 
