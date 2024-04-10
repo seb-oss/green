@@ -16,7 +16,11 @@ If a single value is provided, it will be used for all screen sizes. If three to
 
 ```html
 <!-- Using a single value for all screen sizes -->
-<gds-grid columns="2" gap="xl" row-gap="2xl" padding="2xl">
+<gds-grid 
+    columns="2" 
+    gap="xl" 
+    row-gap="2xl" 
+    padding="2xl" >
     <!-- Child elements here -->
 </gds-grid>
 
@@ -25,8 +29,7 @@ If a single value is provided, it will be used for all screen sizes. If three to
     columns="l:8 m:4 s:2" 
     gap="l:xl m:l s:xs" 
     row-gap="l:xl m:l s:xs" 
-    padding="l:2xl m:l s:xs"
->
+    padding="l:2xl m:l s:xs" >
     <!-- Child elements here -->
 </gds-grid>
 ```
@@ -99,41 +102,40 @@ Auto Columns, while optional, remove the need for breakpoints, adapting to conte
 This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
 The `auto-columns` attribute is set to `240` which will make the columns to be `240px` no matter the screen/container size.
 <Canvas>
-    <gds-grid auto-columns="240">
-        <div>COL: 01</div>
-        <div>COL: 02</div>
-        <div>COL: 03</div>
-        <div>COL: 04</div>
-        <div>COL: 05</div>
-        <div>COL: 06</div>
-        <div>COL: 07</div>
-        <div>COL: 08</div>
-    </gds-grid>
+<gds-grid auto-columns="240">
+    <div>COL: 01</div>
+    <div>COL: 02</div>
+    <div>COL: 03</div>
+    <div>COL: 04</div>
+    <div>COL: 05</div>
+    <div>COL: 06</div>
+    <div>COL: 07</div>
+    <div>COL: 08</div>
+</gds-grid>
 </Canvas>
 
 
 ## Sizes
 Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
-```
-3xl:  size/12 = 96px
-2xl:  size/9 = 48px
-xl:   size/7 = 32px
-l:    size/6 = 24px
-m:    size/5 = 16px
-s:    size/3 = 8px
-xs:   size/2 = 4px
-none: size/0 = 0px
-```
+
+| Size | Token       | Pixels |
+|------|-------------|--------|
+| 3xl  | size/12     | 96px   |
+| 2xl  | size/9      | 48px   |
+| xl   | size/7      | 32px   |
+| l    | size/6      | 24px   |
+| m    | size/5      | 16px   |
+| s    | size/3      | 8px    |
+| xs   | size/2      | 4px    |
+| none | size/0      | 0px    |
 
 ## Breakpoints
 The grid component has three breakpoints for `desktop`, `tablet`, and `mobile` devices. The following are the available breakpoints:
-```
-L (desktop) 
-    desktop-lg: 2560px
-    desktop-md: 1440px
-    desktop-sm: 1024px
-M (tablet)
-    tablet: 768px
-S (mobile)
-    mobile: 425px
-```
+
+| Category | Type       | Size   |
+|----------|------------|--------|
+| L        | desktop-lg | 2560px |
+| L        | desktop-md | 1440px |
+| L        | desktop-sm | 1024px |
+| M        | tablet     | 768px  |
+| S        | mobile     | 425px  |
