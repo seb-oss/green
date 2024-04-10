@@ -1,0 +1,57 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { GdsCard } from '../../../../../dist/libs/core/src'
+import "./card.stories.css"
+
+<Meta title="Components/Card" />
+
+# Card
+
+The `gds-card` is a container component that can be used to display content in a card format. It can be used to display a variety of content types, such as text, images, and buttons. The card component is designed to be flexible and customizable, complementary to the `gds-grid` component.
+
+
+## API Proposal
+
+| Property      | Options                     | Description                                                        |
+|---------------|-----------------------------|--------------------------------------------------------------------|
+| Aspect Ratio  | 16/9, 9/16, 1/1             | The width-to-height ratio of the card                              |
+| Border Radius | L, M, S                     | The roundness of the card's corners                                |
+| Border Style  | Solid, Dashed, Dotted       | The style of the card's border                                     |
+| Border Width  | L, M, S                     | The thickness of the card's border                                 |
+| Elevation     | L, M, S                     | The depth or "lift" of the card relative to the page using shadows |
+| Span          | Single unit 4, or range 1-8 | The number of columns the card should span                         |
+| Rows          | Single unit 4, or range 1-8 | The number of rows the card should span                            |
+| Padding       | L, M, S                     | The amount of space between the card's content and its border      |
+| Gap           | L, M, S                     | The amount of space between the card's direct children             |
+| Display       | Flex, Grid, Block           | The display style of the card                                      |
+| Align Items   | Start, Center, End          | The alignment of the card's content along the cross-axis           |
+| Justify Items | Start, Center, End          | The alignment of the card's content along the main-axis            |
+| Direction     | Row, Column                 | The direction in which the card's content should flow              |
+| Wrap          | Wrap, No Wrap               | Whether the card's content should wrap to the next line            |
+| Background    | Color, Image, Gradient      | The background style of the card                                   |
+
+# Example  
+
+```html
+    <gds-card 
+        ratio="16/9"
+        border="l solid l"
+        elevation="l"
+        span="4"
+        rows="4"
+        padding="l"
+        gap="l"
+        display="flex"
+        align="center"
+        justify="center"
+        direction="column"
+        wrap="wrap"
+        background="primary" >
+            <header>
+                <h2>Card Title</h2>
+                <p>Card content goes here</p>
+            </header>
+            <footer>
+                <button>Click me</button>
+            </footer>
+    </gds-card>
+```
