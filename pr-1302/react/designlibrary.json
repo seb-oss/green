@@ -437,12 +437,12 @@
     }
   },
   {
-    "id": "components-alertribbon--alert-ribbon",
-    "name": "AlertRibbon",
-    "title": "Components/AlertRibbon",
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
     "customParams": {
       "componentIds": [
-        "component-alertribbon"
+        "component-accordion"
       ]
     }
   },
@@ -457,12 +457,12 @@
     }
   },
   {
-    "id": "components-accordion--accordion",
-    "name": "Accordion",
-    "title": "Components/Accordion",
+    "id": "components-alertribbon--alert-ribbon",
+    "name": "AlertRibbon",
+    "title": "Components/AlertRibbon",
     "customParams": {
       "componentIds": [
-        "component-accordion"
+        "component-alertribbon"
       ]
     }
   },
