@@ -40,7 +40,7 @@ export class GdsSegment<ValueT = any> extends GdsElement {
   }
 
   render() {
-    return html`<button aria-selected=${String(this.selected)}>
+    return html`<button aria-current=${String(this.selected)}>
       <slot></slot>
     </button>`
   }

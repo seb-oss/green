@@ -42,7 +42,7 @@
       }
     }
 
-    button[aria-selected='true'] {
+    button[aria-current='true'] {
       background-color: #333;
       color: #fff;
     }
