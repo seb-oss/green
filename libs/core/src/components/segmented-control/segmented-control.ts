@@ -19,7 +19,7 @@ const BTN_SIZE = {
   small: 36,
   medium: 44,
 }
-const getSegmentGap = (transitionalStyles: Boolean) =>
+const getSegmentGap = (transitionalStyles: boolean) =>
   transitionalStyles ? 0 : 4
 
 /**
