@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 29d3014: Add missing tokens, move container colors, split figma files
+
 ## 0.1.0
 
 ### Minor Changes
