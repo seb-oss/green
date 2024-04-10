@@ -10,18 +10,23 @@ The `gds-grid` is a custom element that provides a flexible grid system. It uses
 
 ## Usage
 
-To use the `gds-grid`, you add it to your HTML and specify the number of `columns` for `desktop`, `tablet`, and `mobile` devices using the `columns` attribute. The `columns`, `gap` and `padding` attributes can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for mobile.
+To use the `gds-grid`, you add it to your HTML and specify the number of `columns` for `desktop`, `tablet`, and `mobile` devices using the `columns` attribute. The `columns`, `gap`, `row-gap` and `padding` attributes can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for mobile.
 
 If a single value is provided, it will be used for all screen sizes. If three tokens are provided, each screen size will use the value specified for it.
 
 ```html
 <!-- Using a single value for all screen sizes -->
-<gds-grid columns="2" gap="xl" padding="2xl">
+<gds-grid columns="2" gap="xl" row-gap="2xl" padding="2xl">
     <!-- Child elements here -->
 </gds-grid>
 
 <!-- Using different values for each screen size -->
-<gds-grid columns="l:8 m:4 s:2" gap="l:xl m:l s:xs" padding="l:2xl m:l s:xs">
+<gds-grid 
+    columns="l:8 m:4 s:2" 
+    gap="l:xl m:l s:xs" 
+    row-gap="l:xl m:l s:xs" 
+    padding="l:2xl m:l s:xs"
+>
     <!-- Child elements here -->
 </gds-grid>
 ```
@@ -94,7 +99,7 @@ Auto Columns, while optional, remove the need for breakpoints, adapting to conte
 This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
 The `auto-columns` attribute is set to `240` which will make the columns to be `240px` no matter the screen/container size.
 <Canvas>
-    <gds-grid columns="2" row-gap="s" gap="s"  padding="2xl"  auto-columns="240">
+    <gds-grid auto-columns="240">
         <div>COL: 01</div>
         <div>COL: 02</div>
         <div>COL: 03</div>
