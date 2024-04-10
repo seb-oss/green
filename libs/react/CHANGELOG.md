@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.5.4
+
+### Patch Changes
+
+- c603cd1: exporting icons
+- Updated dependencies [8e7440c]
+  - @sebgroup/green-core@1.12.0
+
 ## 3.5.3
 
 ### Patch Changes
