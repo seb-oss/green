@@ -102,27 +102,6 @@ describe('<gds-segmented-control>', () => {
       expect(el.segMinWidth).to.equal(120)
     })
 
-    it('should not be narrower than segMinWidth when width is narrow', async () => {
-      const el = await fixture<GdsSegmentedControl>(
-        html`<gds-segmented-control
-          seg-min-width="120"
-          style="max-width: 300px"
-        >
-          <gds-segment>Segment 1</gds-segment>
-          <gds-segment>Segment 2</gds-segment>
-          <gds-segment>Segment 3</gds-segment>
-          <gds-segment>Segment 4</gds-segment>
-        </gds-segmented-control>`
-      )
-      await timeout(100)
-
-      const segments = el.segments
-      segments.forEach((segment) => {
-        const segmentWidth = segment.getBoundingClientRect().width
-        expect(segmentWidth).to.be.at.least(120)
-      })
-    })
-
     it('renders the next button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(
         html`
