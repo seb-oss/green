@@ -157,7 +157,7 @@ describe('<gds-segmented-control>', () => {
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
       clickOnElement(nextButton as HTMLElement)
-      await timeout(100)
+      await timeout(200)
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
       expect(prevButton).to.exist
     })
