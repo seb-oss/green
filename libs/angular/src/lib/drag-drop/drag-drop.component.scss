@@ -1,4 +1,4 @@
-@import 'node_modules/@sebgroup/vanilla/src/typography-mixins';
+//@import 'node_modules/@sebgroup/vanilla/src/typography-mixins';
 
 :host {
   // TODO: change vanilla design library pattern to handle not selectable
@@ -40,19 +40,19 @@
   }
 
   .progress {
-    color: $vanilla-color-darkgreen1; // IE fallback for ::-ms-fill
+    //color: $vanilla-color-darkgreen1; // IE fallback for ::-ms-fill
 
     // Progress
     &::-webkit-progress-value {
-      background-color: $vanilla-color-darkgreen1;
+      //background-color: $vanilla-color-darkgreen1;
     }
 
     &::-moz-progress-bar {
-      background-color: $vanilla-color-darkgreen1;
+      //background-color: $vanilla-color-darkgreen1;
     }
 
     &::-ms-fill {
-      background-color: $vanilla-color-darkgreen1;
+      //background-color: $vanilla-color-darkgreen1;
     }
   }
 
@@ -62,22 +62,22 @@
   }
 
   .error-text {
-    color: $vanilla-color-darkred2;
+    //color: $vanilla-color-darkred2;
   }
 
   .success-text {
-    color: $vanilla-color-darkgreen2;
+    //color: $vanilla-color-darkgreen2;
   }
 
   .remove {
     padding: 0 vanilla-px-to-rem(8);
     font-size: 1.5em;
-    color: $vanilla-color-grey600;
+    //color: $vanilla-color-grey600;
     cursor: pointer;
 
     &:hover,
     &:focus {
-      color: $vanilla-color-darkred2;
+      //color: $vanilla-color-darkred2;
     }
   }
 }

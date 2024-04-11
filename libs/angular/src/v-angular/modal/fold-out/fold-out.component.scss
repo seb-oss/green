@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use 'node_modules/@sebgroup/vanilla/src/functions.scss' as func;
+//@use 'node_modules/@sebgroup/vanilla/src/functions.scss' as func;
 
 :host {
   .flex-right {
@@ -7,7 +7,7 @@
   }
 
   .fold-out-button {
-    width: func.vanilla-px-to-em(44 - 2);
+    width: 2.625rem;
     border: none;
     padding: 0;
   }

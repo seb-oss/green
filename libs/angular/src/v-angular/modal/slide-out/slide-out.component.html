@@ -1,4 +1,5 @@
-<div class="sdv-modal-slideout"
+<div
+  class="sdv-modal-slideout"
   [ngClass]="{
     'sdv-modal-slideout--left': fromLeft,
     'sdv-modal-slideout--right': !fromLeft
@@ -6,66 +7,79 @@
   *transloco="let t"
   [class.-active]="shown"
   [attr.data-thook]="thook"
-  [attr.aria-hidden]="!shown">
-  <div #slideOut
+  [attr.aria-hidden]="!shown"
+>
+  <div
+    #slideOut
     class="sdv-modal-slideout__container"
     [class.auto-width]="autoWidth"
     role="dialog"
     aria-modal="true"
     aria-labelledby="sdv-modal-title"
-    aria-describedby="sdv-modal-body">
-
+    aria-describedby="sdv-modal-body"
+  >
     <header class="sdv-modal-slideout__header">
-      <h3 class="sdv-modal-slideout__heading"
-        id="sdv-modal-title">
-        {{t(heading || title || '')}}
+      <h3 class="sdv-modal-slideout__heading" id="sdv-modal-title">
+        {{ t(heading || title || '') }}
       </h3>
-      <button type="button"
+      <button
+        type="button"
         class="sdv-modal-slideout__close"
         data-thook="slideout-close"
         *ngIf="closable"
-        (click)="close()">
-        <fa-icon [icon]="closeIcon"></fa-icon>
+        (click)="close()"
+      >
+        <!-- <fa-icon [icon]="closeIcon"></fa-icon> -->
       </button>
     </header>
 
     <section id="sdv-modal-body">
       <div class="sdv-modal-slideout__content hide-if-empty">
-        <div *ngIf="content"
-          [innerHtml]="content"></div>
+        <div *ngIf="content" [innerHtml]="content"></div>
         <ng-content></ng-content>
       </div>
       <ng-content select="[slot='outside-content']"></ng-content>
     </section>
 
-
     <footer class="sdv-modal-dialog__actions">
-      <button class="sdv-button sdv-button-delete"
+      <button
+        class="sdv-button sdv-button-delete"
         type="reset"
         [attr.data-thook]="'dialog-' + (_buttons?.negative || 'negative')"
         (click)="onAction($event, 'negative')"
         (keydown.enter)="onAction($event, 'negative')"
-        *ngIf="_buttons && _buttons.negative">{{ t(_buttons.negative) }}</button>
+        *ngIf="_buttons && _buttons.negative"
+      >
+        {{ t(_buttons.negative) }}
+      </button>
 
-      <button class="sdv-button sdv-button-secondary"
+      <button
+        class="sdv-button sdv-button-secondary"
         type="button"
         [attr.data-thook]="'dialog-' + (_buttons?.neutral || 'neutral')"
         (click)="onAction($event, 'neutral')"
         (keydown.enter)="onAction($event, 'neutral')"
-        *ngIf="_buttons && _buttons.neutral">{{ t(_buttons.neutral) }}</button>
+        *ngIf="_buttons && _buttons.neutral"
+      >
+        {{ t(_buttons.neutral) }}
+      </button>
 
-      <button class="sdv-button"
+      <button
+        class="sdv-button"
         type="submit"
         [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
         (click)="onAction($event, 'positive')"
         (keydown.enter)="onAction($event, 'positive')"
-        *ngIf="_buttons && _buttons.positive">{{ t(_buttons.positive) }}</button>
+        *ngIf="_buttons && _buttons.positive"
+      >
+        {{ t(_buttons.positive) }}
+      </button>
     </footer>
-
   </div>
 
-  <div class="sdv-modal-backdrop"
+  <div
+    class="sdv-modal-backdrop"
     data-thook="slideout-backdrop"
-    (click)="close()">
-  </div>
+    (click)="close()"
+  ></div>
 </div>

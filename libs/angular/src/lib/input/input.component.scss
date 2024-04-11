@@ -1,8 +1,8 @@
-@use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
-@use 'node_modules/@sebgroup/vanilla/src/mixins' as mixins;
-@use 'node_modules/@sebgroup/vanilla/src/variables' as vars;
-@use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
-@use '../core-mixins' as ngv;
+//// @use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
+// @use 'node_modules/@sebgroup/vanilla/src/mixins' as mixins;
+// @use 'node_modules/@sebgroup/vanilla/src/variables' as vars;
+// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+// @use '../core-mixins' as ngv;
 
 :host {
   .hide-if-empty:empty {
@@ -18,20 +18,20 @@
   }
 
   .ngv-field--error {
-    @include ngv.text-field--error();
+    //@include ngv.text-field--error();
   }
 
   .input {
     &-wrapper {
       display: table;
       width: 100%;
-      border: 0.0625em solid colors.$vanilla-color-grey400;
-      border-radius: vars.$vanilla-component-border-radius;
-      height: functions.vanilla-px-to-em(42);
+      //border: 0.0625em solid colors.$vanilla-color-grey400;
+      //border-radius: vars.$vanilla-component-border-radius;
+      //height: functions.vanilla-px-to-em(42);
 
       &:focus-within {
-        @include mixins.vanilla-focus-outline();
-        border-color: colors.$vanilla-color-darkblue1;
+        //@include mixins.vanilla-focus-outline();
+        //border-color: colors.$vanilla-color-darkblue1;
       }
 
       & > * {
@@ -48,7 +48,7 @@
         border: 0;
         display: block;
         width: 100%;
-        min-height: functions.vanilla-px-to-em(42);
+        //min-height: functions.vanilla-px-to-em(42);
 
         &:focus {
           outline: none;
@@ -63,10 +63,10 @@
   }
 
   .description {
-    margin-bottom: functions.vanilla-px-to-em(8);
+    //margin-bottom: functions.vanilla-px-to-em(8);
   }
 
   .error-wrapper {
-    @include ngv.text-field--error-wrapper();
+    //@include ngv.text-field--error-wrapper();
   }
 }

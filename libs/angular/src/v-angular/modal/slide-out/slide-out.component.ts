@@ -1,8 +1,17 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
 
-import { faTimes } from '@fortawesome/pro-regular-svg-icons';
+// import { faTimes } from '@fortawesome/pro-regular-svg-icons';
 
-import { DialogButtons } from '../modal.types';
+import { DialogButtons } from '../modal.types'
 
 /** Modal slide-out component based on vanilla pattern library design.
  * The modal title can be set using the @Input heading, and will automatically be translated if
@@ -17,86 +26,86 @@ import { DialogButtons } from '../modal.types';
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  selector: 'ngv-slideout-modal',
+  selector: 'ngg-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],
 })
 export class SlideOutComponent implements OnInit {
   /** @internal */
-  @ViewChild('slideOut') slideOutRef: ElementRef | undefined;
+  @ViewChild('slideOut') slideOutRef: ElementRef | undefined
 
   /** Sets from which side the modal should open. */
-  @Input() side: 'left' | 'right' = 'right';
+  @Input() side: 'left' | 'right' = 'right'
   /** Defines the default visibility state of the slide-out. */
-  @Input() shown = false;
+  @Input() shown = false
   /** Defines the default visibility state of the modal. */
-  @Input() initiallyShown = false;
+  @Input() initiallyShown = false
   /** Sets modal heading. Will be translated (using transloco) if the string matches a cms key. */
-  @Input() heading!: string;
+  @Input() heading!: string
   /**
    * Sets modal title. Will be translated (using transloco) if the string matches a cms key.
    * @deprecated - use @Input() heading instead.
    */
-  @Input() title!: string;
+  @Input() title!: string
   /** Sets content body of the modal and can contain html code. The content body can also be set by nesting children to the modal tag. */
-  @Input() content?: string;
+  @Input() content?: string
   /** Sets whether it is possible to close the modal from the top right corner. */
-  @Input() closable = true;
+  @Input() closable = true
   /** Allows the modal content to decide the width of the modal. */
-  @Input() autoWidth = false;
+  @Input() autoWidth = false
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @Input() thook = 'slideout';
+  @Input() thook = 'slideout'
 
   /** @internal */
   get fromLeft(): boolean {
-    return this.side === 'left';
+    return this.side === 'left'
   }
 
-  /** @internal */
-  closeIcon = faTimes;
+  // /** @internal */
+  // closeIcon = faTimes;
 
-  _buttons: DialogButtons | undefined;
+  _buttons: DialogButtons | undefined
   /** Buttons are defined as a key-value pair where key is one of "positive|neutral|negative" and value is the button label. */
   @Input() set buttons(buttons: DialogButtons) {
-    this._buttons = buttons;
+    this._buttons = buttons
   }
 
   /** Will emit true on closing event. */
-  @Output() ngvCloseEvent = new EventEmitter<boolean>();
-  @Output() ngvPositiveEvent = new EventEmitter<void>();
-  @Output() ngvNeutralEvent = new EventEmitter<void>();
-  @Output() ngvNegativeEvent = new EventEmitter<void>();
+  @Output() ngvCloseEvent = new EventEmitter<boolean>()
+  @Output() ngvPositiveEvent = new EventEmitter<void>()
+  @Output() ngvNeutralEvent = new EventEmitter<void>()
+  @Output() ngvNegativeEvent = new EventEmitter<void>()
 
-  private previous: HTMLElement | undefined;
-  private firstFocusable: HTMLElement | undefined;
-  private lastFocusable: HTMLElement | undefined;
+  private previous: HTMLElement | undefined
+  private firstFocusable: HTMLElement | undefined
+  private lastFocusable: HTMLElement | undefined
 
   constructor(private host: ElementRef) {
     // appends methods for opening and closing modal to native element
-    this.host.nativeElement.open = this.open.bind(this);
-    this.host.nativeElement.close = this.close.bind(this);
+    this.host.nativeElement.open = this.open.bind(this)
+    this.host.nativeElement.close = this.close.bind(this)
   }
 
   ngOnInit() {
-    this.shown = this.initiallyShown;
-    if (this.shown) this.limitFocusable();
+    this.shown = this.initiallyShown
+    if (this.shown) this.limitFocusable()
   }
 
   public onAction(event: Event, action: string) {
-    event.preventDefault();
+    event.preventDefault()
     switch (action) {
       case 'positive':
-        this.ngvPositiveEvent.emit();
-        break;
+        this.ngvPositiveEvent.emit()
+        break
       case 'neutral':
-        this.ngvNeutralEvent.emit();
-        break;
+        this.ngvNeutralEvent.emit()
+        break
       case 'negative':
-        this.ngvNegativeEvent.emit();
-        break;
+        this.ngvNegativeEvent.emit()
+        break
     }
-    this.close(event, 'action');
+    this.close(event, 'action')
   }
 
   /**
@@ -106,10 +115,10 @@ export class SlideOutComponent implements OnInit {
    * @returns - true
    */
   open(opener?: HTMLElement): boolean {
-    this.shown = true;
-    this.previous = opener || (document.activeElement as HTMLElement);
-    this.limitFocusable();
-    return true;
+    this.shown = true
+    this.previous = opener || (document.activeElement as HTMLElement)
+    this.limitFocusable()
+    return true
   }
 
   /**
@@ -121,45 +130,56 @@ export class SlideOutComponent implements OnInit {
   @HostListener('click', ['$event', '"host"'])
   @HostListener('document:keydown.escape', ['$event'])
   close(event?: Event, initiator?: string): void {
-    if (initiator === 'host' && event instanceof MouseEvent && event.target !== event.currentTarget) return;
+    if (
+      initiator === 'host' &&
+      event instanceof MouseEvent &&
+      event.target !== event.currentTarget
+    )
+      return
     if (this.shown && this.closable) {
-      this.ngvCloseEvent.emit(this.shown);
-      this.shown = false;
+      this.ngvCloseEvent.emit(this.shown)
+      this.shown = false
       window.setTimeout(() => {
-        if (this.previous) this.previous.focus();
-        this.previous = undefined;
-      });
+        if (this.previous) this.previous.focus()
+        this.previous = undefined
+      })
     }
   }
 
   /** @internal */
   @HostListener('keydown', ['$event'])
   focusTrap(event: KeyboardEvent) {
-    if (event.key !== 'Tab') return;
+    if (event.key !== 'Tab') return
     if (event.shiftKey) {
       // shift + tab
-      if (this.lastFocusable && document.activeElement === this.firstFocusable) {
-        this.lastFocusable.focus();
-        event.preventDefault();
+      if (
+        this.lastFocusable &&
+        document.activeElement === this.firstFocusable
+      ) {
+        this.lastFocusable.focus()
+        event.preventDefault()
       }
     } else {
       // tab
-      if (this.firstFocusable && document.activeElement === this.lastFocusable) {
-        this.firstFocusable.focus();
-        event.preventDefault();
+      if (
+        this.firstFocusable &&
+        document.activeElement === this.lastFocusable
+      ) {
+        this.firstFocusable.focus()
+        event.preventDefault()
       }
     }
   }
 
   private limitFocusable() {
     window.setTimeout(() => {
-      if (!this.slideOutRef) return;
+      if (!this.slideOutRef) return
       const focusable = this.slideOutRef.nativeElement.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
-      this.firstFocusable = focusable[0];
-      this.lastFocusable = focusable[focusable.length - 1];
-      if (this.lastFocusable) this.lastFocusable.focus();
-    });
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      this.firstFocusable = focusable[0]
+      this.lastFocusable = focusable[focusable.length - 1]
+      if (this.lastFocusable) this.lastFocusable.focus()
+    })
   }
 }

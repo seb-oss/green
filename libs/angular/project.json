@@ -15,6 +15,12 @@
         "tsConfig": "libs/angular/tsconfig.lib.prod.json",
         "updateBuildableProjectDepsInPackageJson": false
       },
+      "dependsOn": [
+        {
+          "target": "tokens:build",
+          "dependencies": true
+        }
+      ],
       "configurations": {
         "production": {
           "tsConfig": "libs/angular/tsconfig.lib.prod.json"

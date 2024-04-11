@@ -1,4 +1,4 @@
-@use 'node_modules/include-media/dist/include-media' as include-media;
+//@use 'node_modules/include-media/dist/include-media' as include-media;
 
 :host {
   .hide-if-empty:empty {
@@ -11,9 +11,9 @@
 
   .sdv-modal-slideout__container {
     &.auto-width {
-      @include include-media.media('>tablet') {
-        width: auto;
-      }
+      // @include include-media.media('>tablet') {
+      //   width: auto;
+      // }
     }
   }
 
