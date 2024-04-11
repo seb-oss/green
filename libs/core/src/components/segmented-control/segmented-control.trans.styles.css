@@ -1,0 +1,89 @@
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base, _overrides;
+
+  @layer _base {
+    :host {
+      box-sizing: border-box;
+      display: inline-flex;
+      border: 1px solid #333;
+      border-radius: 4px;
+      contain: layout;
+      max-width: 100%;
+      overflow: hidden;
+      height: 3rem;
+      background-color: #fff;
+    }
+
+    :host([size='small']) {
+      height: 2.5rem;
+    }
+
+    #track {
+      box-sizing: border-box;
+      display: flex;
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #segments {
+      box-sizing: border-box;
+      display: inline-flex;
+      transition: 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    #segments > * {
+      flex: 1 1 auto;
+    }
+
+    #btn-prev,
+    #btn-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background-color: #fff;
+      border-width: 0;
+      appearance: none;
+      aspect-ratio: 1;
+      height: 100%;
+      width: 2.5rem;
+      cursor: pointer;
+      color: #333;
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: var(--grey-400);
+        }
+      }
+    }
+
+    #btn-prev {
+      border-right: 1px solid #333;
+    }
+
+    :host([size='small']) #btn-prev,
+    :host([size='small']) #btn-next {
+      width: 2rem;
+    }
+
+    ::slotted(*) {
+      flex-shrink: 0;
+      flex-grow: 1;
+      z-index: 1;
+    }
+
+    #indicator {
+      display: none;
+    }
+  }
+
+  /* @layer _overrides {
+  } */
+}

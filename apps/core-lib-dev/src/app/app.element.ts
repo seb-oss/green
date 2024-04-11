@@ -3,6 +3,7 @@ import './chlorophyll.scss'
 import './simple-values.element'
 import './complex-values.element'
 import './custom-localization.element'
+import './segmented-control.element'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core'
 
@@ -17,7 +18,7 @@ export class AppElement extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    registerTransitionalStyles()
+    //registerTransitionalStyles()
     //setLocale('sv')
 
     this.innerHTML = html`
@@ -26,6 +27,7 @@ export class AppElement extends HTMLElement {
         <simple-values></simple-values>
         <!-- <complex-values></complex-values> -->
         <!-- <custom-localization></custom-localization> -->
+        <segmented-control></segmented-control>
       </div>
     `
   }

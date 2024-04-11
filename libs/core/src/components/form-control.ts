@@ -92,6 +92,8 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ reflect: true })
   name = ''
 
+  abstract type: string | undefined
+
   get form() {
     return this.#internals.form
   }

@@ -8,8 +8,12 @@ import * as ContextMenu from '../../components/context-menu/context-menu.trans.s
 import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
+import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
+import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
+import { GdsElement } from '../../gds-element'
+import { el } from 'date-fns/locale'
 
 export const registerTransitionalStyles = () => {
   Dropdown.register()
@@ -19,6 +23,8 @@ export const registerTransitionalStyles = () => {
   Calendar.register()
   Datepicker.register()
   GroupedList.register()
+  SegmentedControl.register()
+  Segment.register()
 }
 
 declare global {
@@ -68,9 +74,10 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
-    const element = this.elements.get(styleKey) as LitElement
+    const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
     element.shadowRoot.adoptedStyleSheets = [sheet]
+    element.isUsingTransitionalStyles = true
   }
 
   // This is a fallback for browsers that don't support constructed stylesheets.

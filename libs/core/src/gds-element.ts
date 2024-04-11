@@ -7,6 +7,8 @@ export class GdsElement extends LitElement {
    */
   gdsElementName = ''
 
+  isUsingTransitionalStyles = false
+
   connectedCallback(): void {
     super.connectedCallback()
     this.gdsElementName =
