@@ -494,6 +494,12 @@
     }
   },
   {
+    "id": "testing--page",
+    "name": "Page",
+    "title": "Testing",
+    "customParams": {}
+  },
+  {
     "id": "get-started--page",
     "name": "Page",
     "title": "Get started",
