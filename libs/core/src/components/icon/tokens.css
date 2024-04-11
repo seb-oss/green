@@ -1,0 +1,51 @@
+:root {
+  --color: #fff;
+  --color-hover: #fff;
+  --transition: 0;
+  --transparency: 0.5;
+  --backdrop-blur: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: #000;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --transition: 0;
+  }
+}
+
+@media (hover: hover) {
+  :root {
+    --color-hover: #eee;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --transparency: 1;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color: #000;
+  }
+}
+
+/* Features with less support */
+
+@supports (backdrop-filter: blur(20px)) {
+  [blur] {
+    backdrop-filter: var(--backdrop-blur);
+  }
+}

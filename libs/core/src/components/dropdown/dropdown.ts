@@ -54,6 +54,10 @@ export class GdsDropdown<ValueT = any>
     delegatesFocus: true,
   }
 
+  get type() {
+    return 'gds-dropdown'
+  }
+
   /**
    * The label of the dropdown.
    * Will only render if this property is set to a non-empty string.

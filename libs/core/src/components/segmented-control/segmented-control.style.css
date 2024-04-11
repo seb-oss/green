@@ -1,0 +1,83 @@
+:host {
+  box-sizing: border-box;
+  display: inline-flex;
+  background-color: var(--gds-sys-color-container-container-dim1);
+  border: 0.25rem solid var(--gds-sys-color-container-container-dim1);
+  gap: 0.25rem;
+  border-radius: calc(infinity * 1px);
+  contain: layout;
+  max-width: 100%;
+  overflow: hidden;
+  height: 3rem;
+}
+
+:host([size='small']) {
+  height: 2.5rem;
+}
+
+#track {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+#segments {
+  box-sizing: border-box;
+  display: inline-flex;
+  transition: 0.2s;
+  position: relative;
+  z-index: 1;
+  gap: 0.25rem;
+}
+
+#btn-prev,
+#btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: calc(infinity * 1px);
+  background-color: var(--gds-sys-color-container-container-dim1);
+  border-width: 0;
+  appearance: none;
+  aspect-ratio: 1;
+  height: 100%;
+  width: 2.5rem;
+  cursor: pointer;
+  color: var(--gds-sys-color-content-content);
+
+  @media (pointer: fine) {
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-state-layers-state-black-dim1),
+        var(--gds-sys-color-container-container-dim1)
+      );
+    }
+  }
+}
+
+:host([size='small']) #btn-prev,
+:host([size='small']) #btn-next {
+  width: 2rem;
+}
+
+::slotted(*) {
+  flex-shrink: 0;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+#indicator {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  background-color: var(--gds-sys-color-container-container-bright);
+  border-radius: calc(infinity * 1px);
+  transition: transform 0.2s, width 0.2s;
+  z-index: 0;
+}

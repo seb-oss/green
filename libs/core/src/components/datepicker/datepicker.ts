@@ -75,6 +75,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     delegatesFocus: true,
   }
 
+  get type() {
+    return 'gds-datepicker'
+  }
+
   /**
    * The Date value of the datepicker. This can be set to undefined to clear the datepicker.
    * This can be a string if set via the value attribute in markup, or via the setAttribute DOM API.

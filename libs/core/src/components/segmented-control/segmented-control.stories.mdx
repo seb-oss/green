@@ -1,0 +1,84 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+
+<Meta title="Components/Segmented Control" />
+
+# Segmented Control
+
+A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+
+<button
+  onClick={() => {
+    registerTransitionalStyles()
+    document
+      .querySelectorAll('gds-segmented-control, gds-segment')
+      .forEach((el) => {
+        el.connectedCallback()
+      })
+  }}
+>
+  Show 2016 styles
+</button>
+
+<button onClick={() => location.reload()}>Show 2023 styles</button>
+
+<Canvas>
+  <div>
+    <gds-segmented-control
+      value="2"
+      onchange="document.getElementById('sel').innerText = event.target.value"
+    >
+      <gds-segment value="1">First</gds-segment>
+      <gds-segment value="2">Second</gds-segment>
+      <gds-segment value="3">Third</gds-segment>
+      <gds-segment value="4">Fourth</gds-segment>
+      <gds-segment value="5">Fifth</gds-segment>
+    </gds-segmented-control>
+    <div style={{ 'margin-top': '1rem' }}>
+      Selected: <span id="sel">2</span>
+    </div>
+  </div>
+</Canvas>
+
+## Small
+
+There is a small and a medium version which can be configured using the `size` attribute.
+
+<Canvas>
+  <gds-segmented-control size="small" value="2">
+    <gds-segment value="1">First</gds-segment>
+    <gds-segment value="2">Second</gds-segment>
+    <gds-segment value="3">Third</gds-segment>
+  </gds-segmented-control>
+</Canvas>
+
+## Segment size
+
+The size of the segments can be configured using the `seg-min-width` attribute. This influences
+how many segments will be visible at the same time. If you have long segment labels and want to
+avoid concatenation, you can increase the `seg-min-width` attribute. But keep in mind that the
+best practice is to keep the segment labels short.
+
+### Long label with default segment width
+
+<Canvas>
+  <gds-segmented-control value="2">
+    <gds-segment value="1">First</gds-segment>
+    <gds-segment value="2">Unusually long label text</gds-segment>
+    <gds-segment value="3">Third</gds-segment>
+    <gds-segment value="4">Fourth</gds-segment>
+    <gds-segment value="5">Fifth</gds-segment>
+  </gds-segmented-control>
+</Canvas>
+
+### Using `seg-min-width`
+
+<Canvas>
+  <gds-segmented-control seg-min-width="200" value="3">
+    <gds-segment value="1">First</gds-segment>
+    <gds-segment value="2">Unusually long label text</gds-segment>
+    <gds-segment value="3">Third</gds-segment>
+    <gds-segment value="4">Fourth</gds-segment>
+    <gds-segment value="5">Fifth</gds-segment>
+  </gds-segmented-control>
+</Canvas>
