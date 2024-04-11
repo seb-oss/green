@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.13.0
+
+### Minor Changes
+
+- 6f867ab: **Segmented Control**: Added new component
+
 ## 1.12.0
 
 ### Minor Changes
