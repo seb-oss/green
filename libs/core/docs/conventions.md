@@ -32,7 +32,10 @@ The preferred order of code in a component is something like this:
 As a rule-of-thumb, all primitives should be responsible for setting their own aria-attributes. If the aria-attribute reflects state, then the aria-attribute can be a reactive prop that reflects that internal state, such as “selected”, “hidden”, etc. State that can’t be expressed as aria attributes can have custom reflected attributes.
 Also, primitives should generally be responsible for setting their own role attribute.
 At some point in the future, when the Accessibility Object Model (AOM) has matured a bit more and gained better browser support, we might move the aria attributes there instead, and set them though ElementInternals as the AOM spec suggests.
-Other than that, attribute reflection should be avoided.
+
+### Variants, sets and sizes
+
+Some components are available in multiple variants, such as primary, secondary and tertiary. These variants can also
 
 ## Form controls
 

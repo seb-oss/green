@@ -94,6 +94,7 @@
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@lit/localize": "^0.11.4",
     "@lit/localize-tools": "^0.6.9",
+    "@mdx-js/react": "^1.6.22",
     "@nrwl/esbuild": "16.8.1",
     "@nrwl/storybook": "16.8.1",
     "@nx/angular": "16.8.1",
