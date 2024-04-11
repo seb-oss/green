@@ -114,7 +114,7 @@ describe('<gds-segmented-control>', () => {
           <gds-segment>Segment 4</gds-segment>
         </gds-segmented-control>`
       )
-      await el.updateComplete
+      await timeout(100)
 
       const segments = el.segments
       segments.forEach((segment) => {
@@ -157,7 +157,7 @@ describe('<gds-segmented-control>', () => {
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
       clickOnElement(nextButton as HTMLElement)
-      await timeout(200)
+      await timeout(100)
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
       expect(prevButton).to.exist
     })
