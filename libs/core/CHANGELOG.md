@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0
+
+### Minor Changes
+
+- 8e7440c: Add new attribute row-gap
+
 ## 1.11.0
 
 ### Minor Changes

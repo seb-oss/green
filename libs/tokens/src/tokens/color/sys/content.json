@@ -22,6 +22,11 @@
           "darkValue": "{ref.color.green.65}",
           "type": "color"
         },
+        "contentPositiveBright": {
+          "value": "{ref.color.green.98}",
+          "darkValue": "{ref.color.green.98}",
+          "type": "color"
+        },
         "contentNegative": {
           "value": "{ref.color.red.40}",
           "darkValue": "{ref.color.red.65}",

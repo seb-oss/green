@@ -43,8 +43,18 @@
           "type": "color"
         },
         "strokeCustomBlue": {
-          "value": "{ref.color.red.40}",
-          "darkValue": "{ref.color.red.60}",
+          "value": "{ref.color.blue.40}",
+          "darkValue": "{ref.color.blue.60}",
+          "type": "color"
+        },
+        "strokeCustomBlueBright": {
+          "value": "{ref.color.blue.70}",
+          "darkValue": "{ref.color.blue.20}",
+          "type": "color"
+        },
+        "strokeInversed": {
+          "value": "{ref.color.white}",
+          "darkValue": "{ref.color.black}",
           "type": "color"
         }
       }

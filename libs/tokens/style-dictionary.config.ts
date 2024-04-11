@@ -190,9 +190,7 @@ const config: StyleDictionary.Config = {
           destination: '_pallet.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
             return token.path.includes('ref')
           },
         },
@@ -200,9 +198,7 @@ const config: StyleDictionary.Config = {
           destination: '_light.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
             return !!token.darkValue
           },
           options: {
@@ -213,9 +209,7 @@ const config: StyleDictionary.Config = {
           destination: '_dark.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
             return !!token.darkValue
           },
           options: {
@@ -226,9 +220,7 @@ const config: StyleDictionary.Config = {
           destination: '_mixin-sys.scss',
           format: 'scss/mixin',
           filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
             return token.type === 'color' && !!token.darkValue
           },
         },
@@ -236,9 +228,7 @@ const config: StyleDictionary.Config = {
           destination: '_mixin-ref.scss',
           format: 'scss/mixin',
           filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
             return token.type === 'color' && !token.darkValue
           },
         },
@@ -246,9 +236,7 @@ const config: StyleDictionary.Config = {
           destination: '_pallet-2016.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (token.darkValue) {
-              return false
-            }
+            if (token.darkValue) return false
             return token.version === '2016'
           },
           options: {
@@ -259,9 +247,7 @@ const config: StyleDictionary.Config = {
           destination: '_light-2016.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (!token.darkValue) {
-              return false
-            }
+            if (!token.darkValue) return false
             return token.version === '2016'
           },
           options: {
@@ -272,9 +258,7 @@ const config: StyleDictionary.Config = {
           destination: '_dark-2016.scss',
           format: 'scss/variables',
           filter: (token) => {
-            if (!token.darkValue) {
-              return false
-            }
+            if (!token.darkValue) return false
             return token.version === '2016'
           },
           options: {
@@ -288,9 +272,7 @@ const config: StyleDictionary.Config = {
             colorScheme: 'light',
           },
           filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
+            if (token.version !== '2016') return false
             return token.type === 'color' && !!token.darkValue
           },
         },
@@ -302,9 +284,7 @@ const config: StyleDictionary.Config = {
             colorScheme: 'dark',
           },
           filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
+            if (token.version !== '2016') return false
             return token.type === 'color' && !!token.darkValue
           },
         },
@@ -312,9 +292,7 @@ const config: StyleDictionary.Config = {
           destination: '_mixin-ref-2016.scss',
           format: 'scss/mixin',
           filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
+            if (token.version !== '2016') return false
             return token.type === 'color' && !token.darkValue
           },
         },
@@ -354,7 +332,7 @@ const config: StyleDictionary.Config = {
       files: [
         {
           format: 'json/figma',
-          destination: 'variables.json',
+          destination: 'figma-colours-2023.json',
           options: {
             outputReferences: true,
           },
@@ -362,29 +340,22 @@ const config: StyleDictionary.Config = {
             // Figma currently supports Variables with color, float, boolean or string values.
             // https://www.figma.com/plugin-docs/api/VariableresolvedType/
 
-            let returnValue = false
+            if (token.version === '2016') {
+              return false
+            }
 
-            token.path?.forEach((item) => {
-              if (
-                [
-                  'color',
-                  'size',
-                  'space',
-                  'motion',
-                  'state',
-                  'typography',
-                ].includes(item)
-              ) {
-                returnValue = true
-              }
+            const isColour = token.path?.some((item) => {
+              return ['color', 'colour'].includes(item)
             })
 
-            return returnValue
+            if (isColour) {
+              return true
+            }
           },
         },
         {
           format: 'json/figma',
-          destination: 'variables-2016.json',
+          destination: 'figma-density-2023.json',
           options: {
             outputReferences: true,
           },
@@ -392,19 +363,49 @@ const config: StyleDictionary.Config = {
             // Figma currently supports Variables with color, float, boolean or string values.
             // https://www.figma.com/plugin-docs/api/VariableresolvedType/
 
-            if (token.version !== '2016') {
-              return false
-            }
+            if (token.version === '2016') return false
 
-            let returnValue = false
+            if (token.path?.includes('typography')) return false
 
-            token.path?.forEach((item) => {
-              if (['color', 'size'].includes(item)) {
-                returnValue = true
-              }
+            const isDensity = token.path?.some((item) => {
+              return ['size', 'space'].includes(item)
             })
 
-            return returnValue
+            if (isDensity) return true
+          },
+        },
+        {
+          format: 'json/figma',
+          destination: 'figma-typography-2023.json',
+          options: {
+            outputReferences: true,
+          },
+          filter: function (token) {
+            // Figma currently supports Variables with color, float, boolean or string values.
+            // https://www.figma.com/plugin-docs/api/VariableresolvedType/
+
+            if (token.version === '2016') return false
+
+            if (token.path?.includes('typography')) return true
+          },
+        },
+        {
+          format: 'json/figma',
+          destination: 'variables-colours-2016.json',
+          options: {
+            outputReferences: true,
+          },
+          filter: function (token) {
+            // Figma currently supports Variables with color, float, boolean or string values.
+            // https://www.figma.com/plugin-docs/api/VariableresolvedType/
+
+            if (token.version !== '2016') return false
+
+            const isColour = token.path?.some((item) =>
+              ['color', 'colour'].includes(item)
+            )
+
+            if (isColour) return true
           },
         },
       ],
