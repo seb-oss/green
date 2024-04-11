@@ -233,15 +233,15 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       // Actual available width in the track
       const numSegments = this.segments.length
       const availableWidth = this._elTrack.offsetWidth
+      const availableMinusGap =
+        availableWidth - getSegmentGap(this.isUsingTransitionalStyles)
 
+      // If we already have enough space for all segments, we can return here without
+      // dealing with the prev/next buttons
       if (availableWidth / numSegments > this.segMinWidth) {
         return {
           count: numSegments,
-          segmentWidth:
-            (availableWidth -
-              getSegmentGap(this.isUsingTransitionalStyles) *
-                (numSegments - 1)) /
-            numSegments,
+          segmentWidth: (availableMinusGap * (numSegments - 1)) / numSegments,
         }
       }
 
@@ -252,10 +252,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         availableWidthIncBtns / this.segMinWidth
       )
       const segmentWidth =
-        (availableWidth -
-          getSegmentGap(this.isUsingTransitionalStyles) *
-            (maxVisibleSegments - 1)) /
-        maxVisibleSegments
+        (availableMinusGap * (maxVisibleSegments - 1)) / maxVisibleSegments
       return {
         count: maxVisibleSegments,
         segmentWidth: segmentWidth,
