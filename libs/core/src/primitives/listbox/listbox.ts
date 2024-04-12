@@ -1,7 +1,7 @@
 import { HTMLTemplateResult, LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'

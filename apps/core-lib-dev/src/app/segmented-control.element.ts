@@ -54,8 +54,6 @@ export class SegmentedControl extends LitElement {
                 <h3>This a card number ${card}</h3>
 
                 <gds-dropdown
-                  searchable
-                  multiple
                   name="dropdown"
                   id="dropdown"
                   label="And a dropdown"

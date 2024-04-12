@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, LitElement, html } from 'lit'
+import { HTMLTemplateResult, html } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
@@ -11,9 +11,10 @@ import * as GroupedList from '../../components/grouped-list/grouped-list.trans.s
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 
-import { VER_SUFFIX } from './custom-element-scoping'
+import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
-import { el } from 'date-fns/locale'
+
+import chlorophyllTokens from './chlorophyll-tokens.scss'
 
 export const registerTransitionalStyles = () => {
   Dropdown.register()
@@ -25,6 +26,13 @@ export const registerTransitionalStyles = () => {
   GroupedList.register()
   SegmentedControl.register()
   Segment.register()
+
+  // We create the CSSStyleSheet instance for the chlorophyll tokens
+  // here, so that they can get tree-shaked if registerTransitionalStyles is
+  // never called.
+  const chlorophyll_tokens = new CSSStyleSheet()
+  chlorophyll_tokens.replaceSync(chlorophyllTokens.toString())
+  TransitionalStyles.instance.chlorophyllTokens = chlorophyll_tokens
 }
 
 declare global {
@@ -57,6 +65,8 @@ export class TransitionalStyles {
   private sheetsLegacy = new Map<string, string>()
   private useLegacyStylesheets = !supportsConstructedStylesheets()
 
+  chlorophyllTokens = new CSSStyleSheet()
+
   apply(element: HTMLElement, styleKey: string) {
     if (!element.shadowRoot) return
 
@@ -76,11 +86,12 @@ export class TransitionalStyles {
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
     const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
-    element.shadowRoot.adoptedStyleSheets = [sheet]
+
+    element.shadowRoot.adoptedStyleSheets = [this.chlorophyllTokens, sheet]
     element.isUsingTransitionalStyles = true
   }
 
-  // This is a fallback for browsers that don't support constructed stylesheets.
+  // This is a fallback for browsers that dosen't support constructed stylesheets.
   // Primarily, this is here to support Safari/iOS 15.x
   //
   // To work around the lack of Constructed Stylesheets, we use a regular <style>
@@ -90,12 +101,12 @@ export class TransitionalStyles {
   // Lit itself will also add a <style> element to the shadow root in these browsers,
   // meaning that we have to override the base styles added from the static style
   // property in this case. This is what the `all: revert` rule is for.
-  // We can use cascade layers to ensure that the revert rule ovverides the base styles
+  // We can use cascade layers to ensure that the revert rule overides the base styles
   // but not the transitional styles.
   // `@layer base, reset, transitional-styles;`
   applyToElementLegacy(styleKey: string) {
     const sheet = this.sheetsLegacy.get(styleKey)
-    const element = this.elements.get(styleKey) as LitElement & {
+    const element = this.elements.get(styleKey) as GdsElement & {
       _tStyles: HTMLTemplateResult
     }
 
@@ -109,6 +120,7 @@ export class TransitionalStyles {
       }
       ${unsafeHTML(sheet)}
     </style>`
+    element.isUsingTransitionalStyles = true
   }
 
   register(name: string, styles: string) {

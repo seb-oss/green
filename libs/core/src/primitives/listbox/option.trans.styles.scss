@@ -4,32 +4,32 @@
 @layer base, reset, transitional-styles;
 
 @layer transitional-styles {
-  :host {
+  :host div {
     @include dropdown.select-option;
     display: flex;
     gap: 0.75rem;
     user-select: none;
   }
 
-  :host(:hover),
-  :host(:focus-visible) {
+  :host(:hover) div,
+  :host(:focus-visible) div {
     background-color: var(--grey-400);
   }
 
-  :host(:active) {
+  :host(:active) div {
     background-color: var(--grey-500);
   }
 
-  :host(:focus) {
+  :host(:focus) div {
     outline-color: #000;
     outline-offset: -0.25rem;
   }
 
-  :host([aria-hidden='true']) {
+  :host([aria-hidden='true']) div {
     display: none;
   }
 
-  :host([highlighted]) {
+  :host([highlighted]) div {
     @include dropdown.select-option-highlighted;
     color: #fff;
   }

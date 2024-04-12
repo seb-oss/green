@@ -10,7 +10,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { constrainSlots } from '../../utils/helpers'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './context-menu.styles'
 

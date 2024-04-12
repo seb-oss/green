@@ -1,1 +1,1 @@
-export * from './utils/helpers/transitional-styles'
+export * from './utils/transitional-styles/transitional-styles'

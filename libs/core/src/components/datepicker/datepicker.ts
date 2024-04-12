@@ -14,7 +14,7 @@ import {
   html,
   getScopedTagName,
 } from '../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 
 import '../../primitives/popover/popover'

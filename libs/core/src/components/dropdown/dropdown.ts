@@ -27,7 +27,7 @@ import '../../primitives/popover'
 import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 /**
  * @element gds-dropdown
