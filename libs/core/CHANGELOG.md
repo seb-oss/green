@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.0
+
+### Minor Changes
+
+- a43b1bf: **Testing:**
+
+  - Export a Jest preset which can be used to make it easier to configure Jest for test apps that use Green Core web components
+
 ## 1.13.0
 
 ### Minor Changes
