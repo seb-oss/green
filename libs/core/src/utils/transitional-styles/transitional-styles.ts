@@ -88,7 +88,7 @@ export class TransitionalStyles {
     if (!element || !element.shadowRoot) return
 
     element.shadowRoot.adoptedStyleSheets = [this.chlorophyllTokens, sheet]
-    element.isUsingTransitionalStyles = true
+    element._isUsingTransitionalStyles = true
   }
 
   // This is a fallback for browsers that dosen't support constructed stylesheets.
@@ -120,7 +120,7 @@ export class TransitionalStyles {
       }
       ${unsafeHTML(sheet)}
     </style>`
-    element.isUsingTransitionalStyles = true
+    element._isUsingTransitionalStyles = true
   }
 
   register(name: string, styles: string) {

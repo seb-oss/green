@@ -239,7 +239,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
           count: numSegments,
           segmentWidth:
             (availableWidth -
-              getSegmentGap(this.isUsingTransitionalStyles) *
+              getSegmentGap(this._isUsingTransitionalStyles) *
                 (numSegments - 1)) /
             numSegments,
         }
@@ -253,7 +253,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       )
       const segmentWidth =
         (availableWidth -
-          getSegmentGap(this.isUsingTransitionalStyles) *
+          getSegmentGap(this._isUsingTransitionalStyles) *
             (maxVisibleSegments - 1)) /
         maxVisibleSegments
       return {
@@ -302,7 +302,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
       this.#segmentsContainerLeft =
         -this.#firstVisibleIndex * segmentWidth -
-        getSegmentGap(this.isUsingTransitionalStyles) * this.#firstVisibleIndex
+        getSegmentGap(this._isUsingTransitionalStyles) * this.#firstVisibleIndex
       this.#applySegmentsTransform()
 
       this.#calculatedSegmentWidth = segmentWidth
@@ -352,7 +352,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       const selectedSegmentIndex = this.segments.indexOf(segment)
       const offset =
         selectedSegmentIndex * this.#segmentWidth +
-        getSegmentGap(this.isUsingTransitionalStyles) * selectedSegmentIndex
+        getSegmentGap(this._isUsingTransitionalStyles) * selectedSegmentIndex
       this._elIndicator.style.transform = `translateX(${offset}px)`
       this._elIndicator.style.width = `${this.#segmentWidth}px`
     } else {
