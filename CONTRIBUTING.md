@@ -63,6 +63,8 @@ We also love PRs. If you're thinking of a large PR, we advise opening up an issu
 
 ## Submitting a pull request (PR)
 
+_If you are an SEB Employee opening a PR it's always good to notify the Green team through an SEB communication channel so we know who to turn to if we have questions regarding the PR._
+
 1. [Fork](https://github.com/sebgroup/green/fork) and clone the repository.
 1. Make sure you fulfill the technical pre-requisites
 
