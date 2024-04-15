@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.2
+
+### Patch Changes
+
+- 6a5f039: fixing contrast issue in list component
+
 ## 3.3.1
 
 ### Patch Changes
