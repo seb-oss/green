@@ -1,10 +1,9 @@
-import React, { KeyboardEvent, useContext, useRef } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import Dev, { isDev } from "$/dev/dev"
-import { allComponents, Component } from "content"
-
-import "./style.css"
+import Dev, { isDev } from '$/dev/dev'
+import { allComponents, Component } from 'content'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React, { KeyboardEvent, useContext, useRef } from 'react'
+import './style.css'
 
 export default function Sidebar({
   isNavOpen,
@@ -15,13 +14,13 @@ export default function Sidebar({
 }) {
   const path = usePathname()
   const filteredComponents = allComponents.filter(
-    (component) => component._raw.sourceFileName === "index.mdx"
+    (component) => component._raw.sourceFileName === 'index.mdx'
   )
 
   function Component(component: Component) {
     return (
       <Link
-        className={path == component.url_path ? "active" : ""}
+        className={path == component.url_path ? 'active' : ''}
         href={component.url_path}
         onClick={checkIfMenuShouldClose}
       >
@@ -51,18 +50,18 @@ export default function Sidebar({
     if (
       current &&
       window.innerWidth < 992 &&
-      !current.classList.contains("hidden")
+      !current.classList.contains('hidden')
     ) {
       toggleNav()
     }
   }
 
   return (
-    <aside className={`nav ${!isNavOpen ? "hidden" : ""}`} ref={SideBarRef}>
-      <details open={path.includes("/component")}>
+    <aside className={`nav ${!isNavOpen ? 'hidden' : ''}`} ref={SideBarRef}>
+      <details open={path.includes('/component')}>
         <summary>
           <Link
-            className={path === "/components" ? "active" : ""}
+            className={path === '/components' ? 'active' : ''}
             href="/components"
             onClick={checkIfMenuShouldClose}
           >
@@ -76,78 +75,78 @@ export default function Sidebar({
           ))}
         </nav>
       </details>
-      <details open={path.includes("/foundation")}>
+      <details open={path.includes('/foundation')}>
         <summary>
           <Link
-            className={path === "/foundation" ? "active" : ""}
+            className={path === '/foundation' ? 'active' : ''}
             href="/foundation"
             onClick={checkIfMenuShouldClose}
           >
             Foundation
           </Link>
-          <Dev>
+          {/* <Dev>
             <Arrow />
-          </Dev>
+          </Dev> */}
         </summary>
-        <Dev>
+        {/* <Dev>
           <nav>
             <Link
-              className={path == "/foundation/accessibility" ? "active" : ""}
+              className={path == '/foundation/accessibility' ? 'active' : ''}
               href="/foundation/accessibility"
               onClick={checkIfMenuShouldClose}
             >
               Accessibility
             </Link>
           </nav>
-        </Dev>
+        </Dev> */}
       </details>
-      <details open={path.includes("/ux-writing")}>
+      <details open={path.includes('/ux-writing')}>
         <summary>
           <Link
-            className={path == "/ux-writing" ? "active" : ""}
+            className={path == '/ux-writing' ? 'active' : ''}
             href="/ux-writing"
             onClick={checkIfMenuShouldClose}
           >
             UX writing
           </Link>
-          <Dev>
+          {/* <Dev>
             <Arrow />
-          </Dev>
+          </Dev> */}
         </summary>
-        <Dev>
+        {/* <Dev>
           <nav>
             <Link
-              className={path == "/ux-writing/general" ? "active" : ""}
+              className={path == '/ux-writing/general' ? 'active' : ''}
               href="/ux-writing/general"
             >
               General
             </Link>
             <Link
-              className={path == "/ux-writing/english" ? "active" : ""}
+              className={path == '/ux-writing/english' ? 'active' : ''}
               href="/ux-writing/english"
             >
               English
             </Link>
             <Link
-              className={path == "/ux-writing/swedish" ? "active" : ""}
+              className={path == '/ux-writing/swedish' ? 'active' : ''}
               href="/ux-writing/swedish"
               onClick={checkIfMenuShouldClose}
             >
               Swedish
             </Link>
           </nav>
-        </Dev>
+        </Dev> */}
       </details>
       <details
         open={
-          path.includes("/about") ||
-          path.includes("/changelog") ||
-          path.includes("/status")
+          path.includes('/about') ||
+          path.includes('/changelog') ||
+          path.includes('/status')
         }
       >
         <summary>
           <Link
-            className={path == "/about" ? "active" : ""}
+            className={path == '/about' ? 'active' : ''}
             href="/about"
             onClick={checkIfMenuShouldClose}
           >
@@ -157,13 +156,13 @@ export default function Sidebar({
         </summary>
         <nav>
           <Link
-            className={path == "/changelog" ? "active" : ""}
+            className={path == '/changelog' ? 'active' : ''}
             href="/changelog"
           >
             Changelog
           </Link>
           <Link
-            className={path == "/status" ? "active" : ""}
+            className={path == '/status' ? 'active' : ''}
             href="/status"
             onClick={checkIfMenuShouldClose}
           >
@@ -175,7 +174,7 @@ export default function Sidebar({
         className="pill"
         href="https://designlibrary.sebgroup.com/"
         target="_blank"
-        style={{ marginTop: "auto" }}
+        style={{ marginTop: 'auto' }}
       >
         Design Library
         <svg viewBox="0 0 24 24">
