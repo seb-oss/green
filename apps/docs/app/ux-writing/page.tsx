@@ -1,52 +1,46 @@
-"use client"
+'use client'
 
-import Hero from "@/hero/hero"
-import Stack from "@/stack"
-import TOC from "@/toc/toc"
-import { Col, Row } from "react-flexbox-grid"
-
-import "./style.css"
-
-import Link from "next/link"
-import Cell from "@/grid/cell"
-import Grid from "@/grid/grid"
-import Spacer from "@/spacer/spacer"
-import Content from "&/content/content"
+import TOC from '@/toc/toc'
+import './style.css'
+import Cell from '@/grid/cell'
+import Grid from '@/grid/grid'
+import Spacer from '@/spacer/spacer'
+import Content from '&/content/content'
 
 const tocHeading = [
   {
-    slug: "ux-writing",
-    text: "UX writing",
+    slug: 'ux-writing',
+    text: 'UX writing',
     level: 1,
   },
   {
-    slug: "written-id",
-    text: "Written ID",
+    slug: 'written-id',
+    text: 'Written ID',
     level: 2,
   },
   {
-    slug: "ux-writing-in-seb",
-    text: "UX writing in SEB",
+    slug: 'ux-writing-in-seb',
+    text: 'UX writing in SEB',
     level: 2,
   },
   {
-    slug: "what-is-ux-writing",
-    text: "What is UX writing",
+    slug: 'what-is-ux-writing',
+    text: 'What is UX writing',
     level: 3,
   },
   {
-    slug: "ux-writing-in-seb-is",
-    text: "UX writing in SEB is",
+    slug: 'ux-writing-in-seb-is',
+    text: 'UX writing in SEB is',
     level: 3,
   },
   {
-    slug: "a-few-examples",
-    text: "A few examples",
+    slug: 'a-few-examples',
+    text: 'A few examples',
     level: 3,
   },
   {
-    slug: "translate-texts",
-    text: "Translate texts",
+    slug: 'translate-texts',
+    text: 'Translate texts',
     level: 3,
   },
 ]
