@@ -5,8 +5,6 @@ import { allComponents, Component } from "content"
 
 import "./style.css"
 
-import { log } from "console"
-
 export default function Sidebar({
   isNavOpen,
   toggleNav,
