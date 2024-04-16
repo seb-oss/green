@@ -1,14 +1,14 @@
 gds-main {
   display: flex;
-  gap: 120px;
   flex-direction: column;
+  gap: 120px;
   padding-top: 80px;
 }
 
 gds-badges {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 80px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 }
 
 gds-row {

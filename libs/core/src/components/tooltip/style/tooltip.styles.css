@@ -35,45 +35,45 @@
     position: relative;
 
     @layer a11y {
-      cursor: help;
-      --gds-tooltip-transition: var(--gds-sys-transition);
       --gds-tooltip-contrast: var(--gds-sys-transition);
+      --gds-tooltip-transition: var(--gds-sys-transition);
+      cursor: help;
     }
 
     @layer parts {
       &::before,
       &::after {
+        align-items: center;
+        display: none;
         font-size: var(--gds-tooltip-fs);
+        justify-content: center;
         line-height: 1;
-        user-select: none;
+        opacity: 0;
         pointer-events: none;
         position: absolute;
-        display: none;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
+        user-select: none;
       }
 
       &::before {
-        content: '';
         border: var(--gds-tooltip-arrow, 6px) solid transparent;
+        content: '';
         z-index: 1001;
       }
 
       &::after {
+        background-color: var(--gds-tooltip-bg);
+        border-radius: var(--gds-tooltip-radii);
+        color: var(--gds-tooltip-color);
         content: attr(content);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding-inline: 2ch;
-        padding-block: 1.5ex;
         max-inline-size: 50ch;
         min-inline-size: max-content;
-        z-index: 1000;
         offset-anchor: center top;
-        background-color: var(--gds-tooltip-bg);
-        color: var(--gds-tooltip-color);
-        border-radius: var(--gds-tooltip-radii);
+        overflow: hidden;
+        padding-block: 1.5ex;
+        padding-inline: 2ch;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1000;
       }
 
       &:hover::before,
@@ -85,9 +85,9 @@
     @layer position {
       &:not([position])::before,
       &[position^='up']::before {
-        bottom: calc(100% + 2px);
         border-bottom-width: 0;
         border-top-color: var(--gds-tooltip-bg);
+        bottom: calc(100% + 2px);
       }
 
       &:not([position])::after,
@@ -104,9 +104,9 @@
       }
 
       &[position^='down']::before {
-        top: calc(100% + 2px);
-        border-top-width: 0;
         border-bottom-color: var(--gds-tooltip-bg);
+        border-top-width: 0;
+        top: calc(100% + 2px);
       }
 
       &[position^='down']::after {
@@ -120,30 +120,30 @@
       }
 
       &[position^='left']::before {
-        top: 50%;
-        border-right-width: 0;
         border-left-color: var(--gds-tooltip-bg);
+        border-right-width: 0;
         left: calc(-1px - var(--gds-tooltip-offset, 8px));
+        top: 50%;
         transform: translate(calc(var(--gds-tooltip-offset, 8px) * -2), -50%);
       }
 
       &[position^='left']::after {
-        top: 50%;
         right: calc(100% + var(--gds-tooltip-offset, 8px));
+        top: 50%;
         transform: translate(calc(var(--gds-tooltip-offset, 8px) * -1), -50%);
       }
 
       &[position^='right']::before {
-        top: 50%;
         border-left-width: 0;
         border-right-color: var(--gds-tooltip-bg);
         right: calc(-1px - var(--gds-tooltip-offset, 8px));
+        top: 50%;
         transform: translate(var(--gds-tooltip-offset, 8px), -50%);
       }
 
       &[position^='right']::after {
-        top: 50%;
         left: calc(100% + var(--gds-tooltip-offset, 8px));
+        top: 50%;
         transform: translate(var(--gds-tooltip-offset, 8px), -50%);
       }
     }

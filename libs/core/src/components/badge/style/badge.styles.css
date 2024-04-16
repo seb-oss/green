@@ -102,24 +102,24 @@
 
   @layer shell {
     .gds-badge {
-      font-size: var(--gds-badge-fs);
-      line-height: var(--gds-badge-lh);
-      font-weight: var(--gds-badge-fw);
-      padding-block: var(--gds-badge-block-padding);
-      padding-inline: var(--gds-badge-inline-padding);
-      color: var(--gds-badge-cl);
+      align-items: center;
       background-color: var(--gds-badge-bg);
       border-radius: var(--gds-badge-radii);
+      color: var(--gds-badge-cl);
+      display: flex;
+      font-size: var(--gds-badge-fs);
+      font-weight: var(--gds-badge-fw);
+      gap: 1ch;
+      height: 1lh;
+      justify-content: center;
       letter-spacing: normal;
-      white-space: nowrap;
+      line-height: var(--gds-badge-lh);
+      max-width: max-content;
+      padding-block: var(--gds-badge-block-padding);
+      padding-inline: var(--gds-badge-inline-padding);
       text-overflow: ellipsis;
       text-transform: uppercase;
-      max-width: max-content;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 1lh;
-      gap: 1ch;
+      white-space: nowrap;
 
       @layer variants {
         :host([variant='information']) & {

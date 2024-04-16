@@ -242,6 +242,7 @@
     "style-dictionary": "^3.7.1",
     "style-loader": "^3.3.0",
     "stylelint": "^15.10.1",
+    "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "stylelint-scss": "^4.2.0",
     "stylus": "0.59.0",

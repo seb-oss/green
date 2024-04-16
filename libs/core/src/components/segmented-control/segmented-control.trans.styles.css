@@ -5,15 +5,15 @@
 
   @layer _base {
     :host {
-      box-sizing: border-box;
-      display: inline-flex;
+      background-color: #fff;
       border: 1px solid #333;
       border-radius: 4px;
+      box-sizing: border-box;
       contain: layout;
+      display: inline-flex;
+      height: 3rem;
       max-width: 100%;
       overflow: hidden;
-      height: 3rem;
-      background-color: #fff;
     }
 
     :host([size='small']) {
@@ -25,16 +25,16 @@
       display: flex;
       flex-grow: 0;
       flex-shrink: 1;
-      width: 100%;
-      position: relative;
       overflow: hidden;
+      position: relative;
+      width: 100%;
     }
 
     #segments {
       box-sizing: border-box;
       display: inline-flex;
-      transition: 0.2s;
       position: relative;
+      transition: 0.2s;
       z-index: 1;
     }
 
@@ -44,18 +44,18 @@
 
     #btn-prev,
     #btn-next {
-      display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      background-color: #fff;
-      border-width: 0;
       appearance: none;
       aspect-ratio: 1;
-      height: 100%;
-      width: 2.5rem;
-      cursor: pointer;
+      background-color: #fff;
+      border-width: 0;
       color: #333;
+      cursor: pointer;
+      display: flex;
+      font-size: 1rem;
+      height: 100%;
+      justify-content: center;
+      width: 2.5rem;
 
       @media (pointer: fine) {
         &:hover {
@@ -74,8 +74,8 @@
     }
 
     ::slotted(*) {
-      flex-shrink: 0;
       flex-grow: 1;
+      flex-shrink: 0;
       z-index: 1;
     }
 
