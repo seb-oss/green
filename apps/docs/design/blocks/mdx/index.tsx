@@ -1,27 +1,26 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import Grid from "@/grid/grid"
-import Spacer from "@/spacer/spacer"
-import { useMDXComponent } from "next-contentlayer/hooks"
-
-import Pattern from "../pattern/pattern"
-import Col from "./col/col"
-import Do from "./do/do"
-import Dont from "./dont/dont"
-import Figma from "./figma/figma"
-import FigmaProto from "./figma/figmaProto"
-import IMG from "./image/image"
-import SE from "./lang/se"
-import Playground from "./playground/playground"
-import Refs from "./refs/refs"
-import Row from "./row/row"
+import Grid from '@/grid/grid'
+import Spacer from '@/spacer/spacer'
+import { useMDXComponent } from 'next-contentlayer/hooks'
+import * as React from 'react'
+import Pattern from '../pattern/pattern'
+import Col from './col/col'
+import Do from './do/do'
+import Dont from './dont/dont'
+import Figma from './figma/figma'
+import FigmaProto from './figma/figmaProto'
+import IMG from './image/image'
+import SE from './lang/se'
+//import Playground from "./playground/playground"
+import Refs from './refs/refs'
+import Row from './row/row'
 
 const components = {
   Figma,
   FigmaProto,
   Image: IMG,
-  Playground,
+  //Playground,
   Row,
   Col,
   Do,

@@ -1,6 +1,9 @@
-import { useEffect, useRef } from "react"
+'use client'
 
-import "./styles.css"
+import { useEffect, useRef } from 'react'
+import './styles.css'
+
+//import 'playground-elements'
 
 interface PlaygroundPreviewElement extends HTMLElement {
   project: string | HTMLDivElement
@@ -9,19 +12,19 @@ interface PlaygroundPreviewElement extends HTMLElement {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "playground-ide": React.DetailedHTMLProps<
+      'playground-ide': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
         HTMLElement
       >
-      "playground-project": React.DetailedHTMLProps<
+      'playground-project': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
         HTMLElement
       >
-      "playground-preview": React.DetailedHTMLProps<
+      'playground-preview': React.DetailedHTMLProps<
         React.HTMLAttributes<PlaygroundPreviewElement>,
         PlaygroundPreviewElement
       >
-      "playground-file-editor": React.DetailedHTMLProps<
+      'playground-file-editor': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
         HTMLElement
       >

@@ -9,7 +9,14 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/docs"
+        "outputPath": "dist/apps/docs",
+        "assets": [
+          {
+            "input": "dist/libs/core/src",
+            "glob": "index.js",
+            "output": "./core-out"
+          }
+        ]
       },
       "configurations": {
         "development": {
