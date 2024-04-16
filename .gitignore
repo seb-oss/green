@@ -26,6 +26,9 @@ node_modules
 
 # Next.JS
 .contentlayer
+.next
+/out/
+/dist/
 
 # misc
 /.sass-cache
