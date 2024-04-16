@@ -1,0 +1,12 @@
+footer.main-footer {
+  grid-area: footer;
+  border-top: 1px solid var(--gds-sys-color-stroke-stroke-variant2);
+
+  button.cookie-preferences {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: currentColor;
+    max-width: max-content;
+  }
+}

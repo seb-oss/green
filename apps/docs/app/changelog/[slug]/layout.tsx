@@ -1,4 +1,4 @@
-import Layout from "@/core/layouts/changelog"
+import Layout from "&/changelog"
 
 export default function ChangelogLayout({
   children,

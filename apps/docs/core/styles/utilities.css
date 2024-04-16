@@ -1,7 +1,0 @@
-@layer core {
-  @layer utility {
-    .text-secondary {
-      color: var(--gds-sys-color-content-content-secondary);
-    }
-  }
-}

@@ -1,6 +1,6 @@
 // app/posts/[slug]/page.tsx
 import Link from "next/link"
-import Layout from "@/core/layouts/status"
+import Layout from "&/status"
 import { allComponents } from "content"
 import { format, parseISO } from "date-fns"
 

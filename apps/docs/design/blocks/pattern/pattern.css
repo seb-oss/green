@@ -1,0 +1,77 @@
+figure.preview {
+  --color: hsla(60, 6%, 10%, 1);
+  --cell-lg: 56px;
+  --cell-lg-cl: color-mix(in srgb, var(--color), transparent 99%);
+  --cell-sm: 8px;
+  --cell-sm-cl: color-mix(in srgb, var(--color), transparent 99%);
+  display: flex;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  aspect-ratio: 16 / 9;
+  position: relative;
+
+  background-color: hsl(0 0% 100%);
+  background-image: linear-gradient(
+      to right,
+      transparent calc(var(--cell-lg) - 1px),
+      var(--cell-lg-cl) 1px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(var(--cell-lg) - 1px),
+      var(--cell-lg-cl) 1px
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(var(--cell-sm) - 1px),
+      var(--cell-sm-cl) 1px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(var(--cell-sm) - 1px),
+      var(--cell-sm-cl) 1px
+    );
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+  background-size: var(--cell-lg) 100%, 100% var(--cell-lg), var(--cell-sm) 100%,
+    100% var(--cell-sm);
+  background-position: center;
+  border: 1px solid color-mix(in srgb, var(--color-black), transparent 94%);
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  &.custom {
+    aspect-ratio: 16 / 9;
+    max-height: var(--gds-pattern-max-height);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Only for the demo */
+  button {
+    display: flex;
+    padding: 12px 28px;
+    border-radius: 200px;
+    border: 1px solid color-mix(in srgb, var(--color-black), transparent 90%);
+    backdrop-filter: blur(4px);
+    color: var(--color-black);
+    background-color: transparent;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--color-black), transparent 90%);
+      transform: scale(1.4);
+    }
+  }
+
+  & ~ span {
+    content: attr(data-caption);
+    font-size: 14px;
+    margin-top: 2ex;
+  }
+}

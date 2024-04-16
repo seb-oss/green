@@ -4,81 +4,76 @@ global_id: buttonuxtext
 date: 2023-12-22
 ---
 
-## UX Text
+## UX text
+
 The button text should answer the question "What is happening?" when the user clicks it, but if the purpose of the button is to convert, it should answer the question "What do I get?".
 
-### Use verbs in the imperative mood
-You should primarily use verbs in the imperative mood, which is the form of the verb that conveys commands or requests, for example, <em>Order, Apply, Submit and Sign</em>. If needed, you can add what happens, for example, <em>Write a new message</em> or Add a row. In special cases, the button may consist of another type of text, for example, <em>This solution suits me</em>.
+### Use commands and requests in the button
 
-### Avoid the formal Perform and the vague Okay
-Avoid using words like <em>Perform <SE>(Utför)</SE> and Okay <SE>(Okej)</SE></em> in buttons. Perform is too formal and Okay is too vague and doesn’t answer the question “What is happening?” when the user clicks the button.
+You should primarily use verbs in the imperative mood, which is the form of the verb 
+that conveys commands or requests, for example, *Order, Apply, Submit and Sign.* 
+If needed, you can add what happens, for example, *Write a new message* or *Add a row*. 
+In special cases, the button may consist of another type of text, for example, *This solution suits me.*
+
+### Avoid Perform and Okay
+
+Avoid using words like *Perform <SE>(Utför)</SE> and Okay <SE>(Okej)</SE>* in buttons. 
+Perform is too formal and Okay is too vague and doesn’t answer the question “What is happening?” when the user clicks the button.
 
 ### Standard button texts
+
 Standard text for our most commonly used buttons.
 
-<Row>
-<Col><FigmaSVG node="1612-8563" caption="Next/Nästa – Takes the user to the next step in a flow." /></Col>
-<Col><FigmaSVG node="1612-8541" caption="Back/Tillbaka – Takes the user to the previous step in a flow or aborts the action in dialog and slide outs (used when Cancel or something similar is the primary action)." /></Col>
-<Col><FigmaSVG node="1612-8782" caption="Cancel/Avbryt – Cancels the action." /></Col>
-</Row>
-<Row>
-<Col><FigmaSVG node="1612-8544" caption="Delete/Ta bort – The user wants to delete something (often in red text and with an illustration of a trash can)." /></Col>
-<Col><FigmaSVG node="1612-8548" caption="Change/Ändra – The user wants to change something." /></Col>
-<Col><FigmaSVG node="1612-8551" caption="Save/Spara – The user wants to save something, for instance, a change." /></Col>
-</Row>
-<Row>
-<Col><FigmaSVG node="1612-8557" caption="Close/Stäng – To close a dialog, modal, slide out etc." /></Col>
-<Col><FigmaSVG node="1612-8554" caption="Sign/Signera – The user is signing with BankID." /></Col>
-<Col><FigmaSVG node="1612-8560" caption="Identify yourself/Identifiera dig – The user is identifying themselves with BankID" /></Col>
-</Row>
-<hr />
+<Grid columns={3}>
+<Figma node="258-3237" caption="Next <SE>(Nästa)</SE>" />
+<Figma node="258-3242" caption="Back <SE>(Tillbaka)</SE>" />
+<Figma node="258-3247" caption="Cancel <SE>(Avbryt)</SE>" />
+<Figma node="258-3280" caption="Delete <SE>(Ta bort)</SE>" />
+<Figma node="258-3285" caption="Change <SE>(Ändra)</SE> – takes the user to edit mode." />
+<Figma node="258-3290" caption="Save <SE>(Spara)</SE>" />
+<Figma node="258-3908" caption="Close <SE>(Stäng)</SE> – closing a dialog, modal, slide-out etc." />
+<Figma node="258-3911" caption="Sign <SE>(Signera)</SE> – signing with BankID." />
+<Figma node="258-3913" caption="Identify yourself <SE>(Identifiera dig)</SE> – identifying with BankID." />
+</Grid>
+
+<Spacer size="medium" decorated />
 
 
-<Row>
-<Col>
-## Good example
-It is important to avoid confusion for the user which button to click. The combination Cancel and Close is very similar. Instead, use Back as the secondary action when primary action is Cancel.
-</Col>
+<Grid columns={2}>
 
-<Col>
-    <FigmaSVG 
-        node="1642-1513" 
-        caption="This is a good example of avoiding confusion for the customer." 
-    />
-</Col>
+<div>
+## Cancel and close
 
-</Row>
+It is important to avoid confusion for the user which button to click. The combination *Cancel* and *Close* is very similar. Instead, use *Back* as the secondary action when primary action is *Cancel*.
+</div>
 
-<hr />
+<Figma node="259-4049" caption="This is a good example of avoiding confusion for the customer." />
+</Grid>
 
-## Do’s and dont’s
+<Spacer size="medium" decorated />
 
-<Row>
-<Col>
-Do
-<ul>
-    <li>Answer the question “What is happening?” or “What do I get?”.</li>
-    <li>Use verbs in the imperative mood, that is, commands or requests.</li>
-</ul>
-</Col>
-<Col>
-Don’t
-<ul>
-    <li>Avoid the formal Perform/Utför and the vague Okay/Okej</li>
-    <li>Do not use primary and secondary button text that is too similar to each other.</li>
-</ul>
-</Col>
-</Row>
+## Do’s and don’ts
 
-<Row>
-    <Col>
-        <Do>
-            <FigmaSVG node="1648-1617" />
-        </Do>
-    </Col>
-    <Col>
-        <Dont>
-            <FigmaSVG node="1648-1678" />
-        </Dont>
-    </Col>
-</Row>
+<Grid columns={2}>
+
+<div>
+**Do**
+
+- Answer the question “What is happening?” or “What do I get?”.
+- Use commands or requests in the button.
+- Use *Back* as secondary action in modals where primary actions is *Cancel*.
+</div>
+
+<div>
+**Don’t**
+
+- Avoid the formal *Perform <SE>(Utför)</SE>* and the vague *Okay <SE>(Okej)</SE>*.
+- Do not use primary and secondary button text that is too similar to each other.
+</div>
+
+</Grid>
+
+<Grid columns={2}>
+<Do><Figma node="258-3354" /></Do>
+<Dont><Figma node="258-3385" /></Dont>
+</Grid>

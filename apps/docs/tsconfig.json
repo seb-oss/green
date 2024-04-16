@@ -16,7 +16,16 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "content": [".contentlayer/generated"],
+      "@/*": ["apps/docs/design/blocks/*"],
+      "#/*": ["apps/docs/design/styles/*"],
+      "&/*": ["apps/docs/design/layouts/*"],
+      "m/*": ["apps/docs/design/mdx/*"],
+      "$/*": ["apps/docs/utils/*"],
+      "public/*": ["apps/docs/public/*"],
+    }
   },
   "include": [
     "**/*.css",

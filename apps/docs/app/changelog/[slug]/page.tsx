@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Mdx } from "@/core/blocks/mdx"
-import Layout from "@/core/layouts/changelog"
+import { Mdx } from "@/mdx"
+import Layout from "&/changelog"
 import { allChangelogs } from "content"
 import { format, parseISO } from "date-fns"
 

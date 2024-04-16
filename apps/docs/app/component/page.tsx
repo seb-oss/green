@@ -8,7 +8,7 @@ export default function Component() {
 
   useEffect(() => {
     router.push("/components")
-  }, [])
+  }, [router])
 
   return null
 }

@@ -1,0 +1,75 @@
+/*
+Spaning columns (1-24)
+Attribute: span
+Example: span="8"
+*/
+
+@layer grid.span {
+  /* prettier-ignore */
+  gds-grid > gds-cell {
+    &[span^="1"]  { --gds-grid-col-start: 1   }
+    &[span^="2"]  { --gds-grid-col-start: 2   }
+    &[span^="3"]  { --gds-grid-col-start: 3   }
+    &[span^="4"]  { --gds-grid-col-start: 4   }
+    &[span^="5"]  { --gds-grid-col-start: 5   }
+    &[span^="6"]  { --gds-grid-col-start: 6   }
+    &[span^="7"]  { --gds-grid-col-start: 7   }
+    &[span^="8"]  { --gds-grid-col-start: 8   }
+    &[span^="9"]  { --gds-grid-col-start: 9   }
+    &[span^="10"] { --gds-grid-col-start: 10  }
+    &[span^="11"] { --gds-grid-col-start: 11  }
+    &[span^="12"] { --gds-grid-col-start: 12  }
+    &[span^="13"] { --gds-grid-col-start: 13  }
+    &[span^="14"] { --gds-grid-col-start: 14  }
+    &[span^="15"] { --gds-grid-col-start: 15  }
+    &[span^="16"] { --gds-grid-col-start: 16  }
+    &[span^="17"] { --gds-grid-col-start: 17  }
+    &[span^="18"] { --gds-grid-col-start: 18  }
+    &[span^="19"] { --gds-grid-col-start: 19  }
+    &[span^="20"] { --gds-grid-col-start: 20  }
+    &[span^="21"] { --gds-grid-col-start: 21  }
+    &[span^="22"] { --gds-grid-col-start: 22  }
+    &[span^="23"] { --gds-grid-col-start: 23  }
+    &[span^="24"] { --gds-grid-col-start: 24  }
+  }
+
+  /* span=...+width, span=...-end */
+  /* prettier-ignore */
+  gds-grid > gds-cell {
+    &[span$="+1"],  &[span="1"]                  { --gds-grid-col-end: 1  }
+    &[span$="+2"],  &[span$="-1"],  &[span="2"]  { --gds-grid-col-end: 2  }
+    &[span$="+3"],  &[span$="-2"],  &[span="3"]  { --gds-grid-col-end: 3  }
+    &[span$="+4"],  &[span$="-3"],  &[span="4"]  { --gds-grid-col-end: 4  }
+    &[span$="+5"],  &[span$="-4"],  &[span="5"]  { --gds-grid-col-end: 5  }
+    &[span$="+6"],  &[span$="-5"],  &[span="6"]  { --gds-grid-col-end: 6  }
+    &[span$="+7"],  &[span$="-6"],  &[span="7"]  { --gds-grid-col-end: 7  }
+    &[span$="+8"],  &[span$="-7"],  &[span="8"]  { --gds-grid-col-end: 8  }
+    &[span$="+9"],  &[span$="-8"],  &[span="9"]  { --gds-grid-col-end: 9  }
+    &[span$="+10"], &[span$="-9"],  &[span="10"] { --gds-grid-col-end: 10 }
+    &[span$="+11"], &[span$="-10"], &[span="11"] { --gds-grid-col-end: 11 }
+    &[span$="+12"], &[span$="-11"], &[span="12"] { --gds-grid-col-end: 12 }
+    &[span$="+13"], &[span$="-12"], &[span="13"] { --gds-grid-col-end: 13 }
+    &[span$="+14"], &[span$="-13"], &[span="14"] { --gds-grid-col-end: 14 }
+    &[span$="+15"], &[span$="-14"], &[span="15"] { --gds-grid-col-end: 15 }
+    &[span$="+16"], &[span$="-15"], &[span="16"] { --gds-grid-col-end: 16 }
+    &[span$="+17"], &[span$="-16"], &[span="17"] { --gds-grid-col-end: 17 }
+    &[span$="+18"], &[span$="-17"], &[span="18"] { --gds-grid-col-end: 18 }
+    &[span$="+19"], &[span$="-18"], &[span="19"] { --gds-grid-col-end: 19 }
+    &[span$="+20"], &[span$="-19"], &[span="20"] { --gds-grid-col-end: 20 }
+    &[span$="+21"], &[span$="-20"], &[span="21"] { --gds-grid-col-end: 21 }
+    &[span$="+22"], &[span$="-21"], &[span="22"] { --gds-grid-col-end: 22 }
+    &[span$="+23"], &[span$="-22"], &[span="23"] { --gds-grid-col-end: 23 }
+    &[span$="+24"], &[span$="-23"], &[span="24"] { --gds-grid-col-end: 24 }
+  }
+
+  /* prettier-ignore */
+  gds-grid > gds-cell { 
+    &[span] { grid-column-end: span var(--gds-grid-col-end) }
+    &[span*="+"],
+    &[span*="-"],
+    &[span*=".."]  { grid-column-start: var(--gds-grid-col-start) }
+    &[span*="-"],
+    &[span*=".."] { grid-column-end: var(--gds-grid-col-end) }
+    &[span="row"] { grid-column: 1 / -1 } 
+  }
+}

@@ -1,39 +1,40 @@
-import { defineDocumentType } from '@contentlayer/source-files'
-import { getLastEditedDate, urlFromFilePath } from '../utils'
+import { defineDocumentType } from "@contentlayer/source-files"
+
+import { getLastEditedDate, urlFromFilePath } from "../utils"
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }
 
 export const Post = defineDocumentType(() => ({
-  name: 'Post',
+  name: "Post",
   filePathPattern: `blog/**/*.mdx`,
-  contentType: 'mdx',
+  contentType: "mdx",
   fields: {
     global_id: {
-      type: 'string',
+      type: "string",
       description:
-        'Random ID to uniquely identify this doc, even after it moves',
+        "Random ID to uniquely identify this doc, even after it moves",
       required: true,
     },
-    title: { type: 'string', required: true },
-    date: { type: 'date', required: true },
-    author: { type: 'string', required: false },
-    description: { type: 'string', required: false },
+    title: { type: "string", required: true },
+    date: { type: "date", required: true },
+    author: { type: "string", required: false },
+    description: { type: "string", required: false },
   },
   computedFields: {
     url_path: {
-      type: 'string',
+      type: "string",
       description:
         'The URL path of this page relative to site root. For example, the site root page would be "/", and doc page would be "docs/getting-started/"',
       resolve: (post) => {
-        if (post._id.startsWith('blog/index.mdx')) return '/blog'
+        if (post._id.startsWith("blog/index.mdx")) return "/blog"
         return urlFromFilePath(post)
       },
     },
     pathSegments: {
-      type: 'json',
+      type: "json",
       resolve: (post) =>
         urlFromFilePath(post)
-          .split('/')
+          .split("/")
           // skip `/docs` prefix
           .slice(2)
           .map((dirName) => {
@@ -43,7 +44,7 @@ export const Post = defineDocumentType(() => ({
             return { order, pathName }
           }),
     },
-    last_edited: { type: 'date', resolve: getLastEditedDate },
+    last_edited: { type: "date", resolve: getLastEditedDate },
   },
   extensions: {},
 }))

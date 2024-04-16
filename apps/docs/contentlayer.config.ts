@@ -4,36 +4,17 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import * as documentTypes from './utils/content/types'
+import { contentDirPath } from './utils/content/utils'
+import { rehypePrettyCodeOptions } from './utils/theme/code'
 
 export default makeSource({
   contentDirPath: 'apps/docs/content',
   documentTypes,
   mdx: {
     remarkPlugins: [remarkGfm],
-
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypePrettyCode,
-        {
-          theme: 'one-dark-pro',
-          onVisitLine(node: { children: string | any[] }) {
-            if (node.children.length === 0) {
-              node.children = [{ type: 'text', value: ' ' }]
-            }
-          },
-          onVisitHighlightedLine(node: {
-            properties: { className: string[] }
-          }) {
-            node.properties.className.push('line--highlighted')
-          },
-          onVisitHighlightedWord(node: {
-            properties: { className: string[] }
-          }) {
-            node.properties.className = ['word--highlighted']
-          },
-        },
-      ],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
       [
         rehypeAutolinkHeadings,
         {

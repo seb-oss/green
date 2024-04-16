@@ -1,6 +1,6 @@
 import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
-import { Mdx } from "@/core/blocks/mdx"
+import { Mdx } from "@/mdx"
 import { allComponents } from "content"
 
 type Props = {

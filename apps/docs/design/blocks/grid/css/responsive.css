@@ -1,0 +1,105 @@
+/* 
+Breakpoints:
+Desktop Large: 2560px
+Desktop Medium: 1440px
+Desktop Small: 1024px
+Tablet: 768px
+Mobile: 425px
+*/
+
+@layer grid.desktop {
+  /* Desktop: 1024px - 2560px */
+  /* prettier-ignore */
+  gds-grid {
+    &[columns="1"]  { --gds-c: 1;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="2"]  { --gds-c: 2;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="3"]  { --gds-c: 3;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="4"]  { --gds-c: 4;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="5"]  { --gds-c: 5;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="6"]  { --gds-c: 6;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="7"]  { --gds-c: 7;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="8"]  { --gds-c: 8;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="9"]  { --gds-c: 9;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="10"] { --gds-c: 10; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="11"] { --gds-c: 11; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="12"] { --gds-c: 12; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="13"] { --gds-c: 13; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="14"] { --gds-c: 14; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="15"] { --gds-c: 15; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="16"] { --gds-c: 16; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="17"] { --gds-c: 17; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="18"] { --gds-c: 18; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="19"] { --gds-c: 19; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="20"] { --gds-c: 20; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="21"] { --gds-c: 21; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="22"] { --gds-c: 22; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="23"] { --gds-c: 23; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+    &[columns="24"] { --gds-c: 24; --gds-grid-col: repeat(var(--gds-c), 1fr) }
+  }
+}
+
+@layer grid.tablet {
+  /* Tablet: 768px */
+  /* prettier-ignore */
+  @media only screen and (max-width: 768px) {
+  gds-grid {
+      &[tablet="1"]  { --gds-c: 1  }
+      &[tablet="2"]  { --gds-c: 2  }
+      &[tablet="3"]  { --gds-c: 3  }
+      &[tablet="4"]  { --gds-c: 4  }
+      &[tablet="5"]  { --gds-c: 5  }
+      &[tablet="6"]  { --gds-c: 6  }
+      &[tablet="7"]  { --gds-c: 7  }
+      &[tablet="8"]  { --gds-c: 8  }
+      &[tablet="9"]  { --gds-c: 9  }
+      &[tablet="10"] { --gds-c: 10 }
+      &[tablet="11"] { --gds-c: 11 }
+      &[tablet="12"] { --gds-c: 12 }
+      &[tablet="13"] { --gds-c: 13 }
+      &[tablet="14"] { --gds-c: 14 }
+      &[tablet="15"] { --gds-c: 15 }
+      &[tablet="16"] { --gds-c: 16 }
+      &[tablet="17"] { --gds-c: 17 }
+      &[tablet="18"] { --gds-c: 18 }
+      &[tablet="19"] { --gds-c: 19 }
+      &[tablet="20"] { --gds-c: 20 }
+      &[tablet="21"] { --gds-c: 21 }
+      &[tablet="22"] { --gds-c: 22 }
+      &[tablet="23"] { --gds-c: 23 }
+      &[tablet="24"] { --gds-c: 24 }
+    }
+}
+}
+
+/* Mobile: 425px */
+/* prettier-ignore */
+@layer grid.mobile {
+  @media only screen and (max-width: 425px) {
+    gds-grid {
+      &[mobile="1"]  { --gds-c: 1  }
+      &[mobile="2"]  { --gds-c: 2  }
+      &[mobile="3"]  { --gds-c: 3  }
+      &[mobile="4"]  { --gds-c: 4  }
+      &[mobile="5"]  { --gds-c: 5  }
+      &[mobile="6"]  { --gds-c: 6  }
+      &[mobile="7"]  { --gds-c: 7  }
+      &[mobile="8"]  { --gds-c: 8  }
+      &[mobile="9"]  { --gds-c: 9  }
+      &[mobile="10"] { --gds-c: 10 }
+      &[mobile="11"] { --gds-c: 11 }
+      &[mobile="12"] { --gds-c: 12 }
+      &[mobile="13"] { --gds-c: 13 }
+      &[mobile="14"] { --gds-c: 14 }
+      &[mobile="15"] { --gds-c: 15 }
+      &[mobile="16"] { --gds-c: 16 }
+      &[mobile="17"] { --gds-c: 17 }
+      &[mobile="18"] { --gds-c: 18 }
+      &[mobile="19"] { --gds-c: 19 }
+      &[mobile="20"] { --gds-c: 20 }
+      &[mobile="21"] { --gds-c: 21 }
+      &[mobile="22"] { --gds-c: 22 }
+      &[mobile="23"] { --gds-c: 23 }
+      &[mobile="24"] { --gds-c: 24 }
+    }
+  }
+}

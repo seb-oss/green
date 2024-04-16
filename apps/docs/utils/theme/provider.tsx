@@ -1,8 +1,8 @@
 "use client"
 
 import React, { createContext, useEffect, useState } from "react"
-import Cmdk from "@/core/blocks/cmdk"
-import Favicon from "@/core/blocks/favicon/favicon"
+import Cmdk from "@/cmdk"
+import Favicon from "@/favicon/favicon"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { type ThemeProviderProps } from "next-themes/dist/types"
 import { Toaster } from "sonner"
