@@ -1,0 +1,6 @@
+.card {
+  display: flex;
+  min-height: 250px;
+  border: 1px solid color-mix(in srgb, var(--color-black), transparent 90%);
+  width: 320px;
+}

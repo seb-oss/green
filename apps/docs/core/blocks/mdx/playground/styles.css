@@ -1,0 +1,13 @@
+playground-preview {
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-block-start: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-white), transparent 10%);
+}
+
+playground-preview::part(preview-toolbar) {
+    display: none;
+}

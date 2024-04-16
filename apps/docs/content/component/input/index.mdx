@@ -1,0 +1,148 @@
+---
+title: Input
+summary: Text fields allow users to enter text into a UI. They typically appear in forms and dialogs.
+date: 2023-12-22
+global_id: inputinput
+status: work in progress
+tags: input, form
+node: 1614-9124
+---
+
+## Overview
+
+Input are used to let the user enter text or numbers in a form.Optional field indicator. We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "optional" next to the label with the field.
+
+<Playground component="input" story-id="2" />
+
+<Row>
+<Col>
+### Variants
+To be able to use forms in all context's we provide 2 versions of input fields.
+<ul>
+<li>Label outside (default): Includes all the features we need in complex forms.</li>
+<li>Label inside: gives a more clean look but doesn't work for longer labels and can only be used in specific contexts.</li>
+</ul>
+</Col>
+<Col></Col>
+</Row>
+
+<Row>
+<Col><FigmaSVG node="1654-1952" caption="Default, label outside."/></Col>
+<Col><FigmaSVG node="1654-2159" caption="Option number 2 used only in  specific contexts."/></Col>
+</Row>
+
+
+<Row>
+<Col>
+### Sets
+To be able to use forms in all context's we provide 2 versions of input fields.
+<ul>
+<li>Regular text field</li>
+<li>Multi lined text field, Multiple lines. Some text fields require a lot more text to be entered. A simple example would be description of a payment. For this we use the multi-line version of the input-field. This is often known as a text area or free text. Counter. For some fields it's critical that users know the limitations. Counters start at the max and count down to zero. When the counter comes close to zero the appearance shifts to red to warn the user before the fields stops accepting input.</li>
+</ul>
+</Col>
+<Col>
+</Col>
+</Row>
+
+<Row>
+<Col><FigmaSVG node="1655-2401" caption="Regular and search field."/></Col>
+<Col><FigmaSVG node="1655-2708" caption="Free text field."/></Col>
+</Row>
+
+
+<Row>
+<Col>
+### Sizes
+The input fields come in two sizes.
+<ul>
+<li>Normal: used in most cases.</li>
+<li>Small: used in tables and in some special cases where the space is very limited.</li>
+</ul>
+</Col>
+<Col><FigmaSVG node="1655-2834" caption="Normal and small"/></Col>
+</Row>
+
+<hr />
+
+## Features
+
+### Label
+All input fields need a label. Keep the label short and to the point.
+
+<Row>
+<Col>
+### Field instructions
+Use this to explain how to fill the field. This may be an instruction of how to count or what to include. Limit the instructions to details that all or most users need.
+</Col>
+<Col><FigmaSVG node="1655-2868" caption="Field instruction visible."/></Col>
+</Row>
+
+<Row>
+<Col>
+### Field help
+We can provide three types of help in relation to input fields
+<ul>
+<li>Instruction text: Additional instruction of how to think, what we expect, or what format is required.</li>
+<li>Contextual help: Either as a tooltip, extended help that increase the size of the field with more instructions, or a slide-out with helptext.</li>
+<li>Error text: If users fail in filling the field with correct information, the last help is the error text that can guide to a solution based on the entered information.</li>
+</ul>
+</Col>
+<Col><FigmaSVG node="1655-2901" caption="Field instruction visible."/></Col>
+</Row>
+
+<Row>
+<Col>
+### Dynamic information
+Used to perform comparative calculations next to the field. For example if users fill out salary after taxes, the dynamic information may show the salary before taxes.
+</Col>
+<Col><FigmaSVG node="1655-2834" caption="Example on dynamic information"/></Col>
+</Row>
+
+<Row>
+<Col>
+### Static data
+Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
+</Col>
+<Col><FigmaSVG node="1655-2834" caption="Example on static data"/></Col>
+</Row>
+
+<Row>
+<Col>
+### Auto complete
+Input text can be used with auto complete to help users who have limited literacy or who write in a foreign language.Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
+</Col>
+<Col><FigmaSVG node="1655-2834" caption="Example on autocomplete"/></Col>
+</Row>
+
+<hr />
+
+## Do’s and dont’s
+
+<Row>
+<Col>
+Do
+<ul>
+    <li>Use "optional" to mark optional fields.</li>
+</ul>
+</Col>
+<Col>
+Don’t
+<ul>
+    <li>Use asterix for indicate mandatory fields.</li>
+</ul>
+</Col>
+</Row>
+
+<Row>
+    <Col>
+        <Do>
+            <FigmaSVG node="1655-2834" />
+        </Do>
+    </Col>
+    <Col>
+        <Dont>
+            <FigmaSVG node="1655-2834" />
+        </Dont>
+    </Col>
+</Row>
