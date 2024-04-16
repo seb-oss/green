@@ -42,6 +42,7 @@
     "@floating-ui/dom": "^1.6.1",
     "@lit/react": "^1.0.2",
     "@material/material-color-utilities": "^0.2.4",
+    "@nx/eslint": "^18.2.4",
     "@nx/plugin": "16.8.1",
     "@popperjs/core": "^2.11.5",
     "@sebgroup/bootstrap": "^6.0.1",
