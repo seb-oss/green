@@ -29,6 +29,7 @@ node_modules
 .next
 /out/
 /dist/
+/apps/docs/public/core-out/
 
 # misc
 /.sass-cache

@@ -42,7 +42,8 @@
           "buildTarget": "docs:build:production",
           "dev": false
         }
-      }
+      },
+      "dependsOn": ["core:build-with-types"]
     },
     "export": {
       "executor": "@nx/next:export",
