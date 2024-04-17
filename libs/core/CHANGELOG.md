@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.14.1
+
+### Patch Changes
+
+- 47a8708: **gds-icon**: Fix element scoping
+
 ## 1.14.0
 
 ### Minor Changes
