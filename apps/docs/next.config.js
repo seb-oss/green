@@ -21,7 +21,7 @@ const nextConfig = {
     formats: ['image/webp'],
   },
   experimental: {
-    esmExternals: 'loose',
+    esmExternals: true,
     urlImports: ['https://cdn.skypack.dev'],
   },
   transpilePackages: ['@babel/runtime'],

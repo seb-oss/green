@@ -2,7 +2,7 @@ import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { KeyboardEvent, useContext, useRef } from 'react'
+import React, {  useRef } from 'react'
 import './style.css'
 
 export default function Sidebar({
@@ -84,11 +84,11 @@ export default function Sidebar({
           >
             Foundation
           </Link>
-          {/* <Dev>
+          <Dev>
             <Arrow />
-          </Dev> */}
+          </Dev>
         </summary>
-        {/* <Dev>
+        <Dev>
           <nav>
             <Link
               className={path == '/foundation/accessibility' ? 'active' : ''}
@@ -98,7 +98,7 @@ export default function Sidebar({
               Accessibility
             </Link>
           </nav>
-        </Dev> */}
+        </Dev>
       </details>
       <details open={path.includes('/ux-writing')}>
         <summary>
@@ -109,11 +109,11 @@ export default function Sidebar({
           >
             UX writing
           </Link>
-          {/* <Dev>
+          <Dev>
             <Arrow />
-          </Dev> */}
+          </Dev>
         </summary>
-        {/* <Dev>
+        <Dev>
           <nav>
             <Link
               className={path == '/ux-writing/general' ? 'active' : ''}
@@ -135,7 +135,7 @@ export default function Sidebar({
               Swedish
             </Link>
           </nav>
-        </Dev> */}
+        </Dev>
       </details>
       <details
         open={
