@@ -24,7 +24,7 @@
       "&/*": ["apps/docs/design/layouts/*"],
       "m/*": ["apps/docs/design/mdx/*"],
       "$/*": ["apps/docs/utils/*"],
-      "public/*": ["apps/docs/public/*"],
+      "public/*": ["apps/docs/public/*"]
     }
   },
   "include": [

@@ -82,7 +82,7 @@ export default function RootLayout({
         <Script id="show-banner">
           {`globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true`}
         </Script>
-        <Script type="module" src="/core-out/index.js" />
+        <Script src="/core-out/index.bundle.js" />
       </body>
     </html>
   )

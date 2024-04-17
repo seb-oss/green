@@ -13,7 +13,7 @@
         "assets": [
           {
             "input": "dist/libs/core/src",
-            "glob": "index.js",
+            "glob": "index.bundle.js",
             "output": "./core-out"
           }
         ]
@@ -24,14 +24,21 @@
         },
         "production": {}
       },
-      "dependsOn": ["core:build-with-types"]
+      "dependsOn": ["core:build-bundle-src"]
     },
     "serve": {
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "docs:build",
-        "dev": true
+        "dev": true,
+        "assets": [
+          {
+            "input": "dist/libs/core/src",
+            "glob": "index.bundle.js",
+            "output": "./core-out"
+          }
+        ]
       },
       "configurations": {
         "development": {
@@ -43,7 +50,7 @@
           "dev": false
         }
       },
-      "dependsOn": ["core:build-with-types"]
+      "dependsOn": ["core:build-bundle-src"]
     },
     "export": {
       "executor": "@nx/next:export",

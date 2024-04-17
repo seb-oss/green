@@ -20,7 +20,7 @@ export const generateStaticParams = (): any => {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { slug } = params
 
@@ -52,7 +52,7 @@ export default function ComponentPage({
   const { slug } = params
 
   const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug
+    (component) => component.url_path === '/component/' + slug,
   )
 
   if (!component) {
