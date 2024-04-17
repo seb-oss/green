@@ -1,4 +1,3 @@
-/* code block style */
 @layer core {
   @layer layout.component {
     [data-rehype-pretty-code-fragment] {

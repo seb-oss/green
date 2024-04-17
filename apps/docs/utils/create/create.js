@@ -11,10 +11,8 @@ const dirPath = path.join(
   buttonName
 )
 
-// Create the directory
 fs.mkdirSync(dirPath, { recursive: true })
 
-// Create the .mdx files
 const files = ["accessibility", "code", "index", "ux-text"]
 
 files.forEach((file) => {

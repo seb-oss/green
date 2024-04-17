@@ -80,20 +80,20 @@ export default function About() {
                 The design system is called Green as an homage to SEB being
                 viewed as the {'green bank'} with green as a primary colour for
                 the brand and the bank. The bank also plays a great role in the
-                transition to a{' '}
+                transition to a
                 <Link
                   href="https://sebgroup.com/sustainability/netzerotransition"
                   target="_blank"
                 >
                   net zero society
-                </Link>{' '}
-                and has a focus on{' '}
+                </Link>
+                and has a focus on
                 <Link href="https://sebgroup.com/sustainability">
                   sustainability
-                </Link>{' '}
+                </Link>
                 and helping
                 {"it's"} clients to become more sustainable. The design system
-                initative was also seen as a{' '}
+                initative was also seen as a
                 <Link
                   href="https://en.wikipedia.org/wiki/Greenfield_project"
                   target="_blank"
@@ -193,7 +193,7 @@ export default function About() {
                   <Spacing direction="vertical" size={7} />
                   <ul>
                     <li>
-                      – Book{' '}
+                      – Book
                       <a
                         href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_4065088102?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                         target="_blank"
@@ -202,7 +202,7 @@ export default function About() {
                       </a>
                     </li>
                     <li>
-                      –Book{' '}
+                      –Book
                       <a
                         href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_43486807?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                         target="_blank"
@@ -233,7 +233,7 @@ export default function About() {
                 always reach out to us in the following ways:`}</p>
               <ul className="paragraph-medium text-secondary">
                 <li>
-                  — Ask in our{' '}
+                  — Ask in our
                   <Link
                     href="https://teams.microsoft.com/l/team/19%3aR-yrtyItfX3RWEyU8WrCyVy6u-eqWxYPbY1w2O7UVPs1%40thread.tacv2/conversations?groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                     target="_blank"
@@ -242,13 +242,13 @@ export default function About() {
                   </Link>
                 </li>
                 <li>
-                  — Post an{' '}
+                  — Post an
                   <Link href="https://github.com/sebgroup/green/issues">
                     issue on Github
                   </Link>
                 </li>
                 <li>
-                  — Email us at{' '}
+                  — Email us at
                   <Link href="mailto:greendesignsystem@seb.se">
                     greendesignsystem@seb.se
                   </Link>

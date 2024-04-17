@@ -1,5 +1,3 @@
-import Layout from "&/changelog"
-
 export default function ChangelogLayout({
   children,
 }: {

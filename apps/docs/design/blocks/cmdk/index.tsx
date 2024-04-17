@@ -8,9 +8,7 @@ import {
   allDocuments,
   allMembers,
   allPosts,
-  Member,
 } from "content"
-import { compareDesc, format, parseISO } from "date-fns"
 import Fuse from "fuse.js"
 
 import "./style.css"
@@ -46,7 +44,6 @@ export default function Cmdk({
   useEffect(() => {
     if (refs[focusedIndex] && refs[focusedIndex].current) {
       refs[focusedIndex].current?.focus()
-      // console.log(refs[focusedIndex].current)
     }
   }, [focusedIndex])
 
@@ -81,9 +78,6 @@ export default function Cmdk({
     const componentFuse = new Fuse(allComponents, {
       keys: ["title", "keywords"],
     })
-    // const componentResults = componentFuse.search(value)
-    // const componentItems = componentResults.map((result) => result.item)
-    // results.push(...componentItems)
 
     const componentResults = componentFuse.search(value)
     const componentItems = componentResults
@@ -124,13 +118,6 @@ export default function Cmdk({
             <span className="cmdk-item-char">{doc.title.charAt(0)}</span>
             <span>{doc.version}</span>
           </div>
-          {/* <div className="cmdk-option">
-            <span>
-              <time dateTime={doc.date}>
-                {format(parseISO(doc.date), "LLLL d, yyyy")}
-              </time>
-            </span>
-          </div> */}
         </Link>
       )
     } else if (doc.type === "Component") {
@@ -348,21 +335,6 @@ export default function Cmdk({
             />
           </svg>
           <div className="cmd-options">
-            {/* <div>
-              Navigate
-              <kbd>
-                <svg viewBox="0 0 24 24">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <polyline points="19 12 12 19 5 12"></polyline>
-                </svg>
-              </kbd>
-              <kbd>
-                <svg viewBox="0 0 24 24">
-                  <line x1="12" y1="19" x2="12" y2="5"></line>
-                  <polyline points="5 12 12 5 19 12"></polyline>
-                </svg>
-              </kbd>
-            </div> */}
             <div>
               Select
               <kbd>

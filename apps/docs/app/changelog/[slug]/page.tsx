@@ -1,9 +1,7 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Mdx } from "@/mdx"
 import Layout from "&/changelog"
 import { allChangelogs } from "content"
-import { format, parseISO } from "date-fns"
 
 export const generateStaticParams = (): any => {
   return allChangelogs.map((changelog) => ({
@@ -22,7 +20,7 @@ export default function Changelog({ params }: { params: { slug: string } }) {
     notFound()
   }
 
-  const { date, title, global_id, last_edited, body } = changelog
+  const { body } = changelog
 
   return (
     <Layout>
