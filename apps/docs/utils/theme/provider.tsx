@@ -7,9 +7,18 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
 
-export const ThemeProviderContext = createContext({
+type ThemeProviderContextType = {
+  isOpen: boolean,
+  isNavOpen: boolean,
+  toggleCmd: () => void,
+  toggleNav: () => void,
+}
+
+export const ThemeProviderContext = createContext<ThemeProviderContextType>({
   isOpen: false,
   isNavOpen: false,
+  toggleCmd: () => { throw new Error("Function not implemented."); },
+  toggleNav: () => { throw new Error("Function not implemented."); },
 })
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
