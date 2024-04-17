@@ -2822,7 +2822,7 @@ import { unsafeCSS as unsafeCSS2 } from "lit";
 // dist/libs/tokens/internal/pallet.css
 var pallet_default = `/**
  * Do not edit directly
- * Generated on Wed, 17 Apr 2024 10:28:55 GMT
+ * Generated on Wed, 17 Apr 2024 11:22:40 GMT
  */
 
 :host {
@@ -2983,7 +2983,7 @@ var pallet_default = `/**
 // dist/libs/tokens/internal/theme/light.css
 var light_default = `/**
  * Do not edit directly
- * Generated on Wed, 17 Apr 2024 10:28:55 GMT
+ * Generated on Wed, 17 Apr 2024 11:22:40 GMT
  */
 
 :host {
@@ -3104,7 +3104,7 @@ var light_default = `/**
 // dist/libs/tokens/internal/size.css
 var size_default = `/**
  * Do not edit directly
- * Generated on Wed, 17 Apr 2024 10:28:55 GMT
+ * Generated on Wed, 17 Apr 2024 11:22:40 GMT
  */
 
 :host {
