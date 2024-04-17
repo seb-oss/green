@@ -1,0 +1,75 @@
+.gds-spacing {
+  display: block;
+}
+
+.gds-spacing--horizontal {
+  height: 100%;
+}
+
+.gds-spacing--vertical {
+  width: 100%;
+}
+
+.gds-spacing--horizontal--1 {
+  width: .125rem;
+}
+
+.gds-spacing--horizontal--2 {
+  width: .25rem;
+}
+
+.gds-spacing--horizontal--3 {
+  width: .5rem;
+}
+
+.gds-spacing--horizontal--4 {
+  width: .75rem;
+}
+
+.gds-spacing--horizontal--5 {
+  width: .75rem;
+}
+
+.gds-spacing--horizontal--6 {
+  width: 1rem;
+}
+
+.gds-spacing--horizontal--7 {
+  width: 1.5rem;
+}
+
+.gds-spacing--horizontal--8 {
+  width: 2rem;
+}
+
+.gds-spacing--vertical--1 {
+  height: .125rem;
+}
+
+.gds-spacing--vertical--2 {
+  height: .25rem;
+}
+
+.gds-spacing--vertical--3 {
+  height: .5rem;
+}
+
+.gds-spacing--vertical--4 {
+  height: .75rem;
+}
+
+.gds-spacing--vertical--5 {
+  height: .75rem;
+}
+
+.gds-spacing--vertical--6 {
+  height: 1rem;
+}
+
+.gds-spacing--vertical--7 {
+  height: 1.5rem;
+}
+
+.gds-spacing--vertical--8 {
+  height: 2rem;
+}

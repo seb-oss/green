@@ -1,0 +1,44 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "types": ["jest", "node"],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "content": [".contentlayer/generated"],
+      "@/*": ["apps/docs/design/blocks/*"],
+      "#/*": ["apps/docs/design/styles/*"],
+      "&/*": ["apps/docs/design/layouts/*"],
+      "m/*": ["apps/docs/design/mdx/*"],
+      "$/*": ["apps/docs/utils/*"],
+      "public/*": ["apps/docs/public/*"]
+    }
+  },
+  "include": [
+    "**/*.css",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "../../apps/docs/.next/types/**/*.ts",
+    "../../dist/apps/docs/.next/types/**/*.ts",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "../../.contentlayer/generated",
+    "app/api/figma.js"
+  ],
+  "exclude": ["jest.config.ts"]
+}

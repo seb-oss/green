@@ -1,0 +1,16 @@
+@layer core {
+  @layer layout.main {
+    .layout-main {
+      display: grid;
+      grid-template-areas:
+        "alert alert alert"
+        "header header header"
+        "article article article"
+        "footer footer footer";
+
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: max-content;
+      max-width: var(--max-width);
+    }
+  }
+}

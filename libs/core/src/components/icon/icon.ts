@@ -1,11 +1,13 @@
-import { LitElement, html, unsafeCSS } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { LitElement, unsafeCSS } from 'lit'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
 
 import styles from './stem.styles.scss'
 
-// Add "lib" Attribute for Font-Awesome or similar packages
 
-@customElement('gds-icon')
+@gdsCustomElement('gds-icon')
 export class GdsIcon extends LitElement {
   static get styles() {
     return unsafeCSS(styles)

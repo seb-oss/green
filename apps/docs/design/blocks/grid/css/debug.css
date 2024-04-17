@@ -1,0 +1,38 @@
+@layer grid.debug {
+  /* Debug */
+  gds-grid {
+    &[debug] {
+      counter-set: gds-cell;
+      outline: 1px solid var(--gds-debug-color-container);
+      /* outline-offset: 2px; */
+
+      & > * {
+        outline: 1px dashed var(--gds-debug-color);
+        position: relative;
+
+        &::before {
+          content: counter(gds-cell);
+          color: #fff;
+          font-weight: bold;
+          display: flex;
+          padding: 2px 4px;
+          border-radius: 2px;
+          align-items: center;
+          justify-content: center;
+          background-color: var(--gds-debug-color);
+          counter-increment: gds-cell;
+          position: absolute;
+          top: 4px;
+          right: 4px;
+          font-size: 10px;
+          text-align: right;
+          width: 2ch;
+        }
+
+        &:nth-child(n + 10)::before {
+          content: counter(gds-cell);
+        }
+      }
+    }
+  }
+}

@@ -23,35 +23,35 @@
 }
 
 .gds-switch {
-  position: relative;
-  display: flex;
   align-items: center;
-  justify-content: flex-start;
-  width: 64px;
-  height: 32px;
-  border-radius: var(--gds-checkbox-border-radius);
-  transition: var(--gds-switch-transition);
-  cursor: pointer;
   background-color: var(--gds-checkbox-color-hover);
+  border-radius: var(--gds-checkbox-border-radius);
+  cursor: pointer;
+  display: flex;
+  height: 32px;
+  justify-content: flex-start;
+  position: relative;
+  transition: var(--gds-switch-transition);
+  width: 64px;
 
   input {
     appearance: none;
-    position: relative;
-    margin: unset;
-    padding: unset;
-    box-sizing: border-box;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
     background-color: var(--gds-checkbox-bg-color);
     border: var(--gds-checkbox-border-width) solid
       var(--gds-checkbox-border-color);
     border-radius: var(--gds-checkbox-border-radius);
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 32px;
+    margin: unset;
+    padding: unset;
+    position: relative;
     transition: var(--gds-switch-animaton-transition);
+    width: 32px;
 
     &:checked {
-      border-color: var(--gds-checkbox-checked-color);
       animation: switch-on var(--gds-switch-animaton-on) forwards;
+      border-color: var(--gds-checkbox-checked-color);
     }
 
     &:not(:checked) {
@@ -64,29 +64,29 @@
   }
 
   &:has(input:disabled) {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
 @keyframes switch-on {
   to {
+    border-width: 0;
     transform: translate3d(100%, 0, 0) scale(0.5);
     width: 32px;
-    border-width: 0;
   }
 }
 
 @keyframes switch-off {
   from {
+    border-width: 0;
     transform: translate3d(100%, 0, 0) scale(0.5);
     width: 32px;
-    border-width: 0;
   }
 
   to {
+    border-width: 7.5px;
     transform: translate3d(0%, 0, 0) scale(1);
     width: 32px;
-    border-width: 7.5px;
   }
 }

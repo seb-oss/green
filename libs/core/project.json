@@ -37,6 +37,14 @@
         "esbuildConfig": "libs/core/esbuild.config.cjs"
       }
     },
+    "build-bundle-src": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "options": {
+        "command": "node libs/core/build-scripts/bundle.cjs"
+      },
+      "dependsOn": ["tokens:build"]
+    },
     "build-with-types": {
       "executor": "nx:run-commands",
       "dependsOn": ["build-src"],

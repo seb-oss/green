@@ -7,53 +7,52 @@ $border-color: var(--sg-grey-300);
 $box-shadow: var(--sg-modal-box-shadow);
 $z-index: var(--sg-z-index-datepicker);
 
-// TODO: use css variable
 $border-radius: 4px;
 $date-border-radius: $border-radius;
-// TODO: use css variables
-$date-weight: 500; // medium
-$week-weight: 400; // regular
-$day-weight: 400; // regular
-$disabled-weight: 400; // regular
 
-// hover
+$date-weight: 500; /* medium */
+$week-weight: 400; /* regular */
+$day-weight: 400; /* regular */
+$disabled-weight: 400; /* regular */
+
+/* hover */
 $hover-color: var(--gds-sys-color-font);
 $hover-background: var(--grey-500);
 $hover-border-radius: $border-radius;
 
-// focus
+/* focus */
 $focus-color: $hover-color;
 $focus-background: $hover-background;
 $focus-border-radius: $hover-border-radius;
 
-// selected
+/* selected */
 $selected-color: hsl(var(--sg-hsl-white));
 $selected-background: var(--grey-1000);
 $selected-range-background: hsla(var(--sg-hsl-blue-2), 0.5);
 $selected-border-radius: $border-radius;
 $selected-range-border-radius: 0;
 
-// highlighted
+/* highlighted */
 $highlighted-color: hsl(var(--sg-hsl-white));
 $highlighted-background: hsl(var(--sg-hsl-blue-2));
 $highlighted-border-radius: $border-radius;
 
-// active
+/* active */
 $active-color: $selected-color;
 $active-background: $selected-background;
 $active-border-radius: $selected-border-radius;
 
-// disabled
+/* disabled */
 $disabled-color: hsl(var(--sg-hsl-disabled-color));
 $disabled-weekend-color: hsla(var(--sg-hsl-red-2), 0.25);
 $disabled-background: hsl(var(--sg-hsl-disabled-background));
 
-// today
+/* today */
 $today-color: $selected-background;
 $today-border-radius: $selected-border-radius;
 $today-background: transparent;
 
-// weekend
+/* weekend */
 $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
@@ -80,7 +79,7 @@ $weekend-background: $background;
     }
 
     thead {
-      // days
+      /* days */
       th {
         background: $background;
         border-bottom: solid 1px $border-color;
@@ -93,23 +92,23 @@ $weekend-background: $background;
     }
 
     tbody {
-      // week numbers
+      /* week numbers */
       tr th {
         font-weight: $week-weight;
       }
-      // dates
+      /* dates */
       tr td {
         border: solid 1px transparent;
         font-weight: $date-weight;
         user-select: none;
 
-        // weekend
+        /* weekend */
         &.sg-date-holiday:not(.disabled) {
           background: $weekend-background;
           color: $weekend-color;
         }
 
-        // today
+        /* today */
         &.today {
           background: $today-background;
           border-radius: $today-border-radius;
@@ -117,7 +116,7 @@ $weekend-background: $background;
           color: $today-color;
         }
 
-        // hover
+        /* hover */
         &:hover:not(.disabled) {
           background: $hover-background;
           border: solid 1px $background;
@@ -126,7 +125,7 @@ $weekend-background: $background;
           cursor: pointer;
         }
 
-        // focus
+        /* focus */
         &:focus-visible {
           @include common.add-focus();
         }
@@ -139,7 +138,7 @@ $weekend-background: $background;
           z-index: 0;
         }
 
-        // selected
+        /* selected */
         &[aria-selected='true'] {
           background: $selected-background;
           border: solid 1px $background;
@@ -147,12 +146,12 @@ $weekend-background: $background;
           color: $selected-color;
         }
 
-        // highlighted
+        /* highlighted */
         &[tabindex='0'] {
           border-radius: $highlighted-border-radius;
         }
 
-        // active (pressed)
+        /* active (pressed) */
         &:hover:active:not(.disabled) {
           background: $active-background;
           border: solid 1px $background;
@@ -160,7 +159,7 @@ $weekend-background: $background;
           color: $active-color;
         }
 
-        // disabled
+        /* disabled */
         &.disabled {
           background: $disabled-background;
           border: solid 1px $background;

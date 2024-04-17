@@ -1,0 +1,18 @@
+@layer grid.debug {
+  /* Spacings and gaps */
+  /* prettier-ignore */
+  gds-grid {
+    &[gap-inline="small"]      { --gds-grid-col-gap: var(--gds-gap-l) }
+    &[gap-inline="medium"]     { --gds-grid-col-gap: var(--gds-gap-xxl) }
+    &[gap-inline="large"]      { --gds-grid-col-gap: var(--gds-gap-xxxl) }
+    &[gap-block="small"]      { --gds-grid-row-gap: var(--gds-gap-l) }
+    &[gap-block="medium"]     { --gds-grid-row-gap: var(--gds-gap-xxl) }
+    &[gap-block="large"]      { --gds-grid-row-gap: var(--gds-gap-xxxl) }
+    &[padding-block="small"]    { padding-block: var(--gds-gap-l) }
+    &[padding-block="medium"]   { padding-block: var(--gds-gap-xxl) }
+    &[padding-block="large"]    { padding-block: var(--gds-gap-xxxl) }
+    &[padding-inline="small"]    { padding-inline: var(--gds-gap-l) }
+    &[padding-inline="medium"]   { padding-inline: var(--gds-gap-xxl) }
+    &[padding-inline="large"]    { padding-inline: var(--gds-gap-xxxl) }
+  }
+}

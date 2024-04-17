@@ -26,12 +26,12 @@
     --_state-layer-hover: var(--gds-sys-color-state-layers-state-black);
     --_state-layer-active: var(--gds-sys-color-state-layers-state-black-shade);
 
+    --gds-sys-transition-properties: color;
+
     contain: layout;
     display: inline-block;
     isolation: isolate;
-
     max-width: 100%;
-    --gds-sys-transition-properties: color;
   }
 }
 
@@ -48,28 +48,29 @@
 
 @layer core {
   button {
-    align-items: center;
     --gds-sys-transition-properties: color !important;
+
+    align-items: center;
     background-color: var(--_color-bg);
     block-size: 100%;
-
     border-color: var(--_color-border);
     border-radius: var(--_border-radius);
     border-style: var(--_border-style);
     border-width: var(--_border-width);
-
     box-sizing: border-box;
     color: var(--_color-text);
     color-scheme: dark light;
     cursor: pointer;
-
     display: inline-flex;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
     gap: var(--_gap);
     height: var(--_size);
-
     inline-size: 100%;
     justify-content: space-between;
     justify-items: center;
+    line-height: 1.25;
     outline-color: transparent;
     outline-offset: 2px;
     outline-style: solid;
@@ -78,13 +79,7 @@
     padding-inline: var(--_padding-inline);
     position: relative;
     transition: var(--_transition);
-    font-family: inherit;
     transition-property: color, border-color;
-
-    /* TODO: Tokens... */
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.25;
 
     &:focus {
       outline-color: color-mix(

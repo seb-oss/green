@@ -1,0 +1,94 @@
+.grid-play {
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--color-black), transparent 92%);
+  display: flex;
+  justify-content: space-between;
+
+  --grid-demo-padding: 20px;
+  --grid-demo-preview: 960px;
+  --grid-demo-aside: 280px;
+  --grid-demo-gap: 20px;
+
+  width: calc(
+    var(--grid-demo-preview) + var(--grid-demo-aside) + var(--grid-demo-gap) +
+      var(--grid-demo-padding) * 2
+  );
+
+  gap: var(--grid-demo--gap);
+  padding: var(--grid-demo-padding);
+
+  figure.preview {
+    aspect-ratio: initial;
+    height: 100%;
+    resize: horizontal;
+    overflow: hidden;
+    max-width: var(--grid-demo-preview);
+    border-color: var(--gds-sys-color-stroke-stroke-variant2);
+    justify-content: space-between;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -5px; /* Adjust positioning for handle operation */
+      right: -5px; /* Adjust positioning for handle operation */
+      width: 20px; /* Increase the size of the handle for easier dragging */
+      height: 20px; /* Increase the size of the handle for easier dragging */
+      background-color: #333;
+      cursor: se-resize; /* Change cursor on hover */
+      pointer-events: auto; /* Allow clicking on the handle */
+    }
+
+    code {
+      border: 1px solid color-mix(in srgb, var(--color-black), transparent 92%);
+      padding: 20px;
+      border-radius: 12px;
+      background-color: color-mix(in srgb, var(--color-black), transparent 92%);
+      width: 100%;
+    }
+
+    padding: 24px;
+
+    gds-grid {
+      max-width: 900px;
+    }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    width: var(--grid-demo-aside);
+    min-width: var(--grid-demo-aside);
+    max-width: var(--grid-demo-aside);
+    flex-direction: column;
+    gap: 14px;
+    border: 1px solid color-mix(in srgb, var(--color-black), transparent 92%);
+    padding: 20px;
+    font-size: 12px;
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      select {
+        border-radius: 4px;
+        padding: 8px 12px;
+        appearance: none;
+      }
+
+      .thecheck {
+        display: flex;
+        flex-direction: row;
+        gap: 1ch;
+        user-select: none;
+        font-size: 14px;
+      }
+    }
+  }
+}
