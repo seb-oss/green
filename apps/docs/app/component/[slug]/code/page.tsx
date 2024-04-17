@@ -1,6 +1,5 @@
 import type { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
-import Script from "next/script"
 import { Mdx } from "@/mdx"
 import { allComponents } from "content"
 
@@ -47,12 +46,6 @@ export default function Code({ params }: { params: { slug: string } }) {
 
   const { body } = component
 
-  return (
-    <>
-      <Mdx code={body.code} globals={{}} />
-      {/* <Script id="show-banner">
-        {`globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true`}
-      </Script> */}
-    </>
-  )
+  return <Mdx code={body.code} globals={{}} />
+  
 }

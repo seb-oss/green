@@ -2,7 +2,7 @@
 
 import "./taber.css"
 
-import React, { useRef } from "react"
+import React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -18,7 +18,6 @@ export default function Taber({ component }: TaberProps) {
     { path: "/design", label: "Design" },
     { path: "/ux-text", label: "UX text" },
     { path: "/code", label: "Code" },
-    // { path: "/guidelines", label: "Guidelines" },
     { path: "/accessibility", label: "Accessibility" },
   ]
 

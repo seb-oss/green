@@ -107,7 +107,6 @@ export default function ComponentLayout({
         <Taber component={url_path} />
         <Grid columns={12} gapInline="small" paddingBlock="small">
           <Cell span="10">
-            {/* <Grid gapBlock="small" columns={1} className="content"> */}
             <div className="gds-prose">{children}</div>
           </Cell>
           <Cell span="2">{tocComponent}</Cell>

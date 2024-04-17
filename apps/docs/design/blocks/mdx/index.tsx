@@ -12,20 +12,16 @@ import Figma from './figma/figma'
 import FigmaProto from './figma/figmaProto'
 import IMG from './image/image'
 import SE from './lang/se'
-//import Playground from "./playground/playground"
-import Refs from './refs/refs'
 import Row from './row/row'
 
 const components = {
   Figma,
   FigmaProto,
   Image: IMG,
-  //Playground,
   Row,
   Col,
   Do,
   Dont,
-  Refs,
   SE,
   Pattern,
   Spacer,

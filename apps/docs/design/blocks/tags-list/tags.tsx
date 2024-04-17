@@ -1,4 +1,3 @@
-// Tags.tsx
 import React from "react"
 
 import "@/tags-list/tags.css"

@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Mdx } from "@/mdx"
 import Layout from "&/changelog"
 import { allChangelogs, Changelog } from "content"
 import { compareDesc, format, parseISO } from "date-fns"

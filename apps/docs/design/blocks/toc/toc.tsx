@@ -2,8 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { allComponents, Component } from "content"
 
 import "./toc.css"
 
@@ -98,20 +96,6 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
         >
           {component}
         </Link>
-        {/* {headings.map((heading) => (
-          <Link
-            key={`#${heading.slug}`}
-            href={`#${heading.slug}`}
-            className={`toc-link ${activeId === heading.slug ? "active" : ""}`}
-            data-id={heading.slug}
-            data-level={heading.level}
-            onClick={() => handleClick(heading.slug)}
-            passHref
-          >
-            {heading.text}
-          </Link>
-        ))} */}
-
         {groupedHeadings.map((item, index) =>
           Array.isArray(item) ? (
             <details

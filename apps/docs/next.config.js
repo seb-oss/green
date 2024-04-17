@@ -22,7 +22,9 @@ const nextConfig = {
   },
   experimental: {
     esmExternals: 'loose',
+    urlImports: ['https://cdn.skypack.dev'],
   },
+  transpilePackages: ['@babel/runtime'],
   output: 'export',
   nx: {
     // Set this to true if you would like to use SVGR
