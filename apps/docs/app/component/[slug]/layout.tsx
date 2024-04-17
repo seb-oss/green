@@ -26,7 +26,7 @@ export default function ComponentLayout({
 
   const getComponent = (path: string) =>
     allComponents.find(
-      (component) => component.url_path === `/component/${slug}${path}`
+      (component) => component.url_path === `/component/${slug}${path}`,
     )
 
   const component = getComponent('')
@@ -60,7 +60,7 @@ export default function ComponentLayout({
 
   let tocComponent = <TOC headings={component?.headings} component={title} />
 
-  for (let { path, component } of pathsAndComponents) {
+  for (const { path, component } of pathsAndComponents) {
     if (pathName.includes(path)) {
       tocComponent = <TOC headings={component?.headings} component={title} />
       break

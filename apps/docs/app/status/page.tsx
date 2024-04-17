@@ -1,8 +1,8 @@
 // app/posts/[slug]/page.tsx
-import Link from "next/link"
-import Layout from "&/status"
-import { allComponents } from "content"
-import { format, parseISO } from "date-fns"
+import Link from 'next/link'
+import Layout from '&/status'
+import { allComponents } from 'content'
+import { format, parseISO } from 'date-fns'
 
 // import "./style.css"
 
@@ -16,16 +16,16 @@ export default function Status() {
       </header>
       <ul>
         {allComponents
-          .filter((component) => component._raw.sourceFileName === "index.mdx")
-          .map((component) => (
-            <li>
+          .filter((component) => component._raw.sourceFileName === 'index.mdx')
+          .map((component, index) => (
+            <li key={`key-${index}`}>
               <Link href={component.url_path} title="Component">
                 {component.title}
               </Link>
               <div title="Status">{component.status}</div>
               <time dateTime={component.date}>
                 {component.date &&
-                  format(parseISO(component.date), "LLLL d, yyyy")}
+                  format(parseISO(component.date), 'LLLL d, yyyy')}
               </time>
             </li>
           ))}

@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import React, { ReactNode } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import React, { ReactNode } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-import "./style.css"
+import './style.css'
 
 type TrailTypes = {
   home: ReactNode
@@ -14,24 +14,22 @@ type TrailTypes = {
 
 const Trail = ({ home, separator, activeClass }: TrailTypes) => {
   const paths = usePathname()
-  const pathNames = paths.split("/").filter((path) => path)
+  const pathNames = paths.split('/').filter((path) => path)
 
   return (
     <div className="trail">
       <ul>
         <li>
-          <Link href={"/"}>{home}</Link>
+          <Link href={'/'}>{home}</Link>
         </li>
         {pathNames.length > 0 && separator}
         {pathNames.map((link, index) => {
-          let href = `/${pathNames.slice(0, index + 1).join("/")}`
-          let itemClasses =
+          const href = `/${pathNames.slice(0, index + 1).join('/')}`
+          const itemClasses =
             paths === href
               ? ` ${activeClass}`
-              : " "
-              ? link[0].toUpperCase() + link.slice(1, link.length)
-              : link
-          let itemLink = link
+              : link[0].toUpperCase() + link.slice(1, link.length)
+          const itemLink = link
           return (
             <React.Fragment key={index}>
               <li className={itemClasses}>

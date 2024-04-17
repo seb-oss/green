@@ -8,9 +8,8 @@ import Article from '&/article/article'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
-import type { Metadata } from 'next'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export default function RootLayout({
   children,
@@ -19,7 +18,7 @@ export default function RootLayout({
 }) {
   useEffect(() => {
     const callCC = () => {
-      var cc
+      let cc
       try {
         cc = (window as any).initCookieConsent()
       } catch (error) {
