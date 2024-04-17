@@ -6,7 +6,7 @@ const Dev = ({ children }: { children: ReactNode }) => {
   if (!isDev) {
     return null
   }
-  return children
+  return <>{children}</>
 }
 
 export default Dev
