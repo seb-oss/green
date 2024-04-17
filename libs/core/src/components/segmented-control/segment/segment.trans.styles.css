@@ -5,11 +5,11 @@
 
   @layer _base {
     :host {
-      z-index: 1;
-      display: flex;
-      transition: 0.2s;
       border-right: 1px solid #333;
       box-sizing: border-box;
+      display: flex;
+      transition: 0.2s;
+      z-index: 1;
     }
 
     :host(:last-child) {
@@ -17,23 +17,23 @@
     }
 
     button {
-      flex-shrink: 0;
-      flex-grow: 1;
-      font-family: inherit;
-      font-weight: 500;
-      padding: 0 1rem;
-      min-width: 6.625rem;
-      text-align: center;
-      cursor: pointer;
       appearance: none;
       background: transparent;
       border-width: 0;
-      font-size: inherit;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      width: 100%;
       color: var(--gds-sys-color-content-content);
+      cursor: pointer;
+      flex-grow: 1;
+      flex-shrink: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 500;
+      min-width: 6.625rem;
+      overflow: hidden;
+      padding: 0 1rem;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
     }
 
     @media (pointer: fine) {

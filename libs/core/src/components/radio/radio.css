@@ -38,31 +38,31 @@
 }
 
 .gds-radio {
-  position: relative;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
   border-radius: var(--gds-checkbox-border-radius);
-  transition: var(--gds-radio-transition);
   cursor: pointer;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  position: relative;
+  transition: var(--gds-radio-transition);
+  width: 32px;
 
   input {
     appearance: none;
-    position: relative;
-    margin: unset;
-    padding: unset;
-    box-sizing: border-box;
-    cursor: pointer;
     aspect-ratio: 1/1;
-    width: 16px;
-    height: 16px;
     background-color: var(--gds-checkbox-bg-color);
     border: var(--gds-checkbox-border-width) solid
       var(--gds-checkbox-border-color);
     border-radius: var(--gds-checkbox-border-radius);
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 16px;
+    margin: unset;
+    padding: unset;
+    position: relative;
     transition: var(--gds-radio-transition-input);
+    width: 16px;
 
     &:checked {
       border-color: var(--gds-checkbox-checked-color);
@@ -72,15 +72,15 @@
     &[indeterminate],
     &:indeterminate {
       &::after {
-        border-top: 0;
         border-left: 0;
         border-radius: 0;
-        width: 8px;
+        border-top: 0;
         height: var(--gds-checkbox-border-width);
         inset: 5px 0 0 2px;
-        rotate: 0deg;
         opacity: 1;
+        rotate: 0deg;
         scale: 1;
+        width: 8px;
       }
     }
 
@@ -125,9 +125,9 @@
       }
 
       &:checked {
-        color: var(--gds-checkbox-checked-color-tick);
-        border-color: var(--gds-checkbox-checked-color);
         background-color: var(--gds-checkbox-checked-color);
+        border-color: var(--gds-checkbox-checked-color);
+        color: var(--gds-checkbox-checked-color-tick);
       }
     }
 

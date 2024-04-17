@@ -1,7 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { constrainSlots } from '../../utils/helpers'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import styles from './style/badge.styles.css'
 
@@ -91,7 +90,7 @@ export class GdsBadge extends LitElement {
     const hasIconSlot = this.querySelector('[slot="icon"]') !== null
     const content = html`${when(
       hasIconSlot,
-      () => html`<slot name="icon" gds-allow="gds-icon"></slot>`
+      () => html`<slot name="icon" gds-allow="gds-icon"></slot>`,
     )}${this.slotLabel()}`
 
     return html`<div class="gds-badge">${content}</div>`

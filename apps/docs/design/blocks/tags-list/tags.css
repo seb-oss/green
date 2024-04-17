@@ -1,0 +1,29 @@
+.gds-tags {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  position: relative;
+  gap: 0.5lh;
+
+  .tags-title {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  ul {
+    display: flex;
+    gap: 1ch;
+    padding: 0;
+  }
+
+  .gds-tag {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 200px;
+    border: 1px solid var(--gds-sys-color-stroke-stroke);
+    white-space: nowrap;
+    word-break: normal;
+    max-width: max-content;
+  }
+}

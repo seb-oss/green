@@ -1,0 +1,11 @@
+@layer core {
+  @layer layout.article {
+    .layout-article {
+      grid-area: article;
+      display: grid;
+      grid-template-areas: "sidebar content";
+      grid-template-columns: max-content;
+      grid-template-rows: max-content;
+    }
+  }
+}

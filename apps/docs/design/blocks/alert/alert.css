@@ -1,0 +1,23 @@
+.alert {
+  background-color: hsla(222, 100%, 96%, 1);
+  color: hsla(207, 100%, 34%, 1);
+  padding: 16px var(--gds-gap-l);
+  font-size: 14px;
+  line-height: 1.1;
+  letter-spacing: 0.1px;
+  font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gds-gap-l);
+  grid-area: alert;
+
+  span {
+    margin-inline: auto;
+  }
+
+  svg {
+    min-width: 1lh;
+    min-height: 1lh;
+  }
+}

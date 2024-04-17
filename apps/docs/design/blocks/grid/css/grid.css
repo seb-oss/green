@@ -1,0 +1,55 @@
+@layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
+
+@layer grid {
+  :root {
+    --gds-grid-col: repeat(4, 1fr);
+    --gds-grid-col-start: 1;
+    --gds-grid-col-end: -1;
+    --gds-debug-color: hsla(241, 100%, 66%, 0.4);
+    --gds-debug-color-container: rgba(255, 82, 197, 0.4);
+    --gds-grid-col-gap: 0px;
+  }
+
+  gds-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: var(--gds-grid-col);
+    grid-column-gap: var(--gds-grid-col-gap);
+    grid-row-gap: var(--gds-grid-row-gap);
+    text-wrap: balance;
+
+    & > gds-cell {
+      height: 100%;
+    }
+
+    &[fluid] {
+      --gds-grid-col-count: var(--gds-c);
+      --gds-grid-col-width: 200px;
+      --gap-count: calc(var(--gds-grid-col-count) - 1);
+      --total-gap-width: calc(var(--gap-count) * var(--gds-grid-col-gap));
+      --gds-grid-col-width-max: calc(
+        (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
+      );
+
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(
+          max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)),
+          1fr
+        )
+      );
+      text-wrap: balance;
+    }
+
+    &[content-inline="auto"] {
+      display: grid;
+      grid-auto-columns: auto;
+      grid-auto-flow: column;
+      grid-template-columns: none;
+    }
+
+    &[inline-size="max-content"] {
+      max-width: max-content;
+    }
+  }
+}
