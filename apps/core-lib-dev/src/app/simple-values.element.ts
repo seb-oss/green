@@ -1,7 +1,7 @@
 import {
   GdsDropdown,
   GdsOption,
-  GdsButton,
+  //GdsButton,
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '@sebgroup/green-core'
