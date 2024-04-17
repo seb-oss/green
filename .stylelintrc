@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-prettier-scss"
-  ],
+  "extends": ["stylelint-prettier/recommended"],
   "plugins": ["stylelint-scss"],
   "rules": {
     "at-rule-no-unknown": null,
@@ -16,7 +13,6 @@
         "ignore": ["attribute", "class"]
       }
     ],
-    "custom-property-pattern": "^(_?(?!-)[0-9a-z-]+)$",
-    "function-parentheses-space-inside": "never-single-line"
+    "custom-property-pattern": "^(_?(?!-)[0-9a-z-]+)$"
   }
 }

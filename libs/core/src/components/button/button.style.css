@@ -49,7 +49,7 @@
 @layer core {
   button {
     --gds-sys-transition-properties: color !important;
-    
+
     align-items: center;
     background-color: var(--_color-bg);
     block-size: 100%;
@@ -82,21 +82,41 @@
     transition-property: color, border-color;
 
     &:focus {
-      outline-color: color-mix(in srgb, var(--_color-outline), transparent var(--_color-outline-alpha));
-      
+      outline-color: color-mix(
+        in srgb,
+        var(--_color-outline),
+        transparent var(--_color-outline-alpha)
+      );
+
       &:not(:focus-visible) {
         outline-color: transparent;
       }
     }
 
     &:hover {
-      background-color: color-mix(in srgb, var(--_color-bg), var(--_state-layer-hover));
-      border-color: color-mix(in srgb, var(--_color-border), var(--_state-layer-hover));
+      background-color: color-mix(
+        in srgb,
+        var(--_color-bg),
+        var(--_state-layer-hover)
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--_color-border),
+        var(--_state-layer-hover)
+      );
     }
 
     &:active {
-      background-color: color-mix(in srgb, var(--_color-bg), var(--_state-layer-active));
-      border-color: color-mix(in srgb, var(--_color-border), var(--_state-layer-active));
+      background-color: color-mix(
+        in srgb,
+        var(--_color-bg),
+        var(--_state-layer-active)
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--_color-border),
+        var(--_state-layer-active)
+      );
     }
   }
 
@@ -202,7 +222,9 @@
     }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-positive-dim);
+      --_state-layer-active: var(
+        --gds-sys-color-state-layers-state-positive-dim
+      );
     }
   }
 
@@ -217,7 +239,9 @@
     }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-positive-dim);
+      --_state-layer-active: var(
+        --gds-sys-color-state-layers-state-positive-dim
+      );
       --_color-border: var(--gds-sys-color-stroke-stroke-positive);
     }
   }
@@ -251,7 +275,9 @@
     }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-negative-dim);
+      --_state-layer-active: var(
+        --gds-sys-color-state-layers-state-negative-dim
+      );
     }
   }
 
@@ -266,7 +292,9 @@
     }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-negative-dim);
+      --_state-layer-active: var(
+        --gds-sys-color-state-layers-state-negative-dim
+      );
       --_color-border: var(--gds-sys-color-stroke-stroke-negative);
     }
   }
