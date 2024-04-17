@@ -1,22 +1,20 @@
-import { HTMLTemplateResult, html } from 'lit'
+import { html, HTMLTemplateResult } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-
+import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
+import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
+import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
+import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
+import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
+import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
+import * as Theme from '../../components/theme/theme.trans.styles'
+import { GdsElement } from '../../gds-element'
+import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
 import * as Popover from '../../primitives/popover/popover.trans.styles'
-import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
-import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
-import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
-import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
-import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
-import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
-import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
-
 import { VER_SUFFIX } from '../helpers/custom-element-scoping'
-import { GdsElement } from '../../gds-element'
-
-import chlorophyllTokens from './chlorophyll-tokens.scss'
 
 export const registerTransitionalStyles = () => {
+  Theme.register()
   Dropdown.register()
   Listbox.register()
   Popover.register()
@@ -26,13 +24,6 @@ export const registerTransitionalStyles = () => {
   GroupedList.register()
   SegmentedControl.register()
   Segment.register()
-
-  // We create the CSSStyleSheet instance for the chlorophyll tokens
-  // here, so that they can get tree-shaked if registerTransitionalStyles is
-  // never called.
-  const chlorophyll_tokens = new CSSStyleSheet()
-  chlorophyll_tokens.replaceSync(chlorophyllTokens.toString())
-  TransitionalStyles.instance.chlorophyllTokens = chlorophyll_tokens
 }
 
 declare global {
