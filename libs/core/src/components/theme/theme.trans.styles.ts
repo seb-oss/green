@@ -1,10 +1,10 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './segmented-control.trans.styles.css'
+import chlorophyllTokens from './chlorophyll-tokens.scss'
 
 export function register() {
   TransitionalStyles.instance.register(
-    'gds-segmented-control',
-    styles.toString()
+    'gds-theme',
+    chlorophyllTokens.toString()
   )
 }
 

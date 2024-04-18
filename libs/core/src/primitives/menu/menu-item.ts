@@ -49,6 +49,7 @@ export class GdsMenuItem extends Focusable(GdsElement) {
   }
 
   render() {
-    return html`${this._tStyles}<slot></slot>`
+    return html`${this._tStyles}
+      <div><slot></slot></div>`
   }
 }
