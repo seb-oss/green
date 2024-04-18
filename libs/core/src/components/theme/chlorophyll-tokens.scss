@@ -12,13 +12,13 @@
   @include theme_mixins.add-theme;
 }
 
-/* force dark mode to whole app or part of it by adding the class ".dark-mode" */
+/* force dark mode */
 :host([color-scheme='dark']) {
   @include tokens.dark-mode;
   @include theme_mixins.dark-theme;
 }
 
-/* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */
+/* use preferred color scheme */
 @media (prefers-color-scheme: dark) {
   :host,
   :host([color-scheme='auto']) {
