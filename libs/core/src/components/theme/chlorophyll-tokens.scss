@@ -4,8 +4,6 @@
 @use '../../../../chlorophyll/scss/tokens/components' as components;
 @use '../../../../chlorophyll/scss/components/themes/mixins' as theme_mixins;
 
-@use '../../../../chlorophyll/scss/components/icon';
-
 :host([color-scheme='light']) {
   @include shape.add-tokens;
   @include colors.add-color-tokens;
