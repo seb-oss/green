@@ -1,6 +1,6 @@
-import Content from "&/content/content"
+import Content from '&/content/content'
 
-import "./page.css"
+import './page.css'
 
 export default function Typography() {
   return (

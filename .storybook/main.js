@@ -43,8 +43,8 @@ module.exports = {
                   copyfiles(
                     ['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'],
                     { up: true },
-                    resolve
-                  )
+                    resolve,
+                  ),
                 )
                   .catch((_) => [{ success: false }])
                   .then((_) => [{ success: true }])

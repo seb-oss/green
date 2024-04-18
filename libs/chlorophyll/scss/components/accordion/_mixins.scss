@@ -1,17 +1,17 @@
 @use '../../tokens';
 
 @mixin add-accordion() {
-  border-bottom: .0625rem solid var(--gds-ref-pallet-base300);
+  border-bottom: 0.0625rem solid var(--gds-ref-pallet-base300);
 
   & > div {
-    border-top: .0625rem solid var(--gds-ref-pallet-base300);
+    border-top: 0.0625rem solid var(--gds-ref-pallet-base300);
 
     svg {
       height: 1.5rem;
       width: 1.5rem;
     }
 
-    &:has(button[aria-expanded="true"]) {
+    &:has(button[aria-expanded='true']) {
       background-color: var(--gds-ref-pallet-base100);
 
       & button:hover {
@@ -24,7 +24,7 @@
     }
   }
 
-  & > div > :is(h1, h2, h3, h4, h5, h6, [role="heading"]) {
+  & > div > :is(h1, h2, h3, h4, h5, h6, [role='heading']) {
     margin: 0;
     padding: 0;
 
@@ -57,14 +57,14 @@
         transition: transform tokens.$transition-time;
       }
 
-      &:not([aria-expanded="true"]):hover {
+      &:not([aria-expanded='true']):hover {
         background-color: var(--gds-ref-pallet-base100);
         color: var(--gds-sys-color-base);
       }
     }
   }
 
-  [role="region"] {
+  [role='region'] {
     overflow: hidden;
     line-height: 1.5rem;
     transition: height tokens.$transition-time;
@@ -90,7 +90,7 @@
     > h4,
     > h5,
     > h6,
-    > [role="heading"] {
+    > [role='heading'] {
       margin: 0;
       padding: 0;
 
@@ -101,5 +101,4 @@
       }
     }
   }
-
-} 
+}

@@ -8,7 +8,7 @@ import {
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join('')
+  strs.map((s, i) => s + values[i]).join(''),
 )
 
 export class AppElement extends HTMLElement {
@@ -40,7 +40,7 @@ export class AppElement extends HTMLElement {
 
     ;[1, 2, 3].forEach((num) => {
       const o = document.createElement(
-        getScopedTagName('gds-option')
+        getScopedTagName('gds-option'),
       ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`

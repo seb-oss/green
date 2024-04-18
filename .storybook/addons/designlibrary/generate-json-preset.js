@@ -25,18 +25,18 @@ module.exports = {
     }
     const storySpecifiers = coreCommon.normalizeStories(
       await options.presets.apply('stories'),
-      directories
+      directories,
     )
     const storyPaths = {}
 
     await Promise.all(
       storySpecifiers.map(async (s) => {
         const fullGlob = slash(
-          path.join(directories.workingDir, s.directory, s.files)
+          path.join(directories.workingDir, s.directory, s.files),
         )
         const files = await globby(fullGlob)
         files.forEach((file) => (storyPaths[file] = false))
-      })
+      }),
     )
 
     try {
@@ -54,12 +54,12 @@ module.exports = {
               ...getStoryParametersFromCSF(csf, story.name),
             },
           }))
-        })
+        }),
       )
 
       const jsonOutputFlat = jsonOutput.reduce(
         (cur, acc) => [...acc, ...(Array.isArray(cur) ? [...cur] : [cur])],
-        []
+        [],
       )
 
       const dlJsonPath = path.join(options.outputDir, 'designlibrary.json')
@@ -69,18 +69,18 @@ module.exports = {
         (error) => {
           if (error) {
             nodeLogger.logger.warn(
-              `An error has occurred writing Design Library json to ${dlJsonPath}`
+              `An error has occurred writing Design Library json to ${dlJsonPath}`,
             )
             nodeLogger.logger.warn(error)
 
             return
           }
           nodeLogger.logger.info(`Design Library json written to ${dlJsonPath}`)
-        }
+        },
       )
     } catch (error) {
       nodeLogger.logger.warn(
-        `An error has occurred while generating json for Design Library`
+        `An error has occurred while generating json for Design Library`,
       )
       nodeLogger.logger.warn(error)
     }
@@ -98,7 +98,7 @@ const getMetaParametersFromCSF = (csf) =>
           cur.value.value || cur.value.elements?.map((e) => e.value),
       },
     }),
-    {}
+    {},
   )
 
 const getStoryParametersFromCSF = (csf, storyName) => {

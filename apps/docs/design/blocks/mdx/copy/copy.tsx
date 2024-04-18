@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 export function CopyButton({ text }: { text: string }) {
   const [isCopied, setIsCopied] = useState(false)
@@ -14,7 +14,7 @@ export function CopyButton({ text }: { text: string }) {
 
   return (
     <button disabled={isCopied} onClick={copy}>
-      <span>{isCopied ? "Copied!" : "Copy"}</span>
+      <span>{isCopied ? 'Copied!' : 'Copy'}</span>
     </button>
   )
 }

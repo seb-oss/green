@@ -37,14 +37,14 @@ export function AlertRibbon({
           <button className="close">
             <span className="sr-only">{closeText}</span>
             <i></i>
-          </button>
+          </button>,
         )
       else
         setCloseButton(
           <button className="close">
             <span className="sr-only">Close</span>
             <i></i>
-          </button>
+          </button>,
         )
     }
   }, [isCloseable, closeText])

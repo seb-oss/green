@@ -225,7 +225,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return html`${this._tStyles}
       ${when(
         this.label && !this.hideLabel,
-        () => html`<label for="spinner-0" id="label">${this.label}</label>`
+        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}
 
       <div class="form-info"><slot name="sub-label"></slot></div>
@@ -261,9 +261,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                     this.open = true
                     e.preventDefault()
                   }}
-                ></gds-date-part-spinner>`
+                ></gds-date-part-spinner>`,
             ),
-            html`<span>${this._dateFormatLayout.delimiter}</span>`
+            html`<span>${this._dateFormatLayout.delimiter}</span>`,
           )}
         </div>
         <button
@@ -340,7 +340,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             ${repeat(
               this.#years,
               (year) => year,
-              (year) => html`<gds-option value=${year}>${year}</gds-option>`
+              (year) => html`<gds-option value=${year}>${year}</gds-option>`,
             )}
           </gds-dropdown>
           <button
@@ -409,7 +409,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         html`<button class="tertiary back-to-range" @click=${buttonAction}>
           ${buttonTxt}
         </button>`,
-      () => nothing
+      () => nothing,
     )}`
   }
 
@@ -482,7 +482,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: this.value },
-      })
+      }),
     )
   }
 
@@ -490,7 +490,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.dispatchEvent(
       new CustomEvent('input', {
         detail: { value: this.value },
-      })
+      }),
     )
   }
 
@@ -600,7 +600,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
     const index = Array.from(this._elSpinners).findIndex(
-      (spinner) => spinner === e.target
+      (spinner) => spinner === e.target,
     )
     if (e.key === 'ArrowRight') {
       const next = this._elSpinners[index + 1]

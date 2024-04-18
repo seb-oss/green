@@ -1,12 +1,12 @@
-import Link from "next/link"
-import Flex from "@/flex/flex"
-import Grid from "@/grid/grid"
+import Link from 'next/link'
+import Flex from '@/flex/flex'
+import Grid from '@/grid/grid'
 
-import "@/footer/footer.css"
+import '@/footer/footer.css'
 
 export default function Footer() {
   const year = new Date().getFullYear()
-  const symbol = "\u00A9"
+  const symbol = '\u00A9'
   const text = `${symbol}  ${year} Green Design System`
 
   return (

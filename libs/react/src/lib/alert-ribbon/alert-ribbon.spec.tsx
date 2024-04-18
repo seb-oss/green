@@ -8,14 +8,20 @@ describe('AlertRibbon', () => {
   const Footer = () => <Button>Default Button</Button>
 
   it('renders', () => {
-    const {container} = render(<AlertRibbon>AlertRibbon</AlertRibbon>)
+    const { container } = render(<AlertRibbon>AlertRibbon</AlertRibbon>)
 
     expect(container.getElementsByClassName('alert-ribbon')[0]).toBeTruthy()
   })
   it('sets type class', () => {
-    render(<AlertRibbon type="warning" role="alert">AlertRibbon</AlertRibbon>)
+    render(
+      <AlertRibbon type="warning" role="alert">
+        AlertRibbon
+      </AlertRibbon>,
+    )
 
-    expect(screen.getByRole('alert').classList.contains('warning')).toEqual(true)
+    expect(screen.getByRole('alert').classList.contains('warning')).toEqual(
+      true,
+    )
   })
   it('renders content', () => {
     render(<AlertRibbon>AlertRibbon</AlertRibbon>)
@@ -24,32 +30,22 @@ describe('AlertRibbon', () => {
     expect(screen.getByText('AlertRibbon').textContent).toEqual('AlertRibbon')
   })
   it('renders heading', () => {
-    render(
-      <AlertRibbon header={<Header />}>
-        AlertRibbon
-      </AlertRibbon>
-    )
+    render(<AlertRibbon header={<Header />}>AlertRibbon</AlertRibbon>)
 
     expect(screen.getByRole('heading').textContent).toEqual('Card Headline')
   })
 
   it('renders heading with h3 styling if just string', () => {
-    render(
-      <AlertRibbon header={'header'}>
-        AlertRibbon
-      </AlertRibbon>
-    )
+    render(<AlertRibbon header={'header'}>AlertRibbon</AlertRibbon>)
 
     expect(screen.getByText('header').tagName).toEqual('SPAN')
-    expect(screen.getByText('header').classList.contains('header')).toEqual(true)
+    expect(screen.getByText('header').classList.contains('header')).toEqual(
+      true,
+    )
   })
 
   it('renders footer', () => {
-    render(
-      <AlertRibbon footer={<Footer />}>
-        AlertRibbon
-      </AlertRibbon>
-    )
+    render(<AlertRibbon footer={<Footer />}>AlertRibbon</AlertRibbon>)
 
     expect(screen.getByText('Default Button')).toBeTruthy()
   })
@@ -58,7 +54,7 @@ describe('AlertRibbon', () => {
     render(
       <AlertRibbon isCloseable={false} role="alert" header={<Header />}>
         AlertRibbon
-      </AlertRibbon>
+      </AlertRibbon>,
     )
 
     expect(screen.getByRole('alert')).not.toContain(<button />)
@@ -68,10 +64,12 @@ describe('AlertRibbon', () => {
     render(
       <AlertRibbon isCloseable={true} closeAriaLabel={'Close message'}>
         AlertRibbon
-      </AlertRibbon>
+      </AlertRibbon>,
     )
 
-    expect(screen.getByLabelText("Close message").tagName).toEqual('BUTTON')
-    expect(screen.getByLabelText("Close message").classList.contains('close')).toEqual(true)
+    expect(screen.getByLabelText('Close message').tagName).toEqual('BUTTON')
+    expect(
+      screen.getByLabelText('Close message').classList.contains('close'),
+    ).toEqual(true)
   })
 })

@@ -44,7 +44,7 @@ export class GdsMenuItem extends Focusable(GdsElement) {
       new CustomEvent('gds-menu-item-click', {
         bubbles: true,
         composed: true,
-      })
+      }),
     )
   }
 

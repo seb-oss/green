@@ -1,14 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
-  template: `
-    <p>
-      Option B
-    </p>
-  `,
-  styles: [
-  ]
+  template: ` <p>Option B</p> `,
+  styles: [],
 })
-export class OptionBComponent {
-
-}
+export class OptionBComponent {}

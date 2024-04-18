@@ -159,7 +159,7 @@ export class GdsCalendar extends GdsElement {
                       () =>
                         html`<td class="week-number">
                           ${getWeek(week.days[0])}
-                        </td>`
+                        </td>`,
                     )}
                     ${week.days.map((day) => {
                       const isOutsideCurrentMonth =
@@ -197,9 +197,9 @@ export class GdsCalendar extends GdsElement {
                       `
                     })}
                   </tr>
-                `
+                `,
               )}
-            `
+            `,
           )}
         </tbody>
       </table>`
@@ -213,7 +213,7 @@ export class GdsCalendar extends GdsElement {
         detail: date,
         bubbles: false,
         composed: false,
-      })
+      }),
     )
   }
 
@@ -278,7 +278,7 @@ export class GdsCalendar extends GdsElement {
             detail: this.focusedDate,
             bubbles: false,
             composed: false,
-          })
+          }),
         )
       })
     }

@@ -3,28 +3,47 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 <Meta title="Use cases/Dark mode/Use preferred color scheme" />
 
 ## Auto detect light or dark mode
+
 Since most of our user interfaces currently don't support dark mode, we can't just switch color theme for Green based on preferred color scheme set by the user for the browser as it would result in mixed color themes being used.
 However, if you know that a particular app or flow runs standalone you can override the default theme and use the preferred color scheme by adding the class `auto-mode`. The example below will switch between dark and light mode base on your browser preferences.
 
 <Canvas>
-  <main class='auto-mode bg-color'>
+  <main class="auto-mode bg-color">
     <nav role="navigation" class="bg-dark">
-      <a aria-label='Open seb.se in new tab' href='http://www.seb.se' target='_blank' class='brand'/>
+      <a
+        aria-label="Open seb.se in new tab"
+        href="http://www.seb.se"
+        target="_blank"
+        class="brand"
+      />
       <h1 class="mx-4">Login to Business Arena</h1>
     </nav>
-    <div class="mx-auto my-6" style={{maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto'}}>
+    <div
+      class="mx-auto my-6"
+      style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}
+    >
       <h1>Business Arena</h1>
-      <p class="mb-5">Online banking for Corporates and Financial Institutions</p>
+      <p class="mb-5">
+        Online banking for Corporates and Financial Institutions
+      </p>
       <div class="card">
         <div role="alert" class="info">
           <main>
-            <p>Now it's even easier to log into C&I Online via Business Arena! <a href="#">How to log in with Swedish mobile BankID.</a></p>
+            <p>
+              Now it's even easier to log into C&I Online via Business Arena!{' '}
+              <a href="#">How to log in with Swedish mobile BankID.</a>
+            </p>
           </main>
         </div>
         <div class="card-body">
           <h3 class="mb-5">How do you want to login?</h3>
           <nav role="tablist">
-            <a href="#tab" aria-controls="tab-content-1" role="tab" aria-selected="true">
+            <a
+              href="#tab"
+              aria-controls="tab-content-1"
+              role="tab"
+              aria-selected="true"
+            >
               Digipass
             </a>
             <a href="#tab" aria-controls="tab-content-2" role="tab">
@@ -34,7 +53,7 @@ However, if you know that a particular app or flow runs standalone you can overr
               Other
             </a>
           </nav>
-          <div class="row" style={{justifyContent: 'space-between'}}>
+          <div class="row" style={{ justifyContent: 'space-between' }}>
             <div class="col-12 col-sm-auto">
               <form autocomplete="off" class="mt-7">
                 <div class="form-group">
@@ -47,30 +66,46 @@ However, if you know that a particular app or flow runs standalone you can overr
                 <div class="form-group">
                   <label for="input">Personal identity number</label>
                   <input id="input" type="text" required />
-                  <span class="form-info">Enter your personal identity number with 10 digits.</span>
+                  <span class="form-info">
+                    Enter your personal identity number with 10 digits.
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="inputLong">Login code</label>
                   <span class="form-info">(Appli 2: 9834, 7493)</span>
                   <input id="inputLong" type="text" required />
-                  <span class="form-info">Enter the returned code with six digits.</span>
+                  <span class="form-info">
+                    Enter the returned code with six digits.
+                  </span>
                 </div>
                 <label class="form-control">
                   <input type="checkbox" />
                   <span>Remember me on this device</span>
                   <i></i>
                 </label>
-                <button type="submit" class="mt-6 primary">Log in</button>
+                <button type="submit" class="mt-6 primary">
+                  Log in
+                </button>
               </form>
             </div>
-            <div class="col-12 col-sm" style={{maxWidth: '375px'}}>
-              <h5 class="mt-7 mb-4" for="loginHelp">Login using digipass</h5>
+            <div class="col-12 col-sm" style={{ maxWidth: '375px' }}>
+              <h5 class="mt-7 mb-4" for="loginHelp">
+                Login using digipass
+              </h5>
               <ol aria-describedby="loginHelp">
                 <li>Press the arrow key on the digipass.</li>
-                <li>Enter your four-digit pin code. Appli is shown in the window.</li>
+                <li>
+                  Enter your four-digit pin code. Appli is shown in the window.
+                </li>
                 <li>Press 2. The number 1 is shown in the window.</li>
-                <li>Enter the digits <span class="flash-info">9834</span>. The number 2 is shown.</li>
-                <li>Enter the digits <span class="flash-info">7493</span>. The login pin (6 digits) is visible for 30 seconds.</li>
+                <li>
+                  Enter the digits <span class="flash-info">9834</span>. The
+                  number 2 is shown.
+                </li>
+                <li>
+                  Enter the digits <span class="flash-info">7493</span>. The
+                  login pin (6 digits) is visible for 30 seconds.
+                </li>
                 <li>Enter the code in the field and click Login.</li>
               </ol>
             </div>
@@ -84,24 +119,42 @@ However, if you know that a particular app or flow runs standalone you can overr
 </Canvas>
 
 <Canvas>
-  <main class='light-mode bg-color'>
+  <main class="light-mode bg-color">
     <nav role="navigation" class="bg-dark">
-      <a aria-label='Open seb.se in new tab' href='http://www.seb.se' target='_blank' class='brand'/>
+      <a
+        aria-label="Open seb.se in new tab"
+        href="http://www.seb.se"
+        target="_blank"
+        class="brand"
+      />
       <h1 class="mx-4">Login to Business Arena</h1>
     </nav>
-    <div class="mx-auto my-6" style={{maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto'}}>
+    <div
+      class="mx-auto my-6"
+      style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}
+    >
       <h1>Business Arena</h1>
-      <p class="mb-5">Online banking for Corporates and Financial Institutions</p>
+      <p class="mb-5">
+        Online banking for Corporates and Financial Institutions
+      </p>
       <div class="card">
         <div role="alert" class="info">
           <main>
-            <p>Now it's even easier to log into C&I Online via Business Arena! <a href="#">How to log in with Swedish mobile BankID.</a></p>
+            <p>
+              Now it's even easier to log into C&I Online via Business Arena!{' '}
+              <a href="#">How to log in with Swedish mobile BankID.</a>
+            </p>
           </main>
         </div>
         <div class="card-body">
           <h3 class="mb-5">How do you want to login?</h3>
           <nav role="tablist">
-            <a href="#tab" aria-controls="tab-content-1" role="tab" aria-selected="true">
+            <a
+              href="#tab"
+              aria-controls="tab-content-1"
+              role="tab"
+              aria-selected="true"
+            >
               Digipass
             </a>
             <a href="#tab" aria-controls="tab-content-2" role="tab">
@@ -111,7 +164,7 @@ However, if you know that a particular app or flow runs standalone you can overr
               Other
             </a>
           </nav>
-          <div class="row" style={{justifyContent: 'space-between'}}>
+          <div class="row" style={{ justifyContent: 'space-between' }}>
             <div class="col-12 col-sm-auto">
               <form autocomplete="off" class="mt-7">
                 <div class="form-group">
@@ -124,30 +177,46 @@ However, if you know that a particular app or flow runs standalone you can overr
                 <div class="form-group">
                   <label for="input">Personal identity number</label>
                   <input id="input" type="text" required />
-                  <span class="form-info">Enter your personal identity number with 10 digits.</span>
+                  <span class="form-info">
+                    Enter your personal identity number with 10 digits.
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="inputLong">Login code</label>
                   <span class="form-info">(Appli 2: 9834, 7493)</span>
                   <input id="inputLong" type="text" required />
-                  <span class="form-info">Enter the returned code with six digits.</span>
+                  <span class="form-info">
+                    Enter the returned code with six digits.
+                  </span>
                 </div>
                 <label class="form-control">
                   <input type="checkbox" />
                   <span>Remember me on this device</span>
                   <i></i>
                 </label>
-                <button type="submit" class="mt-6 primary">Log in</button>
+                <button type="submit" class="mt-6 primary">
+                  Log in
+                </button>
               </form>
             </div>
-            <div class="col-12 col-sm" style={{maxWidth: '375px'}}>
-              <h5 class="mt-7 mb-4" for="loginHelp">Login using digipass</h5>
+            <div class="col-12 col-sm" style={{ maxWidth: '375px' }}>
+              <h5 class="mt-7 mb-4" for="loginHelp">
+                Login using digipass
+              </h5>
               <ol aria-describedby="loginHelp">
                 <li>Press the arrow key on the digipass.</li>
-                <li>Enter your four-digit pin code. Appli is shown in the window.</li>
+                <li>
+                  Enter your four-digit pin code. Appli is shown in the window.
+                </li>
                 <li>Press 2. The number 1 is shown in the window.</li>
-                <li>Enter the digits <span class="flash-info">9834</span>. The number 2 is shown.</li>
-                <li>Enter the digits <span class="flash-info">7493</span>. The login pin (6 digits) is visible for 30 seconds.</li>
+                <li>
+                  Enter the digits <span class="flash-info">9834</span>. The
+                  number 2 is shown.
+                </li>
+                <li>
+                  Enter the digits <span class="flash-info">7493</span>. The
+                  login pin (6 digits) is visible for 30 seconds.
+                </li>
                 <li>Enter the code in the field and click Login.</li>
               </ol>
             </div>

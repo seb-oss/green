@@ -105,7 +105,7 @@ export class GdsOption extends Focusable(GdsElement) {
     }
 
     this.updateComplete.then(() =>
-      TransitionalStyles.instance.apply(this, 'gds-option')
+      TransitionalStyles.instance.apply(this, 'gds-option'),
     )
   }
 
@@ -149,7 +149,7 @@ export class GdsOption extends Focusable(GdsElement) {
         detail: {
           value: this.value,
         },
-      })
+      }),
     )
   }
 }

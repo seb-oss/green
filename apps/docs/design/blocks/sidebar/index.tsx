@@ -2,7 +2,7 @@ import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, {  useRef } from 'react'
+import React, { useRef } from 'react'
 import './style.css'
 
 export default function Sidebar({
@@ -14,7 +14,7 @@ export default function Sidebar({
 }) {
   const path = usePathname()
   const filteredComponents = allComponents.filter(
-    (component) => component._raw.sourceFileName === 'index.mdx'
+    (component) => component._raw.sourceFileName === 'index.mdx',
   )
 
   function Component(component: Component) {

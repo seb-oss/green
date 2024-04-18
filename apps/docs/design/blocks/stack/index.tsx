@@ -8,7 +8,7 @@ export default function Stack({
   return (
     <div
       className="stack"
-      style={{ display: "flex", flexDirection: "column", gap }}
+      style={{ display: 'flex', flexDirection: 'column', gap }}
     >
       {children}
     </div>

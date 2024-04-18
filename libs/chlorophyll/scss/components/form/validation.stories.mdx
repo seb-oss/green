@@ -8,42 +8,54 @@ Form validation in Green Chlorophyll relies on `:valid` and `:invalid` state of 
 It's also possible to add either `.is-valid` or `.is-invalid` directly to an inputs to give feedback before the form has been submitted or to override the actual state.
 
 ## Default form with validation
+
 <Canvas>
   <form autocomplete="off" class="was-validated">
     <div class="form-group">
       <label for="input">Input label</label>
-      <input id="input" type="text" required/>
+      <input id="input" type="text" required />
       <span class="form-info">Field is required!</span>
     </div>
     <div class="form-group">
       <label for="inputLong">Input label</label>
-      <input id="inputLong" type="text" required/>
-      <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
+      <input id="inputLong" type="text" required />
+      <span class="form-info">
+        Field is required! Very long error message, lorem ipsum dolar sit amet.
+      </span>
     </div>
     <div class="form-group">
       <label for="numberInput">Input label</label>
-      <input id="numberInput" type="number" min="1" max="5" required/>
+      <input id="numberInput" type="number" min="1" max="5" required />
       <span class="form-info">Invalid number!</span>
     </div>
   </form>
 </Canvas>
 
 ## Horizontal form with validation
+
 <Canvas>
   <form class="horizontal was-validated" autocomplete="off">
     <div class="form-group">
       <label for="inputHorizontal">Input label</label>
-      <input id="inputHorizontal" type="text" required/>
+      <input id="inputHorizontal" type="text" required />
       <span class="form-info">Field is required!</span>
     </div>
     <div class="form-group">
       <label for="inputHorizontalLong">Input label</label>
-      <input id="inputHorizontalLong" type="text" required/>
-      <span class="form-info">Field is required! Very long error message, lorem ipsum dolar sit amet.</span>
+      <input id="inputHorizontalLong" type="text" required />
+      <span class="form-info">
+        Field is required! Very long error message, lorem ipsum dolar sit amet.
+      </span>
     </div>
     <div class="form-group">
       <label for="numberInputHorizontal">Input label</label>
-      <input id="numberInputHorizontal" type="number" min="1" max="5" required/>
+      <input
+        id="numberInputHorizontal"
+        type="number"
+        min="1"
+        max="5"
+        required
+      />
       <span class="form-info">Invalid number!</span>
     </div>
     <button>Button</button>
@@ -56,30 +68,42 @@ It's also possible to add either `.is-valid` or `.is-invalid` directly to an inp
   <form autocomplete="off" class="was-validated">
     <div class="form-group">
       <label for="inputNoFeedback">Input label</label>
-      <input id="inputNoFeedback" type="text" required placeholder="Invalid"/>
+      <input id="inputNoFeedback" type="text" required placeholder="Invalid" />
       <span class="form-info"></span>
     </div>
     <div class="form-group">
       <label for="inputNoinfo">Input label</label>
-      <input id="inputNoFeedback" type="text" placeholder="Valid"/>
+      <input id="inputNoFeedback" type="text" placeholder="Valid" />
       <span class="form-info"></span>
     </div>
   </form>
 </Canvas>
 
 ## Explicit validation
+
 Use `.is-valid` and/or `.is-invalid` to explicitly indicate input validity (usually on form submit or value change).
 
 <Canvas>
   <form autocomplete="off">
     <div class="form-group">
       <label for="inputValid">Input label</label>
-      <input id="inputValid" type="text" class="is-valid" value="Some value" required/>
+      <input
+        id="inputValid"
+        type="text"
+        class="is-valid"
+        value="Some value"
+        required
+      />
       <span class="form-info">Valid input</span>
     </div>
     <div class="form-group">
       <label for="inputInvalid">Input label</label>
-      <input id="inputInvalid" type="text" class="is-invalid" value="Valid but still not"/>
+      <input
+        id="inputInvalid"
+        type="text"
+        class="is-invalid"
+        value="Valid but still not"
+      />
       <span class="form-info">Invalid input</span>
     </div>
   </form>
@@ -94,19 +118,19 @@ Using `.was-validated`, form inputs can either be marked as valid or invalid dep
     <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
-      <input id="inputValid" type="text" value="Some value" required/>
+      <input id="inputValid" type="text" value="Some value" required />
       <span class="form-info">Neutral</span>
     </div>
     <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
-      <input id="inputValid" type="text" value="Some value" required/>
+      <input id="inputValid" type="text" value="Some value" required />
       <span class="form-info">Valid</span>
     </div>
     <div class="form-group">
       <label for="inputValid">Input label</label>
       <span class="form-info">Lorem ipsum description</span>
-      <input id="inputValid" type="text" required/>
+      <input id="inputValid" type="text" required />
       <span class="form-info">Error</span>
     </div>
   </form>
@@ -118,20 +142,26 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
   <form autocomplete="off" novalidate>
     <div class="form-group">
       <label for="inputInvalid">Input label</label>
-      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+      <span class="form-info">
+        Lorem ipsum very long description of input and what should be entered
+      </span>
       <input id="inputInvalid" type="text" />
       <span class="form-info">Neutral</span>
     </div>
     <div class="form-group">
       <label for="inputInvalid">Input label</label>
-      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
-      <input id="inputInvalid" type="text" class="is-valid"/>
+      <span class="form-info">
+        Lorem ipsum very long description of input and what should be entered
+      </span>
+      <input id="inputInvalid" type="text" class="is-valid" />
       <span class="form-info">Valid</span>
     </div>
     <div class="form-group">
       <label for="inputInvalid">Input label</label>
-      <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
-      <input id="inputInvalid" type="text" class="is-invalid"/>
+      <span class="form-info">
+        Lorem ipsum very long description of input and what should be entered
+      </span>
+      <input id="inputInvalid" type="text" class="is-invalid" />
       <span class="form-info">Error</span>
     </div>
   </form>
@@ -145,8 +175,8 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
       <label for="inputValid">Input group label</label>
       <span class="form-info">Lorem ipsum group description</span>
       <div class="group is-invalid">
-        <input id="inputValid1" type="text" required/>
-        <input id="inputValid2" type="text" required/>
+        <input id="inputValid1" type="text" required />
+        <input id="inputValid2" type="text" required />
         <button type="button">Button</button>
       </div>
       <span class="form-info">Error</span>
@@ -155,8 +185,8 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
       <label for="inputValid">Input group label</label>
       <span class="form-info">Lorem ipsum group description</span>
       <div class="group group-border is-invalid">
-        <input id="inputValid1" type="text" required/>
-        <input id="inputValid2" type="text" required/>
+        <input id="inputValid1" type="text" required />
+        <input id="inputValid2" type="text" required />
         <button type="button">Button</button>
       </div>
       <span class="form-info">Error</span>
@@ -164,14 +194,16 @@ Using `.is-valid` and/or `.is-invalid`, form inputs can either be marked as vali
     <div class="form-group">
       <fieldset aria-describedby="checkboxGroupHelp1" class="is-invalid">
         <legend>Invalid checkbox group</legend>
-        <span id="checkboxGroupHelp1" class="form-info">Checkbox group description</span>
+        <span id="checkboxGroupHelp1" class="form-info">
+          Checkbox group description
+        </span>
         <label class="form-control">
-          <input required class="is-invalid" type="checkbox"/>
+          <input required class="is-invalid" type="checkbox" />
           <span>One</span>
           <i></i>
         </label>
         <label class="form-control">
-          <input required class="is-invalid" type="checkbox" required/>
+          <input required class="is-invalid" type="checkbox" required />
           <span>Two</span>
           <i></i>
         </label>

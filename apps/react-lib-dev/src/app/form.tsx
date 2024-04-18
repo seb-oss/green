@@ -44,7 +44,7 @@ const dropDownKeyValueArray = [
 
 export const FormExample = () => {
   const [validator, setValidator] = React.useState<undefined | IValidator>(
-    undefined
+    undefined,
   )
 
   const [adults, setAdults] = React.useState<{ id: number; value: number }>()
@@ -72,7 +72,7 @@ export const FormExample = () => {
             message: 'This field is required',
             indicator: 'error',
             rules: { type: 'Required' },
-          }
+          },
     )
   }
 

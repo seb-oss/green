@@ -25,7 +25,7 @@ export class SlidingUnderlineDirective implements OnInit, OnChanges {
         this.element.nativeElement.classList.remove(
           'left',
           'slider-positive',
-          'slider-negative'
+          'slider-negative',
         )
       })
     }
@@ -42,7 +42,7 @@ export class SlidingUnderlineDirective implements OnInit, OnChanges {
         if (changes.key.currentValue === changes.key.previousValue) {
           this.addAnimation(
             changes.slidingUnderline.currentValue,
-            changes.slidingUnderline.previousValue
+            changes.slidingUnderline.previousValue,
           )
         }
       } else {
@@ -52,7 +52,7 @@ export class SlidingUnderlineDirective implements OnInit, OnChanges {
         ) {
           this.addAnimation(
             changes.slidingUnderline.currentValue,
-            changes.slidingUnderline.previousValue
+            changes.slidingUnderline.previousValue,
           )
         }
       }

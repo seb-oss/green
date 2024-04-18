@@ -16,7 +16,7 @@ export type TableContextType = {
   setTableState: (newState: TableState) => void
   onRowSelect?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    rowKey: string
+    rowKey: string,
   ) => void
   onRowExpand?: (isExpanded: boolean, rowKey: string) => void
   onSort?: (sortedColumn: SortedColumn) => void

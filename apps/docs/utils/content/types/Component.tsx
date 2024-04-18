@@ -1,11 +1,11 @@
 import {
   defineDocumentType,
   defineNestedType,
-} from "@contentlayer/source-files"
-import axios from "axios"
-import GithubSlugger from "github-slugger"
+} from '@contentlayer/source-files'
+import axios from 'axios'
+import GithubSlugger from 'github-slugger'
 
-import { getLastEditedDate, urlFromFilePath } from "../utils"
+import { getLastEditedDate, urlFromFilePath } from '../utils'
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }
 
@@ -13,38 +13,38 @@ const figmaAccessKey = process.env.FIGMA_ACCESS_KEY
 const figmaProjectId = process.env.FIGMA_PROJECT_ID
 
 export const Component = defineDocumentType(() => ({
-  name: "Component",
+  name: 'Component',
   filePathPattern: `component/**/*.mdx`,
-  contentType: "mdx",
+  contentType: 'mdx',
   fields: {
     global_id: {
-      type: "string",
+      type: 'string',
       description:
-        "Random ID to uniquely identify this doc, even after it moves",
+        'Random ID to uniquely identify this doc, even after it moves',
       required: true,
     },
-    title: { type: "string", required: true },
-    summary: { type: "string", required: false },
-    date: { type: "date", required: false },
-    tags: { type: "string", required: false },
-    status: { type: "string", required: false },
-    node: { type: "string", required: false },
-    preview: { type: "string", required: false },
-    private: { type: "boolean", required: false },
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: false },
+    date: { type: 'date', required: false },
+    tags: { type: 'string', required: false },
+    status: { type: 'string', required: false },
+    node: { type: 'string', required: false },
+    preview: { type: 'string', required: false },
+    private: { type: 'boolean', required: false },
   },
   computedFields: {
     url_path: {
-      type: "string",
+      type: 'string',
       description:
         'The URL path of this page relative to site root. For example, the site root page would be "/", and doc page would be "docs/getting-started/"',
       resolve: (component) => {
-        if (component._id.startsWith("component/**/design.mdx"))
-          return "/component"
+        if (component._id.startsWith('component/**/design.mdx'))
+          return '/component'
         return urlFromFilePath(component)
       },
     },
     headings: {
-      type: "json",
+      type: 'json',
       resolve: async (doc) => {
         const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g
         const slugger = new GithubSlugger()
@@ -58,16 +58,16 @@ export const Component = defineDocumentType(() => ({
               text: content,
               slug: content ? slugger.slug(content) : undefined,
             }
-          }
+          },
         )
         return headings
       },
     },
     pathSegments: {
-      type: "json",
+      type: 'json',
       resolve: (post) =>
         urlFromFilePath(post)
-          .split("/")
+          .split('/')
           // skip `/docs` prefix
           .slice(2)
           .map((dirName) => {
@@ -77,9 +77,9 @@ export const Component = defineDocumentType(() => ({
             return { order, pathName }
           }),
     },
-    last_edited: { type: "date", resolve: getLastEditedDate },
+    last_edited: { type: 'date', resolve: getLastEditedDate },
     figma_hero_svg: {
-      type: "json",
+      type: 'json',
       resolve: async (doc) => {
         const node = doc.node
 
@@ -88,9 +88,9 @@ export const Component = defineDocumentType(() => ({
             `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node}&format=svg`,
             {
               headers: {
-                "X-Figma-Token": figmaAccessKey,
+                'X-Figma-Token': figmaAccessKey,
               },
-            }
+            },
           )
 
           const images = response.data.images
@@ -99,7 +99,7 @@ export const Component = defineDocumentType(() => ({
           return fetch(imageUrl)
             .then((response) => response.text())
             .then((svgData) => {
-              const nodeIdWithHyphen = node?.replace(":", "-") // Replace the colon with a hyphen
+              const nodeIdWithHyphen = node?.replace(':', '-') // Replace the colon with a hyphen
               return {
                 node: nodeIdWithHyphen,
                 svg: svgData,
@@ -110,36 +110,36 @@ export const Component = defineDocumentType(() => ({
               // console.error(`Error fetching Figma SVG`, error)
               return {
                 node: node,
-                svg: "",
+                svg: '',
               }
             })
         } catch (error) {
           // console.error("Error fetching Figma hero SVG:")
           return {
             node: node,
-            svg: "",
+            svg: '',
           }
         }
       },
     },
     figma_svgs: {
-      type: "json",
+      type: 'json',
       resolve: async (doc) => {
         const regXHeader = /node="(?<node>.+?)"/g
         const nodes = Array.from(doc.body.raw.matchAll(regXHeader)).map(
-          (match) => match.groups?.node
+          (match) => match.groups?.node,
         )
 
         try {
           const response = await axios.get(
             `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(
-              ","
+              ',',
             )}&format=svg`,
             {
               headers: {
-                "X-Figma-Token": figmaAccessKey,
+                'X-Figma-Token': figmaAccessKey,
               },
-            }
+            },
           )
 
           const images = response.data.images
@@ -150,7 +150,7 @@ export const Component = defineDocumentType(() => ({
               return fetch(imageUrl as string)
                 .then((response) => response.text())
                 .then((svgData) => {
-                  const nodeIdWithHyphen = node.replace(":", "-") // Replace the colon with a hyphen
+                  const nodeIdWithHyphen = node.replace(':', '-') // Replace the colon with a hyphen
                   return {
                     node: nodeIdWithHyphen,
                     svg: svgData,
@@ -161,10 +161,10 @@ export const Component = defineDocumentType(() => ({
                   // console.error(`Error fetching Figma SVG`, error)
                   return {
                     node: node,
-                    svg: "",
+                    svg: '',
                   }
                 })
-            }
+            },
           )
 
           const svgData = await Promise.all(fetchPromises)
@@ -173,7 +173,7 @@ export const Component = defineDocumentType(() => ({
           // console.error("Error processing Figma SVGS:")
           return nodes.map((node) => ({
             node: node,
-            svg: "",
+            svg: '',
           }))
         }
       },

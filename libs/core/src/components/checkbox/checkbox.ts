@@ -42,7 +42,7 @@ export class GdsCheckbox extends LitElement {
     super.update(changedProperties)
     if (!this.inputElement) {
       this.inputElement = this.shadowRoot?.getElementById(
-        'checkbox'
+        'checkbox',
       ) as HTMLInputElement
     }
     this.reflectAttributesToInput()

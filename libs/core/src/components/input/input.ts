@@ -133,7 +133,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         ${when(
           this.multiline,
           () => html`${this.#renderNativeTextarea()}`,
-          () => html`${this.#renderNativeInput()}`
+          () => html`${this.#renderNativeInput()}`,
         )}
         <slot name="trail" gds-allow="gds-badge"></slot>
         ${this.#renderClearButton()}
@@ -143,11 +143,11 @@ export class GdsInput extends GdsFormControlElement<string> {
         <div>
           ${when(
             this.invalid,
-            () => html`<span class="error-text">Error information</span>`
+            () => html`<span class="error-text">Error information</span>`,
           )}
         </div>
         ${when(this.#shouldShowRemainingChars, () =>
-          this.#renderRemainingCharsBadge()
+          this.#renderRemainingCharsBadge(),
         )}
       </div>
     `
@@ -163,7 +163,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           ${when(
             this.multiline,
             () => html`${this.#renderNativeTextarea()}`,
-            () => html`${this.#renderNativeInput()}`
+            () => html`${this.#renderNativeInput()}`,
           )}
         </label>
         <slot name="trail" gds-allow="gds-badge"></slot>
@@ -173,7 +173,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       <div class="foot">
         ${this.#renderSupportingText()}
         ${when(this.#shouldShowRemainingChars, () =>
-          this.#renderRemainingCharsBadge()
+          this.#renderRemainingCharsBadge(),
         )}
         ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
       </div>
@@ -198,7 +198,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       new Event('change', {
         bubbles: true,
         composed: true,
-      })
+      }),
     )
   }
 
@@ -226,7 +226,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         bubbles: true,
         composed: true,
         detail: this.showExtendedSupportingText,
-      })
+      }),
     )
   }
 

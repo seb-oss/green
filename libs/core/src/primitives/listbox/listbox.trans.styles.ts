@@ -8,7 +8,7 @@ export function register() {
   TransitionalStyles.instance.register('gds-option', optionStyles.toString())
   TransitionalStyles.instance.register(
     'gds-menu-heading',
-    menuHeadingStyles.toString()
+    menuHeadingStyles.toString(),
   )
 }
 

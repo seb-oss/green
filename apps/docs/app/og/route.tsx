@@ -1,27 +1,27 @@
-import { ImageResponse } from "next/og"
-import { NextRequest } from "next/server"
+import { ImageResponse } from 'next/og'
+import { NextRequest } from 'next/server'
 
-export const runtime = "edge"
+export const runtime = 'edge'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
-  const postTitle = searchParams.get("title")
+  const postTitle = searchParams.get('title')
 
   return new ImageResponse(
     (
       <div
         style={{
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          backgroundColor: "#000000",
-          backgroundImage: "linear-gradient(234deg, #000000, #222222)",
-          padding: "200px",
-          gap: "100px",
-          fontFamily: "sans-serif",
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          backgroundColor: '#000000',
+          backgroundImage: 'linear-gradient(234deg, #000000, #222222)',
+          padding: '200px',
+          gap: '100px',
+          fontFamily: 'sans-serif',
         }}
       >
         <svg
@@ -38,25 +38,25 @@ export async function GET(req: NextRequest) {
         </svg>
         <div
           style={{
-            display: "flex",
+            display: 'flex',
             fontSize: 130,
-            letterSpacing: "-0.05em",
-            fontStyle: "normal",
-            color: "white",
-            lineHeight: "120px",
-            whiteSpace: "pre-wrap",
+            letterSpacing: '-0.05em',
+            fontStyle: 'normal',
+            color: 'white',
+            lineHeight: '120px',
+            whiteSpace: 'pre-wrap',
           }}
         >
           {postTitle}
         </div>
         <footer
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "30px",
-            fontSize: "40px",
-            color: "#ffffff",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '30px',
+            fontSize: '40px',
+            color: '#ffffff',
           }}
         >
           <svg
@@ -78,6 +78,6 @@ export async function GET(req: NextRequest) {
     {
       width: 1920,
       height: 1080,
-    }
+    },
   )
 }

@@ -1,14 +1,14 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/"
+      interval: 'daily'
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/chlorophyll"
+      interval: 'daily'
+  - package-ecosystem: 'npm'
+    directory: '/chlorophyll'
     schedule:
-      interval: "daily"
+      interval: 'daily'

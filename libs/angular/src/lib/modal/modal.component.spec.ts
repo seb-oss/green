@@ -82,7 +82,7 @@ describe(NggModalComponent.name, () => {
 
     expect(modalElement).toBeDefined()
     await waitFor(() =>
-      expect(component.container.classList.contains('open')).toEqual(true)
+      expect(component.container.classList.contains('open')).toEqual(true),
     )
     expect(bodyScrollLock.disableBodyScroll).toHaveBeenCalled()
   })
@@ -162,7 +162,7 @@ describe(NggModalComponent.name, () => {
     })
 
     await waitFor(() =>
-      expect(component.queryByTestId('modal-header')).toBeFalsy()
+      expect(component.queryByTestId('modal-header')).toBeFalsy(),
     )
   })
 
@@ -198,7 +198,7 @@ describe(NggModalComponent.name, () => {
     })
 
     await waitFor(() =>
-      expect(component.queryByTestId('modal-footer')).toBeFalsy()
+      expect(component.queryByTestId('modal-footer')).toBeFalsy(),
     )
   })
 
@@ -230,7 +230,7 @@ describe(NggModalComponent.name, () => {
     })
 
     const modalConfirmButton = await component.findByTestId(
-      'modal-confirm-button'
+      'modal-confirm-button',
     )
 
     expect(modalConfirmButton.textContent?.trim()).toEqual('FakeConfirm')
@@ -248,7 +248,7 @@ describe(NggModalComponent.name, () => {
     })
 
     const modalDismissButton = await component.findByTestId(
-      'modal-dismiss-button'
+      'modal-dismiss-button',
     )
 
     expect(modalDismissButton.textContent?.trim()).toEqual('FakeDismiss')

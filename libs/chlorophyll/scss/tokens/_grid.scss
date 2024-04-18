@@ -8,17 +8,21 @@
 
 $grid-breakpoints: (
   xs: 0,
-  sm: 36em,   // 576px
-  md: 48em,   // 768px
-  lg: 62em,   // 992px
-  xl: 75em,   // 1200px
-  xxl: 87.5em // 1400px
+  sm: 36em,
+  // 576px
+  md: 48em,
+  // 768px
+  lg: 62em,
+  // 992px
+  xl: 75em,
+  // 1200px
+  xxl: 87.5em // 1400px,
 );
 
 @include functions.assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include functions.assert-starts-at-zero(
-    $grid-breakpoints,
-    '$grid-breakpoints'
+  $grid-breakpoints,
+  '$grid-breakpoints'
 );
 
 // Grid columns

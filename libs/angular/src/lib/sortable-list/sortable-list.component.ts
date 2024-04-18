@@ -74,20 +74,20 @@ export class NggSortableListComponent {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       )
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       )
     }
 
     this.emitItemOrderChanged(
       [Number(event.previousContainer.id), event.previousIndex],
-      [Number(event.container.id), event.currentIndex]
+      [Number(event.container.id), event.currentIndex],
     )
   }
 
@@ -102,7 +102,7 @@ export class NggSortableListComponent {
     groupIndex: number,
     currentItemIndex: number,
     newItemIndex: number,
-    event: any
+    event: any,
   ) {
     event.preventDefault()
 
@@ -127,7 +127,7 @@ export class NggSortableListComponent {
         this.groups[groupIndex].items,
         this.groups[newGroupIndex].items,
         currentItemIndex,
-        newIndex
+        newIndex,
       )
     } else {
       moveItemInArray(this.groups[groupIndex].items, currentItemIndex, newIndex)
@@ -135,7 +135,7 @@ export class NggSortableListComponent {
 
     this.emitItemOrderChanged(
       [groupIndex, currentItemIndex],
-      [newGroupIndex, newIndex]
+      [newGroupIndex, newIndex],
     )
 
     setTimeout(() => {
@@ -180,7 +180,7 @@ export class NggSortableListComponent {
    */
   private emitItemOrderChanged(
     previousIndex: [number, number],
-    currentIndex: [number, number]
+    currentIndex: [number, number],
   ) {
     this.itemOrderChanged.emit({
       previousIndex,

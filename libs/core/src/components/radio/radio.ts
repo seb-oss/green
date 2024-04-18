@@ -44,7 +44,7 @@ export class GdsRadio extends LitElement {
     super.update(changedProperties)
     if (!this.inputElement) {
       this.inputElement = this.shadowRoot?.getElementById(
-        'radio'
+        'radio',
       ) as HTMLInputElement
     }
     this.reflectAttributesToInput()

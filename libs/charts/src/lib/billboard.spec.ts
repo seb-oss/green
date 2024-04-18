@@ -337,7 +337,7 @@ describe('billboard', () => {
         100,
         undefined,
         undefined,
-        undefined
+        undefined,
       )
       expect(formattedNumber).toEqual('100 kr')
     })
@@ -354,7 +354,7 @@ describe('billboard', () => {
         10,
         0.1,
         undefined,
-        undefined
+        undefined,
       )
       expect(formattedNumber).toEqual('10/100')
     })

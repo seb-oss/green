@@ -3,23 +3,29 @@
  * @param e - The mouse event that triggered the ripple effect.
  */
 export const handleGdsRippleEffect = (e: MouseEvent) => {
-  const targetElement = e.target as HTMLElement;
-  const targetRect = targetElement.getBoundingClientRect();
-  
+  const targetElement = e.target as HTMLElement
+  const targetRect = targetElement.getBoundingClientRect()
+
   // Set the ripple effect position
-  targetElement.style.setProperty('--gds-ripple-top', `${e.clientY - targetRect.top}px`);
-  targetElement.style.setProperty('--gds-ripple-left', `${e.clientX - targetRect.left}px`);
-  
+  targetElement.style.setProperty(
+    '--gds-ripple-top',
+    `${e.clientY - targetRect.top}px`,
+  )
+  targetElement.style.setProperty(
+    '--gds-ripple-left',
+    `${e.clientX - targetRect.left}px`,
+  )
+
   // Add and remove the ripple effect class
-  targetElement.classList.remove('gds-ripple-effect');
+  targetElement.classList.remove('gds-ripple-effect')
   setTimeout(() => {
-    targetElement.classList.add('gds-ripple-effect');
-  }, 20);
+    targetElement.classList.add('gds-ripple-effect')
+  }, 20)
 
   // Apply the shadow DOM styles
-  const shadowRoot = targetElement.shadowRoot;
+  const shadowRoot = targetElement.shadowRoot
   if (shadowRoot) {
-    const styleElement = document.createElement('style');
+    const styleElement = document.createElement('style')
     styleElement.textContent = `
       :root {
         --gds-sys-ripple-spread: 20px;
@@ -82,7 +88,7 @@ export const handleGdsRippleEffect = (e: MouseEvent) => {
           opacity: 0;
         }
       }
-    `;
-    shadowRoot.appendChild(styleElement);
+    `
+    shadowRoot.appendChild(styleElement)
   }
-};
+}

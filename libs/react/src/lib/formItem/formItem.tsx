@@ -74,7 +74,7 @@ export const FormItem = ({
 
   const formItemClassNames = classNames(
     'gds-form-item',
-    validator && validateClassName(validator?.indicator)
+    validator && validateClassName(validator?.indicator),
   )
 
   return (
@@ -111,7 +111,7 @@ export const FormItem = ({
                 await delay(10)
                 expandableInnerRef.current &&
                   setExpandableHeight(
-                    expandableInnerRef.current['clientHeight']
+                    expandableInnerRef.current['clientHeight'],
                   )
                 setIsExpanded(true)
               } else {
@@ -142,7 +142,11 @@ export const FormItem = ({
       )}
       {children}
       <div className="gds-form-item__footer">
-        {validator && <span className="form-info" id={`${inputId}_message`}>{validator.message}</span>}
+        {validator && (
+          <span className="form-info" id={`${inputId}_message`}>
+            {validator.message}
+          </span>
+        )}
         {rightAlignedFooterInfo && (
           <span
             className="form-info"

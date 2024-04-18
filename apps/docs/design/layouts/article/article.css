@@ -3,7 +3,7 @@
     .layout-article {
       grid-area: article;
       display: grid;
-      grid-template-areas: "sidebar content";
+      grid-template-areas: 'sidebar content';
       grid-template-columns: max-content;
       grid-template-rows: max-content;
     }

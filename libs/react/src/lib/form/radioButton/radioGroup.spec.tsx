@@ -31,7 +31,7 @@ const MockComponent = (props: MockComponentProps) => (
     {radioBtnValues.map(
       (value: { label: string; value: string }, index: number) => (
         <RadioButton key={index} {...value} />
-      )
+      ),
     )}
   </RadioGroup>
 )
@@ -60,14 +60,14 @@ describe('RadioButton Group Component', () => {
     expect(mockFn).toBeCalledWith('Car 1')
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
-        ?.checked
+        ?.checked,
     ).toEqual(true)
     fireEvent.click(screen.getByText('Car 2'))
     expect(mockFn).lastCalledWith('Car 2')
     expect(mockFn).toBeCalledWith('Car 2')
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
-        ?.checked
+        ?.checked,
     ).toEqual(true)
   })
 
@@ -75,12 +75,12 @@ describe('RadioButton Group Component', () => {
     const { container } = render(
       <MockComponent
         validator={{ message: 'invalid message', indicator: 'error' }}
-      />
+      />,
     )
     expect(screen.getByText('invalid message')).toBeVisible()
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(3)
     expect(
-      screen.getByText('invalid message').classList.contains('form-info')
+      screen.getByText('invalid message').classList.contains('form-info'),
     ).toEqual(true)
   })
 
@@ -91,18 +91,18 @@ describe('RadioButton Group Component', () => {
           validator={{ message: 'invalid message', indicator: 'error' }}
         />
         <button type="reset">reset</button>
-      </form>
+      </form>,
     )
     expect(
-      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked
+      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked,
     ).toBe(false)
     fireEvent.click(screen.getByText('Car 1'))
     expect(
-      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked
+      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked,
     ).toBe(true)
     fireEvent.click(screen.getByText('reset'))
     expect(
-      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked
+      container.querySelector<HTMLInputElement>("input[type='radio']")?.checked,
     ).toBe(false)
   })
 
@@ -111,35 +111,35 @@ describe('RadioButton Group Component', () => {
 
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
-        ?.checked
+        ?.checked,
     ).toBe(true)
   })
 
   it('should be able to set value programmatically', async function () {
     const { container, rerender } = render(
-      <MockComponent defaultSelected={'Car 1'} />
+      <MockComponent defaultSelected={'Car 1'} />,
     )
 
     rerender(
-      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 2'} />
+      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 2'} />,
     )
 
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
-        ?.checked
+        ?.checked,
     ).toBe(false)
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[1]
-        ?.checked
+        ?.checked,
     ).toBe(true)
 
     rerender(
-      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 1'} />
+      <MockComponent defaultSelected={'Car 1'} valueSelected={'Car 1'} />,
     )
 
     expect(
       container.querySelectorAll<HTMLInputElement>("input[type='radio']")[0]
-        ?.checked
+        ?.checked,
     ).toBe(true)
   })
 })

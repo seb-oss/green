@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
-import pluginConfig from "./config"
+import pluginConfig from './config'
 
-import "vanilla-cookieconsent"
-import "./style.css"
+import 'vanilla-cookieconsent'
+import './style.css'
 
 declare global {
   interface Window {
@@ -15,7 +15,7 @@ declare global {
 
 const Consent = () => {
   useEffect(() => {
-    if (!document.getElementById("cc--main")) {
+    if (!document.getElementById('cc--main')) {
       window.CookieConsentApi = window.initCookieConsent()
       window.CookieConsentApi.run(pluginConfig)
     }

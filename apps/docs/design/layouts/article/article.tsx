@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import React, { useContext } from "react"
-import Sidebar from "@/sidebar"
-import { ThemeProviderContext } from "$/theme/provider"
+import React, { useContext } from 'react'
+import Sidebar from '@/sidebar'
+import { ThemeProviderContext } from '$/theme/provider'
 
-import "&/article/article.css"
+import '&/article/article.css'
 
 export default function Article({ children }: { children: React.ReactNode }) {
   const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)

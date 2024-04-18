@@ -1,20 +1,20 @@
-"use client"
+'use client'
 
-import React from "react"
-import useGridDebug from "$/grid-debug/grid-debug"
+import React from 'react'
+import useGridDebug from '$/grid-debug/grid-debug'
 
-import "@/grid/css/grid.css"
-import "@/grid/css/responsive.css"
-import "@/grid/css/span.css"
-import "@/grid/css/space.css"
-import "@/grid/css/align.css"
-import "@/grid/css/debug.css"
+import '@/grid/css/grid.css'
+import '@/grid/css/responsive.css'
+import '@/grid/css/span.css'
+import '@/grid/css/space.css'
+import '@/grid/css/align.css'
+import '@/grid/css/debug.css'
 
-type GridGapSize = "small" | "medium" | "large"
-type GridJustify = "start" | "end" | "center" | "between" | "around" | "evenly"
-type GridAlign = "start" | "end" | "center"
-type ContentInline = "auto" | "max-width"
-type InlineSize = "full" | "max-content"
+type GridGapSize = 'small' | 'medium' | 'large'
+type GridJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
+type GridAlign = 'start' | 'end' | 'center'
+type ContentInline = 'auto' | 'max-width'
+type InlineSize = 'full' | 'max-content'
 
 type GridProps = {
   children: React.ReactNode
@@ -48,7 +48,7 @@ export default function Grid({
   inlineSize,
 }: GridProps) {
   if (columns < 1 || columns > 24) {
-    throw new Error("The columns prop must be between 1 and 24.")
+    throw new Error('The columns prop must be between 1 and 24.')
   }
 
   const debug = useGridDebug()

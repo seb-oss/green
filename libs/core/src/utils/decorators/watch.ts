@@ -33,7 +33,7 @@ export function watch(propertyName: string | string[], options?: WatchOptions) {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     propertyKey: string,
-    descriptor: TypedPropertyDescriptor<UpdateHandler>
+    descriptor: TypedPropertyDescriptor<UpdateHandler>,
   ) => {
     // @ts-expect-error - update is a protected property
     const { update } = proto
@@ -44,7 +44,7 @@ export function watch(propertyName: string | string[], options?: WatchOptions) {
     // @ts-expect-error - update is a protected property
     proto.update = function (
       this: ElemClass,
-      changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>
+      changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>,
     ) {
       watchedProperties.forEach((property) => {
         const key = property as keyof ElemClass

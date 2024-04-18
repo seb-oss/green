@@ -8,7 +8,7 @@ export interface MultipleExecutorOptions {
 
 export default async function multipleExecutor(
   options: MultipleExecutorOptions,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   console.info(`Executing "build-lib"...`)
   console.info(`Options: ${JSON.stringify(options, null, 2)}`)
@@ -16,21 +16,21 @@ export default async function multipleExecutor(
     await runExecutor(
       { project: context.projectName, target: 'compile-scss' },
       {},
-      context
+      context,
     ),
     // copy readme and changelog
     await new Promise((resolve) =>
       copyfiles(
         [`libs/${context.projectName}/*.md`, options.outputPath],
         { up: 2 },
-        resolve
-      )
+        resolve,
+      ),
     )
       .catch((_) => [{ success: false }])
       .then((_) => [{ success: true }]),
     // copy package json
     await new Promise((resolve) =>
-      copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve)
+      copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve),
     )
       .catch((_) => [{ success: false }])
       .then((_) => [{ success: true }]),
@@ -39,8 +39,8 @@ export default async function multipleExecutor(
       copyfiles(
         [`libs/${context.projectName}/scss/**/*.scss`, `${options.outputPath}`],
         { up: 2 },
-        resolve
-      )
+        resolve,
+      ),
     )
       .catch((_) => [{ success: false }])
       .then((_) => [{ success: true }]),

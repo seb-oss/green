@@ -41,7 +41,7 @@ export default {
 } as Meta<NggDatepickerComponent>
 
 const Template: Story<NggDatepickerComponent> = (
-  args: NggDatepickerComponent
+  args: NggDatepickerComponent,
 ) => ({
   props: args,
 })
@@ -66,7 +66,7 @@ CustomOptions.args = {
 }
 
 const FormControlTemplate: Story<NggDatepickerComponent> = (
-  args: NggDatepickerComponent
+  args: NggDatepickerComponent,
 ) => {
   const validationForm = new FormGroup({
     date: new FormControl(undefined, [

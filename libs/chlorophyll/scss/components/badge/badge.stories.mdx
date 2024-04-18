@@ -4,18 +4,21 @@ export const Template = ({ variant, dismissible, text }) => {
   return `
     <span class="badge ${variant}">
       <strong>${text}</strong>
-      ${dismissible ?
-        `<button class="close">
+      ${
+        dismissible
+          ? `<button class="close">
           <span class="sr-only">Remove</span>
           <i></i>
-        </button>` : ``}
+        </button>`
+          : ``
+      }
     </span>`
 }
 
 <Meta
   title="Components/Badge"
   parameters={{
-    componentIds: ['component-badge']
+    componentIds: ['component-badge'],
   }}
   argTypes={{
     variant: {
@@ -23,7 +26,7 @@ export const Template = ({ variant, dismissible, text }) => {
       options: ['', 'info', 'success', 'warning', 'danger', 'light', 'dark'],
     },
     dismissible: {
-      control: 'boolean'
+      control: 'boolean',
     },
     text: { control: 'text' },
   }}
@@ -33,9 +36,9 @@ export const Template = ({ variant, dismissible, text }) => {
   name="Badge"
   args={{
     text: 'Badge',
-    dismissible: false
+    dismissible: false,
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>
@@ -48,27 +51,27 @@ Badges are available in a number of different variants. Please note that the col
 
 <Canvas>
   <div class="badge-container">
-  <span class="badge">
-    <strong>Badge</strong>
-  </span>
-  <span class="badge info">
-    <strong>Information</strong>
-  </span>
-  <span class="badge success">
-    <strong>Success</strong>
-  </span>
-  <span class="badge warning">
-    <strong>Warning</strong>
-  </span>
-  <span class="badge danger">
-    <strong>Danger</strong>
-  </span>
-  <span class="badge light">
-    <strong>Light</strong>
-  </span>
-  <span class="badge dark">
-    <strong>Dark</strong>
-  </span>
+    <span class="badge">
+      <strong>Badge</strong>
+    </span>
+    <span class="badge info">
+      <strong>Information</strong>
+    </span>
+    <span class="badge success">
+      <strong>Success</strong>
+    </span>
+    <span class="badge warning">
+      <strong>Warning</strong>
+    </span>
+    <span class="badge danger">
+      <strong>Danger</strong>
+    </span>
+    <span class="badge light">
+      <strong>Light</strong>
+    </span>
+    <span class="badge dark">
+      <strong>Dark</strong>
+    </span>
   </div>
 </Canvas>
 
@@ -82,23 +85,23 @@ Badges don't have any margin by default, instead they rely on the context in whi
       <strong>Badge</strong>
     </span>
     <span class="badge info">
-    <strong>Information</strong>
+      <strong>Information</strong>
     </span>
     <span class="badge success">
-    <strong>Success</strong>
+      <strong>Success</strong>
     </span>
     <span class="badge warning">
-    <strong>Warning</strong>
+      <strong>Warning</strong>
     </span>
     <span class="badge danger">
-    <strong>Danger</strong>
+      <strong>Danger</strong>
     </span>
     <span class="badge light">
-    <strong>Light</strong>
+      <strong>Light</strong>
     </span>
     <span class="badge dark">
-    <strong>Dark</strong>
-  </span>
+      <strong>Dark</strong>
+    </span>
   </div>
 </Canvas>
 
@@ -112,22 +115,22 @@ We can use utility classes to modify the behaviour, eg. applying `.justify-conte
       <strong>Badge</strong>
     </span>
     <span class="badge info">
-    <strong>Information</strong>
+      <strong>Information</strong>
     </span>
     <span class="badge success">
-    <strong>Success</strong>
+      <strong>Success</strong>
     </span>
     <span class="badge warning">
-    <strong>Warning</strong>
+      <strong>Warning</strong>
     </span>
     <span class="badge danger">
-    <strong>Danger</strong>
+      <strong>Danger</strong>
     </span>
     <span class="badge light">
-    <strong>Light</strong>
+      <strong>Light</strong>
     </span>
     <span class="badge dark">
-    <strong>Dark</strong>
-  </span>
+      <strong>Dark</strong>
+    </span>
   </div>
 </Canvas>

@@ -6,7 +6,6 @@ import {
 
 import styles from './stem.styles.scss'
 
-
 @gdsCustomElement('gds-icon')
 export class GdsIcon extends LitElement {
   static get styles() {

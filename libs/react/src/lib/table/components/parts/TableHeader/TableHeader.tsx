@@ -6,7 +6,7 @@ export type TableHeaderProps = JSX.IntrinsicElements['thead']
 const TableHeader = React.forwardRef(
   (
     { ...props }: TableHeaderProps,
-    ref: React.ForwardedRef<HTMLTableSectionElement>
+    ref: React.ForwardedRef<HTMLTableSectionElement>,
   ) => {
     return (
       <thead {...props} ref={ref}>
@@ -27,7 +27,7 @@ const TableHeader = React.forwardRef(
             })}
       </thead>
     )
-  }
+  },
 )
 
 TableHeader.displayName = 'TableHeader'

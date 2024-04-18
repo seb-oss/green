@@ -59,7 +59,6 @@ $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
 @mixin calendar() {
-
   // use full width on small screens
   @include common.media-breakpoint-down(sm) {
     width: 100%;

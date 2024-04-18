@@ -7,7 +7,7 @@ import { NggCellTableComponent } from './cell-table.component'
 A component for presenting tabular data in a stacked format.
 
 Status: **Beta**<br/>
-*You can use this component, but breaking changes may occur even in minor releases*
+_You can use this component, but breaking changes may occur even in minor releases_
 
 ## Description
 
@@ -35,18 +35,17 @@ When using the `clickableRows` input, you must also make sure to add the `clickL
 The full row is clickable with a mouse or touch input, but when navigating using keyboard or screen reader, the chevron
 will be the only focusable element that can be used to trigger the click action, so it is important to provide a good label for it.
 
-
 ## Inputs
 
-| Input           | Type                         | Description                                            |
-| :-------------- | :--------------------------- | :----------------------------------------------------- |
-| headerList      | `Array<TableHeaderListItem>` | An array of table header configurations.               |
-| rows            | `Array<TableRow>`            | An array of data rows.                                 |
-| className       | `string`                     | Custom CSS class name for styling.                     |
-| minWidth        | `number`                     | Cell minimum width to ensure consistent column widths. |
-| overflowReverse | `boolean`                    | Make the most left element wrap.                       |
-| clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right.                     |
-| clickLabel      | `string`                     | The label for the chevron button.                      |
+| Input           | Type                         | Description                                                                                   |
+| :-------------- | :--------------------------- | :-------------------------------------------------------------------------------------------- |
+| headerList      | `Array<TableHeaderListItem>` | An array of table header configurations.                                                      |
+| rows            | `Array<TableRow>`            | An array of data rows.                                                                        |
+| className       | `string`                     | Custom CSS class name for styling.                                                            |
+| minWidth        | `number`                     | Cell minimum width to ensure consistent column widths.                                        |
+| overflowReverse | `boolean`                    | Make the most left element wrap.                                                              |
+| clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right. |
+| clickLabel      | `string`                     | The label for the chevron button.                                                             |
 
 ## Outputs
 

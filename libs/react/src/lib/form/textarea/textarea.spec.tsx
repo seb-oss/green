@@ -25,7 +25,7 @@ describe('TextArea', () => {
     const mockFn: jest.Mock = jest
       .fn()
       .mockImplementation(
-        (event: ChangeEvent<HTMLTextAreaElement>) => event.target.value
+        (event: ChangeEvent<HTMLTextAreaElement>) => event.target.value,
       )
 
     render(<TextArea label="Label" onChange={mockFn} />)
@@ -47,7 +47,7 @@ describe('TextArea', () => {
         label="Label"
         value="12345"
         onChange={(e) => mockFn(e.currentTarget.value)}
-      />
+      />,
     )
     const inputElement = await screen.findByLabelText('Label')
 
@@ -71,7 +71,7 @@ describe('TextArea', () => {
         label="Label"
         value="12345"
         onChange={(e) => mockFn(e.currentTarget.value)}
-      />
+      />,
     )
 
     const inputElement = await screen.findByLabelText('Label')
@@ -87,7 +87,7 @@ describe('TextArea', () => {
     render(
       <form role="form">
         <TextArea label="Label" />
-      </form>
+      </form>,
     )
 
     const input = screen.getByLabelText('Label') as HTMLInputElement
@@ -105,7 +105,7 @@ describe('TextArea', () => {
       <TextArea
         label="Label"
         validator={{ message: 'valid message', indicator: 'success' }}
-      />
+      />,
     )
     expect(screen.getByText('valid message')).toBeVisible()
   })

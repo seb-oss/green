@@ -28,7 +28,7 @@ export default {
 } as Meta<NggContextMenuComponent>
 
 const Template: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -52,7 +52,7 @@ Default.args = {
 }
 
 const WithLabelTemplate: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -88,7 +88,7 @@ RightToLeft.args = {
 }
 
 const CustomTemplate: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -127,7 +127,7 @@ CustomTemplateDefault.args = {
 }
 
 const TemplatePositionRelative: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,

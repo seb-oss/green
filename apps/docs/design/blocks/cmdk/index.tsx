@@ -1,20 +1,20 @@
-"use client"
+'use client'
 
-import { useEffect, useRef, useState } from "react"
-import Link from "next/link"
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import {
   allChangelogs,
   allComponents,
   allDocuments,
   allMembers,
   allPosts,
-} from "content"
-import Fuse from "fuse.js"
+} from 'content'
+import Fuse from 'fuse.js'
 
-import "./style.css"
+import './style.css'
 
-import React from "react"
-import Image from "next/image"
+import React from 'react'
+import Image from 'next/image'
 
 interface Document {
   handle: any
@@ -36,7 +36,7 @@ export default function Cmdk({
 }) {
   const [isWindows, setIsWindows] = useState(false)
   const [searchResults, setSearchResults] = useState<Document[]>(
-    allDocuments as Document[]
+    allDocuments as Document[],
   )
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const refs = searchResults.map(() => React.createRef<HTMLDivElement>())
@@ -68,7 +68,7 @@ export default function Cmdk({
 
     // Changelogs
     const changelogFuse = new Fuse(allChangelogs, {
-      keys: ["title", "version"],
+      keys: ['title', 'version'],
     })
     const changelogResults = changelogFuse.search(value)
     const changelogItems = changelogResults.map((result) => result.item)
@@ -76,18 +76,18 @@ export default function Cmdk({
 
     // Components
     const componentFuse = new Fuse(allComponents, {
-      keys: ["title", "keywords"],
+      keys: ['title', 'keywords'],
     })
 
     const componentResults = componentFuse.search(value)
     const componentItems = componentResults
       .map((result) => result.item)
-      .filter((item) => item._raw.sourceFileName === "index.mdx")
+      .filter((item) => item._raw.sourceFileName === 'index.mdx')
     results.push(...componentItems)
 
     // Posts
     const postFuse = new Fuse(allPosts, {
-      keys: ["title", "keywords"],
+      keys: ['title', 'keywords'],
     })
     const postResults = postFuse.search(value)
     const postItems = postResults.map((result) => result.item)
@@ -95,7 +95,7 @@ export default function Cmdk({
 
     // Members
     const memberFuse = new Fuse(allMembers, {
-      keys: ["name", "department"],
+      keys: ['name', 'department'],
     })
     const memberResults = memberFuse.search(value)
     const memberItems = memberResults.map((result) => result.item)
@@ -105,8 +105,8 @@ export default function Cmdk({
   }
 
   const renderResult = (doc: Document, index: number, isFocused: boolean) => {
-    const className = isFocused ? "focused" : ""
-    if (doc.type === "Changelog") {
+    const className = isFocused ? 'focused' : ''
+    if (doc.type === 'Changelog') {
       return (
         <Link
           key={doc.title + doc.url_path}
@@ -120,7 +120,7 @@ export default function Cmdk({
           </div>
         </Link>
       )
-    } else if (doc.type === "Component") {
+    } else if (doc.type === 'Component') {
       return (
         <Link
           key={doc.title + doc.url_path}
@@ -151,7 +151,7 @@ export default function Cmdk({
           </div>
         </Link>
       )
-    } else if (doc.type === "Post") {
+    } else if (doc.type === 'Post') {
       return (
         <Link
           key={doc.title + doc.url_path}
@@ -165,11 +165,11 @@ export default function Cmdk({
           </div>
         </Link>
       )
-    } else if (doc.type === "Member") {
+    } else if (doc.type === 'Member') {
       return (
         <Link
           key={doc.title + doc.url_path}
-          href={"about" + doc.url_path}
+          href={'about' + doc.url_path}
           onClick={toggleCmd}
           className={className}
         >
@@ -178,7 +178,7 @@ export default function Cmdk({
               width="16"
               height="16"
               className="cmdk-item-img"
-              src={"https://github.com/" + doc.handle.toString() + ".png"}
+              src={'https://github.com/' + doc.handle.toString() + '.png'}
               alt="Member"
             />
             <span>{doc.name}</span>
@@ -202,17 +202,17 @@ export default function Cmdk({
     }) => {
       const target = e.target
       const inputElements = Array.from(
-        document.querySelectorAll("input, textarea")
+        document.querySelectorAll('input, textarea'),
       )
       if (
-        (e.key === "/" && inputElements.includes(target) === false) ||
+        (e.key === '/' && inputElements.includes(target) === false) ||
         // (e.key === "/" && (e.metaKey || e.ctrlKey)) ||
         ((e.keyCode === 191 || e.keyCode === 75) && (e.metaKey || e.ctrlKey))
       ) {
         e.stopPropagation()
         // e.preventDefault()
         toggleCmd()
-      } else if (e.key === "Escape") {
+      } else if (e.key === 'Escape') {
         if (isOpen) {
           toggleCmd()
           setSearchResults(allDocuments as Document[])
@@ -223,16 +223,16 @@ export default function Cmdk({
 
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement
-      if (isOpen && target.closest(".cmd main") === null) {
+      if (isOpen && target.closest('.cmd main') === null) {
         toggleCmd()
       }
     }
 
-    document.addEventListener("keydown", handleSlashKey)
-    document.addEventListener("click", handleClickOutside)
+    document.addEventListener('keydown', handleSlashKey)
+    document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener("keydown", handleSlashKey)
-      document.removeEventListener("click", handleClickOutside)
+      document.removeEventListener('keydown', handleSlashKey)
+      document.removeEventListener('click', handleClickOutside)
     }
   }, [toggleCmd])
 
@@ -250,11 +250,11 @@ export default function Cmdk({
 
   useEffect(() => {
     const userAgent = window.navigator.userAgent
-    setIsWindows(userAgent.indexOf("Windows") !== -1)
+    setIsWindows(userAgent.indexOf('Windows') !== -1)
   }, [])
 
   return (
-    <div className={`cmd ${isOpen ? "open" : ""}`} role="dialog">
+    <div className={`cmd ${isOpen ? 'open' : ''}`} role="dialog">
       <main>
         <form>
           <label htmlFor="search">
@@ -269,8 +269,8 @@ export default function Cmdk({
             type="text"
             placeholder={
               isWindows
-                ? "/ — Search components & pages"
-                : "⌘K — Search components & pages"
+                ? '/ — Search components & pages'
+                : '⌘K — Search components & pages'
             }
             onChange={handleSearch}
           />
@@ -293,9 +293,9 @@ export default function Cmdk({
                     groups[doc.type] = [doc]
                   }
                   return groups
-                }, {})
+                }, {}),
               )
-                .filter(([type, docs]) => type !== "Post" && type !== "Member")
+                .filter(([type, docs]) => type !== 'Post' && type !== 'Member')
                 .map(([type, docs]) => (
                   <div key={type}>
                     <div className="category" tabIndex={-1}>
@@ -305,8 +305,8 @@ export default function Cmdk({
                       {docs
                         .filter(
                           (doc: any) =>
-                            type !== "Component" ||
-                            doc._id.endsWith("index.mdx")
+                            type !== 'Component' ||
+                            doc._id.endsWith('index.mdx'),
                         )
                         .map((doc: Document, index: number) => {
                           const isFocused = index === focusedIndex

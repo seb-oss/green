@@ -52,7 +52,7 @@ export class GdsMenu extends GdsElement implements ListboxKbNavigation {
       (unwrap(this.#slotRef.value).assignedElements() as GdsMenuItem[]).filter(
         (o) =>
           !o.hasAttribute('isplaceholder') &&
-          o.gdsElementName === 'gds-menu-item'
+          o.gdsElementName === 'gds-menu-item',
       ) || []
     )
   }

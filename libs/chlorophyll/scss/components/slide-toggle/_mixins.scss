@@ -38,7 +38,10 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
   background: $_track_color;
   text-align: left;
   vertical-align: sub;
-  transition: all $_track_transition_time, outline-offset 0s, outline-width 0s;
+  transition:
+    all $_track_transition_time,
+    outline-offset 0s,
+    outline-width 0s;
 
   .dark-mode & {
     border: 1px solid var(--sg-grey-200);
@@ -52,7 +55,9 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
     height: 100%;
     border-radius: 100%;
     aspect-ratio: 1;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.15),
+    box-shadow:
+      0 2px 8px 0 rgba(0, 0, 0, 0.15),
+      0 1px 2px 0 rgba(0, 0, 0, 0.15),
       0 1px 0 0 rgba(0, 0, 0, 0.06);
     transition: $_thumb_transition_time;
   }

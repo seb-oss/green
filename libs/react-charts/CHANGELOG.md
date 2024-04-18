@@ -4,58 +4,41 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 # [1.3.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.2.0...@sebgroup/green-react-charts@1.3.0) (2023-11-08)
 
-
 ### Bug Fixes
 
-* **react-charts:** trigger release ([4ff7884](https://github.com/sebgroup/green/commit/4ff7884cc1ec25231a28998fbc68dfd7945d4a82))
-
+- **react-charts:** trigger release ([4ff7884](https://github.com/sebgroup/green/commit/4ff7884cc1ec25231a28998fbc68dfd7945d4a82))
 
 ### Features
 
-* **react-charts:** updating dependencies ([#1103](https://github.com/sebgroup/green/issues/1103)) ([149dda0](https://github.com/sebgroup/green/commit/149dda090f3580cc67862b35c32022f0f2f20923))
-
-
+- **react-charts:** updating dependencies ([#1103](https://github.com/sebgroup/green/issues/1103)) ([149dda0](https://github.com/sebgroup/green/commit/149dda090f3580cc67862b35c32022f0f2f20923))
 
 # [1.2.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.1.0...@sebgroup/green-react-charts@1.2.0) (2023-10-10)
 
-
 ### Features
 
-* **charts:** custom colours ([#1043](https://github.com/sebgroup/green/issues/1043)) ([25f1061](https://github.com/sebgroup/green/commit/25f10619840060e86883995c71d2603d224cc196))
-
-
+- **charts:** custom colours ([#1043](https://github.com/sebgroup/green/issues/1043)) ([25f1061](https://github.com/sebgroup/green/commit/25f10619840060e86883995c71d2603d224cc196))
 
 # [1.1.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.1...@sebgroup/green-react-charts@1.1.0) (2023-04-03)
 
-
 ### Features
 
-* add option to set axis height manually and remove custom x-axis from `react-charts` ([#812](https://github.com/sebgroup/green/issues/812)) ([17ca0d5](https://github.com/sebgroup/green/commit/17ca0d544ceaf3bfa53e3cb663a5d3c384f9ea2f)), closes [#609](https://github.com/sebgroup/green/issues/609)
-
-
+- add option to set axis height manually and remove custom x-axis from `react-charts` ([#812](https://github.com/sebgroup/green/issues/812)) ([17ca0d5](https://github.com/sebgroup/green/commit/17ca0d544ceaf3bfa53e3cb663a5d3c384f9ea2f)), closes [#609](https://github.com/sebgroup/green/issues/609)
 
 ## [1.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@1.0.0...@sebgroup/green-react-charts@1.0.1) (2023-02-20)
 
-
 ### Bug Fixes
 
-* 🐛 fake fix to bump version ([16ea54c](https://github.com/sebgroup/green/commit/16ea54cc84fd45c8b17087c9e5abc628bbaaea59))
-
-
+- 🐛 fake fix to bump version ([16ea54c](https://github.com/sebgroup/green/commit/16ea54cc84fd45c8b17087c9e5abc628bbaaea59))
 
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@0.0.1...@sebgroup/green-react-charts@1.0.0) (2023-02-20)
 
-
 ### chore
 
-* 🤖 bumping react and angular charts version ([31c93e1](https://github.com/sebgroup/green/commit/31c93e18f37119ff033868538c963311ee50db44))
-
+- 🤖 bumping react and angular charts version ([31c93e1](https://github.com/sebgroup/green/commit/31c93e18f37119ff033868538c963311ee50db44))
 
 ### BREAKING CHANGES
 
-* 🧨 bumping to 1.0.0
-
-
+- 🧨 bumping to 1.0.0
 
 # [1.0.0](https://github.com/sebgroup/green/compare/@sebgroup/green-react-charts@0.0.1...@sebgroup/green-react-charts@1.0.0) (2023-02-17)
 

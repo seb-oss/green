@@ -1,6 +1,6 @@
-import ComponentList from "@/component-list/component-list"
-import Grid from "@/grid/grid"
-import Content from "&/content/content"
+import ComponentList from '@/component-list/component-list'
+import Grid from '@/grid/grid'
+import Content from '&/content/content'
 
 export default function Components() {
   return (

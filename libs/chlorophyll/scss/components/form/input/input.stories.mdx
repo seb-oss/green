@@ -7,7 +7,7 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   return `
     <div class="form-group">
       <label for="inputInvalid">${text}</label>
-      ${ hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
+      ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
       <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
       <span class="form-info">${validation ? validation : 'Neutral'}</span>
     </div>`
@@ -15,8 +15,8 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 
 <Meta
   title="Components/Form/Elements/Input"
-  parameters={{ 
-    componentIds: ['component-input']
+  parameters={{
+    componentIds: ['component-input'],
   }}
   argTypes={{
     validation: {
@@ -24,10 +24,10 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
       options: ['', 'is-valid', 'is-invalid'],
     },
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
     text: { control: 'text' },
-    formInfo: { control: 'text' }
+    formInfo: { control: 'text' },
   }}
 />
 
@@ -35,10 +35,11 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
   name="Input"
   args={{
     text: 'Input label',
-    formInfo: 'Lorem ipsum very long description of input and what should be entered',
-    enabled: true
+    formInfo:
+      'Lorem ipsum very long description of input and what should be entered',
+    enabled: true,
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>
@@ -48,7 +49,9 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 <Canvas>
   <div class="form-group">
     <label for="inputInvalid">Input label</label>
-    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <span class="form-info">
+      Lorem ipsum very long description of input and what should be entered
+    </span>
     <input id="inputInvalid" type="text" />
     <span class="form-info">Neutral</span>
   </div>
@@ -59,7 +62,9 @@ export const Template = ({ validation, enabled, text, formInfo }) => {
 <Canvas>
   <div class="form-group">
     <label for="inputSmall">Input label</label>
-    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
+    <span class="form-info">
+      Lorem ipsum very long description of input and what should be entered
+    </span>
     <input id="inputSmall" type="text" class="small" />
     <span class="form-info">Neutral</span>
   </div>

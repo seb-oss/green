@@ -11,7 +11,7 @@ import Button from '../form/button/button'
 import classNames from 'classnames'
 
 type ModalEventListener = (
-  event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null
+  event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null,
 ) => unknown
 
 export interface ModalProps {
@@ -219,7 +219,7 @@ export const Modal = ({
     {
       'backdrop--transparent': type === 'slideout',
     },
-    status
+    status,
   )
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {

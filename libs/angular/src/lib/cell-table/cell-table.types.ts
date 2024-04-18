@@ -21,7 +21,7 @@ export type TableHeaderListValueType =
 
 /** Table Header List Item Interface */
 export interface TableHeaderListItem<
-  T extends Record<string, unknown> = Record<string, unknown>
+  T extends Record<string, unknown> = Record<string, unknown>,
 > {
   /** The label displayed */
   label: string
@@ -42,7 +42,7 @@ export interface TableRow {
 
 /** The information on the currently selected sort: column name, type and asc/desc  */
 export interface SortInfo<
-  T extends Record<string, unknown> = { [k: string]: any }
+  T extends Record<string, unknown> = { [k: string]: any },
 > {
   /** column name */
   column: keyof T

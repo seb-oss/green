@@ -166,7 +166,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   constructor(
     @Inject(Injector) private injector: Injector,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
   ) {
     registerTransitionalStyles()
   }
@@ -241,7 +241,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
       )
 
     const displayValues = value.map(
-      (v) => this.optionByValue(v)?.[this.display]
+      (v) => this.optionByValue(v)?.[this.display],
     )
     return displayValues?.length > 2
       ? `${displayValues.length} ${this.texts?.selected} `

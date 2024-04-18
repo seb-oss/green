@@ -18,7 +18,7 @@ describe('List', () => {
     render(
       <ListItem listType="table" tableRowData={tableListItem}>
         First
-      </ListItem>
+      </ListItem>,
     )
 
     expect(screen.getByText('description')).toBeTruthy()

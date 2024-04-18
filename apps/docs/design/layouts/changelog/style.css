@@ -98,7 +98,7 @@
           list-style-position: inside;
 
           &::before {
-            content: "•";
+            content: '•';
             margin-right: 1ch;
             opacity: 0.2;
           }

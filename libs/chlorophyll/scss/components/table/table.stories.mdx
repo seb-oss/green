@@ -2,8 +2,8 @@ import { Meta, Canvas } from '@storybook/addon-docs'
 
 <Meta
   title="Components/Table"
-  parameters={{ 
-    componentIds: ['component-table']
+  parameters={{
+    componentIds: ['component-table'],
   }}
 />
 
@@ -13,7 +13,8 @@ import { Meta, Canvas } from '@storybook/addon-docs'
   <main>
     <h3>Missing JavaScript!</h3>
     <p>
-      Please note that the examples below just represent the html markup and some features like sorting won't work without JavaScript.
+      Please note that the examples below just represent the html markup and
+      some features like sorting won't work without JavaScript.
     </p>
   </main>
 </div>
@@ -25,32 +26,32 @@ A simple table, just add class `table` to table element to get correct styling.
 <Canvas>
   <table class="table">
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Superhero</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Superhero</th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Peter</td>
-      <td>Parker</td>
-      <td>Spider-Man</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>John</td>
-      <td>Wayne</td>
-      <td>Batman</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Bruce</td>
-      <td>Banner</td>
-      <td>Hulk</td>
-    </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td>Peter</td>
+        <td>Parker</td>
+        <td>Spider-Man</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>John</td>
+        <td>Wayne</td>
+        <td>Batman</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Bruce</td>
+        <td>Banner</td>
+        <td>Hulk</td>
+      </tr>
     </tbody>
   </table>
 </Canvas>
@@ -62,9 +63,7 @@ The example below shows the markup needed to get a table with sorting and checkb
 <Canvas>
   <div class="overflow-auto">
     <table class="table text-nowrap">
-      <caption>
-        Sortable table example with un-styled caption
-      </caption>
+      <caption>Sortable table example with un-styled caption</caption>
       <thead>
         <tr>
           <th scope="col">
@@ -205,8 +204,8 @@ The example below shows the markup needed to get a table with sorting and checkb
 
 The following examples illustrate two ways to handle table presentation on small screens using pure CSS.
 
-<style>{
-  `
+<style>
+  {`
   @media (max-width: 576px) {
     .table-mobile tbody button.size-sm {
        font-size: 1rem;
@@ -216,7 +215,6 @@ The following examples illustrate two ways to handle table presentation on small
 `}
 </style>
 
-
 ### Turn table into list
 
 Add `table-mobile` class to table and `data-label` attributes with column header to each table cell to display the table as a list on small screens. The table header scrolls horizontally and becomes sticky on small screens too (not visible in here in storybook due to the nature of how storybook renders these examples).
@@ -224,29 +222,37 @@ Add `table-mobile` class to table and `data-label` attributes with column header
 <Canvas>
   <table class="table-mobile table">
     <thead>
-    <tr>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Gender</th>
-      <th scope="col">Favorite Food</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Favorite Food</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td data-label="First Name">Peter</td>
-      <td data-label="Last Name">Parker</td>
-      <td data-label="Gender">👨</td>
-      <td data-label="Favorite Food">Pasta</td>
-      <td class="py-sm-0 align-middle"><button type="button" class="size-sm">Action</button></td>
-    </tr>
-    <tr>
-      <td data-label="First Name">Mary Jane</td>
-      <td data-label="Last Name">Watson</td>
-      <td data-label="Gender">👩</td>
-      <td data-label="Favorite Food">Pizza</td>
-      <td class="py-sm-0 align-middle"><button type="button" class="size-sm">Action</button></td>
-    </tr>
+      <tr>
+        <td data-label="First Name">Peter</td>
+        <td data-label="Last Name">Parker</td>
+        <td data-label="Gender">👨</td>
+        <td data-label="Favorite Food">Pasta</td>
+        <td class="py-sm-0 align-middle">
+          <button type="button" class="size-sm">
+            Action
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="First Name">Mary Jane</td>
+        <td data-label="Last Name">Watson</td>
+        <td data-label="Gender">👩</td>
+        <td data-label="Favorite Food">Pizza</td>
+        <td class="py-sm-0 align-middle">
+          <button type="button" class="size-sm">
+            Action
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
 </Canvas>
@@ -259,38 +265,46 @@ Wrap the table in a div with the class `overflow-auto` to add scroll when table 
   <div class="overflow-auto">
     <table class="table text-nowrap">
       <thead>
-      <tr>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Favorite Food</th>
-        <th scope="col">Hair color</th>
-        <th scope="col">Birthday</th>
-        <th scope="col">Zodiac sign</th>
-        <th></th>
-      </tr>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Favorite Food</th>
+          <th scope="col">Hair color</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">Zodiac sign</th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Peter</td>
-        <td>Parker</td>
-        <td>👨</td>
-        <td>Pasta</td>
-        <td>Brown</td>
-        <td>1974-10-23</td>
-        <td>Scorpio</td>
-        <td class="py-sm-0 align-middle"><button type="button" class="size-sm">Action</button></td>
-      </tr>
-      <tr>
-        <td>Mary Jane</td>
-        <td>Watson</td>
-        <td>👩</td>
-        <td>Pizza</td>
-        <td>Red</td>
-        <td>1980-03-21</td>
-        <td>Aries</td>
-        <td class="py-sm-0 align-middle"><button type="button" class="size-sm">Action</button></td>
-      </tr>
+        <tr>
+          <td>Peter</td>
+          <td>Parker</td>
+          <td>👨</td>
+          <td>Pasta</td>
+          <td>Brown</td>
+          <td>1974-10-23</td>
+          <td>Scorpio</td>
+          <td class="py-sm-0 align-middle">
+            <button type="button" class="size-sm">
+              Action
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Mary Jane</td>
+          <td>Watson</td>
+          <td>👩</td>
+          <td>Pizza</td>
+          <td>Red</td>
+          <td>1980-03-21</td>
+          <td>Aries</td>
+          <td class="py-sm-0 align-middle">
+            <button type="button" class="size-sm">
+              Action
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

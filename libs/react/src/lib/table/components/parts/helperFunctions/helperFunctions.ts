@@ -15,7 +15,7 @@ export function sumCols(
   colsLength: number,
   useSelection?: boolean,
   useShowActionColumn?: boolean,
-  useGroupBy?: boolean
+  useGroupBy?: boolean,
 ): number {
   let sum = colsLength
 
@@ -43,7 +43,7 @@ export function sumCols(
 export function sortArray<T>(
   items: Array<T> = [],
   columnName: keyof T,
-  sortDirection: SortDirection
+  sortDirection: SortDirection,
 ): Array<T> {
   const languages: Readonly<Array<string>> = window.navigator?.languages || [
     'sw',
@@ -61,7 +61,7 @@ export function sortArray<T>(
           result = String(firstItem[columnName]).localeCompare(
             String(secondItem[columnName]),
             languages as Array<string>,
-            { sensitivity: 'base', ignorePunctuation: true }
+            { sensitivity: 'base', ignorePunctuation: true },
           )
         } else {
           result =
@@ -76,7 +76,7 @@ export function sortArray<T>(
           result = String(secondItem[columnName]).localeCompare(
             String(firstItem[columnName]),
             languages as Array<string>,
-            { sensitivity: 'base', ignorePunctuation: true }
+            { sensitivity: 'base', ignorePunctuation: true },
           )
         } else {
           result =
@@ -85,7 +85,7 @@ export function sortArray<T>(
         }
       }
       return result
-    }
+    },
   )
   return sortedItems
 }
@@ -97,7 +97,7 @@ export function sortArray<T>(
  */
 export function filterArrayByColumns<T>(
   data: Array<T>,
-  filterColumns: Array<FilterColumn<T>>
+  filterColumns: Array<FilterColumn<T>>,
 ): Array<T> {
   return data.filter((row: T) => {
     return (
@@ -121,7 +121,7 @@ export function filterArrayByColumns<T>(
 export function searchTextByColumns<T>(
   data: Array<T>,
   keyword: string,
-  searchFields: Array<keyof T>
+  searchFields: Array<keyof T>,
 ): Array<T> {
   return [...data].filter((row: T) => {
     const searchText = String(keyword)
@@ -150,7 +150,7 @@ export function searchTextByColumns<T>(
 export function paginate<T = any>(
   data: Array<T>,
   offset: number,
-  currentPage: number
+  currentPage: number,
 ) {
   if (offset && data?.length > 0) {
     const start: number = currentPage * offset
@@ -179,7 +179,7 @@ export function onRowSelect<T = any>(
   event: React.ChangeEvent<HTMLInputElement>,
   data: Array<GenericTableRow<T>>,
   rowUniqueAccessor: keyof GenericTableRow<T>,
-  rowId: string
+  rowId: string,
 ): RowSelectOutput<T> {
   const target: HTMLInputElement = event.target
   let isAllSelected: boolean | undefined = true
@@ -192,7 +192,7 @@ export function onRowSelect<T = any>(
       isAllSelected = isAllSelected && row.checked
       isIndeterminate = isIndeterminate || row.checked
       return row
-    }
+    },
   )
   return {
     data: newData,
