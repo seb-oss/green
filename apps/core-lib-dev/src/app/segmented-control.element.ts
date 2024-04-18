@@ -1,7 +1,7 @@
-import { LitElement, css } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
 import { html } from '@sebgroup/green-core'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { css, LitElement } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
 
 export class SegmentedControl extends LitElement {
   static styles = css`
@@ -45,7 +45,6 @@ export class SegmentedControl extends LitElement {
             )}
           </gds-segmented-control>
         </div>
-
         <gds-grid columns="3" gap="l" row-gap="l" auto-columns="300">
           ${repeat(
             this.#getCards(),

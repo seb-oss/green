@@ -1,5 +1,5 @@
 import { css, LitElement } from 'lit'
-//import './chlorophyll.scss'
+import './chlorophyll.scss'
 import './simple-values.element'
 import './complex-values.element'
 import './custom-localization.element'
@@ -24,7 +24,7 @@ export class AppElement extends LitElement {
 
   render() {
     return html`
-      <gds-theme>
+      <gds-theme color-scheme="dark">
         <div class="wrapper">
           <h1 class="mb-5" style="color: var(--gds-test-color)">
             Green Core test app
