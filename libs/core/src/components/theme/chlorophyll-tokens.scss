@@ -6,7 +6,7 @@
 
 @use '../../../../chlorophyll/scss/components/icon';
 
-:host {
+:host([color-scheme='light']) {
   @include shape.add-tokens;
   @include colors.add-color-tokens;
   @include components.add-checkbox-tokens;
@@ -15,14 +15,15 @@
 }
 
 /* force dark mode to whole app or part of it by adding the class ".dark-mode" */
-:host([mode='dark']) {
+:host([color-scheme='dark']) {
   @include tokens.dark-mode;
   @include theme_mixins.dark-theme;
 }
 
 /* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */
 @media (prefers-color-scheme: dark) {
-  :host([mode='auto']) {
+  :host,
+  :host([color-scheme='auto']) {
     @include tokens.dark-mode;
     @include theme_mixins.dark-theme;
   }

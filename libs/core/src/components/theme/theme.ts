@@ -23,8 +23,8 @@ export class GdsTheme extends GdsElement {
   /**
    * The theme mode. Can be `light`, `dark`, or `auto`.
    */
-  @property({ reflect: true })
-  mode: 'light' | 'dark' | 'auto' = 'light'
+  @property({ reflect: true, attribute: 'color-scheme'})
+  colorScheme: 'light' | 'dark' | 'auto' = 'light'
 
   connectedCallback(): void {
     super.connectedCallback()
