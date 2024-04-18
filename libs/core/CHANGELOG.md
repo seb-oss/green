@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.15.0
+
+### Minor Changes
+
+- 115f1e0: **Transitional Styles:** Add chlorophyll tokens to `:host`
+
 ## 1.14.1
 
 ### Patch Changes
