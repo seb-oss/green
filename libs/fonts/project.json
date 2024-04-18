@@ -1,0 +1,24 @@
+{
+  "name": "fonts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fonts/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/fonts/src",
+        "commands": [
+          {
+            "command": "cp -R libs/fonts/src/fonts dist/libs/fonts/src"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}
