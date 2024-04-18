@@ -9,7 +9,7 @@ const { createContentlayerPlugin } = require('next-contentlayer')
  **/
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: true,
   images: {
     unoptimized: true,
     domains: [
