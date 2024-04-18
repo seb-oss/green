@@ -14,7 +14,7 @@ import {
 import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './popover.styles'
 

@@ -1,7 +1,7 @@
 import { html } from 'lit'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import style from './menu-heading.styles'
 

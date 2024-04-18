@@ -1,4 +1,4 @@
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
 import styles from './calendar.trans.styles.scss'
 
 export function register() {

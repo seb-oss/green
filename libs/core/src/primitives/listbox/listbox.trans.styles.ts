@@ -1,4 +1,4 @@
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
 import listboxStyles from './listbox.trans.styles.scss'
 import optionStyles from './option.trans.styles.scss'
 import menuHeadingStyles from '../menu/menu-heading.trans.styles.scss'
