@@ -402,7 +402,7 @@ const config: StyleDictionary.Config = {
             if (token.version !== '2016') return false
 
             const isColour = token.path?.some((item) =>
-              ['color', 'colour'].includes(item)
+              ['color', 'colour'].includes(item),
             )
 
             if (isColour) return true

@@ -26,7 +26,7 @@ export default {
 } as Meta<NggPaginationComponent>
 
 const Template: Story<NggPaginationComponent> = (
-  args: NggPaginationComponent
+  args: NggPaginationComponent,
 ) => {
   return {
     template: `

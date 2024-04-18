@@ -1,6 +1,6 @@
 # Green Tokens
 
-Design tokens for **Green Design System**. The design system at Skandinaviska Enskilda Banken (SEB). 
+Design tokens for **Green Design System**. The design system at Skandinaviska Enskilda Banken (SEB).
 
 ## How it works
 
@@ -11,6 +11,7 @@ All of the design tokens and assets are in this repository. Updates to this repo
 Tokens can be transformed with [Style Dictionary](https://amzn.github.io/style-dictionary/) so they can be used in your preferred platform.
 
 To get started, run
+
 ```
 $ yarn install
 $ yarn run build
@@ -20,4 +21,4 @@ The yarn build task is what performs the style dictionary build steps to generat
 
 ## Support
 
-If you need help with tokens or anything regarding the *Green Design System* reach out in SEB's internal Teams channel called *Green Design System* or send an email to [vilhelm.sjolander@seb.se](mailto:vilhelm.sjolander@seb.se)
+If you need help with tokens or anything regarding the _Green Design System_ reach out in SEB's internal Teams channel called _Green Design System_ or send an email to [vilhelm.sjolander@seb.se](mailto:vilhelm.sjolander@seb.se)

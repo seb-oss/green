@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react"
-import Pattern from "@/pattern/pattern"
+import React, { ReactNode } from 'react'
+import Pattern from '@/pattern/pattern'
 
-import "./style.css"
+import './style.css'
 
 type DontProps = {
   children: ReactNode

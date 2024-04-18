@@ -1,7 +1,10 @@
 @font-face {
   font-family: 'SEBSansSerif-Regular';
-  src: url('//esm.sh/@sebgroup/fonts@1.1.0/fonts/SEBSansSerif-Regular.woff2') format('woff2'),
-       url('//esm.sh/@sebgroup/fonts@1.1.0/fonts/SEBSansSerif-Regular.woff') format('woff');
+  src:
+    url('//esm.sh/@sebgroup/fonts@1.1.0/fonts/SEBSansSerif-Regular.woff2')
+      format('woff2'),
+    url('//esm.sh/@sebgroup/fonts@1.1.0/fonts/SEBSansSerif-Regular.woff')
+      format('woff');
   font-weight: 300;
   font-style: normal;
 }
@@ -50,11 +53,13 @@ body {
       var(--cell-sm-cl) 1px
     );
   background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
-  background-size: var(--cell-lg) 100%, 100% var(--cell-lg), var(--cell-sm) 100%,
+  background-size:
+    var(--cell-lg) 100%,
+    100% var(--cell-lg),
+    var(--cell-sm) 100%,
     100% var(--cell-sm);
   background-position: center;
   border: 1px solid color-mix(in srgb, var(--color-black), transparent 94%);
-
 
   display: grid;
   place-content: center;

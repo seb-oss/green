@@ -8,7 +8,7 @@ const routes: Routes = [
     data: { name: 'Segmented control' },
     loadChildren: () =>
       import('./segmented-control/segmented-control.module').then(
-        (m) => m.SegmentedControlModule
+        (m) => m.SegmentedControlModule,
       ),
   },
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
     data: { name: 'Charts' },
     loadChildren: () =>
       import('./green-charts/green-charts.module').then(
-        (m) => m.GreenChartsModule
+        (m) => m.GreenChartsModule,
       ),
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     data: { name: 'Context Menu' },
     loadChildren: () =>
       import('./context-menu/context-menu.module').then(
-        (m) => m.ContextMenuModule
+        (m) => m.ContextMenuModule,
       ),
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
     data: { name: 'Sortable list' },
     loadChildren: () =>
       import('./sortable-list/sortable-list.module').then(
-        (m) => m.SortableListModule
+        (m) => m.SortableListModule,
       ),
   },
   { path: '**', redirectTo: 'buttons' },

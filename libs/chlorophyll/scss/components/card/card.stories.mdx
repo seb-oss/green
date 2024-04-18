@@ -1,20 +1,31 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 
-export const Template = ({ heading,closeButton, body, button, primaryButton, link }) => `
+export const Template = ({
+  heading,
+  closeButton,
+  body,
+  button,
+  primaryButton,
+  link,
+}) => `
   <section class="card">
-    ${heading || closeButton ?
-    `<header>
+    ${
+      heading || closeButton
+        ? `<header>
       <h3>${heading}</h3>
       ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
-     </header>` : ''
+     </header>`
+        : ''
     }
     <p>${body}</p>
-    ${button || primaryButton || link  ?
-    `<footer>
+    ${
+      button || primaryButton || link
+        ? `<footer>
       ${link ? `<a href="#">${link}</a>` : ''}
       ${button ? `<button type="button">${button}</button>` : ''}
       ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
-     </footer>` : ''
+     </footer>`
+        : ''
     }
   </section>
 `
@@ -22,7 +33,7 @@ export const Template = ({ heading,closeButton, body, button, primaryButton, lin
 <Meta
   title="Components/Card"
   parameters={{
-    componentIds: ['component-card']
+    componentIds: ['component-card'],
   }}
   argTypes={{
     heading: { control: 'text' },
@@ -71,7 +82,6 @@ To add contrast between its background and the surface it appears on, the cards 
   </Story>
 </Canvas>
 
-
 ## Element structure
 
 Cards can contain the following elements:
@@ -86,18 +96,23 @@ Content should be placed between optional header and footer.
 If the card has actions (like buttons) or contain links, they should be placed inside a `<footer>...</footer>`.
 
 <Canvas>
-    <section class="card">
-      <header>
-        <h3>Heading</h3>
-        <button class="close"><i></i><span class="sr-only">Close</span></button>
-      </header>
-      <p>
-        Card content placed here.
-      </p>
-      <footer>
-        <a href="#" class="button link">Link</a>
-        <button type="button">Default button</button>
-        <button type="button" class="primary">Primary button</button>
-      </footer>
-    </section>
+  <section class="card">
+    <header>
+      <h3>Heading</h3>
+      <button class="close">
+        <i></i>
+        <span class="sr-only">Close</span>
+      </button>
+    </header>
+    <p>Card content placed here.</p>
+    <footer>
+      <a href="#" class="button link">
+        Link
+      </a>
+      <button type="button">Default button</button>
+      <button type="button" class="primary">
+        Primary button
+      </button>
+    </footer>
+  </section>
 </Canvas>

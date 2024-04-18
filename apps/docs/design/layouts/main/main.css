@@ -3,10 +3,10 @@
     .layout-main {
       display: grid;
       grid-template-areas:
-        "alert alert alert"
-        "header header header"
-        "article article article"
-        "footer footer footer";
+        'alert alert alert'
+        'header header header'
+        'article article article'
+        'footer footer footer';
 
       grid-template-columns: auto 1fr auto;
       grid-template-rows: max-content;

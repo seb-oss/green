@@ -1,12 +1,12 @@
-import type { Metadata } from "next"
-import Image from "next/image"
-import Grid from "@/grid/grid"
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Grid from '@/grid/grid'
 
-import "./style.css"
+import './style.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://seb.io/demo/enkla-lanet"),
-  title: "Enkla Lanet — Green Design System",
+  metadataBase: new URL('https://seb.io/demo/enkla-lanet'),
+  title: 'Enkla Lanet — Green Design System',
 }
 
 export default function EnklaLanet() {

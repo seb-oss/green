@@ -23,7 +23,7 @@ export default {
 } as Meta<NggInPageWizardStepCardComponent>
 
 const Template: Story<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent
+  args: NggInPageWizardStepCardComponent,
 ) => {
   const noop = () => {
     return
@@ -73,7 +73,7 @@ DisableNext.args = {
 }
 
 const TemplateMultiple: Story<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent
+  args: NggInPageWizardStepCardComponent,
 ) => {
   const noop = () => {
     return

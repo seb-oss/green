@@ -37,7 +37,7 @@ aside.toc {
         align-items: center;
         justify-content: space-between;
 
-        a[data-level="2"] {
+        a[data-level='2'] {
           margin: 0;
         }
 
@@ -74,17 +74,17 @@ aside.toc {
         text-decoration: underline;
       }
 
-      &[data-level="1"] {
+      &[data-level='1'] {
         margin-bottom: 1ex;
       }
 
-      &[data-level="2"] {
+      &[data-level='2'] {
         margin-top: 2ex;
         margin-bottom: 1ex;
         gap: 1ch;
 
         &::before {
-          content: " ";
+          content: ' ';
           display: flex;
           width: 6px;
           height: 6px;
@@ -93,8 +93,8 @@ aside.toc {
         }
       }
 
-      &[data-level="3"],
-      &[data-level="4"] {
+      &[data-level='3'],
+      &[data-level='4'] {
         margin-left: 2.5px;
         padding-left: var(--_inline-padding);
         border-left: 1px solid color-mix(in srgb, currentColor, transparent 80%);
@@ -104,7 +104,7 @@ aside.toc {
       &.active {
         color: var(--gds-sys-color-content-content);
 
-        &:not([data-level="2"]) {
+        &:not([data-level='2']) {
           border-left-color: var(--gds-sys-color-content-content);
         }
       }

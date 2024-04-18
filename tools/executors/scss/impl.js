@@ -72,8 +72,8 @@ var __generator =
                 op[0] & 2
                   ? y['return']
                   : op[0]
-                  ? y['throw'] || ((t = y['return']) && t.call(y), 0)
-                  : y.next) &&
+                    ? y['throw'] || ((t = y['return']) && t.call(y), 0)
+                    : y.next) &&
               !(t = t.call(y, op[1])).done)
           )
             return t
@@ -184,7 +184,7 @@ function multipleExecutor(options, context) {
             (0, devkit_1.runExecutor)(
               { project: context.projectName, target: 'compile-scss' },
               {},
-              context
+              context,
             ),
           ]
         case 1:
@@ -196,7 +196,7 @@ function multipleExecutor(options, context) {
               return copyfiles(
                 ['libs/' + context.projectName + '/*.md', options.outputPath],
                 { up: 2 },
-                resolve
+                resolve,
               )
             })
               ['catch'](function (_) {
@@ -218,7 +218,7 @@ function multipleExecutor(options, context) {
               return copyfiles(
                 [options.packageJson, options.outputPath],
                 { up: 2 },
-                resolve
+                resolve,
               )
             })
               ['catch'](function (_) {
@@ -243,7 +243,7 @@ function multipleExecutor(options, context) {
                   '' + options.outputPath,
                 ],
                 { up: 2 },
-                resolve
+                resolve,
               )
             })
               ['catch'](function (_) {

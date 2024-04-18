@@ -13,7 +13,11 @@ describe('Badge', () => {
     expect(document.body.querySelector('.success')).not.toBeNull()
   })
   it('Should render close button', () => {
-    render(<Badge badgeType="success" isCloseable>title</Badge>)
+    render(
+      <Badge badgeType="success" isCloseable>
+        title
+      </Badge>,
+    )
 
     expect(screen.getByRole('button').classList.contains('close')).toBe(true)
   })

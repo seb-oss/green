@@ -30,7 +30,7 @@ const { setLocale } = gdsInitLocalization({
 } as any)
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join('')
+  strs.map((s, i) => s + values[i]).join(''),
 )
 
 export class AppElement extends HTMLElement {

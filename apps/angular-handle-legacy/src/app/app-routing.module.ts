@@ -8,7 +8,7 @@ const routes: Routes = [
     data: { name: 'Charts' },
     loadChildren: () =>
       import('./green-charts/green-charts.module').then(
-        (m) => m.GreenChartsModule
+        (m) => m.GreenChartsModule,
       ),
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
 ]
 
 const routerOptions: ExtraOptions = {
-    anchorScrolling: 'enabled'
+  anchorScrolling: 'enabled',
 }
 
 @NgModule({

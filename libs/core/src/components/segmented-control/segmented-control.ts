@@ -143,7 +143,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             aria-label=${msg('Scroll right')}
           >
             <gds-icon name="chevron-left"></gds-icon>
-          </button>`
+          </button>`,
       )}
       <div
         id="track"
@@ -179,7 +179,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             aria-label=${msg('Scroll right')}
           >
             <gds-icon name="chevron-right"></gds-icon>
-          </button>`
+          </button>`,
       )}`
   }
 
@@ -216,7 +216,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #calcVisibleAfterDrag = () => {
     this.#firstVisibleIndex = Math.round(
-      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth
+      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth,
     )
     this.#calcLayout()
   }
@@ -249,7 +249,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       const availableWidthIncBtns = this.offsetWidth - BTN_SIZE[this.size] * 2
 
       const maxVisibleSegments = Math.floor(
-        availableWidthIncBtns / this.segMinWidth
+        availableWidthIncBtns / this.segMinWidth,
       )
       const segmentWidth =
         (availableWidth -
@@ -314,9 +314,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #applySegmentsTransform = () => {
     window.requestAnimationFrame(() => {
-      this._elSegments.style.transform = `translateX(${
-        this.#segmentsContainerLeft
-      }px)`
+      this._elSegments.style.transform = `translateX(${this.#segmentsContainerLeft}px)`
     })
   }
 
@@ -363,7 +361,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #handleSegmentClick = (event: Event) => {
     const selectedSegment = this.segments.find(
-      (s) => s === event.target || s.contains(event.target as Node)
+      (s) => s === event.target || s.contains(event.target as Node),
     )
     if (selectedSegment) {
       this.segments.forEach((s) => (s.selected = false))
@@ -378,7 +376,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
           detail: { segment: selectedSegment },
           bubbles: true,
           composed: true,
-        })
+        }),
       )
     }
   }

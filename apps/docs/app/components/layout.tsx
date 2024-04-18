@@ -1,13 +1,13 @@
-import type { Metadata } from "next"
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://seb.io/components"),
-  title: "Components — Green",
+  metadataBase: new URL('https://seb.io/components'),
+  title: 'Components — Green',
   alternates: {
-    canonical: "/components",
+    canonical: '/components',
   },
   openGraph: {
-    images: "/og?title=Components",
+    images: '/og?title=Components',
   },
 }
 

@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 
 export default function CustomImage({
   alt,
@@ -16,7 +16,7 @@ export default function CustomImage({
 } & React.ImgHTMLAttributes<HTMLImageElement>) {
   const { theme } = useTheme()
   const [isMounted, setIsMounted] = useState(false)
-  const isDarkMode = theme === "dark"
+  const isDarkMode = theme === 'dark'
 
   useEffect(() => {
     setIsMounted(true)

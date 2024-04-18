@@ -17,7 +17,7 @@ export const urlFromFilePath = (doc: DocumentGen): string => {
 
 export const getLastEditedDate = async (doc: DocumentGen): Promise<Date> => {
   const stats = await fs.stat(
-    path.join(contentDirPath, doc._raw.sourceFilePath)
+    path.join(contentDirPath, doc._raw.sourceFilePath),
   )
   return stats.mtime
 }

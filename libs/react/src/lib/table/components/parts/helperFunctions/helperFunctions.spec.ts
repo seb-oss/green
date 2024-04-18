@@ -124,7 +124,7 @@ describe('Table helper functions:', () => {
     testCases.map((item: SortArrayTestCase) => {
       it(item.statement, () => {
         expect(sortArray(testData, item.sortKey, item.sortDirection)).toEqual(
-          item.result
+          item.result,
         )
       })
     })
@@ -149,7 +149,7 @@ describe('Table helper functions:', () => {
     testCases.map((item: FilterDataByColumnTestCase) => {
       it(item.statement, () => {
         expect(filterArrayByColumns(testData, item.filterColumns)).toEqual(
-          item.result
+          item.result,
         )
       })
     })
@@ -197,8 +197,8 @@ describe('Table helper functions:', () => {
           searchTextByColumns(
             testData,
             item.keyword as string,
-            item.fields as any
-          )
+            item.fields as any,
+          ),
         ).toEqual(item.result)
       })
     })
@@ -241,8 +241,8 @@ describe('Table helper functions:', () => {
           paginate(
             item.data as any,
             item.offset as any,
-            item.currentPage as any
-          )
+            item.currentPage as any,
+          ),
         ).toEqual(item.result)
       })
     })
@@ -302,8 +302,8 @@ describe('Table helper functions:', () => {
             item.event,
             item.data as any,
             item.rowUniqueAccessor,
-            item.rowId
-          )
+            item.rowId,
+          ),
         ).toEqual(item.result)
       })
     })

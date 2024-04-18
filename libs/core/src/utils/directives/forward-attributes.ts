@@ -7,7 +7,7 @@ class ForwardAttributesDirective extends Directive {
     super(partInfo)
     if (partInfo.type !== PartType.ELEMENT) {
       throw new Error(
-        'The `forwardAttributes` directive must be used in element bindings'
+        'The `forwardAttributes` directive must be used in element bindings',
       )
     }
   }

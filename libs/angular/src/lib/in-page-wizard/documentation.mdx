@@ -67,11 +67,14 @@ Usage
   [disableNext]="!!disableNext"
   (handleEditClick)="noop()"
   (handleNextClick)="isCompleted = true;"
-  >
+>
   <div *ngIf="!isCompleted">
     <label for="textInput">Input label</label>
-    <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
-    <input id="textInput" type="text"/>
+    <span class="form-info"
+      >Lorem ipsum very long description of input and what should be
+      entered</span
+    >
+    <input id="textInput" type="text" />
   </div>
   <div *ngIf="!!isCompleted">
     <p class="mb-5">Input after completed</p>

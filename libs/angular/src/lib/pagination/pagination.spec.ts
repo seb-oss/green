@@ -99,7 +99,7 @@ describe('Pagination', () => {
       })
       fireEvent.click(screen.getByLabelText('Next page'))
       expect(
-        screen.getByRole('button', { current: 'page' })?.textContent?.trim()
+        screen.getByRole('button', { current: 'page' })?.textContent?.trim(),
       ).toBe('2')
     })
 
@@ -109,7 +109,7 @@ describe('Pagination', () => {
       })
       fireEvent.click(screen.getByLabelText('Last page'))
       expect(
-        screen.getByRole('button', { current: 'page' })?.textContent?.trim()
+        screen.getByRole('button', { current: 'page' })?.textContent?.trim(),
       ).toBe('10')
     })
 
@@ -119,7 +119,7 @@ describe('Pagination', () => {
       })
       fireEvent.click(screen.getByLabelText('Previous page'))
       expect(
-        screen.getByRole('button', { current: 'page' })?.textContent?.trim()
+        screen.getByRole('button', { current: 'page' })?.textContent?.trim(),
       ).toBe('9')
     })
 
@@ -129,7 +129,7 @@ describe('Pagination', () => {
       })
       fireEvent.click(screen.getByLabelText('First page'))
       expect(
-        screen.getByRole('button', { current: 'page' })?.textContent?.trim()
+        screen.getByRole('button', { current: 'page' })?.textContent?.trim(),
       ).toBe('1')
     })
 
@@ -139,7 +139,7 @@ describe('Pagination', () => {
       })
       fireEvent.click(screen.getByLabelText('Page 5'))
       expect(
-        screen.getByRole('button', { current: 'page' })?.textContent?.trim()
+        screen.getByRole('button', { current: 'page' })?.textContent?.trim(),
       ).toBe('5')
     })
   })

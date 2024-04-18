@@ -96,10 +96,10 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
   constructor(
     private ref: ElementRef<HTMLElement>,
-    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory
+    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory,
   ) {
     this.configurableFocusTrap = this.configurableFocusTrapFactory.create(
-      this.ref.nativeElement
+      this.ref.nativeElement,
     )
   }
 

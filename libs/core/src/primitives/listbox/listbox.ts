@@ -83,7 +83,7 @@ export class GdsListbox
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
         (o) =>
-          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
+          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option',
       ) || []
     )
   }
@@ -164,7 +164,7 @@ export class GdsListbox
       new CustomEvent('change', {
         bubbles: false,
         composed: false,
-      })
+      }),
     )
   }
 }

@@ -24,11 +24,11 @@ const TableHeaderCell = React.forwardRef(
       children,
       ...props
     }: TableHeaderCellProps,
-    ref: React.ForwardedRef<HTMLTableCellElement>
+    ref: React.ForwardedRef<HTMLTableCellElement>,
   ) => {
     const tableContext: TableContextType = useTableContext()
     const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
-      null
+      null,
     )
     const [sortOrder, setSortOrder] = React.useState<
       SortDirection | null | undefined
@@ -40,7 +40,7 @@ const TableHeaderCell = React.forwardRef(
      * @param oldSortDirection current sort direction
      */
     const getSortDirection = (
-      oldSortDirection: SortDirection
+      oldSortDirection: SortDirection,
     ): SortDirection => {
       return oldSortDirection === SortDirection.ASC
         ? SortDirection.DESC
@@ -94,7 +94,7 @@ const TableHeaderCell = React.forwardRef(
       setSortOrder(
         sortable && sortedColumn?.accessor === accessor
           ? sortedColumn?.sortDirection
-          : null
+          : null,
       )
     }, [sortable, sortedColumn])
 
@@ -113,7 +113,7 @@ const TableHeaderCell = React.forwardRef(
         )}
       </th>
     )
-  }
+  },
 )
 
 TableHeaderCell.displayName = 'TableHeaderCell'

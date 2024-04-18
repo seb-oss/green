@@ -53,10 +53,10 @@ export function Slider({
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
   const [sliderValue, setSliderValue] = React.useState<number | undefined>(
-    value ?? defaultValue
+    value ?? defaultValue,
   )
   const [inputFieldValue, setInputFieldValue] = React.useState<string>(
-    sliderValue + ''
+    sliderValue + '',
   )
 
   React.useLayoutEffect(() => {

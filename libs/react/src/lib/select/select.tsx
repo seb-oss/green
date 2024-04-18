@@ -44,7 +44,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       required,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [uuid] = useState(id)
 
@@ -83,7 +83,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </div>
       </FormItem>
     )
-  }
+  },
 )
 
 type OptionProps = React.DetailedHTMLProps<

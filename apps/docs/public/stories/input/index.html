@@ -1,34 +1,36 @@
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="./style.css">
-  <script>
-    globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true
-  </script>
-  <script type="module">
-    import { GdsButton} from "./green-core.js";
-  </script>
-</head>
-<body>
-  <gds-input
-    name="my-text"
-    type="email"
-    label="Label goes here"
-    supporting-text="Supporting text goes here"
-    clearable
-    maxlength="50"
-    required
-  >
-    <gds-icon name="mail" slot="lead"></gds-icon>
-    <gds-badge slot="trail" variant="surface">kr</gds-badge>
-    <span slot="extended-supporting-text">
-      Extended supporting text goes here.
-      <a href="#">Can contain links</a>
-    </span>
-  </gds-input>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script>
+      globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true
+    </script>
+    <script type="module">
+      import { GdsButton } from './green-core.js'
+    </script>
+  </head>
+  <body>
+    <gds-input
+      name="my-text"
+      type="email"
+      label="Label goes here"
+      supporting-text="Supporting text goes here"
+      clearable
+      maxlength="50"
+      required
+    >
+      <gds-icon name="mail" slot="lead"></gds-icon>
+      <gds-badge slot="trail" variant="surface">kr</gds-badge>
+      <span slot="extended-supporting-text">
+        Extended supporting text goes here.
+        <a href="#">Can contain links</a>
+      </span>
+    </gds-input>
+  </body>
 </html>

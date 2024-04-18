@@ -10,7 +10,7 @@ export type TableProps = JSX.IntrinsicElements['table'] & {
   /** callback when row is selected */
   onRowSelect?: (
     event: React.ChangeEvent<HTMLInputElement>,
-    rowKey: string
+    rowKey: string,
   ) => void
   /** callback when row is expanded */
   onRowExpand?: (isExpanded: boolean, rowKey: string) => void
@@ -31,7 +31,7 @@ export const Table = React.memo(
         className,
         ...props
       }: TableProps,
-      ref: React.ForwardedRef<HTMLTableElement>
+      ref: React.ForwardedRef<HTMLTableElement>,
     ): React.ReactElement<void> => {
       const [tableState, setTableState] = React.useState<TableState>({
         expandedRows: [],
@@ -54,6 +54,6 @@ export const Table = React.memo(
           />
         </TableContext.Provider>
       )
-    }
-  )
+    },
+  ),
 )

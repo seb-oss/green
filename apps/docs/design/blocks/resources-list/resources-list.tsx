@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import Card from "@/card/card"
-import Grid from "@/grid/grid"
+import Card from '@/card/card'
+import Grid from '@/grid/grid'
 
-import "@/resources-list/resources-list.css"
+import '@/resources-list/resources-list.css'
 
 function Chevron() {
   return (
@@ -25,16 +25,16 @@ type Resource = {
 
 const resources: Resource[] = [
   {
-    href: "https://github.com/sebgroup/green",
-    target: "_blank",
-    caption: "Github",
-    text: "Start contributing now!",
+    href: 'https://github.com/sebgroup/green',
+    target: '_blank',
+    caption: 'Github',
+    text: 'Start contributing now!',
   },
   {
-    href: "https://brand.seb.se/point/en/seb/",
-    target: "_blank",
-    caption: "Media Bank & Brand Guidelines",
-    text: "SEB Brand Hub",
+    href: 'https://brand.seb.se/point/en/seb/',
+    target: '_blank',
+    caption: 'Media Bank & Brand Guidelines',
+    text: 'SEB Brand Hub',
   },
 ]
 

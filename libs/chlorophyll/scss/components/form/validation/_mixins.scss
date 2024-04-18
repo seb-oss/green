@@ -5,7 +5,10 @@ $_border-width: var(--sg-border-width);
 
 @mixin add-feedback-element($transform: true) {
   position: relative;
-  transition: all 200ms ease-in-out, outline-offset 0s, outline-width 0s;
+  transition:
+    all 200ms ease-in-out,
+    outline-offset 0s,
+    outline-width 0s;
 
   &::before {
     background: transparent;

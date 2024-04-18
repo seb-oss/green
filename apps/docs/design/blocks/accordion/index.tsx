@@ -1,6 +1,6 @@
-import "./styles.css"
+import './styles.css'
 
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
 export function Accordion({ children }: { children: React.ReactNode }) {
   return <div className="gds-accordion">{children}</div>
@@ -57,7 +57,7 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOnClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     onClick && onClick(event)
     setIsOpen((state) => {

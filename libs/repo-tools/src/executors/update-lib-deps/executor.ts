@@ -17,7 +17,7 @@ type NotUsed = Record<string, never>
 
 export default async function updateDeps(
   _: NotUsed,
-  context: ExecutorContext
+  context: ExecutorContext,
 ): Promise<{ success: boolean }> {
   console.info(`Executing "update-deps"...`)
 
@@ -26,7 +26,7 @@ export default async function updateDeps(
   // Use the project graph to get the list of dependencies
   const graph_deps =
     context.projectGraph?.dependencies[libName].filter(
-      (d) => !d.target.startsWith('npm:')
+      (d) => !d.target.startsWith('npm:'),
     ) || []
 
   // Construct npm dependency specifiers for each dependency
@@ -40,14 +40,14 @@ export default async function updateDeps(
   // Generate updated package.json
   const updatedPkgJson = pkgJsonWithUpdatedDeps(
     getLibPkgJson(libName),
-    latest_dep_versions
+    latest_dep_versions,
   )
 
   // Write updated package.json to file
   try {
     await writeFile(
       `libs/${libName}/package.json`,
-      JSON.stringify(updatedPkgJson, null, 2) + '\n'
+      JSON.stringify(updatedPkgJson, null, 2) + '\n',
     )
     return { success: true }
   } catch {
@@ -61,7 +61,7 @@ function getLibPkgJson(libName: string): PackageJsonPartial {
 
 function pkgJsonWithUpdatedDeps(
   pkgJson: PackageJsonPartial,
-  deps: DepSpecs
+  deps: DepSpecs,
 ): PackageJsonPartial {
   const depSections = ['dependencies', 'peerDependencies']
   const updatedPkgJson = { ...pkgJson }

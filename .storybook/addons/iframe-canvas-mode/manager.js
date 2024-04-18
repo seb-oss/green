@@ -2,7 +2,7 @@
  * This addon enables a query parameter to specify "iframe canvas mode".
  * Essentially, it hides the nav menu and tool bar, leaving only the canvas and controls panel.
  * Useful for embeddning a component canvas with controls on another website.
-*/
+ */
 
 import { addons } from '@storybook/addons'
 
@@ -26,17 +26,25 @@ export function initIFrameCanvasMode() {
         fullscreen: { hidden: true },
       },
     })
-    
-    let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'))
-    const isPanelWithinSpec = c => c.resizerNav.x === 320 && c.resizerPanel.x === window.innerWidth - 320
 
-    if (typeof storybookConfig === 'object' && storybookConfig !== null && !isPanelWithinSpec(storybookConfig)) {
+    let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'))
+    const isPanelWithinSpec = (c) =>
+      c.resizerNav.x === 320 && c.resizerPanel.x === window.innerWidth - 320
+
+    if (
+      typeof storybookConfig === 'object' &&
+      storybookConfig !== null &&
+      !isPanelWithinSpec(storybookConfig)
+    ) {
       storybookConfig.resizerPanel.x = window.innerWidth - 320
       storybookConfig.resizerNav.x = 320
       localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
       document.location.reload()
     } else if (storybookConfig === null) {
-      storybookConfig = { resizerNav: { x: 320, y: 0 }, resizerPanel: { x: window.innerWidth - 320, y: 0 } }
+      storybookConfig = {
+        resizerNav: { x: 320, y: 0 },
+        resizerPanel: { x: window.innerWidth - 320, y: 0 },
+      }
       localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
       document.location.reload()
     }

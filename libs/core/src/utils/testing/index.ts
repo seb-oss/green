@@ -4,7 +4,7 @@ function determineMousePosition(
   el: Element,
   position: string,
   offsetX: number,
-  offsetY: number
+  offsetY: number,
 ) {
   const { x, y, width, height } = el.getBoundingClientRect()
   const centerX = Math.floor(x + window.scrollX + width / 2)
@@ -48,13 +48,13 @@ export async function clickOnElement(
   /** The horizontal offset to apply to the position when clicking */
   offsetX = 0,
   /** The vertical offset to apply to the position when clicking */
-  offsetY = 0
+  offsetY = 0,
 ) {
   const { clickX, clickY } = determineMousePosition(
     el,
     position,
     offsetX,
-    offsetY
+    offsetY,
   )
 
   await sendMouse({ type: 'click', position: [clickX, clickY] })
@@ -69,13 +69,13 @@ export async function moveMouseOnElement(
   /** The horizontal offset to apply to the position when clicking */
   offsetX = 0,
   /** The vertical offset to apply to the position when clicking */
-  offsetY = 0
+  offsetY = 0,
 ) {
   const { clickX, clickY } = determineMousePosition(
     el,
     position,
     offsetX,
-    offsetY
+    offsetY,
   )
 
   await sendMouse({ type: 'move', position: [clickX, clickY] })
@@ -88,7 +88,7 @@ export async function dragElement(
   /** The horizontal distance to drag in pixels */
   deltaX = 0,
   /** The vertical distance to drag in pixels */
-  deltaY = 0
+  deltaY = 0,
 ): Promise<void> {
   await moveMouseOnElement(el)
   await sendMouse({ type: 'down' })
@@ -96,7 +96,7 @@ export async function dragElement(
     el,
     'center',
     deltaX,
-    deltaY
+    deltaY,
   )
   await sendMouse({ type: 'move', position: [clickX, clickY] })
   await sendMouse({ type: 'up' })

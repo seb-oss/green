@@ -6,7 +6,7 @@ export type TableBodyProps = JSX.IntrinsicElements['tbody']
 const TableBody = React.forwardRef(
   (
     { ...props }: TableBodyProps,
-    ref: React.ForwardedRef<HTMLTableSectionElement>
+    ref: React.ForwardedRef<HTMLTableSectionElement>,
   ) => {
     let parentKey: string
 
@@ -27,7 +27,7 @@ const TableBody = React.forwardRef(
           ? React.cloneElement<any>(Child, { index, parentKey })
           : Child
       },
-      []
+      [],
     )
 
     return (
@@ -41,18 +41,18 @@ const TableBody = React.forwardRef(
                   Child.props.children,
                   (
                     FragmentChild: React.ReactElement<any>,
-                    fragmentIndex: number
-                  ) => cloneTableRow(FragmentChild, fragmentIndex)
+                    fragmentIndex: number,
+                  ) => cloneTableRow(FragmentChild, fragmentIndex),
                 ),
               })
             } else {
               return cloneTableRow(Child, i)
             }
-          }
+          },
         )}
       </tbody>
     )
-  }
+  },
 )
 
 TableBody.displayName = 'TableBody'

@@ -1,6 +1,6 @@
 // FigmaContext.tsx
-import { createContext, useContext, useEffect, useState } from "react"
-import axios from "axios"
+import { createContext, useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
 interface FigmaData {
   node: string
@@ -35,9 +35,9 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({
           `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node}&format=svg`,
           {
             headers: {
-              "X-Figma-Token": figmaAccessKey,
+              'X-Figma-Token': figmaAccessKey,
             },
-          }
+          },
         )
 
         const images = response.data.images
@@ -45,8 +45,8 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({
         const svgResponse = await axios.get(imageUrl)
         return { node, svgContent: svgResponse.data }
       } catch (error) {
-        console.error("Error fetching Figma image:", error)
-        return { node, svgContent: "" }
+        console.error('Error fetching Figma image:', error)
+        return { node, svgContent: '' }
       }
     }
 

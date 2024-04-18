@@ -61,7 +61,7 @@ export interface ChartStyle extends Pick<ChartOptions, 'color'> {
     value: number,
     ratio: number | undefined,
     id: string,
-    index: number
+    index: number,
   ) => string
 }
 

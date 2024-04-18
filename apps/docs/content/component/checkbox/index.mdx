@@ -14,16 +14,15 @@ node: 1337-5535
 Checkboxes are used when users need to select one or multiple options from a list of choices. They are commonly employed in forms, settings, and filters to allow users to indicate their preferences.
 Checkboxes are typically grouped with a theme label above and the possible options below.
 
-
 ## Variants
-	- **Default:** used in most cases.
-	- **Contained:** used only in combination with other contained form components.
+
+    - **Default:** used in most cases.
+    - **Contained:** used only in combination with other contained form components.
 
 <Grid columns={2} gapInline="small">
   <Figma node="1337-5540" caption="Default variant of checkbox" />
   <Figma node="1337-5542" caption="Contained variant of checkbox" />
 </Grid>
-
 
 ## Features
 
@@ -31,68 +30,62 @@ Checkboxes are typically grouped with a theme label above and the possible optio
   <div>
 
     ### Label support text
-    
+
     May be used for both the group label, and for each individual checkbox in the group.
+
   </div>
   <Figma node="1337-6156" caption="Checkbox with an extra description for the label" />
 </Grid>
 
 <Grid columns={2} gapInline="small">
   <div>
-    
-    ### Error handling
-    
-    Used to highlight that the group of checkboxes contains errors.
+    ### Error handling Used to highlight that the group of checkboxes contains
+    errors.
   </div>
   <Figma node="1337-6177" caption="Checkbox containing errors" />
 </Grid>
 
 <Grid columns={2} gapInline="small">
   <div>
-    
-    ### Indeterminate state
-    
-    Used when the checkbox's state is partially selected, often for parent-child relationships in nested checkboxes.
-    
-    **Behaviour of indeterminate checkboxes**
-    - If some children are selected, the indeterminate state is visible on the parent.
-    - If all children are selected, the selected state is visual on the parent.
-    - If a parent checkbox is selected while unselected or in the indeterminate state, all children will be selected.
-    - If the parent is deselected all children will be deselected.
+    ### Indeterminate state Used when the checkbox's state is partially
+    selected, often for parent-child relationships in nested checkboxes.
+    **Behaviour of indeterminate checkboxes** - If some children are selected,
+    the indeterminate state is visible on the parent. - If all children are
+    selected, the selected state is visual on the parent. - If a parent checkbox
+    is selected while unselected or in the indeterminate state, all children
+    will be selected. - If the parent is deselected all children will be
+    deselected.
   </div>
-  <Figma node="1337-6288" caption="Nested checkboxes with a indeterminate parent" />
+  <Figma
+    node="1337-6288"
+    caption="Nested checkboxes with a indeterminate parent"
+  />
 </Grid>
 
-
-
-
-
-
 ## Alignment
+
 Checkboxes can be aligned horizontal or vertical.
 
 - **Vertical:** This is the default alignment. It's easier to read and scan the available options
 - **Horizontal:** Only used for a small set of options if the page shouldn't be to long, but try to avoid.
-	
+
 <Grid columns={2} gapInline="small">
   <Figma node="1337-6517" caption="Vertical alignment – preferred" />
   <Figma node="1337-6580" caption="Horizontal alignment" />
 </Grid>
 
-
 ## Do's and Don'ts
 
 <Grid columns={2} gapInline="small">
-<div>
-  ### Do:
-    - Use descriptive labels to clearly indicate the purpose of each checkbox.
-    - Keep the text as short as possible.
-</div>
-<div>
-  ### Don't:
-    - Use checkboxes for mutually exclusive options; in such cases, consider using radio buttons instead.
-    - Overload users with too many checkboxes on a single page or form. If you have to present a lot of options, use a multiselect dropdown.
-    - Use it to toggle things on or off, use the switch for that.
-    - Mix default and contained versions.
-</div>
+  <div>
+    ### Do: - Use descriptive labels to clearly indicate the purpose of each
+    checkbox. - Keep the text as short as possible.
+  </div>
+  <div>
+    ### Don't: - Use checkboxes for mutually exclusive options; in such cases,
+    consider using radio buttons instead. - Overload users with too many
+    checkboxes on a single page or form. If you have to present a lot of
+    options, use a multiselect dropdown. - Use it to toggle things on or off,
+    use the switch for that. - Mix default and contained versions.
+  </div>
 </Grid>

@@ -142,7 +142,7 @@ import { sortArray } from '@sebgroup/green-react'
 
 const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
 const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
-  null
+  null,
 )
 
 const onSort = (newSortedColumn: SortedColumn) => {
@@ -152,8 +152,8 @@ const onSort = (newSortedColumn: SortedColumn) => {
       sortArray(
         data,
         newSortedColumn.accessor as keyof SuperHeroRowData,
-        newSortedColumn.sortDirection
-      )
+        newSortedColumn.sortDirection,
+      ),
     )
 }
 ```
@@ -186,7 +186,7 @@ const [selectAllIndicator, setSelectAllIndicator] = React.useState({
 
 const onSelect = (
   event: React.ChangeEvent<HTMLInputElement>,
-  rowUniqueKey: string
+  rowUniqueKey: string,
 ) => {
   const {
     data: newData,
@@ -286,7 +286,7 @@ const onRowExpand = (expanded: boolean, rowId: string) => {
           {columnData.map(
             (column: SuperHeroColumnDataT, columnIndex: number) => (
               <TableCell key={columnIndex}>{item[column.accessor]}</TableCell>
-            )
+            ),
           )}
         </TableRow>
         {item.rowContentDetails?.map((rowItem: SuperHeroRowData) => (
@@ -305,7 +305,7 @@ const onRowExpand = (expanded: boolean, rowId: string) => {
                     ]
                   }
                 </TableCell>
-              )
+              ),
             )}
           </TableRow>
         ))}

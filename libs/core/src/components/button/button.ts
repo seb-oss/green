@@ -120,7 +120,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         bubbles: true,
         composed: true,
         detail: e,
-      })
+      }),
     )
 
     if (this.form) {

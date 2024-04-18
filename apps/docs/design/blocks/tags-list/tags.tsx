@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import "@/tags-list/tags.css"
+import '@/tags-list/tags.css'
 
 interface TagsProps {
   tags: string[]

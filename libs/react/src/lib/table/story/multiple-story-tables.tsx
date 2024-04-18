@@ -104,7 +104,7 @@ export const rowData: SuperHeroRowData[] = [
 export const SortableTable = () => {
   const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
   const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
-    null
+    null,
   )
 
   const onSort = (newSortedColumn: SortedColumn) => {
@@ -114,8 +114,8 @@ export const SortableTable = () => {
         sortArray(
           data,
           newSortedColumn.accessor as keyof SuperHeroRowData,
-          newSortedColumn.sortDirection
-        )
+          newSortedColumn.sortDirection,
+        ),
       )
   }
 
@@ -152,7 +152,7 @@ export const SelectableTable = () => {
 
   const onSelect = (
     event: React.ChangeEvent<HTMLInputElement>,
-    rowUniqueKey: string
+    rowUniqueKey: string,
   ) => {
     const {
       data: newData,
@@ -183,7 +183,7 @@ export const SelectableTable = () => {
                 <TableCell key={columnIndex}>
                   {item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}
                 </TableCell>
-              )
+              ),
             )}
           </TableRow>
         ))}
@@ -228,7 +228,7 @@ export const ExpandableTable = () => {
                       ]
                     }
                   </TableCell>
-                )
+                ),
               )}
             </TableRow>
             {item.rowContentDetails?.map((rowItem: SuperHeroRowData) => (
@@ -247,7 +247,7 @@ export const ExpandableTable = () => {
                         ]
                       }
                     </TableCell>
-                  )
+                  ),
                 )}
               </TableRow>
             ))}

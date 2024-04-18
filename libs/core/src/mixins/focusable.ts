@@ -19,7 +19,7 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
           bubbles: true,
           composed: true,
           relatedTarget: e.relatedTarget,
-        })
+        }),
       )
     }
 
@@ -29,7 +29,7 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
           bubbles: true,
           composed: true,
           relatedTarget: e.relatedTarget,
-        })
+        }),
       )
     }
   }

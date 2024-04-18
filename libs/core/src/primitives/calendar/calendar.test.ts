@@ -36,7 +36,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 7))
+        onlyDate(addDays(new Date(), 7)),
       )
     })
 
@@ -51,7 +51,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -7))
+        onlyDate(addDays(new Date(), -7)),
       )
     })
 
@@ -66,7 +66,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 1))
+        onlyDate(addDays(new Date(), 1)),
       )
     })
 
@@ -81,7 +81,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -1))
+        onlyDate(addDays(new Date(), -1)),
       )
     })
 
@@ -96,7 +96,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(subMonths(new Date(), 1))
+        onlyDate(subMonths(new Date(), 1)),
       )
     })
 
@@ -111,7 +111,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addMonths(new Date(), 1))
+        onlyDate(addMonths(new Date(), 1)),
       )
     })
 
@@ -139,7 +139,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(el.value.getDate()).to.equal(
-        new Date(el.value.getFullYear(), el.value.getMonth() + 1, 0).getDate()
+        new Date(el.value.getFullYear(), el.value.getMonth() + 1, 0).getDate(),
       )
     })
 
@@ -175,7 +175,7 @@ describe('<gds-calendar>', () => {
 
     it('should not select the focused date when pressing enter if it is disabled', async () => {
       const el = await fixture<GdsCalendar>(
-        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`
+        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`,
       )
       el.focus()
 
@@ -197,7 +197,7 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-01'))
+        onlyDate(new Date('2024-02-01')),
       )
     })
   })

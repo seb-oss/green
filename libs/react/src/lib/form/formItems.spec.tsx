@@ -6,7 +6,7 @@ import * as FormContext from './formContext'
 describe('FormItems Component', () => {
   const mockFormContext: jest.SpyInstance = jest.spyOn(
     FormContext,
-    'useFormContext'
+    'useFormContext',
   )
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('FormItems Component', () => {
     const { container } = render(
       <FormItems name="text">
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
     expect(screen.getByText('Some field')).not.toBeNull()
     expect(container.querySelector('input')?.getAttribute('name')).toBe('text')
@@ -39,7 +39,7 @@ describe('FormItems Component', () => {
     const { container } = render(
       <FormItems name="text">
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
     fireEvent.change(container.querySelector('input') as HTMLInputElement, {
       target: { value: 'new value' },
@@ -54,7 +54,7 @@ describe('FormItems Component', () => {
     render(
       <FormItems name="text" onChange={mockFn}>
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
     expect(mockFn).not.toBeCalled()
     await user.type(screen.getByRole('textbox'), inputText)

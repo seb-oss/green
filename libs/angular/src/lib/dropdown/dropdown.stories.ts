@@ -137,12 +137,12 @@ Searchable.args = {
 }
 
 const CustomOptionTemplate: Story<NggDropdownComponent> = (
-  args: NggDropdownComponent
+  args: NggDropdownComponent,
 ) => {
   args.compareWith = (o1: any, o2: any) => o1.id === o2.id
   args.searchFilter = (search: string, value: any) =>
     ['kitchen', 'id'].some((key) =>
-      value[key].toLowerCase().includes(search.toLowerCase())
+      value[key].toLowerCase().includes(search.toLowerCase()),
     )
   return {
     component: NggDropdownComponent,
@@ -213,7 +213,7 @@ CustomOption.args = {
 }
 
 const FormControlTemplate: Story<NggDropdownComponent> = (
-  args: NggDropdownComponent
+  args: NggDropdownComponent,
 ) => {
   const validationForm = new FormGroup({
     country: new FormControl(undefined, [Validators.required]),
@@ -348,7 +348,7 @@ export const Form = FormControlTemplate.bind({})
 Form.args = {}
 
 const FormControlWithResetTemplate: Story<NggDropdownComponent> = (
-  args: NggDropdownComponent
+  args: NggDropdownComponent,
 ) => {
   const validationFormAdvance = new FormGroup({
     country: new FormControl(undefined, [Validators.required]),

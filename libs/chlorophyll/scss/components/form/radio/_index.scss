@@ -1,5 +1,5 @@
 @use 'mixins';
-@forward "tokens";
+@forward 'tokens';
 
 @include mixins.add-radio;
 

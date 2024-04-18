@@ -25,7 +25,7 @@ export function Group({
     { 'group-border': groupBorder },
     { 'group-focus': groupFocus },
     { 'is-invalid': error },
-    className
+    className,
   )
   const errorMessage = error
     ? (error as Error).message || (error as string)
@@ -33,7 +33,11 @@ export function Group({
   return (
     <div className="form-group" id={id}>
       <div className={groupClassName}>{children}</div>
-      {error && <span className="form-info" id={id && `${id}-message`}>{errorMessage}</span>}
+      {error && (
+        <span className="form-info" id={id && `${id}-message`}>
+          {errorMessage}
+        </span>
+      )}
     </div>
   )
 }

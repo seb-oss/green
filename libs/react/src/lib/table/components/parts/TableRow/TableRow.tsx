@@ -48,7 +48,7 @@ const TableRow = React.forwardRef(
       collapseButtonProps = {},
       ...props
     }: TableRowProps,
-    ref: React.ForwardedRef<HTMLTableRowElement>
+    ref: React.ForwardedRef<HTMLTableRowElement>,
   ) => {
     const tableContext = useTableContext()
     const [uniqueId, setUniqueId] = React.useState<string>(uniqueKey as string)
@@ -59,7 +59,7 @@ const TableRow = React.forwardRef(
       Omit<TableHeaderCellProps, 'ref'> | Omit<TableCellProps, 'ref'> | null
     >(null)
     const [expandedRows, setExpandedRows] = React.useState<Array<string>>(
-      tableContext.tableState?.expandedRows || []
+      tableContext.tableState?.expandedRows || [],
     )
     const headerId: string = useId()
 
@@ -132,7 +132,7 @@ const TableRow = React.forwardRef(
                 {...collapseButtonProps}
                 className={classnames(
                   'collapse-btn',
-                  collapseButtonProps.className
+                  collapseButtonProps.className,
                 )}
                 onClick={() =>
                   tableContext?.onRowExpand?.(!isExpanded, uniqueId)
@@ -176,7 +176,7 @@ const TableRow = React.forwardRef(
         {props.children}
       </tr>
     )
-  }
+  },
 )
 
 TableRow.displayName = 'TableRow'

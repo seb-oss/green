@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
@@ -31,19 +31,19 @@ export function ThemeToggle() {
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
-        event.key === "\\" &&
+        event.key === '\\' &&
         isHTMLElement(event.target) &&
-        (event.target as HTMLElement).tagName !== "INPUT" &&
-        (event.target as HTMLElement).tagName !== "TEXTAREA"
+        (event.target as HTMLElement).tagName !== 'INPUT' &&
+        (event.target as HTMLElement).tagName !== 'TEXTAREA'
       ) {
-        setTheme(theme === "light" ? "dark" : "light")
+        setTheme(theme === 'light' ? 'dark' : 'light')
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown)
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [setTheme, theme])
 
@@ -64,10 +64,10 @@ export function ThemeToggle() {
   return (
     <button
       className="theme"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      aria-label={`Toggle ${theme === "dark" ? "Light" : "Dark"} Theme`}
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
     >
-      {theme === "dark" ? <Light /> : <Dark />}
+      {theme === 'dark' ? <Light /> : <Dark />}
     </button>
   )
 }

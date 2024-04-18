@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
 
-import "./style.css"
+import './style.css'
 
 type RowProps = {
   children: ReactNode

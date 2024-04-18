@@ -7,10 +7,17 @@ date: 2023-12-22
 ## Design
 
 Each button type has fully rounded corners. This creates a cohesive and consistent visual language within our design system. The differentiation in colour, border, and background helps users to easily distinguish between primary, secondary, and tertiary actions, contributing to a more intuitive and user-friendly interface.
+
 <Grid columns={3}>
-<Figma node="258-2977" caption="A primary button has a solid container." />
-<Figma node="258-2986" caption="A secondary button has a transparent container and 1 px border." />
-<Figma node="258-2989" caption="A tertiary button has transparent container and no border." />
+  <Figma node="258-2977" caption="A primary button has a solid container." />
+  <Figma
+    node="258-2986"
+    caption="A secondary button has a transparent container and 1 px border."
+  />
+  <Figma
+    node="258-2989"
+    caption="A tertiary button has transparent container and no border."
+  />
 </Grid>
 
 <Spacer size="medium" decorated />
@@ -21,8 +28,8 @@ Each button type has fully rounded corners. This creates a cohesive and consiste
 ## Anatomy
 
 A button consists of a container, a text, and an optional leading or trailing element (icon). The anatomy of a button in our design system includes various visual and functional elements that work together to create a cohesive and user-friendly interface. Here is a breakdown of the key components:
-</div>
 
+</div>
 
 <Figma node="258-3056" caption="Container, text, leading and trailing element." />
 </Grid>
@@ -60,10 +67,10 @@ A button consists of a container, a text, and an optional leading or trailing el
         *Attributes*
 
         Thickness, colour, and style.
-    </div> 
+    </div>
     <div>
         <Figma node="264-7238" caption="Leading element" />
-        
+
         *Purpose*
 
         Provides additional context or visual cues to users before they interact with the button.
@@ -116,34 +123,34 @@ A button consists of a container, a text, and an optional leading or trailing el
 
         ARIA attributes, focus styles, and sufficient colour contrast.
     </div>
+
 </Grid>
 
 <Spacer size="medium" decorated />
 
 ## Leading and trailing elements
 
-An icon positioned at the beginning is known as a leading element, the one at the end of the text is referred to as a trailing element. Both types of elements share common purposes, offering visual cues and improving the user interface. 
+An icon positioned at the beginning is known as a leading element, the one at the end of the text is referred to as a trailing element. Both types of elements share common purposes, offering visual cues and improving the user interface.
 
 <Grid columns={2}>
 <div>
 ### Leading element
 
-Use leading elements to support the button text. 
-Some examples could be a trash can icon + text *Delete*, 
-a search icon + text *Search* and arrow to bottom icon + text *Download*. 
+Use leading elements to support the button text.
+Some examples could be a trash can icon + text _Delete_,
+a search icon + text _Search_ and arrow to bottom icon + text _Download_.
+
 </div>
 
 <Figma node="266-7387" caption="Leading elements that support the button text." />
 </Grid>
-
 
 <Grid columns={2}>
 <div>
 ### Trailing element
 
 Use trailing element as an affordance of what will happen when you interact with the button. For example, a button that leads the user forward in a flow, an arrow icon is a good choice.
+
 </div>
 <Figma node="266-7448" caption="The trailing element gives a hint on what is about to happen on click." />
 </Grid>
-
-

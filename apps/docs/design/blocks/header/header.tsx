@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import React, { forwardRef, useContext, useEffect, useState } from "react"
-import Link from "next/link"
+import React, { forwardRef, useContext, useEffect, useState } from 'react'
+import Link from 'next/link'
 
-import "./header.css"
+import './header.css'
 
-import { ThemeProviderContext } from "$/theme/provider"
-import { ThemeToggle } from "$/theme/toggle"
+import { ThemeProviderContext } from '$/theme/provider'
+import { ThemeToggle } from '$/theme/toggle'
 
 export const Header = forwardRef(({ ...props }, ref) => {
   const { toggleCmd } = useContext(ThemeProviderContext)
@@ -15,14 +15,14 @@ export const Header = forwardRef(({ ...props }, ref) => {
 
   useEffect(() => {
     const userAgent = window.navigator.userAgent
-    setIsWindows(userAgent.indexOf("Windows") !== -1)
+    setIsWindows(userAgent.indexOf('Windows') !== -1)
   }, [])
 
   return (
     <header className="main">
       <nav>
         <button
-          className={`hamburger ${isNavOpen ? "active" : ""}`}
+          className={`hamburger ${isNavOpen ? 'active' : ''}`}
           onClick={toggleNav}
         >
           {isNavOpen === true ? (
@@ -77,7 +77,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <span>{isWindows ? "/" : "⌘K"}</span>
+          <span>{isWindows ? '/' : '⌘K'}</span>
         </button>
         <Link
           className="github"
@@ -95,6 +95,6 @@ export const Header = forwardRef(({ ...props }, ref) => {
   )
 })
 
-Header.displayName = "Header"
+Header.displayName = 'Header'
 
 export default Header

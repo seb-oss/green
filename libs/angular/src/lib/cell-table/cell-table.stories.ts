@@ -54,7 +54,7 @@ export default {
 } as Meta<NggCellTableComponent>
 
 const Template: Story<NggCellTableComponent> = (
-  args: NggCellTableComponent
+  args: NggCellTableComponent,
 ) => {
   return {
     template: `
