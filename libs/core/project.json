@@ -23,8 +23,12 @@
         "main": "libs/core/src/index.ts",
         "additionalEntryPoints": [
           "libs/core/src/transitional-styles.ts",
-          "libs/core/src/localization.ts"
+          "libs/core/src/localization.ts",
+          "libs/core/src/components/dropdown/dropdown.ts",
+          "libs/core/src/components/context-menu/context-menu.ts",
+          "libs/core/src/primitives/popover/popover.ts"
         ],
+        "generateExportsField": true,
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {

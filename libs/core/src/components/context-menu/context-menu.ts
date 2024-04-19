@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, LitElement, nothing } from 'lit'
+import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 import { classMap } from 'lit-html/directives/class-map.js'
 import { property, queryAsync, state } from 'lit/decorators.js'
@@ -15,6 +15,7 @@ import { TransitionalStyles } from '../../transitional-styles'
 import styles from './context-menu.styles'
 
 import '../../primitives/menu/menu'
+import '@sebgroup/green-core/primitives/popover'
 
 /**
  * @element gds-context-menu

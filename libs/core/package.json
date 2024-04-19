@@ -43,6 +43,9 @@
     },
     "./jest-config": {
       "default": "./green-jest-config.cjs"
+    },
+    "./primitives/popover": {
+      "default": "./src/primitives/popover/popover.js"
     }
   }
 }

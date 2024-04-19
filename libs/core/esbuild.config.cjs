@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer')
 const postcssPresetEnv = require('postcss-preset-env')
 
 module.exports = {
+  external: ['@sebgroup/green-core'],
   plugins: [
     esp.sassPlugin({
       type: 'css-text',

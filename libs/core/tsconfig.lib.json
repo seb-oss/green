@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "../../dist",
     "declaration": true,
-    "types": []
+    "types": [],
+    "paths": {
+      "@sebgroup/green-core": ["./src"],
+      "@sebgroup/green-core/*": ["./src/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.css"],
   "exclude": [
