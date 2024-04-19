@@ -10,10 +10,10 @@ import * as Datepicker from '../../components/datepicker/datepicker.trans.styles
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
+import * as Button from '../../components/button/button.trans.styles'
 
 import { VER_SUFFIX } from './custom-element-scoping'
 import { GdsElement } from '../../gds-element'
-import { el } from 'date-fns/locale'
 
 export const registerTransitionalStyles = () => {
   Dropdown.register()
@@ -25,6 +25,7 @@ export const registerTransitionalStyles = () => {
   GroupedList.register()
   SegmentedControl.register()
   Segment.register()
+  Button.register()
 }
 
 declare global {
@@ -74,6 +75,8 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
+    console.log('applyToElement');
+    
     const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
     element.shadowRoot.adoptedStyleSheets = [sheet]
@@ -113,6 +116,8 @@ export class TransitionalStyles {
 
   register(name: string, styles: string) {
     if (this.useLegacyStylesheets) {
+      console.log('useLegacyStylesheets');
+      
       this.sheetsLegacy.set(name, styles)
       this.applyToElementLegacy(name)
       return
@@ -120,6 +125,8 @@ export class TransitionalStyles {
 
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(styles)
+    console.log(name, sheet);
+    
     this.sheets.set(name, sheet)
     this.applyToElement(name, sheet)
   }

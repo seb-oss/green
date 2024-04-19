@@ -14,15 +14,15 @@
           "value": "{ref.size.1}",
           "type": "float"
         },
-        "sm": {
+        "s": {
           "value": "{ref.size.1,5}",
           "type": "float"
         },
-        "md": {
+        "m": {
           "value": "{ref.size.2}",
           "type": "float"
         },
-        "lg": {
+        "l": {
           "value": "{ref.size.4}",
           "type": "float"
         },

@@ -1,9 +1,26 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
 import { GdsButton, GdsIcon } from '../../../../../dist/libs/core/src'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Button" />
 
 # Button
+
+<button
+  onClick={() => {
+    registerTransitionalStyles()
+    document
+      .querySelectorAll('gds-button')
+      .forEach((el) => {
+        console.log(el)
+        el.connectedCallback()
+      })
+  }}
+>
+  Show 2016 styles
+</button>
+
+<button onClick={() => location.reload()}>Show 2023 styles</button>
 
 ## Button variants
 

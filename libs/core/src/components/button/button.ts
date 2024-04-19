@@ -1,6 +1,7 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { constrainSlots } from '../../utils/helpers'
+import { TransitionalStyles } from '../../transitional-styles'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
 
@@ -81,6 +82,11 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   constructor() {
     super()
     constrainSlots(this)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
   render() {

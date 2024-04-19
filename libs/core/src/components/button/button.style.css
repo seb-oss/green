@@ -2,16 +2,16 @@
 
 @layer tokens {
   :host {
-    --_gap: var(--gds-sys-gap-small);
+    --_gap: var(--gds-sys-space-spacer-m);
 
     --_transition: var(--gds-sys-transition);
 
-    --_padding-inline: var(--gds-sys-padding-inline);
-    --_padding-block: var(--gds-sys-padding-block);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-m);
 
-    --_border-radius: var(--gds-sys-border-radius);
-    --_border-width: var(--gds-sys-border-width);
-    --_border-style: var(--gds-sys-border-style);
+    --_border-radius: var(--gds-sys-radii-full);
+    --_border-width: 1px;
+    --_border-style: solid;
 
     --_color-bg: var(--gds-sys-color-content-content);
     --_color-text: var(--gds-sys-color-content-content-inverse);
@@ -179,21 +179,21 @@
 
 @layer sizes {
   :host([size='small']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-3);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-s);
     --_size: 2rem;
     font-size: 0.875rem;
   }
 
   :host([size='medium']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-3);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-m);
     --_size: 2.5rem;
   }
 
   :host([size='large']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-4);
+    --_padding-inline: var(--gds-sys-space-padding-xl);
+    --_padding-block: var(--gds-sys-space-padding-m);
     --_size: 3rem;
   }
 }

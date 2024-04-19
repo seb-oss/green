@@ -1,0 +1,38 @@
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/icon';
+@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
+@use '../../../../chlorophyll/scss/common';
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base, _variants, _overrides;
+
+  :host {
+    display: inline-block;
+  }
+
+  @layer _base {
+    button {
+      @include button.reset();
+      @include button.base();
+      @include button.primary();
+      overflow: hidden;
+    }
+
+    button gds-ripple {
+      display: none;
+    }
+
+    :host([variant*='secondary']) button {
+      @include button.secondary();
+    }
+  
+    :host([variant*='tertiary']) button {
+      @include button.tertiary();
+    }
+  }
+
+  @layer _overrides {
+  }
+}

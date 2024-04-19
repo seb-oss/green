@@ -7,7 +7,7 @@ const formats: Record<string, Format> = {
       const dictionary = Object.assign({}, args.dictionary)
       const options = Object.assign(
         { colorScheme: 'light', selector: ':root' },
-        args.options
+        args.options,
       )
       // Override each token"s `value` with `darkValue`
       dictionary.allTokens = dictionary.allTokens.map((token) => {
@@ -107,7 +107,7 @@ const formats: Record<string, Format> = {
       const dictionary = Object.assign({}, args.dictionary)
       const options = Object.assign(
         { colorScheme: 'light', name: 'add-variables' },
-        args.options
+        args.options,
       )
 
       const { colorScheme, name, outputReferences } = options
