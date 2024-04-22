@@ -1,13 +1,13 @@
 import { HTMLTemplateResult } from 'lit'
 import { state, property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
-import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { constrainSlots } from '../../utils/helpers'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { constrainSlots } from '@sebgroup/green-core/utils/helpers'
 import './list-item'
 
 /**

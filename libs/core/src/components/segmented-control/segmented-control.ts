@@ -2,17 +2,17 @@ import { HTMLTemplateResult, unsafeCSS } from 'lit'
 import { query, state, property, queryAsync } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { msg } from '@lit/localize'
-import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { watch, observeLightDOM } from '../../utils/decorators'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 
 import { GdsSegment } from './segment/segment'
 
-import { tokens } from '../../tokens.style'
+import { tokens } from '@sebgroup/green-core/tokens.style'
 import style from './segmented-control.style.css'
 
 const BTN_SIZE = {

@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { constrainSlots } from '../../utils/helpers'
+import { constrainSlots } from '@sebgroup/green-core/utils/helpers'
 import { when } from 'lit/directives/when.js'
 import styles from './style/badge.styles.css'
 

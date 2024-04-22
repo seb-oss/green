@@ -7,14 +7,14 @@ import { Placement } from '@floating-ui/dom'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../gds-element'
-import { constrainSlots } from '../../utils/helpers'
-import { TransitionalStyles } from '../../transitional-styles'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { constrainSlots } from '@sebgroup/green-core/utils/helpers'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 import styles from './context-menu.styles'
 
-import '../../primitives/menu/menu'
+import '@sebgroup/green-core/primitives/menu'
 import '@sebgroup/green-core/primitives/popover'
 
 /**

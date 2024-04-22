@@ -2,7 +2,7 @@ import { LitElement, unsafeCSS } from 'lit'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 import styles from './stem.styles.scss'
 

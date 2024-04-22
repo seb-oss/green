@@ -1,23 +1,23 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { TransitionalStyles } from '../../transitional-styles'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 
-import { GdsElement } from '../../gds-element'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
 import style from './listbox.styles'
-import { watch } from '../../utils/decorators'
+import { watch } from '@sebgroup/green-core/utils/decorators'
 import {
   html,
   gdsCustomElement,
-} from '../../utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from '../../controllers/listbox-kb-nav-controller'
-import { unwrap } from '../../utils/helpers/unwrap-slots'
+} from '@sebgroup/green-core/controllers/listbox-kb-nav-controller'
+import { unwrap } from '@sebgroup/green-core/utils/helpers/unwrap-slots'
 
 /**
  * @element gds-listbox

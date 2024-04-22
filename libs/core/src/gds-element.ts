@@ -1,5 +1,5 @@
+import { getUnscopedTagName } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 import { LitElement } from 'lit'
-import { getUnscopedTagName } from './utils/helpers/custom-element-scoping'
 
 export class GdsElement extends LitElement {
   /**

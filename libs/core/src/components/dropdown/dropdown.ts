@@ -7,27 +7,27 @@ import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
 import 'reflect-metadata'
 
-import { constrainSlots } from '../../utils/helpers'
-import { watch, observeLightDOM } from '../../utils/decorators'
+import { constrainSlots } from '@sebgroup/green-core/utils/helpers/constrain-slots'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
+import { observeLightDOM } from '@sebgroup/green-core/utils/decorators/observe-light-dom'
 
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
-} from '../../utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
-import '../../primitives/listbox'
+import '@sebgroup/green-core/primitives/listbox'
 import type {
   GdsListbox,
-  GdsOption,
-  OptionsContainer,
-} from '../../primitives/listbox'
+} from '@sebgroup/green-core/primitives/listbox'
+import type { GdsOption, OptionsContainer } from '@sebgroup/green-core/primitives/listbox/option'
 import '@sebgroup/green-core/primitives/popover'
 
-import { GdsFormControlElement } from '../form-control'
+import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
 
 import styles from './dropdown.styles'
-import { TransitionalStyles } from '../../transitional-styles'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 /**
  * @element gds-dropdown

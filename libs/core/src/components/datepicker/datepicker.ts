@@ -8,27 +8,27 @@ import { classMap } from 'lit/directives/class-map.js'
 import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
-} from '../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../transitional-styles'
-import { watch } from '../../utils/decorators'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { watch } from '@sebgroup/green-core/utils/decorators'
 
-import '../../primitives/popover/popover'
+import '@sebgroup/green-core/primitives/popover'
+import type { GdsPopover } from '@sebgroup/green-core/primitives/popover'
 
-import '../../primitives/calendar/calendar'
-import type { GdsCalendar } from '../../primitives/calendar/calendar'
+import '@sebgroup/green-core/primitives/calendar'
+import type { GdsCalendar } from '@sebgroup/green-core/primitives/calendar'
 
-import { GdsDropdown } from '../dropdown/dropdown'
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
-import { GdsPopover } from '../../primitives/popover/popover'
 
 type DatePart = 'year' | 'month' | 'day'
 

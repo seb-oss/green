@@ -1,13 +1,13 @@
 import { property } from 'lit/decorators.js'
-import { GdsElement } from '../../../gds-element'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
 import {
   gdsCustomElement,
   html,
-} from '../../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../../transitional-styles'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { unsafeCSS } from 'lit'
 
-import { tokens } from '../../../tokens.style'
+import { tokens } from '@sebgroup/green-core/tokens.style'
 import style from './segment.style.css'
 
 /**

@@ -1,17 +1,15 @@
-import { css, CSSResult, LitElement, unsafeCSS } from 'lit'
-import type { CSSResultGroup } from 'lit'
+import { css, LitElement, unsafeCSS } from 'lit'
 
 import { property, state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
-import { watch } from '../../utils/decorators'
+import { watch } from '@sebgroup/green-core/utils/decorators'
 
-import { tokens } from '../../tokens.style'
+import { tokens } from '@sebgroup/green-core/tokens.style'
 import GridCSS from './grid.style.css'
-// const gridCSS = unsafeCSS(grid)
 
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
 const BreakpointPattern =
