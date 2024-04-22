@@ -3,12 +3,6 @@ import { css } from 'lit'
 const style = css`
   @layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
 
-  @property --_c {
-    syntax: '<number>';
-    inherits: true;
-    initial-value: 0;
-  }
-
   @layer grid {
     :host {
       --_c: var(--gds-sys-grid-columns-12);
