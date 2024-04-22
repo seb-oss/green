@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.15.1
+
+### Patch Changes
+
+- 385f7ef: Grid fix for Safari, initial value
+
 ## 1.15.0
 
 ### Minor Changes
