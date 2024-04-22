@@ -22,11 +22,14 @@ body:
       label: For which framework/library you are reporting the bug
       multiple: true
       options:
+        - Core
         - React
         - React Charts
         - Angular
         - Angular Charts
         - Chlorophyll
+        - Fonts
+        - Tokens
         - extract
   - type: input
     id: component
