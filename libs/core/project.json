@@ -24,11 +24,34 @@
         "additionalEntryPoints": [
           "libs/core/src/transitional-styles.ts",
           "libs/core/src/localization.ts",
-          "libs/core/src/components/dropdown/dropdown.ts",
+          "libs/core/src/gds-element.ts",
           "libs/core/src/components/context-menu/context-menu.ts",
-          "libs/core/src/primitives/popover/popover.ts"
+          "libs/core/src/components/datepicker/datepicker.ts",
+          "libs/core/src/components/dropdown/dropdown.ts",
+          "libs/core/src/components/grid/grid.ts",
+          "libs/core/src/components/grouped-list/grouped-list.ts",
+          "libs/core/src/components/icon/icon.ts",
+          "libs/core/src/components/segmented-control/segmented-control.ts",
+          "libs/core/src/components/theme/theme.ts",
+          "libs/core/src/components/form-control.ts",
+          "libs/core/src/controllers/listbox-kb-nav-controller.ts",
+          "libs/core/src/primitives/calendar/calendar.ts",
+          "libs/core/src/primitives/listbox/listbox.ts",
+          "libs/core/src/primitives/listbox/option.ts",
+          "libs/core/src/primitives/menu/menu.ts",
+          "libs/core/src/primitives/menu/menu-heading.ts",
+          "libs/core/src/primitives/menu/menu-item.ts",
+          "libs/core/src/primitives/popover/popover.ts",
+          "libs/core/src/utils/decorators/observe-light-dom.ts",
+          "libs/core/src/utils/decorators/watch-media-query.ts",
+          "libs/core/src/utils/decorators/watch.ts",
+          "libs/core/src/utils/directives/forward-attributes.ts",
+          "libs/core/src/utils/helpers/constrain-slots.ts",
+          "libs/core/src/utils/helpers/custom-element-scoping.ts",
+          "libs/core/src/utils/helpers/id.ts",
+          "libs/core/src/utils/helpers/strip-white-space.ts",
+          "libs/core/src/utils/helpers/unwrap-slots.ts"
         ],
-        "generateExportsField": true,
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {
@@ -38,7 +61,9 @@
           }
         ],
         "updateBuildableProjectDepsInPackageJson": false,
-        "esbuildConfig": "libs/core/esbuild.config.cjs"
+        "esbuildConfig": "libs/core/esbuild.config.cjs",
+        "generatePackageJson": true,
+        "generateExportsField": true
       }
     },
     "build-bundle-src": {

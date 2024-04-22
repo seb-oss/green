@@ -12,7 +12,6 @@ import {
   getScopedTagName,
   GdsOption,
 } from '../../../../../dist/libs/core/src/index.js'
-import { send } from 'process'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
