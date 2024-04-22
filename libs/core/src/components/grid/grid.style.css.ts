@@ -5,7 +5,7 @@ const style = css`
 
   @property --_c {
     syntax: '<number>';
-    inherits: false;
+    inherits: true;
     initial-value: 0;
   }
 
@@ -41,8 +41,12 @@ const style = css`
   }
 
   /* Responsive */
-  :host {
+
+  :host([columns]) {
     --_c: var(--_columns-desktop);
+  }
+
+  :host {
     --_gap-column: var(--_gap-desktop);
     --_gap-row: var(--_row-gap-desktop);
     --_grid-padding: var(--_padding-desktop);
@@ -50,8 +54,11 @@ const style = css`
   }
 
   @media only screen and (max-width: 768px) {
-    :host {
+    :host([columns]) {
       --_c: var(--_columns-tablet);
+    }
+
+    :host {
       --_gap-column: var(--_gap-tablet);
       --_gap-row: var(--_row-gap-tablet);
       --_grid-padding: var(--_padding-tablet);
@@ -60,6 +67,10 @@ const style = css`
   }
 
   @media only screen and (max-width: 425px) {
+    :host([columns]) {
+      --_c: var(--_columns-mobile);
+    }
+
     :host {
       --_c: var(--_columns-mobile);
       --_gap-column: var(--_gap-mobile);
