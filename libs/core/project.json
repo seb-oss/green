@@ -85,7 +85,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["build-with-types"],
       "options": {
-        "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
+        "command": "node libs/core/build-scripts/generate-scope-suffix.cjs && node libs/core/build-scripts/fix-pkg-json-export-paths.cjs"
       }
     },
     "lint": {
