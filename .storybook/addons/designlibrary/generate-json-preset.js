@@ -4,8 +4,6 @@ const util = require('util')
 
 const fs = require('fs')
 
-const globby = require('globby')
-
 const csfTools = require('@storybook/csf-tools')
 const nodeLogger = require('@storybook/node-logger')
 const coreCommon = require('@storybook/core-common')
@@ -16,6 +14,7 @@ module.exports = {
   webpackFinal: async (config, options) => {
     const { default: slash } = await import('slash')
     const { default: path } = await import('path')
+    const { globby } = await import('globby')
 
     nodeLogger.logger.info('=> Generating custom json for Design Library...')
 
