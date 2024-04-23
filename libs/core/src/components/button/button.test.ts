@@ -144,6 +144,18 @@ describe('<gds-button>', () => {
 
       expect(shadowButton?.classList.contains('tertiary')).to.equal(true)
     })
+
+    it('should render properly with gds-icon', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button
+          ><gds-icon name="search"></gds-icon>Button</gds-button
+        >`,
+      )
+
+      const button = el.shadowRoot?.querySelector('button')
+
+      expect(button?.classList.contains('circle')).to.exist
+    })
   })
 
   describe('Accessibility', () => {
