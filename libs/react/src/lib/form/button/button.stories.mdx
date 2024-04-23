@@ -14,9 +14,10 @@ Simple Button Component
 <Story
   name="Button"
   parameters={{
-    componentIds: ['component-button']
+    componentIds: ['component-button'],
   }}
-  args={{ children: 'Button', className: 'size-sm' }}>
+  args={{ children: 'Button', className: 'size-sm' }}
+>
   {Template.bind({})}
 </Story>
 
@@ -56,8 +57,7 @@ Variant can also be specified explicitly.
 When using the close button variant, take special care to provide an appropriate label!
 
 <Canvas>
-  <Button variant="close" aria-label="Close">
-  </Button>
+  <Button variant="close" aria-label="Close"></Button>
 </Canvas>
 
 ## Disabled button

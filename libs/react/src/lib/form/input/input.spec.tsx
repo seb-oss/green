@@ -31,7 +31,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <Checkbox label="Input" />
-        </form>
+        </form>,
       )
 
       const input = screen.getByRole('checkbox') as HTMLInputElement
@@ -64,7 +64,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <EmailInput label="Input" />
-        </form>
+        </form>,
       )
 
       const input = screen.getByRole('textbox') as HTMLInputElement
@@ -97,7 +97,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <NumberInput label="Input" />
-        </form>
+        </form>,
       )
 
       const input = screen.getByRole('spinbutton') as HTMLInputElement
@@ -138,7 +138,7 @@ describe('Inputs', () => {
           placeholder="text field"
           testId={'text-input'}
           onChangeInput={mockFn}
-        />
+        />,
       )
 
       const inputElement = await screen.findByTestId('text-input')
@@ -177,10 +177,10 @@ describe('Inputs', () => {
           onChange={(e) => {
             mockFn(e.currentTarget.value)
           }}
-        />
+        />,
       )
       const inputElement = (await screen.findByTestId(
-        'text-input'
+        'text-input',
       )) as HTMLInputElement
 
       expect(inputElement.value).toEqual('12345')
@@ -207,11 +207,11 @@ describe('Inputs', () => {
           onChange={(e) => {
             mockFn(e.currentTarget.value)
           }}
-        />
+        />,
       )
 
       const inputElement = (await screen.findByTestId(
-        'text-input'
+        'text-input',
       )) as HTMLInputElement
 
       expect(inputElement.value).toEqual('12345')
@@ -225,7 +225,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <TextInput label="Input" />
-        </form>
+        </form>,
       )
 
       const input = screen.getByRole('textbox') as HTMLInputElement
@@ -253,7 +253,7 @@ describe('Component: RadioButton', () => {
         onChange={onChange}
         value="test value"
         label="Radio button"
-      />
+      />,
     )
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).toBeCalled()
@@ -267,7 +267,7 @@ describe('Component: RadioButton', () => {
         value="test value"
         label="Radio button"
         disabled
-      />
+      />,
     )
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).not.toBeCalled()
@@ -279,7 +279,7 @@ describe('Component: RadioButton', () => {
         label="Radio button"
         value=""
         validator={{ message: 'Error', indicator: 'error' }}
-      />
+      />,
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })

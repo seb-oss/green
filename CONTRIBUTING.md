@@ -24,7 +24,7 @@ sequenceDiagram
     Note over Your Team: Switch out local component<br>for Green component
 ```
 
-<small>*Diagram over the contribution process for Green Design System*</small>
+<small>_Diagram over the contribution process for Green Design System_</small>
 
 ### Need for component
 
@@ -59,7 +59,7 @@ If you have suggestions for how Green could be improved, or want to report a bug
 
 Eg: `Button: Fontsize and spacings too big` could be tagged with the `Comp: Button` label.
 
-***Note:** Before you open an issue or PR, condider the classification of information you are about to add in it. Only add information if you are certain that it's classified as open (C1).*
+**\*Note:** Before you open an issue or PR, condider the classification of information you are about to add in it. Only add information if you are certain that it's classified as open (C1).\*
 
 ### PRs
 

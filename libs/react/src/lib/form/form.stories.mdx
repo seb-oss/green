@@ -1,5 +1,17 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import { Form, TextInput, EmailInput, NumberInput, Button, ButtonGroup, Checkbox, Text, FormItems, RadioGroup, RadioButton } from './'
+import {
+  Form,
+  TextInput,
+  EmailInput,
+  NumberInput,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  Text,
+  FormItems,
+  RadioGroup,
+  RadioButton,
+} from './'
 import AlertRibbon from '../alert-ribbon/alert-ribbon'
 
 export const Styles = () => (
@@ -35,7 +47,8 @@ export const Template = ({ children, ...props }) => (
     <div className="row">
       <div className="col-12">
         <AlertRibbon type="info" header="" isCloseable={false}>
-          Alert content placed inside a paragraph. Inline link will inherit color from alert to make sure contrast is applied.
+          Alert content placed inside a paragraph. Inline link will inherit
+          color from alert to make sure contrast is applied.
         </AlertRibbon>
       </div>
     </div>

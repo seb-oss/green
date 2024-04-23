@@ -11,5 +11,5 @@ module.exports = composePlugins(
     // For more information on webpack config and Nx see:
     // https://nx.dev/packages/webpack/documents/webpack-config-setup
     return config
-  }
+  },
 )

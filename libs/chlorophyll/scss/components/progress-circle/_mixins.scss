@@ -39,7 +39,9 @@ $variants: (
 @mixin use-animation() {
   animation: progressing ease-out 0.7s;
   transform: rotate(var(--end-value));
-  transition: transform ease-out 0.7s, background-color 0.7s;
+  transition:
+    transform ease-out 0.7s,
+    background-color 0.7s;
 
   @keyframes progressing {
     0% {

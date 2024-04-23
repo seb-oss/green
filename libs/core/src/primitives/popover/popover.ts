@@ -14,7 +14,7 @@ import {
 import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './popover.styles'
 
@@ -189,15 +189,15 @@ export class GdsPopover extends GdsElement {
           () =>
             this.#dialogElementRef.value?.addEventListener(
               'click',
-              this.#clickOutsideListener
+              this.#clickOutsideListener,
             ),
-          0
+          0,
         )
       } else {
         this.#dialogElementRef.value?.close()
         this.#dialogElementRef.value?.removeEventListener(
           'click',
-          this.#clickOutsideListener
+          this.#clickOutsideListener,
         )
       }
     })
@@ -209,7 +209,7 @@ export class GdsPopover extends GdsElement {
         detail: { open: this.open, reason },
         bubbles: false,
         composed: false,
-      })
+      }),
     )
   }
 
@@ -277,7 +277,7 @@ export class GdsPopover extends GdsElement {
           maxWidth: this.calcMaxWidth(referenceEl),
           minHeight: this.calcMinHeight(referenceEl),
           maxHeight: this.calcMaxHeight(referenceEl),
-        })
+        }),
       )
     })
   }

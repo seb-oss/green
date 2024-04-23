@@ -25,7 +25,7 @@ export const gdsInitLocalization = (
   { extraLocales, extraTemplates }: LocalizationConfig = {
     extraLocales: [],
     extraTemplates: new Map(),
-  }
+  },
 ) => {
   const _targetLocales = [...targetLocales] as string[]
 

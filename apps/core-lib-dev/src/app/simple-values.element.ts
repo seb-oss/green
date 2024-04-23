@@ -1,7 +1,7 @@
 import {
   GdsDropdown,
   GdsOption,
-  GdsButton,
+  //GdsButton,
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '@sebgroup/green-core'
@@ -9,7 +9,7 @@ import {
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join('')
+  strs.map((s, i) => s + values[i]).join(''),
 )
 
 export class SimpleValues extends HTMLElement {
@@ -75,11 +75,11 @@ export class SimpleValues extends HTMLElement {
     })
 
     dropdown.addEventListener('gds-ui-state', (e: CustomEvent) =>
-      console.log('UI state changed: ', e.detail)
+      console.log('UI state changed: ', e.detail),
     )
 
     const newOption = document.createElement(
-      getScopedTagName('gds-option')
+      getScopedTagName('gds-option'),
     ) as GdsOption
     newOption.value = { test: 'test' }
     newOption.innerHTML = 'New option'

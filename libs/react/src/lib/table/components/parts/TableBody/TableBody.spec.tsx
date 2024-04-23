@@ -8,7 +8,7 @@ describe('Component: Table body', () => {
     render(
       <table>
         <TableBody />
-      </table>
+      </table>,
     )
     expect(document.body.querySelector('tbody')).toBeInTheDocument()
   })
@@ -19,7 +19,7 @@ describe('Component: Table body', () => {
         <TableBody>
           <TableRow />
         </TableBody>
-      </table>
+      </table>,
     )
     expect(document.body.querySelector('tr')).toBeInTheDocument()
   })
@@ -32,7 +32,7 @@ describe('Component: Table body', () => {
           <TableRow uniqueKey={uniqueKey}></TableRow>
           <TableRow isSubRow></TableRow>
         </TableBody>
-      </table>
+      </table>,
     )
     expect(document.body.querySelector('.sub-row')).toBeInTheDocument()
   })
@@ -48,7 +48,7 @@ describe('Component: Table body', () => {
             <tr className="custom" />
           </React.Fragment>
         </TableBody>
-      </table>
+      </table>,
     )
     expect(document.body.querySelector('.sub-row')).toBeInTheDocument()
     expect(document.body.querySelector('.custom')).toBeInTheDocument()

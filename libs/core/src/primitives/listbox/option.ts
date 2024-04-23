@@ -3,7 +3,7 @@ import { property, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 
@@ -105,7 +105,7 @@ export class GdsOption extends Focusable(GdsElement) {
     }
 
     this.updateComplete.then(() =>
-      TransitionalStyles.instance.apply(this, 'gds-option')
+      TransitionalStyles.instance.apply(this, 'gds-option'),
     )
   }
 
@@ -136,8 +136,8 @@ export class GdsOption extends Focusable(GdsElement) {
       else this.removeAttribute('highlighted')
     }
 
-    return html`${this._tStyles}${when(isMultiple, () => checkbox)}
-      <slot></slot>`
+    return html`${this._tStyles}
+      <div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
   }
 
   #emitSelect(e: MouseEvent | KeyboardEvent) {
@@ -149,7 +149,7 @@ export class GdsOption extends Focusable(GdsElement) {
         detail: {
           value: this.value,
         },
-      })
+      }),
     )
   }
 }

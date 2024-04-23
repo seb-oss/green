@@ -16,7 +16,7 @@ describe('Tabs only allow text as content', () => {
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag).toBeTruthy()
     anchorTag?.map((tags, index) =>
-      expect(tags.textContent).toBe(list[index].text)
+      expect(tags.textContent).toBe(list[index].text),
     )
   })
 
@@ -57,58 +57,88 @@ const tabList: TabProps[] = [
   { title: 'Page 1', children: 'Page 1 Content' },
   { title: 'Page 2', children: 'Page 2 Content' },
   { title: 'Page 3', children: 'Page 3 Content' },
-  { title: 'Page 4', children: <div><div>Page 4 Content</div></div> },
+  {
+    title: 'Page 4',
+    children: (
+      <div>
+        <div>Page 4 Content</div>
+      </div>
+    ),
+  },
   { title: 'Page 5', children: <>Page 5 is a Component</> },
   { title: 'Page 6', disabled: true },
 ]
 
 describe('Tabs allow components as content', () => {
   it('should render all anchor elements', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab {...tab}>{tab.children}</Tab>)}</Tabs>)
+    render(
+      <Tabs>
+        {tabList.map((tab) => (
+          <Tab {...tab}>{tab.children}</Tab>
+        ))}
+      </Tabs>,
+    )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag).toBeTruthy()
     anchorTag?.forEach((tag, index) => {
-      expect(tag.textContent).toBe(tabList[index].title);
-    }  
-    )
+      expect(tag.textContent).toBe(tabList[index].title)
+    })
   })
 
   it('should render the tab set as selected by default', () => {
-    render(<Tabs>
-        <Tab title='NotSelected'></Tab>
-        <Tab title='NotSelected'></Tab>
-        <Tab title='Selected' selected>Tab is selected</Tab>
-      </Tabs>)
+    render(
+      <Tabs>
+        <Tab title="NotSelected"></Tab>
+        <Tab title="NotSelected"></Tab>
+        <Tab title="Selected" selected>
+          Tab is selected
+        </Tab>
+      </Tabs>,
+    )
     const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel')
 
     expect(tabsContent).toBeTruthy()
-    expect(tabsContent[0].textContent).toBe("Tab is selected"); 
+    expect(tabsContent[0].textContent).toBe('Tab is selected')
   })
-  
+
   it('should only render the selected tab element', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab {...tab}>{tab.children}</Tab>)}</Tabs>)
-    const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel', { hidden: true})
+    render(
+      <Tabs>
+        {tabList.map((tab) => (
+          <Tab {...tab}>{tab.children}</Tab>
+        ))}
+      </Tabs>,
+    )
+    const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel', {
+      hidden: true,
+    })
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
-    
+
     expect(anchorTag).toBeTruthy()
-    expect(tabsContent.length).toEqual(6) 
-    expect(tabsContent[0].textContent).toBe(tabList[0].children);
+    expect(tabsContent.length).toEqual(6)
+    expect(tabsContent[0].textContent).toBe(tabList[0].children)
     tabsContent?.forEach((tab, index) => {
-      if(index !== 0)
-        expect(tab.textContent).toBe("");
+      if (index !== 0) expect(tab.textContent).toBe('')
     })
     const clickedTab = 2
     fireEvent.click(anchorTag[clickedTab])
-    expect(tabsContent[clickedTab].textContent).toBe(tabList[clickedTab].children);
+    expect(tabsContent[clickedTab].textContent).toBe(
+      tabList[clickedTab].children,
+    )
 
     tabsContent?.forEach((tab, index) => {
-      if(index !== clickedTab)
-        expect(tab.textContent).toBe("");
+      if (index !== clickedTab) expect(tab.textContent).toBe('')
     })
   })
 
   it('onClick changes selectedTab', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab title={tab.title}>{tab.children}</Tab>)}</Tabs>)
+    render(
+      <Tabs>
+        {tabList.map((tab) => (
+          <Tab title={tab.title}>{tab.children}</Tab>
+        ))}
+      </Tabs>,
+    )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     fireEvent.click(anchorTag[1])
     expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2 Content')
@@ -118,7 +148,13 @@ describe('Tabs allow components as content', () => {
     const onTabChange: jest.Mock = jest
       .fn()
       .mockImplementation((value: number) => value)
-    render(<Tabs onTabChange={onTabChange}>{ tabList.map(tab => <Tab {...tab}></Tab>)}</Tabs>)
+    render(
+      <Tabs onTabChange={onTabChange}>
+        {tabList.map((tab) => (
+          <Tab {...tab}></Tab>
+        ))}
+      </Tabs>,
+    )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     fireEvent.click(anchorTag[1])
     expect(screen.getByRole('tabpanel').textContent).toEqual('Page 2 Content')
@@ -126,7 +162,13 @@ describe('Tabs allow components as content', () => {
   })
 
   it('Should have aria-disabled', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab {...tab}>{tab.children}</Tab>)}</Tabs>)
+    render(
+      <Tabs>
+        {tabList.map((tab) => (
+          <Tab {...tab}>{tab.children}</Tab>
+        ))}
+      </Tabs>,
+    )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag[4].getAttribute('aria-disabled')).toBe(null)
     expect(anchorTag[4].getAttribute('href')).toBe('#')
@@ -134,7 +176,13 @@ describe('Tabs allow components as content', () => {
   })
 
   it('Should set href to "#" if href is not defined ', () => {
-    render(<Tabs>{ tabList.map(tab => <Tab title={tab.title}>{tab.children}</Tab>)}</Tabs>)
+    render(
+      <Tabs>
+        {tabList.map((tab) => (
+          <Tab title={tab.title}>{tab.children}</Tab>
+        ))}
+      </Tabs>,
+    )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag[4].getAttribute('href')).toBe('#')
   })

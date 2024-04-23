@@ -27,7 +27,7 @@
     justify-content: space-between;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: -5px; /* Adjust positioning for handle operation */
       right: -5px; /* Adjust positioning for handle operation */

@@ -31,7 +31,7 @@ describe('Modal', () => {
         confirm="Ok"
       >
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(screen.getByRole('heading').textContent).toBe('This is modal header')
     expect(screen.getByText('modal body')).toBeInTheDocument()
@@ -65,7 +65,7 @@ describe('Modal', () => {
     const { container } = render(
       <Modal header="This is modal header" isOpen={true} type="slideout">
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(container.querySelector('aside')).toBeInTheDocument()
   })
@@ -73,7 +73,7 @@ describe('Modal', () => {
     const { container } = render(
       <Modal header="This is modal header" isOpen={true} type="takeover">
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(container.querySelector('main')).toBeInTheDocument()
   })
@@ -88,7 +88,7 @@ describe('Modal', () => {
         onConfirm={mockOnConfirm}
       >
         modal body
-      </Modal>
+      </Modal>,
     )
     fireEvent.click(screen.getByText('Ok'))
     expect(mockOnConfirm).toBeCalled()
@@ -103,7 +103,7 @@ describe('Modal', () => {
         onDismiss={mockOnDismiss}
       >
         modal body
-      </Modal>
+      </Modal>,
     )
     fireEvent.click(screen.getByText('Nope'))
     expect(mockOnDismiss).toBeCalled()

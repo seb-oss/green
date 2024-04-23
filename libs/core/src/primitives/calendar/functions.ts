@@ -13,13 +13,13 @@ export type Week = {
 
 export function renderMonthGridView(
   date: Date,
-  template: (weeks: Week[]) => TemplateResult
+  template: (weeks: Week[]) => TemplateResult,
 ) {
   const monthStart = startOfMonth(date)
   const monthEnd = endOfMonth(date)
   const weeks = eachWeekOfInterval(
     { start: monthStart, end: monthEnd },
-    { weekStartsOn: 1 }
+    { weekStartsOn: 1 },
   )
 
   return html`${template(
@@ -28,6 +28,6 @@ export function renderMonthGridView(
         start: weekStartDay,
         end: addDays(weekStartDay, 6),
       }),
-    }))
+    })),
   )}`
 }

@@ -1,4 +1,4 @@
-import "@/alert/alert.css"
+import '@/alert/alert.css'
 
 export default function Alert() {
   return (

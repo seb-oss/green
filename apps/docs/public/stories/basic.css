@@ -32,8 +32,11 @@ body {
       var(--cell-sm-cl) 1px
     );
   background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
-  background-size: var(--cell-lg) 100%, 100% var(--cell-lg),
-    var(--cell-sm) 100%, 100% var(--cell-sm);
+  background-size:
+    var(--cell-lg) 100%,
+    100% var(--cell-lg),
+    var(--cell-sm) 100%,
+    100% var(--cell-sm);
   border: 1px solid color-mix(in srgb, var(--color-white), transparent 98%);
   display: grid;
   place-content: center;
@@ -44,9 +47,8 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-      --color-black: hsla(60, 6%, 10%, 1);
-      --color-white: hsl(0 0% 100%);
-    }
+  body {
+    --color-black: hsla(60, 6%, 10%, 1);
+    --color-white: hsl(0 0% 100%);
+  }
 }
-

@@ -41,14 +41,14 @@
       text-wrap: balance;
     }
 
-    &[content-inline="auto"] {
+    &[content-inline='auto'] {
       display: grid;
       grid-auto-columns: auto;
       grid-auto-flow: column;
       grid-template-columns: none;
     }
 
-    &[inline-size="max-content"] {
+    &[inline-size='max-content'] {
       max-width: max-content;
     }
   }

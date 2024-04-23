@@ -1,11 +1,9 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 
+<Meta title="Components/Icons" />
 
-<Meta
-  title="Components/Icons"
-/>
-
-<style>{`
+<style>
+  {`
   button + button {
     margin-left: 1rem;
   }
@@ -21,9 +19,7 @@ Use `sg-icon` which is the base class for icons together with a modifier eg. `sg
 Text content placed inside icons is hidden but will still be picked up by screen readers.
 
 <Canvas>
-  <i class="sg-icon sg-icon-calendar text-primary">
-    Select date
-  </i>
+  <i class="sg-icon sg-icon-calendar text-primary">Select date</i>
 </Canvas>
 
 ## Icon color
@@ -61,4 +57,3 @@ Use utility class for color i.e. `text-*` to set a custom color for icon.
     <i class="sg-icon sg-icon-calendar text-danger">Select date</i>
   </div>
 </Canvas>
-

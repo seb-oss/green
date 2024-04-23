@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
-import React, { ChangeEvent, useState } from "react"
-import Grid from "@/grid/grid"
-import Pattern from "@/pattern/pattern"
+import React, { ChangeEvent, useState } from 'react'
+import Grid from '@/grid/grid'
+import Pattern from '@/pattern/pattern'
 
-import "@/grid/playground.css"
+import '@/grid/playground.css'
 
-type GridAttribute = "small" | "medium" | "large"
+type GridAttribute = 'small' | 'medium' | 'large'
 
 export default function GridPlayground(): JSX.Element {
   const [columns, setColumns] = useState<number>(4)
-  const [paddingInline, setPaddingInline] = useState<GridAttribute>("large")
-  const [paddingBlock, setPaddingBlock] = useState<GridAttribute>("large")
-  const [gapInline, setGapInline] = useState<GridAttribute>("large")
-  const [gapBlock, setGapBlock] = useState<GridAttribute>("large")
+  const [paddingInline, setPaddingInline] = useState<GridAttribute>('large')
+  const [paddingBlock, setPaddingBlock] = useState<GridAttribute>('large')
+  const [gapInline, setGapInline] = useState<GridAttribute>('large')
+  const [gapBlock, setGapBlock] = useState<GridAttribute>('large')
   const [isFluid, setFluid] = useState(false)
 
   const handleColumnsChange = (e: ChangeEvent<HTMLSelectElement>): void => {
@@ -21,13 +21,13 @@ export default function GridPlayground(): JSX.Element {
   }
 
   const handlePaddingInlineChange = (
-    e: ChangeEvent<HTMLSelectElement>
+    e: ChangeEvent<HTMLSelectElement>,
   ): void => {
     setPaddingInline(e.target.value as GridAttribute)
   }
 
   const handlePaddingBlockChange = (
-    e: ChangeEvent<HTMLSelectElement>
+    e: ChangeEvent<HTMLSelectElement>,
   ): void => {
     setPaddingBlock(e.target.value as GridAttribute)
   }
@@ -81,8 +81,8 @@ export default function GridPlayground(): JSX.Element {
         <h2>Playground</h2>
         <p>
           Change the values to see how the grid changes. The grid is a
-          flexbox-based grid system. It uses the CSS properties{" "}
-          <strong>gap</strong>, <strong>padding</strong>, and{" "}
+          flexbox-based grid system. It uses the CSS properties{' '}
+          <strong>gap</strong>, <strong>padding</strong>, and{' '}
           <strong>columns</strong>.
         </p>
         <div className="options">

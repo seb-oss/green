@@ -143,7 +143,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             aria-label=${msg('Scroll right')}
           >
             <gds-icon name="chevron-left"></gds-icon>
-          </button>`
+          </button>`,
       )}
       <div
         id="track"
@@ -179,7 +179,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             aria-label=${msg('Scroll right')}
           >
             <gds-icon name="chevron-right"></gds-icon>
-          </button>`
+          </button>`,
       )}`
   }
 
@@ -216,7 +216,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #calcVisibleAfterDrag = () => {
     this.#firstVisibleIndex = Math.round(
-      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth
+      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth,
     )
     this.#calcLayout()
   }
@@ -239,7 +239,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
           count: numSegments,
           segmentWidth:
             (availableWidth -
-              getSegmentGap(this.isUsingTransitionalStyles) *
+              getSegmentGap(this._isUsingTransitionalStyles) *
                 (numSegments - 1)) /
             numSegments,
         }
@@ -249,11 +249,11 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       const availableWidthIncBtns = this.offsetWidth - BTN_SIZE[this.size] * 2
 
       const maxVisibleSegments = Math.floor(
-        availableWidthIncBtns / this.segMinWidth
+        availableWidthIncBtns / this.segMinWidth,
       )
       const segmentWidth =
         (availableWidth -
-          getSegmentGap(this.isUsingTransitionalStyles) *
+          getSegmentGap(this._isUsingTransitionalStyles) *
             (maxVisibleSegments - 1)) /
         maxVisibleSegments
       return {
@@ -302,7 +302,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
       this.#segmentsContainerLeft =
         -this.#firstVisibleIndex * segmentWidth -
-        getSegmentGap(this.isUsingTransitionalStyles) * this.#firstVisibleIndex
+        getSegmentGap(this._isUsingTransitionalStyles) * this.#firstVisibleIndex
       this.#applySegmentsTransform()
 
       this.#calculatedSegmentWidth = segmentWidth
@@ -314,9 +314,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #applySegmentsTransform = () => {
     window.requestAnimationFrame(() => {
-      this._elSegments.style.transform = `translateX(${
-        this.#segmentsContainerLeft
-      }px)`
+      this._elSegments.style.transform = `translateX(${this.#segmentsContainerLeft}px)`
     })
   }
 
@@ -352,7 +350,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       const selectedSegmentIndex = this.segments.indexOf(segment)
       const offset =
         selectedSegmentIndex * this.#segmentWidth +
-        getSegmentGap(this.isUsingTransitionalStyles) * selectedSegmentIndex
+        getSegmentGap(this._isUsingTransitionalStyles) * selectedSegmentIndex
       this._elIndicator.style.transform = `translateX(${offset}px)`
       this._elIndicator.style.width = `${this.#segmentWidth}px`
     } else {
@@ -363,7 +361,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #handleSegmentClick = (event: Event) => {
     const selectedSegment = this.segments.find(
-      (s) => s === event.target || s.contains(event.target as Node)
+      (s) => s === event.target || s.contains(event.target as Node),
     )
     if (selectedSegment) {
       this.segments.forEach((s) => (s.selected = false))
@@ -378,7 +376,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
           detail: { segment: selectedSegment },
           bubbles: true,
           composed: true,
-        })
+        }),
       )
     }
   }

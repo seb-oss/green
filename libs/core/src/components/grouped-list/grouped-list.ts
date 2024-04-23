@@ -40,7 +40,7 @@ export class GdsGroupedList extends GdsElement {
         () =>
           html`<div class="gds-list-heading" aria-hidden="true" id="label">
             ${this.label}
-          </div>`
+          </div>`,
       )}
       <div role="list" aria-labelledby="label">
         <slot gds-allow="gds-list-item"></slot>

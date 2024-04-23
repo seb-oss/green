@@ -27,7 +27,7 @@ export const Modals = () => {
         >
           This is a modal
         </Modal>,
-        document.body
+        document.body,
       )}
       <Button onClick={() => setIsTakeover(true)}>Open Takeover</Button>
       <Modal

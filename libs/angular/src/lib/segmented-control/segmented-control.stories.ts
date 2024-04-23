@@ -33,7 +33,7 @@ export default {
   title: 'Components/Segmented control',
   component: NggSegmentedControlComponent,
   parameters: {
-    componentIds: ['component-segmented-control']
+    componentIds: ['component-segmented-control'],
   },
   decorators: [
     moduleMetadata({
@@ -42,7 +42,7 @@ export default {
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
     componentWrapperDecorator(
-      (story) => `${story}<router-outlet></router-outlet>`
+      (story) => `${story}<router-outlet></router-outlet>`,
     ),
   ],
 } as Meta

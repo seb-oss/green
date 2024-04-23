@@ -55,7 +55,7 @@ it('should display correct value in dropdown', async () => {
 
   // Query the DOM using the GdsDropdown type
   const dropdown = compiled.querySelector<GdsDropdown>(
-    '[gds-element="gds-dropdown"]' // This is the attribute that Green components use to identify themselves, since the element name itself will have a scoping suffix.
+    '[gds-element="gds-dropdown"]', // This is the attribute that Green components use to identify themselves, since the element name itself will have a scoping suffix.
   )!
 
   // Now you can access properties of the underlying component, such as setting value

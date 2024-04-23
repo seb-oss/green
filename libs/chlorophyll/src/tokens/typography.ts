@@ -2,7 +2,7 @@ export interface Font {
   family: string
   weight: string
 }
-export type Weight = 'light' |'regular' | 'medium' | 'bold'
+export type Weight = 'light' | 'regular' | 'medium' | 'bold'
 
 export const fonts: Record<Weight, Font> = {
   light: {

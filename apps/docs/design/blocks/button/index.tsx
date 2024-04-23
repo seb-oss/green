@@ -1,9 +1,9 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react'
 
 export const Button = forwardRef(({ ...props }, ref) => {
-  return <button> I am a button </button>;
-});
+  return <button> I am a button </button>
+})
 
-Button.displayName = "Button";
+Button.displayName = 'Button'
 
-export default Button;
+export default Button

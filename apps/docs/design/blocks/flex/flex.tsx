@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 
-import "@/flex/flex.css"
+import '@/flex/flex.css'
 
-type FlexJustify = "start" | "end" | "center" | "between" | "around" | "evenly"
-type FlexAlign = "start" | "end" | "center"
-type FlexWrap = "nowrap" | "wrap" | "wrap-reverse"
-type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse"
-type FlexGapSize = "small" | "medium" | "large"
-type FlexInlineSize = "full" | "max-content"
+type FlexJustify = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly'
+type FlexAlign = 'start' | 'end' | 'center'
+type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
+type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
+type FlexGapSize = 'small' | 'medium' | 'large'
+type FlexInlineSize = 'full' | 'max-content'
 
 type FlexProps = {
   children: React.ReactNode
@@ -33,7 +33,7 @@ export default function Flex({
   directionMobile,
   gap,
 }: FlexProps) {
-  let className = "gds-flex"
+  let className = 'gds-flex'
   if (justify) {
     className += ` gds-flex-justify-${justify}`
   }

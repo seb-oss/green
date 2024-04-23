@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { forwardRef } from "react"
-import Link from "next/link"
+import { forwardRef } from 'react'
+import Link from 'next/link'
 
-import "@/card/card.css"
+import '@/card/card.css'
 
-type CardVariant = "default" | "cta"
+type CardVariant = 'default' | 'cta'
 
 type CardProps = {
   children?: React.ReactNode
@@ -17,11 +17,11 @@ type CardProps = {
 
 const Card = forwardRef<HTMLAnchorElement, CardProps>(
   (
-    { children, href, className = "", target, variant = "default", ...rest },
-    ref
+    { children, href, className = '', target, variant = 'default', ...rest },
+    ref,
   ) => {
     const cardClass = `gds-card ${className} ${
-      variant === "cta" ? "gds-card-cta" : ""
+      variant === 'cta' ? 'gds-card-cta' : ''
     }`
 
     return (
@@ -35,9 +35,9 @@ const Card = forwardRef<HTMLAnchorElement, CardProps>(
         {children}
       </Link>
     )
-  }
+  },
 )
 
-Card.displayName = "Card"
+Card.displayName = 'Card'
 
 export default Card

@@ -46,7 +46,7 @@ describe('Stepper', () => {
       const component = render(<Stepper {...props} />)
       const [buttonDown, buttonUp] = await component.findAllByRole('button')
       const input = component.baseElement.getElementsByTagName(
-        'input'
+        'input',
       )[0] as HTMLInputElement
       return {
         component,

@@ -27,18 +27,19 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   const [uuid] = useState(id)
 
-  const validationClassName = validateClassName(validator?.indicator);
+  const validationClassName = validateClassName(validator?.indicator)
 
-  const labelClassNames = classNames('form-control',
-    { [validationClassName]: validator }
-  )
+  const labelClassNames = classNames('form-control', {
+    [validationClassName]: validator,
+  })
 
-  const inputClassNames = classNames(className,
-    { [validationClassName]: validator }
-  )
+  const inputClassNames = classNames(className, {
+    [validationClassName]: validator,
+  })
 
   const describedBy = classNames(ariaDescribedBy, {
-    [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+    [`${uuid}_message`]:
+      validator?.message !== undefined && validator.message.length > 0,
   })
 
   return (
@@ -58,7 +59,11 @@ export const Checkbox = ({
         />
         <i />
       </label>
-      {validator && <span className="form-info" id={`${uuid}_message`}>{validator.message}</span>}
+      {validator && (
+        <span className="form-info" id={`${uuid}_message`}>
+          {validator.message}
+        </span>
+      )}
     </div>
   )
 }

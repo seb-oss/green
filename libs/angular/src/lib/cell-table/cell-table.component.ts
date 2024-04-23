@@ -64,7 +64,7 @@ export class NggCellTableComponent {
   }
 
   getTableHeaderListValueFromNonMain = (
-    header: TableHeaderListItem
+    header: TableHeaderListItem,
   ): TableHeaderListValueType => {
     if (header.valueType) return header.valueType || ''
     return ''

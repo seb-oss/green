@@ -18,7 +18,7 @@ describe('Component: Table row', () => {
     render(
       <WrapperTableRow>
         <TableRow />
-      </WrapperTableRow>
+      </WrapperTableRow>,
     )
     expect(document.body.querySelector('tr')).toBeInTheDocument()
   })
@@ -41,7 +41,7 @@ describe('Component: Table row', () => {
           <TableRow uniqueKey={parentUniqueKey}></TableRow>
           <TableRow isSubRow parentKey={parentUniqueKey}></TableRow>
         </WrapperTableRow>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     await user.click(screen.getAllByRole('button')[0])
     expect(onRowExpand).toBeCalled()
@@ -64,14 +64,14 @@ describe('Component: Table row', () => {
           <TableRow uniqueKey={parentUniqueKey} isExpanded></TableRow>
           <TableRow isSubRow parentKey={parentUniqueKey}></TableRow>
         </WrapperTableRow>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(
-      document.body.querySelector('tr')?.classList.contains('expanded')
+      document.body.querySelector('tr')?.classList.contains('expanded'),
     ).toBeTruthy()
     expect(document.body.querySelector('.sub-row')).toBeInTheDocument()
     expect(
-      document.body.querySelector('.sub-row')?.classList.contains('show')
+      document.body.querySelector('.sub-row')?.classList.contains('show'),
     ).toBeTruthy()
   })
 
@@ -91,10 +91,10 @@ describe('Component: Table row', () => {
         <WrapperTableRow>
           <TableRow uniqueKey={uniqueKey} />
         </WrapperTableRow>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector(`#tb_checkbox_${uniqueKey}`) as HTMLElement
+      document.body.querySelector(`#tb_checkbox_${uniqueKey}`) as HTMLElement,
     )
     expect(onRowSelect).toBeCalled()
   })
@@ -114,10 +114,10 @@ describe('Component: Table row', () => {
         <WrapperTableRow>
           <TableRow isHeaderRow />
         </WrapperTableRow>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector('#tb_checkbox_all') as HTMLElement
+      document.body.querySelector('#tb_checkbox_all') as HTMLElement,
     )
     expect(onRowSelect).toBeCalled()
   })
@@ -135,7 +135,7 @@ describe('Component: Table row', () => {
         <WrapperTableRow>
           <TableRow isSubRow />
         </WrapperTableRow>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(document.body.querySelectorAll('td').length).toEqual(2)
   })

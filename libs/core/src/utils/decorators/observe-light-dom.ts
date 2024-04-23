@@ -11,12 +11,12 @@ export function observeLightDOM(
     childList: true,
     subtree: false,
     characterData: true,
-  }
+  },
 ) {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     _propertyKey: string,
-    descriptor: TypedPropertyDescriptor<Handler>
+    descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
     let observer: MutationObserver
 

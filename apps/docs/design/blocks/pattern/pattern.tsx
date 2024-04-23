@@ -1,6 +1,6 @@
-import React, { ReactNode, useEffect, useRef } from "react"
+import React, { ReactNode, useEffect, useRef } from 'react'
 
-import "./pattern.css"
+import './pattern.css'
 
 interface PatternProps {
   children?: ReactNode
@@ -17,7 +17,7 @@ export default function Pattern({
 }: PatternProps) {
   const style = height
     ? {
-        "--gds-pattern-max-height": `${height}px`,
+        '--gds-pattern-max-height': `${height}px`,
       }
     : {}
 
@@ -25,7 +25,7 @@ export default function Pattern({
 
   useEffect(() => {
     if (height && figureRef.current) {
-      figureRef.current.classList.add("custom")
+      figureRef.current.classList.add('custom')
     }
   }, [height])
 

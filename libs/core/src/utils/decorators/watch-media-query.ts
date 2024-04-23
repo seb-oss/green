@@ -34,7 +34,7 @@ export function watchMediaQuery(q: string) {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     _propertyKey: string,
-    descriptor: TypedPropertyDescriptor<Handler>
+    descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
     const mediaQuery = window.matchMedia(q)
 

@@ -87,7 +87,7 @@ export default {
 } as Meta<NggSortableListComponent>
 
 const createTemplate = (
-  suffixTemplate: boolean = false
+  suffixTemplate: boolean = false,
 ): Story<NggSortableListComponent> => {
   return (args: NggSortableListComponent) => ({
     template: `
@@ -116,7 +116,7 @@ const createTemplate = (
 
 const onItemSelected = (
   changedItem: SortableListItem,
-  items: SortableListItem[]
+  items: SortableListItem[],
 ) => {
   console.log('Updated item:', changedItem, items)
 }

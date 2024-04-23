@@ -13,7 +13,7 @@ const templateCache = new WeakMap<TemplateStringsArray, string[]>()
  * @returns A new template literal tag that strips whitespace from the template
  */
 export function stripWhitespace(
-  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any
+  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any,
 ) {
   return (strings: TemplateStringsArray, ...values: any[]) => {
     let modstrings = templateCache.get(strings)

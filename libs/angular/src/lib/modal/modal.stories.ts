@@ -15,57 +15,61 @@ export default {
     docs: {
       page: Documentation,
     },
-    componentIds: ['component-dialogue', 'component-slideout', 'component-foldout', 'component-takeover'],
+    componentIds: [
+      'component-dialogue',
+      'component-slideout',
+      'component-foldout',
+      'component-takeover',
+    ],
   },
 } as Meta<NggModalComponent>
 
 const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
-  const isOpen = true;
+  const isOpen = true
   return {
-  template: `
+    template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" (closed)="isOpen = false">
       <p>Modal Body</p>
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
   `,
-  props: {
-    ...args,
-    isOpen,
+    props: {
+      ...args,
+      isOpen,
+    },
   }
-}
 }
 
 export const Default = Template.bind({})
 Default.args = {
-    header: 'Header',
-    dismissLabel: 'Secondary',
-    confirmLabel: 'Primary',
-    trapFocus: false
+  header: 'Header',
+  dismissLabel: 'Secondary',
+  confirmLabel: 'Primary',
+  trapFocus: false,
 }
 
 export const Slideout = Template.bind({})
 Slideout.args = {
-    modalType: 'slideout',
-    header: 'Header',
-    dismissLabel: 'Secondary',
-    confirmLabel: 'Primary',
-    trapFocus: false
+  modalType: 'slideout',
+  header: 'Header',
+  dismissLabel: 'Secondary',
+  confirmLabel: 'Primary',
+  trapFocus: false,
 }
 
 export const Takeover = Template.bind({})
 Takeover.args = {
-    modalType: 'takeover',
-    header: 'Header',
-    dismissLabel: 'Secondary',
-    confirmLabel: 'Primary',
-    trapFocus: false
+  modalType: 'takeover',
+  header: 'Header',
+  dismissLabel: 'Secondary',
+  confirmLabel: 'Primary',
+  trapFocus: false,
 }
 
-
 const CustomTemplate: Story<NggModalComponent> = (args: NggModalComponent) => {
-  const isOpen = true;
+  const isOpen = true
   return {
-  template: `
+    template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
       <ng-container nggModalHeader>
         <div style="display:flex;align-items:center;">
@@ -80,19 +84,19 @@ const CustomTemplate: Story<NggModalComponent> = (args: NggModalComponent) => {
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
   `,
-  props: {
-    ...args,
-    isOpen
+    props: {
+      ...args,
+      isOpen,
+    },
   }
-}
 }
 
 export const Custom = CustomTemplate.bind({})
 Custom.args = {
-    header: 'Header',
-    dismissLabel: 'Secondary',
-    confirmLabel: 'Primary',
-    trapFocus: false,
-    hideHeader: false,
-    hideFooter: false
+  header: 'Header',
+  dismissLabel: 'Secondary',
+  confirmLabel: 'Primary',
+  trapFocus: false,
+  hideHeader: false,
+  hideFooter: false,
 }

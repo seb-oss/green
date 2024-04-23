@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import "@/hero/hero.css"
+import '@/hero/hero.css'
 
 export default function Hero({
   heading,

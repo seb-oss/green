@@ -28,33 +28,33 @@ Green currently provides three different variants of the modal - **dialog** (def
 
 ## Modal Options
 
-|Input|Type|Description|
-|:--------|:----------|:------|
-|modalType|`ModalType`|The type of modal. Can be: `default` (dialog), `slideout` (slide-out), `takeover` (fullscreen).|
-|header|`string`|The header text of the modal.|
-|confirmLabel|`string`|The text of the confirm button.|
-|dismissLabel|`string`|The text of the dismiss button.|
-|size|`string`|The size of the modal.|
-|isOpen|`boolean`|Determines whether the modal is open of closed.|
-|trapFocus|`boolean`|Determines whether focus should be trapped inside the modal or not.|
-|hideHeader|`boolean`|Determines whether the header part of the modal is hidden or not.|
-|hideFooter|`boolean`|Determines wheather the footer part of the modal is hidden or not.|
+| Input        | Type        | Description                                                                                     |
+| :----------- | :---------- | :---------------------------------------------------------------------------------------------- |
+| modalType    | `ModalType` | The type of modal. Can be: `default` (dialog), `slideout` (slide-out), `takeover` (fullscreen). |
+| header       | `string`    | The header text of the modal.                                                                   |
+| confirmLabel | `string`    | The text of the confirm button.                                                                 |
+| dismissLabel | `string`    | The text of the dismiss button.                                                                 |
+| size         | `string`    | The size of the modal.                                                                          |
+| isOpen       | `boolean`   | Determines whether the modal is open of closed.                                                 |
+| trapFocus    | `boolean`   | Determines whether focus should be trapped inside the modal or not.                             |
+| hideHeader   | `boolean`   | Determines whether the header part of the modal is hidden or not.                               |
+| hideFooter   | `boolean`   | Determines wheather the footer part of the modal is hidden or not.                              |
 
 ### Outputs
 
-|Event|Description|
-|:--------|:------|
-|isOpenChange|Event emitted when modal is opened or closed. Note that the event is not emitted if subscribed to `closed`.|
-|closed|Event emitted when modal is usually closed (but modal is not closed and will not close by itself). When subscribed to this event you will need to close the modal manually e.g. by updating the `isOpen` property.|
-|confirm|Event emitted when confirm button is clicked.|
-|dismiss|Event emitted when dismiss button is clicked.|
+| Event        | Description                                                                                                                                                                                                        |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| isOpenChange | Event emitted when modal is opened or closed. Note that the event is not emitted if subscribed to `closed`.                                                                                                        |
+| closed       | Event emitted when modal is usually closed (but modal is not closed and will not close by itself). When subscribed to this event you will need to close the modal manually e.g. by updating the `isOpen` property. |
+| confirm      | Event emitted when confirm button is clicked.                                                                                                                                                                      |
+| dismiss      | Event emitted when dismiss button is clicked.                                                                                                                                                                      |
 
 ### Directives
 
-|Directive|Selector|Description|
-|:--------|:----------|:------|
-|NggModalHeaderDirective|nggModalHeader|Used for customizing the header part of the modal.|
-|NggModalFooterDirective|nggModalFooter|Used for customizing the footer part of the modal.|
+| Directive               | Selector       | Description                                        |
+| :---------------------- | :------------- | :------------------------------------------------- |
+| NggModalHeaderDirective | nggModalHeader | Used for customizing the header part of the modal. |
+| NggModalFooterDirective | nggModalFooter | Used for customizing the footer part of the modal. |
 
 ## Examples
 

@@ -27,7 +27,7 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOnClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     item.onClick && item.onClick(event)
     setIsOpen((state) => {

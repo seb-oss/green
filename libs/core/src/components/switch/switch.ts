@@ -42,7 +42,7 @@ export class GdsSwitch extends LitElement {
     super.update(changedProperties)
     if (!this.inputElement) {
       this.inputElement = this.shadowRoot?.getElementById(
-        'switch'
+        'switch',
       ) as HTMLInputElement
     }
     this.reflectAttributesToInput()

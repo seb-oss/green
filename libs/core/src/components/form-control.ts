@@ -142,7 +142,7 @@ export abstract class GdsFormControlElement<ValueT = any>
         valueMissing: false,
         valid: !this.invalid,
       },
-      this.validationMessage || 'Error message'
+      this.validationMessage || 'Error message',
     )
   }
 

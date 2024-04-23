@@ -18,16 +18,22 @@ describe('Component: FlexBox', () => {
 
   it('Should render props', () => {
     render(<Flexbox {...flexboxProps}>i am child</Flexbox>)
-    const className: string = screen.getByText('i am child').getAttribute('class') as string
-    expect(className).toBe('d-flex align-items-start align-content-start align-self-auto justify-content-start flex-column flex-wrap')
+    const className: string = screen
+      .getByText('i am child')
+      .getAttribute('class') as string
+    expect(className).toBe(
+      'd-flex align-items-start align-content-start align-self-auto justify-content-start flex-column flex-wrap',
+    )
   })
 
   it('Should pass in custom classname', () => {
     render(
       <Flexbox className="customName" {...flexboxProps}>
         i am child
-      </Flexbox>
+      </Flexbox>,
     )
-    expect(screen.getByText('i am child').getAttribute('class')).toContain('customName')
+    expect(screen.getByText('i am child').getAttribute('class')).toContain(
+      'customName',
+    )
   })
 })

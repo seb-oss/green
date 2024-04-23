@@ -58,7 +58,7 @@ describe('Accordion', () => {
 
     expect(screen.getAllByRole('region')[0].hidden).toBeFalsy()
     expect(
-      screen.getAllByRole('button')[0].getAttribute('aria-expanded')
+      screen.getAllByRole('button')[0].getAttribute('aria-expanded'),
     ).toEqual('true')
   })
 
@@ -68,10 +68,10 @@ describe('Accordion', () => {
     fireEvent.click(screen.getAllByRole('button')[0])
 
     expect(screen.getAllByRole('button')[0].id).toEqual(
-      screen.getAllByRole('region')[0].getAttribute('aria-labelledby')
+      screen.getAllByRole('region')[0].getAttribute('aria-labelledby'),
     )
     expect(screen.getAllByRole('region')[0].id).toEqual(
-      screen.getAllByRole('button')[0].getAttribute('aria-controls')
+      screen.getAllByRole('button')[0].getAttribute('aria-controls'),
     )
   })
 
@@ -85,7 +85,7 @@ describe('Accordion', () => {
           { ...items[1], onClick: mockFunction },
           { ...items[2], onClick: mockFunction },
         ]}
-      />
+      />,
     )
 
     fireEvent.click(screen.getAllByRole('button')[0])
@@ -110,7 +110,7 @@ describe('Accordion', () => {
           { ...items[1] },
           { ...items[2] },
         ]}
-      />
+      />,
     )
 
     fireEvent.click(screen.getAllByRole('button')[0])

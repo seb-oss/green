@@ -16,7 +16,7 @@ describe('InPageWizardStepCardComponent', () => {
           title: 'Test Title',
           stepText: 'Test Step Text',
         },
-      }
+      },
     )
     const rootElement = findByTestId('in-page-wizard-step-card-root')
     expect(rootElement).toBeDefined()
@@ -36,7 +36,7 @@ describe('InPageWizardStepCardComponent', () => {
             title: 'Test Title',
             stepText: 'Test Step Text',
           },
-        }
+        },
       )
 
       const title = await findByTestId('in-page-wizard-step-card-title')
@@ -63,7 +63,7 @@ describe('InPageWizardStepCardComponent', () => {
             nextBtnText: 'Test Next',
             isActive: true,
           },
-        }
+        },
       )
 
       await waitFor(() => {
@@ -86,7 +86,7 @@ describe('InPageWizardStepCardComponent', () => {
             nextBtnText: 'Test Next',
             isActive: true,
           },
-        }
+        },
       )
 
       const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
@@ -107,7 +107,7 @@ describe('InPageWizardStepCardComponent', () => {
             nextBtnText: 'Test Next',
             isActive: true,
           },
-        }
+        },
       )
 
       const el = queryByTestId('in-page-wizard-step-card-edit-btn')
@@ -127,7 +127,7 @@ describe('InPageWizardStepCardComponent', () => {
             nextBtnText: 'Test Next',
             isActive: true,
           },
-        }
+        },
       )
 
       const content = await findByTestId('in-page-wizard-step-card-content')
@@ -135,7 +135,7 @@ describe('InPageWizardStepCardComponent', () => {
       expect(content.childNodes.length).toEqual(1)
 
       expect(
-        (content.childNodes[0] as HTMLElement).getAttribute('data-testid')
+        (content.childNodes[0] as HTMLElement).getAttribute('data-testid'),
       ).toEqual('fake-step-card-content')
     })
 
@@ -154,7 +154,7 @@ describe('InPageWizardStepCardComponent', () => {
             isActive: true,
             handleNextClick: nextSpy,
           },
-        }
+        },
       )
       // Arrange
       const root = await findByTestId('in-page-wizard-step-card-root')
@@ -188,7 +188,7 @@ describe('InPageWizardStepCardComponent', () => {
             editBtnText: 'Test Edit',
             isCompleted: true,
           },
-        }
+        },
       )
 
       await waitFor(() => {
@@ -212,7 +212,7 @@ describe('InPageWizardStepCardComponent', () => {
             isCompleted: true,
             isActive: false,
           },
-        }
+        },
       )
       const editBtn = await findByTestId('in-page-wizard-step-card-edit-btn')
       expect(editBtn).toBeDefined()
@@ -232,7 +232,7 @@ describe('InPageWizardStepCardComponent', () => {
             editBtnText: 'Test Edit',
             isCompleted: true,
           },
-        }
+        },
       )
       await waitFor(() => {
         expect(queryByTestId('in-page-wizard-step-card-next-btn')).toBeNull()
@@ -252,14 +252,14 @@ describe('InPageWizardStepCardComponent', () => {
             editBtnText: 'Test Edit',
             isCompleted: true,
           },
-        }
+        },
       )
       const content = await findByTestId('in-page-wizard-step-card-content')
       expect(content).toBeDefined()
       expect(content.childNodes.length).toEqual(1)
 
       expect(
-        (content.childNodes[0] as HTMLElement).getAttribute('data-testid')
+        (content.childNodes[0] as HTMLElement).getAttribute('data-testid'),
       ).toEqual('fake-step-card-content')
     })
 
@@ -281,7 +281,7 @@ describe('InPageWizardStepCardComponent', () => {
           componentOutputs: {
             handleEditClick: editSpy,
           },
-        }
+        },
       )
       // Arrange
       const editBtn = await findByTestId('in-page-wizard-step-card-edit-btn')
@@ -315,7 +315,7 @@ describe('InPageWizardStepCardComponent', () => {
             isActive: false,
             isCompleted: false,
           },
-        }
+        },
       )
       await waitFor(() => {
         expect(queryByTestId('in-page-wizard-step-card-next-btn')).toBeNull()
@@ -334,7 +334,7 @@ describe('InPageWizardStepCardComponent', () => {
             isActive: false,
             isCompleted: false,
           },
-        }
+        },
       )
       await waitFor(() => {
         expect(queryByTestId('in-page-wizard-step-card-edit-btn')).toBeNull()
@@ -354,7 +354,7 @@ describe('InPageWizardStepCardComponent', () => {
             isActive: false,
             isCompleted: false,
           },
-        }
+        },
       )
       await waitFor(() => {
         expect(queryByTestId('in-page-wizard-step-card-content')).toBeNull()

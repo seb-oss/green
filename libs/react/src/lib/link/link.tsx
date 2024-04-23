@@ -13,7 +13,7 @@ export const Link = ({
   role,
   ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const buttonClassName = classNames(className, { "button": button }, button)
+  const buttonClassName = classNames(className, { button: button }, button)
 
   return (
     <a

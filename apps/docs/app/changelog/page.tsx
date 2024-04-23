@@ -1,7 +1,7 @@
-import Link from "next/link"
-import Layout from "&/changelog"
-import { allChangelogs, Changelog } from "content"
-import { compareDesc, format, parseISO } from "date-fns"
+import Link from 'next/link'
+import Layout from '&/changelog'
+import { allChangelogs, Changelog } from 'content'
+import { compareDesc, format, parseISO } from 'date-fns'
 
 function ChangelogCard(changelog: Changelog) {
   return (
@@ -9,7 +9,7 @@ function ChangelogCard(changelog: Changelog) {
       <aside>
         <div>{changelog.version}</div>
         <time dateTime={changelog.date}>
-          {format(parseISO(changelog.date), "LL.d.yy")}
+          {format(parseISO(changelog.date), 'LL.d.yy')}
         </time>
       </aside>
       <div>
@@ -24,7 +24,7 @@ function ChangelogCard(changelog: Changelog) {
 
 export default function ChangelogPage() {
   const changelogs = allChangelogs.sort((a, b) =>
-    compareDesc(new Date(a.date), new Date(b.date))
+    compareDesc(new Date(a.date), new Date(b.date)),
   )
 
   return (

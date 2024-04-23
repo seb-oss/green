@@ -1,10 +1,10 @@
-@import "reset.css";
-@import "tokens.css";
-@import "motion.css";
-@import "typography.css";
-@import "utilities.css";
-@import "responsive.css";
-@import "syntax.css";
+@import 'reset.css';
+@import 'tokens.css';
+@import 'motion.css';
+@import 'typography.css';
+@import 'utilities.css';
+@import 'responsive.css';
+@import 'syntax.css';
 
 @layer core {
   html {

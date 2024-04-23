@@ -36,7 +36,7 @@ describe('Form component', () => {
   it('Should render correct form direction', () => {
     const { container } = render(<Form direction="horizontal">i am form</Form>)
     expect(
-      container.querySelector('form')?.className.includes('horizontal')
+      container.querySelector('form')?.className.includes('horizontal'),
     ).toBe(true)
   })
 
@@ -120,7 +120,7 @@ describe('Form component', () => {
         >
           <Checkbox label="checkbox" value="checkme" />
         </FormItems>
-      </Form>
+      </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
     fireEvent.click(screen.getByText('checkbox'))
@@ -145,7 +145,7 @@ describe('Form component', () => {
           </RadioGroup>
         </FormItems>
         <button type="submit">submit</button>
-      </Form>
+      </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
     fireEvent.click(screen.getByText('submit'))
@@ -156,7 +156,7 @@ describe('Form component', () => {
     const mockFn: jest.Mock = jest.fn().mockImplementation((value) => value())
     const mockFormContext: jest.SpyInstance = jest.spyOn(
       FormContext,
-      'useFormContext'
+      'useFormContext',
     )
     mockFormContext.mockImplementation(() => ({
       setValues: mockFn,

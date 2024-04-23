@@ -27,7 +27,7 @@ import '../../primitives/popover'
 import { GdsFormControlElement } from '../form-control'
 
 import styles from './dropdown.styles'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 /**
  * @element gds-dropdown
@@ -152,7 +152,7 @@ export class GdsDropdown<ValueT = any>
    */
   get options() {
     return Array.from(this.#optionElements).filter(
-      (o) => !o.hasAttribute('isplaceholder')
+      (o) => !o.hasAttribute('isplaceholder'),
     )
   }
 
@@ -162,7 +162,7 @@ export class GdsDropdown<ValueT = any>
    */
   get placeholder() {
     return Array.from(this.#optionElements).find((o) =>
-      o.hasAttribute('isplaceholder')
+      o.hasAttribute('isplaceholder'),
     )
   }
 
@@ -182,7 +182,7 @@ export class GdsDropdown<ValueT = any>
                 acc +
                 this.options.find((v) => v.value === cur)?.innerHTML +
                 ', ',
-              ''
+              '',
             )
             .slice(0, -2))
     } else {
@@ -216,7 +216,7 @@ export class GdsDropdown<ValueT = any>
     updateWhenLocaleChanges(this)
 
     this.#optionElements = this.getElementsByTagName(
-      getScopedTagName('gds-option')
+      getScopedTagName('gds-option'),
     ) as HTMLCollectionOf<GdsOption>
   }
 
@@ -235,7 +235,7 @@ export class GdsDropdown<ValueT = any>
       ${this._tStyles}
       ${when(
         this.label && !this.hideLabel,
-        () => html`<label for="trigger">${this.label}</label>`
+        () => html`<label for="trigger">${this.label}</label>`,
       )}
 
       <span class="form-info"><slot name="sub-label"></slot></span>
@@ -269,14 +269,15 @@ export class GdsDropdown<ValueT = any>
       >
         ${when(
           this.searchable,
-          () => html`<input
-            id="searchinput"
-            type="text"
-            aria-label="${msg('Filter available options')}"
-            placeholder="${msg('Search')}"
-            @keydown=${this.#handleSearchFieldKeyDown}
-            @keyup=${this.#handleSearchFieldKeyUp}
-          />`
+          () =>
+            html`<input
+              id="searchinput"
+              type="text"
+              aria-label="${msg('Filter available options')}"
+              placeholder="${msg('Search')}"
+              @keydown=${this.#handleSearchFieldKeyDown}
+              @keyup=${this.#handleSearchFieldKeyUp}
+            />`,
         )}
 
         <gds-listbox
@@ -319,7 +320,7 @@ export class GdsDropdown<ValueT = any>
     else if (
       !this.placeholder &&
       this.options.find((o) =>
-        this.compareWith(o.value, this.value as ValueT)
+        this.compareWith(o.value, this.value as ValueT),
       ) === undefined
     ) {
       this.options[0] && (this.options[0].selected = true)
@@ -352,7 +353,7 @@ export class GdsDropdown<ValueT = any>
 
     if (!input.value) return
     const filteredOptions = options.filter(
-      (o) => !this.searchFilter(input.value, o)
+      (o) => !this.searchFilter(input.value, o),
     )
     filteredOptions.forEach((o) => (o.hidden = true))
   }
@@ -409,7 +410,7 @@ export class GdsDropdown<ValueT = any>
           detail: { value: this.value },
           bubbles: true,
           composed: true,
-        })
+        }),
       )
     })
   }
@@ -434,7 +435,7 @@ export class GdsDropdown<ValueT = any>
         detail: { open },
         bubbles: true,
         composed: true,
-      })
+      }),
     )
   }
 

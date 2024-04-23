@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import React, { useEffect, useRef, useState } from "react"
-import Link from "next/link"
+import React, { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
-import "./toc.css"
+import './toc.css'
 
 interface Heading {
   slug: string
@@ -27,7 +27,7 @@ const Arrow = () => {
 }
 
 const TOC: React.FC<TOCProps> = ({ headings, component }) => {
-  const [activeId, setActiveId] = useState("")
+  const [activeId, setActiveId] = useState('')
   const observer = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
@@ -45,8 +45,8 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [headings])
 
   const handleClick = (slug: string) => {
@@ -61,7 +61,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
           lastItem.push(heading)
         } else {
           throw new Error(
-            "Level 3 and 4 headings should be after a level 2 heading."
+            'Level 3 and 4 headings should be after a level 2 heading.',
           )
         }
       } else if (heading.level === 2) {
@@ -79,19 +79,19 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
       }
       return acc
     },
-    []
+    [],
   )
 
   return (
     <aside className="toc">
       <span>On this page</span>
-      <nav data-name={headings.length > 0 ? "On this page" : ""}>
+      <nav data-name={headings.length > 0 ? 'On this page' : ''}>
         <Link
           key={`#top`}
           href={`#top`}
-          data-id={"top"}
-          data-level={"1"}
-          onClick={() => handleClick("top")}
+          data-id={'top'}
+          data-level={'1'}
+          onClick={() => handleClick('top')}
           passHref
         >
           {component}
@@ -107,7 +107,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
                   key={`#${item[0].slug}`}
                   href={`#${item[0].slug}`}
                   className={`toc-link ${
-                    activeId === item[0].slug ? "active" : ""
+                    activeId === item[0].slug ? 'active' : ''
                   }`}
                   data-id={item[0].slug}
                   data-level={item[0].level}
@@ -123,7 +123,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
                   key={`#${heading.slug}`}
                   href={`#${heading.slug}`}
                   className={`toc-link ${
-                    activeId === heading.slug ? "active" : ""
+                    activeId === heading.slug ? 'active' : ''
                   }`}
                   data-id={heading.slug}
                   data-level={heading.level}
@@ -138,7 +138,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
             <Link
               key={`#${item.slug}`}
               href={`#${item.slug}`}
-              className={`toc-link ${activeId === item.slug ? "active" : ""}`}
+              className={`toc-link ${activeId === item.slug ? 'active' : ''}`}
               data-id={item.slug}
               data-level={item.level}
               onClick={() => handleClick(item.slug)}
@@ -146,7 +146,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
             >
               {item.text}
             </Link>
-          )
+          ),
         )}
       </nav>
     </aside>

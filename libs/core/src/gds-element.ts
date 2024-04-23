@@ -7,7 +7,11 @@ export class GdsElement extends LitElement {
    */
   gdsElementName = ''
 
-  isUsingTransitionalStyles = false
+  /**
+   * Whether the element is using transitional styles.
+   * @internal
+   */
+  _isUsingTransitionalStyles = false
 
   connectedCallback(): void {
     super.connectedCallback()

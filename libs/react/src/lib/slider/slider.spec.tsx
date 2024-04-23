@@ -92,10 +92,10 @@ describe('Slider', () => {
         min={10}
         max={60}
         onChange={onChange}
-      />
+      />,
     )
     const inputField = container.querySelector(
-      'input[type=text]'
+      'input[type=text]',
     ) as HTMLInputElement
     fireEvent.blur(inputField, { target: { value: '' } })
     expect(onChange).toBeCalledWith(10)

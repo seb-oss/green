@@ -1,5 +1,5 @@
 @use './mixins';
 
 .gds-select {
-  @include mixins.add-select()
+  @include mixins.add-select();
 }

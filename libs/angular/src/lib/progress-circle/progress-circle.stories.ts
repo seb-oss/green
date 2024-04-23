@@ -45,7 +45,7 @@ export default {
 } as Meta<NggProgressCircleComponent>
 
 const Template: Story<NggProgressCircleComponent> = (
-  args: NggProgressCircleComponent
+  args: NggProgressCircleComponent,
 ) => ({
   template: `
       <ngg-progress-circle [theme]="theme" [value]="value">

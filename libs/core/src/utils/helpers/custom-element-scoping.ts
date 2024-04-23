@@ -134,7 +134,7 @@ const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
  * lookup table to include the version suffix, and then passes the template on to the provided template tag.
  */
 export function htmlTemplateTagFactory(
-  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any
+  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any,
 ) {
   return (strings: TemplateStringsArray, ...values: any[]) => {
     if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
@@ -166,7 +166,7 @@ export function getScopedTagName(tagName: string) {
  */
 export function getUnscopedTagName(tagName: string) {
   return [...elementLookupTable.entries()].find(
-    ([, value]) => value === tagName
+    ([, value]) => value === tagName,
   )?.[0]
 }
 

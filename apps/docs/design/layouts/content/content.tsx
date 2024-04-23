@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import "&/content/content.css"
+import '&/content/content.css'
 
 type LayoutType =
-  | "home"
-  | "content"
-  | "component"
-  | "changelog"
-  | "search"
-  | "not-found"
-  | "article"
+  | 'home'
+  | 'content'
+  | 'component'
+  | 'changelog'
+  | 'search'
+  | 'not-found'
+  | 'article'
 
 export default function Content({
   children,

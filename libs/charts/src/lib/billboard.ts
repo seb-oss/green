@@ -46,14 +46,14 @@ export const createOptions = ({
       ...res,
       [d.name]: d.type || defaultType,
     }),
-    {}
+    {},
   )
   const axes = settings.data.reduce(
     (res, d) => ({
       ...res,
       [d.name]: d.axis || 'y',
     }),
-    {}
+    {},
   )
 
   const color = Object.assign({}, settings.style?.color)
@@ -169,7 +169,7 @@ export const createOptions = ({
         }),
         {
           ...(options.axis || {}),
-        }
+        },
       )
     }
     options.axis = {
@@ -233,7 +233,7 @@ export const createUpdate = ({
 
 export const createInfo = (
   settings: ChartSettings,
-  chart: BBChart
+  chart: BBChart,
 ): ChartInfo => {
   const info: Partial<ChartInfo> = {
     legend: {
