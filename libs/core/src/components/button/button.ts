@@ -52,10 +52,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   type?: HTMLButtonElement['type']
 
   /**
-   * The variant of the button. Defaults to "primary".
+   * The rank of the button. Defaults to "primary".
    */
   @property({ reflect: true })
-  variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
+  rank: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   /**
    * Defines which set the button belongs to. Defaults to "neutral".
@@ -90,9 +90,11 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   render() {
+
+    const buttonClasses = { circle: this.#isIconButton, icon: this.#isIconButton, small: this.size === 'small', large: this.size === 'large'}
     return html`
       <button
-        class="${classMap({ circle: this.#isIconButton })}"
+        class=${classMap(buttonClasses)}
         ?type="${this.type}"
         ?disabled="${this.disabled}"
         @click="${this.#handleClick}"

@@ -3,10 +3,12 @@
 @use '../../../../chlorophyll/scss/tokens/shame' as tokens;
 @use '../../../../chlorophyll/scss/common';
 
+$button-danger-border: tokens.get(tokens.$red, 0);
+
 @layer base, reset, transitional-styles;
 
 @layer transitional-styles {
-  @layer _base, _variants, _overrides;
+  @layer _base, _ranks, _overrides;
 
   :host {
     display: inline-block;
@@ -17,19 +19,46 @@
       @include button.reset();
       @include button.base();
       @include button.primary();
+      font-size: inherit;
       overflow: hidden;
+    }
+
+    button.icon {
+      padding: .75rem;
+    }
+
+    button.icon.small {
+      padding: .5rem;
+    }
+
+    button.icon.large {
+      padding: 1.25rem;
     }
 
     button gds-ripple {
       display: none;
     }
 
-    :host([variant*='secondary']) button {
+    :host([rank*='secondary']) button {
       @include button.secondary();
     }
   
-    :host([variant*='tertiary']) button {
+    :host([rank*='tertiary']) button {
       @include button.tertiary();
+    }
+
+    :host([variant='negative']:not([rank='secondary'], [rank='tertiary'])) button,
+    :host([variant='negative'][rank='primary']) button {
+      @include button.danger-bg();
+    }
+
+    :host([variant='negative'][rank='secondary']) button,
+    :host([variant='negative'][rank='tertiary']) button {
+      @include button.danger-color();
+    }
+
+    :host([variant='negative'][rank='secondary']) button {
+      border-color: $button-danger-border;
     }
   }
 

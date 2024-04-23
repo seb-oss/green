@@ -1,4 +1,4 @@
-@layer tokens, a11y, core, variants, sizes, sets, disabled;
+@layer tokens, a11y, core, ranks, sizes, variants, disabled;
 
 @layer tokens {
   :host {
@@ -20,8 +20,8 @@
     --_color-outline-alpha: 60%;
     --_color-outline: var(--_color-border);
 
-    /* These state layer variables can be set to the correct state layer token in
-    * the variant and set specific styles. It will be blended with `--_color-bg`
+    /* These state layer variables can be variant to the correct state layer token in
+    * the rank and variant specific styles. It will be blended with `--_color-bg`
     * for the `background-color` rule. */
     --_state-layer-hover: var(--gds-sys-color-state-layers-state-black);
     --_state-layer-active: var(--gds-sys-color-state-layers-state-black-shade);
@@ -71,7 +71,7 @@
     justify-content: space-between;
     justify-items: center;
     outline-color: transparent;
-    outline-offset: 2px;
+    outline-offvariant: 2px;
     outline-style: solid;
     outline-width: 2px;
     padding-block: var(--_padding-block);
@@ -133,8 +133,8 @@
   }
 }
 
-@layer variants {
-  :host([variant*='secondary']) button {
+@layer ranks {
+  :host([rank*='secondary']) button {
     --_color-bg: var(--gds-sys-color-content-content-inverse);
     --_color-text: var(--gds-sys-color-content-content);
     --_color-border: var(--gds-sys-color-stroke-stroke);
@@ -144,7 +144,7 @@
     }
   }
 
-  :host([variant*='tertiary']) button {
+  :host([rank*='tertiary']) button {
     --_color-bg: transparent;
     --_color-text: var(--gds-sys-color-content-content);
     --_color-border: transparent;
@@ -198,8 +198,8 @@
   }
 }
 
-@layer sets {
-  :host([variant='primary'][set='positive']) button {
+@layer variants {
+  :host([rank='primary'][variant='positive']) button {
     --_bg: var(--gds-sys-color-container-container-positive);
     --_color-bg: var(--_bg);
     --_color-border: var(--_bg);
@@ -217,7 +217,7 @@
     }
   }
 
-  :host([variant='secondary'][set='positive']) button {
+  :host([rank='secondary'][variant='positive']) button {
     --_color-bg: var(--gds-sys-color-content-content-inverse);
     --_color-text: var(--gds-sys-color-content-content-positive);
     --_color-border: var(--gds-sys-color-stroke-stroke-positive);
@@ -233,7 +233,7 @@
     }
   }
 
-  :host([variant='tertiary'][set='positive']) button {
+  :host([rank='tertiary'][variant='positive']) button {
     --_color-bg: transparent;
     --_color-text: var(--gds-sys-color-content-content-positive);
     --_color-border: transparent;
@@ -251,7 +251,7 @@
     }
   }
 
-  :host([variant='primary'][set='negative']) button {
+  :host([rank='primary'][variant='negative']) button {
     --_bg: var(--gds-sys-color-container-container-negative);
     --_color-bg: var(--_bg);
     --_color-text: var(--gds-sys-color-status-negative-on-negative);
@@ -270,7 +270,7 @@
     }
   }
 
-  :host([variant='secondary'][set='negative']) button {
+  :host([rank='secondary'][variant='negative']) button {
     --_color-bg: var(--gds-sys-color-content-content-inverse);
     --_color-text: var(--gds-sys-color-content-content-negative);
     --_color-border: var(--gds-sys-color-stroke-stroke-negative);
@@ -286,7 +286,7 @@
     }
   }
 
-  :host([variant='tertiary'][set='negative']) button {
+  :host([rank='tertiary'][variant='negative']) button {
     --_color-bg: transparent;
     --_color-text: var(--gds-sys-color-content-content-negative);
     --_color-border: transparent;

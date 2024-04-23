@@ -22,42 +22,42 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 
 <button onClick={() => location.reload()}>Show 2023 styles</button>
 
-## Button variants
+## Button ranks
 
-Buttons exist in three different variants, Primary, Secondary and Tertiary
+Buttons exist in three different ranks, Primary, Secondary and Tertiary
 
 <Canvas>
   <gds-button>Primary</gds-button>
-  <gds-button variant="secondary">Secondary</gds-button>
-  <gds-button variant="tertiary">Tertiary</gds-button>
+  <gds-button rank="secondary">Secondary</gds-button>
+  <gds-button rank="tertiary">Tertiary</gds-button>
 </Canvas>
 
-## Button sets
+## Button variants
 
-Each variant can belong to one of three sets, Neutral, Positive and Negative
+Each rank can belong to one of three variants, Neutral, Positive and Negative
 
 <Canvas>
   <story-grid>
     <story-row>
       <gds-button>Neutral primary</gds-button>
-      <gds-button variant="secondary">Neutral secondary</gds-button>
-      <gds-button variant="tertiary">Neutral tertiary</gds-button>
+      <gds-button rank="secondary">Neutral secondary</gds-button>
+      <gds-button rank="tertiary">Neutral tertiary</gds-button>
     </story-row>
     <story-row>
-      <gds-button set="positive">Positive primary</gds-button>
-      <gds-button set="positive" variant="secondary">
+      <gds-button variant="positive">Positive primary</gds-button>
+      <gds-button variant="positive" rank="secondary">
         Positive secondary
       </gds-button>
-      <gds-button set="positive" variant="tertiary">
+      <gds-button variant="positive" rank="tertiary">
         Positive tertiary
       </gds-button>
     </story-row>
     <story-row>
-      <gds-button set="negative">Negative primary</gds-button>
-      <gds-button set="negative" variant="secondary">
+      <gds-button variant="negative">Negative primary</gds-button>
+      <gds-button variant="negative" rank="secondary">
         Negative secondary
       </gds-button>
-      <gds-button set="negative" variant="tertiary">
+      <gds-button variant="negative" rank="tertiary">
         Negative tertiary
       </gds-button>
     </story-row>
@@ -112,10 +112,10 @@ instead.
 
 <Canvas>
   <gds-button disabled>Primary</gds-button>
-  <gds-button variant="secondary" set="positive" disabled>
+  <gds-button rank="secondary" variant="positive" disabled>
     Secondary
   </gds-button>
-  <gds-button variant="tertiary" disabled>
+  <gds-button rank="tertiary" disabled>
     Tertiary
   </gds-button>
 </Canvas>
