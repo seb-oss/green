@@ -9,37 +9,38 @@ node: 606-6849
 # preview: <gds-input name="my-text" type="email" label="Label goes here" supporting-text="Supporting text goes here" clearable required >
 ---
 
-## Overview
+## Overview 
 
 Input are used to let the user enter text or numbers in a form.Optional field indicator. We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "optional" next to the label with the field.
+
 
 <Spacer size="medium" decorated />
 
 ### Variants
-
 To be able to use forms in all context's we provide 2 versions of input fields.
 
 - **Default** (Label outside): Includes all the features we need in complex forms.
 - **Contained**: gives a more clean look but doesn't work for longer labels and can only be used in specific contexts.
 
 <Grid columns={2}>
-  <Figma node="606-10125" caption="Default, label outside." />
-  <Figma node="606-10127" caption="Contained." />
+    <Figma node="606-10125" caption="Default, label outside." />
+    <Figma node="606-10127" caption="Contained." />
 </Grid>
+
 
 <Spacer size="medium" decorated />
 
 ### Sets
-
 To be able to use forms in all context's we provide 2 versions of input fields.
 
 - Regular text field
 - Multi lined text field, Multiple lines. Some text fields require a lot more text to be entered. A simple example would be description of a payment. For this we use the multi-line version of the input-field. This is often known as a text area or free text. Counter. For some fields it's critical that users know the limitations. Counters start at the max and count down to zero. When the counter comes close to zero the appearance shifts to red to warn the user before the fields stops accepting input.
 
 <Grid columns={2}>
-  <Figma node="606-10336" caption="Regular text field." />
-  <Figma node="606-10338" caption="Free text field." />
+    <Figma node="606-10336" caption="Regular text field." />
+    <Figma node="606-10338" caption="Free text field." />
 </Grid>
+
 
 <Spacer size="medium" decorated />
 
@@ -50,7 +51,7 @@ The input fields come in two sizes.
 
 - **Normal**: used in most cases.
 - **Small**: used in tables and in some special cases where the space is very limited.
-  </div>
+</div>
 <Figma node="606-10448" caption="Normal and small" />
 </Grid>
 
@@ -61,53 +62,47 @@ The input fields come in two sizes.
 <Grid columns={2}>
 
 <div>
-  ### Label All input fields need a label. Keep the label short and to the
-  point.
+### Label
+All input fields need a label. Keep the label short and to the point.
 </div>
 
 <Figma node="607-10627" />
 </Grid>
 
 <Grid columns={2}>
-  <div>
-    ### Label support text Use this to explain how to fill the field. This may
-    be an instruction of how to count or what to include. Limit the instructions
-    to details that all or most users need.
-  </div>
-  <Figma node="607-10706" caption="Label support text visible." />
+<div>
+### Label support text
+Use this to explain how to fill the field. This may be an instruction of how to count or what to include. Limit the instructions to details that all or most users need.
+</div>
+<Figma node="607-10706" caption="Label support text visible." />
 </Grid>
 
 <Grid columns={2}>
-  <div>
-    ### Field help We can provide three types of help in relation to input
-    fields - Instruction text: Additional instruction of how to think, what we
-    expect, or what format is required. - Contextual help: Either as a tooltip,
-    extended help that increase the size of the field with more instructions, or
-    a slide-out with helptext. - Error text: If users fail in filling the field
-    with correct information, the last help is the error text that can guide to
-    a solution based on the entered information.
-  </div>
-  <Figma node="609-10726" caption="Field instruction visible." />
+<div>
+### Field help
+We can provide three types of help in relation to input fields
+- Instruction text: Additional instruction of how to think, what we expect, or what format is required.
+- Contextual help: Either as a tooltip, extended help that increase the size of the field with more instructions, or a slide-out with helptext.
+- Error text: If users fail in filling the field with correct information, the last help is the error text that can guide to a solution based on the entered information.
+</div>
+<Figma node="609-10726" caption="Field instruction visible." />
 </Grid>
 
 <Grid columns={2}>
-  <div>
-    ### Field error Errors that are related to a field are displayed right next
-    to the field. The field is highlighted with a error message about the
-    problem underneath. The field validation should be done as soon as possible,
-    but not while still editing the information.
-  </div>
-  <Figma node="768-6848" caption="Field error" />
+<div>
+### Field error
+Errors that are related to a field are displayed right next to the field. The field is highlighted with a error message about the problem underneath. 
+The field validation should be done as soon as possible, but not while still editing the information.
+</div>
+<Figma node="768-6848" caption="Field error" />
 </Grid>
 
 <Grid columns={2}>
-  <div>
-    ### Field counter For some fields it's critical that users know the
-    limitations of the number of characters allowed. Counters start at the max
-    and count down to zero. When the counter comes close to zero the appearance
-    shifts to red to warn the user before the fields stops accepting input.
-  </div>
-  <Figma node="609-10804" caption="Field counter" />
+<div>
+### Field counter
+For some fields it's critical that users know the limitations of the number of characters allowed. Counters start at the max and count down to zero. When the counter comes close to zero the appearance shifts to red to warn the user before the fields stops accepting input.
+</div>
+<Figma node="609-10804" caption="Field counter" />
 </Grid>
 
 <Grid columns={2}>
@@ -115,7 +110,6 @@ The input fields come in two sizes.
 ### Dynamic information
 
 Used to perform comparative calculations next to the field. For example if users fill out salary after taxes, the dynamic information may show the salary before taxes.
-
 </div>
 
 <Figma node="619-6291" caption="Example on dynamic information" />
@@ -126,20 +120,16 @@ Used to perform comparative calculations next to the field. For example if users
 ### Static data
 
 Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
-
 </div>
 <Figma node="619-6359" caption="Example on static data" />
 </Grid>
 
 <Grid columns={2}>
-  <div>
-    ### Auto complete Input text can be used with auto complete to help users
-    who have limited literacy or who write in a foreign language.Sometimes you
-    may want to output data from the system inside a form, but it's hard from
-    the system an may not be changed. Then we output that data in plain text,
-    formatted the same way as the form in general. Don't use disabled fields.
-  </div>
-  <Figma node="619-6406" caption="Example on autocomplete" />
+<div>
+### Auto complete
+Input text can be used with auto complete to help users who have limited literacy or who write in a foreign language.Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
+</div>
+<Figma node="619-6406" caption="Example on autocomplete" />
 </Grid>
 
 <Spacer size="medium" decorated />
@@ -151,24 +141,18 @@ Sometimes you may want to output data from the system inside a form, but it's ha
 **Do**
 
 - Use "optional" to mark optional fields.
-  </div>
+</div>
 
 <div>
 **Don’t**
 
 - Use asterix for indicate mandatory fields.
-- Avoid using watermarks or placeholders.
-  </div>
+- Avoid using watermarks or placeholders. 
+</div>
 </Grid>
 
 <Grid columns={2}>
-  <Do>
-    <Figma node="647-6126" />
-  </Do>
-  <Dont>
-    <Figma node="647-6129" />
-  </Dont>
-  <Dont>
-    <Figma node="619-6615" />
-  </Dont>
+    <Do><Figma node="647-6126" /></Do>
+    <Dont><Figma node="647-6129" /></Dont>
+    <Dont><Figma node="619-6615" /></Dont>
 </Grid>
