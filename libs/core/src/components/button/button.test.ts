@@ -30,7 +30,7 @@ describe('<gds-button>', () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
           ><gds-icon name="search" slot="lead"></gds-icon>Button</gds-button
-        >`
+        >`,
       )
 
       const slot = el.shadowRoot?.querySelector('slot[name="lead"]')
@@ -54,10 +54,10 @@ describe('<gds-button>', () => {
       const el = await fixture<GdsButton>(
         html`<form action="javascript:;">
           <gds-button>Button</gds-button>
-        </form>`
+        </form>`,
       )
       const button = el.querySelector(
-        getScopedTagName('gds-button')
+        getScopedTagName('gds-button'),
       ) as GdsButton
 
       expect(button.form).to.equal(el)
@@ -67,10 +67,10 @@ describe('<gds-button>', () => {
       const el = await fixture<GdsButton>(
         html`<form action="javascript:;">
           <gds-button type="submit">Button</gds-button>
-        </form>`
+        </form>`,
       )
       const button = el.querySelector(
-        getScopedTagName('gds-button')
+        getScopedTagName('gds-button'),
       ) as GdsButton
 
       const spy = sinon.spy()
@@ -85,10 +85,10 @@ describe('<gds-button>', () => {
       const el = await fixture<GdsButton>(
         html`<form action="javascript:;">
           <gds-button type="reset">Button</gds-button>
-        </form>`
+        </form>`,
       )
       const button = el.querySelector(
-        getScopedTagName('gds-button')
+        getScopedTagName('gds-button'),
       ) as GdsButton
 
       const spy = sinon.spy()
@@ -101,14 +101,61 @@ describe('<gds-button>', () => {
 
     it('should support value attribute', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button value="value">Button</gds-button>`
+        html`<gds-button value="value">Button</gds-button>`,
       )
 
       expect(el.value).to.equal('value')
     })
+
+    it('should support disabled attribute', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button disabled>Button</gds-button>`,
+      )
+
+      expect(el.disabled).to.be.true
+    })
+
+    it('should support variant attribute', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button variant="positive">Button</gds-button>`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('button')
+
+      expect(shadowButton?.classList.contains('positive')).to.equal(true)
+    })
+
+    it('should support size attribute', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button size="small">Button</gds-button>`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('button')
+
+      expect(shadowButton?.classList.contains('small')).to.equal(true)
+    })
+
+    it('should support rank attribute', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button rank="tertiary">Button</gds-button>`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('button')
+
+      expect(shadowButton?.classList.contains('tertiary')).to.equal(true)
+    })
   })
 
   describe('Accessibility', () => {
+    it('should pass axe smoketest', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button variant="positive" value="Not empty">
+          Test button
+        </gds-button>`,
+      )
+
+      await expect(el).to.be.accessible()
+    })
     it('should fire click event when pressing enter', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
       const spy = sinon.spy()
@@ -124,11 +171,11 @@ describe('<gds-button>', () => {
 
     it('should be possible to tab to the button', async () => {
       const el = await fixture<GdsButton>(
-        html`<div><input /><gds-button>Button</gds-button></div>`
+        html`<div><input /><gds-button>Button</gds-button></div>`,
       )
       const input = el.querySelector('input') as HTMLInputElement
       const button = el.querySelector(
-        getScopedTagName('gds-button')
+        getScopedTagName('gds-button'),
       ) as GdsButton
 
       input.focus()

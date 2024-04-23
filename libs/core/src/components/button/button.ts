@@ -61,7 +61,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
    * Defines which set the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  set: 'neutral' | 'positive' | 'negative' = 'neutral'
+  variant: 'default' | 'positive' | 'negative' = 'default'
 
   /**
    * Sets the size of the button. Defaults to "small".
@@ -90,8 +90,17 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   render() {
-
-    const buttonClasses = { circle: this.#isIconButton, icon: this.#isIconButton, small: this.size === 'small', large: this.size === 'large'}
+    const buttonClasses = {
+      circle: this.#isIconButton,
+      icon: this.#isIconButton,
+      small: this.size === 'small',
+      large: this.size === 'large',
+      positive: this.variant === 'positive',
+      negative: this.variant === 'negative',
+      primary: this.rank === 'primary',
+      secondary: this.rank === 'secondary',
+      tertiary: this.rank === 'tertiary',
+    }
     return html`
       <button
         class=${classMap(buttonClasses)}
