@@ -24,11 +24,11 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     }
 
     button.icon {
-      padding: .75rem;
+      padding: 0.75rem;
     }
 
     button.icon.small {
-      padding: .5rem;
+      padding: 0.5rem;
     }
 
     button.icon.large {
@@ -42,15 +42,17 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     :host([rank*='secondary']) button {
       @include button.secondary();
     }
-  
+
     :host([rank*='tertiary']) button {
       @include button.tertiary();
     }
 
-    :host([variant='negative']:not([rank='secondary'], [rank='tertiary'])) button,
+    /* stylelint-disable */
+    :host([variant='negative']:not([rank='secondary'],[rank='tertiary'])) button,
     :host([variant='negative'][rank='primary']) button {
       @include button.danger-bg();
     }
+    /* stylelint-enable */
 
     :host([variant='negative'][rank='secondary']) button,
     :host([variant='negative'][rank='tertiary']) button {

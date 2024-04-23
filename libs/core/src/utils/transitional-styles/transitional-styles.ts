@@ -78,7 +78,6 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
-    console.log('applyToElement');
     
     const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
@@ -121,8 +120,6 @@ export class TransitionalStyles {
 
   register(name: string, styles: string) {
     if (this.useLegacyStylesheets) {
-      console.log('useLegacyStylesheets');
-      
       this.sheetsLegacy.set(name, styles)
       this.applyToElementLegacy(name)
       return
@@ -130,7 +127,6 @@ export class TransitionalStyles {
 
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(styles)
-    console.log(name, sheet);
     
     this.sheets.set(name, sheet)
     this.applyToElement(name, sheet)
