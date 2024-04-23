@@ -214,7 +214,7 @@ Values for light mode are used by default.
   $card-heading-color: $text-primary,
   $card-color: $text-primary,
   $card-border: solid $border-width $card-background,
-  $card-border-radius: 0,
+  $card-border-radius: 4px,
   $_card: (
     'box-shadow': $card-box-shadow,
     'background': $card-background,
