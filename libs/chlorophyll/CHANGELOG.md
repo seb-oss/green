@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.3
+
+### Patch Changes
+
+- 6610f64: **Card:** Update border radius to match Figma design
+
 ## 3.3.2
 
 ### Patch Changes
