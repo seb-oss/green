@@ -71,7 +71,7 @@
     justify-content: space-between;
     justify-items: center;
     outline-color: transparent;
-    outline-offvariant: 2px;
+    outline-offset: 2px;
     outline-style: solid;
     outline-width: 2px;
     padding-block: var(--_padding-block);

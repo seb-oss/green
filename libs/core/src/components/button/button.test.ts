@@ -21,11 +21,6 @@ describe('<gds-button>', () => {
 
       await el.updateComplete
 
-      console.log('hello')
-
-      console.log(el)
-      console.log(el.shadowRoot?.innerHTML)
-
       const innerButton = el.shadowRoot?.querySelector('button')
 
       expect(innerButton).to.exist
