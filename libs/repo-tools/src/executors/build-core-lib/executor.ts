@@ -27,6 +27,12 @@ export default async function runExecutor(
         './libs/core/src/components/**/!(*.test|*.style|*.styles).ts',
       ),
 
+      // Primitives
+      // These are considered internal, but it is somtimes neccessary to import directly
+      ...glob.sync(
+        './libs/core/src/primitives/**/!(*.test|*.style|*.styles).ts',
+      ),
+
       // Utils
       ...glob.sync('./libs/core/src/localization.ts'),
       ...glob.sync('./libs/core/src/transitional-styles.ts'),
