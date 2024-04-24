@@ -200,7 +200,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#trigger')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAll(getScopedTagName('gds-date-part-spinner'))
+  @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
   @query('.input')
@@ -214,10 +214,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   connectedCallback(): void {
     super.connectedCallback()
-    console.log(
-      'Scoped spinner name',
-      getScopedTagName('gds-date-part-spinner'),
-    )
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
