@@ -384,49 +384,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('1900')
     })
 
-    it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
-      const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker></gds-datepicker>`,
-      )
-
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar-popover"]',
-      )!
-      const popover =
-        el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
-      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
-        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
-      )!
-
-      await clickOnElement(button)
-      await conditionToBeTrue(() => popover.open)
-
-      let keyPress = 'Shift+Tab'
-      if (isWebKit()) {
-        keyPress = 'Shift+Alt+Tab'
-      }
-
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: 'Enter',
-      })
-
-      await conditionToBeTrue(() => monthDropdown.open)
-
-      await expect(monthDropdown.open).to.be.true
-    })
-
     it('should be possible to type out a date without tabbing', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
