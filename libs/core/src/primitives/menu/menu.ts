@@ -2,20 +2,17 @@ import { HTMLTemplateResult } from 'lit'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { state } from 'lit/decorators.js'
 
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
+import { gdsCustomElement, html } from '../../scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from '@sebgroup/green-core/controllers/listbox-kb-nav-controller'
-import { unwrap } from '@sebgroup/green-core/utils/helpers/unwrap-slots'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+} from '../../controllers/listbox-kb-nav-controller'
+import { unwrap } from '../../utils/helpers/unwrap-slots'
+import { TransitionalStyles } from '../../transitional-styles'
 
-import '@sebgroup/green-core/primitives/menu/menu-item'
-import type { GdsMenuItem } from '@sebgroup/green-core/primitives/menu/menu-item'
+import '../../primitives/menu/menu-item'
+import type { GdsMenuItem } from '../../primitives/menu/menu-item'
 
 /**
  * @element gds-menu

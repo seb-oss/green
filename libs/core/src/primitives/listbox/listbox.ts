@@ -3,25 +3,22 @@ import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import 'reflect-metadata'
 
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import '@sebgroup/green-core/primitives/listbox/option'
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
+import '../../primitives/listbox/option'
 import type {
   GdsOption,
   OptionsContainer,
-} from '@sebgroup/green-core/primitives/listbox/option'
+} from '../../primitives/listbox/option'
 
 import style from './listbox.styles'
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
-import {
-  html,
-  gdsCustomElement,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { watch } from '../../utils/decorators/watch'
+import { html, gdsCustomElement } from '../../scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
-} from '@sebgroup/green-core/controllers/listbox-kb-nav-controller'
-import { unwrap } from '@sebgroup/green-core/utils/helpers/unwrap-slots'
+} from '../../controllers/listbox-kb-nav-controller'
+import { unwrap } from '../../utils/helpers/unwrap-slots'
 
 /**
  * @element gds-listbox

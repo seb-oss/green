@@ -7,27 +7,28 @@ import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
 import 'reflect-metadata'
 
-import { constrainSlots } from '@sebgroup/green-core/utils/helpers/constrain-slots'
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
-import { observeLightDOM } from '@sebgroup/green-core/utils/decorators/observe-light-dom'
+import { constrainSlots } from '../../utils/helpers/constrain-slots'
+import { watch } from '../../utils/decorators/watch'
+import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '../../utils/helpers/custom-element-scoping'
 
-import '@sebgroup/green-core/primitives/listbox'
+import '../../primitives/listbox'
+import type { GdsListbox } from '../../primitives/listbox'
 import type {
-  GdsListbox,
-} from '@sebgroup/green-core/primitives/listbox'
-import type { GdsOption, OptionsContainer } from '@sebgroup/green-core/primitives/listbox/option'
-import '@sebgroup/green-core/primitives/popover'
+  GdsOption,
+  OptionsContainer,
+} from '../../primitives/listbox/option'
+import '../../primitives/popover'
 
-import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
+import { GdsFormControlElement } from '../../components/form-control'
 
 import styles from './dropdown.styles'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 /**
  * @element gds-dropdown

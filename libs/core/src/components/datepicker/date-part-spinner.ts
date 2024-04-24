@@ -1,10 +1,7 @@
 import { LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
-import {
-  gdsCustomElement,
-  html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
+import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
 
 /**
  * @element gds-date-part-spinner

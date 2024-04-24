@@ -2,16 +2,16 @@ import { HTMLTemplateResult, html } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
 
-import { gdsCustomElement } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../scoping'
 
 import style from './option.styles'
 
 import 'reflect-metadata'
-import { watch } from '@sebgroup/green-core/utils/decorators'
-import { Focusable } from '@sebgroup/green-core/mixins/focusable'
+import { watch } from '../../utils/decorators'
+import { Focusable } from '../../mixins/focusable'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]

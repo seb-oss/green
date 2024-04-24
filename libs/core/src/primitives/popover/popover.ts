@@ -11,10 +11,10 @@ import {
   Placement,
 } from '@floating-ui/dom'
 
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import { watch, watchMediaQuery } from '@sebgroup/green-core/utils/decorators'
-import { gdsCustomElement } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { GdsElement } from '../../gds-element'
+import { watch, watchMediaQuery } from '../../utils/decorators'
+import { gdsCustomElement } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './popover.styles'
 

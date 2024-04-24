@@ -1,8 +1,5 @@
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
+import { gdsCustomElement, html } from '../../scoping'
 
 /**
  * @element gds-list-item

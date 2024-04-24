@@ -1,21 +1,18 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
-import { constrainSlots } from '@sebgroup/green-core/utils/helpers/constrain-slots'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import '@sebgroup/green-core/primitives/ripple'
+import { classMap } from 'lit/directives/class-map.js'
+import { constrainSlots } from '../../utils/helpers/constrain-slots'
+import { TransitionalStyles } from '../../transitional-styles'
+import '../../primitives/ripple'
 
-import { tokens } from '@sebgroup/green-core/tokens.style'
+import { tokens } from '../../tokens.style'
 import style from './button.style.css'
 
-import {
-  gdsCustomElement,
-  html as customElementHtml,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { stripWhitespace } from '@sebgroup/green-core/utils/helpers/strip-white-space'
-import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
-import type { GdsElement } from '@sebgroup/green-core/gds-element'
+import { gdsCustomElement, html as customElementHtml } from '../../scoping'
+import { stripWhitespace } from '../../utils/helpers/strip-white-space'
+import { GdsFormControlElement } from '../../components/form-control'
+import type { GdsElement } from '../../gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)

@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "BuildCoreLib executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "tsconfig": {
+      "type": "string",
+      "description": "Path to the tsconfig.json file"
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "Path to the output directory"
+    },
+    "assets": {
+      "type": "array",
+      "description": "List of static assets.",
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/assetPattern"
+      }
+    }
+  },
+  "required": [],
+  "definitions": {
+    "assetPattern": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "glob": {
+              "type": "string",
+              "description": "The pattern to match."
+            },
+            "input": {
+              "type": "string",
+              "description": "The input directory path in which to apply `glob`. Defaults to the project root."
+            },
+            "output": {
+              "type": "string",
+              "description": "Relative path within the output folder."
+            },
+            "ignore": {
+              "description": "An array of globs to ignore.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": ["glob", "input", "output"]
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  }
+}

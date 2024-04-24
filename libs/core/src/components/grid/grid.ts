@@ -4,11 +4,11 @@ import { property, state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '../../utils/helpers/custom-element-scoping'
 
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
+import { watch } from '../../utils/decorators/watch'
 
-import { tokens } from '@sebgroup/green-core/tokens.style'
+import { tokens } from '../../tokens.style'
 import GridCSS from './grid.style.css'
 
 type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'

@@ -1,9 +1,6 @@
 import { unsafeCSS } from 'lit'
-import {
-  gdsCustomElement,
-  html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { gdsCustomElement, html } from '../../scoping'
+import { GdsElement } from '../../gds-element'
 
 import styles from './stem.styles.scss'
 

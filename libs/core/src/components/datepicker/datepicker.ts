@@ -8,22 +8,18 @@ import { classMap } from 'lit/directives/class-map.js'
 import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 
-import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
-import {
-  gdsCustomElement,
-  html,
-  getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import { watch } from '@sebgroup/green-core/utils/decorators'
+import { GdsFormControlElement } from '../../components/form-control'
+import { gdsCustomElement, html, getScopedTagName } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators'
 
-import '@sebgroup/green-core/primitives/popover'
-import type { GdsPopover } from '@sebgroup/green-core/primitives/popover'
+import '../../primitives/popover'
+import type { GdsPopover } from '../../primitives/popover'
 
-import '@sebgroup/green-core/primitives/calendar'
-import type { GdsCalendar } from '@sebgroup/green-core/primitives/calendar'
+import '../../primitives/calendar'
+import type { GdsCalendar } from '../../primitives/calendar'
 
-import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsDropdown } from '../../components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
@@ -218,6 +214,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   connectedCallback(): void {
     super.connectedCallback()
+    console.log(
+      'Scoped spinner name',
+      getScopedTagName('gds-date-part-spinner'),
+    )
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
@@ -536,7 +536,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleFieldClick = (e: MouseEvent) => {
-    this._elSpinners[0].focus()
+    this._elSpinners[0]?.focus()
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {

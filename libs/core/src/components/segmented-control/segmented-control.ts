@@ -1,18 +1,15 @@
 import { HTMLTemplateResult, unsafeCSS } from 'lit'
-import { query, state, property, queryAsync } from 'lit/decorators.js'
+import { query, state, property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { msg } from '@lit/localize'
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import {
-  gdsCustomElement,
-  html,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
+import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
 
-import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
+import { GdsSegment } from '../../components/segmented-control/segment'
 
-import { tokens } from '@sebgroup/green-core/tokens.style'
+import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'
 
 const BTN_SIZE = {

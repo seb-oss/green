@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
-import { constrainSlots } from '@sebgroup/green-core/utils/helpers'
+import { constrainSlots } from '../../utils/helpers'
 import styles from './checkbox.css'
 
 @customElement('gds-checkbox')

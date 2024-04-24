@@ -12,11 +12,11 @@ import {
   addMonths,
 } from 'date-fns'
 
-import { GdsElement } from '@sebgroup/green-core/gds-element'
-import { gdsCustomElement } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { GdsElement } from '../../gds-element'
+import { gdsCustomElement } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
 import { renderMonthGridView } from './functions'
-import { watch } from '@sebgroup/green-core/utils/decorators/watch'
+import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
 
