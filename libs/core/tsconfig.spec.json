@@ -1,24 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
+    "outDir": "../../dist/tests/core",
+    "module": "ESNext",
     "types": ["jest", "node"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@sebgroup/green-core": ["../../dist/libs/core/src"],
+      "@sebgroup/green-core/*": ["../../dist/libs/core/src/*"]
+    }
   },
-  "include": [
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "**/*.test.tsx",
-    "**/*.spec.tsx",
-    "**/*.test.js",
-    "**/*.spec.js",
-    "**/*.test.jsx",
-    "**/*.spec.jsx",
-    "**/*.d.ts",
-    "src/components/button/button.tbtst.ts",
-    "src/components/input/input.tbtst.ts"
-  ],
+  "include": ["src/**/*.test.ts", "**/*.css"],
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off"
   }

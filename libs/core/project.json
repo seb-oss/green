@@ -114,14 +114,14 @@
       "executor": "nx:run-commands",
       "dependsOn": ["build-with-types-and-scoping"],
       "options": {
-        "command": "npx wtr --node-resolve --playwright --browsers chromium firefox webkit"
+        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
     "test": {
       "executor": "nx:run-commands",
       "dependsOn": ["build"],
       "options": {
-        "command": "npx wtr --node-resolve --playwright --browsers chromium webkit"
+        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
       }
     },
     "storybook": {
