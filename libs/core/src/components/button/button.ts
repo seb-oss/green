@@ -15,6 +15,8 @@ import {
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '../../components/form-control'
+import { GdsIcon } from '../icon/icon'
+import { GdsElement } from 'src/gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -126,7 +128,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
-      assignedNodes.some((node) => node.nodeName === 'GDS-ICON')
+      assignedNodes.some((node) => node instanceof GdsIcon)
 
     this.requestUpdate()
   }

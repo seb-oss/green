@@ -1,12 +1,10 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
-import { clickOnElement, timeout } from '../../utils/testing/index.js'
 import sinon from 'sinon'
-
-import '../../../../../dist/libs/core/src/index.js'
 import type { GdsButton } from './button.js'
-
+import { clickOnElement, timeout } from '../../utils/testing/index.js'
+import '../../../../../dist/libs/core/src/index.js'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
@@ -112,6 +110,15 @@ describe('<gds-button>', () => {
         html`<gds-button disabled>Button</gds-button>`,
       )
 
+      const spy = sinon.spy()
+      el.addEventListener('click', spy)
+      el.focus()
+
+      await sendKeys({ press: 'Enter' })
+
+      await timeout(1)
+
+      expect(spy.notCalled).to.be.true
       expect(el.disabled).to.be.true
     })
 
@@ -122,6 +129,7 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
+      expect(el.variant).to.equal('positive')
       expect(shadowButton?.classList.contains('positive')).to.equal(true)
     })
 
@@ -132,6 +140,7 @@ describe('<gds-button>', () => {
 
       const shadowButton = el.shadowRoot?.querySelector('button')
 
+      expect(el.size).to.equal('small')
       expect(shadowButton?.classList.contains('small')).to.equal(true)
     })
 
@@ -143,18 +152,34 @@ describe('<gds-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('button')
 
       expect(shadowButton?.classList.contains('tertiary')).to.equal(true)
+      expect(el.rank).to.equal('tertiary')
+    })
+
+    it('should not accept custom HTML', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button>
+          <main>Not visible</main>
+          Visible
+        </gds-button>`,
+      )
+
+      const main = el.shadowRoot?.querySelector('main')
+
+      expect(main).to.not.exist
+      expect(el.innerText).to.equal('Visible')
     })
 
     it('should render properly with gds-icon', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button
-          ><gds-icon name="search"></gds-icon>Button</gds-button
-        >`,
+        html`<gds-button><gds-icon name="arrow"></gds-icon></gds-button>`,
       )
+
+      await el.updateComplete
 
       const button = el.shadowRoot?.querySelector('button')
 
-      expect(button?.classList.contains('circle')).to.exist
+      expect(button?.classList.contains('circle')).to.equal(true)
+      expect(button?.classList.contains('icon')).to.equal(true)
     })
   })
 
