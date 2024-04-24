@@ -1,10 +1,10 @@
 :host {
-  --gds-ripple-animation-name: ripple;
-  --gds-ripple-animation: var(--gds-ripple-animation-name)
-    var(--gds-sys-animation-duration) var(--gds-sys-animation-timing-function)
-    var(--gds-sys-animation-delay) var(--gds-sys-animation-iteration-count)
-    var(--gds-sys-animation-direction) var(--gds-sys-animation-fill-mode)
-    var(--gds-sys-animation-play-state);
+  --gds-ripple-motion-name: ripple;
+  --gds-ripple-motion: var(--gds-ripple-motion-name)
+    var(--gds-sys-motion-duration) var(--gds-sys-motion-timing-function)
+    var(--gds-sys-motion-delay) var(--gds-sys-motion-iteration-count)
+    var(--gds-sys-motion-direction) var(--gds-sys-motion-fill-mode)
+    var(--gds-sys-motion-play-state);
   border-radius: var(--gds-sys-radii-full);
   contain: strict;
   display: flex;
@@ -32,7 +32,7 @@ div {
 }
 
 div.gds-ripple-effect {
-  animation: var(--gds-ripple-animation);
+  animation: var(--gds-ripple-motion);
 }
 
 @keyframes ripple {
@@ -49,6 +49,6 @@ div.gds-ripple-effect {
 
 @media (prefers-reduced-motion: reduce) {
   :host {
-    --gds-ripple-animation-name: none !important;
+    --gds-ripple-motion-name: none !important;
   }
 }

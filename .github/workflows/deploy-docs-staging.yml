@@ -67,7 +67,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: ${{ steps.detect-package-manager.outputs.runner }} nx run docs:build
         env:
           FIGMA_ACCESS_KEY: ${{ secrets.FIGMA_ACCESS_KEY }}
           FIGMA_PROJECT_ID: ${{ secrets.FIGMA_PROJECT_ID_STAGING }}

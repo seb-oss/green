@@ -4,6 +4,34 @@
       "easing": {
         "value": "cubic-bezier(0.46, 0.03, 0.52, 0.96)",
         "type": "string"
+      },
+      "duration": {
+        "value": "1.2s",
+        "type": "string"
+      },
+      "timing-function": {
+        "value": "ease",
+        "type": "string"
+      },
+      "delay": {
+        "value": "0s",
+        "type": "string"
+      },
+      "iteration-count": {
+        "value": "1",
+        "type": "string"
+      },
+      "direction": {
+        "value": "normal",
+        "type": "string"
+      },
+      "fill-mode": {
+        "value": "none",
+        "type": "string"
+      },
+      "play-state": {
+        "value": "running",
+        "type": "string"
       }
     }
   }

@@ -5,13 +5,10 @@ date: 2024-02-08
 ---
 
 ## Accessibility
-
 All values we measure need to pass in order to give a check on the accessibility on all our components.
 
 ### Review
-
 **Review button, webcomponent 2023-12-11 - FAILED**
-
 - Contrast: Passed
 - Aria-label: Passed
 - Keyboard navigation: **Failed** <br />Enter key doesn’t trigger the visual pressed-state.
@@ -19,45 +16,38 @@ All values we measure need to pass in order to give a check on the accessibility
 - Focus: Passed
 - Screen reader: Passed
 
-# { /\* To be done:
-
-| Values to measure   | Status |
-| ------------------- | ------ |
-| Contrast            | Passed |
-| Aria-label          | Passed |
-| Keyboard navigation | Failed |
-| Darkmode            | Passed |
-| Focus               | Passed |
-| Screen reader       | Passed |
-
-\*/}
+{ /* To be done: 
+=======
+| Values to measure      | Status       |
+| ---------------------- | ------------ |
+| Contrast               | Passed       |
+| Aria-label             | Passed       |
+| Keyboard navigation    | Failed       |
+| Darkmode               | Passed       |
+| Focus                  | Passed       |
+| Screen reader          | Passed       |
+*/}
 
 ### Important considerations
 
 #### Maintain semantic consistency
-
 Do not use links (a tag) instead of buttons (button tag). Buttons are intended for actions or operations (e.g. submitting forms, triggering actions), while links are intended for navigation to other pages or resources. Avoid using links for triggering actions, or buttons for navigation purposes.
 
 ### Keyboard navigation
-
 Uses default navigation: trigger on key-up with space, trigger on key-down with enter.
 
 ### Labelling
-
 - Ensure buttons have discernible label text. If the button has no visible text, the label attribute must be used to provide an accessible label.
-- If there are multiple buttons with the same text, such as _Apply_, the label attribute can be used to give each button a distinct label, such as _Apply for A, Apply for B_, etc.
+- If there are multiple buttons with the same text, such as *Apply*, the label attribute can be used to give each button a distinct label, such as *Apply for A, Apply for B*, etc.
 
-<Grid columns={2}>
-  <Figma node="259-4131" caption="Buttons with accessible labels." />
-  <Figma
-    node="259-4140"
-    caption="Icon buttons with accessible labels, label attributes."
-  />
+<Grid columns={2} >
+    <Figma node="259-4131" caption="Buttons with accessible labels." />
+    <Figma node="259-4140" caption="Icon buttons with accessible labels, label attributes." />
 </Grid>
 
 #### Code examples for labelling
 
-```html
+``` html
 <!-- gds-button with visible text. Visible text acts as label by default. -->
 <gds-button>Label text</gds-button>
 
@@ -66,9 +56,8 @@ Uses default navigation: trigger on key-up with space, trigger on key-down with 
 
 <!-- gds-button with only visible icon. Label attribute must be provided,
      since there is no visible text. -->
-<gds-button label="Close menu"> <gds-icon name="x"></gds-icon></gds-button>
+<gds-button label="Close menu">  <gds-icon name="x"></gds-icon></gds-button>
 ```
-
 ## Resources
 
 - [Accessibility / Design Library](https://designlibrary.sebank.se/foundation/accessibility/accessibility-at-seb/)
