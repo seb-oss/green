@@ -30,6 +30,10 @@
   },
   "exports": {
     ".": "./index.js",
-    "./components/*": "./components/*"
+    "./scoping": "./scoping.js",
+    "./transitional-styles": "./transitional-styles.js",
+    "./localization": "./localization.js",
+    "./components/*": "./components/*",
+    "./_primitives/*": "./primitives/*"
   }
 }
