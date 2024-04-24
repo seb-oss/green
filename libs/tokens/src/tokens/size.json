@@ -5,24 +5,40 @@
         "value": "0",
         "type": "float"
       },
-      "1": {
+      "0,5": {
         "value": "2",
         "type": "float"
       },
-      "2": {
+      "1": {
         "value": "4",
         "type": "float"
       },
-      "3": {
+      "1,5": {
+        "value": "6",
+        "type": "float"
+      },
+      "2": {
         "value": "8",
         "type": "float"
       },
-      "4": {
+      "2,5": {
+        "value": "10",
+        "type": "float"
+      },
+      "3": {
         "value": "12",
         "type": "float"
       },
-      "5": {
+      "3,5": {
+        "value": "14",
+        "type": "float"
+      },
+      "4": {
         "value": "16",
+        "type": "float"
+      },
+      "5": {
+        "value": "20",
         "type": "float"
       },
       "6": {
@@ -30,38 +46,382 @@
         "type": "float"
       },
       "7": {
-        "value": "32",
+        "value": "28",
         "type": "float"
       },
       "8": {
-        "value": "40",
+        "value": "32",
         "type": "float"
       },
       "9": {
-        "value": "48",
+        "value": "36",
         "type": "float"
       },
       "10": {
-        "value": "64",
+        "value": "40",
         "type": "float"
       },
       "11": {
-        "value": "80",
+        "value": "44",
         "type": "float"
       },
       "12": {
-        "value": "96",
+        "value": "48",
         "type": "float"
       },
       "13": {
-        "value": "112",
+        "value": "52",
         "type": "float"
       },
       "14": {
-        "value": "128",
+        "value": "56",
         "type": "float"
       },
       "15": {
+        "value": "60",
+        "type": "float"
+      },
+      "16": {
+        "value": "64",
+        "type": "float"
+      },
+      "17": {
+        "value": "68",
+        "type": "float"
+      },
+      "18": {
+        "value": "72",
+        "type": "float"
+      },
+      "19": {
+        "value": "76",
+        "type": "float"
+      },
+      "20": {
+        "value": "80",
+        "type": "float"
+      },
+      "21": {
+        "value": "84",
+        "type": "float"
+      },
+      "22": {
+        "value": "88",
+        "type": "float"
+      },
+      "23": {
+        "value": "92",
+        "type": "float"
+      },
+      "24": {
+        "value": "96",
+        "type": "float"
+      },
+      "25": {
+        "value": "100",
+        "type": "float"
+      },
+      "26": {
+        "value": "104",
+        "type": "float"
+      },
+      "27": {
+        "value": "108",
+        "type": "float"
+      },
+      "28": {
+        "value": "112",
+        "type": "float"
+      },
+      "29": {
+        "value": "116",
+        "type": "float"
+      },
+      "30": {
+        "value": "120",
+        "type": "float"
+      },
+      "31": {
+        "value": "124",
+        "type": "float"
+      },
+      "32": {
+        "value": "128",
+        "type": "float"
+      },
+      "33": {
+        "value": "132",
+        "type": "float"
+      },
+      "34": {
+        "value": "136",
+        "type": "float"
+      },
+      "35": {
+        "value": "140",
+        "type": "float"
+      },
+      "36": {
+        "value": "144",
+        "type": "float"
+      },
+      "37": {
+        "value": "148",
+        "type": "float"
+      },
+      "38": {
+        "value": "152",
+        "type": "float"
+      },
+      "39": {
+        "value": "156",
+        "type": "float"
+      },
+      "40": {
+        "value": "160",
+        "type": "float"
+      },
+      "41": {
+        "value": "164",
+        "type": "float"
+      },
+      "42": {
+        "value": "168",
+        "type": "float"
+      },
+      "43": {
+        "value": "172",
+        "type": "float"
+      },
+      "44": {
+        "value": "176",
+        "type": "float"
+      },
+      "45": {
+        "value": "180",
+        "type": "float"
+      },
+      "46": {
+        "value": "184",
+        "type": "float"
+      },
+      "47": {
+        "value": "188",
+        "type": "float"
+      },
+      "48": {
+        "value": "192",
+        "type": "float"
+      },
+      "49": {
+        "value": "196",
+        "type": "float"
+      },
+      "50": {
+        "value": "200",
+        "type": "float"
+      },
+      "51": {
+        "value": "204",
+        "type": "float"
+      },
+      "52": {
+        "value": "208",
+        "type": "float"
+      },
+      "53": {
+        "value": "212",
+        "type": "float"
+      },
+      "54": {
+        "value": "216",
+        "type": "float"
+      },
+      "55": {
+        "value": "220",
+        "type": "float"
+      },
+      "56": {
+        "value": "224",
+        "type": "float"
+      },
+      "57": {
+        "value": "228",
+        "type": "float"
+      },
+      "58": {
+        "value": "232",
+        "type": "float"
+      },
+      "59": {
+        "value": "236",
+        "type": "float"
+      },
+      "60": {
+        "value": "240",
+        "type": "float"
+      },
+      "61": {
+        "value": "244",
+        "type": "float"
+      },
+      "62": {
+        "value": "248",
+        "type": "float"
+      },
+      "63": {
+        "value": "252",
+        "type": "float"
+      },
+      "64": {
+        "value": "256",
+        "type": "float"
+      },
+      "65": {
+        "value": "260",
+        "type": "float"
+      },
+      "66": {
+        "value": "264",
+        "type": "float"
+      },
+      "67": {
+        "value": "268",
+        "type": "float"
+      },
+      "68": {
+        "value": "272",
+        "type": "float"
+      },
+      "69": {
+        "value": "276",
+        "type": "float"
+      },
+      "70": {
+        "value": "280",
+        "type": "float"
+      },
+      "71": {
+        "value": "284",
+        "type": "float"
+      },
+      "72": {
+        "value": "288",
+        "type": "float"
+      },
+      "73": {
+        "value": "292",
+        "type": "float"
+      },
+      "74": {
+        "value": "296",
+        "type": "float"
+      },
+      "75": {
+        "value": "300",
+        "type": "float"
+      },
+      "76": {
+        "value": "304",
+        "type": "float"
+      },
+      "77": {
+        "value": "308",
+        "type": "float"
+      },
+      "78": {
+        "value": "312",
+        "type": "float"
+      },
+      "79": {
+        "value": "316",
+        "type": "float"
+      },
+      "80": {
+        "value": "320",
+        "type": "float"
+      },
+      "81": {
+        "value": "324",
+        "type": "float"
+      },
+      "82": {
+        "value": "328",
+        "type": "float"
+      },
+      "83": {
+        "value": "332",
+        "type": "float"
+      },
+      "84": {
+        "value": "336",
+        "type": "float"
+      },
+      "85": {
+        "value": "340",
+        "type": "float"
+      },
+      "86": {
+        "value": "344",
+        "type": "float"
+      },
+      "87": {
+        "value": "348",
+        "type": "float"
+      },
+      "88": {
+        "value": "352",
+        "type": "float"
+      },
+      "89": {
+        "value": "356",
+        "type": "float"
+      },
+      "90": {
+        "value": "360",
+        "type": "float"
+      },
+      "91": {
+        "value": "364",
+        "type": "float"
+      },
+      "92": {
+        "value": "368",
+        "type": "float"
+      },
+      "93": {
+        "value": "372",
+        "type": "float"
+      },
+      "94": {
+        "value": "376",
+        "type": "float"
+      },
+      "95": {
+        "value": "380",
+        "type": "float"
+      },
+      "96": {
+        "value": "384",
+        "type": "float"
+      },
+      "97": {
+        "value": "388",
+        "type": "float"
+      },
+      "98": {
+        "value": "392",
+        "type": "float"
+      },
+      "99": {
+        "value": "396",
+        "type": "float"
+      },
+      "100": {
+        "value": "400",
+        "type": "float"
+      },
+      "full": {
         "value": "9999",
         "type": "float"
       }

@@ -1,16 +1,18 @@
 import { html, HTMLTemplateResult } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+import { GdsElement } from '../../gds-element'
+import * as Button from '../../components/button/button.trans.styles'
+import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
 import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
+import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
+import * as Popover from '../../primitives/popover/popover.trans.styles'
 import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
-import { GdsElement } from '../../gds-element'
-import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
-import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
-import * as Popover from '../../primitives/popover/popover.trans.styles'
+
 import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 export const registerTransitionalStyles = () => {
@@ -24,6 +26,7 @@ export const registerTransitionalStyles = () => {
   GroupedList.register()
   SegmentedControl.register()
   Segment.register()
+  Button.register()
 }
 
 declare global {
@@ -75,6 +78,7 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
+    
     const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
 
@@ -123,6 +127,7 @@ export class TransitionalStyles {
 
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(styles)
+    
     this.sheets.set(name, sheet)
     this.applyToElement(name, sheet)
   }
