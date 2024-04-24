@@ -1,22 +1,20 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
-import { constrainSlots } from '../../utils/helpers'
-import { TransitionalStyles } from '../../transitional-styles'
-import '../icon/icon'
-import '../../primitives/ripple/ripple'
+import { constrainSlots } from '@sebgroup/green-core/utils/helpers/constrain-slots'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import '@sebgroup/green-core/primitives/ripple'
 
-import { tokens } from '../../tokens.style'
+import { tokens } from '@sebgroup/green-core/tokens.style'
 import style from './button.style.css'
 
 import {
   gdsCustomElement,
   html as customElementHtml,
-} from '../../utils/helpers/custom-element-scoping'
-import { stripWhitespace } from '../../utils/helpers/strip-white-space'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { stripWhitespace } from '@sebgroup/green-core/utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from '../../components/form-control'
-import { GdsIcon } from '../icon/icon'
-import { GdsElement } from 'src/gds-element'
+import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
+import { GdsIcon } from '@sebgroup/green-core/components/icon'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
