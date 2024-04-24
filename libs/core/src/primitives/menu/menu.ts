@@ -12,8 +12,10 @@ import {
   ListboxKbNavigation,
 } from '@sebgroup/green-core/controllers/listbox-kb-nav-controller'
 import { unwrap } from '@sebgroup/green-core/utils/helpers/unwrap-slots'
-import { GdsMenuItem } from './menu-item'
 import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+import '@sebgroup/green-core/primitives/menu/menu-item'
+import type { GdsMenuItem } from '@sebgroup/green-core/primitives/menu/menu-item'
 
 /**
  * @element gds-menu

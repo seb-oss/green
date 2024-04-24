@@ -10,7 +10,7 @@ import {
 } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 
-import { GdsSegment } from './segment/segment'
+import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 
 import { tokens } from '@sebgroup/green-core/tokens.style'
 import style from './segmented-control.style.css'

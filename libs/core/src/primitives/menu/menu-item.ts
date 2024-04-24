@@ -1,13 +1,13 @@
 import { HTMLTemplateResult, LitElement } from 'lit'
 import { state } from 'lit/decorators.js'
 
-import { GdsElement } from '../../gds-element'
-import { Focusable } from '../../mixins/focusable'
-import { TransitionalStyles } from '../../transitional-styles'
+import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { Focusable } from '@sebgroup/green-core/mixins/focusable'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 import styles from '../listbox/option.styles'
 

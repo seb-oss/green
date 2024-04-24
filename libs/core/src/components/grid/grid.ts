@@ -6,7 +6,7 @@ import {
   html,
 } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
-import { watch } from '@sebgroup/green-core/utils/decorators'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 
 import { tokens } from '@sebgroup/green-core/tokens.style'
 import GridCSS from './grid.style.css'

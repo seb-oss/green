@@ -16,7 +16,7 @@ import { GdsElement } from '@sebgroup/green-core/gds-element'
 import { gdsCustomElement } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { renderMonthGridView } from './functions'
-import { watch } from '@sebgroup/green-core/utils/decorators'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 
 import style from './calendar.styles'
 

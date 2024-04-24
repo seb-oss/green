@@ -1,14 +1,18 @@
 import { HTMLTemplateResult } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-
-import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 
 import { GdsElement } from '@sebgroup/green-core/gds-element'
+import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import '@sebgroup/green-core/primitives/listbox/option'
+import type {
+  GdsOption,
+  OptionsContainer,
+} from '@sebgroup/green-core/primitives/listbox/option'
+
 import style from './listbox.styles'
-import { watch } from '@sebgroup/green-core/utils/decorators'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 import {
   html,
   gdsCustomElement,
