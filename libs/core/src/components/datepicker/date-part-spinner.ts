@@ -3,9 +3,8 @@ import { property, state } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { watch } from '../../utils/decorators'
-import { Focusable } from '../../mixins/focusable'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { watch } from '@sebgroup/green-core/utils/decorators/watch'
 
 /**
  * @element gds-date-part-spinner
