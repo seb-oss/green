@@ -6,8 +6,10 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
 // Replace the exported paths
 const updatedPaths = Object.keys(packageJson.exports).reduce((acc, key) => {
-  const updatedPath = packageJson.exports[key].replace('src/', '');
-  acc[key] = updatedPath;
+  const updatedPathValue = packageJson.exports[key].replace('src/', '');
+  const updatedKey = key.replace('/index', '');
+
+  acc[updatedKey] = updatedPathValue;
   return acc;
 }, {});
 
