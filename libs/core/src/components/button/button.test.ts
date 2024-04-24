@@ -3,12 +3,15 @@ import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 import { clickOnElement, timeout } from '../../utils/testing/index.js'
-import '@sebgroup/green-core/components/button'
-import type { GdsButton } from '@sebgroup/green-core/components/button'
+
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
 } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+
+import '@sebgroup/green-core/components/button'
+import type { GdsButton } from '@sebgroup/green-core/components/button'
+import '@sebgroup/green-core/components/icon'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

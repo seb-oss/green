@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
-import '../../../../../dist/libs/core/src/index.js'
-import { htmlTemplateTagFactory } from '../../../../../dist/libs/core/src/index.js'
+import '@sebgroup/green-core/components/grouped-list'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 import type { GdsGroupedList } from './grouped-list'
 
