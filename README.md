@@ -34,10 +34,10 @@ If you're trying to find something specific, here's a full list of packages that
 
 ## 📋 Table of content
 
-- [Documentation](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#documentation)
-- [Working from SEB](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#working-from-seb)
-- [Contribute](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#contribute)
-- [Working locally with this repo](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#working-locally-with-this-repo)
+- [Documentation](https://github.com/sebgroup/green?tab=readme-ov-file#-documentation)
+- [Working from SEB](https://github.com/sebgroup/green?tab=readme-ov-file#-working-from-seb)
+- [Contribute](https://github.com/sebgroup/green?tab=readme-ov-file#-contribute)
+- [Working locally with this repo](https://github.com/sebgroup/green?tab=readme-ov-file#-working-locally-with-this-repo)
 
 ## 📚 Documentation
 
