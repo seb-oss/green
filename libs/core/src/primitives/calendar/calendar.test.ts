@@ -3,8 +3,9 @@ import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 
 import { onlyDate, timeout } from '../../utils/testing'
-import '../../../../../dist/libs/core/src/index.js'
-import { htmlTemplateTagFactory } from '../../../../../dist/libs/core/src/index.js'
+
+import '@sebgroup/green-core/primitives/calendar'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 import type { GdsCalendar } from './calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
@@ -125,7 +126,7 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(el.value.getDate()).to.equal(1)
+      await expect(el.value!.getDate()).to.equal(1)
     })
 
     it('should select last day of month when pressing end', async () => {
@@ -138,8 +139,12 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(el.value.getDate()).to.equal(
-        new Date(el.value.getFullYear(), el.value.getMonth() + 1, 0).getDate(),
+      await expect(el.value?.getDate()).to.equal(
+        new Date(
+          el.value!.getFullYear(),
+          el.value!.getMonth() + 1,
+          0,
+        ).getDate(),
       )
     })
 

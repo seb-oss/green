@@ -4,14 +4,14 @@ import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '../../../../../dist/libs/core/src/index.js'
-import type { GdsSegmentedControl } from './segmented-control'
+import '@sebgroup/green-core/components/segmented-control'
+import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
+import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '../../../../../dist/libs/core/src/index.js'
-import { GdsSegment } from './segment/segment'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

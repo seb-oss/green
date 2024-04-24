@@ -4,14 +4,14 @@ import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '../../../../../dist/libs/core/src/index.js'
-import type { GdsDropdown } from './dropdown'
+import '@sebgroup/green-core/components/dropdown'
+import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsOption } from '@sebgroup/green-core/primitives/listbox/option'
 
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-  GdsOption,
-} from '../../../../../dist/libs/core/src/index.js'
+} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
