@@ -5,7 +5,7 @@ import { sendKeys } from '@web/test-runner-commands'
 import { onlyDate, timeout } from '../../utils/testing'
 
 import '@sebgroup/green-core/primitives/calendar'
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import type { GdsCalendar } from './calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'

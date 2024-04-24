@@ -11,7 +11,7 @@ import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/se
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

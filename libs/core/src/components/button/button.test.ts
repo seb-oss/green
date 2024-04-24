@@ -7,7 +7,7 @@ import { clickOnElement, timeout } from '../../utils/testing/index.js'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/button'
 import type { GdsButton } from '@sebgroup/green-core/components/button'

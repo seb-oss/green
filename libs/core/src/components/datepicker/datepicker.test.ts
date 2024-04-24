@@ -17,7 +17,7 @@ import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/scoping'
 
 import { GdsPopover } from '@sebgroup/green-core/primitives/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'

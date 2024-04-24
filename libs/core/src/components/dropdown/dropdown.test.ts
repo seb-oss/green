@@ -11,7 +11,7 @@ import { GdsOption } from '@sebgroup/green-core/primitives/listbox/option'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

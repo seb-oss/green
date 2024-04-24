@@ -2,7 +2,8 @@ import { expect, fixture, html as testingHtml } from '@open-wc/testing'
 import '@sebgroup/green-core/components/grid'
 import type { GdsGrid } from '@sebgroup/green-core/components/grid'
 
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/utils/helpers/custom-element-scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('GdsGrid', () => {
