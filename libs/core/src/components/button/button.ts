@@ -15,7 +15,7 @@ import {
 import { stripWhitespace } from '@sebgroup/green-core/utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
-import { GdsIcon } from '@sebgroup/green-core/components/icon'
+import type { GdsElement } from '@sebgroup/green-core/gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -126,11 +126,12 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = this._mainSlot?.assignedNodes() ?? []
+    const assignedNodes = (this._mainSlot?.assignedNodes() ??
+      []) as GdsElement[]
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
-      assignedNodes.some((node) => node instanceof GdsIcon)
+      assignedNodes.some((node) => node.gdsElementName === 'gds-icon')
 
     this.requestUpdate()
   }
