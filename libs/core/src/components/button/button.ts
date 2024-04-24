@@ -1,5 +1,6 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 import { constrainSlots } from '@sebgroup/green-core/utils/helpers/constrain-slots'
 import { TransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import '@sebgroup/green-core/primitives/ripple'
@@ -115,7 +116,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           gds-allow="#text gds-icon"
         ></slot>
         <slot name="trail" gds-allow="gds-icon"></slot>
-        <gds-ripple></gds-ripple>
+        ${when(
+          !this._isUsingTransitionalStyles,
+          () => html`<gds-ripple></gds-ripple>`,
+        )}
       </button>
     `
   }
