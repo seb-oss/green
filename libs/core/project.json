@@ -110,16 +110,23 @@
         "command": "npx stylelint \"libs/core/**/*.(scss|css)\""
       }
     },
+    "build-tests": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node libs/core/build-scripts/build-tests"
+      }
+    },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": ["build-tests"],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
+      "dependsOn": ["build-tests"],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
       }
