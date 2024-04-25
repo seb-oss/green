@@ -28,7 +28,8 @@ export default async function runExecutor(
       ),
 
       // Primitives
-      // These are considered internal, but it is somtimes neccessary to import directly
+      // These are considered internal, but it is somtimes neccessary to
+      // import directly, for example in our tests.
       ...glob.sync(
         './libs/core/src/primitives/**/!(*.test|*.style|*.styles).ts',
       ),
