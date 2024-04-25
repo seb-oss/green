@@ -3,7 +3,7 @@ import { createComponent } from '@lit/react'
 
 import {
   GdsContextMenu,
-  GdsMenuItem,,
+  GdsMenuItem,
   GdsMenuHeading,
 } from '@sebgroup/green-core/components/context-menu'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
