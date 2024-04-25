@@ -1,6 +1,7 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { constrainSlots } from '../../utils/helpers'
+import { TransitionalStyles } from '../../transitional-styles'
 import '../icon/icon'
 import '../../primitives/ripple/ripple'
 
@@ -14,6 +15,8 @@ import {
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '../../components/form-control'
+import { GdsIcon } from '../icon/icon'
+import { GdsElement } from 'src/gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -51,16 +54,16 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   type?: HTMLButtonElement['type']
 
   /**
-   * The variant of the button. Defaults to "primary".
+   * The rank of the button. Defaults to "primary".
    */
   @property({ reflect: true })
-  variant: 'primary' | 'secondary' | 'tertiary' = 'primary'
+  rank: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   /**
    * Defines which set the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  set: 'neutral' | 'positive' | 'negative' = 'neutral'
+  variant: 'default' | 'positive' | 'negative' = 'default'
 
   /**
    * Sets the size of the button. Defaults to "small".
@@ -83,10 +86,26 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
     constrainSlots(this)
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-button')
+  }
+
   render() {
+    const buttonClasses = {
+      circle: this.#isIconButton,
+      icon: this.#isIconButton,
+      small: this.size === 'small',
+      large: this.size === 'large',
+      positive: this.variant === 'positive',
+      negative: this.variant === 'negative',
+      primary: this.rank === 'primary',
+      secondary: this.rank === 'secondary',
+      tertiary: this.rank === 'tertiary',
+    }
     return html`
       <button
-        class="${classMap({ circle: this.#isIconButton })}"
+        class=${classMap(buttonClasses)}
         ?type="${this.type}"
         ?disabled="${this.disabled}"
         @click="${this.#handleClick}"
@@ -109,7 +128,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
-      assignedNodes.some((node) => node.nodeName === 'GDS-ICON')
+      assignedNodes.some((node) => node instanceof GdsIcon)
 
     this.requestUpdate()
   }

@@ -6,59 +6,47 @@
           "value": "{ref.size.0}",
           "type": "float"
         },
-        "2": {
+        "2xs": {
+          "value": "{ref.size.0,5}",
+          "type": "float"
+        },
+        "xs": {
           "value": "{ref.size.1}",
           "type": "float"
         },
-        "4": {
+        "s": {
+          "value": "{ref.size.1,5}",
+          "type": "float"
+        },
+        "m": {
           "value": "{ref.size.2}",
           "type": "float"
         },
-        "8": {
-          "value": "{ref.size.3}",
-          "type": "float"
-        },
-        "12": {
+        "l": {
           "value": "{ref.size.4}",
           "type": "float"
         },
-        "16": {
+        "xl": {
           "value": "{ref.size.5}",
           "type": "float"
         },
-        "24": {
+        "2xl": {
           "value": "{ref.size.6}",
           "type": "float"
         },
-        "32": {
-          "value": "{ref.size.7}",
-          "type": "float"
-        },
-        "40": {
+        "3xl": {
           "value": "{ref.size.8}",
           "type": "float"
         },
-        "48": {
-          "value": "{ref.size.9}",
-          "type": "float"
-        },
-        "64": {
+        "4xl": {
           "value": "{ref.size.10}",
           "type": "float"
         },
-        "80": {
-          "value": "{ref.size.11}",
-          "type": "float"
-        },
-        "96": {
+        "5xl": {
           "value": "{ref.size.12}",
           "type": "float"
         },
-        "112": {
-          "value": "{ref.size.13}",
-          "type": "float"
-        },
-        "120": {
+        "6xl": {
           "value": "{ref.size.14}",
           "type": "float"
         }
