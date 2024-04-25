@@ -21,7 +21,8 @@
     "help": "nx help",
     "postinstall": "ngcc --properties es2020 browser module main && npm run copy-fonts",
     "copy-fonts": "copyfiles node_modules/@sebgroup/fonts/fonts/**/* dist/fonts -f",
-    "changeset:publish": "yarn build:libs && yarn changeset publish"
+    "changeset:publish": "yarn build:libs && yarn changeset publish",
+    "new": "node apps/docs/utils/create/create.js"
   },
   "lint-staged": {
     "libs/**/src/**/*.scss": [
