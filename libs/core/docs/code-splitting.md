@@ -1,6 +1,6 @@
 # Code splitting
 
-Since a consumer of Green Core may not always need all of the components every time, it needs to be possible to import them one by one, so that only used code are included in the application bundle.
+Since a consumer of Green Core may not need all of the components every time, it needs to be possible to import them one by one, so that only used code are included in the application bundle.
 
 Often, you import stuff from a main export like this, for example:
 
@@ -10,11 +10,11 @@ import { GdsDropdown } from '@sebgroup/green-core'
 
 This resolves to an `index.js` file at the root of the package, containing all the exported modules. Normally, this is perfectly fine, as most bundlers have some form of dead code elimination built in, which removes anything that isn't actually used in the end.
 
-Dead code elimination works by statically analyzing the code in the application, and figuring out which code paths are actually being called, and then removing the stuff that never gets reached.
+Dead code elimination works by statically analyzing the code in the application, and figuring out which code paths are actually being called, and then removing the stuff that is never reached.
 
-This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the alayzer doesn't know what else relies on the side-effect. The same thing is true for Web Components.
+This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the alayzer doesn't know what else relies on the side-effect. The same thing is true when a Web Component is registered in the browsers `CustomElementRegistry`.
 
-Since each component in Green Core is automatically registered with the `CustomElementRegistry`, each component can also be said to have a side-effect. This means that when you `import { GdsDropdown } from '@sebgroup/green-core'` you're not just getting the `GdsDropdown` component. You're getting ALL the components, because they all have side-effects.
+Since each component in Green Core is automatically registered with the `CustomElementRegistry`, each component can also be said to have a side-effect. This means that when you `import { GdsDropdown } from '@sebgroup/green-core'` you're not just getting the `GdsDropdown` component. You're getting ALL of the components, because they all have side-effects.
 
 ## Sub-path exports
 
@@ -55,9 +55,9 @@ HTML:
 
 Notice that the consumer needs two components here, `gds-dropdown` and `gds-option`. Therefor, `gds-dropdown` should also import `gds-option`, because from the consumers perspective, it would be unexpected to need to import it separately.
 
-In case a consumer also needs the types for these components, it can be helpful to forward it in the `index.ts` for `gds-dropdown`:
+In case a consumer also needs the types for these components, it can be helpful to forward it in the `index.ts`:
 
-index.ts:
+index.ts for `gds-dropdown`:
 
 ```ts
 export * from './dropdown'
@@ -73,4 +73,4 @@ import '../../primitives/listbox'
 import type { GdsListbox } from '../../primitives/listbox'
 ```
 
-In this case, using simply `import { GdsListbox } from '../../primitives/listbox'` won't work, because typescript will strip out the actual code if it thinks we're only using the type. It can't tell if we're using the element in the template or not. To get around that, we import the code and the type separately.
+In this case, using simply `import { GdsListbox } from '../../primitives/listbox'` won't work, because Typescript will strip out the actual code if it thinks we're only using the type. It can't tell if we're using the element in the template, and in this particular case, we're only using it for type inference, so the code would get stripped. To get around that, we import the code and the type separately.
