@@ -21,8 +21,10 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import { GdsDropdown, GdsOption } from '@sebgroup/green-core'
-
+import {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
