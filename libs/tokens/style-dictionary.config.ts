@@ -78,6 +78,17 @@ const config: StyleDictionary.Config = {
             outputReferences: true,
           },
         },
+        {
+          destination: 'motion.css',
+          format: 'css/variables',
+          filter: function (token) {
+            return token.path?.includes('motion')
+          },
+          options: {
+            outputReferences: true,
+            selector: ':host',
+          },
+        },
       ],
     },
     css: {
@@ -221,6 +232,11 @@ const config: StyleDictionary.Config = {
           format: 'scss/mixin',
           filter: (token) => {
             if (token.version === '2016') return false
+
+            if (token.path.includes('motion')) {
+              return true
+            }
+
             return token.type === 'color' && !!token.darkValue
           },
         },
@@ -293,6 +309,7 @@ const config: StyleDictionary.Config = {
           format: 'scss/mixin',
           filter: (token) => {
             if (token.version !== '2016') return false
+
             return token.type === 'color' && !token.darkValue
           },
         },

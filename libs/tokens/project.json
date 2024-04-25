@@ -9,14 +9,17 @@
       "options": {
         "commands": [
           "nx run tokens:build-style-dictionary",
-          "nx run tokens:copy-package-json"
+          "nx run tokens:copy-package-json",
+          "nx run tokens:copy-readme"
         ],
         "parallel": false
       }
     },
     "build-style-dictionary": {
       "executor": "@nxkit/style-dictionary:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/tokens",
         "styleDictionaryConfig": "libs/tokens/style-dictionary.config.ts",
@@ -25,7 +28,9 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "libs/tokens/**/*.{js,ts}",
@@ -51,6 +56,12 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "cp libs/tokens/package.json dist/libs/tokens"
+      }
+    },
+    "copy-readme": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp libs/tokens/README.md dist/libs/tokens"
       }
     }
   },
