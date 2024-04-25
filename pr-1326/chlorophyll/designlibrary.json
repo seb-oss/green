@@ -1,5 +1,11 @@
 [
   {
+    "id": "frameworks--page",
+    "name": "Page",
+    "title": "Frameworks",
+    "customParams": {}
+  },
+  {
     "id": "components-wizard-in-page-wizard--in-page-wizard-step-card",
     "name": "In-page Wizard Step Card",
     "title": "Components/Wizard/In-page Wizard",
@@ -106,12 +112,6 @@
         "component-checkbox"
       ]
     }
-  },
-  {
-    "id": "frameworks--page",
-    "name": "Page",
-    "title": "Frameworks",
-    "customParams": {}
   },
   {
     "id": "utilities-spacing-padding--page",
