@@ -1,7 +1,8 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsDatepicker, getScopedTagName } from '@sebgroup/green-core'
+import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 registerTransitionalStyles()
