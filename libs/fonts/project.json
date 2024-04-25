@@ -13,10 +13,40 @@
       "options": {
         "outputPath": "dist/libs/fonts/src",
         "commands": [
-          {
-            "command": "cp -R libs/fonts/src/fonts dist/libs/fonts/src"
-          }
+          "mkdir -p dist/libs/fonts/src",
+          "nx run fonts:copy-fonts",
+          "nx run fonts:build-css",
+          "nx run fonts:copy-package-json",
+          "nx run fonts:copy-readme"
         ]
+      }
+    },
+    "copy-fonts": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cp -R libs/fonts/src/fonts dist/libs/fonts/src"
+        ]
+      }
+    },
+    "build-css": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "sass libs/fonts/src/scss/fonts.scss dist/libs/fonts/src/css/fonts.css"
+        ]
+      }
+    },
+    "copy-package-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp libs/fonts/package.json dist/libs/fonts"
+      }
+    },
+    "copy-readme": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp libs/fonts/README.md dist/libs/fonts"
       }
     }
   },
