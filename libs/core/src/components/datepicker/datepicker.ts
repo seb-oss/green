@@ -19,7 +19,8 @@ import type { GdsPopover } from '../../primitives/popover'
 import '../../primitives/calendar'
 import type { GdsCalendar } from '../../primitives/calendar'
 
-import { GdsDropdown } from '../../components/dropdown'
+import '../../components/dropdown'
+import type { GdsDropdown } from '../../components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
