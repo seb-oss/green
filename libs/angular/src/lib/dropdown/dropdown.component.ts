@@ -21,7 +21,8 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import {
+import '@sebgroup/green-core/components/dropdown'
+import type {
   GdsDropdown,
   GdsOption,
 } from '@sebgroup/green-core/components/dropdown'
