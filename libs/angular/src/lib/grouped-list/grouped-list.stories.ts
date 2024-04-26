@@ -1,6 +1,6 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import '@sebgroup/green-core/components/grouped-list'
+import '@sebgroup/green-core/components/grouped-list/index.js'
 import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
 import docs from './grouped-list.docs.mdx'
 

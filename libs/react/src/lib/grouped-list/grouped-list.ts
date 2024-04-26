@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
+import { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 

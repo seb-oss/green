@@ -21,7 +21,7 @@ Since each component in Green Core is automatically registered with the `CustomE
 We can improve the situation by making the package more granular. Intead of all modules being exported from a main root export, we can split it up into separate exports for each component. Importing an individual component now looks like this:
 
 ```ts
-import '@sebgroup/green-core/components/dropdown'
+import '@sebgroup/green-core/components/dropdown/index.js'
 ```
 
 Now we have sort of flipped the problem of dead code elimition on its head. Instead of starting at the end, when an application is built, we start at the begininng, when the component is built. By treating each component as a separate entry-point in the build process, we automatically elimitate all the things that are never imported by that component.
@@ -41,7 +41,7 @@ Here's some consumer code using a `gds-dropdown`:
 JS:
 
 ```js
-import '@sebgroup/green-core/components/dropdown'
+import '@sebgroup/green-core/components/dropdown/index.js'
 ```
 
 HTML:
