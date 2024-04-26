@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.3
+
+### Patch Changes
+
+- f8758d9: **Sub-path imports:** Fix missing filename on import paths
+
 ## 3.6.2
 
 ### Patch Changes
