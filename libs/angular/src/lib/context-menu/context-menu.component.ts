@@ -16,7 +16,7 @@ interface MenuItems extends DropdownOption {
   template?: TemplateRef<unknown>
 }
 
-import '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/context-menu/index.js'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 @Component({

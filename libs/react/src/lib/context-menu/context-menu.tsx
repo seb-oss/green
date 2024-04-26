@@ -5,7 +5,7 @@ import {
   GdsContextMenu,
   GdsMenuItem,
   GdsMenuHeading,
-} from '@sebgroup/green-core/components/context-menu'
+} from '@sebgroup/green-core/components/context-menu/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 

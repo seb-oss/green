@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react'
 import {
   GdsDropdown,
   GdsOption,
-} from '@sebgroup/green-core/components/dropdown'
+} from '@sebgroup/green-core/components/dropdown/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import React from 'react'

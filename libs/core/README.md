@@ -35,7 +35,7 @@ import { html } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 // Import the components that you need
-import '@sebgroup/green-core/components/button'
+import '@sebgroup/green-core/components/button/index.js'
 
 @customElement('my-app')
 export class MyApp extends LitElement {
@@ -79,7 +79,7 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular'
 In your component:
 
 ```ts
-import '@sebgroup/green-core/components/button'
+import '@sebgroup/green-core/components/button/index.js'
 
 // Transitional styles
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
@@ -106,7 +106,7 @@ Here is an example:
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsButton } from '@sebgroup/green-core/component/button'
+import { GdsButton } from '@sebgroup/green-core/component/button/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
