@@ -1,5 +1,9 @@
 import { createComponent } from '@lit/react'
-import { GdsDropdown, GdsOption, getScopedTagName } from '@sebgroup/green-core'
+import {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import React from 'react'
 import { CoreMenuHeading } from '../context-menu/context-menu'

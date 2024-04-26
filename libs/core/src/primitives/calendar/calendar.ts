@@ -13,10 +13,10 @@ import {
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { renderMonthGridView } from './functions'
-import { watch } from '../../utils/decorators'
+import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
 

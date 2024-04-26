@@ -1,8 +1,9 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import '../../../../../dist/libs/core/src/index.js'
-import type { GdsGrid } from './grid'
+import '@sebgroup/green-core/components/grid'
+import type { GdsGrid } from '@sebgroup/green-core/components/grid'
 
-import { htmlTemplateTagFactory } from '../../../../../dist/libs/core/src/index.js'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('GdsGrid', () => {

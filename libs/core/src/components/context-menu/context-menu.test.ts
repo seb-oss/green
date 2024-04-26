@@ -2,19 +2,21 @@ import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { time } from 'console'
 
 import { clickOnElement, timeout } from '../../utils/testing'
-import '../../../../../dist/libs/core/src/index.js'
+
+import '@sebgroup/green-core/components/context-menu'
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '../../../../../dist/libs/core/src/index.js'
+} from '@sebgroup/green-core/scoping'
 
-import type { GdsContextMenu } from './context-menu'
-import { GdsPopover } from 'src/primitives/popover'
-import { GdsMenuItem } from 'src/primitives/menu/menu-item'
-import { GdsMenu } from 'src/primitives/menu/menu'
+import type {
+  GdsContextMenu,
+  GdsMenuItem,
+} from '@sebgroup/green-core/components/context-menu'
+import { GdsPopover } from '@sebgroup/green-core/primitives/popover'
+import { GdsMenu } from '@sebgroup/green-core/primitives/menu'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
