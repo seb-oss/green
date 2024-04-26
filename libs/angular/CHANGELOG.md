@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.2
+
+### Patch Changes
+
+- 57fb099: Publish previously failed version
+
 ## 3.6.1
 
 ### Patch Changes
