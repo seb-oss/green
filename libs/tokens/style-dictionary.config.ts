@@ -427,6 +427,104 @@ const config: StyleDictionary.Config = {
         },
       ],
     },
+    ios: {
+      buildPath: 'ios/',
+      transformGroup: 'ios-swift',
+      files: [
+        {
+          destination: 'light-mode-colors.swift',
+          format: 'ios-swift/class.swift',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return !!token.darkValue
+          },
+
+          options: {
+            colorScheme: 'light',
+          },
+        }, {
+          destination: 'dark-mode-colors.swift',
+          format: 'ios-swift/class.swift',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return !!token.darkValue
+          }, 
+
+          options: {
+            colorScheme: 'dark',
+          },
+        }, {
+          destination: 'dimentions.swift',
+          format: 'ios-swift/class.swift',
+          filter: (token) => {
+            if (token.version === '2016') return false
+            return token.path.includes('size')
+          },
+        }, {
+          destination: 'radii.swift',
+          format: 'ios-swift/class.swift',
+          filter: (token) => {
+            console.log(token);
+            if (token.version === '2016') return false
+            return token.path.includes('radii')
+          },
+        }
+      ],
+    },
+    android: {
+      buildPath: 'android/',
+      transformGroup: 'android',
+      files: [
+        {
+          destination: 'light-mode-colors.xml',
+          format: 'android/colors',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return !!token.darkValue
+          },
+          options: {
+            colorScheme: 'light',
+          },
+        },
+        {
+          destination: 'dark-mode-colors.xml',
+          format: 'android/colors',
+          filter: (token) => {
+            if (token.version === '2016') {
+              return false
+            }
+            return !!token.darkValue
+          },
+
+          options: {
+            colorScheme: 'dark',
+          },
+        },
+        {
+          destination: 'dimensions.xml',
+          format: 'android/resources',
+          filter: (token) => {
+            if (token.version === '2016') return false
+            return token.path.includes('size')
+          },
+        },
+        {
+          destination: 'radii.xml',
+          format: 'android/resources',
+          filter: (token) => {
+            if (token.version === '2016') return false
+            return token.path.includes('radii')
+          },
+        },
+      ],
+
+    }
   },
 }
 
