@@ -1,10 +1,10 @@
 @use '../../tokens';
 
 @mixin add-accordion() {
-  border-bottom: 0.0625rem solid var(--grey-500);
+  border-bottom: 0.0625rem solid var(--grey-600);
 
   & > div {
-    border-top: 0.0625rem solid var(--grey-500);
+    border-top: 0.0625rem solid var(--grey-600);
 
     svg {
       height: 1.5rem;
@@ -15,7 +15,7 @@
       background-color: var(--grey-200);
 
       & button:hover {
-        background-color: var(--grey-400);
+        background-color: var(--grey-500);
       }
 
       svg {
@@ -36,7 +36,7 @@
       background-color: transparent;
       padding: 1rem 5rem 1rem 1rem;
       border-radius: var(--gds-sys-shape-corner-none);
-      color: var(--grey-1000);
+      color: var(--text-primary-color);
       position: relative;
 
       > span {
@@ -55,10 +55,11 @@
         top: 1rem;
         right: 1rem;
         transition: transform tokens.$transition-time;
+        stroke: currentColor;
       }
 
       &:not([aria-expanded='true']):hover {
-        background-color: var(--grey-200);
+        background-color: var(--grey-400);
         color: var(--grey-1000);
       }
     }
