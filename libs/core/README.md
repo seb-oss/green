@@ -94,6 +94,8 @@ In your template:
 <gds-button *nggCoreElement>Click me!</gds-button>
 ```
 
+The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
+
 ### Using React
 
 In most cases, we already exort React wrappers for these components from the `@sebgroup/green-react` package. In those cases you can just use those. But you can also easily create your own wrappers using `@lit/react`.
