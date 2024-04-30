@@ -437,6 +437,16 @@
     }
   },
   {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": [
+        "component-accordion"
+      ]
+    }
+  },
+  {
     "id": "components-badge--badge",
     "name": "Badge",
     "title": "Components/Badge",
@@ -453,16 +463,6 @@
     "customParams": {
       "componentIds": [
         "component-alertribbon"
-      ]
-    }
-  },
-  {
-    "id": "components-accordion--accordion",
-    "name": "Accordion",
-    "title": "Components/Accordion",
-    "customParams": {
-      "componentIds": [
-        "component-accordion"
       ]
     }
   },
