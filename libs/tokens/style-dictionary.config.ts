@@ -363,7 +363,19 @@ const config: StyleDictionary.Config = {
     },
     ios: {
       buildPath: 'ios/',
-      transformGroup: 'ios-swift',
+      /**
+       * These transforms are an adaptation of the [ios-swift transform group](https://amzn.github.io/style-dictionary/#/transform_groups?id=ios-swift)
+       * It needed to be adopted to match our token structure. Since we start the structure with REF & SYS instead of the category.
+       */
+      transforms: [
+        'attribute/cti',
+        'name/cti/camel',
+        'green/color/UIColorSwift',
+        'content/swift/literal',
+        'asset/swift/literal',
+        'size/swift/remToCGFloat',
+        'font/swift/literal',
+      ],
       files: [
         {
           destination: 'light-colors.swift',
