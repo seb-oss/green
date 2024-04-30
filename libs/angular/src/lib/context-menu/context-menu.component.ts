@@ -7,7 +7,7 @@ import {
   EventEmitter,
   TemplateRef,
 } from '@angular/core'
-import { DropdownOption } from '../dropdown/dropdown.component'
+import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
 
 /**
  * MenuItems extends DropDown option and adds the posibility to pass a custom template for just one item.
