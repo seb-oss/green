@@ -4,18 +4,31 @@ import filters from './src/filters'
 import formats from './src/formats'
 import transforms from './src/transforms'
 
+/**
+ * Register custom actions
+ *
+ */
 for (const entry of Object.entries(actions)) {
   StyleDictionary.registerAction(entry[1])
 }
 
+/**
+ * Register custom formats
+ */
 for (const entry of Object.entries(formats)) {
   StyleDictionary.registerFormat(entry[1])
 }
 
+/**
+ * Register custom transforms
+ */
 for (const entry of Object.entries(transforms)) {
   StyleDictionary.registerTransform(entry[1])
 }
 
+/**
+ * Register custom filters
+ */
 for (const entry of Object.entries(filters)) {
   StyleDictionary.registerFilter(entry[1])
 }
@@ -81,9 +94,7 @@ const config: StyleDictionary.Config = {
         {
           destination: 'motion.css',
           format: 'css/variables',
-          filter: function (token) {
-            return token.path?.includes('motion')
-          },
+          filter: 'isMotion',
           options: {
             outputReferences: true,
             selector: ':host',
@@ -92,7 +103,6 @@ const config: StyleDictionary.Config = {
       ],
     },
     css: {
-      // transformGroup: 'css',
       transforms: [
         'attribute/cti',
         'time/seconds',
@@ -109,22 +119,12 @@ const config: StyleDictionary.Config = {
         {
           destination: 'pallet.css',
           format: 'css/variables',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return token.path.includes('ref')
-          },
+          filter: 'is2023Ref',
         },
         {
           destination: 'light.css',
           format: 'css/theme',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
+          filter: 'is2023Color',
           options: {
             colorScheme: 'light',
           },
@@ -132,13 +132,7 @@ const config: StyleDictionary.Config = {
         {
           destination: 'dark.css',
           format: 'css/theme',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-
-            return !!token.darkValue
-          },
+          filter: 'is2023Color',
           options: {
             colorScheme: 'dark',
           },
@@ -146,22 +140,12 @@ const config: StyleDictionary.Config = {
         {
           destination: 'pallet-2016.css',
           format: 'css/variables',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-            return token.path.includes('ref')
-          },
+          filter: 'is2016Ref',
         },
         {
           destination: 'light-2016.css',
           format: 'css/theme',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
+          filter: 'is2016Color',
           options: {
             colorScheme: 'light',
           },
@@ -169,13 +153,7 @@ const config: StyleDictionary.Config = {
         {
           destination: 'dark-2016.css',
           format: 'css/theme',
-          filter: (token) => {
-            if (token.version !== '2016') {
-              return false
-            }
-
-            return !!token.darkValue
-          },
+          filter: 'is2016Color',
           options: {
             colorScheme: 'dark',
           },
@@ -183,7 +161,6 @@ const config: StyleDictionary.Config = {
       ],
     },
     scss: {
-      //transformGroup: 'scss',
       transforms: [
         'attribute/cti',
         'name/cti/kebab',
@@ -200,18 +177,12 @@ const config: StyleDictionary.Config = {
         {
           destination: '_pallet.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return token.path.includes('ref')
-          },
+          filter: 'is2016Ref',
         },
         {
           destination: '_light.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return !!token.darkValue
-          },
+          filter: 'is2023Color',
           options: {
             colorScheme: 'light',
           },
@@ -219,10 +190,7 @@ const config: StyleDictionary.Config = {
         {
           destination: '_dark.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return !!token.darkValue
-          },
+          filter: 'is2023Color',
           options: {
             colorScheme: 'dark',
           },
@@ -230,31 +198,17 @@ const config: StyleDictionary.Config = {
         {
           destination: '_mixin-sys.scss',
           format: 'scss/mixin',
-          filter: (token) => {
-            if (token.version === '2016') return false
-
-            if (token.path.includes('motion')) {
-              return true
-            }
-
-            return token.type === 'color' && !!token.darkValue
-          },
+          filter: 'is2023MotionColor',
         },
         {
           destination: '_mixin-ref.scss',
           format: 'scss/mixin',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return token.type === 'color' && !token.darkValue
-          },
+          filter: 'is2023Ref',
         },
         {
           destination: '_pallet-2016.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (token.darkValue) return false
-            return token.version === '2016'
-          },
+          filter: 'is2016Pallet',
           options: {
             outputReferences: false,
           },
@@ -262,10 +216,7 @@ const config: StyleDictionary.Config = {
         {
           destination: '_light-2016.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (!token.darkValue) return false
-            return token.version === '2016'
-          },
+          filter: 'is2016Color',
           options: {
             outputReferences: false,
           },
@@ -273,10 +224,7 @@ const config: StyleDictionary.Config = {
         {
           destination: '_dark-2016.scss',
           format: 'scss/variables',
-          filter: (token) => {
-            if (!token.darkValue) return false
-            return token.version === '2016'
-          },
+          filter: 'is2016Color',
           options: {
             outputReferences: false,
           },
@@ -287,10 +235,7 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'light',
           },
-          filter: (token) => {
-            if (token.version !== '2016') return false
-            return token.type === 'color' && !!token.darkValue
-          },
+          filter: 'is2016Color',
         },
 
         {
@@ -299,19 +244,12 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'dark',
           },
-          filter: (token) => {
-            if (token.version !== '2016') return false
-            return token.type === 'color' && !!token.darkValue
-          },
+          filter: 'is2016Color',
         },
         {
           destination: '_mixin-ref-2016.scss',
           format: 'scss/mixin',
-          filter: (token) => {
-            if (token.version !== '2016') return false
-
-            return token.type === 'color' && !token.darkValue
-          },
+          filter: 'is2016Ref',
         },
       ],
     },
@@ -330,16 +268,12 @@ const config: StyleDictionary.Config = {
         {
           destination: 'ref-tokens.js',
           format: 'javascript/module',
-          filter: function (token) {
-            return token.path.includes('ref')
-          },
+          filter: 'is2023Ref',
         },
         {
           destination: 'sys-tokens.js',
           format: 'javascript/module',
-          filter: function (token) {
-            return token.path.includes('sys')
-          },
+          filter: 'is2023Sys',
         },
       ],
     },
@@ -432,47 +366,31 @@ const config: StyleDictionary.Config = {
       transformGroup: 'ios-swift',
       files: [
         {
-          destination: 'light-mode-colors.swift',
-          format: 'ios-swift/class.swift',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
-
+          destination: 'light-colors.swift',
+          format: 'green/ios-swift-class',
+          filter: 'is2023Color',
           options: {
             colorScheme: 'light',
           },
-        }, {
-          destination: 'dark-mode-colors.swift',
-          format: 'ios-swift/class.swift',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return !!token.darkValue
-          }, 
-
+        },
+        {
+          destination: 'dark-colors.swift',
+          format: 'green/ios-swift-class',
+          filter: 'is2023Color',
           options: {
             colorScheme: 'dark',
           },
-        }, {
+        },
+        {
           destination: 'dimentions.swift',
-          format: 'ios-swift/class.swift',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return token.path.includes('size')
-          },
-        }, {
+          format: 'green/ios-swift-class',
+          filter: 'is2023Size',
+        },
+        {
           destination: 'radii.swift',
-          format: 'ios-swift/class.swift',
-          filter: (token) => {
-            console.log(token);
-            if (token.version === '2016') return false
-            return token.path.includes('radii')
-          },
-        }
+          format: 'green/ios-swift-class',
+          filter: 'is2023Radii',
+        },
       ],
     },
     android: {
@@ -480,51 +398,41 @@ const config: StyleDictionary.Config = {
       transformGroup: 'android',
       files: [
         {
-          destination: 'light-mode-colors.xml',
-          format: 'android/colors',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
+          destination: 'light-colors.xml',
+          format: 'green/android-resources',
+          filter: 'is2023Color',
           options: {
             colorScheme: 'light',
+            resourceType: 'color',
           },
         },
         {
-          destination: 'dark-mode-colors.xml',
-          format: 'android/colors',
-          filter: (token) => {
-            if (token.version === '2016') {
-              return false
-            }
-            return !!token.darkValue
-          },
-
+          destination: 'dark-colors.xml',
+          format: 'green/android-resources',
+          filter: 'is2023Color',
           options: {
             colorScheme: 'dark',
+            resourceType: 'color',
           },
         },
         {
           destination: 'dimensions.xml',
-          format: 'android/resources',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return token.path.includes('size')
+          format: 'green/android-resources',
+          filter: 'is2023Size',
+          options: {
+            resourceType: 'size',
           },
         },
         {
           destination: 'radii.xml',
-          format: 'android/resources',
-          filter: (token) => {
-            if (token.version === '2016') return false
-            return token.path.includes('radii')
+          format: 'green/android-resources',
+          filter: 'is2023Radii',
+          options: {
+            resourceType: 'number',
           },
         },
       ],
-
-    }
+    },
   },
 }
 
