@@ -26,6 +26,14 @@ First, you need to add some base styles that all components depend on:
 @use '@sebgroup/chlorophyll/scss/components/fonts/';
 ```
 
+**Note:** Depending on you bundler, you may need to configure the font path by setting the `$font-path` variable:
+
+```scss
+@use '@sebgroup/chlorophyll/scss/components/fonts/' with (
+  $font-path: '@sebgroup/fonts/fonts'
+);
+```
+
 You will likely also need to use utility classes and grid (and some components use these interally):
 
 ```scss
