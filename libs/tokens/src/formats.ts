@@ -7,8 +7,6 @@ import {
   formatHelpers,
 } from 'style-dictionary'
 
-console.log(_template)
-
 const {
   fileHeader,
   sortByReference,
@@ -221,7 +219,6 @@ const formats: Record<string, Format> = {
 
       dictionary.allTokens = dictionary.allTokens.map((token) => {
         token.attributes.category = options.resourceType || 'string'
-        console.log(options.resourceType)
 
         return token
       })
