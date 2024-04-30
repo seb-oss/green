@@ -13,28 +13,18 @@
       }
     },
     "build-src": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@sebgroup/repo-tools:build-core-lib",
       "outputs": ["{options.outputPath}"],
-      "format": ["esm", "cjs"],
-      "platform": "browser",
       "options": {
-        "packageJson": "libs/core/package.json",
         "outputPath": "dist/libs/core/src",
-        "main": "libs/core/src/index.ts",
-        "additionalEntryPoints": [
-          "libs/core/src/transitional-styles.ts",
-          "libs/core/src/localization.ts"
-        ],
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           {
-            "glob": "(README.md|setup-jest.js|green-jest-config.cjs)",
+            "glob": "(package.json|README.md|setup-jest.js|green-jest-config.cjs)",
             "input": "libs/core",
             "output": "."
           }
-        ],
-        "updateBuildableProjectDepsInPackageJson": false,
-        "esbuildConfig": "libs/core/esbuild.config.cjs"
+        ]
       }
     },
     "build-bundle-src": {
@@ -73,18 +63,25 @@
         "command": "npx stylelint \"libs/core/**/*.(scss|css)\""
       }
     },
+    "build-tests": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "node libs/core/build-scripts/build-tests"
+      }
+    },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": ["build-tests"],
       "options": {
-        "command": "npx wtr --node-resolve --playwright --browsers chromium firefox webkit"
+        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types-and-scoping"],
+      "dependsOn": ["build-tests"],
       "options": {
-        "command": "npx wtr --node-resolve --playwright --browsers chromium webkit"
+        "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
       }
     },
     "storybook": {

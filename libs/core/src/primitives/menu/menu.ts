@@ -1,19 +1,18 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
 } from '../../controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
-import { GdsMenuItem } from './menu-item'
 import { TransitionalStyles } from '../../transitional-styles'
+
+import '../../primitives/menu/menu-item'
+import type { GdsMenuItem } from '../../primitives/menu/menu-item'
 
 /**
  * @element gds-menu

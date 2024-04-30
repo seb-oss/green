@@ -1,13 +1,11 @@
-import { LitElement, unsafeCSS } from 'lit'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { unsafeCSS } from 'lit'
+import { gdsCustomElement, html } from '../../scoping'
+import { GdsElement } from '../../gds-element'
 
 import styles from './stem.styles.scss'
 
 @gdsCustomElement('gds-icon')
-export class GdsIcon extends LitElement {
+export class GdsIcon extends GdsElement {
   static get styles() {
     return unsafeCSS(styles)
   }

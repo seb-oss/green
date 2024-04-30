@@ -10,7 +10,7 @@ import {
   inject,
 } from '@angular/core'
 
-import { getScopedTagName } from '@sebgroup/green-core'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @Directive({
   selector: '[nggCoreElement]',

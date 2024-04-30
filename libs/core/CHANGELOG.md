@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.16.0
+
+### Minor Changes
+
+- 5b84660: # New tokens
+
+  - Motion
+  - Size scale
+  - Spacing, Margin, Padding
+
+  # New component: Button
+
+  - Built on tokens
+  - Transitional styles
+
+- 80b4050: **Code splitting**: Add support for sub-path exports
+
+### Patch Changes
+
+- 80b4050: **Button**: Fixed an issue with ripple effect when using transitional styles and scoping
+
 ## 1.15.1
 
 ### Patch Changes

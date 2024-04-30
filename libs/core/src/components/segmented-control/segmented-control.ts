@@ -1,16 +1,13 @@
 import { HTMLTemplateResult, unsafeCSS } from 'lit'
-import { query, state, property, queryAsync } from 'lit/decorators.js'
+import { query, state, property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { msg } from '@lit/localize'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
-import { watch, observeLightDOM } from '../../utils/decorators'
+import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
 
-import { GdsSegment } from './segment/segment'
+import { GdsSegment } from '../../components/segmented-control/segment'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'

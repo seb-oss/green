@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.5.6
+
+### Patch Changes
+
+- f8758d9: **Sub-path imports:** Fix missing filename on import paths
+
+## 3.5.5
+
+### Patch Changes
+
+- 80b4050: Update underlying Core components to use sub path imports
+- Updated dependencies [5b84660]
+- Updated dependencies [e20574d]
+- Updated dependencies [80b4050]
+- Updated dependencies [80b4050]
+  - @sebgroup/green-core@1.16.0
+  - @sebgroup/chlorophyll@3.3.4
+
 ## 3.5.4
 
 ### Patch Changes

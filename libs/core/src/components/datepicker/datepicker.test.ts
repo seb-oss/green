@@ -10,16 +10,18 @@ import {
   onlyDate,
   timeout,
 } from '../../utils/testing'
-import '../../../../../dist/libs/core/src/index.js'
+
+import '@sebgroup/green-core/components/datepicker'
+import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
+
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '../../../../../dist/libs/core/src/index.js'
+} from '@sebgroup/green-core/scoping'
 
-import type { GdsDatepicker } from './datepicker'
-import { GdsPopover } from 'src/primitives/popover'
+import { GdsPopover } from '@sebgroup/green-core/primitives/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
-import { GdsDropdown } from '../dropdown/dropdown'
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

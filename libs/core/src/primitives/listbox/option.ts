@@ -5,7 +5,7 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../scoping'
 
 import style from './option.styles'
 

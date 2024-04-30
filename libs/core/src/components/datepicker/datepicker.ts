@@ -9,26 +9,23 @@ import { HTMLTemplateResult, nothing } from 'lit'
 import { msg } from '@lit/localize'
 
 import { GdsFormControlElement } from '../../components/form-control'
-import {
-  gdsCustomElement,
-  html,
-  getScopedTagName,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html, getScopedTagName } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 
-import '../../primitives/popover/popover'
+import '../../primitives/popover'
+import type { GdsPopover } from '../../primitives/popover'
 
-import '../../primitives/calendar/calendar'
-import type { GdsCalendar } from '../../primitives/calendar/calendar'
+import '../../primitives/calendar'
+import type { GdsCalendar } from '../../primitives/calendar'
 
-import { GdsDropdown } from '../dropdown/dropdown'
+import '../../components/dropdown'
+import type { GdsDropdown } from '../../components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import { styles } from './datepicker.styles'
-import { GdsPopover } from '../../primitives/popover/popover'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -204,7 +201,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#trigger')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAll(getScopedTagName('gds-date-part-spinner'))
+  @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
   @query('.input')
@@ -536,7 +533,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleFieldClick = (e: MouseEvent) => {
-    this._elSpinners[0].focus()
+    this._elSpinners[0]?.focus()
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {

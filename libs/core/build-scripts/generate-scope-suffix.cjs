@@ -12,11 +12,13 @@ hashElement(path.join(__dirname, '../src'), options)
     const suffix = hash.hash.substring(0, 6)
     console.log(`Scope suffix: ${suffix}`)
     const results = replace.sync({
-      files: 'dist/libs/core/src/*.js',
+      files: 'dist/libs/core/src/**/*.js',
       from: /-gdsvsuffix/g,
       to: `-${suffix}`,
     })
-    console.log(results)
+    if (process.env.NX_VERBOSE_LOGGING == 'true') {
+      console.log('Replacement results:', results)
+    }
   })
   .catch((error) => {
     return console.error('hashing failed:', error)

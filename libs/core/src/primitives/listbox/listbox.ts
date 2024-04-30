@@ -1,18 +1,19 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { TransitionalStyles } from '../../transitional-styles'
-
-import { GdsOption, OptionsContainer } from './option'
 import 'reflect-metadata'
 
 import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
+import '../../primitives/listbox/option'
+import type {
+  GdsOption,
+  OptionsContainer,
+} from '../../primitives/listbox/option'
+
 import style from './listbox.styles'
-import { watch } from '../../utils/decorators'
-import {
-  html,
-  gdsCustomElement,
-} from '../../utils/helpers/custom-element-scoping'
+import { watch } from '../../utils/decorators/watch'
+import { html, gdsCustomElement } from '../../scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,

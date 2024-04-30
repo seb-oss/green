@@ -57,6 +57,20 @@ Once configured to use scss, it's just a matter of including the scss to your ma
 @use '@sebgroup/chlorophyll/scss';
 ```
 
-### Have other needs?
+**Note:** Depending on you bundler, you may need to configure the font path by setting the `$font-path` variable:
+
+```scss
+@use '@sebgroup/chlorophyll/scss' with (
+  $font-path: '@sebgroup/fonts/fonts'
+);
+```
+
+### Selective imports
+
+I you are only using a few components, it's better to selectively import the components you need. This will reduce the size of the final css bundle.
+
+Check out the example on [this page](https://sebgroup.github.io/green/latest/chlorophyll/?path=/docs/get-started-use--page).
+
+## Have other needs?
 
 More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/sebgroup/green/issues)
