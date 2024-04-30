@@ -17,7 +17,7 @@ import {
 import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
-import { GdsDatepicker } from '@sebgroup/green-core'
+import '@sebgroup/green-core/components/datepicker/index.js'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 export interface Attributes {

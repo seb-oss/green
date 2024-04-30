@@ -29,12 +29,10 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular'
 Import `GdsGroupedList`, `registerTransitionalStyles` and `NggCoreWrapperModule` from `@sebgroup/green-core` in the Angular component that uses it.
 
 ```ts
-import '@sebgroup/green-core' // This needs to be imported at least once in your application for the web components to be registered
+import '@sebgroup/green-core/components/grouped-list/index.js'
 
-// if you need to interact with the component through the DOM, you can import the class like this:
-// import { GdsGroupedList } from '@sebgroup/green-core'
-// or types only
-// import type { GdsGroupedList } from '@sebgroup/green-core'
+// if you need to interact with the component through the DOM, you can also import the class type like this:
+// import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
 
 // Transitional styles will make the component get 2016 design
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'

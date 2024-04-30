@@ -1,13 +1,10 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { Focusable } from '../../mixins/focusable'
 import { TransitionalStyles } from '../../transitional-styles'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 
 import styles from '../listbox/option.styles'
 

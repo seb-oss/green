@@ -7,8 +7,9 @@ import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
 import 'reflect-metadata'
 
-import { constrainSlots } from '../../utils/helpers'
-import { watch, observeLightDOM } from '../../utils/decorators'
+import { constrainSlots } from '../../utils/helpers/constrain-slots'
+import { watch } from '../../utils/decorators/watch'
+import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 
 import {
   gdsCustomElement,
@@ -17,14 +18,14 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 
 import '../../primitives/listbox'
+import type { GdsListbox } from '../../primitives/listbox'
 import type {
-  GdsListbox,
   GdsOption,
   OptionsContainer,
-} from '../../primitives/listbox'
+} from '../../primitives/listbox/option'
 import '../../primitives/popover'
 
-import { GdsFormControlElement } from '../form-control'
+import { GdsFormControlElement } from '../../components/form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'

@@ -1,8 +1,5 @@
 import { GdsElement } from '../../gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 
 /**
  * @element gds-list-item

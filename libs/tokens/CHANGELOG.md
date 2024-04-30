@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- 5b84660: # New tokens
+
+  - Motion
+  - Size scale
+  - Spacing, Margin, Padding
+
+  # New component: Button
+
+  - Built on tokens
+  - Transitional styles
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.4
+
+### Patch Changes
+
+- e20574d: **Accordion:** Fix dark mode colors
+
 ## 3.3.3
 
 ### Patch Changes
