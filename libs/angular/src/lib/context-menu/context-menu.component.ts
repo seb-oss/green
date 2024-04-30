@@ -17,7 +17,7 @@ interface MenuItems extends DropdownOption {
 }
 
 import '@sebgroup/green-core/components/context-menu/index.js'
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import * as ContextMenuTransStyles from '@sebgroup/green-core/components/context-menu/context-menu.trans.styles.js'
 
 @Component({
   selector: 'ngg-context-menu',
@@ -62,7 +62,7 @@ export class NggContextMenuComponent {
   isActive = false
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
-    registerTransitionalStyles()
+    ContextMenuTransStyles.register()
   }
 
   get placement(): string {
