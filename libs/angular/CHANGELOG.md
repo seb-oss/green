@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.7.0
+
+### Minor Changes
+
+- 0aeaa98: **Sub-packages:** Components in `@sebgroup/green-angular` are now exported as separate sub-packages for better tree-shaking.
+
+### Patch Changes
+
+- Updated dependencies [0aeaa98]
+- Updated dependencies [a8941c7]
+  - @sebgroup/green-core@1.18.0
+
 ## 3.6.3
 
 ### Patch Changes
