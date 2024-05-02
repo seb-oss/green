@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.18.0
+
+### Minor Changes
+
+- 0aeaa98: **Transitional styles:** Transitional styles can now be separately imported on a per-component basis
+
+### Patch Changes
+
+- a8941c7: **Jest config:** Add back missing export
+
 ## 1.17.0
 
 ### Minor Changes
