@@ -27,6 +27,9 @@ export default async function runExecutor(
         './libs/core/src/components/**/!(*.test|*.style|*.styles).ts',
       ),
 
+      // Transitional styles
+      ...glob.sync('./libs/core/src/components/**/*.trans.styles.ts'),
+
       // Primitives
       // These are considered internal, but it is somtimes neccessary to
       // import directly, for example in our tests.
