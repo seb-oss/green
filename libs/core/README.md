@@ -31,8 +31,8 @@ import { css, customElement, LitElement } from 'lit'
 // This custom `html` template literal tag from Green Core extends the default `lit-html` tag to handle element version scoping.
 import { html } from '@sebgroup/green-core/scoping'
 
-// Trtansitional styles applies the current 2016 design language to the components
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+// Transitional styles applies the current 2016 design language to the components
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
 
 // Import the components that you need
 import '@sebgroup/green-core/components/button/index.js'
@@ -45,7 +45,7 @@ export class MyApp extends LitElement {
     super.connectedCallback()
 
     // Register transitional styles to get SEB's current visual design
-    registerTransitionalStyles()
+    ButtonStyles.register()
   }
 
   render() {
@@ -82,8 +82,8 @@ In your component:
 import '@sebgroup/green-core/components/button/index.js'
 
 // Transitional styles
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-registerTransitionalStyles()
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
 ```
 
 Use the webcomponent in your template with the `*nggCoreElement` directive.
@@ -108,9 +108,9 @@ import { createComponent } from '@lit/react'
 
 import { GdsButton } from '@sebgroup/green-core/component/button/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
-registerTransitionalStyles()
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
 
 export const Button = createComponent({
   tagName: getScopedTagName('gds-button'),
