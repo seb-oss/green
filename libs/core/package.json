@@ -33,7 +33,7 @@
     "./scoping": "./scoping.js",
     "./transitional-styles": "./transitional-styles.js",
     "./localization": "./localization.js",
-    "./setup-jest": "./setup-jest.js",
+    "./jest-config": "./green-jest-config.cjs",
     "./components/*": "./components/*",
     "./_primitives/*": "./primitives/*"
   }
