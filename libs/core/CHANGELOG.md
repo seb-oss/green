@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.1
+
+### Patch Changes
+
+- 7dd4fef: Fix export path for jest config
+
 ## 1.18.0
 
 ### Minor Changes
