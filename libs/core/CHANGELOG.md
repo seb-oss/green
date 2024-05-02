@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.17.0
+
+### Minor Changes
+
+- c5c696c: Remove default column in mobile
+
 ## 1.16.0
 
 ### Minor Changes
