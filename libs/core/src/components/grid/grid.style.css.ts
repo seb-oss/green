@@ -66,7 +66,6 @@ const style = css`
     }
 
     :host {
-      --_c: var(--_columns-mobile);
       --_gap-column: var(--_gap-mobile);
       --_gap-row: var(--_row-gap-mobile);
       --_grid-padding: var(--_padding-mobile);
