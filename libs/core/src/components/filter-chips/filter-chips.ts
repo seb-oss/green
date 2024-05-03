@@ -1,11 +1,11 @@
-import { HTMLTemplateResult } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import './filter-chip'
 import type { GdsFilterChip } from './filter-chip'
@@ -44,27 +44,25 @@ export class GdsFilterChips<ValueT = any> extends GdsElement {
       : []
   }
 
-  // Used for Transitional Styles in some legacy browsers
   @state()
-  private _tStyles?: HTMLTemplateResult
+  private _collapse = false
 
   @query('slot')
   private _elSlot!: HTMLSlotElement
 
-  connectedCallback(): void {
-    super.connectedCallback()
-
-    TransitionalStyles.instance.apply(this, 'gds-filter-chips')
-  }
+  @query('.chips')
+  private _elChips!: HTMLElement
 
   render() {
-    return html`${this._tStyles}
-      <div role="list">
-        <slot
-          @click=${this.#handleChipClick}
-          @slotchange=${this.#handleSlotChange}
-        ></slot>
-      </div>`
+    const layoutClasses = {
+      collapse: this._collapse,
+    }
+    return html`<div class="chips ${classMap(layoutClasses)}" role="list">
+      <slot
+        @click=${this.#handleChipClick}
+        @slotchange=${this.#handleSlotChange}
+      ></slot>
+    </div>`
   }
 
   #handleChipClick = (event: Event) => {
@@ -85,6 +83,29 @@ export class GdsFilterChips<ValueT = any> extends GdsElement {
         }),
       )
     }
+  }
+
+  private _collapseThreshold = 3
+  private _collapsedAt = 0
+
+  @resizeObserver()
+  private _handleResize() {
+    const chipHeight = this.#getChipHeight()
+    const selfHeight = this.offsetHeight
+    const selfWidth = this.offsetWidth
+
+    if (selfHeight >= chipHeight * this._collapseThreshold) {
+      this._collapse = true
+      this._collapsedAt = selfWidth
+    }
+
+    if (selfWidth > this._collapsedAt) {
+      this._collapse = false
+    }
+  }
+
+  #getChipHeight() {
+    return this.chips[0]?.offsetHeight || 0
   }
 
   #handleSlotChange() {
