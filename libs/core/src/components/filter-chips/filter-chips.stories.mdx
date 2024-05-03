@@ -1,0 +1,22 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+
+<Meta title="Components/Filter Chips" />
+
+# Filter Chips
+
+<button
+  onClick={() => {
+    registerTransitionalStyles()
+    document.querySelectorAll('gds-filter-chips').forEach((el) => {
+      el.connectedCallback()
+    })
+  }}
+>
+  Show 2016 styles
+</button>
+
+<button onClick={() => location.reload()}>Show 2023 styles</button>
+
+TODO:
+Add documentation and examples
