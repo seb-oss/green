@@ -218,12 +218,6 @@
     }
   },
   {
-    "id": "components-grouped-list--default",
-    "name": "Default",
-    "title": "Components/Grouped List",
-    "customParams": {}
-  },
-  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
@@ -302,6 +296,12 @@
         "component-dropdown"
       ]
     }
+  },
+  {
+    "id": "components-grouped-list--default",
+    "name": "Default",
+    "title": "Components/Grouped List",
+    "customParams": {}
   },
   {
     "id": "components-datepicker--simple",
@@ -394,6 +394,36 @@
     }
   },
   {
+    "id": "components-badge--multiple",
+    "name": "Multiple",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--default",
+    "name": "Default",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
+    "id": "components-badge--custom",
+    "name": "Custom",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": [
+        "component-badge"
+      ]
+    }
+  },
+  {
     "id": "components-form-button--default",
     "name": "Default",
     "title": "Components/Form/Button",
@@ -430,36 +460,6 @@
     "customParams": {
       "componentIds": [
         "component-button"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--multiple",
-    "name": "Multiple",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--default",
-    "name": "Default",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
-    }
-  },
-  {
-    "id": "components-badge--custom",
-    "name": "Custom",
-    "title": "Components/Badge",
-    "customParams": {
-      "componentIds": [
-        "component-badge"
       ]
     }
   },
