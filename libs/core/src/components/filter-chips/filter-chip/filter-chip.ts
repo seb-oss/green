@@ -40,14 +40,18 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-
     TransitionalStyles.instance.apply(this, 'gds-filter-chip')
+
+    this.setAttribute('role', 'listitem')
   }
 
   render() {
-    console.log('this.selected', this.selected)
     return html`${this._tStyles}
-      <gds-button size="small" .rank=${this.selected ? 'primary' : 'secondary'}>
+      <gds-button
+        size="small"
+        .rank=${this.selected ? 'primary' : 'secondary'}
+        aria-current=${String(this.selected)}
+      >
         <slot></slot>
         <gds-icon
           name="checkmark"

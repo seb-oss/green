@@ -58,10 +58,13 @@ export class GdsFilterChips<ValueT = any> extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}<slot
-        @click=${this.#handleChipClick}
-        @slotchange=${this.#handleSlotChange}
-      ></slot>`
+    return html`${this._tStyles}
+      <div role="list">
+        <slot
+          @click=${this.#handleChipClick}
+          @slotchange=${this.#handleSlotChange}
+        ></slot>
+      </div>`
   }
 
   #handleChipClick = (event: Event) => {
