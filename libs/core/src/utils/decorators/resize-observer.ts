@@ -1,9 +1,11 @@
 import type { LitElement } from 'lit'
 
 type Handler = () => void
-type ObservedElement = LitElement & {
+type ObserverStorage = {
   __resizeObservers: { [propertyKey: string]: ResizeObserver }
-  __resizeObserver_tids: { [propertyKey: string]: any }
+  __resizeObserver_tids: {
+    [propertyKey: string]: ReturnType<typeof setTimeout>
+  }
 }
 
 /**
@@ -11,7 +13,7 @@ type ObservedElement = LitElement & {
  *
  * Usage:
  * ```javascript
- * \@resizeObserver('(max-width: 576px)')
+ * \@resizeObserver()
  * handleResize() {
  *  // Do some layout calculation or something
  * }
@@ -26,7 +28,7 @@ export function resizeObserver() {
     const connectedCallback = proto.connectedCallback
     const disconnectedCallback = proto.disconnectedCallback
 
-    proto.connectedCallback = function (this: ElemClass & ObservedElement) {
+    proto.connectedCallback = function (this: ElemClass & ObserverStorage) {
       connectedCallback?.call(this)
 
       this.__resizeObservers = this.__resizeObservers || {}
@@ -43,7 +45,7 @@ export function resizeObserver() {
       this.__resizeObservers[propertyKey].observe(this)
     }
 
-    proto.disconnectedCallback = function (this: ElemClass & ObservedElement) {
+    proto.disconnectedCallback = function (this: ElemClass & ObserverStorage) {
       disconnectedCallback?.call(this)
       this.__resizeObservers[propertyKey].disconnect()
     }
