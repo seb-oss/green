@@ -18,7 +18,7 @@ type ObservedElement = LitElement & {
  * ```
  */
 export function resizeObserver() {
-  return <ElemClass extends ObservedElement>(
+  return <ElemClass extends LitElement>(
     proto: ElemClass,
     propertyKey: string,
     descriptor: TypedPropertyDescriptor<Handler>,
@@ -26,7 +26,7 @@ export function resizeObserver() {
     const connectedCallback = proto.connectedCallback
     const disconnectedCallback = proto.disconnectedCallback
 
-    proto.connectedCallback = function (this: ElemClass) {
+    proto.connectedCallback = function (this: ElemClass & ObservedElement) {
       connectedCallback?.call(this)
 
       this.__resizeObservers = this.__resizeObservers || {}
@@ -43,7 +43,7 @@ export function resizeObserver() {
       this.__resizeObservers[propertyKey].observe(this)
     }
 
-    proto.disconnectedCallback = function (this: ElemClass) {
+    proto.disconnectedCallback = function (this: ElemClass & ObservedElement) {
       disconnectedCallback?.call(this)
       this.__resizeObservers[propertyKey].disconnect()
     }
