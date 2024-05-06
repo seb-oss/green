@@ -47,8 +47,8 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      const seg = el.querySelector('#chip') as GdsFilterChip
-      expect(seg.selected).to.be.true
+      const chip = el.querySelector('#chip') as GdsFilterChip
+      expect(chip.selected).to.be.true
     })
 
     it('should set the selected chip based on the value property when multiple chips are selected', async () => {
@@ -60,10 +60,10 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      const seg1 = el.querySelector('#chip1') as GdsFilterChip
-      const seg2 = el.querySelector('#chip2') as GdsFilterChip
-      expect(seg1.selected).to.be.true
-      expect(seg2.selected).to.be.true
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.true
     })
   })
 })
