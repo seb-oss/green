@@ -1,6 +1,10 @@
 import type { LitElement } from 'lit'
 
 type Handler = () => void
+type ObservedElement = LitElement & {
+  __resizeObservers: { [propertyKey: string]: ResizeObserver }
+  __resizeObserver_tids: { [propertyKey: string]: any }
+}
 
 /**
  * Runs when the size of the component changes.
@@ -14,33 +18,34 @@ type Handler = () => void
  * ```
  */
 export function resizeObserver() {
-  return <ElemClass extends LitElement>(
+  return <ElemClass extends ObservedElement>(
     proto: ElemClass,
-    _propertyKey: string,
+    propertyKey: string,
     descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
-    let tid: any
-    let resizeObserver: ResizeObserver
-
     const connectedCallback = proto.connectedCallback
     const disconnectedCallback = proto.disconnectedCallback
 
     proto.connectedCallback = function (this: ElemClass) {
       connectedCallback?.call(this)
 
-      resizeObserver = new ResizeObserver(() => {
-        tid && clearTimeout(tid)
-        tid = setTimeout(() => {
+      this.__resizeObservers = this.__resizeObservers || {}
+      this.__resizeObserver_tids = this.__resizeObserver_tids || {}
+
+      this.__resizeObservers[propertyKey] = new ResizeObserver(() => {
+        this.__resizeObserver_tids[propertyKey] &&
+          clearTimeout(this.__resizeObserver_tids[propertyKey])
+        this.__resizeObserver_tids[propertyKey] = setTimeout(() => {
           descriptor.value?.call(this)
         }, 20)
       })
 
-      resizeObserver.observe(this)
+      this.__resizeObservers[propertyKey].observe(this)
     }
 
     proto.disconnectedCallback = function (this: ElemClass) {
       disconnectedCallback?.call(this)
-      resizeObserver.disconnect()
+      this.__resizeObservers[propertyKey].disconnect()
     }
   }
 }
