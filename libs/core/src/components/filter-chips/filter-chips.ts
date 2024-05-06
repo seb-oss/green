@@ -7,6 +7,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { watch } from '../../utils/decorators/watch'
+import { stringArrayConverter } from '../../utils/helpers/attribute-converters'
 
 import './filter-chip'
 import type { GdsFilterChip } from './filter-chip'
@@ -21,6 +22,9 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   ValueT | ValueT[]
 > {
   static styles = [styles]
+
+  @property({ converter: stringArrayConverter })
+  value?: ValueT | ValueT[]
 
   /**
    * Whether multiple chips can be selected at once.
@@ -125,9 +129,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   private _updateSelectedFromValue() {
     if (!this.value) return
 
-    // Coerce value to array if multiple
     if (this.multiple && !Array.isArray(this.value)) {
       this.value = [this.value]
+    }
+
+    if (!this.multiple && Array.isArray(this.value)) {
+      this.value = this.value[0]
     }
 
     this.updateComplete.then(() => {
