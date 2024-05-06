@@ -39,18 +39,22 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
       : []
   }
 
+  /**
+   * Whether the chips should collapse into a single row when space is limited
+   * @attr row-collapse
+   */
+  @property({ type: Boolean, attribute: 'row-collapse' })
+  rowCollapse = false
+
   @state()
-  private _collapse = false
+  private _collapsed = false
 
   @query('slot')
   private _elSlot!: HTMLSlotElement
 
-  @query('.chips')
-  private _elChips!: HTMLElement
-
   render() {
     const layoutClasses = {
-      collapse: this._collapse,
+      collapse: this._collapsed,
     }
     return html`<div class="chips ${classMap(layoutClasses)}" role="list">
       <slot
@@ -90,17 +94,19 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
 
   @resizeObserver()
   private _handleResize() {
+    if (!this.rowCollapse) return
+
     const chipHeight = this.#getChipHeight()
     const selfHeight = this.offsetHeight
     const selfWidth = this.offsetWidth
 
     if (selfHeight >= chipHeight * this._collapseThreshold) {
-      this._collapse = true
+      this._collapsed = true
       this._collapsedAt = selfWidth
     }
 
     if (selfWidth > this._collapsedAt) {
-      this._collapse = false
+      this._collapsed = false
     }
   }
 

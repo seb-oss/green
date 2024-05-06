@@ -25,7 +25,7 @@ export const styles = css`
     }
 
     ::slotted(*) {
-      scroll-snap-align: center;
+      scroll-snap-align: start;
       scroll-snap-stop: always;
     }
   }
