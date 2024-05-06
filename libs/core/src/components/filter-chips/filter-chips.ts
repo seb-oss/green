@@ -1,11 +1,12 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsElement } from '../../gds-element'
+import { GdsFormControlElement } from '../form-control'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
+import { watch } from '../../utils/decorators/watch'
 
 import './filter-chip'
 import type { GdsFilterChip } from './filter-chip'
@@ -16,26 +17,20 @@ import { styles } from './filter-chips.styles'
  * @element gds-filter-chips
  */
 @gdsCustomElement('gds-filter-chips')
-export class GdsFilterChips<ValueT = any> extends GdsElement {
+export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
+  ValueT | ValueT[]
+> {
   static styles = [styles]
 
   /**
-   * The value of the currently selected segment. Setting this property will
-   * select the segment with the matching value.
-   * @attr value
+   * Whether multiple chips can be selected at once.
+   * @attr multiple
    */
-  @property()
-  get value() {
-    return this.#value
-  }
-  set value(val: ValueT | undefined) {
-    this.#value = val
-    this.#updateSelectedFromValue()
-  }
-  #value?: ValueT
+  @property({ type: Boolean })
+  multiple = false
 
   /**
-   * Returns the segments in the control
+   * Returns the chips in the control
    * @readonly
    */
   get chips() {
@@ -66,18 +61,23 @@ export class GdsFilterChips<ValueT = any> extends GdsElement {
   }
 
   #handleChipClick = (event: Event) => {
-    const selectedChip = this.chips.find(
+    const clickedChip = this.chips.find(
       (s) => s === event.target || s.contains(event.target as Node),
     )
-    if (selectedChip) {
-      this.chips.forEach((s) => (s.selected = false))
-      selectedChip.selected = true
-
-      this.#value = selectedChip.value
+    if (clickedChip) {
+      if (this.multiple && Array.isArray(this.value)) {
+        if (clickedChip.selected) {
+          this.value = this.value.filter((v) => v !== clickedChip.value)
+        } else {
+          this.value = [...this.value, clickedChip.value]
+        }
+      } else {
+        this.value = clickedChip.value
+      }
 
       this.dispatchEvent(
         new CustomEvent('change', {
-          detail: { chip: selectedChip },
+          detail: { clickedChip, value: this.value },
           bubbles: true,
           composed: true,
         }),
@@ -111,18 +111,25 @@ export class GdsFilterChips<ValueT = any> extends GdsElement {
   #handleSlotChange() {
     const selChipValue = this.chips.find((s) => s.selected)?.value
     if (selChipValue) {
-      this.#value = selChipValue
+      this.value = selChipValue
     }
   }
 
-  #updateSelectedFromValue = () => {
-    if (!this.#value) return
+  @watch('value')
+  private _updateSelectedFromValue() {
+    if (!this.value) return
+
+    // Coerce value to array if multiple
+    if (this.multiple && !Array.isArray(this.value)) {
+      this.value = [this.value]
+    }
+
     this.updateComplete.then(() => {
-      const selectedChip = this.chips.find((s) => s.value === this.#value)
-      if (selectedChip) {
-        this.chips.forEach((s) => (s.selected = false))
-        selectedChip.selected = true
-      }
+      this.chips.forEach((chip) => {
+        chip.selected = this.multiple
+          ? (this.value as ValueT[]).includes(chip.value)
+          : this.value === chip.value
+      })
     })
   }
 }
