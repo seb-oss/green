@@ -1,5 +1,5 @@
-import { property, state } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
+import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../../gds-element'
 import {
   gdsCustomElement,
@@ -38,16 +38,20 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
   }
 
   render() {
+    const btnClasses = {
+      'btn-p': !this.selected,
+    }
     return html`<gds-button
       size="small"
       .rank=${this.selected ? 'primary' : 'secondary'}
       aria-current=${String(this.selected)}
     >
-      <slot></slot>
+      <span class=${classMap(btnClasses)}><slot></slot></span>
       <gds-icon
         name="checkmark"
         slot="trail"
         style="display: ${this.selected ? 'block' : 'none'}"
+        class="icon"
       ></gds-icon>
     </gds-button>`
   }
