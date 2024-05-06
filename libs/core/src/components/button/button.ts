@@ -108,10 +108,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         aria-label="${this.label}"
       >
         <slot name="lead" gds-allow="gds-icon"></slot>
-        <slot
-          @slotchange=${this.#mainSlotChange}
-          gds-allow="#text gds-icon"
-        ></slot>
+        <slot @slotchange=${this.#mainSlotChange}></slot>
         <slot name="trail" gds-allow="gds-icon"></slot>
         ${when(
           !this._isUsingTransitionalStyles,
