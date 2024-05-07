@@ -11,8 +11,7 @@
       "outputs": ["{workspaceRoot}/dist/libs/angular-charts"],
       "options": {
         "project": "libs/angular-charts/ng-package.json",
-        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json",
-        "updateBuildableProjectDepsInPackageJson": false
+        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
       },
       "configurations": {
         "production": {
