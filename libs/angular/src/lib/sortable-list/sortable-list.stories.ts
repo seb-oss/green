@@ -87,7 +87,7 @@ export default {
 } as Meta<NggSortableListComponent>
 
 const createTemplate = (
-  suffixTemplate: boolean = false,
+  suffixTemplate = false,
 ): Story<NggSortableListComponent> => {
   return (args: NggSortableListComponent) => ({
     template: `
