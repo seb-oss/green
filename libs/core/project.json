@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
+  "tags": [],
   "implicitDependencies": ["tokens"],
   "targets": {
     "build": {
@@ -50,7 +51,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "dependsOn": ["css-lint"],
       "options": {
@@ -86,13 +87,12 @@
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
-      "dependsOn": ["tokens:build"],
+      "dependsOn": ["build-src"],
       "options": {
         "port": 4400,
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
-      "dependsOn": ["build-src"],
       "inputs": ["core"],
       "configurations": {
         "ci": {
@@ -114,13 +114,12 @@
         "ci": {
           "quiet": true
         },
-        "parallel": false
+        "parallel": {}
       }
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     }
-  },
-  "tags": []
+  }
 }

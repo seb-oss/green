@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/tokens/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -17,9 +18,7 @@
     },
     "build-style-dictionary": {
       "executor": "@nxkit/style-dictionary:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/tokens",
         "styleDictionaryConfig": "libs/tokens/style-dictionary.config.ts",
@@ -27,10 +26,8 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
           "libs/tokens/**/*.{js,ts}",
@@ -64,6 +61,5 @@
         "command": "cp libs/tokens/README.md dist/libs/tokens"
       }
     }
-  },
-  "tags": []
+  }
 }

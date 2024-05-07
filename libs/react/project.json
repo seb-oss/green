@@ -15,7 +15,6 @@
         "project": "libs/react/package.json",
         "entryFile": "libs/react/src/index.ts",
         "external": ["react/jsx-runtime"],
-
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
@@ -29,7 +28,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["libs/react/**/*.{ts,tsx,js,jsx}"]
       },
@@ -65,7 +64,6 @@
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
-
       "options": {
         "uiFramework": "@storybook/react",
         "configDir": "libs/react/.storybook",

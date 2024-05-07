@@ -134,7 +134,6 @@
     "@nx/eslint-plugin": "19.0.0",
     "@nx/jest": "19.0.0",
     "@nx/js": "19.0.0",
-    "@nx/linter": "19.0.0",
     "@nx/next": "19.0.0",
     "@nx/react": "19.0.0",
     "@nx/rollup": "19.0.0",
@@ -257,7 +256,7 @@
     "url-loader": "^4.1.1",
     "webpack": "5.88.2",
     "webpack-merge": "^5.8.0",
-    "yarn-audit-fix": "^9.2.4"
+    "yarn-audit-fix": "^9.2.4",
+    "@nx/eslint": "19.0.0"
   }
 }
-

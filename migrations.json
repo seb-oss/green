@@ -167,28 +167,28 @@
       "version": "17.0.0-beta.7",
       "description": "update-17-0-0-rename-to-eslint",
       "implementation": "./src/migrations/update-17-0-0-rename-to-eslint/update-17-0-0-rename-to-eslint",
-      "package": "@nx/linter",
+      "package": "@nx/eslint",
       "name": "update-17-0-0-rename-to-eslint"
     },
     {
       "version": "17.1.0-beta.1",
       "description": "Updates for @typescript-utils/utils v6.9.1+",
       "implementation": "./src/migrations/update-17-1-0/update-typescript-eslint",
-      "package": "@nx/linter",
+      "package": "@nx/eslint",
       "name": "update-typescript-eslint"
     },
     {
       "version": "17.2.0-beta.0",
       "description": "Simplify eslintFilePatterns",
       "implementation": "./src/migrations/update-17-2-0/simplify-eslint-patterns",
-      "package": "@nx/linter",
+      "package": "@nx/eslint",
       "name": "simplify-eslint-patterns"
     },
     {
       "version": "17.2.9",
       "description": "Move executor options to target defaults",
       "implementation": "./src/migrations/update-17-2-9/move-options-to-target-defaults",
-      "package": "@nx/linter",
+      "package": "@nx/eslint",
       "name": "move-options-to-target-defaults"
     }
   ]
