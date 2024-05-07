@@ -37,8 +37,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react-charts"],
       "options": {
-        "jestConfig": "libs/react-charts/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/react-charts/jest.config.ts"
       }
     },
     "storybook": {

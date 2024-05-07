@@ -37,8 +37,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react"],
       "options": {
-        "jestConfig": "libs/react/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/react/jest.config.ts"
       }
     },
     "storybook": {

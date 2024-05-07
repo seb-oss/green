@@ -36,8 +36,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/extract"],
       "options": {
-        "jestConfig": "libs/extract/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/extract/jest.config.ts"
       }
     },
     "update-dependencies": {

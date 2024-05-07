@@ -28,8 +28,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular"],
       "options": {
-        "jestConfig": "libs/angular/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/angular/jest.config.ts"
       }
     },
     "lint": {

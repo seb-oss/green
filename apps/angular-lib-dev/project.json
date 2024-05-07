@@ -90,8 +90,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/angular-lib-dev"],
       "options": {
-        "jestConfig": "apps/angular-lib-dev/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/angular-lib-dev/jest.config.ts"
       }
     }
   }

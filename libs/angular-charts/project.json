@@ -27,8 +27,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular-charts"],
       "options": {
-        "jestConfig": "libs/angular-charts/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/angular-charts/jest.config.ts"
       }
     },
     "lint": {

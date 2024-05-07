@@ -54,8 +54,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/chlorophyll"],
       "options": {
-        "jestConfig": "libs/chlorophyll/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/chlorophyll/jest.config.ts"
       }
     },
     "storybook": {

@@ -89,8 +89,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/angular-handle-legacy"],
       "options": {
-        "jestConfig": "apps/angular-handle-legacy/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/angular-handle-legacy/jest.config.ts"
       }
     }
   }
