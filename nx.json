@@ -107,5 +107,6 @@
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
-  }
+  },
+  "nxCloudAccessToken": "NmMzZjBhYjAtY2VmMi00MjE5LWIzMmMtNGJiOWQ0ZjMwZTI5fHJlYWQtd3JpdGU="
 }
