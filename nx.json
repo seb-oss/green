@@ -5,17 +5,8 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e",
-          "build-storybook"
-        ],
-        "strictlyOrderedTargets": ["build", "release"],
-        "parallel": 3
+        "strictlyOrderedTargets": ["build", "release"]
       }
     }
   },
@@ -65,20 +56,24 @@
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "inputs": ["production", "^production"],
+      "cache": true
     },
     "build-src": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "cache": true
     },
     "e2e": {
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "cache": true
     },
     "build-storybook": {
       "inputs": [
@@ -86,7 +81,8 @@
         "^production",
         "{workspaceRoot}/.storybook/**/*",
         "!{projectRoot}/.storybook/**/*"
-      ]
+      ],
+      "cache": true
     },
     "build-nx-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
@@ -108,5 +104,6 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "NmMzZjBhYjAtY2VmMi00MjE5LWIzMmMtNGJiOWQ0ZjMwZTI5fHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NmMzZjBhYjAtY2VmMi00MjE5LWIzMmMtNGJiOWQ0ZjMwZTI5fHJlYWQtd3JpdGU=",
+  "parallel": 3
 }
