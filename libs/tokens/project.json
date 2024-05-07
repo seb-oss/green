@@ -27,13 +27,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/tokens/**/*.{js,ts}",
-          "libs/tokens/package.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "update-deps-and-release": {
       "executor": "nx:run-commands",

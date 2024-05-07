@@ -39,15 +39,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/repo-tools/**/*.ts",
-          "libs/repo-tools/generators.json",
-          "libs/repo-tools/executors.json",
-          "libs/repo-tools/package.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",

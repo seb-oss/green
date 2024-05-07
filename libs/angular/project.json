@@ -33,12 +33,6 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/angular/src/**/*.ts",
-          "libs/angular/src/**/*.html"
-        ]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "storybook": {
