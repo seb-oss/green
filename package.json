@@ -150,6 +150,7 @@
     "@storybook/addon-essentials": "7.6.19",
     "@storybook/angular": "7.6.19",
     "@storybook/core-server": "7.6.19",
+    "@storybook/react-webpack5": "7.6.19",
     "@svgr/webpack": "8.1.0",
     "@testing-library/angular": "14.3.0",
     "@testing-library/dom": "^9.0.1",

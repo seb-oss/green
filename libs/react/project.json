@@ -37,23 +37,16 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/react",
-        "port": 4200,
+        "port": 4400,
         "configDir": "libs/react/.storybook"
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
-      },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        }
-      ]
+      }
     },
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
@@ -77,14 +70,16 @@
       ]
     },
     "build-storybook": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["copy-fonts", "tokens:build"],
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
       "options": {
-        "commands": [
-          {
-            "command": "NODE_ENV=production nx run react:build-nx-storybook"
-          }
-        ]
+        "outputDir": "dist/storybook/react",
+        "configDir": "libs/react/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     },
     "update-dependencies": {
