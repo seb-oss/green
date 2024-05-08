@@ -10,9 +10,11 @@ The filter chips component allows users to quickly refine the result of data the
 <button
   onClick={() => {
     registerTransitionalStyles()
-    document.querySelectorAll('gds-filter-chips').forEach((el) => {
-      el.connectedCallback()
-    })
+    document
+      .querySelectorAll('gds-filter-chips, gds-filter-chip')
+      .forEach((el) => {
+        el.connectedCallback()
+      })
   }}
 >
   Show 2016 styles

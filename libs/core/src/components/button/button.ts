@@ -106,6 +106,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         ?disabled="${this.disabled}"
         @click="${this.#handleClick}"
         aria-label="${this.label}"
+        part="_button"
       >
         <slot name="lead" gds-allow="gds-icon"></slot>
         <slot @slotchange=${this.#mainSlotChange}></slot>
