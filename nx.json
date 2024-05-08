@@ -72,7 +72,8 @@
         "default",
         "^production",
         "{workspaceRoot}/.storybook/**/*",
-        "!{projectRoot}/.storybook/**/*"
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/tsconfig.storybook.json"
       ],
       "cache": true
     },
@@ -110,7 +111,8 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-      "!{projectRoot}/src/test-setup.[jt]s"
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/tsconfig.storybook.json"
     ]
   },
   "nxCloudAccessToken": "NmMzZjBhYjAtY2VmMi00MjE5LWIzMmMtNGJiOWQ0ZjMwZTI5fHJlYWQtd3JpdGU=",

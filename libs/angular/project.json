@@ -36,10 +36,8 @@
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
-      "inputs": ["core"],
       "options": {
-        "port": 4100,
-        "host": "0.0.0.0",
+        "port": 4400,
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
         "compodoc": false
@@ -49,17 +47,11 @@
           "quiet": true
         }
       },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        }
-      ]
+      "dependsOn": ["core:build-with-types"]
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
-      "inputs": ["core"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
@@ -71,17 +63,30 @@
           "quiet": true
         }
       },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        },
-        "tokens:build"
-      ]
+      "dependsOn": ["core:build-with-types"]
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/angular/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "angular:build-storybook",
+        "staticFilePath": "dist/storybook/angular",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "angular:build-storybook:ci"
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 // Segmented-controls.stories.ts
 
-import { Meta } from '@storybook/angular/types-6-0'
+import { Meta } from '@storybook/angular'
 import { NggSegmentedControlComponent } from './segmented-control.component'
 import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
