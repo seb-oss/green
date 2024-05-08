@@ -1,5 +1,4 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import defaultConfig from '../../../.storybook/main'
+import defaultConfig from '.storybook/main'
 import type { StorybookConfig } from '@storybook/angular'
 
 const config: StorybookConfig = {

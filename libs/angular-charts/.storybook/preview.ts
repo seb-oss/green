@@ -1,1 +1,1 @@
-import '../../../.storybook/preview'
+import '.storybook/preview'
