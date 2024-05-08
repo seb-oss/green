@@ -37,10 +37,9 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/react",
-        "port": 4300,
+        "port": 4400,
         "configDir": "libs/react-charts/.storybook"
       },
       "configurations": {
@@ -65,14 +64,16 @@
       }
     },
     "build-storybook": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["tokens:build"],
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
       "options": {
-        "commands": [
-          {
-            "command": "NODE_ENV=production nx run react-charts:build-nx-storybook"
-          }
-        ]
+        "outputDir": "dist/storybook/react-charts",
+        "configDir": "libs/react-charts/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     },
     "update-dependencies": {
