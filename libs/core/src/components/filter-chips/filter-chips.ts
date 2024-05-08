@@ -60,10 +60,16 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     const layoutClasses = {
       collapse: this._collapsed,
     }
-    return html`<div class="chips ${classMap(layoutClasses)}" role="list">
+    return html`<div
+      class="chips ${classMap(layoutClasses)}"
+      role="list"
+      aria-multiselectable=${this.multiple}
+    >
       <slot
+        gds-allow="gds-filter-chip"
         @click=${this.#handleChipClick}
         @slotchange=${this.#handleSlotChange}
+        role="none"
       ></slot>
     </div>`
   }
@@ -93,8 +99,8 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     }
   }
 
-  private _collapseThreshold = 3
-  private _collapsedAt = 0
+  #collapseThreshold = 3
+  #collapsedAt = 0
 
   @resizeObserver()
   private _handleResize() {
@@ -104,12 +110,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     const selfHeight = this.offsetHeight
     const selfWidth = this.offsetWidth
 
-    if (selfHeight >= chipHeight * this._collapseThreshold) {
+    if (selfHeight >= chipHeight * this.#collapseThreshold) {
       this._collapsed = true
-      this._collapsedAt = selfWidth
+      this.#collapsedAt = selfWidth
     }
 
-    if (selfWidth > this._collapsedAt) {
+    if (selfWidth > this.#collapsedAt) {
       this._collapsed = false
     }
   }
