@@ -1,0 +1,4 @@
+yarn add v1.22.21
+[1/4] Resolving packages...
+error Couldn't find any versions for "@storybook/addon-webpack5-compiler-swc" that matches "^7.6.19"
+info Visit https://yarnpkg.com/en/docs/cli/add for documentation about this command.

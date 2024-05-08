@@ -11,6 +11,9 @@
     },
     {
       "path": "./.storybook/tsconfig.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
   ],
   "compilerOptions": {
