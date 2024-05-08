@@ -129,7 +129,7 @@ export class GdsListbox
    * If no option is selected, the first visible option is focused.
    */
   focus() {
-    ;(
+    (
       this.visibleSelectedOptionElements[0] || this.visibleOptionElements[0]
     )?.focus()
   }
@@ -159,7 +159,7 @@ export class GdsListbox
       })
     }
 
-    ;(this as any).ariaActiveDescendantElement = option
+    (this as any).ariaActiveDescendantElement = option
 
     this.dispatchEvent(
       new CustomEvent('change', {
