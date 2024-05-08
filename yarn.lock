@@ -7089,6 +7089,30 @@
   resolved "https://registry.yarnpkg.com/@storybook/global/-/global-5.0.0.tgz#b793d34b94f572c1d7d9e0f44fac4e0dbc9572ed"
   integrity sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==
 
+"@storybook/html-webpack5@7.6.19":
+  version "7.6.19"
+  resolved "https://registry.yarnpkg.com/@storybook/html-webpack5/-/html-webpack5-7.6.19.tgz#cb5b40ad64b8ed587cab8e995f0efe0088c696e7"
+  integrity sha512-B0CDSgUoqQyTjHoo5dOLtgye5RdBURcAVhSg3kdn02ZJpzgZszbXYz0bWaS3OrrQ2jplGIB5YRop1Zz3BU97Rg==
+  dependencies:
+    "@storybook/builder-webpack5" "7.6.19"
+    "@storybook/core-common" "7.6.19"
+    "@storybook/global" "^5.0.0"
+    "@storybook/html" "7.6.19"
+    "@storybook/preset-html-webpack" "7.6.19"
+    "@types/node" "^18.0.0"
+
+"@storybook/html@7.6.19":
+  version "7.6.19"
+  resolved "https://registry.yarnpkg.com/@storybook/html/-/html-7.6.19.tgz#b8141c2441a848ebb77daedc8215f5c5a567a4ce"
+  integrity sha512-OS9L3c9GbZrkGlDuF5Gc55eP1diqCLG9mPcfiKRDF+UoZAC8Pv6a+iwmn6O/JF2gKr+B6txCHUxrobui/MSY9g==
+  dependencies:
+    "@storybook/core-client" "7.6.19"
+    "@storybook/docs-tools" "7.6.19"
+    "@storybook/global" "^5.0.0"
+    "@storybook/preview-api" "7.6.19"
+    "@storybook/types" "7.6.19"
+    ts-dedent "^2.0.0"
+
 "@storybook/jest@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@storybook/jest/-/jest-0.2.3.tgz#21512b92469978b37f69d6555949801ef34af153"
@@ -7138,6 +7162,16 @@
   version "7.6.19"
   resolved "https://registry.yarnpkg.com/@storybook/postinstall/-/postinstall-7.6.19.tgz#8f75f43ea786a26a8677dedbedc5e8f947c56456"
   integrity sha512-s6p1vpgMfn+QGDfCK2YNdyyWKidUgb3nGicB81FANRyzYqGB//QlJlghEc2LKCIQbGIZQiwP3l8PdZQmczEJRw==
+
+"@storybook/preset-html-webpack@7.6.19":
+  version "7.6.19"
+  resolved "https://registry.yarnpkg.com/@storybook/preset-html-webpack/-/preset-html-webpack-7.6.19.tgz#00ac55a207005e51904375a05772e19d261ae093"
+  integrity sha512-NpnzLwGvLvnsHiICUA+VuJRVz7/VZy9hXjJXpBtLfoLDyRbiZMCeVeFJ6j0dlraIVwk9OXGfEMmtRHSkG5Xlqg==
+  dependencies:
+    "@storybook/core-webpack" "7.6.19"
+    "@types/node" "^18.0.0"
+    html-loader "^3.1.0"
+    webpack "5"
 
 "@storybook/preset-react-webpack@7.6.19":
   version "7.6.19"
@@ -15394,6 +15428,14 @@ html-escaper@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
+
+html-loader@^3.1.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/html-loader/-/html-loader-3.1.2.tgz#5dc7e52d110b97c381468ac3354efd9bfa36c9fd"
+  integrity sha512-9WQlLiAV5N9fCna4MUmBW/ifaUbuFZ2r7IZmtXzhyfyi4zgPEjXsmsYCKs+yT873MzRj+f1WMjuAiPNA7C6Tcw==
+  dependencies:
+    html-minifier-terser "^6.0.2"
+    parse5 "^6.0.1"
 
 html-minifier-terser@^6.0.2:
   version "6.1.0"
