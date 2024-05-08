@@ -49,8 +49,7 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
-      "dependsOn": ["tokens:build"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/angular-charts",
         "configDir": "libs/angular-charts/.storybook",
