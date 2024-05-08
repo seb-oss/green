@@ -62,7 +62,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     }
     return html`<div
       class="chips ${classMap(layoutClasses)}"
-      role="list"
+      role="listbox"
       aria-multiselectable=${this.multiple}
     >
       <slot

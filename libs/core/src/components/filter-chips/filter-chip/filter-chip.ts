@@ -25,7 +25,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
    * Whether the segment is selected
    * @attr selected
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ reflect: true })
   selected = false
 
   /**
@@ -37,7 +37,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.setAttribute('role', 'listitem')
+    this.setAttribute('role', 'none')
     TransitionalStyles.instance.apply(this, 'gds-filter-chip')
 
     // Apply transitional styles to the button if connectedCallback is called directly
@@ -59,7 +59,8 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       size="small"
       .rank=${this.selected ? 'primary' : 'secondary'}
       variant=${this._isUsingTransitionalStyles ? 'ghost' : 'default'}
-      aria-pressed=${String(this.selected)}
+      gds-role="option"
+      gds-aria-selected=${String(this.selected)}
     >
       <span class=${classMap(btnClasses)}><slot></slot></span>
       <gds-icon
