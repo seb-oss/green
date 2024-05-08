@@ -1,1 +1,2 @@
-import '.storybook/preview'
+/* eslint-disable @nx/enforce-module-boundaries */
+import '../../../.storybook/preview'

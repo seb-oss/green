@@ -1,4 +1,4 @@
-import defaultConfig from '.storybook/main'
+import defaultConfig from '../../../.storybook/main'
 import type { StorybookConfig } from '@storybook/web-components-webpack5'
 
 const config: StorybookConfig = {

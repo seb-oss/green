@@ -1,4 +1,5 @@
-import defaultConfig from '.storybook/main'
+/* eslint-disable @nx/enforce-module-boundaries */
+import defaultConfig from '../../../.storybook/main'
 import type { StorybookConfig } from '@storybook/react-webpack5'
 
 const config: StorybookConfig = {

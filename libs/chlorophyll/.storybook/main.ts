@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import defaultConfig from '../../../.storybook/main'
 import type { StorybookConfig } from '@storybook/html-webpack5'
 
