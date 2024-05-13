@@ -136,6 +136,24 @@ export class GdsGrid extends LitElement {
 
     const { l, m, s } = match?.groups || {}
 
+    const processBreakpoints = (
+      l: string | undefined,
+      m: string | undefined,
+      s: string | undefined,
+    ) => {
+      const desktop = l
+        ? `var(--gds-sys-grid-gap-${l.split(':')[1]})`
+        : undefined
+      const tablet = m
+        ? `var(--gds-sys-grid-gap-${m.split(':')[1]})`
+        : undefined
+      const mobile = s
+        ? `var(--gds-sys-grid-gap-${s.split(':')[1]})`
+        : undefined
+
+      return { desktop, tablet, mobile }
+    }
+
     if (propertyName === 'columns') {
       if (this.columns && !isNaN(Number(this.columns))) {
         desktop = tablet = mobile = Number(this.columns)
