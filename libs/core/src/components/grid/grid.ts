@@ -21,10 +21,6 @@ type CSSProperty = {
   value: string | number | undefined
 }
 
-// type GdsGridTypes = {
-//   [key: string]: string | undefined
-// }
-
 /**
  * @element gds-grid
  * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
@@ -168,9 +164,7 @@ export class GdsGrid extends LitElement {
       if (this.gap && !this.gap.includes(' ')) {
         desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.gap})`
       } else {
-        desktop = l ? `var(--gds-sys-grid-gap-${l.split(':')[1]})` : undefined
-        tablet = m ? `var(--gds-sys-grid-gap-${m.split(':')[1]})` : undefined
-        mobile = s ? `var(--gds-sys-grid-gap-${s.split(':')[1]})` : undefined
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
       }
     }
 
@@ -178,9 +172,7 @@ export class GdsGrid extends LitElement {
       if (this.rowGap && !this.rowGap.includes(' ')) {
         desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.rowGap})`
       } else {
-        desktop = l ? `var(--gds-sys-grid-gap-${l.split(':')[1]})` : undefined
-        tablet = m ? `var(--gds-sys-grid-gap-${m.split(':')[1]})` : undefined
-        mobile = s ? `var(--gds-sys-grid-gap-${s.split(':')[1]})` : undefined
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
       }
     }
 
@@ -188,9 +180,7 @@ export class GdsGrid extends LitElement {
       if (this.padding && !this.padding.includes(' ')) {
         desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.padding})`
       } else {
-        desktop = l ? `var(--gds-sys-grid-gap-${l.split(':')[1]})` : undefined
-        tablet = m ? `var(--gds-sys-grid-gap-${m.split(':')[1]})` : undefined
-        mobile = s ? `var(--gds-sys-grid-gap-${s.split(':')[1]})` : undefined
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
       }
     }
 
