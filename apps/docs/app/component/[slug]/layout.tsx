@@ -73,13 +73,25 @@ export default function ComponentLayout({
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
-    { path: '/design', label: 'Design', isPrivate: componentDesign?.private },
-    { path: '/ux-text', label: 'UX text', isPrivate: componentUXText?.private },
-    { path: '/code', label: 'Code', isPrivate: componentCode?.private },
+    {
+      path: '/design',
+      label: 'Design',
+      isPrivate: componentDesign?.private || false,
+    },
+    {
+      path: '/ux-text',
+      label: 'UX text',
+      isPrivate: componentUXText?.private || false,
+    },
+    {
+      path: '/code',
+      label: 'Code',
+      isPrivate: componentCode?.private || false,
+    },
     {
       path: '/accessibility',
       label: 'Accessibility',
-      isPrivate: componentA11y?.private,
+      isPrivate: componentA11y?.private || false,
     },
   ]
 
