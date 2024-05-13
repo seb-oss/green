@@ -1,0 +1,11 @@
+diff --git a/node_modules/style-dictionary/types/FormatHelpers.d.ts b/node_modules/style-dictionary/types/FormatHelpers.d.ts
+index 6002727..7fb9a82 100644
+--- a/node_modules/style-dictionary/types/FormatHelpers.d.ts
++++ b/node_modules/style-dictionary/types/FormatHelpers.d.ts
+@@ -73,5 +73,5 @@ export interface FormatHelpers {
+     options: object,
+     objectType: string,
+     transformGroup: string,
+-  ) => string;
++  ) => object;
+ }
