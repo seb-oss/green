@@ -17,8 +17,8 @@ import {
 import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
-import { GdsDatepicker } from '@sebgroup/green-core'
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import '@sebgroup/green-core/components/datepicker/index.js'
+import * as DatepickerTransStyles from '@sebgroup/green-core/components/datepicker/datepicker.trans.styles.js'
 
 export interface Attributes {
   id?: string
@@ -118,7 +118,7 @@ export class NggDatepickerComponent
   }
 
   constructor(private _cdr: ChangeDetectorRef) {
-    registerTransitionalStyles()
+    DatepickerTransStyles.register()
   }
 
   writeValue(value: any): void {

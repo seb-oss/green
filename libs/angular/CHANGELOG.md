@@ -1,5 +1,41 @@
 # Changelog
 
+## 3.7.0
+
+### Minor Changes
+
+- 0aeaa98: **Sub-packages:** Components in `@sebgroup/green-angular` are now exported as separate sub-packages for better tree-shaking.
+
+### Patch Changes
+
+- Updated dependencies [0aeaa98]
+- Updated dependencies [a8941c7]
+  - @sebgroup/green-core@1.18.0
+
+## 3.6.3
+
+### Patch Changes
+
+- f8758d9: **Sub-path imports:** Fix missing filename on import paths
+
+## 3.6.2
+
+### Patch Changes
+
+- 57fb099: Publish previously failed version
+
+## 3.6.1
+
+### Patch Changes
+
+- 80b4050: Update underlying Core components to use sub path imports
+- Updated dependencies [5b84660]
+- Updated dependencies [e20574d]
+- Updated dependencies [80b4050]
+- Updated dependencies [80b4050]
+  - @sebgroup/green-core@1.16.0
+  - @sebgroup/chlorophyll@3.3.4
+
 ## 3.6.0
 
 ### Minor Changes

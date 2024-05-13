@@ -1,5 +1,48 @@
 # Changelog
 
+## 1.18.1
+
+### Patch Changes
+
+- 7dd4fef: Fix export path for jest config
+
+## 1.18.0
+
+### Minor Changes
+
+- 0aeaa98: **Transitional styles:** Transitional styles can now be separately imported on a per-component basis
+
+### Patch Changes
+
+- a8941c7: **Jest config:** Add back missing export
+
+## 1.17.0
+
+### Minor Changes
+
+- c5c696c: Remove default column in mobile
+
+## 1.16.0
+
+### Minor Changes
+
+- 5b84660: # New tokens
+
+  - Motion
+  - Size scale
+  - Spacing, Margin, Padding
+
+  # New component: Button
+
+  - Built on tokens
+  - Transitional styles
+
+- 80b4050: **Code splitting**: Add support for sub-path exports
+
+### Patch Changes
+
+- 80b4050: **Button**: Fixed an issue with ripple effect when using transitional styles and scoping
+
 ## 1.15.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { query } from 'lit/decorators.js'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../scoping'
 import styles from './ripple.styles.scss'
 import { tokens } from '../../tokens.style'
 

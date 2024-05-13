@@ -1,31 +1,34 @@
 import { html, HTMLTemplateResult } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
+
+// Only import components here. Primitives should be imported from the components that use them.
+// Also, if a component depens, remember to import transitional styles for teh child component in
+// the parent component. Check how datepicker handles dropdown for an example.
+
 import * as Button from '../../components/button/button.trans.styles'
-import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
+import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
-import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
-import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
-import * as Popover from '../../primitives/popover/popover.trans.styles'
-import * as Segment from '../../components/segmented-control/segment/segment.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
 
 import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
+/**
+ * Registers transitional styles for all components.
+ *
+ * **Note:** If you are only using a few components, consider registering those
+ * separately instead. That way, any unused styles can get tree shaken away.
+ */
 export const registerTransitionalStyles = () => {
   Theme.register()
   Dropdown.register()
-  Listbox.register()
-  Popover.register()
   ContextMenu.register()
-  Calendar.register()
   Datepicker.register()
   GroupedList.register()
   SegmentedControl.register()
-  Segment.register()
   Button.register()
 }
 
@@ -78,7 +81,6 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: CSSStyleSheet) {
-    
     const element = this.elements.get(styleKey) as GdsElement
     if (!element || !element.shadowRoot) return
 
@@ -127,7 +129,7 @@ export class TransitionalStyles {
 
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(styles)
-    
+
     this.sheets.set(name, sheet)
     this.applyToElement(name, sheet)
   }

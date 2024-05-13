@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.15.1",
+  "version": "1.18.1",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -29,20 +29,12 @@
     "reflect-metadata": "^0.1.13"
   },
   "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "default": "./index.js"
-    },
-    "./transitional-styles": {
-      "types": "./transitional-styles.d.ts",
-      "default": "./transitional-styles.js"
-    },
-    "./localization": {
-      "types": "./localization.d.ts",
-      "default": "./localization.js"
-    },
-    "./jest-config": {
-      "default": "./green-jest-config.cjs"
-    }
+    ".": "./index.js",
+    "./scoping": "./scoping.js",
+    "./transitional-styles": "./transitional-styles.js",
+    "./localization": "./localization.js",
+    "./jest-config": "./green-jest-config.cjs",
+    "./components/*": "./components/*",
+    "./_primitives/*": "./primitives/*"
   }
 }

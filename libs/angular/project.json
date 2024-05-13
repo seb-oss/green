@@ -12,8 +12,7 @@
       "inputs": ["core"],
       "options": {
         "project": "libs/angular/ng-package.json",
-        "tsConfig": "libs/angular/tsconfig.lib.prod.json",
-        "updateBuildableProjectDepsInPackageJson": false
+        "tsConfig": "libs/angular/tsconfig.lib.prod.json"
       },
       "configurations": {
         "production": {

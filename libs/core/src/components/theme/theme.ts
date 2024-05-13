@@ -1,9 +1,6 @@
 import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 
 /**
@@ -19,11 +16,10 @@ import { TransitionalStyles } from '../../transitional-styles'
  */
 @gdsCustomElement('gds-theme')
 export class GdsTheme extends GdsElement {
-
   /**
    * The theme mode. Can be `light`, `dark`, or `auto`.
    */
-  @property({ reflect: true, attribute: 'color-scheme'})
+  @property({ reflect: true, attribute: 'color-scheme' })
   colorScheme: 'light' | 'dark' | 'auto' = 'light'
 
   connectedCallback(): void {
@@ -32,8 +28,6 @@ export class GdsTheme extends GdsElement {
   }
 
   render() {
-    return html`
-      <slot></slot>
-    `
+    return html` <slot></slot> `
   }
 }

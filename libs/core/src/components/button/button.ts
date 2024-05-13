@@ -1,22 +1,18 @@
 import { unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
-import { constrainSlots } from '../../utils/helpers'
+import { when } from 'lit/directives/when.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { TransitionalStyles } from '../../transitional-styles'
-import '../icon/icon'
-import '../../primitives/ripple/ripple'
+import '../../primitives/ripple'
 
 import { tokens } from '../../tokens.style'
 import style from './button.style.css'
 
-import {
-  gdsCustomElement,
-  html as customElementHtml,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html as customElementHtml } from '../../scoping'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
-import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '../../components/form-control'
-import { GdsIcon } from '../icon/icon'
-import { GdsElement } from 'src/gds-element'
+import type { GdsElement } from '../../gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -117,18 +113,22 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           gds-allow="#text gds-icon"
         ></slot>
         <slot name="trail" gds-allow="gds-icon"></slot>
-        <gds-ripple></gds-ripple>
+        ${when(
+          !this._isUsingTransitionalStyles,
+          () => html`<gds-ripple></gds-ripple>`,
+        )}
       </button>
     `
   }
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = this._mainSlot?.assignedNodes() ?? []
+    const assignedNodes = (this._mainSlot?.assignedNodes() ??
+      []) as GdsElement[]
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
-      assignedNodes.some((node) => node instanceof GdsIcon)
+      assignedNodes.some((node) => node.gdsElementName === 'gds-icon')
 
     this.requestUpdate()
   }

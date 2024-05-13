@@ -1,9 +1,6 @@
 import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../../gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../scoping'
 import { TransitionalStyles } from '../../../transitional-styles'
 import { unsafeCSS } from 'lit'
 

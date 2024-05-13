@@ -35,10 +35,6 @@ $button-danger-border: tokens.get(tokens.$red, 0);
       padding: 1.25rem;
     }
 
-    button gds-ripple {
-      display: none;
-    }
-
     :host([rank*='secondary']) button {
       @include button.secondary();
     }
@@ -48,7 +44,8 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     }
 
     /* stylelint-disable */
-    :host([variant='negative']:not([rank='secondary'],[rank='tertiary'])) button,
+    :host([variant='negative']:not([rank='secondary'], [rank='tertiary']))
+      button,
     :host([variant='negative'][rank='primary']) button {
       @include button.danger-bg();
     }
