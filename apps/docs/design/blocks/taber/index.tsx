@@ -6,32 +6,34 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-interface TaberProps {
-  component: string
+interface Link {
+  path: string
+  label: string
+  isPrivate: boolean
 }
 
-export default function Taber({ component }: TaberProps) {
-  const pathName = usePathname()
+interface TaberProps {
+  component: string
+  links: Link[]
+}
 
-  const links = [
-    { path: '', label: 'Overview' },
-    { path: '/design', label: 'Design' },
-    { path: '/ux-text', label: 'UX text' },
-    { path: '/code', label: 'Code' },
-    { path: '/accessibility', label: 'Accessibility' },
-  ]
+export default function Taber({ component, links }: TaberProps) {
+  const pathName = usePathname()
 
   return (
     <div className="taber">
-      {links.map(({ path, label }) => (
-        <Link
-          key={path}
-          href={component + path}
-          className={pathName === component + path ? 'active' : ''}
-        >
-          {label}
-        </Link>
-      ))}
+      {links.map(
+        ({ path, label, isPrivate }) =>
+          !isPrivate && (
+            <Link
+              key={path}
+              href={component + path}
+              className={pathName === component + path ? 'active' : ''}
+            >
+              {label}
+            </Link>
+          ),
+      )}
     </div>
   )
 }
