@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.5
+
+### Patch Changes
+
+- a3cfc28: Fix: Dynamic height on full height modals
+
 ## 3.3.4
 
 ### Patch Changes
