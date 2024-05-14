@@ -35,6 +35,8 @@ export default function ComponentLayout({
   const componentDesign = getComponent('/design')
   const componentUXText = getComponent('/ux-text')
 
+  console.log('component', componentCode?.private)
+
   if (!component) {
     notFound()
   }
@@ -68,6 +70,30 @@ export default function ComponentLayout({
   }
 
   const tagsArray = tags ? tags.split(', ') : []
+
+  const links = [
+    { path: '', label: 'Overview', isPrivate: false },
+    {
+      path: '/design',
+      label: 'Design',
+      isPrivate: componentDesign?.private || false,
+    },
+    {
+      path: '/ux-text',
+      label: 'UX text',
+      isPrivate: componentUXText?.private || false,
+    },
+    {
+      path: '/code',
+      label: 'Code',
+      isPrivate: componentCode?.private || false,
+    },
+    {
+      path: '/accessibility',
+      label: 'Accessibility',
+      isPrivate: componentA11y?.private || false,
+    },
+  ]
 
   return (
     <Content layout="component" key={global_id}>
@@ -104,7 +130,7 @@ export default function ComponentLayout({
             </Pattern>
           </gds-cell>
         </Grid>
-        <Taber component={url_path} />
+        <Taber component={url_path} links={links} />
         <Grid columns={12} gapInline="small" paddingBlock="small">
           <Cell span="10">
             <div className="gds-prose">{children}</div>

@@ -72,10 +72,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     return this._elSlot ? (this._elSlot.assignedElements() as GdsSegment[]) : []
   }
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   @query('slot')
   private _elSlot!: HTMLSlotElement
 
@@ -117,8 +113,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}
-      ${when(
+    return html`${when(
         this._showPrevButton,
         () =>
           html`<button

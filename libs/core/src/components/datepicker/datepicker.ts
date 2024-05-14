@@ -193,10 +193,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @query('.input')
   private _elInput!: HTMLDivElement
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   #valueOnOpen?: Date
 
   connectedCallback(): void {
@@ -205,8 +201,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   render() {
-    return html`${this._tStyles}
-      ${when(
+    return html`${when(
         this.label && !this.hideLabel,
         () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}
