@@ -193,10 +193,6 @@ export class GdsDropdown<ValueT = any>
     return displayValue || this.placeholder?.innerHTML || ''
   }
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   #optionElements: HTMLCollectionOf<GdsOption>
 
   @query('#trigger')
@@ -233,7 +229,6 @@ export class GdsDropdown<ValueT = any>
 
   render() {
     return html`
-      ${this._tStyles}
       ${when(
         this.label && !this.hideLabel,
         () => html`<label for="trigger">${this.label}</label>`,

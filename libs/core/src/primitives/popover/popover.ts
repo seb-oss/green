@@ -108,10 +108,6 @@ export class GdsPopover extends GdsElement {
     this.#registerAutoPositioning()
   }
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   // A reference to the dialog element used to make the popover modal
   #dialogElementRef: Ref<HTMLDialogElement> = createRef()
 
@@ -156,23 +152,22 @@ export class GdsPopover extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}
-      <dialog
-        class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
-        ${ref(this.#dialogElementRef)}
-      >
-        <header>
-          <h2>${this.label}</h2>
-          <button
-            class="close"
-            @click=${this.#handleCloseButton}
-            aria-label="${msg('Close')}"
-          >
-            <i></i>
-          </button>
-        </header>
-        <slot></slot>
-      </dialog>`
+    return html`<dialog
+      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+      ${ref(this.#dialogElementRef)}
+    >
+      <header>
+        <h2>${this.label}</h2>
+        <button
+          class="close"
+          @click=${this.#handleCloseButton}
+          aria-label="${msg('Close')}"
+        >
+          <i></i>
+        </button>
+      </header>
+      <slot></slot>
+    </dialog>`
   }
 
   @watch('open')
