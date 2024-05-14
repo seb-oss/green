@@ -33,6 +33,19 @@ export class DynamicStylesController implements ReactiveController {
     }
   }
 
+  clearAll() {
+    if (this.#useLegacyStylesheets) {
+      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.#legacyStyleSheets.clear()
+    } else {
+      if (this.host.shadowRoot) {
+        this.host.shadowRoot.adoptedStyleSheets = []
+        this.#styleSheets.clear()
+        this.#initialStyleSheets = []
+      }
+    }
+  }
+
   #applyStylesLegacy(key: string, cssText: string) {
     let styleEl = this.#legacyStyleSheets.get(key)
 

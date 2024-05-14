@@ -14,7 +14,7 @@ export class GdsElement extends LitElement {
    */
   _isUsingTransitionalStyles = false
 
-  protected _dynamicStylesController: DynamicStylesController
+  _dynamicStylesController: DynamicStylesController
 
   constructor() {
     super()

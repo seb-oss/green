@@ -201,7 +201,15 @@ export class GdsGrid extends GdsElement {
       `,
     }
 
-    this.#updateGridCss()
+    // inject final CSS
+    this._dynamicStylesController.inject(
+      'grid-vars',
+      css`
+        :host {
+          ${unsafeCSS(Object.values(this.#gridVariables).join(''))}
+        }
+      `,
+    )
   }
 
   /**
@@ -258,22 +266,6 @@ export class GdsGrid extends GdsElement {
   @watch('autoColumns')
   private _updateAutoColumnsVariables() {
     this._updateCSSVariables('auto-columns', 'col-width')
-  }
-
-  /**
-   * Watcher for the '_gridVariables' property.
-   * It updates the CSS stylesheet when the '_gridVariables' property changes.
-   */
-  #updateGridCss() {
-    const cssVariables = `:host {${Object.values(this.#gridVariables).join('')}} `
-
-    // Create a CSSResult object from the cssVariables string
-    const cssResult = css`
-      ${unsafeCSS(cssVariables)}
-    ` as CSSResult
-
-    // Inject the CSSResult object
-    this._dynamicStylesController.inject('grid-vars', cssResult)
   }
 
   render() {
