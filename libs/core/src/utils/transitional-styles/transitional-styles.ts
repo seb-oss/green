@@ -79,7 +79,7 @@ export class TransitionalStyles {
           all: revert;
         }
       }
-      ${unsafeHTML(styles)}`
+      ${styles}`
     }
 
     this.#styles.set(name, preparedStyle)
