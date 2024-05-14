@@ -80,10 +80,6 @@ export class GdsOption extends Focusable(GdsElement) {
   @property({ type: Boolean, reflect: true })
   isPlaceholder = false
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   constructor() {
     super()
 
@@ -136,8 +132,7 @@ export class GdsOption extends Focusable(GdsElement) {
       else this.removeAttribute('highlighted')
     }
 
-    return html`${this._tStyles}
-      <div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
+    return html`<div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
   }
 
   #emitSelect(e: MouseEvent | KeyboardEvent) {
