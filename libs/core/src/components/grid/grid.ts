@@ -1,4 +1,4 @@
-import { css, CSSResult, unsafeCSS } from 'lit'
+import { css, unsafeCSS } from 'lit'
 
 import { property } from 'lit/decorators.js'
 import {
