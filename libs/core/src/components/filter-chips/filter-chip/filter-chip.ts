@@ -7,6 +7,7 @@ import {
   html,
   getScopedTagName,
 } from '../../../utils/helpers/custom-element-scoping'
+import { watch } from '../../../utils/decorators'
 
 import '../../button'
 import type { GdsButton } from '../../button'
@@ -60,7 +61,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       .rank=${this.selected ? 'primary' : 'secondary'}
       variant=${this._isUsingTransitionalStyles ? 'ghost' : 'default'}
       gds-role="option"
-      gds-aria-selected=${String(this.selected)}
+      ?aria-selected=${this.selected}
     >
       <span class=${classMap(btnClasses)}><slot></slot></span>
       <gds-icon

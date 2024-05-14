@@ -26,7 +26,7 @@ describe('<gds-filter-chips>', () => {
   describe('Accessibility', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsFilterChips>(
-        html`<gds-filter-chips>
+        html`<gds-filter-chips label="filter">
           <gds-filter-chip>Chip 1</gds-filter-chip>
           <gds-filter-chip>Chip 2</gds-filter-chip>
           <gds-filter-chip>Chip 3</gds-filter-chip>
@@ -40,7 +40,7 @@ describe('<gds-filter-chips>', () => {
   describe('API', () => {
     it('should set the selected chip based on the value property', async () => {
       const el = await fixture<GdsFilterChips>(
-        html`<gds-filter-chips value="2">
+        html`<gds-filter-chips value="2" label="filter">
           <gds-filter-chip value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip value="2" id="chip">Chip 2</gds-filter-chip>
           <gds-filter-chip value="3">Chip 3</gds-filter-chip>
@@ -53,7 +53,7 @@ describe('<gds-filter-chips>', () => {
 
     it('should set the selected chip based on the value property when multiple chips are selected', async () => {
       const el = await fixture<GdsFilterChips>(
-        html`<gds-filter-chips value="2,3" multiple>
+        html`<gds-filter-chips value="2,3" multiple label="filter">
           <gds-filter-chip value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip value="2" id="chip1">Chip 2</gds-filter-chip>
           <gds-filter-chip value="3" id="chip2">Chip 3</gds-filter-chip>

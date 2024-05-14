@@ -34,6 +34,13 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   multiple = false
 
   /**
+   * The accessible label for the control
+   * @attr label
+   */
+  @property()
+  label = ''
+
+  /**
    * Returns the chips in the control
    * @readonly
    */
@@ -63,6 +70,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     return html`<div
       class="chips ${classMap(layoutClasses)}"
       role="listbox"
+      aria-label=${this.label}
       aria-multiselectable=${this.multiple}
     >
       <slot

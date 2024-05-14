@@ -27,7 +27,7 @@ The filter chips component allows users to quickly refine the result of data the
 By default, the filter chips component is single select.
 
 <Canvas>
-  <gds-filter-chips value="top-news">
+  <gds-filter-chips value="top-news" label="Pick news channel">
     <gds-filter-chip value="all">All</gds-filter-chip>
     <gds-filter-chip value="top-news">Top news</gds-filter-chip>
     <gds-filter-chip value="division">Division</gds-filter-chip>
@@ -44,7 +44,7 @@ By default, the filter chips component is single select.
 Setting the `multiple` attribute will allow users to select multiple filter chips. The value of the component will be an array of the selected chip values.
 
 <Canvas>
-  <gds-filter-chips value="top-news,global" multiple>
+  <gds-filter-chips value="top-news,global" label="Pick news channels" multiple>
     <gds-filter-chip value="all">All</gds-filter-chip>
     <gds-filter-chip value="top-news">Top news</gds-filter-chip>
     <gds-filter-chip value="division">Division</gds-filter-chip>
@@ -63,7 +63,7 @@ In some cases, layout constraints may require the filter chips to collapse into 
 Setting the `row-collapse` attribute will enable this behavior when the chips require more than two rows. Instead, scrolling overflow will be used to accommodate the chips.
 
 <Canvas>
-  <gds-filter-chips value="top-news" row-collapse>
+  <gds-filter-chips value="top-news" label="Pick news channel" row-collapse>
     <gds-filter-chip value="all">All</gds-filter-chip>
     <gds-filter-chip value="top-news">Top news</gds-filter-chip>
     <gds-filter-chip value="division">Division</gds-filter-chip>
