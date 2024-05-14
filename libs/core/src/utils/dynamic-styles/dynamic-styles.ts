@@ -1,56 +1,71 @@
-import {
-  ReactiveController,
-  ReactiveControllerHost,
-  CSSResultGroup,
-  css,
-} from 'lit'
+import { ReactiveController, CSSResultGroup } from 'lit'
+import { GdsElement } from '../../gds-element'
 
 export class DynamicStylesController implements ReactiveController {
-  host: ReactiveControllerHost
-  private sheet?: CSSStyleSheet | HTMLStyleElement
+  host: GdsElement
+  #useLegacyStylesheets = !supportsConstructedStylesheets()
+  #initialStyleSheets: CSSStyleSheet[] = []
+  #styleSheets = new Map<string, CSSStyleSheet>()
+  #legacyStyleSheets = new Map<string, HTMLStyleElement>()
 
-  constructor(host: ReactiveControllerHost) {
+  constructor(host: GdsElement) {
     this.host = host
     this.host.addController(this)
+  }
 
-    if (window.CSSStyleSheet && (CSSStyleSheet.prototype as any).replaceSync) {
-      console.log('CSSStyleSheet is supported')
-      this.sheet = new CSSStyleSheet()
-    } else {
-      console.log('CSSStyleSheet is not supported')
-      this.sheet = document.createElement('style')
+  hostConnected() {
+    if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
+      this.#initialStyleSheets = [...this.host.shadowRoot.adoptedStyleSheets]
     }
   }
 
-  inject(styles: CSSResultGroup) {
+  inject(key: string, styles: CSSResultGroup) {
     const cssText = Array.isArray(styles)
       ? styles.map((style) => style.toString()).join('')
       : styles.toString()
 
-    if (this.sheet instanceof CSSStyleSheet) {
-      this.sheet.replaceSync(cssText)
+    if (this.#useLegacyStylesheets) {
+      this.#applyStylesLegacy(key, cssText)
     } else {
-      ;(this.sheet as HTMLStyleElement).textContent = cssText
+      this.#applyStyles(key, cssText)
     }
   }
 
-  setCSSVar(name: string, value: string) {
-    if (this.host instanceof HTMLElement) {
-      this.host.style.setProperty(name, value)
+  #applyStylesLegacy(key: string, cssText: string) {
+    let styleEl = this.#legacyStyleSheets.get(key)
+
+    if (!styleEl) {
+      styleEl = document.createElement('style')
+      this.#legacyStyleSheets.set(key, styleEl)
     }
+
+    styleEl.textContent = cssText
+    this.host.shadowRoot?.appendChild(styleEl)
   }
 
-  appendStyles() {
-    if (
-      this.sheet instanceof HTMLStyleElement &&
-      this.host instanceof HTMLElement &&
-      this.host.shadowRoot
-    ) {
-      this.host.shadowRoot.appendChild(this.sheet)
-    }
-  }
+  #applyStyles(key: string, cssText: string) {
+    if (!this.host.shadowRoot) return
 
-  hostConnected() {
-    this.appendStyles()
+    let styleSheet = this.#styleSheets.get(key)
+
+    if (!styleSheet) {
+      styleSheet = new CSSStyleSheet()
+      this.#styleSheets.set(key, styleSheet)
+    }
+
+    styleSheet.replaceSync(cssText)
+    this.host.shadowRoot.adoptedStyleSheets = [
+      ...this.#initialStyleSheets,
+      ...Array.from(this.#styleSheets.values()),
+    ]
+  }
+}
+
+function supportsConstructedStylesheets() {
+  try {
+    new CSSStyleSheet()
+    return true
+  } catch {
+    return false
   }
 }

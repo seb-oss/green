@@ -5,6 +5,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
 import { DynamicStylesController } from '../../dynamic-styles'
 import { watch } from '../../utils/decorators/watch'
 import { tokens } from '../../tokens.style'
@@ -30,12 +31,12 @@ type CSSProperty = {
  */
 
 @gdsCustomElement('gds-grid')
-export class GdsGrid extends LitElement {
-  #Controller: DynamicStylesController
+export class GdsGrid extends GdsElement {
+  #dynStylesController: DynamicStylesController
 
   constructor() {
     super()
-    this.#Controller = new DynamicStylesController(this)
+    this.#dynStylesController = new DynamicStylesController(this)
   }
 
   static styles = [tokens, GridCSS]
@@ -54,7 +55,7 @@ export class GdsGrid extends LitElement {
    * ```
    */
   @property({ attribute: 'columns', type: String })
-  columns?: string | undefined
+  columns?: string
 
   /**
    * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
@@ -132,11 +133,7 @@ export class GdsGrid extends LitElement {
 
     const { l, m, s } = match?.groups || {}
 
-    const processBreakpoints = (
-      l: string | undefined,
-      m: string | undefined,
-      s: string | undefined,
-    ) => {
+    const processBreakpoints = (l?: string, m?: string, s?: string) => {
       const desktop = l
         ? `var(--gds-sys-grid-gap-${l.split(':')[1]})`
         : undefined
@@ -205,21 +202,20 @@ export class GdsGrid extends LitElement {
       .map(({ name, value }) => `--_${name}: ${value};`)
       .join(' ')
 
-    this._gridVariables = {
-      ...this._gridVariables,
+    this.#gridVariables = {
+      ...this.#gridVariables,
       [propertyPrefix]: css`
         ${unsafeCSS(cssVariables)}
       `,
     }
 
-    this.requestUpdate('_gridVariables')
+    this.#updateGridCss()
   }
 
   /**
    * State variable that holds the CSS variables for column, gap, and padding.
    */
-  @state()
-  private _gridVariables = {
+  #gridVariables = {
     varsColumn: css``,
     varsGap: css``,
     varsRowGap: css``,
@@ -276,9 +272,8 @@ export class GdsGrid extends LitElement {
    * Watcher for the '_gridVariables' property.
    * It updates the CSS stylesheet when the '_gridVariables' property changes.
    */
-  @watch('_gridVariables')
-  private _updateGridCss() {
-    const cssVariables = `:host {${Object.values(this._gridVariables).join('')}} `
+  #updateGridCss() {
+    const cssVariables = `:host {${Object.values(this.#gridVariables).join('')}} `
 
     // Create a CSSResult object from the cssVariables string
     const cssResult = css`
@@ -286,23 +281,7 @@ export class GdsGrid extends LitElement {
     ` as CSSResult
 
     // Inject the CSSResult object
-    this.#Controller.inject(cssResult)
-
-    // If the shadow root exists and the browser supports adopted stylesheets
-    if (this.shadowRoot && 'adoptedStyleSheets' in Document.prototype) {
-      // Create a new stylesheet with the CSS variables
-      const newSheet = new CSSStyleSheet()
-      newSheet.replaceSync(cssResult.cssText)
-
-      // Get the existing adopted stylesheets
-      const styleSheets = [...this.shadowRoot.adoptedStyleSheets]
-
-      // Add the new stylesheet to the adopted stylesheets
-      this.shadowRoot.adoptedStyleSheets = [...styleSheets, newSheet]
-    }
-
-    // Updating a single CSS variable
-    // this.#Controller.setCSSVar('--gds', '#fc0')
+    this.#dynStylesController.inject('grid-vars', cssResult)
   }
 
   render() {
