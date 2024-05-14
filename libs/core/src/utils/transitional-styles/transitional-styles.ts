@@ -70,7 +70,7 @@ export class TransitionalStyles {
     if (!element || !element.shadowRoot) return
 
     element._dynamicStylesController.clearAll()
-    element._dynamicStylesController.inject(styleKey, unsafeCSS(sheet))
+    element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
     element._isUsingTransitionalStyles = true
   }
 

@@ -1,4 +1,4 @@
-import { ReactiveController, CSSResultGroup } from 'lit'
+import { ReactiveController, CSSResult } from 'lit'
 import { GdsElement } from '../gds-element'
 
 export class DynamicStylesController implements ReactiveController {
@@ -21,7 +21,16 @@ export class DynamicStylesController implements ReactiveController {
     }
   }
 
-  inject(key: string, styles: CSSResultGroup) {
+  /**
+   * Injects CSS into the host element's shadow root. The key is used to
+   * identify the styles and can be used to update the styles later. If
+   * you need to clear style for a particular key, you can call `inject`
+   * with an empty string as the `styles` parameter.
+   *
+   * @param key - A unique key to identify the styles.
+   * @param styles - The CSSResult to inject.
+   */
+  inject(key: string, styles: CSSResult) {
     const cssText = Array.isArray(styles)
       ? styles.map((style) => style.toString()).join('')
       : styles.toString()
@@ -33,6 +42,9 @@ export class DynamicStylesController implements ReactiveController {
     }
   }
 
+  /**
+   * Clears all styles of the component, including any initial styles.
+   */
   clearAll() {
     if (this.#useLegacyStylesheets) {
       this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
