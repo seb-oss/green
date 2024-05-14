@@ -1,6 +1,8 @@
-import { html, HTMLTemplateResult, unsafeCSS } from 'lit'
+import { unsafeCSS } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
+import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
+import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 // Only import components here. Primitives should be imported from the components that use them.
 // Also, if a component depens, remember to import transitional styles for teh child component in
@@ -13,9 +15,6 @@ import * as Datepicker from '../../components/datepicker/datepicker.trans.styles
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
-
-import { VER_SUFFIX } from '../helpers/custom-element-scoping'
-import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
 
 /**
  * Registers transitional styles for all components.
@@ -52,8 +51,6 @@ export class TransitionalStyles {
   #elements = new Map<string, GdsElement>()
 
   #useLegacyStylesheets = !supportsConstructedStylesheets()
-
-  chlorophyllTokens = new CSSStyleSheet()
 
   apply(element: GdsElement, styleKey: string) {
     if (!element.shadowRoot) return
