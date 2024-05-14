@@ -73,10 +73,6 @@ export class GdsContextMenu extends GdsElement {
   @property()
   placement: Placement = 'bottom-start'
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
 
@@ -99,8 +95,7 @@ export class GdsContextMenu extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}
-      <button
+    return html`<button
         id="trigger"
         class="icon border-0 small ${classMap({ highlighted: this.open })}"
         aria-label=${this.buttonLabel ?? this.label}

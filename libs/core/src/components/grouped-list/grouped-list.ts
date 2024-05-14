@@ -18,9 +18,6 @@ import './list-item'
  */
 @gdsCustomElement('gds-grouped-list')
 export class GdsGroupedList extends GdsElement {
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
   /**
    * The label for the list that will render in the shadowDOM as the first <li> element in the list with the class `gds-list-heading`
    */
@@ -35,7 +32,7 @@ export class GdsGroupedList extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}${when(
+    return html`${when(
         this.label,
         () =>
           html`<div class="gds-list-heading" aria-hidden="true" id="label">

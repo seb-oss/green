@@ -27,10 +27,6 @@ import type { GdsMenuItem } from '../../primitives/menu/menu-item'
 export class GdsMenu extends GdsElement implements ListboxKbNavigation {
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   constructor() {
     super()
     new ListboxKbNavController(this)
@@ -64,6 +60,6 @@ export class GdsMenu extends GdsElement implements ListboxKbNavigation {
   }
 
   render() {
-    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
+    return html`<slot ${ref(this.#slotRef)}></slot>`
   }
 }
