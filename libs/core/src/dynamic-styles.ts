@@ -1,1 +1,1 @@
-export * from './utils/dynamic-styles/dynamic-styles'
+export * from './controllers/dynamic-styles-controller'

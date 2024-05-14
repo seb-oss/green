@@ -1,5 +1,5 @@
 import { ReactiveController, CSSResultGroup } from 'lit'
-import { GdsElement } from '../../gds-element'
+import { GdsElement } from '../gds-element'
 
 export class DynamicStylesController implements ReactiveController {
   host: GdsElement
