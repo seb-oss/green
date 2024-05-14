@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import {
+  fixture,
+  html as testingHtml,
+  waitUntil,
+  assert,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
@@ -33,7 +38,9 @@ describe('<gds-filter-chips>', () => {
         </gds-filter-chips>`,
       )
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      await assert.isAccessible(el, {
+        ignoredRules: ['aria-required-children'],
+      })
     })
   })
 

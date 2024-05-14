@@ -7,7 +7,6 @@ import {
   html,
   getScopedTagName,
 } from '../../../utils/helpers/custom-element-scoping'
-import { watch } from '../../../utils/decorators'
 
 import '../../button'
 import type { GdsButton } from '../../button'
