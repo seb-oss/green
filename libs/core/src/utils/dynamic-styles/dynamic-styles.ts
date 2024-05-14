@@ -61,7 +61,7 @@ export class DynamicStylesController implements ReactiveController {
   }
 }
 
-function supportsConstructedStylesheets() {
+export function supportsConstructedStylesheets() {
   try {
     new CSSStyleSheet()
     return true

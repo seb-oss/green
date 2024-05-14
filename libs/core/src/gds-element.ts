@@ -1,3 +1,4 @@
+import { DynamicStylesController } from './dynamic-styles'
 import { getUnscopedTagName } from './scoping'
 import { LitElement } from 'lit'
 
@@ -12,6 +13,13 @@ export class GdsElement extends LitElement {
    * @internal
    */
   _isUsingTransitionalStyles = false
+
+  protected _dynamicStylesController: DynamicStylesController
+
+  constructor() {
+    super()
+    this._dynamicStylesController = new DynamicStylesController(this)
+  }
 
   connectedCallback(): void {
     super.connectedCallback()

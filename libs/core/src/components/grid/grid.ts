@@ -1,12 +1,11 @@
-import { css, CSSResult, LitElement, unsafeCSS } from 'lit'
+import { css, CSSResult, unsafeCSS } from 'lit'
 
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
-import { DynamicStylesController } from '../../dynamic-styles'
 import { watch } from '../../utils/decorators/watch'
 import { tokens } from '../../tokens.style'
 
@@ -32,13 +31,6 @@ type CSSProperty = {
 
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends GdsElement {
-  #dynStylesController: DynamicStylesController
-
-  constructor() {
-    super()
-    this.#dynStylesController = new DynamicStylesController(this)
-  }
-
   static styles = [tokens, GridCSS]
 
   static shadowRootOptions: ShadowRootInit = {
@@ -281,7 +273,7 @@ export class GdsGrid extends GdsElement {
     ` as CSSResult
 
     // Inject the CSSResult object
-    this.#dynStylesController.inject('grid-vars', cssResult)
+    this._dynamicStylesController.inject('grid-vars', cssResult)
   }
 
   render() {
