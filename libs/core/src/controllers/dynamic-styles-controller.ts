@@ -47,7 +47,9 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearAll() {
     if (this.#useLegacyStylesheets) {
-      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.host.shadowRoot
+        ?.querySelectorAll('style')
+        .forEach((style) => style.remove())
       this.#legacyStyleSheets.clear()
     } else {
       if (this.host.shadowRoot) {
