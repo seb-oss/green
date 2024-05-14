@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@sebgroup/green-core": "^1.18.0",
-    "@sebgroup/chlorophyll": "^3.3.4",
+    "@sebgroup/chlorophyll": "^3.3.5",
     "@sebgroup/extract": "^3.0.1",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "body-scroll-lock": "^3.1.5"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",
   "repository": {
