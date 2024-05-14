@@ -15,7 +15,9 @@ export class DynamicStylesController implements ReactiveController {
 
   hostConnected() {
     if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
-      this.#initialStyleSheets = [...this.host.shadowRoot.adoptedStyleSheets]
+      this.#initialStyleSheets = [
+        ...(this.host.shadowRoot.adoptedStyleSheets || []),
+      ]
     }
   }
 
