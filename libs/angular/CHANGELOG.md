@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.0
+
+### Minor Changes
+
+- 38a8550: Input for disabling body scroll on NggModal
+
 ## 3.7.0
 
 ### Minor Changes

@@ -34,6 +34,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public size?: Size
   @Input() public hideHeader?: boolean
   @Input() public hideFooter?: boolean
+  @Input() public disableBodyScroll?: boolean = true
   @Input() public get trapFocus(): boolean | undefined {
     return this._trapFocus
   }
@@ -61,15 +62,19 @@ export class NggModalComponent implements OnDestroy, OnInit {
         this.enableFocusTrap()
       }
 
-      disableBodyScroll(this.ref.nativeElement, {
-        allowTouchMove: (el) => {
-          // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
-          return this.ref.nativeElement.contains(el)
-        },
-      })
+      if (this.disableBodyScroll) {
+        disableBodyScroll(this.ref.nativeElement, {
+          allowTouchMove: (el) => {
+            // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
+            return this.ref.nativeElement.contains(el)
+          },
+        })
+      }
     } else {
       this.disableFocusTrap()
-      enableBodyScroll(this.ref.nativeElement)
+      if (this.disableBodyScroll) {
+        enableBodyScroll(this.ref.nativeElement)
+      }
     }
   }
 
