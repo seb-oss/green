@@ -60,7 +60,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       .rank=${this.selected ? 'primary' : 'secondary'}
       variant=${this._isUsingTransitionalStyles ? 'ghost' : 'default'}
       gds-role="option"
-      ?aria-selected=${this.selected}
+      gds-aria-selected=${this.selected}
     >
       <span class=${classMap(btnClasses)}><slot></slot></span>
       <gds-icon
