@@ -22,6 +22,10 @@ The filter chips component allows users to quickly refine the result of data the
 
 <button onClick={() => location.reload()}>Show 2023 styles</button>
 
+## Usage
+
+This component works like many other types of input controls. A `value` property holds the currently selcted value/values and a `change` event is emitted when the value changes.
+
 ## Single select
 
 By default, the filter chips component is single select. Each filter-chip needs to have a unique value attribute. This determines the value of the parent components, and which chip is selected.
@@ -30,16 +34,25 @@ Chips without value cannot be selected.
 **Note:** It is important to remember to set the label attribute. Omitting it will cause poor accessibility for screen reader useSharedState. Internally in the component, the label attribute will be used to set `aria-label` for the appropriate element.
 
 <Canvas>
-  <gds-filter-chips value="top-news" label="Pick news channel">
-    <gds-filter-chip value="all">All</gds-filter-chip>
-    <gds-filter-chip value="top-news">Top news</gds-filter-chip>
-    <gds-filter-chip value="division">Division</gds-filter-chip>
-    <gds-filter-chip value="global">Global</gds-filter-chip>
-    <gds-filter-chip value="country">Country</gds-filter-chip>
-    <gds-filter-chip value="lcfi">
-      Large Corporate & Financial Institutions
-    </gds-filter-chip>
-  </gds-filter-chips>
+  <div>
+    <gds-filter-chips
+      value="top-news"
+      label="Pick news channel"
+      onchange="document.getElementById('sel').innerText = event.target.value"
+    >
+      <gds-filter-chip value="all">All</gds-filter-chip>
+      <gds-filter-chip value="top-news">Top news</gds-filter-chip>
+      <gds-filter-chip value="division">Division</gds-filter-chip>
+      <gds-filter-chip value="global">Global</gds-filter-chip>
+      <gds-filter-chip value="country">Country</gds-filter-chip>
+      <gds-filter-chip value="lcfi">
+        Large Corporate & Financial Institutions
+      </gds-filter-chip>
+    </gds-filter-chips>
+    <div style={{ marginTop: '1rem' }}>
+      Selected: <span id="sel">top-news</span>
+    </div>
+  </div>
 </Canvas>
 
 ## Multi select

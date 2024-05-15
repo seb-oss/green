@@ -48,6 +48,7 @@ Use the web component in your template with the `*nggCoreElement` directive.
   *nggCoreElement
   value="top-news"
   label="Select a category to filter results on"
+  (change)="onFilterChange($event)"
 >
   <gds-filter-chip *nggCoreElement value="all">All</gds-filter-chip>
   <gds-filter-chip *nggCoreElement value="top-news">Top news</gds-filter-chip>
