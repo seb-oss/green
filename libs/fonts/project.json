@@ -1,0 +1,65 @@
+{
+  "name": "fonts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fonts/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/fonts",
+        "commands": [
+          "mkdir -p dist/libs/fonts",
+          "nx run fonts:copy-fonts",
+          "nx run fonts:copy-scss",
+          "nx run fonts:build-css",
+          "nx run fonts:copy-package-json",
+          "nx run fonts:copy-readme"
+        ]
+      }
+    },
+    "copy-fonts": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cp -R libs/fonts/fonts dist/libs/fonts"
+        ]
+      }
+    },
+    "build-css": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "mkdir -p dist/libs/fonts/css",
+          "sass libs/fonts/scss/seb-fonts.scss dist/libs/fonts/css/seb-fonts.css"
+        ]
+      }
+    },
+    "copy-scss": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "mkdir -p dist/libs/fonts/scss",
+          "cp -R libs/fonts/scss/. dist/libs/fonts/scss"
+        ]
+      }
+    },
+    "copy-package-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp libs/fonts/package.json dist/libs/fonts"
+      }
+    },
+    "copy-readme": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp libs/fonts/README.md dist/libs/fonts"
+      }
+    }
+  },
+  "tags": []
+}
