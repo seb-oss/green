@@ -22,31 +22,7 @@ Buttons exist in three different ranks, Primary, Secondary and Tertiary
 Each rank can belong to one of three variants, Neutral, Positive and Negative
 
 <Canvas>
-  <story-grid>
-    <story-row>
-      <gds-button>Neutral primary</gds-button>
-      <gds-button rank="secondary">Neutral secondary</gds-button>
-      <gds-button rank="tertiary">Neutral tertiary</gds-button>
-    </story-row>
-    <story-row>
-      <gds-button variant="positive">Positive primary</gds-button>
-      <gds-button variant="positive" rank="secondary">
-        Positive secondary
-      </gds-button>
-      <gds-button variant="positive" rank="tertiary">
-        Positive tertiary
-      </gds-button>
-    </story-row>
-    <story-row>
-      <gds-button variant="negative">Negative primary</gds-button>
-      <gds-button variant="negative" rank="secondary">
-        Negative secondary
-      </gds-button>
-      <gds-button variant="negative" rank="tertiary">
-        Negative tertiary
-      </gds-button>
-    </story-row>
-  </story-grid>
+  <Story of={ButtonStories.Variants} />
 </Canvas>
 
 ## Button sizes
@@ -54,9 +30,7 @@ Each rank can belong to one of three variants, Neutral, Positive and Negative
 Buttons can be small, medium or large. The default size is medium.
 
 <Canvas>
-  <gds-button size="small">Small</gds-button>
-  <gds-button>Medium</gds-button>
-  <gds-button size="large">Large</gds-button>
+  <Story of={ButtonStories.Sizes} />
 </Canvas>
 
 ## Button with icon
@@ -64,14 +38,7 @@ Buttons can be small, medium or large. The default size is medium.
 Buttons can have an icon on the left or right side of the text. These are called leading or trailing icons, and are added by placing a `gds-icon` component in either the `lead` or `trail` slot.
 
 <Canvas>
-  <gds-button>
-    <gds-icon slot="lead" name="arrow-down" />
-    Leading icon
-  </gds-button>
-  <gds-button>
-    Trailing icon
-    <gds-icon slot="trail" name="arrow-up" />
-  </gds-button>
+  <Story of={ButtonStories.WithIcon} />
 </Canvas>
 
 ## Button with icon only
@@ -79,15 +46,7 @@ Buttons can have an icon on the left or right side of the text. These are called
 If a single `gds-icon` is the only child of a button, it will render as a circular icon button.
 
 <Canvas>
-  <gds-button size="small">
-    <gds-icon name="arrow" />
-  </gds-button>
-  <gds-button>
-    <gds-icon name="arrow" />
-  </gds-button>
-  <gds-button size="large">
-    <gds-icon name="arrow" />
-  </gds-button>
+  <Story of={ButtonStories.IconButton} />
 </Canvas>
 
 ## Disabled
@@ -96,11 +55,5 @@ The buttons support a disabled state, but in general, it should not be used. It 
 instead.
 
 <Canvas>
-  <gds-button disabled>Primary</gds-button>
-  <gds-button rank="secondary" variant="positive" disabled>
-    Secondary
-  </gds-button>
-  <gds-button rank="tertiary" disabled>
-    Tertiary
-  </gds-button>
+  <Story of={ButtonStories.Disabled} />
 </Canvas>
