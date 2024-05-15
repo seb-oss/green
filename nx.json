@@ -115,7 +115,7 @@
       "!{projectRoot}/tsconfig.storybook.json"
     ]
   },
-  "nxCloudAccessToken": "NmMzZjBhYjAtY2VmMi00MjE5LWIzMmMtNGJiOWQ0ZjMwZTI5fHJlYWQtd3JpdGU=",
+  "neverConnectToCloud": true,
   "parallel": 3,
   "useInferencePlugins": false,
   "defaultBase": "main"

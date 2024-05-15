@@ -1,7 +1,6 @@
 import { HTMLTemplateResult } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import 'reflect-metadata'
 
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -125,7 +124,7 @@ export class GdsListbox
    * If no option is selected, the first visible option is focused.
    */
   focus() {
-    (
+    ;(
       this.visibleSelectedOptionElements[0] || this.visibleOptionElements[0]
     )?.focus()
   }
@@ -155,7 +154,7 @@ export class GdsListbox
       })
     }
 
-    (this as any).ariaActiveDescendantElement = option
+    ;(this as any).ariaActiveDescendantElement = option
 
     this.dispatchEvent(
       new CustomEvent('change', {
