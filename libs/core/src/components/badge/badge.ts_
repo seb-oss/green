@@ -53,13 +53,13 @@ export class GdsBadge extends LitElement {
     constrainSlots(this)
   }
 
-  @property({ type: String, reflect: true, attribute: 'variant' })
+  @property({ reflect: true })
   variant = ''
 
-  @property({ type: String, reflect: true, attribute: 'type' })
+  @property({ reflect: true })
   type = ''
 
-  @property({ type: String, reflect: true, attribute: 'icon' })
+  @property({ reflect: true })
   icon = ''
 
   slotIcon() {
