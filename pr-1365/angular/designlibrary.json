@@ -224,6 +224,12 @@
     "customParams": {}
   },
   {
+    "id": "components-filter-chips--default",
+    "name": "Default",
+    "title": "Components/Filter Chips",
+    "customParams": {}
+  },
+  {
     "id": "components-dropdown--select",
     "name": "Select",
     "title": "Components/Dropdown",
