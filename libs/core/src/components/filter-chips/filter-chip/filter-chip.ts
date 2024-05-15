@@ -25,7 +25,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
    * Whether the segment is selected
    * @attr selected
    */
-  @property({ reflect: true })
+  @property({ reflect: true, type: Boolean })
   selected = false
 
   /**
