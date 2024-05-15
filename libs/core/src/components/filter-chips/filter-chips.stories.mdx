@@ -27,6 +27,8 @@ The filter chips component allows users to quickly refine the result of data the
 By default, the filter chips component is single select. Each filter-chip needs to have a unique value attribute. This determines the value of the parent components, and which chip is selected.
 Chips without value cannot be selected.
 
+**Note:** It is important to remember to set the label attribute. Omitting it will cause poor accessibility for screen reader useSharedState. Internally in the component, the label attribute will be used to set `aria-label` for the appropriate element.
+
 <Canvas>
   <gds-filter-chips value="top-news" label="Pick news channel">
     <gds-filter-chip value="all">All</gds-filter-chip>
