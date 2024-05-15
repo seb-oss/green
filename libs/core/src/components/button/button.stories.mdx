@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
-import { GdsButton, GdsIcon } from '../../../../../dist/libs/core/src'
+import '../../../../../dist/libs/core/src/components/button/index.js'
 import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
 <Meta title="Components/Button" />
@@ -9,11 +9,9 @@ import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/tr
 <button
   onClick={() => {
     registerTransitionalStyles()
-    document
-      .querySelectorAll('gds-button')
-      .forEach((el) => {
-        el.connectedCallback()
-      })
+    document.querySelectorAll('gds-button').forEach((el) => {
+      el.connectedCallback()
+    })
   }}
 >
   Show 2016 styles
