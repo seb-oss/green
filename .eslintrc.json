@@ -37,8 +37,5 @@
       "rules": {}
     }
   ],
-  "extends": [
-    "plugin:storybook/recommended",
-    "@babel/plugin-transform-private-property-in-object"
-  ]
+  "extends": ["plugin:storybook/recommended"]
 }
