@@ -1,6 +1,8 @@
-import { html, HTMLTemplateResult } from 'lit'
+import { unsafeCSS } from 'lit'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
+import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
+import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 // Only import components here. Primitives should be imported from the components that use them.
 // Also, if a component depens, remember to import transitional styles for teh child component in
@@ -13,8 +15,6 @@ import * as Datepicker from '../../components/datepicker/datepicker.trans.styles
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
-
-import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 /**
  * Registers transitional styles for all components.
@@ -36,15 +36,6 @@ declare global {
   var __gdsTransitionalStyles: { [VER_SUFFIX]: TransitionalStyles } // eslint-disable-line no-var
 }
 
-function supportsConstructedStylesheets() {
-  try {
-    new CSSStyleSheet()
-    return true
-  } catch {
-    return false
-  }
-}
-
 export class TransitionalStyles {
   static get instance() {
     if (!globalThis.__gdsTransitionalStyles?.[VER_SUFFIX])
@@ -56,81 +47,43 @@ export class TransitionalStyles {
     return globalThis.__gdsTransitionalStyles[VER_SUFFIX]
   }
 
-  private sheets = new Map<string, CSSStyleSheet>()
-  private elements = new Map<string, HTMLElement>()
+  #styles = new Map<string, string>()
+  #elements = new Map<string, GdsElement>()
 
-  private sheetsLegacy = new Map<string, string>()
-  private useLegacyStylesheets = !supportsConstructedStylesheets()
+  #useLegacyStylesheets = !supportsConstructedStylesheets()
 
-  chlorophyllTokens = new CSSStyleSheet()
-
-  apply(element: HTMLElement, styleKey: string) {
+  apply(element: GdsElement, styleKey: string) {
     if (!element.shadowRoot) return
 
-    if (this.useLegacyStylesheets) {
-      this.elements.set(styleKey, element)
-      this.applyToElementLegacy(styleKey)
-      return
-    }
+    const style = this.#styles.get(styleKey)
+    if (!style) return
 
-    const sheet = this.sheets.get(styleKey)
-    if (!sheet) return
-
-    this.elements.set(styleKey, element)
-    this.applyToElement(styleKey, sheet)
+    this.#elements.set(styleKey, element)
+    this.applyToElement(styleKey, style)
   }
 
-  applyToElement(styleKey: string, sheet: CSSStyleSheet) {
-    const element = this.elements.get(styleKey) as GdsElement
+  applyToElement(styleKey: string, sheet: string) {
+    const element = this.#elements.get(styleKey)
     if (!element || !element.shadowRoot) return
 
-    element.shadowRoot.adoptedStyleSheets = [this.chlorophyllTokens, sheet]
-    element._isUsingTransitionalStyles = true
-  }
-
-  // This is a fallback for browsers that dosen't support constructed stylesheets.
-  // Primarily, this is here to support Safari/iOS 15.x
-  //
-  // To work around the lack of Constructed Stylesheets, we use a regular <style>
-  // element instead. The _tStyles property needs to be added to the render template
-  // of each component.
-  //
-  // Lit itself will also add a <style> element to the shadow root in these browsers,
-  // meaning that we have to override the base styles added from the static style
-  // property in this case. This is what the `all: revert` rule is for.
-  // We can use cascade layers to ensure that the revert rule overides the base styles
-  // but not the transitional styles.
-  // `@layer base, reset, transitional-styles;`
-  applyToElementLegacy(styleKey: string) {
-    const sheet = this.sheetsLegacy.get(styleKey)
-    const element = this.elements.get(styleKey) as GdsElement & {
-      _tStyles: HTMLTemplateResult
-    }
-
-    if (!element) return
-
-    element._tStyles = html`<style>
-      @layer reset {
-        *:not(style, [gds-element]) {
-          all: revert;
-        }
-      }
-      ${unsafeHTML(sheet)}
-    </style>`
+    element._dynamicStylesController.clearAll()
+    element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
     element._isUsingTransitionalStyles = true
   }
 
   register(name: string, styles: string) {
-    if (this.useLegacyStylesheets) {
-      this.sheetsLegacy.set(name, styles)
-      this.applyToElementLegacy(name)
-      return
+    let preparedStyle = styles
+    if (this.#useLegacyStylesheets) {
+      preparedStyle = `@layer reset {
+        *:not(style, [gds-element]) {
+          all: revert;
+        }
+      }
+      ${styles}`
     }
 
-    const sheet = new CSSStyleSheet()
-    sheet.replaceSync(styles)
+    this.#styles.set(name, preparedStyle)
 
-    this.sheets.set(name, sheet)
-    this.applyToElement(name, sheet)
+    this.applyToElement(name, preparedStyle)
   }
 }

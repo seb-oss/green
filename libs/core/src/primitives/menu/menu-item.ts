@@ -16,10 +16,6 @@ import styles from '../listbox/option.styles'
 export class GdsMenuItem extends Focusable(GdsElement) {
   static styles = [styles]
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'menuitem')
@@ -46,7 +42,6 @@ export class GdsMenuItem extends Focusable(GdsElement) {
   }
 
   render() {
-    return html`${this._tStyles}
-      <div><slot></slot></div>`
+    return html`<div><slot></slot></div>`
   }
 }

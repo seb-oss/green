@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.19.0
+
+### Minor Changes
+
+- 91e434c: Style controller & Grid Refactoring
+
 ## 1.18.1
 
 ### Patch Changes
