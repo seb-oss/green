@@ -1,32 +1,20 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
-import '../../../../../dist/libs/core/src/components/button/index.js'
-import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+import { Meta, Canvas, Story } from '@storybook/addon-docs'
+import '../../../../../dist/libs/core/src/index.js'
+
+import * as ButtonStories from './button.stories.ts'
 
 <Meta title="Components/Button" />
 
 # Button
 
-<button
-  onClick={() => {
-    registerTransitionalStyles()
-    document.querySelectorAll('gds-button').forEach((el) => {
-      el.connectedCallback()
-    })
-  }}
->
-  Show 2016 styles
-</button>
-
-<button onClick={() => location.reload()}>Show 2023 styles</button>
+<transitional-styles-toggle />
 
 ## Button ranks
 
 Buttons exist in three different ranks, Primary, Secondary and Tertiary
 
 <Canvas>
-  <gds-button>Primary</gds-button>
-  <gds-button rank="secondary">Secondary</gds-button>
-  <gds-button rank="tertiary">Tertiary</gds-button>
+  <Story of={ButtonStories.Ranks} />
 </Canvas>
 
 ## Button variants
