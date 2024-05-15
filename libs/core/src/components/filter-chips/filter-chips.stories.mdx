@@ -24,7 +24,8 @@ The filter chips component allows users to quickly refine the result of data the
 
 ## Single select
 
-By default, the filter chips component is single select.
+By default, the filter chips component is single select. Each filter-chip needs to have a unique value attribute. This determines the value of the parent components, and which chip is selected.
+Chips without value cannot be selected.
 
 <Canvas>
   <gds-filter-chips value="top-news" label="Pick news channel">

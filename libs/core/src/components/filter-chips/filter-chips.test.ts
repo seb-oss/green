@@ -72,5 +72,103 @@ describe('<gds-filter-chips>', () => {
       expect(chip1.selected).to.be.true
       expect(chip2.selected).to.be.true
     })
+
+    it('chips property should return the chips in the control', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chips = el.chips
+      await expect(chips.length).to.equal(2)
+      await expect(chips[0].value).to.equal('1')
+      await expect(chips[1].value).to.equal('2')
+    })
+
+    it('should fire a change event when a chip is selected', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      const changeSpy = sinon.spy()
+      el.addEventListener('change', changeSpy)
+      await clickOnElement(chip1)
+      expect(changeSpy.calledOnce).to.be.true
+      await expect(changeSpy.firstCall.args[0].detail.value).to.equal('1')
+      await clickOnElement(chip2)
+      expect(changeSpy.calledTwice).to.be.true
+      await expect(changeSpy.secondCall.args[0].detail.value).to.equal('2')
+    })
+
+    it('should have a `rowCollapse` property', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips row-collapse label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      expect(el.rowCollapse).to.be.true
+    })
+  })
+
+  describe('Interactions', () => {
+    it('should select a chip when clicked', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      await clickOnElement(chip1)
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.false
+    })
+
+    it('should select a chip when clicked and deselect the other chips if multiple is false', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      await clickOnElement(chip1)
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.false
+      await clickOnElement(chip2)
+      expect(chip1.selected).to.be.false
+      expect(chip2.selected).to.be.true
+    })
+
+    it('should select a chip when clicked and keep the other chips selected if multiple is true', async () => {
+      const el = await fixture<GdsFilterChips>(
+        html`<gds-filter-chips multiple label="filter">
+          <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
+          <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
+        </gds-filter-chips>`,
+      )
+      await el.updateComplete
+      const chip1 = el.querySelector('#chip1') as GdsFilterChip
+      const chip2 = el.querySelector('#chip2') as GdsFilterChip
+      await clickOnElement(chip1)
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.false
+      await clickOnElement(chip2)
+      expect(chip1.selected).to.be.true
+      expect(chip2.selected).to.be.true
+    })
   })
 })

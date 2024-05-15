@@ -38,4 +38,11 @@ describe('<gds-<%= toKebabCase(name) %>>', () => {
       expect(false).to.be.true
     })
   })
+
+  describe('Interactions', () => {
+    // Add actual interaction tests here! (things like keyboard nav, clicking on things behave as expected, etc)
+    it('should have Interaction tests', async () => {
+      expect(false).to.be.true
+    })
+  })
 })
