@@ -1,6 +1,18 @@
-;(globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS = true
-
 import { registerTransitionalStyles } from '../../../dist/libs/core/src/transitional-styles.js'
+import { setCustomElementsManifest, Preview } from '@storybook/web-components'
+import customElements from '../custom-elements.json'
+
+setCustomElementsManifest(customElements)
+
+const preview: Preview = {
+  // ...rest of preview
+  //👇 Enables auto-generated documentation for all stories
+  tags: ['autodocs'],
+}
+
+export default preview
+
+;(globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS = true
 
 class TransitionalStylesToggle extends HTMLElement {
   connectedCallback() {

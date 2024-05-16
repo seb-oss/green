@@ -32,6 +32,9 @@ const html = stripWhitespace(customElementHtml)
 export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = [tokens, unsafeCSS(style)]
 
+  /**
+   * @internal
+   */
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

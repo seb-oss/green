@@ -9,6 +9,7 @@ import 'reflect-metadata'
 export class GdsElement extends LitElement {
   /**
    * The unscoped name of this element.
+   * @attribute gds-element
    */
   gdsElementName = ''
 
@@ -18,6 +19,9 @@ export class GdsElement extends LitElement {
    */
   _isUsingTransitionalStyles = false
 
+  /**
+   * @private
+   */
   _dynamicStylesController: DynamicStylesController
 
   constructor() {

@@ -50,6 +50,12 @@
         "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
     },
+    "build-custom-elements-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd libs/core && npx cem analyze --litelement"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "dependsOn": ["css-lint"]
@@ -100,6 +106,7 @@
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook"
       },
+      "dependsOn": ["build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
