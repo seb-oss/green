@@ -3,18 +3,24 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
-  "implicitDependencies": ["tokens"],
+  "implicitDependencies": [
+    "tokens"
+  ],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/src"
+      ],
       "options": {
         "command": "nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
       "executor": "@sebgroup/repo-tools:build-core-lib",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/core/src",
         "tsConfig": "libs/core/tsconfig.lib.json",
@@ -23,38 +29,58 @@
             "glob": "(package.json|README.md|setup-jest.js|green-jest-config.cjs)",
             "input": "libs/core",
             "output": "."
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "libs/core/src/components/icon/assets",
+            "output": "./icons"
           }
-        ]
+        ],
+        "webpackConfig": "webpack.config.js"
       }
     },
     "build-bundle-src": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/core/src"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/core/src"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/bundle.cjs"
       },
-      "dependsOn": ["tokens:build"]
+      "dependsOn": [
+        "tokens:build"
+      ]
     },
     "build-with-types": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-src"],
+      "dependsOn": [
+        "build-src"
+      ],
       "options": {
         "command": "tsc --emitDeclarationOnly --declaration --project libs/core/tsconfig.lib.json"
       }
     },
     "build-with-types-and-scoping": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-with-types"],
+      "dependsOn": [
+        "build-with-types"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "dependsOn": ["css-lint"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "dependsOn": [
+        "css-lint"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/core/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/core/**/*.ts"
+        ]
       }
     },
     "css-lint": {
@@ -65,35 +91,53 @@
     },
     "build-tests": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "options": {
         "command": "node libs/core/build-scripts/build-tests"
       }
     },
     "test-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
+      "dependsOn": [
+        "build-tests"
+      ],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
+    "fetch-icons": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/fetch-icons.cjs"
+      }
+    },
     "test": {
       "executor": "nx:run-commands",
-      "dependsOn": ["build-tests"],
+      "dependsOn": [
+        "build-tests"
+      ],
       "options": {
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium webkit"
       }
     },
     "storybook": {
       "executor": "@nrwl/storybook:storybook",
-      "dependsOn": ["tokens:build"],
+      "dependsOn": [
+        "tokens:build"
+      ],
       "options": {
         "port": 4400,
         "configDir": "libs/core/.storybook",
         "uiFramework": "@storybook/web-components"
       },
-      "dependsOn": ["build-src"],
-      "inputs": ["core"],
+      "dependsOn": [
+        "build-src"
+      ],
+      "inputs": [
+        "core"
+      ],
       "configurations": {
         "ci": {
           "quiet": true
@@ -102,9 +146,16 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": ["{options.outputDir}"],
-      "inputs": ["core"],
-      "dependsOn": ["build-src", "tokens:build"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "inputs": [
+        "core"
+      ],
+      "dependsOn": [
+        "build-src",
+        "tokens:build"
+      ],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook",
