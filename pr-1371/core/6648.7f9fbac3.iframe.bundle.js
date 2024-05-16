@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[6648],{"./dist/libs/core/src/icons/arrow-up.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/arrow-up.628f0703.svg"}}]);

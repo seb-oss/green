@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[6967],{"./dist/libs/core/src/icons/dot-grid-1x3-horizontal.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/dot-grid-1x3-horizontal.fb0e36c2.svg"}}]);

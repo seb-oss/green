@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[521],{"./dist/libs/core/src/icons/cloud-upload.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/cloud-upload.33824ca9.svg"}}]);

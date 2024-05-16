@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[2134],{"./dist/libs/core/src/icons/circle-plus.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/circle-plus.09e8871b.svg"}}]);

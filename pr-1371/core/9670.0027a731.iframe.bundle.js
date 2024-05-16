@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[9670],{"./dist/libs/core/src/icons/zoom-out.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/zoom-out.bcc3b60f.svg"}}]);

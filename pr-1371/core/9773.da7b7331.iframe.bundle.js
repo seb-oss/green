@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[9773],{"./dist/libs/core/src/icons/floppy-disk-2.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/floppy-disk-2.46d77a09.svg"}}]);

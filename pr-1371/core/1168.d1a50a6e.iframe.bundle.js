@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[1168],{"./dist/libs/core/src/icons/arrow-out-of-box.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/arrow-out-of-box.441f0762.svg"}}]);

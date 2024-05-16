@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[5661],{"./dist/libs/core/src/icons/folder-upload.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/folder-upload.343eaf6b.svg"}}]);
