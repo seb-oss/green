@@ -13,30 +13,34 @@ import '../../../../../dist/libs/core/src/components/icon/index.js'
 const meta: Meta = {
   title: 'Components/Button',
   component: 'gds-button',
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
 }
 
 export default meta
 type Story = StoryObj
 
-const BaseStoryParams: Story = {
+const DefaultParams: Story = {
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
     },
+    controls: { expanded: true },
   },
   argTypes: {
     rank: {
       options: ['primary', 'secondary', 'tertiary'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
     },
     variant: {
       options: ['neutral', 'positive', 'negative'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
     },
     size: {
       options: ['small', 'medium', 'large'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
     },
   },
   args: {
@@ -45,7 +49,7 @@ const BaseStoryParams: Story = {
 }
 
 export const Basic: Story = {
-  ...BaseStoryParams,
+  ...DefaultParams,
 }
 
 /**
@@ -53,9 +57,13 @@ export const Basic: Story = {
  * while the variant defines the intent of the button.
  */
 export const RanksAndVariants: Story = {
-  ...BaseStoryParams,
+  ...DefaultParams,
   name: 'Ranks and variants',
-  render: () => html`
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
     <gds-grid columns="3" gap="m" row-gap="m">
       <div>
         <gds-button>Neutral primary</gds-button>
@@ -100,13 +108,19 @@ export const RanksAndVariants: Story = {
  * Buttons can be small, medium or large. The default size is medium.
  */
 export const Sizes: Story = {
-  ...BaseStoryParams,
-  render: () => html`
-    <gds-button size="small">Small</gds-button>
-
-    <gds-button>Medium</gds-button>
-
-    <gds-button size="large">Large</gds-button>
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: ['rank', 'variant'] },
+  },
+  render: (args) => html`
+    <gds-button .rank=${args.rank} .variant=${args.variant} size="small"
+      >Small</gds-button
+    >
+    <gds-button .rank=${args.rank} .variant=${args.variant}>Medium</gds-button>
+    <gds-button .rank=${args.rank} .variant=${args.variant} size="large"
+      >Large</gds-button
+    >
   `,
 }
 
@@ -115,15 +129,19 @@ export const Sizes: Story = {
  * and are added by placing a `gds-icon` component in either the `lead` or `trail` slot.
  */
 export const WithIcon: Story = {
-  ...BaseStoryParams,
+  ...DefaultParams,
   name: 'Using icons in button',
-  render: () => html`
-    <gds-button>
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: ['rank', 'variant', 'size'] },
+  },
+  render: (args) => html`
+    <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
       <gds-icon slot="lead" name="arrow-down"></gds-icon>
       Leading icon
     </gds-button>
 
-    <gds-button>
+    <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
       Trailing icon
       <gds-icon slot="trail" name="arrow-up"></gds-icon>
     </gds-button>
@@ -134,18 +152,22 @@ export const WithIcon: Story = {
  * If a single `gds-icon` is the only child of a button, it will render as a circular icon button.
  */
 export const IconButton: Story = {
-  ...BaseStoryParams,
+  ...DefaultParams,
   name: 'Icon button',
-  render: () => html`
-    <gds-button size="small">
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: ['rank', 'variant'] },
+  },
+  render: (args) => html`
+    <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
       <gds-icon name="arrow" />
     </gds-button>
 
-    <gds-button>
-      <gds-icon name="arrow" />
+    <gds-button .rank=${args.rank} .variant=${args.variant}>
+      <gds-icon .rank=${args.rank} .variant=${args.variant} name="arrow" />
     </gds-button>
 
-    <gds-button size="large">
+    <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
       <gds-icon name="arrow" />
     </gds-button>
   `,
@@ -157,7 +179,11 @@ export const IconButton: Story = {
  * keep the button clickable and then show an error message instead.
  */
 export const Disabled: Story = {
-  ...BaseStoryParams,
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
   render: () =>
     html`<gds-button disabled>Primary</gds-button>
 
