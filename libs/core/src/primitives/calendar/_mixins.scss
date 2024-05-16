@@ -172,6 +172,23 @@ $weekend-background: $background;
             color: $disabled-weekend-color;
           }
         }
+
+          .date-wrapper{
+            display: flex;
+            flex-direction: column;
+
+            .indicator{
+                display: none;
+              }
+
+              &.customDate{
+                display: block;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                align-self: center;
+              }
+          }
       }
     }
   }

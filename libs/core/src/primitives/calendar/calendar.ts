@@ -20,6 +20,13 @@ import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
 
+type CustomizedDate = {
+  dates: Date[]
+  color?: string // could map to CSS variable name
+  indicator?: 'dot' // possible to support other indicators in future
+  disabled: boolean
+}
+
 /**
  * @element gds-calendar
  * @internal
@@ -104,6 +111,9 @@ export class GdsCalendar extends GdsElement {
   @property({ type: Boolean })
   showWeekNumbers = false
 
+  @property({ attribute: false })
+  customDates?: CustomizedDate
+
   /**
    * Returns the date cell element for the given day number.
    */
@@ -169,17 +179,23 @@ export class GdsCalendar extends GdsElement {
 
                       const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
-                      const isDisabled =
-                        isOutsideCurrentMonth ||
-                        (this.disabledWeekends && isWeekend) ||
-                        (this.disabledDates &&
-                          this.disabledDates.some((d) => isSameDay(d, day)))
+                      const isCustomDate =
+                        this.customDates &&
+                        this.customDates.dates.some((d) => isSameDay(d, day))
+
+                      const isDisabled = isCustomDate
+                        ? false
+                        : isOutsideCurrentMonth ||
+                          (this.disabledWeekends && isWeekend) ||
+                          (this.disabledDates &&
+                            this.disabledDates.some((d) => isSameDay(d, day)))
 
                       return html`
                         <td
                           class="${classMap({
                             disabled: Boolean(isDisabled),
                             today: isSameDay(currentDate, day),
+                            customDate: Boolean(isCustomDate),
                           })}"
                           ?disabled=${isDisabled}
                           tabindex="${isSameDay(this.focusedDate, day)
@@ -192,7 +208,14 @@ export class GdsCalendar extends GdsElement {
                             isDisabled ? null : this.#setSelectedDate(day)}
                           id="dateCell-${day.getDate()}"
                         >
-                          ${day.getDate()}
+                          <div class="date-wrapper">
+                            <span>${day.getDate()}</span>
+                            <span
+                              class="indicator ${classMap({
+                                customDate: Boolean(isCustomDate),
+                              })}"
+                            ></span>
+                          </div>
                         </td>
                       `
                     })}
