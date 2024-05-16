@@ -121,6 +121,7 @@
     "@commitlint/config-angular": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@craftamap/esbuild-plugin-html": "^0.6.1",
+    "@custom-elements-manifest/analyzer": "^0.10.2",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@jscutlery/semver": "3.1.0",
