@@ -401,6 +401,12 @@
     "customParams": {}
   },
   {
+    "id": "components-filter-chips--page",
+    "name": "Page",
+    "title": "Components/Filter Chips",
+    "customParams": {}
+  },
+  {
     "id": "components-dropdown--dropdown",
     "name": "Dropdown",
     "title": "Components/Dropdown",
