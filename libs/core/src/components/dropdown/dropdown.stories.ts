@@ -44,37 +44,19 @@ const DefaultParams: Story = {
     },
   },
   args: {
-    options: [
-      { label: 'Option 1', value: 'opt-1' },
-      { label: 'Option 2', value: 'opt-2' },
-      { label: 'Option 3', value: 'opt-3' },
-    ],
+    innerHTML: `<gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
+<gds-option value="falcon-1">Millenium Falcon</gds-option>
+<gds-option value="defiant-1">Defiant</gds-option>
+<gds-option value="voyager-1">Voyager</gds-option>
+<gds-option value="prometheus-1">Prometheus</gds-option>
+<gds-option value="discovery-1">Discovery</gds-option>
+<gds-option value="columbia-1">Columbia</gds-option>`,
     label: 'Select an option',
   },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-dropdown
-      label=${args.label}
-      ?open=${args.open}
-      ?searchable=${args.searchable}
-      ?multiple=${args.multiple}
-      ?sync-popover-width=${args['sync-popover-width']}
-      .syncPopoverWith=${args.syncPopoverWith}
-      ?hide-label=${args['hide-label']}
-      .hideLabel=${args.hideLabel}
-      max-height=${args['max-height']}
-      .maxHeight=${args.maxHeight}
-    >
-      ${repeat(
-        args.options,
-        (option: any) =>
-          html`<gds-option value=${option.value}>${option.label}</gds-option>`,
-      )}
-    </gds-dropdown>
-  `,
 }
 
 /**
@@ -140,16 +122,16 @@ export const SyncedPopoverWidth: Story = {
   ...DefaultParams,
   name: 'Synced popover width',
   render: (args) => html`
-    <gds-dropdown
-      onchange="document.getElementById('trigger-value').innerText = event.target.value"
-    >
-      <div slot="trigger">
-        <b>Selected: </b>
-        <span id="trigger-value">v1</span>
-      </div>
-      <gds-option value="v1">Value 1</gds-option>
-      <gds-option value="v2">Value 2</gds-option>
-      <gds-option value="v3">Value 3</gds-option>
+    <gds-dropdown sync-popover-width style="width: 200px">
+      <gds-option value="1701-D-1">
+        Enterprise 1701-D is a starship from the TNG series
+      </gds-option>
+      <gds-option value="falcon-1">Millenium Falcon</gds-option>
+      <gds-option value="defiant-1">Defiant</gds-option>
+      <gds-option value="voyager-1">Voyager</gds-option>
+      <gds-option value="prometheus-1">Prometheus</gds-option>
+      <gds-option value="discovery-1">Discovery</gds-option>
+      <gds-option value="columbia-1">Columbia</gds-option>
     </gds-dropdown>
   `,
 }

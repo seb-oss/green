@@ -41,21 +41,15 @@ const DefaultParams: Story = {
     },
   },
   args: {
-    items: ['Item 1', 'Item 2', 'Item 3'],
+    innerHTML: `<gds-list-item>Item 1</gds-list-item>
+<gds-list-item>Item 2</gds-list-item>
+<gds-list-item>Item 3</gds-list-item>`,
     label: 'Grouped list label',
   },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-grouped-list label=${args.label}>
-      ${repeat(
-        args.items,
-        (item: any) => html`<gds-list-item>${item}</gds-list-item>`,
-      )}
-    </gds-grouped-list>
-  `,
 }
 
 /**

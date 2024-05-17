@@ -42,26 +42,14 @@ const DefaultParams: Story = {
     },
   },
   args: {
-    items: ['Item 1', 'Item 2', 'Item 3'],
+    innerHTML: `<gds-menu-item>Action 1</gds-menu-item>
+<gds-menu-item>Action 2</gds-menu-item>
+<gds-menu-item>Action 3</gds-menu-item>`,
   },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-context-menu
-      .buttonLabel=${args.buttonLabel}
-      button-label=${args['button-label']}
-      label=${args.label}
-      .showLabel=${args.showLabel}
-      ?show-label=${args['show-label']}
-    >
-      ${repeat(
-        args.items,
-        (item: any) => html`<gds-menu-item>${item}</gds-menu-item>`,
-      )}
-    </gds-context-menu>
-  `,
 }
 
 /**

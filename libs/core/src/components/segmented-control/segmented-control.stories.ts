@@ -31,31 +31,20 @@ const DefaultParams: Story = {
     controls: { expanded: true },
   },
   argTypes: {
-    items: {
-      control: { type: 'array' },
+    size: {
+      control: { type: 'text' },
     },
   },
   args: {
-    items: ['Item 1', 'Item 2', 'Item 3'],
-    value: 'Item 1',
+    innerHTML: `<gds-segment value="1">Item 1</gds-segment>
+<gds-segment value="2">Item 2</gds-segment>
+<gds-segment value="3">Item 3</gds-segment>`,
+    value: '1',
   },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-segmented-control
-      .segMinWidth=${args.segMinWidth}
-      seg-min-width=${args['seg-min-width']}
-      size=${args.size}
-      value=${args.value}
-    >
-      ${repeat(
-        args.items,
-        (item: any) => html`<gds-segment value=${item}>${item}</gds-segment>`,
-      )}
-    </gds-segmented-control>
-  `,
 }
 
 /**
