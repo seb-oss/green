@@ -14,6 +14,7 @@ import * as ContextMenu from '../../components/context-menu/context-menu.trans.s
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
+import * as FilterChips from '../../components/filter-chips/filter-chips.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
 
 /**
@@ -29,6 +30,7 @@ export const registerTransitionalStyles = () => {
   Datepicker.register()
   GroupedList.register()
   SegmentedControl.register()
+  FilterChips.register()
   Button.register()
 }
 

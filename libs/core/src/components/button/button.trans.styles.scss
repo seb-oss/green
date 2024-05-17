@@ -18,9 +18,14 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     button {
       @include button.reset();
       @include button.base();
-      @include button.primary();
       font-size: inherit;
       overflow: hidden;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    :host(:not([variant='ghost'])) button {
+      @include button.primary();
     }
 
     button.icon {
@@ -58,6 +63,10 @@ $button-danger-border: tokens.get(tokens.$red, 0);
 
     :host([variant='negative'][rank='secondary']) button {
       border-color: $button-danger-border;
+    }
+
+    :host([variant='ghost']) button {
+      @include button.ghost-dark();
     }
   }
 
