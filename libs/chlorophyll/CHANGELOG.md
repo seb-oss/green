@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.6
+
+### Patch Changes
+
+- bfe345f: **Buttons:** Fix selector for active state
+
 ## 3.3.5
 
 ### Patch Changes
