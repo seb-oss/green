@@ -1,7 +1,7 @@
-import { registerTransitionalStyles } from '../../../dist/libs/core/src/transitional-styles.js'
 import { setCustomElementsManifest } from '@storybook/web-components'
 import DocTemplate from './DocTemplate.mdx'
 import customElements from '../custom-elements.json'
+import { registerTransitionalStyles } from '../../../dist/libs/core/src/transitional-styles.js'
 
 setCustomElementsManifest(customElements)
 

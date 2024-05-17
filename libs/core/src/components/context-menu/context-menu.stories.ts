@@ -3,6 +3,11 @@ import { repeat } from 'lit/directives/repeat.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/context-menu/index.js'
 
+// Needed for components that only have 2016 style so far
+import '../../../../../dist/libs/core/src/components/theme/index.js'
+import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+registerTransitionalStyles()
+
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu)
  * &nbsp;|&nbsp;
