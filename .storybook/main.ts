@@ -5,7 +5,11 @@ import * as fs from 'fs'
 
 const config: Omit<StorybookConfig, 'framework'> = {
   stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: ['@storybook/addon-essentials', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
+    '@storybook/addon-styling-webpack',
+  ],
   webpackFinal: async (config, { configType }) => {
     config.plugins?.push(
       new EventHooksPlugin({

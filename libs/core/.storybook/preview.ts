@@ -3,6 +3,8 @@ import DocTemplate from './DocTemplate.mdx'
 import customElements from '../custom-elements.json'
 import { registerTransitionalStyles } from '../../../dist/libs/core/src/transitional-styles.js'
 
+import '!style-loader!css-loader!postcss-loader!sass-loader!./fonts.scss'
+
 import '../../../dist/libs/core/src/components/button/index.js'
 import '../../../dist/libs/core/src/components/grid/index.js'
 

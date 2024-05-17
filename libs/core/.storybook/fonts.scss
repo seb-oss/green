@@ -1,0 +1,7 @@
+@use '@sebgroup/fonts/scss/seb-fonts.scss' with (
+  $seb-font-path: '@sebgroup/fonts/fonts'
+);
+
+.sbdocs-wrapper {
+  font-family: 'SEBSansSerif';
+}
