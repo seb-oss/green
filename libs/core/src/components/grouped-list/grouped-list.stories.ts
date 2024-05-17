@@ -1,31 +1,66 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
+import { html } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
+import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/grouped-list/index.js'
-import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
-<Meta title="Components/Grouped List" />
+/**
+ * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grouped-list)
+ * &nbsp;|&nbsp;
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-list)
+ *
+ * ist are used to list many datapoints with labels in a structured way. They may be grouped under
+ * heading and they may have a link or button added to act on the data being displayed.
+ */
+const meta: Meta = {
+  title: 'Components/Groued List',
+  component: 'gds-grouped-list',
+  subcomponents: { ListItem: 'gds-list-item' },
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+}
 
-## Grouped list
+export default meta
+type Story = StoryObj
 
-The `<gds-grouped-list>` element accepts `<gds-list-item>` elements as children.
+const DefaultParams: Story = {
+  parameters: {
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
+  },
+  argTypes: {
+    items: {
+      control: { type: 'array' },
+    },
+  },
+  args: {
+    items: ['Item 1', 'Item 2', 'Item 3'],
+    label: 'Grouped list label',
+  },
+}
 
-<Canvas>
-  <div style={{ dummy: registerTransitionalStyles() }}>
-    <gds-grouped-list label="Example of a basic list of items">
-      <gds-list-item>Item 1</gds-list-item>
-      <gds-list-item>Item 2</gds-list-item>
-      <gds-list-item>Item 3</gds-list-item>
-      <gds-list-item>Item 4</gds-list-item>
-      <gds-list-item>Item 5</gds-list-item>
+export const Basic: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-grouped-list label=${args.label}>
+      ${repeat(
+        args.items,
+        (item: any) => html`<gds-list-item>${item}</gds-list-item>`,
+      )}
     </gds-grouped-list>
-  </div>
-</Canvas>
+  `,
+}
 
-## Grouped list with values
-
-By default, the list items are displayed as `flex` containers with `space-between` alignment.
-
-<Canvas>
-  <div style={{ dummy: registerTransitionalStyles() }}>
+/**
+ * By default, the list items are displayed as `flex` containers with `space-between` alignment.
+ */
+export const WithValues: Story = {
+  ...DefaultParams,
+  name: 'Grouped list with values',
+  render: (args) => html`
     <gds-grouped-list label="Example with values">
       <gds-list-item>
         <div>Key 1</div>
@@ -48,13 +83,16 @@ By default, the list items are displayed as `flex` containers with `space-betwee
         <strong>Value 5</strong>
       </gds-list-item>
     </gds-grouped-list>
-  </div>
-</Canvas>
+  `,
+}
 
-## Grouped list with values and action
-
-<Canvas>
-  <div style={{ dummy: registerTransitionalStyles() }}>
+/**
+ * Elements such as links or buttons can be slotted into the list items.
+ */
+export const WithValuesAndAction: Story = {
+  ...DefaultParams,
+  name: 'Grouped list with values and action',
+  render: (args) => html`
     <gds-grouped-list label="Example with links">
       <gds-list-item>
         <div>Key 1</div>
@@ -92,43 +130,31 @@ By default, the list items are displayed as `flex` containers with `space-betwee
         </div>
       </gds-list-item>
     </gds-grouped-list>
-  </div>
-</Canvas>
+  `,
+}
 
-## Adjusting apparence
-
-The slotted elements can be styled using inline styles or CSS classes.
-
-<Canvas>
-  <div style={{ dummy: registerTransitionalStyles() }}>
+/**
+ * The slotted elements can be styled using inline styles or CSS classes.
+ */
+export const AdjustingAppearance: Story = {
+  ...DefaultParams,
+  render: (args) => html`
     <gds-grouped-list label="Example of left aligned list">
-      <gds-list-item
-        style={{
-          justifyContent: 'left',
-        }}
-      >
+      <gds-list-item style="justify-content: left">
         <div>Key 1</div>
         <strong>Value 1</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </gds-list-item>
-      <gds-list-item
-        style={{
-          justifyContent: 'left',
-        }}
-      >
+      <gds-list-item style="justify-content: left">
         <div>Key 2</div>
         <strong>Value 2</strong>
         <div>
           <a href="#">Link</a>
         </div>
       </gds-list-item>
-      <gds-list-item
-        style={{
-          justifyContent: 'left',
-        }}
-      >
+      <gds-list-item style="justify-content: left">
         <div>Key 3</div>
         <strong>Value 3</strong>
         <div>
@@ -136,41 +162,20 @@ The slotted elements can be styled using inline styles or CSS classes.
         </div>
       </gds-list-item>
     </gds-grouped-list>
-  </div>
-</Canvas>
 
-The slotted elements can be styled using inline styles or CSS classes.
-
-<Canvas>
-  <div style={{ dummy: registerTransitionalStyles() }}>
     <gds-grouped-list label="Example of vertical list">
-      <gds-list-item
-        style={{
-          flexDirection: 'column',
-          borderWidth: 0,
-        }}
-      >
+      <gds-list-item style="flex-direction: column; border-width: 0">
         <div>Key 1</div>
         <strong>Value 1</strong>
       </gds-list-item>
-      <gds-list-item
-        style={{
-          flexDirection: 'column',
-          borderWidth: 0,
-        }}
-      >
+      <gds-list-item style="flex-direction: column; border-width: 0">
         <div>Key 2</div>
         <strong>Value 2</strong>
       </gds-list-item>
-      <gds-list-item
-        style={{
-          flexDirection: 'column',
-          borderWidth: 0,
-        }}
-      >
+      <gds-list-item style="flex-direction: column; border-width: 0">
         <div>Key 3</div>
         <strong>Value 3</strong>
       </gds-list-item>
     </gds-grouped-list>
-  </div>
-</Canvas>
+  `,
+}

@@ -8,8 +8,10 @@ import 'reflect-metadata'
 
 export class GdsElement extends LitElement {
   /**
-   * The unscoped name of this element.
+   * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
+   *
    * @attribute gds-element
+   * @readonly
    */
   gdsElementName = ''
 
