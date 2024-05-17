@@ -8,6 +8,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
+import '../../components/icon'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'
