@@ -6,6 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
+import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
 import '../../components/icon'
@@ -90,14 +91,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   @state()
   private _showNextButton = false
 
-  #tid?: any
-  #resizeObserver = new ResizeObserver(() => {
-    this.#tid && clearTimeout(this.#tid)
-    this.#tid = setTimeout(() => {
-      this.#calcLayout()
-    }, 20)
-  })
-
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
   #segmentWidth = 0
@@ -111,7 +104,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-    this.#resizeObserver.observe(this)
 
     this.addEventListener('focusin', (e) => {
       if (e.target instanceof GdsSegment) {
@@ -119,11 +111,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         this.#calcLayout(true)
       }
     })
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback()
-    this.#resizeObserver.unobserve(this)
   }
 
   render() {
@@ -214,6 +201,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     this.#calcLayout()
   }
 
+  @resizeObserver()
   @watch('segMinWidth')
   private _recalculateMinWidth() {
     this.updateComplete.then(() => this.#calcLayout())

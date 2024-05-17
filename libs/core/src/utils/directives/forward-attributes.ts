@@ -2,6 +2,23 @@ import { Directive, PartInfo, PartType, directive } from 'lit/directive.js'
 import { ElementPart } from 'lit-html/directive.js'
 import { Part, nothing } from 'lit/html.js'
 
+/**
+ * A directive that forwards attributes from the host element to the target element in the component.
+ *
+ * If an attribute name starts with `gds-`, the `gds-` prefix is removed.
+ *
+ * @param filter A function that determines which attributes to forward.
+ *
+ * @example
+ * Here, all attributes that start with `gds-aria` or are named `gds-role`, will be forwarded:
+ * ```html
+ * <button
+ *    ${forwardAttributes(
+ *      (attr) => attr.name.startsWith('gds-aria') || attr.name === 'gds-role'
+ *    )}
+ * >Button</button>
+ * ```
+ */
 class ForwardAttributesDirective extends Directive {
   constructor(partInfo: PartInfo) {
     super(partInfo)
@@ -23,7 +40,7 @@ class ForwardAttributesDirective extends Directive {
     // TODO: Also remove attributes that are no longer present on the host
     Array.from(host.attributes).forEach((attr) => {
       if (filter(attr)) {
-        element.setAttribute(attr.name, attr.value)
+        element.setAttribute(attr.name.replace('gds-', ''), attr.value)
       }
     })
   }
