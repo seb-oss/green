@@ -3,6 +3,9 @@ import DocTemplate from './DocTemplate.mdx'
 import customElements from '../custom-elements.json'
 import { registerTransitionalStyles } from '../../../dist/libs/core/src/transitional-styles.js'
 
+import '../../../dist/libs/core/src/components/button/index.js'
+import '../../../dist/libs/core/src/components/grid/index.js'
+
 setCustomElementsManifest(customElements)
 
 export default {
