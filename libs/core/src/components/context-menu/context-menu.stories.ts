@@ -1,71 +1,130 @@
-import { Meta, Canvas } from '@storybook/addon-docs'
+import { html } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
+import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/context-menu/index.js'
-import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
 
-<Meta title="Components/Context Menu" />
+/**
+ * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu)
+ * &nbsp;|&nbsp;
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
+ *
+ * The context menu is presented in-context to the related data, so users don’t lose
+ * their place in the app. It appears upon interaction with the 3 dot button and
+ * displays a list of choices, one choice per line.
+ */
+const meta: Meta = {
+  title: 'Components/Context Menu',
+  component: 'gds-context-menu',
+  subcomponents: { MenuItem: 'gds-menu-item' },
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+}
 
-# Context Menu
+export default meta
+type Story = StoryObj
 
-[Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu)
-&nbsp;|&nbsp;
-[Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
+const DefaultParams: Story = {
+  parameters: {
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
+  },
+  argTypes: {
+    items: {
+      control: { type: 'array' },
+    },
+  },
+  args: {
+    items: ['Item 1', 'Item 2', 'Item 3'],
+  },
+}
 
-The context menu is presented in-context to the related data, so users don’t lose
-their place in the app. It appears upon interaction with the 3 dot button and
-displays a list of choices, one choice per line.
+export const Basic: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-context-menu
+      .buttonLabel=${args.buttonLabel}
+      button-label=${args['button-label']}
+      label=${args.label}
+      .showLabel=${args.showLabel}
+      ?show-label=${args['show-label']}
+    >
+      ${repeat(
+        args.items,
+        (item: any) => html`<gds-menu-item>${item}</gds-menu-item>`,
+      )}
+    </gds-context-menu>
+  `,
+}
 
-## Basic usage
-
-Menu items are defined by adding `gds-menu-item` elements as children of the `gds-context-menu` element. You should always provide a `button-label` so the button is accessibible. Consider to show the label aswell with `show-label` set to `true`;
-
-To handle the user's interaction, you can listen to `click` events on indiviudal menu items, or to the `gds-menu-item-click` event on the parent `gds-context-menu` element.
-
-Note that you should always supply a label for the context menu. The label should describe the context of the menu, such as "Select an action for XYZ".
-
-<Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+/**
+ * Menu items are defined by adding `gds-menu-item` elements as children of the `gds-context-menu` element.
+ * You should always provide a `button-label` so the button is accessibible. Consider to show the label as
+ * well with `show-label` set to `true`;
+ *
+ * To handle the user's interaction, you can listen to `click` events on individual menu items, or to the
+ * `gds-menu-item-click` event on the parent `gds-context-menu` element.
+ *
+ * Note that you should always supply a label for the context menu. The label should describe the context
+ * of the menu, such as "Select an action for XYZ".
+ */
+export const Usage: Story = {
+  ...DefaultParams,
+  render: (args) => html`
     Activated action: <span id="display-action"></span>
     <br />
     <gds-context-menu popover-label="Select an action" button-label="Menu">
-      <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">
+      <gds-menu-item
+        onclick="document.getElementById('display-action').innerText = this.innerText"
+      >
         Action 1
       </gds-menu-item>
-      <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">
+      <gds-menu-item
+        onclick="document.getElementById('display-action').innerText = this.innerText"
+      >
         Action 2
       </gds-menu-item>
-      <gds-menu-item onclick="document.getElementById('display-action').innerText = this.innerText">
+      <gds-menu-item
+        onclick="document.getElementById('display-action').innerText = this.innerText"
+      >
         Action 3
       </gds-menu-item>
     </gds-context-menu>
-  </div>
-</Canvas>
+  `,
+}
 
-## Customization
-
-### Show label
-
-You can show the label by setting the `show-label` attribute on the `<gds-context-menu>` element.
-
-<Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
-    <gds-context-menu label="Select an action" button-label="Menu" show-label>
+/**
+ * You can show the label by setting the `show-label` attribute on the `<gds-context-menu>` element.
+ */
+export const ShowLabel: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-context-menu
+      label="Select an action"
+      button-label="Menu"
+      show-label
+      .showLabel=${true}
+    >
       <gds-menu-item>Action 1</gds-menu-item>
       <gds-menu-item>Action 2</gds-menu-item>
       <gds-menu-item>Action 3</gds-menu-item>
     </gds-context-menu>
-  </div>
-</Canvas>
+  `,
+}
 
-### Slots
-
-The context menu can be customized using slots. The content of each menu item is a slot, and there is a slot for customizing the trigger button.
-
-<Canvas>
-  <div style={{ height: '200px', dummy: registerTransitionalStyles() }}>
+/**
+ * You can show the label by setting the `show-label` attribute on the `<gds-context-menu>` element.
+ */
+export const Slots: Story = {
+  ...DefaultParams,
+  render: (args) => html`
     <gds-context-menu>
       <div
         slot="trigger"
-        style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
+        style="display: flex; align-items: center; gap: .5rem;"
       >
         <svg
           width="24"
@@ -89,16 +148,16 @@ The context menu can be customized using slots. The content of each menu item is
       <gds-menu-item>Action 2</gds-menu-item>
       <gds-menu-item>
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            alignItems: 'center',
-            color: 'var(--color)',
-            '--color': 'var(--intent-danger-background)',
-          }}
+          style="
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            color: var(--color);
+            --color: var(--intent-danger-background);
+          "
         >
-          Delete{' '}
+          Delete&nbsp;
           <svg
             width="24"
             height="25"
@@ -114,24 +173,5 @@ The context menu can be customized using slots. The content of each menu item is
         </div>
       </gds-menu-item>
     </gds-context-menu>
-  </div>
-</Canvas>
-
-## Component API
-
-### Attributes
-
-| Attributes     | Type      | Description                                                                                                                                                                |
-| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `label`        | String    | The label for the context menu.                                                                                                                                            |
-| `button-label` | String    | The label for the trigger button.                                                                                                                                          |
-| `show-label`   | Boolean   | Shows the label inside the button.                                                                                                                                         |
-| `open`         | Boolean   | Opens the context menu.                                                                                                                                                    |
-| `placement`    | Placement | The placement of the context menu. Using floating-ui and the type can be found [here](https://github.com/floating-ui/floating-ui/blob/master/packages/utils/src/index.ts). |
-
-### Events
-
-| Events                | Description                                                                         |
-| --------------------- | ----------------------------------------------------------------------------------- |
-| `gds-menu-item-click` | Fired when a menu item is clicked. The event detail contains the clicked menu item. |
-| `gds-ui-state`        | Fired when the menu is opened or closed.                                            |
+  `,
+}
