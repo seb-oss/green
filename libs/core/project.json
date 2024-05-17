@@ -93,6 +93,7 @@
         "port": 4400,
         "configDir": "libs/core/.storybook"
       },
+      "dependsOn": ["build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
