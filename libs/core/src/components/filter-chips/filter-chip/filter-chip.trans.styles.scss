@@ -4,11 +4,6 @@
   @layer _base, _overrides;
 
   @layer _base {
-    :host([selected]) .btn::part(_button) {
-      background-color: var(--grey-1000);
-      color: var(--grey-100);
-    }
-
     .btn-p {
       padding: 0 0.75rem;
     }
