@@ -8,6 +8,10 @@ const config: StorybookConfig = {
     name: '@storybook/web-components-webpack5',
     options: {},
   },
+  previewHead: (head) => `
+    <script>globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true</script>
+    ${head}
+  `,
 }
 
 export default config
