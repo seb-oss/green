@@ -6,7 +6,7 @@ import '../../../../../dist/libs/core/src/components/segmented-control/index.js'
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/segmented-control)
  * &nbsp;|&nbsp;
- * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-segmentedcontrol)
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-segmented-control)
  *
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  */
