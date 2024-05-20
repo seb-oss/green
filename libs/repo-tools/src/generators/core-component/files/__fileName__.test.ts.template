@@ -1,0 +1,48 @@
+import { expect } from '@esm-bundle/chai'
+import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import { sendKeys, sendMouse } from '@web/test-runner-commands'
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import sinon from 'sinon'
+
+import '@sebgroup/green-core/components/<%= toKebabCase(name) %>'
+import type { Gds<%= toPascalCase(name) %> } from '@sebgroup/green-core/components/<%= toKebabCase(name) %>'
+
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core/scoping'
+
+const html = htmlTemplateTagFactory(testingHtml)
+
+describe('<gds-<%= toKebabCase(name) %>>', () => {
+  it('is a GdsElement', async () => {
+    const el = await fixture(
+      html`<gds-<%= toKebabCase(name) %>></gds-<%= toKebabCase(name) %>>`,
+    )
+    expect(el.getAttribute('gds-element')).to.equal('gds-<%= toKebabCase(name) %>')
+  })
+
+  describe('Accessibility', () => {
+    it('is accessible', async () => {
+      const el = await fixture<Gds<%= toPascalCase(name) %>>(
+        html`<gds-<%= toKebabCase(name) %>></gds-<%= toKebabCase(name) %>>`,
+      )
+      await el.updateComplete
+      await expect(el).to.be.accessible()
+    })
+  })
+
+  describe('API', () => {
+    // Add actual API tests here!
+    it('should have API tests', async () => {
+      expect(false).to.be.true
+    })
+  })
+
+  describe('Interactions', () => {
+    // Add actual interaction tests here! (things like keyboard nav, clicking on things behave as expected, etc)
+    it('should have Interaction tests', async () => {
+      expect(false).to.be.true
+    })
+  })
+})

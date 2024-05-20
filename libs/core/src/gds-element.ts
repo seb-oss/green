@@ -1,3 +1,4 @@
+import { state } from 'lit/decorators.js'
 import { DynamicStylesController } from './dynamic-styles'
 import { getUnscopedTagName } from './scoping'
 import { LitElement } from 'lit'
@@ -12,6 +13,7 @@ export class GdsElement extends LitElement {
    * Whether the element is using transitional styles.
    * @internal
    */
+  @state()
   _isUsingTransitionalStyles = false
 
   _dynamicStylesController: DynamicStylesController

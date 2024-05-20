@@ -110,6 +110,14 @@ export class GdsIcon extends GdsElement {
           <line x1="12" y1="9" x2="12" y2="13" />
           <path x1="12" y1="17" x2="12.01" y2="17" />
         </symbol>
+        <symbol id="checkmark">
+          <path
+            d="M2.75 15.0938L9 20.25L21.25 3.75"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </symbol>
       </svg>
       <svg viewBox="0 0 24 24">
         <use href="#${name}"></use>

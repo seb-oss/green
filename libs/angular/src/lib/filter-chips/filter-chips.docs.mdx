@@ -1,0 +1,70 @@
+import { Story, Canvas } from '@storybook/addon-docs'
+
+# Filter Chips
+
+[Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/filter-chips)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/filter-chip)
+
+## Use Web component in Angular
+
+This is a web component that comes from the `Green Core` library. For more examples and customization options, please refer to the [Green Core Storybook](https://sebgroup.github.io/green/latest/core/?path=/story/components-filter-chips--page).
+
+Angular has support for using web components directly in the template. To use this web component in Angular, you need to do the following:
+
+Add the `CUSTOM_ELEMENTS_SCHEMA` in the module that uses this component.
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/common'
+
+@NgModule({
+    // Add the NggCoreWrapperModule to the `imports` array
+    imports: [NggCoreWrapperModule],
+    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+Import dependencies in the Angular component that uses it.
+
+```ts
+import '@sebgroup/green-core/components/filter-chips/index.js'
+
+// if you need to interact with the component through the DOM, you can also import the class type like this:
+// import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list/index.js'
+
+// Transitional styles will make the component get 2016 design
+import * as FilterChipTransStyles from '@sebgroup/green-core/components/filter-chips/filter-chips.trans.styles.js'
+// Call this fuction to register the transitional styles
+FilterChipTransStyles.register()
+// This will load 2016 styles for all instances of Grouped List in the current document.
+```
+
+Use the web component in your template with the `*nggCoreElement` directive.
+
+```html
+<gds-filter-chips
+  *nggCoreElement
+  value="top-news"
+  label="Select a category to filter results on"
+  (change)="onFilterChange($event)"
+>
+  <gds-filter-chip *nggCoreElement value="all">All</gds-filter-chip>
+  <gds-filter-chip *nggCoreElement value="top-news">Top news</gds-filter-chip>
+  <gds-filter-chip *nggCoreElement value="division">Division</gds-filter-chip>
+  <gds-filter-chip *nggCoreElement value="global">Global</gds-filter-chip>
+  <gds-filter-chip *nggCoreElement value="country">Country</gds-filter-chip>
+  <gds-filter-chip *nggCoreElement value="lcfi">
+    Large Corporate & Financial Institutions
+  </gds-filter-chip>
+</gds-filter-chips>
+```
+
+## Examples
+
+### Default
+
+<Canvas>
+  <Story id="components-filter-chips--default" />
+</Canvas>
