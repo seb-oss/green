@@ -1,4 +1,4 @@
-import { Canvas, Story, Meta } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
 import { NggSliderComponent } from './slider.component'
 import * as Stories from './slider.stories.ts'
 
@@ -39,26 +39,30 @@ export class AppModule {}
 
 ### Inputs
 
+<Markdown>{`
 | Input         | Type      | Description                                                                           |
 | :------------ | :-------- | :------------------------------------------------------------------------------------ |
-| name?         | `string`  | Name of the input element                                                             |
-| min           | `number`  | The greatest value in the range of permitted values. Default is 0                     |
-| max           | `number`  | The lowest value in the range of permitted values. Default is 100                     |
-| step          | `number`  | The number that specifies the granularity that the value must adhere to. Default is 1 |
-| label?        | `string`  | Label for the input element                                                           |
-| instruction?  | `string`  | Input element instruction                                                             |
-| placeholder?  | `string`  | Input element placeholder                                                             |
-| disabled      | `boolean` | Whether or not the input is disabled. Default is false                                |
-| hasTextbox    | `boolean` | Whether or not should have input textbox along with the slider. Default is false      |
-| unitLabel     | `string`  | Set this to a string, for example `kr`, to show a unit label next to the input field  |
-| errorMessage? | `string`  | Error message for invalid inputs                                                      |
+| name?         | \`string\`  | Name of the input element                                                             |
+| min           | \`number\`  | The greatest value in the range of permitted values. Default is 0                     |
+| max           | \`number\`  | The lowest value in the range of permitted values. Default is 100                     |
+| step          | \`number\`  | The number that specifies the granularity that the value must adhere to. Default is 1 |
+| label?        | \`string\`  | Label for the input element                                                           |
+| instruction?  | \`string\`  | Input element instruction                                                             |
+| placeholder?  | \`string\`  | Input element placeholder                                                             |
+| disabled      | \`boolean\` | Whether or not the input is disabled. Default is false                                |
+| hasTextbox    | \`boolean\` | Whether or not should have input textbox along with the slider. Default is false      |
+| unitLabel     | \`string\`  | Set this to a string, for example \`kr\`, to show a unit label next to the input field  |
+| errorMessage? | \`string\`  | Error message for invalid inputs                                                      |
+`}</Markdown>
 
 ### Outputs
 
+<Markdown>{`
 | Event        | Description                                                            |
 | :----------- | :--------------------------------------------------------------------- |
 | sliderChange | Event emitted with the slider value when slider value has been changed |
-| sliderTouch  | Event emitted with `true` when slider has been focused                 |
+| sliderTouch  | Event emitted with \`true\` when slider has been focused                 |
+`}</Markdown>
 
 ## Examples
 

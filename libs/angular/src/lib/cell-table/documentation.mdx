@@ -1,4 +1,4 @@
-import { Canvas, Story, Meta } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
 import { NggCellTableComponent } from './cell-table.component'
 import * as Stories from './cell-table.stories.ts'
 
@@ -39,21 +39,25 @@ will be the only focusable element that can be used to trigger the click action,
 
 ## Inputs
 
+<Markdown>{`
 | Input           | Type                         | Description                                                                                   |
 | :-------------- | :--------------------------- | :-------------------------------------------------------------------------------------------- |
-| headerList      | `Array<TableHeaderListItem>` | An array of table header configurations.                                                      |
-| rows            | `Array<TableRow>`            | An array of data rows.                                                                        |
-| className       | `string`                     | Custom CSS class name for styling.                                                            |
-| minWidth        | `number`                     | Cell minimum width to ensure consistent column widths.                                        |
-| overflowReverse | `boolean`                    | Make the most left element wrap.                                                              |
-| clickableRows   | `boolean`                    | Set to true if rows should emit `rowClicked` event on click. Will add a chevron to the right. |
-| clickLabel      | `string`                     | The label for the chevron button.                                                             |
+| headerList      | \`Array<TableHeaderListItem>\` | An array of table header configurations.                                                      |
+| rows            | \`Array<TableRow>\`            | An array of data rows.                                                                        |
+| className       | \`string\`                     | Custom CSS class name for styling.                                                            |
+| minWidth        | \`number\`                     | Cell minimum width to ensure consistent column widths.                                        |
+| overflowReverse | \`boolean\`                    | Make the most left element wrap.                                                              |
+| clickableRows   | \`boolean\`                    | Set to true if rows should emit \`rowClicked\` event on click. Will add a chevron to the right. |
+| clickLabel      | \`string\`                     | The label for the chevron button.                                                             |
+`}</Markdown>
 
 ## Outputs
 
+<Markdown>{`
 | Output     | Description                                                            |
 | :--------- | :--------------------------------------------------------------------- |
 | rowClicked | Event emitted when a row is clicked, providing the clicked row's data. |
+`}</Markdown>
 
 ## Models
 

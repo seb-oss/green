@@ -21,7 +21,7 @@ export default {
   ],
   argTypes: {
     groups: {
-      name: 'items',
+      name: 'groups',
       description: 'Array of groups of items to be displayed in the checklist.',
       control: {
         type: 'object',

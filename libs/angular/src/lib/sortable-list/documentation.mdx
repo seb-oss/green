@@ -1,4 +1,4 @@
-import { Canvas, Story, Meta } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, ArgTypes, Markdown } from '@storybook/addon-docs'
 import * as Stories from './sortable-list.stories.ts'
 
 <Meta of={Stories} />
@@ -35,14 +35,7 @@ export class AppModule {}
 
 ### Inputs
 
-| Input                   | Type                  | Description                                           | Default |
-| :---------------------- | :-------------------- | :---------------------------------------------------- | :------ |
-| groups                  | `SortableListGroup[]` | Array of groups of items to be displayed in the list. | `[]`    |
-| shouldDisplayCheckboxes | `boolean`             | If true, checkboxes are displayed next to each item.  | `false` |
-| isReadOnly              | `boolean`             | If true, items cannot be reordered or selected.       | `false` |
-| isDraggable             | `boolean`             | If true, allows items to be reordered.                | `true`  |
-| description             | `string`              | Description text for the sortable list.               | `''`    |
-| suffixTemplate          | `TemplateRef<any>`    | Custom template for displaying suffixes.              | `null`  |
+<ArgTypes />
 
 ### Event Outputs
 
@@ -75,26 +68,30 @@ These events can be used to sync the list/checklist's state with external data s
 
 ### `SortableListGroup` Interface
 
+<Markdown>{`
 | Property      | Type                 | Description                                    | Required |
 | ------------- | -------------------- | ---------------------------------------------- | -------- |
-| `title`       | `string`             | Title displayed above the group                | Yes      |
-| `description` | `string`             | Optional description displayed below the title | No       |
-| `items`       | `SortableListItem[]` | An array of SortableListItem                   | No       |
+| \`title\`       | \`string\`             | Title displayed above the group                | Yes      |
+| \`description\` | \`string\`             | Optional description displayed below the title | No       |
+| \`items\`       | \`SortableListItem[]\` | An array of SortableListItem                   | No       |
+`}</Markdown>
 
 ### `SortableListItem` Interface
 
 Each item is represented by an object conforming to the `SortableListItem` interface.
 
+<Markdown>{`
 | Property          | Type      | Description                                                          | Required |
 | ----------------- | --------- | -------------------------------------------------------------------- | -------- |
-| `id`              | `any`     | Unique identifier for the checklist item.                            | Yes      |
-| `name`            | `string`  | Display name of the checklist item.                                  | Yes      |
-| `description`     | `string`  | Optional description or additional details for the item.             | No       |
-| `selected`        | `boolean` | Indicates whether the item is selected.                              | No       |
-| `hasCustomSuffix` | `boolean` | Determines if the item should display a custom suffix (if provided). | No       |
-
-The `id` property is crucial for uniquely identifying each item, especially during drag-and-drop operations.
-The `selected` property is used to track whether an item is selected if the `shouldDisplayCheckboxes` is true.
+| \`id\`              | \`any\`     | Unique identifier for the checklist item.                            | Yes      |
+| \`name\`            | \`string\`  | Display name of the checklist item.                                  | Yes      |
+| \`description\`     | \`string\`  | Optional description or additional details for the item.             | No       |
+| \`selected\`        | \`boolean\` | Indicates whether the item is selected.                              | No       |
+| \`hasCustomSuffix\` | \`boolean\` | Determines if the item should display a custom suffix (if provided). | No       |
+`}</Markdown>
+The `id` property is crucial for uniquely identifying each item, especially during
+drag-and-drop operations. The `selected` property is used to track whether an item
+is selected if the `shouldDisplayCheckboxes` is true.
 
 ## Usage
 
@@ -125,15 +122,11 @@ To use the `NggSortableListComponent`, pass an array of objects conforming to th
 
 ### Default
 
-<Canvas>
-  <Story id="components-sortablelist--default" />
-</Canvas>
+<Canvas of={Stories.Default} />
 
 ### With Custom Template
 
-<Canvas>
-  <Story id="components-sortablelist--with-custom-template" />
-</Canvas>
+<Canvas of={Stories.WithCustomTemplate} />
 
 The provided template will only be displayed for items marked with `hasCustomSuffix`.
 
@@ -153,28 +146,20 @@ The provided template will only be displayed for items marked with `hasCustomSuf
 
 Showcases how the component handles separate lists for checked and unchecked items. Great for optionally adding agenda points, filtering with ordering.
 
-<Canvas>
-  <Story id="components-sortablelist--default-sortable-checklist" />
-</Canvas>
+<Canvas of={Stories.DefaultSortableChecklist} />
 
 ### Read-Only Mode
 
 Displays the component in a read-only state where items cannot be selected or reordered.
 
-<Canvas>
-  <Story id="components-sortablelist--read-only" />
-</Canvas>
+<Canvas of={Stories.ReadOnly} />
 
 ### Disable Reordering and Hide Drag Handle Only
 
-<Canvas>
-  <Story id="components-sortablelist--not-draggable" />
-</Canvas>
+<Canvas of={Stories.NotDraggable} />
 
 ### Minimal
 
 A minimal version of the Sortable Checklist without drag handles, descriptions, and custom suffixes.
 
-<Canvas>
-  <Story id="components-sortablelist--minimal" />
-</Canvas>
+<Canvas of={Stories.Minimal} />
