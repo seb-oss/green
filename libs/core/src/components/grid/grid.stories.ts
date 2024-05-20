@@ -129,7 +129,7 @@ export const AllBreakpoints: Story = {
  *
  * > The `auto-columns` attribute, used with CSS grid layout, calculates the maximum column width by subtracting the total gap width from the total available width and dividing by the number of columns. This is represented by the formula `MaxColumnWidth = (W - ((C - 1) * G)) / C`, where `W` is the total available width, `C` is the number of columns, and `G` is the width of a single gap. This calculated width is then used to set each column's width, with a minimum width of the `auto-columns` value.
  *
- * ## Example: Auto Columns without other attributes
+ * #### Example: Auto Columns without other attributes
  *
  * This example has the fluid attribute and it will adapt the content automatically based on the available width and min inline size.
  * The `auto-columns` attribute is set to `240` which will make the columns to be `240px` no matter the screen/container size.
