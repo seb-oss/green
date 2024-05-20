@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@sebgroup/extract": ["libs/extract/src/index.ts"],
-      "@sebgroup/fonts": ["libs/fonts/src/"],
-      "@sebgroup/fonts/*": ["libs/fonts/src/*"],
+      "@sebgroup/fonts": ["libs/fonts/"],
+      "@sebgroup/fonts/*": ["libs/fonts/*"],
       "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
       "@sebgroup/green-angular/*": ["libs/angular/*"],
       "@sebgroup/green-angular-charts": ["libs/angular-charts/src/index.ts"],
