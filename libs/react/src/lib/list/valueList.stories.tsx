@@ -1,8 +1,11 @@
 import ValueList from './valueList'
 
-export default {
+const meta: Meta = {
+  title: 'Components/Lists/ValueList',
   component: ValueList,
 }
+
+export default meta
 
 export const Primary = {
   render: (props) => (
