@@ -210,11 +210,16 @@ export class GdsCalendar extends GdsElement {
                         >
                           <div class="date-wrapper">
                             <span>${day.getDate()}</span>
-                            <span
-                              class="indicator ${classMap({
-                                customDate: Boolean(isCustomDate),
-                              })}"
-                            ></span>
+                            ${when(
+                              this.customDates,
+                              () =>
+                                html`<span
+                                  class="indicator ${classMap({
+                                    customDate: Boolean(isCustomDate),
+                                  })}"
+                                  style="color: ${this.customDates?.color}"
+                                ></span>`,
+                            )}
                           </div>
                         </td>
                       `

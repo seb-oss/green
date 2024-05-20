@@ -177,10 +177,6 @@ $weekend-background: $background;
             display: flex;
             flex-direction: column;
 
-            .indicator{
-                display: none;
-              }
-
               &.customDate{
                 display: block;
                 width: 9px;
