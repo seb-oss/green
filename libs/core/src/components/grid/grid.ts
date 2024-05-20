@@ -28,7 +28,6 @@ type CSSProperty = {
  * @status beta
  *
  */
-
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends GdsElement {
   static styles = [tokens, GridCSS]
@@ -39,7 +38,7 @@ export class GdsGrid extends GdsElement {
   }
 
   /**
-   * @property {string} columns - The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.
+   * The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.
    * @example
    * ```html
    * <gds-grid columns="2"></gds-grid> <!-- applies to all breakpoints -->
@@ -50,7 +49,7 @@ export class GdsGrid extends GdsElement {
   columns?: string
 
   /**
-   * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid gap="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -61,7 +60,7 @@ export class GdsGrid extends GdsElement {
   gap?: GridSizes
 
   /**
-   * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid row-gap="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -72,7 +71,7 @@ export class GdsGrid extends GdsElement {
   rowGap?: GridSizes
 
   /**
-   * @property {string} padding - Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid padding="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -83,7 +82,7 @@ export class GdsGrid extends GdsElement {
   padding?: GridSizes
 
   /**
-   * @property {string} auto-columns - Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
+   * Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
    * @example
    * ```html
    * <gds-grid auto-columns="200"></gds-grid> <!-- applies to all breakpoints -->
