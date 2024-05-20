@@ -1,5 +1,4 @@
-import Documentation from './documentation.mdx'
-import { moduleMetadata, Story, Meta } from '@storybook/angular'
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { NggModalModule } from './modal.module'
 import { NggModalComponent } from './modal.component'
 
@@ -12,9 +11,6 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: [
       'component-dialogue',
       'component-slideout',
@@ -24,7 +20,7 @@ export default {
   },
 } as Meta<NggModalComponent>
 
-const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
+const Template: StoryFn<NggModalComponent> = (args: NggModalComponent) => {
   const isOpen = true
   return {
     template: `
@@ -66,7 +62,9 @@ Takeover.args = {
   trapFocus: false,
 }
 
-const CustomTemplate: Story<NggModalComponent> = (args: NggModalComponent) => {
+const CustomTemplate: StoryFn<NggModalComponent> = (
+  args: NggModalComponent,
+) => {
   const isOpen = true
   return {
     template: `

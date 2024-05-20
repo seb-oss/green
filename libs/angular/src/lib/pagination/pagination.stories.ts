@@ -1,5 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular'
-import Documentation from './documentation.mdx'
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular'
 import { NggPaginationComponent } from './pagination.component'
 import { NggPaginationModule } from './pagination.module'
 
@@ -12,9 +11,6 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-pagination'],
   },
   argTypes: {
@@ -25,7 +21,7 @@ export default {
   },
 } as Meta<NggPaginationComponent>
 
-const Template: Story<NggPaginationComponent> = (
+const Template: StoryFn<NggPaginationComponent> = (
   args: NggPaginationComponent,
 ) => {
   return {

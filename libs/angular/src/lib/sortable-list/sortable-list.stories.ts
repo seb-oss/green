@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import {
   SortableListItem,
   NggSortableListComponent,
@@ -6,15 +6,11 @@ import {
 import { CommonModule } from '@angular/common'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { DragDropModule } from '@angular/cdk/drag-drop'
-import Documentation from './documentation.mdx'
 
 export default {
   title: 'Components/Sortable list',
   component: NggSortableListComponent,
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['sortable-list'],
   },
   decorators: [
@@ -88,7 +84,7 @@ export default {
 
 const createTemplate = (
   suffixTemplate = false,
-): Story<NggSortableListComponent> => {
+): StoryFn<NggSortableListComponent> => {
   return (args: NggSortableListComponent) => ({
     template: `
       ${

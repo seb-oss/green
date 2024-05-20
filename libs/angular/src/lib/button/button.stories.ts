@@ -1,7 +1,6 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular'
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular'
 import { NggButtonComponent } from './button.component'
 import { NggButtonModule } from './button.module'
-import Documentation from './documentation.mdx'
 
 export default {
   title: 'Components/Form/Button',
@@ -12,14 +11,11 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-button'],
   },
 } as Meta<NggButtonComponent>
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return {
     template: `
     <button ngg-button>Button</button>
@@ -29,7 +25,7 @@ const Template: Story = () => {
 
 export const Default = Template.bind({})
 
-const TemplateTypes: Story = () => {
+const TemplateTypes: StoryFn = () => {
   return {
     template: `
     <div class="horizontal">
@@ -42,7 +38,7 @@ const TemplateTypes: Story = () => {
 }
 export const Types = TemplateTypes.bind({})
 
-const TemplateVariants: Story = () => {
+const TemplateVariants: StoryFn = () => {
   return {
     template: `
     <div class="horizontal">
@@ -55,7 +51,7 @@ const TemplateVariants: Story = () => {
 }
 export const Variants = TemplateVariants.bind({})
 
-const TemplateSizes: Story = () => {
+const TemplateSizes: StoryFn = () => {
   return {
     template: `
     <div class="horizontal">
