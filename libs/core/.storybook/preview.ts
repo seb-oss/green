@@ -7,6 +7,7 @@ import '!style-loader!css-loader!postcss-loader!sass-loader!./fonts.scss'
 
 import '../../../dist/libs/core/src/components/button/index.js'
 import '../../../dist/libs/core/src/components/grid/index.js'
+import { html } from 'lit'
 
 setCustomElementsManifest(customElements)
 
@@ -14,8 +15,13 @@ export default {
   parameters: {
     docs: {
       page: DocTemplate,
+      transformSource: (source: any) => {
+        const regexRes = source.match(/<gds-theme>([\s\S]*?)<\/gds-theme>/)
+        return regexRes ? regexRes[1] : source
+      },
     },
   },
+  decorators: [(storyFn: any) => html`<gds-theme>${storyFn()}</gds-theme>`],
 }
 
 class TransitionalStylesToggle extends HTMLElement {
