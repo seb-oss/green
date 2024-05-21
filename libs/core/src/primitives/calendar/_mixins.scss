@@ -177,7 +177,11 @@ $weekend-background: $background;
             display: flex;
             flex-direction: column;
 
-              &.customDate{
+              .hidedefaultDate{
+                display: none;
+              }
+
+              .customDate{
                 display: block;
                 width: 9px;
                 height: 9px;
