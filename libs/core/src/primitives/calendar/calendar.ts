@@ -176,7 +176,11 @@ export class GdsCalendar extends GdsElement {
 
                     const isCustomDate =
                       this.customDates &&
-                      this.customDates.dates.some((d) => isSameDay(d, day))
+                      this.customDates.dates.some((d) => {
+                        console.log(d)
+                        console.log(day)
+                        return isSameDay(d, day)
+                      })
 
                     const isDisabled = isCustomDate
                       ? false
@@ -188,6 +192,7 @@ export class GdsCalendar extends GdsElement {
                     return html`
                       <td
                         class="${classMap({
+                          'custom-date': Boolean(isCustomDate),
                           disabled: Boolean(isDisabled),
                           today: isSameDay(currentDate, day),
                         })}"
@@ -200,24 +205,22 @@ export class GdsCalendar extends GdsElement {
                           isDisabled ? null : this.#setSelectedDate(day)}
                         id="dateCell-${day.getDate()}"
                       >
-                        <div class="date-wrapper">
-                          <span
-                            style="color: ${isCustomDate
-                              ? this.customDates?.color
-                              : ''}"
-                            >${day.getDate()}</span
-                          >
-                          ${when(
-                            this.customDates,
-                            () =>
-                              html` <span
-                                class="indicator ${classMap({
-                                  customDate: Boolean(isCustomDate),
-                                })}"
-                                style="background: ${this.customDates?.color}"
-                              ></span>`,
-                          )}
-                        </div>
+                        <span
+                          style="color: ${isCustomDate
+                            ? this.customDates?.color
+                            : ''}"
+                          >${day.getDate()}</span
+                        >
+
+                        ${when(
+                          isCustomDate,
+                          () =>
+                            html`<span
+                              class="indicator"
+                              style="background-color: ${this.customDates
+                                ?.color}"
+                            ></span>`,
+                        )}
                       </td>
                     `
                   })}
