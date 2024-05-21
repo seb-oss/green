@@ -36,7 +36,7 @@
             "output": "./icons"
           }
         ],
-        "webpackConfig": "webpack.config.js"
+        "webpackConfig": "./webpack.config.js"
       }
     },
     "build-bundle-src": {

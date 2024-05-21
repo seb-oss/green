@@ -142,6 +142,7 @@
     "@nx/web": "16.8.1",
     "@nx/webpack": "16.8.1",
     "@nx/workspace": "16.8.1",
+    "raw-loader": "^4.0.2",
     "@nxkit/style-dictionary": "^3.0.2",
     "@open-wc/testing": "^3.1.8",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",

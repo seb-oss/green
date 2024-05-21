@@ -1,14 +1,16 @@
-import { unsafeCSS, html, css, LitElement } from 'lit'
+import { html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import styles from './stem.styles.scss'
+import IconCSS from './icon.style.css'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 @customElement('gds-icon')
 export class GdsIcon extends LitElement {
-  static styles = [
-    css`
-      ${unsafeCSS(styles)}
-    `,
-  ]
+  static styles = [IconCSS]
+
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
 
   @property({ type: String }) name = ''
   svgContent = ''
@@ -22,10 +24,17 @@ export class GdsIcon extends LitElement {
       }
 
       try {
-        const module = await import(`../icons/${name}.svg`)
-        this.svgContent = module.default.toString()
+        const module = await import(`!!raw-loader!../icons/${name}.svg?raw`)
+
+        /* 
+        Might use this method 
+
+        const response = await fetch(`../icons/${name}.svg`);
+        this.svgContent = await response.text();
+        */
+
+        this.svgContent = module.default
         console.log(`SVG imported: ${name}`)
-        console.log(this.svgContent)
         this.requestUpdate() // Request an update after the SVG has loaded
       } catch (error) {
         console.log(`Failed to import SVG: ${error}`)
@@ -34,6 +43,6 @@ export class GdsIcon extends LitElement {
   }
 
   render() {
-    return html`${this.svgContent}`
+    return html`${unsafeHTML(this.svgContent)}`
   }
 }
