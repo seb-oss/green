@@ -33,7 +33,7 @@
           {
             "glob": "**/*.svg",
             "input": "libs/core/src/components/icon/assets",
-            "output": "./icons"
+            "output": "assets/icons"
           }
         ],
         "webpackConfig": "./webpack.config.js"
