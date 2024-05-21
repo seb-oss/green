@@ -124,10 +124,6 @@ export class GdsCalendar extends GdsElement {
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-calendar')
@@ -142,73 +138,69 @@ export class GdsCalendar extends GdsElement {
 
   render() {
     const currentDate = new Date()
+    
+    return html`<table>
+      <thead>
+        <tr>
+          ${when(this.showWeekNumbers, () => html`<th></th>`)}
+          <th>${msg('Mon')}</th>
+          <th>${msg('Tue')}</th>
+          <th>${msg('Wed')}</th>
+          <th>${msg('Thu')}</th>
+          <th>${msg('Fri')}</th>
+          <th>${msg('Sat')}</th>
+          <th>${msg('Sun')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${renderMonthGridView(
+          this.focusedDate,
+          (weeks) => html`
+            ${weeks.map(
+              (week) => html`
+                <tr>
+                  ${when(
+                    this.showWeekNumbers,
+                    () =>
+                      html`<td class="week-number">
+                        ${getWeek(week.days[0])}
+                      </td>`,
+                  )}
+                  ${week.days.map((day) => {
+                    const isOutsideCurrentMonth =
+                      !isSameMonth(this.focusedDate, day) ||
+                      day < this.min ||
+                      day > this.max
 
-    return html`${this._tStyles}
-      <table>
-        <thead>
-          <tr>
-            ${when(this.showWeekNumbers, () => html`<th></th>`)}
-            <th>${msg('Mon')}</th>
-            <th>${msg('Tue')}</th>
-            <th>${msg('Wed')}</th>
-            <th>${msg('Thu')}</th>
-            <th>${msg('Fri')}</th>
-            <th>${msg('Sat')}</th>
-            <th>${msg('Sun')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${renderMonthGridView(
-            this.focusedDate,
-            (weeks) => html`
-              ${weeks.map(
-                (week) => html`
-                  <tr>
-                    ${when(
-                      this.showWeekNumbers,
-                      () =>
-                        html`<td class="week-number">
-                          ${getWeek(week.days[0])}
-                        </td>`,
-                    )}
-                    ${week.days.map((day) => {
-                      const isOutsideCurrentMonth =
-                        !isSameMonth(this.focusedDate, day) ||
-                        day < this.min ||
-                        day > this.max
-
-                      const isWeekend = day.getDay() === 0 || day.getDay() === 6
-
-                      const isCustomDate =
+                    const isWeekend = day.getDay() === 0 || day.getDay() === 6
+                    
+                    const isCustomDate =
                         this.customDates &&
                         this.customDates.dates.some((d) => isSameDay(d, day))
 
-                      const isDisabled = isCustomDate
+                    const isDisabled = isCustomDate
                         ? false
                         : isOutsideCurrentMonth ||
                           (this.disabledWeekends && isWeekend) ||
                           (this.disabledDates &&
                             this.disabledDates.some((d) => isSameDay(d, day)))
 
-                      return html`
-                        <td
-                          class="${classMap({
-                            disabled: Boolean(isDisabled),
-                            today: isSameDay(currentDate, day),
-                            customDate: Boolean(isCustomDate),
-                          })}"
-                          ?disabled=${isDisabled}
-                          tabindex="${isSameDay(this.focusedDate, day)
-                            ? 0
-                            : -1}"
-                          aria-selected="${this.value &&
-                          isSameDay(this.value, day)}"
-                          aria-label="${day.toDateString()}"
-                          @click=${() =>
-                            isDisabled ? null : this.#setSelectedDate(day)}
-                          id="dateCell-${day.getDate()}"
-                        >
-                          <div class="date-wrapper">
+                    return html`
+                      <td
+                        class="${classMap({
+                          disabled: Boolean(isDisabled),
+                          today: isSameDay(currentDate, day),
+                        })}"
+                        ?disabled=${isDisabled}
+                        tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
+                        aria-selected="${this.value &&
+                        isSameDay(this.value, day)}"
+                        aria-label="${day.toDateString()}"
+                        @click=${() =>
+                          isDisabled ? null : this.#setSelectedDate(day)}
+                        id="dateCell-${day.getDate()}"
+                      >
+                        <div class="date-wrapper">
                             <span>${day.getDate()}</span>
                             ${when(
                               this.customDates,
@@ -221,16 +213,16 @@ export class GdsCalendar extends GdsElement {
                                 ></span>`,
                             )}
                           </div>
-                        </td>
-                      `
-                    })}
-                  </tr>
-                `,
-              )}
-            `,
-          )}
-        </tbody>
-      </table>`
+                      </td>
+                    `
+                  })}
+                </tr>
+              `,
+            )}
+          `,
+        )}
+      </tbody>
+    </table>`
   }
 
   #setSelectedDate(date: Date) {

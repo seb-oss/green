@@ -22,6 +22,10 @@ A segmented control is a group of 2-5 buttons that lets the user switch views or
 
 <button onClick={() => location.reload()}>Show 2023 styles</button>
 
+## Usage
+
+This component works like many other types of input controls. A `value` property holds the currently selcted value/values and a `change` event is emitted when the value changes.
+
 <Canvas>
   <div>
     <gds-segmented-control
@@ -34,7 +38,7 @@ A segmented control is a group of 2-5 buttons that lets the user switch views or
       <gds-segment value="4">Fourth</gds-segment>
       <gds-segment value="5">Fifth</gds-segment>
     </gds-segmented-control>
-    <div style={{ 'margin-top': '1rem' }}>
+    <div style={{ marginTop: '1rem' }}>
       Selected: <span id="sel">2</span>
     </div>
   </div>

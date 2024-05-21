@@ -12,6 +12,10 @@ import { GdsFormControlElement } from '../../components/form-control'
 import { gdsCustomElement, html, getScopedTagName } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
+import {
+  dateArrayConverter,
+  dateConverter,
+} from '../../utils/helpers/attribute-converters'
 
 import '../../primitives/popover'
 import type { GdsPopover } from '../../primitives/popover'
@@ -32,24 +36,6 @@ type DatePart = 'year' | 'month' | 'day'
 type DateFormatLayout = {
   delimiter: string
   layout: { token: 'y' | 'm' | 'd'; name: DatePart }[]
-}
-
-const dateConverter = {
-  fromAttribute(value: string) {
-    return new Date(value)
-  },
-  toAttribute(value: Date) {
-    return value.toISOString()
-  },
-}
-
-const dateArrayConverter = {
-  fromAttribute(value: string) {
-    return value.split(',').map((d) => new Date(d.trim()))
-  },
-  toAttribute(value: Date[]) {
-    return JSON.stringify(value.map((d) => d.toISOString()))
-  },
 }
 
 /**
@@ -207,10 +193,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @query('.input')
   private _elInput!: HTMLDivElement
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   #valueOnOpen?: Date
 
   connectedCallback(): void {
@@ -219,8 +201,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   render() {
-    return html`${this._tStyles}
-      ${when(
+    return html`${when(
         this.label && !this.hideLabel,
         () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}

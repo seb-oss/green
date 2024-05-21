@@ -6,6 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
+import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
 
@@ -71,10 +72,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     return this._elSlot ? (this._elSlot.assignedElements() as GdsSegment[]) : []
   }
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   @query('slot')
   private _elSlot!: HTMLSlotElement
 
@@ -93,14 +90,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   @state()
   private _showNextButton = false
 
-  #tid?: any
-  #resizeObserver = new ResizeObserver(() => {
-    this.#tid && clearTimeout(this.#tid)
-    this.#tid = setTimeout(() => {
-      this.#calcLayout()
-    }, 20)
-  })
-
   #firstVisibleIndex = 0
   #calculatedSegmentWidth = 0
   #segmentWidth = 0
@@ -114,7 +103,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-    this.#resizeObserver.observe(this)
 
     this.addEventListener('focusin', (e) => {
       if (e.target instanceof GdsSegment) {
@@ -124,14 +112,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     })
   }
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback()
-    this.#resizeObserver.unobserve(this)
-  }
-
   render() {
-    return html`${this._tStyles}
-      ${when(
+    return html`${when(
         this._showPrevButton,
         () =>
           html`<button
@@ -218,6 +200,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     this.#calcLayout()
   }
 
+  @resizeObserver()
   @watch('segMinWidth')
   private _recalculateMinWidth() {
     this.updateComplete.then(() => this.#calcLayout())

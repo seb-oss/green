@@ -158,20 +158,6 @@ describe('<gds-button>', () => {
       expect(el.rank).to.equal('tertiary')
     })
 
-    it('should not accept custom HTML', async () => {
-      const el = await fixture<GdsButton>(
-        html`<gds-button>
-          <main>Not visible</main>
-          Visible
-        </gds-button>`,
-      )
-
-      const main = el.shadowRoot?.querySelector('main')
-
-      expect(main).to.not.exist
-      expect(el.innerText).to.equal('Visible')
-    })
-
     it('should render properly with gds-icon', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button><gds-icon name="arrow"></gds-icon></gds-button>`,

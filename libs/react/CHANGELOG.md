@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.6.0
+
+### Minor Changes
+
+- bfe345f: **FilterChips:** Add new component
+
+### Patch Changes
+
+- Updated dependencies [bfe345f]
+- Updated dependencies [bfe345f]
+- Updated dependencies [bfe345f]
+  - @sebgroup/green-core@1.20.0
+  - @sebgroup/chlorophyll@3.3.6
+
 ## 3.5.6
 
 ### Patch Changes

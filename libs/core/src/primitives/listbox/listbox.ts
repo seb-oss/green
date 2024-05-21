@@ -60,10 +60,6 @@ export class GdsListbox
   @property()
   compareWith: (a: any, b: any) => boolean = (a, b) => a === b
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {
@@ -135,7 +131,7 @@ export class GdsListbox
   }
 
   render() {
-    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
+    return html`<slot ${ref(this.#slotRef)}></slot>`
   }
 
   /**

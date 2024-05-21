@@ -17,7 +17,6 @@ const style = css`
       grid-column-gap: var(--_gap-column);
       grid-row-gap: var(--_gap-row);
       padding: var(--_grid-padding);
-      text-wrap: balance;
     }
 
     :host([auto-columns]) {
