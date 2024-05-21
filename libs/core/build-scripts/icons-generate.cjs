@@ -42,7 +42,7 @@ export class ${className} extends GdsIcon {
 }
 
 const mdxFile = path.resolve(__dirname, '../src/components/icon/icon.list.mdx')
-const tsFile = path.resolve(__dirname, '../src/components/icon/icon.list.ts')
+const tsFile = path.resolve(__dirname, '../src/components/icon/icons/index.ts')
 
 async function generateIcons() {
   try {
@@ -66,8 +66,8 @@ async function generateIcons() {
         console.log(`Generated TypeScript file for ${name}`)
 
         // Add to import and element content
-        importContent += `import '../../../../../dist/libs/core/src/components/icon/icons/${name}.js'\n`
-        elementContent += `<gds-icon-${toKebabCase(name)}></gds-icon-${toKebabCase(name)}>\n`
+        importContent += `export * from './${name}'\n`
+        elementContent += `<gds-icon-${toKebabCase(name)} />\n`
       }
     }
     elementContent += '</Canvas>\n'
