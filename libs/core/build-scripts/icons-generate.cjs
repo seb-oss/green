@@ -52,24 +52,42 @@ async function generateIcons() {
     let elementContent = '<Canvas>\n'
     for (const file of regularFiles) {
       if (path.extname(file) === '.svg') {
-        const name = path.basename(file, '.svg')
-        const regularSvg = await readSvgContent(path.join(regularDir, file))
+        let oldName = path.basename(file, '.svg')
+        let newName = oldName.split(',')[0] // get the part before the first comma
+
+        // Rename the files in the regular and solid directories
+        await fs.rename(
+          path.join(regularDir, file),
+          path.join(regularDir, `${newName}.svg`),
+        )
+        try {
+          await fs.rename(
+            path.join(solidDir, file),
+            path.join(solidDir, `${newName}.svg`),
+          )
+        } catch (error) {
+          console.warn(`Failed to rename solid SVG for ${oldName}.`)
+        }
+
+        const regularSvg = await readSvgContent(
+          path.join(regularDir, `${newName}.svg`),
+        )
         let solidSvg = ''
         try {
-          solidSvg = await readSvgContent(path.join(solidDir, file))
+          solidSvg = await readSvgContent(path.join(solidDir, `${newName}.svg`))
         } catch (error) {
           console.warn(
-            `Failed to read solid SVG for ${name}, keeping it empty.`,
+            `Failed to read solid SVG for ${newName}, keeping it empty.`,
           )
         }
 
-        const tsContent = generateTsContent(name, regularSvg, solidSvg)
-        await fs.writeFile(path.join(outputDir, `${name}.ts`), tsContent)
-        console.log(`Generated TypeScript file for ${name}`)
+        const tsContent = generateTsContent(newName, regularSvg, solidSvg)
+        await fs.writeFile(path.join(outputDir, `${newName}.ts`), tsContent)
+        console.log(`Generated TypeScript file for ${newName}`)
 
         // Add to import and element content
-        importContent += `export * from './${name}'\n`
-        elementContent += `<gds-icon-${toKebabCase(name)} />\n`
+        importContent += `export * from './${newName}'\n`
+        elementContent += `<gds-icon-${toKebabCase(newName)} />\n`
       }
     }
     elementContent += '</Canvas>\n'
