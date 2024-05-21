@@ -1,10 +1,5 @@
-// // iconMap.ts
-// import bag from './assets/bag.svg'
-// import otherIcon from './assets/other-icon.svg'
-// // import other SVGs...
+import { IconArrow } from './icons/arrow'
 
-// export const Icons = {
-//   bag,
-//   otherIcon,
-//   // other SVGs...
-// }
+export const Icons = {
+  IconArrow,
+}

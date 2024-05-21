@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import IconCSS from './icon.style.css'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+import { IconArrow } from './icons/arrow'
 
 @customElement('gds-icon')
 export class GdsIcon extends LitElement {
@@ -13,36 +14,24 @@ export class GdsIcon extends LitElement {
   }
 
   @property({ type: String }) name = ''
-  svgContent = ''
+  @property({ type: String }) width = 24
+  @property({ type: String }) height = 24
+  @property({ type: Boolean }) solid = false
 
-  async updated(changedProperties: Map<string, unknown>) {
-    if (changedProperties.has('name')) {
-      const { name } = this
-      if (!name) {
-        console.log('Name property is not set.')
-        return
-      }
-
-      try {
-        const module = await import(`!!raw-loader!../icons/${name}.svg?raw`)
-
-        /* 
-        Might use this method 
-
-        const response = await fetch(`../icons/${name}.svg`);
-        this.svgContent = await response.text();
-        */
-
-        this.svgContent = module.default
-        console.log(`SVG imported: ${name}`)
-        this.requestUpdate() // Request an update after the SVG has loaded
-      } catch (error) {
-        console.log(`Failed to import SVG: ${error}`)
-      }
-    }
-  }
+  protected RegularSVG = IconArrow.RegularSVG
+  protected SolidSVG = IconArrow.SolidSVG
 
   render() {
-    return html`${unsafeHTML(this.svgContent)}`
+    const svgContent = `<svg
+      width="${this.width}"
+      height="${this.height}"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      ${this.solid ? this.SolidSVG : this.RegularSVG}
+    </svg>`
+
+    return html`${unsafeHTML(svgContent)}`
   }
 }
