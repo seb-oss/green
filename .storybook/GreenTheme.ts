@@ -7,7 +7,6 @@ export default create({
   fontCode: 'monospace',
 
   brandTitle: 'SEB Green',
-  brandUrl: 'https://seb.io',
   brandImage:
     'https://github.com/sebgroup/green/assets/428824/fa81da13-8f4a-46ad-a484-75a1472c039b',
   brandTarget: '_self',
