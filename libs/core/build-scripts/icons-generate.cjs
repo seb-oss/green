@@ -21,7 +21,8 @@ function clearAndUpper(text) {
 }
 
 async function readSvgContent(filePath) {
-  const content = await fs.readFile(filePath, 'utf-8')
+  let content = await fs.readFile(filePath, 'utf-8')
+  content = content.replace(/#353531/g, 'currentColor')
   return content.replace(/<\/?svg[^>]*>/g, '')
 }
 
@@ -61,6 +62,7 @@ async function generateIcons() {
             `Failed to read solid SVG for ${name}, keeping it empty.`,
           )
         }
+
         const tsContent = generateTsContent(name, regularSvg, solidSvg)
         await fs.writeFile(path.join(outputDir, `${name}.ts`), tsContent)
         console.log(`Generated TypeScript file for ${name}`)

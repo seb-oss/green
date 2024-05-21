@@ -3,16 +3,22 @@ import '../../../../../dist/libs/core/src/components/icon/icons/index.js'
 
 <Meta title="Components/Icon" />
 
-# Icons
+# Icon
 
-**Note:** The icon component is an early work in progress and is not meant for production use yet.
+The `gds-icon*` component is a flexible icon component. It allows you to use a variety of pre-defined icons in your application. 
 
-Properties 
+Each icon can be customized with different properties:
 
-### style / fill / solid / regular
+- `solid`: This is a boolean property. When set to true, the solid version of the icon is displayed. When set to false or not provided, the regular version of the icon is displayed.
+- `width` and `height`: These properties allow you to set the dimensions of the icon. If not provided, the icon will use its default dimensions at 24x24.
+
+
+
+## All Regular Icons
 
 <Canvas>
 <gds-icon-archive />
+<gds-icon-arrow-box-left />
 <gds-icon-arrow-box-right />
 <gds-icon-arrow-inbox />
 <gds-icon-arrow-left-right />
@@ -28,26 +34,39 @@ Properties
 <gds-icon-arrow-rotate-right-left />
 <gds-icon-arrow-share-left />
 <gds-icon-arrow-up />
+<gds-icon-arrow-wall-down />
+<gds-icon-arrow-wall-left />
 <gds-icon-arrow-wall-right />
 <gds-icon-arrow-wall-up />
 <gds-icon-bag />
 <gds-icon-barcode />
 <gds-icon-bars-three />
+<gds-icon-bars-two />
 <gds-icon-bell />
 <gds-icon-book />
 <gds-icon-bookmark-check />
 <gds-icon-bookmark-delete />
 <gds-icon-bookmark-remove />
+<gds-icon-bookmark />
+<gds-icon-books />
 <gds-icon-bubble-annotation />
 <gds-icon-bubble-dots />
 <gds-icon-bubble-question />
 <gds-icon-bubble-text />
+<gds-icon-bubble-wide-annotation />
+<gds-icon-bubble />
+<gds-icon-bubbles />
+<gds-icon-cain-link />
+<gds-icon-calculator />
+<gds-icon-calendar />
+<gds-icon-calender-add />
 <gds-icon-checkmark />
 <gds-icon-chevron-double-down />
 <gds-icon-chevron-double-left />
 <gds-icon-chevron-double-right />
 <gds-icon-chevron-double-up />
 <gds-icon-chevron-grabber-vertical />
+<gds-icon-chevron-left />
 <gds-icon-chevron-right />
 <gds-icon-chevron-top />
 <gds-icon-circle-check />
@@ -55,6 +74,7 @@ Properties
 <gds-icon-circle-minus />
 <gds-icon-circle-placeholder-on />
 <gds-icon-circle-plus />
+<gds-icon-circle-questionmark />
 <gds-icon-circle-x />
 <gds-icon-clock />
 <gds-icon-cloud-upload />
@@ -64,11 +84,16 @@ Properties
 <gds-icon-dot-grid-1x3-horizontal />
 <gds-icon-dot-grid-1x3-vertical />
 <gds-icon-dot-grid-2x3 />
+<gds-icon-dot-grid-one-horizontal />
 <gds-icon-dot-grid-one-vertical />
+<gds-icon-email />
+<gds-icon-file-text />
 <gds-icon-filter />
 <gds-icon-flag />
 <gds-icon-floppy-disk />
 <gds-icon-folder-upload />
+<gds-icon-group />
+<gds-icon-headphones />
 <gds-icon-history />
 <gds-icon-invite />
 <gds-icon-law />
@@ -87,6 +112,9 @@ Properties
 <gds-icon-people-remove />
 <gds-icon-people />
 <gds-icon-percent />
+<gds-icon-phone />
+<gds-icon-pie-chart />
+<gds-icon-pin />
 <gds-icon-plus-large />
 <gds-icon-plus-small />
 <gds-icon-power-plant />
@@ -94,8 +122,10 @@ Properties
 <gds-icon-settings-gear />
 <gds-icon-share />
 <gds-icon-square-arrow-top-right-2 />
+<gds-icon-square-arrow-top-right />
 <gds-icon-square-check />
 <gds-icon-square-info />
+<gds-icon-square-minus />
 <gds-icon-square-plus />
 <gds-icon-square-x />
 <gds-icon-suitcase-work />
@@ -105,7 +135,158 @@ Properties
 <gds-icon-trash-can />
 <gds-icon-trending3 />
 <gds-icon-triangle-exclamation />
+<gds-icon-volume-half />
 <gds-icon-volume-off />
 <gds-icon-wallet />
 <gds-icon-zoom-in />
+<gds-icon-zoom-out />
+</Canvas>
+
+
+## All Solid Icons
+<Canvas>
+<gds-icon-archive solid/>
+<gds-icon-arrow-box-left solid/>
+<gds-icon-arrow-box-right solid/>
+<gds-icon-arrow-inbox solid/>
+<gds-icon-arrow-left-right solid/>
+<gds-icon-arrow-left solid/>
+<gds-icon-arrow-out-of-box solid/>
+<gds-icon-arrow-right-circle solid/>
+<gds-icon-arrow-right-down-circle solid/>
+<gds-icon-arrow-right-up-circle solid/>
+<gds-icon-arrow-right solid/>
+<gds-icon-arrow-rotate-clockwise solid/>
+<gds-icon-arrow-rotate-counter-clockwise solid/>
+<gds-icon-arrow-rotate-left-right solid/>
+<gds-icon-arrow-rotate-right-left solid/>
+<gds-icon-arrow-share-left solid/>
+<gds-icon-arrow-up solid/>
+<gds-icon-arrow-wall-down solid/>
+<gds-icon-arrow-wall-left solid/>
+<gds-icon-arrow-wall-right solid/>
+<gds-icon-arrow-wall-up solid/>
+<gds-icon-bag solid/>
+<gds-icon-barcode solid/>
+<gds-icon-bars-three solid/>
+<gds-icon-bars-two solid/>
+<gds-icon-bell solid/>
+<gds-icon-book solid/>
+<gds-icon-bookmark-check solid/>
+<gds-icon-bookmark-delete solid/>
+<gds-icon-bookmark-remove solid/>
+<gds-icon-bookmark solid/>
+<gds-icon-books solid/>
+<gds-icon-bubble-annotation solid/>
+<gds-icon-bubble-dots solid/>
+<gds-icon-bubble-question solid/>
+<gds-icon-bubble-text solid/>
+<gds-icon-bubble-wide-annotation solid/>
+<gds-icon-bubble solid/>
+<gds-icon-bubbles solid/>
+<gds-icon-cain-link solid/>
+<gds-icon-calculator solid/>
+<gds-icon-calendar solid/>
+<gds-icon-calender-add solid/>
+<gds-icon-checkmark solid/>
+<gds-icon-chevron-double-down solid/>
+<gds-icon-chevron-double-left solid/>
+<gds-icon-chevron-double-right solid/>
+<gds-icon-chevron-double-up solid/>
+<gds-icon-chevron-grabber-vertical solid/>
+<gds-icon-chevron-left solid/>
+<gds-icon-chevron-right solid/>
+<gds-icon-chevron-top solid/>
+<gds-icon-circle-check solid/>
+<gds-icon-circle-info solid/>
+<gds-icon-circle-minus solid/>
+<gds-icon-circle-placeholder-on solid/>
+<gds-icon-circle-plus solid/>
+<gds-icon-circle-questionmark solid/>
+<gds-icon-circle-x solid/>
+<gds-icon-clock solid/>
+<gds-icon-cloud-upload solid/>
+<gds-icon-credit-card solid/>
+<gds-icon-cross-large solid/>
+<gds-icon-cross-small solid/>
+<gds-icon-dot-grid-1x3-horizontal solid/>
+<gds-icon-dot-grid-1x3-vertical solid/>
+<gds-icon-dot-grid-2x3 solid/>
+<gds-icon-dot-grid-one-horizontal solid/>
+<gds-icon-dot-grid-one-vertical solid/>
+<gds-icon-email solid/>
+<gds-icon-file-text solid/>
+<gds-icon-filter solid/>
+<gds-icon-flag solid/>
+<gds-icon-floppy-disk solid/>
+<gds-icon-folder-upload solid/>
+<gds-icon-group solid/>
+<gds-icon-headphones solid/>
+<gds-icon-history solid/>
+<gds-icon-invite solid/>
+<gds-icon-law solid/>
+<gds-icon-lock solid/>
+<gds-icon-macbook-air solid/>
+<gds-icon-magnifying-glass solid/>
+<gds-icon-minus-large solid/>
+<gds-icon-minus-small solid/>
+<gds-icon-mute solid/>
+<gds-icon-pencel-line solid/>
+<gds-icon-pencil-wave solid/>
+<gds-icon-people-add solid/>
+<gds-icon-people-added solid/>
+<gds-icon-people-circle solid/>
+<gds-icon-people-copy solid/>
+<gds-icon-people-remove solid/>
+<gds-icon-people solid/>
+<gds-icon-percent solid/>
+<gds-icon-phone solid/>
+<gds-icon-pie-chart solid/>
+<gds-icon-pin solid/>
+<gds-icon-plus-large solid/>
+<gds-icon-plus-small solid/>
+<gds-icon-power-plant solid/>
+<gds-icon-search-menu solid/>
+<gds-icon-settings-gear solid/>
+<gds-icon-share solid/>
+<gds-icon-square-arrow-top-right-2 solid/>
+<gds-icon-square-arrow-top-right solid/>
+<gds-icon-square-check solid/>
+<gds-icon-square-info solid/>
+<gds-icon-square-minus solid/>
+<gds-icon-square-plus solid/>
+<gds-icon-square-x solid/>
+<gds-icon-suitcase-work solid/>
+<gds-icon-text-edit solid/>
+<gds-icon-thumbs-down solid/>
+<gds-icon-todos solid/>
+<gds-icon-trash-can solid/>
+<gds-icon-trending3 solid/>
+<gds-icon-triangle-exclamation solid/>
+<gds-icon-volume-half solid/>
+<gds-icon-volume-off solid/>
+<gds-icon-wallet solid/>
+<gds-icon-zoom-in solid/>
+<gds-icon-zoom-out solid/>
+</Canvas>
+
+## Customizing Icons
+
+You can customize the icons by setting the `width` and `height` properties. Color is inherited from the content where is placed.
+
+<Canvas>
+<gds-icon-archive width="48" height="48"/>
+<gds-icon-arrow-box-left width="48" height="48"/>
+<gds-icon-arrow-box-right width="48" height="48"/>
+<gds-icon-arrow-inbox width="48" height="48"/>
+<gds-icon-arrow-left-right width="48" height="48"/>
+<gds-icon-arrow-left width="48" height="48"/>
+<gds-icon-arrow-out-of-box width="48" height="48"/>
+<gds-icon-arrow-right-circle width="48" height="48"/>
+<gds-icon-arrow-right-down-circle width="48" height="48"/>
+<gds-icon-arrow-right-up-circle width="48" height="48"/>
+<gds-icon-arrow-right width="48" height="48"/>
+<gds-icon-arrow-rotate-clockwise width="48" height="48"/>
+<gds-icon-arrow-rotate-counter-clockwise width="48" height="48"/>
+<gds-icon-arrow-rotate-left-right width="48" height="48"/>
 </Canvas>
