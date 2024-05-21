@@ -107,10 +107,16 @@
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
-    "fetch-icons": {
+    "icons-fetch": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node libs/core/build-scripts/fetch-icons.cjs"
+        "command": "node libs/core/build-scripts/icons-fetch.cjs"
+      }
+    },
+    "icons-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
     "test": {
