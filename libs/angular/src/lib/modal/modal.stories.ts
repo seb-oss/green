@@ -21,7 +21,7 @@ export default {
 } as Meta<NggModalComponent>
 
 const Template: StoryFn<NggModalComponent> = (args: NggModalComponent) => {
-  const isOpen = true
+  const isOpen = false
   return {
     template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" (closed)="isOpen = false">
@@ -65,7 +65,7 @@ Takeover.args = {
 const CustomTemplate: StoryFn<NggModalComponent> = (
   args: NggModalComponent,
 ) => {
-  const isOpen = true
+  const isOpen = false
   return {
     template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
