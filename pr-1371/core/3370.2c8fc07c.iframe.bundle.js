@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[3370],{"./dist/libs/core/src/icons/triangle-exclamation.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/triangle-exclamation.b1eb6eda.svg"}}]);

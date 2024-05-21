@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[2007],{"./dist/libs/core/src/icons/home-roof.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/home-roof.08df29e4.svg"}}]);

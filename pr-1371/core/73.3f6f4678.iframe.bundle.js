@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[73],{"./dist/libs/core/src/icons/bell.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/bell.3c932705.svg"}}]);

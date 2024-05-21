@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[9783],{"./dist/libs/core/src/icons/settings-slider-ver.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/settings-slider-ver.58446335.svg"}}]);

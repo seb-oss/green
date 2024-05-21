@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[5827],{"./dist/libs/core/src/icons/magnifying-glass-2.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/magnifying-glass-2.26d7dc3a.svg"}}]);

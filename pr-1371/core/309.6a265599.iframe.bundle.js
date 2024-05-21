@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[309],{"./dist/libs/core/src/icons/settings-gear-2.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/settings-gear-2.c9a24f80.svg"}}]);

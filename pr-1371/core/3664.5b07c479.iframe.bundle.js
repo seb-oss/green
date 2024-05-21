@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[3664],{"./dist/libs/core/src/icons/bubble-annotation-2.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/bubble-annotation-2.525a1ea2.svg"}}]);

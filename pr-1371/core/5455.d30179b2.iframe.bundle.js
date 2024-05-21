@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[5455],{"./dist/libs/core/src/icons/circle-placeholder-on.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/circle-placeholder-on.753f7c42.svg"}}]);

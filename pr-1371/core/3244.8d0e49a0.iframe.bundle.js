@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[3244],{"./dist/libs/core/src/icons/bookmark-delete.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/bookmark-delete.9e24e550.svg"}}]);

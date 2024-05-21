@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkgreen=self.webpackChunkgreen||[]).push([[4545],{"./dist/libs/core/src/icons/zoom-in.svg":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__.p+"static/media/zoom-in.129c6aa5.svg"}}]);
