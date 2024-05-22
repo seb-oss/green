@@ -2,7 +2,11 @@ import { html, LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
+import IconCSS from './icon.style.css'
+
 export abstract class GdsIcon extends LitElement {
+  static styles = [IconCSS]
+
   @property({ type: String }) width = 24
   @property({ type: String }) height = 24
   @property({ type: Boolean }) solid = false

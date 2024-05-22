@@ -79,13 +79,6 @@ export class GdsBadge extends LitElement {
     return hasLabel ? html`<slot part="label" gds-allow="#text"></slot>` : ''
   }
 
-  // slotLabel() {
-
-  //   return this.textContent
-  //     ? html`<slot part="label" gds-allow="#text"></slot>`
-  //     : ''
-  // }
-
   render() {
     const hasIconSlot = this.querySelector('[slot="icon"]') !== null
     const content = html`${when(
