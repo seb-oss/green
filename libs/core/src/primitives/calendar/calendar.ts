@@ -1,7 +1,7 @@
-import { HTMLTemplateResult, LitElement, html } from 'lit'
+import { html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
-import { property, query, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import {
   addDays,
