@@ -93,7 +93,7 @@
         "port": 4400,
         "configDir": "libs/core/.storybook"
       },
-      "dependsOn": ["build-custom-elements-json"],
+      "dependsOn": ["build", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
@@ -107,7 +107,7 @@
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook"
       },
-      "dependsOn": ["build-custom-elements-json"],
+      "dependsOn": ["build", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
