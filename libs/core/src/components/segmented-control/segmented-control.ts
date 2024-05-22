@@ -121,7 +121,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             @click=${this.#scrollLeft}
             aria-label=${msg('Scroll right')}
           >
-            <gds-icon name="chevron-left"></gds-icon>
+            <gds-icon-chevron-left />
           </button>`,
       )}
       <div
@@ -157,7 +157,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             @click=${this.#scrollRight}
             aria-label=${msg('Scroll right')}
           >
-            <gds-icon name="chevron-right"></gds-icon>
+            <gds-icon-chevron-right />
           </button>`,
       )}`
   }
