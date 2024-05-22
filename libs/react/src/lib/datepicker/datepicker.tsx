@@ -15,16 +15,59 @@ export const CoreDatepicker = createComponent({
 })
 
 export interface DatepickerOptions {
+  /**
+   * The label for the Datepicker.
+   */
   label?: string
+
+  /**
+   * Callback function that is called when the value of the Datepicker changes.
+   */
   onChange?: (value: any) => void
+
+  /**
+   * The minimum date that can be selected.
+   */
   minDate?: Date
+
+  /**
+   * The maximum date that can be selected.
+   */
   maxDate?: Date
+
+  /**
+   * The value of the Datepicker.
+   */
   value?: Date
+
+  /**
+   * Whether to show the week numbers.
+   */
   showWeeks?: boolean
+
+  /**
+   * The test ID used for testing.
+   */
   testId?: string
+
+  /**
+   * The size of the Datepicker.
+   */
   size?: 'small' | 'medium'
+
+  /**
+   * Whether to hide the label.
+   */
   hideLabel?: boolean
+
+  /**
+   * Whether to disable weekends.
+   */
   disabledWeekends?: boolean
+
+  /**
+   * An array of disabled dates.
+   */
   disabledDates?: Date[]
 
   /** @deprecated Use `value` instead */

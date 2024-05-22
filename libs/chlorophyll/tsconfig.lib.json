@@ -6,5 +6,11 @@
     "types": []
   },
   "include": ["**/*.ts"],
-  "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"]
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "jest.config.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ]
 }

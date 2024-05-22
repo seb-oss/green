@@ -3,7 +3,7 @@ gds-grid {
   --gds-debug-color-container: rgba(255, 82, 197, 0.4);
 }
 
-gds-grid > div {
+gds-grid > .exampleCell {
   align-items: center;
   aspect-ratio: 16/9;
   border: 1px solid var(--gds-debug-color);

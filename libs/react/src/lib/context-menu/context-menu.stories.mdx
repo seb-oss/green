@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Meta, Canvas, Markdown } from '@storybook/addon-docs'
 import { ContextMenu, MenuItem } from './context-menu'
 
 <Meta title="Components/Context Menu" component={ContextMenu} />
@@ -80,17 +80,23 @@ You can put any type of content within the `MenuItem` component, including icons
 
 ### ContextMenu
 
+<Markdown>{`
 | Prop            | Type                           | Description                                                                  |
 | :-------------- | :----------------------------- | :--------------------------------------------------------------------------- |
-| open            | `boolean`                      | control if the menu should be open or not                                    |
-| buttonLabel     | `string`                       | label for button next to icon                                                |
-| ariaLabel       | `string`                       | aria-label of icon button                                                    |
-| label           | `string`                       | List of items in the accordion                                               |
-| showLabel       | `boolean`                      | Control if the label should be visually shown                                |
-| onMenuItemClick | `(event: CustomEvent) => void` | A callback function to trigger when item is clicked, is applied to all items |
+| open            | \`boolean\`                      | control if the menu should be open or not                                    |
+| buttonLabel     | \`string\`                       | label for button next to icon                                                |
+| ariaLabel       | \`string\`                       | aria-label of icon button                                                    |
+| label           | \`string\`                       | List of items in the accordion                                               |
+| showLabel       | \`boolean\`                      | Control if the label should be visually shown                                |
+| onMenuItemClick | \`(event: CustomEvent) => void\` | A callback function to trigger when item is clicked, is applied to all items |
+`}</Markdown>
 
 ### MenuItem
 
+### MenuItem
+
+<Markdown>{`
 | Prop    | Type                                | Description                                         |
 | :------ | :---------------------------------- | :-------------------------------------------------- |
-| onClick | `(event: React.MouseEvent) => void` | A callback function to trigger when item is clicked |
+| onClick | \`(event: React.MouseEvent) => void\` | A callback function to trigger when item is clicked |
+`}</Markdown>

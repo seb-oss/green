@@ -78,20 +78,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/angular-lib-dev/src/**/*.ts",
-          "apps/angular-lib-dev/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/angular-lib-dev"],
       "options": {
-        "jestConfig": "apps/angular-lib-dev/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/angular-lib-dev/jest.config.ts"
       }
     }
   }

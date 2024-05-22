@@ -1,5 +1,8 @@
 import { NggButtonComponent } from './button.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Meta } from '@storybook/addon-docs'
+import * as Stories from './button.stories.ts'
+
+<Meta of={Stories} />
 
 <style>{`
     div[id^=story--] > div{
@@ -12,6 +15,7 @@ import { Canvas, Story } from '@storybook/addon-docs'
 Green buttons are native `<button>` elements enchanced with SEB Green styling. Apply the `ngg-button` attribute to greenify a button.
 
 {' '}
+
 <Story id="components-form-button--default" />
 
 ## Types
