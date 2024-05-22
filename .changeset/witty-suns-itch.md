@@ -2,8 +2,6 @@
 '@sebgroup/green-core': minor
 ---
 
-**Pull Request Recap:**
-
 **Changes Made:**
 
 - Refactored the `gds-icon` component to import individual icons for improved modularity.
