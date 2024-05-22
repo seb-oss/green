@@ -7,8 +7,8 @@ import IconCSS from './icon.style.css'
 export abstract class GdsIcon extends LitElement {
   static styles = [IconCSS]
 
-  @property({ type: String }) width = 24
-  @property({ type: String }) height = 24
+  @property({ type: String }) width = '24'
+  @property({ type: String }) height = '24'
   @property({ type: Boolean }) solid = false
   @property({ type: String }) label = ''
 

@@ -35,8 +35,7 @@
             "input": "libs/core/src/components/icon/assets",
             "output": "assets/icons"
           }
-        ],
-        "webpackConfig": "./webpack.config.js"
+        ]
       }
     },
     "build-bundle-src": {
