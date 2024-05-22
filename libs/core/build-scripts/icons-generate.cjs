@@ -87,7 +87,7 @@ async function generateIcons() {
 
         // Add to import and element content
         importContent += `export * from './${newName}'\n`
-        elementContent += `<gds-icon-${toKebabCase(newName)} />\n`
+        elementContent += `<gds-icon-${toKebabCase(newName)}></gds-icon-${toKebabCase(newName)}>\n`
       }
     }
     elementContent += '</Canvas>\n'
