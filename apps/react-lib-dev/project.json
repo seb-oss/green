@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/react-lib-dev/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -56,20 +57,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/react-lib-dev/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/react-lib-dev"],
       "options": {
-        "jestConfig": "apps/react-lib-dev/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/react-lib-dev/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

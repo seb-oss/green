@@ -1,0 +1,27 @@
+import { Meta, Canvas } from '@storybook/addon-docs'
+import '../../../../../dist/libs/core/src/components/icon/index.js'
+
+<Meta title="Components/Icon" />
+
+# Icons
+
+**Note:** The icon component is an early work in progress and is not meant for production use yet.
+
+<Canvas>
+  <gds-icon name="plus"></gds-icon>
+  <gds-icon name="x"></gds-icon>
+  <gds-icon name="chevron-left"></gds-icon>
+  <gds-icon name="chevron-right"></gds-icon>
+  <gds-icon name="chevron-down"></gds-icon>
+  <gds-icon name="arrow"></gds-icon>
+  <gds-icon name="bell"></gds-icon>
+  <gds-icon name="calendar"></gds-icon>
+  <gds-icon name="lock"></gds-icon>
+  <gds-icon name="eye"></gds-icon>
+  <gds-icon name="hash"></gds-icon>
+  <gds-icon name="mail"></gds-icon>
+  <gds-icon name="send"></gds-icon>
+  <gds-icon name="info"></gds-icon>
+  <gds-icon name="tel"></gds-icon>
+  <gds-icon name="user"></gds-icon>
+</Canvas>

@@ -15,9 +15,7 @@
         "project": "libs/react/package.json",
         "entryFile": "libs/react/src/index.ts",
         "external": ["react/jsx-runtime"],
-
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           {
             "glob": "libs/react/README.md",
@@ -29,43 +27,30 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/react/**/*.{ts,tsx,js,jsx}"]
-      },
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react"],
       "options": {
-        "jestConfig": "libs/react/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/react/jest.config.ts"
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/react",
-        "port": 4200,
+        "port": 4400,
         "configDir": "libs/react/.storybook"
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
-      },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        }
-      ]
+      }
     },
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
       "outputs": ["{options.outputDir}"],
-
       "options": {
         "uiFramework": "@storybook/react",
         "configDir": "libs/react/.storybook",
@@ -85,14 +70,16 @@
       ]
     },
     "build-storybook": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["copy-fonts", "tokens:build"],
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
       "options": {
-        "commands": [
-          {
-            "command": "NODE_ENV=production nx run react:build-nx-storybook"
-          }
-        ]
+        "outputDir": "dist/storybook/react",
+        "configDir": "libs/react/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     },
     "update-dependencies": {

@@ -1,7 +1,5 @@
 import { render, RenderResult } from '@testing-library/angular'
 import { NggDropdownComponent } from './dropdown.component'
-
-import { getScopedTagName } from '@sebgroup/green-core'
 import { fakeAsync, tick } from '@angular/core/testing'
 
 describe('Dropdown', () => {

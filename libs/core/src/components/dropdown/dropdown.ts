@@ -5,7 +5,6 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
-import 'reflect-metadata'
 
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'

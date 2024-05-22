@@ -1,8 +1,7 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
-
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import { NggCellTableComponent } from './cell-table.component'
 import { NggCellTableModule } from './cell-table.module'
-import Documentation from './documentation.mdx'
+
 const tmp = [
   {
     rowId: 0,
@@ -39,9 +38,6 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['components-cell-table'],
   },
   argTypes: {
@@ -53,7 +49,7 @@ export default {
   },
 } as Meta<NggCellTableComponent>
 
-const Template: Story<NggCellTableComponent> = (
+const Template: StoryFn<NggCellTableComponent> = (
   args: NggCellTableComponent,
 ) => {
   return {
