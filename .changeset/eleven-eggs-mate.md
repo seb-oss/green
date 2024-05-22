@@ -1,5 +1,5 @@
 ---
-"@sebgroup/green-core": minor
+'@sebgroup/green-core': patch
 ---
 
-Added custom dates property to gds-calendar
+Added custom dates property to internal `gds-calendar`
