@@ -63,12 +63,11 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       gds-aria-selected=${this.selected}
     >
       <span class=${classMap(btnClasses)}><slot></slot></span>
-      <gds-icon
-        name="checkmark"
+      <gds-icon-checkmark
         slot="trail"
         style="display: ${this.selected ? 'block' : 'none'}"
         class="icon"
-      ></gds-icon>
+      ></gds-icon-checkmark>
     </gds-button>`
   }
 }
