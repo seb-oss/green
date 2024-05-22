@@ -1,5 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs'
-import { GdsBadge, GdsIcon } from '../../../../../dist/libs/core/src'
+import { GdsBadge } from '../../../../../dist/libs/core/src'
 import './style/badge.stories.css'
 
 <Meta title="Components/Badge" />
@@ -67,27 +67,27 @@ import './style/badge.stories.css'
     <gds-row>
       <h4>Type: Indicator</h4>
       <gds-badge type="indicator" variant="information">
-        <gds-icon slot="icon" name="arrow-up"></gds-icon>
+        <gds-icon-arrow-up slot="icon"></gds-icon-arrow-up>
         10%
       </gds-badge>
       <gds-badge type="indicator" variant="success">
-        <gds-icon slot="icon" name="arrow-down"></gds-icon>
+        <gds-icon-arrow-down slot="icon" ></gds-icon-arrow-down>
         20%
       </gds-badge>
       <gds-badge type="indicator" variant="warning">
-        <gds-icon slot="icon" name="x"></gds-icon>
+        <gds-icon-triangle-exclamation slot="icon" ></gds-icon-triangle-exclamation>
         30%
       </gds-badge>
       <gds-badge type="indicator" variant="error">
-        <gds-icon slot="icon" name="arrow-up"></gds-icon>
+        <gds-icon-circle-x slot="icon" ></gds-icon-circle-x>
         40%
       </gds-badge>
       <gds-badge type="indicator" variant="disabled">
-        <gds-icon slot="icon" name="arrow-down"></gds-icon>
+        <gds-icon-arrow-down slot="icon"></gds-icon-arrow-down>
         50%
       </gds-badge>
       <gds-badge type="indicator" variant="surface">
-        <gds-icon slot="icon" name="x"></gds-icon>
+        <gds-icon-cross-small slot="icon"></gds-icon-cross-small>
         60%
       </gds-badge>
     </gds-row>

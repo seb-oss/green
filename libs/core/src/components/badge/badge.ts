@@ -63,7 +63,7 @@ export class GdsBadge extends LitElement {
   icon = ''
 
   slotIcon() {
-    return html` <slot name="icon" gds-allow="gds-icon"></slot> `
+    return html` <slot name="icon"></slot> `
   }
 
   slotLabel() {
@@ -90,7 +90,7 @@ export class GdsBadge extends LitElement {
     const hasIconSlot = this.querySelector('[slot="icon"]') !== null
     const content = html`${when(
       hasIconSlot,
-      () => html`<slot name="icon" gds-allow="gds-icon"></slot>`,
+      () => html`<slot name="icon"></slot>`,
     )}${this.slotLabel()}`
 
     return html`<div class="gds-badge">${content}</div>`
