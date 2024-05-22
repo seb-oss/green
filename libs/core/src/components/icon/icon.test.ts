@@ -35,6 +35,8 @@ describe('IconArchive', () => {
     element.solid = true
     await element.updateComplete
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg?.innerHTML.trim()).to.equal('<path d="M5 3v18l14-9L5 3z"/>')
+    expect(svg?.innerHTML.trim()).to.equal(
+      '<path d="M5 3v18l14-9L5 3z"></path>',
+    ) // Change this line
   })
 })
