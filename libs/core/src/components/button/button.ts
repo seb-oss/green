@@ -33,6 +33,9 @@ const html = stripWhitespace(customElementHtml)
 export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = [tokens, unsafeCSS(style)]
 
+  /**
+   * @internal
+   */
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -57,10 +60,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   rank: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   /**
-   * Defines which set the button belongs to. Defaults to "neutral".
+   * Defines which variant the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  variant: 'default' | 'positive' | 'negative' = 'default'
+  variant: 'neutral' | 'positive' | 'negative' = 'neutral'
 
   /**
    * Sets the size of the button. Defaults to "small".

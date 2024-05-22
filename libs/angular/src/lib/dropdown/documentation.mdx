@@ -1,5 +1,8 @@
 import { NggDropdownComponent } from './dropdown.component'
-import { Story } from '@storybook/addon-docs'
+import { Story, Meta, Markdown } from '@storybook/addon-docs'
+import * as Stories from './dropdown.stories.ts'
+
+<Meta of={Stories} />
 
 # Dropdown
 
@@ -294,26 +297,30 @@ Below is an example of reset functionality for dropdown
 
 ## Component API
 
+<Markdown>{`
 | Input (attribute) | Description                                                          | Default     |
 | :---------------- | :------------------------------------------------------------------- | :---------- |
-| useValue          | Which key to use as value.                                           | `value`     |
-| display           | Which key to use as display value when selected and in options list. | `label`     |
-| syncPopoverWidth? | Force the popover to have the same widtgh as the trigger             | `undefined` |
-| size              | Size of the dropdown.                                                | `medium`    |
-| hideLabel         | Hide the label.                                                      | `false`     |
-| maxHeight         | Max height of the dropdown.                                          | `500`       |
-| multiSelect       | Enable multi select.                                                 | `false`     |
-| searchable        | Enable search.                                                       | `false`     |
-| texts             | Custom texts, see table below                                        | `Object`    |
+| useValue          | Which key to use as value.                                           | \`value\`     |
+| display           | Which key to use as display value when selected and in options list. | \`label\`     |
+| syncPopoverWidth? | Force the popover to have the same widtgh as the trigger             | \`undefined\` |
+| size              | Size of the dropdown.                                                | \`medium\`    |
+| hideLabel         | Hide the label.                                                      | \`false\`     |
+| maxHeight         | Max height of the dropdown.                                          | \`500\`       |
+| multiSelect       | Enable multi select.                                                 | \`false\`     |
+| searchable        | Enable search.                                                       | \`false\`     |
+| texts             | Custom texts, see table below                                        | \`Object\`    |
+`}</Markdown>
 
 ### Texts input
 
 Custom texts can be set using the `texts` input which takes an object with the following keys.
 
+<Markdown>{`
 | Text               | Description                                            | Default    |
 | :----------------- | :----------------------------------------------------- | :--------- |
-| selected           | Used when multiple items are selected e.g. 5 selected. | `selected` |
-| placeholder        | Text to display when no option is selected.            | `Select`   |
-| searchPlaceholder  | Text to display in Search box.                         | `Search`   |
-| close              | Text for close button displayed on mobiles.            | `Close`    |
-| optionsDescription | Text to describe options.                              | `Options`  |
+| selected           | Used when multiple items are selected e.g. 5 selected. | \`selected\` |
+| placeholder        | Text to display when no option is selected.            | \`Select\`   |
+| searchPlaceholder  | Text to display in Search box.                         | \`Search\`   |
+| close              | Text for close button displayed on mobiles.            | \`Close\`    |
+| optionsDescription | Text to describe options.                              | \`Options\`  |
+`}</Markdown>

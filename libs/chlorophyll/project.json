@@ -54,17 +54,13 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/chlorophyll"],
       "options": {
-        "jestConfig": "libs/chlorophyll/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/chlorophyll/jest.config.ts"
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
-      "dependsOn": ["copy-fonts", "tokens:build"],
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/html",
-        "port": 4000,
-        "host": "0.0.0.0",
+        "port": 4400,
         "configDir": "libs/chlorophyll/.storybook"
       },
       "configurations": {
@@ -74,13 +70,11 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["copy-fonts", "tokens:build"],
       "options": {
-        "uiFramework": "@storybook/html",
-        "configDir": "libs/chlorophyll/.storybook",
-        "outputDir": "dist/storybook/chlorophyll"
+        "outputDir": "dist/storybook/chlorophyll",
+        "configDir": "libs/chlorophyll/.storybook"
       },
       "configurations": {
         "ci": {

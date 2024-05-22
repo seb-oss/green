@@ -1,5 +1,8 @@
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
+import * as Stories from './in-page-wizard-step-card.stories.ts'
+
+<Meta of={Stories} />
 
 # In-page wizard step card
 
@@ -26,22 +29,26 @@ export class AppModule {}
 
 ## Options
 
+<Markdown>{`
 | Input       | Type      | Description                                                                      |
 | :---------- | :-------- | :------------------------------------------------------------------------------- |
-| stepText    | `string`  | The header progress text, typically this would be "Step 1 of 2".                 |
-| title       | `string`  | The header title.                                                                |
-| editBtnText | `string`  | Edit button text, typically this would be "Edit"                                 |
-| nextBtnText | `string`  | Next button text, typically this would be "Next"                                 |
-| isActive    | `boolean` | Indicates that this step is active.                                              |
-| isCompleted | `boolean` | Determines that this step has been completed.                                    |
-| disableNext | `boolean` | Set the next button to disabled. E.g. needed if validation fails for step input. |
+| stepText    | \`string\`  | The header progress text, typically this would be "Step 1 of 2".                 |
+| title       | \`string\`  | The header title.                                                                |
+| editBtnText | \`string\`  | Edit button text, typically this would be "Edit"                                 |
+| nextBtnText | \`string\`  | Next button text, typically this would be "Next"                                 |
+| isActive    | \`boolean\` | Indicates that this step is active.                                              |
+| isCompleted | \`boolean\` | Determines that this step has been completed.                                    |
+| disableNext | \`boolean\` | Set the next button to disabled. E.g. needed if validation fails for step input. |
+`}</Markdown>
 
 ### Outputs
 
+<Markdown>{`
 | Event           | Description                                |
 | :-------------- | :----------------------------------------- |
 | handleNextClick | Event emitted when next button is clicked. |
 | handleEditClick | Event emitted when edit button is clicked. |
+`}</Markdown>
 
 ## Examples
 

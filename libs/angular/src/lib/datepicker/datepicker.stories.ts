@@ -1,8 +1,6 @@
 // Datepicker.stories.ts
-import Documentation from './documentation.mdx'
 import { startOfYear, subYears } from 'date-fns'
-
-import { moduleMetadata, Story, Meta } from '@storybook/angular'
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -22,9 +20,6 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-datepicker'],
   },
   // More on argTypes: https://storybook.js.org/docs/angular/api/argtypes
@@ -40,7 +35,7 @@ export default {
   },
 } as Meta<NggDatepickerComponent>
 
-const Template: Story<NggDatepickerComponent> = (
+const Template: StoryFn<NggDatepickerComponent> = (
   args: NggDatepickerComponent,
 ) => ({
   props: args,
@@ -65,7 +60,7 @@ CustomOptions.args = {
   },
 }
 
-const FormControlTemplate: Story<NggDatepickerComponent> = (
+const FormControlTemplate: StoryFn<NggDatepickerComponent> = (
   args: NggDatepickerComponent,
 ) => {
   const validationForm = new FormGroup({

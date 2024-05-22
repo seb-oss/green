@@ -90,6 +90,9 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ reflect: true })
   name = ''
 
+  /**
+   * The form element that the form control is associated with.
+   */
   get form() {
     return this.#internals.form
   }
