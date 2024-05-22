@@ -20,10 +20,28 @@ import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
 
+/**
+ * Used to customize the appearance of a date in the calendar.
+ */
 export type CustomizedDate = {
+  /**
+   * The date to customize.
+   */
   date: Date
-  color?: string // could map to CSS variable name
-  indicator?: 'dot' // possible to support other indicators in future
+
+  /**
+   * The color of the indicator.
+   */
+  color?: string
+
+  /**
+   * The type of indicator.
+   */
+  indicator?: 'dot'
+
+  /**
+   * Whether the date is disabled or not.
+   */
   disabled: boolean
 }
 
@@ -111,6 +129,10 @@ export class GdsCalendar extends GdsElement {
   @property({ type: Boolean })
   showWeekNumbers = false
 
+  /**
+   * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
+   * This can only be set through the property, not through an attribute.
+   */
   @property({ attribute: false })
   customizedDates?: CustomizedDate[]
 
@@ -167,6 +189,24 @@ export class GdsCalendar extends GdsElement {
                       </td>`,
                   )}
                   ${week.days.map((day) => {
+                    // Establish customization options for the current date
+                    const customization: Omit<CustomizedDate, 'date'> = {
+                      // Defaults
+                      color: 'currentColor',
+
+                      // Get baseline disabled state from the disabledDates prop (or false if unset)
+                      disabled: Boolean(
+                        this.disabledDates &&
+                          this.disabledDates.some((d) => isSameDay(d, day)),
+                      ),
+
+                      // Override with any customizations
+                      ...(this.customizedDates &&
+                        this.customizedDates.find((d) =>
+                          isSameDay(d.date, day),
+                        )),
+                    }
+
                     const isOutsideCurrentMonth =
                       !isSameMonth(this.focusedDate, day) ||
                       day < this.min ||
@@ -174,18 +214,11 @@ export class GdsCalendar extends GdsElement {
 
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
-                    const customization =
-                      this.customizedDates &&
-                      this.customizedDates.find(
-                        (customizedDate) => customizedDate.date === day,
-                      )
-
-                    const isDisabled = customization
-                      ? false
-                      : isOutsideCurrentMonth ||
-                        (this.disabledWeekends && isWeekend) ||
-                        (this.disabledDates &&
-                          this.disabledDates.some((d) => isSameDay(d, day)))
+                    // Establish final disabled state
+                    const isDisabled =
+                      customization.disabled ||
+                      isOutsideCurrentMonth ||
+                      (this.disabledWeekends && isWeekend)
 
                     return html`
                       <td
@@ -211,7 +244,7 @@ export class GdsCalendar extends GdsElement {
                         >
 
                         ${when(
-                          customization,
+                          customization.indicator,
                           () =>
                             html`<span
                               class="indicator_${customization?.indicator}"
