@@ -20,8 +20,8 @@ import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
 
-type CustomizedDate = {
-  dates: Date[]
+export type CustomizedDate = {
+  date: Date
   color?: string // could map to CSS variable name
   indicator?: 'dot' // possible to support other indicators in future
   disabled: boolean
@@ -112,7 +112,7 @@ export class GdsCalendar extends GdsElement {
   showWeekNumbers = false
 
   @property({ attribute: false })
-  customDates?: CustomizedDate
+  customizedDates?: CustomizedDate[]
 
   /**
    * Returns the date cell element for the given day number.
@@ -174,11 +174,13 @@ export class GdsCalendar extends GdsElement {
 
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
-                    const isCustomDate =
-                      this.customDates &&
-                      this.customDates.dates.some((d) => isSameDay(d, day))
+                    const customization =
+                      this.customizedDates &&
+                      this.customizedDates.find(
+                        (customizedDate) => customizedDate.date === day,
+                      )
 
-                    const isDisabled = isCustomDate
+                    const isDisabled = customization
                       ? false
                       : isOutsideCurrentMonth ||
                         (this.disabledWeekends && isWeekend) ||
@@ -202,19 +204,17 @@ export class GdsCalendar extends GdsElement {
                       >
                         <div class="date-wrapper">
                           <span
-                            style="color: ${isCustomDate
-                              ? this.customDates?.color
+                            style="color: ${customization
+                              ? customization?.color
                               : ''}"
                             >${day.getDate()}</span
                           >
                           ${when(
-                            this.customDates,
+                            this.customizedDates,
                             () =>
                               html` <span
-                                class="indicator ${classMap({
-                                  customDate: Boolean(isCustomDate),
-                                })}"
-                                style="background: ${this.customDates?.color}"
+                                class="indicator_${customization?.indicator}"
+                                style="background: ${customization?.color}"
                               ></span>`,
                           )}
                         </div>
