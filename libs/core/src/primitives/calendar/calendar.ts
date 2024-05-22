@@ -190,6 +190,7 @@ export class GdsCalendar extends GdsElement {
                     return html`
                       <td
                         class="${classMap({
+                          'custom-date': Boolean(customization),
                           disabled: Boolean(isDisabled),
                           today: isSameDay(currentDate, day),
                         })}"
@@ -202,22 +203,21 @@ export class GdsCalendar extends GdsElement {
                           isDisabled ? null : this.#setSelectedDate(day)}
                         id="dateCell-${day.getDate()}"
                       >
-                        <div class="date-wrapper">
-                          <span
-                            style="color: ${customization
-                              ? customization?.color
-                              : ''}"
-                            >${day.getDate()}</span
-                          >
-                          ${when(
-                            this.customizedDates,
-                            () =>
-                              html` <span
-                                class="indicator_${customization?.indicator}"
-                                style="background: ${customization?.color}"
-                              ></span>`,
-                          )}
-                        </div>
+                        <span
+                          style="color: ${customization
+                            ? customization?.color
+                            : ''}"
+                          >${day.getDate()}</span
+                        >
+
+                        ${when(
+                          customization,
+                          () =>
+                            html`<span
+                              class="indicator_${customization?.indicator}"
+                              style="background-color: ${customization?.color}"
+                            ></span>`,
+                        )}
                       </td>
                     `
                   })}
