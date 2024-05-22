@@ -10,7 +10,7 @@ import {
 
 import '../../button'
 import type { GdsButton } from '../../button'
-import '../../icon'
+import '../../icon/icons/checkmark.js'
 
 import { styles } from './filter-chip.styles'
 
