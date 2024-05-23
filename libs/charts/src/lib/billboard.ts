@@ -181,6 +181,7 @@ export const createOptions = ({
   let hasNegativeValue = false
   for (const dt of columns) {
     for (const val of dt) {
+      if (typeof val !== 'number') continue
       if (val < 0) {
         hasNegativeValue = true
         break

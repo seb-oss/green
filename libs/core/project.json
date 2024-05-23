@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
+  "tags": [],
   "implicitDependencies": ["tokens"],
   "targets": {
     "build": {
@@ -49,13 +50,15 @@
         "command": "node libs/core/build-scripts/generate-scope-suffix.cjs"
       }
     },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "dependsOn": ["css-lint"],
+    "build-custom-elements-json": {
+      "executor": "nx:run-commands",
       "options": {
-        "lintFilePatterns": ["libs/core/**/*.ts"]
+        "command": "cd libs/core && npx cem analyze --litelement"
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "dependsOn": ["css-lint"]
     },
     "css-lint": {
       "executor": "nx:run-commands",
@@ -85,15 +88,12 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
-      "dependsOn": ["tokens:build"],
+      "executor": "@nx/storybook:storybook",
       "options": {
         "port": 4400,
-        "configDir": "libs/core/.storybook",
-        "uiFramework": "@storybook/web-components"
+        "configDir": "libs/core/.storybook"
       },
-      "dependsOn": ["build-src"],
-      "inputs": ["core"],
+      "dependsOn": ["build", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
@@ -101,26 +101,22 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
-      "inputs": ["core"],
-      "dependsOn": ["build-src", "tokens:build"],
       "options": {
         "outputDir": "dist/storybook/core",
-        "configDir": "libs/core/.storybook",
-        "uiFramework": "@storybook/web-components"
+        "configDir": "libs/core/.storybook"
       },
+      "dependsOn": ["build", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
-        },
-        "parallel": false
+        }
       }
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     }
-  },
-  "tags": []
+  }
 }

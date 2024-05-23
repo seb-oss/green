@@ -1,6 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular'
-
-import Documentation from './documentation.mdx'
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { NggBadgeModule } from './badge.module'
 import { NggBadgeComponent } from './badge.component'
 
@@ -21,21 +19,20 @@ export default {
     },
   },
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-badge'],
   },
 } as Meta<NggBadgeComponent>
 
-const Template: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
+const Template: StoryFn<NggBadgeComponent> = (args: NggBadgeComponent) => ({
   template: `
     <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
   props: args,
 })
 
-const BadgesTemplate: Story<NggBadgeComponent> = (args: NggBadgeComponent) => ({
+const BadgesTemplate: StoryFn<NggBadgeComponent> = (
+  args: NggBadgeComponent,
+) => ({
   template: `
     <div class="d-flex justify-content-between">
       <span ngg-badge >Badge</span>

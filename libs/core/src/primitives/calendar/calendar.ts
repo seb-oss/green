@@ -1,7 +1,7 @@
-import { HTMLTemplateResult, LitElement, html } from 'lit'
+import { html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
-import { property, query, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import {
   addDays,
@@ -19,6 +19,31 @@ import { renderMonthGridView } from './functions'
 import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
+
+/**
+ * Used to customize the appearance of a date in the calendar.
+ */
+export type CustomizedDate = {
+  /**
+   * The date to customize.
+   */
+  date: Date
+
+  /**
+   * The color of the indicator.
+   */
+  color?: string
+
+  /**
+   * The type of indicator.
+   */
+  indicator?: 'dot'
+
+  /**
+   * Whether the date is disabled or not.
+   */
+  disabled: boolean
+}
 
 /**
  * @element gds-calendar
@@ -105,6 +130,13 @@ export class GdsCalendar extends GdsElement {
   showWeekNumbers = false
 
   /**
+   * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
+   * This can only be set through the property, not through an attribute.
+   */
+  @property({ attribute: false })
+  customizedDates?: CustomizedDate[]
+
+  /**
    * Returns the date cell element for the given day number.
    */
   getDateCell(dayNumber: number) {
@@ -157,6 +189,24 @@ export class GdsCalendar extends GdsElement {
                       </td>`,
                   )}
                   ${week.days.map((day) => {
+                    // Establish customization options for the current date
+                    const customization: Omit<CustomizedDate, 'date'> = {
+                      // Defaults
+                      color: 'currentColor',
+
+                      // Get baseline disabled state from the disabledDates prop (or false if unset)
+                      disabled: Boolean(
+                        this.disabledDates &&
+                          this.disabledDates.some((d) => isSameDay(d, day)),
+                      ),
+
+                      // Override with any customizations
+                      ...(this.customizedDates &&
+                        this.customizedDates.find((d) =>
+                          isSameDay(d.date, day),
+                        )),
+                    }
+
                     const isOutsideCurrentMonth =
                       !isSameMonth(this.focusedDate, day) ||
                       day < this.min ||
@@ -164,15 +214,16 @@ export class GdsCalendar extends GdsElement {
 
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
+                    // Establish final disabled state
                     const isDisabled =
+                      customization.disabled ||
                       isOutsideCurrentMonth ||
-                      (this.disabledWeekends && isWeekend) ||
-                      (this.disabledDates &&
-                        this.disabledDates.some((d) => isSameDay(d, day)))
+                      (this.disabledWeekends && isWeekend)
 
                     return html`
                       <td
                         class="${classMap({
+                          'custom-date': Boolean(customization),
                           disabled: Boolean(isDisabled),
                           today: isSameDay(currentDate, day),
                         })}"
@@ -185,7 +236,21 @@ export class GdsCalendar extends GdsElement {
                           isDisabled ? null : this.#setSelectedDate(day)}
                         id="dateCell-${day.getDate()}"
                       >
-                        ${day.getDate()}
+                        <span
+                          style="color: ${customization
+                            ? customization?.color
+                            : ''}"
+                          >${day.getDate()}</span
+                        >
+
+                        ${when(
+                          customization.indicator,
+                          () =>
+                            html`<span
+                              class="indicator_${customization?.indicator}"
+                              style="background-color: ${customization?.color}"
+                            ></span>`,
+                        )}
                       </td>
                     `
                   })}

@@ -1,8 +1,9 @@
-import { unsafeCSS } from 'lit'
+import { nothing, unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
+import { forwardAttributes } from '../../utils/directives'
 import { TransitionalStyles } from '../../transitional-styles'
 import '../../primitives/ripple'
 
@@ -32,6 +33,9 @@ const html = stripWhitespace(customElementHtml)
 export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = [tokens, unsafeCSS(style)]
 
+  /**
+   * @internal
+   */
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -56,10 +60,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   rank: 'primary' | 'secondary' | 'tertiary' = 'primary'
 
   /**
-   * Defines which set the button belongs to. Defaults to "neutral".
+   * Defines which variant the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  variant: 'default' | 'positive' | 'negative' = 'default'
+  variant: 'neutral' | 'positive' | 'negative' = 'neutral'
 
   /**
    * Sets the size of the button. Defaults to "small".
@@ -84,6 +88,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   connectedCallback(): void {
     super.connectedCallback()
+    this.setAttribute('role', 'none')
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
@@ -105,13 +110,15 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         ?type="${this.type}"
         ?disabled="${this.disabled}"
         @click="${this.#handleClick}"
-        aria-label="${this.label}"
+        aria-label=${this.label || nothing}
+        part="_button"
+        ${forwardAttributes(
+          (attr) =>
+            attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
+        )}
       >
         <slot name="lead" gds-allow="gds-icon"></slot>
-        <slot
-          @slotchange=${this.#mainSlotChange}
-          gds-allow="#text gds-icon"
-        ></slot>
+        <slot @slotchange=${this.#mainSlotChange}></slot>
         <slot name="trail" gds-allow="gds-icon"></slot>
         ${when(
           !this._isUsingTransitionalStyles,

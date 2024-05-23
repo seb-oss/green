@@ -9,7 +9,6 @@ import { gdsCustomElement } from '../../scoping'
 
 import style from './option.styles'
 
-import 'reflect-metadata'
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
 

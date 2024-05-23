@@ -1,5 +1,4 @@
-import Documentation from './documentation.mdx'
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import { NggAccordionComponent } from './accordion.component'
 import { NggAccordionModule } from './accordion.module'
 
@@ -12,14 +11,11 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-accordion'],
   },
 } as Meta<NggAccordionComponent>
 
-const Template: Story<NggAccordionComponent> = () => {
+const Template: StoryFn<NggAccordionComponent> = () => {
   return {
     template: `
         <ngg-accordion [closeOthers]=false>
@@ -37,7 +33,7 @@ const Template: Story<NggAccordionComponent> = () => {
   }
 }
 
-const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
+const NoSubHeadersTemplate: StoryFn<NggAccordionComponent> = () => {
   return {
     template: `
         <ngg-accordion [closeOthers]=false>
@@ -55,7 +51,7 @@ const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
   }
 }
 
-const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
+const CheckBoxTemplate: StoryFn<NggAccordionComponent> = () => {
   return {
     template: `
       <ngg-accordion [closeOthers]=true>

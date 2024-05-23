@@ -11,11 +11,13 @@
     },
     {
       "path": "./.storybook/tsconfig.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
   ],
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "strict": true,
     "noImplicitReturns": true,

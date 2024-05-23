@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.20.1
+
+### Patch Changes
+
+- 336743c: Added custom dates property to internal `gds-calendar`
+
+## 1.20.0
+
+### Minor Changes
+
+- bfe345f: **Button:** Remove element constraint from main slot
+- bfe345f: **Filter Chips:** Add new component
+
 ## 1.19.0
 
 ### Minor Changes
