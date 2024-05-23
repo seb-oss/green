@@ -31,19 +31,43 @@ function generateTsContent(name, regularSvg, solidSvg) {
   const tagName = `gds-icon-${toKebabCase(name)}`
 
   return `
-import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
-import { GdsIcon } from '../icon'
-
-@gdsCustomElement('${tagName}')
-export class ${className} extends GdsIcon {
-  static _regularSVG = \`${regularSvg}\`
-  static _solidSVG = \`${solidSvg}\`
-}
+    @gdsCustomElement('${tagName}')
+    export class ${className} extends GdsIcon {
+      static _regularSVG = \`${regularSvg}\`
+      static _solidSVG = \`${solidSvg}\`
+    }
   `.trim()
 }
 
 const mdxFile = path.resolve(__dirname, '../src/components/icon/icon.list.mdx')
 const tsFile = path.resolve(__dirname, '../src/components/icon/icons/index.ts')
+
+async function renameFiles() {
+  const regularFiles = await fs.readdir(regularDir)
+  for (const file of regularFiles) {
+    if (path.extname(file) === '.svg') {
+      let oldName = path.basename(file, '.svg')
+      let newName = oldName.split(',')[0] // get the part before the first comma
+
+      // Rename the files in the regular and solid directories
+      await fs.rename(
+        path.join(regularDir, file),
+        path.join(regularDir, `${newName}.svg`),
+      )
+      console.log(`Renamed ${oldName} to ${newName} in regular directory`)
+
+      try {
+        await fs.rename(
+          path.join(solidDir, file),
+          path.join(solidDir, `${newName}.svg`),
+        )
+        console.log(`Renamed ${oldName} to ${newName} in solid directory`)
+      } catch (error) {
+        console.warn(`Failed to rename solid SVG for ${oldName}.`)
+      }
+    }
+  }
+}
 
 async function generateIcons() {
   try {
@@ -54,20 +78,6 @@ async function generateIcons() {
       if (path.extname(file) === '.svg') {
         let oldName = path.basename(file, '.svg')
         let newName = oldName.split(',')[0] // get the part before the first comma
-
-        // Rename the files in the regular and solid directories
-        await fs.rename(
-          path.join(regularDir, file),
-          path.join(regularDir, `${newName}.svg`),
-        )
-        try {
-          await fs.rename(
-            path.join(solidDir, file),
-            path.join(solidDir, `${newName}.svg`),
-          )
-        } catch (error) {
-          console.warn(`Failed to rename solid SVG for ${oldName}.`)
-        }
 
         const regularSvg = await readSvgContent(
           path.join(regularDir, `${newName}.svg`),
@@ -102,4 +112,9 @@ async function generateIcons() {
   }
 }
 
-generateIcons()
+async function main() {
+  await renameFiles()
+  await generateIcons()
+}
+
+main()

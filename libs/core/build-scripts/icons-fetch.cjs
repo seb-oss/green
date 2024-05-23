@@ -47,34 +47,43 @@ async function fetchAndSaveFigmaIcons(nodeId, savePath) {
     console.log('Traversing document...')
     traverse(docResponse.data.document)
 
-    const fetchPromises = nodes.map(async (node) => {
-      console.log(`Fetching image for node ${node.id}...`)
-      const imagesResponse = await axios.get(
-        `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node.id}&format=svg`,
-        {
-          headers: {
-            'X-Figma-Token': figmaAccessKey,
+    const batchSize = 40
+    for (let i = 0; i < nodes.length; i += batchSize) {
+      const batch = nodes.slice(i, i + batchSize)
+      const fetchPromises = batch.map(async (node) => {
+        console.log(`Fetching image for node ${node.id}...`)
+        const imagesResponse = await axios.get(
+          `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node.id}&format=svg`,
+          {
+            headers: {
+              'X-Figma-Token': figmaAccessKey,
+            },
           },
-        },
-      )
+        )
 
-      const images = imagesResponse.data.images
-      const imageUrl = images[node.id]
-      if (imageUrl) {
-        console.log(`Fetching SVG from ${imageUrl}...`)
-        const response = await axios.get(imageUrl)
-        let nodeName = node.name.split(',')[0]
-        let fileName = `${nodeName}.svg`
-        const svg = response.data
-        console.log(`Writing SVG to ${path.join(savePath, fileName)}...`)
-        await fs.writeFile(path.join(savePath, fileName), svg)
-        console.log(`Fetched Figma SVG for ${nodeName}`)
+        const images = imagesResponse.data.images
+        const imageUrl = images[node.id]
+        if (imageUrl) {
+          console.log(`Fetching SVG from ${imageUrl}...`)
+          const response = await axios.get(imageUrl)
+          let nodeName = node.name.split(',')[0]
+          let fileName = `${nodeName}.svg`
+          const svg = response.data
+          console.log(`Writing SVG to ${path.join(savePath, fileName)}...`)
+          await fs.writeFile(path.join(savePath, fileName), svg)
+          console.log(`Fetched Figma SVG for ${nodeName}`)
+        }
+      })
+
+      console.log('Waiting for all fetch promises to resolve...')
+      await Promise.all(fetchPromises)
+      console.log('All fetch promises resolved.')
+
+      if (i + batchSize < nodes.length) {
+        console.log('Waiting for 1 minute before fetching the next batch...')
+        await new Promise((resolve) => setTimeout(resolve, 60 * 1000)) // Wait for 1 minute
       }
-    })
-
-    console.log('Waiting for all fetch promises to resolve...')
-    await Promise.all(fetchPromises)
-    console.log('All fetch promises resolved.')
+    }
   } catch (error) {
     console.error('Error processing Figma SVGS:', error)
   }
