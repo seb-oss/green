@@ -15,7 +15,7 @@ import { TransitionalStyles } from '../../transitional-styles'
 import styles from './context-menu.styles'
 
 import '../../primitives/menu'
-import '../../primitives/popover'
+import '../popover'
 
 /**
  * @element gds-context-menu

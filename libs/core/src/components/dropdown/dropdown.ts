@@ -22,7 +22,7 @@ import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option'
-import '../../primitives/popover'
+import '../popover'
 
 import { GdsFormControlElement } from '../../components/form-control'
 

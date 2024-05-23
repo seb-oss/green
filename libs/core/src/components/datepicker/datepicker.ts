@@ -17,8 +17,8 @@ import {
   dateConverter,
 } from '../../utils/helpers/attribute-converters'
 
-import '../../primitives/popover'
-import type { GdsPopover } from '../../primitives/popover'
+import '../popover'
+import type { GdsPopover } from '../popover'
 
 import '../../primitives/calendar'
 import type { GdsCalendar } from '../../primitives/calendar'

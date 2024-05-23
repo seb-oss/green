@@ -20,7 +20,6 @@ import styles from './popover.styles'
 
 /**
  * @element gds-popover
- * @internal
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
