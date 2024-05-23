@@ -4,7 +4,7 @@ import { GdsIcon } from '../icon'
 @gdsCustomElement('gds-icon-line-chart-one')
 export class IconLineChartOne extends GdsIcon {
   static _regularSVG = `
-<path d="M2.75 10.75V19.25M8.91602 4.75V19.25M15.082 13.75V19.25M21.248 7.75V19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.25 10.75V16.25M14.25 4.75V16.25M19.25 12.75V16.25M3.75 3.75V20.25H21.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 
 `
   static _solidSVG = `

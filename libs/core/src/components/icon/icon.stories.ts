@@ -27,24 +27,6 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  // argTypes: {
-  //   solid: {
-  //     control: { type: 'boolean' },
-  //     defaultValue: false,
-  //   },
-  //   label: {
-  //     control: { type: 'text' },
-  //     defaultValue: '',
-  //   },
-  //   width: {
-  //     control: { type: 'number' },
-  //     defaultValue: 24,
-  //   },
-  //   height: {
-  //     control: { type: 'number' },
-  //     defaultValue: 24,
-  //   },
-  // },
 }
 
 export const Basic: Story = {
