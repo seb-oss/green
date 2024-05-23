@@ -126,6 +126,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  button.icon slot {
+    display: contents;
+  }
 }
 
 @layer ranks {

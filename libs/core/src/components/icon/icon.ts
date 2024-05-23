@@ -23,6 +23,7 @@ export abstract class GdsIcon extends LitElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-label="${this.label}"
+      role="img"
     >
       ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
     </svg>`

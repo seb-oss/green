@@ -2,7 +2,6 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/grid/index.js'
-
 import '../../../../../dist/libs/core/src/components/icon/icons/chevron-top.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-up.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
@@ -141,13 +140,13 @@ export const WithIcon: Story = {
   },
   render: (args) => html`
     <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
-      <gds-icon-arrow-down slot="lead" />
+      <gds-icon-arrow-down slot="lead"></gds-icon-arrow-down>
       Leading icon
     </gds-button>
 
     <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
       Trailing icon
-      <gds-icon-arrow-up slot="trail" />
+      <gds-icon-arrow-up slot="trail"></gds-icon-arrow-up>
     </gds-button>
   `,
 }

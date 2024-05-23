@@ -39,4 +39,10 @@ describe('IconArchive', () => {
       '<path d="M5 3v18l14-9L5 3z"></path>',
     ) // Change this line
   })
+  it('should be accessible', async () => {
+    element = await fixture(
+      html`<gds-icon-arrow label="Arrow"></gds-icon-arrow>`,
+    )
+    expect(element).to.be.accessible()
+  })
 })

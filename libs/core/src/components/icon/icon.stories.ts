@@ -27,28 +27,33 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  args: {
-    solid: {
-      control: { type: 'boolean' },
-      defaultValue: false,
-    },
-    label: {
-      control: { type: 'text' },
-      defaultValue: '',
-    },
-    width: {
-      control: { type: 'number' },
-      defaultValue: 24,
-    },
-    height: {
-      control: { type: 'number' },
-      defaultValue: 24,
-    },
-  },
+  // argTypes: {
+  //   solid: {
+  //     control: { type: 'boolean' },
+  //     defaultValue: false,
+  //   },
+  //   label: {
+  //     control: { type: 'text' },
+  //     defaultValue: '',
+  //   },
+  //   width: {
+  //     control: { type: 'number' },
+  //     defaultValue: 24,
+  //   },
+  //   height: {
+  //     control: { type: 'number' },
+  //     defaultValue: 24,
+  //   },
+  // },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
+  args: {
+    solid: false,
+    width: 24,
+    height: 24,
+  },
 }
 
 /**
@@ -458,9 +463,9 @@ export const IconsSize: Story = {
 }
 
 /**
- *Aria Label
+ *Accesible Label
  *
- *You can set the `aria-label` attribute to provide a label for the icon. This is useful for screen readers.
+ *You can set the `label` attribute to provide a label for the icon. This is useful for screen readers.
  */
 
 export const IconsLabel: Story = {
