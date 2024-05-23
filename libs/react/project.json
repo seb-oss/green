@@ -80,7 +80,14 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build-with-types-and-scoping",
+          "dependencies": true
+        },
+        "tokens:build"
+      ]
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",

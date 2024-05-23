@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0
+
+### Major Changes
+
+- 5831cf7: Update minimum Angular peer version to 16.2.12
+
+### Patch Changes
+
+- Updated dependencies [336743c]
+  - @sebgroup/green-core@1.20.1
+
 ## 3.8.0
 
 ### Minor Changes

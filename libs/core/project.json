@@ -124,6 +124,7 @@
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook"
       },
+      "dependsOn": ["build", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
