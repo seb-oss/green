@@ -29,12 +29,16 @@ const DefaultParams: Story = {
     controls: { expanded: true },
   },
   args: {
-    innerHTML: `<gds-button rank="tertiary" slot="trigger"><gds-icon-share></gds-icon-share></gds-button>
-<div style="padding: 1rem; padding-top: 0">
-  <h3>This is a custom popover!</h3>
-  <p>It can contain any content you need, including other components.</p>
-  <gds-button rank="primary">Like buttons!</gds-button>
-</div>`,
+    innerHTML: `
+  <gds-button rank="tertiary" slot="trigger">
+    <gds-icon-share></gds-icon-share>
+  </gds-button>
+  <div style="padding: 1rem; padding-top: 0">
+    <h3>This is a custom popover!</h3>
+    <p>It can contain any content you need, including other components.</p>
+    <gds-button rank="primary">Such as buttons!</gds-button>
+  </div>
+`,
     calcMaxWidth: () => '300px',
     placement: 'bottom-center',
   },
