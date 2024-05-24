@@ -201,7 +201,7 @@ export class GdsPopover extends GdsElement {
           () =>
             this.#dialogElementRef.value?.addEventListener(
               'click',
-              this.#clickOutsideListener,
+              this.#handleClickOutside,
             ),
           0,
         )
@@ -209,7 +209,7 @@ export class GdsPopover extends GdsElement {
         this.#dialogElementRef.value?.close()
         this.#dialogElementRef.value?.removeEventListener(
           'click',
-          this.#clickOutsideListener,
+          this.#handleClickOutside,
         )
       }
     })
@@ -239,11 +239,12 @@ export class GdsPopover extends GdsElement {
   }
 
   #registerTriggerEvents() {
-    this._trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.addEventListener('keydown', this.#handleTriggerKeyDown)
+    this._trigger?.addEventListener('click', this.#handleTriggerClick)
   }
 
   #unregisterTriggerEvents() {
-    this._trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.removeEventListener('keydown', this.#handleTriggerKeyDown)
     this.#autoPositionCleanupFn?.()
   }
 
@@ -297,7 +298,7 @@ export class GdsPopover extends GdsElement {
   /**
    * ArrowDown on the trigger element will trigger the popover by default, and escape will close it.
    */
-  #triggerKeyDownListener = (e: KeyboardEvent) => {
+  #handleTriggerKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       this.open = true
@@ -307,6 +308,12 @@ export class GdsPopover extends GdsElement {
       this.open = false
       this.#dispatchUiStateEvent('cancel')
     }
+  }
+
+  #handleTriggerClick = (e: MouseEvent) => {
+    e.preventDefault()
+    this.open = !this.open
+    this.#dispatchUiStateEvent(this.open ? 'show' : 'close')
   }
 
   /**
@@ -322,7 +329,7 @@ export class GdsPopover extends GdsElement {
     })
   }
 
-  #clickOutsideListener = (evt: Event) => {
+  #handleClickOutside = (evt: Event) => {
     const e = evt as PointerEvent
     const dialog = this.#dialogElementRef.value
     const isNotEnterKey = e.clientX > 0 || e.clientY > 0
