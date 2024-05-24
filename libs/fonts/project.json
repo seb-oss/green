@@ -30,7 +30,6 @@
       "defaultConfiguration": "production",
       "dependsOn": ["build-base"],
       "options": {
-        "outputPath": "dist/libs/fonts",
         "commands": [
           "sass libs/fonts/scss/seb-fonts.scss dist/libs/fonts/css/seb-fonts.css"
         ]
