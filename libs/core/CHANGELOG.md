@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.2
+
+### Patch Changes
+
+- ed85124: **Button**: Fix text wrap in transitional styles
+
 ## 1.21.1
 
 ### Patch Changes
