@@ -42,10 +42,17 @@ function generateTsContent(name, regularSvg, solidSvg) {
   return `import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
 import { GdsIcon } from '../icon'
 
+/**
+ * @element ${tagName}
+ */
 @gdsCustomElement('${tagName}')
 export class ${className} extends GdsIcon {
+  /** @private */
   static _regularSVG = \`${regularSvg}\`
+  /** @private */
   static _solidSVG = \`${solidSvg}\`
+  /** @private */
+  static _name = '${name.replace(/-/g, ' ')}'
 }`.trim()
 }
 
@@ -121,12 +128,12 @@ async function renameFiles() {
   await fs.writeFile(path.join(outputDir, 'index.ts'), tsIndexContent)
   console.log('Generated index.ts file')
 
-  const mdxFile = path.resolve(
-    __dirname,
-    '../src/components/icon/icon.list.mdx',
-  )
-  await fs.writeFile(mdxFile, mdxContent)
-  console.log('Generated icon.list.mdx file')
+  // const mdxFile = path.resolve(
+  //   __dirname,
+  //   '../src/components/icon/icon.list.mdx',
+  // )
+  // await fs.writeFile(mdxFile, mdxContent)
+  // console.log('Generated icon.list.mdx file')
 }
 
 async function main() {

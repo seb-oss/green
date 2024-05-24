@@ -3,14 +3,16 @@ import '../../../../../dist/libs/core/src/components/icon/icons/index.js'
 import { html } from 'lit'
 
 /**
- * The `gds-icon` component is a flexible icon component. It allows you to use a variety of pre-defined icons in your application.
+ * The `gds-icon-*` component is a flexible set of icon components. These allows you to use a variety of pre-defined icons in your application.
  *
- * Each icon can be customized with different properties:
+ * ### Usage
  *
- * - `solid`: This is a boolean property. When set to true, the solid version of the icon is displayed. When set to false or not provided, the regular version of the icon is displayed.
- * - `width` and `height`: These properties allow you to set the dimensions of the icon. If not provided, the icon will use its default dimensions at 24x24.
+ * Just like other components, the icons can be imported indivually, so that you don't end up with unused icons in your bundle:
+ *
+ * ```js
+ * import '@sebgroup/green-core/components/icon/icons/gds-icon-archive.js'
+ * ```
  */
-
 const meta: Meta = {
   title: 'Components/Icon',
   component: 'gds-icon-archive',
@@ -39,13 +41,12 @@ export const Basic: Story = {
 }
 
 /**
- * Regular Icons
  * Icons are available in regular versions. You can use the `solid` attribute to display the solid version of the icon.
  */
 
 export const IconsRegular: Story = {
   ...DefaultParams,
-  name: 'Regular',
+  name: 'Regular icons',
   render: (args) => html`
     <gds-icon-airplane-up></gds-icon-airplane-up>
     <gds-icon-archive></gds-icon-archive>
@@ -282,13 +283,11 @@ export const IconsRegular: Story = {
 }
 
 /**
- * Solid Icons
- *
  * Icons are available in solid versions. You can use the `solid` attribute to display the solid version of the icon.
  */
 export const IconsSolid: Story = {
   ...DefaultParams,
-  name: 'Solid',
+  name: 'Solid icons',
   render: (args) => html`
     <gds-icon-airplane-up solid></gds-icon-airplane-up>
     <gds-icon-archive solid></gds-icon-archive>
@@ -533,7 +532,6 @@ export const IconsSolid: Story = {
 }
 
 /**
- * Sizing
  * You can customize the icons by setting the `width` and `height` properties. If not specified it will fall back to `1lh` height and `auto` width.
  */
 
@@ -561,13 +559,11 @@ export const IconsSize: Story = {
 }
 
 /**
- *Accesible Label
- *
- *You can set the `label` attribute to provide a label for the icon. This is useful for screen readers.
+ * Icons have the role of `graphics-symbol`, and will by default have the icon name as label. You can customize the label by setting the `label` attribute.
  */
 
 export const IconsLabel: Story = {
   ...DefaultParams,
-  name: 'Label',
+  name: 'Accessible Label',
   render: (args) => html`<gds-icon-rocket label="Rocket" />`,
 }
