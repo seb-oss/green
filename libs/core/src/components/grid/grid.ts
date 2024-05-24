@@ -57,7 +57,7 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'gap', type: String })
-  gap?: GridSizes
+  gap?: string
 
   /**
    * Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
@@ -68,7 +68,7 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'row-gap', type: String })
-  rowGap?: GridSizes
+  rowGap?: string
 
   /**
    * Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
@@ -79,7 +79,7 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'padding', type: String })
-  padding?: GridSizes
+  padding?: string
 
   /**
    * Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
@@ -90,7 +90,7 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'auto-columns', type: String })
-  autoColumns?: GridSizes
+  autoColumns?: string
 
   /**
    * Lifecycle method called when the element is connected to the DOM.
