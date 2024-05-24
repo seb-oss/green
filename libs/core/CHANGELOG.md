@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.20.2
+
+### Patch Changes
+
+- 73b03d8: Add back a missing dependecny
+
 ## 1.20.1
 
 ### Patch Changes
