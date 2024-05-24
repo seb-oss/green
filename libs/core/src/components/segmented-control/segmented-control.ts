@@ -9,6 +9,7 @@ import { watch } from '../../utils/decorators/watch'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
+import '../../components/icon'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css'

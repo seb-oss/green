@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0
+
+### Major Changes
+
+- 5831cf7: Update minimum Angular peer version to 16.2.12
+
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [2.0.1](https://github.com/sebgroup/green/compare/@sebgroup/green-angular-charts@2.0.0...@sebgroup/green-angular-charts@2.0.1) (2023-11-01)

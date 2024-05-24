@@ -11,8 +11,7 @@
       "outputs": ["{workspaceRoot}/dist/libs/angular-charts"],
       "options": {
         "project": "libs/angular-charts/ng-package.json",
-        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json",
-        "updateBuildableProjectDepsInPackageJson": false
+        "tsConfig": "libs/angular-charts/tsconfig.lib.prod.json"
       },
       "configurations": {
         "production": {
@@ -29,18 +28,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular-charts"],
       "options": {
-        "jestConfig": "libs/angular-charts/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/angular-charts/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/angular-charts/src/**/*.ts",
-          "libs/angular-charts/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -58,7 +50,7 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{options.outputDir}"],
       "dependsOn": ["tokens:build", "fonts:build"],
       "options": {
         "outputDir": "dist/storybook/angular-charts",

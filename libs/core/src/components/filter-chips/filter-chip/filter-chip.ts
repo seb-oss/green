@@ -15,22 +15,20 @@ import '../../icon'
 import { styles } from './filter-chip.styles'
 
 /**
- * @element gds-filter-chips
+ * @element gds-filter-chip
  */
 @gdsCustomElement('gds-filter-chip')
 export class GdsFilterChip<ValueT = any> extends GdsElement {
   static styles = [styles]
 
   /**
-   * Whether the segment is selected
-   * @attr selected
+   * Whether the chip is selected
    */
   @property({ reflect: true, type: Boolean })
   selected = false
 
   /**
-   * Value can be used to tie arbitrary data to the segment.
-   * @attr value
+   * The value of the chip
    */
   @property()
   value?: ValueT

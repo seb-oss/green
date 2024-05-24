@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.20.1
+
+### Patch Changes
+
+- 336743c: Added custom dates property to internal `gds-calendar`
+
 ## 1.20.0
 
 ### Minor Changes
