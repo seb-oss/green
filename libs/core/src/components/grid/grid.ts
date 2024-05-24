@@ -174,7 +174,6 @@ export class GdsGrid extends GdsElement {
       if (this.autoColumns && !this.autoColumns.includes(' ')) {
         desktop = tablet = mobile = `${this.autoColumns}px`
       } else {
-        console.log('auto-columns', l, m, s)
         desktop = l ? `${l.split(':')[1]}px` : undefined
         tablet = m ? `${m.split(':')[1]}px` : undefined
         mobile = s ? `${s.split(':')[1]}px` : undefined
