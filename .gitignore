@@ -61,3 +61,6 @@ next-env.d.ts
 
 custom-elements.json
 storybook.log
+
+# Components 
+icon.list.mdx
