@@ -51,7 +51,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["fonts:build", "tokens:build", "^build"],
       "inputs": ["production", "^production"],
       "cache": true
     },
@@ -96,6 +96,9 @@
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
+    },
+    "copy-fonts": {
+      "dependsOn": ["fonts:build"]
     }
   },
   "namedInputs": {
