@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.1
+
+### Patch Changes
+
+- ee40253: Fix regression of `auto-columns` in Grid
+
 ## 1.21.0
 
 ### Minor Changes
