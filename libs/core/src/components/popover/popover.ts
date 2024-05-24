@@ -1,5 +1,5 @@
-import { HTMLTemplateResult, LitElement, html, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { html, unsafeCSS } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
@@ -78,7 +78,7 @@ export class GdsPopover extends GdsElement {
    * By default, the popover minHeight will be set to `auto`
    */
   @property()
-  calcMinHeight = (referenceEl: HTMLElement) => `auto`
+  calcMinHeight = (_referenceEl: HTMLElement) => `auto`
 
   /**
    * A callback that returns the maximum height of the popover.
@@ -94,11 +94,23 @@ export class GdsPopover extends GdsElement {
   @state()
   private _isVirtKbVisible = false
 
+  @query('slot[name="trigger"]')
+  private _triggerSlot: HTMLSlotElement | undefined
+
   @watch('triggerRef')
   private _handleTriggerRefChanged() {
     this.triggerRef.then((el) => {
       if (el) this._trigger = el
     })
+  }
+
+  #handleTriggerSlotChange() {
+    if (this._triggerSlot) {
+      const trigger = this._triggerSlot.assignedElements()[0] as HTMLElement
+      if (trigger) {
+        this._trigger = trigger
+      }
+    }
   }
 
   @watch('_trigger')
@@ -151,28 +163,34 @@ export class GdsPopover extends GdsElement {
   }
 
   render() {
-    return html`<dialog
-      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
-      ${ref(this.#dialogElementRef)}
-    >
-      <header>
-        <h2>${this.label}</h2>
-        <button
-          class="close"
-          @click=${this.#handleCloseButton}
-          aria-label="${msg('Close')}"
-        >
-          <i></i>
-        </button>
-      </header>
-      <slot></slot>
-    </dialog>`
+    return html`<slot
+        name="trigger"
+        @slotchange=${this.#handleTriggerSlotChange}
+      ></slot>
+      <dialog
+        class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+        aria-hidden="${String(!this.open)}"
+        .hidden="${!this.open}"
+        ${ref(this.#dialogElementRef)}
+      >
+        <header>
+          <h2>${this.label}</h2>
+          <button
+            class="close"
+            @click=${this.#handleCloseButton}
+            aria-label="${msg('Close')}"
+          >
+            <i></i>
+          </button>
+        </header>
+        <slot></slot>
+      </dialog>`
   }
 
   @watch('open')
   private _handleOpenChange() {
-    this.setAttribute('aria-hidden', String(!this.open))
-    this.hidden = !this.open
+    //this.setAttribute('aria-hidden', String(!this.open))
+    //this.hidden = !this.open
 
     this.updateComplete.then(() => {
       if (this.open) {
