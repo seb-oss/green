@@ -2,7 +2,10 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/grid/index.js'
-import '../../../../../dist/libs/core/src/components/icon/index.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/chevron-top.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/arrow-up.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
 
 /**
  * A button serve as an interactive element that enables users to perform an action or make
@@ -137,13 +140,13 @@ export const WithIcon: Story = {
   },
   render: (args) => html`
     <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
-      <gds-icon slot="lead" name="arrow-down"></gds-icon>
+      <gds-icon-arrow-down slot="lead"></gds-icon-arrow-down>
       Leading icon
     </gds-button>
 
     <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
       Trailing icon
-      <gds-icon slot="trail" name="arrow-up"></gds-icon>
+      <gds-icon-arrow-up slot="trail"></gds-icon-arrow-up>
     </gds-button>
   `,
 }
@@ -160,15 +163,15 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
-      <gds-icon name="arrow" />
+      <gds-icon-arrow-right />
     </gds-button>
 
     <gds-button .rank=${args.rank} .variant=${args.variant}>
-      <gds-icon .rank=${args.rank} .variant=${args.variant} name="arrow" />
+      <gds-icon-arrow-right />
     </gds-button>
 
     <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
-      <gds-icon name="arrow" />
+      <gds-icon-arrow-right />
     </gds-button>
   `,
 }

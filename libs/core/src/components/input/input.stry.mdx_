@@ -7,7 +7,7 @@
     supporting-text="Supporting text"
     clearable
   >
-    <gds-icon name="mail" slot="lead"></gds-icon>
+    <gds-icon-email slot="lead"></gds-icon-email>
     <gds-badge slot="trail" variant="surface">
       kr
     </gds-badge>

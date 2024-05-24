@@ -24,8 +24,8 @@ const html = stripWhitespace(customElementHtml)
  * @status beta
  *
  * @slot - Content to be displayed as the button label.
- * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
- * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
+ * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.
+ * @slot trail - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed after the label.
  *
  * @event click - Fired when the button is clicked.
  */
@@ -117,9 +117,9 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
             attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
         )}
       >
-        <slot name="lead" gds-allow="gds-icon"></slot>
+        <slot name="lead"></slot>
         <slot @slotchange=${this.#mainSlotChange}></slot>
-        <slot name="trail" gds-allow="gds-icon"></slot>
+        <slot name="trail"></slot>
         ${when(
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple></gds-ripple>`,
@@ -135,7 +135,9 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
     this.#isIconButton =
       assignedNodes.length === 1 &&
-      assignedNodes.some((node) => node.gdsElementName === 'gds-icon')
+      assignedNodes.some((node) =>
+        node.nodeName.toLowerCase().startsWith('gds-icon'),
+      )
 
     this.requestUpdate()
   }

@@ -126,6 +126,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  button.icon slot {
+    display: contents;
+  }
 }
 
 @layer ranks {
@@ -155,20 +159,14 @@
   }
 
   button.circle {
+    display: flex;
     align-items: center;
-    aspect-ratio: 1/1;
     height: var(--_size);
-    justify-content: center;
-    padding: 0;
     width: var(--_size);
-
-    &::slotted(gds-icon) {
-      align-items: center;
-      display: flex;
-      height: 24px;
-      justify-content: center;
-      width: 24px;
-    }
+    aspect-ratio: 1/1;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
 }
 
