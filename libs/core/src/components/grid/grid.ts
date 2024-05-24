@@ -11,8 +11,6 @@ import { tokens } from '../../tokens.style'
 
 import GridCSS from './grid.style.css'
 
-type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
-
 const BreakpointPattern =
   /(?<l>l:([a-z0-9]+))?\s*(?<m>m:([a-z0-9]+))?\s*(?<s>s:([a-z0-9]+))?/
 
@@ -172,10 +170,11 @@ export class GdsGrid extends GdsElement {
       }
     }
 
-    if (propertyName === 'auto-columns') {
+    if (propertyName === 'autoColumns') {
       if (this.autoColumns && !this.autoColumns.includes(' ')) {
         desktop = tablet = mobile = `${this.autoColumns}px`
       } else {
+        console.log('auto-columns', l, m, s)
         desktop = l ? `${l.split(':')[1]}px` : undefined
         tablet = m ? `${m.split(':')[1]}px` : undefined
         mobile = s ? `${s.split(':')[1]}px` : undefined
@@ -264,7 +263,7 @@ export class GdsGrid extends GdsElement {
    */
   @watch('autoColumns')
   private _updateAutoColumnsVariables() {
-    this._updateCSSVariables('auto-columns', 'col-width')
+    this._updateCSSVariables('autoColumns', 'col-width')
   }
 
   render() {
