@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/fonts/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build-base": {
       "executor": "@nx/js:tsc",
@@ -26,7 +27,7 @@
     },
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{options.outputPath}"],
+      "outputs": ["{workspaceRoot}/dist/libs/fonts"],
       "defaultConfiguration": "production",
       "dependsOn": ["build-base"],
       "options": {
@@ -35,6 +36,5 @@
         ]
       }
     }
-  },
-  "tags": []
+  }
 }

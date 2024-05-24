@@ -21,8 +21,7 @@
           "tsConfig": "libs/angular-charts/tsconfig.lib.json"
         }
       },
-      "defaultConfiguration": "production",
-      "dependsOn": ["charts:build", "tokens:build", "fonts:build"]
+      "defaultConfiguration": "production"
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -51,7 +50,6 @@
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
-      "dependsOn": ["tokens:build", "fonts:build"],
       "options": {
         "outputDir": "dist/storybook/angular-charts",
         "configDir": "libs/angular-charts/.storybook",

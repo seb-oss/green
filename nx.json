@@ -51,7 +51,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["fonts:build", "tokens:build", "^build"],
+      "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
       "cache": true
     },
