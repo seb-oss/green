@@ -1,4 +1,4 @@
-import { html } from 'lit'
+import { html, nothing } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/grid/index.js'
@@ -44,6 +44,16 @@ const DefaultParams: Story = {
     size: {
       options: ['small', 'medium', 'large'],
       control: { type: 'select' },
+    },
+    target: {
+      options: ['_self', '_blank', '_parent', '_top'],
+      control: { type: 'select' },
+    },
+    rel: {
+      control: { type: 'text' },
+    },
+    download: {
+      control: { type: 'text' },
     },
   },
   args: {
@@ -195,4 +205,28 @@ export const Disabled: Story = {
       </gds-button>
 
       <gds-button rank="tertiary" disabled> Tertiary </gds-button>`,
+}
+
+/**
+ * A link styled as a button.
+ */
+export const Link: Story = {
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: ['href', 'target', 'rel', 'download'] },
+  },
+  args: {
+    href: 'https://github.com/sebgroup/green',
+  },
+  render: (args) => html`
+    <gds-button
+      href=${args.href}
+      target=${args.target || nothing}
+      rel=${args.rel || nothing}
+      download=${args?.hasOwnProperty('download') ? args.download : nothing}
+    >
+      Link
+    </gds-button>
+  `,
 }
