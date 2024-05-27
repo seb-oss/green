@@ -16,6 +16,8 @@ import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 
+import '../icon/icons/cross-small'
+
 import styles from './popover.styles'
 
 /**
@@ -66,6 +68,12 @@ export class GdsPopover extends GdsElement {
    */
   @property()
   placement: Placement = 'bottom-start'
+
+  /**
+   * Whether to use a modal dialog in mobile viewport.
+   */
+  @property()
+  useModalInMobileView = false
 
   /**
    * A callback that returns the minimum width of the popover.
@@ -192,18 +200,23 @@ export class GdsPopover extends GdsElement {
       ></slot>
       <div ?hidden="${!this.open}">
         <dialog
-          class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
+          class="${classMap({
+            'v-kb-visible': this._isVirtKbVisible,
+            'use-modal-in-mobile': this.useModalInMobileView,
+          })}"
           aria-hidden="${String(!this.open)}"
         >
           <header>
             <h2>${this.label}</h2>
-            <button
-              class="close"
+            <gds-button
               @click=${this.#handleCloseButton}
-              aria-label="${msg('Close')}"
+              class="close"
+              label="${msg('Close')}"
+              size="small"
+              rank="tertiary"
             >
-              <i></i>
-            </button>
+              <gds-icon-cross-small></icon-cross-small>
+            </gds-button>
           </header>
           <slot></slot>
         </dialog>
@@ -266,7 +279,7 @@ export class GdsPopover extends GdsElement {
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
     this.#isMobileViewport = matches
-    if (matches) {
+    if (matches && this.useModalInMobileView) {
       this.#autoPositionCleanupFn?.()
       this._elDialog?.style.removeProperty('left')
       this._elDialog?.style.removeProperty('top')
@@ -290,7 +303,12 @@ export class GdsPopover extends GdsElement {
     const referenceEl = this._anchor
     const floatingEl = this._elDialog
 
-    if (!referenceEl || !floatingEl || this.#isMobileViewport) return
+    if (
+      !referenceEl ||
+      !floatingEl ||
+      (this.#isMobileViewport && this.useModalInMobileView)
+    )
+      return
 
     if (this.#autoPositionCleanupFn) {
       this.#autoPositionCleanupFn()

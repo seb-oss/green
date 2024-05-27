@@ -275,6 +275,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         id="calendar-popover"
         .placement=${'bottom-end'}
         .calcMinWidth=${() => (this.showWeekNumbers ? '350px' : '305px')}
+        .useModalInMobileView=${true}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return

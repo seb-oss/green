@@ -238,6 +238,7 @@ export class GdsDropdown<ValueT = any>
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
+        .useModalInMobileView=${true}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <button
