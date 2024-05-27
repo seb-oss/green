@@ -11,6 +11,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
+import {
+  trigger,
+  query,
+  style,
+  animate,
+  transition,
+  group,
+} from '@angular/animations'
 import { ModalType, Size } from '@sebgroup/extract'
 import {
   ConfigurableFocusTrap,
@@ -25,6 +33,59 @@ import { NggModalFooterDirective } from './modal-footer.directive'
   styleUrls: ['./modal.component.scss'],
   templateUrl: './modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('modalAnimation', [
+      transition(':enter', [
+        query('aside', style({ transform: 'translateX(100%)' }), {
+          optional: true,
+        }),
+        query('.backdrop, [role=dialog]', style({ opacity: '0' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(0)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '1' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+      transition(':leave', [
+        query('aside', style({ transform: 'translateX(0)' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(100%)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '0' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType

@@ -1,13 +1,14 @@
 import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { NggModalModule } from './modal.module'
 import { NggModalComponent } from './modal.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 export default {
   title: 'Components/Modal',
   component: NggModalComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggModalModule],
+      imports: [NggModalModule, BrowserAnimationsModule],
     }),
   ],
   parameters: {
