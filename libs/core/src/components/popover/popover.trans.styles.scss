@@ -5,6 +5,10 @@
 @layer base, reset, transitional-styles;
 
 @layer transitional-styles {
+  :host {
+    display: contents;
+  }
+
   :host([open]) dialog {
     box-sizing: border-box;
     opacity: 1;
