@@ -105,6 +105,9 @@ export class GdsPopover extends GdsElement {
   @state()
   private _isVirtKbVisible = false
 
+  @query('slot:not([name])')
+  private _elDefaultSlot: HTMLSlotElement | undefined
+
   @query('slot[name="trigger"]')
   private _elTriggerSlot: HTMLSlotElement | undefined
 
@@ -312,10 +315,10 @@ export class GdsPopover extends GdsElement {
   }
 
   /**
-   * ArrowDown on the trigger element will trigger the popover by default, and escape will close it.
+   * ArrowDown or ArrowUp on the trigger element will trigger the popover by default, and escape will close it.
    */
   #handleTriggerKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault()
       this.open = true
       this.#dispatchUiStateEvent('show')
@@ -336,9 +339,8 @@ export class GdsPopover extends GdsElement {
    * Move focus to the first slotted child.
    */
   #focusFirstSlottedChild = () => {
-    const firstSlottedChild = this.shadowRoot
-      ?.querySelector('slot')
-      ?.assignedElements()[0] as HTMLElement
+    const firstSlottedChild =
+      this._elDefaultSlot?.assignedElements()[0] as HTMLElement
 
     this.updateComplete.then(() => {
       firstSlottedChild?.focus()
