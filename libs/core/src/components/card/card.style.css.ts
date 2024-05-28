@@ -5,7 +5,11 @@ const style = css`
 
   @layer card {
     :host {
-      color: teal;
+      display: contents;
+    }
+
+    .card {
+      box-shadow: 0 0 4px red;
     }
   }
 `

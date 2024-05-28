@@ -197,6 +197,6 @@ export class GdsCard extends GdsElement {
   }
 
   render() {
-    return html`<slot></slot>`
+    return html`<div class="card"><slot></slot></div>`
   }
 }
