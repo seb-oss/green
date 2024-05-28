@@ -45,6 +45,13 @@ export class GdsPopover extends GdsElement {
   open = false
 
   /**
+   * This is used to indicate the semantic role of the popover. This will set the `aria-haspopup` attribute on the trigger element.
+   * Read here for more information: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-haspopup
+   */
+  @property({ attribute: 'popup-role' })
+  popupRole: 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' = 'dialog'
+
+  /**
    * Optional way to assign a trigger element for the popover. When using Lit, this can take a value from a `@queryAsync` decorator in order to set the trigger element programatically.
    */
   @property({ attribute: false })
@@ -146,6 +153,7 @@ export class GdsPopover extends GdsElement {
   @watch('_trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
+    this.#setupTriggerAttributes()
   }
 
   @watch('_anchor')
@@ -205,6 +213,7 @@ export class GdsPopover extends GdsElement {
             'use-modal-in-mobile': this.useModalInMobileView,
           })}"
           aria-hidden="${String(!this.open)}"
+          @close=${() => (this.open = false)}
         >
           <header>
             <h2>${this.label}</h2>
@@ -226,6 +235,7 @@ export class GdsPopover extends GdsElement {
   @watch('open')
   private _handleOpenChange() {
     this.updateComplete.then(() => {
+      this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
         this._elDialog?.showModal()
         this.#focusFirstSlottedChild()
@@ -274,6 +284,31 @@ export class GdsPopover extends GdsElement {
     this._trigger?.removeEventListener('keydown', this.#handleTriggerKeyDown)
     this._trigger?.removeEventListener('click', this.#handleTriggerClick)
     this.#autoPositionCleanupFn?.()
+  }
+
+  #setupTriggerAttributes() {
+    if (this._trigger) {
+      // aria-expanded
+      this._trigger?.setAttribute('aria-expanded', String(this.open))
+
+      // tabindex, role="button"
+      const focusableNodeNames = ['A', 'BUTTON', 'INPUT', 'TEXTAREA']
+      const isProbablyFocusable =
+        this._trigger.nodeName.startsWith('GDS-') ||
+        focusableNodeNames.includes(this._trigger.nodeName)
+      if (!isProbablyFocusable) {
+        this._trigger.setAttribute('tabindex', '0')
+        this._trigger.setAttribute('role', 'button')
+      }
+
+      // aria-haspopup
+      const ariaHasPopupAttr = this._trigger.nodeName.startsWith('GDS-')
+        ? 'gds-aria-haspopup'
+        : 'aria-haspopup'
+      if (this._trigger.getAttribute(ariaHasPopupAttr) === null) {
+        this._trigger.setAttribute(ariaHasPopupAttr, this.popupRole)
+      }
+    }
   }
 
   @watchMediaQuery('(max-width: 576px)')
