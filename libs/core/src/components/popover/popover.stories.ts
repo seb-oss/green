@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/popover/index.js'
 import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/grouped-list/index.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/share.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/chevron-bottom.js'
 
 /**
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
@@ -29,8 +29,8 @@ const DefaultParams: Story = {
   },
   args: {
     innerHTML: `
-  <gds-button rank="tertiary" slot="trigger">
-    <gds-icon-share></gds-icon-share>
+  <gds-button rank="secondary" slot="trigger">
+    Show popover <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
   </gds-button>
   <div style="padding: 1rem; padding-top: 0">
     <h3>This is a custom popover!</h3>
