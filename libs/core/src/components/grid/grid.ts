@@ -11,8 +11,6 @@ import { tokens } from '../../tokens.style'
 
 import GridCSS from './grid.style.css'
 
-type GridSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
-
 const BreakpointPattern =
   /(?<l>l:([a-z0-9]+))?\s*(?<m>m:([a-z0-9]+))?\s*(?<s>s:([a-z0-9]+))?/
 
@@ -28,7 +26,6 @@ type CSSProperty = {
  * @status beta
  *
  */
-
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends GdsElement {
   static styles = [tokens, GridCSS]
@@ -39,7 +36,7 @@ export class GdsGrid extends GdsElement {
   }
 
   /**
-   * @property {string} columns - The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.
+   * The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.
    * @example
    * ```html
    * <gds-grid columns="2"></gds-grid> <!-- applies to all breakpoints -->
@@ -50,7 +47,7 @@ export class GdsGrid extends GdsElement {
   columns?: string
 
   /**
-   * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid gap="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -58,10 +55,10 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'gap', type: String })
-  gap?: GridSizes
+  gap?: string
 
   /**
-   * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid row-gap="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -69,10 +66,10 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'row-gap', type: String })
-  rowGap?: GridSizes
+  rowGap?: string
 
   /**
-   * @property {string} padding - Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
+   * Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
    * @example
    * ```html
    * <gds-grid padding="m"></gds-grid> <!-- applies to all breakpoints -->
@@ -80,10 +77,10 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'padding', type: String })
-  padding?: GridSizes
+  padding?: string
 
   /**
-   * @property {string} auto-columns - Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
+   * Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
    * @example
    * ```html
    * <gds-grid auto-columns="200"></gds-grid> <!-- applies to all breakpoints -->
@@ -91,7 +88,7 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @property({ attribute: 'auto-columns', type: String })
-  autoColumns?: GridSizes
+  autoColumns?: string
 
   /**
    * Lifecycle method called when the element is connected to the DOM.
@@ -173,7 +170,7 @@ export class GdsGrid extends GdsElement {
       }
     }
 
-    if (propertyName === 'auto-columns') {
+    if (propertyName === 'autoColumns') {
       if (this.autoColumns && !this.autoColumns.includes(' ')) {
         desktop = tablet = mobile = `${this.autoColumns}px`
       } else {
@@ -265,7 +262,7 @@ export class GdsGrid extends GdsElement {
    */
   @watch('autoColumns')
   private _updateAutoColumnsVariables() {
-    this._updateCSSVariables('auto-columns', 'col-width')
+    this._updateCSSVariables('autoColumns', 'col-width')
   }
 
   render() {

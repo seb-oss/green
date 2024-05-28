@@ -30,7 +30,7 @@ describe('<gds-button>', () => {
     it('should render lead slot', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
-          ><gds-icon name="search" slot="lead"></gds-icon>Button</gds-button
+          ><gds-icon-arrow-right slot="lead" />Button</gds-button
         >`,
       )
 
@@ -160,7 +160,7 @@ describe('<gds-button>', () => {
 
     it('should render properly with gds-icon', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button><gds-icon name="arrow"></gds-icon></gds-button>`,
+        html`<gds-button><gds-icon-arrow-right /></gds-button>`,
       )
 
       await el.updateComplete

@@ -51,13 +51,14 @@ export class GdsContextMenu extends GdsElement {
   @property({
     attribute: 'button-label',
   })
-  buttonLabel = msg('Open context menu')
+  buttonLabel: string = msg('Open context menu')
 
   /**
-   * The label for the trigger button.
+   * Whether to show the label on the trigger button.
    */
   @property({
     attribute: 'show-label',
+    type: Boolean,
   })
   showLabel = false
 

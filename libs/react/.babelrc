@@ -1,13 +1,5 @@
 {
-  "presets": [
-    [
-      "@nx/react/babel",
-      {
-        "runtime": "automatic",
-        "useBuiltIns": "usage"
-      }
-    ]
-  ],
+  "presets": ["@babel/preset-env", ["@nx/react/babel"]],
   "plugins": [
     ["@babel/plugin-transform-private-property-in-object", { "loose": true }]
   ]

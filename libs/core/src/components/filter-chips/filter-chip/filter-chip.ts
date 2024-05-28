@@ -10,27 +10,25 @@ import {
 
 import '../../button'
 import type { GdsButton } from '../../button'
-import '../../icon'
+import '../../icon/icons/checkmark.js'
 
 import { styles } from './filter-chip.styles'
 
 /**
- * @element gds-filter-chips
+ * @element gds-filter-chip
  */
 @gdsCustomElement('gds-filter-chip')
 export class GdsFilterChip<ValueT = any> extends GdsElement {
   static styles = [styles]
 
   /**
-   * Whether the segment is selected
-   * @attr selected
+   * Whether the chip is selected
    */
   @property({ reflect: true, type: Boolean })
   selected = false
 
   /**
-   * Value can be used to tie arbitrary data to the segment.
-   * @attr value
+   * The value of the chip
    */
   @property()
   value?: ValueT
@@ -63,12 +61,13 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       gds-aria-selected=${this.selected}
     >
       <span class=${classMap(btnClasses)}><slot></slot></span>
-      <gds-icon
-        name="checkmark"
+      <gds-icon-checkmark
         slot="trail"
-        style="display: ${this.selected ? 'block' : 'none'}"
+        style="display: ${this.selected ? 'contents' : 'none'}"
+        width="16"
+        height="16"
         class="icon"
-      ></gds-icon>
+      ></gds-icon-checkmark>
     </gds-button>`
   }
 }

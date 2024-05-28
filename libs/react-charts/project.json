@@ -16,7 +16,6 @@
         "entryFile": "libs/react-charts/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           {
             "glob": "libs/react-charts/README.md",
@@ -28,25 +27,19 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/react-charts/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react-charts"],
       "options": {
-        "jestConfig": "libs/react-charts/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/react-charts/jest.config.ts"
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@nx/storybook:storybook",
       "options": {
-        "uiFramework": "@storybook/react",
-        "port": 4300,
+        "port": 4400,
         "configDir": "libs/react-charts/.storybook"
       },
       "configurations": {
@@ -71,14 +64,16 @@
       }
     },
     "build-storybook": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["tokens:build"],
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
       "options": {
-        "commands": [
-          {
-            "command": "NODE_ENV=production nx run react-charts:build-nx-storybook"
-          }
-        ]
+        "outputDir": "dist/storybook/react-charts",
+        "configDir": "libs/react-charts/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     },
     "update-dependencies": {

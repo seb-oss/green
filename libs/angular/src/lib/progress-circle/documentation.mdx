@@ -1,5 +1,8 @@
 import { NggProgressCircleComponent } from './progress-circle.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
+import * as Stories from './progress-circle.stories.ts'
+
+<Meta of={Stories} />
 
 # Progress Circle
 
@@ -24,11 +27,13 @@ export class AppModule {}
 
 ## Progress Circle Options
 
+<Markdown>{`
 | Input | Type                     | Description                                         |
 | :---- | :----------------------- | :-------------------------------------------------- |
-| id    | `string`                 | _(Optional)_ ID of the progress circle              |
-| theme | `ProgressCircleThemes`\* | Theme of the progress circle (default is `warning`) |
-| value | `number`                 | Progress circle value in percentage                 |
+| id    | \`string\`                 | _(Optional)_ ID of the progress circle              |
+| theme | \`ProgressCircleThemes\` | Theme of the progress circle (default is \`warning\`) |
+| value | \`number\`                 | Progress circle value in percentage                 |
+`}</Markdown>
 
 #### \*Progress Circle Themes
 

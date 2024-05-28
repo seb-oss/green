@@ -1,9 +1,17 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
-    "target": "ES2022"
+    "emitDecoratorMetadata": true
   },
-  "exclude": ["../**/*.spec.ts", "../**/*.test.ts", "jest.config.ts"],
-  "include": ["../src/**/*", "../stories/**/*", "*.js"]
+  "exclude": ["../**/*.spec.ts"],
+  "include": [
+    "../src/**/*.stories.ts",
+    "../src/**/*.stories.js",
+    "../src/**/*.stories.jsx",
+    "../src/**/*.stories.tsx",
+    "../src/**/*.stories.mdx",
+    "*.js",
+    "*.ts"
+  ],
+  "target": "ES2022"
 }

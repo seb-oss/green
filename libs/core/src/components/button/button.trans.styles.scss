@@ -24,12 +24,22 @@ $button-danger-border: tokens.get(tokens.$red, 0);
       gap: 0.5rem;
     }
 
+    button slot:not([name]) {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     :host(:not([variant='ghost'])) button {
       @include button.primary();
     }
 
     button.icon {
       padding: 0.75rem;
+      slot {
+        display: contents;
+      }
     }
 
     button.icon.small {

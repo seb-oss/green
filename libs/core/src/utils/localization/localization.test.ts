@@ -1,6 +1,6 @@
 import { expect } from '@esm-bundle/chai'
 import { timeout } from '../../utils/testing'
-import '../../../../../dist/libs/core/src/index.js'
+import '@sebgroup/green-core'
 
 import { gdsInitLocalization } from './localization'
 
