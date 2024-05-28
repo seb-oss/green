@@ -10,7 +10,7 @@ import { html } from 'lit'
  * Just like other components, the icons can be imported indivually, so that you don't end up with unused icons in your bundle:
  *
  * ```js
- * import '@sebgroup/green-core/components/icon/icons/gds-icon-archive.js'
+ * import '@sebgroup/green-core/components/icon/icons/icon-archive.js'
  * ```
  */
 const meta: Meta = {
