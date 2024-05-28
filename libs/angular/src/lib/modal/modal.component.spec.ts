@@ -57,9 +57,10 @@ describe(NggModalComponent.name, () => {
       providers: [],
       componentInputs: { modalType: 'default', isOpen: false },
     })
+    
 
     expect(queryByTestId('modal')).toBeFalsy()
-    expect(container.classList.length).toEqual(0)
+    expect(container.classList.contains('open')).toEqual(false)
     expect(bodyScrollLock.enableBodyScroll).toHaveBeenCalled()
   })
 

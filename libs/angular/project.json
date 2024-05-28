@@ -40,7 +40,10 @@
         "port": 4400,
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/fonts/*"]
+        }
       },
       "configurations": {
         "ci": {
@@ -56,7 +59,10 @@
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/fonts/*"]
+        }
       },
       "configurations": {
         "ci": {

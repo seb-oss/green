@@ -96,6 +96,9 @@
     "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
+    },
+    "copy-fonts": {
+      "dependsOn": ["fonts:build"]
     }
   },
   "namedInputs": {

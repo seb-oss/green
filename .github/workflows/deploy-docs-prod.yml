@@ -72,10 +72,18 @@ jobs:
           FIGMA_ACCESS_KEY: ${{ secrets.FIGMA_ACCESS_KEY }}
           FIGMA_PROJECT_ID: ${{ secrets.FIGMA_PROJECT_ID_STAGING }}
           NEXT_PUBLIC_DEV_ENV: ${{ secrets.NEXT_PUBLIC_DEV_ENV }}
-      - name: Upload artifact
+
+      - name: Upload next build
         uses: actions/upload-artifact@v4
         with:
-          path: ./dist/apps/docs/*
+          name: nextbuild
+          path: ./dist/apps/docs/.next/*
+
+      - name: Upload public folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: ./dist/apps/docs/public
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -93,7 +101,12 @@ jobs:
       - name: Get build artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact
+          name: nextbuild
+
+      - name: Get public folder
+        uses: actions/download-artifact@v4
+        with:
+          name: public
 
       - name: Push changes
         run: |
