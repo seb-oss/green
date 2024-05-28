@@ -1,5 +1,3 @@
-//@use '../../../../chlorophyll/scss/components/popover/mixins' as popover;
-//@use '../../../../chlorophyll/scss/components/close';
 @use '../../../../chlorophyll/scss/common';
 
 @layer base, reset, transitional-styles;
@@ -38,7 +36,6 @@
   }
 
   dialog {
-    //@include popover.popover;
     --z-index: var(--sg-z-index-popover);
     background-color: var(--sg-popover-background);
     display: flex;
@@ -101,7 +98,6 @@
   dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.2);
     display: block;
-    //pointer-events: none;
     position: fixed;
   }
 
