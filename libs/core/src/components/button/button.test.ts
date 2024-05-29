@@ -27,6 +27,20 @@ describe('<gds-button>', () => {
       expect(innerButton).to.exist
     })
 
+    it('should render link', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button href="https://github.com/sebgroup/green"
+          >Link</gds-button
+        >`,
+      )
+
+      await el.updateComplete
+
+      const innerButton = el.shadowRoot?.querySelector('a')
+
+      expect(innerButton).to.exist
+    })
+
     it('should render lead slot', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
@@ -158,6 +172,27 @@ describe('<gds-button>', () => {
       expect(el.rank).to.equal('tertiary')
     })
 
+    it('should support link attributes', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button
+          href="https://github.com/sebgroup/green"
+          target="_self"
+          rel="noopener"
+          download
+          >Link</gds-button
+        >`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('a')
+
+      expect(shadowButton?.getAttribute('href')).to.equal(
+        'https://github.com/sebgroup/green',
+      )
+      expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
+      expect(shadowButton?.getAttribute('target')).to.equal('_self')
+      expect(shadowButton?.hasAttribute('download')).to.equal(true)
+    })
+
     it('should render properly with gds-icon', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button><gds-icon-arrow-right /></gds-button>`,
@@ -173,10 +208,19 @@ describe('<gds-button>', () => {
   })
 
   describe('Accessibility', () => {
-    it('should pass axe smoketest', async () => {
+    it('should pass axe smoketest for button', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button variant="positive" value="Not empty">
           Test button
+        </gds-button>`,
+      )
+
+      await expect(el).to.be.accessible()
+    })
+    it('should pass axe smoketest for button link', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button href="https://github.com/sebgroup/green">
+          Test link
         </gds-button>`,
       )
 
@@ -216,6 +260,22 @@ describe('<gds-button>', () => {
       }
 
       expect(document.activeElement).to.equal(button)
+    })
+  })
+  describe('Security', () => {
+    it('should apply a secure rel attribute by default', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button
+          href="https://github.com/sebgroup/green"
+          target="_blank"
+        >
+          Test link
+        </gds-button>`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('a')
+
+      expect(shadowButton?.getAttribute('rel')).to.equal('noreferrer noopener')
     })
   })
 })
