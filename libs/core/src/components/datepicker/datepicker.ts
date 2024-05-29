@@ -5,11 +5,11 @@ import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { HTMLTemplateResult, nothing } from 'lit'
+import { nothing } from 'lit'
 import { msg } from '@lit/localize'
 
 import { GdsFormControlElement } from '../../components/form-control'
-import { gdsCustomElement, html, getScopedTagName } from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 import {
@@ -28,6 +28,10 @@ import type { GdsDropdown } from '../../components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
+
+import '../../components/icon/icons/calendar'
+import '../../components/icon/icons/chevron-left'
+import '../../components/icon/icons/chevron-right'
 
 import { styles } from './datepicker.styles'
 
@@ -253,12 +257,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-describedby="label"
           @click=${() => (this.open = !this.open)}
         >
-          <svg viewBox="0 0 24 24" inert>
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
+          <gds-icon-calendar></gds-icon-calendar>
         </button>
       </div>
 
@@ -283,7 +282,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
           >
-            <i class="icon prev"></i>
+            <gds-icon-chevron-left></gds-icon-chevron-left>
           </button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
@@ -325,7 +324,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleIncrementFocusedMonth}
             aria-label=${msg('Next month')}
           >
-            <i class="icon next"></i>
+            <gds-icon-chevron-right></gds-icon-chevron-right>
           </button>
         </div>
 
