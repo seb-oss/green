@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.22.0
+
+### Minor Changes
+
+- 096b662: **Popover:** Add new component
+- 1652e33: **Button:** Add suppoert for link buttons
+
+### Patch Changes
+
+- a8b556f: **Dropdown:** Fix line-breaks in trigger button. Fixes #1343
+- 5f224d0: **Datepicker:** Fix incorrectly emitted change event. Fixes #1322
+
 ## 1.21.2
 
 ### Patch Changes
