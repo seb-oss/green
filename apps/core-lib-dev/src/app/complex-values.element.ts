@@ -18,22 +18,16 @@ export class AppElement extends HTMLElement {
     registerTransitionalStyles()
 
     this.innerHTML = html`
-      <div class="card">
-        <form id="my-form">
-          <gds-dropdown
-            id="dropdown"
-            label="Select a value"
-            style="width: 200px"
-          >
-            <span slot="sub-label">Additional <i>label</i> information</span>
-            <span slot="message">A message guiding the user</span>
-            <gds-option isplaceholder>Select value</gds-option>
-          </gds-dropdown>
+      <form id="my-form">
+        <gds-dropdown id="dropdown" label="Select a value" style="width: 200px">
+          <span slot="sub-label">Additional <i>label</i> information</span>
+          <span slot="message">A message guiding the user</span>
+          <gds-option isplaceholder>Select value</gds-option>
+        </gds-dropdown>
 
-          <button type="submit">Submit</button>
-          <button type="reset">Reset</button>
-        </form>
-      </div>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </form>
     `
 
     const dropdown = this.querySelector('#dropdown') as GdsDropdown

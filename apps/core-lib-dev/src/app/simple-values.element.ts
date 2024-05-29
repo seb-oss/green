@@ -19,51 +19,31 @@ export class SimpleValues extends HTMLElement {
     registerTransitionalStyles()
 
     this.innerHTML = html`
-      <div class="card">
-        <form id="my-form">
-          <gds-form-validator></gds-form-validator>
+      <form id="my-form">
+        <gds-form-validator></gds-form-validator>
 
-          <gds-dropdown
-            searchable
-            multiple
-            name="dropdown"
-            id="dropdown"
-            label="Select a value"
-            required
-          >
-            <span slot="sub-label">Additional <i>label</i> information</span>
-            <span slot="message">A message guiding the user</span>
+        <gds-dropdown
+          searchable
+          multiple
+          name="dropdown"
+          id="dropdown"
+          label="Select a value"
+          required
+        >
+          <span slot="sub-label">Additional <i>label</i> information</span>
+          <span slot="message">A message guiding the user</span>
 
-            <gds-option isplaceholder>Select value</gds-option>
-            <gds-option value="v1">Value 1</gds-option>
-            <gds-option value="v2">Value 2</gds-option>
-            <gds-option value="v3">Value 3</gds-option>
-          </gds-dropdown>
+          <gds-option isplaceholder>Select value</gds-option>
+          <gds-option value="v1">Value 1</gds-option>
+          <gds-option value="v2">Value 2</gds-option>
+          <gds-option value="v3">Value 3</gds-option>
+        </gds-dropdown>
 
-          <gds-input
-            name="my-text"
-            label="Label goes here"
-            supporting-text="Supporting text goes here"
-            maxlength="140"
-            variant="simplified"
-            clearable
-            required
-            multiline
-          >
-            <gds-icon name="mail" slot="lead"></gds-icon>
-            <gds-badge slot="trail" variant="surface">kr</gds-badge>
-            <span slot="extended-supporting-text">
-              Extended supporting text goes here.
-              <a href="#">Can contain links</a>
-            </span>
-          </gds-input>
-
-          <gds-button type="submit" name="the-button" value="derp"
-            >Submit</gds-button
-          >
-          <gds-button type="reset" variant="secondary">Reset</gds-button>
-        </form>
-      </div>
+        <gds-button type="submit" name="the-button" value="derp"
+          >Submit</gds-button
+        >
+        <gds-button type="reset" variant="secondary">Reset</gds-button>
+      </form>
     `
 
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
