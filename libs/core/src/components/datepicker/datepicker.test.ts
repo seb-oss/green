@@ -19,7 +19,7 @@ import {
   getScopedTagName,
 } from '@sebgroup/green-core/scoping'
 
-import { GdsPopover } from '@sebgroup/green-core/primitives/popover'
+import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 

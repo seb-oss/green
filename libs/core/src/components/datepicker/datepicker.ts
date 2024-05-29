@@ -17,8 +17,8 @@ import {
   dateConverter,
 } from '../../utils/helpers/attribute-converters'
 
-import '../../primitives/popover'
-import type { GdsPopover } from '../../primitives/popover'
+import '../popover'
+import type { GdsPopover } from '../popover'
 
 import '../../primitives/calendar'
 import type { GdsCalendar } from '../../primitives/calendar'
@@ -190,8 +190,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#calendar')
   private _elCalendar!: Promise<GdsCalendar>
 
-  @queryAsync('#trigger')
+  @queryAsync('#calendar-button')
   private _elTrigger!: Promise<HTMLButtonElement>
+
+  @queryAsync('#field')
+  private _elField!: Promise<HTMLDivElement>
 
   @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
@@ -216,7 +219,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div
         class=${classMap({ field: true, small: this.size === 'small' })}
-        id="trigger"
+        id="field"
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
@@ -257,7 +260,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
-          @click=${() => (this.open = !this.open)}
         >
           <gds-icon-calendar></gds-icon-calendar>
         </button>
@@ -267,12 +269,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <gds-popover
         .triggerRef=${this._elTrigger}
+        .anchorRef=${this._elField}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
         label=${this.label}
         id="calendar-popover"
         .placement=${'bottom-end'}
         .calcMinWidth=${() => (this.showWeekNumbers ? '350px' : '305px')}
+        .useModalInMobileView=${true}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return
