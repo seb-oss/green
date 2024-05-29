@@ -1,6 +1,6 @@
-import { html } from '@sebgroup/green-core'
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { html } from '@sebgroup/green-core/scoping'
 import { css, LitElement } from 'lit'
+import { state } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
 
 export class SegmentedControl extends LitElement {
@@ -11,15 +11,12 @@ export class SegmentedControl extends LitElement {
     }
   `
 
-  static properties = {
-    numCards: { type: Number },
-  }
-
-  numCards = 3
+  @state()
+  accessor numCards = 3
 
   connectedCallback() {
     super.connectedCallback()
-    registerTransitionalStyles()
+    //registerTransitionalStyles()
   }
 
   #cards = [1, 2, 3, 4, 5]
@@ -53,15 +50,15 @@ export class SegmentedControl extends LitElement {
                 <form id="my-form">
                   <h3>This a card number ${card}</h3>
 
-                <gds-dropdown
-                  name="dropdown"
-                  id="dropdown"
-                  label="And a dropdown"
-                  required
-                >
-                  <span slot="sub-label">Because why not!</span>
-                  <span slot="message">Dropdowns are nice</span>
-                    <gds-option isplaceholder>Select value</gds-option>
+                  <gds-dropdown
+                    name="dropdown"
+                    id="dropdown"
+                    label="And a dropdown"
+                    searchable
+                    required
+                  >
+                    <span slot="sub-label">Because why not!</span>
+                    <span slot="message">Dropdowns are nice</span>
                     <gds-option value="v1">Value 1</gds-option>
                     <gds-option value="v2">Value 2</gds-option>
                     <gds-option value="v3">Value 3</gds-option>
