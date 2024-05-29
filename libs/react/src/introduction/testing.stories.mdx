@@ -46,7 +46,9 @@ const greenJestConfig = require('@sebgroup/green-core/jest-config')
 // apply the green jest config
 module.exports = greenJestConfig.apply({
   // Your existing config, for example:
+  testEnvironment: 'jsdom',
   transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest',
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   clearMocks: true,
