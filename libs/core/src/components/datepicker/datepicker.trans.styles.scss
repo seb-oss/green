@@ -1,5 +1,4 @@
 @use '../../../../chlorophyll/scss/common';
-@use '../../../../chlorophyll/scss/components/icon';
 @use '../../../../chlorophyll/scss/components/form/validation/mixins' as
   validation;
 @use '../../../../chlorophyll/scss/tokens' as tokens;
@@ -98,22 +97,10 @@
       color: var(--text-primary-color);
       cursor: pointer;
       width: 2.75rem;
+      font-size: 1rem;
 
       &:hover {
         background: var(--grey-500);
-      }
-
-      svg {
-        height: 1rem;
-        width: 1rem;
-      }
-
-      svg > * {
-        fill: none;
-        stroke: currentColor;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 2px;
       }
     }
 
@@ -156,6 +143,10 @@
       margin: 0.125rem 0.25rem;
       padding: 0.5rem;
       width: 2.75rem;
+      font-size: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         background: var(--grey-400);
@@ -163,27 +154,6 @@
 
       &:focus-visible {
         outline-offset: 0;
-      }
-      // TODO: Replace with proper icons
-      .icon::before {
-        background: none;
-        border-bottom: 2px solid var(--grey-1000);
-        border-left: 2px solid var(--grey-1000);
-        content: '';
-        display: block;
-        height: 8px;
-        margin-top: 2px;
-        width: 8px;
-      }
-
-      .icon.prev::before {
-        margin-left: 3px;
-        transform: translate(75%) rotate(45deg) scaleZ(-1);
-      }
-
-      .icon.next::before {
-        margin-left: -1px;
-        transform: translate(75%) rotate(-135deg) scaleZ(-1);
       }
     }
   }
@@ -196,27 +166,5 @@
 
     display: flex;
     justify-content: space-between;
-
-    button {
-      @include common.add-border-radius();
-      @include common.add-focus();
-      appearance: none;
-      background: transparent;
-      border: 0;
-      color: var(--intent-info-background);
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 500;
-      padding: 0.5rem 0.75rem;
-
-      &:hover {
-        background: var(--intent-info-background);
-        color: #fff;
-      }
-    }
-
-    .clear {
-      margin-right: auto;
-    }
   }
 }
