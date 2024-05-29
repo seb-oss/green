@@ -166,27 +166,5 @@
 
     display: flex;
     justify-content: space-between;
-
-    button {
-      @include common.add-border-radius();
-      @include common.add-focus();
-      appearance: none;
-      background: transparent;
-      border: 0;
-      color: var(--intent-info-background);
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 500;
-      padding: 0.5rem 0.75rem;
-
-      &:hover {
-        background: var(--intent-info-background);
-        color: #fff;
-      }
-    }
-
-    .clear {
-      margin-right: auto;
-    }
   }
 }

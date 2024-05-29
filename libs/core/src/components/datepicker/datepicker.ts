@@ -29,6 +29,7 @@ import type { GdsDropdown } from '../../components/dropdown'
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
+import '../../components/button'
 import '../../components/icon/icons/calendar'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
@@ -343,25 +344,27 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         ></gds-calendar>
 
         <div class="footer">
-          <button
-            class="tertiary clear"
+          <gds-button
+            rank="tertiary"
+            size="small"
             @click=${() => {
               this.value = undefined
               this.#dispatchChangeEvent()
             }}
           >
             ${msg('Clear')}
-          </button>
+          </gds-button>
           ${until(this.#renderBackToValidRangeButton(), nothing)}
-          <button
-            class="tertiary today"
+          <gds-button
+            rank="tertiary"
+            size="small"
             @click=${() => {
               this.value = new Date()
               this.#dispatchChangeEvent()
             }}
           >
             ${msg('Today')}
-          </button>
+          </gds-button>
         </div>
       </gds-popover> `
   }
@@ -383,9 +386,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return html`${when(
       buttonTxt.length > 0,
       () =>
-        html`<button class="tertiary back-to-range" @click=${buttonAction}>
+        html`<gds-button rank="tertiary" size="small" @click=${buttonAction}>
           ${buttonTxt}
-        </button>`,
+        </gds-button>`,
       () => nothing,
     )}`
   }
