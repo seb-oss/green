@@ -118,11 +118,11 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
-  private get isLink() {
-    return this.hasAttribute('href')
+  get #isLink() {
+    return this.href.length > 0
   }
 
-  private get defaultRel() {
+  get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 
@@ -140,18 +140,18 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       tertiary: this.rank === 'tertiary',
     }
 
-    const tag = this.isLink ? literal`a` : literal`button`
+    const tag = this.#isLink ? literal`a` : literal`button`
 
     return staticHtml`
       <${tag}
         class=${classMap(buttonClasses)}
-        type="${ifDefined(this.isLink ? undefined : this.type)}"
+        type="${ifDefined(this.#isLink ? undefined : this.type)}"
         ?disabled="${this.disabled}"
         aria-label=${this.label || nothing}
-        href=${ifDefined(this.isLink ? this.href : undefined)}
-        target=${ifDefined(this.isLink ? this.target : undefined)}
-        rel=${ifDefined(this.isLink ? this.rel || this.defaultRel : undefined)}
-        download=${ifDefined(this.isLink ? this.download : undefined)}
+        href=${ifDefined(this.#isLink ? this.href : undefined)}
+        target=${ifDefined(this.#isLink ? this.target : undefined)}
+        rel=${ifDefined(this.#isLink ? this.rel || this.#defaultRel : undefined)}
+        download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
         @click="${this.#handleClick}"
         ${forwardAttributes(
@@ -193,7 +193,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       }),
     )
 
-    if (this.form && !this.isLink) {
+    if (this.form && !this.#isLink) {
       if (this.type === 'submit') {
         this.form.requestSubmit()
       } else if (this.type === 'reset') {
