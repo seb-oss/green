@@ -35,6 +35,7 @@ import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
 import { styles } from './datepicker.styles'
+import isSameDay from 'date-fns/isSameDay'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -565,12 +566,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.open = e.detail.open
 
     if (e.detail.reason === 'close') {
-      this.value = (await this._elCalendar).value
+      const calValue = (await this._elCalendar).value
+      const hasChanged = !isSameDay(
+        calValue || new Date(0),
+        this.#valueOnOpen || new Date(0),
+      )
+      if (hasChanged) {
+        this.value = calValue
+        this.#dispatchChangeEvent()
+      }
       if (this.value) {
         this._focusedMonth = this.value.getMonth()
         this._focusedYear = this.value.getFullYear()
       }
-      this.#dispatchChangeEvent()
     }
 
     if (e.detail.reason === 'cancel') {
