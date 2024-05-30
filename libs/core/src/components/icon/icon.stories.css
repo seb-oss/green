@@ -16,11 +16,45 @@
       content: '<' attr(gds-element) ' />';
       font-size: 11px;
     }
+
+    &:hover {
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+
+    &::before {
+      content: 'Copied!';
+      position: absolute;
+      transition: all 420ms;
+      bottom: 0px;
+      font-size: 10px;
+      color: #003c2b;
+      opacity: 0;
+    }
+
+    &.copied {
+      animation: copied 2s forwards;
+      transition: all 420ms;
+
+      &::before {
+        opacity: 1;
+        bottom: 10px;
+      }
+    }
   }
 
   [solid] {
     &::after {
       content: '<' attr(gds-element) ' solid />';
     }
+  }
+}
+
+@keyframes copied {
+  0% {
+    background-color: #fafafa;
+  }
+  100% {
+    background-color: #bdfbe9;
   }
 }

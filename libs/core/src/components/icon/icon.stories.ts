@@ -45,6 +45,22 @@ export const Basic: Story = {
  * Icons are available in regular versions. You can use the `solid` attribute to display the solid version of the icon.
  */
 
+window.addEventListener('click', (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (target.tagName.startsWith('GDS-ICON')) {
+    const outerHTML = target.outerHTML
+    const cleanedHTML = outerHTML.replace(/ gds-element="[^"]*"/, '')
+    navigator.clipboard.writeText(cleanedHTML)
+    target.classList.add('copied')
+    setTimeout(() => target.classList.remove('copied'), 2000)
+  }
+})
+
+/**
+ * Click to copy icon HTML code
+ *
+ */
+
 export const IconsRegular: Story = {
   ...DefaultParams,
   name: 'Regular icons',
@@ -292,7 +308,10 @@ export const IconsRegular: Story = {
 
 /**
  * Icons are available in solid versions. You can use the `solid` attribute to display the solid version of the icon.
+ *
+ * * Click to copy icon HTML code
  */
+
 export const IconsSolid: Story = {
   ...DefaultParams,
   name: 'Solid icons',
