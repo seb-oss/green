@@ -1,0 +1,26 @@
+.icon-preview {
+  [gds-element] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-inline: 20px;
+    padding-block: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    gap: 10px;
+    position: relative;
+    box-sizing: border-box;
+
+    &::after {
+      content: '<' attr(gds-element) ' />';
+      font-size: 11px;
+    }
+  }
+
+  [solid] {
+    &::after {
+      content: '<' attr(gds-element) ' solid />';
+    }
+  }
+}
