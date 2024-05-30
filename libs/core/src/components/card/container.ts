@@ -21,7 +21,7 @@ type CSSProperty = {
   value: string | number | undefined
 }
 
-@gdsCustomElement('gds-card')
+@gdsCustomElement('gds-container')
 export class GdsCard extends GdsElement {
   static styles = [tokens, CardCSS]
 
@@ -39,7 +39,13 @@ export class GdsCard extends GdsElement {
    * ```
    */
   @property({ attribute: 'gap', type: String })
-  gap?: CardSizes
+  gap?: string
+
+  @property({ attribute: 'span', type: String })
+  span?: string
+
+  @property({ attribute: 'rows', type: String })
+  rows?: string
 
   /**
    * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
@@ -62,9 +68,6 @@ export class GdsCard extends GdsElement {
    */
   @property({ attribute: 'padding', type: String })
   padding?: CardSizes
-
-  @property({ attribute: 'background', type: String })
-  background?: string
 
   /**
    * Lifecycle method called when the element is connected to the DOM.

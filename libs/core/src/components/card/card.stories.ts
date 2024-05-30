@@ -5,7 +5,7 @@ import { html } from 'lit'
 /**
  * The `gds-card`
  *
- * ### Usage
+ * ## Usage
  *
  */
 const meta: Meta = {
