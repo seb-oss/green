@@ -27,7 +27,7 @@ import { Button } from '@sebgroup/green-react'
 
 ### Components
 
-View all components in the [React Storybook](https://sebgroup.github.io/green/latest/react/)
+View all components in the [React Storybook](https://storybook.seb.io/latest/react/)
 
 ## Develop \*
 
