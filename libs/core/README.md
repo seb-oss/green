@@ -124,4 +124,4 @@ Then you can just use `<Button />` like a regular React component.
 
 ## Documentation
 
-Check out the [Storybook (@sebgroup/core)](https://sebgroup.github.io/green/latest/core/) for components and documentation.
+Check out the [Storybook (@sebgroup/core)](https://storybook.seb.io/latest/core/) for components and documentation.
