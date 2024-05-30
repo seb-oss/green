@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.22.1
+
+### Patch Changes
+
+- 841ffe2: Add GdsElement to icon
+  Closes #1405
+
 ## 1.22.0
 
 ### Minor Changes

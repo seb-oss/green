@@ -1,0 +1,60 @@
+.icon-preview {
+  [gds-element] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-inline: 20px;
+    padding-block: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    gap: 10px;
+    position: relative;
+    box-sizing: border-box;
+
+    &::after {
+      content: '<' attr(gds-element) ' />';
+      font-size: 11px;
+    }
+
+    &:hover {
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+
+    &::before {
+      content: 'Copied!';
+      position: absolute;
+      transition: all 420ms;
+      bottom: 0px;
+      font-size: 10px;
+      color: #003c2b;
+      opacity: 0;
+    }
+
+    &.copied {
+      animation: copied 2s forwards;
+      transition: all 420ms;
+
+      &::before {
+        opacity: 1;
+        bottom: 10px;
+      }
+    }
+  }
+
+  [solid] {
+    &::after {
+      content: '<' attr(gds-element) ' solid />';
+    }
+  }
+}
+
+@keyframes copied {
+  0% {
+    background-color: #fafafa;
+  }
+  100% {
+    background-color: #bdfbe9;
+  }
+}
