@@ -5,8 +5,3 @@
 @use '../../../../libs/chlorophyll/scss' with (
   $font-path: '../../../../dist/fonts'
 );
-
-.wrapper {
-  padding: 2rem;
-  background-color: var(--gds-ref-pallet-base100);
-}

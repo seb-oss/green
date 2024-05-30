@@ -1,7 +1,7 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
 import styles from './context-menu.trans.styles.scss'
 
-import * as Popover from '../../primitives/popover/popover.trans.styles'
+import * as Popover from '../popover/popover.trans.styles'
 import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
 
 export function register() {

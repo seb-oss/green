@@ -3,6 +3,10 @@ import { css } from 'lit'
 const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
+    :host {
+      display: contents;
+    }
+
     :host([open]) dialog {
       opacity: 1;
       box-sizing: border-box;

@@ -1,5 +1,5 @@
-import { HTMLTemplateResult, LitElement, html, unsafeCSS } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { html, unsafeCSS } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
@@ -16,11 +16,12 @@ import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 
+import '../icon/icons/cross-small'
+
 import styles from './popover.styles'
 
 /**
  * @element gds-popover
- * @internal
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
@@ -28,8 +29,10 @@ import styles from './popover.styles'
  * register a keydown listener on the trigger and listen to `ArrowDown` key presses. When the trigger is focused and
  * `ArrowDown` is pressed, the popover will open and focus the first slotted child.
  *
- * @slot - Content of the popover
  * @fires gds-ui-state - Fired when the popover is opened or closed
+ *
+ * @slot - Content of the popover
+ * @slot trigger - Trigger element for the popover. If this slot is occupied, the popover will listen to keydown and click events on the trigger and automtaiclly open when clicked or when the trigger is focused and `ArrowDown` is pressed.
  */
 @gdsCustomElement('gds-popover')
 export class GdsPopover extends GdsElement {
@@ -42,10 +45,23 @@ export class GdsPopover extends GdsElement {
   open = false
 
   /**
-   * Optional trigger element for the popover.
+   * This is used to indicate the semantic role of the popover. This will set the `aria-haspopup` attribute on the trigger element.
+   * Read here for more information: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-haspopup
    */
-  @property()
-  triggerRef: Promise<HTMLElement | undefined> = Promise.resolve(undefined)
+  @property({ attribute: 'popup-role' })
+  popupRole: 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' = 'dialog'
+
+  /**
+   * Optional way to assign a trigger element for the popover. When using Lit, this can take a value from a `@queryAsync` decorator in order to set the trigger element programatically.
+   */
+  @property({ attribute: false })
+  triggerRef?: Promise<HTMLElement>
+
+  /**
+   * Optional way to assign an anchor element for the popover. When using Lit, this can take a value from a `@queryAsync` decorator in order to set the anchor element programatically.
+   */
+  @property({ attribute: false })
+  anchorRef?: Promise<HTMLElement>
 
   /**
    * Optional trigger element for the popover.
@@ -61,55 +77,89 @@ export class GdsPopover extends GdsElement {
   placement: Placement = 'bottom-start'
 
   /**
+   * Whether to use a modal dialog in mobile viewport.
+   */
+  @property()
+  useModalInMobileView = false
+
+  /**
    * A callback that returns the minimum width of the popover.
    * By default, the popover minWidth will be as wide as the trigger element.
    */
-  @property()
+  @property({ attribute: false })
   calcMinWidth = (referenceEl: HTMLElement) => `${referenceEl.offsetWidth}px`
 
   /**
    * A callback that returns the maximum width of the popover.
    * By default, the popover maxWidth will be set to `auto` and will grow as needed.
    */
-  @property()
+  @property({ attribute: false })
   calcMaxWidth = (_referenceEl: HTMLElement) => `auto`
 
   /**
    * A callback that returns the minimum height of the popover.
    * By default, the popover minHeight will be set to `auto`
    */
-  @property()
-  calcMinHeight = (referenceEl: HTMLElement) => `auto`
+  @property({ attribute: false })
+  calcMinHeight = (_referenceEl: HTMLElement) => `auto`
 
   /**
    * A callback that returns the maximum height of the popover.
-   * By default, the popover maxHeight will be set to a hard coded pixel value (check source).
+   * By default, the popover maxHeight will be set to a hard coded pixel value (check source code).
    */
-  @property()
+  @property({ attribute: false })
   calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
+  @state()
+  private _anchor: HTMLElement | undefined = undefined
+
   // Whether the virtual keyboard is visible or not
   @state()
   private _isVirtKbVisible = false
 
+  @query('slot:not([name])')
+  private _elDefaultSlot: HTMLSlotElement | undefined
+
+  @query('slot[name="trigger"]')
+  private _elTriggerSlot: HTMLSlotElement | undefined
+
+  @query('dialog')
+  private _elDialog: HTMLDialogElement | undefined
+
   @watch('triggerRef')
   private _handleTriggerRefChanged() {
-    this.triggerRef.then((el) => {
+    this.triggerRef?.then((el) => {
       if (el) this._trigger = el
     })
+  }
+
+  @watch('anchorRef')
+  private _handleAnchorRefChanged() {
+    this.anchorRef?.then((el) => {
+      if (el) this._anchor = el
+    })
+  }
+
+  #handleTriggerSlotChange() {
+    if (this._elTriggerSlot && this._elTriggerSlot.assignedElements()[0]) {
+      this._trigger = this._elTriggerSlot.assignedElements()[0] as HTMLElement
+      this._anchor = this._elTriggerSlot.assignedElements()[0] as HTMLElement
+    }
   }
 
   @watch('_trigger')
   private _handleTriggerChanged() {
     this.#registerTriggerEvents()
-    this.#registerAutoPositioning()
+    this.#setupTriggerAttributes()
   }
 
-  // A reference to the dialog element used to make the popover modal
-  #dialogElementRef: Ref<HTMLDialogElement> = createRef()
+  @watch('_anchor')
+  private _handleAnchorChanged() {
+    this.#registerAutoPositioning()
+  }
 
   // A function that removes the Floating UI auto positioning. This gets called when we switch to mobile view layout.
   #autoPositionCleanupFn: (() => void) | undefined
@@ -152,48 +202,52 @@ export class GdsPopover extends GdsElement {
   }
 
   render() {
-    return html`<dialog
-      class="${classMap({ 'v-kb-visible': this._isVirtKbVisible })}"
-      ${ref(this.#dialogElementRef)}
-    >
-      <header>
-        <h2>${this.label}</h2>
-        <button
-          class="close"
-          @click=${this.#handleCloseButton}
-          aria-label="${msg('Close')}"
+    return html`<slot
+        name="trigger"
+        @slotchange=${this.#handleTriggerSlotChange}
+      ></slot>
+      <div ?hidden="${!this.open}">
+        <dialog
+          class="${classMap({
+            'v-kb-visible': this._isVirtKbVisible,
+            'use-modal-in-mobile': this.useModalInMobileView,
+          })}"
+          aria-hidden="${String(!this.open)}"
+          @close=${() => (this.open = false)}
         >
-          <i></i>
-        </button>
-      </header>
-      <slot></slot>
-    </dialog>`
+          <header>
+            <h2>${this.label}</h2>
+            <gds-button
+              @click=${this.#handleCloseButton}
+              class="close"
+              label="${msg('Close')}"
+              size="small"
+              rank="tertiary"
+            >
+              <gds-icon-cross-small></icon-cross-small>
+            </gds-button>
+          </header>
+          <slot></slot>
+        </dialog>
+      </div>`
   }
 
   @watch('open')
   private _handleOpenChange() {
-    this.setAttribute('aria-hidden', String(!this.open))
-    this.hidden = !this.open
-
     this.updateComplete.then(() => {
+      this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
-        this.#dialogElementRef.value?.showModal()
+        this._elDialog?.showModal()
         this.#focusFirstSlottedChild()
         // Wait one event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
           () =>
-            this.#dialogElementRef.value?.addEventListener(
-              'click',
-              this.#clickOutsideListener,
-            ),
+            this._elDialog?.addEventListener('click', this.#handleClickOutside),
           0,
         )
       } else {
-        this.#dialogElementRef.value?.close()
-        this.#dialogElementRef.value?.removeEventListener(
-          'click',
-          this.#clickOutsideListener,
-        )
+        this._elDialog?.close()
+        this._elDialog?.removeEventListener('click', this.#handleClickOutside)
       }
     })
   }
@@ -222,25 +276,52 @@ export class GdsPopover extends GdsElement {
   }
 
   #registerTriggerEvents() {
-    this._trigger?.addEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.addEventListener('keydown', this.#handleTriggerKeyDown)
+    this._trigger?.addEventListener('click', this.#handleTriggerClick)
   }
 
   #unregisterTriggerEvents() {
-    this._trigger?.removeEventListener('keydown', this.#triggerKeyDownListener)
+    this._trigger?.removeEventListener('keydown', this.#handleTriggerKeyDown)
+    this._trigger?.removeEventListener('click', this.#handleTriggerClick)
     this.#autoPositionCleanupFn?.()
+  }
+
+  #setupTriggerAttributes() {
+    if (this._trigger) {
+      // aria-expanded
+      this._trigger?.setAttribute('aria-expanded', String(this.open))
+
+      // tabindex, role="button"
+      const focusableNodeNames = ['A', 'BUTTON', 'INPUT', 'TEXTAREA']
+      const isProbablyFocusable =
+        this._trigger.nodeName.startsWith('GDS-') ||
+        focusableNodeNames.includes(this._trigger.nodeName)
+      if (!isProbablyFocusable) {
+        this._trigger.setAttribute('tabindex', '0')
+        this._trigger.setAttribute('role', 'button')
+      }
+
+      // aria-haspopup
+      const ariaHasPopupAttr = this._trigger.nodeName.startsWith('GDS-')
+        ? 'gds-aria-haspopup'
+        : 'aria-haspopup'
+      if (this._trigger.getAttribute(ariaHasPopupAttr) === null) {
+        this._trigger.setAttribute(ariaHasPopupAttr, this.popupRole)
+      }
+    }
   }
 
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
     this.#isMobileViewport = matches
-    if (matches) {
+    if (matches && this.useModalInMobileView) {
       this.#autoPositionCleanupFn?.()
-      this.#dialogElementRef.value?.style.removeProperty('left')
-      this.#dialogElementRef.value?.style.removeProperty('top')
-      this.#dialogElementRef.value?.style.removeProperty('minWidth')
+      this._elDialog?.style.removeProperty('left')
+      this._elDialog?.style.removeProperty('top')
+      this._elDialog?.style.removeProperty('minWidth')
 
       this.updateComplete.then(() => {
-        if (this.open) this.#dialogElementRef.value?.showModal()
+        if (this.open) this._elDialog?.showModal()
       })
     } else {
       this.updateComplete.then(() => {
@@ -250,10 +331,19 @@ export class GdsPopover extends GdsElement {
   }
 
   #registerAutoPositioning() {
-    const referenceEl = this._trigger
-    const floatingEl = this.#dialogElementRef.value
+    if (!this._anchor || !this._elDialog) {
+      return
+    }
 
-    if (!referenceEl || !floatingEl || this.#isMobileViewport) return
+    const referenceEl = this._anchor
+    const floatingEl = this._elDialog
+
+    if (
+      !referenceEl ||
+      !floatingEl ||
+      (this.#isMobileViewport && this.useModalInMobileView)
+    )
+      return
 
     if (this.#autoPositionCleanupFn) {
       this.#autoPositionCleanupFn()
@@ -278,10 +368,10 @@ export class GdsPopover extends GdsElement {
   }
 
   /**
-   * ArrowDown on the trigger element will trigger the popover by default, and escape will close it.
+   * ArrowDown or ArrowUp on the trigger element will trigger the popover by default, and escape will close it.
    */
-  #triggerKeyDownListener = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+  #handleTriggerKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault()
       this.open = true
       this.#dispatchUiStateEvent('show')
@@ -292,22 +382,27 @@ export class GdsPopover extends GdsElement {
     }
   }
 
+  #handleTriggerClick = (e: MouseEvent) => {
+    e.preventDefault()
+    this.open = !this.open
+    this.#dispatchUiStateEvent(this.open ? 'show' : 'close')
+  }
+
   /**
    * Move focus to the first slotted child.
    */
   #focusFirstSlottedChild = () => {
-    const firstSlottedChild = this.shadowRoot
-      ?.querySelector('slot')
-      ?.assignedElements()[0] as HTMLElement
+    const firstSlottedChild =
+      this._elDefaultSlot?.assignedElements()[0] as HTMLElement
 
     this.updateComplete.then(() => {
       firstSlottedChild?.focus()
     })
   }
 
-  #clickOutsideListener = (evt: Event) => {
+  #handleClickOutside = (evt: Event) => {
     const e = evt as PointerEvent
-    const dialog = this.#dialogElementRef.value
+    const dialog = this._elDialog
     const isNotEnterKey = e.clientX > 0 || e.clientY > 0
 
     if (isNotEnterKey && dialog && this.open) {

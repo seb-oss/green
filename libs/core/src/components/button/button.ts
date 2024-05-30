@@ -1,6 +1,8 @@
 import { nothing, unsafeCSS } from 'lit'
+import { html as staticHtml, literal } from 'lit/static-html.js'
 import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { forwardAttributes } from '../../utils/directives'
@@ -77,6 +79,30 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   @property()
   label = ''
 
+  /**
+   * When set, the underlying button will be rendered as an anchor element.
+   */
+  @property()
+  href = ''
+
+  /**
+   * Where to display the linked URL. Only used when href is present.
+   */
+  @property()
+  target?: '_self' | '_blank' | '_parent' | '_top'
+
+  /**
+   * The relationship of the linked URL as space-separated link types. Only used when href is present. Defaults to "noreferrer noopener" for security reasons when target is set.
+   */
+  @property()
+  rel?: string
+
+  /**
+   * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value. Only used when href is present.
+   */
+  @property()
+  download?: string
+
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
 
   #isIconButton = false
@@ -92,8 +118,17 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
+  get #isLink() {
+    return this.href.length > 0
+  }
+
+  get #defaultRel() {
+    return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
   render() {
     const buttonClasses = {
+      button: true,
       circle: this.#isIconButton,
       icon: this.#isIconButton,
       small: this.size === 'small',
@@ -104,14 +139,21 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       secondary: this.rank === 'secondary',
       tertiary: this.rank === 'tertiary',
     }
-    return html`
-      <button
+
+    const tag = this.#isLink ? literal`a` : literal`button`
+
+    return staticHtml`
+      <${tag}
         class=${classMap(buttonClasses)}
-        ?type="${this.type}"
+        type="${ifDefined(this.#isLink ? undefined : this.type)}"
         ?disabled="${this.disabled}"
-        @click="${this.#handleClick}"
         aria-label=${this.label || nothing}
+        href=${ifDefined(this.#isLink ? this.href : undefined)}
+        target=${ifDefined(this.#isLink ? this.target : undefined)}
+        rel=${ifDefined(this.#isLink ? this.rel || this.#defaultRel : undefined)}
+        download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
+        @click="${this.#handleClick}"
         ${forwardAttributes(
           (attr) =>
             attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
@@ -124,7 +166,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple></gds-ripple>`,
         )}
-      </button>
+      </${tag}>
     `
   }
 
@@ -151,7 +193,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       }),
     )
 
-    if (this.form) {
+    if (this.form && !this.#isLink) {
       if (this.type === 'submit') {
         this.form.requestSubmit()
       } else if (this.type === 'reset') {

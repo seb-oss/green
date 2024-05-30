@@ -16,7 +16,7 @@ registerTransitionalStyles()
  * heading and they may have a link or button added to act on the data being displayed.
  */
 const meta: Meta = {
-  title: 'Components/Groued List',
+  title: 'Components/Grouped List',
   component: 'gds-grouped-list',
   subcomponents: { ListItem: 'gds-list-item' },
   parameters: {
