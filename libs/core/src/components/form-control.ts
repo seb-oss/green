@@ -1,9 +1,7 @@
-import { LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { watch } from '../utils/decorators'
 import { GdsElement } from '../gds-element'
-import { getUnscopedTagName } from '../utils/helpers/custom-element-scoping'
 
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
@@ -92,6 +90,9 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ reflect: true })
   name = ''
 
+  /**
+   * The form element that the form control is associated with.
+   */
   get form() {
     return this.#internals.form
   }

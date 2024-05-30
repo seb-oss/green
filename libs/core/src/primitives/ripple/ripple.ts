@@ -1,14 +1,12 @@
 import { LitElement, html, unsafeCSS } from 'lit'
-
-import styles from './ripple.styles.scss'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { query } from 'lit/decorators.js'
+import { gdsCustomElement } from '../../scoping'
+import styles from './ripple.styles.scss'
+import { tokens } from '../../tokens.style'
 
 @gdsCustomElement('gds-ripple')
 export class Ripple extends LitElement {
-  static get styles() {
-    return unsafeCSS(styles)
-  }
+  static styles = [tokens, unsafeCSS(styles)]
 
   @query('div') private _rippleEl?: HTMLDivElement
 

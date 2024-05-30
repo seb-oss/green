@@ -21,33 +21,33 @@ We also provide components for the following technologies:
 
 If you're trying to find something specific, here's a full list of packages that we support!
 
-| Package name                                                                                      | Description                                                             |
-| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [@sebgroup/green-core](https://github.com/sebgroup/green/tree/main/libs/core)                     | Webcomponent library built with [Lit](https://lit.dev)                  |
-| [@sebgroup/green-react](https://github.com/sebgroup/green/tree/main/libs/react)                   | React component library                                                 |
-| [@sebgroup/green-angular](https://github.com/sebgroup/green/tree/main/libs/angular)               | Angular component library                                               |
-| [@sebgroup/chlorophyll](https://github.com/sebgroup/green/tree/main/libs/chlorophyll)             | Styling framework                                                       |
-| [@sebgroup/green-tokens](https://github.com/sebgroup/green/tree/main/libs/tokens)                 | Design Tokens package                                                   |
-| [@sebgroup/green-charts](https://github.com/sebgroup/green/tree/main/libs/charts)                 | An SEB wrapper of [Billboard.js](https://naver.github.io/billboard.js/) |
-| [@sebgroup/green-react-charts](https://github.com/sebgroup/green/tree/main/libs/react-charts)     | A React version of the charts wrapper                                   |
-| [@sebgroup/green-angular-charts](https://github.com/sebgroup/green/tree/main/libs/angular-charts) | An Angular version of the charts wrapper                                |
+| Package name                                                                                      | Latest stable version                                                                                                                                     |                                                                                           | Description                                                             |
+| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [@sebgroup/green-core](https://github.com/sebgroup/green/tree/main/libs/core)                     | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-core/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-core)                     | [Changelog](https://github.com/sebgroup/green/tree/main/libs/core/CHANGELOG.md)           | Web Component library built with [Lit](https://lit.dev)                 |
+| [@sebgroup/green-react](https://github.com/sebgroup/green/tree/main/libs/react)                   | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-react/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-react)                   | [Changelog](https://github.com/sebgroup/green/tree/main/libs/react/CHANGELOG.md)          | React component library                                                 |
+| [@sebgroup/green-angular](https://github.com/sebgroup/green/tree/main/libs/angular)               | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-angular/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-angular)               | [Changelog](https://github.com/sebgroup/green/tree/main/libs/angular/CHANGELOG.md)        | Angular component library                                               |
+| [@sebgroup/chlorophyll](https://github.com/sebgroup/green/tree/main/libs/chlorophyll)             | [![Stable version](https://img.shields.io/npm/v/@sebgroup/chlorophyll/latest.svg)](https://www.npmjs.com/package/@sebgroup/chlorophyll)                   | [Changelog](https://github.com/sebgroup/green/tree/main/libs/chlorophyll/CHANGELOG.md)    | Styling framework                                                       |
+| [@sebgroup/green-tokens](https://github.com/sebgroup/green/tree/main/libs/tokens)                 | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-tokens/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-tokens)                 | [Changelog](https://github.com/sebgroup/green/tree/main/libs/tokens/CHANGELOG.md)         | Design Tokens package                                                   |
+| [@sebgroup/green-charts](https://github.com/sebgroup/green/tree/main/libs/charts)                 | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-charts)                 | [Changelog](https://github.com/sebgroup/green/tree/main/libs/charts/CHANGELOG.md)         | An SEB wrapper of [Billboard.js](https://naver.github.io/billboard.js/) |
+| [@sebgroup/green-react-charts](https://github.com/sebgroup/green/tree/main/libs/react-charts)     | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-react-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-react-charts)     | [Changelog](https://github.com/sebgroup/green/tree/main/libs/react-charts/CHANGELOG.md)   | A React version of the charts wrapper                                   |
+| [@sebgroup/green-angular-charts](https://github.com/sebgroup/green/tree/main/libs/angular-charts) | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-angular-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-angular-charts) | [Changelog](https://github.com/sebgroup/green/tree/main/libs/angular-charts/CHANGELOG.md) | An Angular version of the charts wrapper                                |
 
 ## 📋 Table of content
 
-- [Documentation](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#documentation)
-- [Working from SEB](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#working-from-seb)
-- [Contribute](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#contribute)
-- [Working locally with this repo](https://github.com/sebgroup/green/tree/main?tab=readme-ov-file#working-locally-with-this-repo)
+- [Documentation](https://github.com/sebgroup/green?tab=readme-ov-file#-documentation)
+- [Working from SEB](https://github.com/sebgroup/green?tab=readme-ov-file#-working-from-seb)
+- [Contribute](https://github.com/sebgroup/green?tab=readme-ov-file#-contribute)
+- [Working locally with this repo](https://github.com/sebgroup/green?tab=readme-ov-file#-working-locally-with-this-repo)
 
 ## 📚 Documentation
 
 Documentation currently resides in a few different locations:
 
 - [User Interface Guidelines (Design Library)](https://designlibrary.sebgroup.com/)
-- [Storybook (@sebgroup/chlorophyll)](https://sebgroup.github.io/green/latest/chlorophyll/)
-- [Storybook (@sebgroup/green-core)](https://sebgroup.github.io/green/latest/core/)
-- [Storybook (@sebgroup/green-react)](https://sebgroup.github.io/green/latest/react/)
-- [Storybook (@sebgroup/green-angular)](https://sebgroup.github.io/green/latest/angular/)
+- [Storybook (@sebgroup/chlorophyll)](https://storybook.seb.io/latest/chlorophyll/)
+- [Storybook (@sebgroup/green-core)](https://storybook.seb.io/latest/core/)
+- [Storybook (@sebgroup/green-react)](https://storybook.seb.io/latest/react/)
+- [Storybook (@sebgroup/green-angular)](https://storybook.seb.io/latest/angular/)
 
 ## 🏦 Working from SEB
 

@@ -1,8 +1,7 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
 import { NggSliderComponent } from './slider.component'
 import { NggSliderModule } from './slider.module'
-import Documentation from './documentation.mdx'
 
 export default {
   title: 'Components/Slider',
@@ -13,9 +12,6 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-slider'],
   },
   argTypes: {
@@ -94,10 +90,10 @@ export default {
   },
 } as Meta<NggSliderComponent>
 
-const Template: Story<NggSliderComponent> = (args: NggSliderComponent) => {
+const Template: StoryFn<NggSliderComponent> = (args: NggSliderComponent) => {
   return {
     template: `
-      <ngg-slider 
+      <ngg-slider
         label="Slider label text in one line"
         instruction="Element instruction"
         placeholder="%"

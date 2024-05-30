@@ -1,5 +1,8 @@
 import { NggPaginationComponent } from './pagination.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
+import * as Stories from './pagination.stories.ts'
+
+<Meta of={Stories} />
 
 <style>{`
     div[id^=story--] > div{
@@ -14,7 +17,7 @@ import { Canvas, Story } from '@storybook/addon-docs'
 If you're only using the Pagination component, you just need to import the `NggPaginationModule`.
 
 ```typescript
-import { NggAccordionModule } from '@sebgroup/green-angular'
+import { NggAccordionModule } from '@sebgroup/green-angular/src/lib/pagination'
 
 @NgModule({
   imports: [NggAccordionModule]
@@ -31,24 +34,28 @@ import { NggAccordionModule } from '@sebgroup/green-angular'
 ></ngg-pagination>
 ```
 
-## Accordion Options
+## Options
 
 ### Inputs
 
+<Markdown>{`
 | Input        | Type              | Description                                                                         |
 | :----------- | :---------------- | :---------------------------------------------------------------------------------- |
-| size         | `PaginationSize`  | Rendered size - small or large                                                      |
-| displayPages | `number`          | Amount of pages to be displayed between the `go to first` and `go to last` buttons. |
-| length       | `number`          | Total amount of items to be paginated                                               |
-| pageSize     | `number`          | Displayed items per page                                                            |
-| pageIndex    | `number`          | The current page index. Defaulted to 0.                                             |
-| i18n         | `IPaginationI18n` | Internationalization labels                                                         |
+| size         | \`PaginationSize\`  | Rendered size - small or large                                                      |
+| displayPages | \`number\`          | Amount of pages to be displayed between the \`go to first\` and \`go to last\` buttons. |
+| length       | \`number\`          | Total amount of items to be paginated                                               |
+| pageSize     | \`number\`          | Displayed items per page                                                            |
+| pageIndex    | \`number\`          | The current page index. Defaulted to 0.                                             |
+| i18n         | \`IPaginationI18n\` | Internationalization labels                                                         |
+`}</Markdown>
 
 ### Outputs
 
+<Markdown>{`
 | Event | Description      |
 | :---- | :--------------- | ----------------------------------------------- |
 | page  | IPaginationEvent | Event emitted when a new page index is selected |
+`}</Markdown>
 
 ## Examples
 

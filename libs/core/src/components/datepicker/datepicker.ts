@@ -5,54 +5,43 @@ import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { HTMLTemplateResult, nothing } from 'lit'
+import { nothing } from 'lit'
 import { msg } from '@lit/localize'
 
 import { GdsFormControlElement } from '../../components/form-control'
-import {
-  gdsCustomElement,
-  html,
-  getScopedTagName,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
+import {
+  dateArrayConverter,
+  dateConverter,
+} from '../../utils/helpers/attribute-converters'
 
-import '../../primitives/popover/popover'
+import '../popover'
+import type { GdsPopover } from '../popover'
 
-import '../../primitives/calendar/calendar'
-import type { GdsCalendar } from '../../primitives/calendar/calendar'
+import '../../primitives/calendar'
+import type { GdsCalendar } from '../../primitives/calendar'
 
-import { GdsDropdown } from '../dropdown/dropdown'
+import '../../components/dropdown'
+import type { GdsDropdown } from '../../components/dropdown'
 
 import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
+import '../../components/button'
+import '../../components/icon/icons/calendar'
+import '../../components/icon/icons/chevron-left'
+import '../../components/icon/icons/chevron-right'
+
 import { styles } from './datepicker.styles'
-import { GdsPopover } from '../../primitives/popover/popover'
+import isSameDay from 'date-fns/isSameDay'
 
 type DatePart = 'year' | 'month' | 'day'
 
 type DateFormatLayout = {
   delimiter: string
   layout: { token: 'y' | 'm' | 'd'; name: DatePart }[]
-}
-
-const dateConverter = {
-  fromAttribute(value: string) {
-    return new Date(value)
-  },
-  toAttribute(value: Date) {
-    return value.toISOString()
-  },
-}
-
-const dateArrayConverter = {
-  fromAttribute(value: string) {
-    return value.split(',').map((d) => new Date(d.trim()))
-  },
-  toAttribute(value: Date[]) {
-    return JSON.stringify(value.map((d) => d.toISOString()))
-  },
 }
 
 /**
@@ -201,18 +190,17 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#calendar')
   private _elCalendar!: Promise<GdsCalendar>
 
-  @queryAsync('#trigger')
+  @queryAsync('#calendar-button')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAll(getScopedTagName('gds-date-part-spinner'))
+  @queryAsync('#field')
+  private _elField!: Promise<HTMLDivElement>
+
+  @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
   @query('.input')
   private _elInput!: HTMLDivElement
-
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
 
   #valueOnOpen?: Date
 
@@ -222,8 +210,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   render() {
-    return html`${this._tStyles}
-      ${when(
+    return html`${when(
         this.label && !this.hideLabel,
         () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}
@@ -232,7 +219,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <div
         class=${classMap({ field: true, small: this.size === 'small' })}
-        id="trigger"
+        id="field"
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
@@ -273,14 +260,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
-          @click=${() => (this.open = !this.open)}
         >
-          <svg viewBox="0 0 24 24" inert>
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-          </svg>
+          <gds-icon-calendar></gds-icon-calendar>
         </button>
       </div>
 
@@ -288,12 +269,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <gds-popover
         .triggerRef=${this._elTrigger}
+        .anchorRef=${this._elField}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
         label=${this.label}
         id="calendar-popover"
         .placement=${'bottom-end'}
         .calcMinWidth=${() => (this.showWeekNumbers ? '350px' : '305px')}
+        .useModalInMobileView=${true}
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return
@@ -305,7 +288,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
           >
-            <i class="icon prev"></i>
+            <gds-icon-chevron-left></gds-icon-chevron-left>
           </button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
@@ -347,7 +330,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleIncrementFocusedMonth}
             aria-label=${msg('Next month')}
           >
-            <i class="icon next"></i>
+            <gds-icon-chevron-right></gds-icon-chevron-right>
           </button>
         </div>
 
@@ -366,25 +349,27 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         ></gds-calendar>
 
         <div class="footer">
-          <button
-            class="tertiary clear"
+          <gds-button
+            rank="tertiary"
+            size="small"
             @click=${() => {
               this.value = undefined
               this.#dispatchChangeEvent()
             }}
           >
             ${msg('Clear')}
-          </button>
+          </gds-button>
           ${until(this.#renderBackToValidRangeButton(), nothing)}
-          <button
-            class="tertiary today"
+          <gds-button
+            rank="tertiary"
+            size="small"
             @click=${() => {
               this.value = new Date()
               this.#dispatchChangeEvent()
             }}
           >
             ${msg('Today')}
-          </button>
+          </gds-button>
         </div>
       </gds-popover> `
   }
@@ -406,9 +391,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return html`${when(
       buttonTxt.length > 0,
       () =>
-        html`<button class="tertiary back-to-range" @click=${buttonAction}>
+        html`<gds-button rank="tertiary" size="small" @click=${buttonAction}>
           ${buttonTxt}
-        </button>`,
+        </gds-button>`,
       () => nothing,
     )}`
   }
@@ -536,7 +521,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleFieldClick = (e: MouseEvent) => {
-    this._elSpinners[0].focus()
+    this._elSpinners[0]?.focus()
   }
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
@@ -585,12 +570,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.open = e.detail.open
 
     if (e.detail.reason === 'close') {
-      this.value = (await this._elCalendar).value
+      const calValue = (await this._elCalendar).value
+      const hasChanged = !isSameDay(
+        calValue || new Date(0),
+        this.#valueOnOpen || new Date(0),
+      )
+      if (hasChanged) {
+        this.value = calValue
+        this.#dispatchChangeEvent()
+      }
       if (this.value) {
         this._focusedMonth = this.value.getMonth()
         this._focusedYear = this.value.getFullYear()
       }
-      this.#dispatchChangeEvent()
     }
 
     if (e.detail.reason === 'cancel') {

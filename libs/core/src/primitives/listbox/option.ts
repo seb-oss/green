@@ -5,11 +5,10 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../scoping'
 
 import style from './option.styles'
 
-import 'reflect-metadata'
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
 
@@ -80,10 +79,6 @@ export class GdsOption extends Focusable(GdsElement) {
   @property({ type: Boolean, reflect: true })
   isPlaceholder = false
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   constructor() {
     super()
 
@@ -136,8 +131,7 @@ export class GdsOption extends Focusable(GdsElement) {
       else this.removeAttribute('highlighted')
     }
 
-    return html`${this._tStyles}
-      <div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
+    return html`<div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
   }
 
   #emitSelect(e: MouseEvent | KeyboardEvent) {

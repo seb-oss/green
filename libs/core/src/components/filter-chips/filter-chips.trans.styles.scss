@@ -1,0 +1,14 @@
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base, _overrides;
+
+  :host {
+  }
+
+  @layer _base {
+  }
+
+  @layer _overrides {
+  }
+}

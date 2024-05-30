@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- a7eb4c2: iOS & Android token ouputs
+
+## 0.3.0
+
+### Minor Changes
+
+- 5b84660: # New tokens
+
+  - Motion
+  - Size scale
+  - Spacing, Margin, Padding
+
+  # New component: Button
+
+  - Built on tokens
+  - Transitional styles
+
 ## 0.2.0
 
 ### Minor Changes

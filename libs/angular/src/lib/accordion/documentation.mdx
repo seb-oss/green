@@ -1,5 +1,9 @@
 import { NggAccordionComponent } from './accordion.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Markdown } from '@storybook/addon-docs'
+import { Meta } from '@storybook/blocks'
+import * as Stories from './accordion.stories.ts'
+
+<Meta of={Stories} />
 
 # Accordion
 
@@ -17,7 +21,7 @@ If you're only using the Accordion component, you just need to import the `NggAc
 ```typescript
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { NggAccordionModule } from '@sebgroup/green-angular'
+import { NggAccordionModule } from '@sebgroup/green-angular/src/lib/accordion'
 
 import { AppComponent } from './app.component'
 
@@ -33,26 +37,34 @@ export class AppModule {}
 
 ### Inputs
 
+<Markdown>{`
 | Input       | Type               | Description                                                                                             |
 | :---------- | :----------------- | :------------------------------------------------------------------------------------------------------ |
-| closeOthers | `boolean`          | Indicates if all other sections should be collapsed once one section is expanded                        |
-| expandAll   | `Observable<void>` | Setting this observable causes the component to collapse all sections unless closeOthers is set to true |
+| closeOthers | \`boolean\`          | Indicates if all other sections should be collapsed once one section is expanded                        |
+| expandAll   | \`Observable<void>\` | Setting this observable causes the component to collapse all sections unless closeOthers is set to true |
+`}</Markdown>
 
 ## Accordion List item options
 
 ### Inputs
 
+### Inputs
+
+<Markdown>{`
 | Input             | Type     | Description                                                                                                                                              |
 | :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| listItemHeader    | `string` | The header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                        |
-| listItemSubHeader | `string` | The subheader of the expandable section. Will always be displayed with a smaller font than the header regardless if the content is collapsed or expanded |
-| expandAll         | `string` | The sub header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                    |
+| listItemHeader    | \`string\` | The header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                        |
+| listItemSubHeader | \`string\` | The subheader of the expandable section. Will always be displayed with a smaller font than the header regardless if the content is collapsed or expanded |
+| expandAll         | \`string\` | The sub header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                    |
+`}</Markdown>
 
 ### Outputs
 
+<Markdown>{`
 | Event          | Description                                                                                                                     |
 | :------------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | expandedChange | Event emitted when list item content is collapsed or expanded. The list item component itself is passed together with the event |
+`}</Markdown>
 
 ## Examples
 

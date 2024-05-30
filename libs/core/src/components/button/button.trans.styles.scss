@@ -1,0 +1,87 @@
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/icon';
+@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
+@use '../../../../chlorophyll/scss/common';
+
+$button-danger-border: tokens.get(tokens.$red, 0);
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base, _ranks, _overrides;
+
+  :host {
+    display: inline-block;
+  }
+
+  @layer _base {
+    .button {
+      @include button.reset();
+      @include button.base();
+      box-sizing: border-box;
+      font-size: inherit;
+      overflow: hidden;
+      display: flex;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .button slot:not([name]) {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    :host(:not([variant='ghost'])) .button {
+      @include button.primary();
+    }
+
+    .button.icon {
+      padding: 0.75rem;
+      slot {
+        display: contents;
+      }
+    }
+
+    .button.icon.small {
+      padding: 0.5rem;
+    }
+
+    .button.icon.large {
+      padding: 1.25rem;
+    }
+
+    :host([rank*='secondary']) .button {
+      @include button.secondary();
+    }
+
+    :host([rank*='tertiary']) .button {
+      @include button.tertiary();
+    }
+
+    /* stylelint-disable */
+    :host([variant='negative']:not([rank='secondary'], [rank='tertiary']))
+      .button,
+    :host([variant='negative'][rank='primary']) .button {
+      @include button.danger-bg();
+    }
+    /* stylelint-enable */
+
+    :host([variant='negative'][rank='secondary']) .button,
+    :host([variant='negative'][rank='tertiary']) .button {
+      @include button.danger-color();
+    }
+
+    :host([variant='negative'][rank='secondary']) .button {
+      border-color: $button-danger-border;
+    }
+
+    :host([variant='ghost']) .button {
+      @include button.ghost-dark();
+    }
+  }
+
+  @layer _overrides {
+  }
+}

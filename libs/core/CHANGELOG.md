@@ -1,5 +1,128 @@
 # Changelog
 
+## 1.22.1
+
+### Patch Changes
+
+- 841ffe2: Add GdsElement to icon
+  Closes #1405
+
+## 1.22.0
+
+### Minor Changes
+
+- 096b662: **Popover:** Add new component
+- 1652e33: **Button:** Add suppoert for link buttons
+
+### Patch Changes
+
+- a8b556f: **Dropdown:** Fix line-breaks in trigger button. Fixes #1343
+- 5f224d0: **Datepicker:** Fix incorrectly emitted change event. Fixes #1322
+
+## 1.21.2
+
+### Patch Changes
+
+- ed85124: **Button**: Fix text wrap in transitional styles
+
+## 1.21.1
+
+### Patch Changes
+
+- ee40253: Fix regression of `auto-columns` in Grid
+
+## 1.21.0
+
+### Minor Changes
+
+- 4fef270: **Changes Made:**
+
+  - Refactored the `gds-icon` component to import individual icons for improved modularity.
+  - Implemented a command to generate all icons from the SVG versions for both types (`regular` and `solid`).
+
+  **Features Added:**
+
+  - Icons can now be resized using the `width` and `height` properties.
+  - Color inheritance from `currentColor` on the path and stroke for consistent coloring across icons.
+  - All icons are copied for importing as SVG files.
+  - Direct fetching of icons is enabled from the Figma API or by copying them into the assets directory.
+  - Added label for accessibility to the pass a label to the svg icon.
+
+  **Updates Made:**
+
+  - Ensured all components using `gds-icon` were updated to reflect the changes.
+  - Implemented tests to validate the functionality.
+
+  These changes enhance the reusability and maintainability of the `gds-icon-[ICON_NAME]` component by allowing individual icon imports, custom sizing, color consistency, and streamlined icon generation and usage. The addition of tests ensures the reliability of the updated component.
+
+## 1.20.2
+
+### Patch Changes
+
+- 73b03d8: Add back a missing dependecny
+
+## 1.20.1
+
+### Patch Changes
+
+- 336743c: Added custom dates property to internal `gds-calendar`
+
+## 1.20.0
+
+### Minor Changes
+
+- bfe345f: **Button:** Remove element constraint from main slot
+- bfe345f: **Filter Chips:** Add new component
+
+## 1.19.0
+
+### Minor Changes
+
+- 91e434c: Style controller & Grid Refactoring
+
+## 1.18.1
+
+### Patch Changes
+
+- 7dd4fef: Fix export path for jest config
+
+## 1.18.0
+
+### Minor Changes
+
+- 0aeaa98: **Transitional styles:** Transitional styles can now be separately imported on a per-component basis
+
+### Patch Changes
+
+- a8941c7: **Jest config:** Add back missing export
+
+## 1.17.0
+
+### Minor Changes
+
+- c5c696c: Remove default column in mobile
+
+## 1.16.0
+
+### Minor Changes
+
+- 5b84660: # New tokens
+
+  - Motion
+  - Size scale
+  - Spacing, Margin, Padding
+
+  # New component: Button
+
+  - Built on tokens
+  - Transitional styles
+
+- 80b4050: **Code splitting**: Add support for sub-path exports
+
+### Patch Changes
+
+- 80b4050: **Button**: Fixed an issue with ripple effect when using transitional styles and scoping
+
 ## 1.15.1
 
 ### Patch Changes

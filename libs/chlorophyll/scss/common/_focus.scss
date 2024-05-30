@@ -59,7 +59,7 @@
   $color: tokens.get(tokens.$blue, 0),
   $fadeActiveHover: false
 ) {
-  &[aria-selected],
+  &[aria-selected='true'],
   &:active,
   &.active,
   &.active:hover,
