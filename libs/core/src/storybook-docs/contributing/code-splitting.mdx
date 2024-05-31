@@ -1,6 +1,10 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Contributing/Code Splitting" />
+
 # Code splitting
 
-Since a consumer of Green Core may not need all of the components every time, it needs to be possible to import them one by one, so that only used code are included in the application bundle.
+Since a consumer of Green Core may not need all of the components every time, it needs to be possible to import them one by one, so that only used code gets included in the application bundle.
 
 Often, you import stuff from a main export like this, for example:
 
@@ -12,7 +16,7 @@ This resolves to an `index.js` file at the root of the package, containing all t
 
 Dead code elimination works by statically analyzing the code in the application, and figuring out which code paths are actually being called, and then removing the stuff that is never reached.
 
-This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the alayzer doesn't know what else relies on the side-effect. The same thing is true when a Web Component is registered in the browsers `CustomElementRegistry`.
+This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the analyzer doesn't know what else relies on the side-effect. The same thing is true when a Web Component is registered in the browsers `CustomElementRegistry`.
 
 Since each component in Green Core is automatically registered with the `CustomElementRegistry`, each component can also be said to have a side-effect. This means that when you `import { GdsDropdown } from '@sebgroup/green-core'` you're not just getting the `GdsDropdown` component. You're getting ALL of the components, because they all have side-effects.
 
