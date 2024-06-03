@@ -3,7 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/src",
   "projectType": "library",
-  "tags": [],
   "implicitDependencies": ["tokens"],
   "targets": {
     "build": {
@@ -24,6 +23,11 @@
             "glob": "(package.json|README.md|setup-jest.js|green-jest-config.cjs)",
             "input": "libs/core",
             "output": "."
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "libs/core/src/components/icon/assets",
+            "output": "assets/icons"
           }
         ]
       }
@@ -80,6 +84,18 @@
         "command": "npx wtr --config libs/core/web-test-runner.config.mjs --playwright --browsers chromium firefox webkit"
       }
     },
+    "icons-fetch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-fetch.cjs"
+      }
+    },
+    "icons-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-generate.cjs"
+      }
+    },
     "test": {
       "executor": "nx:run-commands",
       "dependsOn": ["build-tests"],
@@ -93,7 +109,7 @@
         "port": 4400,
         "configDir": "libs/core/.storybook"
       },
-      "dependsOn": ["build", "build-custom-elements-json"],
+      "dependsOn": ["tokens:build", "build-src", "build-custom-elements-json"],
       "configurations": {
         "ci": {
           "quiet": true
@@ -103,6 +119,7 @@
     "build-storybook": {
       "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
+      "dependsOn": ["build-src", "tokens:build", "build-custom-elements-json"],
       "options": {
         "outputDir": "dist/storybook/core",
         "configDir": "libs/core/.storybook"
@@ -118,5 +135,6 @@
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
     }
-  }
+  },
+  "tags": []
 }

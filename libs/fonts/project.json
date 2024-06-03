@@ -1,0 +1,40 @@
+{
+  "name": "fonts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/fonts/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build-base": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": [
+          {
+            "input": "libs/fonts",
+            "glob": "**/fonts/**",
+            "output": "/"
+          },
+          {
+            "input": "libs/fonts",
+            "glob": "**/scss/**",
+            "output": "/"
+          }
+        ],
+        "main": "",
+        "outputPath": "dist/libs/fonts",
+        "tsConfig": "libs/fonts/tsconfig.lib.json"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/fonts"],
+      "defaultConfiguration": "production",
+      "dependsOn": ["build-base"],
+      "options": {
+        "commands": [
+          "sass libs/fonts/scss/seb-fonts.scss dist/libs/fonts/css/seb-fonts.css"
+        ]
+      }
+    }
+  }
+}

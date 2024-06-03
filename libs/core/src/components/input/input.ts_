@@ -24,7 +24,7 @@ import styles from './input.styles.css'
  *
  * @element gds-input
  *.
- * @slot lead - Accepts `gds-icon`. Use this to place an icon in the start of the field.
+ * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
@@ -129,7 +129,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       ${this.#renderSupportingText()} ${this.#renderExtendedSupportingText()}
 
       <div class="field" @click=${this.#handleFieldClick}>
-        <slot name="lead" gds-allow="gds-icon"></slot>
+        <slot name="lead"></slot>
         ${when(
           this.multiline,
           () => html`${this.#renderNativeTextarea()}`,
@@ -157,7 +157,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderSimplified() {
     return html`
       <div class="field" @click=${this.#handleFieldClick}>
-        <slot name="lead" gds-allow="gds-icon"></slot>
+        <slot name="lead"></slot>
         <label for="input">
           <div>${this.label}</div>
           ${when(
@@ -292,7 +292,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
         >
-          <gds-icon name="x"></gds-icon>
+          <gds-icon-cross-small />
         </gds-button>
       `
     else return nothing
@@ -329,7 +329,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             label="${msg('Show extended supporting text')}"
             @click=${this.#handleSupportingTextBtnClick}
           >
-            <gds-icon name="info"></gds-icon>
+            <gds-icon-circle-info />
           </gds-button>
         `
       else return nothing

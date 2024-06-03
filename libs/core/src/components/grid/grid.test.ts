@@ -53,4 +53,18 @@ describe('GdsGrid', () => {
     await element.updateComplete
     expect(element.padding).to.equal('l:m m:s s:xs')
   })
+
+  it('sets auto-columns with multiple values correctly', async () => {
+    ;(element.autoColumns as any) = 'l:100 m:200 s:300'
+    await element.updateComplete
+
+    const computedStyle = getComputedStyle(element)
+    const desktop = computedStyle.getPropertyValue('--_col-width-desktop')
+    const tablet = computedStyle.getPropertyValue('--_col-width-tablet')
+    const mobile = computedStyle.getPropertyValue('--_col-width-mobile')
+
+    expect(desktop).to.equal('100px')
+    expect(tablet).to.equal('200px')
+    expect(mobile).to.equal('300px')
+  })
 })

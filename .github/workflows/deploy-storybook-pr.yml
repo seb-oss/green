@@ -75,7 +75,7 @@ jobs:
             // Create link list
             const links = updatedStorybooks
               .map((storybook) =>
-                `- [${storybook}](https://sebgroup.github.io/green/pr-${{ steps.pr_number.outputs.result }}/${storybook}/)`)
+                `- [${storybook}](https://storybook.seb.io/pr-${{ steps.pr_number.outputs.result }}/${storybook}/)`)
               .join('\n');
 
             // Create comment body
