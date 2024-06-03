@@ -1,7 +1,14 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+
+  "plugins": ["@nx", "import"],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": false, "optionalDependencies": false }
+    ]
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -27,9 +34,10 @@
       "rules": {}
     },
     {
-      "files": ["*.test.ts"],
+      "files": ["*.test.ts", "**/testing/*.ts", "**/build-scripts/*"],
       "rules": {
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "import/no-extraneous-dependencies": "off"
       }
     },
     {
