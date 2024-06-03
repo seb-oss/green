@@ -9,7 +9,7 @@ import type {
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { sendKeys } from '@web/test-runner-commands'
-import { clickOnElement } from 'src/utils/testing'
+import { clickOnElement } from '../../utils/testing'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
