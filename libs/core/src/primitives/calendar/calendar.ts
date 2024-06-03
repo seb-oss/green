@@ -10,6 +10,7 @@ import {
   getWeek,
   subMonths,
   addMonths,
+  lastDayOfMonth,
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
@@ -106,10 +107,18 @@ export class GdsCalendar extends GdsElement {
     return this.focusedDate.getMonth()
   }
   set focusedMonth(month: number) {
-    const newDate = new Date(this.focusedDate)
-    newDate.setMonth(month)
-    newDate.setHours(0, 0, 0, 0)
-    this.focusedDate = newDate
+    const lastOfSelectedMonth = lastDayOfMonth(
+      new Date(this.focusedYear, month, 1),
+    )
+    const newFocusedDate = new Date(this.focusedDate)
+
+    newFocusedDate.setDate(
+      Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
+    )
+    newFocusedDate.setMonth(month)
+    newFocusedDate.setHours(0, 0, 0, 0)
+
+    this.focusedDate = newFocusedDate
   }
 
   /**
