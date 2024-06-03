@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.1.1
+
+### Patch Changes
+
+- 1344f9d: **Deps:** Add previously undeclared peer deps
+- Updated dependencies [1344f9d]
+- Updated dependencies [1344f9d]
+- Updated dependencies [2921f0e]
+  - @sebgroup/green-core@1.22.2
+  - @sebgroup/extract@3.0.2
+
 ## 4.1.0
 
 ### Minor Changes
