@@ -34,7 +34,15 @@
       "rules": {}
     },
     {
-      "files": ["*.test.ts", "**/testing/*.ts", "**/build-scripts/*"],
+      "files": [
+        "*.test.*",
+        "*.spec.*",
+        "*.stories.*",
+        "**/testing/*.ts",
+        "**/test-setup.ts",
+        "**/build-scripts/*",
+        "**/webpack.config.js"
+      ],
       "rules": {
         "@typescript-eslint/no-non-null-assertion": "off",
         "import/no-extraneous-dependencies": "off"

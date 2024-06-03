@@ -7,7 +7,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import isSameDay from 'date-fns/isSameDay/index.js'
+import { isSameDay } from 'date-fns'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import { gdsCustomElement, html } from '../../scoping'
