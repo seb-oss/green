@@ -205,5 +205,21 @@ describe('<gds-calendar>', () => {
         onlyDate(new Date('2024-02-01')),
       )
     })
+
+    it('should focus last day of month if focused date is beyond last day of current month when changing month', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-05-31')}
+        ></gds-calendar>`,
+      )
+      await el.updateComplete
+
+      el.focusedMonth = 1
+      await el.updateComplete
+
+      await expect(onlyDate(el.focusedDate)).to.equal(
+        onlyDate(new Date('2024-02-29')),
+      )
+    })
   })
 })
