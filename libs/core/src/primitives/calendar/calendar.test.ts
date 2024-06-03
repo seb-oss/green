@@ -218,7 +218,7 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-28')),
+        onlyDate(new Date('2024-02-29')),
       )
     })
   })

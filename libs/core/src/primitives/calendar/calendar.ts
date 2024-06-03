@@ -116,7 +116,7 @@ export class GdsCalendar extends GdsElement {
       Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
     )
     newFocusedDate.setMonth(month)
-    newFocusedDate.setHours(0, 0, 0, 0)
+    newFocusedDate.setHours(12, 0, 0, 0)
 
     this.focusedDate = newFocusedDate
   }
