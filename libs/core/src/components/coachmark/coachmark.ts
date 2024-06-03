@@ -1,5 +1,6 @@
-import { html } from 'lit/html.js'
-import { customElement, property, state } from 'lit/decorators.js'
+import { html } from 'lit'
+import { property, state } from 'lit/decorators.js'
+import { gdsCustomElement } from '../../scoping'
 import {
   computePosition,
   detectOverflow,
@@ -13,22 +14,30 @@ import {
 } from '@floating-ui/dom'
 import { ref, createRef, Ref } from 'lit/directives/ref.js'
 import styles from './coachmark.styles'
-import { when } from 'lit/directives/when'
-import { GdsElement } from 'src/gds-element'
+import { when } from 'lit/directives/when.js'
+import { GdsElement } from '../../gds-element'
 
-@customElement('gds-coachmark')
-export class GdsCoachmarkObject extends GdsElement {
+@gdsCustomElement('gds-coachmark')
+export class GdsCoachmark extends GdsElement {
   static styles = styles
+
+  /**
+   * @internal
+   */
+  static shadowRootOptions: ShadowRootInit = {
+    mode: 'open',
+    delegatesFocus: true,
+  }
 
   #cardRef: Ref<Element> = createRef()
   #arrowRef: Ref<Element> = createRef()
-  #targetedElement: HTMLElement = new HTMLElement()
+  #targetedElement: HTMLElement | undefined = undefined
   #autoUpdateCleanupFn: (() => void) | undefined
   @state() _isVisible = false
   @state() _preventClose = false
   @property({ attribute: false }) coachmark: GdsCoachmarkObject | null = null
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback()
 
     document.addEventListener('click', () => {
@@ -67,9 +76,9 @@ export class GdsCoachmarkObject extends GdsElement {
     window.dispatchEvent(new CustomEvent('tooltipClosed'))
   }
 
-  #findTarget(selectors: string[]): HTMLElement {
+  #findTarget(selectors: string[]): HTMLElement | undefined {
     let shadow = false
-    let el: HTMLElement = new HTMLElement()
+    let el: HTMLElement | undefined = undefined
     selectors.forEach((selector) => {
       if (selector !== 'shadowRoot') {
         if (!el && !shadow) {
@@ -125,10 +134,11 @@ export class GdsCoachmarkObject extends GdsElement {
   }
 
   async #computeTooltipPosition(
+    targetedEl: HTMLElement,
     componentEl: HTMLElement,
     arrowEl: HTMLElement,
   ) {
-    return computePosition(this.#targetedElement, componentEl, {
+    return computePosition(targetedEl, componentEl, {
       placement: this.coachmark?.tooltip.preferredPlacement as Placement,
       middleware: [
         offset(() => ({
@@ -164,6 +174,8 @@ export class GdsCoachmarkObject extends GdsElement {
   }
 
   #shouldTooltipBeVisible(): boolean {
+    if (!this.#targetedElement) return false
+
     const isOutOfBound = this.#isElementOutsideView(this.#targetedElement)
     const isVisible = this.#targetedElement.checkVisibility()
     const isOverlapping = !this.coachmark?.tooltip.overlappedBy
@@ -176,47 +188,45 @@ export class GdsCoachmarkObject extends GdsElement {
   }
 
   async #updateCoachmarks() {
+    const targetEl = this.#targetedElement
     const componentEl = this.#cardRef.value as HTMLElement | null
     const arrowEl = this.#arrowRef.value as HTMLElement | null
-    if (componentEl && arrowEl) {
-      try {
-        this.#autoUpdateCleanupFn = autoUpdate(
-          this.#targetedElement,
-          componentEl,
-          () => {
-            this.#computeTooltipPosition(componentEl, arrowEl).then(
-              ({ x, y, middlewareData, placement }) => {
-                if (this.#shouldTooltipBeVisible()) {
-                  this._isVisible = true
-                  Object.assign(componentEl.style, {
-                    visibility: 'visible',
-                    opacity: 1,
-                    left: `${x}px`,
-                    top: `${y}px`,
-                  })
-                  if (middlewareData.arrow) {
-                    const { x, y } = middlewareData.arrow
-                    arrowEl.removeAttribute('class')
-                    arrowEl.classList.add('arrow-' + placement)
-                    Object.assign(arrowEl.style, {
-                      left: x != null ? `${x}px` : '',
-                      top: y != null ? `${y}px` : '',
-                    })
-                  }
-                } else {
-                  this._isVisible = false
-                  Object.assign(componentEl.style, {
-                    visibility: 'hidden',
-                    opacity: 0,
-                  })
-                }
-              },
-            )
+
+    if (!targetEl || !componentEl || !arrowEl) return
+
+    try {
+      this.#autoUpdateCleanupFn = autoUpdate(targetEl, componentEl, () => {
+        this.#computeTooltipPosition(targetEl, componentEl, arrowEl).then(
+          ({ x, y, middlewareData, placement }) => {
+            if (this.#shouldTooltipBeVisible()) {
+              this._isVisible = true
+              Object.assign(componentEl.style, {
+                visibility: 'visible',
+                opacity: 1,
+                left: `${x}px`,
+                top: `${y}px`,
+              })
+              if (middlewareData.arrow) {
+                const { x, y } = middlewareData.arrow
+                arrowEl.removeAttribute('class')
+                arrowEl.classList.add('arrow-' + placement)
+                Object.assign(arrowEl.style, {
+                  left: x != null ? `${x}px` : '',
+                  top: y != null ? `${y}px` : '',
+                })
+              }
+            } else {
+              this._isVisible = false
+              Object.assign(componentEl.style, {
+                visibility: 'hidden',
+                opacity: 0,
+              })
+            }
           },
         )
-      } catch (error) {
-        console.warn('failed to render tooltips')
-      }
+      })
+    } catch (error) {
+      console.warn('failed to render tooltips')
     }
   }
 
@@ -225,7 +235,7 @@ export class GdsCoachmarkObject extends GdsElement {
   }
 
   render() {
-    when(
+    return html`${when(
       this.coachmark,
       () => html`
         <div
@@ -239,7 +249,7 @@ export class GdsCoachmarkObject extends GdsElement {
         </div>
       `,
       () => html``,
-    )
+    )}`
   }
 }
 
@@ -247,11 +257,6 @@ export interface GdsCoachmarkObject {
   id: string
   variant: 'light' | 'dark'
   tooltip: GdsCoachmarkTooltip
-}
-
-export interface GdsCoachmarkAttribute {
-  attribute: string
-  value: string
 }
 
 export interface GdsCoachmarkTooltip {
@@ -266,7 +271,6 @@ export interface GdsCoachmarkTooltip {
     text: string
     target: string
   }
-  attributes: GdsCoachmarkAttribute[]
   preferredPlacement: 'top' | 'bottom' | 'left' | 'right'
   target: string[]
   overlappedBy: string[]
