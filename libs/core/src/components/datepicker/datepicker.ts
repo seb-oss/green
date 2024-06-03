@@ -7,6 +7,7 @@ import { repeat } from 'lit/directives/repeat.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { nothing } from 'lit'
 import { msg } from '@lit/localize'
+import isSameDay from 'date-fns/isSameDay/index.js'
 
 import { GdsFormControlElement } from '../../components/form-control'
 import { gdsCustomElement, html } from '../../scoping'
@@ -35,7 +36,6 @@ import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
 import { styles } from './datepicker.styles'
-import isSameDay from 'date-fns/isSameDay'
 
 type DatePart = 'year' | 'month' | 'day'
 
