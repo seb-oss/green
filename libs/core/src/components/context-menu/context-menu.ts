@@ -1,7 +1,7 @@
-import { HTMLTemplateResult, nothing } from 'lit'
+import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { classMap } from 'lit-html/directives/class-map.js'
-import { property, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { property, queryAsync } from 'lit/decorators.js'
 import { Placement } from '@floating-ui/dom'
 
 import {
