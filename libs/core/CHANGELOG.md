@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.22.2
+
+### Patch Changes
+
+- 1344f9d: **Datepicker:** make import from `date-fns` fully qualified
+- 2921f0e: **Calendar:** improve indicator style
+
 ## 1.22.1
 
 ### Patch Changes
