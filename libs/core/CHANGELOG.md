@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.22.3
+
+### Patch Changes
+
+- 900effe: **Dropdown:** Fix focus issue with VoiceOver iOS. Fixes #1294
+- b62c0ae: **Calendar:** Fix issue where the wrong month could be rendered in the calendar, if focused day number was outside the selected month (for example if 30th is focused and February was selected). Fixes #1412
+
 ## 1.22.2
 
 ### Patch Changes
