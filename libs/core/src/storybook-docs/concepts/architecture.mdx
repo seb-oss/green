@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs'
+import { SBMermaid } from '../../../.storybook/blocks/Mermaid'
+
+<Meta title="Concepts/Architecture" />
+
+# Green architecture
+
+Green Core is the foundation of the Green Design System, and consists of a set of Web Components that underpins the React and Angular components that are typically used when building applications.
+
+The Web Components are themselves often composed of a hierarchy of smaller Web Componentes, called primitives, that defines the various atomic pieces that make up a component.
+
+The Green architecture roughly looks something like this:
+
+<SBMermaid
+  chart={`flowchart TD
+  subgraph Green Core
+    DT[Design Tokens]---AP
+    M[Markup]---AP
+    S[Styles]---AP
+    AP[Atomic Primitives]---|Composition|CP[Compound Primitives]---|Public API Boundry|WC[Web Components]
+  end
+  WC---A[Angular]
+  WC---R[React]
+`}
+></SBMermaid>
+
+Of course, design tokens, markup and styles can be used on all levels of composition, but are only drawn at the top here in order to simplify the diagram.
+
+Public API Boundry before Web Components means that anything that is lower level than a complete component is considered internal to the framework and should not be used by consumers. We only guarantee semantic versioning for the public api. Anything that is considered internal could change in breaking ways in any release.
