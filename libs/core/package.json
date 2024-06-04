@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.21.2",
+  "version": "1.22.2",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/sebgroup/green/"
   },
-  "homepage": "https://sebgroup.github.io/green/latest/core/",
+  "homepage": "https://storybook.seb.io/latest/core/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebgroup/green.git"

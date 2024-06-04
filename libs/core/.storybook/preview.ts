@@ -20,6 +20,18 @@ export default {
         return regexRes ? regexRes[1] : source
       },
     },
+    options: {
+      storySort: {
+        order: [
+          'Welcome',
+          'Components',
+          'Concepts',
+          ['Architecture'],
+          'Contributing',
+          ['Introduction'],
+        ],
+      },
+    },
   },
   decorators: [(storyFn: any) => html`<gds-theme>${storyFn()}</gds-theme>`],
 }

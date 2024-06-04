@@ -1,5 +1,30 @@
 # Changelog
 
+## 4.1.1
+
+### Patch Changes
+
+- 1344f9d: **Deps:** Add previously undeclared peer deps
+- Updated dependencies [1344f9d]
+- Updated dependencies [1344f9d]
+- Updated dependencies [2921f0e]
+  - @sebgroup/green-core@1.22.2
+  - @sebgroup/extract@3.0.2
+
+## 4.1.0
+
+### Minor Changes
+
+- 5a9e3ab: Modal animations
+
+### Patch Changes
+
+- Updated dependencies [a8b556f]
+- Updated dependencies [096b662]
+- Updated dependencies [5f224d0]
+- Updated dependencies [1652e33]
+  - @sebgroup/green-core@1.22.0
+
 ## 4.0.0
 
 ### Major Changes

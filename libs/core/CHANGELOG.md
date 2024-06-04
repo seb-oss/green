@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.22.2
+
+### Patch Changes
+
+- 1344f9d: **Datepicker:** make import from `date-fns` fully qualified
+- 2921f0e: **Calendar:** improve indicator style
+
+## 1.22.1
+
+### Patch Changes
+
+- 841ffe2: Add GdsElement to icon
+  Closes #1405
+
+## 1.22.0
+
+### Minor Changes
+
+- 096b662: **Popover:** Add new component
+- 1652e33: **Button:** Add suppoert for link buttons
+
+### Patch Changes
+
+- a8b556f: **Dropdown:** Fix line-breaks in trigger button. Fixes #1343
+- 5f224d0: **Datepicker:** Fix incorrectly emitted change event. Fixes #1322
+
 ## 1.21.2
 
 ### Patch Changes

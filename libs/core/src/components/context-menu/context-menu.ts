@@ -1,7 +1,7 @@
-import { HTMLTemplateResult, nothing } from 'lit'
+import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { classMap } from 'lit-html/directives/class-map.js'
-import { property, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { property, queryAsync } from 'lit/decorators.js'
 import { Placement } from '@floating-ui/dom'
 
 import {
@@ -15,7 +15,7 @@ import { TransitionalStyles } from '../../transitional-styles'
 import styles from './context-menu.styles'
 
 import '../../primitives/menu'
-import '../../primitives/popover'
+import '../popover'
 
 /**
  * @element gds-context-menu
@@ -103,7 +103,6 @@ export class GdsContextMenu extends GdsElement {
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
-        @click=${() => (this.open = !this.open)}
       >
         <slot name="trigger">
           ${this.showLabel ? this.buttonLabel ?? this.label : nothing}
@@ -119,6 +118,7 @@ export class GdsContextMenu extends GdsElement {
         id="menu"
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
+        .anchorRef=${this.elTriggerBtn}
         .label=${this.label}
         .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}

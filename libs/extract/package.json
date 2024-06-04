@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/extract",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Base library for framework components.",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/sebgroup/green/labels/extract"
   },
-  "homepage": "https://sebgroup.github.io/green/latest/extract/",
+  "homepage": "https://storybook.seb.io/latest/extract/",
   "dependencies": {
     "@types/react": "^17 || ^18",
     "body-scroll-lock": "^3.1.5",
@@ -27,5 +27,8 @@
     "imask": "^6.5.0",
     "rxjs": "^6.5.3 || ^7.4.0",
     "swiped-events": "^1.1.6"
+  },
+  "peerDependencies": {
+    "react": "^17 || ^18"
   }
 }
