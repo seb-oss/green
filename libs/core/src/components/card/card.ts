@@ -37,6 +37,12 @@ export class GdsCard extends GdsElement {
   @property({ attribute: 'background', type: String })
   background?: string
 
+  @property({ attribute: 'border', type: String })
+  border?: string
+
+  @property({ attribute: 'hovered', type: Boolean })
+  hovered?: boolean
+
   /**
    * Lifecycle method called when the element is connected to the DOM.
    * It updates the column, gap, and padding variables.

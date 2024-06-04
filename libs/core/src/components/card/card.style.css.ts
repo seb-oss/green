@@ -26,6 +26,8 @@ const style = css`
         border-radious: var(--_radius-mobile);
       }
     }
+
+    // Add hovered state for card
   }
 `
 export default style
