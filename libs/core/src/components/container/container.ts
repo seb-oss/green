@@ -9,9 +9,7 @@ import { GdsElement } from '../../gds-element'
 import { watch } from '../../utils/decorators/watch'
 import { tokens } from '../../tokens.style'
 
-import CardCSS from './card.style.css'
-
-type CardSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
+import CardCSS from './container.style.css'
 
 const BreakpointPattern =
   /(?<l>l:([a-z0-9]+))?\s*(?<m>m:([a-z0-9]+))?\s*(?<s>s:([a-z0-9]+))?/
@@ -30,16 +28,11 @@ export class GdsCard extends GdsElement {
     delegatesFocus: true,
   }
 
-  /**
-   * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card gap="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card gap="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
   @property({ attribute: 'gap', type: String })
   gap?: string
+
+  @property({ attribute: 'row-gap', type: String })
+  rowGap?: string
 
   @property({ attribute: 'span', type: String })
   span?: string
@@ -47,37 +40,32 @@ export class GdsCard extends GdsElement {
   @property({ attribute: 'rows', type: String })
   rows?: string
 
-  /**
-   * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card row-gap="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card row-gap="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
-  @property({ attribute: 'row-gap', type: String })
-  rowGap?: CardSizes
-
-  /**
-   * @property {string} padding - Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card padding="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card padding="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
   @property({ attribute: 'padding', type: String })
-  padding?: CardSizes
+  padding?: string
 
-  /**
-   * Lifecycle method called when the element is connected to the DOM.
-   * It updates the column, gap, and padding variables.
-   */
+  @property({ attribute: 'display', type: String })
+  display?: string
+
+  @property({ attribute: 'align', type: String })
+  align?: string
+
+  @property({ attribute: 'justify', type: String })
+  justify?: string
+
+  @property({ attribute: 'direction', type: String })
+  direction?: string
+
+  @property({ attribute: 'wrap', type: String })
+  wrap?: string
+
   connectedCallback() {
     super.connectedCallback()
     this._updateGapVariables()
     this._updateRowGapVariables()
     this._updatePaddingVariables()
+    this._updateDirectionVariables()
+    this._updateDisplayVariables()
+    this._updateSpanVariables()
   }
 
   private _updateCSSVariables(
@@ -137,6 +125,47 @@ export class GdsCard extends GdsElement {
       }
     }
 
+    // Display flex or what ever
+    if (propertyName === 'display') {
+      if (this.display && !this.display.includes(' ')) {
+        desktop = tablet = mobile = this.display
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+      }
+    }
+
+    if (propertyName === 'align') {
+      if (this.align && !this.align.includes(' ')) {
+        desktop = tablet = mobile = this.align
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+      }
+    }
+
+    if (propertyName === 'justify') {
+      if (this.justify && !this.justify.includes(' ')) {
+        desktop = tablet = mobile = this.justify
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+      }
+    }
+
+    if (propertyName === 'direction') {
+      if (this.direction && !this.direction.includes(' ')) {
+        desktop = tablet = mobile = this.direction
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+      }
+    }
+
+    if (propertyName === 'span') {
+      if (this.span && !this.span.includes(' ')) {
+        desktop = tablet = mobile = this.span
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+      }
+    }
+
     const properties: CSSProperty[] = [
       { name: `${propertyPrefix}-desktop`, value: desktop },
       { name: `${propertyPrefix}-tablet`, value: tablet },
@@ -166,43 +195,43 @@ export class GdsCard extends GdsElement {
     )
   }
 
-  /**
-   * State variable that holds the CSS variables for column, gap, and padding.
-   */
   #gridVariables = {
     varsGap: css``,
     varsRowGap: css``,
     varsPadding: css``,
   }
 
-  /**
-   * Watcher for the 'gap' property.
-   * It updates the gap CSS variables when the 'gap' property changes.
-   */
   @watch('gap')
   private _updateGapVariables() {
     this._updateCSSVariables('gap', 'gap')
   }
 
-  /**
-   * Watcher for the 'row-gap' property.
-   * It updates the row-gap CSS variables when the 'row-gap' property changes.
-   */
   @watch('row-gap')
   private _updateRowGapVariables() {
     this._updateCSSVariables('rowGap', 'row-gap')
   }
 
-  /**
-   * Watcher for the 'padding' property.
-   * It updates the padding CSS variables when the 'padding' property changes.
-   */
   @watch('padding')
   private _updatePaddingVariables() {
     this._updateCSSVariables('padding', 'padding')
   }
 
+  @watch('display')
+  private _updateDisplayVariables() {
+    this._updateCSSVariables('display', 'display')
+  }
+
+  @watch('direction')
+  private _updateDirectionVariables() {
+    this._updateCSSVariables('direction', 'direction')
+  }
+
+  @watch('span')
+  private _updateSpanVariables() {
+    this._updateCSSVariables('span', 'span')
+  }
+
   render() {
-    return html`<div class="card"><slot></slot></div>`
+    return html`<div class="container"><slot></slot></div>`
   }
 }

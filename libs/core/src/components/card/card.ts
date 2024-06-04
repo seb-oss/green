@@ -11,8 +11,6 @@ import { tokens } from '../../tokens.style'
 
 import CardCSS from './card.style.css'
 
-type CardSizes = 'none' | 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl'
-
 const BreakpointPattern =
   /(?<l>l:([a-z0-9]+))?\s*(?<m>m:([a-z0-9]+))?\s*(?<s>s:([a-z0-9]+))?/
 
@@ -30,38 +28,11 @@ export class GdsCard extends GdsElement {
     delegatesFocus: true,
   }
 
-  /**
-   * @property {string} `gap` - Defines the gap size between grid items. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card gap="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card gap="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
-  @property({ attribute: 'gap', type: String })
-  gap?: CardSizes
+  @property({ attribute: 'elevation', type: String })
+  elevation?: string
 
-  /**
-   * @property {string} `row-gap` - Defines the gap size between grid items in vertical axis. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card row-gap="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card row-gap="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
-  @property({ attribute: 'row-gap', type: String })
-  rowGap?: CardSizes
-
-  /**
-   * @property {string} padding - Defines the padding size around the grid. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. Sizes can be 'none', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'.
-   * @example
-   * ```html
-   * <gds-card padding="m"></gds-card> <!-- applies to all breakpoints -->
-   * <gds-card padding="l:m m:s s:xs"></gds-card> <!-- different values for each breakpoint -->
-   * ```
-   */
-  @property({ attribute: 'padding', type: String })
-  padding?: CardSizes
+  @property({ attribute: 'radius', type: String })
+  radius?: string
 
   @property({ attribute: 'background', type: String })
   background?: string
@@ -72,9 +43,8 @@ export class GdsCard extends GdsElement {
    */
   connectedCallback() {
     super.connectedCallback()
-    this._updateGapVariables()
-    this._updateRowGapVariables()
-    this._updatePaddingVariables()
+    this._updateElevationVariables()
+    this._updateRadiusVariables()
   }
 
   private _updateCSSVariables(
@@ -110,25 +80,17 @@ export class GdsCard extends GdsElement {
       return { desktop, tablet, mobile }
     }
 
-    if (propertyName === 'gap') {
-      if (this.gap && !this.gap.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.gap})`
+    if (propertyName === 'elevation') {
+      if (this.elevation && !this.elevation.includes(' ')) {
+        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.elevation})`
       } else {
         ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
       }
     }
 
-    if (propertyName === 'rowGap') {
-      if (this.rowGap && !this.rowGap.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.rowGap})`
-      } else {
-        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
-      }
-    }
-
-    if (propertyName === 'padding') {
-      if (this.padding && !this.padding.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.padding})`
+    if (propertyName === 'radius') {
+      if (this.radius && !this.radius.includes(' ')) {
+        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.radius})`
       } else {
         ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
       }
@@ -163,40 +125,18 @@ export class GdsCard extends GdsElement {
     )
   }
 
-  /**
-   * State variable that holds the CSS variables for column, gap, and padding.
-   */
   #gridVariables = {
-    varsGap: css``,
-    varsRowGap: css``,
-    varsPadding: css``,
+    varsElevation: css``,
   }
 
-  /**
-   * Watcher for the 'gap' property.
-   * It updates the gap CSS variables when the 'gap' property changes.
-   */
-  @watch('gap')
-  private _updateGapVariables() {
-    this._updateCSSVariables('gap', 'gap')
+  @watch('elevation')
+  private _updateElevationVariables() {
+    this._updateCSSVariables('elevation', 'elevation')
   }
 
-  /**
-   * Watcher for the 'row-gap' property.
-   * It updates the row-gap CSS variables when the 'row-gap' property changes.
-   */
-  @watch('row-gap')
-  private _updateRowGapVariables() {
-    this._updateCSSVariables('rowGap', 'row-gap')
-  }
-
-  /**
-   * Watcher for the 'padding' property.
-   * It updates the padding CSS variables when the 'padding' property changes.
-   */
-  @watch('padding')
-  private _updatePaddingVariables() {
-    this._updateCSSVariables('padding', 'padding')
+  @watch('radius')
+  private _updateRadiusVariables() {
+    this._updateCSSVariables('radius', 'radius')
   }
 
   render() {
