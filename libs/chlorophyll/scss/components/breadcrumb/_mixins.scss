@@ -1,6 +1,6 @@
 @use '../../tokens';
 
-$chevron-icon-size: 16px;
+$chevron-icon-size: 1rem;
 
 @mixin add-breadcrumb() {
   flex-direction: row !important;
