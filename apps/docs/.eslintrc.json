@@ -5,6 +5,9 @@
     "next/core-web-vitals",
     "../../.eslintrc.json"
   ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off"
+  },
   "ignorePatterns": ["!**/*", ".next/**/*"],
   "overrides": [
     {

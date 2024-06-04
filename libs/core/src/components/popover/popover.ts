@@ -239,7 +239,11 @@ export class GdsPopover extends GdsElement {
       if (this.open) {
         this._elDialog?.showModal()
         this.#focusFirstSlottedChild()
-        // Wait one event loop cycle before registering the close listener, to avoid the dialog closing immediately
+
+        // Another VoiceOver hack
+        setTimeout(() => this.#focusFirstSlottedChild(), 250)
+
+        // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
           () =>
             this._elDialog?.addEventListener('click', this.#handleClickOutside),
