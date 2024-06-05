@@ -38,7 +38,7 @@ export class CalendarExample extends LitElement {
             @change=${(e) => (this.disabledWeekends = e.target.checked)} /><span
             >Disable weekends</span
           ><i
-        /></label>
+        ></i></label>
         <label class="form-control"
           ><input
             type="checkbox"
@@ -46,7 +46,7 @@ export class CalendarExample extends LitElement {
             @change=${(e) => (this.showWeekNumbers = e.target.checked)} /><span
             >Show week numbers</span
           ><i
-        /></label>
+        ></i></label>
     </div>`
   }
 }
