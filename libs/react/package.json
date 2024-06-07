@@ -1,13 +1,13 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.20.0",
-    "@sebgroup/chlorophyll": "^3.3.6",
+    "@sebgroup/green-core": "^1.22.3",
+    "@sebgroup/chlorophyll": "^3.4.0",
     "@sebgroup/extract": "^3.0.1",
     "@lit/react": "^1.0.2",
     "classnames": "^2.3.2"
@@ -28,5 +28,5 @@
   "bugs": {
     "url": "https://github.com/sebgroup/green/labels/react"
   },
-  "homepage": "https://sebgroup.github.io/green/latest/react/"
+  "homepage": "https://storybook.seb.io/latest/react/"
 }

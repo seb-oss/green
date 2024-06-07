@@ -5,7 +5,6 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
-import 'reflect-metadata'
 
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'
@@ -23,7 +22,7 @@ import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option'
-import '../../primitives/popover'
+import '../popover'
 
 import { GdsFormControlElement } from '../../components/form-control'
 
@@ -37,7 +36,7 @@ import { TransitionalStyles } from '../../transitional-styles'
  * @status beta
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
- * @slot button - The trigger button for the dropdown. Custom content for the button can be assigned through this slot.
+ * @slot trigger - Custom content for the trigger button can be assigned through this slot.
  * @slot sub-label - Renders between the label and the trigger button.
  * @slot message - Renders below the trigger button. Will be red if there is a validation error.
  *
@@ -198,9 +197,6 @@ export class GdsDropdown<ValueT = any>
   @query('#trigger')
   private _elTriggerBtn!: HTMLButtonElement
 
-  @queryAsync('#trigger')
-  private _elTriggerBtnAsync!: Promise<HTMLButtonElement>
-
   @queryAsync('#listbox')
   private _elListbox!: Promise<GdsListbox>
 
@@ -236,33 +232,30 @@ export class GdsDropdown<ValueT = any>
 
       <span class="form-info"><slot name="sub-label"></slot></span>
 
-      <button
-        id="trigger"
-        @click="${() => (this.open = !this.open)}"
-        aria-haspopup="listbox"
-        role="combobox"
-        aria-owns="listbox"
-        aria-controls="listbox"
-        aria-expanded="${this.open}"
-        aria-label="${this.label}"
-        class=${classMap({ small: this.size === 'small' })}
-      >
-        <slot name="trigger">
-          <span>${unsafeHTML(this.displayValue)}</span>
-        </slot>
-      </button>
-
-      <span class="form-info"><slot name="message"></slot></span>
-
       <gds-popover
         .label=${this.label}
         .open=${this.open}
-        .triggerRef=${this._elTriggerBtnAsync}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
+        .useModalInMobileView=${true}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
+        <button
+          id="trigger"
+          slot="trigger"
+          aria-haspopup="listbox"
+          role="combobox"
+          aria-owns="listbox"
+          aria-controls="listbox"
+          aria-expanded="${this.open}"
+          aria-label="${this.label}"
+          class=${classMap({ small: this.size === 'small' })}
+        >
+          <slot name="trigger">
+            <span>${unsafeHTML(this.displayValue)}</span>
+          </slot>
+        </button>
         ${when(
           this.searchable,
           () =>
@@ -287,6 +280,8 @@ export class GdsDropdown<ValueT = any>
           <slot gds-allow="gds-option gds-menu-heading"></slot>
         </gds-listbox>
       </gds-popover>
+
+      <span class="form-info"><slot name="message"></slot></span>
     `
   }
 

@@ -20,7 +20,7 @@
     background-color: var(--grey-500);
   }
 
-  :host(:focus) div {
+  :host(:focus-visible) {
     outline-color: #000;
     outline-offset: -0.25rem;
   }

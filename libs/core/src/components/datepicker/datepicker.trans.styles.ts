@@ -2,7 +2,7 @@ import { TransitionalStyles } from '../../utils/transitional-styles/transitional
 import styles from './datepicker.trans.styles.scss'
 
 import * as Dropdown from '../dropdown/dropdown.trans.styles'
-import * as Popover from '../../primitives/popover/popover.trans.styles'
+import * as Popover from '../popover/popover.trans.styles'
 import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
 
 export function register() {

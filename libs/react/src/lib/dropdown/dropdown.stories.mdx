@@ -1,4 +1,4 @@
-import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ArgsTable, Canvas, Meta, Story, Markdown } from '@storybook/addon-docs'
 import { Dropdown } from './dropdown'
 
 export const Template = ({ align, ...props }) => (
@@ -61,10 +61,12 @@ Set the `value` prop to set the selected option/options. In multiple select mode
 
 By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
 
+<Markdown>{`
 | Input (attribute) | Description                                                          | Default |
 | :---------------- | :------------------------------------------------------------------- | :------ |
-| useValue          | Which key to use as value.                                           | `value` |
-| display           | Which key to use as display value when selected and in options list. | `label` |
+| useValue          | Which key to use as value.                                           | \`value\` |
+| display           | Which key to use as display value when selected and in options list. | \`label\` |
+`}</Markdown>
 
 ## Value Object
 
@@ -89,9 +91,11 @@ Dropdown option values can even be an object, but note that it requires a `compa
 
 Custom texts can be set using the `texts` prop which takes an object with the following keys:
 
-| Key           | Description                                 | Default  |
-| :------------ | :------------------------------------------ | :------- |
-| `placeholder` | Text to display when no option is selected. | `Select` |
+<Markdown>{`
+| Key           | Type     | Description                                 |
+| :------------ | :------- | :------------------------------------------ |
+| \`placeholder\` | \`string\` | Text to display when no option is selected. |
+`}</Markdown>
 
 <Canvas>
   <div style={{ height: '200px' }}>

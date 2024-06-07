@@ -1,5 +1,86 @@
 # Changelog
 
+## 1.22.3
+
+### Patch Changes
+
+- 900effe: **Dropdown:** Fix focus issue with VoiceOver iOS. Fixes #1294
+- b62c0ae: **Calendar:** Fix issue where the wrong month could be rendered in the calendar, if focused day number was outside the selected month (for example if 30th is focused and February was selected). Fixes #1412
+
+## 1.22.2
+
+### Patch Changes
+
+- 1344f9d: **Datepicker:** make import from `date-fns` fully qualified
+- 2921f0e: **Calendar:** improve indicator style
+
+## 1.22.1
+
+### Patch Changes
+
+- 841ffe2: Add GdsElement to icon
+  Closes #1405
+
+## 1.22.0
+
+### Minor Changes
+
+- 096b662: **Popover:** Add new component
+- 1652e33: **Button:** Add suppoert for link buttons
+
+### Patch Changes
+
+- a8b556f: **Dropdown:** Fix line-breaks in trigger button. Fixes #1343
+- 5f224d0: **Datepicker:** Fix incorrectly emitted change event. Fixes #1322
+
+## 1.21.2
+
+### Patch Changes
+
+- ed85124: **Button**: Fix text wrap in transitional styles
+
+## 1.21.1
+
+### Patch Changes
+
+- ee40253: Fix regression of `auto-columns` in Grid
+
+## 1.21.0
+
+### Minor Changes
+
+- 4fef270: **Changes Made:**
+
+  - Refactored the `gds-icon` component to import individual icons for improved modularity.
+  - Implemented a command to generate all icons from the SVG versions for both types (`regular` and `solid`).
+
+  **Features Added:**
+
+  - Icons can now be resized using the `width` and `height` properties.
+  - Color inheritance from `currentColor` on the path and stroke for consistent coloring across icons.
+  - All icons are copied for importing as SVG files.
+  - Direct fetching of icons is enabled from the Figma API or by copying them into the assets directory.
+  - Added label for accessibility to the pass a label to the svg icon.
+
+  **Updates Made:**
+
+  - Ensured all components using `gds-icon` were updated to reflect the changes.
+  - Implemented tests to validate the functionality.
+
+  These changes enhance the reusability and maintainability of the `gds-icon-[ICON_NAME]` component by allowing individual icon imports, custom sizing, color consistency, and streamlined icon generation and usage. The addition of tests ensures the reliability of the updated component.
+
+## 1.20.2
+
+### Patch Changes
+
+- 73b03d8: Add back a missing dependecny
+
+## 1.20.1
+
+### Patch Changes
+
+- 336743c: Added custom dates property to internal `gds-calendar`
+
 ## 1.20.0
 
 ### Minor Changes

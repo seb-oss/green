@@ -102,6 +102,7 @@ export default function ComponentLayout({
           home={'Home'}
           separator={<span> / </span>}
           activeClass="active"
+          slug={slug}
         />
         <Grid columns={6} tablet={2} mobile={1} gapBlock="small">
           <gds-cell span="4" className="content">

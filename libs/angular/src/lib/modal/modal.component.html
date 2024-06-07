@@ -1,5 +1,5 @@
 <ng-container *ngIf="isOpen" [ngSwitch]="modalType">
-  <div class="gds-dialog-wrapper">
+  <div class="gds-dialog-wrapper" [@modalAnimation]>
     <aside
       data-testid="modal"
       *ngSwitchCase="'slideout'"

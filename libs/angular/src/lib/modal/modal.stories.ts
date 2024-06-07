@@ -1,20 +1,17 @@
-import Documentation from './documentation.mdx'
-import { moduleMetadata, Story, Meta } from '@storybook/angular'
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { NggModalModule } from './modal.module'
 import { NggModalComponent } from './modal.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 export default {
   title: 'Components/Modal',
   component: NggModalComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggModalModule],
+      imports: [NggModalModule, BrowserAnimationsModule],
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: [
       'component-dialogue',
       'component-slideout',
@@ -24,8 +21,8 @@ export default {
   },
 } as Meta<NggModalComponent>
 
-const Template: Story<NggModalComponent> = (args: NggModalComponent) => {
-  const isOpen = true
+const Template: StoryFn<NggModalComponent> = (args: NggModalComponent) => {
+  const isOpen = false
   return {
     template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" (closed)="isOpen = false">
@@ -66,8 +63,10 @@ Takeover.args = {
   trapFocus: false,
 }
 
-const CustomTemplate: Story<NggModalComponent> = (args: NggModalComponent) => {
-  const isOpen = true
+const CustomTemplate: StoryFn<NggModalComponent> = (
+  args: NggModalComponent,
+) => {
+  const isOpen = false
   return {
     template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">

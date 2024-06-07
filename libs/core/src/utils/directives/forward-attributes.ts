@@ -1,6 +1,6 @@
 import { Directive, PartInfo, PartType, directive } from 'lit/directive.js'
-import { ElementPart } from 'lit-html/directive.js'
-import { Part, nothing } from 'lit/html.js'
+import { ElementPart } from 'lit/directive.js'
+import { nothing } from 'lit/html.js'
 
 /**
  * A directive that forwards attributes from the host element to the target element in the component.

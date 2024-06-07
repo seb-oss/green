@@ -24,8 +24,7 @@ describe(NggModalComponent.name, () => {
   })
 
   it('should destroy', async () => {
-    // Mock
-    ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
+    (bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { fixture } = await render(NggModalComponent, {
       declarations: [
@@ -47,7 +46,7 @@ describe(NggModalComponent.name, () => {
 
   it('should be closed', async () => {
     // Mock
-    ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
+    (bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { queryByTestId, container } = await render(NggModalComponent, {
       declarations: [
@@ -58,15 +57,16 @@ describe(NggModalComponent.name, () => {
       providers: [],
       componentInputs: { modalType: 'default', isOpen: false },
     })
+    
 
     expect(queryByTestId('modal')).toBeFalsy()
-    expect(container.classList.length).toEqual(0)
+    expect(container.classList.contains('open')).toEqual(false)
     expect(bodyScrollLock.enableBodyScroll).toHaveBeenCalled()
   })
 
   it('should be open', async () => {
     // Mock
-    ;(bodyScrollLock.disableBodyScroll as unknown) = jest.fn()
+    (bodyScrollLock.disableBodyScroll as unknown) = jest.fn()
 
     const component = await render(NggModalComponent, {
       declarations: [

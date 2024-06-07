@@ -1,6 +1,5 @@
 // Dropdown.stories.ts
-import Documentation from './documentation.mdx'
-import { moduleMetadata, Story, Meta } from '@storybook/angular'
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -22,14 +21,13 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-dropdown'],
   },
 } as Meta<NggDropdownComponent>
 
-const Template: Story<NggDropdownComponent> = (args: NggDropdownComponent) => ({
+const Template: StoryFn<NggDropdownComponent> = (
+  args: NggDropdownComponent,
+) => ({
   template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
   props: args,
 })
@@ -136,7 +134,7 @@ Searchable.args = {
   ],
 }
 
-const CustomOptionTemplate: Story<NggDropdownComponent> = (
+const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (
   args: NggDropdownComponent,
 ) => {
   args.compareWith = (o1: any, o2: any) => o1.id === o2.id
@@ -212,7 +210,7 @@ CustomOption.args = {
   ],
 }
 
-const FormControlTemplate: Story<NggDropdownComponent> = (
+const FormControlTemplate: StoryFn<NggDropdownComponent> = (
   args: NggDropdownComponent,
 ) => {
   const validationForm = new FormGroup({
@@ -347,7 +345,7 @@ const FormControlTemplate: Story<NggDropdownComponent> = (
 export const Form = FormControlTemplate.bind({})
 Form.args = {}
 
-const FormControlWithResetTemplate: Story<NggDropdownComponent> = (
+const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (
   args: NggDropdownComponent,
 ) => {
   const validationFormAdvance = new FormGroup({

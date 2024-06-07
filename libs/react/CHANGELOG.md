@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.7.0
+
+### Minor Changes
+
+- 0afe58f: **Breadcrumbs:** Added new component
+
+### Patch Changes
+
+- 9ee9f49: Not rendering header or footer in card if it's not passed
+- Updated dependencies [900effe]
+- Updated dependencies [0afe58f]
+- Updated dependencies [b62c0ae]
+  - @sebgroup/green-core@1.22.3
+  - @sebgroup/chlorophyll@3.4.0
+
 ## 3.6.0
 
 ### Minor Changes

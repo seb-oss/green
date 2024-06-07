@@ -16,6 +16,10 @@ import { styles } from './filter-chips.styles'
 
 /**
  * @element gds-filter-chips
+ *
+ * @slot - The filter chips to display
+ *
+ * @fires change - When a chip is clicked
  */
 @gdsCustomElement('gds-filter-chips')
 export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
@@ -23,6 +27,10 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
 > {
   static styles = [styles]
 
+  /**
+   * The value of the currently selected chip or chips. This will be an array
+   * if multi-select is enabled.
+   */
   @property({ converter: stringArrayConverter })
   value?: ValueT | ValueT[]
 

@@ -1,8 +1,6 @@
-import { moduleMetadata, Meta, Story } from '@storybook/angular'
-
+import { moduleMetadata, Meta, StoryFn } from '@storybook/angular'
 import { NggProgressCircleModule } from './progress-circle.module'
 import { NggProgressCircleComponent } from './progress-circle.component'
-import Documentation from './documentation.mdx'
 
 export default {
   title: 'Components/Progress Circle',
@@ -37,14 +35,10 @@ export default {
       defaultValue: '70',
     },
   },
-  parameters: {
-    docs: {
-      page: Documentation,
-    },
-  },
+  parameters: {},
 } as Meta<NggProgressCircleComponent>
 
-const Template: Story<NggProgressCircleComponent> = (
+const Template: StoryFn<NggProgressCircleComponent> = (
   args: NggProgressCircleComponent,
 ) => ({
   template: `

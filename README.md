@@ -44,10 +44,10 @@ If you're trying to find something specific, here's a full list of packages that
 Documentation currently resides in a few different locations:
 
 - [User Interface Guidelines (Design Library)](https://designlibrary.sebgroup.com/)
-- [Storybook (@sebgroup/chlorophyll)](https://sebgroup.github.io/green/latest/chlorophyll/)
-- [Storybook (@sebgroup/green-core)](https://sebgroup.github.io/green/latest/core/)
-- [Storybook (@sebgroup/green-react)](https://sebgroup.github.io/green/latest/react/)
-- [Storybook (@sebgroup/green-angular)](https://sebgroup.github.io/green/latest/angular/)
+- [Storybook (@sebgroup/chlorophyll)](https://storybook.seb.io/latest/chlorophyll/)
+- [Storybook (@sebgroup/green-core)](https://storybook.seb.io/latest/core/)
+- [Storybook (@sebgroup/green-react)](https://storybook.seb.io/latest/react/)
+- [Storybook (@sebgroup/green-angular)](https://storybook.seb.io/latest/angular/)
 
 ## 🏦 Working from SEB
 

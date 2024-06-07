@@ -15,7 +15,6 @@
         "entryFile": "libs/extract/src/index.ts",
         "external": ["react/jsx-runtime"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           {
             "glob": "libs/extract/README.md",
@@ -27,18 +26,13 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["libs/extract/**/*.ts"]
-      },
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/extract"],
       "options": {
-        "jestConfig": "libs/extract/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/extract/jest.config.ts"
       }
     },
     "update-dependencies": {
