@@ -18,6 +18,14 @@
   <source>Close</source>
   <target>Stäng</target>
 </trans-unit>
+<trans-unit id="sdc42f1da42d6411a">
+  <source>Clear input</source>
+  <target>Rensa text</target>
+</trans-unit>
+<trans-unit id="sdc27791837e94961">
+  <source>Show extended supporting text</source>
+  <target>Visa utökad beskrivning</target>
+</trans-unit>
 <trans-unit id="s7fd3469f78111589">
   <source>Open context menu</source>
   <target>Öppna meny</target>

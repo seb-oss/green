@@ -1,13 +1,10 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { Focusable } from '../../mixins/focusable'
 import { TransitionalStyles } from '../../transitional-styles'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 
 import styles from '../listbox/option.styles'
 
@@ -18,10 +15,6 @@ import styles from '../listbox/option.styles'
 @gdsCustomElement('gds-menu-item')
 export class GdsMenuItem extends Focusable(GdsElement) {
   static styles = [styles]
-
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -44,11 +37,11 @@ export class GdsMenuItem extends Focusable(GdsElement) {
       new CustomEvent('gds-menu-item-click', {
         bubbles: true,
         composed: true,
-      })
+      }),
     )
   }
 
   render() {
-    return html`${this._tStyles}<slot></slot>`
+    return html`<div><slot></slot></div>`
   }
 }

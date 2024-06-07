@@ -50,16 +50,25 @@ As soon as one of the properties `label`, `info` or `expandable` info are set, t
 </Canvas>
 
 ### Formatter
+
 A formatting callback that takes the current value as an argument and returns the formatted value can be supplied to the Input.
 The returned value will be displayed in the field and outputted in the onChange callback.
 
 The following is just an example. Test thoroughly for your use case before using in production!
 
 <Canvas>
-  <Input label="Input" info='Formats input as swedish number' maxLength={8} unit="Kr" formatter={(value) => {
-    const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
-    return !trimmedValue || isNaN(Number(trimmedValue)) ? value : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
-  }} />
+  <Input
+    label="Input"
+    info="Formats input as swedish number"
+    maxLength={8}
+    unit="Kr"
+    formatter={(value) => {
+      const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
+      return !trimmedValue || isNaN(Number(trimmedValue))
+        ? value
+        : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
+    }}
+  />
 </Canvas>
 
 ### Validation
@@ -96,6 +105,7 @@ The following is just an example. Test thoroughly for your use case before using
   <Input
     label="Input"
     expandableInfo="Expandable Information"
+    expandableInfoButtonLabel="Button label"
     info="Label information"
     maxLength={1000}
     rows={4}

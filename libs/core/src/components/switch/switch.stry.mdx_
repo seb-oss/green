@@ -1,0 +1,31 @@
+import { GdsSwitch } from '../../../../../dist/libs/core/src'
+
+<Meta title="Components/Switch" />
+
+# Switch
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Default
+
+<gds-switch></gds-switch>
+
+<gds-switch checked></gds-switch>
+
+<gds-switch indeterminate></gds-switch>
+
+<gds-switch disabled></gds-switch>
+
+<gds-switch checked disabled></gds-switch>
+
+## Invalid / Error
+
+<gds-switch required></gds-switch>
+
+<gds-switch checked required></gds-switch>
+
+<gds-switch indeterminate required></gds-switch>
+
+<gds-switch disabled required></gds-switch>
+
+<gds-switch checked disabled required></gds-switch>

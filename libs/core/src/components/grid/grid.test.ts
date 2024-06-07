@@ -1,8 +1,9 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import '../../../../../dist/libs/core/src/index.js'
-import type { GdsGrid } from './grid'
+import '@sebgroup/green-core/components/grid'
+import type { GdsGrid } from '@sebgroup/green-core/components/grid'
 
-import { htmlTemplateTagFactory } from '../../../../../dist/libs/core/src/index.js'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('GdsGrid', () => {
@@ -17,11 +18,53 @@ describe('GdsGrid', () => {
     expect(slot).to.exist
   })
 
-  it('sets default properties', () => {
-    const element: GdsGrid = document.createElement('gds-grid') as GdsGrid
-    expect(element.columns).to.be.undefined
-    expect(element.gap).to.be.undefined
-    expect(element.padding).to.be.undefined
-    expect(element.autoColumns).to.be.undefined
+  it('sets columns with single value correctly', async () => {
+    ;(element.columns as any) = '2'
+    await element.updateComplete
+    expect(element.columns).to.equal('2')
+  })
+
+  it('sets columns with multiple values correctly', async () => {
+    ;(element.columns as any) = 'l:8 m:4 s:2'
+    await element.updateComplete
+    expect(element.columns).to.equal('l:8 m:4 s:2')
+  })
+
+  it('sets gap with single value correctly', async () => {
+    ;(element.gap as any) = 'm'
+    await element.updateComplete
+    expect(element.gap).to.equal('m')
+  })
+
+  it('sets gap with multiple values correctly', async () => {
+    ;(element.gap as any) = 'l:m m:s s:xs'
+    await element.updateComplete
+    expect(element.gap).to.equal('l:m m:s s:xs')
+  })
+
+  it('sets padding with single value correctly', async () => {
+    ;(element.padding as any) = 'm'
+    await element.updateComplete
+    expect(element.padding).to.equal('m')
+  })
+
+  it('sets padding with multiple values correctly', async () => {
+    ;(element.padding as any) = 'l:m m:s s:xs'
+    await element.updateComplete
+    expect(element.padding).to.equal('l:m m:s s:xs')
+  })
+
+  it('sets auto-columns with multiple values correctly', async () => {
+    ;(element.autoColumns as any) = 'l:100 m:200 s:300'
+    await element.updateComplete
+
+    const computedStyle = getComputedStyle(element)
+    const desktop = computedStyle.getPropertyValue('--_col-width-desktop')
+    const tablet = computedStyle.getPropertyValue('--_col-width-tablet')
+    const mobile = computedStyle.getPropertyValue('--_col-width-mobile')
+
+    expect(desktop).to.equal('100px')
+    expect(tablet).to.equal('200px')
+    expect(mobile).to.equal('300px')
   })
 })

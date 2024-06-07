@@ -44,11 +44,11 @@ export const RadioGroup = ({
     console.warn('"title" prop is deprecated. Please use "label" instead.')
   if (description)
     console.warn(
-      '"description" prop is deprecated. Please use "labelInformation" instead.'
+      '"description" prop is deprecated. Please use "labelInformation" instead.',
     )
 
   const [selected, setSelected] = useState<string | undefined>(
-    valueSelected ?? defaultSelected
+    valueSelected ?? defaultSelected,
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
   const [name] = useState(propName)
@@ -102,10 +102,11 @@ export const RadioGroup = ({
   })
 
   const describedBy = classNames({
-    [`${uniqueId}_message`]: validator?.message !== undefined && validator.message.length > 0,
+    [`${uniqueId}_message`]:
+      validator?.message !== undefined && validator.message.length > 0,
     [`${uniqueId}_info`]: labelInformation,
     [`gds-expandable-info-${uniqueId}`]: expandableInfo,
-  });
+  })
 
   return (
     <FormItem {...formItemProps} inputId={uniqueId}>
@@ -115,7 +116,7 @@ export const RadioGroup = ({
           (radioButton: React.ReactElement<RadioButtonProps>) => {
             return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
               ? React.cloneElement(radioButton, {
-                  "aria-describedby": describedBy,
+                  'aria-describedby': describedBy,
                   validator: validator,
                   onChange: handleOnChange,
                   checked: selected === radioButton.props.value,
@@ -123,7 +124,7 @@ export const RadioGroup = ({
                   ref: radioBtnRef,
                 })
               : radioButton
-          }
+          },
         )}
       </div>
     </FormItem>

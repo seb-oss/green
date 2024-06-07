@@ -8,11 +8,11 @@ It's generally not recommended to use Chlorophyll directly. Instead you should u
 
 ## Angular
 
-For detailed information on how to use with Angular, go here: [Angular Storybook](https://sebgroup.github.io/green/latest/angular/)
+For detailed information on how to use with Angular, go here: [Angular Storybook](https://storybook.seb.io/latest/angular/)
 
 ## React
 
-For detailed information on how to use with React, go here: [React Storybook](https://sebgroup.github.io/green/latest/react/)
+For detailed information on how to use with React, go here: [React Storybook](https://storybook.seb.io/latest/react/)
 
 ## Selective imports
 
@@ -24,6 +24,14 @@ First, you need to add some base styles that all components depend on:
 @use '@sebgroup/chlorophyll/scss/components/themes/' as themes;
 @use '@sebgroup/chlorophyll/scss/components/reset/' as reset;
 @use '@sebgroup/chlorophyll/scss/components/fonts/';
+```
+
+**Note:** Depending on you bundler, you may need to configure the font path by setting the `$font-path` variable:
+
+```scss
+@use '@sebgroup/chlorophyll/scss/components/fonts/' with (
+  $font-path: '@sebgroup/fonts/fonts'
+);
 ```
 
 You will likely also need to use utility classes and grid (and some components use these interally):

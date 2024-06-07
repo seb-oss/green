@@ -10,6 +10,7 @@ We recommend adding just the parts from Bootstrap that you need, you can read mo
 The different parts from Bootstrap are easily scoped with a few exceptions. `Reboot` which aims to normalize browser differences apply some rules to the `html` and `body` which for obvious reasons won't work as these elements can't be scoped.
 
 **This won't work**
+
 ```css
 .use-bootstrap {
   html, body {
@@ -19,7 +20,6 @@ The different parts from Bootstrap are easily scoped with a few exceptions. `Reb
 ```
 
 Currently, the styles from `Reboot` needs to be added manually to the element scope you're creating so that child elements, that might need them can inherit the rules properly.
-
 
 ### In an Angular app
 
@@ -66,6 +66,7 @@ It could look something like this:
 In the example above, you'll be able to use buttons and charts from Green when placed inside elements with the class `.use-green`. Since we didn't scope Bootstrap we'll be able to use it everywhere in our app.
 
 **html**
+
 ```html
 <h3 class="my-3">Green chart</h3>
 <div class="use-green">
@@ -81,6 +82,7 @@ In the example above, you'll be able to use buttons and charts from Green when p
 Like we've said before, we don't encourage mixing frameworks and when you add things from Green like buttons, you should remove the component it replaces from Bootstrap (or any other framework for that matter).
 
 To optimize your app and the resources it loads when bootstrapping, it could be a good idea to divide your app into lazy loaded modules and import the different parts to each module based on what they need and use. Angular also comes with the ability to use view encapsulation (on by default for components), which allows us to scope styles to a specific component. Eg. if you only use lists from Green in one component it's also possible to add it directly to the component using `@use` like this.
+
 ```css
 /* foo.component.scss */
 @use '@sebgroup/chlorophyll/scss/components/list';

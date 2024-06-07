@@ -1,0 +1,54 @@
+body {
+  color-scheme: dark;
+  --color-white: hsl(0 0% 100%);
+  --color-black: hsla(60, 6%, 10%, 1);
+  margin: 0;
+  padding: 0;
+  font-family: 'SEBSansSerif-Regular', sans-serif;
+  font-weight: 300;
+  --cell-lg: 60px;
+  --cell-lg-cl: color-mix(in srgb, var(--color-white), transparent 98%);
+  --cell-sm: 10px;
+  --cell-sm-cl: color-mix(in srgb, var(--color-white), transparent 99%);
+  background-color: var(--color-black);
+  background-image: linear-gradient(
+      to right,
+      transparent calc(var(--cell-lg) - 1px),
+      var(--cell-lg-cl) 1px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(var(--cell-lg) - 1px),
+      var(--cell-lg-cl) 1px
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(var(--cell-sm) - 1px),
+      var(--cell-sm-cl) 1px
+    ),
+    linear-gradient(
+      to bottom,
+      transparent calc(var(--cell-sm) - 1px),
+      var(--cell-sm-cl) 1px
+    );
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+  background-size:
+    var(--cell-lg) 100%,
+    100% var(--cell-lg),
+    var(--cell-sm) 100%,
+    100% var(--cell-sm);
+  border: 1px solid color-mix(in srgb, var(--color-white), transparent 98%);
+  display: grid;
+  place-content: center;
+  grid-auto-flow: column;
+  gap: 1rem;
+  min-block-size: 100vh;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-black: hsla(60, 6%, 10%, 1);
+    --color-white: hsl(0 0% 100%);
+  }
+}

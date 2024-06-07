@@ -6,7 +6,7 @@ module.exports = composePlugins(withNx(), withWeb(), (config) => {
   // e.g. `config.plugins.push(new MyPlugin())`
 
   config.module.rules.find((rule) =>
-    rule.test.toString().includes('scss')
+    rule.test.toString().includes('scss'),
   ).exclude = [/\.styles.scss$/]
 
   config.module.rules.push({

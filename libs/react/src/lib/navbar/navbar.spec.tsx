@@ -55,7 +55,7 @@ describe('Navbar', () => {
         title={title}
         brandLink="www.random.com"
         brandAriaLabel="Opens random com"
-      />
+      />,
     )
     const anchorElement: HTMLAnchorElement = container.querySelectorAll('a')[0]
     expect(anchorElement).toBeInTheDocument()

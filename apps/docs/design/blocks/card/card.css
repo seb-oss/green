@@ -1,0 +1,52 @@
+.gds-card {
+  background-color: var(--gds-sys-color-container-container);
+  border: none;
+  gap: 24px;
+  flex-direction: column;
+  display: flex;
+  padding: 24px;
+  border-radius: 12px;
+  transition: var(--transition);
+
+  .gds-card-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  &:hover {
+    background-color: var(--gds-sys-color-container-container-dim1);
+  }
+
+  &.gds-card-cta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .gds-card-title {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 20px;
+      line-height: 1;
+      text-decoration: none;
+
+      &::before {
+        content: attr(data-caption);
+        display: flex;
+        line-height: 1;
+        font-size: 14px;
+      }
+    }
+
+    .gds-card-trail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+      border-radius: 200px;
+      background-color: color-mix(in srgb, var(--color-black), transparent 94%);
+    }
+  }
+}

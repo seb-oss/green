@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Meta, Story, moduleMetadata } from '@storybook/angular'
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular'
 import { NggContextMenuComponent } from './context-menu.component'
-import Documentation from './documentation.mdx'
 import { NggContextMenuModule } from './context-menu.module'
 
 export default {
@@ -20,15 +19,12 @@ export default {
     }),
   ],
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['component-context-menu'],
   },
 } as Meta<NggContextMenuComponent>
 
-const Template: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+const Template: StoryFn<NggContextMenuComponent> = (
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -51,8 +47,8 @@ Default.args = {
   ],
 }
 
-const WithLabelTemplate: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -87,8 +83,8 @@ RightToLeft.args = {
   ],
 }
 
-const CustomTemplate: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+const CustomTemplate: StoryFn<NggContextMenuComponent> = (
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,
@@ -103,7 +99,7 @@ const CustomTemplate: Story<NggContextMenuComponent> = (
     </ng-template>
 
     <ng-template #menuItemTemplate let-menuItem>
-      <div 
+      <div
         style="display: flex; justify-content: space-between; align-items: center; min-width: 7rem;"
         [style.color]="(menuItem.value === 'delete') ? '#9F000A' : 'inherit'"
       >
@@ -126,8 +122,8 @@ CustomTemplateDefault.args = {
   ],
 }
 
-const TemplatePositionRelative: Story<NggContextMenuComponent> = (
-  args: NggContextMenuComponent
+const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (
+  args: NggContextMenuComponent,
 ) => ({
   component: NggContextMenuComponent,
   props: args,

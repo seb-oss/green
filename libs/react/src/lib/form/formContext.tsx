@@ -15,13 +15,22 @@ interface FormContextReturnType {
   values?: Record<string, any>
 }
 
-export const FormContext = React.createContext<FormContextReturnType>({} as FormContextReturnType)
+export const FormContext = React.createContext<FormContextReturnType>(
+  {} as FormContextReturnType,
+)
 
 export const useFormContext = () => {
   return React.useContext(FormContext)
 }
 
-export const FormProvider = ({ children, direction = 'vertical', formSize = 'md', onSubmit, onFormSubmit, ...props }: React.PropsWithChildren<FormProps>) => {
+export const FormProvider = ({
+  children,
+  direction = 'vertical',
+  formSize = 'md',
+  onSubmit,
+  onFormSubmit,
+  ...props
+}: React.PropsWithChildren<FormProps>) => {
   /* eslint-disable-next-line */
   const [values, setValues] = React.useState<Record<string, any>>()
   /* eslint-disable-next-line */
@@ -34,7 +43,11 @@ export const FormProvider = ({ children, direction = 'vertical', formSize = 'md'
     event.preventDefault()
 
     Object.keys(fields).forEach((key: string) => {
-      const errorMessage: string = validateInputValue({ name: key, value: values?.[key] }, fields[key], setErrors) as string
+      const errorMessage: string = validateInputValue(
+        { name: key, value: values?.[key] },
+        fields[key],
+        setErrors,
+      ) as string
       hasError = hasError || !!errorMessage
     })
 
@@ -49,8 +62,15 @@ export const FormProvider = ({ children, direction = 'vertical', formSize = 'md'
   }
 
   return (
-    <FormContext.Provider value={{ setValues, setErrors, setFields, errors, values }}>
-      <form className={[direction, `size-${formSize}`].join(' ')} onSubmit={formSubmit} {...props} onReset={resetForm}>
+    <FormContext.Provider
+      value={{ setValues, setErrors, setFields, errors, values }}
+    >
+      <form
+        className={[direction, `size-${formSize}`].join(' ')}
+        onSubmit={formSubmit}
+        {...props}
+        onReset={resetForm}
+      >
         {children}
       </form>
     </FormContext.Provider>

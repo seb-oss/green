@@ -4,15 +4,14 @@ import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '../../../../../dist/libs/core/src/index.js'
-import type { GdsDropdown } from './dropdown'
+import '@sebgroup/green-core/components/dropdown'
+import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsOption } from '@sebgroup/green-core/primitives/listbox/option'
 
 import {
   htmlTemplateTagFactory,
   getScopedTagName,
-  GdsOption,
-} from '../../../../../dist/libs/core/src/index.js'
-import { send } from 'process'
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -44,7 +43,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const popover = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-popover')
+      getScopedTagName('gds-popover'),
     )!
 
     await expect(popover.hidden).to.be.false
@@ -227,7 +226,7 @@ describe('<gds-dropdown>', () => {
     await timeout(50)
 
     await expect(popover?.clientWidth).to.be.greaterThanOrEqual(
-      trigger.clientWidth
+      trigger.clientWidth,
     )
   })
 
@@ -287,7 +286,7 @@ describe('<gds-dropdown>', () => {
 
     ;[1, 2, 3].forEach((num) => {
       const o = document.createElement(
-        getScopedTagName('gds-option')
+        getScopedTagName('gds-option'),
       ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`
@@ -309,12 +308,12 @@ describe('<gds-dropdown>', () => {
 
   it('should select multiple complex values correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(
-      html`<gds-dropdown multiple></gds-dropdown>`
+      html`<gds-dropdown multiple></gds-dropdown>`,
     )
 
     ;[1, 2, 3, 4].forEach((num) => {
       const o = document.createElement(
-        getScopedTagName('gds-option')
+        getScopedTagName('gds-option'),
       ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`
@@ -343,7 +342,7 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
     ;[1, 2, 3].forEach((num) => {
       const o = document.createElement(
-        getScopedTagName('gds-option')
+        getScopedTagName('gds-option'),
       ) as GdsOption
       o.value = `test${num}`
       o.innerHTML = `Test option ${num}`
@@ -611,7 +610,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -640,7 +639,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
     )
 
     await expect(options.length).to.equal(1)

@@ -7,15 +7,14 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 
+import { styles } from './<%= toKebabCase(name) %>.styles'
+
 /**
- * @element gds-<%= name %>
- * @internal
+ * @element gds-<%= toKebabCase(name) %>
  */
 @gdsCustomElement('gds-<%= toKebabCase(name) %>')
 export class Gds<%= toPascalCase(name) %> extends GdsElement {
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
+  static styles = [styles]
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -24,6 +23,6 @@ export class Gds<%= toPascalCase(name) %> extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}<slot></slot>`
+    return html`<slot></slot>`
   }
 }

@@ -1,0 +1,24 @@
+.gds-spacer {
+  display: flex;
+  align-items: center;
+
+  &.gds-spacer-large {
+    block-size: var(--gds-gap-xxxl);
+  }
+
+  &.gds-spacer-medium {
+    block-size: var(--gds-gap-xxl);
+  }
+
+  &.gds-spacer-small {
+    block-size: var(--gds-gap-l);
+  }
+
+  hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: var(--gds-sys-color-stroke-stroke-variant2);
+    border-radius: 200px;
+  }
+}

@@ -1,5 +1,83 @@
 # Changelog
 
+## 4.1.1
+
+### Patch Changes
+
+- 1344f9d: **Deps:** Add previously undeclared peer deps
+- Updated dependencies [1344f9d]
+- Updated dependencies [1344f9d]
+- Updated dependencies [2921f0e]
+  - @sebgroup/green-core@1.22.2
+  - @sebgroup/extract@3.0.2
+
+## 4.1.0
+
+### Minor Changes
+
+- 5a9e3ab: Modal animations
+
+### Patch Changes
+
+- Updated dependencies [a8b556f]
+- Updated dependencies [096b662]
+- Updated dependencies [5f224d0]
+- Updated dependencies [1652e33]
+  - @sebgroup/green-core@1.22.0
+
+## 4.0.0
+
+### Major Changes
+
+- 5831cf7: Update minimum Angular peer version to 16.2.12
+
+### Patch Changes
+
+- Updated dependencies [336743c]
+  - @sebgroup/green-core@1.20.1
+
+## 3.8.0
+
+### Minor Changes
+
+- 38a8550: Input for disabling body scroll on NggModal
+
+## 3.7.0
+
+### Minor Changes
+
+- 0aeaa98: **Sub-packages:** Components in `@sebgroup/green-angular` are now exported as separate sub-packages for better tree-shaking.
+
+### Patch Changes
+
+- Updated dependencies [0aeaa98]
+- Updated dependencies [a8941c7]
+  - @sebgroup/green-core@1.18.0
+
+## 3.6.3
+
+### Patch Changes
+
+- f8758d9: **Sub-path imports:** Fix missing filename on import paths
+
+## 3.6.2
+
+### Patch Changes
+
+- 57fb099: Publish previously failed version
+
+## 3.6.1
+
+### Patch Changes
+
+- 80b4050: Update underlying Core components to use sub path imports
+- Updated dependencies [5b84660]
+- Updated dependencies [e20574d]
+- Updated dependencies [80b4050]
+- Updated dependencies [80b4050]
+  - @sebgroup/green-core@1.16.0
+  - @sebgroup/chlorophyll@3.3.4
+
 ## 3.6.0
 
 ### Minor Changes

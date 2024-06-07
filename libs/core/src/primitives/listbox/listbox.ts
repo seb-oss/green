@@ -1,18 +1,18 @@
-import { HTMLTemplateResult, LitElement } from 'lit'
+import { HTMLTemplateResult } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
-
-import { GdsOption, OptionsContainer } from './option'
-import 'reflect-metadata'
 
 import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
+import '../../primitives/listbox/option'
+import type {
+  GdsOption,
+  OptionsContainer,
+} from '../../primitives/listbox/option'
+
 import style from './listbox.styles'
-import { watch } from '../../utils/decorators'
-import {
-  html,
-  gdsCustomElement,
-} from '../../utils/helpers/custom-element-scoping'
+import { watch } from '../../utils/decorators/watch'
+import { html, gdsCustomElement } from '../../scoping'
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
@@ -59,10 +59,6 @@ export class GdsListbox
   @property()
   compareWith: (a: any, b: any) => boolean = (a, b) => a === b
 
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
-
   #slotRef: Ref<HTMLSlotElement> = createRef()
 
   constructor() {
@@ -83,7 +79,7 @@ export class GdsListbox
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
         (o) =>
-          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
+          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option',
       ) || []
     )
   }
@@ -134,7 +130,7 @@ export class GdsListbox
   }
 
   render() {
-    return html`${this._tStyles}<slot ${ref(this.#slotRef)}></slot>`
+    return html`<slot ${ref(this.#slotRef)}></slot>`
   }
 
   /**
@@ -164,7 +160,7 @@ export class GdsListbox
       new CustomEvent('change', {
         bubbles: false,
         composed: false,
-      })
+      }),
     )
   }
 }

@@ -7,7 +7,7 @@ import { NggCoreElementDirective } from './core-element.directive'
 })
 class TestComponent {}
 
-jest.mock('@sebgroup/green-core', () => ({
+jest.mock('@sebgroup/green-core/scoping', () => ({
   getScopedTagName: jest.fn((name) => name + '-scoped'),
 }))
 

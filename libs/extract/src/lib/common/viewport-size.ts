@@ -41,7 +41,7 @@ export const viewportSize$ =
           }
         }),
         distinctUntilChanged(),
-        shareReplay(1)
+        shareReplay(1),
       )
 
 /** isMobileViewport$ - Observable for mobile viewport based on screen size
@@ -49,5 +49,5 @@ export const viewportSize$ =
  */
 export const isMobileViewport$ = viewportSize$.pipe(
   map((viewportSize) => viewportSize === 'xs'),
-  distinctUntilChanged()
+  distinctUntilChanged(),
 )

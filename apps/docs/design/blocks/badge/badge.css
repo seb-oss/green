@@ -1,0 +1,20 @@
+.gds-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 1ex;
+
+  .gds-badge-title {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .gds-badge-label {
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: hsla(222, 100%, 96%, 1);
+    color: hsla(207, 100%, 34%, 1);
+    white-space: nowrap;
+    max-width: max-content;
+  }
+}

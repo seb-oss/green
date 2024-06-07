@@ -1,0 +1,80 @@
+/**
+ * Do not edit directly
+ * Generated on Wed, 08 Nov 2023 09:48:21 GMT
+ */
+
+:root {
+  color-scheme: light;
+  --gds-sys-color-accent-accent-green: #006d31;
+  --gds-sys-color-accent-accent-orange: #ffba30;
+  --gds-sys-color-background-background: #ffffff;
+  --gds-sys-color-background-background-dim: #f3f3f2;
+  --gds-sys-color-container-container: #f3f3f2;
+  --gds-sys-color-container-container-dim1: #e7e7e4;
+  --gds-sys-color-container-container-dim2: #dadad7;
+  --gds-sys-color-container-container-bright: #ffffff;
+  --gds-sys-color-container-container-shade1: #353531;
+  --gds-sys-color-container-container-shade2: #1b1b18;
+  --gds-sys-color-container-container-disabled: #f9f9f9;
+  --gds-sys-color-container-container-positive: #006d31;
+  --gds-sys-color-container-container-negative: #ba1d00;
+  --gds-sys-color-content-content: #353531;
+  --gds-sys-color-content-content-inverse: #ffffff;
+  --gds-sys-color-content-content-secondary: #6a6a62;
+  --gds-sys-color-content-content-positive: #006d31;
+  --gds-sys-color-content-content-negative: #ba1d00;
+  --gds-sys-color-content-content-negative-bright: #fff8f6;
+  --gds-sys-color-content-content-custom-blue-bright: #f8f9ff;
+  --gds-sys-color-content-content-disabled: #9d9d95;
+  --gds-sys-color-custom-custom-blue: #005fac;
+  --gds-sys-color-custom-on-custom-blue: #d4e3ff;
+  --gds-sys-color-custom-custom-blue-bright: #d4e3ff;
+  --gds-sys-color-custom-on-custom-blue-bright: #00315d;
+  --gds-sys-color-custom-custom-green: #003916;
+  --gds-sys-color-custom-on-custom-green: #eaffe8;
+  --gds-sys-color-custom-custom-green-bright: #eaffe8;
+  --gds-sys-color-custom-on-custom-green-bright: #003916;
+  --gds-sys-color-custom-custom-grey: #353531;
+  --gds-sys-color-custom-on-custom-grey: #e7e7e4;
+  --gds-sys-color-custom-custom-grey-bright: #e7e7e4;
+  --gds-sys-color-custom-on-custom-grey-bright: #353531;
+  --gds-sys-color-primary-primary: #353531;
+  --gds-sys-color-state-layers-state-black: rgba(0, 0, 0, 0.1);
+  --gds-sys-color-state-layers-state-black-dim1: rgba(0, 0, 0, 0.2);
+  --gds-sys-color-state-layers-state-black-dim2: rgba(0, 0, 0, 0.4);
+  --gds-sys-color-state-layers-state-black-shade: rgba(0, 0, 0, 0.6);
+  --gds-sys-color-state-layers-state-positive: rgba(0, 109, 49, 0.1);
+  --gds-sys-color-state-layers-state-positive-dim: rgba(0, 109, 49, 0.2);
+  --gds-sys-color-state-layers-state-negative: rgba(186, 29, 0, 0.1);
+  --gds-sys-color-state-layers-state-negative-dim: rgba(186, 29, 0, 0.2);
+  --gds-sys-color-state-layers-state-custom-blue: rgba(0, 95, 172, 0.2);
+  --gds-sys-color-status-information-information: #353531;
+  --gds-sys-color-status-information-on-information: #ffffff;
+  --gds-sys-color-status-information-information-bright: #f3f3f2;
+  --gds-sys-color-status-information-on-information-bright: #353531;
+  --gds-sys-color-status-negative-negative: #ba1d00;
+  --gds-sys-color-status-negative-on-negative: #ffffff;
+  --gds-sys-color-status-negative-negative-bright: #ffede9;
+  --gds-sys-color-status-negative-on-negative-bright: #ba1d00;
+  --gds-sys-color-status-warning-warning: #9d6e00;
+  --gds-sys-color-status-warning-on-warning: #ffffff;
+  --gds-sys-color-status-warning-warning-bright: #ffeed9;
+  --gds-sys-color-status-warning-on-warning-bright: #7d5700;
+  --gds-sys-color-status-positive-positive: #006d31;
+  --gds-sys-color-status-positive-on-positive: #ffffff;
+  --gds-sys-color-status-positive-positive-bright: #eaffe8;
+  --gds-sys-color-status-positive-on-positive-bright: #006d31;
+  --gds-sys-color-status-notice-notice: #005fac;
+  --gds-sys-color-status-notice-on-notice: #ffffff;
+  --gds-sys-color-status-notice-notice-bright: #ebf1ff;
+  --gds-sys-color-status-notice-on-notice-bright: #005fac;
+  --gds-sys-color-stroke-stroke: #353531;
+  --gds-sys-color-stroke-stroke-variant1: #85857a;
+  --gds-sys-color-stroke-stroke-variant2: #cececa;
+  --gds-sys-color-stroke-stroke-disabled: #9d9d95;
+  --gds-sys-color-stroke-stroke-notice: #005fac;
+  --gds-sys-color-stroke-stroke-positive: #006d31;
+  --gds-sys-color-stroke-stroke-warning: #7d5700;
+  --gds-sys-color-stroke-stroke-negative: #ba1d00;
+  --gds-sys-color-stroke-stroke-custom-blue: #ba1d00;
+}

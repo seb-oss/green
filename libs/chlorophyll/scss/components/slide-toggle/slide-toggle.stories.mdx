@@ -11,13 +11,13 @@ export const Template = ({ label, checked }) => `
 <Meta
   title="Components/Slide Toggle"
   parameters={{
-    componentIds: ['component-slidetoggle']
+    componentIds: ['component-slidetoggle'],
   }}
   argTypes={{
     label: { control: 'text' },
     checked: {
-      control: 'boolean'
-    }
+      control: 'boolean',
+    },
   }}
 />
 
@@ -25,9 +25,9 @@ export const Template = ({ label, checked }) => `
   name="Slide Toggle"
   args={{
     label: 'Toggle me',
-    checked: false
+    checked: false,
   }}
-  parameters={{ docs: { disable: true }}}
+  parameters={{ docs: { disable: true } }}
 >
   {Template.bind({})}
 </Story>
@@ -41,32 +41,57 @@ preference on or off. Slide toggles should not be used in forms where the user n
 button for the values to take effect.
 
 <Canvas>
-<div>
-  <div class="mb-5">
-    <span id="slide-toggle-label-1">Toggle me</span>
-    <button role="switch" aria-checked="false" onClick={toggle} aria-labelledby="slide-toggle-label-1"></button>
-  </div>
-  <div class="mb-5">
-    <button class="ms-0" role="switch" aria-checked="false" onClick={toggle} aria-labelledby="slide-toggle-label-1"></button>
-    <span id="slide-toggle-label-1">Label could also go on this side</span>
-    <br/><small><em>^ Here we add `class="ms-0"` to get rid of left hand margin.</em></small>
-  </div>
   <div>
-    A toggle can also be placed inline
-    <button role="switch" aria-checked="false" onClick={toggle} aria-label="Inline toggle"></button>
-    like this.
+    <div class="mb-5">
+      <span id="slide-toggle-label-1">Toggle me</span>
+      <button
+        role="switch"
+        aria-checked="false"
+        onClick={toggle}
+        aria-labelledby="slide-toggle-label-1"
+      ></button>
+    </div>
+    <div class="mb-5">
+      <button
+        class="ms-0"
+        role="switch"
+        aria-checked="false"
+        onClick={toggle}
+        aria-labelledby="slide-toggle-label-1"
+      ></button>
+      <span id="slide-toggle-label-1">Label could also go on this side</span>
+      <br />
+      <small>
+        <em>^ Here we add `class="ms-0"` to get rid of left hand margin.</em>
+      </small>
+    </div>
+    <div>
+      A toggle can also be placed inline
+      <button
+        role="switch"
+        aria-checked="false"
+        onClick={toggle}
+        aria-label="Inline toggle"
+      ></button>
+      like this.
+    </div>
   </div>
-</div>
 </Canvas>
 
 A slide toggle can also be used in a form group like this:
 
 <Canvas>
-<div class="form-group">
+  <div class="form-group">
     <span id="cookies-label-1">Enable cookies</span>
     <span class="form-info">Some info or help</span>
-    <button class="ms-0" role="switch" aria-checked="false" onClick={toggle} aria-labelledby="cookies-label-1"></button>
-</div>
+    <button
+      class="ms-0"
+      role="switch"
+      aria-checked="false"
+      onClick={toggle}
+      aria-labelledby="cookies-label-1"
+    ></button>
+  </div>
 </Canvas>
 
 ## Accessibility
@@ -85,15 +110,27 @@ and screen reader support here is not great. Many will still announce it as a re
 ### Labelling
 
 If there is a short descriptive text next to the slide toggle, be sure to connect it as a label to the button:
+
 ```html
 <span id="cookies-label-1">Enable cookies</span>
-<button role="switch" aria-checked="false" onClick={toggle} aria-labelledby="cookies-label-1"></button>
+<button
+  role="switch"
+  aria-checked="false"
+  onClick="{toggle}"
+  aria-labelledby="cookies-label-1"
+></button>
 ```
 
 Sometimes, it may be visually obvious what the toggle does even though there is no text snippet in its immidiate vicinity.
 In this case, add a short descriptive label using the `aria-label` attribute:
+
 ```html
-<button role="switch" aria-checked="false" onClick={toggle} aria-label="Enable cookies"></button>
+<button
+  role="switch"
+  aria-checked="false"
+  onClick="{toggle}"
+  aria-label="Enable cookies"
+></button>
 ```
 
 **Do not** change the label with the state of the slide toggle, as this would be confusing to screen reader users.

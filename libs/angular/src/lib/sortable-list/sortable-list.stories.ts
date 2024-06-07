@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import {
   SortableListItem,
   NggSortableListComponent,
@@ -6,15 +6,11 @@ import {
 import { CommonModule } from '@angular/common'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { DragDropModule } from '@angular/cdk/drag-drop'
-import Documentation from './documentation.mdx'
 
 export default {
   title: 'Components/Sortable list',
   component: NggSortableListComponent,
   parameters: {
-    docs: {
-      page: Documentation,
-    },
     componentIds: ['sortable-list'],
   },
   decorators: [
@@ -25,7 +21,7 @@ export default {
   ],
   argTypes: {
     groups: {
-      name: 'items',
+      name: 'groups',
       description: 'Array of groups of items to be displayed in the checklist.',
       control: {
         type: 'object',
@@ -87,8 +83,8 @@ export default {
 } as Meta<NggSortableListComponent>
 
 const createTemplate = (
-  suffixTemplate: boolean = false
-): Story<NggSortableListComponent> => {
+  suffixTemplate = false,
+): StoryFn<NggSortableListComponent> => {
   return (args: NggSortableListComponent) => ({
     template: `
       ${
@@ -116,7 +112,7 @@ const createTemplate = (
 
 const onItemSelected = (
   changedItem: SortableListItem,
-  items: SortableListItem[]
+  items: SortableListItem[],
 ) => {
   console.log('Updated item:', changedItem, items)
 }

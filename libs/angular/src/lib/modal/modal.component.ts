@@ -11,6 +11,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
+import {
+  trigger,
+  query,
+  style,
+  animate,
+  transition,
+  group,
+} from '@angular/animations'
 import { ModalType, Size } from '@sebgroup/extract'
 import {
   ConfigurableFocusTrap,
@@ -25,6 +33,59 @@ import { NggModalFooterDirective } from './modal-footer.directive'
   styleUrls: ['./modal.component.scss'],
   templateUrl: './modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('modalAnimation', [
+      transition(':enter', [
+        query('aside', style({ transform: 'translateX(100%)' }), {
+          optional: true,
+        }),
+        query('.backdrop, [role=dialog]', style({ opacity: '0' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(0)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '1' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+      transition(':leave', [
+        query('aside', style({ transform: 'translateX(0)' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(100%)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '0' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
@@ -34,6 +95,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public size?: Size
   @Input() public hideHeader?: boolean
   @Input() public hideFooter?: boolean
+  @Input() public disableBodyScroll?: boolean = true
   @Input() public get trapFocus(): boolean | undefined {
     return this._trapFocus
   }
@@ -61,15 +123,19 @@ export class NggModalComponent implements OnDestroy, OnInit {
         this.enableFocusTrap()
       }
 
-      disableBodyScroll(this.ref.nativeElement, {
-        allowTouchMove: (el) => {
-          // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
-          return this.ref.nativeElement.contains(el)
-        },
-      })
+      if (this.disableBodyScroll) {
+        disableBodyScroll(this.ref.nativeElement, {
+          allowTouchMove: (el) => {
+            // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
+            return this.ref.nativeElement.contains(el)
+          },
+        })
+      }
     } else {
       this.disableFocusTrap()
-      enableBodyScroll(this.ref.nativeElement)
+      if (this.disableBodyScroll) {
+        enableBodyScroll(this.ref.nativeElement)
+      }
     }
   }
 
@@ -96,10 +162,10 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
   constructor(
     private ref: ElementRef<HTMLElement>,
-    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory
+    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory,
   ) {
     this.configurableFocusTrap = this.configurableFocusTrapFactory.create(
-      this.ref.nativeElement
+      this.ref.nativeElement,
     )
   }
 

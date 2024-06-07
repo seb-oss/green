@@ -7,3 +7,4 @@ export * from './input-mask'
 export * from './i18n'
 
 export * from './on-scroll.directive'
+export * from './core-element'

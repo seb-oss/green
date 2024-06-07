@@ -64,21 +64,20 @@ export const TextArea = ({
       setLocalValue(event.target.value)
       if (onChange) onChange(event)
     },
-    [setLocalValue, onChange]
+    [setLocalValue, onChange],
   )
 
-  const describedBy =
-    classNames(ariaDescribedBy, {
-      [`gds-expandable-info-${uuid}`]: expandableInfo,
-      [`${uuid}_info`]: info,
-      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
-    })
+  const describedBy = classNames(ariaDescribedBy, {
+    [`gds-expandable-info-${uuid}`]: expandableInfo,
+    [`${uuid}_info`]: info,
+    [`${uuid}_message`]:
+      validator?.message !== undefined && validator.message.length > 0,
+  })
 
   const inputClassName =
-    classNames(
-      className,
-      { [validateClassName(validator?.indicator)]: validator }
-    ) || undefined
+    classNames(className, {
+      [validateClassName(validator?.indicator)]: validator,
+    }) || undefined
 
   const rightAlignedFooterInfo = maxLength
     ? `${localValue?.length || 0}/${maxLength}`

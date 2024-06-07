@@ -1,0 +1,20 @@
+@layer core {
+  @layer layout.content {
+    .layout-content {
+      grid-area: content;
+      inline-size: 100%;
+      max-inline-size: var(--gds-bp-desktop-md);
+      margin-inline: auto;
+
+      ul {
+        margin-block: 0;
+        margin-inline: 0;
+        padding-left: 2ch;
+
+        li {
+          list-style: disc;
+        }
+      }
+    }
+  }
+}

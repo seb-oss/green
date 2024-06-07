@@ -1,0 +1,197 @@
+@layer gds-tooltip, tokens, a11y, parts, position, trigger, keyframes;
+
+@layer gds-tooltip {
+  @layer tokens {
+    :host {
+      --gds-tooltip-bg-color: #000;
+      --gds-tooltip-bg-alpha: 90%;
+      --gds-tooltip-fs: 14px;
+      --gds-tooltip-bg: color-mix(
+        in srgb,
+        var(--gds-tooltip-bg-color) var(--gds-tooltip-bg-alpha),
+        transparent
+      );
+      --gds-tooltip-color: #fff;
+      --gds-tooltip-offset: 8px;
+      --gds-tooltip-arrow: 6px;
+      --gds-tooltip-radii: 8px;
+      --gds-tooltip-transition-easing: var(--gds-sys-transition-easing);
+      display: contents;
+      position: relative;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :host {
+        --gds-tooltip-color-bg: var(
+          --gds-tooltip-color-bg-dark,
+          var(--gds-color-grey-20)
+        );
+      }
+    }
+  }
+
+  .gds-tooltip {
+    display: inline-block;
+    position: relative;
+
+    @layer a11y {
+      --gds-tooltip-contrast: var(--gds-sys-transition);
+      --gds-tooltip-transition: var(--gds-sys-transition);
+      cursor: help;
+    }
+
+    @layer parts {
+      &::before,
+      &::after {
+        align-items: center;
+        display: none;
+        font-size: var(--gds-tooltip-fs);
+        justify-content: center;
+        line-height: 1;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        user-select: none;
+      }
+
+      &::before {
+        border: var(--gds-tooltip-arrow, 6px) solid transparent;
+        content: '';
+        z-index: 1001;
+      }
+
+      &::after {
+        background-color: var(--gds-tooltip-bg);
+        border-radius: var(--gds-tooltip-radii);
+        color: var(--gds-tooltip-color);
+        content: attr(content);
+        max-inline-size: 50ch;
+        min-inline-size: max-content;
+        offset-anchor: center top;
+        overflow: hidden;
+        padding-block: 1.5ex;
+        padding-inline: 2ch;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1000;
+      }
+
+      &:hover::before,
+      &:hover::after {
+        display: flex;
+      }
+    }
+
+    @layer position {
+      &:not([position])::before,
+      &[position^='up']::before {
+        border-bottom-width: 0;
+        border-top-color: var(--gds-tooltip-bg);
+        bottom: calc(100% + 2px);
+      }
+
+      &:not([position])::after,
+      &[position^='up']::after {
+        bottom: calc(100% + var(--gds-tooltip-offset, 8px));
+      }
+
+      &:not([position])::before,
+      &:not([position])::after,
+      &[position^='up']::before,
+      &[position^='up']::after {
+        left: 50%;
+        transform: translate(-50%, calc(var(--gds-tooltip-offset, 8px) * -1));
+      }
+
+      &[position^='down']::before {
+        border-bottom-color: var(--gds-tooltip-bg);
+        border-top-width: 0;
+        top: calc(100% + 2px);
+      }
+
+      &[position^='down']::after {
+        top: calc(100% + var(--gds-tooltip-offset, 8px));
+      }
+
+      &[position^='down']::before,
+      &[position^='down']::after {
+        left: 50%;
+        transform: translate(-50%, var(--gds-tooltip-offset, 8px));
+      }
+
+      &[position^='left']::before {
+        border-left-color: var(--gds-tooltip-bg);
+        border-right-width: 0;
+        left: calc(-1px - var(--gds-tooltip-offset, 8px));
+        top: 50%;
+        transform: translate(calc(var(--gds-tooltip-offset, 8px) * -2), -50%);
+      }
+
+      &[position^='left']::after {
+        right: calc(100% + var(--gds-tooltip-offset, 8px));
+        top: 50%;
+        transform: translate(calc(var(--gds-tooltip-offset, 8px) * -1), -50%);
+      }
+
+      &[position^='right']::before {
+        border-left-width: 0;
+        border-right-color: var(--gds-tooltip-bg);
+        right: calc(-1px - var(--gds-tooltip-offset, 8px));
+        top: 50%;
+        transform: translate(var(--gds-tooltip-offset, 8px), -50%);
+      }
+
+      &[position^='right']::after {
+        left: calc(100% + var(--gds-tooltip-offset, 8px));
+        top: 50%;
+        transform: translate(var(--gds-tooltip-offset, 8px), -50%);
+      }
+    }
+
+    @layer trigger {
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::after {
+        animation: gds-tooltip-animation-y 300ms
+          var(--gds-tooltip-transition-easing) forwards;
+      }
+
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::after {
+        animation: gds-tooltip-animation-h 300ms
+          var(--gds-tooltip-transition-easing) forwards;
+      }
+    }
+  }
+
+  @layer keyframes {
+    @keyframes gds-tooltip-animation-y {
+      to {
+        opacity: 0.9;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @keyframes gds-tooltip-animation-h {
+      to {
+        opacity: 0.9;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}

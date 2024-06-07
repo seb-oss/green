@@ -1,27 +1,23 @@
-import Documentation from './documentation.mdx'
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { NggAccordionComponent } from './accordion.component';
-import { NggAccordionModule } from './accordion.module';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { NggAccordionComponent } from './accordion.component'
+import { NggAccordionModule } from './accordion.module'
 
 export default {
-    title: 'Components/Accordion',
-    component: NggAccordionComponent,
-    decorators: [
-      moduleMetadata({
-        imports: [NggAccordionModule],
-      }),
-    ],
-    parameters: {
-      docs: {
-        page: Documentation,
-      },
-      componentIds: ['component-accordion' ],
-    },
+  title: 'Components/Accordion',
+  component: NggAccordionComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [NggAccordionModule],
+    }),
+  ],
+  parameters: {
+    componentIds: ['component-accordion'],
+  },
 } as Meta<NggAccordionComponent>
 
-const Template: Story<NggAccordionComponent> = () => {
-    return {
-        template:`
+const Template: StoryFn<NggAccordionComponent> = () => {
+  return {
+    template: `
         <ngg-accordion [closeOthers]=false>
             <div ngg-accordion-list-item listItemHeader="First accordion heading" listItemSubHeader="First accordion sublabel">
                 <p>This is the content of the first section</p>
@@ -34,12 +30,12 @@ const Template: Story<NggAccordionComponent> = () => {
             </div>
         </ngg-accordion>
         `,
-    }
+  }
 }
 
-const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
-    return {
-        template:`
+const NoSubHeadersTemplate: StoryFn<NggAccordionComponent> = () => {
+  return {
+    template: `
         <ngg-accordion [closeOthers]=false>
             <div ngg-accordion-list-item listItemHeader="First accordion heading">
                 <p>This is the content of the first section</p>
@@ -52,12 +48,12 @@ const NoSubHeadersTemplate: Story<NggAccordionComponent> = () => {
             </div>
         </ngg-accordion>
         `,
-    }
+  }
 }
 
-const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
+const CheckBoxTemplate: StoryFn<NggAccordionComponent> = () => {
   return {
-      template:`
+    template: `
       <ngg-accordion [closeOthers]=true>
           <div ngg-accordion-list-item listItemHeader="First accordion accordion" listItemSubHeader="First accordion with just one option">
             <div>
@@ -104,7 +100,7 @@ const CheckBoxTemplate: Story<NggAccordionComponent> = () => {
       </ngg-accordion>
       `,
   }
-} 
+}
 
 export const Simple = Template.bind({})
 export const Nosubheaders = NoSubHeadersTemplate.bind({})

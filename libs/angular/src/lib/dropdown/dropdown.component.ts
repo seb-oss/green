@@ -21,9 +21,13 @@ import {
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
-import { GdsDropdown, GdsOption } from '@sebgroup/green-core'
+import '@sebgroup/green-core/components/dropdown/index.js'
+import type {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown/index.js'
 
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import * as DropdownTransStyles from '@sebgroup/green-core/components/dropdown/dropdown.trans.styles.js'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -166,9 +170,9 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   constructor(
     @Inject(Injector) private injector: Injector,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
   ) {
-    registerTransitionalStyles()
+    DropdownTransStyles.register()
   }
 
   ngOnInit(): void {
@@ -241,7 +245,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
       )
 
     const displayValues = value.map(
-      (v) => this.optionByValue(v)?.[this.display]
+      (v) => this.optionByValue(v)?.[this.display],
     )
     return displayValues?.length > 2
       ? `${displayValues.length} ${this.texts?.selected} `

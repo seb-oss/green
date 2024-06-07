@@ -24,7 +24,7 @@ function toKebabCase(str: string): string {
 
 export async function coreComponentGenerator(
   tree: Tree,
-  options: CoreComponentGeneratorSchema
+  options: CoreComponentGeneratorSchema,
 ) {
   const componentRoot =
     `libs/core/src/` + options.componentType + 's/' + toKebabCase(options.name)

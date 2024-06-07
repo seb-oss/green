@@ -8,9 +8,7 @@ import { Router } from '@angular/router'
 })
 export class AppComponent {
   get routes() {
-    return this.router.config
-      .filter(route => route.data && route.data.name)
+    return this.router.config.filter((route) => route.data && route.data.name)
   }
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 }

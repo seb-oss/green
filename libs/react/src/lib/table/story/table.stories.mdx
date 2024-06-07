@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, ArgsTable, Markdown } from '@storybook/addon-docs'
 import {
   Table,
   TableHeader,
@@ -142,7 +142,7 @@ import { sortArray } from '@sebgroup/green-react'
 
 const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
 const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
-  null
+  null,
 )
 
 const onSort = (newSortedColumn: SortedColumn) => {
@@ -152,8 +152,8 @@ const onSort = (newSortedColumn: SortedColumn) => {
       sortArray(
         data,
         newSortedColumn.accessor as keyof SuperHeroRowData,
-        newSortedColumn.sortDirection
-      )
+        newSortedColumn.sortDirection,
+      ),
     )
 }
 ```
@@ -186,7 +186,7 @@ const [selectAllIndicator, setSelectAllIndicator] = React.useState({
 
 const onSelect = (
   event: React.ChangeEvent<HTMLInputElement>,
-  rowUniqueKey: string
+  rowUniqueKey: string,
 ) => {
   const {
     data: newData,
@@ -286,7 +286,7 @@ const onRowExpand = (expanded: boolean, rowId: string) => {
           {columnData.map(
             (column: SuperHeroColumnDataT, columnIndex: number) => (
               <TableCell key={columnIndex}>{item[column.accessor]}</TableCell>
-            )
+            ),
           )}
         </TableRow>
         {item.rowContentDetails?.map((rowItem: SuperHeroRowData) => (
@@ -305,7 +305,7 @@ const onRowExpand = (expanded: boolean, rowId: string) => {
                     ]
                   }
                 </TableCell>
-              )
+              ),
             )}
           </TableRow>
         ))}
@@ -319,32 +319,38 @@ const onRowExpand = (expanded: boolean, rowId: string) => {
 
 ### `Table`
 
-| Props        | Description                    | Type                                                                    |
-| :----------- | :----------------------------- | :---------------------------------------------------------------------- |
-| onRowSelect  | callback when row is selected  | `(event: React.ChangeEvent<HTMLInputElement>, rowKey: string ) => void` |
-| onRowExpand  | callback when row is expanded  | `(isExpanded: boolean, rowKey: string) => void`                         |
-| onSort       | callback when column is sorted | `(sortedColumn: SortedColumn) => void`                                  |
-| sortedColumn | preset sorted column           | `SortedColumn`                                                          |
+<Markdown>{`
+| Props        | Type                                                                    | Description                    |
+| :----------- | :---------------------------------------------------------------------- | :----------------------------- |
+| onRowSelect  | \` (event: React.ChangeEvent<HTMLInputElement>, rowKey: string ) => void \` | callback when row is selected  |
+| onRowExpand  | \` (isExpanded: boolean, rowKey: string) => void \`                         | callback when row is expanded  |
+| onSort       | \` (sortedColumn: SortedColumn) => void \`                                  | callback when column is sorted |
+| sortedColumn | \` SortedColumn \`                                                          | preset sorted column           |
+`}</Markdown>
 
 ### `TableHeaderCell`
 
-| Props         | Description                       | Type                |
-| :------------ | :-------------------------------- | :------------------ |
-| accessor      | key to access the table row data. | `keyof RowDataType` |
-| disableSort   | disable sorting.                  | `boolean`           |
-| sortDirection | Ascending and descending value    | `SortDirection`     |
+<Markdown>{`
+| Props         | Type                | Description                       |
+| :------------ | :------------------ | :-------------------------------- |
+| accessor      | \`keyof RowDataType\` | key to access the table row data. |
+| disableSort   | \`boolean\`           | disable sorting.                  |
+| sortDirection | \`SortDirection\`     | Ascending and descending value    |
+`}</Markdown>
 
 ### `TableRow`
 
+<Markdown>{`
 | Props               | Description                                                       | Type                              |
 | :------------------ | :---------------------------------------------------------------- | :-------------------------------- |
-| checked             | Selectable table checkbox checked value.                          | `boolean`                         |
-| indeterminate       | Selectable table checkbox indeterminate value.                    | `boolean`                         |
-| isHeaderRow         | Determines it has table header row                                | `boolean`                         |
-| hideSelect          | Select can be hidden using this flag                              | `boolean`                         |
-| uniqueKey           | uniqueKey to access during sorting, selecting, expanding in table | `string`                          |
-| parentKey           | Used to parent identifier in expandle table                       | `string`                          |
-| isExpanded          | value that unsure the subrow is shown                             | `boolean`                         |
-| isSubRow            | value that identifies that table row is subrow                    | `boolean`                         |
-| collapseButtonProps | expandable button props                                           | `JSX.IntrinsicElements['button']` |
-| checkboxProps       | Selectable table checkbox props                                   | `JSX.IntrinsicElements['input']`  |
+| checked             | Selectable table checkbox checked value.                          | \`boolean\`                         |
+| indeterminate       | Selectable table checkbox indeterminate value.                    | \`boolean\`                         |
+| isHeaderRow         | Determines it has table header row                                | \`boolean\`                         |
+| hideSelect          | Select can be hidden using this flag                              | \`boolean\`                         |
+| uniqueKey           | uniqueKey to access during sorting, selecting, expanding in table | \`string\`                          |
+| parentKey           | Used to parent identifier in expandle table                       | \`string\`                          |
+| isExpanded          | value that unsure the subrow is shown                             | \`boolean\`                         |
+| isSubRow            | value that identifies that table row is subrow                    | \`boolean\`                         |
+| collapseButtonProps | expandable button props                                           | \`JSX.IntrinsicElements['button']\` |
+| checkboxProps       | Selectable table checkbox props                                   | \`JSX.IntrinsicElements['input']\`  |
+`}</Markdown>

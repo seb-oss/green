@@ -1,0 +1,45 @@
+@import 'reset.css';
+@import 'tokens.css';
+@import 'motion.css';
+@import 'typography.css';
+@import 'utilities.css';
+@import 'responsive.css';
+@import 'syntax.css';
+
+@layer core {
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scroll-snap-stop: always;
+    scroll-padding-top: 160px;
+  }
+
+  body {
+    background-color: var(--gds-sys-color-background-background);
+    color: var(--gds-sys-color-content-content);
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--gds-font-family);
+  }
+
+  p,
+  li {
+    > a {
+      text-decoration: underline;
+    }
+  }
+
+  * {
+    &:focus-visible {
+      outline-offset: 2px;
+      outline-color: currentColor;
+      outline-width: 2px;
+      outline-style: solid;
+    }
+  }
+
+  @layer blocks;
+}

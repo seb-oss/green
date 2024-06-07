@@ -5,6 +5,11 @@
       "implementation": "./src/executors/update-lib-deps/executor",
       "schema": "./src/executors/update-lib-deps/schema.json",
       "description": "Update dependencies in libs package.json"
+    },
+    "build-core-lib": {
+      "implementation": "./src/executors/build-core-lib/executor",
+      "schema": "./src/executors/build-core-lib/schema.json",
+      "description": "build-core-lib executor"
     }
   }
 }

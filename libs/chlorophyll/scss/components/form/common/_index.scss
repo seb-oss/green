@@ -29,7 +29,8 @@ form,
   @include mixins.add-form-text;
 }
 
-label, .label, legend {
+label,
+.label,
+legend {
   @include mixins.add-label();
 }
-

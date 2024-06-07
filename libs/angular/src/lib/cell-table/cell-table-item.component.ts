@@ -10,10 +10,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
       <span *ngSwitchCase="'string'">{{ row || '–' }}</span>
       <span *ngSwitchCase="'number'">{{ (row | number) || '–' }}</span>
       <span *ngSwitchCase="'datetime'">{{
-        (row | date : 'HH:mm:ss') || '–'
+        (row | date: 'HH:mm:ss') || '–'
       }}</span>
       <span *ngSwitchCase="'date'">{{
-        (row | date : 'YYYY-MM-dd') || '–'
+        (row | date: 'YYYY-MM-dd') || '–'
       }}</span>
       <span
         *ngSwitchCase="'custom-html'"

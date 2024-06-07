@@ -74,11 +74,13 @@ $label-font-size: 14px;
     position: absolute;
     inset-inline-end: -0.4375rem;
 
-    :before, :after {
+    :before,
+    :after {
       background: var(--color);
     }
 
-    &:hover, &:hover > i {
+    &:hover,
+    &:hover > i {
       background: transparent;
     }
   }

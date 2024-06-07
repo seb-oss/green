@@ -37,10 +37,10 @@ describe('Component: Table header cell', () => {
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader accessor="test">child</WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector('.sg-table-sort') as HTMLElement
+      document.body.querySelector('.sg-table-sort') as HTMLElement,
     )
     expect(setTableStateFn).toBeCalled()
     expect(sortFn).toBeCalled()
@@ -63,10 +63,10 @@ describe('Component: Table header cell', () => {
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader accessor="test">child</WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     await user.click(
-      document.body.querySelector('.sg-table-sort') as HTMLElement
+      document.body.querySelector('.sg-table-sort') as HTMLElement,
     )
     expect(setTableStateFn).toBeCalledWith({
       ...mockProviderValue.tableState,
@@ -93,7 +93,7 @@ describe('Component: Table header cell', () => {
         <WrapperTableHeader accessor="test" sortDirection={SortDirection.ASC}>
           child
         </WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(setTableStateFn).toBeCalledWith({
       ...mockProviderValue.tableState,
@@ -119,10 +119,10 @@ describe('Component: Table header cell', () => {
         <WrapperTableHeader disableSort accessor="test">
           child
         </WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(
-      document.body.querySelector('th')?.classList.contains('sortable')
+      document.body.querySelector('th')?.classList.contains('sortable'),
     ).toBeFalsy()
   })
 })

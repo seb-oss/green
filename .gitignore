@@ -26,6 +26,10 @@ node_modules
 
 # Next.JS
 .contentlayer
+.next
+/out/
+/dist/
+/apps/docs/public/core-out/
 
 # misc
 /.sass-cache
@@ -46,3 +50,17 @@ Thumbs.db
 
 .angular
 .nx
+
+# local env files
+.env*.local
+.env
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+custom-elements.json
+storybook.log
+
+# Components 
+icon.list.mdx

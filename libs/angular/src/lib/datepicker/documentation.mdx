@@ -1,4 +1,7 @@
-import { Story } from '@storybook/addon-docs'
+import { Story, Meta, Canvas, Markdown } from '@storybook/addon-docs'
+import * as Stories from './datepicker.stories.ts'
+
+<Meta of={Stories} />
 
 # Datepicker
 
@@ -11,7 +14,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { ReactiveFormsModule } from '@angular/forms'
-import { NggDatepickerModule } from '@sebgroup/green-angular'
+import { NggDatepickerModule } from '@sebgroup/green-angular/src/lib/datepicker'
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,25 +64,29 @@ If you just need a simple select without any form, validation etc. it's possible
 
 ## Inputs
 
+<Markdown>{`
 | Input (attribute) | Description                                                             | Default     |
 | :---------------- | :---------------------------------------------------------------------- | :---------- |
-| options           | `DatepickerOptions` for datepicker see more info below.                 | n/a         |
+| options           | \`DatepickerOptions\` for datepicker see more info below.                 | n/a         |
 | label             | Text to use as label for datepicker input.                              | n/a         |
-| id                | Id applied to datepicker elements.                                      | `random id` |
-| isValid           | Mark datepicker as invalid/valid.                                       | `null`      |
-| size              | Size of the datepicker input. Possible values are `small` and `medium`. | `medium`    |
-| hideLabel         | Hide the label for the datepicker input.                                | `false`     |
-| disabledDates     | Array of dates to disable                                               | `[]`        |
-| disabledWeekends  | Disable all weekends in the calendar view                               | `false`     |
+| id                | Id applied to datepicker elements.                                      | \`random id\` |
+| isValid           | Mark datepicker as invalid/valid.                                       | \`null\`      |
+| size              | Size of the datepicker input. Possible values are \`small\` and \`medium\`. | \`medium\`    |
+| hideLabel         | Hide the label for the datepicker input.                                | \`false\`     |
+| disabledDates     | Array of dates to disable                                               | \`[]\`        |
+| disabledWeekends  | Disable all weekends in the calendar view                               | \`false\`     |
+`}</Markdown>
 
 ## DatepickerOptions
 
+<Markdown>{`
 | Option     | Description                                                                                                                                                   | Default                                |
 | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------- |
-| showWeeks  | Show week numbers.                                                                                                                                            | `false`                                |
-| minDate    | Min date for datepicker, dates before this date are disabled.                                                                                                 | `startOfYear(subYears(new Date(), 5))` |
-| maxDate    | Max date for datepicker, dates after this date are disabled.                                                                                                  | `endOfYear(addYears(new Date(), 5))`   |
-| dateFormat | Date format for the input field. Use letters `d`, `m`, `y` to specify the order of day, month, year, separated by a delimiter. For example `y-m-d` or `d/m/y` | `y-m-d`                                |
+| showWeeks  | Show week numbers.                                                                                                                                            | \`false\`                                |
+| minDate    | Min date for datepicker, dates before this date are disabled.                                                                                                 | \`startOfYear(subYears(new Date(), 5))\` |
+| maxDate    | Max date for datepicker, dates after this date are disabled.                                                                                                  | \`endOfYear(addYears(new Date(), 5))\`   |
+| dateFormat | Date format for the input field. Use letters \`d\`, \`m\`, \`y\` to specify the order of day, month, year, separated by a delimiter. For example \`y-m-d\` or \`d/m/y\` | \`y-m-d\`                                |
+`}</Markdown>
 
 ```html
 <ngg-datepicker

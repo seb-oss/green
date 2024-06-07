@@ -34,11 +34,16 @@
 @mixin add-hover-state($color: tokens.get(tokens.$blue, 2), $target: '') {
   @if not $target == '' {
     #{$target} {
-      transition: all tokens.$transition-time, outline-offset 0s,
+      transition:
+        all tokens.$transition-time,
+        outline-offset 0s,
         outline-width 0s; // TODO: append transition rule...
     }
   } @else {
-    transition: all tokens.$transition-time, outline-offset 0s, outline-width 0s; // TODO: append transition rule...
+    transition:
+      all tokens.$transition-time,
+      outline-offset 0s,
+      outline-width 0s; // TODO: append transition rule...
   }
 
   &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
@@ -54,7 +59,7 @@
   $color: tokens.get(tokens.$blue, 0),
   $fadeActiveHover: false
 ) {
-  &[aria-selected],
+  &[aria-selected='true'],
   &:active,
   &.active,
   &.active:hover,

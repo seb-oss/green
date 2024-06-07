@@ -1,5 +1,8 @@
 import { NggBadgeComponent } from './badge.component'
-import { Canvas, Story } from '@storybook/addon-docs'
+import { Canvas, Story, Meta, Markdown } from '@storybook/addon-docs'
+import * as Stories from './badge.stories.ts'
+
+<Meta of={Stories} />
 
 # Badge
 
@@ -18,7 +21,7 @@ Use this component to display a status in a more prominent way than just typing 
 ```typescript
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { NggBadgeModule } from '@sebgroup/green-angular'
+import { NggBadgeModule } from '@sebgroup/green-angular/src/lib/badge'
 
 import { AppComponent } from './app.component'
 
@@ -32,19 +35,23 @@ export class AppModule {}
 
 ## Badge Options
 
-|Input|Type|Description|
-|:--------|:----------|:------|
-|badgeType|`BadgeType`|The color of the component. Can be: `info`, `success`, `warning`, `danger`, `light`, and `dark`|
-|isCloseable|`boolean`|Flag whether the component can be dismissed|
-|closeText|`string`|Close text|
-|customColor|`string`|Custom text color|
-|customBackgroundColor|`string`|Custom background color|
+<Markdown>{`
+| Input                 | Type        | Description                                                                                     |
+| :-------------------- | :---------- | :---------------------------------------------------------------------------------------------- |
+| badgeType             | \`BadgeType\` | The color of the component. Can be: \`info\`, \`success\`, \`warning\`, \`danger\`, \`light\`, and \`dark\` |
+| isCloseable           | \`boolean\`   | Flag whether the component can be dismissed                                                     |
+| closeText             | \`string\`    | Close text                                                                                      |
+| customColor           | \`string\`    | Custom text color                                                                               |
+| customBackgroundColor | \`string\`    | Custom background color                                                                         |
+`}</Markdown>
 
 ### Outputs
 
-|Event|Description|
-|:--------|:------|
-|handleClose|Event emitted when badge is dismissed.|
+<Markdown>{`
+| Event       | Description                            |
+| :---------- | :------------------------------------- |
+| handleClose | Event emitted when badge is dismissed. |
+`}</Markdown>
 
 ## Examples
 

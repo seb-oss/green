@@ -12,8 +12,7 @@
       "inputs": ["core"],
       "options": {
         "project": "libs/angular/ng-package.json",
-        "tsConfig": "libs/angular/tsconfig.lib.prod.json",
-        "updateBuildableProjectDepsInPackageJson": false
+        "tsConfig": "libs/angular/tsconfig.lib.prod.json"
       },
       "dependsOn": [
         {
@@ -35,68 +34,71 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular"],
       "options": {
-        "jestConfig": "libs/angular/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/angular/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/angular/src/**/*.ts",
-          "libs/angular/src/**/*.html"
-        ]
-      },
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
-      "inputs": ["core"],
       "options": {
-        "port": 4100,
-        "host": "0.0.0.0",
+        "port": 4400,
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/fonts/*"]
+        }
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
       },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        }
-      ]
+      "dependsOn": ["core:build-with-types"]
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
-      "inputs": ["core"],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/angular",
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/fonts/*"]
+        }
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
       },
-      "dependsOn": [
-        {
-          "target": "build-with-types-and-scoping",
-          "dependencies": true
-        },
-        "tokens:build"
-      ]
+      "dependsOn": ["core:build-with-types"]
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/angular/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "angular:build-storybook",
+        "staticFilePath": "dist/storybook/angular",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "angular:build-storybook:ci"
+        }
+      }
     }
   }
 }

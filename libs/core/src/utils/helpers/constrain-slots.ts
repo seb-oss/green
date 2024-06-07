@@ -29,7 +29,10 @@ export function constrainSlots(self: LitElement) {
     }
 
     const constrain = (slot: HTMLSlotElement) => {
-      const allowed = slot.getAttribute('gds-allow')?.split(' ') || []
+      const allowed = [
+        ...(slot.getAttribute('gds-allow')?.split(' ') || []),
+        'slot',
+      ]
       for (const node of Array.from(slot.assignedNodes())) {
         if (!allowed.includes(node.nodeName.toLowerCase())) {
           node.parentNode?.removeChild(node)

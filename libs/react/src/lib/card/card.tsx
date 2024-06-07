@@ -10,9 +10,9 @@ export interface CardProps {
 export function Card({ children, header, footer }: CardProps) {
   return (
     <section className="card">
-      <header>{header}</header>
-        {children}
-      <footer>{footer}</footer>
+      {header && <header>{header}</header>}
+      {children}
+      {footer && <footer>{footer}</footer>}
     </section>
   )
 }

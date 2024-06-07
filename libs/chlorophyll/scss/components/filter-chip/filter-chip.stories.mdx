@@ -1,26 +1,8 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
 import { handleChipSelection, handleChipRemoval } from './config'
 
-export const Template = ({ label, languageDir, isSelected, isRemovable }) => {
-  const langDir = languageDir === 'RTL' ? 'dir="rtl"' : 'dir="ltr"'
-  const attrClass =
-    'gds-filter-chip gds-ripple' +
-    (isSelected
-      ? ' gds-filter-chip__action gds-filter-chip__action-selected'
-      : '') +
-    (isRemovable
-      ? ' gds-filter-chip__action gds-filter-chip__action-remove'
-      : '')
-  return `
-    <button 
-      aria-label="${label}" 
-      title="${label}" 
-      class="${attrClass}"
-      ${langDir}
-      >
-        ${label}
-    </button>
-`
+export const Template = () => {
+  return `Filter Chips should be used from <a href="https://storybook.seb.io/latest/angular/?path=/docs/components-filter-chips--default#filter-chips">Angular</a>, <a href="https://storybook.seb.io/latest/react/?path=/docs/components-filter-chips--page#filter-chips">React</a> or <a href="https://storybook.seb.io/latest/core/?path=/docs/components-filter-chips--page">Core</a> (Web Components, framework agnostic)`
 }
 
 <Meta
@@ -49,163 +31,24 @@ export const Template = ({ label, languageDir, isSelected, isRemovable }) => {
   }}
 />
 
-# Filter Chip
+# Filter Chips
 
-Chips are compact elements that represent an input, attribute, or action.
-
-<Canvas>
-  <Story
-    name="Filter Chip"
-    args={{
-      label: 'Filter Chip',
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-## Element structure
-
-The elements of a chip are:
-
-- A container element with the class `gds-filter-chip` for base functionality and `gds-filter-chip__action` for interactive functionality.
-
-## Variations
-
-### Selected
-
-Use the `gds-filter-chip__action-selected` class to indicate that a chip is selected.
-
-<Canvas>
-  <Story
-    name="Selected"
-    args={{
-      label: 'Selected',
-      isSelected: true,
-      isRemovable: false,
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Removable
-
-Use the `gds-filter-chip__action-remove` class to indicate that a chip is removable.
-
-<Canvas>
-  <Story
-    name="Removable"
-    args={{
-      label: 'Removable',
-      isSelected: false,
-      isRemovable: true,
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-## Accessibility
-
-Chips are interactive elements that can be selected or removed. They are used to represent an input, attribute, or action.
-
-### Keyboard
-
-- Tab: Moves focus to the next element in the tab order.
-- Shift + Tab: Moves focus to the previous element in the tab order.
-- Enter: Selects or removes the chip.
-
-### Screen readers
-
-- Use the `aria-label` attribute to provide a label for the chip.
-- Use the `title` attribute to provide a tooltip for the chip.
-
-## Usage
-
-### HTML
-
-```html
-<button class="gds-filter-chip gds-ripple">Label</button>
-<button class="gds-filter-chip gds-ripple" onClick="{handleChipSelection}">
-  Selected
-</button>
-<button class="gds-filter-chip gds-ripple" onClick="{handleChipRemoval}">
-  Removable
-</button>
-```
-
-### Ripple animation
-
-The filter uses a ripple animation to indicate the click state of the chip. To use the ripple animation, add the `ripple` function to the `onClick` event of the chip and the class `gds-ripple`.
-
-<Canvas>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipRemoval}>
-    Label
-  </button>
-  <button
-    class="gds-filter-chip gds-ripple gds-filter-chip__action gds-filter-chip__action-selected"
-    onClick={handleChipSelection}
-  >
-    Selected
-  </button>
-  <button
-    class="gds-filter-chip gds-ripple gds-filter-chip__action gds-filter-chip__action-remove"
-    onClick={handleChipRemoval}
-  >
-    Removable
-  </button>
-</Canvas>
-
-### Multiple chips
-
-<Canvas>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipRemoval}>
-    I am selectable
-  </button>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipSelection}>
-    I am removable
-  </button>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipRemoval}>
-    I am selectable
-  </button>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipSelection}>
-    I am removable
-  </button>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipRemoval}>
-    I am selectable
-  </button>
-  <button class="gds-filter-chip gds-ripple" onClick={handleChipSelection}>
-    I am removable
-  </button>
-</Canvas>
-
-### Language Direction
-
-Chips support right-to-left (RTL) languages. To use RTL, add the `dir="rtl"` attribute to the chip.
-
-#### RTL ( Right to Left )
-
-<Canvas>
-  <button
-    class="gds-filter-chip gds-ripple"
-    dir="rtl"
-    onClick={handleChipSelection}
-  >
-    Label
-  </button>
-  <button
-    class="gds-filter-chip gds-ripple gds-filter-chip__action gds-filter-chip__action-selected"
-    dir="rtl"
-    onClick={handleChipSelection}
-  >
-    Selected
-  </button>
-  <button
-    class="gds-filter-chip gds-ripple gds-filter-chip__action gds-filter-chip__action-remove"
-    dir="rtl"
-    onClick={handleChipRemoval}
-  >
-    Removable
-  </button>
-</Canvas>
+<div role="alert" class="warning mb-7 mt-5 w-100">
+  <main>
+    <h3>Not available in Chlorophyll!</h3>
+    <p>
+      This component component requires a Javascript implementation, and cannot
+      be used with only CSS. Check out one of Greens framework implmentations
+      instead!
+    </p>
+    <p>
+      Filter Chips is available in{' '}
+      <a href="https://storybook.seb.io/latest/angular/?path=/docs/components-filter-chips--default#filter-chips">
+        Angular
+      </a>
+      , <a href="https://storybook.seb.io/latest/react/?path=/docs/components-filter-chips--page#filter-chips">
+        React
+      </a> or <a href="https://storybook.seb.io/latest/core/?path=/docs/components-filter-chips--page">as a web component</a>
+    </p>
+  </main>
+</div>

@@ -13,12 +13,12 @@ export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
 export const RadioButton = forwardRef(
   (
     { label, validator, testId, ...props }: RadioButtonProps,
-    ref: React.ForwardedRef<HTMLInputElement>
+    ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const { id } = useInput(props)
 
     const inputClassNames = classNames(
-      validator && validateClassName(validator?.indicator)
+      validator && validateClassName(validator?.indicator),
     )
 
     return (
@@ -35,5 +35,5 @@ export const RadioButton = forwardRef(
         <i />
       </label>
     )
-  }
+  },
 )

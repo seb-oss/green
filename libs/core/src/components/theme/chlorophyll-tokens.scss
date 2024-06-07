@@ -1,0 +1,28 @@
+@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
+@use '../../../../chlorophyll/scss/tokens/colors' as colors;
+@use '../../../../chlorophyll/scss/tokens/shape' as shape;
+@use '../../../../chlorophyll/scss/tokens/components' as components;
+@use '../../../../chlorophyll/scss/components/themes/mixins' as theme_mixins;
+
+:host([color-scheme='light']) {
+  @include shape.add-tokens;
+  @include colors.add-color-tokens;
+  @include components.add-checkbox-tokens;
+  @include tokens.light-mode;
+  @include theme_mixins.add-theme;
+}
+
+/* force dark mode */
+:host([color-scheme='dark']) {
+  @include tokens.dark-mode;
+  @include theme_mixins.dark-theme;
+}
+
+/* use preferred color scheme */
+@media (prefers-color-scheme: dark) {
+  :host,
+  :host([color-scheme='auto']) {
+    @include tokens.dark-mode;
+    @include theme_mixins.dark-theme;
+  }
+}

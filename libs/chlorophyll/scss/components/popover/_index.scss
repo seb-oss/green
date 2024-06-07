@@ -5,7 +5,8 @@
 @use '../../components/close';
 @use '../../components/utility';
 
-.popover, ._popover {
+.popover,
+._popover {
   @include mixins.popover;
 }
 

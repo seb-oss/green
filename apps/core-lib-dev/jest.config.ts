@@ -12,6 +12,6 @@ export default {
     'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs|dist/)',
   ],
   moduleNameMapper: {
-    '@sebgroup/green-core': '<rootDir>/../../dist/libs/core/src',
+    '@sebgroup/green-core': '<rootDir>/../../dist/libs/core/src/index.js',
   },
 }

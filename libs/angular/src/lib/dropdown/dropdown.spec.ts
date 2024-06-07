@@ -1,7 +1,5 @@
 import { render, RenderResult } from '@testing-library/angular'
 import { NggDropdownComponent } from './dropdown.component'
-
-import { getScopedTagName } from '@sebgroup/green-core'
 import { fakeAsync, tick } from '@angular/core/testing'
 
 describe('Dropdown', () => {
@@ -27,13 +25,13 @@ describe('Dropdown', () => {
 
   it('returns correct display value', fakeAsync(() => {
     expect(
-      (component.fixture.componentInstance as any).displayTextByValue(2)
+      (component.fixture.componentInstance as any).displayTextByValue(2),
     ).toBe('B')
   }))
 
   it('returns correct option by value', () => {
     expect(
-      (component.fixture.componentInstance as any).optionByValue(3)
+      (component.fixture.componentInstance as any).optionByValue(3),
     ).toEqual({ label: 'C', value: 3 })
   })
 
@@ -43,7 +41,7 @@ describe('Dropdown', () => {
 
   it('return correct selected option', () => {
     expect((component.fixture.componentInstance as any).selectedOption).toEqual(
-      { label: 'B', value: 2, selected: true }
+      { label: 'B', value: 2, selected: true },
     )
   })
 })

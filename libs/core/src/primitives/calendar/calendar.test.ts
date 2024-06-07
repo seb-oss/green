@@ -3,8 +3,9 @@ import { fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 
 import { onlyDate, timeout } from '../../utils/testing'
-import '../../../../../dist/libs/core/src/index.js'
-import { htmlTemplateTagFactory } from '../../../../../dist/libs/core/src/index.js'
+
+import '@sebgroup/green-core/primitives/calendar'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import type { GdsCalendar } from './calendar'
 import { addDays, addMonths, subMonths } from 'date-fns'
@@ -36,7 +37,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 7))
+        onlyDate(addDays(new Date(), 7)),
       )
     })
 
@@ -51,7 +52,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -7))
+        onlyDate(addDays(new Date(), -7)),
       )
     })
 
@@ -66,7 +67,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), 1))
+        onlyDate(addDays(new Date(), 1)),
       )
     })
 
@@ -81,7 +82,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addDays(new Date(), -1))
+        onlyDate(addDays(new Date(), -1)),
       )
     })
 
@@ -96,7 +97,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(subMonths(new Date(), 1))
+        onlyDate(subMonths(new Date(), 1)),
       )
     })
 
@@ -111,7 +112,7 @@ describe('<gds-calendar>', () => {
       await timeout(0)
 
       await expect(onlyDate(el.value)).to.equal(
-        onlyDate(addMonths(new Date(), 1))
+        onlyDate(addMonths(new Date(), 1)),
       )
     })
 
@@ -125,7 +126,7 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(el.value.getDate()).to.equal(1)
+      await expect(el.value!.getDate()).to.equal(1)
     })
 
     it('should select last day of month when pressing end', async () => {
@@ -138,8 +139,12 @@ describe('<gds-calendar>', () => {
       await sendKeys({ press: 'Enter' })
       await timeout(0)
 
-      await expect(el.value.getDate()).to.equal(
-        new Date(el.value.getFullYear(), el.value.getMonth() + 1, 0).getDate()
+      await expect(el.value?.getDate()).to.equal(
+        new Date(
+          el.value!.getFullYear(),
+          el.value!.getMonth() + 1,
+          0,
+        ).getDate(),
       )
     })
 
@@ -175,7 +180,7 @@ describe('<gds-calendar>', () => {
 
     it('should not select the focused date when pressing enter if it is disabled', async () => {
       const el = await fixture<GdsCalendar>(
-        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`
+        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`,
       )
       el.focus()
 
@@ -197,7 +202,23 @@ describe('<gds-calendar>', () => {
       await el.updateComplete
 
       await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2024-02-01'))
+        onlyDate(new Date('2024-02-01')),
+      )
+    })
+
+    it('should focus last day of month if focused date is beyond last day of current month when changing month', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-05-31')}
+        ></gds-calendar>`,
+      )
+      await el.updateComplete
+
+      el.focusedMonth = 1
+      await el.updateComplete
+
+      await expect(onlyDate(el.focusedDate)).to.equal(
+        onlyDate(new Date('2024-02-29')),
       )
     })
   })

@@ -22,12 +22,12 @@ yarn add @sebgroup/green-react
 import { Button } from '@sebgroup/green-react'
 
 // Use in your JSX
-<Button>A Green React Button!</Button>
+;<Button>A Green React Button!</Button>
 ```
 
 ### Components
 
-View all components in the [React Storybook](https://sebgroup.github.io/green/latest/react/)
+View all components in the [React Storybook](https://storybook.seb.io/latest/react/)
 
 ## Develop \*
 

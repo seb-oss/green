@@ -71,7 +71,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
     validateInputValue(
       { value: inputValue as string, name, type, checked },
       validate?.rules as ValidatorRules,
-      setErrors
+      setErrors,
     )
   }
 

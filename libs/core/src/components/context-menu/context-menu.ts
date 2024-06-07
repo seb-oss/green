@@ -1,7 +1,7 @@
-import { HTMLTemplateResult, LitElement, nothing } from 'lit'
+import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { classMap } from 'lit-html/directives/class-map.js'
-import { property, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { property, queryAsync } from 'lit/decorators.js'
 import { Placement } from '@floating-ui/dom'
 
 import {
@@ -10,11 +10,12 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { constrainSlots } from '../../utils/helpers'
-import { TransitionalStyles } from '../../utils/helpers/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './context-menu.styles'
 
-import '../../primitives/menu/menu'
+import '../../primitives/menu'
+import '../popover'
 
 /**
  * @element gds-context-menu
@@ -50,13 +51,14 @@ export class GdsContextMenu extends GdsElement {
   @property({
     attribute: 'button-label',
   })
-  buttonLabel = msg('Open context menu')
+  buttonLabel: string = msg('Open context menu')
 
   /**
-   * The label for the trigger button.
+   * Whether to show the label on the trigger button.
    */
   @property({
     attribute: 'show-label',
+    type: Boolean,
   })
   showLabel = false
 
@@ -71,10 +73,6 @@ export class GdsContextMenu extends GdsElement {
    */
   @property()
   placement: Placement = 'bottom-start'
-
-  // Used for Transitional Styles in some legacy browsers
-  @state()
-  private _tStyles?: HTMLTemplateResult
 
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
@@ -98,15 +96,13 @@ export class GdsContextMenu extends GdsElement {
   }
 
   render() {
-    return html`${this._tStyles}
-      <button
+    return html`<button
         id="trigger"
         class="icon border-0 small ${classMap({ highlighted: this.open })}"
         aria-label=${this.buttonLabel ?? this.label}
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
-        @click=${() => (this.open = !this.open)}
       >
         <slot name="trigger">
           ${this.showLabel ? this.buttonLabel ?? this.label : nothing}
@@ -122,6 +118,7 @@ export class GdsContextMenu extends GdsElement {
         id="menu"
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
+        .anchorRef=${this.elTriggerBtn}
         .label=${this.label}
         .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}

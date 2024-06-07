@@ -1,0 +1,7 @@
+.page-component {
+  margin-top: calc(3.75rem - var(--gds-gap-l));
+
+  .gds-prose gds-grid {
+    margin: 2.5rem 0;
+  }
+}

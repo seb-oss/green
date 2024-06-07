@@ -1,4 +1,4 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas, Markdown } from '@storybook/addon-docs'
 import Accordion from './accordion'
 
 export const Template = (args) => <Accordion {...args} />
@@ -76,20 +76,24 @@ Use the accordions to "hide" information that users doesn't necessarily need to 
 
 ## Props
 
+<Markdown>{`
 | Prop  | Type                            | Description                    |
 | :---- | :------------------------------ | :----------------------------- |
-| items | `Array<AccordionItemInterface>` | List of items in the accordion |
+| items | \`Array<AccordionItemInterface>\` | List of items in the accordion |
+`}</Markdown>
 
 ### AccordionItemInterface
 
+<Markdown>{`
 | Key      | Type                                                           |
 | :------- | :------------------------------------------------------------- |
-| label    | `string`                                                       |
-| subLabel | `string`                                                       |
-| content  | `JSXElement`                                                   |
-| onClick? | `(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void` |
-| onOpen?  | `(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void` |
-| onClose? | `(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void` |
+| label    | \`string\`                                                       |
+| subLabel | \`string\`                                                       |
+| content  | \`JSXElement\`                                                   |
+| onClick? | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+| onOpen?  | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+| onClose? | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+`}</Markdown>
 
 ## Example
 

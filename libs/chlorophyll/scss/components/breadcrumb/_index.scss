@@ -1,0 +1,5 @@
+@use './mixins';
+
+.breadcrumb {
+  @include mixins.add-breadcrumb;
+}

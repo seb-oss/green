@@ -1,5 +1,52 @@
 # Changelog
 
+## 3.7.0
+
+### Minor Changes
+
+- 0afe58f: **Breadcrumbs:** Added new component
+
+### Patch Changes
+
+- 9ee9f49: Not rendering header or footer in card if it's not passed
+- Updated dependencies [900effe]
+- Updated dependencies [0afe58f]
+- Updated dependencies [b62c0ae]
+  - @sebgroup/green-core@1.22.3
+  - @sebgroup/chlorophyll@3.4.0
+
+## 3.6.0
+
+### Minor Changes
+
+- bfe345f: **FilterChips:** Add new component
+
+### Patch Changes
+
+- Updated dependencies [bfe345f]
+- Updated dependencies [bfe345f]
+- Updated dependencies [bfe345f]
+  - @sebgroup/green-core@1.20.0
+  - @sebgroup/chlorophyll@3.3.6
+
+## 3.5.6
+
+### Patch Changes
+
+- f8758d9: **Sub-path imports:** Fix missing filename on import paths
+
+## 3.5.5
+
+### Patch Changes
+
+- 80b4050: Update underlying Core components to use sub path imports
+- Updated dependencies [5b84660]
+- Updated dependencies [e20574d]
+- Updated dependencies [80b4050]
+- Updated dependencies [80b4050]
+  - @sebgroup/green-core@1.16.0
+  - @sebgroup/chlorophyll@3.3.4
+
 ## 3.5.4
 
 ### Patch Changes
