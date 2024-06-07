@@ -11,6 +11,8 @@ import '@sebgroup/green-core/components/segmented-control/index.js'
 import './chlorophyll.scss'
 import './simple-values.element'
 import './complex-values.element'
+import './datepicker.element'
+import './calendar.element'
 
 const { setLocale, getLocale } = gdsInitLocalization()
 
@@ -74,6 +76,8 @@ export class AppElement extends LitElement {
             <gds-segment value="complex-values"
               >Form: Complex values</gds-segment
             >
+            <gds-segment value="datepicker">Datepicker</gds-segment>
+            <gds-segment value="calendar">Calendar</gds-segment>
           </gds-segmented-control>
           <div class="card">
             ${choose(
@@ -84,6 +88,11 @@ export class AppElement extends LitElement {
                   'complex-values',
                   () => html`<complex-values></complex-values>`,
                 ],
+                [
+                  'datepicker',
+                  () => html`<datepicker-example></datepicker-example>`,
+                ],
+                ['calendar', () => html`<calendar-example></calendar-example>`],
               ],
               () => html`No view selected`,
             )}
