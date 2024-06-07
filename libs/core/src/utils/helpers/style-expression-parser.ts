@@ -20,8 +20,7 @@ const viewportBreakpoints: Record<string, string> = {
 
 const breakpointValueRegex = /^([<|>]=?)?([0-9a-z]+)/
 
-const singleCharTokens = ['{', '}']
-const separators = [';']
+const singleCharTokens = ['{', '}', ';', ',']
 const whitespace = [' ', '/n']
 
 /**
@@ -33,25 +32,27 @@ const whitespace = [' ', '/n']
 export function tokenize(source: string): Tokens {
   const lexemes = []
   let scanned = ''
-  for (const c of source) {
-    if (separators.includes(c)) {
+
+  for (let i = 0; i < source.length; i++) {
+    const c = source[i]
+
+    if (!whitespace.includes(c)) scanned += c
+
+    if (whitespace.includes(c) || i === source.length - 1) {
       lexemes.push(scanned)
       scanned = ''
       continue
     }
+
     if (singleCharTokens.includes(c)) {
-      lexemes.push(scanned)
+      lexemes.push(scanned.slice(0, -1))
       lexemes.push(c)
       scanned = ''
       continue
     }
-    scanned += c
   }
 
-  if (lexemes.length === 0 && scanned.length > 0)
-    return scanned.trim().split(' ')
-
-  return lexemes.filter((l) => l.length > 0)
+  return lexemes.filter((l) => l !== '')
 }
 
 /**
@@ -64,30 +65,57 @@ export function parse(tokens: Tokens): BreakpointTree {
   const tree = []
   let level = 'bp'
   let scope: BreakpointData | undefined = undefined
+  let expectMultiCondition = false
 
   for (const t of tokens) {
     if (!singleCharTokens.includes(t)) {
       if (level === 'val' && scope) {
-        scope.values = t.trim().split(' ')
+        scope.values.push(t)
       } else {
-        scope = { breakpoint: t.trim(), values: [] }
-        tree.push(scope)
+        if (scope && expectMultiCondition) {
+          scope.breakpoint += `,${t}`
+          expectMultiCondition = false
+          continue
+        }
+        if (!scope) {
+          scope = { breakpoint: t, values: [] }
+          tree.push(scope)
+        } else {
+          // This means short hand 0 breakpoint
+          level = 'val'
+          scope.values.push(scope.breakpoint)
+          scope.values.push(t)
+          scope.breakpoint = '-'
+        }
       }
       continue
     }
+
+    if (t === ',') {
+      expectMultiCondition = true
+      continue
+    }
+
     if (t === '{') {
       level = 'val'
       continue
     }
-    if (t === '}') {
+
+    if (t === '}' || t === ';') {
       level = 'bp'
+      scope = undefined
       continue
     }
   }
 
-  return tree.map((bp) =>
-    bp.values.length === 0 ? { breakpoint: '-', values: [bp.breakpoint] } : bp,
-  )
+  return tree.map((bp) => {
+    // Fix remaining shorthand 0 breakpoints
+    if (bp.values.length === 0) {
+      bp.values.push(bp.breakpoint)
+      bp.breakpoint = '-'
+    }
+    return bp
+  })
 }
 
 function parseBreakpoint(bp: string): BreakpointSpecifier {
@@ -101,7 +129,7 @@ function parseBreakpoint(bp: string): BreakpointSpecifier {
   })
 }
 
-export function toCss(rule: string, tree: BreakpointTree) {
+export function toCss(selector: string, rule: string, tree: BreakpointTree) {
   let css = ''
   for (const bp of tree) {
     const bpSpecs =
@@ -114,10 +142,7 @@ export function toCss(rule: string, tree: BreakpointTree) {
           `(${b.condition?.includes('<') ? 'max-width' : 'min-width'}: ${viewportBreakpoints[b.value] ?? b.value})`,
       )
       .join(' and ')
-    const mq = `@media ${query} {
- ${rule}: ${bp.values.map((v) => `var(--gds-sys-space-${v})`).join(' ')};
-}
-`
+    const mq = `@media ${query} {${selector}{${rule}: ${bp.values.map((v) => `var(--gds-sys-space-${v})`).join(' ')};}}`
     css += mq
   }
 
