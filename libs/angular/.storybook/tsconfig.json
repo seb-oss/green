@@ -11,7 +11,27 @@
     "../src/**/*.stories.tsx",
     "../src/**/*.stories.mdx",
     "*.js",
-    "*.ts"
+    "../**/*.js",
+    "*.ts",
+    "../**/*.ts",
+    "../../extract/**/*.ts",
+    "../../extract/**/*.js",
+    "../src/v-angular/button/button.story.ts_",
+    "../src/v-angular/dropdown/dropdown.story.ts_",
+    "../src/v-angular/dropdown-list/dropdown-list.story.ts_",
+    "../src/v-angular/modal/dialog/dialog.story.ts_",
+    "../src/v-angular/modal/fold-out/fold-out.story.ts_",
+    "../src/v-angular/modal/slide-out/slide-outstory.ts_",
+    "../src/v-angular/modal/slide-out/slide-out.story.ts_",
+    "../src/lib/drag-drop/drag-drop.story.ts_",
+    "../src/lib/tabs/tabs.story.ts_",
+    "../src/lib/input/input.story.ts_",
+    "../src/lib/radio/radio.story.ts_",
+    "../src/lib/table/table.story.ts_",
+    "../src/lib/slider/slider.story.ts_",
+    "../src/lib/tooltip/tooltip.story.ts_",
+    "../src/lib/textarea/textarea.story.ts_",
+    "../src/lib/drag-drop/drag-drop.component.ts_"
   ],
   "target": "ES2022"
 }
