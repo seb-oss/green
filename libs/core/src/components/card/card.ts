@@ -155,7 +155,7 @@ export class GdsCard extends GdsElement {
   }
 
   #gridVariables = {
-    varsElevation: css``,
+    // varsElevation: css``,
   }
 
   @watch('elevation')

@@ -99,20 +99,73 @@ export const CardElevation: Story = {
   ...DefaultParams,
   name: 'Elevation',
   render: (args) =>
-    html` <gds-card elevation="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
-      <gds-container
-        padding="l:2xl m:2xl s:2xl"
-        display="flex"
-        align="center"
-        justify="center"
-        gap="2xl"
-        row-gap="2xl"
-        direction="column"
-      >
-        <div>Example One</div>
-        <div>Example Two</div>
-      </gds-container>
-    </gds-card>`,
+    html`<gds-grid columns="5" gap="xl">
+      <gds-card elevation="l:xs m:xs s:xs" radius="l:s m:s s:s">
+        <gds-container
+          padding="l:2xl m:2xl s:2xl"
+          display="flex"
+          align="center"
+          justify="center"
+          gap="2xl"
+          row-gap="2xl"
+          direction="column"
+        >
+          <div>Example One</div>
+        </gds-container>
+      </gds-card>
+      <gds-card elevation="l:s m:s s:s" radius="l:s m:s s:s">
+        <gds-container
+          padding="l:2xl m:2xl s:2xl"
+          display="flex"
+          align="center"
+          justify="center"
+          gap="2xl"
+          row-gap="2xl"
+          direction="column"
+        >
+          <div>Example One</div>
+        </gds-container>
+      </gds-card>
+      <gds-card elevation="l:m m:m s:m" radius="l:s m:s s:s">
+        <gds-container
+          padding="l:2xl m:2xl s:2xl"
+          display="flex"
+          align="center"
+          justify="center"
+          gap="2xl"
+          row-gap="2xl"
+          direction="column"
+        >
+          <div>Example One</div>
+        </gds-container>
+      </gds-card>
+      <gds-card elevation="l:l m:l s:l" radius="l:s m:s s:s">
+        <gds-container
+          padding="l:2xl m:2xl s:2xl"
+          display="flex"
+          align="center"
+          justify="center"
+          gap="2xl"
+          row-gap="2xl"
+          direction="column"
+        >
+          <div>Example One</div>
+        </gds-container>
+      </gds-card>
+      <gds-card elevation="l:xl m:xl s:xl" radius="l:s m:s s:s">
+        <gds-container
+          padding="l:2xl m:2xl s:2xl"
+          display="flex"
+          align="center"
+          justify="center"
+          gap="2xl"
+          row-gap="2xl"
+          direction="column"
+        >
+          <div>Example One</div>
+        </gds-container>
+      </gds-card>
+    </gds-grid>`,
 }
 
 export const CardBackground: Story = {
