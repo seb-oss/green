@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.4
+
+### Patch Changes
+
+- fb7c982: **Datepicker:** Fix copy/paste regression. Fixes #1424
+
 ## 1.22.3
 
 ### Patch Changes
