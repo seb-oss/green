@@ -38,15 +38,15 @@ export function tokenize(source: string): Tokens {
 
     if (!whitespace.includes(c)) scanned += c
 
-    if (whitespace.includes(c) || i === source.length - 1) {
-      lexemes.push(scanned)
+    if (singleCharTokens.includes(c)) {
+      lexemes.push(scanned.slice(0, -1))
+      lexemes.push(c)
       scanned = ''
       continue
     }
 
-    if (singleCharTokens.includes(c)) {
-      lexemes.push(scanned.slice(0, -1))
-      lexemes.push(c)
+    if (whitespace.includes(c) || i === source.length - 1) {
+      lexemes.push(scanned)
       scanned = ''
       continue
     }
@@ -70,7 +70,7 @@ export function parse(tokens: Tokens): BreakpointTree {
   for (const t of tokens) {
     if (!singleCharTokens.includes(t)) {
       if (level === 'val' && scope) {
-        scope.values.push(t)
+        t !== '}' && scope.values.push(t)
       } else {
         if (scope && expectMultiCondition) {
           scope.breakpoint += `,${t}`
@@ -129,7 +129,17 @@ function parseBreakpoint(bp: string): BreakpointSpecifier {
   })
 }
 
-export function toCss(selector: string, rule: string, tree: BreakpointTree) {
+/**
+ * Takes a selector, a rule, and a tree of breakpoints and returns a CSS string.
+ */
+export function toCss(
+  selector: string,
+  property: string,
+  tree: BreakpointTree,
+  valueTemplate: (value: string) => string = (v) => v,
+  styleTemplate: (property: string, values: string[]) => string = (p, vs) =>
+    `${p}: ${vs.join(' ')};`,
+) {
   let css = ''
   for (const bp of tree) {
     const bpSpecs =
@@ -142,7 +152,7 @@ export function toCss(selector: string, rule: string, tree: BreakpointTree) {
           `(${b.condition?.includes('<') ? 'max-width' : 'min-width'}: ${viewportBreakpoints[b.value] ?? b.value})`,
       )
       .join(' and ')
-    const mq = `@media ${query} {${selector}{${rule}: ${bp.values.map((v) => `var(--gds-sys-space-${v})`).join(' ')};}}`
+    const mq = `@media ${query} {${selector}{${styleTemplate(property, bp.values.map(valueTemplate))}}}`
     css += mq
   }
 

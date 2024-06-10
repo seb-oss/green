@@ -6,6 +6,7 @@ describe('style-expression-parser', () => {
     const expressions = [
       'xl',
       'xl s m 2xl',
+      'l{m}',
       'xl; 2xl { l }',
       'xl s s m; >s, <xl { s m }',
       'xl; >=s, <=xl { s m }',
@@ -15,6 +16,7 @@ describe('style-expression-parser', () => {
     const expected = [
       ['xl'],
       ['xl', 's', 'm', '2xl'],
+      ['l', '{', 'm', '}'],
       ['xl', ';', '2xl', '{', 'l', '}'],
       ['xl', 's', 's', 'm', ';', '>s', ',', '<xl', '{', 's', 'm', '}'],
       ['xl', ';', '>=s', ',', '<=xl', '{', 's', 'm', '}'],
@@ -94,9 +96,14 @@ describe('style-expression-parser', () => {
     ]
 
     expressions.forEach((expression, i) => {
-      expect(toCss('.test', 'padding', parse(tokenize(expression)))).to.equal(
-        expected[i],
-      )
+      expect(
+        toCss(
+          '.test',
+          'padding',
+          parse(tokenize(expression)),
+          (v) => `var(--gds-sys-space-${v})`,
+        ),
+      ).to.equal(expected[i])
     })
   })
 })
