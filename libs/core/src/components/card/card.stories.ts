@@ -99,7 +99,7 @@ export const CardElevation: Story = {
   ...DefaultParams,
   name: 'Elevation',
   render: (args) =>
-    html` <gds-card elevation="l:2xl m:2xl s:2xl" radius="l:2xl m:2xl s:2xl">
+    html` <gds-card elevation="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
       <gds-container
         padding="l:2xl m:2xl s:2xl"
         display="flex"
@@ -128,7 +128,7 @@ export const CardGrid: Story = {
   render: (args) =>
     html` <gds-grid columns="4">
       <gds-container span="2">
-        <gds-card elevation="l:2xl m:2xl s:2xl" radius="l:2xl m:2xl s:2xl">
+        <gds-card elevation="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
           <gds-container
             padding="l:2xl m:2xl s:2xl"
             display="flex"

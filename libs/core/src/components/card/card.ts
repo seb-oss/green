@@ -88,13 +88,13 @@ export class GdsCard extends GdsElement {
 
     if (propertyName === 'elevation') {
       if (this.elevation && !this.elevation.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.elevation})`
+        desktop = tablet = mobile = `var(--gds-elevation-${this.elevation})`
       } else {
         ;({ desktop, tablet, mobile } = processBreakpoints(
           l,
           m,
           s,
-          'sys-grid-gap',
+          'elevation',
         ))
       }
     }
