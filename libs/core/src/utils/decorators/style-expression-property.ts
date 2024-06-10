@@ -1,10 +1,11 @@
+import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { GdsElement } from 'src/gds-element'
 import { watch } from './watch'
 import { tokenize, parse, toCss } from '../helpers/style-expression-parser'
 
 export type StyleExpressionPropertyOptions = {
-  selector: string
+  selector?: string
   property?: string
 }
 
@@ -12,14 +13,14 @@ export type StyleExpressionPropertyOptions = {
  * todo
  */
 export function styleExpressionProperty(
-  options: StyleExpressionPropertyOptions,
+  options?: StyleExpressionPropertyOptions,
 ) {
   return <ElemClass extends GdsElement>(
     proto: ElemClass,
     descriptor: PropertyKey,
   ) => {
-    const sel = options.selector
-    const prop = options.property ?? String(descriptor)
+    const sel = options?.selector ?? String(':host')
+    const prop = options?.property ?? String(descriptor)
 
     // Jack into Lits property decorator
     property({ reflect: true })(proto, descriptor)
@@ -32,6 +33,10 @@ export function styleExpressionProperty(
         ;(this as any)[`__${String(descriptor)}_ast`] = ast
 
         console.log(css)
+        ;(this as GdsElement)._dynamicStylesController.inject(
+          `sep_${String(descriptor)}`,
+          unsafeCSS(css),
+        )
       },
     })
   }
