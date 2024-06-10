@@ -118,7 +118,8 @@ export const CardElevation: Story = {
 export const CardBackground: Story = {
   ...DefaultParams,
   name: 'Background',
-  render: (args) => html` <gds-card> Background </gds-card>`,
+  render: (args) =>
+    html` <gds-card background="grey-70"> Background </gds-card>`,
 }
 
 export const CardGrid: Story = {

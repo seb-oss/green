@@ -51,6 +51,7 @@ export class GdsCard extends GdsElement {
     super.connectedCallback()
     this._updateElevationVariables()
     this._updateRadiusVariables()
+    this._updateBackgroundVariables()
   }
 
   private _updateCSSVariables(
@@ -72,16 +73,15 @@ export class GdsCard extends GdsElement {
 
     const { l, m, s } = match?.groups || {}
 
-    const processBreakpoints = (l?: string, m?: string, s?: string) => {
-      const desktop = l
-        ? `var(--gds-sys-grid-gap-${l.split(':')[1]})`
-        : undefined
-      const tablet = m
-        ? `var(--gds-sys-grid-gap-${m.split(':')[1]})`
-        : undefined
-      const mobile = s
-        ? `var(--gds-sys-grid-gap-${s.split(':')[1]})`
-        : undefined
+    const processBreakpoints = (
+      l?: string,
+      m?: string,
+      s?: string,
+      token?: string,
+    ) => {
+      const desktop = l ? `var(--gds-${token}-${l.split(':')[1]})` : undefined
+      const tablet = m ? `var(--gds-${token}-${m.split(':')[1]})` : undefined
+      const mobile = s ? `var(--gds-${token}-${s.split(':')[1]})` : undefined
 
       return { desktop, tablet, mobile }
     }
@@ -90,15 +90,38 @@ export class GdsCard extends GdsElement {
       if (this.elevation && !this.elevation.includes(' ')) {
         desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.elevation})`
       } else {
-        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+        ;({ desktop, tablet, mobile } = processBreakpoints(
+          l,
+          m,
+          s,
+          'sys-grid-gap',
+        ))
       }
     }
 
     if (propertyName === 'radius') {
       if (this.radius && !this.radius.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-sys-grid-gap-${this.radius})`
+        desktop = tablet = mobile = `var(--gds-sys-radii-${this.radius})`
       } else {
-        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s))
+        ;({ desktop, tablet, mobile } = processBreakpoints(
+          l,
+          m,
+          s,
+          'sys-radii',
+        ))
+      }
+    }
+
+    if (propertyName === 'background') {
+      if (this.background && !this.background.includes(' ')) {
+        desktop = tablet = mobile = `var(--gds-ref-color-${this.background})`
+      } else {
+        ;({ desktop, tablet, mobile } = processBreakpoints(
+          l,
+          m,
+          s,
+          'ref-color',
+        ))
       }
     }
 
@@ -143,6 +166,11 @@ export class GdsCard extends GdsElement {
   @watch('radius')
   private _updateRadiusVariables() {
     this._updateCSSVariables('radius', 'radius')
+  }
+
+  @watch('background')
+  private _updateBackgroundVariables() {
+    this._updateCSSVariables('background', 'background')
   }
 
   render() {
