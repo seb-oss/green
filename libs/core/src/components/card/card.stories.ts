@@ -106,11 +106,8 @@ export const CardElevation: Story = {
           display="flex"
           align="center"
           justify="center"
-          gap="2xl"
-          row-gap="2xl"
-          direction="column"
         >
-          <div>Example One</div>
+          XS
         </gds-container>
       </gds-card>
       <gds-card elevation="l:s m:s s:s" radius="l:s m:s s:s">
@@ -119,11 +116,8 @@ export const CardElevation: Story = {
           display="flex"
           align="center"
           justify="center"
-          gap="2xl"
-          row-gap="2xl"
-          direction="column"
         >
-          <div>Example One</div>
+          S
         </gds-container>
       </gds-card>
       <gds-card elevation="l:m m:m s:m" radius="l:s m:s s:s">
@@ -132,11 +126,8 @@ export const CardElevation: Story = {
           display="flex"
           align="center"
           justify="center"
-          gap="2xl"
-          row-gap="2xl"
-          direction="column"
         >
-          <div>Example One</div>
+          M
         </gds-container>
       </gds-card>
       <gds-card elevation="l:l m:l s:l" radius="l:s m:s s:s">
@@ -145,11 +136,8 @@ export const CardElevation: Story = {
           display="flex"
           align="center"
           justify="center"
-          gap="2xl"
-          row-gap="2xl"
-          direction="column"
         >
-          <div>Example One</div>
+          L
         </gds-container>
       </gds-card>
       <gds-card elevation="l:xl m:xl s:xl" radius="l:s m:s s:s">
@@ -158,11 +146,8 @@ export const CardElevation: Story = {
           display="flex"
           align="center"
           justify="center"
-          gap="2xl"
-          row-gap="2xl"
-          direction="column"
         >
-          <div>Example One</div>
+          XL
         </gds-container>
       </gds-card>
     </gds-grid>`,
