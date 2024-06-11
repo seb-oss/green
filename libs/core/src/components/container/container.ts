@@ -66,6 +66,8 @@ export class GdsCard extends GdsElement {
     this._updateDirectionVariables()
     this._updateDisplayVariables()
     this._updateSpanVariables()
+    this._updateAlignVariables()
+    this._updateJustifyVariables()
   }
 
   private _updateCSSVariables(
@@ -219,6 +221,16 @@ export class GdsCard extends GdsElement {
   @watch('display')
   private _updateDisplayVariables() {
     this._updateCSSVariables('display', 'display')
+  }
+
+  @watch('align')
+  private _updateAlignVariables() {
+    this._updateCSSVariables('align', 'align')
+  }
+
+  @watch('justify')
+  private _updateJustifyVariables() {
+    this._updateCSSVariables('justify', 'justify')
   }
 
   @watch('direction')

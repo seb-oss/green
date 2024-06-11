@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/grid/index.js'
+import '../../../../../dist/libs/core/src/components/button/index.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
 import { html } from 'lit'
 
 /**
@@ -79,7 +81,20 @@ const DefaultParams: Story = {
 export const Card: Story = {
   ...DefaultParams,
   name: 'Basic Card',
-  render: (args) => html` <gds-card> Defaults </gds-card>`,
+  render: (args) =>
+    html` <gds-card elevation="l:m m:m s:m" radius="l:xs m:xs s:xs">
+      <gds-container
+        padding="l:2xl m:2xl s:2xl"
+        display="flex"
+        align="center"
+        justify="center"
+        gap="xl"
+      >
+        <span>Default</span> <gds-icon-arrow-down></gds-icon-arrow-down>
+
+        <gds-button>Button</gds-button>
+      </gds-container>
+    </gds-card>`,
 }
 
 export const CardBorder: Story = {

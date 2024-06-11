@@ -13,7 +13,7 @@ const style = css`
       display: var(--_display-desktop);
       gap: var(--_gap-desktop);
       row-gap: var(--_row-gap-desktop);
-      align-content: var(--_align-desktop);
+      align-items: var(--_align-desktop);
       justify-content: var(--_justify-desktop, center);
       flex-direction: var(--_direction-desktop);
       grid-column-start: span var(--_span-desktop);
