@@ -112,15 +112,32 @@ export class GdsCard extends GdsElement {
       }
     }
 
+    /*  
+    --gds-sys-color-container-container: #F3F3F2;
+    --gds-sys-color-container-container-dim1: #E7E7E4;
+    --gds-sys-color-container-container-dim2: #DADAD7;
+    --gds-sys-color-container-container-bright: #FFFFFF;
+    --gds-sys-color-container-container-shade1: #353531;
+    --gds-sys-color-container-container-shade2: #1B1B18;
+    --gds-sys-color-container-container-shade3: #353531;
+    --gds-sys-color-container-container-disabled: #F9F9F9;
+    --gds-sys-color-container-container-positive: #006D31;
+    --gds-sys-color-container-container-negative: #BA1D00;
+    --gds-sys-color-container-container-negative-bright: #FFEDE9;
+     */
+
     if (propertyName === 'background') {
       if (this.background && !this.background.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-ref-color-${this.background})`
+        desktop =
+          tablet =
+          mobile =
+            `var(--gds-sys-color-container-container-${this.background})`
       } else {
         ;({ desktop, tablet, mobile } = processBreakpoints(
           l,
           m,
           s,
-          'ref-color',
+          'sys-color-container-container',
         ))
       }
     }

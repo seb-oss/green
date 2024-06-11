@@ -4,6 +4,7 @@ import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/grid/index.js'
 import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
 import { html } from 'lit'
 
 /**
@@ -92,7 +93,10 @@ export const Card: Story = {
       >
         <span>Default</span> <gds-icon-arrow-down></gds-icon-arrow-down>
 
-        <gds-button>Button</gds-button>
+        <gds-button>
+          Button
+          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+        </gds-button>
       </gds-container>
     </gds-card>`,
 }
