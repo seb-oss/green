@@ -33,7 +33,7 @@ const DefaultParams: Story = {
     padding: {
       control: {
         type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
+        value: { l: '{xs}', m: '{xs}', s: '{xs}' },
         options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
       },
     },
@@ -85,7 +85,7 @@ export const Card: Story = {
   render: (args) =>
     html` <gds-card shadow="l:m m:m s:m" radius="l:xs m:xs s:xs">
       <gds-container
-        padding="l:2xl m:2xl s:2xl"
+        padding="s{xs} m{l} l{2xl}"
         display="flex"
         align="center"
         justify="center"
@@ -121,7 +121,7 @@ export const Cardshadow: Story = {
     html`<gds-grid columns="5" gap="xl">
       <gds-card shadow="l:xs m:xs s:xs" radius="l:s m:s s:s">
         <gds-container
-          padding="l:2xl m:2xl s:2xl"
+          padding="s{xs} m{l} l{2xl}"
           display="flex"
           align="center"
           justify="center"
@@ -131,7 +131,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card shadow="l:s m:s s:s" radius="l:s m:s s:s">
         <gds-container
-          padding="l:2xl m:2xl s:2xl"
+          padding="s{xs} m{l} l{2xl}"
           display="flex"
           align="center"
           justify="center"
@@ -141,7 +141,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card shadow="l:m m:m s:m" radius="l:s m:s s:s">
         <gds-container
-          padding="l:2xl m:2xl s:2xl"
+          padding="s{xs} m{l} l{2xl}"
           display="flex"
           align="center"
           justify="center"
@@ -151,7 +151,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card shadow="l:l m:l s:l" radius="l:s m:s s:s">
         <gds-container
-          padding="l:2xl m:2xl s:2xl"
+          padding="s{xs} m{l} l{2xl}"
           display="flex"
           align="center"
           justify="center"
@@ -161,7 +161,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card shadow="l:xl m:xl s:xl" radius="l:s m:s s:s">
         <gds-container
-          padding="l:2xl m:2xl s:2xl"
+          padding="s{xs} m{l} l{2xl}"
           display="flex"
           align="center"
           justify="center"
@@ -184,10 +184,10 @@ export const CardGrid: Story = {
   name: 'Using with Grid',
   render: (args) =>
     html` <gds-grid columns="4">
-      <gds-container span="2">
+      <gds-container column="2 / -1">
         <gds-card shadow="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
           <gds-container
-            padding="l:2xl m:2xl s:2xl"
+            padding="s{xs} m{l} l{2xl}"
             display="flex"
             align="center"
             justify="center"
