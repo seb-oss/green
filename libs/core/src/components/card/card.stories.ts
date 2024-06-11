@@ -51,7 +51,7 @@ const DefaultParams: Story = {
         options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
       },
     },
-    elevation: {
+    shadow: {
       control: {
         type: 'object',
         value: { l: '2xl', m: 'l', s: 'xs' },
@@ -83,7 +83,7 @@ export const Card: Story = {
   ...DefaultParams,
   name: 'Basic Card',
   render: (args) =>
-    html` <gds-card elevation="l:m m:m s:m" radius="l:xs m:xs s:xs">
+    html` <gds-card shadow="l:m m:m s:m" radius="l:xs m:xs s:xs">
       <gds-container
         padding="l:2xl m:2xl s:2xl"
         display="flex"
@@ -114,12 +114,12 @@ export const CardRadius: Story = {
     html` <gds-card radius="l:2xl m:2xl s:2xl"> Border Radius </gds-card>`,
 }
 
-export const CardElevation: Story = {
+export const Cardshadow: Story = {
   ...DefaultParams,
-  name: 'Elevation',
+  name: 'shadow',
   render: (args) =>
     html`<gds-grid columns="5" gap="xl">
-      <gds-card elevation="l:xs m:xs s:xs" radius="l:s m:s s:s">
+      <gds-card shadow="l:xs m:xs s:xs" radius="l:s m:s s:s">
         <gds-container
           padding="l:2xl m:2xl s:2xl"
           display="flex"
@@ -129,7 +129,7 @@ export const CardElevation: Story = {
           XS
         </gds-container>
       </gds-card>
-      <gds-card elevation="l:s m:s s:s" radius="l:s m:s s:s">
+      <gds-card shadow="l:s m:s s:s" radius="l:s m:s s:s">
         <gds-container
           padding="l:2xl m:2xl s:2xl"
           display="flex"
@@ -139,7 +139,7 @@ export const CardElevation: Story = {
           S
         </gds-container>
       </gds-card>
-      <gds-card elevation="l:m m:m s:m" radius="l:s m:s s:s">
+      <gds-card shadow="l:m m:m s:m" radius="l:s m:s s:s">
         <gds-container
           padding="l:2xl m:2xl s:2xl"
           display="flex"
@@ -149,7 +149,7 @@ export const CardElevation: Story = {
           M
         </gds-container>
       </gds-card>
-      <gds-card elevation="l:l m:l s:l" radius="l:s m:s s:s">
+      <gds-card shadow="l:l m:l s:l" radius="l:s m:s s:s">
         <gds-container
           padding="l:2xl m:2xl s:2xl"
           display="flex"
@@ -159,7 +159,7 @@ export const CardElevation: Story = {
           L
         </gds-container>
       </gds-card>
-      <gds-card elevation="l:xl m:xl s:xl" radius="l:s m:s s:s">
+      <gds-card shadow="l:xl m:xl s:xl" radius="l:s m:s s:s">
         <gds-container
           padding="l:2xl m:2xl s:2xl"
           display="flex"
@@ -185,7 +185,7 @@ export const CardGrid: Story = {
   render: (args) =>
     html` <gds-grid columns="4">
       <gds-container span="2">
-        <gds-card elevation="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
+        <gds-card shadow="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
           <gds-container
             padding="l:2xl m:2xl s:2xl"
             display="flex"

@@ -25,6 +25,9 @@ const DefaultParams: Story = {
     controls: { expanded: true },
   },
   args: {
+    gap: 'l',
+    padding: 's',
+    columns: '4',
     innerHTML: `<div class="exampleCell">COL: 01</div>
 <div class="exampleCell">COL: 02</div>
 <div class="exampleCell">COL: 03</div>

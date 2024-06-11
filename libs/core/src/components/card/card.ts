@@ -28,8 +28,8 @@ export class GdsCard extends GdsElement {
     delegatesFocus: true,
   }
 
-  @property({ attribute: 'elevation', type: String })
-  elevation?: string
+  @property({ attribute: 'shadow', type: String })
+  shadow?: string
 
   @property({ attribute: 'radius', type: String })
   radius?: string
@@ -49,7 +49,7 @@ export class GdsCard extends GdsElement {
    */
   connectedCallback() {
     super.connectedCallback()
-    this._updateElevationVariables()
+    this._updateshadowVariables()
     this._updateRadiusVariables()
     this._updateBackgroundVariables()
   }
@@ -86,16 +86,11 @@ export class GdsCard extends GdsElement {
       return { desktop, tablet, mobile }
     }
 
-    if (propertyName === 'elevation') {
-      if (this.elevation && !this.elevation.includes(' ')) {
-        desktop = tablet = mobile = `var(--gds-elevation-${this.elevation})`
+    if (propertyName === 'shadow') {
+      if (this.shadow && !this.shadow.includes(' ')) {
+        desktop = tablet = mobile = `var(--gds-shadow-${this.shadow})`
       } else {
-        ;({ desktop, tablet, mobile } = processBreakpoints(
-          l,
-          m,
-          s,
-          'elevation',
-        ))
+        ;({ desktop, tablet, mobile } = processBreakpoints(l, m, s, 'shadow'))
       }
     }
 
@@ -172,12 +167,12 @@ export class GdsCard extends GdsElement {
   }
 
   #gridVariables = {
-    // varsElevation: css``,
+    // varsshadow: css``,
   }
 
-  @watch('elevation')
-  private _updateElevationVariables() {
-    this._updateCSSVariables('elevation', 'elevation')
+  @watch('shadow')
+  private _updateshadowVariables() {
+    this._updateCSSVariables('shadow', 'shadow')
   }
 
   @watch('radius')
