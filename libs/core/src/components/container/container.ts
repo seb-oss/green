@@ -54,12 +54,14 @@ export class GdsContainer extends GdsElement {
   })
   direction?: string
 
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
   @styleExpressionProperty({
     property: 'grid-column',
     valueTemplate: (v) => `${v}`,
   })
   column?: string
 
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
   @styleExpressionProperty({
     property: 'grid-row',
     valueTemplate: (v) => `${v}`,
