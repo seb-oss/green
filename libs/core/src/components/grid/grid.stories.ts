@@ -69,7 +69,11 @@ export const Basic: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="l:8 m:4 s:2" gap="l:l m:m s:s" padding="l:2xl m:l s:xs">
+    <gds-grid
+      columns="s{2} m{4} l{8}"
+      gap="s{s} m{m} l{l}"
+      padding="s{xs} m{l} l{2xl}"
+    >
       <div class="exampleCell">COL: 01</div>
       <div class="exampleCell">COL: 02</div>
       <div class="exampleCell">COL: 03</div>
@@ -89,13 +93,7 @@ export const AllBreakpoints: Story = {
   ...DefaultParams,
   name: 'Example: All breakpoints + Auto Columns',
   render: (args) => html`
-    <gds-grid
-      columns="4"
-      gap="l:2xl m:2xl s:2xl"
-      row-gap="l:2xl m:2xl s:2xl"
-      padding="l"
-      auto-columns="100"
-    >
+    <gds-grid columns="4" gap="2xl" padding="l" auto-columns="100">
       <div class="exampleCell">COL: 01</div>
       <div class="exampleCell">COL: 02</div>
       <div class="exampleCell">COL: 03</div>
