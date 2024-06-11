@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/icon/icons/index.js'
-import '../../../../../dist/libs/core/src/components/grid/index.js'
+import './icons/index.ts'
+import '../grid/index.ts'
 import { html } from 'lit'
 import './icon.stories.css'
 /**

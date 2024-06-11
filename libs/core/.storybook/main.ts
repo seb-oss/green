@@ -1,11 +1,16 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import defaultConfig from '../../../.storybook/main'
+//import defaultConfig from '../../../.storybook/main'
 import type { StorybookConfig } from '@storybook/web-components-webpack5'
 
 const config: StorybookConfig = {
-  ...defaultConfig,
+  //...defaultConfig,
+  stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-docs'],
+  core: {
+    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+  },
   framework: {
-    name: '@storybook/web-components-webpack5',
+    name: '@storybook/web-components-vite',
     options: {},
   },
   previewHead: (head) => `

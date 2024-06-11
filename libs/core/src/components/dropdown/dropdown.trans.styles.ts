@@ -1,5 +1,5 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './dropdown.trans.styles.scss'
+import styles from './dropdown.trans.styles.scss?inline'
 
 import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
 import * as Popover from '../popover/popover.trans.styles'

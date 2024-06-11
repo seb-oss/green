@@ -10,7 +10,7 @@ import { TransitionalStyles } from '../../transitional-styles'
 import '../../primitives/ripple'
 
 import { tokens } from '../../tokens.style'
-import style from './button.style.css'
+import style from './button.style.css?inline'
 
 import { gdsCustomElement, html as customElementHtml } from '../../scoping'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
