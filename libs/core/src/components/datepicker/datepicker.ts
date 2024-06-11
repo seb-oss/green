@@ -498,7 +498,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    this._elTrigger.then((field) => {
+    this._elField.then((field) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       e.clipboardData?.setData('text/plain', this.displayValue)
@@ -506,7 +506,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardPaste = (e: ClipboardEvent) => {
-    this._elTrigger.then((field: HTMLElement) => {
+    this._elField.then((field: HTMLElement) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       const pasted = e.clipboardData?.getData('text/plain')

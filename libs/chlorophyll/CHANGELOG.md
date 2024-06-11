@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.0
+
+### Minor Changes
+
+- 0afe58f: **Breadcrumbs:** Added new component
+
 ## 3.3.6
 
 ### Patch Changes
