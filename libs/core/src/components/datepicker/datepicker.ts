@@ -354,6 +354,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             size="small"
             @click=${() => {
               this.value = undefined
+              this.open = false
               this.#dispatchChangeEvent()
             }}
           >
@@ -364,8 +365,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             rank="tertiary"
             size="small"
             @click=${() => {
-              this.value = new Date()
-              this.#dispatchChangeEvent()
+              this.#focusDate(new Date())
             }}
           >
             ${msg('Today')}
