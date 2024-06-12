@@ -71,6 +71,10 @@ jobs:
         if: steps.has_storybooks.outputs.files_exists == 'true'
         run: echo ${{ github.event.number }} > ./dist/storybook/PR_NUMBER
 
+      - name: Add `.nojekyll` file
+        if: steps.has_storybooks.outputs.files_exists == 'true'
+        run: touch ./dist/storybook/.nojekyll
+
       - name: Upload Artifact
         if: steps.has_storybooks.outputs.files_exists == 'true'
         uses: actions/upload-artifact@v2
