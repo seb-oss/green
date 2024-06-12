@@ -1,5 +1,5 @@
 ---
-"@sebgroup/green-core": patch
+'@sebgroup/green-core': patch
 ---
 
-**Datepicker:** Fix inconsistent behavior of calendar footer buttons
+**Datepicker:** Fix inconsistent behavior of calendar footer buttons. Fixes #1418
