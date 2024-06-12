@@ -1,4 +1,4 @@
-import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
+import { TransitionalStyles } from '../../transitional-styles'
 import chlorophyllTokens from './chlorophyll-tokens.scss?inline'
 
 export function register() {
