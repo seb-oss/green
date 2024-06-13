@@ -354,6 +354,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             size="small"
             @click=${() => {
               this.value = undefined
+              this.open = false
               this.#dispatchChangeEvent()
             }}
           >
@@ -364,8 +365,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             rank="tertiary"
             size="small"
             @click=${() => {
-              this.value = new Date()
-              this.#dispatchChangeEvent()
+              this.#focusDate(new Date())
             }}
           >
             ${msg('Today')}
@@ -512,8 +512,22 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       const pasted = e.clipboardData?.getData('text/plain')
       if (!pasted) return
 
-      const pastedDate = new Date(pasted)
-      if (pastedDate.toString() === 'Invalid Date') return
+      let pastedDate = new Date(pasted)
+      if (pastedDate.toString() === 'Invalid Date') {
+        // Try to parse the date with the dateformat
+        const parts = pasted.split(this._dateFormatLayout.delimiter)
+        if (parts.length === 3) {
+          const layout = this._dateFormatLayout.layout
+          const year = parseInt(parts[layout.findIndex((f) => f.token === 'y')])
+          const month =
+            parseInt(parts[layout.findIndex((f) => f.token === 'm')]) - 1
+          const day = parseInt(parts[layout.findIndex((f) => f.token === 'd')])
+          if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+            pastedDate = new Date(`${year}-${month + 1}-${day}`)
+          }
+        }
+        if (pastedDate.toString() === 'Invalid Date') return
+      }
 
       this.value = pastedDate
       this.#dispatchChangeEvent()
@@ -605,7 +619,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
-   * Takes a dateformat string from the dateformat attribute and turnes it to a DateFormatLayout object used in rendering the template.
+   * Takes a dateformat string from the dateformat attribute and turns it to a DateFormatLayout object used in rendering the template.
    */
   #parseDateFormat(dateformat: string): DateFormatLayout {
     const delimiter = dateformat.replace(/[a-z0-9]/gi, '')[0]
