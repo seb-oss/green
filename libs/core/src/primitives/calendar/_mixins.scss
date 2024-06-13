@@ -171,13 +171,22 @@ $weekend-background: $background;
           &.sg-date-holiday {
             color: $disabled-weekend-color;
           }
+          .number,
+          .indicator-dot {
+            --_color: #{$disabled-color} !important;
+          }
         }
 
         &.custom-date {
           position: relative;
         }
       }
-      .indicator_dot {
+
+      .number {
+        color: var(--_color, 'currentColor');
+      }
+
+      .indicator-dot {
         display: block;
         width: 0.375rem;
         height: 0.375rem;
@@ -187,6 +196,7 @@ $weekend-background: $background;
         position: absolute;
         inset-block-end: 0.125rem;
         inset-inline: 0;
+        background-color: var(--_color);
       }
     }
   }
