@@ -1,6 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping'
+// import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 @customElement('calendar-example')
 export class CalendarExample extends LitElement {
@@ -10,6 +11,7 @@ export class CalendarExample extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
+    // registerTransitionalStyles()
   }
 
   @state()

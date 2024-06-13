@@ -19,7 +19,7 @@ export class CardExample extends LitElement {
           <gds-grid columns="2" gap="xl">
             <gds-container position="relative">
               <gds-img
-                ratio="9/16"
+                ratio="2/2.4"
                 src="./assets/cards.jpg"
                 alt="Cards"
                 fit="cover"
@@ -47,12 +47,25 @@ export class CardExample extends LitElement {
                   display="flex"
                   direction="column"
                   padding="s{xs} m{l} l{2xl}"
-                  align="flex-start"
+                  align="stretch"
                   justify="center"
                   height="100%"
                 >
                   <h1>Login</h1>
-                  <gds-container> </gds-container>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                  <gds-container
+                    display="flex"
+                    direction="column"
+                    gap="s"
+                    align="stretch"
+                  >
+                    <input type="text" placeholder="Username" />
+                    <input type="password" placeholder="Password" />
+                  </gds-container>
                   <gds-container
                     display="flex"
                     direction="row"
