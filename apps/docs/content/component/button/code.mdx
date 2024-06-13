@@ -12,9 +12,7 @@ date: 2023-12-22
 
 The defaut button har the prio primary and is the variant normal.
 
-<Pattern height="250">
-  <gds-button>Send payment</gds-button>
-</Pattern>
+<Story component='button' id="basic" />
 
 ```html
 <gds-button>Send payment</gds-button>
@@ -24,13 +22,16 @@ The defaut button har the prio primary and is the variant normal.
 
 Buttons exist in three different prios, Primary, Secondary and Tertiary
 
-<Pattern height="250">
+<Story component='button' id="ranks-and-variants" />
+{/* <Story height="400" src='https://storybook.seb.io/latest/core/iframe.html?viewMode=story&id=components-button--ranks-and-variants' /> */}
+
+{/* <Pattern height="250">
   <Grid columns="3" contentInline="auto" justify="center">
     <gds-button variant="primary">Send payment</gds-button>
     <gds-button variant="secondary">Cancel</gds-button>
     <gds-button variant="tertiary">More</gds-button>
   </Grid>
-</Pattern>
+</Pattern> */}
 
 ```html
 <gds-button prio="primary">Send payment</gds-button>
