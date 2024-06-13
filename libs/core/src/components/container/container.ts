@@ -37,6 +37,24 @@ export class GdsContainer extends GdsElement {
   display?: string
 
   @styleExpressionProperty({
+    property: 'position',
+    valueTemplate: (v) => v,
+  })
+  position?: string
+
+  @styleExpressionProperty({
+    property: 'inset',
+    valueTemplate: (v) => v,
+  })
+  inset?: string
+
+  @styleExpressionProperty({
+    property: 'overflow',
+    valueTemplate: (v) => v,
+  })
+  overflow?: string
+
+  @styleExpressionProperty({
     property: 'align-items',
     valueTemplate: (v) => v,
   })
@@ -67,6 +85,36 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => `${v}`,
   })
   row?: string
+
+  @styleExpressionProperty({
+    property: 'backdrop-filter',
+    valueTemplate: (v) => `blur(${v})`,
+  })
+  filter?: string
+
+  @styleExpressionProperty({
+    property: 'border-radius',
+    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
+  })
+  radius?: string
+
+  @styleExpressionProperty({
+    property: 'background',
+    valueTemplate: (v) => v,
+  })
+  background?: string
+
+  @styleExpressionProperty({
+    property: 'color',
+    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
+  })
+  color?: string
+
+  @styleExpressionProperty({
+    property: 'height',
+    valueTemplate: (v) => v,
+  })
+  height?: string
 
   render() {
     return html`<slot></slot>`
