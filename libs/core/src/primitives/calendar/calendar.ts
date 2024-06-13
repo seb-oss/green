@@ -225,9 +225,9 @@ export class GdsCalendar extends GdsElement {
 
                     // Establish final disabled state
                     const isDisabled =
-                      customization.disabled ||
-                      isOutsideCurrentMonth ||
-                      (this.disabledWeekends && isWeekend)
+                      (customization.disabled ||
+                        (this.disabledWeekends && isWeekend)) &&
+                      isOutsideCurrentMonth
 
                     return html`
                       <td
