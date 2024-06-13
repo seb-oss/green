@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.22.5
+
+### Patch Changes
+
+- d4f2411: **Popover:** Fix wrong close reason when internal dialog was closed natively
+- d4f2411: **Datepicker:** Make sure pasted dates that match `dateformat` is accepted and parsed correctly. Fixes #1231
+- d4f2411: **Datepicker:** Fix inconsistent behavior of calendar footer buttons. Fixes #1418
+
 ## 1.22.4
 
 ### Patch Changes
