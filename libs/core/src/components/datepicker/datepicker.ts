@@ -520,21 +520,26 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       const pasted = e.clipboardData?.getData('text/plain')
       if (!pasted) return
 
-      let pastedDate = new Date(pasted)
-      if (pastedDate.toString() === 'Invalid Date') {
-        // Try to parse the date with the dateformat
-        const parts = pasted.split(this._dateFormatLayout.delimiter)
-        if (parts.length === 3) {
-          const layout = this._dateFormatLayout.layout
-          const year = parseInt(parts[layout.findIndex((f) => f.token === 'y')])
-          const month =
-            parseInt(parts[layout.findIndex((f) => f.token === 'm')]) - 1
-          const day = parseInt(parts[layout.findIndex((f) => f.token === 'd')])
-          if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-            pastedDate = new Date(`${year}-${month + 1}-${day}`)
-          }
+      let pastedDate = new Date('-')
+      let invalid = 'Invalid Date'
+
+      // Try to parse the date with the dateformat
+      const parts = pasted.split(this._dateFormatLayout.delimiter)
+      if (parts.length === 3) {
+        const layout = this._dateFormatLayout.layout
+        const year = parseInt(parts[layout.findIndex((f) => f.token === 'y')])
+        const month =
+          parseInt(parts[layout.findIndex((f) => f.token === 'm')]) - 1
+        const day = parseInt(parts[layout.findIndex((f) => f.token === 'd')])
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+          pastedDate = new Date(`${year}-${month + 1}-${day}`)
         }
-        if (pastedDate.toString() === 'Invalid Date') return
+      }
+      if (pastedDate.toString() === invalid) {
+        pastedDate = new Date(pasted)
+        if (pastedDate.toString() === invalid) {
+          return
+        }
       }
 
       this.value = pastedDate
