@@ -521,7 +521,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       if (!pasted) return
 
       let pastedDate = new Date('-')
-      let invalid = 'Invalid Date'
+      const invalid = 'Invalid Date'
 
       // Try to parse the date with the dateformat
       const parts = pasted.split(this._dateFormatLayout.delimiter)
