@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.6
+
+### Patch Changes
+
+- af2773e: **Calendar:** Fix disabled dates styling when used with customization
+
 ## 1.22.5
 
 ### Patch Changes
