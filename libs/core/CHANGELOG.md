@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.22.7
+
+### Patch Changes
+
+- 65f60aa: **Datepicker:** Fix incorrect parsing of pasted dates in some cases
+- 65f60aa: **Datepicker:** Call `register()` on Button transiational style, since Button is used internally in Datepicker
+- 65f60aa: **Datepicker:** Prevent propagation of click events in footer buttons, which would sometimes incorrectly close modal
+
 ## 1.22.6
 
 ### Patch Changes
