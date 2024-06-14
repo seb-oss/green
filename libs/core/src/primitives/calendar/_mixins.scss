@@ -69,14 +69,12 @@ $weekend-background: $background;
     border-spacing: 0;
   }
 
-  tr {
-    th,
-    td {
-      box-sizing: border-box;
-      height: 2.75rem;
-      text-align: center;
-      width: 2.75rem;
-    }
+  th,
+  td {
+    box-sizing: border-box;
+    height: 2.75rem;
+    text-align: center;
+    width: 2.75rem;
   }
 
   thead {
