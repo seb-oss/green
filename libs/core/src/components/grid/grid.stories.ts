@@ -179,6 +179,6 @@ export const AutoColumns: Story = {
  * | S        | mobile     | 425px  |
  */
 export const Sizes: Story = {
-  ...DefaultParams,
-  render: () => html``,
+  // ...DefaultParams,
+  // render: ,
 }

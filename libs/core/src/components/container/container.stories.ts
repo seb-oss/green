@@ -58,3 +58,23 @@ export const Card: Story = {
   name: 'Container',
   render: (args) => html` <gds-container> Container </gds-container>`,
 }
+
+export const CardGrid: Story = {
+  ...DefaultParams,
+  name: 'Using with Grid',
+  render: (args) =>
+    html` <gds-grid columns="4">
+      <gds-container column="2 / -1">
+        <gds-card shadow="s{xs} m{xs} l{s}" radius="xs">
+          <gds-container
+            padding="l{2xl} m{l} s{xs}"
+            display="flex"
+            align="center"
+            justify="center"
+          >
+            L
+          </gds-container>
+        </gds-card>
+      </gds-container>
+    </gds-grid>`,
+}

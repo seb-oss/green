@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
-import '../../../../../dist/libs/core/src/components/grid/index.js'
-import '../../../../../dist/libs/core/src/components/button/index.js'
+import '../../../../../dist/libs/core/src/components/text/index.js'
+// import '../../../../../dist/libs/core/src/components/grid/index.js'
+// import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
 import { html } from 'lit'
@@ -29,50 +30,7 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {
-    padding: {
-      control: {
-        type: 'object',
-        value: { l: '{xs}', m: '{xs}', s: '{xs}' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-    gap: {
-      control: {
-        type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-    'row-gap': {
-      control: {
-        type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-    shadow: {
-      control: {
-        type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-    border: {
-      control: {
-        type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-    radius: {
-      control: {
-        type: 'object',
-        value: { l: '2xl', m: 'l', s: 'xs' },
-        options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
-      },
-    },
-  },
+  argTypes: {},
 }
 
 /**
@@ -83,7 +41,7 @@ export const Card: Story = {
   ...DefaultParams,
   name: 'Basic Card',
   render: (args) =>
-    html` <gds-card shadow="l:m m:m s:m" radius="l:xs m:xs s:xs">
+    html` <gds-card shadow="s{xs} m{xs} l{s}" radius="m">
       <gds-container
         padding="s{xs} m{l} l{2xl}"
         display="flex"
@@ -116,10 +74,10 @@ export const CardRadius: Story = {
 
 export const Cardshadow: Story = {
   ...DefaultParams,
-  name: 'shadow',
+  name: 'Shadow',
   render: (args) =>
     html`<gds-grid columns="5" gap="xl">
-      <gds-card shadow="l:xs m:xs s:xs" radius="l:s m:s s:s">
+      <gds-card shadow="s{xs} m{xs} l{xs}" radius="xs">
         <gds-container
           padding="s{xs} m{l} l{2xl}"
           display="flex"
@@ -129,7 +87,7 @@ export const Cardshadow: Story = {
           XS
         </gds-container>
       </gds-card>
-      <gds-card shadow="l:s m:s s:s" radius="l:s m:s s:s">
+      <gds-card shadow="s{s} m{s} l{s}" radius="xs">
         <gds-container
           padding="s{xs} m{l} l{2xl}"
           display="flex"
@@ -139,7 +97,7 @@ export const Cardshadow: Story = {
           S
         </gds-container>
       </gds-card>
-      <gds-card shadow="l:m m:m s:m" radius="l:s m:s s:s">
+      <gds-card shadow="s{m} m{m} l{m}" radius="xs">
         <gds-container
           padding="s{xs} m{l} l{2xl}"
           display="flex"
@@ -149,7 +107,7 @@ export const Cardshadow: Story = {
           M
         </gds-container>
       </gds-card>
-      <gds-card shadow="l:l m:l s:l" radius="l:s m:s s:s">
+      <gds-card shadow="s{l} m{l} l{l}" radius="xs">
         <gds-container
           padding="s{xs} m{l} l{2xl}"
           display="flex"
@@ -159,7 +117,7 @@ export const Cardshadow: Story = {
           L
         </gds-container>
       </gds-card>
-      <gds-card shadow="l:xl m:xl s:xl" radius="l:s m:s s:s">
+      <gds-card shadow="s{xl} m{xl} l{xl}" radius="xs">
         <gds-container
           padding="s{xs} m{l} l{2xl}"
           display="flex"
@@ -183,20 +141,53 @@ export const CardGrid: Story = {
   ...DefaultParams,
   name: 'Using with Grid',
   render: (args) =>
-    html` <gds-grid columns="4">
-      <gds-container column="2 / -1">
-        <gds-card shadow="l:xl m:xl s:xl" radius="l:2xl m:2xl s:2xl">
+    html` <gds-grid columns="4" gap="xl">
+      <gds-container>
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
           <gds-container
-            padding="s{xs} m{l} l{2xl}"
             display="flex"
-            align="center"
-            justify="center"
-            gap="2xl"
-            row-gap="2xl"
+            gap="m"
             direction="column"
+            padding="s{xs} m{l} l{2xl}"
           >
-            <div>Example One</div>
-            <div>Example Two</div>
+            <h2>Sidebar</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <gds-button>Button</gds-button>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+      <gds-container column="2 / -1" row="1 / -1" display="flex">
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
+          <gds-container
+            display="flex"
+            padding="s{xs} m{l} l{2xl}"
+            direction="column"
+            align="flex-start"
+            justify="center"
+            gap="m"
+          >
+            <gds-text tag="h3">Span Columns</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+      <gds-container column="1 / -1">
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
+          <gds-container
+            display="flex"
+            padding="s{xs} m{l} l{2xl}"
+            direction="column"
+            align="flex-start"
+            justify="center"
+            gap="m"
+          >
+            Some other column
           </gds-container>
         </gds-card>
       </gds-container>

@@ -40,9 +40,6 @@ export class GdsCard extends GdsElement {
   @property({ attribute: 'border', type: String })
   border?: string
 
-  @property({ attribute: 'hovered', type: Boolean })
-  hovered?: boolean
-
   render() {
     return html`<slot></slot>`
   }
