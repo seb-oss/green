@@ -69,7 +69,74 @@ export const CardRadius: Story = {
   ...DefaultParams,
   name: 'Border Radius',
   render: (args) =>
-    html` <gds-card radius="l:2xl m:2xl s:2xl"> Border Radius </gds-card>`,
+    html`<gds-grid columns="6" gap="xl">
+      <gds-card radius="xs" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          XS
+        </gds-container>
+      </gds-card>
+      <gds-card radius="s" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          S
+        </gds-container>
+      </gds-card>
+      <gds-card radius="m" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          M
+        </gds-container>
+      </gds-card>
+      <gds-card radius="l" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          L
+        </gds-container>
+      </gds-card>
+      <gds-card radius="xl" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          XL
+        </gds-container>
+      </gds-card>
+      <gds-card radius="2xl" background="base800">
+        <gds-container
+          color="white-text"
+          padding="s{xs} m{l} l{2xl}"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          2XL
+        </gds-container>
+      </gds-card>
+    </gds-grid>`,
 }
 
 export const Cardshadow: Story = {
@@ -134,7 +201,76 @@ export const CardBackground: Story = {
   ...DefaultParams,
   name: 'Background',
   render: (args) =>
-    html` <gds-card background="grey-70"> Background </gds-card>`,
+    html`<gds-grid columns="4" gap="xl">
+      <gds-container>
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base100">
+          <gds-container
+            display="flex"
+            gap="l"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+          >
+            <gds-text tag="h3" size="headline-medium">Base 100</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+      <gds-container>
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base200">
+          <gds-container
+            display="flex"
+            gap="l"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+          >
+            <gds-text tag="h3" size="headline-medium">Base 200</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+      <gds-container>
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base300">
+          <gds-container
+            display="flex"
+            gap="l"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+          >
+            <gds-text tag="h3" size="headline-medium">Base 300</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+      <gds-container>
+        <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base400">
+          <gds-container
+            display="flex"
+            gap="l"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+          >
+            <gds-text tag="h3" size="headline-medium">Base 400</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-container>
+        </gds-card>
+      </gds-container>
+    </gds-grid>`,
 }
 
 export const CardGrid: Story = {

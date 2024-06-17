@@ -33,7 +33,7 @@ export class GdsCard extends GdsElement {
 
   @styleExpressionProperty({
     property: 'background',
-    valueTemplate: (v) => v,
+    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
   })
   background?: string
 
