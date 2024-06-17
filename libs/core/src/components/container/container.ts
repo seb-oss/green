@@ -116,6 +116,8 @@ export class GdsContainer extends GdsElement {
   })
   height?: string
 
+  // Border style and also width to apply to the border of the element using shorthand like border="0 1 2 3" nad then style will be applied to each side in order top right bottom left with defualt color
+
   render() {
     return html`<slot></slot>`
   }
