@@ -16,7 +16,25 @@ export class GdsText extends GdsElement {
   @property({ type: String })
   tag = 'p'
 
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+    styleTemplate: (prop, values) => {
+      const size = values[0]
+      return `font-size: var(--gds-sys-typography-size-${size}); line-height: var(--gds-sys-typography-line-height-${size});`
+    },
+  })
+  size?: string
+
+  @styleExpressionProperty()
+  margin?: string
+
+  createTag() {
+    const tag = document.createElement(this.tag)
+    tag.appendChild(document.createElement('slot'))
+    return tag
+  }
+
   render() {
-    return html`<${this.tag}><slot></slot></${this.tag}>`
+    return html`${this.createTag()}`
   }
 }

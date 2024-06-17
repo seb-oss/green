@@ -150,11 +150,11 @@ export const CardGrid: Story = {
             direction="column"
             padding="s{xs} m{l} l{2xl}"
           >
-            <h2>Sidebar</h2>
-            <p>
+            <gds-text tag="h3" size="headline-medium">Span Columns</gds-text>
+            <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            </gds-text>
             <gds-button>Button</gds-button>
           </gds-container>
         </gds-card>
@@ -169,9 +169,13 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            <gds-text tag="h3">Span Columns</gds-text>
+            <gds-text tag="h3" size="headline-medium">Span Columns</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-text tag="h2" size="body-medium"
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
           </gds-container>
