@@ -1,5 +1,5 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './datepicker.trans.styles.scss'
+import styles from './datepicker.trans.styles.scss?inline'
 
 import * as Dropdown from '../dropdown/dropdown.trans.styles'
 import * as Popover from '../popover/popover.trans.styles'

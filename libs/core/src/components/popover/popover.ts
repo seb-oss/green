@@ -173,9 +173,8 @@ export class GdsPopover extends GdsElement {
     this._handleOpenChange()
 
     this.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        this.open = false
-        this.#dispatchUiStateEvent('cancel')
+      if (e.key === 'Escape' && this.open) {
+        this.#handleCancel()
         e.stopPropagation()
         e.preventDefault()
       }
@@ -213,7 +212,7 @@ export class GdsPopover extends GdsElement {
             'use-modal-in-mobile': this.useModalInMobileView,
           })}"
           aria-hidden="${String(!this.open)}"
-          @close=${() => (this.open = false)}
+          @close=${() => this.open && this.#handleCancel()}
         >
           <header>
             <h2>${this.label}</h2>
@@ -254,6 +253,11 @@ export class GdsPopover extends GdsElement {
         this._elDialog?.removeEventListener('click', this.#handleClickOutside)
       }
     })
+  }
+
+  #handleCancel = () => {
+    this.open = false
+    this.#dispatchUiStateEvent('cancel')
   }
 
   #dispatchUiStateEvent = (reason: 'show' | 'close' | 'cancel') => {
@@ -380,9 +384,8 @@ export class GdsPopover extends GdsElement {
       this.open = true
       this.#dispatchUiStateEvent('show')
     }
-    if (e.key === 'Escape') {
-      this.open = false
-      this.#dispatchUiStateEvent('cancel')
+    if (e.key === 'Escape' && this.open) {
+      this.#handleCancel()
     }
   }
 

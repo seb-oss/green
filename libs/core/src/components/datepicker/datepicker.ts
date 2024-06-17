@@ -352,8 +352,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-button
             rank="tertiary"
             size="small"
-            @click=${() => {
+            @click=${(e: MouseEvent) => {
+              e.stopPropagation()
               this.value = undefined
+              this.open = false
               this.#dispatchChangeEvent()
             }}
           >
@@ -363,9 +365,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           <gds-button
             rank="tertiary"
             size="small"
-            @click=${() => {
-              this.value = new Date()
-              this.#dispatchChangeEvent()
+            @click=${(e: MouseEvent) => {
+              e.stopPropagation()
+              this.#focusDate(new Date())
             }}
           >
             ${msg('Today')}
@@ -378,14 +380,20 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const focusedDate = await this.getFocusedDate()
 
     let buttonTxt = ''
-    let buttonAction: () => void
+    let buttonAction: (e: MouseEvent) => void
 
     if (focusedDate && focusedDate > this.max) {
       buttonTxt = msg('Last available date')
-      buttonAction = () => this.#focusDate(this.max)
+      buttonAction = (e: MouseEvent) => {
+        e.stopPropagation()
+        this.#focusDate(this.max)
+      }
     } else if (focusedDate && focusedDate < this.min) {
       buttonTxt = msg('First available date')
-      buttonAction = () => this.#focusDate(this.min)
+      buttonAction = (e: MouseEvent) => {
+        e.stopPropagation()
+        this.#focusDate(this.min)
+      }
     }
 
     return html`${when(
@@ -399,9 +407,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #focusDate(d: Date) {
-    const firstValidDate = new Date(d)
+    const focusDate = new Date(d)
     this._elCalendar
-      .then((el) => (el.focusedDate = firstValidDate))
+      .then((el) => (el.focusedDate = focusDate))
       .then(this.#handleCalendarFocusChange)
   }
 
@@ -512,8 +520,27 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       const pasted = e.clipboardData?.getData('text/plain')
       if (!pasted) return
 
-      const pastedDate = new Date(pasted)
-      if (pastedDate.toString() === 'Invalid Date') return
+      let pastedDate = new Date('-')
+      const invalid = 'Invalid Date'
+
+      // Try to parse the date with the dateformat
+      const parts = pasted.split(this._dateFormatLayout.delimiter)
+      if (parts.length === 3) {
+        const layout = this._dateFormatLayout.layout
+        const year = parseInt(parts[layout.findIndex((f) => f.token === 'y')])
+        const month =
+          parseInt(parts[layout.findIndex((f) => f.token === 'm')]) - 1
+        const day = parseInt(parts[layout.findIndex((f) => f.token === 'd')])
+        if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+          pastedDate = new Date(`${year}-${month + 1}-${day}`)
+        }
+      }
+      if (pastedDate.toString() === invalid) {
+        pastedDate = new Date(pasted)
+        if (pastedDate.toString() === invalid) {
+          return
+        }
+      }
 
       this.value = pastedDate
       this.#dispatchChangeEvent()
@@ -605,7 +632,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   /**
-   * Takes a dateformat string from the dateformat attribute and turnes it to a DateFormatLayout object used in rendering the template.
+   * Takes a dateformat string from the dateformat attribute and turns it to a DateFormatLayout object used in rendering the template.
    */
   #parseDateFormat(dateformat: string): DateFormatLayout {
     const delimiter = dateformat.replace(/[a-z0-9]/gi, '')[0]

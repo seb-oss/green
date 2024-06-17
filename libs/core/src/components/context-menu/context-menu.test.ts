@@ -15,7 +15,7 @@ import type {
   GdsContextMenu,
   GdsMenuItem,
 } from '@sebgroup/green-core/components/context-menu'
-import { GdsPopover } from '@sebgroup/green-core/primitives/popover'
+import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsMenu } from '@sebgroup/green-core/primitives/menu'
 
 const html = htmlTemplateTagFactory(testingHtml)

@@ -1,5 +1,5 @@
 import { TransitionalStyles } from '../../../transitional-styles'
-import styles from './filter-chip.trans.styles.scss'
+import styles from './filter-chip.trans.styles.scss?inline'
 
 import * as Button from '../../button/button.trans.styles'
 
