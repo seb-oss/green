@@ -10,7 +10,7 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import IMGCSS from './img.style.css'
 
 @gdsCustomElement('gds-img')
-export class GdsIMG extends GdsElement {
+export class GdsImg extends GdsElement {
   static styles = [tokens, IMGCSS]
 
   @styleExpressionProperty({

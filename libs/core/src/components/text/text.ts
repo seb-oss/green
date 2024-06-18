@@ -34,7 +34,11 @@ export class GdsText extends GdsElement {
   })
   wrap?: string
 
-  // Balance and pretty
+  @styleExpressionProperty({
+    property: 'max-width',
+    valueTemplate: (v) => `${v}ch`,
+  })
+  length?: string
 
   createTag() {
     const tag = document.createElement(this.tag)

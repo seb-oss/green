@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
+import './index.ts'
 import { html } from 'lit'
 
 /**
- * The `gds-card`
+ * The `gds-img`
  *
  * ## Usage
  *
@@ -23,4 +24,17 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
+  args: {
+    ratio: '16/9',
+    fit: 'cover',
+    inset: '0',
+    position: 'relative',
+    opacity: '1',
+    src: 'https://placehold.co/600x400',
+    alt: 'Placeholder',
+  },
+}
+
+export const Basic: Story = {
+  ...DefaultParams,
 }

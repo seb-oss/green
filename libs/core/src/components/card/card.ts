@@ -37,7 +37,22 @@ export class GdsCard extends GdsElement {
   })
   background?: string
 
-  @property({ attribute: 'border', type: String })
+  // @styleExpressionProperty({
+  //   property: 'border',
+  //   valueTemplate: (v) => `1px solid ${v}`,
+  // })
+  // border?: string
+
+  @styleExpressionProperty({
+    valueTemplate: (v) => `1px solid ${v}`,
+    styleTemplate: (_prop, values) => {
+      const top = values[0]
+      const right = values[1]
+      const bottom = values[2]
+      const left = values[3]
+      return `border-top: ${top}; border-right: ${right}; border-bottom: ${bottom}; border-left: ${left};`
+    },
+  })
   border?: string
 
   render() {

@@ -105,6 +105,12 @@ export class GdsContainer extends GdsElement {
   background?: string
 
   @styleExpressionProperty({
+    property: 'border',
+    valueTemplate: (v) => v,
+  })
+  border?: string
+
+  @styleExpressionProperty({
     property: 'color',
     valueTemplate: (v) => `var(--gds-sys-color-${v})`,
   })

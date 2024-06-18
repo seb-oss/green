@@ -2,8 +2,8 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    --gds-shadow-xs: 0px 0px 1px 0px rgba(0, 0, 0, 0.08),
-      0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+    --gds-shadow-xs: 0px 0px 1px 0px rgba(0, 0, 0, 0.1),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.1);
     --gds-shadow-s: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
       0px 1px 2px 0px rgba(0, 0, 0, 0.06);
     --gds-shadow-m: 0px 4px 8px -2px rgba(0, 0, 0, 0.1),

@@ -62,7 +62,79 @@ export const Card: Story = {
 export const CardBorder: Story = {
   ...DefaultParams,
   name: 'Border Style',
-  render: (args) => html` <gds-card> Border Style </gds-card>`,
+  render: (args) =>
+    html` <gds-grid columns="5" gap="2xl">
+      <gds-card
+        shadow="xl"
+        radius="none none m m"
+        border="currentColor transparent transparent transparent"
+      >
+        <gds-container
+          padding="2xl"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          Top
+        </gds-container>
+      </gds-card>
+      <gds-card
+        shadow="xl"
+        radius="m none none m"
+        border="transparent currentColor transparent transparent"
+      >
+        <gds-container
+          padding="2xl"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          Right
+        </gds-container>
+      </gds-card>
+      <gds-card
+        shadow="xl"
+        radius="m m none none"
+        border="transparent transparent currentColor transparent"
+      >
+        <gds-container
+          padding="2xl"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          Bottom
+        </gds-container>
+      </gds-card>
+      <gds-card
+        shadow="xl"
+        radius="none m m none"
+        border="transparent transparent transparent currentColor"
+      >
+        <gds-container
+          padding="2xl"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          Left
+        </gds-container>
+      </gds-card>
+      <gds-card
+        shadow="xl"
+        radius="m"
+        border="currentColor currentColor currentColor currentColor"
+      >
+        <gds-container
+          padding="2xl"
+          display="flex"
+          align="center"
+          justify="center"
+        >
+          All
+        </gds-container>
+      </gds-card>
+    </gds-grid>`,
 }
 
 export const CardRadius: Story = {
