@@ -65,8 +65,9 @@ export const CardBorder: Story = {
   render: (args) =>
     html` <gds-grid columns="5" gap="2xl">
       <gds-card
-        shadow="xl"
+        shadow="s"
         radius="none none m m"
+        background="base100"
         border="currentColor transparent transparent transparent"
       >
         <gds-container
@@ -79,8 +80,9 @@ export const CardBorder: Story = {
         </gds-container>
       </gds-card>
       <gds-card
-        shadow="xl"
+        shadow="s"
         radius="m none none m"
+        background="base100"
         border="transparent currentColor transparent transparent"
       >
         <gds-container
@@ -93,8 +95,9 @@ export const CardBorder: Story = {
         </gds-container>
       </gds-card>
       <gds-card
-        shadow="xl"
+        shadow="s"
         radius="m m none none"
+        background="base100"
         border="transparent transparent currentColor transparent"
       >
         <gds-container
@@ -107,8 +110,9 @@ export const CardBorder: Story = {
         </gds-container>
       </gds-card>
       <gds-card
-        shadow="xl"
+        shadow="s"
         radius="none m m none"
+        background="base100"
         border="transparent transparent transparent currentColor"
       >
         <gds-container
@@ -121,8 +125,9 @@ export const CardBorder: Story = {
         </gds-container>
       </gds-card>
       <gds-card
-        shadow="xl"
+        shadow="s"
         radius="m"
+        background="base100"
         border="currentColor currentColor currentColor currentColor"
       >
         <gds-container
