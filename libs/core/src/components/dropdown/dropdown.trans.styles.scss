@@ -14,7 +14,7 @@
     display: block;
   }
 
-  :host(:invalid) button + .form-info {
+  :host(:invalid) [gds-element='gds-popover'] + .form-info {
     @include validation.add-feedback-element();
     @include validation.add-feedback(tokens.$intent-danger-background);
   }
