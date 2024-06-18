@@ -286,8 +286,12 @@ export const CardGrid: Story = {
             direction="column"
             padding="s{xs} m{l} l{2xl}"
           >
-            <gds-text tag="h3" size="headline-medium">Span Columns</gds-text>
-            <gds-text>
+            <gds-text
+              tag="h3"
+              size="l{headline-medium} m{headline-medium} s{headline-medium}"
+              >Span Columns</gds-text
+            >
+            <gds-text wrap="balance">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>

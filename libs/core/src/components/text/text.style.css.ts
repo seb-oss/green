@@ -9,6 +9,7 @@ const style = css`
       font-weight: normal;
       font-size: inherit;
       line-height: inherit;
+      text-wrap: inherit;
     }
   }
 `

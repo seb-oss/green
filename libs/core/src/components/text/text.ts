@@ -28,6 +28,14 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty()
   margin?: string
 
+  @styleExpressionProperty({
+    property: 'text-wrap',
+    valueTemplate: (v) => v,
+  })
+  wrap?: string
+
+  // Balance and pretty
+
   createTag() {
     const tag = document.createElement(this.tag)
     tag.appendChild(document.createElement('slot'))
