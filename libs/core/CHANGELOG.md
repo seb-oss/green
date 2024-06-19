@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.8
+
+### Patch Changes
+
+- 42db72f: **Dropdown:** Fix problem with invalid styling
+
 ## 1.22.7
 
 ### Patch Changes
