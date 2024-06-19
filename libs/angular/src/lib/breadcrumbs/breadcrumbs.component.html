@@ -1,0 +1,14 @@
+<nav aria-label="Breadcrumbs"
+  class="sdv-breadcrumbs">
+  <ol>
+    <li *ngFor="let breadcrumb of breadcrumbs; let i = index"
+      [attr.aria-current]="i === breadcrumbs.length - 1">
+      <a [routerLink]="breadcrumb.href"
+        [external]="!!breadcrumb.external"
+        *ngIf="i < breadcrumbs.length - 1; else currentPageRef">{{breadcrumb.title}}</a>
+      <ng-template #currentPageRef>
+        <span>{{breadcrumb.title}}</span>
+      </ng-template>
+    </li>
+  </ol>
+</nav>
