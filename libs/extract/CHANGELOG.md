@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.2
+
+### Patch Changes
+
+- 1344f9d: **Deps:** Add previously undeclared peer deps
+
 ## 3.0.1
 
 ### Patch Changes

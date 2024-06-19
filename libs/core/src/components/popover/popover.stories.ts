@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import '../../../../../dist/libs/core/src/components/popover/index.js'
-import '../../../../../dist/libs/core/src/components/button/index.js'
-import '../../../../../dist/libs/core/src/components/grouped-list/index.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/chevron-bottom.js'
+import './index.ts'
+import '../button/index.ts'
+import '../grouped-list/index.ts'
+import '../icon/icons/chevron-bottom.ts'
 
 /**
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.

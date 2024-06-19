@@ -1,11 +1,11 @@
 import { html, nothing } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/button/index.js'
-import '../../../../../dist/libs/core/src/components/grid/index.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/chevron-top.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-up.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import './index.ts'
+import '../grid/index.js'
+import '../icon/icons/chevron-top.js'
+import '../icon/icons/arrow-up.js'
+import '../icon/icons/arrow-down.js'
+import '../icon/icons/arrow-right.js'
 
 /**
  * A button serve as an interactive element that enables users to perform an action or make

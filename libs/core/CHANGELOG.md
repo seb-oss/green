@@ -1,5 +1,53 @@
 # Changelog
 
+## 1.22.8
+
+### Patch Changes
+
+- 42db72f: **Dropdown:** Fix problem with invalid styling
+
+## 1.22.7
+
+### Patch Changes
+
+- 65f60aa: **Datepicker:** Fix incorrect parsing of pasted dates in some cases
+- 65f60aa: **Datepicker:** Call `register()` on Button transiational style, since Button is used internally in Datepicker
+- 65f60aa: **Datepicker:** Prevent propagation of click events in footer buttons, which would sometimes incorrectly close modal
+
+## 1.22.6
+
+### Patch Changes
+
+- af2773e: **Calendar:** Fix disabled dates styling when used with customization
+
+## 1.22.5
+
+### Patch Changes
+
+- d4f2411: **Popover:** Fix wrong close reason when internal dialog was closed natively
+- d4f2411: **Datepicker:** Make sure pasted dates that match `dateformat` is accepted and parsed correctly. Fixes #1231
+- d4f2411: **Datepicker:** Fix inconsistent behavior of calendar footer buttons. Fixes #1418
+
+## 1.22.4
+
+### Patch Changes
+
+- fb7c982: **Datepicker:** Fix copy/paste regression. Fixes #1424
+
+## 1.22.3
+
+### Patch Changes
+
+- 900effe: **Dropdown:** Fix focus issue with VoiceOver iOS. Fixes #1294
+- b62c0ae: **Calendar:** Fix issue where the wrong month could be rendered in the calendar, if focused day number was outside the selected month (for example if 30th is focused and February was selected). Fixes #1412
+
+## 1.22.2
+
+### Patch Changes
+
+- 1344f9d: **Datepicker:** make import from `date-fns` fully qualified
+- 2921f0e: **Calendar:** improve indicator style
+
 ## 1.22.1
 
 ### Patch Changes

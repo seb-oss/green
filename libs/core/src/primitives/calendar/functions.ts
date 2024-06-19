@@ -5,7 +5,7 @@ import {
   eachWeekOfInterval,
   eachDayOfInterval,
 } from 'date-fns'
-import { TemplateResult, html } from 'lit-html'
+import { TemplateResult, html } from 'lit'
 
 export type Week = {
   days: Date[]

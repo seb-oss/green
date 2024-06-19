@@ -3,6 +3,7 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { allComponents } from 'content'
 
 import './style.css'
 
@@ -10,35 +11,54 @@ type TrailTypes = {
   home: ReactNode
   separator: ReactNode
   activeClass?: string
+  slug?: string
 }
 
-const Trail = ({ home, separator, activeClass }: TrailTypes) => {
+const Trail = ({ home, separator, activeClass, slug }: TrailTypes) => {
   const paths = usePathname()
   const pathNames = paths.split('/').filter((path) => path)
 
+  const getComponent = (path: string) =>
+    allComponents.find(
+      (component) => component.url_path === `/component/${slug}${path}`,
+    )
+
+  const getCurrentComponent = (path: string) =>
+    allComponents.find(
+      (component) => component.url_path === `/component/${slug}`,
+    )
+
+  const lastPath = pathNames.pop()
+  const lastPathComponent = getComponent(`/${lastPath}`)
+  const currentComponent = getCurrentComponent(`/${slug}`)
+
+  // console.log('lastPathComponent', getCurrentComponent('/button'))
   return (
     <div className="trail">
       <ul>
         <li>
           <Link href={'/'}>{home}</Link>
         </li>
-        {pathNames.length > 0 && separator}
-        {pathNames.map((link, index) => {
-          const href = `/${pathNames.slice(0, index + 1).join('/')}`
-          const itemClasses =
-            paths === href
-              ? ` ${activeClass}`
-              : link[0].toUpperCase() + link.slice(1, link.length)
-          const itemLink = link
-          return (
-            <React.Fragment key={index}>
-              <li className={itemClasses}>
-                <Link href={href}>{itemLink}</Link>
-              </li>
-              {pathNames.length !== index + 1 && separator}
-            </React.Fragment>
-          )
-        })}
+        {separator}
+        <li>
+          <Link href={'/components'}>Component</Link>
+        </li>
+        {slug && (
+          <>
+            {separator}
+            <li className={paths === `/component/${slug}` ? activeClass : ''}>
+              <Link href={'/component/' + slug}>{currentComponent?.title}</Link>
+            </li>
+          </>
+        )}
+        {lastPathComponent && (
+          <>
+            {separator}
+            <li className={`${activeClass}`}>
+              <Link href={'/'}>{lastPathComponent?.title}</Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   )
