@@ -1,37 +1,53 @@
-import { CommonModule } from '@angular/common';
-import { importProvidersFrom } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { importProvidersFrom } from '@angular/core'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms'
 
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive';
-import { TextareaComponent } from './textarea.component';
+import { CharacterCountdownDirective } from '../shared/character-countdown/character-countdown.directive'
+import { TextareaComponent } from './textarea.component'
 
 export default {
-  title: 'Core/Textarea',
+  title: 'V-Angular/Textarea',
   component: TextareaComponent,
   decorators: [
-    applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
-    }),
+    // applicationConfig({
+    //   providers: [importProvidersFrom(NgvI18nModule)],
+    // }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
-      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        /*NgvI18nModule,*/ ReactiveFormsModule,
+      ],
     }),
   ],
-} as Meta;
+} as Meta
 
-type TextareaComponentStory = StoryFn<TextareaComponent & any>;
+type TextareaComponentStory = StoryFn<TextareaComponent & any>
 
-let formControlValue: any = undefined;
+let formControlValue: any = undefined
 const Template: TextareaComponentStory = (args: TextareaComponent & any) => {
-  const formControl = new UntypedFormControl(formControlValue, [Validators.maxLength(140)]);
-  formControl.valueChanges.subscribe((val) => (formControlValue = val));
+  const formControl = new UntypedFormControl(formControlValue, [
+    Validators.maxLength(140),
+  ])
+  formControl.valueChanges.subscribe((val) => (formControlValue = val))
   const toggleDisableField = () => {
-    if (!!formControl.disabled) return formControl.enable();
-    formControl.disable();
-  };
+    if (!!formControl.disabled) return formControl.enable()
+    formControl.disable()
+  }
   return {
     template: /*html*/ `
     <div style="width: 15rem">
@@ -55,47 +71,47 @@ const Template: TextareaComponentStory = (args: TextareaComponent & any) => {
       formControl: formControl,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   id: '123',
   label: 'This is a field label',
   placeholder: 'This is a placeholder',
   maxlength: 140,
   invalid: false,
-};
+}
 
-export const WithErrorAndCountdown = Template.bind({});
+export const WithErrorAndCountdown = Template.bind({})
 WithErrorAndCountdown.args = {
   ...Primary.args,
   invalid: true,
   error: 'this is a test error',
-};
+}
 
-export const WithFixedRows = Template.bind({});
+export const WithFixedRows = Template.bind({})
 WithFixedRows.args = {
   ...Primary.args,
   rows: 3,
-};
+}
 
-export const WithFixedRowsAndTextPrefilled = Template.bind({});
+export const WithFixedRowsAndTextPrefilled = Template.bind({})
 WithFixedRowsAndTextPrefilled.args = {
   ...Primary.args,
   rows: 3,
   state:
     'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello',
-};
+}
 
-export const WithLockedInput = Template.bind({});
+export const WithLockedInput = Template.bind({})
 WithLockedInput.args = {
   ...Primary.args,
   locked: true,
   description: undefined,
-};
+}
 
-export const WithDisplayDisabledAsLocked = Template.bind({});
+export const WithDisplayDisabledAsLocked = Template.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   invalid: undefined,
@@ -105,4 +121,4 @@ WithDisplayDisabledAsLocked.args = {
   locked: false,
   description: undefined,
   displayDisabledAsLocked: true,
-};
+}

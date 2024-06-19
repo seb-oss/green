@@ -1,2 +1,10 @@
-:host {
+@use '../../../../chlorophyll/scss/components/breadcrumb/mixins' as mixins;
+
+:host ol {
+  @include mixins.add-breadcrumb();
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
 }

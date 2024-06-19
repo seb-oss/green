@@ -1,36 +1,53 @@
-import { CommonModule } from '@angular/common';
-import { importProvidersFrom } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+//import { importProvidersFrom } from '@angular/core' // Changes: removed
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms'
 
-import { delay } from 'rxjs/operators';
+import { delay } from 'rxjs/operators'
 
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+//import { NgvI18nModule } from '../shared/i18n/i18n.module' // Changes: removed
+import {
+  //applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { CheckboxComponent } from './checkbox.component';
+import { CheckboxComponent } from './checkbox.component'
 
 interface StoryInputListener {
-  checked: boolean;
-  action: (event: Event) => void;
-  opt1: any;
-  opt2: any;
-  opt3: any;
+  checked: boolean
+  action: (event: Event) => void
+  opt1: any
+  opt2: any
+  opt3: any
 }
 
 export default {
-  title: 'Core/Checkbox',
+  title: 'V-Angular/Checkbox',
   component: CheckboxComponent,
   decorators: [
-    applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
-    }),
+    // applicationConfig({
+    //   providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
+    // }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        /* NgvI18nModule*/
+      ],
     }),
   ],
-} as Meta;
+} as Meta
 
-const Template: StoryFn<CheckboxComponent & StoryInputListener> = (args: CheckboxComponent & StoryInputListener) => ({
+const Template: StoryFn<CheckboxComponent & StoryInputListener> = (
+  args: CheckboxComponent & StoryInputListener,
+) => ({
   template: /*html*/ `
     <ngv-checkbox
       id='123'
@@ -42,7 +59,7 @@ const Template: StoryFn<CheckboxComponent & StoryInputListener> = (args: Checkbo
       (ngModelChange)="action($event)">
     </ngv-checkbox>`,
   props: args,
-});
+})
 
 const TemplateAlt: StoryFn<CheckboxComponent & StoryInputListener> = (
   args: CheckboxComponent & StoryInputListener,
@@ -64,24 +81,32 @@ const TemplateAlt: StoryFn<CheckboxComponent & StoryInputListener> = (
       (ngModelChange)="action($event)">
     </ngv-checkbox>`,
   props: args,
-});
+})
 
-const TemplateWithReactiveForm: StoryFn<CheckboxComponent & any> = (args: CheckboxComponent & any) => {
+const TemplateWithReactiveForm: StoryFn<CheckboxComponent & any> = (
+  args: CheckboxComponent & any,
+) => {
   const grp = new UntypedFormGroup({
-    vanilla: new UntypedFormControl(args.selected === 'vanilla' ? args.selected : null),
-    strawberry: new UntypedFormControl(args.selected === 'strawberry' ? args.selected : null),
-    chocolate: new UntypedFormControl(args.selected === 'chocolate' ? args.selected : null),
-  });
-  grp.valueChanges.pipe(delay(0)).subscribe(console.log);
-  let disabled = true;
+    vanilla: new UntypedFormControl(
+      args.selected === 'vanilla' ? args.selected : null,
+    ),
+    strawberry: new UntypedFormControl(
+      args.selected === 'strawberry' ? args.selected : null,
+    ),
+    chocolate: new UntypedFormControl(
+      args.selected === 'chocolate' ? args.selected : null,
+    ),
+  })
+  grp.valueChanges.pipe(delay(0)).subscribe(console.log)
+  let disabled = true
   const toggleDisableField = () => {
-    disabled = !disabled;
+    disabled = !disabled
     if (!!disabled) {
-      Object.values(grp.controls).forEach((ctrl) => ctrl.enable());
-      return;
+      Object.values(grp.controls).forEach((ctrl) => ctrl.enable())
+      return
     }
-    Object.values(grp.controls).forEach((ctrl) => ctrl.disable());
-  };
+    Object.values(grp.controls).forEach((ctrl) => ctrl.disable())
+  }
   return {
     template: /*html*/ `
       <label class="sdv-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
@@ -126,10 +151,10 @@ const TemplateWithReactiveForm: StoryFn<CheckboxComponent & any> = (args: Checkb
       formGroup: grp,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
-export const Single = Template.bind({});
+export const Single = Template.bind({})
 Single.args = {
   checked: false,
   label: 'Field label',
@@ -137,32 +162,47 @@ Single.args = {
   action: console.log,
   required: true,
   disabled: false,
-};
+}
 
-export const Multiple = TemplateAlt.bind({});
+export const Multiple = TemplateAlt.bind({})
 Multiple.args = {
   name: 'options',
-  opt1: { id: 'opt1', checked: false, label: 'Field label 1', value: 'option1' },
-  opt2: { id: 'opt2', checked: false, label: 'Field label 2', value: 'option2' },
-  opt3: { id: 'opt3', checked: false, label: 'Field label 3', value: 'option3' },
+  opt1: {
+    id: 'opt1',
+    checked: false,
+    label: 'Field label 1',
+    value: 'option1',
+  },
+  opt2: {
+    id: 'opt2',
+    checked: false,
+    label: 'Field label 2',
+    value: 'option2',
+  },
+  opt3: {
+    id: 'opt3',
+    checked: false,
+    label: 'Field label 3',
+    value: 'option3',
+  },
   action: console.log,
-};
+}
 
-export const WithReactiveForm = TemplateWithReactiveForm.bind({});
+export const WithReactiveForm = TemplateWithReactiveForm.bind({})
 WithReactiveForm.args = {
   name: 'iceCream',
   selected: 'chocolate',
-};
+}
 
-export const WithLockedInput = TemplateWithReactiveForm.bind({});
+export const WithLockedInput = TemplateWithReactiveForm.bind({})
 WithLockedInput.args = {
   ...WithReactiveForm.args,
   locked: true,
-};
+}
 
-export const WithDisplayDisabledAsLocked = TemplateWithReactiveForm.bind({});
+export const WithDisplayDisabledAsLocked = TemplateWithReactiveForm.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...WithReactiveForm.args,
   locked: false,
   displayDisabledAsLocked: true,
-};
+}

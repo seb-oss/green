@@ -11,7 +11,10 @@
     "../src/**/*.stories.tsx",
     "../src/**/*.stories.mdx",
     "*.js",
-    "*.ts"
+    "*.ts",
+    "../src/lib/input/input.stories.ts_",
+    "../src/lib/typeahead/typeahead-input/typeahead-input.stories.ts_",
+    "../src/v-angular/dropdown/dropdown.stories.ts_"
   ],
   "target": "ES2022"
 }

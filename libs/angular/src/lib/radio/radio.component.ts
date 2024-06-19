@@ -14,7 +14,7 @@ import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../shared/base-control-value-accessor/base-control-value-accessor.component'
 
 /** @internal Internal class used to uncheck radio buttons with the matching name. */
 @Injectable()
@@ -44,11 +44,11 @@ export class NgvRadioControlRegistry {
 
   private _isSameGroup(
     controlPair: [NgControl, RadioComponent],
-    radio: RadioComponent
+    radio: RadioComponent,
   ) {
     if (!controlPair[0].control) return false
-    // @ts-ignore internal properties not exposed
     return (
+      //@ts-expect-error internal properties not exposed
       controlPair[0]._parent === radio.ngControl._parent &&
       controlPair[1].name === radio.name
     )
@@ -88,7 +88,7 @@ export class RadioComponent
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected registry: NgvRadioControlRegistry,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }

@@ -12,7 +12,7 @@ import { ExternalLinkDirective } from '../shared/external-link/external-link.dir
 import { BreadcrumbsComponent } from './breadcrumbs.component'
 
 export default {
-  title: 'Core/Breadcrumbs',
+  title: 'V-Angular/Breadcrumbs',
   component: BreadcrumbsComponent,
   decorators: [
     applicationConfig({

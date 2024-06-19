@@ -1,8 +1,8 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import {
-  faInfoCircle,
-  IconDefinition,
-} from '@fortawesome/pro-regular-svg-icons'
+// import {
+//   faInfoCircle,
+//   IconDefinition,
+// } from '@fortawesome/pro-regular-svg-icons'
 
 /**
  * A button that will present an explanation to a problem/question.
@@ -23,6 +23,6 @@ export class InfoCircleComponent {
    */
   @Input() info!: string
 
-  /** @internal */
-  infoCircle: IconDefinition = faInfoCircle
+  // /** @internal */
+  // infoCircle: IconDefinition = faInfoCircle
 }

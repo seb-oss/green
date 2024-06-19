@@ -1,76 +1,101 @@
-import '../core.globals';
+import '../core.globals'
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { AbstractControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common'
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import {
+  AbstractControl,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
+import { RouterTestingModule } from '@angular/router/testing'
 
-import { debounceTime, delay, distinctUntilChanged, lastValueFrom, map, Observable, of, tap } from 'rxjs';
+import {
+  debounceTime,
+  delay,
+  distinctUntilChanged,
+  lastValueFrom,
+  map,
+  Observable,
+  of,
+  tap,
+} from 'rxjs'
 
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons';
-import { TranslocoLoader, TranslocoService } from '@ngneat/transloco';
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { createMask, NgvInputMaskModule } from '@sebgroup/ngv-input-mask';
-import { TooltipDirective } from '@sebgroup/ngv-tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome'
+import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons'
+import { TranslocoLoader, TranslocoService } from '@ngneat/transloco'
+import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import { createMask, NgvInputMaskModule } from '@sebgroup/ngv-input-mask'
+import { TooltipDirective } from '@sebgroup/ngv-tooltip'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { ButtonComponent } from '../button/button.component';
-import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive';
-import { CheckboxComponent } from '../checkbox/checkbox.component';
-import { DropdownUtils } from '../core.utils';
-import { DropdownListComponent } from '../dropdown-list/dropdown-list.component';
-import { DropdownComponent } from '../dropdown/dropdown.component';
-import { ExternalLinkDirective } from '../external-link/external-link.directive';
-import { InfoCircleComponent } from '../info-circle/info-circle.component';
-import { TypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component';
-import { TypeaheadDirective } from '../typeahead/typeahead.directive';
-import { InputComponent } from './input.component';
+import { ButtonComponent } from '../button/button.component'
+import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
+import { CheckboxComponent } from '../checkbox/checkbox.component'
+import { DropdownUtils } from '../core.utils'
+import { DropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { DropdownComponent } from '../dropdown/dropdown.component'
+import { ExternalLinkDirective } from '../external-link/external-link.directive'
+import { InfoCircleComponent } from '../info-circle/info-circle.component'
+import { TypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { TypeaheadDirective } from '../typeahead/typeahead.directive'
+import { InputComponent } from './input.component'
 
 interface WithExtras {
-  notice: string;
-  tooltip?: string;
-  info?: string;
-  text?: string;
-  ngModel: string;
+  notice: string
+  tooltip?: string
+  info?: string
+  text?: string
+  ngModel: string
 }
 
 const en = {
   'error.fieldinputmask': 'Invalid value pattern',
   'error.fieldrequired': 'Field must have content',
-  'error.fieldmaxlength': 'Field content should not be longer than {{requiredLength}} characters',
+  'error.fieldmaxlength':
+    'Field content should not be longer than {{requiredLength}} characters',
   'label.defaultlabel': 'Label',
   'label.maxlength': 'characters left',
   'label.optional': 'Optional',
-};
+}
 
 const sv = {
   'error.fieldinputmask': 'Icke giltigt tecken mönster',
   'error.fieldrequired': 'Fältet får inte lämnas tomt',
-  'error.fieldmaxlength': 'Fältinnehållet måste vara längre än {{requiredLength}} tecken',
+  'error.fieldmaxlength':
+    'Fältinnehållet måste vara längre än {{requiredLength}} tecken',
   'label.maxlength': 'tecken kvar',
-};
+}
 
 class TranslocoInlineLoader implements TranslocoLoader {
   getTranslation(lang: string) {
     if (lang === 'sv') {
-      return lastValueFrom(of(sv).pipe(delay(1500)));
+      return lastValueFrom(of(sv).pipe(delay(1500)))
     }
-    return lastValueFrom(of(en).pipe(delay(500)));
+    return lastValueFrom(of(en).pipe(delay(500)))
   }
 }
 
-let translocoServiceInstance: TranslocoService;
+let translocoServiceInstance: TranslocoService
 
 function translocoStorybookInitializer(translocoService: TranslocoService) {
   return () => {
-    translocoServiceInstance = translocoService;
-    translocoService.langChanges$.pipe(distinctUntilChanged()).subscribe();
-  };
+    translocoServiceInstance = translocoService
+    translocoService.langChanges$.pipe(distinctUntilChanged()).subscribe()
+  }
 }
 
 const meta: Meta<InputComponent> = {
-  title: 'Core/Input',
+  title: 'V-Angular/Input',
   component: InputComponent,
   decorators: [
     applicationConfig({
@@ -85,7 +110,7 @@ const meta: Meta<InputComponent> = {
         {
           provide: APP_INITIALIZER,
           useFactory: (iconLibrary: FaIconLibrary) => {
-            return async () => iconLibrary.addIcons(faInfoCircle);
+            return async () => iconLibrary.addIcons(faInfoCircle)
           },
           deps: [FaIconLibrary],
           multi: true,
@@ -116,27 +141,34 @@ const meta: Meta<InputComponent> = {
       ],
     }),
   ],
-};
-export default meta;
+}
+export default meta
 
-const Template: StoryFn<InputComponent & WithExtras> = (args: InputComponent & WithExtras) => ({
+const Template: StoryFn<InputComponent & WithExtras> = (
+  args: InputComponent & WithExtras,
+) => ({
   props: args,
-});
+})
 
-const TemplateWithFormControl: StoryFn<InputComponent & WithExtras & any> = (args: InputComponent & WithExtras) => {
-  const ctrl = new UntypedFormControl(args.ngModel, [Validators.required, Validators.maxLength(12)]);
+const TemplateWithFormControl: StoryFn<InputComponent & WithExtras & any> = (
+  args: InputComponent & WithExtras,
+) => {
+  const ctrl = new UntypedFormControl(args.ngModel, [
+    Validators.required,
+    Validators.maxLength(12),
+  ])
   ctrl.valueChanges.subscribe((val) => {
-    console.log('input control value:', val);
-    console.log({ required: required() });
-  });
+    console.log('input control value:', val)
+    console.log({ required: required() })
+  })
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable();
-    ctrl.disable();
-  };
+    if (!!ctrl.disabled) return ctrl.enable()
+    ctrl.disable()
+  }
   const required = () => {
-    const error = ctrl.validator && ctrl.validator({} as AbstractControl);
-    return error && error.required;
-  };
+    const error = ctrl.validator && ctrl.validator({} as AbstractControl)
+    return error && error.required
+  }
   return {
     template: /*html*/ `
     <ngv-input
@@ -160,10 +192,10 @@ const TemplateWithFormControl: StoryFn<InputComponent & WithExtras & any> = (arg
       formControl: ctrl,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   label: 'Field label',
   placeholder: 'This is a placeholder value',
@@ -175,22 +207,26 @@ Primary.args = {
   optional: false,
   disabled: false,
   invalid: false,
-};
+}
 
-export const WithFormControl = TemplateWithFormControl.bind({});
+export const WithFormControl = TemplateWithFormControl.bind({})
 WithFormControl.args = {
   ...Primary.args,
   invalid: undefined,
   required: undefined,
   optional: undefined,
   valid: undefined,
-};
+}
 
-const TemplateWithError: StoryFn<InputComponent & WithExtras> = (args: InputComponent & WithExtras) => ({
+const TemplateWithError: StoryFn<InputComponent & WithExtras> = (
+  args: InputComponent & WithExtras,
+) => ({
   props: { ...args },
-});
+})
 
-const TemplateWithCustomLabel: StoryFn<InputComponent & WithExtras> = (args: InputComponent & WithExtras) => ({
+const TemplateWithCustomLabel: StoryFn<InputComponent & WithExtras> = (
+  args: InputComponent & WithExtras,
+) => ({
   template: /*html*/ `
     <ngv-input [label]="label"
       [disabled]="disabled"
@@ -203,9 +239,9 @@ const TemplateWithCustomLabel: StoryFn<InputComponent & WithExtras> = (args: Inp
       </ng-template>
     </ngv-input>`,
   props: args,
-});
+})
 
-export const WithCustomErrorAndCountdown = TemplateWithError.bind({});
+export const WithCustomErrorAndCountdown = TemplateWithError.bind({})
 WithCustomErrorAndCountdown.args = {
   ...Primary.args,
   maxlength: 25,
@@ -213,32 +249,32 @@ WithCustomErrorAndCountdown.args = {
   invalid: true,
   error: 'this is an error message',
   badgeText: 'SEB',
-};
+}
 
-export const WithCustomError = TemplateWithError.bind({});
+export const WithCustomError = TemplateWithError.bind({})
 WithCustomError.args = {
   ...Primary.args,
   invalid: true,
   error: 'Validation failed on server',
-};
+}
 
-export const WithCustomLabel = TemplateWithCustomLabel.bind({});
+export const WithCustomLabel = TemplateWithCustomLabel.bind({})
 WithCustomLabel.args = {
   ...Primary.args,
   info: 'Some info regarding the input maybe...',
   text: 'And some more text',
-};
+}
 
-const resettime = 3000;
+const resettime = 3000
 const resetObservable$ = new Observable((subscriber) => {
   setInterval(() => {
-    subscriber.next();
-  }, resettime);
-});
+    subscriber.next()
+  }, resettime)
+})
 
-const TemplateWithPrefixAndOrSuffix: StoryFn<InputComponent & WithExtras & any> = (
-  args: InputComponent & WithExtras & any,
-) => ({
+const TemplateWithPrefixAndOrSuffix: StoryFn<
+  InputComponent & WithExtras & any
+> = (args: InputComponent & WithExtras & any) => ({
   styles: [`.suffix-prefix-padding{ padding: 0.75em }`],
   template: /*html*/ `
   <h2>Prefix and/or suffix</h2>
@@ -309,20 +345,20 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<InputComponent & WithExtras & any> 
     </ngv-dropdown>
   </ngv-input>`,
   props: args,
-});
+})
 
-export const WithPrefixAndOrSuffix = TemplateWithPrefixAndOrSuffix.bind({});
+export const WithPrefixAndOrSuffix = TemplateWithPrefixAndOrSuffix.bind({})
 WithPrefixAndOrSuffix.args = {
   ...Primary.args,
   invalid: false,
-};
+}
 
 export const WithResetObservable: StoryFn<InputComponent & WithExtras & any> = (
   _args: InputComponent & WithExtras & any,
 ) => {
   const formGroup = new UntypedFormGroup({
     resetForm: new UntypedFormControl('Annoying orange'),
-  });
+  })
   return {
     template: /*html*/ `
     <ng-container [formGroup]="formGroup">
@@ -339,25 +375,35 @@ export const WithResetObservable: StoryFn<InputComponent & WithExtras & any> = (
       formGroup,
       resetObservable$,
     },
-  };
-};
+  }
+}
 
-export const WithMaxLength: StoryFn<InputComponent & WithExtras & any> = (args: InputComponent & WithExtras & any) => {
+export const WithMaxLength: StoryFn<InputComponent & WithExtras & any> = (
+  args: InputComponent & WithExtras & any,
+) => {
   let formGroup = new UntypedFormGroup({
     remittanceInformation: new UntypedFormControl(
       'This is a test of handling if the text is longer than the max length input',
       Validators.maxLength(9),
     ),
-  });
-  const maxLength$ = of(10);
+  })
+  const maxLength$ = of(10)
 
-  formGroup.get('remittanceInformation')?.valueChanges.subscribe((val) => console.log(val));
+  formGroup
+    .get('remittanceInformation')
+    ?.valueChanges.subscribe((val) => console.log(val))
 
   const toggleLang = () => {
-    const updateLang = translocoServiceInstance.getActiveLang() === 'sv' ? 'en' : 'sv';
-    console.log('from:', translocoServiceInstance.getActiveLang(), '=>', updateLang);
-    translocoServiceInstance.setActiveLang(updateLang);
-  };
+    const updateLang =
+      translocoServiceInstance.getActiveLang() === 'sv' ? 'en' : 'sv'
+    console.log(
+      'from:',
+      translocoServiceInstance.getActiveLang(),
+      '=>',
+      updateLang,
+    )
+    translocoServiceInstance.setActiveLang(updateLang)
+  }
 
   return {
     template: /*html*/ `
@@ -384,27 +430,30 @@ export const WithMaxLength: StoryFn<InputComponent & WithExtras & any> = (args: 
       description: 'This is a field description',
       maxLength$: maxLength$,
       formG: formGroup,
-      setValue: (value: any) => formGroup.controls.remittanceInformation.setValue(value),
+      setValue: (value: any) =>
+        formGroup.controls.remittanceInformation.setValue(value),
       toggleLang: () => toggleLang(),
       show: false,
     },
-  };
-};
+  }
+}
 
-let dateFCValue = '';
-let emailFCValue = '';
-let currencyFCValue = '';
-let phoneFCValue = '';
-let licenseFCValue = '';
-let ipFCValue = '';
+let dateFCValue = ''
+let emailFCValue = ''
+let currencyFCValue = ''
+let phoneFCValue = ''
+let licenseFCValue = ''
+let ipFCValue = ''
 
-const TemplateWithInputMask: StoryFn<InputComponent & WithExtras & any> = (args: InputComponent & WithExtras & any) => {
-  const dateFC = new UntypedFormControl(dateFCValue, [Validators.required]);
-  const emailFC = new UntypedFormControl(emailFCValue);
-  const currencyFC = new UntypedFormControl(currencyFCValue);
-  const phoneFC = new UntypedFormControl(phoneFCValue);
-  const licenseFC = new UntypedFormControl(licenseFCValue);
-  const ipFC = new UntypedFormControl(ipFCValue);
+const TemplateWithInputMask: StoryFn<InputComponent & WithExtras & any> = (
+  args: InputComponent & WithExtras & any,
+) => {
+  const dateFC = new UntypedFormControl(dateFCValue, [Validators.required])
+  const emailFC = new UntypedFormControl(emailFCValue)
+  const currencyFC = new UntypedFormControl(currencyFCValue)
+  const phoneFC = new UntypedFormControl(phoneFCValue)
+  const licenseFC = new UntypedFormControl(licenseFCValue)
+  const ipFC = new UntypedFormControl(ipFCValue)
 
   const formGroup = new UntypedFormGroup({
     dateFC,
@@ -413,27 +462,27 @@ const TemplateWithInputMask: StoryFn<InputComponent & WithExtras & any> = (args:
     phoneFC,
     licenseFC,
     ipFC,
-  });
+  })
 
-  dateFC?.valueChanges.subscribe((val) => (dateFCValue = val));
-  emailFC?.valueChanges.subscribe((val) => (emailFCValue = val));
-  currencyFC?.valueChanges.subscribe((val) => (currencyFCValue = val));
-  phoneFC?.valueChanges.subscribe((val) => (phoneFCValue = val));
-  licenseFC?.valueChanges.subscribe((val) => (licenseFCValue = val));
-  ipFC?.valueChanges.subscribe((val) => (ipFCValue = val));
+  dateFC?.valueChanges.subscribe((val) => (dateFCValue = val))
+  emailFC?.valueChanges.subscribe((val) => (emailFCValue = val))
+  currencyFC?.valueChanges.subscribe((val) => (currencyFCValue = val))
+  phoneFC?.valueChanges.subscribe((val) => (phoneFCValue = val))
+  licenseFC?.valueChanges.subscribe((val) => (licenseFCValue = val))
+  ipFC?.valueChanges.subscribe((val) => (ipFCValue = val))
 
   const dateInputMask = createMask<Date>({
     alias: 'datetime',
     inputFormat: 'yyyy-mm-dd',
     parser: (value: string) => {
-      const values = value.split('-');
-      const year = +values[0];
-      const month = +values[1] - 1;
-      const day = +values[2];
-      return new Date(year, month, day);
+      const values = value.split('-')
+      const year = +values[0]
+      const month = +values[1] - 1
+      const day = +values[2]
+      return new Date(year, month, day)
     },
-  });
-  const emailInputMask = createMask({ alias: 'email' });
+  })
+  const emailInputMask = createMask({ alias: 'email' })
   const currencyInputMask = createMask({
     alias: 'numeric',
     groupSeparator: ',',
@@ -442,10 +491,10 @@ const TemplateWithInputMask: StoryFn<InputComponent & WithExtras & any> = (args:
     prefix: '$ ',
     placeholder: '0',
     shortcuts: null,
-  });
-  const phoneMask = createMask('(999) 999-9999');
-  const licenseInputMask = createMask('[9-]AAA-999');
-  const ipAddressMask = createMask({ alias: 'ip' });
+  })
+  const phoneMask = createMask('(999) 999-9999')
+  const licenseInputMask = createMask('[9-]AAA-999')
+  const ipAddressMask = createMask({ alias: 'ip' })
 
   return {
     template: /*html*/ `
@@ -565,23 +614,23 @@ const TemplateWithInputMask: StoryFn<InputComponent & WithExtras & any> = (args:
       phoneMask,
       locked: args.locked,
     },
-  };
-};
+  }
+}
 
-export const WithInputMask = TemplateWithInputMask.bind({});
+export const WithInputMask = TemplateWithInputMask.bind({})
 WithInputMask.args = {
   locked: false,
-};
+}
 
-export const WithLockedInput = Template.bind({});
+export const WithLockedInput = Template.bind({})
 WithLockedInput.args = {
   ...Primary.args,
   locked: true,
   description: undefined,
   label: 'Bank charges',
-};
+}
 
-export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({});
+export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   invalid: undefined,
@@ -592,22 +641,28 @@ WithDisplayDisabledAsLocked.args = {
   description: undefined,
   label: 'Bank charges',
   displayDisabledAsLocked: true,
-};
+}
 
-const TemplateWithTypeAhead: StoryFn<InputComponent & WithExtras> = (args: InputComponent & WithExtras) => {
+const TemplateWithTypeAhead: StoryFn<InputComponent & WithExtras> = (
+  args: InputComponent & WithExtras,
+) => {
   const options = [
     { key: 'hej', label: 'Hej' },
     { key: 'tja', label: 'Tja' },
     { key: 'hejsan', label: 'Hejsan' },
     { key: 'tjo', label: 'Tjo' },
     { key: 'tjena', label: 'Tjena' },
-  ];
+  ]
   const searchFunction = (value$: Observable<string>) =>
     value$.pipe(
       debounceTime(100),
       tap((x) => console.log('entered value in input: ', x)),
-      map((inputValue) => options.filter((option) => option.key.toUpperCase().includes(inputValue.toUpperCase()))),
-    );
+      map((inputValue) =>
+        options.filter((option) =>
+          option.key.toUpperCase().includes(inputValue.toUpperCase()),
+        ),
+      ),
+    )
   return {
     template: /*html*/ `
       <ngv-input class="toggle"
@@ -628,12 +683,13 @@ const TemplateWithTypeAhead: StoryFn<InputComponent & WithExtras> = (args: Input
     props: {
       ...args,
       searchFunction: searchFunction,
-      selectedFormatter: (value: { key: string; label: string }) => value.label.toUpperCase(),
+      selectedFormatter: (value: { key: string; label: string }) =>
+        value.label.toUpperCase(),
     },
-  };
-};
+  }
+}
 
-export const WithTypeAhead = TemplateWithTypeAhead.bind({});
+export const WithTypeAhead = TemplateWithTypeAhead.bind({})
 WithTypeAhead.args = {
   ...Primary.args,
-};
+}

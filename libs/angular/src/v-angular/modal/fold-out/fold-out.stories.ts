@@ -1,34 +1,40 @@
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER } from '@angular/core';
-
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
-import { FoldOutComponent } from './fold-out.component';
-import { FoldOutOptionDirective } from './fold-out.directive';
-import { exampleAlt, examplePrimary } from './fold-out.examples';
+import { CommonModule } from '@angular/common'
+import { APP_INITIALIZER } from '@angular/core'
+// import {
+//   FaIconLibrary,
+//   FontAwesomeModule,
+// } from '@fortawesome/angular-fontawesome'
+// import { faEllipsisH } from '@fortawesome/pro-regular-svg-icons'
+// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
+import { FoldOutComponent } from './fold-out.component'
+import { FoldOutOptionDirective } from './fold-out.directive'
+import { exampleAlt, examplePrimary } from './fold-out.examples'
 
 export default {
-  title: 'Modal/Fold Out',
+  title: 'V-Angular/Fold Out',
   component: FoldOutComponent,
   decorators: [
-    applicationConfig({
-      providers: [
-        {
-          provide: APP_INITIALIZER,
-          useFactory: (iconLibrary: FaIconLibrary) => {
-            return async () => iconLibrary.addIcons(faEllipsisH);
-          },
-          deps: [FaIconLibrary],
-          multi: true,
-        },
-      ],
-    }),
+    // applicationConfig({
+    //   providers: [
+    //     {
+    //       provide: APP_INITIALIZER,
+    //       useFactory: (iconLibrary: FaIconLibrary) => {
+    //         return async () => iconLibrary.addIcons(faEllipsisH);
+    //       },
+    //       deps: [FaIconLibrary],
+    //       multi: true,
+    //     },
+    //   ],
+    // }),
     moduleMetadata({
       declarations: [FoldOutOptionDirective],
-      imports: [CommonModule, FontAwesomeModule, NgvI18nModule],
+      imports: [CommonModule /*FontAwesomeModule, NgvI18nModule*/],
     }),
   ],
   argTypes: {
@@ -39,7 +45,7 @@ export default {
       },
     },
   },
-} as Meta;
+} as Meta
 
 const Template: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
   template: /* html */ `
@@ -52,7 +58,7 @@ const Template: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
   </div>`,
   styleUrls: ['./fold-out.stories.scss'],
   props: args,
-});
+})
 
 const TemplateAlt: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
   template: /* html */ `
@@ -65,20 +71,20 @@ const TemplateAlt: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
     </div>`,
   styleUrls: ['./fold-out.stories.scss'],
   props: args,
-});
+})
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   alignOptions: 'left',
-};
+}
 Primary.parameters = {
   docs: { source: { code: examplePrimary } },
-};
+}
 
-export const Alternative = TemplateAlt.bind({});
+export const Alternative = TemplateAlt.bind({})
 Alternative.args = {
   alignOptions: 'right',
-};
+}
 Alternative.parameters = {
   docs: { source: { code: exampleAlt } },
-};
+}

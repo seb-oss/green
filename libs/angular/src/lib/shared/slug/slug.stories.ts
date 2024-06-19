@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
 
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
-import { SlugPipe } from './slug.pipe';
+import { SlugPipe } from './slug.pipe'
 
 interface PipeInput {
-  rawValue: string;
+  rawValue: string
 }
 
 export default {
-  title: 'Core/Slug',
+  title: 'V-Angular/Slug',
   decorators: [
     moduleMetadata({
       declarations: [SlugPipe],
@@ -21,7 +21,7 @@ export default {
       control: 'text',
     },
   },
-} as Meta;
+} as Meta
 
 const Template: StoryFn<PipeInput> = (args: PipeInput) => ({
   template: `
@@ -38,9 +38,9 @@ const Template: StoryFn<PipeInput> = (args: PipeInput) => ({
   }`,
   ],
   props: args,
-});
+})
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   rawValue: 'Hej hOpSan!',
-};
+}

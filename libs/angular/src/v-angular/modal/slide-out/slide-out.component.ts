@@ -26,7 +26,7 @@ import { DialogButtons } from '../modal.types'
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  selector: 'ngg-slideout-modal',
+  selector: 'ngv-slideout-modal, ngg-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],
 })
@@ -175,7 +175,7 @@ export class SlideOutComponent implements OnInit {
     window.setTimeout(() => {
       if (!this.slideOutRef) return
       const focusable = this.slideOutRef.nativeElement.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       )
       this.firstFocusable = focusable[0]
       this.lastFocusable = focusable[focusable.length - 1]

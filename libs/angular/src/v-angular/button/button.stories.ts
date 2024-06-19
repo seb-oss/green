@@ -1,24 +1,27 @@
-import '../core.globals';
+import { APP_BASE_HREF, CommonModule } from '@angular/common'
+import { RouterTestingModule } from '@angular/router/testing'
 
-import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { RouterTestingModule } from '@angular/router/testing';
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
-import { ExternalLinkDirective } from '../external-link/external-link.directive';
-import { ButtonComponent, ButtonStyle } from './button.component';
+import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
+import { ButtonComponent, ButtonStyle } from './button.component'
 
 interface StoryClickable {
-  text: string;
-  clickAction: (event: Event) => void;
+  text: string
+  clickAction: (event: Event) => void
 }
 
 const getButtonText = (type: ButtonStyle): string => {
-  return `${ButtonStyle[type]} button`;
-};
+  return `${ButtonStyle[type]} button`
+}
 
 export default {
-  title: 'Core/Button',
+  title: 'V-Angular/Button',
   component: ButtonComponent,
   decorators: [
     applicationConfig({
@@ -47,9 +50,11 @@ export default {
       },
     },
   },
-} as Meta;
+} as Meta
 
-const Template: StoryFn<ButtonComponent & StoryClickable> = (args: ButtonComponent & StoryClickable) => ({
+const Template: StoryFn<ButtonComponent & StoryClickable> = (
+  args: ButtonComponent & StoryClickable,
+) => ({
   template: /*html*/ `
     <div class="button-wrapper button-wrapper--{{ text }}">
       <ngv-button
@@ -77,62 +82,62 @@ const Template: StoryFn<ButtonComponent & StoryClickable> = (args: ButtonCompone
     }`,
   ],
   props: args,
-});
+})
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   buttonStyle: ButtonStyle.Primary,
   text: getButtonText(ButtonStyle.Primary),
   clickAction: console.log,
-};
+}
 
-export const Secondary = Template.bind({});
+export const Secondary = Template.bind({})
 Secondary.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Secondary,
   text: getButtonText(ButtonStyle.Secondary),
-};
+}
 
-export const Alternative = Template.bind({});
+export const Alternative = Template.bind({})
 Alternative.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Alternative,
   text: getButtonText(ButtonStyle.Alternative),
-};
+}
 
-export const Delete = Template.bind({});
+export const Delete = Template.bind({})
 Delete.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Delete,
   text: getButtonText(ButtonStyle.Delete),
-};
+}
 
-export const DeleteConfirm = Template.bind({});
+export const DeleteConfirm = Template.bind({})
 DeleteConfirm.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.DeleteConfirm,
   text: getButtonText(ButtonStyle.DeleteConfirm),
-};
+}
 
-export const Ghost = Template.bind({});
+export const Ghost = Template.bind({})
 Ghost.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Ghost,
   text: getButtonText(ButtonStyle.Ghost),
-};
+}
 
-export const GhostDark = Template.bind({});
+export const GhostDark = Template.bind({})
 GhostDark.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.GhostDark,
   text: getButtonText(ButtonStyle.GhostDark),
-};
+}
 
-export const Link = Template.bind({});
+export const Link = Template.bind({})
 Link.args = {
   ...Primary.args,
   type: 'link',
   href: 'https://seb.se',
   buttonStyle: ButtonStyle.Link,
   text: getButtonText(ButtonStyle.Link),
-};
+}

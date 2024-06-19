@@ -1,32 +1,43 @@
-import { CommonModule } from '@angular/common';
-import { importProvidersFrom } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { importProvidersFrom } from '@angular/core'
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+//import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { RadioComponent } from './radio.component';
+import { RadioComponent } from './radio.component'
 
 interface StoryInputListener {
-  selected: string;
-  action: (event: Event) => void;
+  selected: string
+  action: (event: Event) => void
 }
 
 export default {
-  title: 'Core/Radio',
+  title: 'V-Angular/Radio',
   component: RadioComponent,
 
   decorators: [
-    applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
-    }),
+    // applicationConfig({
+    //   providers: [importProvidersFrom(NgvI18nModule)],
+    // }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule /*NgvI18nModule*/,
+      ],
     }),
   ],
-} as Meta<RadioComponent>;
+} as Meta<RadioComponent>
 
-const Template: StoryFn<RadioComponent & StoryInputListener> = (args: RadioComponent & StoryInputListener) => ({
+const Template: StoryFn<RadioComponent & StoryInputListener> = (
+  args: RadioComponent & StoryInputListener,
+) => ({
   template: /*html*/ `
     <ngv-radio
       [label]="label"
@@ -53,15 +64,17 @@ const Template: StoryFn<RadioComponent & StoryInputListener> = (args: RadioCompo
   props: {
     ...args,
   },
-});
+})
 
-const TemplateWithFormControl: StoryFn<RadioComponent & any> = (args: RadioComponent & any) => {
-  const ctrl = new FormControl(args.selected);
-  ctrl.valueChanges.subscribe(console.log);
+const TemplateWithFormControl: StoryFn<RadioComponent & any> = (
+  args: RadioComponent & any,
+) => {
+  const ctrl = new FormControl(args.selected)
+  ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable();
-    ctrl.disable();
-  };
+    if (!!ctrl.disabled) return ctrl.enable()
+    ctrl.disable()
+  }
   return {
     template: /*html*/ `
     <label class="sdv-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
@@ -98,25 +111,25 @@ const TemplateWithFormControl: StoryFn<RadioComponent & any> = (args: RadioCompo
       formControl: ctrl,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   label: 'Radio label',
   name: 'radio',
   selected: 'radio2',
-};
+}
 
-export const WithLockedInput = TemplateWithFormControl.bind({});
+export const WithLockedInput = TemplateWithFormControl.bind({})
 WithLockedInput.args = {
   ...Primary.args,
   locked: false,
-};
+}
 
-export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({});
+export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   locked: false,
   displayDisabledAsLocked: true,
-};
+}
