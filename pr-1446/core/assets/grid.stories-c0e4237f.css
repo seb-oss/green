@@ -1,0 +1,1 @@
+gds-grid{--gds-debug-color: hsla(241, 100%, 66%, .4);--gds-debug-color-container: rgba(255, 82, 197, .4)}gds-grid>.exampleCell{align-items:center;aspect-ratio:16/9;border:1px solid var(--gds-debug-color);border-radius:8px;display:flex;font-size:14px;justify-content:center;min-height:40px;text-align:center}
