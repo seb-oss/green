@@ -1,8 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/card/index.js'
-import '../../../../../dist/libs/core/src/components/container/index.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import '../../../../../dist/libs/core/src/components/divider/index.js'
 import { html } from 'lit'
 
 /**
@@ -12,7 +9,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Divider',
+  title: 'Components/Layouts/Divider',
   component: 'gds-divider',
   tags: ['autodocs'],
 }
@@ -37,5 +34,6 @@ const DefaultParams: Story = {
 export const Divider: Story = {
   ...DefaultParams,
   name: 'Divider',
-  render: (args) => html` <gds-divider></gds-divider>`,
+  render: (args) =>
+    html` <gds-divider color="base400" size="2xl"></gds-divider>`,
 }

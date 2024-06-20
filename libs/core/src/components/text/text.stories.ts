@@ -12,7 +12,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Text',
+  title: 'Components/Layouts/Text',
   component: 'gds-text',
   tags: ['autodocs'],
 }

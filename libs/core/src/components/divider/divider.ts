@@ -13,11 +13,17 @@ import DividerCSS from './divider.style.css'
 export class GdsDivider extends GdsElement {
   static styles = [tokens, DividerCSS]
 
-  @styleExpressionProperty()
-  size?: string
-
-  @styleExpressionProperty()
+  @styleExpressionProperty({
+    property: 'color',
+    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
+  })
   color?: string
+
+  @styleExpressionProperty({
+    property: '--_size',
+    valueTemplate: (v) => `var(--gds-sys-space-spacer-${v})`,
+  })
+  size?: string
 
   // @styleExpressionProperty({
   //   valueTemplate: (v) => `${v}`,

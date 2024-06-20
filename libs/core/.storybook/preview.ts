@@ -15,6 +15,19 @@ import '../src/components/grid/index.js'
 
 setCustomElementsManifest(customElements)
 
+export const globalTypes = {
+  framework: {
+    name: 'Change Framework',
+    defaultValue: 'Web Components',
+    toolbar: {
+      icon: 'box',
+      items: ['Web Components', 'React', 'Angular'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+}
+
 export default {
   parameters: {
     docs: {

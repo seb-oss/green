@@ -15,7 +15,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Card',
+  title: 'Components/Layouts/Card',
   component: 'gds-card',
   tags: ['autodocs'],
 }
