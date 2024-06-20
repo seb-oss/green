@@ -148,6 +148,12 @@ export class GdsDropdown<ValueT = any>
   hideLabel = false
 
   /**
+   * Whether to disable the mobile styles.
+   */
+  @property()
+  disableMobileStyles = false
+
+  /**
    * Get the options of the dropdown.
    */
   get options() {
@@ -238,7 +244,7 @@ export class GdsDropdown<ValueT = any>
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
-        .useModalInMobileView=${true}
+        .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <button

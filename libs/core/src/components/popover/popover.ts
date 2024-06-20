@@ -2,7 +2,6 @@ import { html, unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
-import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import {
   computePosition,
   autoUpdate,
@@ -80,7 +79,7 @@ export class GdsPopover extends GdsElement {
    * Whether to use a modal dialog in mobile viewport.
    */
   @property()
-  useModalInMobileView = false
+  disableMobileStyles = false
 
   /**
    * A callback that returns the minimum width of the popover.
@@ -209,7 +208,7 @@ export class GdsPopover extends GdsElement {
         <dialog
           class="${classMap({
             'v-kb-visible': this._isVirtKbVisible,
-            'use-modal-in-mobile': this.useModalInMobileView,
+            'use-modal-in-mobile': !this.disableMobileStyles,
           })}"
           aria-hidden="${String(!this.open)}"
           @close=${() => this.open && this.#handleCancel()}
@@ -322,7 +321,7 @@ export class GdsPopover extends GdsElement {
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
     this.#isMobileViewport = matches
-    if (matches && this.useModalInMobileView) {
+    if (matches && !this.disableMobileStyles) {
       this.#autoPositionCleanupFn?.()
       this._elDialog?.style.removeProperty('left')
       this._elDialog?.style.removeProperty('top')
@@ -349,7 +348,7 @@ export class GdsPopover extends GdsElement {
     if (
       !referenceEl ||
       !floatingEl ||
-      (this.#isMobileViewport && this.useModalInMobileView)
+      (this.#isMobileViewport && !this.disableMobileStyles)
     )
       return
 

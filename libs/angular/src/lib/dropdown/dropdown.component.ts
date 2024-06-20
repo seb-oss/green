@@ -76,6 +76,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() size?: 'small' | 'medium'
   @Input() hideLabel?: boolean
   @Input() maxHeight?: number
+  @Input() disableMobileStyles?: boolean
 
   /** @deprecated */
   @Input() fixedPlacement?: DropdownPlacements
