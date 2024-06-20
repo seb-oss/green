@@ -26,6 +26,16 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  style: {
+    name: 'Change Style',
+    defaultValue: '2023',
+    toolbar: {
+      icon: 'box',
+      items: ['2016', '2023'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 }
 
 export default {
