@@ -1,4 +1,3 @@
-import { property } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
@@ -12,6 +11,10 @@ import CardCSS from './card.style.css'
 /**
  * @element gds-card
  * The `gds-card` is a custom element that provides a flexible card system.
+ * It can be used to create a card with different styles and configurations.
+ * The card can be customized with different properties like shadow, border, radius, and background.
+ * It is designed to be used in different scenarios like displaying content, images, or other elements.
+ * It can be used in combination with other elements like `gds-grid`, `gds-container`, `gds-img`, `gds-text` etc.
  *
  * @status beta
  *
@@ -67,9 +70,7 @@ export class GdsCard extends GdsElement {
    * @example
    * ```html
    * <gds-card radius="m">All breakpoints</gds-card>
-   * <gds-card
-   *  radius="s{none none xs} m{none xs none xs} l{s}"
-   * >
+   * <gds-card radius="s{none none xs} m{none xs none xs} l{s}" >
    *    Specific breakpoints and sides
    * </gds-card>
    * ```
@@ -105,14 +106,19 @@ export class GdsCard extends GdsElement {
    * ```html
    * <gds-card border="s{currentColor} m{currentColor} l{currentColor}"></gds-card>
    * ```
+   *
+   * When you want to apply the border in all breakpoints and sides you can use the following:
+   * ```html
+   * <gds-card border="currentColor"></gds-card>
+   * ```
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `1px solid ${v}`,
     styleTemplate: (_prop, values) => {
       const top = values[0]
-      const right = values[1]
-      const bottom = values[2]
-      const left = values[3]
+      const right = values.length > 1 ? values[1] : top
+      const bottom = values.length > 2 ? values[2] : top
+      const left = values.length > 3 ? values[3] : top
       return `border-top: ${top}; border-right: ${right}; border-bottom: ${bottom}; border-left: ${left};`
     },
   })

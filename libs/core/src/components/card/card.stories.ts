@@ -2,18 +2,23 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
-// import '../../../../../dist/libs/core/src/components/grid/index.js'
-// import '../../../../../dist/libs/core/src/components/button/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
 import { html } from 'lit'
 
 /**
- * The `gds-card`
+ * The `gds-card` is a custom element that provides a flexible card system.
  *
- * ## Usage
+ * It can be used to create a card with different styles and configurations.
+ *
+ * The card can be customized with different properties like `shadow`, `border`, `radius`, and `background`.
+ * It is designed to be used in different scenarios like displaying content, images, or other elements.
+ * It can be used in combination with other elements like `gds-grid`, `gds-container`, `gds-img`, `gds-text` etc.
+ *
+ * @status beta
  *
  */
+
 const meta: Meta = {
   title: 'Components/Layouts/Card',
   component: 'gds-card',
@@ -30,18 +35,11 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {},
-}
-
-/**
- * Card
- */
-
-export const Card: Story = {
-  ...DefaultParams,
-  name: 'Basic Card',
-  render: (args) =>
-    html` <gds-card shadow="s{xs} m{xs} l{s}" radius="m">
+  args: {
+    shadow: 's{m}',
+    radius: 'm',
+    background: '',
+    innerHTML: `<gds-card shadow="s{xs} m{xs} l{s}" radius="m">
       <gds-container
         padding="s{xs} m{l} l{2xl}"
         display="flex"
@@ -57,6 +55,15 @@ export const Card: Story = {
         </gds-button>
       </gds-container>
     </gds-card>`,
+  },
+}
+
+/**
+ * Card
+ */
+
+export const Card: Story = {
+  ...DefaultParams,
 }
 
 export const CardBorder: Story = {
@@ -128,7 +135,7 @@ export const CardBorder: Story = {
         shadow="s"
         radius="m"
         background="base100"
-        border="currentColor currentColor currentColor currentColor"
+        border="currentColor"
       >
         <gds-container
           padding="2xl"
