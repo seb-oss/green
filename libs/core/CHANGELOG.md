@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.23.0
+
+### Minor Changes
+
+- f94b8ad: **Dropdown:** Add option for disabling mobile styles
+
 ## 1.22.8
 
 ### Patch Changes

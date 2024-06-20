@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.8.0
+
+### Minor Changes
+
+- f94b8ad: **Dropdown:** Add option for disabling mobile styles
+
+### Patch Changes
+
+- 23022c1: updated in page wizard design
+- Updated dependencies [f94b8ad]
+- Updated dependencies [23022c1]
+- Updated dependencies [47d4df3]
+  - @sebgroup/green-core@1.23.0
+  - @sebgroup/chlorophyll@3.4.1
+
 ## 3.7.0
 
 ### Minor Changes
