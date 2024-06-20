@@ -53,6 +53,9 @@ export interface DropdownArgs {
 
   /** Max height of the dropdown */
   maxHeight?: number
+
+  /** Whether to disable the mobile styles */
+  disableMobileStyles?: boolean
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -100,6 +103,7 @@ export const Dropdown = ({
   validator,
   value,
   syncPopoverWidth,
+  disableMobileStyles,
   ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
@@ -137,6 +141,7 @@ export const Dropdown = ({
         size={props.size}
         hideLabel={props.hideLabel}
         maxHeight={props.maxHeight}
+        disableMobileStyles={disableMobileStyles}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.4.1
+
+### Patch Changes
+
+- 23022c1: updated in page wizard design
+- 47d4df3: fix: correct color and background in Safari iOS
+
 ## 3.4.0
 
 ### Minor Changes
