@@ -125,7 +125,7 @@ export class GdsContainer extends GdsElement {
   @styleExpressionProperty({
     property: 'mask-image',
     valueTemplate: (v) =>
-      `linear-gradient(to ${v}, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 50%)`,
+      `linear-gradient(to ${v}, currentColor 40%, transparent)`,
   })
   mask?: string
 

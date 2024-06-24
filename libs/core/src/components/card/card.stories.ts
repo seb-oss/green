@@ -6,6 +6,7 @@ import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import '../../../../../dist/libs/core/src/components/icon/icons/circles-three.js'
 import { html } from 'lit'
 
 /**
@@ -67,12 +68,18 @@ const DefaultParams: Story = {
 export const Card: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="3" gap="2xl">
+    <gds-grid columns="xs{1} m{2} l{3}" gap="2xl">
       <gds-card shadow="s{xs} m{xs} l{s}" radius="xs" overflow="hidden">
-        <gds-container display="flex" gap="none" direction="column">
+        <gds-container
+          display="flex"
+          gap="none"
+          direction="column"
+          align="stretch"
+        >
           <gds-container position="relative">
             <gds-img
-              src="https://placehold.co/600x400/e9f5ff/2e3438?text=gds-img"
+              src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
+              ratio="1/1"
             ></gds-img>
             <gds-container
               position="absolute"
@@ -94,16 +101,18 @@ export const Card: Story = {
             direction="column"
             padding="s{xs} m{l} l{2xl}"
             align="flex-start"
-            gap="l"
+            gap="2xl"
           >
-            <gds-text tag="h2" size="title-large">Title</gds-text>
-            <gds-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-text>
+            <gds-container>
+              <gds-text tag="h2" size="title-large">James Doe</gds-text>
+              <gds-text>
+                Passionate software engineer with a love for coding and
+                problem-solving.
+              </gds-text>
+            </gds-container>
             <gds-button>
-              Button
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+              Follow
+              <gds-icon-circles-three slot="lead"></gds-icon-circles-three>
             </gds-button>
           </gds-container>
         </gds-container>
@@ -114,10 +123,11 @@ export const Card: Story = {
         border="var(--gds-sys-color-base200)"
         overflow="hidden"
       >
-        <gds-container display="flex" gap="none" direction="column" padding="l">
+        <gds-container display="flex" gap="2xl" direction="column" padding="l">
           <gds-container position="relative">
             <gds-img
-              src="https://placehold.co/600x400/e9f5ff/2e3438?text=gds-img"
+              src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
+              ratio="1/1"
               radius="xs"
             ></gds-img>
             <gds-container
@@ -138,15 +148,18 @@ export const Card: Story = {
           <gds-container
             display="flex"
             direction="column"
-            padding="s{xs} m{l} l{2xl}"
+            padding="s{xs} m{l} l{m}"
             align="flex-start"
-            gap="s"
+            gap="2xl"
           >
-            <gds-text tag="h2" size="title-large">Title</gds-text>
-            <gds-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-text>
+            <gds-container>
+              <gds-text tag="h2" size="title-large">Midsummer</gds-text>
+              <gds-text>
+                Midsummer is a celebration of the season of summer, taking place
+                on or near the date of the summer solstice in the Northern
+                Hemisphere
+              </gds-text>
+            </gds-container>
             <gds-button>
               Button
               <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
@@ -159,7 +172,7 @@ export const Card: Story = {
           <gds-video
             src="https://github.com/seb-oss/green/assets/2398447/d77a95d0-e4d7-4c49-bd95-50d0f72f1a7a"
             fit="cover"
-            ratio="16/9"
+            ratio="1/1"
             events="none"
             autoplay
             muted
@@ -169,11 +182,11 @@ export const Card: Story = {
             position="absolute"
             display="flex"
             padding="4xl 2xl 2xl 2xl"
-            gap="m"
+            gap="xl"
             direction="column"
             inset="50% 0px 0px 0px"
-            filter="10px"
-            background="rgba(0, 0, 0, 0.1)"
+            filter="none"
+            background="rgba(0, 0, 0, 0.6)"
             color="white-text"
             radius="none none m m"
             mask="top"
