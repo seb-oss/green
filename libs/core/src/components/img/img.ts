@@ -32,6 +32,18 @@ export class GdsImg extends GdsElement {
   inset?: string
 
   @styleExpressionProperty({
+    property: 'width',
+    valueTemplate: (v) => v,
+  })
+  width?: string
+
+  @styleExpressionProperty({
+    property: 'height',
+    valueTemplate: (v) => v,
+  })
+  height?: string
+
+  @styleExpressionProperty({
     property: '--_opacity',
     valueTemplate: (v) => v,
   })

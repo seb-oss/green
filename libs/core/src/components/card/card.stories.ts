@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/img/index.js'
+import '../../../../../dist/libs/core/src/components/video/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
@@ -150,6 +151,42 @@ export const Card: Story = {
               Button
               <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
             </gds-button>
+          </gds-container>
+        </gds-container>
+      </gds-card>
+      <gds-card radius="m" overflow="hidden">
+        <gds-container position="relative" display="flex" height="100%">
+          <gds-video
+            src="https://github.com/seb-oss/green/assets/2398447/d77a95d0-e4d7-4c49-bd95-50d0f72f1a7a"
+            fit="cover"
+            ratio="16/9"
+            events="none"
+            autoplay
+            muted
+            loop
+          ></gds-video>
+          <gds-container
+            position="absolute"
+            display="flex"
+            padding="4xl 2xl 2xl 2xl"
+            gap="m"
+            direction="column"
+            inset="50% 0px 0px 0px"
+            filter="10px"
+            background="rgba(0, 0, 0, 0.1)"
+            color="white-text"
+            radius="none none m m"
+            mask="top"
+            justify="flex-end"
+          >
+            <gds-container>
+              <gds-text size="title-large">Jane Doe</gds-text>
+              <gds-text size="body-medium">UX Designer</gds-text>
+            </gds-container>
+            <gds-container display="flex" gap="s">
+              <gds-button rank="secondary">Message</gds-button>
+              <gds-button rank="secondary">Follow</gds-button>
+            </gds-container>
           </gds-container>
         </gds-container>
       </gds-card>
