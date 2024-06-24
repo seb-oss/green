@@ -123,7 +123,7 @@ export const Card: Story = {
         border="var(--gds-sys-color-base200)"
         overflow="hidden"
       >
-        <gds-container display="flex" gap="2xl" direction="column" padding="l">
+        <gds-container display="flex" gap="l" direction="column" padding="l">
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
@@ -153,7 +153,7 @@ export const Card: Story = {
             gap="2xl"
           >
             <gds-container>
-              <gds-text tag="h2" size="title-large">Midsummer</gds-text>
+              <gds-text tag="h2" size="title-large">Lorem Ipsum</gds-text>
               <gds-text>
                 Midsummer is a celebration of the season of summer, taking place
                 on or near the date of the summer solstice in the Northern
