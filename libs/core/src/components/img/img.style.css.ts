@@ -15,6 +15,8 @@ const style = css`
     width: 100%;
     height: auto;
     opacity: var(--_opacity, 1);
+    overflow: hidden;
+    border-radius: inherit;
   }
 
   img {

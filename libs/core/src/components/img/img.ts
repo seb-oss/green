@@ -49,6 +49,12 @@ export class GdsImg extends GdsElement {
   @property()
   alt?: string
 
+  @styleExpressionProperty({
+    property: 'border-radius',
+    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
+  })
+  radius?: string
+
   render() {
     return html`<figure><img src="${this.src}" alt="${this.alt}" /></figure>`
   }

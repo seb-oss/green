@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
+import '../../../../../dist/libs/core/src/components/img/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
@@ -64,6 +65,96 @@ const DefaultParams: Story = {
 
 export const Card: Story = {
   ...DefaultParams,
+  render: (args) => html`
+    <gds-grid columns="3" gap="2xl">
+      <gds-card shadow="s{xs} m{xs} l{s}" radius="xs" overflow="hidden">
+        <gds-container display="flex" gap="none" direction="column">
+          <gds-container position="relative">
+            <gds-img
+              src="https://placehold.co/600x400/e9f5ff/2e3438?text=gds-img"
+            ></gds-img>
+            <gds-container
+              position="absolute"
+              filter="20px"
+              inset="10px 10px auto auto"
+              padding="s{xs} m{xs} l{xs}"
+              background="rgba(0, 0, 0, 0.1)"
+              radius="xs"
+              color="white-text"
+              display="flex"
+              align="center"
+              jusitfy="center"
+            >
+              <gds-icon-arrow-down></gds-icon-arrow-down>
+            </gds-container>
+          </gds-container>
+          <gds-container
+            display="flex"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+            align="flex-start"
+            gap="l"
+          >
+            <gds-text tag="h2" size="title-large">Title</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>
+              Button
+              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+            </gds-button>
+          </gds-container>
+        </gds-container>
+      </gds-card>
+      <gds-card
+        shadow="l"
+        radius="m"
+        border="var(--gds-sys-color-base200)"
+        overflow="hidden"
+      >
+        <gds-container display="flex" gap="none" direction="column" padding="l">
+          <gds-container position="relative">
+            <gds-img
+              src="https://placehold.co/600x400/e9f5ff/2e3438?text=gds-img"
+              radius="xs"
+            ></gds-img>
+            <gds-container
+              position="absolute"
+              filter="20px"
+              inset="10px 10px auto auto"
+              padding="s{xs} m{xs} l{xs}"
+              background="rgba(0, 0, 0, 0.1)"
+              radius="xs"
+              color="white-text"
+              display="flex"
+              align="center"
+              jusitfy="center"
+            >
+              <gds-icon-arrow-down></gds-icon-arrow-down>
+            </gds-container>
+          </gds-container>
+          <gds-container
+            display="flex"
+            direction="column"
+            padding="s{xs} m{l} l{2xl}"
+            align="flex-start"
+            gap="s"
+          >
+            <gds-text tag="h2" size="title-large">Title</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>
+              Button
+              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+            </gds-button>
+          </gds-container>
+        </gds-container>
+      </gds-card>
+    </gds-grid>
+  `,
 }
 
 export const CardBorder: Story = {
