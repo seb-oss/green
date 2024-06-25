@@ -199,8 +199,8 @@ export const Lines: Story = {
         </gds-text>
       </gds-container>
       <gds-container display="flex" direction="column" gap="m">
-        <gds-text tag="h2" size="body-small">Lines:3</gds-text>
         <gds-divider></gds-divider>
+        <gds-text tag="h2" size="body-small">Lines:3</gds-text>
         <gds-text size="display-medium" lines="3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
