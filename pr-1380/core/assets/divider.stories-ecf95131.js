@@ -1,0 +1,5 @@
+import"./chunk.UYKLFTQV-37ab8f29.js";import{x as i}from"./lit-element-2a5e401f.js";import"./chunk.ZQ4D5K7J-1a209b3c.js";import"./Reflect-a49e984a.js";import"./_commonjsHelpers-725317a4.js";const u={title:"Components/Layouts/Divider",component:"gds-divider",tags:["autodocs"],parameters:{docs:{description:{component:"The `gds-divider`\n\n## Usage"}}}},t={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},argTypes:{}},e={...t,name:"Divider",render:n=>i` <gds-divider color="base400" size="2xl"></gds-divider>`};var r,s,o,d,a;e.parameters={...e.parameters,docs:{...(r=e.parameters)==null?void 0:r.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Divider',
+  render: args => html\` <gds-divider color="base400" size="2xl"></gds-divider>\`
+}`,...(o=(s=e.parameters)==null?void 0:s.docs)==null?void 0:o.source},description:{story:"Headings",...(a=(d=e.parameters)==null?void 0:d.docs)==null?void 0:a.description}}};const v=["Divider"];export{e as Divider,v as __namedExportsOrder,u as default};
