@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/divider/index.js'
+import './index.js'
 import { html } from 'lit'
 
 /**

@@ -105,17 +105,6 @@ export class GdsText extends GdsElement {
   })
   align?: string
 
-  /**
-   * @property font
-   * Controls the font-family property of the text.
-   * Supports all valid CSS font-family values.
-   */
-  @styleExpressionProperty({
-    property: 'font-family',
-    valueTemplate: (v) => v,
-  })
-  font?: string
-
   createTag() {
     const tag = document.createElement(this.tag)
     tag.appendChild(document.createElement('slot'))

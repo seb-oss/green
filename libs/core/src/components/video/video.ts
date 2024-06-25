@@ -155,7 +155,7 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
   })
   radius?: string
 
@@ -168,6 +168,7 @@ export class GdsVideo extends GdsElement {
   @property({ type: Boolean }) loop?: boolean
   @query('video') videoElement!: HTMLVideoElement
 
+  // Method to programmatically apply video settings
   applyVideoSettings() {
     if (this.videoElement) {
       this.videoElement.src = this.src || ''

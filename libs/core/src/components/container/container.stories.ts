@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/card/index.js'
+import '../card/index.js'
 import { html } from 'lit'
 
 /**
