@@ -1,5 +1,81 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
+import '../../../../../dist/libs/core/src/components/container/index.js'
+import '../../../../../dist/libs/core/src/components/text/index.js'
+import "./style.stories.css"
 
 <Meta title="Style/Spacing" />
 
 # Size
+
+### The spacing scale is based on a 4px grid. 
+
+The spacing scale is used for margin, padding, gap, radius and all the spacing values.
+
+### Spacing Scale
+<gds-container display="flex" direction="column" gap="s">
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 0</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-0)"  height="40px" background="currentColor"></gds-container>
+    </gds-container>
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 2XS</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-2xs)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: XS</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-xs)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: S</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-s)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: M</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-m)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: L</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-l)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 2XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-2xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 3XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-3xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 4XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-4xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 5XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-5xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: 6XL</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-6xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
+        <gds-text>Size: MAX*</gds-text>
+        <gds-container width="var(--gds-sys-space-spacer-6xl)"  height="40px" background="currentColor"></gds-container>
+    </gds-container> 
+</gds-container>
+ 
+
+ <br />
+ <br />
+ <br />
+
+ ### *1 MAX  
+ The MAX size is the maximum size of the spacing scale used when you want to create a circular shape.
+ Example 
+
+```
+    <gds-container radius="max">MAX</gds-container>
+```

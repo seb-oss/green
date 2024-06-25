@@ -1,0 +1,13 @@
+gds-container {
+  font-family: sans-serif;
+
+  & > gds-container {
+    border: 1px solid #e0e0e0;
+  }
+
+  gds-text {
+    min-width: 10ch;
+    display: inline-block;
+    text-align: left;
+  }
+}

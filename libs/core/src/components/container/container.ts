@@ -325,6 +325,17 @@ export class GdsContainer extends GdsElement {
   height?: string
 
   /**
+   * @property width
+   * Controls the width property of the container.
+   * Supports all valid CSS height values.
+   */
+  @styleExpressionProperty({
+    property: 'width',
+    valueTemplate: (v) => v,
+  })
+  width?: string
+
+  /**
    * @property mask
    * Controls the mask-image property of the container.
    * Adds a predefined style of mask to the container.
