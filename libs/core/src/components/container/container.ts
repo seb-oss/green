@@ -80,6 +80,14 @@ export class GdsContainer extends GdsElement {
   padding?: string
 
   /**
+   * @property margin
+   * Controls the margin of the text.
+   * Supports all the default margin values.
+   */
+  @styleExpressionProperty()
+  margin?: string
+
+  /**
    * @property display
    * Controls the display property of the container.
    * Supports all valid CSS display values.

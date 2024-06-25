@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
-import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import '../../../../../dist/libs/core/src/components/text/index.js'
 import { html } from 'lit'
 
 /**
@@ -27,31 +26,158 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {},
+  argTypes: {
+    size: {
+      options: [
+        'label-overline',
+        'label-input-medium',
+        'label-input-large',
+        'label-information-medium',
+        'label-information-large',
+        'label-small',
+        'label-medium',
+        'label-large',
+        'body-small',
+        'body-medium',
+        'body-large',
+        'title-small',
+        'title-medium',
+        'title-large',
+        'headline-small',
+        'headline-medium',
+        'headline-large',
+        'display-small',
+        'display-medium',
+        'display-large',
+      ],
+      control: { type: 'select' },
+    },
+    tag: {
+      options: [
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'p',
+        'span',
+        'em',
+        'mark',
+        'strong',
+      ],
+      control: { type: 'select' },
+    },
+    wrap: {
+      options: ['balance', 'nowrap', 'pretty', 'wrap'],
+      control: { type: 'select' },
+    },
+    length: {
+      control: { type: 'number' },
+    },
+    min: {
+      control: { type: 'number' },
+    },
+    align: {
+      options: ['left', 'center', 'right', 'justify'],
+      control: { type: 'select' },
+    },
+    font: {
+      control: { type: 'string' },
+    },
+  },
 }
 
 /**
- * Headings
+ * # Headings
+ *
+ * In order to have more flexibility the tag it self and the sizing are controlled by the user.
+ * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
+ *
+ * Tag: h1, h2, h3, h4, h5, h6, p, span, em, mark, strong etc.
+ *
+ * #### The defualt tag is `p` and the defualt size is `body-medium`
  */
 
 export const Card: Story = {
   ...DefaultParams,
-  name: 'Headings',
+  name: 'Tags',
   render: (args) =>
-    html` <gds-card shadow="s{xs} m{xs} l{s}" radius="m">
-      <gds-container
-        padding="s{xs} m{l} l{2xl}"
-        display="flex"
-        align="center"
-        justify="center"
-        gap="xl"
-      >
-        <span>Default</span> <gds-icon-arrow-down></gds-icon-arrow-down>
+    html`<gds-container display="flex" direction="column" gap="m">
+      <gds-text tag="h1">H1</gds-text>
+      <gds-text tag="h2">H2</gds-text>
+      <gds-text tag="h3">H3</gds-text>
+      <gds-text tag="h4">H4</gds-text>
+      <gds-text tag="h5">H5</gds-text>
+      <gds-text tag="h6">H6</gds-text>
+      <gds-text>Paragraph</gds-text>
+      <gds-text tag="span">Span</gds-text>
+      <gds-text tag="em">Em</gds-text>
+      <gds-text tag="mark">Mark</gds-text>
+      <gds-text tag="strong">strong</gds-text>
+    </gds-container>`,
+}
 
-        <gds-button>
-          Button
-          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-        </gds-button>
-      </gds-container>
-    </gds-card>`,
+export const Size: Story = {
+  name: 'Labels',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="label-overline">Label: Overline</gds-text>
+      <gds-text size="label-input-medium">Label: Input Medium</gds-text>
+      <gds-text size="label-input-large">Label: Input Large</gds-text>
+      <gds-text size="label-information-medium"
+        >Label: Input Information Medium</gds-text
+      >
+      <gds-text size="label-information-large"
+        >Label: Input Information Large</gds-text
+      >
+      <gds-text size="label-small">Label: Input Small</gds-text>
+      <gds-text size="label-medium">Label: Input Medium</gds-text>
+      <gds-text size="label-large:">Label: Input Large</gds-text>
+    </gds-container>
+  `,
+}
+
+export const Body: Story = {
+  name: 'Body',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="body-small">Body: Small</gds-text>
+      <gds-text size="body-medium">Body: Medium</gds-text>
+      <gds-text size="body-large:">Body: Large</gds-text>
+    </gds-container>
+  `,
+}
+
+export const Title: Story = {
+  name: 'Title',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="title-small">Title: Small</gds-text>
+      <gds-text size="title-medium">Title: Medium</gds-text>
+      <gds-text size="title-large:">Title: Large</gds-text>
+    </gds-container>
+  `,
+}
+
+export const Headline: Story = {
+  name: 'Headline',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="headline-small">Headline: Small</gds-text>
+      <gds-text size="headline-medium">Headline: Medium</gds-text>
+      <gds-text size="headline-large:">Headline: Large</gds-text>
+    </gds-container>
+  `,
+}
+
+export const Display: Story = {
+  name: 'Display',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="display-small">Display: Small</gds-text>
+      <gds-text size="display-medium">Display: Medium</gds-text>
+      <gds-text size="display-large:">Display: Large</gds-text>
+    </gds-container>
+  `,
 }

@@ -124,6 +124,25 @@ export class GdsCard extends GdsElement {
   })
   border?: string
 
+  /**
+   * @property padding
+   * Controls the padding using shorthand method for the container.
+   * Supports all valid CSS padding values.
+   * You can apply padding in each side like this:
+   * ```html
+   * <gds-container padding="xl"></gds-container>
+   * ```
+   * `xl` in tis case will be applied to all breakpoints and sides.
+   *
+   * Padding also support breakpoint syntax like this:
+   * ```html
+   * <gds-container padding="xs{s} m{m} l{xl}"></gds-container>
+   * ```
+   * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
+   */
+  @styleExpressionProperty()
+  padding?: string
+
   render() {
     return html`<slot></slot>`
   }
