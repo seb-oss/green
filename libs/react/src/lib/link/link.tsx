@@ -15,7 +15,7 @@ export const Link = ({
   role,
   ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const linkClassName = classNames(className, { button: button }, button, {"gds-link-arrow": arrow})
+  const linkClassName = classNames(className, { button: button }, button, {"link gds-link-arrow": arrow})
 
   return (
     <a
