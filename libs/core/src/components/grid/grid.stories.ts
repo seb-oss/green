@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.ts'
+import './grid'
 import './grid.stories.css'
 import { html } from 'lit'
 
@@ -9,7 +9,7 @@ import { html } from 'lit'
  * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
  */
 const meta: Meta = {
-  title: 'Components/Grid',
+  title: 'Docs/Layout/Grid',
   component: 'gds-grid',
   tags: ['autodocs'],
 }

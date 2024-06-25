@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.js'
-import '../img/index.js'
-import '../video/index.js'
-import '../container/index.js'
-import '../text/index.js'
-import '../divider/index.js'
+import './card'
+import '../img'
+import '../video'
+import '../container'
+import '../text'
+import '../divider'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
 import '../icon/icons/circles-three.js'
@@ -24,7 +24,7 @@ import { html } from 'lit'
  */
 
 const meta: Meta = {
-  title: 'Components/Layout/Card',
+  title: 'Docs/Layout/Card',
   component: 'gds-card',
   tags: ['autodocs'],
 }

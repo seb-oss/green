@@ -51,7 +51,8 @@ export default {
       storySort: {
         order: [
           'Welcome',
-          'Components',
+          'Docs',
+          ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',
           ['Architecture'],
           'Contributing',

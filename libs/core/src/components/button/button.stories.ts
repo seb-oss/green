@@ -14,7 +14,7 @@ import '../icon/icons/arrow-right.js'
  * A good rule of thumb is to use only one primary action in each context.
  */
 const meta: Meta = {
-  title: 'Components/Button',
+  title: 'Docs/Components/Button',
   component: 'gds-button',
   parameters: {
     layout: 'centered',

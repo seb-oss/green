@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../card/index.js'
-import '../container/index.js'
-import './index.js'
+import './text'
+import '../card'
+import '../container'
 import { html } from 'lit'
 
 /**
@@ -11,7 +11,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Content/Text',
+  title: 'Docs/Content/Text',
   component: 'gds-text',
   tags: ['autodocs'],
 }

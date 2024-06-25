@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.js'
+import './divider'
 import { html } from 'lit'
 
 /**
@@ -9,7 +9,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Content/Divider',
+  title: 'Docs/Content/Divider',
   component: 'gds-divider',
   tags: ['autodocs'],
 }

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.ts'
+import './img'
 import { html } from 'lit'
 
 /**
@@ -9,7 +9,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Media/Image',
+  title: 'Docs/Media/Image',
   component: 'gds-img',
   tags: ['autodocs'],
 }

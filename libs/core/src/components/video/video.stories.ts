@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.ts'
+import './video'
 import { html } from 'lit'
 
 /**
@@ -9,7 +9,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Media/Video',
+  title: 'Docs/Media/Video',
   component: 'gds-video',
   tags: ['autodocs'],
 }

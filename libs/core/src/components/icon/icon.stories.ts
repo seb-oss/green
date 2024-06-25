@@ -16,7 +16,7 @@ import './icon.stories.css'
  * ```
  */
 const meta: Meta = {
-  title: 'Components/Icon',
+  title: 'Docs/Components/Icon',
   component: 'gds-icon-bank',
   tags: ['autodocs'],
 }
