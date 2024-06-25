@@ -1,9 +1,10 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
+import '../../../../../dist/libs/core/src/components/card/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
 import "./style.stories.css"
 
-<Meta title="Style/Spacing" />
+<Meta title="Style/Size" />
 
 # Size
 
@@ -13,58 +14,102 @@ The spacing scale is used for margin, padding, gap, radius and all the spacing v
 
 ### Spacing Scale
 <gds-container display="flex" direction="column" gap="s">
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 0</gds-text>
-        <gds-container width="var(--gds-space-0)"  height="40px" background="currentColor"></gds-container>
-    </gds-container>
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 2XS</gds-text>
-        <gds-container width="var(--gds-space-2xs)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: XS</gds-text>
-        <gds-container width="var(--gds-space-xs)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: S</gds-text>
-        <gds-container width="var(--gds-space-s)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: M</gds-text>
-        <gds-container width="var(--gds-space-m)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: L</gds-text>
-        <gds-container width="var(--gds-space-l)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: XL</gds-text>
-        <gds-container width="var(--gds-space-xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 2XL</gds-text>
-        <gds-container width="var(--gds-space-2xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 3XL</gds-text>
-        <gds-container width="var(--gds-space-3xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 4XL</gds-text>
-        <gds-container width="var(--gds-space-4xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 5XL</gds-text>
-        <gds-container width="var(--gds-space-5xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: 6XL</gds-text>
-        <gds-container width="var(--gds-space-6xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
-    <gds-container display="flex" gap="2xl" align="center" padding="s l" >
-        <gds-text>Size: MAX*</gds-text>
-        <gds-container width="var(--gds-space-6xl)"  height="40px" background="currentColor"></gds-container>
-    </gds-container> 
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center" overflow="hidden">
+            <gds-text min="10" align="left">MAX*</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 max 0 0" background="currentColor" mask="right"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">8XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 8xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">7XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 7xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">6XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 6xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">5XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 5xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">4XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 4xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">3XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 3xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">2XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 2xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">XL</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 xl 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">L</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 l 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">M</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 m 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">S</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 s 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">XS</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 xs 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">2XS</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 2xs 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+    <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">3XS</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 3xs 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
+        <gds-card shadow="s" radius="s">
+        <gds-container display="flex" gap="s" padding="s l" align="center">
+            <gds-text min="10" align="left">0</gds-text>
+            <gds-container radius="xs" display="inline-block" width="1px" height="40px" padding="0 0 0 0" background="currentColor"></gds-container>
+        </gds-container>
+    </gds-card>
 </gds-container>
  
 
@@ -74,8 +119,16 @@ The spacing scale is used for margin, padding, gap, radius and all the spacing v
 
  ### *1 MAX  
  The MAX size is the maximum size of the spacing scale used when you want to create a circular shape.
- Example 
 
+ Example 
 ```
     <gds-container radius="max">MAX</gds-container>
 ```
+
+ <br />
+ <br />
+ <br />
+
+<gds-container display="flex" align="center" justify="center" width="200px" height="200px" background="black" border="currentColor" color="base800" radius="max">
+    MAX (999px)
+</gds-container>

@@ -1,13 +1,14 @@
 gds-container {
   font-family: sans-serif;
 
-  & > gds-container {
-    border: 1px solid #e0e0e0;
-  }
-
-  gds-text {
-    min-width: 10ch;
+  /* gds-card {
+    padding: 16px 24px;
+  } */
+  /* gds-container {
     display: inline-block;
-    text-align: left;
-  }
+    height: 40px;
+    width: 1px;
+    background: currentColor;
+    box-sizing: border-box;
+  } */
 }

@@ -84,6 +84,28 @@ export class GdsText extends GdsElement {
   length?: string
 
   /**
+   * @property max
+   * Controls the max-width property of the text.
+   * Supports all valid CSS max-width values.
+   */
+  @styleExpressionProperty({
+    property: 'min-width',
+    valueTemplate: (v) => `${v}ch`,
+  })
+  min?: string
+
+  /**
+   * @property align
+   * Controls the text-align property of the text.
+   * Supports all valid CSS text-align values.
+   */
+  @styleExpressionProperty({
+    property: 'text-align',
+    valueTemplate: (v) => v,
+  })
+  align?: string
+
+  /**
    * @property font
    * Controls the font-family property of the text.
    * Supports all valid CSS font-family values.

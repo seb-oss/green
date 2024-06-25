@@ -60,6 +60,10 @@
       "MAX": {
         "value": "999",
         "type": "float"
+      },
+      "0": {
+        "value": "0",
+        "type": "float"
       }
     }
   }

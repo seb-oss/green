@@ -113,15 +113,32 @@ export class GdsContainer extends GdsElement {
   inset?: string
 
   /**
-   * @property opacity
-   * Controls the opacity property of the container.
-   * Supports all valid CSS opacity values.
+   * @property overflow
+   * Controls the overflow property of the container.
+   * Supports all valid CSS overflow values.
    */
   @styleExpressionProperty({
     property: 'overflow',
     valueTemplate: (v) => v,
   })
   overflow?: string
+
+  /**
+   * @property opacity
+   * Controls the opacity property of the divider.
+   * Supports all the opacity tokens from the design system.
+   * You can apply opacity like this:
+   * ```html
+   * <gds-divider opacity="0.2"></gds-divider>
+   * ```
+   * The above example will apply the opacity style of base400.
+   *
+   */
+  @styleExpressionProperty({
+    property: 'opacity',
+    valueTemplate: (v) => v,
+  })
+  opacity?: string
 
   /**
    * @property align
@@ -334,6 +351,17 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   width?: string
+
+  /**
+   * @property stack
+   * Controls the z-index property of the container.
+   * Supports all valid CSS z-index values.
+   */
+  @styleExpressionProperty({
+    property: 'z-index',
+    valueTemplate: (v) => v,
+  })
+  stack?: string
 
   /**
    * @property mask
