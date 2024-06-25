@@ -6,8 +6,8 @@
 
     --_transition: var(--gds-sys-transition);
 
-    --_padding-inline: var(--gds-sys-padding-inline);
-    --_padding-block: var(--gds-sys-padding-block);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-m);
 
     --_border-radius: var(--gds-sys-border-radius);
     --_border-width: var(--gds-sys-border-width);
@@ -24,16 +24,10 @@
     --_font-weight: 400;
     --_line-height: 1.25;
 
-    /* These state layer variables can be set to the correct state layer token in
-    * the variant and set specific styles. It will be blended with `--_color-bg`
-    * for the `background-color` rule. */
-    --_state-layer-hover: var(--gds-sys-color-state-layers-state-black);
-    --_state-layer-active: var(--gds-sys-color-state-layers-state-black-shade);
-
     contain: layout;
     display: inline-block;
     isolation: isolate;
-    height:100%;
+    height: 100%;
     max-width: 100%;
   }
 }
@@ -86,9 +80,11 @@
     line-height: var(--_line-height);
 
     &:focus {
-      outline-color: color-mix(in srgb,
+      outline-color: color-mix(
+        in srgb,
         var(--_color-outline),
-        transparent var(--_color-outline-alpha));
+        transparent var(--_color-outline-alpha)
+      );
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -98,7 +94,7 @@
     &:hover {
       background-color: #ddd;
       border-color: #ddd;
-      border-bottom: solid 2px #85857A;
+      border-bottom: solid 2px #85857a;
     }
 
     &:active {
@@ -107,14 +103,14 @@
     }
 
     &.selected {
-      background-color: #F3F3F2;
-      border-color: #F3F3F2;
+      background-color: #f3f3f2;
+      border-color: #f3f3f2;
       border-bottom: solid 2px #353531;
     }
     &.selected:hover {
       background-color: #ddd;
       border-color: #ddd;
-      border-bottom: solid 2px #85857A;
+      border-bottom: solid 2px #85857a;
     }
 
     slot:not([name]) {
@@ -123,74 +119,39 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    
-    @media (width <= 1024px) {
-      flex-direction: column;
-      line-height: 1.45;
-      gap: 0;
-      slot:not([name]) {
-        order: 1;
-      }
-    }
-    @media (width <= 568px) {
-      flex-direction: column;
-      line-height: 1.45;
-      gap: 0;
-      slot:not([name]) {
-        order: 1;
-      }
-      slot {
-        font-size: .75rem;
-      }
-    }
   }
   button.compactview {
-    display: none;
-    @media (width <= 568px) {
-      display: inline-flex;
-    }
-  }
-  button:hover ::slotted(berry-component) { 
-    background-color: #85857A;
-  }
-  button.selected ::slotted(berry-component) { 
-    background-color: green;
-  }
-  button slot[name] {
     display: block;
+  }
+  button.compactview > * {
+    display: block;
+  }
+  button:hover ::slotted(berry-component) {
+    background-color: #85857a;
+  }
+  button.selected ::slotted(berry-component) {
+    background-color: green;
   }
 }
 
 @layer sizes {
   :host([size='small']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-3);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-s);
     --_size: 2rem;
     font-size: 0.875rem;
-    padding-left: .1rem;
+    padding-left: 0.1rem;
   }
 
   :host([size='medium']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-3);
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-m);
     --_size: 2.5rem;
   }
 
-  @media (width <= 1024px) {
-    :host([size='medium']) button {
-      padding: 0.9rem 1rem 0.4rem;
-    }
-  }
-
-  @media (width <= 568px) {
-    :host([size='medium']) button {
-      padding: 0.7rem 0.7rem 0.7rem;
-    }
-  }
-
   :host([size='large']) button {
-    --_padding-inline: var(--gds-spacing-5);
-    --_padding-block: var(--gds-spacing-4);
+    --_padding-inline: var(--gds-sys-space-padding-xl);
+    --_padding-block: var(--gds-sys-space-padding-m);
     --_size: 3rem;
   }
 }
