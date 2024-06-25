@@ -9,7 +9,7 @@ import { html } from 'lit'
  *
  */
 const meta: Meta = {
-  title: 'Components/Layouts/Image',
+  title: 'Components/Media/Image',
   component: 'gds-img',
   tags: ['autodocs'],
 }
