@@ -4,6 +4,7 @@ import '../../../../../dist/libs/core/src/components/img/index.js'
 import '../../../../../dist/libs/core/src/components/video/index.js'
 import '../../../../../dist/libs/core/src/components/container/index.js'
 import '../../../../../dist/libs/core/src/components/text/index.js'
+import '../../../../../dist/libs/core/src/components/divider/index.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-down.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
 import '../../../../../dist/libs/core/src/components/icon/icons/circles-three.js'
@@ -103,13 +104,14 @@ export const Card: Story = {
             align="flex-start"
             gap="2xl"
           >
-            <gds-container>
+            <gds-container gap="s" display="flex" direction="column">
               <gds-text tag="h2" size="title-large">James Doe</gds-text>
               <gds-text>
                 Passionate software engineer with a love for coding and
                 problem-solving.
               </gds-text>
             </gds-container>
+            <gds-divider opacity="0.2"></gds-divider>
             <gds-button>
               Follow
               <gds-icon-circles-three slot="lead"></gds-icon-circles-three>
@@ -152,12 +154,11 @@ export const Card: Story = {
             align="flex-start"
             gap="2xl"
           >
-            <gds-container>
+            <gds-container gap="s" display="flex" direction="column">
               <gds-text tag="h2" size="title-large">Lorem Ipsum</gds-text>
               <gds-text>
-                Midsummer is a celebration of the season of summer, taking place
-                on or near the date of the summer solstice in the Northern
-                Hemisphere
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt.
               </gds-text>
             </gds-container>
             <gds-button>

@@ -7,13 +7,14 @@ const style = css`
 
   hr {
     border-radius: 200px;
-    color: currentColor;
     background: currentColor;
     font-size: 0;
     border: 0;
-    block-size: 1px;
+    height: 1px;
+    width: 100%;
     margin-top: calc((var(--_size) / 2) - (1px / 2));
     margin-bottom: calc((var(--_size) / 2) - (1px / 2));
+    opacity: var(--_opacity, 1);
   }
 `
 export default style

@@ -9,13 +9,36 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 
 import TextCSS from './text.style.css'
 
+/**
+ * @element gds-text
+ * `gds-text` is a custom element that provides a flexible text system.
+ * For accessibility reasons, it is recommended to use the `gds-text` element to display text content with flexibility like changing the tag, wrap the text and max length in characters.
+ *
+ * @status beta
+ *
+ */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
   static styles = [tokens, TextCSS]
 
+  /**
+   * @property tag
+   * Controls the tag of the text.
+   * Supports all valid HTML tags like h1, h2, h3, h4, h5, h6, p, span, etc.
+   */
   @property({ type: String })
   tag = 'p'
 
+  /**
+   * @property size
+   * Controls the size of the text.
+   * Supports all the size tokens from the design system.
+   * You can apply size like this:
+   * ```html
+   * <gds-text size="xs"></gds-text>
+   * ```
+   * The above example will apply the size of xs.
+   */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
     styleTemplate: (prop, values) => {
@@ -25,15 +48,35 @@ export class GdsText extends GdsElement {
   })
   size?: string
 
+  /**
+   * @property margin
+   * Controls the margin of the text.
+   * Supports all the default margin values.
+   */
   @styleExpressionProperty()
   margin?: string
 
+  /**
+   * @property wrap
+   * Controls the text-wrap property of the text.
+   * Supports all valid CSS text-wrap values.
+   */
   @styleExpressionProperty({
     property: 'text-wrap',
     valueTemplate: (v) => v,
   })
   wrap?: string
 
+  /**
+   * @property length
+   * Controls the max length of the text in characters.
+   * Length is by defualt in characters to keep conistency with the text content.
+   *
+   * You can apply length like this:
+   * ```html
+   * <gds-text length="50"></gds-text>
+   * ```
+   */
   @styleExpressionProperty({
     property: 'max-width',
     valueTemplate: (v) => `${v}ch`,
