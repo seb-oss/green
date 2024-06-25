@@ -28,7 +28,6 @@ $gray-800: map.get(map.get(tokens.$grey, light), 800);
         background: $_header-background;
         color: $_header-color;
         padding: $_table_header_padding;
-        vertical-align: top;
         text-align: left;
         font-weight: 500;
         &.icon-invert {
