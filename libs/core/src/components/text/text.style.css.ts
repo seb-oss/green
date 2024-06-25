@@ -12,5 +12,14 @@ const style = css`
     line-height: inherit;
     text-wrap: inherit;
   }
+
+  :host([lines]) {
+    * {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: var(--_lines);
+    }
+  }
 `
 export default style

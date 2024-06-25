@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './text'
 import '../card'
 import '../container'
+import '../divider'
 import { html } from 'lit'
 
 /**
@@ -182,30 +183,45 @@ export const Display: Story = {
   `,
 }
 
+/**
+ * The `gds-text` component has a `lines` property that will clamp the text to the specified number of lines. It can be any number value.
+ */
 export const Lines: Story = {
   name: 'Line Clamp',
   render: (args) => html`
-    <gds-container display="flex" direction="column" gap="m">
-      <gds-text size="display-small" lines="2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-text>
-      <gds-text size="display-medium" lines="3">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua.
-      </gds-text>
-      <gds-text size="display-large:" lines="2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua.
-      </gds-text>
+    <gds-container display="flex" direction="column" gap="2xl">
+      <gds-container display="flex" direction="column" gap="m">
+        <gds-divider></gds-divider>
+        <gds-text tag="h2" size="body-small">Lines:2</gds-text>
+        <gds-text size="display-small" lines="2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-container>
+      <gds-container display="flex" direction="column" gap="m">
+        <gds-text tag="h2" size="body-small">Lines:3</gds-text>
+        <gds-divider></gds-divider>
+        <gds-text size="display-medium" lines="3">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-container>
+      <gds-container display="flex" direction="column" gap="m">
+        <gds-divider></gds-divider>
+        <gds-text tag="h2" size="body-small">Lines:4</gds-text>
+        <gds-text size="display-large:" lines="4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-container>
     </gds-container>
   `,
 }

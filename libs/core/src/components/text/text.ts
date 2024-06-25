@@ -26,11 +26,11 @@ export class GdsText extends GdsElement {
     tokens,
     TextCSS,
     css`
-      .truncate {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
+      // .truncate {
+      //   display: -webkit-box;
+      //   -webkit-box-orient: vertical;
+      //   overflow: hidden;
+      // }
     `,
   ]
 
@@ -122,16 +122,15 @@ export class GdsText extends GdsElement {
   })
   align?: string
 
-  @property({ type: Number })
+  @styleExpressionProperty({
+    property: '--_lines',
+    valueTemplate: (v) => v,
+  })
   lines?: number
 
   createTag() {
     const tag = document.createElement(this.tag)
-    tag.classList.add('truncate')
     tag.appendChild(document.createElement('slot'))
-    if (this.lines) {
-      tag.style.webkitLineClamp = `${this.lines}`
-    }
     return tag
   }
 
