@@ -78,7 +78,7 @@ export class GdsCard extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
+    valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   radius?: string
 

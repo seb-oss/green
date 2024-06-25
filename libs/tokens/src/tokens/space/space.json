@@ -1,6 +1,6 @@
 {
-  "ref": {
-    "size": {
+  "sys": {
+    "space": {
       "3XS": {
         "value": "2",
         "type": "float"

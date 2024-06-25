@@ -43,7 +43,7 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => `${v}`,
     styleTemplate: (prop, values) => {
       const size = values[0]
-      return `font-size: var(--gds-sys-typography-size-${size}); line-height: var(--gds-sys-typography-line-height-${size});`
+      return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-sys-typography-line-height-${size});`
     },
   })
   size?: string
