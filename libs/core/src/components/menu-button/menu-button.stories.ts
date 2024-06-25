@@ -21,7 +21,7 @@ type Story = StoryObj
 
 export const Default: Story = {
   render: () =>
-    html`<gds-menu-button compactview>
+    html`<gds-menu-button compact>
       <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
       Search
     </gds-menu-button>`,
@@ -43,7 +43,6 @@ export const Notification: Story = {
 export const Notification_unread: Story = {
   render: () =>
     html`<gds-menu-button>
-        <berry-component slot="trail">3</berry-component>
         <gds-icon-bell slot="trail"></gds-icon-bell>
         Notification
       </gds-menu-button>

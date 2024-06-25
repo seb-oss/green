@@ -120,39 +120,22 @@
       white-space: nowrap;
     }
   }
-  button.compactview {
+  button.compact {
     display: block;
-  }
-  button.compactview > * {
-    display: block;
+    --_padding-inline: var(--gds-sys-space-padding-l);
+    --_padding-block: var(--gds-sys-space-padding-s);
+    font-size: 0.875rem;
+    padding-bottom: 0.15rem;
+
+    & > * {
+      display: block;
+    }
   }
   button:hover ::slotted(berry-component) {
     background-color: #85857a;
   }
   button.selected ::slotted(berry-component) {
     background-color: green;
-  }
-}
-
-@layer sizes {
-  :host([size='small']) button {
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-s);
-    --_size: 2rem;
-    font-size: 0.875rem;
-    padding-left: 0.1rem;
-  }
-
-  :host([size='medium']) button {
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-m);
-    --_size: 2.5rem;
-  }
-
-  :host([size='large']) button {
-    --_padding-inline: var(--gds-sys-space-padding-xl);
-    --_padding-block: var(--gds-sys-space-padding-m);
-    --_size: 3rem;
   }
 }
 
