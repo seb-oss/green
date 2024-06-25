@@ -1,3 +1,4 @@
+import { css } from 'lit'
 import { property } from 'lit/decorators.js'
 import {
   gdsCustomElement,
@@ -19,7 +20,23 @@ import TextCSS from './text.style.css'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  static styles = [tokens, TextCSS]
+  // static styles = [tokens, TextCSS, ]
+
+  static styles = [
+    tokens,
+    TextCSS,
+    css`
+      .truncate {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    `,
+  ]
+
+  /**  use line clamp instead 
+  https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+  */
 
   /**
    * @property tag
@@ -105,9 +122,16 @@ export class GdsText extends GdsElement {
   })
   align?: string
 
+  @property({ type: Number })
+  lines?: number
+
   createTag() {
     const tag = document.createElement(this.tag)
+    tag.classList.add('truncate')
     tag.appendChild(document.createElement('slot'))
+    if (this.lines) {
+      tag.style.webkitLineClamp = `${this.lines}`
+    }
     return tag
   }
 

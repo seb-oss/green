@@ -181,3 +181,31 @@ export const Display: Story = {
     </gds-container>
   `,
 }
+
+export const Lines: Story = {
+  name: 'Line Clamp',
+  render: (args) => html`
+    <gds-container display="flex" direction="column" gap="m">
+      <gds-text size="display-small" lines="2">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </gds-text>
+      <gds-text size="display-medium" lines="3">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.
+      </gds-text>
+      <gds-text size="display-large:" lines="2">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.
+      </gds-text>
+    </gds-container>
+  `,
+}
