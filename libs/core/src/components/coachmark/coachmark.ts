@@ -1,6 +1,5 @@
-import { html } from 'lit'
 import { property, state } from 'lit/decorators.js'
-import { gdsCustomElement } from '../../scoping'
+import { gdsCustomElement ,html} from '../../scoping'
 import {
   computePosition,
   detectOverflow,

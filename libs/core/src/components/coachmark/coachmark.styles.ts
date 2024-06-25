@@ -2,7 +2,6 @@ import { css } from 'lit'
 //To do later: add classes for light theme
 const style = css`
   .gds-coachmark {
-    visibility: hidden;
     position: absolute;
     z-index: 1060;
     box-sizing: border-box;
@@ -11,7 +10,6 @@ const style = css`
     border-radius: 0.25rem;
     background-color: #222;
     color: #fff;
-    opacity: 0;
     transition: opacity 0.3s;
   }
 
