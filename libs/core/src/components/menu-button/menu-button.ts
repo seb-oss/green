@@ -68,14 +68,14 @@ export class MenuButton extends GdsElement {
   /**
    * The label of the menu-button. Use this to add an accessible label to the button when no text is provided in the default slot.
    */
-  @property({ type: Boolean })
-  compact: boolean = false
+  @property({ type: Boolean, reflect: true })
+  compact = false
 
   /**
    * Whether the menu button is selected
    */
-  @property({ type: Boolean })
-  selected: boolean = false
+  @property({ type: Boolean, reflect: true })
+  selected = false
 
   constructor() {
     super()
