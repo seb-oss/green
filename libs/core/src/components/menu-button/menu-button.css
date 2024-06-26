@@ -84,7 +84,7 @@
 
     &.selected {
       --_color-bg: var(--gds-sys-color-base100);
-      --_color-border: var(--gds-sys-color-base500);
+      --_color-border: var(--gds-sys-color-base700);
     }
 
     slot:not([name]) {
