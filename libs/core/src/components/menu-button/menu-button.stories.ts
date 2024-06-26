@@ -39,7 +39,7 @@ export const Basic: Story = {
   ...DefaultParams,
 }
 
-export const Example_selected_state: Story = {
+export const Selected_state: Story = {
   ...DefaultParams,
   render: () =>
     html`<gds-menu-button selected>
@@ -48,64 +48,19 @@ export const Example_selected_state: Story = {
     </gds-menu-button>`,
 }
 
-export const Notification: Story = {
+export const Examples: Story = {
   ...DefaultParams,
   render: () =>
     html`<gds-menu-button>
-      <gds-icon-bell slot="trail"></gds-icon-bell>
-      Notification
-    </gds-menu-button>`,
-}
-
-export const Notification_unread: Story = {
-  ...DefaultParams,
-  render: () =>
-    html`<gds-menu-button>
-        <gds-icon-bell slot="trail"></gds-icon-bell>
-        Notification
+        <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
+        Search
       </gds-menu-button>
       <gds-menu-button>
         <gds-icon-bell slot="trail"></gds-icon-bell>
         Notification
       </gds-menu-button>
       <gds-menu-button>
-        <gds-icon-bell slot="trail"></gds-icon-bell>
-        Notification
+        <gds-icon-people slot="trail"></gds-icon-people>
+        Profile
       </gds-menu-button>`,
-}
-
-export const My_shortcuts: Story = {
-  ...DefaultParams,
-  render: () =>
-    html`<gds-menu-button>
-      <gds-icon-star slot="trail"></gds-icon-star>
-      My shortcuts
-    </gds-menu-button>`,
-}
-
-export const Profile: Story = {
-  ...DefaultParams,
-  render: () =>
-    html` <gds-menu-button>
-      <gds-icon-people slot="trail"></gds-icon-people>
-      Profile
-    </gds-menu-button>`,
-}
-
-export const Search: Story = {
-  ...DefaultParams,
-  render: () =>
-    html` <gds-menu-button>
-      <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
-      Search
-    </gds-menu-button>`,
-}
-
-export const Settings: Story = {
-  ...DefaultParams,
-  render: () =>
-    html` <gds-menu-button>
-      <gds-icon-globus slot="trail"></gds-icon-globus>
-      Other countries
-    </gds-menu-button>`,
 }
