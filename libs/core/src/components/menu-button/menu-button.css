@@ -85,6 +85,8 @@
         var(--_color-outline),
         transparent var(--_color-outline-alpha)
       );
+      border-radius: 2px;
+      overflow: visible;
 
       &:not(:focus-visible) {
         outline-color: transparent;
