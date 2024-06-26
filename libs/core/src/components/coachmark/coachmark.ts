@@ -17,6 +17,9 @@ import styles from './coachmark.styles'
 import { when } from 'lit/directives/when.js'
 import { GdsElement } from '../../gds-element'
 
+/**
+ * @element gds-coachmark
+ */
 @gdsCustomElement('gds-coachmark')
 export class GdsCoachmark extends GdsElement {
   static styles = styles
