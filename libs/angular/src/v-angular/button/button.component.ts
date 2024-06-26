@@ -78,14 +78,13 @@ export class ButtonComponent
   /** @internal */
   static buttonStyleClasses(type: ButtonStyle, small: boolean) {
     return {
-      'sdv-button--small': small,
-      'sdv-button-secondary': type === ButtonStyle.Secondary,
-      'sdv-button-alternative': type === ButtonStyle.Alternative,
-      'sdv-button-delete': type === ButtonStyle.Delete,
-      'sdv-button-delete-confirm': type === ButtonStyle.DeleteConfirm,
-      'sdv-button-ghost-light': type === ButtonStyle.Ghost,
-      'sdv-button-ghost-dark': type === ButtonStyle.GhostDark,
-      'sdv-button-link': type === ButtonStyle.Link,
+      small: small,
+      primary: type === ButtonStyle.Primary || type === ButtonStyle.Delete,
+      secondary: type === ButtonStyle.Secondary,
+      tertiary: type === ButtonStyle.Alternative || type === ButtonStyle.Link,
+      danger: type === ButtonStyle.Delete || type === ButtonStyle.DeleteConfirm,
+      ghost: type === ButtonStyle.GhostDark,
+      'ghost-light': type === ButtonStyle.Ghost,
     }
   }
 

@@ -22,15 +22,15 @@ import {
   tap,
 } from 'rxjs'
 
-import {
-  FaIconLibrary,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome'
-import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons'
+// import {
+//   FaIconLibrary,
+//   FontAwesomeModule,
+// } from '@fortawesome/angular-fontawesome'
+// import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons'
 import { TranslocoLoader, TranslocoService } from '@ngneat/transloco'
-import { NgvI18nModule } from '@sebgroup/ngv-i18n'
-import { createMask, NgvInputMaskModule } from '@sebgroup/ngv-input-mask'
-import { TooltipDirective } from '@sebgroup/ngv-tooltip'
+// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import { createMask, NgvInputMaskModule } from '../input-mask'
+// import { TooltipDirective } from '@sebgroup/ngv-tooltip'
 import {
   applicationConfig,
   Meta,
@@ -39,13 +39,13 @@ import {
 } from '@storybook/angular'
 
 import { ButtonComponent } from '../button/button.component'
-import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
-import { CheckboxComponent } from '../checkbox/checkbox.component'
+import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
+import { CheckboxComponent } from '../../lib/checkbox/checkbox.component'
 import { DropdownUtils } from '../core.utils'
 import { DropdownListComponent } from '../dropdown-list/dropdown-list.component'
 import { DropdownComponent } from '../dropdown/dropdown.component'
-import { ExternalLinkDirective } from '../external-link/external-link.directive'
-import { InfoCircleComponent } from '../info-circle/info-circle.component'
+import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
+import { InfoCircleComponent } from '../../lib/info-circle/info-circle.component'
 import { TypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
 import { TypeaheadDirective } from '../typeahead/typeahead.directive'
 import { InputComponent } from './input.component'
@@ -98,26 +98,26 @@ const meta: Meta<InputComponent> = {
   title: 'V-Angular/Input',
   component: InputComponent,
   decorators: [
-    applicationConfig({
-      providers: [
-        importProvidersFrom(NgvI18nModule),
-        {
-          provide: APP_INITIALIZER,
-          useFactory: translocoStorybookInitializer, // our initializer hook
-          multi: true,
-          deps: [TranslocoService], // the dependencies that Angular passes as arguments to our hook
-        },
-        {
-          provide: APP_INITIALIZER,
-          useFactory: (iconLibrary: FaIconLibrary) => {
-            return async () => iconLibrary.addIcons(faInfoCircle)
-          },
-          deps: [FaIconLibrary],
-          multi: true,
-        },
-        DropdownUtils,
-      ],
-    }),
+    // applicationConfig({
+    //   providers: [
+    //     importProvidersFrom(NgvI18nModule),
+    //     {
+    //       provide: APP_INITIALIZER,
+    //       useFactory: translocoStorybookInitializer, // our initializer hook
+    //       multi: true,
+    //       deps: [TranslocoService], // the dependencies that Angular passes as arguments to our hook
+    //     },
+    //     {
+    //       provide: APP_INITIALIZER,
+    //       useFactory: (iconLibrary: FaIconLibrary) => {
+    //         return async () => iconLibrary.addIcons(faInfoCircle)
+    //       },
+    //       deps: [FaIconLibrary],
+    //       multi: true,
+    //     },
+    //     DropdownUtils,
+    //   ],
+    // }),
     moduleMetadata({
       declarations: [
         ButtonComponent,
@@ -125,7 +125,7 @@ const meta: Meta<InputComponent> = {
         DropdownListComponent,
         TypeaheadDropdownListComponent,
         CheckboxComponent,
-        TooltipDirective,
+        // TooltipDirective,
         InfoCircleComponent,
         CharacterCountdownDirective,
         ExternalLinkDirective,
@@ -133,8 +133,6 @@ const meta: Meta<InputComponent> = {
       imports: [
         TypeaheadDirective,
         CommonModule,
-        FontAwesomeModule,
-        NgvI18nModule,
         ReactiveFormsModule,
         RouterTestingModule,
         NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),

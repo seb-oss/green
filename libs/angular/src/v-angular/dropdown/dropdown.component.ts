@@ -21,7 +21,7 @@ import { fromEvent, Subscription } from 'rxjs'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../../lib/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
 import { DropdownUtils, Option, OptionBase, OptionGroup } from '../core.utils'
 
 /**
@@ -37,7 +37,7 @@ import { DropdownUtils, Option, OptionBase, OptionGroup } from '../core.utils'
 export class DropdownComponent<
     K = string | null | undefined,
     V = string | null | undefined,
-    T extends Option<K, V> = Option<K, V>
+    T extends Option<K, V> = Option<K, V>,
   >
   extends BaseControlValueAccessorComponent
   implements OnDestroy, OnChanges
@@ -135,7 +135,7 @@ export class DropdownComponent<
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
-    protected dropdownUtils: DropdownUtils<K, V, T>
+    protected dropdownUtils: DropdownUtils<K, V, T>,
   ) {
     super(ngControl, translocoScope, cdr)
   }

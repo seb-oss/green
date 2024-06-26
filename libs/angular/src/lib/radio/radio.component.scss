@@ -1,3 +1,5 @@
+@use '../../../../chlorophyll/scss/components/form/radio/mixins' as mixins;
+
 :host {
   .ngv-field--locked {
     display: inline-block;

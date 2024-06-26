@@ -1,4 +1,5 @@
-//@use 'node_modules/include-media/dist/include-media' as include-media;
+@use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
+@use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
 
 :host {
   .hide-if-empty:empty {
@@ -7,6 +8,7 @@
 
   .sdv-modal-slideout {
     z-index: 1050;
+    @include mixins.aside-modal();
   }
 
   .sdv-modal-slideout__container {

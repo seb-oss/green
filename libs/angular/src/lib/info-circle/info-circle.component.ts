@@ -1,8 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core'
-// import {
-//   faInfoCircle,
-//   IconDefinition,
-// } from '@fortawesome/pro-regular-svg-icons'
+import '@sebgroup/green-core/components/icon/icons/circle-info'
 
 /**
  * A button that will present an explanation to a problem/question.

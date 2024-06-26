@@ -1,9 +1,9 @@
-//// @use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
-// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
-// @use '../core-mixins' as ngv;
+@use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
 
 :host {
-  .hide-if-empty:empty {
+  @include mixins.add-textarea();
+
+  .hide-if-empty: empty {
     display: none;
   }
 

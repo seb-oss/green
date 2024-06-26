@@ -13,8 +13,8 @@ import { fromEvent, Subject, takeUntil } from 'rxjs'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { OptionBase } from '../../../v-angular/core.utils'
-import { DropdownListComponent } from './../../../v-angular/dropdown-list/dropdown-list.component'
+import { OptionBase } from '../../core.utils'
+import { DropdownListComponent } from '../../dropdown-list/dropdown-list.component'
 import { InputComponent } from '../../input/input.component'
 
 // Use dropdownList template and combine stylesheets
@@ -46,7 +46,7 @@ export class TypeaheadDropdownListComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    private element: ElementRef
+    private element: ElementRef,
   ) {
     super(translocoScope)
   }

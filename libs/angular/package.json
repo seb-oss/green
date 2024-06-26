@@ -17,6 +17,7 @@
     "@sebgroup/green-core": "^1.22.2",
     "@sebgroup/chlorophyll": "^3.3.5",
     "@sebgroup/extract": "^3.0.2",
+    "@ngneat/transloco": "^6.0.4",
     "tslib": "^2.3.1"
   },
   "description": "Angular components built on top of @sebgroup/chlorophyll.",

@@ -1,67 +1,84 @@
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+} from '@angular/forms'
 
-import { debounceTime, map, Observable } from 'rxjs';
+import { debounceTime, map, Observable } from 'rxjs'
 
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronDown, faChevronUp, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { TooltipDirective } from '@sebgroup/ngv-tooltip';
-import { applicationConfig, Meta, moduleMetadata, Story, StoryFn } from '@storybook/angular';
+// import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import { faChevronDown, faChevronUp, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
+// import { NgvI18nModule } from '@sebgroup/ngv-i18n';
+// import { TooltipDirective } from '@sebgroup/ngv-tooltip';
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  Story,
+  StoryFn,
+} from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive';
-import { DropdownUtils, Option } from '../core.utils';
-import { DropdownListComponent } from '../dropdown-list/dropdown-list.component';
-import { InputComponent } from '../input/input.component';
-import { TypeaheadHighlightComponent } from '../typeahead/typeahead-highlight/typeahead-highlight.component';
-import { TypeaheadInputComponent } from '../typeahead/typeahead-input/typeahead-input.component';
-import { TypeaheadDirective } from '../typeahead/typeahead.directive';
-import { DropdownComponent } from './dropdown.component';
+import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
+import { DropdownUtils, Option } from '../core.utils'
+import { DropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { InputComponent } from '../input/input.component'
+import { TypeaheadHighlightComponent } from '../typeahead/typeahead-highlight/typeahead-highlight.component'
+import { TypeaheadInputComponent } from '../typeahead/typeahead-input/typeahead-input.component'
+import { TypeaheadDirective } from '../typeahead/typeahead.directive'
+import { DropdownComponent } from './dropdown.component'
 
 interface WithExtras {
-  ngModel: string;
-  toggleOptions: any;
-  getOptions: any;
+  ngModel: string
+  toggleOptions: any
+  getOptions: any
 }
 
 interface ExtendedOption<K, V> extends Option<K, V> {
-  accountNumber?: string;
-  key: K;
-  label: V;
+  accountNumber?: string
+  key: K
+  label: V
 }
 
 export default {
-  title: 'Core/Dropdown',
+  title: 'V-Angular/Dropdown',
   component: DropdownComponent,
   decorators: [
-    applicationConfig({
-      providers: [
-        importProvidersFrom(NgvI18nModule),
-        DropdownUtils,
-        {
-          provide: APP_INITIALIZER,
-          useFactory: (iconLibrary: FaIconLibrary) => {
-            return async () => iconLibrary.addIcons(faChevronDown, faChevronUp, faEllipsisH);
-          },
-          deps: [FaIconLibrary],
-          multi: true,
-        },
-      ],
-    }),
+    // applicationConfig({
+    //   providers: [
+    //     importProvidersFrom(NgvI18nModule),
+    //     DropdownUtils,
+    //     {
+    //       provide: APP_INITIALIZER,
+    //       useFactory: (iconLibrary: FaIconLibrary) => {
+    //         return async () => iconLibrary.addIcons(faChevronDown, faChevronUp, faEllipsisH);
+    //       },
+    //       deps: [FaIconLibrary],
+    //       multi: true,
+    //     },
+    //   ],
+    // }),
     moduleMetadata({
       declarations: [
         DropdownListComponent,
         InputComponent,
         TypeaheadInputComponent,
         TypeaheadHighlightComponent,
-        TooltipDirective,
+        // TooltipDirective,
         CharacterCountdownDirective,
       ],
-      imports: [CommonModule, FontAwesomeModule, FormsModule, ReactiveFormsModule, NgvI18nModule, TypeaheadDirective],
+      imports: [
+        CommonModule,
+        // FontAwesomeModule,
+        FormsModule,
+        ReactiveFormsModule,
+        // NgvI18nModule,
+        TypeaheadDirective,
+      ],
     }),
   ],
-} as Meta;
+} as Meta
 
 const options = [
   { key: 'opt1', label: 'label.defaultlabel', accountNumber: '345345' },
@@ -69,7 +86,10 @@ const options = [
   { key: 'opt2', label: 'Option 2' },
   { key: 'opt3', label: 'Option 3', disabled: true },
   { key: 'opt4', label: 'Option 4' },
-  { key: 'opt5', label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do' },
+  {
+    key: 'opt5',
+    label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+  },
   {
     label: 'Group',
     options: [
@@ -79,17 +99,22 @@ const options = [
       { key: 'group-opt4', label: 'Option 4' },
     ],
   },
-];
+]
 
-type StoryArgs = DropdownComponent<string, string | null, ExtendedOption<string, string | null>> & WithExtras;
+type StoryArgs = DropdownComponent<
+  string,
+  string | null,
+  ExtendedOption<string, string | null>
+> &
+  WithExtras
 
 const Template: Story<StoryArgs> = (args: StoryArgs) => {
-  const ctrl = new UntypedFormControl(args.ngModel);
-  ctrl.valueChanges.subscribe(console.log);
+  const ctrl = new UntypedFormControl(args.ngModel)
+  ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable();
-    ctrl.disable();
-  };
+    if (!!ctrl.disabled) return ctrl.enable()
+    ctrl.disable()
+  }
   return {
     template: /*html*/ `
       <div style="width: 264px">
@@ -121,11 +146,11 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
       formControl: ctrl,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
 const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
-  const formControl = new UntypedFormControl({ value: '' });
+  const formControl = new UntypedFormControl({ value: '' })
   return {
     template: /*html*/ `
   <div style="width: 264px">
@@ -147,25 +172,25 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
     </ngv-dropdown>
   </div>`,
     props: { ...args, formControl },
-  };
-};
+  }
+}
 
 const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
-  const dropdownFc = new UntypedFormControl();
+  const dropdownFc = new UntypedFormControl()
   dropdownFc.valueChanges.subscribe((value) => {
-    console.log({ value });
-  });
-  let showAlt = false;
+    console.log({ value })
+  })
+  let showAlt = false
   const optionsAlt = [
     { key: 'opt7', label: 'Option 7' },
     { key: 'opt8', label: 'Option 8' },
     { key: 'opt9', label: 'Option 9' },
-  ];
-  args.options = showAlt ? optionsAlt : options;
+  ]
+  args.options = showAlt ? optionsAlt : options
 
   const reset = () => {
-    dropdownFc.reset('opt4');
-  };
+    dropdownFc.reset('opt4')
+  }
 
   return {
     template: /*html*/ `
@@ -195,8 +220,8 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
       formControl: dropdownFc,
       resetFunc: reset,
     },
-  };
-};
+  }
+}
 
 const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   const accounts = [
@@ -232,12 +257,12 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
       balance: 100000000000.5,
       currency: 'EUR',
     },
-  ];
-  const fc = new UntypedFormControl();
+  ]
+  const fc = new UntypedFormControl()
   const toggleDisableField = () => {
-    if (!!fc.disabled) return fc.enable();
-    fc.disable();
-  };
+    if (!!fc.disabled) return fc.enable()
+    fc.disable()
+  }
   return {
     template: /*html*/ `
       <ngv-dropdown
@@ -330,11 +355,11 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
       options: accounts,
       disableFn: toggleDisableField,
     },
-  };
-};
+  }
+}
 
 const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
-  let filterPhrase = '';
+  let filterPhrase = ''
   const accounts = [
     {
       key: 'se50000000001',
@@ -368,29 +393,31 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
       balance: 100000000000.5,
       currency: 'EUR',
     },
-  ];
-  const fc = new UntypedFormControl();
+  ]
+  const fc = new UntypedFormControl()
   const toggleDisableField = () => {
-    if (!!fc.disabled) return fc.enable();
-    fc.disable();
-  };
+    if (!!fc.disabled) return fc.enable()
+    fc.disable()
+  }
   const searchFunction = (value$: Observable<string>) =>
     value$.pipe(
       debounceTime(150),
       map((inputValue) =>
         accounts.filter(
           (option: { accountNumber: string; accountName: string }) =>
-            option.accountName?.toUpperCase().includes(inputValue?.toUpperCase()) ||
+            option.accountName
+              ?.toUpperCase()
+              .includes(inputValue?.toUpperCase()) ||
             option.accountNumber?.replace(/\s/, '').includes(inputValue),
         ),
       ),
-    );
+    )
   const handlefilterPhraseChange = (event: any) => {
-    filterPhrase = event;
-  };
+    filterPhrase = event
+  }
 
   function getFilterPhrase(): string {
-    return filterPhrase;
+    return filterPhrase
   }
 
   return {
@@ -508,20 +535,20 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
       getFilterPhrase: getFilterPhrase,
       handlefilterPhraseChange: handlefilterPhraseChange,
       selectedFormatter: (account: {
-        key: string;
-        label: string;
-        accountNumber: string;
-        accountName: string;
-        balance: number;
-        currency: string;
+        key: string
+        label: string
+        accountNumber: string
+        accountName: string
+        balance: number
+        currency: string
       }) => account?.accountName,
     },
-  };
-};
+  }
+}
 
 const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
-  const ctrl = new UntypedFormControl(args.ngModel);
-  ctrl.valueChanges.subscribe(console.log);
+  const ctrl = new UntypedFormControl(args.ngModel)
+  ctrl.valueChanges.subscribe(console.log)
   return {
     template: /*html*/ `
       <div style="display: flex">
@@ -547,8 +574,8 @@ const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
       ...args,
       formControl: ctrl,
     },
-  };
-};
+  }
+}
 
 const defaultArgs = {
   required: false,
@@ -558,70 +585,71 @@ const defaultArgs = {
   description: 'This. Is. A. Description.',
   ngModel: 'opt2',
   options,
-} as StoryArgs;
+} as StoryArgs
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   ...defaultArgs,
-};
+}
 
-export const Disabled = DisabledTemplate.bind({});
+export const Disabled = DisabledTemplate.bind({})
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
-};
-export const WithError = Template.bind({});
+}
+export const WithError = Template.bind({})
 WithError.args = {
   ...defaultArgs,
   invalid: true,
   error: 'Error message',
-};
+}
 
-export const ComboWithInput = ComboTemplate.bind({});
-ComboWithInput.args = { ...defaultArgs };
+export const ComboWithInput = ComboTemplate.bind({})
+ComboWithInput.args = { ...defaultArgs }
 
-export const WithOptionToggle = AltTemplate.bind({});
+export const WithOptionToggle = AltTemplate.bind({})
 AltTemplate.args = {
   ...defaultArgs,
   ngModel: 'opt2',
   options,
-};
+}
 
-export const WithCustomSelectedTemplate = CustomSelectedTemplate.bind({});
+export const WithCustomSelectedTemplate = CustomSelectedTemplate.bind({})
 WithCustomSelectedTemplate.args = {
   ...defaultArgs,
   label: 'Account selector',
   locked: false,
   displayDisabledAsLocked: true,
-};
+}
 
-export const WithCustomSelectedTemplateTypeahead = CustomSelectedTemplateTypeahead.bind({});
+export const WithCustomSelectedTemplateTypeahead =
+  CustomSelectedTemplateTypeahead.bind({})
 WithCustomSelectedTemplateTypeahead.args = {
   ...defaultArgs,
   label: 'Account selector',
   locked: false,
   displayDisabledAsLocked: true,
-};
+}
 
-export const WithLockedInput = Template.bind({});
+export const WithLockedInput = Template.bind({})
 WithLockedInput.args = {
   ...Primary.args,
   ngModel: 'opt2',
   locked: true,
   description: undefined,
-};
+}
 
-export const WithDisplayDisabledAsLocked = Template.bind({});
+export const WithDisplayDisabledAsLocked = Template.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   locked: false,
   description: undefined,
   displayDisabledAsLocked: true,
-};
+}
 
 const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
-  const ctrl = new UntypedFormControl();
-  ctrl.valueChanges.subscribe(console.log);
+  const ctrl = new UntypedFormControl()
+  ctrl.valueChanges.subscribe(console.log)
   return {
     template: /*html*/ `
     Value: {{ formControl.value }}
@@ -660,14 +688,17 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
           debounceTime(300),
           map((inputValue) =>
             options.filter((option: any) =>
-              option.label?.replace(/\s/gm, '').toLocaleLowerCase().includes(inputValue?.replace(/\s/gm, '').toLocaleLowerCase()),
+              option.label
+                ?.replace(/\s/gm, '')
+                .toLocaleLowerCase()
+                .includes(inputValue?.replace(/\s/gm, '').toLocaleLowerCase()),
             ),
           ),
         ),
     },
-  };
-};
-export const WithTypeAhead = TypeaheadTemplate.bind({});
+  }
+}
+export const WithTypeAhead = TypeaheadTemplate.bind({})
 WithTypeAhead.args = {
   ...defaultArgs,
-};
+}

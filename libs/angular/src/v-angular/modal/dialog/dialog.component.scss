@@ -1,25 +1,16 @@
-// @use '@sebgroup/vanilla/src/functions' as functions;
-// @use '@sebgroup/vanilla/src/colors' as colors;
-//// @use 'include-media/dist/include-media' as include-media;
+@use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
+@use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
 
 :host {
-  z-index: 1040;
+  @include mixins.dialog-modal-wrapper();
 
   .sdv-modal-dialog__container {
-    //@include include-media.media('<tablet') {
-    //width: auto;
-    //}
-    //@include include-media.media('>=tablet') {
-    //width: functions.vanilla-px-to-em(512);
-    //}
+    @include mixins.dialog-modal();
   }
+
   .sdv-modal-dialog__heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    h3 {
-      margin: 0;
-    }
+    @include mixins.modal-header();
+
     button {
       width: 2rem;
       height: 2rem;
@@ -27,22 +18,17 @@
       border: none;
       font-size: 1rem;
       background: 0;
-      // color: colors.$vanilla-color-text;
       cursor: pointer;
 
       &:hover {
-        // background-color: colors.$vanilla-color-grey200;
       }
 
       &:active {
-        // background-color: colors.$vanilla-color-grey500;
       }
-
-      // fa-icon {
-      //   display: flex;
-      //   justify-content: center;
-      //   align-items: center;
-      // }
     }
+  }
+
+  .sdv-modal-dialog__body {
+    @include mixins.modal-body();
   }
 }

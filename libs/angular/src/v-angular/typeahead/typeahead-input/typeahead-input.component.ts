@@ -10,60 +10,65 @@ import {
   Optional,
   Renderer2,
   Self,
-} from '@angular/core';
-import { NgControl } from '@angular/forms';
+} from '@angular/core'
+import { NgControl } from '@angular/forms'
 
-import { takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs'
 
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { OptionBase } from '../../core.utils';
-import { DropdownComponent } from '../../dropdown/dropdown.component';
-import { InputComponent } from '../../input/input.component';
+import { OptionBase } from '../../core.utils'
+import { DropdownComponent } from '../../dropdown/dropdown.component'
+import { InputComponent } from '../../input/input.component'
 
 @Component({
   selector: 'ngv-typeahead-input',
   templateUrl: './typeahead-input.component.html',
   styleUrls: ['./typeahead-input.component.scss'],
 })
-export class TypeaheadInputComponent extends InputComponent implements OnInit, OnDestroy {
+export class TypeaheadInputComponent
+  extends InputComponent
+  implements OnInit, OnDestroy
+{
   /** Reference to the host dropdown */
-  @Input() hostComponent!: DropdownComponent;
+  @Input() hostComponent!: DropdownComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
-  @Input() resultFormatter?: (option: OptionBase<any>) => string;
+  @Input() resultFormatter?: (option: OptionBase<any>) => string
 
   /** Formats the selected item in the input when dropdown is opened. If no function is provided, it will display the value of the selected objects label property */
-  @Input() selectedFormatter?: (selected: OptionBase<any>) => string;
+  @Input() selectedFormatter?: (selected: OptionBase<any>) => string
 
   get dropdownButton(): HTMLElement {
-    return this.hostComponent.inputRef?.nativeElement;
+    return this.hostComponent.inputRef?.nativeElement
   }
 
   /** Boolean to indicate wether the dropdown is expanded or not, to apply appropriate styling */
-  expanded = false;
+  expanded = false
 
   /** Used to determine the height of the inputin html */
-  buttonHeight?: number;
+  buttonHeight?: number
 
   constructor(
     private element: ElementRef,
     private renderer2: Renderer2,
     @Self() @Optional() public ngControl: NgControl,
-    @Optional() @Inject(TRANSLOCO_SCOPE) protected translocoScope: TranslocoScope,
+    @Optional()
+    @Inject(TRANSLOCO_SCOPE)
+    protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
   ) {
-    super(ngControl, translocoScope, cdr);
-    super.ngOnInit();
+    super(ngControl, translocoScope, cdr)
+    super.ngOnInit()
   }
 
   ngOnInit() {
-    this.autocomplete = 'off';
-    this.debounceTime = 0;
-    this.hostComponent.selectOnSingleOption = false;
+    this.autocomplete = 'off'
+    this.debounceTime = 0
+    this.hostComponent.selectOnSingleOption = false
 
-    this.moveInput();
-    this.handleExpandedChange();
+    this.moveInput()
+    this.handleExpandedChange()
   }
 
   /**
@@ -74,7 +79,7 @@ export class TypeaheadInputComponent extends InputComponent implements OnInit, O
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
     if (event.code === 'Space') {
-      event.preventDefault();
+      event.preventDefault()
     }
   }
 
@@ -88,11 +93,15 @@ export class TypeaheadInputComponent extends InputComponent implements OnInit, O
     setTimeout(() => {
       // Only move if parent dropdown is found
       if (!!this.dropdownButton) {
-        this.renderer2.appendChild(this.dropdownButton.querySelector('button'), this.element.nativeElement);
+        this.renderer2.appendChild(
+          this.dropdownButton.querySelector('button'),
+          this.element.nativeElement,
+        )
         // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
-        this.buttonHeight = this.dropdownButton.getBoundingClientRect().height || 32; // Default to 2em;
+        this.buttonHeight =
+          this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
       }
-    }, 0);
+    }, 0)
   }
 
   /**
@@ -101,18 +110,20 @@ export class TypeaheadInputComponent extends InputComponent implements OnInit, O
    * When the dropdown is collapsed, empty the input from text.
    */
   private handleExpandedChange() {
-    this.hostComponent.expandedChange.pipe(takeUntil(this._destroy$)).subscribe((state) => {
-      this.expanded = state;
+    this.hostComponent.expandedChange
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((state) => {
+        this.expanded = state
 
-      if (this.expanded) {
-        // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
-        // See suggestion here: https://github.com/ionic-team/stencil/issues/3772#issuecomment-1292599609
-        setTimeout(() => this.setFocus());
-        // Format and interpolate result since return type can be other than string from the formatter
-        const formattedValue = `${this.formatSelected(this.hostComponent.state)}`;
-        this.setInput(formattedValue, false);
-      } else this.setInput('', true);
-    });
+        if (this.expanded) {
+          // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
+          // See suggestion here: https://github.com/ionic-team/stencil/issues/3772#issuecomment-1292599609
+          setTimeout(() => this.setFocus())
+          // Format and interpolate result since return type can be other than string from the formatter
+          const formattedValue = `${this.formatSelected(this.hostComponent.state)}`
+          this.setInput(formattedValue, false)
+        } else this.setInput('', true)
+      })
   }
 
   /**
@@ -122,11 +133,11 @@ export class TypeaheadInputComponent extends InputComponent implements OnInit, O
    * @returns The formatted value
    */
   private formatSelected(value: OptionBase<any>) {
-    if (value?.key == null) return '';
+    if (value?.key == null) return ''
     // If no formatter exists, return the label or empty string
-    if (!this.selectedFormatter) return value.label ?? '';
+    if (!this.selectedFormatter) return value.label ?? ''
     // If a formatter exists, use it
-    return this.selectedFormatter(value) ?? '';
+    return this.selectedFormatter(value) ?? ''
   }
 
   /**
@@ -134,10 +145,10 @@ export class TypeaheadInputComponent extends InputComponent implements OnInit, O
    * @param input
    */
   private setInput(input: string, triggerFilter: boolean) {
-    this.state = input;
+    this.state = input
     if (triggerFilter) {
-      this.onChange(this.state);
-      this.inputChange$.next(this.state);
+      this.onChange(this.state)
+      this.inputChange$.next(this.state)
     }
   }
 }

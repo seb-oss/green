@@ -4,7 +4,6 @@
     'sdv-modal-slideout--left': fromLeft,
     'sdv-modal-slideout--right': !fromLeft
   }"
-  *transloco="let t"
   [class.-active]="shown"
   [attr.data-thook]="thook"
   [attr.aria-hidden]="!shown"
@@ -20,7 +19,7 @@
   >
     <header class="sdv-modal-slideout__header">
       <h3 class="sdv-modal-slideout__heading" id="sdv-modal-title">
-        {{ t(heading || title || '') }}
+        {{ heading || title || '' }}
       </h3>
       <button
         type="button"
@@ -50,7 +49,7 @@
         (keydown.enter)="onAction($event, 'negative')"
         *ngIf="_buttons && _buttons.negative"
       >
-        {{ t(_buttons.negative) }}
+        {{ _buttons.negative }}
       </button>
 
       <button
@@ -61,7 +60,7 @@
         (keydown.enter)="onAction($event, 'neutral')"
         *ngIf="_buttons && _buttons.neutral"
       >
-        {{ t(_buttons.neutral) }}
+        {{ _buttons.neutral }}
       </button>
 
       <button
@@ -72,7 +71,7 @@
         (keydown.enter)="onAction($event, 'positive')"
         *ngIf="_buttons && _buttons.positive"
       >
-        {{ t(_buttons.positive) }}
+        {{ _buttons.positive }}
       </button>
     </footer>
   </div>

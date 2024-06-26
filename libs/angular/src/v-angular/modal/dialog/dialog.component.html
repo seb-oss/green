@@ -1,6 +1,5 @@
 <div
   class="sdv-modal-dialog__container"
-  *transloco="let t"
   #dialog
   role="dialog"
   aria-dialog="true"
@@ -8,14 +7,14 @@
   [attr.aria-describedby]="dialogBodyId"
 >
   <header class="sdv-modal-dialog__heading">
-    <h3 [attr.id]="dialogTitleId">{{ t(heading || title || '') }}</h3>
+    <h3 [attr.id]="dialogTitleId">{{ heading || title }}</h3>
     <button
       type="button"
       data-thook="dialog-close"
       (click)="onAction($event, 'close')"
       (keydown.enter)="onAction($event, 'close')"
     >
-      <!-- <fa-icon [icon]="closeIcon"></fa-icon> -->
+      <gds-icon-cross-large *nggCoreElement></gds-icon-cross-large>
     </button>
   </header>
 
@@ -33,7 +32,7 @@
       (keydown.enter)="onAction($event, 'negative')"
       *ngIf="_buttons && _buttons.negative"
     >
-      {{ t(_buttons.negative) }}
+      {{ _buttons.negative }}
     </button>
 
     <button
@@ -44,7 +43,7 @@
       (keydown.enter)="onAction($event, 'neutral')"
       *ngIf="_buttons && _buttons.neutral"
     >
-      {{ t(_buttons.neutral) }}
+      {{ _buttons.neutral }}
     </button>
 
     <button
@@ -55,7 +54,7 @@
       (keydown.enter)="onAction($event, 'positive')"
       *ngIf="_buttons && _buttons.positive"
     >
-      {{ t(_buttons.positive) }}
+      {{ _buttons.positive }}
     </button>
   </footer>
 </div>

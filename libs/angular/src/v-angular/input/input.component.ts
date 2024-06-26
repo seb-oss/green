@@ -17,9 +17,9 @@ import { Subject } from 'rxjs'
 import { debounceTime, takeUntil } from 'rxjs/operators'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import type { InputmaskOptions } from '../shared'
+import type { InputmaskOptions } from '../input-mask'
 
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
 
 /**
  * Input fields allow users to add and edit text.
@@ -147,7 +147,7 @@ export class InputComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }

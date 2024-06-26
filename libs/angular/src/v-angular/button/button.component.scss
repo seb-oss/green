@@ -1,2 +1,6 @@
+@use '../../../../chlorophyll/scss/components/button/mixins' as mixins;
 :host {
+  .ghost-light {
+    @include mixins.ghost-light();
+  }
 }

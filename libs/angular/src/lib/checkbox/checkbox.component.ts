@@ -26,12 +26,15 @@ import { BaseControlValueAccessorComponent } from '../shared/base-control-value-
 export class CheckboxComponent extends BaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'checkbox'
+  @Input() optionalLabel = 'Optional'
 
   @Output() readonly valueChange: EventEmitter<string> =
     new EventEmitter<string>()
 
   constructor(
-    @Self() @Optional() public ngControl: NgControl,
+    @Self()
+    @Optional()
+    public ngControl: NgControl,
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,

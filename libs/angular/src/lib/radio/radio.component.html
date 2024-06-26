@@ -1,51 +1,63 @@
 <!-- LOCKED INPUT -->
-<div *ngIf="locked && state"
-  class="sdv-field-radio-wrap">
-  <div [id]="id + '-radio'"
+<div *ngIf="locked && state" class="sdv-field-radio-wrap">
+  <div
+    [id]="id + '-radio'"
     class="ngv-field--locked"
     [attr.name]="name"
-    [attr.value]="value">
+    [attr.value]="value"
+  >
     {{ label }}
-    <ng-template *ngTemplateOutlet="labelContentTpl ?? null; context: {$implicit: value}"></ng-template>
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"
+    ></ng-template>
   </div>
 </div>
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
   <div class="sdv-field-radio-wrap">
-
     <!-- RADIO BUTTON FIELD -->
-    <input #input
-      type="radio"
-      [attr.id]="id + '-radio'"
-      [attr.name]="name"
-      [attr.value]="value"
-      [attr.required]="required"
-      [disabled]="disabled"
-      [autofocus]="autofocus"
-      [attr.aria-label]="description"
-      [checked]="state"
-      (click)="$event.stopPropagation()"
-      (change)="onInputChange($event)"
-      (focus)="onFocus($event)"
-      (blur)="onBlur($event)" />
+    <label [attr.for]="id + '-radio'" class="form-control">
+      <input
+        #input
+        type="radio"
+        [attr.id]="id + '-radio'"
+        [attr.name]="name"
+        [attr.value]="value"
+        [attr.required]="required"
+        [disabled]="disabled"
+        [autofocus]="autofocus"
+        [attr.aria-label]="description"
+        [checked]="state"
+        (click)="$event.stopPropagation()"
+        (change)="onInputChange($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
 
-    <!-- LABEL -->
-    <label [attr.for]="id + '-radio'">
+      <!-- LABEL -->
       {{ label }}
-      <ng-template *ngTemplateOutlet="labelContentTpl ?? null; context: {$implicit: value}"></ng-template>
+      <ng-template
+        *ngTemplateOutlet="
+          labelContentTpl ?? null;
+          context: { $implicit: value }
+        "
+      ></ng-template>
+      <i></i>
     </label>
   </div>
 
   <!-- ERRORS -->
-  <ng-container *transloco="let t; read: scope">
-    <label class="sdv-field-notice sdv-field-notice--error"
+  <ng-container>
+    <label
+      class="sdv-field-notice sdv-field-notice--error"
       [attr.for]="id + '-radio'"
-      *ngIf="invalid && (error || ngControl?.invalid)">
-      <span *ngIf="error; else errorsRef">{{error}}</span>
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span *ngIf="error; else errorsRef">{{ error }}</span>
       <ng-template #errorsRef>
         <span *ngIf="firstError as error">
-          {{ t('error.field' + error?.code, error?.params) }}
+          {{ error.message }}
         </span>
       </ng-template>
     </label>
