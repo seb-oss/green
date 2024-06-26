@@ -61,7 +61,7 @@ export const Example_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
     html` <div
-      style="display:flex;width:700px;height:44px;border-bottom: 1px solid #ddd;"
+      style="display:flex;width:700px;height:50px;border-bottom: 1px solid #ddd;"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>
@@ -82,6 +82,47 @@ export const Example_menu_bar: Story = {
           <div style="padding: 1rem;">Profile stuff</div>
         </gds-popover>
         <gds-menu-button
+          href="https://github.com/seb-oss/green"
+          target="_blank"
+        >
+          <gds-icon-square-arrow-top-right
+            slot="trail"
+          ></gds-icon-square-arrow-top-right>
+          External link
+        </gds-menu-button>
+      </div>
+    </div>`,
+}
+
+/**
+ * Same as above, but using the compact style. This is mainly intended for use in a mobile viewport.
+ */
+export const Compact_menu_bar: Story = {
+  ...DefaultParams,
+  render: () =>
+    html` <div
+      style="display:flex;width:700px;height:50px;border-bottom: 1px solid #ddd;"
+    >
+      <div style="flex-basis:50%;">
+        <gds-menu-button compact>
+          <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
+          Search
+        </gds-menu-button>
+      </div>
+      <div style="flex-basis:50%;display:flex;justify-content:flex-end">
+        <gds-menu-button compact>
+          <gds-icon-bell slot="trail"></gds-icon-bell>
+          Notification
+        </gds-menu-button compact>
+        <gds-popover>
+          <gds-menu-button compact slot="trigger">
+            <gds-icon-people slot="trail"></gds-icon-people>
+            Profile
+          </gds-menu-button>
+          <div style="padding: 1rem;">Profile stuff</div>
+        </gds-popover>
+        <gds-menu-button
+        compact
           href="https://github.com/seb-oss/green"
           target="_blank"
         >

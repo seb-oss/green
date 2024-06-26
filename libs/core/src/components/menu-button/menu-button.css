@@ -112,14 +112,18 @@
     }
   }
   .compact {
-    display: block;
+    display: flex;
+    flex-direction: column;
     --_padding-inline: var(--gds-sys-space-padding-l);
     --_padding-block: var(--gds-sys-space-padding-s);
     font-size: 0.875rem;
     padding-bottom: 0.15rem;
 
-    & > * {
-      display: block;
+    & > slot[name] {
+      order: 0;
+    }
+    & > slot:not([name]) {
+      order: 1;
     }
   }
   :hover ::slotted(berry-component) {
