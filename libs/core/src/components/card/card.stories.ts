@@ -37,28 +37,7 @@ const DefaultParams: Story = {
     docs: {
       source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true },
-  },
-  args: {
-    shadow: 's{m}',
-    radius: 'm',
-    background: '',
-    innerHTML: `<gds-card shadow="s{xs} m{xs} l{s}" radius="m">
-      <gds-container
-        padding="s{xs} m{l} l{l}"
-        display="flex"
-        align="center"
-        justify="center"
-        gap="l"
-      >
-        <span>Default</span> <gds-icon-arrow-down></gds-icon-arrow-down>
-
-        <gds-button>
-          Button
-          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-        </gds-button>
-      </gds-container>
-    </gds-card>`,
+    controls: { disable: true },
   },
 }
 
@@ -295,73 +274,182 @@ export const CardRadius: Story = {
   ...DefaultParams,
   name: 'Border Radius',
   render: (args) =>
-    html`<gds-grid columns="6" gap="l">
-      <gds-card radius="xs" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          XS
-        </gds-container>
-      </gds-card>
-      <gds-card radius="s" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          S
-        </gds-container>
-      </gds-card>
-      <gds-card radius="m" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          M
-        </gds-container>
-      </gds-card>
-      <gds-card radius="l" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          L
-        </gds-container>
-      </gds-card>
-      <gds-card radius="xl" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          XL
-        </gds-container>
-      </gds-card>
-      <gds-card radius="2xl" background="base800">
-        <gds-container
-          color="white-text"
-          padding="s{xs} m{l} l{l}"
-          display="flex"
-          align="center"
-          justify="center"
-        >
-          2XL
-        </gds-container>
-      </gds-card>
+    html`<gds-grid columns="8" gap="l">
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+      >
+        0
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="3xs"
+      >
+        3XS
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="2xs"
+      >
+        2XS
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="xs"
+      >
+        XS
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="s"
+      >
+        S
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="m"
+      >
+        M
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="l"
+      >
+        L
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="xl"
+      >
+        XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="2xl"
+      >
+        2XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="3xl"
+      >
+        3XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="4xl"
+      >
+        4XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="5xl"
+      >
+        5XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="6xl"
+      >
+        6XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="7xl"
+      >
+        7XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="8xl"
+      >
+        8XL
+      </gds-container>
+      <gds-container
+        background="black"
+        color="white-text"
+        padding="xl"
+        display="flex"
+        align="center"
+        justify="center"
+        radius="max"
+      >
+        MAX
+      </gds-container>
     </gds-grid>`,
 }
 

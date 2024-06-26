@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './grid'
+import '../card'
+import '../container'
 import './grid.stories.css'
 import { html } from 'lit'
 
@@ -28,14 +30,16 @@ const DefaultParams: Story = {
     gap: 'l',
     padding: 's',
     columns: '4',
-    innerHTML: `<div class="exampleCell">COL: 01</div>
-<div class="exampleCell">COL: 02</div>
-<div class="exampleCell">COL: 03</div>
-<div class="exampleCell">COL: 04</div>
-<div class="exampleCell">COL: 05</div>
-<div class="exampleCell">COL: 06</div>
-<div class="exampleCell">COL: 07</div>
-<div class="exampleCell">COL: 08</div>`,
+    innerHTML: `
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 01</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 02</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 03</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 04</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 05</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 06</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 07</gds-container></gds-card>
+    <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 08</gds-container></gds-card>
+  `,
   },
 }
 
@@ -72,19 +76,23 @@ export const Basic: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
+    <!-- prettier-ignore -->
     <gds-grid
-      columns="s{2} m{4} l{8}"
-      gap="s{s} m{m} l{l}"
-      padding="s{xs} m{l} l{2xl}"
+      columns="s{2} m{4} l{6}"
+      gap="s{s} m{s} l{s}"
     >
-      <div class="exampleCell">COL: 01</div>
-      <div class="exampleCell">COL: 02</div>
-      <div class="exampleCell">COL: 03</div>
-      <div class="exampleCell">COL: 04</div>
-      <div class="exampleCell">COL: 05</div>
-      <div class="exampleCell">COL: 06</div>
-      <div class="exampleCell">COL: 07</div>
-      <div class="exampleCell">COL: 08</div>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 01</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 02</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 03</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 04</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 05</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 06</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 07</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 08</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 09</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 10</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 11</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 12</gds-container></gds-card>
     </gds-grid>
   `,
 }
@@ -96,15 +104,16 @@ export const AllBreakpoints: Story = {
   ...DefaultParams,
   name: 'Example: All breakpoints + Auto Columns',
   render: (args) => html`
-    <gds-grid columns="4" gap="2xl" padding="l" auto-columns="100">
-      <div class="exampleCell">COL: 01</div>
-      <div class="exampleCell">COL: 02</div>
-      <div class="exampleCell">COL: 03</div>
-      <div class="exampleCell">COL: 04</div>
-      <div class="exampleCell">COL: 05</div>
-      <div class="exampleCell">COL: 06</div>
-      <div class="exampleCell">COL: 07</div>
-      <div class="exampleCell">COL: 08</div>
+    <!-- prettier-ignore -->
+    <gds-grid columns="4" gap="m" auto-columns="100">
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 01</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 02</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 03</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 04</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 05</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 06</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 07</gds-container></gds-card>
+      <gds-card shadow="s" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 08</gds-container></gds-card>
     </gds-grid>
   `,
 }
@@ -139,46 +148,16 @@ export const AutoColumns: Story = {
   ...DefaultParams,
   name: 'Auto Columns attribute',
   render: (args) => html`
-    <gds-grid auto-columns="240">
-      <div class="exampleCell">COL: 01</div>
-      <div class="exampleCell">COL: 02</div>
-      <div class="exampleCell">COL: 03</div>
-      <div class="exampleCell">COL: 04</div>
-      <div class="exampleCell">COL: 05</div>
-      <div class="exampleCell">COL: 06</div>
-      <div class="exampleCell">COL: 07</div>
-      <div class="exampleCell">COL: 08</div>
+    <!-- prettier-ignore -->
+    <gds-grid gap="s" auto-columns="240">
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 01</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 02</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 03</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 04</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 05</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 06</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 07</gds-container></gds-card>
+      <gds-card shadow="m" radius="xs"><gds-container height="120px" display="flex" align="center" justify="center">COL: 08</gds-container></gds-card>
     </gds-grid>
   `,
-}
-
-/**
- *  Sizes ref are part of the internal design system and are used to define the `gap` and `padding` for different devices. The following are the available sizes:
- *
- * | Size | Token   | Pixels |
- * | ---- | ------- | ------ |
- * | 3xl  | size/12 | 96px   |
- * | 2xl  | size/9  | 48px   |
- * | xl   | size/7  | 32px   |
- * | l    | size/6  | 24px   |
- * | m    | size/5  | 16px   |
- * | s    | size/3  | 8px    |
- * | xs   | size/2  | 4px    |
- * | none | size/0  | 0px    |
- *
- * #### Breakpoints
- *
- * The grid component has three breakpoints for `desktop`, `tablet`, and `mobile` devices. The following are the available breakpoints:
- *
- * | Category | Type       | Size   |
- * | -------- | ---------- | ------ |
- * | L        | desktop-lg | 2560px |
- * | L        | desktop-md | 1440px |
- * | L        | desktop-sm | 1024px |
- * | M        | tablet     | 768px  |
- * | S        | mobile     | 425px  |
- */
-export const Sizes: Story = {
-  // ...DefaultParams,
-  // render: ,
 }

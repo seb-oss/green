@@ -30,7 +30,7 @@ export const globalTypes = {
     name: 'Change Style',
     defaultValue: '2023',
     toolbar: {
-      icon: 'box',
+      icon: 'lightning',
       items: ['2016', '2023'],
       showName: true,
       dynamicTitle: true,
@@ -61,35 +61,39 @@ export default {
       },
     },
   },
-  decorators: [(storyFn: any) => html`<gds-theme>${storyFn()}</gds-theme>`],
+  decorators: [
+    (storyFn: any, context: any) => {
+      // Initialize previousStyle if it doesn't exist
+      if (typeof context.globals.previousStyle === 'undefined') {
+        context.globals.previousStyle = '2023' // Default to 2023
+      }
+
+      const style = context.globals.style || '2023'
+
+      if (style === '2016') {
+        if (context.globals.previousStyle !== '2016') {
+          // If switching to 2016 from a different style, register transitional styles
+          registerTransitionalStyles()
+        }
+      } else {
+        if (context.globals.previousStyle === '2016') {
+          // If switching back to 2023 from 2016, force a refresh
+          document.location.reload()
+        }
+        // Implement any additional logic needed for reverting to 2023 styles here
+      }
+
+      // Update previousStyle for the next render
+      context.globals.previousStyle = style
+
+      return html`<gds-theme>${storyFn()}</gds-theme>`
+    },
+  ],
 }
 
 @customElement('transitional-styles-toggle')
 class TransitionalStylesToggle extends LitElement {
   protected createRenderRoot() {
     return this
-  }
-
-  #showTransitionalStyles() {
-    registerTransitionalStyles()
-    document.querySelectorAll('[gds-element]').forEach((el: any) => {
-      el.connectedCallback()
-    })
-  }
-
-  render() {
-    return html`<gds-theme>
-      <gds-grid gap="s" style="margin-bottom: 1rem">
-        <gds-button
-          rank="secondary"
-          @click=${() => this.#showTransitionalStyles()}
-        >
-          Show 2016 styles
-        </gds-button>
-        <gds-button rank="secondary" @click=${() => location.reload()}>
-          Show 2023 styles
-        </gds-button>
-      </gds-grid>
-    </gds-theme>`
   }
 }

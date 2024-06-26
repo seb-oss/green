@@ -22,21 +22,7 @@ import TextCSS from './text.style.css'
 export class GdsText extends GdsElement {
   // static styles = [tokens, TextCSS, ]
 
-  static styles = [
-    tokens,
-    TextCSS,
-    css`
-      // .truncate {
-      //   display: -webkit-box;
-      //   -webkit-box-orient: vertical;
-      //   overflow: hidden;
-      // }
-    `,
-  ]
-
-  /**  use line clamp instead 
-  https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
-  */
+  static styles = [tokens, TextCSS]
 
   /**
    * @property tag
@@ -83,6 +69,17 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => v,
   })
   wrap?: string
+
+  /**
+   * @property transform
+   * Controls the text-transform property of the text.
+   * Supports all valid CSS text-transform values.
+   */
+  @styleExpressionProperty({
+    property: 'text-transform',
+    valueTemplate: (v) => v,
+  })
+  transform?: string
 
   /**
    * @property length
