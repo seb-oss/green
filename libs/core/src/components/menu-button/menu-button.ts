@@ -8,14 +8,8 @@ import { tokens } from '../../tokens.style'
 
 import style from './menu-button.css?inline'
 
-//import { GdsIcon } from '@sebgroup/green-core/components/icon/icon.js'
-
-// Create a customized `html` template tag that strips whitespace and applies custom element scoping.
-//const html = stripWhitespace(customElementHtml)
-
 /**
- * @element menu-button
- * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
+ * @element gds-menu-button
  * @status beta
  *
  * @slot - Content to be displayed as the button label.
@@ -40,12 +34,6 @@ export class MenuButton extends GdsElement {
   disabled = false
 
   /**
-   * Sets the size of the menu-button. Defaults to "medium".
-   */
-  @property({ reflect: true })
-  size: 'small' | 'medium' | 'large' = 'medium'
-
-  /**
    * The label of the menu-button. Use this to add an accessible label to the button when no text is provided in the default slot.
    */
   @property()
@@ -55,7 +43,7 @@ export class MenuButton extends GdsElement {
    * The label of the menu-button. Use this to add an accessible label to the button when no text is provided in the default slot.
    */
   @property({ type: Boolean })
-  compactview: boolean = false
+  compact: boolean = false
 
   /**
    * Whether the menu button is selected
@@ -71,7 +59,7 @@ export class MenuButton extends GdsElement {
   render() {
     const classes = {
       selected: this.selected,
-      compactview: this.compactview,
+      compact: this.compact,
     }
     return html`
       <button
