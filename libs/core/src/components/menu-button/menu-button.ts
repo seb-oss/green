@@ -1,8 +1,10 @@
 import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { literal, html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
-import { gdsCustomElement, html } from '../../scoping'
+import { gdsCustomElement } from '../../scoping'
 import { constrainSlots } from '../../utils/helpers'
 import { tokens } from '../../tokens.style'
 
@@ -40,6 +42,30 @@ export class MenuButton extends GdsElement {
   label = ''
 
   /**
+   * When set, the underlying button will be rendered as an anchor element.
+   */
+  @property()
+  href = ''
+
+  /**
+   * Where to display the linked URL. Only used when href is present.
+   */
+  @property()
+  target?: '_self' | '_blank' | '_parent' | '_top'
+
+  /**
+   * The relationship of the linked URL as space-separated link types. Only used when href is present. Defaults to "noreferrer noopener" for security reasons when target is set.
+   */
+  @property()
+  rel?: string
+
+  /**
+   * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value. Only used when href is present.
+   */
+  @property()
+  download?: string
+
+  /**
    * The label of the menu-button. Use this to add an accessible label to the button when no text is provided in the default slot.
    */
   @property({ type: Boolean })
@@ -58,19 +84,35 @@ export class MenuButton extends GdsElement {
 
   render() {
     const classes = {
+      button: true,
       selected: this.selected,
       compact: this.compact,
     }
-    return html`
-      <button
+
+    const tag = this.#isLink ? literal`a` : literal`button`
+
+    return staticHtml`
+      <${tag}
         class="${classMap(classes)}"
         ?disabled="${this.disabled}"
         aria-label="${this.label}"
+        href=${ifDefined(this.#isLink ? this.href : undefined)}
+        target=${ifDefined(this.#isLink ? this.target : undefined)}
+        rel=${ifDefined(this.#isLink ? this.rel || this.#defaultRel : undefined)}
+        download=${ifDefined(this.#isLink ? this.download : undefined)}
       >
         <slot name="lead"></slot>
         <slot></slot>
         <slot name="trail"></slot>
-      </button>
+      </${tag}>
     `
+  }
+
+  get #isLink() {
+    return this.href.length > 0
+  }
+
+  get #defaultRel() {
+    return this.target === '_blank' ? 'noreferrer noopener' : undefined
   }
 }
