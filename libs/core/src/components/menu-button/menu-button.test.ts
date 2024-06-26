@@ -9,7 +9,7 @@ import {
   getScopedTagName,
 } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/button'
+import '@sebgroup/green-core/components/menu-button'
 import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 import '@sebgroup/green-core/components/icon'
 
@@ -106,7 +106,7 @@ describe('<gds-menu-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('button')
 
       expect(shadowButton?.classList.contains('compact')).to.equal(true)
-      expect(el.comapct).to.equal(true)
+      expect(el.compact).to.equal(true)
     })
 
     it('should support link attributes', async () => {
@@ -171,7 +171,7 @@ describe('<gds-menu-button>', () => {
       )
       const input = el.querySelector('input') as HTMLInputElement
       const button = el.querySelector(
-        getScopedTagName('gds-button'),
+        getScopedTagName('gds-menu-button'),
       ) as GdsMenuButton
 
       input.focus()
