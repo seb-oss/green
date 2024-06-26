@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.2.0
+
+### Minor Changes
+
+- f94b8ad: **Dropdown:** Add option for disabling mobile styles
+
+### Patch Changes
+
+- Updated dependencies [f94b8ad]
+- Updated dependencies [23022c1]
+- Updated dependencies [47d4df3]
+  - @sebgroup/green-core@1.23.0
+  - @sebgroup/chlorophyll@3.4.1
+
 ## 4.1.1
 
 ### Patch Changes
