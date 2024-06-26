@@ -37,8 +37,6 @@ export function styleExpressionProperty(
         const ast = parse(tokenize(newValue as string))
         const css = toCss(sel, prop, ast, valueTemplate, styleTemplate)
         ;(this as any)[`__${String(descriptor)}_ast`] = ast
-
-        console.log(css)
         ;(this as GdsElement)._dynamicStylesController.inject(
           `sep_${String(descriptor)}`,
           unsafeCSS(css),

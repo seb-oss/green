@@ -187,6 +187,43 @@ export const Card: Story = {
   `,
 }
 
+/**
+ * Variants
+ */
+
+export const Variants: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <!-- prettier-ignore -->
+    <gds-grid columns="xs{1} m{2} l{3}" gap="l">
+      <gds-card radius="xs" variant="midnight">
+        <gds-container padding="s l" radius="xl" background="var(--_button)">Midnight</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="frost">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Frost</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="plum">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Plum</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="silver">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Silver</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="mist">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Mist</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="pearl">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Pearl</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="outlined">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Outlined</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="default">
+        <gds-container padding="s l" radius="xl"  background="var(--_button)">Default</gds-container>
+      </gds-card>
+    </gds-grid>
+  `,
+}
+
 export const CardBorder: Story = {
   ...DefaultParams,
   name: 'Border Style',
