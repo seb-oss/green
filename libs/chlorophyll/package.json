@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/chlorophyll",
-  "version": "3.4.3",
+  "version": "3.4.2",
   "description": "A CSS framework for SEB with accessibility at it's core.",
   "main": "css/green-chlorophyll.min.css",
   "repository": {
