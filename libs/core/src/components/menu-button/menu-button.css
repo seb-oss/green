@@ -32,19 +32,8 @@
   }
 }
 
-@layer a11y {
-  @media (prefers-color-scheme: dark) {
-    /* TODO */
-  }
-  @media (prefers-reduced-motion: reduce) {
-    :host {
-      --_transition: none;
-    }
-  }
-}
-
 @layer core {
-  button {
+  .button {
     align-items: center;
 
     background-color: var(--gds-color-transparen);
@@ -122,7 +111,7 @@
       white-space: nowrap;
     }
   }
-  button.compact {
+  .compact {
     display: block;
     --_padding-inline: var(--gds-sys-space-padding-l);
     --_padding-block: var(--gds-sys-space-padding-s);
@@ -133,16 +122,20 @@
       display: block;
     }
   }
-  button:hover ::slotted(berry-component) {
+  :hover ::slotted(berry-component) {
     background-color: #85857a;
   }
-  button.selected ::slotted(berry-component) {
+  .selected ::slotted(berry-component) {
     background-color: green;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
 @layer disabled {
-  button:disabled {
+  :disabled {
     --_color-bg: var(--gds-sys-color-container-container-disabled);
     border-color: var(--_color-bg);
     color: var(--gds-sys-color-content-content-disabled);
