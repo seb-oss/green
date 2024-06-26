@@ -31,7 +31,7 @@ export const Footer = () => (
 
 # Cards
 
-Simple Card Component
+A card is container for short content, related pieces of information, and action on a specific content.
 
 <Story
   name="Card"
@@ -42,6 +42,23 @@ Simple Card Component
 >
   {Template.bind({})}
 </Story>
+
+## Card without header
+
+<Canvas>
+  <Card>
+    <p>
+      <strong>Not passing header prop, but creating it in body</strong>
+    </p>
+    <p class="mb-5">
+      Then you don't get the close button because it's styling is tied to the
+      header
+    </p>
+    <div>
+      <button class="primary">Primary button</button>
+    </div>
+  </Card>
+</Canvas>
 
 ## Headline and text content
 

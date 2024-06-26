@@ -1,10 +1,9 @@
 import { html } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/datepicker/index.js'
+import './index.ts'
 
 // Needed for components that only have 2016 style so far
-import { registerTransitionalStyles } from '../../../../../dist/libs/core/src/transitional-styles.js'
+import { registerTransitionalStyles } from '../../transitional-styles.ts'
 registerTransitionalStyles()
 
 /**

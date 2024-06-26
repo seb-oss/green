@@ -246,7 +246,8 @@ export class GdsCalendar extends GdsElement {
                         id="dateCell-${day.getDate()}"
                       >
                         <span
-                          style="color: ${customization
+                          class="number"
+                          style="--_color: ${customization
                             ? customization?.color
                             : ''}"
                           >${day.getDate()}</span
@@ -256,8 +257,8 @@ export class GdsCalendar extends GdsElement {
                           customization.indicator,
                           () =>
                             html`<span
-                              class="indicator_${customization?.indicator}"
-                              style="background-color: ${customization?.color}"
+                              class="indicator-${customization?.indicator}"
+                              style="--_color: ${customization?.color}"
                             ></span>`,
                         )}
                       </td>

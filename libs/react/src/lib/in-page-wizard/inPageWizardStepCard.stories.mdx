@@ -1,6 +1,6 @@
 import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
 import { InPageWizardStepCard } from './inPageWizardStepCard'
-import { Label, List, Value } from '../list/valueList.tsx'
+import { GroupedList, ListItem } from '../grouped-list'
 import { TextInput } from '../form/input/input.tsx'
 import { TextArea } from '../form'
 import { Check } from '../icons'
@@ -139,12 +139,47 @@ With InPageWizardStepCard it is possible for a user to quickly create wizard ste
       stepText="Step 1 of 3"
       title="Completed step"
     >
-      <List>
-        <Label>Summary item 1</Label>
-        <Value>Summary value 1</Value>
-        <Label>Summary item 2</Label>
-        <Value>Summary value 2</Value>
-      </List>
+      <GroupedList>
+        <ListItem
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            border: 'none',
+            padding: '.5rem 1rem',
+          }}
+        >
+          <div>
+            <b style={{ fontWeight: '500' }}>Summary key</b>
+          </div>
+          <div>Summary value</div>
+        </ListItem>
+        <ListItem
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            border: 'none',
+            padding: '.5rem 1rem',
+          }}
+        >
+          <div>
+            <b style={{ fontWeight: '500' }}>Summary key</b>
+          </div>
+          <div>Summary value</div>
+        </ListItem>
+        <ListItem
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            border: 'none',
+            padding: '.5rem 1rem',
+          }}
+        >
+          <div>
+            <b style={{ fontWeight: '500' }}>Summary key</b>
+          </div>
+          <div>Summary value</div>
+        </ListItem>
+      </GroupedList>
     </InPageWizardStepCard>
     <InPageWizardStepCard
       editBtnText="Edit"

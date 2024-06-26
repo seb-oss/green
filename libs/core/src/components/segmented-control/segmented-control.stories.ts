@@ -1,7 +1,6 @@
 import { html } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/segmented-control/index.js'
+import './index.ts'
 
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/segmented-control)
