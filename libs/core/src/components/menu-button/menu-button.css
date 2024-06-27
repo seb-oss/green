@@ -60,7 +60,7 @@
     font-weight: var(--_font-weight);
     line-height: var(--_line-height);
 
-    &:focus {
+    &:focus-visible {
       outline-color: color-mix(
         in srgb,
         var(--_color-outline),
@@ -68,14 +68,11 @@
       );
       border-radius: 2px;
       overflow: visible;
-
-      &:not(:focus-visible) {
-        outline-color: transparent;
-      }
     }
 
     &:hover,
-    &.selected:hover {
+    &.selected:hover,
+    &:active {
       --_color-bg: var(--gds-sys-color-base200);
       --_color-border: var(--gds-sys-color-base600);
     }
