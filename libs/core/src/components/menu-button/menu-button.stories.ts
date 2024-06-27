@@ -41,6 +41,9 @@ export const Basic: Story = {
   ...DefaultParams,
 }
 
+/**
+ * Selected state is used to indicate that the button is currently selected, for example to indicate the current page.
+ */
 export const Selected_state: Story = {
   ...DefaultParams,
   render: () =>
@@ -48,6 +51,14 @@ export const Selected_state: Story = {
       <gds-icon-magnifying-glass solid slot="lead"></gds-icon-magnifying-glass>
       Search
     </gds-menu-button>`,
+}
+
+/**
+ * The menu button can be used without an icon as well.
+ */
+export const Only_text: Story = {
+  ...DefaultParams,
+  render: () => html`<gds-menu-button>Search</gds-menu-button>`,
 }
 
 /**
