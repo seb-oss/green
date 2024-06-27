@@ -110,7 +110,7 @@ export const Usage: Story = {
 
       function onCalFocusChange(e) {
         year.value = String(e.target.focusedYear)
-        month.value = String(e.target.focusedMonth + 1)
+        month.value = String(e.target.focusedMonth)
       }
 
       function onCalChange() {
