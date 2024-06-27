@@ -4,8 +4,6 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping'
 import './menu-button'
 import '../popover/popover.js'
-import '../layout/flex/flex.js'
-import '../layout/card/card.js'
 
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
@@ -15,7 +13,7 @@ import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
 const meta: Meta = {
-  title: 'Docs/Components/Menu button',
+  title: 'Components/Menu button',
   component: 'gds-menu-button',
   parameters: {
     layout: 'centered',
@@ -73,11 +71,8 @@ export const Only_text: Story = {
 export const Example_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card
-      display="flex"
-      height="50px"
-      width="700px"
-      border="0 0 4xs/base300 0"
+    html` <div
+      style="display:flex;width:700px;height:50px;border-bottom: 1px solid #ddd;"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>
@@ -85,7 +80,7 @@ export const Example_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <div style="flex-basis:50%;display:flex;justify-content:flex-end">
         <gds-menu-button>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
@@ -106,8 +101,8 @@ export const Example_menu_bar: Story = {
           ></gds-icon-square-arrow-top-right>
           External link
         </gds-menu-button>
-      </gds-flex>
-    </gds-card>`,
+      </div>
+    </div>`,
 }
 
 /**
@@ -116,19 +111,16 @@ export const Example_menu_bar: Story = {
 export const Compact_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card
-        display="flex"
-        width="700px"
-        border="0 0 4xs/base300 0"
-        background="base-white"
-      >
+    html` <div
+      style="display:flex;width:700px;border-bottom: 1px solid #ddd;"
+    >
       <div style="flex-basis:50%;">
         <gds-menu-button compact>
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <div style="flex-basis:50%;display:flex;justify-content:flex-end">
         <gds-menu-button compact>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
@@ -150,7 +142,6 @@ export const Compact_menu_bar: Story = {
           ></gds-icon-square-arrow-top-right>
           External link
         </gds-menu-button>
-      </gds-flex>
-    </gds-card>
-    `,
+      </div>
+    </div>`,
 }
