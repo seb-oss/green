@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.24.0
+
+### Minor Changes
+
+- d6540f5: **Menu button:** Add new component
+
 ## 1.23.0
 
 ### Minor Changes
