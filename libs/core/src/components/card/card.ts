@@ -124,6 +124,15 @@ export class GdsCard extends GdsElement {
   })
   border?: string
 
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    styleTemplate: (_prop, val) => {
+      console.log(_prop, val)
+      return `color: var(--gds-color-content-${val[0]});background-color: var(--gds-color-container-${val[0]});border-color: var(--gds-color-stroke-${val[0]});`
+    },
+  })
+  variant?: string
+
   /**
    * @property padding
    * Controls the padding using shorthand method for the container.

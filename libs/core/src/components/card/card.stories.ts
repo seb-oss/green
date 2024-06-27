@@ -196,29 +196,35 @@ export const Variants: Story = {
   render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid columns="xs{1} m{2} l{3}" gap="l">
-      <gds-card radius="xs" variant="midnight">
-        <gds-container padding="s l" radius="xl" background="var(--_button)">Midnight</gds-container>
+      <gds-card radius="xs" variant="white">
+        <gds-container padding="s l" radius="xl">White</gds-container> 
       </gds-card>
-      <gds-card radius="xs" variant="frost">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Frost</gds-container>
+      <gds-card radius="xs" variant="black">
+        <gds-container padding="s l" radius="xl">Black</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="plum">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Plum</gds-container>
+      <gds-card radius="xs" variant="grey">
+        <gds-container padding="s l" radius="xl">Grey</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="silver">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Silver</gds-container>
+      <gds-card radius="xs" variant="green">
+        <gds-container padding="s l" radius="xl">Green</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="mist">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Mist</gds-container>
+      <gds-card radius="xs" variant="blue">
+        <gds-container padding="s l" radius="xl">Blue</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="pearl">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Pearl</gds-container>
+      <gds-card radius="xs" variant="red">
+        <gds-container padding="s l" radius="xl">Red</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="outlined">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Outlined</gds-container>
+      <gds-card radius="xs" variant="orange">
+        <gds-container padding="s l" radius="xl">Orange</gds-container>
       </gds-card>
-      <gds-card radius="xs" variant="default">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Default</gds-container>
+      <gds-card radius="xs" variant="yellow">
+        <gds-container padding="s l" radius="xl">Yellow</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="copper">
+        <gds-container padding="s l" radius="xl">Copper</gds-container>
+      </gds-card>
+      <gds-card radius="xs" variant="purple">
+        <gds-container padding="s l" radius="xl">Purple</gds-container>
       </gds-card>
     </gds-grid>
   `,

@@ -1,0 +1,70 @@
+:host {
+  /* // Refs */
+  --gds-ref-color-grey-1000: #353535;
+  --gds-ref-color-grey-900: #5e5e5e;
+  --gds-ref-color-grey-400: #d7d7d7;
+  --gds-ref-color-green-1000: #428c4b;
+  --gds-ref-color-green-900: #4ba257;
+  --gds-ref-color-green-400: #c0e4c3;
+  --gds-ref-color-blue-1000: #2d6290;
+  --gds-ref-color-blue-900: #3471a6;
+  --gds-ref-color-blue-400: #bbcde7;
+  --gds-ref-color-red-1000: #a63e2a;
+  --gds-ref-color-red-900: #c04832;
+  --gds-ref-color-red-400: #f6bfb9;
+  --gds-ref-color-orange-1000: #aa7028;
+  --gds-ref-color-orange-900: #c5812d;
+  --gds-ref-color-orange-400: #f8d4b9;
+  --gds-ref-color-yellow-1000: #b09934;
+  --gds-ref-color-yellow-900: #ccb03c;
+  --gds-ref-color-yellow-400: #fcecbc;
+  --gds-ref-color-copper-1000: #725d35;
+  --gds-ref-color-copper-900: #836c3d;
+  --gds-ref-color-copper-400: #d5cbbc;
+  --gds-ref-color-pink-1000: #9c777b;
+  --gds-ref-color-pink-900: #b4888e;
+  --gds-ref-color-pink-400: #eed8da;
+  --gds-ref-color-purple-1000: #7b608e;
+  --gds-ref-color-purple-900: #8e6fa5;
+  --gds-ref-color-purple-400: #dbcbe6;
+
+  /* // Container */
+  --gds-color-container-white: var(--gds-ref-color-white);
+  --gds-color-container-black: var(--gds-ref-color-black);
+  --gds-color-container-grey: var(--gds-ref-color-grey-1000);
+  --gds-color-container-green: var(--gds-ref-color-green-1000);
+  --gds-color-container-blue: var(--gds-ref-color-blue-1000);
+  --gds-color-container-red: var(--gds-ref-color-red-1000);
+  --gds-color-container-orange: var(--gds-ref-color-orange-1000);
+  --gds-color-container-yellow: var(--gds-ref-color-yellow-1000);
+  --gds-color-container-copper: var(--gds-ref-color-copper-1000);
+  --gds-color-container-pink: var(--gds-ref-color-pink-1000);
+  --gds-color-container-purple: var(--gds-ref-color-purple-1000);
+
+  /* // Content */
+  --gds-color-content-white: var(--gds-ref-color-white);
+  --gds-color-content-black: var(--gds-ref-color-black);
+
+  --gds-color-content-grey: var(--gds-ref-color-grey-400);
+  --gds-color-content-green: var(--gds-ref-color-green-400);
+  --gds-color-content-blue: var(--gds-ref-color-blue-400);
+  --gds-color-content-red: var(--gds-ref-color-red-400);
+  --gds-color-content-orange: var(--gds-ref-color-orange-400);
+  --gds-color-content-yellow: var(--gds-ref-color-yellow-400);
+  --gds-color-content-copper: var(--gds-ref-color-copper-400);
+  --gds-color-content-pink: var(--gds-ref-color-pink-400);
+  --gds-color-content-purple: var(--gds-ref-color-purple-400);
+
+  /* // Stroke */
+  --gds-color-stroke-white: var(--gds-ref-color-white);
+  --gds-color-stroke-black: var(--gds-ref-color-black);
+  --gds-color-stroke-grey: var(--gds-ref-color-grey-900);
+  --gds-color-stroke-green: var(--gds-ref-color-green-900);
+  --gds-color-stroke-blue: var(--gds-ref-color-blue-900);
+  --gds-color-stroke-red: var(--gds-ref-color-red-900);
+  --gds-color-stroke-orange: var(--gds-ref-color-orange-900);
+  --gds-color-stroke-yellow: var(--gds-ref-color-yellow-900);
+  --gds-color-stroke-copper: var(--gds-ref-color-copper-900);
+  --gds-color-stroke-pink: var(--gds-ref-color-pink-900);
+  --gds-color-stroke-purple: var(--gds-ref-color-purple-900);
+}
