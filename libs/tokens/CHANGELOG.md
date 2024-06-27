@@ -1,11 +1,5 @@
 # Changelog
 
-## 0.5.0
-
-### Minor Changes
-
-- 70bbc39: New components Card, Container, IMG, Video and tokens upgrade
-
 ## 0.4.1
 
 ### Patch Changes
