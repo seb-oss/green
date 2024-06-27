@@ -36,6 +36,14 @@
 - Updated dependencies [d6540f5]
   - @sebgroup/green-core@1.24.0
 
+## 4.2.1
+
+### Patch Changes
+
+- c068ed2: **Dropdown:** Add default value for `maxHeight`
+- Updated dependencies [d6540f5]
+  - @sebgroup/green-core@1.24.0
+
 ## 4.2.0
 
 ### Minor Changes
