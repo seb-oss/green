@@ -48,7 +48,7 @@ export type CustomizedDate = {
 
 /**
  * @element gds-calendar
- * @internal
+ * @status beta
  *
  * A calendar is a widget that allows the user to select a date.
  *
