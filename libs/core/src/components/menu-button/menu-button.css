@@ -18,11 +18,10 @@
     --_font-weight: 400;
     --_line-height: 1.25;
 
-    contain: layout;
     display: inline-block;
     isolation: isolate;
-    height: 100%;
     max-width: 100%;
+    height: 100%;
   }
 }
 
@@ -31,7 +30,6 @@
     align-items: center;
 
     background-color: var(--_color-bg);
-    block-size: 100%;
 
     border-color: var(--_color-border);
     border-style: none;
@@ -99,8 +97,10 @@
     flex-direction: column;
     --_padding-inline: var(--gds-sys-space-padding-l);
     --_padding-block: var(--gds-sys-space-padding-s);
+    --_gap: 1px;
     font-size: 0.875rem;
-    padding-bottom: 0.15rem;
+    height: 56px;
+    justify-content: center;
 
     & > slot[name] {
       order: 0;

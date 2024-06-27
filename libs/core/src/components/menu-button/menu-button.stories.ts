@@ -48,8 +48,8 @@ export const Selected_state: Story = {
   ...DefaultParams,
   render: () =>
     html`<gds-menu-button selected>
-      <gds-icon-magnifying-glass solid slot="lead"></gds-icon-magnifying-glass>
-      Search
+      <gds-icon-people solid slot="trail"></gds-icon-people>
+      Profile
     </gds-menu-button>`,
 }
 
@@ -112,7 +112,7 @@ export const Compact_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
     html` <div
-      style="display:flex;width:700px;height:50px;border-bottom: 1px solid #ddd;"
+      style="display:flex;width:700px;border-bottom: 1px solid #ddd;"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button compact>
