@@ -28,4 +28,11 @@ describe('Card', () => {
     )
     expect(screen.getAllByRole('button')[1].textContent).toContain('Primary')
   })
+  it('doesnt render header, content and footer', () => {
+    const { container } = render(<Card>Hello</Card>)
+
+    expect(container.querySelector('header')).toBeNull()
+    expect(container.querySelector('footer')).toBeNull()
+    expect(screen.getByText('Hello')).toBeDefined()
+  })
 })

@@ -1,5 +1,5 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './segmented-control.trans.styles.css'
+import styles from './segmented-control.trans.styles.css?inline'
 
 import * as Segment from './segment/segment.trans.styles'
 

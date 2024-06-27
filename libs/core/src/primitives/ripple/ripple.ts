@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from 'lit'
 import { query } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../scoping'
-import styles from './ripple.styles.scss'
+import styles from './ripple.styles.scss?inline'
 import { tokens } from '../../tokens.style'
 
 @gdsCustomElement('gds-ripple')

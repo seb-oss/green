@@ -1,5 +1,35 @@
 # Changelog
 
+## 3.8.0
+
+### Minor Changes
+
+- f94b8ad: **Dropdown:** Add option for disabling mobile styles
+
+### Patch Changes
+
+- 23022c1: updated in page wizard design
+- Updated dependencies [f94b8ad]
+- Updated dependencies [23022c1]
+- Updated dependencies [47d4df3]
+  - @sebgroup/green-core@1.23.0
+  - @sebgroup/chlorophyll@3.4.1
+
+## 3.7.0
+
+### Minor Changes
+
+- 0afe58f: **Breadcrumbs:** Added new component
+
+### Patch Changes
+
+- 9ee9f49: Not rendering header or footer in card if it's not passed
+- Updated dependencies [900effe]
+- Updated dependencies [0afe58f]
+- Updated dependencies [b62c0ae]
+  - @sebgroup/green-core@1.22.3
+  - @sebgroup/chlorophyll@3.4.0
+
 ## 3.6.0
 
 ### Minor Changes

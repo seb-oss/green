@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.4.2
+
+### Patch Changes
+
+- 4606e61: **Table:** Update style to match latest design
+
+## 3.4.1
+
+### Patch Changes
+
+- 23022c1: updated in page wizard design
+- 47d4df3: fix: correct color and background in Safari iOS
+
+## 3.4.0
+
+### Minor Changes
+
+- 0afe58f: **Breadcrumbs:** Added new component
+
 ## 3.3.6
 
 ### Patch Changes

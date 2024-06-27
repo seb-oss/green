@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../../../../../dist/libs/core/src/components/grid/index.js'
+import './index.ts'
 import './grid.stories.css'
 import { html } from 'lit'
 

@@ -4,11 +4,7 @@
     "outDir": "../../dist/tests/core",
     "module": "ESNext",
     "types": ["jest", "node"],
-    "esModuleInterop": true,
-    "paths": {
-      "@sebgroup/green-core": ["../../dist/libs/core/src"],
-      "@sebgroup/green-core/*": ["../../dist/libs/core/src/*"]
-    }
+    "esModuleInterop": true
   },
   "include": ["src/**/*.test.ts", "**/*.css"],
   "rules": {
