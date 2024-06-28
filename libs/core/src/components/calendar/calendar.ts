@@ -239,9 +239,7 @@ export class GdsCalendar extends GdsElement {
 
                     return html`
                       <td
-                        role="${ifDefined(
-                          Boolean(isDisabled) ? undefined : 'gridcell',
-                        )}"
+                        role="${ifDefined(isDisabled ? undefined : 'gridcell')}"
                         class="${classMap({
                           'custom-date': Boolean(customization),
                           disabled: Boolean(isDisabled),
