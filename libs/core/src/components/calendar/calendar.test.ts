@@ -4,7 +4,7 @@ import { sendKeys } from '@web/test-runner-commands'
 
 import { onlyDate, timeout } from '../../utils/testing'
 
-import '@sebgroup/green-core/primitives/calendar'
+import '@sebgroup/green-core/components/calendar'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import type { GdsCalendar } from './calendar'
@@ -220,6 +220,55 @@ describe('<gds-calendar>', () => {
       await expect(onlyDate(el.focusedDate)).to.equal(
         onlyDate(new Date('2024-02-29')),
       )
+    })
+  })
+
+  describe('API', () => {
+    it('should correctly render customizedDates', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedYear=${2024}
+          .focusedMonth=${5}
+          .customizedDates=${[
+            {
+              date: new Date('2024-06-04'),
+              color: 'var(--intent-danger-background)',
+            },
+            {
+              date: new Date('2024-06-06'),
+              color: 'var(--intent-danger-background)',
+              indicator: 'dot',
+            },
+            {
+              date: new Date('2024-06-08'),
+              disabled: true,
+            },
+          ]}
+        ></gds-calendar>`,
+      )
+      await el.updateComplete
+
+      const cell1 = el.getDateCell(4)
+      const cell2 = el.getDateCell(6)
+      const cell3 = el.getDateCell(8)
+      const cell4 = el.getDateCell(5)
+
+      expect(cell1).to.have.class('custom-date')
+      expect(
+        cell1?.querySelector('span.number')?.getAttribute('style'),
+      ).to.equal('--_color: var(--intent-danger-background)')
+      expect(cell1).to.not.have.class('disabled')
+
+      expect(cell2).to.have.class('custom-date')
+      expect(
+        cell2?.querySelector('span.number')?.getAttribute('style'),
+      ).to.equal('--_color: var(--intent-danger-background)')
+      expect(cell2?.querySelector('span.indicator-dot')).to.exist
+
+      expect(cell3).to.have.class('custom-date')
+      expect(cell3).to.have.class('disabled')
+
+      expect(cell4).to.not.have.class('custom-date')
     })
   })
 })

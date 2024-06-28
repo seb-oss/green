@@ -198,8 +198,12 @@ export class GdsCalendar extends GdsElement {
                       </td>`,
                   )}
                   ${week.days.map((day) => {
+                    const customization =
+                      this.customizedDates &&
+                      this.customizedDates.find((d) => isSameDay(d.date, day))
+
                     // Establish customization options for the current date
-                    const customization: Omit<CustomizedDate, 'date'> = {
+                    const displayOptions: Omit<CustomizedDate, 'date'> = {
                       // Defaults
                       color: 'currentColor',
 
@@ -210,10 +214,7 @@ export class GdsCalendar extends GdsElement {
                       ),
 
                       // Override with any customizations
-                      ...(this.customizedDates &&
-                        this.customizedDates.find((d) =>
-                          isSameDay(d.date, day),
-                        )),
+                      ...customization,
                     }
 
                     const isOutsideCurrentMonth =
@@ -225,7 +226,7 @@ export class GdsCalendar extends GdsElement {
 
                     // Establish final disabled state
                     const isDisabled =
-                      customization.disabled ||
+                      displayOptions.disabled ||
                       isOutsideCurrentMonth ||
                       (this.disabledWeekends && isWeekend)
 
@@ -247,18 +248,18 @@ export class GdsCalendar extends GdsElement {
                       >
                         <span
                           class="number"
-                          style="--_color: ${customization
-                            ? customization?.color
+                          style="--_color: ${displayOptions
+                            ? displayOptions?.color
                             : ''}"
                           >${day.getDate()}</span
                         >
 
                         ${when(
-                          customization.indicator,
+                          displayOptions.indicator,
                           () =>
                             html`<span
-                              class="indicator-${customization?.indicator}"
-                              style="--_color: ${customization?.color}"
+                              class="indicator-${displayOptions?.indicator}"
+                              style="--_color: ${displayOptions?.color}"
                             ></span>`,
                         )}
                       </td>
