@@ -1,5 +1,6 @@
 import { html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { property, query } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
@@ -146,6 +147,12 @@ export class GdsCalendar extends GdsElement {
   customizedDates?: CustomizedDate[]
 
   /**
+   * The accessible label for the calendar.
+   */
+  @property()
+  label?: string
+
+  /**
    * Returns the date cell element for the given day number.
    */
   getDateCell(dayNumber: number) {
@@ -170,9 +177,9 @@ export class GdsCalendar extends GdsElement {
   render() {
     const currentDate = new Date()
 
-    return html`<table>
-      <thead>
-        <tr>
+    return html`<table role="grid" aria-label="${ifDefined(this.label)}">
+      <thead role="rowgroup">
+        <tr role="row">
           ${when(this.showWeekNumbers, () => html`<th></th>`)}
           <th>${msg('Mon')}</th>
           <th>${msg('Tue')}</th>
@@ -183,17 +190,17 @@ export class GdsCalendar extends GdsElement {
           <th>${msg('Sun')}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody role="rowgroup">
         ${renderMonthGridView(
           this.focusedDate,
           (weeks) => html`
             ${weeks.map(
               (week) => html`
-                <tr>
+                <tr role="row">
                   ${when(
                     this.showWeekNumbers,
                     () =>
-                      html`<td class="week-number">
+                      html`<td class="week-number" scope="row">
                         ${getWeek(week.days[0])}
                       </td>`,
                   )}
@@ -232,6 +239,9 @@ export class GdsCalendar extends GdsElement {
 
                     return html`
                       <td
+                        role="${ifDefined(
+                          Boolean(isDisabled) ? undefined : 'gridcell',
+                        )}"
                         class="${classMap({
                           'custom-date': Boolean(customization),
                           disabled: Boolean(isDisabled),
@@ -240,7 +250,9 @@ export class GdsCalendar extends GdsElement {
                         ?disabled=${isDisabled}
                         tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
                         aria-selected="${this.value &&
-                        isSameDay(this.value, day)}"
+                        isSameDay(this.value, day)
+                          ? 'true'
+                          : 'false'}"
                         aria-label="${day.toDateString()}"
                         @click=${() =>
                           isDisabled ? null : this.#setSelectedDate(day)}

@@ -38,6 +38,9 @@ const DefaultParams: Story = {
 
 export const Basic: Story = {
   ...DefaultParams,
+  args: {
+    label: 'Calendar',
+  },
 }
 
 /**
@@ -53,12 +56,12 @@ export const Usage: Story = {
   render: (args) => html`
     <div style="width: 320px">
       <gds-grid gap="m">
-        <gds-dropdown id="year">
+        <gds-dropdown id="year" label="Year" size="small">
           <gds-option value="2024">2024</gds-option>
           <gds-option value="2025">2025</gds-option>
           <gds-option value="2026">2026</gds-option>
         </gds-dropdown>
-        <gds-dropdown id="month" max-height="200">
+        <gds-dropdown id="month" max-height="200" label="Month" size="small">
           <gds-option value="0">Jan</gds-option>
           <gds-option value="1">Feb</gds-option>
           <gds-option value="2">Mar</gds-option>
@@ -73,7 +76,7 @@ export const Usage: Story = {
           <gds-option value="11">Dec</gds-option>
         </gds-dropdown>
       </gds-grid>
-      <gds-calendar id="cal"></gds-calendar>
+      <gds-calendar id="cal" label="Calendar"></gds-calendar>
       <div>
         Selected date:
         <span id="selected-date" style="font-weight: bold"></span>

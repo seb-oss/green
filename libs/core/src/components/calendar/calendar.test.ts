@@ -21,11 +21,6 @@ describe('<gds-calendar>', () => {
   })
 
   describe('Interactions', () => {
-    it('should default to undefined', async () => {
-      const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
-      expect(el.value).to.equal(undefined)
-    })
-
     it('should increment by 7 days when pressing key down', async () => {
       const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
       el.focus()
@@ -224,6 +219,90 @@ describe('<gds-calendar>', () => {
   })
 
   describe('API', () => {
+    it('should default to undefined', async () => {
+      const el = await fixture<GdsCalendar>(html`<gds-calendar></gds-calendar>`)
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('respects max date', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar .max=${new Date('2024-01-01')}></gds-calendar>`,
+      )
+
+      el.focusedDate = new Date('2024-02-01')
+      await el.updateComplete
+
+      const cell = el.getDateCell(1)
+      expect(cell).to.have.class('disabled')
+
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('respects min date', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar .min=${new Date('2024-01-01')}></gds-calendar>`,
+      )
+
+      el.focusedDate = new Date('2023-12-01')
+      await el.updateComplete
+
+      const cell = el.getDateCell(1)
+      expect(cell).to.have.class('disabled')
+
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('should disable weekends when setting disabledWeekends to true', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .disabledWeekends=${true}
+          .focusedDate=${new Date('2024-06-03')}
+        ></gds-calendar>`,
+      )
+      await el.updateComplete
+
+      const cell1 = el.getDateCell(1)
+      const cell2 = el.getDateCell(9)
+
+      expect(cell1).to.have.class('disabled')
+      expect(cell2).to.have.class('disabled')
+    })
+
+    it('should disable specific dates set in disabledDates', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedYear=${2024}
+          .focusedMonth=${5}
+          .disabledDates=${[
+            new Date('2024-06-04'),
+            new Date('2024-06-06'),
+            new Date('2024-06-08'),
+          ]}
+        ></gds-calendar>`,
+      )
+
+      const cell1 = el.getDateCell(4)
+      const cell2 = el.getDateCell(6)
+      const cell3 = el.getDateCell(8)
+
+      expect(cell1).to.have.class('disabled')
+      expect(cell2).to.have.class('disabled')
+      expect(cell3).to.have.class('disabled')
+    })
+
+    it('should show week numbers when setting showWeekNumbers to true', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .showWeekNumbers=${true}
+          .focusedDate=${new Date('2024-06-01')}
+        ></gds-calendar>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
+      ).to.contain('22')
+    })
+
     it('should correctly render customizedDates', async () => {
       const el = await fixture<GdsCalendar>(
         html`<gds-calendar
@@ -269,6 +348,18 @@ describe('<gds-calendar>', () => {
       expect(cell3).to.have.class('disabled')
 
       expect(cell4).to.not.have.class('custom-date')
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('is accessible', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-06-03')}
+          label="Calendar"
+        ></gds-calendar>`,
+      )
+      await expect(el).to.be.accessible()
     })
   })
 })
