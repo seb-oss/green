@@ -1,3 +1,0 @@
-import{j as n}from"./jsx-runtime-1cddef7b.js";import"./chunk-HLWAVYOI-d7490859.js";import{M as s}from"./index-6b532202.js";import{u as r}from"./index-1220e088.js";import"./iframe-03de1775.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-725317a4.js";import"./index-d38538b0.js";import"./index-356e4a49.js";function e(t){const o=Object.assign({h1:"h1"},r(),t.components);return n.jsxs(n.Fragment,{children:[n.jsx(s,{title:"Docs/Style/Typography"}),`
-`,n.jsx(o.h1,{id:"typography",children:"Typography"}),`
-`]})}function y(t={}){const{wrapper:o}=Object.assign({},r(),t.components);return o?n.jsx(o,Object.assign({},t,{children:n.jsx(e,t)})):e(t)}export{y as default};
