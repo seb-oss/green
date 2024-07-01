@@ -20,3 +20,9 @@ const DefaultParams: Story = {
   },
   argTypes: {},
 }
+
+export const Spacer: Story = {
+  ...DefaultParams,
+  name: 'Spacer',
+  render: (args) => html` <gds-spacer size="2xl"></gds-spacer>`,
+}

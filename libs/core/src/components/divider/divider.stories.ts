@@ -27,10 +27,6 @@ const DefaultParams: Story = {
   argTypes: {},
 }
 
-/**
- * Headings
- */
-
 export const Divider: Story = {
   ...DefaultParams,
   name: 'Divider',
