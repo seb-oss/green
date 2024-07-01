@@ -102,7 +102,7 @@ export const Usage: Story = {
  */
 export const AllBreakpoints: Story = {
   ...DefaultParams,
-  name: 'Example: All breakpoints + Auto Columns',
+  name: 'Breakpoints + Auto Columns',
   render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid columns="4" gap="m" auto-columns="100">
@@ -146,7 +146,7 @@ export const AllBreakpoints: Story = {
  */
 export const AutoColumns: Story = {
   ...DefaultParams,
-  name: 'Auto Columns attribute',
+  name: 'Auto Columns',
   render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid gap="s" auto-columns="s{200} m{220} l{240}">
