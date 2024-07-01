@@ -277,7 +277,7 @@ export const CardBorder: Story = {
  * Supports all the size tokens from the design system.
  *
  * You can apply radius in each corner like this:
- * `<gds-card radius="none none m m" ></gds-card>
+ * `<gds-card radius="0 0 m m" ></gds-card>
  *
  * Also for different breakpoints like this:
  * `<gds-card radius="s{xs} m{xs} l{s}"></gds-card>`
@@ -288,13 +288,17 @@ export const CardBorder: Story = {
  *
  * ```html
  * <gds-card radius="m">All breakpoints</gds-card>
- * <gds-card radius="s{none none xs} m{none xs none xs} l{s}" >
+ * <gds-card radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
  *    Specific breakpoints and sides
  * </gds-card>
  * ```
  *
  * <br>
  * <br>
+ *
+ * These are the available values you can use to define Border Radius
+ *
+ * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
  *
  * #### Examples
  */
@@ -310,9 +314,8 @@ export const CardRadius: Story = {
         display="flex"
         align="center"
         justify="center"
-        radius="3xs"
       >
-        3XS
+        0
       </gds-container>
       <gds-container
         background="base900"
@@ -332,7 +335,7 @@ export const CardRadius: Story = {
         display="flex"
         align="center"
         justify="center"
-        radius="xs"
+        radius="0 xs 0 xs"
       >
         XS
       </gds-container>
@@ -343,7 +346,7 @@ export const CardRadius: Story = {
         display="flex"
         align="center"
         justify="center"
-        radius="s"
+        radius="0 s 0 s"
       >
         S
       </gds-container>
@@ -354,7 +357,7 @@ export const CardRadius: Story = {
         display="flex"
         align="center"
         justify="center"
-        radius="m"
+        radius="0 m 0 m"
       >
         M
       </gds-container>
@@ -365,7 +368,7 @@ export const CardRadius: Story = {
         display="flex"
         align="center"
         justify="center"
-        radius="l"
+        radius="0 l 0 l"
       >
         L
       </gds-container>
@@ -579,8 +582,9 @@ export const CardGrid: Story = {
             <gds-text
               tag="h3"
               size="l{headline-small} m{headline-small} s{headline-small}"
-              >Span Columns</gds-text
             >
+              Sidebar
+            </gds-text>
             <gds-text wrap="balance">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -599,14 +603,18 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            <gds-text tag="h3" size="headline-small">Span Columns</gds-text>
+            <gds-text tag="h3" size="headline-small">
+              Span Columns: [2 / -1]</gds-text
+            >
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
             <gds-text tag="h2" size="body-medium"
               >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
             <gds-button>Button</gds-button>
           </gds-container>

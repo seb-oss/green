@@ -121,9 +121,9 @@ export class GdsContainer extends GdsElement {
   inset?: string
 
   /**
-   * @property overflow
    * Controls the overflow property of the container.
    * Supports all valid CSS overflow values.
+   * @property overflow
    */
   @styleExpressionProperty({
     property: 'overflow',
@@ -272,6 +272,11 @@ export class GdsContainer extends GdsElement {
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.
+   *
+   *  * These are the available values you can use to define Border Radius
+   *
+   * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
+   *
    */
   @styleExpressionProperty({
     property: 'border-radius',
