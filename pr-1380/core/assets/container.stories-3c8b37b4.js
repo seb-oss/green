@@ -1,5 +1,0 @@
-import"./card-13761327.js";import{x as s}from"./lit-element-71e04f06.js";import"./gds-element-54cd6e2a.js";import"./_commonjsHelpers-725317a4.js";import"./tokens.style-880811e7.js";import"./style-expression-property-89161d08.js";import"./watch-c4961afe.js";import"./container-ae43cb5a.js";const x={title:"Docs/Layout/Container",component:"gds-container",tags:["autodocs"],parameters:{docs:{description:{component:"The `gds-container` component is a container element that can be used to wrap other components.\n\n@extends `gds-flex`"}}}},c={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}}},e={...c,name:"Container",render:i=>s` <gds-container> Container </gds-container>`};var r,t,o,n,a;e.parameters={...e.parameters,docs:{...(r=e.parameters)==null?void 0:r.docs,source:{originalSource:`{
-  ...DefaultParams,
-  name: 'Container',
-  render: args => html\` <gds-container> Container </gds-container>\`
-}`,...(o=(t=e.parameters)==null?void 0:t.docs)==null?void 0:o.source},description:{story:"Container",...(a=(n=e.parameters)==null?void 0:n.docs)==null?void 0:a.description}}};const h=["Card"];export{e as Card,h as __namedExportsOrder,x as default};
