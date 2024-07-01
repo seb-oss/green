@@ -1,12 +1,12 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "3.11.0",
+  "version": "3.8.1",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.29.0",
+    "@sebgroup/green-core": "^1.25.0",
     "@sebgroup/chlorophyll": "^3.4.1",
     "@sebgroup/extract": "^3.0.1",
     "@lit/react": "^1.0.2",
