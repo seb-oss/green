@@ -1,6 +1,10 @@
 {
   "ref": {
     "size": {
+      "4XS": {
+        "value": "1",
+        "type": "float"
+      },
       "3XS": {
         "value": "2",
         "type": "float"

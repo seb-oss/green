@@ -281,12 +281,12 @@ export class GdsContainer extends GdsElement {
 
   /**
    * @property background
-   * Controls the background property of the container.
+   * Controls the background property of the card.
    * Supports all the color tokens from the design system.
    */
   @styleExpressionProperty({
     property: 'background',
-    valueTemplate: (v) => v,
+    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
   })
   background?: string
 
@@ -294,23 +294,27 @@ export class GdsContainer extends GdsElement {
    * @property border
    * Controls the border property of the card.
    * Supports all tokens from the design system.
-   * Can be specified for each side useing the color token like this:
+   * Can be specified for each side using the size tokens like this:
    * ```html
-   * <gds-container border="currentColor transparent transparent transparent"></gds-container>
+   * <gds-container border="4xs 0 0 0"></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
    * ```html
-   * <gds-container border="s{currentColor} m{currentColor} l{currentColor}"></gds-container>
+   * <gds-container border="s{2xs} m{3xs} l{4xs}"></gds-container>
    * ```
    *
    * When you want to apply the border in all breakpoints and sides you can use the following:
    * ```html
-   * <gds-container border="currentColor"></gds-container>
+   * <gds-container border="4xs"></gds-container>
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `1px solid ${v}`,
+    valueTemplate: (v) => {
+      const [size, color] = v.split('/')
+      return `var(--gds-space-${size}) solid ${color ? `var(--gds-sys-color-${color})` : 'currentColor'}`
+    },
+    // valueTemplate: (v) => `var(--gds-space-${v}) solid currentColor`,
     styleTemplate: (_prop, values) => {
       const top = values[0]
       const right = values.length > 1 ? values[1] : top

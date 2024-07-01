@@ -98,12 +98,7 @@ export const Card: Story = {
           </gds-container>
         </gds-container>
       </gds-card>
-      <gds-card
-        shadow="l"
-        radius="m"
-        border="var(--gds-sys-color-base200)"
-        overflow="hidden"
-      >
+      <gds-card shadow="l" radius="m" border="3xs/base300" overflow="hidden">
         <gds-container display="flex" gap="m" direction="column" padding="s">
           <gds-container position="relative">
             <gds-img
@@ -188,53 +183,41 @@ export const Card: Story = {
 }
 
 /**
- * Variants
+ * @property border
+ * Controls the border property of the card.
+ * Supports all tokens from the design system.
+ * Can be specified for each side using the size tokens like this:
+ *
+ * ```html
+ * <gds-container border="4xs 0 0 0"></gds-container>
+ * ```
+ *
+ *
+ *
+ * ```html
+ * <!--Border specified for different breakpoints and side: -->
+ * <gds-container border="s{2xs 0 2xs 0} m{3xs 0 0 0} l{4xs}"></gds-container>
+ * ```
+ * * The above example will apply the border style of 2xs(top) 0(right) 2xs(bottom) 0(right) for small devices, 3xs for medium devices, and 4xs for large devices with the respective sides.
+ *
+ * ```html
+ * <!-- Border specified for all sides and all breakpoints: -->
+ * <gds-container border="4xs"></gds-container>
+ * ```
+ *
+ *
+ * To speficy the color of the border you can use the color tokens like this:
+ *
+ * ```html
+ * <gds-container border="4xs/base300"></gds-container>
+ * ```
  */
-
-export const Variants: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <!-- prettier-ignore -->
-    <gds-grid columns="xs{1} m{2} l{3}" gap="l">
-      <gds-card radius="xs" variant="midnight">
-        <gds-container padding="s l" radius="xl" background="var(--_button)">Midnight</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="frost">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Frost</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="plum">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Plum</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="silver">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Silver</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="mist">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Mist</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="pearl">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Pearl</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="outlined">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Outlined</gds-container>
-      </gds-card>
-      <gds-card radius="xs" variant="default">
-        <gds-container padding="s l" radius="xl"  background="var(--_button)">Default</gds-container>
-      </gds-card>
-    </gds-grid>
-  `,
-}
-
 export const CardBorder: Story = {
   ...DefaultParams,
   name: 'Border Style',
   render: (args) =>
     html` <gds-grid columns="5" gap="l">
-      <gds-card
-        shadow="s"
-        radius="0 0 m m"
-        background="base100"
-        border="currentColor transparent transparent transparent"
-      >
+      <gds-card shadow="s" radius="0 0 m m" border="4xs 0 0 0">
         <gds-container
           padding="2xl"
           display="flex"
@@ -244,12 +227,7 @@ export const CardBorder: Story = {
           Top
         </gds-container>
       </gds-card>
-      <gds-card
-        shadow="s"
-        radius="m 0 0 m"
-        background="base100"
-        border="transparent currentColor transparent transparent"
-      >
+      <gds-card shadow="s" radius="m 0 0 m" border="0 4xs 0 0">
         <gds-container
           padding="2xl"
           display="flex"
@@ -259,12 +237,7 @@ export const CardBorder: Story = {
           Right
         </gds-container>
       </gds-card>
-      <gds-card
-        shadow="s"
-        radius="m m 0 0"
-        background="base100"
-        border="transparent transparent currentColor transparent"
-      >
+      <gds-card shadow="s" radius="m m 0 0" border="0 0 4xs 0">
         <gds-container
           padding="2xl"
           display="flex"
@@ -274,12 +247,7 @@ export const CardBorder: Story = {
           Bottom
         </gds-container>
       </gds-card>
-      <gds-card
-        shadow="s"
-        radius="0 m m 0"
-        background="base100"
-        border="transparent transparent transparent currentColor"
-      >
+      <gds-card shadow="s" radius="0 m m 0" border="0 0 0 4xs">
         <gds-container
           padding="2xl"
           display="flex"
@@ -289,12 +257,7 @@ export const CardBorder: Story = {
           Left
         </gds-container>
       </gds-card>
-      <gds-card
-        shadow="s"
-        radius="m"
-        background="base100"
-        border="currentColor"
-      >
+      <gds-card shadow="s" radius="m" border="4xs">
         <gds-container
           padding="2xl"
           display="flex"
@@ -307,23 +270,41 @@ export const CardBorder: Story = {
     </gds-grid>`,
 }
 
+/**
+ * @property radius
+ *
+ * Controls the border-radius property of the card.
+ * Supports all the size tokens from the design system.
+ *
+ * You can apply radius in each corner like this:
+ * `<gds-card radius="none none m m" ></gds-card>
+ *
+ * Also for different breakpoints like this:
+ * `<gds-card radius="s{xs} m{xs} l{s}"></gds-card>`
+ *
+ * Each corner can have a different radius value and also different values for different breakpoints.
+ * The radius styles are predfied on the tokens file and will be applied automativally based on the token value.
+ *
+ *
+ * ```html
+ * <gds-card radius="m">All breakpoints</gds-card>
+ * <gds-card radius="s{none none xs} m{none xs none xs} l{s}" >
+ *    Specific breakpoints and sides
+ * </gds-card>
+ * ```
+ *
+ * <br>
+ * <br>
+ *
+ * #### Examples
+ */
 export const CardRadius: Story = {
   ...DefaultParams,
   name: 'Border Radius',
   render: (args) =>
     html`<gds-grid columns="8" gap="l">
       <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-      >
-        0
-      </gds-container>
-      <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -334,7 +315,7 @@ export const CardRadius: Story = {
         3XS
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -345,7 +326,7 @@ export const CardRadius: Story = {
         2XS
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -356,7 +337,7 @@ export const CardRadius: Story = {
         XS
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -367,7 +348,7 @@ export const CardRadius: Story = {
         S
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -378,7 +359,7 @@ export const CardRadius: Story = {
         M
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -389,7 +370,7 @@ export const CardRadius: Story = {
         L
       </gds-container>
       <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -400,84 +381,7 @@ export const CardRadius: Story = {
         XL
       </gds-container>
       <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="2xl"
-      >
-        2XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="3xl"
-      >
-        3XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="4xl"
-      >
-        4XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="5xl"
-      >
-        5XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="6xl"
-      >
-        6XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="7xl"
-      >
-        7XL
-      </gds-container>
-      <gds-container
-        background="black"
-        color="white-text"
-        padding="xl"
-        display="flex"
-        align="center"
-        justify="center"
-        radius="8xl"
-      >
-        8XL
-      </gds-container>
-      <gds-container
-        background="black"
+        background="base900"
         color="white-text"
         padding="xl"
         display="flex"
@@ -489,6 +393,23 @@ export const CardRadius: Story = {
       </gds-container>
     </gds-grid>`,
 }
+
+/**
+ *
+ * @property shadow
+ *
+ * Controls the box-shadow property of the card.
+ *
+ * Shadow styles are as specified on the design system that range from xl-2xl, can be used like this:
+ *
+ * ```html
+ * <gds-card shadow="s{xs} m{xs} l{s}"></gds-card>
+ * ```
+ *
+ * The above example will apply the shadow style of xs for small devices, xs for medium devices, and s for large devices.
+ * The shadow styles are predfied on the tokens file and will be applied automativally based on the token value.
+ *
+ */
 
 export const Cardshadow: Story = {
   ...DefaultParams,
@@ -547,6 +468,13 @@ export const Cardshadow: Story = {
       </gds-card>
     </gds-grid>`,
 }
+
+/**
+ * @property background
+ *
+ * Controls the background property of the card.
+ * Supports all the color tokens from the design system.
+ */
 
 export const CardBackground: Story = {
   ...DefaultParams,
@@ -624,6 +552,16 @@ export const CardBackground: Story = {
     </gds-grid>`,
 }
 
+/**
+ *
+ * Using `gds-card` with `gds-grid`
+ * The `gds-card` can be used with the `gds-grid` to create a card layout with multiple cards.
+ * The `gds-card` and `gds-container` accept properties like `column` and `row` where you can specify the number of columns specified on the grid to span or rows to span in vertical axis like on this example:
+ *
+ * ```html
+ * <gds-container column="2 / -1" row="1 / -1"></gds-container>
+ * ```
+ */
 export const CardGrid: Story = {
   ...DefaultParams,
   name: 'Using with Grid',
@@ -636,10 +574,11 @@ export const CardGrid: Story = {
             gap="m"
             direction="column"
             padding="s{xs} m{l} l{l}"
+            align="flex-start"
           >
             <gds-text
               tag="h3"
-              size="l{headline-medium} m{headline-medium} s{headline-medium}"
+              size="l{headline-small} m{headline-small} s{headline-small}"
               >Span Columns</gds-text
             >
             <gds-text wrap="balance">
@@ -660,7 +599,7 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            <gds-text tag="h3" size="headline-medium">Span Columns</gds-text>
+            <gds-text tag="h3" size="headline-small">Span Columns</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -669,6 +608,7 @@ export const CardGrid: Story = {
               >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
+            <gds-button>Button</gds-button>
           </gds-container>
         </gds-card>
       </gds-container>
@@ -682,7 +622,24 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            Some other column
+            <gds-text tag="h3" size="headline-small"
+              >Span all columns 1 / -1</gds-text
+            >
+            <gds-text wrap="balance" lines="3">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
           </gds-container>
         </gds-card>
       </gds-container>
