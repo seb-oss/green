@@ -21,8 +21,8 @@ import {
 import '../popover'
 import type { GdsPopover } from '../popover'
 
-import '../../primitives/calendar'
-import type { GdsCalendar } from '../../primitives/calendar'
+import '../calendar'
+import type { GdsCalendar } from '../calendar'
 
 import '../../components/dropdown'
 import type { GdsDropdown } from '../../components/dropdown'
