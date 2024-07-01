@@ -48,7 +48,7 @@ export const Basic: Story = {
 }
 
 /**
- * To use the `gds-grid`, you add it to your HTML and specify the number of `columns` for `desktop`, `tablet`, and `mobile` devices using the `columns` attribute. The `columns`, `gap`, `row-gap` and `padding` attributes can take either a single value or a string of three tokens separated by spaces, each prefixed with `l:` for `desktop`, `m:` for `tablet`, and `s:` for mobile.
+ * To use the `gds-grid`, you add it to your HTML and specify the number of `columns` for `desktop`, `tablet`, and `mobile` devices using the `columns` attribute. The `columns`, `gap`, `row-gap` and `padding` attributes can take either a single value or a string of three tokens separated by spaces, each prefixed with `l` for `desktop`, `m` for `tablet`, and `s` for mobile.
  *
  * If a single value is provided, it will be used for all screen sizes. If three tokens are provided, each screen size will use the value specified for it.
  *
@@ -60,10 +60,10 @@ export const Basic: Story = {
  *
  * <!-- Using different values for each screen size -->
  * <gds-grid
- *   columns="l:8 m:4 s:2"
- *   gap="l:xl m:l s:xs"
- *   row-gap="l:xl m:l s:xs"
- *   padding="l:2xl m:l s:xs"
+ *   columns="l{8} m{4} s{2}"
+ *   gap="l{xl} m{l} s{xs}"
+ *   row-gap="l{xl} m{l} s{xs}"
+ *   padding="l{2xl} m{l} s{xs}"
  * >
  *   <!-- Child elements here -->
  * </gds-grid>
@@ -132,7 +132,7 @@ export const AllBreakpoints: Story = {
  * </gds-grid>
  *
  * <!-- Using different values for each screen size -->
- * <gds-grid columns="l:8 m:4 s:2" auto-columns="l:200 m:100 s:80">
+ * <gds-grid columns="l{8} m{4} s{2}" auto-columns="l{200} m{100} s{80}">
  *   <!-- Child elements here -->
  * </gds-grid>
  * ```

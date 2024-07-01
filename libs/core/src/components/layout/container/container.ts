@@ -25,6 +25,18 @@ export class GdsContainer extends GdsFlex {
   static styles = [tokens, ContainerCSS]
 
   /**
+   * Controls the display property of the container.
+   * Supports all valid CSS display values.
+   *
+   * @property display
+   */
+  @styleExpressionProperty({
+    property: 'display',
+    valueTemplate: (v) => v,
+  })
+  display?: string
+
+  /**
    * Controls the opacity property of the container.
    *
    * You can apply opacity like this:

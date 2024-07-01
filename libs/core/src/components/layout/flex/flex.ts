@@ -9,12 +9,11 @@ import { styleExpressionProperty } from '../../../utils/decorators/style-express
 import FlexCSS from './flex.style.css'
 
 /**
- * The `gds-container` is a custom element that provides a flexible container system.
- * It can be used to create a container with different styles and configurations.
- * The container can be customized with different properties like padding, gap, display, position, and background.
+ * The `gds-flex` component is a flex element that can be used to wrap other components and control the layout of its children.
+ *
  * It can be used in combination with other elements like `gds-grid`, `gds-card`, `gds-img`, `gds-text` etc.
  *
- * @element gds-container
+ * @element gds-flex
  * @status beta
  *
  */
@@ -24,18 +23,19 @@ export class GdsFlex extends GdsElement {
   static styles = [tokens, FlexCSS]
 
   /**
-   * Controls the gap property of the container.
-   * Supports all valid CSS gap values.
+   * Controls the gap property of the flex.
+   * Supports all space tokens as value.
+   *
    * You can apply gap in each column and row like this:
    * ```html
-   * <gds-container gap="m s"></gds-container>
+   * <gds-flex gap="m s"></gds-flex>
    * ```
-   * The gap styles are predfined on the tokens file and will be applied automativally based on the token value.
-   * The gap can be applied to the container using shorthand like gap="1 2"
+   *
+   * The `gap` can be applied on `flex` using shorthand like gap="m s"
    *
    * Gap also support breakpoint syntax like this:
    * ```html
-   * <gds-container gap="xs{s} m{m} l{xl}"></gds-container>
+   * <gds-flex gap="xs{s} m{m} l{xl}"></gds-flex>
    * ```
    * The above example will apply the gap style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
    *
@@ -52,6 +52,7 @@ export class GdsFlex extends GdsElement {
 
   /**
    * Controlling individually the vertical gap you can use this property.
+   *
    * @property rowGap
    *
    */
@@ -62,17 +63,18 @@ export class GdsFlex extends GdsElement {
   rowGap?: string
 
   /**
-   * Controls the padding using shorthand method for the container.
-   * Supports all valid CSS padding values.
+   * Controls the padding using shorthand method for the flex.
+   * Supports all valid token values.
+   *
    * You can apply padding in each side like this:
    * ```html
-   * <gds-container padding="xl"></gds-container>
+   * <gds-flex padding="xl"></gds-flex>
    * ```
    * `xl` in tis case will be applied to all breakpoints and sides.
    *
    * Padding also support breakpoint syntax like this:
    * ```html
-   * <gds-container padding="xs{s} m{m} l{xl}"></gds-container>
+   * <gds-flex padding="xs{s} m{m} l{xl}"></gds-flex>
    * ```
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
    *
@@ -91,19 +93,7 @@ export class GdsFlex extends GdsElement {
   margin?: string
 
   /**
-   * Controls the display property of the container.
-   * Supports all valid CSS display values.
-   *
-   * @property display
-   */
-  @styleExpressionProperty({
-    property: 'display',
-    valueTemplate: (v) => v,
-  })
-  display?: string
-
-  /**
-   * Controls the position property of the container.
+   * Controls the position property of the flex.
    * Supports all valid CSS position values.
    *
    * @property position
@@ -115,7 +105,7 @@ export class GdsFlex extends GdsElement {
   position?: string
 
   /**
-   * Controls the inset property of the container.
+   * Controls the inset property of the flex.
    * Supports all valid CSS inset values.
    *
    * @property inset
@@ -127,7 +117,7 @@ export class GdsFlex extends GdsElement {
   inset?: string
 
   /**
-   * Controls the overflow property of the container.
+   * Controls the overflow property of the flex.
    * Supports all valid CSS overflow values.
    *
    * @property overflow
@@ -139,7 +129,7 @@ export class GdsFlex extends GdsElement {
   overflow?: string
 
   /**
-   * Controls the align-items property of the container.
+   * Controls the align-items property of the flex.
    * Supports all valid CSS align-items values.
    *
    * @property align
@@ -151,7 +141,7 @@ export class GdsFlex extends GdsElement {
   align?: string
 
   /**
-   * Controls the justify-content property of the container.
+   * Controls the justify-content property of the flex.
    * Supports all valid CSS justify-content values.
    *
    * @property justify
@@ -163,7 +153,7 @@ export class GdsFlex extends GdsElement {
   justify?: string
 
   /**
-   * Controls the flex-direction property of the container.
+   * Controls the flex-direction property of the flex.
    * Supports all valid CSS flex-direction values.
    *
    * @property direction
@@ -175,7 +165,7 @@ export class GdsFlex extends GdsElement {
   direction?: string
 
   /**
-   * Controls the grid-column property of the container.
+   * Controls the grid-column property of the flex.
    * Supports all valid CSS grid-column values.
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
    *
@@ -183,13 +173,13 @@ export class GdsFlex extends GdsElement {
    *
    * @example
    * ```html
-   * <gds-container column="2 / -1"></gds-container>
+   * <gds-flex column="2 / -1"></gds-flex>
    * ```
    * The above example will apply the grid-column style of `2 / -1`.
-   * The column can be applied to the container using shorthand like column="1 / 2"
+   * The column can be applied to the flex using shorthand like column="1 / 2"
    * The column also support breakpoint syntax like this:
    * ```html
-   * <gds-container column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * <gds-flex column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
    * ```
    */
   @styleExpressionProperty({
@@ -199,7 +189,7 @@ export class GdsFlex extends GdsElement {
   column?: string
 
   /**
-   * Controls the grid-row property of the container.
+   * Controls the grid-row property of the flex.
    * Supports all valid CSS grid-row values.
    *
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
@@ -208,13 +198,13 @@ export class GdsFlex extends GdsElement {
    *
    * @example
    * ```html
-   * <gds-container row="2 / -1"></gds-container>
+   * <gds-flex row="2 / -1"></gds-flex>
    * ```
    * The above example will apply the grid-row style of `2 / -1`.
-   * The row can be applied to the container using shorthand like row="1 / 2"
+   * The row can be applied to the flex using shorthand like row="1 / 2"
    * The row also support breakpoint syntax like this:
    * ```html
-   * <gds-container row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * <gds-flex row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
    * ```
    */
   @styleExpressionProperty({
@@ -224,7 +214,7 @@ export class GdsFlex extends GdsElement {
   row?: string
 
   /**
-   * Controls the height property of the container.
+   * Controls the height property of the flex.
    * Supports all valid CSS height values.
    *
    * @property height
@@ -236,7 +226,7 @@ export class GdsFlex extends GdsElement {
   height?: string
 
   /**
-   * Controls the width property of the container.
+   * Controls the width property of the flex.
    * Supports all valid CSS height values.
    *
    * @property width
@@ -248,7 +238,7 @@ export class GdsFlex extends GdsElement {
   width?: string
 
   /**
-   * Controls the z-index property of the container.
+   * Controls the z-index property of the flex.
    * Supports all valid CSS z-index values.
    *
    * @property stack

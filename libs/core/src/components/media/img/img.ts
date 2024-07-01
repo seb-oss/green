@@ -24,7 +24,6 @@ export class GdsImg extends GdsElement {
   static styles = [tokens, IMGCSS]
 
   /**
-   * @property ratio
    * Controls the aspect ratio of the image.
    * Supports all common aspect ratios like 16/9, 4/3, 1/1, etc.
    *
@@ -38,28 +37,31 @@ export class GdsImg extends GdsElement {
    * ```html
    * <gds-img ratio="l{16/9} m{4/3} s{1/1}"></gds-img>
    * ```
+   *
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
+   *
+   * @property ratio
    */
   @styleExpressionProperty({
-    property: '--_ratio',
-    valueTemplate: (v) => `${v}`,
+    property: 'aspect-ratio',
+    selector: 'figure',
+    valueTemplate: (v) => v,
   })
   ratio?: string
 
   /**
+   * Controls the `object-position` of the img.
+   * Supports all common CSS values.
    * @property position
-   * Controls the position of the image.
-   * Supports all common positions absolute, relative, fixed etc.
-   *
    */
   @styleExpressionProperty({
-    property: '--_position',
+    property: 'object-position',
+    selector: 'img',
     valueTemplate: (v) => v,
   })
   position?: string
 
   /**
-   * @property inset
    * Controls the inset property of the container.
    * Supports all valid CSS inset values.
    *
@@ -74,16 +76,19 @@ export class GdsImg extends GdsElement {
    * <gds-img inset="l{0} m{10px} s{20px}"></gds-img>
    * ```
    *
+   * @property inset
    */
   @styleExpressionProperty({
-    property: '--_inset',
+    property: 'inset',
+    selector: 'figure',
     valueTemplate: (v) => v,
   })
   inset?: string
 
   /**
-   * @property width
    * Controls the width property of the image.
+   *
+   * @property width
    */
   @styleExpressionProperty({
     property: 'width',
@@ -92,8 +97,9 @@ export class GdsImg extends GdsElement {
   width?: string
 
   /**
-   *  @property height
    * Controls the height property of the image.
+   *
+   *  @property height
    */
   @styleExpressionProperty({
     property: 'height',
@@ -102,7 +108,6 @@ export class GdsImg extends GdsElement {
   height?: string
 
   /**
-   * @property opacity
    * Controls the opacity property of the image.
    *
    * You can apply opacity like this:
@@ -111,45 +116,52 @@ export class GdsImg extends GdsElement {
    * ```
    * The above example will apply the opacity style of 0.2.
    * This is useful when you want to apply a transparent effect to the image when having a darkened background to increase the readability of the text.
+   *
+   * @property opacity
    */
   @styleExpressionProperty({
-    property: '--_opacity',
+    property: 'opacity',
+    selector: 'figure',
     valueTemplate: (v) => v,
   })
   opacity?: string
 
   /**
-   * @property fit
    * Controls the object-fit property of the image.
    *
    * You can apply fit like this:
    * ```html
    * <gds-img fit="cover"></gds-img>
    * ```
-   * The above example will apply the object-fit style of cover.
+   *
+   *  The above example will apply the object-fit style of cover.
+   *
+   * @property fit
    */
   @styleExpressionProperty({
-    property: '--_fit',
+    property: 'object-fit',
+    selector: 'img',
     valueTemplate: (v) => v,
   })
   fit?: string
 
   /**
-   * @property src
    * The image source URL.
+   *
+   * @property src
    */
   @property()
   src?: string
 
   /**
-   * @property alt
    * The image alt text.
+   *
+   * @property alt
    */
   @property()
   alt?: string
 
   /**
-   * @property radius
    * Controls the border-radius property of the image.
    * Supports all the size tokens from the design system.
    *
@@ -169,14 +181,16 @@ export class GdsImg extends GdsElement {
    * @example
    * ```html
    * <gds-img radius="m"></gds-img>
-   * <gds-img radius="s{none none xs} m{none xs none xs} l{s}" >
+   * <gds-img radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
    *    Specific breakpoints and sides
    * </gds-img>
    * ```
    *
+   * @property radius
    */
   @styleExpressionProperty({
     property: 'border-radius',
+    selector: 'figure',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   radius?: string

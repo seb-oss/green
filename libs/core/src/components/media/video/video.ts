@@ -31,19 +31,20 @@ export class GdsVideo extends GdsElement {
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
    */
   @styleExpressionProperty({
-    property: '--_ratio',
-    valueTemplate: (v) => `${v}`,
+    property: 'aspect-ratio',
+    selector: 'figure',
+    valueTemplate: (v) => v,
   })
   ratio?: string
 
   /**
+   * Controls the `object-position` of the video.
+   * Supports all common CSS values.
    * @property position
-   * Controls the position of the video.
-   * Supports all common positions absolute, relative, fixed etc.
-   * This property is used to set the position of the video element when used as background video.
    */
   @styleExpressionProperty({
-    property: '--_position',
+    property: 'object-position',
+    selector: 'video',
     valueTemplate: (v) => v,
   })
   position?: string
@@ -66,7 +67,8 @@ export class GdsVideo extends GdsElement {
    *
    */
   @styleExpressionProperty({
-    property: '--_inset',
+    property: 'inset',
+    selector: 'figure',
     valueTemplate: (v) => v,
   })
   inset?: string
@@ -103,7 +105,8 @@ export class GdsVideo extends GdsElement {
    * This is useful when you want to apply a transparent effect to the image when having a darkened background to increase the readability of the text.
    */
   @styleExpressionProperty({
-    property: '--_opacity',
+    property: 'opacity',
+    selector: 'figure',
     valueTemplate: (v) => v,
   })
   opacity?: string
@@ -119,7 +122,8 @@ export class GdsVideo extends GdsElement {
    * The above example will apply the object-fit style of cover.
    */
   @styleExpressionProperty({
-    property: '--_fit',
+    property: 'object-fit',
+    selector: 'video',
     valueTemplate: (v) => v,
   })
   fit?: string
@@ -131,6 +135,7 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'pointer-events',
+    selector: 'video',
     valueTemplate: (v) => v,
   })
   events?: string
@@ -155,6 +160,7 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'border-radius',
+    selector: 'figure',
     valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
   })
   radius?: string
