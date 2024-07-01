@@ -9,12 +9,12 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import FlexCSS from './flex.style.css'
 
 /**
- * @element gds-container
  * The `gds-container` is a custom element that provides a flexible container system.
  * It can be used to create a container with different styles and configurations.
  * The container can be customized with different properties like padding, gap, display, position, and background.
  * It can be used in combination with other elements like `gds-grid`, `gds-card`, `gds-img`, `gds-text` etc.
  *
+ * @element gds-container
  * @status beta
  *
  */
@@ -24,7 +24,6 @@ export class GdsFlex extends GdsElement {
   static styles = [tokens, FlexCSS]
 
   /**
-   * @property gap
    * Controls the gap property of the container.
    * Supports all valid CSS gap values.
    * You can apply gap in each column and row like this:
@@ -39,6 +38,8 @@ export class GdsFlex extends GdsElement {
    * <gds-container gap="xs{s} m{m} l{xl}"></gds-container>
    * ```
    * The above example will apply the gap style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
+   *
+   * @property gap
    */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
@@ -50,8 +51,8 @@ export class GdsFlex extends GdsElement {
   gap?: string
 
   /**
-   * @property rowGap
    * Controlling individually the vertical gap you can use this property.
+   * @property rowGap
    *
    */
   @styleExpressionProperty({
@@ -61,7 +62,6 @@ export class GdsFlex extends GdsElement {
   rowGap?: string
 
   /**
-   * @property padding
    * Controls the padding using shorthand method for the container.
    * Supports all valid CSS padding values.
    * You can apply padding in each side like this:
@@ -75,22 +75,26 @@ export class GdsFlex extends GdsElement {
    * <gds-container padding="xs{s} m{m} l{xl}"></gds-container>
    * ```
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
+   *
+   * @property padding
    */
   @styleExpressionProperty()
   padding?: string
 
   /**
-   * @property margin
    * Controls the margin of the text.
    * Supports all the default margin values.
+   *
+   * @property margin
    */
   @styleExpressionProperty()
   margin?: string
 
   /**
-   * @property display
    * Controls the display property of the container.
    * Supports all valid CSS display values.
+   *
+   * @property display
    */
   @styleExpressionProperty({
     property: 'display',
@@ -99,9 +103,10 @@ export class GdsFlex extends GdsElement {
   display?: string
 
   /**
-   * @property position
    * Controls the position property of the container.
    * Supports all valid CSS position values.
+   *
+   * @property position
    */
   @styleExpressionProperty({
     property: 'position',
@@ -110,9 +115,10 @@ export class GdsFlex extends GdsElement {
   position?: string
 
   /**
-   * @property inset
    * Controls the inset property of the container.
    * Supports all valid CSS inset values.
+   *
+   * @property inset
    */
   @styleExpressionProperty({
     property: 'inset',
@@ -123,6 +129,7 @@ export class GdsFlex extends GdsElement {
   /**
    * Controls the overflow property of the container.
    * Supports all valid CSS overflow values.
+   *
    * @property overflow
    */
   @styleExpressionProperty({
@@ -132,9 +139,10 @@ export class GdsFlex extends GdsElement {
   overflow?: string
 
   /**
-   * @property align
    * Controls the align-items property of the container.
    * Supports all valid CSS align-items values.
+   *
+   * @property align
    */
   @styleExpressionProperty({
     property: 'align-items',
@@ -143,9 +151,10 @@ export class GdsFlex extends GdsElement {
   align?: string
 
   /**
-   * @property justify
    * Controls the justify-content property of the container.
    * Supports all valid CSS justify-content values.
+   *
+   * @property justify
    */
   @styleExpressionProperty({
     property: 'justify-content',
@@ -154,9 +163,10 @@ export class GdsFlex extends GdsElement {
   justify?: string
 
   /**
-   * @property direction
    * Controls the flex-direction property of the container.
    * Supports all valid CSS flex-direction values.
+   *
+   * @property direction
    */
   @styleExpressionProperty({
     property: 'flex-direction',
@@ -165,10 +175,11 @@ export class GdsFlex extends GdsElement {
   direction?: string
 
   /**
-   * @property column
    * Controls the grid-column property of the container.
    * Supports all valid CSS grid-column values.
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * @property column
    *
    * @example
    * ```html
@@ -188,11 +199,12 @@ export class GdsFlex extends GdsElement {
   column?: string
 
   /**
-   * @property row
    * Controls the grid-row property of the container.
    * Supports all valid CSS grid-row values.
    *
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * @property row
    *
    * @example
    * ```html
@@ -212,9 +224,10 @@ export class GdsFlex extends GdsElement {
   row?: string
 
   /**
-   * @property height
    * Controls the height property of the container.
    * Supports all valid CSS height values.
+   *
+   * @property height
    */
   @styleExpressionProperty({
     property: 'height',
@@ -223,9 +236,10 @@ export class GdsFlex extends GdsElement {
   height?: string
 
   /**
-   * @property width
    * Controls the width property of the container.
    * Supports all valid CSS height values.
+   *
+   * @property width
    */
   @styleExpressionProperty({
     property: 'width',
@@ -234,9 +248,10 @@ export class GdsFlex extends GdsElement {
   width?: string
 
   /**
-   * @property stack
    * Controls the z-index property of the container.
    * Supports all valid CSS z-index values.
+   *
+   * @property stack
    */
   @styleExpressionProperty({
     property: 'z-index',

@@ -10,12 +10,12 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import ContainerCSS from './container.style.css'
 
 /**
- * @element gds-container
  * The `gds-container` is a custom element that provides a flexible container system.
  * It can be used to create a container with different styles and configurations.
  * The container can be customized with different properties like padding, gap, display, position, and background.
  * It can be used in combination with other elements like `gds-grid`, `gds-card`, `gds-img`, `gds-text` etc.
  *
+ * @element gds-container
  * @status beta
  *
  */
@@ -25,7 +25,6 @@ export class GdsContainer extends GdsFlex {
   static styles = [tokens, ContainerCSS]
 
   /**
-   * @property opacity
    * Controls the opacity property of the divider.
    * Supports all the opacity tokens from the design system.
    * You can apply opacity like this:
@@ -34,6 +33,7 @@ export class GdsContainer extends GdsFlex {
    * ```
    * The above example will apply the opacity style of base400.
    *
+   * @property opacity
    */
   @styleExpressionProperty({
     property: 'opacity',
@@ -42,9 +42,10 @@ export class GdsContainer extends GdsFlex {
   opacity?: string
 
   /**
-   * @property filter
    * Controls the backdrop-filter property of the container.
    * When you want to apply a backdrop blur filter to the container you can use this property.
+   *
+   * @property filter
    *
    * @example
    * ```html
@@ -67,9 +68,10 @@ export class GdsContainer extends GdsFlex {
   filter?: string
 
   /**
-   * @property radius
    * Controls the border-radius property of the container.
    * Supports all the size tokens from the design system.
+   *
+   * @property radius
    *
    * @example
    * You can apply radius in each corner like this:
@@ -96,16 +98,17 @@ export class GdsContainer extends GdsFlex {
   radius?: string
 
   /**
-   * @property background
    * Controls the background property of the card.
    * Supports all the color tokens from the design system.
+   *
+   * @property background
+   *
+   * Adding transparency to the background color:
+   * ```html
+   * <gds-container background="primary/0.2"></gds-container>
+   * ```
+   * The above example will apply the background style of `primary` with `20%` transparency.
    */
-  // @styleExpressionProperty({
-  //   property: 'background',
-
-  //   valueTemplate: (v) => `var(--gds-sys-color-${v})`,
-  // })
-  // background?: string
 
   @styleExpressionProperty({
     property: 'background',
@@ -121,9 +124,10 @@ export class GdsContainer extends GdsFlex {
   background?: string
 
   /**
-   * @property color
    * Controls the color property of the container.
    * Supports all the color tokens from the design system.
+   *
+   * @property color
    *
    * @example
    * ```html
@@ -138,9 +142,11 @@ export class GdsContainer extends GdsFlex {
   color?: string
 
   /**
-   * @property border
    * Controls the border property of the card.
    * Supports all tokens from the design system.
+   *
+   * @property border
+   *
    * Can be specified for each side using the size tokens like this:
    * ```html
    * <gds-container border="4xs 0 0 0"></gds-container>
@@ -161,7 +167,6 @@ export class GdsContainer extends GdsFlex {
       const [size, color] = v.split('/')
       return `var(--gds-space-${size}) solid ${color ? `var(--gds-sys-color-${color})` : 'currentColor'}`
     },
-    // valueTemplate: (v) => `var(--gds-space-${v}) solid currentColor`,
     styleTemplate: (_prop, values) => {
       const top = values[0]
       const right = values.length > 1 ? values[1] : top
@@ -173,9 +178,10 @@ export class GdsContainer extends GdsFlex {
   border?: string
 
   /**
-   * @property mask
    * Controls the mask-image property of the container.
    * Adds a predefined style of mask to the container.
+   *
+   * @property mask
    *
    * @example
    *
