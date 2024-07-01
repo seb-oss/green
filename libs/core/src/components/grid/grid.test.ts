@@ -63,8 +63,8 @@ describe('GdsGrid', () => {
     const tablet = computedStyle.getPropertyValue('--_col-width-tablet')
     const mobile = computedStyle.getPropertyValue('--_col-width-mobile')
 
-    expect(desktop).to.equal('100px')
-    expect(tablet).to.equal('200px')
-    expect(mobile).to.equal('300px')
+    expect(desktop).to.equal('100')
+    expect(tablet).to.equal('200')
+    expect(mobile).to.equal('300')
   })
 })
