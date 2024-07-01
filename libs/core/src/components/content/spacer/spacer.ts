@@ -10,6 +10,24 @@ import { styleExpressionProperty } from '../../../utils/decorators/style-express
 export class GdsSpacer extends GdsElement {
   static styles = [tokens]
 
+  /**
+   * Controls the size property of the spacer.
+   * Supports all the space tokens from the design system.
+   *
+   * You can apply size like this:
+   *
+   * ```html
+   * <gds-spacer size="2xl"></gds-spacer>
+   * ```
+   *
+   * You can apply size in different breakpoints like this:
+   *
+   * ```html
+   * <gds-spacer size="s{2xl} m{xl} l{2xl}"></gds-spacer>
+   * ```
+   *
+   * @property size
+   */
   @styleExpressionProperty({
     property: 'height',
     selector: 'div',

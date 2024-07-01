@@ -14,7 +14,6 @@ const style = css`
     width: 100%;
     margin-top: calc((var(--_size) / 2) - (1px / 2));
     margin-bottom: calc((var(--_size) / 2) - (1px / 2));
-    opacity: var(--_opacity, 1);
   }
 `
 export default style

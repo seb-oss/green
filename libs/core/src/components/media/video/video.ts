@@ -9,26 +9,39 @@ import { styleExpressionProperty } from '../../../utils/decorators/style-express
 
 import VideoCSS from './video.style.css'
 
+/**
+ * `gds-video` is a custom video element that provides configurable .mp4 video playback that can be used as background or hero video without controls.
+ * The video can be customized with different properties like ratio, position, inset, width, height, opacity, fit, and radius.
+ *
+ * @element gds-video
+ * @status beta
+ *
+ */
 @gdsCustomElement('gds-video')
 export class GdsVideo extends GdsElement {
   static styles = [tokens, VideoCSS]
 
   /**
-   * @property ratio
    * Controls the aspect ratio of the image.
    * Supports all common aspect ratios like 16/9, 4/3, 1/1, etc.
    *
    * You can apply the aspect ratio like this:
+   *
    * ```html
    * <gds-video ratio="16/9"></gds-video>
    * ```
+   *
    * The above example will apply the aspect ratio of 16/9.
    *
    * You can also apply different aspect ratios for different screen sizes like this:
+   *
    * ```html
    * <gds-video ratio="l{16/9} m{4/3} s{1/1}"></gds-video>
    * ```
-   * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
+   *
+   *  The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
+   *
+   * @property ratio
    */
   @styleExpressionProperty({
     property: 'aspect-ratio',
@@ -50,7 +63,6 @@ export class GdsVideo extends GdsElement {
   position?: string
 
   /**
-   * @property inset
    * Controls the inset property of the container.
    * Supports all valid CSS inset values.
    *
@@ -65,6 +77,7 @@ export class GdsVideo extends GdsElement {
    * <gds-video inset="l{0} m{10px} s{20px}"></gds-video>
    * ```
    *
+   * @property inset
    */
   @styleExpressionProperty({
     property: 'inset',
@@ -74,8 +87,8 @@ export class GdsVideo extends GdsElement {
   inset?: string
 
   /**
-   * @property width
    * Controls the width property of the video.
+   * @property width
    */
   @styleExpressionProperty({
     property: 'width',
@@ -84,8 +97,8 @@ export class GdsVideo extends GdsElement {
   width?: string
 
   /**
-   * @property height
    * Controls the height property of the video.
+   * @property height
    */
   @styleExpressionProperty({
     property: 'height',
@@ -94,15 +107,17 @@ export class GdsVideo extends GdsElement {
   height?: string
 
   /**
-   * @property opacity
    * Controls the opacity property of the image.
    *
    * You can apply opacity like this:
+   *
    * ```html
    * <gds-img opacity="0.2"></gds-img>
    * ```
+   *
    * The above example will apply the opacity style of 0.2.
    * This is useful when you want to apply a transparent effect to the image when having a darkened background to increase the readability of the text.
+   * @property opacity
    */
   @styleExpressionProperty({
     property: 'opacity',
@@ -112,14 +127,17 @@ export class GdsVideo extends GdsElement {
   opacity?: string
 
   /**
-   * @property fit
    * Controls the object-fit property of the image.
    *
    * You can apply fit like this:
+   *
    * ```html
    * <gds-img fit="cover"></gds-img>
    * ```
-   * The above example will apply the object-fit style of cover.
+   *
+   *  The above example will apply the object-fit style of cover.
+   *
+   * @property fit
    */
   @styleExpressionProperty({
     property: 'object-fit',
@@ -129,9 +147,10 @@ export class GdsVideo extends GdsElement {
   fit?: string
 
   /**
-   * @property events
    * Controls the pointer-events property of the video.
    * Supports all valid CSS pointer-events values.
+   *
+   * @property events
    */
   @styleExpressionProperty({
     property: 'pointer-events',
@@ -141,22 +160,24 @@ export class GdsVideo extends GdsElement {
   events?: string
 
   /**
-   * @property radius
    * Controls the border-radius property of the video.
    * Supports all the size tokens from the design system.
    *
    * @example
    * You can apply radius in each corner like this:
+   *
    * ```html
    * <gds-container radius="none none m m" ></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
+   *
    * ```html
    * <gds-container radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.
+   * @property radius
    */
   @styleExpressionProperty({
     property: 'border-radius',

@@ -67,15 +67,19 @@ export class GdsFlex extends GdsElement {
    * Supports all valid token values.
    *
    * You can apply padding in each side like this:
+   *
    * ```html
    * <gds-flex padding="xl"></gds-flex>
    * ```
-   * `xl` in tis case will be applied to all breakpoints and sides.
+   *
+   * `xl` in this case will be applied to all breakpoints and sides.
    *
    * Padding also support breakpoint syntax like this:
+   *
    * ```html
    * <gds-flex padding="xs{s} m{m} l{xl}"></gds-flex>
    * ```
+   *
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
    *
    * @property padding
@@ -175,9 +179,12 @@ export class GdsFlex extends GdsElement {
    * ```html
    * <gds-flex column="2 / -1"></gds-flex>
    * ```
+   *
    * The above example will apply the grid-column style of `2 / -1`.
    * The column can be applied to the flex using shorthand like column="1 / 2"
+   *
    * The column also support breakpoint syntax like this:
+   *
    * ```html
    * <gds-flex column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
    * ```
@@ -200,9 +207,12 @@ export class GdsFlex extends GdsElement {
    * ```html
    * <gds-flex row="2 / -1"></gds-flex>
    * ```
+   *
    * The above example will apply the grid-row style of `2 / -1`.
    * The row can be applied to the flex using shorthand like row="1 / 2"
+   *
    * The row also support breakpoint syntax like this:
+   *
    * ```html
    * <gds-flex row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
    * ```

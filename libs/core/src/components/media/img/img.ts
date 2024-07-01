@@ -10,12 +10,12 @@ import { styleExpressionProperty } from '../../../utils/decorators/style-express
 import IMGCSS from './img.style.css'
 
 /**
- * @element gds-img
  * `gds-img` is a custom element that provides a flexible image system.
  * It can be used to create an image with different styles and configurations.
  *
  * The image can be customized with different properties like ratio, position, inset, width, height, opacity, fit, and radius.
  *
+ * @element gds-img
  * @status beta
  *
  */

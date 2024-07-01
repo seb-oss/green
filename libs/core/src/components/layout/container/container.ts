@@ -67,6 +67,7 @@ export class GdsContainer extends GdsFlex {
    * The above example will apply a backdrop blur filter of `20px`.
    *
    *  The filter also support breakpoint syntax like this:
+   *
    * ```html
    * <gds-container filter="s{20px} m{40px} l{60px}"></gds-container>
    * ```
@@ -87,11 +88,13 @@ export class GdsContainer extends GdsFlex {
    *
    * @example
    * You can apply radius in each corner like this:
+   *
    * ```html
    * <gds-container radius="none none m m" ></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
+   *
    * ```html
    * <gds-container radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
    * ```
@@ -116,9 +119,11 @@ export class GdsContainer extends GdsFlex {
    * @property background
    *
    * Adding transparency to the background color:
+   *
    * ```html
    * <gds-container background="primary/0.2"></gds-container>
    * ```
+   *
    * The above example will apply the background style of `primary` with `20%` transparency.
    */
 
@@ -142,9 +147,11 @@ export class GdsContainer extends GdsFlex {
    * @property color
    *
    * @example
+   *
    * ```html
    * <gds-container color="primary"></gds-container>
    * ```
+   *
    * The above example will apply the color style of `primary`.
    */
   @styleExpressionProperty({
@@ -167,16 +174,19 @@ export class GdsContainer extends GdsFlex {
    * @property border
    *
    * Can be specified for each side using the size tokens like this:
+   *
    * ```html
    * <gds-container border="4xs 0 0 0"></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
+   *
    * ```html
    * <gds-container border="s{2xs} m{3xs} l{4xs}"></gds-container>
    * ```
    *
    * When you want to apply the border in all breakpoints and sides you can use the following:
+   *
    * ```html
    * <gds-container border="4xs"></gds-container>
    * ```
@@ -207,6 +217,7 @@ export class GdsContainer extends GdsFlex {
    * ```html
    * <gds-container mask="top"></gds-container>
    * ```
+   *
    * The above example will apply the mask style of `top` with `40%` transparency.
    *
    */

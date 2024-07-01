@@ -77,17 +77,19 @@ export class GdsText extends GdsElement {
   size?: string
 
   /**
-   * @property margin
    * Controls the margin of the text.
    * Supports all the default margin values.
+   *
+   * @property margin
    */
   @styleExpressionProperty()
   margin?: string
 
   /**
-   * @property wrap
    * Controls the text-wrap property of the text.
    * Supports all valid CSS text-wrap values.
+   *
+   * @property wrap
    */
   @styleExpressionProperty({
     property: 'text-wrap',
@@ -96,9 +98,10 @@ export class GdsText extends GdsElement {
   wrap?: string
 
   /**
-   * @property transform
    * Controls the text-transform property of the text.
    * Supports all valid CSS text-transform values.
+   *
+   * @property transform
    */
   @styleExpressionProperty({
     property: 'text-transform',
@@ -107,14 +110,16 @@ export class GdsText extends GdsElement {
   transform?: string
 
   /**
-   * @property length
    * Controls the max length of the text in characters.
    * Length is by defualt in characters to keep conistency with the text content.
    *
    * You can apply length like this:
+   *
    * ```html
    * <gds-text length="50"></gds-text>
    * ```
+   *
+   * @property length
    */
   @styleExpressionProperty({
     property: 'max-width',
@@ -123,9 +128,10 @@ export class GdsText extends GdsElement {
   length?: string
 
   /**
-   * @property max
    * Controls the max-width property of the text.
    * Supports all valid CSS max-width values.
+   *
+   * @property max
    */
   @styleExpressionProperty({
     property: 'min-width',
@@ -134,9 +140,10 @@ export class GdsText extends GdsElement {
   min?: string
 
   /**
-   * @property align
    * Controls the text-align property of the text.
    * Supports all valid CSS text-align values.
+   *
+   * @property align
    */
   @styleExpressionProperty({
     property: 'text-align',
@@ -144,6 +151,11 @@ export class GdsText extends GdsElement {
   })
   align?: string
 
+  /**
+   * Controls the number of lines it should show.
+   *
+   * @property lines
+   */
   @styleExpressionProperty({
     property: '--_lines',
     valueTemplate: (v) => v,
@@ -156,6 +168,17 @@ export class GdsText extends GdsElement {
     return tag
   }
 
+  /**
+   * Controls the color property of the text.
+   * Supports all the color tokens from the design system.
+   *
+   * @property color
+   *
+   * @example
+   * ```html
+   * <gds-text color="primary"></gds-text>
+   * ```
+   */
   @styleExpressionProperty({
     property: 'color',
     valueTemplate: (v) => {

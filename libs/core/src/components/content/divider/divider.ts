@@ -22,14 +22,18 @@ export class GdsDivider extends GdsElement {
   static styles = [tokens, DividerCSS]
 
   /**
-   * @property color
    * Controls the color property of the divider.
    * Supports all the color tokens from the design system.
+   *
    * You can apply color like this:
+   *
    * ```html
    * <gds-divider color="base400"></gds-divider>
    * ```
+   *
    * The above example will apply the color style of base400.
+   *
+   * @property color
    *
    */
   @styleExpressionProperty({
@@ -46,35 +50,42 @@ export class GdsDivider extends GdsElement {
   color?: string
 
   /**
-   * @property size
    * Controls the size property of the divider.
    * Supports all the space tokens from the design system.
+   *
    * You can apply size like this:
+   *
    * ```html
    * <gds-divider size="2xl"></gds-divider>
    * ```
+   *
    * The above example will apply the size style of 2xl.
    *
+   * @property size
    */
   @styleExpressionProperty({
     property: '--_size',
+    selector: 'hr',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   size?: string
 
   /**
-   * @property opacity
    * Controls the opacity property of the divider.
    * Supports all the opacity tokens from the design system.
+   *
    * You can apply opacity like this:
+   *
    * ```html
    * <gds-divider opacity="0.2"></gds-divider>
    * ```
    * The above example will apply the opacity style of base400.
    *
+   * @property opacity
    */
   @styleExpressionProperty({
-    property: '--_opacity',
+    property: 'opacity',
+    selector: 'hr',
     valueTemplate: (v) => v,
   })
   opacity?: string

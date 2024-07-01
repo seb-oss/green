@@ -4,9 +4,6 @@ import { html } from 'lit'
 
 /**
  * The `gds-video`
- *
- * ## Usage
- *
  */
 const meta: Meta = {
   title: 'Docs/Media/Video',
