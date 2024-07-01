@@ -31,6 +31,14 @@
 - Updated dependencies [96d282a]
   - @sebgroup/green-core@1.25.0
 
+## 3.8.1
+
+### Patch Changes
+
+- 33624a5: Adding secondary prop
+- Updated dependencies [96d282a]
+  - @sebgroup/green-core@1.25.0
+
 ## 3.8.0
 
 ### Minor Changes
