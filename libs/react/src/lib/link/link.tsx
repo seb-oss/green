@@ -3,19 +3,21 @@ import { ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
 
 interface LinkProps extends HTMLProps<HTMLAnchorElement> {
-  button?: boolean | ButtonVariant,
-  arrow?: boolean
+  button?: boolean | ButtonVariant
+  secondary?: boolean
 }
 
 export const Link = ({
   button,
-  arrow,
+  secondary,
   children,
   className,
   role,
   ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const linkClassName = classNames(className, { button: button }, button, {"link gds-link-arrow": arrow})
+  const linkClassName = classNames(className, { button: button }, button, {
+    'link gds-link-arrow': secondary,
+  })
 
   return (
     <a
