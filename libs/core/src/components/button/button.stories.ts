@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
-import '../grid/index.js'
+import '../layout/grid/index.js'
 import '../icon/icons/chevron-top.js'
 import '../icon/icons/arrow-up.js'
 import '../icon/icons/arrow-down.js'

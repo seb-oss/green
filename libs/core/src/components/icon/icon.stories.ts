@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './icons/index.ts'
-import '../grid/index.ts'
-import '../container/index.ts'
+import '../layout/grid/index.ts'
+import '../layout/container/index.ts'
 import { html } from 'lit'
 import './icon.stories.css'
 /**
