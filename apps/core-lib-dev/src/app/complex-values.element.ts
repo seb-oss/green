@@ -5,8 +5,6 @@ import {
   getScopedTagName,
 } from '@sebgroup/green-core'
 
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),
 )
@@ -15,8 +13,6 @@ export class AppElement extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    registerTransitionalStyles()
-
     this.innerHTML = html`
       <form id="my-form">
         <gds-dropdown id="dropdown" label="Select a value" style="width: 200px">

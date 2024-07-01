@@ -13,7 +13,7 @@ import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
 const meta: Meta = {
-  title: 'Components/Menu button',
+  title: 'Docs/Components/Menu button',
   component: 'gds-menu-button',
   parameters: {
     layout: 'centered',

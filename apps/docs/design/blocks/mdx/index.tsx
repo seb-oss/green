@@ -13,6 +13,7 @@ import FigmaProto from './figma/figmaProto'
 import IMG from './image/image'
 import SE from './lang/se'
 import Row from './row/row'
+import Story from './story/story'
 
 const components = {
   Figma,
@@ -26,6 +27,7 @@ const components = {
   Pattern,
   Spacer,
   Grid,
+  Story,
 }
 
 export function Mdx({

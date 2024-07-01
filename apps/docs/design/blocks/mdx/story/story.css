@@ -1,0 +1,8 @@
+iframe.story {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  min-height: 400px;
+}

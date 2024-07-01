@@ -2,14 +2,14 @@
 
 @layer tokens {
   :host {
-    --_gap: var(--gds-sys-space-spacer-m);
+    --_gap: var(--gds-space-m);
 
     --_transition: var(--gds-sys-transition);
 
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-m);
+    --_padding-inline: var(--gds-space-l);
+    --_padding-block: var(--gds-space-m);
 
-    --_border-radius: var(--gds-sys-radii-full);
+    --_border-radius: var(--gds-space-max);
     --_border-width: 1px;
     --_border-style: solid;
 
@@ -173,21 +173,21 @@
 
 @layer sizes {
   :host([size='small']) .button {
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-s);
+    --_padding-inline: var(--gds-space-l);
+    --_padding-block: var(--gds-space-s);
     --_size: 2rem;
     font-size: 0.875rem;
   }
 
   :host([size='medium']) .button {
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-m);
+    --_padding-inline: var(--gds-space-l);
+    --_padding-block: var(--gds-space-m);
     --_size: 2.5rem;
   }
 
   :host([size='large']) .button {
-    --_padding-inline: var(--gds-sys-space-padding-xl);
-    --_padding-block: var(--gds-sys-space-padding-m);
+    --_padding-inline: var(--gds-space-xl);
+    --_padding-block: var(--gds-space-m);
     --_size: 3rem;
   }
 }

@@ -70,12 +70,42 @@ const formats: Record<string, Format> = {
 
       // Map each token
       dictionary.allTokens = dictionary.allTokens.map((token) => {
-        // If the token path starts with 'ref.size' or 'sys.grid.width', convert it to pixels
+        if (token.path[0] === 'sys' && token.path[1] === 'space') {
+          // Adjust token name to remove hyphen after numbers
+          const adjustedName = token.name
+            .replace(/(\d)-/, '$1')
+            .replace('sys-', '')
+          return Object.assign({}, token, {
+            name: adjustedName,
+            value: `${token.value}px`,
+            original: { value: `${token.value}px` },
+          })
+        } else {
+          return token
+        }
+      })
+
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences: options.outputReferences,
+        }) +
+        `\n}\n`
+      )
+    },
+  },
+  text: {
+    name: 'text',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':host' }, args.options)
+
+      // Map each token
+      dictionary.allTokens = dictionary.allTokens.map((token) => {
         if (
-          (token.path[0] === 'ref' && token.path[1] === 'size') ||
-          (token.path[0] === 'sys' &&
-            token.path[1] === 'grid' &&
-            token.path[2] === 'width') ||
           (token.path[0] === 'sys' &&
             token.path[1] === 'typography' &&
             token.path[2] === 'size') ||
@@ -83,9 +113,28 @@ const formats: Record<string, Format> = {
             token.path[1] === 'typography' &&
             token.path[2] === 'line-height')
         ) {
+          // Adjust token name to remove hyphen after numbers
+          const adjustedName = token.name
+            .replace(/(\d)-/, '$1')
+            .replace('sys-', '')
+            .replace('typography-', 'text-')
           return Object.assign({}, token, {
+            name: adjustedName,
             value: `${token.value}px`,
             original: { value: `${token.value}px` },
+          })
+        } else if (
+          token.path[0] === 'sys' &&
+          token.path[1] === 'typography' &&
+          token.path[2] === 'weight'
+        ) {
+          // Only adjust token name for 'weight', without changing the value
+          const adjustedName = token.name
+            .replace('sys-', '')
+            .replace('typography-', 'text-')
+          return Object.assign({}, token, {
+            name: adjustedName,
+            // Do not modify the value for 'weight' tokens
           })
         } else {
           return token
