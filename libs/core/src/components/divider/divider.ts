@@ -34,7 +34,14 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'color',
-    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
+    valueTemplate: (v) => {
+      const [colorName, transparency] = v.split('/')
+      if (transparency) {
+        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+      } else {
+        return `var(--gds-sys-color-${colorName})`
+      }
+    },
   })
   color?: string
 

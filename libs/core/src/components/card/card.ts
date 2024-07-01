@@ -25,12 +25,18 @@ export class GdsCard extends GdsContainer {
 
   /**
    * Controls the box-shadow property of the card.
+   *
    * Shadow styles are as specified on the design system that range from xl-2xl, can be used like this:
    * ```html
    * <gds-card shadow="s{xs} m{xs} l{s}"></gds-card>
    * ```
    * The above example will apply the shadow style of xs for small devices, xs for medium devices, and s for large devices.
-   * The shadow styles are predfied on the tokens file and will be applied automativally based on the token value.
+   *
+   * The shadow styles are predfied on the tokens and will be applied automativally based on the token value.
+   *
+   * These are the available values you can use to define shadow
+   *
+   * `XS`, `S`, `M`, `L`, `XL`
    *
    * @property shadow
    */

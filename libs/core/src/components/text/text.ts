@@ -11,10 +11,10 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import TextCSS from './text.style.css'
 
 /**
- * @element gds-text
  * `gds-text` is a custom element that provides a flexible text system.
  * For accessibility reasons, it is recommended to use the `gds-text` element to display text content with flexibility like changing the tag, wrap the text and max length in characters.
  *
+ * @element gds-text
  * @status beta
  *
  */
@@ -25,28 +25,53 @@ export class GdsText extends GdsElement {
   static styles = [tokens, TextCSS]
 
   /**
-   * @property tag
    * Controls the tag of the text.
    * Supports all valid HTML tags like h1, h2, h3, h4, h5, h6, p, span, etc.
+   *
+   * @property tag
    */
   @property({ type: String })
   tag = 'p'
 
   /**
-   * @property size
    * Controls the size of the text.
-   * Supports all the size tokens from the design system.
+   * Supports all typography size tokens from the design system.
+   *
    * You can apply size like this:
    * ```html
-   * <gds-text size="xs"></gds-text>
+   * <gds-text size="body-medium"></gds-text>
    * ```
-   * The above example will apply the size of xs.
+   *
+   * These are the available values you can use to define size:
+   *
+   * `label-overline`,
+   * `label-input-medium`,
+   * `label-input-large`,
+   * `label-information-medium`,
+   * `label-information-large`,
+   * `label-small`,
+   * `label-medium`,
+   * `label-large`,
+   * `body-small`,
+   * `body-medium`,
+   * `body-large`,
+   * `title-small`,
+   * `title-medium`,
+   * `title-large`,
+   * `headline-small`,
+   * `headline-medium`,
+   * `headline-large`,
+   * `display-small`,
+   * `display-medium`,
+   * `display-large`,
+   *
+   * @property size
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
     styleTemplate: (prop, values) => {
       const size = values[0]
-      return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-sys-typography-line-height-${size});`
+      return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-text-line-height-${size});`
     },
   })
   size?: string
@@ -130,6 +155,19 @@ export class GdsText extends GdsElement {
     tag.appendChild(document.createElement('slot'))
     return tag
   }
+
+  @styleExpressionProperty({
+    property: 'color',
+    valueTemplate: (v) => {
+      const [colorName, transparency] = v.split('/')
+      if (transparency) {
+        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+      } else {
+        return `var(--gds-sys-color-${colorName})`
+      }
+    },
+  })
+  color?: string
 
   render() {
     return html`${this.createTag()}`

@@ -25,13 +25,13 @@ export class GdsContainer extends GdsFlex {
   static styles = [tokens, ContainerCSS]
 
   /**
-   * Controls the opacity property of the divider.
-   * Supports all the opacity tokens from the design system.
+   * Controls the opacity property of the container.
+   *
    * You can apply opacity like this:
+   *
    * ```html
-   * <gds-divider opacity="0.2"></gds-divider>
+   * <gds-container opacity="0.2"></gds-container>
    * ```
-   * The above example will apply the opacity style of base400.
    *
    * @property opacity
    */
@@ -137,7 +137,14 @@ export class GdsContainer extends GdsFlex {
    */
   @styleExpressionProperty({
     property: 'color',
-    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
+    valueTemplate: (v) => {
+      const [colorName, transparency] = v.split('/')
+      if (transparency) {
+        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+      } else {
+        return `var(--gds-sys-color-${colorName})`
+      }
+    },
   })
   color?: string
 

@@ -21,6 +21,8 @@ import { html } from 'lit'
  *
  * @status beta
  *
+ * @extends `gds-container`
+ *
  */
 
 const meta: Meta = {
@@ -293,12 +295,9 @@ export const CardBorder: Story = {
  * </gds-card>
  * ```
  *
- * <br>
- * <br>
- *
  * These are the available values you can use to define Border Radius
  *
- * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
+ * `0`, `4XS`, `3XS`, `2XS`, `XS`, `S`, `M`, `L`, `XL`, `2XL`, `3XL`, `4XL`, `5XL`, `6XL`, `7XL`, `8XL`, `MAX`
  *
  * #### Examples
  */
@@ -631,7 +630,7 @@ export const CardGrid: Story = {
             gap="m"
           >
             <gds-text tag="h3" size="headline-small"
-              >Span all columns 1 / -1</gds-text
+              >Span all columns [1 / -1]</gds-text
             >
             <gds-text wrap="balance" lines="3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

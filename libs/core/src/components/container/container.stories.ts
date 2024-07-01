@@ -5,7 +5,7 @@ import { html } from 'lit'
 /**
  * The `gds-container` component is a container element that can be used to wrap other components.
  *
- * ## Usage
+ * @extends `gds-flex`
  *
  */
 const meta: Meta = {
