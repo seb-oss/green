@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.25.0
+
+### Minor Changes
+
+- 96d282a: **Calendar:** Add new component
+
 ## 1.24.0
 
 ### Minor Changes
