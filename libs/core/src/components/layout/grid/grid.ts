@@ -66,7 +66,7 @@ export class GdsGrid extends GdsElement {
    * @example
    * ```html
    * <gds-grid auto-columns="200"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid auto-columns="l:200 m:100 s:80"></gds-grid> <!-- different values for each breakpoint -->
+   * <gds-grid auto-columns="l{200} m{100} s{80}"></gds-grid> <!-- different values for each breakpoint -->
    * ```
    */
   @styleExpressionProperty({

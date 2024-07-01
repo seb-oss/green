@@ -1,6 +1,6 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import '@sebgroup/green-core/components/text'
-import type { GdsDivider } from '@sebgroup/green-core/components/divider'
+import '@sebgroup/green-core/components/content/text'
+import type { GdsDivider } from '@sebgroup/green-core/components/content/divider'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 

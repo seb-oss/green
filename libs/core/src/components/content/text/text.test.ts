@@ -1,6 +1,6 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import '@sebgroup/green-core/components/text'
-import type { GdsText } from '@sebgroup/green-core/components/text'
+import '@sebgroup/green-core/components/content/text'
+import type { GdsText } from '@sebgroup/green-core/components/content/text'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
