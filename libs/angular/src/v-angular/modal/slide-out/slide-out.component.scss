@@ -1,0 +1,25 @@
+@use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
+@use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
+
+:host {
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  .sdv-modal-slideout {
+    z-index: 1050;
+    @include mixins.aside-modal();
+  }
+
+  .sdv-modal-slideout__container {
+    &.auto-width {
+      // @include include-media.media('>tablet') {
+      //   width: auto;
+      // }
+    }
+  }
+
+  .sdv-modal-slideout__content {
+    white-space: pre-wrap;
+  }
+}

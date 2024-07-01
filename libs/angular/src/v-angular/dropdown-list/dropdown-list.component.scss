@@ -1,0 +1,83 @@
+// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+// @use 'node_modules/@sebgroup/vanilla/src/functions' as functions;
+
+:host {
+  .options {
+    padding: 0;
+    width: inherit;
+    list-style: none;
+    //min-height: functions.vanilla-px-to-em(44);
+    //max-height: functions.vanilla-px-to-em(calc(44 * 6.5));
+    overflow: overlay;
+    //border-color: colors.$vanilla-color-darkblue1;
+
+    //0.625rem: functions.vanilla-px-to-rem(10, 16);
+    //0.1875rem: functions.vanilla-px-to-rem(3, 16);
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 0.625rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      border: solid 3px transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      //box-shadow: inset 0 0 0.625rem 0.625rem colors.$vanilla-color-grey5;
+      border: solid 0.1875rem transparent;
+      border-radius: 0.5rem;
+    }
+
+    .option {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      &[aria-disabled='true'] {
+        opacity: 0.5;
+        cursor: default;
+      }
+
+      &[aria-selected='true'] {
+        //background-color: colors.$vanilla-color-darkblue1;
+        //color: colors.$vanilla-color-white;
+      }
+
+      &:hover,
+      &[aria-focus='true'] {
+        transition: background-color 0.5s;
+        //background-color: colors.$vanilla-color-blue;
+        //color: colors.$vanilla-color-white;
+
+        // Override previous styling for hover is option is disabled.
+        // Could not use :not() since another scss is applied (from dropdown mixins)
+        &[aria-disabled='true'] {
+          transition: unset;
+          background-color: unset;
+          color: unset;
+        }
+      }
+    }
+
+    .group {
+      padding: 0;
+      cursor: default;
+
+      &:hover {
+        color: inherit;
+        background-color: inherit;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        //padding-left: functions.vanilla-px-to-em(16);
+        //padding-right: functions.vanilla-px-to-em(16);
+      }
+    }
+  }
+}

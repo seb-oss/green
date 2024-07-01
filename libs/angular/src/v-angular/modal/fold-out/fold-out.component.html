@@ -1,0 +1,19 @@
+<div #foldout class="sdv-field-dropdown">
+  <button
+    data-thook="fold-out-toggle"
+    class="sdv-button sdv-button-ghost-dark fold-out-button"
+    (click)="toggleVisibility($event)"
+  >
+    <!-- <fa-icon [icon]="faEllipsisH"
+      size="lg"></fa-icon> -->
+  </button>
+
+  <div
+    class="sdv-field-dropdown__options"
+    [ngClass]="{ 'flex-right': alignOptions === 'right' }"
+    [class.-expanded]="shown"
+    (click)="toggleVisibility($event, false)"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>
