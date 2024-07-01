@@ -4,7 +4,7 @@ const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     td.disabled {
-      color: #999;
+      color: #555;
       cursor: default;
     }
     td.today {

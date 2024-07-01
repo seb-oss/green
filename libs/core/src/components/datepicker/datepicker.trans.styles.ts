@@ -3,7 +3,7 @@ import styles from './datepicker.trans.styles.scss?inline'
 
 import * as Dropdown from '../dropdown/dropdown.trans.styles'
 import * as Popover from '../popover/popover.trans.styles'
-import * as Calendar from '../../primitives/calendar/calendar.trans.styles'
+import * as Calendar from '../calendar/calendar.trans.styles'
 
 export function register() {
   TransitionalStyles.instance.register('gds-datepicker', styles.toString())
