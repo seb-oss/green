@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../card'
 import { html } from 'lit'
 
+/**
+ * The `gds-container` component is a container element that can be used to wrap other components.
+ *
+ * @extends `gds-flex`
+ *
+ */
 const meta: Meta = {
-  title: 'Docs/Layout/Flex',
-  component: 'gds-flex',
+  title: 'Docs/Layout/Container',
+  component: 'gds-container',
   tags: ['autodocs'],
 }
 
@@ -20,12 +25,8 @@ const DefaultParams: Story = {
   },
 }
 
-/**
- * Flex
- */
-
-export const Card: Story = {
+export const Container: Story = {
   ...DefaultParams,
-  name: 'Flex',
-  render: (args) => html` <gds-flex> Flex </gds-flex>`,
+  name: 'Container',
+  render: (args) => html` <gds-container> Container </gds-container>`,
 }

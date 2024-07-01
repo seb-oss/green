@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './text'
-import '../card'
-import '../container'
-import '../divider'
+import '../../layout/card'
+import '../../layout/container'
+import '../../content/divider'
 import { html } from 'lit'
 
 /**

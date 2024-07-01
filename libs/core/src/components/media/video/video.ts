@@ -1,27 +1,17 @@
-import { property } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../gds-element'
-import { tokens } from '../../tokens.style'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+} from '../../../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../../gds-element'
+import { tokens } from '../../../tokens.style'
+import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import IMGCSS from './img.style.css'
+import VideoCSS from './video.style.css'
 
-/**
- * @element gds-img
- * `gds-img` is a custom element that provides a flexible image system.
- * It can be used to create an image with different styles and configurations.
- *
- * The image can be customized with different properties like ratio, position, inset, width, height, opacity, fit, and radius.
- *
- * @status beta
- *
- */
-@gdsCustomElement('gds-img')
-export class GdsImg extends GdsElement {
-  static styles = [tokens, IMGCSS]
+@gdsCustomElement('gds-video')
+export class GdsVideo extends GdsElement {
+  static styles = [tokens, VideoCSS]
 
   /**
    * @property ratio
@@ -30,13 +20,13 @@ export class GdsImg extends GdsElement {
    *
    * You can apply the aspect ratio like this:
    * ```html
-   * <gds-img ratio="16/9"></gds-img>
+   * <gds-video ratio="16/9"></gds-video>
    * ```
    * The above example will apply the aspect ratio of 16/9.
    *
    * You can also apply different aspect ratios for different screen sizes like this:
    * ```html
-   * <gds-img ratio="l{16/9} m{4/3} s{1/1}"></gds-img>
+   * <gds-video ratio="l{16/9} m{4/3} s{1/1}"></gds-video>
    * ```
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
    */
@@ -48,9 +38,9 @@ export class GdsImg extends GdsElement {
 
   /**
    * @property position
-   * Controls the position of the image.
+   * Controls the position of the video.
    * Supports all common positions absolute, relative, fixed etc.
-   *
+   * This property is used to set the position of the video element when used as background video.
    */
   @styleExpressionProperty({
     property: '--_position',
@@ -66,12 +56,12 @@ export class GdsImg extends GdsElement {
    * @example
    * You can apply the inset like this:
    * ```html
-   * <gds-img inset="0"></gds-img>
+   * <gds-video inset="0"></gds-video>
    * ```
    *
    * You can also apply different inset values for different screen sizes like this:
    * ```html
-   * <gds-img inset="l{0} m{10px} s{20px}"></gds-img>
+   * <gds-video inset="l{0} m{10px} s{20px}"></gds-video>
    * ```
    *
    */
@@ -83,7 +73,7 @@ export class GdsImg extends GdsElement {
 
   /**
    * @property width
-   * Controls the width property of the image.
+   * Controls the width property of the video.
    */
   @styleExpressionProperty({
     property: 'width',
@@ -92,8 +82,8 @@ export class GdsImg extends GdsElement {
   width?: string
 
   /**
-   *  @property height
-   * Controls the height property of the image.
+   * @property height
+   * Controls the height property of the video.
    */
   @styleExpressionProperty({
     property: 'height',
@@ -135,53 +125,66 @@ export class GdsImg extends GdsElement {
   fit?: string
 
   /**
-   * @property src
-   * The image source URL.
+   * @property events
+   * Controls the pointer-events property of the video.
+   * Supports all valid CSS pointer-events values.
    */
-  @property()
-  src?: string
-
-  /**
-   * @property alt
-   * The image alt text.
-   */
-  @property()
-  alt?: string
+  @styleExpressionProperty({
+    property: 'pointer-events',
+    valueTemplate: (v) => v,
+  })
+  events?: string
 
   /**
    * @property radius
-   * Controls the border-radius property of the image.
+   * Controls the border-radius property of the video.
    * Supports all the size tokens from the design system.
    *
+   * @example
    * You can apply radius in each corner like this:
    * ```html
-   * <gds-img radius="none none m m" ></gds-img>
+   * <gds-container radius="none none m m" ></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
    * ```html
-   * <gds-img radius="s{xs} m{xs} l{s}"></gds-img>
+   * <gds-container radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.
-   * The radius styles are predefined in the tokens file and will be applied automatically based on the token value.
-   *
-   * @example
-   * ```html
-   * <gds-img radius="m"></gds-img>
-   * <gds-img radius="s{none none xs} m{none xs none xs} l{s}" >
-   *    Specific breakpoints and sides
-   * </gds-img>
-   * ```
-   *
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
   })
   radius?: string
 
+  // Video properties
+  @property() src?: string
+  @property() poster?: string
+  @property({ type: Boolean }) muted?: boolean
+  @property({ type: Boolean }) playsinline?: boolean
+  @property({ type: Boolean }) autoplay?: boolean
+  @property({ type: Boolean }) loop?: boolean
+  @query('video') videoElement!: HTMLVideoElement
+
+  // Method to programmatically apply video settings
+  applyVideoSettings() {
+    if (this.videoElement) {
+      this.videoElement.src = this.src || ''
+      this.videoElement.poster = this.poster || ''
+      this.videoElement.muted = this.muted || false
+      this.videoElement.autoplay = this.autoplay || false
+      this.videoElement.loop = this.loop || false
+      this.videoElement.playsInline = this.playsinline || false
+    }
+  }
+
   render() {
-    return html`<figure><img src="${this.src}" alt="${this.alt}" /></figure>`
+    return html`<figure><video></video></figure>`
+  }
+
+  firstUpdated() {
+    this.applyVideoSettings()
   }
 }

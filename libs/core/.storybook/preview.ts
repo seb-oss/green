@@ -11,7 +11,7 @@ import './fonts.scss'
 
 import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
-import '../src/components/grid/index.js'
+import '../src/components/layout/grid/index.js'
 
 setCustomElementsManifest(customElements)
 
