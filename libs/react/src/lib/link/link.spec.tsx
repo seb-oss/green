@@ -35,8 +35,8 @@ describe('Link', () => {
     const link: HTMLAnchorElement = screen.getByText('Foo')
     expect(link.getAttribute('role')).toEqual('button')
   })
-  it('renders boolean arrow prop', () => {
-    render(<Link arrow>Foo</Link>)
+  it('renders boolean secondary prop', () => {
+    render(<Link secondary>Foo</Link>)
     const link: HTMLAnchorElement = screen.getByText('Foo')
     expect(link.className).toEqual('link gds-link-arrow')
   })
