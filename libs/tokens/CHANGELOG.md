@@ -12,12 +12,6 @@
 
 - 4a4a67c: Fixed 2016 base scale dark mode colors
 
-## 0.4.1
-
-### Patch Changes
-
-- 4a4a67c: Fixed 2016 base scale dark mode colors
-
 ## 0.4.0
 
 ### Minor Changes
