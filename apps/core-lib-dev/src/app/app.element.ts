@@ -36,7 +36,7 @@ export class AppElement extends LitElement {
   accessor lang = 'sv'
 
   @state()
-  accessor currentView = 'form-validation'
+  accessor currentView = 'card'
 
   connectedCallback() {
     super.connectedCallback()
@@ -79,22 +79,34 @@ export class AppElement extends LitElement {
             <gds-segment value="calendar">Calendar</gds-segment>
             <gds-segment value="card">Card</gds-segment>
           </gds-segmented-control>
-          ${choose(
-            this.currentView,
-            [
-              [
-                'form-validation',
-                () => html`<form-validation></form-validation>`,
-              ],
-              [
-                'datepicker',
-                () => html`<datepicker-example></datepicker-example>`,
-              ],
-              ['calendar', () => html`<calendar-example></calendar-example>`],
-              ['card', () => html`<card-example></card-example>`],
-            ],
-            () => html`No view selected`,
-          )}
+          ${this.currentView === 'card'
+            ? html`<card-example></card-example>`
+            : html`
+                <div class="card">
+                  ${choose(
+                    this.currentView,
+                    [
+                      [
+                        'simple-values',
+                        () => html`<simple-values></simple-values>`,
+                      ],
+                      [
+                        'complex-values',
+                        () => html`<complex-values></complex-values>`,
+                      ],
+                      [
+                        'datepicker',
+                        () => html`<datepicker-example></datepicker-example>`,
+                      ],
+                      [
+                        'calendar',
+                        () => html`<calendar-example></calendar-example>`,
+                      ],
+                    ],
+                    () => html`No view selected`,
+                  )}
+                </div>
+              `}
         </div>
       </gds-theme>
     `

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './icons/index.ts'
 import '../layout/grid/index.ts'
 import '../layout/container/index.ts'
-import '../layout/flex'
 import { html } from 'lit'
 import './icon.stories.css'
 /**
@@ -97,6 +96,34 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+window.addEventListener('DOMContentLoaded', () => {
+  const searchBox = document.getElementById('icon-search') as HTMLInputElement
+  const icons = Array.from(
+    document.querySelectorAll('[gds-element^="gds-icon-"]'),
+  )
+
+  searchBox.addEventListener('keyup', () => {
+    const searchTerm = searchBox.value.toLowerCase().split(' ')
+
+    icons.forEach((icon) => {
+      const iconNameAttr = icon.getAttribute('gds-element')
+      if (iconNameAttr) {
+        const iconName = iconNameAttr
+          .toLowerCase()
+          .replace('gds-icon-', '')
+          .split('-')
+        const isMatch = searchTerm.every((term) => iconName.includes(term))
+
+        if (isMatch || searchBox.value.trim() === '') {
+          icon.removeAttribute('hidden')
+        } else {
+          icon.setAttribute('hidden', '')
+        }
+      }
+    })
+  })
+})
+
 /**
  * Click to copy icon HTML code
  */
@@ -105,7 +132,7 @@ export const IconsRegular: Story = {
   ...DefaultParams,
   name: 'Regular icons',
   render: (args) => html`
-    <gds-flex direction="column" gap="xl" id="solids">
+    <gds-container display="flex" direction="column" gap="xl">
       <input type="text" id="icon-search" placeholder="Search Icons" />
       <gds-grid
         columns="s{2} m{4} l{4}"
@@ -113,7 +140,6 @@ export const IconsRegular: Story = {
         class="icon-preview"
       >
         <gds-icon-airplane-up></gds-icon-airplane-up>
-        <gds-icon-apple-music></gds-icon-apple-music>
         <gds-icon-archive></gds-icon-archive>
         <gds-icon-arrow-box-left></gds-icon-arrow-box-left>
         <gds-icon-arrow-box-right></gds-icon-arrow-box-right>
@@ -142,7 +168,6 @@ export const IconsRegular: Story = {
         <gds-icon-at></gds-icon-at>
         <gds-icon-bag></gds-icon-bag>
         <gds-icon-bank></gds-icon-bank>
-        <gds-icon-bankid></gds-icon-bankid>
         <gds-icon-banknote></gds-icon-banknote>
         <gds-icon-barcode></gds-icon-barcode>
         <gds-icon-bars-three></gds-icon-bars-three>
@@ -189,7 +214,6 @@ export const IconsRegular: Story = {
         <gds-icon-chevron-left></gds-icon-chevron-left>
         <gds-icon-chevron-right></gds-icon-chevron-right>
         <gds-icon-chevron-top></gds-icon-chevron-top>
-        <gds-icon-chrome></gds-icon-chrome>
         <gds-icon-circle-check></gds-icon-circle-check>
         <gds-icon-circle-info></gds-icon-circle-info>
         <gds-icon-circle-minus></gds-icon-circle-minus>
@@ -200,12 +224,9 @@ export const IconsRegular: Story = {
         <gds-icon-circles-three></gds-icon-circles-three>
         <gds-icon-clock></gds-icon-clock>
         <gds-icon-cloud-upload></gds-icon-cloud-upload>
-        <gds-icon-cloudy-sun></gds-icon-cloudy-sun>
-        <gds-icon-compass-round></gds-icon-compass-round>
         <gds-icon-credit-card></gds-icon-credit-card>
         <gds-icon-cross-large></gds-icon-cross-large>
         <gds-icon-cross-small></gds-icon-cross-small>
-        <gds-icon-cup-hot></gds-icon-cup-hot>
         <gds-icon-devices></gds-icon-devices>
         <gds-icon-direction></gds-icon-direction>
         <gds-icon-dollar></gds-icon-dollar>
@@ -215,9 +236,7 @@ export const IconsRegular: Story = {
         <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
         <gds-icon-email></gds-icon-email>
         <gds-icon-euro></gds-icon-euro>
-        <gds-icon-facebook></gds-icon-facebook>
         <gds-icon-fashion></gds-icon-fashion>
-        <gds-icon-figma></gds-icon-figma>
         <gds-icon-file-bend></gds-icon-file-bend>
         <gds-icon-file-chart></gds-icon-file-chart>
         <gds-icon-file-text></gds-icon-file-text>
@@ -231,10 +250,8 @@ export const IconsRegular: Story = {
         <gds-icon-folder-paper></gds-icon-folder-paper>
         <gds-icon-folder-upload></gds-icon-folder-upload>
         <gds-icon-folder></gds-icon-folder>
-        <gds-icon-github></gds-icon-github>
         <gds-icon-globus></gds-icon-globus>
         <gds-icon-graduate-cap></gds-icon-graduate-cap>
-        <gds-icon-green></gds-icon-green>
         <gds-icon-group></gds-icon-group>
         <gds-icon-growth></gds-icon-growth>
         <gds-icon-headphones></gds-icon-headphones>
@@ -247,7 +264,6 @@ export const IconsRegular: Story = {
         <gds-icon-home-roof></gds-icon-home-roof>
         <gds-icon-horizontal-alignment-bottom></gds-icon-horizontal-alignment-bottom>
         <gds-icon-images></gds-icon-images>
-        <gds-icon-instagram></gds-icon-instagram>
         <gds-icon-invite></gds-icon-invite>
         <gds-icon-knife-spoon></gds-icon-knife-spoon>
         <gds-icon-law></gds-icon-law>
@@ -258,13 +274,10 @@ export const IconsRegular: Story = {
         <gds-icon-line-chart-one></gds-icon-line-chart-one>
         <gds-icon-line-chart-three></gds-icon-line-chart-three>
         <gds-icon-line-chart-two></gds-icon-line-chart-two>
-        <gds-icon-linkedin></gds-icon-linkedin>
         <gds-icon-lock></gds-icon-lock>
         <gds-icon-macbook-air></gds-icon-macbook-air>
         <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
-        <gds-icon-maintenance></gds-icon-maintenance>
         <gds-icon-map-pin></gds-icon-map-pin>
-        <gds-icon-megaphone></gds-icon-megaphone>
         <gds-icon-minus-large></gds-icon-minus-large>
         <gds-icon-minus-small></gds-icon-minus-small>
         <gds-icon-money-hand></gds-icon-money-hand>
@@ -298,18 +311,15 @@ export const IconsRegular: Story = {
         <gds-icon-printer></gds-icon-printer>
         <gds-icon-push></gds-icon-push>
         <gds-icon-qr-code></gds-icon-qr-code>
-        <gds-icon-rainy></gds-icon-rainy>
         <gds-icon-raising-hand></gds-icon-raising-hand>
         <gds-icon-reading-list></gds-icon-reading-list>
         <gds-icon-receipt-bill></gds-icon-receipt-bill>
         <gds-icon-receiption-bell></gds-icon-receiption-bell>
         <gds-icon-robot></gds-icon-robot>
         <gds-icon-rocket></gds-icon-rocket>
-        <gds-icon-rss-feed></gds-icon-rss-feed>
         <gds-icon-school></gds-icon-school>
         <gds-icon-scissors></gds-icon-scissors>
         <gds-icon-search-menu></gds-icon-search-menu>
-        <gds-icon-seb></gds-icon-seb>
         <gds-icon-settings-gear></gds-icon-settings-gear>
         <gds-icon-settings-slider-hor></gds-icon-settings-slider-hor>
         <gds-icon-settings-slider-three></gds-icon-settings-slider-three>
@@ -319,7 +329,6 @@ export const IconsRegular: Story = {
         <gds-icon-smartwatch></gds-icon-smartwatch>
         <gds-icon-solar-panel></gds-icon-solar-panel>
         <gds-icon-solar></gds-icon-solar>
-        <gds-icon-spotify></gds-icon-spotify>
         <gds-icon-square-arrow-top-right></gds-icon-square-arrow-top-right>
         <gds-icon-square-behind-square></gds-icon-square-behind-square>
         <gds-icon-square-check></gds-icon-square-check>
@@ -350,7 +359,6 @@ export const IconsRegular: Story = {
         <gds-icon-trending-two></gds-icon-trending-two>
         <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
         <gds-icon-truck></gds-icon-truck>
-        <gds-icon-twitter></gds-icon-twitter>
         <gds-icon-umbrella-security></gds-icon-umbrella-security>
         <gds-icon-unlocked></gds-icon-unlocked>
         <gds-icon-vertical-alignment-right></gds-icon-vertical-alignment-right>
@@ -363,7 +371,7 @@ export const IconsRegular: Story = {
         <gds-icon-zoom-in></gds-icon-zoom-in>
         <gds-icon-zoom-out></gds-icon-zoom-out>
       </gds-grid>
-    </gds-flex>
+    </gds-container>
   `,
 }
 
