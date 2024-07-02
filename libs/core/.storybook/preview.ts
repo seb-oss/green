@@ -16,16 +16,6 @@ import '../src/components/layout/grid/index.js'
 setCustomElementsManifest(customElements)
 
 export const globalTypes = {
-  framework: {
-    name: 'Change Framework',
-    defaultValue: 'Web Components',
-    toolbar: {
-      icon: 'box',
-      items: ['Web Components', 'React', 'Angular'],
-      showName: true,
-      dynamicTitle: true,
-    },
-  },
   style: {
     name: 'Change Style',
     defaultValue: '2023',
@@ -72,18 +62,14 @@ export default {
 
       if (style === '2016') {
         if (context.globals.previousStyle !== '2016') {
-          // If switching to 2016 from a different style, register transitional styles
           registerTransitionalStyles()
         }
       } else {
         if (context.globals.previousStyle === '2016') {
-          // If switching back to 2023 from 2016, force a refresh
           document.location.reload()
         }
-        // Implement any additional logic needed for reverting to 2023 styles here
       }
 
-      // Update previousStyle for the next render
       context.globals.previousStyle = style
 
       return html`<gds-theme>${storyFn()}</gds-theme>`
