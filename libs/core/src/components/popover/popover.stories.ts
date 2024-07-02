@@ -9,7 +9,7 @@ import '../icon/icons/chevron-bottom.ts'
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  */
 const meta: Meta = {
-  title: 'Components/Popover',
+  title: 'Docs/Components/Popover',
   component: 'gds-popover',
   parameters: {
     layout: 'centered',

@@ -6,8 +6,6 @@ import {
   getScopedTagName,
 } from '@sebgroup/green-core'
 
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),
 )
@@ -16,8 +14,6 @@ export class SimpleValues extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    registerTransitionalStyles()
-
     this.innerHTML = html`
       <form id="my-form">
         <gds-form-validator></gds-form-validator>

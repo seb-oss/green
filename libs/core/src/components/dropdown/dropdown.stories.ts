@@ -19,7 +19,7 @@ registerTransitionalStyles()
  * field, and it also suports both single and multiple selection.
  */
 const meta: Meta = {
-  title: 'Components/Dropdown',
+  title: 'Docs/Components/Dropdown',
   component: 'gds-dropdown',
   subcomponents: { Option: 'gds-option' },
   parameters: {

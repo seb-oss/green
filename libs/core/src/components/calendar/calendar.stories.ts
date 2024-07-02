@@ -13,7 +13,7 @@ registerTransitionalStyles()
  * The calendar component is a visual representation of a calendar that allows users to select a date.
  */
 const meta: Meta = {
-  title: 'Components/Calendar',
+  title: 'Docs/Components/Calendar',
   component: 'gds-calendar',
   parameters: {
     layout: 'centered',
