@@ -97,6 +97,34 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+window.addEventListener('DOMContentLoaded', () => {
+  const searchBox = document.getElementById('icon-search') as HTMLInputElement
+  const icons = Array.from(
+    document.querySelectorAll('[gds-element^="gds-icon-"]'),
+  )
+
+  searchBox.addEventListener('keyup', () => {
+    const searchTerm = searchBox.value.toLowerCase().split(' ')
+
+    icons.forEach((icon) => {
+      const iconNameAttr = icon.getAttribute('gds-element')
+      if (iconNameAttr) {
+        const iconName = iconNameAttr
+          .toLowerCase()
+          .replace('gds-icon-', '')
+          .split('-')
+        const isMatch = searchTerm.every((term) => iconName.includes(term))
+
+        if (isMatch || searchBox.value.trim() === '') {
+          icon.removeAttribute('hidden')
+        } else {
+          icon.setAttribute('hidden', '')
+        }
+      }
+    })
+  })
+})
+
 /**
  * Click to copy icon HTML code
  */
