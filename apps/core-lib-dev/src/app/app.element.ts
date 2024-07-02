@@ -3,7 +3,7 @@ import { property, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 
 import { html } from '@sebgroup/green-core/scoping'
-// import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+// // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 import '@sebgroup/green-core/components/icon/icons/flag.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
@@ -81,20 +81,34 @@ export class AppElement extends LitElement {
             <gds-segment value="calendar">Calendar</gds-segment>
             <gds-segment value="card">Card</gds-segment>
           </gds-segmented-control>
-          ${choose(
-            this.currentView,
-            [
-              ['simple-values', () => html`<simple-values></simple-values>`],
-              ['complex-values', () => html`<complex-values></complex-values>`],
-              [
-                'datepicker',
-                () => html`<datepicker-example></datepicker-example>`,
-              ],
-              ['calendar', () => html`<calendar-example></calendar-example>`],
-              ['card', () => html`<card-example></card-example>`],
-            ],
-            () => html`No view selected`,
-          )}
+          ${this.currentView === 'card'
+            ? html`<card-example></card-example>`
+            : html`
+                <div class="card">
+                  ${choose(
+                    this.currentView,
+                    [
+                      [
+                        'simple-values',
+                        () => html`<simple-values></simple-values>`,
+                      ],
+                      [
+                        'complex-values',
+                        () => html`<complex-values></complex-values>`,
+                      ],
+                      [
+                        'datepicker',
+                        () => html`<datepicker-example></datepicker-example>`,
+                      ],
+                      [
+                        'calendar',
+                        () => html`<calendar-example></calendar-example>`,
+                      ],
+                    ],
+                    () => html`No view selected`,
+                  )}
+                </div>
+              `}
         </div>
       </gds-theme>
     `

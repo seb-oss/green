@@ -6,7 +6,9 @@ import {
 import {
   GdsDropdown,
   GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),
