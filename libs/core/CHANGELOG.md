@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.26.0
+
+### Minor Changes
+
+- 70bbc39: New components Card, Container, IMG, Video and tokens upgrade
+
 ## 1.25.0
 
 ### Minor Changes
