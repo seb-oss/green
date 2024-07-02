@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './grid'
 import '../card'
+import '../flex'
 import '../container'
 import './grid.stories.css'
 import { html } from 'lit'
@@ -31,14 +32,30 @@ const DefaultParams: Story = {
     padding: '0',
     columns: '4',
     innerHTML: `
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 01</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 02</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 03</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 04</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 05</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 06</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 07</gds-container>
-    <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 08</gds-container>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 01</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 02</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 03</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 04</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 05</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 06</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 07</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 08</gds-flex>
+      </gds-card>
   `,
   },
 }
@@ -81,18 +98,42 @@ export const Usage: Story = {
       columns="s{2} m{4} l{6}"
       gap="s{s} m{s} l{s}"
     >
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 01</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 02</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 03</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 04</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 05</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 06</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 07</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 08</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 09</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 10</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 11</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 12</gds-container>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 01</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 02</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 03</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 04</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 05</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 06</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 07</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 08</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 09</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 10</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 11</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 12</gds-flex>
+      </gds-card>
     </gds-grid>
   `,
 }
@@ -106,14 +147,30 @@ export const AllBreakpoints: Story = {
   render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid columns="4" gap="m" auto-columns="100">
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 01</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 02</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 03</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 04</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 05</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 06</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 07</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 08</gds-container>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 01</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 02</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 03</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 04</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 05</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 06</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 07</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 08</gds-flex>
+      </gds-card>
     </gds-grid>
   `,
 }
@@ -150,14 +207,30 @@ export const AutoColumns: Story = {
   render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid gap="s" auto-columns="s{200} m{220} l{240}">
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 01</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 02</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 03</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 04</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 05</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 06</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 07</gds-container>
-      <gds-container border="3xs/base300" radius="s" height="120px" display="flex" align="center" justify="center">COL: 08</gds-container>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 01</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 02</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 03</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 04</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 05</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 06</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 07</gds-flex>
+      </gds-card>
+      <gds-card border="3xs/base300" radius="s">
+        <gds-flex height="100px" align="center" justify="center">COL: 08</gds-flex>
+      </gds-card>
     </gds-grid>
   `,
 }

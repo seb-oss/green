@@ -9,9 +9,9 @@ import { styleExpressionProperty } from '../../../utils/decorators/style-express
 import GridCSS from './grid.style.css'
 
 /**
- * @element gds-grid
  * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
  *
+ * @element gds-grid
  * @status beta
  *
  */
@@ -24,7 +24,7 @@ export class GdsGrid extends GdsElement {
    * @example
    * ```html
    * <gds-grid columns="2"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid columns="l:8 m:4 s:2"></gds-grid> <!-- different values for each breakpoint -->
+   * <gds-grid columns="l{8} m{4} s{2}"></gds-grid> <!-- different values for each breakpoint -->
    * ```
    */
   @styleExpressionProperty({
@@ -38,7 +38,7 @@ export class GdsGrid extends GdsElement {
    * @example
    * ```html
    * <gds-grid gap="m"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid gap="l:m m:s s:xs"></gds-grid> <!-- different values for each breakpoint -->
+   * <gds-grid gap="l{m} m{s} s{xs}"></gds-grid> <!-- different values for each breakpoint -->
    * ```
    */
   @styleExpressionProperty({

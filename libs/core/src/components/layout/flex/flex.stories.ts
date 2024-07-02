@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from 'lit'
 import './flex'
+
 /**
  * The `gds-flex` component is a container element that can be used to wrap other components and control the layout of its children.
  *

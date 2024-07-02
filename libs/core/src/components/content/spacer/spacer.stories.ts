@@ -18,7 +18,6 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {},
 }
 
 export const Spacer: Story = {

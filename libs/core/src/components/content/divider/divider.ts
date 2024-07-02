@@ -33,8 +33,6 @@ export class GdsDivider extends GdsElement {
    *
    * The above example will apply the color style of base400.
    *
-   * @property color
-   *
    */
   @styleExpressionProperty({
     property: 'color',
@@ -61,7 +59,6 @@ export class GdsDivider extends GdsElement {
    *
    * The above example will apply the size style of 2xl.
    *
-   * @property size
    */
   @styleExpressionProperty({
     property: '--_size',
@@ -81,7 +78,6 @@ export class GdsDivider extends GdsElement {
    * ```
    * The above example will apply the opacity style of base400.
    *
-   * @property opacity
    */
   @styleExpressionProperty({
     property: 'opacity',

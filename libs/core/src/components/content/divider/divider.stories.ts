@@ -4,9 +4,6 @@ import { html } from 'lit'
 
 /**
  * The `gds-divider`
- *
- * ## Usage
- *
  */
 const meta: Meta = {
   title: 'Docs/Content/Divider',
@@ -24,7 +21,6 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {},
 }
 
 export const Divider: Story = {

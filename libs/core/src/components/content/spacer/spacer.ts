@@ -26,7 +26,6 @@ export class GdsSpacer extends GdsElement {
    * <gds-spacer size="s{2xl} m{xl} l{2xl}"></gds-spacer>
    * ```
    *
-   * @property size
    */
   @styleExpressionProperty({
     property: 'height',
