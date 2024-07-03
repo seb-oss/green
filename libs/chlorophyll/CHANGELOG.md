@@ -12,12 +12,6 @@
 
 - 4606e61: **Table:** Update style to match latest design
 
-## 3.4.2
-
-### Patch Changes
-
-- 4606e61: **Table:** Update style to match latest design
-
 ## 3.4.1
 
 ### Patch Changes
