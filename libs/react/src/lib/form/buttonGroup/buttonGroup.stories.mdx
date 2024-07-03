@@ -4,8 +4,13 @@ import { Button } from '../button/button'
 
 export const Template = ({ children, ...props }) => (
   <ButtonGroup {...props}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
+    <Button>1 month</Button>
+    <Button>3 months</Button>
+    <Button>This year</Button>
+    <Button>1 year</Button>
+    <Button>3 years</Button>
+    <Button>5 years</Button>
+    <Button>10 years</Button>
   </ButtonGroup>
 )
 
@@ -23,7 +28,7 @@ Grouping Button Components
     }}
     args={{
       variant: 'ghost',
-      selectedIndex: 1,
+      selectedIndex: 4,
     }}
   >
     {Template.bind({})}
@@ -33,9 +38,8 @@ Grouping Button Components
 ### Sizes
 
 <Canvas>
-  <ButtonGroup variant="secondary" selectedIndex={2} className="size-sm">
+  <ButtonGroup variant="secondary" selectedIndex={2} className="small">
     <Button>Button 1</Button>
-    <Button>Button 2</Button>
     <Button>Button 2</Button>
   </ButtonGroup>
 </Canvas>
