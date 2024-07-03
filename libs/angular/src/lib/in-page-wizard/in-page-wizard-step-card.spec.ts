@@ -73,7 +73,7 @@ describe('InPageWizardStepCardComponent', () => {
       })
     })
 
-    it('should show next button', async () => {
+    it('should show next button with icon', async () => {
       const { findByTestId } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
@@ -92,9 +92,11 @@ describe('InPageWizardStepCardComponent', () => {
       const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
       expect(nextBtn).toBeDefined()
       expect(nextBtn.textContent?.trim()).toEqual('Test Next')
+      const nextIcon = await findByTestId('in-page-wizard-step-card-next-icon')
+      expect(nextIcon).toBeDefined()
     })
 
-    it('should not show edit btn', async () => {
+    it('should not show any edit btns', async () => {
       const { queryByTestId } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
@@ -112,6 +114,8 @@ describe('InPageWizardStepCardComponent', () => {
 
       const el = queryByTestId('in-page-wizard-step-card-edit-btn')
       expect(el).toBeNull()
+      const elFooter = queryByTestId('in-page-wizard-step-card-footer-edit-btn')
+      expect(elFooter).toBeNull()
     })
 
     it('should show content', async () => {
@@ -395,6 +399,8 @@ class NggFakeInPageWizardStepCardComponent {
   @Input() public disableNext = false
 
   @Input() public isActive = false
+
+  @Input() public showNextIcon = true
 
   @Input() public handleNextClick?: () => void
 

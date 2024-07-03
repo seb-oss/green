@@ -35,6 +35,7 @@
         (click)="handleOnEditBtnClick($event)"
         data-testid="in-page-wizard-step-card-edit-btn"
       >
+        <ng-template *ngTemplateOutlet="editIcon"> </ng-template>
         {{ editBtnText }}
       </button>
     </div>
@@ -47,7 +48,21 @@
   >
     <ng-content></ng-content>
   </div>
-  <footer class="gds-in-page-wizard-step-card__footer" *ngIf="isActive">
+  <footer
+    class="gds-in-page-wizard-step-card__footer__edit"
+    *ngIf="isCompleted && !isActive"
+  >
+    <button
+      class="secondary"
+      (click)="handleOnEditBtnClick($event)"
+      data-testid="in-page-wizard-step-card-footer-edit-btn"
+    >
+      <ng-template *ngTemplateOutlet="editIcon"> </ng-template>
+      {{ editBtnText }}
+    </button>
+  </footer>
+
+  <footer class="gds-in-page-wizard-step-card__footer__next" *ngIf="isActive">
     <button
       class="primary"
       [disabled]="disableNext"
@@ -55,6 +70,43 @@
       data-testid="in-page-wizard-step-card-next-btn"
     >
       {{ nextBtnText }}
+      <ng-container *ngIf="showNextIcon">
+        <ng-template *ngTemplateOutlet="nextIcon"> </ng-template>
+      </ng-container>
     </button>
   </footer>
 </section>
+
+<ng-template #editIcon>
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 576 512"
+    class="edit-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    focusable="false"
+  >
+    <path
+      fill="var(--color)"
+      d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"
+    ></path>
+  </svg>
+</ng-template>
+
+<ng-template #nextIcon>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1"
+    data-testid="in-page-wizard-step-card-next-icon"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 5l0 14" />
+    <path d="M18 13l-6 6" />
+    <path d="M6 13l6 6" />
+  </svg>
+</ng-template>

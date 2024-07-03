@@ -6,8 +6,16 @@
   padding: 1rem;
   margin-top: 0;
 
-  button svg {
-    margin-left: 0.5rem;
+  button .next-icon {
+    margin-left: 0.3rem;
+  }
+
+  button .edit-icon {
+    margin-right: 0.3rem;
+  }
+
+  button {
+    max-height: 44px;
   }
 
   @include common.media-breakpoint-up('sm') {
@@ -70,8 +78,8 @@
     align-items: center;
 
     svg {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1rem;
+      height: 1rem;
       fill: common.$white;
     }
   }
@@ -130,18 +138,13 @@
     justify-content: flex-start;
   }
 
-  &__footer {
+  &__footer__next, &__footer__edit {
     @include add-in-page-wizard-footer;
   }
 
-  &__footer--edit {
-    button svg {
-      margin-right: 0.25rem;
-      margin-left: 0;
-    }
-
+  &__footer__edit {
     @include common.media-breakpoint-up('sm') {
-      display: none !important;
+        display: none !important;
     }
   }
 
