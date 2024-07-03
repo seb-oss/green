@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import '../modal.globals'
-// import { importProvidersFrom } from '@angular/core'
-
-// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import { importProvidersFrom, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import {
-  // applicationConfig,
+  applicationConfig,
   Meta,
   moduleMetadata,
   StoryFn,
@@ -17,11 +16,12 @@ export default {
   title: 'V-Angular/Dialog',
   component: DialogComponent,
   decorators: [
-    // applicationConfig({
-    //   providers: [importProvidersFrom(NgvI18nModule)],
-    // }),
+    applicationConfig({
+      providers: [importProvidersFrom(NgvI18nModule)],
+    }),
     moduleMetadata({
-      imports: [CommonModule /*NgvI18nModule, FontAwesomeModule*/],
+      imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta

@@ -12,23 +12,16 @@
     @include mixins.modal-header();
 
     button {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      border: none;
-      font-size: 1rem;
-      background: 0;
-      cursor: pointer;
-
-      &:hover {
-      }
-
-      &:active {
-      }
+      display: grid;
+      place-content: center;
     }
   }
 
   .sdv-modal-dialog__body {
     @include mixins.modal-body();
+  }
+
+  .sdv-modal-backdrop {
+    @include backdrop.add-backdrop(rgba(0, 0, 0, 0.35), 999);
   }
 }

@@ -8,7 +8,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core'
-//import { faEllipsisH, IconDefinition } from '@fortawesome/pro-regular-svg-icons';
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
 import { fromEvent, Subscription } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 

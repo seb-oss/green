@@ -1,0 +1,12 @@
+{
+  "error.fieldinputmask": "Invalid value pattern",
+  "error.fieldrequired": "Field must have content",
+  "error.fieldmaxlength": "Field content should not be longer than {{requiredLength}} characters",
+  "label.defaultlabel": "Label",
+  "label.maxlength": "characters left",
+  "label.optional": "Optional",
+  "button_cancel": "Cancel",
+  "button_apply": "Apply",
+  "button_save": "Save",
+  "text_dialogue": "You can supply the content seen here either through the <code>[content]=\"string\"</code> property or</br>by passing children between the opening and closing tags <code>&lt;c-dialog&gt; ...children &lt;/c-dialog&gt;</code>"
+}

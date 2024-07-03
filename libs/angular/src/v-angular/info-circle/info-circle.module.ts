@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { NggCoreWrapperModule } from '../shared'
+import { NggCoreWrapperModule } from '../../lib/shared'
 
 import { InfoCircleComponent } from './info-circle.component'
 

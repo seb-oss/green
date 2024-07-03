@@ -8,7 +8,7 @@ import { FoldOutOptionDirective } from './fold-out/fold-out.directive'
 import { SlideOutComponent } from './slide-out/slide-out.component'
 
 @NgModule({
-  imports: [CommonModule, NggCoreWrapperModule],
+  imports: [CommonModule],
   declarations: [
     DialogComponent,
     SlideOutComponent,
@@ -21,6 +21,5 @@ import { SlideOutComponent } from './slide-out/slide-out.component'
     FoldOutComponent,
     FoldOutOptionDirective,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NgvModalModule {}

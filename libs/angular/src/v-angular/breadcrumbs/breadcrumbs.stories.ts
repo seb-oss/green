@@ -8,7 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { ExternalLinkDirective } from '../shared/external-link/external-link.directive'
+import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
 import { BreadcrumbsComponent } from './breadcrumbs.component'
 
 export default {

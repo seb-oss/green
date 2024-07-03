@@ -1,17 +1,8 @@
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER } from '@angular/core'
-// import {
-//   FaIconLibrary,
-//   FontAwesomeModule,
-// } from '@fortawesome/angular-fontawesome'
-// import { faEllipsisH } from '@fortawesome/pro-regular-svg-icons'
-// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NgvI18nModule } from '../../i18n/i18n.module'
+import { NggCoreWrapperModule } from '../../../lib/shared'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import { FoldOutComponent } from './fold-out.component'
 import { FoldOutOptionDirective } from './fold-out.directive'
 import { exampleAlt, examplePrimary } from './fold-out.examples'
@@ -20,21 +11,10 @@ export default {
   title: 'V-Angular/Fold Out',
   component: FoldOutComponent,
   decorators: [
-    // applicationConfig({
-    //   providers: [
-    //     {
-    //       provide: APP_INITIALIZER,
-    //       useFactory: (iconLibrary: FaIconLibrary) => {
-    //         return async () => iconLibrary.addIcons(faEllipsisH);
-    //       },
-    //       deps: [FaIconLibrary],
-    //       multi: true,
-    //     },
-    //   ],
-    // }),
     moduleMetadata({
       declarations: [FoldOutOptionDirective],
-      imports: [CommonModule /*FontAwesomeModule, NgvI18nModule*/],
+      imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
   argTypes: {

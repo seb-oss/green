@@ -10,9 +10,11 @@ import {
   ViewChild,
 } from '@angular/core'
 
-// import { faTimes } from '@fortawesome/pro-regular-svg-icons';
-
 import { DialogButtons } from '../modal.types'
+
+import * as crossLarge from '@sebgroup/green-core/components/icon/icons/cross-small'
+
+console.log(crossLarge)
 
 export interface DialogEvent<T = any> {
   original: Event | undefined
