@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.3
+
+### Patch Changes
+
+- bc76d34: fixing In page wizard style and angular component
+
 ## 3.4.2
 
 ### Patch Changes
