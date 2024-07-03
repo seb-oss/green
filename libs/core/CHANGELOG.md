@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.27.0
+
+### Minor Changes
+
+- d50e15a: Add ViewBox prop and new icons
+
+### Patch Changes
+
+- 32df607: **Menu button:** Fix padding regression
+
 ## 1.26.0
 
 ### Minor Changes
