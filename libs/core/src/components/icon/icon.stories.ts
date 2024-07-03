@@ -234,6 +234,7 @@ export const IconsRegular: Story = {
         <gds-icon-github></gds-icon-github>
         <gds-icon-globus></gds-icon-globus>
         <gds-icon-graduate-cap></gds-icon-graduate-cap>
+        <gds-icon-green></gds-icon-green>
         <gds-icon-group></gds-icon-group>
         <gds-icon-growth></gds-icon-growth>
         <gds-icon-headphones></gds-icon-headphones>
@@ -308,6 +309,7 @@ export const IconsRegular: Story = {
         <gds-icon-school></gds-icon-school>
         <gds-icon-scissors></gds-icon-scissors>
         <gds-icon-search-menu></gds-icon-search-menu>
+        <gds-icon-seb></gds-icon-seb>
         <gds-icon-settings-gear></gds-icon-settings-gear>
         <gds-icon-settings-slider-hor></gds-icon-settings-slider-hor>
         <gds-icon-settings-slider-three></gds-icon-settings-slider-three>
@@ -409,6 +411,36 @@ export const IconsSolid: Story = {
       <gds-icon-arrow-share-left solid></gds-icon-arrow-share-left>
       <gds-icon-arrow-share-right solid></gds-icon-arrow-share-right>
       <gds-icon-arrow-up solid></gds-icon-arrow-up>
+    </gds-grid>
+  `,
+}
+
+/**
+ * The icon package has the following brand icons available:
+ */
+
+export const Brands: Story = {
+  ...DefaultParams,
+  name: 'Brands',
+  render: (args) => html`
+    <gds-grid
+      columns="s{2} m{4} l{4}"
+      gap="s{xl} m{xl} l{xl}"
+      class="icon-preview"
+    >
+      <gds-icon-green></gds-icon-green>
+      <gds-icon-seb></gds-icon-seb>
+      <gds-icon-apple-music></gds-icon-apple-music>
+      <gds-icon-bankid></gds-icon-bankid>
+      <gds-icon-chrome></gds-icon-chrome>
+      <gds-icon-facebook></gds-icon-facebook>
+      <gds-icon-figma></gds-icon-figma>
+      <gds-icon-github></gds-icon-github>
+      <gds-icon-instagram></gds-icon-instagram>
+      <gds-icon-linkedin></gds-icon-linkedin>
+      <gds-icon-rss-feed></gds-icon-rss-feed>
+      <gds-icon-spotify></gds-icon-spotify>
+      <gds-icon-twitter></gds-icon-twitter>
     </gds-grid>
   `,
 }
