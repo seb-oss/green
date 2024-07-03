@@ -6,14 +6,6 @@
   padding: 1rem;
   margin-top: 0;
 
-  button .next-icon {
-    margin-left: 0.3rem;
-  }
-
-  button .edit-icon {
-    margin-right: 0.3rem;
-  }
-
   button {
     max-height: 44px;
   }
@@ -77,7 +69,8 @@
     justify-content: center;
     align-items: center;
 
-    svg {
+    svg,
+    [gds-element*='gds-icon'] {
       width: 1rem;
       height: 1rem;
       fill: common.$white;
@@ -114,7 +107,8 @@
       display: flex;
     }
 
-    > button > svg {
+    > button > svg,
+    > button > [gds-element*='gds-icon'] {
       margin-right: 0.25rem;
       fill: var(--color);
 
@@ -138,13 +132,23 @@
     justify-content: flex-start;
   }
 
-  &__footer__next, &__footer__edit {
+  &__footer {
     @include add-in-page-wizard-footer;
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-left: 0.25rem;
+    }
   }
 
-  &__footer__edit {
+  &__footer--edit {
     @include common.media-breakpoint-up('sm') {
-        display: none !important;
+      display: none !important;
+    }
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-right: 0.25rem;
     }
   }
 

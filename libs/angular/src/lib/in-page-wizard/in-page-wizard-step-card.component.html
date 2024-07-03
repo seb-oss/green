@@ -49,7 +49,7 @@
     <ng-content></ng-content>
   </div>
   <footer
-    class="gds-in-page-wizard-step-card__footer__edit"
+    class="gds-in-page-wizard-step-card__footer gds-in-page-wizard-step-card__footer--edit"
     *ngIf="isCompleted && !isActive"
   >
     <button
@@ -62,7 +62,10 @@
     </button>
   </footer>
 
-  <footer class="gds-in-page-wizard-step-card__footer__next" *ngIf="isActive">
+  <footer
+    class="gds-in-page-wizard-step-card__footer gds-in-page-wizard-step-card__footer--next"
+    *ngIf="isActive"
+  >
     <button
       class="primary"
       [disabled]="disableNext"
