@@ -4,8 +4,8 @@
   :host {
     --_gap: 4px;
 
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-m);
+    --_padding-inline: var(--gds-space-m);
+    --_padding-block: var(--gds-space-xs);
 
     --_color-bg: transparent;
     --_color-text: var(--gds-sys-color-primary-text);
@@ -92,8 +92,7 @@
   .compact {
     display: flex;
     flex-direction: column;
-    --_padding-inline: var(--gds-sys-space-padding-l);
-    --_padding-block: var(--gds-sys-space-padding-s);
+    --_padding-inline: var(--gds-space-s);
     --_gap: 1px;
     font-size: 0.875rem;
     height: 56px;
