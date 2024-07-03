@@ -100,20 +100,19 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('DOMContentLoaded', () => {
   const searchBox = document.getElementById('icon-search') as HTMLInputElement
   const icons = Array.from(
-    document.querySelectorAll('[gds-element^="gds-icon-"]'),
+    document.querySelectorAll('#solids [gds-element^="gds-icon-"]'),
   )
 
   searchBox.addEventListener('keyup', () => {
-    const searchTerm = searchBox.value.toLowerCase().split(' ')
+    const searchTerm = searchBox.value.toLowerCase()
 
     icons.forEach((icon) => {
       const iconNameAttr = icon.getAttribute('gds-element')
       if (iconNameAttr) {
-        const iconName = iconNameAttr
-          .toLowerCase()
-          .replace('gds-icon-', '')
-          .split('-')
-        const isMatch = searchTerm.every((term) => iconName.includes(term))
+        const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
+
+        // Implement fuzzy search
+        const isMatch = fuzzySearch(searchTerm, iconName)
 
         if (isMatch || searchBox.value.trim() === '') {
           icon.removeAttribute('hidden')
@@ -123,6 +122,18 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     })
   })
+
+  function fuzzySearch(term: string, text: string): boolean {
+    let termIndex = 0
+    let textIndex = 0
+    while (termIndex < term.length && textIndex < text.length) {
+      if (term.charAt(termIndex) === text.charAt(textIndex)) {
+        termIndex++
+      }
+      textIndex++
+    }
+    return termIndex === term.length
+  }
 })
 
 /**
