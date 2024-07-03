@@ -102,11 +102,13 @@ If you just need a simple select without any form, validation etc. it's possible
 
 The dropdown options should be provided as an array of objects with label and value. When a user chooses an option the value will be selected.
 
+<Story id="components-dropdown--render-with-selected-option" />
+
 ```typescript
 const options = [
   { label: 'Tacos', value: 'tacos' },
   { label: 'Pizza', value: 'pizza' },
-  { label: 'Sushi', value: 'sushi', selected: true },
+  { label: 'Im selected', value: 'im-selected', selected: true },
 ]
 ```
 
