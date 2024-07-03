@@ -10,7 +10,7 @@ import './index.ts'
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  */
 const meta: Meta = {
-  title: 'Components/Segmented Control',
+  title: 'Docs/Components/Segmented Control',
   component: 'gds-segmented-control',
   subcomponents: { MenuItem: 'gds-segment' },
   parameters: {

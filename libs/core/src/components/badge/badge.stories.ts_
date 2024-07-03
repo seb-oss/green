@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './badge'
 
 const meta: Meta = {
-  title: 'Components/Badge',
+  title: 'Docs/Components/Badge',
   component: 'gds-badge',
 }
 
