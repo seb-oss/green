@@ -393,14 +393,14 @@ class NggFakeInPageWizardStepCardComponent {
   @Input() public editBtnText = ''
 
   @Input() public nextBtnText = ''
+  
+  @Input() public showNextBtnIcon = true
 
   @Input() public isCompleted = false
 
   @Input() public disableNext = false
 
   @Input() public isActive = false
-
-  @Input() public showNextIcon = true
 
   @Input() public handleNextClick?: () => void
 

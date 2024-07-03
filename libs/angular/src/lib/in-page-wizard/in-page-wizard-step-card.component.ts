@@ -21,7 +21,7 @@ export class NggInPageWizardStepCardComponent {
 
   @Input() public nextBtnText = ''
 
-  @Input() public showNextIcon = true
+  @Input() public showNextBtnIcon = true
 
   @Input() public isCompleted = false
 
