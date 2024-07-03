@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.2.2
+
+### Patch Changes
+
+- bc76d34: fixing In page wizard style and angular component
+- Updated dependencies [32df607]
+- Updated dependencies [d50e15a]
+- Updated dependencies [bc76d34]
+  - @sebgroup/green-core@1.27.0
+  - @sebgroup/chlorophyll@3.4.3
+
 ## 4.2.1
 
 ### Patch Changes
