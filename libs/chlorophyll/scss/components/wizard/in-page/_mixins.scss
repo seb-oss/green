@@ -6,8 +6,13 @@
   padding: 1rem;
   margin-top: 0;
 
-  button svg {
-    margin-left: 0.5rem;
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  button {
+    max-height: 44px;
   }
 
   @include common.media-breakpoint-up('sm') {
@@ -69,7 +74,8 @@
     justify-content: center;
     align-items: center;
 
-    svg {
+    svg,
+    [gds-element*='gds-icon'] {
       width: 1.5rem;
       height: 1.5rem;
       fill: common.$white;
@@ -102,12 +108,16 @@
     grid-area: edit;
     display: none;
     justify-content: end;
+
     @media (min-width: 576px) {
       display: flex;
     }
 
-    > button > svg {
+    > button > svg,
+    > button > [gds-element*='gds-icon'] {
       margin-right: 0.25rem;
+      width: 1rem;
+      height: 1rem;
       fill: var(--color);
 
       path {
@@ -132,16 +142,26 @@
 
   &__footer {
     @include add-in-page-wizard-footer;
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-left: 0.25rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   &__footer--edit {
-    button svg {
-      margin-right: 0.25rem;
-      margin-left: 0;
-    }
-
     @include common.media-breakpoint-up('sm') {
       display: none !important;
+    }
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-right: 0.25rem;
+      margin-left: 0;
+      width: 1rem;
+      height: 1rem;
     }
   }
 
