@@ -6,6 +6,11 @@
   padding: 1rem;
   margin-top: 0;
 
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
   button {
     max-height: 44px;
   }
@@ -71,8 +76,8 @@
 
     svg,
     [gds-element*='gds-icon'] {
-      width: 1rem;
-      height: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
       fill: common.$white;
     }
   }
@@ -103,6 +108,7 @@
     grid-area: edit;
     display: none;
     justify-content: end;
+
     @media (min-width: 576px) {
       display: flex;
     }
@@ -110,6 +116,8 @@
     > button > svg,
     > button > [gds-element*='gds-icon'] {
       margin-right: 0.25rem;
+      width: 1rem;
+      height: 1rem;
       fill: var(--color);
 
       path {
@@ -138,6 +146,8 @@
     svg,
     [gds-element*='gds-icon'] {
       margin-left: 0.25rem;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
@@ -149,6 +159,9 @@
     svg,
     [gds-element*='gds-icon'] {
       margin-right: 0.25rem;
+      margin-left: 0;
+      width: 1rem;
+      height: 1rem;
     }
   }
 
