@@ -160,3 +160,37 @@ $_background: input.$background;
     }
   }
 }
+
+@mixin add-button-group-wrapper() {
+  display: flex;
+  button {
+    min-width: unset;
+  }
+  > .btn-group {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    > button {
+      flex: 1 0 auto;
+    }
+  }
+  > .control-btn-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  > .control-btn-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  > .control-btn-right,
+  .control-btn-left {
+    padding: 0.5rem;
+    > svg {
+      height: 1.2em;
+      width: 1.2em;
+    }
+  }
+}

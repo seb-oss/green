@@ -8,3 +8,7 @@
 .form-group > .group {
   @include common.margin-bottom(3);
 }
+
+.button-group-wrapper {
+  @include mixins.add-button-group-wrapper;
+}
