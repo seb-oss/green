@@ -1,0 +1,17 @@
+import {  css } from 'lit';
+import { constrainSlots } from '../../utils/helpers';
+import { gdsCustomElement, html } from "../../scoping";
+import { GdsElement } from '../../gds-element'
+@gdsCustomElement('gds-step-list')
+export class GdsStepList extends GdsElement {
+  static styles = css`
+    :host {
+      display: block;
+    }`;
+
+    render() {
+      return html`
+      <slot gds-allow="gds-step-list-item"></slot>
+    `;
+    }
+}
