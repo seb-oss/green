@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.28.1
+
+### Patch Changes
+
+- 70f4b1a: Prevent the propagation of grid gap downward
+
 ## 1.28.0
 
 ### Minor Changes
