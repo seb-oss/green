@@ -1,0 +1,24 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+import '../../components/layout/container/container'
+import '../../components/layout/card/card'
+import '../../components/layout/flex/flex'
+import '../../components/content/text/text'
+
+<Meta title="Docs/Style/Colors" />
+
+ 
+### Colors
+<gds-flex direction="column" gap="s">
+    <gds-flex direction="column">
+        <gds-text tag="h4">document/background</gds-text>
+        <gds-card shadow="s" radius="xs">
+            <gds-flex padding="s"> 
+                <gds-card background="base800" width="60px" radius="2xs"></gds-card>
+                <gds-flex direction="column" gap="2xs">
+                    <gds-text>primary</gds-text>
+                    <gds-text>#FFFFFF</gds-text>
+                </gds-flex>
+            </gds-flex>
+        </gds-card>
+    </gds-flex>
+</gds-flex>
