@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.3.0
+
+### Minor Changes
+
+- 718186b: Fix not displayed selected dropdown option then texts input changes
+
+### Patch Changes
+
+- Updated dependencies [6a7e540]
+  - @sebgroup/green-core@1.28.0
+
 ## 4.2.2
 
 ### Patch Changes
