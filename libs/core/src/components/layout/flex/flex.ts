@@ -44,7 +44,7 @@ export class GdsFlex extends GdsContainer {
     styleTemplate: (_prop, values) => {
       const colGap = values[0]
       const rowGap = values[1] || colGap
-      return `--_gap-column: ${colGap}; --_gap-row: ${rowGap};`
+      return `gap: ${colGap} ${rowGap};`
     },
   })
   gap?: string
