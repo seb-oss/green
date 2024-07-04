@@ -3,22 +3,47 @@ import '../../components/layout/container/container'
 import '../../components/layout/card/card'
 import '../../components/layout/flex/flex'
 import '../../components/content/text/text'
+import './colors.style.css'
 
 <Meta title="Docs/Style/Colors" />
 
  
 ### Colors
-<gds-flex direction="column" gap="s">
+<gds-grid columns="5" gap="s">
     <gds-flex direction="column">
-        <gds-text tag="h4">document/background</gds-text>
+        <gds-text size="body-small">document/background</gds-text>
         <gds-card shadow="s" radius="xs">
-            <gds-flex padding="s"> 
-                <gds-card background="base800" width="60px" radius="2xs"></gds-card>
+            <gds-flex padding="xs"> 
+                <gds-card background="l1-bg-primary" border="4xs/base200" width="60px" radius="2xs"></gds-card>
                 <gds-flex direction="column" gap="2xs">
                     <gds-text>primary</gds-text>
-                    <gds-text>#FFFFFF</gds-text>
+                    <gds-text color="base600" size="body-small">#FFFFFF</gds-text>
                 </gds-flex>
             </gds-flex>
         </gds-card>
     </gds-flex>
-</gds-flex>
+    <gds-flex direction="column">
+        <gds-text size="body-small">document/background</gds-text>
+        <gds-card shadow="s" radius="xs">
+            <gds-flex padding="xs"> 
+                <gds-card background="l1-bg-secondary" border="4xs/base200" width="60px" radius="2xs"></gds-card>
+                <gds-flex direction="column" gap="2xs">
+                    <gds-text>secondary</gds-text>
+                    <gds-text color="base600" size="body-small">#FFFFFF</gds-text>
+                </gds-flex>
+            </gds-flex>
+        </gds-card>
+    </gds-flex>
+    <gds-flex direction="column">
+        <gds-text size="body-small">document/background</gds-text>
+        <gds-card shadow="s" radius="xs">
+            <gds-flex padding="xs"> 
+                <gds-card background="l1-bg-tertiary" border="4xs/base200" width="60px" radius="2xs"></gds-card>
+                <gds-flex direction="column" gap="2xs">
+                    <gds-text>tertiary</gds-text>
+                    <gds-text color="base600" size="body-small">#FFFFFF</gds-text>
+                </gds-flex>
+            </gds-flex>
+        </gds-card>
+    </gds-flex>
+</gds-grid>
