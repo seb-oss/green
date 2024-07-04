@@ -28,15 +28,23 @@ export class GdsSegment<ValueT = any> extends GdsElement {
   @property()
   value?: ValueT
 
+  /**
+   * Whether the segment is disabled.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented')
-
     this.setAttribute('role', 'listitem')
   }
 
   render() {
-    return html`<button aria-current=${String(this.selected)}>
+    return html`<button
+      aria-current=${String(this.selected)}
+      ?disabled="${this.disabled}"
+    >
       <slot></slot>
     </button>`
   }
