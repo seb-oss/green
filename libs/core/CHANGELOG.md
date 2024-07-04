@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.28.0
+
+### Minor Changes
+
+- 6a7e540: Fix colors to inherit in brand set
+
 ## 1.27.0
 
 ### Minor Changes
