@@ -19,6 +19,8 @@ import '../icon/icons/cross-small'
 
 import styles from './popover.styles'
 
+const backdropStyle = `display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.25); width: 100%; height: 100%;`
+
 /**
  * @element gds-popover
  *
@@ -248,7 +250,10 @@ export class GdsPopover extends GdsElement {
           ? this._elDialog?.showModal()
           : this._elDialog?.setAttribute('open', 'true')
         this.#focusFirstSlottedChild()
-        this.#backdropEl?.style.setProperty('display', 'block')
+
+        requestAnimationFrame(() =>
+          this.#backdropEl?.style.setProperty('display', 'block'),
+        )
 
         // Another VoiceOver hack
         setTimeout(() => this.#focusFirstSlottedChild(), 250)
@@ -277,12 +282,11 @@ export class GdsPopover extends GdsElement {
 
     this.#backdropEl = parentRoot.querySelector(this.backdrop) as HTMLElement
 
-    if (!this.#backdropEl) return
+    if (!this.#backdropEl || this.#backdropEl.dataset.gdsBackdrop === 'true')
+      return
 
-    this.#backdropEl.setAttribute(
-      'style',
-      'display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.3); width: 100%; height: 100%;',
-    )
+    this.#backdropEl.setAttribute('style', backdropStyle)
+    this.#backdropEl.setAttribute('data-gds-backdrop', 'true')
   }
 
   #handleCancel = () => {
