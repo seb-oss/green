@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.29.0
+
+### Minor Changes
+
+- 663c34d: **Segmented Control:** Add `disabled` property to `gds-segment`
+
 ## 1.28.1
 
 ### Patch Changes
