@@ -73,7 +73,7 @@ Available `SegmentedControl` component props
 |  value       | \` string \`                                                            | The value of the currently selected segment. Setting this property will select the segment with the matching value.  |
 |  segMinWidth | \` number \`                                                            | Minimum width of each segment. Used for calculating the number of visible segments that can fit based on the available space. |
 |  size        | \` small | medium \`                                                    | Size of the segmented control |
-|  onChange    | \` (value: string) => void \`                                           | Fires when the selected segment is changed         |
+|  onChange    | \` (event: Event) => void \`                                            | Fires when the selected segment is changed, use \` event.target.value \` to retrive the value         |
 |  className   | \` string \`                                                            | Component className         |
 |  children    | \` ReactNode | ReactNode[] \`                                           | Pass down Segment component as child |
 `}</Markdown>

@@ -25,7 +25,7 @@ export interface SegmentedControlProps {
   value?: string
   segMinWidth?: number
   size?: 'small' | 'medium'
-  onChange?: (value: string) => void
+  onChange?: (event: Event) => void
   className?: string
   children?: ReactNode | ReactNode[]
 }
@@ -42,13 +42,9 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
   className,
   ...props
 }: SegmentedControlProps) => {
-  const onControlChange = (event: Event) => {
-    onChange && onChange((event?.target as HTMLInputElement).value)
-  }
-
   return (
     <CoreSegementedControl
-      onchange={onControlChange}
+      onchange={onChange}
       className={classNames(className)}
       {...props}
     />
