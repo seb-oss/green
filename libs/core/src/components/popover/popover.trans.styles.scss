@@ -87,7 +87,7 @@
         }
       }
 
-      &::backdrop {
+      &:not(.has-backdrop)::backdrop {
         @include common.media-breakpoint-up('sm') {
           opacity: 0;
         }

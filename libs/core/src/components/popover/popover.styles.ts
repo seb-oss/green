@@ -33,7 +33,7 @@ const style = css`
       display: none;
     }
 
-    dialog::backdrop {
+    dialog:not(.has-backdrop)::backdrop {
       background-color: transparent;
       display: block;
       position: fixed;

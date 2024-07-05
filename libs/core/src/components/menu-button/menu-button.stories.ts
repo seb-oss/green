@@ -116,10 +116,13 @@ export const Example_menu_bar: Story = {
 export const Compact_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card
+    html`<div style="width: 700px; height: 200px;"><gds-card
         display="flex"
-        width="700px"
+        width="720px"
         border="0 0 4xs/base300 0"
+        position="fixed"
+        background="base-white"
+        style="left: 0; top: 0; z-index: 1000;"
       >
       <div style="flex-basis:50%;">
         <gds-menu-button compact>
@@ -132,7 +135,14 @@ export const Compact_menu_bar: Story = {
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
         </gds-menu-button compact>
-        <gds-popover>
+        <gds-popover nonmodal backdrop="#my-backdrop">
+          <gds-menu-button compact slot="trigger">
+            <gds-icon-bell slot="trail"></gds-icon-bell>
+            Notification
+          </gds-menu-button compact>
+          <div style="padding: 1rem;">Profile stuff</div>
+        </gds-popover>
+        <gds-popover nonmodal backdrop="#my-backdrop">
           <gds-menu-button compact slot="trigger">
             <gds-icon-people slot="trail"></gds-icon-people>
             Profile
@@ -150,5 +160,6 @@ export const Compact_menu_bar: Story = {
           External link
         </gds-menu-button>
       </gds-flex>
-    </gds-card>`,
+    </gds-card>
+    <div id="my-backdrop"></div></div>`,
 }

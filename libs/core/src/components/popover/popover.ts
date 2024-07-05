@@ -109,6 +109,12 @@ export class GdsPopover extends GdsElement {
   @property({ attribute: false })
   calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
 
+  @property({ type: Boolean })
+  nonmodal = false
+
+  @property()
+  backdrop?: string
+
   @state()
   private _trigger: HTMLElement | undefined = undefined
 
@@ -165,6 +171,8 @@ export class GdsPopover extends GdsElement {
 
   #isMobileViewport = false
 
+  #backdropEl: HTMLElement | undefined
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-popover')
@@ -209,6 +217,7 @@ export class GdsPopover extends GdsElement {
           class="${classMap({
             'v-kb-visible': this._isVirtKbVisible,
             'use-modal-in-mobile': !this.disableMobileStyles,
+            'has-backdrop': Boolean(this.backdrop && this.backdrop === 'true'),
           })}"
           aria-hidden="${String(!this.open)}"
           @close=${() => this.open && this.#handleCancel()}
@@ -235,23 +244,45 @@ export class GdsPopover extends GdsElement {
     this.updateComplete.then(() => {
       this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
-        this._elDialog?.showModal()
+        !this.nonmodal
+          ? this._elDialog?.showModal()
+          : this._elDialog?.setAttribute('open', 'true')
         this.#focusFirstSlottedChild()
+        this.#backdropEl?.style.setProperty('display', 'block')
 
         // Another VoiceOver hack
         setTimeout(() => this.#focusFirstSlottedChild(), 250)
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
-          () =>
-            this._elDialog?.addEventListener('click', this.#handleClickOutside),
+          () => document.addEventListener('click', this.#handleClickOutside),
           0,
         )
       } else {
         this._elDialog?.close()
-        this._elDialog?.removeEventListener('click', this.#handleClickOutside)
+        document.removeEventListener('click', this.#handleClickOutside)
+        this.#backdropEl?.style.setProperty('display', 'none')
       }
     })
+  }
+
+  @watch('backdrop')
+  private _handleBackdropChange() {
+    const parentRoot = this.parentElement?.getRootNode() as
+      | Document
+      | ShadowRoot
+      | null
+
+    if (!this.backdrop || !parentRoot) return
+
+    this.#backdropEl = parentRoot.querySelector(this.backdrop) as HTMLElement
+
+    if (!this.#backdropEl) return
+
+    this.#backdropEl.setAttribute(
+      'style',
+      'display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.3); width: 100%; height: 100%;',
+    )
   }
 
   #handleCancel = () => {
@@ -421,7 +452,6 @@ export class GdsPopover extends GdsElement {
         e.clientX <= rect.left + rect.width
 
       if (!isInDialog) {
-        e.stopPropagation()
         this.open = false
         this.#dispatchUiStateEvent('close')
       }
