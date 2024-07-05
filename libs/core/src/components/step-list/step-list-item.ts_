@@ -18,7 +18,7 @@ export class GdsStepListItem extends GdsElement {
       font-family: "SEB SansSerif", "SEBSansSerif", "Trebuchet MS", "Trebuchet",
         "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
-    .node-container {
+    .item-container {
       display: flex;
       flex-direction: column;
       padding: 4px 16px 24px;
@@ -112,7 +112,7 @@ export class GdsStepListItem extends GdsElement {
 
   render() {
     return html`
-      <div class="node-container">
+      <div class="item-container">
         ${this.renderIcon()}
         <div class="line"></div>
         <div class="header">
