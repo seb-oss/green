@@ -1,3 +1,5 @@
+@use '../../../../../chlorophyll/scss/common';
+
 @layer base, reset, transitional-styles;
 
 @layer transitional-styles {
@@ -50,6 +52,12 @@
     button:focus-visible {
       outline: 2px solid #000;
       outline-offset: -2px;
+    }
+
+    button:disabled,
+    button[aria-disabled='true'],
+    button.disabled {
+      @include common.add-disable(false, true, true);
     }
   }
 }
