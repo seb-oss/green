@@ -1,17 +1,5 @@
 # Changelog
 
-## 3.11.0
-
-### Minor Changes
-
-- 4c2bdb7: **Accordion:** Add `customLabel` prop, and add support for scrollable content`
-
-## 3.10.0
-
-### Minor Changes
-
-- 525b2c6: **Accordion:** Add `defaultOpen` prop
-
 ## 3.9.0
 
 ### Minor Changes
@@ -22,14 +10,6 @@
 
 - Updated dependencies [663c34d]
   - @sebgroup/green-core@1.29.0
-
-## 3.8.1
-
-### Patch Changes
-
-- 33624a5: Adding secondary prop
-- Updated dependencies [96d282a]
-  - @sebgroup/green-core@1.25.0
 
 ## 3.8.1
 
