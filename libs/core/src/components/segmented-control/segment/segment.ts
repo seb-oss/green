@@ -5,7 +5,7 @@ import { TransitionalStyles } from '../../../transitional-styles'
 import { unsafeCSS } from 'lit'
 
 import { tokens } from '../../../tokens.style'
-import style from './segment.style.css'
+import style from './segment.style.css?inline'
 
 /**
  * @element gds-segment
