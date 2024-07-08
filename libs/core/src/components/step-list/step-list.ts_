@@ -11,7 +11,9 @@ export class GdsStepList extends GdsElement {
 
     render() {
       return html`
-      <slot gds-allow="gds-step-list-item"></slot>
+      <div role="list">
+        <slot gds-allow="gds-step-list-item"></slot>
+      </div>
     `;
     }
 }

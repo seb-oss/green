@@ -112,18 +112,17 @@ export class GdsStepListItem extends GdsElement {
 
   render() {
     return html`
-      <div class="item-container">
+      <div class="item-container" role="list-item">
         ${this.renderIcon()}
         <div class="line"></div>
-        <div class="header">
+        <div class="header" role="header" id="label">
           ${this.title}
-          <div class="header-info">
+         
             ${this.headerInfo
-              ? html`<slot name="header-info">${this.headerInfo}</slot>`
+              ? html` <div class="header-info"><slot name="header-info" role="note">${this.headerInfo}</slot></div>`
               : ""}
-          </div>
         </div>
-        <div class="content">
+        <div class="content" role="item-content" aria-labelledby="label">
           <slot name="content"></slot>
         </div>
       </div>
