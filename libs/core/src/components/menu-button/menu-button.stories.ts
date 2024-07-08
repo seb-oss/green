@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping'
 import './menu-button'
 import '../popover/popover.js'
+import '../popover/backdrop.js'
 import '../layout/flex/flex.js'
 import '../layout/card/card.js'
 
@@ -161,5 +162,6 @@ export const Compact_menu_bar: Story = {
         </gds-menu-button>
       </gds-flex>
     </gds-card>
-    <div id="my-backdrop"></div></div>`,
+    <gds-backdrop id="my-backdrop"></gds-backdrop>
+    </div>`,
 }

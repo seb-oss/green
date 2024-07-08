@@ -18,8 +18,7 @@ import { TransitionalStyles } from '../../transitional-styles'
 import '../icon/icons/cross-small'
 
 import styles from './popover.styles'
-
-const backdropStyle = `display: none; position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.25); width: 100%; height: 100%;`
+import type { GdsBackdrop } from './backdrop'
 
 /**
  * @element gds-popover
@@ -173,7 +172,7 @@ export class GdsPopover extends GdsElement {
 
   #isMobileViewport = false
 
-  #backdropEl: HTMLElement | undefined
+  #backdropEl: GdsBackdrop | undefined
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -251,8 +250,8 @@ export class GdsPopover extends GdsElement {
           : this._elDialog?.setAttribute('open', 'true')
         this.#focusFirstSlottedChild()
 
-        requestAnimationFrame(() =>
-          this.#backdropEl?.style.setProperty('display', 'block'),
+        requestAnimationFrame(
+          () => ((this.#backdropEl as GdsBackdrop).show = true),
         )
 
         // Another VoiceOver hack
@@ -266,7 +265,7 @@ export class GdsPopover extends GdsElement {
       } else {
         this._elDialog?.close()
         document.removeEventListener('click', this.#handleClickOutside)
-        this.#backdropEl?.style.setProperty('display', 'none')
+        ;(this.#backdropEl as GdsBackdrop).show = false
       }
     })
   }
@@ -280,13 +279,7 @@ export class GdsPopover extends GdsElement {
 
     if (!this.backdrop || !parentRoot) return
 
-    this.#backdropEl = parentRoot.querySelector(this.backdrop) as HTMLElement
-
-    if (!this.#backdropEl || this.#backdropEl.dataset.gdsBackdrop === 'true')
-      return
-
-    this.#backdropEl.setAttribute('style', backdropStyle)
-    this.#backdropEl.setAttribute('data-gds-backdrop', 'true')
+    this.#backdropEl = parentRoot.querySelector(this.backdrop) as GdsBackdrop
   }
 
   #handleCancel = () => {
