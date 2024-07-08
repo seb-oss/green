@@ -8,6 +8,7 @@ import {
   offset,
   flip,
   Placement,
+  Middleware,
 } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
@@ -110,11 +111,41 @@ export class GdsPopover extends GdsElement {
   @property({ attribute: false })
   calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
 
+  /**
+   * Whether the popover is nonmodal. When true, the popover will not trap focus and other elements
+   * on the page will still be interactable while the popover is open.
+   */
   @property({ type: Boolean })
   nonmodal = false
 
+  /**
+   * When this is set to `true`, the `:backdrop` pseudo-element will be visible if the popover is
+   * in modal mode. When not in modal mode (using the `nonmodal` attribute), this can instead be
+   * set to a selector matching a `<gds-backdrop>` element, in wich case the popover will take
+   * control of that backdrop.
+   *
+   * Example:
+   * ```html
+   * <gds-popover backdrop=".my-backdrop">
+   *   <gds-button slot="trigger">Open</gds-button>
+   *   <p>Popover content</p>
+   * </gds-popover>
+   * <gds-backdrop class="my-backdrop"></gds-backdrop>
+   */
   @property()
   backdrop?: string
+
+  /**
+   * An array of middleware for the Floating UI positioning algorithm. Here you can pass in an array
+   * of middleware to customize positioning to your needs. This array is passed directly to Floting UI,
+   * so you can just follow the documentation here: https://floating-ui.com/docs/middleware
+   *
+   * This property does not have a corresponding attribute, so it can only be set in JavaScript.
+   *
+   * Defaults to `[offset(8), flip()]`
+   */
+  @property({ attribute: false })
+  floatingUIMiddleware: Middleware[] = [offset(8), flip()]
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
@@ -250,9 +281,9 @@ export class GdsPopover extends GdsElement {
           : this._elDialog?.setAttribute('open', 'true')
         this.#focusFirstSlottedChild()
 
-        requestAnimationFrame(
-          () => ((this.#backdropEl as GdsBackdrop).show = true),
-        )
+        requestAnimationFrame(() => {
+          if (this.#backdropEl) this.#backdropEl.show = true
+        })
 
         // Another VoiceOver hack
         setTimeout(() => this.#focusFirstSlottedChild(), 250)
@@ -265,7 +296,7 @@ export class GdsPopover extends GdsElement {
       } else {
         this._elDialog?.close()
         document.removeEventListener('click', this.#handleClickOutside)
-        ;(this.#backdropEl as GdsBackdrop).show = false
+        if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
   }
@@ -385,18 +416,20 @@ export class GdsPopover extends GdsElement {
     }
 
     this.#autoPositionCleanupFn = autoUpdate(referenceEl, floatingEl, () => {
+      Object.assign(floatingEl.style, {
+        minWidth: this.calcMinWidth(referenceEl),
+        maxWidth: this.calcMaxWidth(referenceEl),
+        minHeight: this.calcMinHeight(referenceEl),
+        maxHeight: this.calcMaxHeight(referenceEl),
+      })
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
-        middleware: [offset(8), flip()],
+        middleware: this.floatingUIMiddleware,
         strategy: 'fixed',
       }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
           left: `${x}px`,
           top: `${y}px`,
-          minWidth: this.calcMinWidth(referenceEl),
-          maxWidth: this.calcMaxWidth(referenceEl),
-          minHeight: this.calcMinHeight(referenceEl),
-          maxHeight: this.calcMaxHeight(referenceEl),
         }),
       )
     })
