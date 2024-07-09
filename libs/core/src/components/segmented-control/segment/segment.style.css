@@ -21,6 +21,11 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 @media (pointer: fine) {
@@ -30,6 +35,10 @@ button {
       var(--gds-sys-color-state-layers-state-black-dim1),
       transparent
     );
+
+    &:disabled {
+      background-color: transparent;
+    }
   }
 }
 

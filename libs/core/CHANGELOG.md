@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.29.0
+
+### Minor Changes
+
+- 663c34d: **Segmented Control:** Add `disabled` property to `gds-segment`
+
+## 1.28.1
+
+### Patch Changes
+
+- 70f4b1a: Prevent the propagation of grid gap downward
+
+## 1.28.0
+
+### Minor Changes
+
+- 6a7e540: Fix colors to inherit in brand set
+
 ## 1.27.0
 
 ### Minor Changes

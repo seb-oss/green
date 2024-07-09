@@ -114,6 +114,33 @@ const options = [
 
 Set an initial value by assigning the `value` to the value input or form controller. Or simply make use of the optional `selected?: boolean` as in the example above.
 
+### Preselect with FormControl
+
+You can also progammatically select options by using Angular FormControls. Create a FormGroup what contains a FormControl for the dropdownStories.
+
+```typescript
+import { FormBuilder } from '@angular/forms'
+
+constructor(private _fb: FormBuilder) {}
+
+dropdownForm = this._fb.group({
+  myDropDownControlName: 'sushi',
+})
+```
+
+Then use the same control name on the dropdown component:
+
+```html
+<form [formGroup]="dropdownForm" class="horizontal">
+  <ngg-dropdown
+    [options]="options"
+    formControlName="myDropDownControlName"
+  ></ngg-dropdown>
+</form>
+```
+
+## Complex values and compare function
+
 By default, the dropdown will look for a label and value pair for the data. The following inputs can be set to alter the options if neccesary.
 
 The value does not have to be a primitive value, it can be assigned an object but it requires that a `compareWith` function is provided to uniquely identify each object. Eg:
