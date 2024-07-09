@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.9.0
+
+### Minor Changes
+
+- 663c34d: **Segmented Control:** Add new React wrapper
+
+### Patch Changes
+
+- Updated dependencies [663c34d]
+  - @sebgroup/green-core@1.29.0
+
 ## 3.8.1
 
 ### Patch Changes
