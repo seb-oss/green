@@ -5,7 +5,10 @@ import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '@sebgroup/green-core/components/popover'
-import type { GdsPopover } from '@sebgroup/green-core/components/popover'
+import type {
+  GdsPopover,
+  GdsBackdrop,
+} from '@sebgroup/green-core/components/popover'
 
 import {
   htmlTemplateTagFactory,
@@ -98,10 +101,25 @@ describe('<gds-popover>', () => {
       await clickOnElement(trigger)
       await waitUntil(() => el.open)
     })
+
+    it('should be possible to reference a backdrop element', async () => {
+      const el = await fixture<GdsPopover>(
+        html`<div>
+          <gds-popover open id="popover" backdrop="#backdrop">
+            <div>Content</div>
+          </gds-popover>
+          <gds-backdrop id="backdrop"></gds-backdrop>
+        </div>`,
+      )
+      await el.updateComplete
+
+      const backdrop = document.querySelector('#backdrop') as GdsBackdrop
+
+      await waitUntil(() => backdrop.show)
+    })
   })
 
   describe('Interactions', () => {
-    // Add actual interaction tests here! (things like keyboard nav, clicking on things behave as expected, etc)
     it('should open when trigger is clicked', async () => {
       const el = await fixture<GdsPopover>(
         html`<gds-popover>
