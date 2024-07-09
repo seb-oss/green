@@ -120,6 +120,7 @@ export const Compact_menu_bar: Story = {
         display="flex"
         width="700px"
         border="0 0 4xs/base300 0"
+        background="base-white"
       >
       <div style="flex-basis:50%;">
         <gds-menu-button compact>
@@ -150,5 +151,6 @@ export const Compact_menu_bar: Story = {
           External link
         </gds-menu-button>
       </gds-flex>
-    </gds-card>`,
+    </gds-card>
+    `,
 }
