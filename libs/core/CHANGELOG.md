@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.30.0
+
+### Minor Changes
+
+- f302973: **Popover:** Add options for modality, backdrop and positioning
+
+### Patch Changes
+
+- f302973: **Container:** Default to `display: block`
+
 ## 1.29.0
 
 ### Minor Changes
