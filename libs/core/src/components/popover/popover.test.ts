@@ -117,6 +117,30 @@ describe('<gds-popover>', () => {
 
       await waitUntil(() => backdrop.show)
     })
+
+    it('should open dialog in modal mode when `nonmodal` is not set', async () => {
+      const el = await fixture<GdsPopover>(
+        html`<gds-popover open>
+          <div slot="trigger">Trigger</div>
+          <div>Content</div>
+        </gds-popover>`,
+      )
+      await el.updateComplete
+
+      expect(el.shadowRoot?.querySelector('dialog:modal')).to.not.be.null
+    })
+
+    it('should not open dialog in modal mode when `nonmodal` is set', async () => {
+      const el = await fixture<GdsPopover>(
+        html`<gds-popover open nonmodal>
+          <div slot="trigger">Trigger</div>
+          <div>Content</div>
+        </gds-popover>`,
+      )
+      await el.updateComplete
+
+      expect(el.shadowRoot?.querySelector('dialog:modal')).to.be.null
+    })
   })
 
   describe('Interactions', () => {
