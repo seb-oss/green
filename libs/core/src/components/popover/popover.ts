@@ -131,6 +131,7 @@ export class GdsPopover extends GdsElement {
    *   <p>Popover content</p>
    * </gds-popover>
    * <gds-backdrop class="my-backdrop"></gds-backdrop>
+   * ```
    */
   @property()
   backdrop?: string
