@@ -36,7 +36,7 @@ const items: AccordionItemInterface[] = [
       </>
     ),
     labelElementLevel: 2,
-    isOpen:true
+    isOpen: true,
   },
 ]
 
@@ -158,8 +158,10 @@ describe('Accordion', () => {
 
   it('accordion is open when isOpen is true', () => {
     render(<Accordion items={items} />)
-    expect(screen.getByText('Third accordion region')).toBeTruthy()
-    expect(screen.getByText('Second accordion region')).toBeFalsy()
-    expect(screen.getByText('First accordion region')).toBeFalsy()
+    expect(screen.getByText('Third accordion region')).toBeVisible()
+
+    // Check that the content of the first and second items are not visible
+    expect(screen.queryByText('First accordion region')).not.toBeVisible()
+    expect(screen.queryByText('Second accordion region')).not.toBeVisible()
   })
 })
