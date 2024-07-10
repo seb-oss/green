@@ -79,34 +79,20 @@ export class AppElement extends LitElement {
             <gds-segment value="calendar">Calendar</gds-segment>
             <gds-segment value="card">Card</gds-segment>
           </gds-segmented-control>
-          ${this.currentView === 'card'
-            ? html`<card-example></card-example>`
-            : html`
-                <div class="card">
-                  ${choose(
-                    this.currentView,
-                    [
-                      [
-                        'simple-values',
-                        () => html`<simple-values></simple-values>`,
-                      ],
-                      [
-                        'complex-values',
-                        () => html`<complex-values></complex-values>`,
-                      ],
-                      [
-                        'datepicker',
-                        () => html`<datepicker-example></datepicker-example>`,
-                      ],
-                      [
-                        'calendar',
-                        () => html`<calendar-example></calendar-example>`,
-                      ],
-                    ],
-                    () => html`No view selected`,
-                  )}
-                </div>
-              `}
+          ${choose(
+            this.currentView,
+            [
+              ['simple-values', () => html`<simple-values></simple-values>`],
+              ['complex-values', () => html`<complex-values></complex-values>`],
+              [
+                'datepicker',
+                () => html`<datepicker-example></datepicker-example>`,
+              ],
+              ['calendar', () => html`<calendar-example></calendar-example>`],
+              ['card', () => html`<card-example></card-example>`],
+            ],
+            () => html`No view selected`,
+          )}
         </div>
       </gds-theme>
     `
