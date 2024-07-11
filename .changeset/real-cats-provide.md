@@ -1,5 +1,5 @@
 ---
-"@sebgroup/green-angular": minor
+'@sebgroup/green-angular': patch
 ---
 
-then changing dropdown texts vissible placeholder shows previous texts value if nothing is selected
+**Dropdown:** Fix previous texts value being displayed if nothing is selected and `texts` input changed
