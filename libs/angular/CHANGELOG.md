@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.3.1
+
+### Patch Changes
+
+- 7cfed86: **Dropdown:** Fix previous texts value being displayed if nothing is selected and `texts` input changed
+
 ## 4.3.0
 
 ### Minor Changes
