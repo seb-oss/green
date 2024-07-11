@@ -96,8 +96,8 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() set texts(texts: DropdownTexts | undefined) {
     this._texts = {
       ...(texts ? texts : {}),
-      select: this.displayTextByValue(this._value),
-    }    
+      select: this.textToDisplay(texts, this._value),
+    }
   }
 
   get texts(): DropdownTexts | undefined {
@@ -250,17 +250,24 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   private displayTextByValue = (value: any) => {
+    return this.textToDisplay(this.texts, value)
+  }
+
+  private textToDisplay = (
+    dropdownTexts: DropdownTexts | undefined,
+    value: any,
+  ): string => {
     if (!Array.isArray(value))
       return (
         this.optionByValue(value)?.[this.display] ||
-        (this.texts?.placeholder ?? 'Select')
+        (dropdownTexts?.placeholder ?? 'Select')
       )
 
     const displayValues = value.map(
       (v) => this.optionByValue(v)?.[this.display],
     )
     return displayValues?.length > 2
-      ? `${displayValues.length} ${this.texts?.selected} `
-      : displayValues?.join(', ') || (this.texts?.placeholder ?? 'Select')
+      ? `${displayValues.length} ${dropdownTexts?.selected} `
+      : displayValues?.join(', ') || (dropdownTexts?.placeholder ?? 'Select')
   }
 }
