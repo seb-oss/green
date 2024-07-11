@@ -11,9 +11,22 @@ import './fonts.scss'
 
 import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
-import '../src/components/grid/index.js'
+import '../src/components/layout/grid/index.js'
 
 setCustomElementsManifest(customElements)
+
+export const globalTypes = {
+  style: {
+    name: 'Change Style',
+    defaultValue: '2023',
+    toolbar: {
+      icon: 'lightning',
+      items: ['2016', '2023'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
+}
 
 export default {
   parameters: {
@@ -28,7 +41,8 @@ export default {
       storySort: {
         order: [
           'Welcome',
-          'Components',
+          'Docs',
+          ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',
           ['Architecture'],
           'Contributing',
@@ -37,35 +51,35 @@ export default {
       },
     },
   },
-  decorators: [(storyFn: any) => html`<gds-theme>${storyFn()}</gds-theme>`],
+  decorators: [
+    (storyFn: any, context: any) => {
+      // Initialize previousStyle if it doesn't exist
+      if (typeof context.globals.previousStyle === 'undefined') {
+        context.globals.previousStyle = '2023' // Default to 2023
+      }
+
+      const style = context.globals.style || '2023'
+
+      if (style === '2016') {
+        if (context.globals.previousStyle !== '2016') {
+          registerTransitionalStyles()
+        }
+      } else {
+        if (context.globals.previousStyle === '2016') {
+          document.location.reload()
+        }
+      }
+
+      context.globals.previousStyle = style
+
+      return html`<gds-theme>${storyFn()}</gds-theme>`
+    },
+  ],
 }
 
 @customElement('transitional-styles-toggle')
 class TransitionalStylesToggle extends LitElement {
   protected createRenderRoot() {
     return this
-  }
-
-  #showTransitionalStyles() {
-    registerTransitionalStyles()
-    document.querySelectorAll('[gds-element]').forEach((el: any) => {
-      el.connectedCallback()
-    })
-  }
-
-  render() {
-    return html`<gds-theme>
-      <gds-grid gap="s" style="margin-bottom: 1rem">
-        <gds-button
-          rank="secondary"
-          @click=${() => this.#showTransitionalStyles()}
-        >
-          Show 2016 styles
-        </gds-button>
-        <gds-button rank="secondary" @click=${() => location.reload()}>
-          Show 2023 styles
-        </gds-button>
-      </gds-grid>
-    </gds-theme>`
   }
 }

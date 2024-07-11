@@ -67,6 +67,23 @@ Small.args = {
   ],
 }
 
+export const RenderWithSelectedOption = Template.bind({})
+RenderWithSelectedOption.args = {
+  id: '',
+  texts: { placeholder: 'Not needed...' },
+  value: '',
+  loop: true,
+  multiSelect: false,
+  searchable: false,
+  display: 'label',
+  useValue: 'value',
+  options: [
+    { label: 'Tacos', value: 'tacos' },
+    { label: 'Pizza', value: 'pizza' },
+    { label: 'Im selected', value: 'sushi', selected: true },
+  ],
+}
+
 export const Test = Template.bind({})
 Test.args = {
   id: '',

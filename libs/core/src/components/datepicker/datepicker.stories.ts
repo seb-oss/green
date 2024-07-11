@@ -23,7 +23,7 @@ registerTransitionalStyles()
  * Clicking the calendar icon opens a popover with a calendar view where a date can be chosen.
  */
 const meta: Meta = {
-  title: 'Components/Datepicker',
+  title: 'Docs/Components/Datepicker',
   component: 'gds-datepicker',
   parameters: {
     layout: 'centered',

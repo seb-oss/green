@@ -63,7 +63,6 @@ export interface DropdownOption {
 })
 export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() id?: string
-  @Input() texts?: DropdownTexts
   @Input() loop?: boolean = false
   @Input() display = 'label'
   @Input() useValue = 'value'
@@ -75,7 +74,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() syncPopoverWidth?: boolean
   @Input() size?: 'small' | 'medium'
   @Input() hideLabel?: boolean
-  @Input() maxHeight?: number
+  @Input() maxHeight?: number = 500
   @Input() disableMobileStyles?: boolean
 
   /** @deprecated */
@@ -93,6 +92,18 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
     return this._options
   }
   private _options: DropdownOption[] | undefined
+
+  @Input() set texts(texts: DropdownTexts | undefined) {
+    this._texts = {
+      ...(texts ? texts : {}),
+      select: this.displayTextByValue(this._value),
+    }    
+  }
+
+  get texts(): DropdownTexts | undefined {
+    return this._texts
+  }
+  private _texts: DropdownTexts | undefined
 
   //
   @Input() set multiSelect(value: string | boolean) {

@@ -1,5 +1,61 @@
 # Changelog
 
+## 1.30.0
+
+### Minor Changes
+
+- f302973: **Popover:** Add options for modality, backdrop and positioning
+
+### Patch Changes
+
+- f302973: **Container:** Default to `display: block`
+
+## 1.29.0
+
+### Minor Changes
+
+- 663c34d: **Segmented Control:** Add `disabled` property to `gds-segment`
+
+## 1.28.1
+
+### Patch Changes
+
+- 70f4b1a: Prevent the propagation of grid gap downward
+
+## 1.28.0
+
+### Minor Changes
+
+- 6a7e540: Fix colors to inherit in brand set
+
+## 1.27.0
+
+### Minor Changes
+
+- d50e15a: Add ViewBox prop and new icons
+
+### Patch Changes
+
+- 32df607: **Menu button:** Fix padding regression
+
+## 1.26.0
+
+### Minor Changes
+
+- 70bbc39: New components Card, Container, IMG, Video and tokens upgrade
+
+## 1.25.0
+
+### Minor Changes
+
+- 96d282a: **Calendar:** Add new component
+
+## 1.24.0
+
+### Minor Changes
+
+- d6540f5: **Menu button:** Add new component
+
 ## 1.23.0
 
 ### Minor Changes
