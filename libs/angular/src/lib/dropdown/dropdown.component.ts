@@ -96,8 +96,8 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() set texts(texts: DropdownTexts | undefined) {
     this._texts = {
       ...(texts ? texts : {}),
-      select: this.displayTextByValue(this._value),
-    }    
+      select: this.textToDisplay(texts, this._value),
+    }
   }
 
   get texts(): DropdownTexts | undefined {
