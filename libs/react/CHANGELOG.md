@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.10.0
+
+### Minor Changes
+
+- 525b2c6: **Accordion:** Add `defaultOpen` prop
+
 ## 3.9.0
 
 ### Minor Changes
