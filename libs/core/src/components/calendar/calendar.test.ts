@@ -395,6 +395,19 @@ describe('<gds-calendar>', () => {
         onlyDate(new Date('2024-06-03')),
       )
     })
+
+    it('should accept a custom date label template', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-06-03')}
+          .dateLabelTemplate=${(date: Date) => date.getDate().toString()}
+        ></gds-calendar>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('#dateCell-3')?.getAttribute('aria-label'),
+      ).to.equal('3')
+    })
   })
 
   describe('Accessibility', () => {

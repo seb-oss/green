@@ -165,6 +165,12 @@ export class GdsCalendar extends GdsElement {
   label?: string
 
   /**
+   * A template function to customize the accessible date label.
+   */
+  @property({ attribute: false })
+  dateLabelTemplate = (date: Date) => date.toDateString()
+
+  /**
    * Returns the date cell element for the given day number.
    */
   getDateCell(dayNumber: number) {
@@ -276,7 +282,7 @@ export class GdsCalendar extends GdsElement {
                             isSameDay(this.value, day)
                               ? 'true'
                               : 'false'}"
-                            aria-label="${day.toDateString()}"
+                            aria-label="${this.dateLabelTemplate(day)}"
                             @click=${() =>
                               isDisabled ? null : this.#setSelectedDate(day)}
                             id="dateCell-${day.getDate()}"
