@@ -140,6 +140,12 @@ export class GdsCalendar extends GdsElement {
   showWeekNumbers = false
 
   /**
+   * Whether to hide extraneous days (that fall ouside of current month)
+   */
+  @property({ type: Boolean })
+  hideExtraneousDays = false
+
+  /**
    * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
    * This can only be set through the property, not through an attribute.
    */
@@ -237,43 +243,52 @@ export class GdsCalendar extends GdsElement {
                       isOutsideCurrentMonth ||
                       (this.disabledWeekends && isWeekend)
 
-                    return html`
-                      <td
-                        role="${ifDefined(isDisabled ? undefined : 'gridcell')}"
-                        class="${classMap({
-                          'custom-date': Boolean(customization),
-                          disabled: Boolean(isDisabled),
-                          today: isSameDay(currentDate, day),
-                        })}"
-                        ?disabled=${isDisabled}
-                        tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
-                        aria-selected="${this.value &&
-                        isSameDay(this.value, day)
-                          ? 'true'
-                          : 'false'}"
-                        aria-label="${day.toDateString()}"
-                        @click=${() =>
-                          isDisabled ? null : this.#setSelectedDate(day)}
-                        id="dateCell-${day.getDate()}"
-                      >
-                        <span
-                          class="number"
-                          style="--_color: ${displayOptions
-                            ? displayOptions?.color
-                            : ''}"
-                          >${day.getDate()}</span
-                        >
+                    const shouldRenderBlank =
+                      this.hideExtraneousDays && isOutsideCurrentMonth
 
-                        ${when(
-                          displayOptions.indicator,
-                          () =>
-                            html`<span
-                              class="indicator-${displayOptions?.indicator}"
-                              style="--_color: ${displayOptions?.color}"
-                            ></span>`,
-                        )}
-                      </td>
-                    `
+                    return shouldRenderBlank
+                      ? html`<td inert></td>`
+                      : html`
+                          <td
+                            role="${ifDefined(
+                              isDisabled ? undefined : 'gridcell',
+                            )}"
+                            class="${classMap({
+                              'custom-date': Boolean(customization),
+                              disabled: Boolean(isDisabled),
+                              today: isSameDay(currentDate, day),
+                            })}"
+                            ?disabled=${isDisabled}
+                            tabindex="${isSameDay(this.focusedDate, day)
+                              ? 0
+                              : -1}"
+                            aria-selected="${this.value &&
+                            isSameDay(this.value, day)
+                              ? 'true'
+                              : 'false'}"
+                            aria-label="${day.toDateString()}"
+                            @click=${() =>
+                              isDisabled ? null : this.#setSelectedDate(day)}
+                            id="dateCell-${day.getDate()}"
+                          >
+                            <span
+                              class="number"
+                              style="--_color: ${displayOptions
+                                ? displayOptions?.color
+                                : ''}"
+                              >${day.getDate()}</span
+                            >
+
+                            ${when(
+                              displayOptions.indicator,
+                              () =>
+                                html`<span
+                                  class="indicator-${displayOptions?.indicator}"
+                                  style="--_color: ${displayOptions?.color}"
+                                ></span>`,
+                            )}
+                          </td>
+                        `
                   })}
                 </tr>
               `,
