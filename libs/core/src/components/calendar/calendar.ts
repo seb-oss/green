@@ -146,6 +146,12 @@ export class GdsCalendar extends GdsElement {
   hideExtraneousDays = false
 
   /**
+   * Whether to hide the day names shown above the calendar.
+   */
+  @property({ type: Boolean })
+  hideDayNames = false
+
+  /**
    * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
    * This can only be set through the property, not through an attribute.
    */
@@ -184,18 +190,22 @@ export class GdsCalendar extends GdsElement {
     const currentDate = new Date()
 
     return html`<table role="grid" aria-label="${ifDefined(this.label)}">
-      <thead role="rowgroup">
-        <tr role="row">
-          ${when(this.showWeekNumbers, () => html`<th></th>`)}
-          <th>${msg('Mon')}</th>
-          <th>${msg('Tue')}</th>
-          <th>${msg('Wed')}</th>
-          <th>${msg('Thu')}</th>
-          <th>${msg('Fri')}</th>
-          <th>${msg('Sat')}</th>
-          <th>${msg('Sun')}</th>
-        </tr>
-      </thead>
+      ${when(
+        !this.hideDayNames,
+        () =>
+          html`<thead role="rowgroup">
+            <tr role="row">
+              ${when(this.showWeekNumbers, () => html`<th></th>`)}
+              <th>${msg('Mon')}</th>
+              <th>${msg('Tue')}</th>
+              <th>${msg('Wed')}</th>
+              <th>${msg('Thu')}</th>
+              <th>${msg('Fri')}</th>
+              <th>${msg('Sat')}</th>
+              <th>${msg('Sun')}</th>
+            </tr>
+          </thead>`,
+      )}
       <tbody role="rowgroup">
         ${renderMonthGridView(
           this.focusedDate,
