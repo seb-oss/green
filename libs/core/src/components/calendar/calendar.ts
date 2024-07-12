@@ -54,7 +54,7 @@ export type CustomizedDate = {
  * A calendar is a widget that allows the user to select a date.
  *
  * @event change - Fired when a date is selected.
- * @event gds-date-focused - Fired when focus has changed.
+ * @event gds-date-focused - Fired when focus is changed. Can be cancelled using `event.preventDefault()`.
  */
 @gdsCustomElement('gds-calendar')
 export class GdsCalendar extends GdsElement {
@@ -367,7 +367,17 @@ export class GdsCalendar extends GdsElement {
       newFocusedDate.getFullYear() >= this.min.getFullYear() &&
       newFocusedDate.getFullYear() <= this.max.getFullYear()
     ) {
-      this.focusedDate = newFocusedDate
+      const proceed = this.dispatchEvent(
+        new CustomEvent('gds-date-focused', {
+          detail: newFocusedDate,
+          bubbles: false,
+          composed: false,
+          cancelable: true,
+        }),
+      )
+      if (proceed) {
+        this.focusedDate = newFocusedDate
+      }
     }
 
     if (handled) {
@@ -376,14 +386,6 @@ export class GdsCalendar extends GdsElement {
 
       this.updateComplete.then(() => {
         this._elFocusedCell?.focus()
-
-        this.dispatchEvent(
-          new CustomEvent('gds-date-focused', {
-            detail: this.focusedDate,
-            bubbles: false,
-            composed: false,
-          }),
-        )
       })
     }
   }
