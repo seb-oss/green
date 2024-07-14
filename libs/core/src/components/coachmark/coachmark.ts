@@ -1,5 +1,5 @@
 import { property, state } from 'lit/decorators.js'
-import { gdsCustomElement ,html} from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import {
   computePosition,
   detectOverflow,
@@ -16,6 +16,16 @@ import styles from './coachmark.styles'
 import { when } from 'lit/directives/when.js'
 import { GdsElement } from '../../gds-element'
 
+/**
+ * @element gds-coachmark
+ * A tooltip container with a slot and an arrow pointing towards the targeted element
+ * depending on the preferred placement,
+ * the coachmark is hidden/disabled when the element is overlapped or out of viewport.
+ *
+ * @slot body - placeholder for the content of the tooltip.
+ *
+ * @event tooltipClosed - dispatched when the tooltip is closed
+ */
 @gdsCustomElement('gds-coachmark')
 export class GdsCoachmark extends GdsElement {
   static styles = styles
@@ -32,15 +42,30 @@ export class GdsCoachmark extends GdsElement {
   #arrowRef: Ref<Element> = createRef()
   #targetedElement: HTMLElement | undefined = undefined
   #autoUpdateCleanupFn: (() => void) | undefined
+
+  /**
+   *Tracks the visibility of the tooltip (readonly)
+   */
   @state() _isVisible = false
+
+  /**
+   *Used to prevent closing the tooltip if it's not visible (readonly)
+   */
   @state() _preventClose = false
+
+  /**
+   *The main coachmark object (provided as an attribute)
+   */
   @property({ attribute: false }) coachmark: GdsCoachmarkObject | null = null
 
   connectedCallback(): void {
     super.connectedCallback()
 
     document.addEventListener('click', () => {
-      this.#closeCoachMark()
+      //safe check for animation and modals
+      setTimeout(() => {
+        this.#closeCoachMark()
+      }, 400)
     })
 
     document.addEventListener('keydown', (event) => {
@@ -242,6 +267,7 @@ export class GdsCoachmark extends GdsElement {
           aria-modal="false"
           ${ref(this.#cardRef) as HTMLElement}
         >
+          ${this.#cardRef.value}
           <slot name="body"></slot>
           <slot name="footer"></slot>
           <div id="gds-arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
