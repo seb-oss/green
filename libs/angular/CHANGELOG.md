@@ -1,5 +1,41 @@
 # Changelog
 
+## 4.3.1
+
+### Patch Changes
+
+- 7cfed86: **Dropdown:** Fix previous texts value being displayed if nothing is selected and `texts` input changed
+
+## 4.3.0
+
+### Minor Changes
+
+- 718186b: Fix not displayed selected dropdown option then texts input changes
+
+### Patch Changes
+
+- Updated dependencies [6a7e540]
+  - @sebgroup/green-core@1.28.0
+
+## 4.2.2
+
+### Patch Changes
+
+- bc76d34: fixing In page wizard style and angular component
+- Updated dependencies [32df607]
+- Updated dependencies [d50e15a]
+- Updated dependencies [bc76d34]
+  - @sebgroup/green-core@1.27.0
+  - @sebgroup/chlorophyll@3.4.3
+
+## 4.2.1
+
+### Patch Changes
+
+- c068ed2: **Dropdown:** Add default value for `maxHeight`
+- Updated dependencies [d6540f5]
+  - @sebgroup/green-core@1.24.0
+
 ## 4.2.0
 
 ### Minor Changes

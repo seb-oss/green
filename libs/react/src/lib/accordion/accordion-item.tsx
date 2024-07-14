@@ -19,12 +19,13 @@ export interface AccordionItemInterface {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  defaultOpen?: boolean
 }
 
 const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
   const { labelElementLevel, label, subLabel, content } = item
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(item.defaultOpen || false)
 
   const handleOnClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,

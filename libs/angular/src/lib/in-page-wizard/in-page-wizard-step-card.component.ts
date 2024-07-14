@@ -21,6 +21,8 @@ export class NggInPageWizardStepCardComponent {
 
   @Input() public nextBtnText = ''
 
+  @Input() public showNextBtnIcon = true
+
   @Input() public isCompleted = false
 
   @Input() public disableNext = false
@@ -29,6 +31,7 @@ export class NggInPageWizardStepCardComponent {
 
   handleOnEditBtnClick(event: MouseEvent): void {
     this.isActive = !this.isActive
+    this.isCompleted = false
     this.handleEditClick.emit(event)
   }
   handleOnNextBtnClick(event: MouseEvent) {

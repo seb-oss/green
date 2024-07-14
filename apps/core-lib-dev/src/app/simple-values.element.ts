@@ -1,12 +1,12 @@
 import {
-  GdsDropdown,
-  GdsOption,
-  //GdsButton,
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core'
+} from '@sebgroup/green-core/scoping'
 
-import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown/index.js'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),
@@ -16,8 +16,6 @@ export class SimpleValues extends HTMLElement {
   public static observedAttributes = []
 
   connectedCallback() {
-    registerTransitionalStyles()
-
     this.innerHTML = html`
       <form id="my-form">
         <gds-form-validator></gds-form-validator>

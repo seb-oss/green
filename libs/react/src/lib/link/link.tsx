@@ -4,20 +4,24 @@ import classNames from 'classnames'
 
 interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   button?: boolean | ButtonVariant
+  secondary?: boolean
 }
 
 export const Link = ({
   button,
+  secondary,
   children,
   className,
   role,
   ...otherProps
 }: PropsWithChildren<LinkProps>) => {
-  const buttonClassName = classNames(className, { button: button }, button)
+  const linkClassName = classNames(className, { button: button }, button, {
+    'link gds-link-arrow': secondary,
+  })
 
   return (
     <a
-      className={buttonClassName}
+      className={linkClassName}
       role={button ? 'button' : role}
       {...otherProps}
     >
