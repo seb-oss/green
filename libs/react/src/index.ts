@@ -22,6 +22,7 @@ export * from './types'
 export * from './lib/table/components'
 export * from './lib/icons'
 export * from './lib/breadcrumb/breadcrumb'
+export * from './lib/segmented-control/segmented-control'
 
 // Backwards compatibility export
 export { AlertRibbon as Alert } from './lib/alert-ribbon/alert-ribbon'

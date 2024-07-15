@@ -30,7 +30,7 @@ export class GdsContainer extends GdsElement {
   @styleExpressionProperty({
     valueTemplate: (v) => v,
   })
-  display?: string
+  display = 'block'
 
   /**
    * Controls the color property of the container.

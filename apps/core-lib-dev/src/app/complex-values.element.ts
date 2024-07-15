@@ -1,9 +1,12 @@
 import {
-  GdsDropdown,
-  GdsOption,
   htmlTemplateTagFactory,
   getScopedTagName,
-} from '@sebgroup/green-core'
+} from '@sebgroup/green-core/scoping'
+
+import {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown/index.js'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),

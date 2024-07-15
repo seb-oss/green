@@ -43,6 +43,17 @@ export const Basic: Story = {
   },
 }
 
+export const Minimal: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-calendar
+      label="Pick a day"
+      hideDayNames="true"
+      hideExtraneousDays="true"
+    ></gds-calendar>
+  `,
+}
+
 /**
  * This is an example of a simple inline datepicker using the calendar
  * component. It demonstrates how to control the view in the calendar,
