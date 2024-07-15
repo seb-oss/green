@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.31.0
+
+### Minor Changes
+
+- 8b92d27: **Calendar:** Add ability to customize aria-label for dates
+- 8b92d27: **Calendar:** Add ability to cancel focus event
+- 8b92d27: **Calender:** Add option to hide day name header
+- 8b92d27: **Calendar:** Add option to hide days outside of current month
+
 ## 1.30.0
 
 ### Minor Changes
