@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.11.0
+
+### Minor Changes
+
+- 4c2bdb7: **Accordion:** Add `customLabel` prop, and add support for scrollable content`
+
 ## 3.10.0
 
 ### Minor Changes
