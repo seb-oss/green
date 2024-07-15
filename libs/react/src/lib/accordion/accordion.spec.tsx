@@ -17,7 +17,7 @@ const items: AccordionItemInterface[] = [
     labelElementLevel: 2,
   },
   {
-    label: 'This is the second Accordion label',
+    customLabel: <>This is the second Accordion label</>,
     subLabel: 'This is the second Accordion sub label',
     content: (
       <>
