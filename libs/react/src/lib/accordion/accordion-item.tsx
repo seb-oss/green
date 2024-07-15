@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, RefObject, useRef, useState } from 'react'
 
 interface AccordionItemProps {
   item: AccordionItemInterface
@@ -7,7 +7,8 @@ interface AccordionItemProps {
 }
 
 export interface AccordionItemInterface {
-  label: string
+  label?: string
+  customLabel?: ReactNode
   /*
    * https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
    * Each accordion button needs to be wrapped in a heading that has a set value for aria-level.
@@ -22,7 +23,8 @@ export interface AccordionItemInterface {
 }
 
 const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
-  const { labelElementLevel, label, subLabel, content } = item
+  const { labelElementLevel, label, subLabel, content, customLabel } = item
+  const contentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -33,6 +35,12 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
     setIsOpen((state) => {
       if (!state) {
         item.onOpen && item.onOpen(event)
+        window.requestAnimationFrame(() => {
+          contentRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+          })
+        })
       } else {
         item.onClose && item.onClose(event)
       }
@@ -51,7 +59,7 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
             handleOnClick(event)
           }}
         >
-          <span>{label}</span>
+          {customLabel ? customLabel : <span>{label}</span>}
           {subLabel && <span>{subLabel}</span>}
           <svg
             viewBox="0 0 24 24"
@@ -71,7 +79,7 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
         aria-labelledby={`accordion-item-button-${index}-${uuid}`}
         hidden={!isOpen}
       >
-        <div>{content}</div>
+        <div ref={contentRef}>{content}</div>
       </div>
     </div>
   )
