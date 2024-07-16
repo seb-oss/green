@@ -1,4 +1,3 @@
-
 import { html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -55,7 +54,7 @@ export type CustomizedDate = {
  * A calendar is a widget that allows the user to select a date.
  *
  * @event change - Fired when a date is selected.
- * @event gds-date-focused - Fired when focus is changed. Can be cancelled using `event.preventDefault()`.
+ * @event gds-date-focused - Fired when focus has changed.
  */
 @gdsCustomElement('gds-calendar')
 export class GdsCalendar extends GdsElement {
@@ -141,18 +140,6 @@ export class GdsCalendar extends GdsElement {
   showWeekNumbers = false
 
   /**
-   * Whether to hide extraneous days (that fall ouside of current month)
-   */
-  @property({ type: Boolean })
-  hideExtraneousDays = false
-
-  /**
-   * Whether to hide the day names shown above the calendar.
-   */
-  @property({ type: Boolean })
-  hideDayNames = false
-
-  /**
    * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
    * This can only be set through the property, not through an attribute.
    */
@@ -164,12 +151,6 @@ export class GdsCalendar extends GdsElement {
    */
   @property()
   label?: string
-
-  /**
-   * A template function to customize the accessible date label.
-   */
-  @property({ attribute: false })
-  dateLabelTemplate = (date: Date) => date.toDateString()
 
   /**
    * Returns the date cell element for the given day number.
@@ -197,22 +178,18 @@ export class GdsCalendar extends GdsElement {
     const currentDate = new Date()
 
     return html`<table role="grid" aria-label="${ifDefined(this.label)}">
-      ${when(
-        !this.hideDayNames,
-        () =>
-          html`<thead role="rowgroup">
-            <tr role="row">
-              ${when(this.showWeekNumbers, () => html`<th></th>`)}
-              <th>${msg('Mon')}</th>
-              <th>${msg('Tue')}</th>
-              <th>${msg('Wed')}</th>
-              <th>${msg('Thu')}</th>
-              <th>${msg('Fri')}</th>
-              <th>${msg('Sat')}</th>
-              <th>${msg('Sun')}</th>
-            </tr>
-          </thead>`,
-      )}
+      <thead role="rowgroup">
+        <tr role="row">
+          ${when(this.showWeekNumbers, () => html`<th></th>`)}
+          <th>${msg('Mon')}</th>
+          <th>${msg('Tue')}</th>
+          <th>${msg('Wed')}</th>
+          <th>${msg('Thu')}</th>
+          <th>${msg('Fri')}</th>
+          <th>${msg('Sat')}</th>
+          <th>${msg('Sun')}</th>
+        </tr>
+      </thead>
       <tbody role="rowgroup">
         ${renderMonthGridView(
           this.focusedDate,
@@ -260,52 +237,43 @@ export class GdsCalendar extends GdsElement {
                       isOutsideCurrentMonth ||
                       (this.disabledWeekends && isWeekend)
 
-                    const shouldRenderBlank =
-                      this.hideExtraneousDays && isOutsideCurrentMonth
+                    return html`
+                      <td
+                        role="${ifDefined(isDisabled ? undefined : 'gridcell')}"
+                        class="${classMap({
+                          'custom-date': Boolean(customization),
+                          disabled: Boolean(isDisabled),
+                          today: isSameDay(currentDate, day),
+                        })}"
+                        ?disabled=${isDisabled}
+                        tabindex="${isSameDay(this.focusedDate, day) ? 0 : -1}"
+                        aria-selected="${this.value &&
+                        isSameDay(this.value, day)
+                          ? 'true'
+                          : 'false'}"
+                        aria-label="${day.toDateString()}"
+                        @click=${() =>
+                          isDisabled ? null : this.#setSelectedDate(day)}
+                        id="dateCell-${day.getDate()}"
+                      >
+                        <span
+                          class="number"
+                          style="--_color: ${displayOptions
+                            ? displayOptions?.color
+                            : ''}"
+                          >${day.getDate()}</span
+                        >
 
-                    return shouldRenderBlank
-                      ? html`<td inert></td>`
-                      : html`
-                          <td
-                            role="${ifDefined(
-                              isDisabled ? undefined : 'gridcell',
-                            )}"
-                            class="${classMap({
-                              'custom-date': Boolean(customization),
-                              disabled: Boolean(isDisabled),
-                              today: isSameDay(currentDate, day),
-                            })}"
-                            ?disabled=${isDisabled}
-                            tabindex="${isSameDay(this.focusedDate, day)
-                              ? 0
-                              : -1}"
-                            aria-selected="${this.value &&
-                            isSameDay(this.value, day)
-                              ? 'true'
-                              : 'false'}"
-                            aria-label="${this.dateLabelTemplate(day)}"
-                            @click=${() =>
-                              isDisabled ? null : this.#setSelectedDate(day)}
-                            id="dateCell-${day.getDate()}"
-                          >
-                            <span
-                              class="number"
-                              style="--_color: ${displayOptions
-                                ? displayOptions?.color
-                                : ''}"
-                              >${day.getDate()}</span
-                            >
-
-                            ${when(
-                              displayOptions.indicator,
-                              () =>
-                                html`<span
-                                  class="indicator-${displayOptions?.indicator}"
-                                  style="--_color: ${displayOptions?.color}"
-                                ></span>`,
-                            )}
-                          </td>
-                        `
+                        ${when(
+                          displayOptions.indicator,
+                          () =>
+                            html`<span
+                              class="indicator-${displayOptions?.indicator}"
+                              style="--_color: ${displayOptions?.color}"
+                            ></span>`,
+                        )}
+                      </td>
+                    `
                   })}
                 </tr>
               `,
@@ -374,17 +342,7 @@ export class GdsCalendar extends GdsElement {
       newFocusedDate.getFullYear() >= this.min.getFullYear() &&
       newFocusedDate.getFullYear() <= this.max.getFullYear()
     ) {
-      const proceed = this.dispatchEvent(
-        new CustomEvent('gds-date-focused', {
-          detail: newFocusedDate,
-          bubbles: false,
-          composed: false,
-          cancelable: true,
-        }),
-      )
-      if (proceed) {
-        this.focusedDate = newFocusedDate
-      }
+      this.focusedDate = newFocusedDate
     }
 
     if (handled) {
@@ -393,6 +351,14 @@ export class GdsCalendar extends GdsElement {
 
       this.updateComplete.then(() => {
         this._elFocusedCell?.focus()
+
+        this.dispatchEvent(
+          new CustomEvent('gds-date-focused', {
+            detail: this.focusedDate,
+            bubbles: false,
+            composed: false,
+          }),
+        )
       })
     }
   }

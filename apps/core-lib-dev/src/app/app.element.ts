@@ -3,7 +3,7 @@ import { property, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 
 import { html } from '@sebgroup/green-core/scoping'
-// // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+// import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 import '@sebgroup/green-core/components/icon/icons/flag.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'

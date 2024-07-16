@@ -250,24 +250,17 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   }
 
   private displayTextByValue = (value: any) => {
-    return this.textToDisplay(this.texts, value)
-  }
-
-  private textToDisplay = (
-    dropdownTexts: DropdownTexts | undefined,
-    value: any,
-  ): string => {
     if (!Array.isArray(value))
       return (
         this.optionByValue(value)?.[this.display] ||
-        (dropdownTexts?.placeholder ?? 'Select')
+        (this.texts?.placeholder ?? 'Select')
       )
 
     const displayValues = value.map(
       (v) => this.optionByValue(v)?.[this.display],
     )
     return displayValues?.length > 2
-      ? `${displayValues.length} ${dropdownTexts?.selected} `
-      : displayValues?.join(', ') || (dropdownTexts?.placeholder ?? 'Select')
+      ? `${displayValues.length} ${this.texts?.selected} `
+      : displayValues?.join(', ') || (this.texts?.placeholder ?? 'Select')
   }
 }
