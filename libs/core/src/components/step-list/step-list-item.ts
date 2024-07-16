@@ -1,7 +1,7 @@
 import { LitElement, PropertyValues, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import "@sebgroup/green-core/components/icon/icons/checkmark.js";
-import { html } from "@sebgroup/green-core/scoping";
+import "../icon/icons/checkmark.js";
+import { html } from "../../scoping.js";
 
 enum LineColor {
   Green = "#45B400",

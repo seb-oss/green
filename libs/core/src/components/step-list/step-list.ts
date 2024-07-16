@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { constrainSlots } from '@sebgroup/green-core/utils/helpers';
+import { constrainSlots } from '../../utils/helpers';
 
 @customElement('gds-step-list')
 export class GdsStepList extends LitElement {
