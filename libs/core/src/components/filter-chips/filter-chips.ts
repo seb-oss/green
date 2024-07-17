@@ -90,6 +90,10 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     </div>`
   }
 
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elSlot.assignedElements()[0] as HTMLElement
+  }
+
   #handleChipClick = (event: Event) => {
     const clickedChip = this.chips.find(
       (s) => s === event.target || s.contains(event.target as Node),

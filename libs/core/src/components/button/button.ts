@@ -104,6 +104,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   download?: string
 
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
+  @query('.button') private _button?: HTMLElement
 
   #isIconButton = false
 
@@ -168,6 +169,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         )}
       </${tag}>
     `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._button as HTMLElement
   }
 
   // Check if the button is an icon button.

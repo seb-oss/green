@@ -287,8 +287,14 @@ export class GdsDropdown<ValueT = any>
         </gds-listbox>
       </gds-popover>
 
-      <span class="form-info"><slot name="message"></slot></span>
+      <span class="form-info"
+        ><slot name="message">${this.validationMessage}</slot></span
+      >
     `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elTriggerBtn
   }
 
   /**

@@ -14,6 +14,13 @@ interface ElementInternalsPolyfill {
   reportValidity(): boolean
 }
 
+export interface GdsValidator {
+  /**
+   * Validate the form control element. Should return the validity state and an optional validation message.
+   */
+  validate(element: GdsFormControlElement): [ValidityState, string] | undefined
+}
+
 /**
  * Abstract base class for Green Core form controls.
  *
@@ -65,6 +72,12 @@ export abstract class GdsFormControlElement<ValueT = any>
     }
   }
 
+  @property({ attribute: false })
+  validator?: GdsValidator
+
+  @property({ type: Boolean })
+  required = false
+
   /**
    * Validation state of the form control. Setting this to true triggers the invalid state of the control.
    *
@@ -79,7 +92,30 @@ export abstract class GdsFormControlElement<ValueT = any>
       toAttribute: (value: boolean) => value?.toString(),
     },
   })
-  invalid = false
+  set invalid(value: boolean) {
+    const oldValue = this.invalid
+    this.#internals.setValidity(
+      {
+        ...this.#internals.validity,
+        customError: value,
+        valid: !value,
+      },
+      this.validationMessage || 'Validation error',
+      // @ts-expect-error
+      this._getValidityAnchor() || undefined,
+    )
+    this.requestUpdate('invalid', oldValue)
+    this.#internals.checkValidity()
+  }
+  get invalid() {
+    return !this.#internals.validity.valid
+  }
+
+  /**
+   * The label of the form control.
+   */
+  @property()
+  label?: string
 
   /**
    * Get or set the value of the form control.
@@ -110,6 +146,26 @@ export abstract class GdsFormControlElement<ValueT = any>
   }
 
   checkValidity() {
+    const anchor = this._getValidityAnchor()
+    if (!anchor || !this.validator) return true
+
+    const oldValue = this.invalid
+
+    // If a validator dosn't return anything, we assume the control is valid.
+    const validity = this.validator.validate(this) || [
+      { ...this.validity, valid: true },
+      '',
+    ]
+
+    this.#internals.setValidity(
+      validity[0],
+      validity[1],
+      // @ts-expect-error
+      this._getValidityAnchor(),
+    )
+
+    this.requestUpdate('invalid', oldValue)
+
     return this.#internals.checkValidity()
   }
 
@@ -117,46 +173,27 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.#internals.form?.addEventListener('reset', this._handleFormReset)
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback()
-    this.#internals.form?.removeEventListener('reset', this._handleFormReset)
-  }
-
-  @watch('invalid')
-  private __handleValidityChange() {
-    this.#internals.setValidity(
-      {
-        badInput: false,
-        customError: this.invalid,
-        patternMismatch: false,
-        rangeOverflow: false,
-        rangeUnderflow: false,
-        stepMismatch: false,
-        tooLong: false,
-        tooShort: false,
-        typeMismatch: false,
-        valueMissing: false,
-        valid: !this.invalid,
-      },
-      this.validationMessage || 'Error message',
-    )
-  }
-
   @watch('value')
   private __handleValueChange() {
     this.#internals.setFormValue(this.value as any)
+    this.checkValidity()
+  }
+
+  formResetCallback() {
+    this.value = undefined
+  }
+
+  formAssociatedCallback(form: HTMLFormElement) {
+    form.addEventListener('submit', this._handleFormSubmit.bind(this))
+  }
+
+  protected _handleFormSubmit(e: Event) {
+    this.checkValidity()
+    if (!this.validity.valid) e.preventDefault()
   }
 
   /**
-   * Event handler for the form reset event.
-   * Can be overridden by subclasses to rcustomize the reset value.
+   * This should return a reference to the HTML element that will recive the focus when the form control is invalid.
    */
-  protected _handleFormReset = () => {
-    this.value = undefined
-  }
+  protected abstract _getValidityAnchor(): HTMLElement
 }

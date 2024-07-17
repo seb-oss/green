@@ -265,7 +265,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         </button>
       </div>
 
-      <div class="form-info"><slot name="message"></slot></div>
+      <div class="form-info">
+        <slot name="message">${this.validationMessage}</slot>
+      </div>
 
       <gds-popover
         .triggerRef=${this._elTrigger}
@@ -374,6 +376,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           </gds-button>
         </div>
       </gds-popover> `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elSpinners[0]
   }
 
   async #renderBackToValidRangeButton() {
