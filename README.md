@@ -73,6 +73,7 @@ So to start Storybook for each component library run:
 
 ```bash
 npx nx run chlorophyll:storybook
+npx nx run core:storybook
 npx nx run react:storybook
 npx nx run angular:storybook
 ```
@@ -85,6 +86,7 @@ npm install nx -g
 
 # And start the storybooks
 nx run chlorophyll:storybook
+nx run core:storybook
 nx run react:storybook
 nx run angular:storybook
 ```
