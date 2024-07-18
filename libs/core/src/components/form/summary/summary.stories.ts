@@ -21,6 +21,7 @@ import '../../icon/icons/rocket.ts'
  */
 const meta: Meta = {
   title: 'Docs/Form validation/Summary',
+  component: 'gds-form-summary',
   parameters: {
     layout: 'centered',
   },
@@ -36,11 +37,6 @@ const DefaultParams: Story = {
       source: { format: true, type: 'dynamic' },
     },
     controls: { expanded: true },
-  },
-  argTypes: {
-    chips: {
-      control: { type: 'array' },
-    },
   },
 }
 
