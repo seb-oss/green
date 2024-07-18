@@ -91,7 +91,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this._elSlot.assignedElements()[0] as HTMLElement
+    return this
   }
 
   #handleChipClick = (event: Event) => {
