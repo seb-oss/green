@@ -30,7 +30,7 @@ describe('<gds-form-summary>', () => {
 
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const formEl = await fixture<GdsFormSummary>(
+      const formEl = await fixture<HTMLFormElement>(
         html`<form>
           <gds-dropdown .invalid=${true} label="Dropdown"></gds-dropdown>
           <gds-form-summary id="summary"></gds-form-summary>
