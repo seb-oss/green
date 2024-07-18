@@ -1,4 +1,5 @@
 import { property } from 'lit/decorators.js'
+import { msg } from '@lit/localize'
 
 import { watch } from '../utils/decorators'
 import { GdsElement } from '../gds-element'
@@ -100,7 +101,7 @@ export abstract class GdsFormControlElement<ValueT = any>
         customError: value,
         valid: !value,
       },
-      this.validationMessage || 'Validation error',
+      this.validationMessage || msg(`Validation error`),
       // @ts-expect-error
       this._getValidityAnchor() || undefined,
     )

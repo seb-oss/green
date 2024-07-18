@@ -1,5 +1,5 @@
 import { when } from 'lit/directives/when.js'
-import { msg } from '@lit/localize'
+import { msg, str } from '@lit/localize'
 import { css } from 'lit'
 import { GdsFormControlElement } from '../../form-control'
 import { GdsElement } from '../../../gds-element'
@@ -66,7 +66,7 @@ export class GdsFormSummary extends GdsElement {
             </gds-container>
             <gds-container>
             ${msg(
-              `There are ${errors.length} errors to correct before you can continue:`,
+              str`There are ${errors.length} errors to correct before you can continue:`,
             )}
             <ul>
               ${errors.map(
