@@ -24,7 +24,7 @@ import type {
 } from '../../primitives/listbox/option'
 import '../popover'
 
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '../form/form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'

@@ -1,8 +1,8 @@
 import { property } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 
-import { watch } from '../utils/decorators'
-import { GdsElement } from '../gds-element'
+import { watch } from '../../utils/decorators'
+import { GdsElement } from '../../gds-element'
 
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null

@@ -1,7 +1,7 @@
 import { when } from 'lit/directives/when.js'
 import { msg, str } from '@lit/localize'
 import { css } from 'lit'
-import { GdsFormControlElement } from '../../form-control'
+import { GdsFormControlElement } from '../form-control'
 import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
 

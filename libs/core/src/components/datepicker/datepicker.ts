@@ -9,7 +9,7 @@ import { nothing } from 'lit'
 import { msg } from '@lit/localize'
 import { isSameDay } from 'date-fns'
 
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '../form/form-control'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'

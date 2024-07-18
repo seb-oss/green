@@ -1,6 +1,6 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from '../form-control'
+import { GdsFormControlElement } from '../form/form-control'
 import {
   gdsCustomElement,
   html,
