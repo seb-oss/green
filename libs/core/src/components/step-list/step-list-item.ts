@@ -83,7 +83,7 @@ export class GdsStepListItem extends LitElement {
   @property({ type: String }) title = ""; // Default title is empty
   @property({ type: String }) headerInfo = "";
 
-  updated(changedProperties: PropertyValues<this>) {
+  updated(changedProperties:PropertyValues<this>) {
     if (changedProperties.has("lineColor")) {
       const colorValue = LineColor[this.lineColor as keyof typeof LineColor];
       this.style.setProperty("--line-color", colorValue);
@@ -117,7 +117,7 @@ export class GdsStepListItem extends LitElement {
         ${this.renderIcon()}
         <div class="line"></div>
         <div class="header" role="header" id="label">
-          ${this.title}
+         <slot name="header"> ${this.title} </slot>
           ${this.headerInfo
             ? html` <div class="header-info">
                 <slot name="header-info" role="note">${this.headerInfo}</slot>
