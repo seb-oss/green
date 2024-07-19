@@ -6,6 +6,13 @@ import '../../datepicker/index.ts'
 import '../../dropdown/index.ts'
 import '../../icon/icons/rocket.ts'
 
+import * as themeTransStyles from '../../theme/theme.trans.styles.ts'
+import * as ddTransStyles from '../../dropdown/dropdown.trans.styles.ts'
+import * as dpTransStyles from '../../datepicker/datepicker.trans.styles.ts'
+themeTransStyles.register()
+ddTransStyles.register()
+dpTransStyles.register()
+
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/form/summary)
  * &nbsp;|&nbsp;
