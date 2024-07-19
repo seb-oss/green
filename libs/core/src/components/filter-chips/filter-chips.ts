@@ -1,6 +1,6 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from '../form-control'
+import { GdsFormControlElement } from '../form/form-control'
 import {
   gdsCustomElement,
   html,
@@ -88,6 +88,10 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
         role="none"
       ></slot>
     </div>`
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this
   }
 
   #handleChipClick = (event: Event) => {
