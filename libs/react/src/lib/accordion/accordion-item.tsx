@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 interface AccordionItemProps {
   item: AccordionItemInterface
@@ -7,8 +7,7 @@ interface AccordionItemProps {
 }
 
 export interface AccordionItemInterface {
-  label?: string
-  customLabel?: ReactNode
+  label: string
   /*
    * https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
    * Each accordion button needs to be wrapped in a heading that has a set value for aria-level.
@@ -20,14 +19,12 @@ export interface AccordionItemInterface {
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-  defaultOpen?: boolean
 }
 
 const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
-  const { labelElementLevel, label, subLabel, content, customLabel } = item
-  const contentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
+  const { labelElementLevel, label, subLabel, content } = item
 
-  const [isOpen, setIsOpen] = useState(item.defaultOpen || false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleOnClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -36,12 +33,6 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
     setIsOpen((state) => {
       if (!state) {
         item.onOpen && item.onOpen(event)
-        window.requestAnimationFrame(() => {
-          contentRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-          })
-        })
       } else {
         item.onClose && item.onClose(event)
       }
@@ -60,7 +51,7 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
             handleOnClick(event)
           }}
         >
-          {customLabel ? customLabel : <span>{label}</span>}
+          <span>{label}</span>
           {subLabel && <span>{subLabel}</span>}
           <svg
             viewBox="0 0 24 24"
@@ -80,7 +71,7 @@ const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
         aria-labelledby={`accordion-item-button-${index}-${uuid}`}
         hidden={!isOpen}
       >
-        <div ref={contentRef}>{content}</div>
+        <div>{content}</div>
       </div>
     </div>
   )
