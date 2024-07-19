@@ -5,12 +5,13 @@ import { choose } from 'lit/directives/choose.js'
 import { html } from '@sebgroup/green-core/scoping'
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+
 import '@sebgroup/green-core/components/icon/icons/flag.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
+import '@sebgroup/green-core/components/context-menu/index.js'
 
 import './chlorophyll.scss'
-import './simple-values.element'
-import './complex-values.element'
+import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
 import './card.element'
@@ -35,7 +36,7 @@ export class AppElement extends LitElement {
   accessor lang = 'sv'
 
   @state()
-  accessor currentView = 'card'
+  accessor currentView = 'form-validation'
 
   connectedCallback() {
     super.connectedCallback()
@@ -71,12 +72,9 @@ export class AppElement extends LitElement {
             .value=${this.currentView}
             @change=${(e: CustomEvent) =>
               (this.currentView = (e.target as any).value)}
-            style="margin-bottom: 1rem;"
+            style="margin-bottom: 1rem; width: 100%;"
           >
-            <gds-segment value="simple-values">Form: Simple values</gds-segment>
-            <gds-segment value="complex-values"
-              >Form: Complex values</gds-segment
-            >
+            <gds-segment value="form-validation">Form validation</gds-segment>
             <gds-segment value="datepicker">Datepicker</gds-segment>
             <gds-segment value="calendar">Calendar</gds-segment>
             <gds-segment value="card">Card</gds-segment>
@@ -84,8 +82,10 @@ export class AppElement extends LitElement {
           ${choose(
             this.currentView,
             [
-              ['simple-values', () => html`<simple-values></simple-values>`],
-              ['complex-values', () => html`<complex-values></complex-values>`],
+              [
+                'form-validation',
+                () => html`<form-validation></form-validation>`,
+              ],
               [
                 'datepicker',
                 () => html`<datepicker-example></datepicker-example>`,

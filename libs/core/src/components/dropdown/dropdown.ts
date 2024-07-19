@@ -24,7 +24,7 @@ import type {
 } from '../../primitives/listbox/option'
 import '../popover'
 
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '../form/form-control'
 
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -287,8 +287,14 @@ export class GdsDropdown<ValueT = any>
         </gds-listbox>
       </gds-popover>
 
-      <span class="form-info"><slot name="message"></slot></span>
+      <span class="form-info"
+        ><slot name="message">${this.validationMessage}</slot></span
+      >
     `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elTriggerBtn
   }
 
   /**
