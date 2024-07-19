@@ -36,7 +36,7 @@ export class AppElement extends LitElement {
   accessor lang = 'sv'
 
   @state()
-  accessor currentView = 'card'
+  accessor currentView = 'form-validation'
 
   connectedCallback() {
     super.connectedCallback()
@@ -82,8 +82,10 @@ export class AppElement extends LitElement {
           ${choose(
             this.currentView,
             [
-              ['simple-values', () => html`<simple-values></simple-values>`],
-              ['complex-values', () => html`<complex-values></complex-values>`],
+              [
+                'form-validation',
+                () => html`<form-validation></form-validation>`,
+              ],
               [
                 'datepicker',
                 () => html`<datepicker-example></datepicker-example>`,
