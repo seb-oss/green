@@ -52,9 +52,9 @@ The system introduces a set of layout oriented components:
   - `<gds-card>`
 
 The hierechy in the list here is intentional. `<gds-container>` is the base component, containing most of the properties,
-while the other ones extends this base with specific specilaizations.
+while the other ones extends this base with specific specializations.
 
-Style expression properties allows you to write resonsive styles in a compact and declarative way. Here is an example:
+Style expression properties allows you to write responsive styles in a compact and declarative way. Here is an example:
 
 ```html
 <!-- Here, we're setting the default padding to `xs`, but increasing it to `m` in `l` viewports -->
@@ -68,7 +68,7 @@ Style expression properties allows you to write resonsive styles in a compact an
 
 This is a very simple example, but it should give you an idea of how the style expression properties work.
 
-Media queries can also be expressed as CSS units and as rangres, for example:
+Media queries can also be expressed as CSS units and as ranges, for example:
 
 - `>m, <xl { ... }` - Above `m`, below `xl`
 - `>500px, <1000px { ... }` - Above 500px, below 1000px
@@ -86,6 +86,16 @@ Semicolon `;` is used to separate media queries, but is only mandatory when the 
 in the first example above.
 
 For more examples, see the stories under Components/Layout.
+
+## Conslusion
+
+In conclusion, this system solves the conflict issue by injecting the CSS directly into the shadow DOM of the component,
+and it solves the payload size issue by generating the CSS that is needed on the fly on the client side. It also solves
+the version lock-in by using the same version scoping mechanism as the rest of the components in Green Core.
+
+Internally, the style expression properties are using a custom property decorator which can be configured for different
+needs on a per-property basis. This keeps the code size in the implementation to a minumum, while still allowing for a
+sufficient level of flexibility.
 
 ## Work in progress
 
