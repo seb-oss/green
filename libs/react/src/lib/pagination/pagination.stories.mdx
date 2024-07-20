@@ -1,0 +1,59 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Markdown,
+  ArgsTable,
+  Preview,
+} from '@storybook/addon-docs'
+import { Pagination } from './pagination'
+import { useState } from 'react'
+
+export const Template = (props) => {
+  const [pageIndex, setPageIndex] = useState(1)
+  return (
+    <Pagination
+      {...props}
+      pageIndex={pageIndex}
+      onClickPage={(index) => setPageIndex(index)}
+    />
+  )
+}
+
+# Pagination
+
+The `Pagination` component allows users to navigate through large sets of items by dividing them into pages.
+It provides controls to switch between pages and displays the current page number.
+
+<Meta title="Components/Pagination" component={Pagination} />
+
+<Canvas>
+  <Story
+    name="Pagination"
+    args={{
+      length: 40,
+      pageSize: 5,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Small
+
+<Canvas>
+  <Story
+    name="Small"
+    args={{
+      length: 0,
+      pageSize: 1,
+      small: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+Here are the props available for the `Pagination` component:
+
+<ArgsTable of={Pagination} />
