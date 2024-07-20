@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/media/img/index.js'
-import '@sebgroup/green-core/components/grid/flex/index.js'
+import '@sebgroup/green-core/components/layout/grid/index.js'
 import '@sebgroup/green-core/components/layout/flex/index.js'
 import '@sebgroup/green-core/components/layout/card/index.js'
 
