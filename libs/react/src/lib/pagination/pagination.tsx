@@ -115,7 +115,7 @@ export const Pagination = ({
             }
           </li>
         )}
-        {(pageList || []).map((page: string | number, index: number) =>
+        {pageList.map((page: string | number, index: number) =>
           page === ELLIPSIS ? (
             <li key={index} aria-hidden="true">
               ...
