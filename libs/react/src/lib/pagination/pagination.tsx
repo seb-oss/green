@@ -80,6 +80,7 @@ export const Pagination = ({
         totalPageCount,
       ]
     }
+    return []
   }, [offset, pageIndex, totalPageCount])
 
   const onPrev = (event: MouseEvent<HTMLAnchorElement>) => {
