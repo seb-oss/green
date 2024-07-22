@@ -28,7 +28,7 @@ const chevronArrowRight = (
   </svg>
 )
 
-const DOTS = '...'
+const ELLIPSIS = '...'
 
 const getPageRange = (start: number, end: number) => {
   const length = end - start + 1
@@ -52,31 +52,31 @@ export const Pagination = ({
     if (offset + 5 >= totalPageCount) {
       return getPageRange(1, totalPageCount)
     }
-    const offsetPageCount = pageIndex + offset
-    const leftSiblingIndex = Math.max(pageIndex - offset, 1)
-    const rightSiblingIndex = Math.min(offsetPageCount, totalPageCount)
-    const showLeftDots = leftSiblingIndex > 2
-    const showRightDots = rightSiblingIndex < totalPageCount - 2
-    const itemCount = 3 + 2 * offset
+    const leftEllipsisIndex = Math.max(pageIndex - offset, 1)
+    const rightEllipsisIndex = Math.min(pageIndex + offset, totalPageCount)
+    const showLeftEllipsis = leftEllipsisIndex > 2
+    const showRightEllipsis = rightEllipsisIndex < totalPageCount - 2
+    const eachItemCount = 3 + 2 * offset
 
-    if (!showLeftDots && showRightDots) {
-      return [...getPageRange(1, itemCount), DOTS, totalPageCount]
+    // show right elipsis
+    if (!showLeftEllipsis && showRightEllipsis) {
+      return [...getPageRange(1, eachItemCount), ELLIPSIS, totalPageCount]
     }
-
-    if (showLeftDots && !showRightDots) {
+    // show left elipsis
+    if (showLeftEllipsis && !showRightEllipsis) {
       return [
         1,
-        DOTS,
-        ...getPageRange(totalPageCount - itemCount + 1, totalPageCount),
+        ELLIPSIS,
+        ...getPageRange(totalPageCount - eachItemCount + 1, totalPageCount),
       ]
     }
-
-    if (showLeftDots && showRightDots) {
+    // show both elipsis
+    if (showLeftEllipsis && showRightEllipsis) {
       return [
         1,
-        DOTS,
-        ...getPageRange(leftSiblingIndex, rightSiblingIndex),
-        DOTS,
+        ELLIPSIS,
+        ...getPageRange(leftEllipsisIndex, rightEllipsisIndex),
+        ELLIPSIS,
         totalPageCount,
       ]
     }
@@ -115,7 +115,7 @@ export const Pagination = ({
           </li>
         )}
         {(pageList || []).map((page: string | number, index: number) =>
-          page === DOTS ? (
+          page === ELLIPSIS ? (
             <li key={index} aria-hidden="true">
               ...
             </li>
