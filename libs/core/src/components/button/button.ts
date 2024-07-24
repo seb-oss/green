@@ -14,7 +14,7 @@ import style from './button.style.css?inline'
 
 import { gdsCustomElement, html as customElementHtml } from '../../scoping'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '../form/form-control'
 import type { GdsElement } from '../../gds-element'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
@@ -104,6 +104,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
   download?: string
 
   @query('slot:not([name])') private _mainSlot?: HTMLSlotElement
+  @query('.button') private _button?: HTMLElement
 
   #isIconButton = false
 
@@ -168,6 +169,10 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         )}
       </${tag}>
     `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._button as HTMLElement
   }
 
   // Check if the button is an icon button.
