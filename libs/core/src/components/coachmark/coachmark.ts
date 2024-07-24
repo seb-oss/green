@@ -64,6 +64,7 @@ export class GdsCoachmark extends GdsElement {
     document.addEventListener('click', () => {
       //safe check for animation and modals
       setTimeout(() => {
+        this.#updateCoachmarks()
         this.#closeCoachMark()
       }, 400)
     })
