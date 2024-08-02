@@ -1,5 +1,16 @@
 import * as StyleDictionary from 'style-dictionary'
 import * as tinycolor from 'tinycolor2'
+import * as lodash from 'lodash'
+
+const uiColorFromValue = (
+  value: any,
+): string => {
+  const { r, g, b, a } = tinycolor(value).toRgb()
+  const rFixed = (r / 255.0).toFixed(3)
+  const gFixed = (g / 255.0).toFixed(3)
+  const bFixed = (b / 255.0).toFixed(3)
+  return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`
+}
 
 const transforms: Record<
   string,
@@ -77,6 +88,15 @@ const transforms: Record<
       return value.setAlpha(token.alpha).toString()
     },
   },
+  'green/name/nativeCamel': {
+    name: 'green/name/nativeCamel',
+    type: 'name',
+    transformer: (token: StyleDictionary.DesignToken) => {
+      // Types will be referenced in class names and can be stricken from each value
+      let simplePath = token.path.slice(2, token.path.length)
+      return lodash.camelCase(simplePath)
+    },
+  },
   'green/color/UIColorSwift': {
     name: 'green/color/UIColorSwift',
     type: 'value',
@@ -87,6 +107,25 @@ const transforms: Record<
       const gFixed = (g / 255.0).toFixed(3)
       const bFixed = (b / 255.0).toFixed(3)
       return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`
+    },
+  },
+  'green/color/UIColorDynamicSwift': {
+    name: 'green/color/UIColorDynamicSwift',
+    type: 'value',
+    matcher: (token) => token.path.includes('color'),
+    transformer: function (token) {
+      let lightColor = uiColorFromValue(token.value)
+      let darkColor
+      if (token.darkValue) {
+        darkColor = uiColorFromValue(token.darkValue)
+      } else {
+        darkColor = lightColor
+      }
+
+      return `traits.userInterface == .dark ?
+             ${lightColor} :
+             ${darkColor}
+          `
     },
   },
 }

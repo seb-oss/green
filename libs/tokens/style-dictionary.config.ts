@@ -381,7 +381,7 @@ const config: StyleDictionary.Config = {
        */
       transforms: [
         'attribute/cti',
-        'name/cti/camel',
+        'green/name/nativeCamel',
         'green/color/UIColorSwift',
         'content/swift/literal',
         'asset/swift/literal',
@@ -390,30 +390,54 @@ const config: StyleDictionary.Config = {
       ],
       files: [
         {
-          destination: 'light-colors.swift',
+          destination: 'Package.swift',
+          format: 'green/ios-swift-package',
+          packageName: 'SebGreenTokens',
+          options: {
+            platformVersion: '15',
+            targets: ['SebGreenTokens'],
+          }
+        },
+        {
+          destination: 'Sources/SebGreenTokens/Colors/LightModeColors.swift',
           format: 'green/ios-swift-class',
           filter: 'is2023Color',
+          className: 'LightModeColors',
+          packageName: 'SebGreenTokens',
           options: {
             colorScheme: 'light',
           },
         },
         {
-          destination: 'dark-colors.swift',
+          destination: 'Sources/SebGreenTokens/Colors/DarkModeColors.swift',
           format: 'green/ios-swift-class',
           filter: 'is2023Color',
+          className: 'DarkModeColors',
+          packageName: 'SebGreenTokens',
           options: {
             colorScheme: 'dark',
           },
         },
         {
-          destination: 'dimentions.swift',
-          format: 'green/ios-swift-class',
-          filter: 'is2023Size',
+          destination: 'Sources/SebGreenTokens/Colors/Colors.swift',
+          format: 'green/ios-swift-colors',
+          filter: 'is2023Color',
+          className: 'Colors',
+          packageName: 'SebGreenTokens',
         },
         {
-          destination: 'radii.swift',
+          destination: 'Sources/SebGreenTokens/Dimensions.swift',
+          format: 'green/ios-swift-class',
+          filter: 'is2023Size',
+          className: 'Dimensions',
+          packageName: 'SebGreenTokens',
+        },
+        {
+          destination: 'Sources/SebGreenTokens/Radii.swift',
           format: 'green/ios-swift-class',
           filter: 'is2023Radii',
+          className: 'Radii',
+          packageName: 'SebGreenTokens',
         },
       ],
     },

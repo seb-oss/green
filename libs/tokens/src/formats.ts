@@ -215,6 +215,18 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  'green/ios-swift-package': {
+    name: 'green/ios-swift-package',
+    formatter: function({ options, file }) {
+      const template = _template(
+        fs.readFileSync(
+          process.cwd() +
+            '/libs/tokens/src/templates/ios/spm.package.template',
+        ),
+      )
+      return template({ file, options, fileHeader })
+    },
+  },
   'green/ios-swift-class': {
     name: 'green/ios-swift-class',
     formatter: function ({ dictionary, options, file, platform }) {
@@ -232,11 +244,12 @@ const formats: Record<string, Format> = {
 
       let allTokens
       const { outputReferences } = options
-      options = setSwiftFileProperties(
+      var optionString = setSwiftFileProperties(
         options,
         'class',
         platform.transformGroup,
       )
+      options = eval(optionString)
       const formatProperty = createPropertyFormatter({
         outputReferences,
         dictionary,
@@ -253,6 +266,40 @@ const formats: Record<string, Format> = {
 
       allTokens = useColorScheme(allTokens, options)
 
+      return template({ allTokens, file, options, formatProperty, fileHeader })
+    },
+  },
+  'green/ios-swift-colors': {
+    name: 'green/ios-swift-colors',
+    formatter: function ({ dictionary, options, file, platform }) {
+      const template = _template(
+        fs.readFileSync(
+          process.cwd() +
+          '/libs/tokens/src/templates/ios/swift.colors.template',
+        ),
+      )
+      let allTokens
+      const { outputReferences } = options
+      var optionString = setSwiftFileProperties(
+        options,
+        'class',
+        platform.transformGroup,
+      )
+      options = eval(optionString)
+      const formatProperty = createPropertyFormatter({
+        outputReferences,
+        dictionary,
+        formatting: {
+          suffix: '',
+        },
+      })
+
+      if (outputReferences) {
+        allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
+      } else {
+        allTokens = [...dictionary.allTokens].sort(sortByName)
+      }
+      console.log("Name: " + allTokens[0].name + ", path: " + allTokens[0].path)
       return template({ allTokens, file, options, formatProperty, fileHeader })
     },
   },
