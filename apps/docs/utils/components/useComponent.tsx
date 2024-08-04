@@ -50,3 +50,18 @@ const useComponent = (componentNames: (keyof typeof components)[]) => {
 }
 
 export default useComponent
+
+// const components = {
+//   theme: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/theme/theme.js'),
+//   container: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/layout/container/container.js'),
+//   divider: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/layout/divider/divider.js'),
+//   flex: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/layout/flex/flex.js'),
+//   img: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/media/img/img.js'),
+//   text: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/text/text.js'),
+//   button: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/form/button/button.js'),
+//   icon: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/icon/icon.js'),
+//   video: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/media/video/video.js'),
+//   icons: () => import('https://esm.sh/@sebgroup/green-core@1.32.0/components/icon/icons.js')
+// };
+
+// export default components;
