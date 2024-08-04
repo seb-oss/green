@@ -24,6 +24,7 @@ const nextConfig = {
     esmExternals: true,
     urlImports: ['https://cdn.skypack.dev'],
   },
+  webComponents: true,
   transpilePackages: ['@babel/runtime'],
   output: 'export',
   nx: {

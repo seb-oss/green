@@ -1,6 +1,6 @@
 @layer core {
   @layer layout.reset {
-    * {
+    *:not(gds-theme *) {
       box-sizing: border-box;
       padding: 0;
       margin: 0;
