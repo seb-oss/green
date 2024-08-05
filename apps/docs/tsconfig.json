@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "moduleResolution": "node",
     "types": ["jest", "node"],
     "plugins": [
       {
@@ -24,6 +25,7 @@
       "&/*": ["apps/docs/design/layouts/*"],
       "m/*": ["apps/docs/design/mdx/*"],
       "$/*": ["apps/docs/utils/*"],
+      "@sebgroup/green-core/*": ["dist/libs/core/src/"],
       "public/*": ["apps/docs/public/*"]
     }
   },

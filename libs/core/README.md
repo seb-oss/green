@@ -94,7 +94,7 @@ In your template:
 <gds-button *nggCoreElement>Click me!</gds-button>
 ```
 
-The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
+The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same purpose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
 
 ### Using React
 
