@@ -1,5 +1,7 @@
 import * as fs from 'fs'
 import * as _template from 'lodash.template'
+import * as swift from './templates/ios/swift.tokens'
+
 import {
   Format,
   Options,
@@ -269,15 +271,9 @@ const formats: Record<string, Format> = {
       return template({ allTokens, file, options, formatProperty, fileHeader })
     },
   },
-  'green/ios-swift-colors': {
-    name: 'green/ios-swift-colors',
+  'green/ios-swift-class-tree': {
+    name: 'green/ios-swift-class-tree',
     formatter: function ({ dictionary, options, file, platform }) {
-      const template = _template(
-        fs.readFileSync(
-          process.cwd() +
-          '/libs/tokens/src/templates/ios/swift.colors.template',
-        ),
-      )
       let allTokens
       const { outputReferences } = options
       var optionString = setSwiftFileProperties(
@@ -286,21 +282,29 @@ const formats: Record<string, Format> = {
         platform.transformGroup,
       )
       options = eval(optionString)
-      const formatProperty = createPropertyFormatter({
-        outputReferences,
-        dictionary,
-        formatting: {
-          suffix: '',
-        },
-      })
-
       if (outputReferences) {
         allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
       } else {
         allTokens = [...dictionary.allTokens].sort(sortByName)
       }
-      console.log("Name: " + allTokens[0].name + ", path: " + allTokens[0].path)
-      return template({ allTokens, file, options, formatProperty, fileHeader })
+      allTokens = useColorScheme(allTokens, options)
+      
+      let propertyFormatter
+      if (options.colorType == 'reference') {
+        propertyFormatter = swift.colorReferencePropertyFormatter(options.lightModeObjectName, options.darkModeObjectName, options)
+      } else {
+        const valueFormatter = createPropertyFormatter({
+          outputReferences,
+          dictionary,
+          formatting: {
+            suffix: '',
+          },
+        })
+        propertyFormatter = swift.staticPropertyFormatter(options, valueFormatter)
+      }
+      let tree = swift.treeFromTokens(allTokens, options.type)
+      let fileContent = swift.fileContentFromTree(tree, options, file, propertyFormatter)
+      return fileContent
     },
   },
   'green/android-resources': {

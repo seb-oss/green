@@ -4,6 +4,9 @@ import filters from './src/filters'
 import formats from './src/formats'
 import transforms from './src/transforms'
 
+const swiftPackageName = 'GreenTokens'
+const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
+
 /**
  * Register custom actions
  *
@@ -375,13 +378,14 @@ const config: StyleDictionary.Config = {
     },
     ios: {
       buildPath: 'ios/',
+      sourcePath: swiftSourcePath,
       /**
        * These transforms are an adaptation of the [ios-swift transform group](https://amzn.github.io/style-dictionary/#/transform_groups?id=ios-swift)
        * It needed to be adopted to match our token structure. Since we start the structure with REF & SYS instead of the category.
        */
       transforms: [
         'attribute/cti',
-        'green/name/nativeCamel',
+        'name/cti/camel',
         'green/color/UIColorSwift',
         'content/swift/literal',
         'asset/swift/literal',
@@ -392,52 +396,66 @@ const config: StyleDictionary.Config = {
         {
           destination: 'Package.swift',
           format: 'green/ios-swift-package',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
           options: {
             platformVersion: '15',
             targets: ['SebGreenTokens'],
           }
         },
         {
-          destination: 'Sources/SebGreenTokens/Colors/LightModeColors.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + 'Colors/LightModeColors.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Color',
           className: 'LightModeColors',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
           options: {
+            type: 'color',
             colorScheme: 'light',
           },
         },
         {
-          destination: 'Sources/SebGreenTokens/Colors/DarkModeColors.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + 'Colors/DarkModeColors.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Color',
           className: 'DarkModeColors',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
           options: {
+            type: 'color',
             colorScheme: 'dark',
           },
         },
         {
-          destination: 'Sources/SebGreenTokens/Colors/Colors.swift',
-          format: 'green/ios-swift-colors',
+          destination: swiftSourcePath + '/Colors/Colors.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Color',
           className: 'Colors',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
+          options: {
+            type: 'color',
+            colorType: 'reference',
+            lightModeObjectName: 'LightModeColors',
+            darkModeObjectName: 'DarkModeColors',
+          }
         },
         {
-          destination: 'Sources/SebGreenTokens/Dimensions.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + 'Dimensions.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Size',
           className: 'Dimensions',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
+          options: {
+            type: 'sys'
+          }
         },
         {
-          destination: 'Sources/SebGreenTokens/Radii.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + 'Radii.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Radii',
           className: 'Radii',
-          packageName: 'SebGreenTokens',
+          packageName: swiftPackageName,
+          options: {
+            type: 'sys'
+          }
         },
       ],
     },
