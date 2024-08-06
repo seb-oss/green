@@ -2,7 +2,8 @@
 
 import Alert from '@/alert/aler'
 import Consent from '@/consent/consent'
-import Footer from '@/footer/footer'
+// import Footer from '@/footer/footer'
+import Footer from '@/[new]/footer'
 import Header from '@/header/header'
 import Article from '&/article/article'
 import Main from '&/main/main'
@@ -92,35 +93,13 @@ export default function RootLayout({
           <Main>
             <Alert />
             <Header />
-            <Article>
-              <div>
-                <Theme color-scheme="light">
-                  <Button>Hello</Button>
-                  <Grid columns="xs{1} m{1} l{1}">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                  </Grid>
-                  {/*
-                  <Card>Card</Card> */}
-                  {/* <Button>Button</Button>
-                  <Card>Card</Card>
-                  <Container>Container</Container>
-                  <Divider />
-                  <Flex>Flex</Flex>
-                  <Grid>Grid</Grid>
-                  <Img />
-                  <Text>Text</Text>
-                  <Video /> */}
-                </Theme>
-                <Theme color-scheme="dark">Dark</Theme>
-              </div>
-
-              {children}
-            </Article>
-            <Consent />
-            <Footer />
+            <Article>{children}</Article>
+            {/* <Consent /> */}
+            {/* <Footer /> */}
           </Main>
+          <Theme>
+            <Footer />
+          </Theme>
         </ThemeProvider>
         <Script id="data-layer">
           {`window["dataLayer"] = {

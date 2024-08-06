@@ -10,7 +10,7 @@ Mobile: 425px
 @layer grid.desktop {
   /* Desktop: 1024px - 2560px */
   /* prettier-ignore */
-  gds-grid {
+  gds-grid.old {
     &[columns="1"]  { --gds-c: 1;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="2"]  { --gds-c: 2;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
     &[columns="3"]  { --gds-c: 3;  --gds-grid-col: repeat(var(--gds-c), 1fr) }
@@ -42,7 +42,7 @@ Mobile: 425px
   /* Tablet: 768px */
   /* prettier-ignore */
   @media only screen and (max-width: 768px) {
-  gds-grid {
+  gds-grid.old {
       &[tablet="1"]  { --gds-c: 1  }
       &[tablet="2"]  { --gds-c: 2  }
       &[tablet="3"]  { --gds-c: 3  }
@@ -75,7 +75,7 @@ Mobile: 425px
 /* prettier-ignore */
 @layer grid.mobile {
   @media only screen and (max-width: 425px) {
-    gds-grid {
+    gds-grid.old {
       &[mobile="1"]  { --gds-c: 1  }
       &[mobile="2"]  { --gds-c: 2  }
       &[mobile="3"]  { --gds-c: 3  }
