@@ -10,7 +10,7 @@
     --gds-grid-col-gap: 0px;
   }
 
-  gds-grid {
+  gds-grid.old {
     display: grid;
     width: 100%;
     grid-template-columns: var(--gds-grid-col);

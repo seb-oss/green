@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsFlex } from '@sebgroup/green-core/components/layout/flex'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-flex'),
+  tagName: 'gds-flex',
   elementClass: GdsFlex,
   react: React,
 })

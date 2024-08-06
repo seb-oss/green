@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsCard } from '@sebgroup/green-core/components/layout/card'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-card'),
+  tagName: 'gds-card',
   elementClass: GdsCard,
   react: React,
 })

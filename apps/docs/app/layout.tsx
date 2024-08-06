@@ -13,13 +13,14 @@ import { useEffect } from 'react'
 // import useComponent from '$/components/useComponent'
 // import { Button } from '@/[gds]/button'
 import { Theme } from '@/[gds]/theme'
+import { Button } from '@/[gds]/button'
+import { Grid } from '@/[gds]/grid'
 // import { Card } from '@/[gds]/card'
 // import { Container } from '@/[gds]/container'
 // import { Divider } from '@/[gds]/divider'
 // import { Flex } from '@/[gds]/flex'
-import { Grid } from '@/[gds]/grid'
-import Button from '@/[gds]/button'
-import Card from '@/[gds]/card'
+// import { Grid } from '@/[gds]/grid'
+// import Card from '@/[gds]/card'
 // import { Img } from '@/[gds]/img'
 // import { Text } from '@/[gds]/text'
 // import { Video } from '@/[gds]/video'
@@ -93,14 +94,15 @@ export default function RootLayout({
             <Header />
             <Article>
               <div>
-                <Theme>
-                  <Grid columns={`xs{1} m{3} l{1}`}>
+                <Theme color-scheme="light">
+                  <Button>Hello</Button>
+                  <Grid columns="xs{1} m{1} l{1}">
                     <div>1</div>
                     <div>2</div>
                     <div>3</div>
                   </Grid>
-                  <Button>Hello</Button>
-                  <Card>Card</Card>
+                  {/*
+                  <Card>Card</Card> */}
                   {/* <Button>Button</Button>
                   <Card>Card</Card>
                   <Container>Container</Container>
@@ -111,6 +113,7 @@ export default function RootLayout({
                   <Text>Text</Text>
                   <Video /> */}
                 </Theme>
+                <Theme color-scheme="dark">Dark</Theme>
               </div>
 
               {children}

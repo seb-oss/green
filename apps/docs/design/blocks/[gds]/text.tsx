@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsText } from '@sebgroup/green-core/components/content/text'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-text'),
+  tagName: 'gds-text',
   elementClass: GdsText,
   react: React,
 })

@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsVideo } from '@sebgroup/green-core/components/media/video'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-video'),
+  tagName: 'gds-video',
   elementClass: GdsVideo,
   react: React,
 })

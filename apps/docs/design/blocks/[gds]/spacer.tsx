@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsSpacer } from '@sebgroup/green-core/components/content/spacer'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-spacer'),
+  tagName: 'gds-spacer',
   elementClass: GdsSpacer,
   react: React,
 })

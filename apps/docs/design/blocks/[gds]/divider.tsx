@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsDivider } from '@sebgroup/green-core/components/content/divider'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-divider'),
+  tagName: 'gds-divider',
   elementClass: GdsDivider,
   react: React,
 })
