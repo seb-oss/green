@@ -13,6 +13,7 @@
     "incremental": true,
     "moduleResolution": "node",
     "types": ["jest", "node"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "plugins": [
       {
         "name": "next"
@@ -25,7 +26,7 @@
       "&/*": ["apps/docs/design/layouts/*"],
       "m/*": ["apps/docs/design/mdx/*"],
       "$/*": ["apps/docs/utils/*"],
-      "@sebgroup/green-core/*": ["dist/libs/core/src/"],
+      "@sebgroup/green-core/*": ["dist/libs/core/src/*"],
       "public/*": ["apps/docs/public/*"]
     }
   },

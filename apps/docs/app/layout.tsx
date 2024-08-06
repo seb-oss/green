@@ -10,12 +10,19 @@ import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
 import { useEffect } from 'react'
-import useComponent from '$/components/useComponent'
-import { Button } from '@/[gds]/button'
+// import useComponent from '$/components/useComponent'
+// import { Button } from '@/[gds]/button'
 import { Theme } from '@/[gds]/theme'
-import { Card } from '@/[gds]/card'
-import { Container } from '@/[gds]/container'
-import { Divider } from '@/[gds]/divider'
+// import { Card } from '@/[gds]/card'
+// import { Container } from '@/[gds]/container'
+// import { Divider } from '@/[gds]/divider'
+// import { Flex } from '@/[gds]/flex'
+import { Grid } from '@/[gds]/grid'
+import Button from '@/[gds]/button'
+import Card from '@/[gds]/card'
+// import { Img } from '@/[gds]/img'
+// import { Text } from '@/[gds]/text'
+// import { Video } from '@/[gds]/video'
 
 export default function RootLayout({
   children,
@@ -85,14 +92,26 @@ export default function RootLayout({
             <Alert />
             <Header />
             <Article>
-              <Theme>
-                <Card>
+              <div>
+                <Theme>
+                  <Grid columns={`xs{1} m{3} l{1}`}>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                  </Grid>
+                  <Button>Hello</Button>
+                  <Card>Card</Card>
+                  {/* <Button>Button</Button>
+                  <Card>Card</Card>
+                  <Container>Container</Container>
                   <Divider />
-                  <Container>
-                    <Button>Click me</Button>
-                  </Container>
-                </Card>
-              </Theme>
+                  <Flex>Flex</Flex>
+                  <Grid>Grid</Grid>
+                  <Img />
+                  <Text>Text</Text>
+                  <Video /> */}
+                </Theme>
+              </div>
 
               {children}
             </Article>

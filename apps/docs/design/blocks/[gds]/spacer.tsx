@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react'
 import { createComponent } from '@lit/react'
-import { GdsFlex } from '@sebgroup/green-core/components/layout/flex'
+import { GdsSpacer } from '@sebgroup/green-core/components/content/spacer'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const Core = createComponent({
-  tagName: getScopedTagName('gds-flex'),
-  elementClass: GdsFlex,
+  tagName: getScopedTagName('gds-spacer'),
+  elementClass: GdsSpacer,
   react: React,
 })
 
-export const Flex = React.forwardRef((props: { [key: string]: any }, ref) => {
+export const Spacer = React.forwardRef((props: { [key: string]: any }, ref) => {
   const { children, ...restProps } = props
   const gridRef = useRef(null)
 
@@ -31,6 +31,6 @@ export const Flex = React.forwardRef((props: { [key: string]: any }, ref) => {
   )
 })
 
-Flex.displayName = 'Flex'
+Spacer.displayName = 'Spacer'
 
-export default Flex
+export default Spacer
