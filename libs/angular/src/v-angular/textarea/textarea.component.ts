@@ -11,7 +11,7 @@ import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../shared/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({

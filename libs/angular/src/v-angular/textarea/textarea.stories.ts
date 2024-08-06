@@ -15,7 +15,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '../shared/character-countdown/character-countdown.directive'
+import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
 import { TextareaComponent } from './textarea.component'
 
 export default {
