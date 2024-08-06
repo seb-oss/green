@@ -1,0 +1,34 @@
+@use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
+@use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
+
+:host {
+  @include mixins.dialog-modal-wrapper();
+
+  .sdv-modal-dialog__container {
+    @include mixins.dialog-modal();
+  }
+
+  .sdv-modal-dialog__heading {
+    @include mixins.modal-header();
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: none;
+      font-size: 1rem;
+      background: 0;
+      cursor: pointer;
+
+      &:hover {
+      }
+
+      &:active {
+      }
+    }
+  }
+
+  .sdv-modal-dialog__body {
+    @include mixins.modal-body();
+  }
+}

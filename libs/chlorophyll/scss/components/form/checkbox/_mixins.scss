@@ -43,8 +43,8 @@ $invalid-color: tokens.$intent-danger-background;
     border-radius: var(--gds-comp-checkbox-border-radius);
     background-color: var(--gds-comp-checkbox-container-color);
     flex: 0 0 auto;
-    height: var(--gds-comp-checkbox-container-width);
-    width: var(--gds-comp-checkbox-container-width);
+    height: var(--gds-comp-checkbox-container-width, 1rem);
+    width: var(--gds-comp-checkbox-container-width, 1rem);
     transition:
       color 0.3s ease-in-out,
       all 0.3s ease-in-out;
