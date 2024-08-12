@@ -17,7 +17,7 @@ import './index.ts'
  *
  */
 const meta: Meta = {
-  title: 'Components/Coachmark',
+  title: 'Docs/Components/Coachmark',
   component: 'gds-coachmark',
   parameters: {
     layout: 'centered',
@@ -41,25 +41,14 @@ export const Basic: Story = {
   render: () => html`
     <main>
       ${document.querySelector('gds-coachmark')
-        ? html`the coachmark is already visible in another panel`
-        : html` <p id="targetElement">clicking will close the coachmark</p>
-            <gds-coachmark .coachmark=${coachmarkExample}>
-              <div class="gds-coachmark" slot="body" aria-modal="false">
-                <div>${coachmarkExample.tooltip.content}</div>
+        ? html`The coachmark is already visible in another panel`
+        : html` <p id="targetElement">Clicking will close the coachmark</p>
+            <gds-coachmark placement="top" .target=${['#targetElement']}>
+              <div class="gds-coachmark" aria-modal="false">
+                <div>This is the coachmark content.</div>
               </div>
               <div id="gds-arrow"></div>
             </gds-coachmark>`}
     </main>
   `,
-}
-let coachmarkExample = {
-  id: 'test-coachmark',
-  variant: 'dark',
-  tooltip: {
-    title: 'This is a coachmark title',
-    content: ['This is the coachmark content.'],
-    closeButton: { text: 'Close', ariaLabel: 'Close tooltip' },
-    preferredPlacement: 'top',
-    target: ['#targetElement'],
-  },
 }

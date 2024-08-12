@@ -54,9 +54,23 @@ export class GdsCoachmark extends GdsElement {
   @state() _preventClose = false
 
   /**
-   *The main coachmark object (provided as an attribute)
+   * The placement of the popover relative to the trigger.
+   * Accepts any of the placements supported by Floating UI.
    */
-  @property({ attribute: false }) coachmark: GdsCoachmarkObject | null = null
+  @property()
+  placement: Placement = 'bottom'
+
+  /**
+   * The coachmark will be hidden when overlapped by the list of provided elements (selectors).
+   */
+  @property({ attribute: false })
+  overlappedBy: string[] = []
+
+  /**
+   * List of selectors pointing to the targeted element. Ex. for a target inside a ShadowDOM: ["some-component", "shadowRoot", "target-element"].
+   */
+  @property({ attribute: false })
+  target: string[] = []
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -87,8 +101,8 @@ export class GdsCoachmark extends GdsElement {
   }
 
   firstUpdated() {
-    if (this.coachmark) {
-      this.#targetedElement = this.#findTarget(this.coachmark.tooltip.target)
+    if (this.target.length > 0) {
+      this.#targetedElement = this.#findTarget(this.target)
       this.#updateCoachmarks()
     }
   }
@@ -104,20 +118,23 @@ export class GdsCoachmark extends GdsElement {
   #findTarget(selectors: string[]): HTMLElement | undefined {
     let shadow = false
     let el: HTMLElement | undefined = undefined
-    selectors.forEach((selector) => {
-      if (selector !== 'shadowRoot') {
-        if (!el && !shadow) {
-          el = document.querySelector(selector) as HTMLElement
-        } else if (el && !shadow) {
-          el = el.querySelector(selector) as HTMLElement
-        } else if (el && shadow && el.shadowRoot) {
-          el = el.shadowRoot.querySelector(selector) as HTMLElement
-          shadow = false
-        }
-      } else {
+
+    for (const selector of selectors) {
+      if (selector === 'shadowRoot') {
         shadow = true
+        continue
       }
-    })
+
+      if (!el) {
+        el = document.querySelector(selector) as HTMLElement
+      } else if (shadow && el.shadowRoot) {
+        el = el.shadowRoot.querySelector(selector) as HTMLElement
+        shadow = false
+      } else {
+        el = el.querySelector(selector) as HTMLElement
+      }
+    }
+
     return el
   }
 
@@ -134,13 +151,17 @@ export class GdsCoachmark extends GdsElement {
   }
 
   #checkOverlap(selectors?: string[]): boolean {
-    for (const selector of selectors ?? []) {
+    if (!selectors) return false
+
+    for (const selector of selectors) {
       const el = document.querySelector(selector) as HTMLElement
       if (!el || getComputedStyle(el).visibility === 'hidden') continue
+
       if (this.#checkBoundingRect(this.#targetedElement as HTMLElement, el)) {
         return true
       }
     }
+
     return false
   }
 
@@ -164,7 +185,7 @@ export class GdsCoachmark extends GdsElement {
     arrowEl: HTMLElement,
   ) {
     return computePosition(targetedEl, componentEl, {
-      placement: this.coachmark?.tooltip.preferredPlacement as Placement,
+      placement: this.placement,
       middleware: [
         offset(() => ({
           mainAxis: 16,
@@ -203,9 +224,10 @@ export class GdsCoachmark extends GdsElement {
 
     const isOutOfBound = this.#isElementOutsideView(this.#targetedElement)
     const isVisible = this.#targetedElement.checkVisibility()
-    const isOverlapping = !this.coachmark?.tooltip.overlappedBy
-      ? false
-      : this.#checkOverlap(this.coachmark.tooltip.overlappedBy)
+    const isOverlapping =
+      this.overlappedBy.length === 0
+        ? false
+        : this.#checkOverlap(this.overlappedBy)
 
     return (
       !isOverlapping && !isOutOfBound && isVisible && window.innerWidth > 580
@@ -261,42 +283,18 @@ export class GdsCoachmark extends GdsElement {
 
   render() {
     return html`${when(
-      this.coachmark,
+      this.target.length > 0,
       () => html`
         <div
           class="gds-coachmark"
           aria-modal="false"
           ${ref(this.#cardRef) as HTMLElement}
         >
-          <slot name="body"></slot>
-          <slot name="footer"></slot>
+          <slot></slot>
           <div id="gds-arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
         </div>
       `,
       () => html``,
     )}`
   }
-}
-
-export interface GdsCoachmarkObject {
-  id: string
-  variant: 'light' | 'dark'
-  tooltip: GdsCoachmarkTooltip
-}
-
-export interface GdsCoachmarkTooltip {
-  title?: string
-  content: string[]
-  closeButton: {
-    text: string
-    ariaLabel: string
-  }
-  link?: {
-    url: string
-    text: string
-    target: string
-  }
-  preferredPlacement: 'top' | 'bottom' | 'left' | 'right'
-  target: string[]
-  overlappedBy: string[]
 }
