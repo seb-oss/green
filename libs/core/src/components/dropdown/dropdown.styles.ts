@@ -25,7 +25,7 @@ const style = css`
       width: 100%;
       max-width: 100%;
       cursor: pointer;
-      user-select: none;
+      // user-select: none;
 
       // Motion
       transition:
@@ -33,11 +33,17 @@ const style = css`
         outline-offset,
         outline-width;
 
-      // Icon
-
+      // Hover
       &:hover {
         background-color: var(--gds-sys-color-container-container-dim1);
       }
+    }
+
+    :host(:focus) button {
+      outline: auto;
+      outline-offset: 4px;
+      outline-color: currentColor;
+      outline-width: 2px;
     }
 
     button[aria-expanded='true'] ::part(icon) {
