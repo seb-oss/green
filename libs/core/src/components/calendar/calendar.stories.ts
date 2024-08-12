@@ -17,6 +17,7 @@ const meta: Meta = {
   component: 'gds-calendar',
   parameters: {
     layout: 'centered',
+    disabledWeekends: true,
   },
   tags: ['autodocs'],
 }

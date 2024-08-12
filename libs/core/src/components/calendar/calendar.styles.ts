@@ -7,144 +7,68 @@ const style = css`
     :host {
       display: flex;
       justify-content: center;
-      padding: 10px;
     }
 
     :host table {
-      border-spacing: 0;
+      border-spacing: 4px;
       flex-grow: 1;
       width: 100%;
-    }
-
-    table {
-      border-spacing: 0;
-    }
-
-    th,
-    td {
-      box-sizing: border-box;
-      height: 2.75rem;
-      text-align: center;
-      width: 2.75rem;
+      padding: 1ch;
     }
 
     thead {
-      /* days */
+      box-shadow: 0 1px 0 0 var(--gds-sys-color-base300);
       th {
+        height: 44px;
+        width: 44px;
+        box-sizing: border-box;
+        text-align: center;
         background: var(--gds-sys-color-container-container-bright);
-        border-bottom: solid 1px var(--gds-sys-color-base300);
-        font-weight: var(--gds-text-weight-book);
-        top: 0;
+        font-weight: normal;
       }
     }
 
     tbody {
-      /* week numbers */
-      th {
-        font-weight: var(--gds-text-weight-regular);
-      }
-      /* dates */
       td {
-        border: solid 1px transparent;
-        font-weight: var(--gds-text-weight-book);
+        height: 44px;
+        width: 44px;
+        box-sizing: border-box;
+        text-align: center;
         user-select: none;
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        border-radius: 4px;
+        transition: all 0.2s;
+        outline-style: solid;
+        outline-color: transparent;
+        outline-width: 1px;
+        outline-offset: 2px;
 
-        /* weekend */
-        &.sg-date-holiday:not(.disabled) {
-          background: #ccc;
-          color: #fafafa;
-        }
-
-        /* today */
-        &.today {
-          background: teal;
-          border-radius: 4px;
-          box-shadow: inset 0 0 0 2px currentColor;
-          color: #000;
-        }
-
-        /* hover */
-        &:hover:not(.disabled) {
-          background: #000;
-          border: solid 1px currentColor;
-          border-radius: 4px;
-          color: #fff;
-          cursor: pointer;
-        }
-
-        /* focus */
-        &:focus-visible {
-          // @include common.add-focus();
-          color: red;
-        }
-
-        &:focus-visible:not(.disabled) {
-          border: solid 1px green;
-          border-radius: 4px;
-          cursor: pointer;
-          position: relative;
-          z-index: 0;
-        }
-
-        /* selected */
+        &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: red;
-          border: solid 1px currentColor;
-          border-radius: 4px;
+          background: #333;
+          cursor: pointer;
           color: #fff;
         }
 
-        /* highlighted */
-        &[tabindex='0'] {
-          border-radius: 4px;
+        &.today:not(:hover) {
+          border-color: currentColor;
         }
 
-        /* active (pressed) */
-        &:hover:active:not(.disabled) {
-          background: orange;
-          border: solid 1px currentColor;
-          border-radius: 4px;
-          color: red;
-        }
-
-        /* disabled */
         &.disabled {
           background-color: #f8f8f8;
           color: #adadad;
-          border: solid 1px currentColor;
-          border-radius: 4px;
           cursor: not-allowed;
-          font-weight: var(--gds-text-weight-book);
-
-          // &.sg-date-holiday {
-          //   color: #fca;
-          // }
-          // .number,
-          // .indicator-dot {
-          //   --_color: #fc0 !important;
-          // }
         }
 
-        &.custom-date {
-          position: relative;
+        &:active:not(.disabled) {
+          scale: 0.96;
         }
-      }
 
-      .number {
-        color: var(--_color, 'currentColor');
-      }
-
-      .indicator-dot {
-        display: block;
-        width: 0.375rem;
-        height: 0.375rem;
-        top: 1.5rem;
-        border-radius: 50%;
-        margin: auto;
-        position: absolute;
-        inset-block-end: 0.125rem;
-        inset-inline: 0;
-        background-color: var(--_color);
+        &:focus-visible {
+          outline-color: color-mix(in srgb, currentColor 50%, transparent 50%);
+        }
       }
     }
   }
