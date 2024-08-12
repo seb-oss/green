@@ -39,6 +39,21 @@ const style = css`
       }
     }
 
+    slot[name='trigger'] > span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    // slot[name='trigger'] > svg {
+    // min-width: 100%;
+    // }
+
+    button ::part(icon) {
+      min-width: 24px;
+    }
+
     :host(:focus) button {
       outline: auto;
       outline-offset: 4px;
