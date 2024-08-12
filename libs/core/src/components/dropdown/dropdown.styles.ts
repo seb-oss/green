@@ -25,7 +25,6 @@ const style = css`
       width: 100%;
       max-width: 100%;
       cursor: pointer;
-      // user-select: none;
 
       // Motion
       transition:
@@ -45,10 +44,6 @@ const style = css`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
-    // slot[name='trigger'] > svg {
-    // min-width: 100%;
-    // }
 
     button ::part(icon) {
       min-width: 24px;
