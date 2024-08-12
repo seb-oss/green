@@ -7,6 +7,8 @@ const style = css`
     :host {
       display: flex;
       flex-direction: column;
+      color: var(--gds-sys-color-base800);
+      font-family: inherit;
     }
 
     button {
@@ -15,16 +17,19 @@ const style = css`
       justify-content: space-between;
       align-items: center;
       gap: 1ch;
-      border-radius: var(--gds-space-xs);
-      font-size: var(--gds-text-size-label-input-large);
-      font-weight: var(--gds-text-weight-book);
-      padding-inline: var(--gds-space-m);
-      padding-block: var(--gds-space-s);
-      background-color: var(--gds-sys-color-container-container);
-      border: 1px solid var(--gds-sys-color-stroke-stroke-variant1);
+      border-radius: var(--gds-space-2xs);
+      font-size: var(--gds-text-size-label-medium);
+      line-height: var(--gds-text-line-height-label-medium);
+      font-weight: var(--gds-text-weight-regular);
+      font-family: inherit;
+      padding-inline: var(--gds-space-s);
+      padding-block: var(--gds-space-xs);
+      background-color: var(--gds-sys-color-container-container-bright);
+      border: 1px solid var(--gds-sys-color-base600);
       width: 100%;
       max-width: 100%;
       cursor: pointer;
+      color: currentColor;
 
       // Motion
       transition:
@@ -46,7 +51,9 @@ const style = css`
     }
 
     button ::part(icon) {
-      min-width: 24px;
+      // min-width: 24px;
+      block-size: 1lh;
+      inline-size: 1lh;
     }
 
     :host(:focus) button {
@@ -61,7 +68,7 @@ const style = css`
     }
 
     label {
-      font-weight: var(--gds-text-weight-book);
+      font-weight: var(--gds-text-weight-regular);
       line-height: var(--gds-text-line-height-label-input-large);
       font-size: var(--gds-text-size-label-input-large);
       padding-block: var(--gds-space-2xs);

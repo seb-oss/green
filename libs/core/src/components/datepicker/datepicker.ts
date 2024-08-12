@@ -286,12 +286,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         }}
       >
         <div class="header">
-          <button
+          <gds-button
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
+            rank="tertiary"
           >
             <gds-icon-chevron-left></gds-icon-chevron-left>
-          </button>
+          </gds-button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${this.#handleMonthChange}
@@ -328,12 +329,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (year) => html`<gds-option value=${year}>${year}</gds-option>`,
             )}
           </gds-dropdown>
-          <button
+          <gds-button
             @click=${this.#handleIncrementFocusedMonth}
             aria-label=${msg('Next month')}
+            rank="tertiary"
           >
             <gds-icon-chevron-right></gds-icon-chevron-right>
-          </button>
+          </gds-button>
         </div>
 
         <gds-calendar
