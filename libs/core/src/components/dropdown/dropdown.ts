@@ -9,12 +9,13 @@ import { HTMLTemplateResult } from 'lit'
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
-
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
 } from '../../utils/helpers/custom-element-scoping'
+
+import '../icon/icons/chevron-bottom'
 
 import '../../primitives/listbox'
 import type { GdsListbox } from '../../primitives/listbox'
@@ -26,6 +27,7 @@ import '../popover'
 
 import { GdsFormControlElement } from '../form/form-control'
 
+import { tokens } from '../../tokens.style'
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
 
@@ -48,7 +50,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = styles
+  static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -260,6 +262,12 @@ export class GdsDropdown<ValueT = any>
         >
           <slot name="trigger">
             <span>${unsafeHTML(this.displayValue)}</span>
+            <div class="icon">
+              <gds-icon-chevron-bottom
+                width="24"
+                height="24"
+              ></gds-icon-chevron-bottom>
+            </div>
           </slot>
         </button>
         ${when(
