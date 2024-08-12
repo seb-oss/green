@@ -35,6 +35,7 @@ import '../../components/icon/icons/calendar'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
+import { tokens } from '../../tokens.style'
 import { styles } from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
@@ -58,7 +59,7 @@ type DateFormatLayout = {
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement<Date> {
-  static styles = [styles]
+  static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -211,9 +212,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   render() {
     return html`${when(
-        this.label && !this.hideLabel,
-        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
-      )}
+      this.label && !this.hideLabel,
+      () => html`<label for="spinner-0" id="label">${this.label}</label>`,
+    )}
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
@@ -234,6 +235,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (f, i) =>
                 html`<gds-date-part-spinner
                   id="spinner-${i}"
+                  class="spinner"
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#spinnerState[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
@@ -253,13 +255,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             html`<span>${this._dateFormatLayout.delimiter}</span>`,
           )}
         </div>
-        <button
+        <gds-button
           id="calendar-button"
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
+          rank="tertiary"
         >
           <gds-icon-calendar></gds-icon-calendar>
         </button>
@@ -298,8 +301,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @change=${this.#handleMonthChange}
             .maxHeight=${300}
             label="${msg('Month')}"
-            style="width:120px"
             size="small"
+            class="month-dropdown"
             hide-label
           >
             <gds-option value="0">${msg('January')}</gds-option>

@@ -42,7 +42,7 @@ const style = css`
         transition: all 0.2s;
         outline-style: solid;
         outline-color: transparent;
-        outline-width: 1px;
+        outline-width: 0px;
         outline-offset: 2px;
 
         &:not(.disabled):hover,
@@ -67,7 +67,7 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: color-mix(in srgb, currentColor 50%, transparent 50%);
+          outline-color: color-mix(in srgb, currentColor, transparent 50%);
         }
       }
     }
