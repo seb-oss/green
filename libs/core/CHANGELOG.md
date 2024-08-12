@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.33.0
+
+### Minor Changes
+
+- 0326b38: Adding new coachmark component
+
 ## 1.32.0
 
 ### Minor Changes
