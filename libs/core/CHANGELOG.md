@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.33.0
+
+### Minor Changes
+
+- 0326b38: Adding new coachmark component
+
+## 1.32.0
+
+### Minor Changes
+
+- 6d482b6: **Form validation:** Add a built-in standard way of doing form validation
+
 ## 1.31.0
 
 ### Minor Changes
