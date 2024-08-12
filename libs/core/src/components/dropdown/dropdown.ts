@@ -262,12 +262,7 @@ export class GdsDropdown<ValueT = any>
         >
           <slot name="trigger">
             <span>${unsafeHTML(this.displayValue)}</span>
-            <div class="icon">
-              <gds-icon-chevron-bottom
-                width="24"
-                height="24"
-              ></gds-icon-chevron-bottom>
-            </div>
+            <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
           </slot>
         </button>
         ${when(
