@@ -2,31 +2,13 @@ import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 
 import '@sebgroup/green-core/components/coachmark'
-import type {
-  GdsCoachmark,
-  GdsCoachmarkObject,
-} from '@sebgroup/green-core/components/coachmark'
+import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { sendKeys } from '@web/test-runner-commands'
 import { clickOnElement } from '../../utils/testing'
 
 const html = htmlTemplateTagFactory(testingHtml)
-
-const coachmarkMock = {
-  id: 'someId',
-  variant: 'dark',
-  tooltip: {
-    closeButton: {
-      ariaLabel: 'ariaClose',
-      text: 'Close',
-    },
-    overlappedBy: [''],
-    preferredPlacement: 'bottom',
-    content: ['some content'],
-    target: [],
-  },
-} as GdsCoachmarkObject
 
 describe('<gds-coachmark>', () => {
   describe('Rendering', () => {
@@ -40,41 +22,31 @@ describe('<gds-coachmark>', () => {
         html`<gds-coachmark></gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
 
       await el.updateComplete
 
-      const container = el.shadowRoot?.querySelector('.gds-coachmark')
+      const container = el.shadowRoot?.querySelector(
+        'div[class*="gds-coachmark"]',
+      )
 
       expect(container).to.exist
     })
 
-    it('should render body slot', async () => {
+    it('should render slot', async () => {
       const el = await fixture<GdsCoachmark>(
-        html`<gds-coachmark><span slot="body">Test</span></gds-coachmark>`,
+        html`<gds-coachmark><span>Test</span></gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
 
       await el.updateComplete
 
-      const bodySlot = el.shadowRoot?.querySelector('slot[name="body"]')
+      const slotEl = el.shadowRoot?.querySelector('slot')
+      expect(slotEl).to.exist
 
-      expect(bodySlot).to.exist
-    })
-
-    it('should render footer slot', async () => {
-      const el = await fixture<GdsCoachmark>(
-        html`<gds-coachmark><span slot="footer">Test</span></gds-coachmark>`,
-      )
-
-      el.coachmark = coachmarkMock
-
-      await el.updateComplete
-
-      const footerSlot = el.shadowRoot?.querySelector('slot[name="footer"]')
-
-      expect(footerSlot).to.exist
+      const slottedEl = el.querySelector('span')
+      expect(slottedEl).to.exist
     })
 
     it('should render arrow div', async () => {
@@ -82,7 +54,7 @@ describe('<gds-coachmark>', () => {
         html`<gds-coachmark></gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
 
       await el.updateComplete
 
@@ -96,12 +68,11 @@ describe('<gds-coachmark>', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsCoachmark>(
         html`<gds-coachmark>
-          <div slot="body">Content</div>
-          <div slot="footer">Footer</div>
+          <div>Content</div>
         </gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
 
       await el.updateComplete
 
@@ -113,12 +84,11 @@ describe('<gds-coachmark>', () => {
     it('should close when clicking anywhere', async () => {
       const el = await fixture<GdsCoachmark>(
         html`<gds-coachmark>
-          <div slot="body">Content</div>
-          <div slot="footer">Footer</div>
+          <div>Content</div>
         </gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
       el._isVisible = true
 
       await el.updateComplete
@@ -130,12 +100,11 @@ describe('<gds-coachmark>', () => {
     it('should close when Escape is pressed', async () => {
       const el = await fixture<GdsCoachmark>(
         html`<gds-coachmark>
-          <div slot="body">Content</div>
-          <div slot="footer">Footer</div>
+          <div>Content</div>
         </gds-coachmark>`,
       )
 
-      el.coachmark = coachmarkMock
+      el.target = ['#someTarget']
       el._isVisible = true
 
       await el.updateComplete

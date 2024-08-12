@@ -286,8 +286,9 @@ export class GdsCoachmark extends GdsElement {
       this.target.length > 0,
       () => html`
         <div
+          role="dialog"
           class="gds-coachmark"
-          aria-modal="false"
+          aria-label="Coachmark"
           ${ref(this.#cardRef) as HTMLElement}
         >
           <slot></slot>
