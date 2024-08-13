@@ -143,8 +143,9 @@ describe('<gds-dropdown>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const triggerSlot =
-      el.shadowRoot!.querySelector<HTMLSlotElement>('gds-button')!
+    const triggerSlot = el.shadowRoot!.querySelector<HTMLSlotElement>(
+      `${getScopedTagName('gds-button')} slot`,
+    )!
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
     await expect(triggerContent.textContent).to.equal('Custom trigger')
@@ -227,7 +228,9 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-button'),
+    )!
 
     await timeout(50)
 
@@ -260,7 +263,9 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-button'),
+    )!
 
     await timeout(50)
 
@@ -405,7 +410,9 @@ describe('<gds-dropdown> interactions', () => {
       </gds-dropdown>
     `)
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-button'),
+    )!
 
     await clickOnElement(trigger, 'center')
     await el.updateComplete
@@ -487,7 +494,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
       </gds-dropdown>
     `)
 
-    await sendKeys({ press: 'Tab' })
+    el.focus()
     await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
 
@@ -523,7 +530,9 @@ describe('<gds-dropdown> keyboard navigation', () => {
       </gds-dropdown>
     `)
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-button'),
+    )!
 
     await clickOnElement(trigger, 'center')
     await el.updateComplete
@@ -701,7 +710,7 @@ describe('<gds-dropdown multiple>', () => {
   //     </gds-dropdown>
   //   `)
 
-  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('button'))!
+  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('gds-button'))!
 
   //   await clickOnElement(triggerButton, 'center')
   //   await el.updateComplete
