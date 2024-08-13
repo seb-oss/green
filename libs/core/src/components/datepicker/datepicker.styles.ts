@@ -15,14 +15,27 @@ export const styles = css`
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding-inline: var(--gds-space-2xs);
-      padding-block-start: var(--gds-space-s);
-      gap: var(--gds-space-2xs);
+      padding-inline: var(--gds-space-s);
+      padding-block-start: var(--gds-space-m);
+      gap: var(--gds-space-xs);
       box-sizing: border-box;
 
-      .month-dropdown {
-        flex: 1;
+      ::part(_button) {
+        border-radius: var(--gds-space-2xs);
       }
+
+      ::part(ripple) {
+        border-radius: var(--gds-space-2xs);
+      }
+    }
+
+    .header gds-dropdown.month {
+      min-width: 140px;
+      flex: 1;
+    }
+
+    .header gds-dropdown.year {
+      width: 110px;
     }
 
     .footer {

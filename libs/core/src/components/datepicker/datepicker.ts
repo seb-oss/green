@@ -263,6 +263,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-controls="calendar-popover"
           aria-describedby="label"
           rank="tertiary"
+          size=${this.size}
         >
           <gds-icon-calendar></gds-icon-calendar>
         </button>
@@ -302,7 +303,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             .maxHeight=${300}
             label="${msg('Month')}"
             size="small"
-            class="month-dropdown"
+            class="month"
             hide-label
           >
             <gds-option value="0">${msg('January')}</gds-option>
@@ -324,6 +325,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             .maxHeight=${300}
             label="${msg('Year')}"
             size="small"
+            class="year"
             hide-label
           >
             ${repeat(

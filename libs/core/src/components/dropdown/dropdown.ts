@@ -249,7 +249,7 @@ export class GdsDropdown<ValueT = any>
         .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
-        <button
+        <gds-button
           id="trigger"
           slot="trigger"
           aria-haspopup="listbox"
@@ -258,13 +258,13 @@ export class GdsDropdown<ValueT = any>
           aria-controls="listbox"
           aria-expanded="${this.open}"
           aria-label="${this.label}"
+          rank="secondary"
+          part="trigger"
           class=${classMap({ small: this.size === 'small' })}
         >
-          <slot name="trigger">
-            <span>${unsafeHTML(this.displayValue)}</span>
-            <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-          </slot>
-        </button>
+          <span>${unsafeHTML(this.displayValue)}</span>
+          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+        </gds-button>
         ${when(
           this.searchable,
           () =>
