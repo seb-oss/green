@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common'
-// import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { importProvidersFrom } from '@angular/core'
 
-// import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { faTimes } from '@fortawesome/pro-regular-svg-icons';
-// // import { NgvI18nModule } from '@sebgroup/ngv-i18n';
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import {
   applicationConfig,
   Meta,
@@ -23,18 +22,10 @@ export default {
   component: SlideOutComponent,
   decorators: [
     applicationConfig({
-      providers: [
-        // importProvidersFrom(NgvI18nModule),
-        // {
-        //   provide: APP_INITIALIZER,
-        //   useFactory: (iconLibrary: FaIconLibrary) => async () => iconLibrary.addIcons(faTimes),
-        //   deps: [FaIconLibrary],
-        //   multi: true,
-        // },
-      ],
+      providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule /*FontAwesomeModule, NgvI18nModule*/],
+      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule],
     }),
   ],
   argTypes: {

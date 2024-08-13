@@ -9,6 +9,15 @@ import {
   ViewChild,
 } from '@angular/core'
 
+import {
+  trigger,
+  query,
+  style,
+  animate,
+  transition,
+  group,
+} from '@angular/animations'
+
 // import { faTimes } from '@fortawesome/pro-regular-svg-icons';
 
 import { DialogButtons } from '../modal.types'
@@ -29,6 +38,59 @@ import { DialogButtons } from '../modal.types'
   selector: 'ngv-slideout-modal, ngg-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],
+  animations: [
+    trigger('modalAnimation', [
+      transition(':enter', [
+        query('.gds-slide-out', style({ transform: 'translateX(100%)' }), {
+          optional: true,
+        }),
+        query('.gds-backdrop, [role=dialog]', style({ opacity: '0' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            '.gds-slide-out',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(0)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.gds-backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '1' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+      transition(':leave', [
+        query('.gds-slide-out', style({ transform: 'translateX(0)' }), {
+          optional: true,
+        }),
+        group([
+          query(
+            '.gds-slide-out',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(100%)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.gds-backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '0' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class SlideOutComponent implements OnInit {
   /** @internal */

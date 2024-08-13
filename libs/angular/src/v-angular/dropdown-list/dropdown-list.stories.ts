@@ -1,26 +1,34 @@
-import { CommonModule } from '@angular/common';
-import { importProvidersFrom } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { importProvidersFrom } from '@angular/core'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+} from '@angular/forms'
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-import { TooltipDirective } from '@sebgroup/ngv-tooltip';
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { NgvI18nModule } from '../i18n/i18n.module'
+import { TooltipDirective } from '../tooltip/tooltip.directive'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
-import { InputComponent } from '../input/input.component';
-import { DropdownListComponent } from './dropdown-list.component';
+import { InputComponent } from '../input/input.component'
+import { DropdownListComponent } from './dropdown-list.component'
 
 interface WithExtras {
-  ngModel: string;
-  ngModelChange: (event: Event) => void;
-  toggleOptions: any;
-  getOptions: any;
-  onSelectedValueChanged: (event: Event) => void;
-  keyUp: KeyboardEvent;
+  ngModel: string
+  ngModelChange: (event: Event) => void
+  toggleOptions: any
+  getOptions: any
+  onSelectedValueChanged: (event: Event) => void
+  keyUp: KeyboardEvent
 }
 
 export default {
-  title: 'Core/DropdownList',
+  title: 'V-Angular/DropdownList',
   component: DropdownListComponent,
   decorators: [
     applicationConfig({
@@ -28,10 +36,10 @@ export default {
     }),
     moduleMetadata({
       declarations: [InputComponent, TooltipDirective],
-      imports: [CommonModule, FontAwesomeModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
     }),
   ],
-} as Meta;
+} as Meta
 
 const options = [
   {
@@ -52,27 +60,27 @@ const options = [
     bicfi: 'bicno',
     label: 'Radiohjälpen: bg',
   },
-];
+]
 
-type StoryArgs = DropdownListComponent & WithExtras;
+type StoryArgs = DropdownListComponent & WithExtras
 
 const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
-  let expanded = false;
-  const formControl = new UntypedFormControl();
-  formControl.valueChanges.subscribe();
+  let expanded = false
+  const formControl = new UntypedFormControl()
+  formControl.valueChanges.subscribe()
   const onSelectedValueChanged = (val: any) => {
-    expanded = false;
-    formControl.setValue(val?.accountNo);
-  };
+    expanded = false
+    formControl.setValue(val?.accountNo)
+  }
   return {
     template: /*html*/ `
       <div style="width: 264px">
   
-        <ngv-input style="position: relative; overflow: hidden"
+        <ngg-input style="position: relative; overflow: hidden"
           name="test"
           [formControl]="formControl"
           (click)="$event.stopPropagation();expanded = !expanded">
-        </ngv-input>
+        </ngg-input>
   
         <ngv-dropdown-list
         style="width: 264px"
@@ -87,12 +95,12 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
       onSelectedValueChanged,
       expanded,
     },
-  };
-};
+  }
+}
 
 const primaryArgs = {
   options,
   keyUp: {},
-} as StoryArgs;
+} as StoryArgs
 
-export const Primary = Template.bind({}, primaryArgs);
+export const Primary = Template.bind({}, primaryArgs)

@@ -21,7 +21,7 @@ import { fromEvent, Subscription } from 'rxjs'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
 import { DropdownUtils, Option, OptionBase, OptionGroup } from '../core.utils'
 
 /**

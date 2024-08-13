@@ -57,7 +57,7 @@ const Template: StoryFn<ButtonComponent & StoryClickable> = (
 ) => ({
   template: /*html*/ `
     <div class="button-wrapper button-wrapper--{{ text }}">
-      <ngv-button
+      <ngg-button
         [small]="small"
         [type]="type || 'button'"
         [href]="href"
@@ -65,7 +65,7 @@ const Template: StoryFn<ButtonComponent & StoryClickable> = (
         [buttonStyle]="buttonStyle"
         (ngvClick)="clickAction(text + ' clicked!')">
         {{ text }}
-      </ngv-button>
+      </ngg-button>
     </div>`,
   styles: [
     `

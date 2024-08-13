@@ -33,7 +33,7 @@ const Template: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
     <ngv-fold-out [alignOptions]="alignOptions">
       <div ngvOption>View details</div>
       <div ngvOption>Sign payment</div>
-      <div ngvOption class="my-custom-class">Delete</div>
+      <div ngvOption>Delete</div>
     </ngv-fold-out>
   </div>`,
   styleUrls: ['./fold-out.stories.scss'],
@@ -46,7 +46,7 @@ const TemplateAlt: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
       <ngv-fold-out [alignOptions]="alignOptions">
         <div ngvOption>View details</div>
         <div ngvOption>Sign payment</div>
-        <div ngvOption class="my-custom-class">Delete</div>
+        <div ngvOption>Delete</div>
       </ngv-fold-out>
     </div>`,
   styleUrls: ['./fold-out.stories.scss'],

@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use '../../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../../chlorophyll/scss/components/card/mixins' as card;
 @use '../../../../../chlorophyll/scss/components/icon';
 @use '../../../../../chlorophyll/scss/tokens/shame' as tokens;
 @use '../../../../../chlorophyll/scss/common';
@@ -23,22 +24,44 @@
     width: auto;
   }
 
-  .card {
+  .gds-fold-out__popover {
+    @include card.card();
     width: fit-content;
     display: none;
     padding: 0;
 
-    &.-expanded {
+    &-expanded {
       display: block;
     }
   }
-}
 
-.sdv-field-dropdown__options__label {
-  padding: 0.75rem 1rem;
-  line-height: 1.25;
-  cursor: pointer;
-  display: flex;
-  gap: 0.75rem;
-  user-select: none;
+  ::ng-deep .sdv-field-dropdown__options__label {
+    @include dropdown.select-option;
+    display: flex;
+    gap: 0.75rem;
+    user-select: none;
+  }
+
+  ::ng-deep .sdv-field-dropdown__options__label:hover,
+  ::ng-deep .sdv-field-dropdown__options__label:focus-visible {
+    background-color: var(--grey-400);
+  }
+
+  ::ng-deep .sdv-field-dropdown__options__label:active {
+    background-color: var(--grey-500);
+  }
+
+  ::ng-deep .sdv-field-dropdown__options__label:focus-visible {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
+
+  ::ng-deep .sdv-field-dropdown__options__label[aria-hidden='true'] {
+    display: none;
+  }
+
+  ::ng-deep .sdv-field-dropdown__options__label[highlighted] {
+    @include dropdown.select-option-highlighted;
+    color: #fff;
+  }
 }

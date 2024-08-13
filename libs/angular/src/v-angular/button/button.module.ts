@@ -8,4 +8,4 @@ import { ButtonComponent } from './button.component'
   imports: [CommonModule],
   exports: [ButtonComponent],
 })
-export class NgvButtonModule {}
+export class NggButtonModule {}

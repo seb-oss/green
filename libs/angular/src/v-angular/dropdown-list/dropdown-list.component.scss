@@ -1,83 +1,36 @@
-// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
-// @use 'node_modules/@sebgroup/vanilla/src/functions' as functions;
+@use '../../../../chlorophyll/scss/components/list/mixins' as list;
+
+@use '../../../../chlorophyll/scss/components/dropdown';
 
 :host {
-  .options {
-    padding: 0;
-    width: inherit;
-    list-style: none;
-    //min-height: functions.vanilla-px-to-em(44);
-    //max-height: functions.vanilla-px-to-em(calc(44 * 6.5));
-    overflow: overlay;
-    //border-color: colors.$vanilla-color-darkblue1;
+  .gds-dropdown__options {
+    @include list.base-list;
+    display: none;
 
-    //0.625rem: functions.vanilla-px-to-rem(10, 16);
-    //0.1875rem: functions.vanilla-px-to-rem(3, 16);
-
-    &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 0.625rem;
+    &-expanded {
+      display: block;
     }
+  }
 
-    &::-webkit-scrollbar-track {
-      border: solid 3px transparent;
-    }
+  .gds-dropdown__options__label:hover,
+  .gds-dropdown__options__label:focus-visible {
+    background-color: var(--grey-400);
+  }
 
-    &::-webkit-scrollbar-thumb {
-      //box-shadow: inset 0 0 0.625rem 0.625rem colors.$vanilla-color-grey5;
-      border: solid 0.1875rem transparent;
-      border-radius: 0.5rem;
-    }
+  .gds-dropdown__options__label:active {
+    background-color: var(--grey-500);
+  }
 
-    .option {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+  .gds-dropdown__options__label:focus-visible {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
 
-      &[aria-disabled='true'] {
-        opacity: 0.5;
-        cursor: default;
-      }
+  .gds-dropdown__options__label[aria-hidden='true'] {
+    display: none;
+  }
 
-      &[aria-selected='true'] {
-        //background-color: colors.$vanilla-color-darkblue1;
-        //color: colors.$vanilla-color-white;
-      }
-
-      &:hover,
-      &[aria-focus='true'] {
-        transition: background-color 0.5s;
-        //background-color: colors.$vanilla-color-blue;
-        //color: colors.$vanilla-color-white;
-
-        // Override previous styling for hover is option is disabled.
-        // Could not use :not() since another scss is applied (from dropdown mixins)
-        &[aria-disabled='true'] {
-          transition: unset;
-          background-color: unset;
-          color: unset;
-        }
-      }
-    }
-
-    .group {
-      padding: 0;
-      cursor: default;
-
-      &:hover {
-        color: inherit;
-        background-color: inherit;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      li {
-        //padding-left: functions.vanilla-px-to-em(16);
-        //padding-right: functions.vanilla-px-to-em(16);
-      }
-    }
+  .gds-dropdown__options__label[highlighted] {
+    color: #fff;
   }
 }

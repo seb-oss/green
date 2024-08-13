@@ -12,9 +12,9 @@
   </button>
 
   <div
-    class="card"
+    class="gds-fold-out__popover"
     [ngClass]="{ 'flex-right': alignOptions === 'right' }"
-    [class.-expanded]="shown"
+    [class.gds-fold-out__popover-expanded]="shown"
     (click)="toggleVisibility($event, false)"
   >
     <ng-content></ng-content>

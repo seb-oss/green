@@ -17,7 +17,7 @@
     "../src/v-angular/typeahead/typeahead-input/typeahead-input.stories.ts_",
     "../src/v-angular/dropdown/dropdown.stories.ts_",
     "../src/lib/shared/slug/slug.stories.ts_",
-    "../src/v-angular/input/input.stories.ts_",
+    "../src/v-angular/input/input.stories.ts",
     "../src/v-angular/tooltip/tooltip.stories.ts_",
     "../src/v-angular/input-mask/input-mask.stories.ts_"
   ],

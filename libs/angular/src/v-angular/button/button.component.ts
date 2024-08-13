@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
 
 export type ButtonTypes = 'button' | 'submit' | 'reset' | 'link'
 
@@ -35,7 +35,7 @@ export enum ButtonStyle {
  * https://designlibrary.sebgroup.com/components/component-button
  */
 @Component({
-  selector: 'ngv-button',
+  selector: 'ngg-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })

@@ -2,24 +2,30 @@
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
 
 :host {
+  .gds-slide-out {
+    @include mixins.modal();
+    @include mixins.aside-modal();
+    z-index: 1050;
+
+    &.auto-width {
+      width: auto;
+      max-width: initial;
+    }
+  }
+
   .hide-if-empty:empty {
     display: none;
   }
 
-  .sdv-modal-slideout {
-    z-index: 1050;
-    @include mixins.aside-modal();
+  .gds-backdrop {
+    @include backdrop.add-backdrop(rgba(0, 0, 0, 0.35), 1040);
   }
 
-  .sdv-modal-slideout__container {
-    &.auto-width {
-      // @include include-media.media('>tablet') {
-      //   width: auto;
-      // }
-    }
+  .gds-slide-out__content {
+    @include mixins.modal-body();
   }
 
-  .sdv-modal-slideout__content {
-    white-space: pre-wrap;
+  #sdv-modal-body {
+    flex: 1;
   }
 }

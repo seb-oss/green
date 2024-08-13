@@ -72,7 +72,7 @@ const CustomTemplate: StoryFn<NggModalComponent> = (
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
       <ng-container nggModalHeader>
         <div style="display:flex;align-items:center;">
-          <h3>{{header}}</h3>
+
           <span style="margin-left:10px;" class="badge info">!</span>
         </div>
       </ng-container>

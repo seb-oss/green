@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
 
 /**
  * Checkboxes allow a user to toggle an option on or off, or make multiple choices in a set of available options.

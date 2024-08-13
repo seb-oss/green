@@ -14,7 +14,7 @@ import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../../lib/shared/base-control-value-accessor/base-control-value-accessor.component'
+import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
 
 /** @internal Internal class used to uncheck radio buttons with the matching name. */
 @Injectable()
