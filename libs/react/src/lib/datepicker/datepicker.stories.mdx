@@ -3,6 +3,12 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 
 export const Template = ({ align, ...props }) => <Datepicker {...props} />
 
+export const ValidationTemplate = (props) => (
+  <Datepicker {...props}>
+    <span slot="message">Custom error message</span>
+  </Datepicker>
+)
+
 <Meta title="Components/Datepicker" component={Datepicker} />
 
 # Datepicker
@@ -21,6 +27,23 @@ Datepicker Component
   }}
 >
   {Template.bind({})}
+</Story>
+
+### Validation
+
+<Story
+  name="Validation"
+  args={{
+    label: 'Pick date',
+    onChange: (newDate) => console.log('New date selected: ', newDate),
+    selectedDate: new Date(),
+    invalid: true,
+  }}
+  parameters={{
+    componentIds: ['component-datepicker'],
+  }}
+>
+  {ValidationTemplate.bind({})}
 </Story>
 
 ### Available props

@@ -70,9 +70,24 @@ export interface DatepickerOptions {
    */
   disabledDates?: Date[]
 
-  /** @deprecated Use `value` instead */
+  /**
+   * Whether the Datepicker is invalid.
+   */
+  invalid?: boolean
+
+  /**
+   * Whether the Datepicker is a required form field.
+   */
+  required?: boolean
+
+  /**
+   * @deprecated Use `value` instead
+   */
   selectedDate?: Date
-  /** @deprecated Use `value` instead */
+
+  /**
+   * @deprecated Use `value` instead
+   */
   currentDate?: Date
 }
 
@@ -84,6 +99,8 @@ export const Datepicker = ({
   value,
   showWeeks,
   testId,
+  invalid,
+  required,
   selectedDate,
   currentDate,
   ...props
@@ -112,6 +129,8 @@ export const Datepicker = ({
         size={props.size}
         value={value}
         hideLabel={props.hideLabel}
+        invalid={invalid}
+        required={required}
         {...props}
       />
     </div>
