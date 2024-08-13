@@ -15,9 +15,9 @@ export const styles = css`
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding-inline: 1ch;
-      padding-block-start: 2ch;
-      gap: 1ch;
+      padding-inline: var(--gds-space-2xs);
+      padding-block-start: var(--gds-space-s);
+      gap: var(--gds-space-2xs);
       box-sizing: border-box;
 
       .month-dropdown {
@@ -28,8 +28,8 @@ export const styles = css`
     .footer {
       display: flex;
       justify-content: space-between;
-      padding-inline: 2ch;
-      padding-block-end: 2ch;
+      padding-inline: var(--gds-space-s);
+      padding-block-end: var(--gds-space-s);
     }
 
     label {
@@ -43,7 +43,7 @@ export const styles = css`
     .field {
       display: flex;
       justify-content: space-between;
-      gap: 1ch;
+      gap: var(--gds-space-s);
       border-radius: var(--gds-space-2xs);
       font-size: var(--gds-text-size-label-medium);
       line-height: var(--gds-text-line-height-label-medium);
@@ -53,7 +53,7 @@ export const styles = css`
       padding-inline: var(--gds-space-2xs);
       padding-block: var(--gds-space-2xs);
       background-color: var(--gds-sys-color-container-container-bright);
-      border: 1px solid var(--gds-sys-color-base600);
+      border: var(--gds-space-4xs) solid var(--gds-sys-color-base600);
       max-width: 100%;
       cursor: pointer;
       color: currentColor;
@@ -67,14 +67,12 @@ export const styles = css`
         text-transform: uppercase;
         flex: 1;
 
-        &:has(:focus-within) {
-          span {
-            opacity: 0;
-          }
-        }
-
         span {
           opacity: 0.4;
+        }
+
+        &:focus-within span {
+          opacity: 0;
         }
 
         .spinner {
@@ -83,11 +81,15 @@ export const styles = css`
           justify-content: center;
           text-align: center;
           height: 100%;
-          padding-inline: 1ch;
           outline-color: var(--gds-sys-color-base500);
           outline-offset: -2px;
-          outline-width: 1px;
+          outline-width: 2px;
           box-sizing: border-box;
+          border-radius: var(--gds-space-2xs);
+
+          &:focus-visible {
+            outline-style: solid;
+          }
         }
 
         .spinner[aria-valuetext='yyyy'],
@@ -97,18 +99,23 @@ export const styles = css`
         }
 
         .spinner[aria-label='Year'] {
-          width: 50px;
+          width: var(--gds-space-4xl);
         }
 
         .spinner[aria-label='Month'],
         .spinner[aria-label='Day'] {
-          width: 42px;
+          width: var(--gds-space-2xl);
         }
 
         .spinner:hover,
         .spinner:focus {
           color: var(--gds-sys-color-base800);
         }
+      }
+
+      ::part(_button) {
+        outline-offset: -2px;
+        border-radius: var(--gds-space-2xs);
       }
     }
   }
