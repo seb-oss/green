@@ -217,7 +217,7 @@ describe('<gds-datepicker>', () => {
   // DISABLE FOR 2023
 
   describe('Interactions', () => {
-    it.skip('should open the calendar when clicking on the calendar button', async () => {
+    it('should open the calendar when clicking on the calendar button', async () => {
       console.warn(
         'Test warning: should open the calendar when clicking on the calendar button',
       )
@@ -235,7 +235,7 @@ describe('<gds-datepicker>', () => {
       await expect(popover.open).to.be.true
       await expect(el.open).to.be.true
     })
-    it.skip('should focus the first date part spinner when clicking on the label', async () => {
+    it('should focus the first date part spinner when clicking on the label', async () => {
       console.warn(
         'Test warning: should focus the first date part spinner when clicking on the label',
       )
@@ -251,7 +251,7 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(label)
       await expect(focusHandler.calledOnce).to.be.true
     })
-    it.skip('should focus the first date part spinner when clicking on the element', async () => {
+    it('should focus the first date part spinner when clicking on the element', async () => {
       console.warn(
         'Test warning: should focus the first date part spinner when clicking on the element',
       )
@@ -268,7 +268,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(focusHandler.calledOnce).to.be.true
     })
-    it.skip('should increment the spinner value when pressing the up arrow', async () => {
+    it('should increment the spinner value when pressing the up arrow', async () => {
       console.warn(
         'Test warning: should increment the spinner value when pressing the up arrow',
       )
@@ -286,7 +286,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2025')
     })
-    it.skip('should decrement the spinner value when pressing the down arrow', async () => {
+    it('should decrement the spinner value when pressing the down arrow', async () => {
       console.warn(
         'Test warning: should decrement the spinner value when pressing the down arrow',
       )
@@ -304,7 +304,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2023')
     })
-    it.skip('should focus the next spinner when pressing the right arrow', async () => {
+    it('should focus the next spinner when pressing the right arrow', async () => {
       console.warn(
         'Test warning: should focus the next spinner when pressing the right arrow',
       )
@@ -322,7 +322,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[1].value.toString()).to.equal('01')
     })
-    it.skip('should focus the previous spinner when pressing the left arrow', async () => {
+    it('should focus the previous spinner when pressing the left arrow', async () => {
       console.warn(
         'Test warning: should focus the previous spinner when pressing the left arrow',
       )
@@ -341,7 +341,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2024')
     })
-    it.skip('should set year to 20 when typing 20 in the year spinner', async () => {
+    it('should set year to 20 when typing 20 in the year spinner', async () => {
       console.warn(
         'Test warning: should set year to 20 when typing 20 in the year spinner',
       )
@@ -359,7 +359,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('20')
     })
-    it.skip('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
+    it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
       console.warn(
         'Test warning: should set year to 1900 when blurring the year spinner with a value below 1900',
       )
@@ -380,7 +380,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('1900')
     })
-    it.skip('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
+    it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
       console.warn(
         'Test warning: should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter',
       )
@@ -419,7 +419,7 @@ describe('<gds-datepicker>', () => {
       await conditionToBeTrue(() => monthDropdown.open)
       await expect(monthDropdown.open).to.be.true
     })
-    it.skip('should be possible to type out a date without tabbing', async () => {
+    it('should be possible to type out a date without tabbing', async () => {
       console.warn(
         'Test warning: should be possible to type out a date without tabbing',
       )
@@ -448,7 +448,7 @@ describe('<gds-datepicker>', () => {
         onlyDate(new Date('2024-05-10')),
       )
     })
-    it.skip('should give calendar keyboard focus after opening the popover', async () => {
+    it('should give calendar keyboard focus after opening the popover', async () => {
       console.log(
         'Test warning: should give calendar keyboard focus after opening the popover',
       )
@@ -467,7 +467,7 @@ describe('<gds-datepicker>', () => {
       })
       expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
     })
-    it.skip('should set spinners to yyyy, mm and dd when date is undefined', async () => {
+    it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
       console.warn(
         'Test warning: should set spinners to yyyy, mm and dd when date is undefined',
       )
@@ -484,7 +484,7 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[1].value.toString()).to.equal('mm')
       await expect(spinners[2].value.toString()).to.equal('dd')
     })
-    it.skip('should emit input event when navigating with arrow keys in calendar popover', async () => {
+    it('should emit input event when navigating with arrow keys in calendar popover', async () => {
       console.warn(
         'Test warning: should emit input event when navigating with arrow keys in calendar popover',
       )
@@ -507,7 +507,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(inputHandler.calledOnce).to.be.true
     })
-    it.skip('should reset to initial value when pressing escape in the popover', async () => {
+    it('should reset to initial value when pressing escape in the popover', async () => {
       console.warn(
         'Test warning: should reset to initial value when pressing escape in the popover',
       )

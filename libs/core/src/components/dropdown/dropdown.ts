@@ -251,8 +251,8 @@ export class GdsDropdown<ValueT = any>
       >
         <gds-button
           id="trigger"
-          slot="trigger"
           aria-haspopup="listbox"
+          slot="trigger"
           role="combobox"
           aria-owns="listbox"
           aria-controls="listbox"
@@ -262,7 +262,9 @@ export class GdsDropdown<ValueT = any>
           part="trigger"
           class=${classMap({ small: this.size === 'small' })}
         >
-          <span>${unsafeHTML(this.displayValue)}</span>
+          <slot name="trigger">
+            <span>${unsafeHTML(this.displayValue)}</span>
+          </slot>
           <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
         </gds-button>
         ${when(

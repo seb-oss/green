@@ -142,7 +142,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const triggerSlot =
-      el.shadowRoot!.querySelector<HTMLSlotElement>('button slot')!
+      el.shadowRoot!.querySelector<HTMLSlotElement>('gds-button')!
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
     await expect(triggerContent.textContent).to.equal('Custom trigger')
@@ -209,7 +209,7 @@ describe('<gds-dropdown>', () => {
   // DISABLE FOR 2023
   // DISABLE FOR 2023
   // DISABLE FOR 2023
-  it.skip('popover should not be narrower than trigger', async () => {
+  it('popover should not be narrower than trigger', async () => {
     console.warn('Test warning: popover should not be narrower than trigger')
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
@@ -237,7 +237,7 @@ describe('<gds-dropdown>', () => {
   // DISABLE FOR 2023
   // DISABLE FOR 2023
   // DISABLE FOR 2023
-  it.skip('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
+  it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
     console.warn(
       'Test warning: should be the same width as the trigger when `sync-popover-width` attribute is set',
     )
@@ -268,7 +268,7 @@ describe('<gds-dropdown>', () => {
   // DISABLE FOR 2023
   // DISABLE FOR 2023
   // DISABLE FOR 2023
-  it.skip('should limit the height of the popover to max-height attribute', async () => {
+  it('should limit the height of the popover to max-height attribute', async () => {
     console.warn(
       'Test warning: should limit the height of the popover to max-height attribute',
     )
