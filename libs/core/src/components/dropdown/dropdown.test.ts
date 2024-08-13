@@ -87,7 +87,9 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-button'),
+    )!
 
     await expect(label).to.not.be.null
     await expect(label.textContent).to.equal('DD Label')
@@ -485,7 +487,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
       </gds-dropdown>
     `)
 
-    el.focus()
+    await sendKeys({ press: 'Tab' })
     await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
 
@@ -699,7 +701,7 @@ describe('<gds-dropdown multiple>', () => {
   //     </gds-dropdown>
   //   `)
 
-  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>('button')!
+  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('button'))!
 
   //   await clickOnElement(triggerButton, 'center')
   //   await el.updateComplete

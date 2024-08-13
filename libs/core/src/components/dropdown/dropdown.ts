@@ -24,6 +24,7 @@ import type {
   OptionsContainer,
 } from '../../primitives/listbox/option'
 import '../popover'
+import '../button'
 
 import { GdsFormControlElement } from '../form/form-control'
 
@@ -251,6 +252,7 @@ export class GdsDropdown<ValueT = any>
       >
         <gds-button
           id="trigger"
+          name="trigger"
           aria-haspopup="listbox"
           slot="trigger"
           role="combobox"
