@@ -146,9 +146,7 @@ describe('<gds-dropdown>', () => {
     const triggerSlot = el.shadowRoot!.querySelector<HTMLSlotElement>(
       `${getScopedTagName('gds-button')} slot`,
     )!
-    const triggerSlot = el.shadowRoot!.querySelector<HTMLSlotElement>(
-      `${getScopedTagName('gds-button')} slot`,
-    )!
+
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
     await expect(triggerContent.textContent).to.equal('Custom trigger')
@@ -231,9 +229,7 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+
     const trigger = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-button'),
     )!
@@ -269,9 +265,7 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+
     const trigger = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-button'),
     )!
@@ -422,9 +416,6 @@ describe('<gds-dropdown> interactions', () => {
     const trigger = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-button'),
     )!
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
 
     await clickOnElement(trigger, 'center')
     await el.updateComplete
@@ -542,9 +533,6 @@ describe('<gds-dropdown> keyboard navigation', () => {
       </gds-dropdown>
     `)
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
     const trigger = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-button'),
     )!
