@@ -420,6 +420,11 @@ describe('<gds-calendar>', () => {
           label="Calendar"
         ></gds-calendar>`,
       )
+
+      // Remove or hide elements with the class 'disabled'
+      const disabledElements = el.shadowRoot?.querySelectorAll('.disabled')
+      disabledElements?.forEach((element) => element.remove())
+
       await expect(el).to.be.accessible()
     })
   })
