@@ -43,12 +43,12 @@ export type DatepickerOptions = {
   /**
    * The maximum date that can be selected.
    */
-  max: Date
+  maxDate: Date
 
   /**
    * The minimum date that can be selected.
    */
-  min: Date
+  minDate: Date
 
   /**
    * Controls whether the datepicker popover is open.
@@ -68,7 +68,7 @@ export type DatepickerOptions = {
   /**
    * Whether to show a column of week numbers in the calendar.
    */
-  showWeekNumbers: boolean
+  showWeeks: boolean
 
   /**
    * Whether to use the small variant of the datepicker field.
