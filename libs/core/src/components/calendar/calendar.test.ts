@@ -349,6 +349,65 @@ describe('<gds-calendar>', () => {
 
       expect(cell4).to.not.have.class('custom-date')
     })
+
+    it('should not render day names when setting hideDayNames to true', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .hideDayNames=${true}
+          .focusedDate=${new Date('2024-06-01')}
+        ></gds-calendar>`,
+      )
+
+      expect(el.shadowRoot?.querySelector('thead')).to.not.exist
+    })
+
+    it('should not render extraneous days when setting hideExtraneousDays to true', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .hideExtraneousDays=${true}
+          .focusedDate=${new Date('2024-06-01')}
+        ></gds-calendar>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
+      ).to.not.contain('27')
+    })
+
+    it('should cancel focus action when calling `event.preventDefault()` on `gds-date-focused` event', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-06-03')}
+        ></gds-calendar>`,
+      )
+
+      el.addEventListener('gds-date-focused', (e) => {
+        e.preventDefault()
+      })
+
+      el.focus()
+
+      await timeout(0)
+      await sendKeys({ press: 'ArrowDown' })
+      await timeout(0)
+
+      expect(onlyDate(el.focusedDate)).to.equal(
+        onlyDate(new Date('2024-06-03')),
+      )
+    })
+
+    it('should accept a custom date label template', async () => {
+      const el = await fixture<GdsCalendar>(
+        html`<gds-calendar
+          .focusedDate=${new Date('2024-06-03')}
+          .dateLabelTemplate=${(date: Date) => date.getDate().toString()}
+        ></gds-calendar>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('#dateCell-3')?.getAttribute('aria-label'),
+      ).to.equal('3')
+    })
   })
 
   describe('Accessibility', () => {
