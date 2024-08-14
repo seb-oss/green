@@ -30,6 +30,7 @@ const style = css`
 
     tbody {
       td {
+        position: relative;
         height: var(--gds-space-2xl);
         width: var(--gds-space-2xl);
         box-sizing: border-box;
@@ -69,6 +70,16 @@ const style = css`
         &:focus-visible {
           outline-color: color-mix(in srgb, currentColor, transparent 50%);
         }
+      }
+
+      .indicator-dot {
+        display: flex;
+        position: absolute;
+        width: var(--gds-space-2xs);
+        height: var(--gds-space-2xs);
+        border-radius: var(--gds-space-max);
+        background-color: var(--_color, currentColor);
+        inset: var(--gds-space-2xs) var(--gds-space-2xs) auto auto;
       }
     }
   }

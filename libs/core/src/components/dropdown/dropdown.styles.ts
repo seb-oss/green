@@ -13,8 +13,10 @@ const style = css`
 
     ::part(_button) {
       --pad: var(--_padding-inline);
+      --gap: var(--_gap);
       border-radius: var(--gds-space-2xs);
       padding-inline: calc(var(--pad) / 2);
+      gap: calc(var(--gap) / 2);
     }
 
     :slot(trail) {
