@@ -22,6 +22,7 @@ import {
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsButton } from '@sebgroup/green-core/components/button'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -141,10 +142,12 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<form>
           <gds-datepicker id="datepicker" value="2024-01-10"></gds-datepicker>
-          <button type="reset">Reset</button>
+          <gds-button type="reset">Reset</gds-button>
         </form>`,
       )
-      const resetButton = el.querySelector<HTMLButtonElement>('button')!
+      const resetButton = el.querySelector<GdsButton>(
+        getScopedTagName('gds-button'),
+      )!
       const spinners = el
         .querySelector('#datepicker')!
         .shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
@@ -212,16 +215,8 @@ describe('<gds-datepicker>', () => {
     })
   })
 
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
-
   describe('Interactions', () => {
     it('should open the calendar when clicking on the calendar button', async () => {
-      console.warn(
-        'Test warning: should open the calendar when clicking on the calendar button',
-      )
-
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
@@ -236,9 +231,6 @@ describe('<gds-datepicker>', () => {
       await expect(el.open).to.be.true
     })
     it('should focus the first date part spinner when clicking on the label', async () => {
-      console.warn(
-        'Test warning: should focus the first date part spinner when clicking on the label',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
       )
@@ -252,9 +244,6 @@ describe('<gds-datepicker>', () => {
       await expect(focusHandler.calledOnce).to.be.true
     })
     it('should focus the first date part spinner when clicking on the element', async () => {
-      console.warn(
-        'Test warning: should focus the first date part spinner when clicking on the element',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
       )
@@ -269,9 +258,6 @@ describe('<gds-datepicker>', () => {
       await expect(focusHandler.calledOnce).to.be.true
     })
     it('should increment the spinner value when pressing the up arrow', async () => {
-      console.warn(
-        'Test warning: should increment the spinner value when pressing the up arrow',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -287,9 +273,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('2025')
     })
     it('should decrement the spinner value when pressing the down arrow', async () => {
-      console.warn(
-        'Test warning: should decrement the spinner value when pressing the down arrow',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -305,9 +288,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('2023')
     })
     it('should focus the next spinner when pressing the right arrow', async () => {
-      console.warn(
-        'Test warning: should focus the next spinner when pressing the right arrow',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -323,10 +303,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[1].value.toString()).to.equal('01')
     })
     it('should focus the previous spinner when pressing the left arrow', async () => {
-      console.warn(
-        'Test warning: should focus the previous spinner when pressing the left arrow',
-      )
-
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -342,9 +318,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('2024')
     })
     it('should set year to 20 when typing 20 in the year spinner', async () => {
-      console.warn(
-        'Test warning: should set year to 20 when typing 20 in the year spinner',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -360,9 +333,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('20')
     })
     it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
-      console.warn(
-        'Test warning: should set year to 1900 when blurring the year spinner with a value below 1900',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker min="2022-01-01"></gds-datepicker>`,
       )
@@ -381,9 +351,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('1900')
     })
     it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
-      console.warn(
-        'Test warning: should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
@@ -420,9 +387,6 @@ describe('<gds-datepicker>', () => {
       await expect(monthDropdown.open).to.be.true
     })
     it('should be possible to type out a date without tabbing', async () => {
-      console.warn(
-        'Test warning: should be possible to type out a date without tabbing',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
@@ -449,9 +413,6 @@ describe('<gds-datepicker>', () => {
       )
     })
     it('should give calendar keyboard focus after opening the popover', async () => {
-      console.log(
-        'Test warning: should give calendar keyboard focus after opening the popover',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -468,9 +429,6 @@ describe('<gds-datepicker>', () => {
       expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
     })
     it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
-      console.warn(
-        'Test warning: should set spinners to yyyy, mm and dd when date is undefined',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -485,9 +443,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[2].value.toString()).to.equal('dd')
     })
     it('should emit input event when navigating with arrow keys in calendar popover', async () => {
-      console.warn(
-        'Test warning: should emit input event when navigating with arrow keys in calendar popover',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
@@ -508,13 +463,10 @@ describe('<gds-datepicker>', () => {
       await expect(inputHandler.calledOnce).to.be.true
     })
     it('should reset to initial value when pressing escape in the popover', async () => {
-      console.warn(
-        'Test warning: should reset to initial value when pressing escape in the popover',
-      )
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+      const button = el.shadowRoot!.querySelector<GdsButton>(
         '[aria-controls="calendar-popover"]',
       )!
       const popover =
@@ -535,10 +487,6 @@ describe('<gds-datepicker>', () => {
       )
     })
   })
-
-  // end-DISABLE FOR 2023
-  // end-DISABLE FOR 2023
-  // end-DISABLE FOR 2023
 
   // describe('Accessibility', () => {
   //   it('should be accessible', async () => {
