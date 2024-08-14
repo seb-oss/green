@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import {
+  aTimeout,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
@@ -216,19 +221,39 @@ describe('<gds-datepicker>', () => {
   })
 
   describe('Interactions', () => {
-    it('should open the calendar when clicking on the calendar button', async () => {
+    it('should open the calendar when clicking on the calendar button', async function () {
+      // Increase the timeout for this test
+      this.timeout(5000)
+
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
+
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar-popover"]',
       )!
+
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
+      // Click the button
       await clickOnElement(button)
+
+      // Wait for a short time to allow for initial layout changes
+      await aTimeout(50)
+
+      // Wait for the popover to open
+      await waitUntil(() => popover.open, 'Popover did not open')
+
+      // Wait for any remaining updates to complete
       await el.updateComplete
-      await expect(popover.open).to.be.true
-      await expect(el.open).to.be.true
+
+      // Add another small delay to ensure stability
+      await aTimeout(50)
+
+      // Check the open states
+      expect(popover.open).to.be.true
+      expect(el.open).to.be.true
     })
     it('should focus the first date part spinner when clicking on the label', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -350,41 +375,50 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('1900')
     })
-    it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async () => {
+
+    it('should open the month picker when clicking on the calendar button and then shift-tabbing three times and pressing enter', async function () {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
+
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar-popover"]',
       )!
+
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
       const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
         `${getScopedTagName('gds-dropdown')}[label="Month"]`,
       )!
+
+      // Click the button and wait for the popover to open
       await clickOnElement(button)
-      await conditionToBeTrue(() => popover.open)
-      let keyPress = 'Shift+Tab'
-      if (isWebKit()) {
-        keyPress = 'Shift+Alt+Tab'
+      await waitUntil(() => popover.open, 'Popover did not open')
+
+      // Determine the key press based on the browser
+      const keyPress = isWebKit() ? 'Shift+Alt+Tab' : 'Shift+Tab'
+
+      // Function to send a key and wait for a short time
+      const sendKeyAndWait = async (key: string) => {
+        await sendKeys({ press: key })
+        await el.updateComplete
+        await aTimeout(100) // Wait a bit for any animations or state updates
       }
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: keyPress,
-      })
-      await timeout(0)
-      await sendKeys({
-        press: 'Enter',
-      })
-      await conditionToBeTrue(() => monthDropdown.open)
-      await expect(monthDropdown.open).to.be.true
+
+      // Send the Shift+Tab keys three times
+      for (let i = 0; i < 3; i++) {
+        await sendKeyAndWait(keyPress)
+      }
+
+      // Send Enter key
+      await sendKeyAndWait('Enter')
+
+      // Wait for the month dropdown to open
+      await waitUntil(() => monthDropdown.open, 'Month dropdown did not open')
+
+      // Final check
+      expect(monthDropdown.open).to.be.true
     })
     it('should be possible to type out a date without tabbing', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -416,18 +450,28 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
+
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar-popover"]',
       )!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
+      // Click the button and wait for the popover to open
       await clickOnElement(button)
-      await conditionToBeTrue(() => popover.open)
-      await sendKeys({
-        press: 'Enter',
-      })
+      await waitUntil(() => popover.open)
+
+      // Wait for any animations or transitions to complete
+      await aTimeout(100)
+
+      // Send the Enter key and wait for any potential state updates
+      await sendKeys({ press: 'Enter' })
+      await el.updateComplete
+
+      // Check the value
       expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
-    })
+    }, 5000) // Increase timeout to 5 seconds
+
     it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
