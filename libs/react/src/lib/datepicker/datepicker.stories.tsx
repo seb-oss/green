@@ -24,6 +24,7 @@ export const Default: Story = {
     label: 'Choose date',
   },
 }
+
 /**
  * To show that the `Datepicker` is invalid, set the `invalid` props to true.
  *
@@ -37,12 +38,9 @@ export const Invalid: Story = {
     value: new Date(),
     testId: 'test',
   },
-  render: (args) => {
-    console.log(args)
-    return (
-      <Datepicker {...args}>
-        <span slot="message">My custom message</span>
-      </Datepicker>
-    )
-  },
+  render: (args) => (
+    <Datepicker {...args}>
+      <span slot="message">My custom message</span>
+    </Datepicker>
+  ),
 }
