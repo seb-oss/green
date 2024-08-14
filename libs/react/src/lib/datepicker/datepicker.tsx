@@ -14,12 +14,7 @@ export const CoreDatepicker = createComponent({
   react: React,
 })
 
-export interface DatepickerOptions {
-  /**
-   * The label for the Datepicker.
-   */
-  label?: string
-
+export type DatepickerOptions = {
   /**
    * Callback function that is called when the value of the Datepicker changes.
    */
@@ -36,11 +31,6 @@ export interface DatepickerOptions {
   maxDate?: Date
 
   /**
-   * The value of the Datepicker.
-   */
-  value?: Date
-
-  /**
    * Whether to show the week numbers.
    */
   showWeeks?: boolean
@@ -51,34 +41,61 @@ export interface DatepickerOptions {
   testId?: string
 
   /**
-   * The size of the Datepicker.
+   * The Date value of the datepicker. This can be set to undefined to clear the datepicker.
+   * This can be a string if set via the value attribute in markup, or via the setAttribute DOM API.
    */
-  size?: 'small' | 'medium'
-
+  value?: Date
   /**
-   * Whether to hide the label.
+   * The minimum date that can be selected.
    */
-  hideLabel?: boolean
-
+  min: Date
   /**
-   * Whether to disable weekends.
+   * The maximum date that can be selected.
    */
-  disabledWeekends?: boolean
-
+  max: Date
   /**
-   * An array of disabled dates.
+   * Controls wheter the datepicker popover is open.
+   */
+  open: boolean
+  /**
+   * The label text displayed above the datepicker. This should always be set to a descriptive label.
+   */
+  label: string
+  /**
+   * Whether to show a column of week numbers in the calendar.
+   */
+  showWeekNumbers: boolean
+  /**
+   * Whether to use the small variant of the datepicker field.
+   */
+  size: 'small' | 'medium'
+  /**
+   * Whether to hide the label above the input field.
+   */
+  hideLabel: boolean
+  /**
+   * Whether to disable weekends in the calendar.
+   */
+  disabledWeekends: boolean
+  /**
+   * An array of dates that should be disabled in the calendar.
    */
   disabledDates?: Date[]
 
   /**
-   * Whether the Datepicker is invalid.
+   * The label of the form control.
    */
-  invalid?: boolean
+  label?: string
+  /**
+   * Get or set the value of the form control.
+   */
+  value?: ValueT
 
   /**
-   * Whether the Datepicker is a required form field.
+   * Validation state of the form control. Setting this to true triggers the invalid state of the control.
+   *
    */
-  required?: boolean
+  invalid: boolean
 
   /**
    * @deprecated Use `value` instead
@@ -99,8 +116,6 @@ export const Datepicker = ({
   value,
   showWeeks,
   testId,
-  invalid,
-  required,
   selectedDate,
   currentDate,
   ...props
@@ -117,6 +132,8 @@ export const Datepicker = ({
     }
   }
 
+  console.log(props)
+
   return (
     <div className="form-group">
       <CoreDatepicker
@@ -126,13 +143,11 @@ export const Datepicker = ({
         max={max}
         showWeekNumbers={showWeeks}
         onchange={onChangeHandler}
-        size={props.size}
         value={value}
-        hideLabel={props.hideLabel}
-        invalid={invalid}
-        required={required}
         {...props}
       />
     </div>
   )
 }
+
+export default Datepicker
