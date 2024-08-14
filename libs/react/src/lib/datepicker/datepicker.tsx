@@ -16,24 +16,64 @@ export const CoreDatepicker = createComponent({
 
 export type DatepickerOptions = {
   /**
+   * An array of dates that should be disabled in the calendar.
+   */
+  disabledDates?: Date[]
+
+  /**
+   * Whether to disable weekends in the calendar.
+   */
+  disabledWeekends: boolean
+
+  /**
+   * Whether to hide the label above the input field.
+   */
+  hideLabel: boolean
+
+  /**
+   * Validation state of the form control. Setting this to true triggers the invalid state of the control.
+   */
+  invalid: boolean
+
+  /**
+   * The label text displayed above the datepicker. This should always be set to a descriptive label.
+   */
+  label: string
+
+  /**
+   * The maximum date that can be selected.
+   */
+  max: Date
+
+  /**
+   * The minimum date that can be selected.
+   */
+  min: Date
+
+  /**
+   * Controls whether the datepicker popover is open.
+   */
+  open: boolean
+
+  /**
    * Callback function that is called when the value of the Datepicker changes.
    */
   onChange?: (value: any) => void
 
   /**
-   * The minimum date that can be selected.
+   * Sets the datepicker as a required field for forms.
    */
-  minDate?: Date
+  required: boolean
 
   /**
-   * The maximum date that can be selected.
+   * Whether to show a column of week numbers in the calendar.
    */
-  maxDate?: Date
+  showWeekNumbers: boolean
 
   /**
-   * Whether to show the week numbers.
+   * Whether to use the small variant of the datepicker field.
    */
-  showWeeks?: boolean
+  size: 'small' | 'medium'
 
   /**
    * The test ID used for testing.
@@ -45,65 +85,14 @@ export type DatepickerOptions = {
    * This can be a string if set via the value attribute in markup, or via the setAttribute DOM API.
    */
   value?: Date
-  /**
-   * The minimum date that can be selected.
-   */
-  min: Date
-  /**
-   * The maximum date that can be selected.
-   */
-  max: Date
-  /**
-   * Controls wheter the datepicker popover is open.
-   */
-  open: boolean
-  /**
-   * The label text displayed above the datepicker. This should always be set to a descriptive label.
-   */
-  label: string
-  /**
-   * Whether to show a column of week numbers in the calendar.
-   */
-  showWeekNumbers: boolean
-  /**
-   * Whether to use the small variant of the datepicker field.
-   */
-  size: 'small' | 'medium'
-  /**
-   * Whether to hide the label above the input field.
-   */
-  hideLabel: boolean
-  /**
-   * Whether to disable weekends in the calendar.
-   */
-  disabledWeekends: boolean
-  /**
-   * An array of dates that should be disabled in the calendar.
-   */
-  disabledDates?: Date[]
 
   /**
-   * The label of the form control.
-   */
-  label?: string
-  /**
-   * Get or set the value of the form control.
-   */
-  value?: ValueT
-
-  /**
-   * Validation state of the form control. Setting this to true triggers the invalid state of the control.
-   *
-   */
-  invalid: boolean
-
-  /**
-   * @deprecated Use `value` instead
+   * @deprecated Use `value` instead.
    */
   selectedDate?: Date
 
   /**
-   * @deprecated Use `value` instead
+   * @deprecated Use `value` instead.
    */
   currentDate?: Date
 }
