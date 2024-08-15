@@ -43,14 +43,11 @@ const style = css`
     }
 
     input[type='text'] {
-      border-radius: 8px;
-      inset: auto;
+      border-radius: var(--gds-space-xs);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       font-size: inherit;
       line-height: inherit;
-      margin-left: auto;
-      margin-right: auto;
       border: none;
       outline: none;
       color: var(--gds-sys-color-base800);
