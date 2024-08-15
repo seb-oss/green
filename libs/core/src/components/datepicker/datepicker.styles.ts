@@ -6,8 +6,10 @@ export const styles = css`
   @layer base {
     :host {
       font-family: inherit;
+      // display: contents;
       display: flex;
       flex-direction: column;
+      // gap: var(--gds-space-xs);
     }
 
     .header {
@@ -46,11 +48,16 @@ export const styles = css`
     }
 
     label {
-      font-weight: var(--gds-text-weight-regular);
-      line-height: var(--gds-text-line-height-label-input-large);
       font-size: var(--gds-text-size-label-input-large);
-      padding-block: var(--gds-space-2xs);
+      font-weight: var(--gds-text-weight-book);
+      line-height: var(--gds-text-line-height-label-input-large);
       font-family: inherit;
+    }
+
+    .form-info {
+      font-size: var(--gds-text-size-label-information-medium);
+      font-weight: var(--gds-text-weight-regular);
+      line-height: var(--gds-text-line-height-label-information-medium);
     }
 
     .field {
@@ -65,6 +72,7 @@ export const styles = css`
       color: var(--gds-sys-color-base800);
       padding-inline: var(--gds-space-2xs);
       padding-block: var(--gds-space-2xs);
+      margin-block: var(--gds-space-xs);
       background-color: var(--gds-sys-color-container-container-bright);
       border: var(--gds-space-4xs) solid var(--gds-sys-color-base600);
       max-width: 100%;
