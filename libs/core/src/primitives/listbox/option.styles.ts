@@ -9,6 +9,9 @@ const style = css`
     }
 
     :host div {
+      display: flex;
+      align-items: center;
+      user-select: none;
       padding-inline: var(--gds-space-m);
       padding-block: var(--gds-space-m);
       cursor: pointer;
@@ -16,8 +19,6 @@ const style = css`
       font-weight: var(--gds-text-weight-regular);
       line-height: var(--gds-text-line-height-label-input-large);
       min-width: 20ch;
-      display: flex;
-      user-select: none;
       gap: 1ch;
     }
 

@@ -215,7 +215,7 @@ export const Searchable: Story = {
 }
 
 /**
- * In order to show a search field on the dropdown, set the `searchable` attribute.
+ * Use the `multiple` attribute to allow multiple selections. The selected values will be displayed
  */
 export const Multiple: Story = {
   ...DefaultParams,
