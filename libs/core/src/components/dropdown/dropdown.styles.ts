@@ -42,6 +42,37 @@ const style = css`
       font-family: inherit;
     }
 
+    input[type='text'] {
+      border-radius: 8px;
+      inset: auto;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      font-size: inherit;
+      line-height: inherit;
+      margin-left: auto;
+      margin-right: auto;
+      border: none;
+      outline: none;
+      color: var(--gds-sys-color-base800);
+      border-bottom: 1px solid var(--gds-sys-color-base400);
+      width: 100%;
+      padding: var(--gds-space-m);
+      font-weight: var(--gds-text-weight-regular);
+      flex: 1;
+      box-sizing: border-box;
+
+      &:focus {
+        border-color: var(--gds-sys-color-base800);
+      }
+
+      &::placeholder {
+        color: currrentColor;
+        font-family: inherit;
+        font-weight: var(--gds-text-weight-regular);
+        color: var(--gds-sys-color-base800);
+      }
+    }
+
     gds-listbox {
       user-select: none;
     }
