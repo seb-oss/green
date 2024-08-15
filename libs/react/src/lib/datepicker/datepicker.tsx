@@ -119,8 +119,6 @@ export const Datepicker = ({
   if (currentDate && !value) value = currentDate
   if (selectedDate && !value) value = selectedDate
 
-  console.log(validator)
-
   const min = minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
   const max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
 
