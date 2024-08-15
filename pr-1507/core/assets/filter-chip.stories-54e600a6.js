@@ -1,0 +1,7 @@
+import"./filter-chips-00ef535a.js";import"./gds-element-24e794df.js";import"./lit-element-2a5e401f.js";import"./_commonjsHelpers-725317a4.js";import"./query-b9d3c2af.js";import"./class-map-43969d56.js";import"./directive-12249aa5.js";import"./button-80ab7da7.js";import"./if-defined-76b9fd71.js";import"./when-cf7256a5.js";import"./constrain-slots-08d8606c.js";import"./transitional-styles-dbf6e776.js";import"./tokens.style-f52cb050.js";import"./lit-localize-87611c26.js";import"./watch-c4961afe.js";import"./resize-observer-81981523.js";import"./attribute-converters-ae269b4b.js";import"./query-async-1ff18261.js";import"./checkmark-25bebc34.js";import"./icon-6da72e8c.js";const S={title:"Docs/Components/Filter Chips/Filter Chip",component:"gds-filter-chip",parameters:{layout:"centered",docs:{description:{component:`[Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/filter-chips)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/component-filter-chip)
+
+The filter chip is a sub-component of the filter chips component, and should generally not be used on its own.`}}},tags:["autodocs"]},i={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},args:{innerText:"Filter chip"}},t={...i};var o,e,r;t.parameters={...t.parameters,docs:{...(o=t.parameters)==null?void 0:o.docs,source:{originalSource:`{
+  ...DefaultParams
+}`,...(r=(e=t.parameters)==null?void 0:e.docs)==null?void 0:r.source}}};const T=["Basic"];export{t as Basic,T as __namedExportsOrder,S as default};
