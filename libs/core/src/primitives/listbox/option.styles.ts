@@ -42,18 +42,17 @@ const style = css`
     }
 
     .checkbox {
-      border-radius: 4px;
-      border: 2px solid currentColor;
-      position: relative;
-      height: 1lh;
-      width: auto;
-      aspect-ratio: 1/1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      padding: var(--gds-space-3xs);
+      height: 1lh;
+      width: auto;
       box-sizing: border-box;
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: var(--gds-space-2xs);
+      border: var(--gds-space-3xs) solid currentColor;
+      padding: var(--gds-space-3xs);
 
       &.checked {
         background-color: currentColor;
@@ -61,7 +60,7 @@ const style = css`
         gds-icon-checkmark {
           &::part(icon) {
             color: var(--gds-sys-color-base-white);
-            stroke-width: 4px;
+            stroke-width: var(--gds-space-2xs);
           }
         }
       }
