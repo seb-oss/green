@@ -1,13 +1,15 @@
 import React from 'react'
 import Datepicker from './datepicker'
 import { Meta, StoryObj } from '@storybook/react'
+import { GdsDatePicker } from '@sebgroup/green-core'
+import { validate } from 'webpack'
 
-type Story = StoryObj<typeof Datepicker>
+type Story = StoryObj<GdsDatePicker>
 
 /**
  * Date pickers are used when users need to enter a date. The user can enter the date as text, but the date picker also allows the user to select the date in a visual representation of a calendar.
  */
-const meta: Meta<typeof Datepicker> = {
+const meta: Meta<GdsDatePicker> = {
   title: 'Components/Datepicker',
   component: Datepicker,
   argTypes: {},
@@ -26,21 +28,66 @@ export const Default: Story = {
 }
 
 /**
- * To show that the `Datepicker` is invalid, set the `invalid` props to true.
+ * To handle validation of the `Datepicker`, you can pass a `validator` object to the `Datepicker` component. The `validator` object should have a `validate` function that takes the `Datepicker` element as an argument and returns an array of the validity state and an optional validation message.
  *
- * If you want a custom error message, add a child to the `Datepicker` that should be put into the `slot="message"`
+ * ```tsx
+ * <Datepicker validator={{ validator: (el: GdsDatepicker) => {
+ *     // Put your custom validation logic
+ *      if (el.value !== 'correctValue') {
+ *        // And return a validator array
+ *        return [
+ *                {
+ *                  badInput: true,
+ *                  customError: true,
+ *                  patternMismatch: true,
+ *                  rangeOverflow: true,
+ *                  rangeUnderflow: true,
+ *                  stepMismatch: true,
+ *                  tooLong: true,
+ *                  tooShort: true,
+ *                  typeMismatch: true,
+ *                  valid: false,
+ *                  valueMissing: true,
+ *                },
+ *                'My custom validation message',
+ *          ] : [ValidityState, string]
+ * }}} />
+ *
+ *
+ * ```
+ *
+ * For more information on validation in Green Core, see the [Form Validation](https://storybook.seb.io/latest/core/?path=/docs/docs-form-validation-documentation--docs) example.
  */
 
-export const Invalid: Story = {
+export const Validation: Story = {
   args: {
     label: 'Choose date',
-    invalid: true,
+    validator: {
+      validate: (el: GdsDatePicker) => {
+        /** Put your custom validation logic */
+        if (el.value !== 'correctValue') {
+          /** And return a validator array */
+          return [
+            {
+              badInput: true,
+              customError: true,
+              patternMismatch: true,
+              rangeOverflow: true,
+              rangeUnderflow: true,
+              stepMismatch: true,
+              tooLong: true,
+              tooShort: true,
+              typeMismatch: true,
+              valid: false,
+              valueMissing: true,
+            },
+            'My custom validation message',
+          ]
+        }
+      },
+    },
     value: new Date(),
     testId: 'test',
   },
-  render: (args) => (
-    <Datepicker {...args}>
-      <span slot="message">My custom message</span>
-    </Datepicker>
-  ),
+  render: (args) => <Datepicker {...args} />,
 }

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createComponent } from '@lit/react'
 
 import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+import { GdsValidator } from '@sebgroup/green-core/components/form/form-control'
 
 registerTransitionalStyles()
 
@@ -34,6 +35,11 @@ export type DatepickerOptions = {
    * Validation state of the form control. Setting this to true triggers the invalid state of the control.
    */
   invalid: boolean
+
+  /**
+   * Validate the form control element. Should return the validity state and an optional validation message.
+   */
+  validator: GdsValidator
 
   /**
    * The label text displayed above the datepicker. This should always be set to a descriptive label.
@@ -105,12 +111,15 @@ export const Datepicker = ({
   value,
   showWeeks,
   testId,
+  validator,
   selectedDate,
   currentDate,
   ...props
 }: DatepickerOptions) => {
   if (currentDate && !value) value = currentDate
   if (selectedDate && !value) value = selectedDate
+
+  console.log(validator)
 
   const min = minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
   const max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
@@ -121,7 +130,13 @@ export const Datepicker = ({
     }
   }
 
-  console.log(props)
+  const ref = React.useRef<GdsDatepicker>(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.validator = validator
+    }
+  }, [validator])
 
   return (
     <div className="form-group">
@@ -133,6 +148,7 @@ export const Datepicker = ({
         showWeekNumbers={showWeeks}
         onchange={onChangeHandler}
         value={value}
+        ref={ref}
         {...props}
       />
     </div>
