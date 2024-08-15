@@ -13,6 +13,8 @@ import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
 import { tokens } from '../../tokens.style'
 
+// import '@sebgroup/core/components/icon/icons/checkmark'
+
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean
@@ -123,9 +125,13 @@ export class GdsOption extends Focusable(GdsElement) {
   render() {
     const isMultiple = this.parentElement?.multiple
 
-    const checkbox = html` <span
-      class="checkbox ${classMap({ checked: this.selected })}"
-    ></span>`
+    const checkbox = html`
+      <span class="checkbox ${classMap({ checked: this.selected })}">
+        ${this.selected
+          ? html`<gds-icon-checkmark stroke></gds-icon-checkmark>`
+          : ''}
+      </span>
+    `
 
     if (!isMultiple) {
       if (this.selected) this.setAttribute('highlighted', '')

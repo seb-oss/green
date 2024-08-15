@@ -213,3 +213,27 @@ export const Searchable: Story = {
     </gds-dropdown>
   `,
 }
+
+/**
+ * In order to show a search field on the dropdown, set the `searchable` attribute.
+ */
+export const Multiple: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown
+      size="small"
+      label="Select tech"
+      searchable
+      multiple
+      hide-label
+    >
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}

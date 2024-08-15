@@ -69,10 +69,6 @@ const style = css`
         color: var(--gds-sys-color-base800);
       }
     }
-
-    gds-listbox {
-      user-select: none;
-    }
   }
 `
 

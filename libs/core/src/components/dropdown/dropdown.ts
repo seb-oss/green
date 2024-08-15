@@ -16,6 +16,9 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 
 import '../icon/icons/chevron-bottom'
+import '../icon/icons/checkmark'
+// import '../icon/icons/chevron-bottom'
+// import '../../components/icon/icons/chevron-right'
 
 import '../../primitives/listbox'
 import type { GdsListbox } from '../../primitives/listbox'
@@ -362,11 +365,46 @@ export class GdsDropdown<ValueT = any>
     options.forEach((o) => (o.hidden = false))
 
     if (!input.value) return
+    // console.log('input.value', input.value)
     const filteredOptions = options.filter(
       (o) => !this.searchFilter(input.value, o),
     )
     filteredOptions.forEach((o) => (o.hidden = true))
   }
+
+  // #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
+  //   console.log('KeyUp event triggered', e)
+
+  //   const input = this._elSearchInput!
+  //   console.log('Search input element:', input)
+
+  //   const options = Array.from(this.#optionElements)
+  //   console.log('Initial options:', options)
+
+  //   options.forEach((o) => {
+  //     o.hidden = false
+  //     console.log('Option before filtering:', o)
+  //   })
+
+  //   if (!input.value) {
+  //     console.log('Input value is empty, returning early.')
+  //     return
+  //   }
+
+  //   console.log('Input value:', input.value)
+
+  //   const filteredOptions = options.filter(
+  //     (o) => !this.searchFilter(input.value, o),
+  //   )
+  //   console.log('Filtered options:', filteredOptions)
+
+  //   filteredOptions.forEach((o) => {
+  //     o.hidden = true
+  //     console.log('Option after filtering:', o)
+  //   })
+
+  //   console.log('Options after filtering:', options)
+  // }
 
   /**
    * Check for ArrowDown or Tab in the search field.
