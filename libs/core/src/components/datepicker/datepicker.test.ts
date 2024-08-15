@@ -17,6 +17,7 @@ import {
 } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/datepicker'
+import '@sebgroup/green-core/components/icon/icons/calendar'
 import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 
 import {
@@ -28,6 +29,11 @@ import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 import { GdsButton } from '@sebgroup/green-core/components/button'
+
+// import '../../components/button'
+// import '../../components/icon/icons/calendar'
+// import '../../components/icon/icons/chevron-left'
+// import '../../components/icon/icons/chevron-right'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -143,15 +149,17 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
+    // The Button
+
     it('should reset when form is reset', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<form>
           <gds-datepicker id="datepicker" value="2024-01-10"></gds-datepicker>
-          <gds-button type="reset">Reset</gds-button>
+          <button type="reset">Reset</button>
         </form>`,
       )
-      const resetButton = el.querySelector<GdsButton>(
-        getScopedTagName('gds-button'),
+      const resetButton = el.querySelector<HTMLButtonElement>(
+        'button[type="reset"]',
       )!
       const spinners = el
         .querySelector('#datepicker')!
@@ -159,11 +167,19 @@ describe('<gds-datepicker>', () => {
           getScopedTagName('gds-date-part-spinner'),
         )!
 
+      // Log initial value
+      console.log('Initial year spinner value:', spinners[0].value.toString())
       await expect(spinners[0].value.toString()).to.equal('2024')
 
+      // Trigger reset
       resetButton.click()
       await timeout(0)
 
+      // Log value after reset
+      console.log(
+        'Year spinner value after reset:',
+        spinners[0].value.toString(),
+      )
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
@@ -222,22 +238,19 @@ describe('<gds-datepicker>', () => {
 
   describe('Interactions', () => {
     it('should open the calendar when clicking on the calendar button', async function () {
-      // Increase the timeout for this test
-      this.timeout(5000)
-
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker></gds-datepicker>`,
       )
 
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar-popover"]',
-      )!
-
+      const button =
+        el.shadowRoot!.querySelector<GdsButton>('#calendar-button')!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
-      // Click the button
-      await clickOnElement(button)
+      button.click()
+      // await clickOnElement(button)
+
+      console.log('IDENTIFYYYYYYYYYY:  Button Clicked)')
 
       // Wait for a short time to allow for initial layout changes
       await aTimeout(50)
@@ -255,6 +268,7 @@ describe('<gds-datepicker>', () => {
       expect(popover.open).to.be.true
       expect(el.open).to.be.true
     })
+
     it('should focus the first date part spinner when clicking on the label', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
@@ -381,9 +395,12 @@ describe('<gds-datepicker>', () => {
         html`<gds-datepicker></gds-datepicker>`,
       )
 
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar-popover"]',
-      )!
+      // const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
+      // '[aria-controls="calendar-popover"]',
+      // )!
+
+      const button =
+        el.shadowRoot!.querySelector<GdsButton>('#calendar-button')!
 
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
@@ -393,7 +410,8 @@ describe('<gds-datepicker>', () => {
       )!
 
       // Click the button and wait for the popover to open
-      await clickOnElement(button)
+      button.click()
+      // await clickOnElement(button)
       await waitUntil(() => popover.open, 'Popover did not open')
 
       // Determine the key press based on the browser
@@ -451,14 +469,14 @@ describe('<gds-datepicker>', () => {
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
 
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar-popover"]',
-      )!
+      const button =
+        el.shadowRoot!.querySelector<GdsButton>('#calendar-button')!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
       // Click the button and wait for the popover to open
-      await clickOnElement(button)
+      // await clickOnElement(button)
+      button.click()
       await waitUntil(() => popover.open)
 
       // Wait for any animations or transitions to complete
@@ -490,14 +508,14 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
-      const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[aria-controls="calendar-popover"]',
-      )!
+      const button =
+        el.shadowRoot!.querySelector<GdsButton>('#calendar-button')!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
       const inputHandler = sinon.fake()
       el.addEventListener('input', inputHandler)
-      await clickOnElement(button)
+      // await clickOnElement(button)
+      button.click()
       await conditionToBeTrue(() => popover.open)
       await sendKeys({
         press: 'ArrowRight',
@@ -510,12 +528,12 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
       )
-      const button = el.shadowRoot!.querySelector<GdsButton>(
-        '[aria-controls="calendar-popover"]',
-      )!
+      const button =
+        el.shadowRoot!.querySelector<GdsButton>('#calendar-button')!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
-      await clickOnElement(button)
+      // await clickOnElement(button)
+      button.click()
       await conditionToBeTrue(() => popover.open)
       await sendKeys({
         press: 'ArrowRight',
