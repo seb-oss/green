@@ -246,12 +246,11 @@ const formats: Record<string, Format> = {
 
       let allTokens
       const { outputReferences } = options
-      var optionString = setSwiftFileProperties(
+      options = setSwiftFileProperties(
         options,
         'class',
         platform.transformGroup,
       )
-      options = eval(optionString)
       const formatProperty = createPropertyFormatter({
         outputReferences,
         dictionary,
@@ -276,12 +275,11 @@ const formats: Record<string, Format> = {
     formatter: function ({ dictionary, options, file, platform }) {
       let allTokens
       const { outputReferences } = options
-      var optionString = setSwiftFileProperties(
+      options = setSwiftFileProperties(
         options,
         'class',
         platform.transformGroup,
       )
-      options = eval(optionString)
       if (outputReferences) {
         allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
       } else {
@@ -290,8 +288,10 @@ const formats: Record<string, Format> = {
       allTokens = useColorScheme(allTokens, options)
       
       let propertyFormatter
-      if (options.colorType == 'reference') {
-        propertyFormatter = swift.colorReferencePropertyFormatter(options.lightModeObjectName, options.darkModeObjectName, options)
+      if (options.colorType == 'uiKitDynamicProvider') {
+        propertyFormatter = swift.uiKitColorReferencePropertyFormatter(options.lightModeObjectName, options.darkModeObjectName, options)
+      } else if (options.colorType == 'swiftUiReferenceToUiKit') {
+        propertyFormatter = swift.swiftUiColorReferencePropertyFormatter(options.uiKitObjectName, options)
       } else {
         const valueFormatter = createPropertyFormatter({
           outputReferences,
@@ -302,8 +302,8 @@ const formats: Record<string, Format> = {
         })
         propertyFormatter = swift.staticPropertyFormatter(options, valueFormatter)
       }
-      let tree = swift.treeFromTokens(allTokens, options.type)
-      let fileContent = swift.fileContentFromTree(tree, options, file, propertyFormatter)
+      const tree = swift.treeFromTokens(allTokens, options.type)
+      const fileContent = swift.fileContentFromTree(tree, options, file, propertyFormatter)
       return fileContent
     },
   },

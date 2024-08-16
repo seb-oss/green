@@ -1,16 +1,5 @@
 import * as StyleDictionary from 'style-dictionary'
 import * as tinycolor from 'tinycolor2'
-import * as lodash from 'lodash'
-
-const uiColorFromValue = (
-  value: any,
-): string => {
-  const { r, g, b, a } = tinycolor(value).toRgb()
-  const rFixed = (r / 255.0).toFixed(3)
-  const gFixed = (g / 255.0).toFixed(3)
-  const bFixed = (b / 255.0).toFixed(3)
-  return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`
-}
 
 const transforms: Record<
   string,

@@ -30,8 +30,8 @@ export const staticPropertyFormatter = (
   valueFormatter: (token) => string,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
   return function(token, indent): string {
-    var value = valueFormatter(token.token)
-    let equalityIndex = value.indexOf('=')
+    let value = valueFormatter(token.token)
+    const equalityIndex = value.indexOf('=')
     if (equalityIndex > 0) {
       value = value.slice(equalityIndex + 1)
     }
@@ -39,13 +39,26 @@ export const staticPropertyFormatter = (
   }
 }
 
-export const colorReferencePropertyFormatter = (
+export const swiftUiColorReferencePropertyFormatter = (
+  uiKitObjectName: string,
+  options: Options,
+): ((token: TokenTreeProperty, indent: string) => string) => {
+  return function(token, indent): string {
+    const path = token.path.slice(0, token.path.length - 1).map((pathComponent) => {
+      return pathComponent[0].toUpperCase() + pathComponent.slice(1)
+    }).join('.') + '.' + token.name
+    
+    return indent + options.accessControl + 'static let ' + token.name + ' = Color(uiColor: ' + uiKitObjectName + '.' + path + ')'
+  }
+}
+
+export const uiKitColorReferencePropertyFormatter = (
   lightModeObjectName: string,
   darkModeObjectName: string,
   options: Options,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
   return function(token, indent): string {
-    let path = token.path.slice(0, token.path.length - 1).map((pathComponent) => {
+    const path = token.path.slice(0, token.path.length - 1).map((pathComponent) => {
       return pathComponent[0].toUpperCase() + pathComponent.slice(1)
     }).join('.') + '.' + token.name
     
@@ -64,11 +77,11 @@ export const treeFromTokens = (
   tokens: TransformedToken[],
   ignorePathUpToValue?: string,
 ): TokenTree => {
-  var tree = null
+  let tree = null
   tokens.forEach(token => {
-    var usablePath
+    let usablePath
     if (ignorePathUpToValue) {
-      let index = token.path.indexOf(ignorePathUpToValue)
+      const index = token.path.indexOf(ignorePathUpToValue)
       if (index > -1) {
         usablePath = token.path.slice(index + 1)
       } else {
@@ -79,12 +92,9 @@ export const treeFromTokens = (
     }
     // Replace hyphens with camel case
     usablePath = usablePath.map((pathComponent) => {
-      var result = pathComponent
-      while (true) {
-        let index = result.indexOf('-')
-        if (index == -1) {
-          return result
-        }
+      let result = pathComponent
+      let index = -1
+      while ((index = result.indexOf('-')) > -1) {
         result = result.slice(0, index) + result[index + 1].toUpperCase() + result.slice(index + 2)
       }
       return result
@@ -102,7 +112,7 @@ export const fileContentFromTree = (
   propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
 ): string => {
   // Headers and imports
-  var result = '//\n// ' + file.destination + '\n//\n'
+  let result = '//\n// ' + file.destination + '\n//\n'
   result += fileHeader({file, commentStyle: 'short'})
   result += options.import.map(function(item) {
     return 'import ' + item
@@ -123,8 +133,8 @@ const swiftObjectFromTree = (
   propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
   indent: number,
 ): string => {
-  var result = ""
-  let indentString = "    ".repeat(indent)
+  let result = ""
+  const indentString = "    ".repeat(indent)
 
   tree.branches.forEach(branch => {
     let name
@@ -183,12 +193,12 @@ const placeTokenInTree = (
   }
 
   // Recursively find/create branches until we reach the proper spot for the token
-  let remainingPath = path.slice(1)
-  let existingBranch = tree.branches.find((value) => {
+  const remainingPath = path.slice(1)
+  const existingBranch = tree.branches.find((value) => {
     return value.name == name
   })
-  var treeFromBranch = null
-  var isNewBranch = false
+  let treeFromBranch = null
+  let isNewBranch = false
   if (existingBranch) {
     treeFromBranch = existingBranch.tree
   } else {

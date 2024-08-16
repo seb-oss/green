@@ -399,7 +399,8 @@ const config: StyleDictionary.Config = {
           packageName: swiftPackageName,
           options: {
             platformVersion: '15',
-            targets: ['SebGreenTokens'],
+            targets: [swiftPackageName],
+            resources: ['Assets'],
           }
         },
         {
@@ -425,6 +426,20 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: swiftSourcePath + '/Colors/UIColors.swift',
+          format: 'green/ios-swift-class-tree',
+          filter: 'is2023Color',
+          className: 'UIColors',
+          packageName: swiftPackageName,
+          options: {
+            type: 'color',
+            colorType: 'uiKitDynamicProvider',
+            import: ["UIKit"],
+            lightModeObjectName: 'LightModeColors',
+            darkModeObjectName: 'DarkModeColors',
+          }
+        },
+        {
           destination: swiftSourcePath + '/Colors/Colors.swift',
           format: 'green/ios-swift-class-tree',
           filter: 'is2023Color',
@@ -432,9 +447,9 @@ const config: StyleDictionary.Config = {
           packageName: swiftPackageName,
           options: {
             type: 'color',
-            colorType: 'reference',
-            lightModeObjectName: 'LightModeColors',
-            darkModeObjectName: 'DarkModeColors',
+            colorType: 'swiftUiReferenceToUiKit',
+            import: ["SwiftUI"],
+            uiKitObjectName: 'UIColors',
           }
         },
         {
