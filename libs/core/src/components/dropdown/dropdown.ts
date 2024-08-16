@@ -17,10 +17,8 @@ import {
 
 import '../icon/icons/chevron-bottom'
 import '../icon/icons/checkmark'
-// import '../icon/icons/chevron-bottom'
-// import '../../components/icon/icons/chevron-right'
-
 import '../../primitives/listbox'
+
 import type { GdsListbox } from '../../primitives/listbox'
 import type {
   GdsOption,
@@ -365,7 +363,6 @@ export class GdsDropdown<ValueT = any>
     options.forEach((o) => (o.hidden = false))
 
     if (!input.value) return
-    // console.log('input.value', input.value)
     const filteredOptions = options.filter(
       (o) => !this.searchFilter(input.value, o),
     )

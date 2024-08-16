@@ -413,7 +413,6 @@ describe('<gds-calendar>', () => {
   // Disable for 2023
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      console.warn('Accessibility test skipped')
       const el = await fixture<GdsCalendar>(
         html`<gds-calendar
           .focusedDate=${new Date('2024-06-03')}

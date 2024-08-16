@@ -3,10 +3,6 @@ import { repeat } from 'lit/directives/repeat.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
-// Needed for components that only have 2016 style so far
-// import { registerTransitionalStyles } from '../../transitional-styles.ts'
-// registerTransitionalStyles()
-
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/dropdown)
  * &nbsp;|&nbsp;

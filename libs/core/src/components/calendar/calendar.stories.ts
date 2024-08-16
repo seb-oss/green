@@ -1,11 +1,6 @@
 import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
-import '../dropdown/index.js'
-
-// Needed for components that only have 2016 style so far
-// import { registerTransitionalStyles } from '../../transitional-styles.ts'
-// registerTransitionalStyles()
 
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/calendar)

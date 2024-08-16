@@ -13,8 +13,6 @@ import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
 import { tokens } from '../../tokens.style'
 
-// import '@sebgroup/core/components/icon/icons/checkmark'
-
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
   multiple: boolean
