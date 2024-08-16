@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.0
+
+### Minor Changes
+
+- 3cf63ae: Adding sizing input for the dialog modal in angular and chlorophyll
+
 ## 3.4.3
 
 ### Patch Changes
