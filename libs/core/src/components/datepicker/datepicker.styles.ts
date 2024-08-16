@@ -6,10 +6,8 @@ export const styles = css`
   @layer base {
     :host {
       font-family: inherit;
-      // display: contents;
       display: flex;
       flex-direction: column;
-      // gap: var(--gds-space-xs);
     }
 
     .header {

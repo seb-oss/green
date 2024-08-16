@@ -12,6 +12,7 @@
 
   :host {
     display: block;
+    font-family: inherit;
   }
 
   :host(:invalid) [gds-element='gds-popover'] + .form-info {
@@ -53,26 +54,12 @@
     }
   }
 
-  button {
-    @include button.reset();
-    @include button.base();
-    @include button.secondary();
-    @include dropdown.dropdown-trigger();
-
-    font-size: inherit;
-    font-weight: normal;
-    line-height: 1.125;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-
-    width: 100%;
-
-    &.small {
-      font-size: 0.875rem;
-    }
+  ::part(_button) {
+    border-color: var(--grey-800);
+    color: var(--text-primary-color);
 
     &:hover {
-      background: var(--grey-400);
+      background-color: var(--grey-400);
     }
   }
 
