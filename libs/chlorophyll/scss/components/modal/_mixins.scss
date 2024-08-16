@@ -96,6 +96,10 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
   position: initial;
   width: 375px;
 
+  &.medium {
+    width: 512px;
+  }
+
   &.large {
     width: 720px;
   }
