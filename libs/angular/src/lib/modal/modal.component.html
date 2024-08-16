@@ -18,6 +18,9 @@
       role="dialog"
       aria-modal="true"
       [class.entered]="isOpen"
+      [class.small]="size === 'sm'"
+      [class.medium]="size === 'md'"
+      [class.large]="size === 'lg'"
     >
       <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </main>

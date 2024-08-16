@@ -24,7 +24,7 @@ describe(NggModalComponent.name, () => {
   })
 
   it('should destroy', async () => {
-    (bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
+    ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { fixture } = await render(NggModalComponent, {
       declarations: [
@@ -46,7 +46,7 @@ describe(NggModalComponent.name, () => {
 
   it('should be closed', async () => {
     // Mock
-    (bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
+    ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { queryByTestId, container } = await render(NggModalComponent, {
       declarations: [
@@ -57,7 +57,6 @@ describe(NggModalComponent.name, () => {
       providers: [],
       componentInputs: { modalType: 'default', isOpen: false },
     })
-    
 
     expect(queryByTestId('modal')).toBeFalsy()
     expect(container.classList.contains('open')).toEqual(false)
@@ -66,7 +65,7 @@ describe(NggModalComponent.name, () => {
 
   it('should be open', async () => {
     // Mock
-    (bodyScrollLock.disableBodyScroll as unknown) = jest.fn()
+    ;(bodyScrollLock.disableBodyScroll as unknown) = jest.fn()
 
     const component = await render(NggModalComponent, {
       declarations: [
@@ -417,5 +416,37 @@ describe(NggModalComponent.name, () => {
     fireEvent.click(dismissButton, { target: dismissButton })
 
     expect(event.target).toEqual(dismissButton)
+  })
+
+  it('should render the medium size', async () => {
+    const component = await render(NggModalComponent, {
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
+      providers: [],
+      componentInputs: { isOpen: true, size: 'md' },
+    })
+
+    const modal = component.queryByRole('dialog')
+
+    expect(modal?.classList.contains('medium')).toBeTruthy()
+  })
+
+  it('should render the large size', async () => {
+    const component = await render(NggModalComponent, {
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
+      providers: [],
+      componentInputs: { isOpen: true, size: 'lg' },
+    })
+
+    const modal = component.queryByRole('dialog')
+
+    expect(modal?.classList.contains('large')).toBeTruthy()
   })
 })
