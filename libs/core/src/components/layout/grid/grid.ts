@@ -3,7 +3,6 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import GridCSS from './grid.style.css'

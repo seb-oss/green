@@ -6,7 +6,6 @@ import { literal, html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { constrainSlots } from '../../utils/helpers'
-// import { tokens } from '../../tokens.style'
 
 import style from './menu-button.css?inline'
 

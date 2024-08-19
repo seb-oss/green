@@ -11,7 +11,6 @@ import style from './option.styles'
 
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
-// import { tokens } from '../../tokens.style'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]

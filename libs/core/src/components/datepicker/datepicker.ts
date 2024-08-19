@@ -35,7 +35,6 @@ import '../../components/icon/icons/calendar'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
-// import { tokens } from '../../tokens.style'
 import { styles } from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'

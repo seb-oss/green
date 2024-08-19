@@ -2,7 +2,6 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import FlexCSS from './flex.style.css'

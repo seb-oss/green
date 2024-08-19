@@ -12,7 +12,6 @@ import { GdsSegment } from '../../components/segmented-control/segment'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
-// import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css?inline'
 
 const BTN_SIZE = {

@@ -29,7 +29,6 @@ import '../button'
 
 import { GdsFormControlElement } from '../form/form-control'
 
-// import { tokens } from '../../tokens.style'
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
 

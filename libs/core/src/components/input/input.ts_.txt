@@ -14,7 +14,6 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { tokens } from '../../tokens.style'
 
 import styles from './input.styles.css'
 

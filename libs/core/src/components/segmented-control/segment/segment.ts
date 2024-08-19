@@ -4,7 +4,6 @@ import { gdsCustomElement, html } from '../../../scoping'
 import { TransitionalStyles } from '../../../transitional-styles'
 import { unsafeCSS } from 'lit'
 
-import { tokens } from '../../../tokens.style'
 import style from './segment.style.css?inline'
 
 /**
@@ -12,7 +11,7 @@ import style from './segment.style.css?inline'
  */
 @gdsCustomElement('gds-segment')
 export class GdsSegment<ValueT = any> extends GdsElement {
-  static styles = [...tokens, unsafeCSS(style)]
+  static styles = [unsafeCSS(style)]
 
   /**
    * Whether the segment is selected
