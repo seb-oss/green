@@ -1,4 +1,0 @@
-import{x as m}from"./lit-element-71e04f06.js";const p={title:"Docs/Theme",component:"gds-theme",tags:["autodocs"],parameters:{docs:{description:{component:"The `gds-theme` is a custom element that provides tokens and high level styling that lives system wide.\n\nIt is mandatory and all component should be wrapped in a `gds-theme` element.\n\n@status beta"}}}},n={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{disable:!0}}},e={...n,render:d=>m` <gds-theme> Theme example </gds-theme> `};var t,s,a,r,o;e.parameters={...e.parameters,docs:{...(t=e.parameters)==null?void 0:t.docs,source:{originalSource:`{
-  ...DefaultParams,
-  render: args => html\` <gds-theme> Theme example </gds-theme> \`
-}`,...(a=(s=e.parameters)==null?void 0:s.docs)==null?void 0:a.source},description:{story:"Card",...(o=(r=e.parameters)==null?void 0:r.docs)==null?void 0:o.description}}};const i=["Theme"];export{e as Theme,i as __namedExportsOrder,p as default};
