@@ -4,7 +4,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import DividerCSS from './divider.style.css'
@@ -19,7 +19,7 @@ import DividerCSS from './divider.style.css'
  */
 @gdsCustomElement('gds-divider')
 export class GdsDivider extends GdsElement {
-  static styles = [tokens, DividerCSS]
+  static styles = [DividerCSS]
 
   /**
    * Controls the color property of the divider.

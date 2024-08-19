@@ -2,7 +2,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import FlexCSS from './flex.style.css'
@@ -20,7 +20,7 @@ import { GdsContainer } from '../container'
 
 @gdsCustomElement('gds-flex')
 export class GdsFlex extends GdsContainer {
-  static styles = [tokens, FlexCSS]
+  static styles = [FlexCSS]
 
   /**
    * Controls the gap property of the flex.

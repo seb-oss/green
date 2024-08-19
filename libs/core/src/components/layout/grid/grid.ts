@@ -3,7 +3,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import GridCSS from './grid.style.css'
@@ -17,7 +17,7 @@ import GridCSS from './grid.style.css'
  */
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends GdsElement {
-  static styles = [tokens, GridCSS]
+  static styles = [GridCSS]
 
   /**
    * The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.

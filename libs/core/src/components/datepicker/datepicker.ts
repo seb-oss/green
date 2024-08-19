@@ -35,7 +35,7 @@ import '../../components/icon/icons/calendar'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
-import { tokens } from '../../tokens.style'
+// import { tokens } from '../../tokens.style'
 import { styles } from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
@@ -59,7 +59,7 @@ type DateFormatLayout = {
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement<Date> {
-  static styles = [tokens, styles]
+  static styles = [styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

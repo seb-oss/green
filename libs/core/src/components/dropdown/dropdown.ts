@@ -29,7 +29,7 @@ import '../button'
 
 import { GdsFormControlElement } from '../form/form-control'
 
-import { tokens } from '../../tokens.style'
+// import { tokens } from '../../tokens.style'
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
 
@@ -52,7 +52,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = [tokens, styles]
+  static styles = [styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

@@ -3,7 +3,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import ContainerCSS from './container.style.css'
@@ -21,7 +21,7 @@ import ContainerCSS from './container.style.css'
 
 @gdsCustomElement('gds-container')
 export class GdsContainer extends GdsElement {
-  static styles = [tokens, ContainerCSS]
+  static styles = [ContainerCSS]
 
   /**
    * Controls the display property of the container.

@@ -4,7 +4,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import IMGCSS from './img.style.css'
@@ -21,7 +21,7 @@ import IMGCSS from './img.style.css'
  */
 @gdsCustomElement('gds-img')
 export class GdsImg extends GdsElement {
-  static styles = [tokens, IMGCSS]
+  static styles = [IMGCSS]
 
   /**
    * Controls the aspect ratio of the image.

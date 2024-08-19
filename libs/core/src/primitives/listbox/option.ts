@@ -11,7 +11,7 @@ import style from './option.styles'
 
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
-import { tokens } from '../../tokens.style'
+// import { tokens } from '../../tokens.style'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
@@ -35,7 +35,7 @@ export interface OptionsContainer extends HTMLElement {
  */
 @gdsCustomElement('gds-option')
 export class GdsOption extends Focusable(GdsElement) {
-  static styles = [tokens, style]
+  static styles = [style]
 
   /**
    * The value of the option.

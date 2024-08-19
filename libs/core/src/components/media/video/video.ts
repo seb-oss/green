@@ -4,7 +4,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
+// import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import VideoCSS from './video.style.css'
@@ -19,7 +19,7 @@ import VideoCSS from './video.style.css'
  */
 @gdsCustomElement('gds-video')
 export class GdsVideo extends GdsElement {
-  static styles = [tokens, VideoCSS]
+  static styles = [VideoCSS]
 
   /**
    * Controls the aspect ratio of the image.

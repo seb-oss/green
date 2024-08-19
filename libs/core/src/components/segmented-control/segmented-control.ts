@@ -12,7 +12,7 @@ import { GdsSegment } from '../../components/segmented-control/segment'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
-import { tokens } from '../../tokens.style'
+// import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css?inline'
 
 const BTN_SIZE = {
@@ -34,7 +34,7 @@ const getSegmentGap = (transitionalStyles: boolean) =>
  */
 @gdsCustomElement('gds-segmented-control')
 export class GdsSegmentedControl<ValueT = any> extends GdsElement {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [unsafeCSS(style)]
 
   /**
    * Minimum width of each segment. Used for calculating the number of visible
