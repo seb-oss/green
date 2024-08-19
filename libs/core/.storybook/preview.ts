@@ -32,7 +32,10 @@ export default {
   parameters: {
     docs: {
       page: DocTemplate,
-      transformSource: (source: any) => {
+      transformSource: (source: any, context: any) => {
+        if (context.parameters?.globals?.disableTheme) {
+          return source
+        }
         const regexRes = source.match(/<gds-theme>([\s\S]*?)<\/gds-theme>/)
         return regexRes ? regexRes[1] : source
       },
@@ -53,12 +56,12 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
-      // Initialize previousStyle if it doesn't exist
       if (typeof context.globals.previousStyle === 'undefined') {
         context.globals.previousStyle = '2023' // Default to 2023
       }
 
       const style = context.globals.style || '2023'
+      const disableTheme = context.parameters?.globals?.disableTheme
 
       if (style === '2016') {
         if (context.globals.previousStyle !== '2016') {
@@ -72,7 +75,11 @@ export default {
 
       context.globals.previousStyle = style
 
-      return html`<gds-theme>${storyFn()}</gds-theme>`
+      if (disableTheme) {
+        return storyFn()
+      } else {
+        return html`<gds-theme>${storyFn()}</gds-theme>`
+      }
     },
   ],
 }
