@@ -33,7 +33,8 @@ const html = stripWhitespace(customElementHtml)
  */
 @gdsCustomElement('gds-button')
 export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
-  static styles = [tokens, unsafeCSS(style)]
+  // static styles = [tokens, unsafeCSS(style)]
+  static styles = [unsafeCSS(style)]
 
   /**
    * @internal

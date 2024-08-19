@@ -2,7 +2,10 @@ import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
-import { css } from 'lit'
+
+// Tokens and styles
+import { tokens } from '../../tokens.style'
+import style from './theme.style.css'
 
 /**
  * @element gds-theme
@@ -17,11 +20,7 @@ import { css } from 'lit'
  */
 @gdsCustomElement('gds-theme')
 export class GdsTheme extends GdsElement {
-  static styles = css`
-    :host {
-      display: contents;
-    }
-  `
+  static styles = [tokens, style]
   /**
    * The theme mode. Can be `light`, `dark`, or `auto`.
    */
