@@ -64,7 +64,7 @@ export abstract class GdsIcon extends GdsElement {
       ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
       role="graphics-symbol"
       part="icon"
-      ?stroke="${this.stroke}"
+      stroke="${this.stroke}"
     >
       ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
     </svg>`

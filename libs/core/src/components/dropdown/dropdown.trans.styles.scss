@@ -54,14 +54,15 @@
     }
   }
 
-  ::part(_button) {
-    border-color: var(--grey-800);
-    color: var(--text-primary-color);
+  // TODO: Remove this when the button component is updated
+  // ::part(_button) {
+  //   border-color: var(--grey-800);
+  //   color: var(--text-primary-color);
 
-    &:hover {
-      background-color: var(--grey-400);
-    }
-  }
+  //   &:hover {
+  //     background-color: var(--grey-400);
+  //   }
+  // }
 
   label {
     display: block;

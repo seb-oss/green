@@ -212,9 +212,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   render() {
     return html`${when(
-      this.label && !this.hideLabel,
-      () => html`<label for="spinner-0" id="label">${this.label}</label>`,
-    )}
+        this.label && !this.hideLabel,
+        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
+      )}
 
       <div class="form-info"><slot name="sub-label"></slot></div>
 
@@ -255,14 +255,13 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             html`<span>${this._dateFormatLayout.delimiter}</span>`,
           )}
         </div>
-        <gds-button
+        <button
           id="calendar-button"
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
-          rank="tertiary"
           size=${this.size}
         >
           <gds-icon-calendar></gds-icon-calendar>

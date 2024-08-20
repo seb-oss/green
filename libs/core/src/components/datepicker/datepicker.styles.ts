@@ -19,14 +19,6 @@ export const styles = css`
       padding-block-start: var(--gds-space-m);
       gap: var(--gds-space-xs);
       box-sizing: border-box;
-
-      ::part(_button) {
-        border-radius: var(--gds-space-2xs);
-      }
-
-      ::part(_ripple) {
-        border-radius: var(--gds-space-2xs);
-      }
     }
 
     .header gds-dropdown.month {
@@ -61,34 +53,36 @@ export const styles = css`
     .field {
       display: flex;
       justify-content: space-between;
-      gap: var(--gds-space-s);
-      border-radius: var(--gds-space-2xs);
+      gap: var(--gds-space-2xs);
+      padding: var(--gds-space-2xs);
+      border-radius: var(--gds-space-xs);
       font-size: var(--gds-text-size-label-medium);
       line-height: var(--gds-text-line-height-label-medium);
       font-weight: var(--gds-text-weight-regular);
       font-family: inherit;
-      color: var(--gds-sys-color-base800);
-      padding-inline: var(--gds-space-2xs);
-      padding-block: var(--gds-space-2xs);
+      color: #1b1b1b;
+      overflow: hidden;
       margin-block: var(--gds-space-xs);
-      background-color: var(--gds-sys-color-container-container-bright);
-      border: var(--gds-space-4xs) solid var(--gds-sys-color-base600);
+      background-color: #e2e2e2;
+      border: var(--gds-space-4xs) solid #6f6f6f;
       max-width: 100%;
       cursor: pointer;
       color: currentColor;
+      height: 48px;
+      box-sizing: border-box;
+
+      &:hover {
+        background-color: #cecece;
+      }
 
       .input {
         display: flex;
         align-items: center;
         flex-direction: row;
-        height: inherit;
         max-width: max-content;
         text-transform: uppercase;
         flex: 1;
-
-        span {
-          opacity: 0.4;
-        }
+        font-variant-numeric: tabular-nums;
 
         &:focus-within span {
           opacity: 0;
@@ -100,41 +94,50 @@ export const styles = css`
           justify-content: center;
           text-align: center;
           height: 100%;
-          outline-color: var(--gds-sys-color-base500);
-          outline-offset: -2px;
+          outline-color: currentcolor;
+          outline-offset: -4px;
           outline-width: 2px;
           box-sizing: border-box;
-          border-radius: var(--gds-space-2xs);
+          border-radius: var(--gds-space-xs);
+          padding-inline: 1ch;
 
           &:focus-visible {
             outline-style: solid;
           }
         }
+      }
 
-        .spinner[aria-valuetext='yyyy'],
-        .spinner[aria-valuetext='mm'],
-        .spinner[aria-valuetext='dd'] {
-          color: var(--gds-sys-color-base500);
-        }
+      button {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        box-sizing: border-box;
+        color: currentColor;
+        cursor: pointer;
+        aspect-ratio: 1;
+        margin: 0;
+        padding: 0;
+        outline-color: inherit;
+        outline-offset: -4px;
+        border-radius: var(--gds-space-xs);
+        padding-top: 2px;
 
-        .spinner[aria-label='Year'] {
-          width: var(--gds-space-4xl);
-        }
-
-        .spinner[aria-label='Month'],
-        .spinner[aria-label='Day'] {
-          width: var(--gds-space-2xl);
-        }
-
-        .spinner:hover,
-        .spinner:focus {
-          color: var(--gds-sys-color-base800);
+        &:focus-visible,
+        &:hover {
+          outline: 2px solid currentcolor;
         }
       }
 
-      ::part(_button) {
-        outline-offset: -2px;
-        border-radius: var(--gds-space-2xs);
+      &.small {
+        height: 32px;
+        padding: 0;
+        font-size: 12px;
+
+        button {
+          outline-offset: -4px;
+          border-radius: var(--gds-space-xs);
+          padding-top: 3px;
+        }
       }
     }
   }

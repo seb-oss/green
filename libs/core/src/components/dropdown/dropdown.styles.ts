@@ -11,21 +11,28 @@ const style = css`
       font-family: inherit;
     }
 
-    ::part(_button) {
-      --pad: var(--_padding-inline);
-      --gap: var(--_gap);
-      border-radius: var(--gds-space-2xs);
-      padding-inline: calc(var(--pad) / 2);
-      gap: calc(var(--gap) / 2);
+    // TODO: Remove this part
+    // ::part(_button) {
+    //   --pad: var(--_padding-inline);
+    //   --gap: var(--_gap);
+    //   border-radius: var(--gds-space-2xs);
+    //   padding-inline: calc(var(--pad) / 2);
+    //   gap: calc(var(--gap) / 2);
+    // }
+
+    // TODO: Style button based on design
+    button {
+      background-color: #fc0;
     }
 
     :slot(trail) {
       transform: scaleY(-1);
     }
 
-    ::part(_ripple) {
-      border-radius: var(--gds-space-2xs);
-    }
+    // TODO: Remove this part
+    // ::part(_ripple) {
+    //   border-radius: var(--gds-space-2xs);
+    // }
 
     slot[name='trigger'] > span {
       display: block;

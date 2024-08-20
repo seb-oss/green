@@ -144,20 +144,6 @@
         flex: 1 1;
       }
     }
-
-    ::part(_button) {
-      border-radius: 4px;
-      color: var(--grey-1000);
-      border: none;
-
-      &:hover {
-        background-color: var(--grey-400);
-      }
-    }
-
-    ::part(_ripple) {
-      border-radius: 4px;
-    }
   }
 
   .footer {
