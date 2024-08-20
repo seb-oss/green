@@ -87,9 +87,7 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName(getScopedTagName('gds-button')),
-    )!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await expect(label).to.not.be.null
     await expect(label.textContent).to.equal('DD Label')
@@ -143,9 +141,8 @@ describe('<gds-dropdown>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const triggerSlot = el.shadowRoot!.querySelector<HTMLSlotElement>(
-      `${getScopedTagName('gds-button')} slot`,
-    )!
+    const triggerSlot =
+      el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
 
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
@@ -230,9 +227,7 @@ describe('<gds-dropdown>', () => {
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await timeout(50)
 
@@ -241,13 +236,7 @@ describe('<gds-dropdown>', () => {
     )
   })
 
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
   it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
-    console.warn(
-      'Test warning: should be the same width as the trigger when `sync-popover-width` attribute is set',
-    )
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown sync-popover-width open>
         <gds-option value="v1">Option 1</gds-option>
@@ -265,23 +254,14 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await timeout(50)
 
     expect(popover?.clientWidth).to.equal(trigger.clientWidth)
   })
 
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
   it('should limit the height of the popover to max-height attribute', async () => {
-    console.warn(
-      'Test warning: should limit the height of the popover to max-height attribute',
-    )
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open max-height="50">
         <gds-option value="v1">Option 1</gds-option>
@@ -413,9 +393,7 @@ describe('<gds-dropdown> interactions', () => {
       </gds-dropdown>
     `)
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await clickOnElement(trigger, 'center')
     await el.updateComplete
@@ -533,9 +511,7 @@ describe('<gds-dropdown> keyboard navigation', () => {
       </gds-dropdown>
     `)
 
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>(
-      getScopedTagName('gds-button'),
-    )!
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await clickOnElement(trigger, 'center')
     await el.updateComplete
