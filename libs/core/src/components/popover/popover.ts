@@ -80,7 +80,7 @@ export class GdsPopover extends GdsElement {
   /**
    * Whether to use a modal dialog in mobile viewport.
    */
-  @property()
+  @property({ type: Boolean })
   disableMobileStyles = false
 
   /**
