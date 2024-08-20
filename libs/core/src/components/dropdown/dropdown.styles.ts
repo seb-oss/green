@@ -23,7 +23,7 @@ const style = css`
       transform: scaleY(-1);
     }
 
-    ::part(ripple) {
+    ::part(_ripple) {
       border-radius: var(--gds-space-2xs);
     }
 

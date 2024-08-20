@@ -24,7 +24,7 @@ export const styles = css`
         border-radius: var(--gds-space-2xs);
       }
 
-      ::part(ripple) {
+      ::part(_ripple) {
         border-radius: var(--gds-space-2xs);
       }
     }
