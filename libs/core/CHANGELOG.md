@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.33.1
+
+### Patch Changes
+
+- d988e2b: **Popover:** Fix property type of `disableMobileStyles` (to Boolean)
+
 ## 1.33.0
 
 ### Minor Changes
