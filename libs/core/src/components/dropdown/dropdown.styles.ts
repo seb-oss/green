@@ -11,28 +11,43 @@ const style = css`
       font-family: inherit;
     }
 
-    // TODO: Remove this part
-    // ::part(_button) {
-    //   --pad: var(--_padding-inline);
-    //   --gap: var(--_gap);
-    //   border-radius: var(--gds-space-2xs);
-    //   padding-inline: calc(var(--pad) / 2);
-    //   gap: calc(var(--gap) / 2);
-    // }
-
-    // TODO: Style button based on design
     button {
-      background-color: #fc0;
-    }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gds-space-xs);
+      height: var(--gds-space-xl);
+      border-style: solid;
+      border-width: var(--gds-space-4xs);
+      border-radius: var(--gds-space-xs);
+      padding-inline-start: var(--gds-space-s);
+      padding-inline-end: var(--gds-space-xs);
+      cursor: pointer;
+      box-sizing: border-box;
 
-    :slot(trail) {
-      transform: scaleY(-1);
-    }
+      // TODO: Update colors to use tokens
+      border-color: #6f6f6f;
+      color: #1b1b1b;
+      background-color: #e2e2e2;
 
-    // TODO: Remove this part
-    // ::part(_ripple) {
-    //   border-radius: var(--gds-space-2xs);
-    // }
+      &:hover {
+        background-color: #cecece;
+      }
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1/1;
+        height: 100%;
+        width: auto;
+        box-sizing: border-box;
+      }
+
+      &[aria-expanded='true'] ::part(icon) {
+        transform: scaleY(-1);
+      }
+    }
 
     slot[name='trigger'] > span {
       display: block;

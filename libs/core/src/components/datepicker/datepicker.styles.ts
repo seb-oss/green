@@ -60,16 +60,20 @@ export const styles = css`
       line-height: var(--gds-text-line-height-label-medium);
       font-weight: var(--gds-text-weight-regular);
       font-family: inherit;
-      color: #1b1b1b;
       overflow: hidden;
       margin-block: var(--gds-space-xs);
-      background-color: #e2e2e2;
-      border: var(--gds-space-4xs) solid #6f6f6f;
       max-width: 100%;
       cursor: pointer;
       color: currentColor;
-      height: 48px;
+      height: var(--gds-space-3xl);
       box-sizing: border-box;
+      border-width: var(--gds-space-4xs);
+      border-style: solid;
+
+      // TODO: Update colors with tokens
+      border-color: #6f6f6f;
+      color: #1b1b1b;
+      background-color: #e2e2e2;
 
       &:hover {
         background-color: #cecece;
@@ -96,7 +100,7 @@ export const styles = css`
           height: 100%;
           outline-color: currentcolor;
           outline-offset: -4px;
-          outline-width: 2px;
+          outline-width: var(--gds-space-3xs);
           box-sizing: border-box;
           border-radius: var(--gds-space-xs);
           padding-inline: 1ch;
@@ -120,18 +124,18 @@ export const styles = css`
         outline-color: inherit;
         outline-offset: -4px;
         border-radius: var(--gds-space-xs);
-        padding-top: 2px;
+        padding-top: var(--gds-space-3xs);
 
         &:focus-visible,
         &:hover {
-          outline: 2px solid currentcolor;
+          outline: var(--gds-space-3xs) solid currentcolor;
         }
       }
 
       &.small {
-        height: 32px;
+        height: var(--gds-space-xl);
+        font-size: var(--gds-text-size-label-small);
         padding: 0;
-        font-size: 12px;
 
         button {
           outline-offset: -4px;

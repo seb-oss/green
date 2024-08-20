@@ -54,15 +54,47 @@
     }
   }
 
-  // TODO: Remove this when the button component is updated
-  // ::part(_button) {
-  //   border-color: var(--grey-800);
-  //   color: var(--text-primary-color);
+  button {
+    @include button.reset();
+    @include button.base();
+    @include button.secondary();
+    @include dropdown.dropdown-trigger();
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1.125;
+    gap: 1ch;
 
-  //   &:hover {
-  //     background-color: var(--grey-400);
-  //   }
-  // }
+    width: 100%;
+
+    &.small {
+      font-size: 0.875rem;
+    }
+
+    &:hover {
+      background: var(--grey-400);
+    }
+
+    &::after {
+      display: none;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      height: 100%;
+      width: auto;
+      box-sizing: border-box;
+    }
+
+    &[aria-expanded='true'] ::part(icon) {
+      transform: scaleY(-1);
+    }
+  }
 
   label {
     display: block;

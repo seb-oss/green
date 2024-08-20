@@ -293,6 +293,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
             rank="tertiary"
+            size="small"
           >
             <gds-icon-chevron-left></gds-icon-chevron-left>
           </gds-button>
@@ -337,6 +338,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             @click=${this.#handleIncrementFocusedMonth}
             aria-label=${msg('Next month')}
             rank="tertiary"
+            size="small"
           >
             <gds-icon-chevron-right></gds-icon-chevron-right>
           </gds-button>
