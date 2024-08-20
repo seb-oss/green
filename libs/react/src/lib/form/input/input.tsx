@@ -6,6 +6,8 @@ import {
   useEffect,
   useState,
   ReactNode,
+  forwardRef,
+  ForwardedRef,
 } from 'react'
 import {
   IExpandableInformation,
@@ -38,130 +40,142 @@ export interface InputProps
   onChangeInput?: (value: string) => string
 }
 
-export const Input = ({
-  'aria-describedby': ariaDescribedBy,
-  autoComplete = 'off',
-  children,
-  className,
-  testId: dataTestId,
-  expandableInfo,
-  expandableInfoButtonLabel,
-  formatter,
-  id = randomId(),
-  label,
-  info,
-  onChange,
-  unit,
-  role,
-  validator,
-  onChangeInput,
-  value = '',
-  required,
-  ...props
-}: InputProps) => {
-  const [uuid] = useState(id)
-  const [localValue, setLocalValue] = useState(value)
+export const Input = forwardRef(
+  (
+    {
+      'aria-describedby': ariaDescribedBy,
+      autoComplete = 'off',
+      children,
+      className,
+      testId: dataTestId,
+      expandableInfo,
+      expandableInfoButtonLabel,
+      formatter,
+      id = randomId(),
+      label,
+      info,
+      onChange,
+      unit,
+      role,
+      validator,
+      onChangeInput,
+      value = '',
+      required,
+      ...props
+    }: InputProps,
+    ref: HTMLInputElement,
+  ) => {
+    const [uuid] = useState(id)
+    const [localValue, setLocalValue] = useState(value)
 
-  useEffect(() => {
-    setLocalValue(value)
-  }, [value])
+    useEffect(() => {
+      setLocalValue(value)
+    }, [value])
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { selectionStart, value } = event.target
-      const formattedValue = formatter ? formatter(value) : value
-      const nrAddedChars = formattedValue.length - value.length
-      const updateCaretPosition = nrAddedChars !== 0
-      const newSelectionStart =
-        updateCaretPosition && selectionStart
-          ? selectionStart + nrAddedChars
-          : selectionStart
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        const { selectionStart, value } = event.target
+        const formattedValue = formatter ? formatter(value) : value
+        const nrAddedChars = formattedValue.length - value.length
+        const updateCaretPosition = nrAddedChars !== 0
+        const newSelectionStart =
+          updateCaretPosition && selectionStart
+            ? selectionStart + nrAddedChars
+            : selectionStart
 
-      // Fixes bug: React loses caret position when you format the input value
-      window.requestAnimationFrame(() => {
-        event.target.selectionStart = newSelectionStart
-        event.target.selectionEnd = newSelectionStart
-      })
+        // Fixes bug: React loses caret position when you format the input value
+        window.requestAnimationFrame(() => {
+          event.target.selectionStart = newSelectionStart
+          event.target.selectionEnd = newSelectionStart
+        })
 
-      setLocalValue(formattedValue)
-      if (onChange) onChange(event)
-      if (onChangeInput) onChangeInput(formattedValue)
-    },
-    [formatter, setLocalValue, onChange, onChangeInput],
-  )
+        setLocalValue(formattedValue)
+        if (onChange) onChange(event)
+        if (onChangeInput) onChangeInput(formattedValue)
+      },
+      [formatter, setLocalValue, onChange, onChangeInput],
+    )
 
-  const showSimpleInput = !label && !info && !expandableInfo
+    const showSimpleInput = !label && !info && !expandableInfo
 
-  const describedBy = classNames(ariaDescribedBy, {
-    [`${uuid}_group-message`]:
-      !showSimpleInput &&
-      validator?.message !== undefined &&
-      validator.message.length > 0,
-    [`${uuid}_info`]: !showSimpleInput && info,
-    [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
-  })
+    const describedBy = classNames(ariaDescribedBy, {
+      [`${uuid}_group-message`]:
+        !showSimpleInput &&
+        validator?.message !== undefined &&
+        validator.message.length > 0,
+      [`${uuid}_info`]: !showSimpleInput && info,
+      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
+    })
 
-  const inputClassName = classNames(className, {
-    [validateClassName(validator?.indicator)]: validator,
-  })
+    const inputClassName = classNames(className, {
+      [validateClassName(validator?.indicator)]: validator,
+    })
 
-  const input = (
-    <input
-      aria-describedby={describedBy || undefined}
-      aria-invalid={validator?.indicator === 'error'}
-      aria-required={required}
-      autoComplete={autoComplete}
-      className={inputClassName || undefined}
-      data-testid={dataTestId}
-      id={uuid}
-      onChange={handleChange}
-      role={role}
-      value={localValue}
-      required={required}
-      {...props}
-    />
-  )
+    const input = (
+      <input
+        aria-describedby={describedBy || undefined}
+        aria-invalid={validator?.indicator === 'error'}
+        aria-required={required}
+        autoComplete={autoComplete}
+        className={inputClassName || undefined}
+        data-testid={dataTestId}
+        id={uuid}
+        onChange={handleChange}
+        role={role}
+        value={localValue}
+        required={required}
+        ref={ref}
+        {...props}
+      />
+    )
 
-  if (showSimpleInput) return input
+    if (showSimpleInput) return input
 
-  const spanClassName = classNames('form-text', { disabled: props.disabled })
+    const spanClassName = classNames('form-text', { disabled: props.disabled })
 
-  return (
-    <FormItem
-      expandableInfo={expandableInfo}
-      expandableInfoButtonLabel={expandableInfoButtonLabel}
-      inputId={uuid}
-      label={label}
-      labelInformation={info}
-      role={role}
-    >
-      <div className="gds-input-wrapper">
-        <Group
-          groupBorder
-          groupFocus
-          error={validator?.message}
-          id={`${uuid}_group`}
-        >
-          {input}
-          {unit && <span className={spanClassName}>{unit}</span>}
-          {children}
-        </Group>
-      </div>
-    </FormItem>
-  )
-}
+    return (
+      <FormItem
+        expandableInfo={expandableInfo}
+        expandableInfoButtonLabel={expandableInfoButtonLabel}
+        inputId={uuid}
+        label={label}
+        labelInformation={info}
+        role={role}
+      >
+        <div className="gds-input-wrapper">
+          <Group
+            groupBorder
+            groupFocus
+            error={validator?.message}
+            id={`${uuid}_group`}
+          >
+            {input}
+            {unit && <span className={spanClassName}>{unit}</span>}
+            {children}
+          </Group>
+        </div>
+      </FormItem>
+    )
+  },
+)
 
-export const TextInput = (props: Omit<InputProps, 'type'>) => {
-  return <Input type="text" {...props} />
-}
+export const TextInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="text" {...props} ref={ref} />
+  },
+)
 
-export const EmailInput = (props: Omit<InputProps, 'type'>) => {
-  return <Input type="email" {...props} />
-}
+export const EmailInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="email" {...props} ref={ref} />
+  },
+)
 
-export const NumberInput = (props: Omit<InputProps, 'type'>) => {
-  return <Input type="number" {...props} />
-}
+export const NumberInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="number" {...props} ref={ref} />
+  },
+)
 
 // For backwards compatibility
 export { RadioButton } from '../radioButton/radioButton'
