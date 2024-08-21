@@ -207,11 +207,7 @@ describe('<gds-dropdown>', () => {
     await expect(formData.get('test-dropdown')).to.equal('v1')
   })
 
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
-  // DISABLE FOR 2023
   it('popover should not be narrower than trigger', async () => {
-    console.warn('Test warning: popover should not be narrower than trigger')
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
         <gds-option placeholder
@@ -257,13 +253,6 @@ describe('<gds-dropdown>', () => {
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
     await timeout(50)
-
-    console.warn('Popover Width:', popover?.clientWidth)
-    console.warn('Trigger Width:', trigger.clientWidth)
-    console.warn('Popover OffsetWidth:', popover?.offsetWidth)
-    console.warn('Trigger OffsetWidth:', trigger.offsetWidth)
-    console.warn('Popover ScrollWidth:', popover?.scrollWidth)
-    console.warn('Trigger ScrollWidth:', trigger.scrollWidth)
 
     expect(popover?.offsetWidth).to.equal(trigger.offsetWidth)
   })
