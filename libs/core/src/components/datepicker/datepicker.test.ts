@@ -1,20 +1,14 @@
 import { expect } from '@esm-bundle/chai'
 import {
-  aTimeout,
   fixture,
   html as testingHtml,
   waitUntil,
+  aTimeout,
 } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import {
-  clickOnElement,
-  conditionToBeTrue,
-  isWebKit,
-  onlyDate,
-  timeout,
-} from '../../utils/testing'
+import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/datepicker'
 import '@sebgroup/green-core/components/icon/icons/calendar'
@@ -122,7 +116,7 @@ describe('<gds-datepicker>', () => {
         press: 'Tab',
       })
 
-      await timeout(0)
+      await aTimeout(0)
 
       await expect(changeHandler.calledOnce).to.be.true
     })
@@ -159,19 +153,12 @@ describe('<gds-datepicker>', () => {
           getScopedTagName('gds-date-part-spinner'),
         )!
 
-      // Log initial value
-      console.log('Initial year spinner value:', spinners[0].value.toString())
       await expect(spinners[0].value.toString()).to.equal('2024')
 
       // Trigger reset
       resetButton.click()
-      await timeout(0)
+      await aTimeout(0)
 
-      // Log value after reset
-      console.log(
-        'Year spinner value after reset:',
-        spinners[0].value.toString(),
-      )
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
@@ -270,7 +257,7 @@ describe('<gds-datepicker>', () => {
       const focusHandler = sinon.fake()
       spinners[0].addEventListener('focus', focusHandler)
       await clickOnElement(el)
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(focusHandler.calledOnce).to.be.true
     })
@@ -285,7 +272,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'ArrowUp',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2025')
     })
@@ -300,7 +287,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'ArrowDown',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2023')
     })
@@ -315,7 +302,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'ArrowRight',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[1].value.toString()).to.equal('01')
     })
@@ -330,7 +317,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'ArrowLeft',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2024')
     })
@@ -345,7 +332,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         type: '20',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('20')
     })
@@ -363,7 +350,7 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'Tab',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('1900')
     })
@@ -384,7 +371,6 @@ describe('<gds-datepicker>', () => {
 
       await clickOnElement(button)
       await popover.updateComplete
-      await timeout(0)
 
       let keyPress = 'Shift+Tab'
       if (isWebKit()) {
@@ -394,21 +380,18 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: keyPress,
       })
-      await timeout(0)
       await sendKeys({
         press: keyPress,
       })
-      await timeout(0)
       await sendKeys({
         press: keyPress,
       })
-      await timeout(0)
       await sendKeys({
         press: 'Enter',
       })
 
       await monthDropdown.updateComplete
-      await timeout(0)
+      await waitUntil(() => monthDropdown.open)
 
       await expect(monthDropdown.open).to.be.true
     })
@@ -421,6 +404,7 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       spinners[0].focus()
+
       await sendKeys({
         type: '2024',
       })
@@ -433,8 +417,9 @@ describe('<gds-datepicker>', () => {
       await sendKeys({
         press: 'Tab',
       })
-      await timeout(0)
+
       await el.updateComplete
+
       await expect(onlyDate(el.value!)).to.equal(
         onlyDate(new Date('2024-05-10')),
       )
@@ -452,7 +437,7 @@ describe('<gds-datepicker>', () => {
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
 
       await clickOnElement(button)
-      await conditionToBeTrue(() => popover.open)
+      await waitUntil(() => popover.open)
 
       await sendKeys({
         press: 'Enter',
@@ -469,7 +454,7 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       el.value = undefined
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('yyyy')
       await expect(spinners[1].value.toString()).to.equal('mm')
@@ -487,11 +472,11 @@ describe('<gds-datepicker>', () => {
       const inputHandler = sinon.fake()
       el.addEventListener('input', inputHandler)
       button.click()
-      await conditionToBeTrue(() => popover.open)
+      await waitUntil(() => popover.open)
       await sendKeys({
         press: 'ArrowRight',
       })
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
       await expect(inputHandler.calledOnce).to.be.true
     })
@@ -518,7 +503,7 @@ describe('<gds-datepicker>', () => {
         press: 'Escape',
       })
 
-      await timeout(0)
+      await aTimeout(0)
       await el.updateComplete
 
       await expect(onlyDate(el.value!)).to.equal(
