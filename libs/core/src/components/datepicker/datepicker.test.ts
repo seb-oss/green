@@ -143,8 +143,6 @@ describe('<gds-datepicker>', () => {
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
 
-    // The Button
-
     it('should reset when form is reset', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<form>

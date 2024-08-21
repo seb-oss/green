@@ -84,10 +84,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      aspect-ratio: 1/1;
-      height: 100%;
-      width: auto;
       box-sizing: border-box;
+      max-height: 24px;
+      max-width: 24px;
     }
 
     &[aria-expanded='true'] ::part(icon) {
