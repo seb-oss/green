@@ -258,7 +258,14 @@ describe('<gds-dropdown>', () => {
 
     await timeout(50)
 
-    expect(popover?.clientWidth).to.equal(trigger.clientWidth)
+    console.warn('Popover Width:', popover?.clientWidth)
+    console.warn('Trigger Width:', trigger.clientWidth)
+    console.warn('Popover OffsetWidth:', popover?.offsetWidth)
+    console.warn('Trigger OffsetWidth:', trigger.offsetWidth)
+    console.warn('Popover ScrollWidth:', popover?.scrollWidth)
+    console.warn('Trigger ScrollWidth:', trigger.scrollWidth)
+
+    expect(popover?.offsetWidth).to.equal(trigger.offsetWidth)
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {

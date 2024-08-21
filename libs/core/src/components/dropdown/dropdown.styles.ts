@@ -17,8 +17,7 @@ const style = css`
       justify-content: space-between;
       gap: var(--gds-space-xs);
       height: var(--gds-space-xl);
-      border-style: solid;
-      border-width: var(--gds-space-4xs);
+      border: var(--gds-space-4xs) solid #6f6f6f;
       border-radius: var(--gds-space-xs);
       padding-inline-start: var(--gds-space-s);
       padding-inline-end: var(--gds-space-xs);

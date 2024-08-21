@@ -18,8 +18,9 @@ const style = css`
       font-size: var(--gds-text-size-label-input-large);
       font-weight: var(--gds-text-weight-regular);
       line-height: var(--gds-text-line-height-label-input-large);
-      min-width: 20ch;
       gap: 1ch;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     :host([highlighted]) div {

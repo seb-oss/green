@@ -269,7 +269,7 @@ export class GdsDropdown<ValueT = any>
           </slot>
           <div class="icon">
             <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-          </span>
+          </div>
         </button>
         ${when(
           this.searchable,
@@ -283,7 +283,6 @@ export class GdsDropdown<ValueT = any>
               @keyup=${this.#handleSearchFieldKeyUp}
             />`,
         )}
-
         <gds-listbox
           id="listbox"
           .multiple="${ifDefined(this.multiple)}"
