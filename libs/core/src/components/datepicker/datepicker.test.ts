@@ -28,12 +28,6 @@ import {
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
-import { GdsButton } from '@sebgroup/green-core/components/button'
-
-// import '../../components/button'
-// import '../../components/icon/icons/calendar'
-// import '../../components/icon/icons/chevron-left'
-// import '../../components/icon/icons/chevron-right'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -390,7 +384,7 @@ describe('<gds-datepicker>', () => {
       )!
 
       await clickOnElement(button)
-      await conditionToBeTrue(() => popover.open)
+      await popover.updateComplete
 
       let keyPress = 'Shift+Tab'
       if (isWebKit()) {
@@ -413,7 +407,7 @@ describe('<gds-datepicker>', () => {
         press: 'Enter',
       })
 
-      await conditionToBeTrue(() => monthDropdown.open)
+      await monthDropdown.updateComplete
 
       await expect(monthDropdown.open).to.be.true
     })
@@ -509,17 +503,23 @@ describe('<gds-datepicker>', () => {
       )!
       const popover =
         el.shadowRoot!.querySelector<GdsPopover>('#calendar-popover')!
+
       button.click()
-      await conditionToBeTrue(() => popover.open)
+
+      await popover.updateComplete
+
       await sendKeys({
         press: 'ArrowRight',
       })
       await el.updateComplete
+
       await sendKeys({
         press: 'Escape',
       })
+
       await timeout(0)
       await el.updateComplete
+
       await expect(onlyDate(el.value!)).to.equal(
         onlyDate(new Date('2024-01-01')),
       )
