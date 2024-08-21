@@ -15,19 +15,31 @@ const style = css`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--gds-space-xs);
-      height: var(--gds-space-xl);
+      gap: var(--gds-space-m);
+      height: var(--gds-space-3xl);
       border: var(--gds-space-4xs) solid #6f6f6f;
       border-radius: var(--gds-space-xs);
-      padding-inline-start: var(--gds-space-s);
-      padding-inline-end: var(--gds-space-xs);
+      padding-inline: var(--gds-space-m);
       cursor: pointer;
       box-sizing: border-box;
+      font-size: var(--gds-space-m);
 
       // TODO: Update colors to use tokens
       border-color: #6f6f6f;
       color: #1b1b1b;
       background-color: #e2e2e2;
+
+      &.small {
+        height: var(--gds-space-xl);
+        padding: var(--gds-space-s);
+        padding-right: var(--gds-space-xs);
+        font-size: calc(var(--gds-space-s) + 2px);
+
+        .icon {
+          width: var(--gds-space-l);
+          height: var(--gds-space-l);
+        }
+      }
 
       &:hover {
         background-color: #cecece;
@@ -37,10 +49,9 @@ const style = css`
         display: flex;
         align-items: center;
         justify-content: center;
-        aspect-ratio: 1/1;
-        height: 100%;
-        width: auto;
         box-sizing: border-box;
+        height: var(--gds-space-xl);
+        width: var(--gds-space-xl);
       }
 
       &[aria-expanded='true'] ::part(icon) {

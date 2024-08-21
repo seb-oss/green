@@ -28,12 +28,6 @@ import {
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
-import { GdsButton } from '@sebgroup/green-core/components/button'
-
-// import '../../components/button'
-// import '../../components/icon/icons/calendar'
-// import '../../components/icon/icons/chevron-left'
-// import '../../components/icon/icons/chevron-right'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -148,8 +142,6 @@ describe('<gds-datepicker>', () => {
 
       await expect(spinners[0].value.toString()).to.equal('yyyy')
     })
-
-    // The Button
 
     it('should reset when form is reset', async () => {
       const el = await fixture<GdsDatepicker>(
