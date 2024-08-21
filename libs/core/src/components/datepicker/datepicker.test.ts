@@ -241,6 +241,7 @@ describe('<gds-datepicker>', () => {
 
       await clickOnElement(button)
       await el.updateComplete
+      await popover.updateComplete
 
       await expect(popover.open).to.be.true
       await expect(el.open).to.be.true
@@ -383,6 +384,7 @@ describe('<gds-datepicker>', () => {
 
       await clickOnElement(button)
       await popover.updateComplete
+      await timeout(0)
 
       let keyPress = 'Shift+Tab'
       if (isWebKit()) {
@@ -406,6 +408,7 @@ describe('<gds-datepicker>', () => {
       })
 
       await monthDropdown.updateComplete
+      await timeout(0)
 
       await expect(monthDropdown.open).to.be.true
     })
