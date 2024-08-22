@@ -8,6 +8,12 @@ const style = css`
       display: contents;
     }
 
+    :host([stroke]) {
+      & > svg > * {
+        stroke-width: inherit;
+      }
+    }
+
     :host(:not([width], [height])) {
       & > svg {
         height: 1lh;

@@ -1,7 +1,12 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import {
+  fixture,
+  html as testingHtml,
+  waitUntil,
+  aTimeout,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import { clickOnElement } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '@sebgroup/green-core/components/dropdown'
@@ -75,7 +80,7 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
 
     await expect(el.value).to.equal('v2')
-    await conditionToBeTrue(() => el.displayValue === 'Option 2')
+    await waitUntil(() => el.displayValue === 'Option 2')
   })
 
   it('should have a label element connected to trigger if `label` attribute is set', async () => {
@@ -142,7 +147,8 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     const triggerSlot =
-      el.shadowRoot!.querySelector<HTMLSlotElement>('button slot')!
+      el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
+
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
     await expect(triggerContent.textContent).to.equal('Custom trigger')
@@ -221,9 +227,10 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
+
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(popover?.clientWidth).to.be.greaterThanOrEqual(
       trigger.clientWidth,
@@ -250,9 +257,9 @@ describe('<gds-dropdown>', () => {
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
 
-    await timeout(50)
+    await aTimeout(50)
 
-    expect(popover?.clientWidth).to.equal(trigger.clientWidth)
+    expect(popover?.offsetWidth).to.equal(trigger.offsetWidth)
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {
@@ -276,7 +283,7 @@ describe('<gds-dropdown>', () => {
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
 
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(popover?.clientHeight).to.be.lessThanOrEqual(50)
   })
@@ -403,7 +410,7 @@ describe('<gds-dropdown> interactions', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await timeout(0)
+    await aTimeout(0)
 
     const option2 = document.getElementById('option2')!
 
@@ -424,7 +431,7 @@ describe('<gds-dropdown> interactions', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await timeout(0)
+    await aTimeout(0)
 
     const changeHandler = sinon.spy()
     el.addEventListener('change', changeHandler)
@@ -451,7 +458,7 @@ describe('<gds-dropdown> interactions', () => {
   //     </gds-dropdown>
   //   `)
 
-  //   await timeout(0)
+  //   await aTimeout(0)
   //   await sendMouse({ type: 'click', position: [10, 10] })
   //   await el.updateComplete
 
@@ -489,9 +496,9 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(document.activeElement).to.equal(secondOption)
   })
@@ -513,9 +520,9 @@ describe('<gds-dropdown> keyboard navigation', () => {
     await expect(el.open).to.be.true
 
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'Enter' })
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(el.value).to.equal('v2')
     await expect(el.open).to.be.false
@@ -531,13 +538,13 @@ describe('<gds-dropdown> keyboard navigation', () => {
     `)
 
     el.focus()
-    await timeout(0)
+    await aTimeout(0)
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'Enter' })
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(el.value).to.equal('v2')
   })
@@ -553,11 +560,11 @@ describe('<gds-dropdown> keyboard navigation', () => {
 
     el.focus()
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'Space' })
-    await timeout(50)
+    await aTimeout(50)
 
     await expect(el.value).to.equal('v2')
   })
@@ -659,7 +666,7 @@ describe('<gds-dropdown multiple>', () => {
 
     el.focus()
     await sendKeys({ press: 'ArrowDown' })
-    await timeout(50)
+    await aTimeout(50)
     await sendKeys({ press: 'ArrowDown' })
     await el.updateComplete
     await sendKeys({ press: 'Space' })
@@ -683,7 +690,8 @@ describe('<gds-dropdown multiple>', () => {
   //     </gds-dropdown>
   //   `)
 
-  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>('button')!
+  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName(getScopedTagName('gds-button')))!
+  //   const triggerButton = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('gds-button'))!
 
   //   await clickOnElement(triggerButton, 'center')
   //   await el.updateComplete
@@ -696,7 +704,7 @@ describe('<gds-dropdown multiple>', () => {
   //   await clickOnElement(option3, 'center')
   //   await el.updateComplete
 
-  //   await timeout(10)
+  //   await aTimeout(10)
 
   //   await expect(el.value.toString()).to.equal(['v2', 'v3'].toString())
   // })
@@ -709,7 +717,7 @@ describe('<gds-dropdown multiple>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-    await timeout(0)
+    await aTimeout(0)
 
     const option2 = el.querySelectorAll(getScopedTagName('gds-option'))[1]
 

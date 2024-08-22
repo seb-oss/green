@@ -35,6 +35,7 @@ import '../../components/icon/icons/calendar'
 import '../../components/icon/icons/chevron-left'
 import '../../components/icon/icons/chevron-right'
 
+import { tokens } from '../../tokens.style'
 import { styles } from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
@@ -58,7 +59,7 @@ type DateFormatLayout = {
  */
 @gdsCustomElement('gds-datepicker')
 export class GdsDatepicker extends GdsFormControlElement<Date> {
-  static styles = [styles]
+  static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -234,6 +235,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (f, i) =>
                 html`<gds-date-part-spinner
                   id="spinner-${i}"
+                  class="spinner"
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#spinnerState[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
@@ -260,6 +262,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
+          size=${this.size}
         >
           <gds-icon-calendar></gds-icon-calendar>
         </button>
@@ -286,19 +289,21 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         }}
       >
         <div class="header">
-          <button
+          <gds-button
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
+            rank="tertiary"
+            size="small"
           >
             <gds-icon-chevron-left></gds-icon-chevron-left>
-          </button>
+          </gds-button>
           <gds-dropdown
             .value=${this._focusedMonth.toString()}
             @change=${this.#handleMonthChange}
             .maxHeight=${300}
             label="${msg('Month')}"
-            style="width:120px"
             size="small"
+            class="month"
             hide-label
           >
             <gds-option value="0">${msg('January')}</gds-option>
@@ -320,6 +325,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             .maxHeight=${300}
             label="${msg('Year')}"
             size="small"
+            class="year"
             hide-label
           >
             ${repeat(
@@ -328,12 +334,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (year) => html`<gds-option value=${year}>${year}</gds-option>`,
             )}
           </gds-dropdown>
-          <button
+          <gds-button
             @click=${this.#handleIncrementFocusedMonth}
             aria-label=${msg('Next month')}
+            rank="tertiary"
+            size="small"
           >
             <gds-icon-chevron-right></gds-icon-chevron-right>
-          </button>
+          </gds-button>
         </div>
 
         <gds-calendar
