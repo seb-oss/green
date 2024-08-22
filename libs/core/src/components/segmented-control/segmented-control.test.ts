@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import { clickOnElement } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '@sebgroup/green-core/components/segmented-control'
@@ -132,7 +132,7 @@ describe('<gds-segmented-control>', () => {
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
       clickOnElement(nextButton as HTMLElement)
-      await timeout(100)
+      await aTimeout(100)
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
       expect(prevButton).to.exist
     })

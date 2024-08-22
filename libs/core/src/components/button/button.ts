@@ -165,7 +165,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         <slot name="trail"></slot>
         ${when(
           !this._isUsingTransitionalStyles,
-          () => html`<gds-ripple></gds-ripple>`,
+          () => html`<gds-ripple part="_ripple"></gds-ripple>`,
         )}
       </${tag}>
     `

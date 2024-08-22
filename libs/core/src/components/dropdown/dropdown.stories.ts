@@ -3,10 +3,6 @@ import { repeat } from 'lit/directives/repeat.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
-// Needed for components that only have 2016 style so far
-import { registerTransitionalStyles } from '../../transitional-styles.ts'
-registerTransitionalStyles()
-
 /**
  * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/dropdown)
  * &nbsp;|&nbsp;
@@ -185,6 +181,48 @@ export const PlaceholderOptions: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-dropdown size="small" label="Select tech" hide-label>
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
+ * In order to show a search field on the dropdown, set the `searchable` attribute.
+ */
+export const Searchable: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown size="small" label="Select tech" searchable hide-label>
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
+ * Use the `multiple` attribute to allow multiple selections. The selected values will be displayed
+ */
+export const Multiple: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown
+      size="small"
+      label="Select tech"
+      searchable
+      multiple
+      hide-label
+    >
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
