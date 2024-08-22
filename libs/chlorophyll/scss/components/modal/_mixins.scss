@@ -95,6 +95,11 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 @mixin dialog-modal() {
   position: initial;
   width: 375px;
+  max-width: 95vw;
+
+  &.medium {
+    width: 512px;
+  }
 
   &.large {
     width: 720px;

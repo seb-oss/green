@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.12.0
+
+### Minor Changes
+
+- e2f3437: Added props for invalidating datepicker
+
 ## 3.11.0
 
 ### Minor Changes

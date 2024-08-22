@@ -27,6 +27,12 @@ export abstract class GdsIcon extends GdsElement {
   solid = false
 
   /**
+   * When set to true, you can apply custom stroke width to the icon.
+   */
+  @property({ type: Boolean })
+  stroke = false
+
+  /**
    * When viewbox is defined it will override the default viewbox of the icon.
    */
   @property({ type: String })
@@ -57,6 +63,8 @@ export abstract class GdsIcon extends GdsElement {
       xmlns="http://www.w3.org/2000/svg"
       ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
       role="graphics-symbol"
+      part="icon"
+      stroke="${this.stroke}"
     >
       ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
     </svg>`

@@ -21,7 +21,7 @@ import { renderMonthGridView } from './functions'
 import { watch } from '../../utils/decorators/watch'
 
 import style from './calendar.styles'
-
+import { tokens } from '../../tokens.style'
 /**
  * Used to customize the appearance of a date in the calendar.
  */
@@ -58,7 +58,7 @@ export type CustomizedDate = {
  */
 @gdsCustomElement('gds-calendar')
 export class GdsCalendar extends GdsElement {
-  static styles = [style]
+  static styles = [tokens, style]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

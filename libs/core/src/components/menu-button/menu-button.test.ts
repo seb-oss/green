@@ -1,8 +1,8 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { clickOnElement, timeout } from '../../utils/testing/index.js'
+import { clickOnElement } from '../../utils/testing/index.js'
 
 import {
   htmlTemplateTagFactory,
@@ -92,7 +92,7 @@ describe('<gds-menu-button>', () => {
 
       await sendKeys({ press: 'Enter' })
 
-      await timeout(1)
+      await aTimeout(1)
 
       expect(spy.notCalled).to.be.true
       expect(el.disabled).to.be.true
@@ -160,7 +160,7 @@ describe('<gds-menu-button>', () => {
 
       await sendKeys({ press: 'Enter' })
 
-      await timeout(1)
+      await aTimeout(1)
 
       expect(spy.calledOnce).to.be.true
     })
