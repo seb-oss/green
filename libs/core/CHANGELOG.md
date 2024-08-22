@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.34.0
+
+### Minor Changes
+
+- 49eb068: Datepicker, Dropdown and Calendar with 2023 styles
+
 ## 1.33.1
 
 ### Patch Changes
