@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.1
+
+### Patch Changes
+
+- 94ddace: **Modals:** Fix small viewport overflow
+
 ## 3.5.0
 
 ### Minor Changes
