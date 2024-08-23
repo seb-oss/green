@@ -1,0 +1,93 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import * as Icons from './icons/index'
+import { useState } from 'react'
+
+export const Template = (props) => {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value.toLowerCase())
+  }
+
+  const handleIconClick = (iconName) => {
+    const importStatement = `import { ${iconName} } from '@sebgroup/green-react'`
+    const jsxCode = `<${iconName} />`
+    const template = `${importStatement}\n\n${jsxCode}`
+    navigator.clipboard.writeText(template)
+    alert(`Copied to clipboard:\n${template}`)
+  }
+
+  const filteredIcons = Object.keys(Icons).filter((iconName) =>
+    iconName.toLowerCase().includes(searchTerm)
+  )
+
+  return (
+    <div className="custom-card-storybook">
+      <Styles />
+      <input
+        type="text"
+        id="icon-search"
+        placeholder="Search icons..."
+        onChange={handleSearch}
+      />
+      <div className="icon-showcase">
+        {filteredIcons.map((iconName) => {
+          const IconComponent = Icons[iconName]
+          return (
+            <div
+              key={iconName}
+              className="icon-container"
+              onClick={() => handleIconClick(iconName)}
+            >
+              <IconComponent />
+              <code>{`<`}{iconName}{`/>`}</code>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+export const Styles = () => (
+  <style>
+    {`
+    .custom-card-storybook .icon-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .custom-card-storybook .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      gap: 20px;
+      border-radius: 8px;
+      border: 1px solid #ececec;
+      padding: 32px 24px;
+    }
+
+    code {
+    font-size: 10px;
+    }
+ 
+    .custom-card-storybook input#icon-search {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  `}
+  </style>
+)
+
+<Meta title="Components/Icon"/>
+
+# Icons
+
+<Canvas>
+  <Story name="Icons">
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -2,6 +2,11 @@ import React from 'react'
 import { randomId } from '@sebgroup/extract'
 import { IconProps } from '../../types/props'
 
+/**
+ *
+ * @deprecated
+ * This component is deprecated. Use `Check` instead from `@sebgroup/green-react`.
+ */
 export const Check = ({ focusable = false, title }: IconProps) => {
   let id
   if (title) id = randomId()
