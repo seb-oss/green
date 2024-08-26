@@ -512,6 +512,20 @@ export const IconsSize: Story = {
 }
 
 /**
+ * You can change the icon stroke by setting the `stroke` attribute.
+ */
+
+export const IconsStroke: Story = {
+  ...DefaultParams,
+  name: 'Stroke',
+  render: (args) => html`
+    <gds-icon-robot stroke="2" height="42"></gds-icon-robot>
+    <gds-icon-rocket stroke="2" height="42"></gds-icon-rocket>
+    <gds-icon-school stroke="2" height="42"></gds-icon-school>
+  `,
+}
+
+/**
  * Icons have the role of `graphics-symbol`, and will by default have the icon name as label. You can customize the label by setting the `label` attribute.
  */
 
