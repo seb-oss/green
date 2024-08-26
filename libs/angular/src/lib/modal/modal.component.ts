@@ -173,7 +173,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.guid = crypto.randomUUID()
+    this.guid = globalThis.crypto.randomUUID()
 
     if (this._isOpen && this.trapFocus) this.enableFocusTrap()
     else this.disableFocusTrap()
