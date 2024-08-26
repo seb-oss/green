@@ -7,11 +7,8 @@ import {
 } from '@angular/forms'
 
 import { debounceTime, map, Observable } from 'rxjs'
-
-// import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { faChevronDown, faChevronUp, faEllipsisH } from '@fortawesome/pro-regular-svg-icons';
-// import { NgvI18nModule } from '@sebgroup/ngv-i18n';
-// import { TooltipDirective } from '@sebgroup/ngv-tooltip';
+import { NgvI18nModule } from '../i18n/i18n.module'
+import { TooltipDirective } from '../tooltip/tooltip.directive'
 import {
   applicationConfig,
   Meta,
@@ -45,35 +42,23 @@ export default {
   title: 'V-Angular/Dropdown',
   component: DropdownComponent,
   decorators: [
-    // applicationConfig({
-    //   providers: [
-    //     importProvidersFrom(NgvI18nModule),
-    //     DropdownUtils,
-    //     {
-    //       provide: APP_INITIALIZER,
-    //       useFactory: (iconLibrary: FaIconLibrary) => {
-    //         return async () => iconLibrary.addIcons(faChevronDown, faChevronUp, faEllipsisH);
-    //       },
-    //       deps: [FaIconLibrary],
-    //       multi: true,
-    //     },
-    //   ],
-    // }),
+    applicationConfig({
+      providers: [importProvidersFrom(NgvI18nModule), DropdownUtils],
+    }),
     moduleMetadata({
       declarations: [
         DropdownListComponent,
         InputComponent,
         TypeaheadInputComponent,
         TypeaheadHighlightComponent,
-        // TooltipDirective,
+        TooltipDirective,
         CharacterCountdownDirective,
       ],
       imports: [
         CommonModule,
-        // FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
-        // NgvI18nModule,
+        NgvI18nModule,
         TypeaheadDirective,
       ],
     }),
@@ -118,7 +103,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
       <div style="width: 264px">
-        <ngv-dropdown
+        <ngg-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [description]="description | transloco"
@@ -135,7 +120,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngv-dropdown>
+        </ngg-dropdown>
 
         <div style="margin-top: 1rem">
           <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -154,7 +139,7 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
   <div style="width: 264px">
-    <ngv-dropdown
+    <ngg-dropdown
       [label]="label"
       [placeholder]="placeholder"
       [options]="options"
@@ -169,7 +154,7 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
 
       <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-    </ngv-dropdown>
+    </ngg-dropdown>
   </div>`,
     props: { ...args, formControl },
   }
@@ -200,7 +185,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           <button class="sdv-button sdv-button-alternative" (click)="resetFunc()">Reset to default</button>
         </div>
         <div>Value: {{ formControl.value }}</div>
-        <ngv-dropdown
+        <ngg-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [options]="options"
@@ -212,7 +197,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngv-dropdown>
+        </ngg-dropdown>
       </div>`,
     props: {
       ...args,
@@ -265,7 +250,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   }
   return {
     template: /*html*/ `
-      <ngv-dropdown
+      <ngg-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -299,7 +284,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           </div>
         </ng-template>
         
-      </ngv-dropdown>
+      </ngg-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
@@ -424,7 +409,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     Filter: {{ getFilterPhrase() }}
-      <ngv-dropdown
+      <ngg-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -475,7 +460,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
           </div>
         </ng-template>
         
-      </ngv-dropdown>
+      </ngg-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
@@ -552,7 +537,7 @@ const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
       <div style="display: flex">
-        <ngv-dropdown
+        <ngg-dropdown
           label="Dropdown"
           [placeholder]="placeholder"
           [options]="options"
@@ -561,7 +546,7 @@ const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           error="This is a permanent error"
           style="width: 264px"
           [formControl]="formControl">
-        </ngv-dropdown>
+        </ngg-dropdown>
         <ngv-input
           label="Input"
           [placeholder]="placeholder"
@@ -654,7 +639,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     <div style="width: 264px; display:">
-        <ngv-dropdown
+        <ngg-dropdown
           [label]="label"
           [formControl]="formControl"
           [placeholder]="placeholder"
@@ -673,7 +658,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template #labelTpl>Custom Label</ng-template>
 
-        </ngv-dropdown>
+        </ngg-dropdown>
       </div>`,
     /*css*/
     styles: [``],

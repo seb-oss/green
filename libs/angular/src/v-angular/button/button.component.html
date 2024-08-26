@@ -1,5 +1,5 @@
-<button #input
-  class="sdv-button"
+<button
+  #input
   [ngClass]="buttonClasses"
   [id]="id + '-button'"
   [attr.name]="name"
@@ -11,12 +11,13 @@
   (click)="onClick($event)"
   (focus)="onFocus($event)"
   (blur)="onBlur($event)"
-  *ngIf="type !== 'link'">
+  *ngIf="type !== 'link'"
+>
   <ng-container *ngTemplateOutlet="contentRef"></ng-container>
 </button>
 
-<a #input
-  class="sdv-button"
+<a
+  #input
   [ngClass]="buttonClasses"
   role="button"
   [id]="id + '-link'"
@@ -26,7 +27,8 @@
   (click)="onClick($event)"
   (focus)="onFocus($event)"
   (blur)="onBlur($event)"
-  *ngIf="type === 'link'">
+  *ngIf="type === 'link'"
+>
   <ng-container *ngTemplateOutlet="contentRef"></ng-container>
 </a>
 

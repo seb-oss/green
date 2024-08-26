@@ -1,4 +1,13 @@
 // load global styles used by storybook
-@use '../libs/chlorophyll/scss' with (
+// @use '../libs/chlorophyll/scss' with (
+//   $font-path: '/dist/fonts'
+// );
+
+@use '../libs/chlorophyll/scss/components/use-green-scope' with (
+  $use-green-selector: '.use-green',
   $font-path: '/dist/fonts'
+);
+
+@use '@sebgroup/fonts/scss/seb-fonts' with (
+  $seb-font-path: '/dist/fonts'
 );
