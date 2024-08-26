@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import * as Icons from './icons/index'
 import { useState } from 'react'
-import { Bank } from './icons/index'
+import { Bank, Rocket } from './icons/index'
 
 export const Template = (props) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -86,6 +86,10 @@ export const Styles = () => (
 <Meta title="Components/Icon"/>
 
 # Icon
+The `Icon` component is a flexible set of icon components. These allows you to use a variety of pre-defined icons in your application. 
+
+You can customize the icons by setting the `width`, `height`, `stroke` and `label` properties.
+
 
 ### Usage
 The react icons can be imported indivually like the example below.
@@ -112,26 +116,31 @@ import { Bank } from '@sebgroup/green-react'
 ```
 
 <Canvas>
-    <Bank />
-    <Bank solid />
+  <Bank />
+  <Bank solid />
 </Canvas>
 
 ## Sizing
 You can customize the icons by setting the `width` and `height` properties. If not specified it will fall back to  `1lh` `height` and `auto` `width`.
  
-```jsx
-import { Bank } from '@sebgroup/green-react'
-
-<Bank width="24" height="24" />
-<Bank width="48" height="48" />
-<Bank width="84" height="84" />
-```
-
-#### Example
 <Canvas>
-    <Bank width="24" height="24" />
-    <Bank width="48" height="48" />
-    <Bank width="84" height="84" />
+  <Bank width="24" height="24" />
+  <Bank width="48" height="48" />
+  <Bank width="84" height="84" />
 </Canvas>
 
- 
+
+## Stroke
+You can change the icon stroke by setting the `stroke` attribute.
+  
+<Canvas>
+    <Bank stroke="2" /> 
+</Canvas>
+
+
+## Label
+Icons have the role of `graphics-symbol`, and will by default have the icon name as label. You can customize the label by setting the `label` attribute.
+
+<Canvas>
+    <Rocket label="Rocket" /> 
+</Canvas>
