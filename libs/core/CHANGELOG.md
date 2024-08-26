@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.35.0
+
+### Minor Changes
+
+- 0af3744: Upgrade core `icon` sizing and add react icons
+
 ## 1.34.0
 
 ### Minor Changes
