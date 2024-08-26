@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.13.0
+
+### Minor Changes
+
+- 0af3744: Add all exisitng icons to React lib
+- 0af3744: Upgrade core `icon` sizing and add react icons
+
+### Patch Changes
+
+- Updated dependencies [0af3744]
+  - @sebgroup/green-core@1.35.0
+
 ## 3.12.0
 
 ### Minor Changes
