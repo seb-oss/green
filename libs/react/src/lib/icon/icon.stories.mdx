@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import * as Icons from './icons/index'
 import { useState } from 'react'
+import { Bank } from './icons/index'
 
 export const Template = (props) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -69,7 +70,7 @@ export const Styles = () => (
     }
 
     code {
-    font-size: 10px;
+      font-size: 10px;
     }
  
     .custom-card-storybook input#icon-search {
@@ -84,10 +85,53 @@ export const Styles = () => (
 
 <Meta title="Components/Icon"/>
 
-# Icons
+# Icon
+
+### Usage
+The react icons can be imported indivually like the example below.
+
+```jsx
+import { Bank } from '@sebgroup/green-react'
+
+<Bank />
+```
 
 <Canvas>
   <Story name="Icons">
     {Template.bind({})}
   </Story>
 </Canvas>
+
+## Solid Icons
+All icons support a boolean `solid` prop to toggle between solid and outline icons. By default, the icons are outlined.
+
+```jsx
+import { Bank } from '@sebgroup/green-react'
+
+<Bank solid />
+```
+
+<Canvas>
+    <Bank />
+    <Bank solid />
+</Canvas>
+
+## Sizing
+You can customize the icons by setting the `width` and `height` properties. If not specified it will fall back to  `1lh` `height` and `auto` `width`.
+ 
+```jsx
+import { Bank } from '@sebgroup/green-react'
+
+<Bank width="24" height="24" />
+<Bank width="48" height="48" />
+<Bank width="84" height="84" />
+```
+
+#### Example
+<Canvas>
+    <Bank width="24" height="24" />
+    <Bank width="48" height="48" />
+    <Bank width="84" height="84" />
+</Canvas>
+
+ 
