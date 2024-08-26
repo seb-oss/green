@@ -5,6 +5,7 @@
       *ngSwitchCase="'slideout'"
       role="dialog"
       aria-modal="true"
+      [attr.aria-describedby]="'modal-header-' + guid"
       [class.small]="size === 'sm'"
       [class.medium]="size === 'md'"
       [class.large]="size === 'lg'"
@@ -17,6 +18,7 @@
       *ngSwitchCase="'takeover'"
       role="dialog"
       aria-modal="true"
+      [attr.aria-describedby]="'modal-header-' + guid"
       [class.entered]="isOpen"
       [class.small]="size === 'sm'"
       [class.medium]="size === 'md'"
@@ -29,6 +31,7 @@
       *ngSwitchDefault
       role="dialog"
       aria-modal="true"
+      [attr.aria-describedby]="'modal-header-' + guid"
       [class.small]="size === 'sm'"
       [class.medium]="size === 'md'"
       [class.large]="size === 'lg'"
@@ -41,6 +44,7 @@
         <header
           *ngIf="!modalHeaderContent; else headerContentTemplate"
           ngg-modal-header
+          [attr.id]="'modal-header-' + guid"
           data-testid="modal-header"
           [header]="header"
           (closed)="this.handleCloseClick($event)"
@@ -62,7 +66,7 @@
       </ng-container>
     </ng-template>
     <ng-template #headerContentTemplate>
-      <header data-testid="modal-header">
+      <header data-testid="modal-header" [attr.id]="'modal-header-' + guid">
         <ng-content select="[nggModalHeader]"></ng-content>
       </header>
     </ng-template>

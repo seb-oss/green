@@ -156,6 +156,9 @@ export class NggModalComponent implements OnDestroy, OnInit {
   public modalHeaderContent?: NggModalHeaderDirective
   @ContentChild(NggModalFooterDirective)
   public modalFooterContent?: NggModalFooterDirective
+
+  public guid = ''
+
   private _isOpen?: boolean
   private _trapFocus?: boolean
   private configurableFocusTrap: ConfigurableFocusTrap
@@ -170,6 +173,8 @@ export class NggModalComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.guid = crypto.randomUUID()
+
     if (this._isOpen && this.trapFocus) this.enableFocusTrap()
     else this.disableFocusTrap()
   }
