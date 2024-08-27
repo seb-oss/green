@@ -195,7 +195,7 @@ export class GdsCoachmark extends GdsElement {
           name: 'detectOverflow',
           async fn(positionState) {
             const overflow = await detectOverflow(positionState, {
-              boundary: document.querySelector('main'),
+              boundary: document.body,
               rootBoundary: 'document',
               altBoundary: true,
               padding: {
