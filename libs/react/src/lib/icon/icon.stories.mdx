@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import * as Icons from './icons/index'
 import { useState } from 'react'
-import { Bank, Rocket } from './icons/index'
+import { IconBank, IconRocket } from './icons/index'
 
 export const Template = (props) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -95,9 +95,9 @@ You can customize the icons by setting the `width`, `height`, `stroke` and `labe
 The react icons can be imported indivually like the example below.
 
 ```jsx
-import { Bank } from '@sebgroup/green-react'
+import { IconBank } from '@sebgroup/green-react'
 
-<Bank />
+<IconBank />
 ```
 
 <Canvas>
@@ -110,23 +110,23 @@ import { Bank } from '@sebgroup/green-react'
 All icons support a boolean `solid` prop to toggle between solid and outline icons. By default, the icons are outlined.
 
 ```jsx
-import { Bank } from '@sebgroup/green-react'
+import { IconBank } from '@sebgroup/green-react'
 
-<Bank solid />
+<IconBank solid />
 ```
 
 <Canvas>
-  <Bank />
-  <Bank solid />
+  <IconBank />
+  <IconBank solid />
 </Canvas>
 
 ## Sizing
 You can customize the icons by setting the `width` and `height` properties. If not specified it will fall back to  `1lh` `height` and `auto` `width`.
  
 <Canvas>
-  <Bank width="24" height="24" />
-  <Bank width="48" height="48" />
-  <Bank width="84" height="84" />
+  <IconBank width="24" height="24" />
+  <IconBank width="48" height="48" />
+  <IconBank width="84" height="84" />
 </Canvas>
 
 
@@ -134,7 +134,7 @@ You can customize the icons by setting the `width` and `height` properties. If n
 You can change the icon stroke by setting the `stroke` attribute.
   
 <Canvas>
-    <Bank stroke="2" /> 
+    <IconBank stroke="2" /> 
 </Canvas>
 
 
@@ -142,5 +142,5 @@ You can change the icon stroke by setting the `stroke` attribute.
 Icons have the role of `graphics-symbol`, and will by default have the icon name as label. You can customize the label by setting the `label` attribute.
 
 <Canvas>
-    <Rocket label="Rocket" /> 
+    <IconRocket label="This is the label for Rocket Icon" /> 
 </Canvas>

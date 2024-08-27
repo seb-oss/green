@@ -21,17 +21,17 @@ function clearAndUpper(text) {
 
 async function generateReactComponent(name) {
   const className = `Icon${toPascalCase(name)}`
-  const componentName = toPascalCase(name)
+  const componentName = `Icon${toPascalCase(name)}`
   const tagName = `gds-icon-${name}`
 
   return `import React from 'react'
 import { createComponent } from '@lit/react'
-import { ${className} } from '@sebgroup/green-core/components/icon/icons/${name}'
+import { ${className} as Icon } from '@sebgroup/green-core/components/icon/icons/${name}'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const ${componentName} = createComponent({
   tagName: getScopedTagName('${tagName}'),
-  elementClass: ${className},
+  elementClass: Icon,
   react: React
 })
 `
@@ -44,7 +44,7 @@ async function processIcons() {
   for (const file of files) {
     if (path.extname(file) === '.svg') {
       const name = path.basename(file, '.svg')
-      const componentName = toPascalCase(name)
+      const componentName = `Icon${toPascalCase(name)}`
 
       try {
         const componentContent = await generateReactComponent(name)
