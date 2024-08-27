@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.4.1
+
+### Patch Changes
+
+- b00a59c: **Modals:** Correct behaviour for modality. Dialogs should only be modal when `trapFocus = true`
+- b00a59c: **Modals:** Fix accessible label
+
 ## 4.4.0
 
 ### Minor Changes
