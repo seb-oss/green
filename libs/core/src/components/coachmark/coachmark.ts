@@ -25,6 +25,8 @@ import { GdsElement } from '../../gds-element'
  * @slot body - placeholder for the content of the tooltip.
  *
  * @event tooltipClosed - dispatched when the tooltip is closed
+ *
+ * @status beta
  */
 @gdsCustomElement('gds-coachmark')
 export class GdsCoachmark extends GdsElement {

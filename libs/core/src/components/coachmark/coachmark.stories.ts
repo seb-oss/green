@@ -15,6 +15,8 @@ import './index.ts'
  * Note: the component can only view one coachmark at the time therefore the tooltip won't be
  * rendered in second storybook panel and testing the tooltip behaviour will be in the first panel only
  *
+ * @status beta
+ *
  */
 const meta: Meta = {
   title: 'Docs/Components/Coachmark',
