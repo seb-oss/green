@@ -55,7 +55,7 @@ export class GdsCoachmark extends GdsElement {
    * The accessible label of the coachmark.
    */
   @property()
-  label: string = 'Coachmark'
+  label = 'Coachmark'
 
   /**
    * A callback that can be used to set the visibility of the coachmark based on your criteria.
