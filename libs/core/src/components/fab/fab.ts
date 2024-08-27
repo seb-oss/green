@@ -26,7 +26,7 @@ import styles from './fab.styles'
  */
 @gdsCustomElement('gds-fab')
 export class GdsFab extends GdsElement {
-  static styles = unsafeCSS(styles)
+  static styles = [styles]
 
   /**
    * Optional way to assign an anchor element for the popover. When using Lit, this can take a value from a `@queryAsync` decorator in order to set the anchor element programatically.

@@ -25,12 +25,8 @@ const DefaultParams: Story = {
   },
   args: {
     innerHTML: `
-  <gds-fab>
     Floating action! <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
-  </gds-fab>
 `,
-    calcMaxWidth: () => '300px',
-    placement: 'bottom-center',
   },
 }
 
