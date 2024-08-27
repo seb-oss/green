@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.0
+
+### Minor Changes
+
+- c791c90: Prefix with Icon all React Icons
+
 ## 3.13.0
 
 ### Minor Changes
