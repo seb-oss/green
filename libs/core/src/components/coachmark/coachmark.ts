@@ -72,6 +72,18 @@ export class GdsCoachmark extends GdsElement {
   @property({ attribute: false })
   target: string[] = []
 
+  /**
+   * A callback that can be used to set the visibility of the coachmark based on your criteria.
+   *
+   * The default computed visibility, based on visibility and overlap of the target element, is supplied as the third argument.
+   */
+  @property({ attribute: false })
+  computeVisibility: (
+    self: GdsCoachmark,
+    target: HTMLElement,
+    computedVisibility: boolean,
+  ) => boolean = (_self, _target, computedVisibility) => computedVisibility
+
   connectedCallback(): void {
     super.connectedCallback()
 
@@ -223,14 +235,16 @@ export class GdsCoachmark extends GdsElement {
     if (!this.#targetedElement) return false
 
     const isOutOfBound = this.#isElementOutsideView(this.#targetedElement)
-    const isVisible = this.#targetedElement.checkVisibility()
+    const targetIsVisible = this.#targetedElement.checkVisibility()
     const isOverlapping =
       this.overlappedBy.length === 0
         ? false
         : this.#checkOverlap(this.overlappedBy)
 
-    return (
-      !isOverlapping && !isOutOfBound && isVisible && window.innerWidth > 580
+    return this.computeVisibility(
+      this,
+      this.#targetedElement,
+      !isOverlapping && !isOutOfBound && targetIsVisible,
     )
   }
 
