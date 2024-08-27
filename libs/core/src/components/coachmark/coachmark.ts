@@ -301,12 +301,12 @@ export class GdsCoachmark extends GdsElement {
       () => html`
         <div
           role="dialog"
-          class="gds-coachmark"
+          id="body"
           aria-label="Coachmark"
           ${ref(this.#cardRef) as HTMLElement}
         >
           <slot></slot>
-          <div id="gds-arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
+          <div id="arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
         </div>
       `,
       () => html``,
