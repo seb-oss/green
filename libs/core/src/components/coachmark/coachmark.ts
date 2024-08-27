@@ -31,29 +31,6 @@ export class GdsCoachmark extends GdsElement {
   static styles = styles
 
   /**
-   * @internal
-   */
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
-  }
-
-  #cardRef: Ref<Element> = createRef()
-  #arrowRef: Ref<Element> = createRef()
-  #targetedElement: HTMLElement | undefined = undefined
-  #autoUpdateCleanupFn: (() => void) | undefined
-
-  /**
-   *Tracks the visibility of the tooltip (readonly)
-   */
-  @state() _isVisible = false
-
-  /**
-   *Used to prevent closing the tooltip if it's not visible (readonly)
-   */
-  @state() _preventClose = false
-
-  /**
    * The placement of the popover relative to the trigger.
    * Accepts any of the placements supported by Floating UI.
    */
@@ -83,6 +60,17 @@ export class GdsCoachmark extends GdsElement {
     target: HTMLElement,
     computedVisibility: boolean,
   ) => boolean = (_self, _target, computedVisibility) => computedVisibility
+
+  // Tracks the visibility of the tooltip (readonly)
+  @state() _isVisible = false
+
+  // Used to prevent closing the tooltip if it's not visible (readonly)
+  @state() _preventClose = false
+
+  #cardRef: Ref<Element> = createRef()
+  #arrowRef: Ref<Element> = createRef()
+  #targetedElement: HTMLElement | undefined = undefined
+  #autoUpdateCleanupFn: (() => void) | undefined
 
   connectedCallback(): void {
     super.connectedCallback()
