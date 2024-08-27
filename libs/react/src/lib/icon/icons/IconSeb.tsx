@@ -1,0 +1,10 @@
+import React from 'react'
+import { createComponent } from '@lit/react'
+import { IconSeb as Icon } from '@sebgroup/green-core/components/icon/icons/seb'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+
+export const IconSeb = createComponent({
+  tagName: getScopedTagName('gds-icon-seb'),
+  elementClass: Icon,
+  react: React
+})
