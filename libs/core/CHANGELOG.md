@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.35.0
+
+### Minor Changes
+
+- 0af3744: Upgrade core `icon` sizing and add react icons
+
+## 1.34.0
+
+### Minor Changes
+
+- 49eb068: Datepicker, Dropdown and Calendar with 2023 styles
+
+## 1.33.1
+
+### Patch Changes
+
+- d988e2b: **Popover:** Fix property type of `disableMobileStyles` (to Boolean)
+
+## 1.33.0
+
+### Minor Changes
+
+- 0326b38: Adding new coachmark component
+
 ## 1.32.0
 
 ### Minor Changes

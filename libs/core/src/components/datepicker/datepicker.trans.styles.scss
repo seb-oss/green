@@ -60,6 +60,17 @@
       }
     }
 
+    ::part(_button) {
+      outline-offset: -4px;
+      background-color: transparent;
+      color: #000;
+      border: none;
+
+      &:hover {
+        border-color: var(--grey-400);
+      }
+    }
+
     .input.is-placeholder {
       opacity: 0;
 
@@ -119,6 +130,7 @@
     @include common.padding-top(3);
     display: flex;
     justify-content: space-between;
+    padding-inline: 5px;
 
     @include common.media-breakpoint-down('sm') {
       padding-top: 0;
@@ -133,27 +145,18 @@
       }
     }
 
-    button {
+    ::part(_button) {
       @include common.add-border-radius();
       @include common.add-focus();
-      appearance: none;
-      background: transparent;
+      background-color: transparent;
       border: 0;
+      color: var(--text-primary-color);
       cursor: pointer;
-      margin: 0.125rem 0.25rem;
-      padding: 0.5rem;
-      width: 2.75rem;
       font-size: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0.5rem 0.75rem;
 
       &:hover {
-        background: var(--grey-400);
-      }
-
-      &:focus-visible {
-        outline-offset: 0;
+        background: var(--grey-500);
       }
     }
   }

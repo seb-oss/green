@@ -11,6 +11,7 @@ import style from './option.styles'
 
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
+import { tokens } from '../../tokens.style'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
@@ -34,7 +35,7 @@ export interface OptionsContainer extends HTMLElement {
  */
 @gdsCustomElement('gds-option')
 export class GdsOption extends Focusable(GdsElement) {
-  static styles = style
+  static styles = [tokens, style]
 
   /**
    * The value of the option.
@@ -122,9 +123,13 @@ export class GdsOption extends Focusable(GdsElement) {
   render() {
     const isMultiple = this.parentElement?.multiple
 
-    const checkbox = html` <span
-      class="checkbox ${classMap({ checked: this.selected })}"
-    ></span>`
+    const checkbox = html`
+      <span class="checkbox ${classMap({ checked: this.selected })}">
+        ${this.selected
+          ? html`<gds-icon-checkmark stroke></gds-icon-checkmark>`
+          : ''}
+      </span>
+    `
 
     if (!isMultiple) {
       if (this.selected) this.setAttribute('highlighted', '')

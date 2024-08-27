@@ -4,12 +4,13 @@ const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host {
-      padding: 0.5 1rem;
       cursor: pointer;
-    }
-
-    :host(:hover) {
-      background-color: grey;
+      color: var(--gds-sys-color-primary-text);
+      background-color: var(--gds-sys-color-container-container-dim1);
+      font-size: var(--gds-text-size-label-input-medium);
+      line-height: var(--gds-text-line-height-label-input-medium);
+      padding-inline: var(--gds-space-m);
+      padding-block: var(--gds-space-xs);
     }
   }
 `
