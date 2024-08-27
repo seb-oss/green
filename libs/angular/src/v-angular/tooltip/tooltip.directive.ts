@@ -175,7 +175,7 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
    */
   create(text: string) {
     this.tooltipElement = this.renderer.createElement('div')
-    this.renderer.addClass(this.tooltipElement, 'sdv-tooltip')
+    this.renderer.addClass(this.tooltipElement, 'gds-tooltip')
     this.renderer.setAttribute(this.tooltipElement, 'data-thook', this.thook)
     this.renderer.setStyle(this.tooltipElement, 'position', 'absolute')
     this.renderer.setStyle(this.tooltipElement, 'z-index', '1040')
@@ -194,7 +194,7 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
     this.arrowElement = this.renderer.createElement('div')
     this.renderer.addClass(
       this.arrowElement,
-      `sdv-tooltip__arrow-${this.placement}`,
+      `gds-tooltip__arrow-${this.placement}`,
     )
 
     // add arrow to tooltip element

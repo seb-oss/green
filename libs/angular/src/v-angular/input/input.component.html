@@ -23,7 +23,7 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="sdv-field-label--small description hide-if-empty">
+<div class="form-info description hide-if-empty">
   {{ description }}
 </div>
 
@@ -50,7 +50,7 @@
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
-  <div class="input-wrapper" [class.ngv-field--error]="invalid">
+  <div class="gds-input-wrapper" [class.ngv-field--error]="invalid">
     <div class="input-group-prefix hide-if-empty">
       <ng-content select="[slot='prefix']"></ng-content>
     </div>
@@ -65,6 +65,7 @@
         [attr.name]="name"
         [attr.required]="required"
         [attr.email]="email"
+        [attr.aria-describedby]="id + '-message'"
         [min]="min"
         [max]="max"
         [step]="step"
@@ -101,6 +102,7 @@
         [attr.role]="role"
         [attr.placeholder]="placeholder"
         [attr.aria-label]="description"
+        [attr.aria-describedby]="id + '-message'"
         [ngvInputMask]="inputMask"
         [formControl]="control"
       />
@@ -113,10 +115,13 @@
   </div>
 
   <!-- ERRORS -->
-  <div class="error-wrapper" *transloco="let t; read: scope">
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
-      [attr.for]="id + '-input'"
+  <div
+    class="gds-form-item__footer error-wrapper"
+    *transloco="let t; read: scope"
+  >
+    <span
+      class="form-info form-info--error"
+      [attr.id]="id + '-message'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >
       <span *ngIf="error; else errorsRef">{{ error }}</span>
@@ -125,20 +130,20 @@
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
-    </label>
+    </span>
 
     <ng-container *ngIf="!inputMask && hasMaxLength && showCharacterCountdown">
-      <label
+      <span
         *ngvCharacterCountdown="
           maxlength;
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft
         "
-        class="sdv-field-notice"
+        class="form-info"
         style="text-align: right"
       >
         {{ charactersLeft }} {{ t('label.maxlength') }}
-      </label>
+      </span>
     </ng-container>
   </div>
 </ng-container>

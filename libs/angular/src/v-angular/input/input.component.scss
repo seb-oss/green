@@ -1,72 +1,44 @@
-//// @use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
-// @use 'node_modules/@sebgroup/vanilla/src/mixins' as mixins;
-// @use 'node_modules/@sebgroup/vanilla/src/variables' as vars;
-// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
-// @use '../core-mixins' as ngv;
+@use '../../../../chlorophyll/scss/components/form/input/mixins';
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 
 :host {
+  &.gds-form-item {
+    @include form-group.add-form-item();
+  }
+
   .hide-if-empty:empty {
     display: none;
   }
 
-  .unset-state {
-    padding-left: 0.5rem;
+  @include mixins.add-text-input;
+
+  input {
+    width: 100%;
   }
 
-  .sdv-field-label--optional {
-    font-weight: 400;
+  .gds-input-wrapper {
+    @include mixins.add-input-wrapper;
   }
 
-  .ngv-field--error {
-    //@include ngv.text-field--error();
+  label,
+  .label,
+  legend {
+    @include form-group.add-label();
   }
 
-  .input {
-    &-wrapper {
-      display: table;
-      width: 100%;
-      //border: 0.0625em solid colors.$vanilla-color-grey400;
-      //border-radius: vars.$vanilla-component-border-radius;
-      //height: functions.vanilla-px-to-em(42);
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
 
-      &:focus-within {
-        //@include mixins.vanilla-focus-outline();
-        //border-color: colors.$vanilla-color-darkblue1;
-      }
-
-      & > * {
-        display: table-cell;
-        height: inherit;
-        vertical-align: middle; /* needed for Safari */
-
-        &:empty {
-          display: none !important;
-        }
-      }
-
-      & input {
-        border: 0;
-        display: block;
-        width: 100%;
-        //min-height: functions.vanilla-px-to-em(42);
-
-        &:focus {
-          outline: none;
-          box-shadow: none;
-        }
-      }
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
     }
 
-    &-group {
-      width: 100%;
+    .form-info--error {
+      color: var(--intent-danger-background, #9f000a);
     }
-  }
-
-  .description {
-    //margin-bottom: functions.vanilla-px-to-em(8);
-  }
-
-  .error-wrapper {
-    //@include ngv.text-field--error-wrapper();
   }
 }

@@ -35,6 +35,8 @@ export class InputComponent
   extends BaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
+  /** Adding .gds-form-item as a class to host element */
+  @HostBinding('class') class = 'gds-form-item'
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'input'
   /** Type of input field. Should avoid types that modify field too much such as range. */
