@@ -135,7 +135,7 @@ export const Size: Story = {
       >
       <gds-text size="label-small">Label: Input Small</gds-text>
       <gds-text size="label-medium">Label: Input Medium</gds-text>
-      <gds-text size="label-large:">Label: Input Large</gds-text>
+      <gds-text size="label-large">Label: Input Large</gds-text>
     </gds-flex>
   `,
 }
@@ -146,7 +146,7 @@ export const Body: Story = {
     <gds-flex direction="column" gap="m">
       <gds-text size="body-small">Body: Small</gds-text>
       <gds-text size="body-medium">Body: Medium</gds-text>
-      <gds-text size="body-large:">Body: Large</gds-text>
+      <gds-text size="body-large">Body: Large</gds-text>
     </gds-flex>
   `,
 }
@@ -157,7 +157,7 @@ export const Title: Story = {
     <gds-flex direction="column" gap="m">
       <gds-text size="title-small">Title: Small</gds-text>
       <gds-text size="title-medium">Title: Medium</gds-text>
-      <gds-text size="title-large:">Title: Large</gds-text>
+      <gds-text size="title-large">Title: Large</gds-text>
     </gds-flex>
   `,
 }
@@ -168,7 +168,7 @@ export const Headline: Story = {
     <gds-flex direction="column" gap="m">
       <gds-text size="headline-small">Headline: Small</gds-text>
       <gds-text size="headline-medium">Headline: Medium</gds-text>
-      <gds-text size="headline-large:">Headline: Large</gds-text>
+      <gds-text size="headline-large">Headline: Large</gds-text>
     </gds-flex>
   `,
 }
@@ -179,7 +179,7 @@ export const Display: Story = {
     <gds-flex direction="column" gap="m">
       <gds-text size="display-small">Display: Small</gds-text>
       <gds-text size="display-medium">Display: Medium</gds-text>
-      <gds-text size="display-large:">Display: Large</gds-text>
+      <gds-text size="display-large">Display: Large</gds-text>
     </gds-flex>
   `,
 }
@@ -214,7 +214,7 @@ export const Lines: Story = {
       <gds-flex direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text tag="h2" size="body-small">Lines:4</gds-text>
-        <gds-text size="display-large:" lines="4">
+        <gds-text size="display-large" lines="4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
