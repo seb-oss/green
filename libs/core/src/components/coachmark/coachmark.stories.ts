@@ -38,19 +38,28 @@ const DefaultParams: Story = {
   },
 }
 
+/**
+ * Because this is the default story that also renders at the top of the page, the
+ * coachmark will be shown in the first panel only, since the `#targetElement` selector
+ * will match the first element in the DOM.
+ */
 export const Basic: Story = {
   ...DefaultParams,
   render: () => html`
-    <main>
-      ${document.querySelector('gds-coachmark')
-        ? html`The coachmark is already visible in another panel`
-        : html` <p id="targetElement">Clicking will close the coachmark</p>
-            <gds-coachmark placement="top" .target=${['#targetElement']}>
-              <div class="gds-coachmark" aria-modal="false">
-                <div>This is the coachmark content.</div>
-              </div>
-              <div id="gds-arrow"></div>
-            </gds-coachmark>`}
-    </main>
+    <div style="height: 200px">
+      <p>
+        The coachmark will target the first element that matches the selector.
+        Clicking anywhere closes the coachmark.
+      </p>
+      <p
+        id="targetElement"
+        style="width: 200px; background: #ddd; padding: 1px"
+      >
+        Coachmark target element
+      </p>
+      <gds-coachmark .target=${['#targetElement']} placement="bottom">
+        This is the coachmark content.
+      </gds-coachmark>
+    </div>
   `,
 }
