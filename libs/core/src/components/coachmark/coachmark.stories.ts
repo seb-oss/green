@@ -8,9 +8,9 @@ import './index.ts'
  * Coachmarks are contextual tips that focus on making the user
  * aware of a new feature, the benefits of an existing one or a moved feature within an interface.
  *
- * the component is primarily a container that follows the targeted element.
- * the tooltip will be invisible and disabled if another element covered the targeted element or its simply out of view
- * the tooltip will close and dispatch a CustomEvent of "tooltipClosed"
+ * The component is primarily a container that follows the targeted element.
+ * The coachmark will be invisible and disabled if another element covered the targeted element or its simply out of view.
+ * The coachmark will close and dispatch a CustomEvent of `gds-ui-state`
  *
  * Note: the component can only view one coachmark at the time therefore the tooltip won't be
  * rendered in second storybook panel and testing the tooltip behaviour will be in the first panel only
