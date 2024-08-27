@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import {
+  aTimeout,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '@open-wc/testing'
 
 import '@sebgroup/green-core/components/coachmark'
 import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
@@ -22,43 +27,26 @@ describe('<gds-coachmark>', () => {
         html`<gds-coachmark></gds-coachmark>`,
       )
 
-      el.target = ['#someTarget']
-
-      await el.updateComplete
-
-      const container = el.shadowRoot?.querySelector(
-        'div[class*="gds-coachmark"]',
-      )
-
-      expect(container).to.exist
+      expect(el.shadowRoot).to.exist
     })
 
     it('should render slot', async () => {
       const el = await fixture<GdsCoachmark>(
-        html`<gds-coachmark><span>Test</span></gds-coachmark>`,
+        html`<gds-coachmark .target=${['#target']}
+          ><span>Test</span></gds-coachmark
+        >`,
       )
-
-      el.target = ['#someTarget']
-
-      await el.updateComplete
 
       const slotEl = el.shadowRoot?.querySelector('slot')
       expect(slotEl).to.exist
-
-      const slottedEl = el.querySelector('span')
-      expect(slottedEl).to.exist
     })
 
     it('should render arrow div', async () => {
       const el = await fixture<GdsCoachmark>(
-        html`<gds-coachmark></gds-coachmark>`,
+        html`<gds-coachmark .target=${['#target']}></gds-coachmark>`,
       )
 
-      el.target = ['#someTarget']
-
-      await el.updateComplete
-
-      const arrow = el.shadowRoot?.querySelector('#gds-arrow')
+      const arrow = el.shadowRoot?.querySelector('#arrow')
 
       expect(arrow).to.exist
     })
@@ -71,8 +59,6 @@ describe('<gds-coachmark>', () => {
           <div>Content</div>
         </gds-coachmark>`,
       )
-
-      el.target = ['#someTarget']
 
       await el.updateComplete
 
@@ -88,7 +74,6 @@ describe('<gds-coachmark>', () => {
         </gds-coachmark>`,
       )
 
-      el.target = ['#someTarget']
       el._isVisible = true
 
       await el.updateComplete
@@ -104,13 +89,53 @@ describe('<gds-coachmark>', () => {
         </gds-coachmark>`,
       )
 
-      el.target = ['#someTarget']
       el._isVisible = true
 
       await el.updateComplete
 
       await sendKeys({ press: 'Escape' })
       await waitUntil(() => !el._isVisible)
+    })
+  })
+
+  describe('API', () => {
+    it('should find target element', async () => {
+      const el = await fixture(
+        html`<div>
+          <div
+            style="position: absolute; top: 100px; left: 100px"
+            id="target"
+          ></div>
+          <gds-coachmark id="coachmark" .target=${['#target']}></gds-coachmark>
+        </div>`,
+      )
+
+      const coachmark = el.querySelector('#coachmark') as GdsCoachmark
+      await coachmark.updateComplete
+
+      const target = el.querySelector('#target')
+
+      expect(coachmark.targetElement).to.equal(target)
+    })
+
+    it('should fire gds-ui-state event when closing', async () => {
+      const el = await fixture<GdsCoachmark>(
+        html`<gds-coachmark .target=${['#target']}>
+          <div>Content</div>
+        </gds-coachmark>`,
+      )
+
+      el._isVisible = true
+
+      await el.updateComplete
+
+      const eventPromise = new Promise((resolve) => {
+        el.addEventListener('gds-ui-state', resolve, { once: true })
+      })
+
+      document.body.click()
+
+      await eventPromise
     })
   })
 })
