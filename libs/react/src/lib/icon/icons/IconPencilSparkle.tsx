@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconPencilSparkle as Icon } from '@sebgroup/green-core/components/icon/icons/pencil-sparkle'
+import { IconPencilSparkle as Icon } from '@sebgroup/green-core/components/icon/icons/pencil-sparkle.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconPencilSparkle = createComponent({

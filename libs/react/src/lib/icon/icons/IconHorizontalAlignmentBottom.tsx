@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconHorizontalAlignmentBottom as Icon } from '@sebgroup/green-core/components/icon/icons/horizontal-alignment-bottom'
+import { IconHorizontalAlignmentBottom as Icon } from '@sebgroup/green-core/components/icon/icons/horizontal-alignment-bottom.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconHorizontalAlignmentBottom = createComponent({
