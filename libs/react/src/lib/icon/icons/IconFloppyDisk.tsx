@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconFloppyDisk as Icon } from '@sebgroup/green-core/components/icon/icons/floppy-disk'
+import { IconFloppyDisk as Icon } from '@sebgroup/green-core/components/icon/icons/floppy-disk.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconFloppyDisk = createComponent({

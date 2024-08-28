@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconFiles as Icon } from '@sebgroup/green-core/components/icon/icons/files'
+import { IconFiles as Icon } from '@sebgroup/green-core/components/icon/icons/files.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconFiles = createComponent({

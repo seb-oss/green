@@ -26,7 +26,7 @@ async function generateReactComponent(name) {
 
   return `import React from 'react'
 import { createComponent } from '@lit/react'
-import { ${className} as Icon } from '@sebgroup/green-core/components/icon/icons/${name}'
+import { ${className} as Icon } from '@sebgroup/green-core/components/icon/icons/${name}.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const ${componentName} = createComponent({
