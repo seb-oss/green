@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.1
+
+### Patch Changes
+
+- cdcbfd1: Add `.js` extension to all icon imports from `green-core`
+
 ## 3.14.0
 
 ### Minor Changes
