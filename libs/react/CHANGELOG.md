@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.14.1
+
+### Patch Changes
+
+- cdcbfd1: Add `.js` extension to all icon imports from `green-core`
+
+## 3.14.0
+
+### Minor Changes
+
+- c791c90: Prefix with Icon all React Icons
+
+## 3.13.0
+
+### Minor Changes
+
+- 0af3744: Add all exisitng icons to React lib
+- 0af3744: Upgrade core `icon` sizing and add react icons
+
+### Patch Changes
+
+- Updated dependencies [0af3744]
+  - @sebgroup/green-core@1.35.0
+
 ## 3.12.0
 
 ### Minor Changes
