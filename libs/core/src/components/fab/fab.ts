@@ -14,6 +14,7 @@ import {
 import { GdsElement } from '../../gds-element'
 import { watch } from '../../utils/decorators'
 import { gdsCustomElement } from '../../scoping'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
 import styles from './fab.styles'
 import { GdsButton } from '../button'
@@ -34,11 +35,32 @@ export class GdsFab extends GdsButton {
   anchorRef?: Promise<HTMLElement>
 
   /**
-   * The placement of the popover relative to the trigger.
-   * Accepts any of the placements supported by Floating UI.
+   * Supports all valid CSS position values.
    */
-  @property()
-  placement: Placement = 'bottom-start'
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  position?: string
+
+  /**
+   * The transform of the FAB. Use this to tweak the position of the element on the screen.
+   *
+   * Accepts any valid CSS transform value.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  transform?: string
+
+  /**
+   * The inset postion of the FAB.
+   *
+   * Accepts any valid CSS inset values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  inset?: string
 
   /**
    * An array of middleware for the Floating UI positioning algorithm. Here you can pass in an array
@@ -91,7 +113,6 @@ export class GdsFab extends GdsButton {
 
     this.#autoPositionCleanupFn = autoUpdate(referenceEl, this, () => {
       computePosition(referenceEl, this, {
-        placement: this.placement,
         middleware: this.floatingUIMiddleware,
         strategy: 'fixed',
       }).then(({ x, y }) =>

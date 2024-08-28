@@ -1,6 +1,11 @@
 import { css } from 'lit'
 
 const style = css`
+  :host {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
   button {
     /* TODO: Tokens! */
     box-shadow:
