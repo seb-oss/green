@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.36.0
+
+### Minor Changes
+
+- 39aa96b: **Coachmarks:** Add `computeVisibility` callback for customizing visibility
+- 39aa96b: **Coachmark:** Rename close event to `gds-ui-state` to align with other components
+
+### Patch Changes
+
+- 39aa96b: **Coachmark:** Remove hard coded dependence on `main` element
+
 ## 1.35.0
 
 ### Minor Changes

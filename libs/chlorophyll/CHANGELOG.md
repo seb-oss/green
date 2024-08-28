@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.0
+
+### Minor Changes
+
+- 6e0e9c1: text area fix footer to be medium
+
 ## 3.5.1
 
 ### Patch Changes
