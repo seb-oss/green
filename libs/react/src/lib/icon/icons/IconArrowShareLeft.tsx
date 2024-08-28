@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconArrowShareLeft as Icon } from '@sebgroup/green-core/components/icon/icons/arrow-share-left'
+import { IconArrowShareLeft as Icon } from '@sebgroup/green-core/components/icon/icons/arrow-share-left.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconArrowShareLeft = createComponent({
