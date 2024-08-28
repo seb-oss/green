@@ -2,12 +2,23 @@ import { css } from 'lit'
 
 const style = css`
   button {
-    border-radius: calc(infinity * 1px);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    /* TODO: Tokens! */
+    box-shadow:
+      0px 8px 12px 0px rgba(27, 27, 24, 0.15),
+      0px 0px 1px 0px rgba(13, 13, 12, 0.3);
     border: none;
-    background-color: #ddd;
-    appearance: none;
-    padding: 1rem;
+    background-color: var(--gds-sys-color-background-background-dim);
+    color: var(--gds-sys-color-primary-text);
+    height: 3.5rem;
+    font-weight: 400;
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-container-container-shade1) 10%,
+        transparent
+      );
+    }
   }
 `
 

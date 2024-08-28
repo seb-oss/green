@@ -16,6 +16,7 @@ import { watch } from '../../utils/decorators'
 import { gdsCustomElement } from '../../scoping'
 
 import styles from './fab.styles'
+import { GdsButton } from '../button'
 
 /**
  * @element gds-fab
@@ -25,20 +26,12 @@ import styles from './fab.styles'
  * @slot - Content of the FAB
  */
 @gdsCustomElement('gds-fab')
-export class GdsFab extends GdsElement {
-  static styles = [styles]
-
+export class GdsFab extends GdsButton {
   /**
    * Optional way to assign an anchor element for the popover. When using Lit, this can take a value from a `@queryAsync` decorator in order to set the anchor element programatically.
    */
   @property({ attribute: false })
   anchorRef?: Promise<HTMLElement>
-
-  /**
-   * Optional trigger element for the popover.
-   */
-  @property()
-  label: string | undefined = undefined
 
   /**
    * The placement of the popover relative to the trigger.
@@ -65,6 +58,11 @@ export class GdsFab extends GdsElement {
   @query('slot:not([name])')
   private _elDefaultSlot: HTMLSlotElement | undefined
 
+  connectedCallback() {
+    super.connectedCallback()
+    this._dynamicStylesController.inject('FAB_styles', styles)
+  }
+
   @watch('anchorRef')
   private _handleAnchorRefChanged() {
     this.anchorRef?.then((el) => {
@@ -79,12 +77,6 @@ export class GdsFab extends GdsElement {
 
   // A function that removes the Floating UI auto positioning. This gets called when we switch to mobile view layout.
   #autoPositionCleanupFn: (() => void) | undefined
-
-  render() {
-    return html`<button>
-      <slot></slot>
-    </button>`
-  }
 
   #registerAutoPositioning() {
     if (!this._anchor) {

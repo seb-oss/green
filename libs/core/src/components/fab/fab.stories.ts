@@ -25,7 +25,7 @@ const DefaultParams: Story = {
   },
   args: {
     innerHTML: `
-    Floating action! <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+    What's new? <div slot="trail" style="width:8px;height:8px;border-radius:8px;background-color:green;box-shadow:0 0 0 4px rgba(0,85,0,0.3)"></div>
 `,
   },
 }
