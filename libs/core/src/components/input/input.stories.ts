@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-
+import './input'
 import { html } from 'lit'
 
 const meta: Meta = {
@@ -28,6 +28,21 @@ export const Input: Story = {
   ...DefaultParams,
   name: 'Regular icons',
   render: (args) => html`
-    <gds-flex direction="column" gap="xl" id="solids"> test </gds-flex>
+    <gds-flex>
+      <gds-input
+        label="Label"
+        maxlength="50"
+        supporting-text="Supporting text"
+        clearable
+      >
+        <gds-icon-email slot="lead"></gds-icon-email>
+        <gds-badge slot="trail" variant="surface"> kr </gds-badge>
+        <gds-panel slot="extended-supporting-text">
+          Extended supporting text as <strong>markup</strong>
+          <br />
+          <a href="#">Can contain links</a>
+        </gds-panel>
+      </gds-input>
+    </gds-flex>
   `,
 }
