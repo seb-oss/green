@@ -1,10 +1,9 @@
 :host {
   --gds-ripple-motion-name: ripple;
-  --gds-ripple-motion: var(--gds-ripple-motion-name)
-    var(--gds-sys-motion-duration) var(--gds-sys-motion-timing-function)
-    var(--gds-sys-motion-delay) var(--gds-sys-motion-iteration-count)
-    var(--gds-sys-motion-direction) var(--gds-sys-motion-fill-mode)
-    var(--gds-sys-motion-play-state);
+  --gds-ripple-motion: var(--gds-ripple-motion-name) 2s
+    cubic-bezier(0.22, 1, 0.36, 1) var(--gds-sys-motion-delay)
+    var(--gds-sys-motion-iteration-count) var(--gds-sys-motion-direction)
+    var(--gds-sys-motion-fill-mode) var(--gds-sys-motion-play-state);
   border-radius: var(--gds-space-max);
   contain: strict;
   display: flex;
@@ -19,7 +18,7 @@ div {
   background-color: currentColor;
   border-radius: var(--gds-space-max);
   display: flex;
-  height: 20px;
+  height: 40px;
   left: var(--gds-ripple-left, 50%);
   margin-left: -10px;
   margin-top: -10px;
@@ -27,7 +26,7 @@ div {
   pointer-events: none;
   position: absolute;
   top: var(--gds-ripple-top, 50%);
-  width: 20px;
+  width: 40px;
   will-change: transform;
 }
 
@@ -43,7 +42,7 @@ div.gds-ripple-effect {
 
   to {
     opacity: 0;
-    transform: scale(calc(3 * var(--mt-ripple-spread, 4)));
+    transform: scale(calc(3 * 4));
   }
 }
 
