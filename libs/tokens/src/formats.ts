@@ -105,6 +105,7 @@ const formats: Record<string, Format> = {
       const dictionary = Object.assign({}, args.dictionary)
       const options = Object.assign({ selector: ':host' }, args.options)
 
+      // TODO: Update all sizes for typography
       // Map each token
       dictionary.allTokens = dictionary.allTokens.map((token) => {
         if (
@@ -219,11 +220,10 @@ const formats: Record<string, Format> = {
   },
   'green/ios-swift-package': {
     name: 'green/ios-swift-package',
-    formatter: function({ options, file }) {
+    formatter: function ({ options, file }) {
       const template = _template(
         fs.readFileSync(
-          process.cwd() +
-            '/libs/tokens/src/templates/ios/spm.package.template',
+          process.cwd() + '/libs/tokens/src/templates/ios/spm.package.template',
         ),
       )
       return template({ file, options, fileHeader })
@@ -286,12 +286,19 @@ const formats: Record<string, Format> = {
         allTokens = [...dictionary.allTokens].sort(sortByName)
       }
       allTokens = useColorScheme(allTokens, options)
-      
+
       let propertyFormatter
       if (options.colorType == 'uiKitDynamicProvider') {
-        propertyFormatter = swift.uiKitColorReferencePropertyFormatter(options.lightModeObjectName, options.darkModeObjectName, options)
+        propertyFormatter = swift.uiKitColorReferencePropertyFormatter(
+          options.lightModeObjectName,
+          options.darkModeObjectName,
+          options,
+        )
       } else if (options.colorType == 'swiftUiReferenceToUiKit') {
-        propertyFormatter = swift.swiftUiColorReferencePropertyFormatter(options.uiKitObjectName, options)
+        propertyFormatter = swift.swiftUiColorReferencePropertyFormatter(
+          options.uiKitObjectName,
+          options,
+        )
       } else {
         const valueFormatter = createPropertyFormatter({
           outputReferences,
@@ -300,10 +307,18 @@ const formats: Record<string, Format> = {
             suffix: '',
           },
         })
-        propertyFormatter = swift.staticPropertyFormatter(options, valueFormatter)
+        propertyFormatter = swift.staticPropertyFormatter(
+          options,
+          valueFormatter,
+        )
       }
       const tree = swift.treeFromTokens(allTokens, options.type)
-      const fileContent = swift.fileContentFromTree(tree, options, file, propertyFormatter)
+      const fileContent = swift.fileContentFromTree(
+        tree,
+        options,
+        file,
+        propertyFormatter,
+      )
       return fileContent
     },
   },
