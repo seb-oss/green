@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- 7a228fb: Formatted iOS token outputs as an SPM package
+
 ## 0.5.0
 
 ### Minor Changes

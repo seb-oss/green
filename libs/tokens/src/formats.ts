@@ -1,5 +1,7 @@
 import * as fs from 'fs'
 import * as _template from 'lodash.template'
+import * as swift from './templates/ios/swift.tokens'
+
 import {
   Format,
   Options,
@@ -215,6 +217,18 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  'green/ios-swift-package': {
+    name: 'green/ios-swift-package',
+    formatter: function({ options, file }) {
+      const template = _template(
+        fs.readFileSync(
+          process.cwd() +
+            '/libs/tokens/src/templates/ios/spm.package.template',
+        ),
+      )
+      return template({ file, options, fileHeader })
+    },
+  },
   'green/ios-swift-class': {
     name: 'green/ios-swift-class',
     formatter: function ({ dictionary, options, file, platform }) {
@@ -254,6 +268,43 @@ const formats: Record<string, Format> = {
       allTokens = useColorScheme(allTokens, options)
 
       return template({ allTokens, file, options, formatProperty, fileHeader })
+    },
+  },
+  'green/ios-swift-class-tree': {
+    name: 'green/ios-swift-class-tree',
+    formatter: function ({ dictionary, options, file, platform }) {
+      let allTokens
+      const { outputReferences } = options
+      options = setSwiftFileProperties(
+        options,
+        'class',
+        platform.transformGroup,
+      )
+      if (outputReferences) {
+        allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
+      } else {
+        allTokens = [...dictionary.allTokens].sort(sortByName)
+      }
+      allTokens = useColorScheme(allTokens, options)
+      
+      let propertyFormatter
+      if (options.colorType == 'uiKitDynamicProvider') {
+        propertyFormatter = swift.uiKitColorReferencePropertyFormatter(options.lightModeObjectName, options.darkModeObjectName, options)
+      } else if (options.colorType == 'swiftUiReferenceToUiKit') {
+        propertyFormatter = swift.swiftUiColorReferencePropertyFormatter(options.uiKitObjectName, options)
+      } else {
+        const valueFormatter = createPropertyFormatter({
+          outputReferences,
+          dictionary,
+          formatting: {
+            suffix: '',
+          },
+        })
+        propertyFormatter = swift.staticPropertyFormatter(options, valueFormatter)
+      }
+      const tree = swift.treeFromTokens(allTokens, options.type)
+      const fileContent = swift.fileContentFromTree(tree, options, file, propertyFormatter)
+      return fileContent
     },
   },
   'green/android-resources': {
