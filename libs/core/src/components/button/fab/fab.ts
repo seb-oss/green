@@ -11,10 +11,10 @@ import {
   Middleware,
 } from '@floating-ui/dom'
 
-import { GdsElement } from '../../gds-element'
-import { watch } from '../../utils/decorators'
-import { gdsCustomElement } from '../../scoping'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { GdsElement } from '../../../gds-element'
+import { watch } from '../../../utils/decorators'
+import { gdsCustomElement } from '../../../scoping'
+import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
 import styles from './fab.styles'
 import { GdsButton } from '../button'
