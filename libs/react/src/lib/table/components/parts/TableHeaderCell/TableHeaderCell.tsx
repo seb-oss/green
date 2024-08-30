@@ -6,11 +6,14 @@ import {
   TableContextType,
   useTableContext,
 } from '../../context/TableContextProvider'
+import TooltipButton from '../../../../tooltip/tooltipButton/tooltipButton'
+import Tooltip from '../../../../tooltip/tooltip'
 
 export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
   accessor?: keyof T
   disableSort?: boolean
   sortDirection?: SortDirection
+  tooltipText?: string
 }
 
 const TableHeaderCell = React.forwardRef(
@@ -22,6 +25,7 @@ const TableHeaderCell = React.forwardRef(
       sortDirection,
       onClick,
       children,
+      tooltipText,
       ...props
     }: TableHeaderCellProps,
     ref: React.ForwardedRef<HTMLTableCellElement>,
@@ -73,6 +77,17 @@ const TableHeaderCell = React.forwardRef(
       return 'descending'
     }, [sortable, sortOrder])
 
+    const renderCellContent = () =>
+      sortable ? (
+        <TooltipButton tooltip={tooltipText} className="sg-table-sort">
+          {children}
+        </TooltipButton>
+      ) : tooltipText ? (
+        <Tooltip text={tooltipText}>{children}</Tooltip>
+      ) : (
+        children
+      )
+
     React.useEffect(() => {
       setSortable(!disableSort && !!tableContext.onSort)
     }, [disableSort, tableContext.onSort])
@@ -106,11 +121,7 @@ const TableHeaderCell = React.forwardRef(
         aria-sort={getCurrentSortValue()}
         {...props}
       >
-        {sortable ? (
-          <button className="sg-table-sort"> {children}</button>
-        ) : (
-          children
-        )}
+        {renderCellContent()}
       </th>
     )
   },
