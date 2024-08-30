@@ -7,7 +7,11 @@ import styles from './fab.styles'
 /**
  * @element gds-fab
  *
- * A FAB is a floating action button that is used to trigger a primary action in the UI.
+ * The Floating Action Button is used for functions central to the user experience, such as
+ * support and help features that needs to be accessible at all times.
+ *
+ * The button is always floating visible in the users viewport, typically in the lower right
+ * corner. This button can be used with an icon only.
  *
  * @slot - Content of the FAB
  */
