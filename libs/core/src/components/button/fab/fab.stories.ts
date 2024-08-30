@@ -8,7 +8,7 @@ import '../icon/icons/chevron-bottom.ts'
  * A FAB is a floating action button that is used to trigger a primary action in the UI.
  */
 const meta: Meta = {
-  title: 'Docs/Components/FAB',
+  title: 'Docs/Components/Button/FAB',
   component: 'gds-fab',
   tags: ['autodocs'],
 }
