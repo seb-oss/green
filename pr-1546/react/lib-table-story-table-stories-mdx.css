@@ -1,0 +1,3 @@
+.tooltip-container{position:relative;display:inline-block;cursor:pointer;overflow:visible}.tooltip-text{visibility:hidden;background-color:#000;color:#fff;text-align:center;border-radius:.3125rem;padding:.5rem;position:absolute;z-index:9999;bottom:125%;left:50%;margin-left:-3rem;opacity:0;transition:opacity .3s}.tooltip-container:hover .tooltip-text{visibility:visible;opacity:1}
+
+/*# sourceMappingURL=lib-table-story-table-stories-mdx.css.map*/
