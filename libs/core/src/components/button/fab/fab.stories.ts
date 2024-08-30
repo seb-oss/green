@@ -4,6 +4,8 @@ import { html } from '../../../scoping.ts'
 import './index.ts'
 import '../../icon/icons/chevron-bottom.ts'
 
+import { DefaultParams as ButtonDefaultParams } from '../button.stories'
+
 /**
  * The Floating Action Button is used for functions central to the user experience, such as
  * support and help features that needs to be accessible at all times.
@@ -21,6 +23,7 @@ export default meta
 type Story = StoryObj
 
 const DefaultParams: Story = {
+  ...ButtonDefaultParams,
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
