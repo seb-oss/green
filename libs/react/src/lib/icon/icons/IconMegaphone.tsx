@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconMegaphone as Icon } from '@sebgroup/green-core/components/icon/icons/megaphone'
+import { IconMegaphone as Icon } from '@sebgroup/green-core/components/icon/icons/megaphone.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconMegaphone = createComponent({

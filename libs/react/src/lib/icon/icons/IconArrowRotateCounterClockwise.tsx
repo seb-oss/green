@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconArrowRotateCounterClockwise as Icon } from '@sebgroup/green-core/components/icon/icons/arrow-rotate-counter-clockwise'
+import { IconArrowRotateCounterClockwise as Icon } from '@sebgroup/green-core/components/icon/icons/arrow-rotate-counter-clockwise.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconArrowRotateCounterClockwise = createComponent({

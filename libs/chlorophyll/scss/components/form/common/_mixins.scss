@@ -207,6 +207,10 @@
     margin-top: 0.5rem;
     display: flex;
     column-gap: 1rem;
+
+    & > span {
+      font-weight: 500;
+    }
   }
 }
 

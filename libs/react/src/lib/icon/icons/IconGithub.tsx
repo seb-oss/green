@@ -1,6 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-import { IconGithub as Icon } from '@sebgroup/green-core/components/icon/icons/github'
+import { IconGithub as Icon } from '@sebgroup/green-core/components/icon/icons/github.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 export const IconGithub = createComponent({
