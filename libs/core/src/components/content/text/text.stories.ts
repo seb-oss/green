@@ -31,6 +31,7 @@ const DefaultParams: Story = {
   argTypes: {
     size: {
       options: [
+        'headline-xl',
         'headline-l',
         'headline-m',
         'headline-s',
@@ -143,6 +144,7 @@ export const Headline: Story = {
       <gds-text size="headline-s">Headline Small</gds-text>
       <gds-text size="headline-m">Headline Medium</gds-text>
       <gds-text size="headline-l">Headline Large</gds-text>
+      <gds-text size="headline-xl">Headline Extra Large</gds-text>
     </gds-flex>
   `,
 }

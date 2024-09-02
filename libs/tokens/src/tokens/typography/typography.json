@@ -2,16 +2,20 @@
   "sys": {
     "typography": {
       "size": {
-        "headline-l": {
+        "headline-xl": {
           "value": "32",
           "type": "float"
         },
-        "headline-m": {
+        "headline-l": {
           "value": "28",
           "type": "float"
         },
-        "headline-s": {
+        "headline-m": {
           "value": "24",
+          "type": "float"
+        },
+        "headline-s": {
+          "value": "20",
           "type": "float"
         },
         "title-l": {
