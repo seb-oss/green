@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import { Tooltip, Button } from '@sebgroup/green-react'
+
+export const Template = (children, ...props) => (
+  <Tooltip text="I'm a tooltip!">
+    <button>Test</button>
+  </Tooltip>
+)
+
+<Meta title="Components/Tooltip" component={Tooltip} />
+
+<Story
+  name="Tooltip"
+  parameters={{
+    componentIds: ['component-tooltip'],
+    docs: { disable: true },
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+# Tooltip
+
+The Tooltip component is a simple component that displays a tooltip when hovered over the target element.
+
+<Canvas>
+  <div>
+    <br />
+    <br />
+    <br />
+    <Tooltip text={`I'm a tooltip!`}>
+      <Button variant={'primary'}>Hover me</Button>
+    </Tooltip>
+  </div>
+</Canvas>
+
+#### Available props
+
+##### Tooltip
+
+<ArgsTable of={Tooltip} />
