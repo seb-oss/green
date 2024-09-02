@@ -7,7 +7,7 @@ const style = css`
 
   * {
     margin: unset;
-    font-weight: normal;
+    font-weight: inherit;
     font-size: inherit;
     line-height: inherit;
     text-wrap: inherit;

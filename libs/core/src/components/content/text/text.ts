@@ -80,6 +80,18 @@ export class GdsText extends GdsElement {
   size?: string
 
   /**
+   * Controls the `font-weight` of the text.
+   * Supports all the weigh tokens.
+   *
+   * @property weight
+   */
+  @styleExpressionProperty({
+    property: 'font-weight',
+    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+  })
+  weight?: string
+
+  /**
    * Controls the margin of the text.
    * Supports all the default margin values.
    *

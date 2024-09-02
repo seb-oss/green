@@ -123,6 +123,19 @@ export const Card: Story = {
     </gds-flex>`,
 }
 
+export const Weight: Story = {
+  ...DefaultParams,
+  name: 'Weight',
+  render: (args) =>
+    html`<gds-flex direction="column" gap="m">
+      <gds-text weight="bold">Bold (700)</gds-text>
+      <gds-text weight="medium">Medium (500)</gds-text>
+      <gds-text weight="book">Book (450)</gds-text>
+      <gds-text weight="regular">Regular (400)</gds-text>
+      <gds-text weight="light">Light (300)</gds-text>
+    </gds-flex>`,
+}
+
 export const Headline: Story = {
   name: 'Headline',
   render: (args) => html`
