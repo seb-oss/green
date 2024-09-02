@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.5.1
+
+### Patch Changes
+
+- 94ddace: **Modals:** Fix small viewport overflow
+
+## 3.5.0
+
+### Minor Changes
+
+- 3cf63ae: Adding sizing input for the dialog modal in angular and chlorophyll
+
 ## 3.4.3
 
 ### Patch Changes
