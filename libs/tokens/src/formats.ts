@@ -163,6 +163,7 @@ const formats: Record<string, Format> = {
       const options = Object.assign({ selector: ':host' }, args.options)
 
       // Define opacity values for each shadow size
+      // TODO: Implement a better way to handle opacity values or get the colors from Figma tokens
       const opacityMap = {
         xs: [0.1, 0.1],
         s: [0.1, 0.06],
