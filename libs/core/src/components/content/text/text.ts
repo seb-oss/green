@@ -39,31 +39,34 @@ export class GdsText extends GdsElement {
    *
    * You can apply size like this:
    * ```html
-   * <gds-text size="body-medium"></gds-text>
+   * <gds-text size="body-m"></gds-text>
    * ```
    *
    * These are the available values you can use to define size:
    *
-   * `label-overline`,
-   * `label-input-medium`,
-   * `label-input-large`,
-   * `label-information-medium`,
-   * `label-information-large`,
-   * `label-small`,
-   * `label-medium`,
-   * `label-large`,
-   * `body-small`,
-   * `body-medium`,
-   * `body-large`,
-   * `title-small`,
-   * `title-medium`,
-   * `title-large`,
-   * `headline-small`,
-   * `headline-medium`,
-   * `headline-large`,
-   * `display-small`,
-   * `display-medium`,
-   * `display-large`,
+   * `headline-l`,
+   * `headline-m`,
+   * `headline-s`,
+   * `title-l`,
+   * `title-m`,
+   * `title-s`,
+   * `detail-m`,
+   * `detail-s`,
+   * `detail-xs`,
+   * `body-l`,
+   * `body-m`,
+   * `body-s`,
+   * `display-2xl`,
+   * `display-xl`,
+   * `display-l`,
+   * `display-m`,
+   * `display-s `,
+   * `preamble-2xl`,
+   * `preamble-xl`,
+   * `preamble-l`,
+   * `preamble-m`,
+   * `preamble-s`,
+   * `preamble-xs`,
    *
    * @property size
    */

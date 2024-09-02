@@ -31,26 +31,29 @@ const DefaultParams: Story = {
   argTypes: {
     size: {
       options: [
-        'label-overline',
-        'label-input-medium',
-        'label-input-large',
-        'label-information-medium',
-        'label-information-large',
-        'label-small',
-        'label-medium',
-        'label-large',
-        'body-small',
-        'body-medium',
-        'body-large',
-        'title-small',
-        'title-medium',
-        'title-large',
-        'headline-small',
-        'headline-medium',
-        'headline-large',
-        'display-small',
-        'display-medium',
-        'display-large',
+        'headline-l',
+        'headline-m',
+        'headline-s',
+        'title-l',
+        'title-m',
+        'title-s',
+        'detail-m',
+        'detail-s',
+        'detail-xs',
+        'body-l',
+        'body-m',
+        'body-s',
+        'display-2xl',
+        'display-xl',
+        'display-l',
+        'display-m',
+        'display-s ',
+        'preamble-2xl',
+        'preamble-xl',
+        'preamble-l',
+        'preamble-m',
+        'preamble-s',
+        'preamble-xs',
       ],
       control: { type: 'select' },
     },
@@ -120,33 +123,13 @@ export const Card: Story = {
     </gds-flex>`,
 }
 
-export const Size: Story = {
-  name: 'Labels',
+export const Headline: Story = {
+  name: 'Headline',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="label-overline">Label: Overline</gds-text>
-      <gds-text size="label-input-medium">Label: Input Medium</gds-text>
-      <gds-text size="label-input-large">Label: Input Large</gds-text>
-      <gds-text size="label-information-medium"
-        >Label: Input Information Medium</gds-text
-      >
-      <gds-text size="label-information-large"
-        >Label: Input Information Large</gds-text
-      >
-      <gds-text size="label-small">Label: Input Small</gds-text>
-      <gds-text size="label-medium">Label: Input Medium</gds-text>
-      <gds-text size="label-large">Label: Input Large</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Body: Story = {
-  name: 'Body',
-  render: (args) => html`
-    <gds-flex direction="column" gap="m">
-      <gds-text size="body-small">Body: Small</gds-text>
-      <gds-text size="body-medium">Body: Medium</gds-text>
-      <gds-text size="body-large">Body: Large</gds-text>
+      <gds-text size="headline-l">Headline Large</gds-text>
+      <gds-text size="headline-m">Headline Medium</gds-text>
+      <gds-text size="headline-s">Headline Small</gds-text>
     </gds-flex>
   `,
 }
@@ -155,20 +138,31 @@ export const Title: Story = {
   name: 'Title',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="title-small">Title: Small</gds-text>
-      <gds-text size="title-medium">Title: Medium</gds-text>
-      <gds-text size="title-large">Title: Large</gds-text>
+      <gds-text size="title-l">Title Large</gds-text>
+      <gds-text size="title-m">Title Medium</gds-text>
+      <gds-text size="title-s">Title Small</gds-text>
     </gds-flex>
   `,
 }
 
-export const Headline: Story = {
-  name: 'Headline',
+export const Detail: Story = {
+  name: 'Detail',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="headline-small">Headline: Small</gds-text>
-      <gds-text size="headline-medium">Headline: Medium</gds-text>
-      <gds-text size="headline-large">Headline: Large</gds-text>
+      <gds-text size="detail-m">Detail Medium</gds-text>
+      <gds-text size="detail-s">Detail Small</gds-text>
+      <gds-text size="detail-xs">Detail Extra Small</gds-text>
+    </gds-flex>
+  `,
+}
+
+export const Body: Story = {
+  name: 'Body',
+  render: (args) => html`
+    <gds-flex direction="column" gap="m">
+      <gds-text size="body-l">Body Large</gds-text>
+      <gds-text size="body-m">Body Medium</gds-text>
+      <gds-text size="body-s">Body Small</gds-text>
     </gds-flex>
   `,
 }
@@ -177,9 +171,25 @@ export const Display: Story = {
   name: 'Display',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="display-small">Display: Small</gds-text>
-      <gds-text size="display-medium">Display: Medium</gds-text>
-      <gds-text size="display-large">Display: Large</gds-text>
+      <gds-text size="display-2xl">Display 2XL</gds-text>
+      <gds-text size="display-xl">Display XL</gds-text>
+      <gds-text size="display-l">Display Large</gds-text>
+      <gds-text size="display-m">Display Medium</gds-text>
+      <gds-text size="display-s">Display Small</gds-text>
+    </gds-flex>
+  `,
+}
+
+export const Preamble: Story = {
+  name: 'Preamble',
+  render: (args) => html`
+    <gds-flex direction="column" gap="m">
+      <gds-text size="preamble-2xl">Preamble 2XL</gds-text>
+      <gds-text size="preamble-xl">Preamble XL</gds-text>
+      <gds-text size="preamble-l">Preamble Large</gds-text>
+      <gds-text size="preamble-m">Preamble Medium</gds-text>
+      <gds-text size="preamble-s">Preamble Small</gds-text>
+      <gds-text size="preamble-xs">Preamble Extra Small</gds-text>
     </gds-flex>
   `,
 }
@@ -193,16 +203,16 @@ export const Lines: Story = {
     <gds-flex direction="column" gap="2xl">
       <gds-flex direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text tag="h2" size="body-small">Lines:2</gds-text>
-        <gds-text size="display-small" lines="2">
+        <gds-text tag="h2" size="body-s">Lines:2</gds-text>
+        <gds-text size="display-s" lines="2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
       <gds-flex direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text tag="h2" size="body-small">Lines:3</gds-text>
-        <gds-text size="display-medium" lines="3">
+        <gds-text tag="h2" size="body-s">Lines:3</gds-text>
+        <gds-text size="display-m" lines="3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -213,8 +223,8 @@ export const Lines: Story = {
       </gds-flex>
       <gds-flex direction="column" gap="m">
         <gds-divider></gds-divider>
-        <gds-text tag="h2" size="body-small">Lines:4</gds-text>
-        <gds-text size="display-large" lines="4">
+        <gds-text tag="h2" size="body-s">Lines:4</gds-text>
+        <gds-text size="display-l" lines="4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -226,3 +236,75 @@ export const Lines: Story = {
     </gds-flex>
   `,
 }
+
+// Sizes
+// headline-l: 32
+// headline-m: 28
+// headline-s: 24
+
+// title-l: 20
+// title-m: 16
+// title-s: 14
+
+// detail-m: 16
+// detail-s: 14
+// detail-xs: 12
+
+// body-l: 20
+// body-m: 16
+// body-s: 14
+
+// display-xxl: 82
+// display-xl: 64
+// display-l: 48
+// display-m: 36
+// display-s: 32
+
+// headline-l: 32
+// headline-m: 24
+// headline-s: 20
+
+// preamble-xxl: 32
+// preamble-xl: 28
+// preamble-l: 24
+// preamble-m: 20
+// preamble-s: 18
+// preamble-xs: 16
+
+// Line height
+// Line height
+// Line height
+// Line height
+
+// headline-l: 40
+// headline-m: 36
+// headline-s: 30
+
+// title-l: 26
+// title-m: 24
+// title-s: 20
+
+// detail-m: 20
+// detail-s: 18
+// detail-xs: 16
+
+// body-l: 26
+// body-m: 24
+// body-s: 20
+
+// display-xxl: 90
+// display-xl: 72
+// display-l: 56
+// display-m: 44
+// display-s: 40
+
+// headline-l: 40
+// headline-m: 32
+// headline-s: 28
+
+// preamble-xxl: 40
+// preamble-xl: 36
+// preamble-l: 32
+// preamble-m: 28
+// preamble-s: 26
+// preamble-xs: 24
