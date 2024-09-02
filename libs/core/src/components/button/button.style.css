@@ -19,7 +19,6 @@
 
     --_color-outline-alpha: 60%;
     --_color-outline: var(--_color-border);
-
     /* These state layer variables can be variant to the correct state layer token in
     * the rank and variant specific styles. It will be blended with `--_color-bg`
     * for the `background-color` rule. */
@@ -172,6 +171,9 @@
 }
 
 @layer sizes {
+  :host([size='small']) {
+    --_size: 2rem;
+  }
   :host([size='small']) .button {
     --_padding-inline: var(--gds-space-l);
     --_padding-block: var(--gds-space-s);

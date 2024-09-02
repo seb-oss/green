@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.1
+
+### Patch Changes
+
+- 5cfcca1: Change stroke to path fill on chevron icon
+
 ## 3.6.0
 
 ### Minor Changes
