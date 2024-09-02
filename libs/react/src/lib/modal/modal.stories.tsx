@@ -16,10 +16,10 @@ const Template: Story<ModalProps> = (props) => {
   }
 
   return (
-    <div>
+    <div style={{ overflowY: 'auto', height: '800px' }}>
       {!isOpen && (
         <button className="button" onClick={openModal}>
-          open modal
+          Open Modal
         </button>
       )}
       <Modal
