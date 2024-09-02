@@ -140,9 +140,9 @@ export const Headline: Story = {
   name: 'Headline',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="headline-l">Headline Large</gds-text>
-      <gds-text size="headline-m">Headline Medium</gds-text>
       <gds-text size="headline-s">Headline Small</gds-text>
+      <gds-text size="headline-m">Headline Medium</gds-text>
+      <gds-text size="headline-l">Headline Large</gds-text>
     </gds-flex>
   `,
 }
@@ -151,9 +151,9 @@ export const Title: Story = {
   name: 'Title',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="title-l">Title Large</gds-text>
-      <gds-text size="title-m">Title Medium</gds-text>
       <gds-text size="title-s">Title Small</gds-text>
+      <gds-text size="title-m">Title Medium</gds-text>
+      <gds-text size="title-l">Title Large</gds-text>
     </gds-flex>
   `,
 }
@@ -162,9 +162,9 @@ export const Detail: Story = {
   name: 'Detail',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="detail-m">Detail Medium</gds-text>
-      <gds-text size="detail-s">Detail Small</gds-text>
       <gds-text size="detail-xs">Detail Extra Small</gds-text>
+      <gds-text size="detail-s">Detail Small</gds-text>
+      <gds-text size="detail-m">Detail Medium</gds-text>
     </gds-flex>
   `,
 }
@@ -173,9 +173,9 @@ export const Body: Story = {
   name: 'Body',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="body-l">Body Large</gds-text>
-      <gds-text size="body-m">Body Medium</gds-text>
       <gds-text size="body-s">Body Small</gds-text>
+      <gds-text size="body-m">Body Medium</gds-text>
+      <gds-text size="body-l">Body Large</gds-text>
     </gds-flex>
   `,
 }
@@ -184,11 +184,11 @@ export const Display: Story = {
   name: 'Display',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="display-2xl">Display 2XL</gds-text>
-      <gds-text size="display-xl">Display XL</gds-text>
-      <gds-text size="display-l">Display Large</gds-text>
-      <gds-text size="display-m">Display Medium</gds-text>
       <gds-text size="display-s">Display Small</gds-text>
+      <gds-text size="display-m">Display Medium</gds-text>
+      <gds-text size="display-l">Display Large</gds-text>
+      <gds-text size="display-xl">Display XL</gds-text>
+      <gds-text size="display-2xl">Display 2XL</gds-text>
     </gds-flex>
   `,
 }
@@ -197,12 +197,12 @@ export const Preamble: Story = {
   name: 'Preamble',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="preamble-2xl">Preamble 2XL</gds-text>
-      <gds-text size="preamble-xl">Preamble XL</gds-text>
-      <gds-text size="preamble-l">Preamble Large</gds-text>
-      <gds-text size="preamble-m">Preamble Medium</gds-text>
-      <gds-text size="preamble-s">Preamble Small</gds-text>
       <gds-text size="preamble-xs">Preamble Extra Small</gds-text>
+      <gds-text size="preamble-s">Preamble Small</gds-text>
+      <gds-text size="preamble-m">Preamble Medium</gds-text>
+      <gds-text size="preamble-l">Preamble Large</gds-text>
+      <gds-text size="preamble-xl">Preamble XL</gds-text>
+      <gds-text size="preamble-2xl">Preamble 2XL</gds-text>
     </gds-flex>
   `,
 }
@@ -249,75 +249,3 @@ export const Lines: Story = {
     </gds-flex>
   `,
 }
-
-// Sizes
-// headline-l: 32
-// headline-m: 28
-// headline-s: 24
-
-// title-l: 20
-// title-m: 16
-// title-s: 14
-
-// detail-m: 16
-// detail-s: 14
-// detail-xs: 12
-
-// body-l: 20
-// body-m: 16
-// body-s: 14
-
-// display-xxl: 82
-// display-xl: 64
-// display-l: 48
-// display-m: 36
-// display-s: 32
-
-// headline-l: 32
-// headline-m: 24
-// headline-s: 20
-
-// preamble-xxl: 32
-// preamble-xl: 28
-// preamble-l: 24
-// preamble-m: 20
-// preamble-s: 18
-// preamble-xs: 16
-
-// Line height
-// Line height
-// Line height
-// Line height
-
-// headline-l: 40
-// headline-m: 36
-// headline-s: 30
-
-// title-l: 26
-// title-m: 24
-// title-s: 20
-
-// detail-m: 20
-// detail-s: 18
-// detail-xs: 16
-
-// body-l: 26
-// body-m: 24
-// body-s: 20
-
-// display-xxl: 90
-// display-xl: 72
-// display-l: 56
-// display-m: 44
-// display-s: 40
-
-// headline-l: 40
-// headline-m: 32
-// headline-s: 28
-
-// preamble-xxl: 40
-// preamble-xl: 36
-// preamble-l: 32
-// preamble-m: 28
-// preamble-s: 26
-// preamble-xs: 24
