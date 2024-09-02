@@ -6,7 +6,6 @@ import {
   TableContextType,
   useTableContext,
 } from '../../context/TableContextProvider'
-import TooltipButton from '../../../../tooltip/tooltipButton/tooltipButton'
 import Tooltip from '../../../../tooltip/tooltip'
 
 export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
