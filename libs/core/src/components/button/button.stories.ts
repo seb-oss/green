@@ -25,7 +25,7 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
-const DefaultParams: Story = {
+export const DefaultParams: Story = {
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
