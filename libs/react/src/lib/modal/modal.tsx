@@ -124,36 +124,51 @@ export const Modal = ({
   size = 'sm',
   ...props
 }: ModalProps) => {
-  const [uuid, _] = useState(id)
-  const [status, setStatus] = useState<string>(UNMOUNTED)
-  const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
+  const [uuid, _] = useState(id);
+  const [status, setStatus] = useState<string>(UNMOUNTED);
+  const [shouldRender, setShouldRender] = useState<boolean | undefined>(false);
 
   useEffect(() => {
     if (isOpen && !shouldRender && status === UNMOUNTED) {
-      setShouldRender(true)
-      setStatus(IS_MOUNTING)
+      setShouldRender(true);
+      setStatus(IS_MOUNTING);
     }
 
     if (isOpen && shouldRender && status === IS_MOUNTING) {
-      setStatus(IS_ENTERING)
+      setStatus(IS_ENTERING);
       setTimeout(() => {
-        setStatus(ENTERED)
-      }, DELAY)
+        setStatus(ENTERED);
+      }, DELAY);
     }
 
     if (!isOpen && status === ENTERED) {
-      setStatus(IS_EXITING)
+      setStatus(IS_EXITING);
       setTimeout(() => {
-        setStatus(UNMOUNTED)
-        setShouldRender(false)
-      }, DELAY)
+        setStatus(UNMOUNTED);
+        setShouldRender(false);
+      }, DELAY);
     }
-  }, [isOpen, shouldRender, status])
+  }, [isOpen, shouldRender, status]);
 
-  if (!isOpen) return null
+  useEffect(() => {
+    if (isOpen) {
+      // Disable background scroll
+      document.body.classList.add('modal-open');
+    } else {
+      // Re-enable background scroll
+      document.body.classList.remove('modal-open');
+    }
 
-  const bodyId = `${uuid}_body`
-  const headerId = `${uuid}_header`
+    // Cleanup on component unmount
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const bodyId = `${uuid}_body`;
+  const headerId = `${uuid}_header`;
 
   const dialogProps: DetailedHTMLProps<
     HTMLAttributes<HTMLElement>,
@@ -164,16 +179,16 @@ export const Modal = ({
     'aria-modal': true,
     'aria-labelledby': headerId,
     'aria-describedby': bodyId,
-  }
+  };
 
-  let modalContent
+  let modalContent;
 
   switch (type) {
     case 'slideout': {
       const className: string | undefined = classNames(status, {
         'gds-slide-out--960': size === 'lg',
         'gds-slide-out--768': size === 'md',
-      })
+      });
 
       modalContent = (
         <aside className={className} {...dialogProps}>
@@ -187,8 +202,8 @@ export const Modal = ({
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </aside>
-      )
-      break
+      );
+      break;
     }
     case 'takeover': {
       modalContent = (
@@ -197,8 +212,8 @@ export const Modal = ({
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </main>
-      )
-      break
+      );
+      break;
     }
     default: {
       modalContent = (
@@ -209,8 +224,8 @@ export const Modal = ({
             <ModalFooter {...props} />
           </section>
         </div>
-      )
-      break
+      );
+      break;
     }
   }
 
@@ -220,24 +235,24 @@ export const Modal = ({
       'backdrop--transparent': type === 'slideout',
     },
     status,
-  )
+  );
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (props.onClose && !props.preventBackdropClose) {
       if (type === 'slideout') {
-        setStatus && setStatus(IS_EXITING)
+        setStatus && setStatus(IS_EXITING);
         setTimeout(() => {
-          if (props.onClose) props.onClose(event)
-          setStatus && setStatus(UNMOUNTED)
-          setShouldRender && setShouldRender(false)
-        }, DELAY)
+          if (props.onClose) props.onClose(event);
+          setStatus && setStatus(UNMOUNTED);
+          setShouldRender && setShouldRender(false);
+        }, DELAY);
       } else {
-        if (props.onClose) props.onClose(event)
-        setStatus && setStatus(UNMOUNTED)
-        setShouldRender && setShouldRender(false)
+        if (props.onClose) props.onClose(event);
+        setStatus && setStatus(UNMOUNTED);
+        setShouldRender && setShouldRender(false);
       }
     }
-  }
+  };
 
   return (
     <>
@@ -250,7 +265,7 @@ export const Modal = ({
         aria-hidden="true"
       ></div>
     </>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
