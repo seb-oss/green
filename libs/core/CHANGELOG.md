@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.37.1
+
+### Patch Changes
+
+- 8c47629: **Dropdown:** Fix regression in transitional styles
+
 ## 1.37.0
 
 ### Minor Changes
