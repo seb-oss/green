@@ -105,6 +105,7 @@ export const Pagination = ({
             {
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
+                href=""
                 onClick={onPrev}
                 aria-label="Previous Page"
                 className="gds-reset"
@@ -125,6 +126,7 @@ export const Pagination = ({
               {
                 // eslint-disable-next-line jsx-a11y/anchor-is-valid
                 <a
+                  href=""
                   onClick={(e) => {
                     e.preventDefault()
                     onClickPage && onClickPage(page as number)
@@ -144,6 +146,7 @@ export const Pagination = ({
             {
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
+                href=""
                 onClick={onNext}
                 role="button"
                 aria-label="Next Page"
