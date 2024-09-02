@@ -3,8 +3,6 @@ import { customElement, state } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/calendar/index.js'
-import * as CalendarTransitionalStyles from '@sebgroup/green-core/components/calendar/calendar.trans.styles.js'
-CalendarTransitionalStyles.register()
 
 @customElement('calendar-example')
 export class CalendarExample extends LitElement {
