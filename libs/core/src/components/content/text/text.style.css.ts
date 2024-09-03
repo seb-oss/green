@@ -67,7 +67,7 @@ const style = css`
 
   :host(:not([weight])) {
     strong {
-      font-weight: var(--gds-text-weight-bold);
+      font-weight: var(--gds-text-weight-book);
     }
   }
 

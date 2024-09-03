@@ -212,7 +212,8 @@ export class GdsText extends GdsElement {
   color?: string
 
   render() {
-    const TAG = unsafeStatic(this.tag)
+    const TAG_ENCODE = encodeURI(this.tag)
+    const TAG = unsafeStatic(TAG_ENCODE)
     return html`<${TAG} tag><slot></slot></${TAG}>`
   }
 }
