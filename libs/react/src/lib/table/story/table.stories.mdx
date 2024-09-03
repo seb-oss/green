@@ -65,7 +65,7 @@ import {
   TableRow,
   TableHeaderCell,
   TableCell,
-} from '@sebgroup/green-react'
+} from '@sebgroup/green-react/src/lib/table'
 ```
 
 ```typescript
@@ -138,7 +138,7 @@ const rowData: SuperHeroRowData[] = [
 </Story>
 
 ```tsx
-import { sortArray } from '@sebgroup/green-react'
+import { sortArray } from '@sebgroup/green-react/src/lib/table'
 
 const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
 const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
@@ -176,7 +176,7 @@ const onSort = (newSortedColumn: SortedColumn) => {
 </Story>
 
 ```typescript
-import { onRowSelect } from '@sebgroup/green-react'
+import { onRowSelect } from '@sebgroup/green-react/src/lib/table'
 
 const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
 const [selectAllIndicator, setSelectAllIndicator] = React.useState({

@@ -18,7 +18,7 @@ List are used to list many datapoints with labels in a structured way. They may 
 To use the component, import `GroupedList` and `ListItem` like this:
 
 ```jsx
-import { GroupedList, ListItem } from '@sebgroup/green-react'
+import { GroupedList, ListItem } from '@sebgroup/green-react/src/lib/list'
 
 // Use as JSX element in your app
 return (
@@ -43,7 +43,7 @@ return (
 This component does not need you to import styles from `Chlorophyll` it handles it with "transitional styles" that you need to register.
 
 ```jsx
-import { registerTransitionalStyles } from '@sebgroup/green-react'
+import { registerTransitionalStyles } from '@sebgroup/green-core/scoping'
 // Register the styles once in your apps entrypoint (main.tsx, app.tsx) file
 registerTransitionalStyles()
 ```
