@@ -124,7 +124,7 @@ export const SortableTable = () => {
       <TableHeader>
         <TableRow>
           {columnData.map((column: SuperHeroColumnDataT, i: number) => (
-            <TableHeaderCell key={i} {...column} />
+            <TableHeaderCell key={i} {...column} tooltipText={'Tooltip'} />
           ))}
         </TableRow>
       </TableHeader>
