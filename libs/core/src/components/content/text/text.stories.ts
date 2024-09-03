@@ -8,6 +8,8 @@ import { html } from 'lit'
 
 /**
  * The `gds-text`
+ * The gds-text element is designed to display text content flexibly. You can easily change the HTML tag it uses, wrap the text, set a maximum character length, and apply line clamping. It also allows you to adjust the text size based on design tokens that work together with line height and font size.
+ *
  *
  * ## Usage
  *
@@ -100,9 +102,9 @@ const DefaultParams: Story = {
  * In order to have more flexibility the tag it self and the sizing are controlled by the user.
  * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
  *
- * Tag: h1, h2, h3, h4, h5, h6, p, span, em, mark, strong etc.
+ * Tag: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small`, `sup` etc.
  *
- * #### The defualt tag is `p` and the defualt size is `body-medium`
+ * #### The defualt tag is `p` and the defualt size is `body-m`
  */
 
 export const Card: Story = {
@@ -110,17 +112,18 @@ export const Card: Story = {
   name: 'Tags',
   render: (args) =>
     html`<gds-flex direction="column" gap="m">
-      <gds-text tag="h1">H1</gds-text>
-      <gds-text tag="h2">H2</gds-text>
-      <gds-text tag="h3">H3</gds-text>
-      <gds-text tag="h4">H4</gds-text>
-      <gds-text tag="h5">H5</gds-text>
-      <gds-text tag="h6">H6</gds-text>
-      <gds-text>Paragraph</gds-text>
+      <gds-text size="heading-xl" tag="h1">H1</gds-text>
+      <gds-text size="heading-l" tag="h2">H2</gds-text>
+      <gds-text size="heading-m" tag="h3">H3</gds-text>
+      <gds-text size="heading-s" tag="h4">H4</gds-text>
+      <gds-text size="" tag="h5">H5</gds-text>
+      <gds-text size="" tag="h6">H6</gds-text>
+      <gds-text sizee="body-m">Paragraph</gds-text>
       <gds-text tag="span">Span</gds-text>
       <gds-text tag="em">Em</gds-text>
       <gds-text tag="mark">Mark</gds-text>
       <gds-text tag="strong">strong</gds-text>
+      <gds-text tag="small">small</gds-text>
     </gds-flex>`,
 }
 
