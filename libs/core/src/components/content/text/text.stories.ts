@@ -109,19 +109,23 @@ export const Card: Story = {
   ...DefaultParams,
   name: 'Tags',
   render: (args) =>
-    html`<gds-flex direction="column" gap="m">
-      <gds-text size="heading-xl" tag="h1">H1</gds-text>
-      <gds-text size="heading-l" tag="h2">H2</gds-text>
-      <gds-text size="heading-m" tag="h3">H3</gds-text>
-      <gds-text size="heading-s" tag="h4">H4</gds-text>
-      <gds-text size="heading-xs" tag="h5">H5</gds-text>
-      <gds-text size="heading-2xs" tag="h6">H6</gds-text>
-      <gds-text>Paragraph ( Default )</gds-text>
-      <gds-text tag="span">Span</gds-text>
-      <gds-text tag="em">Em</gds-text>
-      <gds-text tag="mark">Mark</gds-text>
-      <gds-text tag="strong">strong</gds-text>
-      <gds-text tag="small">small</gds-text>
+    html`<gds-flex direction="column" gap="2xl">
+      <gds-flex direction="column" gap="m">
+        <gds-text>Paragraph ( Default )</gds-text>
+        <gds-text tag="span">Span</gds-text>
+        <gds-text tag="em">Em</gds-text>
+        <gds-text tag="mark">Mark</gds-text>
+        <gds-text tag="strong">strong</gds-text>
+        <gds-text tag="small">small</gds-text>
+      </gds-flex>
+      <gds-flex direction="column" gap="m">
+        <gds-text tag="h1">H1</gds-text>
+        <gds-text tag="h2">H2</gds-text>
+        <gds-text tag="h3">H3</gds-text>
+        <gds-text tag="h4">H4</gds-text>
+        <gds-text tag="h5">H5</gds-text>
+        <gds-text tag="h6">H6</gds-text>
+      </gds-flex>
     </gds-flex>`,
 }
 
