@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const inputs = Object.fromEntries(
   glob
-    .sync('libs/react/src/lib/**/!(*.spec|*.test|*.stories).tsx')
+    .sync('libs/react/src/lib/**/!(*.spec|*.test|*.stories).ts?(x)')
     .map((file) => [
       // This remove `libs/react/src` as well as the file extension from each
       // file, so e.g. libs/react/src/lib/nested/foo.js becomes lib/nested/foo
