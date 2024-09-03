@@ -2,31 +2,27 @@
   "sys": {
     "typography": {
       "size": {
-        "headline-xl": {
+        "heading-xl": {
           "value": "32",
           "type": "float"
         },
-        "headline-l": {
+        "heading-l": {
           "value": "28",
           "type": "float"
         },
-        "headline-m": {
+        "heading-m": {
           "value": "24",
           "type": "float"
         },
-        "headline-s": {
+        "heading-s": {
           "value": "20",
           "type": "float"
         },
-        "title-l": {
-          "value": "20",
-          "type": "float"
-        },
-        "title-m": {
+        "heading-xs": {
           "value": "16",
           "type": "float"
         },
-        "title-s": {
+        "heading-2xl": {
           "value": "14",
           "type": "float"
         },

@@ -33,13 +33,12 @@ const DefaultParams: Story = {
   argTypes: {
     size: {
       options: [
-        'headline-xl',
-        'headline-l',
-        'headline-m',
-        'headline-s',
-        'title-l',
-        'title-m',
-        'title-s',
+        'heading-xl',
+        'heading-l',
+        'heading-m',
+        'heading-s',
+        'heading-xs',
+        'heading-2xs',
         'detail-m',
         'detail-s',
         'detail-xs',
@@ -116,8 +115,8 @@ export const Card: Story = {
       <gds-text size="heading-l" tag="h2">H2</gds-text>
       <gds-text size="heading-m" tag="h3">H3</gds-text>
       <gds-text size="heading-s" tag="h4">H4</gds-text>
-      <gds-text size="" tag="h5">H5</gds-text>
-      <gds-text size="" tag="h6">H6</gds-text>
+      <gds-text size="heading-xs" tag="h5">H5</gds-text>
+      <gds-text size="heading-2xs" tag="h6">H6</gds-text>
       <gds-text>Paragraph ( Default )</gds-text>
       <gds-text tag="span">Span</gds-text>
       <gds-text tag="em">Em</gds-text>
@@ -140,25 +139,17 @@ export const Weight: Story = {
     </gds-flex>`,
 }
 
-export const Headline: Story = {
-  name: 'Headline',
+export const Heading: Story = {
+  name: 'Heading',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="headline-s">Headline Small</gds-text>
-      <gds-text size="headline-m">Headline Medium</gds-text>
-      <gds-text size="headline-l">Headline Large</gds-text>
-      <gds-text size="headline-xl">Headline Extra Large</gds-text>
-    </gds-flex>
-  `,
-}
-
-export const Title: Story = {
-  name: 'Title',
-  render: (args) => html`
-    <gds-flex direction="column" gap="m">
-      <gds-text size="title-s">Title Small</gds-text>
-      <gds-text size="title-m">Title Medium</gds-text>
-      <gds-text size="title-l">Title Large</gds-text>
+      <gds-text size="heading-2xs">Heading 2XS</gds-text>
+      <gds-text size="heading-xs">Heading XS</gds-text>
+      <gds-text size="heading-s">Heading Small</gds-text>
+      <gds-text size="heading-s">Heading Small</gds-text>
+      <gds-text size="heading-m">Heading Medium</gds-text>
+      <gds-text size="heading-l">Heading Large</gds-text>
+      <gds-text size="heading-xl">Heading Extra Large</gds-text>
     </gds-flex>
   `,
 }

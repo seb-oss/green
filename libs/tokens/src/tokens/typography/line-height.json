@@ -2,31 +2,27 @@
   "sys": {
     "typography": {
       "line-height": {
-        "headline-xl": {
+        "heading-xl": {
+          "value": "44",
+          "type": "float"
+        },
+        "heading-l": {
           "value": "40",
           "type": "float"
         },
-        "headline-l": {
-          "value": "36",
-          "type": "float"
-        },
-        "headline-m": {
+        "heading-m": {
           "value": "32",
           "type": "float"
         },
-        "headline-s": {
+        "heading-s": {
           "value": "28",
           "type": "float"
         },
-        "title-l": {
-          "value": "26",
-          "type": "float"
-        },
-        "title-m": {
+        "heading-xs": {
           "value": "24",
           "type": "float"
         },
-        "title-s": {
+        "heading-2xs": {
           "value": "20",
           "type": "float"
         },

@@ -39,12 +39,12 @@ export class GdsText extends GdsElement {
    *
    * These are the available values you can use to define size:
    *
-   * `headline-l`,
-   * `headline-m`,
-   * `headline-s`,
-   * `title-l`,
-   * `title-m`,
-   * `title-s`,
+   * `heading-xl`,
+   * `heading-l`,
+   * `heading-m`,
+   * `heading-s`,
+   * `heading-xs`,
+   * `heading-2xs`,
    * `detail-m`,
    * `detail-s`,
    * `detail-xs`,

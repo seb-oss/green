@@ -13,10 +13,14 @@ const style = css`
     text-wrap: inherit;
   }
 
-  :host(:not([size])) {
-    font-size: var(--font-size-body-m);
-    line-height: var(--line-height-body-m);
-  }
+  // TODO: Add defaults for H1-H6 and p
+  // Example:
+  // :host(:not([size])) {
+  // h1 {
+  //   font-size: var(--font-size-body-m);
+  //   line-height: var(--line-height-body-m);
+  // }
+  // }
 
   :host([lines]) {
     * {
