@@ -96,14 +96,13 @@ const DefaultParams: Story = {
 }
 
 /**
- * # Headings
  *
  * In order to have more flexibility the tag it self and the sizing are controlled by the user.
  * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
  *
- * Tag: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small`, `sup` etc.
+ * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
  *
- * #### The defualt tag is `p` and the defualt size is `body-m`
+ * The defualt tag is `p` and the defualt size is `body-m`
  */
 
 export const Card: Story = {
@@ -139,17 +138,22 @@ export const Weight: Story = {
     </gds-flex>`,
 }
 
+/**
+ * > Headings in the `gds-text` component come with predefined sizes based on design tokens, and the `tag` property is used to define the heading level.
+ * > For example, using `tag="h1"` will automatically apply the `heading-xl` size, so specifying the `size` property is not necessary.
+ * > However, the `size` property can still be used to override the default size if needed.
+ * > This provides flexibility in using the `gds-text` component across different contexts while ensuring consistent typography.
+ */
 export const Heading: Story = {
   name: 'Heading',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text size="heading-2xs">Heading 2XS</gds-text>
-      <gds-text size="heading-xs">Heading XS</gds-text>
-      <gds-text size="heading-s">Heading Small</gds-text>
-      <gds-text size="heading-s">Heading Small</gds-text>
-      <gds-text size="heading-m">Heading Medium</gds-text>
-      <gds-text size="heading-l">Heading Large</gds-text>
-      <gds-text size="heading-xl">Heading Extra Large</gds-text>
+      <gds-text tag="h6" size="heading-2xs">H6: Heading 2XS</gds-text>
+      <gds-text tag="h5" size="heading-xs">H5: Heading XS</gds-text>
+      <gds-text tag="h4" size="heading-s">H4: Heading Small</gds-text>
+      <gds-text tag="h3" size="heading-m">H3: Heading Medium</gds-text>
+      <gds-text tag="h2" size="heading-l">H2: Heading Large</gds-text>
+      <gds-text tag="h1" size="heading-xl">H1: Heading Extra Large</gds-text>
     </gds-flex>
   `,
 }
