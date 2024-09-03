@@ -1,5 +1,5 @@
 ---
-"@sebgroup/green-react": minor
+'@sebgroup/green-react': minor
 ---
 
-New tooltip link component, new tooltip button and tooltip support for table
+New tooltip component and tooltip support for table
