@@ -19,6 +19,8 @@ import style from './menu-button.css?inline'
  * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
  *
  * @event click - Fired when the button is clicked.
+ *
+ * @csspart main-slot - The main slot of the button, between the lead and trail slots.
  */
 @gdsCustomElement('gds-menu-button')
 export class MenuButton extends GdsElement {
