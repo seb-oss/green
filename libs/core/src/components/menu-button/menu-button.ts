@@ -102,7 +102,7 @@ export class MenuButton extends GdsElement {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
       >
         <slot name="lead"></slot>
-        <slot></slot>
+        <slot part="main-slot"></slot>
         <slot name="trail"></slot>
       </${tag}>
     `
