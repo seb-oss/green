@@ -1,4 +1,4 @@
-import { html as staticHtml, literal } from 'lit/static-html.js'
+import { html, unsafeStatic } from 'lit/static-html.js'
 import { property } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
@@ -67,10 +67,11 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
-    selector: (instance) => instance.tag,
     styleTemplate: (prop, values) => {
       const size = values[0]
-      return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-text-line-height-${size});`
+      const styleSize = `font-size: var(--gds-text-size-${size});`
+      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      return styleSize + styleLine
     },
   })
   size?: string
@@ -198,7 +199,7 @@ export class GdsText extends GdsElement {
   color?: string
 
   render() {
-    const TAG = literal(this.tag)
-    return staticHtml`<${TAG}><slot></slot></${TAG}>`
+    const TAG = unsafeStatic(this.tag)
+    return html`<${TAG}><slot></slot></${TAG}>`
   }
 }
