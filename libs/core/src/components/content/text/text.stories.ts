@@ -148,12 +148,12 @@ export const Heading: Story = {
   name: 'Heading',
   render: (args) => html`
     <gds-flex direction="column" gap="m">
-      <gds-text tag="h6" size="heading-2xs">H6: Heading 2XS</gds-text>
-      <gds-text tag="h5" size="heading-xs">H5: Heading XS</gds-text>
-      <gds-text tag="h4" size="heading-s">H4: Heading Small</gds-text>
-      <gds-text tag="h3" size="heading-m">H3: Heading Medium</gds-text>
-      <gds-text tag="h2" size="heading-l">H2: Heading Large</gds-text>
-      <gds-text tag="h1" size="heading-xl">H1: Heading Extra Large</gds-text>
+      <gds-text tag="h6">H6: Heading 2XS</gds-text>
+      <gds-text tag="h5">H5: Heading XS</gds-text>
+      <gds-text tag="h4">H4: Heading Small</gds-text>
+      <gds-text tag="h3">H3: Heading Medium</gds-text>
+      <gds-text tag="h2">H2: Heading Large</gds-text>
+      <gds-text tag="h1">H1: Heading Extra Large</gds-text>
     </gds-flex>
   `,
 }

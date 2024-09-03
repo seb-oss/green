@@ -13,14 +13,42 @@ const style = css`
     text-wrap: inherit;
   }
 
-  // TODO: Add defaults for H1-H6 and p
-  // Example:
-  // :host(:not([size])) {
-  // h1 {
-  //   font-size: var(--font-size-body-m);
-  //   line-height: var(--line-height-body-m);
-  // }
-  // }
+  :host(:not([size])) {
+    h1 {
+      font-size: var(--gds-text-size-heading-xl);
+      line-height: var(--gds-text-line-height-heading-xl);
+    }
+
+    h2 {
+      font-size: var(--gds-text-size-heading-l);
+      line-height: var(--gds-text-line-height-heading-l);
+    }
+
+    h3 {
+      font-size: var(--gds-text-size-heading-m);
+      line-height: var(--gds-text-line-height-heading-m);
+    }
+
+    h4 {
+      font-size: var(--gds-text-size-heading-s);
+      line-height: var(--gds-text-line-height-heading-s);
+    }
+
+    h5 {
+      font-size: var(--gds-text-size-heading-xs);
+      line-height: var(--gds-text-line-height-heading-xs);
+    }
+
+    h6 {
+      font-size: var(--gds-text-size-heading-2xs);
+      line-height: var(--gds-text-line-height-heading-2xs);
+    }
+
+    p {
+      font-size: var(--gds-text-size-body-m);
+      line-height: var(--gds-text-line-height-body-m);
+    }
+  }
 
   :host([lines]) {
     * {

@@ -67,6 +67,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
@@ -84,6 +85,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'font-weight',
+    selector: '[tag]',
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   weight?: string
@@ -94,7 +96,11 @@ export class GdsText extends GdsElement {
    *
    * @property margin
    */
-  @styleExpressionProperty()
+  @styleExpressionProperty({
+    property: 'margin',
+    selector: '[tag]',
+    valueTemplate: (v) => v,
+  })
   margin?: string
 
   /**
@@ -105,6 +111,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-wrap',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   wrap?: string
@@ -117,6 +124,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-transform',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   transform?: string
@@ -135,6 +143,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'max-width',
+    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   length?: string
@@ -147,6 +156,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'min-width',
+    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   min?: string
@@ -159,6 +169,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-align',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   align?: string
@@ -170,6 +181,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_lines',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   lines?: number
@@ -187,6 +199,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'color',
+    selector: '[tag]',
     valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
@@ -200,6 +213,6 @@ export class GdsText extends GdsElement {
 
   render() {
     const TAG = unsafeStatic(this.tag)
-    return html`<${TAG}><slot></slot></${TAG}>`
+    return html`<${TAG} tag><slot></slot></${TAG}>`
   }
 }
