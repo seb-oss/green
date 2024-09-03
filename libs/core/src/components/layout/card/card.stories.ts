@@ -382,7 +382,7 @@ export const CardBackground: Story = {
           direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="headline-m">Base 100</gds-text>
+          <gds-text tag="h3" size="heading-m">Base 100</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -397,7 +397,7 @@ export const CardBackground: Story = {
           direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="headline-m">Base 200</gds-text>
+          <gds-text tag="h3" size="heading-m">Base 200</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -412,7 +412,7 @@ export const CardBackground: Story = {
           direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="headline-m">Base 300</gds-text>
+          <gds-text tag="h3" size="heading-m">Base 300</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -427,7 +427,7 @@ export const CardBackground: Story = {
           direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="headline-m">Base 400</gds-text>
+          <gds-text tag="h3" size="heading-m">Base 400</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -461,7 +461,7 @@ export const CardGrid: Story = {
             padding="s{xs} m{l} l{l}"
             align="flex-start"
           >
-            <gds-text tag="h3" size="l{headline-s} m{headline-s} s{headline-s}">
+            <gds-text tag="h3" size="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
             </gds-text>
             <gds-text wrap="balance">
@@ -481,7 +481,7 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            <gds-text tag="h3" size="headline-s">
+            <gds-text tag="h3" size="heading-s">
               Span Columns: [2 / -1]</gds-text
             >
             <gds-text>
@@ -507,7 +507,7 @@ export const CardGrid: Story = {
             justify="center"
             gap="m"
           >
-            <gds-text tag="h3" size="headline-s"
+            <gds-text tag="h3" size="heading-s"
               >Span all columns [1 / -1]</gds-text
             >
             <gds-text wrap="balance" lines="3">
