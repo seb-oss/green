@@ -2,6 +2,11 @@
 @use 'mixins';
 
 // base styles for modal
+
+body.modal-open {
+  overflow: hidden; // Hide the scrollbar on the body when modal is open
+}
+
 div[role='dialog']:not(.sg-date, .popover),
 section[role='dialog'],
 main[role='dialog'],
