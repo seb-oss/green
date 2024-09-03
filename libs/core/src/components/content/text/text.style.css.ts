@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    display: block;
+    display: contents;
   }
 
   * {
@@ -11,6 +11,11 @@ const style = css`
     font-size: inherit;
     line-height: inherit;
     text-wrap: inherit;
+  }
+
+  :host(:not([size])) {
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-body-m);
   }
 
   :host([lines]) {

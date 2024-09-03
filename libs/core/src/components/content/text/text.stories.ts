@@ -118,7 +118,7 @@ export const Card: Story = {
       <gds-text size="heading-s" tag="h4">H4</gds-text>
       <gds-text size="" tag="h5">H5</gds-text>
       <gds-text size="" tag="h6">H6</gds-text>
-      <gds-text sizee="body-m">Paragraph</gds-text>
+      <gds-text>Paragraph ( Default )</gds-text>
       <gds-text tag="span">Span</gds-text>
       <gds-text tag="em">Em</gds-text>
       <gds-text tag="mark">Mark</gds-text>

@@ -1,9 +1,6 @@
-import { css } from 'lit'
+import { html as staticHtml, literal } from 'lit/static-html.js'
 import { property } from 'lit/decorators.js'
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -20,8 +17,6 @@ import TextCSS from './text.style.css'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  // static styles = [tokens, TextCSS, ]
-
   static styles = [tokens, TextCSS]
 
   /**
@@ -72,6 +67,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: (instance) => instance.tag,
     styleTemplate: (prop, values) => {
       const size = values[0]
       return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-text-line-height-${size});`
@@ -177,12 +173,6 @@ export class GdsText extends GdsElement {
   })
   lines?: number
 
-  createTag() {
-    const tag = document.createElement(this.tag)
-    tag.appendChild(document.createElement('slot'))
-    return tag
-  }
-
   /**
    * Controls the color property of the text.
    * Supports all the color tokens from the design system.
@@ -208,6 +198,7 @@ export class GdsText extends GdsElement {
   color?: string
 
   render() {
-    return html`${this.createTag()}`
+    const TAG = literal(this.tag)
+    return staticHtml`<${TAG}><slot></slot></${TAG}>`
   }
 }
