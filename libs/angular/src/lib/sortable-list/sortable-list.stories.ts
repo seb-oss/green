@@ -76,7 +76,7 @@ export default {
       name: 'suffixTemplate',
       description: 'Custom template for displaying suffixes.',
       control: {
-        type: 'none',
+        type: 'object',
       },
     },
   },
@@ -85,7 +85,7 @@ export default {
 const createTemplate = (
   suffixTemplate = false,
 ): StoryFn<NggSortableListComponent> => {
-  return (args: NggSortableListComponent) => ({
+  return (args) => ({
     template: `
       ${
         suffixTemplate
