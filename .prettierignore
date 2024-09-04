@@ -5,3 +5,5 @@
 
 /.nx/cache
 **/*.mdx
+
+/.nx/workspace-data
