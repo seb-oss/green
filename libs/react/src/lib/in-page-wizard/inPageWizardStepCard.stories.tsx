@@ -13,7 +13,7 @@ export default {
   component: InPageWizardStepCard,
 }
 
-export const InPageWizardStepCard = {
+export const Default = {
   render: Template.bind({}),
   name: 'InPageWizardStepCard',
 

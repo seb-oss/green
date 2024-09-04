@@ -9,11 +9,11 @@ const Template = ({ children, ...props }) => (
 )
 
 export default {
-  title: 'Components/Form',
+  title: 'Components/Form/ButtonGroup',
   component: ButtonGroup,
 }
 
-export const ButtonGroup = {
+export const Default = {
   render: Template.bind({}),
   name: 'Button Group',
 

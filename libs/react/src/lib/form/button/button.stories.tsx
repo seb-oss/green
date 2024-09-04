@@ -9,7 +9,7 @@ export default {
   component: Button,
 }
 
-export const Button = {
+export const Default = {
   render: Template.bind({}),
   name: 'Button',
 

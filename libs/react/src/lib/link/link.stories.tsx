@@ -22,7 +22,7 @@ export default {
   },
 }
 
-export const Link = {
+export const Default = {
   render: Template.bind({}),
   name: 'Link',
 

@@ -7,7 +7,7 @@ export default {
   component: Stepper,
 }
 
-export const Stepper = {
+export const Default = {
   render: Template.bind({}),
   name: 'Stepper',
 

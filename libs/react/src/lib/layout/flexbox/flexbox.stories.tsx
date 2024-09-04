@@ -36,7 +36,7 @@ export default {
   component: Flexbox,
 }
 
-export const Flexbox = {
+export const Default = {
   render: Template.bind({}),
   name: 'Flexbox',
 

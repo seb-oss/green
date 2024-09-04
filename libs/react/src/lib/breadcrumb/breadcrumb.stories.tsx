@@ -22,7 +22,7 @@ export default {
   component: Breadcrumb,
 }
 
-export const Breadcrumb = {
+export const Default = {
   render: Template.bind({}),
   name: 'Breadcrumb',
 

@@ -8,7 +8,7 @@ export default {
   args: {},
 }
 
-export const Checkbox = {
+export const Default = {
   render: CheckboxTemplate.bind({}),
   name: 'Checkbox',
 

@@ -7,7 +7,7 @@ export default {
   component: Accordion,
 }
 
-export const Accordion = {
+export const Default = {
   render: Template.bind({}),
   name: 'Accordion',
 

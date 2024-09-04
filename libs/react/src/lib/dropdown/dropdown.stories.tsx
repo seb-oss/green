@@ -11,7 +11,7 @@ export default {
   component: Dropdown,
 }
 
-export const Dropdown = {
+export const Default = {
   render: Template.bind({}),
   name: 'Dropdown',
 

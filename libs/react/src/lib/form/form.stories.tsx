@@ -159,7 +159,7 @@ export default {
   component: Form,
 }
 
-export const Form = {
+export const Default = {
   render: Template.bind({}),
   name: 'Form',
 

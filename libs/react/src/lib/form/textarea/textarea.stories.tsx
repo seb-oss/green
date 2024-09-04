@@ -7,7 +7,7 @@ export default {
   component: TextArea,
 }
 
-export const TextArea = {
+export const Default = {
   render: TextAreaTemplate.bind({}),
   name: 'TextArea',
 

@@ -7,7 +7,7 @@ export default {
   component: Badge,
 }
 
-export const Badge = {
+export const Default = {
   render: Template.bind({}),
   name: 'Badge',
 

@@ -47,7 +47,7 @@ export const Template = () => {
 
 Table Component
 
-<Story of={TableStories.Table} />
+<Story of={TableStories.Default} />
 
 ## Usage
 
@@ -122,7 +122,7 @@ const rowData: SuperHeroRowData[] = [
 
 ## Sortable Table
 
-<Story of={TableStories.SortableTable} />
+<Story of={TableStories.SortableTableStory} />
 
 ```tsx
 import { sortArray } from '@sebgroup/green-react/src/lib/table'
@@ -153,7 +153,7 @@ const onSort = (newSortedColumn: SortedColumn) => {
 
 ## Selectable Table
 
-<Story of={TableStories.SelectableTable} />
+<Story of={TableStories.SelectableTableStory} />
 
 ```typescript
 import { onRowSelect } from '@sebgroup/green-react/src/lib/table'
@@ -198,7 +198,7 @@ const onSelect = (
 
 ## Expandable Table
 
-<Story of={TableStories.ExpandableTable} />
+<Story of={TableStories.ExpandableTableStory} />
 
 ```typescript
 interface SuperHeroData {

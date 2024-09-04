@@ -20,7 +20,7 @@ export default {
   argTypes: {},
 }
 
-export const SegmentedControl = {
+export const Default = {
   render: Template.bind({}),
   name: 'SegmentedControl',
 

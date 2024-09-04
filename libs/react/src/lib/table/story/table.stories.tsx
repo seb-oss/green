@@ -44,7 +44,7 @@ export default {
   component: Table,
 }
 
-export const Table = {
+export const Default = {
   render: Template.bind({}),
   name: 'Table',
 
@@ -53,7 +53,7 @@ export const Table = {
   },
 }
 
-export const SortableTable = {
+export const SortableTableStory = {
   render: () => <SortableTable />,
   name: 'Sortable table',
 
@@ -62,7 +62,7 @@ export const SortableTable = {
   },
 }
 
-export const SelectableTable = {
+export const SelectableTableStory = {
   render: () => <SelectableTable />,
   name: 'Selectable table',
 
@@ -71,7 +71,7 @@ export const SelectableTable = {
   },
 }
 
-export const ExpandableTable = {
+export const ExpandableTableStory = {
   render: () => <ExpandableTable />,
   name: 'Expandable table',
 

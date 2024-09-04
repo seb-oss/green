@@ -7,7 +7,7 @@ export default {
   component: Input,
 }
 
-export const Input = {
+export const Default = {
   render: InputTemplate.bind({}),
   name: 'Input',
 

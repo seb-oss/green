@@ -40,7 +40,7 @@ export default {
   component: AlertRibbon,
 }
 
-export const AlertRibbon = {
+export const Default = {
   render: Template.bind({}),
   name: 'AlertRibbon',
 

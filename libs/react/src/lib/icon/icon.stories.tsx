@@ -90,7 +90,7 @@ export default {
   title: 'Components/Icon',
 }
 
-export const Icons = {
+export const Default = {
   render: Template.bind({}),
   name: 'Icons',
 }

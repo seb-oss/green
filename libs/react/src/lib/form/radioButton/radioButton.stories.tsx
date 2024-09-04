@@ -9,7 +9,7 @@ export default {
   component: RadioButton,
 }
 
-export const RadioButton = {
+export const Default = {
   render: RadioButtonTemplate.bind({}),
   name: 'RadioButton',
 

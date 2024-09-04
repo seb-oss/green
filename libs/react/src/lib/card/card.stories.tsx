@@ -29,7 +29,7 @@ export default {
   component: Card,
 }
 
-export const Card = {
+export const Default = {
   render: Template.bind({}),
   name: 'Card',
 

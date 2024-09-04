@@ -3,11 +3,11 @@ import { Text } from './text'
 const TextInputTempalte = ({ children }) => <Text>{children}</Text>
 
 export default {
-  title: 'Components/Form',
+  title: 'Components/Form/Text',
   component: Text,
 }
 
-export const Text = {
+export const Default = {
   render: TextInputTempalte.bind({}),
   name: 'Text',
 
