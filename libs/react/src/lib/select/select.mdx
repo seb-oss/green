@@ -1,0 +1,43 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Select, Option, OptionGroup } from './select'
+import * as SelectStories from './select.stories';
+
+export const Template = ({ children, ...props }) => (
+  <Select {...props}>{children}</Select>
+)
+
+# Select
+
+Select component.
+
+<Meta of={SelectStories} />
+
+<Canvas>
+  <Story of={SelectStories.WithOptions} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.WithPlaceholder} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.WithOptionGroups} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.WithDisabledGroup} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.WithValidation} />
+</Canvas>
+
+### Expandlable information
+
+<Canvas>
+  <Story of={SelectStories.ExpandableInformation} />
+</Canvas>
+
+#### Available props
+
+<Controls />

@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import List from './list'
+import * as ListStories from './list.stories';
+
+export const Template = ({ children, ...props }) => (
+  <List {...props}>{children}</List>
+)
+
+export const TableListTemplate = ({ ...props }) => <List {...props} />
+
+<Meta of={ListStories} />
+
+# List
+
+### Ordered List
+
+<Canvas>
+  <Story of={ListStories.OrderedList} />
+</Canvas>
+
+<Canvas>
+  <Story of={ListStories.UnorderedList} />
+</Canvas>
+
+### Check List
+
+<Canvas>
+  <Story of={ListStories.CheckList} />
+</Canvas>
