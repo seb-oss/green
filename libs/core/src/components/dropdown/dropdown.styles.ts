@@ -23,6 +23,7 @@ const style = css`
       cursor: pointer;
       box-sizing: border-box;
       font-size: var(--gds-space-m);
+      font-family: inherit;
 
       // TODO: Update colors to use tokens
       border-color: #6f6f6f;
@@ -67,9 +68,9 @@ const style = css`
     }
 
     label {
-      font-weight: var(--gds-text-weight-regular);
-      line-height: var(--gds-text-line-height-label-input-large);
-      font-size: var(--gds-text-size-label-input-large);
+      font-size: var(--gds-text-size-detail-m);
+      line-height: var(--gds-text-line-height-detail-m);
+      font-weight: var(--gds-text-weight-book);
       padding-block: var(--gds-space-2xs);
       font-family: inherit;
     }
@@ -86,9 +87,10 @@ const style = css`
       border-bottom: 1px solid var(--gds-sys-color-base400);
       width: 100%;
       padding: var(--gds-space-m);
-      font-weight: var(--gds-text-weight-regular);
+      font-weight: var(--gds-text-weight-book);
       flex: 1;
       box-sizing: border-box;
+      font-family: inherit;
 
       &:focus {
         border-color: var(--gds-sys-color-base800);
@@ -97,7 +99,7 @@ const style = css`
       &::placeholder {
         color: currrentColor;
         font-family: inherit;
-        font-weight: var(--gds-text-weight-regular);
+        font-weight: var(--gds-text-weight-book);
         color: var(--gds-sys-color-base800);
       }
     }
