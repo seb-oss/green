@@ -1,0 +1,3 @@
+import{j as t}from"./jsx-runtime-b736948c.js";import"./chunk-HLWAVYOI-b37ee388.js";import{M as s}from"./index-cc401401.js";import{u as e}from"./index-2ca1a4b8.js";import"./iframe-267c4890.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-725317a4.js";import"./index-d38538b0.js";import"./index-356e4a49.js";function r(o){const n=Object.assign({h1:"h1",p:"p"},e(),o.components);return t.jsxs(t.Fragment,{children:[t.jsx(s,{title:"Docs/Style/Colors"}),`
+`,t.jsx(n.h1,{id:"colors",children:"Colors"}),`
+`,t.jsx(n.p,{children:"Add color diagram here for better understanding."})]})}function x(o={}){const{wrapper:n}=Object.assign({},e(),o.components);return n?t.jsx(n,Object.assign({},o,{children:t.jsx(r,o)})):r(o)}export{x as default};
