@@ -125,6 +125,7 @@ export const styles = css`
         outline-offset: -4px;
         border-radius: var(--gds-space-xs);
         padding-top: var(--gds-space-3xs);
+        font-family: inherit;
 
         &:focus-visible,
         &:hover {

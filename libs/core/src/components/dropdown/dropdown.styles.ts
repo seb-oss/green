@@ -23,6 +23,7 @@ const style = css`
       cursor: pointer;
       box-sizing: border-box;
       font-size: var(--gds-space-m);
+      font-family: inherit;
 
       // TODO: Update colors to use tokens
       border-color: #6f6f6f;
@@ -89,6 +90,7 @@ const style = css`
       font-weight: var(--gds-text-weight-book);
       flex: 1;
       box-sizing: border-box;
+      font-family: inherit;
 
       &:focus {
         border-color: var(--gds-sys-color-base800);
