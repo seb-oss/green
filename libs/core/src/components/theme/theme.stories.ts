@@ -108,7 +108,7 @@ export const Theme: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="title-large">James Doe</gds-text>
+              <gds-text tag="h2" size="body-l">James Doe</gds-text>
               <gds-text>
                 Passionate software engineer with a love for coding and
                 problem-solving.
@@ -143,7 +143,7 @@ export const Theme: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="title-large">Lorem Ipsum</gds-text>
+              <gds-text tag="h2" size="body-l">Lorem Ipsum</gds-text>
               <gds-text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt.
@@ -183,8 +183,8 @@ export const Theme: Story = {
               height="100%"
             >
               <gds-container>
-                <gds-text size="title-large">Jane Doe</gds-text>
-                <gds-text size="body-medium">UX Designer</gds-text>
+                <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
+                <gds-text tag="p" size="body-m">UX Designer</gds-text>
               </gds-container>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Message</gds-button>
