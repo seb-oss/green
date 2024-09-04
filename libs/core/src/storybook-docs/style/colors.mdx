@@ -1,7 +1,83 @@
-import { Meta, Markdown } from '@storybook/addon-docs'
+import { Meta, Markdown } from '@storybook/addon-docs';
+import colors from '../../../../tokens/src/tokens/color-v2/color.json';
+import '../../components/layout/container/container'
+import '../../components/layout/grid/grid'
+import '../../components/layout/card/card'
+import '../../components/layout/flex/flex'
+import '../../components/content/text/text'
+import '../../components/theme/theme'
 
 <Meta title="Docs/Style/Colors" />
 
-# Colors
+# Colors 
 
-Add color diagram here for better understanding.
+  {Object.entries(colors.sys.color).map(([level, categories]) => (
+    level !== 'states' && (
+      <gds-flex direction="column" gap="2xl">
+        <gds-flex gap="s" direction="column">
+            {Object.entries(categories).map(([category, items]) => (
+                <gds-flex gap="xl" direction="column">
+                    <gds-text tag="h4">{level.replace(/-/g, ' ').toUpperCase()} {category.replace(/-/g, ' ')}</gds-text>
+                    
+                    <gds-flex direction="row" gap="xl">
+                        {Object.entries(items).map(([item, properties]) => (
+                            <gds-flex direction="column" gap="l">
+                                <gds-card shadow="m" radius="s" padding="xs" width="140px">
+                                    <gds-flex gap="xs" align="center" >
+                                        <gds-theme color-scheme="dark">
+                                            <gds-card 
+                                                height="40px" 
+                                                width="40px" 
+                                                radius="xs" 
+                                                border="3xs/l2-stroke-tertiary"
+                                                background={level + "-" + category + "-" + item.replace(/-/g, ' ')}
+                                            />
+                                        </gds-theme>
+                                        <gds-flex direction="column" gap="3xs" align="start">
+                                            <gds-text tag="small">{item.replace(/-/g, ' ')}</gds-text>
+                                            <gds-text tag="small" transform="uppercase">{properties.value}</gds-text>
+                                        </gds-flex>
+                                    </gds-flex>
+                                </gds-card>   
+                                <gds-card shadow="m" radius="s" padding="xs" width="140px">
+                                    <gds-flex gap="xs" align="center" justify="start">
+                                        <gds-theme color-scheme="light">
+                                            <gds-card 
+                                                height="40px" 
+                                                width="40px" 
+                                                radius="xs" 
+                                                border="3xs/l2-stroke-tertiary"
+                                                background={level + "-" + category + "-" + item.replace(/-/g, ' ')}
+                                            />
+                                        </gds-theme>
+                                        <gds-flex direction="column" gap="3xs" align="start">
+                                            <gds-text tag="small">{item.replace(/-/g, ' ')}</gds-text>
+                                            <gds-text tag="small" transform="uppercase">{properties.darkValue}</gds-text>
+                                        </gds-flex>
+                                    </gds-flex>
+                                </gds-card>
+                            </gds-flex>
+                        ))}
+                    </gds-flex>
+                </gds-flex>
+            ))}
+        </gds-flex>
+      </gds-flex>
+    )
+  ))}
+
+  {colors.sys.color.states && (
+    <>
+      <h2>STATES</h2>
+      {Object.entries(colors.sys.color.states).map(([state, properties]) => (
+        <>
+          <h3>{state.replace(/-/g, ' ').toUpperCase()}</h3>
+          <ul>
+            <li>Value: {properties.value}</li>
+            <li>Dark Value: {properties.darkValue}</li>
+            <li>Type: {properties.type}</li>
+          </ul>
+        </>
+      ))}
+    </>
+  )}

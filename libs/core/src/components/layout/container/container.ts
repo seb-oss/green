@@ -73,7 +73,7 @@ export class GdsContainer extends GdsElement {
       if (transparency) {
         return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-sys-color-${colorName})`
+        return `var(--gds-color-${colorName})`
       }
     },
   })

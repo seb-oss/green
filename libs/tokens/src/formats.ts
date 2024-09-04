@@ -8,6 +8,7 @@ import {
   TransformedToken,
   formatHelpers,
 } from 'style-dictionary'
+import { color } from '@storybook/theming'
 
 const {
   fileHeader,
@@ -60,6 +61,54 @@ const formats: Record<string, Format> = {
           dictionary,
           outputReferences: options.outputReferences,
         }) +
+        `\n}\n`
+      )
+    },
+  },
+  'color/v2': {
+    name: 'color/v2',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign(
+        { selector: ':host', colorScheme: 'light' },
+        args.options,
+      )
+
+      // Apply color scheme to tokens
+      dictionary.allTokens = useColorScheme(dictionary.allTokens, options)
+
+      // Filter and map each token
+      dictionary.allTokens = dictionary.allTokens
+        .filter((token) => token.filePath.includes('color-v2'))
+        .map((token) => {
+          if (
+            token.path[2] === 'l1' ||
+            token.path[2] === 'l1-complement' ||
+            token.path[2] === 'l2' ||
+            token.path[2] === 'l2-complement' ||
+            token.path[2] === 'l3' ||
+            token.path[2] === 'l3-complement' ||
+            token.path[2] === 'states'
+          ) {
+            // Adjust token name to follow the format --gds-color-l1-background-primary
+            token.name = `gds-color-${token.path.slice(2).join('-')}`
+          }
+          return token
+        })
+
+      // Generate CSS variables
+      const cssVariables = formatHelpers.formattedVariables({
+        format: 'css',
+        dictionary,
+        outputReferences: options.outputReferences,
+      })
+
+      // Return the formatted CSS
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        `  color-scheme: ${options.colorScheme};\n` +
+        cssVariables +
         `\n}\n`
       )
     },
