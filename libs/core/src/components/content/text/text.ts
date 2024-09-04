@@ -26,7 +26,7 @@ export class GdsText extends GdsElement {
    * @property tag
    */
   @property({ type: String })
-  tag = 'p'
+  tag = 'span'
 
   /**
    * Controls the size of the text.

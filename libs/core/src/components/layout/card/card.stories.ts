@@ -72,8 +72,8 @@ export const Card: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="title-l">James Doe</gds-text>
-              <gds-text>
+              <gds-text tag="h2" size="body-l">James Doe</gds-text>
+              <gds-text tag="p">
                 Passionate software engineer with a love for coding and
                 problem-solving.
               </gds-text>
@@ -107,8 +107,8 @@ export const Card: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="title-l">Lorem Ipsum</gds-text>
-              <gds-text>
+              <gds-text tag="h2" size="body-l">Lorem Ipsum</gds-text>
+              <gds-text tag="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt.
               </gds-text>
@@ -147,8 +147,8 @@ export const Card: Story = {
               height="100%"
             >
               <gds-container>
-                <gds-text size="title-l">Jane Doe</gds-text>
-                <gds-text size="body-m">UX Designer</gds-text>
+                <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
+                <gds-text tag="p" size="body-m">UX Designer</gds-text>
               </gds-container>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Message</gds-button>

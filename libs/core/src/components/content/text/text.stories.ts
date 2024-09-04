@@ -102,7 +102,7 @@ const DefaultParams: Story = {
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
  *
- * The defualt tag is `p` and the defualt size is `body-m`
+ * The default tag is `span` and the default size is `body-m`
  */
 
 export const Card: Story = {
@@ -111,8 +111,8 @@ export const Card: Story = {
   render: (args) =>
     html`<gds-flex direction="column" gap="2xl">
       <gds-flex direction="column" gap="m">
-        <gds-text>Paragraph ( Default )</gds-text>
-        <gds-text tag="span">Span</gds-text>
+        <gds-text>Span ( Default )</gds-text>
+        <gds-text tag="p">Paragraph </gds-text>
         <gds-text tag="em">Em</gds-text>
         <gds-text tag="mark">Mark</gds-text>
         <gds-text tag="strong">strong</gds-text>
