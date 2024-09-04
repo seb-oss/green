@@ -1,7 +1,8 @@
 {
   "name": "@sebgroup/green-react",
   "version": "3.14.1",
-  "main": "./index.js",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"

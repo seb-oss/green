@@ -10,7 +10,6 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/react",
-        "packageJson": "libs/react/package.json",
         "tsConfig": "libs/react/tsconfig.lib.json",
         "project": "libs/react/package.json",
         "entryFile": "libs/react/src/index.ts",
@@ -21,8 +20,8 @@
         ],
         "assets": [
           {
-            "glob": "libs/react/README.md",
-            "input": ".",
+            "glob": "(README.md)",
+            "input": "libs/react",
             "output": "."
           }
         ],
