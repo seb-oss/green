@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tokensversion: ${{ steps.output-tokens-version.outputs.tokensversion }}
+      tokensshoulddeploy: ${{ steps.output-tokens-version.outputs.tokensshoulddeploy }} ?? false
     steps:
       - name: Get token
         id: get_token
@@ -64,6 +65,7 @@ jobs:
         if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
         id: output-tokens-version
         run: |
+          echo "tokensshoulddeploy=true" >> "$GITHUB_OUTPUT"
           echo "tokensversion=$( jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< ${{ steps.changesets.outputs.publishedPackages }}" >> "$GITHUB_OUTPUT"
 
   deployiostokens:
