@@ -29,7 +29,7 @@ describe('<gds-button>', () => {
 
     it('should render link', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button href="https://github.com/sebgroup/green"
+        html`<gds-button href="https://github.com/seb-oss/green"
           >Link</gds-button
         >`,
       )
@@ -175,7 +175,7 @@ describe('<gds-button>', () => {
     it('should support link attributes', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_self"
           rel="noopener"
           download
@@ -186,7 +186,7 @@ describe('<gds-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('a')
 
       expect(shadowButton?.getAttribute('href')).to.equal(
-        'https://github.com/sebgroup/green',
+        'https://github.com/seb-oss/green',
       )
       expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
       expect(shadowButton?.getAttribute('target')).to.equal('_self')
@@ -219,7 +219,7 @@ describe('<gds-button>', () => {
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button href="https://github.com/sebgroup/green">
+        html`<gds-button href="https://github.com/seb-oss/green">
           Test link
         </gds-button>`,
       )
@@ -266,7 +266,7 @@ describe('<gds-button>', () => {
     it('should apply a secure rel attribute by default', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_blank"
         >
           Test link
