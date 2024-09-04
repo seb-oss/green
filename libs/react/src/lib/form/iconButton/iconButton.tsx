@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent } from 'react'
+import React, { ReactNode, MouseEvent } from 'react'
 import { ButtonType } from '@sebgroup/extract'
 
 interface IconButtonInterface {
@@ -8,6 +8,7 @@ interface IconButtonInterface {
   'aria-expanded'?: boolean
   'aria-controls'?: string
   size?: 'small' | 'normal'
+  title?: string
 }
 
 export const IconButton = ({
@@ -22,6 +23,7 @@ export const IconButton = ({
       aria-controls={props['aria-controls']}
       aria-expanded={props['aria-expanded']}
       type={props.type ?? 'button'}
+      title={props.title}
     >
       {children}
     </button>
