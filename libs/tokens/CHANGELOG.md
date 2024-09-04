@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0
+
+### Minor Changes
+
+Fixes: #1557
+
+Introducing the new color system with a new naming convention and structure
+
 ## 0.7.0
 
 ### Minor Changes

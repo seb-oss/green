@@ -2,6 +2,7 @@
 
 @layer tokens {
   :host {
+    /* TODO: Update with all new colors */
     --_gap: var(--gds-space-m);
 
     --_transition: var(--gds-sys-transition);
