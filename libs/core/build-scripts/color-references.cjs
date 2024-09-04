@@ -1,3 +1,4 @@
+// TODO: Delete before publishing
 const fs = require('fs').promises
 const path = require('path')
 const { performance } = require('perf_hooks')
