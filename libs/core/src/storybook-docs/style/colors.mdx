@@ -10,19 +10,18 @@ import '../../components/theme/theme'
 <Meta title="Docs/Style/Colors" />
 
 # Colors 
-
+<gds-flex direction="column" gap="2xl">
   {Object.entries(colors.sys.color).map(([level, categories]) => (
     level !== 'states' && (
       <gds-flex direction="column" gap="2xl">
-        <gds-flex gap="s" direction="column">
+        <gds-flex gap="2xl" direction="column">
             {Object.entries(categories).map(([category, items]) => (
-                <gds-flex gap="xl" direction="column">
+                <gds-flex gap="s" direction="column">
                     <gds-text tag="h4">{level.replace(/-/g, ' ').toUpperCase()} {category.replace(/-/g, ' ')}</gds-text>
-                    
-                    <gds-flex direction="row" gap="xl">
+                    <gds-flex direction="row" gap="s">
                         {Object.entries(items).map(([item, properties]) => (
-                            <gds-flex direction="column" gap="l">
-                                <gds-card shadow="m" radius="s" padding="xs" width="140px">
+                            <gds-flex direction="column" gap="s">
+                                <gds-card border="3xs/l2-stroke-tertiary" radius="s" padding="xs" width="20ch">
                                     <gds-flex gap="xs" align="center" >
                                         <gds-theme color-scheme="auto">
                                             <gds-card 
@@ -30,16 +29,16 @@ import '../../components/theme/theme'
                                                 width="40px" 
                                                 radius="xs" 
                                                 border="3xs/l2-stroke-tertiary"
-                                                background={level + "-" + category + "-" + item.replace(/-/g, ' ')}
+                                                background={level + "-" + category + "-" + item}
                                             />
                                         </gds-theme>
                                         <gds-flex direction="column" gap="3xs" align="start">
-                                            <gds-text tag="small">{item.replace(/-/g, ' ')}</gds-text>
+                                            <gds-text tag="small">{item}</gds-text>
                                             <gds-text tag="small" transform="uppercase">{properties.value}</gds-text>
                                         </gds-flex>
                                     </gds-flex>
                                 </gds-card>   
-                                <gds-card shadow="m" radius="s" padding="xs" width="140px">
+                                <gds-card border="3xs/l2-stroke-tertiary" radius="s" padding="xs" width="20ch">
                                     <gds-flex gap="xs" align="center" justify="start">
                                         <gds-theme color-scheme="dark">
                                             <gds-card 
@@ -47,11 +46,11 @@ import '../../components/theme/theme'
                                                 width="40px" 
                                                 radius="xs" 
                                                 border="3xs/l2-stroke-tertiary"
-                                                background={level + "-" + category + "-" + item.replace(/-/g, ' ')}
+                                                background={level + "-" + category + "-" + item}
                                             />
                                         </gds-theme>
                                         <gds-flex direction="column" gap="3xs" align="start">
-                                            <gds-text tag="small">{item.replace(/-/g, ' ')}</gds-text>
+                                            <gds-text tag="small">{item}</gds-text>
                                             <gds-text tag="small" transform="uppercase">{properties.darkValue}</gds-text>
                                         </gds-flex>
                                     </gds-flex>
@@ -65,8 +64,8 @@ import '../../components/theme/theme'
       </gds-flex>
     )
   ))}
-
-  {colors.sys.color.states && (
+</gds-flex>
+  {/* {colors.sys.color.states && (
     <>
       <h2>STATES</h2>
       {Object.entries(colors.sys.color.states).map(([state, properties]) => (
@@ -80,4 +79,4 @@ import '../../components/theme/theme'
         </>
       ))}
     </>
-  )}
+  )} */}
