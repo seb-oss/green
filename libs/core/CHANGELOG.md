@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.38.1
+
+### Patch Changes
+
+- 3d8cbea: **Popover:** Fix incorrect scoping applied internally in Popover
+
 ## 1.38.0
 
 ### Minor Changes

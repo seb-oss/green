@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.15.0
+
+### Minor Changes
+
+- b8dded4: **IconButton:** Add `title` prop
+
+### Patch Changes
+
+- Updated dependencies [3d8cbea]
+  - @sebgroup/green-core@1.38.1
+
 ## 3.14.1
 
 ### Patch Changes
