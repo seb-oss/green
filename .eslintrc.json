@@ -27,7 +27,8 @@
               }
             ]
           }
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "off"
       }
     },
     {
