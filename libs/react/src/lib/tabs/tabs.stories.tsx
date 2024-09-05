@@ -1,4 +1,4 @@
-import { Tabs, Tab, Card } from '@sebgroup/green-react'
+import { Tabs, Tab, Card } from './tabs'
 
 const Template = (children, ...props) => (
   <Card>
