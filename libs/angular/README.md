@@ -1,5 +1,5 @@
 <div align="center">
-<img width="600" alt="green-angular" src="https://github.com/sebgroup/green/assets/11420341/c776109a-c980-4c33-92dd-109f1ff31ba2">
+<img width="600" alt="green-angular" src="https://github.com/seb-oss/green/assets/11420341/c776109a-c980-4c33-92dd-109f1ff31ba2">
 <h1>@sebgroup/green-angular</h1>
 <p>
 Angular components with SEB's look and feel.
@@ -65,4 +65,4 @@ Once configured to use scss, it's just a matter of including the scss to your ma
 
 ### Have other needs?
 
-More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/sebgroup/green/issues)
+More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/seb-oss/green/issues)

@@ -25,7 +25,7 @@ type Resource = {
 
 const resources: Resource[] = [
   {
-    href: 'https://github.com/sebgroup/green',
+    href: 'https://github.com/seb-oss/green',
     target: '_blank',
     caption: 'Github',
     text: 'Start contributing now!',
