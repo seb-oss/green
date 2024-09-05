@@ -13318,7 +13318,7 @@ glob@^10.2.2, glob@^10.3.10:
     package-json-from-dist "^1.0.0"
     path-scurry "^1.11.1"
 
-glob@^7.0.5, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
+glob@^7.0.5, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.2.0:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.2.3.tgz#b8df0fb802bbfa8e89bd1d938b4e16578ed44f2b"
   integrity sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==
@@ -22437,16 +22437,16 @@ strong-log-transformer@^2.1.0:
     minimist "^1.2.0"
     through "^2.3.4"
 
-style-dictionary@^3.7.1:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.9.2.tgz#5b3ecd4af28a64f4855db71c90d24fd288f27318"
-  integrity sha512-M2pcQ6hyRtqHOh+NyT6T05R3pD/gwNpuhREBKvxC1En0vyywx+9Wy9nXWT1SZ9ePzv1vAo65ItnpA16tT9ZUCg==
+style-dictionary@3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.9.0.tgz#c89ba60b81a821c52515ae45d5e5c2da41c34546"
+  integrity sha512-mnq8QfPJoj3ellKHRKZwmCgYUGgwYtoagW5edyKpR09O1W4/XqBdeKXoY/LbeIKqHrqVR7sGgk6E/dNYkPS4aA==
   dependencies:
     chalk "^4.0.0"
     change-case "^4.1.2"
     commander "^8.3.0"
     fs-extra "^10.0.0"
-    glob "^10.3.10"
+    glob "^7.2.0"
     json5 "^2.2.2"
     jsonc-parser "^3.0.0"
     lodash "^4.17.15"
