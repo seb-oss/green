@@ -106,10 +106,12 @@ const formats: Record<string, Format> = {
       // Return the formatted CSS
       return (
         formatHelpers.fileHeader({ file: args.file }) +
-        `${options.selector} {\n` +
+        // `${options.selector} {\n` +
+        `` +
         `  color-scheme: ${options.colorScheme};\n` +
         cssVariables +
-        `\n}\n`
+        ``
+        // `\n}\n`
       )
     },
   },

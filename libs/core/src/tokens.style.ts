@@ -1,5 +1,5 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { unsafeCSS } from 'lit'
+import { unsafeCSS, css } from 'lit'
 import palletCss from '../../../dist/libs/tokens/internal/pallet.css?inline'
 import lightThemeCss from '../../../dist/libs/tokens/internal/theme/light.css?inline'
 import sizeTokens from '../../../dist/libs/tokens/internal/size.css?inline'
@@ -11,16 +11,23 @@ import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
 import colorV2Light from '../../../dist/libs/tokens/internal/light.css?inline'
 import colorV2Dark from '../../../dist/libs/tokens/internal/dark.css?inline'
 
+console.log(`:root { ${colorV2Light} }`)
+
 const tokens = [
-  unsafeCSS(palletCss),
-  unsafeCSS(lightThemeCss),
+  // unsafeCSS(palletCss),
+  // unsafeCSS(lightThemeCss),
   unsafeCSS(sizeTokens),
   unsafeCSS(textTokens),
   unsafeCSS(motionTokens),
   unsafeCSS(shadowTokens),
-  // v2
-  unsafeCSS(colorV2Light),
-  unsafeCSS(colorV2Dark),
 ]
 
-export { tokens }
+// TODO: Consider more efficient way to apply tokens
+const tokesStyleSheets = new CSSStyleSheet()
+tokesStyleSheets.replaceSync(`:root { ${colorV2Light} }`)
+document.adoptedStyleSheets = [
+  ...(document.adoptedStyleSheets || []),
+  tokesStyleSheets,
+]
+
+export { tokens, colorV2Light, colorV2Dark }

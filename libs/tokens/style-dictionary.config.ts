@@ -91,7 +91,7 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'light',
             outputReferences: false,
-            selector: ':host',
+            // selector: '.light',
           },
         },
         {
@@ -101,7 +101,7 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'dark',
             outputReferences: false,
-            selector: ':host',
+            // selector: ':host',
           },
         },
         {
