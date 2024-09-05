@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from 'lit'
+import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
@@ -13,7 +13,7 @@ import {
 
 import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
-import { gdsCustomElement } from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 
 import '../icon/icons/cross-small'
