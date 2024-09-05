@@ -7,7 +7,7 @@ import { registerTransitionalStyles } from '../../transitional-styles.ts'
 registerTransitionalStyles()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grouped-list)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/grouped-list)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-list)
  *

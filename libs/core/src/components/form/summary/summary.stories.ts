@@ -14,7 +14,7 @@ ddTransStyles.register()
 dpTransStyles.register()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/form/summary)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *

@@ -14,7 +14,7 @@
   "homepage": "https://seb.io",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/"
+    "url": "https://github.com/seb-oss/green/"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
