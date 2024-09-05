@@ -1,5 +1,5 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { unsafeCSS, css } from 'lit'
+import { unsafeCSS } from 'lit'
 import palletCss from '../../../dist/libs/tokens/internal/pallet.css?inline'
 import lightThemeCss from '../../../dist/libs/tokens/internal/theme/light.css?inline'
 import sizeTokens from '../../../dist/libs/tokens/internal/size.css?inline'
@@ -14,8 +14,8 @@ import colorV2Dark from '../../../dist/libs/tokens/internal/dark.css?inline'
 console.log(`:root { ${colorV2Light} }`)
 
 const tokens = [
-  // unsafeCSS(palletCss),
-  // unsafeCSS(lightThemeCss),
+  unsafeCSS(palletCss),
+  unsafeCSS(lightThemeCss),
   unsafeCSS(sizeTokens),
   unsafeCSS(textTokens),
   unsafeCSS(motionTokens),
