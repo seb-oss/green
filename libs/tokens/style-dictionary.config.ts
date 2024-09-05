@@ -107,6 +107,16 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: 'shadow.css',
+          format: 'shadow',
+          filter: function (token) {
+            return token.path.includes('shadow')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
           destination: 'motion.css',
           format: 'css/variables',
           filter: 'isMotion',
@@ -401,7 +411,7 @@ const config: StyleDictionary.Config = {
             platformVersion: '15',
             targets: [swiftPackageName],
             resources: ['Assets'],
-          }
+          },
         },
         {
           destination: swiftSourcePath + 'Colors/LightModeColors.swift',
@@ -434,10 +444,10 @@ const config: StyleDictionary.Config = {
           options: {
             type: 'color',
             colorType: 'uiKitDynamicProvider',
-            import: ["UIKit"],
+            import: ['UIKit'],
             lightModeObjectName: 'LightModeColors',
             darkModeObjectName: 'DarkModeColors',
-          }
+          },
         },
         {
           destination: swiftSourcePath + '/Colors/Colors.swift',
@@ -448,9 +458,9 @@ const config: StyleDictionary.Config = {
           options: {
             type: 'color',
             colorType: 'swiftUiReferenceToUiKit',
-            import: ["SwiftUI"],
+            import: ['SwiftUI'],
             uiKitObjectName: 'UIColors',
-          }
+          },
         },
         {
           destination: swiftSourcePath + 'Dimensions.swift',
@@ -459,8 +469,8 @@ const config: StyleDictionary.Config = {
           className: 'Dimensions',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
+            type: 'sys',
+          },
         },
         {
           destination: swiftSourcePath + 'Radii.swift',
@@ -469,8 +479,8 @@ const config: StyleDictionary.Config = {
           className: 'Radii',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
+            type: 'sys',
+          },
         },
       ],
     },

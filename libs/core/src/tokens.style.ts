@@ -5,6 +5,7 @@ import lightThemeCss from '../../../dist/libs/tokens/internal/theme/light.css?in
 import sizeTokens from '../../../dist/libs/tokens/internal/size.css?inline'
 import textTokens from '../../../dist/libs/tokens/internal/text.css?inline'
 import motionTokens from '../../../dist/libs/tokens/internal/motion.css?inline'
+import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
 
 const tokens = [
   unsafeCSS(palletCss),
@@ -12,6 +13,7 @@ const tokens = [
   unsafeCSS(sizeTokens),
   unsafeCSS(textTokens),
   unsafeCSS(motionTokens),
+  unsafeCSS(shadowTokens),
 ]
 
 export { tokens }
