@@ -243,7 +243,7 @@ export default function About() {
                 </li>
                 <li>
                   — Post an
-                  <Link href="https://github.com/sebgroup/green/issues">
+                  <Link href="https://github.com/seb-oss/green/issues">
                     issue on Github
                   </Link>
                 </li>

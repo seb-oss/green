@@ -7,7 +7,7 @@ import './grid.stories.css'
 import { html } from 'lit'
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grid)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/grid)
  *
  * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
  */
