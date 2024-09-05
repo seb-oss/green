@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import * as InputStories from './input.stories';
+
+export const Template = ({ validation, enabled, text, formInfo }) => {
+  const attrValidation = validation ? `class="${validation}" ` : ``
+  const attrEnabled = enabled ? `` : `disabled`
+  const hasExtraInfo = formInfo.length > 0
+  return `
+    <div class="form-group">
+      <label for="inputInvalid">${text}</label>
+      ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
+      <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
+      <span class="form-info">${validation ? validation : 'Neutral'}</span>
+    </div>`
+}
+
+<Meta of={InputStories} />
+
+<Story of={InputStories.Input} />
+
+# Input normal size
+
+<Canvas>
+  <div class="form-group">
+    <label for="inputInvalid">Input label</label>
+
+    <span class="form-info">
+      Lorem ipsum very long description of input and what should be entered
+    </span>
+
+    <input id="inputInvalid" type="text" />
+
+    <span class="form-info">Neutral</span>
+  </div>
+</Canvas>
+
+# Input small size
+
+<Canvas>
+  <div class="form-group">
+    <label for="inputSmall">Input label</label>
+
+    <span class="form-info">
+      Lorem ipsum very long description of input and what should be entered
+    </span>
+
+    <input id="inputSmall" type="text" class="small" />
+
+    <span class="form-info">Neutral</span>
+  </div>
+</Canvas>

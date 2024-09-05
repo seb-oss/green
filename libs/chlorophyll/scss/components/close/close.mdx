@@ -1,0 +1,15 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import * as CloseStories from './close.stories';
+
+export const Template = () => {
+  return `
+    <button class="close" type="button">
+      <span class="sr-only">Close</span>
+      <i></i>
+    </button>
+  `
+}
+
+<Meta of={CloseStories} />
+
+<Story of={CloseStories.CloseButton} />

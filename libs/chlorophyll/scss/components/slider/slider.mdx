@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import * as SliderStories from './slider.stories';
+
+export const Template = ({ unitLabel, showMinMax }) => {
+  return `
+  <div class="form-group">
+    <div class="gds-slider-label-container">
+        <label for="gds-slider" id="gds-slider-label">Slider label text in one line</label>
+        ${
+          unitLabel
+            ? `<div class="group group-border group-focus">
+          <input type="number" aria-labelledby="gds-slider-label" />
+          <span class="form-text">${unitLabel}</span>
+        </div>
+        `
+            : '<input type="number" aria-labelledby="gds-slider-label" />'
+        }
+    </div>
+    <input type="range" id="gds-slider" />
+    ${
+      showMinMax === true
+        ? `
+          <div class="gds-slider-min-max">
+            <div class="gds-slider-min">0</div>
+            <div class="gds-slider-max">100</div>
+          </div>`
+        : ''
+    }
+  </div>
+  `
+}
+
+<Meta of={SliderStories} />
+
+# Slider
+
+A slider to experiment and adjust values with.
+
+## Description
+
+The component allows for easy adjustments of a value and check the updated result immediately.
+
+## Usage
+
+On pages where the user can experiment or adjust values in a scale, such as "How much can I borrow?".
+
+## Basic example
+
+<Canvas>
+  <Story of={SliderStories.Slider} />
+</Canvas>
+
+## Example with unit label
+
+<Canvas>
+  <Story of={SliderStories.SliderWithUnitLabel} />
+</Canvas>

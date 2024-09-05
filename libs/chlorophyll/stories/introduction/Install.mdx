@@ -1,0 +1,95 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Get started/Install" />
+
+# Install
+
+Green consists out of several packages that is best installed with NPM or Yarn.
+We recommend installing the lib corresponding with the framework you're using even though the number of components they provide at the time of writing is limited. We currently support both Angular and React.
+
+When installing you need to have the correct config setup depending if you use VPN or an external network.
+
+## Config connected to SEB Corporate or on VPN
+
+### npm
+
+* config registry to point to artifactory
+* proxy is not relevant here
+
+### git
+
+* proxy needed as you need to pass through the firewalls to connect to github.com
+* only https is allowed through the proxy, so git can't be using ssh
+
+## Config connected to any public network (not on VPN)
+
+### npm
+
+* config registry to npmjs
+* proxy according to your network requirements (SEB proxy settings disabled of course)
+
+### git
+
+* proxy according to your network requirements
+
+## Check config commands
+
+```
+/* yarn */
+yarn config list
+
+/* npm */
+npm config list
+
+/* git */
+git config --list --global
+git config --list --local
+```
+
+**Please note** - you don't have to install chlorophyll which is the core lib containing common css if you install our libs for Angular and React as they both have a dependency to chlorophyll.
+
+If you need charts, we have libs for that too based on [Billboardjs](https://naver.github.io/billboard.js/). Same thing here, install the package for the framework you're using.
+
+## Angular
+
+**Components**
+
+```
+npm install @sebgroup/green-angular --save
+```
+
+For detailed information on the Angular lib, go here: [Angular Storybook](https://storybook.seb.io/latest/angular/)
+
+**Charts**
+
+```
+npm install @sebgroup/green-angular-charts --save
+```
+
+For detailed information on the Angular charts lib, go here: [Angular Charts Storybook](https://storybook.seb.io/latest/angular-charts/)
+
+## React
+
+**Components**
+
+```
+npm install @sebgroup/green-react --save
+```
+
+For detailed information on the React lib, go here: [React Storybook](https://storybook.seb.io/latest/react/)
+
+**Charts**
+
+```
+npm install @sebgroup/green-react-charts --save
+```
+
+For detailed information on the React charts lib, go here: [React Charts Storybook](https://storybook.seb.io/latest/react-charts/)
+
+## Pure CSS/SCSS
+
+```
+npm install @sebgroup/chlorophyll --save
+```
+
+[Next step](./?path=/story/get-started-use--page)
