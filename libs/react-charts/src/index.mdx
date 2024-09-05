@@ -1,9 +1,10 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import { Meta, Story, Canvas } from '@storybook/blocks'
 import { Chart } from '.'
+import * as IndexStories from './index.stories';
 
 export const Template = (args) => <Chart {...args} />
 
-<Meta title="Getting started" component={Chart} />
+<Meta of={IndexStories} />
 
 # Getting started with charts in React
 
@@ -52,25 +53,5 @@ export const MyChart = () => {
 ```
 
 <Canvas>
-  <Story
-    name="Getting started"
-    args={{
-      settings: {
-        data: [
-          {
-            name: 'Score card',
-            values: [12, 9, 3, 1],
-          },
-        ],
-        categories: [
-          'Signerade avtal (SEB)',
-          'Påbörjade trials (Oxceed)',
-          'Aktiverade prenumerationer',
-          'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
-        ],
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
+  <Story of={IndexStories.GettingStarted} />
 </Canvas>
