@@ -9,7 +9,7 @@
   "description": "Base library for charts.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -20,7 +20,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/charts"
+    "url": "https://github.com/seb-oss/green/labels/charts"
   },
   "homepage": "https://storybook.seb.io/latest/charts/"
 }

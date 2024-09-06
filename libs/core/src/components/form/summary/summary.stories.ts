@@ -4,17 +4,11 @@ import './index.ts'
 
 import '../../datepicker/index.ts'
 import '../../dropdown/index.ts'
+import '../../input/index.ts'
 import '../../icon/icons/rocket.ts'
 
-import * as themeTransStyles from '../../theme/theme.trans.styles.ts'
-import * as ddTransStyles from '../../dropdown/dropdown.trans.styles.ts'
-import * as dpTransStyles from '../../datepicker/datepicker.trans.styles.ts'
-themeTransStyles.register()
-ddTransStyles.register()
-dpTransStyles.register()
-
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/form/summary)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *
@@ -87,6 +81,18 @@ export const Usage: Story = {
           },
         }}
       ></gds-datepicker>
+      <gds-input
+        label="Designation"
+        .validator=${{
+          validate: (el: any) => {
+            if (el.value === '')
+              return [
+                { ...el.validity, valid: false, customError: true },
+                'A designation is required',
+              ]
+          },
+        }}
+      ></gds-input>
       <gds-container margin="s 0 s">
         <gds-form-summary></gds-form-summary>
       </gds-container>

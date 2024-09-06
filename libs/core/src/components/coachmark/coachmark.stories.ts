@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/coachmark)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/coachmark)
  *
  * Coachmarks are contextual tips that focus on making the user
  * aware of a new feature, the benefits of an existing one or a moved feature within an interface.

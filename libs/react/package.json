@@ -1,12 +1,12 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "3.14.1",
+  "version": "3.15.0",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.35.0",
+    "@sebgroup/green-core": "^1.38.1",
     "@sebgroup/chlorophyll": "^3.4.1",
     "@sebgroup/extract": "^3.0.1",
     "@lit/react": "^1.0.2",
@@ -15,7 +15,7 @@
   "description": "React components built on top of @sebgroup/chlorophyll.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -26,7 +26,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/react"
+    "url": "https://github.com/seb-oss/green/labels/react"
   },
   "homepage": "https://storybook.seb.io/latest/react/"
 }

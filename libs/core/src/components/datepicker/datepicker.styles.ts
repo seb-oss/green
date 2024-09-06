@@ -38,16 +38,16 @@ export const styles = css`
     }
 
     label {
-      font-size: var(--gds-text-size-label-input-large);
+      font-size: var(--gds-text-size-detail-m);
+      line-height: var(--gds-text-line-height-detail-m);
       font-weight: var(--gds-text-weight-book);
-      line-height: var(--gds-text-line-height-label-input-large);
       font-family: inherit;
     }
 
     .form-info {
-      font-size: var(--gds-text-size-label-information-medium);
+      font-size: var(--gds-text-size-detail-s);
+      line-height: var(--gds-text-line-height-detail-s);
       font-weight: var(--gds-text-weight-regular);
-      line-height: var(--gds-text-line-height-label-information-medium);
     }
 
     .field {
@@ -56,8 +56,8 @@ export const styles = css`
       gap: var(--gds-space-2xs);
       padding: var(--gds-space-2xs);
       border-radius: var(--gds-space-xs);
-      font-size: var(--gds-text-size-label-medium);
-      line-height: var(--gds-text-line-height-label-medium);
+      font-size: var(--gds-text-size-detail-m);
+      line-height: var(--gds-text-line-height-detail-m);
       font-weight: var(--gds-text-weight-regular);
       font-family: inherit;
       overflow: hidden;
@@ -125,6 +125,7 @@ export const styles = css`
         outline-offset: -4px;
         border-radius: var(--gds-space-xs);
         padding-top: var(--gds-space-3xs);
+        font-family: inherit;
 
         &:focus-visible,
         &:hover {
@@ -134,7 +135,7 @@ export const styles = css`
 
       &.small {
         height: var(--gds-space-xl);
-        font-size: var(--gds-text-size-label-small);
+        font-size: var(--gds-text-size-detail-s);
         padding: 0;
 
         button {

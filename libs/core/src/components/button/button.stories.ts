@@ -217,7 +217,7 @@ export const Link: Story = {
     controls: { include: ['href', 'target', 'rel', 'download'] },
   },
   args: {
-    href: 'https://github.com/sebgroup/green',
+    href: 'https://github.com/seb-oss/green',
   },
   render: (args) => html`
     <gds-button
