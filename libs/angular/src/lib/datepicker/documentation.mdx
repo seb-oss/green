@@ -31,7 +31,7 @@ NggDatepickerComponent is a form control for picking dates.
 It supports 2-way binding to the value property without the need for Angular forms,
 and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
 
-<Story id="components-datepicker--simple" />
+<Story of={Stories.Simple} />
 
 ## Reactive forms
 
@@ -100,9 +100,7 @@ If you just need a simple select without any form, validation etc. it's possible
 
 _Note:_ `disabledDates` and `options` in the example above are properties that you need to add in the component class.
 
-<Canvas>
-  <Story id="components-datepicker--custom-options" />
-</Canvas>
+<Canvas of={Stories.CustomOptions} />
 
 ## Example usage in reactive form
 
@@ -123,7 +121,7 @@ validationForm = this._fb.group({
 })
 ```
 
-<Story id="components-datepicker--form" />
+<Story of={Stories.Form} />
 
 ### Markup
 
