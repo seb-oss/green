@@ -121,7 +121,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     ])}`
   }
 
-  _getValidityAnchor() {
+  protected _getValidityAnchor() {
     return this.elInput
   }
 
@@ -150,7 +150,8 @@ export class GdsInput extends GdsFormControlElement<string> {
         <div>
           ${when(
             this.invalid,
-            () => html`<span class="error-text">Error information</span>`,
+            () =>
+              html`<span class="error-text">${this.validationMessage}</span>`,
           )}
         </div>
         ${when(this.#shouldShowRemainingChars, () =>
@@ -281,10 +282,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         ?inert="${!this.showExtendedSupportingText}"
       >
         <div>
-          <slot
-            name="extended-supporting-text"
-            @slotchange=${() => this.requestUpdate()}
-          ></slot>
+          <slot name="message" @slotchange=${() => this.requestUpdate()}></slot>
         </div>
       </div>
     `
