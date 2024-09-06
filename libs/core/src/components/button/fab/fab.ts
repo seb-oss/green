@@ -35,15 +35,29 @@ export class GdsFab extends GdsButton {
   })
   transform?: string
 
-  /**
-   * The inset postion of the FAB.
-   *
-   * Accepts any valid CSS inset values.
-   */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
+    selector: '[part="_button"]',
   })
-  inset?: string
+  top?: string
+
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[part="_button"]',
+  })
+  bottom?: string
+
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[part="_button"]',
+  })
+  left?: string
+
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[part="_button"]',
+  })
+  right?: string
 
   connectedCallback() {
     super.connectedCallback()

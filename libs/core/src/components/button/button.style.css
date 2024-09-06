@@ -16,13 +16,14 @@
 
 @layer core {
   .button {
+    --_block-size: var(--gds-space-3xl);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     border: none;
     cursor: pointer;
-    block-size: var(--gds-space-3xl);
+    block-size: var(--_block-size);
     background-color: var(--gds-color-l3-background-primary);
     color: var(--gds-color-l3-content-primary);
     border-radius: var(--gds-space-max);
@@ -68,7 +69,7 @@
       }
     }
 
-    slot:not([name]) {
+    &:not(.circle) slot:not([name]) {
       display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -124,14 +125,14 @@
 
 @layer sizes {
   :host([size='small']) .button {
-    block-size: var(--gds-space-xl);
+    --_block-size: var(--gds-space-xl);
     font-size: var(--gds-text-size-detail-s);
     line-height: var(--gds-text-line-height-detail-s);
     padding-inline: var(--gds-space-m);
   }
 
   :host([size='medium']) .button {
-    block-size: var(--gds-space-2xl);
+    --_block-size: var(--gds-space-2xl);
     font-size: var(--gds-text-size-detail-m);
     line-height: var(--gds-text-line-height-detail-m);
   }
