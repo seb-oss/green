@@ -43,6 +43,7 @@ export class NggInPageWizardStepCardComponent {
       this.isActive = false;
       this.isCompleted = true;
     }
+    
     this.handleNextClick.emit(event)
   }
 }
