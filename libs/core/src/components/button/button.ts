@@ -143,9 +143,14 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
     const tag = this.#isLink ? literal`a` : literal`button`
 
+    const classList = Object.entries(buttonClasses)
+      .filter(([_, value]) => value)
+      .map(([key, _]) => key)
+      .join(' ')
+
     return staticHtml`
       <${tag}
-        class=${classMap(buttonClasses)}
+        class="${classList}"
         type="${ifDefined(this.#isLink ? undefined : this.type)}"
         ?disabled="${this.disabled}"
         aria-label=${this.label || nothing}
@@ -167,6 +172,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple part="_ripple"></gds-ripple>`,
         )}
+        <div class="state"></div>
       </${tag}>
     `
   }

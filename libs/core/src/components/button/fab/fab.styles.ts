@@ -2,6 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
+    display: inline-flex;
     position: fixed;
     inset: auto 2rem 2rem auto;
   }
