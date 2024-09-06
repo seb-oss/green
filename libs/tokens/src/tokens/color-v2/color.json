@@ -35,51 +35,9 @@
                         "darkValue": "#1b1b1b",
                         "type": "color"
                     }
-                },
-                "states": {
-                    "dark-hover": {
-                        "value": "#ffffff19",
-                        "darkValue": "#ffffff19",
-                        "type": "color"
-                    },
-                    "dark-pressed": {
-                        "value": "#ffffff33",
-                        "darkValue": "#ffffff33",
-                        "type": "color"
-                    },
-                    "light-hover": {
-                        "value": "#1b1b1b19",
-                        "darkValue": "#1b1b1b19",
-                        "type": "color"
-                    },
-                    "light-pressed": {
-                        "value": "#1b1b1b33",
-                        "darkValue": "#1b1b1b33",
-                        "type": "color"
-                    },
-                    "negative-hover": {
-                        "value": "#a63e2a19",
-                        "darkValue": "#a63e2a19",
-                        "type": "color"
-                    },
-                    "negative-pressed": {
-                        "value": "#a63e2a33",
-                        "darkValue": "#a63e2a33",
-                        "type": "color"
-                    },
-                    "positive-hover": {
-                        "value": "#35723d19",
-                        "darkValue": "#35723d19",
-                        "type": "color"
-                    },
-                    "positive-pressed": {
-                        "value": "#35723d33",
-                        "darkValue": "#35723d33",
-                        "type": "color"
-                    }
                 }
             },
-            "l1-complement": {
+            "l1c": {
                 "content": {
                     "negative": {
                         "value": "#a63e2a",
@@ -156,7 +114,7 @@
                     }
                 }
             },
-            "l2-complement": {
+            "l2c": {
                 "background": {
                     "blue-01": {
                         "value": "#eaf0f7",
@@ -373,9 +331,51 @@
                         "darkValue": "#1b1b1b",
                         "type": "color"
                     }
+                },
+                "states": {
+                    "dark-hover": {
+                        "value": "#ffffff19",
+                        "darkValue": "#ffffff19",
+                        "type": "color"
+                    },
+                    "dark-pressed": {
+                        "value": "#ffffff33",
+                        "darkValue": "#ffffff33",
+                        "type": "color"
+                    },
+                    "light-hover": {
+                        "value": "#1b1b1b19",
+                        "darkValue": "#1b1b1b19",
+                        "type": "color"
+                    },
+                    "light-pressed": {
+                        "value": "#1b1b1b33",
+                        "darkValue": "#1b1b1b33",
+                        "type": "color"
+                    },
+                    "negative-hover": {
+                        "value": "#a63e2a19",
+                        "darkValue": "#a63e2a19",
+                        "type": "color"
+                    },
+                    "negative-pressed": {
+                        "value": "#a63e2a33",
+                        "darkValue": "#a63e2a33",
+                        "type": "color"
+                    },
+                    "positive-hover": {
+                        "value": "#35723d19",
+                        "darkValue": "#35723d19",
+                        "type": "color"
+                    },
+                    "positive-pressed": {
+                        "value": "#35723d33",
+                        "darkValue": "#35723d33",
+                        "type": "color"
+                    }
                 }
             },
-            "l3-complement": {
+            "l3c": {
                 "background": {
                     "blue-01": {
                         "value": "#d3dfef",

@@ -83,12 +83,11 @@ const formats: Record<string, Format> = {
         .map((token) => {
           if (
             token.path[2] === 'l1' ||
-            token.path[2] === 'l1-complement' ||
+            token.path[2] === 'l1c' ||
             token.path[2] === 'l2' ||
-            token.path[2] === 'l2-complement' ||
+            token.path[2] === 'l2c' ||
             token.path[2] === 'l3' ||
-            token.path[2] === 'l3-complement' ||
-            token.path[2] === 'states'
+            token.path[2] === 'l3c'
           ) {
             // Adjust token name to follow the format --gds-color-l1-background-primary
             token.name = `gds-color-${token.path.slice(2).join('-')}`

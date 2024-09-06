@@ -21,14 +21,14 @@ import '../../components/icon/icons/sun'
                 <gds-flex gap="s" direction="column">
                     <gds-text tag="h6" transform="capitalize" color="l1-content-primary/0.4">{category}</gds-text>
                     <gds-flex direction="row" gap="s">
-                      <gds-flex direction="column" height="140px" gap="s">
+                      {! `<gds-flex direction="column" height="140px" gap="s">
                         <gds-flex align="center" height="64px" opacity="0.8">
                           <gds-icon-sun height="10" />
                         </gds-flex>
                         <gds-flex align="center" height="64px" opacity="0.8">
                           <gds-icon-moon height="10" />
                         </gds-flex>
-                      </gds-flex>
+                      </gds-flex>`}
                         {Object.entries(items).map(([item, properties]) => (
                             <gds-flex direction="column" gap="s">
                                   <gds-theme color-scheme="auto">
