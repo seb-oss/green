@@ -18,7 +18,7 @@
       "options": {
         "commands": [
           {
-            "command": "yarn copy-fonts"
+            "command": "npm run copy-fonts"
           }
         ]
       }
