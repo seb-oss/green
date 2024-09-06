@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult, unsafeCSS } from 'lit'
+import { LitElement, TemplateResult } from 'lit'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
@@ -85,7 +85,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    *
    * A typical form should use the default variant.
    */
-  @property()
+  @property({ type: String })
   variant: 'default' | 'simplified' = 'default'
 
   /**
