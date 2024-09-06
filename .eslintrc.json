@@ -3,6 +3,7 @@
   "ignorePatterns": ["**/*"],
   "plugins": ["@nx", "import"],
   "rules": {
+    "@typescript-eslint/no-extra-semi": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -35,7 +36,6 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript", "prettier"],
       "rules": {
-        "@typescript-eslint/no-extra-semi": "error",
         "no-extra-semi": "off"
       }
     },

@@ -1,6 +1,6 @@
 import Link from './link'
 import { createComponent } from '@lit/react'
-import { IconArrowRight } from '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import { IconArrowRight } from '@sebgroup/green-core/components/icon/icons/arrow-right.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 const GdsIconArrowRight = createComponent({
