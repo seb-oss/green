@@ -54,52 +54,52 @@ jobs:
           GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-          - name: Upload tokens ios build
-          if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
-          uses: actions/upload-artifact@v4
-          with:
-            name: iostokens
-            path: ./dist/libs/tokens/ios/*
-  
-        - name: Output green-tokens versions
-          if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
-          id: output-tokens-version
-          run: echo "tokensversion=$(jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< '${{ steps.changesets.outputs.publishedPackages }}')" >> "$GITHUB_OUTPUT"
-  
-    deployiostokens:
-      name: Deploy Swift Package
-      runs-on: ubuntu-latest
-      needs: release
-      if: ${{ needs.release.outputs.tokensshoulddeploy }}
-      env:
-        CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
-        CI_COMMIT_AUTHOR: Continuous Integration
-      steps:
-        - name: Get token
-          id: get_token_deploy
-          uses: actions/create-github-app-token@v1
-          with:
-            app-id: ${{ secrets.GREEN_BOT_APP_ID }}
-            private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
-  
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            repository: seb-oss/green-tokens-ios
-            ref: main
-            token: ${{ steps.get_token_deploy.outputs.token }}
-  
-        - name: Get artifact
-          uses: actions/download-artifact@v4
-          with:
-            name: iostokens
-  
-        - name: Push changes
-          run: |
-            git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-            git config --global user.email "username@users.noreply.github.com"
-            git add .
-            git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-            git push
-            git tag -a ${{ needs.release.outputs.tokensversion }} -m "Version ${{ needs.release.outputs.tokensversion }} of the Green Tokens Package for Swift."
-            git push origin ${{ needs.release.outputs.tokensversion }}
+      - name: Upload tokens ios build
+        if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: iostokens
+          path: ./dist/libs/tokens/ios/*
+
+      - name: Output green-tokens versions
+        if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
+        id: output-tokens-version
+        run: echo "tokensversion=$(jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< '${{ steps.changesets.outputs.publishedPackages }}')" >> "$GITHUB_OUTPUT"
+
+  deployiostokens:
+    name: Deploy Swift Package
+    runs-on: ubuntu-latest
+    needs: release
+    if: ${{ needs.release.outputs.tokensshoulddeploy }}
+    env:
+      CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
+      CI_COMMIT_AUTHOR: Continuous Integration
+    steps:
+      - name: Get token
+        id: get_token_deploy
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: seb-oss/green-tokens-ios
+          ref: main
+          token: ${{ steps.get_token_deploy.outputs.token }}
+
+      - name: Get artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: iostokens
+
+      - name: Push changes
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "username@users.noreply.github.com"
+          git add .
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
+          git tag -a ${{ needs.release.outputs.tokensversion }} -m "Version ${{ needs.release.outputs.tokensversion }} of the Green Tokens Package for Swift."
+          git push origin ${{ needs.release.outputs.tokensversion }}
