@@ -203,9 +203,9 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-sys-color-${colorName})`
+        return `var(--gds-color-${colorName})`
       }
     },
   })

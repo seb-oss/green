@@ -57,10 +57,11 @@ describe('<gds-button>', () => {
   describe('API', () => {
     it('should fire click event', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
+      const button = el.shadowRoot.querySelector('button') // get the button element from the shadow dom
       const spy = sinon.spy()
-      el.addEventListener('click', spy)
+      button.addEventListener('click', spy)
 
-      await clickOnElement(el)
+      await clickOnElement(button)
 
       expect(spy.calledOnce).to.be.true
     })
@@ -79,7 +80,7 @@ describe('<gds-button>', () => {
     })
 
     it('should submit form when type is submit', async () => {
-      const el = await fixture<GdsButton>(
+      const el = await fixture<HTMLFormElement>(
         html`<form action="javascript:;">
           <gds-button type="submit">Button</gds-button>
         </form>`,
@@ -91,13 +92,19 @@ describe('<gds-button>', () => {
       const spy = sinon.spy()
       el.addEventListener('submit', spy)
 
-      await clickOnElement(button)
+      // Select button from the shadow DOM
+      const shadowButton = button.shadowRoot?.querySelector('button')
+      if (shadowButton) {
+        await clickOnElement(shadowButton)
+      } else {
+        await clickOnElement(button)
+      }
 
       expect(spy.calledOnce).to.be.true
     })
 
     it('should reset form when type is reset', async () => {
-      const el = await fixture<GdsButton>(
+      const el = await fixture<HTMLFormElement>(
         html`<form action="javascript:;">
           <gds-button type="reset">Button</gds-button>
         </form>`,
@@ -109,7 +116,13 @@ describe('<gds-button>', () => {
       const spy = sinon.spy()
       el.addEventListener('reset', spy)
 
-      await clickOnElement(button)
+      // Select button from the shadow DOM
+      const shadowButton = button.shadowRoot?.querySelector('button')
+      if (shadowButton) {
+        await clickOnElement(shadowButton)
+      } else {
+        await clickOnElement(button)
+      }
 
       expect(spy.calledOnce).to.be.true
     })
