@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult, unsafeCSS } from 'lit'
+import { LitElement, TemplateResult } from 'lit'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
@@ -9,14 +9,14 @@ import { msg } from '@lit/localize'
 import { constrainSlots } from '../../utils/helpers'
 import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
-import { GdsFormControlElement } from '../form-control'
+import { GdsFormControlElement } from '../form/form-control'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../tokens.style'
 
-import styles from './input.styles.css'
+import { styles } from './input.styles'
 
 /**
  * @summary A custom input element that can be used in forms.
@@ -35,7 +35,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   }
-  static styles = [tokens, unsafeCSS(styles)]
+  static styles = [tokens, styles]
 
   @property()
   value = ''
@@ -85,7 +85,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    *
    * A typical form should use the default variant.
    */
-  @property()
+  @property({ type: String })
   variant: 'default' | 'simplified' = 'default'
 
   /**
@@ -96,7 +96,10 @@ export class GdsInput extends GdsFormControlElement<string> {
   multiline = false
 
   @queryAsync('input, textarea')
-  private elInput!: Promise<HTMLInputElement | HTMLTextAreaElement>
+  private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
+
+  @query('input, textarea')
+  private elInput!: HTMLInputElement | HTMLTextAreaElement
 
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
@@ -116,6 +119,10 @@ export class GdsInput extends GdsFormControlElement<string> {
       ['default', () => this.#renderDefault()],
       ['simplified', () => this.#renderSimplified()],
     ])}`
+  }
+
+  protected _getValidityAnchor() {
+    return this.elInput
   }
 
   // variant="default"
@@ -143,7 +150,8 @@ export class GdsInput extends GdsFormControlElement<string> {
         <div>
           ${when(
             this.invalid,
-            () => html`<span class="error-text">Error information</span>`,
+            () =>
+              html`<span class="error-text">${this.validationMessage}</span>`,
           )}
         </div>
         ${when(this.#shouldShowRemainingChars, () =>
@@ -205,14 +213,14 @@ export class GdsInput extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     if (!this.multiline) return
-    this.elInput.then((element) => {
+    this.elInputAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
     })
   }
 
   #handleFieldClick = () => {
-    this.elInput.then((el) => el.focus())
+    this.elInputAsync.then((el) => el.focus())
   }
 
   #handleClearBtnClick = () => {
@@ -274,10 +282,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         ?inert="${!this.showExtendedSupportingText}"
       >
         <div>
-          <slot
-            name="extended-supporting-text"
-            @slotchange=${() => this.requestUpdate()}
-          ></slot>
+          <slot name="message" @slotchange=${() => this.requestUpdate()}></slot>
         </div>
       </div>
     `
@@ -334,12 +339,5 @@ export class GdsInput extends GdsFormControlElement<string> {
         `
       else return nothing
     })
-  }
-
-  /**
-   * Event handler for the form reset event.
-   */
-  override _handleFormReset = () => {
-    this.value = ''
   }
 }
