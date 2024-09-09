@@ -6,8 +6,12 @@ import '@sebgroup/green-core/components/media/img/index.js'
 import '@sebgroup/green-core/components/layout/grid/index.js'
 import '@sebgroup/green-core/components/layout/flex/index.js'
 import '@sebgroup/green-core/components/layout/card/index.js'
+import '@sebgroup/green-core/components/input/index.js'
+import '@sebgroup/green-core/components/content/text/index.js'
 
-@customElement('card-example')
+import './login.css'
+
+@customElement('gds-login')
 export class CardExample extends LitElement {
   protected createRenderRoot() {
     return this
@@ -19,12 +23,17 @@ export class CardExample extends LitElement {
 
   render() {
     return html`
-      <gds-card shadow="s" radius="xs" overflow="hidden" margin="s 0">
-        <gds-grid columns="2" gap="xl">
-          <gds-flex position="relative">
+      <gds-card
+        shadow="s"
+        radius="xs"
+        background="l2-background-secondary"
+        overflow="hidden"
+      >
+        <gds-grid columns="2">
+          <gds-flex position="relative" display="s{none}">
             <gds-img
               ratio="2/2.4"
-              src="./assets/cards.jpg"
+              src="https://images.unsplash.com/photo-1670788837782-11c4f9e01d1f?q=80&w=3946&auto=format&fit=crop"
               alt="Cards"
               fit="cover"
               position="60%"
@@ -38,29 +47,34 @@ export class CardExample extends LitElement {
               radius="xs"
               color="white-text"
             >
-              <h2>Title</h2>
-              <p>
+              <gds-text tag="h2">Title</gds-text>
+              <gds-text tag="p" size="detail-xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              </gds-text>
             </gds-container>
           </gds-flex>
           <gds-flex
             direction="column"
-            padding="s{xs} m{l} l{2xl}"
+            padding="2xl"
             align="stretch"
             justify="center"
             height="100%"
           >
-            <h1>Login</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <gds-flex direction="column" gap="s" align="stretch">
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
-            </gds-flex>
+            <gds-text tag="h1">Välkommen till Internetbanken</gds-text>
+            <gds-text tag="p"> Hur vill du logga in? </gds-text>
+
+            <gds-card radius="s" border="4xs/l2-stroke-primary" padding="s">
+              <gds-text>Logga in med digipass</gds-text>
+
+              <gds-flex direction="column" gap="s" align="stretch">
+                <gds-input
+                  id="test"
+                  label="Personnummer"
+                  supportingText="Fyll i med 12 siffror."
+                ></gds-input>
+              </gds-flex>
+            </gds-card>
             <gds-flex direction="row" gap="xl" align="center" padding="s 0 0 0">
               <gds-button>
                 Register
