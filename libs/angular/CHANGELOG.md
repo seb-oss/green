@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.5.0
+
+### Minor Changes
+
+- a6a0672: Added an input property to check if the step is valid to be completed or not. Used for accessibility purposes.
+
+### Patch Changes
+
+- Updated dependencies [26fdbeb]
+- Updated dependencies [26fdbeb]
+  - @sebgroup/green-core@1.40.0
+
 ## 4.4.1
 
 ### Patch Changes
