@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms'
 
-// import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nModule } from '../i18n/i18n.module'
 import {
   applicationConfig,
   Meta,
@@ -22,16 +22,12 @@ export default {
   title: 'V-Angular/Textarea',
   component: TextareaComponent,
   decorators: [
-    // applicationConfig({
-    //   providers: [importProvidersFrom(NgvI18nModule)],
-    // }),
+    applicationConfig({
+      providers: [importProvidersFrom(NgvI18nModule)],
+    }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
-      imports: [
-        CommonModule,
-        FormsModule,
-        /*NgvI18nModule,*/ ReactiveFormsModule,
-      ],
+      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule],
     }),
   ],
 } as Meta

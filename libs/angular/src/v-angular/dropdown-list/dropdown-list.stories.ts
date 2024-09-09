@@ -74,9 +74,9 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
   }
   return {
     template: /*html*/ `
-      <div style="width: 264px">
+      <div style="width: 264px;position: relative;">
   
-        <ngg-input style="position: relative; overflow: hidden"
+        <ngg-input
           name="test"
           [formControl]="formControl"
           (click)="$event.stopPropagation();expanded = !expanded">

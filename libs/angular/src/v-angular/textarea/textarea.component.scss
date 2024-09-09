@@ -1,7 +1,17 @@
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 @use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
 
 :host {
   @include mixins.add-textarea();
+
+  label:not(.sdv-field-notice) {
+    @include form-group.add-label;
+    margin-bottom: 0.5rem;
+  }
+
+  label:is(.sdv-field-label) {
+    margin-bottom: 0.5rem;
+  }
 
   .hide-if-empty: empty {
     display: none;
@@ -25,10 +35,11 @@
   }
 
   .description {
-    //margin-bottom: functions.vanilla-px-to-em(8);
+    margin-bottom: 0.5rem;
   }
 
   .error-wrapper {
+    margin-top: 0.5rem;
     //@include ngv.text-field--error-wrapper();
   }
 

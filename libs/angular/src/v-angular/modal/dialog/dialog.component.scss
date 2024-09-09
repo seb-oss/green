@@ -5,6 +5,7 @@
   @include mixins.dialog-modal-wrapper();
 
   .sdv-modal-dialog__container {
+    @include mixins.modal();
     @include mixins.dialog-modal();
   }
 
