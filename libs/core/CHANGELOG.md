@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.40.1
+
+### Patch Changes
+
+- 8eb82e6: Fix `gds-container` `margin` prop to accept `auto` value
+
 ## 1.40.0
 
 ### Minor Changes
