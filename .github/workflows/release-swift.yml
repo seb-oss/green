@@ -64,9 +64,10 @@ jobs:
       - name: Output green-tokens versions
         if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
         id: output-tokens-version
-        run: echo "tokensversion=$( jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< ${{ steps.changesets.outputs.publishedPackages }}" >> "$GITHUB_OUTPUT"
+        run: echo "tokensversion=$( jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< ${{ fromJson(steps.changesets.outputs.publishedPackages) }}" >> "$GITHUB_OUTPUT"
 
   deployiostokens:
+    name: Deploy Green Tokens iOS
     runs-on: ubuntu-latest
     needs: release
     if: ${{ needs.release.outputs.tokensshoulddeploy }}
