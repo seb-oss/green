@@ -72,7 +72,7 @@ export const RanksAndVariants: Story = {
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
       <gds-fab
-        inset="auto auto 200px 300px"
+        inset="auto 300px 200px auto"
         variant="positive"
         rank="secondary"
       >
@@ -86,7 +86,7 @@ export const RanksAndVariants: Story = {
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
       <gds-fab
-        inset="auto auto 200px 500px"
+        inset="auto 500px 200px auto"
         variant="negative"
         rank="secondary"
       >
@@ -160,6 +160,29 @@ export const IconButton: Story = {
         rank="tertiary"
       >
         <gds-icon-bubbles></gds-icon-bubbles>
+      </gds-fab>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Default color of the signal within the FAB is the same as the button color.
+ *
+ * If you want to change the color of the signal, you can use the `color` property.
+ */
+
+export const Color: Story = {
+  ...DefaultParams,
+  name: 'Color',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-flex height="300px">
+      <gds-fab inset="auto 48px 48px auto" rank="primary">
+        Secondary
+        <gds-signal slot="trail" color="l3c-content-positive"></gds-signal>
       </gds-fab>
     </gds-flex>
   `,

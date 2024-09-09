@@ -5,14 +5,6 @@ const style = css`
     display: contents;
   }
 
-  :host-context([rank='primary']) [part='signal'] {
-    background-color: var(--gds-color-l3-background-quarternary);
-
-    &::before {
-      background-color: var(--gds-color-l3-states-dark-hover);
-    }
-  }
-
   [part='signal'] {
     display: flex;
     align-items: center;
@@ -21,7 +13,6 @@ const style = css`
     width: 6px;
     height: 6px;
     border-radius: var(--gds-space-max);
-    // background-color: var(--gds-color-l3c-background-positive);
     background-color: currentColor;
     transition: all 0.4s;
 
