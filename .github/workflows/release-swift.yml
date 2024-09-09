@@ -45,14 +45,12 @@ jobs:
 
       - name: Mock Changeset
         id: changesets
-        # uses: changesets/action@v1
-        # with:
-        #   publish: yarn changeset:publish
-        # env:
-        #   GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
-        #   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          echo "publishedPackages=[{\"name\": \"@sebgroup/green-tokens\", \"version\": \"0.6.0\"}]" >> "$GITHUB_OUTPUT"
+        uses: changesets/action@v1
+        with:
+          publish: yarn changeset:publish
+        env:
+          GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Upload tokens ios build
         if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
@@ -64,7 +62,7 @@ jobs:
       - name: Output green-tokens versions
         if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
         id: output-tokens-version
-        run: echo "tokensversion=$( jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< ${{ steps.changesets.outputs.publishedPackages }}" >> "$GITHUB_OUTPUT"
+        run: echo "tokensversion=$(jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< '${{ steps.changesets.outputs.publishedPackages }}')" >> "$GITHUB_OUTPUT"
 
   deployiostokens:
     runs-on: ubuntu-latest
