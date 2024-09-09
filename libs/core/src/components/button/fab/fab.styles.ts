@@ -8,8 +8,7 @@ const style = css`
   .button {
     box-shadow: var(--gds-shadow-m);
     position: fixed;
-    bottom: var(--gds-space-3xl);
-    right: var(--gds-space-3xl);
+    inset: auto var(--gds-space-3xl) var(--gds-space-3xl) auto;
     block-size: calc(var(--_block-size) + var(--gds-space-xs));
   }
 `

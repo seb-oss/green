@@ -58,33 +58,41 @@ export const RanksAndVariants: Story = {
   },
   render: (args) => html`
     <gds-flex height="600px">
-      <gds-fab bottom="300px">
+      <gds-fab inset="auto 100px 300px auto">
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="200px" rank="secondary">
+      <gds-fab inset="auto 100px 200px auto" rank="secondary">
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="100px" rank="tertiary">
+      <gds-fab inset="auto 100px 100px auto" rank="tertiary">
         Tertiary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
 
-      <gds-fab bottom="300px" right="300px" variant="positive">
+      <gds-fab inset="auto 300px 300px auto" variant="positive">
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="200px" right="300px" variant="positive" rank="secondary">
+      <gds-fab
+        inset="auto auto 200px 300px"
+        variant="positive"
+        rank="secondary"
+      >
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="100px" right="300px" variant="positive" rank="tertiary">
+      <gds-fab inset="auto 300px 100px auto" variant="positive" rank="tertiary">
         Tertiary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
 
-      <gds-fab bottom="300px" right="500px" variant="negative">
+      <gds-fab inset="auto 500px 300px auto" variant="negative">
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="200px" right="500px" variant="negative" rank="secondary">
+      <gds-fab
+        inset="auto auto 200px 500px"
+        variant="negative"
+        rank="secondary"
+      >
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab bottom="100px" right="500px" variant="negative" rank="tertiary">
+      <gds-fab inset="auto 500px 100px auto" variant="negative" rank="tertiary">
         Tertiary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
     </gds-flex>
@@ -104,22 +112,21 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex height="600px">
-      <gds-fab bottom="300px">
+      <gds-fab inset="auto 100px 300px auto">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab bottom="200px" rank="secondary">
+      <gds-fab inset="auto 100px 200px auto" rank="secondary">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab bottom="100px" rank="tertiary">
+      <gds-fab inset="auto 100px 100px auto" rank="tertiary">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
 
-      <gds-fab bottom="300px" right="300px" size="medium" variant="positive">
+      <gds-fab inset="auto 300px 300px auto" size="medium" variant="positive">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
       <gds-fab
-        bottom="200px"
-        right="300px"
+        inset="auto 300px 200px auto"
         size="medium"
         variant="positive"
         rank="secondary"
@@ -127,8 +134,7 @@ export const IconButton: Story = {
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
       <gds-fab
-        bottom="100px"
-        right="300px"
+        inset="auto 300px 100px auto"
         size="medium"
         variant="positive"
         rank="tertiary"
@@ -136,12 +142,11 @@ export const IconButton: Story = {
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
 
-      <gds-fab bottom="300px" right="500px" size="small" variant="negative">
+      <gds-fab inset="auto 500px 300px auto" size="small" variant="negative">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
       <gds-fab
-        bottom="200px"
-        right="500px"
+        inset="auto 500px 200px auto"
         size="small"
         variant="negative"
         rank="secondary"
@@ -149,8 +154,7 @@ export const IconButton: Story = {
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
       <gds-fab
-        bottom="100px"
-        right="500px"
+        inset="auto 500px 100px auto"
         size="small"
         variant="negative"
         rank="tertiary"
