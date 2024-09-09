@@ -11,8 +11,6 @@ import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
 import colorV2Light from '../../../dist/libs/tokens/internal/light.css?inline'
 import colorV2Dark from '../../../dist/libs/tokens/internal/dark.css?inline'
 
-console.log(`:root { ${colorV2Light} }`)
-
 const tokens = [
   unsafeCSS(palletCss),
   unsafeCSS(lightThemeCss),
