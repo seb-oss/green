@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.40.0
+
+### Minor Changes
+
+- 26fdbeb: Refactor Colors
+  Introducing the new color system with a new naming convention and structure
+
+  Fixes: #1557
+
+- 26fdbeb: Refactor colors
+
+  Fixes: #1557
+
 ## 1.39.0
 
 ### Minor Changes
