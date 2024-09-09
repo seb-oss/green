@@ -7,9 +7,12 @@ import { html } from '@sebgroup/green-core/scoping'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
 import '@sebgroup/green-core/components/icon/icons/flag.js'
+import '@sebgroup/green-core/components/menu-button/index.js'
+import '@sebgroup/green-core/components/icon/icons/seb.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/context-menu/index.js'
 
+import '../components/header'
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
@@ -52,6 +55,7 @@ export class AppElement extends LitElement {
   render() {
     return html`
       <gds-theme color-scheme="light">
+        <gds-header></gds-header>
         <div class="container">
           <div style="display: flex; justify-content: space-between;">
             <h1 class="mb-5">Green Core test app</h1>
