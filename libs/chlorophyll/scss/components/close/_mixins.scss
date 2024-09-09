@@ -18,30 +18,6 @@ $close-bg-active: var(--grey-500);
 $close-icon-color: var(--text-primary-color);
 
 @mixin close {
-  /* smartphones, touchscreens */
-  @media (hover: none) and (pointer: coarse) {
-    &:not(:disabled):not(.disabled) {
-      padding: $close-padding-sm;
-      height: $close-touch-target-size;
-      width: $close-touch-target-size;
-
-      > i {
-        background: var(--gds-ref-pallet-base200);
-        height: $close-height-sm;
-        width: $close-width-sm;
-        border-radius: 50%;
-        position: relative;
-        --color: var(--gds-sys-color-base);
-      }
-
-      & > div::after,
-      & > div::before {
-        height: 0.789375rem;
-        width: 0.130625rem;
-        top: 0.625rem;
-      }
-    }
-  }
 
   font-size: 0;
   background: $close-bg;
@@ -55,17 +31,42 @@ $close-icon-color: var(--text-primary-color);
   position: relative;
   width: $close-width;
 
+  /* smartphones, touchscreens */
+  @media (hover: none) and (pointer: coarse) {
+    &:not(:disabled):not(.disabled) {
+      padding: $close-padding-sm;
+      height: $close-touch-target-size;
+      width: $close-touch-target-size;
+
+      >i {
+        background: var(--gds-ref-pallet-base200);
+        height: $close-height-sm;
+        width: $close-width-sm;
+        border-radius: 50%;
+        position: relative;
+        --color: var(--gds-sys-color-base);
+      }
+
+      &>div::after,
+      &>div::before {
+        height: 0.789375rem;
+        width: 0.130625rem;
+        top: 0.625rem;
+      }
+    }
+  }
+
   @include common.add-focus('visible', 'i');
 
-  > i {
+  >i {
     border-radius: var(--gds-sys-shape-corner-round);
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  & > i::after,
-  & > i::before {
+  &>i::after,
+  &>i::before {
     background: var(--gds-sys-color-font);
     content: '';
     display: block;
@@ -77,33 +78,29 @@ $close-icon-color: var(--text-primary-color);
     top: 0.625rem;
   }
 
-  & > i::after {
+  &>i::after {
     transform: rotateZ(45deg);
   }
 
-  & > i::before {
+  &>i::before {
     transform: rotateZ(-45deg);
   }
 
-  > svg path {
+  >svg path {
     fill: var(--gds-sys-color-font);
   }
 
   @include common.media-breakpoint-up('md') {
-    &:not(:disabled, .disabled):hover > i {
-      background: color-mix(
-        in srgb,
-        var(--gds-sys-color-font) 10%,
-        transparent
-      );
+    &:not(:disabled, .disabled):hover>i {
+      background: color-mix(in srgb,
+          var(--gds-sys-color-font) 10%,
+          transparent);
     }
 
-    &:not(:disabled, .disabled):hover:active > i {
-      background: color-mix(
-        in srgb,
-        var(--gds-sys-color-font) 20%,
-        transparent
-      );
+    &:not(:disabled, .disabled):hover:active>i {
+      background: color-mix(in srgb,
+          var(--gds-sys-color-font) 20%,
+          transparent);
     }
   }
 }

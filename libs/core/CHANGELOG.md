@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.39.0
+
+### Minor Changes
+
+- 7508dcd: **Input:** Add input component (beta)
+
 ## 1.38.1
 
 ### Patch Changes
