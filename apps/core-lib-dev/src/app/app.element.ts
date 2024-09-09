@@ -7,8 +7,10 @@ import { html } from '@sebgroup/green-core/scoping'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
 import '@sebgroup/green-core/components/icon/icons/flag.js'
+import '@sebgroup/green-core/components/icon/icons/growth.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/icon/icons/seb.js'
+import '@sebgroup/green-core/components/layout/flex/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/context-menu/index.js'
 
@@ -43,7 +45,7 @@ export class AppElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-    // registerTransitionalStyles()
+    this.addEventListener('view-change', this.handleViewChange as EventListener)
     this.setLang(getLocale())
   }
 
@@ -52,55 +54,41 @@ export class AppElement extends LitElement {
     setLocale(lang)
   }
 
+  disconnectedCallback() {
+    this.removeEventListener(
+      'view-change',
+      this.handleViewChange as EventListener,
+    )
+    super.disconnectedCallback()
+  }
+
+  private handleViewChange(event: CustomEvent) {
+    this.currentView = event.detail.view
+  }
+
   render() {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <div class="container">
-          <div style="display: flex; justify-content: space-between;">
-            <h1 class="mb-5">Green Core test app</h1>
-            <gds-context-menu>
-              <span slot="trigger">
-                Lang: ${this.lang}
-                <gds-icon-flag></gds-icon-flag>
-              </span>
-              <gds-menu-item @click=${() => this.setLang('sv')}>
-                SV
-              </gds-menu-item>
-              <gds-menu-item @click=${() => this.setLang('en')}>
-                EN
-              </gds-menu-item>
-            </gds-context-menu>
-          </div>
 
-          <gds-segmented-control
-            .value=${this.currentView}
-            @change=${(e: CustomEvent) =>
-              (this.currentView = (e.target as any).value)}
-            style="margin-bottom: 1rem; width: 100%;"
-          >
-            <gds-segment value="login">Login</gds-segment>
-            <gds-segment value="form-validation">Form validation</gds-segment>
-            <gds-segment value="datepicker">Datepicker</gds-segment>
-            <gds-segment value="calendar">Calendar</gds-segment>
-          </gds-segmented-control>
-          ${choose(
-            this.currentView,
+        <gds-container padding="2xl">
+        ${choose(
+          this.currentView,
+          [
+            ['login', () => html`<gds-login></gds-login>`],
             [
-              ['login', () => html`<gds-login></gds-login>`],
-              [
-                'form-validation',
-                () => html`<form-validation></form-validation>`,
-              ],
-              [
-                'datepicker',
-                () => html`<datepicker-example></datepicker-example>`,
-              ],
-              ['calendar', () => html`<calendar-example></calendar-example>`],
+              'form-validation',
+              () => html`<form-validation></form-validation>`,
             ],
-            () => html`No view selected`,
-          )}
-        </div>
+            [
+              'datepicker',
+              () => html`<datepicker-example></datepicker-example>`,
+            ],
+            ['calendar', () => html`<calendar-example></calendar-example>`],
+          ],
+          () => html`No view selected`,
+        )}
+        <gds-container>
       </gds-theme>
     `
   }

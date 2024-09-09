@@ -43,7 +43,6 @@ export class CardExample extends LitElement {
               filter="20px"
               inset="auto 20px 20px 20px"
               padding="s{xs} m{l} l{2xl}"
-              background="rgba(0, 0, 0, 0.1)"
               radius="xs"
               color="white-text"
             >
