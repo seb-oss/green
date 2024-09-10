@@ -253,60 +253,64 @@ export const CardRadius: Story = {
   name: 'Border Radius',
   render: (args) =>
     html`<gds-grid columns="8" gap="l">
-      <gds-card background="base900" color="white-text" padding="xl">
+      <gds-card
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
+        padding="xl"
+      >
         <gds-flex display="flex" align="center" justify="center"> 0 </gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="2xs"
       >
         <gds-flex display="flex" align="center" justify="center">2XS</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="0 xs 0 xs"
       >
         <gds-flex display="flex" align="center" justify="center">XS</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="0 s 0 s"
       >
         <gds-flex display="flex" align="center" justify="center">S</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="0 m 0 m"
       >
         <gds-flex display="flex" align="center" justify="center">M</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="0 l 0 l"
       >
         <gds-flex display="flex" align="center" justify="center">L</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="xl"
       >
         <gds-flex display="flex" align="center" justify="center">XL</gds-flex>
       </gds-card>
       <gds-card
-        background="base900"
-        color="white-text"
+        background="l2-background-tertiary"
+        color="l2-content-tertiary"
         padding="xl"
         radius="max"
       >
