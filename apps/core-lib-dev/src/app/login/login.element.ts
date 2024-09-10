@@ -92,45 +92,101 @@ export class CardExample extends LitElement {
               justify="center"
               height="100%"
             >
-              <gds-container>
-                <gds-text tag="h1" color="l2-content-primary" weight="book">
-                  Välkommen till Internetbanken
-                </gds-text>
-                <gds-text tag="p" size="heading-l" color="l2-content-secondary">
-                  Hur vill du logga in?
-                </gds-text>
-              </gds-container>
-              <gds-card radius="s" border="4xs/l2-stroke-primary" padding="xl">
-                <gds-flex direction="column" gap="l">
-                  <gds-text size="heading-l">Logga in med digipass</gds-text>
-                  <gds-input
-                    label="Personnummer"
-                    showExtendedSupportingText="true"
-                    supportingText="Fyll i med 12 siffror."
-                  ></gds-input>
+              <form novalidate>
+                <gds-container>
+                  <gds-text tag="h1" color="l2-content-primary" weight="book">
+                    Välkommen till Internetbanken
+                  </gds-text>
+                  <gds-text
+                    tag="p"
+                    size="heading-l"
+                    color="l2-content-secondary"
+                  >
+                    Hur vill du logga in?
+                  </gds-text>
+                </gds-container>
+                <gds-card
+                  radius="s"
+                  border="4xs/l2-stroke-primary"
+                  padding="xl"
+                >
+                  <gds-flex direction="column" gap="l">
+                    <gds-text size="heading-l">Logga in med digipass</gds-text>
+                    <gds-input
+                      label="Personnummer"
+                      showExtendedSupportingText="true"
+                      supportingText="Fyll i med 12 siffror."
+                      .validator=${{
+                        validate: (el: any) => {
+                          if (el.value === '')
+                            return [
+                              {
+                                ...el.validity,
+                                valid: false,
+                                customError: true,
+                              },
+                              'Du måste fylla i ditt personnummer.',
+                            ]
+                          else if (el.value.length !== 12 || isNaN(el.value))
+                            return [
+                              {
+                                ...el.validity,
+                                valid: false,
+                                customError: true,
+                              },
+                              'Personnumret måste vara 12 siffror.',
+                            ]
+                        },
+                      }}
+                    ></gds-input>
 
-                  <ol>
-                    <li>Skriv in din PIN i digipassen.</li>
-                    <li>Tryck 2 när APPLI visas.</li>
-                    <li>
-                      Skriv in <gds-text tag="code">1234</gds-text> och sedan
-                      <gds-text tag="code">5678</gds-text> i digipassen.
-                    </li>
-                    <li>Fyll i signeringskoden, den visas i 30 sekunder.</li>
-                  </ol>
+                    <ol>
+                      <li>Skriv in din PIN i digipassen.</li>
+                      <li>Tryck 2 när APPLI visas.</li>
+                      <li>
+                        Skriv in <gds-text tag="code">1234</gds-text> och sedan
+                        <gds-text tag="code">5678</gds-text> i digipassen.
+                      </li>
+                      <li>Fyll i signeringskoden, den visas i 30 sekunder.</li>
+                    </ol>
 
-                  <gds-input
-                    label="Inloggningskod"
-                    supportingText="Fyll i koden med 6 siffror."
-                  ></gds-input>
+                    <gds-input
+                      label="Inloggningskod"
+                      supportingText="Fyll i koden med 6 siffror."
+                      .validator=${{
+                        validate: (el: any) => {
+                          if (el.value === '')
+                            return [
+                              {
+                                ...el.validity,
+                                valid: false,
+                                customError: true,
+                              },
+                              'Du måste fylla i en kod.',
+                            ]
+                          else if (el.value.length !== 6 || isNaN(el.value))
+                            return [
+                              {
+                                ...el.validity,
+                                valid: false,
+                                customError: true,
+                              },
+                              'Koden måste vara 6 siffror.',
+                            ]
+                        },
+                      }}
+                    ></gds-input>
 
-                  <gds-button size="large">Logga in</gds-button>
+                    <gds-form-summary></gds-form-summary>
 
-                  <gds-button rank="tertiary">
-                    Ändra identifieringsmetod
-                  </gds-button>
-                </gds-flex>
-              </gds-card>
+                    <gds-button type="submit" size="large">Logga in</gds-button>
+
+                    <gds-button rank="tertiary">
+                      Ändra identifieringsmetod
+                    </gds-button>
+                  </gds-flex>
+                </gds-card>
+              </form>
             </gds-flex>
           </gds-grid>
         </gds-card>
