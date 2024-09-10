@@ -1,5 +1,5 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import { IconArchive } from './icons/archive'
+import { IconArchive } from './_v1_icons/archive'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 

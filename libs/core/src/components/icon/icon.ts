@@ -49,7 +49,7 @@ export abstract class GdsIcon extends GdsElement {
   protected static _solidSVG?: string
 
   render() {
-    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'seb'
+    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
 
     const width = isSebIcon
       ? '55'

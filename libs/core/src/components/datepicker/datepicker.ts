@@ -31,9 +31,9 @@ import './date-part-spinner'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import '../../components/button'
-import '../../components/icon/icons/calendar'
-import '../../components/icon/icons/chevron-left'
-import '../../components/icon/icons/chevron-right'
+import '../icon/icons/calendar'
+import '../icon/icons/chevron-left'
+import '../icon/icons/chevron-right'
 
 import { tokens } from '../../tokens.style'
 import { styles } from './datepicker.styles'

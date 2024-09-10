@@ -74,7 +74,7 @@ export class GdsHeader extends LitElement {
           height="4rem"
           align="center"
         >
-          <gds-icon-seb></gds-icon-seb>
+          <gds-icon-brands-seb></gds-icon-brands-seb>
         </gds-flex>
         <gds-flex align="center" margin="0 m 0 0">
           <gds-context-menu>
