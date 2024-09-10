@@ -21,12 +21,12 @@ export class GdsHeader extends LitElement {
   render() {
     return html`
       <gds-flex
-        align="center"
+        align="stretch"
         width="100%"
         justify="space-between"
         background="l1-background-primary"
         position="relative"
-        padding="m"
+        height="4rem"
       >
         <gds-container display="xs{flex} s{flex} m{flex} l{none}">
           <gds-context-menu>
@@ -71,17 +71,21 @@ export class GdsHeader extends LitElement {
           inset="auto 0"
           margin="0 auto"
           width="max-content"
+          height="4rem"
+          align="center"
         >
           <gds-icon-seb></gds-icon-seb>
         </gds-flex>
-        <gds-context-menu>
-          <gds-flex align="center" gap="s" slot="trigger">
-            Language
-            <gds-icon-globus></gds-icon-globus>
-          </gds-flex>
-          <gds-menu-item>EN</gds-menu-item>
-          <gds-menu-item>SV</gds-menu-item>
-        </gds-context-menu>
+        <gds-flex align="center" margin="0 m 0 0">
+          <gds-context-menu>
+            <gds-flex align="center" gap="s" slot="trigger">
+              Language
+              <gds-icon-globus></gds-icon-globus>
+            </gds-flex>
+            <gds-menu-item>EN</gds-menu-item>
+            <gds-menu-item>SV</gds-menu-item>
+          </gds-context-menu>
+        </gds-flex>
       </gds-flex>
     `
   }
