@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.2
+
+### Patch Changes
+
+- 32f256b: Fix compatibility with newer SASS versions
+
 ## 3.6.1
 
 ### Patch Changes
