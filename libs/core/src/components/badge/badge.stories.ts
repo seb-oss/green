@@ -44,6 +44,10 @@ export const Variants: Story = {
           <gds-text>Icon</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
+        <gds-badge variant="information">Hello</gds-badge>
+        <gds-badge variant="success">Hello</gds-badge>
+        <gds-badge variant="error">I am a error</gds-badge>
+
         <gds-badge variant="information">
           <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
           Information
