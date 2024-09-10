@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.16.0
+
+### Minor Changes
+
+- d1c3f31: Added background scroll lock for modal component
+
+### Patch Changes
+
+- Updated dependencies [32f256b]
+  - @sebgroup/chlorophyll@3.6.2
+
 ## 3.15.0
 
 ### Minor Changes
