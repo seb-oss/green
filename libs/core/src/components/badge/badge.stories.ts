@@ -1,6 +1,6 @@
 import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
-import './badge'
+// import './badge'
 
 const meta: Meta = {
   title: 'Docs/Components/Badge',
@@ -12,6 +12,10 @@ type Story = StoryObj
 
 export const Basic: Story = {}
 
+/**
+ * Badge
+ * @status beta
+ */
 export const Variants: Story = {
   render: () => html`
     <gds-badge variant="information">Information</gds-badge>
