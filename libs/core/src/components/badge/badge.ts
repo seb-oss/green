@@ -19,6 +19,11 @@ import BadgeCSS from './badge.style.css?inline'
 export class GdsBadge extends GdsElement {
   static styles = [tokens, unsafeCSS(BadgeCSS)]
 
+  /**
+   * Controls the variant of the badge.
+   * Supports all valid variants like information, notice, success, warning, error.
+   * @property variant
+   */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
     selector: '.badge',
