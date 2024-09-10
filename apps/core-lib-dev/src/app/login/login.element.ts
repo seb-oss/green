@@ -34,17 +34,16 @@ export class CardExample extends LitElement {
     return html`
       <gds-flex justify="center">
         <gds-card
-          shadow="s"
-          radius="xs"
+          shadow="2xs{0} s{0} m{s} l{s} xl{s}"
+          radius="2xs{0} s{0} m{xs} l{xs} xl{xs}"
           background="l2-background-secondary"
           overflow="hidden"
           width="clamp(320px, 100%, 1440px)"
         >
-
           <gds-grid columns="2xs{1} s{1} m{2} l{2} xl{2}">
-            <gds-flex position="relative" >
+            <gds-flex position="relative">
               <gds-video
-                ratio="2/2.4"
+                ratio="2xs{1/1} s{16/9} m{16/9} l{1/1} xl{2/2.4}"
                 src=${coverTwo}
                 alt="Cards"
                 fit="cover"
@@ -60,63 +59,82 @@ export class CardExample extends LitElement {
                 filter="2px"
                 inset="40% 0 0 0"
                 mask="top/l1-background-tertiary/0.3"
-                padding="2xl"
+                padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
                 position="absolute"
                 radius="xs"
                 stack="2"
               >
-                <gds-flex direction="column" justify="flex-end" height="100%" gap="xs">
-                  <gds-text tag="h2" wrap="balance">Sector by sector. Industry by industry.</gds-text>
-                  <gds-text tag="p" wrap="balance"> Together with our clients, we're accelerating the sustainable transition.</gds-text>
+                <gds-flex
+                  direction="column"
+                  justify="flex-end"
+                  height="100%"
+                  gap="xs"
+                >
+                  <gds-text tag="h2" wrap="balance">
+                    Sector by sector. Industry by industry.
+                  </gds-text>
+                  <gds-text tag="p" wrap="balance">
+                    Together with our clients, we're accelerating the
+                    sustainable transition.
+                  </gds-text>
                   <gds-flex align="center" gap="s" margin="s 0 0 0">
                     <gds-text>Net Zero Transition</gds-text>
                     <gds-icon-arrow-right></gds-icon-arrow-right>
                   </gds-flex>
                 </gds-flex>
-              </gds-container>
+              </gds-card>
             </gds-flex>
             <gds-flex
               direction="column"
-              padding="4xl"
+              padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
               gap="2xl"
               align="stretch"
               justify="center"
               height="100%"
             >
               <gds-container>
-                <gds-text tag="h1" color="l2-content-primary" weight="book">Välkommen till Internetbanken</gds-text>
-                <gds-text tag="p" size="heading-l" color="l2-content-secondary"> Hur vill du logga in? </gds-text>
+                <gds-text tag="h1" color="l2-content-primary" weight="book">
+                  Välkommen till Internetbanken
+                </gds-text>
+                <gds-text tag="p" size="heading-l" color="l2-content-secondary">
+                  Hur vill du logga in?
+                </gds-text>
               </gds-container>
               <gds-card radius="s" border="4xs/l2-stroke-primary" padding="xl">
                 <gds-flex direction="column" gap="l">
-                  <gds-text size="heading-l">Logga in med digipass</gds-text> 
+                  <gds-text size="heading-l">Logga in med digipass</gds-text>
                   <gds-input
                     label="Personnummer"
                     showExtendedSupportingText="true"
                     supportingText="Fyll i med 12 siffror."
-                  ></gds-input> 
+                  ></gds-input>
 
                   <ol>
                     <li>Skriv in din PIN i digipassen.</li>
                     <li>Tryck 2 när APPLI visas.</li>
-                    <li>Skriv in <gds-text tag="code">1234</gds-text> och sedan <gds-text tag="code">5678</gds-text> i digipassen.</li>
+                    <li>
+                      Skriv in <gds-text tag="code">1234</gds-text> och sedan
+                      <gds-text tag="code">5678</gds-text> i digipassen.
+                    </li>
                     <li>Fyll i signeringskoden, den visas i 30 sekunder.</li>
                   </ol>
 
                   <gds-input
                     label="Inloggningskod"
                     supportingText="Fyll i koden med 6 siffror."
-                  ></gds-input> 
+                  ></gds-input>
 
                   <gds-button size="large">Logga in</gds-button>
 
-                  <gds-button rank="tertiary">Ändra identifieringsmetod</gds-button>
+                  <gds-button rank="tertiary">
+                    Ändra identifieringsmetod
+                  </gds-button>
                 </gds-flex>
               </gds-card>
             </gds-flex>
           </gds-grid>
         </gds-card>
-    </gds-flex>
+      </gds-flex>
     `
   }
 }
