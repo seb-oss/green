@@ -6,13 +6,22 @@ import { html } from '@sebgroup/green-core/scoping'
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
+import '@sebgroup/green-core/components/content/text/index.js'
+import '@sebgroup/green-core/components/context-menu/index.js'
+import '@sebgroup/green-core/components/icon/icons/arrow-right.js'
 import '@sebgroup/green-core/components/icon/icons/flag.js'
 import '@sebgroup/green-core/components/icon/icons/growth.js'
-import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/icon/icons/seb.js'
+import '@sebgroup/green-core/components/icon/icons/bars-three.js'
+import '@sebgroup/green-core/components/icon/icons/globus.js'
+import '@sebgroup/green-core/components/input/index.js'
+import '@sebgroup/green-core/components/layout/card/index.js'
 import '@sebgroup/green-core/components/layout/flex/index.js'
+import '@sebgroup/green-core/components/layout/grid/index.js'
+import '@sebgroup/green-core/components/media/img/index.js'
+import '@sebgroup/green-core/components/media/video/index.js'
+import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
-import '@sebgroup/green-core/components/context-menu/index.js'
 
 import '../components/header'
 import './chlorophyll.scss'
@@ -70,25 +79,24 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-
-        <gds-container padding="2xl">
-        ${choose(
-          this.currentView,
-          [
-            ['login', () => html`<gds-login></gds-login>`],
+        <gds-container padding="s{0} m{s} l{4xl}">
+          ${choose(
+            this.currentView,
             [
-              'form-validation',
-              () => html`<form-validation></form-validation>`,
+              ['login', () => html`<gds-login></gds-login>`],
+              [
+                'form-validation',
+                () => html`<form-validation></form-validation>`,
+              ],
+              [
+                'datepicker',
+                () => html`<datepicker-example></datepicker-example>`,
+              ],
+              ['calendar', () => html`<calendar-example></calendar-example>`],
             ],
-            [
-              'datepicker',
-              () => html`<datepicker-example></datepicker-example>`,
-            ],
-            ['calendar', () => html`<calendar-example></calendar-example>`],
-          ],
-          () => html`No view selected`,
-        )}
-        <gds-container>
+            () => html`No view selected`,
+          )}
+        </gds-container>
       </gds-theme>
     `
   }

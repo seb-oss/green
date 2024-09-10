@@ -244,6 +244,16 @@ export class GdsContainer extends GdsElement {
   })
   stack?: string
 
+  /**
+   * Controls the box-sizing property of the container.
+   * Supports all valid CSS box-sizing values.
+   */
+  @styleExpressionProperty({
+    property: 'box-sizing',
+    valueTemplate: (v) => v,
+  })
+  box?: string
+
   render() {
     return html`<slot></slot>`
   }

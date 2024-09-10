@@ -134,10 +134,10 @@ export const Card: Story = {
           <gds-card
             position="absolute"
             inset="50% 0px 0px 0px"
-            filter="0"
-            background="base900/0.6"
-            color="white-text"
-            mask="top"
+            filter="4px"
+            color="l2-content-tertiary"
+            mask="top/l2-background-tertiary/0.4"
+            stack="2"
           >
             <gds-flex
               direction="column"
