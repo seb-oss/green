@@ -2,13 +2,14 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    position: fixed;
-    inset: auto 2rem 2rem auto;
+    display: contents;
   }
 
   .button {
     box-shadow: var(--gds-shadow-m);
-    height: calc(var(--_size) + 0.5rem);
+    position: fixed;
+    inset: auto var(--gds-space-3xl) var(--gds-space-3xl) auto;
+    block-size: calc(var(--_block-size) + var(--gds-space-xs));
   }
 `
 

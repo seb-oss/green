@@ -2,7 +2,10 @@ import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
-import { css } from 'lit'
+import { css, unsafeCSS } from 'lit'
+import { watch } from '../../utils/decorators'
+
+import { colorV2Dark, colorV2Light } from '../../tokens.style'
 
 /**
  * @element gds-theme
@@ -31,9 +34,29 @@ export class GdsTheme extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-theme')
+    this._dynamicStylesController.inject(
+      'tokens',
+      unsafeCSS(`:host {${colorV2Dark}}`),
+    )
   }
 
   render() {
     return html`<slot></slot>`
+  }
+
+  // TODO: Add prefers-color-scheme media query when `auto` is selected
+  @watch('colorScheme')
+  private _onColorSchemeChange() {
+    if (this.colorScheme === 'dark') {
+      this._dynamicStylesController.inject(
+        'tokens',
+        unsafeCSS(`:host { ${colorV2Dark}}`),
+      )
+    } else {
+      this._dynamicStylesController.inject(
+        'tokens',
+        unsafeCSS(`:host { ${colorV2Light}}`),
+      )
+    }
   }
 }

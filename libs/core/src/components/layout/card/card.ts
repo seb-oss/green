@@ -72,7 +72,7 @@ export class GdsCard extends GdsContainer {
   @styleExpressionProperty({
     valueTemplate: (v) => {
       const [size, color] = v.split('/')
-      return `var(--gds-space-${size}) solid ${color ? `var(--gds-sys-color-${color})` : 'currentColor'}`
+      return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${color})` : 'currentColor'}`
     },
     styleTemplate: (_prop, values) => {
       const top = values[0]
