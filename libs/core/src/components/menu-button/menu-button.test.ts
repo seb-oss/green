@@ -1,8 +1,8 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { clickOnElement, timeout } from '../../utils/testing/index.js'
+import { clickOnElement } from '../../utils/testing/index.js'
 
 import {
   htmlTemplateTagFactory,
@@ -31,7 +31,7 @@ describe('<gds-menu-button>', () => {
 
     it('should render link', async () => {
       const el = await fixture<GdsMenuButton>(
-        html`<gds-menu-button href="https://github.com/sebgroup/green"
+        html`<gds-menu-button href="https://github.com/seb-oss/green"
           >Link</gds-menu-button
         >`,
       )
@@ -92,7 +92,7 @@ describe('<gds-menu-button>', () => {
 
       await sendKeys({ press: 'Enter' })
 
-      await timeout(1)
+      await aTimeout(1)
 
       expect(spy.notCalled).to.be.true
       expect(el.disabled).to.be.true
@@ -112,7 +112,7 @@ describe('<gds-menu-button>', () => {
     it('should support link attributes', async () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_self"
           rel="noopener"
           download
@@ -123,7 +123,7 @@ describe('<gds-menu-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('a')
 
       expect(shadowButton?.getAttribute('href')).to.equal(
-        'https://github.com/sebgroup/green',
+        'https://github.com/seb-oss/green',
       )
       expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
       expect(shadowButton?.getAttribute('target')).to.equal('_self')
@@ -143,7 +143,7 @@ describe('<gds-menu-button>', () => {
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsMenuButton>(
-        html`<gds-menu-button href="https://github.com/sebgroup/green">
+        html`<gds-menu-button href="https://github.com/seb-oss/green">
           Test link
         </gds-menu-button>`,
       )
@@ -160,7 +160,7 @@ describe('<gds-menu-button>', () => {
 
       await sendKeys({ press: 'Enter' })
 
-      await timeout(1)
+      await aTimeout(1)
 
       expect(spy.calledOnce).to.be.true
     })
@@ -192,7 +192,7 @@ describe('<gds-menu-button>', () => {
     it('should apply a secure rel attribute by default', async () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_blank"
         >
           Test link

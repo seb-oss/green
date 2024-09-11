@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai'
-import { timeout } from '../../utils/testing'
+import { aTimeout } from '@open-wc/testing'
 import '@sebgroup/green-core'
 
 import { gdsInitLocalization } from './localization'
@@ -19,7 +19,7 @@ describe('Localization module', () => {
 
     it('should set the locale to the specified locale', async () => {
       setLocale('sv')
-      await timeout(0)
+      await aTimeout(0)
       expect(getLocale()).to.equal('sv')
     })
   })

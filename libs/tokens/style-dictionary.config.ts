@@ -4,6 +4,9 @@ import filters from './src/filters'
 import formats from './src/formats'
 import transforms from './src/transforms'
 
+const swiftPackageName = 'GreenTokens'
+const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
+
 /**
  * Register custom actions
  *
@@ -82,6 +85,26 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: 'light.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'light',
+            outputReferences: false,
+            // selector: '.light',
+          },
+        },
+        {
+          destination: 'dark.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'dark',
+            outputReferences: false,
+            // selector: ':host',
+          },
+        },
+        {
           destination: 'size.css',
           format: 'size',
           filter: function (token) {
@@ -98,6 +121,16 @@ const config: StyleDictionary.Config = {
           filter: function (token) {
             // Check if the token type is 'float' and the path includes 'space'
             return token.type === 'float' && token.path.includes('typography')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
+          destination: 'shadow.css',
+          format: 'shadow',
+          filter: function (token) {
+            return token.path.includes('shadow')
           },
           options: {
             outputReferences: true,
@@ -375,6 +408,7 @@ const config: StyleDictionary.Config = {
     },
     ios: {
       buildPath: 'ios/',
+      sourcePath: swiftSourcePath,
       /**
        * These transforms are an adaptation of the [ios-swift transform group](https://amzn.github.io/style-dictionary/#/transform_groups?id=ios-swift)
        * It needed to be adopted to match our token structure. Since we start the structure with REF & SYS instead of the category.
@@ -390,30 +424,83 @@ const config: StyleDictionary.Config = {
       ],
       files: [
         {
-          destination: 'light-colors.swift',
-          format: 'green/ios-swift-class',
-          filter: 'is2023Color',
+          destination: 'Package.swift',
+          format: 'green/ios-swift-package',
+          packageName: swiftPackageName,
           options: {
+            platformVersion: '15',
+            targets: [swiftPackageName],
+            resources: ['Assets'],
+          },
+        },
+        {
+          destination: swiftSourcePath + 'Colors/LightModeColors.swift',
+          format: 'green/ios-swift-class-tree',
+          filter: 'is2023Color',
+          className: 'LightModeColors',
+          packageName: swiftPackageName,
+          options: {
+            type: 'color',
             colorScheme: 'light',
           },
         },
         {
-          destination: 'dark-colors.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + 'Colors/DarkModeColors.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Color',
+          className: 'DarkModeColors',
+          packageName: swiftPackageName,
           options: {
+            type: 'color',
             colorScheme: 'dark',
           },
         },
         {
-          destination: 'dimentions.swift',
-          format: 'green/ios-swift-class',
-          filter: 'is2023Size',
+          destination: swiftSourcePath + '/Colors/UIColors.swift',
+          format: 'green/ios-swift-class-tree',
+          filter: 'is2023Color',
+          className: 'UIColors',
+          packageName: swiftPackageName,
+          options: {
+            type: 'color',
+            colorType: 'uiKitDynamicProvider',
+            import: ['UIKit'],
+            lightModeObjectName: 'LightModeColors',
+            darkModeObjectName: 'DarkModeColors',
+          },
         },
         {
-          destination: 'radii.swift',
-          format: 'green/ios-swift-class',
+          destination: swiftSourcePath + '/Colors/Colors.swift',
+          format: 'green/ios-swift-class-tree',
+          filter: 'is2023Color',
+          className: 'Colors',
+          packageName: swiftPackageName,
+          options: {
+            type: 'color',
+            colorType: 'swiftUiReferenceToUiKit',
+            import: ['SwiftUI'],
+            uiKitObjectName: 'UIColors',
+          },
+        },
+        {
+          destination: swiftSourcePath + 'Dimensions.swift',
+          format: 'green/ios-swift-class-tree',
+          filter: 'is2023Size',
+          className: 'Dimensions',
+          packageName: swiftPackageName,
+          options: {
+            type: 'sys',
+          },
+        },
+        {
+          destination: swiftSourcePath + 'Radii.swift',
+          format: 'green/ios-swift-class-tree',
           filter: 'is2023Radii',
+          className: 'Radii',
+          packageName: swiftPackageName,
+          options: {
+            type: 'sys',
+          },
         },
       ],
     },

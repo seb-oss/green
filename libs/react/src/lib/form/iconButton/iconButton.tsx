@@ -8,6 +8,7 @@ interface IconButtonInterface {
   'aria-expanded'?: boolean
   'aria-controls'?: string
   size?: 'small' | 'normal'
+  title?: string
 }
 
 export const IconButton = forwardRef(

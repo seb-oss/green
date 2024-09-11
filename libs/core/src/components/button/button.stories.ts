@@ -2,6 +2,11 @@ import { html, nothing } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 import '../layout/grid/index.js'
+import '../content/text/index.js'
+import '../content/divider/index.js'
+import '../layout/flex/index.js'
+import '../icon/icons/credit-card.js'
+import '../icon/icons/circle-x.js'
 import '../icon/icons/chevron-top.js'
 import '../icon/icons/arrow-up.js'
 import '../icon/icons/arrow-down.js'
@@ -25,7 +30,7 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
-const DefaultParams: Story = {
+export const DefaultParams: Story = {
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
@@ -77,42 +82,52 @@ export const RanksAndVariants: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-grid columns="3" gap="m" row-gap="m">
-      <div>
-        <gds-button>Neutral primary</gds-button>
-      </div>
-      <div>
-        <gds-button rank="secondary">Neutral secondary</gds-button>
-      </div>
-      <div>
-        <gds-button rank="tertiary">Neutral tertiary</gds-button>
-      </div>
-      <div>
-        <gds-button variant="positive">Positive primary</gds-button>
-      </div>
-      <div>
-        <gds-button variant="positive" rank="secondary">
-          Positive secondary
-        </gds-button>
-      </div>
-      <div>
-        <gds-button variant="positive" rank="tertiary">
-          Positive tertiary
-        </gds-button>
-      </div>
-      <div>
-        <gds-button variant="negative">Negative primary</gds-button>
-      </div>
-      <div>
-        <gds-button variant="negative" rank="secondary">
-          Negative secondary
-        </gds-button>
-      </div>
-      <div>
-        <gds-button variant="negative" rank="tertiary">
-          Negative tertiary
-        </gds-button>
-      </div>
+    <gds-flex direction="column" gap="4xl" padding="4xl">
+      <gds-flex direction="column" gap="m">
+        <gds-text>Neutral</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button>
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary</gds-button>
+          <gds-button rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>  
+            Secondary</gds-button>
+          <gds-button rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>  
+            Tertiary</gds-button>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex direction="column" gap="m">
+        <gds-text>Positive</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="positive">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary</gds-button>
+          <gds-button variant="positive" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary</gds-button>
+          <gds-button variant="positive" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary</gds-button>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex direction="column" gap="m">
+        <gds-text>Negative</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="negative">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary</gds-button>
+          <gds-button variant="negative" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary</gds-button>
+          <gds-button variant="negative" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary</gds-button>
+        </gds-flex>
+      </gds-flex>
     </gds-grid>
   `,
 }
@@ -127,13 +142,17 @@ export const Sizes: Story = {
     controls: { include: ['rank', 'variant'] },
   },
   render: (args) => html`
-    <gds-button .rank=${args.rank} .variant=${args.variant} size="small"
-      >Small</gds-button
-    >
-    <gds-button .rank=${args.rank} .variant=${args.variant}>Medium</gds-button>
-    <gds-button .rank=${args.rank} .variant=${args.variant} size="large"
-      >Large</gds-button
-    >
+    <gds-flex gap="l" align="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
+        Small
+      </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant}>
+        Medium
+      </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
+        Large
+      </gds-button>
+    </gds-flex>
   `,
 }
 
@@ -149,15 +168,24 @@ export const WithIcon: Story = {
     controls: { include: ['rank', 'variant', 'size'] },
   },
   render: (args) => html`
-    <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
-      <gds-icon-arrow-down slot="lead"></gds-icon-arrow-down>
-      Leading icon
-    </gds-button>
-
-    <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
-      Trailing icon
-      <gds-icon-arrow-up slot="trail"></gds-icon-arrow-up>
-    </gds-button>
+    <gds-flex gap="l">
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        .size=${args.size}
+      >
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        Leading icon
+      </gds-button>
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        .size=${args.size}
+      >
+        Trailing icon
+        <gds-icon-credit-card slot="trail"></gds-icon-credit-card>
+      </gds-button>
+    </gds-flex>
   `,
 }
 
@@ -172,17 +200,17 @@ export const IconButton: Story = {
     controls: { include: ['rank', 'variant'] },
   },
   render: (args) => html`
-    <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
-      <gds-icon-arrow-right />
-    </gds-button>
-
-    <gds-button .rank=${args.rank} .variant=${args.variant}>
-      <gds-icon-arrow-right />
-    </gds-button>
-
-    <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
-      <gds-icon-arrow-right />
-    </gds-button>
+    <gds-flex gap="l" align="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
+        <gds-icon-arrow-right />
+      </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant}>
+        <gds-icon-arrow-right />
+      </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
+        <gds-icon-arrow-right />
+      </gds-button>
+    </gds-flex>
   `,
 }
 
@@ -197,14 +225,15 @@ export const Disabled: Story = {
     ...DefaultParams.parameters,
     controls: { include: [] },
   },
-  render: () =>
-    html`<gds-button disabled>Primary</gds-button>
-
+  render: () => html`
+    <gds-flex gap="l">
+      <gds-button disabled>Primary</gds-button>
       <gds-button rank="secondary" variant="positive" disabled>
         Secondary
       </gds-button>
-
-      <gds-button rank="tertiary" disabled> Tertiary </gds-button>`,
+      <gds-button rank="tertiary" disabled> Tertiary </gds-button>
+    </gds-flex>
+  `,
 }
 
 /**
@@ -217,7 +246,7 @@ export const Link: Story = {
     controls: { include: ['href', 'target', 'rel', 'download'] },
   },
   args: {
-    href: 'https://github.com/sebgroup/green',
+    href: 'https://github.com/seb-oss/green',
   },
   render: (args) => html`
     <gds-button
@@ -227,6 +256,23 @@ export const Link: Story = {
       download=${args?.hasOwnProperty('download') ? args.download : nothing}
     >
       Link
+    </gds-button>
+  `,
+}
+
+/**
+ * Length constraints are set by default at `20ch` to ensure that the text does not wrap or overflow.
+ */
+export const Length: Story = {
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-button>
+      <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      This is a long text that will truncated
     </gds-button>
   `,
 }

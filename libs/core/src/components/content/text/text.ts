@@ -1,14 +1,11 @@
-import { css } from 'lit'
+import { html, unsafeStatic } from 'lit/static-html.js'
 import { property } from 'lit/decorators.js'
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import TextCSS from './text.style.css'
+import TextCSS from './text.style'
 
 /**
  * `gds-text` is a custom element that provides a flexible text system.
@@ -20,8 +17,6 @@ import TextCSS from './text.style.css'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  // static styles = [tokens, TextCSS, ]
-
   static styles = [tokens, TextCSS]
 
   /**
@@ -31,7 +26,7 @@ export class GdsText extends GdsElement {
    * @property tag
    */
   @property({ type: String })
-  tag = 'p'
+  tag = 'span'
 
   /**
    * Controls the size of the text.
@@ -39,42 +34,61 @@ export class GdsText extends GdsElement {
    *
    * You can apply size like this:
    * ```html
-   * <gds-text size="body-medium"></gds-text>
+   * <gds-text size="body-m"></gds-text>
    * ```
    *
    * These are the available values you can use to define size:
    *
-   * `label-overline`,
-   * `label-input-medium`,
-   * `label-input-large`,
-   * `label-information-medium`,
-   * `label-information-large`,
-   * `label-small`,
-   * `label-medium`,
-   * `label-large`,
-   * `body-small`,
-   * `body-medium`,
-   * `body-large`,
-   * `title-small`,
-   * `title-medium`,
-   * `title-large`,
-   * `headline-small`,
-   * `headline-medium`,
-   * `headline-large`,
-   * `display-small`,
-   * `display-medium`,
-   * `display-large`,
+   * `heading-xl`,
+   * `heading-l`,
+   * `heading-m`,
+   * `heading-s`,
+   * `heading-xs`,
+   * `heading-2xs`,
+   * `detail-m`,
+   * `detail-s`,
+   * `detail-xs`,
+   * `body-l`,
+   * `body-m`,
+   * `body-s`,
+   * `display-2xl`,
+   * `display-xl`,
+   * `display-l`,
+   * `display-m`,
+   * `display-s `,
+   * `preamble-2xl`,
+   * `preamble-xl`,
+   * `preamble-l`,
+   * `preamble-m`,
+   * `preamble-s`,
+   * `preamble-xs`,
    *
    * @property size
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
-      return `font-size: var(--gds-text-size-${size}); line-height: var(--gds-text-line-height-${size});`
+      const styleSize = `font-size: var(--gds-text-size-${size});`
+      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      return styleSize + styleLine
     },
   })
   size?: string
+
+  /**
+   * Controls the `font-weight` of the text.
+   * Supports all the weigh tokens.
+   *
+   * @property weight
+   */
+  @styleExpressionProperty({
+    property: 'font-weight',
+    selector: '[tag]',
+    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+  })
+  weight?: string
 
   /**
    * Controls the margin of the text.
@@ -82,7 +96,11 @@ export class GdsText extends GdsElement {
    *
    * @property margin
    */
-  @styleExpressionProperty()
+  @styleExpressionProperty({
+    property: 'margin',
+    selector: '[tag]',
+    valueTemplate: (v) => v,
+  })
   margin?: string
 
   /**
@@ -93,6 +111,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-wrap',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   wrap?: string
@@ -105,6 +124,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-transform',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   transform?: string
@@ -123,6 +143,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'max-width',
+    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   length?: string
@@ -135,6 +156,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'min-width',
+    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   min?: string
@@ -147,6 +169,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-align',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   align?: string
@@ -158,15 +181,10 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_lines',
+    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   lines?: number
-
-  createTag() {
-    const tag = document.createElement(this.tag)
-    tag.appendChild(document.createElement('slot'))
-    return tag
-  }
 
   /**
    * Controls the color property of the text.
@@ -181,18 +199,21 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'color',
+    selector: '[tag]',
     valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-sys-color-${colorName})`
+        return `var(--gds-color-${colorName})`
       }
     },
   })
   color?: string
 
   render() {
-    return html`${this.createTag()}`
+    const TAG_ENCODE = encodeURI(this.tag)
+    const TAG = unsafeStatic(TAG_ENCODE)
+    return html`<${TAG} tag><slot></slot></${TAG}>`
   }
 }

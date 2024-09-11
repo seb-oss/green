@@ -52,7 +52,7 @@ export class ${className} extends GdsIcon {
   /** @private */
   static _solidSVG = \`${solidSvg}\`
   /** @private */
-  static _name = '${name.replace(/-/g, ' ')}'
+  static _name = '${toKebabCase(name)}'
 }`.trim()
 }
 

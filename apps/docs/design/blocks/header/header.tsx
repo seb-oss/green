@@ -81,7 +81,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
         </button>
         <Link
           className="github"
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_blank"
           aria-label="GitHub"
         >

@@ -22,36 +22,15 @@ import { GdsElement } from '../../gds-element'
  * depending on the preferred placement,
  * the coachmark is hidden/disabled when the element is overlapped or out of viewport.
  *
- * @slot body - placeholder for the content of the tooltip.
+ * @slot - placeholder for the content of the tooltip.
  *
- * @event tooltipClosed - dispatched when the tooltip is closed
+ * @event gds-ui-state - dispatched when the tooltip is closed
+ *
+ * @status beta
  */
 @gdsCustomElement('gds-coachmark')
 export class GdsCoachmark extends GdsElement {
   static styles = styles
-
-  /**
-   * @internal
-   */
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
-  }
-
-  #cardRef: Ref<Element> = createRef()
-  #arrowRef: Ref<Element> = createRef()
-  #targetedElement: HTMLElement | undefined = undefined
-  #autoUpdateCleanupFn: (() => void) | undefined
-
-  /**
-   *Tracks the visibility of the tooltip (readonly)
-   */
-  @state() _isVisible = false
-
-  /**
-   *Used to prevent closing the tooltip if it's not visible (readonly)
-   */
-  @state() _preventClose = false
 
   /**
    * The placement of the popover relative to the trigger.
@@ -71,6 +50,39 @@ export class GdsCoachmark extends GdsElement {
    */
   @property({ attribute: false })
   target: string[] = []
+
+  /**
+   * The accessible label of the coachmark.
+   */
+  @property()
+  label = 'Coachmark'
+
+  /**
+   * A callback that can be used to set the visibility of the coachmark based on your criteria.
+   *
+   * The default computed visibility, based on visibility and overlap of the target element, is supplied as the third argument.
+   */
+  @property({ attribute: false })
+  computeVisibility: (
+    self: GdsCoachmark,
+    target: HTMLElement,
+    computedVisibility: boolean,
+  ) => boolean = (_self, _target, computedVisibility) => computedVisibility
+
+  /**
+   * The resolved targeted element (readonly)
+   */
+  targetElement: HTMLElement | undefined = undefined
+
+  // Tracks the visibility of the tooltip (readonly)
+  @state() _isVisible = false
+
+  // Used to prevent closing the tooltip if it's not visible (readonly)
+  @state() _preventClose = false
+
+  #cardRef: Ref<Element> = createRef()
+  #arrowRef: Ref<Element> = createRef()
+  #autoUpdateCleanupFn: (() => void) | undefined
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -102,7 +114,7 @@ export class GdsCoachmark extends GdsElement {
 
   firstUpdated() {
     if (this.target.length > 0) {
-      this.#targetedElement = this.#findTarget(this.target)
+      this.targetElement = this.#findTarget(this.target)
       this.#updateCoachmarks()
     }
   }
@@ -112,7 +124,13 @@ export class GdsCoachmark extends GdsElement {
     this._isVisible = false
     this.#cardRef.value?.remove()
     this.#autoUpdateCleanupFn?.()
-    window.dispatchEvent(new CustomEvent('tooltipClosed'))
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { open: this._isVisible, reason: 'closed' },
+        bubbles: false,
+        composed: false,
+      }),
+    )
   }
 
   #findTarget(selectors: string[]): HTMLElement | undefined {
@@ -157,7 +175,7 @@ export class GdsCoachmark extends GdsElement {
       const el = document.querySelector(selector) as HTMLElement
       if (!el || getComputedStyle(el).visibility === 'hidden') continue
 
-      if (this.#checkBoundingRect(this.#targetedElement as HTMLElement, el)) {
+      if (this.#checkBoundingRect(this.targetElement as HTMLElement, el)) {
         return true
       }
     }
@@ -195,7 +213,7 @@ export class GdsCoachmark extends GdsElement {
           name: 'detectOverflow',
           async fn(positionState) {
             const overflow = await detectOverflow(positionState, {
-              boundary: document.querySelector('main'),
+              boundary: document.body,
               rootBoundary: 'document',
               altBoundary: true,
               padding: {
@@ -220,22 +238,24 @@ export class GdsCoachmark extends GdsElement {
   }
 
   #shouldTooltipBeVisible(): boolean {
-    if (!this.#targetedElement) return false
+    if (!this.targetElement) return false
 
-    const isOutOfBound = this.#isElementOutsideView(this.#targetedElement)
-    const isVisible = this.#targetedElement.checkVisibility()
+    const isOutOfBound = this.#isElementOutsideView(this.targetElement)
+    const targetIsVisible = this.targetElement.checkVisibility()
     const isOverlapping =
       this.overlappedBy.length === 0
         ? false
         : this.#checkOverlap(this.overlappedBy)
 
-    return (
-      !isOverlapping && !isOutOfBound && isVisible && window.innerWidth > 580
+    return this.computeVisibility(
+      this,
+      this.targetElement,
+      !isOverlapping && !isOutOfBound && targetIsVisible,
     )
   }
 
   async #updateCoachmarks() {
-    const targetEl = this.#targetedElement
+    const targetEl = this.targetElement
     const componentEl = this.#cardRef.value as HTMLElement | null
     const arrowEl = this.#arrowRef.value as HTMLElement | null
 
@@ -287,12 +307,12 @@ export class GdsCoachmark extends GdsElement {
       () => html`
         <div
           role="dialog"
-          class="gds-coachmark"
-          aria-label="Coachmark"
+          id="body"
+          aria-label=${this.label}
           ${ref(this.#cardRef) as HTMLElement}
         >
           <slot></slot>
-          <div id="gds-arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
+          <div id="arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
         </div>
       `,
       () => html``,
