@@ -35,7 +35,7 @@ export class NggOnScrollDirective implements AfterViewInit, OnDestroy {
           throttle(() => interval(30)),
         )
         .subscribe(() => {
-          this.onScroll$.next(null)
+          this.onScroll$.next()
         })
     }
   }
