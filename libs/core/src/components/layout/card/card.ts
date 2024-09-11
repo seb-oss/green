@@ -5,7 +5,7 @@ import {
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
-import CardCSS from './card.style.css'
+import CardCSS from './card.style'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.

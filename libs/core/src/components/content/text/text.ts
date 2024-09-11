@@ -5,7 +5,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import TextCSS from './text.style.css'
+import TextCSS from './text.style'
 
 /**
  * `gds-text` is a custom element that provides a flexible text system.

@@ -1,11 +1,10 @@
 import { html } from 'lit/static-html.js'
-import { unsafeCSS } from 'lit'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
-import BadgeCSS from './badge.style.css?inline'
+import BadgeCSS from './badge.style.css'
 
 /**
  * `gds-badge`
@@ -17,7 +16,7 @@ import BadgeCSS from './badge.style.css?inline'
 
 @gdsCustomElement('gds-badge')
 export class GdsBadge extends GdsElement {
-  static styles = [tokens, unsafeCSS(BadgeCSS)]
+  static styles = [tokens, BadgeCSS]
 
   /**
    * Controls the variant of the badge.

@@ -6,7 +6,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import ContainerCSS from './container.style.css'
+import ContainerCSS from './container.style'
 
 /**
  * The `gds-container` is a custom element that provides a flexible container system.
