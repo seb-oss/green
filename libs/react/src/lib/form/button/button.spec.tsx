@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import Button from './button'
+import React from 'react'
 
 describe('Button', () => {
   it('renders', () => {
@@ -21,5 +22,16 @@ describe('Button', () => {
     render(<Button variant="ghost">Hello</Button>)
 
     expect(screen.getByRole('button')).toHaveClass('ghost')
+  })
+
+  it('ref becomes button element', () => {
+    const ref = React.createRef<HTMLButtonElement>()
+    render(
+      <Button variant="primary" ref={ref}>
+        Label
+      </Button>,
+    )
+
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement)
   })
 })

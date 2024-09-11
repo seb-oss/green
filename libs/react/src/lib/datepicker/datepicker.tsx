@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, forwardRef } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
+import type { Ref } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { GdsValidator } from '@sebgroup/green-core/components/form/form-control'
+import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
 
 registerTransitionalStyles()
 
@@ -144,14 +151,15 @@ export const Datepicker = forwardRef(
       }
     }
 
-    const _ref = useRef<GdsDatepicker>(null)
-    const innerRef = ref ?? _ref
+    const _ref = useRef<GdsDatepicker | null>(null)
+
+    useImperativeHandle(ref, () => _ref.current, [_ref])
 
     useEffect(() => {
-      if (innerRef?.current) {
-        innerRef.current.validator = validator
+      if (_ref?.current) {
+        _ref.current.validator = validator
       }
-    }, [validator, innerRef])
+    }, [validator])
 
     return (
       <div className="form-group">
@@ -163,7 +171,7 @@ export const Datepicker = forwardRef(
           showWeekNumbers={showWeeks}
           onchange={onChangeHandler}
           value={value}
-          ref={innerRef}
+          ref={_ref}
           {...props}
         />
       </div>

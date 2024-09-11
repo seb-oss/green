@@ -34,10 +34,14 @@ export interface InputProps
   unit?: string
   /** Validation object */
   validator?: IValidator
-  /** Value of input */
+  /**
+   * Value of input
+   */
   value?: string | number
   /** Function called when input value changes */
   onChangeInput?: (value: string) => string
+  /** Pass an string that is an id to another element describing the input-field*/
+  'aria-describedby'?: string
 }
 
 export const Input = forwardRef(
@@ -63,7 +67,7 @@ export const Input = forwardRef(
       required,
       ...props
     }: InputProps,
-    ref: HTMLInputElement,
+    ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [uuid] = useState(id)
     const [localValue, setLocalValue] = useState(value)

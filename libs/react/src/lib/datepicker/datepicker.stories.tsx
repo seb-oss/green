@@ -90,13 +90,5 @@ export const Validation: Story = {
     testId: 'test',
     ref: React.createRef(),
   },
-  render: (args) => (
-    <Datepicker
-      label={args.label}
-      validator={args.validator}
-      value={args.value}
-      testId={args.testId}
-      ref={args.ref}
-    />
-  ),
+  render: (args) => <Datepicker {...args} />,
 }
