@@ -8,7 +8,7 @@ export const Template = (props) => <Stepper {...props} />
 
 # Stepper
 
-<Story of={StepperStories.Default} />
+<Canvas of={StepperStories.Default} />
 
 A stepper makes it easier to input values that are in a narrow range.
 
@@ -16,9 +16,7 @@ A stepper makes it easier to input values that are in a narrow range.
 
 Create a basic Stepper that can be placed within a form by passing a label. The component has a `form-group` wrapping to simplify form building.
 
-<Canvas>
-  <Story of={StepperStories.BasicStepper} />
-</Canvas>
+<Canvas of={StepperStories.BasicStepper} />
 
 The Stepper currently only works in *controlled* mode, meaning that you app needs to handle all state.
 Here's a basic example:
@@ -41,45 +39,40 @@ return (
 
 By omitting `label`, `description` and `statusMessage` props we don't wrap the component in a `form-group` and you can use it more unrestricted.
 
-<Canvas>
-  <Story of={StepperStories.PrimitiveStepper} />
-</Canvas>
+<Canvas of={StepperStories.PrimitiveStepper} />
 
 We can then custom build our `form-group`as needed.
 
 ***If using the component in this way you have to handle rendering of error messages yourself***.
 
-<Canvas>
-  <div className="form-group">
-    <label htmlFor="multiple-steppers" className="mb-5">
-      How many people will live in your new home?
-    </label>
+<div className="form-group">
+  <label htmlFor="multiple-steppers" className="mb-5">
+    How many people will live in your new home?
+  </label>
 
-    <div id="multiple-steppers" className="horizontal">
+  <div id="multiple-steppers" className="horizontal">
+    <div>
       <div>
-        <div>
-          <div className="form-info">Adults</div>
+        <div className="form-info">Adults</div>
 
-          <Stepper />
-        </div>
+        <Stepper />
       </div>
+    </div>
 
+    <div>
       <div>
-        <div>
-          <div className="form-info">Children under 18</div>
+        <div className="form-info">Children under 18</div>
 
-          <Stepper />
-        </div>
+        <Stepper />
       </div>
     </div>
   </div>
-</Canvas>
+</div>
+
 
 ## Validation
 
-<Canvas>
-  <Story of={StepperStories.StepperValidation} />
-</Canvas>
+<Canvas of={StepperStories.StepperValidation} />
 
 ## Properties
 

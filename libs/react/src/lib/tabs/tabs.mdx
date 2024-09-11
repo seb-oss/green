@@ -2,87 +2,21 @@ import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
 import { Tabs, Tab, Card } from '@sebgroup/green-react'
 import * as TabsStories from './tabs.stories';
 
-export const Template = (children, ...props) => (
-  <Card>
-    <Tabs {...props}>
-      <Tab title={'Page 1'}>Page 1 is simple text</Tab>
-      <Tab title={'Page 2'}>
-        <>
-          <h2>Page 2 is a component</h2>
-          <p>With more comlpex content</p>
-        </>
-      </Tab>
-      <Tab title={'Page 3'}>Page 3 Content</Tab>
-      <Tab title={'Page 4'}>
-        <>Page 4 Content</>
-      </Tab>
-    </Tabs>
-  </Card>
-)
-
 <Meta of={TabsStories} />
-
-<Story of={TabsStories.Default} />
 
 # Tabs
 
 Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
 
-<Canvas>
-  <Tabs>
-    <Tab title={'Page 1'}>
-      <>
-        <p>Tab content will only render when a tab is selected.</p>
-
-        <p>
-          If you need to pre-load data, do it separately outside of the
-          component that is rendered in the tab.
-        </p>
-      </>
-    </Tab>
-
-    <Tab title={'Page 2'}>
-      <>Page 2 is a component</>
-    </Tab>
-
-    <Tab title={'Page 3'}>Page 3 Content</Tab>
-
-    <Tab title={'Page 4'}>
-      <>Page 4 Content</>
-    </Tab>
-  </Tabs>
-</Canvas>
+<Canvas of={TabsStories.Default} />
 
 #### Tab selected by default
 
-<Canvas>
-  <Tabs>
-    <Tab title={'Page 1'}>Page 1 Content</Tab>
-    <Tab title={'Page 2'}>Page 2 Content</Tab>
-    <Tab title={'Page 3'}>Page 3 Content</Tab>
-
-    <Tab title={'Page 4'} selected>
-      Page 4 Content set as selected{' '}
-    </Tab>
-  </Tabs>
-</Canvas>
+<Canvas of={TabsStories.DefaultSelection} />
 
 #### Disabled tabs
 
-<Canvas>
-  <Tabs>
-    <Tab title={'Page 1'}>Page 1 Content</Tab>
-    <Tab title={'Page 2'}>Page 2 Content</Tab>
-
-    <Tab title={'Page 3'} disabled>
-      Page 3 Content
-    </Tab>
-
-    <Tab title={'Page 4'} disabled>
-      Page 4 Content
-    </Tab>
-  </Tabs>
-</Canvas>
+<Canvas of={TabsStories.DisabledTabs} />
 
 <br />
 
@@ -90,18 +24,18 @@ Tabs make it easy to explore and switch between different views or functional as
 
 This interface only supports text content, and will be removed in a future release.
 
-<Canvas>
-  <Tabs
-    list={[
-      { text: 'Page 1', href: '#' },
-      { text: 'Page 2', href: '#', selected: true },
-      { text: 'Page 3', href: '#' },
-      { text: 'Page 4', href: '#' },
-      { text: 'Page 5', href: '#', disabled: true },
-      { text: 'Page 6', href: '#', disabled: true },
-    ]}
-  />
-</Canvas>
+```tsx
+<Tabs
+  list={[
+    { text: 'Page 1', href: '#' },
+    { text: 'Page 2', href: '#', selected: true },
+    { text: 'Page 3', href: '#' },
+    { text: 'Page 4', href: '#' },
+    { text: 'Page 5', href: '#', disabled: true },
+    { text: 'Page 6', href: '#', disabled: true },
+  ]}
+/>
+```
 
 <br />
 

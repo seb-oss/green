@@ -18,126 +18,31 @@ With InPageWizardStepCard it is possible for a user to quickly create wizard ste
 
 ## Default
 
-<Canvas>
-  <Story of={InPageWizardStepCardStories.Default} />
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.Default} />
 
 ## Next button text
 
-<Canvas>
-  <InPageWizardStepCard editBtnText="Edit" nextBtnText="My next button text" stepStatus="IsActive" stepText="Active step text" title="Active step title">
-    Active step content
-  </InPageWizardStepCard>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.NextButtonText} />
 
 ## Next button icon
 
-<Canvas>
-  <InPageWizardStepCard editBtnText="Edit" nextBtnText="Next" nextBtnIcon={<Check />} stepStatus="IsActive" stepText="Active step text" title="Active step title">
-    Active step content
-  </InPageWizardStepCard>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.NextButtonIcon} />
 
 ## Hidden footer
 
-<Canvas>
-  <InPageWizardStepCard editBtnText="Edit" nextBtnText="Next" nextBtnIcon={<Check />} stepStatus="IsActive" stepText="Active step text" title="Active step title" hideFooter={true}>
-    Active step content
-  </InPageWizardStepCard>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.HiddenFooter} />
 
 ## Edit button text
 
-<Canvas>
-  <InPageWizardStepCard editBtnText="Redigera" nextBtnText="Next" stepStatus="IsComplete" stepText="Completed step text" title="Completed step title">
-    Completed step content
-  </InPageWizardStepCard>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.EditText} />
 
 ## Status
 
-<Canvas>
-  <div>
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Nästa" stepStatus="IsComplete" stepText="Step 1 of 3" title="Completed step">
-      Content of Step 1
-    </InPageWizardStepCard>
-
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Next" stepStatus="IsActive" stepText="Step 2 of 3" title="Active step">
-      Content of Step 2
-    </InPageWizardStepCard>
-
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Nästa" stepStatus="NotStarted" stepText="Step 3 of 3" title="Not started step">
-      Content of Step 3
-    </InPageWizardStepCard>
-  </div>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.Status} />
 
 ## Example
 
-<Canvas>
-  <div>
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Nästa" stepStatus="IsComplete" stepText="Step 1 of 3" title="Completed step">
-      <GroupedList>
-        <ListItem
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            border: 'none',
-            padding: '.5rem 1rem',
-          }}
-        >
-          <div>
-            <b style={{ fontWeight: '500' }}>Summary key</b>
-          </div>
-
-          <div>Summary value</div>
-        </ListItem>
-
-        <ListItem
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            border: 'none',
-            padding: '.5rem 1rem',
-          }}
-        >
-          <div>
-            <b style={{ fontWeight: '500' }}>Summary key</b>
-          </div>
-
-          <div>Summary value</div>
-        </ListItem>
-
-        <ListItem
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            border: 'none',
-            padding: '.5rem 1rem',
-          }}
-        >
-          <div>
-            <b style={{ fontWeight: '500' }}>Summary key</b>
-          </div>
-
-          <div>Summary value</div>
-        </ListItem>
-      </GroupedList>
-    </InPageWizardStepCard>
-
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Next" stepStatus="IsActive" stepText="Step 2 of 3" title="Active step">
-      <TextInput label="Input 1" />
-
-      <TextInput label="Input 2" />
-
-      <TextArea label="Text area" />
-    </InPageWizardStepCard>
-
-    <InPageWizardStepCard editBtnText="Edit" nextBtnText="Nästa" stepStatus="NotStarted" stepText="Step 3 of 3" title="Not started step">
-      Content of Step 3
-    </InPageWizardStepCard>
-  </div>
-</Canvas>
+<Canvas of={InPageWizardStepCardStories.Example} />
 
 ## Properties
 

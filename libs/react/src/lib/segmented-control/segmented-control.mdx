@@ -22,21 +22,18 @@ A segmented control is a group of 2-5 buttons that lets the user switch views or
 
 <Meta of={SegmentedControlStories} />
 
-<Canvas>
-  <Story of={SegmentedControlStories.Default} />
-</Canvas>
+<Canvas of={SegmentedControlStories.Default} />
 
 ### Small
 
 There is a small and a medium version which can be configured using the `size` prop.
 
-<Canvas>
-  <SegmentedControl size="small">
-    <Segment value="1">1 month</Segment>
-    <Segment value="2">This year</Segment>
-    <Segment value="3">1 year</Segment>
-  </SegmentedControl>
-</Canvas>
+<SegmentedControl size="small">
+  <Segment value="1">1 month</Segment>
+  <Segment value="2">This year</Segment>
+  <Segment value="3">1 year</Segment>
+</SegmentedControl>
+
 
 ### Segment Size
 
@@ -44,16 +41,14 @@ The size of the segments can be configured using the `segMinWidth` prop. This in
 If you have long segment labels and want to avoid concatenation, you can increase the `segMinWidth` prop.
 But keep in mind that the best practice is to keep the segment labels short.
 
-<Canvas>
-  <SegmentedControl segMinWidth={200}>
-    <Segment value="1">1 month</Segment>
-    <Segment value="2">This year</Segment>
-    <Segment value="3">1 year</Segment>
-    <Segment value="4">3 years</Segment>
-    <Segment value="5">5 years</Segment>
-    <Segment value="6">10 years</Segment>
-  </SegmentedControl>
-</Canvas>
+<SegmentedControl segMinWidth={200}>
+  <Segment value="1">1 month</Segment>
+  <Segment value="2">This year</Segment>
+  <Segment value="3">1 year</Segment>
+  <Segment value="4">3 years</Segment>
+  <Segment value="5">5 years</Segment>
+  <Segment value="6">10 years</Segment>
+</SegmentedControl>
 
 Available `SegmentedControl` component props
 

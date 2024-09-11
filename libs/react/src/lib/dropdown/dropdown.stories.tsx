@@ -1,3 +1,4 @@
+import React from 'react'
 import { Dropdown } from './dropdown'
 
 const Template = ({ align, ...props }) => <Dropdown {...props}></Dropdown>

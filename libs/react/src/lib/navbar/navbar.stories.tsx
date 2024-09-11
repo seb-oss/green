@@ -1,3 +1,4 @@
+import React from 'react'
 import Navbar from './navbar'
 
 const Template = ({ children, ...props }) => (
@@ -15,13 +16,51 @@ export default {
   },
 }
 
-export const Component = {
+export const Transparent = {
   render: Template.bind({}),
-  name: 'Component',
+  name: 'Transparent',
+
+  args: {
+    title: 'Transparent navbar',
+    titleLink: 'http://seb.se',
+    variant: undefined,
+  },
+}
+
+export const Light = {
+  render: Template.bind({}),
+  name: 'Light',
+
+  args: {
+    title: 'Light navbar',
+    titleLink: 'http://seb.se',
+    variant: 'bg-light',
+  },
+}
+
+export const Dark = {
+  render: Template.bind({}),
+  name: 'Dark',
+
+  args: {
+    title: 'Dark navbar',
+    titleLink: 'http://seb.se',
+    variant: 'bg-dark',
+  },
+}
+
+export const Content = {
+  render: Template.bind({}),
+  name: 'Content',
 
   args: {
     title: 'Page heading',
-    titleLink: '',
-    variant: undefined,
+    variant: 'bg-light',
+    children: [
+      <input type="text" placeholder="Input field" />,
+      <button type="button" className="ghost">
+        Search
+      </button>,
+    ],
   },
 }

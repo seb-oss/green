@@ -16,41 +16,21 @@ Simple navbar component.
 
 ### Transparent
 
-<Canvas>
-  <Navbar title="Transparent navbar" />
-</Canvas>
+<Canvas of={NavbarStories.Transparent} />
 
 ### Light
 
-<Canvas>
-  <Navbar title="Light navbar" variant="bg-light" />
-</Canvas>
+<Canvas of={NavbarStories.Light} />
 
 ### Dark
 
-<Canvas>
-  <Navbar title="Dark navbar" variant="bg-dark" />
-</Canvas>
+<Canvas of={NavbarStories.Dark} />
 
 ## Content
 
 ### Light navbar with grid and additional content
 
-<Canvas>
-  <Navbar title="Page heading" variant="bg-light">
-    <input type="text" placeholder="Input field" />
-
-    <button type="button" className="ghost">
-      Search
-    </button>
-  </Navbar>
-</Canvas>
-
-## Component
-
-<Canvas>
-  <Story of={NavbarStories.Component} />
-</Canvas>
+<Canvas of={NavbarStories.Content} />
 
 #### Available props
 

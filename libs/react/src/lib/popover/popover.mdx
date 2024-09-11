@@ -1,8 +1,9 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import { Popover } from './popover'
 import { Button } from '../form'
+import * as PopoverStories from './popover.stories'
 
-<Meta title="Components/Popover" component={Popover} />
+<Meta of={PopoverStories} />
 
 # Popover
 
@@ -24,12 +25,7 @@ return (
 )
 ```
 
-<Canvas>
-  <Popover>
-    <Button slot="trigger">Open popover</Button>
-    <div style={{ padding: '1rem' }}>Content in popover</div>
-  </Popover>
-</Canvas>
+<Canvas of={PopoverStories.Default} />
 
 ## More examples
 
