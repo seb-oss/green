@@ -1,36 +1,6 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import * as CardStories from './card.stories';
 
-export const Template = ({
-  heading,
-  closeButton,
-  body,
-  button,
-  primaryButton,
-  link,
-}) => `
-  <section class="card">
-    ${
-      heading || closeButton
-        ? `<header>
-      <h3>${heading}</h3>
-      ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
-     </header>`
-        : ''
-    }
-    <p>${body}</p>
-    ${
-      button || primaryButton || link
-        ? `<footer>
-      ${link ? `<a href="#">${link}</a>` : ''}
-      ${button ? `<button type="button">${button}</button>` : ''}
-      ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
-     </footer>`
-        : ''
-    }
-  </section>
-`
-
 <Meta of={CardStories} />
 
 # Cards
@@ -55,9 +25,7 @@ The whole card could be linked, otherwise there could be text links or buttons w
 
 To add contrast between its background and the surface it appears on, the cards have a smooth drop shadow.
 
-<Canvas>
-  <Story of={CardStories.Card} />
-</Canvas>
+<Canvas of={CardStories.Card} />
 
 ## Element structure
 
@@ -72,30 +40,19 @@ Content should be placed between optional header and footer.
 **Footer** (optional)<br />
 If the card has actions (like buttons) or contain links, they should be placed inside a `<footer>...</footer>`.
 
-<Canvas>
-  <section class="card">
-    <header>
-      <h3>Heading</h3>
 
-      <button class="close">
-        <i />
-
-        <span class="sr-only">Close</span>
-      </button>
-    </header>
-
-    <p>Card content placed here.</p>
-
-    <footer>
-      <a href="#" class="button link">
-        Link
-      </a>
-
-      <button type="button">Default button</button>
-
-      <button type="button" class="primary">
-        Primary button
-      </button>
-    </footer>
-  </section>
-</Canvas>
+<section class="card">
+  <header>
+    <h3>Heading</h3>
+    <button class="close">
+      <i />
+      <span class="sr-only">Close</span>
+    </button>
+  </header>
+  <p>Card content placed here.</p>
+  <footer>
+    <a href="#" class="button link">Link</a>
+    <button type="button">Default button</button>
+    <button type="button" class="primary">Primary button</button>
+  </footer>
+</section>
