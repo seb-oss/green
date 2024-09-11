@@ -4,13 +4,11 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react'
-import type { Ref } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { GdsValidator } from '@sebgroup/green-core/components/form/form-control'
-import { GdsFormControlElement } from '@sebgroup/green-core/components/form-control'
 
 registerTransitionalStyles()
 
