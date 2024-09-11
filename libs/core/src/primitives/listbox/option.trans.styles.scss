@@ -48,7 +48,7 @@
     align-items: center;
     justify-content: center;
 
-    gds-icon-checkmark {
+    [gds-element='gds-icon-checkmark'] {
       &::part(icon) {
         width: 10px;
         height: 10px;
@@ -58,10 +58,9 @@
     &.checked {
       background-color: var(--gds-comp-checkbox-container-color-selected);
 
-      gds-icon-checkmark {
+      [gds-element='gds-icon-checkmark'] {
         &::part(icon) {
           color: var(--gds-comp-checkbox-border-color-selected, #fff);
-          stroke-width: 4px;
         }
       }
     }

@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.17.0
+
+### Minor Changes
+
+- b5605be: Add brand icons and rename, container and flex improvements
+
+### Patch Changes
+
+- Updated dependencies [b5605be]
+- Updated dependencies [a5e3c8e]
+- Updated dependencies [a5e3c8e]
+  - @sebgroup/green-core@1.41.0
+
 ## 3.16.0
 
 ### Minor Changes

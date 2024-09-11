@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.41.0
+
+### Minor Changes
+
+- b5605be: Add brand icons and rename, container and flex improvements
+
+### Patch Changes
+
+- a5e3c8e: **Dropdown:** Enable overflow scroll in 2023 version
+- a5e3c8e: **Dropdown**: Fix missing checkmark in multi-select
+
 ## 1.40.1
 
 ### Patch Changes

@@ -42,6 +42,7 @@
     "@babel/helper-function-name": "^7.24.7",
     "@babel/helper-hoist-variables": "^7.24.7",
     "@changesets/cli": "^2.27.1",
+    "@figma/code-connect": "^1.1.2",
     "@floating-ui/dom": "^1.6.1",
     "@lit/react": "^1.0.5",
     "@material/material-color-utilities": "^0.2.4",

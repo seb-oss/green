@@ -5,7 +5,7 @@ import {
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
-import CardCSS from './card.style.css'
+import CardCSS from './card.style'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.
@@ -133,6 +133,7 @@ export class GdsCard extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'backdrop-filter',
+    selector: '[backdrop]',
     valueTemplate: (v) => `blur(${v})`,
   })
   filter?: string
@@ -150,16 +151,33 @@ export class GdsCard extends GdsContainer {
    * ```
    *
    * The above example will apply the mask style of `top` with `40%` transparency.
+   * The mask can be applied in different positions like `top`, `bottom`, `left`, `right`.
+   *
+   * It can also be combined with the color like this:
+   * ```html
+   * <gds-container mask="top/l1-background-tertiary/0.4"></gds-container>
+   * ```
    *
    */
+
   @styleExpressionProperty({
-    property: 'mask-image',
-    valueTemplate: (v) =>
-      `linear-gradient(to ${v}, currentColor 40%, transparent)`,
+    valueTemplate: (v) => {
+      const [position, colorName, transparency] = v.split('/')
+      const color = transparency
+        ? `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        : `var(--gds-color-${colorName})`
+      return `mask-image: linear-gradient(to ${position}, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%); background-color: ${color};`
+    },
+    styleTemplate: (_prop, values) => {
+      const [MASK] = values[0].split('/')
+      return `[backdrop] { ${MASK} }`
+    },
   })
   mask?: string
 
   render() {
-    return html`<slot></slot>`
+    return html`${this.mask || this.filter
+        ? html`<div backdrop></div>`
+        : ''}<slot></slot>`
   }
 }
