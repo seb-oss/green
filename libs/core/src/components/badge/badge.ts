@@ -4,7 +4,7 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
-import BadgeCSS from './badge.style.css'
+import BadgeCSS from './badge.style'
 
 /**
  * `gds-badge`
