@@ -12,7 +12,7 @@ import './index.ts'
  * Input fields allow users to enter text into a UI. They typically appear in forms and dialogs.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Input',
+  title: 'Docs/Components/Form/Input',
   component: 'gds-input',
   parameters: {
     layout: 'centered',
@@ -34,9 +34,35 @@ const DefaultParams: Story = {
   },
   args: {
     label: 'Label text',
+    multiline: true,
   },
 }
 
 export const Basic: Story = {
   ...DefaultParams,
+  args: {
+    maxlength: 20,
+  },
+}
+
+export const Simplified: Story = {
+  ...DefaultParams,
+  args: {
+    label: 'Simplified',
+    variant: 'simplified',
+    clearable: true,
+  },
+}
+
+export const ExtendedSupportingText: Story = {
+  ...DefaultParams,
+  render: () => html`
+    <gds-input
+      label="Label text"
+      supporting-text="Supporting text"
+      show-extended-supporting-text
+    >
+      <span slot="message">Extended supporting text</span>
+    </gds-input>
+  `,
 }

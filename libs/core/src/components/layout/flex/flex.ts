@@ -5,7 +5,7 @@ import {
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import FlexCSS from './flex.style.css'
+import FlexCSS from './flex.style'
 import { GdsContainer } from '../container'
 
 /**

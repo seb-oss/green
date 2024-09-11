@@ -326,7 +326,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    */
   async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
-      if (slot.assignedElements().length > 0)
+      if (slot && slot.assignedElements().length > 0)
         return html`
           <gds-button
             size="small"
