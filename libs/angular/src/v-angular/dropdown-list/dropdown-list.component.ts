@@ -14,14 +14,14 @@ import {
   SimpleChanges,
   TemplateRef,
   ViewChildren,
-} from '@angular/core';
+} from '@angular/core'
 
-import { Subject, Subscription } from 'rxjs';
-import scrollIntoView from 'scroll-into-view-if-needed';
+import { Subject, Subscription } from 'rxjs'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { DropdownUtils, Option, OptionBase } from '../core.utils';
+import { DropdownUtils, Option, OptionBase } from '../core.utils'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -29,61 +29,73 @@ import { DropdownUtils, Option, OptionBase } from '../core.utils';
   templateUrl: './dropdown-list.component.html',
   styleUrls: ['./dropdown-list.component.scss'],
 })
-export class DropdownListComponent implements OnInit, OnChanges {
+export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {
-    this.setExpanded(state);
+    this.setExpanded(state)
   }
   get expanded(): boolean {
-    return this._expanded;
+    return this._expanded
   }
-  @Input() state: any;
+  @Input() state: any
 
   /** The additional amount to show when option is scrolled into view. */
-  @Input() scrollOffset = 24;
+  @Input() scrollOffset = 24
 
-  @Input() optionContentTpl: TemplateRef<OptionBase<any>> | undefined;
+  @Input() optionContentTpl: TemplateRef<OptionBase<any>> | undefined
 
   /** @internal List of references to the option elements. */
-  @ViewChildren('optionRefs') optionRefs: QueryList<ElementRef<HTMLLIElement>> | undefined;
+  @ViewChildren('optionRefs') optionRefs:
+    | QueryList<ElementRef<HTMLLIElement>>
+    | undefined
 
   /** Id of the host element and is accessible by the children, automatically generated if not provided. */
-  @HostBinding('attr.id') @Input() id = (window as any).ngv?.nextId();
+  @HostBinding('attr.id') @Input() id = (window as any).ngv?.nextId()
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'dropdown';
+  @HostBinding('attr.data-thook') @Input() thook = 'dropdown'
 
-  @Input() options!: any[];
+  @Input() options!: any[]
 
-  @Input() textToHighlight?: string;
+  @Input() textToHighlight?: string
 
-  @Output() selectedValueChanged = new EventEmitter<any>();
+  @Output() selectedValueChanged = new EventEmitter<any>()
 
-  @Output() closed = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>()
 
   /** The current active option based on numeric index. */
-  public activeIndex = -1;
+  public activeIndex = -1
 
-  scope: string | undefined;
+  scope: string | undefined
 
-  private dropdownUtils: DropdownUtils<string | null, string, any> = new DropdownUtils<string | null, string, any>();
-  private _expanded = false;
-  private closed$ = new Subject<boolean>();
-  public selectedValue?: Option<string, any>;
+  private dropdownUtils: DropdownUtils<string | null, string, any> =
+    new DropdownUtils<string | null, string, any>()
+  private _expanded = false
+  private closed$ = new Subject<boolean>()
+  public selectedValue?: Option<string, any>
 
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
-  protected onClickSubscription: Subscription | undefined;
+  protected onClickSubscription: Subscription | undefined
 
-  constructor(@Optional() @Inject(TRANSLOCO_SCOPE) protected translocoScope: TranslocoScope) {
-    if (this.translocoScope) this.scope = this.translocoScope.toString();
+  constructor(
+    @Optional()
+    @Inject(TRANSLOCO_SCOPE)
+    protected translocoScope: TranslocoScope,
+  ) {
+    if (this.translocoScope) this.scope = this.translocoScope.toString()
   }
 
   ngOnInit(): void {
-    if (this.state) this.activeIndex = this.options.findIndex((option) => option.key === this.state.key);
+    if (this.state)
+      this.activeIndex = this.options.findIndex(
+        (option) => option.key === this.state.key,
+      )
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes.state && !changes.state.firstChange) this.selectedValue = changes.state.currentValue;
-    if (!!changes.options?.currentValue?.length && this.expanded) this.refreshSelectedOption();
+    if (!!changes.state && !changes.state.firstChange)
+      this.selectedValue = changes.state.currentValue
+    if (!!changes.options?.currentValue?.length && this.expanded)
+      this.refreshSelectedOption()
   }
 
   /**
@@ -91,18 +103,18 @@ export class DropdownListComponent implements OnInit, OnChanges {
    * @param option the object to check.
    */
   isGroup(option: any): boolean {
-    return 'options' in option;
+    return 'options' in option
   }
 
   /** @internal */
   updateState(option: any, event: Event) {
-    if (option.disabled) return;
+    if (option.disabled) return
 
-    this.selectedValue = option;
-    this.state = option;
-    this.selectedValueChanged.emit(option);
-    this.setExpanded(false);
-    event.stopPropagation();
+    this.selectedValue = option
+    this.state = option
+    this.selectedValueChanged.emit(option)
+    this.setExpanded(false)
+    event.stopPropagation()
   }
 
   /**
@@ -110,12 +122,12 @@ export class DropdownListComponent implements OnInit, OnChanges {
    */
   setExpanded(expanded = true) {
     // update expanded state
-    this._expanded = expanded;
+    this._expanded = expanded
 
-    if (expanded) this.refreshSelectedOption();
+    if (expanded) this.refreshSelectedOption()
     else {
-      this.closed$.next(true);
-      this.onClickSubscription?.unsubscribe();
+      this.closed$.next(true)
+      this.onClickSubscription?.unsubscribe()
     }
   }
 
@@ -123,10 +135,13 @@ export class DropdownListComponent implements OnInit, OnChanges {
    * @internal
    */
   refreshSelectedOption() {
-    const options = this.dropdownUtils.flattenOptions(this.options, !this.optionContentTpl);
-    this.activeIndex = this.getActiveIndex();
-    this.state = options[this.activeIndex];
-    this.scrollToResult(this.state);
+    const options = this.dropdownUtils.flattenOptions(
+      this.options,
+      !this.optionContentTpl,
+    )
+    this.activeIndex = this.getActiveIndex()
+    this.state = options[this.activeIndex]
+    this.scrollToResult(this.state)
   }
 
   /**
@@ -140,12 +155,15 @@ export class DropdownListComponent implements OnInit, OnChanges {
     if (!!this.selectedValue && this.selectedValue?.key != null) {
       let selectedIndex = this.dropdownUtils
         .flattenOptions(this.options, !this.optionContentTpl)
-        .findIndex((option) => option.key != null && option.key === this.selectedValue?.key);
-      if (selectedIndex > -1) return selectedIndex;
+        .findIndex(
+          (option) =>
+            option.key != null && option.key === this.selectedValue?.key,
+        )
+      if (selectedIndex > -1) return selectedIndex
     }
     return this.dropdownUtils
       .flattenOptions(this.options, !this.optionContentTpl)
-      .findIndex((option) => option.key != null);
+      .findIndex((option) => option.key != null)
   }
 
   /**
@@ -154,7 +172,7 @@ export class DropdownListComponent implements OnInit, OnChanges {
    * @param elem The HTMLElement to evaluate
    * */
   isOverflow(elem: HTMLElement) {
-    return elem.offsetWidth < elem.scrollWidth;
+    return elem.offsetWidth < elem.scrollWidth
   }
 
   /**
@@ -162,7 +180,7 @@ export class DropdownListComponent implements OnInit, OnChanges {
    * @param group the object to typecast.
    */
   castGroup(group: any): any {
-    return group;
+    return group
   }
 
   /**
@@ -176,11 +194,11 @@ export class DropdownListComponent implements OnInit, OnChanges {
       case 'Enter': //  Disable form submission
       case 'ArrowUp': // Disable scrolling up
       case 'ArrowDown': // Disable scrolling down
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
+        event.preventDefault()
+        event.stopPropagation()
+        return false
     }
-    return true;
+    return true
   }
 
   /**
@@ -190,53 +208,56 @@ export class DropdownListComponent implements OnInit, OnChanges {
    */
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    if (!this.expanded) return;
-    const options = this.dropdownUtils.flattenOptions(this.options, !this.optionContentTpl);
-    let option;
+    if (!this.expanded) return
+    const options = this.dropdownUtils.flattenOptions(
+      this.options,
+      !this.optionContentTpl,
+    )
+    let option
 
     switch (event.key) {
       case 'Escape':
-        this.setExpanded(false);
-        this.closed.emit();
-        break;
+        this.setExpanded(false)
+        this.closed.emit()
+        break
       case 'Enter': // Select the currently chosen value
-        option = options[this.activeIndex];
-        this.updateState(option, event);
-        break;
+        option = options[this.activeIndex]
+        this.updateState(option, event)
+        break
 
       case 'Home': // Move to the first option
-        this.activeIndex = 0;
+        this.activeIndex = 0
 
-        option = options[this.activeIndex];
-        this.state = option;
-        this.scrollToResult(option);
-        break;
+        option = options[this.activeIndex]
+        this.state = option
+        this.scrollToResult(option)
+        break
 
       case 'ArrowUp': // Move up one step to the previous option
-        if (this.activeIndex > 0) this.activeIndex--;
-        else if (this.activeIndex === 0) this.activeIndex = options.length - 1;
+        if (this.activeIndex > 0) this.activeIndex--
+        else if (this.activeIndex === 0) this.activeIndex = options.length - 1
 
-        option = options[this.activeIndex];
-        this.state = option;
-        this.scrollToResult(option);
-        break;
+        option = options[this.activeIndex]
+        this.state = option
+        this.scrollToResult(option)
+        break
 
       case 'ArrowDown': // Move down one step to the next option
-        if (options.length > this.activeIndex + 1) this.activeIndex++;
-        else if (this.activeIndex === options.length - 1) this.activeIndex = 0;
+        if (options.length > this.activeIndex + 1) this.activeIndex++
+        else if (this.activeIndex === options.length - 1) this.activeIndex = 0
 
-        option = options[this.activeIndex];
-        this.state = option;
-        this.scrollToResult(option);
-        break;
+        option = options[this.activeIndex]
+        this.state = option
+        this.scrollToResult(option)
+        break
 
       case 'End': // Move to the last options
-        this.activeIndex = options.length - 1;
+        this.activeIndex = options.length - 1
 
-        option = options[this.activeIndex];
-        this.state = option;
-        this.scrollToResult(option);
-        break;
+        option = options[this.activeIndex]
+        this.state = option
+        this.scrollToResult(option)
+        break
     }
   }
 
@@ -245,22 +266,24 @@ export class DropdownListComponent implements OnInit, OnChanges {
    * @param key the result index which to scroll to.
    */
   scrollToResult(option: any) {
-    if (!this.optionRefs || !option) return;
-    const optionRef = this.optionRefs.find((li) => li.nativeElement.id === this.id + '-option-' + option.key);
-    const offset = this.scrollOffset;
+    if (!this.optionRefs || !option) return
+    const optionRef = this.optionRefs.find(
+      (li) => li.nativeElement.id === this.id + '-option-' + option.key,
+    )
+    const offset = this.scrollOffset
     if (optionRef) {
-      let delta = window.scrollY || document.documentElement.scrollTop;
+      let delta = window.scrollY || document.documentElement.scrollTop
 
       // The list seems not to be visible at the time of scrolling, but this setTimeout "hack" makes it work...
       setTimeout(() => {
         scrollIntoView(optionRef.nativeElement, {
           scrollMode: 'if-needed',
           block: 'nearest',
-        });
+        })
 
-        delta -= window.scrollY || document.documentElement.scrollTop;
-        if (delta) window.scrollBy(0, delta > 0 ? -offset : offset);
-      }, 0);
+        delta -= window.scrollY || document.documentElement.scrollTop
+        if (delta) window.scrollBy(0, delta > 0 ? -offset : offset)
+      }, 0)
     }
   }
 }

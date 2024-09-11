@@ -19,7 +19,7 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
 })
-export class TextareaComponent extends BaseControlValueAccessorComponent {
+export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'textarea'
   /** Text shown before input has a written value. */

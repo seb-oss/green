@@ -21,11 +21,11 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
 export class NgvRadioControlRegistry {
   private _radios: any[] = []
 
-  add(control: NgControl, radio: RadioComponent) {
+  add(control: NgControl, radio: NgvRadioComponent) {
     this._radios.push([control, radio])
   }
 
-  remove(radio: RadioComponent) {
+  remove(radio: NgvRadioComponent) {
     for (let i = this._radios.length - 1; i >= 0; --i) {
       if (this._radios[i][1] === radio) {
         this._radios.splice(i, 1)
@@ -34,7 +34,7 @@ export class NgvRadioControlRegistry {
     }
   }
 
-  select(radio: RadioComponent) {
+  select(radio: NgvRadioComponent) {
     this._radios.forEach((controlPair) => {
       if (this._isSameGroup(controlPair, radio) && controlPair[1] !== radio) {
         controlPair[1].writeValue(radio.value)
@@ -43,8 +43,8 @@ export class NgvRadioControlRegistry {
   }
 
   private _isSameGroup(
-    controlPair: [NgControl, RadioComponent],
-    radio: RadioComponent,
+    controlPair: [NgControl, NgvRadioComponent],
+    radio: NgvRadioComponent,
   ) {
     if (!controlPair[0].control) return false
     return (
@@ -61,12 +61,12 @@ export class NgvRadioControlRegistry {
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngg-radio ngv-radio',
+  selector: 'ngv-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   providers: [NgvRadioControlRegistry],
 })
-export class RadioComponent
+export class NgvRadioComponent
   extends BaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {

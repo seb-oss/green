@@ -9,7 +9,7 @@ import {
 } from '@storybook/angular'
 
 import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
-import { ButtonComponent, ButtonStyle } from './button.component'
+import { NgvButtonComponent, ButtonStyle } from './button.component'
 
 interface StoryClickable {
   text: string
@@ -22,7 +22,7 @@ const getButtonText = (type: ButtonStyle): string => {
 
 export default {
   title: 'V-Angular/Button',
-  component: ButtonComponent,
+  component: NgvButtonComponent,
   decorators: [
     applicationConfig({
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
@@ -52,12 +52,12 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<ButtonComponent & StoryClickable> = (
-  args: ButtonComponent & StoryClickable,
+const Template: StoryFn<NgvButtonComponent & StoryClickable> = (
+  args: NgvButtonComponent & StoryClickable,
 ) => ({
   template: /*html*/ `
     <div class="button-wrapper button-wrapper--{{ text }}">
-      <ngg-button
+      <ngv-button
         [small]="small"
         [type]="type || 'button'"
         [href]="href"
@@ -65,7 +65,7 @@ const Template: StoryFn<ButtonComponent & StoryClickable> = (
         [buttonStyle]="buttonStyle"
         (ngvClick)="clickAction(text + ' clicked!')">
         {{ text }}
-      </ngg-button>
+      </ngv-button>
     </div>`,
   styles: [
     `

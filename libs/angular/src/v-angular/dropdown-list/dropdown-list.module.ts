@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { NgvI18nModule } from '../i18n/i18n.module'
-import { NggTooltipModule } from '../tooltip'
+import { NgvTooltipModule } from '../tooltip'
 
-import { DropdownListComponent } from './dropdown-list.component'
+import { NgvDropdownListComponent } from './dropdown-list.component'
 
 @NgModule({
-  declarations: [DropdownListComponent],
-  imports: [CommonModule, NgvI18nModule, NggTooltipModule],
-  exports: [DropdownListComponent],
+  declarations: [NgvDropdownListComponent],
+  imports: [CommonModule, NgvI18nModule, NgvTooltipModule],
+  exports: [NgvDropdownListComponent],
 })
 export class NgvDropdownListModule {}

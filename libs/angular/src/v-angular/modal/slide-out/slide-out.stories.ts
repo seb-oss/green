@@ -10,7 +10,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { SlideOutComponent } from './slide-out.component'
+import { NgvSlideOutComponent } from './slide-out.component'
 
 interface WithExtras {
   action: (val: any) => void
@@ -19,7 +19,7 @@ interface WithExtras {
 
 export default {
   title: 'V-Angular/Slide Out',
-  component: SlideOutComponent,
+  component: NgvSlideOutComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(NgvI18nModule)],
@@ -48,8 +48,8 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<SlideOutComponent & WithExtras> = (
-  args: SlideOutComponent & WithExtras,
+const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (
+  args: NgvSlideOutComponent & WithExtras,
 ) => ({
   template: /* html */ `
   <ngv-slideout-modal #slideOut [initiallyShown]="initiallyShown" [closable]="closable" [content]="content" [title]="title" [buttons]="buttons" [side]="side" [autoWidth]="autoWidth" (ngvCloseEvent)="action($event)">

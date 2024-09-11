@@ -2,12 +2,12 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { NggCoreWrapperModule } from '../../lib/shared'
 
-import { InfoCircleComponent } from './info-circle.component'
+import { NgvInfoCircleComponent } from './info-circle.component'
 
 @NgModule({
-  declarations: [InfoCircleComponent],
+  declarations: [NgvInfoCircleComponent],
   imports: [CommonModule, NggCoreWrapperModule],
-  exports: [InfoCircleComponent],
+  exports: [NgvInfoCircleComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class NggInfoCircleModule {}
+export class NgvInfoCircleModule {}

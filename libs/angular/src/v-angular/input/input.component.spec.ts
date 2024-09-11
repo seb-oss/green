@@ -16,7 +16,7 @@ import { TranslocoModule } from '@ngneat/transloco'
 import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
-import { InputComponent } from './input.component'
+import { NgvInputComponent } from './input.component'
 
 const member = (name: any) => chalk.blueBright(`${name}`)
 const atInput = (name: any) =>
@@ -28,12 +28,12 @@ describe('[NgvCore]', () => {
   // InputComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('InputComponent - constructor()', () => {
-    let component: InputComponent
-    let fixture: ComponentFixture<InputComponent>
+    let component: NgvInputComponent
+    let fixture: ComponentFixture<NgvInputComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [InputComponent, CharacterCountdownDirective],
+        declarations: [NgvInputComponent, CharacterCountdownDirective],
         providers: [
           { provide: NgControl, useValue: { control: new FormControl() } },
         ],
@@ -48,7 +48,7 @@ describe('[NgvCore]', () => {
 
     describe('constructor()', () => {
       it('should create', () => {
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         fixture.detectChanges()
         expect(fixture.componentInstance).toBeTruthy()
       })
@@ -56,7 +56,7 @@ describe('[NgvCore]', () => {
 
     describe('@Input() optional', () => {
       it(`adds optional label if ${primitive(true)}`, () => {
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.optional = true
@@ -71,7 +71,7 @@ describe('[NgvCore]', () => {
       })
 
       it(`adds optional label if ${atInput('required')} is ${primitive(false)}`, () => {
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.required = false
@@ -87,7 +87,7 @@ describe('[NgvCore]', () => {
       it(`adds optional label if ${member('control.required')} is evaluated as ${primitive(false)}`, () => {
         const control = new FormControl(undefined)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.optional = undefined
@@ -102,7 +102,7 @@ describe('[NgvCore]', () => {
       })
 
       it(`hides optional label if ${primitive(false)}`, () => {
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.optional = false
@@ -116,7 +116,7 @@ describe('[NgvCore]', () => {
       })
 
       it(`hides optional label if ${atInput('required')} is ${primitive(true)}`, () => {
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.required = true
@@ -133,7 +133,7 @@ describe('[NgvCore]', () => {
         const control = new FormControl(undefined, Validators.required)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
         component.label = 'Label text'
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
 
@@ -149,7 +149,7 @@ describe('[NgvCore]', () => {
       )} is evaluated as ${primitive(false)}`, () => {
         const control = new FormControl(undefined)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
-        fixture = TestBed.createComponent(InputComponent)
+        fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
         component.optional = false

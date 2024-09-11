@@ -29,11 +29,13 @@ type Position = {
  * https://designlibrary.sebgroup.com/components/component-tooltip
  */
 @Directive({
-  selector: '[nggTooltip]',
+  selector: '[ngvTooltip]',
 })
-export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
+export class NgvTooltipDirective
+  implements AfterViewInit, OnChanges, OnDestroy
+{
   /** The text that will be shown in the tooltip. */
-  @Input() nggTooltip?: string
+  @Input() ngvTooltip?: string
   /** Special property used for selecting DOM elements during automated UI testing. */
   @Input() thook = 'tooltip'
   /** The side of the anchor which the tooltip will be rendered.
@@ -50,9 +52,9 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
   @Input() maxWidth = 343
 
   /** Emits a show event triggered changing visibility state of the tooltip. */
-  @Output() nggShow = new EventEmitter<HTMLElement>()
+  @Output() ngvShow = new EventEmitter<HTMLElement>()
   /** Emits a hide event triggered changing visibility state of the tooltip. */
-  @Output() nggHide = new EventEmitter<HTMLElement>()
+  @Output() ngvHide = new EventEmitter<HTMLElement>()
 
   /** @internal */
   protected timeout = 0
@@ -93,18 +95,18 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      TooltipDirective.shouldUpdate(changes.nggTooltip) ||
-      TooltipDirective.shouldUpdate(changes.placement) ||
-      TooltipDirective.shouldUpdate(changes.thook)
+      NgvTooltipDirective.shouldUpdate(changes.ngvTooltip) ||
+      NgvTooltipDirective.shouldUpdate(changes.placement) ||
+      NgvTooltipDirective.shouldUpdate(changes.thook)
     ) {
       this.shown ? this.show(true) : this.hide(true)
     }
 
-    if (TooltipDirective.shouldUpdate(changes.shown)) {
+    if (NgvTooltipDirective.shouldUpdate(changes.shown)) {
       this.shown ? this.show() : this.hide()
     }
 
-    if (TooltipDirective.shouldUpdate(changes.offset)) {
+    if (NgvTooltipDirective.shouldUpdate(changes.offset)) {
       this.updatePosition()
     }
   }
@@ -141,18 +143,18 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
    */
   show(recreate = false) {
     // Require tooltip text to create
-    if (!this.nggTooltip || this.nggTooltip.length === 0) return
+    if (!this.ngvTooltip || this.ngvTooltip.length === 0) return
 
     if (recreate || !this.tooltipElement) {
       this.hide(true)
-      this.create(this.nggTooltip)
+      this.create(this.ngvTooltip)
     } else {
       this.renderer.appendChild(this.parentElement, this.tooltipElement)
     }
 
     this.updatePosition()
     this.shown = true
-    this.nggShow.emit(this.tooltipElement)
+    this.ngvShow.emit(this.tooltipElement)
   }
 
   /**
@@ -165,7 +167,7 @@ export class TooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
       this.renderer.removeChild(this.parentElement, this.tooltipElement)
     if (destroy) this.destroy()
     this.shown = false
-    this.nggHide.emit(this.tooltipElement)
+    this.ngvHide.emit(this.tooltipElement)
   }
 
   /**

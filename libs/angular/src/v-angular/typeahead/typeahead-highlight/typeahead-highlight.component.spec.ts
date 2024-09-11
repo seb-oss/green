@@ -1,70 +1,72 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TypeaheadHighlightComponent } from './typeahead-highlight.component';
+import { NgvTypeaheadHighlightComponent } from './typeahead-highlight.component'
 
 describe('[NgvCore]', () => {
   // ----------------------------------------------------------------------------
   // TypeaheadHighlightComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('TypeaheadHighlightComponent', () => {
-    let component: TypeaheadHighlightComponent;
-    let fixture: ComponentFixture<TypeaheadHighlightComponent>;
+    let component: NgvTypeaheadHighlightComponent
+    let fixture: ComponentFixture<NgvTypeaheadHighlightComponent>
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [TypeaheadHighlightComponent],
-      });
-      fixture = TestBed.createComponent(TypeaheadHighlightComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+        declarations: [NgvTypeaheadHighlightComponent],
+      })
+      fixture = TestBed.createComponent(NgvTypeaheadHighlightComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+    })
 
     it('should create', () => {
-      expect(component).toBeTruthy();
-    });
+      expect(component).toBeTruthy()
+    })
 
     describe('updateValues', () => {
       it('splits and make text inputs lowercase', () => {
-        const spy = jest.spyOn(component as any, 'getHighlightedPart');
-        component.text = 'opTION';
-        component.input = 'tIO';
-        (component as any).updateValues();
-        const expectedText = ['o', 'p', 't', 'i', 'o', 'n'];
-        const expectedInput = ['t', 'i', 'o'];
-        expect(spy).toHaveBeenCalledWith(expectedText, expectedInput);
-      });
+        const spy = jest.spyOn(component as any, 'getHighlightedPart')
+        component.text = 'opTION'
+        component.input = 'tIO'
+        ;(component as any).updateValues()
+        const expectedText = ['o', 'p', 't', 'i', 'o', 'n']
+        const expectedInput = ['t', 'i', 'o']
+        expect(spy).toHaveBeenCalledWith(expectedText, expectedInput)
+      })
 
       it('resets option if no match is found', () => {
-        jest.spyOn(component as any, 'getHighlightedPart').mockReturnValue({ start: -1, end: -1 });
-        component.text = 'opTION';
-        component.input = 'tIO';
+        jest
+          .spyOn(component as any, 'getHighlightedPart')
+          .mockReturnValue({ start: -1, end: -1 })
+        component.text = 'opTION'
+        component.input = 'tIO'
 
-        component.prefix = 'dummy1';
-        component.match = 'dummy2';
-        component.suffix = 'dummy3';
+        component.prefix = 'dummy1'
+        component.match = 'dummy2'
+        component.suffix = 'dummy3'
 
-        expect(component.prefix).toEqual('dummy1');
-        expect(component.match).toEqual('dummy2');
-        expect(component.suffix).toEqual('dummy3');
+        expect(component.prefix).toEqual('dummy1')
+        expect(component.match).toEqual('dummy2')
+        expect(component.suffix).toEqual('dummy3')
 
-        (component as any).updateValues();
+        ;(component as any).updateValues()
 
-        expect(component.prefix).toEqual('');
-        expect(component.prefix).toEqual('');
-        expect(component.prefix).toEqual('');
-      });
+        expect(component.prefix).toEqual('')
+        expect(component.prefix).toEqual('')
+        expect(component.prefix).toEqual('')
+      })
 
       it('updates variables when a match is found', () => {
-        component.text = 'opTION';
-        component.input = 'tIO';
+        component.text = 'opTION'
+        component.input = 'tIO'
 
-        (component as any).updateValues();
+        ;(component as any).updateValues()
 
-        expect(component.prefix).toEqual('op');
-        expect(component.match).toEqual('TIO');
-        expect(component.suffix).toEqual('N');
-      });
-    });
+        expect(component.prefix).toEqual('op')
+        expect(component.match).toEqual('TIO')
+        expect(component.suffix).toEqual('N')
+      })
+    })
 
     describe('getHighlightedPart', () => {
       it.each`
@@ -78,12 +80,18 @@ describe('[NgvCore]', () => {
         ${'kaka'}           | ${'ka'}     | ${{ start: 0, end: 2 }}
         ${'kakan'}          | ${'kan'}    | ${{ start: 2, end: 5 }}
         ${'kaffe och kaka'} | ${'eo'}     | ${{ start: 4, end: 7 }}
-      `('Without spaces: $text and $input produces: $expected', ({ text, input, expected }) => {
-        const splittedText = text.split('');
-        const splittedInput = input.split('');
-        const res = (component as any).getHighlightedPart(splittedText, splittedInput);
-        expect(res).toEqual(expected);
-      });
+      `(
+        'Without spaces: $text and $input produces: $expected',
+        ({ text, input, expected }) => {
+          const splittedText = text.split('')
+          const splittedInput = input.split('')
+          const res = (component as any).getHighlightedPart(
+            splittedText,
+            splittedInput,
+          )
+          expect(res).toEqual(expected)
+        },
+      )
 
       it.each`
         text                | input        | expected
@@ -98,12 +106,18 @@ describe('[NgvCore]', () => {
         ${'kaffe och kaka'} | ${' och'}    | ${{ start: 5, end: 9 }}
         ${'kaffe och kaka'} | ${'och '}    | ${{ start: 6, end: 10 }}
         ${'kaffe och kaka'} | ${' och '}   | ${{ start: 5, end: 10 }}
-      `('With spaces: $text and $input produces: $expected', ({ text, input, expected }) => {
-        const splittedText = text.split('');
-        const splittedInput = input.split('');
-        const res = (component as any).getHighlightedPart(splittedText, splittedInput);
-        expect(res).toEqual(expected);
-      });
-    });
-  });
-});
+      `(
+        'With spaces: $text and $input produces: $expected',
+        ({ text, input, expected }) => {
+          const splittedText = text.split('')
+          const splittedInput = input.split('')
+          const res = (component as any).getHighlightedPart(
+            splittedText,
+            splittedInput,
+          )
+          expect(res).toEqual(expected)
+        },
+      )
+    })
+  })
+})

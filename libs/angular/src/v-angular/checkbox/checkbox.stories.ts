@@ -17,7 +17,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { CheckboxComponent } from './checkbox.component'
+import { NgvCheckboxComponent } from './checkbox.component'
 
 interface StoryInputListener {
   checked: boolean
@@ -29,7 +29,7 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Checkbox',
-  component: CheckboxComponent,
+  component: NgvCheckboxComponent,
   decorators: [
     // applicationConfig({
     //   providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
@@ -45,8 +45,8 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<CheckboxComponent & StoryInputListener> = (
-  args: CheckboxComponent & StoryInputListener,
+const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+  args: NgvCheckboxComponent & StoryInputListener,
 ) => ({
   template: /*html*/ `
     <ngv-checkbox
@@ -61,8 +61,8 @@ const Template: StoryFn<CheckboxComponent & StoryInputListener> = (
   props: args,
 })
 
-const TemplateAlt: StoryFn<CheckboxComponent & StoryInputListener> = (
-  args: CheckboxComponent & StoryInputListener,
+const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+  args: NgvCheckboxComponent & StoryInputListener,
 ) => ({
   template: /*html*/ `
     <ngv-checkbox
@@ -83,8 +83,8 @@ const TemplateAlt: StoryFn<CheckboxComponent & StoryInputListener> = (
   props: args,
 })
 
-const TemplateWithReactiveForm: StoryFn<CheckboxComponent & any> = (
-  args: CheckboxComponent & any,
+const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
+  args: NgvCheckboxComponent & any,
 ) => {
   const grp = new UntypedFormGroup({
     vanilla: new UntypedFormControl(

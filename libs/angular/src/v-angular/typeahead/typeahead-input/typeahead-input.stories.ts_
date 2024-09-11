@@ -15,16 +15,16 @@ import { NgvInputMaskModule } from '@sebgroup/ngv-input-mask';
 import { TooltipDirective } from '@sebgroup/ngv-tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-import { ButtonComponent } from '../../button/button.component';
+import { NgvButtonComponent } from '../../button/button.component';
 import { CharacterCountdownDirective } from '../../character-countdown/character-countdown.directive';
-import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { NgvCheckboxComponent } from '../../checkbox/checkbox.component';
 import { DropdownUtils } from '../../core.utils';
-import { DropdownListComponent } from '../../dropdown-list/dropdown-list.component';
-import { DropdownComponent } from '../../dropdown/dropdown.component';
+import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.component';
+import { NgvDropdownComponent } from '../../dropdown/dropdown.component';
 import { ExternalLinkDirective } from '../../external-link/external-link.directive';
-import { InfoCircleComponent } from '../../info-circle/info-circle.component';
-import { TypeaheadDirective } from '../typeahead.directive';
-import { TypeaheadInputComponent } from './typeahead-input.component';
+import { NgvInfoCircleComponent } from '../../info-circle/info-circle.component';
+import { NgvTypeaheadDirective } from '../typeahead.directive';
+import { NgvTypeaheadInputComponent } from './typeahead-input.component';
 
 interface WithExtras {
   notice: string;
@@ -68,9 +68,9 @@ function translocoStorybookInitializer(translocoService: TranslocoService) {
   };
 }
 
-const meta: Meta<TypeaheadInputComponent> = {
+const meta: Meta<NgvTypeaheadInputComponent> = {
   title: 'Core/TypeaheadInput',
-  component: TypeaheadInputComponent,
+  component: NgvTypeaheadInputComponent,
   decorators: [
     applicationConfig({
       providers: [
@@ -94,17 +94,17 @@ const meta: Meta<TypeaheadInputComponent> = {
     }),
     moduleMetadata({
       declarations: [
-        ButtonComponent,
-        DropdownComponent,
-        DropdownListComponent,
-        CheckboxComponent,
+        NgvButtonComponent,
+        NgvDropdownComponent,
+        NgvDropdownListComponent,
+        NgvCheckboxComponent,
         TooltipDirective,
-        InfoCircleComponent,
+        NgvInfoCircleComponent,
         CharacterCountdownDirective,
         ExternalLinkDirective,
       ],
       imports: [
-        TypeaheadDirective,
+        NgvTypeaheadDirective,
         CommonModule,
         FontAwesomeModule,
         NgvI18nModule,
@@ -117,12 +117,12 @@ const meta: Meta<TypeaheadInputComponent> = {
 };
 export default meta;
 
-const Template: StoryFn<TypeaheadInputComponent & WithExtras> = (args: TypeaheadInputComponent & WithExtras) => ({
+const Template: StoryFn<NgvTypeaheadInputComponent & WithExtras> = (args: NgvTypeaheadInputComponent & WithExtras) => ({
   props: args,
 });
 
-const TemplateWithFormControl: StoryFn<TypeaheadInputComponent & WithExtras & any> = (
-  args: TypeaheadInputComponent & WithExtras,
+const TemplateWithFormControl: StoryFn<NgvTypeaheadInputComponent & WithExtras & any> = (
+  args: NgvTypeaheadInputComponent & WithExtras,
 ) => {
   const ctrl = new UntypedFormControl(args.ngModel, [Validators.required, Validators.maxLength(12)]);
   ctrl.valueChanges.subscribe((val) => {

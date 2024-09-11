@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { DropdownComponent } from './dropdown.component'
+import { NgvDropdownComponent } from './dropdown.component'
 
 @NgModule({
-  declarations: [DropdownComponent],
+  declarations: [NgvDropdownComponent],
   imports: [CommonModule],
-  exports: [DropdownComponent],
+  exports: [NgvDropdownComponent],
 })
 export class NgvDropdownModule {}

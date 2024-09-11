@@ -5,26 +5,26 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
 import { ExternalLinkDirective } from '../shared/external-link.directive'
-import { BreadcrumbsComponent } from './breadcrumbs.component'
+import { NgvBreadcrumbsComponent } from './breadcrumbs.component'
 
 describe('[NgvCore]', () => {
   // ----------------------------------------------------------------------------
   // BreadcrumbsComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('BreadcrumbsComponent - constructor()', () => {
-    let component: BreadcrumbsComponent
-    let fixture: ComponentFixture<BreadcrumbsComponent>
+    let component: NgvBreadcrumbsComponent
+    let fixture: ComponentFixture<NgvBreadcrumbsComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [BreadcrumbsComponent, ExternalLinkDirective],
+        declarations: [NgvBreadcrumbsComponent, ExternalLinkDirective],
         providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
         imports: [RouterTestingModule],
       }).compileComponents()
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(BreadcrumbsComponent)
+      fixture = TestBed.createComponent(NgvBreadcrumbsComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

@@ -7,11 +7,11 @@ import '@sebgroup/green-core/components/icon/icons/circle-info'
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngg-info-circle',
+  selector: 'ngv-info-circle',
   templateUrl: './info-circle.component.html',
   styleUrls: ['./info-circle.component.scss'],
 })
-export class InfoCircleComponent {
+export class NgvInfoCircleComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'info'
 

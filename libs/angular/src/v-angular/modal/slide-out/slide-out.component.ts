@@ -35,7 +35,7 @@ import { DialogButtons } from '../modal.types'
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  selector: 'ngv-slideout-modal, ngg-slideout-modal',
+  selector: 'ngv-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],
   animations: [
@@ -92,7 +92,7 @@ import { DialogButtons } from '../modal.types'
     ]),
   ],
 })
-export class SlideOutComponent implements OnInit {
+export class NgvSlideOutComponent implements OnInit {
   /** @internal */
   @ViewChild('slideOut') slideOutRef: ElementRef | undefined
 

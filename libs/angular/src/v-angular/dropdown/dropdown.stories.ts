@@ -8,7 +8,7 @@ import {
 
 import { debounceTime, map, Observable } from 'rxjs'
 import { NgvI18nModule } from '../i18n/i18n.module'
-import { TooltipDirective } from '../tooltip/tooltip.directive'
+import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
 import {
   applicationConfig,
   Meta,
@@ -19,12 +19,12 @@ import {
 
 import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core.utils'
-import { DropdownListComponent } from '../dropdown-list/dropdown-list.component'
-import { InputComponent } from '../input/input.component'
-import { TypeaheadHighlightComponent } from '../typeahead/typeahead-highlight/typeahead-highlight.component'
-import { TypeaheadInputComponent } from '../typeahead/typeahead-input/typeahead-input.component'
-import { TypeaheadDirective } from '../typeahead/typeahead.directive'
-import { DropdownComponent } from './dropdown.component'
+import { NgvDropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { NgvInputComponent } from '../input/input.component'
+import { NgvTypeaheadHighlightComponent } from '../typeahead/typeahead-highlight/typeahead-highlight.component'
+import { NgvTypeaheadInputComponent } from '../typeahead/typeahead-input/typeahead-input.component'
+import { NgvTypeaheadDirective } from '../typeahead/typeahead.directive'
+import { NgvDropdownComponent } from './dropdown.component'
 
 interface WithExtras {
   ngModel: string
@@ -40,18 +40,18 @@ interface ExtendedOption<K, V> extends Option<K, V> {
 
 export default {
   title: 'V-Angular/Dropdown',
-  component: DropdownComponent,
+  component: NgvDropdownComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(NgvI18nModule), DropdownUtils],
     }),
     moduleMetadata({
       declarations: [
-        DropdownListComponent,
-        InputComponent,
-        TypeaheadInputComponent,
-        TypeaheadHighlightComponent,
-        TooltipDirective,
+        NgvDropdownListComponent,
+        NgvInputComponent,
+        NgvTypeaheadInputComponent,
+        NgvTypeaheadHighlightComponent,
+        NgvTooltipDirective,
         CharacterCountdownDirective,
       ],
       imports: [
@@ -59,7 +59,7 @@ export default {
         FormsModule,
         ReactiveFormsModule,
         NgvI18nModule,
-        TypeaheadDirective,
+        NgvTypeaheadDirective,
       ],
     }),
   ],
@@ -86,7 +86,7 @@ const options = [
   },
 ]
 
-type StoryArgs = DropdownComponent<
+type StoryArgs = NgvDropdownComponent<
   string,
   string | null,
   ExtendedOption<string, string | null>
@@ -103,7 +103,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
       <div style="width: 264px">
-        <ngg-dropdown
+        <ngv-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [description]="description | transloco"
@@ -120,7 +120,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngg-dropdown>
+        </ngv-dropdown>
 
         <div style="margin-top: 1rem">
           <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -139,7 +139,7 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
   <div style="width: 264px">
-    <ngg-dropdown
+    <ngv-dropdown
       [label]="label"
       [placeholder]="placeholder"
       [options]="options"
@@ -154,7 +154,7 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
 
       <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-    </ngg-dropdown>
+    </ngv-dropdown>
   </div>`,
     props: { ...args, formControl },
   }
@@ -185,7 +185,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           <button class="sdv-button sdv-button-alternative" (click)="resetFunc()">Reset to default</button>
         </div>
         <div>Value: {{ formControl.value }}</div>
-        <ngg-dropdown
+        <ngv-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [options]="options"
@@ -197,7 +197,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngg-dropdown>
+        </ngv-dropdown>
       </div>`,
     props: {
       ...args,
@@ -250,7 +250,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   }
   return {
     template: /*html*/ `
-      <ngg-dropdown
+      <ngv-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -284,7 +284,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           </div>
         </ng-template>
         
-      </ngg-dropdown>
+      </ngv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
@@ -409,7 +409,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     Filter: {{ getFilterPhrase() }}
-      <ngg-dropdown
+      <ngv-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -460,7 +460,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
           </div>
         </ng-template>
         
-      </ngg-dropdown>
+      </ngv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
@@ -537,7 +537,7 @@ const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
       <div style="display: flex">
-        <ngg-dropdown
+        <ngv-dropdown
           label="Dropdown"
           [placeholder]="placeholder"
           [options]="options"
@@ -546,7 +546,7 @@ const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
           error="This is a permanent error"
           style="width: 264px"
           [formControl]="formControl">
-        </ngg-dropdown>
+        </ngv-dropdown>
         <ngv-input
           label="Input"
           [placeholder]="placeholder"
@@ -639,7 +639,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     <div style="width: 264px; display:">
-        <ngg-dropdown
+        <ngv-dropdown
           [label]="label"
           [formControl]="formControl"
           [placeholder]="placeholder"
@@ -658,7 +658,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
 
           <ng-template #labelTpl>Custom Label</ng-template>
 
-        </ngg-dropdown>
+        </ngv-dropdown>
       </div>`,
     /*css*/
     styles: [``],

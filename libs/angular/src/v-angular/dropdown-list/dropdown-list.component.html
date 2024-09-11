@@ -55,7 +55,7 @@
         option.key === selectedValue?.key && !!selectedValue?.key
       "
       [attr.aria-focus]="option.key === state?.key && !option.disabled"
-      [nggTooltip]="isOverflow(liElem) ? t(option.label) : undefined"
+      [ngvTooltip]="isOverflow(liElem) ? t(option.label) : undefined"
       (click)="updateState(option, $event)"
     >
       <ng-template
@@ -66,7 +66,7 @@
       >
       </ng-template>
     </li>
-    <!-- Checking overflow on custom templates do not work skip adding nggToolTip if custom template is provided -->
+    <!-- Checking overflow on custom templates do not work skip adding ngvToolTip if custom template is provided -->
     <li
       #optionRefs
       *ngIf="!!optionContentTpl"

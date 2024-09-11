@@ -7,7 +7,7 @@ import {
 } from '@angular/forms'
 
 import { NgvI18nModule } from '../i18n/i18n.module'
-import { TooltipDirective } from '../tooltip/tooltip.directive'
+import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
 import {
   applicationConfig,
   Meta,
@@ -15,8 +15,8 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { InputComponent } from '../input/input.component'
-import { DropdownListComponent } from './dropdown-list.component'
+import { NgvInputComponent } from '../input/input.component'
+import { NgvDropdownListComponent } from './dropdown-list.component'
 
 interface WithExtras {
   ngModel: string
@@ -29,13 +29,13 @@ interface WithExtras {
 
 export default {
   title: 'V-Angular/DropdownList',
-  component: DropdownListComponent,
+  component: NgvDropdownListComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      declarations: [InputComponent, TooltipDirective],
+      declarations: [NgvInputComponent, NgvTooltipDirective],
       imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
     }),
   ],
@@ -62,7 +62,7 @@ const options = [
   },
 ]
 
-type StoryArgs = DropdownListComponent & WithExtras
+type StoryArgs = NgvDropdownListComponent & WithExtras
 
 const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
   let expanded = false
@@ -76,11 +76,11 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
     template: /*html*/ `
       <div style="width: 264px;position: relative;">
   
-        <ngg-input
+        <ngv-input
           name="test"
           [formControl]="formControl"
           (click)="$event.stopPropagation();expanded = !expanded">
-        </ngg-input>
+        </ngv-input>
   
         <ngv-dropdown-list
         style="width: 264px"

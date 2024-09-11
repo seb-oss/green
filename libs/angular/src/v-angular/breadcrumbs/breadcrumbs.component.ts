@@ -11,11 +11,11 @@ type Breadcrumb = {
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngg-breadcrumbs ngv-breadcrumbs',
+  selector: 'ngv-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
 })
-export class BreadcrumbsComponent {
+export class NgvBreadcrumbsComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'breadcrumbs'
 

@@ -30,11 +30,11 @@ import { DropdownUtils, Option, OptionBase, OptionGroup } from '../core.utils'
  * https://designlibrary.sebgroup.com/components/component-dropdown
  */
 @Component({
-  selector: 'ngg-dropdown',
+  selector: 'ngv-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent<
+export class NgvDropdownComponent<
     K = string | null | undefined,
     V = string | null | undefined,
     T extends Option<K, V> = Option<K, V>,

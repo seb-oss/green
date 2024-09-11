@@ -1,37 +1,44 @@
-import { Directive } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Directive } from '@angular/core'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NgvI18nModule } from '@sebgroup/ngv-i18n';
+import { NgvI18nModule } from '@sebgroup/ngv-i18n'
 
-import { DropdownListComponent } from './dropdown-list.component';
+import { NgvDropdownListComponent } from './dropdown-list.component'
 
 @Directive({
   selector: '[ngvTooltip]',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['ngvTooltip', 'thook', 'placement', 'shown', 'offset', 'resizeThrottle'],
+  inputs: [
+    'ngvTooltip',
+    'thook',
+    'placement',
+    'shown',
+    'offset',
+    'resizeThrottle',
+  ],
 })
 class TooltipStubDirective {}
 
 describe('DropdownListComponent', () => {
-  let component: DropdownListComponent;
-  let fixture: ComponentFixture<DropdownListComponent>;
+  let component: NgvDropdownListComponent
+  let fixture: ComponentFixture<NgvDropdownListComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DropdownListComponent, TooltipStubDirective],
+      declarations: [NgvDropdownListComponent, TooltipStubDirective],
       imports: [NgvI18nModule],
-    }).compileComponents();
-  });
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DropdownListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(NgvDropdownListComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
   describe('getActiveIndex', () => {
     const optionsWithNullish = [
@@ -39,12 +46,12 @@ describe('DropdownListComponent', () => {
       { key: 'key1', label: 'la1' },
       { key: 'key2', label: 'la2' },
       { key: 'key3', label: 'la3' },
-    ];
+    ]
     const optionsWithoutNullish = [
       { key: 'key1', label: 'la1' },
       { key: 'key2', label: 'la2' },
       { key: 'key3', label: 'la3' },
-    ];
+    ]
     it.each`
       selected                    | options                                                         | expectedIndex
       ${undefined}                | ${optionsWithNullish}                                           | ${1}
@@ -73,11 +80,14 @@ describe('DropdownListComponent', () => {
       ${{ key: 'key1' }}          | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
       ${{ key: 'notExisting!!' }} | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
       ${{ key: 'notExisting!!' }} | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
-    `('$selected and $options returns index: $expectedIndex', ({ selected, options, expectedIndex }) => {
-      component.options = options;
-      component.selectedValue = selected;
-      const expected = component.getActiveIndex();
-      expect(expected).toEqual(expectedIndex);
-    });
-  });
-});
+    `(
+      '$selected and $options returns index: $expectedIndex',
+      ({ selected, options, expectedIndex }) => {
+        component.options = options
+        component.selectedValue = selected
+        const expected = component.getActiveIndex()
+        expect(expected).toEqual(expectedIndex)
+      },
+    )
+  })
+})

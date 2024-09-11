@@ -10,11 +10,11 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { DialogComponent } from './dialog.component'
+import { NgvDialogComponent } from './dialog.component'
 
 export default {
   title: 'V-Angular/Dialog',
-  component: DialogComponent,
+  component: NgvDialogComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(NgvI18nModule)],
@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const Template: StoryFn<NgvDialogComponent> = (args: NgvDialogComponent) => ({
   props: args,
 })
 

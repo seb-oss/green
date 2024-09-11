@@ -14,8 +14,8 @@ import { fromEvent, Subject, takeUntil } from 'rxjs'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
 import { OptionBase } from '../../core.utils'
-import { DropdownListComponent } from '../../dropdown-list/dropdown-list.component'
-import { InputComponent } from '../../input/input.component'
+import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.component'
+import { NgvInputComponent } from '../../input/input.component'
 
 // Use dropdownList template and combine stylesheets
 @Component({
@@ -27,11 +27,11 @@ import { InputComponent } from '../../input/input.component'
     './../../../v-angular/dropdown-list/dropdown-list.component.scss',
   ],
 })
-export class TypeaheadDropdownListComponent
-  extends DropdownListComponent
+export class NgvTypeaheadDropdownListComponent
+  extends NgvDropdownListComponent
   implements OnInit, OnDestroy
 {
-  @Input() hostComponent!: InputComponent
+  @Input() hostComponent!: NgvInputComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
   @Input() resultFormatter?: (option: OptionBase<any>) => string

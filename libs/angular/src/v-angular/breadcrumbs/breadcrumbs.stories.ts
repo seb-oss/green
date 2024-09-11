@@ -9,11 +9,11 @@ import {
 } from '@storybook/angular'
 
 import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
-import { BreadcrumbsComponent } from './breadcrumbs.component'
+import { NgvBreadcrumbsComponent } from './breadcrumbs.component'
 
 export default {
   title: 'V-Angular/Breadcrumbs',
-  component: BreadcrumbsComponent,
+  component: NgvBreadcrumbsComponent,
   decorators: [
     applicationConfig({
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
@@ -25,8 +25,8 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<BreadcrumbsComponent> = (
-  args: BreadcrumbsComponent,
+const Template: StoryFn<NgvBreadcrumbsComponent> = (
+  args: NgvBreadcrumbsComponent,
 ) => ({
   template: /*html*/ `<ngv-breadcrumbs [breadcrumbs]="breadcrumbs"></ngv-breadcrumbs>`,
   props: args,

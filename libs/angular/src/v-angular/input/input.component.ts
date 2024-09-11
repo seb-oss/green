@@ -27,11 +27,11 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngg-input',
+  selector: 'ngv-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent
+export class NgvInputComponent
   extends BaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {

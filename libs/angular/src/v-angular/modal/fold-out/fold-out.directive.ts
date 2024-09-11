@@ -1,8 +1,8 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core'
 
 @Directive({
   selector: '[ngvOption]',
 })
-export class FoldOutOptionDirective {
-  @HostBinding('class.sdv-field-dropdown__options__label') baseClass = true;
+export class NgvFoldOutOptionDirective {
+  @HostBinding('class.sdv-field-dropdown__options__label') baseClass = true
 }

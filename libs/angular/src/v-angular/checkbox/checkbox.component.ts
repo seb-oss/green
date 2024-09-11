@@ -19,11 +19,11 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngg-checkbox ngv-checkbox',
+  selector: 'ngv-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent extends BaseControlValueAccessorComponent {
+export class NgvCheckboxComponent extends BaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'checkbox'
   @Input() optionalLabel = 'Optional'

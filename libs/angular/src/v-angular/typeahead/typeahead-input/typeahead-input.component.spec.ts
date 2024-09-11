@@ -12,8 +12,8 @@ import { TranslocoModule } from '@ngneat/transloco'
 import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
 
 import { DropdownComponent } from '../../../lib/dropdown/dropdown.component'
-import { InputComponent } from '../../input/input.component'
-import { TypeaheadInputComponent } from './typeahead-input.component'
+import { NgvInputComponent } from '../../input/input.component'
+import { NgvTypeaheadInputComponent } from './typeahead-input.component'
 
 @Component({
   template: '',
@@ -39,19 +39,19 @@ describe('[NgvCore]', () => {
   // TypeaheadInput - constructor()
   // ----------------------------------------------------------------------------
   describe('TypeaheadInputComponent - constructor()', () => {
-    let component: TypeaheadInputComponent
-    let fixture: ComponentFixture<TypeaheadInputComponent>
+    let component: NgvTypeaheadInputComponent
+    let fixture: ComponentFixture<NgvTypeaheadInputComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [
-          TypeaheadInputComponent,
+          NgvTypeaheadInputComponent,
           DropdownStubComponent,
-          InputComponent,
+          NgvInputComponent,
         ],
         imports: [CommonModule, TranslocoModule, NgvI18nTestModule],
       })
-      fixture = TestBed.createComponent(TypeaheadInputComponent)
+      fixture = TestBed.createComponent(NgvTypeaheadInputComponent)
       component = fixture.componentInstance
       component.hostComponent = new DropdownStubComponent() as DropdownComponent
     }))

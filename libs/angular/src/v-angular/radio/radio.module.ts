@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { RadioComponent } from './radio.component'
+import { NgvRadioComponent } from './radio.component'
 
 @NgModule({
-  declarations: [RadioComponent],
+  declarations: [NgvRadioComponent],
   imports: [CommonModule],
-  exports: [RadioComponent],
+  exports: [NgvRadioComponent],
 })
-export class NggRadioModule {}
+export class NgvRadioModule {}

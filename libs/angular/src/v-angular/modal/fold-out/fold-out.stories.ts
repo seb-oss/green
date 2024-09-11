@@ -3,16 +3,16 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NggCoreWrapperModule } from '../../../lib/shared'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
-import { FoldOutComponent } from './fold-out.component'
-import { FoldOutOptionDirective } from './fold-out.directive'
+import { NgvFoldOutComponent } from './fold-out.component'
+import { NgvFoldOutOptionDirective } from './fold-out.directive'
 import { exampleAlt, examplePrimary } from './fold-out.examples'
 
 export default {
   title: 'V-Angular/Fold Out',
-  component: FoldOutComponent,
+  component: NgvFoldOutComponent,
   decorators: [
     moduleMetadata({
-      declarations: [FoldOutOptionDirective],
+      declarations: [NgvFoldOutOptionDirective],
       imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
@@ -27,7 +27,7 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
+const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
   template: /* html */ `
   <div class="story-wrapper">
     <ngv-fold-out [alignOptions]="alignOptions">
@@ -40,7 +40,9 @@ const Template: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
   props: args,
 })
 
-const TemplateAlt: StoryFn<FoldOutComponent> = (args: FoldOutComponent) => ({
+const TemplateAlt: StoryFn<NgvFoldOutComponent> = (
+  args: NgvFoldOutComponent,
+) => ({
   template: /* html */ `
     <div class="story-wrapper--right-align">
       <ngv-fold-out [alignOptions]="alignOptions">

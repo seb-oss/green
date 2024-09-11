@@ -1,37 +1,40 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import {
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n';
+import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
 
-import '../core.globals';
-import { RadioComponent } from './radio.component';
+import '../core.globals'
+import { NgvRadioComponent } from './radio.component'
 
 describe('[NgvCore]', () => {
   // ----------------------------------------------------------------------------
   // RadioComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('RadioComponent - constructor()', () => {
-    let component: RadioComponent;
-    let fixture: ComponentFixture<RadioComponent>;
+    let component: NgvRadioComponent
+    let fixture: ComponentFixture<NgvRadioComponent>
 
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [RadioComponent],
-          providers: [{ provide: NgControl, useValue: new FormControl() }],
-          imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
-        }).compileComponents();
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NgvRadioComponent],
+        providers: [{ provide: NgControl, useValue: new FormControl() }],
+        imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
+      }).compileComponents()
+    }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(RadioComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
+      fixture = TestBed.createComponent(NgvRadioComponent)
+      component = fixture.componentInstance
+      fixture.detectChanges()
+    })
 
     it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-  });
-});
+      expect(component).toBeTruthy()
+    })
+  })
+})

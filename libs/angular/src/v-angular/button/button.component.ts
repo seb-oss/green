@@ -35,11 +35,11 @@ export enum ButtonStyle {
  * https://designlibrary.sebgroup.com/components/component-button
  */
 @Component({
-  selector: 'ngg-button',
+  selector: 'ngv-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent
+export class NgvButtonComponent
   extends BaseControlValueAccessorComponent
   implements OnInit, OnChanges
 {
@@ -91,7 +91,7 @@ export class ButtonComponent
   ngOnInit() {
     super.ngOnInit()
     if (this.href) this.external = /^\w+:\/\/.+$/.test(this.href)
-    this.buttonClasses = ButtonComponent.buttonStyleClasses(
+    this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
       this.buttonStyle,
       this.small,
     )
@@ -99,7 +99,7 @@ export class ButtonComponent
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.buttonStyle || changes.small) {
-      this.buttonClasses = ButtonComponent.buttonStyleClasses(
+      this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
         this.buttonStyle,
         this.small,
       )

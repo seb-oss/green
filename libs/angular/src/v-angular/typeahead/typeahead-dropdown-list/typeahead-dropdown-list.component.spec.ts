@@ -1,12 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TranslocoModule } from '@ngneat/transloco';
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n';
+import { TranslocoModule } from '@ngneat/transloco'
+import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
 
-import { InputComponent } from '../../input/input.component';
-import { TypeaheadDropdownListComponent } from './typeahead-dropdown-list.component';
+import { NgvInputComponent } from '../../input/input.component'
+import { NgvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.component'
 
 @Component({
   template: ` <ng-container>
@@ -17,9 +23,9 @@ import { TypeaheadDropdownListComponent } from './typeahead-dropdown-list.compon
   outputs: ['ngvFocus'],
 })
 export class InputStubComponent {
-  @Output() ngvFocus: EventEmitter<boolean> = new EventEmitter();
-  @Output() ngvInput: EventEmitter<string> = new EventEmitter();
-  @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef;
+  @Output() ngvFocus: EventEmitter<boolean> = new EventEmitter()
+  @Output() ngvInput: EventEmitter<string> = new EventEmitter()
+  @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef
 
   constructor() {}
 }
@@ -29,46 +35,49 @@ describe('[NgvCore]', () => {
   // TypeaheadDropdownList - constructor()
   // ----------------------------------------------------------------------------
   describe('TypeaheadDropdownListComponent', () => {
-    let component: TypeaheadDropdownListComponent;
-    let fixture: ComponentFixture<TypeaheadDropdownListComponent>;
+    let component: NgvTypeaheadDropdownListComponent
+    let fixture: ComponentFixture<NgvTypeaheadDropdownListComponent>
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        declarations: [TypeaheadDropdownListComponent, InputStubComponent],
+        declarations: [NgvTypeaheadDropdownListComponent, InputStubComponent],
         imports: [CommonModule, TranslocoModule, NgvI18nTestModule],
-      });
-      fixture = TestBed.createComponent(TypeaheadDropdownListComponent);
-      await fixture.whenStable();
-      component = fixture.componentInstance;
-      component.hostComponent = new InputStubComponent() as InputComponent;
-    });
+      })
+      fixture = TestBed.createComponent(NgvTypeaheadDropdownListComponent)
+      await fixture.whenStable()
+      component = fixture.componentInstance
+      component.hostComponent = new InputStubComponent() as NgvInputComponent
+    })
 
     it('should create', () => {
-      fixture.detectChanges();
-      expect(component).toBeTruthy();
-    });
+      fixture.detectChanges()
+      expect(component).toBeTruthy()
+    })
 
     describe('handleFocusChanges', () => {
       it('emits empty string if no state exists', () => {
-        component.state = undefined;
-        const spy = jest.spyOn(component.hostComponent.ngvInput, 'emit');
-        fixture.detectChanges();
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' });
-        expect(spy).toHaveBeenCalledWith('');
-      });
+        component.state = undefined
+        const spy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        fixture.detectChanges()
+        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        expect(spy).toHaveBeenCalledWith('')
+      })
 
       it('does not emits if no state exists and set expanded', () => {
-        component.state = { key: '111', label: 'label123' };
-        const emitSpy = jest.spyOn(component.hostComponent.ngvInput, 'emit');
-        const expandedSpy = jest.spyOn(component, 'setExpanded');
-        const outisdeSpy = jest.spyOn(component as any, 'subscribeToOutsideClickEvent');
-        fixture.detectChanges();
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' });
-        expect(emitSpy).not.toHaveBeenCalled();
-        expect(expandedSpy).toHaveBeenCalledWith(true);
-        expect(outisdeSpy).toHaveBeenCalled();
-      });
-    });
+        component.state = { key: '111', label: 'label123' }
+        const emitSpy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        const expandedSpy = jest.spyOn(component, 'setExpanded')
+        const outisdeSpy = jest.spyOn(
+          component as any,
+          'subscribeToOutsideClickEvent',
+        )
+        fixture.detectChanges()
+        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        expect(emitSpy).not.toHaveBeenCalled()
+        expect(expandedSpy).toHaveBeenCalledWith(true)
+        expect(outisdeSpy).toHaveBeenCalled()
+      })
+    })
 
     describe('formatSelected', () => {
       it.each`
@@ -80,21 +89,28 @@ describe('[NgvCore]', () => {
         ${{ key: 0, label: 'Real string' }}          | ${'Real string'}
         ${{ key: '', label: 'Real string' }}         | ${'Real string'}
         ${{ key: 'real key', label: 'Real string' }} | ${'Real string'}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const res = (component as any).formatSelected(value);
-        expect(res).toStrictEqual(expectedValue);
-      });
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
 
       it.each`
         value                                                 | expectedValue
         ${{ key: 'real key', label: 'Real string' }}          | ${'REAL STRING'}
         ${{ key: 'real key', wrongLabelProp: 'Real string' }} | ${''}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const formatterFunc = (v: { key: any; label: string }) => v.label?.toUpperCase();
-        component.selectedFormatter = formatterFunc;
-        const res = (component as any).formatSelected(value);
-        expect(res).toStrictEqual(expectedValue);
-      });
-    });
-  });
-});
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const formatterFunc = (v: { key: any; label: string }) =>
+            v.label?.toUpperCase()
+          component.selectedFormatter = formatterFunc
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
+    })
+  })
+})

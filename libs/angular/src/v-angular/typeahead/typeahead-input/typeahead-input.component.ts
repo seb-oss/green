@@ -18,20 +18,20 @@ import { takeUntil } from 'rxjs'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
 import { OptionBase } from '../../core.utils'
-import { DropdownComponent } from '../../dropdown/dropdown.component'
-import { InputComponent } from '../../input/input.component'
+import { NgvDropdownComponent } from '../../dropdown/dropdown.component'
+import { NgvInputComponent } from '../../input/input.component'
 
 @Component({
   selector: 'ngv-typeahead-input',
   templateUrl: './typeahead-input.component.html',
   styleUrls: ['./typeahead-input.component.scss'],
 })
-export class TypeaheadInputComponent
-  extends InputComponent
+export class NgvTypeaheadInputComponent
+  extends NgvInputComponent
   implements OnInit, OnDestroy
 {
   /** Reference to the host dropdown */
-  @Input() hostComponent!: DropdownComponent
+  @Input() hostComponent!: NgvDropdownComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
   @Input() resultFormatter?: (option: OptionBase<any>) => string

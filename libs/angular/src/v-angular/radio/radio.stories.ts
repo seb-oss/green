@@ -10,7 +10,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { RadioComponent } from './radio.component'
+import { NgvRadioComponent } from './radio.component'
 
 interface StoryInputListener {
   selected: string
@@ -19,7 +19,7 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Radio',
-  component: RadioComponent,
+  component: NgvRadioComponent,
 
   decorators: [
     // applicationConfig({
@@ -33,10 +33,10 @@ export default {
       ],
     }),
   ],
-} as Meta<RadioComponent>
+} as Meta<NgvRadioComponent>
 
-const Template: StoryFn<RadioComponent & StoryInputListener> = (
-  args: RadioComponent & StoryInputListener,
+const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
+  args: NgvRadioComponent & StoryInputListener,
 ) => ({
   template: /*html*/ `
     <ngv-radio
@@ -66,8 +66,8 @@ const Template: StoryFn<RadioComponent & StoryInputListener> = (
   },
 })
 
-const TemplateWithFormControl: StoryFn<RadioComponent & any> = (
-  args: RadioComponent & any,
+const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
+  args: NgvRadioComponent & any,
 ) => {
   const ctrl = new FormControl(args.selected)
   ctrl.valueChanges.subscribe(console.log)
