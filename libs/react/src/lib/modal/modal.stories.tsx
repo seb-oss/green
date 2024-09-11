@@ -16,7 +16,7 @@ const Template: Story<ModalProps> = (props) => {
   }
 
   return (
-    <div>
+    <div style={{ overflow: 'auto', height: '100vh' }}>
       {!isOpen && (
         <button className="button" onClick={openModal}>
           open modal
