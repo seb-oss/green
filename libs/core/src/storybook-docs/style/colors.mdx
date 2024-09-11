@@ -1,0 +1,103 @@
+import { Meta, Markdown } from '@storybook/addon-docs';
+import colors from '../../../../tokens/src/tokens/color-v2/color.json';
+import '../../components/layout/container/container'
+import '../../components/layout/grid/grid'
+import '../../components/layout/card/card'
+import '../../components/layout/flex/flex'
+import '../../components/content/text/text'
+import '../../components/theme/theme'
+import '../../components/icon/icons/moon'
+import '../../components/icon/icons/sun'
+
+<Meta title="Docs/Style/Colors" />
+
+# Colors 
+<gds-flex direction="column" gap="2xl">
+  {Object.entries(colors.sys.color).map(([level, categories]) => ( 
+      <gds-flex direction="column" gap="2xl">
+        <gds-flex gap="s" direction="column">
+          <gds-text tag="h3" transform="uppercase">{level}</gds-text>
+            {Object.entries(categories).map(([category, items]) => (
+                <gds-flex gap="s" direction="column">
+                    <gds-text tag="h6" transform="capitalize" color="l1-content-primary/0.4">{category}</gds-text>
+                    <gds-flex direction="row" gap="s">
+                      {! `<gds-flex direction="column" height="140px" gap="s">
+                        <gds-flex align="center" height="64px" opacity="0.8">
+                          <gds-icon-sun height="10" />
+                        </gds-flex>
+                        <gds-flex align="center" height="64px" opacity="0.8">
+                          <gds-icon-moon height="10" />
+                        </gds-flex>
+                      </gds-flex>`}
+                        {Object.entries(items).map(([item, properties]) => (
+                            <gds-flex direction="column" gap="s">
+                                  <gds-theme color-scheme="auto">
+                                    <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" radius="s" padding="xs" width="20ch">
+                                        <gds-flex gap="xs" align="center" >
+                                          <gds-card 
+                                              height="40px" 
+                                              width="40px" 
+                                              radius="xs" 
+                                              border="4xs/l2-stroke-primary"
+                                              background={level + "-" + category + "-" + item}
+                                          />
+                                          <gds-flex direction="column" gap="3xs" align="start">
+                                              <gds-text tag="small">{item}</gds-text>
+                                              <gds-text tag="small" transform="uppercase">{properties.value}</gds-text>
+                                          </gds-flex>
+                                        </gds-flex>
+                                    </gds-card>   
+                                  </gds-theme>
+                                <gds-theme color-scheme="dark">
+                                  <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" radius="s" padding="xs" width="20ch">
+                                      <gds-flex gap="xs" align="center" justify="start">
+                                          <gds-card 
+                                              height="40px" 
+                                              width="40px" 
+                                              radius="xs" 
+                                              border="4xs/l2-stroke-tertiary"
+                                              background={level + "-" + category + "-" + item}
+                                          />
+                                          <gds-flex direction="column" gap="3xs" align="start">
+                                            <gds-text 
+                                              color="l1-content-primary" 
+                                              tag="small"
+                                            >
+                                              {item}
+                                            </gds-text>
+                                            <gds-text 
+                                              color="l1-content-primary" 
+                                              tag="small" 
+                                              transform="uppercase"
+                                            >
+                                              {properties.darkValue}
+                                            </gds-text>
+                                          </gds-flex>
+                                      </gds-flex>
+                                  </gds-card>
+                                </gds-theme>
+                            </gds-flex>
+                        ))}
+                    </gds-flex>
+                </gds-flex>
+            ))}
+        </gds-flex>
+      </gds-flex>
+    )
+  )}
+</gds-flex>
+  {/* {colors.sys.color.states && (
+    <>
+      <h2>STATES</h2>
+      {Object.entries(colors.sys.color.states).map(([state, properties]) => (
+        <>
+          <h3>{state.replace(/-/g, ' ').toUpperCase()}</h3>
+          <ul>
+            <li>Value: {properties.value}</li>
+            <li>Dark Value: {properties.darkValue}</li>
+            <li>Type: {properties.type}</li>
+          </ul>
+        </>
+      ))}
+    </>
+  )} */}

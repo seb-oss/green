@@ -11,5 +11,5 @@ export class IconLineChartFour extends GdsIcon {
   /** @private */
   static _solidSVG = `<path d="M21.248 16.75V19.25M15.082 12.75V19.25M8.91602 8.75V19.25M2.75 4.75V19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`
   /** @private */
-  static _name = 'line chart four'
+  static _name = 'line-chart-four'
 }

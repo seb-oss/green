@@ -6,7 +6,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import ContainerCSS from './container.style.css'
+import ContainerCSS from './container.style'
 
 /**
  * The `gds-container` is a custom element that provides a flexible container system.
@@ -73,7 +73,7 @@ export class GdsContainer extends GdsElement {
       if (transparency) {
         return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-sys-color-${colorName})`
+        return `var(--gds-color-${colorName})`
       }
     },
   })
@@ -121,7 +121,21 @@ export class GdsContainer extends GdsElement {
    * Controls the margin of the text.
    * Supports all the default margin values.
    */
-  @styleExpressionProperty()
+  @styleExpressionProperty({
+    valueTemplate: (v) => {
+      return v === 'auto' ? 'auto' : `var(--gds-space-${v})`
+    },
+    styleTemplate: (_prop, values) => {
+      const transformValue = (v: string) => (v === 'auto' ? 'auto' : `${v}`)
+
+      const top = transformValue(values[0])
+      const right = values.length > 1 ? transformValue(values[1]) : top
+      const bottom = values.length > 2 ? transformValue(values[2]) : top
+      const left = values.length > 3 ? transformValue(values[3]) : right
+
+      return `margin: ${top} ${right} ${bottom} ${left};`
+    },
+  })
   margin?: string
 
   /**
@@ -229,6 +243,16 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   stack?: string
+
+  /**
+   * Controls the box-sizing property of the container.
+   * Supports all valid CSS box-sizing values.
+   */
+  @styleExpressionProperty({
+    property: 'box-sizing',
+    valueTemplate: (v) => v,
+  })
+  box?: string
 
   render() {
     return html`<slot></slot>`

@@ -9,8 +9,8 @@ import { watch } from '../../utils/decorators/watch'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
-import '../../components/icon/icons/chevron-left'
-import '../../components/icon/icons/chevron-right'
+import '../icon/icons/chevron-left'
+import '../icon/icons/chevron-right'
 
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css?inline'

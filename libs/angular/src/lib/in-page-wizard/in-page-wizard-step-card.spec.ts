@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { render, fireEvent, waitFor } from '@testing-library/angular'
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
 
@@ -143,9 +143,47 @@ describe('InPageWizardStepCardComponent', () => {
       ).toEqual('fake-step-card-content')
     })
 
+    it('should not change the state to completed if the step is not valid on button click', async () => {
+      const nextSpy = jest.fn()
+      const { findByTestId, fixture } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+            stepIsValid: () => {return false },
+            handleNextClick: nextSpy,
+          },
+        },
+      )
+      // Arrange
+      const root = await findByTestId('in-page-wizard-step-card-root')
+      const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
+      expect(nextBtn).toBeDefined()
+      expect(root.classList).toContain('active')
+      expect(root.classList).not.toContain('completed')
+
+      // Act
+      fireEvent.click(nextBtn)
+
+      // Assert
+      await waitFor(() => {
+        expect(nextSpy).toBeCalledTimes(1)
+        expect(root.classList).toContain('active')
+        expect(fixture.componentInstance.isCompleted).toBe(false);
+        expect(fixture.componentInstance.isActive).toBe(true);
+      })
+    })
+  })
+
     it('should on next btn click change state to completed', async () => {
       const nextSpy = jest.fn()
-      const { findByTestId } = await render(
+      const { findByTestId, fixture } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
           declarations: [
@@ -174,6 +212,8 @@ describe('InPageWizardStepCardComponent', () => {
       await waitFor(() => {
         expect(nextSpy).toBeCalledTimes(1)
         expect(root.classList).not.toContain('active')
+        expect(fixture.componentInstance.isCompleted).toBe(true);
+        expect(fixture.componentInstance.isActive).toBe(false);
       })
     })
   })
@@ -365,7 +405,7 @@ describe('InPageWizardStepCardComponent', () => {
       })
     })
   })
-})
+
 
 @Component({
   selector: 'ngg-fake-step-card',
@@ -378,6 +418,7 @@ describe('InPageWizardStepCardComponent', () => {
       [stepText]="stepText"
       [editBtnText]="editBtnText"
       [nextBtnText]="nextBtnText"
+      [stepIsValid]="stepIsValid"
       (handleNextClick)="_handleNextClick()"
       (handleEditClick)="_handleEditClick()"
     >
@@ -393,7 +434,7 @@ class NggFakeInPageWizardStepCardComponent {
   @Input() public editBtnText = ''
 
   @Input() public nextBtnText = ''
-  
+
   @Input() public showNextBtnIcon = true
 
   @Input() public isCompleted = false
@@ -402,12 +443,18 @@ class NggFakeInPageWizardStepCardComponent {
 
   @Input() public isActive = false
 
+  @Input() public stepIsValid = () => { return true; }
+
   @Input() public handleNextClick?: () => void
 
   @Input() public handleEditClick?: () => void
 
   _handleNextClick() {
     if (this.handleNextClick) {
+      if (this.stepIsValid()) {
+        this.isActive = false;
+        this.isCompleted = true;
+      }
       this.handleNextClick()
     }
   }
