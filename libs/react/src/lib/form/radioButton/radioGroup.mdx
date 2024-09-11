@@ -28,61 +28,21 @@ Together, `RadioGroup` and `RadioButton` components facilitate the use of radio 
 
 ### Default Radio Group
 
-<Canvas>
-  <Story of={RadioGroupStories.Default} />
-</Canvas>
+<Canvas of={RadioGroupStories.Default} />
 
 ## Expandable information
 
-<Canvas>
-  <Story of={RadioGroupStories.ExpandableInformation} />
-</Canvas>
+<Canvas of={RadioGroupStories.ExpandableInformation} />
 
 ## Validation
 
-<Canvas>
-  <Story of={RadioGroupStories.Validation} />
-</Canvas>
+<Canvas of={RadioGroupStories.Validation} />
 
 ## Horizontal
 
-<Canvas>
-  <Story of={RadioGroupStories.Horizontal} />
-</Canvas>
+<Canvas of={RadioGroupStories.Horizontal} />
 
 ### Props of RadioGroup
 
-<Markdown>
-  {`
-  | Prop                       | Type                                               | Description                                                                                                   |
-  | :------------------------- | :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
-  | label?                     | \`string\`                                           | Label for the radio group                                                                                     |
-  | title?                     | \`string\`                                           | Title for the radio group                                                                                     |
-  | labelInformation?          | \`string\`                                           | Additional information for the label                                                                          |
-  | valueSelected?             | \`string\`                                           | The currently selected value in the radio group. Needs to match the string value of an enclosed \`RadioButton\` |
-  | description?               | \`string\`                                           | Description for the radio group                                                                               |
-  | expandableInfo?            | \`ReactNode\`                                        | Expandable information text                                                                                   |
-  | expandableInfoButtonLabel? | \`string\`                                           | Label for the expandable info button                                                                          |
-  | defaultSelected?           | \`string\`                                           | Default selected value in the radio group                                                                     |
-  | validator?                 | \`IValidator\`                                       | Validator function for radio group values                                                                     |
-  | onChangeRadio?             | \`(value: string) => string\`                        | Function called when radio button selection changes                                                           |
-  | onChange?                  | \`(e: React.ChangeEvent<HTMLInputElement>) => void\` | Function called with the raw DOM event when a selection changes                                               |
-  | name?                      | \`string\`                                           | Name attribute for the radio group                                                                            |
-  | horizontal?                | \`boolean\`                                          | Whether or not the radio buttons are displayed horizontally                                                   |
-  `}
-</Markdown>
+<ArgTypes of={RadioGroup} />
 
-### Props of RadioButton
-
-Please note that since the `RadioButtonProps` interface extends `HTMLProps<HTMLInputElement>`, this table only covers the additional properties specific to `RadioButtonProps`. The interface also includes all properties from `HTMLProps<HTMLInputElement>`.
-
-<Markdown>
-  {`
-  | Prop       | Type     | Description                                         |
-  | :--------- | :------- | :-------------------------------------------------- |
-  | label      | \`string\` | Label for the radio button                          |
-  | testId?    | \`string\` | Test ID for the radio button (for testing purposes) |
-  | validator? | \`string\` | Validator function for radio button value           |
-  | value      | \`string\` | Value of the radio button                           |
-  `}
-</Markdown>

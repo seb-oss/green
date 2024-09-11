@@ -1,7 +1,8 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import { FilterChips, FilterChip } from './filter-chips'
+import * as FilterChipStories from './filter-chip.stories'
 
-<Meta title="Components/Filter Chips" component={FilterChips} />
+<Meta of={FilterChipStories} />
 
 # Filter Chips
 
@@ -34,19 +35,15 @@ return (
 )
 ```
 
-<Canvas>
-  <FilterChips value="division" label="Select a filter category">
-    <FilterChip value="all">All</FilterChip>
-    <FilterChip value="top-news">Top news</FilterChip>
-    <FilterChip value="division">Division</FilterChip>
-    <FilterChip value="global">Global</FilterChip>
-    <FilterChip value="country">Country</FilterChip>
+<FilterChips value="division" label="Select a filter category">
+  <FilterChip value="all">All</FilterChip>
+  <FilterChip value="top-news">Top news</FilterChip>
+  <FilterChip value="division">Division</FilterChip>
+  <FilterChip value="global">Global</FilterChip>
+  <FilterChip value="country">Country</FilterChip>
+  <FilterChip value="lcfi">Large Corporate & Financial Institutions</FilterChip>
+</FilterChips>
 
-    <FilterChip value="lcfi">
-      Large Corporate & Financial Institutions
-    </FilterChip>
-  </FilterChips>
-</Canvas>
 
 **Note:** It is important to remember to set the label attribute. Omitting it will cause poor accessibility for screen reader useSharedState. Internally in the component, the label attribute will be used to set `aria-label` for the appropriate element.
 

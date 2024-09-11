@@ -10,87 +10,31 @@ export const TextAreaTemplate = ({ ...props }) => <TextArea {...props} />
 
 ## Default
 
-<Canvas>
-  <Story of={TextareaStories.Default} />
-</Canvas>
+<Canvas of={TextareaStories.Default} />
 
 ## Label Information
 
-<Canvas>
-  <TextArea label="Text Area" info="Label Information" />
-</Canvas>
-
-## Disabled
-
-<Canvas>
-  <TextArea label="Text Area" disabled />
-</Canvas>
+<Canvas of={TextareaStories.LabelInformation} />
 
 ## Expandable Information
 
-<Canvas>
-  <TextArea label="Text Area" expandableInfo="Expandable Information" />
-</Canvas>
+<Canvas of={TextareaStories.ExpandableInformation} />
 
 ## Max Length
 
-<Canvas>
-  <TextArea label="Text Area" maxLength={100} />
-</Canvas>
+<Canvas of={TextareaStories.MaxLength} />
 
 ## More Rows
 
-<Canvas>
-  <TextArea label="Text Area" rows={10} />
-</Canvas>
+<Canvas of={TextareaStories.MoreRows} />
 
 ## Validation
 
-<Canvas>
-  <div>
-    <TextArea
-      label="Error Text Area"
-      validator={{
-        indicator: 'error',
-        message: 'Error message',
-      }}
-    />
-
-    <TextArea
-      label="Info Text Area"
-      validator={{
-        indicator: 'info',
-        message: 'Info message',
-      }}
-    />
-
-    <TextArea
-      label="Success Text Area"
-      validator={{
-        indicator: 'success',
-        message: 'Success message',
-      }}
-    />
-  </div>
-</Canvas>
+<Canvas of={TextareaStories.ErrorMessage} />
 
 ## Everything On
 
-<Canvas>
-  <TextArea
-    label="Text Area"
-    expandableInfo="Expandable Information"
-    info="Label information"
-    maxLength={1000}
-    rows={4}
-    validator={{
-      indicator: 'error',
-      message: 'Error message',
-    }}
-    placeholder="Placeholder"
-    disabled
-  />
-</Canvas>
+<Canvas of={TextareaStories.Everything} />
 
 ## Properties
 

@@ -10,9 +10,7 @@ export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
 ## Basic
 
-<Canvas>
-  <Story of={CheckboxStories.Default} />
-</Canvas>
+<Canvas of={CheckboxStories.Default} />
 
 ## Checked state
 
@@ -34,43 +32,42 @@ function RobotCheckComponent () {
 
 ## States and variants checkbox
 
-<Canvas>
-  <form>
-    <Checkbox label="Normal unchecked" />
 
-    <Checkbox label="Normal checked" checked />
+<form>
+  <Checkbox label="Normal unchecked" />
 
-    <Checkbox
-      label="Invalid unchecked"
-      validator={{
-        indicator: 'error',
-        message: 'Invalid',
-      }}
-    />
+  <Checkbox label="Normal checked" checked />
 
-    <Checkbox
-      label="Invalid checked"
-      validator={{
-        indicator: 'error',
-        message: 'Invalid',
-      }}
-      checked
-    />
-  </form>
-</Canvas>
+  <Checkbox
+    label="Invalid unchecked"
+    validator={{
+      indicator: 'error',
+      message: 'Invalid',
+    }}
+  />
 
-## Validation
-
-<Canvas>
   <Checkbox
     label="Invalid checked"
     validator={{
       indicator: 'error',
-      message: 'Error',
+      message: 'Invalid',
     }}
     checked
   />
-</Canvas>
+</form>
+
+## Validation
+
+```jsx
+<Checkbox
+  label="Invalid checked"
+  validator={{
+    indicator: 'error',
+    message: 'Error',
+  }}
+  checked
+/>
+```
 
 ## Properties
 

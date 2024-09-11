@@ -4,39 +4,18 @@ import { Select, Option } from '../select'
 import { NumberInput } from '../form/input/input'
 import * as FormItemStories from './formItem.stories';
 
-export const Template = () => {
-  return (
-    <>
-      <Select label="This is a label" info="this is information label">
-        <Option>This is an option</Option>
-        <Option>This is an option</Option>
-      </Select>
-      <Select label="This is a label" info="this is information label">
-        <Option>This is an option</Option>
-        <Option>This is an option</Option>
-      </Select>
-    </>
-  )
-}
-
 <Meta of={FormItemStories} />
 
 # FormItem
 
-<Canvas>
-  <Story of={FormItemStories.TextInput} />
-</Canvas>
+<Canvas of={FormItemStories.TextInput} />
 
 ### Expandable information
 
-<Canvas>
-  <Story of={FormItemStories.ExpandableInformation} />
-</Canvas>
+<Canvas of={FormItemStories.ExpandableInformation} />
 
 Expandable information can also be used with JSX:
 
-<Canvas>
-  <Story of={FormItemStories.ExpandableInformationJsx} />
-</Canvas>
+<Canvas of={FormItemStories.ExpandableInformationJsx} />
 
 <Controls />

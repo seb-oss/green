@@ -12,9 +12,7 @@ export const InputTemplate = ({ ...props }) => <Input {...props} />
 
 If an input is requested without a label, info or expandable info, then a pure input is rendered. Can be used together with the Group component.
 
-<Canvas>
-  <Story of={InputStories.Default} />
-</Canvas>
+<Canvas of={InputStories.Default} />
 
 ## Input with FormItem
 
@@ -22,27 +20,15 @@ As soon as one of the properties `label`, `info` or `expandable` info are set, t
 
 ### Label Information
 
-<Canvas>
-  <Input label="Input" info="Label Information" />
-</Canvas>
-
-### Disabled
-
-<Canvas>
-  <Input label="Input" disabled />
-</Canvas>
+<Canvas of={InputStories.WithFormInfo} />
 
 ### Expandable Information
 
-<Canvas>
-  <Input label="Input" expandableInfo="Expandable Information" />
-</Canvas>
+<Canvas of={InputStories.WithExpandableInfo} />
 
-### Right label
+### Unit label
 
-<Canvas>
-  <Input label="Input" unit="kr" />
-</Canvas>
+<Canvas of={InputStories.UnitLabel} />
 
 ### Formatter
 
@@ -51,8 +37,8 @@ The returned value will be displayed in the field and outputted in the onChange 
 
 The following is just an example. Test thoroughly for your use case before using in production!
 
-<Canvas>
-  <Input
+```tsx
+<Input
     label="Input"
     info="Formats input as swedish number"
     maxLength={8}
@@ -64,57 +50,31 @@ The following is just an example. Test thoroughly for your use case before using
         : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
     }}
   />
-</Canvas>
+```
+<Input
+    label="Input"
+    info="Formats input as swedish number"
+    maxLength={8}
+    unit="Kr"
+    formatter={(value) => {
+      const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
+      return !trimmedValue || isNaN(Number(trimmedValue))
+        ? value
+        : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
+    }}
+  />
 
 ### Validation
 
-<Canvas>
-  <div>
-    <Input
-      label="Error input"
-      validator={{
-        indicator: 'error',
-        message: 'Error message',
-      }}
-    />
+A `validator`, despite it's name, does not add validation. It's simply a way to add an error message to the field.
 
-    <Input
-      label="Info input"
-      validator={{
-        indicator: 'info',
-        message: 'Info message',
-      }}
-    />
 
-    <Input
-      label="Success input"
-      validator={{
-        indicator: 'success',
-        message: 'Success message',
-      }}
-    />
-  </div>
-</Canvas>
+<Canvas of={InputStories.Validator} />
+
 
 ### Everything On
 
-<Canvas>
-  <Input
-    label="Input"
-    expandableInfo="Expandable Information"
-    expandableInfoButtonLabel="Button label"
-    info="Label information"
-    maxLength={1000}
-    rows={4}
-    validator={{
-      indicator: 'error',
-      message: 'Error message',
-    }}
-    placeholder="Placeholder"
-    disabled
-    unit="kr"
-  />
-</Canvas>
+<Canvas of={InputStories.Everything} />
 
 ## Properties
 

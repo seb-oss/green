@@ -39,6 +39,8 @@
     "@angular/platform-browser": "^16.2.12",
     "@angular/platform-browser-dynamic": "^16.2.12",
     "@angular/router": "^16.2.12",
+    "@babel/helper-function-name": "^7.24.7",
+    "@babel/helper-hoist-variables": "^7.24.7",
     "@changesets/cli": "^2.27.1",
     "@floating-ui/dom": "^1.6.1",
     "@lit/react": "^1.0.5",

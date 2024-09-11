@@ -34,42 +34,33 @@ export const Footer = () => (
 
 A card is container for short content, related pieces of information, and action on a specific content.
 
-<Story of={CardStories.Default} />
+<Canvas of={CardStories.Default} />
 
 ## Card without header
 
-<Canvas>
-  <Card>
-    <p>
-      <strong>Not passing header prop, but creating it in body</strong>
-    </p>
-
-    <p class="mb-5">
-      Then you don't get the close button because it's styling is tied to the
-      header
-    </p>
-
-    <div>
-      <button class="primary">Primary button</button>
-    </div>
-  </Card>
-</Canvas>
+<Card>
+  <p>
+    <strong>Not passing header prop, but creating it in body</strong>
+  </p>
+  <p class="mb-5">
+    Then you don't get the close button because it's styling is tied to the
+    header
+  </p>
+  <div>
+    <button class="primary">Primary button</button>
+  </div>
+</Card>
 
 ## Headline and text content
-
-<Canvas>
-  <Card header={<h3>Card one headline</h3>}>Card one content text</Card>
-
-  <Card header={<h3>Card two headline</h3>} />
-</Canvas>
+<Card header={<h3>Card one headline</h3>}>Card one content text</Card>
+<br /><br />
+<Card header={<h3>Card two headline</h3>} />
 
 ## Card with button
 
-<Canvas>
-  <Card header={<Header />} footer={<Footer />}>
-    Here is some content with link and two buttons footer
-  </Card>
-</Canvas>
+<Card header={<Header />} footer={<Footer />}>
+  Here is some content with link and two buttons footer
+</Card>
 
 ## Props
 

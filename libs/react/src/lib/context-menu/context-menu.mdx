@@ -1,7 +1,8 @@
 import { Meta, Canvas, Markdown } from '@storybook/blocks'
 import { ContextMenu, MenuItem } from './context-menu'
+import * as ContextMenuStories from './context-menu.stories'
 
-<Meta title="Components/Context Menu" component={ContextMenu} />
+<Meta of={ContextMenuStories} />
 
 # Context Menu
 
@@ -23,15 +24,10 @@ import { ContextMenu } from '@sebgroup/green-react/src/lib/context-menu'
 
 ## Examples
 
-In the example below, we are listening to the `onMenuItemClick` event on the `ContextMenu` component.
+In the example below, we are listening to the `onMenuItemClick` event on the `ContextMenu` component.\
+(`onMenuItemClick={(e) => console.log(e)}`)
 
-<Canvas>
-  <ContextMenu buttonLabel="Choose an action" onMenuItemClick={(e) => console.log(e)}>
-    <MenuItem>Action 1</MenuItem>
-    <MenuItem>Action 2</MenuItem>
-    <MenuItem>Action 3</MenuItem>
-  </ContextMenu>
-</Canvas>
+<Canvas of={ContextMenuStories.Default} />
 
 A more typical usage would be to listen to `onClick` events on individual `MenuItem`s, while mapping to your specific data:
 
@@ -49,25 +45,21 @@ A more typical usage would be to listen to `onClick` events on individual `MenuI
 
 You can show the label by setting the `showLabel` prop to `true`.
 
-<Canvas>
-  <ContextMenu showLabel buttonLabel="Choose an action" onMenuItemClick={(e) => console.log(e)}>
-    <MenuItem>Action 1</MenuItem>
-    <MenuItem>Action 2</MenuItem>
-    <MenuItem>Action 3</MenuItem>
-  </ContextMenu>
-</Canvas>
+<ContextMenu showLabel buttonLabel="Choose an action" onMenuItemClick={(e) => console.log(e)}>
+  <MenuItem>Action 1</MenuItem>
+  <MenuItem>Action 2</MenuItem>
+  <MenuItem>Action 3</MenuItem>
+</ContextMenu>
 
 ### Custom menu item content
 
 You can put any type of content within the `MenuItem` component, including icons, images, or other components.
 
-<Canvas>
-  <ContextMenu label="Choose an action" onMenuItemClick={(e) => console.log(e)}>
-    <MenuItem>Action 1</MenuItem>
-    <MenuItem>Action 2</MenuItem>
-    <MenuItem>Action 3</MenuItem>
-  </ContextMenu>
-</Canvas>
+<ContextMenu label="Choose an action" onMenuItemClick={(e) => console.log(e)}>
+  <MenuItem>Action 1</MenuItem>
+  <MenuItem>Action 2</MenuItem>
+  <MenuItem>Action 3</MenuItem>
+</ContextMenu>
 
 ## Component API
 

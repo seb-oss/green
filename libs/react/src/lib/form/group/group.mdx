@@ -1,8 +1,9 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import { Group } from '../'
 import { TextInput, Button } from '../../form'
+import * as GroupStories from './group.stories'
 
-<Meta title="Components/Form/Group" component={Group} />
+<Meta of={GroupStories} />
 
 # Group
 
@@ -10,60 +11,13 @@ Group inputs, buttons and other form elements together.
 
 ## Input & Button
 
-<Canvas>
-  <Group>
-    <TextInput placeholder="Input field" />
-
-    <Button>Normal button</Button>
-  </Group>
-</Canvas>
+<Canvas of={GroupStories.Default} />
 
 ## Static text in input field
 
-<Canvas>
-  <Group groupBorder groupFocus>
-    <TextInput placeholder="First input field" />
+<Canvas of={GroupStories.StaticText} />
 
-    <span className="form-text">kr</span>
-  </Group>
-</Canvas>
+## Group error message
 
-## Inputs
+<Canvas of={GroupStories.Error} />
 
-<Canvas>
-  <Group>
-    <TextInput placeholder="First input field" />
-
-    <TextInput placeholder="Second input field" />
-
-    <TextInput placeholder="Third input field" />
-  </Group>
-
-  <Group error="Error">
-    <TextInput placeholder="Forth input field" />
-
-    <TextInput placeholder="Fifth input field" />
-
-    <TextInput placeholder="Sixth input field" />
-  </Group>
-</Canvas>
-
-## Group with shared border
-
-<Canvas>
-  <Group groupBorder>
-    <TextInput placeholder="First input field" />
-
-    <TextInput placeholder="Second input field" />
-
-    <TextInput placeholder="Third input field" />
-  </Group>
-
-  <Group error="Error" groupBorder>
-    <TextInput placeholder="Forth input field" />
-
-    <TextInput placeholder="Fifth input field" />
-
-    <TextInput placeholder="Sixth input field" />
-  </Group>
-</Canvas>

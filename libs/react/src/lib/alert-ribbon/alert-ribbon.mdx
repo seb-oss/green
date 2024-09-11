@@ -51,75 +51,38 @@ Simple Alert ribbon component
 
 Set a alert type for color coded alerts. Please note that inline links can only be in the end of the AlertRibbon in Figma/Design Library so this code might be utpdated to that.
 
-<Canvas>
-  <AlertRibbon header="Info heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links,{' '}
-    <a href="#">info</a>, will inherit color from alert to make sure contrast is
-    applied.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.Info} />
 
-  <AlertRibbon type="success" header="Success heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links,{' '}
-    <a href="#">success</a>, will inherit color from alert to make sure contrast
-    is applied.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.Success} />
 
-  <AlertRibbon type="warning" header="Warning heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links,{' '}
-    <a href="#">warning</a>, will inherit color from alert to make sure contrast
-    is applied, like this .
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.Warning} />
 
-  <AlertRibbon type="danger" header="Danger heading." isCloseable={false}>
-    AlertRibbon content placed inside a paragraph. Inline links,{' '}
-    <a href="#">danger</a>, will inherit color from alert to make sure contrast
-    is applied, like this .
-  </AlertRibbon>
-</Canvas>
+<Canvas of={AlertRibbonStories.Danger} />
 
 ## AlertRibbon with Close button
 
 Close button icon
 
-<Canvas>
-  <AlertRibbon header="Info" isCloseable={true}>
-    This is an alert type <a href="#">info with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.InfoWithCloseButton} />
 
-  <AlertRibbon type="success" header="Success" isCloseable={true}>
-    This is an alert type <a href="#">success with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.SuccessWithCloseButton} />
 
-  <AlertRibbon type="warning" header="Warning" isCloseable={true}>
-    This is an alert type <a href="#">warning with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.WarningWithCloseButton} />
 
-  <AlertRibbon type="danger" header="Danger" isCloseable={true}>
-    This is an alert type <a href="#">danger with a link</a>.
-  </AlertRibbon>
-</Canvas>
+<Canvas of={AlertRibbonStories.DangerWithCloseButton} />
+
 
 ## AlertRibbon with Footer Buttons
 
 Button components can be passed in as a footer
 
-<Canvas>
-  <AlertRibbon header="Info" footer={<FooterInfo />} isCloseable={true}>
-    This is an alert type <a href="#">info with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.InfoWithFooterButtons} />
 
-  <AlertRibbon type="success" header="Success" footer={<FooterSuccess />} isCloseable={true}>
-    This is an alert type <a href="#">success with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.SuccessWithFooterButtons} />
 
-  <AlertRibbon type="warning" header="Warning" footer={<FooterWarning />} isCloseable={true}>
-    This is an alert type <a href="#">warning with a link</a>.
-  </AlertRibbon>
+<Canvas of={AlertRibbonStories.WarningWithFooterButtons} />
 
-  <AlertRibbon type="danger" header="Danger" footer={<FooterDanger />} isCloseable={true}>
-    This is an alert type <a href="#">danger with a link</a>.
-  </AlertRibbon>
-</Canvas>
+<Canvas of={AlertRibbonStories.DangerWithFooterButtons} />
 
 ## Props
 
