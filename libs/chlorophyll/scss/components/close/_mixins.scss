@@ -18,6 +18,18 @@ $close-bg-active: var(--grey-500);
 $close-icon-color: var(--text-primary-color);
 
 @mixin close {
+  font-size: 0;
+  background: var(--gds-sys-color-surface);
+  border: 0;
+  border-radius: 50%;
+  content: '';
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  height: $close-height;
+  position: relative;
+  width: $close-width;
+
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
     &:not(:disabled):not(.disabled) {
@@ -26,6 +38,7 @@ $close-icon-color: var(--text-primary-color);
       width: $close-touch-target-size;
 
       > i {
+        background: var(--gds-ref-pallet-base200);
         height: $close-height-sm;
         width: $close-width-sm;
         border-radius: 50%;
@@ -42,18 +55,6 @@ $close-icon-color: var(--text-primary-color);
     }
   }
 
-  font-size: 0;
-  background: var(--gds-sys-color-surface);
-  border: 0;
-  border-radius: 50%;
-  content: '';
-  cursor: pointer;
-  display: flex;
-  font-family: inherit;
-  height: $close-height;
-  position: relative;
-  width: $close-width;
-
   @include common.add-focus('visible', 'i');
 
   > i {
@@ -65,7 +66,7 @@ $close-icon-color: var(--text-primary-color);
 
   & > i::after,
   & > i::before {
-    background: var(--gds-ref-pallet-base800);
+    background: var(--gds-sys-color-font);
     content: '';
     display: block;
     height: 0.789375rem;
@@ -85,16 +86,24 @@ $close-icon-color: var(--text-primary-color);
   }
 
   > svg path {
-    fill: var(--gds-ref-pallet-base800);
+    fill: var(--gds-sys-color-font);
   }
 
   @include common.media-breakpoint-up('md') {
-    &:not(:disabled, .disabled):hover {
-      background: var(--gds-ref-pallet-base200);
+    &:not(:disabled, .disabled):hover > i {
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-font) 10%,
+        transparent
+      );
     }
 
-    &:not(:disabled, .disabled):hover:active {
-      background: var(--gds-ref-pallet-base300);
+    &:not(:disabled, .disabled):hover:active > i {
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-font) 20%,
+        transparent
+      );
     }
   }
 }

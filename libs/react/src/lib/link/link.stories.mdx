@@ -1,5 +1,14 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
 import Link from './link'
+import { createComponent } from '@lit/react'
+import { IconArrowRight } from '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+
+export const GdsIconArrowRight = createComponent({
+  tagName: getScopedTagName('gds-icon-arrow-right'),
+  elementClass: IconArrowRight,
+  react: React,
+})
 
 export const Template = ({ ...props }) => <Link {...props} />
 
@@ -29,8 +38,6 @@ Simple link component
 >
   {Template.bind({})}
 </Story>
-
-#
 
 ## Link on backgrounds
 
@@ -70,6 +77,17 @@ now you've got a link which looks and behaves like a button!
   </Link>
   <Link button="ghost" href="https://seb.se">
     Go to seb.se as ghost button
+  </Link>
+</Canvas>
+
+## Secondary link (Dark grey)
+
+The secondary link is mostly used when the link is a stand alone, but the blue link can also be used there.
+
+<Canvas>
+  <Link secondary href="#">
+    Go to page
+    <GdsIconArrowRight></GdsIconArrowRight>
   </Link>
 </Canvas>
 

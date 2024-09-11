@@ -2,12 +2,8 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
-// Needed for components that only have 2016 style so far
-import { registerTransitionalStyles } from '../../transitional-styles.ts'
-registerTransitionalStyles()
-
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/datepicker)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/datepicker)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/datepicker)
  *
@@ -23,7 +19,7 @@ registerTransitionalStyles()
  * Clicking the calendar icon opens a popover with a calendar view where a date can be chosen.
  */
 const meta: Meta = {
-  title: 'Components/Datepicker',
+  title: 'Docs/Components/Form/Datepicker',
   component: 'gds-datepicker',
   parameters: {
     layout: 'centered',

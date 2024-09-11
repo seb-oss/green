@@ -1,0 +1,97 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Guides/Troubleshooting" />
+
+# Troubleshooting common problems
+
+This guide will help you troubleshoot common problems that you might encounter when developing with Green.
+
+## Component is not rendering
+
+If a component is not rendering, there are a few things you can check:
+
+- Make sure that the component is imported correctly. For example, if you are using the button component, you need
+  to import it like this:
+
+```ts
+import '@sebgroup/green-core/components/button/index.js'
+```
+
+- Check that [custom element scoping](https://storybook.seb.io/latest/core/?path=/docs/concepts-scoping--docs) is
+  correctly applied. If you inspect the component in the browser, you should see that the custom element name has a
+  version suffix, like this:`<gds-button-VERSIONSTRING>`.
+
+  If the version suffix is missing, it usually means one of two things:
+
+  - The component is not imported correctly. See previous point.
+  - The suffix is not being applied in your template. There are a few different ways to accomplish this, depending on
+    what framework you are working with. Check the examples in the [Welcome](https://storybook.seb.io/latest/core/?path=/docs/welcome--docs)
+    docs to see how it is done in Lit, React and Angular.
+
+  When the component is properly initialized, it should have an attribute called `gds-element`, and a shadow root
+  attached, similar to this:
+
+  <img
+    width="335"
+    alt="image"
+    src="https://github.com/user-attachments/assets/5918f952-4713-4ee8-a298-2ae9b71c45fa"
+  />
+
+## Component is not styled correctly
+
+First, check that you have loaded and registered Transistional Styles accoring to the examples in the [Welcome](https://storybook.seb.io/latest/core/?path=/docs/welcome--docs) docs.
+
+If you are still having issues, continue reading.
+
+A common cause of styling issues with Green Core components is that [transitional styles](https://storybook.seb.io/latest/core/?path=/docs/concepts-transitional-styles--docs)
+often rely on [Chlorophyll](https://storybook.seb.io/latest/chlorophyll) CSS variables being in scope.
+
+When you already have the Chlorophyll CSS loaded on the page, this is usually not an issue, but if you try to use the components in isolation, you might run into this problem.
+
+There are two ways to solve it:
+
+- Make sure that the Chlorophyll CSS is loaded on the page. This can be done by importing SCSS or precompiled CSS from the `@sebgroup/chlorophyll` package.
+- Use the (currently experimental) `<gds-theme>` component. This component will automatically load the Chlorophyll CSS variables, and make sure that they are in scope.
+
+  You can use the `<gds-theme>` component like this:
+
+```ts
+// Import the theme component
+import '@sebgroup/green-core/components/theme/index.js'
+
+// Import and register transitional styles for the theme component
+// This is important, as it will make sure that the actual Chlorophyll CSS variables are loaded
+import * as themeTransStyles from '@sebgroup/green-core/components/theme/theme.trans.styles.ts'
+themeTransStyles.register()
+```
+
+Then use it in your template:
+
+```html
+<gds-theme>
+  <!-- Green Core components here -->
+</gds-theme>
+```
+
+## Errors in the console
+
+- `Class constructor LitElement cannot be invoked without 'new'`
+
+  This error usually occurs when incorrect transformations are applied in the build step.
+
+  Make sure that:
+
+  - The `@babel/preset-env` is configured correctly in your Babel configuration.
+  - The compile target for both Babel and TypeScript is set to at least `es2015`.
+  - You are using Typescript version 5.0 or later.
+
+## Problems testing with Jest
+
+The most common source of issues when tesing with Jest is that, by default, Jest does not apply babel transformations to modules in `node_modules`.
+Because of this, you need to configure Jest to transform the Green Core modules. Core already have a configureation for this that you can import
+and apply to your Jest configuration.
+
+Check the docs for React or Angular for more details on how to do this:
+
+- [React](https://storybook.seb.io/latest/react/?path=/docs/testing--docs)
+- [Angular](https://storybook.seb.io/latest/angular/?path=/docs/testing--docs)

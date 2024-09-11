@@ -55,7 +55,9 @@
         top: 1rem;
         right: 1rem;
         transition: transform tokens.$transition-time;
-        stroke: currentColor;
+        path {
+          fill: currentColor;
+        }
       }
 
       &:not([aria-expanded='true']):hover {

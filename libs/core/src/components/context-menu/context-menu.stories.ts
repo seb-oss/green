@@ -7,7 +7,7 @@ import { registerTransitionalStyles } from '../../transitional-styles.ts'
 registerTransitionalStyles()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/context-menu)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
  *
@@ -16,7 +16,7 @@ registerTransitionalStyles()
  * displays a list of choices, one choice per line.
  */
 const meta: Meta = {
-  title: 'Components/Context Menu',
+  title: 'Docs/Components/Context Menu',
   component: 'gds-context-menu',
   subcomponents: { MenuItem: 'gds-menu-item' },
   parameters: {

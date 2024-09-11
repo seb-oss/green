@@ -7,7 +7,7 @@ import { registerTransitionalStyles } from '../../transitional-styles.ts'
 registerTransitionalStyles()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grouped-list)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/grouped-list)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-list)
  *
@@ -15,7 +15,7 @@ registerTransitionalStyles()
  * heading and they may have a link or button added to act on the data being displayed.
  */
 const meta: Meta = {
-  title: 'Components/Grouped List',
+  title: 'Docs/Components/Grouped List',
   component: 'gds-grouped-list',
   subcomponents: { ListItem: 'gds-list-item' },
   parameters: {

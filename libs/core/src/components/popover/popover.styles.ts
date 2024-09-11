@@ -15,6 +15,8 @@ const style = css`
     }
 
     dialog {
+      display: flex;
+      flex-direction: column;
       inset: auto;
       position: fixed;
       overflow: hidden;
@@ -33,7 +35,7 @@ const style = css`
       display: none;
     }
 
-    dialog::backdrop {
+    dialog:not(.has-backdrop)::backdrop {
       background-color: transparent;
       display: block;
       position: fixed;

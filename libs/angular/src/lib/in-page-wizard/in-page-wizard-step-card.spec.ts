@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { render, fireEvent, waitFor } from '@testing-library/angular'
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
 
@@ -73,7 +73,7 @@ describe('InPageWizardStepCardComponent', () => {
       })
     })
 
-    it('should show next button', async () => {
+    it('should show next button with icon', async () => {
       const { findByTestId } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
@@ -92,9 +92,11 @@ describe('InPageWizardStepCardComponent', () => {
       const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
       expect(nextBtn).toBeDefined()
       expect(nextBtn.textContent?.trim()).toEqual('Test Next')
+      const nextIcon = await findByTestId('in-page-wizard-step-card-next-icon')
+      expect(nextIcon).toBeDefined()
     })
 
-    it('should not show edit btn', async () => {
+    it('should not show any edit btns', async () => {
       const { queryByTestId } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
@@ -112,6 +114,8 @@ describe('InPageWizardStepCardComponent', () => {
 
       const el = queryByTestId('in-page-wizard-step-card-edit-btn')
       expect(el).toBeNull()
+      const elFooter = queryByTestId('in-page-wizard-step-card-footer-edit-btn')
+      expect(elFooter).toBeNull()
     })
 
     it('should show content', async () => {
@@ -139,9 +143,47 @@ describe('InPageWizardStepCardComponent', () => {
       ).toEqual('fake-step-card-content')
     })
 
+    it('should not change the state to completed if the step is not valid on button click', async () => {
+      const nextSpy = jest.fn()
+      const { findByTestId, fixture } = await render(
+        NggFakeInPageWizardStepCardComponent,
+        {
+          declarations: [
+            NggFakeInPageWizardStepCardComponent,
+            NggInPageWizardStepCardComponent,
+          ],
+          providers: [],
+          componentInputs: {
+            nextBtnText: 'Test Next',
+            isActive: true,
+            stepIsValid: () => {return false },
+            handleNextClick: nextSpy,
+          },
+        },
+      )
+      // Arrange
+      const root = await findByTestId('in-page-wizard-step-card-root')
+      const nextBtn = await findByTestId('in-page-wizard-step-card-next-btn')
+      expect(nextBtn).toBeDefined()
+      expect(root.classList).toContain('active')
+      expect(root.classList).not.toContain('completed')
+
+      // Act
+      fireEvent.click(nextBtn)
+
+      // Assert
+      await waitFor(() => {
+        expect(nextSpy).toBeCalledTimes(1)
+        expect(root.classList).toContain('active')
+        expect(fixture.componentInstance.isCompleted).toBe(false);
+        expect(fixture.componentInstance.isActive).toBe(true);
+      })
+    })
+  })
+
     it('should on next btn click change state to completed', async () => {
       const nextSpy = jest.fn()
-      const { findByTestId } = await render(
+      const { findByTestId, fixture } = await render(
         NggFakeInPageWizardStepCardComponent,
         {
           declarations: [
@@ -170,6 +212,8 @@ describe('InPageWizardStepCardComponent', () => {
       await waitFor(() => {
         expect(nextSpy).toBeCalledTimes(1)
         expect(root.classList).not.toContain('active')
+        expect(fixture.componentInstance.isCompleted).toBe(true);
+        expect(fixture.componentInstance.isActive).toBe(false);
       })
     })
   })
@@ -361,7 +405,7 @@ describe('InPageWizardStepCardComponent', () => {
       })
     })
   })
-})
+
 
 @Component({
   selector: 'ngg-fake-step-card',
@@ -374,6 +418,7 @@ describe('InPageWizardStepCardComponent', () => {
       [stepText]="stepText"
       [editBtnText]="editBtnText"
       [nextBtnText]="nextBtnText"
+      [stepIsValid]="stepIsValid"
       (handleNextClick)="_handleNextClick()"
       (handleEditClick)="_handleEditClick()"
     >
@@ -390,11 +435,15 @@ class NggFakeInPageWizardStepCardComponent {
 
   @Input() public nextBtnText = ''
 
+  @Input() public showNextBtnIcon = true
+
   @Input() public isCompleted = false
 
   @Input() public disableNext = false
 
   @Input() public isActive = false
+
+  @Input() public stepIsValid = () => { return true; }
 
   @Input() public handleNextClick?: () => void
 
@@ -402,6 +451,10 @@ class NggFakeInPageWizardStepCardComponent {
 
   _handleNextClick() {
     if (this.handleNextClick) {
+      if (this.stepIsValid()) {
+        this.isActive = false;
+        this.isCompleted = true;
+      }
       this.handleNextClick()
     }
   }

@@ -9,23 +9,27 @@ import { HTMLTemplateResult } from 'lit'
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
-
 import {
   gdsCustomElement,
   html,
   getScopedTagName,
 } from '../../utils/helpers/custom-element-scoping'
 
+import '../icon/icons/chevron-bottom'
+import '../icon/icons/checkmark'
 import '../../primitives/listbox'
+
 import type { GdsListbox } from '../../primitives/listbox'
 import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option'
 import '../popover'
+import '../button'
 
-import { GdsFormControlElement } from '../../components/form-control'
+import { GdsFormControlElement } from '../form/form-control'
 
+import { tokens } from '../../tokens.style'
 import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
 
@@ -48,7 +52,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = styles
+  static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -148,6 +152,12 @@ export class GdsDropdown<ValueT = any>
   hideLabel = false
 
   /**
+   * Whether to disable the mobile styles.
+   */
+  @property()
+  disableMobileStyles = false
+
+  /**
    * Get the options of the dropdown.
    */
   get options() {
@@ -238,23 +248,28 @@ export class GdsDropdown<ValueT = any>
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
-        .useModalInMobileView=${true}
+        .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <button
           id="trigger"
-          slot="trigger"
+          name="trigger"
           aria-haspopup="listbox"
+          slot="trigger"
           role="combobox"
           aria-owns="listbox"
           aria-controls="listbox"
           aria-expanded="${this.open}"
           aria-label="${this.label}"
+          part="trigger"
           class=${classMap({ small: this.size === 'small' })}
         >
           <slot name="trigger">
             <span>${unsafeHTML(this.displayValue)}</span>
           </slot>
+          <div class="icon">
+            <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+          </div>
         </button>
         ${when(
           this.searchable,
@@ -268,7 +283,6 @@ export class GdsDropdown<ValueT = any>
               @keyup=${this.#handleSearchFieldKeyUp}
             />`,
         )}
-
         <gds-listbox
           id="listbox"
           .multiple="${ifDefined(this.multiple)}"
@@ -281,8 +295,14 @@ export class GdsDropdown<ValueT = any>
         </gds-listbox>
       </gds-popover>
 
-      <span class="form-info"><slot name="message"></slot></span>
+      <span class="form-info"
+        ><slot name="message">${this.validationMessage}</slot></span
+      >
     `
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elTriggerBtn
   }
 
   /**

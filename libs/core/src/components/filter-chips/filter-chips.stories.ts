@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/filter-chips)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/filter-chips)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-filter-chip)
  *
  * The filter chips component allows users to quickly refine the result of data they want to be presented on the page.
  */
 const meta: Meta = {
-  title: 'Components/Filter Chips',
+  title: 'Docs/Components/Filter Chips',
   component: 'gds-filter-chips',
   //subcomponents: { FilterChip: 'gds-filter-chip' },
   parameters: {

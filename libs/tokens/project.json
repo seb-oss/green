@@ -45,13 +45,13 @@
     "copy-package-json": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cp libs/tokens/package.json dist/libs/tokens"
+        "command": "npx copyfiles libs/tokens/package.json dist/libs/tokens -f"
       }
     },
     "copy-readme": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cp libs/tokens/README.md dist/libs/tokens"
+        "command": "npx copyfiles libs/tokens/README.md dist/libs/tokens -f"
       }
     }
   }

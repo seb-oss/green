@@ -2,6 +2,10 @@ import React from 'react'
 import { randomId } from '@sebgroup/extract'
 import { IconProps } from '../../types/props'
 
+/**
+ * @deprecated
+ * This component is deprecated. Use `SquareExclamation` instead from `@sebgroup/green-react`.
+ */
 export const SquareExclamation = ({
   focusable = false,
   title,

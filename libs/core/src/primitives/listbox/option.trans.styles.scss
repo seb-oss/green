@@ -44,23 +44,24 @@
     margin-top: 0.15rem;
     position: relative;
     width: var(--gds-comp-checkbox-container-width);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    [gds-element='gds-icon-checkmark'] {
+      &::part(icon) {
+        width: 10px;
+        height: 10px;
+      }
+    }
 
     &.checked {
       background-color: var(--gds-comp-checkbox-container-color-selected);
 
-      &::after {
-        border-bottom: 3px solid
-          var(--gds-comp-checkbox-border-color-selected, #fff);
-        border-left: 3px solid
-          var(--gds-comp-checkbox-border-color-selected, #fff);
-        content: '';
-        height: 0.5rem;
-        left: -1px;
-        position: absolute;
-        top: 0.05rem;
-        transform: scale(0.55) rotate(-45deg);
-        transform-origin: center center;
-        width: 1rem;
+      [gds-element='gds-icon-checkmark'] {
+        &::part(icon) {
+          color: var(--gds-comp-checkbox-border-color-selected, #fff);
+        }
       }
     }
   }

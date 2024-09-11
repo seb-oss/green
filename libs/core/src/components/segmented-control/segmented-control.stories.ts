@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/segmented-control)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/segmented-control)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-segmented-control)
  *
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  */
 const meta: Meta = {
-  title: 'Components/Segmented Control',
+  title: 'Docs/Components/Segmented Control',
   component: 'gds-segmented-control',
   subcomponents: { MenuItem: 'gds-segment' },
   parameters: {

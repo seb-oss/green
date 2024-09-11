@@ -9,10 +9,11 @@ import { watch } from '../../utils/decorators/watch'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 
 import { GdsSegment } from '../../components/segmented-control/segment'
-import '../../components/icon'
+import '../icon/icons/chevron-left'
+import '../icon/icons/chevron-right'
 
 import { tokens } from '../../tokens.style'
-import style from './segmented-control.style.css'
+import style from './segmented-control.style.css?inline'
 
 const BTN_SIZE = {
   small: 36,
@@ -47,7 +48,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
    * Size of the segmented control
    * @attr size
    */
-  @property()
+  @property({ reflect: true })
   size: 'small' | 'medium' = 'medium'
 
   /**

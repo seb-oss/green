@@ -3,15 +3,20 @@
 
 @mixin add-in-page-wizard-footer {
   border-top: 1px solid tokens.get(tokens.$grey, 500);
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  padding: 1rem;
   margin-top: 0;
 
-  button svg {
-    margin-left: 0.5rem;
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  button {
+    max-height: 44px;
   }
 
   @include common.media-breakpoint-up('sm') {
-    padding: 1.5rem 1rem 1.5rem 4.5rem;
+    padding: 1.5rem 1rem 1.5rem 1.5rem;
 
     button {
       min-width: 21rem;
@@ -40,7 +45,7 @@
 
   > header {
     display: grid;
-    grid-template-columns: 2.75rem 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1.5rem;
     grid-template-rows: 1.25rem 1.75rem;
     grid-template-areas:
       'progress progress progress'
@@ -51,11 +56,11 @@
 
     @media (min-width: 576px) {
       padding: 1rem 1rem 1rem 1.5rem;
-      grid-template-columns: 3rem 1fr 6.25rem;
+      grid-template-columns: 2.5rem 1fr 6.25rem;
       grid-template-rows: 1.25rem 1.75rem;
       grid-template-areas:
-        'icon progress edit'
-        'icon title title';
+        'progress progress edit'
+        'title title title';
     }
   }
 
@@ -69,11 +74,8 @@
     justify-content: center;
     align-items: center;
 
-    @include common.media-breakpoint-up('sm') {
-      display: flex;
-    }
-
-    svg {
+    svg,
+    [gds-element*='gds-icon'] {
       width: 1.5rem;
       height: 1.5rem;
       fill: common.$white;
@@ -88,18 +90,34 @@
 
   &__header__title {
     grid-area: title;
+
+    > * {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+
+      @include common.media-breakpoint-up('sm') {
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1.75rem;
+      }
+    }
   }
 
   &__header__edit {
     grid-area: edit;
     display: none;
     justify-content: end;
+
     @media (min-width: 576px) {
       display: flex;
     }
 
-    > button > svg {
+    > button > svg,
+    > button > [gds-element*='gds-icon'] {
       margin-right: 0.25rem;
+      width: 1rem;
+      height: 1rem;
       fill: var(--color);
 
       path {
@@ -111,35 +129,47 @@
   &__content {
     padding: 0.5rem 1rem 1.5rem 1rem;
     max-width: 50rem;
+
     @include common.media-breakpoint-up('sm') {
-      padding: 1rem 1rem 1.5rem 4.5rem;
+      padding: 0.5rem 1rem 1.5rem 1.5rem;
     }
   }
 
   > footer {
+    margin-block-start: 0;
     justify-content: flex-start;
   }
 
   &__footer {
     @include add-in-page-wizard-footer;
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-left: 0.25rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   &__footer--edit {
-    button svg {
-      margin-right: 0.25rem;
-      margin-left: 0;
-    }
-
     @include common.media-breakpoint-up('sm') {
       display: none !important;
+    }
+
+    svg,
+    [gds-element*='gds-icon'] {
+      margin-right: 0.25rem;
+      margin-left: 0;
+      width: 1rem;
+      height: 1rem;
     }
   }
 
   // Completed section styling
   &.completed &__header {
     grid-template-areas:
-      'icon progress progress'
-      'icon title title';
+      'progress progress icon'
+      'title title icon';
 
     @media (min-width: 576px) {
       grid-template-areas:
@@ -150,6 +180,6 @@
 
   &.completed &__header__icon {
     display: flex;
-    background-color: tokens.get(tokens.$green, 1);
+    background-color: tokens.get(tokens.$green, 2, dark);
   }
 }

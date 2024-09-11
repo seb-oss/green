@@ -1,11 +1,14 @@
 import * as fs from 'fs'
 import * as _template from 'lodash.template'
+import * as swift from './templates/ios/swift.tokens'
+
 import {
   Format,
   Options,
   TransformedToken,
   formatHelpers,
 } from 'style-dictionary'
+import { color } from '@storybook/theming'
 
 const {
   fileHeader,
@@ -62,6 +65,55 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  'color/v2': {
+    name: 'color/v2',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign(
+        { selector: ':host', colorScheme: 'light' },
+        args.options,
+      )
+
+      // Apply color scheme to tokens
+      dictionary.allTokens = useColorScheme(dictionary.allTokens, options)
+
+      // Filter and map each token
+      dictionary.allTokens = dictionary.allTokens
+        .filter((token) => token.filePath.includes('color-v2'))
+        .map((token) => {
+          if (
+            token.path[2] === 'l1' ||
+            token.path[2] === 'l1c' ||
+            token.path[2] === 'l2' ||
+            token.path[2] === 'l2c' ||
+            token.path[2] === 'l3' ||
+            token.path[2] === 'l3c'
+          ) {
+            // Adjust token name to follow the format --gds-color-l1-background-primary
+            token.name = `gds-color-${token.path.slice(2).join('-')}`
+          }
+          return token
+        })
+
+      // Generate CSS variables
+      const cssVariables = formatHelpers.formattedVariables({
+        format: 'css',
+        dictionary,
+        outputReferences: options.outputReferences,
+      })
+
+      // Return the formatted CSS
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        // `${options.selector} {\n` +
+        `` +
+        `  color-scheme: ${options.colorScheme};\n` +
+        cssVariables +
+        ``
+        // `\n}\n`
+      )
+    },
+  },
   size: {
     name: 'size',
     formatter: function (args) {
@@ -70,20 +122,13 @@ const formats: Record<string, Format> = {
 
       // Map each token
       dictionary.allTokens = dictionary.allTokens.map((token) => {
-        // If the token path starts with 'ref.size' or 'sys.grid.width', convert it to pixels
-        if (
-          (token.path[0] === 'ref' && token.path[1] === 'size') ||
-          (token.path[0] === 'sys' &&
-            token.path[1] === 'grid' &&
-            token.path[2] === 'width') ||
-          (token.path[0] === 'sys' &&
-            token.path[1] === 'typography' &&
-            token.path[2] === 'size') ||
-          (token.path[0] === 'sys' &&
-            token.path[1] === 'typography' &&
-            token.path[2] === 'line-height')
-        ) {
+        if (token.path[0] === 'sys' && token.path[1] === 'space') {
+          // Adjust token name to remove hyphen after numbers
+          const adjustedName = token.name
+            .replace(/(\d)-/, '$1')
+            .replace('sys-', '')
           return Object.assign({}, token, {
+            name: adjustedName,
             value: `${token.value}px`,
             original: { value: `${token.value}px` },
           })
@@ -100,6 +145,131 @@ const formats: Record<string, Format> = {
           dictionary,
           outputReferences: options.outputReferences,
         }) +
+        `\n}\n`
+      )
+    },
+  },
+  text: {
+    name: 'text',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':host' }, args.options)
+
+      // TODO: Update all sizes for typography
+      // Map each token
+      dictionary.allTokens = dictionary.allTokens.map((token) => {
+        if (
+          (token.path[0] === 'sys' &&
+            token.path[1] === 'typography' &&
+            token.path[2] === 'size') ||
+          (token.path[0] === 'sys' &&
+            token.path[1] === 'typography' &&
+            token.path[2] === 'line-height')
+        ) {
+          // Adjust token name to remove hyphen after numbers
+          const adjustedName = token.name
+            .replace(/(\d)-/, '$1')
+            .replace('sys-', '')
+            .replace('typography-', 'text-')
+          return Object.assign({}, token, {
+            name: adjustedName,
+            value: `${token.value}px`,
+            original: { value: `${token.value}px` },
+          })
+        } else if (
+          token.path[0] === 'sys' &&
+          token.path[1] === 'typography' &&
+          token.path[2] === 'weight'
+        ) {
+          // Only adjust token name for 'weight', without changing the value
+          const adjustedName = token.name
+            .replace('sys-', '')
+            .replace('typography-', 'text-')
+          return Object.assign({}, token, {
+            name: adjustedName,
+            // Do not modify the value for 'weight' tokens
+          })
+        } else {
+          return token
+        }
+      })
+
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences: options.outputReferences,
+        }) +
+        `\n}\n`
+      )
+    },
+  },
+  shadow: {
+    name: 'shadow',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':host' }, args.options)
+
+      // Define opacity values for each shadow size
+      // TODO: Implement a better way to handle opacity values or get the colors from Figma tokens
+      const opacityMap = {
+        xs: [0.1, 0.1],
+        s: [0.1, 0.06],
+        m: [0.1, 0.06],
+        l: [0.08, 0.03],
+        xl: [0.08, 0.03],
+      }
+
+      // Helper function to convert hex to rgba
+      function hexToRgba(hex, opacity) {
+        const bigint = parseInt(hex.slice(1), 16)
+        const r = (bigint >> 16) & 255
+        const g = (bigint >> 8) & 255
+        const b = bigint & 255
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`
+      }
+
+      // Group shadow properties by size
+      const shadowGroups = dictionary.allTokens.reduce((acc, token) => {
+        if (token.path[0] === 'sys' && token.path[1] === 'shadow') {
+          const size = token.path[2].split('-')[0]
+          if (!acc[size]) acc[size] = {}
+          acc[size][token.path.slice(2).join('-')] = token.value
+        }
+        return acc
+      }, {})
+
+      // Create combined shadow variables
+      const combinedShadows = Object.entries(shadowGroups)
+        .map(([size, props]) => {
+          const offsetX1 = props[`${size}-offset-x-1`] || 0
+          const offsetY1 = props[`${size}-offset-y-1`] || 0
+          const blur1 = props[`${size}-blur-1`] || 0
+          const spread1 = props[`${size}-spread-1`] || 0
+          const color1 = hexToRgba(
+            props[`${size}-color-1`] || '#000000',
+            opacityMap[size][0],
+          )
+          const offsetX2 = props[`${size}-offset-x-2`] || 0
+          const offsetY2 = props[`${size}-offset-y-2`] || 0
+          const blur2 = props[`${size}-blur-2`] || 0
+          const spread2 = props[`${size}-spread-2`] || 0
+          const color2 = hexToRgba(
+            props[`${size}-color-2`] || '#000000',
+            opacityMap[size][1],
+          )
+
+          const shadowValue = `${offsetX1}px ${offsetY1}px ${blur1}px ${spread1}px ${color1}, ${offsetX2}px ${offsetY2}px ${blur2}px ${spread2}px ${color2}`
+          return `--gds-shadow-${size}: ${shadowValue};`
+        })
+        .join('\n')
+
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        combinedShadows +
         `\n}\n`
       )
     },
@@ -166,6 +336,17 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  'green/ios-swift-package': {
+    name: 'green/ios-swift-package',
+    formatter: function ({ options, file }) {
+      const template = _template(
+        fs.readFileSync(
+          process.cwd() + '/libs/tokens/src/templates/ios/spm.package.template',
+        ),
+      )
+      return template({ file, options, fileHeader })
+    },
+  },
   'green/ios-swift-class': {
     name: 'green/ios-swift-class',
     formatter: function ({ dictionary, options, file, platform }) {
@@ -205,6 +386,58 @@ const formats: Record<string, Format> = {
       allTokens = useColorScheme(allTokens, options)
 
       return template({ allTokens, file, options, formatProperty, fileHeader })
+    },
+  },
+  'green/ios-swift-class-tree': {
+    name: 'green/ios-swift-class-tree',
+    formatter: function ({ dictionary, options, file, platform }) {
+      let allTokens
+      const { outputReferences } = options
+      options = setSwiftFileProperties(
+        options,
+        'class',
+        platform.transformGroup,
+      )
+      if (outputReferences) {
+        allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
+      } else {
+        allTokens = [...dictionary.allTokens].sort(sortByName)
+      }
+      allTokens = useColorScheme(allTokens, options)
+
+      let propertyFormatter
+      if (options.colorType == 'uiKitDynamicProvider') {
+        propertyFormatter = swift.uiKitColorReferencePropertyFormatter(
+          options.lightModeObjectName,
+          options.darkModeObjectName,
+          options,
+        )
+      } else if (options.colorType == 'swiftUiReferenceToUiKit') {
+        propertyFormatter = swift.swiftUiColorReferencePropertyFormatter(
+          options.uiKitObjectName,
+          options,
+        )
+      } else {
+        const valueFormatter = createPropertyFormatter({
+          outputReferences,
+          dictionary,
+          formatting: {
+            suffix: '',
+          },
+        })
+        propertyFormatter = swift.staticPropertyFormatter(
+          options,
+          valueFormatter,
+        )
+      }
+      const tree = swift.treeFromTokens(allTokens, options.type)
+      const fileContent = swift.fileContentFromTree(
+        tree,
+        options,
+        file,
+        propertyFormatter,
+      )
+      return fileContent
     },
   },
   'green/android-resources': {

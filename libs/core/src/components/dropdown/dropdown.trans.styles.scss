@@ -12,6 +12,7 @@
 
   :host {
     display: block;
+    font-family: inherit;
   }
 
   :host(:invalid) [gds-element='gds-popover'] + .form-info {
@@ -58,14 +59,17 @@
     @include button.base();
     @include button.secondary();
     @include dropdown.dropdown-trigger();
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
     font-size: inherit;
     font-weight: normal;
     line-height: 1.125;
+    gap: 1ch;
+    width: 100%;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
-
-    width: 100%;
 
     &.small {
       font-size: 0.875rem;
@@ -73,6 +77,23 @@
 
     &:hover {
       background: var(--grey-400);
+    }
+
+    &::after {
+      display: none;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      max-height: 24px;
+      max-width: 24px;
+    }
+
+    &[aria-expanded='true'] ::part(icon) {
+      transform: scaleY(-1);
     }
   }
 

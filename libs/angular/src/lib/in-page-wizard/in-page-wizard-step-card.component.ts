@@ -13,6 +13,10 @@ export class NggInPageWizardStepCardComponent {
   readonly handleEditClick: EventEmitter<MouseEvent> =
     new EventEmitter<MouseEvent>()
 
+  @Input() public stepIsValid = () => {
+    return true;
+  }
+
   @Input() public stepText = ''
 
   @Input() public title = ''
@@ -20,6 +24,8 @@ export class NggInPageWizardStepCardComponent {
   @Input() public editBtnText = ''
 
   @Input() public nextBtnText = ''
+
+  @Input() public showNextBtnIcon = true
 
   @Input() public isCompleted = false
 
@@ -29,11 +35,15 @@ export class NggInPageWizardStepCardComponent {
 
   handleOnEditBtnClick(event: MouseEvent): void {
     this.isActive = !this.isActive
+    this.isCompleted = false
     this.handleEditClick.emit(event)
   }
   handleOnNextBtnClick(event: MouseEvent) {
-    this.isActive = false
-    this.isCompleted = true
+    if (this.stepIsValid()) {
+      this.isActive = false;
+      this.isCompleted = true;
+    }
+    
     this.handleNextClick.emit(event)
   }
 }

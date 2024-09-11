@@ -1,9 +1,9 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/context-menu'
 import {
@@ -47,7 +47,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await timeout(0)
+      await aTimeout(0)
 
       const spy = sinon.spy()
       el.addEventListener('gds-menu-item-click', spy)
@@ -67,7 +67,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await timeout(0)
+      await aTimeout(0)
 
       const spy = sinon.spy()
       el.addEventListener('click', spy)
@@ -113,7 +113,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await timeout(0)
+      await aTimeout(0)
 
       const spy = sinon.spy()
       el.addEventListener('gds-menu-item-click', spy)
@@ -136,7 +136,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await timeout(0)
+      await aTimeout(0)
 
       const spy = sinon.spy()
       el.addEventListener('gds-menu-item-click', spy)
@@ -159,7 +159,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      await timeout(0)
+      await aTimeout(0)
 
       const item = el.querySelector<GdsMenuItem>(
         getScopedTagName('gds-menu-item'),

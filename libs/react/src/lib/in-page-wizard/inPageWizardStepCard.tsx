@@ -53,7 +53,7 @@ export const InPageWizardStepCard = ({
           {stepText}
         </div>
         <div className="gds-in-page-wizard-step-card__header__title">
-          <h2 className="h4">{title}</h2>
+          <h2>{title}</h2>
         </div>
 
         {stepStatus === 'IsComplete' && (

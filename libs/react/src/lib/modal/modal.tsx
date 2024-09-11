@@ -5,10 +5,12 @@ import {
   MouseEvent,
   ReactNode,
   useEffect,
+  useRef,
   useState,
 } from 'react'
 import Button from '../form/button/button'
 import classNames from 'classnames'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 type ModalEventListener = (
   event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null,
@@ -128,6 +130,8 @@ export const Modal = ({
   const [status, setStatus] = useState<string>(UNMOUNTED)
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     if (isOpen && !shouldRender && status === UNMOUNTED) {
       setShouldRender(true)
@@ -148,6 +152,20 @@ export const Modal = ({
         setShouldRender(false)
       }, DELAY)
     }
+
+    if (isOpen && modalRef.current) {
+      // Disable scrolling on the body when the modal is open
+      disableBodyScroll(modalRef.current);
+    } else if (modalRef.current) {
+      // Enable scrolling on the body when the modal is closed
+      enableBodyScroll(modalRef.current);
+    }
+
+    return () => {
+      // Cleanup by enabling body scroll and removing all scroll locks
+      clearAllBodyScrollLocks();
+    };
+    
   }, [isOpen, shouldRender, status])
 
   if (!isOpen) return null
@@ -176,7 +194,7 @@ export const Modal = ({
       })
 
       modalContent = (
-        <aside className={className} {...dialogProps}>
+        <aside className={className} {...dialogProps} ref={modalRef}>
           <ModalHeader
             id={headerId}
             setStatus={setStatus}
@@ -192,7 +210,7 @@ export const Modal = ({
     }
     case 'takeover': {
       modalContent = (
-        <main {...dialogProps}>
+        <main {...dialogProps} ref={modalRef}>
           <ModalHeader id={headerId} {...props} />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
@@ -202,7 +220,7 @@ export const Modal = ({
     }
     default: {
       modalContent = (
-        <div className="gds-dialog-wrapper">
+        <div className="gds-dialog-wrapper" ref={modalRef}>
           <section {...dialogProps}>
             <ModalHeader id={headerId} {...props} />
             <ModalBody id={bodyId} {...props} />

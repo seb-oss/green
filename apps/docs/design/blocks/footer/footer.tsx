@@ -39,7 +39,7 @@ export default function Footer() {
             <ul>
               <Grid columns={1} gapBlock="small">
                 <li>
-                  <Link href="https://github.com/sebgroup/green">Github</Link>
+                  <Link href="https://github.com/seb-oss/green">Github</Link>
                 </li>
                 <li>
                   <Link href="/changelog">Changelog</Link>
