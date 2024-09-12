@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.41.1
+
+### Patch Changes
+
+- 5c5234e: **Option:** Use scoped html template tag
+
 ## 1.41.0
 
 ### Minor Changes
