@@ -57,12 +57,17 @@ export const Simplified: Story = {
 export const ExtendedSupportingText: Story = {
   ...DefaultParams,
   render: () => html`
-    <gds-input
-      label="Label text"
-      supporting-text="Supporting text"
-      show-extended-supporting-text
-    >
-      <span slot="message">Extended supporting text</span>
-    </gds-input>
+    <gds-flex flex-direction="column" gap="xl">
+      <gds-input
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="message">Extended supporting text</span>
+      </gds-input>
+      <gds-input label="Label text" supporting-text="Supporting text">
+        <span slot="message">Extended supporting text</span>
+      </gds-input>
+    </gds-flex>
   `,
 }

@@ -85,7 +85,7 @@ export const Example_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
@@ -128,7 +128,7 @@ export const Compact_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button compact>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification

@@ -12,28 +12,28 @@ import '../../components/icon/icons/sun'
 <Meta title="Docs/Style/Colors" />
 
 # Colors 
-<gds-flex direction="column" gap="2xl">
+<gds-flex flex-direction="column" gap="2xl">
   {Object.entries(colors.sys.color).map(([level, categories]) => ( 
-      <gds-flex direction="column" gap="2xl">
-        <gds-flex gap="s" direction="column">
+      <gds-flex flex-direction="column" gap="2xl">
+        <gds-flex gap="s" flex-direction="column">
           <gds-text text-transform="uppercase">{level}</gds-text>
             {Object.entries(categories).map(([category, items]) => (
-                <gds-flex gap="s" direction="column">
+                <gds-flex gap="s" flex-direction="column">
                     <gds-text text-transform="capitalize" color="l1-content-primary/0.4">{category}</gds-text>
-                    <gds-flex direction="row" gap="s">
-                      {! `<gds-flex direction="column" height="140px" gap="s">
-                        <gds-flex align="center" height="64px" opacity="0.8">
+                    <gds-flex flex-direction="row" gap="s">
+                      {! `<gds-flex flex-direction="column" height="140px" gap="s">
+                        <gds-flex align-items="center" height="64px" opacity="0.8">
                           <gds-icon-sun height="10" />
                         </gds-flex>
-                        <gds-flex align="center" height="64px" opacity="0.8">
+                        <gds-flex align-items="center" height="64px" opacity="0.8">
                           <gds-icon-moon height="10" />
                         </gds-flex>
                       </gds-flex>`}
                         {Object.entries(items).map(([item, properties]) => (
-                            <gds-flex direction="column" gap="s">
+                            <gds-flex flex-direction="column" gap="s">
                                   <gds-theme color-scheme="auto">
                                     <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
-                                        <gds-flex gap="xs" align="center" >
+                                        <gds-flex gap="xs" align-items="center" >
                                           <gds-card 
                                               height="40px" 
                                               width="40px" 
@@ -41,7 +41,7 @@ import '../../components/icon/icons/sun'
                                               border="4xs/l2-stroke-primary"
                                               background={level + "-" + category + "-" + item}
                                           />
-                                          <gds-flex direction="column" gap="3xs" align="start">
+                                          <gds-flex flex-direction="column" gap="3xs" align-items="start">
                                               <gds-text tag="small">{item}</gds-text>
                                               <gds-text text-transform="uppercase">{properties.value}</gds-text>
                                           </gds-flex>
@@ -50,7 +50,7 @@ import '../../components/icon/icons/sun'
                                   </gds-theme>
                                 <gds-theme color-scheme="dark">
                                   <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
-                                      <gds-flex gap="xs" align="center" justify="start">
+                                      <gds-flex gap="xs" align-items="center" justify-content="start">
                                           <gds-card 
                                               height="40px" 
                                               width="40px" 
@@ -58,7 +58,7 @@ import '../../components/icon/icons/sun'
                                               border="4xs/l2-stroke-tertiary"
                                               background={level + "-" + category + "-" + item}
                                           />
-                                          <gds-flex direction="column" gap="3xs" align="start">
+                                          <gds-flex flex-direction="column" gap="3xs" align-items="start">
                                             <gds-text 
                                               color="l1-content-primary" 
                                               tag="small"

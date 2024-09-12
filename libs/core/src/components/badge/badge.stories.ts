@@ -39,8 +39,8 @@ export const Variants: Story = {
   },
   render: (args) => html`
     <gds-grid columns="2" gap="2xl">
-      <gds-flex gap="xl" direction="column" width="20ch">
-        <gds-flex direction="column" gap="s">
+      <gds-flex gap="xl" flex-direction="column" width="20ch">
+        <gds-flex flex-direction="column" gap="s">
           <gds-text>Icon</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
@@ -66,8 +66,8 @@ export const Variants: Story = {
           Error
         </gds-badge>
       </gds-flex>
-      <gds-flex gap="xl" direction="column" width="20ch">
-        <gds-flex direction="column" gap="s">
+      <gds-flex gap="xl" flex-direction="column" width="20ch">
+        <gds-flex flex-direction="column" gap="s">
           <gds-text>Basic</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>

@@ -70,11 +70,10 @@ export class GdsGrid extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    attribute: 'auto-columns',
     property: '--_col-width',
     valueTemplate: (v) => `${v}px`,
   })
-  autoColumns?: string
+  'auto-columns'?: string
 
   render() {
     return html`<slot></slot>`

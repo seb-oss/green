@@ -38,10 +38,15 @@ export const Card: Story = {
   render: (args) => html`
     <gds-grid columns="xs{1} m{3} l{2}" gap="l">
       <gds-card overflow="hidden">
-        <gds-flex display="flex" gap="0" direction="column" align="stretch">
+        <gds-flex
+          display="flex"
+          gap="0"
+          flex-direction="column"
+          align-items="stretch"
+        >
           <gds-container
             position="relative"
-            border-radius="xs"
+            border-radius="s"
             overflow="hidden"
           >
             <gds-img
@@ -64,12 +69,12 @@ export const Card: Story = {
             </gds-mask>
           </gds-container>
           <gds-flex
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{l} l{l}"
-            align="flex-start"
+            align-items="flex-start"
             gap="l"
           >
-            <gds-flex gap="s" direction="column">
+            <gds-flex gap="s" flex-direction="column">
               <gds-text font-size="body-l">
                 Sector by sector. Industry by industry.
               </gds-text>
@@ -83,7 +88,7 @@ export const Card: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card border-radius="m" overflow="hidden">
+      <gds-card border-radius="s" overflow="hidden">
         <gds-flex position="relative" height="100%">
           <gds-video
             src="https://github.com/user-attachments/assets/f556d859-466a-416c-95fb-ee908ffccfdd"
@@ -100,8 +105,8 @@ export const Card: Story = {
             position="absolute"
           >
             <gds-flex
-              direction="column"
-              justify="flex-end"
+              flex-direction="column"
+              justify-content="flex-end"
               padding="4xl 2xl 2xl 2xl"
               gap="l"
               height="100%"

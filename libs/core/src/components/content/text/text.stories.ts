@@ -109,8 +109,8 @@ export const Card: Story = {
   ...DefaultParams,
   name: 'Tags',
   render: (args) =>
-    html`<gds-flex direction="column" gap="2xl">
-      <gds-flex direction="column" gap="m">
+    html`<gds-flex flex-direction="column" gap="2xl">
+      <gds-flex flex-direction="column" gap="m">
         <gds-text>Span ( Default )</gds-text>
         <gds-text tag="p">Paragraph </gds-text>
         <gds-text tag="em">Em</gds-text>
@@ -118,7 +118,7 @@ export const Card: Story = {
         <gds-text tag="strong">strong</gds-text>
         <gds-text tag="small">small</gds-text>
       </gds-flex>
-      <gds-flex direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-text tag="h1">H1</gds-text>
         <gds-text tag="h2">H2</gds-text>
         <gds-text tag="h3">H3</gds-text>
@@ -133,7 +133,7 @@ export const Weight: Story = {
   ...DefaultParams,
   name: 'Weight',
   render: (args) =>
-    html`<gds-flex direction="column" gap="m">
+    html`<gds-flex flex-direction="column" gap="m">
       <gds-text weight="bold">Bold (700)</gds-text>
       <gds-text weight="medium">Medium (500)</gds-text>
       <gds-text weight="book">Book (450)</gds-text>
@@ -151,7 +151,7 @@ export const Weight: Story = {
 export const Heading: Story = {
   name: 'Heading',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-text tag="h6">H6: Heading 2XS</gds-text>
       <gds-text tag="h5">H5: Heading XS</gds-text>
       <gds-text tag="h4">H4: Heading Small</gds-text>
@@ -165,7 +165,7 @@ export const Heading: Story = {
 export const Detail: Story = {
   name: 'Detail',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="detail-xs">Detail Extra Small</gds-text>
       <gds-text font-size="detail-s">Detail Small</gds-text>
       <gds-text font-size="detail-m">Detail Medium</gds-text>
@@ -176,7 +176,7 @@ export const Detail: Story = {
 export const Body: Story = {
   name: 'Body',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="body-s">Body Small</gds-text>
       <gds-text font-size="body-m">Body Medium</gds-text>
       <gds-text font-size="body-l">Body Large</gds-text>
@@ -187,7 +187,7 @@ export const Body: Story = {
 export const Display: Story = {
   name: 'Display',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="display-s">Display Small</gds-text>
       <gds-text font-size="display-m">Display Medium</gds-text>
       <gds-text font-size="display-l">Display Large</gds-text>
@@ -200,7 +200,7 @@ export const Display: Story = {
 export const Preamble: Story = {
   name: 'Preamble',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="preamble-xs">Preamble Extra Small</gds-text>
       <gds-text font-size="preamble-s">Preamble Small</gds-text>
       <gds-text font-size="preamble-m">Preamble Medium</gds-text>
@@ -217,8 +217,8 @@ export const Preamble: Story = {
 export const Lines: Story = {
   name: 'Line Clamp',
   render: (args) => html`
-    <gds-flex direction="column" gap="2xl">
-      <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="2xl">
+      <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:2</gds-text>
         <gds-text font-size="display-s" lines="2">
@@ -226,7 +226,7 @@ export const Lines: Story = {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
-      <gds-flex direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:3</gds-text>
         <gds-text font-size="display-m" lines="3">
@@ -238,7 +238,7 @@ export const Lines: Story = {
           incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
-      <gds-flex direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:4</gds-text>
         <gds-text font-size="display-l" lines="4">
@@ -265,14 +265,14 @@ export const Lines: Story = {
 export const Color: Story = {
   name: 'Color',
   render: (args) => html`
-    <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="m">
       <gds-theme color-scheme="dark">
         <gds-flex
           background="l1-background-primary"
           border-radius="xs"
           padding="xl"
           display="flex"
-          direction="column"
+          flex-direction="column"
         >
           <gds-text color="l1-content-primary" font-size="body-s">
             Color: Content Primary
@@ -283,7 +283,7 @@ export const Color: Story = {
           border-radius="xs"
           padding="xl"
           display="flex"
-          direction="column"
+          flex-direction="column"
         >
           <gds-text color="l1-content-secondary" font-size="body-m">
             Color: Content Secondary
@@ -294,7 +294,7 @@ export const Color: Story = {
           border-radius="xs"
           padding="xl"
           display="flex"
-          direction="column"
+          flex-direction="column"
         >
           <gds-text color="l1-content-tertiary" font-size="body-l">
             Color: Content Tertiary

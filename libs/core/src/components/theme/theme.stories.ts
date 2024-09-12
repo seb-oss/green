@@ -89,7 +89,12 @@ export const Theme: Story = {
   render: () => html`
     <gds-grid columns="xs{1} m{3} l{3}" gap="l">
       <gds-card shadow="s{xs} m{xs} l{s}" border-radius="xs" overflow="hidden">
-        <gds-flex display="flex" gap="0" direction="column" align="stretch">
+        <gds-flex
+          display="flex"
+          gap="0"
+          flex-direction="column"
+          align-items="stretch"
+        >
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
@@ -102,12 +107,12 @@ export const Theme: Story = {
             </gds-container>
           </gds-container>
           <gds-flex
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{l} l{l}"
-            align="flex-start"
+            align-items="flex-start"
             gap="l"
           >
-            <gds-flex gap="s" direction="column">
+            <gds-flex gap="s" flex-direction="column">
               <gds-text font-size="body-l">James Doe</gds-text>
               <gds-text>
                 Passionate software engineer with a love for coding and
@@ -128,7 +133,7 @@ export const Theme: Story = {
         border="3xs/l2-stroke-primary"
         overflow="hidden"
       >
-        <gds-flex gap="m" direction="column" padding="s">
+        <gds-flex gap="m" flex-direction="column" padding="s">
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
@@ -142,12 +147,12 @@ export const Theme: Story = {
             </gds-container>
           </gds-container>
           <gds-flex
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{s} l{s}"
-            align="flex-start"
+            align-items="flex-start"
             gap="l"
           >
-            <gds-flex gap="s" direction="column">
+            <gds-flex gap="s" flex-direction="column">
               <gds-text font-size="body-l">Lorem Ipsum</gds-text>
               <gds-text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -181,8 +186,8 @@ export const Theme: Story = {
             z-index="2"
           >
             <gds-flex
-              direction="column"
-              justify="flex-end"
+              flex-direction="column"
+              justify-content="flex-end"
               padding="4xl 2xl 2xl 2xl"
               gap="l"
               height="100%"

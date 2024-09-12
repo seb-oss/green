@@ -32,7 +32,7 @@ export class CardExample extends LitElement {
 
   render() {
     return html`
-      <gds-flex justify="center">
+      <gds-flex justify-content="center">
         <gds-card
           shadow="2xs{0} s{0} m{s} l{s} xl{s}"
           border-radius="2xs{0} s{0} m{xs} l{xs} xl{xs}"
@@ -65,8 +65,8 @@ export class CardExample extends LitElement {
                 z-index="2"
               >
                 <gds-flex
-                  direction="column"
-                  justify="flex-end"
+                  flex-direction="column"
+                  justify-content="flex-end"
                   height="100%"
                   gap="xs"
                 >
@@ -77,7 +77,7 @@ export class CardExample extends LitElement {
                     Together with our clients, we're accelerating the
                     sustainable transition.
                   </gds-text>
-                  <gds-flex align="center" gap="s" margin="s 0 0 0">
+                  <gds-flex align-items="center" gap="s" margin="s 0 0 0">
                     <gds-text>Net Zero Transition</gds-text>
                     <gds-icon-arrow-right></gds-icon-arrow-right>
                   </gds-flex>
@@ -85,11 +85,11 @@ export class CardExample extends LitElement {
               </gds-card>
             </gds-flex>
             <gds-flex
-              direction="column"
+              flex-direction="column"
               padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
               gap="2xl"
-              align="stretch"
-              justify="center"
+              align-items="stretch"
+              justify-content="center"
               height="100%"
             >
               <form novalidate>
@@ -110,7 +110,7 @@ export class CardExample extends LitElement {
                   border="4xs/l2-stroke-primary"
                   padding="xl"
                 >
-                  <gds-flex direction="column" gap="l">
+                  <gds-flex flex-direction="column" gap="l">
                     <gds-text font-size="heading-l"
                       >Logga in med digipass</gds-text
                     >
