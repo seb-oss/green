@@ -10,7 +10,6 @@ export class GdsMask extends GdsElement {
 
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    selector: '[part="mask"]',
   })
   display = 'contents'
 
