@@ -7,7 +7,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import DividerCSS from './divider.style.css'
+import DividerCSS from './divider.style'
 
 /**
  * The `gds-divider`  is a custom element that provides a flexible divider system.

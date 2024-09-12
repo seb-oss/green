@@ -6,6 +6,7 @@ const style = css`
     :host {
       display: flex;
       flex-direction: column;
+      overflow: auto;
     }
   }
 `

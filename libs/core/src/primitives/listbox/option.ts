@@ -1,17 +1,18 @@
-import { HTMLTemplateResult, html } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 
-import { gdsCustomElement } from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 
 import style from './option.styles'
 
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
 import { tokens } from '../../tokens.style'
+
+import '../../components/icon/icons/checkmark'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
@@ -126,7 +127,7 @@ export class GdsOption extends Focusable(GdsElement) {
     const checkbox = html`
       <span class="checkbox ${classMap({ checked: this.selected })}">
         ${this.selected
-          ? html`<gds-icon-checkmark stroke></gds-icon-checkmark>`
+          ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>`
           : ''}
       </span>
     `

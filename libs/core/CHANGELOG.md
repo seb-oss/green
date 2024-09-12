@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.41.1
+
+### Patch Changes
+
+- 5c5234e: **Option:** Use scoped html template tag
+
+## 1.41.0
+
+### Minor Changes
+
+- b5605be: Add brand icons and rename, container and flex improvements
+
+### Patch Changes
+
+- a5e3c8e: **Dropdown:** Enable overflow scroll in 2023 version
+- a5e3c8e: **Dropdown**: Fix missing checkmark in multi-select
+
+## 1.40.1
+
+### Patch Changes
+
+- 8eb82e6: Fix `gds-container` `margin` prop to accept `auto` value
+
+## 1.40.0
+
+### Minor Changes
+
+- 26fdbeb: Refactor Colors
+  Introducing the new color system with a new naming convention and structure
+
+  Fixes: #1557
+
+- 26fdbeb: Refactor colors
+
+  Fixes: #1557
+
 ## 1.39.0
 
 ### Minor Changes

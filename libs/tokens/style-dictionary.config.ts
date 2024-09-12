@@ -85,6 +85,26 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: 'light.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'light',
+            outputReferences: false,
+            // selector: '.light',
+          },
+        },
+        {
+          destination: 'dark.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'dark',
+            outputReferences: false,
+            // selector: ':host',
+          },
+        },
+        {
           destination: 'size.css',
           format: 'size',
           filter: function (token) {
