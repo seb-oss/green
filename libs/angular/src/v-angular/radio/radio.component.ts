@@ -14,7 +14,7 @@ import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** @internal Internal class used to uncheck radio buttons with the matching name. */
 @Injectable()
@@ -67,7 +67,7 @@ export class NgvRadioControlRegistry {
   providers: [NgvRadioControlRegistry],
 })
 export class NgvRadioComponent
-  extends BaseControlValueAccessorComponent
+  extends NgvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
   /** Special property used for selecting DOM elements during automated UI testing. */

@@ -11,7 +11,7 @@ import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
@@ -19,7 +19,7 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
 })
-export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
+export class NgvTextareaComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'textarea'
   /** Text shown before input has a written value. */
@@ -31,6 +31,10 @@ export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
     this._minlength = length
     this.cdr.detectChanges()
   }
+  get minlength(): number {
+    return this._minlength
+  }
+
   /**
    * Minimum length (number of characters) of value.
    * @deprecated minlength triggers angular-template-validation. Use @Input() minLength instead.
@@ -44,6 +48,9 @@ export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
     this._maxlength = length
     this.cdr.detectChanges()
   }
+  get maxlength(): number {
+    return this._maxlength
+  }
   /**
    * Maximum length (number of characters) of value.
    * @deprecated maxlength triggers angular-template-validation. Use @Input() maxLength instead.
@@ -52,8 +59,6 @@ export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
     this._maxlength = length
     this.cdr.detectChanges()
   }
-  /** Sets the height of the textarea and disables resize. A scrollbar will appear if necessary. */
-  @Input() rows?: number
 
   /** Returns if maxlength is used */
   get hasMaxLength(): boolean {
@@ -61,14 +66,11 @@ export class NgvTextareaComponent extends BaseControlValueAccessorComponent {
   }
 
   private _maxlength = Number.MAX_SAFE_INTEGER
-  get maxlength(): number {
-    return this._maxlength
-  }
 
   private _minlength = 0
-  get minlength(): number {
-    return this._minlength
-  }
+
+  /** Sets the height of the textarea and disables resize. A scrollbar will appear if necessary. */
+  @Input() rows?: number
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,

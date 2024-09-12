@@ -7,14 +7,13 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
-import '../core.globals'
+import '../core/core.globals'
 import { NgvDropdownComponent } from './dropdown.component'
-import { DropdownUtils, Option } from '../core.utils'
-import { NgvDropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { DropdownUtils, Option } from '../core/core.utils'
+import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
 
 @Component({
   selector: 'ngv-dropdown-list',
@@ -46,7 +45,6 @@ describe('[NgvCore]', () => {
         ],
         imports: [
           CommonModule,
-          FontAwesomeModule,
           FormsModule,
           ReactiveFormsModule,
           NgvI18nTestModule,

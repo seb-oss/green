@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { CommonModule } from '@angular/common'
+import { NgModule, Pipe, PipeTransform } from '@angular/core'
 import {
   HashMap,
   Translation,
@@ -11,33 +11,33 @@ import {
   TRANSLOCO_FALLBACK_STRATEGY,
   TRANSLOCO_INTERCEPTOR,
   TRANSLOCO_MISSING_HANDLER,
-  TRANSLOCO_TRANSPILER
-} from '@ngneat/transloco';
+  TRANSLOCO_TRANSPILER,
+} from '@ngneat/transloco'
 
 @Pipe({ name: 'transloco' })
 export class TranslocoMockPipe implements PipeTransform {
-  transform = (value: number): number => value;
+  transform = (value: number): number => value
 }
 
 export class TranslocoMockTranspiler implements TranslocoTranspilerFunction {
-  transpile = (..._args: string[]) => '';
+  transpile = (..._args: string[]) => ''
 }
 
 export class TranslocoMockMissingHandler implements TranslocoMissingHandler {
-  handle = (key: string, _: TranslocoConfig, _params: HashMap) => key;
+  handle = (key: string, _: TranslocoConfig, _params: HashMap) => key
 }
 
 export class TranslocoMockStrategy implements TranslocoFallbackStrategy {
-  getNextLangs = (_failedLang: string): any => '';
+  getNextLangs = (_failedLang: string): any => ''
 }
 
 export class TranslocoMockInterceptor implements TranslocoInterceptor {
   preSaveTranslation(translation: Translation, _lang: string): Translation {
-    return translation;
+    return translation
   }
 
   preSaveTranslationKey(_key: string, value: string, _lang: string): string {
-    return value;
+    return value
   }
 }
 
@@ -56,7 +56,7 @@ export class TranslocoMockInterceptor implements TranslocoInterceptor {
     },
     {
       provide: TRANSLOCO_FALLBACK_STRATEGY,
-      useClass: TranslocoMockStrategy
+      useClass: TranslocoMockStrategy,
     },
     {
       provide: TRANSLOCO_MISSING_HANDLER,

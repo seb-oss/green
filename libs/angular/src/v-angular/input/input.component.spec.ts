@@ -1,4 +1,4 @@
-import '../core.globals'
+import '../core/core.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
@@ -12,8 +12,7 @@ import { By } from '@angular/platform-browser'
 
 import chalk from 'chalk'
 
-import { TranslocoModule } from '@ngneat/transloco'
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvInputComponent } from './input.component'
@@ -37,12 +36,7 @@ describe('[NgvCore]', () => {
         providers: [
           { provide: NgControl, useValue: { control: new FormControl() } },
         ],
-        imports: [
-          FormsModule,
-          ReactiveFormsModule,
-          TranslocoModule,
-          NgvI18nTestModule,
-        ],
+        imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
       }).compileComponents()
     }))
 

@@ -293,7 +293,9 @@ describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
     const appRef = TestBed.inject(ApplicationRef)
     const input = inputField('input')
 
-    appRef.tick = jest.fn(() => {})
+    appRef.tick = jest.fn(() => {
+      // Empty function
+    })
 
     // Act
     // Caretaker note: `spectator.dispatchMouseEvent` is not used here explicitly

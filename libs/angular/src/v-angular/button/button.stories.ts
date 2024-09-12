@@ -8,7 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
+import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
 import { NgvButtonComponent, ButtonStyle } from './button.component'
 
 interface StoryClickable {
@@ -29,7 +29,7 @@ export default {
     }),
     moduleMetadata({
       imports: [CommonModule, RouterTestingModule],
-      declarations: [ExternalLinkDirective],
+      declarations: [NgvExternalLinkDirective],
     }),
   ],
   argTypes: {

@@ -17,13 +17,13 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
-import { DropdownUtils, Option } from '../core.utils'
-import { NgvDropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
+import { DropdownUtils, Option } from '../core/core.utils'
+import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
 import { NgvInputComponent } from '../input/input.component'
-import { NgvTypeaheadHighlightComponent } from '../typeahead/typeahead-highlight/typeahead-highlight.component'
-import { NgvTypeaheadInputComponent } from '../typeahead/typeahead-input/typeahead-input.component'
-import { NgvTypeaheadDirective } from '../typeahead/typeahead.directive'
+import { NgvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
+import { NgvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
+import { NgvTypeaheadDirective } from './typeahead/typeahead.directive'
 import { NgvDropdownComponent } from './dropdown.component'
 
 interface WithExtras {
@@ -97,7 +97,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
   const ctrl = new UntypedFormControl(args.ngModel)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable()
+    if (ctrl.disabled) return ctrl.enable()
     ctrl.disable()
   }
   return {
@@ -165,7 +165,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   dropdownFc.valueChanges.subscribe((value) => {
     console.log({ value })
   })
-  let showAlt = false
+  const showAlt = false
   const optionsAlt = [
     { key: 'opt7', label: 'Option 7' },
     { key: 'opt8', label: 'Option 8' },
@@ -245,7 +245,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
-    if (!!fc.disabled) return fc.enable()
+    if (fc.disabled) return fc.enable()
     fc.disable()
   }
   return {
@@ -381,7 +381,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
   ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
-    if (!!fc.disabled) return fc.enable()
+    if (fc.disabled) return fc.enable()
     fc.disable()
   }
   const searchFunction = (value$: Observable<string>) =>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { NgvI18nModule } from '../i18n/i18n.module'
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvTooltipDirective } from './tooltip.directive'
 
 @NgModule({

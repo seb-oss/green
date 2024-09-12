@@ -6,9 +6,9 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
-import '../core.globals'
+import '../core/core.globals'
 import { NgvRadioComponent } from './radio.component'
 
 describe('[NgvCore]', () => {

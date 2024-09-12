@@ -1,4 +1,4 @@
-import '../core.globals'
+import '../core/core.globals'
 
 import { CommonModule } from '@angular/common'
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
@@ -38,15 +38,15 @@ import {
 } from '@storybook/angular'
 
 import { NgvButtonComponent } from '../button/button.component'
-import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
+import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
-import { DropdownUtils } from '../core.utils'
-import { NgvDropdownListComponent } from '../dropdown-list/dropdown-list.component'
+import { DropdownUtils } from '../core/core.utils'
+import { NgvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
 import { NgvDropdownComponent } from '../dropdown/dropdown.component'
-import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
+import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
 import { NgvInfoCircleComponent } from '../info-circle/info-circle.component'
-import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadDirective } from '../typeahead/typeahead.directive'
+import { NgvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NgvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
 import { NgvInputComponent } from './input.component'
 
 interface WithExtras {
@@ -119,7 +119,7 @@ const meta: Meta<NgvInputComponent> = {
         NgvTooltipDirective,
         NgvInfoCircleComponent,
         CharacterCountdownDirective,
-        ExternalLinkDirective,
+        NgvExternalLinkDirective,
       ],
       imports: [
         NgvTypeaheadDirective,
@@ -152,7 +152,7 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
     console.log({ required: required() })
   })
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable()
+    if (ctrl.disabled) return ctrl.enable()
     ctrl.disable()
   }
   const required = () => {
@@ -371,7 +371,7 @@ export const WithResetObservable: StoryFn<
 export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
   args: NgvInputComponent & WithExtras & any,
 ) => {
-  let formGroup = new UntypedFormGroup({
+  const formGroup = new UntypedFormGroup({
     remittanceInformation: new UntypedFormControl(
       'This is a test of handling if the text is longer than the max length input',
       Validators.maxLength(9),

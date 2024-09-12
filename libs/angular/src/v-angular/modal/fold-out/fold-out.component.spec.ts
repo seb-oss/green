@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { NgvFoldOutComponent } from './fold-out.component'
 
 describe('[NgvModal]', () => {
@@ -13,7 +12,6 @@ describe('[NgvModal]', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NgvFoldOutComponent],
-        imports: [FontAwesomeModule],
       }).compileComponents()
     }))
 

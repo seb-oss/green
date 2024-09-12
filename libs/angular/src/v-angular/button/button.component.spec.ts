@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
-import '../core.globals'
-import { ExternalLinkDirective } from '../external-link/external-link.directive'
+import '../core/core.globals'
+import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link/external-link.directive'
 import { NgvButtonComponent } from './button.component'
 
 describe('[NgvCore]', () => {
@@ -21,7 +21,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvButtonComponent, ExternalLinkDirective],
+        declarations: [NgvButtonComponent, NgvExternalLinkDirective],
         providers: [
           { provide: APP_BASE_HREF, useValue: '/' },
           { provide: NgControl, useValue: new FormControl() },

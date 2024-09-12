@@ -15,7 +15,7 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 export type ButtonTypes = 'button' | 'submit' | 'reset' | 'link'
 
@@ -40,7 +40,7 @@ export enum ButtonStyle {
   styleUrls: ['./button.component.scss'],
 })
 export class NgvButtonComponent
-  extends BaseControlValueAccessorComponent
+  extends NgvBaseControlValueAccessorComponent
   implements OnInit, OnChanges
 {
   /** Special property used for selecting DOM elements during automated UI testing. */

@@ -12,10 +12,6 @@ import {
 
 import { DialogButtons } from '../modal.types'
 
-import * as crossLarge from '@sebgroup/green-core/components/icon/icons/cross-small'
-
-console.log(crossLarge)
-
 export interface DialogEvent<T = any> {
   original: Event | undefined
   payload: T | undefined

@@ -32,7 +32,9 @@ export class NgvFoldOutComponent implements OnDestroy {
   /** @internal */
   shown = false
 
-  constructor() {}
+  constructor() {
+    // Empty constructor
+  }
 
   ngOnDestroy(): void {
     this.onClickSubscription?.unsubscribe()

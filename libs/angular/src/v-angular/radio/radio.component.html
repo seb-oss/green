@@ -48,7 +48,7 @@
   </div>
 
   <!-- ERRORS -->
-  <ng-container>
+  <ng-container *transloco="let t; read: scope">
     <label
       class="sdv-field-notice sdv-field-notice--error"
       [attr.for]="id + '-radio'"
@@ -57,7 +57,7 @@
       <span *ngIf="error; else errorsRef">{{ error }}</span>
       <ng-template #errorsRef>
         <span *ngIf="firstError as error">
-          {{ error.message }}
+          {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
     </label>

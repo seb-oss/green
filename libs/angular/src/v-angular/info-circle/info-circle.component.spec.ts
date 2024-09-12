@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { TooltipDirective } from '@sebgroup/ngv-tooltip'
+import { NgvTooltipDirective } from '@sebgroup/green-angular/src/v-angular/tooltip'
 import { NgvInfoCircleComponent } from './info-circle.component'
 
 describe('[NgvCore]', () => {
@@ -13,8 +12,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvInfoCircleComponent, TooltipDirective],
-        imports: [FontAwesomeModule],
+        declarations: [NgvInfoCircleComponent, NgvTooltipDirective],
       }).compileComponents()
     }))
 

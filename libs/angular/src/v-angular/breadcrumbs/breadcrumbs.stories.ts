@@ -8,7 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { ExternalLinkDirective } from '../../lib/shared/external-link/external-link.directive'
+import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
 import { NgvBreadcrumbsComponent } from './breadcrumbs.component'
 
 export default {
@@ -20,7 +20,7 @@ export default {
     }),
     moduleMetadata({
       imports: [CommonModule, RouterTestingModule],
-      declarations: [ExternalLinkDirective],
+      declarations: [NgvExternalLinkDirective],
     }),
   ],
 } as Meta

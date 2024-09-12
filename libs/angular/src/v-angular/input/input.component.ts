@@ -17,9 +17,9 @@ import { Subject } from 'rxjs'
 import { debounceTime, takeUntil } from 'rxjs/operators'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import type { InputmaskOptions } from '../input-mask'
+import type { InputmaskOptions } from '@sebgroup/green-angular/src/v-angular/input-mask'
 
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Input fields allow users to add and edit text.
@@ -32,7 +32,7 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
   styleUrls: ['./input.component.scss'],
 })
 export class NgvInputComponent
-  extends BaseControlValueAccessorComponent
+  extends NgvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
   /** Adding .gds-form-item as a class to host element */
@@ -66,10 +66,16 @@ export class NgvInputComponent
   @Input() set minlength(length: number) {
     this._minlength = length
   }
+  get minlength(): number {
+    return this._minlength
+  }
   /** Maximum length (number of characters) of value. */
   @Input() set maxLength(length: number) {
     this._maxlength = length
     this.writeValue(this.state)
+  }
+  get maxlength(): number {
+    return this._maxlength
   }
   /**
    * Maximum length (number of characters) of value.
@@ -80,14 +86,8 @@ export class NgvInputComponent
     this.writeValue(this.state)
   }
   private _maxlength = Number.MAX_SAFE_INTEGER
-  get maxlength(): number {
-    return this._maxlength
-  }
 
   private _minlength = 0
-  get minlength(): number {
-    return this._minlength
-  }
 
   /** Wether to show label that tells how many characters are still left to be entered. Will only be set if maxLength is also set */
   private _showCharacterCountDown = true
@@ -101,7 +101,7 @@ export class NgvInputComponent
   /** Pattern the value must match to be valid. */
   @Input() pattern = ''
   /** Amount of time to wait until emitting (ngvINput) event */
-  @Input() debounceTime: number = 500
+  @Input() debounceTime = 500
   /**
    * @deprecated
    * Text to put in badge

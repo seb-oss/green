@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import { NgvSlideOutComponent } from './slide-out.component'
 
@@ -12,7 +11,7 @@ describe('SlideOutComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NgvSlideOutComponent],
-      imports: [FontAwesomeModule, NgvI18nTestModule],
+      imports: [NgvI18nTestModule],
     }).compileComponents()
   }))
 

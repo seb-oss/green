@@ -1,4 +1,4 @@
-import '../core.globals'
+import '../core/core.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
@@ -9,7 +9,7 @@ import {
 } from '@angular/forms'
 
 import { TranslocoModule } from '@ngneat/transloco'
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvTextareaComponent } from './textarea.component'

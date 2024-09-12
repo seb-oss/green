@@ -1,4 +1,4 @@
-import '../core.globals'
+import '../core/core.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
@@ -7,9 +7,8 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
-import { By } from '@angular/platform-browser'
 
-import { NgvI18nTestModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import { NgvCheckboxComponent } from './checkbox.component'
 
@@ -33,8 +32,7 @@ describe('[NgvCore]', () => {
       component = fixture.componentInstance
       fixture.detectChanges()
 
-      checkbox = fixture.debugElement.query(By.css('input'))
-        .nativeElement as HTMLInputElement
+      checkbox = fixture.debugElement.nativeElement.querySelector('input')
     }))
 
     it('should create', () => {
@@ -43,6 +41,7 @@ describe('[NgvCore]', () => {
 
     describe('onInputChange', () => {
       it('should toggle state if not disabled', () => {
+        fixture.detectChanges()
         component.disabled = false
         checkbox.click()
         expect(component.state).toBe(true)

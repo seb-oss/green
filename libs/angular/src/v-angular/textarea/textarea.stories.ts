@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms'
 
-import { NgvI18nModule } from '../i18n/i18n.module'
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import {
   applicationConfig,
   Meta,
@@ -15,7 +15,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '../../lib/shared/character-countdown/character-countdown.directive'
+import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
 import { NgvTextareaComponent } from './textarea.component'
 
 export default {
@@ -41,7 +41,7 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
   ])
   formControl.valueChanges.subscribe((val) => (formControlValue = val))
   const toggleDisableField = () => {
-    if (!!formControl.disabled) return formControl.enable()
+    if (formControl.disabled) return formControl.enable()
     formControl.disable()
   }
   return {

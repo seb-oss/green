@@ -1,10 +1,10 @@
-import '../core.globals'
+import '../core/core.globals'
 
 import { APP_BASE_HREF } from '@angular/common'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { ExternalLinkDirective } from '../shared/external-link.directive'
+import { NgvExternalLinkDirective } from '../external-link'
 import { NgvBreadcrumbsComponent } from './breadcrumbs.component'
 
 describe('[NgvCore]', () => {
@@ -17,7 +17,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvBreadcrumbsComponent, ExternalLinkDirective],
+        declarations: [NgvBreadcrumbsComponent, NgvExternalLinkDirective],
         providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
         imports: [RouterTestingModule],
       }).compileComponents()

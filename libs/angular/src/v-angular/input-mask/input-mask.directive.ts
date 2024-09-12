@@ -61,10 +61,14 @@ export class NgvInputMaskDirective<T = any>
   }
 
   @HostListener('input', ['$event.target.value'])
-  onInput = (_: any) => {}
+  onInput = (_: any) => {
+    // Empty method
+  }
 
   @HostListener('blur', ['$event.target.value'])
-  onTouched = (_: any) => {}
+  onTouched = (_: any) => {
+    // Empty method
+  }
 
   @HostListener('keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {

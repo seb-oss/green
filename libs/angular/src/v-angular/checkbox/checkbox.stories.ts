@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-//import { importProvidersFrom } from '@angular/core' // Changes: removed
+import { importProvidersFrom } from '@angular/core'
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -9,14 +9,14 @@ import {
 
 import { delay } from 'rxjs/operators'
 
-//import { NgvI18nModule } from '../shared/i18n/i18n.module' // Changes: removed
 import {
-  //applicationConfig,
+  applicationConfig,
   Meta,
   moduleMetadata,
   StoryFn,
 } from '@storybook/angular'
 
+import { NgvI18nModule } from '../i18n'
 import { NgvCheckboxComponent } from './checkbox.component'
 
 interface StoryInputListener {
@@ -31,16 +31,11 @@ export default {
   title: 'V-Angular/Checkbox',
   component: NgvCheckboxComponent,
   decorators: [
-    // applicationConfig({
-    //   providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
-    // }),
+    applicationConfig({
+      providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
+    }),
     moduleMetadata({
-      imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        /* NgvI18nModule*/
-      ],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
     }),
   ],
 } as Meta
@@ -101,7 +96,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
   let disabled = true
   const toggleDisableField = () => {
     disabled = !disabled
-    if (!!disabled) {
+    if (disabled) {
       Object.values(grp.controls).forEach((ctrl) => ctrl.enable())
       return
     }
@@ -162,6 +157,7 @@ Single.args = {
   action: console.log,
   required: true,
   disabled: false,
+  locked: false,
 }
 
 export const Multiple = TemplateAlt.bind({})

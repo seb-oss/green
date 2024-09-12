@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import { BaseControlValueAccessorComponent } from '../base-control-value-accessor/base-control-value-accessor.component'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Checkboxes allow a user to toggle an option on or off, or make multiple choices in a set of available options.
@@ -23,7 +23,7 @@ import { BaseControlValueAccessorComponent } from '../base-control-value-accesso
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })
-export class NgvCheckboxComponent extends BaseControlValueAccessorComponent {
+export class NgvCheckboxComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'checkbox'
   @Input() optionalLabel = 'Optional'

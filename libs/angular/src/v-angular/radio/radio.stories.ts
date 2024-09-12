@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-//import { NgvI18nModule } from '@sebgroup/ngv-i18n'
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import {
   applicationConfig,
   Meta,
@@ -22,15 +22,11 @@ export default {
   component: NgvRadioComponent,
 
   decorators: [
-    // applicationConfig({
-    //   providers: [importProvidersFrom(NgvI18nModule)],
-    // }),
+    applicationConfig({
+      providers: [importProvidersFrom(NgvI18nModule)],
+    }),
     moduleMetadata({
-      imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule /*NgvI18nModule*/,
-      ],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
     }),
   ],
 } as Meta<NgvRadioComponent>
@@ -72,7 +68,7 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
   const ctrl = new FormControl(args.selected)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
-    if (!!ctrl.disabled) return ctrl.enable()
+    if (ctrl.disabled) return ctrl.enable()
     ctrl.disable()
   }
   return {
