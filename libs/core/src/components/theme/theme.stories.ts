@@ -88,12 +88,12 @@ export const Theme: Story = {
   },
   render: () => html`
     <gds-grid columns="xs{1} m{3} l{3}" gap="l">
-      <gds-card shadow="s{xs} m{xs} l{s}" radius="xs" overflow="hidden">
+      <gds-card shadow="s{xs} m{xs} l{s}" border-radius="xs" overflow="hidden">
         <gds-flex display="flex" gap="0" direction="column" align="stretch">
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
-              ratio="1/1"
+              aspect-ratio="1/1"
             ></gds-img>
             <gds-container position="absolute" inset="20px 20px auto auto">
               <gds-button>
@@ -108,7 +108,7 @@ export const Theme: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="body-l">James Doe</gds-text>
+              <gds-text font-size="body-l">James Doe</gds-text>
               <gds-text>
                 Passionate software engineer with a love for coding and
                 problem-solving.
@@ -124,7 +124,7 @@ export const Theme: Story = {
       </gds-card>
       <gds-card
         shadow="l"
-        radius="m"
+        border-radius="m"
         border="3xs/l2-stroke-primary"
         overflow="hidden"
       >
@@ -132,8 +132,8 @@ export const Theme: Story = {
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
-              ratio="1/1"
-              radius="xs"
+              aspect-ratio="1/1"
+              border-radius="xs"
             ></gds-img>
             <gds-container position="absolute" inset="20px 20px auto auto">
               <gds-button>
@@ -148,7 +148,7 @@ export const Theme: Story = {
             gap="l"
           >
             <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="body-l">Lorem Ipsum</gds-text>
+              <gds-text font-size="body-l">Lorem Ipsum</gds-text>
               <gds-text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt.
@@ -161,13 +161,13 @@ export const Theme: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card radius="m" overflow="hidden">
+      <gds-card border-radius="m" overflow="hidden">
         <gds-flex position="relative" height="100%">
           <gds-video
             src="https://github.com/seb-oss/green/assets/2398447/d77a95d0-e4d7-4c49-bd95-50d0f72f1a7a"
-            fit="cover"
-            ratio="1/1"
-            events="none"
+            object-fit="cover"
+            aspect-ratio="1/1"
+            pointer-events="none"
             autoplay
             muted
             loop
@@ -188,8 +188,8 @@ export const Theme: Story = {
               height="100%"
             >
               <gds-container>
-                <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
-                <gds-text tag="p" size="body-m">UX Designer</gds-text>
+                <gds-text font-size="body-l">Jane Doe</gds-text>
+                <gds-text font-size="body-m">UX Designer</gds-text>
               </gds-container>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Message</gds-button>

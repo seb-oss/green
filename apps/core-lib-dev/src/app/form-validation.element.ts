@@ -22,7 +22,7 @@ export class FormValidationExample extends LitElement {
   }
 
   render() {
-    return html`<gds-card border="4xs/base300" padding="m" radius="s">
+    return html`<gds-card border="4xs/base300" padding="m" border-radius="s">
       <form>
         <!-- <gds-input
           required

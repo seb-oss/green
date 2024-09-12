@@ -44,35 +44,6 @@ export class GdsCard extends GdsContainer {
   })
   shadow?: string
 
-  /**
-   * Controls the border-radius property of the container.
-   * Supports all the size tokens from the design system.
-   *
-   * You can apply radius in each corner like this:
-   *
-   * ```html
-   * <gds-container radius="none none m m" ></gds-container>
-   * ```
-   *
-   * Also for different breakpoints like this:
-   *
-   * ```html
-   * <gds-container radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
-   * ```
-   *
-   * Each corner can have a different radius value and also different values for different breakpoints.
-   *
-   *  * These are the available values you can use to define Border Radius
-   *
-   * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
-   *
-   */
-  @styleExpressionProperty({
-    property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
-  })
-  radius?: string
-
   render() {
     return html`<slot></slot>`
   }

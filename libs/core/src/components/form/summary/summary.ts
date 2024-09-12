@@ -59,7 +59,7 @@ export class GdsFormSummary extends GdsElement {
     return when(
       errors.length > 0,
       () =>
-        html`<gds-card border="4xs/error-text" radius="2xs" padding="m" color="error-text">
+        html`<gds-card border="4xs/error-text" border-radius="2xs" padding="m" color="error-text">
           <gds-flex gap="s">
             <gds-container>
               <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>

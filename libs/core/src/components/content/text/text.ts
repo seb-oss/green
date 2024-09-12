@@ -34,7 +34,7 @@ export class GdsText extends GdsElement {
    *
    * You can apply size like this:
    * ```html
-   * <gds-text size="body-m"></gds-text>
+   * <gds-text font-size="body-m"></gds-text>
    * ```
    *
    * These are the available values you can use to define size:
@@ -75,7 +75,7 @@ export class GdsText extends GdsElement {
       return styleSize + styleLine
     },
   })
-  size?: string
+  'font-size'?: string
 
   /**
    * Controls the `font-weight` of the text.
@@ -114,7 +114,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  wrap?: string
+  'text-wrap'?: string
 
   /**
    * Controls the text-transform property of the text.
@@ -127,7 +127,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  transform?: string
+  'text-transform'?: string
 
   /**
    * Controls the max length of the text in characters.
@@ -136,7 +136,7 @@ export class GdsText extends GdsElement {
    * You can apply length like this:
    *
    * ```html
-   * <gds-text length="50"></gds-text>
+   * <gds-text max-width="50"></gds-text>
    * ```
    *
    * @property length
@@ -146,7 +146,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
-  length?: string
+  'max-width'?: string
 
   /**
    * Controls the max-width property of the text.
@@ -159,7 +159,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
-  min?: string
+  'min-width'?: string
 
   /**
    * Controls the text-align property of the text.
