@@ -5,6 +5,14 @@
   "projectType": "library",
   "targets": {
     "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "echo 'building Extract'"
+      },
+      "dependsOn": ["rollup"]
+    },
+    "rollup": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {

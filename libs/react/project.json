@@ -6,8 +6,19 @@
   "tags": [],
   "targets": {
     "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "npx copyfiles -f libs/react/package.json dist/libs/react"
+      },
+      "dependsOn": ["rollup"]
+    },
+    "rollup": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": ["{projectRoot}/**/*"],
       "options": {
         "outputPath": "dist/libs/react",
         "tsConfig": "libs/react/tsconfig.lib.json",
