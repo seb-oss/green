@@ -5,7 +5,7 @@ import {
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
-import CardCSS from './card.style'
+import '../../../primitives/mask'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.
@@ -20,7 +20,7 @@ import CardCSS from './card.style'
  */
 @gdsCustomElement('gds-card')
 export class GdsCard extends GdsContainer {
-  static styles = [tokens, CardCSS]
+  static styles = [tokens]
 
   /**
    * Controls the box-shadow property of the card.
@@ -159,25 +159,19 @@ export class GdsCard extends GdsContainer {
    * ```
    *
    */
-
-  @styleExpressionProperty({
-    valueTemplate: function (v) {
-      const [position, colorName, transparency] = v.split('/')
-      const color = transparency
-        ? `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
-        : `var(--gds-color-${colorName})`
-      return `mask-image: linear-gradient(to ${position}, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%); background-color: ${color};`
-    },
-    styleTemplate: (_prop, values) => {
-      const [MASK] = values[0].split('/')
-      return `[backdrop] { ${MASK} }`
-    },
-  })
+  @styleExpressionProperty({})
   mask?: string
 
   render() {
+    const [maskImage, backgroundColor, backgroundColorAlpha] = (
+      this.mask ?? ''
+    ).split('/')
+
     return html`${this.mask || this.filter
-        ? html`<div backdrop></div>`
+        ? html`<gds-mask
+            mask-image="${maskImage}"
+            background-color="${backgroundColor}/${backgroundColorAlpha}"
+          ></gds-mask>`
         : ''}<slot></slot>`
   }
 }
