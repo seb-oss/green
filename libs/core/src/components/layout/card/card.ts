@@ -161,7 +161,7 @@ export class GdsCard extends GdsContainer {
    */
 
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [position, colorName, transparency] = v.split('/')
       const color = transparency
         ? `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
