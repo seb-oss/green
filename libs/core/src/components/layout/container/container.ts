@@ -239,20 +239,9 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS z-index values.
    */
   @styleExpressionProperty({
-    property: 'z-index',
     valueTemplate: (v) => v,
   })
-  stack?: string
-
-  /**
-   * Controls the box-sizing property of the container.
-   * Supports all valid CSS box-sizing values.
-   */
-  @styleExpressionProperty({
-    property: 'box-sizing',
-    valueTemplate: (v) => v,
-  })
-  box?: string
+  'z-index'?: string
 
   render() {
     return html`<slot></slot>`

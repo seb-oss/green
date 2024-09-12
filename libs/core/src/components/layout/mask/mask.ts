@@ -1,35 +1,13 @@
 import { html } from 'lit/static-html.js'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { GdsElement } from '../../gds-element'
-import { tokens } from '../../tokens.style'
+import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
+import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
+import { tokens } from '../../../tokens.style'
+import { GdsFlex } from '../flex'
+import MaskCSS from './mask.style'
 
 @gdsCustomElement('gds-mask')
-export class GdsMask extends GdsElement {
-  static styles = [tokens]
-
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  display = 'contents'
-
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-    selector: '[part="mask"]',
-  })
-  inset = '0'
-
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-    selector: '[part="mask"]',
-  })
-  position = 'absolute'
-
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-    selector: '[part="mask"]',
-  })
-  'z-index' = '-1'
+export class GdsMask extends GdsFlex {
+  static styles = [tokens, MaskCSS]
 
   @styleExpressionProperty({
     selector: '[part="mask"]',
@@ -70,13 +48,38 @@ export class GdsMask extends GdsElement {
   })
   'background-color'?: string
 
+  /**
+   * Controls the backdrop-filter property of the container.
+   * When you want to apply a backdrop blur filter to the container you can use this property.
+   *
+   * ```html
+   * <gds-mask backdrop-filter="20px"></gds-mask>
+   * ```
+   *
+   * The above example will apply a backdrop blur filter of `20px`.
+   *
+   *  The filter also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-mask backdrop-filter="s{20px} m{40px} l{60px}"></gds-mask>
+   * ```
+   *
+   * The above example will apply the filter style of `20px` for `small` devices, `40px` for `medium` devices, and `60px` for large devices.
+   */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
     selector: '[part="mask"]',
   })
   'backdrop-filter'?: string
 
+  constructor() {
+    super()
+    this.position = 'relative'
+    this.inset = '0'
+  }
+
   render() {
-    return html`<div part="mask"></div>`
+    return html`<div part="mask"></div>
+      <div part="content"><slot></slot></div>`
   }
 }

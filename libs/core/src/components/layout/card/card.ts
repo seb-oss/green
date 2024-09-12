@@ -5,7 +5,6 @@ import {
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
-import '../../../primitives/mask'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.
@@ -113,65 +112,7 @@ export class GdsCard extends GdsContainer {
   })
   radius?: string
 
-  /**
-   * Controls the backdrop-filter property of the container.
-   * When you want to apply a backdrop blur filter to the container you can use this property.
-   *
-   * ```html
-   * <gds-container filter="20px"></gds-container>
-   * ```
-   *
-   * The above example will apply a backdrop blur filter of `20px`.
-   *
-   *  The filter also support breakpoint syntax like this:
-   *
-   * ```html
-   * <gds-container filter="s{20px} m{40px} l{60px}"></gds-container>
-   * ```
-   *
-   * The above example will apply the filter style of `20px` for `small` devices, `40px` for `medium` devices, and `60px` for large devices.
-   */
-  @styleExpressionProperty({
-    property: 'backdrop-filter',
-    selector: '[backdrop]',
-    valueTemplate: (v) => `blur(${v})`,
-  })
-  filter?: string
-
-  /**
-   * Controls the mask-image property of the container.
-   * Adds a predefined style of mask to the container.
-   *
-   * @property mask
-   *
-   * @example
-   *
-   * ```html
-   * <gds-container mask="top"></gds-container>
-   * ```
-   *
-   * The above example will apply the mask style of `top` with `40%` transparency.
-   * The mask can be applied in different positions like `top`, `bottom`, `left`, `right`.
-   *
-   * It can also be combined with the color like this:
-   * ```html
-   * <gds-container mask="top/l1-background-tertiary/0.4"></gds-container>
-   * ```
-   *
-   */
-  @styleExpressionProperty({})
-  mask?: string
-
   render() {
-    const [maskImage, backgroundColor, backgroundColorAlpha] = (
-      this.mask ?? ''
-    ).split('/')
-
-    return html`${this.mask || this.filter
-        ? html`<gds-mask
-            mask-image="${maskImage}"
-            background-color="${backgroundColor}/${backgroundColorAlpha}"
-          ></gds-mask>`
-        : ''}<slot></slot>`
+    return html`<slot></slot>`
   }
 }

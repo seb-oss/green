@@ -62,7 +62,7 @@ export class CardExample extends LitElement {
                 padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
                 position="absolute"
                 radius="xs"
-                stack="2"
+                z-index="2"
               >
                 <gds-flex
                   direction="column"

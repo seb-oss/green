@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
+import { html } from 'lit'
 import './card'
 import '../../media/img'
 import '../../media/video'
 import '../../layout/container'
+import '../mask/index.js'
 import '../../layout/flex'
 import '../../content/text'
 import '../../content/divider'
 import '../../icon/icons/arrow-down.js'
 import '../../icon/icons/arrow-right.js'
 import '../../icon/icons/circles-three.js'
-import { html } from 'lit'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.
@@ -131,13 +132,10 @@ export const Card: Story = {
             muted
             loop
           ></gds-video>
-          <gds-card
+          <gds-mask
+            mask-image="top"
+            background-color="l2-background-tertiary/0.4"
             position="absolute"
-            inset="50% 0px 0px 0px"
-            filter="4px"
-            color="l2-content-tertiary"
-            mask="top/l2-background-tertiary/0.4"
-            stack="2"
           >
             <gds-flex
               direction="column"
@@ -145,6 +143,8 @@ export const Card: Story = {
               padding="4xl 2xl 2xl 2xl"
               gap="l"
               height="100%"
+              width="100%"
+              color="l2-content-tertiary"
             >
               <gds-container>
                 <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
@@ -155,7 +155,7 @@ export const Card: Story = {
                 <gds-button rank="secondary">Follow</gds-button>
               </gds-flex>
             </gds-flex>
-          </gds-card>
+          </gds-mask>
         </gds-flex>
       </gds-card>
     </gds-grid>

@@ -173,7 +173,7 @@ export const Theme: Story = {
             filter="4px"
             color="l2-content-tertiary"
             mask="top/l2-background-tertiary/0.4"
-            stack="2"
+            z-index="2"
           >
             <gds-flex
               direction="column"
