@@ -8,7 +8,9 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "echo 'building Extract'"
+        "command": "echo 'building Extract'",
+        "outputPath": "dist/libs/extract",
+        "project": "libs/extract/package.json"
       },
       "dependsOn": ["rollup"]
     },
