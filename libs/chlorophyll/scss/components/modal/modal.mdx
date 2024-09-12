@@ -1,61 +1,20 @@
 import { Meta, Canvas, Story } from '@storybook/blocks'
 import { background } from '@storybook/theming'
-import * as ModalStories from './modal.stories';
 
-<Meta of={ModalStories} />
+<Meta title='Components/Modals' />
 
 # Modals
 
-<div role="alert" class="info mb-7 mt-5">
+<div role="alert" class="warning mb-7 mt-5">
   <main>
-    <h3>Missing JavaScript!</h3>
-
+    <h3>Modals are not available in Chlorophyll</h3>
     <p>
-      Please note that the examples below just represent the html markup and
-      they won't work without JavaScript. Please checkout the framework
-      implementations for "working" examples.
+      Please checkout the framework implementations for examples.
     </p>
   </main>
 
   <footer>
-    <a target="_blank" href="./../angular/?path=/docs/components-modal">
-      View Angular component
-    </a>
-
-    <a target="_blank" href="./../react/?path=/docs/components-modal">
-      View React component
-    </a>
+    <a target="_blank" href="./../angular/?path=/docs/components-modal">View Angular component</a>
+    <a target="_blank" href="./../react/?path=/docs/components-modal">View React component</a>
   </footer>
 </div>
-
-## Modal variants
-
-Green currently provides three different variants of the modal - **dialog**, **aside** (aka slide out) and **fullscreen** (aka take over).
-
-### Dialogue
-
-Dialog modals are typically used for confirming actions or displaying information that the user must act on before continuing with intended flow.
-
-<Canvas of={ModalStories.Dialogue} />
-
-### Slide-out
-
-Aside modals or slide out modals are typically used for displaying details regarding some information, i.e. transaction details in a list of transactions. It slides in from the right on desktop and from the bottom of the viewport on smaller screens like mobile devices.
-
-<Canvas of={ModalStories.SlideOut} />
-
-### Slide-out variants
-
-#### Slide-out 768
-
-<Canvas of={ModalStories.SlideOut768} />
-
-#### Slide-out 960
-
-<Canvas of={ModalStories.SlideOut960} />
-
-### Fullscreen
-
-Fullscreen modals or takeovers are typically used for wizards or for complex flows requiring a lot of screen estate.
-
-<Canvas of={ModalStories.Takeover} />

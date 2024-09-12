@@ -48,10 +48,4 @@ export const Textarea = {
       'Lorem ipsum very long description of textarea and what should be entered',
     enabled: true,
   },
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
 }

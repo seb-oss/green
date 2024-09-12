@@ -33,10 +33,4 @@ export const SlideToggle = {
     label: 'Toggle me',
     checked: false,
   },
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
 }

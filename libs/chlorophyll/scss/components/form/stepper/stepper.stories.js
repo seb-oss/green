@@ -52,10 +52,4 @@ export const Stepper = {
       'Lorem ipsum very long description of stepper and what should be entered',
     enabled: true,
   },
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
 }

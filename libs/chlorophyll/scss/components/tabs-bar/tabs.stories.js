@@ -37,10 +37,4 @@ export default {
 export const Tabs = {
   render: Template.bind({}),
   name: 'Tabs',
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
 }

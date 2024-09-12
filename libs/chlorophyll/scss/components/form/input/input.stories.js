@@ -48,10 +48,4 @@ export const Input = {
       'Lorem ipsum very long description of input and what should be entered',
     enabled: true,
   },
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
 }

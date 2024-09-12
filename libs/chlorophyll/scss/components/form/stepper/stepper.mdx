@@ -1,85 +1,8 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import * as StepperStories from './stepper.stories';
 
-export const Template = ({ validation, enabled, text, formInfo }) => {
-  const attrValidation = validation ? validation : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  const hasExtraInfo = formInfo.length > 0
-  return `
-    <div class="form-group">
-        <label for="stepperInput">${text}</label>
-        ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-        <div class="group group-border group-stepper ${attrValidation} ${attrEnabled}">
-            <button class="tertiary" ${attrEnabled}>-</button>
-            <input id="stepperInput" type="number" placeholder="0" ${attrEnabled} />
-            <button class="tertiary" ${attrEnabled}>+</button>
-        </div>
-        <span class="form-info">${validation ? validation : 'Neutral'}</span>
-    </div>`
-}
-
 <Meta of={StepperStories} />
-
-<Story of={StepperStories.Stepper} />
 
 # Stepper
 
-<Canvas>
-  <form>
-    <div class="form-group">
-      <label for="stepperInput">Stepper label</label>
-
-      <span class="form-info">
-        Lorem ipsum very long description of stepper and what should be entered
-      </span>
-
-      <div class="group group-border group-stepper">
-        <button class="tertiary">-</button>
-
-        <input id="stepperInput" type="number" placeholder="0" />
-
-        <button class="tertiary">+</button>
-      </div>
-
-      <span class="form-info">Neutral</span>
-    </div>
-  </form>
-</Canvas>
-
-<Canvas>
-  <form>
-    <div class="form-group">
-      <label for="stepperInput">Stepper label</label>
-
-      <div class="horizontal">
-        <div>
-          <div>
-            <span class="form-info">Vuxna</span>
-
-            <div class="group group-border group-stepper">
-              <button class="tertiary">-</button>
-
-              <input id="stepperInput" type="number" placeholder="0" />
-
-              <button class="tertiary">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <span class="form-info">Barn under 18</span>
-
-            <div class="group group-border group-stepper">
-              <button class="tertiary">-</button>
-
-              <input id="stepperInput" type="number" placeholder="0" />
-
-              <button class="tertiary">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</Canvas>
+<Canvas of={StepperStories.Stepper} />

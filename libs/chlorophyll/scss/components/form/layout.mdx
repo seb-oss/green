@@ -11,60 +11,45 @@ By default the flow in forms is vertical i.e. form elements such as inputs, butt
 
 ### Vertical layout (default and recommended)
 
-<Canvas>
-  <form>
-    <div class="form-group">
-      <label for="horizontalInput">Input label</label>
+<form>
+  <div class="form-group">
+    <label for="horizontalInput">Input label</label>
+    <input type="text" id="horizontalInput" placeholder="Regular input" />
+  </div>
 
-      <input type="text" id="horizontalInput" placeholder="Regular input" />
-    </div>
+  <button>Medium</button>
 
-    <button>Medium</button>
+  <div class="form-group">
+    <fieldset>
+      <label class="form-control">
+        <input required type="checkbox" />
+        <span>Check me!</span>
+        <i />
+      </label>
+    </fieldset>
+  </div>
+  <span class="form-text">Static text</span>
+</form>
 
-    <div class="form-group">
-      <fieldset>
-        <label class="form-control">
-          <input required type="checkbox" />
-
-          <span>Check me!</span>
-
-          <i />
-        </label>
-      </fieldset>
-    </div>
-
-    <span class="form-text">Static text</span>
-  </form>
-</Canvas>
 
 ### Horizontal layout
 
-<Canvas>
-  <form class="horizontal">
-    <div class="form-group">
-      <label for="horizontalInput">Input label</label>
+<form class="horizontal">
+  <div class="form-group">
+    <label for="horizontalInput">Input label</label>
+    <input type="text" id="horizontalInput" placeholder="Regular input" />
+  </div>
 
-      <input type="text" id="horizontalInput" placeholder="Regular input" />
-    </div>
+  <button>Medium</button>
 
-    <button>Medium</button>
-
-    <div class="form-group">
-      <fieldset>
-        <label class="form-control">
-          <input required type="checkbox" />
-
-          <span>Check me!</span>
-
-          <i />
-        </label>
-      </fieldset>
-    </div>
-
-    <span class="form-text">Static text</span>
-  </form>
-</Canvas>
-
-### Using grid
-
-Example will be added
+  <div class="form-group">
+    <fieldset>
+      <label class="form-control">
+        <input required type="checkbox" />
+        <span>Check me!</span>
+        <i />
+      </label>
+    </fieldset>
+  </div>
+  <span class="form-text">Static text</span>
+</form>

@@ -1,35 +1,8 @@
 import { Meta, Story, Canvas } from '@storybook/blocks'
 import * as TextareaStories from './textarea.stories';
 
-export const Template = ({ validation, enabled, text, formInfo }) => {
-  const attrValidation = validation ? `class="${validation}" ` : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  const hasExtraInfo = formInfo.length > 0
-  return `
-    <div class="form-group">
-      <label for="exampleTextarea">${text}</label>
-      ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-      <textarea id="exampleTextarea" ${attrValidation} ${attrEnabled}></textarea>
-      <span class="form-info">${validation ? validation : 'Neutral'}</span>
-    </div>`
-}
-
 <Meta of={TextareaStories} />
-
-<Story of={TextareaStories.Textarea} />
 
 # Textarea
 
-<Canvas>
-  <div class="form-group">
-    <label for="exampleTextarea">Textarea label</label>
-
-    <span class="form-info">
-      Lorem ipsum very long description of textarea and what should be entered
-    </span>
-
-    <textarea id="exampleTextarea" />
-
-    <span class="form-info">Neutral</span>
-  </div>
-</Canvas>
+<Canvas of={TextareaStories.Textarea} />
