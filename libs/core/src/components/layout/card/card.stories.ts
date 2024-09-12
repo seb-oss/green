@@ -87,7 +87,12 @@ export const Card: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l" radius="m" border="3xs/base300" overflow="hidden">
+      <gds-card
+        shadow="l"
+        radius="m"
+        border="3xs/l2-stroke-primary"
+        overflow="hidden"
+      >
         <gds-flex gap="m" direction="column" padding="s">
           <gds-container position="relative">
             <gds-img
@@ -189,7 +194,7 @@ export const Card: Story = {
  * To speficy the color of the border you can use the color tokens like this:
  *
  * ```html
- * <gds-container border="4xs/base300"></gds-container>
+ * <gds-container border="4xs/l2-stroke-primary"></gds-container>
  * ```
  */
 export const CardBorder: Story = {
@@ -409,7 +414,11 @@ export const CardBackground: Story = {
           <gds-button>Button</gds-button>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base300">
+      <gds-card
+        shadow="l{m} m{m} s{m}"
+        radius="xs"
+        background="l2-stroke-primary"
+      >
         <gds-flex
           gap="l"
           align="flex-start"

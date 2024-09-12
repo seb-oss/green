@@ -80,6 +80,45 @@ export class GdsContainer extends GdsElement {
   background?: string
 
   /**
+   * Controls the border property of the card.
+   * Supports all tokens from the design system.
+   *
+   * @property border
+   *
+   * Can be specified for each side using the size tokens like this:
+   *
+   * ```html
+   * <gds-container border="4xs 0 0 0"></gds-container>
+   * ```
+   *
+   * Also for different breakpoints like this:
+   *
+   * ```html
+   * <gds-container border="s{2xs} m{3xs} l{4xs}"></gds-container>
+   * ```
+   *
+   * When you want to apply the border in all breakpoints and sides you can use the following:
+   *
+   * ```html
+   * <gds-container border="4xs"></gds-container>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => {
+      const [size, color] = v.split('/')
+      return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${color})` : 'currentColor'}`
+    },
+    styleTemplate: (_prop, values) => {
+      const top = values[0]
+      const right = values.length > 1 ? values[1] : top
+      const bottom = values.length > 2 ? values[2] : top
+      const left = values.length > 3 ? values[3] : top
+      return `border-top: ${top}; border-right: ${right}; border-bottom: ${bottom}; border-left: ${left};`
+    },
+  })
+  border?: string
+
+  /**
    * Controls the opacity property of the container.
    *
    * You can apply opacity like this:

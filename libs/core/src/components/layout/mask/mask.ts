@@ -13,7 +13,7 @@ export class GdsMask extends GdsFlex {
     selector: '[part="mask"]',
     valueTemplate: (v) => {
       const [direction] = v.split('/')
-      return `linear-gradient(to ${direction}, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%)`
+      return `linear-gradient(to ${direction}, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%)`
     },
   })
   'mask-image'?: string
