@@ -101,6 +101,26 @@ describe('Component: Table header cell', () => {
     })
   })
 
+  it('Tooltip should be visible', () => {
+    render(
+      <WrapperTableHeader accessor="test" tooltipText="tool-tip-test-text" />,
+    )
+    expect(screen.getByText('tool-tip-test-text')).toBeInTheDocument()
+  })
+
+  it('Tooltip should be visible on sortable table', () => {
+    render(
+      <WrapperTableHeader
+        accessor="test"
+        tooltipText="tool-tip-test-text-on-sortable"
+        sortDirection={SortDirection.ASC}
+      />,
+    )
+    expect(
+      screen.getByText('tool-tip-test-text-on-sortable'),
+    ).toBeInTheDocument()
+  })
+
   it('Should able to disable sort per cell', () => {
     const sortFn: jest.Mock = jest.fn()
     const setTableStateFn: jest.Mock = jest.fn()
