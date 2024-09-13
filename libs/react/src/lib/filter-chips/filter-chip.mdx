@@ -1,0 +1,52 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { FilterChips, FilterChip } from './filter-chips'
+import * as FilterChipStories from './filter-chip.stories'
+
+<Meta of={FilterChipStories} />
+
+# Filter Chips
+
+[Source code](https://github.com/seb-oss/green/tree/main/libs/react/src/lib/filter-chips)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/filter-chip)
+
+## Importing the component
+
+To use the component, import `FilterChips` and `FilterChip` like this:
+
+```jsx
+import {
+  FilterChips,
+  FilterChip,
+} from '@sebgroup/green-react/src/lib/filter-chips'
+
+// Use as JSX element in your app
+return (
+  <FilterChips value="division" label="Select a filter category">
+    <FilterChip value="all">All</FilterChip>
+    <FilterChip value="top-news">Top news</FilterChip>
+    <FilterChip value="division">Division</FilterChip>
+    <FilterChip value="global">Global</FilterChip>
+    <FilterChip value="country">Country</FilterChip>
+    <FilterChip value="lcfi">
+      Large Corporate & Financial Institutions
+    </FilterChip>
+  </FilterChips>
+)
+```
+
+<FilterChips value="division" label="Select a filter category">
+  <FilterChip value="all">All</FilterChip>
+  <FilterChip value="top-news">Top news</FilterChip>
+  <FilterChip value="division">Division</FilterChip>
+  <FilterChip value="global">Global</FilterChip>
+  <FilterChip value="country">Country</FilterChip>
+  <FilterChip value="lcfi">Large Corporate & Financial Institutions</FilterChip>
+</FilterChips>
+
+
+**Note:** It is important to remember to set the label attribute. Omitting it will cause poor accessibility for screen reader useSharedState. Internally in the component, the label attribute will be used to set `aria-label` for the appropriate element.
+
+## More examples
+
+For various examples of how to use the component, head over to the [Green Core storybook](https://storybook.seb.io/latest/core/?path=/story/components-filter-chips--page)

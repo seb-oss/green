@@ -4,7 +4,7 @@ const copyfiles = require('copyfiles')
 import * as fs from 'fs'
 
 const config: Omit<StorybookConfig, 'framework'> = {
-  stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../src/**/*.mdx', '../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-docs',

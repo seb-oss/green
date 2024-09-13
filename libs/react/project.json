@@ -6,20 +6,33 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/rollup:rollup",
+      "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "command": "npx copyfiles -f libs/react/package.json dist/libs/react"
+      },
+      "dependsOn": ["rollup"]
+    },
+    "rollup": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": ["{projectRoot}/**/*"],
+      "options": {
         "outputPath": "dist/libs/react",
-        "packageJson": "libs/react/package.json",
         "tsConfig": "libs/react/tsconfig.lib.json",
         "project": "libs/react/package.json",
         "entryFile": "libs/react/src/index.ts",
         "external": ["react/jsx-runtime"],
-        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "rollupConfig": [
+          "@nx/react/plugins/bundle-rollup",
+          "libs/react/rollup.config.mjs"
+        ],
         "assets": [
           {
-            "glob": "libs/react/README.md",
-            "input": ".",
+            "glob": "(README.md)",
+            "input": "libs/react",
             "output": "."
           }
         ],

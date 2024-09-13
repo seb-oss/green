@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.41.2
+
+### Patch Changes
+
+- eb3fbc7: Join transformIgnorePatterns with AND
+
 ## 1.41.1
 
 ### Patch Changes

@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Tabs, Tab, Card } from '@sebgroup/green-react'
+import * as TabsStories from './tabs.stories';
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets.
+
+<Canvas of={TabsStories.Default} />
+
+#### Tab selected by default
+
+<Canvas of={TabsStories.DefaultSelection} />
+
+#### Disabled tabs
+
+<Canvas of={TabsStories.DisabledTabs} />
+
+<br />
+
+# Using `list` property *(deprecated)*
+
+This interface only supports text content, and will be removed in a future release.
+
+```tsx
+<Tabs
+  list={[
+    { text: 'Page 1', href: '#' },
+    { text: 'Page 2', href: '#', selected: true },
+    { text: 'Page 3', href: '#' },
+    { text: 'Page 4', href: '#' },
+    { text: 'Page 5', href: '#', disabled: true },
+    { text: 'Page 6', href: '#', disabled: true },
+  ]}
+/>
+```
+
+<br />
+
+#### Available props
+
+##### Tabs
+
+<Controls />
+
+##### Tab
+
+<Controls />

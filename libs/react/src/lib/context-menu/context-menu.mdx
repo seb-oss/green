@@ -1,0 +1,91 @@
+import { Meta, Canvas, Markdown } from '@storybook/blocks'
+import { ContextMenu, MenuItem } from './context-menu'
+import * as ContextMenuStories from './context-menu.stories'
+
+<Meta of={ContextMenuStories} />
+
+# Context Menu
+
+[Source code](https://github.com/seb-oss/green/tree/main/libs/react/src/lib/context-menu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
+
+## Overview
+
+The context menu is a clickable button that opens a menu where you can find the action connected to an area or item. This component is a wrapper and uses the [Green Core Context Menu](https://github.com/seb-oss/green/tree/main/libs/core/src/components/context-menu) component under the hood.
+
+## Importing the component
+
+To use the `ContextMenu` component, you need to import the component:
+
+```jsx
+import { ContextMenu } from '@sebgroup/green-react/src/lib/context-menu'
+```
+
+## Examples
+
+In the example below, we are listening to the `onMenuItemClick` event on the `ContextMenu` component.\
+(`onMenuItemClick={(e) => console.log(e)}`)
+
+<Canvas of={ContextMenuStories.Default} />
+
+A more typical usage would be to listen to `onClick` events on individual `MenuItem`s, while mapping to your specific data:
+
+```jsx
+<ContextMenu buttonLabel="Choose an action">
+  {myListOfActions.map((action) => (
+    <MenuItem key={action.id} onClick={() => console.log(action.id)}>
+      {action.name}
+    </MenuItem>
+  ))}
+</ContextMenu>
+```
+
+### Show label
+
+You can show the label by setting the `showLabel` prop to `true`.
+
+<ContextMenu showLabel buttonLabel="Choose an action" onMenuItemClick={(e) => console.log(e)}>
+  <MenuItem>Action 1</MenuItem>
+  <MenuItem>Action 2</MenuItem>
+  <MenuItem>Action 3</MenuItem>
+</ContextMenu>
+
+### Custom menu item content
+
+You can put any type of content within the `MenuItem` component, including icons, images, or other components.
+
+<ContextMenu label="Choose an action" onMenuItemClick={(e) => console.log(e)}>
+  <MenuItem>Action 1</MenuItem>
+  <MenuItem>Action 2</MenuItem>
+  <MenuItem>Action 3</MenuItem>
+</ContextMenu>
+
+## Component API
+
+### ContextMenu
+
+<Markdown>
+  {`
+  | Prop            | Type                           | Description                                                                  |
+  | :-------------- | :----------------------------- | :--------------------------------------------------------------------------- |
+  | open            | \`boolean\`                      | control if the menu should be open or not                                    |
+  | buttonLabel     | \`string\`                       | label for button next to icon                                                |
+  | ariaLabel       | \`string\`                       | aria-label of icon button                                                    |
+  | label           | \`string\`                       | List of items in the accordion                                               |
+  | showLabel       | \`boolean\`                      | Control if the label should be visually shown                                |
+  | onMenuItemClick | \`(event: CustomEvent) => void\` | A callback function to trigger when item is clicked, is applied to all items |
+  `}
+</Markdown>
+
+### MenuItem
+
+### MenuItem
+
+<Markdown>
+  {`
+  | Prop    | Type                                | Description                                         |
+  | :------ | :---------------------------------- | :-------------------------------------------------- |
+  | onClick | \`(event: React.MouseEvent) => void\` | A callback function to trigger when item is clicked |
+  `}
+</Markdown>

@@ -1,0 +1,69 @@
+import { Controls, Meta, Story, Canvas } from '@storybook/blocks'
+import Button from './button'
+import * as ButtonStories from './button.stories';
+
+export const Template = ({ children, ...props }) => (
+  <Button {...props}>{children}</Button>
+)
+
+<Meta of={ButtonStories} />
+
+# Buttons
+
+Simple Button Component
+
+<Canvas of={ButtonStories.Default} />
+
+#
+
+## Types
+
+Specifying a type will cause the button to automatically render the appropriate variant for that type of button.
+
+<Button type="button">Button Type</Button>
+<Button type="submit">Submit Type</Button>
+<Button type="reset">Reset Type</Button>
+
+
+## Variants
+
+Variant can also be specified explicitly.
+
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="tertiary">Tertiary</Button>
+<Button variant="ghost">Ghost</Button>
+
+
+## Sizes
+
+<Button>Default</Button>
+<Button size="small">Small</Button>
+<Button size="large">Large</Button>
+
+
+## Close button
+
+When using the close button variant, take special care to provide an appropriate label!
+
+
+<Button variant="close" aria-label="Close" />
+
+
+## Disabled button
+
+Buttons can be disabled by setting the `disabled` prop. In general, this should be strictly
+avoided though. Rather than using disabled buttons, you should allow the user to click the
+button and and instead provide an explanation of why the action is not available.
+
+
+<Button variant="primary" disabled>Primary Button</Button>
+
+<Button variant="secondary" disabled>Secondary Button</Button>
+
+<Button variant="ghost" disabled>Ghost Button</Button>
+
+
+## Properties
+
+<Controls />

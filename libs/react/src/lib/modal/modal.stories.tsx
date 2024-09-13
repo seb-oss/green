@@ -1,6 +1,7 @@
+import React from 'react'
 import Modal, { ModalProps } from './modal'
 import { Meta, Story } from '@storybook/react/types-6-0'
-import { useArgs } from '@storybook/client-api'
+import { useArgs } from '@storybook/preview-api'
 
 const Template: Story<ModalProps> = (props) => {
   const [{ isOpen }, updateArgs] = useArgs()
@@ -16,7 +17,7 @@ const Template: Story<ModalProps> = (props) => {
   }
 
   return (
-    <div style={{ overflow: 'auto', height: '100vh' }}>
+    <div>
       {!isOpen && (
         <button className="button" onClick={openModal}>
           open modal
@@ -80,7 +81,7 @@ TakeOver.args = {
   dismiss: 'Nope',
 }
 
-export default {
+const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   component: Modal,
   parameters: {
@@ -91,4 +92,6 @@ export default {
       'component-takeover',
     ],
   },
-} as Meta
+}
+
+export default meta

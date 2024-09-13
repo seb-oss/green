@@ -1,0 +1,48 @@
+import { Meta, Story, Canvas, ArgTypes, Markdown } from '@storybook/blocks'
+import { RadioButton } from './radioButton'
+import { RadioGroup } from './radioGroup'
+import * as RadioGroupStories from './radioGroup.stories';
+
+export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
+
+export const RadioGroupTemplate = ({ ...props }) => (
+  <RadioGroup {...props}>
+    <RadioButton value={'value-1'} label="First label" />
+    <RadioButton value={'value-2'} label="Second label" />
+  </RadioGroup>
+)
+
+<Meta of={RadioGroupStories} />
+
+## RadioGroup and RadioButton Components
+
+### RadioGroup
+
+`RadioGroup` is a container component for managing radio buttons, ensuring only one can be selected at a time. It provides customization options such as horizontal alignment, default selection, and expandable information. The component can also be configured with validation functions and event handlers.
+
+### RadioButton
+
+`RadioButton` represents an individual radio button within a `RadioGroup`. It extends native HTML input properties for customization. Each `RadioButton` can have its own label, value, and optional test ID. Validation functions can be applied to individual radio buttons if needed.
+
+Together, `RadioGroup` and `RadioButton` components facilitate the use of radio buttons in React applications.
+
+### Default Radio Group
+
+<Canvas of={RadioGroupStories.Default} />
+
+## Expandable information
+
+<Canvas of={RadioGroupStories.ExpandableInformation} />
+
+## Validation
+
+<Canvas of={RadioGroupStories.Validation} />
+
+## Horizontal
+
+<Canvas of={RadioGroupStories.Horizontal} />
+
+### Props of RadioGroup
+
+<ArgTypes of={RadioGroup} />
+

@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Use cases/Use Green for MFE in shell application" />
+
+# Use Green for MFE in shell application
+
+Whenever you create an MFE (Micro Front End) that will be used or incorporated in another application (shell) you need to consider CSS leakage to avoid the CSS from the MFE to affect the shell (and the other way around, which is another topic).
+
+### Scoping CSS
+
+*Note: not necessary if the MFE uses a shadow DOM*
+
+The example below is for Angular but the same principle applies to other frameworks as well. We recommend setting up Angular with scss and that you add global styles to `styles.scss` located in the `src` folder of your project.
+
+Import green and scope it to the app root. Eg: `app-root.use-green` (app-root is the default root in angular but should be renamed to a unique name).
+We use the app-root here to make sure that no CSS leaks outside of the MFE which will be rendered inside the `<app-root>` tag.
+
+**styles.scss**
+
+```css
+/* Add use-green scope. If you need to configure the font-path variable you can do it here as well by setting $font-path. */
+@use '@sebgroup/chlorophyll/scss/components/use-green-scope' with (
+  $use-green-selector: 'app-root.use-green',
+  $font-path: './path/to/seb/font'
+);
+
+app-root.use-green {
+  /* declare parts to include in a separate file that you import (to scope it to .use-green) */
+  @import './green'; /* custom import of green (see example file below) */
+}
+```
+
+**green.scss**
+
+```css
+/* Custom import of green */
+@use '@sebgroup/chlorophyll/scss'; /* if yoy want all of green */
+/* @use '@sebgroup/chlorophyll/scss/components/button'; */ /* if you only need specific parts like button component(s) */
+```

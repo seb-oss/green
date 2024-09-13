@@ -26,7 +26,7 @@ export default meta
 
 type Story = StoryObj<NggModalComponent>
 
-const RenderTemplate = (args: NggModalComponent) => ({
+const RenderTemplate = (args: any) => ({
   template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" [size]="size" (closed)="isOpen = false">
       <p>Modal Body</p>

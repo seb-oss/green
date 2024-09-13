@@ -62,5 +62,9 @@ next-env.d.ts
 custom-elements.json
 storybook.log
 
-# Components 
+# Components
 icon.list.mdx
+
+# Migrations
+migrations.json
+storybook-migration-summary.md

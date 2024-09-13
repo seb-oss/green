@@ -1,0 +1,138 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Flexbox } from '../'
+import { Card } from '../../card/card'
+import * as FlexboxStories from './flexbox.stories';
+
+export const Template = (props) => (
+  <div className="custom-card-storybook">
+    <Styles />
+    <Flexbox {...props}>
+      <Card>1</Card>
+      <Card>2</Card>
+      <Card>3</Card>
+      <Card>4</Card>
+      <Card>5</Card>
+    </Flexbox>
+  </div>
+)
+
+export const Styles = () => (
+  <style>
+    {`
+    .custom-card-storybook .card{
+      border: 3px solid #007ac7;
+      margin: 1rem;
+      min-width: 8rem;
+    }
+    .custom-card-storybook .card p {
+      text-align:center;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+  `}
+  </style>
+)
+
+<Meta of={FlexboxStories} />
+
+# Flexbox
+
+This is just a simple wrapper around the flexbox css properties. It is used to create a flex container and apply flex properties to its children.
+
+<Canvas of={FlexboxStories.Default} />
+
+### Space evenly
+
+<div className="custom-card-storybook">
+  <Flexbox justifyContent="around" alignItems="stretch">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+### Flex-start
+
+<div className="custom-card-storybook">
+  <Flexbox justifyContent="start">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+### Flex-center
+
+<div className="custom-card-storybook">
+  <Flexbox justifyContent="center">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+### Flex-end
+
+
+<div className="custom-card-storybook">
+  <Flexbox justifyContent="end">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+
+### Flex-direction - column
+
+<div className="custom-card-storybook">
+  <Flexbox flexDirection="column">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+### Flex-direction - column-reverse
+
+<div className="custom-card-storybook">
+  <Flexbox flexDirection="column-reverse">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+  </Flexbox>
+</div>
+
+
+### Flex-wrap
+
+<div className="custom-card-storybook">
+  <Flexbox flexWrap="wrap">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+    <Card>4</Card>
+    <Card>5</Card>
+    <Card>6</Card>
+    <Card>7</Card>
+  </Flexbox>
+</div>
+
+
+### Flex-wrap-reverse
+
+<div className="custom-card-storybook">
+  <Flexbox flexWrap="wrap-reverse">
+    <Card>1</Card>
+    <Card>2</Card>
+    <Card>3</Card>
+    <Card>4</Card>
+    <Card>5</Card>
+    <Card>6</Card>
+    <Card>7</Card>
+  </Flexbox>
+</div>
+
+**Note** - Flexbox component supports breakpoints for `sm, md, lg, xl and xxl` which is part of the properties .
+
+<Controls />
