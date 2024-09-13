@@ -1,11 +1,10 @@
-import { HTMLTemplateResult, html } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 
-import { gdsCustomElement } from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 
 import style from './option.styles'
 

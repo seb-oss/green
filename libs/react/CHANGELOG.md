@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.18.0
+
+### Minor Changes
+
+- 4457554: **Code splitting**
+
+  `@sebgroup/green-react` now supports code sub-imports for producing leaner output bundles.
+
+  Old version:
+
+  ```js
+  import { Dropdown } from '@sebgroup/green-react'
+  ```
+
+  New version:
+
+  ```js
+  import { Dropdown } from '@sebgroup/green-react/src/lib/dropdown'
+  ```
+
+  By specifying the exact module you want to import, you won't be adding any extra non-treeshakable weight to your bundle.
+
+### Patch Changes
+
+- Updated dependencies [eb3fbc7]
+  - @sebgroup/green-core@1.41.2
+
 ## 3.17.0
 
 ### Minor Changes

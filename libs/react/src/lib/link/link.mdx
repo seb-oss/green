@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import Link from './link'
+import { createComponent } from '@lit/react'
+import { IconArrowRight } from '../../../../../dist/libs/core/src/components/icon/icons/arrow-right.js'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import * as LinkStories from './link.stories';
+
+export const GdsIconArrowRight = createComponent({
+  tagName: getScopedTagName('gds-icon-arrow-right'),
+  elementClass: IconArrowRight,
+  react: React,
+})
+
+export const Template = ({ ...props }) => <Link {...props} />
+
+<Meta of={LinkStories} />
+
+# Link
+
+Simple link component
+
+<Canvas of={LinkStories.Default} />
+
+
+## Link on backgrounds
+
+Links will by default have their color adjusted and use the color which gives best contrast against background of immediate parent.
+Currently, it works with all the intent colors using the pattern \*-\{intent} e.g. bg-info, alert-success, alert-danger etc.
+
+<Canvas of={LinkStories.OnBackground} />
+
+
+## Style links as button
+
+Sometimes you want to use links but style them as buttons, just add the class button and optionally a variant like primary or ghost and voilà -
+now you've got a link which looks and behaves like a button!
+
+<Canvas of={LinkStories.AsButton} />
+
+
+## Secondary link (Dark grey)
+
+The secondary link is mostly used when the link is a stand alone, but the blue link can also be used there.
+
+<Canvas of={LinkStories.Secondary} />
+
+
+### Available props
+
+<Controls />

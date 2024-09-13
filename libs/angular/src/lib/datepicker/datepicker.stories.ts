@@ -35,9 +35,7 @@ export default {
   },
 } as Meta<NggDatepickerComponent>
 
-const Template: StoryFn<NggDatepickerComponent> = (
-  args: NggDatepickerComponent,
-) => ({
+const Template: StoryFn<NggDatepickerComponent> = (args) => ({
   props: args,
 })
 
@@ -60,9 +58,7 @@ CustomOptions.args = {
   },
 }
 
-const FormControlTemplate: StoryFn<NggDatepickerComponent> = (
-  args: NggDatepickerComponent,
-) => {
+const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
   const validationForm = new FormGroup({
     date: new FormControl(undefined, [
       Validators.required,

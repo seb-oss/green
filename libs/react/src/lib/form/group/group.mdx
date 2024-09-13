@@ -1,0 +1,23 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { Group } from '../'
+import { TextInput, Button } from '../../form'
+import * as GroupStories from './group.stories'
+
+<Meta of={GroupStories} />
+
+# Group
+
+Group inputs, buttons and other form elements together.
+
+## Input & Button
+
+<Canvas of={GroupStories.Default} />
+
+## Static text in input field
+
+<Canvas of={GroupStories.StaticText} />
+
+## Group error message
+
+<Canvas of={GroupStories.Error} />
+

@@ -17,9 +17,7 @@ export default {
   },
 } as Meta<NggInPageWizardStepCardComponent>
 
-const Template: StoryFn<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent,
-) => {
+const Template: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }
@@ -67,9 +65,7 @@ DisableNext.args = {
   disableNext: true,
 }
 
-const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent,
-) => {
+const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }

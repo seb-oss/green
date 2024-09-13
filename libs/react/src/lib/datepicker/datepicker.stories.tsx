@@ -36,21 +36,21 @@ export const Default: Story = {
  *      if (el.value !== 'correctValue') {
  *        // And return a validator array
  *        return [
- *                {
- *                  badInput: true,
- *                  customError: true,
- *                  patternMismatch: true,
- *                  rangeOverflow: true,
- *                  rangeUnderflow: true,
- *                  stepMismatch: true,
- *                  tooLong: true,
- *                  tooShort: true,
- *                  typeMismatch: true,
- *                  valid: false,
- *                  valueMissing: true,
- *                },
- *                'My custom validation message',
- *          ] : [ValidityState, string]
+ *            {
+ *              badInput: true,
+ *              customError: true,
+ *              patternMismatch: true,
+ *              rangeOverflow: true,
+ *              rangeUnderflow: true,
+ *              stepMismatch: true,
+ *              tooLong: true,
+ *              tooShort: true,
+ *              typeMismatch: true,
+ *              valid: false,
+ *              valueMissing: true,
+ *            },
+ *            'My custom validation message',
+ *      ] : [ValidityState, string]
  * }}} />
  *
  *
@@ -58,7 +58,6 @@ export const Default: Story = {
  *
  * For more information on validation in Green Core, see the [Form Validation](https://storybook.seb.io/latest/core/?path=/docs/docs-form-validation-documentation--docs) example.
  */
-
 export const Validation: Story = {
   args: {
     label: 'Choose date',

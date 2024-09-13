@@ -1,0 +1,24 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { RadioButton } from './radioButton'
+import { RadioGroup } from './radioGroup'
+import * as RadioButtonStories from './radioButton.stories';
+
+export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
+
+export const RadioGroupTemplate = ({ ...props }) => <RadioGroup {...props} />
+
+<Meta of={RadioButtonStories} />
+
+# Radio button
+
+Simple Radio Button Component
+
+<Canvas of={RadioButtonStories.Default} />
+
+## Radio Group
+
+Radio buttons are typically used in a group. Check the RadioGroup stories for examples.
+
+## Properties
+
+<Controls />

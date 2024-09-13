@@ -1,0 +1,25 @@
+import { Meta, Canvas } from '@storybook/blocks'
+
+<Meta title="Utilities/Flexbox/Order" />
+
+# Flexbox order
+
+This utility class can be applied to elements with `display: flex` or `display: inline-flex`. Some common cases include `.row`, `.d-flex` etc.
+
+**Class:** `order-{breakpoint}-{value}` <br />
+**Values:** `first`,`0-5`,`last` <br />
+**Responsive:** true
+
+## Examples
+
+### Responsive
+
+Reverse order by default and switch order on medium screens and up.
+
+<Canvas>
+  <div class="d-flex">
+    <div class="p-3 border border-info order-last order-md-2">Item 1</div>
+    <div class="p-3 border border-info order-md-0">Item 2</div>
+    <div class="p-3 border border-info order-first order-md-1">Item 3</div>
+  </div>
+</Canvas>

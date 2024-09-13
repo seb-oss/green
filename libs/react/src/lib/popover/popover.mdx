@@ -1,0 +1,32 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { Popover } from './popover'
+import { Button } from '../form'
+import * as PopoverStories from './popover.stories'
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+[Source code](https://github.com/seb-oss/green/tree/main/libs/react/src/lib/popover)
+
+## Importing the component
+
+To use the component, import `Popover` like this:
+
+```jsx
+import { Popover, Button } from '@sebgroup/green-react/src/lib/popover'
+
+// Use as JSX element in your app
+return (
+  <Popover>
+    <Button slot="trigger">Open popover</Button>
+    <div style={{ padding: '1rem;' }}>Content in popover</div>
+  </Popover>
+)
+```
+
+<Canvas of={PopoverStories.Default} />
+
+## More examples
+
+For various examples of how to use the component, head over to the [Green Core storybook](https://storybook.seb.io/latest/core/?path=/story/components-popover--page)

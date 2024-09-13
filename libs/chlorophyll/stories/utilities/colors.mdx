@@ -1,0 +1,75 @@
+import { Meta, Canvas } from '@storybook/blocks'
+
+<Meta title="Utilities/Colors" />
+
+{' '}
+
+<style>
+  {`
+    div > div[class*='text-'] {
+      margin-bottom: 1rem;
+    }
+    div > div[class*='bg-'] {
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      }`}
+</style>
+
+# Colors
+
+## Text colors
+
+**Class:** `text-{variant}` <br />
+
+<div>
+  <div class="text-transparent bg-secondary">
+    Transparent <span class="text-primary">(transparent color)</span>
+  </div>
+
+  <div class="text-background bg-secondary">
+    Background <span class="text-primary">(background color)</span>
+  </div>
+
+  <div class="mb-4">
+    Reset{' '}
+
+    <a class="text-reset" href="#">
+      Link
+    </a>
+  </div>
+
+  <div class="text-primary">Primary (will adjust according to theme)</div>
+  <div class="text-secondary">Secondary (will adjust according to theme)</div>
+  <div class="text-light">Light (will always be light)</div>
+  <div class="text-dark">Dark (will always be dark)</div>
+  <div class="text-success">Success</div>
+  <div class="text-danger">Danger</div>
+  <div class="text-warning">Warning</div>
+  <div class="text-info">Info</div>
+</div>
+
+## Background colors
+
+**Class:** `bg-{variant}` <br />
+
+<div>
+  <div class="bg-transparent">Transparent</div>
+  <div class="bg-background">Background</div>
+
+  <div class="bg-primary">
+    <span class="me-4">Reset</span>
+
+    <div role="alert" class="danger bg-reset">
+      Danger
+    </div>
+  </div>
+
+  <div class="bg-primary">Primary (will adjust according to theme)</div>
+  <div class="bg-secondary">Secondary (will adjust according to theme)</div>
+  <div class="bg-light">Light (will always be light)</div>
+  <div class="bg-dark">Dark (will always be dark)</div>
+  <div class="bg-success">Success</div>
+  <div class="bg-danger">Danger</div>
+  <div class="bg-warning">Warning</div>
+  <div class="bg-info">Info</div>
+</div>
