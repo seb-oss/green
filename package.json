@@ -48,7 +48,6 @@
     "@material/material-color-utilities": "^0.2.4",
     "@nx/plugin": "19.6.5",
     "@ngneat/transloco": "^6.0.4",
-    "@nx/eslint": "19.0.0",
     "@popperjs/core": "^2.11.5",
     "@sebgroup/bootstrap": "^6.0.1",
     "@storybook/addon-interactions": "^8.2.8",
