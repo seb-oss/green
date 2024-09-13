@@ -1,7 +1,8 @@
 import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
-
+import '../badge'
+import '../layout/flex'
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/input)
  * &nbsp;|&nbsp;
@@ -62,12 +63,65 @@ export const ExtendedSupportingText: Story = {
         label="Label text"
         supporting-text="Supporting text"
         show-extended-supporting-text
+        maxLength="20"
+        variant="default"
       >
-        <span slot="message">Extended supporting text</span>
+        <span slot="lead">LEAD</span>
+        <gds-badge slot="trail">TRAIL</gds-badge>
+        <span slot="message">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.</span
+        >
       </gds-input>
-      <gds-input label="Label text" supporting-text="Supporting text">
-        <span slot="message">Extended supporting text</span>
+      <gds-input
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+        maxLength="20"
+        variant="simplified"
+        multiline
+      >
+        <span slot="message">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </span>
       </gds-input>
+   
+      <gds-input
+        label="default "
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+        maxLength="20"
+        variant="default"
+      >
+        <div slot="message">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua.
+        </span>
+      </gds-input>
+
+ 
     </gds-flex>
   `,
 }

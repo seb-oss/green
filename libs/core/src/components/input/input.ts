@@ -18,6 +18,9 @@ import { tokens } from '../../tokens.style'
 
 import { styles } from './input.styles'
 
+import '../icon/icons/cross-small'
+import '../icon/icons/circle-info'
+
 /**
  * @summary A custom input element that can be used in forms.
  * @status beta
