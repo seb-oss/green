@@ -32,7 +32,7 @@ export default {
 } as Meta<NgvRadioComponent>
 
 const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
-  args: NgvRadioComponent & StoryInputListener,
+  args: any,
 ) => ({
   template: /*html*/ `
     <ngv-radio

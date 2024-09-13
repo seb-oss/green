@@ -48,9 +48,7 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (
-  args: NgvSlideOutComponent & WithExtras,
-) => ({
+const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
   template: /* html */ `
   <ngv-slideout-modal #slideOut [initiallyShown]="initiallyShown" [closable]="closable" [content]="content" [title]="title" [buttons]="buttons" [side]="side" [autoWidth]="autoWidth" (ngvCloseEvent)="action($event)">
       <p *ngIf="!outsideContent && !autoWidth">Some content in the content div</p>

@@ -13,7 +13,6 @@ import {
   applicationConfig,
   Meta,
   moduleMetadata,
-  Story,
   StoryFn,
 } from '@storybook/angular'
 
@@ -93,7 +92,7 @@ type StoryArgs = NgvDropdownComponent<
 > &
   WithExtras
 
-const Template: Story<StoryArgs> = (args: StoryArgs) => {
+const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
@@ -134,7 +133,7 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
   }
 }
 
-const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
+const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
   const formControl = new UntypedFormControl({ value: '' })
   return {
     template: /*html*/ `
@@ -160,7 +159,7 @@ const DisabledTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   }
 }
 
-const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
+const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
   const dropdownFc = new UntypedFormControl()
   dropdownFc.valueChanges.subscribe((value) => {
     console.log({ value })
@@ -208,7 +207,7 @@ const AltTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   }
 }
 
-const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
+const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
   const accounts = [
     {
       key: 'se50000000001',
@@ -283,7 +282,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
             </div>
           </div>
         </ng-template>
-        
+
       </ngv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -306,7 +305,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
       }
       .account-option--number,
       .account-option--label {
-        padding-bottom: 0.25em; 
+        padding-bottom: 0.25em;
       }
       .account-option--label {
         display: flex;
@@ -343,7 +342,7 @@ const CustomSelectedTemplate: Story<StoryArgs> = (args: StoryArgs) => {
   }
 }
 
-const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
+const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
   let filterPhrase = ''
   const accounts = [
     {
@@ -448,7 +447,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
                 <ngv-typeahead-highlight [textContent]="option?.accountName" [textToHighlight]="getFilterPhrase()">
                 </ngv-typeahead-highlight>
               </div>
-              
+
               <div>{{ option?.balance | number: '1.2-2':locale }} {{ option?.currency }}</div>
             </div>
             <div class="account-option--number">
@@ -459,7 +458,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
             </div>
           </div>
         </ng-template>
-        
+
       </ngv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -482,7 +481,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
       }
       .account-option--number,
       .account-option--label {
-        padding-bottom: 0.25em; 
+        padding-bottom: 0.25em;
       }
       .account-option--label {
         display: flex;
@@ -531,7 +530,7 @@ const CustomSelectedTemplateTypeahead: Story<StoryArgs> = (args: StoryArgs) => {
   }
 }
 
-const ComboTemplate: Story<StoryArgs> = (args: StoryArgs) => {
+const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel)
   ctrl.valueChanges.subscribe(console.log)
   return {
@@ -572,34 +571,34 @@ const defaultArgs = {
   options,
 } as StoryArgs
 
-export const Primary = Template.bind({})
+export const Primary = Template.bind({}) as any
 Primary.args = {
   ...defaultArgs,
 }
 
-export const Disabled = DisabledTemplate.bind({})
+export const Disabled = DisabledTemplate.bind({}) as any
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
 }
-export const WithError = Template.bind({})
+export const WithError = Template.bind({}) as any
 WithError.args = {
   ...defaultArgs,
   invalid: true,
   error: 'Error message',
 }
 
-export const ComboWithInput = ComboTemplate.bind({})
+export const ComboWithInput = ComboTemplate.bind({}) as any
 ComboWithInput.args = { ...defaultArgs }
 
-export const WithOptionToggle = AltTemplate.bind({})
-AltTemplate.args = {
+export const WithOptionToggle = AltTemplate.bind({}) as any
+WithOptionToggle.args = {
   ...defaultArgs,
   ngModel: 'opt2',
   options,
 }
 
-export const WithCustomSelectedTemplate = CustomSelectedTemplate.bind({})
+export const WithCustomSelectedTemplate = CustomSelectedTemplate.bind({}) as any
 WithCustomSelectedTemplate.args = {
   ...defaultArgs,
   label: 'Account selector',
@@ -608,7 +607,7 @@ WithCustomSelectedTemplate.args = {
 }
 
 export const WithCustomSelectedTemplateTypeahead =
-  CustomSelectedTemplateTypeahead.bind({})
+  CustomSelectedTemplateTypeahead.bind({}) as any
 WithCustomSelectedTemplateTypeahead.args = {
   ...defaultArgs,
   label: 'Account selector',
@@ -632,7 +631,7 @@ WithDisplayDisabledAsLocked.args = {
   displayDisabledAsLocked: true,
 }
 
-const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
+const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
   const ctrl = new UntypedFormControl()
   ctrl.valueChanges.subscribe(console.log)
   return {
@@ -683,7 +682,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: StoryArgs) => {
     },
   }
 }
-export const WithTypeAhead = TypeaheadTemplate.bind({})
+export const WithTypeAhead = TypeaheadTemplate.bind({}) as any
 WithTypeAhead.args = {
   ...defaultArgs,
 }
