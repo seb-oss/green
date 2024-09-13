@@ -2,14 +2,13 @@ import React from 'react'
 import Datepicker from './datepicker'
 import { Meta, StoryObj } from '@storybook/react'
 import { GdsDatePicker } from '@sebgroup/green-core'
-import { validate } from 'webpack'
 
-type Story = StoryObj<GdsDatePicker>
+type Story = StoryObj<typeof Datepicker>
 
 /**
  * Date pickers are used when users need to enter a date. The user can enter the date as text, but the date picker also allows the user to select the date in a visual representation of a calendar.
  */
-const meta: Meta<GdsDatePicker> = {
+const meta: Meta<typeof Datepicker> = {
   title: 'Components/Datepicker',
   component: Datepicker,
   argTypes: {},
@@ -84,9 +83,11 @@ export const Validation: Story = {
           ]
         }
       },
+      disabled: true,
     },
     value: new Date(),
     testId: 'test',
+    ref: React.createRef(),
   },
   render: (args) => <Datepicker {...args} />,
 }

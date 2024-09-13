@@ -73,8 +73,10 @@ describe('Tabs allow components as content', () => {
   it('should render all anchor elements', () => {
     render(
       <Tabs>
-        {tabList.map((tab) => (
-          <Tab {...tab}>{tab.children}</Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} {...tab}>
+            {tab.children}
+          </Tab>
         ))}
       </Tabs>,
     )
@@ -104,8 +106,10 @@ describe('Tabs allow components as content', () => {
   it('should only render the selected tab element', () => {
     render(
       <Tabs>
-        {tabList.map((tab) => (
-          <Tab {...tab}>{tab.children}</Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} {...tab}>
+            {tab.children}
+          </Tab>
         ))}
       </Tabs>,
     )
@@ -134,8 +138,10 @@ describe('Tabs allow components as content', () => {
   it('onClick changes selectedTab', () => {
     render(
       <Tabs>
-        {tabList.map((tab) => (
-          <Tab title={tab.title}>{tab.children}</Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} title={tab.title}>
+            {tab.children}
+          </Tab>
         ))}
       </Tabs>,
     )
@@ -150,8 +156,8 @@ describe('Tabs allow components as content', () => {
       .mockImplementation((value: number) => value)
     render(
       <Tabs onTabChange={onTabChange}>
-        {tabList.map((tab) => (
-          <Tab {...tab}></Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} {...tab}></Tab>
         ))}
       </Tabs>,
     )
@@ -164,8 +170,10 @@ describe('Tabs allow components as content', () => {
   it('Should have aria-disabled', () => {
     render(
       <Tabs>
-        {tabList.map((tab) => (
-          <Tab {...tab}>{tab.children}</Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} {...tab}>
+            {tab.children}
+          </Tab>
         ))}
       </Tabs>,
     )
@@ -178,8 +186,10 @@ describe('Tabs allow components as content', () => {
   it('Should set href to "#" if href is not defined ', () => {
     render(
       <Tabs>
-        {tabList.map((tab) => (
-          <Tab title={tab.title}>{tab.children}</Tab>
+        {tabList.map((tab, index) => (
+          <Tab key={`tab-${index}`} title={tab.title}>
+            {tab.children}
+          </Tab>
         ))}
       </Tabs>,
     )
