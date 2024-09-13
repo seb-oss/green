@@ -1,4 +1,4 @@
-import { moduleMetadata, Story } from '@storybook/angular'
+import { moduleMetadata, StoryFn } from '@storybook/angular'
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { NggChartComponent } from './ngg-chart.component'
@@ -17,12 +17,12 @@ export default {
   ],
 }
 
-const ChartStory: Story<NggChartComponent> = (args) => ({
+const ChartStory: StoryFn<NggChartComponent> = (args: any) => ({
   props: args,
   template: `<ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>`,
 })
 
-const ChartCardStory: Story<NggChartComponent> = (args) => ({
+const ChartCardStory: StoryFn<NggChartComponent> = (args: any) => ({
   props: args,
   template: `<div class="card" style="height: 340px">
                 <header><h3>Chart in card with locked height (340px)</h3></header>
@@ -32,7 +32,7 @@ const ChartCardStory: Story<NggChartComponent> = (args) => ({
              </div>`,
 })
 
-const ObservableChartStory: Story<NggChartComponent> = (args) => ({
+const ObservableChartStory: StoryFn<NggChartComponent> = (args: any) => ({
   props: args,
   template: `<ngg-chart [settings]="settings | async" [theme]="theme"></ngg-chart>`,
 })
@@ -61,7 +61,7 @@ SimpleBar.args = {
           stepSize: 50,
         },
       },
-      tooltipNumberFormat: (value) => `${value} st`,
+      tooltipNumberFormat: (value: any) => `${value} st`,
     },
   },
 }

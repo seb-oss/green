@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import * as InPageWizardStories from './in-page-wizard.stories';
+
+<Meta of={InPageWizardStories} />
+
+# In page wizard
+
+Presents a sequence that leads the user through well-defined steps within a page.
+
+<Story of={InPageWizardStories.InPageWizardStepCard} />
+
+## Completed step
+
+A completed step has a green check mark icon and an Edit-button which allows the user to change previously entered information.
+
+<Canvas of={InPageWizardStories.CompletedStep} />
+
+## Current step (active)
+
+The current step is the one the user is currently interacting with.
+
+<Canvas of={InPageWizardStories.CurrentStep} />
+
+## Upcoming, but not yet started, step
+
+An upcoming step only shows the title and step number, but hides the details in order to reduce clutter.
+
+<Canvas of={InPageWizardStories.NotStartedStep} />

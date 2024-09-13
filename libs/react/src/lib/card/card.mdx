@@ -1,0 +1,67 @@
+import { Meta, Story, Canvas, ArgTypes } from '@storybook/blocks'
+import Card from './card'
+import Button from '../form/button/button'
+import Link from '../link/link'
+import * as CardStories from './card.stories';
+
+export const Template = ({ children, ...props }) => (
+  <Card {...props}>{children}</Card>
+)
+
+export const Header = () => (
+  <>
+    <h3>Card Headline</h3>
+    <Button variant="close">
+      <span className="sr-only">Close</span>
+      <i></i>
+    </Button>
+  </>
+)
+
+export const Footer = () => (
+  <>
+    <Link href="https://seb.se" className="button link">
+      Link
+    </Link>
+    <Button>Default button</Button>
+    <Button variant="primary">Primary</Button>
+  </>
+)
+
+<Meta of={CardStories} />
+
+# Cards
+
+A card is container for short content, related pieces of information, and action on a specific content.
+
+<Canvas of={CardStories.Default} />
+
+## Card without header
+
+<Card>
+  <p>
+    <strong>Not passing header prop, but creating it in body</strong>
+  </p>
+  <p class="mb-5">
+    Then you don't get the close button because it's styling is tied to the
+    header
+  </p>
+  <div>
+    <button class="primary">Primary button</button>
+  </div>
+</Card>
+
+## Headline and text content
+<Card header={<h3>Card one headline</h3>}>Card one content text</Card>
+<br /><br />
+<Card header={<h3>Card two headline</h3>} />
+
+## Card with button
+
+<Card header={<Header />} footer={<Footer />}>
+  Here is some content with link and two buttons footer
+</Card>
+
+## Props
+
+<ArgTypes />

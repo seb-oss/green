@@ -23,16 +23,14 @@ export default {
   },
 } as Meta<NggBadgeComponent>
 
-const Template: StoryFn<NggBadgeComponent> = (args: NggBadgeComponent) => ({
+const Template: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
   props: args,
 })
 
-const BadgesTemplate: StoryFn<NggBadgeComponent> = (
-  args: NggBadgeComponent,
-) => ({
+const BadgesTemplate: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <div class="d-flex justify-content-between">
       <span ngg-badge >Badge</span>
