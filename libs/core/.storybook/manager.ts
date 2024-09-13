@@ -25,13 +25,19 @@ addons.setConfig({
           ? 'has-children'
           : 'no-children'
 
-      console.log(item)
+      // console.log(item['parent'])
+      // console.log(api)
+
+      const itemType = 'type-' + item.type
+      const itemParent =
+        item['parent'] !== undefined ? 'parent-' + item['parent'] : ''
+
       return createElement(
         'div',
         {
-          className: `gds-item ${levelClass} ${childrenClass} ${'item-' + item.name.toLowerCase().replace(/\s+/g, '-')}`,
+          className: `gds-item ${itemType} ${itemParent} ${childrenClass} ${'depth-' + item.depth} ${'item-' + item.name.toLowerCase().replace(/\s+/g, '-')}`,
         },
-        item.name,
+        createElement('span', null, item.name),
         betaItems[item.name] ? createElement('gds-badge', null, 'BETA') : null,
       )
     },
