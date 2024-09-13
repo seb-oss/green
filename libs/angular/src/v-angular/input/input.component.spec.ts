@@ -1,5 +1,4 @@
 import '../core/core.globals'
-
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
   FormControl,
@@ -9,18 +8,19 @@ import {
   Validators,
 } from '@angular/forms'
 import { By } from '@angular/platform-browser'
+// import chalk from 'chalk'
+//import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
-import chalk from 'chalk'
-
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { TranslocoTestingModule } from '@ngneat/transloco'
+import en from '../i18n/i18n.json'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvInputComponent } from './input.component'
 
-const member = (name: any) => chalk.blueBright(`${name}`)
-const atInput = (name: any) =>
-  chalk.white('@') + chalk.green('Input') + chalk.magenta('() ') + member(name)
-const primitive = (value: any) => chalk.blue.bold(`${value}`)
+// const member = (name: any) => chalk.blueBright(`${name}`)
+// const atInput = (name: any) =>
+//   chalk.white('@') + chalk.green('Input') + chalk.magenta('() ') + member(name)
+// const primitive = (value: any) => chalk.blue.bold(`${value}`)
 
 describe('[NgvCore]', () => {
   // ----------------------------------------------------------------------------
@@ -36,7 +36,18 @@ describe('[NgvCore]', () => {
         providers: [
           { provide: NgControl, useValue: { control: new FormControl() } },
         ],
-        imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          TranslocoTestingModule.forRoot({
+            langs: { en },
+            translocoConfig: {
+              availableLangs: ['en'],
+              defaultLang: 'en',
+            },
+            preloadLangs: true,
+          }),
+        ],
       }).compileComponents()
     }))
 
@@ -49,7 +60,7 @@ describe('[NgvCore]', () => {
     })
 
     describe('@Input() optional', () => {
-      it(`adds optional label if ${primitive(true)}`, () => {
+      it(`adds optional label if`, () => {
         fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
@@ -64,7 +75,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeTruthy()
       })
 
-      it(`adds optional label if ${atInput('required')} is ${primitive(false)}`, () => {
+      it(`adds optional label if`, () => {
         fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
@@ -78,7 +89,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeTruthy()
       })
 
-      it(`adds optional label if ${member('control.required')} is evaluated as ${primitive(false)}`, () => {
+      it(`adds optional label if is evaluated as`, () => {
         const control = new FormControl(undefined)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
         fixture = TestBed.createComponent(NgvInputComponent)
@@ -95,7 +106,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeTruthy()
       })
 
-      it(`hides optional label if ${primitive(false)}`, () => {
+      it(`hides optional label if`, () => {
         fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
@@ -109,7 +120,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeFalsy()
       })
 
-      it(`hides optional label if ${atInput('required')} is ${primitive(true)}`, () => {
+      it(`hides optional label if`, () => {
         fixture = TestBed.createComponent(NgvInputComponent)
         component = fixture.componentInstance
         component.label = 'Label text'
@@ -123,7 +134,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeFalsy()
       })
 
-      it(`hides optional label if ${member('control.required')} is evaluated as ${primitive(true)}`, () => {
+      it(`hides optional label if `, () => {
         const control = new FormControl(undefined, Validators.required)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
         component.label = 'Label text'
@@ -138,9 +149,7 @@ describe('[NgvCore]', () => {
         expect(optionalLabel).toBeFalsy()
       })
 
-      it(`hides optional label if ${primitive(false)} despite if ${member(
-        'control.required',
-      )} is evaluated as ${primitive(false)}`, () => {
+      it(`hides optional label if`, () => {
         const control = new FormControl(undefined)
         TestBed.overrideProvider(NgControl, { useValue: { control } })
         fixture = TestBed.createComponent(NgvInputComponent)

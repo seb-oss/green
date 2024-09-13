@@ -8,7 +8,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { TranslocoTestingModule } from '@ngneat/transloco'
+import en from '../i18n/i18n.json'
 
 import { NgvCheckboxComponent } from './checkbox.component'
 
@@ -24,7 +25,18 @@ describe('[NgvCore]', () => {
     beforeEach(waitForAsync(async () => {
       await TestBed.configureTestingModule({
         declarations: [NgvCheckboxComponent],
-        imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          TranslocoTestingModule.forRoot({
+            langs: { en },
+            translocoConfig: {
+              availableLangs: ['en'],
+              defaultLang: 'en',
+            },
+            preloadLangs: true,
+          }),
+        ],
         providers: [{ provide: NgControl, useValue: new FormControl() }],
       }).compileComponents()
 
@@ -43,9 +55,11 @@ describe('[NgvCore]', () => {
       it('should toggle state if not disabled', () => {
         fixture.detectChanges()
         component.disabled = false
+
         checkbox.click()
         expect(component.state).toBe(true)
       })
+
       it('should not toggle state if disabled', () => {
         component.state = true
         component.disabled = true

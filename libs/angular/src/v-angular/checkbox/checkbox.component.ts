@@ -8,6 +8,8 @@ import {
   Optional,
   Output,
   Self,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
