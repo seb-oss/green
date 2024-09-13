@@ -247,7 +247,7 @@ export class GdsDropdown<ValueT = any>
         .open=${this.open}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
-        .calcMaxHeight=${(_trigger: HTMLElement) => `${this.maxHeight}px`}
+        .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
@@ -350,6 +350,18 @@ export class GdsDropdown<ValueT = any>
         else listbox.selection = [this.value as any]
       }
     })
+  }
+
+  #calcMaxHeight = (trigger: HTMLElement) => {
+    const triggerRect = trigger.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+    const bottomSpace = windowHeight - triggerRect.bottom
+    const topSpace = triggerRect.top
+
+    let height = Math.min(topSpace, this.maxHeight)
+    if (bottomSpace > topSpace) height = Math.min(bottomSpace, this.maxHeight)
+
+    return `${height - 16}px`
   }
 
   /**
