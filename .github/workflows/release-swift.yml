@@ -19,6 +19,10 @@ jobs:
         with:
           app-id: ${{ secrets.GREEN_BOT_APP_ID }}
           private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: |
+            green-tokens-ios
+            green
 
       - name: Checkout
         uses: actions/checkout@v4
