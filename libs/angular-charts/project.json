@@ -62,6 +62,12 @@
         }
       }
     },
+    "copy-designlibrary-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles -f libs/angular-charts/.storybook/designlibrary.json dist/storybook/angular-charts"
+      }
+    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}

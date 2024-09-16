@@ -74,6 +74,10 @@ jobs:
           duration: 30m
           authorized-users: splashdust
 
+      ## This is a index file used by Design Library to show links to components
+      - name: Copy designlibrary.json
+        run: yarn nx run-many --target copy-designlibrary-json --all
+
       - name: Deploy storybooks to GitHub Pages
 
         uses: JamesIves/github-pages-deploy-action@4.1.4
