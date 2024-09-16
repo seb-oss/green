@@ -16,6 +16,9 @@ jobs:
       - name: Get token
         id: app-token
         uses: actions/create-github-app-token@v1
+        repositories: |
+          seb-oss/green
+          seb-oss/green-tokens-ios
         with:
           app-id: ${{ secrets.GREEN_BOT_APP_ID }}
           private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
