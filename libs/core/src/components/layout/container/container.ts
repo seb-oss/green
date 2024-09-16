@@ -300,6 +300,15 @@ export class GdsContainer extends GdsElement {
   width?: string
 
   /**
+   * Controls the cursor property of the flex.
+   * Supports all valid CSS cursor values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  cursor?: string
+
+  /**
    * Controls the z-index property of the flex.
    * Supports all valid CSS z-index values.
    */
