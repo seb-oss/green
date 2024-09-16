@@ -22,6 +22,11 @@ export function renderMonthGridView(
     { weekStartsOn: 1 },
   )
 
+  // pad `weeks` so that we always render 6 rows
+  while (weeks.length < 6) {
+    weeks.push(addDays(weeks[weeks.length - 1], 7))
+  }
+
   return html`${template(
     weeks.map((weekStartDay) => ({
       days: eachDayOfInterval({
