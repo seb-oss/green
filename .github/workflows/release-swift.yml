@@ -6,98 +6,45 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    name: Release Swift
-    runs-on: ubuntu-latest
-    outputs:
-      tokensversion: ${{ steps.output-tokens-version.outputs.tokensversion }}
-      tokensshoulddeploy: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
-    steps:
-      - name: Get token
-        id: get_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
-          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
-
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js LTS
-        uses: actions/setup-node@v3
-        with:
-          node-version: lts/*
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies
-        run: yarn install --prefer-offline --frozen-lockfile --silent
-
-      - name: Mock Changeset
-        id: changesets
-        # uses: changesets/action@v1
-        # with:
-        #   publish: yarn changeset:publish
-        # env:
-        #   GITHUB_TOKEN: ${{ steps.get_token.outputs.token }}
-        #   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          echo "publishedPackages=[{\"name\": \"@sebgroup/green-tokens\", \"version\": \"0.6.0\"}]" >> "$GITHUB_OUTPUT"
-
-      - name: Upload tokens ios build
-        if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: iostokens
-          path: ./dist/libs/tokens/ios/*
-
-      - name: Output green-tokens versions
-        if: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
-        id: output-tokens-version
-        run: echo "tokensversion=$( jq -r '.[] | select(.name=="@sebgroup/green-tokens").version' <<< ${{ fromJson(steps.changesets.outputs.publishedPackages) }}" >> "$GITHUB_OUTPUT"
-
   deployiostokens:
-    name: Deploy Green Tokens iOS
+    name: Deploy Swift Package
     runs-on: ubuntu-latest
     needs: release
-    if: ${{ needs.release.outputs.tokensshoulddeploy }}
     env:
       CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
       CI_COMMIT_AUTHOR: Continuous Integration
     steps:
       - name: Get token
-        id: get_token_deploy
+        id: app-token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ secrets.GREEN_BOT_APP_ID }}
           private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: seb-oss/green-tokens-ios
           ref: main
-          token: ${{ steps.get_token_deploy.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
 
-      - name: Get artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: iostokens
+      # - name: Get artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: iostokens
+
+      - name: Get GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - run: |
+          git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
+          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
 
       - name: Push changes
         run: |
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "username@users.noreply.github.com"
           git add .
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
