@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.41.4
+
+### Patch Changes
+
+- 63e0c36: **Calendar:** Fix jumping height when changing months. Fixes #1441
+
 ## 1.41.3
 
 ### Patch Changes
