@@ -52,9 +52,7 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NgvButtonComponent & StoryClickable> = (
-  args: NgvButtonComponent & StoryClickable,
-) => ({
+const Template: StoryFn<NgvButtonComponent & StoryClickable> = (args: any) => ({
   template: /*html*/ `
     <div class="button-wrapper button-wrapper--{{ text }}">
       <ngv-button

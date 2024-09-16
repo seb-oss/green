@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<NgvDialogComponent> = (args: NgvDialogComponent) => ({
+const Template: StoryFn<NgvDialogComponent> = (args: any) => ({
   props: args,
 })
 

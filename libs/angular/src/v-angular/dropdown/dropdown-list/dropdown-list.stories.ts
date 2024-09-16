@@ -64,7 +64,7 @@ const options = [
 
 type StoryArgs = NgvDropdownListComponent & WithExtras
 
-const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
+const Template: StoryFn<StoryArgs> = (args: any) => {
   let expanded = false
   const formControl = new UntypedFormControl()
   formControl.valueChanges.subscribe()
@@ -75,13 +75,13 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
   return {
     template: /*html*/ `
       <div style="width: 264px;position: relative;">
-  
+
         <ngv-input
           name="test"
           [formControl]="formControl"
           (click)="$event.stopPropagation();expanded = !expanded">
         </ngv-input>
-  
+
         <ngv-dropdown-list
         style="width: 264px"
         [expanded]=expanded
@@ -101,6 +101,6 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => {
 const primaryArgs = {
   options,
   keyUp: {},
-} as StoryArgs
+}
 
-export const Primary = Template.bind({}, primaryArgs)
+export const Primary = Template.bind({}, primaryArgs as any)

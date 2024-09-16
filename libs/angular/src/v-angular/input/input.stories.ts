@@ -134,14 +134,12 @@ const meta: Meta<NgvInputComponent> = {
 }
 export default meta
 
-const Template: StoryFn<NgvInputComponent & WithExtras> = (
-  args: NgvInputComponent & WithExtras,
-) => ({
+const Template: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
   props: args,
 })
 
 const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras,
+  args: any,
 ) => {
   const ctrl = new UntypedFormControl(args.ngModel, [
     Validators.required,
@@ -209,13 +207,13 @@ WithFormControl.args = {
 }
 
 const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (
-  args: NgvInputComponent & WithExtras,
+  args: any,
 ) => ({
   props: { ...args },
 })
 
 const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
-  args: NgvInputComponent & WithExtras,
+  args: any,
 ) => ({
   template: /*html*/ `
     <ngv-input [label]="label"
@@ -586,7 +584,7 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
         min-height: 150px;
         max-height: 250px;
       }
-      
+
       .row:after {
         content: "";
         display: table;
@@ -634,7 +632,7 @@ WithDisplayDisabledAsLocked.args = {
 }
 
 const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (
-  args: NgvInputComponent & WithExtras,
+  args: any,
 ) => {
   const options = [
     { key: 'hej', label: 'Hej' },

@@ -41,7 +41,7 @@ export default {
 } as Meta
 
 const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
-  args: NgvCheckboxComponent & StoryInputListener,
+  args: any,
 ) => ({
   template: /*html*/ `
     <ngv-checkbox
@@ -57,7 +57,7 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
 })
 
 const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
-  args: NgvCheckboxComponent & StoryInputListener,
+  args: any,
 ) => ({
   template: /*html*/ `
     <ngv-checkbox
