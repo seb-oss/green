@@ -6,11 +6,16 @@
   @layer _base {
     :host {
       @include mixins.calendar();
-    }
 
-    table {
-      flex-grow: 1;
-      width: 100%;
+      table {
+        flex-grow: 1;
+        width: 100%;
+      }
+
+      table td {
+        width: 3rem;
+        height: 3rem;
+      }
     }
   }
 
