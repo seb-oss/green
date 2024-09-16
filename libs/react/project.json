@@ -102,6 +102,12 @@
         "tokens:build"
       ]
     },
+    "copy-designlibrary-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles -f libs/react/.storybook/designlibrary.json dist/storybook/react"
+      }
+    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
