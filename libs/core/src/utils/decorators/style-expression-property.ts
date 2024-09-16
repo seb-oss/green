@@ -13,7 +13,7 @@ export type StyleExpressionPropertyOptions = {
 }
 
 /**
- * todo
+ * Property decorator for creating style expression properties.
  */
 export function styleExpressionProperty(
   options?: StyleExpressionPropertyOptions,
@@ -28,20 +28,36 @@ export function styleExpressionProperty(
       options?.valueTemplate ?? ((v) => `var(--gds-space-${v})`)
     const styleTemplate = options?.styleTemplate
 
-    // Jack into Lits property decorator
-    property({ attribute: options?.attribute })(proto, descriptor)
+    const states = [null, 'hover', 'focus-within']
 
-    // And also our own watch decorator to catch changes
-    watch(descriptor as string)(proto, descriptor as string, {
-      value: function (oldValue: unknown, newValue: unknown) {
-        const ast = parse(tokenize(newValue as string))
-        const css = toCss(sel, prop, ast, valueTemplate, styleTemplate)
-        ;(this as any)[`__${String(descriptor)}_ast`] = ast
-        ;(this as GdsElement)._dynamicStylesController.inject(
-          `sep_${String(descriptor)}`,
-          unsafeCSS(css),
-        )
-      },
+    states.forEach((state) => {
+      const d = state ? `${state}:${String(descriptor)}` : String(descriptor)
+
+      // Jack into Lits property decorator
+      property({
+        attribute:
+          options?.attribute && `${state}:${String(options.attribute)}`,
+      })(proto, d)
+
+      // And also our own watch decorator to catch changes
+      watch(d)(proto, d, {
+        value: function (oldValue: unknown, newValue: unknown) {
+          const ast = parse(tokenize(newValue as string))
+          const css = toCss(
+            state ? sel + `(:${state})` : sel,
+            prop,
+            ast,
+            valueTemplate,
+            styleTemplate,
+          )
+          console.log('watch', d, css)
+          ;(this as any)[`__${d}_ast`] = ast
+          ;(this as GdsElement)._dynamicStylesController.inject(
+            `sep_${d}`,
+            unsafeCSS(css),
+          )
+        },
+      })
     })
   }
 }
