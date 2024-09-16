@@ -9,6 +9,9 @@ jobs:
   deployiostokens:
     name: Deploy Swift Package
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     env:
       CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
       CI_COMMIT_AUTHOR: Continuous Integration
