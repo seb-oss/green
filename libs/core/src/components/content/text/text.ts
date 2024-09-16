@@ -5,7 +5,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import TextCSS from './text.style.css'
+import TextCSS from './text.style'
 
 /**
  * `gds-text` is a custom element that provides a flexible text system.
@@ -203,9 +203,9 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-sys-color-${colorName})`
+        return `var(--gds-color-${colorName})`
       }
     },
   })

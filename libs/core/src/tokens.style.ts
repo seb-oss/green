@@ -7,6 +7,10 @@ import textTokens from '../../../dist/libs/tokens/internal/text.css?inline'
 import motionTokens from '../../../dist/libs/tokens/internal/motion.css?inline'
 import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
 
+// V2
+import colorV2Light from '../../../dist/libs/tokens/internal/light.css?inline'
+import colorV2Dark from '../../../dist/libs/tokens/internal/dark.css?inline'
+
 const tokens = [
   unsafeCSS(palletCss),
   unsafeCSS(lightThemeCss),
@@ -16,4 +20,12 @@ const tokens = [
   unsafeCSS(shadowTokens),
 ]
 
-export { tokens }
+// TODO: Consider more efficient way to apply tokens
+const tokesStyleSheets = new CSSStyleSheet()
+tokesStyleSheets.replaceSync(`:root { ${colorV2Light} }`)
+document.adoptedStyleSheets = [
+  ...(document.adoptedStyleSheets || []),
+  tokesStyleSheets,
+]
+
+export { tokens, colorV2Light, colorV2Dark }

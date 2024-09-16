@@ -40,6 +40,7 @@ export class AppModule {}
 | isActive    | \`boolean\`  | Indicates that this step is active.                                              |
 | isCompleted | \`boolean\`  | Determines that this step has been completed.                                    |
 | disableNext | \`boolean\`  | Set the next button to disabled. E.g. needed if validation fails for step input. |
+| isStepValid | \`function\` | Don't set the step to completed if a validation in the parent component fails. Used for accessibility purposes. |
 `}</Markdown>
 
 ### Outputs
@@ -58,9 +59,7 @@ export class AppModule {}
 Step card that can be set to active.
 _Note due to som issue with storybook and angular and input change the edit button change content is not switching as expected_
 
-<Canvas>
-  <Story id="components-wizard-in-page-wizard-step-card--default" />
-</Canvas>
+<Canvas of={Stories.Default} />
 
 Usage
 
@@ -104,14 +103,10 @@ _The current step is the one the user is currently interacting with._
 Step three is upcoming.
 _An upcoming step only shows the title and step number, but hides the details in order to reduce clutter._
 
-<Canvas>
-  <Story id="components-wizard-in-page-wizard-step-card--multiple" />
-</Canvas>
+<Canvas of={Stories.Multiple} />
 
 ### Disable next button
 
 Disable next button. For example if validation failed for content input
 
-<Canvas>
-  <Story id="components-wizard-in-page-wizard-step-card--disable-next" />
-</Canvas>
+<Canvas of={Stories.DisableNext} />

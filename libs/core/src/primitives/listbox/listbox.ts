@@ -1,5 +1,4 @@
-import { HTMLTemplateResult } from 'lit'
-import { property, state } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { Ref, createRef, ref } from 'lit/directives/ref.js'
 
 import { GdsElement } from '../../gds-element'

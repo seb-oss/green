@@ -48,8 +48,8 @@ export const ButtonGroup = ({
 
   return (
     <Group data-label="button-group" id={id}>
-      {buttons.map((props) => (
-        <Button key={props.key} {...props} />
+      {buttons.map(({ key, ...props }) => (
+        <Button key={key} {...props} />
       ))}
     </Group>
   )

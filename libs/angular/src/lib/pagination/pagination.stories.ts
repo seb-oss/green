@@ -21,9 +21,7 @@ export default {
   },
 } as Meta<NggPaginationComponent>
 
-const Template: StoryFn<NggPaginationComponent> = (
-  args: NggPaginationComponent,
-) => {
+const Template: StoryFn<NggPaginationComponent> = (args) => {
   return {
     template: `
     <ngg-pagination [size]="size" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [displayPages]="displayPages"></ngg-pagination>

@@ -1,5 +1,5 @@
 import { NggDropdownComponent } from './dropdown.component'
-import { Story, Meta, Markdown } from '@storybook/addon-docs'
+import { Story, Meta, Markdown, Canvas } from '@storybook/addon-docs'
 import * as Stories from './dropdown.stories.ts'
 
 <Meta of={Stories} />
@@ -32,7 +32,7 @@ NggDropdownComponent is a form control for selecting a single or multiple values
 The dropdown supports 2-way binding to the value property without the need for Angular forms,
 and supports all the form directives from the core FormsModule (NgModel) and ReactiveFormsModule (FormControl, FormGroup, etc.).
 
-<Story id="components-dropdown--select" />
+<Canvas of={Stories.Select} />
 
 ## Option headings
 
@@ -58,13 +58,13 @@ You can turn your options into option headings by adding the `heading` property 
 }
 ```
 
-<Story id="components-dropdown--test" />
+<Canvas of={Stories.Test} />
 
 ## Small dropdown
 
 You can set the size of the dropdown to small by setting the size input to `small`.
 
-<Story id="components-dropdown--small" />
+<Canvas of={Stories.Small} />
 
 ## Reactive forms
 
@@ -102,7 +102,7 @@ If you just need a simple select without any form, validation etc. it's possible
 
 The dropdown options should be provided as an array of objects with label and value. When a user chooses an option the value will be selected.
 
-<Story id="components-dropdown--render-with-selected-option" />
+<Canvas of={Stories.RenderWithSelectedOption} />
 
 ```typescript
 const options = [
@@ -197,7 +197,7 @@ Just add `multiSelect` to add support for multi select.
 </form>
 ```
 
-<Story id="components-dropdown--multi-select" />
+<Canvas of={Stories.MultiSelect} />
 
 ## Searchable
 
@@ -213,7 +213,7 @@ For search functionality add `searchable`. By default search will filter on 'dis
 </form>
 ```
 
-<Story id="components-dropdown--searchable" />
+<Canvas of={Stories.Searchable} />
 
 ## Custom option template
 
@@ -230,7 +230,7 @@ Use an ng-template with the nggDropdownOption directive to provide the dropdown 
 </ngg-dropdown>
 ```
 
-<Story id="components-dropdown--custom-option" />
+<Canvas of={Stories.CustomOption} />
 
 To be able to search in custom properties, you should provide an a search filter function.
 
@@ -242,7 +242,7 @@ const searchFilter: (search, value) => ['kitchen', 'id'].some((key) => value[key
 
 Below is an example of how the component can be used with reactive forms and validations.
 
-<Story id="components-dropdown--form" />
+<Canvas of={Stories.Form}/>
 
 ### Markup
 
@@ -280,7 +280,7 @@ Below is an example of how the component can be used with reactive forms and val
 
 Below is an example of reset functionality for dropdown
 
-<Story id="components-dropdown--form-with-reset" />
+<Canvas of={Stories.FormWithReset} />
 
 ### Markup
 

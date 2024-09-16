@@ -1,0 +1,84 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Get started" />
+
+# Install
+
+```
+npm install @sebgroup/green-angular-charts --save
+```
+
+# Import chart module
+
+We recommend import `NggChartsModule` into a shared module eg. `SharedModule` that can be imported into other, preferably lazy loaded modules when needed.
+
+```ts
+import { NggChartsModule } from '@sebgroup/green-angular-charts'
+
+@NgModule({
+  declarations: [...],
+  imports: [
+    ...
+    NggChartsModule
+  ],
+  exports: [
+    NggChartsModule
+  ]
+})
+export class SharedModule {}
+```
+
+# Import styling
+
+We recommend setting up your Angular project to use scss (SASS) for css preprocessing.
+
+Once configured to use scss, it's just a matter of including the scss to your main styles file, typically it would be `styles.scss` located at the root of the `src` folder unless you've changed it.
+Don't forget to add the base styles for green as they're needed too (example with minimal dependencies will be added later).
+
+### Add scss
+
+`{project}/src/styles.scss`
+
+```css
+// import base styles from green/chlorophyll
+@use '~@sebgroup/chlorophyll/scss';
+
+// import chart styles from green-charts
+@use "~@sebgroup/green-charts/scss" as charts;
+```
+
+# Add and use component
+
+`{project}/src/app/ex-bar-chart/ex-bar-chart.component.ts`
+
+```ts
+import { Component } from '@angular/core'
+import { ChartSettings } from '@sebgroup/green-charts'
+
+@Component({
+  selector: 'ex-bar-chart',
+  template: `<ngg-chart [settings]="settings"></ngg-chart>`,
+  styleUrls: ['./green-charts.component.css'],
+})
+export class BarChartsComponent {
+  settings: ChartSettings = {
+    data: [
+      {
+        name: 'Antal',
+        type: 'bar',
+        values: [234, 197, 97, 12],
+      },
+    ],
+    categories: [
+      'Signerade avtal (SEB)',
+      'Påbörjade trials (Oxceed)',
+      'Aktiverade prenumerationer',
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+    ],
+  }
+}
+```
+
+### Have other needs?
+
+More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/seb-oss/green/issues)

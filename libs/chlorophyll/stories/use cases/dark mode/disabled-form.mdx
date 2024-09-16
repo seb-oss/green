@@ -1,0 +1,645 @@
+import { Canvas, Meta } from '@storybook/blocks'
+
+<Meta title="Use cases/Dark mode/Disabled forms" />
+
+<div class="d-flex">
+  <main class="light-mode p-4">
+    <div class="mx-auto my-6" style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <h1>Light mode</h1>
+      <p class="mb-5">Lorem ipsum text</p>
+
+      <div class="mb-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">Example with aria-disabled="true" and .disabled</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+                <input id="inputValid2" type="text" required class="disabled" />
+                <button type="button" aria-disabled="true">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+                <button type="button" disabled>Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+                  <span>Three</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked="checked" disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">
+                Example with aria-disabled="true" and .disabled
+              </span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+                <input id="inputValid2" type="text" required class="disabled" />
+                <button type="button" aria-disabled="true">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+                <button type="button" disabled>Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+                  <span>Three</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="elevation-2 mt-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">
+                Example with aria-disabled="true" and .disabled
+              </span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+                <input id="inputValid2" type="text" required class="disabled" />
+                <button type="button" aria-disabled="true">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+
+                <button type="button" disabled>Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+                  <span>Three</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <main class="dark-mode bg-color p-4">
+    <div class="mx-auto my-6" style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <h1>Dark mode</h1>
+      <p class="mb-5">Lorem ipsum text</p>
+
+      <div class="mb-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">
+                Example with aria-disabled="true" and .disabled
+              </span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required class="disabled" />
+
+                <button type="button" aria-disabled="true">
+                  Button
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+
+                <button type="button" disabled>
+                  Button
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked disabled />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required disabled />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>
+                  Cancel
+                </button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">
+                Example with aria-disabled="true" and .disabled
+              </span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required class="disabled" />
+
+                <button type="button" aria-disabled="true">
+                  Button
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+
+                <button type="button" disabled>
+                  Button
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked disabled />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required disabled />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>
+                  Cancel
+                </button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="elevation-2 mt-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+              <input id="inputValid1" type="text" disabled required value="Disabled" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+
+              <span class="form-info">
+                Example with aria-disabled="true" and .disabled
+              </span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required aria-disabled="true" placeholder="Placeholder" />
+                <input id="inputValid2" type="text" required class="disabled" />
+                <button type="button" aria-disabled="true">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border disabled">
+                <input id="inputValid1" type="text" required disabled />
+                <input id="inputValid2" type="text" required aria-disabled="true" />
+                <button type="button" disabled>Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required disabled />
+                  <span>Three</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Disabled radio group</legend>
+                <span id="radioGroupHelp1" class="form-info">Radio group description</span>
+                <label class="form-control">
+                  <input required type="radio" checked disabled />
+                  <span>One</span>
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required disabled />
+                  <span>Two</span>
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button" disabled>Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit" disabled>Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
