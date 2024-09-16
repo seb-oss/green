@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { FormItem } from './formItem'
 import { IValidator } from '@sebgroup/extract'
 import userEvent from '@testing-library/user-event'
@@ -55,7 +55,9 @@ describe('FormItem', () => {
       </FormItem>,
     )
     expect(screen.getByText(formItemProps.expandableInfo)).not.toBeVisible()
-    await userEvent.click(screen.getByRole('button'))
+    await act(async () => {
+      await userEvent.click(screen.getByRole('button'))
+    })
     expect(screen.getByText(formItemProps.expandableInfo)).toBeVisible()
   })
 

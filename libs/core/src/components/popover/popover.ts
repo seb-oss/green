@@ -291,12 +291,13 @@ export class GdsPopover extends GdsElement {
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
-          () => document.addEventListener('click', this.#handleClickOutside),
+          () =>
+            this._elDialog?.addEventListener('click', this.#handleClickOutside),
           0,
         )
       } else {
         this._elDialog?.close()
-        document.removeEventListener('click', this.#handleClickOutside)
+        this._elDialog?.removeEventListener('click', this.#handleClickOutside)
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })

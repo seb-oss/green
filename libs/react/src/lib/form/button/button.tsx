@@ -1,4 +1,9 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
+import {
+  forwardRef,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ForwardedRef,
+} from 'react'
 import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
 
@@ -17,37 +22,44 @@ export interface ButtonProps
   testId?: string
 }
 
-export function Button({
-  className,
-  variant,
-  active = false,
-  type = 'button',
-  size,
-  testId,
-  ...otherProps
-}: ButtonProps) {
-  const buttonClassName =
-    classNames(className, variant, size, {
-      active: active,
-    }) || undefined
+export const Button = forwardRef(
+  (
+    {
+      className,
+      variant,
+      active = false,
+      type = 'button',
+      size,
+      testId,
+      ...props
+    }: ButtonProps,
+    ref: ForwardedRef<HTMLButtonElement>,
+  ) => {
+    const buttonClassName =
+      classNames(className, variant, size, {
+        active: active,
+      }) || undefined
 
-  return variant == 'close' ? (
-    <button
-      className={buttonClassName}
-      aria-label={otherProps['aria-label'] ?? 'Close'}
-      data-testid={testId}
-      {...otherProps}
-    >
-      <i></i>
-    </button>
-  ) : (
-    <button
-      className={buttonClassName}
-      type={type}
-      data-testid={testId}
-      {...otherProps}
-    />
-  )
-}
+    return variant == 'close' ? (
+      <button
+        className={buttonClassName}
+        aria-label={props['aria-label'] ?? 'Close'}
+        data-testid={testId}
+        ref={ref}
+        {...props}
+      >
+        <i></i>
+      </button>
+    ) : (
+      <button
+        className={buttonClassName}
+        type={type}
+        data-testid={testId}
+        ref={ref}
+        {...props}
+      />
+    )
+  },
+)
 
 export default Button
