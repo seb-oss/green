@@ -4,8 +4,6 @@ const style = css`
   :host {
     --_c: 12;
     --_grid-col: repeat(var(--_c), 1fr);
-    display: grid;
-    width: 100%;
     grid-template-columns: var(--_grid-col);
     grid-column-gap: var(--_gap-column, 0px);
     grid-row-gap: var(--_gap-row, 0px);

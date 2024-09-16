@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.19.0
+
+### Minor Changes
+
+- 7b503d8: Adding forwardrefs to form components
+
+### Patch Changes
+
+- Updated dependencies [a7f217e]
+- Updated dependencies [6e5f2a9]
+- Updated dependencies [6e5f2a9]
+  - @sebgroup/green-core@1.41.3
+
 ## 3.18.0
 
 ### Minor Changes

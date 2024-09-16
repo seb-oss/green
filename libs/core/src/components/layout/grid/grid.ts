@@ -2,7 +2,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../../gds-element'
+import { GdsContainer } from '../container'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
@@ -16,7 +16,7 @@ import GridCSS from './grid.style'
  *
  */
 @gdsCustomElement('gds-grid')
-export class GdsGrid extends GdsElement {
+export class GdsGrid extends GdsContainer {
   static styles = [tokens, GridCSS]
 
   /**
@@ -51,17 +51,6 @@ export class GdsGrid extends GdsElement {
   gap?: string
 
   /**
-   * Defines the padding size around the grid. Accepts a style expression
-   * @example
-   * ```html
-   * <gds-grid padding="m"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid padding="l{m} m{s} s{xs}"></gds-grid> <!-- different values for each breakpoint -->
-   * ```
-   */
-  @styleExpressionProperty()
-  padding?: string
-
-  /**
    * Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
    * @example
    * ```html
@@ -74,6 +63,12 @@ export class GdsGrid extends GdsElement {
     valueTemplate: (v) => `${v}px`,
   })
   'auto-columns'?: string
+
+  constructor() {
+    super()
+    this.display = 'grid'
+    this.width = '100%'
+  }
 
   render() {
     return html`<slot></slot>`

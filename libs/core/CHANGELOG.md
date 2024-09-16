@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.41.3
+
+### Patch Changes
+
+- a7f217e: **Grid:** Now correctly extends `GdsContainer`
+- 6e5f2a9: **Dropdown:** Fix overflow issue when there is too little space in the viewport. Fixes #1276
+- 6e5f2a9: **Popover:** Fix close on click outside issue in Firefox. Fixes #1503
+
 ## 1.41.2
 
 ### Patch Changes
