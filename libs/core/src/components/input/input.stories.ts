@@ -108,72 +108,67 @@ export const SupportingText: Story = {
 
 export const ExtendedSupportingText: Story = {
   ...DefaultParams,
+  name: 'Extended Supporting Text',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl">
       <gds-input
         label="Label text"
         supporting-text="Supporting text"
         show-extended-supporting-text
-        variant="default"
       >
         <span slot="message">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</span
-        >
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
       </gds-input>
     </gds-flex>
   `,
 }
 
-// export const ExtendedSupportingText: Story = {
-//   ...DefaultParams,
-//   render: () => html`
-//     <gds-flex flex-direction="column" gap="xl">
-//       <gds-input
-//         label="Label text"
-//         supporting-text="Supporting text"
-//         show-extended-supporting-text
-//         maxLength="20"
-//         variant="default"
-//       >
-//         <span slot="lead">LEAD</span>
-//         <gds-badge slot="trail">TRAIL</gds-badge>
-//         <span slot="message">
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-//           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-//           tempor incididunt ut labore et dolore magna aliqua.</span
-//         >
-//       </gds-input>
-//       <gds-input
-//         label="Label text"
-//         supporting-text="Supporting text"
-//         show-extended-supporting-text
-//         maxLength="20"
-//         variant="simplified"
-//         multiline
-//       >
-//         <span slot="message">
-//           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-//           eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-//           ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-//           tempor incididunt ut labore et dolore magna aliqua.
-//         </span>
-//       </gds-input>
+export const Validation: Story = {
+  ...DefaultParams,
+  name: 'Validation',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="xl">
+      <gds-input
+        label="Label text"
+        supporting-text="Make sure text is at least 12 characters long."
+        show-extended-supporting-text
+        length="12"
+        .validator=${{
+          validate: (el: any) => {
+            if (el.value === '')
+              return [
+                {
+                  ...el.validity,
+                  valid: false,
+                  customError: true,
+                },
+                'Custom error message',
+              ]
+            else if (el.value.length !== 12 || isNaN(el.value))
+              return [
+                {
+                  ...el.validity,
+                  valid: false,
+                  customError: true,
+                },
+                'The value must be 12 characters long.',
+              ]
+          },
+        }}
+      >
+      </gds-input>
+    </gds-flex>
+  `,
+}
 
-//       <gds-input
-//         label="default "
-//         supporting-text="Supporting text"
-//         show-extended-supporting-text
-//         maxLength="20"
-//         variant="default"
-//       >
-//         <div slot="message">...
-//         </span>
-//       </gds-input>
-
-//     </gds-flex>
-//   `,
-// }
+export const Multiline: Story = {
+  ...DefaultParams,
+  name: 'Multiline',
+  args: {
+    label: 'Multiline',
+    supportingText: 'Supporting text',
+    multiline: true,
+  },
+}

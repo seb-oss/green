@@ -136,9 +136,18 @@ export class GdsInput extends GdsFormControlElement<string> {
   // variant="default"
   #renderDefault() {
     return html`
-      <gds-flex flex-direction="column" gap="2xs">
-        <gds-flex class="head">
-          <gds-text tag="label" for="input">${this.label}</gds-text>
+      <gds-flex
+        flex-direction="column"
+        gap="2xs"
+        width="340px"
+        color="${this.invalid ? 'l3-content-negative' : null}"
+      >
+        <gds-flex
+          class="head"
+          align-items="center"
+          justify-content="space-between"
+        >
+          <gds-text tag="label" for="input"> ${this.label} </gds-text>
           ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
         </gds-flex>
 
@@ -155,8 +164,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           padding="xs m"
           height="var(--gds-space-3xl)"
           border-radius="xs"
-          background="l3-background-secondary"
-          border="4xs/l3-stroke-secondary"
+          background="${this.invalid
+            ? 'l3c-background-negative-secondary'
+            : 'l3-background-secondary'}"
+          border="${this.invalid
+            ? '4xs/l3c-stroke-negative'
+            : '4xs/l3-stroke-secondary'}"
           class="field"
           @click=${this.#handleFieldClick}
           cursor="text"
@@ -284,6 +297,9 @@ export class GdsInput extends GdsFormControlElement<string> {
       <input
         @input=${this.#handleOnInput}
         @change=${this.#handleOnChange}
+        style="${this.invalid
+          ? 'color: var(--gds-color-l3-content-negative);'
+          : null}"
         .value=${this.value}
         id="input"
         aria-describedby="supporting-text"
@@ -367,18 +383,18 @@ export class GdsInput extends GdsFormControlElement<string> {
    */
   async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
-      if (slot && slot.assignedElements().length > 0)
-        return html`
-          <gds-button
-            size="small"
-            rank="tertiary"
-            label="${msg('Show extended supporting text')}"
-            @click=${this.#handleSupportingTextBtnClick}
-          >
-            <gds-icon-circle-info />
-          </gds-button>
-        `
-      else return nothing
+      // if (slot && slot.assignedElements().length > 0)
+      return html`
+        <gds-button
+          size="small"
+          rank="tertiary"
+          label="${msg('Show extended supporting text')}"
+          @click=${this.#handleSupportingTextBtnClick}
+        >
+          <gds-icon-circle-info />
+        </gds-button>
+      `
+      // else return nothing
     })
   }
 }

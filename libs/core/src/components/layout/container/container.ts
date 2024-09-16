@@ -291,13 +291,37 @@ export class GdsContainer extends GdsElement {
   height?: string
 
   /**
+   * Controls the `max-height` property of the flex.
+   * Supports all valid CSS `max-height` values.
+   *
+   * @property max-height
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'max-height'?: string
+
+  /**
    * Controls the width property of the flex.
    * Supports all valid CSS height values.
+   *
+   *  @property width
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
   })
   width?: string
+
+  /**
+   * Controls the `max-width` property of the flex.
+   * Supports all valid CSS `max-width` values.
+   *
+   * @property max-width
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'max-width'?: string
 
   /**
    * Controls the cursor property of the flex.

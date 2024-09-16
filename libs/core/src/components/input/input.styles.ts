@@ -31,7 +31,7 @@ export const styles = css`
 
     :host {
       contain: layout;
-      display: block;
+      display: contents;
       isolation: isolate;
     }
 
