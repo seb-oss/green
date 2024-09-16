@@ -9,7 +9,6 @@ jobs:
   deployiostokens:
     name: Deploy Swift Package
     runs-on: ubuntu-latest
-    needs: release
     env:
       CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
       CI_COMMIT_AUTHOR: Continuous Integration
@@ -45,8 +44,7 @@ jobs:
 
       - name: Push changes
         run: |
+          echo "test" >> test.txt
           git add .
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
-          git tag -a ${{ needs.release.outputs.tokensversion }} -m "Version ${{ needs.release.outputs.tokensversion }} of the Green Tokens Package for Swift."
-          git push origin ${{ needs.release.outputs.tokensversion }}
