@@ -1,0 +1,18 @@
+@use '../../../../chlorophyll/scss/components/breadcrumb/mixins' as mixins;
+@use '../../../../chlorophyll/scss/components/list/mixins' as list;
+@use '../../../../chlorophyll/scss/components/link/mixins' as link;
+
+:host ol {
+  @include list.base-list();
+  @include mixins.add-breadcrumb();
+
+  a {
+    @include link.underline;
+    @include link.base;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}

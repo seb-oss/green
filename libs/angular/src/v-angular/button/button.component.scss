@@ -1,0 +1,37 @@
+@use '../../../../chlorophyll/scss/components/button/mixins' as mixins;
+
+:host {
+  button,
+  a {
+    @include mixins.reset();
+    @include mixins.base;
+  }
+
+  .primary {
+    @include mixins.primary();
+  }
+
+  .secondary {
+    @include mixins.secondary();
+  }
+
+  .tertiary {
+    @include mixins.tertiary();
+  }
+
+  .ghost-light {
+    @include mixins.ghost-light();
+  }
+
+  .ghost {
+    @include mixins.ghost-dark();
+  }
+
+  .danger.primary {
+    @include mixins.danger-bg;
+  }
+
+  .danger:not(.primary) {
+    @include mixins.danger-color;
+  }
+}
