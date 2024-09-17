@@ -104,6 +104,18 @@ export class GdsText extends GdsElement {
   margin?: string
 
   /**
+   * Controls the 'isolation of the text.
+   * Supports all the default 'isolation values.
+   *
+   * @property isolation
+   */
+  @styleExpressionProperty({
+    selector: '[tag]',
+    valueTemplate: (v) => v,
+  })
+  'isolation'?: string
+
+  /**
    * Controls the text-wrap property of the text.
    * Supports all valid CSS text-wrap values.
    *

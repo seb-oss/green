@@ -64,3 +64,34 @@ label {
   top: calc(100% - 80px);
   left: 440px;
 }
+
+[id='explode']:checked ~ .gds-levels[data-title]::after,
+[id='explode']:checked ~ .gds-levels [data-title]::after {
+  opacity: 1;
+  scale: 1;
+}
+
+[data-title]::after {
+  top: 40px;
+  left: 40px;
+  position: absolute;
+  opacity: 0;
+  scale: 0;
+}
+
+[data-title^='L3']::after {
+  content: 'L3';
+}
+
+[id='hide']:checked ~ .gds-levels [data-title^='L2']::after {
+  color: #000;
+}
+
+[data-title^='L2']::after {
+  content: 'L2';
+  color: #fff;
+}
+
+[data-title^='L1']::after {
+  content: 'L1';
+}
