@@ -88,7 +88,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
-  weight?: string
+  'font-weight'?: string
 
   /**
    * Controls the margin of the text.

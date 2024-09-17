@@ -109,7 +109,8 @@ export class GdsInput extends GdsFormControlElement<string> {
   @query('input, textarea')
   private elInput!: HTMLInputElement | HTMLTextAreaElement
 
-  @queryAsync('slot[name="extended-supporting-text"]')
+  @queryAsync('slot[name="message"]')
+  // @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
   constructor() {
@@ -146,13 +147,22 @@ export class GdsInput extends GdsFormControlElement<string> {
           class="head"
           align-items="center"
           justify-content="space-between"
+          padding="3xs 0 2xs 0"
         >
-          <gds-text tag="label" for="input"> ${this.label} </gds-text>
+          <gds-flex flex-direction="column">
+            <gds-text
+              font-weight="book"
+              font-size="detail-m"
+              tag="label"
+              for="input"
+            >
+              ${this.label}
+            </gds-text>
+            ${when(this.supportingText, () => this.#renderSupportingText())}
+          </gds-flex>
           ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
         </gds-flex>
 
-        <!-- ${this.#renderSupportingText()} ${this.#renderExtendedSupportingText()} -->
-        ${when(this.supportingText, () => this.#renderSupportingText())}
         ${when(this.showExtendedSupportingText, () =>
           this.#renderExtendedSupportingText(),
         )}
@@ -219,7 +229,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           @click=${this.#handleFieldClick}
         >
           <slot name="lead"></slot>
-          <gds-text tag="label" for="input">
+          <gds-text
+            tag="label"
+            font-weight="book"
+            font-size="detail-m"
+            for="input"
+          >
             <gds-flex>${this.label}</gds-flex>
             ${when(
               this.multiline,
@@ -325,9 +340,14 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   #renderSupportingText() {
     return html`
-      <gds-flex class="supporting-text" id="supporting-text">
+      <gds-text
+        font-size="detail-s"
+        color="l3-content-tertiary"
+        class="supporting-text"
+        id="supporting-text"
+      >
         ${this.supportingText}
-      </gds-flex>
+      </gds-text>
     `
   }
 
@@ -337,10 +357,14 @@ export class GdsInput extends GdsFormControlElement<string> {
         class="extended-supporting-text"
         aria-hidden="${!this.showExtendedSupportingText}"
         ?inert="${!this.showExtendedSupportingText}"
+        padding="s m"
+        border-radius="xs"
+        background="l2-background-primary"
+        color="l2-content-primary"
       >
-        <div>
+        <gds-text font-size="body-s">
           <slot name="message" @slotchange=${() => this.requestUpdate()}></slot>
-        </div>
+        </gds-text>
       </gds-flex>
     `
   }
@@ -383,18 +407,18 @@ export class GdsInput extends GdsFormControlElement<string> {
    */
   async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
     return this.elExtendedSupportingTextSlot.then((slot) => {
-      // if (slot && slot.assignedElements().length > 0)
-      return html`
-        <gds-button
-          size="small"
-          rank="tertiary"
-          label="${msg('Show extended supporting text')}"
-          @click=${this.#handleSupportingTextBtnClick}
-        >
-          <gds-icon-circle-info />
-        </gds-button>
-      `
-      // else return nothing
+      if (slot && slot.assignedElements().length > 0)
+        return html`
+          <gds-button
+            size="small"
+            rank="tertiary"
+            label="${msg('Show extended supporting text')}"
+            @click=${this.#handleSupportingTextBtnClick}
+          >
+            <gds-icon-circle-info />
+          </gds-button>
+        `
+      else return nothing
     })
   }
 }

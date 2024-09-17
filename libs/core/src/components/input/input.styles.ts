@@ -48,6 +48,8 @@ export const styles = css`
       padding: unset;
       transition: var(--_transition);
       width: 100%;
+      font-size: var(--gds-text-size-detail-m);
+      line-height: var(--gds-text-line-height-detail-m);
     }
   }
 
