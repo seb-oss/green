@@ -36,7 +36,7 @@ const DefaultParams: Story = {
 export const Card: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="xs{1} m{3} l{2}" gap="l">
+    <gds-grid columns="xs{1} m{2} l{2}" gap="l">
       <gds-card overflow="hidden">
         <gds-flex
           display="flex"

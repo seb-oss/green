@@ -182,7 +182,7 @@ export class GdsVideo extends GdsElement {
   @styleExpressionProperty({
     property: 'border-radius',
     selector: 'figure',
-    valueTemplate: (v) => `var(--gds-sys-radii-${v})`,
+    valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   'border-radius'?: string
 

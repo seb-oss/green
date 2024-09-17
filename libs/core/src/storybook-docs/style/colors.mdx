@@ -1,15 +1,162 @@
 import { Meta, Markdown } from '@storybook/addon-docs';
 import colors from '../../../../tokens/src/tokens/color-v2/color.json';
 import '../../components/layout/container/container'
+import '../../components/badge'
 import '../../components/layout/grid/grid'
+import '../../components/media/video/video'
 import '../../components/layout/card/card'
 import '../../components/layout/flex/flex'
+import '../../components/layout/mask/mask'
 import '../../components/content/text/text'
 import '../../components/theme/theme'
 import '../../components/icon/icons/moon'
 import '../../components/icon/icons/sun'
+import '../../components/icon/icons/eye-slash'
+import '../../components/icon/icons/square-behind-square'
+import '../../components/icon/icons/focus-square'
+import '../../components/icon/icons/square-placeholder'
+import "./colors.css"
+import "../../components/button/fab/fab"
 
 <Meta title="Docs/Style/Colors" />
+
+# Color System 
+The color system is a collection of colors that are used to create a visual hierarchy in the design system. The color system is divided into three levels:
+
+<gds-flex flex-direction="column" gap="l" >
+  <gds-flex gap="s">
+    <gds-badge variant="">L1: Document</gds-badge>
+    <gds-badge variant="notice">L2: Container</gds-badge>
+    <gds-badge variant="success">L3: Component & State</gds-badge>
+  </gds-flex>
+
+
+  <gds-container 
+    display="grid" 
+    place-items="center" 
+    min-height="80vh" 
+    border-radius="s" 
+    background="l1-background-secondary"
+    position="relative"
+  >
+    <gds-flex 
+      position="absolute"
+      inset="20px auto auto 20px"
+      flex-direction="column"
+      gap="s"
+    >
+      <gds-flex align-items="center" gap="xs">
+        <gds-icon-square-behind-square></gds-icon-square-behind-square>
+        <label htmlFor="explode">Exploded View</label> 
+      </gds-flex>
+      <gds-flex align-items="center" gap="xs">
+        <gds-icon-focus-square></gds-icon-focus-square>
+        <label htmlFor="video">Reveal Background</label> 
+      </gds-flex>
+      <gds-flex align-items="center" gap="xs">
+        <gds-icon-eye-slash></gds-icon-eye-slash>
+        <label htmlFor="hide">Hide Video</label> 
+      </gds-flex>
+      <gds-flex align-items="center" gap="xs">
+        <gds-icon-square-placeholder></gds-icon-square-placeholder>
+        <label htmlFor="mask">Mask</label> 
+      </gds-flex>
+  </gds-flex>
+
+    <input type="checkbox" id="explode" name="explode" />
+    <input type="checkbox" id="video" name="video" />
+    <input type="checkbox" id="hide" name="hide" />
+    <input type="checkbox" id="mask" name="mask" />
+    <gds-flex 
+      class="gds-levels" 
+      transform-style="preserve-3d" 
+      background="l1-background-primary"
+      data-title="L1: Document"
+      width="400px"
+      height="80%"
+      position="relative"
+      border-radius="l"
+    >
+  
+    <gds-container 
+      border="xs/l2-stroke-inversed"  
+      border-radius="l"
+      transform="translate3d(0, 0, 100px)"
+      background="l3-states-positive-hover"
+      data-title="L2: Container"
+      position="absolute"
+      inset="0" 
+    >
+      <gds-container 
+        inset="0" 
+        overflow="hidden"  
+        position="absolute" 
+        border-radius="m"
+        id="cover"
+      >
+        <gds-video
+          src="https://github.com/user-attachments/assets/f556d859-466a-416c-95fb-ee908ffccfdd"
+          object-fit="cover"
+          aspect-ratio="9/16"
+          pointer-events="none" 
+          autoplay
+          muted
+          loop
+          ></gds-video>
+      </gds-container>
+    </gds-container>
+
+    <gds-container  
+      border-radius="s"
+      transform="translate3d(0, 0, 200px)"
+      data-title="L3: Component"
+      position="absolute"
+      inset="0"
+      margin="xs"
+    >
+
+          <gds-mask
+            id="masker"
+            mask-image="top"
+            background-color="l2-background-tertiary/0.6"
+            position="absolute"
+            backdrop-filter="blur(4px)"
+            overflow="hidden"
+            border-radius="m"
+          >
+            <gds-flex
+              flex-direction="column"
+              justify-content="flex-end"
+              padding="4xl 2xl 2xl 2xl"
+              gap="l"
+              height="100%"
+              width="100%"
+              color="l2-content-tertiary"
+            >
+              <gds-container>
+                <gds-text tag="h3" font-size="body-m"> 
+                  Sustainable Practices 
+                </gds-text>
+                <gds-text color="#fff" font-size="body-s">
+                  Promoting Eco-Friendly Solutions
+                </gds-text>
+              </gds-container>
+              <gds-flex gap="s">
+                <gds-button rank="secondary">Get Involved</gds-button>
+                <gds-theme color-scheme="dark">
+                  <gds-button rank="tertiary">Learn more</gds-button>
+                </gds-theme>
+              </gds-flex>
+            </gds-flex>
+          </gds-mask>
+
+
+    </gds-container>
+ 
+    </gds-flex>
+  </gds-container>
+</gds-flex>
+
 
 # Colors 
 <gds-flex flex-direction="column" gap="2xl">
@@ -86,18 +233,4 @@ import '../../components/icon/icons/sun'
     )
   )}
 </gds-flex>
-  {/* {colors.sys.color.states && (
-    <>
-      <h2>STATES</h2>
-      {Object.entries(colors.sys.color.states).map(([state, properties]) => (
-        <>
-          <h3>{state.replace(/-/g, ' ').toUpperCase()}</h3>
-          <ul>
-            <li>Value: {properties.value}</li>
-            <li>Dark Value: {properties.darkValue}</li>
-            <li>Type: {properties.type}</li>
-          </ul>
-        </>
-      ))}
-    </>
-  )} */}
+ 

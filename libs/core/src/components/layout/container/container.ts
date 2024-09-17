@@ -33,6 +33,24 @@ export class GdsContainer extends GdsElement {
   display = 'block'
 
   /**
+   * Controls the `place-items` property of the container.
+   * Supports all valid CSS `place-items` values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'place-items'?: string
+
+  /**
+   * Controls the `place-content` property of the container.
+   * Supports all valid CSS `place-content` values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'place-content'?: string
+
+  /**
    * Controls the color property of the container.
    * Supports all the color tokens from the design system.
    *
@@ -302,6 +320,17 @@ export class GdsContainer extends GdsElement {
   'max-height'?: string
 
   /**
+   * Controls the `min-height` property of the flex.
+   * Supports all valid CSS `min-height` values.
+   *
+   * @property min-height
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'min-height'?: string
+
+  /**
    * Controls the width property of the flex.
    * Supports all valid CSS height values.
    *
@@ -340,6 +369,28 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   'z-index'?: string
+
+  /**
+   * Controls the `transform` property of the flex.
+   * Supports all valid CSS `transform` values.
+   *
+   * @property transform
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  transform?: string
+
+  /**
+   * Controls the `transform-style` property of the flex.
+   * Supports all valid CSS `transform-style` values.
+   *
+   * @property transform-style
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'transform-style'?: string
 
   render() {
     return html`<slot></slot>`
