@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.6.0
+
+### Minor Changes
+
+- 70e8855: Adding V-Angular components to Green: breadcrumbs, button, card, checkbox,dropdown-list,dropdown,info-circle,input-mask,input,modal,radio,textarea,tooltip,typeahead.
+
+### Patch Changes
+
+- Updated dependencies [70e8855]
+  - @sebgroup/chlorophyll@3.6.3
+
 ## 4.5.0
 
 ### Minor Changes
