@@ -15,7 +15,12 @@ input {
     transform 4s 0s,
     background 4s 0s;
 }
-
+[id='explode']:not(:checked) ~ .gds-levels {
+  transform: rotateX(0deg) rotateY(0deg) rotateX(0deg) translate3d(0, 0, 0);
+  transition:
+    transform 4s 0s,
+    background 4s 0s;
+}
 label {
   cursor: pointer;
   font-size: 12px;
