@@ -18,6 +18,7 @@ import '../../components/icon/icons/focus-square'
 import '../../components/icon/icons/square-placeholder'
 import "./colors.css"
 import "../../components/button/fab/fab"
+import VIDEO from './video.mp4'
 
 <Meta title="Docs/Style/Colors" />
 
@@ -30,10 +31,9 @@ The color system is a collection of colors that are used to create a visual hier
   <gds-flex gap="s">
     <gds-badge variant="">L1: Document</gds-badge>
     <gds-badge variant="notice">L2: Container</gds-badge>
-    <gds-badge variant="success">L3: Component & State</gds-badge>
+    <gds-badge variant="success">L3: Component</gds-badge>
   </gds-flex>
-
-
+ 
   <gds-container 
     display="grid" 
     place-items="center" 
@@ -97,8 +97,9 @@ The color system is a collection of colors that are used to create a visual hier
         border-radius="m"
         id="cover"
       >
+          {/* src="https://github.com/user-attachments/assets/f556d859-466a-416c-95fb-ee908ffccfdd" */}
         <gds-video
-          src="https://github.com/user-attachments/assets/f556d859-466a-416c-95fb-ee908ffccfdd"
+          src={VIDEO}
           object-fit="cover"
           object-position="center"
           aspect-ratio="9/16"

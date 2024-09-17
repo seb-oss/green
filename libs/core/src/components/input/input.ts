@@ -164,12 +164,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           padding="xs m"
           height="var(--gds-space-3xl)"
           border-radius="xs"
-          background="${this.invalid
+          .background=${this.invalid
             ? 'l3c-background-negative-secondary'
-            : 'l3-background-secondary'}"
-          border="${this.invalid
+            : 'l3-background-secondary'}
+          .border=${this.invalid
             ? '4xs/l3c-stroke-negative'
-            : '4xs/l3-stroke-secondary'}"
+            : '4xs/l3-stroke-secondary'}
           class="field"
           @click=${this.#handleFieldClick}
           cursor="text"
