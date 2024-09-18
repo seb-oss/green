@@ -353,6 +353,17 @@ export class GdsContainer extends GdsElement {
   'max-width'?: string
 
   /**
+   * Controls the `min-width` property of the flex.
+   * Supports all valid CSS `min-width` values.
+   *
+   * @property min-width
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'min-width'?: string
+
+  /**
    * Controls the cursor property of the flex.
    * Supports all valid CSS cursor values.
    */

@@ -153,11 +153,10 @@ export class GdsInput extends GdsFormControlElement<string> {
   // variant="default"
   #renderDefault() {
     return html`
-      <!-- color="${this.invalid ? 'l3-content-negative' : null}" -->
       <gds-flex
         flex-direction="column"
         gap="2xs"
-        width="340px"
+        min-width="${this.size === 'small' ? '200px' : '343px'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         user-select="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
@@ -235,7 +234,10 @@ export class GdsInput extends GdsFormControlElement<string> {
             class="state"
             position="absolute"
             inset="0"
-            background="l3-states-light-hover"
+            border-radius="xs"
+            .background="${this.invalid
+              ? 'l3-states-negative-hover'
+              : 'l3-states-light-hover'}"
             pointer-events="none"
             opacity="0"
             transition="all 368ms cubic-bezier(0.4, 0, 0.2, 1)"
@@ -250,7 +252,7 @@ export class GdsInput extends GdsFormControlElement<string> {
                 <gds-flex
                   align-items="center"
                   gap="${this.size === 'small' ? '2xs' : 'xs'}"
-                  padding="${this.size === 'small' ? '0 s' : ''}"
+                  padding="${this.size === 'small' ? '0 s' : 'xs m xs 0'}"
                 >
                   <gds-icon-triangle-exclamation width="18" height="18" solid>
                   </gds-icon-triangle-exclamation>

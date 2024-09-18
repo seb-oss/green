@@ -69,6 +69,7 @@ export const All: Story = {
           label="Label"
           supporting-text="Label support text"
           value=" "
+          .invalid=${true}
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
@@ -98,6 +99,7 @@ export const All: Story = {
           label="Label"
           supporting-text="Label support text"
           value=" "
+          .invalid=${true}
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
@@ -207,6 +209,7 @@ export const All: Story = {
           size="small"
           supporting-text="Label support text"
           value=" "
+          .invalid=${true}
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
