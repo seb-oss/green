@@ -61,6 +61,32 @@ export const All: Story = {
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-input>
       </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          show-extended-supporting-text
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-input>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          show-extended-supporting-text
+          value=" "
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-input>
+      </gds-flex>
       <gds-flex padding="xl 0 0 0" flex-direction="column">
         <gds-text>Validation</gds-text>
         <gds-divider></gds-divider>
@@ -316,7 +342,6 @@ export const All: Story = {
           maxlength="140"
           multiline
         >
-          <gds-badge variant="error" slot="trail">KR</gds-badge>
         </gds-input>
       </gds-flex>
       <gds-flex gap="xl">
@@ -335,7 +360,32 @@ export const All: Story = {
           .invalid=${true}
           multiline
         >
-          <gds-badge variant="error" slot="trail">KR</gds-badge>
+        </gds-input>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          show-extended-supporting-text
+          maxlength="140"
+          multiline
+        >
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-input>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          show-extended-supporting-text
+          maxlength="140"
+          multiline
+        >
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
         </gds-input>
       </gds-flex>
     </gds-flex>
