@@ -268,6 +268,7 @@ export const All: Story = {
         <gds-text>Search & Badge</gds-text>
         <gds-divider></gds-divider>
       </gds-flex>
+
       <gds-flex gap="xl">
         <gds-input label="Label" supporting-text="Label support text">
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
@@ -294,6 +295,17 @@ export const All: Story = {
           supporting-text="Label support text"
           value="Input"
         >
+          <gds-badge variant="error" slot="trail">KR</gds-badge>
+        </gds-input>
+      </gds-flex>
+      <gds-flex padding="xl 0 0 0" flex-direction="column">
+        <gds-text tag="h2">Multiline</gds-text>
+        <gds-divider></gds-divider>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input label="Label" supporting-text="Label support text" multiline>
+        </gds-input>
+        <gds-input label="Label" supporting-text="Label support text" multiline>
           <gds-badge variant="error" slot="trail">KR</gds-badge>
         </gds-input>
       </gds-flex>

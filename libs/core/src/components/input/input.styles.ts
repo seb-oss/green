@@ -40,12 +40,14 @@ export const styles = css`
     }
 
     .field {
-      transion: var(--_transition);
+      transition: var(--_transition);
       position: relative;
 
       &:has(input:focus) {
         border-color: var(--gds-color-l3-border-primary);
       }
+
+      // min-height: max(var(--gds-space-xl), calc(1lh * var(--_lines)));
     }
 
     @media (hover: hover) {
@@ -71,6 +73,14 @@ export const styles = css`
       width: 100%;
       font-size: var(--gds-text-size-detail-m);
       line-height: var(--gds-text-line-height-detail-m);
+    }
+
+    textarea {
+      overflow: hidden;
+      resize: none;
+      transition: unset;
+      min-height: calc(1lh * 4);
+      height: calc(1lh * var(--_lines));
     }
   }
 

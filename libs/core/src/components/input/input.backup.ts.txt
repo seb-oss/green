@@ -198,19 +198,10 @@ export class GdsInput extends GdsFormControlElement<string> {
           align-items="center"
           justify-content="center"
           gap="${this.size === 'small' ? '2xs' : 'xs'}"
-          padding="${this.multiline
-            ? 's s s m'
-            : this.size === 'small'
-              ? 'xs s'
-              : 'xs m'}"
-          min-height="${this.size === 'small'
+          padding="${this.size === 'small' ? 'xs s' : 'xs m'}"
+          height="${this.size === 'small'
             ? 'var(--gds-space-xl)'
             : 'var(--gds-space-3xl)'}"
-          height="${this.multiline
-            ? ''
-            : this.size === 'small'
-              ? 'var(--gds-space-xl)'
-              : 'var(--gds-space-3xl)'}}"
           border-radius="xs"
           .background=${this.disabled
             ? 'l3-background-disabled'
@@ -226,14 +217,13 @@ export class GdsInput extends GdsFormControlElement<string> {
           @click=${this.#handleFieldClick}
           cursor="text"
         >
-          ${!this.multiline ? this.#renderSlotLead() : nothing}
+          ${this.#renderSlotLead()}
           ${when(
             this.multiline,
             () => html`${this.#renderNativeTextarea()}`,
             () => html`${this.#renderNativeInput()}`,
           )}
-          ${!this.multiline ? this.#renderSlotTrail() : nothing}
-          ${this.#renderClearButton()}
+          ${this.#renderSlotTrail()} ${this.#renderClearButton()}
 
           <gds-flex
             class="state"
@@ -355,16 +345,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.elInputAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
-
-      // // Update the height based on the --_lines value
-      // const lineHeight = parseFloat(getComputedStyle(element).lineHeight)
-      // const numberOfLines = parseInt(lines, 10)
-      // if (!isNaN(lineHeight) && !isNaN(numberOfLines)) {
-      //   element.style.height = `${lineHeight * numberOfLines}px`
-      // } else {
-      //   // Reset to default height if --_lines value is not valid
-      //   element.style.height = ''
-      // }
     })
   }
 
