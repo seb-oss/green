@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 import '../badge'
 import '../layout/flex'
+import '../content/divider'
 import '../icon/icons/credit-card.ts'
 
 /**
@@ -136,6 +137,28 @@ export const All: Story = {
         <gds-input
           label="Label"
           disabled
+          supporting-text="Label support text"
+          value=" "
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+      </gds-flex>
+      <gds-flex padding="xl 0 0 0" flex-direction="column">
+        <gds-text>Small</gds-text>
+        <gds-divider></gds-divider>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          size="small"
+          supporting-text="Label support text"
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+        <gds-input
+          label="Label"
+          size="small"
           supporting-text="Label support text"
           value=" "
           clearable

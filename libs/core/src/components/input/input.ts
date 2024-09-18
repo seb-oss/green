@@ -21,6 +21,7 @@ import { styles } from './input.styles'
 // Local Components
 import '../icon/icons/cross-small'
 import '../icon/icons/circle-info'
+import '../icon/icons/triangle-exclamation'
 import '../layout/flex'
 import '../layout/container'
 import '../content/text'
@@ -106,6 +107,8 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'simplified' = 'default'
 
+  @property({ type: String })
+  size: 'default' | 'small' = 'default'
   /**
    * Whether the input field should be multiline or not. Multiline fields will render a textarea
    * internally instead of an input.
@@ -192,7 +195,9 @@ export class GdsInput extends GdsFormControlElement<string> {
           justify-content="center"
           gap="m"
           padding="xs m"
-          height="var(--gds-space-3xl)"
+          height="${this.size === 'small'
+            ? 'var(--gds-space-xl)'
+            : 'var(--gds-space-3xl)'}"
           border-radius="xs"
           .background=${this.disabled
             ? 'l3-background-disabled'
@@ -226,10 +231,15 @@ export class GdsInput extends GdsFormControlElement<string> {
           <gds-container>
             ${when(
               this.invalid,
-              () =>
-                html`<gds-text tag="span" class="error-text"
-                  >${this.validationMessage}</gds-text
-                >`,
+              () => html`
+                <gds-flex align-items="center" gap="xs">
+                  <gds-icon-triangle-exclamation>
+                  </gds-icon-triangle-exclamation>
+                  <gds-text tag="span" class="error-text">
+                    ${this.validationMessage}
+                  </gds-text>
+                </gds-flex>
+              `,
             )}
           </gds-container>
           ${when(this.#shouldShowRemainingChars, () =>
@@ -251,7 +261,6 @@ export class GdsInput extends GdsFormControlElement<string> {
           padding="xs m"
           background="l3-background-secondary"
           border="4xs/l3-stroke-secondary"
-          height="var(--gds-space-3xl)"
           border-radius="xs"
           class="field"
           @click=${this.#handleFieldClick}
@@ -411,6 +420,8 @@ export class GdsInput extends GdsFormControlElement<string> {
         <gds-button
           size="small"
           rank="tertiary"
+          variant="${this.invalid ? 'negative' : ''}"
+          ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
         >
