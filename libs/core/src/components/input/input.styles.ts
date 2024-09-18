@@ -5,8 +5,7 @@ export const styles = css`
 
   @layer tokens {
     :host {
-      --_transition: color 368ms cubic-bezier(0.4, 0, 0.2, 1),
-        background-color 368ms cubic-bezier(0.4, 0, 0.2, 1);
+      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -33,6 +32,28 @@ export const styles = css`
       contain: layout;
       display: contents;
       isolation: isolate;
+    }
+
+    :host([size='small']) input {
+      font-size: var(--gds-text-size-detail-s);
+      line-height: var(--gds-text-line-height-detail-s);
+    }
+
+    .field {
+      transion: var(--_transition);
+      position: relative;
+
+      &:has(input:focus) {
+        border-color: var(--gds-color-l3-border-primary);
+      }
+    }
+
+    @media (hover: hover) {
+      .field:hover {
+        .state {
+          opacity: 1;
+        }
+      }
     }
 
     input,

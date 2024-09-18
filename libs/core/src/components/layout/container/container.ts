@@ -414,6 +414,17 @@ export class GdsContainer extends GdsElement {
   })
   'transform-style'?: string
 
+  /**
+   * Controls the `transition` property of the flex.
+   * Supports all valid CSS `transition` values.
+   *
+   * @property transition
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'transition'?: string
+
   render() {
     return html`<slot></slot>`
   }

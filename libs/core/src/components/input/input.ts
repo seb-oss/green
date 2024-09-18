@@ -191,10 +191,11 @@ export class GdsInput extends GdsFormControlElement<string> {
         )}
 
         <gds-flex
+          position="relative"
           align-items="center"
           justify-content="center"
-          gap="m"
-          padding="xs m"
+          gap="${this.size === 'small' ? '2xs' : 'xs'}"
+          padding="${this.size === 'small' ? 'xs s' : 'xs m'}"
           height="${this.size === 'small'
             ? 'var(--gds-space-xl)'
             : 'var(--gds-space-3xl)'}"
@@ -213,7 +214,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           @click=${this.#handleFieldClick}
           cursor="text"
         >
-          <gds-flex width="24px">
+          <gds-flex
+            width="${this.size === 'small' ? '18px' : '24px'}"
+            height="${this.size === 'small' ? '18px' : '24px'}"
+            align-items="center"
+            justify-content="center"
+          >
             <slot name="lead"></slot>
           </gds-flex>
           ${when(
@@ -225,6 +231,15 @@ export class GdsInput extends GdsFormControlElement<string> {
             <slot name="trail" gds-allow="gds-badge"></slot>
           </gds-flex>
           ${this.#renderClearButton()}
+          <gds-flex
+            class="state"
+            position="absolute"
+            inset="0"
+            background="l3-states-light-hover"
+            pointer-events="none"
+            opacity="0"
+            transition="all 368ms cubic-bezier(0.4, 0, 0.2, 1)"
+          ></gds-flex>
         </gds-flex>
 
         <gds-flex class="foot">
@@ -232,10 +247,21 @@ export class GdsInput extends GdsFormControlElement<string> {
             ${when(
               this.invalid,
               () => html`
-                <gds-flex align-items="center" gap="xs">
-                  <gds-icon-triangle-exclamation>
+                <gds-flex
+                  align-items="center"
+                  gap="${this.size === 'small' ? '2xs' : 'xs'}"
+                  padding="${this.size === 'small' ? '0 s' : ''}"
+                >
+                  <gds-icon-triangle-exclamation width="18" height="18" solid>
                   </gds-icon-triangle-exclamation>
-                  <gds-text tag="span" class="error-text">
+                  <gds-text
+                    tag="span"
+                    font-size="${this.size === 'small'
+                      ? 'detail-xs'
+                      : 'detail-s'}"
+                    font-weight="book"
+                    class="error-text"
+                  >
                     ${this.validationMessage}
                   </gds-text>
                 </gds-flex>

@@ -145,7 +145,7 @@ export const All: Story = {
         </gds-input>
       </gds-flex>
       <gds-flex padding="xl 0 0 0" flex-direction="column">
-        <gds-text>Small</gds-text>
+        <gds-text tag="h2">Small</gds-text>
         <gds-divider></gds-divider>
       </gds-flex>
       <gds-flex gap="xl">
@@ -161,6 +161,74 @@ export const All: Story = {
           size="small"
           supporting-text="Label support text"
           value=" "
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+      </gds-flex>
+      <gds-flex padding="xl 0 0 0" flex-direction="column">
+        <gds-text>Validation</gds-text>
+        <gds-divider></gds-divider>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          size="small"
+          supporting-text="Label support text"
+          value=" "
+          .invalid=${true}
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'Custom error message',
+                ]
+              else if (el.value.length !== 12 || isNaN(el.value))
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'The value must be 12 characters long.',
+                ]
+            },
+          }}
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+        <gds-input
+          label="Label"
+          size="small"
+          supporting-text="Label support text"
+          value=" "
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'Custom error message',
+                ]
+              else if (el.value.length !== 12 || isNaN(el.value))
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'The value must be 12 characters long.',
+                ]
+            },
+          }}
           clearable
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
