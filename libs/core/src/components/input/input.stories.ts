@@ -41,6 +41,112 @@ const DefaultParams: Story = {
   },
 }
 
+export const All: Story = {
+  ...DefaultParams,
+  name: 'All',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="2xl">
+      <gds-flex gap="xl">
+        <gds-input label="Label" supporting-text="Label support text">
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          value=" "
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+      </gds-flex>
+      <gds-flex padding="xl 0 0 0" flex-direction="column">
+        <gds-text>Validation</gds-text>
+        <gds-divider></gds-divider>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          value=" "
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'Custom error message',
+                ]
+              else if (el.value.length !== 12 || isNaN(el.value))
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'The value must be 12 characters long.',
+                ]
+            },
+          }}
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          value=" "
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'Custom error message',
+                ]
+              else if (el.value.length !== 12 || isNaN(el.value))
+                return [
+                  {
+                    ...el.validity,
+                    valid: false,
+                    customError: true,
+                  },
+                  'The value must be 12 characters long.',
+                ]
+            },
+          }}
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+      </gds-flex>
+
+      <gds-flex padding="xl 0 0 0" flex-direction="column">
+        <gds-text>Disabled</gds-text>
+        <gds-divider></gds-divider>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input label="Label" disabled supporting-text="Label support text">
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+        <gds-input
+          label="Label"
+          disabled
+          supporting-text="Label support text"
+          value=" "
+          clearable
+        >
+          <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        </gds-input>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
 export const Basic: Story = {
   ...DefaultParams,
   name: 'Variant: Default',
@@ -110,13 +216,19 @@ export const ExtendedSupportingText: Story = {
   ...DefaultParams,
   name: 'Extended Supporting Text',
   render: () => html`
-    <gds-flex flex-direction="column" gap="xl">
+    <gds-flex gap="xl">
+      <gds-input label="Label text" supporting-text="Supporting text">
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+      </gds-input>
       <gds-input
         label="Label text"
         supporting-text="Supporting text"
         show-extended-supporting-text
       >
-        <span slot="message">
+        <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>

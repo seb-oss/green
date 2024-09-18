@@ -362,6 +362,28 @@ export class GdsContainer extends GdsElement {
   cursor?: string
 
   /**
+   * Controls the `pointer-events` property of the flex.
+   * Supports all valid CSS `pointer-events` values.
+   *
+   * @property pointer-events
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'pointer-events'?: string
+
+  /**
+   * Controls the `user-select` property of the flex.
+   * Supports all valid CSS `user-select` values.
+   *
+   * @property user-select
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'user-select'?: string
+
+  /**
    * Controls the z-index property of the flex.
    * Supports all valid CSS z-index values.
    */

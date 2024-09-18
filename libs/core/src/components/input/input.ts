@@ -71,6 +71,16 @@ export class GdsInput extends GdsFormControlElement<string> {
   showExtendedSupportingText = false
 
   /**
+   * If the input is Disabled
+   */
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  /**
    * Whether the field should be clearable or not. Clearable fields will display a clear button when
    * the field has a value.
    */
@@ -109,8 +119,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   @query('input, textarea')
   private elInput!: HTMLInputElement | HTMLTextAreaElement
 
-  @queryAsync('slot[name="message"]')
-  // @queryAsync('slot[name="extended-supporting-text"]')
+  @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
   constructor() {
@@ -121,6 +130,10 @@ export class GdsInput extends GdsFormControlElement<string> {
   connectedCallback(): void {
     super.connectedCallback()
     this._setAutoHeight()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
   }
 
   render() {
@@ -137,11 +150,18 @@ export class GdsInput extends GdsFormControlElement<string> {
   // variant="default"
   #renderDefault() {
     return html`
+      <!-- color="${this.invalid ? 'l3-content-negative' : null}" -->
       <gds-flex
         flex-direction="column"
         gap="2xs"
         width="340px"
-        color="${this.invalid ? 'l3-content-negative' : null}"
+        pointer-events="${this.disabled ? 'none' : 'auto'}"
+        user-select="${this.disabled ? 'none' : 'auto'}"
+        color="${this.disabled
+          ? 'l3-content-disabled'
+          : this.invalid
+            ? 'l3-content-negative'
+            : null}"
       >
         <gds-flex
           class="head"
@@ -174,23 +194,31 @@ export class GdsInput extends GdsFormControlElement<string> {
           padding="xs m"
           height="var(--gds-space-3xl)"
           border-radius="xs"
-          .background=${this.invalid
-            ? 'l3c-background-negative-secondary'
-            : 'l3-background-secondary'}
-          .border=${this.invalid
-            ? '4xs/l3c-stroke-negative'
-            : '4xs/l3-stroke-secondary'}
+          .background=${this.disabled
+            ? 'l3-background-disabled'
+            : this.invalid
+              ? 'l3c-background-negative-secondary'
+              : 'l3-background-secondary'}
+          .border=${this.disabled
+            ? ''
+            : this.invalid
+              ? '4xs/l3c-stroke-negative'
+              : '4xs/l3-stroke-secondary'}
           class="field"
           @click=${this.#handleFieldClick}
           cursor="text"
         >
-          <slot name="lead"></slot>
+          <gds-flex width="24px">
+            <slot name="lead"></slot>
+          </gds-flex>
           ${when(
             this.multiline,
             () => html`${this.#renderNativeTextarea()}`,
             () => html`${this.#renderNativeInput()}`,
           )}
-          <slot name="trail" gds-allow="gds-badge"></slot>
+          <gds-flex width="24px">
+            <slot name="trail" gds-allow="gds-badge"></slot>
+          </gds-flex>
           ${this.#renderClearButton()}
         </gds-flex>
 
@@ -342,7 +370,11 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <gds-text
         font-size="detail-s"
-        color="l3-content-tertiary"
+        .color="${this.disabled
+          ? 'l3-content-disabled'
+          : this.invalid
+            ? 'l3-content-negative'
+            : 'l3-content-tertiary'}"
         class="supporting-text"
         id="supporting-text"
       >
@@ -352,6 +384,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderExtendedSupportingText() {
+    // .display="${this.showExtendedSupportingText ? 'block' : 'none'}"
     return html`
       <gds-flex
         class="extended-supporting-text"
@@ -363,7 +396,10 @@ export class GdsInput extends GdsFormControlElement<string> {
         color="l2-content-primary"
       >
         <gds-text font-size="body-s">
-          <slot name="message" @slotchange=${() => this.requestUpdate()}></slot>
+          <slot
+            name="extended-supporting-text"
+            @slotchange=${() => this.requestUpdate()}
+          ></slot>
         </gds-text>
       </gds-flex>
     `
