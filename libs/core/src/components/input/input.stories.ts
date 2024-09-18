@@ -303,9 +303,38 @@ export const All: Story = {
         <gds-divider></gds-divider>
       </gds-flex>
       <gds-flex gap="xl">
-        <gds-input label="Label" supporting-text="Label support text" multiline>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          maxlength="140"
+          multiline
+        >
         </gds-input>
-        <gds-input label="Label" supporting-text="Label support text" multiline>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          maxlength="140"
+          multiline
+        >
+          <gds-badge variant="error" slot="trail">KR</gds-badge>
+        </gds-input>
+      </gds-flex>
+      <gds-flex gap="xl">
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          maxlength="140"
+          .invalid=${true}
+          multiline
+        >
+        </gds-input>
+        <gds-input
+          label="Label"
+          supporting-text="Label support text"
+          maxlength="140"
+          .invalid=${true}
+          multiline
+        >
           <gds-badge variant="error" slot="trail">KR</gds-badge>
         </gds-input>
       </gds-flex>

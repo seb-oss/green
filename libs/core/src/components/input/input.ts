@@ -249,35 +249,40 @@ export class GdsInput extends GdsFormControlElement<string> {
           ></gds-flex>
         </gds-flex>
 
-        <gds-flex class="foot">
-          <gds-container>
-            ${when(
-              this.invalid,
-              () => html`
-                <gds-flex
-                  align-items="center"
-                  gap="${this.size === 'small' ? '2xs' : 'xs'}"
-                  padding="${this.size === 'small' ? '0 s' : 'xs m xs 0'}"
+        <gds-flex
+          class="foot"
+          align-items="center"
+          justify-content="space-between"
+          padding="${this.multiline ? '2xs m' : ''}"
+        >
+          ${when(
+            this.invalid,
+            () => html`
+              <gds-flex
+                align-items="center"
+                gap="${this.size === 'small' ? '2xs' : 'xs'}"
+                padding="${this.size === 'small' ? '0 s' : 'xs m xs 0'}"
+              >
+                <gds-icon-triangle-exclamation width="18" height="18" solid>
+                </gds-icon-triangle-exclamation>
+                <gds-text
+                  tag="span"
+                  font-size="${this.size === 'small'
+                    ? 'detail-xs'
+                    : 'detail-s'}"
+                  font-weight="book"
+                  class="error-text"
                 >
-                  <gds-icon-triangle-exclamation width="18" height="18" solid>
-                  </gds-icon-triangle-exclamation>
-                  <gds-text
-                    tag="span"
-                    font-size="${this.size === 'small'
-                      ? 'detail-xs'
-                      : 'detail-s'}"
-                    font-weight="book"
-                    class="error-text"
-                  >
-                    ${this.validationMessage}
-                  </gds-text>
-                </gds-flex>
-              `,
-            )}
-          </gds-container>
-          ${when(this.#shouldShowRemainingChars, () =>
-            this.#renderRemainingCharsBadge(),
+                  ${this.validationMessage}
+                </gds-text>
+              </gds-flex>
+            `,
           )}
+          <gds-flex margin="0 0 0 auto">
+            ${when(this.#shouldShowRemainingChars, () =>
+              this.#renderRemainingCharsBadge(),
+            )}
+          </gds-flex>
         </gds-flex>
       </gds-flex>
     `
@@ -432,6 +437,9 @@ export class GdsInput extends GdsFormControlElement<string> {
         @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
+        style="${this.invalid
+          ? 'color: var(--gds-color-l3-content-negative);'
+          : null}"
         aria-describedby="supporting-text"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
@@ -509,7 +517,9 @@ export class GdsInput extends GdsFormControlElement<string> {
     } else {
       variant = 'success'
     }
-    return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
+    return html`<gds-badge variant="${this.invalid ? 'error' : variant}"
+      >${remaining}</gds-badge
+    >`
   }
 
   /**
