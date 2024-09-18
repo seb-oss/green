@@ -125,6 +125,9 @@ export class GdsInput extends GdsFormControlElement<string> {
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
+  @query('slot[name="lead"]')
+  private leadSlot!: HTMLSlotElement
+
   constructor() {
     super()
     constrainSlots(this)
@@ -156,7 +159,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       <gds-flex
         flex-direction="column"
         gap="2xs"
-        min-width="${this.size === 'small' ? '200px' : '343px'}"
+        width="${this.size === 'small' ? '200px' : '343px'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         user-select="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
