@@ -27,9 +27,10 @@ export class GdsBadge extends GdsElement {
     valueTemplate: (v) => `${v}`,
     selector: '.badge',
     styleTemplate: (prop, values) => {
+      const level = 'l3'
       const variant = values[0]
-      const BG = `background-color: var(--gds-color-l3-background-${variant}-secondary);`
-      const CL = `color: var(--gds-color-l3-content-${variant});`
+      const BG = `background-color: var(--gds-color-${level}-background-${variant}-secondary);`
+      const CL = `color: var(--gds-color-${level}-content-${variant});`
       const style = `${BG} ${CL}`
       return style
     },
