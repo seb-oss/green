@@ -133,7 +133,7 @@ describe('style-expression-parser', () => {
       '@media (min-width: 0px) {.test{padding: var(--gds-sys-space-xl) var(--gds-sys-space-s) var(--gds-sys-space-m) var(--gds-sys-space-2xl);}}',
       '@media (min-width: 0px) {.test{padding: var(--gds-sys-space-xl);}}@media (min-width: 2560px) {.test{padding: var(--gds-sys-space-l);}}',
       '@media (min-width: 0px) {.test{padding: var(--gds-sys-space-xl);}}@media (min-width: 512px) and (max-width: 1024px) {.test{padding: var(--gds-sys-space-s) var(--gds-sys-space-m);}}',
-      '@media (min-width: 0px) {.test{padding: var(--gds-sys-space-l);}.test:hover{padding: var(--gds-sys-space-xl);}}@media (min-width: 1440px) {.test{padding: var(--gds-sys-space-xl);}.test:hover{padding: var(--gds-sys-space-2xl);}.test:focus{padding: var(--gds-sys-space-3xl);}}',
+      '@media (min-width: 0px) {.test{padding: var(--gds-sys-space-l);}@media (hover: hover) {.test:hover{padding: var(--gds-sys-space-xl);}}}@media (min-width: 1440px) {.test{padding: var(--gds-sys-space-xl);}@media (hover: hover) {.test:hover{padding: var(--gds-sys-space-2xl);}}.test:focus{padding: var(--gds-sys-space-3xl);}}',
     ]
 
     expressions.forEach((expression, i) => {

@@ -176,7 +176,17 @@ export function toCss(
             selector === ':host'
               ? `:host(:${bpValues.sel})`
               : `${selector}:${bpValues.sel}`
-        return `${sel}{${styleTemplate(property, bpValues.values.map(valueTemplate))}}`
+
+        const style = styleTemplate(
+          property,
+          bpValues.values.map(valueTemplate),
+        )
+
+        // If the selector is hover, we wrap the style in a hover media query so that
+        // it excludes touch devices
+        if (bpValues.sel === 'hover')
+          return `@media (hover: hover) {${sel}{${style}}}`
+        else return `${sel}{${style}}`
       })
       .join('')}}`
     css += mq
