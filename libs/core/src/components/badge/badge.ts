@@ -3,7 +3,7 @@ import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-
+import { property, query, queryAsync, state } from 'lit/decorators.js'
 import BadgeCSS from './badge.style'
 
 /**
@@ -18,24 +18,36 @@ import BadgeCSS from './badge.style'
 export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
 
+  // Private property for level with default value 'l3'
+  @property({ type: String })
+  private level: string = 'l3'
+
   /**
    * Controls the variant of the badge.
    * Supports all valid variants like information, notice, positive, warning, negative.
    * @property variant
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: (v: string) => `${v}`,
     selector: '.badge',
-    styleTemplate: (prop, values) => {
-      const level = 'l3'
+    styleTemplate: function (this: GdsBadge, prop: string, values: string[]) {
       const variant = values[0]
-      const BG = `background-color: var(--gds-color-${level}-background-${variant}-secondary);`
-      const CL = `color: var(--gds-color-${level}-content-${variant});`
-      const style = `${BG} ${CL}`
-      return style
+      return this.generateColorStyles(this.level, variant)
     },
   })
   variant?: string
+
+  /**
+   * Generates the color styles based on the level and variant.
+   * @param level - The level of the badge.
+   * @param variant - The variant of the badge.
+   * @returns The CSS style string.
+   */
+  private generateColorStyles(level: string, variant: string): string {
+    const BG = `background-color: var(--gds-color-${level}-background-${variant}-secondary);`
+    const CL = `color: var(--gds-color-${level}-content-${variant});`
+    return `${BG} ${CL}`
+  }
 
   render() {
     return html`<div class="badge">

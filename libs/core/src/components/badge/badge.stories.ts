@@ -90,7 +90,7 @@ export const Lead: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-flex gap="xl" width="20ch">
+    <gds-flex gap="xl">
       <gds-badge variant="positive">
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         Launch
@@ -113,7 +113,7 @@ export const Trail: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-flex gap="xl" width="20ch">
+    <gds-flex gap="xl">
       <gds-badge variant="positive">
         <gds-icon-plus-small slot="lead"></gds-icon-plus-small>
         Information
