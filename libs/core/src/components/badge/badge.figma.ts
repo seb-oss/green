@@ -7,7 +7,7 @@ figma.connect(
       statusText: figma.string('Status text'),
       variant: figma.enum('Variant', {
         Information: 'information',
-        Success: 'success',
+        Positive: 'positive',
         Warning: 'warning',
         Negative: 'negative',
         Notice: 'notice',

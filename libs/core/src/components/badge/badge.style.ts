@@ -14,7 +14,7 @@ const style = css`
       justify-content: flex-start;
       font-size: var(--gds-text-size-detail-s);
       line-height: var(--gds-text-line-height-detail-s);
-      background-color: var(--gds-color-l2-background-information);
+      // background-color: var(--gds-color-l2-background-information);
       padding-inline: var(--gds-space-xs);
       border-radius: var(--gds-space-2xs);
       block-size: var(--gds-space-l);
