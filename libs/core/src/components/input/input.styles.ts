@@ -85,6 +85,14 @@ export const styles = css`
       min-height: calc(1lh * 4);
       height: calc(1lh * var(--_lines));
     }
+
+    :host([size='small']) slot[name='lead']::slotted(*) {
+      width: var(--gds-space-m);
+    }
+
+    slot[name='lead']::slotted(*) {
+      width: var(--gds-space-l);
+    }
   }
 
   @layer simplified {

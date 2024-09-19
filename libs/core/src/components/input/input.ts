@@ -399,24 +399,11 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderSlotLead() {
-    return html`
-      <gds-flex
-        width="${this.size === 'small' ? '18px' : '24px'}"
-        height="${this.size === 'small' ? '18px' : '24px'}"
-        align-items="center"
-        justify-content="center"
-      >
-        <slot name="lead"></slot>
-      </gds-flex>
-    `
+    return html` <slot name="lead"></slot> `
   }
 
   #renderSlotTrail() {
-    return html`
-      <gds-flex width="24px">
-        <slot name="trail" gds-allow="gds-badge"></slot>
-      </gds-flex>
-    `
+    return html` <slot name="trail" gds-allow="gds-badge"></slot> `
   }
 
   #renderNativeInput() {
@@ -497,7 +484,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     if (this.clearable && this.value.length > 0)
       return html`
         <gds-button
-          size="xs"
+          size="${this.size === 'small' ? 'xs' : 'small'}"
           rank="tertiary"
           variant="${this.invalid ? 'negative' : ''}"
           ?disabled="${this.disabled}"
