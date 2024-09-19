@@ -206,12 +206,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           .background=${this.disabled
             ? 'l3-background-disabled'
             : this.invalid
-              ? 'l3c-background-negative-secondary'
+              ? 'l3-background-negative-secondary'
               : 'l3-background-secondary'}
           .border=${this.disabled
             ? ''
             : this.invalid
-              ? '4xs/l3c-border-negative'
+              ? '4xs/l3-border-negative'
               : '4xs/l3-border-secondary'}
           class="field"
           @click=${this.#handleFieldClick}

@@ -24,6 +24,7 @@ import '../icon/icons/circle-info'
 import '../icon/icons/triangle-exclamation'
 import '../layout/flex'
 import '../layout/container'
+import '../layout/card'
 import '../content/text'
 import '../button'
 
@@ -156,33 +157,35 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   // variant="default"
   #renderDefault() {
+    // TODO:
+
+    // max-width="${this.size === 'small' ? '200px' : '343px'}"
+
     return html`
       <gds-flex
         flex-direction="column"
-        gap="2xs"
-        width="${this.size === 'small' ? '200px' : '343px'}"
-        pointer-events="${this.disabled ? 'none' : 'auto'}"
+        width="100%"
+        gap="${this.size === 'small' ? '2xs' : 'xs'}"
         user-select="${this.disabled ? 'none' : 'auto'}"
+        pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
           ? 'l3-content-disabled'
           : this.invalid
             ? 'l3-content-negative'
-            : null}"
+            : 'l3-content-tertiary'}"
       >
         <gds-flex
           class="head"
           align-items="center"
           justify-content="space-between"
-          padding="3xs 0 2xs 0"
+          padding="3xs 0 0 0"
         >
           <gds-flex flex-direction="column">
             <gds-text
               font-weight="book"
-              font-size="detail-m"
-              tag="label"
-              for="input"
+              font-size="${this.size === 'small' ? 'detail-s' : 'detail-m'}"
             >
-              ${this.label}
+              <label for="input"> ${this.label} </label>
             </gds-text>
             ${when(this.supportingText, () => this.#renderSupportingText())}
           </gds-flex>
@@ -215,12 +218,12 @@ export class GdsInput extends GdsFormControlElement<string> {
           .background=${this.disabled
             ? 'l3-background-disabled'
             : this.invalid
-              ? 'l3c-background-negative-secondary'
+              ? 'l3-background-negative-secondary'
               : 'l3-background-secondary'}
           .border=${this.disabled
             ? ''
             : this.invalid
-              ? '4xs/l3c-border-negative'
+              ? '4xs/l3-border-negative'
               : '4xs/l3-border-secondary'}
           class="field"
           @click=${this.#handleFieldClick}
@@ -232,8 +235,10 @@ export class GdsInput extends GdsFormControlElement<string> {
             () => html`${this.#renderNativeTextarea()}`,
             () => html`${this.#renderNativeInput()}`,
           )}
-          ${!this.multiline ? this.#renderSlotTrail() : nothing}
-          ${this.#renderClearButton()}
+          <gds-flex gap="xs" align-items="center">
+            ${this.#renderClearButton()}
+            ${!this.multiline ? this.#renderSlotTrail() : nothing}
+          </gds-flex>
 
           <gds-flex
             class="state"
@@ -253,18 +258,19 @@ export class GdsInput extends GdsFormControlElement<string> {
           class="foot"
           align-items="center"
           justify-content="space-between"
-          padding="${this.multiline ? '2xs m' : ''}"
+          aria-live="polite"
         >
           ${when(
             this.invalid,
             () => html`
               <gds-flex
-                align-items="center"
+                align-items="flex-start"
                 gap="${this.size === 'small' ? '2xs' : 'xs'}"
-                padding="${this.size === 'small' ? '0 s' : 'xs m xs 0'}"
               >
-                <gds-icon-triangle-exclamation width="18" height="18" solid>
-                </gds-icon-triangle-exclamation>
+                <gds-flex min-width="18px">
+                  <gds-icon-triangle-exclamation width="18" height="18" solid>
+                  </gds-icon-triangle-exclamation>
+                </gds-flex>
                 <gds-text
                   tag="span"
                   font-size="${this.size === 'small'
@@ -423,6 +429,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           : null}"
         .value=${this.value}
         id="input"
+        ?disabled=${this.disabled}
         aria-describedby="supporting-text"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
@@ -450,7 +457,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderSupportingText() {
     return html`
       <gds-text
-        font-size="detail-s"
+        font-size="${this.size === 'small' ? 'detail-s' : 'detail-m'}"
         .color="${this.disabled
           ? 'l3-content-disabled'
           : this.invalid
@@ -467,14 +474,14 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderExtendedSupportingText() {
     // .display="${this.showExtendedSupportingText ? 'block' : 'none'}"
     return html`
-      <gds-flex
+      <gds-card
         class="extended-supporting-text"
         aria-hidden="${!this.showExtendedSupportingText}"
         ?inert="${!this.showExtendedSupportingText}"
         padding="s m"
         border-radius="xs"
-        background="l2-background-primary"
-        color="l2-content-primary"
+        background="l3-background-secondary"
+        color="l3-content-tertiary"
       >
         <gds-text font-size="body-s">
           <slot
@@ -482,7 +489,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             @slotchange=${() => this.requestUpdate()}
           ></slot>
         </gds-text>
-      </gds-flex>
+      </gds-card>
     `
   }
 
@@ -490,7 +497,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     if (this.clearable && this.value.length > 0)
       return html`
         <gds-button
-          size="small"
+          size="xs"
           rank="tertiary"
           variant="${this.invalid ? 'negative' : ''}"
           ?disabled="${this.disabled}"
@@ -511,13 +518,13 @@ export class GdsInput extends GdsFormControlElement<string> {
     const remaining = this.maxlength - this.value.length
     let variant
     if (remaining < 0) {
-      variant = 'error'
+      variant = 'negative'
     } else if (remaining < 20) {
       variant = 'warning'
     } else {
-      variant = 'success'
+      variant = 'positive'
     }
-    return html`<gds-badge variant="${this.invalid ? 'error' : variant}"
+    return html`<gds-badge variant="${this.invalid ? 'negative' : variant}"
       >${remaining}</gds-badge
     >`
   }
@@ -536,6 +543,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             label="${msg('Show extended supporting text')}"
             @click=${this.#handleSupportingTextBtnClick}
           >
+            <!-- TODO: When is open it should be solid  -->
             <gds-icon-circle-info />
           </gds-button>
         `

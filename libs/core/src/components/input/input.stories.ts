@@ -47,7 +47,7 @@ export const All: Story = {
   ...DefaultParams,
   name: 'All',
   render: () => html`
-    <gds-flex flex-direction="column" gap="2xl">
+    <gds-flex flex-direction="column" gap="2xl" width="800px">
       <gds-flex gap="xl">
         <gds-input label="Label" supporting-text="Label support text">
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
@@ -95,6 +95,7 @@ export const All: Story = {
         <gds-input
           label="Label"
           supporting-text="Label support text"
+          show-extended-supporting-text
           value=" "
           .invalid=${true}
           .validator=${{
@@ -106,7 +107,7 @@ export const All: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Custom error message',
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -115,12 +116,16 @@ export const All: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'The value must be 12 characters long.',
+                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                 ]
             },
           }}
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
         </gds-input>
         <gds-input
           label="Label"
@@ -136,7 +141,7 @@ export const All: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Custom error message',
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -215,7 +220,7 @@ export const All: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Custom error message',
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -246,7 +251,7 @@ export const All: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Custom error message',
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -296,13 +301,14 @@ export const All: Story = {
       </gds-flex>
 
       <gds-flex gap="xl">
-        <gds-input label="Label" supporting-text="Label support text">
+        <gds-input label="Label" supporting-text="Label support text" clearable>
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
         </gds-input>
         <gds-input
           label="Label"
           supporting-text="Label support text"
           value="Input"
+          clearable
         >
           <gds-badge variant="information" slot="trail">KR</gds-badge>
         </gds-input>
@@ -501,7 +507,7 @@ export const All: Story = {
 //                   valid: false,
 //                   customError: true,
 //                 },
-//                 'Custom error message',
+//                 'Error message.',
 //               ]
 //             else if (el.value.length !== 12 || isNaN(el.value))
 //               return [

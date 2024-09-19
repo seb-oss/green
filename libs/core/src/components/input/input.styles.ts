@@ -42,9 +42,12 @@ export const styles = css`
     .field {
       transition: var(--_transition);
       position: relative;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
 
-      &:has(input:focus) {
-        border-color: var(--gds-color-l3-border-primary);
+      &:has(input:focus-visible) {
+        // border-color: var(--gds-color-l3-border-primary);
+        outline-color: currentColor;
       }
 
       // min-height: max(var(--gds-space-xl), calc(1lh * var(--_lines)));

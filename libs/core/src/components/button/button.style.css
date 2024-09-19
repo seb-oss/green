@@ -124,6 +124,13 @@
 }
 
 @layer sizes {
+  :host([size='xs']) .button {
+    --_block-size: var(--gds-space-l);
+    font-size: var(--gds-text-size-detail-s);
+    line-height: var(--gds-text-line-height-detail-s);
+    padding-inline: var(--gds-space-m);
+  }
+
   :host([size='small']) .button {
     --_block-size: var(--gds-space-xl);
     font-size: var(--gds-text-size-detail-s);
