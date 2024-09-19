@@ -35,7 +35,7 @@ export class GdsBadge extends GdsElement {
       return this.generateColorStyles(this.level, variant)
     },
   })
-  variant?: string
+  variant = 'information'
 
   /**
    * Generates the color styles based on the level and variant.
