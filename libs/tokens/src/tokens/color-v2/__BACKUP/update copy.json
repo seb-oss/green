@@ -1,0 +1,406 @@
+{
+    "levels-l2-background-primary": {
+        "light": "#f3f3f3ff",
+        "dark": "#242424ff"
+    },
+    "levels-l2-background-secondary": {
+        "light": "#ffffffff",
+        "dark": "#242424ff"
+    },
+    "levels-l2-background-tertiary": {
+        "light": "#242424ff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l1-background-tertiary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-background-positive": {
+        "light": "#35723dff",
+        "dark": "#54b561ff"
+    },
+    "levels-l3-background-negative": {
+        "light": "#a63e2aff",
+        "dark": "#c04831ff"
+    },
+    "levels-l1-background-primary": {
+        "light": "#ffffffff",
+        "dark": "#0e0e0eff"
+    },
+    "levels-l1-background-secondary": {
+        "light": "#eeeeeeff",
+        "dark": "#131313ff"
+    },
+    "levels-l2-border-primary": {
+        "light": "#d7d7d7ff",
+        "dark": "#353535ff"
+    },
+    "levels-l2-border-secondary": {
+        "light": "#6f6f6fff",
+        "dark": "#5e5e5eff"
+    },
+    "levels-l2-border-tertiary": {
+        "light": "#f9f9f9ff",
+        "dark": "#2c2c2cff"
+    },
+    "levels-l2-background-copper-01": {
+        "light": "#f2efebff",
+        "dark": "#f2efebff"
+    },
+    "levels-l2-background-copper-02": {
+        "light": "#332a18ff",
+        "dark": "#332a18ff"
+    },
+    "levels-l2-background-purple-01": {
+        "light": "#f3eff7ff",
+        "dark": "#f3eff7ff"
+    },
+    "levels-l2-background-purple-02": {
+        "light": "#372b40ff",
+        "dark": "#372b40ff"
+    },
+    "levels-l2-background-green-01": {
+        "light": "#ecf6edff",
+        "dark": "#ecf6edff"
+    },
+    "levels-l2-background-green-02": {
+        "light": "#1d3f22ff",
+        "dark": "#1d3f22ff"
+    },
+    "levels-l2-background-blue-01": {
+        "light": "#eaf0f7ff",
+        "dark": "#eaf0f7ff"
+    },
+    "levels-l2-background-blue-02": {
+        "light": "#152c41ff",
+        "dark": "#152c41ff"
+    },
+    "levels-l3-background-copper-01": {
+        "light": "#e4ded5ff",
+        "dark": "#e4ded5ff"
+    },
+    "levels-l3-background-buy": {
+        "light": "#2e6290ff",
+        "dark": "#3571a6ff"
+    },
+    "levels-l3-background-copper-02": {
+        "light": "#42361fff",
+        "dark": "#42361fff"
+    },
+    "levels-l3-background-purple-01": {
+        "light": "#e7deeeff",
+        "dark": "#e7deeeff"
+    },
+    "levels-l3-background-purple-02": {
+        "light": "#473752ff",
+        "dark": "#473752ff"
+    },
+    "levels-l3-background-green-01": {
+        "light": "#d7edd9ff",
+        "dark": "#d7edd9ff"
+    },
+    "levels-l3-background-green-02": {
+        "light": "#25512bff",
+        "dark": "#25512bff"
+    },
+    "levels-l3-background-blue-01": {
+        "light": "#d3dfefff",
+        "dark": "#d3dfefff"
+    },
+    "levels-l3-background-blue-02": {
+        "light": "#1a3853ff",
+        "dark": "#1a3853ff"
+    },
+    "levels-l3-background-primary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-content-primary": {
+        "light": "#ffffffff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-secondary": {
+        "light": "#5e5e5eff",
+        "dark": "#abababff"
+    },
+    "levels-l3-content-tertiary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-background-secondary": {
+        "light": "#e2e2e2ff",
+        "dark": "#353535ff"
+    },
+    "levels-l3-background-tertiary": {
+        "light": "#d7d7d7ff",
+        "dark": "#424242ff"
+    },
+    "levels-l3-border-primary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-border-secondary": {
+        "light": "#6f6f6fff",
+        "dark": "#abababff"
+    },
+    "levels-l3-border-tertiary": {
+        "light": "#d7d7d7ff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-buy": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l2-content-copper-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l2-content-copper-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l2-content-purple-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l2-content-purple-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l2-content-green-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l2-content-green-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l2-content-blue-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l2-content-blue-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l3-content-copper-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-copper-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l3-content-purple-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-purple-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l3-content-green-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-green-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l3-content-blue-01": {
+        "light": "#1b1b1bff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-blue-02": {
+        "light": "#ffffffff",
+        "dark": "#ffffffff"
+    },
+    "levels-l3-content-disabled": {
+        "light": "#abababff",
+        "dark": "#5e5e5eff"
+    },
+    "levels-l3-background-disabled": {
+        "light": "#f9f9f9ff",
+        "dark": "#181818ff"
+    },
+    "levels-l1-content-primary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l1-content-secondary": {
+        "light": "#5e5e5eff",
+        "dark": "#abababff"
+    },
+    "levels-l1-content-tertiary": {
+        "light": "#ffffffff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l1-content-positive": {
+        "light": "#35723dff",
+        "dark": "#54b561ff"
+    },
+    "levels-l1-content-negative": {
+        "light": "#a63e2aff",
+        "dark": "#a63e2aff"
+    },
+    "levels-l2-background-positive": {
+        "light": "#ecf6edff",
+        "dark": "#1d3f22ff"
+    },
+    "levels-l2-background-negative": {
+        "light": "#fceceaff",
+        "dark": "#4a1c13ff"
+    },
+    "levels-l2-background-warning": {
+        "light": "#fcecbcff",
+        "dark": "#4c3212ff"
+    },
+    "levels-l2-background-notice": {
+        "light": "#eaf0f7ff",
+        "dark": "#152c41ff"
+    },
+    "levels-l2-background-information": {
+        "light": "#e2e2e2ff",
+        "dark": "#353535ff"
+    },
+    "levels-l2-content-positive": {
+        "light": "#35723dff",
+        "dark": "#54b561ff"
+    },
+    "levels-l2-content-negative": {
+        "light": "#a63e2aff",
+        "dark": "#ee8375ff"
+    },
+    "levels-l2-content-warning": {
+        "light": "#65581eff",
+        "dark": "#f3b274ff"
+    },
+    "levels-l2-content-notice": {
+        "light": "#005facff",
+        "dark": "#78a3d5ff"
+    },
+    "levels-l2-content-infomation": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l2-content-primary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l2-content-secondary": {
+        "light": "#5e5e5eff",
+        "dark": "#abababff"
+    },
+    "levels-l2-content-tertiary": {
+        "light": "#ffffffff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-content-positive": {
+        "light": "#35723dff",
+        "dark": "#54b561ff"
+    },
+    "levels-l3-content-negative": {
+        "light": "#a63e2aff",
+        "dark": "#ee8375ff"
+    },
+    "levels-l3-background-negative-tertiary": {
+        "light": "#f5bfb9ff",
+        "dark": "#4a1c13ff"
+    },
+    "levels-l3-background-quarternary": {
+        "light": "#ffffffff",
+        "dark": "#0e0e0eff"
+    },
+    "levels-l3-border-negative": {
+        "light": "#a63e2aff",
+        "dark": "#ee8375ff"
+    },
+    "levels-l3-states-dark-hover": {
+        "light": "#ffffff19",
+        "dark": "#ffffff19"
+    },
+    "levels-l3-states-dark-pressed": {
+        "light": "#ffffff33",
+        "dark": "#ffffff33"
+    },
+    "levels-l3-states-positive-hover": {
+        "light": "#35723d19",
+        "dark": "#54b56119"
+    },
+    "levels-l3-states-positive-pressed": {
+        "light": "#35723d33",
+        "dark": "#54b56133"
+    },
+    "levels-l3-states-negative-hover": {
+        "light": "#a63e2a19",
+        "dark": "#ee837519"
+    },
+    "levels-l3-states-negative-pressed": {
+        "light": "#a63e2a33",
+        "dark": "#ee837533"
+    },
+    "levels-l3-states-light-hover": {
+        "light": "#1b1b1b19",
+        "dark": "#d7d7d719"
+    },
+    "levels-l3-states-light-pressed": {
+        "light": "#1b1b1b33",
+        "dark": "#d7d7d733"
+    },
+    "levels-l2-border-quarternary": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l2-border-inversed": {
+        "light": "#ffffffff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-background-disabled-secondary": {
+        "light": "#f3f3f3ff",
+        "dark": "#1b1b1bff"
+    },
+    "levels-l3-background-positive-secondary": {
+        "light": "#d7edd9ff",
+        "dark": "#25512bff"
+    },
+    "levels-l3-background-negative-secondary": {
+        "light": "#f8d6d3ff",
+        "dark": "#602418ff"
+    },
+    "levels-l3-background-notice": {
+        "light": "#005facff",
+        "dark": "#78a3d5ff"
+    },
+    "levels-l3-background-warning": {
+        "light": "#65581eff",
+        "dark": "#f3b274ff"
+    },
+    "levels-l3-background-information": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-content-notice": {
+        "light": "#005facff",
+        "dark": "#78a3d5ff"
+    },
+    "levels-l3-content-warning": {
+        "light": "#65581eff",
+        "dark": "#f3b274ff"
+    },
+    "levels-l3-content-information": {
+        "light": "#1b1b1bff",
+        "dark": "#d7d7d7ff"
+    },
+    "levels-l3-background-warning-secondary": {
+        "light": "#fadf7bff",
+        "dark": "#624017ff"
+    },
+    "levels-l3-background-information-secondary": {
+        "light": "#d7d7d7ff",
+        "dark": "#424242ff"
+    },
+    "levels-l3-background-notice-secondary": {
+        "light": "#d3dfefff",
+        "dark": "#1a3853ff"
+    }
+}
