@@ -174,7 +174,7 @@ export function toCss(
         if (bpValues.sel.length > 0)
           sel =
             selector === ':host'
-              ? `:host(:${bpValues.sel}`
+              ? `:host(:${bpValues.sel})`
               : `${selector}:${bpValues.sel}`
         return `${sel}{${styleTemplate(property, bpValues.values.map(valueTemplate))}}`
       })

@@ -8,7 +8,7 @@ import { tokenize, parse, toCss } from './style-expression-parser'
 
 const expression = 'block; hover:flex; xl { focus:block; flex }'
 const ast = parse(tokenize(expression))
-const css = toCss('div', 'padding', ast)
+const css = toCss(':host', 'background', ast)
 console.log(
   'AST',
   inspect(ast, { showHidden: false, depth: null, colors: true }),
