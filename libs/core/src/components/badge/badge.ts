@@ -20,7 +20,7 @@ export class GdsBadge extends GdsElement {
 
   /**
    * Controls the variant of the badge.
-   * Supports all valid variants like information, notice, success, warning, error.
+   * Supports all valid variants like information, notice, success, warning, negative.
    * @property variant
    */
   @styleExpressionProperty({
@@ -45,7 +45,7 @@ export class GdsBadge extends GdsElement {
           bg: 'warning',
           color: 'warning',
         },
-        error: {
+        negative: {
           bg: 'negative',
           color: 'negative',
         },
@@ -55,8 +55,8 @@ export class GdsBadge extends GdsElement {
         bg: 'default-bg',
         color: 'default-content',
       }
-      const BG = `background-color: var(--gds-color-l3c-background-${tokens.bg}-secondary);`
-      const CL = `color: var(--gds-color-l3c-content-${tokens.color});`
+      const BG = `background-color: var(--gds-color-l3-background-${tokens.bg}-secondary);`
+      const CL = `color: var(--gds-color-l3-content-${tokens.color});`
       const style = `${BG} ${CL}`
       return style
     },

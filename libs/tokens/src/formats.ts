@@ -83,35 +83,54 @@ const formats: Record<string, Format> = {
         .map((token) => {
           if (
             token.path[2] === 'l1' ||
-            token.path[2] === 'l1c' ||
             token.path[2] === 'l2' ||
-            token.path[2] === 'l2c' ||
-            token.path[2] === 'l3' ||
-            token.path[2] === 'l3c'
+            token.path[2] === 'l3'
           ) {
             // Adjust token name to follow the format --gds-color-l1-background-primary
             token.name = `gds-color-${token.path.slice(2).join('-')}`
           }
+
+          // Preserve original hex values with alpha
+          if (token.value && /^#[0-9A-Fa-f]{8}$/.test(token.value)) {
+            token.originalValue = token.value
+          }
+
           return token
         })
 
       // Generate CSS variables
-      const cssVariables = formatHelpers.formattedVariables({
-        format: 'css',
-        dictionary,
-        outputReferences: options.outputReferences,
-      })
+      // const cssVariables = formatHelpers.formattedVariables({
+      //   format: 'css',
+      //   dictionary,
+      //   outputReferences: options.outputReferences,
+      // })
+
+      // Generate CSS variables
+      const cssVariables = dictionary.allTokens
+        .map((token) => {
+          const value =
+            options.colorScheme === 'dark' ? token.darkValue : token.value
+          return `  --${token.name}: ${value};\n`
+        })
+        .join('')
 
       // Return the formatted CSS
       return (
         formatHelpers.fileHeader({ file: args.file }) +
-        // `${options.selector} {\n` +
-        `` +
         `  color-scheme: ${options.colorScheme};\n` +
-        cssVariables +
-        ``
-        // `\n}\n`
+        cssVariables
       )
+
+      // Return the formatted CSS
+      // return (
+      //   formatHelpers.fileHeader({ file: args.file }) +
+      //   // `${options.selector} {\n` +
+      //   `` +
+      //   `  color-scheme: ${options.colorScheme};\n` +
+      //   cssVariables +
+      //   ``
+      //   // `\n}\n`
+      // )
     },
   },
   size: {

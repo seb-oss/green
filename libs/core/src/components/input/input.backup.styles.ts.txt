@@ -7,7 +7,7 @@ export const styles = css`
     :host {
       --_color-bg: var(--gds-sys-color-container-container);
 
-      --_color-border: var(--gds-sys-color-stroke-stroke-variant1);
+      --_color-border: var(--gds-sys-color-border-stroke-variant1);
       --_border-radius: 0.5rem;
       --_border-width: 0.0625rem;
       --_border-width-hover: 0.125rem;
@@ -224,8 +224,8 @@ export const styles = css`
 
     :host(:invalid) .field {
       --_color-bg: var(--gds-sys-color-status-negative-negative-bright);
-      --_color-border: var(--gds-sys-color-stroke-stroke-negative);
-      --_color-outline: var(--gds-sys-color-stroke-stroke-negative);
+      --_color-border: var(--gds-sys-color-border-stroke-negative);
+      --_color-outline: var(--gds-sys-color-border-stroke-negative);
       color: var(--gds-sys-color-status-negative-on-negative-bright);
     }
 

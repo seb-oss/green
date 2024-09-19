@@ -130,7 +130,7 @@ export const Theme: Story = {
       <gds-card
         shadow="l"
         border-radius="m"
-        border="3xs/l2-stroke-primary"
+        border="3xs/l2-border-primary"
         overflow="hidden"
       >
         <gds-flex gap="m" flex-direction="column" padding="s">

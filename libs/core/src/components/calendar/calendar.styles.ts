@@ -17,7 +17,7 @@ const style = css`
     }
 
     thead {
-      box-shadow: 0 var(--gds-space-4xs) 0 0 var(--gds-color-l2-stroke-primary);
+      box-shadow: 0 var(--gds-space-4xs) 0 0 var(--gds-color-l2-border-primary);
       th {
         height: var(--gds-space-2xl);
         width: var(--gds-space-2xl);

@@ -82,7 +82,7 @@ The color system is a collection of colors that are used to create a visual hier
     >
   
     <gds-container 
-      border="xs/l2-stroke-inversed"  
+      border="xs/l2-border-inversed"  
       border-radius="l"
       transform="translate3d(0, 0, 100px)"
       background="l3-states-positive-hover"
@@ -166,7 +166,7 @@ The color system is a collection of colors that are used to create a visual hier
 
 # Colors 
 <gds-flex flex-direction="column" gap="2xl">
-  {Object.entries(colors.sys.color).map(([level, categories]) => ( 
+  {Object.entries(colors.color.level).map(([level, categories]) => ( 
       <gds-flex flex-direction="column" gap="2xl">
         <gds-flex gap="s" flex-direction="column">
           <gds-text text-transform="uppercase">{level}</gds-text>
@@ -185,13 +185,13 @@ The color system is a collection of colors that are used to create a visual hier
                         {Object.entries(items).map(([item, properties]) => (
                             <gds-flex flex-direction="column" gap="s">
                                   <gds-theme color-scheme="auto">
-                                    <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
+                                    <gds-card border="4xs/l2-border-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
                                         <gds-flex gap="xs" align-items="center" >
                                           <gds-card 
                                               height="40px" 
                                               width="40px" 
                                               border-radius="xs" 
-                                              border="4xs/l2-stroke-primary"
+                                              border="4xs/l2-border-primary"
                                               background={level + "-" + category + "-" + item}
                                           />
                                           <gds-flex flex-direction="column" gap="3xs" align-items="start">
@@ -202,13 +202,13 @@ The color system is a collection of colors that are used to create a visual hier
                                     </gds-card>   
                                   </gds-theme>
                                 <gds-theme color-scheme="dark">
-                                  <gds-card border="4xs/l2-stroke-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
+                                  <gds-card border="4xs/l2-border-primary" background="l2-background-primary" border-radius="s" padding="xs" width="20ch">
                                       <gds-flex gap="xs" align-items="center" justify-content="start">
                                           <gds-card 
                                               height="40px" 
                                               width="40px" 
                                               border-radius="xs" 
-                                              border="4xs/l2-stroke-tertiary"
+                                              border="4xs/l2-border-tertiary"
                                               background={level + "-" + category + "-" + item}
                                           />
                                           <gds-flex flex-direction="column" gap="3xs" align-items="start">

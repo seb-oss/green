@@ -15,7 +15,7 @@ import '../icon/icons/triangle-exclamation.js'
 /**
  * A badge is a small status or notification indicator that can be used to display a message or status.
  *
- * Variants: `information`, `notice`, `success`, `warning`, `error`
+ * Variants: `information`, `notice`, `success`, `warning`, `negative`
  */
 const meta: Meta = {
   title: 'Docs/Components/Badge',
@@ -60,10 +60,10 @@ export const Variants: Story = {
           <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
           Success
         </gds-badge>
-        <gds-badge variant="error">
+        <gds-badge variant="negative">
           <gds-icon-triangle-exclamation slot="lead">
           </gds-icon-triangle-exclamation>
-          Error
+          Negative
         </gds-badge>
       </gds-flex>
       <gds-flex gap="xl" flex-direction="column" width="20ch">
@@ -75,7 +75,7 @@ export const Variants: Story = {
         <gds-badge variant="notice"> Notice </gds-badge>
         <gds-badge variant="success"> Success </gds-badge>
         <gds-badge variant="warning"> Success </gds-badge>
-        <gds-badge variant="error"> Error </gds-badge>
+        <gds-badge variant="negative"> Negative </gds-badge>
       </gds-flex>
     </gds-grid>
   `,
@@ -119,7 +119,7 @@ export const Trail: Story = {
         Information
         <span slot="trail">%</span>
       </gds-badge>
-      <gds-badge variant="error">
+      <gds-badge variant="negative">
         <gds-icon-minus-small slot="lead"></gds-icon-minus-small>
         Information
         <span slot="trail">%</span>

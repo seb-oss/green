@@ -9,7 +9,7 @@ figma.connect(
         Information: 'information',
         Success: 'success',
         Warning: 'warning',
-        Error: 'error',
+        Negative: 'negative',
         Notice: 'notice',
       }),
       icon: figma.boolean('Icon'),

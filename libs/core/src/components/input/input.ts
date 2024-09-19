@@ -220,8 +220,8 @@ export class GdsInput extends GdsFormControlElement<string> {
           .border=${this.disabled
             ? ''
             : this.invalid
-              ? '4xs/l3c-stroke-negative'
-              : '4xs/l3-stroke-secondary'}
+              ? '4xs/l3c-border-negative'
+              : '4xs/l3-border-secondary'}
           class="field"
           @click=${this.#handleFieldClick}
           cursor="text"
@@ -298,7 +298,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           gap="m"
           padding="xs m"
           background="l3-background-secondary"
-          border="4xs/l3-stroke-secondary"
+          border="4xs/l3-border-secondary"
           border-radius="xs"
           class="field"
           @click=${this.#handleFieldClick}

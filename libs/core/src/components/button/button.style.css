@@ -140,7 +140,7 @@
 
 @layer variants {
   .positive {
-    background-color: var(--gds-color-l3c-background-positive);
+    background-color: var(--gds-color-l3-background-positive);
 
     .state {
       :where(.secondary, .tertiary):hover & {
@@ -153,18 +153,18 @@
     }
 
     &.secondary {
-      background-color: var(--gds-color-l3c-background-positive-secondary);
-      color: var(--gds-color-l3c-content-positive);
+      background-color: var(--gds-color-l3-background-positive-secondary);
+      color: var(--gds-color-l3-content-positive);
     }
 
     &.tertiary {
       background-color: transparent;
-      color: var(--gds-color-l3c-content-positive);
+      color: var(--gds-color-l3-content-positive);
     }
   }
 
   .negative {
-    background-color: var(--gds-color-l3c-background-negative);
+    background-color: var(--gds-color-l3-background-negative);
 
     .state {
       :where(.secondary, .tertiary):hover & {
@@ -177,13 +177,13 @@
     }
 
     &.secondary {
-      background-color: var(--gds-color-l3c-background-negative-secondary);
-      color: var(--gds-color-l3c-content-negative);
+      background-color: var(--gds-color-l3-background-negative-secondary);
+      color: var(--gds-color-l3-content-negative);
     }
 
     &.tertiary {
       background-color: transparent;
-      color: var(--gds-color-l3c-content-negative);
+      color: var(--gds-color-l3-content-negative);
     }
   }
 }
