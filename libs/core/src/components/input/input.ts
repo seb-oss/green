@@ -513,9 +513,8 @@ export class GdsInput extends GdsFormControlElement<string> {
     } else {
       variant = 'positive'
     }
-    return html`<gds-badge variant="${this.invalid ? 'negative' : variant}"
-      >${remaining}</gds-badge
-    >`
+    // return html`<gds-badge variant="${this.invalid ? 'negative' : variant}"
+    return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
   }
 
   /**
