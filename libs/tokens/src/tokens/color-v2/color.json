@@ -272,6 +272,11 @@
                         "darkValue": "#25512b",
                         "type": "color"
                     },
+                    "positive-badge": {
+                        "value": "#BCE1C0",
+                        "darkValue": "#306938",
+                        "type": "color"
+                    },
                     "negative": {
                         "value": "#a63e2a",
                         "darkValue": "#c04831",
@@ -282,9 +287,9 @@
                         "darkValue": "#602418",
                         "type": "color"
                     },
-                    "negative-tertiary": {
-                        "value": "#f5bfb9",
-                        "darkValue": "#4a1c13",
+                    "negative-badge": {
+                        "value": "#F5BFB9",
+                        "darkValue": "#4A1C13",
                         "type": "color"
                     },
                     "notice": {
@@ -297,6 +302,11 @@
                         "darkValue": "#1a3853",
                         "type": "color"
                     },
+                    "notice-badge": {
+                        "value": "#C7D6EB",
+                        "darkValue": "#214769",
+                        "type": "color"
+                    },
                     "warning": {
                         "value": "#65581e",
                         "darkValue": "#f3b274",
@@ -307,6 +317,11 @@
                         "darkValue": "#624017",
                         "type": "color"
                     },
+                    "warning-badge": {
+                        "value": "#F8D553",
+                        "darkValue": "#744C1B",
+                        "type": "color"
+                    },
                     "information": {
                         "value": "#1b1b1b",
                         "darkValue": "#d7d7d7",
@@ -315,6 +330,11 @@
                     "information-secondary": {
                         "value": "#d7d7d7",
                         "darkValue": "#424242",
+                        "type": "color"
+                    },
+                    "information-badge": {
+                        "value": "#C4C4C4",
+                        "darkValue": "#616161",
                         "type": "color"
                     },
                     "buy": {
@@ -489,43 +509,51 @@
                 },
                 "states": {
                     "dark-hover": {
-                        "value": "#ffffff19",
-                        "darkValue": "#ffffff19",
+                        "value": "#ffffff",
+                        "darkValue": "#ffffff",
+                        "alpha": "10%",
                         "type": "color"
                     },
                     "dark-pressed": {
-                        "value": "#ffffff33",
-                        "darkValue": "#ffffff33",
+                        "value": "#ffffff",
+                        "darkValue": "#ffffff",
+                        "alpha": "20%",
                         "type": "color"
                     },
                     "light-hover": {
-                        "value": "#1b1b1b19",
-                        "darkValue": "#d7d7d719",
+                        "value": "#1b1b1b",
+                        "darkValue": "#d7d7d7",
+                        "alpha": "10%",
                         "type": "color"
                     },
                     "light-pressed": {
-                        "value": "#1b1b1b33",
-                        "darkValue": "#d7d7d733",
+                        "value": "#1b1b1b",
+                        "darkValue": "#d7d7d7",
+                        "alpha": "20%",
                         "type": "color"
                     },
                     "positive-hover": {
-                        "value": "#35723d19",
-                        "darkValue": "#54b56119",
+                        "value": "#35723d",
+                        "darkValue": "#54b561",
+                        "alpha": "10%",
                         "type": "color"
                     },
                     "positive-pressed": {
-                        "value": "#35723d33",
-                        "darkValue": "#54b56133",
+                        "value": "#35723d",
+                        "darkValue": "#54b561",
+                        "alpha": "20%",
                         "type": "color"
                     },
                     "negative-hover": {
-                        "value": "#a63e2a19",
-                        "darkValue": "#ee837519",
+                        "value": "#a63e2a",
+                        "darkValue": "#ee8375",
+                        "alpha": "10%",
                         "type": "color"
                     },
                     "negative-pressed": {
-                        "value": "#a63e2a33",
-                        "darkValue": "#ee837533",
+                        "value": "#a63e2a",
+                        "darkValue": "#ee8375",
+                        "alpha": "20%",
                         "type": "color"
                     }
                 }

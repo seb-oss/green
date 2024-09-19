@@ -46,17 +46,31 @@ export const styles = css`
       outline-offset: 2px;
 
       &:has(input:focus-visible) {
-        // border-color: var(--gds-color-l3-border-primary);
+        border-color: var(--gds-color-l3-border-primary);
         outline-color: currentColor;
       }
 
-      // min-height: max(var(--gds-space-xl), calc(1lh * var(--_lines)));
+      &.invalid:has(input:focus-visible) {
+        border-color: var(--gds-color-l3-border-negative);
+      }
     }
 
     @media (hover: hover) {
-      .field:hover {
-        .state {
-          opacity: 1;
+      .field {
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-secondary),
+            var(--gds-color-l3-states-light-hover)
+          );
+        }
+
+        &.invalid:hover {
+          background: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-negative-secondary),
+            var(--gds-color-l3-states-negative-hover)
+          );
         }
       }
     }

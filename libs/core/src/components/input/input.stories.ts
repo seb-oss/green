@@ -330,8 +330,9 @@ export const All: Story = {
           .invalid="${true}"
           supporting-text="Label support text"
           value="Input"
+          clearable
         >
-          <gds-badge variant="error" slot="trail">KR</gds-badge>
+          <gds-badge variant="negative" slot="trail">KR</gds-badge>
         </gds-input>
       </gds-flex>
       <gds-flex padding="xl 0 0 0" flex-direction="column">

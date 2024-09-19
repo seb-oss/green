@@ -167,9 +167,8 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple part="_ripple"></gds-ripple>`,
         )}
-        <div class="state"></div>
-      </${tag}>
-    `
+        </${tag}>
+        `
   }
 
   protected _getValidityAnchor(): HTMLElement {

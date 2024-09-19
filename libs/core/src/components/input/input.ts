@@ -157,12 +157,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     return this.elInput
   }
 
-  // variant="default"
   #renderDefault() {
-    // TODO:
-
-    // max-width="${this.size === 'small' ? '200px' : '343px'}"
-
     return html`
       <gds-flex
         flex-direction="column"
@@ -227,7 +222,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             : this.invalid
               ? '4xs/l3-border-negative'
               : '4xs/l3-border-secondary'}
-          class="field"
+          class="field ${this.invalid ? 'invalid' : ''}"
           @click=${this.#handleFieldClick}
           cursor="text"
         >
@@ -241,19 +236,6 @@ export class GdsInput extends GdsFormControlElement<string> {
             ${this.#renderClearButton()}
             ${!this.textarea ? this.#renderSlotTrail() : nothing}
           </gds-flex>
-
-          <gds-flex
-            class="state"
-            position="absolute"
-            inset="0"
-            border-radius="xs"
-            .background="${this.invalid
-              ? 'l3-states-negative-hover'
-              : 'l3-states-light-hover'}"
-            pointer-events="none"
-            opacity="0"
-            transition="all 368ms cubic-bezier(0.4, 0, 0.2, 1)"
-          ></gds-flex>
         </gds-flex>
 
         <gds-flex
@@ -298,48 +280,7 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   // variant="floatingLabel"
   #renderFloatingLabel() {
-    return html`
-      <gds-flex flex-direction="column" gap="2xs">
-        <gds-flex
-          align-items="center"
-          justify-content="center"
-          gap="m"
-          padding="xs m"
-          background="l3-background-secondary"
-          border="4xs/l3-border-secondary"
-          border-radius="xs"
-          class="field"
-          @click=${this.#handleFieldClick}
-        >
-          <slot name="lead"></slot>
-          <gds-text
-            tag="label"
-            font-weight="book"
-            font-size="detail-m"
-            for="input"
-          >
-            <gds-flex>${this.label}</gds-flex>
-            ${when(
-              this.textarea,
-              () => html`${this.#renderNativeTextarea()}`,
-              () => html`${this.#renderNativeInput()}`,
-            )}
-          </gds-text>
-          <slot name="trail" gds-allow="gds-badge"></slot>
-          ${this.#renderClearButton()}
-        </gds-flex>
-
-        <gds-flex class="foot">
-          ${this.#renderSupportingText()}
-          ${when(this.#shouldShowRemainingChars, () =>
-            this.#renderRemainingCharsBadge(),
-          )}
-          ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
-        </gds-flex>
-
-        ${this.#renderExtendedSupportingText()}
-      </gds-flex>
-    `
+    return nothing
   }
 
   // Any attribute name added here will get forwarded to the native <input> element.
@@ -368,16 +309,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.elInputAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
-
-      // // Update the height based on the --_lines value
-      // const lineHeight = parseFloat(getComputedStyle(element).lineHeight)
-      // const numberOfLines = parseInt(lines, 10)
-      // if (!isNaN(lineHeight) && !isNaN(numberOfLines)) {
-      //   element.style.height = `${lineHeight * numberOfLines}px`
-      // } else {
-      //   // Reset to default height if --_lines value is not valid
-      //   element.style.height = ''
-      // }
     })
   }
 
@@ -461,7 +392,6 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderExtendedSupportingText() {
-    // .display="${this.showExtendedSupportingText ? 'block' : 'none'}"
     return html`
       <gds-card
         class="extended-supporting-text"

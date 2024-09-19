@@ -44,7 +44,7 @@ export class GdsBadge extends GdsElement {
    * @returns The CSS style string.
    */
   private generateColorStyles(level: string, variant: string): string {
-    const BG = `background-color: var(--gds-color-${level}-background-${variant}-secondary);`
+    const BG = `background-color: var(--gds-color-${level}-background-${variant}-badge);`
     const CL = `color: var(--gds-color-${level}-content-${variant});`
     return `${BG} ${CL}`
   }
