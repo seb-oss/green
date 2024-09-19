@@ -35,7 +35,10 @@ type Story = StoryObj
 export const Variants: Story = {
   name: 'Variants',
   parameters: {
-    controls: { include: [] },
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
   },
   render: (args) => html`
     <gds-grid columns="2" gap="2xl">
