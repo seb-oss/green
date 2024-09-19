@@ -43,6 +43,8 @@ import '../button'
 export class GdsInput extends GdsFormControlElement<string> {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
+    // TODO:
+    // Consider setting `delegatesFocus: false` to fix the selection problem
     delegatesFocus: true,
   }
   static styles = [tokens, styles]
@@ -97,26 +99,26 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   /**
    * The variant of the input field. The default variant displays a label, supporting text, and
-   * extended supporting text. The simplified variant only displays the field itself and the
+   * extended supporting text. The floating-label variant only displays the field itself and the
    * supporting text below.
    *
-   * The simplified variant should only be used in specific cases, for example when the input field
+   * The floating-label variant should only be used in specific cases, for example when the input field
    * is placed inside a table cell or in a space-constrained layout.
    *
    * A typical form should use the default variant.
    */
   @property({ type: String })
-  variant: 'default' | 'simplified' = 'default'
+  variant: 'default' | 'floating-label' = 'default'
 
   @property({ type: String })
   size: 'default' | 'small' = 'default'
 
   /**
-   * Whether the input field should be multiline or not. Multiline fields will render a textarea
+   * Whether the input field should be textarea or not. Textarea fields will render a textarea
    * internally instead of an input.
    */
   @property({ type: Boolean })
-  multiline = false
+  textarea = false
 
   @queryAsync('input, textarea')
   private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
@@ -147,7 +149,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   render() {
     return html`${choose(this.variant, [
       ['default', () => this.#renderDefault()],
-      ['simplified', () => this.#renderSimplified()],
+      ['floating-label', () => this.#renderFloatingLabel()],
     ])}`
   }
 
@@ -201,7 +203,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           align-items="center"
           justify-content="center"
           gap="${this.size === 'small' ? '2xs' : 'xs'}"
-          padding="${this.multiline
+          padding="${this.textarea
             ? 's s s m'
             : this.size === 'small'
               ? 'xs s'
@@ -209,7 +211,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           min-height="${this.size === 'small'
             ? 'var(--gds-space-xl)'
             : 'var(--gds-space-3xl)'}"
-          height="${this.multiline
+          height="${this.textarea
             ? ''
             : this.size === 'small'
               ? 'var(--gds-space-xl)'
@@ -229,15 +231,15 @@ export class GdsInput extends GdsFormControlElement<string> {
           @click=${this.#handleFieldClick}
           cursor="text"
         >
-          ${!this.multiline ? this.#renderSlotLead() : nothing}
+          ${!this.textarea ? this.#renderSlotLead() : nothing}
           ${when(
-            this.multiline,
+            this.textarea,
             () => html`${this.#renderNativeTextarea()}`,
             () => html`${this.#renderNativeInput()}`,
           )}
           <gds-flex gap="xs" align-items="center">
             ${this.#renderClearButton()}
-            ${!this.multiline ? this.#renderSlotTrail() : nothing}
+            ${!this.textarea ? this.#renderSlotTrail() : nothing}
           </gds-flex>
 
           <gds-flex
@@ -294,8 +296,8 @@ export class GdsInput extends GdsFormControlElement<string> {
     `
   }
 
-  // variant="simplified"
-  #renderSimplified() {
+  // variant="floatingLabel"
+  #renderFloatingLabel() {
     return html`
       <gds-flex flex-direction="column" gap="2xs">
         <gds-flex
@@ -318,7 +320,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           >
             <gds-flex>${this.label}</gds-flex>
             ${when(
-              this.multiline,
+              this.textarea,
               () => html`${this.#renderNativeTextarea()}`,
               () => html`${this.#renderNativeInput()}`,
             )}
@@ -362,7 +364,7 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   @watch('value')
   private _setAutoHeight() {
-    if (!this.multiline) return
+    if (!this.textarea) return
     this.elInputAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())

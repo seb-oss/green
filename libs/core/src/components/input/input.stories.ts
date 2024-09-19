@@ -39,7 +39,7 @@ const DefaultParams: Story = {
   },
   args: {
     label: 'Label text',
-    multiline: false,
+    textarea: false,
   },
 }
 
@@ -49,7 +49,11 @@ export const All: Story = {
   render: () => html`
     <gds-flex flex-direction="column" gap="2xl" width="800px">
       <gds-flex gap="xl">
-        <gds-input label="Label" supporting-text="Label support text">
+        <gds-input
+          value="test"
+          label="Label"
+          supporting-text="Label support text"
+        >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-input>
         <gds-input
@@ -331,7 +335,7 @@ export const All: Story = {
         </gds-input>
       </gds-flex>
       <gds-flex padding="xl 0 0 0" flex-direction="column">
-        <gds-text tag="h2">Multiline</gds-text>
+        <gds-text tag="h2">Textarea</gds-text>
         <gds-divider></gds-divider>
       </gds-flex>
       <gds-flex gap="xl">
@@ -339,14 +343,14 @@ export const All: Story = {
           label="Label"
           supporting-text="Label support text"
           maxlength="140"
-          multiline
+          textarea
         >
         </gds-input>
         <gds-input
           label="Label"
           supporting-text="Label support text"
           maxlength="140"
-          multiline
+          textarea
         >
         </gds-input>
       </gds-flex>
@@ -356,7 +360,7 @@ export const All: Story = {
           supporting-text="Label support text"
           maxlength="140"
           .invalid=${true}
-          multiline
+          textarea
         >
         </gds-input>
         <gds-input
@@ -364,7 +368,7 @@ export const All: Story = {
           supporting-text="Label support text"
           maxlength="140"
           .invalid=${true}
-          multiline
+          textarea
         >
         </gds-input>
       </gds-flex>
@@ -374,7 +378,7 @@ export const All: Story = {
           supporting-text="Label support text"
           show-extended-supporting-text
           maxlength="140"
-          multiline
+          textarea
         >
           <span slot="extended-supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -386,7 +390,7 @@ export const All: Story = {
           supporting-text="Label support text"
           show-extended-supporting-text
           maxlength="140"
-          multiline
+          textarea
         >
           <span slot="extended-supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -526,12 +530,12 @@ export const All: Story = {
 //   `,
 // }
 
-// export const Multiline: Story = {
+// export const textarea: Story = {
 //   ...DefaultParams,
-//   name: 'Multiline',
+//   name: 'textarea',
 //   args: {
-//     label: 'Multiline',
+//     label: 'textarea',
 //     supportingText: 'Supporting text',
-//     multiline: true,
+//     textarea: true,
 //   },
 // }

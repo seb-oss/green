@@ -12,7 +12,7 @@ import type { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-for (const variant of ['default', 'simplified'] as const) {
+for (const variant of ['default', 'floating-label'] as const) {
   describe('<gds-input>', () => {
     describe('Rendering', () => {
       it('should render a label', async () => {
