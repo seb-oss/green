@@ -41,12 +41,6 @@ import '../button'
  */
 @gdsCustomElement('gds-input')
 export class GdsInput extends GdsFormControlElement<string> {
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    // TODO:
-    // Consider setting `delegatesFocus: false` to fix the selection problem
-    delegatesFocus: true,
-  }
   static styles = [tokens, styles]
 
   @property()
