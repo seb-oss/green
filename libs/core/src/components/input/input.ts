@@ -1,4 +1,4 @@
-import { LitElement, TemplateResult } from 'lit'
+import { TemplateResult } from 'lit'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { until } from 'lit/directives/until.js'
 import { nothing } from 'lit/html.js'
@@ -26,6 +26,7 @@ import '../layout/flex'
 import '../layout/container'
 import '../layout/card'
 import '../content/text'
+import '../badge'
 import '../button'
 
 /**
