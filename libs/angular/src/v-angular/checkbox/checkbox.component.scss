@@ -1,0 +1,12 @@
+@use '../../../../chlorophyll/scss/components/form/checkbox/mixins';
+@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
+
+:host {
+  @include tokens.add-checkbox-tokens;
+  @include mixins.add-checkbox();
+
+  .form-control {
+    @include form-mixins.add-form-control;
+  }
+}

@@ -31,8 +31,8 @@ const style = css`
     tbody {
       td {
         position: relative;
-        height: var(--gds-space-2xl);
-        width: var(--gds-space-2xl);
+        height: var(--gds-space-3xl);
+        width: var(--gds-space-3xl);
         box-sizing: border-box;
         text-align: center;
         user-select: none;

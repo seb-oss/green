@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.gds-tooltip {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.5rem;
+  pointer-events: none;
+
+  &__arrow-top {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0.5rem solid transparent;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: #1a1a1a transparent transparent;
+  }
+
+  &__arrow-bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0.5rem solid transparent;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: transparent transparent #1a1a1a;
+  }
+
+  &__arrow-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0.5rem solid transparent;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-color: transparent transparent transparent #1a1a1a;
+  }
+
+  &__arrow-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0.5rem solid transparent;
+    left: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-color: transparent #1a1a1a transparent transparent;
+  }
+}
