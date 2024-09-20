@@ -193,6 +193,10 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
+  focus(options?: FocusOptions | undefined): void {
+    this._getValidityAnchor().focus(options)
+  }
+
   /**
    * This should return a reference to the HTML element that will recive the focus when the form control is invalid.
    */
