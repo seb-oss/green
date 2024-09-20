@@ -1,9 +1,9 @@
-import { html } from 'lit/static-html.js'
+import { property } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { html } from '../../scoping'
 import BadgeCSS from './badge.style'
 
 /**
@@ -13,7 +13,6 @@ import BadgeCSS from './badge.style'
  * @status beta
  *
  */
-
 @gdsCustomElement('gds-badge')
 export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
