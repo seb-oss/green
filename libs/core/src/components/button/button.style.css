@@ -1,11 +1,5 @@
 @layer tokens, core, a11y, ranks, sizes, variants, disabled;
 
-@layer tokens {
-  :host {
-    display: contents;
-  }
-}
-
 @layer a11y {
   @media (prefers-reduced-motion: reduce) {
     .button {
@@ -15,6 +9,10 @@
 }
 
 @layer core {
+  :host {
+    display: inline-block;
+  }
+
   .button {
     --_block-size: var(--gds-space-3xl);
     display: inline-flex;
