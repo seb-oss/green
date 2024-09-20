@@ -29,8 +29,8 @@ export const styles = css`
     }
 
     :host {
+      width: 100%;
       contain: layout;
-      display: contents;
       isolation: isolate;
     }
 
