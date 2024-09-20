@@ -189,9 +189,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
         </gds-flex>
 
-        ${when(this.showExtendedSupportingText, () =>
-          this.#renderExtendedSupportingText(),
-        )}
+        ${this.#renderExtendedSupportingText()}
 
         <gds-flex
           position="relative"
@@ -397,10 +395,14 @@ export class GdsInput extends GdsFormControlElement<string> {
         class="extended-supporting-text"
         aria-hidden="${!this.showExtendedSupportingText}"
         ?inert="${!this.showExtendedSupportingText}"
-        padding="s m"
+        opacity="${this.showExtendedSupportingText ? '1' : '0'}"
+        height="${this.showExtendedSupportingText ? 'auto' : '0px'}"
+        padding="${this.showExtendedSupportingText ? 's m' : '0 m'}"
         border-radius="xs"
         background="l3-background-secondary"
+        transition=".3s"
         color="l3-content-tertiary"
+        overflow="hidden"
       >
         <gds-text font-size="body-s">
           <slot
@@ -461,8 +463,7 @@ export class GdsInput extends GdsFormControlElement<string> {
             label="${msg('Show extended supporting text')}"
             @click=${this.#handleSupportingTextBtnClick}
           >
-            <!-- TODO: When is open it should be solid  -->
-            <gds-icon-circle-info />
+            <gds-icon-circle-info ?solid=${this.showExtendedSupportingText} />
           </gds-button>
         `
       else return nothing
