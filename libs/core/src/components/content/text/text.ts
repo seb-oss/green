@@ -184,7 +184,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  align?: string
+  'text-align'?: string
 
   /**
    * Controls the number of lines it should show.

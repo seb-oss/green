@@ -1,7 +1,59 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
 
-import ReadMe from '../../README.md?raw'
+import '../components/layout/flex/flex'
+import '../components/layout/card/card'
+import '../components/content/text/text'
+import '../components/content/divider/divider'
+import '../components/icon/icons/brand-green'
+import '../components/icon/icons/brand-seb'
+import Version from './version';
 
-<Meta title="Green Design System" id="welcome" />
+<Meta title="Green Design System" id="welcome"  />
 
-<Markdown>{ReadMe}</Markdown>
+<gds-theme>
+    <gds-flex flex-direction="column" gap="4xl">
+        <gds-card  border-radius="m" padding="l">
+            <gds-flex 
+                min-width="100%" 
+                justify-content="center" 
+                align-items="center" 
+                flex-direction="column" 
+                padding="l"
+                gap="xl">
+                <gds-icon-brand-green width="80" height="80"></gds-icon-brand-green>
+                <gds-text tag="code" font-size="display-s">
+                    <Version pack="@sebgroup/green-core" />
+                </gds-text>
+                <gds-text tag="code" font-size="display-s">@sebgroup/green-core</gds-text>
+                <gds-text font-size="display-xs" text-align="center" text-wrap="balance">Green Core is a carefully crafted set of Web Components that lays the foundation for the Green Design System.</gds-text>
+                <gds-flex gap="s"> 
+                    <a target="_blank" href="https://github.com/seb-oss/green/blob/main/LICENSE">
+                        <img src="https://img.shields.io/badge/license-Apache2.0-005FAC"/>
+                    </a>
+                    <a target="_blank" href="https://semver.org/">
+                        <img src="https://img.shields.io/badge/semantic%20versioning-006D31"/>
+                    </a>
+                    <a target="_blank" href="https://nx.dev/">
+                        <img src="https://img.shields.io/badge/maintained%20with-nx-006D31"/>
+                    </a>
+                    <a target="_blank" href="https://github.com/seb-oss/green/blob/main/CONTRIBUTING.md">
+                        <img src="https://img.shields.io/badge/PRs-welcome-006D31"/>
+                    </a>
+                </gds-flex>
+                <gds-flex gap="s">
+                    <gds-text>Built by:</gds-text>
+                    <gds-icon-brand-seb width="40" height="40"></gds-icon-brand-seb>
+                </gds-flex>
+            </gds-flex>
+        </gds-card>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex flex-direction="column" gap="s">
+            <gds-text tag="h2">Components</gds-text>
+            <gds-grid column="4">
+                <gds-card border="4xs/l2-border-primary" border-radius="m" padding="s">
+                    This is it
+                </gds-card>
+            </gds-grid>
+        </gds-flex>
+    </gds-flex>
+</gds-theme>
