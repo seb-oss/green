@@ -8,9 +8,6 @@ import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/input)
- * &nbsp;|&nbsp;
- * [Usage guidelines](https://seb.io/component/input)
  *
  * @status beta
  *

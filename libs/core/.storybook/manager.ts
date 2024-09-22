@@ -8,6 +8,7 @@ const betaItems = {
   Layout: true,
   Form: true,
   Input: true,
+  Textarea: true,
   Media: true,
   Content: true,
   Style: true,

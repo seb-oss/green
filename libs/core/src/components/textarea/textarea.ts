@@ -105,16 +105,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
-  @property({ type: String })
-  size: 'default' | 'small' = 'default'
-
-  /**
-   * Whether the input field should be textarea or not. Textarea fields will render a textarea
-   * internally instead of an input.
-   */
-  // @property({ type: Boolean })
-  // textarea = false
-
   @queryAsync('textarea')
   private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
 
@@ -157,7 +147,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       <gds-flex
         flex-direction="column"
         width="100%"
-        gap="${this.size === 'small' ? '2xs' : 'xs'}"
+        gap="xs"
         user-select="${this.disabled ? 'none' : 'auto'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
@@ -173,10 +163,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           padding="3xs 0 0 0"
         >
           <gds-flex flex-direction="column">
-            <gds-text
-              font-weight="book"
-              font-size="${this.size === 'small' ? 'detail-s' : 'detail-m'}"
-            >
+            <gds-text font-weight="book" font-size="detail-m">
               <label for="input"> ${this.label} </label>
             </gds-text>
             ${when(this.supportingText, () => this.#renderSupportingText())}
@@ -190,7 +177,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           position="relative"
           align-items="flex-start"
           justify-content="center"
-          gap="${this.size === 'small' ? '2xs' : 'xs'}"
+          gap="xs"
           padding="s s s m"
           border-radius="xs"
           .background=${this.disabled
@@ -209,7 +196,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         >
           ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
 
-          <gds-flex gap="xs" align-items="center">
+          <gds-flex gap="xs" align-items="center" height="var(--gds-space-l)">
             ${this.#renderClearButton()} ${this.#renderSlotTrail()}
           </gds-flex>
         </gds-flex>
@@ -223,19 +210,14 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           ${when(
             this.invalid,
             () => html`
-              <gds-flex
-                align-items="flex-start"
-                gap="${this.size === 'small' ? '2xs' : 'xs'}"
-              >
+              <gds-flex align-items="flex-start" gap="xs">
                 <gds-flex min-width="18px">
                   <gds-icon-triangle-exclamation width="18" height="18" solid>
                   </gds-icon-triangle-exclamation>
                 </gds-flex>
                 <gds-text
                   tag="span"
-                  font-size="${this.size === 'small'
-                    ? 'detail-xs'
-                    : 'detail-s'}"
+                  font-size="detail-s"
                   font-weight="book"
                   class="error-text"
                 >
@@ -338,7 +320,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   #renderSupportingText() {
     return html`
       <gds-text
-        font-size="${this.size === 'small' ? 'detail-s' : 'detail-m'}"
+        font-size="detail-m"
         .color="${this.disabled
           ? 'l3-content-disabled'
           : this.invalid
@@ -379,7 +361,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     if (this.clearable && this.value.length > 0)
       return html`
         <gds-button
-          size="${this.size === 'small' ? 'xs' : 'small'}"
+          size="small"
           rank="tertiary"
           variant="${this.invalid ? 'negative' : ''}"
           ?disabled="${this.disabled}"
