@@ -17,6 +17,7 @@ import {
 import '../layout/flex'
 import { tokens } from '../../tokens.style'
 import { styles } from './textarea.styles'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
 // Local Components
 import '../icon/icons/cross-small'
@@ -52,6 +53,19 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    */
   @property()
   label = ''
+
+  /**
+   * Rows of the textarea
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: 'textarea',
+    styleTemplate: (_prop, values) => {
+      const ROWS = values[0]
+      return `min-height: calc(1lh * ${ROWS});`
+    },
+  })
+  rows = 4
 
   /**
    * The supporting text displayed between the label and the field itself
@@ -388,7 +402,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     } else {
       variant = 'positive'
     }
-    // return html`<gds-badge variant="${this.invalid ? 'negative' : variant}"
     return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
   }
 

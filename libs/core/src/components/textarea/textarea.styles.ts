@@ -34,7 +34,7 @@ export const styles = css`
       isolation: isolate;
     }
 
-    :host([size='small']) input {
+    :host([size='small']) textarea {
       font-size: var(--gds-text-size-detail-s);
       line-height: var(--gds-text-line-height-detail-s);
     }
@@ -45,12 +45,12 @@ export const styles = css`
       outline: 2px solid transparent;
       outline-offset: 2px;
 
-      &:has(input:focus-visible) {
+      &:has(textarea:focus-visible) {
         border-color: var(--gds-color-l3-border-primary);
         outline-color: currentColor;
       }
 
-      &.invalid:has(input:focus-visible) {
+      &.invalid:has(textarea:focus-visible) {
         border-color: var(--gds-color-l3-border-negative);
       }
     }
@@ -75,7 +75,6 @@ export const styles = css`
       }
     }
 
-    input,
     textarea {
       appearance: none;
       background-color: transparent;

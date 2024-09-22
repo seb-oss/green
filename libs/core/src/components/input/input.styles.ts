@@ -75,8 +75,7 @@ export const styles = css`
       }
     }
 
-    input,
-    textarea {
+    input {
       appearance: none;
       background-color: transparent;
       border: 0;
@@ -92,20 +91,12 @@ export const styles = css`
       line-height: var(--gds-text-line-height-detail-m);
     }
 
-    textarea {
-      overflow: hidden;
-      resize: none;
-      transition: unset;
-      min-height: calc(1lh * 4);
-      height: calc(1lh * var(--_lines));
-    }
-
     :host([size='small']) slot[name='lead']::slotted(*) {
       width: var(--gds-space-m);
     }
 
     slot[name='lead']::slotted(*) {
-      width: var(--gds-space-l);
+      min-width: var(--gds-space-l);
     }
   }
 

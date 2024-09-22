@@ -344,14 +344,12 @@ export const All: Story = {
           label="Label"
           supporting-text="Label support text"
           maxlength="140"
-          textarea
         >
         </gds-input>
         <gds-input
           label="Label"
           supporting-text="Label support text"
           maxlength="140"
-          textarea
         >
         </gds-input>
       </gds-flex>
@@ -361,7 +359,6 @@ export const All: Story = {
           supporting-text="Label support text"
           maxlength="140"
           .invalid=${true}
-          textarea
         >
         </gds-input>
         <gds-input
@@ -369,7 +366,6 @@ export const All: Story = {
           supporting-text="Label support text"
           maxlength="140"
           .invalid=${true}
-          textarea
         >
         </gds-input>
       </gds-flex>
@@ -379,7 +375,6 @@ export const All: Story = {
           supporting-text="Label support text"
           show-extended-supporting-text
           maxlength="140"
-          textarea
         >
           <span slot="extended-supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -391,7 +386,6 @@ export const All: Story = {
           supporting-text="Label support text"
           show-extended-supporting-text
           maxlength="140"
-          textarea
         >
           <span slot="extended-supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

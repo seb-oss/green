@@ -108,13 +108,6 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   size: 'default' | 'small' = 'default'
 
-  /**
-   * Whether the input field should be textarea or not. Textarea fields will render a textarea
-   * internally instead of an input.
-   */
-  @property({ type: Boolean })
-  textarea = false
-
   @queryAsync('input, textarea')
   private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
 
@@ -191,19 +184,13 @@ export class GdsInput extends GdsFormControlElement<string> {
           align-items="center"
           justify-content="center"
           gap="${this.size === 'small' ? '2xs' : 'xs'}"
-          padding="${this.textarea
-            ? 's s s m'
-            : this.size === 'small'
-              ? 'xs s'
-              : 'xs m'}"
+          padding="${this.size === 'small' ? 'xs s' : 'xs m'}"
           min-height="${this.size === 'small'
             ? 'var(--gds-space-xl)'
             : 'var(--gds-space-3xl)'}"
-          height="${this.textarea
-            ? ''
-            : this.size === 'small'
-              ? 'var(--gds-space-xl)'
-              : 'var(--gds-space-3xl)'}}"
+          height="${this.size === 'small'
+            ? 'var(--gds-space-xl)'
+            : 'var(--gds-space-3xl)'}}"
           border-radius="xs"
           .background=${this.disabled
             ? 'l3-background-disabled'
@@ -219,15 +206,9 @@ export class GdsInput extends GdsFormControlElement<string> {
           @click=${this.#handleFieldClick}
           cursor="text"
         >
-          ${!this.textarea ? this.#renderSlotLead() : nothing}
-          ${when(
-            this.textarea,
-            () => html`${this.#renderNativeTextarea()}`,
-            () => html`${this.#renderNativeInput()}`,
-          )}
+          ${this.#renderSlotLead()} ${this.#renderNativeInput()}
           <gds-flex gap="xs" align-items="center">
-            ${this.#renderClearButton()}
-            ${!this.textarea ? this.#renderSlotTrail() : nothing}
+            ${this.#renderClearButton()} ${this.#renderSlotTrail()}
           </gds-flex>
         </gds-flex>
 
@@ -298,7 +279,6 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   @watch('value')
   private _setAutoHeight() {
-    if (!this.textarea) return
     this.elInputAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
@@ -347,23 +327,6 @@ export class GdsInput extends GdsFormControlElement<string> {
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       />
-    `
-  }
-
-  #renderNativeTextarea() {
-    return html`
-      <textarea
-        @input=${this.#handleOnInput}
-        @change=${this.#handleOnChange}
-        .value=${this.value}
-        id="input"
-        style="${this.invalid
-          ? 'color: var(--gds-color-l3-content-negative);'
-          : null}"
-        aria-describedby="supporting-text"
-        placeholder=" "
-        ${forwardAttributes(this.#forwardableAttrs)}
-      ></textarea>
     `
   }
 
@@ -438,7 +401,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     } else {
       variant = 'positive'
     }
-    // return html`<gds-badge variant="${this.invalid ? 'negative' : variant}"
     return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
   }
 

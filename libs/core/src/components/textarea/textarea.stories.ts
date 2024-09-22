@@ -47,8 +47,9 @@ export const All: Story = {
       <gds-flex gap="xl">
         <gds-textarea
           value="test"
-          label="Label"
+          label="Rows"
           supporting-text="Label support text"
+          rows="8"
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-textarea>
