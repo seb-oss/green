@@ -1,12 +1,27 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
+import LinkTo from '@storybook/addon-links/react';
 
 import '../components/layout/flex/flex'
+import '../components/layout/flex/flex'
 import '../components/layout/card/card'
+import '../components/badge/badge'
+import '../components/button/button'
+import '../components/button/fab/fab'
 import '../components/content/text/text'
+import '../components/menu-button/menu-button'
+import '../components/popover/popover'
+import '../components/segmented-control/segmented-control'
+import '../components/filter-chips/filter-chips'
 import '../components/content/divider/divider'
 import '../components/icon/icons/brand-green'
 import '../components/icon/icons/brand-seb'
+import '../components/icon/icons/credit-card'
+import '../components/icon/icons/rocket'
+import '../components/icon/icons/magnifying-glass'
+import '../components/icon/icons/chevron-bottom'
+import '../primitives/signal/signal'
 import Version from './version';
+import Story from './story';
 
 <Meta title="Green Design System" id="welcome"  />
 
@@ -49,10 +64,119 @@ import Version from './version';
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex flex-direction="column" gap="s">
             <gds-text tag="h2">Components</gds-text>
-            <gds-grid column="4">
-                <gds-card border="4xs/l2-border-primary" border-radius="m" padding="s">
-                    This is it
-                </gds-card>
+            <gds-grid columns="3" gap="l">
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px">
+                                <gds-badge variant="notice">Badge</gds-badge>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Badge</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px">
+                                <gds-button><gds-icon-credit-card slot="lead"></gds-icon-credit-card>Primary</gds-button>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Button</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative">
+                                <gds-fab variant="positive" inset="0" rank="secondary" position="relative">Secondary <gds-signal slot="trail"></gds-signal></gds-fab>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">FAB</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative" gap="s">
+                                <gds-filter-chips
+                                    value="chips, filter"
+                                    label="Pick news channel" 
+                                >
+                                    <gds-filter-chip value="filter">Filter</gds-filter-chip>
+                                    <gds-filter-chip value="chips">Chips</gds-filter-chip> 
+                                </gds-filter-chips>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Filter Chips</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative" gap="s">
+                                <gds-icon-rocket width="42" height="42"></gds-icon-rocket>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Icon</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative" gap="s">
+                                <gds-menu-button><gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>Search</gds-menu-button>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Menu Button</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative" gap="s">
+                            <gds-flex max-width="180px">
+                            <gds-segmented-control size="small" value="1"><gds-segment value="1">Segmented</gds-segment><gds-segment value="2">Control</gds-segment></gds-segmented-control>
+                            </gds-flex>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Segmented Control</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
+                <Story path="../?path=/docs/docs-components-badge--docs" > 
+                    <gds-card border="4xs/l2-border-primary" border-radius="s" overflow="hidden">
+                        <gds-flex flex-direction="column">
+                            <gds-flex align-items="center" justify-content="center" padding="l s" background="l2-background-primary/0.4" height="140px" position="relative" gap="s">
+                                <gds-popover><gds-button rank="secondary" slot="trigger">Popover <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom></gds-button></gds-popover>
+                            </gds-flex>
+                            <gds-divider padding="s" opacity="0.2"></gds-divider>
+                            <gds-flex padding="s">
+                                <gds-text tag="h5">Popover</gds-text>
+                            </gds-flex>
+                        </gds-flex>
+                    </gds-card>
+                </Story>
             </gds-grid>
         </gds-flex>
     </gds-flex>
