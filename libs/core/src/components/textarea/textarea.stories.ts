@@ -401,3 +401,26 @@ export const All: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * Minimum number of rows to display in the textarea is `4` by default. <br>
+ * You can specify the number of rows to display in the textarea using the `rows` attribute.
+ *
+ * @property rows - The number of rows to display in the textarea.
+ **/
+export const Rows: Story = {
+  ...DefaultParams,
+  name: 'Rows',
+  render: () => html`
+  <gds-flex width="400px">
+      <gds-textarea
+        value="Textarea demo value"
+        label="Rows"
+        supporting-text="Label support text"
+        rows="8"
+      >
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      </gds-textarea>
+    </gds-flex
+  `,
+}

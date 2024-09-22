@@ -319,7 +319,9 @@ export class GdsInput extends GdsFormControlElement<string> {
         @change=${this.#handleOnChange}
         style="${this.invalid
           ? 'color: var(--gds-color-l3-content-negative);'
-          : null}"
+          : this.disabled
+            ? 'color: currentColor;pointer-events:none;'
+            : null}"
         .value=${this.value}
         id="input"
         ?disabled=${this.disabled}
