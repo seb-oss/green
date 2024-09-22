@@ -323,7 +323,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         id="input"
         style="${this.invalid
           ? 'color: var(--gds-color-l3-content-negative);'
-          : null}"
+          : this.disabled
+            ? 'color: currentColor;pointer-events:none;'
+            : null}"
         aria-describedby="supporting-text"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}

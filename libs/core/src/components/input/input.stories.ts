@@ -13,12 +13,12 @@ import '../icon/icons/people-profile.ts'
  * Input fields allow users to enter text into a UI. They typically appear in forms and dialogs.
  *
  * Some features of the input field include:
- * — Two different sizes, `small` and `default`
- * — Built-in support for form validation
- * — Slots for `lead` and `trail` icons
- * — `Supporting` and `Extended` text
- * — `Clearable` input fields
- * — `Length` validation
+ * - Two different sizes, `small` and `default`
+ * - Built-in support for form validation
+ * - Slots for `lead` and `trail` icons
+ * - `Supporting` and `Extended` text
+ * - `Clearable` input fields
+ * - `Length` validation
  *
  * @status beta
  */
@@ -47,13 +47,6 @@ const DefaultParams: Story = {
     label: 'Label text',
     textarea: false,
   },
-  render: () => html`
-    <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-input label="Lead Icon" supporting-text="Support text">
-        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-      </gds-input>
-    </gds-flex>
-  `,
 }
 
 export const Default: Story = {
