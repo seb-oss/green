@@ -368,7 +368,7 @@ export const Disabled: Story = {
   ...DefaultParams,
   name: 'Disabled',
   render: () => html`
-    <gds-flex gap="xl">
+    <gds-flex gap="xl" width="800px">
       <gds-textarea label="Label" disabled supporting-text="Support text">
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-textarea>
