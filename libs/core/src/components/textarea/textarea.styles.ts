@@ -5,7 +5,7 @@ export const styles = css`
 
   @layer tokens {
     :host {
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1), resize 0s;
+      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1), height 0s;
     }
   }
 
