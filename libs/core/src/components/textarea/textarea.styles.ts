@@ -105,6 +105,7 @@ export const styles = css`
 
     slot[name='lead']::slotted(*) {
       min-width: var(--gds-space-l);
+      display: flex;
     }
 
     .extended-supporting-text {
