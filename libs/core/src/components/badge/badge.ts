@@ -1,11 +1,10 @@
-import { property } from 'lit/decorators.js'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { html } from '../../scoping'
 import BadgeCSS from './badge.style'
-
 /**
  * `gds-badge`
  *
@@ -47,28 +46,96 @@ export class GdsBadge extends GdsElement {
   })
   disabled = false
 
+  /**
+   * Indicates whether the badge is in notification mode.
+   * When set to `true`, the badge will act as a notification badge with only two variants: `positive` or `negative`.
+   *
+   * @property {boolean} notification - Controls the notification mode of the badge.
+   */
+  @property({
+    attribute: 'notification',
+    type: Boolean,
+    reflect: true,
+  })
+  notification = false
+
+  @state()
+  mainSlotOccupied = false
+
+  constructor() {
+    super()
+  }
+
   render() {
+    const background = this.disabled
+      ? 'disabled'
+      : this.notification
+        ? (this as GdsBadge).variant
+        : (this as GdsBadge).variant + '-badge'
+
+    const color = this.disabled
+      ? 'disabled'
+      : this.notification
+        ? 'primary'
+        : (this as GdsBadge).variant
+
+    const padding = this.size === 'small' || this.notification ? '2xs' : 'xs'
+
+    const blockSize = this.mainSlotOccupied
+      ? this.size === 'small' || this.notification
+        ? 'm'
+        : 'l'
+      : 'xs'
+
+    const inlineSize = this.mainSlotOccupied ? 'l' : 'xs'
+
     return html`<gds-flex
       level="3"
-      background=${this.disabled
-        ? 'disabled'
-        : (this as GdsBadge).variant + '-badge'}
-      color=${this.disabled ? 'disabled' : (this as GdsBadge).variant}
+      background=${background}
+      color=${color}
       gap="2xs"
       align-items="center"
       justify-content="flex-start"
-      padding-inline="${this.size === 'small' ? '2xs' : 'xs'}"
-      border-radius="2xs"
-      block-size="${this.size === 'small' ? 'm' : 'l'}"
+      padding-inline="${padding}"
+      border-radius="${this.notification ? 'max' : '2xs'}"
+      block-size="${blockSize}"
       width="max-content"
+      inline-size="${inlineSize}"
       font-size="detail-s"
       font-weight="book"
       pointer-events=${this.disabled ? 'none' : 'auto'}
       user-select="${this.disabled ? 'none' : 'auto'}"
     >
-      ${this.size !== 'small' ? html`<slot name="lead"></slot>` : ''}
-      <slot></slot>
-      <slot name="trail"></slot>
+      ${this.#renderLeadSlot()} ${this.#renderMainSlot()}
+      ${this.#renderTrailSlot()}
     </gds-flex>`
+  }
+
+  #renderLeadSlot() {
+    if (this.size !== 'small' || !this.notification) {
+      return html`<slot name="lead"></slot>`
+    }
+  }
+
+  #renderMainSlot() {
+    return html`<slot @slotchange=${this.#handleSlotChange}></slot>`
+  }
+
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.mainSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
+  }
+
+  #renderTrailSlot() {
+    if (!this.notification) {
+      return html`<slot name="trail"></slot>`
+    }
   }
 }

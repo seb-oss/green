@@ -46,9 +46,6 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
-/**
- *
- */
 export const Variants: Story = {
   name: 'Variants',
   render: (args) => html`
@@ -104,6 +101,34 @@ export const Variants: Story = {
           <gds-badge variant="warning"> Warning </gds-badge>
           <gds-badge variant="negative"> Negative </gds-badge>
           <gds-badge variant="negative" disabled> Disabled </gds-badge>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Small</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-flex gap="xl">
+          <gds-badge size="small" variant="information"> 120 </gds-badge>
+          <gds-badge size="small" variant="notice"> 428 </gds-badge>
+          <gds-badge size="small" variant="positive"> 32 </gds-badge>
+          <gds-badge size="small" variant="warning"> 602 </gds-badge>
+          <gds-badge size="small" variant="negative"> 537 </gds-badge>
+          <gds-badge size="small" variant="negative" disabled> 982 </gds-badge>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Notification</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-flex gap="xl" align-items="center">
+          <gds-badge variant="positive" notification></gds-badge>
+          <gds-badge variant="positive" notification>9</gds-badge>
+          <gds-badge variant="positive" notification>999+</gds-badge>
+          <gds-badge variant="negative" notification></gds-badge>
+          <gds-badge variant="negative" notification>9</gds-badge>
+          <gds-badge variant="negative" notification>999+</gds-badge>
         </gds-flex>
       </gds-flex>
     </gds-flex>
@@ -234,6 +259,74 @@ export const Disabled: Story = {
         </gds-icon-arrow-rotate-counter-clockwise>
         Discard
       </gds-badge>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `Notification` story demonstrates the use of the `gds-badge` component in notification mode.
+ * In this mode, the badge acts as a notification indicator with only two possible variants: `positive` or `negative`.
+ *
+ * Example usage:
+ *
+ * ```html
+ * <gds-flex gap="xl">
+ *   <gds-badge notification>...</gds-badge>
+ *   <gds-badge notification>...</gds-badge>
+ * </gds-flex>
+ * ```
+ *
+ * @property {boolean} notification - Controls the notification mode of the badge.
+ */
+
+export const Notification: Story = {
+  name: 'Notification',
+  parameters: {
+    actions: {
+      handles: ['mouseover', 'mouseout'],
+    },
+  },
+  play: async () => {
+    document.querySelectorAll('gds-badge[notification]').forEach((badge) => {
+      let interval: number | undefined
+
+      const startAnimation = () => {
+        const content = badge.textContent?.trim() || ''
+        const numericContent = content.replace(/\D/g, '') // Remove non-numeric characters
+        if (numericContent && !isNaN(Number(numericContent))) {
+          const targetValue = parseInt(numericContent, 10)
+          let currentValue = 0
+          interval = window.setInterval(() => {
+            badge.textContent =
+              currentValue.toString() + content.replace(/\d/g, '') // Preserve non-numeric characters
+            if (currentValue === targetValue) {
+              clearInterval(interval)
+            } else {
+              currentValue++
+            }
+          }, 50) // Adjust the interval speed as needed
+        }
+      }
+
+      const stopAnimation = () => {
+        if (interval) {
+          clearInterval(interval)
+          interval = undefined
+        }
+      }
+
+      badge.addEventListener('mouseover', startAnimation)
+      badge.addEventListener('mouseout', stopAnimation)
+    })
+  },
+  render: (args) => html`
+    <gds-flex gap="xl" align-items="center">
+      <gds-badge variant="positive" notification></gds-badge>
+      <gds-badge variant="positive" notification>9</gds-badge>
+      <gds-badge variant="positive" notification>999+</gds-badge>
+      <gds-badge variant="negative" notification></gds-badge>
+      <gds-badge variant="negative" notification>9</gds-badge>
+      <gds-badge variant="negative" notification>999+</gds-badge>
     </gds-flex>
   `,
 }

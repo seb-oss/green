@@ -138,10 +138,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   variant: 'default' | 'floating-label' = 'default'
 
   @queryAsync('textarea')
-  private elTextareaAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
+  private elTextareaAsync!: Promise<HTMLTextAreaElement>
 
   @query('textarea')
-  private elTextarea!: HTMLInputElement | HTMLTextAreaElement
+  private elTextarea!: HTMLTextAreaElement
 
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>

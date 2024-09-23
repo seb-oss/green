@@ -108,11 +108,11 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   size: 'default' | 'small' = 'default'
 
-  @queryAsync('input, textarea')
-  private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
+  @queryAsync('input')
+  private elInputAsync!: Promise<HTMLInputElement>
 
-  @query('input, textarea')
-  private elInput!: HTMLInputElement | HTMLTextAreaElement
+  @query('input')
+  private elInput!: HTMLInputElement
 
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
