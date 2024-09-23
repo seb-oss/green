@@ -143,6 +143,10 @@ export const Length: Story = {
  * You can specify the number of rows to display in the textarea using the `rows` attribute.
  *
  * @property rows - The number of rows to display in the textarea.
+ *
+ * ```html
+ *  <gds-textarea rows="8"></gds-textarea>
+ * ```
  **/
 export const Rows: Story = {
   ...DefaultParams,
@@ -157,6 +161,50 @@ export const Rows: Story = {
         rows="8"
       >
       </gds-textarea>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `resize` property is set to `auto` by default, allowing the user to resize the textarea.
+ *
+ * To disable the resize functionality, set the `resize` property to `false`.
+ *
+ * When the `resize` property is set to `auto`, a resize handle will appear at the bottom center of the textarea when the user hovers over it. Dragging this handle will resize the textarea.
+ *
+ * The textarea's size is adjustable based on the `rows` attribute and the content within the textarea.
+ *
+ * @property resize - Controls whether and how the textarea can be resized by the user.
+ *
+ * ```html
+ *  <gds-textarea resize="false"></gds-textarea>
+ * ```
+ **/
+export const Resize: Story = {
+  ...DefaultParams,
+  name: 'Resize',
+  render: () => html`
+    <gds-flex gap="xl" width="800px">
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Resize: False</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resize="false"
+        >
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Resize: True</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea label="Label" supporting-text="Label support text">
+        </gds-textarea>
+      </gds-flex>
     </gds-flex>
   `,
 }

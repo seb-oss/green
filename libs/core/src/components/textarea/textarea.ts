@@ -67,8 +67,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   })
   rows = 4
 
-  // TODO: Implement this feature more efficiently
-
   @state()
   private lines = 4 // Default number of lines
   private isDragging = false // Track dragging state
@@ -108,15 +106,17 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   clearable = false
 
   /**
-   * Whether the field should be resizeable or not. If set to false, the field will not be resizeable.
+   * Whether the field should be resizeable or not. If set to `false`, the field will not be resizeable.
    *
-   * When true (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
+   * When `auto` (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
    *
-   * @property true
+   * The textarea is resizeable based on the `rows` attribute and the content of the textarea by default.
+   *
+   * @property resize
    *
    */
-  @property({ type: Boolean })
-  resize = true
+  @property()
+  resize = ''
 
   /**
    * The maximum number of characters allowed in the field.
@@ -153,11 +153,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     super()
     constrainSlots(this)
     this.lines = 0
+    this.resize = 'auto'
   }
 
   connectedCallback(): void {
     super.connectedCallback()
     this._setAutoHeight()
+    this.#addResizeHandleListener()
   }
 
   disconnectedCallback() {
@@ -233,7 +235,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           <gds-flex gap="xs" align-items="center" height="var(--gds-space-l)">
             ${this.#renderClearButton()} ${this.#renderSlotTrail()}
           </gds-flex>
-          ${this.#renderResizeHandle()}
+          ${when(
+            this.resize === 'auto',
+            () => this.#renderResizeHandle(),
+            () => nothing,
+          )}
         </gds-flex>
 
         <gds-flex
@@ -328,7 +334,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
-    if (!this.resize) return nothing
     return html`
       <slot
         name="trail"
@@ -373,7 +378,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       this.elTextareaAsync.then((element) => {
         element?.style.setProperty('--_lines', this.lines.toString())
       })
-      console.log(`Current lines: ${this.lines}`) // For debugging
 
       // Update lastMouseY to the current position
       this.lastMouseY = event.clientY
@@ -387,6 +391,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderResizeHandle() {
+    console.log('renderResizeHandle', this.resize)
     return html`
       <gds-container
         class="resize-handle"
