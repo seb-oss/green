@@ -18,7 +18,7 @@ export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
 
   // Private property for level with default value 'l3'
-  @property({ type: String })
+  @property()
   private level: string = 'l3'
 
   /**

@@ -1,11 +1,13 @@
+import { property } from 'lit/decorators.js'
+
 import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../../gds-element'
-import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
+import { GdsElement } from '../../../gds-element'
 
+import { tokens } from '../../../tokens.style'
 import ContainerCSS from './container.style'
 
 /**
@@ -31,6 +33,18 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   display = 'block'
+
+  /**
+   * Level of the container.
+   * The level of the container can be used to apply background and color styles from the corresponding level.
+   *
+   * Default value is `l1`.
+   *
+   * @property level
+   *
+   * */
+  @property()
+  level = 'l1'
 
   /**
    * Controls the `place-items` property of the container.
@@ -459,6 +473,7 @@ export class GdsContainer extends GdsElement {
   animation?: string
 
   render() {
+    console.log('Level', this.level)
     return html`<slot></slot>`
   }
 }

@@ -1,5 +1,4 @@
 import { unsafeCSS } from 'lit'
-import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
 import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
 import { VER_SUFFIX } from '../helpers/custom-element-scoping'
