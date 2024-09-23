@@ -67,6 +67,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   })
   rows = 4
 
+  // TODO: Implement this feature more efficiently
+
+  @state()
+  private lines = 4 // Default number of lines
+  private isDragging = false // Track dragging state
+  private lastMouseY = 0 // Store the last mouse Y position
+
   /**
    * The supporting text displayed between the label and the field itself
    */
@@ -101,6 +108,17 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   clearable = false
 
   /**
+   * Whether the field should be resizeable or not. If set to false, the field will not be resizeable.
+   *
+   * When true (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
+   *
+   * @property true
+   *
+   */
+  @property({ type: Boolean })
+  resize = true
+
+  /**
    * The maximum number of characters allowed in the field.
    */
   @property({ type: Number })
@@ -120,10 +138,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   variant: 'default' | 'floating-label' = 'default'
 
   @queryAsync('textarea')
-  private elInputAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
+  private elTextareaAsync!: Promise<HTMLInputElement | HTMLTextAreaElement>
 
   @query('textarea')
-  private elInput!: HTMLInputElement | HTMLTextAreaElement
+  private elTextarea!: HTMLInputElement | HTMLTextAreaElement
 
   @queryAsync('slot[name="extended-supporting-text"]')
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
@@ -134,6 +152,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   constructor() {
     super()
     constrainSlots(this)
+    this.lines = 0
   }
 
   connectedCallback(): void {
@@ -143,6 +162,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   disconnectedCallback() {
     super.disconnectedCallback()
+    this.#addResizeHandleListener()
   }
 
   render() {
@@ -153,7 +173,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   protected _getValidityAnchor() {
-    return this.elInput
+    return this.elTextarea
   }
 
   #renderDefault() {
@@ -213,6 +233,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           <gds-flex gap="xs" align-items="center" height="var(--gds-space-l)">
             ${this.#renderClearButton()} ${this.#renderSlotTrail()}
           </gds-flex>
+          ${this.#renderResizeHandle()}
         </gds-flex>
 
         <gds-flex
@@ -277,14 +298,14 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   @watch('value')
   private _setAutoHeight() {
-    this.elInputAsync.then((element) => {
+    this.elTextareaAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
     })
   }
 
   #handleFieldClick = () => {
-    this.elInputAsync.then((el) => el.focus())
+    this.elTextareaAsync.then((el) => el.focus())
   }
 
   #handleClearBtnClick = () => {
@@ -307,12 +328,76 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
+    if (!this.resize) return nothing
     return html`
       <slot
         name="trail"
         gds-allow="gds-badge"
         @slotchange=${this.#handleSlotChange}
       ></slot>
+    `
+  }
+
+  #addResizeHandleListener() {
+    const resizeHandle = this.querySelector('.resize-handle')
+    if (resizeHandle) {
+      resizeHandle.addEventListener(
+        'mousedown',
+        this.#startDragging.bind(this) as EventListener,
+      )
+    }
+  }
+
+  #startDragging(event: MouseEvent) {
+    event.preventDefault() // Prevent default behavior
+    this.isDragging = true // Set dragging state to true
+    this.lastMouseY = event.clientY // Store the initial mouse position
+    document.addEventListener('mousemove', this.#onDrag.bind(this))
+    document.addEventListener('mouseup', this.#stopDragging.bind(this))
+  }
+
+  #onDrag(event: MouseEvent) {
+    if (!this.isDragging) return // If not dragging, return
+    const deltaY = event.clientY - this.lastMouseY // Calculate the movement in Y direction
+
+    // Check if the movement exceeds the threshold (10 or 20 pixels)
+    if (Math.abs(deltaY) >= 20) {
+      if (deltaY > 0) {
+        // Dragging down, increase lines
+        this.lines += 1
+      } else {
+        // Dragging up, decrease lines
+        this.lines = Math.max(1, this.lines - 1) // Ensure lines do not go below 1
+      }
+
+      this.elTextareaAsync.then((element) => {
+        element?.style.setProperty('--_lines', this.lines.toString())
+      })
+      console.log(`Current lines: ${this.lines}`) // For debugging
+
+      // Update lastMouseY to the current position
+      this.lastMouseY = event.clientY
+    }
+  }
+
+  #stopDragging() {
+    this.isDragging = false // Set dragging state to false
+    document.removeEventListener('mousemove', this.#onDrag.bind(this))
+    document.removeEventListener('mouseup', this.#stopDragging.bind(this))
+  }
+
+  #renderResizeHandle() {
+    return html`
+      <gds-container
+        class="resize-handle"
+        position="absolute"
+        inset="auto auto -10px 0"
+        width="100%"
+        height="20px"
+        cursor="row-resize"
+        z-index="2"
+        @mousedown=${this.#startDragging}
+      ></gds-container>
     `
   }
 
