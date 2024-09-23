@@ -121,7 +121,6 @@ export const styles = css`
       &:hover,
       &:active {
         &::before {
-          background: var(--gds-color-l3-border-primary);
           width: 22px;
           opacity: 1;
           height: 1px;
@@ -130,7 +129,7 @@ export const styles = css`
       &::before {
         content: '';
         position: absolute;
-        background: var(--gds-color-l3-border-primary);
+        background: currentColor;
         inset: 0;
         margin-inline: auto;
         height: 0px;
