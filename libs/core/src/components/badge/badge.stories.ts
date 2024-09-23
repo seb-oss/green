@@ -15,7 +15,24 @@ import '../icon/icons/triangle-exclamation.js'
 /**
  * A badge is a small status or notification indicator that can be used to display a message or status.
  *
- * Variants: `information`, `notice`, `positive`, `warning`, `negative`
+ * Features:
+ * - **Variants**: The badge supports multiple variants including `information`, `notice`, `positive`, `warning`, and `negative`, allowing for different contextual uses.
+ * - **Slots**: The badge includes a `lead` slot for adding leading content such as icons, enhancing the visual representation.
+ * - **Disabled State**: The badge can be disabled, making it non-interactive and visually indicating its disabled state.
+ * - **Size Control**: The badge size can be controlled via the `size` property, with options for `default` and `small`.
+ *
+ * Example usage:
+ *
+ * ```html
+ * <gds-badge variant="positive">
+ *   <gds-icon-rocket slot="lead"></gds-icon-rocket>
+ *   Launch
+ * </gds-badge>
+ * <gds-badge variant="warning" disabled>
+ *   <gds-icon-arrow-rotate-counter-clockwise slot="lead"></gds-icon-arrow-rotate-counter-clockwise>
+ *   Discard
+ * </gds-badge>
+ * ```
  */
 const meta: Meta = {
   title: 'Docs/Components/Badge',
@@ -34,58 +51,82 @@ type Story = StoryObj
  */
 export const Variants: Story = {
   name: 'Variants',
-  parameters: {
-    docs: {
-      source: { format: true, type: 'dynamic' },
-    },
-    controls: { expanded: true },
-  },
   render: (args) => html`
-    <gds-grid columns="2" gap="2xl">
-      <gds-flex gap="xl" flex-direction="column" width="20ch">
+    <gds-flex
+      flex-direction="column"
+      justify-content="center"
+      gap="4xl"
+      padding="4xl"
+    >
+      <gds-flex flex-direction="column" gap="m">
         <gds-flex flex-direction="column" gap="s">
           <gds-text>Icon</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
-        <gds-badge variant="information">
-          <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
-          Information
-        </gds-badge>
-        <gds-badge variant="notice">
-          <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
-          Notice
-        </gds-badge>
-        <gds-badge variant="positive">
-          <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
-          Positive
-        </gds-badge>
-        <gds-badge variant="warning">
-          <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
-          Warning
-        </gds-badge>
-        <gds-badge variant="negative">
-          <gds-icon-triangle-exclamation slot="lead">
-          </gds-icon-triangle-exclamation>
-          Negative
-        </gds-badge>
+        <gds-flex gap="xl">
+          <gds-badge variant="information">
+            <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
+            Information
+          </gds-badge>
+          <gds-badge variant="notice">
+            <gds-icon-circle-info slot="lead"></gds-icon-circle-info>
+            Notice
+          </gds-badge>
+          <gds-badge variant="positive">
+            <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
+            Positive
+          </gds-badge>
+          <gds-badge variant="warning">
+            <gds-icon-circle-check slot="lead"></gds-icon-circle-check>
+            Warning
+          </gds-badge>
+          <gds-badge variant="negative">
+            <gds-icon-triangle-exclamation slot="lead">
+            </gds-icon-triangle-exclamation>
+            Negative
+          </gds-badge>
+          <gds-badge variant="negative" disabled>
+            <gds-icon-triangle-exclamation slot="lead">
+            </gds-icon-triangle-exclamation>
+            Disabled
+          </gds-badge>
+        </gds-flex>
       </gds-flex>
-      <gds-flex gap="xl" flex-direction="column" width="20ch">
+      <gds-flex flex-direction="column" gap="m">
         <gds-flex flex-direction="column" gap="s">
           <gds-text>Basic</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
-        <gds-badge variant="information"> Information </gds-badge>
-        <gds-badge variant="notice"> Notice </gds-badge>
-        <gds-badge variant="positive"> Positive </gds-badge>
-        <gds-badge variant="warning"> Warning </gds-badge>
-        <gds-badge variant="negative"> Negative </gds-badge>
+        <gds-flex gap="xl">
+          <gds-badge variant="information"> Information </gds-badge>
+          <gds-badge variant="notice"> Notice </gds-badge>
+          <gds-badge variant="positive"> Positive </gds-badge>
+          <gds-badge variant="warning"> Warning </gds-badge>
+          <gds-badge variant="negative"> Negative </gds-badge>
+          <gds-badge variant="negative" disabled> Disabled </gds-badge>
+        </gds-flex>
       </gds-flex>
-    </gds-grid>
+    </gds-flex>
   `,
 }
 
 /**
- * `gds-badge` has a lead slot that can be used to add leading content to the badge like `gds-icon`.
+ * The `gds-badge` component includes a `lead` slot that allows for the addition of leading content, such as icons.
+ *
+ * This slot can be used to enhance the visual representation of the badge by including elements like `gds-icon`.
+ *
+ * Example usage:
+ *
+ * ```html
+ * <gds-badge variant="positive">
+ *   <gds-icon-rocket slot="lead"></gds-icon-rocket>
+ *   Launch
+ * </gds-badge>
+ * <gds-badge variant="warning">
+ *   <gds-icon-chevron-up slot="lead"></gds-icon-chevron-up>
+ *   Discard
+ * </gds-badge>
+ * ```
  */
 export const Lead: Story = {
   name: 'Lead',
@@ -109,6 +150,12 @@ export const Lead: Story = {
 
 /**
  * `gds-badge` has a trail slot that can be used to add additional content to the badge.
+ *
+ * ```html
+ * <gds-badge>
+ *  <span slot="trail">...</span>
+ * </gds-badge>
+ * ```
  */
 export const Trail: Story = {
   name: 'Trail',
@@ -119,13 +166,73 @@ export const Trail: Story = {
     <gds-flex gap="xl">
       <gds-badge variant="positive">
         <gds-icon-plus-small slot="lead"></gds-icon-plus-small>
-        Information
-        <span slot="trail">%</span>
+        10,000.00
+        <span slot="trail">SEK</span>
       </gds-badge>
       <gds-badge variant="negative">
         <gds-icon-minus-small slot="lead"></gds-icon-minus-small>
-        Information
-        <span slot="trail">%</span>
+        142.00
+        <span slot="trail">EUR</span>
+      </gds-badge>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Defines the size of the badge.
+ * The default value is `default`.
+ *
+ * @property {string} size - The size of the badge, which can be either 'default' or 'small'.
+ *
+ * ```html
+ * <gds-badge size="small">...</gds-badge>
+ * ```
+ */
+export const Size: Story = {
+  name: 'Size',
+  render: (args) => html`
+    <gds-flex gap="4xl">
+      <gds-flex flex-direction="column" gap="xl">
+        <gds-badge variant="information" size="small">140</gds-badge>
+        <gds-badge variant="notice" size="small">140</gds-badge>
+        <gds-badge variant="positive" size="small">140</gds-badge>
+        <gds-badge variant="warning" size="small">140</gds-badge>
+        <gds-badge variant="negative" size="small">140</gds-badge>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="xl">
+        <gds-badge variant="information" size="small">kr</gds-badge>
+        <gds-badge variant="notice" size="small">kr</gds-badge>
+        <gds-badge variant="positive" size="small">kr</gds-badge>
+        <gds-badge variant="warning" size="small">kr</gds-badge>
+        <gds-badge variant="negative" size="small">kr</gds-badge>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Indicates whether the badge is disabled.
+ * When set to `true`, the badge will appear in a disabled state and will not be interactive.
+ *
+ * @property {boolean} disabled - Controls the disabled state of the badge.
+ *
+ * ```html
+ * <gds-badge disabled>...</gds-badge>
+ * <gds-badge disabled>...</gds-badge>
+ * ```
+ */
+export const Disabled: Story = {
+  name: 'Disabled',
+  render: (args) => html`
+    <gds-flex gap="xl">
+      <gds-badge variant="positive" disabled>
+        <gds-icon-rocket slot="lead"></gds-icon-rocket>
+        Launch
+      </gds-badge>
+      <gds-badge variant="warning" disabled>
+        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
+        </gds-icon-arrow-rotate-counter-clockwise>
+        Discard
       </gds-badge>
     </gds-flex>
   `,

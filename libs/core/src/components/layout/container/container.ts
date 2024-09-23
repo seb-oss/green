@@ -376,6 +376,12 @@ export class GdsContainer extends GdsElement {
   @styleExpressionProperty()
   padding?: string
 
+  @styleExpressionProperty()
+  'padding-inline'?: string
+
+  @styleExpressionProperty()
+  'padding-block'?: string
+
   /**
    * Controls the margin of the text.
    * Supports all the default margin values.
@@ -505,6 +511,15 @@ export class GdsContainer extends GdsElement {
   'min-height'?: string
 
   /**
+   * Controls the `block-size` property of the flex.
+   * Supports only tokens.
+   *
+   * @property block-size
+   */
+  @styleExpressionProperty()
+  'block-size'?: string
+
+  /**
    * Controls the width property of the flex.
    * Supports all valid CSS height values.
    *
@@ -536,6 +551,15 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   'min-width'?: string
+
+  /**
+   * Controls the `inline-size` property of the flex.
+   * Supports only token
+   *
+   * @property inline-size
+   */
+  @styleExpressionProperty()
+  'inline-size'?: string
 
   /**
    * Controls the cursor property of the flex.
@@ -631,6 +655,66 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   animation?: string
+
+  /**
+   * Controls the size of the text.
+   * Supports all typography size tokens from the design system.
+   *
+   * You can apply size like this:
+   * ```html
+   * <gds-container font-size="body-m"></gds-container>
+   * ```
+   *
+   * These are the available values you can use to define size:
+   *
+   * `heading-xl`,
+   * `heading-l`,
+   * `heading-m`,
+   * `heading-s`,
+   * `heading-xs`,
+   * `heading-2xs`,
+   * `detail-m`,
+   * `detail-s`,
+   * `detail-xs`,
+   * `body-l`,
+   * `body-m`,
+   * `body-s`,
+   * `display-2xl`,
+   * `display-xl`,
+   * `display-l`,
+   * `display-m`,
+   * `display-s `,
+   * `preamble-2xl`,
+   * `preamble-xl`,
+   * `preamble-l`,
+   * `preamble-m`,
+   * `preamble-s`,
+   * `preamble-xs`,
+   *
+   * @property 'font-size'
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+    styleTemplate: (prop, values) => {
+      const size = values[0]
+      const styleSize = `font-size: var(--gds-text-size-${size});`
+      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      return styleSize + styleLine
+    },
+  })
+  'font-size'?: string
+
+  /**
+   * Controls the `font-weight` of the text.
+   * Supports all the weigh tokens.
+   *
+   * @property weight
+   */
+  @styleExpressionProperty({
+    property: 'font-weight',
+    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+  })
+  'font-weight'?: string
 
   render() {
     return html`<slot></slot>`
