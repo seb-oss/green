@@ -184,7 +184,11 @@ export class GdsInput extends GdsFormControlElement<string> {
           align-items="center"
           justify-content="center"
           gap="${this.size === 'small' ? '2xs' : 'xs'}"
-          padding="${this.size === 'small' ? 'xs s' : 'xs m'}"
+          padding="${this.size === 'small'
+            ? 'xs s'
+            : this.#renderSlotTrail()
+              ? 'xs xs xs m'
+              : 'xs m'}"
           min-height="${this.size === 'small'
             ? 'var(--gds-space-xl)'
             : 'var(--gds-space-3xl)'}"
