@@ -28,10 +28,6 @@ import '../icon/icons/triangle-exclamation.js'
  *   <gds-icon-rocket slot="lead"></gds-icon-rocket>
  *   Launch
  * </gds-badge>
- * <gds-badge variant="warning" disabled>
- *   <gds-icon-arrow-rotate-counter-clockwise slot="lead"></gds-icon-arrow-rotate-counter-clockwise>
- *   Discard
- * </gds-badge>
  * ```
  */
 const meta: Meta = {
