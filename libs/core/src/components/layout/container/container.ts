@@ -434,7 +434,29 @@ export class GdsContainer extends GdsElement {
   @styleExpressionProperty({
     valueTemplate: (v) => v,
   })
-  'transition'?: string
+  transition?: string
+
+  /**
+   * Controls the `transition-behavior` property of the flex.
+   * Supports all valid CSS `transition-behavior` values.
+   *
+   * @property transition-behavior
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'transition-behavior'?: string
+
+  /**
+   * Controls the `animation` property of the flex.
+   * Supports all valid CSS `animation` values.
+   *
+   * @property animation
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  animation?: string
 
   render() {
     return html`<slot></slot>`

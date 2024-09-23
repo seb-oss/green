@@ -99,6 +99,19 @@ export const styles = css`
       min-width: var(--gds-space-l);
       display: flex;
     }
+
+    @supports (display: flex) {
+      .extended-supporting-text {
+        opacity: 1;
+        translate: 0;
+        transition: var(--_transition);
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 2px;
+        }
+      }
+    }
   }
 
   @layer simplified {

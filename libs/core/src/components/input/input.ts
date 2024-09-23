@@ -372,19 +372,17 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderExtendedSupportingText() {
+    // animation="ExtendedSupportTextFade 668ms ease forwards"
     return html`
       <gds-card
-        display="${this.showExtendedSupportingText ? 'block' : 'none'}"
         class="extended-supporting-text"
         padding="s m"
         border-radius="xs"
         background="l3-background-secondary"
         color="l3-content-tertiary"
+        display="${this.showExtendedSupportingText ? 'block' : 'none'}"
       >
-        <gds-text
-          font-size="body-s"
-          display="${this.showExtendedSupportingText ? 'block' : 'none'}"
-        >
+        <gds-text font-size="body-s">
           <slot
             name="extended-supporting-text"
             @slotchange=${() => this.requestUpdate()}
