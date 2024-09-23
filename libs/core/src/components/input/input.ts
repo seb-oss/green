@@ -118,7 +118,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
   @state()
-  leadSlotOccupied = false
+  trailSlotOccupied = false
 
   constructor() {
     super()
@@ -186,7 +186,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           gap="${this.size === 'small' ? '2xs' : 'xs'}"
           padding="${this.size === 'small'
             ? 'xs s'
-            : this.#renderSlotTrail()
+            : !this.trailSlotOccupied
               ? 'xs xs xs m'
               : 'xs m'}"
           min-height="${this.size === 'small'
@@ -313,7 +313,25 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
-    return html` <slot name="trail" gds-allow="gds-badge"></slot> `
+    return html`
+      <slot
+        name="trail"
+        gds-allow="gds-badge"
+        @slotchange=${this.#handleSlotChange}
+      ></slot>
+    `
+  }
+
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.trailSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
   }
 
   #renderNativeInput() {

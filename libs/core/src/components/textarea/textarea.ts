@@ -129,7 +129,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
 
   @state()
-  leadSlotOccupied = false
+  trailSlotOccupied = false
 
   constructor() {
     super()
@@ -192,7 +192,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           align-items="flex-start"
           justify-content="center"
           gap="xs"
-          padding="s s s m"
+          padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
           border-radius="xs"
           .background=${this.disabled
             ? 'l3-background-disabled'
@@ -307,11 +307,25 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
-    return html` <slot name="trail" gds-allow="gds-badge"></slot> `
+    return html`
+      <slot
+        name="trail"
+        gds-allow="gds-badge"
+        @slotchange=${this.#handleSlotChange}
+      ></slot>
+    `
   }
 
-  #renderNativeInput() {
-    return html` ... `
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.trailSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
   }
 
   #renderNativeTextarea() {
