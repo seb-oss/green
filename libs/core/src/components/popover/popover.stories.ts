@@ -66,7 +66,7 @@ export const Customization: Story = {
     html`<gds-container width="700px" height="250px"><gds-card
         display="flex"
         width="720px"
-        border="0 0 4xs/l2-border-primary 0"
+        border="0 0 4xs/primary 0"
         position="fixed"
         background="base-white"
         style="left: 0; top: 0; z-index: 1000;"

@@ -258,7 +258,7 @@ export const Lines: Story = {
  *
  * The `gds-text` component has a `color` property that will change the text color based on the specified color token.
  *
- * e.g. `<gds-text color="l1-content-primary"></gds-text>`
+ * e.g. `<gds-text level="1" color="primary"></gds-text>`
  *
  */
 
@@ -268,35 +268,38 @@ export const Color: Story = {
     <gds-flex flex-direction="column" gap="m">
       <gds-theme color-scheme="dark">
         <gds-flex
-          background="l1-background-primary"
+          level="1"
+          background="primary"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text color="l1-content-primary" font-size="body-s">
+          <gds-text level="1" color="primary" font-size="body-s">
             Color: Content Primary
           </gds-text>
         </gds-flex>
         <gds-flex
-          background="l1-background-secondary"
+          level="1"
+          background="secondary"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text color="l1-content-secondary" font-size="body-m">
+          <gds-text level="1" color="secondary" font-size="body-m">
             Color: Content Secondary
           </gds-text>
         </gds-flex>
         <gds-flex
-          background="l1-background-tertiary"
+          level="1"
+          background="tertiary"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text color="l1-content-tertiary" font-size="body-l">
+          <gds-text level="1" color="tertiary" font-size="body-l">
             Color: Content Tertiary
           </gds-text>
         </gds-flex>

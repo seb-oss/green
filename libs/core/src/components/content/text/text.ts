@@ -20,6 +20,17 @@ export class GdsText extends GdsElement {
   static styles = [tokens, TextCSS]
 
   /**
+   * The level of the container can be used to apply background and color styles from the corresponding level.
+   *
+   * Default value for `gds-container` is set to `2`.
+   *
+   * @property level
+   *
+   * */
+  @property()
+  level = '2'
+
+  /**
    * Controls the tag of the text.
    * Supports all valid HTML tags like h1, h2, h3, h4, h5, h6, p, span, etc.
    *
@@ -212,12 +223,12 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'color',
     selector: '[tag]',
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsText).level}-content-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-color-${colorName})`
+        return `var(--gds-color-${'l' + (this as GdsText).level}-content-${colorName})`
       }
     },
   })

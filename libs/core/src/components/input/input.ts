@@ -148,16 +148,17 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderDefault() {
     return html`
       <gds-flex
+        level="3"
         flex-direction="column"
         width="100%"
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
         user-select="${this.disabled ? 'none' : 'auto'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
-          ? 'l3-content-disabled'
+          ? 'disabled'
           : this.invalid
-            ? 'l3-content-negative'
-            : 'l3-content-tertiary'}"
+            ? 'negative'
+            : 'tertiary'}"
       >
         <gds-flex
           class="head"
@@ -180,6 +181,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         ${this.#renderExtendedSupportingText()}
 
         <gds-flex
+          level="3"
           position="relative"
           align-items="center"
           justify-content="center"
@@ -197,15 +199,15 @@ export class GdsInput extends GdsFormControlElement<string> {
             : 'var(--gds-space-3xl)'}}"
           border-radius="xs"
           .background=${this.disabled
-            ? 'l3-background-disabled'
+            ? 'disabled'
             : this.invalid
-              ? 'l3-background-negative-secondary'
-              : 'l3-background-secondary'}
+              ? 'negative-secondary'
+              : 'secondary'}
           .border=${this.disabled
             ? ''
             : this.invalid
-              ? '4xs/l3-border-negative'
-              : '4xs/l3-border-secondary'}
+              ? '4xs/negative'
+              : '4xs/secondary'}
           class="field ${this.invalid ? 'invalid' : ''}"
           @click=${this.#handleFieldClick}
           cursor="text"
@@ -357,12 +359,13 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderSupportingText() {
     return html`
       <gds-text
+        level="3"
         font-size="${this.size === 'small' ? 'detail-s' : 'detail-m'}"
         .color="${this.disabled
-          ? 'l3-content-disabled'
+          ? 'disabled'
           : this.invalid
-            ? 'l3-content-negative'
-            : 'l3-content-tertiary'}"
+            ? 'negative'
+            : 'tertiary'}"
         class="supporting-text"
         id="supporting-text"
       >
@@ -375,11 +378,12 @@ export class GdsInput extends GdsFormControlElement<string> {
     // animation="ExtendedSupportTextFade 668ms ease forwards"
     return html`
       <gds-card
+        level="3"
         class="extended-supporting-text"
         padding="s m"
         border-radius="xs"
-        background="l3-background-secondary"
-        color="l3-content-tertiary"
+        background="secondary"
+        color="tertiary"
         display="${this.showExtendedSupportingText ? 'block' : 'none'}"
       >
         <gds-text font-size="body-s">

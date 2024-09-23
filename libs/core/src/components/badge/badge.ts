@@ -17,9 +17,16 @@ import BadgeCSS from './badge.style'
 export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
 
-  // Private property for level with default value 'l3'
+  /**
+   * The level of the container can be used to apply background and color styles from the corresponding level.
+   *
+   * Default value for `gds-container` is set to `2`.
+   *
+   * @property level
+   *
+   * */
   @property()
-  private level: string = 'l3'
+  level = '3'
 
   /**
    * Controls the variant of the badge.
@@ -43,8 +50,8 @@ export class GdsBadge extends GdsElement {
    * @returns The CSS style string.
    */
   private generateColorStyles(level: string, variant: string): string {
-    const BG = `background-color: var(--gds-color-${level}-background-${variant}-badge);`
-    const CL = `color: var(--gds-color-${level}-content-${variant});`
+    const BG = `background-color: var(--gds-color-${'l' + level}-background-${variant}-badge);`
+    const CL = `color: var(--gds-color-${'l' + level}-content-${variant});`
     return `${BG} ${CL}`
   }
 

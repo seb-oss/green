@@ -184,13 +184,14 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         flex-direction="column"
         width="100%"
         gap="xs"
+        level="3"
         user-select="${this.disabled ? 'none' : 'auto'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
-          ? 'l3-content-disabled'
+          ? 'disabled'
           : this.invalid
-            ? 'l3-content-negative'
-            : 'l3-content-tertiary'}"
+            ? 'negative'
+            : 'tertiary'}"
       >
         <gds-flex
           class="head"
@@ -214,18 +215,19 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           align-items="flex-start"
           justify-content="center"
           gap="xs"
+          level="3"
           padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
           border-radius="xs"
           .background=${this.disabled
-            ? 'l3-background-disabled'
+            ? 'disabled'
             : this.invalid
-              ? 'l3-background-negative-secondary'
-              : 'l3-background-secondary'}
+              ? 'negative-secondary'
+              : 'secondary'}
           .border=${this.disabled
             ? ''
             : this.invalid
-              ? '4xs/l3-border-negative'
-              : '4xs/l3-border-secondary'}
+              ? '4xs/negative'
+              : '4xs/secondary'}
           class="field ${this.invalid ? 'invalid' : ''}"
           @click=${this.#handleFieldClick}
           cursor="text"
@@ -440,12 +442,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   #renderSupportingText() {
     return html`
       <gds-text
+        level="3"
         font-size="detail-m"
         .color="${this.disabled
-          ? 'l3-content-disabled'
+          ? 'disabled'
           : this.invalid
-            ? 'l3-content-negative'
-            : 'l3-content-tertiary'}"
+            ? 'negative'
+            : 'tertiary'}"
         class="supporting-text"
         id="supporting-text"
       >
@@ -457,12 +460,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   #renderExtendedSupportingText() {
     return html`
       <gds-card
+        level="3"
         display="${this.showExtendedSupportingText ? 'block' : 'none'}"
         class="extended-supporting-text"
         padding="s m"
         border-radius="xs"
-        background="l3-background-secondary"
-        color="l3-content-tertiary"
+        background="secondary"
+        color="tertiary"
       >
         <gds-text
           font-size="body-s"

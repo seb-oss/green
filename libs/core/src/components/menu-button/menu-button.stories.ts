@@ -77,7 +77,7 @@ export const Example_menu_bar: Story = {
       display="flex"
       height="50px"
       width="700px"
-      border="0 0 4xs/l2-border-primary 0"
+      border="0 0 4xs/primary 0"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>
@@ -119,7 +119,7 @@ export const Compact_menu_bar: Story = {
     html`<gds-card
         display="flex"
         width="700px"
-        border="0 0 4xs/l2-border-primary 0"
+        border="0 0 4xs/primary 0"
         background="base-white"
       >
       <div style="flex-basis:50%;">

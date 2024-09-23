@@ -35,16 +35,15 @@ export class GdsContainer extends GdsElement {
   display = 'block'
 
   /**
-   * Level of the container.
    * The level of the container can be used to apply background and color styles from the corresponding level.
    *
-   * Default value is `l1`.
+   * Default value for `gds-container` is set to `2`.
    *
    * @property level
    *
    * */
   @property()
-  level = 'l1'
+  level = '2'
 
   /**
    * Controls the `place-items` property of the container.
@@ -75,12 +74,12 @@ export class GdsContainer extends GdsElement {
    * The above example will apply the color style of `primary`.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsContainer).level}-content-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-color-${colorName})`
+        return `var(--gds-color-${'l' + (this as GdsContainer).level}-content-${colorName})`
       }
     },
   })
@@ -100,12 +99,12 @@ export class GdsContainer extends GdsElement {
    */
 
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsContainer).level}-background-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-color-${colorName})`
+        return `var(--gds-color-${'l' + (this as GdsContainer).level}-background-${colorName})`
       }
     },
   })
@@ -136,9 +135,9 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [size, color] = v.split('/')
-      return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${color})` : 'currentColor'}`
+      return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${'l' + (this as GdsContainer).level}-border-${color})` : 'currentColor'}`
     },
     styleTemplate: (_prop, values) => {
       const top = values[0]
@@ -473,7 +472,6 @@ export class GdsContainer extends GdsElement {
   animation?: string
 
   render() {
-    console.log('Level', this.level)
     return html`<slot></slot>`
   }
 }

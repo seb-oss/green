@@ -38,11 +38,11 @@ export class GdsMask extends GdsFlex {
 
   @styleExpressionProperty({
     selector: '[part="mask"]',
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [backgroundColor, backgroundColorAlpha] = v.split('/')
       const background = backgroundColorAlpha
-        ? `color-mix(in srgb, var(--gds-color-${backgroundColor}) ${parseFloat(backgroundColorAlpha) * 100}%, transparent 0%)`
-        : `var(--gds-color-${backgroundColor})`
+        ? `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsFlex).level}-background-${backgroundColor}) ${parseFloat(backgroundColorAlpha) * 100}%, transparent 0%)`
+        : `var(--gds-color-${'l' + (this as GdsFlex).level}-background-${backgroundColor})`
       return background
     },
   })

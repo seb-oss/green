@@ -95,7 +95,7 @@ export const Card: Story = {
       <gds-card
         shadow="l"
         border-radius="m"
-        border="3xs/l2-border-primary"
+        border="3xs/primary"
         overflow="hidden"
       >
         <gds-flex gap="m" flex-direction="column" padding="s">
@@ -144,7 +144,7 @@ export const Card: Story = {
           ></gds-video>
           <gds-mask
             mask-image="top"
-            background-color="l2-background-tertiary/0.4"
+            background-color="tertiary/0.4"
             position="absolute"
           >
             <gds-flex
@@ -154,7 +154,7 @@ export const Card: Story = {
               gap="l"
               height="100%"
               width="100%"
-              color="l2-content-tertiary"
+              color="tertiary"
             >
               <gds-container>
                 <gds-text font-size="body-l">Jane Doe</gds-text>
@@ -199,7 +199,7 @@ export const Card: Story = {
  * To speficy the color of the border you can use the color tokens like this:
  *
  * ```html
- * <gds-container border="4xs/l2-border-primary"></gds-container>
+ * <gds-container border="4xs/primary"></gds-container>
  * ```
  */
 export const CardBorder: Story = {
@@ -269,18 +269,14 @@ export const CardRadius: Story = {
   name: 'Border Radius',
   render: (args) =>
     html`<gds-grid columns="8" gap="l">
-      <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
-        padding="xl"
-      >
+      <gds-card background="tertiary" color="tertiary" padding="xl">
         <gds-flex display="flex" align-items="center" justify-content="center">
           0
         </gds-flex>
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="2xs"
       >
@@ -289,8 +285,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="0 xs 0 xs"
       >
@@ -299,8 +295,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="0 s 0 s"
       >
@@ -309,8 +305,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="0 m 0 m"
       >
@@ -319,8 +315,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="0 l 0 l"
       >
@@ -329,8 +325,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="xl"
       >
@@ -339,8 +335,8 @@ export const CardRadius: Story = {
         >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
         border-radius="max"
       >
@@ -463,11 +459,7 @@ export const CardBackground: Story = {
           <gds-button>Button</gds-button>
         </gds-flex>
       </gds-card>
-      <gds-card
-        shadow="l{m} m{m} s{m}"
-        border-radius="xs"
-        background="l2-border-primary"
-      >
+      <gds-card shadow="l{m} m{m} s{m}" border-radius="xs" background="primary">
         <gds-flex
           gap="l"
           align-items="flex-start"

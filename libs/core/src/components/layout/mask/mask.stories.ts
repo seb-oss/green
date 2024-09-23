@@ -56,7 +56,7 @@ export const Card: Story = {
             ></gds-img>
             <gds-mask
               mask-image="top"
-              background-color="l2-background-tertiary/0.9"
+              background-color="tertiary/0.9"
               z-index="2"
               position="absolute"
               inset="50% 0 0 0"
@@ -101,7 +101,7 @@ export const Card: Story = {
           ></gds-video>
           <gds-mask
             mask-image="top"
-            background-color="l2-background-tertiary/0.6"
+            background-color="tertiary/0.6"
             position="absolute"
           >
             <gds-flex
@@ -111,7 +111,7 @@ export const Card: Story = {
               gap="l"
               height="100%"
               width="100%"
-              color="l2-content-tertiary"
+              color="tertiary"
             >
               <gds-container>
                 <gds-text tag="h3"> Sustainable Practices </gds-text>
