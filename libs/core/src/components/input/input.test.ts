@@ -148,7 +148,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             clearable
           >
             <gds-icon name="mail" slot="lead"></gds-icon>
-            <gds-badge slot="trail" variant="surface">kr</gds-badge>
+            <gds-badge slot="trail" variant="information">kr</gds-badge>
             <span slot="extended-supporting-text">
               Extended supporting text goes here.
               <a href="#">Can contain links</a>

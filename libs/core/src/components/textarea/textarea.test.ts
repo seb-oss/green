@@ -8,24 +8,27 @@ import { clickOnElement } from '../../utils/testing'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/input/index.js'
-import type { GdsInput } from '@sebgroup/green-core/components/input/index.js'
+import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 for (const variant of ['default' /*, 'floating-label' */] as const) {
-  describe('<gds-input>', () => {
+  describe('<gds-textarea>', () => {
     describe('Rendering', () => {
       it('should render a label', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" label="My label"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            label="My label"
+          ></gds-textarea>`,
         )
         const labelEl = el.shadowRoot?.querySelector('label')
         expect(labelEl).to.exist
         expect(labelEl?.textContent).to.contain('My label')
       })
       it('should pass through the type attribute', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" type="email"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}" type="email"></gds-textarea>`,
         )
         const inputEl = el.shadowRoot?.querySelector('input')
         expect(inputEl?.type).to.equal('email')
@@ -33,21 +36,24 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
     })
     describe('API', () => {
       it('should set the value', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         el.value = 'My value'
         expect(el.value).to.equal('My value')
       })
       it('should set the name', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" name="my-name"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            name="my-name"
+          ></gds-textarea>`,
         )
         expect(el.name).to.equal('my-name')
       })
       it('should fire a change event when the value has changed and focus has shifted away', async () => {
         const el = await fixture<Ht>(
-          html`<gds-input variant="${variant}"></gds-input><input />`,
+          html`<gds-textarea variant="${variant}"></gds-textarea><input />`,
         )
         const changeSpy = sinon.spy()
         el.addEventListener('change', changeSpy)
@@ -59,8 +65,8 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(changeSpy).to.have.been.calledOnce
       })
       it('should fire an input event when the value changes', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         const inputSpy = sinon.spy()
         el.addEventListener('input', inputSpy)
@@ -70,8 +76,11 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(inputSpy).to.have.been.calledOnce
       })
       it('should show remaining characters when maxlength is set', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" maxlength="10"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            maxlength="10"
+          ></gds-textarea>`,
         )
         const remainingCharactersBadgeEl = el.shadowRoot?.querySelector(
           '.foot [gds-element=gds-badge]',
@@ -86,12 +95,12 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(remainingCharactersBadgeEl?.textContent).to.equal('-5')
       })
       it('should render a clear button when clearable is set and value is non-empty', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
             variant="${variant}"
             clearable
             value="My value"
-          ></gds-input>`,
+          ></gds-textarea>`,
         )
         const clearButtonEl = el.shadowRoot?.querySelector(
           '.field [label="Clear input"]',
@@ -99,12 +108,12 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(clearButtonEl).to.exist
       })
       it('should fire a gds-ui-state event when the extended supporting text is toggled', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}">
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}">
             <span slot="extended-supporting-text"
               >Extended supporting text goes here.</span
             >
-          </gds-input>`,
+          </gds-textarea>`,
         )
         await aTimeout(10)
 
@@ -121,12 +130,12 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
 
     describe('Interactions', async () => {
       it('should clear the value when clicking on the clear button', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
             variant="${variant}"
             clearable
             value="My value"
-          ></gds-input>`,
+          ></gds-textarea>`,
         )
         const clearButtonEl = el.shadowRoot?.querySelector(
           '.field [label="Clear input"]',
@@ -138,8 +147,8 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
 
     describe('Accessibility', () => {
       it('should pass axe smoketest', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
             variant="${variant}"
             label="My label"
             value="Not empty"
@@ -148,29 +157,32 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             clearable
           >
             <gds-icon name="mail" slot="lead"></gds-icon>
-            <gds-badge slot="trail" variant="surface">kr</gds-badge>
+            <gds-badge slot="trail" variant="information">kr</gds-badge>
             <span slot="extended-supporting-text">
               Extended supporting text goes here.
               <a href="#">Can contain links</a>
             </span>
-          </gds-input>`,
+          </gds-textarea>`,
         )
         await expect(el).to.be.accessible()
       })
       it('label should have a for attribute that matches the input id', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" label="My label"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            label="My label"
+          ></gds-textarea>`,
         )
         const labelEl = el.shadowRoot?.querySelector('label')
         const inputEl = el.shadowRoot?.querySelector('input')
         expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
       })
       it('should have a aria-describedby attribute that matches the supporting text id', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
             variant="${variant}"
             supporting-text="My supporting text"
-          ></gds-input>`,
+          ></gds-textarea>`,
         )
         const inputEl = el.shadowRoot?.querySelector('input')
         const supportingTextEl =
@@ -180,22 +192,25 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
       })
       it('should focus when clicking on the field', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         await clickOnElement(el.shadowRoot?.querySelector('.field') as Element)
         expect(document.activeElement).to.equal(el)
       })
       it('should focus when clicking on the label', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}" label="My label"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            label="My label"
+          ></gds-textarea>`,
         )
         await clickOnElement(el.shadowRoot?.querySelector('label') as Element)
         expect(document.activeElement).to.equal(el)
       })
       it('should focus when calling focus()', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input variant="${variant}"></gds-input>`,
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
         el.focus()
         expect(document.activeElement).to.equal(el)
