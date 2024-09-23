@@ -74,13 +74,42 @@ export class GdsContainer extends GdsElement {
    * The above example will apply the color style of `primary`.
    */
   @styleExpressionProperty({
-    valueTemplate: function (v) {
-      const [colorName, transparency] = v.split('/')
-      if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsContainer).level}-content-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
-      } else {
-        return `var(--gds-color-${'l' + (this as GdsContainer).level}-content-${colorName})`
+    valueTemplate: function (v: string) {
+      const [colorInput, transparency] = v.split('/')
+
+      // Helper function to determine if a color is custom
+      const isCustomColor = (color: string): boolean => {
+        const trimmedColor = color.trim()
+        return (
+          trimmedColor.startsWith('#') || // Hex color
+          trimmedColor.startsWith('rgb(') || // RGB color
+          trimmedColor.startsWith('rgba(') || // RGBA color
+          trimmedColor.startsWith('hsl(') || // HSL color
+          trimmedColor.startsWith('hsla(') // HSLA color
+        )
       }
+
+      // Function to construct the CSS variable string
+      const constructCssVariable = (
+        level: string,
+        colorName: string,
+      ): string => {
+        return `var(--gds-color-l${level}-content-${colorName})`
+      }
+
+      // Determine the color value
+      const getColorValue = (color: string, transparency?: string): string => {
+        if (isCustomColor(color)) {
+          return transparency
+            ? `color-mix(in srgb, ${color} ${parseFloat(transparency) * 100}%, transparent 0%)`
+            : color // Use the custom color directly
+        } else {
+          return constructCssVariable((this as GdsContainer).level, color)
+        }
+      }
+
+      // Return the computed color value
+      return getColorValue(colorInput, transparency)
     },
   })
   color?: string
@@ -99,13 +128,42 @@ export class GdsContainer extends GdsElement {
    */
 
   @styleExpressionProperty({
-    valueTemplate: function (v) {
-      const [colorName, transparency] = v.split('/')
-      if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsContainer).level}-background-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
-      } else {
-        return `var(--gds-color-${'l' + (this as GdsContainer).level}-background-${colorName})`
+    valueTemplate: function (v: string) {
+      const [colorInput, transparency] = v.split('/')
+
+      // Helper function to determine if a color is custom
+      const isCustomColor = (color: string): boolean => {
+        const trimmedColor = color.trim()
+        return (
+          trimmedColor.startsWith('#') || // Hex color
+          trimmedColor.startsWith('rgb(') || // RGB color
+          trimmedColor.startsWith('rgba(') || // RGBA color
+          trimmedColor.startsWith('hsl(') || // HSL color
+          trimmedColor.startsWith('hsla(') // HSLA color
+        )
       }
+
+      // Function to construct the CSS variable string
+      const constructCssVariable = (level: string, color: string): string => {
+        return `var(--gds-color-l${level}-background-${color})`
+      }
+
+      // Determine the background color
+      const getBackgroundColor = (
+        color: string,
+        transparency?: string,
+      ): string => {
+        if (isCustomColor(color)) {
+          return transparency
+            ? `color-mix(in srgb, ${color} ${parseFloat(transparency) * 100}%, transparent 0%)`
+            : color // Use the custom color directly
+        } else {
+          return constructCssVariable((this as GdsContainer).level, color)
+        }
+      }
+
+      // Return the computed background color
+      return getBackgroundColor(colorInput, transparency)
     },
   })
   background?: string
@@ -135,19 +193,122 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: function (v) {
+    valueTemplate: function (v: string) {
       const [size, color] = v.split('/')
-      return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${'l' + (this as GdsContainer).level}-border-${color})` : 'currentColor'}`
+
+      // Helper function to determine if a color is custom
+      const isCustomColor = (color: string): boolean => {
+        const trimmedColor = color.trim()
+        return (
+          trimmedColor.startsWith('#') || // Hex color
+          trimmedColor.startsWith('rgb(') || // RGB color
+          trimmedColor.startsWith('rgba(') || // RGBA color
+          trimmedColor.startsWith('hsl(') || // HSL color
+          trimmedColor.startsWith('hsla(') // HSLA color
+        )
+      }
+
+      // Function to construct the CSS variable string for border color
+      const constructBorderColorVariable = (
+        level: string,
+        color: string,
+      ): string => {
+        return `var(--gds-color-l${level}-border-${color})`
+      }
+
+      // Determine the border color value
+      const getBorderColorValue = (color: string): string => {
+        return isCustomColor(color)
+          ? color // Use the custom color directly
+          : constructBorderColorVariable((this as GdsContainer).level, color)
+      }
+
+      // Return the computed border value with size and color
+      return `var(--gds-space-${size}) solid ${color ? getBorderColorValue(color) : 'currentColor'}`
     },
     styleTemplate: (_prop, values) => {
       const top = values[0]
       const right = values.length > 1 ? values[1] : top
       const bottom = values.length > 2 ? values[2] : top
       const left = values.length > 3 ? values[3] : top
-      return `border-top: ${top}; border-right: ${right}; border-bottom: ${bottom}; border-left: ${left};`
+
+      return `
+        border-top: ${top}; 
+        border-right: ${right}; 
+        border-bottom: ${bottom}; 
+        border-left: ${left};
+      `
     },
   })
   border?: string
+
+  @styleExpressionProperty({
+    valueTemplate: function (v: string) {
+      const [color] = v.split('/')
+
+      // Helper function to determine if a color is custom
+      const isCustomColor = (color: string): boolean => {
+        const trimmedColor = color.trim()
+        return (
+          trimmedColor.startsWith('#') || // Hex color
+          trimmedColor.startsWith('rgb(') || // RGB color
+          trimmedColor.startsWith('rgba(') || // RGBA color
+          trimmedColor.startsWith('hsl(') || // HSL color
+          trimmedColor.startsWith('hsla(') // HSLA color
+        )
+      }
+
+      // Function to construct the CSS variable string for border color
+      const constructBorderColorVariable = (
+        level: string,
+        color: string,
+      ): string => {
+        return `var(--gds-color-l${level}-border-${color})`
+      }
+
+      // Determine the border color value
+      const getBorderColorValue = (color: string): string => {
+        return isCustomColor(color)
+          ? color // Use the custom color directly
+          : constructBorderColorVariable((this as GdsContainer).level, color)
+      }
+
+      // Return the computed border color value
+      return color ? getBorderColorValue(color) : 'currentColor'
+    },
+    styleTemplate: (_prop, values) => {
+      const top = values[0]
+      const right = values.length > 1 ? values[1] : top
+      const bottom = values.length > 2 ? values[2] : top
+      const left = values.length > 3 ? values[3] : top
+
+      return `
+        border-top-color: ${top}; 
+        border-right-color: ${right}; 
+        border-bottom-color: ${bottom}; 
+        border-left-color: ${left};
+      `
+    },
+  })
+  'border-color'?: string
+
+  @styleExpressionProperty({
+    styleTemplate: (_prop, values) => {
+      const top = values[0]
+      const right = values.length > 1 ? values[1] : top
+      const bottom = values.length > 2 ? values[2] : top
+      const left = values.length > 3 ? values[3] : top
+
+      return `
+        border-top-width: ${top}; 
+        border-right-width: ${right}; 
+        border-bottom-width: ${bottom}; 
+        border-left-width: ${left};
+        border-style: solid;
+      `
+    },
+  })
+  'border-width'?: string
 
   /**
    * Controls the border-radius property of the container.

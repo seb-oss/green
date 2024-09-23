@@ -18,48 +18,23 @@ export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
 
   /**
-   * The level of the container can be used to apply background and color styles from the corresponding level.
-   *
-   * Default value for `gds-container` is set to `2`.
-   *
-   * @property level
-   *
-   * */
-  @property()
-  level = '3'
-
-  /**
    * Controls the variant of the badge.
    * Supports all valid variants like information, notice, positive, warning, negative.
    * @property variant
    */
-  @styleExpressionProperty({
-    valueTemplate: (v: string) => `${v}`,
-    selector: '.badge',
-    styleTemplate: function (this: GdsBadge, prop: string, values: string[]) {
-      const variant = values[0]
-      return this.generateColorStyles(this.level, variant)
-    },
-  })
+  @property()
   variant = 'information'
 
-  /**
-   * Generates the color styles based on the level and variant.
-   * @param level - The level of the badge.
-   * @param variant - The variant of the badge.
-   * @returns The CSS style string.
-   */
-  private generateColorStyles(level: string, variant: string): string {
-    const BG = `background-color: var(--gds-color-${'l' + level}-background-${variant}-badge);`
-    const CL = `color: var(--gds-color-${'l' + level}-content-${variant});`
-    return `${BG} ${CL}`
-  }
-
   render() {
-    return html`<div class="badge">
+    return html`<gds-flex
+      level="3"
+      background=${(this as GdsBadge).variant + '-badge'}
+      color=${(this as GdsBadge).variant}
+      class="badge"
+    >
       <slot name="lead"></slot>
       <slot></slot>
       <slot name="trail"></slot>
-    </div>`
+    </gds-flex>`
   }
 }
