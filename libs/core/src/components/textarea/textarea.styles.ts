@@ -106,6 +106,17 @@ export const styles = css`
     slot[name='lead']::slotted(*) {
       min-width: var(--gds-space-l);
     }
+
+    .extended-supporting-text {
+      opacity: 1;
+      translate: 0;
+      transition: var(--_transition);
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 2px;
+      }
+    }
   }
 
   @layer simplified {

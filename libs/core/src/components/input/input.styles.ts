@@ -100,16 +100,14 @@ export const styles = css`
       display: flex;
     }
 
-    @supports (display: flex) {
-      .extended-supporting-text {
-        opacity: 1;
-        translate: 0;
-        transition: var(--_transition);
+    .extended-supporting-text {
+      opacity: 1;
+      translate: 0;
+      transition: var(--_transition);
 
-        @starting-style {
-          opacity: 0;
-          translate: 0 2px;
-        }
+      @starting-style {
+        opacity: 0;
+        translate: 0 2px;
       }
     }
   }
