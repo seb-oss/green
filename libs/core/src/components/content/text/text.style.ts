@@ -13,7 +13,7 @@ const style = css`
     text-wrap: inherit;
   }
 
-  :host(:not([size])) {
+  :host(:not([font-size])) {
     h1 {
       font-size: var(--gds-text-size-heading-xl);
       line-height: var(--gds-text-line-height-heading-xl);
@@ -65,7 +65,7 @@ const style = css`
     }
   }
 
-  :host(:not([weight])) {
+  :host(:not([font-weight])) {
     strong {
       font-weight: var(--gds-text-weight-book);
     }

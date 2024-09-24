@@ -50,56 +50,60 @@ export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
     html`<form style="width: 450px">
-      <gds-dropdown
-        label="Astronaut"
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value !== 'cat')
-              return [
-                { ...el.validity, valid: false, customError: true },
-                el.value === undefined
-                  ? 'An astronaut is required'
-                  : 'Only cats can pilot rockets!',
-              ]
-          },
-        }}
-      >
-        <gds-option>Pick your astronaut</gds-option>
-        <gds-option value="dog">Dog</gds-option>
-        <gds-option value="cat">Cat</gds-option>
-        <gds-option value="fish">Fish</gds-option>
-      </gds-dropdown>
-      <gds-datepicker
-        label="Launch date"
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === undefined)
-              return [
-                { ...el.validity, valid: false, customError: true },
-                'A date is required',
-              ]
-          },
-        }}
-      ></gds-datepicker>
-      <gds-input
-        label="Designation"
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === '')
-              return [
-                { ...el.validity, valid: false, customError: true },
-                'A designation is required',
-              ]
-          },
-        }}
-      ></gds-input>
-      <gds-container margin="s 0 s">
-        <gds-form-summary></gds-form-summary>
-      </gds-container>
-      <gds-button type="submit">
-        Launch
-        <gds-icon-rocket slot="trail"></gds-icon-rocket>
-      </gds-button>
-      <gds-button type="reset">Reset</gds-button>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-dropdown
+          label="Astronaut"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value !== 'cat')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  el.value === undefined
+                    ? 'An astronaut is required'
+                    : 'Only cats can pilot rockets!',
+                ]
+            },
+          }}
+        >
+          <gds-option>Pick your astronaut</gds-option>
+          <gds-option value="dog">Dog</gds-option>
+          <gds-option value="cat">Cat</gds-option>
+          <gds-option value="fish">Fish</gds-option>
+        </gds-dropdown>
+        <gds-datepicker
+          label="Launch date"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === undefined)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A date is required',
+                ]
+            },
+          }}
+        ></gds-datepicker>
+        <gds-input
+          label="Designation"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A designation is required',
+                ]
+            },
+          }}
+        ></gds-input>
+        <gds-container margin="s 0 s">
+          <gds-form-summary></gds-form-summary>
+        </gds-container>
+        <gds-flex gap="m">
+          <gds-button type="submit">
+            Launch
+            <gds-icon-rocket slot="trail"></gds-icon-rocket>
+          </gds-button>
+          <gds-button type="reset">Reset</gds-button>
+        </gds-flex>
+      </gds-flex>
     </form>`,
 }

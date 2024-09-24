@@ -1,20 +1,18 @@
-@layer tokens, a11y, core, ranks, sizes, variants, disabled;
-
-@layer tokens {
-  :host {
-    display: contents;
-  }
-}
+@layer tokens, core, a11y, ranks, sizes, variants, disabled;
 
 @layer a11y {
   @media (prefers-reduced-motion: reduce) {
-    :host {
+    .button {
       transition: none;
     }
   }
 }
 
 @layer core {
+  :host {
+    display: inline-block;
+  }
+
   .button {
     --_block-size: var(--gds-space-3xl);
     display: inline-flex;
@@ -51,22 +49,20 @@
       }
     }
 
-    .state {
-      border-radius: inherit;
-      position: absolute;
-      inset: 0;
-      background-color: transparent;
-      pointer-events: none;
-      isolation: isolate;
-      transition: all 0.4s;
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-primary),
+        var(--gds-color-l3-states-dark-hover)
+      );
+    }
 
-      :hover & {
-        background-color: var(--gds-color-l3-states-dark-hover);
-      }
-
-      :active & {
-        background-color: var(--gds-color-l3-states-dark-pressed);
-      }
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-primary),
+        var(--gds-color-l3-states-dark-pressed)
+      );
     }
 
     &:not(.circle) slot:not([name]) {
@@ -96,14 +92,20 @@
     background-color: var(--gds-color-l3-background-secondary);
     color: var(--gds-color-l3-content-secondary);
 
-    .state {
-      :hover & {
-        background-color: var(--gds-color-l3-states-light-hover);
-      }
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-secondary),
+        var(--gds-color-l3-states-light-hover)
+      );
+    }
 
-      :active & {
-        background-color: var(--gds-color-l3-states-light-pressed);
-      }
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-secondary),
+        var(--gds-color-l3-states-light-pressed)
+      );
     }
   }
 
@@ -111,19 +113,32 @@
     background-color: transparent;
     color: var(--gds-color-l3-content-tertiary);
 
-    .state {
-      :hover & {
-        background-color: var(--gds-color-l3-states-light-hover);
-      }
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-color-l3-states-light-hover)
+      );
+    }
 
-      :active & {
-        background-color: var(--gds-color-l3-states-light-pressed);
-      }
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-color-l3-states-light-pressed)
+      );
     }
   }
 }
 
 @layer sizes {
+  :host([size='xs']) .button {
+    --_block-size: var(--gds-space-l);
+    font-size: var(--gds-text-size-detail-s);
+    line-height: var(--gds-text-line-height-detail-s);
+    padding-inline: var(--gds-space-m);
+  }
+
   :host([size='small']) .button {
     --_block-size: var(--gds-space-xl);
     font-size: var(--gds-text-size-detail-s);
@@ -140,50 +155,126 @@
 
 @layer variants {
   .positive {
-    background-color: var(--gds-color-l3c-background-positive);
+    background-color: var(--gds-color-l3-background-positive);
 
-    .state {
-      :where(.secondary, .tertiary):hover & {
-        background-color: var(--gds-color-l3-states-positive-hover);
-      }
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-positive),
+        var(--gds-color-l3-states-dark-hover)
+      );
+    }
 
-      :where(.secondary, .tertiary):active & {
-        background-color: var(--gds-color-l3-states-positive-pressed);
-      }
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-positive),
+        var(--gds-color-l3-states-dark-pressed)
+      );
     }
 
     &.secondary {
-      background-color: var(--gds-color-l3c-background-positive-secondary);
-      color: var(--gds-color-l3c-content-positive);
+      background-color: var(--gds-color-l3-background-positive-secondary);
+      color: var(--gds-color-l3-content-positive);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-positive-secondary),
+          var(--gds-color-l3-states-positive-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-positive-secondary),
+          var(--gds-color-l3-states-positive-pressed)
+        );
+      }
     }
 
     &.tertiary {
       background-color: transparent;
-      color: var(--gds-color-l3c-content-positive);
+      color: var(--gds-color-l3-content-positive);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-positive-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-positive-pressed)
+        );
+      }
     }
   }
 
   .negative {
-    background-color: var(--gds-color-l3c-background-negative);
+    background-color: var(--gds-color-l3-background-negative);
 
-    .state {
-      :where(.secondary, .tertiary):hover & {
-        background-color: var(--gds-color-l3-states-negative-hover);
-      }
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative),
+        var(--gds-color-l3-states-dark-hover)
+      );
+    }
 
-      :where(.secondary, .tertiary):active & {
-        background-color: var(--gds-color-l3-states-negative-pressed);
-      }
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative),
+        var(--gds-color-l3-states-dark-pressed)
+      );
     }
 
     &.secondary {
-      background-color: var(--gds-color-l3c-background-negative-secondary);
-      color: var(--gds-color-l3c-content-negative);
+      background-color: var(--gds-color-l3-background-negative-secondary);
+      color: var(--gds-color-l3-content-negative);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-negative-secondary),
+          var(--gds-color-l3-states-negative-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-negative-secondary),
+          var(--gds-color-l3-states-negative-pressed)
+        );
+      }
     }
 
     &.tertiary {
       background-color: transparent;
-      color: var(--gds-color-l3c-content-negative);
+      color: var(--gds-color-l3-content-negative);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-negative-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-negative-pressed)
+        );
+      }
     }
   }
 }

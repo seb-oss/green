@@ -157,6 +157,7 @@
     "@schematics/angular": "~15.1.0",
     "@storybook/addon-essentials": "8.2.9",
     "@storybook/addon-styling-webpack": "^1.0.0",
+    "@storybook/addon-links": "8.3.2",
     "@storybook/angular": "8.2.9",
     "@storybook/blocks": "^8.2.8",
     "@storybook/builder-vite": "8.2.9",
