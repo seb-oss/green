@@ -17,6 +17,7 @@ import { NgvTypeaheadInputComponent } from './typeahead-input.component'
 
 @Component({
   template: '',
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-dropdown',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: [

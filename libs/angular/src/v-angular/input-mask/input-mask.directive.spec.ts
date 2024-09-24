@@ -25,6 +25,7 @@ import { NgvInputMaskDirective } from './input-mask.directive'
 
 describe('[NgvInputMask] -> InputMaskDirective', () => {
   @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'nggv-lib-custom-input',
     template: `
       <input

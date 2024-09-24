@@ -18,6 +18,7 @@ export interface DialogEvent<T = any> {
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],

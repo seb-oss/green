@@ -22,6 +22,7 @@ import { NgvDropdownComponent } from '../../dropdown.component'
 import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-typeahead-input',
   templateUrl: './typeahead-input.component.html',
   styleUrls: ['./typeahead-input.component.scss'],

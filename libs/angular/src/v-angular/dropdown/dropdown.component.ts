@@ -35,6 +35,7 @@ import {
  * https://designlibrary.sebgroup.com/components/component-dropdown
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
