@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { createComponent } from '@lit/react'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
-import { GdsInput } from '@sebgroup/green-core/components/input/input.js'
+import { GdsTextarea } from '@sebgroup/green-core/components/textarea/textarea.js'
 
 const tagName = getScopedTagName('gds-input')
-//GdsInput.define('gds-input')
+//GdsTextarea.define('gds-input')
 
 const reactWrapper = createComponent({
   tagName,
-  elementClass: GdsInput,
+  elementClass: GdsTextarea,
   react: React,
   events: {},
-  displayName: 'GdsInput'
+  displayName: 'GdsTextarea'
 })
 
 export default reactWrapper
