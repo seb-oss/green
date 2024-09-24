@@ -20,7 +20,6 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
  * https://designlibrary.sebgroup.com/components/component-checkbox
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],

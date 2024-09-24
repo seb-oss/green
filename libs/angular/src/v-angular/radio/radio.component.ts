@@ -60,7 +60,6 @@ export class NgvRadioControlRegistry {
  * https://designlibrary.sebgroup.com/components/component-radiobutton
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],

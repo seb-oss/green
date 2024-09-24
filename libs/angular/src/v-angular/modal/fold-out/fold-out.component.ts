@@ -13,7 +13,6 @@ import { fromEvent, Subscription } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-fold-out',
   templateUrl: './fold-out.component.html',
   styleUrls: ['./fold-out.component.scss'],

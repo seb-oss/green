@@ -15,7 +15,6 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],

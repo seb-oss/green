@@ -35,7 +35,6 @@ import { DialogButtons } from '../modal.types'
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],

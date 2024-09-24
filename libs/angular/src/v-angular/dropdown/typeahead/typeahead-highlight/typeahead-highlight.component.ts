@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-typeahead-highlight',
   templateUrl: './typeahead-highlight.component.html',
   styleUrls: ['./typeahead-highlight.component.scss'],

@@ -26,7 +26,6 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
  * https://designlibrary.sebgroup.com/components/component-input
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],

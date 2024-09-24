@@ -19,7 +19,6 @@ import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 
 // Use dropdownList template and combine stylesheets
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-typeahead-dropdown-list',
   templateUrl: '../../dropdown-list/dropdown-list.component.html',
   styleUrls: [
