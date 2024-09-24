@@ -7,7 +7,7 @@ import { clickOnElement } from '../../utils/testing'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/input/index.js'
+import '@sebgroup/green-core/components/textarea/index.js'
 import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
@@ -25,13 +25,6 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const labelEl = el.shadowRoot?.querySelector('label')
         expect(labelEl).to.exist
         expect(labelEl?.textContent).to.contain('My label')
-      })
-      it('should pass through the type attribute', async () => {
-        const el = await fixture<GdsTextarea>(
-          html`<gds-textarea variant="${variant}" type="email"></gds-textarea>`,
-        )
-        const inputEl = el.shadowRoot?.querySelector('input')
-        expect(inputEl?.type).to.equal('email')
       })
     })
     describe('API', () => {
@@ -58,10 +51,8 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const changeSpy = sinon.spy()
         el.addEventListener('change', changeSpy)
         el.focus()
-
         await sendKeys({ press: 'a' })
         await sendKeys({ press: 'Tab' })
-
         expect(changeSpy).to.have.been.calledOnce
       })
       it('should fire an input event when the value changes', async () => {
@@ -116,13 +107,11 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           </gds-textarea>`,
         )
         await aTimeout(10)
-
         const stateChangeSpy = sinon.spy()
         el.addEventListener('gds-ui-state', stateChangeSpy)
         const supportingTextBtnEl = el.shadowRoot?.querySelector(
           '[gds-element=gds-button][label="Show extended supporting text"]',
         )
-
         supportingTextBtnEl.click()
         expect(stateChangeSpy).to.have.been.calledOnce
       })
@@ -174,7 +163,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           ></gds-textarea>`,
         )
         const labelEl = el.shadowRoot?.querySelector('label')
-        const inputEl = el.shadowRoot?.querySelector('input')
+        const inputEl = el.shadowRoot?.querySelector('textarea')
         expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
       })
       it('should have a aria-describedby attribute that matches the supporting text id', async () => {
@@ -184,7 +173,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             supporting-text="My supporting text"
           ></gds-textarea>`,
         )
-        const inputEl = el.shadowRoot?.querySelector('input')
+        const inputEl = el.shadowRoot?.querySelector('textarea')
         const supportingTextEl =
           el.shadowRoot?.querySelector('.supporting-text')
         expect(inputEl?.getAttribute('aria-describedby')).to.equal(
