@@ -234,7 +234,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         >
           ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
 
-          <gds-flex gap="xs" align-items="center" height="var(--gds-space-l)">
+          <gds-flex gap="xs" align-items="center" block-size="l">
             ${this.#renderClearButton()} ${this.#renderSlotTrail()}
           </gds-flex>
           ${when(
@@ -246,14 +246,15 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
         <gds-flex
           class="foot"
-          align-items="center"
+          align-items="flex-start"
           justify-content="space-between"
           aria-live="polite"
+          gap="xl"
         >
           ${when(
             this.invalid,
             () => html`
-              <gds-flex align-items="flex-start" gap="xs">
+              <gds-flex align-items="flex-start" gap="xs" margin="2xs 0 0 0">
                 <gds-flex min-width="18px">
                   <gds-icon-triangle-exclamation width="18" height="18" solid>
                   </gds-icon-triangle-exclamation>
@@ -269,7 +270,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
               </gds-flex>
             `,
           )}
-          <gds-flex margin="0 0 0 auto">
+          <gds-flex
+            margin="0 0 0 auto"
+            min-width="4ch"
+            justify-content="flex-end"
+          >
             ${when(this.#shouldShowRemainingChars, () =>
               this.#renderRemainingCharsBadge(),
             )}

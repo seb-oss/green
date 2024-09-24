@@ -370,6 +370,7 @@ export const Validation: Story = {
           label="Label"
           supporting-text="Label support text"
           value="Incorrect value"
+          maxLength="12"
           clearable
           .invalid=${true}
           .validator=${{
@@ -390,7 +391,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'The value must be 12 characters long.',
+                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                 ]
             },
           }}

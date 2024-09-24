@@ -520,6 +520,15 @@ export class GdsContainer extends GdsElement {
   'block-size'?: string
 
   /**
+   * Controls the `min-block-size` property of the flex.
+   * Supports only tokens.
+   *
+   * @property min-block-size
+   */
+  @styleExpressionProperty()
+  'min-block-size'?: string
+
+  /**
    * Controls the width property of the flex.
    * Supports all valid CSS height values.
    *

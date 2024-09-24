@@ -151,7 +151,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         level="3"
         flex-direction="column"
         width="100%"
-        gap="${this.size === 'small' ? '2xs' : 'xs'}"
+        gap="xs"
         user-select="${this.disabled ? 'none' : 'auto'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
@@ -191,12 +191,8 @@ export class GdsInput extends GdsFormControlElement<string> {
             : !this.trailSlotOccupied
               ? 'xs xs xs m'
               : 'xs m'}"
-          min-height="${this.size === 'small'
-            ? 'var(--gds-space-xl)'
-            : 'var(--gds-space-3xl)'}"
-          height="${this.size === 'small'
-            ? 'var(--gds-space-xl)'
-            : 'var(--gds-space-3xl)'}}"
+          min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+          block-size="${this.size === 'small' ? 'xl' : '3xl'}"
           border-radius="xs"
           .background=${this.disabled
             ? 'disabled'
@@ -220,9 +216,10 @@ export class GdsInput extends GdsFormControlElement<string> {
 
         <gds-flex
           class="foot"
-          align-items="center"
+          align-items="flex-start"
           justify-content="space-between"
           aria-live="polite"
+          gap="xl"
         >
           ${when(
             this.invalid,
@@ -230,6 +227,7 @@ export class GdsInput extends GdsFormControlElement<string> {
               <gds-flex
                 align-items="flex-start"
                 gap="${this.size === 'small' ? '2xs' : 'xs'}"
+                margin="2xs 0 0 0"
               >
                 <gds-flex min-width="18px">
                   <gds-icon-triangle-exclamation width="18" height="18" solid>
@@ -248,7 +246,11 @@ export class GdsInput extends GdsFormControlElement<string> {
               </gds-flex>
             `,
           )}
-          <gds-flex margin="0 0 0 auto">
+          <gds-flex
+            margin="0 0 0 auto"
+            min-width="4ch"
+            justify-content="flex-end"
+          >
             ${when(this.#shouldShowRemainingChars, () =>
               this.#renderRemainingCharsBadge(),
             )}

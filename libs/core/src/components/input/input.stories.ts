@@ -73,9 +73,21 @@ export const Size: Story = {
   ...DefaultParams,
   name: 'Size',
   render: () => html`
-    <gds-flex flex-direction="column" gap="xl" width="320px">
+    <gds-flex width="800px" gap="4xl" align-items="flex-start">
       <gds-input label="Lead Icon" size="small">
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+      </gds-input>
+      <gds-input
+        label="Lead Icon"
+        supporting-text="Example support text"
+        size="small"
+        clearable
+      >
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
       </gds-input>
     </gds-flex>
   `,
@@ -333,7 +345,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'The value must be 12 characters long.',
+                  'The value must be 12 characters long. ',
                 ]
             },
           }}

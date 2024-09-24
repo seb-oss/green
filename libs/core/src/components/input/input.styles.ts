@@ -92,7 +92,13 @@ export const styles = css`
     }
 
     :host([size='small']) slot[name='lead']::slotted(*) {
-      width: var(--gds-space-m);
+      line-height: 18px;
+    }
+
+    :host([size='small']) slot[name='lead']::slotted(*) {
+      min-width: var(--gds-space-m);
+      max-width: var(--gds-space-m);
+      display: flex;
     }
 
     slot[name='lead']::slotted(*) {
