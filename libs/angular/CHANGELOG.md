@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.6.1
+
+### Patch Changes
+
+- 074fcad: rename ngv to nggv
+- Updated dependencies [0ace1ed]
+- Updated dependencies [fbecda4]
+  - @sebgroup/chlorophyll@3.6.4
+  - @sebgroup/green-core@1.42.0
+
 ## 4.6.0
 
 ### Minor Changes
