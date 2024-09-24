@@ -1,16 +1,8 @@
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
 
-import {
-  GdsDropdown,
-  GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
+import { GdsDropdown, GdsOption } from '@sebgroup/green-core/components/dropdown/index.js'
 
-const html = htmlTemplateTagFactory((strs, ...values) =>
-  strs.map((s, i) => s + values[i]).join(''),
-)
+const html = htmlTemplateTagFactory((strs, ...values) => strs.map((s, i) => s + values[i]).join(''))
 
 export class SimpleValues extends HTMLElement {
   public static observedAttributes = []
@@ -20,14 +12,7 @@ export class SimpleValues extends HTMLElement {
       <form id="my-form">
         <gds-form-validator></gds-form-validator>
 
-        <gds-dropdown
-          searchable
-          multiple
-          name="dropdown"
-          id="dropdown"
-          label="Select a value"
-          required
-        >
+        <gds-dropdown searchable multiple name="dropdown" id="dropdown" label="Select a value" required>
           <span slot="sub-label">Additional <i>label</i> information</span>
           <span slot="message">A message guiding the user</span>
 
@@ -37,9 +22,7 @@ export class SimpleValues extends HTMLElement {
           <gds-option value="v3">Value 3</gds-option>
         </gds-dropdown>
 
-        <gds-button type="submit" name="the-button" value="derp"
-          >Submit</gds-button
-        >
+        <gds-button type="submit" name="the-button" value="derp">Submit</gds-button>
         <gds-button type="reset" variant="secondary">Reset</gds-button>
       </form>
     `
@@ -52,13 +35,9 @@ export class SimpleValues extends HTMLElement {
       console.log('dd name', dropdown.name)
     })
 
-    dropdown.addEventListener('gds-ui-state', (e: CustomEvent) =>
-      console.log('UI state changed: ', e.detail),
-    )
+    dropdown.addEventListener('gds-ui-state', (e: CustomEvent) => console.log('UI state changed: ', e.detail))
 
-    const newOption = document.createElement(
-      getScopedTagName('gds-option'),
-    ) as GdsOption
+    const newOption = document.createElement(getScopedTagName('gds-option')) as GdsOption
     newOption.value = { test: 'test' }
     newOption.innerHTML = 'New option'
     dropdown.appendChild(newOption)
@@ -66,7 +45,7 @@ export class SimpleValues extends HTMLElement {
     console.log(dropdown.options)
 
     const form = this.querySelector('#my-form') as HTMLFormElement
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       e.preventDefault()
       console.log('Form submitted', form.elements)
 

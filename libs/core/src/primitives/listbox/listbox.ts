@@ -4,18 +4,12 @@ import { Ref, createRef, ref } from 'lit/directives/ref.js'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
 import '../../primitives/listbox/option'
-import type {
-  GdsOption,
-  OptionsContainer,
-} from '../../primitives/listbox/option'
+import type { GdsOption, OptionsContainer } from '../../primitives/listbox/option'
 
 import style from './listbox.styles'
 import { watch } from '../../utils/decorators/watch'
 import { html, gdsCustomElement } from '../../scoping'
-import {
-  ListboxKbNavController,
-  ListboxKbNavigation,
-} from '../../controllers/listbox-kb-nav-controller'
+import { ListboxKbNavController, ListboxKbNavigation } from '../../controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 
 /**
@@ -32,10 +26,7 @@ import { unwrap } from '../../utils/helpers/unwrap-slots'
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
 @gdsCustomElement('gds-listbox')
-export class GdsListbox
-  extends GdsElement
-  implements ListboxKbNavigation, OptionsContainer
-{
+export class GdsListbox extends GdsElement implements ListboxKbNavigation, OptionsContainer {
   static styles = style
 
   /**
@@ -47,8 +38,8 @@ export class GdsListbox
     attribute: 'aria-multiselectable',
     converter: {
       fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value.toString(),
-    },
+      toAttribute: (value: boolean) => value.toString()
+    }
   })
   multiple = false
 
@@ -77,8 +68,7 @@ export class GdsListbox
 
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsOption[]).filter(
-        (o) =>
-          !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option',
+        o => !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-option'
       ) || []
     )
   }
@@ -87,26 +77,26 @@ export class GdsListbox
    * Returns a list of all visible `gds-option` elements in the listbox.
    */
   get visibleOptionElements() {
-    return this.options.filter((el) => !el.hidden)
+    return this.options.filter(el => !el.hidden)
   }
 
   /**
    * Returns a list of all visible `gds-option` elements in the listbox.
    */
   get visibleSelectedOptionElements() {
-    return this.options.filter((el) => el.selected && !el.hidden)
+    return this.options.filter(el => el.selected && !el.hidden)
   }
 
   /**
    * Returns a list of all selected `gds-option` elements in the listbox.
    */
   get selection(): GdsOption[] {
-    return this.options.filter((el) => el.selected)
+    return this.options.filter(el => el.selected)
   }
 
   set selection(values: any[]) {
-    this.options.forEach((el) => {
-      el.selected = values.some((v) => this.compareWith(v, el.value))
+    this.options.forEach(el => {
+      el.selected = values.some(v => this.compareWith(v, el.value))
     })
   }
 
@@ -123,9 +113,7 @@ export class GdsListbox
    * If no option is selected, the first visible option is focused.
    */
   focus() {
-    ;(
-      this.visibleSelectedOptionElements[0] || this.visibleOptionElements[0]
-    )?.focus()
+    ;(this.visibleSelectedOptionElements[0] || this.visibleOptionElements[0])?.focus()
   }
 
   render() {
@@ -137,7 +125,7 @@ export class GdsListbox
    */
   @watch('multiple')
   private _rerenderOptions() {
-    this.options.forEach((el) => {
+    this.options.forEach(el => {
       el.requestUpdate()
     })
   }
@@ -148,7 +136,7 @@ export class GdsListbox
     if (this.multiple) option.selected = !option.selected
     else {
       option.selected = true
-      Array.from(this.options).forEach((el) => {
+      Array.from(this.options).forEach(el => {
         if (el !== option) el.selected = false
       })
     }
@@ -158,8 +146,8 @@ export class GdsListbox
     this.dispatchEvent(
       new CustomEvent('change', {
         bubbles: false,
-        composed: false,
-      }),
+        composed: false
+      })
     )
   }
 }

@@ -4,6 +4,6 @@ import { Component } from '@angular/core'
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngv-card',
   template: ` <ng-content></ng-content> `,
-  styleUrls: ['./card.component.scss'],
+  styleUrls: ['./card.component.scss']
 })
 export class NgvCardComponent {}

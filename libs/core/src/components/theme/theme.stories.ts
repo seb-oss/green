@@ -56,7 +56,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Docs/Theme',
   component: 'gds-theme',
-  tags: ['autodocs'],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -65,13 +65,13 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' },
+      source: { format: true, type: 'dynamic' }
     },
     controls: { disable: true },
     globals: {
-      disableTheme: true,
-    },
-  },
+      disableTheme: true
+    }
+  }
 }
 
 /**
@@ -83,8 +83,8 @@ export const Theme: Story = {
   parameters: {
     ...DefaultParams.parameters,
     globals: {
-      disableTheme: true,
-    },
+      disableTheme: true
+    }
   },
   render: () => html`
     <gds-grid columns="xs{1} m{3} l{3}" gap="l">
@@ -101,18 +101,10 @@ export const Theme: Story = {
               </gds-button>
             </gds-container>
           </gds-container>
-          <gds-flex
-            direction="column"
-            padding="s{xs} m{l} l{l}"
-            align="flex-start"
-            gap="l"
-          >
+          <gds-flex direction="column" padding="s{xs} m{l} l{l}" align="flex-start" gap="l">
             <gds-flex gap="s" direction="column">
               <gds-text tag="h2" size="body-l">James Doe</gds-text>
-              <gds-text>
-                Passionate software engineer with a love for coding and
-                problem-solving.
-              </gds-text>
+              <gds-text> Passionate software engineer with a love for coding and problem-solving. </gds-text>
             </gds-flex>
             <gds-divider opacity="0.2"></gds-divider>
             <gds-button>
@@ -136,17 +128,11 @@ export const Theme: Story = {
               </gds-button>
             </gds-container>
           </gds-container>
-          <gds-flex
-            direction="column"
-            padding="s{xs} m{s} l{s}"
-            align="flex-start"
-            gap="l"
-          >
+          <gds-flex direction="column" padding="s{xs} m{s} l{s}" align="flex-start" gap="l">
             <gds-flex gap="s" direction="column">
               <gds-text tag="h2" size="body-l">Lorem Ipsum</gds-text>
               <gds-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
               </gds-text>
             </gds-flex>
             <gds-button>
@@ -175,13 +161,7 @@ export const Theme: Story = {
             mask="top/l2-background-tertiary/0.4"
             stack="2"
           >
-            <gds-flex
-              direction="column"
-              justify="flex-end"
-              padding="4xl 2xl 2xl 2xl"
-              gap="l"
-              height="100%"
-            >
+            <gds-flex direction="column" justify="flex-end" padding="4xl 2xl 2xl 2xl" gap="l" height="100%">
               <gds-container>
                 <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
                 <gds-text tag="p" size="body-m">UX Designer</gds-text>
@@ -195,5 +175,5 @@ export const Theme: Story = {
         </gds-flex>
       </gds-card>
     </gds-grid>
-  `,
+  `
 }

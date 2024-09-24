@@ -10,7 +10,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'index.ts'),
       name: 'PlayGroundElements',
       // the proper extensions will be added
-      fileName: 'playground-elements',
-    },
-  },
+      fileName: 'playground-elements'
+    }
+  }
 })

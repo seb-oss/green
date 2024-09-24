@@ -65,11 +65,7 @@
       a {
         text-underline-offset: 4px;
         text-decoration-thickness: 1px;
-        text-decoration-color: color-mix(
-          in srgb,
-          var(--color-black),
-          transparent 40%
-        );
+        text-decoration-color: color-mix(in srgb, var(--color-black), transparent 40%);
         text-decoration: none;
       }
 
@@ -112,14 +108,9 @@
             padding: 4px 8px;
             border-radius: 8px;
             margin-inline: 1ch;
-            background-color: color-mix(
-              in srgb,
-              var(--color-black),
-              transparent 99%
-            );
+            background-color: color-mix(in srgb, var(--color-black), transparent 99%);
             color: var(--color-black);
-            border: 1px solid
-              color-mix(in srgb, var(--color-black), transparent 95%);
+            border: 1px solid color-mix(in srgb, var(--color-black), transparent 95%);
           }
         }
       }

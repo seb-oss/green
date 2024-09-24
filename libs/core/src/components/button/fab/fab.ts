@@ -21,7 +21,7 @@ export class GdsFab extends GdsButton {
    * Supports all valid CSS position values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   position?: string
 
@@ -31,7 +31,7 @@ export class GdsFab extends GdsButton {
    * Accepts any valid CSS transform value.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   transform?: string
 
@@ -41,8 +41,8 @@ export class GdsFab extends GdsButton {
    * Accepts any valid CSS inset values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
-    selector: '[part="_button"]',
+    valueTemplate: v => v,
+    selector: '[part="_button"]'
   })
   inset?: string
 

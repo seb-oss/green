@@ -13,7 +13,7 @@ import {
   QueryList,
   SimpleChanges,
   TemplateRef,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core'
 
 import { Subject, Subscription } from 'rxjs'
@@ -21,17 +21,13 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
-import {
-  DropdownUtils,
-  Option,
-  OptionBase,
-} from '@sebgroup/green-angular/src/v-angular/core'
+import { DropdownUtils, Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngv-dropdown-list',
   templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.scss'],
+  styleUrls: ['./dropdown-list.component.scss']
 })
 export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {
@@ -48,9 +44,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() optionContentTpl: TemplateRef<OptionBase<any>> | undefined
 
   /** @internal List of references to the option elements. */
-  @ViewChildren('optionRefs') optionRefs:
-    | QueryList<ElementRef<HTMLLIElement>>
-    | undefined
+  @ViewChildren('optionRefs') optionRefs: QueryList<ElementRef<HTMLLIElement>> | undefined
 
   /** Id of the host element and is accessible by the children, automatically generated if not provided. */
   @HostBinding('attr.id') @Input() id = (window as any).ngv?.nextId()
@@ -71,8 +65,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
 
   scope: string | undefined
 
-  private dropdownUtils: DropdownUtils<string | null, string, any> =
-    new DropdownUtils<string | null, string, any>()
+  private dropdownUtils: DropdownUtils<string | null, string, any> = new DropdownUtils<string | null, string, any>()
   private _expanded = false
   private closed$ = new Subject<boolean>()
   public selectedValue?: Option<string, any>
@@ -83,23 +76,18 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   constructor(
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
-    protected translocoScope: TranslocoScope,
+    protected translocoScope: TranslocoScope
   ) {
     if (this.translocoScope) this.scope = this.translocoScope.toString()
   }
 
   ngOnInit(): void {
-    if (this.state)
-      this.activeIndex = this.options.findIndex(
-        (option) => option.key === this.state.key,
-      )
+    if (this.state) this.activeIndex = this.options.findIndex(option => option.key === this.state.key)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes.state && !changes.state.firstChange)
-      this.selectedValue = changes.state.currentValue
-    if (!!changes.options?.currentValue?.length && this.expanded)
-      this.refreshSelectedOption()
+    if (!!changes.state && !changes.state.firstChange) this.selectedValue = changes.state.currentValue
+    if (!!changes.options?.currentValue?.length && this.expanded) this.refreshSelectedOption()
   }
 
   /**
@@ -139,10 +127,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    * @internal
    */
   refreshSelectedOption() {
-    const options = this.dropdownUtils.flattenOptions(
-      this.options,
-      !this.optionContentTpl,
-    )
+    const options = this.dropdownUtils.flattenOptions(this.options, !this.optionContentTpl)
     this.activeIndex = this.getActiveIndex()
     this.state = options[this.activeIndex]
     this.scrollToResult(this.state)
@@ -159,15 +144,12 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
     if (!!this.selectedValue && this.selectedValue?.key != null) {
       const selectedIndex = this.dropdownUtils
         .flattenOptions(this.options, !this.optionContentTpl)
-        .findIndex(
-          (option) =>
-            option.key != null && option.key === this.selectedValue?.key,
-        )
+        .findIndex(option => option.key != null && option.key === this.selectedValue?.key)
       if (selectedIndex > -1) return selectedIndex
     }
     return this.dropdownUtils
       .flattenOptions(this.options, !this.optionContentTpl)
-      .findIndex((option) => option.key != null)
+      .findIndex(option => option.key != null)
   }
 
   /**
@@ -213,10 +195,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
     if (!this.expanded) return
-    const options = this.dropdownUtils.flattenOptions(
-      this.options,
-      !this.optionContentTpl,
-    )
+    const options = this.dropdownUtils.flattenOptions(this.options, !this.optionContentTpl)
     let option
 
     switch (event.key) {
@@ -271,9 +250,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    */
   scrollToResult(option: any) {
     if (!this.optionRefs || !option) return
-    const optionRef = this.optionRefs.find(
-      (li) => li.nativeElement.id === this.id + '-option-' + option.key,
-    )
+    const optionRef = this.optionRefs.find(li => li.nativeElement.id === this.id + '-option-' + option.key)
     const offset = this.scrollOffset
     if (optionRef) {
       let delta = window.scrollY || document.documentElement.scrollTop
@@ -282,7 +259,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
       setTimeout(() => {
         scrollIntoView(optionRef.nativeElement, {
           scrollMode: 'if-needed',
-          block: 'nearest',
+          block: 'nearest'
         })
 
         delta -= window.scrollY || document.documentElement.scrollTop

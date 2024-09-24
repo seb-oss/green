@@ -11,9 +11,9 @@ const reactWrapper = createComponent({
   elementClass: GdsDatepicker,
   react: React,
   events: {
-    undefined: "change" as EventName<undefined>,
-    undefined: "input" as EventName<undefined>,
-    undefined: "gds-ui-state" as EventName<undefined>,
+    onChange: "change",
+    onInput: "input",
+    onGdsUiState: "gds-ui-state",
   },
   displayName: "GdsDatepicker",
 });

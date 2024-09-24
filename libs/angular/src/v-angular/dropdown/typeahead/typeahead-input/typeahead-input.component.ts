@@ -9,7 +9,7 @@ import {
   OnInit,
   Optional,
   Renderer2,
-  Self,
+  Self
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 
@@ -24,12 +24,9 @@ import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 @Component({
   selector: 'ngv-typeahead-input',
   templateUrl: './typeahead-input.component.html',
-  styleUrls: ['./typeahead-input.component.scss'],
+  styleUrls: ['./typeahead-input.component.scss']
 })
-export class NgvTypeaheadInputComponent
-  extends NgvInputComponent
-  implements OnInit, OnDestroy
-{
+export class NgvTypeaheadInputComponent extends NgvInputComponent implements OnInit, OnDestroy {
   /** Reference to the host dropdown */
   @Input() hostComponent!: NgvDropdownComponent
 
@@ -56,7 +53,7 @@ export class NgvTypeaheadInputComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef,
+    protected cdr: ChangeDetectorRef
   ) {
     super(ngControl, translocoScope, cdr)
     super.ngOnInit()
@@ -93,13 +90,9 @@ export class NgvTypeaheadInputComponent
     setTimeout(() => {
       // Only move if parent dropdown is found
       if (this.dropdownButton) {
-        this.renderer2.appendChild(
-          this.dropdownButton.querySelector('button'),
-          this.element.nativeElement,
-        )
+        this.renderer2.appendChild(this.dropdownButton.querySelector('button'), this.element.nativeElement)
         // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
-        this.buttonHeight =
-          this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
+        this.buttonHeight = this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
       }
     }, 0)
   }
@@ -110,20 +103,18 @@ export class NgvTypeaheadInputComponent
    * When the dropdown is collapsed, empty the input from text.
    */
   private handleExpandedChange() {
-    this.hostComponent.expandedChange
-      .pipe(takeUntil(this._destroy$))
-      .subscribe((state) => {
-        this.expanded = state
+    this.hostComponent.expandedChange.pipe(takeUntil(this._destroy$)).subscribe(state => {
+      this.expanded = state
 
-        if (this.expanded) {
-          // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
-          // See suggestion here: https://github.com/ionic-team/stencil/issues/3772#issuecomment-1292599609
-          setTimeout(() => this.setFocus())
-          // Format and interpolate result since return type can be other than string from the formatter
-          const formattedValue = `${this.formatSelected(this.hostComponent.state)}`
-          this.setInput(formattedValue, false)
-        } else this.setInput('', true)
-      })
+      if (this.expanded) {
+        // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
+        // See suggestion here: https://github.com/ionic-team/stencil/issues/3772#issuecomment-1292599609
+        setTimeout(() => this.setFocus())
+        // Format and interpolate result since return type can be other than string from the formatter
+        const formattedValue = `${this.formatSelected(this.hostComponent.state)}`
+        this.setInput(formattedValue, false)
+      } else this.setInput('', true)
+    })
   }
 
   /**

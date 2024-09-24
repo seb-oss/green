@@ -49,8 +49,7 @@ $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 800;
 
-$font-family-sans-serif: 'SEBSansSerif', sans-serif, 'Helvetica Neue', Helvetica,
-  Arial !default;
+$font-family-sans-serif: 'SEBSansSerif', sans-serif, 'Helvetica Neue', Helvetica, Arial !default;
 $root-font-size: 16px !default;
 $base-font-size: 1rem !default; // relative to root element font size (html)
 $font-path: '../fonts' !default;
@@ -70,65 +69,65 @@ $green: (
   light: (
     0: rgb(55, 157, 0),
     1: rgb(69, 180, 0),
-    2: rgb(96, 205, 24),
+    2: rgb(96, 205, 24)
   ),
   dark: (
     0: rgb(96, 205, 24),
     1: rgb(117, 180, 74),
-    2: rgb(48, 136, 0),
-  ),
+    2: rgb(48, 136, 0)
+  )
 );
 
 $blue: (
   light: (
     0: rgb(0, 122, 199),
     1: rgb(0, 146, 225),
-    2: rgb(65, 176, 238),
+    2: rgb(65, 176, 238)
   ),
   dark: (
     0: rgb(88, 184, 238),
     1: rgb(0, 173, 255),
-    2: rgb(44, 156, 217),
-  ),
+    2: rgb(44, 156, 217)
+  )
 );
 
 $red: (
   light: (
     0: rgb(187, 0, 12),
     1: rgb(216, 26, 26),
-    2: rgb(240, 53, 41),
+    2: rgb(240, 53, 41)
   ),
   dark: (
     0: rgb(247, 112, 109),
     1: rgb(200, 42, 41),
-    2: rgb(158, 33, 32),
-  ),
+    2: rgb(158, 33, 32)
+  )
 );
 
 $yellow: (
   light: (
     0: rgb(248, 160, 0),
     1: rgb(255, 180, 0),
-    2: rgb(255, 197, 0),
+    2: rgb(255, 197, 0)
   ),
   dark: (
     0: rgb(255, 225, 130),
     1: rgb(240, 190, 71),
-    2: rgb(235, 171, 57),
-  ),
+    2: rgb(235, 171, 57)
+  )
 );
 
 $purple: (
   light: (
     0: rgb(63, 37, 135),
     1: rgb(79, 44, 153),
-    2: rgb(103, 58, 182),
+    2: rgb(103, 58, 182)
   ),
   dark: (
     0: rgb(173, 145, 220),
     1: rgb(126, 82, 204),
-    2: rgb(74, 50, 143),
-  ),
+    2: rgb(74, 50, 143)
+  )
 );
 /* stylelint-disable */
 $grey: (
@@ -164,7 +163,7 @@ $grey: (
     1000: rgb(171, 171, 171),
     1100: rgb(179, 179, 179),
     // missing?
-  ),
+  )
 );
 /* stylelint-enable */
 
@@ -175,7 +174,7 @@ $disabled: (
     'border': var(--gds-ref-pallet-base500),
     'primary-background': var(--gds-ref-pallet-base200),
     'primary-color': var(--gds-ref-pallet-base600),
-    'primary-border': var(--gds-ref-pallet-base500),
+    'primary-border': var(--gds-ref-pallet-base500)
   ),
   dark: (
     'background': transparentize($white, 0.98),
@@ -183,21 +182,21 @@ $disabled: (
     'border': get($grey, 400, 'dark'),
     'primary-background': transparentize($white, 0.98),
     'primary-color': transparentize($white, 0.93),
-    'primary-border': get($grey, 400, 'dark'),
-  ),
+    'primary-border': get($grey, 400, 'dark')
+  )
 );
 
 $shadows: (
   light: (
     'none': 0 0 0 0,
     'sm': 0 0.125rem 0.375rem rgba($black, 0.15),
-    'md': 0 0.5rem 1rem rgba($black, 0.1),
+    'md': 0 0.5rem 1rem rgba($black, 0.1)
   ),
   dark: (
     'none': 0 0 0 0,
     'sm': 0 0.125rem 0.375rem rgba($black, 0.15),
-    'md': 0 0.5rem 1rem rgba($black, 0.1),
-  ),
+    'md': 0 0.5rem 1rem rgba($black, 0.1)
+  )
 );
 
 $intent: (
@@ -210,7 +209,7 @@ $intent: (
     //TODO: base color from on pallet
     'danger': rgba(159, 0, 10, 1),
     'light': get($grey, 300),
-    'dark': get($grey, 1000),
+    'dark': get($grey, 1000)
   ),
   dark: (
     'primary': get($blue, 2, 'dark'),
@@ -221,8 +220,8 @@ $intent: (
     //TODO: base color from on pallet
     'danger': rgba(255, 89, 79, 1),
     'light': get($grey, 300, 'dark'),
-    'dark': get($grey, 1000, 'dark'),
-  ),
+    'dark': get($grey, 1000, 'dark')
+  )
 );
 
 $border-color: var(--sg-border-color);
@@ -284,11 +283,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --checkbox-checkmark-disabled-color: #{get($grey, 500, 'dark')};
   --link-color-dark: #{get($grey, 1100, 'dark')};
   --link-color-dark-visited: #{get($grey, 1000, 'dark')};
-  --form-control-primary-bg-disabled: #{get(
-      $disabled,
-      'primary-background',
-      'dark'
-    )};
+  --form-control-primary-bg-disabled: #{get($disabled, 'primary-background', 'dark')};
   @include generate-intent-variables($intent, 'dark');
   @include grey-colors($grey, 'dark');
   color: var(--text-primary-color);

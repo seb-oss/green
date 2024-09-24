@@ -13,11 +13,7 @@ export const styles = css`
       --_border-width-hover: 0.125rem;
 
       --_color-outline-alpha: 60%;
-      --_color-outline: color-mix(
-        in srgb,
-        var(--_color-border),
-        transparent var(--_color-outline-alpha)
-      );
+      --_color-outline: color-mix(in srgb, var(--_color-border), transparent var(--_color-outline-alpha));
 
       --_transition: var(--gds-sys-transition);
       --_lh: 1.25;
@@ -257,18 +253,13 @@ export const styles = css`
     }
 
     :host([variant='simplified'])
-      label:has(
-        input:not(:placeholder-shown, [readonly]),
-        textarea:not(:placeholder-shown, [readonly])
-      ),
+      label:has(input:not(:placeholder-shown, [readonly]), textarea:not(:placeholder-shown, [readonly])),
     :host([variant='simplified']) label:focus-within {
       div {
         font-size: 0.75rem;
         font-weight: 500;
         top: 0.375rem;
-        transform: translateY(
-          translateY(calc(0px - var(--gds-input-label-translate)))
-        );
+        transform: translateY(translateY(calc(0px - var(--gds-input-label-translate))));
       }
 
       input,

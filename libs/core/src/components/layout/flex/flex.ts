@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
@@ -45,7 +42,7 @@ export class GdsFlex extends GdsContainer {
       const colGap = values[0]
       const rowGap = values[1] || colGap
       return `gap: ${colGap} ${rowGap};`
-    },
+    }
   })
   gap?: string
 
@@ -55,7 +52,7 @@ export class GdsFlex extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'align-items',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   align?: string
 
@@ -65,7 +62,7 @@ export class GdsFlex extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'justify-content',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   justify?: string
 
@@ -75,7 +72,7 @@ export class GdsFlex extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'flex-direction',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   direction?: string
 

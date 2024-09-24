@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsSegmentedControl,
   react: React,
   events: {
-    undefined: "changed" as EventName<undefined>,
+    onChanged: "changed",
   },
   displayName: "GdsSegmentedControl",
 });

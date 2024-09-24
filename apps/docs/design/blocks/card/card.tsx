@@ -16,26 +16,15 @@ type CardProps = {
 }
 
 const Card = forwardRef<HTMLAnchorElement, CardProps>(
-  (
-    { children, href, className = '', target, variant = 'default', ...rest },
-    ref,
-  ) => {
-    const cardClass = `gds-card ${className} ${
-      variant === 'cta' ? 'gds-card-cta' : ''
-    }`
+  ({ children, href, className = '', target, variant = 'default', ...rest }, ref) => {
+    const cardClass = `gds-card ${className} ${variant === 'cta' ? 'gds-card-cta' : ''}`
 
     return (
-      <Link
-        href={href}
-        ref={ref}
-        className={cardClass}
-        target={target}
-        {...rest}
-      >
+      <Link href={href} ref={ref} className={cardClass} target={target} {...rest}>
         {children}
       </Link>
     )
-  },
+  }
 )
 
 Card.displayName = 'Card'

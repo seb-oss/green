@@ -14,7 +14,7 @@ const items: AccordionItemInterface[] = [
         <a href="/#">And this is a link</a>
       </>
     ),
-    labelElementLevel: 2,
+    labelElementLevel: 2
   },
   {
     customLabel: <>This is the second Accordion label</>,
@@ -25,7 +25,7 @@ const items: AccordionItemInterface[] = [
         <a href="/#">And this is a link</a>
       </>
     ),
-    labelElementLevel: 2,
+    labelElementLevel: 2
   },
   {
     label: 'This is the third Accordion label',
@@ -36,8 +36,8 @@ const items: AccordionItemInterface[] = [
       </>
     ),
     labelElementLevel: 2,
-    defaultOpen: true,
-  },
+    defaultOpen: true
+  }
 ]
 
 describe('Accordion', () => {
@@ -58,9 +58,7 @@ describe('Accordion', () => {
     fireEvent.click(screen.getAllByRole('button')[0])
 
     expect(screen.getAllByRole('region')[0].hidden).toBeFalsy()
-    expect(
-      screen.getAllByRole('button')[0].getAttribute('aria-expanded'),
-    ).toEqual('true')
+    expect(screen.getAllByRole('button')[0].getAttribute('aria-expanded')).toEqual('true')
   })
 
   it('should have correct aria attributes', () => {
@@ -69,11 +67,9 @@ describe('Accordion', () => {
     fireEvent.click(screen.getAllByRole('button')[0])
 
     expect(screen.getAllByRole('button')[0].id).toEqual(
-      screen.getAllByRole('region')[0].getAttribute('aria-labelledby'),
+      screen.getAllByRole('region')[0].getAttribute('aria-labelledby')
     )
-    expect(screen.getAllByRole('region')[0].id).toEqual(
-      screen.getAllByRole('button')[0].getAttribute('aria-controls'),
-    )
+    expect(screen.getAllByRole('region')[0].id).toEqual(screen.getAllByRole('button')[0].getAttribute('aria-controls'))
   })
 
   it('should call the onClick handler passed as prop', function () {
@@ -84,9 +80,9 @@ describe('Accordion', () => {
         items={[
           { ...items[0], onClick: mockFunction },
           { ...items[1], onClick: mockFunction },
-          { ...items[2], onClick: mockFunction },
+          { ...items[2], onClick: mockFunction }
         ]}
-      />,
+      />
     )
 
     fireEvent.click(screen.getAllByRole('button')[0])
@@ -106,12 +102,12 @@ describe('Accordion', () => {
           {
             ...items[0],
             onOpen: mockFunctionOnOpen,
-            onClose: mockFunctionOnClose,
+            onClose: mockFunctionOnClose
           },
           { ...items[1] },
-          { ...items[2] },
+          { ...items[2] }
         ]}
-      />,
+      />
     )
 
     fireEvent.click(screen.getAllByRole('button')[0])
@@ -139,7 +135,7 @@ describe('Accordion', () => {
     render(<Accordion items={items} />)
 
     userEvent.type(screen.getAllByRole('button')[0], '{enter}', {
-      skipClick: true,
+      skipClick: true
     })
 
     expect(screen.getByText('First accordion region')).toBeDefined()
@@ -150,7 +146,7 @@ describe('Accordion', () => {
     render(<Accordion items={items} />)
 
     userEvent.type(screen.getAllByRole('button')[0], '{space}', {
-      skipClick: true,
+      skipClick: true
     })
 
     expect(screen.getByText('First accordion region')).toBeDefined()

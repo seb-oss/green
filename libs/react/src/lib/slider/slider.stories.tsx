@@ -1,6 +1,6 @@
 import { Slider } from './slider'
 
-const Template = (props) => <Slider {...props} />
+const Template = props => <Slider {...props} />
 
 export default {
   title: 'Components/Slider',
@@ -11,8 +11,8 @@ export default {
       name: 'name',
 
       control: {
-        type: 'text',
-      },
+        type: 'text'
+      }
     },
 
     value: {
@@ -20,8 +20,8 @@ export default {
       defaultValue: 50,
 
       control: {
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
 
     min: {
@@ -29,8 +29,8 @@ export default {
       defaultValue: 0,
 
       control: {
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
 
     max: {
@@ -38,8 +38,8 @@ export default {
       defaultValue: 100,
 
       control: {
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
 
     showMinMax: {
@@ -47,8 +47,8 @@ export default {
       defaultValue: false,
 
       control: {
-        type: 'boolean',
-      },
+        type: 'boolean'
+      }
     },
 
     step: {
@@ -56,8 +56,8 @@ export default {
       defaultValue: 1,
 
       control: {
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
 
     label: {
@@ -65,8 +65,8 @@ export default {
       defaultValue: 'Slider label text in one line',
 
       control: {
-        type: 'text',
-      },
+        type: 'text'
+      }
     },
 
     instruction: {
@@ -74,47 +74,47 @@ export default {
       defaultValue: 'Element instruction',
 
       control: {
-        type: 'text',
-      },
+        type: 'text'
+      }
     },
 
     hasTextbox: {
       name: 'hasTextbox',
 
       control: {
-        type: 'boolean',
-      },
+        type: 'boolean'
+      }
     },
 
     unitLabel: {
       name: 'Unit label',
 
       control: {
-        type: 'text',
-      },
+        type: 'text'
+      }
     },
 
     errorMessage: {
       name: 'errorMessage',
 
       control: {
-        type: 'text',
-      },
+        type: 'text'
+      }
     },
 
     disabled: {
       name: 'disabled',
 
       control: {
-        type: 'boolean',
-      },
-    },
-  },
+        type: 'boolean'
+      }
+    }
+  }
 }
 
 export const Default = {
   render: Template.bind({}),
-  name: 'Default',
+  name: 'Default'
 }
 
 export const Textbox = {
@@ -122,8 +122,8 @@ export const Textbox = {
   name: 'Textbox',
 
   args: {
-    hasTextbox: true,
-  },
+    hasTextbox: true
+  }
 }
 
 export const UnitTextbox = {
@@ -133,8 +133,8 @@ export const UnitTextbox = {
   args: {
     hasTextbox: true,
     unitLabel: 'kr',
-    showMinMax: true,
-  },
+    showMinMax: true
+  }
 }
 
 export const Error = {
@@ -143,8 +143,8 @@ export const Error = {
 
   args: {
     hasTextbox: true,
-    errorMessage: 'Error text can be quite long',
-  },
+    errorMessage: 'Error text can be quite long'
+  }
 }
 
 export const Disabled = {
@@ -153,6 +153,6 @@ export const Disabled = {
 
   args: {
     hasTextbox: true,
-    disabled: true,
-  },
+    disabled: true
+  }
 }

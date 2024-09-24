@@ -21,9 +21,9 @@ const meta: Meta = {
   title: 'Docs/Components/Badge',
   component: 'gds-badge',
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -35,9 +35,9 @@ type Story = StoryObj
 export const Variants: Story = {
   name: 'Variants',
   parameters: {
-    controls: { include: [] },
+    controls: { include: [] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-grid columns="2" gap="2xl">
       <gds-flex gap="xl" direction="column" width="20ch">
         <gds-flex direction="column" gap="s">
@@ -61,8 +61,7 @@ export const Variants: Story = {
           Success
         </gds-badge>
         <gds-badge variant="error">
-          <gds-icon-triangle-exclamation slot="lead">
-          </gds-icon-triangle-exclamation>
+          <gds-icon-triangle-exclamation slot="lead"> </gds-icon-triangle-exclamation>
           Error
         </gds-badge>
       </gds-flex>
@@ -78,7 +77,7 @@ export const Variants: Story = {
         <gds-badge variant="error"> Error </gds-badge>
       </gds-flex>
     </gds-grid>
-  `,
+  `
 }
 
 /**
@@ -87,21 +86,20 @@ export const Variants: Story = {
 export const Lead: Story = {
   name: 'Lead',
   parameters: {
-    controls: { include: [] },
+    controls: { include: [] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex gap="xl" width="20ch">
       <gds-badge variant="success">
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         Launch
       </gds-badge>
       <gds-badge variant="warning">
-        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
-        </gds-icon-arrow-rotate-counter-clockwise>
+        <gds-icon-arrow-rotate-counter-clockwise slot="lead"> </gds-icon-arrow-rotate-counter-clockwise>
         Discard
       </gds-badge>
     </gds-flex>
-  `,
+  `
 }
 
 /**
@@ -110,9 +108,9 @@ export const Lead: Story = {
 export const Trail: Story = {
   name: 'Trail',
   parameters: {
-    controls: { include: [] },
+    controls: { include: [] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex gap="xl" width="20ch">
       <gds-badge variant="success">
         <gds-icon-plus-small slot="lead"></gds-icon-plus-small>
@@ -125,5 +123,5 @@ export const Trail: Story = {
         <span slot="trail">%</span>
       </gds-badge>
     </gds-flex>
-  `,
+  `
 }

@@ -14,17 +14,17 @@ export default {
     moduleMetadata({
       declarations: [NgvFoldOutOptionDirective],
       imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }),
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    })
   ],
   argTypes: {
     alignOptions: {
       control: {
         type: 'inline-radio',
-        options: ['left', 'right'],
-      },
-    },
-  },
+        options: ['left', 'right']
+      }
+    }
+  }
 } as Meta
 
 const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
@@ -37,12 +37,10 @@ const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
     </ngv-fold-out>
   </div>`,
   styleUrls: ['./fold-out.stories.scss'],
-  props: args,
+  props: args
 })
 
-const TemplateAlt: StoryFn<NgvFoldOutComponent> = (
-  args: NgvFoldOutComponent,
-) => ({
+const TemplateAlt: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
   template: /* html */ `
     <div class="story-wrapper--right-align">
       <ngv-fold-out [alignOptions]="alignOptions">
@@ -52,21 +50,21 @@ const TemplateAlt: StoryFn<NgvFoldOutComponent> = (
       </ngv-fold-out>
     </div>`,
   styleUrls: ['./fold-out.stories.scss'],
-  props: args,
+  props: args
 })
 
 export const Primary = Template.bind({})
 Primary.args = {
-  alignOptions: 'left',
+  alignOptions: 'left'
 }
 Primary.parameters = {
-  docs: { source: { code: examplePrimary } },
+  docs: { source: { code: examplePrimary } }
 }
 
 export const Alternative = TemplateAlt.bind({})
 Alternative.args = {
-  alignOptions: 'right',
+  alignOptions: 'right'
 }
 Alternative.parameters = {
-  docs: { source: { code: exampleAlt } },
+  docs: { source: { code: exampleAlt } }
 }

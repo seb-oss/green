@@ -6,16 +6,16 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: ['@storybook/addon-essentials', '@storybook/addon-docs'],
   core: {
-    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+    builder: '@storybook/builder-vite' // 👈 The builder enabled here.
   },
   framework: {
     name: '@storybook/web-components-vite',
-    options: {},
+    options: {}
   },
-  previewHead: (head) => `
+  previewHead: head => `
     <script>globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true</script>
     ${head}
-  `,
+  `
 }
 
 export default config

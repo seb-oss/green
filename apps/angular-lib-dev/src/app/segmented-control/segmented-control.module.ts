@@ -9,11 +9,7 @@ import { NggSegmentedControlModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [SegmentedControlComponent, OptionAComponent, OptionBComponent],
-  imports: [
-    CommonModule,
-    NggSegmentedControlModule,
-    SegmentedControlRoutingModule,
-  ],
-  exports: [OptionAComponent, OptionBComponent],
+  imports: [CommonModule, NggSegmentedControlModule, SegmentedControlRoutingModule],
+  exports: [OptionAComponent, OptionBComponent]
 })
 export class SegmentedControlModule {}

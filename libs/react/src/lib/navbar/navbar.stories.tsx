@@ -1,9 +1,7 @@
 import React from 'react'
 import Navbar from './navbar'
 
-const Template = ({ children, ...props }) => (
-  <Navbar {...props}>{children}</Navbar>
-)
+const Template = ({ children, ...props }) => <Navbar {...props}>{children}</Navbar>
 
 export default {
   title: 'Components/Navbar',
@@ -11,9 +9,9 @@ export default {
 
   argTypes: {
     variant: {
-      options: [undefined, 'bg-light', 'bg-dark'],
-    },
-  },
+      options: [undefined, 'bg-light', 'bg-dark']
+    }
+  }
 }
 
 export const Transparent = {
@@ -23,8 +21,8 @@ export const Transparent = {
   args: {
     title: 'Transparent navbar',
     titleLink: 'http://seb.se',
-    variant: undefined,
-  },
+    variant: undefined
+  }
 }
 
 export const Light = {
@@ -34,8 +32,8 @@ export const Light = {
   args: {
     title: 'Light navbar',
     titleLink: 'http://seb.se',
-    variant: 'bg-light',
-  },
+    variant: 'bg-light'
+  }
 }
 
 export const Dark = {
@@ -45,8 +43,8 @@ export const Dark = {
   args: {
     title: 'Dark navbar',
     titleLink: 'http://seb.se',
-    variant: 'bg-dark',
-  },
+    variant: 'bg-dark'
+  }
 }
 
 export const Content = {
@@ -60,7 +58,7 @@ export const Content = {
       <input type="text" placeholder="Input field" />,
       <button type="button" className="ghost">
         Search
-      </button>,
-    ],
-  },
+      </button>
+    ]
+  }
 }

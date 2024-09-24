@@ -15,17 +15,11 @@ export type StyleExpressionPropertyOptions = {
 /**
  * todo
  */
-export function styleExpressionProperty(
-  options?: StyleExpressionPropertyOptions,
-) {
-  return <ElemClass extends GdsElement>(
-    proto: ElemClass,
-    descriptor: PropertyKey,
-  ) => {
+export function styleExpressionProperty(options?: StyleExpressionPropertyOptions) {
+  return <ElemClass extends GdsElement>(proto: ElemClass, descriptor: PropertyKey) => {
     const sel = options?.selector ?? String(':host')
     const prop = options?.property ?? String(descriptor)
-    const valueTemplate =
-      options?.valueTemplate ?? ((v) => `var(--gds-space-${v})`)
+    const valueTemplate = options?.valueTemplate ?? (v => `var(--gds-space-${v})`)
     const styleTemplate = options?.styleTemplate
 
     // Jack into Lits property decorator
@@ -37,11 +31,8 @@ export function styleExpressionProperty(
         const ast = parse(tokenize(newValue as string))
         const css = toCss(sel, prop, ast, valueTemplate, styleTemplate)
         ;(this as any)[`__${String(descriptor)}_ast`] = ast
-        ;(this as GdsElement)._dynamicStylesController.inject(
-          `sep_${String(descriptor)}`,
-          unsafeCSS(css),
-        )
-      },
+        ;(this as GdsElement)._dynamicStylesController.inject(`sep_${String(descriptor)}`, unsafeCSS(css))
+      }
     })
   }
 }

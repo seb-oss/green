@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
@@ -41,7 +38,7 @@ export class GdsCard extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'box-shadow',
-    valueTemplate: (v) => `var(--gds-shadow-${v})`,
+    valueTemplate: v => `var(--gds-shadow-${v})`
   })
   shadow?: string
 
@@ -70,7 +67,7 @@ export class GdsCard extends GdsContainer {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       const [size, color] = v.split('/')
       return `var(--gds-space-${size}) solid ${color ? `var(--gds-color-${color})` : 'currentColor'}`
     },
@@ -80,7 +77,7 @@ export class GdsCard extends GdsContainer {
       const bottom = values.length > 2 ? values[2] : top
       const left = values.length > 3 ? values[3] : top
       return `border-top: ${top}; border-right: ${right}; border-bottom: ${bottom}; border-left: ${left};`
-    },
+    }
   })
   border?: string
 
@@ -109,7 +106,7 @@ export class GdsCard extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: v => `var(--gds-space-${v})`
   })
   radius?: string
 
@@ -134,7 +131,7 @@ export class GdsCard extends GdsContainer {
   @styleExpressionProperty({
     property: 'backdrop-filter',
     selector: '[backdrop]',
-    valueTemplate: (v) => `blur(${v})`,
+    valueTemplate: v => `blur(${v})`
   })
   filter?: string
 
@@ -161,7 +158,7 @@ export class GdsCard extends GdsContainer {
    */
 
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       const [position, colorName, transparency] = v.split('/')
       const color = transparency
         ? `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
@@ -171,13 +168,11 @@ export class GdsCard extends GdsContainer {
     styleTemplate: (_prop, values) => {
       const [MASK] = values[0].split('/')
       return `[backdrop] { ${MASK} }`
-    },
+    }
   })
   mask?: string
 
   render() {
-    return html`${this.mask || this.filter
-        ? html`<div backdrop></div>`
-        : ''}<slot></slot>`
+    return html`${this.mask || this.filter ? html`<div backdrop></div>` : ''}<slot></slot>`
   }
 }

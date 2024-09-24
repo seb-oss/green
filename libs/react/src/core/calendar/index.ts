@@ -11,8 +11,8 @@ const reactWrapper = createComponent({
   elementClass: GdsCalendar,
   react: React,
   events: {
-    undefined: "change" as EventName<undefined>,
-    undefined: "gds-date-focused" as EventName<undefined>,
+    onChange: "change",
+    onGdsDateFocused: "gds-date-focused",
   },
   displayName: "GdsCalendar",
 });

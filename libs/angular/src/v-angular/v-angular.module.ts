@@ -34,7 +34,7 @@ import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
     NgvRadioModule,
     NgvTextareaModule,
     NgvTooltipModule,
-    NgvTypeaheadModule,
-  ],
+    NgvTypeaheadModule
+  ]
 })
 export class NggModule {}

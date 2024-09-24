@@ -20,15 +20,11 @@ export default function GridPlayground(): JSX.Element {
     setColumns(Number(e.target.value))
   }
 
-  const handlePaddingInlineChange = (
-    e: ChangeEvent<HTMLSelectElement>,
-  ): void => {
+  const handlePaddingInlineChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     setPaddingInline(e.target.value as GridAttribute)
   }
 
-  const handlePaddingBlockChange = (
-    e: ChangeEvent<HTMLSelectElement>,
-  ): void => {
+  const handlePaddingBlockChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     setPaddingBlock(e.target.value as GridAttribute)
   }
 
@@ -59,8 +55,8 @@ export default function GridPlayground(): JSX.Element {
             <div className="column" key={i}>
               <h2>COL:{i + 1}</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
               </p>
             </div>
           ))}
@@ -80,10 +76,8 @@ export default function GridPlayground(): JSX.Element {
       <aside>
         <h2>Playground</h2>
         <p>
-          Change the values to see how the grid changes. The grid is a
-          flexbox-based grid system. It uses the CSS properties{' '}
-          <strong>gap</strong>, <strong>padding</strong>, and{' '}
-          <strong>columns</strong>.
+          Change the values to see how the grid changes. The grid is a flexbox-based grid system. It uses the CSS
+          properties <strong>gap</strong>, <strong>padding</strong>, and <strong>columns</strong>.
         </p>
         <div className="options">
           <label className="thecheck">

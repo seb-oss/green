@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { GdsContainer } from '../container'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -29,7 +26,7 @@ export class GdsGrid extends GdsContainer {
    */
   @styleExpressionProperty({
     property: '--_c',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   columns?: string
 
@@ -46,7 +43,7 @@ export class GdsGrid extends GdsContainer {
       const colGap = values[0]
       const rowGap = values[1] || colGap
       return `--_gap-column: ${colGap}; --_gap-row: ${rowGap};`
-    },
+    }
   })
   gap?: string
 
@@ -61,7 +58,7 @@ export class GdsGrid extends GdsContainer {
   @styleExpressionProperty({
     attribute: 'auto-columns',
     property: '--_col-width',
-    valueTemplate: (v) => `${v}px`,
+    valueTemplate: v => `${v}px`
   })
   autoColumns?: string
 

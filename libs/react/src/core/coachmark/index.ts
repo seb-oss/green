@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsCoachmark,
   react: React,
   events: {
-    undefined: "gds-ui-state" as EventName<undefined>,
+    onGdsUiState: "gds-ui-state",
   },
   displayName: "GdsCoachmark",
 });

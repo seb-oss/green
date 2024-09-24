@@ -10,16 +10,11 @@ figma.connect(
         Success: 'success',
         Warning: 'warning',
         Error: 'error',
-        Notice: 'notice',
+        Notice: 'notice'
       }),
-      icon: figma.boolean('Icon'),
+      icon: figma.boolean('Icon')
     },
-    example: ({
-      variant,
-      statusText,
-    }: {
-      variant: string
-      statusText: string
-    }) => html` <gds-badge variant=${variant}> ${statusText} </gds-badge>`,
-  },
+    example: ({ variant, statusText }: { variant: string; statusText: string }) =>
+      html` <gds-badge variant=${variant}> ${statusText} </gds-badge>`
+  }
 )

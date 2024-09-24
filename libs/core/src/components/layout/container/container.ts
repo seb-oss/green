@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -28,7 +25,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS display values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   display = 'block'
 
@@ -43,14 +40,14 @@ export class GdsContainer extends GdsElement {
    * The above example will apply the color style of `primary`.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
         return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
         return `var(--gds-sys-color-${colorName})`
       }
-    },
+    }
   })
   color?: string
 
@@ -68,14 +65,14 @@ export class GdsContainer extends GdsElement {
    */
 
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
         return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
         return `var(--gds-color-${colorName})`
       }
-    },
+    }
   })
   background?: string
 
@@ -89,7 +86,7 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   opacity?: string
 
@@ -122,7 +119,7 @@ export class GdsContainer extends GdsElement {
    * Supports all the default margin values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       return v === 'auto' ? 'auto' : `var(--gds-space-${v})`
     },
     styleTemplate: (_prop, values) => {
@@ -134,7 +131,7 @@ export class GdsContainer extends GdsElement {
       const left = values.length > 3 ? transformValue(values[3]) : right
 
       return `margin: ${top} ${right} ${bottom} ${left};`
-    },
+    }
   })
   margin?: string
 
@@ -143,7 +140,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS position values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   position?: string
 
@@ -152,7 +149,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS inset values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   inset?: string
 
@@ -161,7 +158,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS overflow values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   overflow?: string
 
@@ -185,7 +182,7 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'grid-column',
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`
   })
   column?: string
 
@@ -210,7 +207,7 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'grid-row',
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`
   })
   row?: string
 
@@ -221,7 +218,7 @@ export class GdsContainer extends GdsElement {
    * @property height
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   height?: string
 
@@ -230,7 +227,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS height values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   width?: string
 
@@ -240,7 +237,7 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'z-index',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   stack?: string
 
@@ -250,7 +247,7 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'box-sizing',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   box?: string
 

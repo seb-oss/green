@@ -23,9 +23,9 @@ export const globalTypes = {
       icon: 'lightning',
       items: ['2016', '2023'],
       showName: true,
-      dynamicTitle: true,
-    },
-  },
+      dynamicTitle: true
+    }
+  }
 }
 
 export default {
@@ -35,7 +35,7 @@ export default {
       transformSource: (source: any) => {
         const regexRes = source.match(/<gds-theme>([\s\S]*?)<\/gds-theme>/)
         return regexRes ? regexRes[1] : source
-      },
+      }
     },
     options: {
       storySort: {
@@ -46,10 +46,10 @@ export default {
           'Concepts',
           ['Architecture'],
           'Contributing',
-          ['Introduction'],
-        ],
-      },
-    },
+          ['Introduction']
+        ]
+      }
+    }
   },
   decorators: [
     (storyFn: any, context: any) => {
@@ -73,8 +73,8 @@ export default {
       context.globals.previousStyle = style
 
       return html`<gds-theme>${storyFn()}</gds-theme>`
-    },
-  ],
+    }
+  ]
 }
 
 @customElement('transitional-styles-toggle')

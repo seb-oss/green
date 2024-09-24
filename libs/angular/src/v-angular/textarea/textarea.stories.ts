@@ -1,19 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormControl,
-  Validators,
-} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms'
 
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
 import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
 import { NgvTextareaComponent } from './textarea.component'
@@ -23,23 +13,21 @@ export default {
   component: NgvTextareaComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NgvI18nModule)]
     }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
-      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule],
-    }),
-  ],
+      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule]
+    })
+  ]
 } as Meta
 
 type TextareaComponentStory = StoryFn<NgvTextareaComponent & any>
 
 let formControlValue: any = undefined
 const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
-  const formControl = new UntypedFormControl(formControlValue, [
-    Validators.maxLength(140),
-  ])
-  formControl.valueChanges.subscribe((val) => (formControlValue = val))
+  const formControl = new UntypedFormControl(formControlValue, [Validators.maxLength(140)])
+  formControl.valueChanges.subscribe(val => (formControlValue = val))
   const toggleDisableField = () => {
     if (formControl.disabled) return formControl.enable()
     formControl.disable()
@@ -65,8 +53,8 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
     props: {
       ...args,
       formControl: formControl,
-      disableFn: toggleDisableField,
-    },
+      disableFn: toggleDisableField
+    }
   }
 }
 
@@ -76,20 +64,20 @@ Primary.args = {
   label: 'This is a field label',
   placeholder: 'This is a placeholder',
   maxlength: 140,
-  invalid: false,
+  invalid: false
 }
 
 export const WithErrorAndCountdown = Template.bind({})
 WithErrorAndCountdown.args = {
   ...Primary.args,
   invalid: true,
-  error: 'this is a test error',
+  error: 'this is a test error'
 }
 
 export const WithFixedRows = Template.bind({})
 WithFixedRows.args = {
   ...Primary.args,
-  rows: 3,
+  rows: 3
 }
 
 export const WithFixedRowsAndTextPrefilled = Template.bind({})
@@ -97,14 +85,14 @@ WithFixedRowsAndTextPrefilled.args = {
   ...Primary.args,
   rows: 3,
   state:
-    'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello',
+    'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello'
 }
 
 export const WithLockedInput = Template.bind({})
 WithLockedInput.args = {
   ...Primary.args,
   locked: true,
-  description: undefined,
+  description: undefined
 }
 
 export const WithDisplayDisabledAsLocked = Template.bind({})
@@ -116,5 +104,5 @@ WithDisplayDisabledAsLocked.args = {
   valid: undefined,
   locked: false,
   description: undefined,
-  displayDisabledAsLocked: true,
+  displayDisabledAsLocked: true
 }

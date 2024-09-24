@@ -24,42 +24,42 @@ export class GdsBadge extends GdsElement {
    * @property variant
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`,
     selector: '.badge',
     styleTemplate: (prop, values) => {
       const variant = values[0]
       const variantMapping: { [key: string]: { bg: string; color: string } } = {
         information: {
           bg: 'information',
-          color: 'information',
+          color: 'information'
         },
         notice: {
           bg: 'notice',
-          color: 'notice',
+          color: 'notice'
         },
         success: {
           bg: 'positive',
-          color: 'positive',
+          color: 'positive'
         },
         warning: {
           bg: 'warning',
-          color: 'warning',
+          color: 'warning'
         },
         error: {
           bg: 'negative',
-          color: 'negative',
-        },
+          color: 'negative'
+        }
       }
 
       const tokens = variantMapping[variant] || {
         bg: 'default-bg',
-        color: 'default-content',
+        color: 'default-content'
       }
       const BG = `background-color: var(--gds-color-l3c-background-${tokens.bg}-secondary);`
       const CL = `color: var(--gds-color-l3c-content-${tokens.color});`
       const style = `${BG} ${CL}`
       return style
-    },
+    }
   })
   variant?: string
 

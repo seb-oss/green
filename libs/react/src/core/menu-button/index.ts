@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: MenuButton,
   react: React,
   events: {
-    undefined: "click" as EventName<undefined>,
+    onClick: "click",
   },
   displayName: "MenuButton",
 });

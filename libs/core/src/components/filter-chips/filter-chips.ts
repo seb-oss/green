@@ -1,10 +1,7 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlElement } from '../form/form-control'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../utils/helpers/custom-element-scoping'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { watch } from '../../utils/decorators/watch'
 import { stringArrayConverter } from '../../utils/helpers/attribute-converters'
@@ -22,9 +19,7 @@ import { styles } from './filter-chips.styles'
  * @fires change - When a chip is clicked
  */
 @gdsCustomElement('gds-filter-chips')
-export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
-  ValueT | ValueT[]
-> {
+export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<ValueT | ValueT[]> {
   static styles = [styles]
 
   /**
@@ -53,9 +48,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
    * @readonly
    */
   get chips() {
-    return this._elSlot
-      ? (this._elSlot.assignedElements() as GdsFilterChip[])
-      : []
+    return this._elSlot ? (this._elSlot.assignedElements() as GdsFilterChip[]) : []
   }
 
   /**
@@ -73,7 +66,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
 
   render() {
     const layoutClasses = {
-      collapse: this._collapsed,
+      collapse: this._collapsed
     }
     return html`<div
       class="chips ${classMap(layoutClasses)}"
@@ -95,13 +88,11 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   }
 
   #handleChipClick = (event: Event) => {
-    const clickedChip = this.chips.find(
-      (s) => s === event.target || s.contains(event.target as Node),
-    )
+    const clickedChip = this.chips.find(s => s === event.target || s.contains(event.target as Node))
     if (clickedChip) {
       if (this.multiple && Array.isArray(this.value)) {
         if (clickedChip.selected) {
-          this.value = this.value.filter((v) => v !== clickedChip.value)
+          this.value = this.value.filter(v => v !== clickedChip.value)
         } else {
           this.value = [...this.value, clickedChip.value]
         }
@@ -113,8 +104,8 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
         new CustomEvent('change', {
           detail: { clickedChip, value: this.value },
           bubbles: true,
-          composed: true,
-        }),
+          composed: true
+        })
       )
     }
   }
@@ -145,7 +136,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   }
 
   #handleSlotChange() {
-    const selChipValue = this.chips.find((s) => s.selected)?.value
+    const selChipValue = this.chips.find(s => s.selected)?.value
     if (selChipValue) {
       this.value = selChipValue
     }
@@ -164,10 +155,8 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     }
 
     this.updateComplete.then(() => {
-      this.chips.forEach((chip) => {
-        chip.selected = this.multiple
-          ? (this.value as ValueT[]).includes(chip.value)
-          : this.value === chip.value
+      this.chips.forEach(chip => {
+        chip.selected = this.multiple ? (this.value as ValueT[]).includes(chip.value) : this.value === chip.value
       })
     })
   }

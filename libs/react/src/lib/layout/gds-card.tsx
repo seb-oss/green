@@ -6,7 +6,7 @@ import { GdsCard } from '@sebgroup/green-core/components/layout/card/index.js'
 const Card = createComponent({
   tagName: getScopedTagName('gds-card'),
   elementClass: GdsCard,
-  react: React,
+  react: React
 })
 
 export default Card

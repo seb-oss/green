@@ -11,7 +11,7 @@ import {
   Optional,
   Output,
   Self,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
@@ -27,7 +27,7 @@ export enum ButtonStyle {
   DeleteConfirm,
   Ghost,
   GhostDark,
-  Link,
+  Link
 }
 
 /**
@@ -37,19 +37,15 @@ export enum ButtonStyle {
 @Component({
   selector: 'ngv-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  styleUrls: ['./button.component.scss']
 })
-export class NgvButtonComponent
-  extends NgvBaseControlValueAccessorComponent
-  implements OnInit, OnChanges
-{
+export class NgvButtonComponent extends NgvBaseControlValueAccessorComponent implements OnInit, OnChanges {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'button'
   /** Type of button to one of button|submit|reset|link, where link creates an anchor tag. */
   @Input() type: ButtonTypes = 'button'
   /** Style of the button to one of Primary|Secondary|Alternative|Delete|DeleteConfirm|Ghost|GhostDark|Link. */
-  @Input() buttonStyle: ButtonStyle =
-    this.type === 'link' ? ButtonStyle.Link : ButtonStyle.Primary
+  @Input() buttonStyle: ButtonStyle = this.type === 'link' ? ButtonStyle.Link : ButtonStyle.Primary
   /** Size of the button to be smaller. */
   @Input() small = false
   /** Where the button should link to if {@link ButtonTypes} is set to link. */
@@ -70,7 +66,7 @@ export class NgvButtonComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef,
+    protected cdr: ChangeDetectorRef
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -84,25 +80,19 @@ export class NgvButtonComponent
       tertiary: type === ButtonStyle.Alternative || type === ButtonStyle.Link,
       danger: type === ButtonStyle.Delete || type === ButtonStyle.DeleteConfirm,
       ghost: type === ButtonStyle.GhostDark,
-      'ghost-light': type === ButtonStyle.Ghost,
+      'ghost-light': type === ButtonStyle.Ghost
     }
   }
 
   ngOnInit() {
     super.ngOnInit()
     if (this.href) this.external = /^\w+:\/\/.+$/.test(this.href)
-    this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
-      this.buttonStyle,
-      this.small,
-    )
+    this.buttonClasses = NgvButtonComponent.buttonStyleClasses(this.buttonStyle, this.small)
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.buttonStyle || changes.small) {
-      this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
-        this.buttonStyle,
-        this.small,
-      )
+      this.buttonClasses = NgvButtonComponent.buttonStyleClasses(this.buttonStyle, this.small)
     }
   }
 

@@ -6,11 +6,7 @@ import { IconProps } from '../../types/props'
  * @deprecated
  * This component is deprecated. Use `SquareExclamation` instead from `@sebgroup/green-react`.
  */
-export const SquareExclamation = ({
-  focusable = false,
-  title,
-  ...props
-}: IconProps) => {
+export const SquareExclamation = ({ focusable = false, title, ...props }: IconProps) => {
   let id
   if (title) id = randomId()
   return (

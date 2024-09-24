@@ -11,8 +11,8 @@ const reactWrapper = createComponent({
   elementClass: GdsContextMenu,
   react: React,
   events: {
-    undefined: "gds-menu-item-click" as EventName<undefined>,
-    undefined: "gds-ui-state" as EventName<undefined>,
+    onGdsMenuItemClick: "gds-menu-item-click",
+    onGdsUiState: "gds-ui-state",
   },
   displayName: "GdsContextMenu",
 });

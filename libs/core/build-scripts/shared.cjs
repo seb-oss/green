@@ -1,23 +1,23 @@
 /** Gets an array of components from a CEM object. */
 function getAllComponents(metadata) {
-  const allComponents = [];
+  const allComponents = []
 
-  metadata.modules.map((module) => {
-    module.declarations?.map((declaration) => {
+  metadata.modules.map(module => {
+    module.declarations?.map(declaration => {
       if (declaration.customElement) {
-        const component = declaration;
-        const path = module.path;
+        const component = declaration
+        const path = module.path
 
         if (component) {
-          allComponents.push(Object.assign(component, { path }));
+          allComponents.push(Object.assign(component, { path }))
         }
       }
-    });
-  });
+    })
+  })
 
-  return allComponents;
+  return allComponents
 }
 
 module.exports = {
   getAllComponents
-};
+}

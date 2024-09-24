@@ -9,7 +9,7 @@ import {
   OnInit,
   Optional,
   Output,
-  Self,
+  Self
 } from '@angular/core'
 import { NgControl, UntypedFormControl } from '@angular/forms'
 
@@ -29,12 +29,9 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngv-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  styleUrls: ['./input.component.scss']
 })
-export class NgvInputComponent
-  extends NgvBaseControlValueAccessorComponent
-  implements OnInit, OnDestroy
-{
+export class NgvInputComponent extends NgvBaseControlValueAccessorComponent implements OnInit, OnDestroy {
   /** Adding .gds-form-item as a class to host element */
   @HostBinding('class') class = 'gds-form-item'
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -149,18 +146,16 @@ export class NgvInputComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef,
+    protected cdr: ChangeDetectorRef
   ) {
     super(ngControl, translocoScope, cdr)
   }
 
   ngOnInit() {
     super.ngOnInit()
-    this.inputChange$
-      .pipe(takeUntil(this._destroy$), debounceTime(this.debounceTime))
-      .subscribe((inputValue) => {
-        this.ngvInput.emit(inputValue)
-      })
+    this.inputChange$.pipe(takeUntil(this._destroy$), debounceTime(this.debounceTime)).subscribe(inputValue => {
+      this.ngvInput.emit(inputValue)
+    })
   }
 
   ngOnDestroy(): void {

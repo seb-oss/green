@@ -22,9 +22,9 @@ const meta: Meta = {
   title: 'Docs/Components/Button',
   component: 'gds-button',
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -33,41 +33,41 @@ type Story = StoryObj
 export const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' },
+      source: { format: true, type: 'dynamic' }
     },
-    controls: { expanded: true },
+    controls: { expanded: true }
   },
   argTypes: {
     rank: {
       options: ['primary', 'secondary', 'tertiary'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     },
     variant: {
       options: ['neutral', 'positive', 'negative'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     },
     size: {
       options: ['small', 'medium', 'large'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     },
     target: {
       options: ['_self', '_blank', '_parent', '_top'],
-      control: { type: 'select' },
+      control: { type: 'select' }
     },
     rel: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     download: {
-      control: { type: 'text' },
-    },
+      control: { type: 'text' }
+    }
   },
   args: {
-    innerText: 'Button',
-  },
+    innerText: 'Button'
+  }
 }
 
 export const Basic: Story = {
-  ...DefaultParams,
+  ...DefaultParams
 }
 
 /**
@@ -79,9 +79,9 @@ export const RanksAndVariants: Story = {
   name: 'Ranks and variants',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] },
+    controls: { include: [] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex direction="column" gap="4xl" padding="4xl">
       <gds-flex direction="column" gap="m">
         <gds-text>Neutral</gds-text>
@@ -129,7 +129,7 @@ export const RanksAndVariants: Story = {
         </gds-flex>
       </gds-flex>
     </gds-grid>
-  `,
+  `
 }
 
 /**
@@ -139,21 +139,15 @@ export const Sizes: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: ['rank', 'variant'] },
+    controls: { include: ['rank', 'variant'] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex gap="l" align="center">
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
-        Small
-      </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant}>
-        Medium
-      </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
-        Large
-      </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="small"> Small </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant}> Medium </gds-button>
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="large"> Large </gds-button>
     </gds-flex>
-  `,
+  `
 }
 
 /**
@@ -165,28 +159,20 @@ export const WithIcon: Story = {
   name: 'Using icons in button',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: ['rank', 'variant', 'size'] },
+    controls: { include: ['rank', 'variant', 'size'] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex gap="l">
-      <gds-button
-        .rank=${args.rank}
-        .variant=${args.variant}
-        .size=${args.size}
-      >
+      <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         Leading icon
       </gds-button>
-      <gds-button
-        .rank=${args.rank}
-        .variant=${args.variant}
-        .size=${args.size}
-      >
+      <gds-button .rank=${args.rank} .variant=${args.variant} .size=${args.size}>
         Trailing icon
         <gds-icon-credit-card slot="trail"></gds-icon-credit-card>
       </gds-button>
     </gds-flex>
-  `,
+  `
 }
 
 /**
@@ -197,9 +183,9 @@ export const IconButton: Story = {
   name: 'Icon button',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: ['rank', 'variant'] },
+    controls: { include: ['rank', 'variant'] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-flex gap="l" align="center">
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
@@ -211,7 +197,7 @@ export const IconButton: Story = {
         <gds-icon-arrow-right />
       </gds-button>
     </gds-flex>
-  `,
+  `
 }
 
 /**
@@ -223,17 +209,15 @@ export const Disabled: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] },
+    controls: { include: [] }
   },
   render: () => html`
     <gds-flex gap="l">
       <gds-button disabled>Primary</gds-button>
-      <gds-button rank="secondary" variant="positive" disabled>
-        Secondary
-      </gds-button>
+      <gds-button rank="secondary" variant="positive" disabled> Secondary </gds-button>
       <gds-button rank="tertiary" disabled> Tertiary </gds-button>
     </gds-flex>
-  `,
+  `
 }
 
 /**
@@ -243,12 +227,12 @@ export const Link: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: ['href', 'target', 'rel', 'download'] },
+    controls: { include: ['href', 'target', 'rel', 'download'] }
   },
   args: {
-    href: 'https://github.com/seb-oss/green',
+    href: 'https://github.com/seb-oss/green'
   },
-  render: (args) => html`
+  render: args => html`
     <gds-button
       href=${args.href}
       target=${args.target || nothing}
@@ -257,7 +241,7 @@ export const Link: Story = {
     >
       Link
     </gds-button>
-  `,
+  `
 }
 
 /**
@@ -267,12 +251,12 @@ export const Length: Story = {
   ...DefaultParams,
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] },
+    controls: { include: [] }
   },
-  render: (args) => html`
+  render: args => html`
     <gds-button>
       <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       This is a long text that will truncated
     </gds-button>
-  `,
+  `
 }

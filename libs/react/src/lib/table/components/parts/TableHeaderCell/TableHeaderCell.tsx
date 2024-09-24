@@ -1,11 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { SortDirection } from '../../table-typings'
-import {
-  SortedColumn,
-  TableContextType,
-  useTableContext,
-} from '../../context/TableContextProvider'
+import { SortedColumn, TableContextType, useTableContext } from '../../context/TableContextProvider'
 
 export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
   accessor?: keyof T
@@ -15,36 +11,20 @@ export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
 
 const TableHeaderCell = React.forwardRef(
   (
-    {
-      accessor,
-      disableSort,
-      className,
-      sortDirection,
-      onClick,
-      children,
-      ...props
-    }: TableHeaderCellProps,
-    ref: React.ForwardedRef<HTMLTableCellElement>,
+    { accessor, disableSort, className, sortDirection, onClick, children, ...props }: TableHeaderCellProps,
+    ref: React.ForwardedRef<HTMLTableCellElement>
   ) => {
     const tableContext: TableContextType = useTableContext()
-    const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
-      null,
-    )
-    const [sortOrder, setSortOrder] = React.useState<
-      SortDirection | null | undefined
-    >(SortDirection.ASC)
+    const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(null)
+    const [sortOrder, setSortOrder] = React.useState<SortDirection | null | undefined>(SortDirection.ASC)
     const [sortable, setSortable] = React.useState<boolean>(false)
 
     /**
      * get latest sort direction
      * @param oldSortDirection current sort direction
      */
-    const getSortDirection = (
-      oldSortDirection: SortDirection,
-    ): SortDirection => {
-      return oldSortDirection === SortDirection.ASC
-        ? SortDirection.DESC
-        : SortDirection.ASC
+    const getSortDirection = (oldSortDirection: SortDirection): SortDirection => {
+      return oldSortDirection === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC
     }
 
     /** on column sort */
@@ -53,12 +33,12 @@ const TableHeaderCell = React.forwardRef(
         sortedColumn && sortedColumn.accessor === accessor
           ? {
               ...sortedColumn,
-              sortDirection: getSortDirection(sortedColumn.sortDirection),
+              sortDirection: getSortDirection(sortedColumn.sortDirection)
             }
           : { accessor, sortDirection: SortDirection.DESC }
       tableContext.setTableState({
         ...tableContext.tableState,
-        sortedColumn: newSortedColumn,
+        sortedColumn: newSortedColumn
       })
       !!newSortedColumn && tableContext?.onSort?.(newSortedColumn)
     }, [sortedColumn, tableContext])
@@ -85,17 +65,13 @@ const TableHeaderCell = React.forwardRef(
       if (sortDirection && tableContext.onSort) {
         tableContext.setTableState({
           ...tableContext.tableState,
-          sortedColumn: { accessor, sortDirection },
+          sortedColumn: { accessor, sortDirection }
         })
       }
     }, [sortDirection, tableContext.onSort])
 
     React.useEffect(() => {
-      setSortOrder(
-        sortable && sortedColumn?.accessor === accessor
-          ? sortedColumn?.sortDirection
-          : null,
-      )
+      setSortOrder(sortable && sortedColumn?.accessor === accessor ? sortedColumn?.sortDirection : null)
     }, [sortable, sortedColumn])
 
     return (
@@ -106,14 +82,10 @@ const TableHeaderCell = React.forwardRef(
         aria-sort={getCurrentSortValue()}
         {...props}
       >
-        {sortable ? (
-          <button className="sg-table-sort"> {children}</button>
-        ) : (
-          children
-        )}
+        {sortable ? <button className="sg-table-sort"> {children}</button> : children}
       </th>
     )
-  },
+  }
 )
 
 TableHeaderCell.displayName = 'TableHeaderCell'

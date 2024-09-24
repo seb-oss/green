@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsPopover,
   react: React,
   events: {
-    undefined: "gds-ui-state" as EventName<undefined>,
+    onGdsUiState: "gds-ui-state",
   },
   displayName: "GdsPopover",
 });

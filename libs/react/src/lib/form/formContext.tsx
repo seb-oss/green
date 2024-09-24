@@ -15,9 +15,7 @@ interface FormContextReturnType {
   values?: Record<string, any>
 }
 
-export const FormContext = React.createContext<FormContextReturnType>(
-  {} as FormContextReturnType,
-)
+export const FormContext = React.createContext<FormContextReturnType>({} as FormContextReturnType)
 
 export const useFormContext = () => {
   return React.useContext(FormContext)
@@ -46,7 +44,7 @@ export const FormProvider = ({
       const errorMessage: string = validateInputValue(
         { name: key, value: values?.[key] },
         fields[key],
-        setErrors,
+        setErrors
       ) as string
       hasError = hasError || !!errorMessage
     })
@@ -62,15 +60,8 @@ export const FormProvider = ({
   }
 
   return (
-    <FormContext.Provider
-      value={{ setValues, setErrors, setFields, errors, values }}
-    >
-      <form
-        className={[direction, `size-${formSize}`].join(' ')}
-        onSubmit={formSubmit}
-        {...props}
-        onReset={resetForm}
-      >
+    <FormContext.Provider value={{ setValues, setErrors, setFields, errors, values }}>
+      <form className={[direction, `size-${formSize}`].join(' ')} onSubmit={formSubmit} {...props} onReset={resetForm}>
         {children}
       </form>
     </FormContext.Provider>

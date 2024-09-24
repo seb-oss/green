@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
   </ngv-fold-out>\`,
   styles: [\`.my-custom-class { /* ... */ }\`]
 })
-export class FoldOutImplementationComponent {}`;
+export class FoldOutImplementationComponent {}`
 
 export const exampleAlt = `
 import { Component } from '@angular/core';
@@ -28,4 +28,4 @@ import { Component } from '@angular/core';
     </ngv-fold-out>\`,
     styles: [\`.my-custom-class { /* ... */ }\`]
 })
-export class FoldOutImplementationComponent {}`;
+export class FoldOutImplementationComponent {}`

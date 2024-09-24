@@ -10,10 +10,7 @@ import { constrainSlots } from '../../utils/helpers'
 import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../tokens.style'
 
 import { styles } from './input.styles'
@@ -33,7 +30,7 @@ import { styles } from './input.styles'
 export class GdsInput extends GdsFormControlElement<string> {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
+    delegatesFocus: true
   }
   static styles = [tokens, styles]
 
@@ -58,7 +55,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({
     attribute: 'show-extended-supporting-text',
     type: Boolean,
-    reflect: true,
+    reflect: true
   })
   showExtendedSupportingText = false
 
@@ -117,7 +114,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   render() {
     return html`${choose(this.variant, [
       ['default', () => this.#renderDefault()],
-      ['simplified', () => this.#renderSimplified()],
+      ['simplified', () => this.#renderSimplified()]
     ])}`
   }
 
@@ -140,23 +137,15 @@ export class GdsInput extends GdsFormControlElement<string> {
         ${when(
           this.multiline,
           () => html`${this.#renderNativeTextarea()}`,
-          () => html`${this.#renderNativeInput()}`,
+          () => html`${this.#renderNativeInput()}`
         )}
         <slot name="trail" gds-allow="gds-badge"></slot>
         ${this.#renderClearButton()}
       </div>
 
       <div class="foot">
-        <div>
-          ${when(
-            this.invalid,
-            () =>
-              html`<span class="error-text">${this.validationMessage}</span>`,
-          )}
-        </div>
-        ${when(this.#shouldShowRemainingChars, () =>
-          this.#renderRemainingCharsBadge(),
-        )}
+        <div>${when(this.invalid, () => html`<span class="error-text">${this.validationMessage}</span>`)}</div>
+        ${when(this.#shouldShowRemainingChars, () => this.#renderRemainingCharsBadge())}
       </div>
     `
   }
@@ -171,7 +160,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           ${when(
             this.multiline,
             () => html`${this.#renderNativeTextarea()}`,
-            () => html`${this.#renderNativeInput()}`,
+            () => html`${this.#renderNativeInput()}`
           )}
         </label>
         <slot name="trail" gds-allow="gds-badge"></slot>
@@ -179,10 +168,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       </div>
 
       <div class="foot">
-        ${this.#renderSupportingText()}
-        ${when(this.#shouldShowRemainingChars, () =>
-          this.#renderRemainingCharsBadge(),
-        )}
+        ${this.#renderSupportingText()} ${when(this.#shouldShowRemainingChars, () => this.#renderRemainingCharsBadge())}
         ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
       </div>
 
@@ -191,8 +177,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   // Any attribute name added here will get forwarded to the native <input> element.
-  #forwardableAttrs = (attr: Attr) =>
-    ['type', 'placeholder', 'required'].includes(attr.name)
+  #forwardableAttrs = (attr: Attr) => ['type', 'placeholder', 'required'].includes(attr.name)
 
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
@@ -205,22 +190,22 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.dispatchEvent(
       new Event('change', {
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     )
   }
 
   @watch('value')
   private _setAutoHeight() {
     if (!this.multiline) return
-    this.elInputAsync.then((element) => {
+    this.elInputAsync.then(element => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
     })
   }
 
   #handleFieldClick = () => {
-    this.elInputAsync.then((el) => el.focus())
+    this.elInputAsync.then(el => el.focus())
   }
 
   #handleClearBtnClick = () => {
@@ -233,8 +218,8 @@ export class GdsInput extends GdsFormControlElement<string> {
       new CustomEvent('gds-ui-state', {
         bubbles: true,
         composed: true,
-        detail: this.showExtendedSupportingText,
-      }),
+        detail: this.showExtendedSupportingText
+      })
     )
   }
 
@@ -267,11 +252,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderSupportingText() {
-    return html`
-      <div class="supporting-text" id="supporting-text">
-        ${this.supportingText}
-      </div>
-    `
+    return html` <div class="supporting-text" id="supporting-text">${this.supportingText}</div> `
   }
 
   #renderExtendedSupportingText() {
@@ -291,12 +272,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   #renderClearButton() {
     if (this.clearable && this.value.length > 0)
       return html`
-        <gds-button
-          size="small"
-          variant="tertiary"
-          label="${msg('Clear input')}"
-          @click=${this.#handleClearBtnClick}
-        >
+        <gds-button size="small" variant="tertiary" label="${msg('Clear input')}" @click=${this.#handleClearBtnClick}>
           <gds-icon-cross-small />
         </gds-button>
       `
@@ -325,7 +301,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
   async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
-    return this.elExtendedSupportingTextSlot.then((slot) => {
+    return this.elExtendedSupportingTextSlot.then(slot => {
       if (slot && slot.assignedElements().length > 0)
         return html`
           <gds-button

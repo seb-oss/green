@@ -10,20 +10,15 @@ export default {
   component: NggContextMenuComponent,
   decorators: [
     moduleMetadata({
-      imports: [
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        NggContextMenuModule,
-      ],
-    }),
+      imports: [CommonModule, BrowserModule, BrowserAnimationsModule, NggContextMenuModule]
+    })
   ],
   parameters: {
-    componentIds: ['component-context-menu'],
-  },
+    componentIds: ['component-context-menu']
+  }
 } as Meta<NggContextMenuComponent>
 
-const Template: StoryFn<NggContextMenuComponent> = (args) => ({
+const Template: StoryFn<NggContextMenuComponent> = args => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -32,7 +27,7 @@ const Template: StoryFn<NggContextMenuComponent> = (args) => ({
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
   </div>
-  `,
+  `
 })
 
 export const Default = Template.bind({})
@@ -41,11 +36,11 @@ Default.args = {
   menuItems: [
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-  ],
+    { label: 'Option 3', value: 'option3' }
+  ]
 }
 
-const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
+const WithLabelTemplate: StoryFn<NggContextMenuComponent> = args => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -56,7 +51,7 @@ const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
         Menu
         <i class="sg-icon sg-icon-ellipsis"></i>
     </ng-template>
-    `,
+    `
 })
 
 export const WithLabel = WithLabelTemplate.bind({})
@@ -65,8 +60,8 @@ WithLabel.args = {
   menuItems: [
     { label: 'Key 1', value: 'option1' },
     { label: 'Key 2', value: 'option2' },
-    { label: 'Key 3', value: 'option3' },
-  ],
+    { label: 'Key 3', value: 'option3' }
+  ]
 }
 
 export const RightToLeft = Template.bind({})
@@ -75,11 +70,11 @@ RightToLeft.args = {
   menuItems: [
     { label: 'Key 1', value: 'option1' },
     { label: 'Key 2', value: 'option2' },
-    { label: 'Key 3', value: 'option3' },
-  ],
+    { label: 'Key 3', value: 'option3' }
+  ]
 }
 
-const CustomTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
+const CustomTemplate: StoryFn<NggContextMenuComponent> = args => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -103,7 +98,7 @@ const CustomTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
         </svg>
       </div>
     </ng-template>
-    `,
+    `
 })
 
 export const CustomTemplateDefault = CustomTemplate.bind({})
@@ -112,11 +107,11 @@ CustomTemplateDefault.args = {
   menuItems: [
     { label: 'Key 1', value: 'option1' },
     { label: 'Key 2', value: 'option2' },
-    { label: 'Delete', value: 'delete' },
-  ],
+    { label: 'Delete', value: 'delete' }
+  ]
 }
 
-const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (args) => ({
+const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = args => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -127,7 +122,7 @@ const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (args) => ({
       <ngg-context-menu #ctx [direction]="direction" [menuItems]="menuItems"></ngg-context-menu>
     </div>
   </div>
-  `,
+  `
 })
 
 export const PositionRelative = TemplatePositionRelative.bind({})
@@ -136,6 +131,6 @@ PositionRelative.args = {
   menuItems: [
     { label: 'Option 1', value: 'option1' },
     { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
-  ],
+    { label: 'Option 3', value: 'option3' }
+  ]
 }

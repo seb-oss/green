@@ -2,40 +2,16 @@ import '../core/core.globals'
 
 import { CommonModule } from '@angular/common'
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
-import {
-  AbstractControl,
-  ReactiveFormsModule,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms'
+import { AbstractControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import {
-  debounceTime,
-  delay,
-  distinctUntilChanged,
-  lastValueFrom,
-  map,
-  Observable,
-  of,
-  tap,
-} from 'rxjs'
+import { debounceTime, delay, distinctUntilChanged, lastValueFrom, map, Observable, of, tap } from 'rxjs'
 
-import {
-  TranslocoLoader,
-  TranslocoModule,
-  TranslocoService,
-} from '@ngneat/transloco'
+import { TranslocoLoader, TranslocoModule, TranslocoService } from '@ngneat/transloco'
 import { NgvI18nModule } from '../i18n/i18n.module'
 import { createMask, NgvInputMaskModule } from '../input-mask'
 import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
 import { NgvButtonComponent } from '../button/button.component'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
@@ -60,19 +36,17 @@ interface WithExtras {
 const en = {
   'error.fieldinputmask': 'Invalid value pattern',
   'error.fieldrequired': 'Field must have content',
-  'error.fieldmaxlength':
-    'Field content should not be longer than {{requiredLength}} characters',
+  'error.fieldmaxlength': 'Field content should not be longer than {{requiredLength}} characters',
   'label.defaultlabel': 'Label',
   'label.maxlength': 'characters left',
-  'label.optional': 'Optional',
+  'label.optional': 'Optional'
 }
 
 const sv = {
   'error.fieldinputmask': 'Icke giltigt tecken mönster',
   'error.fieldrequired': 'Fältet får inte lämnas tomt',
-  'error.fieldmaxlength':
-    'Fältinnehållet måste vara längre än {{requiredLength}} tecken',
-  'label.maxlength': 'tecken kvar',
+  'error.fieldmaxlength': 'Fältinnehållet måste vara längre än {{requiredLength}} tecken',
+  'label.maxlength': 'tecken kvar'
 }
 
 class TranslocoInlineLoader implements TranslocoLoader {
@@ -104,10 +78,10 @@ const meta: Meta<NgvInputComponent> = {
           provide: APP_INITIALIZER,
           useFactory: translocoStorybookInitializer, // our initializer hook
           multi: true,
-          deps: [TranslocoService], // the dependencies that Angular passes as arguments to our hook
+          deps: [TranslocoService] // the dependencies that Angular passes as arguments to our hook
         },
-        DropdownUtils,
-      ],
+        DropdownUtils
+      ]
     }),
     moduleMetadata({
       declarations: [
@@ -119,7 +93,7 @@ const meta: Meta<NgvInputComponent> = {
         NgvTooltipDirective,
         NgvInfoCircleComponent,
         CharacterCountdownDirective,
-        NgvExternalLinkDirective,
+        NgvExternalLinkDirective
       ],
       imports: [
         NgvTypeaheadDirective,
@@ -127,25 +101,20 @@ const meta: Meta<NgvInputComponent> = {
         ReactiveFormsModule,
         RouterTestingModule,
         NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
-        TranslocoModule,
-      ],
-    }),
-  ],
+        TranslocoModule
+      ]
+    })
+  ]
 }
 export default meta
 
 const Template: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
-  props: args,
+  props: args
 })
 
-const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: any,
-) => {
-  const ctrl = new UntypedFormControl(args.ngModel, [
-    Validators.required,
-    Validators.maxLength(12),
-  ])
-  ctrl.valueChanges.subscribe((val) => {
+const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (args: any) => {
+  const ctrl = new UntypedFormControl(args.ngModel, [Validators.required, Validators.maxLength(12)])
+  ctrl.valueChanges.subscribe(val => {
     console.log('input control value:', val)
     console.log({ required: required() })
   })
@@ -178,8 +147,8 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
     props: {
       ...args,
       formControl: ctrl,
-      disableFn: toggleDisableField,
-    },
+      disableFn: toggleDisableField
+    }
   }
 }
 
@@ -194,7 +163,7 @@ Primary.args = {
   required: undefined,
   optional: false,
   disabled: false,
-  invalid: false,
+  invalid: false
 }
 
 export const WithFormControl = TemplateWithFormControl.bind({})
@@ -203,18 +172,14 @@ WithFormControl.args = {
   invalid: undefined,
   required: undefined,
   optional: undefined,
-  valid: undefined,
+  valid: undefined
 }
 
-const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (
-  args: any,
-) => ({
-  props: { ...args },
+const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
+  props: { ...args }
 })
 
-const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
-  args: any,
-) => ({
+const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
   template: /*html*/ `
     <ngv-input [label]="label"
       [disabled]="disabled"
@@ -226,7 +191,7 @@ const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
         <span>{{ text }}</span>
       </ng-template>
     </ngv-input>`,
-  props: args,
+  props: args
 })
 
 export const WithCustomErrorAndCountdown = TemplateWithError.bind({})
@@ -236,33 +201,33 @@ WithCustomErrorAndCountdown.args = {
   showCharacterCountdown: true,
   invalid: true,
   error: 'this is an error message',
-  badgeText: 'SEB',
+  badgeText: 'SEB'
 }
 
 export const WithCustomError = TemplateWithError.bind({})
 WithCustomError.args = {
   ...Primary.args,
   invalid: true,
-  error: 'Validation failed on server',
+  error: 'Validation failed on server'
 }
 
 export const WithCustomLabel = TemplateWithCustomLabel.bind({})
 WithCustomLabel.args = {
   ...Primary.args,
   info: 'Some info regarding the input maybe...',
-  text: 'And some more text',
+  text: 'And some more text'
 }
 
 const resettime = 3000
-const resetObservable$ = new Observable((subscriber) => {
+const resetObservable$ = new Observable(subscriber => {
   setInterval(() => {
     subscriber.next()
   }, resettime)
 })
 
-const TemplateWithPrefixAndOrSuffix: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (args: NgvInputComponent & WithExtras & any) => ({
+const TemplateWithPrefixAndOrSuffix: StoryFn<NgvInputComponent & WithExtras & any> = (
+  args: NgvInputComponent & WithExtras & any
+) => ({
   styles: [`.suffix-prefix-padding{ padding: 0.75em }`],
   template: /*html*/ `
   <h2>Prefix and/or suffix</h2>
@@ -332,20 +297,20 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
       ]">
     </ngv-dropdown>
   </ngv-input>`,
-  props: args,
+  props: args
 })
 
 export const WithPrefixAndOrSuffix = TemplateWithPrefixAndOrSuffix.bind({})
 WithPrefixAndOrSuffix.args = {
   ...Primary.args,
-  invalid: false,
+  invalid: false
 }
 
-export const WithResetObservable: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (_args: NgvInputComponent & WithExtras & any) => {
+export const WithResetObservable: StoryFn<NgvInputComponent & WithExtras & any> = (
+  _args: NgvInputComponent & WithExtras & any
+) => {
   const formGroup = new UntypedFormGroup({
-    resetForm: new UntypedFormControl('Annoying orange'),
+    resetForm: new UntypedFormControl('Annoying orange')
   })
   return {
     template: /*html*/ `
@@ -361,35 +326,27 @@ export const WithResetObservable: StoryFn<
     props: {
       description: `I will reset every ${resettime}ms`,
       formGroup,
-      resetObservable$,
-    },
+      resetObservable$
+    }
   }
 }
 
 export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+  args: NgvInputComponent & WithExtras & any
 ) => {
   const formGroup = new UntypedFormGroup({
     remittanceInformation: new UntypedFormControl(
       'This is a test of handling if the text is longer than the max length input',
-      Validators.maxLength(9),
-    ),
+      Validators.maxLength(9)
+    )
   })
   const maxLength$ = of(10)
 
-  formGroup
-    .get('remittanceInformation')
-    ?.valueChanges.subscribe((val) => console.log(val))
+  formGroup.get('remittanceInformation')?.valueChanges.subscribe(val => console.log(val))
 
   const toggleLang = () => {
-    const updateLang =
-      translocoServiceInstance.getActiveLang() === 'sv' ? 'en' : 'sv'
-    console.log(
-      'from:',
-      translocoServiceInstance.getActiveLang(),
-      '=>',
-      updateLang,
-    )
+    const updateLang = translocoServiceInstance.getActiveLang() === 'sv' ? 'en' : 'sv'
+    console.log('from:', translocoServiceInstance.getActiveLang(), '=>', updateLang)
     translocoServiceInstance.setActiveLang(updateLang)
   }
 
@@ -418,11 +375,10 @@ export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
       description: 'This is a field description',
       maxLength$: maxLength$,
       formG: formGroup,
-      setValue: (value: any) =>
-        formGroup.controls.remittanceInformation.setValue(value),
+      setValue: (value: any) => formGroup.controls.remittanceInformation.setValue(value),
       toggleLang: () => toggleLang(),
-      show: false,
-    },
+      show: false
+    }
   }
 }
 
@@ -434,7 +390,7 @@ let licenseFCValue = ''
 let ipFCValue = ''
 
 const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+  args: NgvInputComponent & WithExtras & any
 ) => {
   const dateFC = new UntypedFormControl(dateFCValue, [Validators.required])
   const emailFC = new UntypedFormControl(emailFCValue)
@@ -449,15 +405,15 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
     currencyFC,
     phoneFC,
     licenseFC,
-    ipFC,
+    ipFC
   })
 
-  dateFC?.valueChanges.subscribe((val) => (dateFCValue = val))
-  emailFC?.valueChanges.subscribe((val) => (emailFCValue = val))
-  currencyFC?.valueChanges.subscribe((val) => (currencyFCValue = val))
-  phoneFC?.valueChanges.subscribe((val) => (phoneFCValue = val))
-  licenseFC?.valueChanges.subscribe((val) => (licenseFCValue = val))
-  ipFC?.valueChanges.subscribe((val) => (ipFCValue = val))
+  dateFC?.valueChanges.subscribe(val => (dateFCValue = val))
+  emailFC?.valueChanges.subscribe(val => (emailFCValue = val))
+  currencyFC?.valueChanges.subscribe(val => (currencyFCValue = val))
+  phoneFC?.valueChanges.subscribe(val => (phoneFCValue = val))
+  licenseFC?.valueChanges.subscribe(val => (licenseFCValue = val))
+  ipFC?.valueChanges.subscribe(val => (ipFCValue = val))
 
   const dateInputMask = createMask<Date>({
     alias: 'datetime',
@@ -468,7 +424,7 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
       const month = +values[1] - 1
       const day = +values[2]
       return new Date(year, month, day)
-    },
+    }
   })
   const emailInputMask = createMask({ alias: 'email' })
   const currencyInputMask = createMask({
@@ -478,7 +434,7 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
     digitsOptional: false,
     prefix: '$ ',
     placeholder: '0',
-    shortcuts: null,
+    shortcuts: null
   })
   const phoneMask = createMask('(999) 999-9999')
   const licenseInputMask = createMask('[9-]AAA-999')
@@ -590,7 +546,7 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
         display: table;
         clear: both;
       }
-    `,
+    `
     ],
     props: {
       formGroup,
@@ -600,14 +556,14 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
       currencyInputMask,
       ipAddressMask,
       phoneMask,
-      locked: args.locked,
-    },
+      locked: args.locked
+    }
   }
 }
 
 export const WithInputMask = TemplateWithInputMask.bind({})
 WithInputMask.args = {
-  locked: false,
+  locked: false
 }
 
 export const WithLockedInput = Template.bind({})
@@ -615,7 +571,7 @@ WithLockedInput.args = {
   ...Primary.args,
   locked: true,
   description: undefined,
-  label: 'Bank charges',
+  label: 'Bank charges'
 }
 
 export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({})
@@ -628,28 +584,22 @@ WithDisplayDisabledAsLocked.args = {
   locked: false,
   description: undefined,
   label: 'Bank charges',
-  displayDisabledAsLocked: true,
+  displayDisabledAsLocked: true
 }
 
-const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (
-  args: any,
-) => {
+const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (args: any) => {
   const options = [
     { key: 'hej', label: 'Hej' },
     { key: 'tja', label: 'Tja' },
     { key: 'hejsan', label: 'Hejsan' },
     { key: 'tjo', label: 'Tjo' },
-    { key: 'tjena', label: 'Tjena' },
+    { key: 'tjena', label: 'Tjena' }
   ]
   const searchFunction = (value$: Observable<string>) =>
     value$.pipe(
       debounceTime(100),
-      tap((x) => console.log('entered value in input: ', x)),
-      map((inputValue) =>
-        options.filter((option) =>
-          option.key.toUpperCase().includes(inputValue.toUpperCase()),
-        ),
-      ),
+      tap(x => console.log('entered value in input: ', x)),
+      map(inputValue => options.filter(option => option.key.toUpperCase().includes(inputValue.toUpperCase())))
     )
   return {
     template: /*html*/ `
@@ -666,18 +616,17 @@ const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (
       ngv-dropdown-list {
         width: 100%;
       }
-    `,
+    `
     ],
     props: {
       ...args,
       searchFunction: searchFunction,
-      selectedFormatter: (value: { key: string; label: string }) =>
-        value.label.toUpperCase(),
-    },
+      selectedFormatter: (value: { key: string; label: string }) => value.label.toUpperCase()
+    }
   }
 }
 
 export const WithTypeAhead = TemplateWithTypeAhead.bind({})
 WithTypeAhead.args = {
-  ...Primary.args,
+  ...Primary.args
 }

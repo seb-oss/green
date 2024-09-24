@@ -1,10 +1,8 @@
 :host {
   --gds-ripple-motion-name: ripple;
-  --gds-ripple-motion: var(--gds-ripple-motion-name)
-    var(--gds-sys-motion-duration) var(--gds-sys-motion-timing-function)
-    var(--gds-sys-motion-delay) var(--gds-sys-motion-iteration-count)
-    var(--gds-sys-motion-direction) var(--gds-sys-motion-fill-mode)
-    var(--gds-sys-motion-play-state);
+  --gds-ripple-motion: var(--gds-ripple-motion-name) var(--gds-sys-motion-duration)
+    var(--gds-sys-motion-timing-function) var(--gds-sys-motion-delay) var(--gds-sys-motion-iteration-count)
+    var(--gds-sys-motion-direction) var(--gds-sys-motion-fill-mode) var(--gds-sys-motion-play-state);
   border-radius: var(--gds-space-max);
   contain: strict;
   display: flex;

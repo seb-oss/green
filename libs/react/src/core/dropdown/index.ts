@@ -11,8 +11,8 @@ const reactWrapper = createComponent({
   elementClass: GdsDropdown,
   react: React,
   events: {
-    undefined: "change" as EventName<undefined>,
-    undefined: "gds-ui-state" as EventName<undefined>,
+    onChange: "change",
+    onGdsUiState: "gds-ui-state",
   },
   displayName: "GdsDropdown",
 });

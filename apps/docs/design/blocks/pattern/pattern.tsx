@@ -9,15 +9,10 @@ interface PatternProps {
   content?: string
 }
 
-export default function Pattern({
-  children,
-  caption,
-  height,
-  content,
-}: PatternProps) {
+export default function Pattern({ children, caption, height, content }: PatternProps) {
   const style = height
     ? {
-        '--gds-pattern-max-height': `${height}px`,
+        '--gds-pattern-max-height': `${height}px`
       }
     : {}
 
@@ -40,12 +35,7 @@ export default function Pattern({
           dangerouslySetInnerHTML={{ __html: content }}
         />
       ) : (
-        <figure
-          ref={figureRef}
-          className="preview"
-          data-caption={caption}
-          style={style as React.CSSProperties}
-        >
+        <figure ref={figureRef} className="preview" data-caption={caption} style={style as React.CSSProperties}>
           {children}
         </figure>
       )}

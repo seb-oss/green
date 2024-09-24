@@ -9,17 +9,12 @@ const meta: Meta<NggModalComponent> = {
   component: NggModalComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggModalModule, BrowserAnimationsModule],
-    }),
+      imports: [NggModalModule, BrowserAnimationsModule]
+    })
   ],
   parameters: {
-    componentIds: [
-      'component-dialogue',
-      'component-slideout',
-      'component-foldout',
-      'component-takeover',
-    ],
-  },
+    componentIds: ['component-dialogue', 'component-slideout', 'component-foldout', 'component-takeover']
+  }
 }
 
 export default meta
@@ -35,8 +30,8 @@ const RenderTemplate = (args: any) => ({
   `,
   props: {
     ...args,
-    isOpen: false,
-  },
+    isOpen: false
+  }
 })
 
 export const Default: Story = {
@@ -45,9 +40,9 @@ export const Default: Story = {
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false,
-    size: 'lg',
+    size: 'lg'
   },
-  render: RenderTemplate,
+  render: RenderTemplate
 }
 
 export const Slideout = {
@@ -56,9 +51,9 @@ export const Slideout = {
     header: 'Header',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
-    trapFocus: false,
+    trapFocus: false
   },
-  render: RenderTemplate,
+  render: RenderTemplate
 }
 
 export const Takeover = {
@@ -67,9 +62,9 @@ export const Takeover = {
     header: 'Header',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
-    trapFocus: false,
+    trapFocus: false
   },
-  render: RenderTemplate,
+  render: RenderTemplate
 }
 
 export const Custom = {
@@ -79,14 +74,14 @@ export const Custom = {
     confirmLabel: 'Primary',
     trapFocus: false,
     hideHeader: false,
-    hideFooter: false,
+    hideFooter: false
   },
   render: (args: NggModalComponent) => {
     const isOpen = false
     return {
       props: {
         ...args,
-        isOpen,
+        isOpen
       },
       template: `
       <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
@@ -102,7 +97,7 @@ export const Custom = {
         </ng-container>
       </ngg-modal>
       <button (click)="isOpen = true">Open Modal</button>
-    `,
+    `
     }
-  },
+  }
 }

@@ -15,9 +15,9 @@ const meta: Meta = {
   title: 'Docs/Components/Form/Input',
   component: 'gds-input',
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -26,23 +26,23 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' },
+      source: { format: true, type: 'dynamic' }
     },
     controls: {
-      expanded: true,
-    },
+      expanded: true
+    }
   },
   args: {
     label: 'Label text',
-    multiline: true,
-  },
+    multiline: true
+  }
 }
 
 export const Basic: Story = {
   ...DefaultParams,
   args: {
-    maxlength: 20,
-  },
+    maxlength: 20
+  }
 }
 
 export const Simplified: Story = {
@@ -50,19 +50,15 @@ export const Simplified: Story = {
   args: {
     label: 'Simplified',
     variant: 'simplified',
-    clearable: true,
-  },
+    clearable: true
+  }
 }
 
 export const ExtendedSupportingText: Story = {
   ...DefaultParams,
   render: () => html`
-    <gds-input
-      label="Label text"
-      supporting-text="Supporting text"
-      show-extended-supporting-text
-    >
+    <gds-input label="Label text" supporting-text="Supporting text" show-extended-supporting-text>
       <span slot="message">Extended supporting text</span>
     </gds-input>
-  `,
+  `
 }

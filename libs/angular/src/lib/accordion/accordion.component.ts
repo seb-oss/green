@@ -1,22 +1,13 @@
-import {
-  AfterContentChecked,
-  Component,
-  ContentChildren,
-  Input,
-  OnDestroy,
-  QueryList,
-} from '@angular/core'
+import { AfterContentChecked, Component, ContentChildren, Input, OnDestroy, QueryList } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 import { NggAccordionListItemComponent } from './accordion-list-item.component'
 
 @Component({
   selector: 'ngg-accordion',
-  templateUrl: './accordion.component.html',
+  templateUrl: './accordion.component.html'
 })
 export class NggAccordionComponent implements AfterContentChecked, OnDestroy {
-  @ContentChildren(NggAccordionListItemComponent) private items:
-    | QueryList<NggAccordionListItemComponent>
-    | undefined
+  @ContentChildren(NggAccordionListItemComponent) private items: QueryList<NggAccordionListItemComponent> | undefined
   private _expandAll: Observable<void> | undefined
   private expandAllSubscription: Subscription | undefined
   @Input() public closeOthers = false
@@ -48,7 +39,7 @@ export class NggAccordionComponent implements AfterContentChecked, OnDestroy {
       const itemArray = this.items ? Array.from(this.items) : undefined
       if (itemArray) {
         for (const i of itemArray) {
-          i.expandedChange.subscribe((child) => this.onChildExpanded(child))
+          i.expandedChange.subscribe(child => this.onChildExpanded(child))
         }
       }
     }
@@ -69,7 +60,7 @@ export class NggAccordionComponent implements AfterContentChecked, OnDestroy {
 
   private onChildExpanded(childIdentity: NggAccordionListItemComponent) {
     if (this.closeOthers && childIdentity.isExpanded && this.items) {
-      this.items.forEach((item) => {
+      this.items.forEach(item => {
         if (item !== childIdentity) item.shrink()
       })
     }

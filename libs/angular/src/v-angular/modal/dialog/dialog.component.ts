@@ -7,7 +7,7 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core'
 
 import { DialogButtons } from '../modal.types'
@@ -21,7 +21,7 @@ export interface DialogEvent<T = any> {
   selector: 'ngv-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  exportAs: 'dialog',
+  exportAs: 'dialog'
 })
 export class NgvDialogComponent implements OnInit {
   @ViewChild('dialog') dialogRef: ElementRef | undefined
@@ -75,10 +75,8 @@ export class NgvDialogComponent implements OnInit {
   protected _lastFocusable: HTMLElement | undefined
 
   ngOnInit() {
-    this.dialogTitleId =
-      this.dialogTitleId ?? 'sdv-dialog-title-' + window.ngv?.nextId()
-    this.dialogBodyId =
-      this.dialogBodyId ?? 'sdv-dialog-body-' + window.ngv?.nextId()
+    this.dialogTitleId = this.dialogTitleId ?? 'sdv-dialog-title-' + window.ngv?.nextId()
+    this.dialogBodyId = this.dialogBodyId ?? 'sdv-dialog-body-' + window.ngv?.nextId()
 
     this.shown = this.initiallyShown
     if (this.shown) this._limitFocusable()
@@ -88,7 +86,7 @@ export class NgvDialogComponent implements OnInit {
     event.preventDefault()
     const emitEvent = {
       original: event,
-      payload: this.payload,
+      payload: this.payload
     }
     switch (action) {
       case 'positive':
@@ -116,7 +114,7 @@ export class NgvDialogComponent implements OnInit {
     window.setTimeout(() => {
       if (!this.dialogRef) return
       const focusable = this.dialogRef.nativeElement.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )
       this._firstFocusable = focusable[0]
       this._lastFocusable = focusable[focusable.length - 1]
@@ -133,7 +131,7 @@ export class NgvDialogComponent implements OnInit {
     if (this.shown) {
       const emitEvent = {
         original: event,
-        payload: this.payload,
+        payload: this.payload
       }
       this.ngvCloseEvent.emit(emitEvent)
     }
@@ -149,19 +147,13 @@ export class NgvDialogComponent implements OnInit {
     if (event.key !== 'Tab') return
     if (event.shiftKey) {
       // shift + tab
-      if (
-        this._lastFocusable &&
-        document.activeElement === this._firstFocusable
-      ) {
+      if (this._lastFocusable && document.activeElement === this._firstFocusable) {
         this._lastFocusable.focus()
         event.preventDefault()
       }
     } else {
       // tab
-      if (
-        this._firstFocusable &&
-        document.activeElement === this._lastFocusable
-      ) {
+      if (this._firstFocusable && document.activeElement === this._lastFocusable) {
         this._firstFocusable.focus()
         event.preventDefault()
       }

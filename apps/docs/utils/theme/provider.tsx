@@ -22,7 +22,7 @@ export const ThemeProviderContext = createContext<ThemeProviderContextType>({
   },
   toggleNav: () => {
     throw new Error('Function not implemented.')
-  },
+  }
 })
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
@@ -30,11 +30,11 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const [isNavOpen, setNavOpen] = useState(false)
 
   const toggleCmd = () => {
-    setIsOpen((prevOpen) => !prevOpen)
+    setIsOpen(prevOpen => !prevOpen)
   }
 
   const toggleNav = () => {
-    setNavOpen((prevNavOpen) => {
+    setNavOpen(prevNavOpen => {
       const newNavOpen = !prevNavOpen
       localStorage.setItem('navOpen', newNavOpen ? 'true' : 'false')
       return newNavOpen
@@ -45,16 +45,9 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     const navOpen = localStorage.getItem('navOpen')
     setNavOpen(navOpen === 'true')
 
-    const handleMKey = (e: {
-      stopPropagation(): void
-      key: string
-      target: any
-      preventDefault: () => void
-    }) => {
+    const handleMKey = (e: { stopPropagation(): void; key: string; target: any; preventDefault: () => void }) => {
       const target = e.target
-      const inputElements = Array.from(
-        document.querySelectorAll('input, textarea'),
-      )
+      const inputElements = Array.from(document.querySelectorAll('input, textarea'))
       if (e.key === 'm' && inputElements.includes(target) === false) {
         e.stopPropagation()
         toggleNav()
@@ -71,7 +64,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     isOpen,
     isNavOpen,
     toggleCmd,
-    toggleNav,
+    toggleNav
   }
 
   return (
@@ -79,14 +72,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       <ThemeProviderContext.Provider value={themeProviderValue}>
         <Favicon />
         {children}
-        <Toaster
-          richColors
-          theme="dark"
-          position="bottom-right"
-          expand={false}
-          closeButton={true}
-          duration={4428}
-        />
+        <Toaster richColors theme="dark" position="bottom-right" expand={false} closeButton={true} duration={4428} />
         <Cmdk isOpen={isOpen} toggleCmd={toggleCmd} />
       </ThemeProviderContext.Provider>
     </NextThemesProvider>

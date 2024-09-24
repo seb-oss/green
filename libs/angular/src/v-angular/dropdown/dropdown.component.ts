@@ -13,7 +13,7 @@ import {
   Output,
   Self,
   SimpleChanges,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 
@@ -22,12 +22,7 @@ import { fromEvent, Subscription } from 'rxjs'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
 import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
-import {
-  DropdownUtils,
-  Option,
-  OptionBase,
-  OptionGroup,
-} from '@sebgroup/green-angular/src/v-angular/core'
+import { DropdownUtils, Option, OptionBase, OptionGroup } from '@sebgroup/green-angular/src/v-angular/core'
 
 /**
  * A dropdown allows the user to select an option from a list.
@@ -37,23 +32,19 @@ import {
 @Component({
   selector: 'ngv-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
+  styleUrls: ['./dropdown.component.scss']
 })
 export class NgvDropdownComponent<
     K = string | null | undefined,
     V = string | null | undefined,
-    T extends Option<K, V> = Option<K, V>,
+    T extends Option<K, V> = Option<K, V>
   >
   extends NgvBaseControlValueAccessorComponent
   implements OnDestroy, OnChanges
 {
   /** Custom template for displaying selected option. */
-  @ContentChild('selectedTpl', { read: TemplateRef }) selectedContentTpl:
-    | TemplateRef<OptionBase<T>>
-    | undefined
-  @ContentChild('optionTpl', { read: TemplateRef }) optionContentTpl:
-    | TemplateRef<OptionBase<any>>
-    | undefined
+  @ContentChild('selectedTpl', { read: TemplateRef }) selectedContentTpl: TemplateRef<OptionBase<T>> | undefined
+  @ContentChild('optionTpl', { read: TemplateRef }) optionContentTpl: TemplateRef<OptionBase<any>> | undefined
 
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'dropdown'
@@ -65,9 +56,7 @@ export class NgvDropdownComponent<
     // update options
     this._options = value
     // already has a null/undefined key
-    const nullishOption = this.dropdownUtils
-      .flattenOptions(value, false)
-      .find((option) => option.key == null)
+    const nullishOption = this.dropdownUtils.flattenOptions(value, false).find(option => option.key == null)
     // if the dropdown is optional, add a null value to deselect option
     if (!this.required && !nullishOption && this.allowControlNullishOption) {
       this._options = [this.defaultNullishOption].concat(this._options)
@@ -83,7 +72,7 @@ export class NgvDropdownComponent<
     // don't update local state if we shouldn't control nullish value and we cant find the selected value amongst the options
     const matchingOption = this.dropdownUtils
       .flattenOptions(value, false)
-      .find((option) => option.key == this.ngControl?.value)
+      .find(option => option.key == this.ngControl?.value)
     if (!this.allowControlNullishOption && !matchingOption) return
 
     // Update local state
@@ -140,7 +129,7 @@ export class NgvDropdownComponent<
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
-    protected dropdownUtils: DropdownUtils<K, V, T>,
+    protected dropdownUtils: DropdownUtils<K, V, T>
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -149,8 +138,7 @@ export class NgvDropdownComponent<
     if (changes.required?.currentValue !== undefined) {
       const isRequired = changes.required.currentValue
       // remove nullish option
-      const hasNullishOption =
-        this.dropdownUtils.flattenOptions(this._options, false)[0]?.key == null
+      const hasNullishOption = this.dropdownUtils.flattenOptions(this._options, false)[0]?.key == null
       // if required, remove nullish option
       if (isRequired && hasNullishOption && this.allowControlNullishOption) {
         this._options = this._options.slice(1)
@@ -171,7 +159,7 @@ export class NgvDropdownComponent<
   /** @internal override to correctly set state from form value */
   writeValue(value: any): void {
     const options = this.dropdownUtils.flattenOptions(this._options, false)
-    this.state = options.find((option) => option.key === value)
+    this.state = options.find(option => option.key === value)
   }
 
   // ----------------------------------------------------------------------------
@@ -201,14 +189,11 @@ export class NgvDropdownComponent<
   subscribeToOutsideClickEvent() {
     this.onClickSubscription = fromEvent(document, 'click').subscribe({
       next: (event: Event) => {
-        if (
-          this.expanded &&
-          !this.inputRef?.nativeElement.contains(event.target)
-        ) {
+        if (this.expanded && !this.inputRef?.nativeElement.contains(event.target)) {
           this.toggleDropdown()
           this.onClickSubscription?.unsubscribe()
         }
-      },
+      }
     })
   }
 
