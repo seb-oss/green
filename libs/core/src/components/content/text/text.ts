@@ -67,7 +67,7 @@ export class GdsText extends GdsElement {
    * @property size
    */
   @styleExpressionProperty({
-    valueTemplate: v => `${v}`,
+    valueTemplate: (v) => `${v}`,
     selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
@@ -75,7 +75,6 @@ export class GdsText extends GdsElement {
       const styleLine = `line-height: var(--gds-text-line-height-${size});`
       return styleSize + styleLine
     },
-    reflect: true
   })
   size?: string
 
@@ -88,7 +87,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'font-weight',
     selector: '[tag]',
-    valueTemplate: v => `var(--gds-text-weight-${v})`
+    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   weight?: string
 
@@ -101,7 +100,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'margin',
     selector: '[tag]',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   margin?: string
 
@@ -114,7 +113,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-wrap',
     selector: '[tag]',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   wrap?: string
 
@@ -127,7 +126,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-transform',
     selector: '[tag]',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   transform?: string
 
@@ -146,7 +145,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'max-width',
     selector: '[tag]',
-    valueTemplate: v => `${v}ch`
+    valueTemplate: (v) => `${v}ch`,
   })
   length?: string
 
@@ -159,7 +158,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'min-width',
     selector: '[tag]',
-    valueTemplate: v => `${v}ch`
+    valueTemplate: (v) => `${v}ch`,
   })
   min?: string
 
@@ -172,7 +171,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-align',
     selector: '[tag]',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   align?: string
 
@@ -184,7 +183,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: '--_lines',
     selector: '[tag]',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   lines?: number
 
@@ -202,21 +201,25 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'color',
     selector: '[tag]',
-    valueTemplate: v => {
+    valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
         return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
         return `var(--gds-color-${colorName})`
       }
-    }
+    },
   })
   color?: string
 
   render() {
     const TAG_ENCODE = encodeURI(this.tag)
     const TAG = unsafeStatic(TAG_ENCODE)
-    const classes = { 'no-size-set': !this.size, 'no-weight-set': !this.weight, 'lines-set': !!this.lines }
+    const classes = {
+      'no-size-set': !this.size,
+      'no-weight-set': !this.weight,
+      'lines-set': !!this.lines,
+    }
     return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
   }
 }
