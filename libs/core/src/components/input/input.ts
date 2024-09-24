@@ -146,8 +146,6 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderDefault() {
-    console.log('elInput', this.elInput)
-
     return html`
       <gds-flex
         level="3"

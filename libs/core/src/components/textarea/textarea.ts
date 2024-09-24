@@ -179,8 +179,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderDefault() {
-    console.log('elTextarea', this.elTextarea)
-
     return html`
       <gds-flex
         flex-direction="column"
