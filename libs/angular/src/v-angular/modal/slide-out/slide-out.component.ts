@@ -26,7 +26,7 @@ import { DialogButtons } from '../modal.types'
  * The modal title can be set using the @Input heading, and will automatically be translated if
  * the string matches a cms key.
  * Content can be injected into the body of the slide-out by either setting the @Input content to any type of
- * markdown, or using content projection (adding content between the `ngv-slideout-modal`-start and end tag).
+ * markdown, or using content projection (adding content between the `nggv-slideout-modal`-start and end tag).
  * If the content needs to stretch outside the normal padded area, add the attribute `slot="outside-content"` to the
  * projected content main element.
  * Test hooks:
@@ -35,7 +35,7 @@ import { DialogButtons } from '../modal.types'
  * The backdrop is selectable using 'slideout-backdrop'.
  */
 @Component({
-  selector: 'ngv-slideout-modal',
+  selector: 'nggv-slideout-modal',
   templateUrl: './slide-out.component.html',
   styleUrls: ['./slide-out.component.scss'],
   animations: [
