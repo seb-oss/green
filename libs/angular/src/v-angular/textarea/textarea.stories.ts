@@ -47,7 +47,7 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
   return {
     template: /*html*/ `
     <div style="width: 15rem">
-      <ngv-textarea
+      <nggv-textarea
         [formControl]="formControl"
         [label]="label"
         [invalid]="invalid"
@@ -56,7 +56,7 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
         [rows]="rows"
         [locked]="locked"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
-      </ngv-textarea>
+      </nggv-textarea>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>

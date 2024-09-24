@@ -77,7 +77,7 @@ export const Example_menu_bar: Story = {
       display="flex"
       height="50px"
       width="700px"
-      border="0 0 4xs/base300 0"
+      border="0 0 4xs/primary 0"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>
@@ -85,7 +85,7 @@ export const Example_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
@@ -119,7 +119,7 @@ export const Compact_menu_bar: Story = {
     html`<gds-card
         display="flex"
         width="700px"
-        border="0 0 4xs/base300 0"
+        border="0 0 4xs/primary 0"
         background="base-white"
       >
       <div style="flex-basis:50%;">
@@ -128,7 +128,7 @@ export const Compact_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button compact>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
