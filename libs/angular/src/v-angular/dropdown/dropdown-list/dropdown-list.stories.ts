@@ -76,18 +76,18 @@ const Template: StoryFn<StoryArgs> = (args: any) => {
     template: /*html*/ `
       <div style="width: 264px;position: relative;">
 
-        <ngv-input
+        <nggv-input
           name="test"
           [formControl]="formControl"
           (click)="$event.stopPropagation();expanded = !expanded">
-        </ngv-input>
+        </nggv-input>
 
-        <ngv-dropdown-list
+        <nggv-dropdown-list
         style="width: 264px"
         [expanded]=expanded
         [options]=options
         (selectedValueChanged)="onSelectedValueChanged($event)">
-        </ngv-dropdown-list>
+        </nggv-dropdown-list>
       </div>`,
     props: {
       ...args,

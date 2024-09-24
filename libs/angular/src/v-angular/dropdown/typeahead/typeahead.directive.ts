@@ -31,7 +31,7 @@ import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdo
 import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 
 @Directive({
-  selector: 'ngv-input[ngvTypeahead]',
+  selector: 'nggv-input[ngvTypeahead]',
   standalone: true,
 })
 export class NgvTypeaheadDirective<
@@ -73,7 +73,7 @@ export class NgvTypeaheadDirective<
     this.inputValue$.next(event)
   }
 
-  /** Helper to the determine if the host is ngv-drodpown or ngv-input*/
+  /** Helper to the determine if the host is nggv-drodpown or nggv-input*/
   get hostIsDropdown() {
     return !!this.hostDropdown
   }
@@ -87,7 +87,7 @@ export class NgvTypeaheadDirective<
     return { key: null, label: 'label.nomatchingoptions', disabled: true }
   }
 
-  /** Name of the component. ngv-dropdown if NgvDropdownComponent or ngv-input if NgvInputComponent */
+  /** Name of the component. nggv-dropdown if NgvDropdownComponent or nggv-input if NgvInputComponent */
   get localName() {
     return this.element.nativeElement.localName
   }
@@ -123,8 +123,8 @@ export class NgvTypeaheadDirective<
   /**
    * @internal
    * Core functionality of typeahead. Emits input, then filters the result based on the supplied function
-   * If directive is applied on ngv-input, manually show or hide options in the list.
-   * If directive is applied on ngv-dropdown, let the dropdown itself choose when to open or close
+   * If directive is applied on nggv-input, manually show or hide options in the list.
+   * If directive is applied on nggv-dropdown, let the dropdown itself choose when to open or close
    */
   private handleInputChanges() {
     this.inputSubscription$ = this.inputValue$
@@ -142,7 +142,7 @@ export class NgvTypeaheadDirective<
 
   /**
    * @internal
-   * Creates a ngv-input if the host itself is not a text-input
+   * Creates a nggv-input if the host itself is not a text-input
    * Set styles to not display the input when closed
    * Trigger filtering when changes occur in the field
    * */
@@ -161,7 +161,7 @@ export class NgvTypeaheadDirective<
       .subscribe((inputValue) => this.inputValue$.next(inputValue))
   }
 
-  /** @internal Creates a ngv-dropdown-list if the host itself is a ngv-input */
+  /** @internal Creates a nggv-dropdown-list if the host itself is a nggv-input */
   private createDropdownList() {
     this.dropdownListComponent = this.viewContainerRef.createComponent(
       NgvTypeaheadDropdownListComponent,
@@ -171,8 +171,8 @@ export class NgvTypeaheadDirective<
 
   /**
    * @internal Sets the options the user can select.
-   * If the host is a ngv-dropdown, utilize the dropdown itself to display the options
-   * If the host is a ngv-input, use the created ngv-dropdown-list to displaye the options
+   * If the host is a nggv-dropdown, utilize the dropdown itself to display the options
+   * If the host is a nggv-input, use the created nggv-dropdown-list to displaye the options
    * @param filteredValues The options to display in the dropdown
    * @param emptyInput If the input is empty
    */

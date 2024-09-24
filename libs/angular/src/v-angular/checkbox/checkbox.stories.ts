@@ -44,7 +44,7 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
-    <ngv-checkbox
+    <nggv-checkbox
       id='123'
       [label]="label"
       [value]="value"
@@ -52,7 +52,7 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
       [required]="required"
       [ngModel]="checked"
       (ngModelChange)="action($event)">
-    </ngv-checkbox>`,
+    </nggv-checkbox>`,
   props: args,
 })
 
@@ -60,21 +60,21 @@ const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
-    <ngv-checkbox
+    <nggv-checkbox
       [id]="opt1.id" [name]="name" [label]="opt1.label" [value]="opt1.value"
       [ngModel]="opt1.ngModel"
       (ngModelChange)="action($event)">
-    </ngv-checkbox>
-    <ngv-checkbox
+    </nggv-checkbox>
+    <nggv-checkbox
       [id]="opt2.id" [name]="name" [label]="opt2.label" [value]="opt2.value"
       [ngModel]="opt2.ngModel"
       (ngModelChange)="action($event)">
-    </ngv-checkbox>
-    <ngv-checkbox
+    </nggv-checkbox>
+    <nggv-checkbox
       [id]="opt3.id" [name]="name" [label]="opt3.label" [value]="opt3.value"
       [ngModel]="opt3.ngModel"
       (ngModelChange)="action($event)">
-    </ngv-checkbox>`,
+    </nggv-checkbox>`,
   props: args,
 })
 
@@ -106,7 +106,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
     template: /*html*/ `
       <label class="sdv-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
       <div [formGroup]="formGroup">
-        <ngv-checkbox id="opt1"
+        <nggv-checkbox id="opt1"
           [name]="name"
           label="Vanilla"
           value="vanilla"
@@ -115,8 +115,8 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Vanilla 🍦</ng-template>
-        </ngv-checkbox>
-        <ngv-checkbox id="opt2"
+        </nggv-checkbox>
+        <nggv-checkbox id="opt2"
           [name]="name"
           label="Strawberry"
           value="strawberry"
@@ -125,8 +125,8 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Strawberry 🍧</ng-template>
-        </ngv-checkbox>
-        <ngv-checkbox id="opt3"
+        </nggv-checkbox>
+        <nggv-checkbox id="opt3"
           [name]="name"
           label="Chocolate"
           value="chocolate"
@@ -135,7 +135,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Chocolate 🍫</ng-template>
-        </ngv-checkbox>
+        </nggv-checkbox>
       </div>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>

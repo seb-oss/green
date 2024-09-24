@@ -16,7 +16,7 @@ import { DropdownUtils, Option } from '../core/core.utils'
 import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
 
 @Component({
-  selector: 'ngv-dropdown-list',
+  selector: 'nggv-dropdown-list',
   template: '',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['state', 'scrollOffset', 'options', 'expanded', 'optionContentTpl'],
