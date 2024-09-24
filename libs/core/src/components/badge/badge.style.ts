@@ -7,6 +7,18 @@ const style = css`
     :host {
       display: contents;
     }
+
+    slot[name='lead']::slotted(*) {
+      line-height: 16px;
+    }
+
+    :host([notification]) slot[name='trail']::slotted(*) {
+      line-height: 12px;
+    }
+
+    :host([notification]) slot[name='lead']::slotted(*) {
+      line-height: 12px;
+    }
   }
 `
 export default style

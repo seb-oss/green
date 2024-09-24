@@ -41,6 +41,7 @@ export default {
       storySort: {
         order: [
           'Green Design System',
+          'Get started',
           'Docs',
           ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',

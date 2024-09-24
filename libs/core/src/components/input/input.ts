@@ -230,7 +230,11 @@ export class GdsInput extends GdsFormControlElement<string> {
                 margin="2xs 0 0 0"
               >
                 <gds-flex min-width="18px">
-                  <gds-icon-triangle-exclamation width="18" height="18" solid>
+                  <gds-icon-triangle-exclamation
+                    width="${this.size === 'small' ? '16' : '18'}"
+                    height="${this.size === 'small' ? '16' : '18'}"
+                    solid
+                  >
                   </gds-icon-triangle-exclamation>
                 </gds-flex>
                 <gds-text

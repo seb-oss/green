@@ -11,6 +11,7 @@ import '../icon/icons/minus-small.ts'
 import '../icon/icons/rocket.ts'
 import '../icon/icons/arrow-rotate-counter-clockwise.ts'
 import '../icon/icons/triangle-exclamation.js'
+import '../icon/icons/plus-small.ts'
 
 /**
  * A badge is a small status or notification indicator that can be used to display a message or status.
@@ -121,10 +122,15 @@ export const Variants: Story = {
         <gds-flex gap="xl" align-items="center">
           <gds-badge variant="positive" notification></gds-badge>
           <gds-badge variant="positive" notification>9</gds-badge>
-          <gds-badge variant="positive" notification>999+</gds-badge>
+          <gds-badge variant="positive" notification>
+            999
+            <gds-icon-plus-small slot="trail"></gds-icon-plus-small
+          ></gds-badge>
           <gds-badge variant="negative" notification></gds-badge>
           <gds-badge variant="negative" notification>9</gds-badge>
-          <gds-badge variant="negative" notification>999+</gds-badge>
+          <gds-badge variant="negative" notification>
+            999 <gds-icon-plus-small slot="trail"></gds-icon-plus-small
+          ></gds-badge>
         </gds-flex>
       </gds-flex>
     </gds-flex>
@@ -319,10 +325,16 @@ export const Notification: Story = {
     <gds-flex gap="xl" align-items="center">
       <gds-badge variant="positive" notification></gds-badge>
       <gds-badge variant="positive" notification>9</gds-badge>
-      <gds-badge variant="positive" notification>999+</gds-badge>
+      <gds-badge variant="positive" notification>
+        999
+        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
+      </gds-badge>
       <gds-badge variant="negative" notification></gds-badge>
       <gds-badge variant="negative" notification>9</gds-badge>
-      <gds-badge variant="negative" notification>999+</gds-badge>
+      <gds-badge variant="negative" notification>
+        999
+        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
+      </gds-badge>
     </gds-flex>
   `,
 }

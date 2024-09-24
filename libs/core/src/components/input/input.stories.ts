@@ -82,6 +82,28 @@ export const Size: Story = {
         supporting-text="Example support text"
         size="small"
         clearable
+        .validator=${{
+          validate: (el: any) => {
+            if (el.value === '')
+              return [
+                {
+                  ...el.validity,
+                  valid: false,
+                  customError: true,
+                },
+                'Error message.',
+              ]
+            else if (el.value.length !== 12 || isNaN(el.value))
+              return [
+                {
+                  ...el.validity,
+                  valid: false,
+                  customError: true,
+                },
+                'The value must be 12 characters long.',
+              ]
+          },
+        }}
       >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         <span slot="extended-supporting-text">

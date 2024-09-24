@@ -93,7 +93,7 @@ export class GdsBadge extends GdsElement {
       level="3"
       background=${background}
       color=${color}
-      gap="2xs"
+      gap="${this.notification ? '' : '2xs'}"
       align-items="center"
       justify-content="flex-start"
       padding-inline="${padding}"
@@ -101,8 +101,9 @@ export class GdsBadge extends GdsElement {
       block-size="${blockSize}"
       width="max-content"
       inline-size="${inlineSize}"
-      font-size="detail-s"
-      font-weight="book"
+      font-size="${this.size === 'small' || this.notification
+        ? 'detail-xs'
+        : 'detail-s'}"
       pointer-events=${this.disabled ? 'none' : 'auto'}
       user-select="${this.disabled ? 'none' : 'auto'}"
     >
@@ -134,8 +135,8 @@ export class GdsBadge extends GdsElement {
   }
 
   #renderTrailSlot() {
-    if (!this.notification) {
-      return html`<slot name="trail"></slot>`
-    }
+    // if (!this.notification) {
+    return html`<slot name="trail"></slot>`
+    // }
   }
 }
