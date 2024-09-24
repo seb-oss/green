@@ -5653,6 +5653,15 @@
     polished "^4.2.2"
     ts-dedent "^2.2.0"
 
+"@storybook/addon-links@8.3.2":
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-8.3.2.tgz#cb4d66ace1cb9ad4b02a3adba38bab18b2f768af"
+  integrity sha512-CHp/3XSB/AWyoP9b2tNaaKNTyftLPIPWqMhqhH1V5irjXhLDpBBEkmgbvB19xJ4qCfDjjOjokSLmSBaVOnzv2g==
+  dependencies:
+    "@storybook/csf" "^0.1.11"
+    "@storybook/global" "^5.0.0"
+    ts-dedent "^2.0.0"
+
 "@storybook/addon-measure@8.2.9":
   version "8.2.9"
   resolved "https://registry.yarnpkg.com/@storybook/addon-measure/-/addon-measure-8.2.9.tgz#998995c31980d635132c42a8d621095e73adb9b6"
@@ -5892,7 +5901,7 @@
     recast "^0.23.1"
     ts-dedent "^2.0.0"
 
-"@storybook/csf@0.1.11", "@storybook/csf@^0.1.2":
+"@storybook/csf@0.1.11", "@storybook/csf@^0.1.11", "@storybook/csf@^0.1.2":
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/@storybook/csf/-/csf-0.1.11.tgz#ad685a4fe564a47a6b73571c2e7c07b526f4f71b"
   integrity sha512-dHYFQH3mA+EtnCkHXzicbLgsvzYjcDJ1JWsogbItZogkPHgSJM/Wr71uMkcvw8v9mmCyP4NpXJuu6bPoVsOnzg==

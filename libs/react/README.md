@@ -1,4 +1,4 @@
-<div align="center">
+<div align-items="center">
 <img width="600" alt="green-react" src="https://github.com/seb-oss/green/assets/11420341/ad4c9fe3-137f-4230-9ea7-a4de87752aa9">
 <h1>@sebgroup/green-react</h1>
 <p>

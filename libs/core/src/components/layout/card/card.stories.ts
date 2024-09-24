@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
+import { html } from 'lit'
 import './card'
 import '../../media/img'
 import '../../media/video'
 import '../../layout/container'
+import '../mask/index.js'
 import '../../layout/flex'
 import '../../content/text'
 import '../../content/divider'
 import '../../icon/icons/arrow-down.js'
 import '../../icon/icons/arrow-right.js'
 import '../../icon/icons/circles-three.js'
-import { html } from 'lit'
 
 /**
  * The `gds-card` is a custom element that provides a flexible card system.
@@ -52,12 +53,17 @@ export const Card: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-grid columns="xs{1} m{3} l{3}" gap="l">
-      <gds-card shadow="s{xs} m{xs} l{s}" radius="xs" overflow="hidden">
-        <gds-flex display="flex" gap="0" direction="column" align="stretch">
+      <gds-card shadow="s{xs} m{xs} l{s}" border-radius="xs" overflow="hidden">
+        <gds-flex
+          display="flex"
+          gap="0"
+          flex-direction="column"
+          align-items="stretch"
+        >
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
-              ratio="1/1"
+              aspect-ratio="1/1"
             ></gds-img>
             <gds-container position="absolute" inset="20px 20px auto auto">
               <gds-button>
@@ -66,13 +72,13 @@ export const Card: Story = {
             </gds-container>
           </gds-container>
           <gds-flex
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{l} l{l}"
-            align="flex-start"
+            align-items="flex-start"
             gap="l"
           >
-            <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="body-l">James Doe</gds-text>
+            <gds-flex gap="s" flex-direction="column">
+              <gds-text font-size="body-l">James Doe</gds-text>
               <gds-text tag="p">
                 Passionate software engineer with a love for coding and
                 problem-solving.
@@ -86,13 +92,18 @@ export const Card: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l" radius="m" border="3xs/base300" overflow="hidden">
-        <gds-flex gap="m" direction="column" padding="s">
+      <gds-card
+        shadow="l"
+        border-radius="m"
+        border="3xs/primary"
+        overflow="hidden"
+      >
+        <gds-flex gap="m" flex-direction="column" padding="s">
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
-              ratio="1/1"
-              radius="xs"
+              aspect-ratio="1/1"
+              border-radius="xs"
             ></gds-img>
             <gds-container position="absolute" inset="20px 20px auto auto">
               <gds-button>
@@ -101,13 +112,13 @@ export const Card: Story = {
             </gds-container>
           </gds-container>
           <gds-flex
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{s} l{s}"
-            align="flex-start"
+            align-items="flex-start"
             gap="l"
           >
-            <gds-flex gap="s" direction="column">
-              <gds-text tag="h2" size="body-l">Lorem Ipsum</gds-text>
+            <gds-flex gap="s" flex-direction="column">
+              <gds-text font-size="body-l">Lorem Ipsum</gds-text>
               <gds-text tag="p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt.
@@ -120,42 +131,41 @@ export const Card: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card radius="m" overflow="hidden">
+      <gds-card border-radius="m" overflow="hidden">
         <gds-flex position="relative" height="100%">
           <gds-video
             src="https://github.com/seb-oss/green/assets/2398447/d77a95d0-e4d7-4c49-bd95-50d0f72f1a7a"
-            fit="cover"
-            ratio="1/1"
-            events="none"
+            object-fit="cover"
+            aspect-ratio="1/1"
+            pointer-events="none"
             autoplay
             muted
             loop
           ></gds-video>
-          <gds-card
+          <gds-mask
+            mask-image="top"
+            background-color="tertiary/0.4"
             position="absolute"
-            inset="50% 0px 0px 0px"
-            filter="4px"
-            color="l2-content-tertiary"
-            mask="top/l2-background-tertiary/0.4"
-            stack="2"
           >
             <gds-flex
-              direction="column"
-              justify="flex-end"
+              flex-direction="column"
+              justify-content="flex-end"
               padding="4xl 2xl 2xl 2xl"
               gap="l"
               height="100%"
+              width="100%"
+              color="tertiary"
             >
               <gds-container>
-                <gds-text tag="h4" size="body-l">Jane Doe</gds-text>
-                <gds-text tag="p" size="body-m">UX Designer</gds-text>
+                <gds-text font-size="body-l">Jane Doe</gds-text>
+                <gds-text font-size="body-m">UX Designer</gds-text>
               </gds-container>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Message</gds-button>
                 <gds-button rank="secondary">Follow</gds-button>
               </gds-flex>
             </gds-flex>
-          </gds-card>
+          </gds-mask>
         </gds-flex>
       </gds-card>
     </gds-grid>
@@ -189,7 +199,7 @@ export const Card: Story = {
  * To speficy the color of the border you can use the color tokens like this:
  *
  * ```html
- * <gds-container border="4xs/base300"></gds-container>
+ * <gds-container border="4xs/primary"></gds-container>
  * ```
  */
 export const CardBorder: Story = {
@@ -197,24 +207,30 @@ export const CardBorder: Story = {
   name: 'Border Style',
   render: (args) =>
     html` <gds-grid columns="5" gap="l">
-      <gds-card shadow="s" radius="0 0 m m" border="4xs 0 0 0">
-        <gds-flex padding="2xl" align="center" justify="center"> Top </gds-flex>
+      <gds-card shadow="s" border-radius="0 0 m m" border="4xs 0 0 0">
+        <gds-flex padding="2xl" align-items="center" justify-content="center">
+          Top
+        </gds-flex>
       </gds-card>
-      <gds-card shadow="s" radius="m 0 0 m" border="0 4xs 0 0">
-        <gds-flex padding="2xl" align="center" justify="center">Right</gds-flex>
+      <gds-card shadow="s" border-radius="m 0 0 m" border="0 4xs 0 0">
+        <gds-flex padding="2xl" align-items="center" justify-content="center"
+          >Right</gds-flex
+        >
       </gds-card>
-      <gds-card shadow="s" radius="m m 0 0" border="0 0 4xs 0">
-        <gds-flex padding="2xl" align="center" justify="center">
+      <gds-card shadow="s" border-radius="m m 0 0" border="0 0 4xs 0">
+        <gds-flex padding="2xl" align-items="center" justify-content="center">
           Bottom
         </gds-flex>
       </gds-card>
-      <gds-card shadow="s" radius="0 m m 0" border="0 0 0 4xs">
-        <gds-flex padding="2xl" align="center" justify="center">
+      <gds-card shadow="s" border-radius="0 m m 0" border="0 0 0 4xs">
+        <gds-flex padding="2xl" align-items="center" justify-content="center">
           Left
         </gds-flex>
       </gds-card>
-      <gds-card shadow="s" radius="m" border="4xs">
-        <gds-flex padding="2xl" align="center" justify="center"> All </gds-flex>
+      <gds-card shadow="s" border-radius="m" border="4xs">
+        <gds-flex padding="2xl" align-items="center" justify-content="center">
+          All
+        </gds-flex>
       </gds-card>
     </gds-grid>`,
 }
@@ -226,18 +242,18 @@ export const CardBorder: Story = {
  * Supports all the size tokens from the design system.
  *
  * You can apply radius in each corner like this:
- * `<gds-card radius="0 0 m m" ></gds-card>
+ * `<gds-card border-radius="0 0 m m" ></gds-card>
  *
  * Also for different breakpoints like this:
- * `<gds-card radius="s{xs} m{xs} l{s}"></gds-card>`
+ * `<gds-card border-radius="s{xs} m{xs} l{s}"></gds-card>`
  *
  * Each corner can have a different radius value and also different values for different breakpoints.
  * The radius styles are predfied on the tokens file and will be applied automativally based on the token value.
  *
  *
  * ```html
- * <gds-card radius="m">All breakpoints</gds-card>
- * <gds-card radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
+ * <gds-card border-radius="m">All breakpoints</gds-card>
+ * <gds-card border-radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
  *    Specific breakpoints and sides
  * </gds-card>
  * ```
@@ -253,68 +269,80 @@ export const CardRadius: Story = {
   name: 'Border Radius',
   render: (args) =>
     html`<gds-grid columns="8" gap="l">
-      <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
-        padding="xl"
-      >
-        <gds-flex display="flex" align="center" justify="center"> 0 </gds-flex>
+      <gds-card background="tertiary" color="tertiary" padding="xl">
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          0
+        </gds-flex>
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="2xs"
+        border-radius="2xs"
       >
-        <gds-flex display="flex" align="center" justify="center">2XS</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >2XS</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="0 xs 0 xs"
+        border-radius="0 xs 0 xs"
       >
-        <gds-flex display="flex" align="center" justify="center">XS</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >XS</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="0 s 0 s"
+        border-radius="0 s 0 s"
       >
-        <gds-flex display="flex" align="center" justify="center">S</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >S</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="0 m 0 m"
+        border-radius="0 m 0 m"
       >
-        <gds-flex display="flex" align="center" justify="center">M</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >M</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="0 l 0 l"
+        border-radius="0 l 0 l"
       >
-        <gds-flex display="flex" align="center" justify="center">L</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >L</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="xl"
+        border-radius="xl"
       >
-        <gds-flex display="flex" align="center" justify="center">XL</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >XL</gds-flex
+        >
       </gds-card>
       <gds-card
-        background="l2-background-tertiary"
-        color="l2-content-tertiary"
+        background="tertiary"
+        color="tertiary"
         padding="xl"
-        radius="max"
+        border-radius="max"
       >
-        <gds-flex display="flex" align="center" justify="center">MAX</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >MAX</gds-flex
+        >
       </gds-card>
     </gds-grid>`,
 }
@@ -344,25 +372,47 @@ export const Cardshadow: Story = {
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{xs} m{xs} l{xs}"
-        radius="xs"
+        border-radius="xs"
       >
-        <gds-flex display="flex" align="center" justify="center">XS</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >XS</gds-flex
+        >
       </gds-card>
-      <gds-card padding="s{xs} m{l} l{l}" shadow="s{s} m{s} l{s}" radius="xs">
-        <gds-flex display="flex" align="center" justify="center">S</gds-flex>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        shadow="s{s} m{s} l{s}"
+        border-radius="xs"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >S</gds-flex
+        >
       </gds-card>
-      <gds-card padding="s{xs} m{l} l{l}" shadow="s{m} m{m} l{m}" radius="xs">
-        <gds-flex display="flex" align="center" justify="center">M</gds-flex>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        shadow="s{m} m{m} l{m}"
+        border-radius="xs"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >M</gds-flex
+        >
       </gds-card>
-      <gds-card padding="s{xs} m{l} l{l}" shadow="s{l} m{l} l{l}" radius="xs">
-        <gds-flex display="flex" align="center" justify="center">L</gds-flex>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        shadow="s{l} m{l} l{l}"
+        border-radius="xs"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >L</gds-flex
+        >
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{xl} m{xl} l{xl}"
-        radius="xs"
+        border-radius="xs"
       >
-        <gds-flex display="flex" align="center" justify="center">XL</gds-flex>
+        <gds-flex display="flex" align-items="center" justify-content="center"
+          >XL</gds-flex
+        >
       </gds-card>
     </gds-grid>`,
 }
@@ -379,14 +429,14 @@ export const CardBackground: Story = {
   name: 'Background',
   render: (args) =>
     html`<gds-grid columns="4" gap="l">
-      <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base100">
+      <gds-card shadow="l{m} m{m} s{m}" border-radius="xs" background="base100">
         <gds-flex
           gap="l"
-          align="flex-start"
-          direction="column"
+          align-items="flex-start"
+          flex-direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="heading-m">Base 100</gds-text>
+          <gds-text font-size="heading-m">Base 100</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -394,14 +444,14 @@ export const CardBackground: Story = {
           <gds-button>Button</gds-button>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base200">
+      <gds-card shadow="l{m} m{m} s{m}" border-radius="xs" background="base200">
         <gds-flex
           gap="l"
-          align="flex-start"
-          direction="column"
+          align-items="flex-start"
+          flex-direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="heading-m">Base 200</gds-text>
+          <gds-text font-size="heading-m">Base 200</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -409,14 +459,14 @@ export const CardBackground: Story = {
           <gds-button>Button</gds-button>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base300">
+      <gds-card shadow="l{m} m{m} s{m}" border-radius="xs" background="primary">
         <gds-flex
           gap="l"
-          align="flex-start"
-          direction="column"
+          align-items="flex-start"
+          flex-direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="heading-m">Base 300</gds-text>
+          <gds-text font-size="heading-m">Base 300</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -424,14 +474,14 @@ export const CardBackground: Story = {
           <gds-button>Button</gds-button>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l{m} m{m} s{m}" radius="xs" background="base400">
+      <gds-card shadow="l{m} m{m} s{m}" border-radius="xs" background="base400">
         <gds-flex
           gap="l"
-          align="flex-start"
-          direction="column"
+          align-items="flex-start"
+          flex-direction="column"
           padding="s{xs} m{l} l{l}"
         >
-          <gds-text tag="h3" size="heading-m">Base 400</gds-text>
+          <gds-text font-size="heading-m">Base 400</gds-text>
           <gds-text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -449,7 +499,7 @@ export const CardBackground: Story = {
  * The `gds-card` and `gds-container` accept properties like `column` and `row` where you can specify the number of columns specified on the grid to span or rows to span in vertical axis like on this example:
  *
  * ```html
- * <gds-container column="2 / -1" row="1 / -1"></gds-container>
+ * <gds-container grid-column="2 / -1" grid-row="1 / -1"></gds-container>
  * ```
  */
 export const CardGrid: Story = {
@@ -458,17 +508,17 @@ export const CardGrid: Story = {
   render: (args) =>
     html` <gds-grid columns="4" gap="l">
       <gds-container>
-        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
+        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
           <gds-flex
             gap="m"
-            direction="column"
+            flex-direction="column"
             padding="s{xs} m{l} l{l}"
-            align="flex-start"
+            align-items="flex-start"
           >
-            <gds-text tag="h3" size="l{heading-s} m{heading-s} s{heading-s}">
+            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
             </gds-text>
-            <gds-text wrap="balance">
+            <gds-text text-wrap="balance">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
@@ -476,23 +526,21 @@ export const CardGrid: Story = {
           </gds-flex>
         </gds-card>
       </gds-container>
-      <gds-container column="2 / -1" row="1 / -1" display="flex">
-        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
+      <gds-container grid-column="2 / -1" grid-row="1 / -1" display="flex">
+        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
           <gds-flex
             padding="s{xs} m{l} l{l}"
-            direction="column"
-            align="flex-start"
-            justify="center"
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
             gap="m"
           >
-            <gds-text tag="h3" size="heading-s">
-              Span Columns: [2 / -1]</gds-text
-            >
+            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
-            <gds-text tag="h2" size="body-m"
+            <gds-text font-size="body-m"
               >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -502,19 +550,17 @@ export const CardGrid: Story = {
           </gds-flex>
         </gds-card>
       </gds-container>
-      <gds-container column="1 / -1">
-        <gds-card shadow="l{m} m{m} s{m}" radius="xs">
+      <gds-container grid-column="1 / -1">
+        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
           <gds-flex
             padding="s{xs} m{l} l{l}"
-            direction="column"
-            align="flex-start"
-            justify="center"
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
             gap="m"
           >
-            <gds-text tag="h3" size="heading-s"
-              >Span all columns [1 / -1]</gds-text
-            >
-            <gds-text wrap="balance" lines="3">
+            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text text-wrap="balance" lines="3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

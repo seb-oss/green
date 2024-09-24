@@ -23,7 +23,7 @@ import style from './menu-button.css?inline'
  * @csspart main-slot - The main slot of the button, between the lead and trail slots.
  */
 @gdsCustomElement('gds-menu-button')
-export class MenuButton extends GdsElement {
+export class GdsMenuButton extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
   static shadowRootOptions: ShadowRootInit = {
