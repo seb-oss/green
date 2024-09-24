@@ -10,10 +10,7 @@ import { constrainSlots } from '../../utils/helpers'
 import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import '../layout/flex'
 import { tokens } from '../../tokens.style'
 import { styles } from './input.styles'
