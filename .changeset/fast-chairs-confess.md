@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-container to create correct styling
+style expression value template css var fallback
