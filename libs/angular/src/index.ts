@@ -15,22 +15,3 @@ export * from './lib/context-menu'
 export * from './lib/sortable-list'
 export * from './lib/cell-table'
 export * from './lib/shared/core-element'
-
-/**
- * V-Angular exports
- */
-export * from './v-angular/base-control-value-accessor'
-export * from './v-angular/breadcrumbs'
-export * from './v-angular/button'
-export * from './v-angular/card'
-export * from './v-angular/checkbox'
-export * from './v-angular/dropdown'
-export * from './v-angular/dropdown/dropdown-list'
-export * from './v-angular/i18n'
-export * from './v-angular/info-circle'
-export * from './v-angular/input'
-export * from './v-angular/input-mask'
-export * from './v-angular/modal'
-export * from './v-angular/radio'
-export * from './v-angular/textarea'
-export * from './v-angular/tooltip'

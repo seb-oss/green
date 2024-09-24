@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.4
+
+### Patch Changes
+
+- 0ace1ed: pagination size fix
+  Fixes #1481
+
 ## 3.6.3
 
 ### Patch Changes

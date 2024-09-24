@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 
 @Component({
-  selector: 'ngv-typeahead-highlight',
+  selector: 'nggv-typeahead-highlight',
   templateUrl: './typeahead-highlight.component.html',
   styleUrls: ['./typeahead-highlight.component.scss'],
 })
