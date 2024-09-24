@@ -5,6 +5,8 @@
     "storybook-static",
     "setup-jest.js",
     "*.stories.ts",
+    "*.tsx",
+    "*.stories.tsx",
     ".storybook/*"
   ],
   "overrides": [
