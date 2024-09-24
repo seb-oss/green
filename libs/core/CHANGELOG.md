@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.42.0
+
+### Minor Changes
+
+- fbecda4: **Declarative Layout:** Add support for pseudo sub-selectors, like `:hover`, ':focus', etc.
+
 ## 1.41.4
 
 ### Patch Changes
