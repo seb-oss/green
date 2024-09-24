@@ -239,8 +239,8 @@ export class GdsText extends GdsElement {
     const TAG_ENCODE = encodeURI(this.tag)
     const TAG = unsafeStatic(TAG_ENCODE)
     const classes = {
-      'no-size-set': !this.size,
-      'no-weight-set': !this.weight,
+      'no-size-set': !this['font-size'],
+      'no-weight-set': !this['font-weight'],
       'lines-set': !!this.lines,
     }
     return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
