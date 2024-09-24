@@ -4,7 +4,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import IMGCSS from './img.style.css'
+import IMGCSS from './img.style'
 
 /**
  * `gds-img` is a custom element that provides a flexible image system.
@@ -26,13 +26,13 @@ export class GdsImg extends GdsElement {
    *
    * You can apply the aspect ratio like this:
    * ```html
-   * <gds-img ratio="16/9"></gds-img>
+   * <gds-img aspect-ratio="16/9"></gds-img>
    * ```
    * The above example will apply the aspect ratio of 16/9.
    *
    * You can also apply different aspect ratios for different screen sizes like this:
    * ```html
-   * <gds-img ratio="l{16/9} m{4/3} s{1/1}"></gds-img>
+   * <gds-img aspect-ratio="l{16/9} m{4/3} s{1/1}"></gds-img>
    * ```
    *
    * The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
@@ -44,7 +44,7 @@ export class GdsImg extends GdsElement {
     selector: 'figure',
     valueTemplate: v => v
   })
-  ratio?: string
+  'aspect-ratio'?: string
 
   /**
    * Controls the `object-position` of the img.
@@ -128,7 +128,7 @@ export class GdsImg extends GdsElement {
    *
    * You can apply fit like this:
    * ```html
-   * <gds-img fit="cover"></gds-img>
+   * <gds-img object-fit="cover"></gds-img>
    * ```
    *
    *  The above example will apply the object-fit style of cover.
@@ -140,7 +140,7 @@ export class GdsImg extends GdsElement {
     selector: 'img',
     valueTemplate: v => v
   })
-  fit?: string
+  'object-fit'?: string
 
   /**
    * The image source URL.
@@ -164,12 +164,12 @@ export class GdsImg extends GdsElement {
    *
    * You can apply radius in each corner like this:
    * ```html
-   * <gds-img radius="none none m m" ></gds-img>
+   * <gds-img border-radius="none none m m" ></gds-img>
    * ```
    *
    * Also for different breakpoints like this:
    * ```html
-   * <gds-img radius="s{xs} m{xs} l{s}"></gds-img>
+   * <gds-img border-radius="s{xs} m{xs} l{s}"></gds-img>
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.
@@ -177,8 +177,8 @@ export class GdsImg extends GdsElement {
    *
    * @example
    * ```html
-   * <gds-img radius="m"></gds-img>
-   * <gds-img radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
+   * <gds-img border-radius="m"></gds-img>
+   * <gds-img border-radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
    *    Specific breakpoints and sides
    * </gds-img>
    * ```
@@ -190,7 +190,7 @@ export class GdsImg extends GdsElement {
     selector: 'figure',
     valueTemplate: v => `var(--gds-space-${v})`
   })
-  radius?: string
+  'border-radius'?: string
 
   render() {
     return html`<figure><img src="${this.src}" alt="${this.alt}" /></figure>`

@@ -1,11 +1,10 @@
-import { html } from 'lit/static-html.js'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-
+import { html } from '../../scoping'
 import BadgeCSS from './badge.style'
-
 /**
  * `gds-badge`
  *
@@ -13,61 +12,119 @@ import BadgeCSS from './badge.style'
  * @status beta
  *
  */
-
 @gdsCustomElement('gds-badge')
 export class GdsBadge extends GdsElement {
   static styles = [tokens, BadgeCSS]
 
   /**
    * Controls the variant of the badge.
-   * Supports all valid variants like information, notice, success, warning, error.
+   * Supports all valid variants like information, notice, positive, warning, negative.
    * @property variant
    */
-  @styleExpressionProperty({
-    valueTemplate: v => `${v}`,
-    selector: '.badge',
-    styleTemplate: (prop, values) => {
-      const variant = values[0]
-      const variantMapping: { [key: string]: { bg: string; color: string } } = {
-        information: {
-          bg: 'information',
-          color: 'information'
-        },
-        notice: {
-          bg: 'notice',
-          color: 'notice'
-        },
-        success: {
-          bg: 'positive',
-          color: 'positive'
-        },
-        warning: {
-          bg: 'warning',
-          color: 'warning'
-        },
-        error: {
-          bg: 'negative',
-          color: 'negative'
-        }
-      }
+  @property()
+  variant = 'information'
 
-      const tokens = variantMapping[variant] || {
-        bg: 'default-bg',
-        color: 'default-content'
-      }
-      const BG = `background-color: var(--gds-color-l3c-background-${tokens.bg}-secondary);`
-      const CL = `color: var(--gds-color-l3c-content-${tokens.color});`
-      const style = `${BG} ${CL}`
-      return style
-    }
+  /**
+   * Defines the size of the badge.
+   * The default value is `default`.
+   *
+   * @property {string} size - The size of the badge, which can be either 'default' or 'small'.
+   */
+  @property({ type: String })
+  size: 'default' | 'small' = 'default'
+
+  /**
+   * Indicates whether the badge is disabled.
+   * When set to `true`, the badge will appear in a disabled state and will not be interactive.
+   *
+   * @property {boolean} disabled - Controls the disabled state of the badge.
+   */
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true
   })
-  variant?: string
+  disabled = false
+
+  /**
+   * Indicates whether the badge is in notification mode.
+   * When set to `true`, the badge will act as a notification badge with only two variants: `positive` or `negative`.
+   *
+   * @property {boolean} notification - Controls the notification mode of the badge.
+   */
+  @property({
+    attribute: 'notification',
+    type: Boolean,
+    reflect: true
+  })
+  notification = false
+
+  @state()
+  mainSlotOccupied = false
+
+  constructor() {
+    super()
+  }
 
   render() {
-    return html`<div class="badge">
-      <slot name="lead"></slot>
-      <slot></slot>
-      <slot name="trail"></slot>
-    </div>`
+    const background = this.disabled
+      ? 'disabled'
+      : this.notification
+        ? (this as GdsBadge).variant
+        : (this as GdsBadge).variant + '-badge'
+
+    const color = this.disabled ? 'disabled' : this.notification ? 'primary' : (this as GdsBadge).variant
+
+    const padding = this.size === 'small' || this.notification ? '2xs' : 'xs'
+
+    const blockSize = this.mainSlotOccupied ? (this.size === 'small' || this.notification ? 'm' : 'l') : 'xs'
+
+    const inlineSize = this.mainSlotOccupied ? 'l' : 'xs'
+
+    return html`<gds-flex
+      level="3"
+      background=${background}
+      color=${color}
+      gap="${this.notification ? '' : '2xs'}"
+      align-items="center"
+      justify-content="flex-start"
+      padding-inline="${padding}"
+      border-radius="${this.notification ? 'max' : '2xs'}"
+      block-size="${blockSize}"
+      width="max-content"
+      inline-size="${inlineSize}"
+      font-size="${this.size === 'small' || this.notification ? 'detail-xs' : 'detail-s'}"
+      pointer-events=${this.disabled ? 'none' : 'auto'}
+      user-select="${this.disabled ? 'none' : 'auto'}"
+    >
+      ${this.#renderLeadSlot()} ${this.#renderMainSlot()} ${this.#renderTrailSlot()}
+    </gds-flex>`
+  }
+
+  #renderLeadSlot() {
+    if (this.size !== 'small' || !this.notification) {
+      return html`<slot name="lead"></slot>`
+    }
+  }
+
+  #renderMainSlot() {
+    return html`<slot @slotchange=${this.#handleSlotChange}></slot>`
+  }
+
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.mainSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        node =>
+          node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '')
+      )
+  }
+
+  #renderTrailSlot() {
+    // if (!this.notification) {
+    return html`<slot name="trail"></slot>`
+    // }
   }
 }

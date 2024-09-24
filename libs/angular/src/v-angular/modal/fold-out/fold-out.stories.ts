@@ -30,11 +30,11 @@ export default {
 const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
   template: /* html */ `
   <div class="story-wrapper">
-    <ngv-fold-out [alignOptions]="alignOptions">
+    <nggv-fold-out [alignOptions]="alignOptions">
       <div ngvOption>View details</div>
       <div ngvOption>Sign payment</div>
       <div ngvOption>Delete</div>
-    </ngv-fold-out>
+    </nggv-fold-out>
   </div>`,
   styleUrls: ['./fold-out.stories.scss'],
   props: args
@@ -43,11 +43,11 @@ const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
 const TemplateAlt: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
   template: /* html */ `
     <div class="story-wrapper--right-align">
-      <ngv-fold-out [alignOptions]="alignOptions">
+      <nggv-fold-out [alignOptions]="alignOptions">
         <div ngvOption>View details</div>
         <div ngvOption>Sign payment</div>
         <div ngvOption>Delete</div>
-      </ngv-fold-out>
+      </nggv-fold-out>
     </div>`,
   styleUrls: ['./fold-out.stories.scss'],
   props: args

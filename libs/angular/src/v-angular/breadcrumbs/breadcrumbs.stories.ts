@@ -21,7 +21,7 @@ export default {
 } as Meta
 
 const Template: StoryFn<NgvBreadcrumbsComponent> = (args: NgvBreadcrumbsComponent) => ({
-  template: /*html*/ `<ngv-breadcrumbs [breadcrumbs]="breadcrumbs"></ngv-breadcrumbs>`,
+  template: /*html*/ `<nggv-breadcrumbs [breadcrumbs]="breadcrumbs"></nggv-breadcrumbs>`,
   props: args
 })
 

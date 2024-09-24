@@ -4,7 +4,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import VideoCSS from './video.style.css'
+import VideoCSS from './video.style'
 
 /**
  * `gds-video` is a custom video element that provides configurable .mp4 video playback that can be used as background or hero video without controls.
@@ -25,7 +25,7 @@ export class GdsVideo extends GdsElement {
    * You can apply the aspect ratio like this:
    *
    * ```html
-   * <gds-video ratio="16/9"></gds-video>
+   * <gds-video aspect-ratio="16/9"></gds-video>
    * ```
    *
    * The above example will apply the aspect ratio of 16/9.
@@ -33,7 +33,7 @@ export class GdsVideo extends GdsElement {
    * You can also apply different aspect ratios for different screen sizes like this:
    *
    * ```html
-   * <gds-video ratio="l{16/9} m{4/3} s{1/1}"></gds-video>
+   * <gds-video aspect-ratio="l{16/9} m{4/3} s{1/1}"></gds-video>
    * ```
    *
    *  The above example will apply the aspect ratio of 16/9 for large screens, 4/3 for medium screens, and 1/1 for small screens.
@@ -45,7 +45,7 @@ export class GdsVideo extends GdsElement {
     selector: 'figure',
     valueTemplate: v => v
   })
-  ratio?: string
+  'aspect-ratio'?: string
 
   /**
    * Controls the `object-position` of the video.
@@ -57,7 +57,7 @@ export class GdsVideo extends GdsElement {
     selector: 'video',
     valueTemplate: v => v
   })
-  position?: string
+  'object-position'?: string
 
   /**
    * Controls the inset property of the container.
@@ -129,7 +129,7 @@ export class GdsVideo extends GdsElement {
    * You can apply fit like this:
    *
    * ```html
-   * <gds-img fit="cover"></gds-img>
+   * <gds-img object-fit="cover"></gds-img>
    * ```
    *
    *  The above example will apply the object-fit style of cover.
@@ -141,7 +141,7 @@ export class GdsVideo extends GdsElement {
     selector: 'video',
     valueTemplate: v => v
   })
-  fit?: string
+  'object-fit'?: string
 
   /**
    * Controls the pointer-events property of the video.
@@ -154,7 +154,7 @@ export class GdsVideo extends GdsElement {
     selector: 'video',
     valueTemplate: v => v
   })
-  events?: string
+  'pointer-events'?: string
 
   /**
    * Controls the border-radius property of the video.
@@ -164,13 +164,13 @@ export class GdsVideo extends GdsElement {
    * You can apply radius in each corner like this:
    *
    * ```html
-   * <gds-container radius="none none m m" ></gds-container>
+   * <gds-container border-radius="none none m m" ></gds-container>
    * ```
    *
    * Also for different breakpoints like this:
    *
    * ```html
-   * <gds-container radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
+   * <gds-container border-radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.
@@ -179,9 +179,9 @@ export class GdsVideo extends GdsElement {
   @styleExpressionProperty({
     property: 'border-radius',
     selector: 'figure',
-    valueTemplate: v => `var(--gds-sys-radii-${v})`
+    valueTemplate: v => `var(--gds-space-${v})`
   })
-  radius?: string
+  'border-radius'?: string
 
   // Video properties
   @property() src?: string

@@ -20,9 +20,9 @@ type StoryArgs = NgvInfoCircleComponent
 const Template: StoryFn<StoryArgs> = (args: StoryArgs) => ({
   template: /*html*/ `
   <div style="height:200px; display:grid; place-content: center;">
-    <ngv-info-circle [attr.data-thook]="thook"
+    <nggv-info-circle [attr.data-thook]="thook"
     [info]="info">
-    </ngv-info-circle>
+    </nggv-info-circle>
   </div>`,
   props: { ...args }
 })

@@ -21,7 +21,8 @@ export class GdsFab extends GdsButton {
    * Supports all valid CSS position values.
    */
   @styleExpressionProperty({
-    valueTemplate: v => v
+    valueTemplate: v => v,
+    selector: '[part="_button"]'
   })
   position?: string
 

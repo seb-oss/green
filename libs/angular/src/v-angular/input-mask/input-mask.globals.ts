@@ -13,6 +13,7 @@ declare global {
 }
 
 ;(() => {
+;(() => {
   // Make sure there is an incremental ID each component can use
   if (typeof window !== 'undefined' && !window.ngv) {
     window.ngv = {

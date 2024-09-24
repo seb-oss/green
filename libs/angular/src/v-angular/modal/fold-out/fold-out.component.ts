@@ -13,7 +13,7 @@ import { fromEvent, Subscription } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 
 @Component({
-  selector: 'ngv-fold-out',
+  selector: 'nggv-fold-out',
   templateUrl: './fold-out.component.html',
   styleUrls: ['./fold-out.component.scss']
 })

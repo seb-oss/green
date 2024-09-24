@@ -17,14 +17,14 @@ export default {
 
 const BasicTemplate: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <nggv-card>
       Basic card
     </ngv-card>`
 })
 
 const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <nggv-card>
       <div class="card-row">
         <div class="card-column"> Column 1 </div>
         <div class="card-column"> Column 2 </div>
@@ -36,7 +36,7 @@ const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
 
 const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <nggv-card>
       <div class="card-row">
         <div class="card-column"> <b>Expenses</b> </div>
         <div class="card-column"></div>

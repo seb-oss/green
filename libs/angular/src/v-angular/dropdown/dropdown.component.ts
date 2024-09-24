@@ -30,7 +30,7 @@ import { DropdownUtils, Option, OptionBase, OptionGroup } from '@sebgroup/green-
  * https://designlibrary.sebgroup.com/components/component-dropdown
  */
 @Component({
-  selector: 'ngv-dropdown',
+  selector: 'nggv-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })

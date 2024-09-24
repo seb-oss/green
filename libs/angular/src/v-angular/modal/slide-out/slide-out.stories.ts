@@ -45,7 +45,7 @@ export default {
 
 const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
   template: /* html */ `
-  <ngv-slideout-modal #slideOut [initiallyShown]="initiallyShown" [closable]="closable" [content]="content" [title]="title" [buttons]="buttons" [side]="side" [autoWidth]="autoWidth" (ngvCloseEvent)="action($event)">
+  <nggv-slideout-modal #slideOut [initiallyShown]="initiallyShown" [closable]="closable" [content]="content" [title]="title" [buttons]="buttons" [side]="side" [autoWidth]="autoWidth" (ngvCloseEvent)="action($event)">
       <p *ngIf="!outsideContent && !autoWidth">Some content in the content div</p>
       <div *ngIf="outsideContent" slot="outside-content" [ngStyle]="{ 'background': 'black', 'color': 'white', 'padding': '1rem' }">
         This is the slotted content. This can be used in the (rare) case of content that needs
@@ -54,7 +54,7 @@ const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
       <div *ngIf="autoWidth" slot="outside-content" [ngStyle]="{ 'background': 'green', 'color': 'white', 'padding': '1rem', 'width': '50vw' }">
         This is a modal with extra wide content.
       </div>
-    </ngv-slideout-modal>
+    </nggv-slideout-modal>
     <button class="sdv-button" (click)="slideOut.open()">Open slide-out</button>
     `,
   props: args

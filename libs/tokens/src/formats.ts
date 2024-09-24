@@ -61,37 +61,30 @@ const formats: Record<string, Format> = {
       dictionary.allTokens = dictionary.allTokens
         .filter(token => token.filePath.includes('color-v2'))
         .map(token => {
-          if (
-            token.path[2] === 'l1' ||
-            token.path[2] === 'l1c' ||
-            token.path[2] === 'l2' ||
-            token.path[2] === 'l2c' ||
-            token.path[2] === 'l3' ||
-            token.path[2] === 'l3c'
-          ) {
-            // Adjust token name to follow the format --gds-color-l1-background-primary
+          if (token.path[2] === 'l1' || token.path[2] === 'l2' || token.path[2] === 'l3') {
             token.name = `gds-color-${token.path.slice(2).join('-')}`
           }
+
           return token
         })
 
-      // Generate CSS variables
-      const cssVariables = formatHelpers.formattedVariables({
-        format: 'css',
-        dictionary,
-        outputReferences: options.outputReferences
-      })
+      // Generate CSS variables with alpha value concatenation
+      const cssVariables = dictionary.allTokens
+        .map(token => {
+          let value = options.colorScheme === 'dark' ? token.darkValue : token.value
+          const alpha = token.alpha ? ` ${token.alpha}` : ''
+
+          // Clean up value if it contains NaN%
+          if (value.includes('NaN%')) {
+            value = value.replace(' NaN%', '')
+          }
+
+          return `  --${token.name}: ${value}${alpha};\n`
+        })
+        .join('')
 
       // Return the formatted CSS
-      return (
-        formatHelpers.fileHeader({ file: args.file }) +
-        // `${options.selector} {\n` +
-        `` +
-        `  color-scheme: ${options.colorScheme};\n` +
-        cssVariables +
-        ``
-        // `\n}\n`
-      )
+      return formatHelpers.fileHeader({ file: args.file }) + `color-scheme: ${options.colorScheme};\n` + cssVariables
     }
   },
   size: {

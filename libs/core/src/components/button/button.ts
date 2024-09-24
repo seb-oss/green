@@ -71,7 +71,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
    * Sets the size of the button. Defaults to "small".
    */
   @property({ reflect: true })
-  size: 'small' | 'medium' | 'large' = 'medium'
+  size: 'xs' | 'small' | 'medium' | 'large' = 'medium'
 
   /**
    * The label of the button. Use this to add an accessible label to the button when no text is provided in the default slot.
@@ -161,9 +161,8 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         <slot @slotchange=${this.#mainSlotChange}></slot>
         <slot name="trail"></slot>
         ${when(!this._isUsingTransitionalStyles, () => html`<gds-ripple part="_ripple"></gds-ripple>`)}
-        <div class="state"></div>
-      </${tag}>
-    `
+        </${tag}>
+        `
   }
 
   protected _getValidityAnchor(): HTMLElement {

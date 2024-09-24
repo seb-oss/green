@@ -24,8 +24,7 @@ import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 import { DropdownUtils, Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngv-dropdown-list',
+  selector: 'nggv-dropdown-list',
   templateUrl: './dropdown-list.component.html',
   styleUrls: ['./dropdown-list.component.scss']
 })

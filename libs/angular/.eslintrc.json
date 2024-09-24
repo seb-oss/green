@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": ["ngg", "ngv"],
+            "prefix": ["ngg", "nggv"],
             "style": "kebab-case"
           }
         ]

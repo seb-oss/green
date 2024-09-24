@@ -47,24 +47,76 @@ export class GdsFlex extends GdsContainer {
   gap?: string
 
   /**
-   * Controls the align-items property of the flex.
+   * Controls the `flex` property of the flex.
+   * Supports all valid CSS flex property values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  flex?: string
+
+  /**
+   * Controls the `align-self` property of the flex.
+   * Supports all valid CSS align-self values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  'align-self'?: string
+
+  /**
+   * Controls the `align-items` property of the flex.
    * Supports all valid CSS align-items values.
    */
   @styleExpressionProperty({
-    property: 'align-items',
     valueTemplate: v => v
   })
-  align?: string
+  'align-items'?: string
 
   /**
-   * Controls the justify-content property of the flex.
+   * Controls the `align-content` property of the flex.
+   * Supports all valid CSS align-content values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  'align-content'?: string
+
+  /**
+   * Controls the `justify-content` property of the flex.
    * Supports all valid CSS justify-content values.
    */
   @styleExpressionProperty({
-    property: 'justify-content',
     valueTemplate: v => v
   })
-  justify?: string
+  'justify-content'?: string
+
+  /**
+   * Controls the `place-content` property of the flex.
+   * Supports all valid CSS place-content values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  'place-content'?: string
+
+  /**
+   * Controls the `justify-items` property of the flex.
+   * Supports all valid CSS justify-items values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  'justify-items'?: string
+
+  /**
+   * Controls the `justify-self` property of the flex.
+   * Supports all valid CSS justify-self values.
+   */
+  @styleExpressionProperty({
+    valueTemplate: v => v
+  })
+  'justify-self'?: string
 
   /**
    * Controls the flex-direction property of the flex.
@@ -74,7 +126,7 @@ export class GdsFlex extends GdsContainer {
     property: 'flex-direction',
     valueTemplate: v => v
   })
-  direction?: string
+  'flex-direction'?: string
 
   connectedCallback(): void {
     super.connectedCallback()

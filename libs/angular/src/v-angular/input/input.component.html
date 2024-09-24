@@ -24,7 +24,7 @@
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div [id]="id + '-input'" class="ngv-field--locked" [attr.name]="name" [attr.value]="state" [attr.role]="role">
+  <div [id]="id + '-input'" class="nggv-field--locked" [attr.name]="name" [attr.value]="state" [attr.role]="role">
     <span *ngIf="!state" class="unset-state">-</span>
     <ng-container *ngIf="state">
       <ng-container *ngIf="!inputMask">
@@ -39,7 +39,7 @@
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
-  <div class="gds-input-wrapper" [class.ngv-field--error]="invalid">
+  <div class="gds-input-wrapper" [class.nggv-field--error]="invalid">
     <div class="input-group-prefix hide-if-empty">
       <ng-content select="[slot='prefix']"></ng-content>
     </div>

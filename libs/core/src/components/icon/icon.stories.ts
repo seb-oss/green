@@ -116,7 +116,7 @@ export const IconsRegular: Story = {
     })
 
     return html`
-      <gds-flex direction="column" gap="xl" id="solids">
+      <gds-flex flex-direction="column" gap="xl" id="solids">
         <input type="text" id="icon-search" placeholder="Search Icons" />
         <gds-grid columns="s{2} m{4} l{4}" gap="s{xl} m{xl} l{xl}" class="icon-preview"> ${iconElements} </gds-grid>
       </gds-flex>

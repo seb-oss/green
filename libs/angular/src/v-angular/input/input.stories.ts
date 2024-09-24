@@ -128,7 +128,7 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
   }
   return {
     template: /*html*/ `
-    <ngv-input
+    <nggv-input
       [label]="label"
       [placeholder]="placeholder"
       [description]="description"
@@ -139,7 +139,7 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [formControl]="formControl">
-    </ngv-input>
+    </nggv-input>
     <div style="margin-top: 1rem">
       <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
     </div>
@@ -181,16 +181,16 @@ const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (args: any) =
 
 const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
   template: /*html*/ `
-    <ngv-input [label]="label"
+    <nggv-input [label]="label"
       [disabled]="disabled"
       [invalid]="invalid"
       [required]="required">
       <ng-template #labelTpl>
         <i>{{ customLabelText }}</i>
-        <ngv-info-circle [info]="info"></ngv-info-circle>
+        <nggv-info-circle [info]="info"></nggv-info-circle>
         <span>{{ text }}</span>
       </ng-template>
-    </ngv-input>`,
+    </nggv-input>`,
   props: args
 })
 
@@ -235,68 +235,68 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<NgvInputComponent & WithExtras & an
     Prefix and/or suffix demontrations with simple HTML-elements and with other components.
   </p>
   <hr>
-  <ngv-input label="Default"
+  <nggv-input label="Default"
     type="text"
     description="Default"
     [invalid]="invalid">
-  </ngv-input>
-  <ngv-input label="Prefix"
+  </nggv-input>
+  <nggv-input label="Prefix"
     type="text"
     description="Prefix with checkbox"
     [invalid]="invalid">
-    <ngv-checkbox
+    <nggv-checkbox
       slot="prefix"
       label="Selected"
       [value]="true">
-    </ngv-checkbox>
-  </ngv-input>
+    </nggv-checkbox>
+  </nggv-input>
 
-  <ngv-input label="Suffix"
+  <nggv-input label="Suffix"
     type="text"
     description="Suffix with simple text"
     [invalid]="invalid">
     <label slot="suffix" class="suffix-prefix-padding">SEB</label>
-  </ngv-input>
+  </nggv-input>
 
-  <ngv-input label="Default (suffix)"
+  <nggv-input label="Default (suffix)"
     type="text"
     description="Suffix (default placement) with button"
     [invalid]="invalid">
-    <ngv-button
+    <nggv-button
       class="suffix-prefix-padding"
       [small]="true"
       type="button">
       SAVE
-    </ngv-button>
-  </ngv-input>
+    </nggv-button>
+  </nggv-input>
 
-  <ngv-input label="Large button with no padding (suffix)"
+  <nggv-input label="Large button with no padding (suffix)"
   type="text"
   description="Suffix (default placement) with button without padding"
   [invalid]="invalid">
-  <ngv-button
+  <nggv-button
   class="integrated-btn"
     [small]="false"
     type="button"
     [buttonStyle]="2">
     x
-  </ngv-button>
-</ngv-input>
+  </nggv-button>
+</nggv-input>
 
-  <ngv-input label="Prefix and default (suffix)"
+  <nggv-input label="Prefix and default (suffix)"
     type="number"
     description="Prefix with simple label and suffix (default) with dropdown"
     [invalid]="invalid">
     <label slot="prefix" class="suffix-prefix-padding">Amount:</label>
-    <ngv-dropdown
+    <nggv-dropdown
       placeholder="Currency"
       [options]="[
         { key: 'eur', label: 'EUR' },
         { key: 'sek', label: 'SEK' },
         { key: 'usd', label: 'USD' }
       ]">
-    </ngv-dropdown>
-  </ngv-input>`,
+    </nggv-dropdown>
+  </nggv-input>`,
   props: args
 })
 
@@ -315,13 +315,13 @@ export const WithResetObservable: StoryFn<NgvInputComponent & WithExtras & any> 
   return {
     template: /*html*/ `
     <ng-container [formGroup]="formGroup">
-      <ngv-input label="Reset demo"
+      <nggv-input label="Reset demo"
         type="text"
         formControlName="resetForm"
         [description]="description"
         [defaultValue]="defaultValue"
         [reset]="resetObservable$">
-      </ngv-input>
+      </nggv-input>
     </ng-container>`,
     props: {
       description: `I will reset every ${resettime}ms`,
@@ -356,7 +356,7 @@ export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
     <button (click)="toggleLang()">Toggle lang</button>
     <button (click)="setValue('another long value')">Set form value</button>
     <ng-container [formGroup]="formG">
-      <ngv-input *ngIf="show"
+      <nggv-input *ngIf="show"
         [label]="label"
         [invalid]="invalid"
         [maxLength]="maxLength$ | async"
@@ -364,10 +364,10 @@ export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
         >
         <ng-template #labelTpl>
           <i>{{ customLabelText }}</i>
-          <ngv-info-circle [info]="info"></ngv-info-circle>
+          <nggv-info-circle [info]="info"></nggv-info-circle>
           <span>{{ text }}</span>
         </ng-template>
-      </ngv-input>
+      </nggv-input>
       <span>value: {{ formG.controls.remittanceInformation.value }}</span>
     </ng-container>`,
     props: {
@@ -446,12 +446,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
       <div class="row">
         <div class="column">
           <h2>Date</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="dateInputMask"
             formControlName="dateFC"
             placeholder="yyyy-mm-dd"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.dateFC.valid }} </div>
           <div> Value: {{ formGroup.controls.dateFC.value }} </div>
           <div> Errors: {{ formGroup.controls.dateFC.errors | json }} </div>
@@ -459,12 +459,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
 
         <div class="column">
           <h2>E-mail</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="emailInputMask"
             formControlName="emailFC"
             placeholder="_@_._"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.emailFC.valid }} </div>
           <div> Value: {{ formGroup.controls.emailFC.value }} </div>
           <div> Errors: {{ formGroup.controls.emailFC.errors | json }} </div>
@@ -472,12 +472,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
 
         <div class="column">
           <h2>Currency</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="currencyInputMask"
             formControlName="currencyFC"
             placeholder="$ 0.00"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.currencyFC.valid }} </div>
           <div> Value: {{ formGroup.controls.currencyFC.value }} </div>
           <div> Errors: {{ formGroup.controls.currencyFC.errors | json }} </div>
@@ -487,12 +487,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
       <div class="row">
         <div class="column">
           <h2>Phone</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="phoneMask"
             formControlName="phoneFC"
             placeholder="(___) ___-____"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.phoneFC.valid }} </div>
           <div> Value: {{ formGroup.controls.phoneFC.value }} </div>
           <div> Errors: {{ formGroup.controls.phoneFC.errors | json }} </div>
@@ -500,12 +500,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
 
         <div class="column">
           <h2>License</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="licenseInputMask"
             formControlName="licenseFC"
             placeholder="___-___"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.licenseFC.valid }} </div>
           <div> Value: {{ formGroup.controls.licenseFC.value }} </div>
           <div> Errors: {{ formGroup.controls.licenseFC.errors | json }} </div>
@@ -513,12 +513,12 @@ const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
 
         <div class="column">
           <h2>IP address</h2>
-          <ngv-input
+          <nggv-input
             [inputMask]="ipAddressMask"
             formControlName="ipFC"
             placeholder="_._._._"
             [locked]="locked">
-          </ngv-input>
+          </nggv-input>
           <div> Valid: {{ formGroup.controls.ipFC.valid }} </div>
           <div> Value: {{ formGroup.controls.ipFC.value }} </div>
           <div> Errors: {{ formGroup.controls.ipFC.errors }} </div>
@@ -603,17 +603,17 @@ const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (args: an
     )
   return {
     template: /*html*/ `
-      <ngv-input class="toggle"
+      <nggv-input class="toggle"
         [label]="label"
         [ngvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
         [autocomplete]="'off'">
-      </ngv-input>
+      </nggv-input>
     `,
     styles: [
       /*css*/ `
-      ngv-dropdown-list {
+      nggv-dropdown-list {
         width: 100%;
       }
     `

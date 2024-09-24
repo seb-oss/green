@@ -57,12 +57,12 @@ export class GdsFormSummary extends GdsElement {
     return when(
       errors.length > 0,
       () =>
-        html`<gds-card border="4xs/error-text" radius="2xs" padding="m" color="error-text">
-          <gds-flex gap="s">
+        html`<gds-card level="3" border="4xs/negative" border-radius="2xs" padding="m" color="error-text">
+          <gds-flex gap="s" level=="3" color="negative">
             <gds-container>
               <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
             </gds-container>
-            <gds-container>
+            <gds-container >
             ${msg(str`There are ${errors.length} errors to correct before you can continue:`)}
             <ul>
               ${errors.map(

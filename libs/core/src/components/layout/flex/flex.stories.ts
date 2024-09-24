@@ -29,7 +29,7 @@ export const Flex: Story = {
   ...DefaultParams,
   name: 'Flex',
   render: args => html`
-    <gds-flex align="space-between" justify="space-between">
+    <gds-flex align-items="space-between" justify-content="space-between">
       <gds-text>Flex</gds-text>
       <gds-text>Example</gds-text>
     </gds-flex>

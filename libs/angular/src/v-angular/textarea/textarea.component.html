@@ -22,7 +22,7 @@
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div [id]="id + '-textarea'" class="ngv-field--locked" [attr.name]="name" [attr.value]="state" [attr.role]="role">
+  <div [id]="id + '-textarea'" class="nggv-field--locked" [attr.name]="name" [attr.value]="state" [attr.role]="role">
     <span *ngIf="!state" class="unset-state">-</span>
     <ng-container *ngIf="state">
       {{ state }}
@@ -37,7 +37,7 @@
     [id]="id + '-textarea'"
     class="sdv-field"
     [ngClass]="{ 'no-resize': !!rows }"
-    [class.ngv-field--error]="invalid"
+    [class.nggv-field--error]="invalid"
     [attr.name]="name"
     [attr.required]="required"
     [disabled]="disabled"

@@ -1,6 +1,6 @@
 <!-- LOCKED INPUT -->
 <div *ngIf="locked && state" class="sdv-field-radio-wrap">
-  <div [id]="id + '-radio'" class="ngv-field--locked" [attr.name]="name" [attr.value]="value">
+  <div [id]="id + '-radio'" class="nggv-field--locked" [attr.name]="name" [attr.value]="value">
     {{ label }}
     <ng-template *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"></ng-template>
   </div>

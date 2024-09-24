@@ -6,8 +6,7 @@ import '@sebgroup/green-core/components/icon/icons/circle-info'
  * https://designlibrary.sebgroup.com/components/component-contextual-help-button
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngv-info-circle',
+  selector: 'nggv-info-circle',
   templateUrl: './info-circle.component.html',
   styleUrls: ['./info-circle.component.scss']
 })

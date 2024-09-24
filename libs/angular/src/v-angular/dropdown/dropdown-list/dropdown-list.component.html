@@ -65,12 +65,12 @@
   </ng-template>
 
   <ng-template #basicOptionContentTpl let-option>
-    <ngv-typeahead-highlight
+    <nggv-typeahead-highlight
       *ngIf="!!textToHighlight"
       [textToHighlight]="textToHighlight"
       [textContent]="t(option.label)"
     >
-    </ngv-typeahead-highlight>
+    </nggv-typeahead-highlight>
     <ng-container *ngIf="!textToHighlight">
       {{ t(option.label) }}
     </ng-container>

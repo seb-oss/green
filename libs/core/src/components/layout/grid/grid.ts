@@ -56,11 +56,10 @@ export class GdsGrid extends GdsContainer {
    * ```
    */
   @styleExpressionProperty({
-    attribute: 'auto-columns',
     property: '--_col-width',
     valueTemplate: v => `${v}px`
   })
-  autoColumns?: string
+  'auto-columns'?: string
 
   constructor() {
     super()

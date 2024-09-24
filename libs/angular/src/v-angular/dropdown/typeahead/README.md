@@ -2,7 +2,7 @@
 
 ## Description
 
-A directive that can be used on `ngv-dropdown` and `ngv-input` to be able to filter among options.
+A directive that can be used on `nggv-dropdown` and `nggv-input` to be able to filter among options.
 The provided operator function filters options among options and return a list of options that fulfils the critera.
 
 ## Inputs
@@ -25,7 +25,7 @@ The directive should be imported, since it's standalone.
 ```ts
 // consumer.modules.ts
 import { ConsumerComponent } from './consumer.component';
-import { TypeaheadDirective } from '@sebgroup/ngv-core';
+import { TypeaheadDirective } from '@sebgroup/nggv-core';
 
 @NgModule({
     ...,
@@ -43,7 +43,7 @@ import { TypeaheadDirective } from '@sebgroup/ngv-core';
 
 ```HTML
 <!-- consumer.component.html -->
-<ngv-dropdown
+<nggv-dropdown
     #dropdownElement
     [ngvTypeahead]="typeaheadFunction"
     [selectedFormatter]="selectedFormatter"
@@ -51,8 +51,8 @@ import { TypeaheadDirective } from '@sebgroup/ngv-core';
     [allowUnselect]="allowUnselect"
     [unselectLabel]="unselectLabel"
     [hostComponent]="dropdownElement">
-</ngv-dropdown>
-<ngv-input
+</nggv-dropdown>
+<nggv-input
     #inputElement
     [ngvTypeahead]="typeaheadFunction"
     [selectedFormatter]="selectedFormatter"
@@ -60,7 +60,7 @@ import { TypeaheadDirective } from '@sebgroup/ngv-core';
     [allowUnselect]="allowUnselect"
     [unselectLabel]="unselectLabel"
     [hostComponent]="inputElement">
-</ngv-input>
+</nggv-input>
 
 ```
 
@@ -97,7 +97,7 @@ import { TypeaheadDirective } from '@sebgroup/ngv-core';
 ```ts
 // consumer.modules.ts
 import { ConsumerComponent } from './consumer.component';
-import { TypeaheadDirective } from '@sebgroup/ngv-core';
+import { TypeaheadDirective } from '@sebgroup/nggv-core';
 
 @NgModule({
     ...,

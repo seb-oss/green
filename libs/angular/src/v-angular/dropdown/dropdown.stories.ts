@@ -82,7 +82,7 @@ const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
   return {
     template: /*html*/ `
       <div style="width: 264px">
-        <ngv-dropdown
+        <nggv-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [description]="description | transloco"
@@ -99,7 +99,7 @@ const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngv-dropdown>
+        </nggv-dropdown>
 
         <div style="margin-top: 1rem">
           <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -118,7 +118,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
   return {
     template: /*html*/ `
   <div style="width: 264px">
-    <ngv-dropdown
+    <nggv-dropdown
       [label]="label"
       [placeholder]="placeholder"
       [options]="options"
@@ -133,7 +133,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
 
       <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-    </ngv-dropdown>
+    </nggv-dropdown>
   </div>`,
     props: { ...args, formControl }
   }
@@ -164,7 +164,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
           <button class="sdv-button sdv-button-alternative" (click)="resetFunc()">Reset to default</button>
         </div>
         <div>Value: {{ formControl.value }}</div>
-        <ngv-dropdown
+        <nggv-dropdown
           [label]="label"
           [placeholder]="placeholder"
           [options]="options"
@@ -176,7 +176,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
 
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
 
-        </ngv-dropdown>
+        </nggv-dropdown>
       </div>`,
     props: {
       ...args,
@@ -229,7 +229,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
   }
   return {
     template: /*html*/ `
-      <ngv-dropdown
+      <nggv-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -263,14 +263,14 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
           </div>
         </ng-template>
 
-      </ngv-dropdown>
+      </nggv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
       `
-      ::ng-deep.ngv-field-dropdown__label::before {
+      ::ng-deep.nggv-field-dropdown__label::before {
         margin: 0.5rem 0;
       }
       .account-option {
@@ -386,7 +386,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     Filter: {{ getFilterPhrase() }}
-      <ngv-dropdown
+      <nggv-dropdown
         [label]="label"
         [placeholder]="placeholder"
         [options]="options"
@@ -422,29 +422,29 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
           <div class="account-option" *ngIf="!!option.key">
             <div class="account-option--label">
               <div>
-                <ngv-typeahead-highlight [textContent]="option?.accountName" [textToHighlight]="getFilterPhrase()">
-                </ngv-typeahead-highlight>
+                <nggv-typeahead-highlight [textContent]="option?.accountName" [textToHighlight]="getFilterPhrase()">
+                </nggv-typeahead-highlight>
               </div>
 
               <div>{{ option?.balance | number: '1.2-2':locale }} {{ option?.currency }}</div>
             </div>
             <div class="account-option--number">
               <div>
-                <ngv-typeahead-highlight [textContent]="option?.accountNumber" [textToHighlight]="getFilterPhrase()">
-                </ngv-typeahead-highlight></div>
+                <nggv-typeahead-highlight [textContent]="option?.accountNumber" [textToHighlight]="getFilterPhrase()">
+                </nggv-typeahead-highlight></div>
               <div></div>
             </div>
           </div>
         </ng-template>
 
-      </ngv-dropdown>
+      </nggv-dropdown>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
       `
-      ::ng-deep.ngv-field-dropdown__label::before {
+      ::ng-deep.nggv-field-dropdown__label::before {
         margin: 0.5rem 0;
       }
       .account-option {
@@ -514,7 +514,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
   return {
     template: /*html*/ `
       <div style="display: flex">
-        <ngv-dropdown
+        <nggv-dropdown
           label="Dropdown"
           [placeholder]="placeholder"
           [options]="options"
@@ -523,14 +523,14 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           error="This is a permanent error"
           style="width: 264px"
           [formControl]="formControl">
-        </ngv-dropdown>
-        <ngv-input
+        </nggv-dropdown>
+        <nggv-input
           label="Input"
           [placeholder]="placeholder"
           [required]="true"
           style="margin-left: 0.25rem; width: 264px"
           [formControl]="formControl">
-        </ngv-input>
+        </nggv-input>
       </div>`,
     props: {
       ...args,
@@ -615,7 +615,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
     template: /*html*/ `
     Value: {{ formControl.value }}
     <div style="width: 264px; display:">
-        <ngv-dropdown
+        <nggv-dropdown
           [label]="label"
           [formControl]="formControl"
           [placeholder]="placeholder"
@@ -634,7 +634,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
 
           <ng-template #labelTpl>Custom Label</ng-template>
 
-        </ngv-dropdown>
+        </nggv-dropdown>
       </div>`,
     /*css*/
     styles: [``],
