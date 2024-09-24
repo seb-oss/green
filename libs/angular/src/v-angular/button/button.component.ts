@@ -35,7 +35,7 @@ export enum ButtonStyle {
  * https://designlibrary.sebgroup.com/components/component-button
  */
 @Component({
-  selector: 'ngv-button',
+  selector: 'ngg-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })

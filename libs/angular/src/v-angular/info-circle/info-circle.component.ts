@@ -7,7 +7,7 @@ import '@sebgroup/green-core/components/icon/icons/circle-info'
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngv-info-circle',
+  selector: 'ngg-info-circle',
   templateUrl: './info-circle.component.html',
   styleUrls: ['./info-circle.component.scss'],
 })

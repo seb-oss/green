@@ -24,26 +24,26 @@ export default {
 
 const BasicTemplate: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <ngg-card>
       Basic card
-    </ngv-card>`,
+    </ngg-card>`,
 })
 
 const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <ngg-card>
       <div class="card-row">
         <div class="card-column"> Column 1 </div>
         <div class="card-column"> Column 2 </div>
         <div class="card-column"> Column 3 </div>
         <div class="card-column"> Column 4 </div>
       </div>
-    </ngv-card>`,
+    </ngg-card>`,
 })
 
 const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
-    <ngv-card>
+    <ngg-card>
       <div class="card-row">
         <div class="card-column"> <b>Expenses</b> </div>
         <div class="card-column"></div>
@@ -60,7 +60,7 @@ const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
         <div class="card-column"> Sum </div>
         <div class="card-column"> 33,00 € </div>
       </div>
-    </ngv-card>`,
+    </ngg-card>`,
 })
 
 export const Basic = BasicTemplate.bind({})

@@ -35,27 +35,27 @@ const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
-    <ngv-radio
+    <ngg-radio
       [label]="label"
       [name]="name"
       [value]="name + '1'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
-    </ngv-radio>
-    <ngv-radio
+    </ngg-radio>
+    <ngg-radio
       [label]="label"
       [name]="name"
       [value]="name + '2'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
-    </ngv-radio>
-    <ngv-radio
+    </ngg-radio>
+    <ngg-radio
       [label]="label"
       [name]="name"
       [value]="name + '3'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
-    </ngv-radio>
+    </ngg-radio>
   `,
   props: {
     ...args,
@@ -74,30 +74,30 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
   return {
     template: /*html*/ `
     <label class="sdv-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
-    <ngv-radio
+    <ngg-radio
       [name]="name"
       [value]="name + '1'"
       [formControl]="formControl"
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 1</ng-template>
-    </ngv-radio>
-    <ngv-radio
+    </ngg-radio>
+    <ngg-radio
       [name]="name"
       [value]="name + '2'"
       [formControl]="formControl"
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 2</ng-template>
-    </ngv-radio>
-    <ngv-radio
+    </ngg-radio>
+    <ngg-radio
       [name]="name"
       [value]="name + '3'"
       [formControl]="formControl"
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 3</ng-template>
-    </ngv-radio>
+    </ngg-radio>
     <div style="margin-top: 1rem">
       <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
     </div>

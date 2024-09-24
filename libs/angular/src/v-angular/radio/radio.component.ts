@@ -61,7 +61,7 @@ export class NgvRadioControlRegistry {
  */
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngv-radio',
+  selector: 'ngg-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   providers: [NgvRadioControlRegistry],

@@ -18,7 +18,7 @@ import { NgvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.com
   template: ` <ng-container>
     <input #input id="input" />
   </ng-container>`,
-  selector: 'ngv-input',
+  selector: 'ngg-input',
   // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
   outputs: ['ngvFocus'],
 })

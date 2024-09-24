@@ -18,7 +18,7 @@ export interface DialogEvent<T = any> {
 }
 
 @Component({
-  selector: 'ngv-dialog',
+  selector: 'ngg-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
   exportAs: 'dialog',

@@ -19,7 +19,7 @@ import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 
 // Use dropdownList template and combine stylesheets
 @Component({
-  selector: 'ngv-typeahead-dropdown-list',
+  selector: 'ngg-typeahead-dropdown-list',
   templateUrl: '../../dropdown-list/dropdown-list.component.html',
   styleUrls: [
     '../typeahead-dropdown-list/typeahead-dropdown-list.component.scss',

@@ -25,7 +25,7 @@
   <ng-container *ngIf="locked">
     <div
       [id]="id + '-input'"
-      class="ngv-field--locked"
+      class="ngg-field--locked"
       [attr.name]="name"
       [attr.value]="state"
       [attr.role]="role"
@@ -51,8 +51,8 @@
         [id]="id + '-toggle'"
         [disabled]="disabled"
         type="button"
-        class="ngv-field-dropdown__label toggle"
-        [class.ngv-field--error]="invalid"
+        class="ngg-field-dropdown__label toggle"
+        [class.ngg-field--error]="invalid"
         aria-haspopup="listbox"
         [attr.data-thook]="thook + '-toggle'"
         [attr.aria-expanded]="expanded"
@@ -68,7 +68,7 @@
         </ng-template>
       </button>
 
-      <ngv-dropdown-list
+      <ngg-dropdown-list
         #dropDownList
         [options]="options"
         [scrollOffset]="scrollOffset"
@@ -78,7 +78,7 @@
         [textToHighlight]="textToHighlight"
         (selectedValueChanged)="onSelectChange($event)"
       >
-      </ngv-dropdown-list>
+      </ngg-dropdown-list>
     </div>
     <!-- ERRORS -->
     <label

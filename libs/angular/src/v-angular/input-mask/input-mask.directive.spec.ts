@@ -25,11 +25,11 @@ import { NgvInputMaskDirective } from './input-mask.directive'
 
 describe('[NgvInputMask] -> InputMaskDirective', () => {
   @Component({
-    selector: 'ngv-lib-custom-input',
+    selector: 'ngg-lib-custom-input',
     template: `
       <input
         *ngIf="!isAsync"
-        class="ngv-lib-custom-input"
+        class="ngg-lib-custom-input"
         [formControl]="control"
         [ngvInputMask]="inputMask"
         [placeholder]="placeholder"
@@ -60,12 +60,12 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         [formControl]="initDateFC"
       />
       <input class="phone" [ngvInputMask]="phoneMask" [formControl]="phoneFC" />
-      <ngv-lib-custom-input
+      <ngg-lib-custom-input
         [control]="dateFCCustom"
         [inputMask]="dateMask"
         [isAsync]="isAsync"
         placeholder="Date"
-      ></ngv-lib-custom-input>
+      ></ngg-lib-custom-input>
     `,
   })
   class TestComponent {
@@ -196,24 +196,24 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
   })
 
   it('should update the non-native UI value as per mask', () => {
-    const customInput = inputField('.ngv-lib-custom-input')
+    const customInput = inputField('.ngg-lib-custom-input')
     updateInput(customInput, '28021988')
     expect(customInput.value).toEqual('28/02/1988')
   })
 
   it('should update the non-native control value as per mask parser', () => {
-    updateInput('.ngv-lib-custom-input', '28021988')
+    updateInput('.ngg-lib-custom-input', '28021988')
     expect(component.dateFCCustom.value).toEqual(new Date(1988, 1, 28))
   })
 
   it('should make non-native form control invalid for non-compliant value', () => {
-    updateInput('.ngv-lib-custom-input', '28')
+    updateInput('.ngg-lib-custom-input', '28')
     expect(component.dateFCCustom.invalid).toBeTruthy()
   })
 
   it('should render non-native with initial value', () => {
     component.dateFCCustom.setValue('28/02/1988')
-    const input = inputField('.ngv-lib-custom-input')
+    const input = inputField('.ngg-lib-custom-input')
     expect(input.value).toEqual('28/02/1988')
   })
 
@@ -221,7 +221,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
     component.isAsync = true
     fixture.detectChanges()
 
-    let input = inputField('.ngv-lib-custom-input')
+    let input = inputField('.ngg-lib-custom-input')
     expect(input).toBeNull()
 
     component.isAsync = false
@@ -229,7 +229,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
 
     await new Promise((r) => setTimeout(r, 1000))
 
-    input = inputField('.ngv-lib-custom-input')
+    input = inputField('.ngg-lib-custom-input')
     component.dateFCCustom.setValue('28/02/1988')
     expect(input.value).toEqual('28/02/1988')
   })

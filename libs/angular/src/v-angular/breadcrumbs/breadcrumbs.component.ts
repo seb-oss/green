@@ -11,7 +11,7 @@ type Breadcrumb = {
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'ngv-breadcrumbs',
+  selector: 'ngg-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
 })
