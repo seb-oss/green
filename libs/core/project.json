@@ -74,6 +74,15 @@
         "command": "cd libs/core && npx cem analyze --litelement"
       }
     },
+    "make-react": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build-custom-elements-json"
+      ],
+      "options": {
+        "command": "node libs/core/build-scripts/make-react.cjs"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "dependsOn": [
