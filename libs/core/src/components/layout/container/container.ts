@@ -373,11 +373,7 @@ export class GdsContainer extends GdsElement {
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
    *
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => {
-      return `var(--gds-space-${v}, 0)`
-    },
-  })
+  @styleExpressionProperty()
   padding?: string
 
   @styleExpressionProperty()
