@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsFlex } from "@sebgroup/green-core/components/layout/flex/flex.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsFlex } from '@sebgroup/green-core/components/layout/flex/flex.js'
 
-const tagName = getScopedTagName("gds-flex");
+const tagName = getScopedTagName('gds-flex')
 //GdsFlex.define('gds-flex')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsFlex,
   react: React,
   events: {},
-  displayName: "GdsFlex",
-});
+  displayName: 'GdsFlex'
+})
 
-export default reactWrapper;
+export default reactWrapper

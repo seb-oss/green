@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsContextMenu } from "@sebgroup/green-core/components/context-menu/context-menu.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsContextMenu } from '@sebgroup/green-core/components/context-menu/context-menu.js'
 
-const tagName = getScopedTagName("gds-context-menu");
+const tagName = getScopedTagName('gds-context-menu')
 //GdsContextMenu.define('gds-context-menu')
 
 const reactWrapper = createComponent({
@@ -11,10 +11,10 @@ const reactWrapper = createComponent({
   elementClass: GdsContextMenu,
   react: React,
   events: {
-    onGdsMenuItemClick: "gds-menu-item-click",
-    onGdsUiState: "gds-ui-state",
+    onGdsMenuItemClick: 'gds-menu-item-click',
+    onGdsUiState: 'gds-ui-state'
   },
-  displayName: "GdsContextMenu",
-});
+  displayName: 'GdsContextMenu'
+})
 
-export default reactWrapper;
+export default reactWrapper

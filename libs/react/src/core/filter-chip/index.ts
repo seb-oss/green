@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsFilterChip } from "@sebgroup/green-core/components/filter-chips/filter-chip/filter-chip.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsFilterChip } from '@sebgroup/green-core/components/filter-chips/filter-chip/filter-chip.js'
 
-const tagName = getScopedTagName("gds-filter-chip");
+const tagName = getScopedTagName('gds-filter-chip')
 //GdsFilterChip.define('gds-filter-chip')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsFilterChip,
   react: React,
   events: {},
-  displayName: "GdsFilterChip",
-});
+  displayName: 'GdsFilterChip'
+})
 
-export default reactWrapper;
+export default reactWrapper

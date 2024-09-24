@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsSegment } from "@sebgroup/green-core/components/segmented-control/segment/segment.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment/segment.js'
 
-const tagName = getScopedTagName("gds-segment");
+const tagName = getScopedTagName('gds-segment')
 //GdsSegment.define('gds-segment')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsSegment,
   react: React,
   events: {},
-  displayName: "GdsSegment",
-});
+  displayName: 'GdsSegment'
+})
 
-export default reactWrapper;
+export default reactWrapper

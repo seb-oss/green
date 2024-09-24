@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { MenuButton } from "@sebgroup/green-core/components/menu-button/menu-button.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { MenuButton } from '@sebgroup/green-core/components/menu-button/menu-button.js'
 
-const tagName = getScopedTagName("gds-menu-button");
+const tagName = getScopedTagName('gds-menu-button')
 //MenuButton.define('gds-menu-button')
 
 const reactWrapper = createComponent({
@@ -11,9 +11,9 @@ const reactWrapper = createComponent({
   elementClass: MenuButton,
   react: React,
   events: {
-    onClick: "click",
+    onClick: 'click'
   },
-  displayName: "MenuButton",
-});
+  displayName: 'MenuButton'
+})
 
-export default reactWrapper;
+export default reactWrapper

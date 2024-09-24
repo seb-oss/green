@@ -48,13 +48,7 @@ export function styleExpressionProperty(options?: StyleExpressionPropertyOptions
     watch(descriptor as string)(proto, descriptor as string, {
       value: function (oldValue: unknown, newValue: unknown) {
         const ast = parse(tokenize(newValue as string))
-        const css = toCss(
-          sel,
-          prop,
-          ast,
-          valueTemplate.bind(this),
-          styleTemplate?.bind(this),
-        )
+        const css = toCss(sel, prop, ast, valueTemplate.bind(this), styleTemplate?.bind(this))
         ;(this as any)[`__${String(descriptor)}_ast`] = ast
         ;(this as GdsElement)._dynamicStylesController.inject(`sep_${String(descriptor)}`, unsafeCSS(css))
       }

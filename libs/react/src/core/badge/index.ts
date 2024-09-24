@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsBadge } from "@sebgroup/green-core/components/badge/badge.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsBadge } from '@sebgroup/green-core/components/badge/badge.js'
 
-const tagName = getScopedTagName("gds-badge");
+const tagName = getScopedTagName('gds-badge')
 //GdsBadge.define('gds-badge')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsBadge,
   react: React,
   events: {},
-  displayName: "GdsBadge",
-});
+  displayName: 'GdsBadge'
+})
 
-export default reactWrapper;
+export default reactWrapper

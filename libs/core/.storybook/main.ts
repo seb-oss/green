@@ -4,11 +4,7 @@ import type { StorybookConfig } from '@storybook/web-components-webpack5'
 const config: StorybookConfig = {
   //...defaultConfig,
   stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs',
-    '@storybook/addon-links',
-  ],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-docs', '@storybook/addon-links'],
   core: {
     builder: '@storybook/builder-vite' // 👈 The builder enabled here.
   },

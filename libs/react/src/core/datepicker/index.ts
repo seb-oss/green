@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsDatepicker } from "@sebgroup/green-core/components/datepicker/datepicker.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/datepicker.js'
 
-const tagName = getScopedTagName("gds-datepicker");
+const tagName = getScopedTagName('gds-datepicker')
 //GdsDatepicker.define('gds-datepicker')
 
 const reactWrapper = createComponent({
@@ -11,11 +11,11 @@ const reactWrapper = createComponent({
   elementClass: GdsDatepicker,
   react: React,
   events: {
-    onChange: "change",
-    onInput: "input",
-    onGdsUiState: "gds-ui-state",
+    onChange: 'change',
+    onInput: 'input',
+    onGdsUiState: 'gds-ui-state'
   },
-  displayName: "GdsDatepicker",
-});
+  displayName: 'GdsDatepicker'
+})
 
-export default reactWrapper;
+export default reactWrapper

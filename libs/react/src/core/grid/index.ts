@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsGrid } from "@sebgroup/green-core/components/layout/grid/grid.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsGrid } from '@sebgroup/green-core/components/layout/grid/grid.js'
 
-const tagName = getScopedTagName("gds-grid");
+const tagName = getScopedTagName('gds-grid')
 //GdsGrid.define('gds-grid')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsGrid,
   react: React,
   events: {},
-  displayName: "GdsGrid",
-});
+  displayName: 'GdsGrid'
+})
 
-export default reactWrapper;
+export default reactWrapper

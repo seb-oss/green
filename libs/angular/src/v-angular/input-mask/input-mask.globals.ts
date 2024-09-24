@@ -13,7 +13,6 @@ declare global {
 }
 
 ;(() => {
-;(() => {
   // Make sure there is an incremental ID each component can use
   if (typeof window !== 'undefined' && !window.ngv) {
     window.ngv = {
@@ -22,7 +21,7 @@ declare global {
         let id = this.ids[namespace] || 0
         if (typeof this.ids[namespace] === 'number') id++
         this.ids[namespace] = id
-        return namespace === 'default' ? `ngv-${id}` : `ngv-${namespace}-${id}`
+        return namespace === 'default' ? `nggv-${id}` : `nggv-${namespace}-${id}`
       }
     }
   }

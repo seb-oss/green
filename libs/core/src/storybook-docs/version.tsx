@@ -6,9 +6,7 @@ const version = ({ pack }) => {
   useEffect(() => {
     const fetchVersion = async () => {
       try {
-        const response = await fetch(
-          `https://registry.npmjs.org/${pack}/latest`,
-        )
+        const response = await fetch(`https://registry.npmjs.org/${pack}/latest`)
         const data = await response.json()
         setVersion(data.version)
       } catch (error) {

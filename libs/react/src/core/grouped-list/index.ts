@@ -1,9 +1,9 @@
-import * as React from "react";
-import { createComponent } from "@lit/react";
-import { getScopedTagName } from "@sebgroup/green-core/scoping";
-import { GdsGroupedList } from "@sebgroup/green-core/components/grouped-list/grouped-list.js";
+import * as React from 'react'
+import { createComponent } from '@lit/react'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list/grouped-list.js'
 
-const tagName = getScopedTagName("gds-grouped-list");
+const tagName = getScopedTagName('gds-grouped-list')
 //GdsGroupedList.define('gds-grouped-list')
 
 const reactWrapper = createComponent({
@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsGroupedList,
   react: React,
   events: {},
-  displayName: "GdsGroupedList",
-});
+  displayName: 'GdsGroupedList'
+})
 
-export default reactWrapper;
+export default reactWrapper
