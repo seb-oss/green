@@ -15,7 +15,7 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
-  selector: 'ngv-textarea',
+  selector: 'nggv-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
 })

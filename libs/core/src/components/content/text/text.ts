@@ -21,6 +21,17 @@ export class GdsText extends GdsElement {
   static styles = [tokens, textStyles]
 
   /**
+   * The level of the container can be used to apply background and color styles from the corresponding level.
+   *
+   * Default value for `gds-container` is set to `2`.
+   *
+   * @property level
+   *
+   * */
+  @property()
+  level = '2'
+
+  /**
    * Controls the tag of the text.
    * Supports all valid HTML tags like h1, h2, h3, h4, h5, h6, p, span, etc.
    *
@@ -35,7 +46,7 @@ export class GdsText extends GdsElement {
    *
    * You can apply size like this:
    * ```html
-   * <gds-text size="body-m"></gds-text>
+   * <gds-text font-size="body-m"></gds-text>
    * ```
    *
    * These are the available values you can use to define size:
@@ -76,7 +87,7 @@ export class GdsText extends GdsElement {
       return styleSize + styleLine
     },
   })
-  size?: string
+  'font-size'?: string
 
   /**
    * Controls the `font-weight` of the text.
@@ -89,7 +100,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
-  weight?: string
+  'font-weight'?: string
 
   /**
    * Controls the margin of the text.
@@ -105,6 +116,18 @@ export class GdsText extends GdsElement {
   margin?: string
 
   /**
+   * Controls the 'isolation of the text.
+   * Supports all the default 'isolation values.
+   *
+   * @property isolation
+   */
+  @styleExpressionProperty({
+    selector: '[tag]',
+    valueTemplate: (v) => v,
+  })
+  'isolation'?: string
+
+  /**
    * Controls the text-wrap property of the text.
    * Supports all valid CSS text-wrap values.
    *
@@ -115,7 +138,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  wrap?: string
+  'text-wrap'?: string
 
   /**
    * Controls the text-transform property of the text.
@@ -128,7 +151,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  transform?: string
+  'text-transform'?: string
 
   /**
    * Controls the max length of the text in characters.
@@ -137,7 +160,7 @@ export class GdsText extends GdsElement {
    * You can apply length like this:
    *
    * ```html
-   * <gds-text length="50"></gds-text>
+   * <gds-text max-width="50"></gds-text>
    * ```
    *
    * @property length
@@ -147,7 +170,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
-  length?: string
+  'max-width'?: string
 
   /**
    * Controls the max-width property of the text.
@@ -160,7 +183,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
-  min?: string
+  'min-width'?: string
 
   /**
    * Controls the text-align property of the text.
@@ -173,7 +196,7 @@ export class GdsText extends GdsElement {
     selector: '[tag]',
     valueTemplate: (v) => v,
   })
-  align?: string
+  'text-align'?: string
 
   /**
    * Controls the number of lines it should show.
@@ -201,12 +224,12 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'color',
     selector: '[tag]',
-    valueTemplate: (v) => {
+    valueTemplate: function (v) {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
-        return `color-mix(in srgb, var(--gds-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
+        return `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsText).level}-content-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
-        return `var(--gds-color-${colorName})`
+        return `var(--gds-color-${'l' + (this as GdsText).level}-content-${colorName})`
       }
     },
   })

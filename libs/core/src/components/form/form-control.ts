@@ -101,7 +101,7 @@ export abstract class GdsFormControlElement<ValueT = any>
         customError: value,
         valid: !value,
       },
-      this.validationMessage || msg(`Validation error`),
+      this.validationMessage || msg(`Error message.`),
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
       this._getValidityAnchor() || undefined,
     )
@@ -191,6 +191,10 @@ export abstract class GdsFormControlElement<ValueT = any>
   protected _handleFormSubmit(e: Event) {
     this.checkValidity()
     if (!this.validity.valid) e.preventDefault()
+  }
+
+  focus(options?: FocusOptions | undefined): void {
+    this._getValidityAnchor().focus(options)
   }
 
   /**
