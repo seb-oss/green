@@ -51,10 +51,6 @@ export class GdsRichText extends GdsElement {
     this._captureDOM()
   }
 
-  render() {
-    return html``
-  }
-
   @observeLightDOM()
   private _captureDOM() {
     if (!this.shadowRoot || this.childNodes.length === 0) return
