@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.43.0
+
+### Minor Changes
+
+- 916a2ef: Update & Release Input
+  Closes: #1541
+
+### Patch Changes
+
+- 69f1894: style expression value template css var fallback
+
 ## 1.42.0
 
 ### Minor Changes
