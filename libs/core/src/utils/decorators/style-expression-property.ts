@@ -44,7 +44,7 @@ export function styleExpressionProperty(
     const sel = options?.selector ?? String(':host')
     const prop = options?.property ?? String(descriptor)
     const valueTemplate =
-      options?.valueTemplate ?? ((v) => `var(--gds-space-${v})`)
+      options?.valueTemplate ?? ((v) => `var(--gds-space-${v}, 0)`)
     const styleTemplate = options?.styleTemplate
 
     // Jack into Lits property decorator
