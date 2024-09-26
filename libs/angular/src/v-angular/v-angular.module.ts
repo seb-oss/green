@@ -37,4 +37,4 @@ import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
     NgvTypeaheadModule
   ]
 })
-export class NggModule {}
+export class NggvModule {}
