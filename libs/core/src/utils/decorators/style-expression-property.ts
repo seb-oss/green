@@ -1,4 +1,4 @@
-import { unsafeCSS } from 'lit'
+import { CSSResult, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { GdsElement } from 'src/gds-element'
 import { watch } from './watch'
@@ -27,7 +27,15 @@ export type StyleExpressionPropertyOptions = {
    * `(property, values) => `${property}: ${values.join(' ')};`
    * This can be used to customize the generated CSS. This runs after the `valueTemplate` is executed. */
   styleTemplate?: (property: string, values: string[]) => string
+
+  /** Set this to something unique if the property suffers from caching issues.
+   * This can typically happen if a identically named combo of property and selector is used in multiple
+   * components with different style or value templates.
+   */
+  cacheOverrideKey?: string
 }
+
+const styleCache = {} as Record<string, CSSResult>
 
 /**
  * A decorator that can be used to create a Style Expression Property.
@@ -46,13 +54,31 @@ export function styleExpressionProperty(
     const valueTemplate =
       options?.valueTemplate ?? ((v) => `var(--gds-space-${v})`)
     const styleTemplate = options?.styleTemplate
+    const cacheKey = options?.cacheOverrideKey ?? `0`
 
     // Jack into Lits property decorator
-    property({ attribute: options?.attribute })(proto, descriptor)
+    property({ attribute: options?.attribute, noAccessor: true })(
+      proto,
+      descriptor,
+    )
 
-    // And also our own watch decorator to catch changes
-    watch(descriptor as string)(proto, descriptor as string, {
-      value: function (oldValue: unknown, newValue: unknown) {
+    Object.defineProperty(proto, descriptor, {
+      get: function () {
+        return this[descriptor]
+      },
+      set: async function (newValue) {
+        await this.updateComplete
+
+        const styleKey = sel + prop + newValue + cacheKey
+
+        if (styleCache.hasOwnProperty(styleKey)) {
+          ;(this as GdsElement)._dynamicStylesController.inject(
+            `sep_${String(descriptor)}`,
+            styleCache[styleKey] as CSSResult,
+          )
+          return
+        }
+
         const ast = parse(tokenize(newValue as string))
         const css = toCss(
           sel,
@@ -61,11 +87,16 @@ export function styleExpressionProperty(
           valueTemplate.bind(this),
           styleTemplate?.bind(this),
         )
-        ;(this as any)[`__${String(descriptor)}_ast`] = ast
+
+        const style = unsafeCSS(css)
+        styleCache[styleKey] = style
+        this[`__${String(descriptor)}_ast`] = ast
         ;(this as GdsElement)._dynamicStylesController.inject(
           `sep_${String(descriptor)}`,
-          unsafeCSS(css),
+          style,
         )
+
+        this.requestUpdate()
       },
     })
   }
