@@ -1,10 +1,6 @@
 import { css } from 'lit'
 
 const style = css`
-  :host {
-    display: contents;
-  }
-
   .button {
     box-shadow: var(--gds-shadow-m);
     position: fixed;
