@@ -107,12 +107,12 @@ export const Card: Story = {
         <gds-text tag="small">small</gds-text>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
-        <gds-text tag="h1">H1</gds-text>
-        <gds-text tag="h2">H2</gds-text>
-        <gds-text tag="h3">H3</gds-text>
-        <gds-text tag="h4">H4</gds-text>
-        <gds-text tag="h5">H5</gds-text>
-        <gds-text tag="h6">H6</gds-text>
+        <gds-text .tag=${'h1'}>H1</gds-text>
+        <gds-text .tag=${'h2'}>H2</gds-text>
+        <gds-text .tag=${'h3'}>H3</gds-text>
+        <gds-text .tag=${'h4'}>H4</gds-text>
+        <gds-text .tag=${'h5'}>H5</gds-text>
+        <gds-text .tag=${'h6'}>H6</gds-text>
       </gds-flex>
     </gds-flex>`
 }
@@ -154,9 +154,9 @@ export const Detail: Story = {
   name: 'Detail',
   render: args => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="detail-xs">Detail Extra Small</gds-text>
-      <gds-text font-size="detail-s">Detail Small</gds-text>
-      <gds-text font-size="detail-m">Detail Medium</gds-text>
+      <gds-text .font-size={'detail-xs'}>Detail Extra Small</gds-text>
+      <gds-text .font-size={'detail-s'}>Detail Small</gds-text>
+      <gds-text .font-size={'detail-m'}>Detail Medium</gds-text>
     </gds-flex>
   `
 }
