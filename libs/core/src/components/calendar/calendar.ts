@@ -247,10 +247,15 @@ export class GdsCalendar extends GdsElement {
                       ...customization,
                     }
 
-                    const isOutsideCurrentMonth =
-                      !isSameMonth(this.focusedDate, day) ||
-                      day < this.min ||
-                      day > this.max
+                    const isOutsideCurrentMonth = !isSameMonth(
+                      this.focusedDate,
+                      day,
+                    )
+
+                    const isOutsideMinMax =
+                      (day < this.min || day > this.max) &&
+                      !isSameDay(day, this.min) &&
+                      !isSameDay(day, this.max)
 
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
@@ -258,6 +263,7 @@ export class GdsCalendar extends GdsElement {
                     const isDisabled =
                       displayOptions.disabled ||
                       isOutsideCurrentMonth ||
+                      isOutsideMinMax ||
                       (this.disabledWeekends && isWeekend)
 
                     const shouldRenderBlank =
