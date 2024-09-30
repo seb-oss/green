@@ -82,8 +82,8 @@ export const RanksAndVariants: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-flex direction="column" gap="4xl" padding="4xl">
-      <gds-flex direction="column" gap="m">
+    <gds-flex flex-direction="column" gap="4xl" padding="4xl">
+      <gds-flex flex-direction="column" gap="m">
         <gds-text>Neutral</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex gap="xl">
@@ -98,7 +98,7 @@ export const RanksAndVariants: Story = {
             Tertiary</gds-button>
         </gds-flex>
       </gds-flex>
-      <gds-flex direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-text>Positive</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex gap="xl">
@@ -113,7 +113,7 @@ export const RanksAndVariants: Story = {
             Tertiary</gds-button>
         </gds-flex>
       </gds-flex>
-      <gds-flex direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-text>Negative</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex gap="xl">
@@ -142,7 +142,7 @@ export const Sizes: Story = {
     controls: { include: ['rank', 'variant'] },
   },
   render: (args) => html`
-    <gds-flex gap="l" align="center">
+    <gds-flex gap="l" align-items="center">
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
       </gds-button>
@@ -200,7 +200,7 @@ export const IconButton: Story = {
     controls: { include: ['rank', 'variant'] },
   },
   render: (args) => html`
-    <gds-flex gap="l" align="center">
+    <gds-flex gap="l" align-items="center">
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
       </gds-button>

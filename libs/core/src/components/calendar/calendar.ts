@@ -12,6 +12,7 @@ import {
   subMonths,
   addMonths,
   lastDayOfMonth,
+  setHours,
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
@@ -316,11 +317,14 @@ export class GdsCalendar extends GdsElement {
   }
 
   #setSelectedDate(date: Date) {
-    this.value = date
+    // Set the time to midday to avoid timezone issues
+    const dateOnMidDay = setHours(date, 12)
+
+    this.value = dateOnMidDay
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: date,
+        detail: dateOnMidDay,
         bubbles: false,
         composed: false,
       }),

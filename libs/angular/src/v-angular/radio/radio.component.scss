@@ -1,0 +1,18 @@
+@use '../../../../chlorophyll/scss/components/form/radio/mixins' as mixins;
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as common;
+
+:host {
+  .nggv-field--locked {
+    display: inline-block;
+    border-radius: 0.25em;
+    position: relative;
+    min-height: 2em;
+    padding: 0.5em 0.75em 0.5em 0em;
+  }
+
+  .form-control {
+    @include common.add-form-control();
+  }
+
+  @include mixins.add-radio();
+}

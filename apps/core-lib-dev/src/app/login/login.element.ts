@@ -32,10 +32,10 @@ export class CardExample extends LitElement {
 
   render() {
     return html`
-      <gds-flex justify="center">
+      <gds-flex justify-content="center">
         <gds-card
           shadow="2xs{0} s{0} m{s} l{s} xl{s}"
-          radius="2xs{0} s{0} m{xs} l{xs} xl{xs}"
+          border-radius="2xs{0} s{0} m{xs} l{xs} xl{xs}"
           background="l2-background-secondary"
           overflow="hidden"
           width="clamp(320px, 100%, 1440px)"
@@ -43,12 +43,12 @@ export class CardExample extends LitElement {
           <gds-grid columns="2xs{1} s{1} m{2} l{2} xl{2}">
             <gds-flex position="relative">
               <gds-video
-                ratio="2xs{1/1} s{16/9} m{16/9} l{1/1} xl{2/2.4}"
+                aspect-ratio="2xs{1/1} s{16/9} m{16/9} l{1/1} xl{2/2.4}"
                 src=${coverTwo}
                 alt="Cards"
-                fit="cover"
+                object-fit="cover"
                 position="center"
-                events="none"
+                pointer-events="none"
                 playsinline
                 autoplay
                 muted
@@ -61,23 +61,23 @@ export class CardExample extends LitElement {
                 mask="top/l1-background-tertiary/0.3"
                 padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
                 position="absolute"
-                radius="xs"
-                stack="2"
+                border-radius="xs"
+                z-index="2"
               >
                 <gds-flex
-                  direction="column"
-                  justify="flex-end"
+                  flex-direction="column"
+                  justify-content="flex-end"
                   height="100%"
                   gap="xs"
                 >
-                  <gds-text tag="h2" wrap="balance">
+                  <gds-text text-wrap="balance">
                     Sector by sector. Industry by industry.
                   </gds-text>
-                  <gds-text tag="p" wrap="balance">
+                  <gds-text text-wrap="balance">
                     Together with our clients, we're accelerating the
                     sustainable transition.
                   </gds-text>
-                  <gds-flex align="center" gap="s" margin="s 0 0 0">
+                  <gds-flex align-items="center" gap="s" margin="s 0 0 0">
                     <gds-text>Net Zero Transition</gds-text>
                     <gds-icon-arrow-right></gds-icon-arrow-right>
                   </gds-flex>
@@ -85,11 +85,11 @@ export class CardExample extends LitElement {
               </gds-card>
             </gds-flex>
             <gds-flex
-              direction="column"
+              flex-direction="column"
               padding="2xs{l} s{l} m{xl} l{4xl} xl{4xl}"
               gap="2xl"
-              align="stretch"
-              justify="center"
+              align-items="stretch"
+              justify-content="center"
               height="100%"
             >
               <form novalidate>
@@ -106,12 +106,14 @@ export class CardExample extends LitElement {
                   </gds-text>
                 </gds-container>
                 <gds-card
-                  radius="s"
+                  border-radius="s"
                   border="4xs/l2-stroke-primary"
                   padding="xl"
                 >
-                  <gds-flex direction="column" gap="l">
-                    <gds-text size="heading-l">Logga in med digipass</gds-text>
+                  <gds-flex flex-direction="column" gap="l">
+                    <gds-text font-size="heading-l"
+                      >Logga in med digipass</gds-text
+                    >
                     <gds-input
                       label="Personnummer"
                       showExtendedSupportingText="true"

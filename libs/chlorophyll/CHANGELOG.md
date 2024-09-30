@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.6.4
+
+### Patch Changes
+
+- 0ace1ed: pagination size fix
+  Fixes #1481
+
+## 3.6.3
+
+### Patch Changes
+
+- 70e8855: Adding V-Angular components to Green: breadcrumbs, button, card, checkbox,dropdown-list,dropdown,info-circle,input-mask,input,modal,radio,textarea,tooltip,typeahead.
+
 ## 3.6.2
 
 ### Patch Changes

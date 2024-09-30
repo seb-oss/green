@@ -1,0 +1,46 @@
+@use '../../../../chlorophyll/scss/components/card/mixins' as mixins;
+
+:host {
+  @include mixins.card();
+
+  &:has(.card-row),
+  &:has(.card-row) {
+    display: table;
+    width: inherit;
+    box-sizing: border-box;
+  }
+
+  ::ng-deep .card-row {
+    display: table-row;
+
+    & * {
+      padding-bottom: 0.5rem;
+    }
+
+    &:last-child * {
+      padding-bottom: 0;
+    }
+
+    &.divider * {
+      border-top: 1px solid #d8d8d8;
+      padding-top: 0.375rem;
+    }
+  }
+
+  ::ng-deep .card-column {
+    display: table-cell;
+    text-align: start;
+
+    &:first-child {
+      text-align: start;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      text-align: center;
+    }
+
+    &:last-child {
+      text-align: end;
+    }
+  }
+}

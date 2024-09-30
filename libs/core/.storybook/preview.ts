@@ -40,7 +40,8 @@ export default {
     options: {
       storySort: {
         order: [
-          'Welcome',
+          'Green Design System',
+          'Get started',
           'Docs',
           ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',

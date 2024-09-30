@@ -1,5 +1,36 @@
 # Changelog
 
+## 4.6.2
+
+### Patch Changes
+
+- 05c1eab: rename ngv to nggv
+- 05c1eab: updated v-angular exports
+- Updated dependencies [69f1894]
+- Updated dependencies [916a2ef]
+  - @sebgroup/green-core@1.43.0
+
+## 4.6.1
+
+### Patch Changes
+
+- 074fcad: rename ngv to nggv
+- Updated dependencies [0ace1ed]
+- Updated dependencies [fbecda4]
+  - @sebgroup/chlorophyll@3.6.4
+  - @sebgroup/green-core@1.42.0
+
+## 4.6.0
+
+### Minor Changes
+
+- 70e8855: Adding V-Angular components to Green: breadcrumbs, button, card, checkbox,dropdown-list,dropdown,info-circle,input-mask,input,modal,radio,textarea,tooltip,typeahead.
+
+### Patch Changes
+
+- Updated dependencies [70e8855]
+  - @sebgroup/chlorophyll@3.6.3
+
 ## 4.5.0
 
 ### Minor Changes

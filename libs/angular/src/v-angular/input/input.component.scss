@@ -1,0 +1,44 @@
+@use '../../../../chlorophyll/scss/components/form/input/mixins';
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
+
+:host {
+  &.gds-form-item {
+    @include form-group.add-form-item();
+  }
+
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  @include mixins.add-text-input;
+
+  input {
+    width: 100%;
+  }
+
+  .gds-input-wrapper {
+    @include mixins.add-input-wrapper;
+  }
+
+  label,
+  .label,
+  legend {
+    @include form-group.add-label();
+  }
+
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+    }
+
+    .form-info--error {
+      color: var(--intent-danger-background, #9f000a);
+    }
+  }
+}

@@ -14,5 +14,4 @@ export * from './lib/in-page-wizard'
 export * from './lib/context-menu'
 export * from './lib/sortable-list'
 export * from './lib/cell-table'
-
 export * from './lib/shared/core-element'

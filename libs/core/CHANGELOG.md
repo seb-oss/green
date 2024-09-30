@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.43.0
+
+### Minor Changes
+
+- 916a2ef: Update & Release Input
+  Closes: #1541
+
+### Patch Changes
+
+- 69f1894: style expression value template css var fallback
+
+## 1.42.0
+
+### Minor Changes
+
+- fbecda4: **Declarative Layout:** Add support for pseudo sub-selectors, like `:hover`, ':focus', etc.
+
+## 1.41.4
+
+### Patch Changes
+
+- 63e0c36: **Calendar:** Fix jumping height when changing months. Fixes #1441
+
 ## 1.41.3
 
 ### Patch Changes
