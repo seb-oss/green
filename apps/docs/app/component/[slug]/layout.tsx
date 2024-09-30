@@ -27,8 +27,6 @@ export default function ComponentLayout({ children, params }: { children: React.
   const componentDesign = getComponent('/design')
   const componentUXText = getComponent('/ux-text')
 
-  console.log('component', componentCode?.private)
-
   if (!component) {
     notFound()
   }

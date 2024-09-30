@@ -1,22 +1,16 @@
-aside.nav {
-  --border-color: var(--gds-sys-color-stroke-stroke-variant2);
-  display: flex;
+.menu {
   position: fixed;
   height: 100%;
   z-index: 4;
-  background: var(--gds-sys-color-background-background);
   flex-direction: column;
   top: var(--header-height);
-  gap: 12px;
-  padding: 24px;
-  border-right: 1px solid var(--border-color);
   width: 320px;
   min-width: 320px;
   grid-area: sidebar;
 
   @media screen and (min-width: 62rem) {
     position: sticky;
-    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100vh - var(--header-height) - 2rem);
     block-size: 100vh;
   }
 

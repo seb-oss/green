@@ -1,17 +1,35 @@
 'use client'
 
 import Alert from '@/alert/aler'
+import Menu from '@/sidebar'
 import Consent from '@/consent/consent'
 import Footer from '@/footer/footer'
 import Header from '@/header/header'
-import Article from '&/article/article'
+import Page from '&/article/article'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
+  ssr: false
+})
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false
+})
+
+const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/container'), {
+  ssr: false
+})
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [colorScheme, setColorScheme] = useState(
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  )
+
   useEffect(() => {
     const callCC = () => {
       let cc
@@ -43,19 +61,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       }
     }
     Fonts()
-  }, [])
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+      setColorScheme(event.matches ? 'dark' : 'light')
+    })
+  }, [colorScheme, setColorScheme])
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning color-scheme={colorScheme}>
       <body>
         <ThemeProvider attribute="theme" defaultTheme="system" enableColorScheme={false} enableSystem>
-          <Main>
-            <Alert />
+          <GdsTheme colorScheme={colorScheme}>
             <Header />
-            <Article>{children}</Article>
-            <Consent />
-            <Footer />
-          </Main>
+            <GdsFlex padding="0 m; >m{0 l}" gap="l">
+              <Menu isNavOpen={true} />
+              <GdsContainer width="100%">
+                <GdsContainer max-width="1088px" margin="auto">
+                  {children}
+                </GdsContainer>
+              </GdsContainer>
+            </GdsFlex>
+
+            <Main>
+              <Consent />
+              <Footer />
+            </Main>
+          </GdsTheme>
         </ThemeProvider>
         <Script id="data-layer">
           {`window["dataLayer"] = {
@@ -67,8 +98,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "website":"seb.io",
           };`}
         </Script>
-        <Script id="show-banner">{`globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true`}</Script>
-        <Script src="/core-out/index.bundle.js" />
       </body>
     </html>
   )

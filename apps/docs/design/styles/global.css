@@ -15,8 +15,6 @@
   }
 
   body {
-    background-color: var(--gds-sys-color-background-background);
-    color: var(--gds-sys-color-content-content);
     letter-spacing: 0.1px;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
@@ -25,11 +23,20 @@
     font-family: var(--gds-font-family);
   }
 
-  p,
-  li {
-    > a {
-      text-decoration: underline;
+  @media screen and (prefers-color-scheme: dark) {
+    body {
+      background-color: #0e0e0e;
+      color: #d7d7d7;
     }
+  }
+
+  body {
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--gds-font-family);
   }
 
   * {
