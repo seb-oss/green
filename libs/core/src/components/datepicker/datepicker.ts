@@ -676,6 +676,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     newDate.setFullYear(parseInt(this.#spinnerState.year))
     newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
     newDate.setDate(parseInt(this.#spinnerState.day))
+    newDate.setHours(12)
 
     if (newDate.toString() === 'Invalid Date') return
 
