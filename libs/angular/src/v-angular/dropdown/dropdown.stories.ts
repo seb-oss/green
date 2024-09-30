@@ -1,11 +1,20 @@
 import { CommonModule } from '@angular/common'
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
-import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms'
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+} from '@angular/forms'
 
 import { debounceTime, map, Observable } from 'rxjs'
 import { NgvI18nModule } from '../i18n/i18n.module'
 import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core/core.utils'
@@ -33,7 +42,7 @@ export default {
   component: NgvDropdownComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule), DropdownUtils]
+      providers: [importProvidersFrom(NgvI18nModule), DropdownUtils],
     }),
     moduleMetadata({
       declarations: [
@@ -42,11 +51,17 @@ export default {
         NgvTypeaheadInputComponent,
         NgvTypeaheadHighlightComponent,
         NgvTooltipDirective,
-        CharacterCountdownDirective
+        CharacterCountdownDirective,
       ],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule, NgvTypeaheadDirective]
-    })
-  ]
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgvI18nModule,
+        NgvTypeaheadDirective,
+      ],
+    }),
+  ],
 } as Meta
 
 const options = [
@@ -57,7 +72,7 @@ const options = [
   { key: 'opt4', label: 'Option 4' },
   {
     key: 'opt5',
-    label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do'
+    label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
   },
   {
     label: 'Group',
@@ -65,12 +80,17 @@ const options = [
       { key: 'group-opt1', label: null, accountNumber: '3453245' },
       { key: 'group-opt2', label: 'Option 2' },
       { key: 'group-opt3', label: 'Option 3' },
-      { key: 'group-opt4', label: 'Option 4' }
-    ]
-  }
+      { key: 'group-opt4', label: 'Option 4' },
+    ],
+  },
 ]
 
-type StoryArgs = NgvDropdownComponent<string, string | null, ExtendedOption<string, string | null>> & WithExtras
+type StoryArgs = NgvDropdownComponent<
+  string,
+  string | null,
+  ExtendedOption<string, string | null>
+> &
+  WithExtras
 
 const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel)
@@ -108,8 +128,8 @@ const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
     props: {
       ...args,
       formControl: ctrl,
-      disableFn: toggleDisableField
-    }
+      disableFn: toggleDisableField,
+    },
   }
 }
 
@@ -135,20 +155,20 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
 
     </nggv-dropdown>
   </div>`,
-    props: { ...args, formControl }
+    props: { ...args, formControl },
   }
 }
 
 const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
   const dropdownFc = new UntypedFormControl()
-  dropdownFc.valueChanges.subscribe(value => {
+  dropdownFc.valueChanges.subscribe((value) => {
     console.log({ value })
   })
   const showAlt = false
   const optionsAlt = [
     { key: 'opt7', label: 'Option 7' },
     { key: 'opt8', label: 'Option 8' },
-    { key: 'opt9', label: 'Option 9' }
+    { key: 'opt9', label: 'Option 9' },
   ]
   args.options = showAlt ? optionsAlt : options
 
@@ -182,8 +202,8 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
       ...args,
       showAlt: showAlt,
       formControl: dropdownFc,
-      resetFunc: reset
-    }
+      resetFunc: reset,
+    },
   }
 }
 
@@ -195,7 +215,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 01',
       accountName: 'Savings account',
       balance: 1000,
-      currency: 'SEK'
+      currency: 'SEK',
     },
     {
       key: 'se50000000002',
@@ -203,7 +223,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 02',
       accountName: 'Foreign account',
       balance: 100.5,
-      currency: 'USD'
+      currency: 'USD',
     },
     {
       key: 'se50000000003',
@@ -211,7 +231,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 03',
       accountName: 'Account with a really long name',
       balance: 2000,
-      currency: 'SEK'
+      currency: 'SEK',
     },
     {
       key: 'se50000000004',
@@ -219,8 +239,8 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 04',
       accountName: 'Euro account with €€€',
       balance: 100000000000.5,
-      currency: 'EUR'
-    }
+      currency: 'EUR',
+    },
   ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
@@ -311,14 +331,14 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         flex-grow: 3;
         display: flex;
         justify-content: flex-end;
-      }`
+      }`,
     ],
     props: {
       ...args,
       formControl: fc,
       options: accounts,
-      disableFn: toggleDisableField
-    }
+      disableFn: toggleDisableField,
+    },
   }
 }
 
@@ -331,7 +351,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 01',
       accountName: 'Savings account 2',
       balance: 1000,
-      currency: 'SEK'
+      currency: 'SEK',
     },
     {
       key: 'se50000000002',
@@ -339,7 +359,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 02',
       accountName: 'Foreign account 03',
       balance: 100.5,
-      currency: 'USD'
+      currency: 'USD',
     },
     {
       key: 'se50000000003',
@@ -347,7 +367,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 03',
       accountName: 'Account with a really long name',
       balance: 2000,
-      currency: 'SEK'
+      currency: 'SEK',
     },
     {
       key: 'se50000000004',
@@ -355,8 +375,8 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
       accountNumber: '5000 00 000 04',
       accountName: 'Euro account with €€€',
       balance: 100000000000.5,
-      currency: 'EUR'
-    }
+      currency: 'EUR',
+    },
   ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
@@ -366,13 +386,15 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
   const searchFunction = (value$: Observable<string>) =>
     value$.pipe(
       debounceTime(150),
-      map(inputValue =>
+      map((inputValue) =>
         accounts.filter(
           (option: { accountNumber: string; accountName: string }) =>
-            option.accountName?.toUpperCase().includes(inputValue?.toUpperCase()) ||
-            option.accountNumber?.replace(/\s/, '').includes(inputValue)
-        )
-      )
+            option.accountName
+              ?.toUpperCase()
+              .includes(inputValue?.toUpperCase()) ||
+            option.accountNumber?.replace(/\s/, '').includes(inputValue),
+        ),
+      ),
     )
   const handlefilterPhraseChange = (event: any) => {
     filterPhrase = event
@@ -485,7 +507,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         flex-grow: 3;
         display: flex;
         justify-content: flex-end;
-      }`
+      }`,
     ],
     props: {
       ...args,
@@ -503,8 +525,8 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         accountName: string
         balance: number
         currency: string
-      }) => account?.accountName
-    }
+      }) => account?.accountName,
+    },
   }
 }
 
@@ -534,8 +556,8 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
       </div>`,
     props: {
       ...args,
-      formControl: ctrl
-    }
+      formControl: ctrl,
+    },
   }
 }
 
@@ -546,24 +568,24 @@ const defaultArgs = {
   placeholder: 'Placeholder text',
   description: 'This. Is. A. Description.',
   ngModel: 'opt2',
-  options
+  options,
 } as StoryArgs
 
 export const Primary = Template.bind({}) as any
 Primary.args = {
-  ...defaultArgs
+  ...defaultArgs,
 }
 
 export const Disabled = DisabledTemplate.bind({}) as any
 Disabled.args = {
   ...defaultArgs,
-  disabled: true
+  disabled: true,
 }
 export const WithError = Template.bind({}) as any
 WithError.args = {
   ...defaultArgs,
   invalid: true,
-  error: 'Error message'
+  error: 'Error message',
 }
 
 export const ComboWithInput = ComboTemplate.bind({}) as any
@@ -573,7 +595,7 @@ export const WithOptionToggle = AltTemplate.bind({}) as any
 WithOptionToggle.args = {
   ...defaultArgs,
   ngModel: 'opt2',
-  options
+  options,
 }
 
 export const WithCustomSelectedTemplate = CustomSelectedTemplate.bind({}) as any
@@ -581,15 +603,16 @@ WithCustomSelectedTemplate.args = {
   ...defaultArgs,
   label: 'Account selector',
   locked: false,
-  displayDisabledAsLocked: true
+  displayDisabledAsLocked: true,
 }
 
-export const WithCustomSelectedTemplateTypeahead = CustomSelectedTemplateTypeahead.bind({}) as any
+export const WithCustomSelectedTemplateTypeahead =
+  CustomSelectedTemplateTypeahead.bind({}) as any
 WithCustomSelectedTemplateTypeahead.args = {
   ...defaultArgs,
   label: 'Account selector',
   locked: false,
-  displayDisabledAsLocked: true
+  displayDisabledAsLocked: true,
 }
 
 export const WithLockedInput = Template.bind({})
@@ -597,7 +620,7 @@ WithLockedInput.args = {
   ...Primary.args,
   ngModel: 'opt2',
   locked: true,
-  description: undefined
+  description: undefined,
 }
 
 export const WithDisplayDisabledAsLocked = Template.bind({})
@@ -605,7 +628,7 @@ WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   locked: false,
   description: undefined,
-  displayDisabledAsLocked: true
+  displayDisabledAsLocked: true,
 }
 
 const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
@@ -647,19 +670,19 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
       searchFunction: (value$: Observable<string>) =>
         value$.pipe(
           debounceTime(300),
-          map(inputValue =>
+          map((inputValue) =>
             options.filter((option: any) =>
               option.label
                 ?.replace(/\s/gm, '')
                 .toLocaleLowerCase()
-                .includes(inputValue?.replace(/\s/gm, '').toLocaleLowerCase())
-            )
-          )
-        )
-    }
+                .includes(inputValue?.replace(/\s/gm, '').toLocaleLowerCase()),
+            ),
+          ),
+        ),
+    },
   }
 }
 export const WithTypeAhead = TypeaheadTemplate.bind({}) as any
 WithTypeAhead.args = {
-  ...defaultArgs
+  ...defaultArgs,
 }

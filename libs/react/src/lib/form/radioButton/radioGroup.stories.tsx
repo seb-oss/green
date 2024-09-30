@@ -12,7 +12,7 @@ const RadioGroupTemplate = ({ ...props }) => (
 
 export default {
   title: 'Components/Form/RadioGroup',
-  component: RadioGroup
+  component: RadioGroup,
 }
 
 export const Default = {
@@ -20,13 +20,13 @@ export const Default = {
   name: 'Default',
 
   parameters: {
-    componentIds: ['component-radiogroup']
+    componentIds: ['component-radiogroup'],
   },
 
   args: {
     label: 'Radio group',
-    labelInformation: 'This is longer information describing the input'
-  }
+    labelInformation: 'This is longer information describing the input',
+  },
 }
 
 export const ExpandableInformation = {
@@ -42,7 +42,7 @@ export const ExpandableInformation = {
     </RadioGroup>
   ),
 
-  name: 'Expandable information'
+  name: 'Expandable information',
 }
 
 export const Validation = {
@@ -51,8 +51,9 @@ export const Validation = {
       label="Radio Group"
       labelInformation="Radio Group Description"
       validator={{
-        message: 'This form item is invalid! And what happens if its really long?',
-        indicator: 'error'
+        message:
+          'This form item is invalid! And what happens if its really long?',
+        indicator: 'error',
       }}
     >
       <RadioButton label="Radio Button 1" name="name" value="button1" />
@@ -60,7 +61,7 @@ export const Validation = {
     </RadioGroup>
   ),
 
-  name: 'Validation'
+  name: 'Validation',
 }
 
 export const Horizontal = {
@@ -69,8 +70,9 @@ export const Horizontal = {
       label="Radio Group"
       labelInformation="Radio Group Description"
       validator={{
-        message: 'This form item is invalid! And what happens if its really long?',
-        indicator: 'error'
+        message:
+          'This form item is invalid! And what happens if its really long?',
+        indicator: 'error',
       }}
       horizontal
     >
@@ -79,5 +81,5 @@ export const Horizontal = {
     </RadioGroup>
   ),
 
-  name: 'Horizontal'
+  name: 'Horizontal',
 }

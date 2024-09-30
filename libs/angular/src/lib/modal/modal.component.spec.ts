@@ -1,14 +1,23 @@
 import { fireEvent, render, waitFor } from '@testing-library/angular'
 import * as bodyScrollLock from 'body-scroll-lock'
 import { createMock } from '@testing-library/angular/jest-utils'
-import { NggModalBodyComponent, NggModalComponent, NggModalFooterComponent, NggModalHeaderComponent } from '.'
+import {
+  NggModalBodyComponent,
+  NggModalComponent,
+  NggModalFooterComponent,
+  NggModalHeaderComponent,
+} from '.'
 
 describe(NggModalComponent.name, () => {
   it('should create', async () => {
     const { fixture } = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' }
+      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' },
     })
     const modal = fixture.componentInstance
     expect(modal).toBeTruthy()
@@ -18,9 +27,13 @@ describe(NggModalComponent.name, () => {
     ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { fixture } = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'default', isOpen: true }
+      componentInputs: { modalType: 'default', isOpen: true },
     })
 
     const modal = fixture.componentInstance
@@ -36,9 +49,13 @@ describe(NggModalComponent.name, () => {
     ;(bodyScrollLock.enableBodyScroll as unknown) = jest.fn()
 
     const { queryByTestId, container } = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'default', isOpen: false }
+      componentInputs: { modalType: 'default', isOpen: false },
     })
 
     expect(queryByTestId('modal')).toBeFalsy()
@@ -51,23 +68,33 @@ describe(NggModalComponent.name, () => {
     ;(bodyScrollLock.disableBodyScroll as unknown) = jest.fn()
 
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'default', isOpen: true }
+      componentInputs: { modalType: 'default', isOpen: true },
     })
 
     const modalElement = await component.findByTestId('modal')
 
     expect(modalElement).toBeDefined()
-    await waitFor(() => expect(component.container.classList.contains('open')).toEqual(true))
+    await waitFor(() =>
+      expect(component.container.classList.contains('open')).toEqual(true),
+    )
     expect(bodyScrollLock.disableBodyScroll).toHaveBeenCalled()
   })
 
   it('should show dialog', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'default', isOpen: true }
+      componentInputs: { modalType: 'default', isOpen: true },
     })
 
     const modalElement = await component.findByTestId('modal')
@@ -77,9 +104,13 @@ describe(NggModalComponent.name, () => {
 
   it('should show slideout', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'slideout', isOpen: true }
+      componentInputs: { modalType: 'slideout', isOpen: true },
     })
     const modalElement = await component.findByTestId('modal')
 
@@ -88,9 +119,13 @@ describe(NggModalComponent.name, () => {
 
   it('should show takeover', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { modalType: 'takeover', isOpen: true }
+      componentInputs: { modalType: 'takeover', isOpen: true },
     })
 
     const modalElement = await component.findByTestId('modal')
@@ -100,9 +135,13 @@ describe(NggModalComponent.name, () => {
 
   it('should show header', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true }
+      componentInputs: { isOpen: true },
     })
 
     const modalHeader = await component.findByTestId('modal-header')
@@ -112,19 +151,29 @@ describe(NggModalComponent.name, () => {
 
   it('should not show header', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { hideHeader: true, isOpen: true }
+      componentInputs: { hideHeader: true, isOpen: true },
     })
 
-    await waitFor(() => expect(component.queryByTestId('modal-header')).toBeFalsy())
+    await waitFor(() =>
+      expect(component.queryByTestId('modal-header')).toBeFalsy(),
+    )
   })
 
   it('should show footer', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { confirmLabel: 'fakeConfirm', isOpen: true }
+      componentInputs: { confirmLabel: 'fakeConfirm', isOpen: true },
     })
 
     const modalFooter = await component.findByTestId('modal-footer')
@@ -134,23 +183,33 @@ describe(NggModalComponent.name, () => {
 
   it('should not show footer', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
       componentInputs: {
         isOpen: true,
         confirmLabel: 'FakeConfirm',
-        hideFooter: true
-      }
+        hideFooter: true,
+      },
     })
 
-    await waitFor(() => expect(component.queryByTestId('modal-footer')).toBeFalsy())
+    await waitFor(() =>
+      expect(component.queryByTestId('modal-footer')).toBeFalsy(),
+    )
   })
 
   it('should set header', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, header: 'FakeHeader' }
+      componentInputs: { isOpen: true, header: 'FakeHeader' },
     })
 
     const modalHeaderText = await component.findByTestId('modal-header-text')
@@ -160,33 +219,49 @@ describe(NggModalComponent.name, () => {
 
   it('should set confirm', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, confirmLabel: 'FakeConfirm' }
+      componentInputs: { isOpen: true, confirmLabel: 'FakeConfirm' },
     })
 
-    const modalConfirmButton = await component.findByTestId('modal-confirm-button')
+    const modalConfirmButton = await component.findByTestId(
+      'modal-confirm-button',
+    )
 
     expect(modalConfirmButton.textContent?.trim()).toEqual('FakeConfirm')
   })
 
   it('should set dismiss', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' }
+      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' },
     })
 
-    const modalDismissButton = await component.findByTestId('modal-dismiss-button')
+    const modalDismissButton = await component.findByTestId(
+      'modal-dismiss-button',
+    )
 
     expect(modalDismissButton.textContent?.trim()).toEqual('FakeDismiss')
   })
 
   it('should set size', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, size: 'lg' }
+      componentInputs: { isOpen: true, size: 'lg' },
     })
 
     const modalElement = await component.findByTestId('modal')
@@ -196,9 +271,13 @@ describe(NggModalComponent.name, () => {
 
   it('should close on close button click', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true }
+      componentInputs: { isOpen: true },
     })
 
     const modal = component.fixture.componentInstance as NggModalComponent
@@ -223,9 +302,13 @@ describe(NggModalComponent.name, () => {
 
   it('should close on backdrop click', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true }
+      componentInputs: { isOpen: true },
     })
 
     const modal = component.fixture.componentInstance
@@ -252,9 +335,13 @@ describe(NggModalComponent.name, () => {
 
   it('should send close event', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true }
+      componentInputs: { isOpen: true },
     })
 
     const modal = component.fixture.componentInstance
@@ -279,9 +366,13 @@ describe(NggModalComponent.name, () => {
 
   it('should send confirm event', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, confirmLabel: 'FakeConfirm' }
+      componentInputs: { isOpen: true, confirmLabel: 'FakeConfirm' },
     })
 
     const modal = component.fixture.componentInstance
@@ -302,9 +393,13 @@ describe(NggModalComponent.name, () => {
 
   it('should send dismiss event', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' }
+      componentInputs: { isOpen: true, dismissLabel: 'FakeDismiss' },
     })
 
     const modal = component.fixture.componentInstance
@@ -325,9 +420,13 @@ describe(NggModalComponent.name, () => {
 
   it('should render the medium size', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, size: 'md' }
+      componentInputs: { isOpen: true, size: 'md' },
     })
 
     const modal = component.queryByRole('dialog')
@@ -337,9 +436,13 @@ describe(NggModalComponent.name, () => {
 
   it('should render the large size', async () => {
     const component = await render(NggModalComponent, {
-      declarations: [NggModalHeaderComponent, NggModalBodyComponent, NggModalFooterComponent],
+      declarations: [
+        NggModalHeaderComponent,
+        NggModalBodyComponent,
+        NggModalFooterComponent,
+      ],
       providers: [],
-      componentInputs: { isOpen: true, size: 'lg' }
+      componentInputs: { isOpen: true, size: 'lg' },
     })
 
     const modal = component.queryByRole('dialog')

@@ -1,10 +1,10 @@
 import Accordion from './accordion'
 
-const Template = args => <Accordion {...args} />
+const Template = (args) => <Accordion {...args} />
 
 export default {
   title: 'Components/Accordion',
-  component: Accordion
+  component: Accordion,
 }
 
 export const Default = {
@@ -12,7 +12,7 @@ export const Default = {
   name: 'Accordion',
 
   parameters: {
-    componentIds: ['component-accordion']
+    componentIds: ['component-accordion'],
   },
 
   args: {
@@ -24,16 +24,17 @@ export const Default = {
         content: (
           <>
             <p>
-              In such a case, we can debounce the resize handling and thus the re-rendering. This will mean to throttle
-              or wait between calls to our handleResize function. There are solid debounce implementations. Let's add a
-              short and simple one to our example
+              In such a case, we can debounce the resize handling and thus the
+              re-rendering. This will mean to throttle or wait between calls to
+              our handleResize function. There are solid debounce
+              implementations. Let's add a short and simple one to our example
             </p>
             <a href="#">And this is a link</a>
           </>
         ),
 
         labelElementLevel: 2,
-        defaultOpen: true
+        defaultOpen: true,
       },
       {
         label: 'Second accordion heading',
@@ -41,14 +42,16 @@ export const Default = {
         content: (
           <>
             <p>
-              When adding an event listener, such as we are for the resize event, we should make sure to clean up after
-              ourselves. In the example so far, we haven't, and that could cause our app problems later.
+              When adding an event listener, such as we are for the resize
+              event, we should make sure to clean up after ourselves. In the
+              example so far, we haven't, and that could cause our app problems
+              later.
             </p>
             <a href="#">And this is a link</a>
           </>
         ),
 
-        labelElementLevel: 2
+        labelElementLevel: 2,
       },
       {
         label: 'Third accordion heading',
@@ -61,8 +64,8 @@ export const Default = {
           </>
         ),
 
-        labelElementLevel: 2
-      }
-    ]
-  }
+        labelElementLevel: 2,
+      },
+    ],
+  },
 }

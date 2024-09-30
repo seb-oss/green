@@ -8,7 +8,7 @@ describe('Component: Table header', () => {
     render(
       <table>
         <TableHeader />
-      </table>
+      </table>,
     )
     expect(document.body.querySelector('thead')).toBeInTheDocument()
   })
@@ -19,7 +19,7 @@ describe('Component: Table header', () => {
       setTableState: null,
       onRowSelect: jest.fn(),
       onRowExpand: jest.fn(),
-      onSort: null
+      onSort: null,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
@@ -28,7 +28,7 @@ describe('Component: Table header', () => {
             <TableRow />
           </TableHeader>
         </table>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(document.body.querySelectorAll('th').length).toEqual(2)
   })
@@ -39,7 +39,7 @@ describe('Component: Table header', () => {
       setTableState: jest.fn(),
       onRowSelect: jest.fn(),
       onRowExpand: jest.fn(),
-      onSort: null
+      onSort: null,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
@@ -50,7 +50,7 @@ describe('Component: Table header', () => {
             <tr className="custom" />
           </TableHeader>
         </table>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(document.body.querySelectorAll('input').length).toEqual(1)
     expect(document.body.querySelector('.custom')).not.toBeNull()

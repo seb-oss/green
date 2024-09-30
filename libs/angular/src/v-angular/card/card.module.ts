@@ -6,6 +6,6 @@ import { NgvCardComponent } from './card.component'
 @NgModule({
   declarations: [NgvCardComponent],
   imports: [CommonModule],
-  exports: [NgvCardComponent]
+  exports: [NgvCardComponent],
 })
 export class NgvCardModule {}

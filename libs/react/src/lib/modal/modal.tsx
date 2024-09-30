@@ -1,10 +1,24 @@
 import { ModalType, Size, randomId } from '@sebgroup/extract'
-import { DetailedHTMLProps, HTMLAttributes, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import Button from '../form/button/button'
 import classNames from 'classnames'
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
 
-type ModalEventListener = (event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null) => unknown
+type ModalEventListener = (
+  event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null,
+) => unknown
 
 export interface ModalProps {
   type?: ModalType
@@ -21,13 +35,21 @@ export interface ModalProps {
   preventBackdropClose?: boolean
 }
 
-interface ModalHeaderProps extends Pick<ModalProps, 'type' | 'header' | 'id' | 'onClose'> {
+interface ModalHeaderProps
+  extends Pick<ModalProps, 'type' | 'header' | 'id' | 'onClose'> {
   setStatus?: (status: string) => void
   setShouldRender?: (shouldRender: boolean) => void
 }
 
-const ModalHeader = ({ type, setStatus, setShouldRender, header = '', id, onClose }: ModalHeaderProps) => {
-  const handleClose: ModalEventListener = event => {
+const ModalHeader = ({
+  type,
+  setStatus,
+  setShouldRender,
+  header = '',
+  id,
+  onClose,
+}: ModalHeaderProps) => {
+  const handleClose: ModalEventListener = (event) => {
     if (type === 'slideout') {
       setStatus && setStatus(IS_EXITING)
       setTimeout(() => {
@@ -66,13 +88,13 @@ const ModalFooter = ({
   onClose,
   onConfirm,
   onDismiss,
-  preventBackdropClose = false
+  preventBackdropClose = false,
 }: Partial<ModalProps>) => {
-  const handleConfirm: ModalEventListener = event => {
+  const handleConfirm: ModalEventListener = (event) => {
     if (onConfirm) onConfirm(event)
     if (onClose) onClose(event)
   }
-  const handleDismiss: ModalEventListener = event => {
+  const handleDismiss: ModalEventListener = (event) => {
     if (onDismiss) onDismiss(event)
     if (onClose) onClose(event)
   }
@@ -101,7 +123,13 @@ const IS_ENTERING = 'is-entering'
 const ENTERED = 'entered'
 const IS_EXITING = 'is-exiting'
 
-export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', ...props }: ModalProps) => {
+export const Modal = ({
+  type = 'default',
+  id = randomId(),
+  isOpen,
+  size = 'sm',
+  ...props
+}: ModalProps) => {
   const [uuid, _] = useState(id)
   const [status, setStatus] = useState<string>(UNMOUNTED)
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
@@ -148,12 +176,15 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', 
   const bodyId = `${uuid}_body`
   const headerId = `${uuid}_header`
 
-  const dialogProps: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
+  const dialogProps: DetailedHTMLProps<
+    HTMLAttributes<HTMLElement>,
+    HTMLElement
+  > = {
     id: uuid,
     role: 'dialog',
     'aria-modal': true,
     'aria-labelledby': headerId,
-    'aria-describedby': bodyId
+    'aria-describedby': bodyId,
   }
 
   let modalContent
@@ -162,12 +193,18 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', 
     case 'slideout': {
       const className: string | undefined = classNames(status, {
         'gds-slide-out--960': size === 'lg',
-        'gds-slide-out--768': size === 'md'
+        'gds-slide-out--768': size === 'md',
       })
 
       modalContent = (
         <aside className={className} {...dialogProps} ref={modalRef}>
-          <ModalHeader id={headerId} setStatus={setStatus} setShouldRender={setShouldRender} type={type} {...props} />
+          <ModalHeader
+            id={headerId}
+            setStatus={setStatus}
+            setShouldRender={setShouldRender}
+            type={type}
+            {...props}
+          />
           <ModalBody id={bodyId} {...props} />
           <ModalFooter {...props} />
         </aside>
@@ -201,9 +238,9 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', 
   const backdropClassnames: string | undefined = classNames(
     'backdrop',
     {
-      'backdrop--transparent': type === 'slideout'
+      'backdrop--transparent': type === 'slideout',
     },
-    status
+    status,
   )
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -230,7 +267,7 @@ export const Modal = ({ type = 'default', id = randomId(), isOpen, size = 'sm', 
       <div
         data-testid="modal-backdrop"
         className={backdropClassnames}
-        onClick={e => handleBackdropClick(e)}
+        onClick={(e) => handleBackdropClick(e)}
         aria-hidden="true"
       ></div>
     </>

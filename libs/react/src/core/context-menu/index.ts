@@ -12,9 +12,9 @@ const reactWrapper = createComponent({
   react: React,
   events: {
     onGdsMenuItemClick: 'gds-menu-item-click',
-    onGdsUiState: 'gds-ui-state'
+    onGdsUiState: 'gds-ui-state',
   },
-  displayName: 'GdsContextMenu'
+  displayName: 'GdsContextMenu',
 })
 
 export default reactWrapper

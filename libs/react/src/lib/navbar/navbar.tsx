@@ -18,7 +18,7 @@ export const Navbar = ({
   title,
   titleLink,
   brandLink = 'https://www.seb.se',
-  brandAriaLabel = 'Open seb.se in new tab'
+  brandAriaLabel = 'Open seb.se in new tab',
 }: NavProps) => {
   const [props, setProps] = useState<HTMLAttributes<HTMLElement>>({})
   useEffect(() => {
@@ -30,7 +30,12 @@ export const Navbar = ({
 
   return (
     <nav role="navigation" {...props}>
-      <Link aria-label={brandAriaLabel} href={brandLink} target="_blank" className="brand" />
+      <Link
+        aria-label={brandAriaLabel}
+        href={brandLink}
+        target="_blank"
+        className="brand"
+      />
       <div className="container-fluid">
         <div className="row justify-content-between align-items-center">
           <div className="col-auto">

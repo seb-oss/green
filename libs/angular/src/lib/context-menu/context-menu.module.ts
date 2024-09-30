@@ -7,6 +7,6 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
   declarations: [NggContextMenuComponent],
   imports: [CommonModule, NggCoreWrapperModule],
   exports: [NggContextMenuComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NggContextMenuModule {}

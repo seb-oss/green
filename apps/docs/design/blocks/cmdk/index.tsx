@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { allChangelogs, allComponents, allDocuments, allMembers, allPosts } from 'content'
+import {
+  allChangelogs,
+  allComponents,
+  allDocuments,
+  allMembers,
+  allPosts,
+} from 'content'
 import Fuse from 'fuse.js'
 
 import './style.css'
@@ -21,9 +27,17 @@ interface Document {
   department?: string
 }
 
-export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd: () => void }) {
+export default function Cmdk({
+  isOpen,
+  toggleCmd,
+}: {
+  isOpen: boolean
+  toggleCmd: () => void
+}) {
   const [isWindows, setIsWindows] = useState(false)
-  const [searchResults, setSearchResults] = useState<Document[]>(allDocuments as Document[])
+  const [searchResults, setSearchResults] = useState<Document[]>(
+    allDocuments as Document[],
+  )
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const refs = searchResults.map(() => React.createRef<HTMLDivElement>())
 
@@ -54,37 +68,37 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
 
     // Changelogs
     const changelogFuse = new Fuse(allChangelogs, {
-      keys: ['title', 'version']
+      keys: ['title', 'version'],
     })
     const changelogResults = changelogFuse.search(value)
-    const changelogItems = changelogResults.map(result => result.item)
+    const changelogItems = changelogResults.map((result) => result.item)
     results.push(...changelogItems)
 
     // Components
     const componentFuse = new Fuse(allComponents, {
-      keys: ['title', 'keywords']
+      keys: ['title', 'keywords'],
     })
 
     const componentResults = componentFuse.search(value)
     const componentItems = componentResults
-      .map(result => result.item)
-      .filter(item => item._raw.sourceFileName === 'index.mdx')
+      .map((result) => result.item)
+      .filter((item) => item._raw.sourceFileName === 'index.mdx')
     results.push(...componentItems)
 
     // Posts
     const postFuse = new Fuse(allPosts, {
-      keys: ['title', 'keywords']
+      keys: ['title', 'keywords'],
     })
     const postResults = postFuse.search(value)
-    const postItems = postResults.map(result => result.item)
+    const postItems = postResults.map((result) => result.item)
     results.push(...postItems)
 
     // Members
     const memberFuse = new Fuse(allMembers, {
-      keys: ['name', 'department']
+      keys: ['name', 'department'],
     })
     const memberResults = memberFuse.search(value)
-    const memberItems = memberResults.map(result => result.item)
+    const memberItems = memberResults.map((result) => result.item)
     results.push(...memberItems)
 
     setSearchResults(results as Document[])
@@ -94,7 +108,12 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
     const className = isFocused ? 'focused' : ''
     if (doc.type === 'Changelog') {
       return (
-        <Link key={doc.title + doc.url_path} href={doc.url_path} onClick={toggleCmd} className={className}>
+        <Link
+          key={doc.title + doc.url_path}
+          href={doc.url_path}
+          onClick={toggleCmd}
+          className={className}
+        >
           <div className="cmdk-item-name">
             <span className="cmdk-item-char">{doc.title.charAt(0)}</span>
             <span>{doc.version}</span>
@@ -103,7 +122,12 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
       )
     } else if (doc.type === 'Component') {
       return (
-        <Link key={doc.title + doc.url_path} href={doc.url_path} onClick={toggleCmd} className={className}>
+        <Link
+          key={doc.title + doc.url_path}
+          href={doc.url_path}
+          onClick={toggleCmd}
+          className={className}
+        >
           <div className="cmdk-item-name">
             <span className="cmdk-item-char">{doc.title.charAt(0)}</span>
             <span>{doc.title}</span>
@@ -129,7 +153,12 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
       )
     } else if (doc.type === 'Post') {
       return (
-        <Link key={doc.title + doc.url_path} href={doc.url_path} onClick={toggleCmd} className={className}>
+        <Link
+          key={doc.title + doc.url_path}
+          href={doc.url_path}
+          onClick={toggleCmd}
+          className={className}
+        >
           <div className="cmdk-item-name">
             <span className="cmdk-item-char">{doc.title.charAt(0)}</span>
             <span>{doc.title}</span>
@@ -138,7 +167,12 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
       )
     } else if (doc.type === 'Member') {
       return (
-        <Link key={doc.title + doc.url_path} href={'about' + doc.url_path} onClick={toggleCmd} className={className}>
+        <Link
+          key={doc.title + doc.url_path}
+          href={'about' + doc.url_path}
+          onClick={toggleCmd}
+          className={className}
+        >
           <div className="cmdk-item-name">
             <Image
               width="16"
@@ -167,7 +201,9 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
       preventDefault: () => void
     }) => {
       const target = e.target
-      const inputElements = Array.from(document.querySelectorAll('input, textarea'))
+      const inputElements = Array.from(
+        document.querySelectorAll('input, textarea'),
+      )
       if (
         (e.key === '/' && inputElements.includes(target) === false) ||
         // (e.key === "/" && (e.metaKey || e.ctrlKey)) ||
@@ -231,7 +267,11 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
             ref={inputRef}
             id="search"
             type="text"
-            placeholder={isWindows ? '/ — Search components & pages' : '⌘K — Search components & pages'}
+            placeholder={
+              isWindows
+                ? '/ — Search components & pages'
+                : '⌘K — Search components & pages'
+            }
             onChange={handleSearch}
           />
           <button type="reset">
@@ -253,7 +293,7 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
                     groups[doc.type] = [doc]
                   }
                   return groups
-                }, {})
+                }, {}),
               )
                 .filter(([type, docs]) => type !== 'Post' && type !== 'Member')
                 .map(([type, docs]) => (
@@ -263,7 +303,11 @@ export default function Cmdk({ isOpen, toggleCmd }: { isOpen: boolean; toggleCmd
                     </div>
                     <div className="list">
                       {docs
-                        .filter((doc: any) => type !== 'Component' || doc._id.endsWith('index.mdx'))
+                        .filter(
+                          (doc: any) =>
+                            type !== 'Component' ||
+                            doc._id.endsWith('index.mdx'),
+                        )
                         .map((doc: Document, index: number) => {
                           const isFocused = index === focusedIndex
                           return renderResult(doc, index, isFocused)

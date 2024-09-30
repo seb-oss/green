@@ -8,6 +8,6 @@ import { NggSortableListModule } from '@sebgroup/green-angular'
 @NgModule({
   declarations: [SortableListComponent],
   imports: [CommonModule, NggSortableListModule, SortableListRoutingModule],
-  exports: []
+  exports: [],
 })
 export class SortableListModule {}

@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsContainer,
   react: React,
   events: {},
-  displayName: 'GdsContainer'
+  displayName: 'GdsContainer',
 })
 
 export default reactWrapper

@@ -17,12 +17,19 @@
   margin-right: calc(
     var(--#{tokens.$variable-prefix}gutter-x) * -0.5
   ); // stylelint-disable-line function-disallowed-list
-  margin-top: calc(var(--#{tokens.$variable-prefix}gutter-y) * -1); // stylelint-disable-line function-disallowed-list
+  margin-top: calc(
+    var(--#{tokens.$variable-prefix}gutter-y) * -1
+  ); // stylelint-disable-line function-disallowed-list
 }
 
 @mixin make-col-ready($gutter: tokens.$grid-gutter-width) {
   // Add box sizing if only the grid is loaded
-  box-sizing: if(variable-exists(include-column-box-sizing) and tokens.$include-column-box-sizing, border-box, null);
+  box-sizing: if(
+    variable-exists(include-column-box-sizing) and
+      tokens.$include-column-box-sizing,
+    border-box,
+    null
+  );
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we set the width
   // later on to override this initial width.
@@ -147,7 +154,10 @@
   }
 }
 
-@mixin make-cssgrid($columns: tokens.$grid-columns, $breakpoints: tokens.$grid-breakpoints) {
+@mixin make-cssgrid(
+  $columns: tokens.$grid-columns,
+  $breakpoints: tokens.$grid-breakpoints
+) {
   @each $breakpoint in map-keys($breakpoints) {
     $infix: breakpoints.breakpoint-infix($breakpoint, $breakpoints);
 

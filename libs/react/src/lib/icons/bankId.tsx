@@ -70,7 +70,10 @@ export const BankId = ({ fill, focusable, title, ...props }: IconProps) => {
           />
         </g>
         <g>
-          <path fill={fill ? fill : '#479CBE'} d="M371.9,511.2H391l-8.4,54.5h-19.1L371.9,511.2z" />
+          <path
+            fill={fill ? fill : '#479CBE'}
+            d="M371.9,511.2H391l-8.4,54.5h-19.1L371.9,511.2z"
+          />
           <path
             fill={fill ? fill : '#479CBE'}
             d="M400.3,511.2h27.3c21.1,0,27.2,15.3,25.2,28c-1.9,12.4-11.7,26.5-30.2,26.5h-30.8L400.3,511.2z M418,552.7

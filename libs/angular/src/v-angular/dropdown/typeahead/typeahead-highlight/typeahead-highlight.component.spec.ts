@@ -12,7 +12,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvTypeaheadHighlightComponent]
+        declarations: [NgvTypeaheadHighlightComponent],
       })
       fixture = TestBed.createComponent(NgvTypeaheadHighlightComponent)
       component = fixture.componentInstance
@@ -35,7 +35,9 @@ describe('[NgvCore]', () => {
       })
 
       it('resets option if no match is found', () => {
-        jest.spyOn(component as any, 'getHighlightedPart').mockReturnValue({ start: -1, end: -1 })
+        jest
+          .spyOn(component as any, 'getHighlightedPart')
+          .mockReturnValue({ start: -1, end: -1 })
         component.text = 'opTION'
         component.input = 'tIO'
 
@@ -76,12 +78,18 @@ describe('[NgvCore]', () => {
         ${'kaka'}           | ${'ka'}     | ${{ start: 0, end: 2 }}
         ${'kakan'}          | ${'kan'}    | ${{ start: 2, end: 5 }}
         ${'kaffe och kaka'} | ${'eo'}     | ${{ start: 4, end: 7 }}
-      `('Without spaces: $text and $input produces: $expected', ({ text, input, expected }) => {
-        const splittedText = text.split('')
-        const splittedInput = input.split('')
-        const res = (component as any).getHighlightedPart(splittedText, splittedInput)
-        expect(res).toEqual(expected)
-      })
+      `(
+        'Without spaces: $text and $input produces: $expected',
+        ({ text, input, expected }) => {
+          const splittedText = text.split('')
+          const splittedInput = input.split('')
+          const res = (component as any).getHighlightedPart(
+            splittedText,
+            splittedInput,
+          )
+          expect(res).toEqual(expected)
+        },
+      )
 
       it.each`
         text                | input        | expected
@@ -96,12 +104,18 @@ describe('[NgvCore]', () => {
         ${'kaffe och kaka'} | ${' och'}    | ${{ start: 5, end: 9 }}
         ${'kaffe och kaka'} | ${'och '}    | ${{ start: 6, end: 10 }}
         ${'kaffe och kaka'} | ${' och '}   | ${{ start: 5, end: 10 }}
-      `('With spaces: $text and $input produces: $expected', ({ text, input, expected }) => {
-        const splittedText = text.split('')
-        const splittedInput = input.split('')
-        const res = (component as any).getHighlightedPart(splittedText, splittedInput)
-        expect(res).toEqual(expected)
-      })
+      `(
+        'With spaces: $text and $input produces: $expected',
+        ({ text, input, expected }) => {
+          const splittedText = text.split('')
+          const splittedInput = input.split('')
+          const res = (component as any).getHighlightedPart(
+            splittedText,
+            splittedInput,
+          )
+          expect(res).toEqual(expected)
+        },
+      )
     })
   })
 })

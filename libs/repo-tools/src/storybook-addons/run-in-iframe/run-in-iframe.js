@@ -1,4 +1,4 @@
-history.pushState = (f =>
+history.pushState = ((f) =>
   function pushState() {
     var ret = f.apply(this, arguments)
     window.dispatchEvent(new Event('pushstate'))
@@ -6,7 +6,7 @@ history.pushState = (f =>
     return ret
   })(history.pushState)
 
-history.replaceState = (f =>
+history.replaceState = ((f) =>
   function replaceState() {
     var ret = f.apply(this, arguments)
     window.dispatchEvent(new Event('replacestate'))

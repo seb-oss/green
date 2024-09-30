@@ -5,7 +5,7 @@ const Template = ({ align, ...props }) => <Dropdown {...props}></Dropdown>
 
 export default {
   title: 'Components/Dropdown',
-  component: Dropdown
+  component: Dropdown,
 }
 
 export const Default = {
@@ -13,27 +13,27 @@ export const Default = {
   name: 'Dropdown',
 
   parameters: {
-    componentIds: ['component-dropdown']
+    componentIds: ['component-dropdown'],
   },
 
   args: {
     options: [
       {
         label: 'Select',
-        value: null
+        value: null,
       },
       {
         label: 'Tacos',
-        value: 'tacos'
+        value: 'tacos',
       },
       {
         label: 'Pizza',
-        value: 'pizza'
+        value: 'pizza',
       },
       {
         label: 'Sushi',
-        value: 'sushi'
-      }
+        value: 'sushi',
+      },
     ],
 
     label: 'Dropdown label',
@@ -44,16 +44,16 @@ export const Default = {
       selected: 'selected',
       placeholder: 'Select',
       close: 'Close',
-      optionsDescription: 'Options'
+      optionsDescription: 'Options',
     },
 
-    onChange: value => {
+    onChange: (value) => {
       console.log('OnChange', value)
     },
 
     label: 'Dropdown label',
-    syncPopoverWidth: false
-  }
+    syncPopoverWidth: false,
+  },
 }
 
 export const TextAndPlaceholder = {
@@ -62,18 +62,18 @@ export const TextAndPlaceholder = {
 
   args: {
     texts: {
-      placeholder: 'Select me please!'
+      placeholder: 'Select me please!',
     },
     label: 'Awesome label!!',
     informationLabel: 'Awesome informationLabel!!',
     options: [
       { label: 'Tacos', value: { id: 'tacos', kitchen: 'mexican' } },
       { label: 'Pizza', value: { id: 'pizza', kitchen: 'italian' } },
-      { label: 'Sushi', value: { id: 'sushi', kitchen: 'japanese' } }
+      { label: 'Sushi', value: { id: 'sushi', kitchen: 'japanese' } },
     ],
     compareWith: (meal1, meal2) => meal1.id === meal2.id,
-    onChange: value => console.log('OnChange', value)
-  }
+    onChange: (value) => console.log('OnChange', value),
+  },
 }
 
 export const OptionHeadings = {
@@ -90,9 +90,9 @@ export const OptionHeadings = {
       { label: 'Dinner', heading: true },
       { label: 'Burger', value: 'burger' },
       { label: 'Pasta', value: 'pasta' },
-      { label: 'Ramen', value: 'ramen' }
-    ]
-  }
+      { label: 'Ramen', value: 'ramen' },
+    ],
+  },
 }
 
 export const MultiSelect = {
@@ -105,9 +105,9 @@ export const MultiSelect = {
     options: [
       { label: 'Tacos', value: 'tacos' },
       { label: 'Pizza', value: 'pizza' },
-      { label: 'Sushi', value: 'sushi' }
-    ]
-  }
+      { label: 'Sushi', value: 'sushi' },
+    ],
+  },
 }
 
 export const Small = {
@@ -121,7 +121,7 @@ export const Small = {
     options: [
       { label: 'Tacos', value: 'tacos' },
       { label: 'Pizza', value: 'pizza' },
-      { label: 'Sushi', value: 'sushi' }
-    ]
-  }
+      { label: 'Sushi', value: 'sushi' },
+    ],
+  },
 }

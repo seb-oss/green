@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 
 /** Pipe used to transform text with special characters into a simple kebab-case id. */
 @Pipe({
-  name: 'slug'
+  name: 'slug',
 })
 export class SlugPipe implements PipeTransform {
   /**

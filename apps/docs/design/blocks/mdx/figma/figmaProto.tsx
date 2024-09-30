@@ -11,7 +11,13 @@ interface FigmaProtoProps {
   height?: string
 }
 
-export default function FigmaProto({ file, caption, node, scale, height }: FigmaProtoProps) {
+export default function FigmaProto({
+  file,
+  caption,
+  node,
+  scale,
+  height,
+}: FigmaProtoProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleLoad = () => {

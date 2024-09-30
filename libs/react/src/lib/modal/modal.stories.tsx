@@ -3,7 +3,7 @@ import Modal, { ModalProps } from './modal'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import { useArgs } from '@storybook/preview-api'
 
-const Template: Story<ModalProps> = props => {
+const Template: Story<ModalProps> = (props) => {
   const [{ isOpen }, updateArgs] = useArgs()
   const handleClose = () => {
     updateArgs({ isOpen: false })
@@ -23,7 +23,12 @@ const Template: Story<ModalProps> = props => {
           open modal
         </button>
       )}
-      <Modal {...props} onClose={handleClose} isOpen={isOpen} onConfirm={onConfirm} />
+      <Modal
+        {...props}
+        onClose={handleClose}
+        isOpen={isOpen}
+        onConfirm={onConfirm}
+      />
     </div>
   )
 }
@@ -34,7 +39,7 @@ ModalDefault.args = {
   header: 'Default Modal',
   children: 'Body content',
   confirm: 'OK',
-  dismiss: 'Nope'
+  dismiss: 'Nope',
 }
 
 export const SlideOutSmall: Story<ModalProps> = Template.bind({})
@@ -44,7 +49,7 @@ SlideOutSmall.args = {
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
-  size: 'sm'
+  size: 'sm',
 }
 
 export const SlideOutMedium: Story<ModalProps> = Template.bind({})
@@ -54,7 +59,7 @@ SlideOutMedium.args = {
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
-  size: 'md'
+  size: 'md',
 }
 
 export const SlideOutLarge: Story<ModalProps> = Template.bind({})
@@ -64,7 +69,7 @@ SlideOutLarge.args = {
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
-  size: 'lg'
+  size: 'lg',
 }
 
 export const TakeOver: Story<ModalProps> = Template.bind({})
@@ -73,15 +78,20 @@ TakeOver.args = {
   header: 'TakeOver Modal',
   children: 'Body content',
   confirm: 'OK',
-  dismiss: 'Nope'
+  dismiss: 'Nope',
 }
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   component: Modal,
   parameters: {
-    componentIds: ['component-dialogue', 'component-slideout', 'component-foldout', 'component-takeover']
-  }
+    componentIds: [
+      'component-dialogue',
+      'component-slideout',
+      'component-foldout',
+      'component-takeover',
+    ],
+  },
 }
 
 export default meta

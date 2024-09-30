@@ -9,7 +9,7 @@ export const dateConverter: ComplexAttributeConverter<Date, string> = {
   },
   toAttribute(value: Date) {
     return value.toISOString()
-  }
+  },
 }
 
 /**
@@ -18,21 +18,22 @@ export const dateConverter: ComplexAttributeConverter<Date, string> = {
  */
 export const dateArrayConverter: ComplexAttributeConverter<Date[], string> = {
   fromAttribute(value: string) {
-    return value.split(',').map(d => new Date(d.trim()))
+    return value.split(',').map((d) => new Date(d.trim()))
   },
   toAttribute(value: Date[]) {
-    return JSON.stringify(value.map(d => d.toISOString()))
-  }
+    return JSON.stringify(value.map((d) => d.toISOString()))
+  },
 }
 
 /**
  * Converts between a comma-separated list of strings and an array of strings.
  */
-export const stringArrayConverter: ComplexAttributeConverter<string[], string> = {
-  fromAttribute(value: string) {
-    return value.split(',')
-  },
-  toAttribute(value: string[]) {
-    return Array.isArray(value) ? value.join(',') : value
+export const stringArrayConverter: ComplexAttributeConverter<string[], string> =
+  {
+    fromAttribute(value: string) {
+      return value.split(',')
+    },
+    toAttribute(value: string[]) {
+      return Array.isArray(value) ? value.join(',') : value
+    },
   }
-}

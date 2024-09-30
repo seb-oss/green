@@ -1,9 +1,13 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import { calculateDegrees, ProgressCircleThemes, randomId } from '@sebgroup/extract'
+import {
+  calculateDegrees,
+  ProgressCircleThemes,
+  randomId,
+} from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-progress-circle',
-  templateUrl: './progress-circle.component.html'
+  templateUrl: './progress-circle.component.html',
 })
 export class NggProgressCircleComponent {
   @HostBinding('style.--start-value') private _startValue = '0deg'

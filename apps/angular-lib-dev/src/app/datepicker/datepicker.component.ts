@@ -10,14 +10,14 @@ const { setLocale } = gdsInitLocalization()
 @Component({
   selector: 'green-datepicker',
   templateUrl: './datepicker.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent {
   dateForm: FormGroup
   constructor(private _fb: FormBuilder) {
     this.dateForm = this._fb.group({
       date: [new Date(), [Validators.required]],
-      dateEmpty: ['', [Validators.required]]
+      dateEmpty: ['', [Validators.required]],
     })
 
     setLocale('sv')
@@ -29,7 +29,7 @@ export class DatepickerComponent {
 
   options: DatepickerOptions = {
     minDate: startOfYear(subYears(new Date(), 100)),
-    maxDate: new Date()
+    maxDate: new Date(),
   }
 
   validationForm = this._fb.group({
@@ -39,10 +39,10 @@ export class DatepickerComponent {
         Validators.required,
         dateValidator({
           min: this.options.minDate,
-          max: this.options.maxDate
-        })
-      ]
-    ]
+          max: this.options.maxDate,
+        }),
+      ],
+    ],
   })
 
   save() {

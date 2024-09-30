@@ -6,6 +6,6 @@ import { RouterModule } from '@angular/router'
 @NgModule({
   declarations: [NggSegmentedControlComponent],
   imports: [RouterModule, CommonModule],
-  exports: [NggSegmentedControlComponent]
+  exports: [NggSegmentedControlComponent],
 })
 export class NggSegmentedControlModule {}

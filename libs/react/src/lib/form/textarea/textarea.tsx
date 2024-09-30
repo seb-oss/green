@@ -1,12 +1,28 @@
-import { IExpandableInformation, IValidator, randomId, validateClassName } from '@sebgroup/extract'
-import { ChangeEvent, DetailedHTMLProps, ReactNode, forwardRef, useCallback, useEffect, useState } from 'react'
+import {
+  IExpandableInformation,
+  IValidator,
+  randomId,
+  validateClassName,
+} from '@sebgroup/extract'
+import {
+  ChangeEvent,
+  DetailedHTMLProps,
+  ReactNode,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import type { ForwardedRef } from 'react'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 
 export interface ITextAreaProps
   extends IExpandableInformation,
-    DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
+    DetailedHTMLProps<
+      React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+      HTMLTextAreaElement
+    > {
   /** Data test id used for finding elements in test */
   testId?: string
   /** Label describing the textarea */
@@ -40,7 +56,7 @@ export const TextArea = forwardRef(
       required,
       ...props
     }: ITextAreaProps,
-    ref: ForwardedRef<HTMLTextAreaElement>
+    ref: ForwardedRef<HTMLTextAreaElement>,
   ) => {
     const [uuid] = useState(id)
     const [localValue, setLocalValue] = useState(value)
@@ -54,21 +70,24 @@ export const TextArea = forwardRef(
         setLocalValue(event.target.value)
         if (onChange) onChange(event)
       },
-      [setLocalValue, onChange]
+      [setLocalValue, onChange],
     )
 
     const describedBy = classNames(ariaDescribedBy, {
       [`gds-expandable-info-${uuid}`]: expandableInfo,
       [`${uuid}_info`]: info,
-      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+      [`${uuid}_message`]:
+        validator?.message !== undefined && validator.message.length > 0,
     })
 
     const inputClassName =
       classNames(className, {
-        [validateClassName(validator?.indicator)]: validator
+        [validateClassName(validator?.indicator)]: validator,
       }) || undefined
 
-    const rightAlignedFooterInfo = maxLength ? `${localValue?.length || 0}/${maxLength}` : undefined
+    const rightAlignedFooterInfo = maxLength
+      ? `${localValue?.length || 0}/${maxLength}`
+      : undefined
 
     return (
       <FormItem
@@ -102,5 +121,5 @@ export const TextArea = forwardRef(
         </div>
       </FormItem>
     )
-  }
+  },
 )

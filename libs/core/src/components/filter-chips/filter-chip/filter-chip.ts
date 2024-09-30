@@ -2,7 +2,11 @@ import { property, queryAsync } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../../gds-element'
 import { TransitionalStyles } from '../../../transitional-styles'
-import { gdsCustomElement, html, getScopedTagName } from '../../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+  getScopedTagName,
+} from '../../../utils/helpers/custom-element-scoping'
 
 import '../../button'
 import type { GdsButton } from '../../button'
@@ -36,7 +40,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
 
     // Apply transitional styles to the button if connectedCallback is called directly
     // This is here mainly for the toggle feature in Storybook to work
-    this._button.then(btn => {
+    this._button.then((btn) => {
       TransitionalStyles.instance.apply(btn, 'gds-button')
     })
   }
@@ -46,7 +50,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
 
   render() {
     const btnClasses = {
-      'btn-p': !this.selected
+      'btn-p': !this.selected,
     }
     return html`<gds-button
       class="btn"

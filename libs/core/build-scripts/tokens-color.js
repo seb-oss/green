@@ -12,8 +12,8 @@ fs.readFile('update.json', 'utf8', (err, data) => {
   // Initialize the output structure
   const outputJson = {
     color: {
-      level: {}
-    }
+      level: {},
+    },
   }
 
   // Process the input JSON
@@ -34,7 +34,7 @@ fs.readFile('update.json', 'utf8', (err, data) => {
     const originalValue = {
       value: value['light'],
       darkValue: value['dark'],
-      type: 'color'
+      type: 'color',
     }
 
     outputJson['color']['level'][level][group][tokenName] = originalValue
@@ -45,8 +45,8 @@ fs.readFile('update.json', 'utf8', (err, data) => {
       {
         Key: key,
         Light: originalValue['value'],
-        Dark: originalValue['darkValue']
-      }
+        Dark: originalValue['darkValue'],
+      },
     ])
   }
 
@@ -54,21 +54,27 @@ fs.readFile('update.json', 'utf8', (err, data) => {
   const sortedLevels = Object.keys(outputJson['color']['level']).sort()
   const sortedOutputJson = {
     color: {
-      level: {}
-    }
+      level: {},
+    },
   }
 
-  sortedLevels.forEach(level => {
-    sortedOutputJson['color']['level'][level] = outputJson['color']['level'][level]
+  sortedLevels.forEach((level) => {
+    sortedOutputJson['color']['level'][level] =
+      outputJson['color']['level'][level]
   })
 
   // Write the grouped JSON to color-2.json
-  fs.writeFile('color-2.json', JSON.stringify(sortedOutputJson, null, 4), 'utf8', err => {
-    if (err) {
-      console.error('Error writing color-2.json:', err)
-      return
-    }
+  fs.writeFile(
+    'color-2.json',
+    JSON.stringify(sortedOutputJson, null, 4),
+    'utf8',
+    (err) => {
+      if (err) {
+        console.error('Error writing color-2.json:', err)
+        return
+      }
 
-    console.log('Processing complete. Output written to color-2.json')
-  })
+      console.log('Processing complete. Output written to color-2.json')
+    },
+  )
 })

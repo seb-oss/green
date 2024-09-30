@@ -1,5 +1,6 @@
 @use '../../../../chlorophyll/scss/common';
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as validation;
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
 @use '../../../../chlorophyll/scss/tokens' as tokens;
 
 @layer base, reset, transitional-styles;
@@ -84,7 +85,11 @@
       display: inline-block;
 
       &:focus {
-        background: color-mix(in srgb, var(--gds-sys-color-blue) 50%, transparent);
+        background: color-mix(
+          in srgb,
+          var(--gds-sys-color-blue) 50%,
+          transparent
+        );
         outline: none;
       }
 

@@ -25,10 +25,14 @@ export default function Taber({ component, links }: TaberProps) {
       {links.map(
         ({ path, label, isPrivate }) =>
           !isPrivate && (
-            <Link key={path} href={component + path} className={pathName === component + path ? 'active' : ''}>
+            <Link
+              key={path}
+              href={component + path}
+              className={pathName === component + path ? 'active' : ''}
+            >
               {label}
             </Link>
-          )
+          ),
       )}
     </div>
   )

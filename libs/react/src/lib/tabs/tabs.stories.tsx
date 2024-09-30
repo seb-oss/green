@@ -10,7 +10,7 @@ const Template = ({ children, ...props }) => (
 
 export default {
   title: 'Components/Tabs',
-  component: Tabs
+  component: Tabs,
 }
 
 export const Default = {
@@ -18,7 +18,7 @@ export const Default = {
   name: 'Tabs',
 
   parameters: {
-    componentIds: ['component-tabs']
+    componentIds: ['component-tabs'],
   },
   args: {
     children: [
@@ -26,7 +26,10 @@ export const Default = {
         <>
           <p>Tab content will only render when a tab is selected.</p>
 
-          <p>If you need to pre-load data, do it separately outside of the component that is rendered in the tab.</p>
+          <p>
+            If you need to pre-load data, do it separately outside of the
+            component that is rendered in the tab.
+          </p>
         </>
       </Tab>,
       <Tab title={'Page 2'}>
@@ -38,9 +41,9 @@ export const Default = {
       <Tab title={'Page 3'}>Page 3, simple text</Tab>,
       <Tab title={'Page 4'}>
         <>Page 4 Content</>
-      </Tab>
-    ]
-  }
+      </Tab>,
+    ],
+  },
 }
 
 export const DefaultSelection = {
@@ -54,9 +57,9 @@ export const DefaultSelection = {
       <Tab title={'Page 3'}>Page 3 Content</Tab>,
       <Tab title={'Page 4'} selected>
         Page 4 Content set as selected{' '}
-      </Tab>
-    ]
-  }
+      </Tab>,
+    ],
+  },
 }
 
 export const DisabledTabs = {
@@ -72,7 +75,7 @@ export const DisabledTabs = {
       </Tab>,
       <Tab title={'Page 4'} disabled>
         Page 4 Content
-      </Tab>
-    ]
-  }
+      </Tab>,
+    ],
+  },
 }

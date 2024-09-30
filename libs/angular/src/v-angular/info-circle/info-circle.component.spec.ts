@@ -12,7 +12,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvInfoCircleComponent, NgvTooltipDirective]
+        declarations: [NgvInfoCircleComponent, NgvTooltipDirective],
       }).compileComponents()
     }))
 

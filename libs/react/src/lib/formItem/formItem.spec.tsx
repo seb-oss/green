@@ -9,11 +9,11 @@ const formItemProps = {
   expandableInfo: 'This is longer information that is expandable',
   validator: {
     message: 'This is an error message',
-    indicator: 'error'
+    indicator: 'error',
   } as IValidator,
   inputId: '12345',
   expandableInfoButtonLabel: 'Button label',
-  role: 'radiogroup'
+  role: 'radiogroup',
 }
 
 describe('FormItem', () => {
@@ -21,7 +21,7 @@ describe('FormItem', () => {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(screen.getByLabelText(formItemProps.label)).toBeInTheDocument()
   })
@@ -30,7 +30,7 @@ describe('FormItem', () => {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(screen.getByText(formItemProps.labelInformation)).toBeInTheDocument()
   })
@@ -39,10 +39,12 @@ describe('FormItem', () => {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(screen.getByRole('button')).toBeInTheDocument()
-    expect(screen.getByRole('button').getAttribute('aria-controls')).toBeTruthy()
+    expect(
+      screen.getByRole('button').getAttribute('aria-controls'),
+    ).toBeTruthy()
     expect(screen.getByRole('button').classList.contains('icon')).toEqual(true)
   })
 
@@ -50,7 +52,7 @@ describe('FormItem', () => {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(screen.getByText(formItemProps.expandableInfo)).not.toBeVisible()
     await act(async () => {
@@ -63,7 +65,7 @@ describe('FormItem', () => {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(screen.getByRole('radiogroup')).toBeInTheDocument()
   })
@@ -72,11 +74,21 @@ describe('FormItem', () => {
     const { container } = render(
       <FormItem {...formItemProps}>
         <input type="text" />
-      </FormItem>
+      </FormItem>,
     )
     expect(container.querySelectorAll('.is-invalid').length).toEqual(1)
-    expect(container.querySelectorAll('.is-invalid')[0].classList.contains('gds-form-item')).toEqual(true)
-    expect(screen.getByText(formItemProps.validator.message)).toBeInTheDocument()
-    expect(screen.getByText(formItemProps.validator.message).classList.contains('form-info')).toEqual(true)
+    expect(
+      container
+        .querySelectorAll('.is-invalid')[0]
+        .classList.contains('gds-form-item'),
+    ).toEqual(true)
+    expect(
+      screen.getByText(formItemProps.validator.message),
+    ).toBeInTheDocument()
+    expect(
+      screen
+        .getByText(formItemProps.validator.message)
+        .classList.contains('form-info'),
+    ).toEqual(true)
   })
 })

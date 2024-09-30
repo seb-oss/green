@@ -1,4 +1,10 @@
-import { AfterViewInit, Directive, ElementRef, InjectionToken, OnDestroy } from '@angular/core'
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  InjectionToken,
+  OnDestroy,
+} from '@angular/core'
 import { Subject, fromEvent, interval } from 'rxjs'
 import { takeUntil, throttle } from 'rxjs/operators'
 
@@ -9,10 +15,11 @@ export const ON_SCROLL_TOKEN = new InjectionToken<string>('ON_SCROLL_TOKEN')
   providers: [
     {
       provide: ON_SCROLL_TOKEN,
-      useFactory: (component: NggOnScrollDirective): Subject<unknown> => component?.onScroll$,
-      deps: [NggOnScrollDirective]
-    }
-  ]
+      useFactory: (component: NggOnScrollDirective): Subject<unknown> =>
+        component?.onScroll$,
+      deps: [NggOnScrollDirective],
+    },
+  ],
 })
 export class NggOnScrollDirective implements AfterViewInit, OnDestroy {
   onScroll$ = new Subject()
@@ -25,7 +32,7 @@ export class NggOnScrollDirective implements AfterViewInit, OnDestroy {
       fromEvent(this.elementRef?.nativeElement, 'scroll')
         .pipe(
           takeUntil(this.destroy$),
-          throttle(() => interval(30))
+          throttle(() => interval(30)),
         )
         .subscribe(() => {
           this.onScroll$.next(null) // Changes: added null due to TS error

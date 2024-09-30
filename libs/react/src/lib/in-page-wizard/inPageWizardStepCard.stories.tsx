@@ -1,5 +1,8 @@
 import React from 'react'
-import { InPageWizardStepCard, InPageWizardStepCardProps } from './inPageWizardStepCard'
+import {
+  InPageWizardStepCard,
+  InPageWizardStepCardProps,
+} from './inPageWizardStepCard'
 import { IconCheckmark } from '../icon/icons/IconCheckmark'
 import { GroupedList, ListItem } from '../grouped-list'
 import { TextInput } from '../form/input/input'
@@ -11,7 +14,7 @@ const Template = ({ children, ...props }: InPageWizardStepCardProps) => (
 
 export default {
   title: 'Components/InPageWizardStepCard',
-  component: InPageWizardStepCard
+  component: InPageWizardStepCard,
 }
 
 export const Default = {
@@ -23,8 +26,8 @@ export const Default = {
     nextBtnText: 'Next',
     stepStatus: 'IsActive',
     stepText: 'Active step text',
-    title: 'Active step title'
-  }
+    title: 'Active step title',
+  },
 }
 
 export const NextButtonText = Template.bind({})
@@ -33,7 +36,7 @@ NextButtonText.args = {
   nextBtnText: 'My next button text',
   stepStatus: 'IsActive',
   stepText: 'Active step text',
-  title: 'Active step title'
+  title: 'Active step title',
 }
 
 export const NextButtonIcon = Template.bind({})
@@ -43,7 +46,7 @@ NextButtonIcon.args = {
   nextBtnIcon: <IconCheckmark />,
   stepStatus: 'IsActive',
   stepText: 'Active step text',
-  title: 'Active step title'
+  title: 'Active step title',
 }
 
 export const HiddenFooter = Template.bind({})
@@ -54,7 +57,7 @@ HiddenFooter.args = {
   stepStatus: 'IsActive',
   stepText: 'Active step text',
   title: 'Active step title',
-  hideFooter: true
+  hideFooter: true,
 }
 
 export const EditText = Template.bind({})
@@ -64,7 +67,7 @@ EditText.args = {
   editBtnText: 'Redigera',
   stepStatus: 'IsComplete',
   stepText: 'Completed step text',
-  title: 'Completed step title'
+  title: 'Completed step title',
 }
 
 export const Status = ({ children, ...props }) => (
@@ -116,7 +119,7 @@ export const Example = ({ children, ...props }) => (
             display: 'flex',
             flexDirection: 'column',
             border: 'none',
-            padding: '.5rem 1rem'
+            padding: '.5rem 1rem',
           }}
         >
           <div>
@@ -131,7 +134,7 @@ export const Example = ({ children, ...props }) => (
             display: 'flex',
             flexDirection: 'column',
             border: 'none',
-            padding: '.5rem 1rem'
+            padding: '.5rem 1rem',
           }}
         >
           <div>
@@ -146,7 +149,7 @@ export const Example = ({ children, ...props }) => (
             display: 'flex',
             flexDirection: 'column',
             border: 'none',
-            padding: '.5rem 1rem'
+            padding: '.5rem 1rem',
           }}
         >
           <div>

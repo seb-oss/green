@@ -11,9 +11,9 @@ describe('billboard', () => {
           {
             name: 'Foo',
             type: 'bar',
-            values: [1, 2, 3]
-          }
-        ]
+            values: [1, 2, 3],
+          },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -21,12 +21,12 @@ describe('billboard', () => {
         data: {
           columns: [['Foo', 1, 2, 3]],
           types: {
-            Foo: 'bar'
+            Foo: 'bar',
           },
           axes: {
-            Foo: 'y'
-          }
-        }
+            Foo: 'y',
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -37,10 +37,10 @@ describe('billboard', () => {
           {
             name: 'Foo',
             type: 'area',
-            values: [1, 2, 3]
-          }
+            values: [1, 2, 3],
+          },
         ],
-        categories: ['Herp', 'Derp', 'Slurp']
+        categories: ['Herp', 'Derp', 'Slurp'],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -48,18 +48,18 @@ describe('billboard', () => {
         data: {
           columns: [['Foo', 1, 2, 3]],
           types: {
-            Foo: 'area'
+            Foo: 'area',
           },
           axes: {
-            Foo: 'y'
-          }
+            Foo: 'y',
+          },
         },
         axis: {
           x: {
             categories: ['Herp', 'Derp', 'Slurp'],
-            type: 'category'
-          }
-        }
+            type: 'category',
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -69,8 +69,8 @@ describe('billboard', () => {
         type: 'bar',
         data: [
           { name: 'Foo', values: [1] },
-          { name: 'Bar', values: [2] }
-        ]
+          { name: 'Bar', values: [2] },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -78,17 +78,17 @@ describe('billboard', () => {
         data: {
           columns: [
             ['Foo', 1],
-            ['Bar', 2]
+            ['Bar', 2],
           ],
           types: {
             Foo: 'bar',
-            Bar: 'bar'
+            Bar: 'bar',
           },
           axes: {
             Foo: 'y',
-            Bar: 'y'
-          }
-        }
+            Bar: 'y',
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -98,8 +98,8 @@ describe('billboard', () => {
         type: 'bar',
         data: [
           { name: 'Foo', values: [1] },
-          { name: 'Bar', values: [2], type: 'area' }
-        ]
+          { name: 'Bar', values: [2], type: 'area' },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -107,17 +107,17 @@ describe('billboard', () => {
         data: {
           columns: [
             ['Foo', 1],
-            ['Bar', 2]
+            ['Bar', 2],
           ],
           types: {
             Foo: 'bar',
-            Bar: 'area'
+            Bar: 'area',
           },
           axes: {
             Foo: 'y',
-            Bar: 'y'
-          }
-        }
+            Bar: 'y',
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -129,9 +129,9 @@ describe('billboard', () => {
             name: 'Foo',
             type: 'bar',
             values: [1, 2, 3],
-            axis: 'y2'
-          }
-        ]
+            axis: 'y2',
+          },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -139,17 +139,17 @@ describe('billboard', () => {
         data: {
           columns: [['Foo', 1, 2, 3]],
           types: {
-            Foo: 'bar'
+            Foo: 'bar',
           },
           axes: {
-            Foo: 'y2'
-          }
+            Foo: 'y2',
+          },
         },
         axis: {
           y2: {
-            show: true
-          }
-        }
+            show: true,
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -158,8 +158,8 @@ describe('billboard', () => {
       const settings: ChartSettings = {
         data: [
           { name: 'Foo', values: [1] },
-          { name: 'Bar', values: [2], type: 'area' }
-        ]
+          { name: 'Bar', values: [2], type: 'area' },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -167,17 +167,17 @@ describe('billboard', () => {
         data: {
           columns: [
             ['Foo', 1],
-            ['Bar', 2]
+            ['Bar', 2],
           ],
           types: {
             Foo: 'bar',
-            Bar: 'area'
+            Bar: 'area',
           },
           axes: {
             Foo: 'y',
-            Bar: 'y'
-          }
-        }
+            Bar: 'y',
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -186,8 +186,8 @@ describe('billboard', () => {
       const settings: ChartSettings = {
         data: [
           { name: 'Foo', values: [1] },
-          { name: 'Bar', values: [-2], type: 'area' }
-        ]
+          { name: 'Bar', values: [-2], type: 'area' },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -195,22 +195,22 @@ describe('billboard', () => {
         data: {
           columns: [
             ['Foo', 1],
-            ['Bar', -2]
+            ['Bar', -2],
           ],
           types: {
             Foo: 'bar',
-            Bar: 'area'
+            Bar: 'area',
           },
           axes: {
             Foo: 'y',
-            Bar: 'y'
-          }
+            Bar: 'y',
+          },
         },
         grid: {
           y: {
-            lines: [{ value: 0, class: 'base-line' }]
-          }
-        }
+            lines: [{ value: 0, class: 'base-line' }],
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -219,8 +219,8 @@ describe('billboard', () => {
       const settings: ChartSettings = {
         data: [
           { name: 'Foo', values: [1] },
-          { name: 'Bar', values: [-2], type: 'area' }
-        ]
+          { name: 'Bar', values: [-2], type: 'area' },
+        ],
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: ChartOptions = {
@@ -228,22 +228,22 @@ describe('billboard', () => {
         data: {
           columns: [
             ['Foo', 1],
-            ['Bar', -2]
+            ['Bar', -2],
           ],
           types: {
             Foo: 'bar',
-            Bar: 'area'
+            Bar: 'area',
           },
           axes: {
             Foo: 'y',
-            Bar: 'y'
-          }
+            Bar: 'y',
+          },
         },
         grid: {
           y: {
-            lines: [{ value: 0, class: 'base-line' }]
-          }
-        }
+            lines: [{ value: 0, class: 'base-line' }],
+          },
+        },
       }
       expect(parsed).toMatchObject(expected)
     })
@@ -254,17 +254,17 @@ describe('billboard', () => {
         style: {
           axis: {
             y: {
-              show: false
-            }
-          }
-        }
+              show: false,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         y: {
           show: false,
-          clipPath: false
-        }
+          clipPath: false,
+        },
       }
       expect(parsed.axis).toEqual(expected)
     })
@@ -275,17 +275,17 @@ describe('billboard', () => {
         style: {
           axis: {
             x: {
-              show: false
-            }
-          }
-        }
+              show: false,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         x: {
           show: false,
-          clipPath: false
-        }
+          clipPath: false,
+        },
       }
       expect(parsed.axis).toEqual(expected)
     })
@@ -296,27 +296,27 @@ describe('billboard', () => {
         style: {
           axis: {
             y2: {
-              show: false
-            }
-          }
-        }
+              show: false,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         y2: {
-          show: false
-        }
+          show: false,
+        },
       }
       expect(parsed.axis).toEqual(expected)
     })
     it('tooltip ratio format', () => {
       const chartElement = '#foo'
       const settings: ChartSettings = {
-        data: []
+        data: [],
       }
       const formatter = createOptions({
         settings,
-        chartElement
+        chartElement,
       }).tooltip.format.value.bind({})
       expect(formatter(undefined, 0)).toEqual('0%')
       expect(formatter(undefined, 0.5)).toEqual('50%')
@@ -329,11 +329,16 @@ describe('billboard', () => {
       const settings: ChartSettings = {
         data: [],
         style: {
-          tooltipNumberFormat: value => `${value} kr`
-        }
+          tooltipNumberFormat: (value) => `${value} kr`,
+        },
       }
       const parsed = createOptions({ settings, chartElement })
-      const formattedNumber = parsed.tooltip.format.value.bind({})(100, undefined, undefined, undefined)
+      const formattedNumber = parsed.tooltip.format.value.bind({})(
+        100,
+        undefined,
+        undefined,
+        undefined,
+      )
       expect(formattedNumber).toEqual('100 kr')
     })
     it('overrides tooltip percentages', () => {
@@ -341,11 +346,16 @@ describe('billboard', () => {
       const settings: ChartSettings = {
         data: [],
         style: {
-          tooltipNumberFormat: (value, ratio) => `${value}/${value / ratio}`
-        }
+          tooltipNumberFormat: (value, ratio) => `${value}/${value / ratio}`,
+        },
       }
       const parsed = createOptions({ settings, chartElement })
-      const formattedNumber = parsed.tooltip.format.value.bind({})(10, 0.1, undefined, undefined)
+      const formattedNumber = parsed.tooltip.format.value.bind({})(
+        10,
+        0.1,
+        undefined,
+        undefined,
+      )
       expect(formattedNumber).toEqual('10/100')
     })
     it('add tick config if ticksCount is specified in style', () => {
@@ -356,19 +366,19 @@ describe('billboard', () => {
           axis: {
             y2: {
               show: false,
-              ticksCount: 5
-            }
-          }
-        }
+              ticksCount: 5,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         y2: {
           show: false,
           tick: {
-            count: 5
-          }
-        }
+            count: 5,
+          },
+        },
       }
       expect(parsed.axis).toEqual(expected)
     })
@@ -380,19 +390,19 @@ describe('billboard', () => {
           axis: {
             y2: {
               show: false,
-              stepSize: 5
-            }
-          }
-        }
+              stepSize: 5,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         y2: {
           show: false,
           tick: {
-            stepSize: 5
-          }
-        }
+            stepSize: 5,
+          },
+        },
       }
       expect(parsed.axis).toEqual(expected)
     })
@@ -403,26 +413,26 @@ describe('billboard', () => {
         style: {
           axis: {
             y: {
-              values: [1, 2, 3, 4]
+              values: [1, 2, 3, 4],
             },
             y2: {
-              values: [100, 200, 300, 400]
-            }
-          }
-        }
+              values: [100, 200, 300, 400],
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const expected: Axis = {
         y: {
           tick: {
-            values: [1, 2, 3, 4]
-          }
+            values: [1, 2, 3, 4],
+          },
         },
         y2: {
           tick: {
-            values: [100, 200, 300, 400]
-          }
-        }
+            values: [100, 200, 300, 400],
+          },
+        },
       }
       expect(parsed.axis).toMatchObject(expected)
     })
@@ -433,10 +443,10 @@ describe('billboard', () => {
         style: {
           axis: {
             y2: {
-              format: v => `fmt:${v}`
-            }
-          }
-        }
+              format: (v) => `fmt:${v}`,
+            },
+          },
+        },
       }
       const parsed = createOptions({ settings, chartElement })
       const formatted = parsed.axis.y2.tick.format.bind({})(123)
@@ -450,14 +460,14 @@ describe('billboard', () => {
       settings = { data: [] }
       const pChart: Partial<Chart> = {
         categories: jest.fn().mockReturnValue([]),
-        color: jest.fn().mockReturnValue('#308800')
+        color: jest.fn().mockReturnValue('#308800'),
       }
       chart = pChart as Chart
     })
     it('sets legend', () => {
       settings.data = [
         { name: 'Foo', values: [] },
-        { name: 'Bar', values: [] }
+        { name: 'Bar', values: [] },
       ]
       settings.legend = 'top'
 
@@ -466,8 +476,8 @@ describe('billboard', () => {
         placement: 'top',
         items: [
           { title: 'Foo', color: '#308800' },
-          { title: 'Bar', color: '#308800' }
-        ]
+          { title: 'Bar', color: '#308800' },
+        ],
       }
 
       expect(info.legend).toEqual(expected)
@@ -484,9 +494,9 @@ describe('billboard', () => {
       settings.style = {
         axis: {
           x: {
-            show: false
-          }
-        }
+            show: false,
+          },
+        },
       }
 
       const info = createInfo(settings, chart)

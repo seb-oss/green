@@ -13,17 +13,17 @@ const meta: Meta<typeof Datepicker> = {
   component: Datepicker,
   argTypes: {},
   parameters: {
-    componentIds: ['component-datepicker']
+    componentIds: ['component-datepicker'],
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
 
 export const Default: Story = {
   args: {
-    label: 'Choose date'
-  }
+    label: 'Choose date',
+  },
 }
 
 /**
@@ -77,17 +77,17 @@ export const Validation: Story = {
               tooShort: true,
               typeMismatch: true,
               valid: false,
-              valueMissing: true
+              valueMissing: true,
             },
-            'My custom validation message'
+            'My custom validation message',
           ]
         }
       },
-      disabled: true
+      disabled: true,
     },
     value: new Date(),
     testId: 'test',
-    ref: React.createRef()
+    ref: React.createRef(),
   },
-  render: args => <Datepicker {...args} />
+  render: (args) => <Datepicker {...args} />,
 }

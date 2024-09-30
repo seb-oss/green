@@ -12,13 +12,13 @@ export const CoreSegementedControl = createComponent({
   tagName: getScopedTagName('gds-segmented-control'),
   elementClass: GdsSegmentedControl,
   events: { onchange: 'change' },
-  react: React
+  react: React,
 })
 
 export const CoreSegment = createComponent({
   tagName: getScopedTagName('gds-segment'),
   elementClass: GdsSegment,
-  react: React
+  react: React,
 })
 
 export interface SegmentedControlProps {
@@ -42,10 +42,19 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
   className,
   ...props
 }: SegmentedControlProps) => {
-  return <CoreSegementedControl onchange={onChange} className={classNames(className)} {...props} />
+  return (
+    <CoreSegementedControl
+      onchange={onChange}
+      className={classNames(className)}
+      {...props}
+    />
+  )
 }
 
-const Segment: React.FC<SegmentProps> = ({ className, ...props }: SegmentProps) => {
+const Segment: React.FC<SegmentProps> = ({
+  className,
+  ...props
+}: SegmentProps) => {
   return <CoreSegment className={classNames(className)} {...props} />
 }
 

@@ -8,7 +8,7 @@ describe('Breadcrumb', () => {
         <BreadcrumbItem>Item 1</BreadcrumbItem>
         <BreadcrumbItem>Item 2</BreadcrumbItem>
         <BreadcrumbItem>Item 3</BreadcrumbItem>
-      </Breadcrumb>
+      </Breadcrumb>,
     )
     expect(screen.getAllByText(/Item/)).toHaveLength(3)
   })

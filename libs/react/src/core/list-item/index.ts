@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsListItem,
   react: React,
   events: {},
-  displayName: 'GdsListItem'
+  displayName: 'GdsListItem',
 })
 
 export default reactWrapper

@@ -10,7 +10,7 @@ import {
   sortArray,
   onRowSelect,
   TableHeaderCellProps,
-  GenericTableRow
+  GenericTableRow,
 } from '../components'
 
 interface SuperHeroData {
@@ -25,26 +25,29 @@ type SuperHeroRowData = GenericTableRow<SuperHeroData>
 
 type ExpandedSuperHeroRowAccessor = Omit<SuperHeroRowData, 'rowContentDetails'>
 
-type SuperHeroColumnDataT = Omit<TableHeaderCellProps<SuperHeroRowData>, 'ref'> &
+type SuperHeroColumnDataT = Omit<
+  TableHeaderCellProps<SuperHeroRowData>,
+  'ref'
+> &
   React.RefAttributes<HTMLTableCellElement>
 
 export const columnData: SuperHeroColumnDataT[] = [
   {
     children: '#',
-    accessor: 'id'
+    accessor: 'id',
   },
   {
     children: 'First name',
-    accessor: 'firstName'
+    accessor: 'firstName',
   },
   {
     children: 'Last name',
-    accessor: 'lastName'
+    accessor: 'lastName',
   },
   {
     children: 'Superhero',
-    accessor: 'superHero'
-  }
+    accessor: 'superHero',
+  },
 ]
 
 export const rowData: SuperHeroRowData[] = [
@@ -60,9 +63,9 @@ export const rowData: SuperHeroRowData[] = [
         id: '1',
         firstName: 'Peter',
         lastName: 'Parker',
-        superHero: 'Spider-man'
-      }
-    ]
+        superHero: 'Spider-man',
+      },
+    ],
   },
   {
     id: '2',
@@ -76,9 +79,9 @@ export const rowData: SuperHeroRowData[] = [
         id: '1',
         firstName: 'Peter',
         lastName: 'Parker',
-        superHero: 'Spider-man'
-      }
-    ]
+        superHero: 'Spider-man',
+      },
+    ],
   },
   {
     id: '3',
@@ -92,20 +95,28 @@ export const rowData: SuperHeroRowData[] = [
         id: '1',
         firstName: 'Peter',
         lastName: 'Parker',
-        superHero: 'Spider-man'
-      }
-    ]
-  }
+        superHero: 'Spider-man',
+      },
+    ],
+  },
 ]
 
 export const SortableTable = () => {
   const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
-  const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(null)
+  const [sortedColumn, setSortedColumn] = React.useState<SortedColumn | null>(
+    null,
+  )
 
   const onSort = (newSortedColumn: SortedColumn) => {
     setSortedColumn(newSortedColumn)
     newSortedColumn &&
-      setData(sortArray(data, newSortedColumn.accessor as keyof SuperHeroRowData, newSortedColumn.sortDirection))
+      setData(
+        sortArray(
+          data,
+          newSortedColumn.accessor as keyof SuperHeroRowData,
+          newSortedColumn.sortDirection,
+        ),
+      )
   }
 
   return (
@@ -121,7 +132,9 @@ export const SortableTable = () => {
         {data.map((item: SuperHeroRowData, i: number) => (
           <TableRow key={i}>
             {columnData.map((column, columnIndex) => (
-              <TableCell key={columnIndex}>{item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}</TableCell>
+              <TableCell key={columnIndex}>
+                {item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}
+              </TableCell>
             ))}
           </TableRow>
         ))}
@@ -134,14 +147,21 @@ export const SelectableTable = () => {
   const [data, setData] = React.useState<SuperHeroRowData[]>(rowData)
   const [selectAllIndicator, setSelectAllIndicator] = React.useState({
     checked: false,
-    indeterminate: false
+    indeterminate: false,
   })
 
-  const onSelect = (event: React.ChangeEvent<HTMLInputElement>, rowUniqueKey: string) => {
-    const { data: newData, isAllSelected, isIndeterminate } = onRowSelect(event, data, 'id', rowUniqueKey)
+  const onSelect = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    rowUniqueKey: string,
+  ) => {
+    const {
+      data: newData,
+      isAllSelected,
+      isIndeterminate,
+    } = onRowSelect(event, data, 'id', rowUniqueKey)
     setSelectAllIndicator({
       checked: isAllSelected,
-      indeterminate: isIndeterminate
+      indeterminate: isIndeterminate,
     })
     setData(newData)
   }
@@ -158,9 +178,13 @@ export const SelectableTable = () => {
       <TableBody>
         {data.map((item: SuperHeroRowData, i: number) => (
           <TableRow key={i} uniqueKey={item.id} checked={item.checked}>
-            {columnData.map((column: SuperHeroColumnDataT, columnIndex: number) => (
-              <TableCell key={columnIndex}>{item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}</TableCell>
-            ))}
+            {columnData.map(
+              (column: SuperHeroColumnDataT, columnIndex: number) => (
+                <TableCell key={columnIndex}>
+                  {item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}
+                </TableCell>
+              ),
+            )}
           </TableRow>
         ))}
       </TableBody>
@@ -195,17 +219,36 @@ export const ExpandableTable = () => {
         {data.map((item: SuperHeroRowData, i: number) => (
           <React.Fragment key={i}>
             <TableRow uniqueKey={item.id} isExpanded={item.expanded}>
-              {columnData.map((column: SuperHeroColumnDataT, columnIndex: number) => (
-                <TableCell key={columnIndex}>{item[column.accessor as keyof ExpandedSuperHeroRowAccessor]}</TableCell>
-              ))}
+              {columnData.map(
+                (column: SuperHeroColumnDataT, columnIndex: number) => (
+                  <TableCell key={columnIndex}>
+                    {
+                      item[
+                        column.accessor as keyof ExpandedSuperHeroRowAccessor
+                      ]
+                    }
+                  </TableCell>
+                ),
+              )}
             </TableRow>
             {item.rowContentDetails?.map((rowItem: SuperHeroRowData) => (
-              <TableRow isSubRow key={rowItem.id} uniqueKey={rowItem.id} isExpanded={rowItem.expanded}>
-                {columnData.map((column: SuperHeroColumnDataT, columnIndex: number) => (
-                  <TableCell key={columnIndex}>
-                    {rowItem[column.accessor as keyof ExpandedSuperHeroRowAccessor]}
-                  </TableCell>
-                ))}
+              <TableRow
+                isSubRow
+                key={rowItem.id}
+                uniqueKey={rowItem.id}
+                isExpanded={rowItem.expanded}
+              >
+                {columnData.map(
+                  (column: SuperHeroColumnDataT, columnIndex: number) => (
+                    <TableCell key={columnIndex}>
+                      {
+                        rowItem[
+                          column.accessor as keyof ExpandedSuperHeroRowAccessor
+                        ]
+                      }
+                    </TableCell>
+                  ),
+                )}
               </TableRow>
             ))}
           </React.Fragment>

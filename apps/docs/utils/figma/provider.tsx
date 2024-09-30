@@ -20,7 +20,10 @@ interface FigmaProviderProps {
   children: React.ReactNode
 }
 
-export const FigmaProvider: React.FC<FigmaProviderProps> = ({ children, nodes }) => {
+export const FigmaProvider: React.FC<FigmaProviderProps> = ({
+  children,
+  nodes,
+}) => {
   const [figmaData, setFigmaData] = useState<FigmaData[]>([])
   const figmaAccessKey = process.env.NEXT_PUBLIC_FIGMA_ACCESS_KEY
   const figmaProjectId = process.env.NEXT_PUBLIC_FIGMA_PROJECT_ID
@@ -28,11 +31,14 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({ children, nodes })
   useEffect(() => {
     const fetchData = async (node: string) => {
       try {
-        const response = await axios.get(`https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node}&format=svg`, {
-          headers: {
-            'X-Figma-Token': figmaAccessKey
-          }
-        })
+        const response = await axios.get(
+          `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node}&format=svg`,
+          {
+            headers: {
+              'X-Figma-Token': figmaAccessKey,
+            },
+          },
+        )
 
         const images = response.data.images
         const imageUrl = Object.values(images)[0] as string
@@ -47,5 +53,9 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({ children, nodes })
     Promise.all(nodes.map(fetchData)).then(setFigmaData)
   }, [])
 
-  return <FigmaContext.Provider value={{ figmaData }}>{children}</FigmaContext.Provider>
+  return (
+    <FigmaContext.Provider value={{ figmaData }}>
+      {children}
+    </FigmaContext.Provider>
+  )
 }

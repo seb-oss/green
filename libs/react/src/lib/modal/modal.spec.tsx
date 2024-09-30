@@ -6,7 +6,12 @@ describe('Modal', () => {
   const MockModal = () => {
     const [toggle, setToggle] = useState(true)
     return (
-      <Modal isOpen={toggle} onClose={() => setToggle(false)} dismiss="Dismiss" confirm="Confirm">
+      <Modal
+        isOpen={toggle}
+        onClose={() => setToggle(false)}
+        dismiss="Dismiss"
+        confirm="Confirm"
+      >
         This is a modal body
       </Modal>
     )
@@ -19,9 +24,14 @@ describe('Modal', () => {
 
   it('Should render modal header, body and footer', () => {
     render(
-      <Modal header="This is modal header" isOpen={true} dismiss="Nope" confirm="Ok">
+      <Modal
+        header="This is modal header"
+        isOpen={true}
+        dismiss="Nope"
+        confirm="Ok"
+      >
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(screen.getByRole('heading').textContent).toBe('This is modal header')
     expect(screen.getByText('modal body')).toBeInTheDocument()
@@ -55,7 +65,7 @@ describe('Modal', () => {
     const { container } = render(
       <Modal header="This is modal header" isOpen={true} type="slideout">
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(container.querySelector('aside')).toBeInTheDocument()
   })
@@ -63,7 +73,7 @@ describe('Modal', () => {
     const { container } = render(
       <Modal header="This is modal header" isOpen={true} type="takeover">
         modal body
-      </Modal>
+      </Modal>,
     )
     expect(container.querySelector('main')).toBeInTheDocument()
   })
@@ -71,9 +81,14 @@ describe('Modal', () => {
   it('Should fire onComfirm function', () => {
     const mockOnConfirm: jest.Mock = jest.fn()
     render(
-      <Modal isOpen={true} dismiss="Nope" confirm="Ok" onConfirm={mockOnConfirm}>
+      <Modal
+        isOpen={true}
+        dismiss="Nope"
+        confirm="Ok"
+        onConfirm={mockOnConfirm}
+      >
         modal body
-      </Modal>
+      </Modal>,
     )
     fireEvent.click(screen.getByText('Ok'))
     expect(mockOnConfirm).toBeCalled()
@@ -81,9 +96,14 @@ describe('Modal', () => {
   it('Should fire onDismiss function', () => {
     const mockOnDismiss: jest.Mock = jest.fn()
     render(
-      <Modal isOpen={true} dismiss="Nope" confirm="Ok" onDismiss={mockOnDismiss}>
+      <Modal
+        isOpen={true}
+        dismiss="Nope"
+        confirm="Ok"
+        onDismiss={mockOnDismiss}
+      >
         modal body
-      </Modal>
+      </Modal>,
     )
     fireEvent.click(screen.getByText('Nope'))
     expect(mockOnDismiss).toBeCalled()

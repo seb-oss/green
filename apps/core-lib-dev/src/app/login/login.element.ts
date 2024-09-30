@@ -64,10 +64,18 @@ export class CardExample extends LitElement {
                 border-radius="xs"
                 z-index="2"
               >
-                <gds-flex direction="column" justify="flex-end" height="100%" gap="xs">
-                  <gds-text tag="h2" wrap="balance"> Sector by sector. Industry by industry. </gds-text>
+                <gds-flex
+                  direction="column"
+                  justify="flex-end"
+                  height="100%"
+                  gap="xs"
+                >
+                  <gds-text tag="h2" wrap="balance">
+                    Sector by sector. Industry by industry.
+                  </gds-text>
                   <gds-text tag="p" wrap="balance">
-                    Together with our clients, we're accelerating the sustainable transition.
+                    Together with our clients, we're accelerating the
+                    sustainable transition.
                   </gds-text>
                   <gds-flex align-items="center" gap="s" margin="s 0 0 0">
                     <gds-text>Net Zero Transition</gds-text>
@@ -86,10 +94,22 @@ export class CardExample extends LitElement {
             >
               <form novalidate>
                 <gds-container>
-                  <gds-text tag="h1" color="l2-content-primary" weight="book"> Välkommen till Internetbanken </gds-text>
-                  <gds-text tag="p" size="heading-l" color="l2-content-secondary"> Hur vill du logga in? </gds-text>
+                  <gds-text tag="h1" color="l2-content-primary" weight="book">
+                    Välkommen till Internetbanken
+                  </gds-text>
+                  <gds-text
+                    tag="p"
+                    size="heading-l"
+                    color="l2-content-secondary"
+                  >
+                    Hur vill du logga in?
+                  </gds-text>
                 </gds-container>
-                <gds-card radius="s" border="4xs/l2-stroke-primary" padding="xl">
+                <gds-card
+                  radius="s"
+                  border="4xs/l2-stroke-primary"
+                  padding="xl"
+                >
                   <gds-flex direction="column" gap="l">
                     <gds-text size="heading-l">Logga in med digipass</gds-text>
                     <gds-input
@@ -103,20 +123,20 @@ export class CardExample extends LitElement {
                               {
                                 ...el.validity,
                                 valid: false,
-                                customError: true
+                                customError: true,
                               },
-                              'Du måste fylla i ditt personnummer.'
+                              'Du måste fylla i ditt personnummer.',
                             ]
                           else if (el.value.length !== 12 || isNaN(el.value))
                             return [
                               {
                                 ...el.validity,
                                 valid: false,
-                                customError: true
+                                customError: true,
                               },
-                              'Personnumret måste vara 12 siffror.'
+                              'Personnumret måste vara 12 siffror.',
                             ]
-                        }
+                        },
                       }}
                     ></gds-input>
 
@@ -124,8 +144,8 @@ export class CardExample extends LitElement {
                       <li>Skriv in din PIN i digipassen.</li>
                       <li>Tryck 2 när APPLI visas.</li>
                       <li>
-                        Skriv in <gds-text tag="code">1234</gds-text> och sedan <gds-text tag="code">5678</gds-text> i
-                        digipassen.
+                        Skriv in <gds-text tag="code">1234</gds-text> och sedan
+                        <gds-text tag="code">5678</gds-text> i digipassen.
                       </li>
                       <li>Fyll i signeringskoden, den visas i 30 sekunder.</li>
                     </ol>
@@ -140,20 +160,20 @@ export class CardExample extends LitElement {
                               {
                                 ...el.validity,
                                 valid: false,
-                                customError: true
+                                customError: true,
                               },
-                              'Du måste fylla i en kod.'
+                              'Du måste fylla i en kod.',
                             ]
                           else if (el.value.length !== 6 || isNaN(el.value))
                             return [
                               {
                                 ...el.validity,
                                 valid: false,
-                                customError: true
+                                customError: true,
                               },
-                              'Koden måste vara 6 siffror.'
+                              'Koden måste vara 6 siffror.',
                             ]
-                        }
+                        },
                       }}
                     ></gds-input>
 
@@ -161,7 +181,9 @@ export class CardExample extends LitElement {
 
                     <gds-button type="submit" size="large">Logga in</gds-button>
 
-                    <gds-button rank="tertiary"> Ändra identifieringsmetod </gds-button>
+                    <gds-button rank="tertiary">
+                      Ändra identifieringsmetod
+                    </gds-button>
                   </gds-flex>
                 </gds-card>
               </form>

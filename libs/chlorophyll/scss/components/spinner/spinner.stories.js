@@ -7,11 +7,11 @@ export default {
   title: 'Components/Spinner',
 
   parameters: {
-    componentIds: ['component-spinners']
-  }
+    componentIds: ['component-spinners'],
+  },
 }
 
 export const Spinner = {
   render: Template.bind({}),
-  name: 'Spinner'
+  name: 'Spinner',
 }

@@ -1,4 +1,7 @@
-import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsContainer } from '../container'
@@ -37,7 +40,7 @@ export class GdsCard extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'box-shadow',
-    valueTemplate: v => `var(--gds-shadow-${v})`
+    valueTemplate: (v) => `var(--gds-shadow-${v})`,
   })
   shadow?: string
 

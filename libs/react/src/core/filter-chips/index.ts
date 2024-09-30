@@ -11,9 +11,9 @@ const reactWrapper = createComponent({
   elementClass: GdsFilterChips,
   react: React,
   events: {
-    onChange: 'change'
+    onChange: 'change',
   },
-  displayName: 'GdsFilterChips'
+  displayName: 'GdsFilterChips',
 })
 
 export default reactWrapper

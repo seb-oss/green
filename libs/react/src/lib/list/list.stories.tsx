@@ -6,7 +6,7 @@ const TableListTemplate = ({ ...props }) => <List {...props} />
 
 export default {
   title: 'Components/Lists',
-  component: List
+  component: List,
 }
 
 export const OrderedList = {
@@ -15,8 +15,8 @@ export const OrderedList = {
 
   args: {
     listType: 'ordered',
-    children: ['First', 'Second', 'Third', 'Fourth']
-  }
+    children: ['First', 'Second', 'Third', 'Fourth'],
+  },
 }
 
 export const UnorderedList = {
@@ -25,8 +25,8 @@ export const UnorderedList = {
 
   args: {
     listType: 'unordered',
-    children: ['First', 'Second', 'Third', 'Fourth']
-  }
+    children: ['First', 'Second', 'Third', 'Fourth'],
+  },
 }
 
 export const CheckList = {
@@ -35,6 +35,6 @@ export const CheckList = {
 
   args: {
     listType: 'check',
-    children: ['First', 'Second', 'Third', 'Fourth']
-  }
+    children: ['First', 'Second', 'Third', 'Fourth'],
+  },
 }

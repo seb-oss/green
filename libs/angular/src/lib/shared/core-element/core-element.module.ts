@@ -6,6 +6,6 @@ import { NggCoreElementDirective } from './core-element.directive'
 @NgModule({
   declarations: [NggCoreElementDirective],
   imports: [CommonModule],
-  exports: [NggCoreElementDirective]
+  exports: [NggCoreElementDirective],
 })
 export class NggCoreWrapperModule {}

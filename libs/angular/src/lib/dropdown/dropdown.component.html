@@ -16,12 +16,16 @@
     [maxHeight]="maxHeight"
     [disableMobileStyles]="disableMobileStyles"
   >
-    <span slot="message" #formInfo><ng-content select="[data-form-info]"></ng-content></span>
+    <span slot="message" #formInfo
+      ><ng-content select="[data-form-info]"></ng-content
+    ></span>
 
     <span slot="trigger"
       ><ng-container
         *ngTemplateOutlet="
-          customButton?.templateRef && selectedOption ? customButton!.templateRef : defaultButton;
+          customButton?.templateRef && selectedOption
+            ? customButton!.templateRef
+            : defaultButton;
           context: { option: selectedOption }
         "
       ></ng-container
@@ -32,7 +36,9 @@
         <gds-option *nggCoreElement [value]="option[useValue]"
           ><ng-container
             *ngTemplateOutlet="
-              customOption?.templateRef ? customOption!.templateRef : defaultOption;
+              customOption?.templateRef
+                ? customOption!.templateRef
+                : defaultOption;
               context: { option: option, index: index }
             "
           ></ng-container

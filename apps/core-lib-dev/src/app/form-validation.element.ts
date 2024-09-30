@@ -29,15 +29,20 @@ export class FormValidationExample extends LitElement {
           label="Name"
           placeholder="Enter your name"
         ></gds-input> -->
-        <gds-fab position="fixed; <s { static }" inset="auto 5rem 5rem auto">FAB!</gds-fab>
+        <gds-fab position="fixed; <s { static }" inset="auto 5rem 5rem auto"
+          >FAB!</gds-fab
+        >
         <gds-datepicker
           label="Birth date"
           .validator=${{
             validate: (el: any) => {
               console.log('Inside datepicker validator', el.value)
               if (el.value === undefined)
-                return [{ ...el.validity, valid: false, customError: true }, 'This field is required']
-            }
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'This field is required',
+                ]
+            },
           }}
         ></gds-datepicker>
         <gds-dropdown
@@ -46,8 +51,11 @@ export class FormValidationExample extends LitElement {
             validate: (el: any) => {
               console.log('Inside custom validator', el.value)
               if (el.value !== 'cat')
-                return [{ ...el.validity, valid: false, customError: true }, 'Only cats are allowed!']
-            }
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'Only cats are allowed!',
+                ]
+            },
           }}
         >
           <gds-option>Pick favorite</gds-option>

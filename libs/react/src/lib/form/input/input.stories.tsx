@@ -4,7 +4,7 @@ const InputTemplate = ({ ...props }) => <Input {...props} />
 
 export default {
   title: 'Components/Form/Input',
-  component: Input
+  component: Input,
 }
 
 export const Default = {
@@ -12,10 +12,10 @@ export const Default = {
   name: 'Input',
 
   parameters: {
-    componentIds: ['component-input']
+    componentIds: ['component-input'],
   },
 
-  args: {}
+  args: {},
 }
 
 export const WithFormInfo = {
@@ -24,8 +24,8 @@ export const WithFormInfo = {
 
   args: {
     label: 'Label',
-    info: 'Some info text'
-  }
+    info: 'Some info text',
+  },
 }
 
 export const WithExpandableInfo = {
@@ -34,8 +34,8 @@ export const WithExpandableInfo = {
 
   args: {
     label: 'Label',
-    expandableInfo: 'Some info text'
-  }
+    expandableInfo: 'Some info text',
+  },
 }
 
 export const UnitLabel = {
@@ -44,8 +44,8 @@ export const UnitLabel = {
 
   args: {
     label: 'Label',
-    unit: 'kr'
-  }
+    unit: 'kr',
+  },
 }
 
 export const Validator = {
@@ -56,9 +56,9 @@ export const Validator = {
     label: 'Label',
     validator: {
       indicator: 'error',
-      message: 'Error message'
-    }
-  }
+      message: 'Error message',
+    },
+  },
 }
 
 export const Everything = {
@@ -75,7 +75,7 @@ export const Everything = {
     unit: 'kr',
     validator: {
       indicator: 'error',
-      message: 'Error message'
-    }
-  }
+      message: 'Error message',
+    },
+  },
 }

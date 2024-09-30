@@ -6,6 +6,6 @@ import { BootstrapComponent } from './bootstrap.component'
 
 @NgModule({
   declarations: [BootstrapComponent],
-  imports: [CommonModule, BootstrapRoutingModule]
+  imports: [CommonModule, BootstrapRoutingModule],
 })
 export class BootstrapModule {}

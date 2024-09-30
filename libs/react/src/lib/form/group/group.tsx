@@ -12,15 +12,24 @@ export interface GroupProps {
   className?: classNames.Argument
 }
 
-export function Group({ id, children, error, className, groupBorder = false, groupFocus = false }: GroupProps) {
+export function Group({
+  id,
+  children,
+  error,
+  className,
+  groupBorder = false,
+  groupFocus = false,
+}: GroupProps) {
   const groupClassName = classNames(
     'group',
     { 'group-border': groupBorder },
     { 'group-focus': groupFocus },
     { 'is-invalid': error },
-    className
+    className,
   )
-  const errorMessage = error ? (error as Error).message || (error as string) : ''
+  const errorMessage = error
+    ? (error as Error).message || (error as string)
+    : ''
   return (
     <div className="form-group" id={id}>
       <div className={groupClassName}>{children}</div>

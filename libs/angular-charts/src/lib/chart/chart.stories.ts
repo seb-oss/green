@@ -8,18 +8,18 @@ import { NggChartsModule } from '../ngg-charts.module'
 export default {
   title: 'Chart',
   parameters: {
-    componentIds: ['component-chart']
+    componentIds: ['component-chart'],
   },
   decorators: [
     moduleMetadata({
-      imports: [BrowserModule, CommonModule, NggChartsModule]
-    })
-  ]
+      imports: [BrowserModule, CommonModule, NggChartsModule],
+    }),
+  ],
 }
 
 const ChartStory: StoryFn<NggChartComponent> = (args: any) => ({
   props: args,
-  template: `<ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>`
+  template: `<ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>`,
 })
 
 const ChartCardStory: StoryFn<NggChartComponent> = (args: any) => ({
@@ -29,12 +29,12 @@ const ChartCardStory: StoryFn<NggChartComponent> = (args: any) => ({
                 <div>
                     <ngg-chart [settings]="settings" [theme]="theme"></ngg-chart>
                 </div>
-             </div>`
+             </div>`,
 })
 
 const ObservableChartStory: StoryFn<NggChartComponent> = (args: any) => ({
   props: args,
-  template: `<ngg-chart [settings]="settings | async" [theme]="theme"></ngg-chart>`
+  template: `<ngg-chart [settings]="settings | async" [theme]="theme"></ngg-chart>`,
 })
 
 export const SimpleBar = ChartStory.bind({})
@@ -45,25 +45,25 @@ SimpleBar.args = {
       {
         name: 'Antal',
         type: 'bar',
-        values: [234, 197, 97, 12]
-      }
+        values: [234, 197, 97, 12],
+      },
     ],
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
-      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)'
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
     ],
     style: {
       axis: {
         y: {
           label: 'Antal',
-          stepSize: 50
-        }
+          stepSize: 50,
+        },
       },
-      tooltipNumberFormat: (value: any) => `${value} st`
-    }
-  }
+      tooltipNumberFormat: (value: any) => `${value} st`,
+    },
+  },
 }
 
 export const EmptyChart = ChartStory.bind({})
@@ -71,7 +71,7 @@ EmptyChart.args = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   settings: null,
-  theme: ''
+  theme: '',
 }
 
 export const ObservableSimpleBar = ObservableChartStory.bind({})
@@ -83,17 +83,17 @@ ObservableSimpleBar.args = {
       {
         name: 'Antal',
         type: 'bar',
-        values: [234, 197, 97, 12]
-      }
+        values: [234, 197, 97, 12],
+      },
     ],
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
-      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)'
-    ]
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+    ],
   }),
-  theme: ''
+  theme: '',
 }
 
 export const Pie = ChartStory.bind({})
@@ -103,20 +103,20 @@ Pie.args = {
     data: [
       {
         name: 'Ej tilldelade',
-        values: [700]
+        values: [700],
       },
       {
         name: 'Tilldelade',
-        values: [200]
+        values: [200],
       },
       {
         name: 'Utnyttjade',
-        values: [100]
-      }
+        values: [100],
+      },
     ],
-    legend: 'right'
+    legend: 'right',
   },
-  theme: ''
+  theme: '',
 }
 
 export const Donut = ChartStory.bind({})
@@ -126,19 +126,19 @@ Donut.args = {
     data: [
       {
         name: 'Ej tilldelade',
-        values: [700]
+        values: [700],
       },
       {
         name: 'Tilldelade',
-        values: [200]
+        values: [200],
       },
       {
         name: 'Utnyttjade',
-        values: [100]
-      }
-    ]
+        values: [100],
+      },
+    ],
   },
-  theme: ''
+  theme: '',
 }
 
 export const Lines = ChartStory.bind({})
@@ -148,22 +148,22 @@ Lines.args = {
       {
         name: 'Signerade avtal SEB',
         type: 'line',
-        values: [10, 14, 6, 15]
+        values: [10, 14, 6, 15],
       },
       {
         name: 'Påbörjade trials',
         type: 'line',
-        values: [8, 9, 13, 11]
+        values: [8, 9, 13, 11],
       },
       {
         name: 'Aktiverade prenumerationer',
         type: 'line',
-        values: [3, 7, 9, 10]
-      }
+        values: [3, 7, 9, 10],
+      },
     ],
-    categories: ['jan', 'feb', 'mar', 'apr']
+    categories: ['jan', 'feb', 'mar', 'apr'],
   },
-  theme: ''
+  theme: '',
 }
 
 export const HideAxes = ChartStory.bind({})
@@ -173,27 +173,27 @@ HideAxes.args = {
       {
         name: 'Signerade avtal SEB',
         type: 'line',
-        values: [10, 14, 6, 15]
+        values: [10, 14, 6, 15],
       },
       {
         name: 'Påbörjade trials',
         type: 'line',
-        values: [8, 9, 13, 11]
+        values: [8, 9, 13, 11],
       },
       {
         name: 'Aktiverade prenumerationer',
         type: 'line',
-        values: [3, 7, 9, 10]
-      }
+        values: [3, 7, 9, 10],
+      },
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
     style: {
       axis: false,
       point: {
-        show: 'focus'
-      }
-    }
-  }
+        show: 'focus',
+      },
+    },
+  },
 }
 
 export const Splines = ChartStory.bind({})
@@ -203,20 +203,20 @@ Splines.args = {
     data: [
       {
         name: 'Signerade avtal SEB',
-        values: [10, 14, 6, 15]
+        values: [10, 14, 6, 15],
       },
       {
         name: 'Påbörjade trials',
-        values: [8, 9, 13, 11]
+        values: [8, 9, 13, 11],
       },
       {
         name: 'Aktiverade prenumerationer',
-        values: [3, 7, 9, 10]
-      }
+        values: [3, 7, 9, 10],
+      },
     ],
-    categories: ['jan', 'feb', 'mar', 'apr']
+    categories: ['jan', 'feb', 'mar', 'apr'],
   },
-  theme: ''
+  theme: '',
 }
 
 export const Mixed = ChartStory.bind({})
@@ -226,23 +226,23 @@ Mixed.args = {
       {
         type: 'spline',
         name: 'Signerade avtal SEB',
-        values: [10, 14, 6, 15]
+        values: [10, 14, 6, 15],
       },
       {
         type: 'area',
         name: 'Påbörjade trials',
-        values: [8, 9, 13, 11]
+        values: [8, 9, 13, 11],
       },
       {
         type: 'bar',
         name: 'Aktiverade prenumerationer',
-        values: [3, 7, 9, 10]
-      }
+        values: [3, 7, 9, 10],
+      },
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
-    legend: 'right'
+    legend: 'right',
   },
-  theme: ''
+  theme: '',
 }
 
 export const MixedSecondY = ChartStory.bind({})
@@ -252,24 +252,24 @@ MixedSecondY.args = {
       {
         type: 'spline',
         name: 'Signerade avtal SEB',
-        values: [100, 140, 60, 150]
+        values: [100, 140, 60, 150],
       },
       {
         type: 'area',
         name: 'Påbörjade trials',
-        values: [80, 90, 130, 110]
+        values: [80, 90, 130, 110],
       },
       {
         type: 'bar',
         name: 'Aktiverade prenumerationer',
         values: [3, 7, 9, 2],
-        axis: 'y2'
-      }
+        axis: 'y2',
+      },
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
-    legend: 'top'
+    legend: 'top',
   },
-  theme: ''
+  theme: '',
 }
 
 export const FitToHeight = ChartCardStory.bind({})
@@ -278,22 +278,22 @@ FitToHeight.args = {
   theme: '',
   settings: {
     style: {
-      fitHeightToParent: true
+      fitHeightToParent: true,
     },
     data: [
       {
         name: 'Antal',
         type: 'bar',
-        values: [234, 197, 97, 12]
-      }
+        values: [234, 197, 97, 12],
+      },
     ],
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
-      'Avslutade prenumerationer'
-    ]
-  }
+      'Avslutade prenumerationer',
+    ],
+  },
 }
 
 export const CustomTickValues = ChartStory.bind({})
@@ -303,29 +303,29 @@ CustomTickValues.args = {
       {
         type: 'spline',
         name: 'Signerade avtal SEB',
-        values: [100, 140, 250, 380]
+        values: [100, 140, 250, 380],
       },
       {
         type: 'bar',
         name: 'Aktiverade prenumerationer',
         values: [3, 7, 9, 2],
-        axis: 'y2'
-      }
+        axis: 'y2',
+      },
     ],
     categories: ['jan', 'feb', 'mar', 'apr'],
     legend: 'top',
     style: {
       axis: {
         y: {
-          values: [100, 200, 300, 400]
+          values: [100, 200, 300, 400],
         },
         y2: {
-          values: () => [0, 4, 8, 10]
-        }
-      }
-    }
+          values: () => [0, 4, 8, 10],
+        },
+      },
+    },
   },
-  theme: ''
+  theme: '',
 }
 
 export const MixedGraphWithNegativeValues = ChartStory.bind({})
@@ -335,25 +335,38 @@ MixedGraphWithNegativeValues.args = {
       {
         type: 'spline',
         name: 'Signerade avtal SEB',
-        values: [100, 140, 250, 380, -100, 345, 100, 50, 20, 230, -20, 180]
+        values: [100, 140, 250, 380, -100, 345, 100, 50, 20, 230, -20, 180],
       },
       {
         type: 'line',
         name: 'Aktiverade prenumerationer',
         values: [-100],
-        axis: 'y2'
+        axis: 'y2',
       },
       {
         type: 'bar',
         name: 'Aktiverade prenumerationer',
         values: [50, 230, 100, 280, 100, -30, -200, 100, 20, 230, -20, 180],
-        axis: 'y2'
-      }
+        axis: 'y2',
+      },
     ],
-    categories: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
-    legend: 'top'
+    categories: [
+      'jan',
+      'feb',
+      'mar',
+      'apr',
+      'maj',
+      'jun',
+      'jul',
+      'aug',
+      'sep',
+      'okt',
+      'nov',
+      'dec',
+    ],
+    legend: 'top',
   },
-  theme: ''
+  theme: '',
 }
 
 export const CustomColours = ChartStory.bind({})
@@ -363,18 +376,18 @@ CustomColours.args = {
     data: [
       {
         name: 'Ej tilldelade',
-        values: [600]
+        values: [600],
       },
       {
         name: 'Tilldelade',
-        values: [100]
-      }
+        values: [100],
+      },
     ],
     style: {
       color: {
-        pattern: ['#dadada', '#45B400']
-      }
-    }
+        pattern: ['#dadada', '#45B400'],
+      },
+    },
   },
-  theme: ''
+  theme: '',
 }

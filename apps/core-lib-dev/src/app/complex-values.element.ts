@@ -1,8 +1,16 @@
-import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core/scoping'
 
-import { GdsDropdown, GdsOption } from '@sebgroup/green-core/components/dropdown/index.js'
+import {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown/index.js'
 
-const html = htmlTemplateTagFactory((strs, ...values) => strs.map((s, i) => s + values[i]).join(''))
+const html = htmlTemplateTagFactory((strs, ...values) =>
+  strs.map((s, i) => s + values[i]).join(''),
+)
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = []
@@ -23,8 +31,10 @@ export class AppElement extends HTMLElement {
 
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
 
-    ;[1, 2, 3].forEach(num => {
-      const o = document.createElement(getScopedTagName('gds-option')) as GdsOption
+    ;[1, 2, 3].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option'),
+      ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`
       dropdown.appendChild(o)

@@ -11,11 +11,11 @@ export default {
   title: 'Components/Close button',
 
   parameters: {
-    componentIds: ['component-close-button']
-  }
+    componentIds: ['component-close-button'],
+  },
 }
 
 export const CloseButton = {
   render: Template.bind({}),
-  name: 'Close button'
+  name: 'Close button',
 }

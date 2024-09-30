@@ -2,10 +2,17 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["node", "@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"],
+    "types": [
+      "node",
+      "@nx/react/typings/cssmodule.d.ts",
+      "@nx/react/typings/image.d.ts"
+    ],
     "noPropertyAccessFromIndexSignature": false
   },
-  "files": ["../../node_modules/@nx/react/typings/cssmodule.d.ts", "../../node_modules/@nx/react/typings/image.d.ts"],
+  "files": [
+    "../../node_modules/@nx/react/typings/cssmodule.d.ts",
+    "../../node_modules/@nx/react/typings/image.d.ts"
+  ],
   "exclude": [
     "**/*.spec.ts",
     "**/*.test.ts",

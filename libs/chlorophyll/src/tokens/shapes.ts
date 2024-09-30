@@ -1,5 +1,15 @@
-export type Display = 'flex' | 'inline-flex' | 'block' | 'inline-block' | 'inline' | 'inherit' | 'none'
-export type Spacing = string | { v: string; h: string } | { t: string; r: string; b: string; l: string }
+export type Display =
+  | 'flex'
+  | 'inline-flex'
+  | 'block'
+  | 'inline-block'
+  | 'inline'
+  | 'inherit'
+  | 'none'
+export type Spacing =
+  | string
+  | { v: string; h: string }
+  | { t: string; r: string; b: string; l: string }
 export type TextAlign = 'left' | 'center' | 'right'
 
 export interface Shape {
@@ -19,12 +29,12 @@ export const shapes: Record<Shapes, Shape> = {
     margin: '0px',
     borderRadius: '.25em',
     borderWidth: '1px',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   input: {
     display: 'inline-block',
     padding: { v: '0', h: '16px' },
     margin: '0px',
-    borderRadius: '4px'
-  }
+    borderRadius: '4px',
+  },
 }

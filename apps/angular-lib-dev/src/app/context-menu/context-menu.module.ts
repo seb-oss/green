@@ -8,7 +8,13 @@ import { NggContextMenuModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [ContextMenuComponent],
-  imports: [CommonModule, NggContextMenuModule, ContextMenuRoutingModule, ReactiveFormsModule, FormsModule],
-  exports: []
+  imports: [
+    CommonModule,
+    NggContextMenuModule,
+    ContextMenuRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
+  exports: [],
 })
 export class ContextMenuModule {}

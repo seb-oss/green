@@ -18,9 +18,9 @@ const meta: Meta = {
   title: 'Docs/Components/Menu button',
   component: 'gds-menu-button',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -29,18 +29,18 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
     innerHTML: `<gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
-    Search`
-  }
+    Search`,
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -52,7 +52,7 @@ export const Selected_state: Story = {
     html`<gds-menu-button selected>
       <gds-icon-people solid slot="trail"></gds-icon-people>
       Profile
-    </gds-menu-button>`
+    </gds-menu-button>`,
 }
 
 /**
@@ -60,7 +60,7 @@ export const Selected_state: Story = {
  */
 export const Only_text: Story = {
   ...DefaultParams,
-  render: () => html`<gds-menu-button>Search</gds-menu-button>`
+  render: () => html`<gds-menu-button>Search</gds-menu-button>`,
 }
 
 /**
@@ -73,7 +73,12 @@ export const Only_text: Story = {
 export const Example_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card display="flex" height="50px" width="700px" border="0 0 4xs/primary 0">
+    html`<gds-card
+      display="flex"
+      height="50px"
+      width="700px"
+      border="0 0 4xs/primary 0"
+    >
       <div style="flex-basis:50%;">
         <gds-menu-button>
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
@@ -92,12 +97,17 @@ export const Example_menu_bar: Story = {
           </gds-menu-button>
           <div style="padding: 1rem;">Profile stuff</div>
         </gds-popover>
-        <gds-menu-button href="https://github.com/seb-oss/green" target="_blank">
-          <gds-icon-square-arrow-top-right slot="trail"></gds-icon-square-arrow-top-right>
+        <gds-menu-button
+          href="https://github.com/seb-oss/green"
+          target="_blank"
+        >
+          <gds-icon-square-arrow-top-right
+            slot="trail"
+          ></gds-icon-square-arrow-top-right>
           External link
         </gds-menu-button>
       </gds-flex>
-    </gds-card>`
+    </gds-card>`,
 }
 
 /**
@@ -142,5 +152,5 @@ export const Compact_menu_bar: Story = {
         </gds-menu-button>
       </gds-flex>
     </gds-card>
-    `
+    `,
 }

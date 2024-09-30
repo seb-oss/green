@@ -35,7 +35,8 @@ export class GdsElement extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.gdsElementName = getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
+    this.gdsElementName =
+      getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
     this.setAttribute('gds-element', this.gdsElementName)
   }
 }

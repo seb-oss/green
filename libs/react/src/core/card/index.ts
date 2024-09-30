@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsCard,
   react: React,
   events: {},
-  displayName: 'GdsCard'
+  displayName: 'GdsCard',
 })
 
 export default reactWrapper

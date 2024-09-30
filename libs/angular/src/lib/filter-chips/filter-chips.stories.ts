@@ -8,13 +8,13 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [NggCoreWrapperModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }),
   ],
-  parameters: {}
+  parameters: {},
 } as Meta
 
-const Template: StoryFn = args => ({
+const Template: StoryFn = (args) => ({
   template: `
   <gds-filter-chips *nggCoreElement value="top-news" label="${args.label}">
     <gds-filter-chip *nggCoreElement value="all">All</gds-filter-chip>
@@ -27,11 +27,11 @@ const Template: StoryFn = args => ({
     </gds-filter-chip>
   </gds-filter-chips>
     `,
-  props: args
+  props: args,
 })
 
 export const Default = Template.bind({})
 
 Default.args = {
-  label: 'Select a category to filter results on'
+  label: 'Select a category to filter results on',
 }

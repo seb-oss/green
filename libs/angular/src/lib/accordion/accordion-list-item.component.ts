@@ -4,7 +4,7 @@ import { randomId } from '@sebgroup/extract'
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ngg-accordion-list-item]',
-  templateUrl: './accordion-list-item.component.html'
+  templateUrl: './accordion-list-item.component.html',
 })
 export class NggAccordionListItemComponent {
   @Input() public id: string = randomId()

@@ -14,10 +14,16 @@
         [id]="g_i.toString()"
         (cdkDropListDropped)="onDragDrop($event)"
       >
-        <p *ngIf="group.title && group.title.length > 0" class="item-list-header">
+        <p
+          *ngIf="group.title && group.title.length > 0"
+          class="item-list-header"
+        >
           <span class="item-list-header-title">{{ group.title }}</span>
         </p>
-        <p *ngIf="group.description && group.description.length > 0" class="item-list-header-description">
+        <p
+          *ngIf="group.description && group.description.length > 0"
+          class="item-list-header-description"
+        >
           {{ group.description }}
         </p>
         <div
@@ -48,9 +54,15 @@
               <div class="item-box-title">
                 <span name="agendaItemName"
                   >{{ checklistItem.name }}
-                  <span *ngIf="checklistItem.hasCustomSuffix" class="item-list-suffix">
+                  <span
+                    *ngIf="checklistItem.hasCustomSuffix"
+                    class="item-list-suffix"
+                  >
                     <ng-container
-                      *ngTemplateOutlet="suffixTemplate; context: { $implicit: checklistItem }"
+                      *ngTemplateOutlet="
+                        suffixTemplate;
+                        context: { $implicit: checklistItem }
+                      "
                       class="user-icon"
                     >
                     </ng-container>

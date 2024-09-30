@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsTheme,
   react: React,
   events: {},
-  displayName: 'GdsTheme'
+  displayName: 'GdsTheme',
 })
 
 export default reactWrapper

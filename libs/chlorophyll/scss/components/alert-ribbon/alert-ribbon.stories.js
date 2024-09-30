@@ -1,4 +1,12 @@
-const Template = ({ type, heading, content, link, button, primaryButton, closeButton }) => `
+const Template = ({
+  type,
+  heading,
+  content,
+  link,
+  button,
+  primaryButton,
+  closeButton,
+}) => `
   <div role="alert" class="${type}">
     <i>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,39 +36,39 @@ export default {
   title: 'Components/Alert ribbon',
 
   parameters: {
-    componentIds: ['component-alertribbon']
+    componentIds: ['component-alertribbon'],
   },
 
   argTypes: {
     type: {
       control: 'select',
-      options: ['success', 'warning', 'danger', '']
+      options: ['success', 'warning', 'danger', ''],
     },
 
     heading: {
-      control: 'text'
+      control: 'text',
     },
 
     content: {
-      control: 'text'
+      control: 'text',
     },
 
     link: {
-      control: 'text'
+      control: 'text',
     },
 
     button: {
-      control: 'text'
+      control: 'text',
     },
 
     primaryButton: {
-      control: 'text'
+      control: 'text',
     },
 
     closeButton: {
-      control: 'boolean'
-    }
-  }
+      control: 'boolean',
+    },
+  },
 }
 
 export const AlertRibbon = {
@@ -70,10 +78,11 @@ export const AlertRibbon = {
   args: {
     type: '',
     heading: 'Can contain a heading.',
-    content: 'Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or',
+    content:
+      'Body text starts on the same row as heading. A link (optional) always ends the message, stand alone or',
     link: 'part of the sentence.',
     button: false,
     primaryButton: '',
-    closeButton: true
-  }
+    closeButton: true,
+  },
 }

@@ -1,4 +1,9 @@
-import { File, Options, TransformedToken, formatHelpers } from 'style-dictionary'
+import {
+  File,
+  Options,
+  TransformedToken,
+  formatHelpers,
+} from 'style-dictionary'
 
 const { fileHeader } = formatHelpers
 
@@ -20,7 +25,7 @@ export type TokenTree = {
 
 export const staticPropertyFormatter = (
   options: Options,
-  valueFormatter: (token) => string
+  valueFormatter: (token) => string,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
   return function (token, indent): string {
     let value = valueFormatter(token.token)
@@ -28,19 +33,21 @@ export const staticPropertyFormatter = (
     if (equalityIndex > 0) {
       value = value.slice(equalityIndex + 1)
     }
-    return indent + options.accessControl + 'static let ' + token.name + ' =' + value
+    return (
+      indent + options.accessControl + 'static let ' + token.name + ' =' + value
+    )
   }
 }
 
 export const swiftUiColorReferencePropertyFormatter = (
   uiKitObjectName: string,
-  options: Options
+  options: Options,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
   return function (token, indent): string {
     const path =
       token.path
         .slice(0, token.path.length - 1)
-        .map(pathComponent => {
+        .map((pathComponent) => {
           return pathComponent[0].toUpperCase() + pathComponent.slice(1)
         })
         .join('.') +
@@ -64,13 +71,13 @@ export const swiftUiColorReferencePropertyFormatter = (
 export const uiKitColorReferencePropertyFormatter = (
   lightModeObjectName: string,
   darkModeObjectName: string,
-  options: Options
+  options: Options,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
   return function (token, indent): string {
     const path =
       token.path
         .slice(0, token.path.length - 1)
-        .map(pathComponent => {
+        .map((pathComponent) => {
           return pathComponent[0].toUpperCase() + pathComponent.slice(1)
         })
         .join('.') +
@@ -108,9 +115,12 @@ export const uiKitColorReferencePropertyFormatter = (
 }
 
 /// Structures a list of tokens into a tree by the token paths.
-export const treeFromTokens = (tokens: TransformedToken[], ignorePathUpToValue?: string): TokenTree => {
+export const treeFromTokens = (
+  tokens: TransformedToken[],
+  ignorePathUpToValue?: string,
+): TokenTree => {
   let tree = null
-  tokens.forEach(token => {
+  tokens.forEach((token) => {
     let usablePath
     if (ignorePathUpToValue) {
       const index = token.path.indexOf(ignorePathUpToValue)
@@ -123,11 +133,14 @@ export const treeFromTokens = (tokens: TransformedToken[], ignorePathUpToValue?:
       usablePath = token.path
     }
     // Replace hyphens with camel case
-    usablePath = usablePath.map(pathComponent => {
+    usablePath = usablePath.map((pathComponent) => {
       let result = pathComponent
       let index = -1
       while ((index = result.indexOf('-')) > -1) {
-        result = result.slice(0, index) + result[index + 1].toUpperCase() + result.slice(index + 2)
+        result =
+          result.slice(0, index) +
+          result[index + 1].toUpperCase() +
+          result.slice(index + 2)
       }
       return result
     })
@@ -141,7 +154,7 @@ export const fileContentFromTree = (
   tree: TokenTree,
   options: Options,
   file: File,
-  propertyFormatter: (token: TokenTreeProperty, indent: string) => string
+  propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
 ): string => {
   // Headers and imports
   let result = '//\n// ' + file.destination + '\n//\n'
@@ -154,7 +167,8 @@ export const fileContentFromTree = (
   result += '\n\n'
 
   // File contents
-  result += options.accessControl + options.objectType + ' ' + file.className + ' {\n'
+  result +=
+    options.accessControl + options.objectType + ' ' + file.className + ' {\n'
   result += swiftObjectFromTree(tree, options, propertyFormatter, 1)
   result += '}\n'
 
@@ -165,35 +179,51 @@ const swiftObjectFromTree = (
   tree: TokenTree,
   options: Options,
   propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
-  indent: number
+  indent: number,
 ): string => {
   let result = ''
   const indentString = '    '.repeat(indent)
 
-  tree.branches.forEach(branch => {
+  tree.branches.forEach((branch) => {
     let name
     if (branch.name.length > 1) {
       name = branch.name[0].toUpperCase() + branch.name.slice(1)
     } else {
       name = branch.name.toUpperCase()
     }
-    result += indentString + options.accessControl + options.objectType + ' ' + name + ' {\n'
+    result +=
+      indentString +
+      options.accessControl +
+      options.objectType +
+      ' ' +
+      name +
+      ' {\n'
     // Increase indent for each subnode to make the contents easy to read
-    result += swiftObjectFromTree(branch.tree, options, propertyFormatter, indent + 1)
+    result += swiftObjectFromTree(
+      branch.tree,
+      options,
+      propertyFormatter,
+      indent + 1,
+    )
     result += indentString + '}\n'
   })
 
-  tree.properties.forEach(property => {
+  tree.properties.forEach((property) => {
     result += propertyFormatter(property, indentString) + '\n'
   })
   return result
 }
 
-const placeTokenInTree = (token: TransformedToken, path: string[], fullPath: string[], tree?: TokenTree): TokenTree => {
+const placeTokenInTree = (
+  token: TransformedToken,
+  path: string[],
+  fullPath: string[],
+  tree?: TokenTree,
+): TokenTree => {
   if (!tree) {
     tree = {
       properties: [],
-      branches: []
+      branches: [],
     }
   }
 
@@ -216,14 +246,14 @@ const placeTokenInTree = (token: TransformedToken, path: string[], fullPath: str
     tree.properties.push({
       name: name,
       path: fullPath,
-      token: token
+      token: token,
     })
     return tree
   }
 
   // Recursively find/create branches until we reach the proper spot for the token
   const remainingPath = path.slice(1)
-  const existingBranch = tree.branches.find(value => {
+  const existingBranch = tree.branches.find((value) => {
     return value.name == name
   })
   let treeFromBranch = null
@@ -233,11 +263,16 @@ const placeTokenInTree = (token: TransformedToken, path: string[], fullPath: str
   } else {
     isNewBranch = true
   }
-  treeFromBranch = placeTokenInTree(token, remainingPath, fullPath, treeFromBranch)
+  treeFromBranch = placeTokenInTree(
+    token,
+    remainingPath,
+    fullPath,
+    treeFromBranch,
+  )
   if (isNewBranch) {
     tree.branches.push({
       name: name,
-      tree: treeFromBranch
+      tree: treeFromBranch,
     })
   }
   return tree

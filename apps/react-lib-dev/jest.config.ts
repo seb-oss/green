@@ -11,14 +11,18 @@ export default {
       'babel-jest',
       {
         presets: ['@nx/react/babel'],
-        plugins: [['@babel/plugin-transform-class-static-block', { loose: true }]]
-      }
-    ]
+        plugins: [
+          ['@babel/plugin-transform-class-static-block', { loose: true }],
+        ],
+      },
+    ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/react-lib-dev',
-  transformIgnorePatterns: ['node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs|dist/)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!.*.mjs$|lit-element|lit-html|lit|@lit|@lit-labs|dist/)',
+  ],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/../..'
-  })
+    prefix: '<rootDir>/../..',
+  }),
 }

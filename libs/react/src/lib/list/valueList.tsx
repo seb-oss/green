@@ -1,7 +1,9 @@
 import { ReactElement } from 'react'
 
 interface ValueListProps {
-  children?: ReactElement<ValueListItemProps> | ReactElement<ValueListItemProps>[]
+  children?:
+    | ReactElement<ValueListItemProps>
+    | ReactElement<ValueListItemProps>[]
   inverted?: boolean
 }
 

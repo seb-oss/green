@@ -61,8 +61,8 @@ export default {
   title: 'Components/Navigation/Pagination',
 
   parameters: {
-    componentIds: ['component-pagination']
-  }
+    componentIds: ['component-pagination'],
+  },
 }
 
 export const Pagination = {
@@ -70,12 +70,12 @@ export const Pagination = {
   name: 'Pagination',
 
   args: {
-    size: 'small'
+    size: 'small',
   },
 
   parameters: {
     docs: {
-      disable: true
-    }
-  }
+      disable: true,
+    },
+  },
 }

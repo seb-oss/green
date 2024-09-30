@@ -14,8 +14,8 @@ export class GdsSignal extends GdsElement {
    * Change signal color based on variant
    */
   @styleExpressionProperty({
-    valueTemplate: v => `var(--gds-color-${v})`,
-    selector: '[part="signal"]'
+    valueTemplate: (v) => `var(--gds-color-${v})`,
+    selector: '[part="signal"]',
   })
   color?: string
 

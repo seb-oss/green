@@ -19,7 +19,7 @@ describe('[NgvCore]', () => {
       TestBed.configureTestingModule({
         declarations: [NgvBreadcrumbsComponent, NgvExternalLinkDirective],
         providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
-        imports: [RouterTestingModule]
+        imports: [RouterTestingModule],
       }).compileComponents()
     }))
 

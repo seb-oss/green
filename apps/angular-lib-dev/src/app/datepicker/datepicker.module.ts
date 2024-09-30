@@ -8,6 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [DatepickerComponent],
-  imports: [CommonModule, NggDatepickerModule, DatepickerRoutingModule, ReactiveFormsModule, FormsModule]
+  imports: [
+    CommonModule,
+    NggDatepickerModule,
+    DatepickerRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
 export class DatepickerModule {}

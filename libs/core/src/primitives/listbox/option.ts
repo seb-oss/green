@@ -49,7 +49,7 @@ export class GdsOption extends Focusable(GdsElement) {
    */
   @property({
     attribute: 'aria-hidden',
-    reflect: true
+    reflect: true,
   })
   get hidden(): boolean {
     return this.#hidden
@@ -68,7 +68,7 @@ export class GdsOption extends Focusable(GdsElement) {
    */
   @property({
     attribute: 'aria-selected',
-    reflect: true
+    reflect: true,
   })
   selected = false
 
@@ -85,7 +85,7 @@ export class GdsOption extends Focusable(GdsElement) {
     super()
 
     this.addEventListener('click', this.#emitSelect)
-    this.addEventListener('keydown', e => {
+    this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
       e.preventDefault()
       this.#emitSelect(e)
@@ -101,7 +101,9 @@ export class GdsOption extends Focusable(GdsElement) {
       this.setAttribute('aria-hidden', 'true')
     }
 
-    this.updateComplete.then(() => TransitionalStyles.instance.apply(this, 'gds-option'))
+    this.updateComplete.then(() =>
+      TransitionalStyles.instance.apply(this, 'gds-option'),
+    )
   }
 
   get parentElement() {
@@ -124,7 +126,9 @@ export class GdsOption extends Focusable(GdsElement) {
 
     const checkbox = html`
       <span class="checkbox ${classMap({ checked: this.selected })}">
-        ${this.selected ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>` : ''}
+        ${this.selected
+          ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>`
+          : ''}
       </span>
     `
 
@@ -143,9 +147,9 @@ export class GdsOption extends Focusable(GdsElement) {
         bubbles: true,
         composed: true,
         detail: {
-          value: this.value
-        }
-      })
+          value: this.value,
+        },
+      }),
     )
   }
 }

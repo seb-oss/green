@@ -64,11 +64,11 @@ export abstract class GdsFormControlElement<ValueT = any>
           tooShort: false,
           typeMismatch: false,
           valueMissing: false,
-          valid: true
+          valid: true,
         },
         willValidate: true,
         checkValidity: () => true,
-        reportValidity: () => true
+        reportValidity: () => true,
       }
     }
   }
@@ -90,8 +90,8 @@ export abstract class GdsFormControlElement<ValueT = any>
     attribute: 'aria-invalid',
     converter: {
       fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value?.toString()
-    }
+      toAttribute: (value: boolean) => value?.toString(),
+    },
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
@@ -99,11 +99,11 @@ export abstract class GdsFormControlElement<ValueT = any>
       {
         ...this.#internals.validity,
         customError: value,
-        valid: !value
+        valid: !value,
       },
       this.validationMessage || msg(`Error message.`),
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
-      this._getValidityAnchor() || undefined
+      this._getValidityAnchor() || undefined,
     )
     this.requestUpdate('invalid', oldValue)
     this.#internals.checkValidity()
@@ -153,13 +153,16 @@ export abstract class GdsFormControlElement<ValueT = any>
     const oldValue = this.invalid
 
     // If a validator dosn't return anything, we assume the control is valid.
-    const validity = this.validator.validate(this) || [{ ...this.validity, valid: true }, '']
+    const validity = this.validator.validate(this) || [
+      { ...this.validity, valid: true },
+      '',
+    ]
 
     this.#internals.setValidity(
       validity[0],
       validity[1],
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
-      this._getValidityAnchor()
+      this._getValidityAnchor(),
     )
 
     this.requestUpdate('invalid', oldValue)

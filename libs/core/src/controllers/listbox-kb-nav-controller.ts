@@ -69,7 +69,7 @@ export class ListboxKbNavController implements ReactiveController {
       const isNumber = key >= '0' && key <= '9'
       if (isLetter || isNumber) {
         // Find the first item that starts with the typed letter
-        const firstMatch = this.host.navigableItems.find(el => {
+        const firstMatch = this.host.navigableItems.find((el) => {
           const text = el.textContent?.trim().toLowerCase()
           return text?.startsWith(key)
         })

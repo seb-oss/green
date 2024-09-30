@@ -6,8 +6,8 @@ const config: StorybookConfig = {
   ...defaultConfig,
   framework: {
     name: '@storybook/html-webpack5',
-    options: {}
-  }
+    options: {},
+  },
 }
 
 export default config

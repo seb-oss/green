@@ -1,5 +1,11 @@
 import { useState, PropsWithChildren, HTMLProps, useLayoutEffect } from 'react'
-import { AlignContentType, AlignType, FlexDirectionType, FlexWrapType, JustifyContentType } from './types'
+import {
+  AlignContentType,
+  AlignType,
+  FlexDirectionType,
+  FlexWrapType,
+  JustifyContentType,
+} from './types'
 
 export interface FlexboxProps extends HTMLProps<HTMLDivElement> {
   alignContent?: AlignContentType
@@ -43,7 +49,15 @@ export const Flexbox = ({
     className && newClasses.push(className)
 
     setClasses(newClasses)
-  }, [alignContent, alignItems, alignSelf, justifyContent, flexDirection, flexWrap, className])
+  }, [
+    alignContent,
+    alignItems,
+    alignSelf,
+    justifyContent,
+    flexDirection,
+    flexWrap,
+    className,
+  ])
 
   return (
     <div className={flexClassName} {...props}>

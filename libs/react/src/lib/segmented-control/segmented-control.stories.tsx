@@ -1,7 +1,7 @@
 import { SegmentedControl, Segment } from './segmented-control'
 import { provideProtractorTestingSupport } from '@angular/platform-browser'
 
-const Template = props => (
+const Template = (props) => (
   <SegmentedControl {...props}>
     <Segment value="1">1 month</Segment>
     <Segment value="2">This year</Segment>
@@ -17,7 +17,7 @@ const Template = props => (
 export default {
   title: 'Components/SegmentedControl',
   component: SegmentedControl,
-  argTypes: {}
+  argTypes: {},
 }
 
 export const Default = {
@@ -25,6 +25,6 @@ export const Default = {
   name: 'SegmentedControl',
 
   args: {
-    onChange: console.log
-  }
+    onChange: console.log,
+  },
 }

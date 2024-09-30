@@ -65,7 +65,10 @@ export class AppElement extends LitElement {
   }
 
   disconnectedCallback() {
-    this.removeEventListener('view-change', this.handleViewChange as EventListener)
+    this.removeEventListener(
+      'view-change',
+      this.handleViewChange as EventListener,
+    )
     super.disconnectedCallback()
   }
 
@@ -82,11 +85,17 @@ export class AppElement extends LitElement {
             this.currentView,
             [
               ['login', () => html`<gds-login></gds-login>`],
-              ['form-validation', () => html`<form-validation></form-validation>`],
-              ['datepicker', () => html`<datepicker-example></datepicker-example>`],
-              ['calendar', () => html`<calendar-example></calendar-example>`]
+              [
+                'form-validation',
+                () => html`<form-validation></form-validation>`,
+              ],
+              [
+                'datepicker',
+                () => html`<datepicker-example></datepicker-example>`,
+              ],
+              ['calendar', () => html`<calendar-example></calendar-example>`],
             ],
-            () => html`No view selected`
+            () => html`No view selected`,
           )}
         </gds-container>
       </gds-theme>

@@ -6,6 +6,6 @@ import { NggProgressCircleComponent } from './progress-circle.component'
 @NgModule({
   declarations: [NggProgressCircleComponent],
   imports: [CommonModule],
-  exports: [NggProgressCircleComponent]
+  exports: [NggProgressCircleComponent],
 })
 export class NggProgressCircleModule {}

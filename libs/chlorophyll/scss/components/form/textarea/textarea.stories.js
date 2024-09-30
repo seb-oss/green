@@ -15,27 +15,27 @@ export default {
   title: 'Components/Form/Elements/Textarea',
 
   parameters: {
-    componentIds: ['component-input']
+    componentIds: ['component-input'],
   },
 
   argTypes: {
     validation: {
       control: 'select',
-      options: ['', 'is-valid', 'is-invalid']
+      options: ['', 'is-valid', 'is-invalid'],
     },
 
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     text: {
-      control: 'text'
+      control: 'text',
     },
 
     formInfo: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Textarea = {
@@ -44,7 +44,8 @@ export const Textarea = {
 
   args: {
     text: 'Textarea label',
-    formInfo: 'Lorem ipsum very long description of textarea and what should be entered',
-    enabled: true
-  }
+    formInfo:
+      'Lorem ipsum very long description of textarea and what should be entered',
+    enabled: true,
+  },
 }

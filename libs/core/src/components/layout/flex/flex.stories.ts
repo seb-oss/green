@@ -10,7 +10,7 @@ import './flex'
 const meta: Meta = {
   title: 'Docs/Layout/Flex',
   component: 'gds-flex',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -19,19 +19,19 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
-  }
+    controls: { expanded: true },
+  },
 }
 
 export const Flex: Story = {
   ...DefaultParams,
   name: 'Flex',
-  render: args => html`
+  render: (args) => html`
     <gds-flex align-items="space-between" justify-content="space-between">
       <gds-text>Flex</gds-text>
       <gds-text>Example</gds-text>
     </gds-flex>
-  `
+  `,
 }

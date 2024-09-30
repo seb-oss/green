@@ -45,7 +45,7 @@ export default function Grid({
   fluid,
   justify,
   align,
-  inlineSize
+  inlineSize,
 }: GridProps) {
   if (columns < 1 || columns > 24) {
     throw new Error('The columns prop must be between 1 and 24.')

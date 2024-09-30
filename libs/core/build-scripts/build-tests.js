@@ -6,10 +6,10 @@ await esbuild.build({
   bundle: true,
   tsconfig: 'libs/core/tsconfig.spec.json',
   alias: {
-    '@sebgroup/green-core': './dist/libs/core/src'
+    '@sebgroup/green-core': './dist/libs/core/src',
   },
   packages: 'external',
   target: 'es2022',
   platform: 'neutral',
-  outdir: 'dist/tests/core'
+  outdir: 'dist/tests/core',
 })

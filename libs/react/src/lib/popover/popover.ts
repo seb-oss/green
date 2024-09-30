@@ -9,5 +9,5 @@ PopoverTransitionalStyles.register()
 export const Popover = createComponent({
   tagName: getScopedTagName('gds-popover'),
   elementClass: GdsPopover,
-  react: React
+  react: React,
 })

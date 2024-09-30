@@ -16,7 +16,7 @@ describe('Badge', () => {
     render(
       <Badge badgeType="success" isCloseable>
         title
-      </Badge>
+      </Badge>,
     )
 
     expect(screen.getByRole('button').classList.contains('close')).toBe(true)

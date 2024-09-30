@@ -14,9 +14,9 @@ const meta: Meta = {
   title: 'Docs/Components/Filter Chips/Filter Chip',
   component: 'gds-filter-chip',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -25,15 +25,15 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
-    innerText: 'Filter chip'
-  }
+    innerText: 'Filter chip',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }

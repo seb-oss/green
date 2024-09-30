@@ -12,9 +12,9 @@ const reactWrapper = createComponent({
   react: React,
   events: {
     onChange: 'change',
-    onGdsDateFocused: 'gds-date-focused'
+    onGdsDateFocused: 'gds-date-focused',
   },
-  displayName: 'GdsCalendar'
+  displayName: 'GdsCalendar',
 })
 
 export default reactWrapper

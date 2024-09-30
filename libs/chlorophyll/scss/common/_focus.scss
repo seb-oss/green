@@ -48,18 +48,27 @@
 
   &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    );
   }
 }
 
-@mixin add-active-state($color: tokens.get(tokens.$blue, 0), $fadeActiveHover: false) {
+@mixin add-active-state(
+  $color: tokens.get(tokens.$blue, 0),
+  $fadeActiveHover: false
+) {
   &[aria-selected='true'],
   &:active,
   &.active,
   &.active:hover,
   &:active:hover {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1);
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    );
   }
   @if ($fadeActiveHover) {
     &[aria-selected]:hover,
@@ -83,6 +92,9 @@
 @mixin add-active-focus-state($color: tokens.get(tokens.$blue, 2)) {
   &:focus-visible {
     @include functions.desired-color-combination(tokens.$white, $color, 20%, 3);
-    border-color: nth(functions.desired-color-combination(tokens.$white, $color, 20%, 3), 1) !important;
+    border-color: nth(
+      functions.desired-color-combination(tokens.$white, $color, 20%, 3),
+      1
+    ) !important;
   }
 }

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs'
 import { NggOnScrollDirective, ON_SCROLL_TOKEN } from './on-scroll.directive'
 
 @Component({
-  template: '<div nggOnScroll><</div>'
+  template: '<div nggOnScroll><</div>',
 })
 class TestComponent {}
 
@@ -21,14 +21,16 @@ describe('NggOnScrollDirective', () => {
       providers: [
         {
           provide: ON_SCROLL_TOKEN,
-          useValue: onScroll$
-        }
-      ]
+          useValue: onScroll$,
+        },
+      ],
     })
     const fixture = TestBed.createComponent(TestComponent)
     parent = fixture.debugElement.nativeElement
     fixture.detectChanges()
-    component = fixture.debugElement.query(By.directive(NggOnScrollDirective)).injector.get(NggOnScrollDirective)
+    component = fixture.debugElement
+      .query(By.directive(NggOnScrollDirective))
+      .injector.get(NggOnScrollDirective)
   })
 
   it('should create', () => {

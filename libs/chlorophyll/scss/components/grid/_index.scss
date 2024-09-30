@@ -21,7 +21,10 @@
     @include mixins.make-cssgrid();
     display: grid;
     gap: var(--#{tokens.$variable-prefix}gap, #{tokens.$grid-gutter-width});
-    grid-template-columns: repeat(var(--#{tokens.$variable-prefix}columns, #{tokens.$grid-columns}), 1fr);
+    grid-template-columns: repeat(
+      var(--#{tokens.$variable-prefix}columns, #{tokens.$grid-columns}),
+      1fr
+    );
     grid-template-rows: repeat(var(--#{tokens.$variable-prefix}rows, 1), 1fr);
   }
 }

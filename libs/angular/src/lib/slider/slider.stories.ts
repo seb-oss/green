@@ -8,89 +8,89 @@ export default {
   component: NggSliderComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggSliderModule]
-    })
+      imports: [NggSliderModule],
+    }),
   ],
   parameters: {
-    componentIds: ['component-slider']
+    componentIds: ['component-slider'],
   },
   argTypes: {
     name: {
       name: 'name',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     defaultValue: {
       name: 'defaultValue',
       defaultValue: 50,
       control: {
-        type: 'number'
-      }
+        type: 'number',
+      },
     },
     min: {
       name: 'min',
       defaultValue: 0,
       control: {
-        type: 'number'
-      }
+        type: 'number',
+      },
     },
     max: {
       name: 'max',
       defaultValue: 100,
       control: {
-        type: 'number'
-      }
+        type: 'number',
+      },
     },
     step: {
       name: 'step',
       defaultValue: 1,
       control: {
-        type: 'number'
-      }
+        type: 'number',
+      },
     },
     label: {
       name: 'label',
       defaultValue: 'Slider label text in one line',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     instruction: {
       name: 'instruction',
       defaultValue: 'Element instruction',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     hasTextbox: {
       name: 'hasTextbox',
       control: {
-        type: 'boolean'
-      }
+        type: 'boolean',
+      },
     },
     unitLabel: {
       name: 'Unit label',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     errorMessage: {
       name: 'errorMessage',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     disabled: {
       name: 'disabled',
       control: {
-        type: 'boolean'
-      }
-    }
-  }
+        type: 'boolean',
+      },
+    },
+  },
 } as Meta<NggSliderComponent>
 
-const Template: StoryFn<NggSliderComponent> = args => {
+const Template: StoryFn<NggSliderComponent> = (args) => {
   return {
     template: `
       <ngg-slider
@@ -106,8 +106,8 @@ const Template: StoryFn<NggSliderComponent> = args => {
       </ngg-slider>
     `,
     props: {
-      ...args
-    }
+      ...args,
+    },
   }
 }
 
@@ -115,23 +115,23 @@ export const Default = Template.bind({})
 
 export const Textbox = Template.bind({})
 Textbox.args = {
-  hasTextbox: true
+  hasTextbox: true,
 }
 
 export const UnitTextbox = Template.bind({})
 UnitTextbox.args = {
   hasTextbox: true,
-  unitLabel: 'kr'
+  unitLabel: 'kr',
 }
 
 export const Error = Template.bind({})
 Error.args = {
   hasTextbox: true,
-  errorMessage: 'Error text can be quite long'
+  errorMessage: 'Error text can be quite long',
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
   hasTextbox: true,
-  disabled: true
+  disabled: true,
 }

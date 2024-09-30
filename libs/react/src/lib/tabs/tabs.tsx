@@ -1,4 +1,9 @@
-import React, { useState, ReactNode, ReactElement, PropsWithChildren } from 'react'
+import React, {
+  useState,
+  ReactNode,
+  ReactElement,
+  PropsWithChildren,
+} from 'react'
 
 export interface IList {
   text?: string
@@ -32,7 +37,9 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     if (event.currentTarget.ariaDisabled !== 'true') {
-      const focusedIndex: number = parseInt(event.currentTarget.dataset.indexNumber as string)
+      const focusedIndex: number = parseInt(
+        event.currentTarget.dataset.indexNumber as string,
+      )
       setSelectedTab(focusedIndex)
       onTabChange && onTabChange(focusedIndex)
     }
@@ -41,9 +48,9 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
   function getDefaultSelectedTab(): number {
     let selectedTabIndex = 0
 
-    if (children) selectedTabIndex = children.findIndex(x => x.props.selected)
+    if (children) selectedTabIndex = children.findIndex((x) => x.props.selected)
     else if (list) {
-      selectedTabIndex = list.findIndex(x => x.selected)
+      selectedTabIndex = list.findIndex((x) => x.selected)
     }
 
     return selectedTabIndex !== -1 ? selectedTabIndex : 0
@@ -83,12 +90,20 @@ export const Tabs = ({ list, onTabChange, children }: TabsProps) => {
       <section>
         {!children &&
           list?.map((value: IList, index: number) => (
-            <article role="tabpanel" key={index} aria-hidden={selectedTab !== index}>
+            <article
+              role="tabpanel"
+              key={index}
+              aria-hidden={selectedTab !== index}
+            >
               {value.text}
             </article>
           ))}
         {children?.map((tab: ReactElement<TabProps>, index: number) => (
-          <article role="tabpanel" key={index} aria-hidden={selectedTab !== index}>
+          <article
+            role="tabpanel"
+            key={index}
+            aria-hidden={selectedTab !== index}
+          >
             {selectedTab === index && tab.props.children}
           </article>
         ))}

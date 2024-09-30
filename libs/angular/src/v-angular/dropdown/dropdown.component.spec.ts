@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common'
 import { Component, Directive } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
@@ -14,7 +19,7 @@ import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.componen
   selector: 'nggv-dropdown-list',
   template: '',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['state', 'scrollOffset', 'options', 'expanded', 'optionContentTpl']
+  inputs: ['state', 'scrollOffset', 'options', 'expanded', 'optionContentTpl'],
 })
 class DropdownListStubComponent {}
 
@@ -34,14 +39,20 @@ describe('[NgvCore]', () => {
           { provide: NgControl, useValue: { control: new FormControl() } },
           {
             provide: NgvDropdownListComponent,
-            useValue: DropdownListStubComponent
+            useValue: DropdownListStubComponent,
           },
-          DropdownUtils
+          DropdownUtils,
         ],
-        imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nTestModule]
+        imports: [
+          CommonModule,
+          FormsModule,
+          ReactiveFormsModule,
+          NgvI18nTestModule,
+        ],
       }).compileComponents()
 
-      fixture = TestBed.createComponent<NgvDropdownComponent>(NgvDropdownComponent)
+      fixture =
+        TestBed.createComponent<NgvDropdownComponent>(NgvDropdownComponent)
       component = fixture.componentInstance
     }))
 
@@ -50,21 +61,26 @@ describe('[NgvCore]', () => {
     })
 
     describe('set options', () => {
-      const dummyoptions: Option<string | null, string>[] = [{ key: 'dummy', label: 'dummy' }]
+      const dummyoptions: Option<string | null, string>[] = [
+        { key: 'dummy', label: 'dummy' },
+      ]
 
       describe.each`
         description                                                      | required | options                          | expectedLength
         ${'should add default option if not required'}                   | ${false} | ${dummyoptions}                  | ${2}
         ${'should not add default option if required'}                   | ${true}  | ${dummyoptions}                  | ${1}
         ${'should not add default option if null option already exists'} | ${false} | ${[{ key: null, label: 'bla' }]} | ${1}
-      `('(with or without default option)', ({ description, required, options, expectedLength }) => {
-        it(description, () => {
-          component.required = required
-          component.options = [...options]
-          fixture.detectChanges()
-          expect(component.options.length).toEqual(expectedLength)
-        })
-      })
+      `(
+        '(with or without default option)',
+        ({ description, required, options, expectedLength }) => {
+          it(description, () => {
+            component.required = required
+            component.options = [...options]
+            fixture.detectChanges()
+            expect(component.options.length).toEqual(expectedLength)
+          })
+        },
+      )
 
       it('should call updateModel with', () => {
         component.required = true
@@ -84,8 +100,8 @@ describe('[NgvCore]', () => {
             isFirstChange: () => true,
             firstChange: true,
             currentValue: true,
-            previousValue: undefined
-          }
+            previousValue: undefined,
+          },
         })
         expect(component.options.length).toEqual(1)
         expect(component.options[0]).toEqual(dummyoptions[0])
@@ -95,8 +111,8 @@ describe('[NgvCore]', () => {
             isFirstChange: () => false,
             firstChange: false,
             currentValue: false,
-            previousValue: true
-          }
+            previousValue: true,
+          },
         })
         expect(component.options.length).toEqual(2)
         expect(component.options[1]).toEqual(dummyoptions[0])

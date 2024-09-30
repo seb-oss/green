@@ -8,6 +8,6 @@ import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
   declarations: [NgvRadioComponent],
   imports: [CommonModule, NgvI18nModule],
   exports: [NgvRadioComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NgvRadioModule {}

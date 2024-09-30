@@ -7,6 +7,6 @@ import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 @NgModule({
   declarations: [NgvCheckboxComponent],
   imports: [CommonModule, NgvI18nModule],
-  exports: [NgvCheckboxComponent]
+  exports: [NgvCheckboxComponent],
 })
 export class NgvCheckboxModule {}

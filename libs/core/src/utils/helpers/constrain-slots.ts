@@ -17,7 +17,8 @@ import { LitElement } from 'lit'
  */
 export function constrainSlots(self: LitElement) {
   self.updateComplete.then(() => {
-    const slots = self.shadowRoot?.querySelectorAll<HTMLSlotElement>('slot[gds-allow]')
+    const slots =
+      self.shadowRoot?.querySelectorAll<HTMLSlotElement>('slot[gds-allow]')
     if (!slots) return
 
     // Trim whitespace-only text nodes
@@ -28,7 +29,10 @@ export function constrainSlots(self: LitElement) {
     }
 
     const constrain = (slot: HTMLSlotElement) => {
-      const allowed = [...(slot.getAttribute('gds-allow')?.split(' ') || []), 'slot']
+      const allowed = [
+        ...(slot.getAttribute('gds-allow')?.split(' ') || []),
+        'slot',
+      ]
       for (const node of Array.from(slot.assignedNodes())) {
         if (!allowed.includes(node.nodeName.toLowerCase())) {
           node.parentNode?.removeChild(node)
@@ -36,7 +40,7 @@ export function constrainSlots(self: LitElement) {
       }
     }
 
-    slots.forEach(slot => {
+    slots.forEach((slot) => {
       constrain(slot)
       slot.addEventListener('slotchange', () => constrain(slot))
     })

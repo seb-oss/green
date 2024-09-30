@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common'
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing'
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing'
 
 import { TranslocoModule } from '@ngneat/transloco'
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
@@ -14,9 +20,15 @@ import { NgvTypeaheadInputComponent } from './typeahead-input.component'
 
   selector: 'nggv-dropdown',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['placeholder', 'options', 'scrollOffset', 'allowNullishOption', 'selectOnSingleOption'],
+  inputs: [
+    'placeholder',
+    'options',
+    'scrollOffset',
+    'allowNullishOption',
+    'selectOnSingleOption',
+  ],
   // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-  outputs: ['expandedChange']
+  outputs: ['expandedChange'],
 })
 export class DropdownStubComponent {
   @Input() selectOnSingleOption?: boolean
@@ -33,12 +45,17 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvTypeaheadInputComponent, DropdownStubComponent, NgvInputComponent],
-        imports: [CommonModule, TranslocoModule, NgvI18nTestModule]
+        declarations: [
+          NgvTypeaheadInputComponent,
+          DropdownStubComponent,
+          NgvInputComponent,
+        ],
+        imports: [CommonModule, TranslocoModule, NgvI18nTestModule],
       })
       fixture = TestBed.createComponent(NgvTypeaheadInputComponent)
       component = fixture.componentInstance
-      component.hostComponent = new DropdownStubComponent() as NgvDropdownComponent
+      component.hostComponent =
+        new DropdownStubComponent() as NgvDropdownComponent
     }))
 
     it('should create', () => {
@@ -70,7 +87,9 @@ describe('[NgvCore]', () => {
 
       it("calls set input with selected value when it's opened", () => {
         const dummyValue = 'Dummy'
-        const formatterSpy = jest.spyOn(component as any, 'formatSelected').mockReturnValue(dummyValue)
+        const formatterSpy = jest
+          .spyOn(component as any, 'formatSelected')
+          .mockReturnValue(dummyValue)
         const setInputSpy = jest.spyOn(component as any, 'setInput')
         fixture.detectChanges()
         component.hostComponent.expandedChange.next(true)
@@ -102,28 +121,38 @@ describe('[NgvCore]', () => {
         ${{ key: 0, label: 'Real string' }}          | ${'Real string'}
         ${{ key: '', label: 'Real string' }}         | ${'Real string'}
         ${{ key: 'real key', label: 'Real string' }} | ${'Real string'}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const res = (component as any).formatSelected(value)
-        expect(res).toStrictEqual(expectedValue)
-      })
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
 
       it.each`
         value                                                 | expectedValue
         ${{ key: 'real key', label: 'Real string' }}          | ${'REAL STRING'}
         ${{ key: 'real key', wrongLabelProp: 'Real string' }} | ${''}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const formatterFunc = (v: { key: any; label: string }) => v.label?.toUpperCase()
-        component.selectedFormatter = formatterFunc
-        const res = (component as any).formatSelected(value)
-        expect(res).toStrictEqual(expectedValue)
-      })
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const formatterFunc = (v: { key: any; label: string }) =>
+            v.label?.toUpperCase()
+          component.selectedFormatter = formatterFunc
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
     })
 
     describe('setInput', () => {
       it('sets input but does not trigger filter', () => {
         const dummyValue = 'Test123'
         const onChangeSpy = jest.spyOn(component as any, 'onChange')
-        const inputChangeSpy = jest.spyOn((component as any).inputChange$, 'next')
+        const inputChangeSpy = jest.spyOn(
+          (component as any).inputChange$,
+          'next',
+        )
         ;(component as any).setInput(dummyValue, false)
 
         expect(component.state).toEqual(dummyValue)
@@ -134,7 +163,10 @@ describe('[NgvCore]', () => {
       it('sets input but and trigger filter', () => {
         const dummyValue = 'Test789'
         const onChangeSpy = jest.spyOn(component as any, 'onChange')
-        const inputChangeSpy = jest.spyOn((component as any).inputChange$, 'next')
+        const inputChangeSpy = jest.spyOn(
+          (component as any).inputChange$,
+          'next',
+        )
         ;(component as any).setInput(dummyValue, true)
 
         expect(component.state).toEqual(dummyValue)

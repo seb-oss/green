@@ -4,7 +4,7 @@ import {
   ILabelAndLabelInformation,
   IValidator,
   randomId,
-  validateClassName
+  validateClassName,
 } from '@sebgroup/extract'
 import { ChevronDown } from '../icons'
 import { FormItem } from '../formItem'
@@ -13,7 +13,10 @@ import classNames from 'classnames'
 export interface SelectProps
   extends IExpandableInformation,
     ILabelAndLabelInformation,
-    React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+    React.DetailedHTMLProps<
+      React.SelectHTMLAttributes<HTMLSelectElement>,
+      HTMLSelectElement
+    > {
   label: string
   info?: string
   validator?: IValidator | undefined
@@ -41,18 +44,19 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       required,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [uuid] = useState(id)
 
     const selectClassName = classNames('gds-select', {
-      [`${validateClassName(validator?.indicator)}`]: validator
+      [`${validateClassName(validator?.indicator)}`]: validator,
     })
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0,
+      [`${uuid}_message`]:
+        validator?.message !== undefined && validator.message.length > 0,
       [`${uuid}_info`]: info || props.labelInformation,
-      [`gds-expandable-info-${uuid}`]: expandableInfo
+      [`gds-expandable-info-${uuid}`]: expandableInfo,
     })
 
     return (
@@ -79,16 +83,22 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </div>
       </FormItem>
     )
-  }
+  },
 )
 
-type OptionProps = React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>
+type OptionProps = React.DetailedHTMLProps<
+  React.OptionHTMLAttributes<HTMLOptionElement>,
+  HTMLOptionElement
+>
 
 export const Option = (props: OptionProps) => {
   return <option {...props} />
 }
 
-type OptGroupProps = React.DetailedHTMLProps<React.OptgroupHTMLAttributes<HTMLOptGroupElement>, HTMLOptGroupElement>
+type OptGroupProps = React.DetailedHTMLProps<
+  React.OptgroupHTMLAttributes<HTMLOptGroupElement>,
+  HTMLOptGroupElement
+>
 
 export const OptionGroup = (props: OptGroupProps) => {
   return <optgroup {...props} />

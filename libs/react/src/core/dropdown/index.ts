@@ -12,9 +12,9 @@ const reactWrapper = createComponent({
   react: React,
   events: {
     onChange: 'change',
-    onGdsUiState: 'gds-ui-state'
+    onGdsUiState: 'gds-ui-state',
   },
-  displayName: 'GdsDropdown'
+  displayName: 'GdsDropdown',
 })
 
 export default reactWrapper

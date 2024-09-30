@@ -11,7 +11,7 @@ import {
   TRANSLOCO_FALLBACK_STRATEGY,
   TRANSLOCO_INTERCEPTOR,
   TRANSLOCO_MISSING_HANDLER,
-  TRANSLOCO_TRANSPILER
+  TRANSLOCO_TRANSPILER,
 } from '@ngneat/transloco'
 
 @Pipe({ name: 'transloco' })
@@ -48,21 +48,21 @@ export class TranslocoMockInterceptor implements TranslocoInterceptor {
   providers: [
     {
       provide: TRANSLOCO_TRANSPILER,
-      useClass: TranslocoMockTranspiler
+      useClass: TranslocoMockTranspiler,
     },
     {
       provide: TRANSLOCO_INTERCEPTOR,
-      useClass: TranslocoMockInterceptor
+      useClass: TranslocoMockInterceptor,
     },
     {
       provide: TRANSLOCO_FALLBACK_STRATEGY,
-      useClass: TranslocoMockStrategy
+      useClass: TranslocoMockStrategy,
     },
     {
       provide: TRANSLOCO_MISSING_HANDLER,
       useClass: TranslocoMockMissingHandler,
-      deps: [TRANSLOCO_TRANSPILER]
-    }
-  ]
+      deps: [TRANSLOCO_TRANSPILER],
+    },
+  ],
 })
 export class NgvI18nTestModule {}

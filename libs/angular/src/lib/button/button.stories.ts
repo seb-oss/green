@@ -7,19 +7,19 @@ export default {
   component: NggButtonComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggButtonModule]
-    })
+      imports: [NggButtonModule],
+    }),
   ],
   parameters: {
-    componentIds: ['component-button']
-  }
+    componentIds: ['component-button'],
+  },
 } as Meta<NggButtonComponent>
 
 const Template: StoryFn = () => {
   return {
     template: `
     <button ngg-button>Button</button>
-    `
+    `,
   }
 }
 
@@ -33,7 +33,7 @@ const TemplateTypes: StoryFn = () => {
       <button ngg-button type="submit">Submit</button>
       <button ngg-button type="reset">Reset</button>
     </div>
-    `
+    `,
   }
 }
 export const Types = TemplateTypes.bind({})
@@ -46,7 +46,7 @@ const TemplateVariants: StoryFn = () => {
       <button ngg-button variant="secondary">Secondary</button>
       <button ngg-button variant="ghost">Ghost</button>
     </div>
-    `
+    `,
   }
 }
 export const Variants = TemplateVariants.bind({})
@@ -59,7 +59,7 @@ const TemplateSizes: StoryFn = () => {
       <button ngg-button size="small">Small</button>
       <button ngg-button size="large">Large</button>
     </div>
-    `
+    `,
   }
 }
 export const Sizes = TemplateSizes.bind({})

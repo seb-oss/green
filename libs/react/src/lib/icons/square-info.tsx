@@ -5,7 +5,11 @@ import { IconProps } from '../../types/props'
  * @deprecated
  * This component is deprecated. Use `SquareInfo` instead from `@sebgroup/green-react`.
  */
-export const SquareInfo = ({ focusable = false, title, ...props }: IconProps) => {
+export const SquareInfo = ({
+  focusable = false,
+  title,
+  ...props
+}: IconProps) => {
   let id
   if (title) id = randomId()
   return (

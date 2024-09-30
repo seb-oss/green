@@ -28,7 +28,9 @@ export default function CustomImage({
   return (
     <figure>
       <picture>
-        {isDarkMode && <source srcSet={dark} media="(prefers-color-scheme: dark)" />}
+        {isDarkMode && (
+          <source srcSet={dark} media="(prefers-color-scheme: dark)" />
+        )}
         <img alt={alt} {...props} />
       </picture>
       {caption && <figcaption dangerouslySetInnerHTML={{ __html: caption }} />}

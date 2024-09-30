@@ -1,7 +1,9 @@
 import AlertRibbon from './alert-ribbon'
 import { Button } from '../form/button/button'
 
-const Template = ({ children, ...props }) => <AlertRibbon {...props}>{children}</AlertRibbon>
+const Template = ({ children, ...props }) => (
+  <AlertRibbon {...props}>{children}</AlertRibbon>
+)
 
 const Footer = () => (
   <>
@@ -35,7 +37,7 @@ const FooterDanger = () => (
 
 export default {
   title: 'Components/AlertRibbon',
-  component: AlertRibbon
+  component: AlertRibbon,
 }
 
 export const Default = {
@@ -43,7 +45,7 @@ export const Default = {
   name: 'AlertRibbon',
 
   parameters: {
-    componentIds: ['component-alertribbon']
+    componentIds: ['component-alertribbon'],
   },
 
   args: {
@@ -53,8 +55,8 @@ export const Default = {
     children:
       'Eftersom du vill låna med någon annan än din partner vill vi prata med dig. Du är välkommen att kontakta oss på 0771-365 365 eller boka ett rådgivningsmöte',
     isCloseable: false,
-    closeText: ''
-  }
+    closeText: '',
+  },
 }
 
 export const Info = Template.bind({})
@@ -64,12 +66,13 @@ Info.args = {
   footer: null,
   children: (
     <>
-      AlertRibbon content placed inside a paragraph. Inline links, <a href="#">info</a>, will inherit color from alert
-      to make sure contrast is applied.
+      AlertRibbon content placed inside a paragraph. Inline links,{' '}
+      <a href="#">info</a>, will inherit color from alert to make sure contrast
+      is applied.
     </>
   ),
   isCloseable: false,
-  closeText: ''
+  closeText: '',
 }
 
 export const Success = Template.bind({})
@@ -79,12 +82,13 @@ Success.args = {
   footer: null,
   children: (
     <>
-      AlertRibbon content placed inside a paragraph. Inline links, <a href="#">success</a>, will inherit color from
-      alert to make sure contrast is applied.
+      AlertRibbon content placed inside a paragraph. Inline links,{' '}
+      <a href="#">success</a>, will inherit color from alert to make sure
+      contrast is applied.
     </>
   ),
   isCloseable: false,
-  closeText: ''
+  closeText: '',
 }
 
 export const Warning = Template.bind({})
@@ -94,12 +98,13 @@ Warning.args = {
   footer: null,
   children: (
     <>
-      AlertRibbon content placed inside a paragraph. Inline links, <a href="#">warning</a>, will inherit color from
-      alert to make sure contrast is applied, like this .
+      AlertRibbon content placed inside a paragraph. Inline links,{' '}
+      <a href="#">warning</a>, will inherit color from alert to make sure
+      contrast is applied, like this .
     </>
   ),
   isCloseable: false,
-  closeText: ''
+  closeText: '',
 }
 
 export const Danger = Template.bind({})
@@ -109,12 +114,13 @@ Danger.args = {
   footer: null,
   children: (
     <>
-      AlertRibbon content placed inside a paragraph. Inline links, <a href="#">danger</a>, will inherit color from alert
-      to make sure contrast is applied, like this .
+      AlertRibbon content placed inside a paragraph. Inline links,{' '}
+      <a href="#">danger</a>, will inherit color from alert to make sure
+      contrast is applied, like this .
     </>
   ),
   isCloseable: false,
-  closeText: ''
+  closeText: '',
 }
 
 export const InfoWithCloseButton = Template.bind({})
@@ -128,7 +134,7 @@ InfoWithCloseButton.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const SuccessWithCloseButton = Template.bind({})
@@ -142,7 +148,7 @@ SuccessWithCloseButton.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const WarningWithCloseButton = Template.bind({})
@@ -156,7 +162,7 @@ WarningWithCloseButton.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const DangerWithCloseButton = Template.bind({})
@@ -170,7 +176,7 @@ DangerWithCloseButton.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const InfoWithFooterButtons = Template.bind({})
@@ -184,7 +190,7 @@ InfoWithFooterButtons.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const SuccessWithFooterButtons = Template.bind({})
@@ -198,7 +204,7 @@ SuccessWithFooterButtons.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const WarningWithFooterButtons = Template.bind({})
@@ -212,7 +218,7 @@ WarningWithFooterButtons.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }
 
 export const DangerWithFooterButtons = Template.bind({})
@@ -226,5 +232,5 @@ DangerWithFooterButtons.args = {
     </>
   ),
   isCloseable: true,
-  closeText: ''
+  closeText: '',
 }

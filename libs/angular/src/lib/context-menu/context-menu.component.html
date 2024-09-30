@@ -1,6 +1,14 @@
-<gds-context-menu *nggCoreElement data-testid="context-menu" [placement]="placement" [open]="isActive">
+<gds-context-menu
+  *nggCoreElement
+  data-testid="context-menu"
+  [placement]="placement"
+  [open]="isActive"
+>
   <div style="display: contents" slot="trigger">
-    <ng-container [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"> </ng-container>
+    <ng-container
+      [ngTemplateOutlet]="menuAnchorTemplate ?? defaultButtonTemplate"
+    >
+    </ng-container>
   </div>
   <ng-container *ngFor="let menuItem of menuItems">
     <gds-menu-item *nggCoreElement (click)="onItemClick(menuItem)">

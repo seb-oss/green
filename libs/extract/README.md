@@ -61,9 +61,9 @@ export const createCalculator = (listener: (data: CalculatorData) => void, optio
       [7, 8, 9],
       [4, 5, 6],
       [1, 2, 3],
-      [0, '.']
+      [0, '.'],
     ],
-    operators: ['/', '*', '-', '+', '=']
+    operators: ['/', '*', '-', '+', '='],
   }
 
   // Create interaction object
@@ -72,14 +72,14 @@ export const createCalculator = (listener: (data: CalculatorData) => void, optio
       data = clear(data) // pure function
       listener(data)
     },
-    pressDigit: digit => {
+    pressDigit: (digit) => {
       data = pressDigit(data, digit) // reducer
       listener(data)
     },
-    pressOperator: operator => {
+    pressOperator: (operator) => {
       data = pressOperator(data, operator) // reducer
       listener(data)
-    }
+    },
   }
 
   // Add keyboard interactions to element

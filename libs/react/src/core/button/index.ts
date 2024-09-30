@@ -11,9 +11,9 @@ const reactWrapper = createComponent({
   elementClass: GdsButton,
   react: React,
   events: {
-    onClick: 'click'
+    onClick: 'click',
   },
-  displayName: 'GdsButton'
+  displayName: 'GdsButton',
 })
 
 export default reactWrapper

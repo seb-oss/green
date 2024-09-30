@@ -4,7 +4,7 @@ import React, { InputHTMLAttributes, RefObject, useMemo, useRef } from 'react'
 const useInput = (
   props: InputHTMLAttributes<HTMLInputElement>,
   onChanges?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  onChangeInput?: (value: string) => string
+  onChangeInput?: (value: string) => string,
 ): InputHTMLAttributes<HTMLInputElement> & {
   ref: RefObject<HTMLInputElement>
 } => {
@@ -20,7 +20,7 @@ const useInput = (
     ...props,
     id,
     ref,
-    onChange
+    onChange,
   }
 }
 

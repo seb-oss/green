@@ -1,4 +1,11 @@
-const Template = ({ heading, closeButton, body, button, primaryButton, link }) => `
+const Template = ({
+  heading,
+  closeButton,
+  body,
+  button,
+  primaryButton,
+  link,
+}) => `
   <section class="card">
     ${
       heading || closeButton
@@ -25,34 +32,34 @@ export default {
   title: 'Components/Card',
 
   parameters: {
-    componentIds: ['component-card']
+    componentIds: ['component-card'],
   },
 
   argTypes: {
     heading: {
-      control: 'text'
+      control: 'text',
     },
 
     body: {
-      control: 'text'
+      control: 'text',
     },
 
     link: {
-      control: 'text'
+      control: 'text',
     },
 
     button: {
-      control: 'text'
+      control: 'text',
     },
 
     primaryButton: {
-      control: 'text'
+      control: 'text',
     },
 
     closeButton: {
-      control: 'boolean'
-    }
-  }
+      control: 'boolean',
+    },
+  },
 }
 
 export const Card = {
@@ -64,6 +71,6 @@ export const Card = {
     body: 'Card body',
     link: '',
     button: '',
-    primaryButton: ''
-  }
+    primaryButton: '',
+  },
 }

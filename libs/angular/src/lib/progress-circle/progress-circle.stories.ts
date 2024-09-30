@@ -7,41 +7,49 @@ export default {
   component: NggProgressCircleComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggProgressCircleModule]
-    })
+      imports: [NggProgressCircleModule],
+    }),
   ],
   argTypes: {
     theme: {
-      options: ['success', 'warning', 'info', 'danger', 'light', 'dark', 'disabled'],
+      options: [
+        'success',
+        'warning',
+        'info',
+        'danger',
+        'light',
+        'dark',
+        'disabled',
+      ],
       control: 'radio',
       name: 'Theme',
-      defaultValue: 'warning'
+      defaultValue: 'warning',
     },
     value: {
       control: {
         type: 'number',
         min: 0,
-        max: 100
+        max: 100,
       },
       name: 'Value',
-      defaultValue: '70'
-    }
+      defaultValue: '70',
+    },
   },
-  parameters: {}
+  parameters: {},
 } as Meta<NggProgressCircleComponent>
 
-const Template: StoryFn<NggProgressCircleComponent> = args => ({
+const Template: StoryFn<NggProgressCircleComponent> = (args) => ({
   template: `
       <ngg-progress-circle [theme]="theme" [value]="value">
         <div>Current progress is</div>
         <div style="margin:6px 0;font-size:32px;font-weight:700;line-height:32px;">70%</div>
         <div>out of 100</div>
       </ngg-progress-circle>`,
-  props: args
+  props: args,
 })
 
 export const Default = Template.bind({})
 Default.args = {
   theme: 'warning',
-  value: 70
+  value: 70,
 }

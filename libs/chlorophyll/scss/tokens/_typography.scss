@@ -5,7 +5,7 @@ $font-size: (
   'm': 1rem,
   'l': 1.25rem,
   'xl': 2rem,
-  'xxl': 3rem
+  'xxl': 3rem,
 );
 
 $font-sizes: (
@@ -13,7 +13,7 @@ $font-sizes: (
   1: map.get($font-size, 'm'),
   2: map.get($font-size, 'l'),
   3: map.get($font-size, 'xl'),
-  4: map.get($font-size, 'xxl')
+  4: map.get($font-size, 'xxl'),
 );
 
 $font-scale: (
@@ -33,7 +33,7 @@ $font-scale: (
   // 48px
   8: 4rem,
   // 64px
-  9: 6rem // 96px,
+  9: 6rem // 96px,,
 );
 
 @function font-scale($step) {
@@ -59,7 +59,7 @@ $line-height-scale: (
   // 56px
   9: 4.5rem,
   // 72px
-  10: 6.25rem // 100px,
+  10: 6.25rem // 100px,,
 );
 
 @function line-height-scale($step) {
@@ -70,7 +70,7 @@ $font-weights: (
   'light': 300,
   'regular': 400,
   'medium': 500,
-  'bold': 800
+  'bold': 800,
 );
 
 @function font-weight($weight) {
@@ -86,20 +86,20 @@ $display-01: (
     font-size: font-scale(9),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(10),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(8),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(9),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(7),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(8),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-01: (
@@ -107,20 +107,20 @@ $heading-01: (
     font-size: font-scale(7),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(8),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(6),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(7),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(5),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(7),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-02: (
@@ -128,20 +128,20 @@ $heading-02: (
     font-size: font-scale(5),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(6),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(4),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(5),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(4),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(5),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-03: (
@@ -149,20 +149,20 @@ $heading-03: (
     font-size: font-scale(4),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(5),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(3),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(4),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(3),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(5),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-04: (
@@ -170,20 +170,20 @@ $heading-04: (
     font-size: font-scale(3),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(4),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(3),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(4),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(3),
     font-weight: font-weight('regular'),
     line-height: line-height-scale(4),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-05: (
@@ -191,20 +191,20 @@ $heading-05: (
     font-size: font-scale(2),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(3),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(2),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(3),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(2),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(3),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $heading-06: (
@@ -212,34 +212,34 @@ $heading-06: (
     font-size: font-scale(1),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(2),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   tablet: (
     font-size: font-scale(1),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(2),
-    letter-spacing: 0
+    letter-spacing: 0,
   ),
   mobile: (
     font-size: font-scale(1),
     font-weight: font-weight('medium'),
     line-height: line-height-scale(2),
-    letter-spacing: 0
-  )
+    letter-spacing: 0,
+  ),
 );
 
 $body-01: (
   font-size: font-scale(2),
   font-weight: font-weight('regular'),
   line-height: line-height-scale(3),
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $body-02: (
   font-size: font-scale(1),
   font-weight: font-weight('regular'),
   line-height: line-height-scale(3),
-  letter-spacing: 0
+  letter-spacing: 0,
 );
 
 $headings: (
@@ -248,5 +248,5 @@ $headings: (
   3: $heading-03,
   4: $heading-04,
   5: $heading-05,
-  6: $heading-06
+  6: $heading-06,
 );

@@ -19,9 +19,9 @@ const meta: Meta = {
   component: 'gds-grouped-list',
   subcomponents: { ListItem: 'gds-list-item' },
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -30,25 +30,25 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   argTypes: {
     items: {
-      control: { type: 'array' }
-    }
+      control: { type: 'array' },
+    },
   },
   args: {
     innerHTML: `<gds-list-item>Item 1</gds-list-item>
 <gds-list-item>Item 2</gds-list-item>
 <gds-list-item>Item 3</gds-list-item>`,
-    label: 'Grouped list label'
-  }
+    label: 'Grouped list label',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -57,7 +57,7 @@ export const Basic: Story = {
 export const WithValues: Story = {
   ...DefaultParams,
   name: 'Grouped list with values',
-  render: args => html`
+  render: (args) => html`
     <gds-grouped-list label="Example with values">
       <gds-list-item>
         <div>Key 1</div>
@@ -80,7 +80,7 @@ export const WithValues: Story = {
         <strong>Value 5</strong>
       </gds-list-item>
     </gds-grouped-list>
-  `
+  `,
 }
 
 /**
@@ -89,7 +89,7 @@ export const WithValues: Story = {
 export const WithValuesAndAction: Story = {
   ...DefaultParams,
   name: 'Grouped list with values and action',
-  render: args => html`
+  render: (args) => html`
     <gds-grouped-list label="Example with links">
       <gds-list-item>
         <div>Key 1</div>
@@ -127,7 +127,7 @@ export const WithValuesAndAction: Story = {
         </div>
       </gds-list-item>
     </gds-grouped-list>
-  `
+  `,
 }
 
 /**
@@ -135,7 +135,7 @@ export const WithValuesAndAction: Story = {
  */
 export const AdjustingAppearance: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-grouped-list label="Example of left aligned list">
       <gds-list-item style="justify-content: left">
         <div>Key 1</div>
@@ -174,5 +174,5 @@ export const AdjustingAppearance: Story = {
         <strong>Value 3</strong>
       </gds-list-item>
     </gds-grouped-list>
-  `
+  `,
 }

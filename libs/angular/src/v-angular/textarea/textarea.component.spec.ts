@@ -1,7 +1,12 @@
 import '../core/core.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
 import { TranslocoModule } from '@ngneat/transloco'
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
@@ -21,7 +26,12 @@ describe('[NgvCore]', () => {
       TestBed.configureTestingModule({
         declarations: [NgvTextareaComponent, CharacterCountdownDirective],
         providers: [{ provide: NgControl, useValue: new FormControl() }],
-        imports: [FormsModule, ReactiveFormsModule, TranslocoModule, NgvI18nTestModule]
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          TranslocoModule,
+          NgvI18nTestModule,
+        ],
       }).compileComponents()
     }))
 

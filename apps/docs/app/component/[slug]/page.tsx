@@ -13,15 +13,18 @@ type Props = {
 }
 
 export const generateStaticParams = (): any => {
-  return allComponents.map(component => ({
-    slug: component.url_path.replace('/component/', '')
+  return allComponents.map((component) => ({
+    slug: component.url_path.replace('/component/', ''),
   }))
 }
 
-export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = params
 
-  const component = allComponents.find(component => {
+  const component = allComponents.find((component) => {
     if (component.url_path !== '/component/' + slug) {
       return false
     }
@@ -37,14 +40,20 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
 
   return {
     title: component.title + ' — Green Design System',
-    description: component.summary
+    description: component.summary,
   }
 }
 
-export default function ComponentPage({ params }: { params: { slug: string } }) {
+export default function ComponentPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const { slug } = params
 
-  const component = allComponents.find(component => component.url_path === '/component/' + slug)
+  const component = allComponents.find(
+    (component) => component.url_path === '/component/' + slug,
+  )
 
   if (!component) {
     notFound()
@@ -65,9 +74,9 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
             url: `https://seb.io/component/${slug}`,
             author: {
               '@type': 'Company',
-              name: 'SEB'
-            }
-          })
+              name: 'SEB',
+            },
+          }),
         }}
       />
       <Head>

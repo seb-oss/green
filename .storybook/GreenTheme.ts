@@ -35,5 +35,5 @@ export default create({
   inputBg: '#ffffff',
   inputBorder: '#cececa',
   inputTextColor: '#353531',
-  inputBorderRadius: 1
+  inputBorderRadius: 1,
 })

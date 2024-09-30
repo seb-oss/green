@@ -31,7 +31,10 @@
     "update-deps-and-release": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["nx run tokens:update-dependencies", "nx run tokens:version-and-release"],
+        "commands": [
+          "nx run tokens:update-dependencies",
+          "nx run tokens:version-and-release"
+        ],
         "parallel": false
       }
     },

@@ -1,7 +1,7 @@
 import { Flexbox } from '../'
 import { Card } from '../../card/card'
 
-const Template = props => (
+const Template = (props) => (
   <div className="custom-card-storybook">
     <Styles />
     <Flexbox {...props}>
@@ -33,7 +33,7 @@ const Styles = () => (
 
 export default {
   title: 'Components/Layout/Flexbox',
-  component: Flexbox
+  component: Flexbox,
 }
 
 export const Default = {
@@ -41,6 +41,6 @@ export const Default = {
   name: 'Flexbox',
 
   args: {
-    justifyContent: 'between'
-  }
+    justifyContent: 'between',
+  },
 }

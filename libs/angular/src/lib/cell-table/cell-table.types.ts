@@ -20,7 +20,9 @@ export type TableHeaderListValueType =
   | ''
 
 /** Table Header List Item Interface */
-export interface TableHeaderListItem<T extends Record<string, unknown> = Record<string, unknown>> {
+export interface TableHeaderListItem<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> {
   /** The label displayed */
   label: string
   /** the key selector corresponding to to the TableList Item which this column is targeting */
@@ -39,7 +41,9 @@ export interface TableRow {
 }
 
 /** The information on the currently selected sort: column name, type and asc/desc  */
-export interface SortInfo<T extends Record<string, unknown> = { [k: string]: any }> {
+export interface SortInfo<
+  T extends Record<string, unknown> = { [k: string]: any },
+> {
   /** column name */
   column: keyof T
   /** is ascending (false for descending) */

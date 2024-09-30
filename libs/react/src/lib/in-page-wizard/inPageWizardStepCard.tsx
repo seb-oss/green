@@ -36,11 +36,11 @@ export const InPageWizardStepCard = ({
   hideFooter = false,
   nextBtnIcon,
   nextBtnText = 'Next',
-  onEditClick
+  onEditClick,
 }: InPageWizardStepCardProps) => {
   const sectionClassName = classNames('gds-in-page-wizard-step-card', 'card', {
     active: stepStatus === 'IsActive',
-    completed: stepStatus === 'IsComplete'
+    completed: stepStatus === 'IsComplete',
   })
 
   return (
@@ -49,7 +49,9 @@ export const InPageWizardStepCard = ({
         <div className="gds-in-page-wizard-step-card__header__icon">
           <Check />
         </div>
-        <div className="gds-in-page-wizard-step-card__header__progress">{stepText}</div>
+        <div className="gds-in-page-wizard-step-card__header__progress">
+          {stepText}
+        </div>
         <div className="gds-in-page-wizard-step-card__header__title">
           <h2>{title}</h2>
         </div>

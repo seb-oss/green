@@ -55,7 +55,11 @@
 
   @if $index {
     @return str-slice($string, 1, $index - 1) + $replace +
-      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
   }
 
   @return $string;
@@ -93,16 +97,28 @@ $enable-important-utilities: true;
     }
 
     // Use custom class if present
-    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+    $property-class: if(
+      map-has-key($utility, class),
+      map-get($utility, class),
+      nth($properties, 1)
+    );
     $property-class: if($property-class == null, '', $property-class);
 
     // State params to generate pseudo-classes
     $state: if(map-has-key($utility, state), map-get($utility, state), ());
 
-    $infix: if($property-class == '' and str-slice($infix, 1, 1) == '-', str-slice($infix, 2), $infix);
+    $infix: if(
+      $property-class == '' and str-slice($infix, 1, 1) == '-',
+      str-slice($infix, 2),
+      $infix
+    );
 
     // Don't prefix if value key is null (eg. with shadow class)
-    $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
+    $property-class-modifier: if(
+      $key,
+      if($property-class == '' and $infix == '', '', '-') + $key,
+      ''
+    );
 
     // Disable RFS for now
     /*@if map-get($utility, rfs) {
@@ -133,7 +149,9 @@ $enable-important-utilities: true;
         }
 
         @each $pseudo in $state {
-          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+          .#{$property-class
+            + $infix
+            + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
             --#{config.$variable-prefix}#{$property-class}: #{$value};
           }
         }
@@ -145,14 +163,18 @@ $enable-important-utilities: true;
                 --#{config.$variable-prefix}#{$local-var}: #{$value};
               }
             }
-            #{$property}: $value if($enable-important-utilities, !important, null);
+            #{$property}: $value
+              if($enable-important-utilities, !important, null);
           }
         }
 
         @each $pseudo in $state {
-          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+          .#{$property-class
+            + $infix
+            + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
             @each $property in $properties {
-              #{$property}: $value if($enable-important-utilities, !important, null);
+              #{$property}: $value
+                if($enable-important-utilities, !important, null);
             }
           }
         }

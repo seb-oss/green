@@ -4,7 +4,7 @@ import ListItem from './listItem'
 
 const tableListItem: TableListProps = {
   title: 'title',
-  definition: ['description']
+  definition: ['description'],
 }
 
 describe('List', () => {
@@ -18,7 +18,7 @@ describe('List', () => {
     render(
       <ListItem listType="table" tableRowData={tableListItem}>
         First
-      </ListItem>
+      </ListItem>,
     )
 
     expect(screen.getByText('description')).toBeTruthy()

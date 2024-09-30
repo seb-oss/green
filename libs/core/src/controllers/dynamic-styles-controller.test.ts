@@ -44,9 +44,10 @@ describe('DynamicStylesController', () => {
     const adoptedStyleSheets = element.shadowRoot?.adoptedStyleSheets || []
     const allStyles = [
       ...(styleElement ? [styleElement.textContent] : []),
-      ...adoptedStyleSheets.map(sheet => sheet.cssRules[0].cssText)
+      ...adoptedStyleSheets.map((sheet) => sheet.cssRules[0].cssText),
     ]
-    expect(allStyles.some(style => style && style.includes('color: red'))).to.be.true
+    expect(allStyles.some((style) => style && style.includes('color: red'))).to
+      .be.true
   })
 
   it('clears all styles', () => {

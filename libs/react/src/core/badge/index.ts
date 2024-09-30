@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsBadge,
   react: React,
   events: {},
-  displayName: 'GdsBadge'
+  displayName: 'GdsBadge',
 })
 
 export default reactWrapper

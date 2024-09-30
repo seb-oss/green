@@ -17,7 +17,7 @@ describe('[NgvModal]', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NgvDialogComponent],
-        imports: [NgvI18nTestModule]
+        imports: [NgvI18nTestModule],
       }).compileComponents()
     }))
 

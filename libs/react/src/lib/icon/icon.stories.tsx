@@ -2,14 +2,14 @@ import * as Icons from './icons/index'
 import { useState } from 'react'
 import { IconBank, IconRocket } from './icons/index'
 
-const Template = props => {
+const Template = (props) => {
   const [searchTerm, setSearchTerm] = useState('')
 
-  const handleSearch = event => {
+  const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase())
   }
 
-  const handleIconClick = iconName => {
+  const handleIconClick = (iconName) => {
     const importStatement = `import { ${iconName} } from '@sebgroup/green-react/src/lib/icon/icons/${iconName}.js'`
     const jsxCode = `<${iconName} />`
     const template = `${importStatement}\n\n${jsxCode}`
@@ -17,17 +17,28 @@ const Template = props => {
     alert(`Copied to clipboard:\n${template}`)
   }
 
-  const filteredIcons = Object.keys(Icons).filter(iconName => iconName.toLowerCase().includes(searchTerm))
+  const filteredIcons = Object.keys(Icons).filter((iconName) =>
+    iconName.toLowerCase().includes(searchTerm),
+  )
 
   return (
     <div className="custom-card-storybook">
       <Styles />
-      <input type="text" id="icon-search" placeholder="Search icons..." onChange={handleSearch} />
+      <input
+        type="text"
+        id="icon-search"
+        placeholder="Search icons..."
+        onChange={handleSearch}
+      />
       <div className="icon-showcase">
-        {filteredIcons.map(iconName => {
+        {filteredIcons.map((iconName) => {
           const IconComponent = Icons[iconName]
           return (
-            <div key={iconName} className="icon-container" onClick={() => handleIconClick(iconName)}>
+            <div
+              key={iconName}
+              className="icon-container"
+              onClick={() => handleIconClick(iconName)}
+            >
               <IconComponent />
               <code>
                 {`<`}
@@ -76,10 +87,10 @@ const Styles = () => (
 )
 
 export default {
-  title: 'Components/Icon'
+  title: 'Components/Icon',
 }
 
 export const Default = {
   render: Template.bind({}),
-  name: 'Icons'
+  name: 'Icons',
 }

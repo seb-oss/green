@@ -11,7 +11,11 @@ import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
 import { useEffect } from 'react'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   useEffect(() => {
     const callCC = () => {
       let cc
@@ -27,10 +31,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
     if (
       location.hostname === 'seb.io' &&
-      document.cookie.split('; ').find(row => row.startsWith('GDS Cookie Consent'))
+      document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('GDS Cookie Consent'))
     ) {
       const script = document.createElement('script')
-      script.src = 'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
+      script.src =
+        'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
       script.type = 'application/javascript'
       document.head.appendChild(script)
 
@@ -48,7 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="theme" defaultTheme="system" enableColorScheme={false} enableSystem>
+        <ThemeProvider
+          attribute="theme"
+          defaultTheme="system"
+          enableColorScheme={false}
+          enableSystem
+        >
           <Main>
             <Alert />
             <Header />

@@ -60,12 +60,16 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   /* Hover state */
-  #{$selector}:hover #{$checkbox-selector}:not(.disabled, :disabled, :checked, :indeterminate) ~ i {
+  #{$selector}:hover
+    #{$checkbox-selector}:not(.disabled, :disabled, :checked, :indeterminate)
+    ~ i {
     border-color: var(--gds-comp-checkbox-hover-border-color);
     box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-hover-border-color);
   }
 
-  #{$selector}:hover #{$checkbox-selector}:not(:checked, :indeterminate, :disabled, .disabled) ~ i::after {
+  #{$selector}:hover
+    #{$checkbox-selector}:not(:checked, :indeterminate, :disabled, .disabled)
+    ~ i::after {
     border-color: var(--gds-comp-checkbox-hover-border-color);
     opacity: 1;
   }
@@ -86,7 +90,8 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector} #{$checkbox-selector}:indeterminate ~ i::after {
-    border-bottom: 2px solid var(--gds-comp-checkbox-border-color-selected, #fff);
+    border-bottom: 2px solid
+      var(--gds-comp-checkbox-border-color-selected, #fff);
     border-left: none;
     transform: scale(1) rotate(0deg);
     opacity: 1;
@@ -145,7 +150,8 @@ $invalid-color: tokens.$intent-danger-background;
   }
 
   #{$selector} #{$checkbox-selector} ~ i::after {
-    border-bottom: 3px solid var(--gds-comp-checkbox-border-color-selected, #fff);
+    border-bottom: 3px solid
+      var(--gds-comp-checkbox-border-color-selected, #fff);
     border-left: 3px solid var(--gds-comp-checkbox-border-color-selected, #fff);
     height: 0.5rem;
     width: 1rem;

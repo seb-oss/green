@@ -13,13 +13,21 @@ interface ButtonGroupProps {
   id?: string
 }
 type Props = ButtonProps & JSX.IntrinsicAttributes
-export const ButtonGroup = ({ children, className, selectedIndex, variant, id }: ButtonGroupProps) => {
+export const ButtonGroup = ({
+  children,
+  className,
+  selectedIndex,
+  variant,
+  id,
+}: ButtonGroupProps) => {
   const [selected, setSelected] = useState(selectedIndex)
   const [buttons, setButtons] = useState<Props[]>([])
 
   useEffect(() => {
-    const buttonProps: Props[] = (children instanceof Array ? children : [children])
-      .filter(b => b && (b as ReactElement).props)
+    const buttonProps: Props[] = (
+      children instanceof Array ? children : [children]
+    )
+      .filter((b) => b && (b as ReactElement).props)
       .map((b, ix) => {
         const bp = (b as ReactElement).props
         const props: Props = {
@@ -27,11 +35,11 @@ export const ButtonGroup = ({ children, className, selectedIndex, variant, id }:
           variant,
           key: bp.key || `btn_${ix}`,
           active: ix === selected,
-          onClick: e => {
+          onClick: (e) => {
             setSelected(ix)
             if (bp.onClick) bp.onClick(e)
           },
-          className: classNames(bp.className, className)
+          className: classNames(bp.className, className),
         }
         return props
       })

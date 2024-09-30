@@ -40,7 +40,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
    */
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   /**
@@ -138,7 +138,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       negative: this.variant === 'negative',
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
-      tertiary: this.rank === 'tertiary'
+      tertiary: this.rank === 'tertiary',
     }
 
     const tag = this.#isLink ? literal`a` : literal`button`
@@ -155,7 +155,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
         @click="${this.#handleClick}"
-        ${forwardAttributes(attr => attr.name.startsWith('gds-aria') || attr.name === 'gds-role')}
+        ${forwardAttributes((attr) => attr.name.startsWith('gds-aria') || attr.name === 'gds-role')}
       >
         <slot name="lead"></slot>
         <slot @slotchange=${this.#mainSlotChange}></slot>
@@ -171,10 +171,14 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = (this._mainSlot?.assignedNodes() ?? []) as GdsElement[]
+    const assignedNodes = (this._mainSlot?.assignedNodes() ??
+      []) as GdsElement[]
 
     this.#isIconButton =
-      assignedNodes.length === 1 && assignedNodes.some(node => node.nodeName.toLowerCase().startsWith('gds-icon'))
+      assignedNodes.length === 1 &&
+      assignedNodes.some((node) =>
+        node.nodeName.toLowerCase().startsWith('gds-icon'),
+      )
 
     this.requestUpdate()
   }
@@ -184,8 +188,8 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       new CustomEvent('gds-click', {
         bubbles: true,
         composed: true,
-        detail: e
-      })
+        detail: e,
+      }),
     )
 
     if (this.form && !this.#isLink) {

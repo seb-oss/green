@@ -2,6 +2,6 @@ import { Component } from '@angular/core'
 
 @Component({
   template: ` <p>Option A</p> `,
-  styles: []
+  styles: [],
 })
 export class OptionAComponent {}

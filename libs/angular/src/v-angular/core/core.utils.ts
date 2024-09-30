@@ -15,12 +15,21 @@ export interface OptionGroup<T extends Option<any, any>> {
 export type OptionBase<T extends Option<any, any>> = T | OptionGroup<T>
 
 @Injectable()
-export class DropdownUtils<K = string | null, V = string, T extends Option<K, V> = Option<K, V>> {
-  public flattenOptions(options: OptionBase<T>[] | undefined, mustHaveLabel: boolean): T[] {
+export class DropdownUtils<
+  K = string | null,
+  V = string,
+  T extends Option<K, V> = Option<K, V>,
+> {
+  public flattenOptions(
+    options: OptionBase<T>[] | undefined,
+    mustHaveLabel: boolean,
+  ): T[] {
     if (!options) return [] as T[]
     return options.reduce((acc, current) => {
-      if (this.isGroup(current)) return acc.concat(this.flattenOptions(current.options, mustHaveLabel))
-      if (!current.disabled && !(mustHaveLabel && !current.label)) acc.push(current) // skip disabled
+      if (this.isGroup(current))
+        return acc.concat(this.flattenOptions(current.options, mustHaveLabel))
+      if (!current.disabled && !(mustHaveLabel && !current.label))
+        acc.push(current) // skip disabled
       return acc
     }, [] as T[])
   }

@@ -12,7 +12,7 @@ type Breadcrumb = {
 @Component({
   selector: 'nggv-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.scss']
+  styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class NgvBreadcrumbsComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */

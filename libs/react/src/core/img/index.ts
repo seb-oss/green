@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsImg,
   react: React,
   events: {},
-  displayName: 'GdsImg'
+  displayName: 'GdsImg',
 })
 
 export default reactWrapper

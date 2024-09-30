@@ -10,7 +10,7 @@ import {
   OnInit,
   Optional,
   Output,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core'
 
 import {
@@ -21,7 +21,7 @@ import {
   Subscription,
   takeUntil,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs'
 
 import { Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
@@ -32,12 +32,12 @@ import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.co
 
 @Directive({
   selector: 'nggv-input[ngvTypeahead]',
-  standalone: true
+  standalone: true,
 })
 export class NgvTypeaheadDirective<
     K = string | null | undefined,
     V = string | null | undefined,
-    T extends Option<K, V> = Option<K, V>
+    T extends Option<K, V> = Option<K, V>,
   >
   implements OnInit, OnDestroy
 {
@@ -104,7 +104,7 @@ export class NgvTypeaheadDirective<
     private viewContainerRef: ViewContainerRef,
     private element: ElementRef,
     @Optional() @Host() private hostDropdown: NgvDropdownComponent,
-    @Optional() @Host() private hostInput: NgvInputComponent
+    @Optional() @Host() private hostInput: NgvInputComponent,
   ) {}
 
   ngOnInit() {
@@ -131,11 +131,13 @@ export class NgvTypeaheadDirective<
       .pipe(
         takeUntil(this.onDestroy$),
         distinctUntilChanged(),
-        tap(inputValue => this.filterPhraseChange.emit(inputValue)),
+        tap((inputValue) => this.filterPhraseChange.emit(inputValue)),
         this.typeaheadFunction ? this.typeaheadFunction : () => from([]),
-        withLatestFrom(this.inputValue$)
+        withLatestFrom(this.inputValue$),
       )
-      .subscribe(([filteredValues, input]) => this.setOptions(filteredValues, input))
+      .subscribe(([filteredValues, input]) =>
+        this.setOptions(filteredValues, input),
+      )
   }
 
   /**
@@ -146,7 +148,9 @@ export class NgvTypeaheadDirective<
    * */
   private createInput() {
     // Create the input component
-    this.inputComponent = this.viewContainerRef.createComponent(NgvTypeaheadInputComponent)
+    this.inputComponent = this.viewContainerRef.createComponent(
+      NgvTypeaheadInputComponent,
+    )
     // Forward necessary info to component
     this.inputComponent.setInput('hostComponent', this.hostDropdown)
     this.inputComponent.setInput('selectedFormatter', this.selectedFormatter)
@@ -154,12 +158,14 @@ export class NgvTypeaheadDirective<
     // Listen to value changes
     this.inputComponent.instance.ngvInput
       .pipe(takeUntil(this.onDestroy$))
-      .subscribe(inputValue => this.inputValue$.next(inputValue))
+      .subscribe((inputValue) => this.inputValue$.next(inputValue))
   }
 
   /** @internal Creates a nggv-dropdown-list if the host itself is a nggv-input */
   private createDropdownList() {
-    this.dropdownListComponent = this.viewContainerRef.createComponent(NgvTypeaheadDropdownListComponent)
+    this.dropdownListComponent = this.viewContainerRef.createComponent(
+      NgvTypeaheadDropdownListComponent,
+    )
     this.dropdownListComponent.setInput('hostComponent', this.hostInput)
   }
 
@@ -174,7 +180,12 @@ export class NgvTypeaheadDirective<
     if (!filteredValues) return
     // Conditionally add empty or nullish option if it's allowed, the input is empty and does not already contain nullish
     const allowNullish =
-      this.allowUnselect && !input && !(Object.keys(filteredValues[0]).includes('key') && filteredValues[0].key == null)
+      this.allowUnselect &&
+      !input &&
+      !(
+        Object.keys(filteredValues[0]).includes('key') &&
+        filteredValues[0].key == null
+      )
     if (filteredValues.length === 0) {
       filteredValues = [this.emptyOption]
     } else if (allowNullish) {
@@ -191,7 +202,10 @@ export class NgvTypeaheadDirective<
     }
 
     if (!this.hostIsDropdown) {
-      this.dropdownListComponent.setInput('options', this.formatOptions(filteredValues))
+      this.dropdownListComponent.setInput(
+        'options',
+        this.formatOptions(filteredValues),
+      )
       this.dropdownListComponent.setInput('textToHighlight', `${input || ''}`)
     }
   }
@@ -204,6 +218,8 @@ export class NgvTypeaheadDirective<
   private formatOptions(options: T[]): OptionBase<any>[] {
     if (!options) return []
     if (!this.resultFormatter) return options
-    return options.map(value => (value?.label ? this.resultFormatter?.(value) : value))
+    return options.map((value) =>
+      value?.label ? this.resultFormatter?.(value) : value,
+    )
   }
 }

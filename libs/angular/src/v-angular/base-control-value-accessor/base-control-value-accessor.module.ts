@@ -4,6 +4,6 @@ import { NgvBaseControlValueAccessorComponent } from './base-control-value-acces
 @NgModule({
   declarations: [NgvBaseControlValueAccessorComponent],
   imports: [],
-  exports: [NgvBaseControlValueAccessorComponent]
+  exports: [NgvBaseControlValueAccessorComponent],
 })
 export class NgvBaseControlValueAccessorModule {}

@@ -5,14 +5,19 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core'
-import { IPaginationEvent, IPaginationI18n, PaginationI18n, PaginationSize } from '@sebgroup/extract'
+import {
+  IPaginationEvent,
+  IPaginationI18n,
+  PaginationI18n,
+  PaginationSize,
+} from '@sebgroup/extract'
 
 @Component({
   selector: 'ngg-pagination',
   templateUrl: './pagination.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggPaginationComponent implements OnChanges {
   /** Internationalization labels */
@@ -58,7 +63,12 @@ export class NggPaginationComponent implements OnChanges {
   @Output() page = new EventEmitter<IPaginationEvent>()
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.displayPages || changes.pageIndex || changes.pageSize || changes.length) {
+    if (
+      changes.displayPages ||
+      changes.pageIndex ||
+      changes.pageSize ||
+      changes.length
+    ) {
       this._pageIndicies = this.getDisplayedPageIndicies()
     }
   }
@@ -128,7 +138,8 @@ export class NggPaginationComponent implements OnChanges {
     }
 
     // All pages can fit
-    if (this.totalPages <= this.displayPages) return [...Array(this.totalPages - 2).keys()].map(index => index + 1)
+    if (this.totalPages <= this.displayPages)
+      return [...Array(this.totalPages - 2).keys()].map((index) => index + 1)
 
     // Only first & last
     if (this.totalPages === 2) return []

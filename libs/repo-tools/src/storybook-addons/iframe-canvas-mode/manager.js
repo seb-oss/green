@@ -23,14 +23,19 @@ export function initIFrameCanvasMode() {
         zoom: { hidden: false },
         eject: { hidden: true },
         copy: { hidden: true },
-        fullscreen: { hidden: true }
-      }
+        fullscreen: { hidden: true },
+      },
     })
 
     let storybookConfig = JSON.parse(localStorage.getItem('storybook-layout'))
-    const isPanelWithinSpec = c => c.resizerNav.x === 320 && c.resizerPanel.x === window.innerWidth - 320
+    const isPanelWithinSpec = (c) =>
+      c.resizerNav.x === 320 && c.resizerPanel.x === window.innerWidth - 320
 
-    if (typeof storybookConfig === 'object' && storybookConfig !== null && !isPanelWithinSpec(storybookConfig)) {
+    if (
+      typeof storybookConfig === 'object' &&
+      storybookConfig !== null &&
+      !isPanelWithinSpec(storybookConfig)
+    ) {
       storybookConfig.resizerPanel.x = window.innerWidth - 320
       storybookConfig.resizerNav.x = 320
       localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
@@ -38,7 +43,7 @@ export function initIFrameCanvasMode() {
     } else if (storybookConfig === null) {
       storybookConfig = {
         resizerNav: { x: 320, y: 0 },
-        resizerPanel: { x: window.innerWidth - 320, y: 0 }
+        resizerPanel: { x: window.innerWidth - 320, y: 0 },
       }
       localStorage.setItem('storybook-layout', JSON.stringify(storybookConfig))
       document.location.reload()

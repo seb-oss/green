@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsVideo,
   react: React,
   events: {},
-  displayName: 'GdsVideo'
+  displayName: 'GdsVideo',
 })
 
 export default reactWrapper

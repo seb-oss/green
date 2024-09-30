@@ -28,7 +28,7 @@ export class GdsMenuButton extends GdsElement {
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   /**
@@ -88,7 +88,7 @@ export class GdsMenuButton extends GdsElement {
     const classes = {
       button: true,
       selected: this.selected,
-      compact: this.compact
+      compact: this.compact,
     }
 
     const tag = this.#isLink ? literal`a` : literal`button`

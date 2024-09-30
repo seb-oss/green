@@ -22,9 +22,9 @@ const meta: Meta = {
   title: 'Docs/Components/Form/Datepicker',
   component: 'gds-datepicker',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -33,19 +33,19 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
     controls: {
-      expanded: true
-    }
+      expanded: true,
+    },
   },
   args: {
-    label: 'Pick a date'
-  }
+    label: 'Pick a date',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -59,12 +59,16 @@ export const Basic: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-datepicker label="Using slots" onchange="console.log(this.value)">
-      <span slot="sub-label"> A sub-label can be added as additional description </span>
-      <span slot="message"> Instructive message. Will turn red if there is a validation error </span>
+      <span slot="sub-label">
+        A sub-label can be added as additional description
+      </span>
+      <span slot="message">
+        Instructive message. Will turn red if there is a validation error
+      </span>
     </gds-datepicker>
-  `
+  `,
 }
 
 /**
@@ -72,7 +76,12 @@ export const Usage: Story = {
  */
 export const WeekNumbers: Story = {
   ...DefaultParams,
-  render: args => html` <gds-datepicker label="With week numbers" show-week-numbers></gds-datepicker> `
+  render: (args) => html`
+    <gds-datepicker
+      label="With week numbers"
+      show-week-numbers
+    ></gds-datepicker>
+  `,
 }
 
 /**
@@ -81,9 +90,13 @@ export const WeekNumbers: Story = {
 export const MinMaxDates: Story = {
   ...DefaultParams,
   name: 'Min and max dates',
-  render: args => html`
-    <gds-datepicker label="Using min and max dates" min="2022-11-11" max="2024-02-20"></gds-datepicker>
-  `
+  render: (args) => html`
+    <gds-datepicker
+      label="Using min and max dates"
+      min="2022-11-11"
+      max="2024-02-20"
+    ></gds-datepicker>
+  `,
 }
 
 /**
@@ -96,13 +109,13 @@ export const MinMaxDates: Story = {
  */
 export const Disabled: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-datepicker
       label="Disabled weekends"
       disabled-weekends
       disabled-dates="2024-03-08, 2024-04-12, 2024-03-18, 2024-03-19"
     ></gds-datepicker>
-  `
+  `,
 }
 
 /**
@@ -112,5 +125,11 @@ export const Disabled: Story = {
  */
 export const InputFieldSize: Story = {
   ...DefaultParams,
-  render: args => html` <gds-datepicker label="A small datepicker" hide-label size="small"></gds-datepicker> `
+  render: (args) => html`
+    <gds-datepicker
+      label="A small datepicker"
+      hide-label
+      size="small"
+    ></gds-datepicker>
+  `,
 }

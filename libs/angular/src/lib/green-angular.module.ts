@@ -32,7 +32,7 @@ import { NggCellTableModule } from './cell-table'
     NggInPageWizardModule,
     NggCellTableModule,
     NggSharedModule,
-    NggSortableListModule
-  ]
+    NggSortableListModule,
+  ],
 })
 export class NggModule {}

@@ -9,7 +9,7 @@ describe('Select', () => {
       <Select>
         <Option value={'first-value'}>First value</Option>
         <Option value={'second-value'}>Second value</Option>
-      </Select>
+      </Select>,
     )
     expect(screen.getByText('First value')).toBeTruthy()
     expect(screen.getByText('Second value')).toBeTruthy()
@@ -26,10 +26,12 @@ describe('Select', () => {
           <Option value={'second-first-value'}>Second first value</Option>
           <Option value={'second-second-value'}>Second second value</Option>
         </OptionGroup>
-      </Select>
+      </Select>,
     )
 
-    expect(container.querySelector('[label="second-group"]')?.tagName).toEqual('OPTGROUP')
+    expect(container.querySelector('[label="second-group"]')?.tagName).toEqual(
+      'OPTGROUP',
+    )
   })
 
   it('should trigger onChange when user changes select option', async function () {
@@ -39,13 +41,13 @@ describe('Select', () => {
       <Select
         testId="test-select-id"
         defaultValue={'first-value'}
-        onChange={event => {
+        onChange={(event) => {
           onChangeMock(event)
         }}
       >
         <Option value={'first-value'}>First value</Option>
         <Option value={'second-value'}>Second value</Option>
-      </Select>
+      </Select>,
     )
 
     const select = await screen.findByTestId('test-select-id')

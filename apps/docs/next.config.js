@@ -12,30 +12,35 @@ const nextConfig = {
   swcMinify: true,
   images: {
     unoptimized: true,
-    domains: ['images.unsplash.com', 'random.unsplash.com', 'github.com', 'avatars.githubusercontent.com'],
-    formats: ['image/webp']
+    domains: [
+      'images.unsplash.com',
+      'random.unsplash.com',
+      'github.com',
+      'avatars.githubusercontent.com',
+    ],
+    formats: ['image/webp'],
   },
   experimental: {
     esmExternals: true,
-    urlImports: ['https://cdn.skypack.dev']
+    urlImports: ['https://cdn.skypack.dev'],
   },
   transpilePackages: ['@babel/runtime'],
   output: 'export',
   nx: {
     // Set this to true if you would like to use SVGR
     // See: https://github.com/gregberge/svgr
-    svgr: false
-  }
+    svgr: false,
+  },
 }
 
 const withContentlayer = createContentlayerPlugin({
-  configPath: 'apps/docs/contentlayer.config.ts'
+  configPath: 'apps/docs/contentlayer.config.ts',
 })
 
 const plugins = [
   // Add more Next.js plugins to this list if needed.
   withNx,
-  withContentlayer
+  withContentlayer,
 ]
 
 module.exports = composePlugins(...plugins)(nextConfig)

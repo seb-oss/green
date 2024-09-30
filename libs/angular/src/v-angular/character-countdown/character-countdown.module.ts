@@ -6,6 +6,6 @@ import { CharacterCountdownDirective } from './character-countdown.directive'
 @NgModule({
   declarations: [CharacterCountdownDirective],
   imports: [CommonModule],
-  exports: [CharacterCountdownDirective]
+  exports: [CharacterCountdownDirective],
 })
 export class NggCharacterCountdownDirectiveModule {}

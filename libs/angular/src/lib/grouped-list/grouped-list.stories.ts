@@ -11,13 +11,13 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [NggCoreWrapperModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }),
   ],
-  parameters: {}
+  parameters: {},
 } as Meta
 
-const Template: StoryFn = args => ({
+const Template: StoryFn = (args) => ({
   template: `
     <gds-grouped-list *nggCoreElement label="${args.label}">
         <gds-list-item *nggCoreElement>Item 1</gds-list-item>
@@ -25,11 +25,11 @@ const Template: StoryFn = args => ({
         <gds-list-item *nggCoreElement>Item 3</gds-list-item>
     </gds-grouped-list>
     `,
-  props: args
+  props: args,
 })
 
 export const Default = Template.bind({})
 
 Default.args = {
-  label: 'Grouped list label'
+  label: 'Grouped list label',
 }

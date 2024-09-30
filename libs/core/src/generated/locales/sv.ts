@@ -45,5 +45,5 @@ export const templates = {
   sdc42f1da42d6411a: `Rensa text`,
   se0955919920ee87d: `Dag`,
   se4129fd6b9d7b4c2: `Sista tillgängliga datum`,
-  sf295af199c723ec8: `Fre`
+  sf295af199c723ec8: `Fre`,
 }

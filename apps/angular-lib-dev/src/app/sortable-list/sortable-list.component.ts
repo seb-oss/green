@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { SortableListItem, SortableListGroup } from '@sebgroup/green-angular'
 
 @Component({
-  templateUrl: './sortable-list.component.html'
+  templateUrl: './sortable-list.component.html',
 })
 export class SortableListComponent {
   groups: SortableListGroup[] = [
@@ -12,10 +12,10 @@ export class SortableListComponent {
         { id: 2, name: 'Item 2' },
         { id: 3, name: 'Item 3' },
         { id: 4, name: 'Item 4' },
-        { id: 5, name: 'Item 5' }
+        { id: 5, name: 'Item 5' },
       ],
       title: 'Group 1',
-      description: 'Description for group 1'
+      description: 'Description for group 1',
     },
     {
       items: [
@@ -23,11 +23,11 @@ export class SortableListComponent {
         { id: 7, name: 'Item 2' },
         { id: 8, name: 'Item 3' },
         { id: 9, name: 'Item 4' },
-        { id: 10, name: 'Item 5' }
+        { id: 10, name: 'Item 5' },
       ],
       title: 'Group 2',
-      description: 'Description for group 2'
-    }
+      description: 'Description for group 2',
+    },
   ]
 
   onItemSelected(event: any): void {

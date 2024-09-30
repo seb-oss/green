@@ -23,7 +23,9 @@ class ForwardAttributesDirective extends Directive {
   constructor(partInfo: PartInfo) {
     super(partInfo)
     if (partInfo.type !== PartType.ELEMENT) {
-      throw new Error('The `forwardAttributes` directive must be used in element bindings')
+      throw new Error(
+        'The `forwardAttributes` directive must be used in element bindings',
+      )
     }
   }
 
@@ -36,7 +38,7 @@ class ForwardAttributesDirective extends Directive {
     const host = part.options?.host as Element
 
     // TODO: Also remove attributes that are no longer present on the host
-    Array.from(host.attributes).forEach(attr => {
+    Array.from(host.attributes).forEach((attr) => {
       if (filter(attr)) {
         element.setAttribute(attr.name.replace('gds-', ''), attr.value)
       }

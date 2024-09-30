@@ -6,7 +6,7 @@ const RadioGroupTemplate = ({ ...props }) => <RadioGroup {...props} />
 
 export default {
   title: 'Components/Form/RadioButton',
-  component: RadioButton
+  component: RadioButton,
 }
 
 export const Default = {
@@ -14,15 +14,15 @@ export const Default = {
   name: 'RadioButton',
 
   parameters: {
-    componentIds: ['component-radiobutton']
+    componentIds: ['component-radiobutton'],
   },
 
   args: {
     label: 'Radio Button',
     value: 'Button value',
 
-    onChange: e => {
+    onChange: (e) => {
       console.log(e.target.checked)
-    }
-  }
+    },
+  },
 }

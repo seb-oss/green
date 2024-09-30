@@ -1,7 +1,11 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsContextMenu, GdsMenuItem, GdsMenuHeading } from '@sebgroup/green-core/components/context-menu/index.js'
+import {
+  GdsContextMenu,
+  GdsMenuItem,
+  GdsMenuHeading,
+} from '@sebgroup/green-core/components/context-menu/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -12,20 +16,20 @@ export const ContextMenu = createComponent({
   elementClass: GdsContextMenu,
   events: {
     onMenuItemClick: 'gds-menu-item-click',
-    onUiStateChange: 'gds-ui-state'
+    onUiStateChange: 'gds-ui-state',
   },
-  react: React
+  react: React,
 })
 
 export const MenuItem = createComponent({
   tagName: getScopedTagName('gds-menu-item'),
   elementClass: GdsMenuItem,
   events: { onMenuItemClick: 'gds-menu-item-click' },
-  react: React
+  react: React,
 })
 
 export const CoreMenuHeading = createComponent({
   tagName: getScopedTagName('gds-menu-heading'),
   elementClass: GdsMenuHeading,
-  react: React
+  react: React,
 })

@@ -1,4 +1,9 @@
-<nav [class]="'pagination ' + size" role="navigation" [attr.aria-label]="i18n.paginationLabel" *ngIf="totalPages > 1">
+<nav
+  [class]="'pagination ' + size"
+  role="navigation"
+  [attr.aria-label]="i18n.paginationLabel"
+  *ngIf="totalPages > 1"
+>
   <ul class="gds-reset">
     <li *ngIf="hasPrevious()">
       <a
@@ -46,7 +51,12 @@
       </a>
     </li>
 
-    <li *ngIf="pageIndicies[pageIndicies.length - 1] < totalPages - 2" aria-hidden="true">...</li>
+    <li
+      *ngIf="pageIndicies[pageIndicies.length - 1] < totalPages - 2"
+      aria-hidden="true"
+    >
+      ...
+    </li>
 
     <li>
       <a

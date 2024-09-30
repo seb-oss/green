@@ -20,7 +20,7 @@ export class GdsMenuItem extends Focusable(GdsElement) {
     super.connectedCallback()
     this.setAttribute('role', 'menuitem')
 
-    this.addEventListener('keydown', e => {
+    this.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter' && e.key !== ' ') return
       e.preventDefault()
       this.click()
@@ -36,8 +36,8 @@ export class GdsMenuItem extends Focusable(GdsElement) {
     this.dispatchEvent(
       new CustomEvent('gds-menu-item-click', {
         bubbles: true,
-        composed: true
-      })
+        composed: true,
+      }),
     )
   }
 

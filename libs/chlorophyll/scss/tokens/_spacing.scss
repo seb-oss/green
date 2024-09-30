@@ -12,8 +12,12 @@ $spacing: (
   7: 2rem,
   8: 4rem,
   9: 6rem,
-  10: 8rem
+  10: 8rem,
 );
 
 $container-padding-x: map.get($spacing, 4);
-$negative-spacing: if($enable-negative-margins, functions.negativify-map($spacing), null) !default;
+$negative-spacing: if(
+  $enable-negative-margins,
+  functions.negativify-map($spacing),
+  null
+) !default;

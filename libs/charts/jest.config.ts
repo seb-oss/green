@@ -8,11 +8,11 @@ export default {
       'ts-jest',
       {
         tsconfig: '<rootDir>/tsconfig.spec.json',
-        stringifyContentPathRegex: '\\.(html|svg)$'
-      }
-    ]
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!billboard.js/.*)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/charts'
+  coverageDirectory: '../../coverage/libs/charts',
 }

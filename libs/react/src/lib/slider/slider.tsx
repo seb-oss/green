@@ -1,9 +1,19 @@
 import React from 'react'
-import { getSliderTrackBackground, randomId, sliderColors } from '@sebgroup/extract'
+import {
+  getSliderTrackBackground,
+  randomId,
+  sliderColors,
+} from '@sebgroup/extract'
 
 import { SliderProps } from '../../types'
 
-const InputWrapper = ({ children, unitLabel }: { children: React.ReactNode; unitLabel?: string }) => (
+const InputWrapper = ({
+  children,
+  unitLabel,
+}: {
+  children: React.ReactNode
+  unitLabel?: string
+}) => (
   <>
     {unitLabel ? (
       <div className="group group-border group-focus">
@@ -39,11 +49,15 @@ export function Slider({
   onChange,
   enableClamping = true,
   onClamp,
-  enterKeyHint
+  enterKeyHint,
 }: SliderProps) {
   const [background, setBackground] = React.useState<string>()
-  const [sliderValue, setSliderValue] = React.useState<number | undefined>(value ?? defaultValue)
-  const [inputFieldValue, setInputFieldValue] = React.useState<string>(sliderValue + '')
+  const [sliderValue, setSliderValue] = React.useState<number | undefined>(
+    value ?? defaultValue,
+  )
+  const [inputFieldValue, setInputFieldValue] = React.useState<string>(
+    sliderValue + '',
+  )
 
   React.useLayoutEffect(() => {
     if (disabled) {
@@ -52,7 +66,8 @@ export function Slider({
     }
 
     let percent = 0
-    if (sliderValue !== undefined) percent = ((sliderValue - min) / (max - min)) * 100
+    if (sliderValue !== undefined)
+      percent = ((sliderValue - min) / (max - min)) * 100
 
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
@@ -119,12 +134,17 @@ export function Slider({
               enterKeyHint={enterKeyHint}
               className={errorMessage ? 'is-invalid' : ''}
               disabled={disabled}
-              onChange={e => handleInputFieldChange(e.currentTarget.value)}
-              onKeyDown={e => e.key === 'Enter' && handleInputFieldChange(e.currentTarget.value, true)}
-              onBlur={e => handleInputFieldChange(e.currentTarget.value, true)}
+              onChange={(e) => handleInputFieldChange(e.currentTarget.value)}
+              onKeyDown={(e) =>
+                e.key === 'Enter' &&
+                handleInputFieldChange(e.currentTarget.value, true)
+              }
+              onBlur={(e) =>
+                handleInputFieldChange(e.currentTarget.value, true)
+              }
               min={min}
               max={max}
-              onInvalid={e => {
+              onInvalid={(e) => {
                 e.preventDefault()
               }}
             />
@@ -140,9 +160,9 @@ export function Slider({
         max={max}
         step={step}
         disabled={disabled}
-        onChange={e => handleChange(e.currentTarget.value)}
+        onChange={(e) => handleChange(e.currentTarget.value)}
         style={{
-          background
+          background,
         }}
       />
       {showMinMax && (

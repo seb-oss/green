@@ -1,10 +1,10 @@
 import { Chart } from '.'
 
-const Template = args => <Chart {...args} />
+const Template = (args) => <Chart {...args} />
 
 export default {
   title: 'Getting started',
-  component: Chart
+  component: Chart,
 }
 
 export const GettingStarted = {
@@ -16,16 +16,16 @@ export const GettingStarted = {
       data: [
         {
           name: 'Score card',
-          values: [12, 9, 3, 1]
-        }
+          values: [12, 9, 3, 1],
+        },
       ],
 
       categories: [
         'Signerade avtal (SEB)',
         'Påbörjade trials (Oxceed)',
         'Aktiverade prenumerationer',
-        'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)'
-      ]
-    }
-  }
+        'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+      ],
+    },
+  },
 }

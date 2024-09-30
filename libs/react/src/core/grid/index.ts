@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsGrid,
   react: React,
   events: {},
-  displayName: 'GdsGrid'
+  displayName: 'GdsGrid',
 })
 
 export default reactWrapper

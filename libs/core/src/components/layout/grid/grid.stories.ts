@@ -14,7 +14,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Docs/Layout/Grid',
   component: 'gds-grid',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -23,9 +23,9 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
     gap: 'm',
@@ -56,12 +56,12 @@ const DefaultParams: Story = {
       <gds-card border="4xs/primary" border-radius="s">
         <gds-flex height="100px" align-items="center" justify-content="center">COL: 08</gds-flex>
       </gds-card>
-  `
-  }
+  `,
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -92,7 +92,7 @@ export const Basic: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid
       columns="s{2} m{4} l{6}"
@@ -135,7 +135,7 @@ export const Usage: Story = {
         <gds-flex height="100px" align-items="center" justify-content="center">COL: 12</gds-flex>
       </gds-card>
     </gds-grid>
-  `
+  `,
 }
 
 /**
@@ -144,7 +144,7 @@ export const Usage: Story = {
 export const AllBreakpoints: Story = {
   ...DefaultParams,
   name: 'Breakpoints + Auto Columns',
-  render: args => html`
+  render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid columns="4" gap="m" auto-columns="100">
       <gds-card border="4xs/primary" border-radius="s">
@@ -172,7 +172,7 @@ export const AllBreakpoints: Story = {
         <gds-flex height="100px" align-items="center" justify-content="center">COL: 08</gds-flex>
       </gds-card>
     </gds-grid>
-  `
+  `,
 }
 
 /**
@@ -237,7 +237,7 @@ export const AllBreakpoints: Story = {
 export const AutoColumns: Story = {
   ...DefaultParams,
   name: 'Auto Columns',
-  render: args => html`
+  render: (args) => html`
     <!-- prettier-ignore -->
     <gds-grid gap="s" auto-columns="s{200} m{220} l{240}">
       <gds-card border="4xs/primary" border-radius="s">
@@ -265,5 +265,5 @@ export const AutoColumns: Story = {
         <gds-flex height="100px" align-items="center" justify-content="center">COL: 08</gds-flex>
       </gds-card>
     </gds-grid>
-  `
+  `,
 }

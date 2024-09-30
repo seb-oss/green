@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
 module.exports = {
-  extends: ['@commitlint/config-conventional']
+  extends: ['@commitlint/config-conventional'],
 }

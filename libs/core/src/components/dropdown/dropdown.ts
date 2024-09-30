@@ -9,14 +9,21 @@ import { HTMLTemplateResult } from 'lit'
 import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
-import { gdsCustomElement, html, getScopedTagName } from '../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+  getScopedTagName,
+} from '../../utils/helpers/custom-element-scoping'
 
 import '../icon/icons/chevron-bottom'
 import '../icon/icons/checkmark'
 import '../../primitives/listbox'
 
 import type { GdsListbox } from '../../primitives/listbox'
-import type { GdsOption, OptionsContainer } from '../../primitives/listbox/option'
+import type {
+  GdsOption,
+  OptionsContainer,
+} from '../../primitives/listbox/option'
 import '../popover'
 import '../button'
 
@@ -41,11 +48,14 @@ import { TransitionalStyles } from '../../transitional-styles'
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-dropdown')
-export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | ValueT[]> implements OptionsContainer {
+export class GdsDropdown<ValueT = any>
+  extends GdsFormControlElement<ValueT | ValueT[]>
+  implements OptionsContainer
+{
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   get type() {
@@ -108,7 +118,8 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * ```
    */
   @property()
-  searchFilter: (q: string, o: GdsOption) => boolean = (q, o) => o.innerHTML.toLowerCase().includes(q.toLowerCase())
+  searchFilter: (q: string, o: GdsOption) => boolean = (q, o) =>
+    o.innerHTML.toLowerCase().includes(q.toLowerCase())
 
   /**
    * Whether the popover should sync its width to the trigger button. When this is
@@ -150,7 +161,9 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * Get the options of the dropdown.
    */
   get options() {
-    return Array.from(this.#optionElements).filter(o => !o.hasAttribute('isplaceholder'))
+    return Array.from(this.#optionElements).filter(
+      (o) => !o.hasAttribute('isplaceholder'),
+    )
   }
 
   /**
@@ -158,7 +171,9 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * If no placeholder is found, this will be undefined.
    */
   get placeholder() {
-    return Array.from(this.#optionElements).find(o => o.hasAttribute('isplaceholder'))
+    return Array.from(this.#optionElements).find((o) =>
+      o.hasAttribute('isplaceholder'),
+    )
   }
 
   /**
@@ -172,10 +187,16 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
       this.value.length > 2
         ? (displayValue = msg(str`${this.value.length} selected`))
         : (displayValue = this.value
-            .reduce((acc: string, cur: ValueT) => acc + this.options.find(v => v.value === cur)?.innerHTML + ', ', '')
+            .reduce(
+              (acc: string, cur: ValueT) =>
+                acc +
+                this.options.find((v) => v.value === cur)?.innerHTML +
+                ', ',
+              '',
+            )
             .slice(0, -2))
     } else {
-      displayValue = this.options.find(v => v.selected)?.innerHTML
+      displayValue = this.options.find((v) => v.selected)?.innerHTML
     }
 
     return displayValue || this.placeholder?.innerHTML || ''
@@ -197,7 +218,9 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
     constrainSlots(this)
     updateWhenLocaleChanges(this)
 
-    this.#optionElements = this.getElementsByTagName(getScopedTagName('gds-option')) as HTMLCollectionOf<GdsOption>
+    this.#optionElements = this.getElementsByTagName(
+      getScopedTagName('gds-option'),
+    ) as HTMLCollectionOf<GdsOption>
   }
 
   connectedCallback() {
@@ -212,14 +235,18 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
 
   render() {
     return html`
-      ${when(this.label && !this.hideLabel, () => html`<label for="trigger">${this.label}</label>`)}
+      ${when(
+        this.label && !this.hideLabel,
+        () => html`<label for="trigger">${this.label}</label>`,
+      )}
 
       <span class="form-info"><slot name="sub-label"></slot></span>
 
       <gds-popover
         .label=${this.label}
         .open=${this.open}
-        .calcMaxWidth=${(trigger: HTMLElement) => (this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`)}
+        .calcMaxWidth=${(trigger: HTMLElement) =>
+          this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
@@ -254,7 +281,7 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
               placeholder="${msg('Search')}"
               @keydown=${this.#handleSearchFieldKeyDown}
               @keyup=${this.#handleSearchFieldKeyUp}
-            />`
+            />`,
         )}
         <gds-listbox
           id="listbox"
@@ -268,7 +295,9 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
         </gds-listbox>
       </gds-popover>
 
-      <span class="form-info"><slot name="message">${this.validationMessage}</slot></span>
+      <span class="form-info"
+        ><slot name="message">${this.validationMessage}</slot></span
+      >
     `
   }
 
@@ -283,7 +312,7 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
     attributes: true,
     childList: true,
     subtree: true,
-    characterData: true
+    characterData: true,
   })
   private _handleLightDOMChange() {
     this.requestUpdate()
@@ -301,7 +330,9 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
     // Make sure the value is one of the options, unless we have a placeholder
     else if (
       !this.placeholder &&
-      this.options.find(o => this.compareWith(o.value, this.value as ValueT)) === undefined
+      this.options.find((o) =>
+        this.compareWith(o.value, this.value as ValueT),
+      ) === undefined
     ) {
       this.options[0] && (this.options[0].selected = true)
       this.value = this.options[0]?.value
@@ -313,7 +344,7 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    */
   @watch('value')
   private _handleValueChange() {
-    this._elListbox.then(listbox => {
+    this._elListbox.then((listbox) => {
       if (listbox) {
         if (Array.isArray(this.value)) listbox.selection = this.value as any[]
         else listbox.selection = [this.value as any]
@@ -341,11 +372,13 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
   #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
     const input = this._elSearchInput!
     const options = Array.from(this.#optionElements)
-    options.forEach(o => (o.hidden = false))
+    options.forEach((o) => (o.hidden = false))
 
     if (!input.value) return
-    const filteredOptions = options.filter(o => !this.searchFilter(input.value, o))
-    filteredOptions.forEach(o => (o.hidden = true))
+    const filteredOptions = options.filter(
+      (o) => !this.searchFilter(input.value, o),
+    )
+    filteredOptions.forEach((o) => (o.hidden = true))
   }
 
   /**
@@ -353,7 +386,7 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * If found, focus should be moved to the listbox.
    */
   #handleSearchFieldKeyDown = (e: KeyboardEvent) => {
-    this._elListbox?.then(listbox => {
+    this._elListbox?.then((listbox) => {
       if (e.key === 'ArrowDown' || e.key === 'Tab') {
         e.preventDefault()
         listbox.focus()
@@ -377,7 +410,8 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
   #handleOptionFocusChange = (e: FocusEvent) => {
     // Set the ariaActiveDescendant of the trigger button
     const triggerButton = this._elTriggerBtn as any
-    if (triggerButton) triggerButton.ariaActiveDescendantElement = e.target as any
+    if (triggerButton)
+      triggerButton.ariaActiveDescendantElement = e.target as any
   }
 
   /**
@@ -386,8 +420,8 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * @fires change
    */
   #handleSelectionChange() {
-    this._elListbox.then(listbox => {
-      if (this.multiple) this.value = listbox.selection.map(s => s.value)
+    this._elListbox.then((listbox) => {
+      if (this.multiple) this.value = listbox.selection.map((s) => s.value)
       else {
         this.value = listbox.selection[0]?.value
         this.open = false
@@ -398,8 +432,8 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
         new CustomEvent('change', {
           detail: { value: this.value },
           bubbles: true,
-          composed: true
-        })
+          composed: true,
+        }),
       )
     })
   }
@@ -411,7 +445,7 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
   private _onOpenChange() {
     const open = this.open
 
-    Array.from(this.#optionElements).forEach(o => (o.hidden = !open))
+    Array.from(this.#optionElements).forEach((o) => (o.hidden = !open))
 
     if (open) this.#registerAutoCloseListener()
     else {
@@ -423,8 +457,8 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
       new CustomEvent('gds-ui-state', {
         detail: { open },
         bubbles: true,
-        composed: true
-      })
+        composed: true,
+      }),
     )
   }
 
@@ -444,7 +478,10 @@ export class GdsDropdown<ValueT = any> extends GdsFormControlElement<ValueT | Va
    * A listener to close the dropdown when any other element is focused.
    */
   #blurCloseListener = (e: Event) => {
-    const isFocusOutside = e instanceof FocusEvent && e.relatedTarget && !this.contains(e.relatedTarget as Node)
+    const isFocusOutside =
+      e instanceof FocusEvent &&
+      e.relatedTarget &&
+      !this.contains(e.relatedTarget as Node)
 
     if (isFocusOutside) this.open = false
   }

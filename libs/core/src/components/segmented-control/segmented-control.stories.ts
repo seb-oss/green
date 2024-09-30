@@ -14,9 +14,9 @@ const meta: Meta = {
   component: 'gds-segmented-control',
   subcomponents: { MenuItem: 'gds-segment' },
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -25,25 +25,25 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   argTypes: {
     size: {
-      control: { type: 'text' }
-    }
+      control: { type: 'text' },
+    },
   },
   args: {
     innerHTML: `<gds-segment value="1">Item 1</gds-segment>
 <gds-segment value="2">Item 2</gds-segment>
 <gds-segment value="3">Item 3</gds-segment>`,
-    value: '1'
-  }
+    value: '1',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -52,8 +52,11 @@ export const Basic: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args => html`
-    <gds-segmented-control value="2" onchange="document.getElementById('sel').innerText = event.target.value">
+  render: (args) => html`
+    <gds-segmented-control
+      value="2"
+      onchange="document.getElementById('sel').innerText = event.target.value"
+    >
       <gds-segment value="1">First</gds-segment>
       <gds-segment value="2">Second</gds-segment>
       <gds-segment value="3">Third</gds-segment>
@@ -61,7 +64,7 @@ export const Usage: Story = {
       <gds-segment value="5">Fifth</gds-segment>
     </gds-segmented-control>
     <div style="margin-top: 1rem">Selected: <span id="sel">2</span></div>
-  `
+  `,
 }
 
 /**
@@ -69,13 +72,13 @@ export const Usage: Story = {
  */
 export const Small: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-segmented-control size="small" value="2">
       <gds-segment value="1">First</gds-segment>
       <gds-segment value="2">Second</gds-segment>
       <gds-segment value="3">Third</gds-segment>
     </gds-segmented-control>
-  `
+  `,
 }
 
 /**
@@ -86,7 +89,7 @@ export const Small: Story = {
  */
 export const SegmentSize: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <div style="max-width: 800px">
       <gds-segmented-control seg-min-width="200" value="3">
         <gds-segment value="1">First</gds-segment>
@@ -96,5 +99,5 @@ export const SegmentSize: Story = {
         <gds-segment value="5">Fifth</gds-segment>
       </gds-segmented-control>
     </div>
-  `
+  `,
 }

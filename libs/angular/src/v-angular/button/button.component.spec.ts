@@ -1,6 +1,11 @@
 import { APP_BASE_HREF } from '@angular/common'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
 import '../core/core.globals'
 import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link/external-link.directive'
@@ -19,9 +24,9 @@ describe('[NgvCore]', () => {
         declarations: [NgvButtonComponent, NgvExternalLinkDirective],
         providers: [
           { provide: APP_BASE_HREF, useValue: '/' },
-          { provide: NgControl, useValue: new FormControl() }
+          { provide: NgControl, useValue: new FormControl() },
         ],
-        imports: [FormsModule, ReactiveFormsModule, RouterTestingModule]
+        imports: [FormsModule, ReactiveFormsModule, RouterTestingModule],
       }).compileComponents()
     }))
 

@@ -5,4 +5,6 @@ export class InputMaskConfig {
   inputSelector = 'input'
 }
 
-export const INPUT_MASK_CONFIG = new InjectionToken<InputMaskConfig>('InputMaskConfig')
+export const INPUT_MASK_CONFIG = new InjectionToken<InputMaskConfig>(
+  'InputMaskConfig',
+)

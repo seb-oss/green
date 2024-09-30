@@ -11,18 +11,18 @@ const routes: Routes = [
     children: [
       {
         path: 'option-a',
-        component: OptionAComponent
+        component: OptionAComponent,
       },
       {
         path: 'option-b',
-        component: OptionBComponent
-      }
-    ]
-  }
+        component: OptionBComponent,
+      },
+    ],
+  },
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SegmentedControlRoutingModule {}

@@ -116,7 +116,7 @@ export const Button = createComponent({
   tagName: getScopedTagName('gds-button'),
   elementClass: GdsButton,
   react: React,
-  events: { onClick: 'click' } // Event callbacks need to be explicitly mapped to DOM events
+  events: { onClick: 'click' }, // Event callbacks need to be explicitly mapped to DOM events
 })
 ```
 

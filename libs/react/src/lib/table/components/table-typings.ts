@@ -1,6 +1,6 @@
 export enum SortDirection {
   ASC = 'ASC',
-  DESC = 'DESC'
+  DESC = 'DESC',
 }
 
 export interface FilterColumn<T = any> {

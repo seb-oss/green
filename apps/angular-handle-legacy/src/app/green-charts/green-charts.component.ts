@@ -11,7 +11,7 @@ import { ChartSettings } from '@sebgroup/green-charts'
     <div class="use-green mt-3">
       <button type="button">Green default button</button>
       <button type="submit">Green primary button</button>
-    </div>`
+    </div>`,
 })
 export class GreenChartsComponent {
   settings: ChartSettings = {
@@ -19,14 +19,14 @@ export class GreenChartsComponent {
       {
         name: 'Antal',
         type: 'bar',
-        values: [234, 197, 97, 12]
-      }
+        values: [234, 197, 97, 12],
+      },
     ],
     categories: [
       'Signerade avtal (SEB)',
       'Påbörjade trials (Oxceed)',
       'Aktiverade prenumerationer',
-      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)'
-    ]
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+    ],
   }
 }

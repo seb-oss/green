@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsRadioGroup,
   react: React,
   events: {},
-  displayName: 'GdsRadioGroup'
+  displayName: 'GdsRadioGroup',
 })
 
 export default reactWrapper

@@ -43,30 +43,30 @@ export default {
   title: 'Components/Wizard/In-page Wizard',
 
   parameters: {
-    componentIds: ['component-inpagewizard']
+    componentIds: ['component-inpagewizard'],
   },
 
   argTypes: {
     isCompleted: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     isStarted: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     stepText: {
-      control: 'text'
+      control: 'text',
     },
 
     title: {
-      control: 'text'
+      control: 'text',
     },
 
     content: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const InPageWizardStepCard = {
@@ -78,14 +78,14 @@ export const InPageWizardStepCard = {
     isStarted: false,
     stepText: 'Step 1 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
   },
 
   parameters: {
     docs: {
-      disable: true
-    }
-  }
+      disable: true,
+    },
+  },
 }
 
 export const CompletedStep = {
@@ -97,8 +97,8 @@ export const CompletedStep = {
     isStarted: false,
     stepText: 'Step 1 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
-  }
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
+  },
 }
 
 export const CurrentStep = {
@@ -120,8 +120,8 @@ export const CurrentStep = {
           <label for="inputInvalid">Input label</label>
           <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
           <input id="inputInvalid" type="text" />
-        </div>`
-  }
+        </div>`,
+  },
 }
 
 export const NotStartedStep = {
@@ -133,6 +133,6 @@ export const NotStartedStep = {
     isStarted: false,
     stepText: 'Step 3 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
-  }
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
+  },
 }

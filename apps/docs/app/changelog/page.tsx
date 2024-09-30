@@ -8,7 +8,9 @@ function ChangelogCard(changelog: Changelog) {
     <article id={changelog.version} className="log">
       <aside>
         <div>{changelog.version}</div>
-        <time dateTime={changelog.date}>{format(parseISO(changelog.date), 'LL.d.yy')}</time>
+        <time dateTime={changelog.date}>
+          {format(parseISO(changelog.date), 'LL.d.yy')}
+        </time>
       </aside>
       <div>
         <h2>
@@ -21,7 +23,9 @@ function ChangelogCard(changelog: Changelog) {
 }
 
 export default function ChangelogPage() {
-  const changelogs = allChangelogs.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+  const changelogs = allChangelogs.sort((a, b) =>
+    compareDesc(new Date(a.date), new Date(b.date)),
+  )
 
   return (
     <Layout>

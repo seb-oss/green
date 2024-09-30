@@ -8,13 +8,20 @@ interface ListItemProps extends HTMLAttributes<HTMLLIElement> {
   children?: ReactNode
 }
 
-const ListItem = ({ listType, tableRowData, children, ...props }: ListItemProps) => {
+const ListItem = ({
+  listType,
+  tableRowData,
+  children,
+  ...props
+}: ListItemProps) => {
   if (listType === 'table') {
     return (
       <dl>
         <div>
           <dt>{tableRowData?.title}</dt>
-          {tableRowData?.definition.map((item, index) => <dd key={index}>{item}</dd>)}
+          {tableRowData?.definition.map((item, index) => (
+            <dd key={index}>{item}</dd>
+          ))}
         </div>
       </dl>
     )

@@ -102,7 +102,11 @@ $button-danger-border-color: $button-danger-bg;
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable($button-primary-bg, $button-primary-color, $button-primary-border-color);
+    @include common.add-disable(
+      $button-primary-bg,
+      $button-primary-color,
+      $button-primary-border-color
+    );
   }
 }
 
@@ -194,14 +198,22 @@ $button-danger-border-color: $button-danger-bg;
   color: $button-danger-color;
   --color: #{$button-danger-color};
 
-  @include common.add-hover-active-state($button-danger-bg-hover, $button-danger-bg, $button-danger-border-color);
+  @include common.add-hover-active-state(
+    $button-danger-bg-hover,
+    $button-danger-bg,
+    $button-danger-border-color
+  );
 
   @include common.add-focus();
 
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable($button-danger-bg, $button-danger-color, $button-danger-border-color);
+    @include common.add-disable(
+      $button-danger-bg,
+      $button-danger-color,
+      $button-danger-border-color
+    );
   }
 }
 
@@ -210,7 +222,11 @@ $button-danger-border-color: $button-danger-bg;
   --color: #{$button-danger-bg};
   border-color: transparent;
 
-  @include common.add-hover-active-state($button-danger-bg-hover, $button-danger-bg, $button-danger-border-color);
+  @include common.add-hover-active-state(
+    $button-danger-bg-hover,
+    $button-danger-bg,
+    $button-danger-border-color
+  );
 
   @include common.add-focus();
 }

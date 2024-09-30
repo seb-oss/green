@@ -55,12 +55,12 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    * Rows of the textarea
    */
   @styleExpressionProperty({
-    valueTemplate: v => v,
+    valueTemplate: (v) => v,
     selector: 'textarea',
     styleTemplate: (_prop, values) => {
       const ROWS = values[0]
       return `min-height: calc(1lh * ${ROWS});`
-    }
+    },
   })
   rows = 4
 
@@ -81,7 +81,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @property({
     attribute: 'show-extended-supporting-text',
     type: Boolean,
-    reflect: true
+    reflect: true,
   })
   showExtendedSupportingText = false
 
@@ -91,7 +91,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @property({
     attribute: 'disabled',
     type: Boolean,
-    reflect: true
+    reflect: true,
   })
   disabled = false
 
@@ -167,7 +167,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   render() {
     return html`${choose(this.variant, [
       ['default', () => this.#renderDefault()],
-      ['floating-label', () => this.#renderFloatingLabel()]
+      ['floating-label', () => this.#renderFloatingLabel()],
     ])}`
   }
 
@@ -184,9 +184,18 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         level="3"
         user-select="${this.disabled ? 'none' : 'auto'}"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
-        color="${this.disabled ? 'disabled' : this.invalid ? 'negative' : 'tertiary'}"
+        color="${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative'
+            : 'tertiary'}"
       >
-        <gds-flex class="head" align-items="center" justify-content="space-between" padding="3xs 0 0 0">
+        <gds-flex
+          class="head"
+          align-items="center"
+          justify-content="space-between"
+          padding="3xs 0 0 0"
+        >
           <gds-flex flex-direction="column">
             <gds-text font-weight="book" font-size="detail-m">
               <label for="input"> ${this.label} </label>
@@ -206,8 +215,16 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           level="3"
           padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
           border-radius="xs"
-          .background=${this.disabled ? 'disabled' : this.invalid ? 'negative-secondary' : 'secondary'}
-          .border=${this.disabled ? '' : this.invalid ? '4xs/negative' : '4xs/secondary'}
+          .background=${this.disabled
+            ? 'disabled'
+            : this.invalid
+              ? 'negative-secondary'
+              : 'secondary'}
+          .border=${this.disabled
+            ? ''
+            : this.invalid
+              ? '4xs/negative'
+              : '4xs/secondary'}
           class="field ${this.invalid ? 'invalid' : ''}"
           @click=${this.#handleFieldClick}
           cursor="text"
@@ -220,26 +237,44 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           ${when(
             this.resize === 'auto',
             () => this.#renderResizeHandle(),
-            () => nothing
+            () => nothing,
           )}
         </gds-flex>
 
-        <gds-flex class="foot" align-items="flex-start" justify-content="space-between" aria-live="polite" gap="xl">
+        <gds-flex
+          class="foot"
+          align-items="flex-start"
+          justify-content="space-between"
+          aria-live="polite"
+          gap="xl"
+        >
           ${when(
             this.invalid,
             () => html`
               <gds-flex align-items="flex-start" gap="xs" margin="2xs 0 0 0">
                 <gds-flex min-width="18px">
-                  <gds-icon-triangle-exclamation width="18" height="18" solid> </gds-icon-triangle-exclamation>
+                  <gds-icon-triangle-exclamation width="18" height="18" solid>
+                  </gds-icon-triangle-exclamation>
                 </gds-flex>
-                <gds-text tag="span" font-size="detail-s" font-weight="book" class="error-text">
+                <gds-text
+                  tag="span"
+                  font-size="detail-s"
+                  font-weight="book"
+                  class="error-text"
+                >
                   ${this.validationMessage}
                 </gds-text>
               </gds-flex>
-            `
+            `,
           )}
-          <gds-flex margin="0 0 0 auto" min-width="4ch" justify-content="flex-end">
-            ${when(this.#shouldShowRemainingChars, () => this.#renderRemainingCharsBadge())}
+          <gds-flex
+            margin="0 0 0 auto"
+            min-width="4ch"
+            justify-content="flex-end"
+          >
+            ${when(this.#shouldShowRemainingChars, () =>
+              this.#renderRemainingCharsBadge(),
+            )}
           </gds-flex>
         </gds-flex>
       </gds-flex>
@@ -252,7 +287,8 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   // Any attribute name added here will get forwarded to the native <input> element.
-  #forwardableAttrs = (attr: Attr) => ['type', 'placeholder', 'required'].includes(attr.name)
+  #forwardableAttrs = (attr: Attr) =>
+    ['type', 'placeholder', 'required'].includes(attr.name)
 
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
@@ -265,21 +301,21 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     this.dispatchEvent(
       new Event('change', {
         bubbles: true,
-        composed: true
-      })
+        composed: true,
+      }),
     )
   }
 
   @watch('value')
   private _setAutoHeight() {
-    this.elTextareaAsync.then(element => {
+    this.elTextareaAsync.then((element) => {
       const lines = (element.value.split('\n').length || 1).toString()
       element?.style.setProperty('--_lines', lines.toString())
     })
   }
 
   #handleFieldClick = () => {
-    this.elTextareaAsync.then(el => el.focus())
+    this.elTextareaAsync.then((el) => el.focus())
   }
 
   #handleClearBtnClick = () => {
@@ -292,8 +328,8 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       new CustomEvent('gds-ui-state', {
         bubbles: true,
         composed: true,
-        detail: this.showExtendedSupportingText
-      })
+        detail: this.showExtendedSupportingText,
+      }),
     )
   }
 
@@ -302,13 +338,22 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
-    return html` <slot name="trail" gds-allow="gds-badge" @slotchange=${this.#handleSlotChange}></slot> `
+    return html`
+      <slot
+        name="trail"
+        gds-allow="gds-badge"
+        @slotchange=${this.#handleSlotChange}
+      ></slot>
+    `
   }
 
   #addResizeHandleListener() {
     const resizeHandle = this.querySelector('.resize-handle')
     if (resizeHandle) {
-      resizeHandle.addEventListener('mousedown', this.#startDragging.bind(this) as EventListener)
+      resizeHandle.addEventListener(
+        'mousedown',
+        this.#startDragging.bind(this) as EventListener,
+      )
     }
   }
 
@@ -334,7 +379,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         this.lines = Math.max(1, this.lines - 1) // Ensure lines do not go below 1
       }
 
-      this.elTextareaAsync.then(element => {
+      this.elTextareaAsync.then((element) => {
         element?.style.setProperty('--_lines', this.lines.toString())
       })
 
@@ -370,8 +415,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     this.trailSlotOccupied =
       assignedNodes.length > 0 &&
       assignedNodes.some(
-        node =>
-          node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '')
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
   }
 
@@ -399,7 +445,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       <gds-text
         level="3"
         font-size="detail-m"
-        .color="${this.disabled ? 'disabled' : this.invalid ? 'negative' : 'tertiary'}"
+        .color="${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative'
+            : 'tertiary'}"
         class="supporting-text"
         id="supporting-text"
       >
@@ -419,8 +469,14 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         background="secondary"
         color="tertiary"
       >
-        <gds-text font-size="body-s" display="${this.showExtendedSupportingText ? 'block' : 'none'}">
-          <slot name="extended-supporting-text" @slotchange=${() => this.requestUpdate()}></slot>
+        <gds-text
+          font-size="body-s"
+          display="${this.showExtendedSupportingText ? 'block' : 'none'}"
+        >
+          <slot
+            name="extended-supporting-text"
+            @slotchange=${() => this.requestUpdate()}
+          ></slot>
         </gds-text>
       </gds-card>
     `
@@ -465,7 +521,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
    */
   async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
-    return this.elExtendedSupportingTextSlot.then(slot => {
+    return this.elExtendedSupportingTextSlot.then((slot) => {
       if (slot && slot.assignedElements().length > 0)
         return html`
           <gds-button

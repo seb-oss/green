@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { NggSortableListComponent, SortableListItem } from './sortable-list.component'
+import {
+  NggSortableListComponent,
+  SortableListItem,
+} from './sortable-list.component'
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop'
 
 describe('NggSortableListComponent', () => {
@@ -9,7 +12,7 @@ describe('NggSortableListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NggSortableListComponent],
-      imports: [DragDropModule]
+      imports: [DragDropModule],
     }).compileComponents()
   })
 
@@ -29,9 +32,9 @@ describe('NggSortableListComponent', () => {
         items: [
           { id: 1, name: 'Item 1', selected: false },
           { id: 2, name: 'Item 2', selected: false },
-          { id: 3, name: 'Item 3', selected: false }
-        ]
-      }
+          { id: 3, name: 'Item 3', selected: false },
+        ],
+      },
     ]
     fixture.detectChanges()
   })
@@ -45,14 +48,14 @@ describe('NggSortableListComponent', () => {
       const testItem: SortableListItem = {
         id: 1,
         name: 'Test Item',
-        selected: false
+        selected: false,
       }
       component.groups = [
         {
           title: 'Group 1',
           description: 'Description for group 1',
-          items: [testItem]
-        }
+          items: [testItem],
+        },
       ]
       fixture.detectChanges()
 
@@ -67,7 +70,7 @@ describe('NggSortableListComponent', () => {
       // Checking if the right event is emitted
       expect(itemSelectedSpy).toHaveBeenCalledWith({
         changedItem: testItem,
-        groups: component.groups
+        groups: component.groups,
       })
     })
 
@@ -76,14 +79,14 @@ describe('NggSortableListComponent', () => {
       const testItem: SortableListItem = {
         id: 1,
         name: 'Test Item',
-        selected: true
+        selected: true,
       }
       component.groups = [
         {
           title: 'Group 1',
           description: 'Description for group 1',
-          items: [testItem]
-        }
+          items: [testItem],
+        },
       ]
       fixture.detectChanges()
       const itemSelectedSpy = jest.spyOn(component.itemSelectionChanged, 'emit')
@@ -97,7 +100,7 @@ describe('NggSortableListComponent', () => {
       // Assert the right event is emitted
       expect(itemSelectedSpy).toHaveBeenCalledWith({
         changedItem: testItem,
-        groups: component.groups
+        groups: component.groups,
       })
     })
   })
@@ -112,7 +115,7 @@ describe('NggSortableListComponent', () => {
         container: { data: component.groups, id: '0' } as any,
         previousContainer: { data: component.groups, id: '0' } as any,
         isPointerOverContainer: true,
-        distance: { x: 0, y: 0 }
+        distance: { x: 0, y: 0 },
       } as any
 
       // Act
@@ -123,7 +126,7 @@ describe('NggSortableListComponent', () => {
       expect(spy).toHaveBeenCalledWith({
         previousIndex: [0, 0],
         currentIndex: [0, 1],
-        groups: component.groups
+        groups: component.groups,
       })
     })
   })
@@ -133,7 +136,7 @@ describe('NggSortableListComponent', () => {
       // Arrange
       const spy = jest.spyOn(component.itemOrderChanged, 'emit')
       const keyboardEvent = new KeyboardEvent('keydown', {
-        code: 'ArrowUp'
+        code: 'ArrowUp',
       })
 
       // Act
@@ -144,7 +147,7 @@ describe('NggSortableListComponent', () => {
       expect(spy).toHaveBeenCalledWith({
         previousIndex: [0, 0],
         currentIndex: [0, 1],
-        groups: component.groups
+        groups: component.groups,
       })
     })
   })

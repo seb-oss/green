@@ -56,7 +56,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Docs/Theme',
   component: 'gds-theme',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -65,13 +65,13 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
     controls: { disable: true },
     globals: {
-      disableTheme: true
-    }
-  }
+      disableTheme: true,
+    },
+  },
 }
 
 /**
@@ -83,13 +83,18 @@ export const Theme: Story = {
   parameters: {
     ...DefaultParams.parameters,
     globals: {
-      disableTheme: true
-    }
+      disableTheme: true,
+    },
   },
   render: () => html`
     <gds-grid columns="xs{1} m{3} l{3}" gap="l">
       <gds-card shadow="s{xs} m{xs} l{s}" border-radius="xs" overflow="hidden">
-        <gds-flex display="flex" gap="0" flex-direction="column" align-items="stretch">
+        <gds-flex
+          display="flex"
+          gap="0"
+          flex-direction="column"
+          align-items="stretch"
+        >
           <gds-container position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
@@ -101,10 +106,18 @@ export const Theme: Story = {
               </gds-button>
             </gds-container>
           </gds-container>
-          <gds-flex flex-direction="column" padding="s{xs} m{l} l{l}" align-items="flex-start" gap="l">
+          <gds-flex
+            flex-direction="column"
+            padding="s{xs} m{l} l{l}"
+            align-items="flex-start"
+            gap="l"
+          >
             <gds-flex gap="s" flex-direction="column">
               <gds-text font-size="body-l">James Doe</gds-text>
-              <gds-text> Passionate software engineer with a love for coding and problem-solving. </gds-text>
+              <gds-text>
+                Passionate software engineer with a love for coding and
+                problem-solving.
+              </gds-text>
             </gds-flex>
             <gds-divider opacity="0.2"></gds-divider>
             <gds-button>
@@ -114,7 +127,12 @@ export const Theme: Story = {
           </gds-flex>
         </gds-flex>
       </gds-card>
-      <gds-card shadow="l" border-radius="m" border="3xs/primary" overflow="hidden">
+      <gds-card
+        shadow="l"
+        border-radius="m"
+        border="3xs/primary"
+        overflow="hidden"
+      >
         <gds-flex gap="m" flex-direction="column" padding="s">
           <gds-container position="relative">
             <gds-img
@@ -128,11 +146,17 @@ export const Theme: Story = {
               </gds-button>
             </gds-container>
           </gds-container>
-          <gds-flex flex-direction="column" padding="s{xs} m{s} l{s}" align-items="flex-start" gap="l">
+          <gds-flex
+            flex-direction="column"
+            padding="s{xs} m{s} l{s}"
+            align-items="flex-start"
+            gap="l"
+          >
             <gds-flex gap="s" flex-direction="column">
               <gds-text font-size="body-l">Lorem Ipsum</gds-text>
               <gds-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt.
               </gds-text>
             </gds-flex>
             <gds-button>
@@ -153,7 +177,11 @@ export const Theme: Story = {
             muted
             loop
           ></gds-video>
-          <gds-card position="absolute" inset="50% 0px 0px 0px" color="tertiary">
+          <gds-card
+            position="absolute"
+            inset="50% 0px 0px 0px"
+            color="tertiary"
+          >
             <gds-flex
               flex-direction="column"
               justify-content="flex-end"
@@ -174,5 +202,5 @@ export const Theme: Story = {
         </gds-flex>
       </gds-card>
     </gds-grid>
-  `
+  `,
 }

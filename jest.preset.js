@@ -13,5 +13,5 @@ module.exports = greenConfig.apply({
    * Example: "nx affected --targets=test --update-snapshot"
    * More info: https://jestjs.io/docs/upgrading-to-jest29#snapshot-format
    */
-  snapshotFormat: { escapeString: true, printBasicPrototype: true }
+  snapshotFormat: { escapeString: true, printBasicPrototype: true },
 })

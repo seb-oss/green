@@ -1,10 +1,12 @@
 import { FilterChips, FilterChip } from './filter-chips'
 
-const Template = ({ children, ...props }) => <FilterChips {...props}>{children}</FilterChips>
+const Template = ({ children, ...props }) => (
+  <FilterChips {...props}>{children}</FilterChips>
+)
 
 export default {
   title: 'Components/Filter Chips',
-  component: FilterChips
+  component: FilterChips,
 }
 
 export const Default = {
@@ -12,7 +14,7 @@ export const Default = {
   name: 'Filter Chips',
 
   parameters: {
-    componentIds: ['component-filterchips']
+    componentIds: ['component-filterchips'],
   },
 
   args: {
@@ -22,7 +24,9 @@ export const Default = {
       <FilterChip value="division">Division</FilterChip>,
       <FilterChip value="global">Global</FilterChip>,
       <FilterChip value="country">Country</FilterChip>,
-      <FilterChip value="lcfi">Large Corporate & Financial Institutions</FilterChip>
-    ]
-  }
+      <FilterChip value="lcfi">
+        Large Corporate & Financial Institutions
+      </FilterChip>,
+    ],
+  },
 }

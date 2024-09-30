@@ -8,24 +8,24 @@ export default {
   title: 'Components/Form/Elements/Button',
 
   parameters: {
-    componentIds: ['component-button']
+    componentIds: ['component-button'],
   },
 
   argTypes: {
     type: {
       control: 'select',
-      options: ['button', 'submit', 'reset']
+      options: ['button', 'submit', 'reset'],
     },
 
     variant: {
       control: 'select',
-      options: ['', 'primary', 'secondary', 'ghost', 'danger']
+      options: ['', 'primary', 'secondary', 'ghost', 'danger'],
     },
 
     text: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Button = {
@@ -34,6 +34,6 @@ export const Button = {
 
   args: {
     type: 'button',
-    text: 'Click me!'
-  }
+    text: 'Click me!',
+  },
 }

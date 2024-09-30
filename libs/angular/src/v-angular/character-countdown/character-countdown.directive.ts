@@ -1,7 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core'
 
 @Directive({
-  selector: '[ngvCharacterCountdown]'
+  selector: '[ngvCharacterCountdown]',
 })
 export class CharacterCountdownDirective {
   @Input('ngvCharacterCountdown')
@@ -34,12 +34,16 @@ export class CharacterCountdownDirective {
 
   constructor(
     private readonly viewContainerRef: ViewContainerRef,
-    private readonly templateRef: TemplateRef<any>
+    private readonly templateRef: TemplateRef<any>,
   ) {}
 
   updateContext() {
-    this.context.charactersLeft = this.calculateCharactersLeft(this._maxlength, this._currentLength)
+    this.context.charactersLeft = this.calculateCharactersLeft(
+      this._maxlength,
+      this._currentLength,
+    )
   }
 
-  calculateCharactersLeft = (max: number, current: number): number => max - current
+  calculateCharactersLeft = (max: number, current: number): number =>
+    max - current
 }

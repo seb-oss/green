@@ -22,9 +22,9 @@ const meta: Meta = {
   title: 'Docs/Components/Coachmark',
   component: 'gds-coachmark',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -33,9 +33,9 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
-    }
-  }
+      source: { format: true, type: 'dynamic' },
+    },
+  },
 }
 
 /**
@@ -48,10 +48,18 @@ export const Basic: Story = {
   render: () => html`
     <div style="height: 200px">
       <p>
-        The coachmark will target the first element that matches the selector. Clicking anywhere closes the coachmark.
+        The coachmark will target the first element that matches the selector.
+        Clicking anywhere closes the coachmark.
       </p>
-      <p id="targetElement" style="width: 200px; background: #ddd; padding: 1px">Coachmark target element</p>
-      <gds-coachmark .target=${['#targetElement']} placement="bottom"> This is the coachmark content. </gds-coachmark>
+      <p
+        id="targetElement"
+        style="width: 200px; background: #ddd; padding: 1px"
+      >
+        Coachmark target element
+      </p>
+      <gds-coachmark .target=${['#targetElement']} placement="bottom">
+        This is the coachmark content.
+      </gds-coachmark>
     </div>
-  `
+  `,
 }

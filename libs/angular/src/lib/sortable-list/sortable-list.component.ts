@@ -1,5 +1,17 @@
-import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core'
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core'
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop'
 
 export interface SortableListItem {
   id: any
@@ -18,7 +30,7 @@ export interface SortableListGroup {
 @Component({
   selector: 'ngg-sortable-list',
   templateUrl: './sortable-list.component.html',
-  styleUrls: ['./sortable-list.component.scss']
+  styleUrls: ['./sortable-list.component.scss'],
 })
 export class NggSortableListComponent {
   @Input() groups: SortableListGroup[] = []
@@ -59,14 +71,23 @@ export class NggSortableListComponent {
    */
   onDragDrop(event: CdkDragDrop<SortableListItem[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex)
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      )
     } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      )
     }
 
     this.emitItemOrderChanged(
       [Number(event.previousContainer.id), event.previousIndex],
-      [Number(event.container.id), event.currentIndex]
+      [Number(event.container.id), event.currentIndex],
     )
   }
 
@@ -77,7 +98,12 @@ export class NggSortableListComponent {
    * @param currentItemIndex - The current index of the item.
    * @param newItemIndex - The new index of the item.
    */
-  onAltArrowKeydown(groupIndex: number, currentItemIndex: number, newItemIndex: number, event: any) {
+  onAltArrowKeydown(
+    groupIndex: number,
+    currentItemIndex: number,
+    newItemIndex: number,
+    event: any,
+  ) {
     event.preventDefault()
 
     let newIndex = newItemIndex
@@ -97,12 +123,20 @@ export class NggSortableListComponent {
     }
 
     if (transfer) {
-      transferArrayItem(this.groups[groupIndex].items, this.groups[newGroupIndex].items, currentItemIndex, newIndex)
+      transferArrayItem(
+        this.groups[groupIndex].items,
+        this.groups[newGroupIndex].items,
+        currentItemIndex,
+        newIndex,
+      )
     } else {
       moveItemInArray(this.groups[groupIndex].items, currentItemIndex, newIndex)
     }
 
-    this.emitItemOrderChanged([groupIndex, currentItemIndex], [newGroupIndex, newIndex])
+    this.emitItemOrderChanged(
+      [groupIndex, currentItemIndex],
+      [newGroupIndex, newIndex],
+    )
 
     setTimeout(() => {
       this.focusItem(newGroupIndex, newIndex)
@@ -144,11 +178,14 @@ export class NggSortableListComponent {
    * @param previousIndex - The previous index of the item.
    * @param currentIndex - The current index of the item.
    */
-  private emitItemOrderChanged(previousIndex: [number, number], currentIndex: [number, number]) {
+  private emitItemOrderChanged(
+    previousIndex: [number, number],
+    currentIndex: [number, number],
+  ) {
     this.itemOrderChanged.emit({
       previousIndex,
       currentIndex,
-      groups: [...this.groups]
+      groups: [...this.groups],
     })
   }
 
@@ -168,7 +205,8 @@ export class NggSortableListComponent {
    * @param itemIndex - The index of the item.
    */
   private focusItem(groupIndex: number, itemIndex: number): void {
-    const groupElements = this.sortableListGroups.nativeElement.querySelectorAll('.item-list-group')
+    const groupElements =
+      this.sortableListGroups.nativeElement.querySelectorAll('.item-list-group')
 
     if (groupElements && groupElements.length > groupIndex) {
       const itemElements = groupElements[groupIndex].querySelectorAll('.item')

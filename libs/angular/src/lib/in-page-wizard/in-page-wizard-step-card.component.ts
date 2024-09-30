@@ -2,14 +2,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 @Component({
   selector: 'ngg-in-page-wizard-step-card',
-  templateUrl: './in-page-wizard-step-card.component.html'
+  templateUrl: './in-page-wizard-step-card.component.html',
 })
 export class NggInPageWizardStepCardComponent {
   @Output()
-  readonly handleNextClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+  readonly handleNextClick: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
 
   @Output()
-  readonly handleEditClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+  readonly handleEditClick: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
 
   @Input() public stepIsValid = () => {
     return true

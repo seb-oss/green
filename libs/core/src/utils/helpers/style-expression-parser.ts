@@ -18,7 +18,7 @@ const viewportBreakpoints: Record<string, string> = {
   '3xl': '3840px',
   '4xl': '4320px',
   '5xl': '6016px',
-  '6xl': '7680px'
+  '6xl': '7680px',
 }
 
 const breakpointValueRegex = /^([<|>]=?)?([0-9a-z]+)/
@@ -55,7 +55,7 @@ export function tokenize(source: string): Tokens {
     }
   }
 
-  return lexemes.filter(l => l !== '')
+  return lexemes.filter((l) => l !== '')
 }
 
 /**
@@ -133,7 +133,7 @@ export function parse(tokens: Tokens): BreakpointTree {
 
 function parseBreakpoint(bp: string): BreakpointSpecifier {
   const bps = bp.split(',')
-  return bps.map(b => {
+  return bps.map((b) => {
     const match = b.trim().match(breakpointValueRegex)
     if (!match) {
       throw new Error(`Invalid breakpoint specifier: ${b}`)
@@ -149,15 +149,20 @@ export function toCss(
   selector: string,
   property: string,
   tree: BreakpointTree,
-  valueTemplate: (value: string) => string = v => v,
-  styleTemplate: (property: string, values: string[]) => string = (p, vs) => `${p}: ${vs.join(' ')};`
+  valueTemplate: (value: string) => string = (v) => v,
+  styleTemplate: (property: string, values: string[]) => string = (p, vs) =>
+    `${p}: ${vs.join(' ')};`,
 ) {
   let css = ''
   for (const bp of tree) {
-    const bpSpecs = bp.breakpoint === '-' ? [{ condition: '>=', value: '0' }] : parseBreakpoint(bp.breakpoint)
+    const bpSpecs =
+      bp.breakpoint === '-'
+        ? [{ condition: '>=', value: '0' }]
+        : parseBreakpoint(bp.breakpoint)
     const query = bpSpecs
       .map(
-        b => `(${b.condition?.includes('<') ? 'max-width' : 'min-width'}: ${viewportBreakpoints[b.value] ?? b.value})`
+        (b) =>
+          `(${b.condition?.includes('<') ? 'max-width' : 'min-width'}: ${viewportBreakpoints[b.value] ?? b.value})`,
       )
       .join(' and ')
 
@@ -167,13 +172,20 @@ export function toCss(
       .map((bpValues: BreakpointValues) => {
         let sel = selector
         if (bpValues.sel.length > 0)
-          sel = selector === ':host' ? `:host(:${bpValues.sel})` : `${selector}:${bpValues.sel}`
+          sel =
+            selector === ':host'
+              ? `:host(:${bpValues.sel})`
+              : `${selector}:${bpValues.sel}`
 
-        const style = styleTemplate(property, bpValues.values.map(valueTemplate))
+        const style = styleTemplate(
+          property,
+          bpValues.values.map(valueTemplate),
+        )
 
         // If the selector is hover, we wrap the style in a hover media query so that
         // it excludes touch devices
-        if (bpValues.sel === 'hover') return `@media (hover: hover) {${sel}{${style}}}`
+        if (bpValues.sel === 'hover')
+          return `@media (hover: hover) {${sel}{${style}}}`
         else return `${sel}{${style}}`
       })
       .join('')}}`

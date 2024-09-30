@@ -5,22 +5,22 @@ import { DropdownOption } from '@sebgroup/green-angular'
 @Component({
   selector: 'green-context-menu',
   templateUrl: './context-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuComponent {
   menuItems: DropdownOption[] = [
     {
       label: 'Tacos',
-      value: 'tacos'
+      value: 'tacos',
     },
     {
       label: 'Pizza',
-      value: 'pizza'
+      value: 'pizza',
     },
     {
       label: 'Sushi',
-      value: 'sushi'
-    }
+      value: 'sushi',
+    },
   ]
 
   onItemClicked(item: DropdownOption) {

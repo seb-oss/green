@@ -5,28 +5,34 @@ const list: string[] = ['First', 'Second', 'Third']
 const tableData: TableListProps[] = [
   {
     title: 'title',
-    definition: ['description 1']
+    definition: ['description 1'],
   },
   {
     title: 'title 2',
-    definition: ['description 2']
-  }
+    definition: ['description 2'],
+  },
 ]
 
 describe('List', () => {
   it('Should render ordered list', () => {
     render(<List listType="ordered">{list}</List>)
-    list.map((text, index) => expect(screen.getByText(text).textContent).toBe(list[index]))
+    list.map((text, index) =>
+      expect(screen.getByText(text).textContent).toBe(list[index]),
+    )
   })
 
   it('Should render unordered list', () => {
     render(<List listType="unordered">{list}</List>)
-    list.map((text, index) => expect(screen.getByText(text).textContent).toBe(list[index]))
+    list.map((text, index) =>
+      expect(screen.getByText(text).textContent).toBe(list[index]),
+    )
   })
 
   it('Should render check list', () => {
     render(<List listType="check">{list}</List>)
-    list.map((text, index) => expect(screen.getByText(text).textContent).toBe(list[index]))
+    list.map((text, index) =>
+      expect(screen.getByText(text).textContent).toBe(list[index]),
+    )
   })
 
   it('Should render description list', () => {
@@ -37,7 +43,9 @@ describe('List', () => {
 
   it('Check list should have check class name', () => {
     const { container } = render(<List listType="check">{list}</List>)
-    list.map((text, index) => expect(screen.getByText(text).textContent).toBe(list[index]))
+    list.map((text, index) =>
+      expect(screen.getByText(text).textContent).toBe(list[index]),
+    )
     expect(container.getElementsByClassName('check')).toBeTruthy()
   })
 })

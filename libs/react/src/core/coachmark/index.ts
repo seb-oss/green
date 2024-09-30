@@ -11,9 +11,9 @@ const reactWrapper = createComponent({
   elementClass: GdsCoachmark,
   react: React,
   events: {
-    onGdsUiState: 'gds-ui-state'
+    onGdsUiState: 'gds-ui-state',
   },
-  displayName: 'GdsCoachmark'
+  displayName: 'GdsCoachmark',
 })
 
 export default reactWrapper

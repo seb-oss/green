@@ -15,7 +15,10 @@
         "polyfills": "apps/angular-lib-dev/src/polyfills.ts",
         "tsConfig": "apps/angular-lib-dev/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/angular-lib-dev/src/favicon.ico", "apps/angular-lib-dev/src/assets"],
+        "assets": [
+          "apps/angular-lib-dev/src/favicon.ico",
+          "apps/angular-lib-dev/src/assets"
+        ],
         "styles": ["apps/angular-lib-dev/src/styles.scss"],
         "scripts": []
       },

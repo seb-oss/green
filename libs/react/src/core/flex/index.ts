@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsFlex,
   react: React,
   events: {},
-  displayName: 'GdsFlex'
+  displayName: 'GdsFlex',
 })
 
 export default reactWrapper

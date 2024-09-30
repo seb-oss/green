@@ -7,6 +7,6 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
   declarations: [NggDatepickerComponent],
   imports: [CommonModule, NggCoreWrapperModule],
   exports: [NggDatepickerComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NggDatepickerModule {}

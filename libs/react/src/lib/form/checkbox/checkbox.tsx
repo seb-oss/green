@@ -1,6 +1,12 @@
 import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
 import classNames from 'classnames'
-import { FormEventHandler, ForwardedRef, HTMLProps, useState, forwardRef } from 'react'
+import {
+  FormEventHandler,
+  ForwardedRef,
+  HTMLProps,
+  useState,
+  forwardRef,
+} from 'react'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
@@ -27,22 +33,23 @@ export const Checkbox = forwardRef(
       className,
       ...props
     }: CheckboxProps,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [uuid] = useState(id)
 
     const validationClassName = validateClassName(validator?.indicator)
 
     const labelClassNames = classNames('form-control', {
-      [validationClassName]: validator
+      [validationClassName]: validator,
     })
 
     const inputClassNames = classNames(className, {
-      [validationClassName]: validator
+      [validationClassName]: validator,
     })
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_message`]: validator?.message !== undefined && validator.message.length > 0
+      [`${uuid}_message`]:
+        validator?.message !== undefined && validator.message.length > 0,
     })
 
     return (
@@ -70,5 +77,5 @@ export const Checkbox = forwardRef(
         )}
       </div>
     )
-  }
+  },
 )

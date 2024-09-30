@@ -6,6 +6,6 @@ import { NgvExternalLinkDirective } from './external-link.directive'
 @NgModule({
   declarations: [NgvExternalLinkDirective],
   imports: [CommonModule],
-  exports: [NgvExternalLinkDirective]
+  exports: [NgvExternalLinkDirective],
 })
 export class NgvExternalLinkDirectiveModule {}

@@ -35,7 +35,7 @@ describe('Stepper', () => {
   it('renders status message', async () => {
     props.validator = {
       message: 'Status',
-      indicator: 'error'
+      indicator: 'error',
     }
     const { findByText } = render(<Stepper {...props} />)
 
@@ -45,12 +45,14 @@ describe('Stepper', () => {
     const renderComponent = async (props: StepperProps = {}) => {
       const component = render(<Stepper {...props} />)
       const [buttonDown, buttonUp] = await component.findAllByRole('button')
-      const input = component.baseElement.getElementsByTagName('input')[0] as HTMLInputElement
+      const input = component.baseElement.getElementsByTagName(
+        'input',
+      )[0] as HTMLInputElement
       return {
         component,
         buttonDown,
         buttonUp,
-        input
+        input,
       }
     }
     it('goes up', async () => {
@@ -76,7 +78,7 @@ describe('Stepper', () => {
       const user = userEvent.setup()
       const { input } = await renderComponent({
         value: 0,
-        onChange
+        onChange,
       })
 
       await user.type(input, '1')

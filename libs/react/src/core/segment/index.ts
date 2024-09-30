@@ -11,7 +11,7 @@ const reactWrapper = createComponent({
   elementClass: GdsSegment,
   react: React,
   events: {},
-  displayName: 'GdsSegment'
+  displayName: 'GdsSegment',
 })
 
 export default reactWrapper

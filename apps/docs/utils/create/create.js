@@ -2,13 +2,20 @@ const fs = require('fs')
 const path = require('path')
 
 const buttonName = process.argv[2]
-const dirPath = path.join(__dirname, '..', '..', 'content', 'component', buttonName)
+const dirPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'content',
+  'component',
+  buttonName,
+)
 
 fs.mkdirSync(dirPath, { recursive: true })
 
 const files = ['accessibility', 'code', 'index', 'ux-text']
 
-files.forEach(file => {
+files.forEach((file) => {
   let title = file.charAt(0).toUpperCase() + file.slice(1)
   if (file === 'ux-text') {
     title = 'UX text'

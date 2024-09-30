@@ -5,34 +5,42 @@ import * as fs from 'fs'
 
 const config: Omit<StorybookConfig, 'framework'> = {
   stories: ['../src/**/*.mdx', '../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
-  addons: ['@storybook/addon-essentials', '@storybook/addon-docs', '@storybook/addon-styling-webpack'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
+    '@storybook/addon-styling-webpack',
+  ],
   webpackFinal: async (config, { configType }) => {
     config.plugins?.push(
       new EventHooksPlugin({
         compile: async () => {
-          fs.access('dist/fonts', async error => {
+          fs.access('dist/fonts', async (error) => {
             if (error) {
               console.log('Font directory does not exist. Copying fonts...')
-              await new Promise(resolve =>
-                copyfiles(['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'], { up: true }, resolve)
+              await new Promise((resolve) =>
+                copyfiles(
+                  ['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'],
+                  { up: true },
+                  resolve,
+                ),
               )
-                .catch(_ => [{ success: false }])
-                .then(_ => [{ success: true }])
+                .catch((_) => [{ success: false }])
+                .then((_) => [{ success: true }])
             } else {
               console.log("Font directory already exist. Won't copy fonts...")
             }
           })
-        }
-      })
+        },
+      }),
     )
 
     config.module?.rules?.push({
       test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource'
+      type: 'asset/resource',
     })
 
     return config
-  }
+  },
 }
 
 export default config

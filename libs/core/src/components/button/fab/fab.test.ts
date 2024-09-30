@@ -7,7 +7,10 @@ import sinon from 'sinon'
 import '@sebgroup/green-core/components/button/fab'
 import type { GdsFab } from '@sebgroup/green-core/components/button/fab'
 
-import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

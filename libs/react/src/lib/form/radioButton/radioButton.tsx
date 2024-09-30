@@ -11,17 +11,29 @@ export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {
 }
 
 export const RadioButton = forwardRef(
-  ({ label, validator, testId, ...props }: RadioButtonProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+  (
+    { label, validator, testId, ...props }: RadioButtonProps,
+    ref: React.ForwardedRef<HTMLInputElement>,
+  ) => {
     const { id } = useInput(props)
 
-    const inputClassNames = classNames(validator && validateClassName(validator?.indicator))
+    const inputClassNames = classNames(
+      validator && validateClassName(validator?.indicator),
+    )
 
     return (
       <label htmlFor={id} className="form-control">
-        <input id={id} type="radio" data-testid={testId} {...props} className={inputClassNames} ref={ref} />
+        <input
+          id={id}
+          type="radio"
+          data-testid={testId}
+          {...props}
+          className={inputClassNames}
+          ref={ref}
+        />
         <span>{label}</span>
         <i />
       </label>
     )
-  }
+  },
 )

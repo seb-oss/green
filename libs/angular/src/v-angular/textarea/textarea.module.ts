@@ -6,6 +6,6 @@ import { NgvTextareaComponent } from './textarea.component'
 @NgModule({
   declarations: [NgvTextareaComponent],
   imports: [CommonModule],
-  exports: [NgvTextareaComponent]
+  exports: [NgvTextareaComponent],
 })
 export class NgvTextareaModule {}

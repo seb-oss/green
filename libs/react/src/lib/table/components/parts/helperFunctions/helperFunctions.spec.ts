@@ -1,5 +1,14 @@
-import { filterArrayByColumns, searchTextByColumns, sortArray, sumCols } from './helperFunctions'
-import { FilterColumn, GenericTableRow, SortDirection } from '../../table-typings'
+import {
+  filterArrayByColumns,
+  searchTextByColumns,
+  sortArray,
+  sumCols,
+} from './helperFunctions'
+import {
+  FilterColumn,
+  GenericTableRow,
+  SortDirection,
+} from '../../table-typings'
 import { onRowSelect, paginate, RowSelectOutput } from './helperFunctions'
 
 type Data = {
@@ -49,7 +58,7 @@ function getData() {
     { name: 'rodd', age: 12 },
     { name: 'andy', age: 22 },
     { name: 'andrew', age: 22 },
-    { name: 'zodd', age: 32 }
+    { name: 'zodd', age: 32 },
   ]
 }
 
@@ -75,8 +84,8 @@ describe('Table helper functions:', () => {
           { name: 'andrew', age: 22 },
           { name: 'andy', age: 22 },
           { name: 'rodd', age: 12 },
-          { name: 'zodd', age: 32 }
-        ]
+          { name: 'zodd', age: 32 },
+        ],
       },
       {
         statement: 'Should sort array descendingly according to name',
@@ -86,8 +95,8 @@ describe('Table helper functions:', () => {
           { name: 'zodd', age: 32 },
           { name: 'rodd', age: 12 },
           { name: 'andy', age: 22 },
-          { name: 'andrew', age: 22 }
-        ]
+          { name: 'andrew', age: 22 },
+        ],
       },
       {
         statement: 'Should sort array ascendingly according to age',
@@ -97,8 +106,8 @@ describe('Table helper functions:', () => {
           { name: 'rodd', age: 12 },
           { name: 'andy', age: 22 },
           { name: 'andrew', age: 22 },
-          { name: 'zodd', age: 32 }
-        ]
+          { name: 'zodd', age: 32 },
+        ],
       },
       {
         statement: 'Should sort array descendingly according to age',
@@ -108,13 +117,15 @@ describe('Table helper functions:', () => {
           { name: 'zodd', age: 32 },
           { name: 'andy', age: 22 },
           { name: 'andrew', age: 22 },
-          { name: 'rodd', age: 12 }
-        ]
-      }
+          { name: 'rodd', age: 12 },
+        ],
+      },
     ]
     testCases.map((item: SortArrayTestCase) => {
       it(item.statement, () => {
-        expect(sortArray(testData, item.sortKey, item.sortDirection)).toEqual(item.result)
+        expect(sortArray(testData, item.sortKey, item.sortDirection)).toEqual(
+          item.result,
+        )
       })
     })
   })
@@ -124,20 +135,22 @@ describe('Table helper functions:', () => {
       {
         statement: 'Should return original array if filter columns is empty',
         filterColumns: [],
-        result: getData()
+        result: getData(),
       },
       {
         statement: 'Should return filtered array based on filter columns',
         filterColumns: [
           { accessor: 'age', value: 22 },
-          { accessor: 'name', value: ['andrew'] }
+          { accessor: 'name', value: ['andrew'] },
         ],
-        result: [{ age: 22, name: 'andrew' }]
-      }
+        result: [{ age: 22, name: 'andrew' }],
+      },
     ]
     testCases.map((item: FilterDataByColumnTestCase) => {
       it(item.statement, () => {
-        expect(filterArrayByColumns(testData, item.filterColumns)).toEqual(item.result)
+        expect(filterArrayByColumns(testData, item.filterColumns)).toEqual(
+          item.result,
+        )
       })
     })
   })
@@ -145,39 +158,48 @@ describe('Table helper functions:', () => {
   describe('searchTextByColumns', () => {
     const testCases: Array<SearchTextByColumnTestCase> = [
       {
-        statement: 'Should return empty array if keyword and fields are undefined',
+        statement:
+          'Should return empty array if keyword and fields are undefined',
         keyword: undefined,
         fields: undefined,
-        result: []
+        result: [],
       },
       {
         statement: 'Should return empty array if keyword is undefined',
         keyword: undefined,
         fields: ['age'],
-        result: []
+        result: [],
       },
       {
         statement: 'Should return empty array if field defined is not existed',
         keyword: '1',
         fields: ['age2' as any],
-        result: []
+        result: [],
       },
       {
-        statement: 'Should return filtered array based on string keyword and fields defined',
+        statement:
+          'Should return filtered array based on string keyword and fields defined',
         keyword: 'andrew',
         fields: ['name'],
-        result: [{ name: 'andrew', age: 22 }]
+        result: [{ name: 'andrew', age: 22 }],
       },
       {
-        statement: 'Should return filtered array based on numbered keyword and fields defined',
+        statement:
+          'Should return filtered array based on numbered keyword and fields defined',
         keyword: 32 as any,
         fields: ['age'],
-        result: [{ name: 'zodd', age: 32 }]
-      }
+        result: [{ name: 'zodd', age: 32 }],
+      },
     ]
     testCases.map((item: SearchTextByColumnTestCase) => {
       it(item.statement, () => {
-        expect(searchTextByColumns(testData, item.keyword as string, item.fields as any)).toEqual(item.result)
+        expect(
+          searchTextByColumns(
+            testData,
+            item.keyword as string,
+            item.fields as any,
+          ),
+        ).toEqual(item.result)
       })
     })
   })
@@ -189,33 +211,39 @@ describe('Table helper functions:', () => {
         offset: null,
         currentPage: null,
         data: getData(),
-        result: getData()
+        result: getData(),
       },
       {
         statement: 'Should return original array if data is null',
         offset: 1,
         currentPage: null,
         data: null,
-        result: null
+        result: null,
       },
       {
         statement: 'Should return original array if data is empty',
         offset: 1,
         currentPage: null,
         data: [],
-        result: []
+        result: [],
       },
       {
         statement: 'Should return paginated array',
         offset: 1,
         currentPage: 0,
         data: getData(),
-        result: [getData()[0]]
-      }
+        result: [getData()[0]],
+      },
     ]
     testCases.map((item: PaginateTestCase) => {
       it(item.statement, () => {
-        expect(paginate(item.data as any, item.offset as any, item.currentPage as any)).toEqual(item.result)
+        expect(
+          paginate(
+            item.data as any,
+            item.offset as any,
+            item.currentPage as any,
+          ),
+        ).toEqual(item.result)
       })
     })
   })
@@ -231,8 +259,8 @@ describe('Table helper functions:', () => {
         result: {
           data: undefined as any,
           isAllSelected: false,
-          isIndeterminate: false
-        }
+          isIndeterminate: false,
+        },
       },
       {
         statement: 'Should check all if rowId is all',
@@ -246,8 +274,8 @@ describe('Table helper functions:', () => {
             return item
           }),
           isAllSelected: true,
-          isIndeterminate: false
-        }
+          isIndeterminate: false,
+        },
       },
       {
         statement: 'Should check selected row',
@@ -263,13 +291,20 @@ describe('Table helper functions:', () => {
             return item
           }),
           isAllSelected: undefined as any,
-          isIndeterminate: true
-        }
-      }
+          isIndeterminate: true,
+        },
+      },
     ]
     testCases.map((item: RowSelectTestCase) => {
       it(item.statement, () => {
-        expect(onRowSelect(item.event, item.data as any, item.rowUniqueAccessor, item.rowId)).toEqual(item.result)
+        expect(
+          onRowSelect(
+            item.event,
+            item.data as any,
+            item.rowUniqueAccessor,
+            item.rowId,
+          ),
+        ).toEqual(item.result)
       })
     })
   })

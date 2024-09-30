@@ -8,6 +8,6 @@ import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
   declarations: [NgvInfoCircleComponent],
   imports: [CommonModule, NggCoreWrapperModule, NgvTooltipModule],
   exports: [NgvInfoCircleComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NgvInfoCircleModule {}

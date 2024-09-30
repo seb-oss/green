@@ -17,7 +17,7 @@ const MockComponent = ({ mockOnSubmit }: MockComponentProps) => (
       validate={{
         message: 'fill in blank',
         indicator: 'error',
-        rules: { type: 'Required' }
+        rules: { type: 'Required' },
       }}
     >
       <TextInput label="Text field" placeholder="eg: cat" value={''} />
@@ -35,7 +35,9 @@ describe('Form component', () => {
 
   it('Should render correct form direction', () => {
     const { container } = render(<Form direction="horizontal">i am form</Form>)
-    expect(container.querySelector('form')?.className.includes('horizontal')).toBe(true)
+    expect(
+      container.querySelector('form')?.className.includes('horizontal'),
+    ).toBe(true)
   })
 
   it('Should render larger form size', () => {
@@ -47,10 +49,10 @@ describe('Form component', () => {
     const { container } = render(<MockComponent />)
     expect(screen.queryByText('fill in blank')).toBeNull()
     fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-      target: { value: 'value' }
+      target: { value: 'value' },
     })
     fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-      target: { value: '' }
+      target: { value: '' },
     })
     expect(screen.queryByText('fill in blank')).toBeVisible()
   })
@@ -66,8 +68,8 @@ describe('Form component', () => {
     const { container } = render(<MockComponent />)
     await act(() =>
       fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-        target: { value: 'value' }
-      })
+        target: { value: 'value' },
+      }),
     )
     expect(container.querySelector('input')?.value).toBe('value')
     fireEvent.click(screen.getByText('reset'))
@@ -85,12 +87,14 @@ describe('Form component', () => {
 
   it('Should call onSubmitForm fn', async () => {
     /* eslint-disable-next-line */
-    const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
+    const mockFn: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
     await act(() =>
       fireEvent.change(screen.getByPlaceholderText('eg: cat'), {
-        target: { value: 'cat cat' }
-      })
+        target: { value: 'cat cat' },
+      }),
     )
     await act(() => fireEvent.click(screen.getByText('submit')))
     expect(mockFn).toBeCalled()
@@ -99,7 +103,9 @@ describe('Form component', () => {
 
   it('Should call not onSubmitForm fn when input empty', async () => {
     /* eslint-disable-next-line */
-    const mockFn: jest.Mock = jest.fn().mockImplementation((value: any) => value)
+    const mockFn: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
     await act(() => fireEvent.click(screen.getByText('submit')))
     expect(mockFn).not.toBeCalled()
@@ -113,12 +119,12 @@ describe('Form component', () => {
           validate={{
             message: 'required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <Checkbox label="checkbox" />
         </FormItems>
-      </Form>
+      </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
     await act(() => fireEvent.click(screen.getByText('checkbox')))
@@ -133,7 +139,7 @@ describe('Form component', () => {
           validate={{
             message: 'required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <RadioGroup label="Radio Group">
@@ -142,7 +148,7 @@ describe('Form component', () => {
           </RadioGroup>
         </FormItems>
         <button type="submit">submit</button>
-      </Form>
+      </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
     await act(() => fireEvent.click(screen.getByText('submit')))
@@ -150,14 +156,17 @@ describe('Form component', () => {
   })
 
   it('Should remove inputs and useEffect cleanup should run', async () => {
-    const mockFn: jest.Mock = jest.fn().mockImplementation(value => value())
-    const mockFormContext: jest.SpyInstance = jest.spyOn(FormContext, 'useFormContext')
+    const mockFn: jest.Mock = jest.fn().mockImplementation((value) => value())
+    const mockFormContext: jest.SpyInstance = jest.spyOn(
+      FormContext,
+      'useFormContext',
+    )
     mockFormContext.mockImplementation(() => ({
       setValues: mockFn,
       setErrors: mockFn,
       setFields: mockFn,
       errors: undefined,
-      values: undefined
+      values: undefined,
     }))
     const MockComponent = () => {
       const [hide, setHide] = React.useState(true)

@@ -12,9 +12,14 @@ import {
   Optional,
   PLATFORM_ID,
   Renderer2,
-  Self
+  Self,
 } from '@angular/core'
-import { AbstractControl, ControlValueAccessor, NgControl, Validator } from '@angular/forms'
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NgControl,
+  Validator,
+} from '@angular/forms'
 
 import type Inputmask from 'inputmask'
 import _Inputmask from 'inputmask'
@@ -22,10 +27,12 @@ import _Inputmask from 'inputmask'
 import { INPUT_MASK_CONFIG, InputMaskConfig } from './config'
 import type { InputmaskOptions } from './input-mask.types'
 
-const InputmaskConstructor = (_Inputmask as unknown as { default?: Inputmask.Static }).default || _Inputmask
+const InputmaskConstructor =
+  (_Inputmask as unknown as { default?: Inputmask.Static }).default ||
+  _Inputmask
 
 @Directive({
-  selector: '[ngvInputMask]'
+  selector: '[ngvInputMask]',
 })
 export class NgvInputMaskDirective<T = any>
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator
@@ -45,7 +52,7 @@ export class NgvInputMaskDirective<T = any>
     @Inject(PLATFORM_ID) private platformId: string,
     private elementRef: ElementRef<HTMLInputElement | any>,
     private renderer: Renderer2,
-    private ngZone: NgZone
+    private ngZone: NgZone,
   ) {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this
@@ -70,15 +77,19 @@ export class NgvInputMaskDirective<T = any>
       this.elementRef.nativeElement.dispatchEvent(
         new Event('input', {
           bubbles: true,
-          cancelable: true
-        })
+          cancelable: true,
+        }),
       )
     }
   }
 
   ngOnInit() {
     if (this.control) {
-      this.control.setValidators(this.control.validator ? [this.control.validator, this.validate] : [this.validate])
+      this.control.setValidators(
+        this.control.validator
+          ? [this.control.validator, this.validate]
+          : [this.validate],
+      )
 
       this.control.updateValueAndValidity()
     }
@@ -90,12 +101,18 @@ export class NgvInputMaskDirective<T = any>
   }
 
   initInputMask() {
-    if (isPlatformServer(this.platformId) || !this.nativeInputElement || !Object.keys(this.ngvInputMask).length) {
+    if (
+      isPlatformServer(this.platformId) ||
+      !this.nativeInputElement ||
+      !Object.keys(this.ngvInputMask).length
+    ) {
       return
     }
 
     this.inputMaskPlugin = this.ngZone.runOutsideAngular(() =>
-      new InputmaskConstructor(this.inputMaskOptions).mask(this.nativeInputElement as HTMLInputElement)
+      new InputmaskConstructor(this.inputMaskOptions).mask(
+        this.nativeInputElement as HTMLInputElement,
+      ),
     )
 
     if (this.control) {
@@ -123,7 +140,7 @@ export class NgvInputMaskDirective<T = any>
   registerOnChange(fn: (_: T | null) => void): void {
     // Use injected parser from settings to modify value
     // of users desire
-    this.onInput = value => {
+    this.onInput = (value) => {
       const parser = this.ngvInputMask?.parser
       const newValue = parser && value ? parser(value) : value
       fn(newValue)
@@ -135,7 +152,9 @@ export class NgvInputMaskDirective<T = any>
   }
 
   validate = (control: AbstractControl): { [key: string]: any } | null =>
-    !control.value || !this.inputMaskPlugin || this.inputMaskPlugin.isValid() ? null : { invalidformat: true }
+    !control.value || !this.inputMaskPlugin || this.inputMaskPlugin.isValid()
+      ? null
+      : { invalidformat: true }
 
   setDisabledState(disabled: boolean): void {
     if (this.nativeInputElement) {
@@ -153,16 +172,17 @@ export class NgvInputMaskDirective<T = any>
     } else {
       this.defaultInputMaskConfig = {
         ...this.defaultInputMaskConfig,
-        ...config
+        ...config,
       }
       if (this.defaultInputMaskConfig.isAsync) {
         // Create an observer instance linked to the callback function
-        this.mutationObserver = new MutationObserver(mutationsList => {
+        this.mutationObserver = new MutationObserver((mutationsList) => {
           for (const mutation of mutationsList) {
             if (mutation.type === 'childList') {
-              const nativeInputElement = this.elementRef.nativeElement.querySelector(
-                this.defaultInputMaskConfig.inputSelector
-              )
+              const nativeInputElement =
+                this.elementRef.nativeElement.querySelector(
+                  this.defaultInputMaskConfig.inputSelector,
+                )
               if (nativeInputElement) {
                 this.nativeInputElement = nativeInputElement
                 this.mutationObserver?.disconnect()
@@ -175,10 +195,12 @@ export class NgvInputMaskDirective<T = any>
         // Start observing the target node for configured mutations
         this.mutationObserver.observe(this.elementRef.nativeElement, {
           childList: true,
-          subtree: true
+          subtree: true,
         })
       } else {
-        this.nativeInputElement = this.elementRef.nativeElement.querySelector(this.defaultInputMaskConfig.inputSelector)
+        this.nativeInputElement = this.elementRef.nativeElement.querySelector(
+          this.defaultInputMaskConfig.inputSelector,
+        )
       }
     }
   }

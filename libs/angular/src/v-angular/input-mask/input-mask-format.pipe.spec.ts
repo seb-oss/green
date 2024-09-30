@@ -18,12 +18,12 @@ describe('[NgvInputMask]', () => {
     'yyyy.mm.dd.',
     'yyyy.mm.dd',
     'mm.dd.yyyy',
-    'dd/mm yyyy'
+    'dd/mm yyyy',
   ]
 
-  const dateMasks = dateFormats.map(format => ({
+  const dateMasks = dateFormats.map((format) => ({
     alias: 'datetime',
-    inputFormat: format
+    inputFormat: format,
   }))
 
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('[NgvInputMask]', () => {
       groupSeparator: ' ',
       radixPoint: ',',
       digits: 2,
-      digitsOptional: false
+      digitsOptional: false,
     }
 
     const numericMask2 = {
@@ -48,7 +48,7 @@ describe('[NgvInputMask]', () => {
       groupSeparator: ',',
       radixPoint: '.',
       digits: 2,
-      digitsOptional: false
+      digitsOptional: false,
     }
 
     it.each`

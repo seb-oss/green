@@ -1,5 +1,18 @@
-import { Table, TableHeader, TableBody, TableRow, TableHeaderCell, TableCell } from '../components'
-import { SortableTable, SelectableTable, ExpandableTable, columnData, rowData } from './multiple-story-tables'
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+} from '../components'
+import {
+  SortableTable,
+  SelectableTable,
+  ExpandableTable,
+  columnData,
+  rowData,
+} from './multiple-story-tables'
 
 const Template = () => {
   return (
@@ -28,7 +41,7 @@ const Template = () => {
 
 export default {
   title: 'Components/Table',
-  component: Table
+  component: Table,
 }
 
 export const Default = {
@@ -36,8 +49,8 @@ export const Default = {
   name: 'Table',
 
   parameters: {
-    componentIds: ['component-table']
-  }
+    componentIds: ['component-table'],
+  },
 }
 
 export const SortableTableStory = {
@@ -45,8 +58,8 @@ export const SortableTableStory = {
   name: 'Sortable table',
 
   parameters: {
-    componentIds: ['component-sortable']
-  }
+    componentIds: ['component-sortable'],
+  },
 }
 
 export const SelectableTableStory = {
@@ -54,8 +67,8 @@ export const SelectableTableStory = {
   name: 'Selectable table',
 
   parameters: {
-    componentIds: ['component-selectable']
-  }
+    componentIds: ['component-selectable'],
+  },
 }
 
 export const ExpandableTableStory = {
@@ -63,6 +76,6 @@ export const ExpandableTableStory = {
   name: 'Expandable table',
 
   parameters: {
-    componentIds: ['component-expandable']
-  }
+    componentIds: ['component-expandable'],
+  },
 }

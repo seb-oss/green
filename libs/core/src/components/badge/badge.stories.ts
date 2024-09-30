@@ -35,9 +35,9 @@ const meta: Meta = {
   title: 'Docs/Components/Badge',
   component: 'gds-badge',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -45,8 +45,13 @@ type Story = StoryObj
 
 export const Variants: Story = {
   name: 'Variants',
-  render: args => html`
-    <gds-flex flex-direction="column" justify-content="center" gap="4xl" padding="4xl">
+  render: (args) => html`
+    <gds-flex
+      flex-direction="column"
+      justify-content="center"
+      gap="4xl"
+      padding="4xl"
+    >
       <gds-flex flex-direction="column" gap="m">
         <gds-flex flex-direction="column" gap="s">
           <gds-text>Icon</gds-text>
@@ -70,11 +75,13 @@ export const Variants: Story = {
             Warning
           </gds-badge>
           <gds-badge variant="negative">
-            <gds-icon-triangle-exclamation slot="lead"> </gds-icon-triangle-exclamation>
+            <gds-icon-triangle-exclamation slot="lead">
+            </gds-icon-triangle-exclamation>
             Negative
           </gds-badge>
           <gds-badge variant="negative" disabled>
-            <gds-icon-triangle-exclamation slot="lead"> </gds-icon-triangle-exclamation>
+            <gds-icon-triangle-exclamation slot="lead">
+            </gds-icon-triangle-exclamation>
             Disabled
           </gds-badge>
         </gds-flex>
@@ -127,7 +134,7 @@ export const Variants: Story = {
         </gds-flex>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -151,20 +158,21 @@ export const Variants: Story = {
 export const Lead: Story = {
   name: 'Lead',
   parameters: {
-    controls: { include: [] }
+    controls: { include: [] },
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex gap="xl">
       <gds-badge variant="positive">
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         Launch
       </gds-badge>
       <gds-badge variant="warning">
-        <gds-icon-arrow-rotate-counter-clockwise slot="lead"> </gds-icon-arrow-rotate-counter-clockwise>
+        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
+        </gds-icon-arrow-rotate-counter-clockwise>
         Discard
       </gds-badge>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -179,9 +187,9 @@ export const Lead: Story = {
 export const Trail: Story = {
   name: 'Trail',
   parameters: {
-    controls: { include: [] }
+    controls: { include: [] },
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex gap="xl">
       <gds-badge variant="positive">
         <gds-icon-plus-small slot="lead"></gds-icon-plus-small>
@@ -194,7 +202,7 @@ export const Trail: Story = {
         <span slot="trail">EUR</span>
       </gds-badge>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -209,7 +217,7 @@ export const Trail: Story = {
  */
 export const Size: Story = {
   name: 'Size',
-  render: args => html`
+  render: (args) => html`
     <gds-flex gap="4xl">
       <gds-flex flex-direction="column" gap="xl">
         <gds-badge variant="information" size="small">140</gds-badge>
@@ -226,7 +234,7 @@ export const Size: Story = {
         <gds-badge variant="negative" size="small">kr</gds-badge>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -242,18 +250,19 @@ export const Size: Story = {
  */
 export const Disabled: Story = {
   name: 'Disabled',
-  render: args => html`
+  render: (args) => html`
     <gds-flex gap="xl">
       <gds-badge variant="positive" disabled>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         Launch
       </gds-badge>
       <gds-badge variant="warning" disabled>
-        <gds-icon-arrow-rotate-counter-clockwise slot="lead"> </gds-icon-arrow-rotate-counter-clockwise>
+        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
+        </gds-icon-arrow-rotate-counter-clockwise>
         Discard
       </gds-badge>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -276,11 +285,11 @@ export const Notification: Story = {
   name: 'Notification',
   parameters: {
     actions: {
-      handles: ['mouseover', 'mouseout']
-    }
+      handles: ['mouseover', 'mouseout'],
+    },
   },
   play: async () => {
-    document.querySelectorAll('gds-badge[notification]').forEach(badge => {
+    document.querySelectorAll('gds-badge[notification]').forEach((badge) => {
       let interval: number | undefined
 
       const startAnimation = () => {
@@ -290,7 +299,8 @@ export const Notification: Story = {
           const targetValue = parseInt(numericContent, 10)
           let currentValue = 0
           interval = window.setInterval(() => {
-            badge.textContent = currentValue.toString() + content.replace(/\d/g, '') // Preserve non-numeric characters
+            badge.textContent =
+              currentValue.toString() + content.replace(/\d/g, '') // Preserve non-numeric characters
             if (currentValue === targetValue) {
               clearInterval(interval)
             } else {
@@ -311,7 +321,7 @@ export const Notification: Story = {
       badge.addEventListener('mouseout', stopAnimation)
     })
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex gap="xl" align-items="center">
       <gds-badge variant="positive" notification></gds-badge>
       <gds-badge variant="positive" notification>9</gds-badge>
@@ -326,5 +336,5 @@ export const Notification: Story = {
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-badge>
     </gds-flex>
-  `
+  `,
 }

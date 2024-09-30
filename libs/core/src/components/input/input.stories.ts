@@ -26,9 +26,9 @@ const meta: Meta = {
   title: 'Docs/Components/Form/Input',
   component: 'gds-input',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -37,16 +37,16 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
     controls: {
-      expanded: true
-    }
+      expanded: true,
+    },
   },
   args: {
     label: 'Label text',
-    textarea: false
-  }
+    textarea: false,
+  },
 }
 
 export const Default: Story = {
@@ -58,7 +58,7 @@ export const Default: Story = {
         <gds-icon-people-profile slot="lead"></gds-icon-people-profile>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -89,30 +89,30 @@ export const Size: Story = {
                 {
                   ...el.validity,
                   valid: false,
-                  customError: true
+                  customError: true,
                 },
-                'Error message.'
+                'Error message.',
               ]
             else if (el.value.length !== 12 || isNaN(el.value))
               return [
                 {
                   ...el.validity,
                   valid: false,
-                  customError: true
+                  customError: true,
                 },
-                'The value must be 12 characters long.'
+                'The value must be 12 characters long.',
               ]
-          }
+          },
         }}
       >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         <span slot="extended-supporting-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -134,7 +134,7 @@ export const Lead: Story = {
         <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -151,11 +151,16 @@ export const Trail: Story = {
   name: 'Slot: Trail',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-input label="Label" supporting-text="Label support text" value="10,000.00" clearable>
+      <gds-input
+        label="Label"
+        supporting-text="Label support text"
+        value="10,000.00"
+        clearable
+      >
         <gds-badge variant="information" slot="trail">USD</gds-badge>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -172,10 +177,16 @@ export const Length: Story = {
   name: 'Length',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-input label="Label" supporting-text="Label support text" value="Example value" maxLength="20" clearable>
+      <gds-input
+        label="Label"
+        supporting-text="Label support text"
+        value="Example value"
+        maxLength="20"
+        clearable
+      >
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -192,9 +203,13 @@ export const Clearable: Story = {
   name: 'Clearable',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-input label="Label text" value="Clear this text" clearable></gds-input>
+      <gds-input
+        label="Label text"
+        value="Clear this text"
+        clearable
+      ></gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -213,7 +228,7 @@ export const SupportingText: Story = {
     <gds-flex flex-direction="column" gap="xl" width="320px">
       <gds-input label="Label" supporting-text="Supporting text"></gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -242,18 +257,22 @@ export const ExtendedSupportingText: Story = {
     <gds-flex gap="xl" width="800px">
       <gds-input label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>
-      <gds-input label="Label text" supporting-text="Supporting text" show-extended-supporting-text>
+      <gds-input
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
         <span slot="extended-supporting-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -302,26 +321,26 @@ export const Validation: Story = {
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'Error message.'
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'The value must be 12 characters long.'
+                  'The value must be 12 characters long.',
                 ]
-            }
+            },
           }}
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
           <span slot="extended-supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </span>
         </gds-input>
         <gds-input
@@ -337,20 +356,20 @@ export const Validation: Story = {
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'Error message.'
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'The value must be 12 characters long. '
+                  'The value must be 12 characters long. ',
                 ]
-            }
+            },
           }}
           clearable
         >
@@ -358,7 +377,7 @@ export const Validation: Story = {
         </gds-input>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -378,9 +397,15 @@ export const Disabled: Story = {
       <gds-input label="Label" disabled supporting-text="Support text">
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-input>
-      <gds-input label="Label" disabled supporting-text="Support text" value="Disabled with value" clearable>
+      <gds-input
+        label="Label"
+        disabled
+        supporting-text="Support text"
+        value="Disabled with value"
+        clearable
+      >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-input>
     </gds-flex>
-  `
+  `,
 }

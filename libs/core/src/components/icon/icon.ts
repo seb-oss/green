@@ -51,8 +51,16 @@ export abstract class GdsIcon extends GdsElement {
   render() {
     const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
 
-    const width = isSebIcon ? '55' : this.width !== undefined ? this.width.toString() : undefined
-    const height = isSebIcon ? '24' : this.height !== undefined ? this.height.toString() : '1lh'
+    const width = isSebIcon
+      ? '55'
+      : this.width !== undefined
+        ? this.width.toString()
+        : undefined
+    const height = isSebIcon
+      ? '24'
+      : this.height !== undefined
+        ? this.height.toString()
+        : '1lh'
     const viewBox = isSebIcon ? '0 0 55 24' : this.box || '0 0 24 24'
 
     let svgContent = `<svg
@@ -71,7 +79,7 @@ export abstract class GdsIcon extends GdsElement {
     if (this.stroke) {
       svgContent = svgContent.replace(
         /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
-        `<$1 stroke-width="${this.stroke}"`
+        `<$1 stroke-width="${this.stroke}"`,
       )
     }
 

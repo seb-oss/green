@@ -30,7 +30,11 @@ button {
 
 @media (pointer: fine) {
   button:hover {
-    background-color: color-mix(in srgb, var(--gds-sys-color-state-layers-state-black-dim1), transparent);
+    background-color: color-mix(
+      in srgb,
+      var(--gds-sys-color-state-layers-state-black-dim1),
+      transparent
+    );
 
     &:disabled {
       background-color: transparent;

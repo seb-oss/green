@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'center',
-          backgroundImage: 'url(https://seb.io/og-bg.png)'
+          backgroundImage: 'url(https://seb.io/og-bg.png)',
         }}
       >
         <div
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
             fontStyle: 'normal',
             color: 'white',
             lineHeight: '120px',
-            whiteSpace: 'pre-wrap'
+            whiteSpace: 'pre-wrap',
           }}
         >
           {postTitle}
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     ),
     {
       width: 1920,
-      height: 1080
-    }
+      height: 1080,
+    },
   )
 }

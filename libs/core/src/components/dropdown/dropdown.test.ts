@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil, aTimeout } from '@open-wc/testing'
+import {
+  fixture,
+  html as testingHtml,
+  waitUntil,
+  aTimeout,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement } from '../../utils/testing'
 import sinon from 'sinon'
@@ -8,7 +13,10 @@ import '@sebgroup/green-core/components/dropdown'
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 import { GdsOption } from '@sebgroup/green-core/primitives/listbox/option'
 
-import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -39,7 +47,9 @@ describe('<gds-dropdown>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const popover = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('gds-popover'))!
+    const popover = el.shadowRoot!.querySelector<HTMLElement>(
+      getScopedTagName('gds-popover'),
+    )!
 
     await expect(popover.hidden).to.be.false
   })
@@ -136,7 +146,8 @@ describe('<gds-dropdown>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const triggerSlot = el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
+    const triggerSlot =
+      el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
 
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
 
@@ -204,7 +215,10 @@ describe('<gds-dropdown>', () => {
   it('popover should not be narrower than trigger', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown open>
-        <gds-option placeholder>This is a very long string that will cause the trigger to be very wide</gds-option>
+        <gds-option placeholder
+          >This is a very long string that will cause the trigger to be very
+          wide</gds-option
+        >
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
@@ -218,7 +232,9 @@ describe('<gds-dropdown>', () => {
 
     await aTimeout(50)
 
-    await expect(popover?.clientWidth).to.be.greaterThanOrEqual(trigger.clientWidth)
+    await expect(popover?.clientWidth).to.be.greaterThanOrEqual(
+      trigger.clientWidth,
+    )
   })
 
   it('should be the same width as the trigger when `sync-popover-width` attribute is set', async () => {
@@ -227,7 +243,10 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v1">Option 1</gds-option>
         <gds-option value="v2">Option 2</gds-option>
         <gds-option value="v3">Option 3</gds-option>
-        <gds-option>This is a very long option text that will cause the popover to be very wide</gds-option>
+        <gds-option
+          >This is a very long option text that will cause the popover to be
+          very wide</gds-option
+        >
       </gds-dropdown>
     `)
 
@@ -272,8 +291,10 @@ describe('<gds-dropdown>', () => {
   it('should select complex value correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
 
-    ;[1, 2, 3].forEach(num => {
-      const o = document.createElement(getScopedTagName('gds-option')) as GdsOption
+    ;[1, 2, 3].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option'),
+      ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
@@ -293,10 +314,14 @@ describe('<gds-dropdown>', () => {
   })
 
   it('should select multiple complex values correctly with `compareWith` callback', async () => {
-    const el = await fixture<GdsDropdown>(html`<gds-dropdown multiple></gds-dropdown>`)
+    const el = await fixture<GdsDropdown>(
+      html`<gds-dropdown multiple></gds-dropdown>`,
+    )
 
-    ;[1, 2, 3, 4].forEach(num => {
-      const o = document.createElement(getScopedTagName('gds-option')) as GdsOption
+    ;[1, 2, 3, 4].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option'),
+      ) as GdsOption
       o.value = { val: `test${num}` }
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
@@ -322,8 +347,10 @@ describe('<gds-dropdown>', () => {
     el.value = 'test2'
 
     await el.updateComplete
-    ;[1, 2, 3].forEach(num => {
-      const o = document.createElement(getScopedTagName('gds-option')) as GdsOption
+    ;[1, 2, 3].forEach((num) => {
+      const o = document.createElement(
+        getScopedTagName('gds-option'),
+      ) as GdsOption
       o.value = `test${num}`
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
@@ -568,7 +595,8 @@ describe('<gds-dropdown searchable>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const searchField = el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLElement>('input[type=text]')!
 
     await expect(searchField).to.not.be.null
   })
@@ -581,13 +609,16 @@ describe('<gds-dropdown searchable>', () => {
         <gds-option>Option 3</gds-option>
       </gds-dropdown>
     `)
-    const searchField = el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
 
     searchField.focus()
     await sendKeys({ type: '2' })
     await el.updateComplete
 
-    const options = el.querySelectorAll(`${getScopedTagName('gds-option')}:not([aria-hidden="true"])`)
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+    )
 
     await expect(options.length).to.equal(1)
     await expect(options[0].textContent).to.equal('Option 2')
@@ -602,15 +633,21 @@ describe('<gds-dropdown searchable>', () => {
       </gds-dropdown>
     `)
 
-    el.searchFilter = (q, o) => o.innerHTML.split(' ').some(o_part => q.split(' ').some(q_part => q_part === o_part))
+    el.searchFilter = (q, o) =>
+      o.innerHTML
+        .split(' ')
+        .some((o_part) => q.split(' ').some((q_part) => q_part === o_part))
 
-    const searchField = el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
+    const searchField =
+      el.shadowRoot!.querySelector<HTMLInputElement>('input[type=text]')!
 
     searchField.focus()
     await sendKeys({ type: 'qux thud' })
     await el.updateComplete
 
-    const options = el.querySelectorAll(`${getScopedTagName('gds-option')}:not([aria-hidden="true"])`)
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+    )
 
     await expect(options.length).to.equal(1)
     await expect(options[0].textContent).to.equal('qux fred thud')

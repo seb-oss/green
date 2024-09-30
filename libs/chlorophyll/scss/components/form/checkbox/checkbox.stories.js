@@ -13,31 +13,31 @@ export default {
   title: 'Components/Form/Elements/Checkbox',
 
   parameters: {
-    componentIds: ['component-checkbox']
+    componentIds: ['component-checkbox'],
   },
 
   argTypes: {
     validation: {
       control: 'select',
-      options: ['', 'is-valid', 'is-invalid']
+      options: ['', 'is-valid', 'is-invalid'],
     },
 
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     checked: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     indeterminate: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     text: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Checkbox = {
@@ -48,10 +48,10 @@ export const Checkbox = {
     text: 'Click me!',
     enabled: true,
     checked: false,
-    indeterminate: false
+    indeterminate: false,
   },
 
-  parameters: {}
+  parameters: {},
 }
 
 export const Invalid = {
@@ -65,7 +65,7 @@ export const Invalid = {
   </label>
 
   <span class="form-info">Error</span>
-</div>`
+</div>`,
 }
 
 export const Group = {
@@ -88,7 +88,7 @@ export const Group = {
         </div>
       </fieldset>
     </div>
-  `
+  `,
 }
 
 export const HorizontalGroup = {
@@ -114,7 +114,7 @@ export const HorizontalGroup = {
     </div>
   `,
   name: 'HorizontalGroup',
-  parameters: {}
+  parameters: {},
 }
 
 export const Validation = {
@@ -195,7 +195,7 @@ export const Validation = {
     </div>
   `,
   name: 'Validation',
-  parameters: {}
+  parameters: {},
 }
 
 export const HorizontalValidation = {
@@ -284,5 +284,5 @@ export const HorizontalValidation = {
     </div>
   `,
   name: 'HorizontalValidation',
-  parameters: {}
+  parameters: {},
 }

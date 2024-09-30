@@ -1,4 +1,9 @@
-import { fireEvent, render, RenderResult, waitFor } from '@testing-library/angular'
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+} from '@testing-library/angular'
 import { NggAccordionListItemComponent } from './accordion-list-item.component'
 
 describe(NggAccordionListItemComponent.name, () => {
@@ -8,7 +13,7 @@ describe(NggAccordionListItemComponent.name, () => {
   beforeEach(async () => {
     component = await render(NggAccordionListItemComponent, {
       declarations: [NggAccordionListItemComponent],
-      providers: []
+      providers: [],
     })
     listItem = component.fixture.componentInstance
   })
@@ -18,7 +23,9 @@ describe(NggAccordionListItemComponent.name, () => {
   })
 
   it('should toggle expanded when expand button clicked', async () => {
-    const expanderInput = await component.findByTestId('accordion-list-item-expander-button')
+    const expanderInput = await component.findByTestId(
+      'accordion-list-item-expander-button',
+    )
     fireEvent.click(expanderInput)
 
     await waitFor(() => {
@@ -37,7 +44,9 @@ describe(NggAccordionListItemComponent.name, () => {
   })
 
   it('should fire expanded change event when button clicked', async () => {
-    const expanderInput = await component.findByTestId('accordion-list-item-expander-button')
+    const expanderInput = await component.findByTestId(
+      'accordion-list-item-expander-button',
+    )
     let eventEmitted = false
 
     listItem.expandedChange.subscribe(() => {
@@ -67,7 +76,9 @@ describe(NggAccordionListItemComponent.name, () => {
 
   it('should display item header', async () => {
     listItem.listItemHeader = 'Foo'
-    const listItemHeaderElement = await component.findByTestId('accordion-list-item-header')
+    const listItemHeaderElement = await component.findByTestId(
+      'accordion-list-item-header',
+    )
 
     component.detectChanges()
     expect(listItemHeaderElement.textContent).toEqual('Foo')
@@ -75,7 +86,9 @@ describe(NggAccordionListItemComponent.name, () => {
 
   it('should display item subheader', async () => {
     listItem.listItemSubHeader = 'Bar'
-    const listItemSubHeaderElement = await component.findByTestId('accordion-list-item-subheader')
+    const listItemSubHeaderElement = await component.findByTestId(
+      'accordion-list-item-subheader',
+    )
 
     component.detectChanges()
     expect(listItemSubHeaderElement.textContent).toEqual('Bar')

@@ -4,7 +4,7 @@ const TextInputTempalte = ({ children }) => <Text>{children}</Text>
 
 export default {
   title: 'Components/Form/Text',
-  component: Text
+  component: Text,
 }
 
 export const Default = {
@@ -12,6 +12,6 @@ export const Default = {
   name: 'Text',
 
   args: {
-    children: 'This is a line of text'
-  }
+    children: 'This is a line of text',
+  },
 }

@@ -1,5 +1,8 @@
 import { property } from 'lit/decorators.js'
-import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -42,7 +45,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'aspect-ratio',
     selector: 'figure',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   'aspect-ratio'?: string
 
@@ -54,7 +57,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'object-position',
     selector: 'img',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   position?: string
 
@@ -78,7 +81,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'inset',
     selector: 'figure',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   inset?: string
 
@@ -89,7 +92,7 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'width',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   width?: string
 
@@ -100,7 +103,7 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'height',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   height?: string
 
@@ -119,7 +122,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'opacity',
     selector: 'figure',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   opacity?: string
 
@@ -138,7 +141,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'object-fit',
     selector: 'img',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   'object-fit'?: string
 
@@ -188,7 +191,7 @@ export class GdsImg extends GdsElement {
   @styleExpressionProperty({
     property: 'border-radius',
     selector: 'figure',
-    valueTemplate: v => `var(--gds-space-${v})`
+    valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   'border-radius'?: string
 

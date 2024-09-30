@@ -28,20 +28,25 @@ interface WatchOptions {
 export function watch(propertyName: string | string[], options?: WatchOptions) {
   const resolvedOptions: Required<WatchOptions> = {
     waitUntilFirstUpdate: false,
-    ...options
+    ...options,
   }
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     propertyKey: string,
-    descriptor: TypedPropertyDescriptor<UpdateHandler>
+    descriptor: TypedPropertyDescriptor<UpdateHandler>,
   ) => {
     // @ts-expect-error - update is a protected property
     const { update } = proto
-    const watchedProperties = Array.isArray(propertyName) ? propertyName : [propertyName]
+    const watchedProperties = Array.isArray(propertyName)
+      ? propertyName
+      : [propertyName]
 
     // @ts-expect-error - update is a protected property
-    proto.update = function (this: ElemClass, changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>) {
-      watchedProperties.forEach(property => {
+    proto.update = function (
+      this: ElemClass,
+      changedProps: Map<keyof ElemClass, ElemClass[keyof ElemClass]>,
+    ) {
+      watchedProperties.forEach((property) => {
         const key = property as keyof ElemClass
         if (changedProps.has(key)) {
           const oldValue = changedProps.get(key)

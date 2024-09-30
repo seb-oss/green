@@ -1,4 +1,12 @@
-import { Input, Output, Component, ViewChild, ElementRef, EventEmitter, TemplateRef } from '@angular/core'
+import {
+  Input,
+  Output,
+  Component,
+  ViewChild,
+  ElementRef,
+  EventEmitter,
+  TemplateRef,
+} from '@angular/core'
 import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
 
 /**
@@ -13,7 +21,7 @@ import * as ContextMenuTransStyles from '@sebgroup/green-core/components/context
 
 @Component({
   selector: 'ngg-context-menu',
-  templateUrl: './context-menu.component.html'
+  templateUrl: './context-menu.component.html',
 })
 export class NggContextMenuComponent {
   /**
@@ -45,7 +53,8 @@ export class NggContextMenuComponent {
   /**
    * Emits when a menu item is clicked.
    */
-  @Output() contextMenuItemClicked: EventEmitter<DropdownOption> = new EventEmitter<DropdownOption>()
+  @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
+    new EventEmitter<DropdownOption>()
 
   @ViewChild('contextMenuPopover') popover!: ElementRef<HTMLElement>
   @ViewChild('contextMenuAnchor') anchor!: ElementRef<HTMLElement>

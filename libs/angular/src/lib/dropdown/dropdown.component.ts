@@ -10,15 +10,22 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core'
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms'
+import {
+  ControlValueAccessor,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms'
 
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 
 import '@sebgroup/green-core/components/dropdown/index.js'
-import type { GdsDropdown, GdsOption } from '@sebgroup/green-core/components/dropdown/index.js'
+import type {
+  GdsDropdown,
+  GdsOption,
+} from '@sebgroup/green-core/components/dropdown/index.js'
 
 import * as DropdownTransStyles from '@sebgroup/green-core/components/dropdown/dropdown.trans.styles.js'
 
@@ -49,10 +56,10 @@ export interface DropdownOption {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: NggDropdownComponent,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() id?: string
@@ -78,7 +85,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
     this._options = value
     this.texts = {
       ...this.texts,
-      select: this.displayTextByValue(this._value)
+      select: this.displayTextByValue(this._value),
     }
   }
   get options(): DropdownOption[] | undefined {
@@ -89,7 +96,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() set texts(texts: DropdownTexts | undefined) {
     this._texts = {
       ...(texts ? texts : {}),
-      select: this.textToDisplay(texts, this._value)
+      select: this.textToDisplay(texts, this._value),
     }
   }
 
@@ -124,7 +131,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
     this.texts = {
       ...this.texts,
-      select: this.displayTextByValue(this._value)
+      select: this.displayTextByValue(this._value),
     }
   }
   get value(): any {
@@ -143,7 +150,8 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   onTouchedFn?: () => void
 
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>()
-  @Output() readonly touched: EventEmitter<boolean> = new EventEmitter<boolean>()
+  @Output() readonly touched: EventEmitter<boolean> =
+    new EventEmitter<boolean>()
 
   @ContentChild(NggDropdownOptionDirective)
   customOption?: NggDropdownOptionDirective
@@ -153,13 +161,13 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   @ViewChild('gdsDropdown', { static: false }) gdsDropdown?: ElementRef
 
-  public onValueChange: (event: Event) => void = event => {
+  public onValueChange: (event: Event) => void = (event) => {
     const target = event.target as GdsDropdown<DropdownOption>
     this._value = target.value
 
     this.texts = {
       ...this.texts,
-      select: this.displayTextByValue(this._value)
+      select: this.displayTextByValue(this._value),
     }
 
     this.onChangeFn?.(this.value)
@@ -174,19 +182,25 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
 
   constructor(
     @Inject(Injector) private injector: Injector,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
   ) {
     DropdownTransStyles.register()
   }
 
   ngOnInit(): void {
     if (!this._value) {
-      if (this.multiSelect) this._value = this.options?.filter(o => o.selected === true)?.map(o => o[this.useValue])
-      else this._value = this.options?.find(o => o.selected === true)?.[this.useValue]
+      if (this.multiSelect)
+        this._value = this.options
+          ?.filter((o) => o.selected === true)
+          ?.map((o) => o[this.useValue])
+      else
+        this._value = this.options?.find((o) => o.selected === true)?.[
+          this.useValue
+        ]
 
       this.texts = {
         ...this.texts,
-        select: this.displayTextByValue(this._value)
+        select: this.displayTextByValue(this._value),
       }
     }
 
@@ -196,7 +210,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
       placeholder: this.texts?.placeholder ?? 'Select',
       searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
       selected: this.texts?.selected ?? 'selected',
-      select: this.displayTextByValue(this._value)
+      select: this.displayTextByValue(this._value),
     }
   }
 
@@ -220,26 +234,38 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   }
   searchFilterAdapter = (q: string, o: GdsOption) => {
     if (this.searchFilter) return this.searchFilter(q, o.value)
-    else return ((q: string, o: GdsOption) => o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
+    else
+      return ((q: string, o: GdsOption) =>
+        o.innerHTML.toLowerCase().includes(q.toLowerCase()))(q, o)
   }
 
   private convertToBoolean(value: string | boolean): boolean {
-    return value === '' || value === 'true' || value.toString() === 'true' || false
+    return (
+      value === '' || value === 'true' || value.toString() === 'true' || false
+    )
   }
 
   private optionByValue = (value: any) => {
-    return this.options?.find(o => o[this.useValue] === value)
+    return this.options?.find((o) => o[this.useValue] === value)
   }
 
   private displayTextByValue = (value: any) => {
     return this.textToDisplay(this.texts, value)
   }
 
-  private textToDisplay = (dropdownTexts: DropdownTexts | undefined, value: any): string => {
+  private textToDisplay = (
+    dropdownTexts: DropdownTexts | undefined,
+    value: any,
+  ): string => {
     if (!Array.isArray(value))
-      return this.optionByValue(value)?.[this.display] || (dropdownTexts?.placeholder ?? 'Select')
+      return (
+        this.optionByValue(value)?.[this.display] ||
+        (dropdownTexts?.placeholder ?? 'Select')
+      )
 
-    const displayValues = value.map(v => this.optionByValue(v)?.[this.display])
+    const displayValues = value.map(
+      (v) => this.optionByValue(v)?.[this.display],
+    )
     return displayValues?.length > 2
       ? `${displayValues.length} ${dropdownTexts?.selected} `
       : displayValues?.join(', ') || (dropdownTexts?.placeholder ?? 'Select')

@@ -5,7 +5,7 @@ export default {
   testFramework: {
     config: {
       timeout: 3000,
-      retries: 5
-    }
-  }
+      retries: 5,
+    },
+  },
 }

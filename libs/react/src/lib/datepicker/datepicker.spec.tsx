@@ -8,7 +8,7 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { GdsDatepicker } from '@sebgroup/green-core'
 import exp from 'constants'
 
-const tick = (ms?: number) => new Promise<void>(r => setTimeout(r, ms || 0))
+const tick = (ms?: number) => new Promise<void>((r) => setTimeout(r, ms || 0))
 
 const pad = (num: number): string => `${num < 10 ? '0' : ''}${num}`
 
@@ -32,7 +32,7 @@ describe('Datepicker', () => {
     const { container, findByTestId } = render(
       <Datepicker testId="datepicker" invalid>
         <span slot="message">My custom message</span>
-      </Datepicker>
+      </Datepicker>,
     )
 
     const gdsDatepicker = (await findByTestId('datepicker')) as GdsDatepicker
@@ -42,7 +42,7 @@ describe('Datepicker', () => {
       container
         ?.querySelector(getScopedTagName('gds-datepicker'))
         ?.shadowRoot?.querySelector('slot[name="message"]')
-        ?.assignedNodes()[0].textContent
+        ?.assignedNodes()[0].textContent,
     ).toEqual('My custom message')
   })
 
@@ -51,7 +51,9 @@ describe('Datepicker', () => {
     const { container } = render(<Datepicker ref={ref} />)
     await act(() => tick())
 
-    const gdsDatepicker = (await container?.querySelector(getScopedTagName('gds-datepicker'))) as GdsDatepicker
+    const gdsDatepicker = (await container?.querySelector(
+      getScopedTagName('gds-datepicker'),
+    )) as GdsDatepicker
 
     expect(ref.current).toEqual(gdsDatepicker)
   })
