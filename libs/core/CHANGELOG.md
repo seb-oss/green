@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.43.2
+
+### Patch Changes
+
+- 12d322e: gds-text to use classes instead of :not() selectores
+- 26ca3ef: **Popover:** Fix regression with closing on clicking outside for `nonmodal` popovers
+
 ## 1.43.1
 
 ### Patch Changes
