@@ -22,8 +22,8 @@ import VIDEO from './video.mp4'
 
 <Meta title="Docs/Style/Colors" />
 
-# Color System 
-The color system is a collection of colors that are used to create a visual hierarchy in the green design system. 
+# Color System
+The color system is a collection of colors that are used to create a visual hierarchy in the green design system.
 
 ### The color system is divided into three levels:
 
@@ -33,17 +33,17 @@ The color system is a collection of colors that are used to create a visual hier
     <gds-badge variant="notice">L2: Container</gds-badge>
     <gds-badge variant="positive">L3: Component</gds-badge>
   </gds-flex>
- 
-  <gds-container 
-    display="grid" 
-    place-items="center" 
-    min-height="80vh" 
-    border-radius="s" 
+
+  <gds-container
+    display="grid"
+    place-items="center"
+    min-height="80vh"
+    border-radius="s"
     level="1"
     background="secondary"
     position="relative"
   >
-    <gds-flex 
+    <gds-flex
       position="absolute"
       inset="20px auto auto 20px"
       flex-direction="column"
@@ -51,19 +51,19 @@ The color system is a collection of colors that are used to create a visual hier
     >
       <gds-flex align-items="center" gap="xs">
         <gds-icon-square-behind-square></gds-icon-square-behind-square>
-        <label htmlFor="explode">Exploded View</label> 
+        <label htmlFor="explode">Exploded View</label>
       </gds-flex>
       <gds-flex align-items="center" gap="xs">
         <gds-icon-focus-square></gds-icon-focus-square>
-        <label htmlFor="video">Reveal Background</label> 
+        <label htmlFor="video">Reveal Background</label>
       </gds-flex>
       <gds-flex align-items="center" gap="xs">
         <gds-icon-eye-slash></gds-icon-eye-slash>
-        <label htmlFor="hide">Hide Video</label> 
+        <label htmlFor="hide">Hide Video</label>
       </gds-flex>
       <gds-flex align-items="center" gap="xs">
         <gds-icon-square-placeholder></gds-icon-square-placeholder>
-        <label htmlFor="mask">Mask</label> 
+        <label htmlFor="mask">Mask</label>
       </gds-flex>
   </gds-flex>
 
@@ -71,10 +71,10 @@ The color system is a collection of colors that are used to create a visual hier
     <input type="checkbox" id="video" name="video" />
     <input type="checkbox" id="hide" name="hide" />
     <input type="checkbox" id="mask" name="mask" />
-    <gds-flex 
+    <gds-flex
       level="1"
-      class="gds-levels" 
-      transform-style="preserve-3d" 
+      class="gds-levels"
+      transform-style="preserve-3d"
       background="primary"
       data-title="L1: Document"
       width="400px"
@@ -82,30 +82,30 @@ The color system is a collection of colors that are used to create a visual hier
       position="relative"
       border-radius="l"
     >
-  
-    <gds-container 
+
+    <gds-container
       level="2"
-      border="xs/inversed"  
+      border="xs/inversed"
       border-radius="l"
-      transform="translate3d(0, 0, 100px)"
+      style={{transform: 'translate3d(0, 0, 100px)'}}
       background="positive"
       data-title="L2: Container"
       position="absolute"
-      inset="0" 
+      inset="0"
     >
-      <gds-container 
-        inset="0" 
-        overflow="hidden"  
-        position="absolute" 
+      <gds-container
+        inset="0"
+        overflow="hidden"
+        position="absolute"
         border-radius="m"
         id="cover"
-      > 
+      >
         <gds-video
           src={VIDEO}
           object-fit="cover"
           object-position="center"
           aspect-ratio="9/16"
-          pointer-events="none" 
+          pointer-events="none"
           autoplay
           muted
           loop
@@ -113,9 +113,9 @@ The color system is a collection of colors that are used to create a visual hier
       </gds-container>
     </gds-container>
 
-    <gds-container  
+    <gds-container
       border-radius="s"
-      transform="translate3d(0, 0, 200px)"
+      style={{transform: 'translate3d(0, 0, 200px)'}}
       data-title="L3: Component"
       position="absolute"
       inset="0"
@@ -142,9 +142,9 @@ The color system is a collection of colors that are used to create a visual hier
             >
               <gds-container>
                 <gds-text tag="h3" text-wrap="balance">Sustainable Practices</gds-text>
-  
-                <gds-text 
-                  color="tertiary/0.6" 
+
+                <gds-text
+                  color="tertiary/0.6"
                   font-size="body-s"
                   >Promoting Eco-Friendly Solutions</gds-text>
               </gds-container>
@@ -160,21 +160,21 @@ The color system is a collection of colors that are used to create a visual hier
 
 
     </gds-container>
- 
+
     </gds-flex>
   </gds-container>
 </gds-flex>
 
 
-# Colors 
+# Colors
 <gds-flex flex-direction="column" gap="2xl">
-  {Object.entries(colors.color.level).map(([level, categories]) => ( 
+  {Object.entries(colors.color.level).map(([level, categories]) => (
       <gds-flex flex-direction="column" gap="2xl">
         <gds-flex gap="s" flex-direction="column">
           <gds-text text-transform="uppercase">{level}</gds-text>
             {Object.entries(categories).map(([category, items]) => (
                 <gds-flex gap="s" flex-direction="column">
-                    <gds-text text-transform="capitalize" 
+                    <gds-text text-transform="capitalize"
                     level="1" color="primary/0.4">{category}</gds-text>
                     <gds-flex flex-direction="row" gap="s">
                         {Object.entries(items).map(([item, properties]) => (
@@ -182,11 +182,11 @@ The color system is a collection of colors that are used to create a visual hier
                                   <gds-theme color-scheme="auto">
                                     <gds-card border="4xs/primary" background="primary" border-radius="s" padding="xs" width="20ch">
                                         <gds-flex gap="xs" align-items="center" >
-                                          <gds-card 
+                                          <gds-card
                                               level={level.replace(/^l/, '')}
-                                              height="40px" 
-                                              width="40px" 
-                                              border-radius="xs" 
+                                              height="40px"
+                                              width="40px"
+                                              border-radius="xs"
                                               border-width="4xs"
                                               border-color="#d7d7d7"
                                               background={item}
@@ -196,32 +196,32 @@ The color system is a collection of colors that are used to create a visual hier
                                               <gds-text text-transform="uppercase">{properties.value}</gds-text>
                                           </gds-flex>
                                         </gds-flex>
-                                    </gds-card>   
+                                    </gds-card>
                                   </gds-theme>
                                 <gds-theme color-scheme="dark">
                                   <gds-card border="4xs/primary" background="primary" border-radius="s" padding="xs" width="20ch">
                                       <gds-flex gap="xs" align-items="center" justify-content="start">
                                           <gds-card
-                                              level={level.replace(/^l/, '')} 
-                                              height="40px" 
-                                              width="40px" 
-                                              border-radius="xs" 
+                                              level={level.replace(/^l/, '')}
+                                              height="40px"
+                                              width="40px"
+                                              border-radius="xs"
                                               border-width="4xs"
                                               border-color="#3c3b3b"
                                               background={item}
                                           />
                                           <gds-flex flex-direction="column" gap="3xs" align-items="start">
-                                            <gds-text 
+                                            <gds-text
                                               level="1"
-                                              color="primary" 
+                                              color="primary"
                                               tag="small"
                                             >
                                               {item}
                                             </gds-text>
-                                            <gds-text 
+                                            <gds-text
                                               level="1"
-                                              color="primary" 
-                                              tag="small" 
+                                              color="primary"
+                                              tag="small"
                                               transform="uppercase"
                                             >
                                               {properties.darkValue}
@@ -240,4 +240,3 @@ The color system is a collection of colors that are used to create a visual hier
     )
   )}
 </gds-flex>
- 
