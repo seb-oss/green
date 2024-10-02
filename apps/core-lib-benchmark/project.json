@@ -54,6 +54,12 @@
         }
       }
     },
+    "collect-trace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node apps/core-lib-benchmark/scripts/puppeteer-trace.mjs"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint"
     },
