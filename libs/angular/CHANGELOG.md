@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.6.2
+
+### Patch Changes
+
+- 05c1eab: rename ngv to nggv
+- 05c1eab: updated v-angular exports
+- Updated dependencies [69f1894]
+- Updated dependencies [916a2ef]
+  - @sebgroup/green-core@1.43.0
+
 ## 4.6.1
 
 ### Patch Changes

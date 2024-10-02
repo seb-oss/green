@@ -274,6 +274,8 @@ export class GdsPopover extends GdsElement {
 
   @watch('open')
   private _handleOpenChange() {
+    const clickOutsideTarget =
+      (this.nonmodal ? this.#backdropEl : this._elDialog) || document
     this.updateComplete.then(() => {
       this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
@@ -292,12 +294,18 @@ export class GdsPopover extends GdsElement {
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
           () =>
-            this._elDialog?.addEventListener('click', this.#handleClickOutside),
+            clickOutsideTarget.addEventListener(
+              'click',
+              this.#handleClickOutside,
+            ),
           0,
         )
       } else {
         this._elDialog?.close()
-        this._elDialog?.removeEventListener('click', this.#handleClickOutside)
+        clickOutsideTarget.removeEventListener(
+          'click',
+          this.#handleClickOutside,
+        )
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
