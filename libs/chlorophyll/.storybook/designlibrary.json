@@ -10,9 +10,7 @@
     "name": "In-page Wizard Step Card",
     "title": "Components/Wizard/In-page Wizard",
     "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
+      "componentIds": ["component-inpagewizard"]
     }
   },
   {
@@ -20,9 +18,7 @@
     "name": "Completed step",
     "title": "Components/Wizard/In-page Wizard",
     "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
+      "componentIds": ["component-inpagewizard"]
     }
   },
   {
@@ -30,9 +26,7 @@
     "name": "Current step",
     "title": "Components/Wizard/In-page Wizard",
     "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
+      "componentIds": ["component-inpagewizard"]
     }
   },
   {
@@ -40,9 +34,7 @@
     "name": "Not started step",
     "title": "Components/Wizard/In-page Wizard",
     "customParams": {
-      "componentIds": [
-        "component-inpagewizard"
-      ]
+      "componentIds": ["component-inpagewizard"]
     }
   },
   {
@@ -50,9 +42,7 @@
     "name": "Textarea",
     "title": "Components/Form/Elements/Textarea",
     "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
+      "componentIds": ["component-input"]
     }
   },
   {
@@ -60,9 +50,7 @@
     "name": "Stepper",
     "title": "Components/Form/Elements/Stepper",
     "customParams": {
-      "componentIds": [
-        "component-stepper"
-      ]
+      "componentIds": ["component-stepper"]
     }
   },
   {
@@ -70,9 +58,7 @@
     "name": "Radiobutton",
     "title": "Components/Form/Elements/Radio button",
     "customParams": {
-      "componentIds": [
-        "component-radiobutton"
-      ]
+      "componentIds": ["component-radiobutton"]
     }
   },
   {
@@ -80,9 +66,7 @@
     "name": "Input",
     "title": "Components/Form/Elements/Input",
     "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
+      "componentIds": ["component-input"]
     }
   },
   {
@@ -108,9 +92,7 @@
     "name": "Checkbox",
     "title": "Components/Form/Elements/Checkbox",
     "customParams": {
-      "componentIds": [
-        "component-checkbox"
-      ]
+      "componentIds": ["component-checkbox"]
     }
   },
   {
@@ -208,9 +190,7 @@
     "name": "Tabs",
     "title": "Components/Tabs",
     "customParams": {
-      "componentIds": [
-        "component-tab"
-      ]
+      "componentIds": ["component-tab"]
     }
   },
   {
@@ -218,9 +198,7 @@
     "name": "Page",
     "title": "Components/Table",
     "customParams": {
-      "componentIds": [
-        "component-table"
-      ]
+      "componentIds": ["component-table"]
     }
   },
   {
@@ -228,9 +206,7 @@
     "name": "Spinner",
     "title": "Components/Spinner",
     "customParams": {
-      "componentIds": [
-        "component-spinners"
-      ]
+      "componentIds": ["component-spinners"]
     }
   },
   {
@@ -238,9 +214,7 @@
     "name": "Slider",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": [
-        "component-slider"
-      ]
+      "componentIds": ["component-slider"]
     }
   },
   {
@@ -248,9 +222,7 @@
     "name": "Slider with unit label",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": [
-        "component-slider"
-      ]
+      "componentIds": ["component-slider"]
     }
   },
   {
@@ -258,9 +230,7 @@
     "name": "Slide Toggle",
     "title": "Components/Slide Toggle",
     "customParams": {
-      "componentIds": [
-        "component-slidetoggle"
-      ]
+      "componentIds": ["component-slidetoggle"]
     }
   },
   {
@@ -268,9 +238,7 @@
     "name": "Page",
     "title": "Components/Skeleton loader",
     "customParams": {
-      "componentIds": [
-        "component-skeleton-loader"
-      ]
+      "componentIds": ["component-skeleton-loader"]
     }
   },
   {
@@ -278,9 +246,7 @@
     "name": "Pagination",
     "title": "Components/Navigation/Pagination",
     "customParams": {
-      "componentIds": [
-        "component-pagination"
-      ]
+      "componentIds": ["component-pagination"]
     }
   },
   {
@@ -296,9 +262,7 @@
     "name": "Dialogue",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": [
-        "component-dialogue"
-      ]
+      "componentIds": ["component-dialogue"]
     }
   },
   {
@@ -306,9 +270,7 @@
     "name": "Slide-out",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": [
-        "component-slideout"
-      ]
+      "componentIds": ["component-slideout"]
     }
   },
   {
@@ -316,9 +278,7 @@
     "name": "Slide-out 768",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": [
-        "component-slideout"
-      ]
+      "componentIds": ["component-slideout"]
     }
   },
   {
@@ -326,9 +286,7 @@
     "name": "Slide-out 960",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": [
-        "component-slideout"
-      ]
+      "componentIds": ["component-slideout"]
     }
   },
   {
@@ -336,9 +294,7 @@
     "name": "Takeover",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": [
-        "component-takeover"
-      ]
+      "componentIds": ["component-takeover"]
     }
   },
   {
@@ -346,9 +302,7 @@
     "name": "Page",
     "title": "Components/List",
     "customParams": {
-      "componentIds": [
-        "component-list"
-      ]
+      "componentIds": ["component-list"]
     }
   },
   {
@@ -356,9 +310,7 @@
     "name": "Page",
     "title": "Components/Links",
     "customParams": {
-      "componentIds": [
-        "component-inlinelinks"
-      ]
+      "componentIds": ["component-inlinelinks"]
     }
   },
   {
@@ -414,9 +366,7 @@
     "name": "Filter Chip",
     "title": "Components/Filter Chip",
     "customParams": {
-      "componentIds": [
-        "component-filter-chip"
-      ]
+      "componentIds": ["component-filter-chip"]
     }
   },
   {
@@ -424,9 +374,7 @@
     "name": "Selected",
     "title": "Components/Filter Chip",
     "customParams": {
-      "componentIds": [
-        "component-filter-chip"
-      ]
+      "componentIds": ["component-filter-chip"]
     }
   },
   {
@@ -434,9 +382,7 @@
     "name": "Removable",
     "title": "Components/Filter Chip",
     "customParams": {
-      "componentIds": [
-        "component-filter-chip"
-      ]
+      "componentIds": ["component-filter-chip"]
     }
   },
   {
@@ -444,9 +390,7 @@
     "name": "Dropdown",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": [
-        "component-dropdown"
-      ]
+      "componentIds": ["component-dropdown"]
     }
   },
   {
@@ -454,9 +398,7 @@
     "name": "Datepicker",
     "title": "Components/Datepicker",
     "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
+      "componentIds": ["component-datepicker"]
     }
   },
   {
@@ -464,9 +406,7 @@
     "name": "Close button",
     "title": "Components/Close button",
     "customParams": {
-      "componentIds": [
-        "component-close-button"
-      ]
+      "componentIds": ["component-close-button"]
     }
   },
   {
@@ -474,9 +414,7 @@
     "name": "Card",
     "title": "Components/Card",
     "customParams": {
-      "componentIds": [
-        "component-card"
-      ]
+      "componentIds": ["component-card"]
     }
   },
   {
@@ -484,9 +422,7 @@
     "name": "Button",
     "title": "Components/Form/Elements/Button",
     "customParams": {
-      "componentIds": [
-        "component-button"
-      ]
+      "componentIds": ["component-button"]
     }
   },
   {
@@ -494,9 +430,7 @@
     "name": "Badge",
     "title": "Components/Badge",
     "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
+      "componentIds": ["component-badge"]
     }
   },
   {
@@ -504,9 +438,7 @@
     "name": "Alert ribbon",
     "title": "Components/Alert ribbon",
     "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
+      "componentIds": ["component-alertribbon"]
     }
   },
   {
@@ -514,9 +446,7 @@
     "name": "Accordion",
     "title": "Components/Accordion",
     "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
+      "componentIds": ["component-accordion"]
     }
   },
   {

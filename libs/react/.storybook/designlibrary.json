@@ -69,9 +69,7 @@
     "name": "Table",
     "title": "Components/Table",
     "customParams": {
-      "componentIds": [
-        "component-table"
-      ]
+      "componentIds": ["component-table"]
     }
   },
   {
@@ -79,9 +77,7 @@
     "name": "Sortable table",
     "title": "Components/Table",
     "customParams": {
-      "componentIds": [
-        "component-sortable"
-      ]
+      "componentIds": ["component-sortable"]
     }
   },
   {
@@ -89,9 +85,7 @@
     "name": "Selectable table",
     "title": "Components/Table",
     "customParams": {
-      "componentIds": [
-        "component-selectable"
-      ]
+      "componentIds": ["component-selectable"]
     }
   },
   {
@@ -99,9 +93,7 @@
     "name": "Expandable table",
     "title": "Components/Table",
     "customParams": {
-      "componentIds": [
-        "component-expandable"
-      ]
+      "componentIds": ["component-expandable"]
     }
   },
   {
@@ -115,9 +107,7 @@
     "name": "TextArea",
     "title": "Components/Form/TextArea",
     "customParams": {
-      "componentIds": [
-        "component-textarea"
-      ]
+      "componentIds": ["component-textarea"]
     }
   },
   {
@@ -131,9 +121,7 @@
     "name": "Default",
     "title": "Components/Form/RadioGroup",
     "customParams": {
-      "componentIds": [
-        "component-radiogroup"
-      ]
+      "componentIds": ["component-radiogroup"]
     }
   },
   {
@@ -159,9 +147,7 @@
     "name": "RadioButton",
     "title": "Components/Form/RadioButton",
     "customParams": {
-      "componentIds": [
-        "component-radiobutton"
-      ]
+      "componentIds": ["component-radiobutton"]
     }
   },
   {
@@ -169,9 +155,7 @@
     "name": "Input",
     "title": "Components/Form/Input",
     "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
+      "componentIds": ["component-input"]
     }
   },
   {
@@ -191,9 +175,7 @@
     "name": "Checkbox",
     "title": "Components/Form/Checkbox",
     "customParams": {
-      "componentIds": [
-        "component-checkbox"
-      ]
+      "componentIds": ["component-checkbox"]
     }
   },
   {
@@ -201,9 +183,7 @@
     "name": "Button Group",
     "title": "Components/Form",
     "customParams": {
-      "componentIds": [
-        "component-segmented-control"
-      ]
+      "componentIds": ["component-segmented-control"]
     }
   },
   {
@@ -211,9 +191,7 @@
     "name": "Button",
     "title": "Components/Form/Button",
     "customParams": {
-      "componentIds": [
-        "component-button"
-      ]
+      "componentIds": ["component-button"]
     }
   },
   {
@@ -221,9 +199,7 @@
     "name": "Tabs",
     "title": "Components/Tabs",
     "customParams": {
-      "componentIds": [
-        "component-tabs"
-      ]
+      "componentIds": ["component-tabs"]
     }
   },
   {
@@ -231,9 +207,7 @@
     "name": "Stepper",
     "title": "Components/Stepper",
     "customParams": {
-      "componentIds": [
-        "component-stepper"
-      ]
+      "componentIds": ["component-stepper"]
     }
   },
   {
@@ -355,9 +329,7 @@
     "name": "Link",
     "title": "Components/Link",
     "customParams": {
-      "componentIds": [
-        "component-inlinelinks"
-      ]
+      "componentIds": ["component-inlinelinks"]
     }
   },
   {
@@ -377,9 +349,7 @@
     "name": "TextInput",
     "title": "Components/FormItem",
     "customParams": {
-      "componentIds": [
-        "component-input"
-      ]
+      "componentIds": ["component-input"]
     }
   },
   {
@@ -411,9 +381,7 @@
     "name": "Dropdown",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": [
-        "component-dropdown"
-      ]
+      "componentIds": ["component-dropdown"]
     }
   },
   {
@@ -421,9 +389,7 @@
     "name": "Datepicker",
     "title": "Components/Datepicker",
     "customParams": {
-      "componentIds": [
-        "component-datepicker"
-      ]
+      "componentIds": ["component-datepicker"]
     }
   },
   {
@@ -437,9 +403,7 @@
     "name": "Card",
     "title": "Components/Card",
     "customParams": {
-      "componentIds": [
-        "component-card"
-      ]
+      "componentIds": ["component-card"]
     }
   },
   {
@@ -447,9 +411,7 @@
     "name": "Badge",
     "title": "Components/Badge",
     "customParams": {
-      "componentIds": [
-        "component-badge"
-      ]
+      "componentIds": ["component-badge"]
     }
   },
   {
@@ -457,9 +419,7 @@
     "name": "AlertRibbon",
     "title": "Components/AlertRibbon",
     "customParams": {
-      "componentIds": [
-        "component-alertribbon"
-      ]
+      "componentIds": ["component-alertribbon"]
     }
   },
   {
@@ -467,9 +427,7 @@
     "name": "Accordion",
     "title": "Components/Accordion",
     "customParams": {
-      "componentIds": [
-        "component-accordion"
-      ]
+      "componentIds": ["component-accordion"]
     }
   },
   {

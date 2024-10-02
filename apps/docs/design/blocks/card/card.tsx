@@ -20,9 +20,7 @@ const Card = forwardRef<HTMLAnchorElement, CardProps>(
     { children, href, className = '', target, variant = 'default', ...rest },
     ref,
   ) => {
-    const cardClass = `gds-card ${className} ${
-      variant === 'cta' ? 'gds-card-cta' : ''
-    }`
+    const cardClass = `gds-card ${className} ${variant === 'cta' ? 'gds-card-cta' : ''}`
 
     return (
       <Link

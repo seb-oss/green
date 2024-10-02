@@ -65,15 +65,15 @@ export class CardExample extends LitElement {
                 z-index="2"
               >
                 <gds-flex
-                  flex-direction="column"
-                  justify-content="flex-end"
+                  direction="column"
+                  justify="flex-end"
                   height="100%"
                   gap="xs"
                 >
-                  <gds-text text-wrap="balance">
+                  <gds-text tag="h2" wrap="balance">
                     Sector by sector. Industry by industry.
                   </gds-text>
-                  <gds-text text-wrap="balance">
+                  <gds-text tag="p" wrap="balance">
                     Together with our clients, we're accelerating the
                     sustainable transition.
                   </gds-text>
@@ -106,14 +106,12 @@ export class CardExample extends LitElement {
                   </gds-text>
                 </gds-container>
                 <gds-card
-                  border-radius="s"
+                  radius="s"
                   border="4xs/l2-stroke-primary"
                   padding="xl"
                 >
-                  <gds-flex flex-direction="column" gap="l">
-                    <gds-text font-size="heading-l"
-                      >Logga in med digipass</gds-text
-                    >
+                  <gds-flex direction="column" gap="l">
+                    <gds-text size="heading-l">Logga in med digipass</gds-text>
                     <gds-input
                       label="Personnummer"
                       showExtendedSupportingText="true"

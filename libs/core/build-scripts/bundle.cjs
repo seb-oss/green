@@ -15,7 +15,9 @@ esbuild.build({
         const { css } = await postcss([
           autoprefixer,
           postcssPresetEnv({ stage: false }),
-        ]).process(source, { from: undefined })
+        ]).process(source, {
+          from: undefined,
+        })
         return css
       },
     }),

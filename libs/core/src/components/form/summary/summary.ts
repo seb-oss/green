@@ -65,9 +65,7 @@ export class GdsFormSummary extends GdsElement {
               <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
             </gds-container>
             <gds-container >
-            ${msg(
-              str`There are ${errors.length} errors to correct before you can continue:`,
-            )}
+            ${msg(str`There are ${errors.length} errors to correct before you can continue:`)}
             <ul>
               ${errors.map(
                 (el: GdsFormControlElement) =>

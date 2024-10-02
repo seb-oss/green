@@ -10,7 +10,11 @@ import {
 } from 'react'
 import Button from '../form/button/button'
 import classNames from 'classnames'
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
 
 type ModalEventListener = (
   event: MouseEvent<HTMLButtonElement | HTMLDivElement> | null,
@@ -130,8 +134,8 @@ export const Modal = ({
   const [status, setStatus] = useState<string>(UNMOUNTED)
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 
-  const modalRef = useRef<HTMLDivElement>(null);
-  
+  const modalRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (isOpen && !shouldRender && status === UNMOUNTED) {
       setShouldRender(true)
@@ -155,17 +159,16 @@ export const Modal = ({
 
     if (isOpen && modalRef.current) {
       // Disable scrolling on the body when the modal is open
-      disableBodyScroll(modalRef.current);
+      disableBodyScroll(modalRef.current)
     } else if (modalRef.current) {
       // Enable scrolling on the body when the modal is closed
-      enableBodyScroll(modalRef.current);
+      enableBodyScroll(modalRef.current)
     }
 
     return () => {
       // Cleanup by enabling body scroll and removing all scroll locks
-      clearAllBodyScrollLocks();
-    };
-    
+      clearAllBodyScrollLocks()
+    }
   }, [isOpen, shouldRender, status])
 
   if (!isOpen) return null

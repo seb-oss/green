@@ -48,7 +48,6 @@ describe('[NgvCore]', () => {
         expect(component.prefix).toEqual('dummy1')
         expect(component.match).toEqual('dummy2')
         expect(component.suffix).toEqual('dummy3')
-
         ;(component as any).updateValues()
 
         expect(component.prefix).toEqual('')
@@ -59,7 +58,6 @@ describe('[NgvCore]', () => {
       it('updates variables when a match is found', () => {
         component.text = 'opTION'
         component.input = 'tIO'
-
         ;(component as any).updateValues()
 
         expect(component.prefix).toEqual('op')

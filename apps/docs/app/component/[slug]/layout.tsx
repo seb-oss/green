@@ -119,7 +119,7 @@ export default function ComponentLayout({
           </gds-cell>
           <gds-cell span="2">
             <Pattern>
-              {preview?.trim() ?? '' ? (
+              {(preview?.trim() ?? '') ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: `${preview}`,

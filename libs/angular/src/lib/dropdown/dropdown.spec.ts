@@ -41,7 +41,11 @@ describe('Dropdown', () => {
 
   it('return correct selected option', () => {
     expect((component.fixture.componentInstance as any).selectedOption).toEqual(
-      { label: 'B', value: 2, selected: true },
+      {
+        label: 'B',
+        value: 2,
+        selected: true,
+      },
     )
   })
 })

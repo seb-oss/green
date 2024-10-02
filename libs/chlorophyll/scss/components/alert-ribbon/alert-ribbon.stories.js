@@ -20,20 +20,12 @@ const Template = ({
         ${link ? `<a href="#">${link}</a>.` : ''}
       </p>
     </div>
-    ${
-      closeButton
-        ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>`
-        : ''
-    }
+    ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
     ${
       button || primaryButton
         ? `<footer>
         ${button ? `<button type="button">${button}</button>` : ''}
-        ${
-          primaryButton
-            ? `<button type="button" class="primary">${primaryButton}</button>`
-            : ''
-        }
+        ${primaryButton ? `<button type="button" class="primary">${primaryButton}</button>` : ''}
      </footer>`
         : ''
     }

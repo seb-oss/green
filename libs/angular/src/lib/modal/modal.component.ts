@@ -49,7 +49,9 @@ import { NggModalFooterDirective } from './modal-footer.directive'
               '350ms cubic-bezier(0.33, 1, 0.68, 1)',
               style({ transform: 'translateX(0)' }),
             ),
-            { optional: true },
+            {
+              optional: true,
+            },
           ),
           query(
             '.backdrop, [role=dialog]',
@@ -57,7 +59,9 @@ import { NggModalFooterDirective } from './modal-footer.directive'
               '350ms cubic-bezier(0.33, 1, 0.68, 1)',
               style({ opacity: '1' }),
             ),
-            { optional: true },
+            {
+              optional: true,
+            },
           ),
         ]),
       ]),
@@ -72,7 +76,9 @@ import { NggModalFooterDirective } from './modal-footer.directive'
               '350ms cubic-bezier(0.33, 1, 0.68, 1)',
               style({ transform: 'translateX(100%)' }),
             ),
-            { optional: true },
+            {
+              optional: true,
+            },
           ),
           query(
             '.backdrop, [role=dialog]',
@@ -80,7 +86,9 @@ import { NggModalFooterDirective } from './modal-footer.directive'
               '350ms cubic-bezier(0.33, 1, 0.68, 1)',
               style({ opacity: '0' }),
             ),
-            { optional: true },
+            {
+              optional: true,
+            },
           ),
         ]),
       ]),

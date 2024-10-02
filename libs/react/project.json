@@ -16,7 +16,7 @@
     "rollup": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "core:make-react"],
       "cache": true,
       "inputs": ["{projectRoot}/**/*"],
       "options": {

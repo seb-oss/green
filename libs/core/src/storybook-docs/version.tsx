@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useEffect, useState } from 'react'
 
 const version = ({ pack }) => {
   const [version, setVersion] = useState('0.0.0')

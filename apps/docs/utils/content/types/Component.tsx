@@ -132,9 +132,7 @@ export const Component = defineDocumentType(() => ({
 
         try {
           const response = await axios.get(
-            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(
-              ',',
-            )}&format=svg`,
+            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(',')}&format=svg`,
             {
               headers: {
                 'X-Figma-Token': figmaAccessKey,

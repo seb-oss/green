@@ -106,9 +106,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
                 <Link
                   key={`#${item[0].slug}`}
                   href={`#${item[0].slug}`}
-                  className={`toc-link ${
-                    activeId === item[0].slug ? 'active' : ''
-                  }`}
+                  className={`toc-link ${activeId === item[0].slug ? 'active' : ''}`}
                   data-id={item[0].slug}
                   data-level={item[0].level}
                   onClick={() => handleClick(item[0].slug)}
@@ -122,9 +120,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
                 <Link
                   key={`#${heading.slug}`}
                   href={`#${heading.slug}`}
-                  className={`toc-link ${
-                    activeId === heading.slug ? 'active' : ''
-                  }`}
+                  className={`toc-link ${activeId === heading.slug ? 'active' : ''}`}
                   data-id={heading.slug}
                   data-level={heading.level}
                   onClick={() => handleClick(heading.slug)}

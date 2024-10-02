@@ -87,11 +87,7 @@ const createTemplate = (
 ): StoryFn<NggSortableListComponent> => {
   return (args) => ({
     template: `
-      ${
-        suffixTemplate
-          ? '<ng-template #customTemplate><span>🐞🚀 LGTM!</span></ng-template>'
-          : ''
-      }
+      ${suffixTemplate ? '<ng-template #customTemplate><span>🐞🚀 LGTM!</span></ng-template>' : ''}
       <ngg-sortable-list [groups]="groups"
                               [isReadOnly]="isReadOnly"
                               [isDraggable]="isDraggable"
