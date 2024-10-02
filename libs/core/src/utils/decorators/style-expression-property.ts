@@ -62,6 +62,7 @@ export function styleExpressionProperty(
       descriptor,
     )
 
+    // Define the getter and setter for the property
     Object.defineProperty(proto, descriptor, {
       get: function () {
         return this[descriptor]
