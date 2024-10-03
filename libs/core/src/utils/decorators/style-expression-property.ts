@@ -68,8 +68,8 @@ export function styleExpressionProperty(
         return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
-        await this.updateComplete
         this['__' + String(descriptor)] = newValue
+        await this.updateComplete
 
         const styleKey = sel + prop + newValue + cacheKey
 
