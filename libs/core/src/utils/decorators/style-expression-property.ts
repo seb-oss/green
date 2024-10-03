@@ -91,7 +91,6 @@ export function styleExpressionProperty(
 
         const style = unsafeCSS(css)
         styleCache.set(styleKey, style)
-        this[`__${String(descriptor)}_ast`] = ast
         ;(this as GdsElement)._dynamicStylesController.inject(
           `sep_${String(descriptor)}`,
           style,
