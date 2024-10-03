@@ -12,6 +12,7 @@ import {
   subMonths,
   addMonths,
   lastDayOfMonth,
+  setHours,
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
@@ -246,10 +247,15 @@ export class GdsCalendar extends GdsElement {
                       ...customization,
                     }
 
-                    const isOutsideCurrentMonth =
-                      !isSameMonth(this.focusedDate, day) ||
-                      day < this.min ||
-                      day > this.max
+                    const isOutsideCurrentMonth = !isSameMonth(
+                      this.focusedDate,
+                      day,
+                    )
+
+                    const isOutsideMinMax =
+                      (day < this.min || day > this.max) &&
+                      !isSameDay(day, this.min) &&
+                      !isSameDay(day, this.max)
 
                     const isWeekend = day.getDay() === 0 || day.getDay() === 6
 
@@ -257,6 +263,7 @@ export class GdsCalendar extends GdsElement {
                     const isDisabled =
                       displayOptions.disabled ||
                       isOutsideCurrentMonth ||
+                      isOutsideMinMax ||
                       (this.disabledWeekends && isWeekend)
 
                     const shouldRenderBlank =
@@ -316,11 +323,14 @@ export class GdsCalendar extends GdsElement {
   }
 
   #setSelectedDate(date: Date) {
-    this.value = date
+    // Set the time to midday to avoid timezone issues
+    const dateOnMidDay = setHours(date, 12)
+
+    this.value = dateOnMidDay
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: date,
+        detail: dateOnMidDay,
         bubbles: false,
         composed: false,
       }),

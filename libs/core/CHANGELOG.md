@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.43.2
+
+### Patch Changes
+
+- 12d322e: gds-text to use classes instead of :not() selectores
+- 26ca3ef: **Popover:** Fix regression with closing on clicking outside for `nonmodal` popovers
+
+## 1.43.1
+
+### Patch Changes
+
+- b3de0e0: **Calendar:** Setting the time to 12.00 when selecting a date in the calendar
+- b3de0e0: **Datepicker:** Set hours to 12 when setting date though spinners in the field. Fixes #1284
+- 69b2bde: **FAB:** Fix default host `display` property
+- b3de0e0: **Calendar:** Only disable dates that fall fully before or after the min/max setting
+
+## 1.43.0
+
+### Minor Changes
+
+- 916a2ef: Update & Release Input
+  Closes: #1541
+
+### Patch Changes
+
+- 69f1894: style expression value template css var fallback
+
 ## 1.42.0
 
 ### Minor Changes
