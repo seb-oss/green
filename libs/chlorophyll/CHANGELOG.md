@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.5
+
+### Patch Changes
+
+- d98aa7a: fixed color of close button in alert button
+- 5ca3740: change transparentize to color.adjust
+
 ## 3.6.4
 
 ### Patch Changes

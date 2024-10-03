@@ -2,7 +2,14 @@ import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { msg } from '@lit/localize'
-import { computePosition, autoUpdate, offset, flip, Placement, Middleware } from '@floating-ui/dom'
+import {
+  computePosition,
+  autoUpdate,
+  offset,
+  flip,
+  Placement,
+  Middleware,
+} from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
 import { watch, watchMediaQuery } from '../../utils/decorators'
@@ -162,14 +169,14 @@ export class GdsPopover extends GdsElement {
 
   @watch('triggerRef')
   private _handleTriggerRefChanged() {
-    this.triggerRef?.then(el => {
+    this.triggerRef?.then((el) => {
       if (el) this._trigger = el
     })
   }
 
   @watch('anchorRef')
   private _handleAnchorRefChanged() {
-    this.anchorRef?.then(el => {
+    this.anchorRef?.then((el) => {
       if (el) this._anchor = el
     })
   }
@@ -223,7 +230,7 @@ export class GdsPopover extends GdsElement {
         this._isVirtKbVisible = false
       }
     })
-    this.addEventListener('blurin', _ => {
+    this.addEventListener('blurin', (_) => {
       this._isVirtKbVisible = false
     })
   }
@@ -243,7 +250,7 @@ export class GdsPopover extends GdsElement {
           class="${classMap({
             'v-kb-visible': this._isVirtKbVisible,
             'use-modal-in-mobile': !this.disableMobileStyles,
-            'has-backdrop': Boolean(this.backdrop && this.backdrop === 'true')
+            'has-backdrop': Boolean(this.backdrop && this.backdrop === 'true'),
           })}"
           aria-hidden="${String(!this.open)}"
           @close=${() => this.open && this.#handleCancel()}
@@ -267,10 +274,14 @@ export class GdsPopover extends GdsElement {
 
   @watch('open')
   private _handleOpenChange() {
+    const clickOutsideTarget =
+      (this.nonmodal ? this.#backdropEl : this._elDialog) || document
     this.updateComplete.then(() => {
       this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
-        !this.nonmodal ? this._elDialog?.showModal() : this._elDialog?.setAttribute('open', 'true')
+        !this.nonmodal
+          ? this._elDialog?.showModal()
+          : this._elDialog?.setAttribute('open', 'true')
         this.#focusFirstSlottedChild()
 
         requestAnimationFrame(() => {
@@ -281,10 +292,20 @@ export class GdsPopover extends GdsElement {
         setTimeout(() => this.#focusFirstSlottedChild(), 250)
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
-        setTimeout(() => this._elDialog?.addEventListener('click', this.#handleClickOutside), 0)
+        setTimeout(
+          () =>
+            clickOutsideTarget.addEventListener(
+              'click',
+              this.#handleClickOutside,
+            ),
+          0,
+        )
       } else {
         this._elDialog?.close()
-        this._elDialog?.removeEventListener('click', this.#handleClickOutside)
+        clickOutsideTarget.removeEventListener(
+          'click',
+          this.#handleClickOutside,
+        )
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
@@ -292,7 +313,10 @@ export class GdsPopover extends GdsElement {
 
   @watch('backdrop')
   private _handleBackdropChange() {
-    const parentRoot = this.parentElement?.getRootNode() as Document | ShadowRoot | null
+    const parentRoot = this.parentElement?.getRootNode() as
+      | Document
+      | ShadowRoot
+      | null
 
     if (!this.backdrop || !parentRoot) return
 
@@ -309,8 +333,8 @@ export class GdsPopover extends GdsElement {
       new CustomEvent('gds-ui-state', {
         detail: { open: this.open, reason },
         bubbles: false,
-        composed: false
-      })
+        composed: false,
+      }),
     )
   }
 
@@ -346,14 +370,17 @@ export class GdsPopover extends GdsElement {
       // tabindex, role="button"
       const focusableNodeNames = ['A', 'BUTTON', 'INPUT', 'TEXTAREA']
       const isProbablyFocusable =
-        this._trigger.nodeName.startsWith('GDS-') || focusableNodeNames.includes(this._trigger.nodeName)
+        this._trigger.nodeName.startsWith('GDS-') ||
+        focusableNodeNames.includes(this._trigger.nodeName)
       if (!isProbablyFocusable) {
         this._trigger.setAttribute('tabindex', '0')
         this._trigger.setAttribute('role', 'button')
       }
 
       // aria-haspopup
-      const ariaHasPopupAttr = this._trigger.nodeName.startsWith('GDS-') ? 'gds-aria-haspopup' : 'aria-haspopup'
+      const ariaHasPopupAttr = this._trigger.nodeName.startsWith('GDS-')
+        ? 'gds-aria-haspopup'
+        : 'aria-haspopup'
       if (this._trigger.getAttribute(ariaHasPopupAttr) === null) {
         this._trigger.setAttribute(ariaHasPopupAttr, this.popupRole)
       }
@@ -387,7 +414,12 @@ export class GdsPopover extends GdsElement {
     const referenceEl = this._anchor
     const floatingEl = this._elDialog
 
-    if (!referenceEl || !floatingEl || (this.#isMobileViewport && !this.disableMobileStyles)) return
+    if (
+      !referenceEl ||
+      !floatingEl ||
+      (this.#isMobileViewport && !this.disableMobileStyles)
+    )
+      return
 
     if (this.#autoPositionCleanupFn) {
       this.#autoPositionCleanupFn()
@@ -398,17 +430,17 @@ export class GdsPopover extends GdsElement {
         minWidth: this.calcMinWidth(referenceEl),
         maxWidth: this.calcMaxWidth(referenceEl),
         minHeight: this.calcMinHeight(referenceEl),
-        maxHeight: this.calcMaxHeight(referenceEl)
+        maxHeight: this.calcMaxHeight(referenceEl),
       })
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: this.floatingUIMiddleware,
-        strategy: 'fixed'
+        strategy: 'fixed',
       }).then(({ x, y }) =>
         Object.assign(floatingEl.style, {
           left: `${x}px`,
-          top: `${y}px`
-        })
+          top: `${y}px`,
+        }),
       )
     })
   }
@@ -437,7 +469,8 @@ export class GdsPopover extends GdsElement {
    * Move focus to the first slotted child.
    */
   #focusFirstSlottedChild = () => {
-    const firstSlottedChild = this._elDefaultSlot?.assignedElements()[0] as HTMLElement
+    const firstSlottedChild =
+      this._elDefaultSlot?.assignedElements()[0] as HTMLElement
 
     this.updateComplete.then(() => {
       firstSlottedChild?.focus()

@@ -1,3 +1,4 @@
+import { classMap } from 'lit/directives/class-map.js'
 import { html, unsafeStatic } from 'lit/static-html.js'
 import { property } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
@@ -5,7 +6,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import TextCSS from './text.style'
+import textStyles from './text.style'
 
 /**
  * `gds-text` is a custom element that provides a flexible text system.
@@ -17,7 +18,7 @@ import TextCSS from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  static styles = [tokens, TextCSS]
+  static styles = [tokens, textStyles]
 
   /**
    * The level of the container can be used to apply background and color styles from the corresponding level.
@@ -239,6 +240,11 @@ export class GdsText extends GdsElement {
   render() {
     const TAG_ENCODE = encodeURI(this.tag)
     const TAG = unsafeStatic(TAG_ENCODE)
-    return html`<${TAG} tag><slot></slot></${TAG}>`
+    const classes = {
+      'no-size-set': !this['font-size'],
+      'no-weight-set': !this['font-weight'],
+      'lines-set': !!this.lines,
+    }
+    return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
   }
 }
