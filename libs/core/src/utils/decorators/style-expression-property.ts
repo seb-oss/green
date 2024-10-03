@@ -35,7 +35,7 @@ export type StyleExpressionPropertyOptions = {
   cacheOverrideKey?: string
 }
 
-const styleCache = {} as Record<string, CSSResult>
+const styleCache = new Map<string, CSSResult>()
 
 /**
  * A decorator that can be used to create a Style Expression Property.
@@ -72,10 +72,10 @@ export function styleExpressionProperty(
 
         const styleKey = sel + prop + newValue + cacheKey
 
-        if (styleCache.hasOwnProperty(styleKey)) {
+        if (styleCache.has(styleKey)) {
           ;(this as GdsElement)._dynamicStylesController.inject(
             `sep_${String(descriptor)}`,
-            styleCache[styleKey] as CSSResult,
+            styleCache.get(styleKey) as CSSResult,
           )
           return
         }
@@ -90,7 +90,7 @@ export function styleExpressionProperty(
         )
 
         const style = unsafeCSS(css)
-        styleCache[styleKey] = style
+        styleCache.set(styleKey, style)
         this[`__${String(descriptor)}_ast`] = ast
         ;(this as GdsElement)._dynamicStylesController.inject(
           `sep_${String(descriptor)}`,
