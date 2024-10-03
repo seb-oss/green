@@ -13,20 +13,30 @@ import dynamic from 'next/dynamic'
 import { ThemeProviderContext } from '$/theme/provider'
 
 const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
-  ssr: false
+  ssr: false,
 })
 
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
-  ssr: false
+  ssr: false,
 })
 
-const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/container'), {
-  ssr: false
-})
+const GdsContainer = dynamic(
+  () => import('@sebgroup/green-react/src/core/container'),
+  {
+    ssr: false,
+  },
+)
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>(
-    window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark',
   )
 
   useEffect(() => {
@@ -44,10 +54,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
     if (
       location.hostname === 'seb.io' &&
-      document.cookie.split('; ').find(row => row.startsWith('GDS Cookie Consent'))
+      document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('GDS Cookie Consent'))
     ) {
       const script = document.createElement('script')
-      script.src = 'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
+      script.src =
+        'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
       script.type = 'application/javascript'
       document.head.appendChild(script)
 
@@ -61,31 +74,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     }
     Fonts()
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-      setColorScheme(event.matches ? 'dark' : 'light')
-    })
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        setColorScheme(event.matches ? 'dark' : 'light')
+      })
   }, [colorScheme, setColorScheme])
 
   const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
 
   return (
-    <html lang="en" suppressHydrationWarning color-scheme={colorScheme}>
+    <html lang="en" suppressHydrationWarning theme={colorScheme}>
       <body>
-        <ThemeProvider attribute="theme" defaultTheme="system" enableColorScheme={false} enableSystem>
-          <GdsTheme colorScheme={colorScheme}>
-            <Header />
-            <GdsFlex padding="0 m; >m{0 l}" gap="l">
-              <Menu isNavOpen={isNavOpen} toggleNav={toggleNav} />
-              <GdsContainer width="100%">
-                <GdsContainer max-width="1088px" margin="auto">
-                  {children}
-                </GdsContainer>
+        <ThemeProvider
+          attribute="theme"
+          defaultTheme="system"
+          enableColorScheme={false}
+          enableSystem
+        >
+          <Header />
+          <GdsFlex padding="0 m; >m{0 l}" gap="l">
+            <Menu isNavOpen={isNavOpen} toggleNav={toggleNav} />
+            <GdsContainer width="100%">
+              <GdsContainer max-width="1088px" margin="auto">
+                {children}
               </GdsContainer>
-            </GdsFlex>
-            <Main>
-              <Consent />
-            </Main>
-          </GdsTheme>
+            </GdsContainer>
+          </GdsFlex>
+          <Main>
+            <Consent />
+          </Main>
         </ThemeProvider>
         <Script id="data-layer">
           {`window["dataLayer"] = {

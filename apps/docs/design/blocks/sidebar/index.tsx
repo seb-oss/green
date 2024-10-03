@@ -8,12 +8,18 @@ import './style.css'
 
 const GdsButton = dynamic(() => import('@sebgroup/green-react/src/core/button'))
 const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
-const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/container'))
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
 
-export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: () => void }) {
+export default function Sidebar({
+  isNavOpen,
+}: {
+  isNavOpen: boolean
+  toggleNav: () => void
+}) {
   const path = usePathname()
-  const filteredComponents = allComponents.filter(component => component._raw.sourceFileName === 'index.mdx')
+  const filteredComponents = allComponents.filter(
+    (component) => component._raw.sourceFileName === 'index.mdx',
+  )
 
   function Component(component: Component) {
     return (
@@ -24,14 +30,18 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
   }
 
   const components = filteredComponents
-    .filter(component => !(component.private && !isDev))
+    .filter((component) => !(component.private && !isDev))
     .sort((a, b) => a.title.localeCompare(b.title))
 
   const SideBarRef = useRef<HTMLDivElement>(null)
 
   const checkIfMenuShouldClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const { current } = SideBarRef
-    if (current && window.innerWidth < 992 && !current.classList.contains('hidden')) {
+    if (
+      current &&
+      window.innerWidth < 992 &&
+      !current.classList.contains('hidden')
+    ) {
       toggleNav()
     }
   }
@@ -39,7 +49,12 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
   return (
     <nav className="menu">
       <GdsFlex height="100%">
-        <GdsCard width="250px" padding="m" background="primary" border-radius="s">
+        <GdsCard
+          width="250px"
+          padding="m"
+          background="primary"
+          border-radius="s"
+        >
           <GdsFlex gap="s" flex-direction="column">
             <details open={path.includes('/component')}>
               <summary>
@@ -73,7 +88,9 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
               <Dev>
                 <nav>
                   <Link
-                    className={path == '/foundation/accessibility' ? 'active' : ''}
+                    className={
+                      path == '/foundation/accessibility' ? 'active' : ''
+                    }
                     href="/foundation/accessibility"
                     onClick={checkIfMenuShouldClose}
                   >
@@ -96,10 +113,16 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
               </summary>
               <Dev>
                 <nav>
-                  <GdsButton rank={path == '/ux-writing' ? 'primary' : 'tertiary'} href="/ux-writing/general">
+                  <GdsButton
+                    rank={path == '/ux-writing' ? 'primary' : 'tertiary'}
+                    href="/ux-writing/general"
+                  >
                     General
                   </GdsButton>
-                  <GdsButton rank={path == '/ux-writing' ? 'primary' : 'tertiary'} href="/ux-writing/english">
+                  <GdsButton
+                    rank={path == '/ux-writing' ? 'primary' : 'tertiary'}
+                    href="/ux-writing/english"
+                  >
                     English
                   </GdsButton>
                   <GdsButton
@@ -113,14 +136,27 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
                 </nav>
               </Dev>
             </details>
-            <details open={path.includes('/about') || path.includes('/changelog') || path.includes('/status')}>
+            <details
+              open={
+                path.includes('/about') ||
+                path.includes('/changelog') ||
+                path.includes('/status')
+              }
+            >
               <summary>
-                <GdsButton className={path == '/about' ? 'active' : ''} href="/about" onClick={checkIfMenuShouldClose}>
+                <GdsButton
+                  className={path == '/about' ? 'active' : ''}
+                  href="/about"
+                  onClick={checkIfMenuShouldClose}
+                >
                   About
                 </GdsButton>
               </summary>
               <nav>
-                <GdsButton className={path == '/changelog' ? 'active' : ''} href="/changelog">
+                <GdsButton
+                  className={path == '/changelog' ? 'active' : ''}
+                  href="/changelog"
+                >
                   Changelog
                 </GdsButton>
                 <GdsButton
@@ -133,7 +169,10 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
                 </GdsButton>
               </nav>
             </details>
-            <GdsButton href="https://designlibrary.sebgroup.com/" target="_blank">
+            <GdsButton
+              href="https://designlibrary.sebgroup.com/"
+              target="_blank"
+            >
               Design Library
             </GdsButton>
           </GdsFlex>

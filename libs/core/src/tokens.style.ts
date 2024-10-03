@@ -17,12 +17,18 @@ const tokens = [
   unsafeCSS(sizeTokens),
   unsafeCSS(textTokens),
   unsafeCSS(motionTokens),
-  unsafeCSS(shadowTokens)
+  unsafeCSS(shadowTokens),
 ]
 
 // TODO: Consider more efficient way to apply tokens
 const tokesStyleSheets = new CSSStyleSheet()
-tokesStyleSheets.replaceSync(`:root { ${colorV2Light} }`)
-document.adoptedStyleSheets = [...(document.adoptedStyleSheets || []), tokesStyleSheets]
+tokesStyleSheets.replaceSync(`
+  :root, :root[theme="light"] { ${colorV2Light} }
+  :root[theme="dark"] { ${colorV2Dark} }
+  `)
+document.adoptedStyleSheets = [
+  ...(document.adoptedStyleSheets || []),
+  tokesStyleSheets,
+]
 
 export { tokens, colorV2Light, colorV2Dark }

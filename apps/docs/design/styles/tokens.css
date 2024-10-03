@@ -1,4 +1,4 @@
-[theme='light'] {
+/* [theme='light'] {
   color-scheme: light;
   --gds-sys-color-accent-accent-green: #006d31;
   --gds-sys-color-accent-accent-orange: #ffba30;
@@ -148,7 +148,7 @@
   --gds-sys-color-stroke-stroke-warning: #ae7a00;
   --gds-sys-color-stroke-stroke-negative: #ff7257;
   --gds-sys-color-stroke-stroke-custom-blue: #ff5636;
-}
+} */
 
 @layer core {
   @layer tokens {
@@ -156,7 +156,11 @@
       --color-white: hsl(0 0% 100%);
       --color-black: hsla(60, 6%, 10%, 1);
       --color-alpha: 90%;
-      --color-mix: color-mix(in srgb, var(--color-black), transparent var(--color-alpha));
+      --color-mix: color-mix(
+        in srgb,
+        var(--color-black),
+        transparent var(--color-alpha)
+      );
       --transition: all 248ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
       --header-height: 72px;
 
