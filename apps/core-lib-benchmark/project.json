@@ -60,9 +60,6 @@
         "command": "node apps/core-lib-benchmark/scripts/puppeteer-trace.mjs"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "dependsOn": ["build"],
