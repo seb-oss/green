@@ -33,6 +33,7 @@ export class GdsElement extends LitElement {
     this._dynamicStylesController = new DynamicStylesController(this)
   }
 
+  // TODO: This is slow. We need to find a more efficient way of setting the gds-element attribute.
   connectedCallback(): void {
     super.connectedCallback()
     this.gdsElementName =
