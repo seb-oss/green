@@ -7,42 +7,94 @@ import { ThemeToggle } from '$/theme/toggle'
 
 import dynamic from 'next/dynamic'
 
-const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/container'), {
-  ssr: false
-})
+const GdsContainer = dynamic(
+  () => import('@sebgroup/green-react/src/core/container'),
+  {
+    ssr: false,
+  },
+)
 
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
-  ssr: false
+  ssr: false,
 })
 
-const GdsButton = dynamic(() => import('@sebgroup/green-react/src/core/button'), {
-  ssr: false
-})
+const GdsButton = dynamic(
+  () => import('@sebgroup/green-react/src/core/button'),
+  {
+    ssr: false,
+  },
+)
 
 const IconBrandSeb = dynamic(
-  () => import('@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb').then(mod => mod.IconBrandSeb),
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons').then(
+      (mod) => mod.IconBrandSeb,
+    ),
   {
-    ssr: false
-  }
+    ssr: false,
+  },
+)
+
+const IconBarsThree = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons').then(
+      (mod) => mod.IconBarsThree,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+const IconMagnifyingGlass = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons').then(
+      (mod) => mod.IconMagnifyingGlass,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconBrandGithub = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons').then(
+      (mod) => mod.IconBrandGithub,
+    ),
+  {
+    ssr: false,
+  },
 )
 
 export const Header = forwardRef(({ ...props }, ref) => {
-  const { toggleCmd } = useContext(ThemeProviderContext)
   const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
-  const [isWindows, setIsWindows] = useState(false)
-
-  useEffect(() => {
-    const userAgent = window.navigator.userAgent
-    setIsWindows(userAgent.indexOf('Windows') !== -1)
-  }, [])
 
   return (
-    <header>
-      <GdsContainer margin="auto" max-width="1088px" padding="m 0">
+    <header style={{ position: 'sticky', top: 0 }}>
+      <GdsContainer margin="auto" padding="m; m{m l}" inset="0 0 auto 0">
         <GdsFlex justify-content="space-between" align-items="center">
-          <GdsButton rank="tertiary">Menu</GdsButton>
-          <IconBrandSeb />
-          <GdsButton rank="tertiary">Search</GdsButton>
+          <GdsFlex flex="1" display="flex; m{none}">
+            <GdsButton rank="tertiary" onClick={() => toggleNav()}>
+              <IconBarsThree />
+            </GdsButton>
+          </GdsFlex>
+          <GdsFlex
+            flex="1"
+            align-items="center"
+            justify-content="center; >m{flex-start}"
+            style={{ paddingLeft: 110 }}
+          >
+            <IconBrandSeb />
+          </GdsFlex>
+          <GdsFlex gap="s" flex="1" justify-content="flex-end">
+            <GdsFlex display="none; s{flex}">
+              <GdsButton rank="tertiary">
+                <IconMagnifyingGlass slot="lead" />
+                Search
+              </GdsButton>
+            </GdsFlex>
+            <GdsButton rank="tertiary">
+              <IconBrandGithub />
+            </GdsButton>
+          </GdsFlex>
         </GdsFlex>
       </GdsContainer>
     </header>

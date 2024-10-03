@@ -3,12 +3,13 @@
   height: 100%;
   z-index: 4;
   flex-direction: column;
-  top: var(--header-height);
-  width: 320px;
-  min-width: 320px;
   grid-area: sidebar;
+  top: var(--gds-space-l);
+  transform: translateX(calc(-100% - 2 * var(--gds-space-l)));
 
-  @media screen and (min-width: 62rem) {
+  @media screen and (min-width: 64rem) {
+    transform: initial;
+    top: var(--header-height);
     position: sticky;
     max-height: calc(100vh - var(--header-height) - 2rem);
     block-size: 100vh;

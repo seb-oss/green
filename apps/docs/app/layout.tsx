@@ -1,17 +1,16 @@
 'use client'
 
-import Alert from '@/alert/aler'
 import Menu from '@/sidebar'
 import Consent from '@/consent/consent'
 import Footer from '@/footer/footer'
 import Header from '@/header/header'
-import Page from '&/article/article'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import dynamic from 'next/dynamic'
+import { ThemeProviderContext } from '$/theme/provider'
 
 const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
   ssr: false
@@ -26,7 +25,7 @@ const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/contai
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [colorScheme, setColorScheme] = useState(
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>(
     window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
   )
 
@@ -67,6 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     })
   }, [colorScheme, setColorScheme])
 
+  const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
+
   return (
     <html lang="en" suppressHydrationWarning color-scheme={colorScheme}>
       <body>
@@ -74,17 +75,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GdsTheme colorScheme={colorScheme}>
             <Header />
             <GdsFlex padding="0 m; >m{0 l}" gap="l">
-              <Menu isNavOpen={true} />
+              <Menu isNavOpen={isNavOpen} toggleNav={toggleNav} />
               <GdsContainer width="100%">
                 <GdsContainer max-width="1088px" margin="auto">
                   {children}
                 </GdsContainer>
               </GdsContainer>
             </GdsFlex>
-
             <Main>
               <Consent />
-              <Footer />
             </Main>
           </GdsTheme>
         </ThemeProvider>

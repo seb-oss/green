@@ -39,7 +39,7 @@ export default function Sidebar({ isNavOpen }: { isNavOpen: boolean; toggleNav: 
   return (
     <nav className="menu">
       <GdsFlex height="100%">
-        <GdsCard width="320px" padding="m" background="primary" border-radius="s">
+        <GdsCard width="250px" padding="m" background="primary" border-radius="s">
           <GdsFlex gap="s" flex-direction="column">
             <details open={path.includes('/component')}>
               <summary>

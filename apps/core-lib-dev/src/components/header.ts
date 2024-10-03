@@ -13,8 +13,8 @@ export class GdsHeader extends LitElement {
       new CustomEvent('view-change', {
         detail: { view },
         bubbles: true,
-        composed: true
-      })
+        composed: true,
+      }),
     )
   }
 
@@ -34,17 +34,40 @@ export class GdsHeader extends LitElement {
               Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
-            <gds-menu-item @click=${() => this.handleButtonClick('login')}> Login </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('form-validation')}> Validation </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('datepicker')}> Datepicker </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('calendar')}> Calendar </gds-menu-item>
+            <gds-menu-item @click=${() => this.handleButtonClick('login')}>
+              Login
+            </gds-menu-item>
+            <gds-menu-item
+              @click=${() => this.handleButtonClick('form-validation')}
+            >
+              Validation
+            </gds-menu-item>
+            <gds-menu-item @click=${() => this.handleButtonClick('datepicker')}>
+              Datepicker
+            </gds-menu-item>
+            <gds-menu-item @click=${() => this.handleButtonClick('calendar')}>
+              Calendar
+            </gds-menu-item>
           </gds-context-menu>
         </gds-container>
         <gds-container display="xs{none} s{none} m{none} l{flex}">
-          <gds-menu-button @click=${() => this.handleButtonClick('login')}> Login </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('form-validation')}> Validation </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}> Datepicker </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}> Calendar </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('login')}>
+            Login
+          </gds-menu-button>
+          <gds-menu-button
+            @click=${() => this.handleButtonClick('form-validation')}
+          >
+            Validation
+          </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}>
+            Datepicker
+          </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
+            Calendar
+          </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('fonts')}>
+            Fonts
+          </gds-menu-button>
         </gds-container>
         <gds-flex
           position="2xs{relative} l{absolute}"
