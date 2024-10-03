@@ -65,10 +65,11 @@ export function styleExpressionProperty(
     // Define the getter and setter for the property
     Object.defineProperty(proto, descriptor, {
       get: function () {
-        return this[descriptor]
+        return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
         await this.updateComplete
+        this['__' + String(descriptor)] = newValue
 
         const styleKey = sel + prop + newValue + cacheKey
 
@@ -95,8 +96,6 @@ export function styleExpressionProperty(
           `sep_${String(descriptor)}`,
           style,
         )
-
-        this.requestUpdate()
       },
     })
   }
