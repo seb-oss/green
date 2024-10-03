@@ -6,6 +6,7 @@ import { html } from '@sebgroup/green-core/scoping.js'
 
 import './benches/decl-layout-1'
 import './benches/css-layout-1'
+import './benches/form-layout-1'
 
 @customElement('app-root')
 export class AppElement extends LitElement {
@@ -18,6 +19,10 @@ export class AppElement extends LitElement {
     {
       path: '/css-layout-1',
       render: () => html`<css-layout-1></css-layout-1>`,
+    },
+    {
+      path: '/form-layout-1',
+      render: () => html`<form-layout-1></form-layout-1>`,
     },
   ])
 
