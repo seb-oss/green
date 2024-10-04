@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.6
+
+### Patch Changes
+
+- 62cde4b: fixing correct default typography for heading elements
+
 ## 3.6.5
 
 ### Patch Changes
