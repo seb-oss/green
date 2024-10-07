@@ -35,7 +35,7 @@ export default function Header() {
         align-items="center"
         padding="0 l"
         height="72px"
-        border="0 0 4xs/tertiary 0"
+        border="0 0 4xs/#cececa 0"
       >
         <GdsButton rank="tertiary" onClick={toggleNav}>
           Menu
