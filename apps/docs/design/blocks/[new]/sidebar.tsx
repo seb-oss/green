@@ -6,6 +6,7 @@ import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
+import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import { usePathname } from 'next/navigation'
@@ -76,8 +77,10 @@ export default function Sidebar({
       max-width="300px"
       min-height="100vh"
       align-items="flex-start"
+      flex-direction="column"
+      gap="l"
     >
-      <GdsFlex flex-direction="column" flex="1">
+      <GdsFlex flex-direction="column" min-width="100%">
         <GdsFlex align-items="center" justify-content="space-between">
           <Link
             className={path === '/components' ? 'active' : ''}
@@ -95,6 +98,116 @@ export default function Sidebar({
             ))}
           </GdsFlex>
         )}
+      </GdsFlex>
+
+      <GdsFlex flex-direction="column" min-width="100%">
+        <GdsFlex align-items="center" justify-content="space-between">
+          <Link
+            className={path === '/foundation' ? 'active' : ''}
+            href="/foundation"
+            onClick={checkIfMenuShouldClose}
+          >
+            Foundation
+          </Link>
+          <Arrow />
+        </GdsFlex>
+
+        {isNavVisible && (
+          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+            <Link
+              className={path == '/foundation/accessibility' ? 'active' : ''}
+              href="/foundation/accessibility"
+              onClick={checkIfMenuShouldClose}
+            >
+              Accessibility
+            </Link>
+          </GdsFlex>
+        )}
+      </GdsFlex>
+      <GdsFlex flex-direction="column" min-width="100%">
+        <GdsFlex align-items="center" justify-content="space-between">
+          <Link
+            className={path === '/foundation' ? 'active' : ''}
+            href="/foundation"
+            onClick={checkIfMenuShouldClose}
+          >
+            UX writing
+          </Link>
+          <Arrow />
+        </GdsFlex>
+
+        {isNavVisible && (
+          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+            <Link
+              className={path == '/ux-writing/general' ? 'active' : ''}
+              href="/ux-writing/general"
+            >
+              General
+            </Link>
+            <Link
+              className={path == '/ux-writing/english' ? 'active' : ''}
+              href="/ux-writing/english"
+            >
+              English
+            </Link>
+            <Link
+              className={path == '/ux-writing/swedish' ? 'active' : ''}
+              href="/ux-writing/swedish"
+              onClick={checkIfMenuShouldClose}
+            >
+              Swedish
+            </Link>
+          </GdsFlex>
+        )}
+      </GdsFlex>
+      <GdsFlex flex-direction="column" min-width="100%">
+        <GdsFlex align-items="center" justify-content="space-between">
+          <Link
+            className={path === '/foundation' ? 'active' : ''}
+            href="/foundation"
+            onClick={checkIfMenuShouldClose}
+          >
+            About
+          </Link>
+          <Arrow />
+        </GdsFlex>
+
+        {isNavVisible && (
+          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+            <Link
+              className={path == '/changelog' ? 'active' : ''}
+              href="/changelog"
+            >
+              Changelog
+            </Link>
+            <Link
+              className={path == '/status' ? 'active' : ''}
+              href="/status"
+              onClick={checkIfMenuShouldClose}
+            >
+              Status
+            </Link>
+          </GdsFlex>
+        )}
+      </GdsFlex>
+
+      <GdsFlex
+        position="sticky"
+        inset="auto 0 24px 0"
+        margin="auto 0 0 0"
+        min-width="100%"
+        justify-content="stretch"
+      >
+        <Link
+          href="https://designlibrary.sebgroup.com/"
+          target="_blank"
+          style={{ minInlineSize: '100%' }}
+        >
+          <GdsFlex align-items="center" justify-content="space-between">
+            Design Library
+            <IconCainLink />
+          </GdsFlex>
+        </Link>
       </GdsFlex>
     </GdsFlex>
   )
