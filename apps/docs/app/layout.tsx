@@ -3,13 +3,15 @@
 import Menu from '@/sidebar'
 import Consent from '@/consent/consent'
 import Footer from '@/footer/footer'
-import Header from '@/header/header'
+// import Header from '@/header/header'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
 import { useEffect, useState, useContext } from 'react'
 import dynamic from 'next/dynamic'
+import Sidebar from '@/[new]/sidebar'
+import Header from '@/[new]/header'
 //import { ThemeProviderContext } from '$/theme/provider'
 
 const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
@@ -93,7 +95,10 @@ export default function RootLayout({
           enableSystem
         >
           <GdsFlex gap="l">
-            <Menu />
+            <Header />
+            {/* <Sidebar /> */}
+          </GdsFlex>
+          {/* <GdsFlex gap="l">
             <GdsFlex flex-direction="column" gap="l" width="100%">
               <Header />
               <GdsContainer padding="0 m; >m{0 l 0 0}">
@@ -102,7 +107,7 @@ export default function RootLayout({
                 </GdsContainer>
               </GdsContainer>
             </GdsFlex>
-          </GdsFlex>
+          </GdsFlex> */}
           <Main>
             <Consent />
           </Main>
