@@ -14,20 +14,24 @@ import Sidebar from '@/[new]/sidebar'
 import Header from '@/[new]/header'
 //import { ThemeProviderContext } from '$/theme/provider'
 
-const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
-  ssr: false,
-})
+// const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
+//   ssr: false,
+// })
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
-  ssr: false,
-})
+// const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+//   ssr: false,
+// })
 
-const GdsContainer = dynamic(
-  () => import('@sebgroup/green-react/src/core/container'),
-  {
-    ssr: false,
-  },
-)
+// const GdsContainer = dynamic(
+//   () => import('@sebgroup/green-react/src/core/container'),
+//   {
+//     ssr: false,
+//   },
+// )
+
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsContainer from '@sebgroup/green-react/src/core/container'
+import GdsTheme from '@sebgroup/green-react/src/core/theme'
 
 export default function RootLayout({
   children,
@@ -88,12 +92,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning gds-theme={colorScheme}>
       <body>
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="theme"
           defaultTheme="system"
           enableColorScheme={false}
           enableSystem
-        >
+        > */}
+        <GdsTheme>
           <GdsFlex flex-direction="column">
             <Header />
             <Sidebar />
@@ -111,7 +116,8 @@ export default function RootLayout({
           <Main>
             <Consent />
           </Main>
-        </ThemeProvider>
+        </GdsTheme>
+        {/* </ThemeProvider> */}
         <Script id="data-layer">
           {`window["dataLayer"] = {
             "pageName":"seb.io",

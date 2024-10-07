@@ -14,8 +14,7 @@ export default function Sidebar({
   return (
     <GdsFlex
       padding="l"
-      border-color="tertiary"
-      border="0 4xs 0 0"
+      border="0 4xs/tertiary 0 0"
       max-width="300px"
       min-height="100vh"
       align-items="flex-start"

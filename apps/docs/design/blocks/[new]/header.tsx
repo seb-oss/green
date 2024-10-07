@@ -5,6 +5,7 @@ import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrand
 import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
 import { IconCrossSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossSmall'
 import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBarsThree'
+import GdsContainer from '@sebgroup/green-react/src/core/container'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import Link from 'next/link'
@@ -21,37 +22,39 @@ export default function Header() {
     setIsWindows(userAgent.indexOf('Windows') !== -1)
   }, [])
   return (
-    <GdsFlex
+    <GdsContainer
       level="1"
-      justify-content="space-between"
-      min-width="100%"
-      align-items="center"
       position="sticky"
       inset="0"
       z-index="100"
-      padding="0 l"
-      height="72px"
-      border="0 0 4xs 0"
-      border-color="primary"
       background="primary"
     >
-      <GdsButton rank="tertiary" onClick={toggleNav}>
-        Menu
-        {isNavOpen === true ? (
-          <IconCrossSmall slot="lead" />
-        ) : (
-          <IconBarsThree slot="lead" />
-        )}
-      </GdsButton>
-      <Link href="/">
-        <IconBrandSeb />
-      </Link>
-      <GdsFlex gap="s">
-        <GdsButton rank="tertiary">Search</GdsButton>
-        <GdsButton rank="tertiary">
-          <IconBrandGithub />
+      <GdsFlex
+        justify-content="space-between"
+        min-width="100%"
+        align-items="center"
+        padding="0 l"
+        height="72px"
+        border="0 0 4xs/tertiary 0"
+      >
+        <GdsButton rank="tertiary" onClick={toggleNav}>
+          Menu
+          {isNavOpen === true ? (
+            <IconCrossSmall slot="lead" />
+          ) : (
+            <IconBarsThree slot="lead" />
+          )}
         </GdsButton>
+        <Link href="/">
+          <IconBrandSeb />
+        </Link>
+        <GdsFlex gap="s">
+          <GdsButton rank="tertiary">Search</GdsButton>
+          <GdsButton rank="tertiary">
+            <IconBrandGithub />
+          </GdsButton>
+        </GdsFlex>
       </GdsFlex>
-    </GdsFlex>
+    </GdsContainer>
   )
 }
