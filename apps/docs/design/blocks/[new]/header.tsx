@@ -1,5 +1,6 @@
 'use client'
 
+import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb'
 import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
 import { IconCrossSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossSmall'
@@ -7,23 +8,40 @@ import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBars
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import Link from 'next/link'
+import { ThemeProviderContext } from '$/theme/provider'
+import { ThemeToggle } from '$/theme/toggle'
 
 export default function Header() {
+  const { toggleCmd } = useContext(ThemeProviderContext)
+  const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
+  const [isWindows, setIsWindows] = useState(false)
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent
+    setIsWindows(userAgent.indexOf('Windows') !== -1)
+  }, [])
   return (
     <GdsFlex
+      level="1"
       justify-content="space-between"
       min-width="100%"
       align-items="center"
       position="sticky"
+      inset="0"
       z-index="100"
       padding="0 l"
       height="72px"
       border="0 0 4xs 0"
       border-color="primary"
+      background="primary"
     >
-      <GdsButton rank="tertiary">
+      <GdsButton rank="tertiary" onClick={toggleNav}>
         Menu
-        <IconBarsThree slot="lead" />
+        {isNavOpen === true ? (
+          <IconCrossSmall slot="lead" />
+        ) : (
+          <IconBarsThree slot="lead" />
+        )}
       </GdsButton>
       <Link href="/">
         <IconBrandSeb />

@@ -1,126 +1,35 @@
-import Dev, { isDev } from '$/dev/dev'
-import { allComponents, Component } from 'content'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React, { useRef } from 'react'
-import dynamic from 'next/dynamic'
-import GdsCard from '@sebgroup/green-react/src/core/card'
-import GdsFlex from '@sebgroup/green-react/src/core/card'
-// import './style.css'
+'use client'
 
-// const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
-// const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
+import Link from 'next/link'
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsButton from '@sebgroup/green-react/src/core/button'
+import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 
 export default function Sidebar({
   isNavOpen,
 }: {
-  isNavOpen: boolean
-  toggleNav: () => void
+  isNavOpen?: boolean
+  toggleNav?: () => void
 }) {
-  const path = usePathname()
-  const filteredComponents = allComponents.filter(
-    (component) => component._raw.sourceFileName === 'index.mdx',
-  )
-
-  const components = filteredComponents
-    .filter((component) => !(component.private && !isDev))
-    .sort((a, b) => a.title.localeCompare(b.title))
-
-  const SideBarRef = useRef<HTMLDivElement>(null)
-
-  const checkIfMenuShouldClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const { current } = SideBarRef
-    if (
-      current &&
-      window.innerWidth < 992 &&
-      !current.classList.contains('hidden')
-    ) {
-      toggleNav()
-    }
-  }
-
   return (
-    <GdsFlex className="menu" padding="l">
-      <GdsCard
-        width="250px"
-        padding="m l"
-        background="primary"
-        border-radius="s"
+    <GdsFlex
+      padding="l"
+      border-color="tertiary"
+      border="0 4xs 0 0"
+      max-width="300px"
+      min-height="100vh"
+      align-items="flex-start"
+    >
+      <GdsFlex
+        align-items="center"
+        justify-content="space-between"
+        min-width="100%"
       >
-        <GdsFlex gap="s" flex-direction="column">
-          <Link
-            className={path === '/components' ? 'active' : ''}
-            href="/components"
-            onClick={checkIfMenuShouldClose}
-          >
-            Components
-          </Link>
-
-          {components.map((component, idx) => (
-            <Link
-              key={idx}
-              href={component.url_path}
-              onClick={checkIfMenuShouldClose}
-            >
-              {component.title}
-            </Link>
-          ))}
-
-          <Link
-            className={path === '/foundation' ? 'active' : ''}
-            href="/foundation"
-            onClick={checkIfMenuShouldClose}
-          >
-            Foundation
-          </Link>
-          <Dev></Dev>
-
-          <Dev>
-            <nav>
-              <Link
-                className={path == '/foundation/accessibility' ? 'active' : ''}
-                href="/foundation/accessibility"
-                onClick={checkIfMenuShouldClose}
-              >
-                Accessibility
-              </Link>
-            </nav>
-          </Dev>
-
-          <Link
-            rank={path == '/ux-writing' ? 'primary' : 'tertiary'}
-            href="/ux-writing"
-            onClick={checkIfMenuShouldClose}
-          >
-            UX writing
-          </Link>
-
-          <Link
-            className={path == '/about' ? 'active' : ''}
-            href="/about"
-            onClick={checkIfMenuShouldClose}
-          >
-            About
-          </Link>
-
-          <Link
-            className={path == '/changelog' ? 'active' : ''}
-            href="/changelog"
-          >
-            Changelog
-          </Link>
-          <Link
-            className={path == '/status' ? 'active' : ''}
-            href="/status"
-            onClick={checkIfMenuShouldClose}
-          >
-            Status
-          </Link>
-          <Link href="https://designlibrary.sebgroup.com/" target="_blank">
-            Design Library
-          </Link>
-        </GdsFlex>
-      </GdsCard>
+        Design
+        <GdsButton rank="tertiary">
+          <IconChevronBottom />
+        </GdsButton>
+      </GdsFlex>
     </GdsFlex>
   )
 }

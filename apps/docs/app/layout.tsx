@@ -94,9 +94,9 @@ export default function RootLayout({
           enableColorScheme={false}
           enableSystem
         >
-          <GdsFlex gap="l">
+          <GdsFlex flex-direction="column">
             <Header />
-            {/* <Sidebar /> */}
+            <Sidebar />
           </GdsFlex>
           {/* <GdsFlex gap="l">
             <GdsFlex flex-direction="column" gap="l" width="100%">
