@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": ["ngg", "ngv"],
+            "prefix": ["ngg", "nggv"],
             "style": "camelCase"
           }
         ],
