@@ -249,7 +249,7 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      [theme='dark'] {
+      [gds-theme='dark'] {
         --color-white: hsla(60, 6%, 10%, 1);
         --color-black: hsl(0 0% 100%);
       }

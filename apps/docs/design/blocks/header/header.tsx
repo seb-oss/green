@@ -3,7 +3,6 @@
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ThemeProviderContext } from '$/theme/provider'
-import { ThemeToggle } from '$/theme/toggle'
 
 import dynamic from 'next/dynamic'
 
@@ -71,10 +70,12 @@ export const Header = forwardRef(({ ...props }, ref) => {
     <header style={{ position: 'sticky', top: 0 }}>
       <GdsContainer margin="auto" padding="m; m{m l}" inset="0 0 auto 0">
         <GdsFlex justify-content="space-between" align-items="center">
-          <GdsFlex flex="1" display="flex; m{none}">
-            <GdsButton rank="tertiary" onClick={() => toggleNav()}>
-              <IconBarsThree />
-            </GdsButton>
+          <GdsFlex flex="1" display="flex">
+            <GdsContainer display="block; m{none}">
+              <GdsButton rank="tertiary" onClick={() => toggleNav()}>
+                <IconBarsThree />
+              </GdsButton>
+            </GdsContainer>
           </GdsFlex>
           <GdsFlex
             flex="1"

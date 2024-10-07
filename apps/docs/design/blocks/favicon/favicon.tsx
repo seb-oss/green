@@ -1,9 +1,6 @@
-import { useTheme } from 'next-themes'
-
 export default function Favicon() {
-  const { resolvedTheme } = useTheme()
-  const fill = resolvedTheme === 'dark' ? '#fff' : '#000'
-  const fillRect = resolvedTheme === 'dark' ? '#000' : '#fff'
+  const fill = '#000'
+  const fillRect = '#fff'
 
   const svgCode = `
     <svg xmlns="http://www.w3.org/2000/svg" fill="${fill}" width="80" height="60" viewBox="0 0 80 60">

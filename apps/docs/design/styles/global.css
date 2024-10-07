@@ -25,8 +25,8 @@
 
   @media screen and (prefers-color-scheme: dark) {
     body {
-      background-color: #0e0e0e;
-      color: #d7d7d7;
+      background-color: var(--gds-color-l1-background-primary);
+      color: var(--gds-color-l1-content-primary);
     }
   }
 
@@ -46,6 +46,10 @@
       outline-width: 2px;
       outline-style: solid;
     }
+  }
+
+  figure {
+    margin: 0;
   }
 
   @layer blocks;
