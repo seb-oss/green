@@ -31,7 +31,7 @@ import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdo
 import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 
 @Directive({
-  selector: 'nggv-input[ngvTypeahead]',
+  selector: 'nggv-input[ngvTypeahead], nggv-dropdown[ngvTypeahead]',
   standalone: true,
 })
 export class NgvTypeaheadDirective<
