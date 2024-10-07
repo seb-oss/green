@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': patch
 ---
 
-fixing selector and imported modules
+**V-Angular:** fixing selector and imported modules
