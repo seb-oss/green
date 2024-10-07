@@ -26,7 +26,7 @@
   }
 
   // .nggv-field--error {
-  //   //@include ngv.text-field--error();
+  //   //@include nggv.text-field--error();
   // }
 
   textarea {
@@ -40,7 +40,7 @@
 
   .error-wrapper {
     margin-top: 0.5rem;
-    //@include ngv.text-field--error-wrapper();
+    //@include nggv.text-field--error-wrapper();
   }
 
   .no-resize {

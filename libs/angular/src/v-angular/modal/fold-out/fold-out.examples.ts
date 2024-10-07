@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
   selector: 'app-fold-out-implementation',
   template: \`
   <nggv-fold-out>
-    <!-- directive [ngvOption] sets styling for each list item -->
-    <div ngvOption>View details</div>
-    <div ngvOption>Sign payment</div>
-    <div ngvOption class="my-custom-class">Delete</div>
+    <!-- directive [nggvOption] sets styling for each list item -->
+    <div nggvOption>View details</div>
+    <div nggvOption>Sign payment</div>
+    <div nggvOption class="my-custom-class">Delete</div>
   </nggv-fold-out>\`,
   styles: [\`.my-custom-class { /* ... */ }\`]
 })
@@ -21,10 +21,10 @@ import { Component } from '@angular/core';
   selector: 'app-fold-out-implementation',
   template: \`
     <nggv-fold-out [flex]="'left'">
-      <!-- directive [ngvOption] sets styling for each list item -->
-      <div ngvOption>View details</div>
-      <div ngvOption>Sign payment</div>
-      <div ngvOption class="my-custom-class">Delete</div>
+      <!-- directive [nggvOption] sets styling for each list item -->
+      <div nggvOption>View details</div>
+      <div nggvOption>Sign payment</div>
+      <div nggvOption class="my-custom-class">Delete</div>
     </nggv-fold-out>\`,
     styles: [\`.my-custom-class { /* ... */ }\`]
 })

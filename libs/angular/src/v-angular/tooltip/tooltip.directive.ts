@@ -35,7 +35,7 @@ export class NgvTooltipDirective
   implements AfterViewInit, OnChanges, OnDestroy
 {
   /** The text that will be shown in the tooltip. */
-  @Input() ngvTooltip?: string
+  @Input() nggvTooltip?: string
   /** Special property used for selecting DOM elements during automated UI testing. */
   @Input() thook = 'tooltip'
   /** The side of the anchor which the tooltip will be rendered.
@@ -52,9 +52,9 @@ export class NgvTooltipDirective
   @Input() maxWidth = 343
 
   /** Emits a show event triggered changing visibility state of the tooltip. */
-  @Output() ngvShow = new EventEmitter<HTMLElement>()
+  @Output() nggvShow = new EventEmitter<HTMLElement>()
   /** Emits a hide event triggered changing visibility state of the tooltip. */
-  @Output() ngvHide = new EventEmitter<HTMLElement>()
+  @Output() nggvHide = new EventEmitter<HTMLElement>()
 
   /** @internal */
   protected timeout = 0
@@ -95,7 +95,7 @@ export class NgvTooltipDirective
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      NgvTooltipDirective.shouldUpdate(changes.ngvTooltip) ||
+      NgvTooltipDirective.shouldUpdate(changes.nggvTooltip) ||
       NgvTooltipDirective.shouldUpdate(changes.placement) ||
       NgvTooltipDirective.shouldUpdate(changes.thook)
     ) {
@@ -143,18 +143,18 @@ export class NgvTooltipDirective
    */
   show(recreate = false) {
     // Require tooltip text to create
-    if (!this.ngvTooltip || this.ngvTooltip.length === 0) return
+    if (!this.nggvTooltip || this.nggvTooltip.length === 0) return
 
     if (recreate || !this.tooltipElement) {
       this.hide(true)
-      this.create(this.ngvTooltip)
+      this.create(this.nggvTooltip)
     } else {
       this.renderer.appendChild(this.parentElement, this.tooltipElement)
     }
 
     this.updatePosition()
     this.shown = true
-    this.ngvShow.emit(this.tooltipElement)
+    this.nggvShow.emit(this.tooltipElement)
   }
 
   /**
@@ -167,7 +167,7 @@ export class NgvTooltipDirective
       this.renderer.removeChild(this.parentElement, this.tooltipElement)
     if (destroy) this.destroy()
     this.shown = false
-    this.ngvHide.emit(this.tooltipElement)
+    this.nggvHide.emit(this.tooltipElement)
   }
 
   /**

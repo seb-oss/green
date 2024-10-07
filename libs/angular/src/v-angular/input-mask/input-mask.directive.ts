@@ -32,13 +32,13 @@ const InputmaskConstructor =
   _Inputmask
 
 @Directive({
-  selector: '[ngvInputMask]',
+  selector: '[nggvInputMask]',
 })
 export class NgvInputMaskDirective<T = any>
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator
 {
   /** Input settings of directive */
-  @Input() ngvInputMask: InputmaskOptions<T> = {}
+  @Input() nggvInputMask: InputmaskOptions<T> = {}
 
   inputMaskPlugin: Inputmask.Instance | undefined
   nativeInputElement: HTMLInputElement | undefined
@@ -104,7 +104,7 @@ export class NgvInputMaskDirective<T = any>
     if (
       isPlatformServer(this.platformId) ||
       !this.nativeInputElement ||
-      !Object.keys(this.ngvInputMask).length
+      !Object.keys(this.nggvInputMask).length
     ) {
       return
     }
@@ -127,7 +127,7 @@ export class NgvInputMaskDirective<T = any>
   }
 
   get inputMaskOptions(): Inputmask.Options {
-    const { parser, ...options } = this.ngvInputMask
+    const { parser, ...options } = this.nggvInputMask
     return options
   }
 
@@ -141,7 +141,7 @@ export class NgvInputMaskDirective<T = any>
     // Use injected parser from settings to modify value
     // of users desire
     this.onInput = (value) => {
-      const parser = this.ngvInputMask?.parser
+      const parser = this.nggvInputMask?.parser
       const newValue = parser && value ? parser(value) : value
       fn(newValue)
     }

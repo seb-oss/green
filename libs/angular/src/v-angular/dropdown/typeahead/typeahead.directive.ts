@@ -31,7 +31,7 @@ import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdo
 import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 
 @Directive({
-  selector: 'nggv-input[ngvTypeahead], nggv-dropdown[ngvTypeahead]',
+  selector: 'nggv-input[nggvTypeahead], nggv-dropdown[nggvTypeahead]',
   standalone: true,
 })
 export class NgvTypeaheadDirective<
@@ -42,7 +42,7 @@ export class NgvTypeaheadDirective<
   implements OnInit, OnDestroy
 {
   /** Function that filter the inputvalue */
-  @Input() set ngvTypeahead(value: OperatorFunction<string, T[]> | undefined) {
+  @Input() set nggvTypeahead(value: OperatorFunction<string, T[]> | undefined) {
     this.typeaheadFunction = value
 
     // If inputsubscription already exists, unsubscribe and subscribe again
@@ -69,7 +69,7 @@ export class NgvTypeaheadDirective<
   @Output() filterPhraseChange = new EventEmitter<string>()
 
   /** Forward text inputs to apply the filter function*/
-  @HostListener('ngvInput', ['$event']) onNgvInput(event: any) {
+  @HostListener('nggvInput', ['$event']) onNgvInput(event: any) {
     this.inputValue$.next(event)
   }
 
@@ -156,7 +156,7 @@ export class NgvTypeaheadDirective<
     this.inputComponent.setInput('selectedFormatter', this.selectedFormatter)
     this.inputComponent.setInput('resultFormatter', this.resultFormatter)
     // Listen to value changes
-    this.inputComponent.instance.ngvInput
+    this.inputComponent.instance.nggvInput
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((inputValue) => this.inputValue$.next(inputValue))
   }
