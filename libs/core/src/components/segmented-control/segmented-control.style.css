@@ -18,20 +18,15 @@
 #track {
   box-sizing: border-box;
   display: flex;
-  flex-grow: 0;
-  flex-shrink: 1;
+  flex-grow: 1;
+  scroll-snap-type: inline mandatory;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
   overflow: hidden;
   position: relative;
-  width: 100%;
-}
-
-#segments {
-  box-sizing: border-box;
-  display: inline-flex;
   gap: 0.25rem;
+  box-sizing: border-box;
   position: relative;
-  transition: 0.2s;
-  z-index: 1;
 }
 
 #btn-prev,
@@ -70,6 +65,7 @@
   flex-grow: 1;
   flex-shrink: 0;
   z-index: 1;
+  scroll-snap-align: start;
 }
 
 #indicator {

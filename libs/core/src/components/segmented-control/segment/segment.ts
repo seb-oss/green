@@ -34,6 +34,16 @@ export class GdsSegment<ValueT = any> extends GdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
+  /**
+   * Whether the segment is currently visible.
+   */
+  get isVisible() {
+    return this._isVisible
+  }
+  // This is deliberatly not marked as private, since we're setting it from the parent component,
+  // but it is not meant to be set by the consumer.
+  _isVisible = true
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented')

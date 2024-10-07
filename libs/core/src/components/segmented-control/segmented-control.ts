@@ -1,5 +1,5 @@
 import { HTMLTemplateResult, unsafeCSS } from 'lit'
-import { query, state, property } from 'lit/decorators.js'
+import { query, state, property, queryAsync } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { msg } from '@lit/localize'
 import { GdsElement } from '../../gds-element'
@@ -8,7 +8,8 @@ import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 
-import { GdsSegment } from '../../components/segmented-control/segment'
+import './segment'
+import type { GdsSegment } from './segment'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
 
@@ -83,35 +84,19 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   @query('#track')
   private _elTrack!: HTMLDivElement
 
-  @query('#segments')
-  private _elSegments!: HTMLDivElement
-
   @state()
   private _showPrevButton = false
 
   @state()
   private _showNextButton = false
 
-  #firstVisibleIndex = 0
-  #calculatedSegmentWidth = 0
   #segmentWidth = 0
-  #segmentsContainerLeft = 0
-  #focusedIndex = 0
 
-  #dragStartX = 0
-  #dragStartLeft = 0
-  #isDragging = false
+  intersectionObserver: IntersectionObserver | null = null
 
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
-
-    this.addEventListener('focusin', (e) => {
-      if (e.target instanceof GdsSegment) {
-        this.#focusedIndex = this.segments.indexOf(e.target as GdsSegment)
-        this.#calcLayout(true)
-      }
-    })
   }
 
   render() {
@@ -126,30 +111,14 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
             <gds-icon-chevron-left />
           </button>`,
       )}
-      <div
-        id="track"
-        @scroll=${() => {
-          // This is here to prevent native scroll on focus
-          this._elTrack.scrollLeft = 0
-        }}
-      >
-        <div
-          id="segments"
-          @pointerdown=${this.#startDrag}
-          @pointermove=${this.#drag}
-          @touchmove=${this.#drag}
-          @pointerup=${this.#endDrag}
-          @pointercancel=${this.#endDrag}
-          role="list"
-        >
-          <slot
-            gds-allow="gds-segment"
-            @click=${this.#handleSegmentClick}
-            @slotchange=${this.#handleSlotChange}
-            role="none"
-          ></slot>
-          <div id="indicator" role="none"></div>
-        </div>
+      <div id="track" role="list">
+        <slot
+          gds-allow="gds-segment"
+          @click=${this.#handleSegmentClick}
+          @slotchange=${this.#handleSlotChange}
+          role="none"
+        ></slot>
+        <div id="indicator" role="none"></div>
       </div>
       ${when(
         this._showNextButton,
@@ -164,44 +133,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       )}`
   }
 
-  #startDrag = (event: PointerEvent) => {
-    this.#dragStartX = event.clientX
-    this.#dragStartLeft = this.#segmentsContainerLeft
-    this.#isDragging = true
-  }
-
-  #drag = (event: PointerEvent) => {
-    if (!this.#isDragging) return
-    event.preventDefault()
-    const delta = event.clientX - this.#dragStartX
-
-    if (Math.abs(delta) < 5) return
-
-    try {
-      if (!this._elSegments.hasPointerCapture(event.pointerId))
-        this._elSegments.setPointerCapture(event.pointerId)
-
-      this.#segmentsContainerLeft = this.#dragStartLeft + delta
-      this.#applySegmentsTransform()
-    } catch {} // eslint-disable-line no-empty
-  }
-
-  #endDrag = (event: PointerEvent) => {
-    if (!this.#isDragging) return
-    this.#isDragging = false
-    try {
-      this._elSegments.releasePointerCapture(event.pointerId)
-      this.#calcVisibleAfterDrag()
-    } catch {} // eslint-disable-line no-empty
-  }
-
-  #calcVisibleAfterDrag = () => {
-    this.#firstVisibleIndex = Math.round(
-      -this.#segmentsContainerLeft / this.#calculatedSegmentWidth,
-    )
-    this.#calcLayout()
-  }
-
   @resizeObserver()
   @watch('segMinWidth')
   private _recalculateMinWidth() {
@@ -211,6 +142,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   // Calculates the layout based on the configured min width
   // and the available space in the track
   #calcLayout = (followFocus = false) => {
+    console.log('calcLayout')
     const calcNumVisibleSegments = () => {
       // Actual available width in the track
       const numSegments = this.segments.length
@@ -244,59 +176,22 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       }
     }
 
-    // Run an initial calculation to get the number of visible segments
-    const { count } = calcNumVisibleSegments()
-
-    // Ensure that the focused segment is always visible
-    if (followFocus) {
-      if (this.#focusedIndex >= this.#firstVisibleIndex + count) {
-        this.#firstVisibleIndex = this.#focusedIndex - count + 1
-      }
-      if (this.#focusedIndex < this.#firstVisibleIndex) {
-        this.#firstVisibleIndex = this.#focusedIndex
-      }
-    }
-
-    // prevent overscroll by clamping #firstVisibleIndex
-    const endFirstIndex = this.segments.length - count
-    const hasReachedEnd = this.#firstVisibleIndex >= endFirstIndex
-    const isAtStart = this.#firstVisibleIndex <= 0
-    if (hasReachedEnd) {
-      this.#firstVisibleIndex = endFirstIndex
-    }
-    if (isAtStart) {
-      this.#firstVisibleIndex = 0
-    }
-    //
-
     // Update the visible state of the scroll buttons
-    this.#updateScrollBtnState(count)
+    this.#updateScrollBtnState()
 
     // Wait for lit-html to render updated buttons and then update the segment widths
     this.updateComplete.then(() => {
       // Run calculations again to get the final segmentWidth with updated state of the buttons
       // taken into account
-      const { segmentWidth, count } = calcNumVisibleSegments()
+      const { segmentWidth } = calcNumVisibleSegments()
 
       this.segments.forEach((segment) => {
         segment.style.width = segmentWidth + 'px'
       })
 
-      this.#segmentsContainerLeft =
-        -this.#firstVisibleIndex * segmentWidth -
-        getSegmentGap(this._isUsingTransitionalStyles) * this.#firstVisibleIndex
-      this.#applySegmentsTransform()
-
-      this.#calculatedSegmentWidth = segmentWidth
       this.#segmentWidth = segmentWidth
 
       this.#updateIndicator()
-    })
-  }
-
-  #applySegmentsTransform = () => {
-    window.requestAnimationFrame(() => {
-      this._elSegments.style.transform = `translateX(${this.#segmentsContainerLeft}px)`
     })
   }
 
@@ -305,24 +200,45 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     if (selSegmentValue) {
       this.#value = selSegmentValue
     }
-    this.#calcLayout()
+
+    this.intersectionObserver?.disconnect()
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const segment = entry.target as GdsSegment
+          segment._isVisible = entry.isIntersecting
+        })
+        this.#updateScrollBtnState()
+        this.#calcLayout()
+      },
+      {
+        root: this._elTrack,
+        rootMargin: '0px',
+        threshold: 0.1,
+      },
+    )
+    this.segments.forEach((s) => {
+      this.intersectionObserver?.observe(s)
+    })
   }
 
   #scrollLeft = () => {
-    this.#firstVisibleIndex--
-    this.#calcLayout()
+    this.segments
+      .filter((s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible)[0]
+      .scrollIntoView()
   }
 
   #scrollRight = () => {
-    this.#firstVisibleIndex++
-    this.#calcLayout()
+    this.segments
+      .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
+      .reverse()[0]
+      .scrollIntoView({ block: 'end' })
   }
 
   // Updates the visibility of the scroll buttons
-  #updateScrollBtnState = (numVisibleSegments: number) => {
-    this._showPrevButton = this.#firstVisibleIndex > 0
-    this._showNextButton =
-      this.#firstVisibleIndex < this.segments.length - numVisibleSegments
+  #updateScrollBtnState = () => {
+    this._showPrevButton = !this.segments[0].isVisible
+    this._showNextButton = !this.segments[this.segments.length - 1].isVisible
   }
 
   // Updates the selection indicator position
@@ -370,7 +286,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       if (selectedSegment) {
         this.segments.forEach((s) => (s.selected = false))
         selectedSegment.selected = true
-        this.#focusedIndex = this.segments.indexOf(selectedSegment)
         this.#calcLayout(true)
       }
     })
