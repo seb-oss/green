@@ -7,11 +7,7 @@
   right: 0;
   top: var(--header-height);
   border-radius: 0px;
-  background-color: color-mix(
-    in srgb,
-    var(--gds-sys-color-background-background),
-    transparent 10%
-  );
+  background-color: color-mix(in srgb, var(--gds-sys-color-background-background), transparent 10%);
   backdrop-filter: blur(10px);
   display: flex;
   z-index: 4;

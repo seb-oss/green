@@ -30,6 +30,7 @@ import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
 import './login/login.element'
+import './/fonts.element'
 
 const { setLocale, getLocale } = gdsInitLocalization()
 
@@ -73,6 +74,8 @@ export class AppElement extends LitElement {
   }
 
   private handleViewChange(event: CustomEvent) {
+    console.log(event)
+
     this.currentView = event.detail.view
   }
 
@@ -94,6 +97,7 @@ export class AppElement extends LitElement {
                 () => html`<datepicker-example></datepicker-example>`,
               ],
               ['calendar', () => html`<calendar-example></calendar-example>`],
+              ['fonts', () => html`<fonts-example></fonts-example>`],
             ],
             () => html`No view selected`,
           )}

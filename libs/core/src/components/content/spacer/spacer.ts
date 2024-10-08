@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -30,7 +27,7 @@ export class GdsSpacer extends GdsElement {
   @styleExpressionProperty({
     property: 'height',
     selector: 'div',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: v => `var(--gds-space-${v})`
   })
   size?: string
 

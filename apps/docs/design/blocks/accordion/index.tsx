@@ -52,15 +52,13 @@ export function AccordionItem({
   onClick,
   onOpen,
   onClose,
-  children,
+  children
 }: AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleOnClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     onClick && onClick(event)
-    setIsOpen((state) => {
+    setIsOpen(state => {
       if (!state) {
         onOpen && onOpen(event)
       } else {
@@ -79,7 +77,7 @@ export function AccordionItem({
           id={id}
           aria-expanded={isOpen}
           aria-controls={`gds-accordion-item-region--${uuid}`}
-          onClick={(event) => {
+          onClick={event => {
             handleOnClick(event)
           }}
         >
@@ -89,12 +87,7 @@ export function AccordionItem({
           </div>
         </button>
       </div>
-      <div
-        role="region"
-        id={`gds-accordion-item-region--${uuid}`}
-        aria-labelledby={id}
-        hidden={!isOpen}
-      >
+      <div role="region" id={`gds-accordion-item-region--${uuid}`} aria-labelledby={id} hidden={!isOpen}>
         <div>{children}</div>
       </div>
     </div>

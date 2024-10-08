@@ -6,22 +6,13 @@ import {
   ILabelAndLabelInformation,
   IValidator,
   randomId,
-  validateClassName,
+  validateClassName
 } from '@sebgroup/extract'
-import React, {
-  PropsWithChildren,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { InfoCircle, Times } from '../icons'
 import classNames from 'classnames'
 
-interface FormItemProps
-  extends IExpandableInformation,
-    ILabelAndLabelInformation,
-    PropsWithChildren {
+interface FormItemProps extends IExpandableInformation, ILabelAndLabelInformation, PropsWithChildren {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeInput?: (value: string) => string
   validator?: IValidator
@@ -40,7 +31,7 @@ export const FormItem = ({
   children,
   expandableInfoButtonLabel,
   role,
-  rightAlignedFooterInfo,
+  rightAlignedFooterInfo
 }: FormItemProps) => {
   const expandableInnerRef = useRef<HTMLDivElement>(null)
   const expandableRef = useRef<HTMLDivElement>(null)
@@ -49,16 +40,13 @@ export const FormItem = ({
   const [isHidden, setIsHidden] = useState(false)
 
   useLayoutEffect(() => {
-    expandableInnerRef.current &&
-      setExpandableHeight(expandableInnerRef.current['clientHeight'])
+    expandableInnerRef.current && setExpandableHeight(expandableInnerRef.current['clientHeight'])
     setIsHidden(true)
   }, [])
 
   useEffect(() => {
     const handleResize = debounce(function setExpandableHeightAfterResize() {
-      isExpanded &&
-        expandableInnerRef.current &&
-        setExpandableHeight(expandableInnerRef.current['clientHeight'])
+      isExpanded && expandableInnerRef.current && setExpandableHeight(expandableInnerRef.current['clientHeight'])
     }, 300)
 
     if (expandableRef.current) {
@@ -72,10 +60,7 @@ export const FormItem = ({
 
   if (!inputId) inputId = randomId()
 
-  const formItemClassNames = classNames(
-    'gds-form-item',
-    validator && validateClassName(validator?.indicator),
-  )
+  const formItemClassNames = classNames('gds-form-item', validator && validateClassName(validator?.indicator))
 
   return (
     <div
@@ -87,10 +72,7 @@ export const FormItem = ({
       <div className="gds-form-item__header">
         <div className="gds-form-item__labels">
           {label && (
-            <label
-              id={role ? `${inputId}-label` : undefined}
-              htmlFor={role ? undefined : inputId}
-            >
+            <label id={role ? `${inputId}-label` : undefined} htmlFor={role ? undefined : inputId}>
               {label}
             </label>
           )}
@@ -105,14 +87,11 @@ export const FormItem = ({
             size="small"
             aria-expanded={isExpanded}
             aria-controls={`${inputId}-expandable-info`}
-            onClick={async (event) => {
+            onClick={async event => {
               if (!isExpanded) {
                 setIsHidden(false)
                 await delay(10)
-                expandableInnerRef.current &&
-                  setExpandableHeight(
-                    expandableInnerRef.current['clientHeight'],
-                  )
+                expandableInnerRef.current && setExpandableHeight(expandableInnerRef.current['clientHeight'])
                 setIsExpanded(true)
               } else {
                 setIsExpanded(false)
@@ -152,7 +131,7 @@ export const FormItem = ({
             className="form-info"
             style={{
               textAlign: 'right',
-              width: validator ? 'auto' : '100%',
+              width: validator ? 'auto' : '100%'
             }}
           >
             {rightAlignedFooterInfo}

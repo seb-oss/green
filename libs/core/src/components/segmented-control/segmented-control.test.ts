@@ -8,18 +8,13 @@ import '@sebgroup/green-core/components/segmented-control'
 import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
 import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-segmented-control>', () => {
   it('is a GdsElement', async () => {
-    const el = await fixture(
-      html`<gds-segmented-control></gds-segmented-control>`,
-    )
+    const el = await fixture(html`<gds-segmented-control></gds-segmented-control>`)
     expect(el.getAttribute('gds-element')).to.equal('gds-segmented-control')
   })
 
@@ -29,7 +24,7 @@ describe('<gds-segmented-control>', () => {
         html`<gds-segmented-control>
           <gds-segment>Segment 1</gds-segment>
           <gds-segment>Segment 2</gds-segment>
-        </gds-segmented-control>`,
+        </gds-segmented-control>`
       )
       await el.updateComplete
       await expect(el).to.be.accessible()
@@ -42,7 +37,7 @@ describe('<gds-segmented-control>', () => {
         html`<gds-segmented-control value="2">
           <gds-segment value="1">Segment 1</gds-segment>
           <gds-segment value="2" id="seg">Segment 2</gds-segment>
-        </gds-segmented-control>`,
+        </gds-segmented-control>`
       )
       await el.updateComplete
       const seg = el.querySelector('#seg') as GdsSegment
@@ -54,7 +49,7 @@ describe('<gds-segmented-control>', () => {
         html`<gds-segmented-control>
           <gds-segment value="1">Segment 1</gds-segment>
           <gds-segment value="2" id="seg">Segment 2</gds-segment>
-        </gds-segmented-control>`,
+        </gds-segmented-control>`
       )
       await el.updateComplete
       const seg = el.querySelector('#seg') as GdsSegment
@@ -68,7 +63,7 @@ describe('<gds-segmented-control>', () => {
         html`<gds-segmented-control value="1">
           <gds-segment value="1">Segment 1</gds-segment>
           <gds-segment value="2" id="seg">Segment 2</gds-segment>
-        </gds-segmented-control>`,
+        </gds-segmented-control>`
       )
       await el.updateComplete
       el.value = '2'
@@ -82,7 +77,7 @@ describe('<gds-segmented-control>', () => {
         html`<gds-segmented-control value="1">
           <gds-segment value="1">Segment 1</gds-segment>
           <gds-segment value="2" id="seg">Segment 2</gds-segment>
-        </gds-segmented-control>`,
+        </gds-segmented-control>`
       )
       await el.updateComplete
       const spy = sinon.spy()
@@ -95,9 +90,7 @@ describe('<gds-segmented-control>', () => {
 
     it('should set the segMinWidth property based on the seg-min-width attribute', async () => {
       const el = await fixture<GdsSegmentedControl>(
-        html`<gds-segmented-control
-          seg-min-width="120"
-        ></gds-segmented-control>`,
+        html`<gds-segmented-control seg-min-width="120"></gds-segmented-control>`
       )
       expect(el.segMinWidth).to.equal(120)
     })

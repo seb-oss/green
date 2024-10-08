@@ -1,7 +1,4 @@
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
@@ -45,7 +42,7 @@ export class GdsFlex extends GdsContainer {
       const colGap = values[0]
       const rowGap = values[1] || colGap
       return `gap: ${colGap} ${rowGap};`
-    },
+    }
   })
   gap?: string
 
@@ -54,7 +51,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS flex property values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   flex?: string
 
@@ -63,7 +60,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS align-self values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'align-self'?: string
 
@@ -72,7 +69,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS align-items values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'align-items'?: string
 
@@ -81,7 +78,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS align-content values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'align-content'?: string
 
@@ -90,7 +87,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS justify-content values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'justify-content'?: string
 
@@ -99,7 +96,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS place-content values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'place-content'?: string
 
@@ -108,7 +105,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS justify-items values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'justify-items'?: string
 
@@ -117,7 +114,7 @@ export class GdsFlex extends GdsContainer {
    * Supports all valid CSS justify-self values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'justify-self'?: string
 
@@ -127,7 +124,7 @@ export class GdsFlex extends GdsContainer {
    */
   @styleExpressionProperty({
     property: 'flex-direction',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'flex-direction'?: string
 

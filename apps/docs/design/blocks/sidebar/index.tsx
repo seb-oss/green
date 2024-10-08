@@ -3,11 +3,14 @@ import { allComponents, Component } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useRef } from 'react'
+import dynamic from 'next/dynamic'
 import './style.css'
+
+const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
 
 export default function Sidebar({
   isNavOpen,
-  toggleNav,
 }: {
   isNavOpen: boolean
   toggleNav: () => void
@@ -17,31 +20,9 @@ export default function Sidebar({
     (component) => component._raw.sourceFileName === 'index.mdx',
   )
 
-  function Component(component: Component) {
-    return (
-      <Link
-        className={path == component.url_path ? 'active' : ''}
-        href={component.url_path}
-        onClick={checkIfMenuShouldClose}
-      >
-        {component.title}
-      </Link>
-    )
-  }
-
   const components = filteredComponents
     .filter((component) => !(component.private && !isDev))
     .sort((a, b) => a.title.localeCompare(b.title))
-
-  const Arrow = () => {
-    return (
-      <span aria-label="Expand" tabIndex={0}>
-        <svg viewBox="0 0 24 24">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </span>
-    )
-  }
 
   const SideBarRef = useRef<HTMLDivElement>(null)
 
@@ -57,132 +38,91 @@ export default function Sidebar({
   }
 
   return (
-    <aside className={`nav ${!isNavOpen ? 'hidden' : ''}`} ref={SideBarRef}>
-      <details open={path.includes('/component')}>
-        <summary>
-          <Link
-            className={path === '/components' ? 'active' : ''}
-            href="/components"
-            onClick={checkIfMenuShouldClose}
-          >
-            Components
-          </Link>
-          <Arrow />
-        </summary>
-        <nav>
-          {components.map((component, idx) => (
-            <Component key={idx} {...component} />
-          ))}
-        </nav>
-      </details>
-      <details open={path.includes('/foundation')}>
-        <summary>
-          <Link
-            className={path === '/foundation' ? 'active' : ''}
-            href="/foundation"
-            onClick={checkIfMenuShouldClose}
-          >
-            Foundation
-          </Link>
-          <Dev>
-            <Arrow />
-          </Dev>
-        </summary>
-        <Dev>
-          <nav>
+    <GdsFlex className="menu" padding="l">
+      <GdsCard
+        width="250px"
+        padding="m l"
+        background="primary"
+        border-radius="s"
+      >
+        <nav className="menu">
+          <GdsFlex gap="s" flex-direction="column">
             <Link
-              className={path == '/foundation/accessibility' ? 'active' : ''}
-              href="/foundation/accessibility"
+              className={path === '/components' ? 'active' : ''}
+              href="/components"
               onClick={checkIfMenuShouldClose}
             >
-              Accessibility
+              Components
             </Link>
-          </nav>
-        </Dev>
-      </details>
-      <details open={path.includes('/ux-writing')}>
-        <summary>
-          <Link
-            className={path == '/ux-writing' ? 'active' : ''}
-            href="/ux-writing"
-            onClick={checkIfMenuShouldClose}
-          >
-            UX writing
-          </Link>
-          <Dev>
-            <Arrow />
-          </Dev>
-        </summary>
-        <Dev>
-          <nav>
+
+            {components.map((component, idx) => (
+              <Link
+                key={idx}
+                href={component.url_path}
+                onClick={checkIfMenuShouldClose}
+              >
+                {component.title}
+              </Link>
+            ))}
+
             <Link
-              className={path == '/ux-writing/general' ? 'active' : ''}
-              href="/ux-writing/general"
-            >
-              General
-            </Link>
-            <Link
-              className={path == '/ux-writing/english' ? 'active' : ''}
-              href="/ux-writing/english"
-            >
-              English
-            </Link>
-            <Link
-              className={path == '/ux-writing/swedish' ? 'active' : ''}
-              href="/ux-writing/swedish"
+              className={path === '/foundation' ? 'active' : ''}
+              href="/foundation"
               onClick={checkIfMenuShouldClose}
             >
-              Swedish
+              Foundation
             </Link>
-          </nav>
-        </Dev>
-      </details>
-      <details
-        open={
-          path.includes('/about') ||
-          path.includes('/changelog') ||
-          path.includes('/status')
-        }
-      >
-        <summary>
-          <Link
-            className={path == '/about' ? 'active' : ''}
-            href="/about"
-            onClick={checkIfMenuShouldClose}
-          >
-            About
-          </Link>
-          <Arrow />
-        </summary>
-        <nav>
-          <Link
-            className={path == '/changelog' ? 'active' : ''}
-            href="/changelog"
-          >
-            Changelog
-          </Link>
-          <Link
-            className={path == '/status' ? 'active' : ''}
-            href="/status"
-            onClick={checkIfMenuShouldClose}
-          >
-            Status
-          </Link>
+            <Dev></Dev>
+
+            <Dev>
+              <nav>
+                <Link
+                  className={
+                    path == '/foundation/accessibility' ? 'active' : ''
+                  }
+                  href="/foundation/accessibility"
+                  onClick={checkIfMenuShouldClose}
+                >
+                  Accessibility
+                </Link>
+              </nav>
+            </Dev>
+
+            <Link
+              rank={path == '/ux-writing' ? 'primary' : 'tertiary'}
+              href="/ux-writing"
+              onClick={checkIfMenuShouldClose}
+            >
+              UX writing
+            </Link>
+
+            <Link
+              className={path == '/about' ? 'active' : ''}
+              href="/about"
+              onClick={checkIfMenuShouldClose}
+            >
+              About
+            </Link>
+
+            <Link
+              className={path == '/changelog' ? 'active' : ''}
+              href="/changelog"
+            >
+              Changelog
+            </Link>
+            <Link
+              className={path == '/status' ? 'active' : ''}
+              href="/status"
+              onClick={checkIfMenuShouldClose}
+            >
+              Status
+            </Link>
+            <Link href="https://designlibrary.sebgroup.com/" target="_blank">
+              Design Library
+            </Link>
+          </GdsFlex>
         </nav>
-      </details>
-      <Link
-        className="pill"
-        href="https://designlibrary.sebgroup.com/"
-        target="_blank"
-        style={{ marginTop: 'auto' }}
-      >
-        Design Library
-        <svg viewBox="0 0 24 24">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-          <polyline points="15 3 21 3 21 9" />
-          <line x1="10" y1="14" x2="21" y2="3" />
-        </svg>
-      </Link>
-    </aside>
+      </GdsCard>
+    </GdsFlex>
   )
 }

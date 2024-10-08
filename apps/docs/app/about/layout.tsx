@@ -5,17 +5,13 @@ export const metadata: Metadata = {
   title: 'About — Green ',
   description: 'Green Design System',
   alternates: {
-    canonical: '/about',
+    canonical: '/about'
   },
   openGraph: {
-    images: '/og?title=About',
-  },
+    images: '/og?title=About'
+  }
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children
 }

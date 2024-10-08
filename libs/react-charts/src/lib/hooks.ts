@@ -1,10 +1,4 @@
-import {
-  Chart,
-  ChartArgs,
-  ChartInfo,
-  ChartSettings,
-  create,
-} from '@sebgroup/green-charts'
+import { Chart, ChartArgs, ChartInfo, ChartSettings, create } from '@sebgroup/green-charts'
 import { RefObject, useEffect, useState } from 'react'
 
 interface ChartProps {
@@ -25,14 +19,7 @@ export const useChart = ({ chartRef, settings }: ChartProps) => {
   }, [chartRef, chart])
 
   useEffect(() => {
-    if (
-      !chartRef ||
-      !chartRef.current ||
-      !settings ||
-      !chart ||
-      chart.settings === settings
-    )
-      return
+    if (!chartRef || !chartRef.current || !settings || !chart || chart.settings === settings) return
     setChart(chart.update({ settings, chartElement: chartRef.current }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings])

@@ -28,12 +28,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   }
   height: 332px;
   mask-image: $_base-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   mask-repeat: no-repeat;
@@ -57,12 +52,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
     }
   }
   mask-image: $_dot-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   mask-repeat: repeat;
   background-size: 200vw 100vw;
   background-position: 0 0;
@@ -81,12 +71,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   }
   height: 158px;
   mask-image: $_table-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   mask-repeat: repeat;
   background-size: 200vw 100vw;
   background-position: 0 0;
@@ -107,12 +92,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   mask-repeat: no-repeat;
   mask-position: center bottom;
   mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
@@ -132,12 +112,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   mask-repeat: no-repeat;
   mask-position: center bottom;
   mask-size: 100% 100%;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
@@ -158,12 +133,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   mask-repeat: no-repeat;
   mask-position: center bottom;
   mask-size: 100% 100%;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
@@ -184,12 +154,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   mask-repeat: repeat-x;
   mask-position: center bottom;
   mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;
@@ -209,12 +174,7 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
   mask-repeat: repeat;
   mask-position: center bottom;
   mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
+  background: linear-gradient(280deg, $background-color 12.5%, $highlight-color 17.5%, $background-color 37.5%);
   background-size: 200vw 100vw;
   background-position: 0 0;
   animation: skeleton-loader 3000ms linear infinite;

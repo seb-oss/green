@@ -1,14 +1,6 @@
 {
   "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": [
-    "!**/*",
-    "storybook-static",
-    "setup-jest.js",
-    "*.stories.ts",
-    "*.tsx",
-    "*.stories.tsx",
-    ".storybook/*"
-  ],
+  "ignorePatterns": ["!**/*", "storybook-static", "setup-jest.js", "*.stories.ts", ".storybook/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],

@@ -91,8 +91,7 @@ export const gdsCustomElement = (tagName: string) => {
   elementLookupTable.set(tagName, versionedTagName)
 
   // Bail out if the element is already registered
-  if (customElements.get(versionedTagName))
-    return (_classOrDescriptor: any) => false
+  if (customElements.get(versionedTagName)) return (_classOrDescriptor: any) => false
 
   return customElement(versionedTagName)
 }
@@ -104,10 +103,7 @@ export const gdsCustomElement = (tagName: string) => {
  * since it expects the same TemplateStringArray instance to be passed in each time.
  */
 const templateCache = new WeakMap<TemplateStringsArray, string[]>()
-function applyElementScoping(
-  strings: TemplateStringsArray,
-  ...values: any[]
-): [string[], ...any[]] {
+function applyElementScoping(strings: TemplateStringsArray, ...values: any[]): [string[], ...any[]] {
   let modstrings = templateCache.get(strings)
 
   if (!modstrings) {
@@ -120,7 +116,7 @@ function applyElementScoping(
 }
 
 const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
-  inStr.map((s) => {
+  inStr.map(s => {
     for (const [key, value] of elementLookupTable.entries()) {
       // Match the key, as long as it is not followed by a dash or lowercase letter.
       // The key `gds-menu` should only match `gds-menu` and not `gds-menu-item` or `gds-menuitem`, for example.
@@ -133,9 +129,7 @@ const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
  * Template tag factory that creates a new template tag, which rewrites all custom element names from the
  * lookup table to include the version suffix, and then passes the template on to the provided template tag.
  */
-export function htmlTemplateTagFactory(
-  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any,
-) {
+export function htmlTemplateTagFactory(extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any) {
   return (strings: TemplateStringsArray, ...values: any[]) => {
     if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
       return extendedTag(strings, ...values)
@@ -165,9 +159,7 @@ export function getScopedTagName(tagName: string) {
  * @param tagName The scoped tag name to unscope
  */
 export function getUnscopedTagName(tagName: string) {
-  return [...elementLookupTable.entries()].find(
-    ([, value]) => value === tagName,
-  )?.[0]
+  return [...elementLookupTable.entries()].find(([, value]) => value === tagName)?.[0]
 }
 
 export default {}

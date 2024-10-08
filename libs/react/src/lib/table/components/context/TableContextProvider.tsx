@@ -14,10 +14,7 @@ export interface TableState {
 export type TableContextType = {
   tableState: TableState
   setTableState: (newState: TableState) => void
-  onRowSelect?: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    rowKey: string,
-  ) => void
+  onRowSelect?: (event: React.ChangeEvent<HTMLInputElement>, rowKey: string) => void
   onRowExpand?: (isExpanded: boolean, rowKey: string) => void
   onSort?: (sortedColumn: SortedColumn) => void
 }
@@ -25,16 +22,15 @@ export type TableContextType = {
 const defaultContext: any = {
   tableState: {
     sortedColumn: null,
-    expandedRows: [],
+    expandedRows: []
   },
   setTableState: null,
   onRowSelect: null,
   onRowExpand: null,
-  onSort: null,
+  onSort: null
 }
 
-export const TableContext: React.Context<TableContextType> =
-  React.createContext(defaultContext)
+export const TableContext: React.Context<TableContextType> = React.createContext(defaultContext)
 
 export const useTableContext = () => {
   return React.useContext(TableContext)

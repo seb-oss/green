@@ -1,74 +1,34 @@
 'use client'
 
-import Alert from '@/alert/aler'
-import Consent from '@/consent/consent'
-import Footer from '@/footer/footer'
-import Header from '@/header/header'
-import Article from '&/article/article'
-import Main from '&/main/main'
-import Fonts from '$/fonts/fonts'
-import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
-import { useEffect } from 'react'
+import Main from '&/main/main'
+import Consent from '@/consent/consent'
+import Fonts from '$/fonts/fonts'
+import Header from 'core/header'
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import { Provider } from '$/provider/provider'
+
+import '#/global.css'
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  useEffect(() => {
-    const callCC = () => {
-      let cc
-      try {
-        cc = (window as any).initCookieConsent()
-      } catch (error) {
-        console.error(error)
-      }
-      if (cc) {
-        cc.run({})
-      }
-    }
-
-    if (
-      location.hostname === 'seb.io' &&
-      document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('GDS Cookie Consent'))
-    ) {
-      const script = document.createElement('script')
-      script.src =
-        'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
-      script.type = 'application/javascript'
-      document.head.appendChild(script)
-
-      const timer = setTimeout(() => {
-        callCC()
-      }, 1000)
-
-      return () => {
-        clearTimeout(timer)
-      }
-    }
-    Fonts()
-  }, [])
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider
-          attribute="theme"
-          defaultTheme="system"
-          enableColorScheme={false}
-          enableSystem
-        >
-          <Main>
-            <Alert />
-            <Header />
-            <Article>{children}</Article>
-            <Consent />
-            <Footer />
-          </Main>
-        </ThemeProvider>
+        <Provider>
+          <Fonts>
+            <GdsFlex flex-direction="column">
+              <Header />
+              <Main>
+                {children}
+                <Consent />
+              </Main>
+            </GdsFlex>
+          </Fonts>
+        </Provider>
         <Script id="data-layer">
           {`window["dataLayer"] = {
             "pageName":"seb.io",
@@ -79,10 +39,6 @@ export default function RootLayout({
             "website":"seb.io",
           };`}
         </Script>
-        <Script id="show-banner">
-          {`globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true`}
-        </Script>
-        <Script src="/core-out/index.bundle.js" />
       </body>
     </html>
   )

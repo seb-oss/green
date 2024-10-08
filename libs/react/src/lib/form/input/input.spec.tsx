@@ -1,13 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import React, { useState } from 'react'
-import {
-  Checkbox,
-  EmailInput,
-  NumberInput,
-  TextInput,
-  RadioButton,
-} from './input'
+import { Checkbox, EmailInput, NumberInput, TextInput, RadioButton } from './input'
 import userEvent from '@testing-library/user-event'
 
 describe('Inputs', () => {
@@ -31,7 +25,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <Checkbox label="Input" />
-        </form>,
+        </form>
       )
 
       const input = screen.getByRole('checkbox') as HTMLInputElement
@@ -69,7 +63,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <EmailInput label="Input" />
-        </form>,
+        </form>
       )
 
       const input = screen.getByRole('textbox') as HTMLInputElement
@@ -107,7 +101,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <NumberInput label="Input" />
-        </form>,
+        </form>
       )
 
       const input = screen.getByRole('spinbutton') as HTMLInputElement
@@ -144,17 +138,9 @@ describe('Inputs', () => {
 
     it('Should fire onChangeInput', async () => {
       const user = userEvent.setup()
-      const mockFn: jest.Mock = jest
-        .fn()
-        .mockImplementation((value: string) => value)
+      const mockFn: jest.Mock = jest.fn().mockImplementation((value: string) => value)
 
-      render(
-        <TextInput
-          placeholder="text field"
-          testId={'text-input'}
-          onChangeInput={mockFn}
-        />,
-      )
+      render(<TextInput placeholder="text field" testId={'text-input'} onChangeInput={mockFn} />)
 
       const inputElement = await screen.findByTestId('text-input')
       await act(async () => await user.click(inputElement))
@@ -167,9 +153,7 @@ describe('Inputs', () => {
     it('Should fire onChange', async () => {
       const user = userEvent.setup()
 
-      const mockFn: jest.Mock = jest
-        .fn()
-        .mockImplementation((value: string) => value)
+      const mockFn: jest.Mock = jest.fn().mockImplementation((value: string) => value)
 
       render(<TextInput testId="text-input" onChange={mockFn} />)
       const inputElement = await screen.findByTestId('text-input')
@@ -189,14 +173,12 @@ describe('Inputs', () => {
         <TextInput
           testId="text-input"
           value={'12345'}
-          onChange={(e) => {
+          onChange={e => {
             mockFn(e.currentTarget.value)
           }}
-        />,
+        />
       )
-      const inputElement = (await screen.findByTestId(
-        'text-input',
-      )) as HTMLInputElement
+      const inputElement = (await screen.findByTestId('text-input')) as HTMLInputElement
 
       expect(inputElement.value).toEqual('12345')
 
@@ -217,15 +199,13 @@ describe('Inputs', () => {
         <TextInput
           testId="text-input"
           value={'12345'}
-          onChange={(e) => {
+          onChange={e => {
             mockFn(e.currentTarget.value)
           }}
-        />,
+        />
       )
 
-      const inputElement = (await screen.findByTestId(
-        'text-input',
-      )) as HTMLInputElement
+      const inputElement = (await screen.findByTestId('text-input')) as HTMLInputElement
 
       expect(inputElement.value).toEqual('12345')
 
@@ -238,7 +218,7 @@ describe('Inputs', () => {
       render(
         <form role="form">
           <TextInput label="Input" />
-        </form>,
+        </form>
       )
 
       const input = screen.getByRole('textbox') as HTMLInputElement
@@ -267,38 +247,21 @@ describe('Component: RadioButton', () => {
 
   it('Should capture onChange events from individual radio buttons and emit it as one event', () => {
     const onChange: jest.Mock = jest.fn()
-    render(
-      <RadioButton
-        onChange={onChange}
-        value="test value"
-        label="Radio button"
-      />,
-    )
+    render(<RadioButton onChange={onChange} value="test value" label="Radio button" />)
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).toBeCalled()
   })
 
   it('Should not fire onchange when disabled', () => {
-    const onChange: jest.Mock = jest.fn().mockImplementation((value) => value)
-    render(
-      <RadioButton
-        onChange={onChange}
-        value="test value"
-        label="Radio button"
-        disabled
-      />,
-    )
+    const onChange: jest.Mock = jest.fn().mockImplementation(value => value)
+    render(<RadioButton onChange={onChange} value="test value" label="Radio button" disabled />)
     fireEvent.click(screen.getByText('Radio button'))
     expect(onChange).not.toBeCalled()
   })
 
   it('Should render validator: invalid', () => {
     const { container } = render(
-      <RadioButton
-        label="Radio button"
-        value=""
-        validator={{ message: 'Error', indicator: 'error' }}
-      />,
+      <RadioButton label="Radio button" value="" validator={{ message: 'Error', indicator: 'error' }} />
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
   })
@@ -312,18 +275,9 @@ describe('Component: RadioButton', () => {
 describe('Validation: text, number and email component', () => {
   const MockComponent = () => (
     <>
-      <TextInput
-        label="Input label"
-        validator={{ message: 'valid message', indicator: 'success' }}
-      />
-      <NumberInput
-        label="Input label"
-        validator={{ message: 'valid message', indicator: 'success' }}
-      />
-      <EmailInput
-        label="Input label"
-        validator={{ message: 'valid message', indicator: 'success' }}
-      />
+      <TextInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
+      <NumberInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
+      <EmailInput label="Input label" validator={{ message: 'valid message', indicator: 'success' }} />
     </>
   )
   it('Should render validation: valid', () => {

@@ -36,8 +36,7 @@ export class GdsElement extends LitElement {
   // TODO: This is slow. We need to find a more efficient way of setting the gds-element attribute.
   connectedCallback(): void {
     super.connectedCallback()
-    this.gdsElementName =
-      getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
+    this.gdsElementName = getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
     this.setAttribute('gds-element', this.gdsElementName)
   }
 }

@@ -5,15 +5,9 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectorRef,
+  ChangeDetectorRef
 } from '@angular/core'
-import {
-  AbstractControl,
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms'
+import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors, ValidatorFn } from '@angular/forms'
 import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
@@ -54,14 +48,12 @@ export interface DatepickerOptions {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: NggDatepickerComponent,
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NggDatepickerComponent
-  implements ControlValueAccessor, AfterViewInit
-{
+export class NggDatepickerComponent implements ControlValueAccessor, AfterViewInit {
   @Input() size?: 'small' | 'medium'
   @Input() hideLabel?: boolean
   @Input() disabledWeekends?: boolean
@@ -167,16 +159,16 @@ export function dateValidator(dates?: { min?: Date; max?: Date }): ValidatorFn {
       return {
         validDate: {
           minDate: startOfDay(dates.min),
-          actualDate: newDate,
-        },
+          actualDate: newDate
+        }
       }
     }
     if (!validMaxDate && dates?.max) {
       return {
         validDate: {
           maxDate: endOfDay(dates.max),
-          actualDate: newDate,
-        },
+          actualDate: newDate
+        }
       }
     }
 

@@ -24,11 +24,7 @@
         <h3 class="gds-slide-out__heading" id="sdv-modal-title">
           {{ heading || title || '' }}
         </h3>
-        <button
-          data-testid="modal-close-button"
-          class="close"
-          (click)="this.close()"
-        >
+        <button data-testid="modal-close-button" class="close" (click)="this.close()">
           <span className="sr-only">Close</span>
           <i></i>
         </button>
@@ -77,10 +73,6 @@
       </footer>
     </div>
 
-    <div
-      class="gds-backdrop"
-      data-thook="slideout-backdrop"
-      (click)="close()"
-    ></div>
+    <div class="gds-backdrop" data-thook="slideout-backdrop" (click)="close()"></div>
   </div>
 </ng-container>

@@ -8,14 +8,7 @@ import { NgvDropdownListComponent } from './dropdown-list.component'
 @Directive({
   selector: '[ngvTooltip]',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: [
-    'ngvTooltip',
-    'thook',
-    'placement',
-    'shown',
-    'offset',
-    'resizeThrottle',
-  ],
+  inputs: ['ngvTooltip', 'thook', 'placement', 'shown', 'offset', 'resizeThrottle']
 })
 class TooltipStubDirective {}
 
@@ -26,7 +19,7 @@ describe('DropdownListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NgvDropdownListComponent, TooltipStubDirective],
-      imports: [NgvI18nModule],
+      imports: [NgvI18nModule]
     }).compileComponents()
   })
 
@@ -45,12 +38,12 @@ describe('DropdownListComponent', () => {
       { key: null, label: 'placeholder' },
       { key: 'key1', label: 'la1' },
       { key: 'key2', label: 'la2' },
-      { key: 'key3', label: 'la3' },
+      { key: 'key3', label: 'la3' }
     ]
     const optionsWithoutNullish = [
       { key: 'key1', label: 'la1' },
       { key: 'key2', label: 'la2' },
-      { key: 'key3', label: 'la3' },
+      { key: 'key3', label: 'la3' }
     ]
     it.each`
       selected                    | options                                                         | expectedIndex
@@ -80,14 +73,11 @@ describe('DropdownListComponent', () => {
       ${{ key: 'key1' }}          | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
       ${{ key: 'notExisting!!' }} | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
       ${{ key: 'notExisting!!' }} | ${[{ key: null, label: 'placeholder' }, { label: 'zonkey?!' }]} | ${-1}
-    `(
-      '$selected and $options returns index: $expectedIndex',
-      ({ selected, options, expectedIndex }) => {
-        component.options = options
-        component.selectedValue = selected
-        const expected = component.getActiveIndex()
-        expect(expected).toEqual(expectedIndex)
-      },
-    )
+    `('$selected and $options returns index: $expectedIndex', ({ selected, options, expectedIndex }) => {
+      component.options = options
+      component.selectedValue = selected
+      const expected = component.getActiveIndex()
+      expect(expected).toEqual(expectedIndex)
+    })
   })
 })

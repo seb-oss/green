@@ -19,13 +19,13 @@ export default makeSource({
         {
           behavior: 'wrap',
           properties: {
-            className: ['anchor'],
-          },
-        },
-      ],
-    ],
+            className: ['anchor']
+          }
+        }
+      ]
+    ]
   },
-  onSuccess: async (importData) => {
+  onSuccess: async importData => {
     const { allDocuments } = await importData()
-  },
+  }
 })

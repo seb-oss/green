@@ -18,7 +18,7 @@ describe('Component: Table row', () => {
     render(
       <WrapperTableRow>
         <TableRow />
-      </WrapperTableRow>,
+      </WrapperTableRow>
     )
     expect(document.body.querySelector('tr')).toBeInTheDocument()
   })
@@ -33,7 +33,7 @@ describe('Component: Table row', () => {
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand,
-      onSort: null,
+      onSort: null
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
@@ -41,7 +41,7 @@ describe('Component: Table row', () => {
           <TableRow uniqueKey={parentUniqueKey}></TableRow>
           <TableRow isSubRow parentKey={parentUniqueKey}></TableRow>
         </WrapperTableRow>
-      </TableContext.Provider>,
+      </TableContext.Provider>
     )
     await user.click(screen.getAllByRole('button')[0])
     expect(onRowExpand).toBeCalled()
@@ -56,7 +56,7 @@ describe('Component: Table row', () => {
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand,
-      onSort: null,
+      onSort: null
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
@@ -64,15 +64,11 @@ describe('Component: Table row', () => {
           <TableRow uniqueKey={parentUniqueKey} isExpanded></TableRow>
           <TableRow isSubRow parentKey={parentUniqueKey}></TableRow>
         </WrapperTableRow>
-      </TableContext.Provider>,
+      </TableContext.Provider>
     )
-    expect(
-      document.body.querySelector('tr')?.classList.contains('expanded'),
-    ).toBeTruthy()
+    expect(document.body.querySelector('tr')?.classList.contains('expanded')).toBeTruthy()
     expect(document.body.querySelector('.sub-row')).toBeInTheDocument()
-    expect(
-      document.body.querySelector('.sub-row')?.classList.contains('show'),
-    ).toBeTruthy()
+    expect(document.body.querySelector('.sub-row')?.classList.contains('show')).toBeTruthy()
   })
 
   it('Should be able to select row', async () => {
@@ -84,18 +80,16 @@ describe('Component: Table row', () => {
       setTableState: null,
       onRowSelect,
       onRowExpand: null,
-      onSort: null,
+      onSort: null
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableRow>
           <TableRow uniqueKey={uniqueKey} />
         </WrapperTableRow>
-      </TableContext.Provider>,
+      </TableContext.Provider>
     )
-    await user.click(
-      document.body.querySelector(`#tb_checkbox_${uniqueKey}`) as HTMLElement,
-    )
+    await user.click(document.body.querySelector(`#tb_checkbox_${uniqueKey}`) as HTMLElement)
     expect(onRowSelect).toBeCalled()
   })
 
@@ -107,18 +101,16 @@ describe('Component: Table row', () => {
       setTableState: null,
       onRowSelect,
       onRowExpand: null,
-      onSort: null,
+      onSort: null
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableRow>
           <TableRow isHeaderRow />
         </WrapperTableRow>
-      </TableContext.Provider>,
+      </TableContext.Provider>
     )
-    await user.click(
-      document.body.querySelector('#tb_checkbox_all') as HTMLElement,
-    )
+    await user.click(document.body.querySelector('#tb_checkbox_all') as HTMLElement)
     expect(onRowSelect).toBeCalled()
   })
 
@@ -128,14 +120,14 @@ describe('Component: Table row', () => {
       setTableState: null,
       onRowSelect: jest.fn(),
       onRowExpand: jest.fn(),
-      onSort: null,
+      onSort: null
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableRow>
           <TableRow isSubRow />
         </WrapperTableRow>
-      </TableContext.Provider>,
+      </TableContext.Provider>
     )
     expect(document.body.querySelectorAll('td').length).toEqual(2)
   })

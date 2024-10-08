@@ -3,8 +3,8 @@
 import React, { createContext, useEffect, useState } from 'react'
 import Cmdk from '@/cmdk'
 import Favicon from '@/favicon/favicon'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { type ThemeProviderProps } from 'next-themes/dist/types'
+// import { ThemeProvider as NextThemesProvider } from 'next-themes'
+// import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
 
 type ThemeProviderContextType = {
@@ -75,20 +75,18 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   }
 
   return (
-    <NextThemesProvider {...props}>
-      <ThemeProviderContext.Provider value={themeProviderValue}>
-        <Favicon />
-        {children}
-        <Toaster
-          richColors
-          theme="dark"
-          position="bottom-right"
-          expand={false}
-          closeButton={true}
-          duration={4428}
-        />
-        <Cmdk isOpen={isOpen} toggleCmd={toggleCmd} />
-      </ThemeProviderContext.Provider>
-    </NextThemesProvider>
+    <ThemeProviderContext.Provider value={themeProviderValue}>
+      <Favicon />
+      {children}
+      <Toaster
+        richColors
+        theme="dark"
+        position="bottom-right"
+        expand={false}
+        closeButton={true}
+        duration={4428}
+      />
+      <Cmdk isOpen={isOpen} toggleCmd={toggleCmd} />
+    </ThemeProviderContext.Provider>
   )
 }

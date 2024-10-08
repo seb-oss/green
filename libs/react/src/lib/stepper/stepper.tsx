@@ -1,15 +1,7 @@
 import { IValidator, validateClassName, IndicatorType } from '@sebgroup/extract'
-import {
-  ChangeEventHandler,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-} from 'react'
+import { ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
-export interface StepperProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+export interface StepperProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   id?: string
   value?: string | number
   onChange?: ChangeEventHandler<HTMLInputElement>
@@ -75,8 +67,7 @@ export function Stepper({
     </div>
   )
 
-  if (!label && !description && !statusMessage && !validator)
-    return PrimitiveStepper
+  if (!label && !description && !statusMessage && !validator) return PrimitiveStepper
 
   return (
     <div className="form-group">

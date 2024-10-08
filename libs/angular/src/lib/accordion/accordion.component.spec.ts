@@ -11,12 +11,8 @@ describe(NggAccordionComponent.name, () => {
 
   beforeEach(async () => {
     fakeComponent = await render(NggFakeAccordionComponent, {
-      declarations: [
-        NggFakeAccordionComponent,
-        NggAccordionListItemComponent,
-        NggAccordionComponent,
-      ],
-      providers: [],
+      declarations: [NggFakeAccordionComponent, NggAccordionListItemComponent, NggAccordionComponent],
+      providers: []
     })
 
     fakeComponent.detectChanges()
@@ -29,18 +25,12 @@ describe(NggAccordionComponent.name, () => {
   })
 
   it('should call expand all when closeOthers is false', async () => {
-    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(
-      By.directive(NggAccordionListItemComponent),
-    )
+    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(By.directive(NggAccordionListItemComponent))
     const listItem1 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '1',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '1'
     )?.componentInstance as NggAccordionListItemComponent
     const listItem2 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '2',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '2'
     )?.componentInstance as NggAccordionListItemComponent
 
     // closeOthers property defaults to false by component so we do not set it here.
@@ -56,18 +46,12 @@ describe(NggAccordionComponent.name, () => {
   })
 
   it('should not call expand all when closeOthers is true', async () => {
-    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(
-      By.directive(NggAccordionListItemComponent),
-    )
+    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(By.directive(NggAccordionListItemComponent))
     const listItem1 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '1',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '1'
     )?.componentInstance as NggAccordionListItemComponent
     const listItem2 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '2',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '2'
     )?.componentInstance as NggAccordionListItemComponent
 
     component.closeOthers = true
@@ -83,18 +67,12 @@ describe(NggAccordionComponent.name, () => {
   })
 
   it('should shrink other children when child is expanded if closeOthers is true', async () => {
-    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(
-      By.directive(NggAccordionListItemComponent),
-    )
+    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(By.directive(NggAccordionListItemComponent))
     const listItem1 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '1',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '1'
     )?.componentInstance as NggAccordionListItemComponent
     const listItem2 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '2',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '2'
     )?.componentInstance as NggAccordionListItemComponent
 
     component.closeOthers = true
@@ -122,18 +100,12 @@ describe(NggAccordionComponent.name, () => {
   })
 
   it('should not shrink other children when child is expanded if closeOthers is false', async () => {
-    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(
-      By.directive(NggAccordionListItemComponent),
-    )
+    const accordionListItems = fakeComponent.fixture.debugElement.queryAll(By.directive(NggAccordionListItemComponent))
     const listItem1 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '1',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '1'
     )?.componentInstance as NggAccordionListItemComponent
     const listItem2 = accordionListItems.find(
-      (i) =>
-        (i.componentInstance as NggAccordionListItemComponent)
-          .listItemHeader === '2',
+      i => (i.componentInstance as NggAccordionListItemComponent).listItemHeader === '2'
     )?.componentInstance as NggAccordionListItemComponent
 
     component.closeOthers = false
@@ -166,6 +138,6 @@ describe(NggAccordionComponent.name, () => {
       <div ngg-accordion-list-item listItemHeader="1"></div>
       <div ngg-accordion-list-item listItemHeader="2"></div>
     </ngg-accordion>
-  `,
+  `
 })
 class NggFakeAccordionComponent {}

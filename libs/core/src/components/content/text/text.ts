@@ -78,14 +78,16 @@ export class GdsText extends GdsElement {
    * @property size
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`,
     selector: '[tag]',
     styleTemplate: (prop, values) => {
+      console.log(values)
+
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
       const styleLine = `line-height: var(--gds-text-line-height-${size});`
       return styleSize + styleLine
-    },
+    }
   })
   'font-size'?: string
 
@@ -98,7 +100,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'font-weight',
     selector: '[tag]',
-    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+    valueTemplate: v => `var(--gds-text-weight-${v})`
   })
   'font-weight'?: string
 
@@ -111,7 +113,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'margin',
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   margin?: string
 
@@ -123,7 +125,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'isolation'?: string
 
@@ -136,7 +138,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-wrap',
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'text-wrap'?: string
 
@@ -149,7 +151,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-transform',
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'text-transform'?: string
 
@@ -168,7 +170,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'max-width',
     selector: '[tag]',
-    valueTemplate: (v) => `${v}ch`,
+    valueTemplate: v => `${v}ch`
   })
   'max-width'?: string
 
@@ -181,7 +183,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'min-width',
     selector: '[tag]',
-    valueTemplate: (v) => `${v}ch`,
+    valueTemplate: v => `${v}ch`
   })
   'min-width'?: string
 
@@ -194,7 +196,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: 'text-align',
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'text-align'?: string
 
@@ -206,7 +208,7 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     property: '--_lines',
     selector: '[tag]',
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   lines?: number
 
@@ -231,7 +233,7 @@ export class GdsText extends GdsElement {
       } else {
         return `var(--gds-color-${'l' + (this as GdsText).level}-content-${colorName})`
       }
-    },
+    }
   })
   color?: string
 

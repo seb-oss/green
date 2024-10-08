@@ -65,6 +65,9 @@ export class GdsHeader extends LitElement {
           <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
             Calendar
           </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('fonts')}>
+            Fonts
+          </gds-menu-button>
         </gds-container>
         <gds-flex
           position="2xs{relative} l{absolute}"

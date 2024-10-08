@@ -8,13 +8,7 @@ import { NggDropdownModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [DropdownComponent],
-  imports: [
-    CommonModule,
-    NggDropdownModule,
-    DropdownRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
-  exports: [],
+  imports: [CommonModule, NggDropdownModule, DropdownRoutingModule, ReactiveFormsModule, FormsModule],
+  exports: []
 })
 export class DropdownModule {}

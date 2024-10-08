@@ -12,10 +12,7 @@ interface IconButtonInterface {
 }
 
 export const IconButton = forwardRef(
-  (
-    { children, onClick, ...props }: IconButtonInterface,
-    ref: ForwardedRef<HTMLButtonElement>,
-  ) => {
+  ({ children, onClick, ...props }: IconButtonInterface, ref: ForwardedRef<HTMLButtonElement>) => {
     return (
       <button
         className={`icon ${props.size === 'small' && 'small'}`}
@@ -28,5 +25,5 @@ export const IconButton = forwardRef(
         {children}
       </button>
     )
-  },
+  }
 )

@@ -104,13 +104,9 @@
 @mixin user-preferences {
   @media (prefers-color-scheme: dark) {
     .gds-filter-chip {
-      --gds-comp-chips-icon-action-selected: var(
-        --gds-comp-chips-icon-action-selected-dark
-      );
+      --gds-comp-chips-icon-action-selected: var(--gds-comp-chips-icon-action-selected-dark);
 
-      --gds-comp-chips-icon-action-remove: var(
-        --gds-comp-chips-icon-action-remove-dark
-      );
+      --gds-comp-chips-icon-action-remove: var(--gds-comp-chips-icon-action-remove-dark);
     }
   }
   @media (prefers-reduced-motion) {

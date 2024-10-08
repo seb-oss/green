@@ -53,62 +53,42 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
     setActiveId(slug)
   }
 
-  const groupedHeadings: (Heading | Heading[])[] = headings.reduce(
-    (acc: (Heading | Heading[])[], heading: Heading) => {
-      if (heading.level > 2) {
-        const lastItem = acc[acc.length - 1]
-        if (Array.isArray(lastItem)) {
-          lastItem.push(heading)
-        } else {
-          throw new Error(
-            'Level 3 and 4 headings should be after a level 2 heading.',
-          )
-        }
-      } else if (heading.level === 2) {
-        const nextHeadingIndex = headings.indexOf(heading) + 1
-        if (
-          headings[nextHeadingIndex] &&
-          headings[nextHeadingIndex].level > 2
-        ) {
-          acc.push([heading])
-        } else {
-          acc.push(heading)
-        }
+  const groupedHeadings: (Heading | Heading[])[] = headings.reduce((acc: (Heading | Heading[])[], heading: Heading) => {
+    if (heading.level > 2) {
+      const lastItem = acc[acc.length - 1]
+      if (Array.isArray(lastItem)) {
+        lastItem.push(heading)
+      } else {
+        throw new Error('Level 3 and 4 headings should be after a level 2 heading.')
+      }
+    } else if (heading.level === 2) {
+      const nextHeadingIndex = headings.indexOf(heading) + 1
+      if (headings[nextHeadingIndex] && headings[nextHeadingIndex].level > 2) {
+        acc.push([heading])
       } else {
         acc.push(heading)
       }
-      return acc
-    },
-    [],
-  )
+    } else {
+      acc.push(heading)
+    }
+    return acc
+  }, [])
 
   return (
     <aside className="toc">
       <span>On this page</span>
       <nav data-name={headings.length > 0 ? 'On this page' : ''}>
-        <Link
-          key={`#top`}
-          href={`#top`}
-          data-id={'top'}
-          data-level={'1'}
-          onClick={() => handleClick('top')}
-          passHref
-        >
+        <Link key={`#top`} href={`#top`} data-id={'top'} data-level={'1'} onClick={() => handleClick('top')} passHref>
           {component}
         </Link>
         {groupedHeadings.map((item, index) =>
           Array.isArray(item) ? (
-            <details
-              key={index}
-              open={item.some((heading) => heading.slug === activeId)}
-            >
+            <details key={index} open={item.some(heading => heading.slug === activeId)}>
               <summary>
                 <Link
                   key={`#${item[0].slug}`}
                   href={`#${item[0].slug}`}
-                  className={`toc-link ${
-                    activeId === item[0].slug ? 'active' : ''
-                  }`}
+                  className={`toc-link ${activeId === item[0].slug ? 'active' : ''}`}
                   data-id={item[0].slug}
                   data-level={item[0].level}
                   onClick={() => handleClick(item[0].slug)}
@@ -118,13 +98,11 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
                 </Link>
                 <Arrow />
               </summary>
-              {item.slice(1).map((heading) => (
+              {item.slice(1).map(heading => (
                 <Link
                   key={`#${heading.slug}`}
                   href={`#${heading.slug}`}
-                  className={`toc-link ${
-                    activeId === heading.slug ? 'active' : ''
-                  }`}
+                  className={`toc-link ${activeId === heading.slug ? 'active' : ''}`}
                   data-id={heading.slug}
                   data-level={heading.level}
                   onClick={() => handleClick(heading.slug)}
@@ -146,7 +124,7 @@ const TOC: React.FC<TOCProps> = ({ headings, component }) => {
             >
               {item.text}
             </Link>
-          ),
+          )
         )}
       </nav>
     </aside>

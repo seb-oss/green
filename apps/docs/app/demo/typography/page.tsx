@@ -29,12 +29,8 @@ export default function Typography() {
         <div className="gds-fs-label-medium">Label Medium</div>
         <div className="gds-fs-label-small">Label Small</div>
 
-        <div className="gds-fs-label-information-large">
-          Label Information Large
-        </div>
-        <div className="gds-fs-label-information-medium">
-          Label Information Medium
-        </div>
+        <div className="gds-fs-label-information-large">Label Information Large</div>
+        <div className="gds-fs-label-information-medium">Label Information Medium</div>
 
         <div className="gds-fs-label-input-large">Label Input Large</div>
         <div className="gds-fs-label-input-medium">Label Input Medium</div>
