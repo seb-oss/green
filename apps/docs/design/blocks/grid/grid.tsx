@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import useGridDebug from '$/grid-debug/grid-debug'
+// import useGridDebug from '$/grid-debug/grid-debug'
 
 import '@/grid/css/grid.css'
 import '@/grid/css/responsive.css'
@@ -45,16 +45,16 @@ export default function Grid({
   fluid,
   justify,
   align,
-  inlineSize
+  inlineSize,
 }: GridProps) {
   if (columns < 1 || columns > 24) {
     throw new Error('The columns prop must be between 1 and 24.')
   }
 
-  const debug = useGridDebug()
+  // const debug = useGridDebug()
   return (
     <gds-grid
-      {...(debug ? { debug: true } : {})}
+      // {...(debug ? { debug: true } : {})}
       gap-block={gapBlock}
       gap-inline={gapInline}
       padding-block={paddingBlock}

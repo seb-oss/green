@@ -3,7 +3,7 @@
 import { useContext } from 'react'
 import { Context } from '$/provider/provider'
 
-import Sidebar from '@/[new]/sidebar'
+import Sidebar from 'core/sidebar'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 
 import '#/global.css'
