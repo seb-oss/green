@@ -36,7 +36,7 @@ interface WithExtras {
           <label class="story-label">
             Date
             <input
-              [ngvInputMask]="dateInputMask"
+              [nggvInputMask]="dateInputMask"
               [formControl]="dateFC"
               placeholder="dd/mm/yyyy"
             />
@@ -50,7 +50,7 @@ interface WithExtras {
           <label class="story-label">
             E-mail
             <input
-              [ngvInputMask]="emailInputMask"
+              [nggvInputMask]="emailInputMask"
               [formControl]="emailFC"
               placeholder="_@_._"
             />
@@ -64,7 +64,7 @@ interface WithExtras {
           <label class="story-label">
             Currency
             <input
-              [ngvInputMask]="currencyInputMask"
+              [nggvInputMask]="currencyInputMask"
               [formControl]="currencyFC"
               placeholder="$ 0.00"
             />
@@ -78,7 +78,7 @@ interface WithExtras {
           <label class="story-label">
             License
             <input
-              [ngvInputMask]="licenseInputMask"
+              [nggvInputMask]="licenseInputMask"
               [formControl]="licenseFC"
               placeholder="___-___"
             />
@@ -92,7 +92,7 @@ interface WithExtras {
           <label class="story-label">
             IP address
             <input
-              [ngvInputMask]="ipAddressMask"
+              [nggvInputMask]="ipAddressMask"
               [formControl]="ipFC"
               placeholder="_._._._"
             />

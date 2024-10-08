@@ -21,11 +21,11 @@ import { NgvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.com
 
   selector: 'nggv-input',
   // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-  outputs: ['ngvFocus'],
+  outputs: ['nggvFocus'],
 })
 export class InputStubComponent {
-  @Output() ngvFocus: EventEmitter<boolean> = new EventEmitter()
-  @Output() ngvInput: EventEmitter<string> = new EventEmitter()
+  @Output() nggvFocus: EventEmitter<boolean> = new EventEmitter()
+  @Output() nggvInput: EventEmitter<string> = new EventEmitter()
   @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef
 
   constructor() {
@@ -60,22 +60,22 @@ describe('[NgvCore]', () => {
     describe('handleFocusChanges', () => {
       it('emits empty string if no state exists', () => {
         component.state = undefined
-        const spy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        const spy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         fixture.detectChanges()
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(spy).toHaveBeenCalledWith('')
       })
 
       it('does not emits if no state exists and set expanded', () => {
         component.state = { key: '111', label: 'label123' }
-        const emitSpy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        const emitSpy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         const expandedSpy = jest.spyOn(component, 'setExpanded')
         const outisdeSpy = jest.spyOn(
           component as any,
           'subscribeToOutsideClickEvent',
         )
         fixture.detectChanges()
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(emitSpy).not.toHaveBeenCalled()
         expect(expandedSpy).toHaveBeenCalledWith(true)
         expect(outisdeSpy).toHaveBeenCalled()

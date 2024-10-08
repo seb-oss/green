@@ -99,7 +99,7 @@ export class NgvInputComponent
 
   /** Pattern the value must match to be valid. */
   @Input() pattern = ''
-  /** Amount of time to wait until emitting (ngvINput) event */
+  /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
   /**
    * @deprecated
@@ -126,7 +126,7 @@ export class NgvInputComponent
   }
 
   /** Emits every time the value of the inner input field changes, independantly of updates on the formcontroller */
-  @Output() ngvInput = new EventEmitter<any>()
+  @Output() nggvInput = new EventEmitter<any>()
 
   private _formControl = new UntypedFormControl()
   get control(): UntypedFormControl {
@@ -158,7 +158,7 @@ export class NgvInputComponent
     this.inputChange$
       .pipe(takeUntil(this._destroy$), debounceTime(this.debounceTime))
       .subscribe((inputValue) => {
-        this.ngvInput.emit(inputValue)
+        this.nggvInput.emit(inputValue)
       })
   }
 

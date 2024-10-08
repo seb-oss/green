@@ -65,10 +65,10 @@ export class NgvDialogComponent implements OnInit {
   // /** @internal */
   // closeIcon = faTimes
 
-  @Output() ngvCloseEvent = new EventEmitter<DialogEvent>()
-  @Output() ngvPositiveEvent = new EventEmitter<DialogEvent>()
-  @Output() ngvNeutralEvent = new EventEmitter<DialogEvent>()
-  @Output() ngvNegativeEvent = new EventEmitter<DialogEvent>()
+  @Output() nggvCloseEvent = new EventEmitter<DialogEvent>()
+  @Output() nggvPositiveEvent = new EventEmitter<DialogEvent>()
+  @Output() nggvNeutralEvent = new EventEmitter<DialogEvent>()
+  @Output() nggvNegativeEvent = new EventEmitter<DialogEvent>()
 
   protected _previous: HTMLElement | undefined
   protected _firstFocusable: HTMLElement | undefined
@@ -76,9 +76,9 @@ export class NgvDialogComponent implements OnInit {
 
   ngOnInit() {
     this.dialogTitleId =
-      this.dialogTitleId ?? 'sdv-dialog-title-' + window.ngv?.nextId()
+      this.dialogTitleId ?? 'sdv-dialog-title-' + window.nggv?.nextId()
     this.dialogBodyId =
-      this.dialogBodyId ?? 'sdv-dialog-body-' + window.ngv?.nextId()
+      this.dialogBodyId ?? 'sdv-dialog-body-' + window.nggv?.nextId()
 
     this.shown = this.initiallyShown
     if (this.shown) this._limitFocusable()
@@ -92,13 +92,13 @@ export class NgvDialogComponent implements OnInit {
     }
     switch (action) {
       case 'positive':
-        this.ngvPositiveEvent.emit(emitEvent)
+        this.nggvPositiveEvent.emit(emitEvent)
         break
       case 'neutral':
-        this.ngvNeutralEvent.emit(emitEvent)
+        this.nggvNeutralEvent.emit(emitEvent)
         break
       case 'negative':
-        this.ngvNegativeEvent.emit(emitEvent)
+        this.nggvNegativeEvent.emit(emitEvent)
         break
       // case 'close' is handled by if-statement below with call to this.close()
     }
@@ -135,7 +135,7 @@ export class NgvDialogComponent implements OnInit {
         original: event,
         payload: this.payload,
       }
-      this.ngvCloseEvent.emit(emitEvent)
+      this.nggvCloseEvent.emit(emitEvent)
     }
     this.shown = false
     window.setTimeout(() => {
