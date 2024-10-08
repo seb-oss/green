@@ -22,11 +22,16 @@
   scroll-snap-type: inline mandatory;
   overscroll-behavior-x: contain;
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow-x: scroll;
   position: relative;
   gap: 0.25rem;
   box-sizing: border-box;
   position: relative;
+  scrollbar-width: none;
+}
+
+#track::-webkit-scrollbar {
+  display: none;
 }
 
 #btn-prev,
