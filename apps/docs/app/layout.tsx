@@ -8,6 +8,8 @@ import Header from 'core/header'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import { Provider } from '$/provider/provider'
 
+import '#/global.css'
+
 export default function RootLayout({
   children,
 }: {

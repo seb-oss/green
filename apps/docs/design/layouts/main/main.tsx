@@ -6,16 +6,15 @@ import { Context } from '$/provider/provider'
 import Sidebar from 'core/sidebar'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 
-import '#/global.css'
-import '&/main/main.css'
-
 export default function Main({ children }: { children: React.ReactNode }) {
   const { toggleNav, isNavOpen } = useContext(Context)
 
   return (
-    <GdsFlex gap="4xl">
+    <GdsFlex>
       {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
-      <main>{children}</main>
+      <GdsFlex padding="4xl" flex-direction="column">
+        {children}
+      </GdsFlex>
     </GdsFlex>
   )
 }
