@@ -223,16 +223,19 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   }
 
   #scrollLeft = () => {
-    this.segments
-      .filter((s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible)[0]
-      .scrollIntoView()
+    const nextLeftOutOfView = this.segments.filter(
+      (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
+    )[0]
+
+    nextLeftOutOfView.scrollIntoView()
   }
 
   #scrollRight = () => {
-    this.segments
+    const nextRightOutOfView = this.segments
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
-      .scrollIntoView()
+
+    nextRightOutOfView.scrollIntoView()
   }
 
   // Updates the visibility of the scroll buttons
