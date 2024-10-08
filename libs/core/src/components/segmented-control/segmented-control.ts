@@ -214,7 +214,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       {
         root: this._elTrack,
         rootMargin: '0px',
-        threshold: 0.1,
+        threshold: 0.5,
       },
     )
     this.segments.forEach((s) => {
@@ -232,7 +232,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     this.segments
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
-      .scrollIntoView({ block: 'end' })
+      .scrollIntoView()
   }
 
   // Updates the visibility of the scroll buttons
