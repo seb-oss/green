@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.43.4
+
+### Patch Changes
+
+- aab2665: **Icon:** Remove `display: contents`
+- aab2665: **Button:** Fix max-width issue
+- cb2d08c: **Grid:** switching gap to have <row-value> <column-value> as css spec https://developer.mozilla.org/en-US/docs/Web/CSS/gap#values
+
 ## 1.43.3
 
 ### Patch Changes
