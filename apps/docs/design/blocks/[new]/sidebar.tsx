@@ -74,39 +74,21 @@ export default function Sidebar({
   toggleNav?: () => void
 }) {
   const path = usePathname()
-  const [isNavVisible, setIsNavVisible] = useState(false)
+  const [visibleSublinks, setVisibleSublinks] = useState<{
+    [key: string]: boolean
+  }>({})
 
-  const SideBarRef = useRef<HTMLDivElement>(null)
-
-  const checkIfMenuShouldClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const { current } = SideBarRef
-    if (
-      current &&
-      window.innerWidth < 992 &&
-      !current.classList.contains('hidden')
-    ) {
-      // toggleNav()
-    }
+  const toggleSublinkVisibility = (key: string) => {
+    setVisibleSublinks((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }))
   }
-
-  const toggleNavVisibility = () => {
-    setIsNavVisible(!isNavVisible)
-  }
-
-  const Arrow = () => (
-    <GdsButton
-      rank="tertiary"
-      aria-label="Expand"
-      onClick={toggleNavVisibility}
-    >
-      {isNavVisible ? <IconChevronTop /> : <IconChevronBottom />}
-    </GdsButton>
-  )
 
   return (
     <GdsFlex
       padding="l"
-      border="0 4xs/#cececa 0 0"
+      border="0 4xs/primary 0 0"
       max-width="300px"
       min-height="100vh"
       align-items="flex-start"
@@ -119,20 +101,30 @@ export default function Sidebar({
             <Link
               className={path === menuItem.path ? 'active' : ''}
               href={menuItem.path}
-              onClick={checkIfMenuShouldClose}
             >
               {menuItem.title}
             </Link>
-            <Arrow />
+            {menuItem.subLinks.length > 0 && (
+              <GdsButton
+                rank="tertiary"
+                aria-label="Expand"
+                onClick={() => toggleSublinkVisibility(menuItem.title)}
+              >
+                {visibleSublinks[menuItem.title] ? (
+                  <IconChevronTop />
+                ) : (
+                  <IconChevronBottom />
+                )}
+              </GdsButton>
+            )}
           </GdsFlex>
-          {isNavVisible && (
+          {visibleSublinks[menuItem.title] && (
             <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
               {menuItem.subLinks.map((subLink, subIdx) => (
                 <Link
                   key={subIdx}
                   className={path === subLink.path ? 'active' : ''}
                   href={subLink.path}
-                  onClick={checkIfMenuShouldClose}
                 >
                   {subLink.title}
                 </Link>
