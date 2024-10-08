@@ -91,10 +91,10 @@ export const RanksAndVariants: Story = {
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Primary</gds-button>
           <gds-button rank="secondary">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>  
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Secondary</gds-button>
           <gds-button rank="tertiary">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>  
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Tertiary</gds-button>
         </gds-flex>
       </gds-flex>
@@ -261,7 +261,7 @@ export const Link: Story = {
 }
 
 /**
- * Length constraints are set by default at `20ch` to ensure that the text does not wrap or overflow.
+ * Text content will get truncated if it does not fit.
  */
 export const Length: Story = {
   ...DefaultParams,
@@ -270,9 +270,11 @@ export const Length: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-button>
-      <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-      This is a long text that will truncated
-    </gds-button>
+    <div style="width: 30ch">
+      <gds-button>
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        This is a long text that will truncated
+      </gds-button>
+    </div>
   `,
 }
