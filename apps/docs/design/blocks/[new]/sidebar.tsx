@@ -1,16 +1,71 @@
 'use client'
 
 import Link from 'next/link'
-import GdsContainer from '@sebgroup/green-react/src/core/container'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
 import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
-import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import { usePathname } from 'next/navigation'
 import React, { useRef, useState } from 'react'
+
+const menu = [
+  {
+    title: 'Components',
+    path: '/components',
+    subLinks: allComponents
+      .filter((component) => component._raw.sourceFileName === 'index.mdx')
+      .filter((component) => !(component.private && !isDev))
+      .sort((a, b) => a.title.localeCompare(b.title))
+      .map((component) => ({
+        title: component.title,
+        path: component.url_path,
+      })),
+  },
+  {
+    title: 'Foundation',
+    path: '/foundation',
+    subLinks: [
+      {
+        title: 'Accessibility',
+        path: '/foundation/accessibility',
+      },
+    ],
+  },
+  {
+    title: 'UX Writing',
+    path: '/ux-writing',
+    subLinks: [
+      {
+        title: 'General',
+        path: '/ux-writing/general',
+      },
+      {
+        title: 'English',
+        path: '/ux-writing/english',
+      },
+      {
+        title: 'Swedish',
+        path: '/ux-writing/swedish',
+      },
+    ],
+  },
+  {
+    title: 'About',
+    path: '/foundation',
+    subLinks: [
+      {
+        title: 'Changelog',
+        path: '/changelog',
+      },
+      {
+        title: 'Status',
+        path: '/status',
+      },
+    ],
+  },
+]
 
 export default function Sidebar({
   isNavOpen,
@@ -20,38 +75,6 @@ export default function Sidebar({
 }) {
   const path = usePathname()
   const [isNavVisible, setIsNavVisible] = useState(false)
-
-  const filteredComponents = allComponents.filter(
-    (component) => component._raw.sourceFileName === 'index.mdx',
-  )
-
-  function Component(component: Component) {
-    return (
-      <Link
-        className={path == component.url_path ? 'active' : ''}
-        href={component.url_path}
-        onClick={checkIfMenuShouldClose}
-      >
-        {component.title}
-      </Link>
-    )
-  }
-
-  const components = filteredComponents
-    .filter((component) => !(component.private && !isDev))
-    .sort((a, b) => a.title.localeCompare(b.title))
-
-  const Arrow = () => {
-    return (
-      <GdsButton
-        rank="tertiary"
-        aria-label="Expand"
-        onClick={toggleNavVisibility}
-      >
-        {isNavVisible ? <IconChevronTop /> : <IconChevronBottom />}
-      </GdsButton>
-    )
-  }
 
   const SideBarRef = useRef<HTMLDivElement>(null)
 
@@ -70,6 +93,16 @@ export default function Sidebar({
     setIsNavVisible(!isNavVisible)
   }
 
+  const Arrow = () => (
+    <GdsButton
+      rank="tertiary"
+      aria-label="Expand"
+      onClick={toggleNavVisibility}
+    >
+      {isNavVisible ? <IconChevronTop /> : <IconChevronBottom />}
+    </GdsButton>
+  )
+
   return (
     <GdsFlex
       padding="l"
@@ -80,117 +113,34 @@ export default function Sidebar({
       flex-direction="column"
       gap="l"
     >
-      <GdsFlex flex-direction="column" min-width="100%">
-        <GdsFlex align-items="center" justify-content="space-between">
-          <Link
-            className={path === '/components' ? 'active' : ''}
-            href="/components"
-            onClick={checkIfMenuShouldClose}
-          >
-            Components
-          </Link>
-          <Arrow />
-        </GdsFlex>
-        {isNavVisible && (
-          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
-            {components.map((component, idx) => (
-              <Component key={idx} {...component} />
-            ))}
-          </GdsFlex>
-        )}
-      </GdsFlex>
-
-      <GdsFlex flex-direction="column" min-width="100%">
-        <GdsFlex align-items="center" justify-content="space-between">
-          <Link
-            className={path === '/foundation' ? 'active' : ''}
-            href="/foundation"
-            onClick={checkIfMenuShouldClose}
-          >
-            Foundation
-          </Link>
-          <Arrow />
-        </GdsFlex>
-
-        {isNavVisible && (
-          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+      {menu.map((menuItem, idx) => (
+        <GdsFlex key={idx} flex-direction="column" min-width="100%">
+          <GdsFlex align-items="center" justify-content="space-between">
             <Link
-              className={path == '/foundation/accessibility' ? 'active' : ''}
-              href="/foundation/accessibility"
+              className={path === menuItem.path ? 'active' : ''}
+              href={menuItem.path}
               onClick={checkIfMenuShouldClose}
             >
-              Accessibility
+              {menuItem.title}
             </Link>
+            <Arrow />
           </GdsFlex>
-        )}
-      </GdsFlex>
-      <GdsFlex flex-direction="column" min-width="100%">
-        <GdsFlex align-items="center" justify-content="space-between">
-          <Link
-            className={path === '/foundation' ? 'active' : ''}
-            href="/foundation"
-            onClick={checkIfMenuShouldClose}
-          >
-            UX writing
-          </Link>
-          <Arrow />
+          {isNavVisible && (
+            <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+              {menuItem.subLinks.map((subLink, subIdx) => (
+                <Link
+                  key={subIdx}
+                  className={path === subLink.path ? 'active' : ''}
+                  href={subLink.path}
+                  onClick={checkIfMenuShouldClose}
+                >
+                  {subLink.title}
+                </Link>
+              ))}
+            </GdsFlex>
+          )}
         </GdsFlex>
-
-        {isNavVisible && (
-          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
-            <Link
-              className={path == '/ux-writing/general' ? 'active' : ''}
-              href="/ux-writing/general"
-            >
-              General
-            </Link>
-            <Link
-              className={path == '/ux-writing/english' ? 'active' : ''}
-              href="/ux-writing/english"
-            >
-              English
-            </Link>
-            <Link
-              className={path == '/ux-writing/swedish' ? 'active' : ''}
-              href="/ux-writing/swedish"
-              onClick={checkIfMenuShouldClose}
-            >
-              Swedish
-            </Link>
-          </GdsFlex>
-        )}
-      </GdsFlex>
-      <GdsFlex flex-direction="column" min-width="100%">
-        <GdsFlex align-items="center" justify-content="space-between">
-          <Link
-            className={path === '/foundation' ? 'active' : ''}
-            href="/foundation"
-            onClick={checkIfMenuShouldClose}
-          >
-            About
-          </Link>
-          <Arrow />
-        </GdsFlex>
-
-        {isNavVisible && (
-          <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
-            <Link
-              className={path == '/changelog' ? 'active' : ''}
-              href="/changelog"
-            >
-              Changelog
-            </Link>
-            <Link
-              className={path == '/status' ? 'active' : ''}
-              href="/status"
-              onClick={checkIfMenuShouldClose}
-            >
-              Status
-            </Link>
-          </GdsFlex>
-        )}
-      </GdsFlex>
-
+      ))}
       <GdsFlex
         position="sticky"
         inset="auto 0 24px 0"
