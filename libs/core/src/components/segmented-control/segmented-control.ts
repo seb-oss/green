@@ -90,8 +90,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   @state()
   private _showNextButton = false
 
-  #segmentWidth = 0
-
   intersectionObserver: IntersectionObserver | null = null
 
   connectedCallback(): void {
@@ -136,13 +134,15 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   @resizeObserver()
   @watch('segMinWidth')
   private _recalculateMinWidth() {
+    this.segments.forEach((segment) => {
+      segment.style.width = `auto`
+    })
     this.updateComplete.then(() => this.#calcLayout())
   }
 
   // Calculates the layout based on the configured min width
   // and the available space in the track
-  #calcLayout = (followFocus = false) => {
-    console.log('calcLayout')
+  #calcLayout = () => {
     const calcNumVisibleSegments = () => {
       // Actual available width in the track
       const numSegments = this.segments.length
@@ -172,7 +172,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         maxVisibleSegments
       return {
         count: maxVisibleSegments,
-        segmentWidth: segmentWidth,
+        calculatedSegmentWidth: segmentWidth,
       }
     }
 
@@ -183,13 +183,14 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     this.updateComplete.then(() => {
       // Run calculations again to get the final segmentWidth with updated state of the buttons
       // taken into account
-      const { segmentWidth } = calcNumVisibleSegments()
+      const { calculatedSegmentWidth, count } = calcNumVisibleSegments()
+      const gap = getSegmentGap(this._isUsingTransitionalStyles)
 
-      this.segments.forEach((segment) => {
-        segment.style.width = segmentWidth + 'px'
-      })
-
-      this.#segmentWidth = segmentWidth
+      if (this._showNextButton || this._showPrevButton) {
+        this.segments.forEach((segment) => {
+          segment.style.width = `max(calc((100% / ${count}) - ${gap}px / ${count} * (${count} - 1)), ${calculatedSegmentWidth}px)`
+        })
+      }
 
       this.#updateIndicator()
     })
@@ -210,6 +211,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         })
         this.#updateScrollBtnState()
         this.#calcLayout()
+        setTimeout(() => this.#calcLayout(), 1500)
       },
       {
         root: this._elTrack,
@@ -248,12 +250,12 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   #updateIndicator = () => {
     const segment = this.segments.find((s) => s.selected)
     if (segment) {
-      const selectedSegmentIndex = this.segments.indexOf(segment)
-      const offset =
-        selectedSegmentIndex * this.#segmentWidth +
-        getSegmentGap(this._isUsingTransitionalStyles) * selectedSegmentIndex
-      this._elIndicator.style.transform = `translateX(${offset}px)`
-      this._elIndicator.style.width = `${this.#segmentWidth}px`
+      const leftButtonWidth = this._showPrevButton ? BTN_SIZE[this.size] : 0
+      const segmentWidth = segment.offsetWidth
+      const segmentLeft = segment.offsetLeft - leftButtonWidth
+
+      this._elIndicator.style.transform = `translateX(${segmentLeft}px)`
+      this._elIndicator.style.width = `${segmentWidth}px`
     } else {
       this._elIndicator.style.transform = `translateX(-100%)`
       this._elIndicator.style.width = `0px`
