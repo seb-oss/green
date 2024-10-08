@@ -79,8 +79,6 @@ export class GdsBadge extends GdsElement {
 
     const blockSize = this.mainSlotOccupied ? (this.size === 'small' || this.notification ? 'm' : 'l') : 'xs'
 
-    const inlineSize = this.mainSlotOccupied ? 'l' : 'xs'
-
     return html`<gds-flex
       level="3"
       background=${background}
@@ -92,8 +90,9 @@ export class GdsBadge extends GdsElement {
       border-radius="${this.notification ? 'max' : '2xs'}"
       block-size="${blockSize}"
       width="max-content"
-      inline-size="${inlineSize}"
-      font-size="${this.size === 'small' || this.notification ? 'detail-xs' : 'detail-s'}"
+      font-size="${this.size === 'small' || this.notification
+        ? 'detail-xs'
+        : 'detail-s'}"
       pointer-events=${this.disabled ? 'none' : 'auto'}
       user-select="${this.disabled ? 'none' : 'auto'}"
     >

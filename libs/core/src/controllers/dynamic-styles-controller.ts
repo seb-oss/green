@@ -15,7 +15,9 @@ export class DynamicStylesController implements ReactiveController {
 
   hostConnected() {
     if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
-      this.#initialStyleSheets = [...(this.host.shadowRoot.adoptedStyleSheets || [])]
+      this.#initialStyleSheets = [
+        ...(this.host.shadowRoot.adoptedStyleSheets || []),
+      ]
     }
   }
 
@@ -29,12 +31,13 @@ export class DynamicStylesController implements ReactiveController {
    * @param styles - The CSSResult to inject.
    */
   inject(key: string, styles: CSSResult) {
-    const cssText = Array.isArray(styles) ? styles.map(style => style.toString()).join('') : styles.toString()
-
     if (this.#useLegacyStylesheets) {
+      const cssText = Array.isArray(styles)
+        ? styles.map((style) => style.toString()).join('')
+        : styles.toString()
       this.#applyStylesLegacy(key, cssText)
     } else {
-      this.#applyStyles(key, cssText)
+      styles.styleSheet && this.#applyStyles(key, styles.styleSheet)
     }
   }
 
@@ -43,8 +46,10 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearAll() {
     if (this.#useLegacyStylesheets) {
-      this.#legacyStyleSheets.forEach(styleEl => styleEl.remove())
-      this.host.shadowRoot?.querySelectorAll('style').forEach(style => (style.innerHTML = ''))
+      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.host.shadowRoot
+        ?.querySelectorAll('style')
+        .forEach((style) => (style.innerHTML = ''))
       this.#legacyStyleSheets.clear()
     } else {
       if (this.host.shadowRoot) {
@@ -67,18 +72,15 @@ export class DynamicStylesController implements ReactiveController {
     this.host.shadowRoot?.appendChild(styleEl)
   }
 
-  #applyStyles(key: string, cssText: string) {
+  #applyStyles(key: string, styleSheet: CSSStyleSheet) {
     if (!this.host.shadowRoot) return
 
-    let styleSheet = this.#styleSheets.get(key)
+    this.#styleSheets.set(key, styleSheet)
 
-    if (!styleSheet) {
-      styleSheet = new CSSStyleSheet()
-      this.#styleSheets.set(key, styleSheet)
-    }
-
-    styleSheet.replaceSync(cssText)
-    this.host.shadowRoot.adoptedStyleSheets = [...this.#initialStyleSheets, ...Array.from(this.#styleSheets.values())]
+    this.host.shadowRoot.adoptedStyleSheets = [
+      ...this.#initialStyleSheets,
+      ...Array.from(this.#styleSheets.values()),
+    ]
   }
 }
 

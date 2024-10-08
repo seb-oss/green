@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.43.3
+
+### Patch Changes
+
+- e08cfd1: **Declarative Layout:** Performance improvements
+
 ## 1.43.2
 
 ### Patch Changes

@@ -1,0 +1,72 @@
+{
+  "name": "core-lib-benchmark",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/core-lib-benchmark/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/core-lib-benchmark"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "core-lib-benchmark:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "core-lib-benchmark:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "core-lib-benchmark:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "dependsOn": ["build"],
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "core-lib-benchmark:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "core-lib-benchmark:build:development"
+        },
+        "production": {
+          "buildTarget": "core-lib-benchmark:build:production"
+        }
+      }
+    },
+    "collect-trace": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node apps/core-lib-benchmark/scripts/puppeteer-trace.mjs"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "core-lib-benchmark:build",
+        "spa": true
+      }
+    }
+  }
+}
