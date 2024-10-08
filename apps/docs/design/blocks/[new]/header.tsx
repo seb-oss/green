@@ -5,6 +5,7 @@ import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrand
 import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
 import { IconCrossSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossSmall'
 import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBarsThree'
+import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
 import GdsContainer from '@sebgroup/green-react/src/core/container'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
@@ -49,7 +50,10 @@ export default function Header() {
           <IconBrandSeb />
         </Link>
         <GdsFlex gap="s">
-          <GdsButton rank="tertiary">Search</GdsButton>
+          <GdsButton rank="tertiary">
+            Search
+            <IconMagnifyingGlass slot="trail" />
+          </GdsButton>
           <GdsButton rank="tertiary">
             <IconBrandGithub />
           </GdsButton>

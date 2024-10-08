@@ -16,7 +16,7 @@ const menu = [
     path: '/components',
     subLinks: allComponents
       .filter((component) => component._raw.sourceFileName === 'index.mdx')
-      .filter((component) => !(component.private && !isDev))
+      .filter((component) => !component.private)
       .sort((a, b) => a.title.localeCompare(b.title))
       .map((component) => ({
         title: component.title,
@@ -85,7 +85,7 @@ export default function Sidebar({
       window.innerWidth < 992 &&
       !current.classList.contains('hidden')
     ) {
-      toggleNav()
+      // toggleNav()
     }
   }
 
