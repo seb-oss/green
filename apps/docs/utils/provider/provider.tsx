@@ -1,32 +1,70 @@
 'use client'
 
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
 
-interface DataContextProps {
-  fullscreen: boolean
-  setFullscreen: (value: boolean) => void
+interface ContextProps {
+  loading: boolean
+  isNavOpen: boolean
+  toggleNav: () => void
 }
 
-export const DataContext = createContext<DataContextProps>({
-  fullscreen: false,
-  setFullscreen: () => {},
+export const Context = createContext<ContextProps>({
+  loading: true,
+  isNavOpen: false,
+  toggleNav: () => {},
 })
 
 export function Provider({ children, ...props }: ThemeProviderProps) {
-  const [fullscreen, setFullscreen] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [isNavOpen, setNavOpen] = useState(false)
+
+  const toggleNav = () => {
+    setNavOpen((prevNavOpen) => {
+      const newNavOpen = !prevNavOpen
+      localStorage.setItem('navOpen', newNavOpen ? 'true' : 'false')
+      return newNavOpen
+    })
+  }
+
+  useEffect(() => {
+    const navOpen = localStorage.getItem('navOpen')
+    setNavOpen(navOpen === 'true')
+
+    const handleMKey = (e: {
+      stopPropagation(): void
+      key: string
+      target: any
+      preventDefault: () => void
+    }) => {
+      const target = e.target
+      const inputElements = Array.from(
+        document.querySelectorAll('input, textarea'),
+      )
+      if (e.key === 'm' && inputElements.includes(target) === false) {
+        e.stopPropagation()
+        toggleNav()
+      }
+    }
+
+    document.addEventListener('keydown', handleMKey)
+    return () => {
+      document.removeEventListener('keydown', handleMKey)
+    }
+  }, [])
 
   const value = {
-    fullscreen,
-    setFullscreen,
+    loading,
+    isNavOpen,
+    toggleNav,
   }
 
   return (
     <NextThemesProvider {...props}>
-      <DataContext.Provider value={value}>
+      <Context.Provider value={value}>
         {children}
         <Toaster
           richColors
@@ -36,7 +74,7 @@ export function Provider({ children, ...props }: ThemeProviderProps) {
           closeButton={true}
           duration={4428}
         />
-      </DataContext.Provider>
+      </Context.Provider>
     </NextThemesProvider>
   )
 }

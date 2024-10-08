@@ -1,6 +1,6 @@
 'use client'
 
-import React, { forwardRef, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb'
 import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
 import { IconCrossSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossSmall'
@@ -10,18 +10,18 @@ import GdsContainer from '@sebgroup/green-react/src/core/container'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import Link from 'next/link'
-import { ThemeProviderContext } from '$/theme/provider'
-import { ThemeToggle } from '$/theme/toggle'
+import { Context } from '$/provider/provider'
 
 export default function Header() {
-  const { toggleCmd } = useContext(ThemeProviderContext)
-  const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
+  const { toggleNav, isNavOpen } = useContext(Context)
+
   const [isWindows, setIsWindows] = useState(false)
 
   useEffect(() => {
     const userAgent = window.navigator.userAgent
     setIsWindows(userAgent.indexOf('Windows') !== -1)
   }, [])
+
   return (
     <GdsContainer
       level="1"

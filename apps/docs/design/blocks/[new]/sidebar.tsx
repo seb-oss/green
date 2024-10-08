@@ -85,11 +85,13 @@ export default function Sidebar({
     }))
   }
 
+  // console.log('path', isNavOpen)
+
   return (
     <GdsFlex
       padding="l"
       border="0 4xs/primary 0 0"
-      max-width="300px"
+      min-width="300px"
       min-height="100vh"
       align-items="flex-start"
       flex-direction="column"
