@@ -291,7 +291,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       if (selectedSegment) {
         this.segments.forEach((s) => (s.selected = false))
         selectedSegment.selected = true
-        this.#calcLayout(true)
+        selectedSegment.scrollIntoView()
       }
     })
   }
