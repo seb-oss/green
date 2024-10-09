@@ -229,6 +229,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
+    nextLeftOutOfView._isVisible = true
+    this.#updateScrollBtnState()
     nextLeftOutOfView.scrollIntoView()
   }
 
@@ -237,6 +239,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
 
+    nextRightOutOfView._isVisible = true
+    this.#updateScrollBtnState()
     nextRightOutOfView.scrollIntoView()
   }
 
