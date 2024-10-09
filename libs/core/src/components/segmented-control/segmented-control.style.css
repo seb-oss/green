@@ -5,9 +5,10 @@
   box-sizing: border-box;
   contain: layout;
   display: inline-flex;
-  gap: 0.25rem;
+  /* gap: 0.25rem; */
   height: 3rem;
   width: 100%;
+  position: relative;
   overflow: hidden;
 }
 
@@ -23,10 +24,10 @@
   overscroll-behavior-x: contain;
   scroll-behavior: smooth;
   overflow-x: scroll;
-  position: relative;
   gap: 0.25rem;
   box-sizing: border-box;
   position: relative;
+
   scrollbar-width: none;
 }
 
@@ -36,6 +37,7 @@
 
 #btn-prev,
 #btn-next {
+  box-sizing: border-box;
   align-items: center;
   appearance: none;
   aspect-ratio: 1;
@@ -49,6 +51,10 @@
   height: 100%;
   justify-content: center;
   width: 2.5rem;
+  transition: 0.2s;
+  position: relative;
+  z-index: 2;
+  position: absolute;
 
   @media (pointer: fine) {
     &:hover {
@@ -60,6 +66,21 @@
     }
   }
 }
+#btn-prev {
+  margin: 0 0.25rem 0 0;
+}
+#btn-next {
+  margin: 0 0 0 0.25rem;
+  right: 0;
+}
+
+#btn-prev[aria-hidden='true'],
+#btn-next[aria-hidden='true'] {
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
 
 :host([size='small']) #btn-prev,
 :host([size='small']) #btn-next {
@@ -70,6 +91,7 @@
   flex-grow: 1;
   flex-shrink: 0;
   z-index: 1;
+  scroll-margin: 0 2.75rem;
   scroll-snap-align: start;
 }
 
@@ -79,6 +101,7 @@
   height: 100%;
   left: 0;
   position: absolute;
+  z-index: 0;
   transition:
     transform 0.2s,
     width 0.2s;

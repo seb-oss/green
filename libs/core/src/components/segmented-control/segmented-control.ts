@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, unsafeCSS } from 'lit'
+import { HTMLTemplateResult, css, unsafeCSS } from 'lit'
 import { query, state, property, queryAsync } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { msg } from '@lit/localize'
@@ -104,20 +104,27 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-segmented-control')
+
+    this.updateComplete.then(() => {
+      this._elTrack.addEventListener('scroll', () => {
+        this.#updateScrollBtnStateDebounced()
+        // this.#calcLayoutDebounced()
+        //this.#updateIndicator()
+      })
+    })
+    //setTimeout(() => this.#calcLayoutDebounced(), 100)
   }
 
   render() {
-    return html`${when(
-        this._showPrevButton,
-        () =>
-          html`<button
-            id="btn-prev"
-            @click=${this.#scrollLeft}
-            aria-label=${msg('Scroll right')}
-          >
-            <gds-icon-chevron-left />
-          </button>`,
-      )}
+    return html`<button
+        aria-hidden=${!this._showPrevButton}
+        ?inert=${!this._showPrevButton}
+        id="btn-prev"
+        @click=${this.#scrollLeft}
+        aria-label=${msg('Scroll right')}
+      >
+        <gds-icon-chevron-left />
+      </button>
       <div id="track" role="list">
         <slot
           gds-allow="gds-segment"
@@ -127,80 +134,22 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         ></slot>
         <div id="indicator" role="none"></div>
       </div>
-      ${when(
-        this._showNextButton,
-        () =>
-          html`<button
-            id="btn-next"
-            @click=${this.#scrollRight}
-            aria-label=${msg('Scroll right')}
-          >
-            <gds-icon-chevron-right />
-          </button>`,
-      )}`
+      <button
+        aria-hidden=${!this._showNextButton}
+        ?inert=${!this._showNextButton}
+        id="btn-next"
+        @click=${this.#scrollRight}
+        aria-label=${msg('Scroll right')}
+      >
+        <gds-icon-chevron-right />
+      </button>`
   }
 
   @resizeObserver()
   @watch('segMinWidth')
   private _recalculateMinWidth() {
-    this.segments.forEach((segment) => {
-      segment.style.width = `auto`
-    })
-    this.updateComplete.then(() => this.#calcLayout())
-  }
-
-  // Calculates the layout based on the configured min width
-  // and the available space in the track
-  #calcLayout = () => {
-    const calcNumVisibleSegments = () => {
-      // Actual available width in the track
-      const numSegments = this.segments.length
-      const availableWidth = this._elTrack.offsetWidth
-
-      if (availableWidth / numSegments > this.segMinWidth) {
-        return {
-          count: numSegments,
-          segmentWidth:
-            (availableWidth -
-              getSegmentGap(this._isUsingTransitionalStyles) *
-                (numSegments - 1)) /
-            numSegments,
-        }
-      }
-
-      // Max avaliable width in the track accounting for the scroll buttons
-      const availableWidthIncBtns = this.offsetWidth - BTN_SIZE[this.size] * 2
-
-      const maxVisibleSegments = Math.floor(
-        availableWidthIncBtns / this.segMinWidth,
-      )
-      const segmentWidth =
-        (availableWidth -
-          getSegmentGap(this._isUsingTransitionalStyles) *
-            (maxVisibleSegments - 1)) /
-        maxVisibleSegments
-      return {
-        count: maxVisibleSegments,
-        calculatedSegmentWidth: segmentWidth,
-      }
-    }
-
-    // Update the visible state of the scroll buttons
-    this.#updateScrollBtnState()
-
-    // Wait for lit-html to render updated buttons and then update the segment widths
     this.updateComplete.then(() => {
-      // Run calculations again to get the final segmentWidth with updated state of the buttons
-      // taken into account
-      const { calculatedSegmentWidth, count } = calcNumVisibleSegments()
-      const gap = getSegmentGap(this._isUsingTransitionalStyles)
-
-      if (this._showNextButton || this._showPrevButton) {
-        this.segments.forEach((segment) => {
-          segment.style.width = `max(calc((100% / ${count}) - ${gap}px / ${count} * (${count} - 1)), ${calculatedSegmentWidth}px)`
-        })
-      }
-
+      this.#updateScrollBtnStateDebounced()
       this.#updateIndicator()
     })
   }
@@ -216,18 +165,12 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       (entries) => {
         entries.forEach((entry) => {
           const segment = entry.target as GdsSegment
-          segment._isVisible = entry.isIntersecting
+          segment._isVisible = entry.intersectionRatio > 0.99
         })
-        debounce(() => {
-          this.#updateScrollBtnState()
-          this.#calcLayout()
-          //setTimeout(() => this.#calcLayout(), 1500)
-        }, 500)()
       },
       {
         root: this._elTrack,
-        rootMargin: '0px',
-        threshold: 0.5,
+        threshold: [0, 0.01, 0.5, 0.99, 1],
       },
     )
     this.segments.forEach((s) => {
@@ -237,44 +180,37 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #scrollLeft = () => {
     const nextLeftOutOfView = this.segments.filter(
-      (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
+      (s, i, arr) => arr[i + 2]?.isVisible && !s.isVisible,
     )[0]
 
-    // Since we're going left, we know that the last segment will never be
-    // visible, so we can pre-set its visibility to `false` in order to calculate
-    // button visibility ahead of time. This helps to animate things correctly.
-    this.segments[this.segments.length - 1]._isVisible = false
-    nextLeftOutOfView._isVisible = true
-    this.#updateScrollBtnState()
-    this.#calcLayout()
-    requestAnimationFrame(() => nextLeftOutOfView.scrollIntoView())
+    nextLeftOutOfView.scrollIntoView()
   }
 
   #scrollRight = () => {
     const nextRightOutOfView = this.segments
-      .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
+      .filter((s, i, arr) => arr[i - 2]?.isVisible && !s.isVisible)
       .reverse()[0]
 
-    this.segments[0]._isVisible = false
-    nextRightOutOfView._isVisible = true
-    this.#updateScrollBtnState()
-    this.#calcLayout()
-    requestAnimationFrame(() => nextRightOutOfView.scrollIntoView())
+    nextRightOutOfView.scrollIntoView()
   }
 
   // Updates the visibility of the scroll buttons
   #updateScrollBtnState = () => {
+    if (this.segments.every((s) => !s.isVisible)) return
     this._showPrevButton = !this.segments[0].isVisible
     this._showNextButton = !this.segments[this.segments.length - 1].isVisible
   }
+
+  #updateScrollBtnStateDebounced = debounce(this.#updateScrollBtnState, 50)
 
   // Updates the selection indicator position
   #updateIndicator = () => {
     const segment = this.segments.find((s) => s.selected)
     if (segment) {
-      const leftButtonWidth = this._showPrevButton ? BTN_SIZE[this.size] : 0
       const segmentWidth = segment.offsetWidth
-      const segmentLeft = segment.offsetLeft - leftButtonWidth
+      const segmentLeft = segment.offsetLeft
+
+      //console.log(segmentWidth, segmentLeft)
 
       this._elIndicator.style.transform = `translateX(${segmentLeft}px)`
       this._elIndicator.style.width = `${segmentWidth}px`
