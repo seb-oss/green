@@ -20,8 +20,17 @@ const BTN_SIZE = {
   small: 36,
   medium: 44,
 }
+
 const getSegmentGap = (transitionalStyles: boolean) =>
   transitionalStyles ? 0 : 4
+
+const debounce = (fn: () => void, delay: number) => {
+  let timeoutId: NodeJS.Timeout
+  return () => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(fn, delay)
+  }
+}
 
 /**
  * @element gds-segmented-control
@@ -209,9 +218,11 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
           const segment = entry.target as GdsSegment
           segment._isVisible = entry.isIntersecting
         })
-        this.#updateScrollBtnState()
-        this.#calcLayout()
-        setTimeout(() => this.#calcLayout(), 1500)
+        debounce(() => {
+          this.#updateScrollBtnState()
+          this.#calcLayout()
+          //setTimeout(() => this.#calcLayout(), 1500)
+        }, 500)()
       },
       {
         root: this._elTrack,
@@ -229,9 +240,14 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
+    // Since we're going left, we know that the last segment will never be
+    // visible, so we can pre-set its visibility to `false` in order to calculate
+    // button visibility ahead of time. This helps to animate things correctly.
+    this.segments[this.segments.length - 1]._isVisible = false
     nextLeftOutOfView._isVisible = true
     this.#updateScrollBtnState()
-    nextLeftOutOfView.scrollIntoView()
+    this.#calcLayout()
+    requestAnimationFrame(() => nextLeftOutOfView.scrollIntoView())
   }
 
   #scrollRight = () => {
@@ -239,9 +255,11 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
 
+    this.segments[0]._isVisible = false
     nextRightOutOfView._isVisible = true
     this.#updateScrollBtnState()
-    nextRightOutOfView.scrollIntoView()
+    this.#calcLayout()
+    requestAnimationFrame(() => nextRightOutOfView.scrollIntoView())
   }
 
   // Updates the visibility of the scroll buttons
