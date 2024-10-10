@@ -16,14 +16,6 @@ import '../icon/icons/chevron-right'
 import { tokens } from '../../tokens.style'
 import style from './segmented-control.style.css?inline'
 
-const BTN_SIZE = {
-  small: 36,
-  medium: 44,
-}
-
-const getSegmentGap = (transitionalStyles: boolean) =>
-  transitionalStyles ? 0 : 4
-
 const debounce = (fn: () => void, delay: number) => {
   let timeoutId: NodeJS.Timeout
   return () => {
@@ -100,11 +92,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     this.updateComplete.then(() => {
       this._elTrack.addEventListener('scroll', () => {
         this.#updateScrollBtnStateDebounced()
-        // this.#calcLayoutDebounced()
-        //this.#updateIndicator()
       })
     })
-    //setTimeout(() => this.#calcLayoutDebounced(), 100)
   }
 
   render() {
@@ -201,8 +190,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     if (segment) {
       const segmentWidth = segment.offsetWidth
       const segmentLeft = segment.offsetLeft
-
-      //console.log(segmentWidth, segmentLeft)
 
       this._elIndicator.style.transform = `translateX(${segmentLeft}px)`
       this._elIndicator.style.width = `${segmentWidth}px`
