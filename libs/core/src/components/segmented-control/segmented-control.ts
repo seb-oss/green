@@ -47,14 +47,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
   /**
-   * Minimum width of each segment. Used for calculating the number of visible
-   * segments that can fit based on the available space.
-   * @attr seg-min-width
-   */
-  @property({ type: Number, attribute: 'seg-min-width' })
-  segMinWidth = 100
-
-  /**
    * Size of the segmented control
    * @attr size
    */
