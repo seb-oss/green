@@ -133,5 +133,20 @@ describe('<gds-segmented-control>', () => {
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
       waitUntil(() => prevButton?.getAttribute('aria-hidden') === 'false')
     })
+
+    it('<gds-segment> should support min-width, max-width and width style expression properties', async () => {
+      const el = await fixture<GdsSegmentedControl>(html`
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment max-width="200px">Segment 2</gds-segment>
+          <gds-segment width="150px">Segment 3</gds-segment>
+        </gds-segmented-control>
+      `)
+
+      const segments = el.segments
+      expect(segments[0]['min-width']).to.equal('100px')
+      expect(segments[1]['max-width']).to.equal('200px')
+      expect(segments[2]['width']).to.equal('150px')
+    })
   })
 })
