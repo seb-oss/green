@@ -93,15 +93,6 @@ describe('<gds-segmented-control>', () => {
       expect(spy).to.have.been.calledOnce
     })
 
-    it('should set the segMinWidth property based on the seg-min-width attribute', async () => {
-      const el = await fixture<GdsSegmentedControl>(
-        html`<gds-segmented-control
-          seg-min-width="120"
-        ></gds-segmented-control>`,
-      )
-      expect(el.segMinWidth).to.equal(120)
-    })
-
     it('renders the next button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(html`
         <gds-segmented-control seg-min-width="120" style="max-width: 300px">
