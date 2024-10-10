@@ -2,7 +2,7 @@
 '@sebgroup/green-core': minor
 ---
 
-**Segmented Control:** Add support for variable width segments
+**Segmented Control:** Add support for variable width segments. Fixes #1603
 
 This change refactors a large chunk of the Segmented Control implementation:
 
