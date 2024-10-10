@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
+import {
+  fixture,
+  html as testingHtml,
+  aTimeout,
+  waitUntil,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement } from '../../utils/testing'
 import sinon from 'sinon'
@@ -95,37 +100,38 @@ describe('<gds-segmented-control>', () => {
 
     it('renders the next button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(html`
-        <gds-segmented-control seg-min-width="120" style="max-width: 300px">
-          <gds-segment>Segment 1</gds-segment>
-          <gds-segment>Segment 2</gds-segment>
-          <gds-segment>Segment 3</gds-segment>
-          <gds-segment>Segment 4</gds-segment>
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment min-width="100px">Segment 2</gds-segment>
+          <gds-segment min-width="100px">Segment 3</gds-segment>
+          <gds-segment min-width="100px">Segment 4</gds-segment>
         </gds-segmented-control>
       `)
 
       await el.updateComplete
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
-      expect(nextButton).to.exist
+      waitUntil(() => nextButton?.getAttribute('aria-hidden') === 'false')
     })
 
     it('renders the prev button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(html`
-        <gds-segmented-control seg-min-width="120" style="max-width: 300px">
-          <gds-segment>Segment 1</gds-segment>
-          <gds-segment>Segment 2</gds-segment>
-          <gds-segment>Segment 3</gds-segment>
-          <gds-segment>Segment 4</gds-segment>
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment min-width="100px">Segment 2</gds-segment>
+          <gds-segment min-width="100px">Segment 3</gds-segment>
+          <gds-segment min-width="100px">Segment 4</gds-segment>
         </gds-segmented-control>
       `)
 
       await el.updateComplete
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
+      waitUntil(() => nextButton?.getAttribute('aria-hidden') === 'false')
       clickOnElement(nextButton as HTMLElement)
-      await aTimeout(100)
+
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
-      expect(prevButton).to.exist
+      waitUntil(() => prevButton?.getAttribute('aria-hidden') === 'false')
     })
   })
 })
