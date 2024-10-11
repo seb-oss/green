@@ -58,9 +58,36 @@
 
 import { html as litHtml } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { GdsElement } from '../../gds-element'
 
 export const VER_SUFFIX = '-gdsvsuffix'
 const elementLookupTable = new Map<string, string>()
+
+function scopedCustomElement(tagName: string) {
+  const versionedTagName = tagName + VER_SUFFIX
+  elementLookupTable.set(tagName, versionedTagName)
+
+  return function (constructor: any) {
+    constructor.prototype.gdsElementName = tagName
+
+    // Bail out if the element is already registered
+    if (customElements.get(versionedTagName))
+      return (_constructor: GdsElement) => false
+
+    return customElement(versionedTagName)(constructor) as any
+  }
+}
+
+function unscopedCustomElement(tagName: string) {
+  // We still need to add elements to the lookup table since we use this lookup table to
+  // validate a custom element even though we are not using scoping
+  elementLookupTable.set(tagName, tagName)
+
+  return function (constructor: any) {
+    constructor.prototype.gdsElementName = tagName
+    return customElement(tagName)(constructor)
+  }
+}
 
 /**
  * Class decorator factory that defines the decorated class as a custom element, and registers
@@ -79,22 +106,9 @@ const elementLookupTable = new Map<string, string>()
  */
 export const gdsCustomElement = (tagName: string) => {
   if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
-    /**
-     * We still need to add elements to the lookup table since we use this lookup table to
-     * validate a custom element even though we are not using scoping
-     */
-    elementLookupTable.set(tagName, tagName)
-    return customElement(tagName)
+    return unscopedCustomElement(tagName)
   }
-
-  const versionedTagName = tagName + VER_SUFFIX
-  elementLookupTable.set(tagName, versionedTagName)
-
-  // Bail out if the element is already registered
-  if (customElements.get(versionedTagName))
-    return (_classOrDescriptor: any) => false
-
-  return customElement(versionedTagName)
+  return scopedCustomElement(tagName)
 }
 
 /**
