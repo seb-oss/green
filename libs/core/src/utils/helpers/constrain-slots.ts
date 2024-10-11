@@ -1,4 +1,5 @@
 import { LitElement } from 'lit'
+import type { GdsElement } from '../../gds-element'
 
 /**
  * This function is used to constrain the slots of a component to only allow
@@ -34,7 +35,7 @@ export function constrainSlots(self: LitElement) {
         'slot',
       ]
       for (const node of Array.from(slot.assignedNodes())) {
-        if (!allowed.includes(node.nodeName.toLowerCase())) {
+        if (!allowed.includes((node as GdsElement).gdsElementName || '')) {
           node.parentNode?.removeChild(node)
         }
       }
