@@ -6,7 +6,6 @@ import { when } from 'lit/directives/when.js'
 import { choose } from 'lit/directives/choose.js'
 import { msg } from '@lit/localize'
 
-import { constrainSlots } from '../../utils/helpers'
 import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
@@ -148,7 +147,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   constructor() {
     super()
-    constrainSlots(this)
     this.lines = 0
     this.resize = 'auto'
   }
@@ -339,11 +337,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #renderSlotTrail() {
     return html`
-      <slot
-        name="trail"
-        gds-allow="gds-badge"
-        @slotchange=${this.#handleSlotChange}
-      ></slot>
+      <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
     `
   }
 

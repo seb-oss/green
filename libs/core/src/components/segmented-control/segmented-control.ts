@@ -1,6 +1,5 @@
-import { HTMLTemplateResult, css, unsafeCSS } from 'lit'
-import { query, state, property, queryAsync } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
+import { unsafeCSS } from 'lit'
+import { query, state, property } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -108,7 +107,6 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       </button>
       <div id="track" role="list">
         <slot
-          gds-allow="gds-segment"
           @click=${this.#handleSegmentClick}
           @slotchange=${this.#handleSlotChange}
           role="none"
