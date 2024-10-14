@@ -4,7 +4,6 @@ import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { forwardAttributes } from '../../utils/directives'
 import { TransitionalStyles } from '../../transitional-styles'
 import '../../primitives/ripple'
@@ -110,7 +109,6 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback(): void {
