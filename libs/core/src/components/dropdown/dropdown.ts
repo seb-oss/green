@@ -451,6 +451,10 @@ export class GdsDropdown<ValueT = any>
       this._elSearchInput && (this._elSearchInput.value = '')
     }
 
+    const selectedOption = this.options.find((option) => option.selected)
+
+    selectedOption?.scrollIntoView()
+
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         detail: { open },

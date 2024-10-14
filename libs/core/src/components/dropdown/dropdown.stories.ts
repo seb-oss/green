@@ -206,6 +206,28 @@ export const Searchable: Story = {
       <gds-option value="cloning">Cloning</gds-option>
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
+      <gds-option value="ai">Artificial Intelligence</gds-option>
+      <gds-option value="robotics">Robotics</gds-option>
+      <gds-option value="quantum-computing">Quantum Computing</gds-option>
+      <gds-option value="biotechnology">Biotechnology</gds-option>
+      <gds-option value="genetic-engineering">Genetic Engineering</gds-option>
+      <gds-option value="holography">Holography</gds-option>
+      <gds-option value="fusion-power">Fusion Power</gds-option>
+      <gds-option value="antimatter">Antimatter</gds-option>
+      <gds-option value="dark-matter">Dark Matter</gds-option>
+      <gds-option value="neural-interfaces">Neural Interfaces</gds-option>
+      <gds-option value="exoskeletons">Exoskeletons</gds-option>
+      <gds-option value="space-elevators">Space Elevators</gds-option>
+      <gds-option value="terraforming">Terraforming</gds-option>
+      <gds-option value="nanobots">Nanobots</gds-option>
+      <gds-option value="smart-materials">Smart Materials</gds-option>
+      <gds-option value="augmented-reality">Augmented Reality</gds-option>
+      <gds-option value="virtual-reality">Virtual Reality</gds-option>
+      <gds-option value="brain-computer-interface"
+        >Brain-Computer Interface</gds-option
+      >
+      <gds-option value="cybersecurity">Cybersecurity</gds-option>
+      <gds-option value="biometrics">Biometrics</gds-option>
     </gds-dropdown>
   `,
 }
