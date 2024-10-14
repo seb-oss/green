@@ -6,7 +6,6 @@ import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
 
-import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { watch } from '../../utils/decorators/watch'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import {
@@ -161,6 +160,7 @@ export class GdsDropdown<ValueT = any>
    * Get the options of the dropdown.
    */
   get options() {
+    if (!this.#optionElements) return []
     return Array.from(this.#optionElements).filter(
       (o) => !o.hasAttribute('isplaceholder'),
     )
@@ -171,6 +171,7 @@ export class GdsDropdown<ValueT = any>
    * If no placeholder is found, this will be undefined.
    */
   get placeholder() {
+    if (!this.#optionElements) return
     return Array.from(this.#optionElements).find((o) =>
       o.hasAttribute('isplaceholder'),
     )
@@ -202,7 +203,7 @@ export class GdsDropdown<ValueT = any>
     return displayValue || this.placeholder?.innerHTML || ''
   }
 
-  #optionElements: HTMLCollectionOf<GdsOption>
+  #optionElements?: NodeListOf<GdsOption>
 
   @query('#trigger')
   private _elTriggerBtn!: HTMLButtonElement
@@ -215,12 +216,7 @@ export class GdsDropdown<ValueT = any>
 
   constructor() {
     super()
-    constrainSlots(this)
     updateWhenLocaleChanges(this)
-
-    this.#optionElements = this.getElementsByTagName(
-      getScopedTagName('gds-option'),
-    ) as HTMLCollectionOf<GdsOption>
   }
 
   connectedCallback() {
@@ -280,7 +276,7 @@ export class GdsDropdown<ValueT = any>
               aria-label="${msg('Filter available options')}"
               placeholder="${msg('Search')}"
               @keydown=${this.#handleSearchFieldKeyDown}
-              @input=${this.#handleSearchFieldOnInput}
+              @input=${this.#handleSearchFieldInput}
             />`,
         )}
         <gds-listbox
@@ -291,7 +287,7 @@ export class GdsDropdown<ValueT = any>
           @gds-focus="${this.#handleOptionFocusChange}"
           @keydown=${this.#handleListboxKeyDown}
         >
-          <slot gds-allow="gds-option gds-menu-heading"></slot>
+          <slot></slot>
         </gds-listbox>
       </gds-popover>
 
@@ -316,6 +312,8 @@ export class GdsDropdown<ValueT = any>
   })
   private _handleLightDOMChange() {
     this.requestUpdate()
+
+    this.#optionElements = this.querySelectorAll('[gds-element=gds-option]')
 
     if (this.multiple) {
       this._handleValueChange()
@@ -369,15 +367,14 @@ export class GdsDropdown<ValueT = any>
    *
    * @param e The input event.
    */
-  #handleSearchFieldOnInput = (e: KeyboardEvent) => {
+  #handleSearchFieldInput = (e: KeyboardEvent) => {
     if (!e.currentTarget) return
 
     const input = e.currentTarget as HTMLInputElement
-    const options = Array.from(this.#optionElements)
-    options.forEach((o) => (o.hidden = false))
+    this.options.forEach((o) => (o.hidden = false))
 
     if (!input.value) return
-    const filteredOptions = options.filter(
+    const filteredOptions = this.options.filter(
       (o) => !this.searchFilter(input.value, o),
     )
     filteredOptions.forEach((o) => (o.hidden = true))
@@ -447,13 +444,17 @@ export class GdsDropdown<ValueT = any>
   private _onOpenChange() {
     const open = this.open
 
-    Array.from(this.#optionElements).forEach((o) => (o.hidden = !open))
+    this.#optionElements?.forEach((o) => (o.hidden = !open))
 
     if (open) this.#registerAutoCloseListener()
     else {
       this.#unregisterAutoCloseListener()
       this._elSearchInput && (this._elSearchInput.value = '')
     }
+
+    const selectedOption = this.options.find((option) => option.selected)
+
+    selectedOption?.scrollIntoView()
 
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {

@@ -7,7 +7,6 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { constrainSlots } from '../../utils/helpers'
 import './list-item'
 
 /**
@@ -26,7 +25,6 @@ export class GdsGroupedList extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    constrainSlots(this)
 
     TransitionalStyles.instance.apply(this, 'gds-grouped-list')
   }
@@ -40,7 +38,7 @@ export class GdsGroupedList extends GdsElement {
           </div>`,
       )}
       <div role="list" aria-labelledby="label">
-        <slot gds-allow="gds-list-item"></slot>
+        <slot></slot>
       </div>`
   }
 }

@@ -82,7 +82,6 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
       aria-multiselectable=${this.multiple}
     >
       <slot
-        gds-allow="gds-filter-chip"
         @click=${this.#handleChipClick}
         @slotchange=${this.#handleSlotChange}
         role="none"
