@@ -280,7 +280,7 @@ export class GdsDropdown<ValueT = any>
               aria-label="${msg('Filter available options')}"
               placeholder="${msg('Search')}"
               @keydown=${this.#handleSearchFieldKeyDown}
-              @keyup=${this.#handleSearchFieldKeyUp}
+              @input=${this.#handleSearchFieldOnInput}
             />`,
         )}
         <gds-listbox
@@ -367,10 +367,10 @@ export class GdsDropdown<ValueT = any>
   /**
    * Event handler for filtering the options in the dropdown.
    *
-   * @param e The keyboard event.
+   * @param e The input event.
    */
-  #handleSearchFieldKeyUp = (e: KeyboardEvent) => {
-    const input = this._elSearchInput!
+  #handleSearchFieldOnInput = (e: KeyboardEvent) => {
+    const input = e.currentTarget
     const options = Array.from(this.#optionElements)
     options.forEach((o) => (o.hidden = false))
 
