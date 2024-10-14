@@ -454,7 +454,7 @@ export class GdsDropdown<ValueT = any>
 
     const selectedOption = this.options.find((option) => option.selected)
 
-    selectedOption?.scrollIntoView()
+    this.updateComplete.then(() => selectedOption?.scrollIntoView())
 
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
