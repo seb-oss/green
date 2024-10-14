@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.44.1
+
+### Patch Changes
+
+- 7cc2863: **Slot constraints:** Fix issue when using custom element names
+- 2ce164f: **Dropdown:** Scroll into view after `updateComplete`
+- a71fd2e: **Dropdown:** searching for options is now done oninput event instead of keydown
+- 4750979: **Dropdown:** fixing so that selected item scrolls into view on open
+
 ## 1.44.0
 
 ### Minor Changes
